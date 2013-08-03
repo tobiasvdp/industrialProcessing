@@ -25,7 +25,7 @@ public class IndustrialProcessing {
         @Instance("IndustrialProcessing")
         public static IndustrialProcessing instance;
         
-        public static CreativeTabs tabMachines = new tabMachines(CreativeTabs.getNextID(),"IndustrialProcessing");
+        public static CreativeTabs tabMachines = new TabMachines(CreativeTabs.getNextID(),"IndustrialProcessing");
         
         public final static BlockCrusher blockCrusher = new BlockCrusher();
         public final static BlockFilter blockFilter = new BlockFilter();
