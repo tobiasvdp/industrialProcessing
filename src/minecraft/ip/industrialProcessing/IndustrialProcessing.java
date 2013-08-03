@@ -1,6 +1,7 @@
 package ip.industrialProcessing;
 
 import ip.industrialProcessing.machines.crusher.BlockCrusher;
+import ip.industrialProcessing.machines.filter.BlockFilter;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -24,7 +25,8 @@ public class IndustrialProcessing {
         @Instance("IndustrialProcessing")
         public static IndustrialProcessing instance;
         
-        public final static BlockCrusher blockCrusher = new BlockCrusher(500);
+        public final static BlockCrusher blockCrusher = new BlockCrusher();
+        public final static BlockFilter blockFilter = new BlockFilter();
 	        
         // Says where the client and server 'proxy' code is loaded.
         @SidedProxy(clientSide="ip.industrialProcessing.client.ClientProxy", serverSide="ip.industrialProcessing.CommonProxy")
