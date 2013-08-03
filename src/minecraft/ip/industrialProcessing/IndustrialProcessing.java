@@ -25,6 +25,8 @@ public class IndustrialProcessing {
         @Instance("IndustrialProcessing")
         public static IndustrialProcessing instance;
         
+        public static CreativeTabs tabMachines = new tabMachines(CreativeTabs.getNextID(),"IndustrialProcessing");
+        
         public final static BlockCrusher blockCrusher = new BlockCrusher();
         public final static BlockFilter blockFilter = new BlockFilter();
 	        
@@ -39,20 +41,16 @@ public class IndustrialProcessing {
         
         @EventHandler
         public void load(FMLInitializationEvent event) {
-                proxy.registerRenderers();
-                
+        		LanguageRegistry.instance().addStringLocalization("itemGroup.tabMachines", "en_US", "Industrial Processing");
+        	
                 GameRegistry.registerBlock(blockCrusher, "BlockCrusher");
                 MinecraftForge.setBlockHarvestLevel(blockCrusher, "pickaxe", 1);
                 LanguageRegistry.addName(blockCrusher, "Crusher");
+                
+                proxy.registerRenderers();
         }
         @EventHandler
         public void postInit(FMLPostInitializationEvent event) {
                 // Stub Method
         }
-        
-        public static CreativeTabs tabMachines = new CreativeTabs("Industrial Processing") {
-            public ItemStack getIconItemStack() {
-                    return new ItemStack(blockCrusher,1,0);
-            }
-    };
 }
