@@ -6,6 +6,10 @@ import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import ip.industrialProcessing.machines.filter.ContainerFilter;
 import ip.industrialProcessing.machines.filter.GuiContainerFilter;
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
+import ip.industrialProcessing.machines.magneticSeparator.ContainerMagneticSeparator;
+import ip.industrialProcessing.machines.magneticSeparator.GuiContainerMagneticSeparator;
+import ip.industrialProcessing.machines.magneticSeparator.TileEntityMagneticSeparator;
+import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -22,7 +26,8 @@ public class GuiHandler implements IGuiHandler {
 			return new ContainerFilter(player.inventory, (TileEntityFilter)entity);
 		if(entity  instanceof TileEntityCrusher)
 			return new ContainerCrusher(player.inventory, (TileEntityCrusher)entity);
-		
+		if(entity  instanceof TileEntityMagneticSeparator)
+			return new ContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator)entity); 
 		
 		return null;
 	}
@@ -36,6 +41,8 @@ public class GuiHandler implements IGuiHandler {
 			return new GuiContainerFilter(player.inventory, (TileEntityFilter)entity);
 		if(entity  instanceof TileEntityCrusher)
 			return new GuiCrusher(player.inventory, (TileEntityCrusher)entity);
+		if(entity  instanceof TileEntityMagneticSeparator)
+			return new GuiContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator)entity);
 		return null;
 	}
 

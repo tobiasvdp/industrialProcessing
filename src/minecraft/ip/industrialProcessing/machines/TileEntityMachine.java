@@ -284,7 +284,7 @@ public abstract class TileEntityMachine extends TileEntity implements
 		return stack.input && isValidInput(i, itemstack.itemID);
 	}
 
-	protected abstract boolean isValidInput(int i, int itemID) ;
+	protected abstract boolean isValidInput(int slot, int itemID) ;
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int var1) {
