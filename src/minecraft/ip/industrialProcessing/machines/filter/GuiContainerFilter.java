@@ -14,11 +14,4 @@ public class GuiContainerFilter extends GuiContainerMachine {
 				tileEntity), "Ore Filter", "textures/gui/Filter.png");
 		this.filterTileEntity = tileEntity;
 	}
-
-	@Override
-	public void extendedDrawString() {
-		Worker worker = this.filterTileEntity.getWorker();
-		int progress = worker.getProgress();		
-		fontRenderer.drawString(Integer.toString(progress), 8, 20, 4210752);
-	}
 }

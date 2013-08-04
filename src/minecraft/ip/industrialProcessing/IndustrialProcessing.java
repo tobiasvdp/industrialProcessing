@@ -5,6 +5,7 @@ import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import ip.industrialProcessing.machines.filter.BlockFilter;
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
 import ip.industrialProcessing.machines.magneticSeparator.BlockMagneticSeparator;
+import ip.industrialProcessing.machines.magneticSeparator.TileEntityMagneticSeparator;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -74,7 +75,7 @@ public class IndustrialProcessing {
                 GameRegistry.registerBlock(blockMageneticSeparator, "BlockMagneticSeparator");
                 MinecraftForge.setBlockHarvestLevel(blockMageneticSeparator, "pickaxe", 1);
                 LanguageRegistry.addName(blockMageneticSeparator, "Magnetic Ore Separator");                
-                ModLoader.registerTileEntity(TileEntityFilter.class, "MagneticOreSeparator");
+                ModLoader.registerTileEntity(TileEntityMagneticSeparator.class, "MagneticOreSeparator");
                 
                 
                 proxy.registerRenderers();

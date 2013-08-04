@@ -43,12 +43,17 @@ public class TileEntityFilter extends TileEntityMachine {
 	}
 
 	@Override
-	public void beginWork() {
-
+	public void workCancelled(boolean remote) {
+		// TODO: stop sound
+	}
+	@Override
+	public void beginWork(boolean remote) {
+		// TODO: start sound
 	}
 
 	@Override
-	public void workDone() {
+	public void workDone(boolean remote) {
+		// TODO: stop sound
 	}
 
 	@Override

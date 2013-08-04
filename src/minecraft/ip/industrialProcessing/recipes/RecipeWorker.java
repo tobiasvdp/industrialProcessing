@@ -30,21 +30,23 @@ public class RecipeWorker extends Worker {
 	};
 
 	@Override
-	protected void onEndWork() {
-		removeInput(recipe);
-		produceOutput(recipe);
-		super.onEndWork();
+	protected void onEndWork(boolean remote) {
+		if (!remote) { // remote = client, !remote = server
+			removeInput(recipe);
+			produceOutput(recipe);
+		}
+		super.onEndWork(remote);
 		this.recipe = null;
 	}
 
 	@Override
-	protected void onBeginWork() {
+	protected void onBeginWork(boolean remote) {
 		this.recipe = this.getCurrentRecipe();
 		if (recipe != null)
 			this.totalWork = this.recipe.workRequired;
 		else
 			this.totalWork = 0;
-		super.onBeginWork();
+		super.onBeginWork(remote);
 	}
 
 	public Recipe getCurrentRecipe() {
@@ -100,8 +102,11 @@ public class RecipeWorker extends Worker {
 	}
 
 	protected void produceOutput(Recipe recipe) {
+
 		if (recipe == null || recipe.outputs == null)
 			return;
+		System.out.println("Outputting recipe after working "
+				+ recipe.workRequired);
 		for (int i = 0; i < recipe.outputs.length; i++) {
 			// TODO: liquids and tank recipes!
 			RecipeOutputSlot slot = recipe.outputs[i];
@@ -129,6 +134,8 @@ public class RecipeWorker extends Worker {
 		value *= resize;
 		value = Math.max(0, Math.min(value + distributionCenter, 1));
 		int amount = (int) Math.round(value * size) + minAmount;
+		System.out.println(String.format("%s: %s-%s %s = %s", randomValue,
+				minAmount, maxAmount, distributionCenter, amount));
 		return amount;
 	}
 }

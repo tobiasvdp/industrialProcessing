@@ -46,7 +46,7 @@ public abstract class TileEntityMachine extends TileEntity implements
 	}
 
 	protected void work() {
-		worker.doWork(1);
+		worker.doWork(1, this.worldObj.isRemote);
 	}
 
 	@Override
@@ -111,7 +111,8 @@ public abstract class TileEntityMachine extends TileEntity implements
 			MachineItemStack machineStack = itemStacks.get(slot);
 			if (machineStack.stack == null)
 				machineStack.stack = new ItemStack(itemId, amount, 0);
-			machineStack.stack.stackSize += amount;
+			else
+				machineStack.stack.stackSize += amount;
 			onInventoryChanged();
 			return true;
 		}

@@ -29,7 +29,7 @@ public class TileEntityCrusher extends TileEntityMachine {
 
 	@Override
 	protected void work() {
-		worker.doWork(this.speed / 10);
+		worker.doWork(this.speed / 10, this.getWorldObj().isRemote);
 	};
 
 	@Override
@@ -43,10 +43,16 @@ public class TileEntityCrusher extends TileEntityMachine {
 	}
 
 	@Override
-	public void workDone() { // example on how to speed up!
+	public void workCancelled(boolean remote) {
+		this.speed = 10; // reset speed
+		// TODO: stop sound
+	}
+
+	@Override
+	public void workDone(boolean remote) { // example on how to speed up!
 		if (worker.hasWork()) {
-			this.speed += 5;
-			if (this.speed > 50) // max speed 
+			this.speed += 1;
+			if (this.speed > 50) // max speed
 				this.speed = 50;
 		} else {
 			this.speed = 10;
@@ -55,7 +61,7 @@ public class TileEntityCrusher extends TileEntityMachine {
 	}
 
 	@Override
-	public void beginWork() {
+	public void beginWork(boolean remote) {
 		// TODO: start sound
 	}
 

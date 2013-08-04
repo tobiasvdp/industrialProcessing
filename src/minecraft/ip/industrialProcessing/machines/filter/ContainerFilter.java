@@ -25,9 +25,9 @@ public class ContainerFilter extends ContainerMachine {
 		super(inventoryPlayer, tileEntity);
 
 		slots = new Slot[3];		
-		slots[0] = new Slot(tileEntity, 0, 44, 33);
-		slots[1] = new Slot(tileEntity, 1, 104, 33);
-		slots[2] = new Slot(tileEntity, 2, 104, 56);
+		slots[0] = new SlotBase(tileEntity, 0, 44, 33);
+		slots[1] = new SlotOutput(tileEntity, 1, 104, 33);
+		slots[2] = new SlotOutput(tileEntity, 2, 104, 56);
 
 		addSlotToContainer(slots[0]);
 		addSlotToContainer(slots[1]);

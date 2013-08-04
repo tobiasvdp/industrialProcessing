@@ -37,16 +37,21 @@ public class TileEntityMagneticSeparator extends TileEntityMachine {
 		return true;
 	}
 
+
 	@Override
-	public void workDone() { 
-		
+	public void workCancelled(boolean remote) {
+		// TODO: stop sound
+	}
+	@Override
+	public void beginWork(boolean remote) {
+		// TODO: start sound
 	}
 
 	@Override
-	public void beginWork() { 
-		
+	public void workDone(boolean remote) {
+		// TODO: stop sound
 	}
-
+	
 	@Override
 	public Iterator<Recipe> iterateRecipes() { 
 		return recipes.iterator();

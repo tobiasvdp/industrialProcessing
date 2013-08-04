@@ -1,6 +1,8 @@
 package ip.industrialProcessing.machines.crusher;
 
 import ip.industrialProcessing.machines.ContainerMachine;
+import ip.industrialProcessing.slots.SlotBase;
+import ip.industrialProcessing.slots.SlotOutput;
 import ip.industrialProcessing.utils.containers.ContainerUtils;
 import ip.industrialProcessing.utils.containers.IContainerAdd;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,8 +27,8 @@ public class ContainerCrusher extends ContainerMachine {
 		this.tileEntityCrusher = tileEntityCrusher;
 		
 		slots = new Slot[2];		
-		slots[0] = new Slot(tileEntityCrusher, 0, 44, 33);
-		slots[1] = new Slot(tileEntityCrusher, 1, 104, 33);
+		slots[0] = new SlotBase(tileEntityCrusher, 0, 44, 33);
+		slots[1] = new SlotOutput(tileEntityCrusher, 1, 104, 33);
 		
         addSlotToContainer(slots[0]);
         addSlotToContainer(slots[1]);	

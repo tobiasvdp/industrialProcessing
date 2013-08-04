@@ -13,24 +13,30 @@ public class Worker {
 		this.totalWork = totalWork;
 	}
 
-	public boolean doWork(int amount) {
+	public boolean doWork(int amount, boolean remote) {
 		boolean worked = false;
 		if (amount > 0) {
 			if (this.workDone == 0) {
-				onBeginWork();
+				onBeginWork(remote);
 			}
 			if (hasWork()) {
 				if (canWork()) {
 					worked = true;
 					this.workDone += amount;
 					if (this.workDone >= this.totalWork) {
-						onEndWork();
+						onEndWork(remote);
 					}
 				}
-			} else
-				this.workDone = 0;
+			} else {
+				this.onWorkCancelled(remote);
+			}
 		}
 		return worked;
+	}
+
+	protected void onWorkCancelled(boolean remote) {
+		this.handler.workCancelled(remote);
+		this.workDone = 0;
 	}
 
 	public boolean hasWork() {
@@ -41,17 +47,18 @@ public class Worker {
 		return this.handler.canWork();
 	}
 
-	protected void onEndWork() {
-		this.handler.workDone();
+	protected void onEndWork(boolean remote) {
+		this.handler.workDone(remote);
 		this.workDone = 0;
 	}
 
-	protected void onBeginWork() {
-		this.handler.beginWork();
+	protected void onBeginWork(boolean remote) {
+		this.handler.beginWork(remote);
 	}
 
 	public int getProgress() {
-		if(this.totalWork == 0) return -1;
+		if (this.totalWork == 0)
+			return -1;
 		return 100 * this.workDone / this.totalWork;
 	}
 
@@ -61,7 +68,7 @@ public class Worker {
 	}
 
 	public void readFromNBT(NBTTagCompound nbt) {
-		nbt.setShort("IP.Worker.WorkDone", (short)this.workDone);
-		nbt.setShort("IP.Worker.TotalWork", (short)this.totalWork);		
+		nbt.setShort("IP.Worker.WorkDone", (short) this.workDone);
+		nbt.setShort("IP.Worker.TotalWork", (short) this.totalWork);
 	}
 }

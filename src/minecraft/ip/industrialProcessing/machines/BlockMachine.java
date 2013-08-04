@@ -10,6 +10,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public abstract class BlockMachine extends BlockContainer {
@@ -19,7 +21,15 @@ public abstract class BlockMachine extends BlockContainer {
 		setStepSound(stepSound);
 		setUnlocalizedName(name);
 		setCreativeTab(tab);
+		
+		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX+ "inputTop");
 	}
+	
+	@Override
+	public Icon getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
+		return blockIcon;		
+	};
+	
 	
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z,

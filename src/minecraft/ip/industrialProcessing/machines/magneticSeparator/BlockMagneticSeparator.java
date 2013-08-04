@@ -15,7 +15,7 @@ public class BlockMagneticSeparator extends BlockMachine {
 
 	public BlockMagneticSeparator() {
 		super(IndustrialProcessingConfig.getMagneticSeparatorBlockID(), Material.iron, 1F,
-				Block.soundMetalFootstep, "Ore Filter",
+				Block.soundMetalFootstep, "Magnetic Ore Separator",
 				IndustrialProcessing.tabMachines);
 	}
 	@Override

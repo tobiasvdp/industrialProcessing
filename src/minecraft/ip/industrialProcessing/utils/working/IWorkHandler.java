@@ -14,10 +14,16 @@ public interface IWorkHandler {
 	/**
 	 * this method gets called when the work is done
 	 */
-	void workDone();
+	void workDone(boolean remote);
 	
 	/**
 	 * this method gets called when the work begins
 	 */
-	void beginWork();
+	void beginWork(boolean remote);
+	
+	/**
+	 * this method gets called when the work gets cancelled (input removed)
+	 * @param remote 
+	 */
+	void workCancelled(boolean remote);
 }

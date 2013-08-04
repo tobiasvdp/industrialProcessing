@@ -2,7 +2,7 @@ package ip.industrialProcessing.slots;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
-
+import net.minecraft.item.ItemStack;
 
 public class SlotBase extends Slot {
 
@@ -10,6 +10,9 @@ public class SlotBase extends Slot {
 		super(iinventory, slotIndex, posX, posY);
 	}
 
-
+	@Override
+	public boolean isItemValid(ItemStack par1ItemStack) {
+		return inventory.isItemValidForSlot(this.slotNumber, par1ItemStack);
+	}
 
 }
