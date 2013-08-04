@@ -32,7 +32,7 @@ public class RecipeWorker extends Worker {
 	@Override
 	protected void onEndWork() {
 		removeInput(recipe);
-			produceOutput(recipe);
+		produceOutput(recipe);
 		super.onEndWork();
 		this.recipe = null;
 	}
@@ -93,7 +93,6 @@ public class RecipeWorker extends Worker {
 			// TODO: liquids and tank recipes!
 			RecipeInputSlot slot = currentRecipe.inputs[i];
 
-			
 			if (!this.handler.removeFromSlot(slot.index, slot.itemId,
 					slot.amount))
 				System.out.println("Failed to remove recipe input?!");
@@ -107,8 +106,9 @@ public class RecipeWorker extends Worker {
 			// TODO: liquids and tank recipes!
 			RecipeOutputSlot slot = recipe.outputs[i];
 
-			double randomValue = random.nextGaussian(); // TODO: sync client & server on this 
-			
+			double randomValue = random.nextGaussian(); // TODO: sync client &
+														// server on this
+
 			int amount = getAmount(randomValue, slot.minAmount, slot.maxAmount,
 					slot.distributionCenter);
 			if (!this.handler.addToSlot(slot.index, slot.itemId, amount))
@@ -124,16 +124,11 @@ public class RecipeWorker extends Worker {
 		if (size == 0)
 			return minAmount;
 
-		double value = randomValue ;
-
-		double resize = Math.abs(0.5-distributionCenter)+1;
-		
+		double value = randomValue;
+		double resize = Math.abs(0.5 - distributionCenter) + 1;
 		value *= resize;
-		
-		value = Math.max(0, Math.min(value+ distributionCenter, 1));
-		
+		value = Math.max(0, Math.min(value + distributionCenter, 1));
 		int amount = (int) Math.round(value * size) + minAmount;
-
 		return amount;
 	}
 }

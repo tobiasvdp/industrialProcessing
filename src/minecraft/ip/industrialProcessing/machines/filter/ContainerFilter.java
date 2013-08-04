@@ -1,6 +1,8 @@
 package ip.industrialProcessing.machines.filter;
 
 import ip.industrialProcessing.machines.ContainerMachine;
+import ip.industrialProcessing.slots.SlotBase;
+import ip.industrialProcessing.slots.SlotOutput;
 import ip.industrialProcessing.utils.containers.ContainerUtils;
 import ip.industrialProcessing.utils.containers.IContainerAdd;
 import ip.industrialProcessing.utils.containers.IContainerTransfer;
@@ -20,9 +22,9 @@ public class ContainerFilter extends ContainerMachine {
 			TileEntityFilter tileEntity) {
 		super(inventoryPlayer, tileEntity);
 		
-		inputSlot = new Slot(tileEntity, 0, 16, 16);
-		outputSmallSlot = new Slot(tileEntity, 1, 48, 16);
-		outputBigSlot = new Slot(tileEntity, 2, 32, 32);
+		inputSlot = new SlotBase(tileEntity, 0, 16, 16);
+		outputSmallSlot = new SlotOutput(tileEntity, 1, 48, 16);
+		outputBigSlot = new SlotOutput(tileEntity, 2, 32, 32);
 
 		addSlotToContainer(inputSlot);
 		addSlotToContainer(outputSmallSlot);
