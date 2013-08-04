@@ -10,6 +10,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.src.ModLoader;
+import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -26,11 +27,21 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class IndustrialProcessing {
 
+	public static final String RESOURCE_PATH = "/assets/industrialprocessing/";
+	public static final String TEXTURE_DIRECTORY = RESOURCE_PATH + "textures/";
+	public static final String GUI_DIRECTORY = TEXTURE_DIRECTORY + "gui/";
+	public static final String BLOCK_TEXTURE_DIRECTORY = TEXTURE_DIRECTORY + "blocks/";
+	public static final String ITEM_TEXTURE_DIRECTORY = TEXTURE_DIRECTORY + "items/";
+	public static final String MODEL_TEXTURE_DIRECTORY = TEXTURE_DIRECTORY + "models/";
+	public static final String TEXTURE_DOMAIN = "industrialprocessing";
+	public static final String TEXTURE_NAME_PREFIX = TEXTURE_DOMAIN + ":";
+
+	
         // The instance of your mod that Forge uses.
         @Instance("IndustrialProcessing")
         public static IndustrialProcessing instance;
         
-        public static CreativeTabs tabMachines = new TabMachines(CreativeTabs.getNextID(),"IndustrialProcessing");
+        public static CreativeTabs tabMachines = new TabMachines(CreativeTabs.getNextID(),"industrialprocessing");
         
         public final static BlockCrusher blockCrusher = new BlockCrusher();
         public final static BlockFilter blockFilter = new BlockFilter();

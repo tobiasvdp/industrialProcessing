@@ -1,5 +1,7 @@
 package ip.industrialProcessing.machines;
 
+import ip.industrialProcessing.IndustrialProcessing;
+
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -36,7 +38,7 @@ protected String textureLocation;
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2,int par3) {
-		ResourceLocation texture = new ResourceLocation("IndustrialProcessing",textureLocation);
+		ResourceLocation texture = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN,textureLocation);
         mc.renderEngine.func_110577_a(texture);
 	    GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 	    int x = (width - xSize) / 2;
