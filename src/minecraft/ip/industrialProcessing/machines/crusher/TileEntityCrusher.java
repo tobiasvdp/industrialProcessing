@@ -3,10 +3,7 @@ package ip.industrialProcessing.machines.crusher;
 import java.util.Iterator;
 
 import ip.industrialProcessing.machines.TileEntityMachine;
-import ip.industrialProcessing.machines.filter.RecipesFilter;
-import ip.industrialProcessing.recipes.IRecipeWorkHandler;
 import ip.industrialProcessing.recipes.Recipe;
-import ip.industrialProcessing.recipes.RecipeWorker;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -16,57 +13,60 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TileEntityCrusher extends TileEntityMachine implements
-	IRecipeWorkHandler {
+public class TileEntityCrusher extends TileEntityMachine {
 
-		public static RecipesFilter recipes = new RecipesFilter();
-		
-		private RecipeWorker recipeWorker;
+	public static RecipesCrusher recipes = new RecipesCrusher();
+	private int speed;
 
-		public TileEntityCrusher() {
-			this.recipeWorker = new RecipeWorker(this);
-			super.setWorker(this.recipeWorker);
+	public TileEntityCrusher() {
+		super();
+		this.addStack(null, ForgeDirection.UP, true, false);
+		this.addStack(null, new ForgeDirection[] { ForgeDirection.SOUTH,
+				ForgeDirection.NORTH, ForgeDirection.EAST, ForgeDirection.WEST,
+				ForgeDirection.DOWN }, false, true);
+		this.speed = 10;
+	}
 
-			this.addStack(null, ForgeDirection.UP, true, false);
-			this.addStack(null, ForgeDirection.DOWN, false, true);
+	@Override
+	protected void work() {
+		worker.doWork(this.speed / 10);
+	};
+
+	@Override
+	public boolean hasWork() {
+		return true;
+	}
+
+	@Override
+	public boolean canWork() {
+		return true;
+	}
+
+	@Override
+	public void workDone() { // example on how to speed up!
+		if (worker.hasWork()) {
+			this.speed += 5;
+			if (this.speed > 50) // max speed 
+				this.speed = 50;
+		} else {
+			this.speed = 10;
+			// TODO: stop sound
 		}
+	}
 
-		@Override
-		public void beginWork() {
-		}
+	@Override
+	public void beginWork() {
+		// TODO: start sound
+	}
 
-		@Override
-		public void workDone() {
+	@Override
+	protected boolean isValidInput(int slot, int itemID) {
+		return recipes.isValidInput(slot, itemID);
+	}
 
-		}
-
-		@Override
-		public boolean hasWork() {
-			return true;
-		}
-
-		@Override
-		public boolean canWork() {
-			return true;
-		}
-
-		@Override
-		public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-			if (i == 0) return canInput(itemstack);
-			return false;
-		}
-
-		private boolean canInput(ItemStack itemstack) {
-			if (itemstack == null)
-				return false;
-			if (itemstack.itemID == Block.gravel.blockID)
-				return true;
-			return false;
-		}
-
-		@Override
-		public Iterator<Recipe> iterateRecipes() {
-			return recipes.iterator();
-		}
+	@Override
+	public Iterator<Recipe> iterateRecipes() {
+		return recipes.iterator();
+	}
 
 }

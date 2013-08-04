@@ -9,23 +9,23 @@ import ip.industrialProcessing.utils.working.Worker;
 
 public class RecipeWorker extends Worker {
 
-	private Random random = new Random();
+	private Random random;
 	private IRecipeWorkHandler handler;
 	private Recipe recipe;
 
 	public RecipeWorker(IRecipeWorkHandler handler) {
 		super(handler, 100);
 		this.handler = handler;
-
+		this.random = new Random(156464564);
 	}
 
 	@Override
-	protected boolean hasWork() {
+	public boolean hasWork() {
 		return super.hasWork() && matchesInput(this.recipe);
 	};
 
 	@Override
-	protected boolean canWork() {
+	public boolean canWork() {
 		return super.canWork() && outputAvailable(this.recipe);
 	};
 
@@ -93,6 +93,7 @@ public class RecipeWorker extends Worker {
 			// TODO: liquids and tank recipes!
 			RecipeInputSlot slot = currentRecipe.inputs[i];
 
+			
 			if (!this.handler.removeFromSlot(slot.index, slot.itemId,
 					slot.amount))
 				System.out.println("Failed to remove recipe input?!");
@@ -106,7 +107,9 @@ public class RecipeWorker extends Worker {
 			// TODO: liquids and tank recipes!
 			RecipeOutputSlot slot = recipe.outputs[i];
 
-			int amount = getAmount(slot.minAmount, slot.maxAmount,
+			double randomValue = random.nextGaussian(); // TODO: sync client & server on this 
+			
+			int amount = getAmount(randomValue, slot.minAmount, slot.maxAmount,
 					slot.distributionCenter);
 			if (!this.handler.addToSlot(slot.index, slot.itemId, amount))
 				System.out.println("Failed to create recipe output?!");
@@ -114,17 +117,23 @@ public class RecipeWorker extends Worker {
 
 	}
 
-	private int getAmount(int minAmount, int maxAmount,
+	private int getAmount(double randomValue, int minAmount, int maxAmount,
 			double distributionCenter) {
 
 		int size = maxAmount - minAmount;
 		if (size == 0)
 			return minAmount;
 
-		double value = random.nextGaussian() + distributionCenter;
+		double value = randomValue ;
 
+		double resize = Math.abs(0.5-distributionCenter)+1;
+		
+		value *= resize;
+		
+		value = Math.max(0, Math.min(value+ distributionCenter, 1));
+		
 		int amount = (int) Math.round(value * size) + minAmount;
 
-		return 0;
+		return amount;
 	}
 }
