@@ -25,13 +25,15 @@ public class RecipesFilter extends RecipesMachine {
 		sandOutput.type = RecipeSlotType.INVENTORY;
 		sandOutput.minAmount = 0;
 		sandOutput.maxAmount = 3;
+		sandOutput.distributionCenter = 0.75;
 		
 		RecipeOutputSlot gravelOutput = new RecipeOutputSlot();
 		gravelOutput.itemId = Block.gravel.blockID;
 		gravelOutput.index = 2;
 		gravelOutput.type = RecipeSlotType.INVENTORY;
-		sandOutput.minAmount = 0;
+		gravelOutput.minAmount = 0;
 		gravelOutput.maxAmount = 3;
+		gravelOutput.distributionCenter = 0.25;
 		
 		Recipe filterDirt = new Recipe();
 		filterDirt.powerRequired = 0;
@@ -41,5 +43,6 @@ public class RecipesFilter extends RecipesMachine {
 		
 		addRecipe(filterDirt);
 	}
+
 
 }

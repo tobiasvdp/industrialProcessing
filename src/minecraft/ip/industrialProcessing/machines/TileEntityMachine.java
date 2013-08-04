@@ -1,5 +1,6 @@
 package ip.industrialProcessing.machines;
 
+import ip.industrialProcessing.recipes.IRecipeWorkHandler;
 import ip.industrialProcessing.recipes.RecipeWorker;
 import ip.industrialProcessing.utils.inventories.InventoryUtils;
 import ip.industrialProcessing.utils.working.IWorkHandler;
@@ -11,16 +12,28 @@ import java.util.Stack;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
 public abstract class TileEntityMachine extends TileEntity implements
-		ISidedInventory, IWorkHandler, IMachineSlots {
+		ISidedInventory, IWorkHandler, IMachineSlots, IRecipeWorkHandler {
 
 	private ArrayList<MachineItemStack> itemStacks = new ArrayList<MachineItemStack>();
 	private int[][] itemStackSideSlots = new int[6][0];
+	private RecipeWorker recipeWorker;
 
-	private Worker worker;
+	public TileEntityMachine() {
+		this.recipeWorker = new RecipeWorker(this);
+		setWorker(this.recipeWorker);
+	}
+
+	protected Worker worker;
+
+	public Worker getWorker() {
+		return worker;
+	}
 
 	@Override
 	public void updateEntity() {
@@ -34,6 +47,50 @@ public abstract class TileEntityMachine extends TileEntity implements
 
 	protected void work() {
 		worker.doWork(1);
+	}
+  
+	
+	@Override
+	public void writeToNBT(NBTTagCompound nbt) {
+		worker.writeToNBT(nbt);
+		writeInventory(this, nbt);
+	};
+
+	private void writeInventory(TileEntityMachine tileEntityMachine,
+			NBTTagCompound nbt) {
+		NBTTagList nbttaglist = new NBTTagList();
+		for (int i = 0; i < this.itemStacks.size(); ++i) {
+			MachineItemStack machineStack = this.itemStacks.get(i);
+			if (machineStack.stack != null) {
+				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+				nbttagcompound1.setByte("Slot", (byte) i);
+				machineStack.stack.writeToNBT(nbttagcompound1);
+				nbttaglist.appendTag(nbttagcompound1);
+			}
+		}
+		nbt.setTag("Items", nbttaglist);
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+		worker.readFromNBT(nbt);
+		readInventory(this, nbt);
+	};
+
+	private void readInventory(TileEntityMachine tileEntityMachine,
+			NBTTagCompound nbt) {
+		NBTTagList nbttaglist = nbt.getTagList("Items");
+		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
+			NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+					.tagAt(i);
+			byte b0 = nbttagcompound1.getByte("Slot");
+
+			if (b0 >= 0 && b0 < itemStacks.size()) {
+				MachineItemStack machineStack = this.itemStacks.get(b0);
+				machineStack.stack = ItemStack
+						.loadItemStackFromNBT(nbttagcompound1);
+			}
+		}
 	}
 
 	@Override
@@ -220,7 +277,14 @@ public abstract class TileEntityMachine extends TileEntity implements
 	}
 
 	@Override
-	public abstract boolean isItemValidForSlot(int i, ItemStack itemstack);
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+		MachineItemStack stack = getMachineStack(i);
+		if (stack == null || itemstack == null)
+			return false;
+		return stack.input && isValidInput(i, itemstack.itemID);
+	}
+
+	protected abstract boolean isValidInput(int i, int itemID) ;
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int var1) {

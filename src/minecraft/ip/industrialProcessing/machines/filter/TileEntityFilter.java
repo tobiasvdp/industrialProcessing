@@ -24,11 +24,10 @@ import ip.industrialProcessing.utils.inventories.InventoryUtils;
 import ip.industrialProcessing.utils.working.IWorkHandler;
 import ip.industrialProcessing.utils.working.Worker;
 
-public class TileEntityFilter extends TileEntityMachine implements
-IRecipeWorkHandler {
+public class TileEntityFilter extends TileEntityMachine {
 
 	public static RecipesFilter recipes = new RecipesFilter();
-	
+
 	private RecipeWorker recipeWorker;
 
 	public TileEntityFilter() {
@@ -39,17 +38,17 @@ IRecipeWorkHandler {
 		this.addStack(null,
 				new ForgeDirection[] { ForgeDirection.SOUTH,
 						ForgeDirection.NORTH, ForgeDirection.EAST,
-						ForgeDirection.WEST }, true, false);
+						ForgeDirection.WEST }, false, true);
 		this.addStack(null, ForgeDirection.DOWN, false, true);
 	}
 
 	@Override
 	public void beginWork() {
+
 	}
 
 	@Override
 	public void workDone() {
-
 	}
 
 	@Override
@@ -63,20 +62,8 @@ IRecipeWorkHandler {
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		if (i == 0)
-			return canInput(itemstack);
-		return false;
-	}
-
-	private boolean canInput(ItemStack itemstack) {
-		if (itemstack == null)
-			return false;
-		if (itemstack.itemID == Block.gravel.blockID)
-			return true;
-		if (itemstack.itemID == Block.dirt.blockID)
-			return true;
-		return false;
+	protected boolean isValidInput(int slot, int itemID) {
+		return recipes.isValidInput(slot, itemID);
 	}
 
 	@Override
