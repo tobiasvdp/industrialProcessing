@@ -20,6 +20,8 @@ public class GuiHandler implements IGuiHandler {
 		TileEntity entity = world.getBlockTileEntity(x, y, z);
 		if(entity  instanceof TileEntityFilter)
 			return new ContainerFilter(player.inventory, (TileEntityFilter)entity);
+		if(entity  instanceof TileEntityCrusher)
+			return new ContainerCrusher(player.inventory, (TileEntityCrusher)entity);
 		
 		
 		return null;

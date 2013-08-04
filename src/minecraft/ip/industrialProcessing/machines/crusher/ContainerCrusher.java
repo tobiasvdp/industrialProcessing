@@ -9,8 +9,9 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerCrusher extends ContainerMachine{
+public class ContainerCrusher extends ContainerMachine {
 
+	
 	protected TileEntityCrusher tileEntityCrusher;
 	
 	@Override
@@ -22,9 +23,7 @@ public class ContainerCrusher extends ContainerMachine{
 		super(inventoryPlayer, tileEntityCrusher);
 		this.tileEntityCrusher = tileEntityCrusher;
 		
-        addSlotToContainer(new Slot(tileEntityCrusher, 0, 8, 33));
-        addSlotToContainer(new Slot(tileEntityCrusher, 1, 8, 33));
-
-        ContainerUtils.BindPlayerInventory(inventoryPlayer,this,0);		
+        addSlotToContainer(new Slot(tileEntityCrusher, 0, 8, 16));
+        addSlotToContainer(new Slot(tileEntityCrusher, 1, 8, 48));	
 	}
 }

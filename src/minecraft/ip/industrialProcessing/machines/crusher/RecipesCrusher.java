@@ -28,8 +28,8 @@ public class RecipesCrusher extends RecipesMachine {
 		sandOutput.type = RecipeSlotType.INVENTORY;
 		
 		Recipe sandRecipe = new Recipe();
-		sandRecipe.inputs = new RecipeInputSlot[]{ cobbleInput};
-		sandRecipe.outputs = new RecipeOutputSlot[]{ sandOutput };
+		sandRecipe.inputs = new RecipeInputSlot[]{cobbleInput};
+		sandRecipe.outputs = new RecipeOutputSlot[]{sandOutput};
 		
 		addRecipe(sandRecipe);
 	}
