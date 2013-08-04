@@ -1,5 +1,6 @@
 package ip.industrialProcessing.machines.crusher;
 
+import ip.industrialProcessing.machines.TileEntityMachine;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -8,7 +9,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityCrusher extends TileEntity implements ISidedInventory{
+public class TileEntityCrusher extends TileEntityMachine{
 	private ItemStack[] itemStacks = new ItemStack[2];
 	public int workTime = 0;
 	public int workingTime = 0;
@@ -53,7 +54,7 @@ public class TileEntityCrusher extends TileEntity implements ISidedInventory{
 	}
 		
 	public TileEntityCrusher() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	@Override
@@ -181,6 +182,26 @@ public class TileEntityCrusher extends TileEntity implements ISidedInventory{
 		} else {
 			return 1;
 		}
+	}
+	@Override
+	public boolean hasWork() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public boolean canWork() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public void workDone() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void beginWork() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

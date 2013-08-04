@@ -1,38 +1,12 @@
 package ip.industrialProcessing.machines.crusher;
 
-import org.lwjgl.opengl.GL11;
-
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.texture.TextureUtil;
+import ip.industrialProcessing.machines.GuiMachine;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 
-public class GuiCrusher extends GuiContainer {
+public class GuiCrusher extends GuiMachine{
 
-public TileEntityCrusher tileEntityCrusher;
-	
-	public GuiCrusher (InventoryPlayer inventoryPlayer,TileEntityCrusher tileEntity) {
-		super(new ContainerCrusher(inventoryPlayer, tileEntity));
-		tileEntityCrusher = tileEntity;
+	public GuiCrusher(InventoryPlayer inventory, TileEntityCrusher entity) {
+		super(inventory, entity, new ContainerCrusher(inventory, entity), "Ore Crusher");
 	}
-
-	@Override
-	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
-		fontRenderer.drawString("Ore Crusher", 8, 6, 4210752);
-		fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
-	}
-
-	@Override
-	protected void drawGuiContainerBackgroundLayer(float par1, int par2,int par3) {
-		ResourceLocation texture = new ResourceLocation("/gui/trap.png");
-        mc.renderEngine.func_110577_a(texture);
-	    GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-	    int x = (width - xSize) / 2;
-	    int y = (height - ySize) / 2;
-	    this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
-	}
-
 
 }

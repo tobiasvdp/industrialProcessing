@@ -1,5 +1,6 @@
 package ip.industrialProcessing;
 
+import ip.industrialProcessing.machines.crusher.ContainerCrusher;
 import ip.industrialProcessing.machines.crusher.GuiCrusher;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import ip.industrialProcessing.machines.filter.ContainerFilter;

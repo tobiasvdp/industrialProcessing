@@ -1,5 +1,6 @@
 package ip.industrialProcessing.machines.crusher;
 
+import ip.industrialProcessing.machines.ContainerMachine;
 import ip.industrialProcessing.utils.containers.ContainerUtils;
 import ip.industrialProcessing.utils.containers.IContainerAdd;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,20 +9,17 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerCrusher extends Container implements IContainerAdd {
+public class ContainerCrusher extends ContainerMachine{
 
 	protected TileEntityCrusher tileEntityCrusher;
 	
-	public ContainerCrusher() {
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
 		return tileEntityCrusher.isUseableByPlayer(entityplayer);
 	}
 	
 	public ContainerCrusher(InventoryPlayer inventoryPlayer, TileEntityCrusher tileEntityCrusher) {
+		super(inventoryPlayer, tileEntityCrusher);
 		this.tileEntityCrusher = tileEntityCrusher;
 		
         addSlotToContainer(new Slot(tileEntityCrusher, 0, 44, 33));
