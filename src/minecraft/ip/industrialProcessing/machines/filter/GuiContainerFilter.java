@@ -1,10 +1,10 @@
 package ip.industrialProcessing.machines.filter;
 
-import ip.industrialProcessing.machines.GuiMachine;
+import ip.industrialProcessing.machines.GuiContainerMachine;
 import ip.industrialProcessing.utils.working.Worker;
 import net.minecraft.entity.player.InventoryPlayer;
 
-public class GuiContainerFilter extends GuiMachine {
+public class GuiContainerFilter extends GuiContainerMachine {
 
 	private TileEntityFilter filterTileEntity;
 

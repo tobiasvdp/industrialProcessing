@@ -10,13 +10,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
-public class GuiMachine extends GuiContainer {
+public class GuiContainerMachine extends GuiContainer {
 
 public TileEntity tileEntity;
 protected String name;
 protected String textureLocation;
 	
-	public GuiMachine (InventoryPlayer inventoryPlayer,TileEntity tileEntity, ContainerMachine container,String name,String textureLocation) {
+	public GuiContainerMachine (InventoryPlayer inventoryPlayer,TileEntity tileEntity, ContainerMachine container,String name,String textureLocation) {
 		super(container);
 		this.tileEntity = tileEntity;
 		this.name = name;
