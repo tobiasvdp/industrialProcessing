@@ -1,20 +1,91 @@
 package ip.industrialProcessing.machines.filter;
 
 import cpw.mods.fml.relauncher.Side;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.src.ModLoader;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.MinecraftForge;
 import ip.industrialProcessing.utils.inventories.IItemStacksInventory;
 import ip.industrialProcessing.utils.inventories.InventoryUtils;
+import ip.industrialProcessing.utils.working.IWorkHandler;
+import ip.industrialProcessing.utils.working.Worker;
 
 public class TileEntityFilter extends TileEntity implements ISidedInventory,
-		IItemStacksInventory {
+		IItemStacksInventory, IWorkHandler {
+
+	private ItemStack[] stacks = new ItemStack[3];
+	private Worker worker;
+
+	public TileEntityFilter() {
+		worker = new Worker(this, 10);
+	}
+
+	@Override
+	public void beginWork() {
+		// decide on what to make here
+	}
+
+	@Override
+	public void workDone() {
+		// and do it here
+		System.out.println("Hey, this thingy has it's work done!");
+
+		ItemStack outputSmall = this.stacks[1];
+		ItemStack outputBig = this.stacks[2];
+
+		if (outputSmall == null)
+			outputSmall = new ItemStack(Block.sand, 1);
+		else
+			outputSmall.stackSize++;
+
+		if (outputBig == null)
+			outputBig = new ItemStack(Block.gravel, 1);
+		else
+			outputBig.stackSize++;
+		
+		this.stacks[1] = outputSmall;
+		this.stacks[2] = outputBig;
+		onInventoryChanged();
+	}
+
+	@Override
+	public boolean canUpdate() {
+		return true;
+	}
+
+	@Override
+	public void updateEntity() {
+		worker.doWork(1);
+	}
+
+	@Override
+	public boolean hasWork() {
+		ItemStack input = this.stacks[0];
+		return input != null && input.stackSize > 0
+				&& canAcceptInputId(input.itemID);
+	}
+
+	@Override
+	public boolean canWork() {
+		ItemStack outputSmall = this.stacks[1];
+		ItemStack outputBig = this.stacks[2];
+
+		return !((outputSmall != null && outputSmall.stackSize >= getInventoryStackLimit()) || (outputBig != null && outputBig.stackSize >= getInventoryStackLimit()));
+	}
+
+	private boolean canAcceptInputId(int itemID) {
+
+		if (itemID == Block.dirt.blockID)
+			return true;
+		return false;
+	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound par1) {
@@ -29,8 +100,6 @@ public class TileEntityFilter extends TileEntity implements ISidedInventory,
 		super.readFromNBT(par1);
 		InventoryUtils.ReadInventory(this, par1);
 	}
-
-	private ItemStack[] stacks = new ItemStack[3];
 
 	@Override
 	public int getSizeInventory() {
@@ -108,9 +177,17 @@ public class TileEntityFilter extends TileEntity implements ISidedInventory,
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		if (i == 0) // insert on input
-			return true;
-		return false; // no inserts in output
+		if (i != 0) // no inserts in output
+			return false;
+		if (itemstack != null && !canAcceptInputId(itemstack.itemID)) // check
+																		// if
+																		// the
+																		// itemstack
+																		// can
+																		// be
+																		// accepted
+			return false;
+		return true;
 	}
 
 	@Override
