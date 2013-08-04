@@ -17,7 +17,6 @@ public class ContainerMachine extends VerifyingContainer implements
 	public ContainerMachine(InventoryPlayer inventoryPlayer,
 			TileEntityMachine tileEntity) {
 		this.tileEntity = tileEntity;
-		ContainerUtils.BindPlayerInventory(inventoryPlayer, this, 0);
 	}
 
 	@Override
@@ -35,10 +34,6 @@ public class ContainerMachine extends VerifyingContainer implements
 	public void containerAddSlot(Slot slot) {
 		this.addSlotToContainer(slot);
 	}
-    @Override
-    public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
-    	return ContainerUtils.TransferStackInSlot(player, slot, tileEntity, this);
-    }
 
 	@Override
 	public boolean containerMergeItemStack(ItemStack par1ItemStack, int par2,
@@ -50,4 +45,6 @@ public class ContainerMachine extends VerifyingContainer implements
 	public Slot containerGetSlot(int slot) {
 		return getSlot(slot);
 	}
+	
+	
 }
