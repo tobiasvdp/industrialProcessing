@@ -10,7 +10,7 @@ public class GuiContainerFilter extends GuiMachine {
 		super(inventoryPlayer,tileEntity,new ContainerFilter(inventoryPlayer, tileEntity),"Ore Filter");	
 	}
 	@Override
-	public void extendedDraw(){
+	public void extendedDrawString(){
 		fontRenderer.drawString("test", 8, 20, 4210752);
 	}
 }

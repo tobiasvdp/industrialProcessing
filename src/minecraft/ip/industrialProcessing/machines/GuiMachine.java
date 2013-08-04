@@ -25,7 +25,11 @@ protected String name;
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
 		fontRenderer.drawString(name, 8, 6, 4210752);
 		fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
-		extendedDraw();
+		extendedDrawString();
+	}
+
+	public void extendedDrawString() {
+		
 	}
 
 	@Override
@@ -36,8 +40,7 @@ protected String name;
 	    int x = (width - xSize) / 2;
 	    int y = (height - ySize) / 2;
 	    this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
-	    
-	    
+	    extendedDraw();
 	}
 	public void extendedDraw(){
 		
