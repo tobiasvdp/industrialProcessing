@@ -14,7 +14,7 @@ public class GuiContainerMagneticSeparator extends GuiContainerMachine {
 	public GuiContainerMagneticSeparator(InventoryPlayer inventoryPlayer,
 			TileEntityMagneticSeparator tileEntity) {
 		super(inventoryPlayer, tileEntity, new ContainerMagneticSeparator(
-				inventoryPlayer, tileEntity), "Ore Filter", "none");
+				inventoryPlayer, tileEntity), "Magnetic Ore Separator", "textures/gui/MagneticSeparator.png");
 		this.tileEntity = tileEntity;
 	}
 

@@ -19,12 +19,12 @@ public class ContainerMagneticSeparator extends ContainerMachine {
 			TileEntityMachine tileEntity) {
 		super(inventoryPlayer, tileEntity);
 
-		inputSlot = new SlotBase(tileEntity, 0, 16, 16);
-		outputPurifiedMetal = new SlotOutput(tileEntity, 1, 16, 48);
+		inputSlot = new SlotBase(tileEntity, 0, 44, 33);
+		outputPurifiedMetal = new SlotOutput(tileEntity, 1, 16, 56);
 		
-		outputIronOxide = new SlotOutput(tileEntity, 2, 48, 16);
-		outputNickelDust = new SlotOutput(tileEntity, 3, 64, 16);
-		outputSphalerite = new SlotOutput(tileEntity, 3, 96, 16);
+		outputIronOxide = new SlotOutput(tileEntity, 2, 104, 33);
+		outputNickelDust = new SlotOutput(tileEntity, 3, 122, 33);
+		outputSphalerite = new SlotOutput(tileEntity, 4, 140, 33);
 
 		addSlotToContainer(inputSlot);
 		addSlotToContainer(outputPurifiedMetal);
