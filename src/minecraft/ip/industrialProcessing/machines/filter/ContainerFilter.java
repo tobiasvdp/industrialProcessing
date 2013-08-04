@@ -23,17 +23,11 @@ public class ContainerFilter extends ContainerMachine {
 	public ContainerFilter(InventoryPlayer inventoryPlayer,
 			TileEntityFilter tileEntity) {
 		super(inventoryPlayer, tileEntity);
-		
-<<<<<<< HEAD
+
 		slots = new Slot[3];		
 		slots[0] = new Slot(tileEntity, 0, 16, 16);
 		slots[1] = new Slot(tileEntity, 1, 48, 16);
 		slots[2] = new Slot(tileEntity, 2, 32, 32);
-=======
-		inputSlot = new SlotBase(tileEntity, 0, 16, 16);
-		outputSmallSlot = new SlotOutput(tileEntity, 1, 48, 16);
-		outputBigSlot = new SlotOutput(tileEntity, 2, 32, 32);
->>>>>>> branch 'master' of https://github.com/tobiasvdp/industrialProcessing.git
 
 		addSlotToContainer(slots[0]);
 		addSlotToContainer(slots[1]);
