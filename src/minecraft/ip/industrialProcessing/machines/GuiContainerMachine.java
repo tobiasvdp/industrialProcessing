@@ -14,15 +14,20 @@ import net.minecraft.util.StatCollector;
 
 public class GuiContainerMachine extends GuiContainer {
 
-public TileEntity tileEntity;
+public TileEntityMachine tileEntity;
 protected String name;
 protected String textureLocation;
+protected int progressBarX = 70;
+protected int progressBarY = 34;
+protected int progressBarWidth = 22;
+protected int progressBarHeight = 16;
 	
 	public GuiContainerMachine (InventoryPlayer inventoryPlayer,TileEntity tileEntity, ContainerMachine container,String name,String textureLocation) {
 		super(container);
-		this.tileEntity = tileEntity;
+		this.tileEntity = (TileEntityMachine) tileEntity;
 		this.name = name;
 		this.textureLocation = textureLocation;
+		
 	}
 
 	@Override
@@ -44,7 +49,19 @@ protected String textureLocation;
 	    int x = (width - xSize) / 2;
 	    int y = (height - ySize) / 2;
 	    this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
+	    
+	    //progress indicator
+		int scale = tileEntity.getScaledProgress(progressBarWidth);
+		if (scale > 0){
+			this.drawTexturedModalRect(x+progressBarX, y+progressBarY, 176, 0, scale, progressBarHeight);
+		}
 	    extendedDraw();
+	}
+	public void setProgressBarLocation(int x,int y,int w,int h){
+		progressBarX = x;
+		progressBarY = y;
+		progressBarWidth = w;
+		progressBarHeight = h;
 	}
 	public void extendedDraw(){
 		

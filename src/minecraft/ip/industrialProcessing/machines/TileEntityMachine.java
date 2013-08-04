@@ -314,7 +314,7 @@ public abstract class TileEntityMachine extends TileEntity implements
 	}
 	
 	public int getScaledProgress(int i){
-		return this.worker.getProgress()/100*i;
+		return this.worker.getProgress()*i/100;
 	}
 
 }
