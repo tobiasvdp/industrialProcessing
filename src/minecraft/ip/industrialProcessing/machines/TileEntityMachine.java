@@ -48,8 +48,7 @@ public abstract class TileEntityMachine extends TileEntity implements
 	protected void work() {
 		worker.doWork(1);
 	}
-  
-	
+
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
 		worker.writeToNBT(nbt);
@@ -284,7 +283,7 @@ public abstract class TileEntityMachine extends TileEntity implements
 		return stack.input && isValidInput(i, itemstack.itemID);
 	}
 
-	protected abstract boolean isValidInput(int slot, int itemID) ;
+	protected abstract boolean isValidInput(int slot, int itemID);
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int var1) {
@@ -312,9 +311,9 @@ public abstract class TileEntityMachine extends TileEntity implements
 	public void setWorker(Worker recipeWorker) {
 		this.worker = recipeWorker;
 	}
-	
-	public int getScaledProgress(int i){
-		return this.worker.getProgress()*i/100;
+
+	public int getScaledProgress(int i) {
+		return this.worker.getProgress() * i / 100;
 	}
 
 }

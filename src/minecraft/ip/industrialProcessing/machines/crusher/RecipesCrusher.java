@@ -29,9 +29,9 @@ public class RecipesCrusher extends RecipesMachine {
 		sandOutput.type = RecipeSlotType.INVENTORY;
 		
 		Recipe sandRecipe = new Recipe();
+		sandRecipe.workRequired = 30;
 		sandRecipe.inputs = new RecipeInputSlot[]{cobbleInput};
 		sandRecipe.outputs = new RecipeOutputSlot[]{sandOutput};		
-		
 		addRecipe(sandRecipe);
 		
 		//dirt
@@ -50,6 +50,7 @@ public class RecipesCrusher extends RecipesMachine {
 		dirtOutput.type = RecipeSlotType.INVENTORY;
 		
 		Recipe dirtRecipe = new Recipe();
+		dirtRecipe.workRequired = 30;
 		dirtRecipe.inputs = new RecipeInputSlot[]{sandInput};
 		dirtRecipe.outputs = new RecipeOutputSlot[]{dirtOutput};		
 		
