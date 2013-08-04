@@ -27,7 +27,7 @@ public class ContainerCrusher extends Container implements IContainerAdd {
         addSlotToContainer(new Slot(tileEntityCrusher, 0, 44, 33));
         addSlotToContainer(new Slot(tileEntityCrusher, 1, 8, 33));
 
-        ContainerUtils.BindPlayerInventory(inventoryPlayer,this);
+        ContainerUtils.BindPlayerInventory(inventoryPlayer,this,0);
 		
 		
 	}

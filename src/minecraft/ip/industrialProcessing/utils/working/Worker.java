@@ -3,8 +3,8 @@ package ip.industrialProcessing.utils.working;
 public class Worker {
 
 	private IWorkHandler handler;
-	private int totalWork;
-	private int workDone;
+	protected int totalWork;
+	protected int workDone;
 
 	public Worker(IWorkHandler handler, int totalWork) {
 		this.handler = handler;
@@ -17,18 +17,26 @@ public class Worker {
 			if (this.handler.hasWork()) {
 				if (this.handler.canWork()) {
 					if (this.workDone == 0) {
-						this.handler.beginWork();
+						onBeginWork();
 					}
 					worked = true;
 					this.workDone += amount;
 					if (this.workDone >= this.totalWork) {
-						this.handler.workDone();
-						this.workDone = 0;
+						onEndWork();
 					}
 				}
 			} else
 				this.workDone = 0;
 		}
 		return worked;
+	}
+
+	protected void onEndWork() {
+		this.handler.workDone();
+		this.workDone = 0;
+	}
+
+	protected void onBeginWork() {
+		this.handler.beginWork();
 	}
 }
