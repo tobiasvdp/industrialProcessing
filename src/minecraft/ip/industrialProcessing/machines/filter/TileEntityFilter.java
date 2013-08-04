@@ -1,5 +1,8 @@
 package ip.industrialProcessing.machines.filter;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,6 +27,8 @@ import ip.industrialProcessing.utils.working.Worker;
 public class TileEntityFilter extends TileEntityMachine implements
 IRecipeWorkHandler {
 
+	public static RecipesFilter recipes = new RecipesFilter();
+	
 	private RecipeWorker recipeWorker;
 
 	public TileEntityFilter() {
@@ -49,12 +54,12 @@ IRecipeWorkHandler {
 
 	@Override
 	public boolean hasWork() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean canWork() {
-		return false;
+		return true;
 	}
 
 	@Override
@@ -72,6 +77,11 @@ IRecipeWorkHandler {
 		if (itemstack.itemID == Block.dirt.blockID)
 			return true;
 		return false;
+	}
+
+	@Override
+	public Iterator<Recipe> iterateRecipes() {
+		return recipes.iterator();
 	}
 
 }

@@ -14,11 +14,11 @@ public class Worker {
 	public boolean doWork(int amount) {
 		boolean worked = false;
 		if (amount > 0) {
-			if (this.handler.hasWork()) {
-				if (this.handler.canWork()) {
-					if (this.workDone == 0) {
-						onBeginWork();
-					}
+			if (this.workDone == 0) {
+				onBeginWork();
+			}
+			if (hasWork()) {
+				if (canWork()) {
 					worked = true;
 					this.workDone += amount;
 					if (this.workDone >= this.totalWork) {
@@ -30,7 +30,17 @@ public class Worker {
 		}
 		return worked;
 	}
+	
+	protected boolean hasWork()
+	{
+		return this.handler.hasWork();
+	}
 
+	protected boolean canWork()
+	{
+		return this.handler.canWork();
+	}
+	
 	protected void onEndWork() {
 		this.handler.workDone();
 		this.workDone = 0;

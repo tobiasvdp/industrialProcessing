@@ -6,10 +6,11 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import ip.industrialProcessing.utils.containers.ContainerUtils;
 import ip.industrialProcessing.utils.containers.IContainerAdd;
+import ip.industrialProcessing.utils.containers.IContainerTransfer;
 import ip.industrialProcessing.utils.containers.VerifyingContainer;
 
 public class ContainerMachine extends VerifyingContainer implements
-		IContainerAdd {
+		IContainerAdd, IContainerTransfer {
 
 	private TileEntityMachine tileEntity;
 
@@ -33,5 +34,20 @@ public class ContainerMachine extends VerifyingContainer implements
 	@Override
 	public void containerAddSlot(Slot slot) {
 		this.addSlotToContainer(slot);
+	}
+    @Override
+    public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
+    	return ContainerUtils.TransferStackInSlot(player, slot, tileEntity, this);
+    }
+
+	@Override
+	public boolean containerMergeItemStack(ItemStack par1ItemStack, int par2,
+			int par3, boolean par4) {
+		return this.mergeItemStack(par1ItemStack, par2, par3, par4);
+	}
+
+	@Override
+	public Slot containerGetSlot(int slot) {
+		return getSlot(slot);
 	}
 }

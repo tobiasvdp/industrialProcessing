@@ -10,15 +10,16 @@ public abstract class VerifyingContainer extends Container {
 
 	protected abstract boolean canPutItemStackInSlot(ItemStack stack, Slot slot);
 
+	@Override
 	protected boolean mergeItemStack(ItemStack par1ItemStack, int par2,
 			int par3, boolean par4) {
 		boolean flag1 = false;
-		
+
 		int k = par2;
 
 		if (par4) {
 			k = par3 - 1;
-		} 
+		}
 		Slot slot;
 		ItemStack itemstack1;
 
@@ -27,7 +28,8 @@ public abstract class VerifyingContainer extends Container {
 					&& (!par4 && k < par3 || par4 && k >= par2)) {
 				slot = (Slot) this.inventorySlots.get(k);
 				itemstack1 = slot.getStack();
-				boolean toPlayerSlot = par4 && slot.inventory instanceof InventoryPlayer;
+				boolean toPlayerSlot = par4
+						&& slot.inventory instanceof InventoryPlayer;
 				if (itemstack1 != null
 						&& itemstack1.itemID == par1ItemStack.itemID
 						&& (!par1ItemStack.getHasSubtypes() || par1ItemStack
@@ -36,7 +38,8 @@ public abstract class VerifyingContainer extends Container {
 								itemstack1)) {
 					int l = itemstack1.stackSize + par1ItemStack.stackSize;
 
-					if (toPlayerSlot || canPutItemStackInSlot(par1ItemStack, slot)) {
+					if (toPlayerSlot
+							|| canPutItemStackInSlot(par1ItemStack, slot)) {
 						if (l <= par1ItemStack.getMaxStackSize()) {
 							par1ItemStack.stackSize = 0;
 							itemstack1.stackSize = l;
@@ -72,10 +75,12 @@ public abstract class VerifyingContainer extends Container {
 			while (!par4 && k < par3 || par4 && k >= par2) {
 				slot = (Slot) this.inventorySlots.get(k);
 				itemstack1 = slot.getStack();
-				boolean toPlayerSlot = par4 && slot.inventory instanceof InventoryPlayer;
+				boolean toPlayerSlot = par4
+						&& slot.inventory instanceof InventoryPlayer;
 
 				if (itemstack1 == null
-						&& (toPlayerSlot || canPutItemStackInSlot(par1ItemStack, slot))) {
+						&& (toPlayerSlot || canPutItemStackInSlot(
+								par1ItemStack, slot))) {
 					slot.putStack(par1ItemStack.copy());
 					slot.onSlotChanged();
 					par1ItemStack.stackSize = 0;

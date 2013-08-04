@@ -6,6 +6,7 @@ import ip.industrialProcessing.utils.working.IWorkHandler;
 import ip.industrialProcessing.utils.working.Worker;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -36,6 +37,32 @@ public abstract class TileEntityMachine extends TileEntity implements
 	}
 
 	@Override
+	public boolean removeFromSlot(int slot, int itemId, int amount) {
+		if (slotContains(slot, itemId, amount)) {
+			MachineItemStack machineStack = itemStacks.get(slot);
+			machineStack.stack.stackSize -= amount;
+			if (machineStack.stack.stackSize == 0)
+				machineStack.stack = null;
+			onInventoryChanged();
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean addToSlot(int slot, int itemId, int amount) {
+		if (slotHasRoomFor(slot, itemId, amount)) {
+			MachineItemStack machineStack = itemStacks.get(slot);
+			if (machineStack.stack == null)
+				machineStack.stack = new ItemStack(itemId, amount, 0);
+			machineStack.stack.stackSize += amount;
+			onInventoryChanged();
+			return true;
+		}
+		return false;
+	}
+
+	@Override
 	public boolean slotContains(int slot, int itemId, int amount) {
 		MachineItemStack machineStack = itemStacks.get(slot);
 		return machineStack != null && machineStack.stack != null
@@ -51,6 +78,16 @@ public abstract class TileEntityMachine extends TileEntity implements
 		return machineStack != null
 				&& (machineStack.stack == null || (machineStack.stack.itemID == stack.itemID && (machineStack.stack.stackSize
 						+ stack.stackSize < getInventoryStackLimit())));
+	}
+
+	@Override
+	public boolean slotHasRoomFor(int slot, int itemId, int amount) {
+		if (amount == 0)
+			return true;
+		MachineItemStack machineStack = itemStacks.get(slot);
+		return machineStack != null
+				&& (machineStack.stack == null || (machineStack.stack.itemID == itemId && (machineStack.stack.stackSize
+						+ amount < getInventoryStackLimit())));
 	}
 
 	protected void addStack(ItemStack stack, ForgeDirection side,
@@ -108,19 +145,23 @@ public abstract class TileEntityMachine extends TileEntity implements
 	}
 
 	@Override
-	public ItemStack decrStackSize(int slotIndex, int amount) {
+	public ItemStack decrStackSize(int i, int j) {
+		MachineItemStack machineStack = getMachineStack(i);
+		if (machineStack == null)
+			return null;
 
-		ItemStack stack = getStackInSlot(slotIndex);
-		if (stack != null) {
-			if (stack.stackSize <= amount) {
-				setInventorySlotContents(slotIndex, null);
-			} else {
-				stack = stack.splitStack(amount);
-				if (stack.stackSize == 0) {
-					setInventorySlotContents(slotIndex, null);
-				}
-			}
+		ItemStack stack = machineStack.stack;
+		if (stack == null)
+			return null;
+
+		if (stack.stackSize > j) {
+			stack = stack.splitStack(j);
+
+			onInventoryChanged();
+			return stack;
 		}
+		machineStack.stack = null;
+		onInventoryChanged();
 		return stack;
 	}
 
@@ -135,6 +176,9 @@ public abstract class TileEntityMachine extends TileEntity implements
 
 	@Override
 	public void setInventorySlotContents(int slotIndex, ItemStack stack) {
+		if (slotIndex > getSizeInventory())
+			return;
+
 		MachineItemStack machineStack = getMachineStack(slotIndex);
 		if (machineStack != null) {
 			machineStack.stack = stack;
@@ -147,13 +191,11 @@ public abstract class TileEntityMachine extends TileEntity implements
 
 	@Override
 	public String getInvName() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Filter";
 	}
 
 	@Override
 	public boolean isInvNameLocalized() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -198,7 +240,7 @@ public abstract class TileEntityMachine extends TileEntity implements
 	public boolean canExtractItem(int slotIndex, ItemStack itemstack, int amount) {
 		MachineItemStack machineStack = getMachineStack(slotIndex);
 		if (machineStack != null && machineStack.output) {
-			return isItemValidForSlot(slotIndex, itemstack);
+			return true;
 		}
 		return false;
 	}
