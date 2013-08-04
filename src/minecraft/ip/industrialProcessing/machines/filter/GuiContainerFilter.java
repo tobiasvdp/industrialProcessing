@@ -11,7 +11,7 @@ public class GuiContainerFilter extends GuiContainerMachine {
 	public GuiContainerFilter(InventoryPlayer inventoryPlayer,
 			TileEntityFilter tileEntity) {
 		super(inventoryPlayer, tileEntity, new ContainerFilter(inventoryPlayer,
-				tileEntity), "Ore Filter", "none");
+				tileEntity), "Ore Filter", "textures/gui/Filter.png");
 		this.filterTileEntity = tileEntity;
 	}
 

@@ -25,8 +25,8 @@ public class ContainerCrusher extends ContainerMachine {
 		this.tileEntityCrusher = tileEntityCrusher;
 		
 		slots = new Slot[2];		
-		slots[0] = new Slot(tileEntityCrusher, 0, 8, 16);
-		slots[1] = new Slot(tileEntityCrusher, 1, 8, 48);
+		slots[0] = new Slot(tileEntityCrusher, 0, 44, 33);
+		slots[1] = new Slot(tileEntityCrusher, 1, 104, 33);
 		
         addSlotToContainer(slots[0]);
         addSlotToContainer(slots[1]);	
