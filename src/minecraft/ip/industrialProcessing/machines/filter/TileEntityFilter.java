@@ -39,7 +39,7 @@ IRecipeWorkHandler {
 		this.addStack(null,
 				new ForgeDirection[] { ForgeDirection.SOUTH,
 						ForgeDirection.NORTH, ForgeDirection.EAST,
-						ForgeDirection.WEST }, false, true);
+						ForgeDirection.WEST }, true, false);
 		this.addStack(null, ForgeDirection.DOWN, false, true);
 	}
 
