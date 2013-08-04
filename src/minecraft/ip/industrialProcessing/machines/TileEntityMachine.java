@@ -312,5 +312,9 @@ public abstract class TileEntityMachine extends TileEntity implements
 	public void setWorker(Worker recipeWorker) {
 		this.worker = recipeWorker;
 	}
+	
+	public int getScaledProgress(int i){
+		return this.worker.getProgress()/100*i;
+	}
 
 }
