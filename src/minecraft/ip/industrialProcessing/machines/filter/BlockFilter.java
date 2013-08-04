@@ -28,7 +28,6 @@ public class BlockFilter extends BlockContainer {
 		if (tileEntity == null || player.isSneaking()) {
 			return false;
 		}
-		// code to open gui explained later
 		player.openGui(IndustrialProcessing.instance, 0, world, x, y, z);
 		return true;
 	}

@@ -28,13 +28,12 @@ public class TileEntityCrusher extends TileEntity implements ISidedInventory{
 				this.itemStacks[i].writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);
 			}
-			
-			par1.setTag("Items", nbttaglist);
+		}	
+		par1.setTag("Items", nbttaglist);
 
-			if (this.isInvNameLocalized()) {
-				par1.setString("Crusher", this.field_94130_e);
-			}
-		}		
+		if (this.isInvNameLocalized()) {
+			par1.setString("Crusher", this.field_94130_e);
+		}
 	}
 	@Override
 	public void readFromNBT(NBTTagCompound par1) {

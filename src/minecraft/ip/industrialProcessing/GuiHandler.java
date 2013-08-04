@@ -1,5 +1,7 @@
 package ip.industrialProcessing;
 
+import ip.industrialProcessing.machines.crusher.GuiCrusher;
+import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import ip.industrialProcessing.machines.filter.ContainerFilter;
 import ip.industrialProcessing.machines.filter.GuiContainerFilter;
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
@@ -29,6 +31,8 @@ public class GuiHandler implements IGuiHandler {
 		TileEntity entity = world.getBlockTileEntity(x, y, z);
 		if(entity  instanceof TileEntityFilter)
 			return new GuiContainerFilter(player.inventory, (TileEntityFilter)entity);
+		if(entity  instanceof TileEntityCrusher)
+			return new GuiCrusher(player.inventory, (TileEntityCrusher)entity);
 		return null;
 	}
 

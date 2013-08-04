@@ -21,24 +21,16 @@ public class BlockCrusher extends BlockContainer {
 	}
 
 	@Override
-	 public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int par6, float par7, float par8, float par9)
-	    {
-	        if (world.isRemote)
-	        {
-	            return true;
-	        }
-	        else
-	        {
-	        	TileEntityCrusher tileEntityCrusher = (TileEntityCrusher)world.getBlockTileEntity(x, y, z);
-
-	            if (tileEntityCrusher != null)
-	            {
-	            	//entityPlayer.openGui(industrialProcessing.instance, 0, world, x, y, z);
-	            }
-
-	            return true;
-	        }
-	    }
+	public boolean onBlockActivated(World world, int x, int y, int z,
+			EntityPlayer player, int metadata, float what, float these,
+			float are) {
+		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+		if (tileEntity == null || player.isSneaking()) {
+			return false;
+		}
+		player.openGui(IndustrialProcessing.instance, 0, world, x, y, z);
+		return true;
+	}
 	@Override
 	public TileEntity createNewTileEntity(World world) {
 		return new TileEntityCrusher();
