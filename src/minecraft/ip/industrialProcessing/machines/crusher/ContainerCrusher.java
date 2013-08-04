@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 
 public class ContainerCrusher extends ContainerMachine {
 
+	protected Slot[] slots;
 	
 	protected TileEntityCrusher tileEntityCrusher;
 	
@@ -23,7 +24,17 @@ public class ContainerCrusher extends ContainerMachine {
 		super(inventoryPlayer, tileEntityCrusher);
 		this.tileEntityCrusher = tileEntityCrusher;
 		
-        addSlotToContainer(new Slot(tileEntityCrusher, 0, 8, 16));
-        addSlotToContainer(new Slot(tileEntityCrusher, 1, 8, 48));	
+		slots = new Slot[2];		
+		slots[0] = new Slot(tileEntityCrusher, 0, 8, 16);
+		slots[1] = new Slot(tileEntityCrusher, 1, 8, 48);
+		
+        addSlotToContainer(slots[0]);
+        addSlotToContainer(slots[1]);	
+        
+        ContainerUtils.BindPlayerInventory(inventoryPlayer, this, 0);
+	}
+	@Override
+	public int getSizeInventory() {
+		return slots.length;
 	}
 }

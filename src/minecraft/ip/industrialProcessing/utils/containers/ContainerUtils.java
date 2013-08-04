@@ -26,40 +26,8 @@ public final class ContainerUtils {
 		}
 	}
 
-	public static ItemStack TransferStackInSlot(EntityPlayer player, int slot,
-			IInventory tileEntity, IContainerTransfer container) {
-		Slot slotObject = container.containerGetSlot(slot);
-		ItemStack stack = null;
+	public static ItemStack TransferStackInSlot(EntityPlayer player, int slotId,IInventory tileEntity, IContainerTransfer container) {
+		return null;
 
-		if (slotObject != null && slotObject.getHasStack()) {
-			ItemStack stackInSlot = slotObject.getStack();
-			stack = stackInSlot.copy();
-
-			if (slotObject.inventory.equals(player.inventory)) {
-				// from EntityPlayer to TileEntity
-				if (!container
-						.containerMergeItemStack(stackInSlot, 0, 9, false)) {
-					return null;
-				}
-			} else { 
-				// from TileEntity to EntityPlayer
-				if (!container
-						.containerMergeItemStack(stackInSlot, 0, 35, true)) {
-					return null;
-				}
-			}
-
-			if (stackInSlot.stackSize == 0) {
-				slotObject.putStack(null);
-			} else {
-				slotObject.onSlotChanged();
-			}
-
-			if (stackInSlot.stackSize == stack.stackSize) {
-				return null;
-			}
-			slotObject.onPickupFromSlot(player, stackInSlot);
-		}
-		return stack;
 	}
 }

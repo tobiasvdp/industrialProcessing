@@ -14,6 +14,7 @@ public class RecipesCrusher extends RecipesMachine {
 	}
 
 	private void addDefaultRecipes() {
+		//cobble
 		RecipeInputSlot cobbleInput = new RecipeInputSlot();
 		cobbleInput.amount = 1;
 		cobbleInput.index = 0;
@@ -29,8 +30,30 @@ public class RecipesCrusher extends RecipesMachine {
 		
 		Recipe sandRecipe = new Recipe();
 		sandRecipe.inputs = new RecipeInputSlot[]{cobbleInput};
-		sandRecipe.outputs = new RecipeOutputSlot[]{sandOutput};
+		sandRecipe.outputs = new RecipeOutputSlot[]{sandOutput};		
 		
 		addRecipe(sandRecipe);
+		
+		//dirt
+		RecipeInputSlot sandInput = new RecipeInputSlot();
+		sandInput.amount = 3;
+		sandInput.index = 0;
+		sandInput.itemId=Block.sand.blockID;
+		sandInput.type = RecipeSlotType.INVENTORY;
+		
+		RecipeOutputSlot dirtOutput = new RecipeOutputSlot();
+		dirtOutput.minAmount = 2;
+		dirtOutput.maxAmount = 4;
+		dirtOutput.distributionCenter = 2;
+		dirtOutput.index = 1;
+		dirtOutput.itemId = Block.dirt.blockID;
+		dirtOutput.type = RecipeSlotType.INVENTORY;
+		
+		Recipe dirtRecipe = new Recipe();
+		dirtRecipe.inputs = new RecipeInputSlot[]{sandInput};
+		dirtRecipe.outputs = new RecipeOutputSlot[]{dirtOutput};		
+		
+		addRecipe(dirtRecipe);
+		
 	}
 }
