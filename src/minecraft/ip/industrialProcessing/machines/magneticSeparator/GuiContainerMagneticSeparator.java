@@ -17,5 +17,14 @@ public class GuiContainerMagneticSeparator extends GuiContainerMachine {
 				inventoryPlayer, tileEntity), "Magnetic Ore Separator", "textures/gui/MagneticSeparator.png");
 		this.tileEntity = tileEntity;
 	}
+	@Override
+	public void extendedDraw(){
+		int scale = tileEntity.getScaledProgress(22);
+		if (scale != 0){
+		    int x = (width - xSize) / 2;
+		    int y = (height - ySize) / 2;
+			this.drawTexturedModalRect(x+70, y+34, 176, 0, scale, 16);
+		}
+	}
 
 }
