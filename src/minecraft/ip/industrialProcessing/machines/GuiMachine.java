@@ -14,11 +14,13 @@ public class GuiMachine extends GuiContainer {
 
 public TileEntity tileEntity;
 protected String name;
+protected String textureLocation;
 	
-	public GuiMachine (InventoryPlayer inventoryPlayer,TileEntity tileEntity, ContainerMachine container,String name) {
+	public GuiMachine (InventoryPlayer inventoryPlayer,TileEntity tileEntity, ContainerMachine container,String name,String textureLocation) {
 		super(container);
 		this.tileEntity = tileEntity;
 		this.name = name;
+		this.textureLocation = textureLocation;
 	}
 
 	@Override
@@ -34,7 +36,7 @@ protected String name;
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2,int par3) {
-		ResourceLocation texture = new ResourceLocation("/gui/trap.png");
+		ResourceLocation texture = new ResourceLocation(textureLocation);
         mc.renderEngine.func_110577_a(texture);
 	    GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 	    int x = (width - xSize) / 2;

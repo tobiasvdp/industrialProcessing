@@ -2,12 +2,11 @@ package ip.industrialProcessing.machines.filter;
 
 import ip.industrialProcessing.machines.GuiMachine;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 
 public class GuiContainerFilter extends GuiMachine {
 
 	public GuiContainerFilter(InventoryPlayer inventoryPlayer, TileEntityFilter tileEntity) {
-		super(inventoryPlayer,tileEntity,new ContainerFilter(inventoryPlayer, tileEntity),"Ore Filter");	
+		super(inventoryPlayer,tileEntity,new ContainerFilter(inventoryPlayer, tileEntity),"Ore Filter","none");	
 	}
 	@Override
 	public void extendedDrawString(){
