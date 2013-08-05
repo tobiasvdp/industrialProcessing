@@ -63,12 +63,12 @@ public class Worker {
 	}
 
 	public void writeToNBT(NBTTagCompound nbt) {
-		this.workDone = nbt.getShort("IP.Worker.WorkDone");
-		this.totalWork = nbt.getShort("IP.Worker.TotalWork");
+		nbt.setShort("IP.Worker.WorkDone", (short) this.workDone);
+		nbt.setShort("IP.Worker.TotalWork", (short) this.totalWork);
 	}
 
 	public void readFromNBT(NBTTagCompound nbt) {
-		nbt.setShort("IP.Worker.WorkDone", (short) this.workDone);
-		nbt.setShort("IP.Worker.TotalWork", (short) this.totalWork);
+		this.workDone = nbt.getShort("IP.Worker.WorkDone");
+		this.totalWork = nbt.getShort("IP.Worker.TotalWork");
 	}
 }
