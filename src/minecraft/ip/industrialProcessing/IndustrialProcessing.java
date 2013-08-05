@@ -76,10 +76,9 @@ public class IndustrialProcessing {
                 MinecraftForge.setBlockHarvestLevel(blockMageneticSeparator, "pickaxe", 1);
                 LanguageRegistry.addName(blockMageneticSeparator, "Magnetic Ore Separator");                
                 ModLoader.registerTileEntity(TileEntityMagneticSeparator.class, "MagneticOreSeparator");
-                
-                
-                proxy.registerRenderers();
+
                 NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
+                proxy.registerRenderers();
         }
         @EventHandler
         public void postInit(FMLPostInitializationEvent event) {

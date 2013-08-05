@@ -8,5 +8,6 @@ public class GuiCrusher extends GuiContainerMachine{
 	public GuiCrusher(InventoryPlayer inventory, TileEntityCrusher entity) {
 		super(inventory, entity, new ContainerCrusher(inventory, entity), "Ore Crusher","textures/gui/Crusher.png");
 	}
+	
 
 }

@@ -19,6 +19,7 @@ public class TileEntityCrusher extends TileEntityMachine {
 
 	public static RecipesCrusher recipes = new RecipesCrusher();
 	private int speed;
+	public EntityPlayer placedBy;
 
 	public TileEntityCrusher() {
 		super();
