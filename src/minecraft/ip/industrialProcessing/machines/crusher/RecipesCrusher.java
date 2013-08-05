@@ -1,6 +1,8 @@
 package ip.industrialProcessing.machines.crusher;
 
 import net.minecraft.block.Block;
+import ip.industrialProcessing.config.ConfigBlocks;
+import ip.industrialProcessing.config.ConfigItems;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeInputSlot;
@@ -14,47 +16,53 @@ public class RecipesCrusher extends RecipesMachine {
 	}
 
 	private void addDefaultRecipes() {
-		//cobble
-		RecipeInputSlot cobbleInput = new RecipeInputSlot();
-		cobbleInput.amount = 1;
-		cobbleInput.index = 0;
-		cobbleInput.itemId = Block.cobblestone.blockID;
-		cobbleInput.type = RecipeSlotType.INVENTORY;
-		RecipeOutputSlot sandOutput = new RecipeOutputSlot();
-		sandOutput.minAmount = 1;
-		sandOutput.maxAmount = 3;
-		sandOutput.distributionCenter = 0;
-		sandOutput.index = 1;
-		sandOutput.itemId = Block.sand.blockID;
-		sandOutput.type = RecipeSlotType.INVENTORY;
+		//copper ore to Crushed copper chunks
+		Recipe copperCrushing = new Recipe();
+		copperCrushing.inputs = new RecipeInputSlot[]{
+				new RecipeInputSlot(0, ConfigBlocks.BlockCopperOreID(), RecipeSlotType.INVENTORY, 1)
+		};
 		
-		Recipe sandRecipe = new Recipe();
-		sandRecipe.workRequired = 30;
-		sandRecipe.inputs = new RecipeInputSlot[]{cobbleInput};
-		sandRecipe.outputs = new RecipeOutputSlot[]{sandOutput};		
-		addRecipe(sandRecipe);
+		copperCrushing.outputs = new RecipeOutputSlot[]{
+				new RecipeOutputSlot(1, ConfigItems.ItemCopperCrushedChunksID(), RecipeSlotType.INVENTORY, 1, 3, 0)
+		};
+		copperCrushing.powerRequired = 30;		
+		addRecipe(copperCrushing);
 		
-		//dirt
-		RecipeInputSlot sandInput = new RecipeInputSlot();
-		sandInput.amount = 3;
-		sandInput.index = 0;
-		sandInput.itemId=Block.sand.blockID;
-		sandInput.type = RecipeSlotType.INVENTORY;
+		//Large copper to Crushed copper chunks
+		Recipe copperCrushing2 = new Recipe();
+		copperCrushing2.inputs = new RecipeInputSlot[]{
+				new RecipeInputSlot(0, ConfigItems.ItemCopperLargeChunksID(), RecipeSlotType.INVENTORY, 1)
+		};
 		
-		RecipeOutputSlot dirtOutput = new RecipeOutputSlot();
-		dirtOutput.minAmount = 2;
-		dirtOutput.maxAmount = 4;
-		dirtOutput.distributionCenter = 2;
-		dirtOutput.index = 1;
-		dirtOutput.itemId = Block.dirt.blockID;
-		dirtOutput.type = RecipeSlotType.INVENTORY;
+		copperCrushing2.outputs = new RecipeOutputSlot[]{
+				new RecipeOutputSlot(1, ConfigItems.ItemCopperCrushedChunksID(), RecipeSlotType.INVENTORY, 1, 3, -0.5)
+		};
+		copperCrushing2.powerRequired = 30;		
+		addRecipe(copperCrushing2);
 		
-		Recipe dirtRecipe = new Recipe();
-		dirtRecipe.workRequired = 30;
-		dirtRecipe.inputs = new RecipeInputSlot[]{sandInput};
-		dirtRecipe.outputs = new RecipeOutputSlot[]{dirtOutput};		
+		//Tin ore to Crushed Tin chunks
+		Recipe TinCrushing = new Recipe();
+		TinCrushing.inputs = new RecipeInputSlot[]{
+				new RecipeInputSlot(0, ConfigBlocks.BlockTinOreID(), RecipeSlotType.INVENTORY, 1)
+		};
 		
-		addRecipe(dirtRecipe);
+		TinCrushing.outputs = new RecipeOutputSlot[]{
+				new RecipeOutputSlot(1, ConfigItems.ItemTinCrushedChunksID(), RecipeSlotType.INVENTORY, 1, 3, 0)
+		};
+		TinCrushing.powerRequired = 30;		
+		addRecipe(TinCrushing);
+		
+		//Large Tin to Crushed Tin chunks
+		Recipe TinCrushing2 = new Recipe();
+		TinCrushing2.inputs = new RecipeInputSlot[]{
+				new RecipeInputSlot(0, ConfigItems.ItemTinLargeChunksID(), RecipeSlotType.INVENTORY, 1)
+		};
+		
+		TinCrushing2.outputs = new RecipeOutputSlot[]{
+				new RecipeOutputSlot(1, ConfigItems.ItemTinCrushedChunksID(), RecipeSlotType.INVENTORY, 1, 3, -0.5)
+		};
+		TinCrushing2.powerRequired = 30;		
+		addRecipe(TinCrushing2);
 		
 	}
 }
