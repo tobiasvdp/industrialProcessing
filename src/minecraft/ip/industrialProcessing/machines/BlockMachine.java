@@ -29,8 +29,7 @@ public abstract class BlockMachine extends BlockContainer {
 	public Icon getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
 		return blockIcon;		
 	};
-	
-	
+
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z,
 			EntityPlayer player, int metadata, float what, float these,

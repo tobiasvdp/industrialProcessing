@@ -86,8 +86,8 @@ public class IndustrialProcessing {
                 ModLoader.registerTileEntity(TileEntityMixer.class, "OreMixer");
                 
                 
-                proxy.registerRenderers();
                 NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
+                proxy.registerRenderers();
         }
         @EventHandler
         public void postInit(FMLPostInitializationEvent event) {

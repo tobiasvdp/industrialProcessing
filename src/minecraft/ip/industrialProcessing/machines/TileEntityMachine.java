@@ -16,9 +16,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.liquids.ITankContainer;
 
 public abstract class TileEntityMachine extends TileEntity implements
-		ISidedInventory, IWorkHandler, IMachineSlots, IRecipeWorkHandler {
+		ISidedInventory, IWorkHandler, IMachineSlots, IRecipeWorkHandler{
 
 	private ArrayList<MachineItemStack> itemStacks = new ArrayList<MachineItemStack>();
 	private int[][] itemStackSideSlots = new int[6][0];
