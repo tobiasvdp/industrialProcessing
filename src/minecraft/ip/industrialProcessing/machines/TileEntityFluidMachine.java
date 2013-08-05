@@ -370,7 +370,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 		if (stack == null)
 			return true;
 		return stack.isFluidEqual(addStack)
-				&& stack.amount + addStack.amount < tank.getCapacity();
+				&& stack.amount + addStack.amount <= tank.getCapacity();
 	}
 
 	@Override
@@ -382,7 +382,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 		if (stack == null)
 			return true;
 		return stack.fluidID == itemId
-				&& stack.amount + amount < tank.getCapacity();
+				&& stack.amount + amount <= tank.getCapacity();
 	}
 
 	@Override
