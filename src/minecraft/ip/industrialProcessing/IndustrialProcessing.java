@@ -1,6 +1,6 @@
 package ip.industrialProcessing;
 
-import ip.industrialProcessing.items.ItemIronLargeChunks;
+import ip.industrialProcessing.items.*;
 import ip.industrialProcessing.machines.crusher.BlockCrusher;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import ip.industrialProcessing.machines.filter.BlockFilter;
@@ -49,6 +49,14 @@ public class IndustrialProcessing {
         
         //create items
         private final static ItemIronLargeChunks itemIronLargeChunks = new ItemIronLargeChunks();
+        private final static ItemCopperLargeChunks itemCopperLargeChunks = new ItemCopperLargeChunks();
+        private final static ItemTinLargeChunks itemTinLargeChunks = new ItemTinLargeChunks();
+        private final static ItemIronSmallChunks itemIronSmallChunks = new ItemIronSmallChunks();
+        private final static ItemCopperSmallChunks itemCopperSmallChunks = new ItemCopperSmallChunks();
+        private final static ItemTinSmallChunks itemTinSmallChunks = new ItemTinSmallChunks();
+        private final static ItemIronCrushedChunks itemIronCrushedChunks = new ItemIronCrushedChunks();
+        private final static ItemCopperCrushedChunks itemCopperCrushedChunks = new ItemCopperCrushedChunks();
+        private final static ItemTinCrushedChunks itemTinCrushedChunks = new ItemTinCrushedChunks();
         
         //create blocks
         public final static BlockCrusher blockCrusher = new BlockCrusher();
@@ -95,6 +103,14 @@ public class IndustrialProcessing {
                 
                 //give items a name
                 LanguageRegistry.addName(itemIronLargeChunks, "Large Iron Chunks");
+                LanguageRegistry.addName(itemCopperLargeChunks, "Large Copper Chunks");
+                LanguageRegistry.addName(itemTinLargeChunks, "Large Tin Chunks");
+                LanguageRegistry.addName(itemIronSmallChunks, "Small Iron Chunks");
+                LanguageRegistry.addName(itemCopperSmallChunks, "Small Copper Chunks");
+                LanguageRegistry.addName(itemTinSmallChunks, "Small Tin Chunks");
+                LanguageRegistry.addName(itemIronCrushedChunks, "Crushed Iron Chunks");
+                LanguageRegistry.addName(itemCopperCrushedChunks, "Crushed Copper Chunks");
+                LanguageRegistry.addName(itemTinCrushedChunks, "Crushed Tin Chunks");
                 
                 proxy.registerRenderers();
         }
