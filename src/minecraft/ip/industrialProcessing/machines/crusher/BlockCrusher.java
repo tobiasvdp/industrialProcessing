@@ -1,5 +1,7 @@
 package ip.industrialProcessing.machines.crusher;
 
+import java.io.Console;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ip.industrialProcessing.IndustrialProcessing;
@@ -33,30 +35,30 @@ public class BlockCrusher extends BlockMachine {
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static Icon topIcon;
-	public static Icon bottomIcon;
-	public static Icon sideIcon;
+	public Icon topIcon;
+	public Icon bottomIcon;
+	public Icon sideIcon;
 	
-	@SideOnly(Side.CLIENT)
 	@Override
-	public void registerIcons(IconRegister icon) {
-		topIcon = icon.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX
-				+ "crusher_top");
-		bottomIcon = icon.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX
-				+ "crusher_bottom");
-		sideIcon = icon.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX
-				+ "crusher_side");
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister par1IconRegister) {
+		topIcon = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX+ "crusher_top");
+		bottomIcon = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX+ "crusher_bottom");
+		sideIcon = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX+ "crusher_side");
 	}
 	
 	@SideOnly(Side.CLIENT)
 	@Override
 	public Icon getIcon(int side, int meta) {
+		if (meta == 0){
 		if(side == ForgeDirection.UP.ordinal())
 			return topIcon;
 		else if(side == ForgeDirection.DOWN.ordinal())
 			return bottomIcon;
 		else
 			return sideIcon;
+		}
+		return sideIcon;
 	}
 	
 	
