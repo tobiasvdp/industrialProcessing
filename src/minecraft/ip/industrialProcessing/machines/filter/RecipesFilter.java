@@ -13,35 +13,7 @@ import ip.industrialProcessing.recipes.RecipeSlotType;
 public class RecipesFilter extends RecipesMachine {
 	public RecipesFilter() {
 		
-		RecipeInputSlot dirtInput = new RecipeInputSlot();
-		dirtInput.itemId = Block.dirt.blockID;
-		dirtInput.index = 0;
-		dirtInput.type = RecipeSlotType.INVENTORY;
-		dirtInput.amount = 4;
-		
-		RecipeOutputSlot sandOutput = new RecipeOutputSlot();
-		sandOutput.itemId = Block.sand.blockID;
-		sandOutput.index = 1;
-		sandOutput.type = RecipeSlotType.INVENTORY;
-		sandOutput.minAmount = 0;
-		sandOutput.maxAmount = 3;
-		sandOutput.distributionCenter = 0.75;
-		
-		RecipeOutputSlot gravelOutput = new RecipeOutputSlot();
-		gravelOutput.itemId = Block.gravel.blockID;
-		gravelOutput.index = 2;
-		gravelOutput.type = RecipeSlotType.INVENTORY;
-		gravelOutput.minAmount = 0;
-		gravelOutput.maxAmount = 3;
-		gravelOutput.distributionCenter = 0.25;
-		
-		Recipe filterDirt = new Recipe();
-		filterDirt.powerRequired = 0;
-		filterDirt.workRequired = 100;
-		filterDirt.inputs = new RecipeInputSlot[] { dirtInput };
-		filterDirt.outputs = new RecipeOutputSlot[] { sandOutput, gravelOutput };
-		
-		addRecipe(filterDirt);
+
 	}
 
 
