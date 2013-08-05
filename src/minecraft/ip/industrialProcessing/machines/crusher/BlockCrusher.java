@@ -36,7 +36,9 @@ public class BlockCrusher extends BlockMachine {
 
 	@SideOnly(Side.CLIENT)
 	public Icon topIcon;
+	@SideOnly(Side.CLIENT)
 	public Icon bottomIcon;
+	@SideOnly(Side.CLIENT)
 	public Icon sideIcon;
 	
 	@Override
@@ -50,15 +52,12 @@ public class BlockCrusher extends BlockMachine {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public Icon getIcon(int side, int meta) {
-		if (meta == 0){
-		if(side == ForgeDirection.UP.ordinal())
+		if(side == ForgeDirection.UP.ordinal())			
 			return topIcon;
-		else if(side == ForgeDirection.DOWN.ordinal())
+		else if(side == ForgeDirection.DOWN.ordinal())			
 			return bottomIcon;
-		else
+		else			
 			return sideIcon;
-		}
-		return sideIcon;
 	}
 	
 	
