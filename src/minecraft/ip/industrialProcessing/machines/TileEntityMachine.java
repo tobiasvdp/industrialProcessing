@@ -51,6 +51,7 @@ public abstract class TileEntityMachine extends TileEntity implements
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
 		worker.writeToNBT(nbt);
 		writeInventory(this, nbt);
 	};
@@ -72,6 +73,7 @@ public abstract class TileEntityMachine extends TileEntity implements
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
 		worker.readFromNBT(nbt);
 		readInventory(this, nbt);
 	};
