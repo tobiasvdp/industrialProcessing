@@ -66,26 +66,38 @@ public class RecipeWorker extends Worker {
 		if (currentRecipe.inputs == null)
 			return false;
 		for (int i = 0; i < currentRecipe.inputs.length; i++) {
-			// TODO: liquids and tank recipes!
 			RecipeInputSlot slot = currentRecipe.inputs[i];
-			if (!this.handler
-					.slotContains(slot.index, slot.itemId, slot.amount))
+			if (!hasInputIngredients(slot))
 				return false;
 		}
 		return true;
 	}
 
+	protected boolean hasInputIngredients(RecipeInputSlot slot) {
+		if (slot.type == RecipeSlotType.INVENTORY) {
+			return this.handler.slotContains(slot.index, slot.itemId,
+					slot.amount);
+		}
+		return false;
+	}
+
 	private boolean outputAvailable(Recipe currentRecipe) {
 		if (currentRecipe == null || currentRecipe.outputs == null)
 			return false;
-		for (int i = 0; i < currentRecipe.inputs.length; i++) {
-			// TODO: liquids and tank recipes!
+		for (int i = 0; i < currentRecipe.outputs.length; i++) {
 			RecipeOutputSlot slot = currentRecipe.outputs[i];
-			if (!this.handler.slotHasRoomFor(slot.index, slot.itemId,
-					slot.maxAmount))
+			if (!hasOutputSpace(slot))
 				return false;
 		}
 		return true;
+	}
+
+	protected boolean hasOutputSpace(RecipeOutputSlot slot) {
+		if (slot.type == RecipeSlotType.INVENTORY) {
+			return this.handler.slotHasRoomFor(slot.index, slot.itemId,
+					slot.maxAmount);
+		}
+		return false;
 	}
 
 	private void removeInput(Recipe currentRecipe) {
@@ -95,6 +107,12 @@ public class RecipeWorker extends Worker {
 			// TODO: liquids and tank recipes!
 			RecipeInputSlot slot = currentRecipe.inputs[i];
 
+			removeFromInput(slot);
+		}
+	}
+
+	protected void removeFromInput(RecipeInputSlot slot) {
+		if (slot.type == RecipeSlotType.INVENTORY) {
 			if (!this.handler.removeFromSlot(slot.index, slot.itemId,
 					slot.amount))
 				System.out.println("Failed to remove recipe input?!");
@@ -111,20 +129,25 @@ public class RecipeWorker extends Worker {
 			// TODO: liquids and tank recipes!
 			RecipeOutputSlot slot = recipe.outputs[i];
 
-			double randomValue = random.nextGaussian(); // TODO: sync client &
-														// server on this
+			double randomValue = random.nextGaussian();
 
 			int amount = getAmount(randomValue, slot.minAmount, slot.maxAmount,
 					slot.distributionCenter);
-			if (!this.handler.addToSlot(slot.index, slot.itemId, amount))
-				System.out.println("Failed to create recipe output?!");
+
+			addToOutput(amount, slot);
 		}
 
 	}
 
-	private int getAmount(double randomValue, int minAmount, int maxAmount,
-			double distributionCenter) {
+	protected void addToOutput(int amount, RecipeOutputSlot slot) {
+		if (slot.type == RecipeSlotType.INVENTORY) {
+			if (!this.handler.addToSlot(slot.index, slot.itemId, amount))
+				System.out.println("Failed to create recipe output?!");
+		}
+	}
 
+	protected int getAmount(double randomValue, int minAmount, int maxAmount,
+			double distributionCenter) {
 		int size = maxAmount - minAmount;
 		if (size == 0)
 			return minAmount;

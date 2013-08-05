@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
@@ -20,26 +21,34 @@ public class TileEntityMixer extends TileEntityFluidMachine {
 	private static RecipesMixer recipes = new RecipesMixer();
 
 	public TileEntityMixer() {
+
+		System.out.println("Setting up Mixer");
+
 		addStack(null, ForgeDirection.UP, true, false); // Mixing ingredient
 
+		ForgeDirection[] nodirections = new ForgeDirection[0];
 		// buckets!
-		addStack(null, ForgeDirection.UP, true, false); // Liquid Input Full
-														// Input
-		addStack(null, ForgeDirection.DOWN, false, true); // Liquid Input Empty
-															// Output
-		addStack(null, ForgeDirection.UP, true, false); // Liquid Output Empty
-														// Input
-		addStack(null, ForgeDirection.DOWN, false, true); // Liquid Output Full
-															// Output
+		addStack(null, nodirections, true, false); // Liquid Input Full
+													// Input
+		addStack(null, nodirections, false, true); // Liquid Input Empty
+													// Output
+		addStack(null, nodirections, true, false); // Liquid Output Empty
+													// Input
+		addStack(null, nodirections, false, true); // Liquid Output Full
+													// Output
 
-		addTank(new FluidTank(10000), new ForgeDirection[] {
-				ForgeDirection.NORTH, ForgeDirection.SOUTH,
-				ForgeDirection.WEST, ForgeDirection.EAST }, true, false);
-		addTank(new FluidTank(10000), ForgeDirection.DOWN, false, true);
+		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10,
+				new ForgeDirection[] { ForgeDirection.NORTH,
+						ForgeDirection.SOUTH, ForgeDirection.WEST,
+						ForgeDirection.EAST }, true, false);
+		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, ForgeDirection.DOWN, false, true);
 	}
 
 	@Override
 	public void updateEntity() {
+		addBucketToTank(1,2,0);
+		getBucketFromTank(3,4,1);
+		/*
 		ItemStack waterStacks = getStackInSlot(1);
 		ItemStack bucketOutputStack = getStackInSlot(2);
 		if (waterStacks != null
@@ -48,17 +57,21 @@ public class TileEntityMixer extends TileEntityFluidMachine {
 			if (bucketOutputStack == null) {
 
 				MachineFluidTank tank = this.getFluidTankForSlot(0);
-				if (tank != null
-						&& tank.tank.getFluidAmount() < tank.tank.getCapacity()) {
+
+				if (this.tankHasRoomFor(0, FluidRegistry.WATER.getID(), 1000)) {
 					this.decrStackSize(1, 1); // take water out
-					Fluid fluid = FluidRegistry.getFluid("Water");
-					tank.tank.fill(new FluidStack(fluid, 1000), true);
-					this.setInventorySlotContents(2, new ItemStack(
-							Item.bucketEmpty, 1));
+					Fluid fluid = FluidRegistry.WATER;
+					if (this.removeFromSlot(1, Item.bucketWater.itemID, 1)) {
+						tank.fill(new FluidStack(fluid, 1000), true);
+						this.setInventorySlotContents(2, new ItemStack(
+								Item.bucketEmpty, 1));
+					}
 				}
 			}
-		}
+		}*/
+		super.updateEntity();
 	};
+
 
 	@Override
 	public boolean hasWork() {
@@ -101,9 +114,9 @@ public class TileEntityMixer extends TileEntityFluidMachine {
 	}
 
 	@Override
-	protected boolean isTankValidForLiquid(int index, int fluidId) {
-		if (index == 0)
-			return fluidId == FluidRegistry.getFluidID("Water");
+	protected boolean isTankValidForLiquid(int slot, int fluidId) {
+		if (slot == 0)
+			return fluidId == FluidRegistry.WATER.getID();
 		return false;
 	}
 

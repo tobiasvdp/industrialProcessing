@@ -16,7 +16,7 @@ public class GuiContainerMachine extends GuiContainer {
 
 public TileEntityMachine tileEntity;
 protected String name;
-protected String textureLocation;
+protected ResourceLocation textureLocation;
 protected int progressBarX = 70;
 protected int progressBarY = 34;
 protected int progressBarWidth = 22;
@@ -25,26 +25,19 @@ protected int progressBarHeight = 16;
 	public GuiContainerMachine (InventoryPlayer inventoryPlayer,TileEntityMachine tileEntity, ContainerMachine container,String name,String textureLocation) {
 		super(container);
 		this.tileEntity = tileEntity;
-		this.name = name;
-		this.textureLocation = textureLocation;
-		
+		this.name = name; 
+		this.textureLocation = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN,textureLocation);
 	}
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
 		fontRenderer.drawString(name, 8, 6, 4210752);
 		fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
-		extendedDrawString();
-	}
-
-	public void extendedDrawString() {
-		
 	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2,int par3) {
-		ResourceLocation texture = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN,textureLocation);
-        mc.renderEngine.func_110577_a(texture);
+        mc.renderEngine.func_110577_a(this.textureLocation);
 	    GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 	    int x = (width - xSize) / 2;
 	    int y = (height - ySize) / 2;
@@ -55,16 +48,12 @@ protected int progressBarHeight = 16;
 		if (scale > 0){
 			this.drawTexturedModalRect(x+progressBarX, y+progressBarY, 176, 0, scale, progressBarHeight);
 		}
-	    extendedDraw();
 	}
-	public void setProgressBarLocation(int x,int y,int w,int h){
+	protected void setProgressBarLocation(int x,int y,int w,int h){
 		progressBarX = x;
 		progressBarY = y;
 		progressBarWidth = w;
 		progressBarHeight = h;
-	}
-	public void extendedDraw(){
-		
 	}
 
 

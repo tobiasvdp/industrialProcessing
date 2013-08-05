@@ -19,13 +19,17 @@ import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.liquids.ITankContainer;
 
 public abstract class TileEntityMachine extends TileEntity implements
-		ISidedInventory, IWorkHandler, IMachineSlots, IRecipeWorkHandler{
+		ISidedInventory, IWorkHandler, IMachineSlots, IRecipeWorkHandler {
 
 	private ArrayList<MachineItemStack> itemStacks = new ArrayList<MachineItemStack>();
 	private int[][] itemStackSideSlots = new int[6][0];
 	private RecipeWorker recipeWorker;
 
 	public TileEntityMachine() {
+		setupDefaultRecipeWorker();
+	}
+
+	protected void setupDefaultRecipeWorker() {
 		this.recipeWorker = new RecipeWorker(this);
 		setWorker(this.recipeWorker);
 	}
@@ -54,11 +58,10 @@ public abstract class TileEntityMachine extends TileEntity implements
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 		worker.writeToNBT(nbt);
-		writeInventory(this, nbt);
+		writeInventory(nbt);
 	};
 
-	private void writeInventory(TileEntityMachine tileEntityMachine,
-			NBTTagCompound nbt) {
+	private void writeInventory(NBTTagCompound nbt) {
 		NBTTagList nbttaglist = new NBTTagList();
 		for (int i = 0; i < this.itemStacks.size(); ++i) {
 			MachineItemStack machineStack = this.itemStacks.get(i);
@@ -76,11 +79,10 @@ public abstract class TileEntityMachine extends TileEntity implements
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 		worker.readFromNBT(nbt);
-		readInventory(this, nbt);
+		readInventory(nbt);
 	};
 
-	private void readInventory(TileEntityMachine tileEntityMachine,
-			NBTTagCompound nbt) {
+	private void readInventory(NBTTagCompound nbt) {
 		NBTTagList nbttaglist = nbt.getTagList("Items");
 		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
 			NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
@@ -207,7 +209,6 @@ public abstract class TileEntityMachine extends TileEntity implements
 
 		if (stack.stackSize > j) {
 			stack = stack.splitStack(j);
-
 			onInventoryChanged();
 			return stack;
 		}
@@ -310,5 +311,4 @@ public abstract class TileEntityMachine extends TileEntity implements
 	public int getScaledProgress(int i) {
 		return this.worker.getProgress() * i / 100;
 	}
-
 }

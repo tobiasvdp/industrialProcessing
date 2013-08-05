@@ -17,9 +17,5 @@ public class GuiContainerMagneticSeparator extends GuiContainerMachine {
 				inventoryPlayer, tileEntity), "Magnetic Ore Separator", "textures/gui/MagneticSeparator.png");
 		this.tileEntity = tileEntity;
 	}
-	@Override
-	public void extendedDraw(){
-
-	}
 
 }

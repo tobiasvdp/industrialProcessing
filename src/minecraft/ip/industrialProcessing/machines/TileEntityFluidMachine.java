@@ -1,44 +1,179 @@
 package ip.industrialProcessing.machines;
 
+import ip.industrialProcessing.recipes.IRecipeFluidWorkHandler;
 import ip.industrialProcessing.recipes.Recipe;
+import ip.industrialProcessing.recipes.RecipeFluidWorker;
+import ip.industrialProcessing.recipes.RecipeWorker;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.activity.InvalidActivityException;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidIdMapPacket;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
+import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 import net.minecraftforge.liquids.LiquidTank;
 
 public abstract class TileEntityFluidMachine extends TileEntityMachine
-		implements IFluidHandler {
+		implements IFluidHandler, IRecipeFluidWorkHandler {
 
 	private int[][] fluidTankSideslots = new int[6][0];
 	private ArrayList<MachineFluidTank> fluidTanks = new ArrayList<MachineFluidTank>();
+	private RecipeFluidWorker recipeFluidWorker;
 
-	protected void addTank(FluidTank stack, ForgeDirection side, boolean input,
-			boolean output) {
-		addTank(stack, new ForgeDirection[] { side }, input, output);
+	public TileEntityFluidMachine() {
+
 	}
 
-	protected void addTank(FluidTank tank, ForgeDirection[] sides,
-			boolean input, boolean output) {
-		if (tank == null)
-			throw new NullPointerException("Tank is required");
+	@Override
+	public void writeToNBT(net.minecraft.nbt.NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
+		writeTanks(nbt);
+	};
+
+	private void writeTanks(NBTTagCompound nbt) {
+		NBTTagList nbttaglist = new NBTTagList();
+		for (int i = 0; i < this.fluidTanks.size(); ++i) {
+			MachineFluidTank tank = this.fluidTanks.get(i);
+			if (tank != null) {
+				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+				nbttagcompound1.setByte("Slot", (byte) i);
+				FluidStack stack = tank.getFluid();
+				if (stack != null)
+					stack.writeToNBT(nbttagcompound1);
+				nbttaglist.appendTag(nbttagcompound1);
+			}
+		}
+		nbt.setTag("Tanks", nbttaglist);
+	}
+
+	@Override
+	public void readFromNBT(net.minecraft.nbt.NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
+		readTanks(nbt);
+	};
+
+	private void readTanks(NBTTagCompound nbt) {
+		NBTTagList nbttaglist = nbt.getTagList("Tanks");
+		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
+			NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
+					.tagAt(i);
+			byte b0 = nbttagcompound1.getByte("Slot");
+
+			if (b0 >= 0 && b0 < this.fluidTanks.size()) {
+				MachineFluidTank machineStack = this.fluidTanks.get(b0);
+				FluidStack stack = FluidStack
+						.loadFluidStackFromNBT(nbttagcompound1);
+				machineStack.setFluid(stack);
+			}
+		}
+	}
+
+	protected void getBucketFromTank(int inputSlot, int outputSlot, int tankSlot) {
+		ItemStack bucketOutputStack = getStackInSlot(outputSlot);
+		if (bucketOutputStack == null) {
+			ItemStack inputStack = getStackInSlot(inputSlot);
+			if (inputStack != null) {
+				FluidTank tank = getTankInSlot(tankSlot);
+				if (tank != null) {
+					ItemStack singleItem = inputStack.copy();
+					singleItem.stackSize = 1;
+
+					FluidStack fluid = tank.getFluid();
+					ItemStack filled = FluidContainerRegistry
+							.fillFluidContainer(fluid, singleItem);
+
+					if(filled != null)
+					{
+						FluidStack removeFluid = FluidContainerRegistry.getFluidForFilledItem(filled);
+						tank.drain(removeFluid.amount, true);
+						this.decrStackSize(inputSlot, 1);
+						setInventorySlotContents(outputSlot, filled);
+					}
+				}
+			}
+		}
+	}
+
+	protected void addBucketToTank(int inputSlot, int outputSlot, int tankSlot) {
+
+		ItemStack bucketOutputStack = getStackInSlot(outputSlot);
+		if (bucketOutputStack == null) // output available
+		{
+			ItemStack inputStack = getStackInSlot(inputSlot);
+			FluidStack fluid = FluidContainerRegistry
+					.getFluidForFilledItem(inputStack);
+			if (fluid != null) {
+				if (isTankValidForLiquid(tankSlot, fluid.fluidID)) {
+
+					ItemStack emptyContainer = getEmptyContainerFromContainer(inputStack);
+					if (emptyContainer != null) {
+						if (this.tankHasRoomFor(tankSlot, fluid)) {
+							emptyContainer.stackSize = 1;
+							this.decrStackSize(inputSlot, 1);
+							getTankInSlot(tankSlot).fill(fluid, true);
+							this.setInventorySlotContents(outputSlot,
+									emptyContainer);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private ItemStack getEmptyContainerFromContainer(ItemStack stack) {
+		FluidContainerData[] data = FluidContainerRegistry
+				.getRegisteredFluidContainerData();
+		for (int i = 0; i < data.length; i++) {
+			FluidContainerData containerData = data[i];
+			if (containerData.filledContainer.isItemEqual(stack))
+				return containerData.emptyContainer.copy();
+		}
+		return null;
+	}
+
+	protected boolean isLiquidContainerValidForTank(int tankslot,
+			ItemStack inputStack) {
+		FluidStack fluid = FluidContainerRegistry
+				.getFluidForFilledItem(inputStack);
+		if (fluid == null)
+			return false;
+		return isTankValidForLiquid(tankslot, fluid.fluidID);
+	}
+
+	@Override
+	protected void setupDefaultRecipeWorker() {
+		this.recipeFluidWorker = new RecipeFluidWorker(this);
+		setWorker(this.recipeFluidWorker);
+	}
+
+	protected void addTank(int capacity, ForgeDirection side, boolean input,
+			boolean output) {
+		addTank(capacity, new ForgeDirection[] { side }, input, output);
+	}
+
+	protected void addTank(int capacity, ForgeDirection[] sides, boolean input,
+			boolean output) {
 		int index = fluidTanks.size();
 
 		int[] sideIndices = new int[sides.length];
 		for (int i = 0; i < sideIndices.length; i++)
 			sideIndices[i] = sides[i].ordinal();
 
-		fluidTanks.add(new MachineFluidTank(tank, sideIndices, input, output));
+		fluidTanks.add(new MachineFluidTank(this, capacity, sideIndices, input,
+				output));
 
 		for (int i = 0; i < sideIndices.length; i++) {
 			int sideIndex = sideIndices[i];
@@ -58,12 +193,19 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 
 	protected abstract boolean isTankValidForLiquid(int index, int fluidId);
 
-	protected MachineFluidTank getFluidTankForSlot(int slot)
-	{
-		if(slot < 0 || slot > fluidTanks.size()) return null;
+	public FluidTankInfo getFluidTankInfoForSlot(int slot) {
+		MachineFluidTank tank = getFluidTankForSlot(slot);
+		if (tank == null)
+			return null;
+		return tank.getInfo();
+	}
+
+	protected MachineFluidTank getFluidTankForSlot(int slot) {
+		if (slot < 0 || slot > fluidTanks.size())
+			return null;
 		return this.fluidTanks.get(slot);
 	}
-	
+
 	private FluidTank getInputTankForFluid(ForgeDirection from, Fluid resource) {
 		if (resource == null)
 			return null;
@@ -71,15 +213,12 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 		for (int i = 0; i < sideSlots.length; i++) {
 			int slotIndex = sideSlots[i];
 			if (isTankValidForLiquid(slotIndex, resource.getID())) {
-				MachineFluidTank machineTank = this.getTankInSlot(slotIndex);
-				if (machineTank.input) {
-					FluidTank tank = machineTank.tank;
-					if (tank.getFluidAmount() > tank.getCapacity()) {
-						FluidStack tankFluid = tank.getFluid();
-						if (tankFluid == null
-								|| tankFluid.fluidID == resource.getID()) {
-							return tank;
-						}
+				MachineFluidTank tank = this.getTankInSlot(slotIndex);
+				if (tank.input && tank.getFluidAmount() > tank.getCapacity()) {
+					FluidStack tankFluid = tank.getFluid();
+					if (tankFluid == null
+							|| tankFluid.fluidID == resource.getID()) {
+						return tank;
 					}
 				}
 			}
@@ -95,15 +234,11 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 		for (int i = 0; i < sideSlots.length; i++) {
 			int slotIndex = sideSlots[i];
 			if (isTankValidForLiquid(slotIndex, resource.fluidID)) {
-				MachineFluidTank machineTank = this.getTankInSlot(slotIndex);
-				if (machineTank.input) {
-					FluidTank tank = machineTank.tank;
-					if (tank.getFluidAmount() > tank.getCapacity()) {
-						FluidStack tankFluid = tank.getFluid();
-						if (tankFluid == null
-								|| tankFluid.isFluidEqual(resource)) {
-							return tank;
-						}
+				MachineFluidTank tank = this.getTankInSlot(slotIndex);
+				if (tank.input && tank.getFluidAmount() > tank.getCapacity()) {
+					FluidStack tankFluid = tank.getFluid();
+					if (tankFluid == null || tankFluid.isFluidEqual(resource)) {
+						return tank;
 					}
 				}
 			}
@@ -111,22 +246,19 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 		}
 		return null;
 	}
-	private FluidTank getOutputTankForFluid(ForgeDirection from,
-			Fluid resource) {
+
+	private FluidTank getOutputTankForFluid(ForgeDirection from, Fluid resource) {
 		if (resource == null)
 			return null;
 		int[] sideSlots = fluidTankSideslots[from.ordinal()];
 		for (int i = 0; i < sideSlots.length; i++) {
 			int slotIndex = sideSlots[i];
 			if (isTankValidForLiquid(slotIndex, resource.getID())) {
-				MachineFluidTank machineTank = this.getTankInSlot(slotIndex);
-				if (machineTank.output) {
-					FluidTank tank = machineTank.tank;
-					if (tank.getFluidAmount() > 0) {
-						FluidStack tankFluid = tank.getFluid();
-						if (tankFluid.fluidID == resource.getID()) {
-							return tank;
-						}
+				MachineFluidTank tank = this.getTankInSlot(slotIndex);
+				if (tank.output && tank.getFluidAmount() > 0) {
+					FluidStack tankFluid = tank.getFluid();
+					if (tankFluid.fluidID == resource.getID()) {
+						return tank;
 					}
 				}
 			}
@@ -143,18 +275,14 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 		for (int i = 0; i < sideSlots.length; i++) {
 			int slotIndex = sideSlots[i];
 			if (isTankValidForLiquid(slotIndex, resource.fluidID)) {
-				MachineFluidTank machineTank = this.getTankInSlot(slotIndex);
-				if (machineTank.output) {
-					FluidTank tank = machineTank.tank;
-					if (tank.getFluidAmount() > 0) {
-						FluidStack tankFluid = tank.getFluid();
-						if (tankFluid.isFluidEqual(resource)) {
-							return tank;
-						}
+				MachineFluidTank tank = this.getTankInSlot(slotIndex);
+				if (tank.output && tank.getFluidAmount() > 0) {
+					FluidStack tankFluid = tank.getFluid();
+					if (tankFluid.isFluidEqual(resource)) {
+						return tank;
 					}
 				}
 			}
-
 		}
 		return null;
 	}
@@ -163,14 +291,10 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 		int[] sideSlots = fluidTankSideslots[from.ordinal()];
 		for (int i = 0; i < sideSlots.length; i++) {
 			int slotIndex = sideSlots[i];
-			MachineFluidTank machineTank = this.getTankInSlot(slotIndex);
-			if (machineTank.output) {
-				FluidTank tank = machineTank.tank;
-				if (tank.getFluidAmount() > 0) {
-					return tank;
-				}
+			MachineFluidTank tank = this.getTankInSlot(slotIndex);
+			if (tank.output && tank.getFluidAmount() > 0) {
+				return tank;
 			}
-
 		}
 		return null;
 	}
@@ -218,12 +342,79 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 	@Override
 	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
 		int[] sides = this.fluidTankSideslots[from.ordinal()];
-		
+
 		FluidTankInfo[] tanks = new FluidTankInfo[sides.length];
-		for(int i = 0; i < sides.length; i++)
-		{
-			tanks[i] = getTankInSlot(sides[i]).tank.getInfo();
+		for (int i = 0; i < sides.length; i++) {
+			tanks[i] = getTankInSlot(sides[i]).getInfo();
 		}
 		return tanks;
+	}
+
+	@Override
+	public boolean tankContains(int slot, int itemId, int amount) {
+		MachineFluidTank tank = getTankInSlot(slot);
+		if (tank == null)
+			return false;
+		FluidStack stack = tank.getFluid();
+		if (stack == null)
+			return false;
+		return stack.fluidID == itemId && stack.amount >= amount;
+	}
+
+	@Override
+	public boolean tankHasRoomFor(int slot, FluidStack addStack) {
+		MachineFluidTank tank = getTankInSlot(slot);
+		if (tank == null)
+			return false;
+		FluidStack stack = tank.getFluid();
+		if (stack == null)
+			return true;
+		return stack.isFluidEqual(addStack)
+				&& stack.amount + addStack.amount < tank.getCapacity();
+	}
+
+	@Override
+	public boolean tankHasRoomFor(int slot, int itemId, int amount) {
+		MachineFluidTank tank = getTankInSlot(slot);
+		if (tank == null)
+			return false;
+		FluidStack stack = tank.getFluid();
+		if (stack == null)
+			return true;
+		return stack.fluidID == itemId
+				&& stack.amount + amount < tank.getCapacity();
+	}
+
+	@Override
+	public boolean addToTank(int index, int itemId, int amount) {
+		MachineFluidTank tank = getTankInSlot(index);
+		if (tank == null)
+			return false;
+		FluidStack stack = tank.getFluid();
+		FluidStack newStack = new FluidStack(itemId, amount);
+		if (stack == null) {
+			tank.setFluid(newStack);
+			return true;
+		} else if (stack.fluidID == itemId
+				&& stack.amount + amount < tank.getCapacity()) {
+			tank.fill(newStack, true);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean removeFromTank(int index, int itemId, int amount) {
+		MachineFluidTank tank = getTankInSlot(index);
+		if (tank == null)
+			return false;
+		FluidStack stack = tank.getFluid();
+		if (stack == null)
+			return false;
+		if (stack.fluidID == itemId && stack.amount >= amount) {
+			tank.drain(amount, true);
+			return true;
+		}
+		return false;
 	}
 }
