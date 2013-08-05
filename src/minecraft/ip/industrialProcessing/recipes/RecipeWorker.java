@@ -31,10 +31,9 @@ public class RecipeWorker extends Worker {
 
 	@Override
 	protected void onEndWork(boolean remote) {
-		if (!remote) { // remote = client, !remote = server
-			removeInput(recipe);
-			produceOutput(recipe);
-		}
+		// remote = client, !remote = server
+		removeInput(recipe);
+		produceOutput(recipe);
 		super.onEndWork(remote);
 		this.recipe = null;
 	}
