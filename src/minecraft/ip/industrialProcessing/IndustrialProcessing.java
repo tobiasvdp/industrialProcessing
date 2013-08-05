@@ -1,5 +1,6 @@
 package ip.industrialProcessing;
 
+import ip.industrialProcessing.items.ItemIronLargeChunks;
 import ip.industrialProcessing.machines.crusher.BlockCrusher;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import ip.industrialProcessing.machines.filter.BlockFilter;
@@ -44,6 +45,10 @@ public class IndustrialProcessing {
         
         public static CreativeTabs tabMachines = new TabMachines(CreativeTabs.getNextID(),"industrialprocessing");
         
+        //create items
+        private final static ItemIronLargeChunks itemIronLargeChunks = new ItemIronLargeChunks();
+        
+        //create blocks
         public final static BlockCrusher blockCrusher = new BlockCrusher();
         public final static BlockFilter blockFilter = new BlockFilter();
         public final static BlockMagneticSeparator blockMageneticSeparator = new BlockMagneticSeparator();
@@ -78,6 +83,10 @@ public class IndustrialProcessing {
                 ModLoader.registerTileEntity(TileEntityMagneticSeparator.class, "MagneticOreSeparator");
 
                 NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
+                
+                //give items a name
+                LanguageRegistry.addName(itemIronLargeChunks, "Large Iron Chunks");
+                
                 proxy.registerRenderers();
         }
         @EventHandler
