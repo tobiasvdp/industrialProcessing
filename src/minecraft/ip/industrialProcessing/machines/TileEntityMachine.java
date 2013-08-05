@@ -152,16 +152,7 @@ public abstract class TileEntityMachine extends TileEntity implements
 	protected void addStack(ItemStack stack, ForgeDirection side,
 			boolean input, boolean output) {
 		int index = itemStacks.size();
-
-		itemStacks.add(new MachineItemStack(stack,
-				new int[] { side.ordinal() }, input, output));
-
-		int sideIndex = side.ordinal();
-		int[] slots = itemStackSideSlots[sideIndex];
-		int[] newSlots = new int[slots.length + 1];
-		System.arraycopy(slots, 0, newSlots, 0, slots.length);
-		newSlots[slots.length] = index;
-		itemStackSideSlots[sideIndex] = newSlots;
+		addStack(stack, new ForgeDirection[] { side }, input, output);
 	}
 
 	protected void addStack(ItemStack stack, ForgeDirection[] sides,

@@ -6,6 +6,8 @@ import ip.industrialProcessing.machines.filter.BlockFilter;
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
 import ip.industrialProcessing.machines.magneticSeparator.BlockMagneticSeparator;
 import ip.industrialProcessing.machines.magneticSeparator.TileEntityMagneticSeparator;
+import ip.industrialProcessing.machines.mixer.BlockMixer;
+import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -47,6 +49,7 @@ public class IndustrialProcessing {
         public final static BlockCrusher blockCrusher = new BlockCrusher();
         public final static BlockFilter blockFilter = new BlockFilter();
         public final static BlockMagneticSeparator blockMageneticSeparator = new BlockMagneticSeparator();
+        public final static BlockMixer blockMixer = new BlockMixer();
 	        
         // Says where the client and server 'proxy' code is loaded.
         @SidedProxy(clientSide="ip.industrialProcessing.client.ClientProxy", serverSide="ip.industrialProcessing.CommonProxy")
@@ -76,6 +79,11 @@ public class IndustrialProcessing {
                 MinecraftForge.setBlockHarvestLevel(blockMageneticSeparator, "pickaxe", 1);
                 LanguageRegistry.addName(blockMageneticSeparator, "Magnetic Ore Separator");                
                 ModLoader.registerTileEntity(TileEntityMagneticSeparator.class, "MagneticOreSeparator");
+
+                GameRegistry.registerBlock(blockMixer, "BlockMixer");
+                MinecraftForge.setBlockHarvestLevel(blockMixer, "pickaxe", 1);
+                LanguageRegistry.addName(blockMixer, "Ore Mixer");                
+                ModLoader.registerTileEntity(TileEntityMixer.class, "OreMixer");
                 
                 
                 proxy.registerRenderers();

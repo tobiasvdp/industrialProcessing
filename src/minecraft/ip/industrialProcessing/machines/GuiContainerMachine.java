@@ -22,9 +22,9 @@ protected int progressBarY = 34;
 protected int progressBarWidth = 22;
 protected int progressBarHeight = 16;
 	
-	public GuiContainerMachine (InventoryPlayer inventoryPlayer,TileEntity tileEntity, ContainerMachine container,String name,String textureLocation) {
+	public GuiContainerMachine (InventoryPlayer inventoryPlayer,TileEntityMachine tileEntity, ContainerMachine container,String name,String textureLocation) {
 		super(container);
-		this.tileEntity = (TileEntityMachine) tileEntity;
+		this.tileEntity = tileEntity;
 		this.name = name;
 		this.textureLocation = textureLocation;
 		
