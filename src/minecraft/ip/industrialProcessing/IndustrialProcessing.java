@@ -1,5 +1,6 @@
 package ip.industrialProcessing;
 
+import ip.industrialProcessing.config.ConfigBlocks;
 import ip.industrialProcessing.items.*;
 import ip.industrialProcessing.machines.crusher.BlockCrusher;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
@@ -10,12 +11,15 @@ import ip.industrialProcessing.machines.magneticSeparator.TileEntityMagneticSepa
 import ip.industrialProcessing.machines.mixer.BlockMixer;
 import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockOre;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.src.ModLoader;
+import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -45,7 +49,11 @@ public class IndustrialProcessing {
         @Instance("IndustrialProcessing")
         public static IndustrialProcessing instance;
         
+        //create creative tab
         public static CreativeTabs tabMachines = new TabMachines(CreativeTabs.getNextID(),"industrialprocessing");
+        
+        //create worldgen
+        public static WorldGeneration worldGen = new WorldGeneration();
         
         //create items
         private final static ItemIronLargeChunks itemIronLargeChunks = new ItemIronLargeChunks();
@@ -58,7 +66,11 @@ public class IndustrialProcessing {
         private final static ItemCopperCrushedChunks itemCopperCrushedChunks = new ItemCopperCrushedChunks();
         private final static ItemTinCrushedChunks itemTinCrushedChunks = new ItemTinCrushedChunks();
         
-        //create blocks
+        //create ores
+        public static final Block blockCopperOre = (new BlockOre(ConfigBlocks.BlockCopperOreID())).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("blockCopperOre").func_111022_d(TEXTURE_NAME_PREFIX+"blockCopperOre").setCreativeTab(IndustrialProcessing.tabMachines);;
+        public static final Block blockTinOre = (new BlockOre(ConfigBlocks.BlockTinOreID())).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("blockTinOre").func_111022_d(TEXTURE_NAME_PREFIX+"blockTinOre").setCreativeTab(IndustrialProcessing.tabMachines);;
+        
+        //create Machines
         public final static BlockCrusher blockCrusher = new BlockCrusher();
         public final static BlockFilter blockFilter = new BlockFilter();
         public final static BlockMagneticSeparator blockMageneticSeparator = new BlockMagneticSeparator();
@@ -75,6 +87,8 @@ public class IndustrialProcessing {
         
         @EventHandler
         public void load(FMLInitializationEvent event) {
+        		GameRegistry.registerWorldGenerator(worldGen);   
+        	
         		LanguageRegistry.instance().addStringLocalization("itemGroup.tabMachines", "en_US", "Industrial Processing");
         	
                 GameRegistry.registerBlock(blockCrusher, "BlockOreCrusher");
@@ -100,6 +114,20 @@ public class IndustrialProcessing {
                 
                 
                 NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
+                
+                //register blocks
+                GameRegistry.registerBlock(blockCopperOre, "blockCopperOre");
+                MinecraftForge.setBlockHarvestLevel(blockCopperOre, "pickaxe", 1);
+                GameRegistry.registerBlock(blockTinOre, "blockTinOre");
+                MinecraftForge.setBlockHarvestLevel(blockTinOre, "pickaxe", 1);
+                
+                //give blocks a name
+                LanguageRegistry.addName(blockCopperOre, "Copper");
+                LanguageRegistry.addName(blockTinOre, "Tin");
+                
+                //register ore to oredirectory
+                OreDictionary.registerOre("oreCopper", new ItemStack(blockCopperOre));
+                OreDictionary.registerOre("oreTin", new ItemStack(blockTinOre));
                 
                 //give items a name
                 LanguageRegistry.addName(itemIronLargeChunks, "Large Iron Chunks");
