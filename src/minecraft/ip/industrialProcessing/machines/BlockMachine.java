@@ -23,6 +23,7 @@ public abstract class BlockMachine extends BlockContainer {
 		setCreativeTab(tab);
 		
 		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX+ "inputTop");
+		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX+"frame_full");
 	}
 	
 	@Override

@@ -1,14 +1,17 @@
 package ip.industrialProcessing.machines.multiblock;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.gen.structure.StructureVillagePieceWeight;
 
-public class TileEntityMultiMachineFrame extends TileEntity implements
+public abstract class TileEntityMultiMachineFrame extends TileEntity implements
 		IMultiblockTileEntityFrame {
 
 	private int coreX;
 	private int coreY;
 	private int coreZ;
 	private boolean hasCore;
+	private MachineFrameState state;
 
 	@Override
 	public int getCoreX() {
@@ -62,6 +65,7 @@ public class TileEntityMultiMachineFrame extends TileEntity implements
 	@Override
 	public void removeCore() {
 		this.hasCore = false;
+		setBlockDisconnected();
 	}
 
 	@Override
@@ -85,6 +89,27 @@ public class TileEntityMultiMachineFrame extends TileEntity implements
 				+ ", " + this.zCoord + " for frame @ " + core.getCoreX() + ", "
 				+ core.getCoreY() + ", " + core.getCoreZ());
 		this.setCore(core.getCoreX(), core.getCoreY(), core.getCoreZ());
+		
+		setBlockConnected(core.isStructureComplete());
 	}
+
+	private void setBlockConnected(boolean structureComplete) {
+		 this.state =  structureComplete ?  MachineFrameState.COMPLETED : MachineFrameState.CONNECTED;
+		updateState(state);
+	}
+	
+	@Override
+	public void setState(MachineFrameState state) {
+		this.state = state;
+		updateState(state);
+	}
+	
+	private void setBlockDisconnected()
+	{
+		this.state = MachineFrameState.DISCONNECTED;
+		updateState(state);
+	}
+
+	protected abstract void updateState(MachineFrameState state);
 
 }

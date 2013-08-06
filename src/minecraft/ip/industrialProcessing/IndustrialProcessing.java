@@ -10,10 +10,12 @@ import ip.industrialProcessing.machines.magneticSeparator.BlockMagneticSeparator
 import ip.industrialProcessing.machines.magneticSeparator.TileEntityMagneticSeparator;
 import ip.industrialProcessing.machines.mixer.BlockMixer;
 import ip.industrialProcessing.machines.mixer.TileEntityMixer;
+import ip.industrialProcessing.machines.multiblock.MachineFrameState;
 import ip.industrialProcessing.machines.multiblock.TileEntityMultiMachineFrame;
 import ip.industrialProcessing.machines.multiblock.crusher.BlockLargeCrusher;
 import ip.industrialProcessing.machines.multiblock.crusher.TileEntityLargeCrusher;
 import ip.industrialProcessing.machines.multiblock.machineFrame.BlockMachineFrame;
+import ip.industrialProcessing.machines.multiblock.machineFrame.TileEntityMachineFrame;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockOre;
 import net.minecraft.creativetab.CreativeTabs;
@@ -82,7 +84,9 @@ public class IndustrialProcessing {
 	        
         // create Multiblock Machines
 
-        public final static BlockMachineFrame blockMachineFrame = new BlockMachineFrame();
+        public final static BlockMachineFrame blockMachineFrame = new BlockMachineFrame(MachineFrameState.DISCONNECTED);
+        public final static BlockMachineFrame blockMachineFrameConnected = new BlockMachineFrame(MachineFrameState.CONNECTED);
+        public final static BlockMachineFrame blockMachineFrameCompleted = new BlockMachineFrame(MachineFrameState.COMPLETED);
         public final static BlockLargeCrusher blockLargeCrusher = new BlockLargeCrusher();
         
         // Says where the client and server 'proxy' code is loaded.
@@ -105,7 +109,7 @@ public class IndustrialProcessing {
         		registerMachine(blockMageneticSeparator, "IP.Machine.Separator", "Magnetic Separator", TileEntityMagneticSeparator.class);
         		registerMachine(blockMixer, "IP.Machine.Mixer", "Mixer", TileEntityMixer.class);
  
-        		registerMachine(blockMachineFrame, "IP.Machine.Multi.Frame", "Machine Frame", TileEntityMultiMachineFrame.class);
+        		registerMachine(blockMachineFrame, "IP.Machine.Multi.Frame", "Machine Frame", TileEntityMachineFrame.class);
         		registerMachine(blockLargeCrusher, "IP.Machine.Multi.Crusher", "Large Crusher", TileEntityLargeCrusher.class);
         		
         		registerOre(blockCopperOre, "IP.World.CopperOre", "Copper Ore", "copper");

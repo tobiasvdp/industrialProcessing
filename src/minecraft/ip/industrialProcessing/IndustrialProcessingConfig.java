@@ -12,6 +12,8 @@ public class IndustrialProcessingConfig {
 	private int magneticSeparatorBlockID = 502;
 	private int mixerBlockID = 503;
 	private int machineFrameBlockID = 600;
+	private int machineFrameConnectedBlockID = 601;
+	private int machineFrameCompletedBlockID = 602;
 	private int largeCrusherBlockID = 700;
 
 	public static IndustrialProcessingConfig getInstance() {
@@ -39,7 +41,15 @@ public class IndustrialProcessingConfig {
 	{
 		return getInstance().machineFrameBlockID;
 	}
-	
+
+	public static int getMachineFrameConnectedBlockID()
+	{
+		return getInstance().machineFrameConnectedBlockID;
+	}
+	public static int getMachineFrameCompletedBlockID()
+	{
+		return getInstance().machineFrameCompletedBlockID;
+	}
 	public static int getLargeCrusherBlockID() {
 		return getInstance().largeCrusherBlockID;
 	}

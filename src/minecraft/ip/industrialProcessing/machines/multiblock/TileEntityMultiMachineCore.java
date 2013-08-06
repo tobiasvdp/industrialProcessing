@@ -62,15 +62,31 @@ public class TileEntityMultiMachineCore extends TileEntity implements
 	protected void onStructureBroken() {
 		System.out.println("Multistructure broken around core @ " + xCoord
 				+ ", " + yCoord + ", " + zCoord);
+		setState(MachineFrameState.CONNECTED);
 	}
 
 	protected void onStructureCompleted() {
 		System.out.println("Multistructure completed around core @ " + xCoord
 				+ ", " + yCoord + ", " + zCoord);
+		setState(MachineFrameState.COMPLETED);
 	}
+	private void setState(MachineFrameState state) {
+
+		MultiBlockStructureBlockDescription[] descriptions = this.structure
+				.getDescriptions();
+		for (MultiBlockStructureBlockDescription description : descriptions) {
+			IMultiblockTileEntityFrame frame = MultiblockUtils.getFrameAt(this.worldObj, xCoord+description.getX(), yCoord+description.getY(), zCoord+description.getZ());
+			if(frame != null)
+			{
+				frame.setState(state);
+			}
+		}
+	}
+
 
 	@Override
 	public void breakEntireStructure() {
+		/*
 		MultiBlockStructureBlockDescription[] descriptions = this.structure
 				.getDescriptions();
 		for (MultiBlockStructureBlockDescription description : descriptions) {
@@ -78,6 +94,8 @@ public class TileEntityMultiMachineCore extends TileEntity implements
 		}
 		this.isStructureComplete = false;
 		onStructureBroken();
+		*/
+		setState(MachineFrameState.DISCONNECTED);
 	}
 
 	@Override

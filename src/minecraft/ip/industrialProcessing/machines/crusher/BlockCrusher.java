@@ -27,6 +27,7 @@ public class BlockCrusher extends BlockMachine {
 		super(IndustrialProcessingConfig.getCrusherBlockID(), Material.iron,
 				1F, Block.soundMetalFootstep, "Ore Crusher",
 				IndustrialProcessing.tabMachines);
+		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX+"crusher_top");
 	}
 
 	@Override

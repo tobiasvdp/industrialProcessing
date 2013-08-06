@@ -46,8 +46,11 @@ public class MultiblockUtils {
 								if (frame.hasCore()) {
 									IMultiblockTileEntityCore core = getCoreFromFrame(
 											world, frame);
-									if (isFrameForCore(sourceFrame, core, world))
-										return core; // this is the core we're looking for
+									if (core != null
+											&& isFrameForCore(sourceFrame,
+													core, world))
+										return core; // this is the core we're
+														// looking for
 								} else {
 									IMultiblockTileEntityCore core = findCorePositionFromNeighborsRecursive(
 											world, ix, iy, iz, sourceFrame,
@@ -62,7 +65,7 @@ public class MultiblockUtils {
 			}
 		}
 
-		return null; 
+		return null;
 	}
 
 	private static boolean isFrameForCore(
@@ -187,9 +190,7 @@ public class MultiblockUtils {
 		System.out.println("Core @ " + x + ", " + y + ", " + z + " was broken");
 		IMultiblockTileEntityCore core = getCoreAt(world, x, y, z);
 		if (core != null) {
-			if (core.isStructureComplete()) {
-				core.breakEntireStructure();
-			}
+			core.breakEntireStructure();
 		}
 	}
 

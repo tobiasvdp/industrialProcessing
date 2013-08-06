@@ -1,5 +1,7 @@
 package ip.industrialProcessing.machines.multiblock;
 
+import java.util.Arrays;
+
 import net.minecraft.world.World;
 
 public class MultiBlockStructureBlockDescription {
@@ -7,17 +9,28 @@ public class MultiBlockStructureBlockDescription {
 	private int x;
 	private int y;
 	private int z;
-	private int blockID;
+	private int[] blockIDs;
 
-	public MultiBlockStructureBlockDescription(int x, int y, int z, int blockID) {
+	public MultiBlockStructureBlockDescription(int x, int y, int z, int... blockIDs) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
-		this.blockID = blockID;
+		this.blockIDs = blockIDs;
 	}
 
+	public int getX() {
+		return x;
+	}	
+	public int getY() {
+		return y;
+	}
+	public int getZ() {
+		return z;
+	}
+	
 	public boolean isPresent(World worldObj, int xCoord, int yCoord, int zCoord) {
-		return worldObj.getBlockId(xCoord + x, yCoord + y, zCoord + z) == this.blockID;
+		int block = worldObj.getBlockId(xCoord + x, yCoord + y, zCoord + z);
+		return containsBlock(block);
 	}
 
 	public boolean breakBlock(World worldObj, int xCoord, int yCoord, int zCoord) {
@@ -30,7 +43,15 @@ public class MultiBlockStructureBlockDescription {
 	public boolean isPart(int x2, int y2, int z2, int xCoord, int yCoord,
 			int zCoord, int blockId2) {
 		return x2 == x + xCoord && y2 == y + yCoord && z2 == z + zCoord
-				&& blockId2 == blockID;
+				&& containsBlock(blockId2);
 	}
 
+	private boolean containsBlock(int block)
+	{
+		for(int i = 0; i < this.blockIDs.length; i++)
+		{
+			if(this.blockIDs[i] == block) return true;
+		}
+		return false;
+	}
 }

@@ -15,4 +15,5 @@ public interface IMultiblockTileEntityFrame {
 	//void setCore(int x, int y, int z);
 	void removeCore();
 	void setCore(IMultiblockTileEntityCore core);
+	void setState(MachineFrameState state);
 }

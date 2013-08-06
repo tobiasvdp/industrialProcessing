@@ -19,8 +19,9 @@ public abstract class BlockMultiMachineCore extends BlockContainer {
 		setStepSound(stepSound);
 		setUnlocalizedName(name);
 		setCreativeTab(tab);
+		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX+"frame_full");
 	}
-
+	
 	@Override
 	public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
 		InventoryUtils.DropInventoryContents(world, x, y, z);
@@ -39,5 +40,10 @@ public abstract class BlockMultiMachineCore extends BlockContainer {
 		super.onNeighborBlockChange(world, x, y, z, par5);
 
 	}
-
+ 
+	
+	@Override
+	public boolean isOpaqueCube() {
+		return false;
+	}
 }
