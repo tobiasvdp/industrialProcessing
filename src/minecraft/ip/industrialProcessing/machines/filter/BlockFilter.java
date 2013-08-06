@@ -93,8 +93,14 @@ public class BlockFilter extends BlockMachine {
 		if (tileEntity == null || player.isSneaking()) {
 			return false;
 		}
-		player.addStat(IndustrialProcessing.achPlacedFilter, 1);
 		player.openGui(IndustrialProcessing.instance, 0, world, x, y, z);
 		return true;
+	}
+	@Override
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack itemStack){
+		int dir = MathHelper.floor_double((double)((entityLivingBase.rotationYaw * 4F) / 360F) + 0.5D) & 3;
+        world.setBlockMetadataWithNotify(x, y, z, dir, 0);
+        EntityPlayer player = (EntityPlayer) entityLivingBase;
+        player.addStat(IndustrialProcessing.achPlacedFilter, 1);
 	}
 }
