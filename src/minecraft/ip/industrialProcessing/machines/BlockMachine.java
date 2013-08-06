@@ -54,5 +54,17 @@ public abstract class BlockMachine extends BlockContainer {
 		int dir = MathHelper.floor_double((double)((entityLivingBase.rotationYaw * 4F) / 360F) + 0.5D) & 3;
         world.setBlockMetadataWithNotify(x, y, z, dir, 0);
 	}
+	@Override
+    public boolean canPlaceBlockAt(World par1World, int x, int y, int z)
+    {
+        boolean canPlace = true;
+        int l = par1World.getBlockId(x, y, z);
+        Block block = Block.blocksList[l];
+        if (block != null){
+	        if (!block.isBlockReplaceable(par1World, x, y, z))
+	        canPlace = false;
+        }
+        return canPlace;
+    }
 
 }

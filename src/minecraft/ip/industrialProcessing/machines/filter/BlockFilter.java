@@ -2,6 +2,8 @@ package ip.industrialProcessing.machines.filter;
 
 import java.util.List;
 
+import javax.jws.Oneway;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ip.industrialProcessing.IndustrialProcessing;
@@ -80,26 +82,19 @@ public class BlockFilter extends BlockMachine {
 	   return false;
 	}
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack itemStack){
-		int dir = MathHelper.floor_double((double)((entityLivingBase.rotationYaw * 4F) / 360F) + 0.5D) & 3;
-        world.setBlockMetadataWithNotify(x, y, z, dir, 0);
-	}
-
-	@Override
     public boolean renderAsNormalBlock(){                
 		return false;        
 	}
-	
 	@Override
-    public boolean canPlaceBlockAt(World par1World, int x, int y, int z)
-    {
-        boolean canPlace = true;
-        int l = par1World.getBlockId(x, y, z);
-        Block block = Block.blocksList[l];
-        if (block != null){
-	        if (!block.isBlockReplaceable(par1World, x, y, z))
-	        canPlace = false;
-        }
-        return canPlace;
-    }
+	public boolean onBlockActivated(World world, int x, int y, int z,
+			EntityPlayer player, int metadata, float what, float these,
+			float are) {
+		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+		if (tileEntity == null || player.isSneaking()) {
+			return false;
+		}
+		player.addStat(IndustrialProcessing.achPlacedFilter, 1);
+		player.openGui(IndustrialProcessing.instance, 0, world, x, y, z);
+		return true;
+	}
 }

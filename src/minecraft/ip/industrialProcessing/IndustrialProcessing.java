@@ -1,5 +1,6 @@
 package ip.industrialProcessing;
 
+import ip.industrialProcessing.config.ConfigAchievements;
 import ip.industrialProcessing.config.ConfigBlocks;
 import ip.industrialProcessing.items.*;
 import ip.industrialProcessing.machines.crusher.BlockCrusher;
@@ -22,7 +23,9 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.src.ModLoader;
+import net.minecraft.stats.Achievement;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
@@ -89,10 +92,17 @@ public class IndustrialProcessing {
         public final static BlockMachineFrame blockMachineFrameCompleted = new BlockMachineFrame(MachineFrameState.COMPLETED);
         public final static BlockLargeCrusher blockLargeCrusher = new BlockLargeCrusher();
         
+        //create achivements
+        public static AchievementPage achPage = new AchievementPage("Industrial Processing");
+        public static Achievement achPlacedFilter = new Achievement(ConfigAchievements.PlacedFilterID(), "placedFilter", 0, 0, blockFilter, null).registerAchievement();
+        public static Achievement achPlacedCrusher = new Achievement(ConfigAchievements.PlacedCrusherID(), "placedCrusher", 0, -1, blockCrusher, achPlacedFilter).registerAchievement();
+        
+        
+        
         // Says where the client and server 'proxy' code is loaded.
         @SidedProxy(clientSide="ip.industrialProcessing.client.ClientProxy", serverSide="ip.industrialProcessing.CommonProxy")
         public static CommonProxy proxy;
-        
+                
         @EventHandler
         public void preInit(FMLPreInitializationEvent event) {
                 // Stub Method
@@ -129,8 +139,20 @@ public class IndustrialProcessing {
                 LanguageRegistry.addName(itemCopperCrushedChunks, "Crushed Copper Chunks");
                 LanguageRegistry.addName(itemTinCrushedChunks, "Crushed Tin Chunks");
                 
+                //register achievements
+                achPage.getAchievements().add(achPlacedFilter);
+                achPage.getAchievements().add(achPlacedCrusher);
+                AchievementPage.registerAchievementPage(achPage);
+                
+                //give achievements a name
+                LanguageRegistry.instance().addStringLocalization("achievement." + "placedFilter", "en_US", "First filter");
+                LanguageRegistry.instance().addStringLocalization("achievement." + "placedFilter" + ".desc", "en_US", "Placing your first filter");
+                LanguageRegistry.instance().addStringLocalization("achievement." + "placedCrusher", "en_US", "First crusher");
+                LanguageRegistry.instance().addStringLocalization("achievement." + "placedCrusher" + ".desc", "en_US", "Placing your first crusher");
+                
                 proxy.registerRenderers();
         }
+        
         private void registerOre(Block block, String uniqueId,
 				String displayName, String oreDictionaryKey) {
             GameRegistry.registerBlock(block, uniqueId);
