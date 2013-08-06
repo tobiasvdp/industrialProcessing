@@ -122,8 +122,8 @@ public class IndustrialProcessing {
                 MinecraftForge.setBlockHarvestLevel(blockTinOre, "pickaxe", 1);
                 
                 //give blocks a name
-                LanguageRegistry.addName(blockCopperOre, "Copper");
-                LanguageRegistry.addName(blockTinOre, "Tin");
+                LanguageRegistry.addName(blockCopperOre, "Copper Ore");
+                LanguageRegistry.addName(blockTinOre, "Tin Ore");
                 
                 //register ore to oredirectory
                 OreDictionary.registerOre("oreCopper", new ItemStack(blockCopperOre));
