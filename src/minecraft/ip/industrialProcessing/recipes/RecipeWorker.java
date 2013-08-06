@@ -32,8 +32,10 @@ public class RecipeWorker extends Worker {
 	@Override
 	protected void onEndWork(boolean remote) {
 		// remote = client, !remote = server
-		removeInput(recipe);
-		produceOutput(recipe);
+		if (!remote) {
+			removeInput(recipe);
+			produceOutput(recipe);
+		}
 		super.onEndWork(remote);
 		this.recipe = null;
 	}
@@ -124,7 +126,7 @@ public class RecipeWorker extends Worker {
 			return;
 		System.out.println("Outputting recipe after working "
 				+ recipe.workRequired);
-		for (int i = 0; i < recipe.outputs.length; i++) { 
+		for (int i = 0; i < recipe.outputs.length; i++) {
 			RecipeOutputSlot slot = recipe.outputs[i];
 
 			double randomValue = random.nextGaussian();
