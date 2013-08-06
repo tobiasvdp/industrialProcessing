@@ -10,6 +10,10 @@ import ip.industrialProcessing.machines.magneticSeparator.BlockMagneticSeparator
 import ip.industrialProcessing.machines.magneticSeparator.TileEntityMagneticSeparator;
 import ip.industrialProcessing.machines.mixer.BlockMixer;
 import ip.industrialProcessing.machines.mixer.TileEntityMixer;
+import ip.industrialProcessing.machines.multiblock.TileEntityMultiMachineFrame;
+import ip.industrialProcessing.machines.multiblock.crusher.BlockLargeCrusher;
+import ip.industrialProcessing.machines.multiblock.crusher.TileEntityLargeCrusher;
+import ip.industrialProcessing.machines.multiblock.machineFrame.BlockMachineFrame;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockOre;
 import net.minecraft.creativetab.CreativeTabs;
@@ -76,6 +80,11 @@ public class IndustrialProcessing {
         public final static BlockMagneticSeparator blockMageneticSeparator = new BlockMagneticSeparator();
         public final static BlockMixer blockMixer = new BlockMixer();
 	        
+        // create Multiblock Machines
+
+        public final static BlockMachineFrame blockMachineFrame = new BlockMachineFrame();
+        public final static BlockLargeCrusher blockLargeCrusher = new BlockLargeCrusher();
+        
         // Says where the client and server 'proxy' code is loaded.
         @SidedProxy(clientSide="ip.industrialProcessing.client.ClientProxy", serverSide="ip.industrialProcessing.CommonProxy")
         public static CommonProxy proxy;
@@ -91,43 +100,19 @@ public class IndustrialProcessing {
         	
         		LanguageRegistry.instance().addStringLocalization("itemGroup.tabMachines", "en_US", "Industrial Processing");
         	
-                GameRegistry.registerBlock(blockCrusher, "BlockOreCrusher");
-                MinecraftForge.setBlockHarvestLevel(blockCrusher, "pickaxe", 1);
-                LanguageRegistry.addName(blockCrusher, "Ore Crusher");
-                ModLoader.registerTileEntity(TileEntityCrusher.class, "OreCrusher");
-                
-                GameRegistry.registerBlock(blockFilter, "BlockOreFilter");
-                MinecraftForge.setBlockHarvestLevel(blockFilter, "pickaxe", 1);
-                LanguageRegistry.addName(blockFilter, "Ore Filter");                
-                ModLoader.registerTileEntity(TileEntityFilter.class, "OreFilter");
-                
-
-                GameRegistry.registerBlock(blockMageneticSeparator, "BlockMagneticSeparator");
-                MinecraftForge.setBlockHarvestLevel(blockMageneticSeparator, "pickaxe", 1);
-                LanguageRegistry.addName(blockMageneticSeparator, "Magnetic Ore Separator");                
-                ModLoader.registerTileEntity(TileEntityMagneticSeparator.class, "MagneticOreSeparator");
-
-                GameRegistry.registerBlock(blockMixer, "BlockMixer");
-                MinecraftForge.setBlockHarvestLevel(blockMixer, "pickaxe", 1);
-                LanguageRegistry.addName(blockMixer, "Ore Mixer");                
-                ModLoader.registerTileEntity(TileEntityMixer.class, "OreMixer");
-                
+        		registerMachine(blockCrusher, "IP.Machine.Crusher", "Ore Crusher", TileEntityCrusher.class);        		 
+        		registerMachine(blockFilter, "IP.Machine.Filter", "Ore Filter", TileEntityFilter.class);
+        		registerMachine(blockMageneticSeparator, "IP.Machine.Separator", "Magnetic Separator", TileEntityMagneticSeparator.class);
+        		registerMachine(blockMixer, "IP.Machine.Mixer", "Mixer", TileEntityMixer.class);
+ 
+        		registerMachine(blockMachineFrame, "IP.Machine.Multi.Frame", "Machine Frame", TileEntityMultiMachineFrame.class);
+        		registerMachine(blockLargeCrusher, "IP.Machine.Multi.Crusher", "Large Crusher", TileEntityLargeCrusher.class);
+        		
+        		registerOre(blockCopperOre, "IP.World.CopperOre", "Copper Ore", "copper");
+        		registerOre(blockTinOre, "IP.World.TinOre", "Tin Ore", "copper");
                 
                 NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
-                
-                //register blocks
-                GameRegistry.registerBlock(blockCopperOre, "blockCopperOre");
-                MinecraftForge.setBlockHarvestLevel(blockCopperOre, "pickaxe", 1);
-                GameRegistry.registerBlock(blockTinOre, "blockTinOre");
-                MinecraftForge.setBlockHarvestLevel(blockTinOre, "pickaxe", 1);
-                
-                //give blocks a name
-                LanguageRegistry.addName(blockCopperOre, "Copper Ore");
-                LanguageRegistry.addName(blockTinOre, "Tin Ore");
-                
-                //register ore to oredirectory
-                OreDictionary.registerOre("oreCopper", new ItemStack(blockCopperOre));
-                OreDictionary.registerOre("oreTin", new ItemStack(blockTinOre));
+                 
                 
                 //give items a name
                 LanguageRegistry.addName(itemIronLargeChunks, "Large Iron Chunks");
@@ -142,7 +127,24 @@ public class IndustrialProcessing {
                 
                 proxy.registerRenderers();
         }
-        @EventHandler
+        private void registerOre(Block block, String uniqueId,
+				String displayName, String oreDictionaryKey) {
+            GameRegistry.registerBlock(block, uniqueId);
+            MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
+            LanguageRegistry.addName(block, displayName);
+			OreDictionary.registerOre(oreDictionaryKey, block);
+		}
+
+		private void registerMachine(Block block, String uniqueId,
+				String displayName, Class tileEntity) {
+
+            GameRegistry.registerBlock(block, uniqueId);
+            MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
+            LanguageRegistry.addName(block, displayName);
+            ModLoader.registerTileEntity(tileEntity, uniqueId);
+		}
+
+		@EventHandler
         public void postInit(FMLPostInitializationEvent event) {
                 // Stub Method
         }
