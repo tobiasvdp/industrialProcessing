@@ -68,7 +68,7 @@ public class MultiblockUtils {
 		return null;
 	}
 
-	private static boolean isFrameForCore(
+	public static boolean isFrameForCore(
 			IMultiblockTileEntityFrame sourceFrame,
 			IMultiblockTileEntityCore core, World world) {
 

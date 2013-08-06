@@ -15,8 +15,7 @@ public abstract class BlockMultiMachineFrame extends BlockContainer {
 
 	public BlockMultiMachineFrame(int blockId, CreativeTabs tab) {
 		super(blockId, Material.iron);
-		setCreativeTab(tab);
-		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX+"frame_empty");
+		setCreativeTab(tab); 
 	}
   
 	@Override

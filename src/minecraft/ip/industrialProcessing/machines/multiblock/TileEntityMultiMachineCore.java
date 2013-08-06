@@ -45,8 +45,19 @@ public class TileEntityMultiMachineCore extends TileEntity implements
 		MultiBlockStructureBlockDescription[] descriptions = this.structure
 				.getDescriptions();
 		for (MultiBlockStructureBlockDescription description : descriptions) {
-			if (!description.isPresent(this.worldObj, this.xCoord, this.yCoord,
+			if (description.isPresent(this.worldObj, this.xCoord, this.yCoord,
 					this.zCoord)) {
+				IMultiblockTileEntityFrame frame = MultiblockUtils.getFrameAt(this.worldObj, this.xCoord+description.getX(), this.yCoord+description.getY(), this.zCoord+description.getZ());
+				if(frame == null) {complete = false; break;}
+				else
+				{
+					if(!MultiblockUtils.isFrameForCore(frame, this, this.worldObj)) // this block is claimed by another core!
+					{
+						complete = false;
+						break;
+					}						
+				}
+			}else{
 				complete = false;
 				break;
 			}

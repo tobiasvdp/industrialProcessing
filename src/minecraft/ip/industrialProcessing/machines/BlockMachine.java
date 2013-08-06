@@ -22,30 +22,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 public abstract class BlockMachine extends BlockContainer {
-	private Icon texture;
 	public BlockMachine(int par1, Material par2Material, float hardness, StepSound stepSound, String name, CreativeTabs tab) {
 		super(par1, par2Material);
 		setHardness(hardness);
 		setStepSound(stepSound);
 		setUnlocalizedName(name);
 		setCreativeTab(tab); 
-		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX+ "inputTop");
-		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX+"frame_full"); 
-	}
-	
-	@Override
-	public Icon getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
-		return this.texture;		
-	};
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
-		texture = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX+ "inputTop");
-	}
-	@SideOnly(Side.CLIENT)
-	//@Override
-	public Icon getIcon(int side, int meta) {		
-			return this.texture;
+		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX+ "inputTop"); 
 	}
 
 	@Override

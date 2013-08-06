@@ -71,4 +71,8 @@ public class Worker {
 		this.workDone = nbt.getShort("IP.Worker.WorkDone");
 		this.totalWork = nbt.getShort("IP.Worker.TotalWork");
 	}
+
+	public boolean isWorking() { 
+		return this.workDone > 0 && this.workDone < this.totalWork;
+	}
 }
