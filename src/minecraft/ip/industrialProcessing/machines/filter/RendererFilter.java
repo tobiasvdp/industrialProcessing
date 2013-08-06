@@ -50,7 +50,7 @@ public class RendererFilter extends TileEntitySpecialRenderer {
 		        GL11.glPushMatrix();
 		         GL11.glTranslatef(0.5F, 1.5F, 0.5F);
 		         //This line actually rotates the renderer.
-		         GL11.glRotatef((-90F), 0F, 1F, 0F);
+		         GL11.glRotatef((dir*-90F), 0F, 1F, 0F);
 		         GL11.glRotatef((-180F), 0F, 0F, 1F);
 		         GL11.glScalef(1f, 1f, 1f);
 		         String textureLocation = "textures/render/ModelFilter.png";
@@ -58,7 +58,7 @@ public class RendererFilter extends TileEntitySpecialRenderer {
 		         func_110628_a(new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN,textureLocation));
 	         }else{   
 		         GL11.glPushMatrix();
-		         GL11.glTranslatef(0.5F, 3.5F, 0.5F);
+		         GL11.glTranslatef(0.3F, 3.7F, 0.5F);
 		         GL11.glRotatef((90F), 0F, 1F, 0F);
 		         GL11.glRotatef((-180F), 0F, 0F, 1F);
 		         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
