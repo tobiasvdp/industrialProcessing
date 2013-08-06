@@ -12,7 +12,7 @@ public interface IMultiblockTileEntityFrame {
 	
 	boolean hasCore();
 	
-	void setCore(int x, int y, int z);
+	//void setCore(int x, int y, int z);
 	void removeCore();
 	void setCore(IMultiblockTileEntityCore core);
 }

@@ -22,16 +22,14 @@ public class BlockMultiMachineFrame extends BlockContainer {
 	}
 
 	@Override
-	public void breakBlock(World world, int x, int y, int z,
-			int par5, int par6) {
-		super.breakBlock(world, x, y, z, par5, par6);		
+	public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
+		super.breakBlock(world, x, y, z, par5, par6);
 		MultiblockUtils.notifyFrameBreak(world, x, y, z);
 	}
 
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, int par5) {
-
-MultiblockUtils.frameNeighborUpdated(world, x, y, z);
+		MultiblockUtils.frameNeighborUpdated(world, x, y, z);
 	}
 
 	/*

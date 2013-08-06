@@ -29,9 +29,8 @@ public class TileEntityMultiMachineFrame extends TileEntity implements
 	public boolean hasCore() {
 		return this.hasCore;
 	}
-
-	@Override
-	public void setCore(int x, int y, int z) {
+ 
+	private void setCore(int x, int y, int z) {
 		this.coreX = x;
 		this.coreY = y;
 		this.coreZ = z;

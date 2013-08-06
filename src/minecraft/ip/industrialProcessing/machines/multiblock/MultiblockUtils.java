@@ -2,25 +2,28 @@ package ip.industrialProcessing.machines.multiblock;
 
 import java.util.HashSet;
 
+import org.lwjgl.Sys;
+
 import ip.industrialProcessing.utils.Position;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class MultiblockUtils {
 
-	public static IMultiblockTileEntityCore findCorePositionFromNeighbors(
-			World world, int x, int y, int z) {
-		HashSet<IMultiblockTileEntityFrame> processedFrames = new HashSet<IMultiblockTileEntityFrame>();
-
-		IMultiblockTileEntityFrame frame = getFrameAt(world, x, y, z);
-		processedFrames.add(frame);
-
-		return findCorePositionFromNeighborsRecursive(world, x, y, z,
-				processedFrames);
-	}
-
+	/*
+	 * public static IMultiblockTileEntityCore findCorePositionFromNeighbors(
+	 * World world, int x, int y, int z) { HashSet<IMultiblockTileEntityFrame>
+	 * processedFrames = new HashSet<IMultiblockTileEntityFrame>();
+	 * 
+	 * IMultiblockTileEntityFrame frame = getFrameAt(world, x, y, z);
+	 * processedFrames.add(frame);
+	 * 
+	 * return findCorePositionFromNeighborsRecursive(world, x, y, z, frame,
+	 * processedFrames); }
+	 */
 	private static IMultiblockTileEntityCore findCorePositionFromNeighborsRecursive(
 			World world, int x, int y, int z,
+			IMultiblockTileEntityFrame sourceFrame,
 			HashSet<IMultiblockTileEntityFrame> processedFrames) {
 
 		for (int ix = x - 1; ix <= x + 1; ix++) {
@@ -28,44 +31,59 @@ public class MultiblockUtils {
 				for (int iz = z - 1; iz <= z + 1; iz++) {
 					if (ix == x && iy == y && iz == z)
 						continue; // don't look at the frame in this spot;
-
-					TileEntity tileEntity = world
-							.getBlockTileEntity(ix, iy, iz);
-					if (tileEntity instanceof IMultiblockTileEntityCore) {
-						return (IMultiblockTileEntityCore) tileEntity;
-					} else if (tileEntity instanceof IMultiblockTileEntityFrame) {
-
-						IMultiblockTileEntityFrame frame = (IMultiblockTileEntityFrame) tileEntity;
-						if (frame != null && !processedFrames.contains(frame)) {
-							processedFrames.add(frame);
-							if (frame.hasCore()) {
-								return getCoreAt(world, frame.getCoreX(),
-										frame.getCoreY(), frame.getCoreZ());
-							} else {
-								return findCorePositionFromNeighborsRecursive(
-										world, x, y, z, processedFrames);
+					{
+						TileEntity tileEntity = world.getBlockTileEntity(ix,
+								iy, iz);
+						if (tileEntity instanceof IMultiblockTileEntityCore) {
+							IMultiblockTileEntityCore core = (IMultiblockTileEntityCore) tileEntity;
+							if (isFrameForCore(sourceFrame, core, world))
+								return core;
+							// else: this is not the core we're looking for!
+						} else if (tileEntity instanceof IMultiblockTileEntityFrame) {
+							IMultiblockTileEntityFrame frame = (IMultiblockTileEntityFrame) tileEntity;
+							if (!processedFrames.contains(frame)) {
+								processedFrames.add(frame);
+								if (frame.hasCore()) {
+									IMultiblockTileEntityCore core = getCoreFromFrame(
+											world, frame);
+									if (isFrameForCore(sourceFrame, core, world))
+										return core; // this is the core we're looking for
+								} else {
+									IMultiblockTileEntityCore core = findCorePositionFromNeighborsRecursive(
+											world, ix, iy, iz, sourceFrame,
+											processedFrames);
+									if (core != null)
+										return core;
+								}
 							}
 						}
 					}
 				}
 			}
 		}
-		return null;
+
+		return null; 
 	}
 
-	/*
-	 * Don't do this, let the core set the frame's pointers, so we don't go out
-	 * of bounds public static void setCoreToNeighbors(World world, int x, int
-	 * y, int z, IMultiblockTileEntityCore core) { for (int ix = x - 1; ix <= x
-	 * + 1; ix++) { for (int iy = y - 1; iy <= y + 1; iy++) { for (int iz = z -
-	 * 1; iz <= z + 1; iz++) { if (ix == x && iy == y && iz == z) continue; //
-	 * don't look at the frame in this spot;
-	 * 
-	 * IMultiblockTileEntityFrame frame = getFrameAt(world, ix, iy, iz);
-	 * if(frame != null && !frame.hasCore()) { frame.setCore(core); } } } }
-	 * 
-	 * }
-	 */
+	private static boolean isFrameForCore(
+			IMultiblockTileEntityFrame sourceFrame,
+			IMultiblockTileEntityCore core, World world) {
+
+		int x = sourceFrame.getFrameX();
+		int y = sourceFrame.getFrameY();
+		int z = sourceFrame.getFrameZ();
+		int blockId = world.getBlockId(x, y, z);
+
+		return (core.isPartOfStructure(x, y, z, blockId));
+	}
+
+	public static boolean isFramePointingToCore(
+			IMultiblockTileEntityFrame sourceFrame,
+			IMultiblockTileEntityCore core) {
+		return sourceFrame.getCoreX() == core.getCoreX()
+				&& sourceFrame.getCoreY() == core.getCoreY()
+				&& sourceFrame.getCoreZ() == core.getCoreZ();
+	}
 
 	public static IMultiblockTileEntityFrame getFrameAt(World world, int x,
 			int y, int z) {
@@ -121,6 +139,7 @@ public class MultiblockUtils {
 	}
 
 	public static void notifyFrameBreak(World world, int x, int y, int z) {
+		System.out.println("Breaking frame @ " + x + ", " + y + ", " + z);
 		IMultiblockTileEntityFrame frame = getFrameAt(world, x, y, z);
 		if (frame != null && frame.hasCore()) {
 			IMultiblockTileEntityCore core = getCoreAt(world, frame.getCoreX(),
@@ -130,6 +149,8 @@ public class MultiblockUtils {
 	}
 
 	public static void frameNeighborUpdated(World world, int x, int y, int z) {
+		System.out.println("Frame @ " + x + ", " + y + ", " + z
+				+ " noticed neighbor update ");
 		IMultiblockTileEntityFrame frame = getFrameAt(world, x, y, z);
 		if (frame != null) {
 			IMultiblockTileEntityCore core = getCoreFromFrame(world, frame);
@@ -140,7 +161,7 @@ public class MultiblockUtils {
 				HashSet<IMultiblockTileEntityFrame> processedFrames = new HashSet<IMultiblockTileEntityFrame>();
 				processedFrames.add(frame);
 				core = findCorePositionFromNeighborsRecursive(world, x, y, z,
-						processedFrames);
+						frame, processedFrames);
 				if (core != null) {
 					int blockId = world.getBlockId(x, y, z);
 					if (core.isPartOfStructure(x, y, z, blockId)) {
@@ -163,6 +184,7 @@ public class MultiblockUtils {
 	}
 
 	public static void breakCore(World world, int x, int y, int z) {
+		System.out.println("Core @ " + x + ", " + y + ", " + z + " was broken");
 		IMultiblockTileEntityCore core = getCoreAt(world, x, y, z);
 		if (core != null) {
 			if (core.isStructureComplete()) {
@@ -172,6 +194,8 @@ public class MultiblockUtils {
 	}
 
 	public static void coreNeighborUpdate(World world, int x, int y, int z) {
+		System.out.println("Core @ " + x + ", " + y + ", " + z
+				+ " noticed neighbor update ");
 		IMultiblockTileEntityCore core = getCoreAt(world, x, y, z);
 
 		if (core != null) {

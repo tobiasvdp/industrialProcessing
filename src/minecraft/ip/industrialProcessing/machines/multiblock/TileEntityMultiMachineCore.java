@@ -82,6 +82,10 @@ public class TileEntityMultiMachineCore extends TileEntity implements
 
 	@Override
 	public boolean isPartOfStructure(int x, int y, int z, int blockId) {
+		IMultiblockTileEntityFrame frame = MultiblockUtils.getFrameAt(this.worldObj, x, y, z);
+		if(frame != null && (frame.hasCore() && !MultiblockUtils.isFramePointingToCore(frame, this))) 
+			return false;// frame belongs to another core!
+		
 		MultiBlockStructureBlockDescription[] descriptions = this.structure
 				.getDescriptions();
 		for (MultiBlockStructureBlockDescription description : descriptions) {
