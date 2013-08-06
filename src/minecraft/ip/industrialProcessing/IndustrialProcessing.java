@@ -56,15 +56,15 @@ public class IndustrialProcessing {
         public static WorldGeneration worldGen = new WorldGeneration();
         
         //create items
-        private final static ItemIronLargeChunks itemIronLargeChunks = new ItemIronLargeChunks();
-        private final static ItemCopperLargeChunks itemCopperLargeChunks = new ItemCopperLargeChunks();
-        private final static ItemTinLargeChunks itemTinLargeChunks = new ItemTinLargeChunks();
-        private final static ItemIronSmallChunks itemIronSmallChunks = new ItemIronSmallChunks();
-        private final static ItemCopperSmallChunks itemCopperSmallChunks = new ItemCopperSmallChunks();
-        private final static ItemTinSmallChunks itemTinSmallChunks = new ItemTinSmallChunks();
-        private final static ItemIronCrushedChunks itemIronCrushedChunks = new ItemIronCrushedChunks();
-        private final static ItemCopperCrushedChunks itemCopperCrushedChunks = new ItemCopperCrushedChunks();
-        private final static ItemTinCrushedChunks itemTinCrushedChunks = new ItemTinCrushedChunks();
+        public final static ItemIronLargeChunks itemIronLargeChunks = new ItemIronLargeChunks();
+        public final static ItemCopperLargeChunks itemCopperLargeChunks = new ItemCopperLargeChunks();
+        public final static ItemTinLargeChunks itemTinLargeChunks = new ItemTinLargeChunks();
+        public final static ItemIronSmallChunks itemIronSmallChunks = new ItemIronSmallChunks();
+        public final static ItemCopperSmallChunks itemCopperSmallChunks = new ItemCopperSmallChunks();
+        public final static ItemTinSmallChunks itemTinSmallChunks = new ItemTinSmallChunks();
+        public final static ItemIronCrushedChunks itemIronCrushedChunks = new ItemIronCrushedChunks();
+        public final static ItemCopperCrushedChunks itemCopperCrushedChunks = new ItemCopperCrushedChunks();
+        public final static ItemTinCrushedChunks itemTinCrushedChunks = new ItemTinCrushedChunks();
         
         //create ores
         public static final Block blockCopperOre = (new BlockOre(ConfigBlocks.BlockCopperOreID())).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("blockCopperOre").func_111022_d(TEXTURE_NAME_PREFIX+"blockCopperOre").setCreativeTab(IndustrialProcessing.tabMachines);;

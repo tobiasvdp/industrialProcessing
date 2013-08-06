@@ -65,37 +65,6 @@ public class BlockCrusher extends BlockMachine {
     public void onBlockAdded(World world, int x, int y, int z){                
     	super.onBlockAdded(world, x, y, z);                
     }
-	@Override
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityliving, ItemStack stack) {
-		super.onBlockPlacedBy(world, i, j, k, entityliving, stack);
-
-
-		ForgeDirection orientation = get2dOrientation(new Position(entityliving.posX, entityliving.posY, entityliving.posZ), new Position(i, j, k));
-
-		world.setBlockMetadataWithNotify(i, j, k, orientation.getOpposite().ordinal(),1);
-		if (entityliving instanceof EntityPlayer) {
-			TileEntityCrusher tq = (TileEntityCrusher) world.getBlockTileEntity(i, j, k);
-			tq.placedBy = (EntityPlayer) entityliving;
-		}
-	}
-
-
-	public static ForgeDirection get2dOrientation(Position pos1, Position pos2) {
-		double Dx = pos1.x - pos2.x;
-		double Dz = pos1.z - pos2.z;
-		double angle = Math.atan2(Dz, Dx) / Math.PI * 180 + 180;
-
-
-		if (angle < 45 || angle > 315) {
-			return ForgeDirection.EAST;
-		} else if (angle < 135) {
-			return ForgeDirection.SOUTH;
-		} else if (angle < 225) {
-			return ForgeDirection.WEST;
-		} else {
-			return ForgeDirection.NORTH;
-		}
-	}
 
 
 }
