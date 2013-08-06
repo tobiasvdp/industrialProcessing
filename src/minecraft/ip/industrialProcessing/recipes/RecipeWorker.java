@@ -124,16 +124,15 @@ public class RecipeWorker extends Worker {
 			return;
 		System.out.println("Outputting recipe after working "
 				+ recipe.workRequired);
-		for (int i = 0; i < recipe.outputs.length; i++) {
-			// TODO: liquids and tank recipes!
+		for (int i = 0; i < recipe.outputs.length; i++) { 
 			RecipeOutputSlot slot = recipe.outputs[i];
 
 			double randomValue = random.nextGaussian();
 
 			int amount = getAmount(randomValue, slot.minAmount, slot.maxAmount,
 					slot.distributionCenter);
-
-			addToOutput(amount, slot);
+			if (amount > 0)
+				addToOutput(amount, slot);
 		}
 
 	}

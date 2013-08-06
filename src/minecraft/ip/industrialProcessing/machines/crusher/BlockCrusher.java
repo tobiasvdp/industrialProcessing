@@ -41,7 +41,7 @@ public class BlockCrusher extends BlockMachine {
 	@SideOnly(Side.CLIENT)
 	public Icon sideIcon;
 	
-	@Override
+	//@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
 		topIcon = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX+ "crusher_top");
@@ -50,7 +50,7 @@ public class BlockCrusher extends BlockMachine {
 	}
 	
 	@SideOnly(Side.CLIENT)
-	@Override
+	//@Override
 	public Icon getIcon(int side, int meta) {
 		if(side == ForgeDirection.UP.ordinal())			
 			return topIcon;
@@ -59,7 +59,6 @@ public class BlockCrusher extends BlockMachine {
 		else			
 			return sideIcon;
 	}
-	
 	
     @Override
     public void onBlockAdded(World world, int x, int y, int z){                

@@ -47,14 +47,10 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 		NBTTagList nbttaglist = new NBTTagList();
 		for (int i = 0; i < this.fluidTanks.size(); ++i) {
 			MachineFluidTank tank = this.fluidTanks.get(i);
-			if (tank != null) {
-				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
-				nbttagcompound1.setByte("Slot", (byte) i);
-				FluidStack stack = tank.getFluid();
-				if (stack != null)
-					stack.writeToNBT(nbttagcompound1);
-				nbttaglist.appendTag(nbttagcompound1);
-			}
+			NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+			nbttagcompound1.setByte("Slot", (byte) i);
+			tank.writeToNBT(nbttagcompound1);
+			nbttaglist.appendTag(nbttagcompound1);
 		}
 		nbt.setTag("Tanks", nbttaglist);
 	}
@@ -73,10 +69,8 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 			byte b0 = nbttagcompound1.getByte("Slot");
 
 			if (b0 >= 0 && b0 < this.fluidTanks.size()) {
-				MachineFluidTank machineStack = this.fluidTanks.get(b0);
-				FluidStack stack = FluidStack
-						.loadFluidStackFromNBT(nbttagcompound1);
-				machineStack.setFluid(stack);
+				MachineFluidTank machineTank = this.fluidTanks.get(b0);
+				machineTank.readFromNBT(nbttagcompound1);
 			}
 		}
 	}

@@ -36,7 +36,7 @@ public class RecipesCrusher extends RecipesMachine {
 		};
 		
 		copperCrushing2.outputs = new RecipeOutputSlot[]{
-				new RecipeOutputSlot(1, IndustrialProcessing.itemCopperCrushedChunks.itemID, RecipeSlotType.INVENTORY, 1, 3, 0)
+				new RecipeOutputSlot(1, IndustrialProcessing.itemCopperCrushedChunks.itemID, RecipeSlotType.INVENTORY, 1, 1, 0)
 		};
 		copperCrushing2.workRequired = 30;		
 		addRecipe(copperCrushing2);
@@ -60,7 +60,7 @@ public class RecipesCrusher extends RecipesMachine {
 		};
 		
 		TinCrushing2.outputs = new RecipeOutputSlot[]{
-				new RecipeOutputSlot(1, IndustrialProcessing.itemTinCrushedChunks.itemID, RecipeSlotType.INVENTORY, 1, 3, 0)
+				new RecipeOutputSlot(1, IndustrialProcessing.itemTinCrushedChunks.itemID, RecipeSlotType.INVENTORY, 1, 1, 0)
 		};
 		TinCrushing2.workRequired = 30;		
 		addRecipe(TinCrushing2);
@@ -84,7 +84,7 @@ public class RecipesCrusher extends RecipesMachine {
 		};
 		
 		IronCrushing2.outputs = new RecipeOutputSlot[]{
-				new RecipeOutputSlot(1, IndustrialProcessing.itemIronCrushedChunks.itemID, RecipeSlotType.INVENTORY, 1, 3, 0)
+				new RecipeOutputSlot(1, IndustrialProcessing.itemIronCrushedChunks.itemID, RecipeSlotType.INVENTORY, 1, 1, 0)
 		};
 		IronCrushing2.workRequired = 30;		
 		addRecipe(IronCrushing2);
