@@ -1,5 +1,7 @@
 package ip.industrialProcessing.machines.filter;
 
+import java.util.Random;
+
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.IndustrialProcessingConfig;
 
@@ -39,6 +41,7 @@ public class RendererFilter extends TileEntitySpecialRenderer {
 	        Tessellator tessellator = Tessellator.instance;
 	        //This will make your block brightness dependent from surroundings lighting.
 	        if (world != null){
+	        	
 		        float f = block.getBlockBrightness(world, i, j, k);
 		        int l = world.getLightBrightnessForSkyBlocks(i, j, k, 0);
 		        int l1 = l % 65536;
@@ -53,9 +56,18 @@ public class RendererFilter extends TileEntitySpecialRenderer {
 		         GL11.glRotatef((dir*-90F), 0F, 1F, 0F);
 		         GL11.glRotatef((-180F), 0F, 0F, 1F);
 		         GL11.glScalef(1f, 1f, 1f);
-		         String textureLocation = "textures/render/Vibratingscreen.png";
-		         
-		         func_110628_a(new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN,textureLocation));
+		         ResourceLocation tex; 
+		         if (tl.getWorker().isWorking()){
+		        	 Random rand = new Random();
+		        	 if (rand.nextInt(1)== 1){
+		        		 tex =  new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN,"textures/render/Vibratingscreen2.png");
+		        	 }else{
+		        		 tex =  new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN,"textures/render/Vibratingscreen2.png");
+		        	 }
+		         }else{
+		        	 tex =  new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN,"textures/render/Vibratingscreen.png");
+		         }
+		         func_110628_a(tex);
 	         }else{   
 		         GL11.glPushMatrix();
 		         GL11.glTranslatef(0.3F, 3.7F, 0.5F);
