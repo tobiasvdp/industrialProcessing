@@ -17,8 +17,8 @@ import net.minecraft.world.World;
 
 public class RendererFilter extends TileEntitySpecialRenderer {
 	public static RendererFilter instance = new RendererFilter();
-	ModelFilter model = new ModelFilter(); 
-	private static final ResourceLocation texture = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN,"textures/render/ModelFilter.png");
+	ModelFilter2 model = new ModelFilter2(); 
+	private static final ResourceLocation texture = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN,"textures/render/Vibratingscreen.png");
     
 	public RendererFilter() {
 	}
@@ -53,7 +53,7 @@ public class RendererFilter extends TileEntitySpecialRenderer {
 		         GL11.glRotatef((dir*-90F), 0F, 1F, 0F);
 		         GL11.glRotatef((-180F), 0F, 0F, 1F);
 		         GL11.glScalef(1f, 1f, 1f);
-		         String textureLocation = "textures/render/ModelFilter.png";
+		         String textureLocation = "textures/render/Vibratingscreen.png";
 		         
 		         func_110628_a(new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN,textureLocation));
 	         }else{   
@@ -68,7 +68,7 @@ public class RendererFilter extends TileEntitySpecialRenderer {
 	         /*
 	         Place your rendering code here.
 	         */
-	         this.model.renderModel(0.0625F);
+	         this.model.render(0.0625F);
 
 	        GL11.glPopMatrix();
 	}
