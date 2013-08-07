@@ -87,9 +87,7 @@ public class IndustrialProcessing {
 	        
         // create Multiblock Machines
 
-        public final static BlockMachineFrame blockMachineFrame = new BlockMachineFrame(MachineFrameState.DISCONNECTED);
-        public final static BlockMachineFrame blockMachineFrameConnected = new BlockMachineFrame(MachineFrameState.CONNECTED);
-        public final static BlockMachineFrame blockMachineFrameCompleted = new BlockMachineFrame(MachineFrameState.COMPLETED);
+        public final static BlockMachineFrame blockMachineFrame = new BlockMachineFrame();
         public final static BlockLargeCrusher blockLargeCrusher = new BlockLargeCrusher();
         
         //create achivements

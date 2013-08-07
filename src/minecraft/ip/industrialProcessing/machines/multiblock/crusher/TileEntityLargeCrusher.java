@@ -12,21 +12,19 @@ public class TileEntityLargeCrusher extends TileEntityMultiMachineCore {
 	static {
 
 		// workaround for blocks that change id depending on their state
-		int frameId1 = IndustrialProcessing.blockMachineFrame.blockID;
-		int frameId2 = IndustrialProcessing.blockMachineFrameCompleted.blockID;
-		int frameId3 = IndustrialProcessing.blockMachineFrameConnected.blockID;
+		int frameId1 = IndustrialProcessing.blockMachineFrame.blockID; 
 		MultiBlockStructureBlockDescription topSide = new MultiBlockStructureBlockDescription(
-				0, 1, 0, frameId1, frameId2, frameId3);
+				0, 1, 0, frameId1 );
 		MultiBlockStructureBlockDescription bottomSide = new MultiBlockStructureBlockDescription(
-				0, -1, 0, frameId1, frameId2, frameId3);
+				0, -1, 0, frameId1);
 		MultiBlockStructureBlockDescription side1 = new MultiBlockStructureBlockDescription(
-				1, 0, 0, frameId1, frameId2, frameId3);
+				1, 0, 0, frameId1);
 		MultiBlockStructureBlockDescription side2 = new MultiBlockStructureBlockDescription(
-				-1, 0, 0, frameId1, frameId2, frameId3);
+				-1, 0, 0, frameId1);
 		MultiBlockStructureBlockDescription side3 = new MultiBlockStructureBlockDescription(
-				0, 0, 1, frameId1, frameId2, frameId3);
+				0, 0, 1, frameId1);
 		MultiBlockStructureBlockDescription side4 = new MultiBlockStructureBlockDescription(
-				0, 0, -1, frameId1, frameId2, frameId3);
+				0, 0, -1, frameId1);
 		crusherStructure = new MultiBlockStructure(topSide, bottomSide, side1,
 				side2, side3, side4);
 	}

@@ -1,11 +1,18 @@
 package ip.industrialProcessing.machines.multiblock;
 
+import org.lwjgl.Sys;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import net.minecraft.world.gen.structure.StructureVillagePieceWeight;
 
 public abstract class TileEntityMultiMachineFrame extends TileEntity implements
 		IMultiblockTileEntityFrame {
+
+	public TileEntityMultiMachineFrame() {
+		this.state = MachineFrameState.DISCONNECTED;
+	}
 
 	private int coreX;
 	private int coreY;
@@ -32,7 +39,7 @@ public abstract class TileEntityMultiMachineFrame extends TileEntity implements
 	public boolean hasCore() {
 		return this.hasCore;
 	}
- 
+
 	private void setCore(int x, int y, int z) {
 		this.coreX = x;
 		this.coreY = y;
@@ -89,27 +96,49 @@ public abstract class TileEntityMultiMachineFrame extends TileEntity implements
 				+ ", " + this.zCoord + " for frame @ " + core.getCoreX() + ", "
 				+ core.getCoreY() + ", " + core.getCoreZ());
 		this.setCore(core.getCoreX(), core.getCoreY(), core.getCoreZ());
-		
+
 		setBlockConnected(core.isStructureComplete());
 	}
 
 	private void setBlockConnected(boolean structureComplete) {
-		 this.state =  structureComplete ?  MachineFrameState.COMPLETED : MachineFrameState.CONNECTED;
-		updateState(state);
+		MachineFrameState newState = structureComplete ? MachineFrameState.COMPLETED
+				: MachineFrameState.CONNECTED;
+		if (newState != this.state) {
+			this.state = newState;
+			updateState(newState);
+		}
 	}
-	
+
 	@Override
 	public void setState(MachineFrameState state) {
-		this.state = state;
-		updateState(state);
-	}
-	
-	private void setBlockDisconnected()
-	{
-		this.state = MachineFrameState.DISCONNECTED;
-		updateState(state);
+		if (this.state != state) {
+			this.state = state;
+			updateState(state);
+		}
 	}
 
-	protected abstract void updateState(MachineFrameState state);
+	@Override
+	public MachineFrameState getState() {
+		return this.state;
+	}
 
+	private void setBlockDisconnected() {
+		if (this.state != MachineFrameState.DISCONNECTED) {
+			this.state = MachineFrameState.DISCONNECTED;
+			updateState(state);
+		}
+	}
+
+	protected void updateState(MachineFrameState state) {
+		System.out.println("Set state of frame @ " + xCoord + ", " + yCoord
+				+ ", " + zCoord + " to " + state + "=>" + this.state);
+		if (this.worldObj != null)
+			this.worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord,
+					state.ordinal(), 3);
+	}
+
+	@Override
+	public void setWorldObj(World par1World) {
+		super.setWorldObj(par1World);
+	}
 }

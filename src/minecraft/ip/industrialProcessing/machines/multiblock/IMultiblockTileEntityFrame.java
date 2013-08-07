@@ -9,6 +9,7 @@ public interface IMultiblockTileEntityFrame {
 	int getFrameX();
 	int getFrameY();
 	int getFrameZ();
+	MachineFrameState getState();
 	
 	boolean hasCore();
 	
@@ -16,4 +17,5 @@ public interface IMultiblockTileEntityFrame {
 	void removeCore();
 	void setCore(IMultiblockTileEntityCore core);
 	void setState(MachineFrameState state);
+	
 }

@@ -4,15 +4,15 @@ import ip.industrialProcessing.IndustrialProcessingConfig;
 
 public class ConfigItems {
 
-	private int ItemIronLargeChunksID = 2000;
-	private int ItemCopperLargeChunksID = 2001;
-	private int ItemTinLargeChunksID = 2002;
-	private int ItemIronSmallChunksID = 2003;
-	private int ItemCopperSmallChunksID = 2004;
-	private int ItemTinSmallChunksID = 2005;
-	private int ItemIronCrushedChunksID = 2006;
-	private int ItemCopperCrushedChunksID = 2007;
-	private int ItemTinCrushedChunksID = 2008;
+	private int ItemIronLargeChunksID = 5000;
+	private int ItemCopperLargeChunksID = 5001;
+	private int ItemTinLargeChunksID = 5002;
+	private int ItemIronSmallChunksID = 5003;
+	private int ItemCopperSmallChunksID = 5004;
+	private int ItemTinSmallChunksID = 5005;
+	private int ItemIronCrushedChunksID = 5006;
+	private int ItemCopperCrushedChunksID = 5007;
+	private int ItemTinCrushedChunksID = 5008;
 	
 	public static int ItemIronLargeChunksID(){return getInstance().ItemIronLargeChunksID;}
 	public static int ItemCopperLargeChunksID(){return getInstance().ItemCopperLargeChunksID;}
