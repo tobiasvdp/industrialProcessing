@@ -35,14 +35,12 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 
 	private int[][] fluidTankSideslots = new int[6][0];
 	private ArrayList<MachineFluidTank> fluidTanks = new ArrayList<MachineFluidTank>();
- 
 
-	@SideOnly(Side.SERVER)
 	@Override
-	protected ServerWorker createServerSideWorker() { 
+	protected ServerWorker createServerSideWorker() {
 		return new RecipeFluidWorker(this);
 	}
-	
+
 	@Override
 	public void writeToNBT(net.minecraft.nbt.NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
@@ -101,6 +99,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 						tank.drain(removeFluid.amount, true);
 						this.decrStackSize(inputSlot, 1);
 						setInventorySlotContents(outputSlot, filled);
+						onTanksChanged();
 					}
 				}
 			}
@@ -126,6 +125,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 							getTankInSlot(tankSlot).fill(fluid, true);
 							this.setInventorySlotContents(outputSlot,
 									emptyContainer);
+							onTanksChanged();
 						}
 					}
 				}
@@ -151,7 +151,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 		if (fluid == null)
 			return false;
 		return isTankValidForLiquid(tankslot, fluid.fluidID);
-	} 
+	}
 
 	protected void addTank(int capacity, ForgeDirection side, boolean input,
 			boolean output) {
@@ -194,7 +194,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 		return tank.getInfo();
 	}
 
-	protected MachineFluidTank getFluidTankForSlot(int slot) {
+	private MachineFluidTank getFluidTankForSlot(int slot) {
 		if (slot < 0 || slot > fluidTanks.size())
 			return null;
 		return this.fluidTanks.get(slot);
@@ -298,7 +298,10 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 		FluidTank tank = getInputTankForFluidStack(from, resource);
 		if (tank == null)
 			return 0;
-		return tank.fill(resource, doFill);
+		int amount = tank.fill(resource, doFill);
+		if (doFill)
+			onTanksChanged();
+		return amount;
 	}
 
 	@Override
@@ -307,7 +310,10 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 		FluidTank tank = getOutputTankForFluidStack(from, resource);
 		if (tank == null)
 			return null;
-		return tank.drain(tank.getFluidAmount(), doDrain);
+		FluidStack amount = tank.drain(tank.getFluidAmount(), doDrain);
+		if (doDrain)
+			onTanksChanged();
+		return amount;
 	}
 
 	@Override
@@ -316,12 +322,14 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 		FluidTank tank = getOutputTank(from);
 		if (tank == null)
 			return null;
-		return tank.drain(tank.getFluidAmount(), doDrain);
+		FluidStack amount = tank.drain(tank.getFluidAmount(), doDrain);
+		if (doDrain)
+			onTanksChanged();
+		return amount;
 	}
 
 	@Override
-	public boolean canFill(ForgeDirection from, Fluid fluid) {
-
+	public boolean canFill(ForgeDirection from, Fluid fluid) { 
 		FluidTank tank = getInputTankForFluid(from, fluid);
 		return tank != null;
 	}
@@ -388,10 +396,12 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 		FluidStack newStack = new FluidStack(itemId, amount);
 		if (stack == null) {
 			tank.setFluid(newStack);
+			super.notifyBlockChange();
 			return true;
 		} else if (stack.fluidID == itemId
 				&& stack.amount + amount < tank.getCapacity()) {
 			tank.fill(newStack, true);
+			onTanksChanged();
 			return true;
 		}
 		return false;
@@ -407,8 +417,14 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 			return false;
 		if (stack.fluidID == itemId && stack.amount >= amount) {
 			tank.drain(amount, true);
+			onTanksChanged();
 			return true;
 		}
 		return false;
+	}
+
+	protected void onTanksChanged() {
+		this.onInventoryChanged();
+		super.notifyBlockChange();
 	}
 }

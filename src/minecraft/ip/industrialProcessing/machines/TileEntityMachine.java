@@ -67,18 +67,7 @@ public abstract class TileEntityMachine extends TileEntity implements
 	protected void work(int amount) {
 		this.getWorker().doWork(amount);
 	}
-
-	public void syncWorker(int totalWork, int workDone) {
-		serverWorker.setTotalWork(totalWork);
-		serverWorker.setTotalWork(workDone);
-	}
-
-	public int[] syncWorker() {
-		int x[] = new int[2];
-		x[0] = serverWorker.getTotalWork();
-		x[1] = serverWorker.getTotalWork();
-		return x;
-	}
+ 
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
@@ -380,7 +369,7 @@ public abstract class TileEntityMachine extends TileEntity implements
 		notifyBlockChange();
 	}
 
-	private void notifyBlockChange() {
+	protected void notifyBlockChange() {
 		if (!this.worldObj.isRemote)
 			this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}

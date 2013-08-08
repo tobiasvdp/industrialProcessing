@@ -24,10 +24,10 @@ public class RecipesMixer extends RecipesMachine {
 		lava.workRequired = 30;
 		lava.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0,
 				FluidRegistry.WATER.getID(),
-				RecipeSlotType.TANK, 1) ,
+				RecipeSlotType.TANK, 1000) ,
 				new RecipeInputSlot(0,
 				Item.blazePowder.itemID,
-				RecipeSlotType.TANK, 1)};
+				RecipeSlotType.INVENTORY, 1)};
 		lava.outputs = new RecipeOutputSlot[] {
 				new RecipeOutputSlot(1,
 						FluidRegistry.LAVA.getID(),

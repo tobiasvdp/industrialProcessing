@@ -25,10 +25,10 @@ import net.minecraftforge.common.ForgeDirection;
 public class BlockCrusher extends BlockMachine {
 
 	public BlockCrusher() {
-		super(ConfigMachineBlocks.getCrusherBlockID(), Material.iron,
-				1F, Block.soundMetalFootstep, "Ore Crusher",
+		super(ConfigMachineBlocks.getCrusherBlockID(), Material.iron, 1F,
+				Block.soundMetalFootstep, "Ore Crusher",
 				IndustrialProcessing.tabMachines);
-		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX+"crusher_top");
+		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "crusher_top");
 	}
 
 	@Override
@@ -37,59 +37,46 @@ public class BlockCrusher extends BlockMachine {
 	}
 
 	@SideOnly(Side.CLIENT)
-	public Icon topIcon; 
+	public Icon topIcon;
 	public Icon bottomIcon;
-	public Icon sideIcon;
-	private Icon sideAnimatedIcon;
-	
+	public Icon sideIcon; 
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
-		topIcon = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX+ "crusher_top");
-		bottomIcon = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX+ "crusher_bottom");
-		sideIcon = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX+ "crusher_side");
-		sideAnimatedIcon = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX+ "crusher_bottom"); //TODO: animated texture
+		topIcon = par1IconRegister
+				.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX
+						+ "crusher_top");
+		bottomIcon = par1IconRegister
+				.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX
+						+ "crusher_bottom");
+		sideIcon = par1IconRegister
+				.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX
+						+ "crusher_side"); 
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getIcon(int side, int meta) {
-		if(side == ForgeDirection.UP.ordinal())			
+		if (side == ForgeDirection.UP.ordinal())
 			return topIcon;
-		else if(side == ForgeDirection.DOWN.ordinal())			
+		else if (side == ForgeDirection.DOWN.ordinal())
 			return bottomIcon;
-		else			
+		else
 			return sideIcon;
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Icon getBlockTexture(IBlockAccess par1iBlockAccess, int par2,
 			int par3, int par4, int side) {
  
-		boolean animated = false;
-		TileEntity entity = par1iBlockAccess.getBlockTileEntity(par2, par3, par4);
-		if(entity instanceof TileEntityCrusher)
-		{
-			TileEntityCrusher crusherTile = (TileEntityCrusher)entity;
-			animated = crusherTile.getWorker().isWorking();
-		}	 
-				
-		if(side == ForgeDirection.UP.ordinal())			
+		if (side == ForgeDirection.UP.ordinal())
 			return topIcon;
-		else if(side == ForgeDirection.DOWN.ordinal())			
+		else if (side == ForgeDirection.DOWN.ordinal())
 			return bottomIcon;
-		else			
-			return animated ?sideAnimatedIcon : sideIcon;
+		else
+			return  sideIcon;
 	}
-	
-	
-	
-	
-    @Override
-    public void onBlockAdded(World world, int x, int y, int z){                
-    	super.onBlockAdded(world, x, y, z);                
-    }
-
 
 }

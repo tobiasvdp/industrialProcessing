@@ -2,17 +2,17 @@ package ip.industrialProcessing.utils.working;
 
 public class ClientWorker implements IWorker {
 
-	private int totalWork;
-	private int workDone;
+	private int totalWork = 0;
+	private int workDone = 0; // don't start working when placed
 
 	public boolean doWork(int amount) {
-		if (workDone >= 0) {
+		if (workDone >= 1) {
 			workDone += amount;
 			if (workDone > totalWork)
-				workDone = totalWork;
+				workDone = totalWork+1;
 			else
 				return true;
-		}// else (work < 0) : still in prepare stage!
+		}// else (work <= 0) : still in prepare stage!
 		return false;
 	}
 
@@ -40,12 +40,12 @@ public class ClientWorker implements IWorker {
 	public int getScaledProgress(int progressBarWidth) {
 		if (totalWork == 0)
 			return 0;
-		return progressBarWidth * workDone / totalWork;
+		return progressBarWidth * (workDone-1) / totalWork;
 	}
 
 	@Override
 	public boolean isWorking() {
-		return workDone > 0 && workDone < totalWork;
+		return workDone > 1 && workDone <= totalWork;
 	}
 
 }
