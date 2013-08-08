@@ -49,7 +49,6 @@ public class PacketHandler implements IPacketHandler {
             if (thisTileEntity != null) {
         	try{
         		thisTileEntityFilter=(TileEntityFilter)thisTileEntity;
-        		System.out.println("read = " + workDone + " " + totalWork);
         		thisTileEntityFilter.syncWorker(totalWork, workDone);
         		
         	}catch(Exception e){
