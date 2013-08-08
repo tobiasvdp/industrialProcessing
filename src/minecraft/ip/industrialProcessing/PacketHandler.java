@@ -25,10 +25,9 @@ public class PacketHandler implements IPacketHandler {
 
 	@Override
 	public void onPacketData(INetworkManager manager,
-			Packet250CustomPayload packet, Player player) {
+			Packet250CustomPayload packet, Player player) { 
 		if (packet.channel.equals("IP.WorkSyncable")) {
 			TileSyncHandler.handleWorkSync(manager, packet, player);
-		}
-
+		}  
 	}
 }
