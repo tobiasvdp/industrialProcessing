@@ -41,6 +41,18 @@ public class RecipesCrusher extends RecipesMachine {
 		copperCrushing2.workRequired = 30;		
 		addRecipe(copperCrushing2);
 		
+		//Washed copper to fine ores chunks
+		Recipe copperCrushing3 = new Recipe();
+		copperCrushing3.inputs = new RecipeInputSlot[]{
+				new RecipeInputSlot(0, IndustrialProcessing.itemCopperWashedChunks.itemID, RecipeSlotType.INVENTORY, 1)
+		};
+		
+		copperCrushing3.outputs = new RecipeOutputSlot[]{
+				new RecipeOutputSlot(1, IndustrialProcessing.itemCopperFineChunks.itemID, RecipeSlotType.INVENTORY, 1, 1, 0)
+		};
+		copperCrushing3.workRequired = 30;		
+		addRecipe(copperCrushing3);
+		
 		//Tin ore to Crushed Tin chunks
 		Recipe TinCrushing = new Recipe();
 		TinCrushing.inputs = new RecipeInputSlot[]{
@@ -64,6 +76,18 @@ public class RecipesCrusher extends RecipesMachine {
 		};
 		TinCrushing2.workRequired = 30;		
 		addRecipe(TinCrushing2);
+		
+		//Washed tin to fine ores chunks
+		Recipe tinCrushing3 = new Recipe();
+		tinCrushing3.inputs = new RecipeInputSlot[]{
+				new RecipeInputSlot(0, IndustrialProcessing.itemTinWashedChunks.itemID, RecipeSlotType.INVENTORY, 1)
+		};
+		
+		tinCrushing3.outputs = new RecipeOutputSlot[]{
+				new RecipeOutputSlot(1, IndustrialProcessing.itemTinFineChunks.itemID, RecipeSlotType.INVENTORY, 1, 1, 0)
+		};
+		tinCrushing3.workRequired = 30;		
+		addRecipe(tinCrushing3);
 		
 		//Iron ore to Crushed Iron chunks
 		Recipe IronCrushing = new Recipe();
@@ -89,5 +113,16 @@ public class RecipesCrusher extends RecipesMachine {
 		IronCrushing2.workRequired = 30;		
 		addRecipe(IronCrushing2);
 		
+		//Washed iron to fine ores chunks
+		Recipe ironCrushing3 = new Recipe();
+		ironCrushing3.inputs = new RecipeInputSlot[]{
+				new RecipeInputSlot(0, IndustrialProcessing.itemIronWashedChunks.itemID, RecipeSlotType.INVENTORY, 1)
+		};
+		
+		ironCrushing3.outputs = new RecipeOutputSlot[]{
+				new RecipeOutputSlot(1, IndustrialProcessing.itemIronFineChunks.itemID, RecipeSlotType.INVENTORY, 1, 1, 0)
+		};
+		ironCrushing3.workRequired = 30;		
+		addRecipe(ironCrushing3);
 	}
 }
