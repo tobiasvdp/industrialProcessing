@@ -3,11 +3,11 @@ package ip.industrialProcessing.config;
 public class ConfigBlocks {
 
 
-	private int BlockCopperOreID = 1000;
-	private int BlockTinOreID = 1001;
+	private int blockCopperOreID = 1000;
+	private int blockTinOreID = 1001;
 	
-	public static int BlockCopperOreID(){return getInstance().BlockCopperOreID;}
-	public static int BlockTinOreID(){return getInstance().BlockTinOreID;}
+	public static int BlockCopperOreID(){return getInstance().blockCopperOreID;}
+	public static int BlockTinOreID(){return getInstance().blockTinOreID;}
 	
 	private ConfigBlocks(){
 	

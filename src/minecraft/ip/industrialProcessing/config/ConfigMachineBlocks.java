@@ -1,12 +1,12 @@
-package ip.industrialProcessing;
+package ip.industrialProcessing.config;
 
-public class IndustrialProcessingConfig {
+public class ConfigMachineBlocks {
 
-	private IndustrialProcessingConfig() {
+	private ConfigMachineBlocks() {
 
 	}
 
-	private static IndustrialProcessingConfig instance = new IndustrialProcessingConfig();
+	private static ConfigMachineBlocks instance = new ConfigMachineBlocks();
 	private int crusherBlockID = 500;
 	private int filterBlockId = 501;
 	private int magneticSeparatorBlockID = 502;
@@ -16,7 +16,7 @@ public class IndustrialProcessingConfig {
 	private int machineFrameCompletedBlockID = 602;
 	private int largeCrusherBlockID = 700;
 
-	public static IndustrialProcessingConfig getInstance() {
+	public static ConfigMachineBlocks getInstance() {
 		return instance;
 	}
 

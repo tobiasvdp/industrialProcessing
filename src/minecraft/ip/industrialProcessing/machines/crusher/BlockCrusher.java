@@ -5,7 +5,7 @@ import java.io.Console;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.IndustrialProcessingConfig;
+import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.utils.Position;
 import net.minecraft.block.Block;
@@ -25,7 +25,7 @@ import net.minecraftforge.common.ForgeDirection;
 public class BlockCrusher extends BlockMachine {
 
 	public BlockCrusher() {
-		super(IndustrialProcessingConfig.getCrusherBlockID(), Material.iron,
+		super(ConfigMachineBlocks.getCrusherBlockID(), Material.iron,
 				1F, Block.soundMetalFootstep, "Ore Crusher",
 				IndustrialProcessing.tabMachines);
 		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX+"crusher_top");

@@ -7,8 +7,8 @@ import javax.jws.Oneway;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.IndustrialProcessingConfig;
 import ip.industrialProcessing.client.ClientProxy;
+import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.utils.inventories.InventoryUtils;
 import net.minecraft.block.Block;
@@ -31,7 +31,7 @@ public class BlockFilter extends BlockMachine {
 	private Icon[] textures;
 	
 	public BlockFilter() {
-		super(IndustrialProcessingConfig.getFilterBlockID(), Material.iron, 1F,
+		super(ConfigMachineBlocks.getFilterBlockID(), Material.iron, 1F,
 		Block.soundMetalFootstep, "Ore Filter",
 		IndustrialProcessing.tabMachines);
 	}			

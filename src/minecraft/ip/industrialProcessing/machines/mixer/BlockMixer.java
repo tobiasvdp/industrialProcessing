@@ -7,13 +7,13 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.IndustrialProcessingConfig;
+import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.machines.BlockMachine;
 
 public class BlockMixer extends BlockMachine {
 
 	public BlockMixer() {
-		super(IndustrialProcessingConfig.getMixerBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Mixer", IndustrialProcessing.tabMachines);
+		super(ConfigMachineBlocks.getMixerBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Mixer", IndustrialProcessing.tabMachines);
 	}
 
 	@Override

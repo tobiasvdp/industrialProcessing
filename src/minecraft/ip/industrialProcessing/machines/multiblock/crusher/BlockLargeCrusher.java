@@ -7,13 +7,13 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.IndustrialProcessingConfig;
+import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.machines.multiblock.BlockMultiMachineCore;
 
 public class BlockLargeCrusher extends BlockMultiMachineCore {
 
 	public BlockLargeCrusher() {
-		super(IndustrialProcessingConfig.getLargeCrusherBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Large Crusher", IndustrialProcessing.tabMachines);
+		super(ConfigMachineBlocks.getLargeCrusherBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Large Crusher", IndustrialProcessing.tabMachines);
 	}
 
 	@Override

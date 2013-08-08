@@ -3,7 +3,7 @@ package ip.industrialProcessing.machines.filter;
 import java.util.Random;
 
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.IndustrialProcessingConfig;
+import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.machines.crusher.ModelCrusher;
 
 import org.lwjgl.opengl.GL11;

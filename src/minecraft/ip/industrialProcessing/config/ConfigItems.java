@@ -1,6 +1,5 @@
 package ip.industrialProcessing.config;
 
-import ip.industrialProcessing.IndustrialProcessingConfig;
 
 public class ConfigItems {
 

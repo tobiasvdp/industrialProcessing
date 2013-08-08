@@ -1,7 +1,7 @@
 package ip.industrialProcessing.machines.magneticSeparator;
 
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.IndustrialProcessingConfig;
+import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
 import net.minecraft.block.Block;
@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 public class BlockMagneticSeparator extends BlockMachine {
 
 	public BlockMagneticSeparator() {
-		super(IndustrialProcessingConfig.getMagneticSeparatorBlockID(), Material.iron, 1F,
+		super(ConfigMachineBlocks.getMagneticSeparatorBlockID(), Material.iron, 1F,
 				Block.soundMetalFootstep, "Magnetic Ore Separator",
 				IndustrialProcessing.tabMachines);
 	}

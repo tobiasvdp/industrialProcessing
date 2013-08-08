@@ -6,7 +6,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.IndustrialProcessingConfig;
+import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.machines.multiblock.BlockMultiMachineFrame;
 import ip.industrialProcessing.machines.multiblock.IMultiblockTileEntityFrame;
 import ip.industrialProcessing.machines.multiblock.MachineFrameState;
@@ -15,7 +15,7 @@ public class BlockMachineFrame extends BlockMultiMachineFrame {
 
 	public BlockMachineFrame() {
 
-		super(IndustrialProcessingConfig.getMachineFrameBlockID(),
+		super(ConfigMachineBlocks.getMachineFrameBlockID(),
 				IndustrialProcessing.tabMachines);
 
 	} 
