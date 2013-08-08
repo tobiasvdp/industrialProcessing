@@ -112,6 +112,10 @@ public class IndustrialProcessing {
 			ConfigItems.ItemSiliciumID(), "ItemSilicium");
 	public final static ItemIP itemZincDust = new ItemIP(
 			ConfigItems.ItemZincDustID(), "ItemZincDust");
+	public final static ItemIP itemTinPurified = new ItemIP(
+			ConfigItems.ItemTinPurifiedID(), "ItemTinPurified");
+	public final static ItemIP itemSulfur = new ItemIP(
+			ConfigItems.ItemSulfurID(), "ItemSulfur");
 
 	// create ores
 	public static final Block blockCopperOre = (new BlockOre(
@@ -207,6 +211,8 @@ public class IndustrialProcessing {
 		LanguageRegistry.addName(itemSilicium, "Silicium");
 		LanguageRegistry.addName(itemZincDust, "zinc Dust");
 		LanguageRegistry.addName(itemCopperPurified, "Purified copper");
+		LanguageRegistry.addName(itemTinPurified, "Purified tin");
+		LanguageRegistry.addName(itemSulfur, "Sulfur");
 		
 		// register achievements
 		achPage.getAchievements().add(achPlacedFilter);
