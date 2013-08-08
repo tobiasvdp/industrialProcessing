@@ -41,7 +41,9 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 @Mod(modid="IndustrialProcessing", name="Industrial Processing", version="0.0.0")
-@NetworkMod(clientSideRequired=true, serverSideRequired=false)
+@NetworkMod(clientSideRequired=true, serverSideRequired=false,
+	channels={"IPTileSync"}, packetHandler = PacketHandler.class)
+
 public class IndustrialProcessing {
 
 	public static final String RESOURCE_PATH = "/assets/industrialprocessing/";

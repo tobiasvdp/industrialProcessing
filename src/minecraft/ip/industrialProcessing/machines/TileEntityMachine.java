@@ -53,6 +53,17 @@ public abstract class TileEntityMachine extends TileEntity implements
 	protected void work() {
 		worker.doWork(1, this.worldObj.isRemote);
 	}
+	
+	public void syncWorker(int totalWork,int workDone){
+		worker.setTotalWork(totalWork);
+		worker.setTotalWork(workDone);
+	}
+	public int[] syncWorker(){
+		int x[] = new int[2];
+		x[0] = worker.getTotalWork();
+		x[1] = worker.getTotalWork();
+		return x;
+	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
@@ -309,6 +320,7 @@ public abstract class TileEntityMachine extends TileEntity implements
 	}
 
 	public int getScaledProgress(int i) {
+		//System.out.println("Progress "+i);
 		return this.worker.getProgress() * i / 100;
 	}
 }

@@ -61,6 +61,10 @@ public class Worker {
 			return -1;
 		return 100 * this.workDone / this.totalWork;
 	}
+	public int getTotalWork(){return totalWork;}
+	public int getWorkDone(){return workDone;}
+	public void setTotalWork(int x){totalWork = x;}
+	public void setWorkDone(int x){workDone = x;}
 
 	public void writeToNBT(NBTTagCompound nbt) {
 		nbt.setShort("IP.Worker.WorkDone", (short) this.workDone);

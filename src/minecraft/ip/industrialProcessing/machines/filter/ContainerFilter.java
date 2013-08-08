@@ -10,20 +10,21 @@ import ip.industrialProcessing.utils.containers.VerifyingContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class ContainerFilter extends ContainerMachine {
-	Slot inputSlot;
-	Slot outputSmallSlot;
-	Slot outputBigSlot;
 	
+	protected TileEntityFilter tileEntity;
 	protected Slot[] slots;
 
 	public ContainerFilter(InventoryPlayer inventoryPlayer,
 			TileEntityFilter tileEntity) {
 		super(inventoryPlayer, tileEntity);
 
+		this.tileEntity = tileEntity;
+		
 		slots = new Slot[3];		
 		slots[0] = new SlotBase(tileEntity, 0, 44, 33);
 		slots[1] = new SlotOutput(tileEntity, 1, 104, 33);

@@ -4,6 +4,7 @@ import java.util.Random;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.IndustrialProcessingConfig;
+import ip.industrialProcessing.machines.crusher.ModelCrusher;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -19,8 +20,8 @@ import net.minecraft.world.World;
 
 public class RendererFilter extends TileEntitySpecialRenderer {
 	public static RendererFilter instance = new RendererFilter();
-	ModelFilter2 model = new ModelFilter2(); 
-	private static final ResourceLocation texture = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN,"textures/render/Vibratingscreen.png");
+	ModelFilter model = new ModelFilter(); 
+	private static final ResourceLocation texture = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN,"textures/render/ModelFilter.png");
     
 	public RendererFilter() {
 	}
@@ -58,14 +59,13 @@ public class RendererFilter extends TileEntitySpecialRenderer {
 		         GL11.glScalef(1f, 1f, 1f);
 		         ResourceLocation tex; 
 		         if (tl.getWorker().isWorking()){
-		        	 Random rand = new Random();
-		        	 if (rand.nextInt(1)== 1){
-		        		 tex =  new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN,"textures/render/Vibratingscreen2.png");
-		        	 }else{
-		        		 tex =  new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN,"textures/render/Vibratingscreen2.png");
-		        	 }
+		        	 float tilt = tl.getTiltZ();
+		        	 GL11.glRotatef(tilt, 1F, 0F, 0F);
+		        	 tilt = tl.getTiltX();
+		        	 GL11.glRotatef(tilt, 0F, 0F, 1F);
+		        	 tex =  texture;
 		         }else{
-		        	 tex =  new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN,"textures/render/Vibratingscreen.png");
+		        	 tex =  texture;
 		         }
 		         func_110628_a(tex);
 	         }else{   
