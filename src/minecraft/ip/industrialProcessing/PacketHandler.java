@@ -1,6 +1,8 @@
 package ip.industrialProcessing;
 
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
+import ip.industrialProcessing.packetHandlers.TileSyncHandler;
+import ip.industrialProcessing.utils.working.IWorkSyncable;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
@@ -14,7 +16,9 @@ import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 
 public class PacketHandler implements IPacketHandler {
-	
+
+	public static final String WORK_SYNC = "IP.WorkSyncable";
+
 	public PacketHandler() {
 		// TODO Auto-generated constructor stub
 	}
@@ -22,44 +26,9 @@ public class PacketHandler implements IPacketHandler {
 	@Override
 	public void onPacketData(INetworkManager manager,
 			Packet250CustomPayload packet, Player player) {
-        if (packet.channel.equals("IPTileSync")) {
-            Entity playerEntity = (Entity)player;
-            TileEntity thisTileEntity;
-            TileEntityFilter thisTileEntityFilter;
-            int xcoord;
-            int ycoord;
-            int zcoord;
-        	int totalWork;
-        	int workDone;
-            
-            DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
-            
-            try {
-                	xcoord = inputStream.readInt();
-                	ycoord = inputStream.readInt();
-                	zcoord = inputStream.readInt();
-                	totalWork = inputStream.readInt();
-                	workDone = inputStream.readInt();
-            } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-            }    
-            
-            thisTileEntity =playerEntity.worldObj.getBlockTileEntity(xcoord, ycoord, zcoord);
-            if (thisTileEntity != null) {
-        	try{
-        		thisTileEntityFilter=(TileEntityFilter)thisTileEntity;
-        		System.out.println("read = " + workDone + " " + totalWork);
-        		thisTileEntityFilter.syncWorker(totalWork, workDone);
-        		
-        	}catch(Exception e){
-        		System.out.println("Cold not cast");
-        		System.out.println(xcoord + " " + ycoord + " " + zcoord);
-        		
-        	}        
-            }	
-
-        }
+		if (packet.channel.equals("IP.WorkSyncable")) {
+			TileSyncHandler.handleWorkSync(manager, packet, player);
+		}
 
 	}
 }

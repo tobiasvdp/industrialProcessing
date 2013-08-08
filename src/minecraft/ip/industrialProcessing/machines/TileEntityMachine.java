@@ -1,5 +1,6 @@
 package ip.industrialProcessing.machines;
 
+import ip.industrialProcessing.packetHandlers.TileSyncHandler;
 import ip.industrialProcessing.recipes.IRecipeWorkHandler;
 import ip.industrialProcessing.recipes.RecipeWorker;
 import ip.industrialProcessing.utils.inventories.InventoryUtils;
@@ -14,6 +15,9 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.INetworkManager;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.liquids.ITankContainer;
@@ -42,7 +46,10 @@ public abstract class TileEntityMachine extends TileEntity implements
 
 	@Override
 	public void updateEntity() {
-		work();
+		work(); 
+		if (!this.worldObj.isRemote) {
+			TileSyncHandler.sendWorkSync(this);
+		}
 	}
 
 	@Override
@@ -322,5 +329,18 @@ public abstract class TileEntityMachine extends TileEntity implements
 	public int getScaledProgress(int i) {
 		//System.out.println("Progress "+i);
 		return this.worker.getProgress() * i / 100;
-	}
+	} 
+	
+	@Override
+	public Packet getDescriptionPacket() {
+        System.out.println("Sending "+this+"'s NBT data");
+        NBTTagCompound nbtTag = new NBTTagCompound();
+        this.writeToNBT(nbtTag);
+        return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
+    }
+	
+	@Override
+    public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
+        readFromNBT(packet.customParam1);
+    }
 }

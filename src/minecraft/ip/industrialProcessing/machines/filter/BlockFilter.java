@@ -9,6 +9,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.client.ClientProxy;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
+import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.utils.inventories.InventoryUtils;
 import net.minecraft.block.Block;
@@ -51,11 +52,12 @@ public class BlockFilter extends BlockMachine {
     @Override
     public int getRenderType()
     {
-        return ClientProxy.getFilterID();
+        return ConfigRenderers.getRendererFilterId();
     }
     @Override
     public boolean canRenderInPass(int pass)
 	{
+    	// this looks weird??????
 	    //Set the static var in the client proxy
 	    ClientProxy.renderPass = pass;
 	    //the block can render in both passes, so return true always

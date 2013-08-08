@@ -25,6 +25,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.MinecraftForge;
 import ip.industrialProcessing.machines.TileEntityMachine;
+import ip.industrialProcessing.packetHandlers.TileSyncHandler;
 import ip.industrialProcessing.recipes.IRecipeWorkHandler;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeWorker;
@@ -50,40 +51,13 @@ public class TileEntityFilter extends TileEntityMachine {
 						ForgeDirection.WEST }, false, true);
 		this.addStack(null, ForgeDirection.DOWN, false, true);
 	}
-	
-	@Override
-	public void updateEntity() {
-		work();
-		Side side = FMLCommonHandler.instance().getEffectiveSide();
-		if (side == Side.SERVER) {
-			int x[] = syncWorker();
-			ByteArrayOutputStream bos = new ByteArrayOutputStream(8);
-			DataOutputStream outputStream = new DataOutputStream(bos);
-			try {
-		        	outputStream.writeInt(this.xCoord);
-		        	outputStream.writeInt(this.yCoord);
-		        	outputStream.writeInt(this.zCoord);
-			        outputStream.writeInt(x[0]);
-			        outputStream.writeInt(x[1]);
-			} catch (Exception ex) {
-			        ex.printStackTrace();
-			}
-
-			Packet250CustomPayload packet = new Packet250CustomPayload();
-			packet.channel = "IPTileSync";
-			packet.data = bos.toByteArray();
-			packet.length = bos.size();
-			
-			PacketDispatcher.sendPacketToAllPlayers(packet);
-		}else{
-
-		}
-	}
+ 
 
 	@Override
 	public void workCancelled(boolean remote) {
 		// TODO: stop sound
 	}
+
 	@Override
 	public void beginWork(boolean remote) {
 		// TODO: start sound
@@ -113,28 +87,18 @@ public class TileEntityFilter extends TileEntityMachine {
 	public Iterator<Recipe> iterateRecipes() {
 		return recipes.iterator();
 	}
-	@Override
-	public Packet getDescriptionPacket() {
-        NBTTagCompound nbtTag = new NBTTagCompound();
-        this.writeToNBT(nbtTag);
-        return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
-    }
-	@Override
-    public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
-        readFromNBT(packet.customParam1);
-    }
 
 	public float getTiltZ() {
 		int i = recipeWorker.getProgress() % 6;
-		 i = i - 3;
-		return i;
-	}
-	public float getTiltX() {
-		int i = recipeWorker.getProgress() % 3;
-		 i = i - 1;
-		 i = -i;
+		i = i - 3;
 		return i;
 	}
 
+	public float getTiltX() {
+		int i = recipeWorker.getProgress() % 3;
+		i = i - 1;
+		i = -i;
+		return i;
+	}
 
 }
