@@ -11,9 +11,7 @@ public class ConfigMachineBlocks {
 	private int filterBlockId = 501;
 	private int magneticSeparatorBlockID = 502;
 	private int mixerBlockID = 503;
-	private int machineFrameBlockID = 600;
-	private int machineFrameConnectedBlockID = 601;
-	private int machineFrameCompletedBlockID = 602;
+	private int machineFrameBlockID = 600; 
 	private int largeCrusherBlockID = 700;
 
 	public static ConfigMachineBlocks getInstance() {
@@ -41,15 +39,7 @@ public class ConfigMachineBlocks {
 	{
 		return getInstance().machineFrameBlockID;
 	}
-
-	public static int getMachineFrameConnectedBlockID()
-	{
-		return getInstance().machineFrameConnectedBlockID;
-	}
-	public static int getMachineFrameCompletedBlockID()
-	{
-		return getInstance().machineFrameCompletedBlockID;
-	}
+ 
 	public static int getLargeCrusherBlockID() {
 		return getInstance().largeCrusherBlockID;
 	}
