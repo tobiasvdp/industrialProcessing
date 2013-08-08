@@ -20,9 +20,11 @@ import net.minecraft.world.World;
 
 public class RendererFilter extends TileEntitySpecialRenderer {
 	public static RendererFilter instance = new RendererFilter();
-	ModelFilter model = new ModelFilter(); 
-	private static final ResourceLocation texture = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN,"textures/render/ModelFilter.png");
-    
+	ModelFilter model = new ModelFilter();
+	private static final ResourceLocation texture = new ResourceLocation(
+			IndustrialProcessing.TEXTURE_DOMAIN,
+			"textures/render/ModelFilter.png");
+
 	public RendererFilter() {
 	}
 
@@ -30,58 +32,70 @@ public class RendererFilter extends TileEntitySpecialRenderer {
 	public void renderTileEntityAt(TileEntity tileEntity, double d0, double d1,
 			double d2, float f) {
 		GL11.glPushMatrix();
-        //This will move our renderer so that it will be on proper place in the world
-        GL11.glTranslatef((float)d0, (float)d1, (float)d2);
-        TileEntityFilter tileEntityYour = (TileEntityFilter)tileEntity;
-        /*Note that true tile entity coordinates (tileEntity.xCoord, etc) do not match to render coordinates (d, etc) that are calculated as [true coordinates] - [player coordinates (camera coordinates)]*/
-        renderBlockYour(tileEntityYour, tileEntity.worldObj, tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord, IndustrialProcessing.blockFilter);
-       GL11.glPopMatrix();
+		// This will move our renderer so that it will be on proper place in the
+		// world
+		GL11.glTranslatef((float) d0, (float) d1, (float) d2);
+		TileEntityFilter tileEntityYour = (TileEntityFilter) tileEntity;
+		/*
+		 * Note that true tile entity coordinates (tileEntity.xCoord, etc) do
+		 * not match to render coordinates (d, etc) that are calculated as [true
+		 * coordinates] - [player coordinates (camera coordinates)]
+		 */
+		renderBlockYour(tileEntityYour, tileEntity.worldObj, tileEntity.xCoord,
+				tileEntity.yCoord, tileEntity.zCoord,
+				IndustrialProcessing.blockFilter);
+		GL11.glPopMatrix();
 
 	}
-	 public void renderBlockYour(TileEntityFilter tl, World world, int i, int j, int k, Block block) {
-	        Tessellator tessellator = Tessellator.instance;
-	        //This will make your block brightness dependent from surroundings lighting.
-	        if (world != null){
-	        	
-		        float f = block.getBlockBrightness(world, i, j, k);
-		        int l = world.getLightBrightnessForSkyBlocks(i, j, k, 0);
-		        int l1 = l % 65536;
-		        int l2 = l / 65536;
-		        tessellator.setColorOpaque_F(f, f, f);
-		        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)l1, (float)l2); 
-		        
-		        int dir = world.getBlockMetadata(i, j, k);
-		        GL11.glPushMatrix();
-		         GL11.glTranslatef(0.5F, 1.5F, 0.5F);
-		         //This line actually rotates the renderer.
-		         GL11.glRotatef((dir*-90F), 0F, 1F, 0F);
-		         GL11.glRotatef((-180F), 0F, 0F, 1F);
-		         GL11.glScalef(1f, 1f, 1f);
-		         ResourceLocation tex; 
-		         if (tl.getWorker().isWorking()){
-		        	 float tilt = tl.getTiltZ();
-		        	 GL11.glRotatef(tilt, 1F, 0F, 0F);
-		        	 tilt = tl.getTiltX();
-		        	 GL11.glRotatef(tilt, 0F, 0F, 1F);
-		        	 tex =  texture;
-		         }else{
-		        	 tex =  texture;
-		         }
-		         func_110628_a(tex);
-	         }else{   
-		         GL11.glPushMatrix();
-		         GL11.glTranslatef(0.3F, 3.7F, 0.5F);
-		         GL11.glRotatef((90F), 0F, 1F, 0F);
-		         GL11.glRotatef((-180F), 0F, 0F, 1F);
-		         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-		         GL11.glScalef(1.5f, 1.5f, 1.5f);
-		         this.func_110628_a(texture);
-	         }
-	         /*
-	         Place your rendering code here.
-	         */
-	         this.model.render(0.0625F);
 
-	        GL11.glPopMatrix();
+	float tilt = 0;
+
+	public void renderBlockYour(TileEntityFilter tl, World world, int i, int j,
+			int k, Block block) {
+		Tessellator tessellator = Tessellator.instance;
+		// This will make your block brightness dependent from surroundings
+		// lighting.
+		if (world != null) {
+
+			float f = block.getBlockBrightness(world, i, j, k);
+			int l = world.getLightBrightnessForSkyBlocks(i, j, k, 0);
+			int l1 = l % 65536;
+			int l2 = l / 65536;
+			tessellator.setColorOpaque_F(f, f, f);
+			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit,
+					(float) l1, (float) l2);
+
+			int dir = world.getBlockMetadata(i, j, k);
+			GL11.glPushMatrix();
+			GL11.glTranslatef(0.5F, 1.5F, 0.5F);
+			// This line actually rotates the renderer.
+			GL11.glRotatef((dir * -90F), 0F, 1F, 0F);
+			GL11.glRotatef((-180F), 0F, 0F, 1F);
+			GL11.glScalef(1f, 1f, 1f);
+			ResourceLocation tex;
+			if (tl.getWorker().isWorking()) {
+				tilt++;
+				GL11.glRotatef(tilt % 6 - 3, 1F, 0F, 0F);
+				GL11.glRotatef(tilt % 4 - 2, 0F, 0F, 1F);
+				tex = texture;
+			} else {
+				tex = texture;
+			}
+			func_110628_a(tex);
+		} else {
+			GL11.glPushMatrix();
+			GL11.glTranslatef(0.3F, 3.7F, 0.5F);
+			GL11.glRotatef((90F), 0F, 1F, 0F);
+			GL11.glRotatef((-180F), 0F, 0F, 1F);
+			GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+			GL11.glScalef(1.5f, 1.5f, 1.5f);
+			this.func_110628_a(texture);
+		}
+		/*
+		 * Place your rendering code here.
+		 */
+		this.model.render(0.0625F);
+
+		GL11.glPopMatrix();
 	}
 }

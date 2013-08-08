@@ -6,9 +6,12 @@ import ip.industrialProcessing.recipes.Recipe;
 
 import java.util.Iterator;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
@@ -21,8 +24,7 @@ public class TileEntityMixer extends TileEntityFluidMachine {
 	private static RecipesMixer recipes = new RecipesMixer();
 
 	public TileEntityMixer() {
-
-		System.out.println("Setting up Mixer");
+ 
 
 		addStack(null, ForgeDirection.UP, true, false); // Mixing ingredient
 
@@ -41,58 +43,27 @@ public class TileEntityMixer extends TileEntityFluidMachine {
 				new ForgeDirection[] { ForgeDirection.NORTH,
 						ForgeDirection.SOUTH, ForgeDirection.WEST,
 						ForgeDirection.EAST }, true, false);
-		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, ForgeDirection.DOWN, false, true);
+		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, ForgeDirection.DOWN,
+				false, true);
 	}
 
 	@Override
 	public void updateEntity() {
-		addBucketToTank(1,2,0);
-		getBucketFromTank(3,4,1);
-		/*
-		ItemStack waterStacks = getStackInSlot(1);
-		ItemStack bucketOutputStack = getStackInSlot(2);
-		if (waterStacks != null
-				&& waterStacks.itemID == Item.bucketWater.itemID
-				&& waterStacks.stackSize > 0) {
-			if (bucketOutputStack == null) {
-
-				MachineFluidTank tank = this.getFluidTankForSlot(0);
-
-				if (this.tankHasRoomFor(0, FluidRegistry.WATER.getID(), 1000)) {
-					this.decrStackSize(1, 1); // take water out
-					Fluid fluid = FluidRegistry.WATER;
-					if (this.removeFromSlot(1, Item.bucketWater.itemID, 1)) {
-						tank.fill(new FluidStack(fluid, 1000), true);
-						this.setInventorySlotContents(2, new ItemStack(
-								Item.bucketEmpty, 1));
-					}
-				}
-			}
-		}*/
+		addBucketToTank(1, 2, 0);
+		getBucketFromTank(3, 4, 1);
 		super.updateEntity();
 	};
 
-
+	@SideOnly(Side.SERVER)
 	@Override
 	public boolean hasWork() {
 		return true;
 	}
 
+	@SideOnly(Side.SERVER)
 	@Override
 	public boolean canWork() {
 		return true;
-	}
-
-	@Override
-	public void workDone(boolean remote) {
-	}
-
-	@Override
-	public void beginWork(boolean remote) {
-	}
-
-	@Override
-	public void workCancelled(boolean remote) {
 	}
 
 	@Override

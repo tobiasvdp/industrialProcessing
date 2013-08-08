@@ -4,16 +4,20 @@ import ip.industrialProcessing.recipes.IRecipeFluidWorkHandler;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeFluidWorker;
 import ip.industrialProcessing.recipes.RecipeWorker;
+import ip.industrialProcessing.utils.working.ServerWorker;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.activity.InvalidActivityException;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
@@ -31,12 +35,14 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 
 	private int[][] fluidTankSideslots = new int[6][0];
 	private ArrayList<MachineFluidTank> fluidTanks = new ArrayList<MachineFluidTank>();
-	private RecipeFluidWorker recipeFluidWorker;
+ 
 
-	public TileEntityFluidMachine() {
-
+	@SideOnly(Side.SERVER)
+	@Override
+	protected ServerWorker createServerSideWorker() { 
+		return new RecipeFluidWorker(this);
 	}
-
+	
 	@Override
 	public void writeToNBT(net.minecraft.nbt.NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
@@ -89,9 +95,9 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 					ItemStack filled = FluidContainerRegistry
 							.fillFluidContainer(fluid, singleItem);
 
-					if(filled != null)
-					{
-						FluidStack removeFluid = FluidContainerRegistry.getFluidForFilledItem(filled);
+					if (filled != null) {
+						FluidStack removeFluid = FluidContainerRegistry
+								.getFluidForFilledItem(filled);
 						tank.drain(removeFluid.amount, true);
 						this.decrStackSize(inputSlot, 1);
 						setInventorySlotContents(outputSlot, filled);
@@ -145,13 +151,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 		if (fluid == null)
 			return false;
 		return isTankValidForLiquid(tankslot, fluid.fluidID);
-	}
-
-	@Override
-	protected void setupDefaultRecipeWorker() {
-		this.recipeFluidWorker = new RecipeFluidWorker(this);
-		setWorker(this.recipeFluidWorker);
-	}
+	} 
 
 	protected void addTank(int capacity, ForgeDirection side, boolean input,
 			boolean output) {

@@ -4,12 +4,18 @@ import ip.industrialProcessing.packetHandlers.TileSyncHandler;
 import ip.industrialProcessing.recipes.IRecipeWorkHandler;
 import ip.industrialProcessing.recipes.RecipeWorker;
 import ip.industrialProcessing.utils.inventories.InventoryUtils;
+import ip.industrialProcessing.utils.working.ClientWorker;
 import ip.industrialProcessing.utils.working.IWorkHandler;
-import ip.industrialProcessing.utils.working.Worker;
+import ip.industrialProcessing.utils.working.IWorker;
+import ip.industrialProcessing.utils.working.IWorkingEntity;
+import ip.industrialProcessing.utils.working.ServerWorker;
+import ip.industrialProcessing.utils.working.WorkUtils;
 
 import java.util.ArrayList;
 import java.util.Stack;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -19,37 +25,38 @@ import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.liquids.ITankContainer;
 
 public abstract class TileEntityMachine extends TileEntity implements
-		ISidedInventory, IWorkHandler, IMachineSlots, IRecipeWorkHandler {
+		ISidedInventory, IWorkHandler, IMachineSlots, IRecipeWorkHandler,
+		IWorkingEntity {
 
 	private ArrayList<MachineItemStack> itemStacks = new ArrayList<MachineItemStack>();
 	private int[][] itemStackSideSlots = new int[6][0];
-	private RecipeWorker recipeWorker;
 
 	public TileEntityMachine() {
-		setupDefaultRecipeWorker();
+		this.serverWorker = createServerSideWorker();
+		this.clientWorker = new ClientWorker();
 	}
 
-	protected void setupDefaultRecipeWorker() {
-		this.recipeWorker = new RecipeWorker(this);
-		setWorker(this.recipeWorker);
+	protected ServerWorker createServerSideWorker() {
+		return new RecipeWorker(this);
 	}
 
-	protected Worker worker;
+	protected ServerWorker serverWorker;
+	protected ClientWorker clientWorker;
 
-	public Worker getWorker() {
-		return worker;
+	public IWorker getWorker() {
+		if (this.worldObj.isRemote)
+			return clientWorker;
+		else
+			return serverWorker;
 	}
 
 	@Override
 	public void updateEntity() {
-		work(); 
-		if (!this.worldObj.isRemote) {
-			TileSyncHandler.sendWorkSync(this);
-		}
+		work(1);
 	}
 
 	@Override
@@ -57,27 +64,36 @@ public abstract class TileEntityMachine extends TileEntity implements
 		return true;
 	}
 
-	protected void work() {
-		worker.doWork(1, this.worldObj.isRemote);
+	protected void work(int amount) {
+		this.getWorker().doWork(amount);
 	}
-	
-	public void syncWorker(int totalWork,int workDone){
-		worker.setTotalWork(totalWork);
-		worker.setTotalWork(workDone);
+
+	public void syncWorker(int totalWork, int workDone) {
+		serverWorker.setTotalWork(totalWork);
+		serverWorker.setTotalWork(workDone);
 	}
-	public int[] syncWorker(){
+
+	public int[] syncWorker() {
 		int x[] = new int[2];
-		x[0] = worker.getTotalWork();
-		x[1] = worker.getTotalWork();
+		x[0] = serverWorker.getTotalWork();
+		x[1] = serverWorker.getTotalWork();
 		return x;
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
-		worker.writeToNBT(nbt);
 		writeInventory(nbt);
+		writeWorker(nbt);
 	};
+
+	private void writeWorker(NBTTagCompound nbt) {
+		if (this.worldObj.isRemote) {
+			WorkUtils.writeToNBT(clientWorker, nbt);
+		} else {
+			WorkUtils.writeToNBT(serverWorker, nbt);
+		}
+	}
 
 	private void writeInventory(NBTTagCompound nbt) {
 		NBTTagList nbttaglist = new NBTTagList();
@@ -96,9 +112,14 @@ public abstract class TileEntityMachine extends TileEntity implements
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
-		worker.readFromNBT(nbt);
 		readInventory(nbt);
+		readWorker(nbt);
 	};
+
+	private void readWorker(NBTTagCompound nbt) {
+		WorkUtils.readFromNBT(clientWorker, nbt);
+		WorkUtils.readFromNBT(serverWorker, nbt);
+	}
 
 	private void readInventory(NBTTagCompound nbt) {
 		NBTTagList nbttaglist = nbt.getTagList("Items");
@@ -322,25 +343,60 @@ public abstract class TileEntityMachine extends TileEntity implements
 		return false;
 	}
 
-	public void setWorker(Worker recipeWorker) {
-		this.worker = recipeWorker;
-	}
-
-	public int getScaledProgress(int i) {
-		//System.out.println("Progress "+i);
-		return this.worker.getProgress() * i / 100;
-	} 
-	
 	@Override
 	public Packet getDescriptionPacket() {
-        System.out.println("Sending "+this+"'s NBT data");
-        NBTTagCompound nbtTag = new NBTTagCompound();
-        this.writeToNBT(nbtTag);
-        return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
-    }
-	
+		System.out.println("Sending " + this + "'s NBT data");
+		NBTTagCompound nbtTag = new NBTTagCompound();
+		this.writeToNBT(nbtTag);
+		return new Packet132TileEntityData(this.xCoord, this.yCoord,
+				this.zCoord, 1, nbtTag);
+	}
+
 	@Override
-    public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
-        readFromNBT(packet.customParam1);
-    }
+	public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
+		readFromNBT(packet.customParam1);
+	}
+
+	@Override
+	public void workProgressed(int amount) {
+	}
+
+	@Override
+	public void workCancelled() {
+		notifyBlockChange();
+	}
+
+	@Override
+	public void prepareWork() {
+	}
+
+	@Override
+	public void beginWork() {
+		notifyBlockChange();
+	}
+
+	@Override
+	public void workDone() {
+		notifyBlockChange();
+	}
+
+	private void notifyBlockChange() {
+		if (!this.worldObj.isRemote)
+			this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+	}
+
+	@Override
+	public boolean hasWork() {
+		return true;
+	}
+
+	@Override
+	public boolean canWork() {
+		return true;
+	}
+
+	@Override
+	public TileEntity getTileEntity() {
+		return this;
+	}
 }

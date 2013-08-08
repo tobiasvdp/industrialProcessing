@@ -9,5 +9,4 @@ import ip.industrialProcessing.utils.working.IWorkHandler;
 
 public interface IRecipeWorkHandler extends IWorkHandler, IMachineSlots { 
 	Iterator<Recipe> iterateRecipes();
-
 }

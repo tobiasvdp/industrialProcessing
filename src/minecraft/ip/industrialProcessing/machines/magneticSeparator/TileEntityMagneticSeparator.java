@@ -5,6 +5,7 @@ import java.util.Iterator;
 import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.recipes.Recipe;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 public class TileEntityMagneticSeparator extends TileEntityMachine {
@@ -12,7 +13,7 @@ public class TileEntityMagneticSeparator extends TileEntityMachine {
 	public static RecipesMagneticSeparator recipes = new RecipesMagneticSeparator();
 	
 	public TileEntityMagneticSeparator()
-	{
+	{ 
 		ForgeDirection[] sides = new ForgeDirection[]{
 				 ForgeDirection.EAST,
 				 ForgeDirection.SOUTH,
@@ -26,31 +27,7 @@ public class TileEntityMagneticSeparator extends TileEntityMachine {
 		this.addStack(null, sides, false, true); // nickel
 		this.addStack(null, sides, false, true); // sphalerite
 	}
-	
-	@Override
-	public boolean hasWork() { 
-		return true;
-	}
-
-	@Override
-	public boolean canWork() { 
-		return true;
-	}
-
-
-	@Override
-	public void workCancelled(boolean remote) {
-		// TODO: stop sound
-	}
-	@Override
-	public void beginWork(boolean remote) {
-		// TODO: start sound
-	}
-
-	@Override
-	public void workDone(boolean remote) {
-		// TODO: stop sound
-	}
+	 
 	
 	@Override
 	public Iterator<Recipe> iterateRecipes() { 

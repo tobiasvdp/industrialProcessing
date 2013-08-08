@@ -1,6 +1,7 @@
 package ip.industrialProcessing.machines;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.utils.working.IWorker;
 
 import org.lwjgl.opengl.GL11;
 
@@ -44,7 +45,8 @@ protected int progressBarHeight = 16;
 	    this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 	    
 	    //progress indicator
-		int scale = tileEntity.getScaledProgress(progressBarWidth);
+	    IWorker worker = tileEntity.getWorker();
+		int scale = worker.getScaledProgress(progressBarWidth);
 		if (scale > 0){
 			this.drawTexturedModalRect(x+progressBarX, y+progressBarY, 176, 0, scale, progressBarHeight);
 		}

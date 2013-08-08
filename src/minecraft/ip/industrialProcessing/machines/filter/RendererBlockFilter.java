@@ -34,7 +34,7 @@ public class RendererBlockFilter implements ISimpleBlockRenderingHandler{
     }
 
 
-    private final TileEntityFilter table = new TileEntityFilter();
+    private static final TileEntityFilter table = new TileEntityFilter();
 
 
     @Override

@@ -33,19 +33,17 @@ public class BlockCrusher extends BlockMachine {
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityCrusher();
+		return new TileEntityCrusher(world);
 	}
 
-	//@SideOnly(Side.CLIENT)
-	public Icon topIcon;
-	//@SideOnly(Side.CLIENT)
+	@SideOnly(Side.CLIENT)
+	public Icon topIcon; 
 	public Icon bottomIcon;
-	//@SideOnly(Side.CLIENT)
 	public Icon sideIcon;
 	private Icon sideAnimatedIcon;
 	
-	//@Override
-	//@SideOnly(Side.CLIENT)
+	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerIcons(IconRegister par1IconRegister) {
 		topIcon = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX+ "crusher_top");
 		bottomIcon = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX+ "crusher_bottom");
@@ -54,6 +52,7 @@ public class BlockCrusher extends BlockMachine {
 	}
 	
 	@Override
+	@SideOnly(Side.CLIENT)
 	public Icon getIcon(int side, int meta) {
 		if(side == ForgeDirection.UP.ordinal())			
 			return topIcon;
@@ -64,6 +63,7 @@ public class BlockCrusher extends BlockMachine {
 	}
 	
 	@Override
+	@SideOnly(Side.CLIENT)
 	public Icon getBlockTexture(IBlockAccess par1iBlockAccess, int par2,
 			int par3, int par4, int side) {
  

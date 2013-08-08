@@ -42,7 +42,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 @Mod(modid="IndustrialProcessing", name="Industrial Processing", version="0.0.0")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false,
-	channels={"IPTileSync"}, packetHandler = PacketHandler.class)
+	channels={PacketHandler.ANIMATION_SYNC}, packetHandler = PacketHandler.class)
 
 public class IndustrialProcessing {
 

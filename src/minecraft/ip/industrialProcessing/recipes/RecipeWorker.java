@@ -3,11 +3,12 @@ package ip.industrialProcessing.recipes;
 import java.util.Iterator;
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.item.ItemStack;
 import ip.industrialProcessing.utils.working.IWorkHandler;
-import ip.industrialProcessing.utils.working.Worker;
-
-public class RecipeWorker extends Worker {
+import ip.industrialProcessing.utils.working.ServerWorker; 
+public class RecipeWorker extends ServerWorker {
 
 	private Random random;
 	private IRecipeWorkHandler handler;
@@ -30,24 +31,21 @@ public class RecipeWorker extends Worker {
 	};
 
 	@Override
-	protected void onEndWork(boolean remote) {
-		// remote = client, !remote = server
-		if (!remote) {
+	protected void onEndWork() {
 			removeInput(recipe);
 			produceOutput(recipe);
-		}
-		super.onEndWork(remote);
+		super.onEndWork();
 		this.recipe = null;
 	}
 
 	@Override
-	protected void onBeginWork(boolean remote) {
-		this.recipe = this.getCurrentRecipe();
-		if (recipe != null)
-			this.totalWork = this.recipe.workRequired;
-		else
-			this.totalWork = 0;
-		super.onBeginWork(remote);
+	protected void onPrepareWork() {
+			this.recipe = this.getCurrentRecipe();
+			if (recipe != null)
+				this.totalWork = this.recipe.workRequired;
+			else
+				this.totalWork = 0;
+		super.onPrepareWork();
 	}
 
 	public Recipe getCurrentRecipe() {
@@ -105,7 +103,6 @@ public class RecipeWorker extends Worker {
 		if (currentRecipe == null || currentRecipe.inputs == null)
 			return;
 		for (int i = 0; i < currentRecipe.inputs.length; i++) {
-			// TODO: liquids and tank recipes!
 			RecipeInputSlot slot = currentRecipe.inputs[i];
 
 			removeFromInput(slot);
