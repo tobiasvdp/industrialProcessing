@@ -4,9 +4,10 @@ import ip.industrialProcessing.config.ConfigAchievements;
 import ip.industrialProcessing.config.ConfigBlocks;
 import ip.industrialProcessing.config.ConfigFluids;
 import ip.industrialProcessing.config.ConfigItems;
-import ip.industrialProcessing.fluids.BlockFluidBaseDirtyWater;
-import ip.industrialProcessing.fluids.ItemFluidContainer;
-import ip.industrialProcessing.fluids.ItemFluidDirtyWater;
+import ip.industrialProcessing.fluids.BlockFluid;
+import ip.industrialProcessing.fluids.BucketHandler;
+import ip.industrialProcessing.fluids.ContainerFluid;
+import ip.industrialProcessing.fluids.ItemFluid;
 import ip.industrialProcessing.items.*;
 import ip.industrialProcessing.machines.crusher.BlockCrusher;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
@@ -136,9 +137,21 @@ public class IndustrialProcessing {
 			ConfigItems.ItemSulfurID(), "ItemSulfur");
 	
 	// create fluids
-	public final static ItemFluidDirtyWater itemFluidDirtyWater = new ItemFluidDirtyWater("DirtyWater");
-	public final static BlockFluidBaseDirtyWater blockFluidBaseDirtyWater = new BlockFluidBaseDirtyWater(ConfigFluids.blockFluidBaseDirtyWaterID(), itemFluidDirtyWater ,Material.water,tabMachines);
-	public final static ItemFluidContainer bucketDirtyWater = new ItemFluidContainer(ConfigFluids.BucketDirtyWaterID(),itemFluidDirtyWater);
+	public final static ItemFluid itemFluidDirtyWater = new ItemFluid("DirtyWater",1000,1000);
+	public final static BlockFluid blockFluidDirtyWater = new BlockFluid(ConfigFluids.blockFluidBaseDirtyWaterID(), itemFluidDirtyWater ,Material.water,tabMachines);
+	public final static ContainerFluid bucketDirtyWater = new ContainerFluid(ConfigFluids.BucketDirtyWaterID(),itemFluidDirtyWater, blockFluidDirtyWater);
+	
+	public final static ItemFluid itemFluidOreSludgeIron = new ItemFluid("OreSludgeIron",1000,1000);
+	public final static BlockFluid blockFluidOreSludgeIron = new BlockFluid(ConfigFluids.blockFluidBaseOreSludgeIronID(), itemFluidOreSludgeIron ,Material.water,tabMachines);
+	public final static ContainerFluid bucketOreSludgeIron = new ContainerFluid(ConfigFluids.BucketOreSludgeIronID(),itemFluidOreSludgeIron,blockFluidOreSludgeIron);
+	
+	public final static ItemFluid itemFluidOreSludgeCopper = new ItemFluid("OreSludgeCopper",1000,1000);
+	public final static BlockFluid blockFluidOreSludgeCopper = new BlockFluid(ConfigFluids.blockFluidBaseOreSludgeCopperID(), itemFluidOreSludgeCopper ,Material.water,tabMachines);
+	public final static ContainerFluid bucketOreSludgeCopper = new ContainerFluid(ConfigFluids.BucketOreSludgeCopperID(),itemFluidOreSludgeCopper,blockFluidOreSludgeCopper);
+	
+	public final static ItemFluid itemFluidOreSludgeTin = new ItemFluid("OreSludgeTin",1000,1000);
+	public final static BlockFluid blockFluidOreSludgeTin = new BlockFluid(ConfigFluids.blockFluidBaseOreSludgeTinID(), itemFluidOreSludgeTin ,Material.water,tabMachines);
+	public final static ContainerFluid bucketOreSludgeTin = new ContainerFluid(ConfigFluids.BucketOreSludgeTinID(),itemFluidOreSludgeTin,blockFluidOreSludgeTin);
 
 	// create ores
 	public static final Block blockCopperOre = (new BlockOre(
@@ -183,7 +196,8 @@ public class IndustrialProcessing {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		// Stub Method
+		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
+		MinecraftForge.EVENT_BUS.register(this);
 	}
 
 	@EventHandler
@@ -210,8 +224,15 @@ public class IndustrialProcessing {
 				"copper");
 		registerOre(blockTinOre, "IP.World.TinOre", "Tin Ore", "copper");
 		
-		registerFluid(blockFluidBaseDirtyWater,itemFluidDirtyWater,bucketDirtyWater, "blockFluidBaseDirtyWater", "Dirty water");
-		LanguageRegistry.addName(bucketDirtyWater, "Bucket of dirty water");
+		//register fluid
+		registerFluid(blockFluidDirtyWater,itemFluidDirtyWater,bucketDirtyWater, "blockFluid", "Dirty water");
+		LanguageRegistry.addName(bucketDirtyWater, "Dirty water Bucket");
+		registerFluid(blockFluidOreSludgeIron,itemFluidOreSludgeIron,bucketOreSludgeIron, "blockFluid", "Iron ore sludge");
+		LanguageRegistry.addName(bucketOreSludgeIron, "Iron sludge Bucket");
+		registerFluid(blockFluidOreSludgeCopper,itemFluidOreSludgeCopper,bucketOreSludgeCopper, "blockFluid", "Copper ore sludge");
+		LanguageRegistry.addName(bucketOreSludgeCopper, "Copper sludge Bucket");
+		registerFluid(blockFluidOreSludgeTin,itemFluidOreSludgeTin,bucketOreSludgeTin, "blockFluid", "Tin ore sludge");
+		LanguageRegistry.addName(bucketOreSludgeTin, "Tin sludge Bucket");
 		
 		//register multistructures
 		registerMachine(blockMultiMachineInventory, "MultiBlockInventory",
@@ -275,8 +296,9 @@ public class IndustrialProcessing {
 		OreDictionary.registerOre(oreDictionaryKey, block);
 	}
 
-	private void registerFluid(Block block,Fluid fluid, ItemFluidContainer bucket , String uniqueId, String displayName) {
+	private void registerFluid(Block block,Fluid fluid, ContainerFluid bucket , String uniqueId, String displayName) {
 		GameRegistry.registerBlock(block, uniqueId);
+		FluidRegistry.registerFluid(fluid); 
 		LanguageRegistry.addName(block, displayName);
 		FluidContainerRegistry.registerFluidContainer(
 				new FluidContainerData(
@@ -285,6 +307,7 @@ public class IndustrialProcessing {
 					new ItemStack( Item.bucketEmpty )
 				)
 			);
+		//BucketHandler.INSTANCE.buckets.put(block, bucket);
 	}
 	
 	private void registerMachine(Block block, String uniqueId,

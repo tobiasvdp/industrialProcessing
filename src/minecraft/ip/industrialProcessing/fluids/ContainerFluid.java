@@ -1,10 +1,16 @@
 package ip.industrialProcessing.fluids;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumMovingObjectType;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.Event.Result;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
@@ -16,39 +22,20 @@ import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 import net.minecraftforge.fluids.FluidRegistry;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.items.ItemIP;
+import net.minecraftforge.event.Event.Result;
+import net.minecraftforge.event.Event;
+import net.minecraftforge.event.EventPriority;
 
-public class ItemFluidContainer extends ItemIP implements IFluidContainerItem{
+public class ContainerFluid extends ItemBucket implements IFluidContainerItem{
 	private int capacity;
-	public ItemFluidContainer(int itemId,Fluid fluid) {
-		super(itemId, "Container"+fluid.getUnlocalizedName());
+	private int isFull;
+	public ContainerFluid(int itemId,Fluid fluid, BlockFluid block) {
+		super(itemId,block.blockID);
+		setUnlocalizedName("Container"+fluid.getUnlocalizedName());
+		setMaxStackSize(64);
+		setCreativeTab(IndustrialProcessing.tabMachines);
 		this.capacity = 1000;
-	}
-	@ForgeSubscribe
-	public void onBucketFill( FillBucketEvent event )
-	{
-		ItemStack result = attemptFill( event.world, event.target );
-		
-		if ( result != null )
-		{
-			event.result = result;
-			event.setResult( Result.ALLOW );
-		}
-	}
-	private ItemStack attemptFill( World world, MovingObjectPosition p )
-	{
-		int id = world.getBlockId( p.blockX, p.blockY, p.blockZ );
-		
-		if ( id == IndustrialProcessing.blockFluidBaseDirtyWater.blockID )
-		{
-			if ( world.getBlockMetadata( p.blockX, p.blockY, p.blockZ ) == 0 ) // Check that it is a source block
-			{
-				world.setBlock( p.blockX, p.blockY, p.blockZ, 0 ); // Remove the fluid block
-				
-				return new ItemStack( IndustrialProcessing.bucketDirtyWater );
-			}
-		}
-		
-		return null;
+		BucketHandler.INSTANCE.buckets.put(block, this);
 	}
 	   @Override
 	    public FluidStack getFluid(ItemStack container)
