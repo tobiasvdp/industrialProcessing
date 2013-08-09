@@ -185,7 +185,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 		return this.fluidTanks.get(i);
 	}
 
-	protected abstract boolean isTankValidForFluid(int index, int fluidId);
+	protected abstract boolean isTankValidForFluid(int slot, int fluidId);
 
 	public FluidTankInfo getFluidTankInfoForSlot(int slot) {
 		MachineFluidTank tank = getFluidTankForSlot(slot);

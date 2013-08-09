@@ -1,5 +1,8 @@
 package ip.industrialProcessing;
 
+import ip.industrialProcessing.machines.classifier.ContainerClassifier;
+import ip.industrialProcessing.machines.classifier.GuiContainerClassifier;
+import ip.industrialProcessing.machines.classifier.TileEntityClassifier;
 import ip.industrialProcessing.machines.crusher.ContainerCrusher;
 import ip.industrialProcessing.machines.crusher.GuiCrusher;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
@@ -38,9 +41,12 @@ public class GuiHandler implements IGuiHandler {
 			return new ContainerMixer(player.inventory, (TileEntityMixer)entity); 
 		if(entity  instanceof TileEntityDryer)
 			return new ContainerDryer(player.inventory, (TileEntityDryer)entity); 
+		if(entity  instanceof TileEntityClassifier)
+			return new ContainerClassifier(player.inventory, (TileEntityClassifier)entity); 
 		
 		return null;
 	}
+	 
 
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world,
@@ -57,6 +63,8 @@ public class GuiHandler implements IGuiHandler {
 			return new GuiContainerMixer(player.inventory, (TileEntityMixer)entity);
 		if(entity  instanceof TileEntityDryer)
 			return new GuiContainerDryer(player.inventory, (TileEntityDryer)entity);
+		if(entity  instanceof TileEntityClassifier)
+			return new GuiContainerClassifier(player.inventory, (TileEntityClassifier)entity);
 		return null;
 	}
 
