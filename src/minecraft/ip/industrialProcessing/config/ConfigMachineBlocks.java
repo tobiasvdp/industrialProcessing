@@ -13,6 +13,7 @@ public class ConfigMachineBlocks {
 	private int mixerBlockID = 503;
 	private int machineFrameBlockID = 600; 
 	private int largeCrusherBlockID = 700;
+	private int getMultiMachineInputID = 601;
 
 	public static ConfigMachineBlocks getInstance() {
 		return instance;
@@ -42,6 +43,10 @@ public class ConfigMachineBlocks {
  
 	public static int getLargeCrusherBlockID() {
 		return getInstance().largeCrusherBlockID;
+	}
+
+	public static int getMultiMachineInputID() {
+		return getInstance().getMultiMachineInputID;
 	}
 
 }

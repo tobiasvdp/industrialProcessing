@@ -15,7 +15,7 @@ public class BlockMachineFrame extends BlockMultiMachineFrame {
 
 	public BlockMachineFrame() {
 
-		super(ConfigMachineBlocks.getMachineFrameBlockID(),
+		super(ConfigMachineBlocks.getMachineFrameBlockID(),"BlockMachineFrame",
 				IndustrialProcessing.tabMachines);
 
 	} 

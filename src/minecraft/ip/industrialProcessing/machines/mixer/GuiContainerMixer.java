@@ -10,6 +10,7 @@ public class GuiContainerMixer extends GuiContainerFluidMachine {
 	public GuiContainerMixer(InventoryPlayer inventoryPlayer,
 			TileEntityMixer tileEntity) {
 		super(inventoryPlayer, tileEntity, new ContainerMixer(inventoryPlayer, tileEntity), "Mixer", "textures/gui/Mixer.png"); 
+		setProgressBarLocation(78,33,24,17);
 	}
 
 	
