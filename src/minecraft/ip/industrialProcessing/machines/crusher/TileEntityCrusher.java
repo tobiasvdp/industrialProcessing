@@ -23,7 +23,7 @@ public class TileEntityCrusher extends TileEntityMachine {
 	private int speed;
 	public EntityPlayer placedBy;
 
-	public TileEntityCrusher(World world) { 
+	public TileEntityCrusher() { 
 		this.addStack(null, ForgeDirection.UP, true, false);
 		this.addStack(null, new ForgeDirection[] { ForgeDirection.SOUTH,
 				ForgeDirection.NORTH, ForgeDirection.EAST, ForgeDirection.WEST,

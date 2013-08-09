@@ -1,12 +1,15 @@
 package ip.industrialProcessing.machines.crusher;
 
 import java.io.Console;
+import java.util.Random;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
+import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.machines.BlockMachine;
+import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.utils.Position;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -22,61 +25,37 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
-public class BlockCrusher extends BlockMachine {
+public class BlockCrusher extends BlockMachineRendered {
 
-	public BlockCrusher() {
-		super(ConfigMachineBlocks.getCrusherBlockID(), Material.iron, 1F,
-				Block.soundMetalFootstep, "Ore Crusher",
-				IndustrialProcessing.tabMachines);
-		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "crusher_top");
+    public BlockCrusher() {
+	super(ConfigMachineBlocks.getCrusherBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Ore Crusher", IndustrialProcessing.tabMachines);
+    }
+
+    @Override
+    public TileEntity createNewTileEntity(World world) {
+	return new TileEntityCrusher();
+    }
+
+    @Override
+    public int getRenderType() {
+	return ConfigRenderers.getRendererCrusherId();
+    }
+
+    Random rnd = new Random();
+
+    @Override
+    public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random) {
+	super.randomDisplayTick(par1World, par2, par3, par4, par5Random);
+	TileEntityCrusher crusher = (TileEntityCrusher) par1World.getBlockTileEntity(par2, par3, par4);
+	if (crusher.getWorker().isWorking()) {
+	    for(int i = 0; i < 5; i++){
+	    int x = 0;
+	    int z = 0;
+	    float offsetX = (2 * rnd.nextFloat() - 1f) * 0.25f;
+	    float offsetZ = (2 * rnd.nextFloat() - 1f) * 0.25f;
+	    par1World.spawnParticle("smoke", par2 + 0.5f + offsetX, par3 + 0.5f + offsetZ, par4 + 0.5f, x, -0.001f, z);
+	    }
 	}
-
-	@Override
-	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityCrusher(world);
-	}
-
-	@SideOnly(Side.CLIENT)
-	public Icon topIcon;
-	public Icon bottomIcon;
-	public Icon sideIcon; 
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister par1IconRegister) {
-		topIcon = par1IconRegister
-				.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX
-						+ "crusher_top");
-		bottomIcon = par1IconRegister
-				.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX
-						+ "crusher_bottom");
-		sideIcon = par1IconRegister
-				.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX
-						+ "crusher_side"); 
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public Icon getIcon(int side, int meta) {
-		if (side == ForgeDirection.UP.ordinal())
-			return topIcon;
-		else if (side == ForgeDirection.DOWN.ordinal())
-			return bottomIcon;
-		else
-			return sideIcon;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public Icon getBlockTexture(IBlockAccess par1iBlockAccess, int par2,
-			int par3, int par4, int side) {
- 
-		if (side == ForgeDirection.UP.ordinal())
-			return topIcon;
-		else if (side == ForgeDirection.DOWN.ordinal())
-			return bottomIcon;
-		else
-			return  sideIcon;
-	}
+    }
 
 }
