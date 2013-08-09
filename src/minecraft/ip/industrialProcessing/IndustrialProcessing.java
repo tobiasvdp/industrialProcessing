@@ -14,10 +14,10 @@ import ip.industrialProcessing.machines.mixer.BlockMixer;
 import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import ip.industrialProcessing.machines.multiblock.MachineFrameState;
 import ip.industrialProcessing.machines.multiblock.TileEntityMultiMachineFrame;
-import ip.industrialProcessing.machines.multiblock.buildingBlocks.BlockMultiMachineInput;
-import ip.industrialProcessing.machines.multiblock.buildingBlocks.TileEntityMultiMachineInput;
 import ip.industrialProcessing.machines.multiblock.crusher.BlockLargeCrusher;
 import ip.industrialProcessing.machines.multiblock.crusher.TileEntityLargeCrusher;
+import ip.industrialProcessing.machines.multiblock.inventory.BlockMultiMachineInventory;
+import ip.industrialProcessing.machines.multiblock.inventory.TileEntityMultiMachineInventory;
 import ip.industrialProcessing.machines.multiblock.machineFrame.BlockMachineFrame;
 import ip.industrialProcessing.machines.multiblock.machineFrame.TileEntityMachineFrame;
 import net.minecraft.block.Block;
@@ -140,7 +140,7 @@ public class IndustrialProcessing {
 	public final static BlockMixer blockMixer = new BlockMixer();
 
 	// create Multiblock Machines
-	public final static BlockMultiMachineInput blockMultiMachineInput = new BlockMultiMachineInput();
+	public final static BlockMultiMachineInventory blockMultiMachineInventory = new BlockMultiMachineInventory();
 	
 	public final static BlockMachineFrame blockMachineFrame = new BlockMachineFrame();
 	public final static BlockLargeCrusher blockLargeCrusher = new BlockLargeCrusher();
@@ -188,8 +188,8 @@ public class IndustrialProcessing {
 		registerOre(blockTinOre, "IP.World.TinOre", "Tin Ore", "copper");
 		
 		//register multistructures
-		registerMachine(blockMultiMachineInput, "MutiBlockInput",
-				"Multiblock Input", TileEntityMultiMachineInput.class);
+		registerMachine(blockMultiMachineInventory, "MultiBlockInventory",
+				"Multiblock hatch", TileEntityMultiMachineInventory.class);
 		registerMachine(blockMachineFrame, "MultiBlockFrame",
 				"Multiblock Frame", TileEntityMachineFrame.class);
 

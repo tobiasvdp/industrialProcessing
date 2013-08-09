@@ -1,4 +1,4 @@
-package ip.industrialProcessing.machines.multiblock.buildingBlocks;
+package ip.industrialProcessing.machines.multiblock.inventory;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
@@ -12,20 +12,20 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
-public class BlockMultiMachineInput extends BlockMultiMachineFrame {
+public class BlockMultiMachineInventory extends BlockMultiMachineFrame {
 
 	private Icon completedIcon;
 	private Icon connectedIcon;
 	private Icon disconnectedIcon;
 	
-	public BlockMultiMachineInput() {
-		super(ConfigMachineBlocks.getMultiMachineInputID(),"BlockMultiMachineInput",
+	public BlockMultiMachineInventory() {
+		super(ConfigMachineBlocks.getMultiMachineInputID(),"BlockMultiMachineInventory",
 				IndustrialProcessing.tabMachines);
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityMultiMachineInput();
+		return new TileEntityMultiMachineInventory();
 	}
 
 	@Override
