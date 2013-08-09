@@ -4,6 +4,7 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.utils.Position;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -19,9 +20,12 @@ public abstract class BlockMultiMachineFrame extends BlockContainer {
 	private Icon connectedIcon;
 	private Icon disconnectedIcon;
 
-	public BlockMultiMachineFrame(int blockId, CreativeTabs tab) {
-		super(blockId, Material.iron);
-		setCreativeTab(tab);
+	public BlockMultiMachineFrame(int par1, String name, CreativeTabs tab) {
+		super(par1, Material.iron);
+		setHardness(1F);
+		setStepSound(Block.soundMetalFootstep);
+		setUnlocalizedName(name);
+		setCreativeTab(tab); 
 	}
 
 	public Icon getBlockTexture(IBlockAccess par1iBlockAccess, int par2,

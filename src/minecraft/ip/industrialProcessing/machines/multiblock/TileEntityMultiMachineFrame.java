@@ -18,7 +18,7 @@ public abstract class TileEntityMultiMachineFrame extends TileEntity implements
 	private int coreY;
 	private int coreZ;
 	private boolean hasCore;
-	private MachineFrameState state;
+	protected MachineFrameState state;
 
 	@Override
 	public int getCoreX() {

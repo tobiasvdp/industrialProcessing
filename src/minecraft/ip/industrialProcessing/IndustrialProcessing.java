@@ -16,6 +16,8 @@ import ip.industrialProcessing.machines.mixer.BlockMixer;
 import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import ip.industrialProcessing.machines.multiblock.MachineFrameState;
 import ip.industrialProcessing.machines.multiblock.TileEntityMultiMachineFrame;
+import ip.industrialProcessing.machines.multiblock.buildingBlocks.BlockMultiMachineInput;
+import ip.industrialProcessing.machines.multiblock.buildingBlocks.TileEntityMultiMachineInput;
 import ip.industrialProcessing.machines.multiblock.crusher.BlockLargeCrusher;
 import ip.industrialProcessing.machines.multiblock.crusher.TileEntityLargeCrusher;
 import ip.industrialProcessing.machines.multiblock.machineFrame.BlockMachineFrame;
@@ -141,7 +143,8 @@ public class IndustrialProcessing {
 	public final static BlockDryer blockDryer = new BlockDryer();
 
 	// create Multiblock Machines
-
+	public final static BlockMultiMachineInput blockMultiMachineInput = new BlockMultiMachineInput();
+	
 	public final static BlockMachineFrame blockMachineFrame = new BlockMachineFrame();
 	public final static BlockLargeCrusher blockLargeCrusher = new BlockLargeCrusher();
 
@@ -181,14 +184,18 @@ public class IndustrialProcessing {
 				TileEntityMixer.class);
 		registerMachine(blockDryer, "IP.Machine.Dryer", "Dryer", TileEntityDryer.class);
 
-		registerMachine(blockMachineFrame, "IP.Machine.Multi.Frame",
-				"Machine Frame", TileEntityMachineFrame.class);
 		registerMachine(blockLargeCrusher, "IP.Machine.Multi.Crusher",
 				"Large Crusher", TileEntityLargeCrusher.class);
 
 		registerOre(blockCopperOre, "IP.World.CopperOre", "Copper Ore",
 				"copper");
 		registerOre(blockTinOre, "IP.World.TinOre", "Tin Ore", "copper");
+		
+		//register multistructures
+		registerMachine(blockMultiMachineInput, "MutiBlockInput",
+				"Multiblock Input", TileEntityMultiMachineInput.class);
+		registerMachine(blockMachineFrame, "MultiBlockFrame",
+				"Multiblock Frame", TileEntityMachineFrame.class);
 
 		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
 
