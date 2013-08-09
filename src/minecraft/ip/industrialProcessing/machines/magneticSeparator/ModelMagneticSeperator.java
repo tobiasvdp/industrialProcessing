@@ -109,7 +109,7 @@ public class ModelMagneticSeperator extends Model {
 	      Shape2.setTextureSize(64, 32);
 	      Shape2.mirror = true;
 	      setRotation(Shape2, 0F, 0F, 0F);
-	      Shape3 = new ModelRenderer(this, 48, 0);
+	      Shape3 = new ModelRenderer(this, 48, 3);
 	      Shape3.addBox(0F, 0F, 0F, 6, 1, 2);
 	      Shape3.setRotationPoint(-4F, 19F, -1F);
 	      Shape3.setTextureSize(64, 32);
@@ -169,7 +169,7 @@ public class ModelMagneticSeperator extends Model {
 	      Shape16.setTextureSize(64, 32);
 	      Shape16.mirror = true;
 	      setRotation(Shape16, 0F, 0F, 0F);
-	      Shape17 = new ModelRenderer(this, 11, 0);
+	      Shape17 = new ModelRenderer(this, 11, 1);
 	      Shape17.addBox(0F, 0F, 0F, 12, 2, 13);
 	      Shape17.setRotationPoint(-8F, 9F, -7F);
 	      Shape17.setTextureSize(64, 32);
