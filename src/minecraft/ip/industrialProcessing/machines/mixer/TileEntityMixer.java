@@ -85,7 +85,7 @@ public class TileEntityMixer extends TileEntityFluidMachine {
 	}
 
 	@Override
-	protected boolean isTankValidForLiquid(int slot, int fluidId) {
+	protected boolean isTankValidForFluid(int slot, int fluidId) {
 		if (slot == 0)
 			return fluidId == FluidRegistry.WATER.getID();
 		return false;

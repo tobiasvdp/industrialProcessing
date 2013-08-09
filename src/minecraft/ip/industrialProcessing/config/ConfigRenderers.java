@@ -2,6 +2,7 @@ package ip.industrialProcessing.config;
 
 public class ConfigRenderers {
 
+	private int rendererMixerID;
 	private int rendererFilterID;
 	private int rendererMagneticSeperatorID;
 
@@ -10,6 +11,8 @@ public class ConfigRenderers {
 	
 	public static int getRendererMagneticSeperatorId() {return getInstance().rendererMagneticSeperatorID;}
 	public static void setRendererMagneticSeperatorId(int value) {getInstance().rendererMagneticSeperatorID = value;}
+	public static int getRendererMixerId() {return getInstance().rendererMixerID;}
+	public static void setRendererMixerId(int value) {getInstance().rendererMixerID = value;}
 
 	private ConfigRenderers() {
 
@@ -19,5 +22,5 @@ public class ConfigRenderers {
 
 	public static ConfigRenderers getInstance() {
 		return instance;
-	}
+	} 
 }

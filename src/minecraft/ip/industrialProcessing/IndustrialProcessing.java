@@ -6,6 +6,8 @@ import ip.industrialProcessing.config.ConfigItems;
 import ip.industrialProcessing.items.*;
 import ip.industrialProcessing.machines.crusher.BlockCrusher;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
+import ip.industrialProcessing.machines.dryer.BlockDryer;
+import ip.industrialProcessing.machines.dryer.TileEntityDryer;
 import ip.industrialProcessing.machines.filter.BlockFilter;
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
 import ip.industrialProcessing.machines.magneticSeparator.BlockMagneticSeparator;
@@ -138,6 +140,7 @@ public class IndustrialProcessing {
 	public final static BlockFilter blockFilter = new BlockFilter();
 	public final static BlockMagneticSeparator blockMageneticSeparator = new BlockMagneticSeparator();
 	public final static BlockMixer blockMixer = new BlockMixer();
+	public final static BlockDryer blockDryer = new BlockDryer();
 
 	// create Multiblock Machines
 	public final static BlockMultiMachineInventory blockMultiMachineInventory = new BlockMultiMachineInventory();
@@ -179,6 +182,7 @@ public class IndustrialProcessing {
 				"Magnetic Separator", TileEntityMagneticSeparator.class);
 		registerMachine(blockMixer, "IP.Machine.Mixer", "Mixer",
 				TileEntityMixer.class);
+		registerMachine(blockDryer, "IP.Machine.Dryer", "Dryer", TileEntityDryer.class);
 
 		registerMachine(blockLargeCrusher, "IP.Machine.Multi.Crusher",
 				"Large Crusher", TileEntityLargeCrusher.class);

@@ -39,9 +39,7 @@ import ip.industrialProcessing.utils.working.ServerWorker;
 public class TileEntityFilter extends TileEntityMachine {
 
 	public static RecipesFilter recipes = new RecipesFilter();
-
-	private RecipeWorker recipeWorker;
-
+ 
 	public TileEntityFilter() {   
 
 		this.addStack(null, ForgeDirection.UP, true, false);
