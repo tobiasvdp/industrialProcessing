@@ -225,13 +225,13 @@ public class IndustrialProcessing {
 		registerOre(blockTinOre, "IP.World.TinOre", "Tin Ore", "copper");
 		
 		//register fluid
-		registerFluid(blockFluidDirtyWater,itemFluidDirtyWater,bucketDirtyWater, "blockFluid", "Dirty water");
+		registerFluid(blockFluidDirtyWater,itemFluidDirtyWater,bucketDirtyWater, "Dirty water");
 		LanguageRegistry.addName(bucketDirtyWater, "Dirty water Bucket");
-		registerFluid(blockFluidOreSludgeIron,itemFluidOreSludgeIron,bucketOreSludgeIron, "blockFluid", "Iron ore sludge");
+		registerFluid(blockFluidOreSludgeIron,itemFluidOreSludgeIron,bucketOreSludgeIron, "Iron ore sludge");
 		LanguageRegistry.addName(bucketOreSludgeIron, "Iron sludge Bucket");
-		registerFluid(blockFluidOreSludgeCopper,itemFluidOreSludgeCopper,bucketOreSludgeCopper, "blockFluid", "Copper ore sludge");
+		registerFluid(blockFluidOreSludgeCopper,itemFluidOreSludgeCopper,bucketOreSludgeCopper, "Copper ore sludge");
 		LanguageRegistry.addName(bucketOreSludgeCopper, "Copper sludge Bucket");
-		registerFluid(blockFluidOreSludgeTin,itemFluidOreSludgeTin,bucketOreSludgeTin, "blockFluid", "Tin ore sludge");
+		registerFluid(blockFluidOreSludgeTin,itemFluidOreSludgeTin,bucketOreSludgeTin, "Tin ore sludge");
 		LanguageRegistry.addName(bucketOreSludgeTin, "Tin sludge Bucket");
 		
 		//register multistructures
@@ -296,9 +296,8 @@ public class IndustrialProcessing {
 		OreDictionary.registerOre(oreDictionaryKey, block);
 	}
 
-	private void registerFluid(Block block,Fluid fluid, ContainerFluid bucket , String uniqueId, String displayName) {
-		GameRegistry.registerBlock(block, uniqueId);
-		FluidRegistry.registerFluid(fluid); 
+	private void registerFluid(Block block,Fluid fluid, ContainerFluid bucket , String displayName) { 
+		GameRegistry.registerBlock(block, "BlockFluid"+fluid.getName());
 		LanguageRegistry.addName(block, displayName);
 		FluidContainerRegistry.registerFluidContainer(
 				new FluidContainerData(

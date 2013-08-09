@@ -9,6 +9,7 @@ public class ItemFluid extends Fluid{
 		super(fluidName);
 		setDensity( density ); 
 		setViscosity( viscosity );
+		FluidRegistry.registerFluid(this);
 	}
 
 
