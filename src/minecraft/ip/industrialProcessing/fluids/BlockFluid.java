@@ -1,9 +1,13 @@
 package ip.industrialProcessing.fluids;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import ip.industrialProcessing.IndustrialProcessing;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -18,14 +22,37 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;
 
-public class BlockFluid extends BlockFluidClassic implements IFluidBlock{
+public class BlockFluid extends BlockFluidClassic{
 
+    @SideOnly(Side.CLIENT)
+    protected Icon[] theIcon;
+	
 	public BlockFluid(int id, Fluid fluid, Material material, CreativeTabs tab) {
 		super(id, fluid, material);
 		setUnlocalizedName("Block"+fluid.getUnlocalizedName());
 		setCreativeTab(tab);
 		this.disableStats();
 	}
+	
+    @SideOnly(Side.CLIENT)
+    public int getRenderBlockPass()
+    {
+        return this.blockMaterial == Material.water ? 1 : 0;
+    }
+	
+	@Override
+    @SideOnly(Side.CLIENT)
+    public Icon getIcon(int par1, int par2)
+    {
+        return par1 != 0 && par1 != 1 ? this.theIcon[1] : this.theIcon[0];
+    }
+	
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IconRegister par1IconRegister)
+    {
+    	this.theIcon = new Icon[] {par1IconRegister.registerIcon("water_still"), par1IconRegister.registerIcon("water_flow")};
+    	this.getFluid().setIcons(theIcon[0], theIcon[1]);
+    }
 
 	@Override
 	public FluidStack drain(World world, int x, int y, int z, boolean doDrain) {

@@ -32,7 +32,7 @@ public class ContainerFluid extends ItemBucket implements IFluidContainerItem{
 	public ContainerFluid(int itemId,Fluid fluid, BlockFluid block) {
 		super(itemId,block.blockID);
 		setUnlocalizedName("Container"+fluid.getUnlocalizedName());
-		setMaxStackSize(64);
+		setMaxStackSize(1);
 		setCreativeTab(IndustrialProcessing.tabMachines);
 		this.capacity = 1000;
 		BucketHandler.INSTANCE.buckets.put(block, this);

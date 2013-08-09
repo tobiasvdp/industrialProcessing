@@ -20,18 +20,13 @@ public class RecipesMixer extends RecipesMachine {
 
 	private void addDefaultRecipes() {
 
-		Recipe lava = new Recipe();
-		lava.workRequired = 30;
-		lava.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0,
-				FluidRegistry.WATER.getID(),
-				RecipeSlotType.TANK, 1000) ,
-				new RecipeInputSlot(0,
-				Item.blazePowder.itemID,
-				RecipeSlotType.INVENTORY, 1)};
-		lava.outputs = new RecipeOutputSlot[] {
-				new RecipeOutputSlot(1,
-						FluidRegistry.LAVA.getID(),
-						RecipeSlotType.TANK, 0, 1000, 0.5)  };
-		addRecipe(lava);
+		Recipe ironSludge= new Recipe();
+		ironSludge.workRequired = 30;
+		ironSludge.inputs = new RecipeInputSlot[] { 
+				new RecipeInputSlot(0,FluidRegistry.WATER.getID(),RecipeSlotType.TANK, 1000) ,
+				new RecipeInputSlot(0,IndustrialProcessing.itemIronSmallChunks.itemID,RecipeSlotType.INVENTORY, 1)};
+		ironSludge.outputs = new RecipeOutputSlot[] {
+				new RecipeOutputSlot(1,FluidRegistry.getFluidID(IndustrialProcessing.itemFluidOreSludgeIron.getName()),RecipeSlotType.TANK, 0, 1000, 0.5)  };
+		addRecipe(ironSludge);
 	}
 }
