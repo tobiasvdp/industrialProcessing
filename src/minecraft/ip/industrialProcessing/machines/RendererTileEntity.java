@@ -6,6 +6,7 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.machines.crusher.ModelCrusher;
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
+import ip.industrialProcessing.utils.working.IWorker;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -60,8 +61,17 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 		Tessellator tessellator = Tessellator.instance;
 		// This will make your block brightness dependent from surroundings
 		// lighting.
+		float animation = 0;
 		if (world != null) {
 
+			if(tl instanceof TileEntityMachine)
+			{
+				TileEntityMachine machine = (TileEntityMachine)tl;
+				IWorker worker = machine.getWorker();
+				if(worker != null)
+					animation = worker.getScaledProgress(100)/100f;
+			}
+			
 			float f = block.getBlockBrightness(world, i, j, k);
 			int l = world.getLightBrightnessForSkyBlocks(i, j, k, 0);
 			int l1 = l % 65536;
@@ -92,7 +102,7 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 		/*
 		 * Place your rendering code here.
 		 */
-		this.model.renderModel(0.0625F);
+		this.model.renderModelAnimated(0.0625F, animation);
 
 		GL11.glPopMatrix();
 	}
