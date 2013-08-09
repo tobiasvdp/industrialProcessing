@@ -11,6 +11,7 @@ public class ConfigMachineBlocks {
 	private int filterBlockId = 501;
 	private int magneticSeparatorBlockID = 502;
 	private int mixerBlockID = 503;
+	private int dryerBlockID = 504;
 	private int machineFrameBlockID = 600; 
 	private int largeCrusherBlockID = 700;
 
@@ -42,6 +43,10 @@ public class ConfigMachineBlocks {
  
 	public static int getLargeCrusherBlockID() {
 		return getInstance().largeCrusherBlockID;
+	}
+
+	public static int getDryerBlockID() {
+		return getInstance().dryerBlockID;
 	}
 
 }

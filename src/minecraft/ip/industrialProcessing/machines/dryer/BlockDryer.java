@@ -1,4 +1,4 @@
-package ip.industrialProcessing.machines.mixer;
+package ip.industrialProcessing.machines.dryer;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.StepSound;
@@ -9,18 +9,16 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.machines.BlockMachine;
-import ip.industrialProcessing.machines.BlockMachineRendered;
 
-public class BlockMixer extends BlockMachineRendered {
+public class BlockDryer extends BlockMachine {
 
-	public BlockMixer() {
-		super(ConfigMachineBlocks.getMixerBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Mixer", IndustrialProcessing.tabMachines);
+	public BlockDryer() {
+		super(ConfigMachineBlocks.getDryerBlockID(), Material.iron, 1f, Block.soundMetalFootstep, "Dryer", IndustrialProcessing.tabMachines); 
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world) {
-		 
-		return new TileEntityMixer();
+	public TileEntity createNewTileEntity(World world) { 
+		return new TileEntityDryer();
 	}
 
 }

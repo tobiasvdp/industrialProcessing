@@ -115,7 +115,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 			FluidStack fluid = FluidContainerRegistry
 					.getFluidForFilledItem(inputStack);
 			if (fluid != null) {
-				if (isTankValidForLiquid(tankSlot, fluid.fluidID)) {
+				if (isTankValidForFluid(tankSlot, fluid.fluidID)) {
 
 					ItemStack emptyContainer = getEmptyContainerFromContainer(inputStack);
 					if (emptyContainer != null) {
@@ -150,7 +150,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 				.getFluidForFilledItem(inputStack);
 		if (fluid == null)
 			return false;
-		return isTankValidForLiquid(tankslot, fluid.fluidID);
+		return isTankValidForFluid(tankslot, fluid.fluidID);
 	}
 
 	protected void addTank(int capacity, ForgeDirection side, boolean input,
@@ -185,7 +185,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 		return this.fluidTanks.get(i);
 	}
 
-	protected abstract boolean isTankValidForLiquid(int index, int fluidId);
+	protected abstract boolean isTankValidForFluid(int index, int fluidId);
 
 	public FluidTankInfo getFluidTankInfoForSlot(int slot) {
 		MachineFluidTank tank = getFluidTankForSlot(slot);
@@ -206,7 +206,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 		int[] sideSlots = fluidTankSideslots[from.ordinal()];
 		for (int i = 0; i < sideSlots.length; i++) {
 			int slotIndex = sideSlots[i];
-			if (isTankValidForLiquid(slotIndex, resource.getID())) {
+			if (isTankValidForFluid(slotIndex, resource.getID())) {
 				MachineFluidTank tank = this.getTankInSlot(slotIndex);
 				if (tank.input && tank.getFluidAmount() > tank.getCapacity()) {
 					FluidStack tankFluid = tank.getFluid();
@@ -227,7 +227,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 		int[] sideSlots = fluidTankSideslots[from.ordinal()];
 		for (int i = 0; i < sideSlots.length; i++) {
 			int slotIndex = sideSlots[i];
-			if (isTankValidForLiquid(slotIndex, resource.fluidID)) {
+			if (isTankValidForFluid(slotIndex, resource.fluidID)) {
 				MachineFluidTank tank = this.getTankInSlot(slotIndex);
 				if (tank.input && tank.getFluidAmount() > tank.getCapacity()) {
 					FluidStack tankFluid = tank.getFluid();
@@ -247,7 +247,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 		int[] sideSlots = fluidTankSideslots[from.ordinal()];
 		for (int i = 0; i < sideSlots.length; i++) {
 			int slotIndex = sideSlots[i];
-			if (isTankValidForLiquid(slotIndex, resource.getID())) {
+			if (isTankValidForFluid(slotIndex, resource.getID())) {
 				MachineFluidTank tank = this.getTankInSlot(slotIndex);
 				if (tank.output && tank.getFluidAmount() > 0) {
 					FluidStack tankFluid = tank.getFluid();
@@ -268,7 +268,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 		int[] sideSlots = fluidTankSideslots[from.ordinal()];
 		for (int i = 0; i < sideSlots.length; i++) {
 			int slotIndex = sideSlots[i];
-			if (isTankValidForLiquid(slotIndex, resource.fluidID)) {
+			if (isTankValidForFluid(slotIndex, resource.fluidID)) {
 				MachineFluidTank tank = this.getTankInSlot(slotIndex);
 				if (tank.output && tank.getFluidAmount() > 0) {
 					FluidStack tankFluid = tank.getFluid();

@@ -3,6 +3,9 @@ package ip.industrialProcessing;
 import ip.industrialProcessing.machines.crusher.ContainerCrusher;
 import ip.industrialProcessing.machines.crusher.GuiCrusher;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
+import ip.industrialProcessing.machines.dryer.ContainerDryer;
+import ip.industrialProcessing.machines.dryer.GuiContainerDryer;
+import ip.industrialProcessing.machines.dryer.TileEntityDryer;
 import ip.industrialProcessing.machines.filter.ContainerFilter;
 import ip.industrialProcessing.machines.filter.GuiContainerFilter;
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
@@ -33,6 +36,8 @@ public class GuiHandler implements IGuiHandler {
 			return new ContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator)entity); 
 		if(entity  instanceof TileEntityMixer)
 			return new ContainerMixer(player.inventory, (TileEntityMixer)entity); 
+		if(entity  instanceof TileEntityDryer)
+			return new ContainerDryer(player.inventory, (TileEntityDryer)entity); 
 		
 		return null;
 	}
@@ -50,6 +55,8 @@ public class GuiHandler implements IGuiHandler {
 			return new GuiContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator)entity);
 		if(entity  instanceof TileEntityMixer)
 			return new GuiContainerMixer(player.inventory, (TileEntityMixer)entity);
+		if(entity  instanceof TileEntityDryer)
+			return new GuiContainerDryer(player.inventory, (TileEntityDryer)entity);
 		return null;
 	}
 
