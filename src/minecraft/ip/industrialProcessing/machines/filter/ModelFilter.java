@@ -33,8 +33,7 @@ public class ModelFilter extends Model {
 	ModelRenderer Shape21;
 	ModelRenderer Shape22;
 	ModelRenderer Shape23;
-	ModelRenderer Shape24;
-	private Entity entity;
+	ModelRenderer Shape24; 
 
 	public ModelFilter() {
 		textureWidth = 64;
@@ -195,7 +194,7 @@ public class ModelFilter extends Model {
 	public void render(Entity entity, float f, float f1, float f2, float f3,
 			float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
-		setRotationAngles(f, f1, f2, f3, f4, f5);
+		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		plateShape3.render(f5);
 		plateShape4.render(f5);
 		plateShape2.render(f5);
@@ -219,8 +218,7 @@ public class ModelFilter extends Model {
 		Shape21.render(f5);
 		Shape22.render(f5);
 		Shape23.render(f5);
-		Shape24.render(f5);
-		this.entity = entity;
+		Shape24.render(f5); 
 	}
 
 	@Override
@@ -313,10 +311,6 @@ public class ModelFilter extends Model {
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
-
-	public void setRotationAngles(float f, float f1, float f2, float f3,
-			float f4, float f5) {
-		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-	}
+ 
 
 }

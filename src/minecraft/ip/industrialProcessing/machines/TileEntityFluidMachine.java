@@ -427,4 +427,16 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine
 		this.onInventoryChanged();
 		super.notifyBlockChange();
 	}
+	
+	public FluidTankInfo getTankInfoForSlot(int slot)
+	{
+		 MachineFluidTank tank = this.getTankInSlot(slot);
+		 if(tank != null) return tank.getInfo();
+		 return null;
+	}
+	
+	public int getTankCount()
+	{
+		return this.fluidTanks.size();
+	}
 }

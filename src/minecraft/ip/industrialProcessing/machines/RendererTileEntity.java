@@ -15,25 +15,27 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTankInfo;
 
 public class RendererTileEntity extends TileEntitySpecialRenderer {
 	private Model model;
 	private ResourceLocation texture = new ResourceLocation(
-			IndustrialProcessing.TEXTURE_DOMAIN,
-			"textures/render/");
+			IndustrialProcessing.TEXTURE_DOMAIN, "textures/render/");
 	private Block block;
 	private String name;
-	
-	public RendererTileEntity(Block block,String name,Model model) {
+
+	public RendererTileEntity(Block block, String name, Model model) {
 		this.block = block;
 		this.name = name;
-		texture = new ResourceLocation(
-				IndustrialProcessing.TEXTURE_DOMAIN,
-				"textures/render/"+name+".png");
+		texture = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN,
+				"textures/render/" + name + ".png");
 		this.model = model;
 	}
 
@@ -50,8 +52,7 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 		 * coordinates] - [player coordinates (camera coordinates)]
 		 */
 		renderBlockYour(tileEntity, tileEntity.worldObj, tileEntity.xCoord,
-				tileEntity.yCoord, tileEntity.zCoord,
-				block);
+				tileEntity.yCoord, tileEntity.zCoord, block);
 		GL11.glPopMatrix();
 
 	}
@@ -64,14 +65,13 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 		float animation = 0;
 		if (world != null) {
 
-			if(tl instanceof TileEntityMachine)
-			{
-				TileEntityMachine machine = (TileEntityMachine)tl;
+			if (tl instanceof TileEntityMachine) {
+				TileEntityMachine machine = (TileEntityMachine) tl;
 				IWorker worker = machine.getWorker();
-				if(worker != null)
-					animation = worker.getScaledProgress(100)/100f;
+				if (worker != null)
+					animation = worker.getScaledProgress(100) / 100f;
 			}
-			
+
 			float f = block.getBlockBrightness(world, i, j, k);
 			int l = world.getLightBrightnessForSkyBlocks(i, j, k, 0);
 			int l1 = l % 65536;
@@ -89,7 +89,7 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 			GL11.glScalef(1f, 1f, 1f);
 			ResourceLocation tex;
 			tex = texture;
-			func_110628_a(tex);
+			func_110628_a(tex); 
 		} else {
 			GL11.glPushMatrix();
 			GL11.glTranslatef(0.3F, 3.7F, 0.5F);
@@ -103,6 +103,21 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 		 * Place your rendering code here.
 		 */
 		this.model.renderModelAnimated(0.0625F, animation);
+
+		if (tl instanceof TileEntityFluidMachine) {
+			TileEntityFluidMachine machine = (TileEntityFluidMachine) tl;
+			this.func_110628_a(TextureMap.field_110575_b);	
+			for (int t = 0; t < machine.getTankCount(); t++) {
+				FluidTankInfo info = machine.getTankInfoForSlot(t);
+				if(info != null)
+				{
+					if(info.fluid != null){ 
+						Icon icon = info.fluid.getFluid().getStillIcon();
+						this.model.renderLiquid(0.0625f, t, info.fluid.amount / (float)info.capacity, icon);
+					}
+				}
+			}
+		}
 
 		GL11.glPopMatrix();
 	}
