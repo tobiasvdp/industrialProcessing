@@ -19,7 +19,7 @@ public class BlockMultiMachineInventory extends BlockMultiMachineFrame {
 	private Icon disconnectedIcon;
 	
 	public BlockMultiMachineInventory() {
-		super(ConfigMachineBlocks.getMultiMachineInputID(),"BlockMultiMachineInventory",
+		super(ConfigMachineBlocks.getMultiMachineInputBlockID(),"BlockMultiMachineInventory",
 				IndustrialProcessing.tabMachines);
 	}
 

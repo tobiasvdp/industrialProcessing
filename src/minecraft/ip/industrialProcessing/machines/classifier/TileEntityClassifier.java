@@ -1,4 +1,4 @@
-package ip.industrialProcessing.machines.dryer;
+package ip.industrialProcessing.machines.classifier;
 
 import java.util.Iterator;
 
@@ -6,14 +6,17 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.machines.TileEntityFluidMachine;
 import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.recipes.Recipe;
 
-public class TileEntityDryer extends TileEntityFluidMachine {
+public class TileEntityClassifier extends TileEntityFluidMachine {
 
-    public TileEntityDryer() {
-	addStack(null, ForgeDirection.UP, true, false); // Mixing ingredient
+    public TileEntityClassifier()
+    {
+	addStack(null, ForgeDirection.UP, true, false); // Input Solid ingredient
+	addStack(null, ForgeDirection.DOWN, false, true); // Output Solid ingredient
 
 	ForgeDirection[] nodirections = new ForgeDirection[0];
 	// buckets!
@@ -23,20 +26,12 @@ public class TileEntityDryer extends TileEntityFluidMachine {
 	addStack(null, nodirections, false, true); // Liquid Output Full Output
 
 	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, new ForgeDirection[] { ForgeDirection.NORTH, ForgeDirection.SOUTH, ForgeDirection.WEST, ForgeDirection.EAST }, true, false);
-	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, ForgeDirection.DOWN, false, true);
+	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, new ForgeDirection[] { ForgeDirection.NORTH, ForgeDirection.SOUTH, ForgeDirection.WEST, ForgeDirection.EAST }, false, true);
     }
-
+    
+    private static RecipesClassifier recipes = new RecipesClassifier();
     @Override
-    public void updateEntity() {
-	addBucketToTank(1, 2, 0);
-	getBucketFromTank(3, 4, 1);
-	super.updateEntity();
-    };
-
-    private static RecipesDryer recipes = new RecipesDryer();
-
-    @Override
-    public Iterator<Recipe> iterateRecipes() {
+    public Iterator<Recipe> iterateRecipes() { 
 	return recipes.iterator();
     }
 
@@ -47,10 +42,10 @@ public class TileEntityDryer extends TileEntityFluidMachine {
 		       // containers
 	    return recipes.isValidInput(slot, itemID);
 
-	if (slot == 3) // fluid output container input slot, only empty container
+	if (slot == 4) // fluid output container input slot, only empty container
 	    return FluidContainerRegistry.isEmptyContainer(new ItemStack(itemID, 1, 0));
 
-	if (slot == 1) { // fluid input container input slot, only filled containers with correct fluid
+	if (slot == 2) { // fluid input container input slot, only filled containers with correct fluid
 	    FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(new ItemStack(itemID, 1, 0));
 	    if (fluid == null)
 		return false;

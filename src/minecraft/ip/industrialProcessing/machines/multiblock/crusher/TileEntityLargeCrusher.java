@@ -11,7 +11,7 @@ public class TileEntityLargeCrusher extends TileEntityMultiMachineCore {
 	private static MultiBlockStructure crusherStructure;
 
 	static { 
-		int inputId = ConfigMachineBlocks.getMultiMachineInputID();
+		int inputId = ConfigMachineBlocks.getMultiMachineInputBlockID();
 		int frameId = ConfigMachineBlocks.getMachineFrameBlockID(); 
 		int blockId[][][] = new int[3][3][3];
 		

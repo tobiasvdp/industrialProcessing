@@ -12,9 +12,10 @@ public class ConfigMachineBlocks {
 	private int magneticSeparatorBlockID = 502;
 	private int mixerBlockID = 503;
 	private int dryerBlockID = 504;
+	private int classifierBlockID = 505;
 	private int machineFrameBlockID = 600;
+	private int multiMachineInputBlockID = 601;
 	private int largeCrusherBlockID = 700;
-	private int getMultiMachineInputID = 601;
 
 	public static ConfigMachineBlocks getInstance() {
 		return instance;
@@ -49,8 +50,12 @@ public class ConfigMachineBlocks {
 		return getInstance().dryerBlockID;
 	}
 
-	public static int getMultiMachineInputID() {
-		return getInstance().getMultiMachineInputID;
+	public static int getMultiMachineInputBlockID() {
+		return getInstance().multiMachineInputBlockID;
+	}
+
+	public static int getClassifierBlockID() {
+		return getInstance().classifierBlockID;
 	}
 
 }
