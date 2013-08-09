@@ -105,6 +105,9 @@ public class IndustrialProcessing {
     public final static ItemIP itemIronOxideDust = new ItemIP(ConfigItems.ItemIronOxideDustID(), "ItemIronOxideDust");
     public final static ItemIP itemCopperMineral = new ItemIP(ConfigItems.ItemCopperMineralID(), "ItemCopperMineral");
     public final static ItemIP itemTinOxideDust = new ItemIP(ConfigItems.ItemTinOxideDustID(), "ItemTinOxideDust");
+    public final static ItemIP itemIronMixedFragments = new ItemIP(ConfigItems.ItemIronMixedFragmentsID(), "ItemIronMixedFragments");
+    public final static ItemIP itemCopperMixedFragments = new ItemIP(ConfigItems.ItemCopperMixedFragmentsID(), "ItemCopperMixedFragments");
+    public final static ItemIP itemTinMixedFragments = new ItemIP(ConfigItems.ItemTinMixedFragmentsID(), "ItemTinMixedFragments");
     public final static ItemIP itemCopperPurified = new ItemIP(ConfigItems.ItemCopperPurifiedID(), "ItemCopperPurified");
     public final static ItemIP itemSilicium = new ItemIP(ConfigItems.ItemSiliciumID(), "ItemSilicium");
     public final static ItemIP itemZincDust = new ItemIP(ConfigItems.ItemZincDustID(), "ItemZincDust");
@@ -214,6 +217,9 @@ public class IndustrialProcessing {
 	LanguageRegistry.addName(itemIronOxideDust, "Iron oxide Dust");
 	LanguageRegistry.addName(itemCopperMineral, "Copper mineral");
 	LanguageRegistry.addName(itemTinOxideDust, "Tin oxide Dust");
+	LanguageRegistry.addName(itemIronMixedFragments, "Iron mixed fragments");
+	LanguageRegistry.addName(itemCopperMixedFragments, "Copper mixed fragments");
+	LanguageRegistry.addName(itemTinMixedFragments, "Tin mixed fragments");
 	LanguageRegistry.addName(itemSilicium, "Silicium");
 	LanguageRegistry.addName(itemZincDust, "zinc Dust");
 	LanguageRegistry.addName(itemCopperPurified, "Purified copper");
