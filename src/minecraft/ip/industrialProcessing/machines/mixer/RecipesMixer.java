@@ -28,5 +28,23 @@ public class RecipesMixer extends RecipesMachine {
 		ironSludge.outputs = new RecipeOutputSlot[] {
 				new RecipeOutputSlot(1,FluidRegistry.getFluidID(IndustrialProcessing.itemFluidOreSludgeIron.getName()),RecipeSlotType.TANK, 0, 1000, 0.5)  };
 		addRecipe(ironSludge);
+		
+		Recipe copperSludge= new Recipe();
+		copperSludge.workRequired = 30;
+		copperSludge.inputs = new RecipeInputSlot[] { 
+				new RecipeInputSlot(0,FluidRegistry.WATER.getID(),RecipeSlotType.TANK, 1000) ,
+				new RecipeInputSlot(0,IndustrialProcessing.itemCopperSmallChunks.itemID,RecipeSlotType.INVENTORY, 1)};
+		copperSludge.outputs = new RecipeOutputSlot[] {
+				new RecipeOutputSlot(1,FluidRegistry.getFluidID(IndustrialProcessing.itemFluidOreSludgeCopper.getName()),RecipeSlotType.TANK, 0, 1000, 0.5)  };
+		addRecipe(copperSludge);
+		
+		Recipe tinSludge= new Recipe();
+		tinSludge.workRequired = 30;
+		tinSludge.inputs = new RecipeInputSlot[] { 
+				new RecipeInputSlot(0,FluidRegistry.WATER.getID(),RecipeSlotType.TANK, 1000) ,
+				new RecipeInputSlot(0,IndustrialProcessing.itemTinSmallChunks.itemID,RecipeSlotType.INVENTORY, 1)};
+		tinSludge.outputs = new RecipeOutputSlot[] {
+				new RecipeOutputSlot(1,FluidRegistry.getFluidID(IndustrialProcessing.itemFluidOreSludgeTin.getName()),RecipeSlotType.TANK, 0, 1000, 0.5)  };
+		addRecipe(tinSludge);
 	}
 }
