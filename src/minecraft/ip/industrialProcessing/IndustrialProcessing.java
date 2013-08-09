@@ -2,7 +2,11 @@ package ip.industrialProcessing;
 
 import ip.industrialProcessing.config.ConfigAchievements;
 import ip.industrialProcessing.config.ConfigBlocks;
+import ip.industrialProcessing.config.ConfigFluids;
 import ip.industrialProcessing.config.ConfigItems;
+import ip.industrialProcessing.fluids.BlockFluidBaseDirtyWater;
+import ip.industrialProcessing.fluids.ItemFluidContainer;
+import ip.industrialProcessing.fluids.ItemFluidDirtyWater;
 import ip.industrialProcessing.items.*;
 import ip.industrialProcessing.machines.crusher.BlockCrusher;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
@@ -24,15 +28,25 @@ import ip.industrialProcessing.machines.multiblock.machineFrame.BlockMachineFram
 import ip.industrialProcessing.machines.multiblock.machineFrame.TileEntityMachineFrame;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockOre;
+import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.src.ModLoader;
 import net.minecraft.stats.Achievement;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.Event.Result;
+import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraftforge.event.entity.player.FillBucketEvent;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -120,6 +134,11 @@ public class IndustrialProcessing {
 			ConfigItems.ItemTinPurifiedID(), "ItemTinPurified");
 	public final static ItemIP itemSulfur = new ItemIP(
 			ConfigItems.ItemSulfurID(), "ItemSulfur");
+	
+	// create fluids
+	public final static ItemFluidDirtyWater itemFluidDirtyWater = new ItemFluidDirtyWater("DirtyWater");
+	public final static BlockFluidBaseDirtyWater blockFluidBaseDirtyWater = new BlockFluidBaseDirtyWater(ConfigFluids.blockFluidBaseDirtyWaterID(), itemFluidDirtyWater ,Material.water,tabMachines);
+	public final static ItemFluidContainer bucketDirtyWater = new ItemFluidContainer(ConfigFluids.BucketDirtyWaterID(),itemFluidDirtyWater);
 
 	// create ores
 	public static final Block blockCopperOre = (new BlockOre(
@@ -191,6 +210,9 @@ public class IndustrialProcessing {
 				"copper");
 		registerOre(blockTinOre, "IP.World.TinOre", "Tin Ore", "copper");
 		
+		registerFluid(blockFluidBaseDirtyWater,itemFluidDirtyWater,bucketDirtyWater, "blockFluidBaseDirtyWater", "Dirty water");
+		LanguageRegistry.addName(bucketDirtyWater, "Bucket of dirty water");
+		
 		//register multistructures
 		registerMachine(blockMultiMachineInventory, "MultiBlockInventory",
 				"Multiblock hatch", TileEntityMultiMachineInventory.class);
@@ -253,6 +275,18 @@ public class IndustrialProcessing {
 		OreDictionary.registerOre(oreDictionaryKey, block);
 	}
 
+	private void registerFluid(Block block,Fluid fluid, ItemFluidContainer bucket , String uniqueId, String displayName) {
+		GameRegistry.registerBlock(block, uniqueId);
+		LanguageRegistry.addName(block, displayName);
+		FluidContainerRegistry.registerFluidContainer(
+				new FluidContainerData(
+					FluidRegistry.getFluidStack( fluid.getName(), FluidContainerRegistry.BUCKET_VOLUME ),
+					new ItemStack( bucket ),
+					new ItemStack( Item.bucketEmpty )
+				)
+			);
+	}
+	
 	private void registerMachine(Block block, String uniqueId,
 			String displayName, Class tileEntity) {
 
