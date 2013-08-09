@@ -1,10 +1,11 @@
 package ip.industrialProcessing.machines.filter;
 
+import ip.industrialProcessing.machines.Model;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelFilter extends ModelBase
+public class ModelFilter extends Model
 {
   //fields
     ModelRenderer Shape1;
@@ -222,7 +223,8 @@ public class ModelFilter extends ModelBase
     Shape24.render(f5);
     this.entity = entity;
   }
-  public void render(float f1)
+  @Override
+  public void renderModel(float f1)
   {
     Shape1.render(f1);
     Shape2.render(f1);

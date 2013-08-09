@@ -1,4 +1,4 @@
-package ip.industrialProcessing.machines.filter;
+package ip.industrialProcessing.machines;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -11,13 +11,14 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
-public class RendererBlockFilter implements ISimpleBlockRenderingHandler{
+public class RendererBlock implements ISimpleBlockRenderingHandler{
 	final int renderID;
+	private TileEntity table;
 
-
-    public RendererBlockFilter(int var1)
+    public RendererBlock(int var1,TileEntity tileEntity)
     {
         this.renderID = var1;
+        table = tileEntity;
     }
 
 
@@ -32,11 +33,7 @@ public class RendererBlockFilter implements ISimpleBlockRenderingHandler{
 
         renderBlocks.clearOverrideBlockTexture();
     }
-
-
-    private static final TileEntityFilter table = new TileEntityFilter();
-
-
+  
     @Override
     public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
     {

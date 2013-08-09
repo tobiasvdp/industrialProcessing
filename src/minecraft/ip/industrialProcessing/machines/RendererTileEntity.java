@@ -1,10 +1,11 @@
-package ip.industrialProcessing.machines.filter;
+package ip.industrialProcessing.machines;
 
 import java.util.Random;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.machines.crusher.ModelCrusher;
+import ip.industrialProcessing.machines.filter.TileEntityFilter;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -18,14 +19,21 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class RendererFilter extends TileEntitySpecialRenderer {
-	public static RendererFilter instance = new RendererFilter();
-	ModelFilter model = new ModelFilter();
-	private static final ResourceLocation texture = new ResourceLocation(
+public class RendererTileEntity extends TileEntitySpecialRenderer {
+	private Model model;
+	private ResourceLocation texture = new ResourceLocation(
 			IndustrialProcessing.TEXTURE_DOMAIN,
-			"textures/render/ModelFilter.png");
-
-	public RendererFilter() {
+			"textures/render/");
+	private Block block;
+	private String name;
+	
+	public RendererTileEntity(Block block,String name,Model model) {
+		this.block = block;
+		this.name = name;
+		texture = new ResourceLocation(
+				IndustrialProcessing.TEXTURE_DOMAIN,
+				"textures/render/"+name+".png");
+		this.model = model;
 	}
 
 	@Override
@@ -35,22 +43,19 @@ public class RendererFilter extends TileEntitySpecialRenderer {
 		// This will move our renderer so that it will be on proper place in the
 		// world
 		GL11.glTranslatef((float) d0, (float) d1, (float) d2);
-		TileEntityFilter tileEntityYour = (TileEntityFilter) tileEntity;
 		/*
 		 * Note that true tile entity coordinates (tileEntity.xCoord, etc) do
 		 * not match to render coordinates (d, etc) that are calculated as [true
 		 * coordinates] - [player coordinates (camera coordinates)]
 		 */
-		renderBlockYour(tileEntityYour, tileEntity.worldObj, tileEntity.xCoord,
+		renderBlockYour(tileEntity, tileEntity.worldObj, tileEntity.xCoord,
 				tileEntity.yCoord, tileEntity.zCoord,
-				IndustrialProcessing.blockFilter);
+				block);
 		GL11.glPopMatrix();
 
 	}
 
-	float tilt = 0;
-
-	public void renderBlockYour(TileEntityFilter tl, World world, int i, int j,
+	public void renderBlockYour(TileEntity tl, World world, int i, int j,
 			int k, Block block) {
 		Tessellator tessellator = Tessellator.instance;
 		// This will make your block brightness dependent from surroundings
@@ -73,14 +78,7 @@ public class RendererFilter extends TileEntitySpecialRenderer {
 			GL11.glRotatef((-180F), 0F, 0F, 1F);
 			GL11.glScalef(1f, 1f, 1f);
 			ResourceLocation tex;
-			if (tl.getWorker().isWorking()) {
-				tilt++;
-				GL11.glRotatef(tilt % 6 - 3, 1F, 0F, 0F);
-				GL11.glRotatef(tilt % 4 - 2, 0F, 0F, 1F);
-				tex = texture;
-			} else {
-				tex = texture;
-			}
+			tex = texture;
 			func_110628_a(tex);
 		} else {
 			GL11.glPushMatrix();
@@ -94,7 +92,7 @@ public class RendererFilter extends TileEntitySpecialRenderer {
 		/*
 		 * Place your rendering code here.
 		 */
-		this.model.render(0.0625F);
+		this.model.renderModel(0.0625F);
 
 		GL11.glPopMatrix();
 	}
