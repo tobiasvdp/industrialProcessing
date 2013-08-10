@@ -7,6 +7,7 @@ import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.machines.crusher.ModelCrusher;
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
 import ip.industrialProcessing.utils.working.IWorker;
+import ip.industrialProcessing.utils.working.IWorkingEntity;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -65,8 +66,8 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 		float animation = 0;
 		if (world != null) {
 
-			if (tl instanceof TileEntityMachine) {
-				TileEntityMachine machine = (TileEntityMachine) tl;
+			if (tl instanceof IWorkingEntity) {
+			    IWorkingEntity machine = (IWorkingEntity) tl;
 				IWorker worker = machine.getWorker();
 				if (worker != null)
 					animation = worker.getScaledProgress(100) / 100f;

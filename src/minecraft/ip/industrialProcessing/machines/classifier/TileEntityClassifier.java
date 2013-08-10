@@ -9,10 +9,11 @@ import net.minecraftforge.fluids.FluidStack;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.machines.TileEntityFluidMachine;
+import ip.industrialProcessing.machines.TileEntityFluidWorkerMachine;
 import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.recipes.Recipe;
 
-public class TileEntityClassifier extends TileEntityFluidMachine {
+public class TileEntityClassifier extends TileEntityFluidWorkerMachine {
 
     public TileEntityClassifier() {
 	addStack(null, LocalDirection.UP, true, false); // Input Solid

@@ -32,15 +32,11 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 
-public abstract class TileEntityFluidMachine extends TileEntityMachine implements IFluidHandler, IRecipeFluidWorkHandler {
+public abstract class TileEntityFluidMachine extends TileEntityMachine implements IFluidHandler, IMachineTanks {
 
     private int[][] fluidTankSideslots = new int[6][0];
     private ArrayList<MachineFluidTank> fluidTanks = new ArrayList<MachineFluidTank>();
-
-    @Override
-    protected ServerWorker createServerSideWorker() {
-	return new RecipeFluidWorker(this);
-    }
+ 
 
     @Override
     public void writeToNBT(net.minecraft.nbt.NBTTagCompound nbt) {

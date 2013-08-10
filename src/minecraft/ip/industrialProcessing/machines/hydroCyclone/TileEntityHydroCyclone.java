@@ -8,10 +8,11 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityFluidMachine;
+import ip.industrialProcessing.machines.TileEntityFluidWorkerMachine;
 import ip.industrialProcessing.machines.thickener.RecipesThickener;
 import ip.industrialProcessing.recipes.Recipe;
 
-public class TileEntityHydroCyclone extends TileEntityFluidMachine {
+public class TileEntityHydroCyclone extends TileEntityFluidWorkerMachine {
 
     public TileEntityHydroCyclone() {
 

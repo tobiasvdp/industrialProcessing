@@ -3,6 +3,7 @@ package ip.industrialProcessing.machines.mixer;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.MachineFluidTank;
 import ip.industrialProcessing.machines.TileEntityFluidMachine;
+import ip.industrialProcessing.machines.TileEntityFluidWorkerMachine;
 import ip.industrialProcessing.recipes.Recipe;
 
 import java.util.Iterator;
@@ -20,7 +21,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public class TileEntityMixer extends TileEntityFluidMachine {
+public class TileEntityMixer extends TileEntityFluidWorkerMachine {
 
     private static RecipesMixer recipes = new RecipesMixer();
 
