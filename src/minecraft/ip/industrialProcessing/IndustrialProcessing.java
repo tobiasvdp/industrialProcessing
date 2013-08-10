@@ -35,6 +35,7 @@ import ip.industrialProcessing.machines.multiblock.machineFrame.BlockMachineFram
 import ip.industrialProcessing.machines.multiblock.machineFrame.TileEntityMachineFrame;
 import ip.industrialProcessing.machines.thickener.BlockThickener;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
+import ip.industrialProcessing.utils.DamageSourceIP;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockOre;
 import net.minecraft.block.material.Material;
@@ -43,6 +44,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.src.ModLoader;
 import net.minecraft.stats.Achievement;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -88,6 +90,9 @@ public class IndustrialProcessing {
 
     // create creative tab
     public static CreativeTabs tabMachines = new TabMachines(CreativeTabs.getNextID(), "industrialprocessing");
+    
+    // create damagesources
+    public static final DamageSourceIP DamageDirtyWater = new DamageSourceIP("DirtyWater");
 
     // create worldgen
     public static WorldGeneration worldGen = new WorldGeneration();
@@ -122,19 +127,19 @@ public class IndustrialProcessing {
 
     // create fluids
     public final static ItemFluid itemFluidDirtyWater = new ItemFluid("DirtyWater", 1000, 1000);
-    public final static BlockFluid blockFluidDirtyWater = new BlockFluid(ConfigFluids.blockFluidBaseDirtyWaterID(), itemFluidDirtyWater, Material.water, tabMachines);
+    public final static BlockFluid blockFluidDirtyWater = new BlockFluid(ConfigFluids.blockFluidBaseDirtyWaterID(), itemFluidDirtyWater, Material.water, tabMachines,true);
     public final static ContainerFluid bucketDirtyWater = new ContainerFluid(ConfigFluids.BucketDirtyWaterID(), itemFluidDirtyWater, blockFluidDirtyWater,"ContainerDirtyWater");
 
     public final static ItemFluid itemFluidOreSludgeIron = new ItemFluid("OreSludgeIron", 1000, 1000);
-    public final static BlockFluid blockFluidOreSludgeIron = new BlockFluid(ConfigFluids.blockFluidBaseOreSludgeIronID(), itemFluidOreSludgeIron, Material.water, tabMachines);
+    public final static BlockFluid blockFluidOreSludgeIron = new BlockFluid(ConfigFluids.blockFluidBaseOreSludgeIronID(), itemFluidOreSludgeIron, Material.water, tabMachines,false);
     public final static ContainerFluid bucketOreSludgeIron = new ContainerFluid(ConfigFluids.BucketOreSludgeIronID(), itemFluidOreSludgeIron, blockFluidOreSludgeIron,"ContainerOreSludgeIron");
 
     public final static ItemFluid itemFluidOreSludgeCopper = new ItemFluid("OreSludgeCopper", 1000, 1000);
-    public final static BlockFluid blockFluidOreSludgeCopper = new BlockFluid(ConfigFluids.blockFluidBaseOreSludgeCopperID(), itemFluidOreSludgeCopper, Material.water, tabMachines);
+    public final static BlockFluid blockFluidOreSludgeCopper = new BlockFluid(ConfigFluids.blockFluidBaseOreSludgeCopperID(), itemFluidOreSludgeCopper, Material.water, tabMachines,false);
     public final static ContainerFluid bucketOreSludgeCopper = new ContainerFluid(ConfigFluids.BucketOreSludgeCopperID(), itemFluidOreSludgeCopper, blockFluidOreSludgeCopper,"ContainerOreSludgeCopper");
 
     public final static ItemFluid itemFluidOreSludgeTin = new ItemFluid("OreSludgeTin", 1000, 1000);
-    public final static BlockFluid blockFluidOreSludgeTin = new BlockFluid(ConfigFluids.blockFluidBaseOreSludgeTinID(), itemFluidOreSludgeTin, Material.water, tabMachines);
+    public final static BlockFluid blockFluidOreSludgeTin = new BlockFluid(ConfigFluids.blockFluidBaseOreSludgeTinID(), itemFluidOreSludgeTin, Material.water, tabMachines,false);
     public final static ContainerFluid bucketOreSludgeTin = new ContainerFluid(ConfigFluids.BucketOreSludgeTinID(), itemFluidOreSludgeTin, blockFluidOreSludgeTin,"ContainerOreSludgeTin");
 
     // create ores
@@ -238,6 +243,11 @@ public class IndustrialProcessing {
 	LanguageRegistry.addName(itemCopperPurified, "Purified copper");
 	LanguageRegistry.addName(itemTinPurified, "Purified tin");
 	LanguageRegistry.addName(itemSulfur, "Sulfur");
+	
+	//add death display messages
+	LanguageRegistry.instance().addStringLocalization("death.attack.DirtyWater", "%1$s was poisoned to death by swiming in dirty water.");
+	LanguageRegistry.instance().addStringLocalization("death.attack.DirtyWater.player", "%1$s was killed in dirty water by %2$s");
+	LanguageRegistry.instance().addStringLocalization("death.attack.DirtyWater.item", "%1$s was killed in dirty water by %2$s");
 
 	// register achievements
 	achPage.getAchievements().add(achPlacedFilter);

@@ -6,7 +6,9 @@ import ip.industrialProcessing.IndustrialProcessing;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
@@ -26,13 +28,22 @@ public class BlockFluid extends BlockFluidClassic{
 
     @SideOnly(Side.CLIENT)
     protected Icon[] theIcon;
+    protected boolean doDamage;
 	
-	public BlockFluid(int id, Fluid fluid, Material material, CreativeTabs tab) {
+	public BlockFluid(int id, Fluid fluid, Material material, CreativeTabs tab,boolean doDamage) {
 		super(id, fluid, material);
 		setUnlocalizedName("Block"+fluid.getUnlocalizedName());
 		setCreativeTab(tab);
 		this.disableStats();
+		this.doDamage = doDamage;
 	}
+	
+	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity)
+    {
+		if (doDamage){
+			par5Entity.attackEntityFrom(IndustrialProcessing.DamageDirtyWater, 2.0F);
+		}
+    }
 	
     @SideOnly(Side.CLIENT)
     public int getRenderBlockPass()
