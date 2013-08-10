@@ -15,6 +15,9 @@ import ip.industrialProcessing.machines.filter.TileEntityFilter;
 import ip.industrialProcessing.machines.flotationCell.ContainerFlotationCell;
 import ip.industrialProcessing.machines.flotationCell.GuiContainerFlotationCell;
 import ip.industrialProcessing.machines.flotationCell.TileEntityFlotationCell;
+import ip.industrialProcessing.machines.hydroCyclone.ContainerHydroCyclone;
+import ip.industrialProcessing.machines.hydroCyclone.GuiContainerHydroCyclone;
+import ip.industrialProcessing.machines.hydroCyclone.TileEntityHydroCyclone;
 import ip.industrialProcessing.machines.magneticSeparator.ContainerMagneticSeparator;
 import ip.industrialProcessing.machines.magneticSeparator.GuiContainerMagneticSeparator;
 import ip.industrialProcessing.machines.magneticSeparator.TileEntityMagneticSeparator;
@@ -52,8 +55,9 @@ public class GuiHandler implements IGuiHandler {
 		if(entity  instanceof TileEntityThickener)
 			return new ContainerThickener(player.inventory, (TileEntityThickener)entity); 
 		if(entity  instanceof TileEntityFlotationCell)
-			return new ContainerFlotationCell(player.inventory, (TileEntityFlotationCell)entity); 
-		
+			return new ContainerFlotationCell(player.inventory, (TileEntityFlotationCell)entity);  
+		if(entity  instanceof TileEntityHydroCyclone)
+			return new ContainerHydroCyclone(player.inventory, (TileEntityHydroCyclone)entity); 
 		return null;
 	}
 	 
@@ -79,6 +83,8 @@ public class GuiHandler implements IGuiHandler {
 			return new GuiContainerThickener(player.inventory, (TileEntityThickener)entity);
 		if(entity  instanceof TileEntityFlotationCell)
 			return new GuiContainerFlotationCell(player.inventory, (TileEntityFlotationCell)entity);
+		if(entity  instanceof TileEntityHydroCyclone)
+			return new GuiContainerHydroCyclone(player.inventory, (TileEntityHydroCyclone)entity);
 		return null;
 	}
 

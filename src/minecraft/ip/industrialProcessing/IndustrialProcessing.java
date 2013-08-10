@@ -19,6 +19,8 @@ import ip.industrialProcessing.machines.filter.BlockFilter;
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
 import ip.industrialProcessing.machines.flotationCell.BlockFlotationCell;
 import ip.industrialProcessing.machines.flotationCell.TileEntityFlotationCell;
+import ip.industrialProcessing.machines.hydroCyclone.BlockHydroCyclone;
+import ip.industrialProcessing.machines.hydroCyclone.TileEntityHydroCyclone;
 import ip.industrialProcessing.machines.magneticSeparator.BlockMagneticSeparator;
 import ip.industrialProcessing.machines.magneticSeparator.TileEntityMagneticSeparator;
 import ip.industrialProcessing.machines.mixer.BlockMixer;
@@ -148,6 +150,7 @@ public class IndustrialProcessing {
     public final static BlockClassifier blockClassifier = new BlockClassifier();
     public final static BlockThickener blockThickener = new BlockThickener();
     public final static BlockFlotationCell blockFlotationCell = new BlockFlotationCell();
+    public final static BlockHydroCyclone blockHydroCyclone = new BlockHydroCyclone();
 
     // create Multiblock Machines
     public final static BlockMultiMachineInventory blockMultiMachineInventory = new BlockMultiMachineInventory();
@@ -184,6 +187,7 @@ public class IndustrialProcessing {
 	registerMachine(blockClassifier, "IP.Machine.Classifier", "Classifier", TileEntityClassifier.class);
 	registerMachine(blockThickener, "IP.Machine.Thickener", "Thickener", TileEntityThickener.class);
 	registerMachine(blockFlotationCell, "IP.Machine.FlotationCell", "Flotation Cell", TileEntityFlotationCell.class);
+	registerMachine(blockHydroCyclone, "IP.Machine.HydroCyclone", "Hydro Cyclone Separator", TileEntityHydroCyclone.class);
 
 	registerMachine(blockLargeCrusher, "IP.Machine.Multi.Crusher", "Large Crusher", TileEntityLargeCrusher.class);
 
