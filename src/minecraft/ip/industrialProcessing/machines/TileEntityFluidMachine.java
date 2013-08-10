@@ -28,7 +28,6 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
-import net.minecraftforge.liquids.LiquidTank;
 
 public abstract class TileEntityFluidMachine extends TileEntityMachine
 		implements IFluidHandler, IRecipeFluidWorkHandler {
