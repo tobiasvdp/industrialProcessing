@@ -11,7 +11,7 @@ public class GuiContainerHydroCyclone extends GuiContainerFluidMachine {
 
     public GuiContainerHydroCyclone(InventoryPlayer inventoryPlayer,
 		TileEntityHydroCyclone tileEntity) {
-	super(inventoryPlayer, tileEntity, new ContainerHydroCyclone(inventoryPlayer, tileEntity), "Flotation Cell", "textures/gui/FlotationCell.png"); 
+	super(inventoryPlayer, tileEntity, new ContainerHydroCyclone(inventoryPlayer, tileEntity), "Hydro Cyclone Separator", "textures/gui/HydroCyclone.png"); 
 	setProgressBarLocation(76,34,24,17);
 	}
  
