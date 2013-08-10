@@ -13,14 +13,15 @@ public class GuiContainerDryer extends GuiContainerFluidMachine {
 
 	public GuiContainerDryer(InventoryPlayer inventoryPlayer,
 			TileEntityDryer tileEntity) {
-		super(inventoryPlayer, tileEntity, new ContainerDryer(inventoryPlayer, tileEntity), "Dryer", "textures/gui/Dryer.png"); 
+		super(inventoryPlayer, tileEntity, new ContainerDryer(inventoryPlayer, tileEntity), "Dryer", "textures/gui/Dryer.png");
+		setProgressBarLocation(76,34,24,17);
 	}
  
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2,int par3) {
 		super.drawGuiContainerBackgroundLayer(par1, par2, par3);
-		drawTank(0, 44, 12);
-		drawTank(1, 143, 12);
+		drawTank(0, 8, 19);
+		drawTank(1, 152, 19);
 	}
 }

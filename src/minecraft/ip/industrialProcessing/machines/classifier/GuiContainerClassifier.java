@@ -13,7 +13,7 @@ public class GuiContainerClassifier extends GuiContainerFluidMachine {
 	public GuiContainerClassifier(InventoryPlayer inventoryPlayer,
 			TileEntityClassifier tileEntity) {
 		super(inventoryPlayer, tileEntity, new ContainerClassifier(inventoryPlayer, tileEntity), "Classifier", "textures/gui/Classifier.png"); 
-		setProgressBarLocation(78,33,24,17);
+		setProgressBarLocation(76,34,24,17);
 	}
 
 	
@@ -21,8 +21,8 @@ public class GuiContainerClassifier extends GuiContainerFluidMachine {
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2,int par3) {
 		super.drawGuiContainerBackgroundLayer(par1, par2, par3);
-		drawTank(0, 44, 12);
-		drawTank(1, 143, 12);
+		drawTank(0, 8, 19);
+		drawTank(1, 152, 19);
 	}
 
 }

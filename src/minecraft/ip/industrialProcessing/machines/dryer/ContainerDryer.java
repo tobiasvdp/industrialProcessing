@@ -23,12 +23,12 @@ public class ContainerDryer extends ContainerFluidMachine {
 		super(inventoryPlayer, tileEntity);
 		this.tileEntityDryer = tileEntity;
 		
-		outputSlot = new SlotBase(tileEntity, 0, 82, 12);
-		inputMixedFullInput = new SlotLiquid(tileEntity, 1, 17,16);
-		inputMixedEmptyOutput = new SlotLiquidOutput(tileEntity, 2,17, 51);
+		outputSlot = new SlotBase(tileEntity, 0, 116, 35);
+		inputMixedFullInput = new SlotLiquid(tileEntity, 1, 8,19);
+		inputMixedEmptyOutput = new SlotLiquidOutput(tileEntity, 2,8, 53);
 
-		outputDirtyWaterEmptyInput = new SlotLiquid(tileEntity, 3, 116,16);
-		outputDirtyWaterFullOutput = new SlotLiquidOutput(tileEntity, 4,116, 51);
+		outputDirtyWaterEmptyInput = new SlotLiquid(tileEntity, 3, 152,19);
+		outputDirtyWaterFullOutput = new SlotLiquidOutput(tileEntity, 4,152, 53);
 		
 		
 		addSlotToContainer(outputSlot);
@@ -38,5 +38,10 @@ public class ContainerDryer extends ContainerFluidMachine {
 		addSlotToContainer(outputDirtyWaterFullOutput);
 				
 		ContainerUtils.BindPlayerInventory(inventoryPlayer, this, 0);
+	}
+
+	@Override
+	public int getSizeInventory() {
+		return 5;
 	}
 }

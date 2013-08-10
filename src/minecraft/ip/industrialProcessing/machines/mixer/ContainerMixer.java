@@ -20,12 +20,12 @@ public class ContainerMixer extends ContainerFluidMachine {
 			TileEntityMixer tileEntity) {
 		super(inventoryPlayer, tileEntity); 
 		
-		inputSlot = new SlotBase(tileEntity, 0, 82, 12);
-		inputWaterFullInput = new SlotLiquid(tileEntity, 1, 17,16);
-		inputWaterEmptyOutput = new SlotLiquidOutput(tileEntity, 2,17, 51);
+		inputSlot = new SlotBase(tileEntity, 0, 44, 35);
+		inputWaterFullInput = new SlotLiquid(tileEntity, 1, 8,19);
+		inputWaterEmptyOutput = new SlotLiquidOutput(tileEntity, 2,8, 53);
 
-		inputMixedEmptyInput = new SlotLiquid(tileEntity, 3, 116,16);
-		inputMixedFullOutput = new SlotLiquidOutput(tileEntity, 4,116, 51);
+		inputMixedEmptyInput = new SlotLiquid(tileEntity, 3, 152,19);
+		inputMixedFullOutput = new SlotLiquidOutput(tileEntity, 4,152, 53);
 		
 		
 		addSlotToContainer(inputSlot);

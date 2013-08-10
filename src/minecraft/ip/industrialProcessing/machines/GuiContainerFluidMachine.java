@@ -22,7 +22,7 @@ public class GuiContainerFluidMachine extends GuiContainerMachine {
 
 	public void drawTank(int slot, int x, int y)
 	{
-		drawTank(slot, x, y, 16, 58);
+		drawTank(slot, x, y, 16, 50);
 	}
 	
 	public void drawTank(int slot, int x, int y, int width, int height)
