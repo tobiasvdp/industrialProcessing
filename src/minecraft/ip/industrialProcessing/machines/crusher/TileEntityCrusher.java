@@ -3,6 +3,7 @@ package ip.industrialProcessing.machines.crusher;
 import java.util.Iterator;
 
 import cpw.mods.fml.relauncher.Side;
+import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.recipes.Recipe;
 import net.minecraft.block.Block;
@@ -24,10 +25,8 @@ public class TileEntityCrusher extends TileEntityMachine {
 	public EntityPlayer placedBy;
 
 	public TileEntityCrusher() { 
-		this.addStack(null, ForgeDirection.UP, true, false);
-		this.addStack(null, new ForgeDirection[] { ForgeDirection.SOUTH,
-				ForgeDirection.NORTH, ForgeDirection.EAST, ForgeDirection.WEST,
-				ForgeDirection.DOWN }, false, true);
+		this.addStack(null, LocalDirection.UP, true, false);
+		this.addStack(null, LocalDirection.DOWN, false, true);
 		this.speed = 10;
 	}
  

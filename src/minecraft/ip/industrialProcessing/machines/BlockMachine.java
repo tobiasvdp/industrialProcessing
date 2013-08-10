@@ -1,8 +1,13 @@
 package ip.industrialProcessing.machines;
 
+import org.lwjgl.Sys;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import ic2.api.Direction;
+import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
 import ip.industrialProcessing.utils.inventories.InventoryUtils;
 import net.minecraft.block.Block;
@@ -63,8 +68,16 @@ public abstract class BlockMachine extends BlockContainer {
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack itemStack) {
 	int dir = MathHelper.floor_double((double) ((entityLivingBase.rotationYaw * 4F) / 360F) + 0.5D) & 3;
 	world.setBlockMetadataWithNotify(x, y, z, dir, 0);
-	System.out.println("Facing "+getForwardFromMetadata(dir));
+	
+	ForgeDirection facing = getForwardFromMetadata(dir);
+	System.out.println("Facing "+facing);
+	LocalDirection localNorth =DirectionUtils.GetLocalDirection(ForgeDirection.NORTH, facing);
+	System.out.println("North is "+localNorth);
+	ForgeDirection worldNorth = DirectionUtils.GetWorldDirection(localNorth, facing);
+	System.out.println(localNorth +" is "+worldNorth);
     }
+     
+    
     // TODO: use the tile entity to store orientation
     public ForgeDirection getForwardFromMetadata(World world, int x, int y, int z)
     {

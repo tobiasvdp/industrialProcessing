@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityFluidMachine;
 import ip.industrialProcessing.machines.thickener.RecipesThickener;
 import ip.industrialProcessing.recipes.Recipe;
@@ -14,7 +15,7 @@ public class TileEntityFlotationCell extends TileEntityFluidMachine {
 
     public TileEntityFlotationCell() {
 
-	ForgeDirection[] nodirections = new ForgeDirection[0];
+	LocalDirection[] nodirections = new LocalDirection[0];
 	// buckets!
 	// 0: Liquid Input Full Input
 	addStack(null, nodirections, true, false);
@@ -28,13 +29,14 @@ public class TileEntityFlotationCell extends TileEntityFluidMachine {
 	addStack(null, nodirections, true, false);
 	// 5: Dirty Water Output Full Output
 	addStack(null, nodirections, false, true);
+	LocalDirection[] allSides = new LocalDirection[] { LocalDirection.LEFT, LocalDirection.RIGHT, LocalDirection.FRONT, LocalDirection.BACK };
 
 	// 0: input tank
-	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, new ForgeDirection[] { ForgeDirection.NORTH, ForgeDirection.SOUTH, ForgeDirection.WEST, ForgeDirection.EAST }, true, false);
+	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, allSides, true, false);
 	// 1: paste output tank
-	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, ForgeDirection.DOWN, false, true);
+	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.DOWN, false, true);
 	// 2: dirty water output tank
-	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, new ForgeDirection[] { ForgeDirection.NORTH, ForgeDirection.SOUTH, ForgeDirection.WEST, ForgeDirection.EAST }, false, true);
+	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, allSides, false, true);
 
     }
 

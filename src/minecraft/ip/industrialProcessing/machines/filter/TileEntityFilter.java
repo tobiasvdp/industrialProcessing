@@ -26,6 +26,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.MinecraftForge;
+import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.packetHandlers.TileSyncHandler;
 import ip.industrialProcessing.recipes.IRecipeWorkHandler;
@@ -38,26 +39,21 @@ import ip.industrialProcessing.utils.working.ServerWorker;
 
 public class TileEntityFilter extends TileEntityMachine {
 
-	public static RecipesFilter recipes = new RecipesFilter();
- 
-	public TileEntityFilter() {   
+    public static RecipesFilter recipes = new RecipesFilter();
 
-		this.addStack(null, ForgeDirection.UP, true, false);
-		this.addStack(null,
-				new ForgeDirection[] { ForgeDirection.SOUTH,
-						ForgeDirection.NORTH, ForgeDirection.EAST,
-						ForgeDirection.WEST }, false, true);
-		this.addStack(null, ForgeDirection.DOWN, false, true);
-	}
+    public TileEntityFilter() {
+	this.addStack(null, LocalDirection.UP, true, false);
+	this.addStack(null, LocalDirection.LEFT, false, true);
+	this.addStack(null, LocalDirection.DOWN, false, true);
+    }
 
-	 
-	@Override
-	protected boolean isValidInput(int slot, int itemID) {
-		return recipes.isValidInput(slot, itemID);
-	}
+    @Override
+    protected boolean isValidInput(int slot, int itemID) {
+	return recipes.isValidInput(slot, itemID);
+    }
 
-	@Override
-	public Iterator<Recipe> iterateRecipes() {
-		return recipes.iterator();
-	}
+    @Override
+    public Iterator<Recipe> iterateRecipes() {
+	return recipes.iterator();
+    }
 }

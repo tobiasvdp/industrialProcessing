@@ -2,6 +2,7 @@ package ip.industrialProcessing.machines.magneticSeparator;
 
 import java.util.Iterator;
 
+import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.recipes.Recipe;
 import net.minecraft.tileentity.TileEntity;
@@ -13,19 +14,13 @@ public class TileEntityMagneticSeparator extends TileEntityMachine {
 	public static RecipesMagneticSeparator recipes = new RecipesMagneticSeparator();
 	
 	public TileEntityMagneticSeparator()
-	{ 
-		ForgeDirection[] sides = new ForgeDirection[]{
-				 ForgeDirection.EAST,
-				 ForgeDirection.SOUTH,
-				 ForgeDirection.WEST,
-				 ForgeDirection.NORTH
-		};
+	{  
 	
-		this.addStack(null, ForgeDirection.UP, true, false); // input
-		this.addStack(null, ForgeDirection.DOWN, false, true); // output
-		this.addStack(null, sides, false, true); // ironOxide
-		this.addStack(null, sides, false, true); // nickel
-		this.addStack(null, sides, false, true); // sphalerite
+		this.addStack(null, LocalDirection.UP, true, false); // input
+		this.addStack(null, LocalDirection.DOWN, false, true); // output
+		this.addStack(null, LocalDirection.RIGHT, false, true); // ironOxide
+		this.addStack(null, LocalDirection.RIGHT, false, true); // nickel
+		this.addStack(null, LocalDirection.RIGHT, false, true); // sphalerite
 	}
 	 
 	

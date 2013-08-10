@@ -1,5 +1,6 @@
 package ip.industrialProcessing.machines.mixer;
 
+import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.MachineFluidTank;
 import ip.industrialProcessing.machines.TileEntityFluidMachine;
 import ip.industrialProcessing.recipes.Recipe;
@@ -25,9 +26,9 @@ public class TileEntityMixer extends TileEntityFluidMachine {
 
     public TileEntityMixer() {
 
-	addStack(null, ForgeDirection.UP, true, false); // Mixing ingredient
+	addStack(null, LocalDirection.UP, true, false); // Mixing ingredient
 
-	ForgeDirection[] nodirections = new ForgeDirection[0];
+	LocalDirection[] nodirections = new LocalDirection[0];
 	// buckets!
 	addStack(null, nodirections, true, false); // Liquid Input Full
 						   // Input
@@ -38,8 +39,8 @@ public class TileEntityMixer extends TileEntityFluidMachine {
 	addStack(null, nodirections, false, true); // Liquid Output Full
 						   // Output
 
-	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, new ForgeDirection[] { ForgeDirection.NORTH, ForgeDirection.SOUTH, ForgeDirection.WEST, ForgeDirection.EAST }, true, false);
-	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, ForgeDirection.DOWN, false, true);
+	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.BACK, true, false);
+	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.DOWN, false, true);
     }
 
     @Override
