@@ -26,6 +26,9 @@ public class ConfigItems {
 	private int ItemCopperPurifiedID = 5020;
 	private int ItemTinPurifiedID = 5021;
 	private int ItemSulfurID = 5022;
+	private int ItemIronMixedFragmentsID = 5023;
+	private int ItemCopperMixedFragmentsID = 5024;
+	private int ItemTinMixedFragmentsID = 5025;
 	
 	public static int ItemIronLargeChunksID(){return getInstance().ItemIronLargeChunksID;}
 	public static int ItemCopperLargeChunksID(){return getInstance().ItemCopperLargeChunksID;}
@@ -50,6 +53,9 @@ public class ConfigItems {
 	public static int ItemCopperPurifiedID(){return getInstance().ItemCopperPurifiedID;}
 	public static int ItemTinPurifiedID(){return getInstance().ItemTinPurifiedID;}
 	public static int ItemSulfurID(){return getInstance().ItemSulfurID;}
+	public static int ItemIronMixedFragmentsID() {return getInstance().ItemIronMixedFragmentsID;}
+	public static int ItemCopperMixedFragmentsID() {return getInstance().ItemCopperMixedFragmentsID;}
+	public static int ItemTinMixedFragmentsID() {return getInstance().ItemTinMixedFragmentsID;}
 	
 	private ConfigItems(){
 	

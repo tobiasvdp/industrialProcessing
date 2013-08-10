@@ -56,6 +56,51 @@ public class RecipesFilter extends RecipesMachine {
 						IndustrialProcessing.itemIronSmallChunks.itemID,
 						RecipeSlotType.INVENTORY, 1, 2, 0.75) };
 		addRecipe(iron);
+		
+		
+		//Fine copper to dust and mixed fragments chunks
+		Recipe copper2 = new Recipe();
+		copper2.workRequired = 30;
+		copper2.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0,
+				IndustrialProcessing.itemCopperFineChunks.itemID,
+				RecipeSlotType.INVENTORY, 1) };
+		copper2.outputs = new RecipeOutputSlot[] {
+				new RecipeOutputSlot(1,
+						IndustrialProcessing.itemCopperMineral.itemID,
+						RecipeSlotType.INVENTORY, 0, 1, 0),
+				new RecipeOutputSlot(2,
+						IndustrialProcessing.itemCopperMixedFragments.itemID,
+						RecipeSlotType.INVENTORY, 1, 2, 0.75) };
+		addRecipe(copper2);
+		
+		//Fine tin to dust and mixed fragments chunks
+		Recipe tin2 = new Recipe();
+		tin2.workRequired = 30;
+		tin2.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0,
+				IndustrialProcessing.itemTinFineChunks.itemID,
+				RecipeSlotType.INVENTORY, 1) };
+		tin2.outputs = new RecipeOutputSlot[] {
+				new RecipeOutputSlot(1,
+						IndustrialProcessing.itemTinOxideDust.itemID,
+						RecipeSlotType.INVENTORY, 0, 1, 0),
+				new RecipeOutputSlot(2,
+						IndustrialProcessing.itemTinMixedFragments.itemID,
+						RecipeSlotType.INVENTORY, 1, 2, 0.75) };
+		addRecipe(tin2);
+		//Fine iron to dust and mixed fragments chunks
+		Recipe iron2 = new Recipe();
+		iron2.workRequired = 30;
+		iron2.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0,
+				IndustrialProcessing.itemIronFineChunks.itemID,
+				RecipeSlotType.INVENTORY, 1) };
+		iron2.outputs = new RecipeOutputSlot[] {
+				new RecipeOutputSlot(1,
+						IndustrialProcessing.itemIronOxideDust.itemID,
+						RecipeSlotType.INVENTORY, 0, 1, 0),
+				new RecipeOutputSlot(2,
+						IndustrialProcessing.itemIronMixedFragments.itemID,
+						RecipeSlotType.INVENTORY, 1, 2, 0.75) };
+		addRecipe(iron2);
 	}
 
 }
