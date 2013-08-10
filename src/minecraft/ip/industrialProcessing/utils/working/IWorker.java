@@ -2,7 +2,7 @@ package ip.industrialProcessing.utils.working;
 
 public interface IWorker {
 
-	boolean doWork(int amount);
+	int doWork(int amount);
 	
 	 int getTotalWork() ;
 

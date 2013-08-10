@@ -37,6 +37,8 @@ import ip.industrialProcessing.machines.multiblock.machineFrame.BlockMachineFram
 import ip.industrialProcessing.machines.multiblock.machineFrame.TileEntityMachineFrame;
 import ip.industrialProcessing.machines.thickener.BlockThickener;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
+import ip.industrialProcessing.power.manualGenerator.BlockManualGenerator;
+import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
 import ip.industrialProcessing.utils.DamageSourceIP;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockOre;
@@ -160,6 +162,9 @@ public class IndustrialProcessing {
     public final static BlockHydroCyclone blockHydroCyclone = new BlockHydroCyclone();
     public final static BlockDiskFilter blockDiskFilter = new BlockDiskFilter();
 
+    // create generators
+    public final static BlockManualGenerator blockManualGenerator = new BlockManualGenerator();
+    
     // create Multiblock Machines
     public final static BlockMultiMachineInventory blockMultiMachineInventory = new BlockMultiMachineInventory();
 
@@ -198,6 +203,8 @@ public class IndustrialProcessing {
 	registerMachine(blockFlotationCell, "IP.Machine.FlotationCell", "Flotation Cell", TileEntityFlotationCell.class);
 	registerMachine(blockHydroCyclone, "IP.Machine.HydroCyclone", "Hydro Cyclone Separator", TileEntityHydroCyclone.class);
 	registerMachine(blockDiskFilter, "IP.Machine.DiskFilter", "Disk Filter", TileEntityDiskFilter.class);
+	
+	registerMachine(blockManualGenerator, "IP.Generator.Manual", "Crank Generator", TileEntityManualGenerator.class);
 
 	registerMachine(blockLargeCrusher, "IP.Machine.Multi.Crusher", "Large Crusher", TileEntityLargeCrusher.class);
 

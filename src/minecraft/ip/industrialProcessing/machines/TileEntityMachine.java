@@ -70,8 +70,8 @@ public abstract class TileEntityMachine extends TileEntity implements ISidedInve
 	return true;
     }
 
-    protected void work(int amount) {
-	this.getWorker().doWork(amount);
+    protected int work(int amount) {
+	return this.getWorker().doWork(amount);
     }
 
     @Override

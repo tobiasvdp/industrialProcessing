@@ -41,6 +41,8 @@ public class DirectionUtils {
     }
 
     public static LocalDirection GetLocalDirection(ForgeDirection direction, ForgeDirection forward) {
+	if(direction == ForgeDirection.DOWN) return LocalDirection.DOWN;
+	if(direction == ForgeDirection.UP) return LocalDirection.UP;
 	int rotationAmount = getRotationIndex(forward);
 	int directionAmount = getRotationIndex(direction);
 
@@ -51,7 +53,7 @@ public class DirectionUtils {
     }
 
     public static LocalDirection GetLocalDirection(int directionOrdinal, ForgeDirection forwardDirection) {
-	ForgeDirection direction = ForgeDirection.values()[directionOrdinal];
+	ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[directionOrdinal];
 	return GetLocalDirection(direction, forwardDirection);
     }
 }

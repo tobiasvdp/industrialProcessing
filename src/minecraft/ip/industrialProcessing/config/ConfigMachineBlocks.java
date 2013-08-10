@@ -22,6 +22,8 @@ public class ConfigMachineBlocks {
     private int multiMachineInputBlockID = 601;
     private int largeCrusherBlockID = 700;
 
+    private int manualGeneratorBlockID = 800; // Crank Generator
+    
     public static ConfigMachineBlocks getInstance() {
 	return instance;
     }
@@ -77,6 +79,10 @@ public class ConfigMachineBlocks {
 
     public static int getDiskFilterBlockID() {
 	return getInstance().diskFilterBlockID;
+    }
+
+    public static int getManualGeneratorBlockID() {
+	return getInstance().manualGeneratorBlockID;
     }
 
 }

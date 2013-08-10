@@ -13,8 +13,8 @@ public class ServerWorker implements IWorker {
 		this.totalWork = totalWork;
 	}
 
-	public boolean doWork(int amount) {
-		boolean worked = false;
+	public int doWork(int amount) {
+		int workToDo = 0;
 		if (amount > 0) {
 			if (this.workDone == 0) {
 				onPrepareWork();
@@ -23,8 +23,8 @@ public class ServerWorker implements IWorker {
 				if (canWork()) {
 					if (workDone == 1)
 						onBeginWork();
-					worked = true;
-					onWorkProgressed(amount);
+					workToDo = Math.min(amount, totalWork - workDone+1);
+					onWorkProgressed(workToDo);
 					if (this.workDone > this.totalWork) {
 						onEndWork();
 					}
@@ -35,7 +35,7 @@ public class ServerWorker implements IWorker {
 				this.workDone = 0; // prepare again next tick
 
 		}
-		return worked;
+		return workToDo;
 	}
 
 	private void onBeginWork() {
@@ -43,8 +43,8 @@ public class ServerWorker implements IWorker {
 	}
 
 	protected void onWorkProgressed(int amount) {
-		this.handler.workProgressed(amount);
 		this.workDone += amount;
+		this.handler.workProgressed(amount);
 	}
 
 	protected void onWorkCancelled() {
