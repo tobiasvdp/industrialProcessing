@@ -50,7 +50,7 @@ public class BlockFluid extends BlockFluidClassic{
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister)
     {
-    	this.theIcon = new Icon[] {par1IconRegister.registerIcon("water_still"), par1IconRegister.registerIcon("water_flow")};
+    	this.theIcon = new Icon[] {par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + this.getFluid().getName() + "_still"), par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX +this.getFluid().getName()+"_flow")};
     	this.getFluid().setIcons(theIcon[0], theIcon[1]);
     }
 

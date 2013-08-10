@@ -13,8 +13,6 @@ import ip.industrialProcessing.machines.classifier.BlockClassifier;
 import ip.industrialProcessing.machines.classifier.TileEntityClassifier;
 import ip.industrialProcessing.machines.crusher.BlockCrusher;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
-import ip.industrialProcessing.machines.diskFilter.BlockDiskFilter;
-import ip.industrialProcessing.machines.diskFilter.TileEntityDiskFilter;
 import ip.industrialProcessing.machines.dryer.BlockDryer;
 import ip.industrialProcessing.machines.dryer.TileEntityDryer;
 import ip.industrialProcessing.machines.filter.BlockFilter;
@@ -153,7 +151,6 @@ public class IndustrialProcessing {
     public final static BlockThickener blockThickener = new BlockThickener();
     public final static BlockFlotationCell blockFlotationCell = new BlockFlotationCell();
     public final static BlockHydroCyclone blockHydroCyclone = new BlockHydroCyclone();
-    public final static BlockDiskFilter blockDiskFilter = new BlockDiskFilter();
 
     // create Multiblock Machines
     public final static BlockMultiMachineInventory blockMultiMachineInventory = new BlockMultiMachineInventory();
@@ -173,6 +170,7 @@ public class IndustrialProcessing {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
 	MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
+	MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
 	MinecraftForge.EVENT_BUS.register(this);
     }
 
@@ -191,7 +189,6 @@ public class IndustrialProcessing {
 	registerMachine(blockThickener, "IP.Machine.Thickener", "Thickener", TileEntityThickener.class);
 	registerMachine(blockFlotationCell, "IP.Machine.FlotationCell", "Flotation Cell", TileEntityFlotationCell.class);
 	registerMachine(blockHydroCyclone, "IP.Machine.HydroCyclone", "Hydro Cyclone Separator", TileEntityHydroCyclone.class);
-	registerMachine(blockDiskFilter, "IP.Machine.DiskFilter", "Disk Filter", TileEntityDiskFilter.class);
 
 	registerMachine(blockLargeCrusher, "IP.Machine.Multi.Crusher", "Large Crusher", TileEntityLargeCrusher.class);
 
