@@ -14,6 +14,8 @@ public class ConfigMachineBlocks {
     private int dryerBlockID = 504;
     private int classifierBlockID = 505;
     private int thickenerBlockID = 506;
+    private int flotationCellBlokID = 507;
+    
     private int machineFrameBlockID = 600;
     private int multiMachineInputBlockID = 601;
     private int largeCrusherBlockID = 700;
@@ -61,6 +63,10 @@ public class ConfigMachineBlocks {
 
     public static int getThickenerBlockID() {
 	return getInstance().thickenerBlockID;
+    }
+
+    public static int getFlotationCellBlockID() { 
+	return getInstance().flotationCellBlokID;
     }
 
 }
