@@ -29,6 +29,8 @@ import ip.industrialProcessing.machines.multiblock.inventory.BlockMultiMachineIn
 import ip.industrialProcessing.machines.multiblock.inventory.TileEntityMultiMachineInventory;
 import ip.industrialProcessing.machines.multiblock.machineFrame.BlockMachineFrame;
 import ip.industrialProcessing.machines.multiblock.machineFrame.TileEntityMachineFrame;
+import ip.industrialProcessing.machines.thickener.BlockThickener;
+import ip.industrialProcessing.machines.thickener.TileEntityThickener;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockOre;
 import net.minecraft.block.material.Material;
@@ -142,6 +144,7 @@ public class IndustrialProcessing {
     public final static BlockMixer blockMixer = new BlockMixer();
     public final static BlockDryer blockDryer = new BlockDryer();
     public final static BlockClassifier blockClassifier = new BlockClassifier();
+    public final static BlockThickener blockThickener = new BlockThickener();
 
     // create Multiblock Machines
     public final static BlockMultiMachineInventory blockMultiMachineInventory = new BlockMultiMachineInventory();
@@ -176,6 +179,7 @@ public class IndustrialProcessing {
 	registerMachine(blockMixer, "IP.Machine.Mixer", "Mixer", TileEntityMixer.class);
 	registerMachine(blockDryer, "IP.Machine.Dryer", "Dryer", TileEntityDryer.class);
 	registerMachine(blockClassifier, "IP.Machine.Classifier", "Classifier", TileEntityClassifier.class);
+	registerMachine(blockThickener, "IP.Machine.Thickener", "Thickener", TileEntityThickener.class);
 
 	registerMachine(blockLargeCrusher, "IP.Machine.Multi.Crusher", "Large Crusher", TileEntityLargeCrusher.class);
 

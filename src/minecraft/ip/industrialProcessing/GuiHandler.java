@@ -18,6 +18,9 @@ import ip.industrialProcessing.machines.magneticSeparator.TileEntityMagneticSepa
 import ip.industrialProcessing.machines.mixer.ContainerMixer;
 import ip.industrialProcessing.machines.mixer.GuiContainerMixer;
 import ip.industrialProcessing.machines.mixer.TileEntityMixer;
+import ip.industrialProcessing.machines.thickener.ContainerThickener;
+import ip.industrialProcessing.machines.thickener.GuiContainerThickener;
+import ip.industrialProcessing.machines.thickener.TileEntityThickener;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -43,6 +46,8 @@ public class GuiHandler implements IGuiHandler {
 			return new ContainerDryer(player.inventory, (TileEntityDryer)entity); 
 		if(entity  instanceof TileEntityClassifier)
 			return new ContainerClassifier(player.inventory, (TileEntityClassifier)entity); 
+		if(entity  instanceof TileEntityThickener)
+			return new ContainerThickener(player.inventory, (TileEntityThickener)entity); 
 		
 		return null;
 	}
@@ -65,6 +70,8 @@ public class GuiHandler implements IGuiHandler {
 			return new GuiContainerDryer(player.inventory, (TileEntityDryer)entity);
 		if(entity  instanceof TileEntityClassifier)
 			return new GuiContainerClassifier(player.inventory, (TileEntityClassifier)entity);
+		if(entity  instanceof TileEntityThickener)
+			return new GuiContainerThickener(player.inventory, (TileEntityThickener)entity);
 		return null;
 	}
 
