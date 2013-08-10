@@ -16,6 +16,7 @@ public class ConfigMachineBlocks {
     private int thickenerBlockID = 506;
     private int flotationCellBlockID = 507;
     private int hydroCycloneBlockID = 508;
+    private int diskFilterBlockID = 509;
     
     private int machineFrameBlockID = 600;
     private int multiMachineInputBlockID = 601;
@@ -72,6 +73,10 @@ public class ConfigMachineBlocks {
 
     public static int getHydroCycloneBlockID() {
 	return getInstance().hydroCycloneBlockID;
+    }
+
+    public static int getDiskFilterBlockID() {
+	return getInstance().diskFilterBlockID;
     }
 
 }

@@ -6,6 +6,9 @@ import ip.industrialProcessing.machines.classifier.TileEntityClassifier;
 import ip.industrialProcessing.machines.crusher.ContainerCrusher;
 import ip.industrialProcessing.machines.crusher.GuiCrusher;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
+import ip.industrialProcessing.machines.diskFilter.ContainerDiskFilter;
+import ip.industrialProcessing.machines.diskFilter.GuiContainerDiskFilter;
+import ip.industrialProcessing.machines.diskFilter.TileEntityDiskFilter;
 import ip.industrialProcessing.machines.dryer.ContainerDryer;
 import ip.industrialProcessing.machines.dryer.GuiContainerDryer;
 import ip.industrialProcessing.machines.dryer.TileEntityDryer;
@@ -58,6 +61,8 @@ public class GuiHandler implements IGuiHandler {
 			return new ContainerFlotationCell(player.inventory, (TileEntityFlotationCell)entity);  
 		if(entity  instanceof TileEntityHydroCyclone)
 			return new ContainerHydroCyclone(player.inventory, (TileEntityHydroCyclone)entity); 
+		if(entity  instanceof TileEntityDiskFilter)
+			return new ContainerDiskFilter(player.inventory, (TileEntityDiskFilter)entity); 
 		return null;
 	}
 	 
@@ -85,6 +90,8 @@ public class GuiHandler implements IGuiHandler {
 			return new GuiContainerFlotationCell(player.inventory, (TileEntityFlotationCell)entity);
 		if(entity  instanceof TileEntityHydroCyclone)
 			return new GuiContainerHydroCyclone(player.inventory, (TileEntityHydroCyclone)entity);
+		if(entity  instanceof TileEntityDiskFilter)
+			return new GuiContainerDiskFilter(player.inventory, (TileEntityDiskFilter)entity);
 		return null;
 	}
 
