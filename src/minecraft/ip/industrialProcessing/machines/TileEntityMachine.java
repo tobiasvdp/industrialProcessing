@@ -281,8 +281,7 @@ public abstract class TileEntityMachine extends TileEntity implements ISidedInve
     }
 
     @Override
-    public Packet getDescriptionPacket() {
-	System.out.println("Sending " + this + "'s NBT data");
+    public Packet getDescriptionPacket() { 
 	NBTTagCompound nbtTag = new NBTTagCompound();
 	this.writeToNBT(nbtTag);
 	return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);

@@ -4,6 +4,7 @@ import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.MachineFluidTank;
 import ip.industrialProcessing.machines.TileEntityFluidMachine;
 import ip.industrialProcessing.machines.TileEntityFluidWorkerMachine;
+import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
 import ip.industrialProcessing.recipes.Recipe;
 
 import java.util.Iterator;
@@ -21,12 +22,12 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public class TileEntityMixer extends TileEntityFluidWorkerMachine {
+public class TileEntityMixer extends TileEntityPoweredFluidWorkerMachine {
 
     private static RecipesMixer recipes = new RecipesMixer();
 
     public TileEntityMixer() {
-
+	super(LocalDirection.LEFT, 10000);
 	addStack(null, LocalDirection.UP, true, false); // Mixing ingredient
 
 	LocalDirection[] nodirections = new LocalDirection[0];
@@ -74,10 +75,12 @@ public class TileEntityMixer extends TileEntityFluidWorkerMachine {
 		       // containers
 	    return recipes.isValidInput(slot, itemID);
 
-	if (slot == 3) // fluid output container input slot, only empty container
+	if (slot == 3) // fluid output container input slot, only empty
+		       // container
 	    return FluidContainerRegistry.isEmptyContainer(new ItemStack(itemID, 1, 0));
 
-	if (slot == 1) { // fluid input container input slot, only filled containers with correct fluid
+	if (slot == 1) { // fluid input container input slot, only filled
+			 // containers with correct fluid
 	    FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(new ItemStack(itemID, 1, 0));
 	    if (fluid == null)
 		return false;

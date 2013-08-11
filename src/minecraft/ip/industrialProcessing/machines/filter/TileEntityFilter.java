@@ -28,6 +28,7 @@ import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.MinecraftForge;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityMachine;
+import ip.industrialProcessing.machines.TileEntityPoweredWorkerMachine;
 import ip.industrialProcessing.machines.TileEntityWorkerMachine;
 import ip.industrialProcessing.packetHandlers.TileSyncHandler;
 import ip.industrialProcessing.recipes.IRecipeWorkHandler;
@@ -38,11 +39,12 @@ import ip.industrialProcessing.utils.inventories.InventoryUtils;
 import ip.industrialProcessing.utils.working.IWorkHandler;
 import ip.industrialProcessing.utils.working.ServerWorker;
 
-public class TileEntityFilter extends TileEntityWorkerMachine {
+public class TileEntityFilter extends TileEntityPoweredWorkerMachine {
 
     public static RecipesFilter recipes = new RecipesFilter();
 
     public TileEntityFilter() {
+	super(LocalDirection.LEFT, 10000);
 	this.addStack(null, LocalDirection.UP, true, false);
 	this.addStack(null, LocalDirection.LEFT, false, true);
 	this.addStack(null, LocalDirection.DOWN, false, true);

@@ -17,6 +17,7 @@ public class PowerProducerManager {
     int storedPower = 0;
     int storageCapacity = 0;
     int maxPowerOutput = 1;
+    int updateCount = 0;
 
     public PowerProducerManager(TileEntity entity, IPowerProducer supplier, int capacity, int maxOutput) {
 	this.entity = entity;
@@ -33,6 +34,10 @@ public class PowerProducerManager {
 	    ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[i];
 	    searchPowerAcceptor(direction);
 	}
+	notifyUpdate();
+    }
+
+    private void notifyUpdate() {
 	entity.worldObj.markBlockForUpdate(entity.xCoord, entity.yCoord, entity.zCoord);
     }
 
@@ -58,7 +63,7 @@ public class PowerProducerManager {
 	    searchPowerAcceptors();
 	if (!connectedDirections.isEmpty()) {
 	    int production = this.supplier.producePower(storageCapacity - storedPower);
-	    if (production > 0) {
+	    if (production > 0 || storageCapacity > 0) { // distribute whenever there is power
 		storedPower += production;
 		// this shouldn't happen if generatePower is implemented
 		// correctly:
@@ -74,6 +79,7 @@ public class PowerProducerManager {
 			storedPower -= used;
 		    }
 		}
+		notifyUpdate();
 	    }
 	}
     }
