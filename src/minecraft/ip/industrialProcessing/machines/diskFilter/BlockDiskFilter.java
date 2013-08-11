@@ -8,9 +8,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
+import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.machines.BlockMachine;
+import ip.industrialProcessing.machines.BlockMachineRendered;
 
-public class BlockDiskFilter extends BlockMachine {
+public class BlockDiskFilter extends BlockMachineRendered {
 
 	public BlockDiskFilter() {
 		super(ConfigMachineBlocks.getDiskFilterBlockID(), Material.iron, 1f, Block.soundMetalFootstep, "Disk Filter", IndustrialProcessing.tabMachines); 
@@ -20,5 +22,10 @@ public class BlockDiskFilter extends BlockMachine {
 	public TileEntity createNewTileEntity(World world) { 
 		return new TileEntityDiskFilter();
 	}
+	
+    @Override
+    public int getRenderType() {
+    	return ConfigRenderers.getRendererDiskFilterId();
+    }
 
 }

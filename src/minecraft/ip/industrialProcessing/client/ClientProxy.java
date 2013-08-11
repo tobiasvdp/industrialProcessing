@@ -11,6 +11,8 @@ import ip.industrialProcessing.machines.RendererBlock;
 import ip.industrialProcessing.machines.RendererTileEntity;
 import ip.industrialProcessing.machines.crusher.ModelCrusher;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
+import ip.industrialProcessing.machines.diskFilter.ModelDiskFilter;
+import ip.industrialProcessing.machines.diskFilter.TileEntityDiskFilter;
 import ip.industrialProcessing.machines.filter.ModelFilter;
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
 import ip.industrialProcessing.machines.magneticSeparator.ModelMagneticSeperator;
@@ -38,5 +40,9 @@ public class ClientProxy extends CommonProxy {
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrusher.class, new RendererTileEntity(IndustrialProcessing.blockCrusher, "ModelCrusher", new ModelCrusher()));
 	ConfigRenderers.setRendererCrusherId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererCrusherId(), new TileEntityCrusher()));
+	
+	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDiskFilter.class, new RendererTileEntity(IndustrialProcessing.blockDiskFilter, "ModelDiskFilter", new ModelDiskFilter()));
+	ConfigRenderers.setRendererDiskFilterIdId(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererDiskFilterId(), new TileEntityDiskFilter()));
     }
 }
