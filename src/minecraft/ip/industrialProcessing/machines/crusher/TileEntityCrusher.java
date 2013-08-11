@@ -6,6 +6,8 @@ import cpw.mods.fml.relauncher.Side;
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityMachine;
+import ip.industrialProcessing.machines.TileEntityPoweredWorkerMachine;
+import ip.industrialProcessing.machines.TileEntityWorkerMachine;
 import ip.industrialProcessing.power.IPowerAcceptor;
 import ip.industrialProcessing.recipes.Recipe;
 import net.minecraft.block.Block;
@@ -20,30 +22,17 @@ import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.liquids.ILiquidTank;
 import net.minecraftforge.liquids.LiquidStack;
 
-public class TileEntityCrusher extends TileEntityMachine implements IPowerAcceptor {
+public class TileEntityCrusher extends TileEntityPoweredWorkerMachine {
+ 
 
-    private static final int MAX_STORED_POWER = 1000;
-    private int storedPower = 0;
-
-    public static RecipesCrusher recipes = new RecipesCrusher();
-    private int speed;
-    public EntityPlayer placedBy;
-    private LocalDirection powerInputDirection;
+    public static RecipesCrusher recipes = new RecipesCrusher();   
 
     public TileEntityCrusher() {
+	super(LocalDirection.LEFT, 10000, 100); // does 100 work per tick, lasts 100 ticks
 	this.addStack(null, LocalDirection.UP, true, false);
-	this.addStack(null, LocalDirection.DOWN, false, true);
-	this.speed = 10;
-	this.powerInputDirection = LocalDirection.LEFT;
+	this.addStack(null, LocalDirection.DOWN, false, true); 
     }
-
-    @Override
-    public void updateEntity() {
-	// TODO: this still consumes power if there is no work!
-	int maxConsume = Math.min(storedPower, 10);
-	maxConsume = work(maxConsume/5) * 5; 
-	this.storedPower -= maxConsume;  
-    }
+ 
 
     @Override
     protected boolean isValidInput(int slot, int itemID) {
@@ -54,23 +43,6 @@ public class TileEntityCrusher extends TileEntityMachine implements IPowerAccept
     public Iterator<Recipe> iterateRecipes() {
 	return recipes.iterator();
     }
-
-    @Override
-    public int acceptPower(int maxAmount, ForgeDirection side) {
-	LocalDirection direction = DirectionUtils.GetLocalDirection(side, getForwardDirection());
-	if (direction == powerInputDirection) {
-	    int maxRequest = (MAX_STORED_POWER - storedPower);
-	    maxRequest = Math.min(maxAmount, maxRequest);
-	    this.storedPower += maxRequest; 
-	    return maxRequest;
-	}
-	return 0;
-    }
-
-    @Override
-    public boolean canAcceptPower(ForgeDirection side) {
-	LocalDirection direction = DirectionUtils.GetLocalDirection(side, getForwardDirection());
-	return direction == powerInputDirection;
-    }
+ 
 
 }

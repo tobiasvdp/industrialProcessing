@@ -26,7 +26,7 @@ public class RecipesCrusher extends RecipesMachine {
 		copperCrushing.outputs = new RecipeOutputSlot[]{
 				new RecipeOutputSlot(1, IndustrialProcessing.itemCopperCrushedChunks.itemID, RecipeSlotType.INVENTORY, 1, 3, 0)
 		};
-		copperCrushing.workRequired = 30;
+		copperCrushing.workRequired = 3000;
 		addRecipe(copperCrushing);
 		
 		//Large copper to Crushed copper chunks
@@ -38,7 +38,7 @@ public class RecipesCrusher extends RecipesMachine {
 		copperCrushing2.outputs = new RecipeOutputSlot[]{
 				new RecipeOutputSlot(1, IndustrialProcessing.itemCopperCrushedChunks.itemID, RecipeSlotType.INVENTORY, 1, 1, 0)
 		};
-		copperCrushing2.workRequired = 30;		
+		copperCrushing2.workRequired = 3000;		
 		addRecipe(copperCrushing2);
 		
 		//Washed copper to fine ores chunks
@@ -50,7 +50,7 @@ public class RecipesCrusher extends RecipesMachine {
 		copperCrushing3.outputs = new RecipeOutputSlot[]{
 				new RecipeOutputSlot(1, IndustrialProcessing.itemCopperFineChunks.itemID, RecipeSlotType.INVENTORY, 1, 1, 0)
 		};
-		copperCrushing3.workRequired = 30;		
+		copperCrushing3.workRequired = 3000;		
 		addRecipe(copperCrushing3);
 		
 		//Tin ore to Crushed Tin chunks
@@ -62,7 +62,7 @@ public class RecipesCrusher extends RecipesMachine {
 		TinCrushing.outputs = new RecipeOutputSlot[]{
 				new RecipeOutputSlot(1, IndustrialProcessing.itemTinCrushedChunks.itemID, RecipeSlotType.INVENTORY, 1, 3, 0)
 		};
-		TinCrushing.workRequired = 30;		
+		TinCrushing.workRequired = 3000;		
 		addRecipe(TinCrushing);
 		
 		//Large Tin to Crushed Tin chunks
@@ -74,7 +74,7 @@ public class RecipesCrusher extends RecipesMachine {
 		TinCrushing2.outputs = new RecipeOutputSlot[]{
 				new RecipeOutputSlot(1, IndustrialProcessing.itemTinCrushedChunks.itemID, RecipeSlotType.INVENTORY, 1, 1, 0)
 		};
-		TinCrushing2.workRequired = 30;		
+		TinCrushing2.workRequired = 3000;		
 		addRecipe(TinCrushing2);
 		
 		//Washed tin to fine ores chunks
@@ -86,7 +86,7 @@ public class RecipesCrusher extends RecipesMachine {
 		tinCrushing3.outputs = new RecipeOutputSlot[]{
 				new RecipeOutputSlot(1, IndustrialProcessing.itemTinFineChunks.itemID, RecipeSlotType.INVENTORY, 1, 1, 0)
 		};
-		tinCrushing3.workRequired = 30;		
+		tinCrushing3.workRequired = 3000;		
 		addRecipe(tinCrushing3);
 		
 		//Iron ore to Crushed Iron chunks
@@ -98,7 +98,7 @@ public class RecipesCrusher extends RecipesMachine {
 		IronCrushing.outputs = new RecipeOutputSlot[]{
 				new RecipeOutputSlot(1, IndustrialProcessing.itemIronCrushedChunks.itemID, RecipeSlotType.INVENTORY, 1, 3, 0)
 		};
-		IronCrushing.workRequired = 30;		
+		IronCrushing.workRequired = 3000;		
 		addRecipe(IronCrushing);
 		
 		//Large Iron to Crushed Iron chunks
@@ -110,7 +110,7 @@ public class RecipesCrusher extends RecipesMachine {
 		IronCrushing2.outputs = new RecipeOutputSlot[]{
 				new RecipeOutputSlot(1, IndustrialProcessing.itemIronCrushedChunks.itemID, RecipeSlotType.INVENTORY, 1, 1, 0)
 		};
-		IronCrushing2.workRequired = 30;		
+		IronCrushing2.workRequired = 3000;		
 		addRecipe(IronCrushing2);
 		
 		//Washed iron to fine ores chunks
@@ -122,7 +122,7 @@ public class RecipesCrusher extends RecipesMachine {
 		ironCrushing3.outputs = new RecipeOutputSlot[]{
 				new RecipeOutputSlot(1, IndustrialProcessing.itemIronFineChunks.itemID, RecipeSlotType.INVENTORY, 1, 1, 0)
 		};
-		ironCrushing3.workRequired = 30;		
+		ironCrushing3.workRequired = 3000;		
 		addRecipe(ironCrushing3);
 	}
 }

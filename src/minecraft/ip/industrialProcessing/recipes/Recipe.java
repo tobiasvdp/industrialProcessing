@@ -7,6 +7,5 @@ import java.util.ArrayList;
 public class Recipe {
 	public RecipeInputSlot[] inputs;
 	public RecipeOutputSlot[] outputs;
-	public int workRequired;
-	public int powerRequired;
+	public int workRequired; 
 }

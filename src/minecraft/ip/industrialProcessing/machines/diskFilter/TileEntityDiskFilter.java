@@ -8,10 +8,11 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityFluidMachine;
+import ip.industrialProcessing.machines.TileEntityFluidWorkerMachine;
 import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.recipes.Recipe;
 
-public class TileEntityDiskFilter extends TileEntityFluidMachine {
+public class TileEntityDiskFilter extends TileEntityFluidWorkerMachine {
 
     public TileEntityDiskFilter() {
 	addStack(null, LocalDirection.UP, true, false); // Mixing ingredient

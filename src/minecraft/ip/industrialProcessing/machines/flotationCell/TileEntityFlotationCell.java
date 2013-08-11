@@ -8,10 +8,11 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityFluidMachine;
+import ip.industrialProcessing.machines.TileEntityFluidWorkerMachine;
 import ip.industrialProcessing.machines.thickener.RecipesThickener;
 import ip.industrialProcessing.recipes.Recipe;
 
-public class TileEntityFlotationCell extends TileEntityFluidMachine {
+public class TileEntityFlotationCell extends TileEntityFluidWorkerMachine {
 
     public TileEntityFlotationCell() {
 
