@@ -6,6 +6,7 @@ import org.lwjgl.util.vector.Vector;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.Entity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.util.Vec3;
 import ip.industrialProcessing.machines.Model;
@@ -194,7 +195,7 @@ public class ModelMixer extends Model {
 	}
 
 	@Override
-	public void renderModel(float f1) {
+	public void renderModel(TileEntity entity,float f1) {
 		SupportBeamRightBottom.render(f1);
 		SupportBeamLeftBottom.render(f1);
 		WallFront.render(f1);

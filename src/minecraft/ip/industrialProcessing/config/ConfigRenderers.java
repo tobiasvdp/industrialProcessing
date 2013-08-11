@@ -7,6 +7,7 @@ public class ConfigRenderers {
 	private int rendererMagneticSeperatorID;
 	private int rendererCrusherID;
 	private int rendererDiskFilterID;
+	private int RendererTransportFluidsId;
 
 	public static int getRendererFilterId() {return getInstance().rendererFilterID;}
 	public static void setRendererFilterId(int value) {getInstance().rendererFilterID = value;}
@@ -19,7 +20,9 @@ public class ConfigRenderers {
 	public static void setRendererCrusherId(int value) {getInstance().rendererCrusherID = value;}
 	public static int getRendererDiskFilterId() {return getInstance().rendererDiskFilterID;}
 	public static void setRendererDiskFilterIdId(int value) {getInstance().rendererDiskFilterID = value;}
-
+	public static int getRendererTransportFluidsId() {return	getInstance().RendererTransportFluidsId;} 
+	public static void setRendererTransportFluidsId(int value) {getInstance().RendererTransportFluidsId = value;}
+	
 	private ConfigRenderers() {
 
 	}
@@ -28,5 +31,6 @@ public class ConfigRenderers {
 
 	public static ConfigRenderers getInstance() {
 		return instance;
-	} 
+	}
+	
 }

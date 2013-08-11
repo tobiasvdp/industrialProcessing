@@ -19,6 +19,8 @@ import ip.industrialProcessing.machines.magneticSeparator.ModelMagneticSeperator
 import ip.industrialProcessing.machines.magneticSeparator.TileEntityMagneticSeparator;
 import ip.industrialProcessing.machines.mixer.ModelMixer;
 import ip.industrialProcessing.machines.mixer.TileEntityMixer;
+import ip.industrialProcessing.transport.fluids.ModelTransportFluids;
+import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids;
 
 public class ClientProxy extends CommonProxy {
     public static int renderPass;
@@ -44,5 +46,9 @@ public class ClientProxy extends CommonProxy {
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDiskFilter.class, new RendererTileEntity(IndustrialProcessing.blockDiskFilter, "ModelDiskFilter", new ModelDiskFilter()));
 	ConfigRenderers.setRendererDiskFilterIdId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererDiskFilterId(), new TileEntityDiskFilter()));
+	
+	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTransportFluids.class, new RendererTileEntity(IndustrialProcessing.blockTransportFluids, "ModelTransportFluids", new ModelTransportFluids()));
+	ConfigRenderers.setRendererTransportFluidsId(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererTransportFluidsId(), new TileEntityTransportFluids()));
     }
 }

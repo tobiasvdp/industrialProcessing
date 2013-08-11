@@ -6,6 +6,7 @@ import ip.industrialProcessing.machines.Model;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.tileentity.TileEntity;
 
 public class ModelCrusher extends Model {
     // fields
@@ -126,7 +127,7 @@ public class ModelCrusher extends Model {
     }
 
     @Override
-    public void renderModel(float scale) {
+    public void renderModel(TileEntity entity,float scale) {
 	SupportBeamRight.render(scale);
 	SupportBeamLeft.render(scale);
 	CrusherPlate1.render(scale);

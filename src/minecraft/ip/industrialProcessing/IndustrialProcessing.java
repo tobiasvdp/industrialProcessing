@@ -41,6 +41,8 @@ import ip.industrialProcessing.power.buildcraftGenerator.BlockBuildcraftGenerato
 import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
 import ip.industrialProcessing.power.manualGenerator.BlockManualGenerator;
 import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
+import ip.industrialProcessing.transport.fluids.BlockTransportFluids;
+import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids;
 import ip.industrialProcessing.utils.DamageSourceIP;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockOre;
@@ -163,6 +165,9 @@ public class IndustrialProcessing {
     public final static BlockFlotationCell blockFlotationCell = new BlockFlotationCell();
     public final static BlockHydroCyclone blockHydroCyclone = new BlockHydroCyclone();
     public final static BlockDiskFilter blockDiskFilter = new BlockDiskFilter();
+    
+    //create fluidpipe
+    public final static BlockTransportFluids blockTransportFluids = new BlockTransportFluids();
 
     // create generators
     public final static BlockManualGenerator blockManualGenerator = new BlockManualGenerator();
@@ -210,6 +215,10 @@ public class IndustrialProcessing {
 	registerMachine(blockManualGenerator, "IP.Generator.Manual", "Crank Generator", TileEntityManualGenerator.class);
 	registerMachine(blockBuildcraftGenerator, "IP.Generator.Buildcraft", "Buildcraft Generator", TileEntityBuildcraftGenerator.class);
 	registerMachine(blockLargeCrusher, "IP.Machine.Multi.Crusher", "Large Crusher", TileEntityLargeCrusher.class);
+	
+	//register transport
+	registerMachine(blockTransportFluids, "IP.Transport.Fluids", "Liquid pipe", TileEntityTransportFluids.class);
+	//register ores
 
 	registerOre(blockCopperOre, "IP.World.CopperOre", "Copper Ore", "copper");
 	registerOre(blockTinOre, "IP.World.TinOre", "Tin Ore", "copper");

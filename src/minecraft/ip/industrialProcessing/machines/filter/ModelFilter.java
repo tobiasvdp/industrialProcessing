@@ -6,6 +6,7 @@ import ip.industrialProcessing.machines.Model;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.tileentity.TileEntity;
 
 public class ModelFilter extends Model {
 	// fields
@@ -222,7 +223,7 @@ public class ModelFilter extends Model {
 	}
 
 	@Override
-	public void renderModel(float f1) {
+	public void renderModel(TileEntity entity,float f1) {
 		plateShape3.render(f1);
 		plateShape4.render(f1);
 		plateShape2.render(f1);
