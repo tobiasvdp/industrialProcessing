@@ -23,7 +23,7 @@ public class ConfigMachineBlocks {
     private int largeCrusherBlockID = 700;
 
     private int manualGeneratorBlockID = 800; // Crank Generator
-    
+    private int buildcraftGeneratorBlockID = 801; // Buildcraft Joule converter
     public static ConfigMachineBlocks getInstance() {
 	return instance;
     }
@@ -83,6 +83,10 @@ public class ConfigMachineBlocks {
 
     public static int getManualGeneratorBlockID() {
 	return getInstance().manualGeneratorBlockID;
+    }
+
+    public static int getBuildcraftGeneratorBlockID() {
+	return getInstance().buildcraftGeneratorBlockID;
     }
 
 }
