@@ -11,11 +11,13 @@ import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.machines.TileEntityFluidMachine;
 import ip.industrialProcessing.machines.TileEntityFluidWorkerMachine;
 import ip.industrialProcessing.machines.TileEntityMachine;
+import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
 import ip.industrialProcessing.recipes.Recipe;
 
-public class TileEntityClassifier extends TileEntityFluidWorkerMachine {
+public class TileEntityClassifier extends TileEntityPoweredFluidWorkerMachine {
 
     public TileEntityClassifier() {
+	super(LocalDirection.LEFT, 10000);
 	addStack(null, LocalDirection.UP, true, false); // Input Solid
 							// ingredient
 	addStack(null, LocalDirection.DOWN, false, true); // Output Solid

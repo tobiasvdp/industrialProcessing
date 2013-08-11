@@ -10,11 +10,13 @@ import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityFluidMachine;
 import ip.industrialProcessing.machines.TileEntityFluidWorkerMachine;
 import ip.industrialProcessing.machines.TileEntityMachine;
+import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
 import ip.industrialProcessing.recipes.Recipe;
 
-public class TileEntityDryer extends TileEntityFluidWorkerMachine {
+public class TileEntityDryer extends TileEntityPoweredFluidWorkerMachine {
 
     public TileEntityDryer() {
+	super(LocalDirection.LEFT, 10000);
 	addStack(null, LocalDirection.UP, true, false); // Mixing ingredient
 
 	LocalDirection[] nodirections = new LocalDirection[0];

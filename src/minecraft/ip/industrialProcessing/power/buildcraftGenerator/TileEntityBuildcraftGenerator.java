@@ -10,7 +10,7 @@ import ip.industrialProcessing.power.TileEntityPowerGenerator;
 
 public class TileEntityBuildcraftGenerator extends TileEntityPowerGenerator implements IPowerReceptor {
 
-    private static final float CONVERSION_RATE = 10;
+    private static final float CONVERSION_RATE = 2f;
     private PowerHandler powerHandler;
 
     public TileEntityBuildcraftGenerator() {

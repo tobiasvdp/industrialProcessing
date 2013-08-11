@@ -10,21 +10,21 @@ import java.util.Iterator;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 
-public abstract class TileEntityFluidPoweredWorkerMachine extends TileEntityFluidWorkerMachine implements IPowerAcceptor {
+public abstract class TileEntityPoweredFluidWorkerMachine extends TileEntityFluidWorkerMachine implements IPowerAcceptor {
  
     private LocalDirection powerInputSide;
     private int powerStorage;
     private int powerCapacity;
     private int maxWorkSpeed;
 
-    public TileEntityFluidPoweredWorkerMachine(LocalDirection powerInput, int powerCapacity, int maxWorkSpeed) {
+    public TileEntityPoweredFluidWorkerMachine(LocalDirection powerInput, int powerCapacity, int maxWorkSpeed) {
 	this.powerInputSide = powerInput;
 	this.powerStorage = 0;
 	this.powerCapacity = powerCapacity;
 	this.maxWorkSpeed = maxWorkSpeed;
     }
 
-    public TileEntityFluidPoweredWorkerMachine(LocalDirection powerInput, int powerCapacity) {
+    public TileEntityPoweredFluidWorkerMachine(LocalDirection powerInput, int powerCapacity) {
 	this(powerInput, powerCapacity, PowerWorkerHelper.DEFAULT_WORK_SPEED);
     }
 
