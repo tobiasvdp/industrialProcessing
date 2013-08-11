@@ -1,5 +1,7 @@
 package ip.industrialProcessing.machines.diskFilter;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import ip.industrialProcessing.machines.Model;
@@ -564,6 +566,7 @@ public class ModelDiskFilter extends Model {
 
 	@Override
 	public void renderModelAnimated(float f5, float progress) {
+		progress = Math.max(0, Math.min(1, progress));
 	    SupportBeamTop.render(f5);
 	    SupportBeamRightBottom.render(f5);
 	    SupportBeamLeftBottom.render(f5);
@@ -591,6 +594,10 @@ public class ModelDiskFilter extends Model {
 	    Geul10.render(f5);
 	    Geul11.render(f5);
 	    Geul12.render(f5);
+	    
+		GL11.glPushMatrix();
+		GL11.glRotatef(progress * 360 * 3f, 0, 0, 1);
+	    
 	    as.render(f5);
 	    as4Back3.render(f5);
 	    as3Back3.render(f5);
@@ -620,6 +627,9 @@ public class ModelDiskFilter extends Model {
 	    as4Back1.render(f5);
 	    as3Back1.render(f5);
 	    as1Front2.render(f5);
+	    
+		GL11.glPopMatrix();
+	    
 	    Glider.render(f5);
 	    OreBar.render(f5);
 	}
