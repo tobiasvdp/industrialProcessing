@@ -3,6 +3,7 @@ package ip.industrialProcessing.machines;
 import ic2.api.Direction;
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
+import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.packetHandlers.TileSyncHandler;
 import ip.industrialProcessing.recipes.IRecipeWorkHandler;
 import ip.industrialProcessing.recipes.RecipeWorker;
@@ -36,7 +37,7 @@ public abstract class TileEntityMachine extends TileEntity implements ISidedInve
     private ArrayList<MachineItemStack> itemStacks = new ArrayList<MachineItemStack>();
     private int[][] itemStackSideSlots = new int[6][0]; 
 
-     protected ForgeDirection getForwardDirection(){
+     public ForgeDirection getForwardDirection(){
 	 int meta = this.worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
 	 return BlockMachine.getForwardFromMetadata(meta);
      }
@@ -296,5 +297,5 @@ public abstract class TileEntityMachine extends TileEntity implements ISidedInve
     protected void notifyBlockChange() {
 	if (!this.worldObj.isRemote)
 	    this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-    } 
+    }  
 }

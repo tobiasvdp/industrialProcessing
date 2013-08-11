@@ -17,13 +17,18 @@ public class ConfigMachineBlocks {
     private int flotationCellBlockID = 507;
     private int hydroCycloneBlockID = 508;
     private int diskFilterBlockID = 509;
-    
+
     private int machineFrameBlockID = 600;
     private int multiMachineInputBlockID = 601;
     private int largeCrusherBlockID = 700;
 
     private int manualGeneratorBlockID = 800; // Crank Generator
     private int buildcraftGeneratorBlockID = 801; // Buildcraft Joule converter
+
+    private int wireBlockID = 900;
+    private int voltMeterBlockID = 901;
+    private int ampMeterBlockID = 902;
+
     public static ConfigMachineBlocks getInstance() {
 	return instance;
     }
@@ -69,7 +74,7 @@ public class ConfigMachineBlocks {
 	return getInstance().thickenerBlockID;
     }
 
-    public static int getFlotationCellBlockID() { 
+    public static int getFlotationCellBlockID() {
 	return getInstance().flotationCellBlockID;
     }
 
@@ -87,6 +92,18 @@ public class ConfigMachineBlocks {
 
     public static int getBuildcraftGeneratorBlockID() {
 	return getInstance().buildcraftGeneratorBlockID;
+    }
+
+    public static int getWireBlockID() {
+	return getInstance().wireBlockID;
+    }
+
+    public static int getVoltMeterBlockID() {
+	return getInstance().voltMeterBlockID;
+    }
+
+    public static int getAmpMeterBlockID() {
+	return getInstance().ampMeterBlockID;
     }
 
 }

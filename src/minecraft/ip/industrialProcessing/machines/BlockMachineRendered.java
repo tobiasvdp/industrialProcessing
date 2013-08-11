@@ -13,17 +13,12 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockMachineRendered extends BlockMachine {
+public abstract class BlockMachineRendered extends BlockMachine {
 
     public BlockMachineRendered(int par1, Material par2Material, float hardness, StepSound stepSound, String name, CreativeTabs tab) {
 	super(par1, par2Material, hardness, stepSound, name, tab); 
     }
-
-    @Override
-    public TileEntity createNewTileEntity(World world) {
-	return null;
-    }
-
+ 
     @Override
     public boolean isOpaqueCube() {
 	return false;
