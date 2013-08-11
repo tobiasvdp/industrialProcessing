@@ -40,7 +40,7 @@ public class TileEntityMixer extends TileEntityFluidWorkerMachine {
 	addStack(null, nodirections, false, true); // Liquid Output Full
 						   // Output
 
-	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.BACK, true, false);
+	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.LEFT, true, false);
 	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.DOWN, false, true);
     }
 
