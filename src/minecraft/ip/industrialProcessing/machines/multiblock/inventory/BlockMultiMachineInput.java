@@ -12,20 +12,20 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
-public class BlockMultiMachineInventory extends BlockMultiMachineFrame {
+public class BlockMultiMachineInput extends BlockMultiMachineFrame {
 
 	private Icon completedIcon;
 	private Icon connectedIcon;
 	private Icon disconnectedIcon;
 	
-	public BlockMultiMachineInventory() {
+	public BlockMultiMachineInput() {
 		super(ConfigMachineBlocks.getMultiMachineInputBlockID(),"BlockMultiMachineInventory",
 				IndustrialProcessing.tabMachines);
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityMultiMachineInventory();
+		return new TileEntityMultiMachineInput();
 	}
 
 	@Override

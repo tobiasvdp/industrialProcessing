@@ -31,8 +31,8 @@ import ip.industrialProcessing.machines.multiblock.MachineFrameState;
 import ip.industrialProcessing.machines.multiblock.TileEntityMultiMachineFrame;
 import ip.industrialProcessing.machines.multiblock.crusher.BlockLargeCrusher;
 import ip.industrialProcessing.machines.multiblock.crusher.TileEntityLargeCrusher;
-import ip.industrialProcessing.machines.multiblock.inventory.BlockMultiMachineInventory;
-import ip.industrialProcessing.machines.multiblock.inventory.TileEntityMultiMachineInventory;
+import ip.industrialProcessing.machines.multiblock.inventory.BlockMultiMachineInput;
+import ip.industrialProcessing.machines.multiblock.inventory.TileEntityMultiMachineInput;
 import ip.industrialProcessing.machines.multiblock.machineFrame.BlockMachineFrame;
 import ip.industrialProcessing.machines.multiblock.machineFrame.TileEntityMachineFrame;
 import ip.industrialProcessing.machines.thickener.BlockThickener;
@@ -174,7 +174,7 @@ public class IndustrialProcessing {
     public final static BlockBuildcraftGenerator blockBuildcraftGenerator = new BlockBuildcraftGenerator();
 
     // create Multiblock Machines
-    public final static BlockMultiMachineInventory blockMultiMachineInventory = new BlockMultiMachineInventory();
+    public final static BlockMultiMachineInput blockMultiMachineInput = new BlockMultiMachineInput();
 
     public final static BlockMachineFrame blockMachineFrame = new BlockMachineFrame();
     public final static BlockLargeCrusher blockLargeCrusher = new BlockLargeCrusher();
@@ -234,7 +234,7 @@ public class IndustrialProcessing {
 	LanguageRegistry.addName(bucketOreSludgeTin, "Tin sludge Bucket");
 
 	// register multistructures
-	registerMachine(blockMultiMachineInventory, "MultiBlockInventory", "Multiblock hatch", TileEntityMultiMachineInventory.class);
+	registerMachine(blockMultiMachineInput, "MultiBlockInventory", "Multiblock hatch", TileEntityMultiMachineInput.class);
 	registerMachine(blockMachineFrame, "MultiBlockFrame", "Multiblock Frame", TileEntityMachineFrame.class);
 
 	NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
