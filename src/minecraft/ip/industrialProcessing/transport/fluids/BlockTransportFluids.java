@@ -30,6 +30,7 @@ public class BlockTransportFluids extends BlockTransport {
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, int par5) {
 		TileEntityTransportFluids entity = (TileEntityTransportFluids) world.getBlockTileEntity(x, y, z);
+		entity.setNeighborChanged(true);
 		entity.senseSides(world);
 		world.markBlockForUpdate(x, y, z);
 	}

@@ -3,6 +3,7 @@ package ip.industrialProcessing.transport.fluids;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.machines.Model;
 
@@ -174,9 +175,11 @@ public class ModelTransportFluids extends Model{
 	  }
 
 	@Override
-	public void renderModel(TileEntity entity,float f5) {
-		TileEntityTransportFluids te = (TileEntityTransportFluids) entity;
-		if (te.blockMetadata != -1){
+	public void renderModel(World world,int x,int y,int z,float f5) {
+		if (world != null){
+		TileEntityTransportFluids te = (TileEntityTransportFluids) world.getBlockTileEntity(x, y, z);
+
+		te.senseSides(world);
 		ForgeDirection dir = te.getForward();
 		
 	    Shape1.render(f5);

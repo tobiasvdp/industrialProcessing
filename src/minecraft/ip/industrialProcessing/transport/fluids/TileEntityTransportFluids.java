@@ -25,7 +25,8 @@ import ip.industrialProcessing.transport.TileEntityTransport;
 public class TileEntityTransportFluids extends TileEntityTransport implements IFluidHandler, IMachineTanks {
 
 	private ArrayList<MachineFluidTank> fluidTanks = new ArrayList<MachineFluidTank>();
-	private int[][] fluidTankSideslots = new int[6][0]; 
+	private int[][] fluidTankSideslots = new int[6][0];
+	private boolean neighborChanged = true; 
 	
     @Override
     public void writeToNBT(net.minecraft.nbt.NBTTagCompound nbt) {
@@ -361,6 +362,13 @@ public class TileEntityTransportFluids extends TileEntityTransport implements IF
 		if (entity == null) return false;
 		if (entity instanceof IFluidHandler || entity instanceof IPipe){System.out.println(dir.toString()); return true;}
 		return false;
+	}
+
+	public void setNeighborChanged(boolean b) {
+		neighborChanged = b;
+	}
+	public boolean isNeighborChanged() {
+		return neighborChanged;
 	}
 
 }

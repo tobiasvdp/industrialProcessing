@@ -7,6 +7,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 public class ModelFilter extends Model {
 	// fields
@@ -223,7 +224,7 @@ public class ModelFilter extends Model {
 	}
 
 	@Override
-	public void renderModel(TileEntity entity,float f1) {
+	public void renderModel(World world,int x,int y,int z,float f1) {
 		plateShape3.render(f1);
 		plateShape4.render(f1);
 		plateShape2.render(f1);

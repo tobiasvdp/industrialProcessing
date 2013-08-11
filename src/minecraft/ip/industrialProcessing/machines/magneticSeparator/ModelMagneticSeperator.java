@@ -3,6 +3,7 @@ package ip.industrialProcessing.machines.magneticSeparator;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import ip.industrialProcessing.machines.Model;
 
 public class ModelMagneticSeperator extends Model {
@@ -216,7 +217,7 @@ public class ModelMagneticSeperator extends Model {
 	}
 
 	@Override
-	public void renderModel(TileEntity entity,float f) {
+	public void renderModel(World world,int x,int y,int z,float f) {
 		Shape5.render(f);
 		Shape6.render(f);
 		Shape14.render(f);

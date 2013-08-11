@@ -5,6 +5,7 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import ip.industrialProcessing.machines.Model;
 
 public class ModelDiskFilter extends Model {
@@ -511,7 +512,7 @@ public class ModelDiskFilter extends Model {
 	  }
 
 	@Override
-	public void renderModel(TileEntity entity,float f5) {
+	public void renderModel(World world,int x,int y,int z,float f5) {
 	    SupportBeamTop.render(f5);
 	    SupportBeamRightBottom.render(f5);
 	    SupportBeamLeftBottom.render(f5);

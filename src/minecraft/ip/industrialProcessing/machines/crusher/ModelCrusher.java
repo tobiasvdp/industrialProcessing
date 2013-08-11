@@ -7,6 +7,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 public class ModelCrusher extends Model {
     // fields
@@ -127,7 +128,7 @@ public class ModelCrusher extends Model {
     }
 
     @Override
-    public void renderModel(TileEntity entity,float scale) {
+    public void renderModel(World world,int x,int y,int z,float scale) {
 	SupportBeamRight.render(scale);
 	SupportBeamLeft.render(scale);
 	CrusherPlate1.render(scale);

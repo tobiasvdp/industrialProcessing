@@ -106,7 +106,7 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 		if (tl instanceof TileEntityMachine){
 			this.model.renderModelAnimated(0.0625F, animation);
 		}else{
-			this.model.renderModel(tl,0.0625F);
+			this.model.renderModel(world,i,j,k,0.0625F);
 		}
 
 		if (tl instanceof TileEntityFluidMachine) {
