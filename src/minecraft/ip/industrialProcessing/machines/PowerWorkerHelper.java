@@ -11,6 +11,9 @@ public class PowerWorkerHelper {
     }
 
     public static int acceptPower(int capacity, int storage, int maxAmount) {
-	return Math.min(capacity - storage, maxAmount);
+	
+	int drain = (capacity - storage) * maxAmount / capacity;
+	return drain;
+	//return Math.min(capacity - storage, maxAmount);
     }
 }

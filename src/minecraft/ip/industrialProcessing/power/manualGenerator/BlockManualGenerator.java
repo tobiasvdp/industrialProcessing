@@ -29,5 +29,11 @@ public class BlockManualGenerator extends BlockPowerGenerator {
         generator.playerPushed();
     }
     
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
+        TileEntityManualGenerator generator = (TileEntityManualGenerator)world.getBlockTileEntity(x, y, z);
+        generator.playerPushed();
+        return super.onBlockActivated(world, x, y, z, player, metadata, what, these, are);
+    }
     
 }

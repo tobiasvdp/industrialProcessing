@@ -1,6 +1,5 @@
 package ip.industrialProcessing.power;
-
-import ic2.api.Direction;
+ 
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityMachine;
@@ -25,10 +24,10 @@ public class PowerDistributorManager {
 
     protected TileEntityMachine entity;
 
-    protected boolean unDiscovered = false;
+    protected boolean undiscovered = true;
 
     public void searchPowerAcceptors() {
-	this.unDiscovered = false;
+	this.undiscovered = false;
 	ArrayList<PowerAcceptorConnection> connections = new ArrayList<PowerAcceptorConnection>();
 	for (int i = 0; i < ForgeDirection.VALID_DIRECTIONS.length; i++) {
 	    ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[i];
@@ -84,5 +83,10 @@ public class PowerDistributorManager {
 	}
 	PowerAcceptorConnection[] outputs = connections.toArray(new PowerAcceptorConnection[connections.size()]);
 	this.distributor.setOutputs(outputs);
+    }
+
+    public void update() { 
+	if (this.undiscovered)
+	    searchPowerAcceptors();
     }
 }

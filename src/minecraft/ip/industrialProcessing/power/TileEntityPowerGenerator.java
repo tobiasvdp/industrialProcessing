@@ -37,7 +37,7 @@ public abstract class TileEntityPowerGenerator extends TileEntityMachine impleme
 
     @Override
     public void updateEntity() {
-	this.powerManager.updateDistributor();
+	this.powerManager.update();
 	super.updateEntity();
     }
   

@@ -6,6 +6,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
+import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 
 public class BlockAmpMeter extends BlockMachineRendered {
@@ -23,5 +24,9 @@ public class BlockAmpMeter extends BlockMachineRendered {
         super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
         TileEntityAmpMeter ampMeter = (TileEntityAmpMeter)par1World.getBlockTileEntity(par2, par3, par4);
         ampMeter.checkConnections();
+    }
+    @Override
+    public int getRenderType() {
+	return ConfigRenderers.getRendererAmpMeterId();
     }
 }

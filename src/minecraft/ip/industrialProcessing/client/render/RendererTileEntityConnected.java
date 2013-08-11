@@ -36,7 +36,10 @@ public class RendererTileEntityConnected extends RendererTileEntity {
 		down = tile.getConnection(ForgeDirection.DOWN);
 	    }
 	}
-
+	if (world == null) {
+	    north = ConnectionState.PLUGGED;
+	    south = ConnectionState.CONNECTED;
+	}
 	this.model.renderModelConnected(f, north, east, south, west, up, down);
     }
 }

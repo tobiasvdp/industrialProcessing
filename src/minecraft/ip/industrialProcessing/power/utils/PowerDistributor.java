@@ -35,7 +35,7 @@ public class PowerDistributor {
 		}// else: give it all we've got!
 		availableOutput = Math.min(availableOutput, maxPerSide);
 		int usage = connection.acceptor.acceptPower(availableOutput, connection.connectedFrom, doDistribute);
-		this.usages[i] = usage;
+		this.usages[i] = usage; 
 		currentTotalUsage += usage;
 	    } else
 		usages[i] = 0;

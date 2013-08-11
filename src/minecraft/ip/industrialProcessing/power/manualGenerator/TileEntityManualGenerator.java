@@ -13,12 +13,12 @@ public class TileEntityManualGenerator extends TileEntityPowerGenerator {
     }
 
     // each tick, this amount of mechanical energy is converted to power.
-    private static final int DRAIN_RATE = 100;
+    private static final int DRAIN_RATE = 500;
     // if the player hits, 100 mechanical energy is stored in this generator
     private static final int PLAYER_FORCE_RATE = 1000;
     // how much mechanical energy can this generator store, prevents the player
     // from spamming this thing
-    private static final int MAX_STORAGE = 15000; // about 15 hits in the face, about 15 ticks to deplete
+    private static final int MAX_STORAGE = 15000; // about 15 hits in the face, about 30 ticks to deplete
 
     int storedPlayerForce = 0; // buffer
     private int currentProduction; // used for animation

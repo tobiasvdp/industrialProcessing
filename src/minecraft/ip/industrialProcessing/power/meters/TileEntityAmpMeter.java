@@ -16,23 +16,34 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class TileEntityAmpMeter extends TileEntityMachine implements IPowerAcceptor, IPowerProducer, IAnimationProgress {
 
-    LocalDirection inputSide = LocalDirection.LEFT;
-    LocalDirection outputSide = LocalDirection.RIGHT;
-    private PowerDistributor distributor;
+    LocalDirection inputSide = LocalDirection.UP;
+    LocalDirection outputSide = LocalDirection.BACK;
 
     public TileEntityAmpMeter() {
-	this.distributor = new PowerDistributor();
     }
 
     private float amps;
+    private PowerAcceptorConnection output;
+    private boolean connectionsUnchecked = true;
 
+    @Override
+    public boolean canUpdate() { 
+        return connectionsUnchecked;
+    }
+    
+    @Override
+    public void updateEntity() {
+        if(connectionsUnchecked)
+           checkConnections(); 
+    }
+    
     @Override
     public float getAnimationProgress(float scale) {
 	return this.amps;
     }
 
     @Override
-    public int producePower(int maxAmount) { 
+    public int producePower(int maxAmount) {
 	return 0; // this isn't used
     }
 
@@ -44,8 +55,14 @@ public class TileEntityAmpMeter extends TileEntityMachine implements IPowerAccep
 
     @Override
     public int acceptPower(int maxAmount, ForgeDirection side, boolean doAccept) {
-	if (canAcceptPower(side)) {
-	    return distributor.distributePower(maxAmount, maxAmount, doAccept);
+	if (canAcceptPower(side) && output != null) {
+	    
+	    int amount = output.acceptor.acceptPower(maxAmount, output.connectedFrom, doAccept);   //.distributePower(maxAmount, maxAmount, doAccept);
+	    if (doAccept) {
+		this.amps += (amount / 1000F - this.amps) / 10;
+		System.out.println("amount of power through the network: " + amount);
+	    }
+	    return amount;
 	}
 	return 0;
     }
@@ -62,12 +79,13 @@ public class TileEntityAmpMeter extends TileEntityMachine implements IPowerAccep
     }
 
     public void checkConnections() {
+	this.connectionsUnchecked  = false;
 	ForgeDirection outDir = DirectionUtils.GetWorldDirection(this.outputSide, getForwardDirection());
 	TileEntity entity = this.worldObj.getBlockTileEntity(this.xCoord + outDir.offsetX, this.yCoord + outDir.offsetY, this.zCoord + outDir.offsetZ);
 	if (entity instanceof IPowerAcceptor) {
-	    this.distributor.setOutputs(new PowerAcceptorConnection[] { new PowerAcceptorConnection((IPowerAcceptor) entity, outDir.getOpposite()) });
+	    this.output = new PowerAcceptorConnection((IPowerAcceptor) entity, outDir.getOpposite());
 	} else
-	    this.distributor.setOutputs(new PowerAcceptorConnection[0]);
+	    this.output = null;
 
     }
 

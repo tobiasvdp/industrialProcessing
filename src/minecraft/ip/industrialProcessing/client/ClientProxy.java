@@ -42,7 +42,8 @@ public class ClientProxy extends CommonProxy {
     private static final ModelCrusher crusher = new ModelCrusher();
     private static final ModelAnimatedMachine diskFilter = new ModelDiskFilter();
     private static final ModelConnected wire = new ModelWire();
-    private static final ModelAnimatedMachine voltMeter = new ModelVoltMeter();
+    private static final ModelAnimatedMachine voltMeter = new ModelVoltMeter(false);
+    private static final ModelAnimatedMachine ampMeter = new ModelVoltMeter(true);
     private static final ModelConnected transportFluids = new ModelTransportFluids();
     @Override
     public void registerRenderers() {
@@ -75,7 +76,7 @@ public class ClientProxy extends CommonProxy {
 	ConfigRenderers.setRendererVoltMeterId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererVoltMeterId(), new TileEntityVoltMeter()));
 
-	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAmpMeter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockAmpMeter, "ModelVoltMeter", voltMeter));
+	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAmpMeter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockAmpMeter, "ModelAmpMeter", ampMeter));
 	ConfigRenderers.setRendererAmpMeterId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererAmpMeterId(), new TileEntityAmpMeter()));
  

@@ -11,14 +11,13 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class TileEntityVoltMeter extends TileEntityMachine implements IPowerAcceptor, IAnimationProgress {
 
-    private LocalDirection inputSide = LocalDirection.RIGHT;
+    private LocalDirection inputSide = LocalDirection.BACK;
     private float volt;
 
     @Override
     public int acceptPower(int maxAmount, ForgeDirection side, boolean doAccept) {
 	if (!doAccept) { // sensing what's availabe on the wire in total
-	    System.out.println("Max Amount of power on the network: " + maxAmount);
-	    this.volt += (maxAmount / 100F - this.volt) / 10;
+	    this.volt += (maxAmount / 1000F - this.volt) / 10;
 	}
 	return 0;
     }

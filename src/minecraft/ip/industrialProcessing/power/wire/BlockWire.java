@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigBlocks;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
+import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 
 public class BlockWire extends BlockMachineRendered {
@@ -27,5 +28,10 @@ public class BlockWire extends BlockMachineRendered {
 	super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
 	TileEntityWire wire = (TileEntityWire) par1World.getBlockTileEntity(par2, par3, par4);
 	wire.verifyNeighbors();
+    }
+
+    @Override
+    public int getRenderType() {
+	return ConfigRenderers.getRendererWireId();
     }
 }
