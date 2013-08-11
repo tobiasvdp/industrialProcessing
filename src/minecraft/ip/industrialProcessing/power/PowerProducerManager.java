@@ -27,19 +27,15 @@ public class PowerProducerManager extends PowerDistributorManager {
     public void updateDistributor() {
 	if (this.unDiscovered)
 	    searchPowerAcceptors();
-	if (!connectedDirections.isEmpty()) {
-	    int production = this.supplier.producePower(storageCapacity - storedPower);
-	    if (production > 0 || storageCapacity > 0) { // distribute whenever
-							 // there is power
-		storedPower += production;
-		// this shouldn't happen if generatePower is implemented
-		// correctly:
-		if (storedPower > storageCapacity)
-		    storedPower = storageCapacity;
-		this.distributePower(storedPower, maxPowerOutput, true);
-		notifyUpdate();
-	    }
-	}
+	int production = this.supplier.producePower(storageCapacity - storedPower);
+	this.storedPower += production;
+	// sense the network for demand (distributor updates the power
+	// distribution internally in this call)
+	int desiredPower = this.distributePower(storedPower, maxPowerOutput, false);
+	// fulfill the demand of the network
+	this.storedPower -= this.distributePower(storedPower, maxPowerOutput, true);
+
+	notifyUpdate();
     }
 
     @Override

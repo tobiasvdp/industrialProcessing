@@ -8,13 +8,15 @@ public class PowerDistributor {
 
     private int totalUsage = 0;
     private int[] usages;
-    private PowerAcceptorConnection[] outputs;
+    private PowerAcceptorConnection[] outputs = new PowerAcceptorConnection[0];
 
-    
     public PowerAcceptorConnection[] getOutputs() {
 	return outputs;
     }
+
     public void setOutputs(PowerAcceptorConnection[] outputs) {
+	if (outputs == null)
+	    outputs = new PowerAcceptorConnection[0];
 	this.outputs = outputs;
 	this.usages = new int[outputs.length];
 	Arrays.fill(this.usages, 0);
@@ -29,7 +31,7 @@ public class PowerDistributor {
 		int availableOutput = availablePower;
 		if (doDistribute) {
 		    // divide proportional to demand:
-		    availableOutput = availablePower * this.usages[i] / Math.min(this.totalUsage, 1);
+		    availableOutput = availablePower * this.usages[i] / Math.max(this.totalUsage, 1);
 		}// else: give it all we've got!
 		availableOutput = Math.min(availableOutput, maxPerSide);
 		int usage = connection.acceptor.acceptPower(availableOutput, connection.connectedFrom, doDistribute);

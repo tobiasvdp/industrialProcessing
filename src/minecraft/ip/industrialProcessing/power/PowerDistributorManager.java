@@ -4,6 +4,8 @@ import ic2.api.Direction;
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityMachine;
+import ip.industrialProcessing.power.utils.PowerAcceptorConnection;
+import ip.industrialProcessing.power.utils.PowerDistributor;
 
 import java.util.ArrayList;
 
@@ -13,8 +15,7 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class PowerDistributorManager {
 
-    private boolean[] validLocalOutputDirections = new boolean[6];
-
+    private PowerDistributor distributor = new PowerDistributor();
     private IPowerProducer supplier;
 
     public PowerDistributorManager(TileEntityMachine entity, IPowerProducer supplier) {
@@ -24,17 +25,18 @@ public class PowerDistributorManager {
 
     protected TileEntityMachine entity;
 
-    protected ArrayList<ForgeDirection> connectedDirections = new ArrayList<ForgeDirection>();
     protected boolean unDiscovered = false;
 
     public void searchPowerAcceptors() {
 	this.unDiscovered = false;
-	connectedDirections.clear();
+	ArrayList<PowerAcceptorConnection> connections = new ArrayList<PowerAcceptorConnection>();
 	for (int i = 0; i < ForgeDirection.VALID_DIRECTIONS.length; i++) {
 	    ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[i];
 	    if (supplier.canProducePower(direction))
-		searchPowerAcceptor(direction);
+		searchPowerAcceptor(direction, connections);
 	}
+	PowerAcceptorConnection[] outputs = connections.toArray(new PowerAcceptorConnection[connections.size()]);
+	this.distributor.setOutputs(outputs);
 	notifyUpdate();
     }
 
@@ -42,11 +44,12 @@ public class PowerDistributorManager {
 	entity.worldObj.markBlockForUpdate(entity.xCoord, entity.yCoord, entity.zCoord);
     }
 
-    protected void searchPowerAcceptor(ForgeDirection direction) {
+    protected void searchPowerAcceptor(ForgeDirection direction, ArrayList<PowerAcceptorConnection> connections) {
 	IPowerAcceptor acceptor = getAcceptor(direction);
 	if (acceptor != null) {
-	    if (acceptor.canAcceptPower(direction.getOpposite())) {
-		connectedDirections.add(direction);
+	    ForgeDirection opposite = direction.getOpposite();
+	    if (acceptor.canAcceptPower(opposite)) {
+		connections.add(new PowerAcceptorConnection(acceptor, opposite));
 	    }
 	}
     }
@@ -59,70 +62,27 @@ public class PowerDistributorManager {
 	return null;
     }
 
-    public int distributePower(int storedPower, int maxPowerPerSide, boolean doAccept) {
-	// the more machines connected, the less each machine gets:
-	int maxPower = Math.min(maxPowerPerSide, storedPower / connectedDirections.size());
-	int outputted = 0;
-
-	IPowerAcceptor[] acceptors = new IPowerAcceptor[connectedDirections.size()];
-	ForgeDirection[] directions = new ForgeDirection[connectedDirections.size()];
-	for (int i = 0; i < connectedDirections.size(); i++) {
-	    ForgeDirection direction = connectedDirections.get(i);
-	    IPowerAcceptor acceptor = getAcceptor(direction);
-	    acceptors[i] = acceptor;
-	    directions[i] = direction;
-	}
-	return distributePower(acceptors, directions, storedPower, maxPowerPerSide, doAccept);
-    }
-
-    public static int distributePower(IPowerAcceptor[] acceptors, ForgeDirection[] acceptorSides, int maxPower, int maxPowerPerReceiver, boolean doAccept) {
-	int totalUsage = 0;
-	int[] usages = new int[acceptors.length];
-
-	for (int i = 0; i < acceptors.length; i++) {
-	    IPowerAcceptor acceptor = acceptors[i];
-	    ForgeDirection side = acceptorSides[i];
-	    if (acceptor != null) {
-		int maxOutput = maxPowerPerReceiver < 0 ? maxPower : Math.min(maxPower, maxPowerPerReceiver);
-		int usage = acceptor.acceptPower(maxOutput, side, false);
-		// protection against abuse of acceptors that want to take to
-		// much:
-		usages[i] = Math.min(usage, maxOutput);
-		totalUsage += usage;
-	    }
-	}
-	if (!doAccept || totalUsage == 0) {
-	    return totalUsage;
-	} else {
-	    int consumed = 0;
-	    for (int i = 0; i < acceptors.length; i++) {
-		IPowerAcceptor acceptor = acceptors[i];
-		ForgeDirection side = acceptorSides[i];
-		int sidePower = usages[i] * maxPower / totalUsage;
-		if (acceptor != null) {
-		    int usage = acceptor.acceptPower(sidePower, side, true);
-		    consumed += usage;
-		}
-	    }
-	    return consumed;
-	}
+    public int distributePower(int storedPower, int maxPowerPerSide, boolean doDistribute) {
+	return this.distributor.distributePower(storedPower, maxPowerPerSide, doDistribute);
     }
 
     public void writeToNBT(NBTTagCompound nbt) {
-	int[] directions = new int[this.connectedDirections.size()];
-	for (int i = 0; i < connectedDirections.size(); i++) {
-	    ForgeDirection direction = connectedDirections.get(i);
-	    directions[i] = direction.ordinal();
+	PowerAcceptorConnection[] connections = this.distributor.getOutputs();
+	int[] directions = new int[connections.length];
+	for (int i = 0; i < connections.length; i++) {
+	    directions[i] = connections[i].connectedFrom.getOpposite().ordinal();
 	}
 	nbt.setIntArray("Cons", directions);
     }
 
     public void readFromNBT(NBTTagCompound nbt) {
-	int[] directions = nbt.getIntArray("Cons");
-	this.connectedDirections.clear();
+	int[] directions = nbt.getIntArray("Cons"); 
+	ArrayList<PowerAcceptorConnection> connections = new ArrayList<PowerAcceptorConnection>(directions.length);
 	for (int i = 0; i < directions.length; i++) {
 	    ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[directions[i]];
-	    searchPowerAcceptor(direction);
+	    searchPowerAcceptor(direction, connections);
 	}
+	PowerAcceptorConnection[] outputs = connections.toArray(new PowerAcceptorConnection[connections.size()]);
+	this.distributor.setOutputs(outputs);
     }
 }
