@@ -66,6 +66,7 @@ public class ModelDiskFilter extends Model {
 	    ModelRenderer as1Front2;
 	    ModelRenderer Glider;
 	    ModelRenderer OreBar;
+	    ModelRenderer BottomPlate2;
 	    
 	    Entity entity;
 	  
@@ -422,6 +423,12 @@ public class ModelDiskFilter extends Model {
 		      OreBar.setTextureSize(64, 32);
 		      OreBar.mirror = true;
 		      setRotation(OreBar, 0F, 0F, 0F);
+		      BottomPlate2 = new ModelRenderer(this, 12, 51);
+		      BottomPlate2.addBox(0F, 0F, 0F, 12, 1, 12);
+		      BottomPlate2.setRotationPoint(-6F, 18F, -6F);
+		      BottomPlate2.setTextureSize(64, 32);
+		      BottomPlate2.mirror = true;
+		      setRotation(BottomPlate2, 0F, 0F, 0F);
 	  }
 	  
 	  public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
@@ -486,6 +493,7 @@ public class ModelDiskFilter extends Model {
 	    as1Front2.render(f5);
 	    Glider.render(f5);
 	    OreBar.render(f5);
+	    BottomPlate2.render(f5);
 	    this.entity = entity;
 	  }
 	  
@@ -561,6 +569,7 @@ public class ModelDiskFilter extends Model {
 	    as1Front2.render(f5);
 	    Glider.render(f5);
 	    OreBar.render(f5);
+	    BottomPlate2.render(f5);
 		
 	}
 
@@ -632,6 +641,7 @@ public class ModelDiskFilter extends Model {
 	    
 	    Glider.render(f5);
 	    OreBar.render(f5);
+	    BottomPlate2.render(f5);
 	}
 
 }
