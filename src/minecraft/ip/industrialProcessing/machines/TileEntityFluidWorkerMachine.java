@@ -1,5 +1,6 @@
 package ip.industrialProcessing.machines;
 
+import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.recipes.IRecipeFluidWorkHandler;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeFluidWorker;
@@ -14,7 +15,7 @@ import java.util.Iterator;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachine implements IRecipeFluidWorkHandler {
+public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachine implements IRecipeFluidWorkHandler, IAnimationProgress {
  
     public TileEntityFluidWorkerMachine() {
 	this.serverWorker = createServerSideWorker();
@@ -115,4 +116,12 @@ public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachin
     public TileEntity getTileEntity() {
 	return this;
     } 
+    
+    @Override
+    public float getAnimationProgress(float scale) {
+	IWorker worker = getWorker();
+	if(worker != null)
+	    return worker.getScaledProgress(100)/100f * scale;
+        return 0;
+    }
 }

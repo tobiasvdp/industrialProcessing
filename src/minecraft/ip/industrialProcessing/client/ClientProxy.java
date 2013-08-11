@@ -6,9 +6,16 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.client.MinecraftForgeClient;
 import ip.industrialProcessing.CommonProxy;
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.client.render.ModelAnimatedFluidMachine;
+import ip.industrialProcessing.client.render.ModelAnimatedMachine;
+import ip.industrialProcessing.client.render.ModelConnected;
+import ip.industrialProcessing.client.render.ModelMachine;
+import ip.industrialProcessing.client.render.RendererTileEntity;
+import ip.industrialProcessing.client.render.RendererTileEntityConnected;
+import ip.industrialProcessing.client.render.RendererTileEntityFluidWorker;
+import ip.industrialProcessing.client.render.RendererTileEntityAnimated;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.machines.RendererBlock;
-import ip.industrialProcessing.machines.RendererTileEntity;
 import ip.industrialProcessing.machines.crusher.ModelCrusher;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import ip.industrialProcessing.machines.diskFilter.ModelDiskFilter;
@@ -19,30 +26,54 @@ import ip.industrialProcessing.machines.magneticSeparator.ModelMagneticSeperator
 import ip.industrialProcessing.machines.magneticSeparator.TileEntityMagneticSeparator;
 import ip.industrialProcessing.machines.mixer.ModelMixer;
 import ip.industrialProcessing.machines.mixer.TileEntityMixer;
+import ip.industrialProcessing.power.meters.ModelVoltMeter;
+import ip.industrialProcessing.power.meters.TileEntityAmpMeter;
+import ip.industrialProcessing.power.meters.TileEntityVoltMeter;
+import ip.industrialProcessing.power.wire.ModelWire;
+import ip.industrialProcessing.power.wire.TileEntityWire;
 
 public class ClientProxy extends CommonProxy {
     public static int renderPass;
-
+    private static final ModelFilter filter = new ModelFilter();
+    private static final ModelMachine magneticSeparator = new ModelMagneticSeperator();
+    private static final ModelAnimatedFluidMachine mixer = new ModelMixer();
+    private static final ModelCrusher crusher = new ModelCrusher();
+    private static final ModelAnimatedMachine diskFilter = new ModelDiskFilter();
+    private static final ModelConnected wire = new ModelWire();
+    private static final ModelAnimatedMachine voltMeter = new ModelVoltMeter();
     @Override
     public void registerRenderers() {
-	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFilter.class, new RendererTileEntity(IndustrialProcessing.blockFilter, "ModelFilter", new ModelFilter()));
+	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFilter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockFilter, "ModelFilter", filter));
 	ConfigRenderers.setRendererFilterId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererFilterId(), new TileEntityFilter()));
 
-	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMagneticSeparator.class, new RendererTileEntity(IndustrialProcessing.blockMageneticSeparator, "ModelMagneticSeperator", new ModelMagneticSeperator()));
+	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMagneticSeparator.class, new RendererTileEntity(IndustrialProcessing.blockMageneticSeparator, "ModelMagneticSeperator", magneticSeparator));
 	ConfigRenderers.setRendererMagneticSeperatorId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererMagneticSeperatorId(), new TileEntityMagneticSeparator()));
 
-	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMixer.class, new RendererTileEntity(IndustrialProcessing.blockMixer, "ModelMixer", new ModelMixer()));
+	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMixer.class, new RendererTileEntityFluidWorker(IndustrialProcessing.blockMixer, "ModelMixer", mixer));
 	ConfigRenderers.setRendererMixerId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererMixerId(), new TileEntityMixer()));
 
-	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrusher.class, new RendererTileEntity(IndustrialProcessing.blockCrusher, "ModelCrusher", new ModelCrusher()));
+	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrusher.class, new RendererTileEntityAnimated(IndustrialProcessing.blockCrusher, "ModelCrusher", crusher));
 	ConfigRenderers.setRendererCrusherId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererCrusherId(), new TileEntityCrusher()));
 	
-	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDiskFilter.class, new RendererTileEntity(IndustrialProcessing.blockDiskFilter, "ModelDiskFilter", new ModelDiskFilter()));
+	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDiskFilter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockDiskFilter, "ModelDiskFilter", diskFilter));
 	ConfigRenderers.setRendererDiskFilterIdId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererDiskFilterId(), new TileEntityDiskFilter()));
+	 
+	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWire.class, new RendererTileEntityConnected(IndustrialProcessing.blockWire, "ModelWire", wire));
+	ConfigRenderers.setRendererWireId(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererWireId(), new TileEntityWire()));
+
+	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityVoltMeter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockVoltMeter, "ModelVoltMeter", voltMeter));
+	ConfigRenderers.setRendererVoltMeterId(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererVoltMeterId(), new TileEntityVoltMeter()));
+
+	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAmpMeter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockAmpMeter, "ModelVoltMeter", voltMeter));
+	ConfigRenderers.setRendererAmpMeterId(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererAmpMeterId(), new TileEntityAmpMeter()));
+	
     }
 }

@@ -41,6 +41,12 @@ import ip.industrialProcessing.power.buildcraftGenerator.BlockBuildcraftGenerato
 import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
 import ip.industrialProcessing.power.manualGenerator.BlockManualGenerator;
 import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
+import ip.industrialProcessing.power.meters.BlockAmpMeter;
+import ip.industrialProcessing.power.meters.BlockVoltMeter;
+import ip.industrialProcessing.power.meters.TileEntityAmpMeter;
+import ip.industrialProcessing.power.meters.TileEntityVoltMeter;
+import ip.industrialProcessing.power.wire.BlockWire;
+import ip.industrialProcessing.power.wire.TileEntityWire;
 import ip.industrialProcessing.utils.DamageSourceIP;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockOre;
@@ -168,6 +174,12 @@ public class IndustrialProcessing {
     public final static BlockManualGenerator blockManualGenerator = new BlockManualGenerator();
     public final static BlockBuildcraftGenerator blockBuildcraftGenerator = new BlockBuildcraftGenerator();
 
+    // create wires
+    public final static BlockWire blockWire = new BlockWire();
+    public final static BlockVoltMeter blockVoltMeter = new BlockVoltMeter();
+    public final static BlockAmpMeter blockAmpMeter = new BlockAmpMeter();
+    
+    
     // create Multiblock Machines
     public final static BlockMultiMachineInventory blockMultiMachineInventory = new BlockMultiMachineInventory();
 
@@ -211,6 +223,10 @@ public class IndustrialProcessing {
 	registerMachine(blockBuildcraftGenerator, "IP.Generator.Buildcraft", "Buildcraft Generator", TileEntityBuildcraftGenerator.class);
 	registerMachine(blockLargeCrusher, "IP.Machine.Multi.Crusher", "Large Crusher", TileEntityLargeCrusher.class);
 
+	registerMachine(blockWire, "IP.Wire", "Wire", TileEntityWire.class);
+	registerMachine(blockVoltMeter, "IP.Meter.Volt", "Volt Meter", TileEntityVoltMeter.class);
+	registerMachine(blockAmpMeter, "IP.Meter.Amp", "Amp Meter", TileEntityAmpMeter.class);
+	
 	registerOre(blockCopperOre, "IP.World.CopperOre", "Copper Ore", "copper");
 	registerOre(blockTinOre, "IP.World.TinOre", "Tin Ore", "copper");
 

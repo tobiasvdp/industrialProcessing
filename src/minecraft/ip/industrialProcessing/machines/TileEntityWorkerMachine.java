@@ -1,5 +1,6 @@
 package ip.industrialProcessing.machines;
 
+import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.recipes.IRecipeWorkHandler;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeWorker;
@@ -15,11 +16,11 @@ import java.util.Iterator;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-public abstract class TileEntityWorkerMachine extends TileEntityMachine implements IWorkHandler, IRecipeWorkHandler, IWorkingEntity {
+public abstract class TileEntityWorkerMachine extends TileEntityMachine implements IWorkHandler, IRecipeWorkHandler, IWorkingEntity, IAnimationProgress {
 
     public TileEntityWorkerMachine() {
 	this.serverWorker = createServerSideWorker();
-	this.clientWorker = new ClientWorker();  
+	this.clientWorker = new ClientWorker();
     }
 
     protected ServerWorker createServerSideWorker() {
@@ -41,11 +42,10 @@ public abstract class TileEntityWorkerMachine extends TileEntityMachine implemen
 	doWork();
     }
 
-    protected void doWork()
-    {
+    protected void doWork() {
 	work(1);
     }
-    
+
     @Override
     public boolean canUpdate() {
 	return true;
@@ -57,7 +57,7 @@ public abstract class TileEntityWorkerMachine extends TileEntityMachine implemen
 
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
-	super.writeToNBT(nbt); 
+	super.writeToNBT(nbt);
 	writeWorker(nbt);
     };
 
@@ -71,7 +71,7 @@ public abstract class TileEntityWorkerMachine extends TileEntityMachine implemen
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
-	super.readFromNBT(nbt); 
+	super.readFromNBT(nbt);
 	readWorker(nbt);
     };
 
@@ -116,5 +116,13 @@ public abstract class TileEntityWorkerMachine extends TileEntityMachine implemen
     @Override
     public TileEntity getTileEntity() {
 	return this;
+    }
+
+    @Override
+    public float getAnimationProgress(float scale) {
+	IWorker worker = getWorker();
+	if (worker != null)
+	    return worker.getScaledProgress(100) / 100f * scale;
+	return 0;
     }
 }

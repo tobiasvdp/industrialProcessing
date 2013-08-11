@@ -2,9 +2,10 @@ package ip.industrialProcessing.machines.magneticSeparator;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import ip.industrialProcessing.machines.Model;
+import ip.industrialProcessing.client.render.ModelAnimatedMachine;
+import ip.industrialProcessing.client.render.ModelMachine;
 
-public class ModelMagneticSeperator extends Model {
+public class ModelMagneticSeperator extends ModelAnimatedMachine {
 
 	Entity entity;
 	ModelRenderer Shape5;
@@ -186,7 +187,7 @@ public class ModelMagneticSeperator extends Model {
 	public void render(Entity entity, float f, float f1, float f2, float f3,
 			float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
-		setRotationAngles(f, f1, f2, f3, f4, f5);
+		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		Shape5.render(f5);
 		Shape6.render(f5);
 		Shape14.render(f5);
@@ -210,8 +211,7 @@ public class ModelMagneticSeperator extends Model {
 		Shape13.render(f5);
 		Shape16.render(f5);
 		Shape17.render(f5);
-		Shape19.render(f5);
-		this.entity = entity;
+		Shape19.render(f5); 
 	}
 
 	@Override
@@ -244,6 +244,7 @@ public class ModelMagneticSeperator extends Model {
 
 	@Override
 	public void renderModelAnimated(float f, float progress) {
+	    // TODO: animate?
 		Shape5.render(f);
 		Shape6.render(f);
 		Shape14.render(f);
@@ -268,17 +269,6 @@ public class ModelMagneticSeperator extends Model {
 		Shape16.render(f);
 		Shape17.render(f);
 		Shape19.render(f); 
-	}
-
-	private void setRotation(ModelRenderer model, float x, float y, float z) {
-		model.rotateAngleX = x;
-		model.rotateAngleY = y;
-		model.rotateAngleZ = z;
-	}
-
-	public void setRotationAngles(float f, float f1, float f2, float f3,
-			float f4, float f5) {
-		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-	}
+	} 
 
 }

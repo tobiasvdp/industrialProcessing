@@ -46,4 +46,9 @@ public class TileEntityBuildcraftGenerator extends TileEntityPowerGenerator impl
 	return this.worldObj;
     }
 
+    @Override
+    public boolean canProducePower(ForgeDirection opposite) { 
+	return true;
+    }
+
 }

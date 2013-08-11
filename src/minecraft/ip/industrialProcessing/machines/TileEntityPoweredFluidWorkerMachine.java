@@ -55,10 +55,12 @@ public abstract class TileEntityPoweredFluidWorkerMachine extends TileEntityFlui
     }
 
     @Override
-    public int acceptPower(int maxAmount, ForgeDirection side) {
+    public int acceptPower(int maxAmount, ForgeDirection side, boolean doAccept) {
 	if (canAcceptPower(side)) {
 	    int accept = PowerWorkerHelper.acceptPower(this.powerCapacity, this.powerStorage, maxAmount);
-	    this.powerStorage += accept;
+	    if (doAccept) {
+		this.powerStorage += accept;
+	    }
 	    return accept;
 	}
 	return 0;
