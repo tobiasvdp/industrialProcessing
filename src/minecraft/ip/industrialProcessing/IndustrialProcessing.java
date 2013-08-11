@@ -37,6 +37,8 @@ import ip.industrialProcessing.machines.multiblock.machineFrame.BlockMachineFram
 import ip.industrialProcessing.machines.multiblock.machineFrame.TileEntityMachineFrame;
 import ip.industrialProcessing.machines.thickener.BlockThickener;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
+import ip.industrialProcessing.power.buildcraftGenerator.BlockBuildcraftGenerator;
+import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
 import ip.industrialProcessing.power.manualGenerator.BlockManualGenerator;
 import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
 import ip.industrialProcessing.utils.DamageSourceIP;
@@ -94,7 +96,7 @@ public class IndustrialProcessing {
 
     // create creative tab
     public static CreativeTabs tabMachines = new TabMachines(CreativeTabs.getNextID(), "industrialprocessing");
-    
+
     // create damagesources
     public static final DamageSourceIP DamageDirtyWater = new DamageSourceIP("DirtyWater");
 
@@ -131,20 +133,20 @@ public class IndustrialProcessing {
 
     // create fluids
     public final static ItemFluid itemFluidDirtyWater = new ItemFluid("DirtyWater", 1000, 1000);
-    public final static BlockFluid blockFluidDirtyWater = new BlockFluid(ConfigFluids.blockFluidBaseDirtyWaterID(), itemFluidDirtyWater, Material.water, tabMachines,true);
-    public final static ContainerFluid bucketDirtyWater = new ContainerFluid(ConfigFluids.BucketDirtyWaterID(), itemFluidDirtyWater, blockFluidDirtyWater,"ContainerDirtyWater");
+    public final static BlockFluid blockFluidDirtyWater = new BlockFluid(ConfigFluids.blockFluidBaseDirtyWaterID(), itemFluidDirtyWater, Material.water, tabMachines, true);
+    public final static ContainerFluid bucketDirtyWater = new ContainerFluid(ConfigFluids.BucketDirtyWaterID(), itemFluidDirtyWater, blockFluidDirtyWater, "ContainerDirtyWater");
 
     public final static ItemFluid itemFluidOreSludgeIron = new ItemFluid("OreSludgeIron", 1000, 1000);
-    public final static BlockFluid blockFluidOreSludgeIron = new BlockFluid(ConfigFluids.blockFluidBaseOreSludgeIronID(), itemFluidOreSludgeIron, Material.water, tabMachines,false);
-    public final static ContainerFluid bucketOreSludgeIron = new ContainerFluid(ConfigFluids.BucketOreSludgeIronID(), itemFluidOreSludgeIron, blockFluidOreSludgeIron,"ContainerOreSludgeIron");
+    public final static BlockFluid blockFluidOreSludgeIron = new BlockFluid(ConfigFluids.blockFluidBaseOreSludgeIronID(), itemFluidOreSludgeIron, Material.water, tabMachines, false);
+    public final static ContainerFluid bucketOreSludgeIron = new ContainerFluid(ConfigFluids.BucketOreSludgeIronID(), itemFluidOreSludgeIron, blockFluidOreSludgeIron, "ContainerOreSludgeIron");
 
     public final static ItemFluid itemFluidOreSludgeCopper = new ItemFluid("OreSludgeCopper", 1000, 1000);
-    public final static BlockFluid blockFluidOreSludgeCopper = new BlockFluid(ConfigFluids.blockFluidBaseOreSludgeCopperID(), itemFluidOreSludgeCopper, Material.water, tabMachines,false);
-    public final static ContainerFluid bucketOreSludgeCopper = new ContainerFluid(ConfigFluids.BucketOreSludgeCopperID(), itemFluidOreSludgeCopper, blockFluidOreSludgeCopper,"ContainerOreSludgeCopper");
+    public final static BlockFluid blockFluidOreSludgeCopper = new BlockFluid(ConfigFluids.blockFluidBaseOreSludgeCopperID(), itemFluidOreSludgeCopper, Material.water, tabMachines, false);
+    public final static ContainerFluid bucketOreSludgeCopper = new ContainerFluid(ConfigFluids.BucketOreSludgeCopperID(), itemFluidOreSludgeCopper, blockFluidOreSludgeCopper, "ContainerOreSludgeCopper");
 
     public final static ItemFluid itemFluidOreSludgeTin = new ItemFluid("OreSludgeTin", 1000, 1000);
-    public final static BlockFluid blockFluidOreSludgeTin = new BlockFluid(ConfigFluids.blockFluidBaseOreSludgeTinID(), itemFluidOreSludgeTin, Material.water, tabMachines,false);
-    public final static ContainerFluid bucketOreSludgeTin = new ContainerFluid(ConfigFluids.BucketOreSludgeTinID(), itemFluidOreSludgeTin, blockFluidOreSludgeTin,"ContainerOreSludgeTin");
+    public final static BlockFluid blockFluidOreSludgeTin = new BlockFluid(ConfigFluids.blockFluidBaseOreSludgeTinID(), itemFluidOreSludgeTin, Material.water, tabMachines, false);
+    public final static ContainerFluid bucketOreSludgeTin = new ContainerFluid(ConfigFluids.BucketOreSludgeTinID(), itemFluidOreSludgeTin, blockFluidOreSludgeTin, "ContainerOreSludgeTin");
 
     // create ores
     public static final Block blockCopperOre = (new BlockOre(ConfigBlocks.BlockCopperOreID())).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("blockCopperOre").func_111022_d(TEXTURE_NAME_PREFIX + "blockCopperOre").setCreativeTab(IndustrialProcessing.tabMachines);;
@@ -164,7 +166,8 @@ public class IndustrialProcessing {
 
     // create generators
     public final static BlockManualGenerator blockManualGenerator = new BlockManualGenerator();
-    
+    public final static BlockBuildcraftGenerator blockBuildcraftGenerator = new BlockBuildcraftGenerator();
+
     // create Multiblock Machines
     public final static BlockMultiMachineInventory blockMultiMachineInventory = new BlockMultiMachineInventory();
 
@@ -203,9 +206,9 @@ public class IndustrialProcessing {
 	registerMachine(blockFlotationCell, "IP.Machine.FlotationCell", "Flotation Cell", TileEntityFlotationCell.class);
 	registerMachine(blockHydroCyclone, "IP.Machine.HydroCyclone", "Hydro Cyclone Separator", TileEntityHydroCyclone.class);
 	registerMachine(blockDiskFilter, "IP.Machine.DiskFilter", "Disk Filter", TileEntityDiskFilter.class);
-	
-	registerMachine(blockManualGenerator, "IP.Generator.Manual", "Crank Generator", TileEntityManualGenerator.class);
 
+	registerMachine(blockManualGenerator, "IP.Generator.Manual", "Crank Generator", TileEntityManualGenerator.class);
+	registerMachine(blockBuildcraftGenerator, "IP.Generator.Buildcraft", "Buildcraft Generator", TileEntityBuildcraftGenerator.class);
 	registerMachine(blockLargeCrusher, "IP.Machine.Multi.Crusher", "Large Crusher", TileEntityLargeCrusher.class);
 
 	registerOre(blockCopperOre, "IP.World.CopperOre", "Copper Ore", "copper");
@@ -254,8 +257,8 @@ public class IndustrialProcessing {
 	LanguageRegistry.addName(itemCopperPurified, "Purified copper");
 	LanguageRegistry.addName(itemTinPurified, "Purified tin");
 	LanguageRegistry.addName(itemSulfur, "Sulfur");
-	
-	//add death display messages
+
+	// add death display messages
 	LanguageRegistry.instance().addStringLocalization("death.attack.DirtyWater", "%1$s was poisoned to death by swiming in dirty water.");
 	LanguageRegistry.instance().addStringLocalization("death.attack.DirtyWater.player", "%1$s was killed in dirty water by %2$s");
 	LanguageRegistry.instance().addStringLocalization("death.attack.DirtyWater.item", "%1$s was killed in dirty water by %2$s");
