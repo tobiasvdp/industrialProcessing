@@ -7,6 +7,8 @@ import ip.industrialProcessing.client.render.ModelMachine;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 public class ModelCrusher extends ModelAnimatedMachine {
     // fields
@@ -37,7 +39,7 @@ public class ModelCrusher extends ModelAnimatedMachine {
 	SupportBeamLeft.addBox(0F, 0F, 0F, 2, 2, 16);
 	SupportBeamLeft.setRotationPoint(-8F, 22F, 8F);
 	SupportBeamLeft.setTextureSize(64, 64);
-	SupportBeamLeft.mirror = true;      
+	SupportBeamLeft.mirror = true;
 	setRotation(SupportBeamLeft, 0F, 1.570796F, 0F);
 	CrusherPlate1 = new ModelRenderer(this, 34, 47);
 	CrusherPlate1.addBox(0F, 0F, 0F, 9, 13, 2);
@@ -101,7 +103,8 @@ public class ModelCrusher extends ModelAnimatedMachine {
 	setRotation(PowerConnector, 0F, 1.570796F, 0F);
 
     }
-// is this even used anywhere?
+
+    // is this even used anywhere?
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 	super.render(entity, f, f1, f2, f3, f4, f5);
 	super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
@@ -118,23 +121,6 @@ public class ModelCrusher extends ModelAnimatedMachine {
 	OutputBottom.render(f5);
 	PowerConnector.render(f5);
 
-    }
-
-
-    @Override
-    public void renderModel(float scale) {
-	SupportBeamRight.render(scale);
-	SupportBeamLeft.render(scale);
-	CrusherPlate1.render(scale);
-	CrusherPlate2.render(scale);
-	FrontBox.render(scale);
-	BackPlate.render(scale);
-	SideRight.render(scale);
-	SideLeft.render(scale);
-	BottomPlate.render(scale);
-	InputTop.render(scale);
-	OutputBottom.render(scale);
-	PowerConnector.render(scale);
     }
 
     @Override
@@ -165,5 +151,10 @@ public class ModelCrusher extends ModelAnimatedMachine {
 	InputTop.render(scale);
 	OutputBottom.render(scale);
 	PowerConnector.render(scale);
+    }
+
+    @Override
+    public void renderModel(float f) {
+	renderModelAnimated(f, 0f);
     }
 }

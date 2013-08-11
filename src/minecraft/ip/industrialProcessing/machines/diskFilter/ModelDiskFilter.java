@@ -1,11 +1,10 @@
 package ip.industrialProcessing.machines.diskFilter;
 
-import org.lwjgl.opengl.GL11;
-
+import ip.industrialProcessing.client.render.ModelAnimatedMachine;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import ip.industrialProcessing.client.render.ModelAnimatedMachine;
-import ip.industrialProcessing.client.render.ModelMachine;
+
+import org.lwjgl.opengl.GL11; 
 
 public class ModelDiskFilter extends ModelAnimatedMachine {
     // fields
@@ -68,8 +67,7 @@ public class ModelDiskFilter extends ModelAnimatedMachine {
     ModelRenderer Glider;
     ModelRenderer OreBar;
     ModelRenderer BottomPlate2;
-
-    Entity entity;
+  
 
     public ModelDiskFilter() {
 	textureWidth = 64;

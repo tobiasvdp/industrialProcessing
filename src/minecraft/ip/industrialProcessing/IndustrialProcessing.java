@@ -31,8 +31,8 @@ import ip.industrialProcessing.machines.multiblock.MachineFrameState;
 import ip.industrialProcessing.machines.multiblock.TileEntityMultiMachineFrame;
 import ip.industrialProcessing.machines.multiblock.crusher.BlockLargeCrusher;
 import ip.industrialProcessing.machines.multiblock.crusher.TileEntityLargeCrusher;
-import ip.industrialProcessing.machines.multiblock.inventory.BlockMultiMachineInventory;
-import ip.industrialProcessing.machines.multiblock.inventory.TileEntityMultiMachineInventory;
+import ip.industrialProcessing.machines.multiblock.inventory.BlockMultiMachineInput;
+import ip.industrialProcessing.machines.multiblock.inventory.TileEntityMultiMachineInput;
 import ip.industrialProcessing.machines.multiblock.machineFrame.BlockMachineFrame;
 import ip.industrialProcessing.machines.multiblock.machineFrame.TileEntityMachineFrame;
 import ip.industrialProcessing.machines.thickener.BlockThickener;
@@ -40,13 +40,15 @@ import ip.industrialProcessing.machines.thickener.TileEntityThickener;
 import ip.industrialProcessing.power.buildcraftGenerator.BlockBuildcraftGenerator;
 import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
 import ip.industrialProcessing.power.manualGenerator.BlockManualGenerator;
-import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
+import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator; 
 import ip.industrialProcessing.power.meters.BlockAmpMeter;
 import ip.industrialProcessing.power.meters.BlockVoltMeter;
 import ip.industrialProcessing.power.meters.TileEntityAmpMeter;
 import ip.industrialProcessing.power.meters.TileEntityVoltMeter;
 import ip.industrialProcessing.power.wire.BlockWire;
-import ip.industrialProcessing.power.wire.TileEntityWire;
+import ip.industrialProcessing.power.wire.TileEntityWire; 
+import ip.industrialProcessing.transport.fluids.BlockTransportFluids;
+import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids; 
 import ip.industrialProcessing.utils.DamageSourceIP;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockOre;
@@ -169,6 +171,9 @@ public class IndustrialProcessing {
     public final static BlockFlotationCell blockFlotationCell = new BlockFlotationCell();
     public final static BlockHydroCyclone blockHydroCyclone = new BlockHydroCyclone();
     public final static BlockDiskFilter blockDiskFilter = new BlockDiskFilter();
+    
+    //create fluidpipe
+    public final static BlockTransportFluids blockTransportFluids = new BlockTransportFluids();
 
     // create generators
     public final static BlockManualGenerator blockManualGenerator = new BlockManualGenerator();
@@ -181,7 +186,7 @@ public class IndustrialProcessing {
     
     
     // create Multiblock Machines
-    public final static BlockMultiMachineInventory blockMultiMachineInventory = new BlockMultiMachineInventory();
+    public final static BlockMultiMachineInput blockMultiMachineInput = new BlockMultiMachineInput();
 
     public final static BlockMachineFrame blockMachineFrame = new BlockMachineFrame();
     public final static BlockLargeCrusher blockLargeCrusher = new BlockLargeCrusher();
@@ -222,6 +227,10 @@ public class IndustrialProcessing {
 	registerMachine(blockManualGenerator, "IP.Generator.Manual", "Crank Generator", TileEntityManualGenerator.class);
 	registerMachine(blockBuildcraftGenerator, "IP.Generator.Buildcraft", "Buildcraft Generator", TileEntityBuildcraftGenerator.class);
 	registerMachine(blockLargeCrusher, "IP.Machine.Multi.Crusher", "Large Crusher", TileEntityLargeCrusher.class);
+	
+	//register transport
+	registerMachine(blockTransportFluids, "IP.Transport.Fluids", "Liquid pipe", TileEntityTransportFluids.class);
+	//register ores
 
 	registerMachine(blockWire, "IP.Wire", "Wire", TileEntityWire.class);
 	registerMachine(blockVoltMeter, "IP.Meter.Volt", "Volt Meter", TileEntityVoltMeter.class);
@@ -241,7 +250,7 @@ public class IndustrialProcessing {
 	LanguageRegistry.addName(bucketOreSludgeTin, "Tin sludge Bucket");
 
 	// register multistructures
-	registerMachine(blockMultiMachineInventory, "MultiBlockInventory", "Multiblock hatch", TileEntityMultiMachineInventory.class);
+	registerMachine(blockMultiMachineInput, "MultiBlockInventory", "Multiblock hatch", TileEntityMultiMachineInput.class);
 	registerMachine(blockMachineFrame, "MultiBlockFrame", "Multiblock Frame", TileEntityMachineFrame.class);
 
 	NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());

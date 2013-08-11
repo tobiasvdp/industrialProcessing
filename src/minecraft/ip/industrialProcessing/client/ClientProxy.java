@@ -25,12 +25,14 @@ import ip.industrialProcessing.machines.filter.TileEntityFilter;
 import ip.industrialProcessing.machines.magneticSeparator.ModelMagneticSeperator;
 import ip.industrialProcessing.machines.magneticSeparator.TileEntityMagneticSeparator;
 import ip.industrialProcessing.machines.mixer.ModelMixer;
-import ip.industrialProcessing.machines.mixer.TileEntityMixer;
+import ip.industrialProcessing.machines.mixer.TileEntityMixer; 
 import ip.industrialProcessing.power.meters.ModelVoltMeter;
 import ip.industrialProcessing.power.meters.TileEntityAmpMeter;
 import ip.industrialProcessing.power.meters.TileEntityVoltMeter;
 import ip.industrialProcessing.power.wire.ModelWire;
-import ip.industrialProcessing.power.wire.TileEntityWire;
+import ip.industrialProcessing.power.wire.TileEntityWire; 
+import ip.industrialProcessing.transport.fluids.ModelTransportFluids;
+import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids; 
 
 public class ClientProxy extends CommonProxy {
     public static int renderPass;
@@ -41,6 +43,7 @@ public class ClientProxy extends CommonProxy {
     private static final ModelAnimatedMachine diskFilter = new ModelDiskFilter();
     private static final ModelConnected wire = new ModelWire();
     private static final ModelAnimatedMachine voltMeter = new ModelVoltMeter();
+    private static final ModelConnected transportFluids = new ModelTransportFluids();
     @Override
     public void registerRenderers() {
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFilter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockFilter, "ModelFilter", filter));
@@ -62,6 +65,7 @@ public class ClientProxy extends CommonProxy {
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDiskFilter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockDiskFilter, "ModelDiskFilter", diskFilter));
 	ConfigRenderers.setRendererDiskFilterIdId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererDiskFilterId(), new TileEntityDiskFilter()));
+ 
 	 
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWire.class, new RendererTileEntityConnected(IndustrialProcessing.blockWire, "ModelWire", wire));
 	ConfigRenderers.setRendererWireId(RenderingRegistry.getNextAvailableRenderId());
@@ -74,6 +78,11 @@ public class ClientProxy extends CommonProxy {
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAmpMeter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockAmpMeter, "ModelVoltMeter", voltMeter));
 	ConfigRenderers.setRendererAmpMeterId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererAmpMeterId(), new TileEntityAmpMeter()));
+ 
 	
+	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTransportFluids.class, new RendererTileEntityConnected(IndustrialProcessing.blockTransportFluids, "ModelTransportFluids", transportFluids));
+	ConfigRenderers.setRendererTransportFluidsId(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererTransportFluidsId(), new TileEntityTransportFluids()));
+ 
     }
 }

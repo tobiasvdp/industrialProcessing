@@ -7,6 +7,8 @@ import ip.industrialProcessing.client.render.ModelMachine;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 public class ModelFilter extends ModelAnimatedMachine {
     // fields
@@ -220,7 +222,7 @@ public class ModelFilter extends ModelAnimatedMachine {
 	Shape23.render(f5);
 	Shape24.render(f5);
     }
-
+ 
     @Override
     public void renderModel(float f1) {
 	plateShape3.render(f1);
@@ -247,8 +249,7 @@ public class ModelFilter extends ModelAnimatedMachine {
 	Shape22.render(f1);
 	Shape23.render(f1);
 	Shape24.render(f1);
-    }
-
+    } 
     @Override
     public void renderModelAnimated(float f1, float animated) {
 	float freq1 = 27;

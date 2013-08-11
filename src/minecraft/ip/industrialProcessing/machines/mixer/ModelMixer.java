@@ -260,4 +260,4 @@ public class ModelMixer extends ModelAnimatedFluidMachine {
 	    tessellator.draw();
 	}
     }
-}
+} 

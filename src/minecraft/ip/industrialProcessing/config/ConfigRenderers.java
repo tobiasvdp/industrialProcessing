@@ -10,6 +10,7 @@ public class ConfigRenderers {
     private int rendererDiskFilterID;
     private int rendererVoltMeterID;
     private int rendererAmpMeterID;
+    private int rendererTransportFluidID;
 
     public static int getRendererFilterId() {
 	return getInstance().rendererFilterID;
@@ -66,6 +67,7 @@ public class ConfigRenderers {
     public static void setRendererVoltMeterId(int value) {
 	getInstance().rendererVoltMeterID = value;
     }
+
     public static int getRendererAmpMeterId() {
 	return getInstance().rendererAmpMeterID;
     }
@@ -73,6 +75,15 @@ public class ConfigRenderers {
     public static void setRendererAmpMeterId(int value) {
 	getInstance().rendererAmpMeterID = value;
     }
+
+    public static int getRendererTransportFluidsId() {
+	return getInstance().rendererTransportFluidID;
+    }
+
+    public static void setRendererTransportFluidsId(int value) {
+	getInstance().rendererTransportFluidID = value;
+    }
+
     private ConfigRenderers() {
 
     }
