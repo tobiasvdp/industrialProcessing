@@ -1,5 +1,8 @@
 package ip.industrialProcessing;
 
+import ip.industrialProcessing.machines.blastFurnace.ContainerBlastFurnace;
+import ip.industrialProcessing.machines.blastFurnace.GuiContainerBlastFurnace;
+import ip.industrialProcessing.machines.blastFurnace.TileEntityBlastFurnace;
 import ip.industrialProcessing.machines.classifier.ContainerClassifier;
 import ip.industrialProcessing.machines.classifier.GuiContainerClassifier;
 import ip.industrialProcessing.machines.classifier.TileEntityClassifier;
@@ -12,6 +15,9 @@ import ip.industrialProcessing.machines.diskFilter.TileEntityDiskFilter;
 import ip.industrialProcessing.machines.dryer.ContainerDryer;
 import ip.industrialProcessing.machines.dryer.GuiContainerDryer;
 import ip.industrialProcessing.machines.dryer.TileEntityDryer;
+import ip.industrialProcessing.machines.extruder.ContainerExtruder;
+import ip.industrialProcessing.machines.extruder.GuiContainerExtruder;
+import ip.industrialProcessing.machines.extruder.TileEntityExtruder;
 import ip.industrialProcessing.machines.filter.ContainerFilter;
 import ip.industrialProcessing.machines.filter.GuiContainerFilter;
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
@@ -27,6 +33,12 @@ import ip.industrialProcessing.machines.magneticSeparator.TileEntityMagneticSepa
 import ip.industrialProcessing.machines.mixer.ContainerMixer;
 import ip.industrialProcessing.machines.mixer.GuiContainerMixer;
 import ip.industrialProcessing.machines.mixer.TileEntityMixer;
+import ip.industrialProcessing.machines.oxygenFurnace.ContainerOxygenFurnace;
+import ip.industrialProcessing.machines.oxygenFurnace.GuiContainerOxygenFurnace;
+import ip.industrialProcessing.machines.oxygenFurnace.TileEntityOxygenFurnace;
+import ip.industrialProcessing.machines.pelletExtruder.ContainerPelletExtruder;
+import ip.industrialProcessing.machines.pelletExtruder.GuiContainerPelletExtruder;
+import ip.industrialProcessing.machines.pelletExtruder.TileEntityPelletExtruder;
 import ip.industrialProcessing.machines.thickener.ContainerThickener;
 import ip.industrialProcessing.machines.thickener.GuiContainerThickener;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
@@ -62,7 +74,15 @@ public class GuiHandler implements IGuiHandler {
 		if(entity  instanceof TileEntityHydroCyclone)
 			return new ContainerHydroCyclone(player.inventory, (TileEntityHydroCyclone)entity); 
 		if(entity  instanceof TileEntityDiskFilter)
-			return new ContainerDiskFilter(player.inventory, (TileEntityDiskFilter)entity); 
+			return new ContainerDiskFilter(player.inventory, (TileEntityDiskFilter)entity);
+		if(entity  instanceof TileEntityPelletExtruder)
+			return new ContainerPelletExtruder(player.inventory, (TileEntityPelletExtruder)entity); 
+		if(entity  instanceof TileEntityExtruder)
+			return new ContainerExtruder(player.inventory, (TileEntityExtruder)entity); 
+		if(entity  instanceof TileEntityOxygenFurnace)
+			return new ContainerOxygenFurnace(player.inventory, (TileEntityOxygenFurnace)entity); 
+		if(entity  instanceof TileEntityBlastFurnace)
+			return new ContainerBlastFurnace(player.inventory, (TileEntityBlastFurnace)entity); 
 		return null;
 	}
 	 
@@ -92,6 +112,14 @@ public class GuiHandler implements IGuiHandler {
 			return new GuiContainerHydroCyclone(player.inventory, (TileEntityHydroCyclone)entity);
 		if(entity  instanceof TileEntityDiskFilter)
 			return new GuiContainerDiskFilter(player.inventory, (TileEntityDiskFilter)entity);
+		if(entity  instanceof TileEntityPelletExtruder)
+			return new GuiContainerPelletExtruder(player.inventory, (TileEntityPelletExtruder)entity); 
+		if(entity  instanceof TileEntityExtruder)
+			return new GuiContainerExtruder(player.inventory, (TileEntityExtruder)entity); 
+		if(entity  instanceof TileEntityOxygenFurnace)
+			return new GuiContainerOxygenFurnace(player.inventory, (TileEntityOxygenFurnace)entity); 
+		if(entity  instanceof TileEntityBlastFurnace)
+			return new GuiContainerBlastFurnace(player.inventory, (TileEntityBlastFurnace)entity); 
 		return null;
 	}
 

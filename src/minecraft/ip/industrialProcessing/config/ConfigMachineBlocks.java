@@ -1,10 +1,12 @@
 package ip.industrialProcessing.config;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.machines.blastFurnace.TileEntityBlastFurnace;
 import ip.industrialProcessing.machines.classifier.TileEntityClassifier;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import ip.industrialProcessing.machines.diskFilter.TileEntityDiskFilter;
 import ip.industrialProcessing.machines.dryer.TileEntityDryer;
+import ip.industrialProcessing.machines.extruder.TileEntityExtruder;
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
 import ip.industrialProcessing.machines.flotationCell.TileEntityFlotationCell;
 import ip.industrialProcessing.machines.hydroCyclone.TileEntityHydroCyclone;
@@ -13,6 +15,8 @@ import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import ip.industrialProcessing.machines.multiblock.crusher.TileEntityLargeCrusher;
 import ip.industrialProcessing.machines.multiblock.inventory.TileEntityMultiMachineInput;
 import ip.industrialProcessing.machines.multiblock.machineFrame.TileEntityMachineFrame;
+import ip.industrialProcessing.machines.oxygenFurnace.TileEntityOxygenFurnace;
+import ip.industrialProcessing.machines.pelletExtruder.TileEntityPelletExtruder;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
 import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
 import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
@@ -44,6 +48,11 @@ public class ConfigMachineBlocks {
 	private int flotationCellBlockID = 507;
 	private int hydroCycloneBlockID = 508;
 	private int diskFilterBlockID = 509;
+	
+	private int blastFurnaceID = 550;
+	private int extruderID = 551;
+	private int oxygenFurnaceID = 552;
+	private int pelletExtruderID = 553;
 
 	private int machineFrameBlockID = 600;
 	private int multiMachineInputBlockID = 601;
@@ -69,6 +78,10 @@ public class ConfigMachineBlocks {
 		registerMachineBlock(IndustrialProcessing.blockFlotationCell, "IP.Machine.FlotationCell", "Flotation Cell", TileEntityFlotationCell.class);
 		registerMachineBlock(IndustrialProcessing.blockHydroCyclone, "IP.Machine.HydroCyclone", "Hydro Cyclone Separator", TileEntityHydroCyclone.class);
 		registerMachineBlock(IndustrialProcessing.blockDiskFilter, "IP.Machine.DiskFilter", "Disk Filter", TileEntityDiskFilter.class);
+		registerMachineBlock(IndustrialProcessing.blockBlastFurnace, "IP.Machine.BlastFurnace", "Blast Furnace", TileEntityBlastFurnace.class);
+		registerMachineBlock(IndustrialProcessing.blockExtruder, "IP.Machine.Extruder", "Extruder", TileEntityExtruder.class);
+		registerMachineBlock(IndustrialProcessing.blockOxygenFurnace, "IP.Machine.OxygenFurnace", "Oxygen Furnace", TileEntityOxygenFurnace.class);
+		registerMachineBlock(IndustrialProcessing.blockPelletExtruder, "IP.Machine.PelletExtruder", "Pellet Extruder", TileEntityPelletExtruder.class);
 
 		registerMachineBlock(IndustrialProcessing.blockManualGenerator, "IP.Generator.Manual", "Crank Generator", TileEntityManualGenerator.class);
 		registerMachineBlock(IndustrialProcessing.blockBuildcraftGenerator, "IP.Generator.Buildcraft", "Buildcraft Generator", TileEntityBuildcraftGenerator.class);
@@ -172,6 +185,18 @@ public class ConfigMachineBlocks {
 	}
 	public static int getBatteryBoxBlockID() {
 		return getInstance().batteryBoxBlockID;
+	}
+	public static int getPelletExtruderID() {
+		return getInstance().pelletExtruderID;
+	}
+	public static int getExtruderID() {
+		return getInstance().extruderID;
+	}
+	public static int getBlastFurnaceID() {
+		return getInstance().blastFurnaceID;
+	}
+	public static int getOxygenFurnaceID() {
+		return getInstance().oxygenFurnaceID;
 	}
 
 }

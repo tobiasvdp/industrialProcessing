@@ -6,37 +6,36 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ConfigItems {
 
-	private int ItemIronLargeChunksID = 5000;
-	private int ItemCopperLargeChunksID = 5001;
-	private int ItemTinLargeChunksID = 5002;
-	private int ItemIronSmallChunksID = 5003;
-	private int ItemCopperSmallChunksID = 5004;
-	private int ItemTinSmallChunksID = 5005;
-	private int ItemIronCrushedChunksID = 5006;
-	private int ItemCopperCrushedChunksID = 5007;
-	private int ItemTinCrushedChunksID = 5008;
-	private int ItemIronWashedChunksID = 5009;
-	private int ItemCopperWashedChunksID = 5010;
-	private int ItemTinWashedChunksID = 5011;
-	private int ItemIronFineChunksID = 5012;
-	private int ItemCopperFineChunksID = 5013;
-	private int ItemTinFineChunksID = 5014;
-	private int ItemIronOxideDustID = 5015;
-	private int ItemCopperMineralID = 5016;
-	private int ItemTinOxideDustID = 5017;
-	private int ItemSiliciumID = 5018;
-	private int ItemZincDustID = 5019;
-	private int ItemCopperPurifiedID = 5020;
-	private int ItemTinPurifiedID = 5021;
-	private int ItemSulfurID = 5022;
-	private int ItemIronMixedFragmentsID = 5023;
-	private int ItemCopperMixedFragmentsID = 5024;
-	private int ItemTinMixedFragmentsID = 5025;
-	
-	private int ItemIronOxidePelletsID = 5026;
-	private int ItemCalcareousSinterDustID = 5027;
-	private int ItemCokesID = 5028;
-	private int ItemSlagID = 5029;
+	private int ItemIronLargeChunksID = 6500;
+	private int ItemCopperLargeChunksID = 6501;
+	private int ItemTinLargeChunksID = 6502;
+	private int ItemIronSmallChunksID = 6503;
+	private int ItemCopperSmallChunksID = 6504;
+	private int ItemTinSmallChunksID = 6505;
+	private int ItemIronCrushedChunksID = 6506;
+	private int ItemCopperCrushedChunksID = 6507;
+	private int ItemTinCrushedChunksID = 6508;
+	private int ItemIronWashedChunksID = 6509;
+	private int ItemCopperWashedChunksID = 6510;
+	private int ItemTinWashedChunksID = 6511;
+	private int ItemIronFineChunksID = 6512;
+	private int ItemCopperFineChunksID = 6513;
+	private int ItemTinFineChunksID = 6514;
+	private int ItemIronOxideDustID = 6515;
+	private int ItemCopperMineralID = 6516;
+	private int ItemTinOxideDustID = 6517;
+	private int ItemSiliciumID = 6518;
+	private int ItemZincDustID = 6519;
+	private int ItemCopperPurifiedID = 6520;
+	private int ItemTinPurifiedID = 6521;
+	private int ItemSulfurID = 6522;
+	private int ItemIronMixedFragmentsID = 6523;
+	private int ItemCopperMixedFragmentsID = 6524;
+	private int ItemTinMixedFragmentsID = 6525;
+	private int ItemIronOxidePelletsID = 6526;
+	private int ItemCalcareousSinterDustID = 6527;
+	private int ItemCokesID = 6528;
+	private int ItemSlagID = 6529;
 	
 	public static int ItemIronLargeChunksID(){return getInstance().ItemIronLargeChunksID;}
 	public static int ItemCopperLargeChunksID(){return getInstance().ItemCopperLargeChunksID;}

@@ -14,21 +14,22 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ConfigFluids {
 
-	private int blockFluidBaseDirtyWaterID = 2000;
-	private int BucketDirtyWaterID = 2001;
-	private int blockFluidBaseOreSludgeIronID = 2002;
-	private int blockFluidBaseOreSludgeCopperID = 2003;
-	private int blockFluidBaseOreSludgeTinID = 2004;
-	private int BucketOreSludgeIronID = 2005;
-	private int BucketOreSludgeCopperID = 2006;
-	private int BucketOreSludgeTinID = 2007;
-	private int BucketHotSlagID = 2008;
-	private int BucketPigIronID = 2009;
-	private int BucketHotSteelID = 2010;
-	private int blockFluidBaseHotSlagID = 2011;
-	private int blockFluidBasePigIronID = 2012;
-	private int blockFluidBaseHotSteelID = 2013;
-	private int blockFluidBaseExhaustGasID = 2014;
+	private int offset = 2500;
+	private int blockFluidBaseDirtyWaterID = offset;
+	private int BucketDirtyWaterID = offset+1;
+	private int blockFluidBaseOreSludgeIronID = offset+2;
+	private int blockFluidBaseOreSludgeCopperID = offset+3;
+	private int blockFluidBaseOreSludgeTinID = offset+4;
+	private int BucketOreSludgeIronID = offset+5;
+	private int BucketOreSludgeCopperID = offset+6;
+	private int BucketOreSludgeTinID = offset+7;
+	private int BucketHotSlagID = offset+8;
+	private int BucketPigIronID = offset+9;
+	private int BucketHotSteelID = offset+10;
+	private int blockFluidBaseHotSlagID = offset+11;
+	private int blockFluidBasePigIronID = offset+12;
+	private int blockFluidBaseHotSteelID = offset+13;
+	private int blockFluidBaseExhaustGasID = offset+14;
 	
 	public static int blockFluidBaseDirtyWaterID(){return getInstance().blockFluidBaseDirtyWaterID;}
 	public static int BucketDirtyWaterID(){return getInstance().BucketDirtyWaterID;}

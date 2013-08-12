@@ -5,10 +5,12 @@ import net.minecraft.src.ModLoader;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import ip.industrialProcessing.machines.blastFurnace.BlockBlastFurnace;
 import ip.industrialProcessing.machines.classifier.BlockClassifier;
 import ip.industrialProcessing.machines.crusher.BlockCrusher;
 import ip.industrialProcessing.machines.diskFilter.BlockDiskFilter;
 import ip.industrialProcessing.machines.dryer.BlockDryer;
+import ip.industrialProcessing.machines.extruder.BlockExtruder;
 import ip.industrialProcessing.machines.filter.BlockFilter;
 import ip.industrialProcessing.machines.flotationCell.BlockFlotationCell;
 import ip.industrialProcessing.machines.hydroCyclone.BlockHydroCyclone;
@@ -17,6 +19,8 @@ import ip.industrialProcessing.machines.mixer.BlockMixer;
 import ip.industrialProcessing.machines.multiblock.crusher.BlockLargeCrusher;
 import ip.industrialProcessing.machines.multiblock.inventory.BlockMultiMachineInput;
 import ip.industrialProcessing.machines.multiblock.machineFrame.BlockMachineFrame;
+import ip.industrialProcessing.machines.oxygenFurnace.BlockOxygenFurnace;
+import ip.industrialProcessing.machines.pelletExtruder.BlockPelletExtruder;
 import ip.industrialProcessing.machines.thickener.BlockThickener;
 import ip.industrialProcessing.power.buildcraftGenerator.BlockBuildcraftGenerator;
 import ip.industrialProcessing.power.manualGenerator.BlockManualGenerator;
@@ -38,6 +42,10 @@ public interface ISetupMachineBlocks {
 	public final static BlockFlotationCell blockFlotationCell = new BlockFlotationCell();
 	public final static BlockHydroCyclone blockHydroCyclone = new BlockHydroCyclone();
 	public final static BlockDiskFilter blockDiskFilter = new BlockDiskFilter();
+	public final static BlockBlastFurnace blockBlastFurnace = new BlockBlastFurnace();
+	public final static BlockExtruder blockExtruder = new BlockExtruder();
+	public final static BlockOxygenFurnace blockOxygenFurnace = new BlockOxygenFurnace();
+	public final static BlockPelletExtruder blockPelletExtruder = new BlockPelletExtruder();
 
 	// create generators
 	public final static BlockManualGenerator blockManualGenerator = new BlockManualGenerator();
