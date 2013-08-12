@@ -33,6 +33,11 @@ public class ConfigItems {
 	private int ItemCopperMixedFragmentsID = 5024;
 	private int ItemTinMixedFragmentsID = 5025;
 	
+	private int ItemIronOxidePelletsID = 5026;
+	private int ItemCalcareousSinterDustID = 5027;
+	private int ItemCokesID = 5028;
+	private int ItemSlagID = 5029;
+	
 	public static int ItemIronLargeChunksID(){return getInstance().ItemIronLargeChunksID;}
 	public static int ItemCopperLargeChunksID(){return getInstance().ItemCopperLargeChunksID;}
 	public static int ItemTinLargeChunksID(){return getInstance().ItemTinLargeChunksID;}
@@ -59,6 +64,11 @@ public class ConfigItems {
 	public static int ItemIronMixedFragmentsID() {return getInstance().ItemIronMixedFragmentsID;}
 	public static int ItemCopperMixedFragmentsID() {return getInstance().ItemCopperMixedFragmentsID;}
 	public static int ItemTinMixedFragmentsID() {return getInstance().ItemTinMixedFragmentsID;}
+	
+	public static int ItemIronOxidePelletsID() {return getInstance().ItemIronOxidePelletsID;}
+	public static int ItemCalcareousSinterDustID() {return getInstance().ItemCalcareousSinterDustID;}
+	public static int ItemCokesID() {return getInstance().ItemCokesID;}
+	public static int ItemSlagID() {return getInstance().ItemSlagID;}
 	
 	public static void addToLanguageRegistry(){
 		LanguageRegistry.addName(IndustrialProcessing.itemIronLargeChunks, "Large iron Chunks");
@@ -87,6 +97,11 @@ public class ConfigItems {
 		LanguageRegistry.addName(IndustrialProcessing.itemCopperPurified, "Purified copper");
 		LanguageRegistry.addName(IndustrialProcessing.itemTinPurified, "Purified tin");
 		LanguageRegistry.addName(IndustrialProcessing.itemSulfur, "Sulfur");
+		
+		LanguageRegistry.addName(IndustrialProcessing.itemIronOxidePellets, "Iron pellets");
+		LanguageRegistry.addName(IndustrialProcessing.itemCalcareousSinterDust, "Calcareous sinter dust");
+		LanguageRegistry.addName(IndustrialProcessing.itemCokes, "Cokes");
+		LanguageRegistry.addName(IndustrialProcessing.itemSlag, "Slag");
 	}
 	
 	private ConfigItems(){

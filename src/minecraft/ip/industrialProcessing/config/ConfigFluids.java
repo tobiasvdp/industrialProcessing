@@ -22,6 +22,13 @@ public class ConfigFluids {
 	private int BucketOreSludgeIronID = 2005;
 	private int BucketOreSludgeCopperID = 2006;
 	private int BucketOreSludgeTinID = 2007;
+	private int BucketHotSlagID = 2008;
+	private int BucketPigIronID = 2009;
+	private int BucketHotSteelID = 2010;
+	private int blockFluidBaseHotSlagID = 2011;
+	private int blockFluidBasePigIronID = 2012;
+	private int blockFluidBaseHotSteelID = 2013;
+	private int blockFluidBaseExhaustGasID = 2014;
 	
 	public static int blockFluidBaseDirtyWaterID(){return getInstance().blockFluidBaseDirtyWaterID;}
 	public static int BucketDirtyWaterID(){return getInstance().BucketDirtyWaterID;}
@@ -31,6 +38,13 @@ public class ConfigFluids {
 	public static int BucketOreSludgeIronID() {return getInstance().BucketOreSludgeIronID ;}
 	public static int BucketOreSludgeCopperID() {return getInstance().BucketOreSludgeCopperID ;}
 	public static int BucketOreSludgeTinID() {return getInstance().BucketOreSludgeTinID ;}
+	public static int BucketHotSlagID() {return getInstance().BucketHotSlagID ;}
+	public static int BucketPigIronID() {return getInstance().BucketPigIronID ;}
+	public static int BucketHotSteelID() {return getInstance().BucketHotSteelID ;}
+	public static int blockFluidBaseHotSlagID() {return getInstance().blockFluidBaseHotSlagID ;}
+	public static int blockFluidBasePigIronID() {return getInstance().blockFluidBasePigIronID ;}
+	public static int blockFluidBaseHotSteelID() {return getInstance().blockFluidBaseHotSteelID ;}
+	public static int blockFluidBaseExhaustGasID() {return getInstance().blockFluidBaseExhaustGasID ;}
 	
 	public void registerFluids(){
 		registerFluid(IndustrialProcessing.blockFluidDirtyWater, IndustrialProcessing.itemFluidDirtyWater, IndustrialProcessing.bucketDirtyWater, "Dirty water");
@@ -41,12 +55,21 @@ public class ConfigFluids {
 		LanguageRegistry.addName(IndustrialProcessing.bucketOreSludgeCopper, "Copper sludge Bucket");
 		registerFluid(IndustrialProcessing.blockFluidOreSludgeTin, IndustrialProcessing.itemFluidOreSludgeTin, IndustrialProcessing.bucketOreSludgeTin, "Tin ore sludge");
 		LanguageRegistry.addName(IndustrialProcessing.bucketOreSludgeTin, "Tin sludge Bucket");
+		registerFluid(IndustrialProcessing.blockFluidHotSlag, IndustrialProcessing.itemFluidHotSlag, IndustrialProcessing.bucketHotSlag, "Hot slag");
+		LanguageRegistry.addName(IndustrialProcessing.bucketHotSlag, "Hot slag Bucket");
+		registerFluid(IndustrialProcessing.blockFluidPigIron, IndustrialProcessing.itemFluidPigIron, IndustrialProcessing.bucketPigIron, "Pig iron");
+		LanguageRegistry.addName(IndustrialProcessing.bucketPigIron, "Pig iron Bucket");
+		registerFluid(IndustrialProcessing.blockFluidHotSteel, IndustrialProcessing.itemFluidHotSteel, IndustrialProcessing.bucketHotSteel, "Molten steel");
+		LanguageRegistry.addName(IndustrialProcessing.bucketHotSteel, "Molten steel Bucket");
+		registerFluid(IndustrialProcessing.blockFluidExhaustGas, IndustrialProcessing.itemFluidExhaustGas, null, "Exhaust gas");
 	}
 	
 	private void registerFluid(Block block, Fluid fluid, ContainerFluid bucket, String displayName) {
 		GameRegistry.registerBlock(block, "BlockFluid" + fluid.getName());
 		LanguageRegistry.addName(block, displayName);
-		FluidContainerRegistry.registerFluidContainer(new FluidContainerData(FluidRegistry.getFluidStack(fluid.getName(), FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(bucket), new ItemStack(Item.bucketEmpty)));
+		if (bucket != null){
+			FluidContainerRegistry.registerFluidContainer(new FluidContainerData(FluidRegistry.getFluidStack(fluid.getName(), FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(bucket), new ItemStack(Item.bucketEmpty)));
+		}
 	}
 	
 	private ConfigFluids(){
