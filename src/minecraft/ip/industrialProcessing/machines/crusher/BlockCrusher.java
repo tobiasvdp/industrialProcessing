@@ -28,7 +28,7 @@ import net.minecraftforge.common.ForgeDirection;
 public class BlockCrusher extends BlockMachineRendered {
 
     public BlockCrusher() {
-	super(ConfigMachineBlocks.getCrusherBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Ore Crusher", IndustrialProcessing.tabMachines);
+	super(ConfigMachineBlocks.getCrusherBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Ore Crusher", IndustrialProcessing.tabOreProcessing);
     }
 
     @Override

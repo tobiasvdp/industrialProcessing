@@ -35,7 +35,7 @@ public class BlockFilter extends BlockMachineRendered {
 	public BlockFilter() {
 		super(ConfigMachineBlocks.getFilterBlockID(), Material.iron, 1F,
 		Block.soundMetalFootstep, "Ore Filter",
-		IndustrialProcessing.tabMachines);
+		IndustrialProcessing.tabOreProcessing);
 	}			
 
     @Override

@@ -33,7 +33,7 @@ public class ContainerFluid extends ItemBucket implements IFluidContainerItem{
 		super(itemId,block.blockID);
 		setUnlocalizedName("Container"+fluid.getName());
 		setMaxStackSize(1);
-		setCreativeTab(IndustrialProcessing.tabMachines);
+		setCreativeTab(IndustrialProcessing.tabOreProcessing);
 		this.capacity = 1000;
 		BucketHandler.INSTANCE.buckets.put(block, this);
 		func_111206_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + texture);

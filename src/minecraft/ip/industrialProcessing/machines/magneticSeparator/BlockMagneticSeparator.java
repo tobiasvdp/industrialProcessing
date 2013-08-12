@@ -18,7 +18,7 @@ public class BlockMagneticSeparator extends BlockMachineRendered {
 	public BlockMagneticSeparator() {
 		super(ConfigMachineBlocks.getMagneticSeparatorBlockID(), Material.iron, 1F,
 				Block.soundMetalFootstep, "Magnetic Ore Separator",
-				IndustrialProcessing.tabMachines);
+				IndustrialProcessing.tabOreProcessing);
 	}
 	@Override
 	public TileEntity createNewTileEntity(World world) {

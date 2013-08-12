@@ -8,7 +8,7 @@ public class ItemIP extends Item {
 	public ItemIP(int ID,String name) {
 		super(ID);
 		setMaxStackSize(64);
-		setCreativeTab(IndustrialProcessing.tabMachines);
+		setCreativeTab(IndustrialProcessing.tabOreProcessing);
 		setUnlocalizedName(name);
 		func_111206_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + name);
 	}

@@ -20,7 +20,7 @@ public class BlockMultiMachineInput extends BlockMultiMachineFrame {
 	
 	public BlockMultiMachineInput() {
 		super(ConfigMachineBlocks.getMultiMachineInputBlockID(),"BlockMultiMachineInventory",
-				IndustrialProcessing.tabMachines);
+				IndustrialProcessing.tabOreProcessing);
 	}
 
 	@Override

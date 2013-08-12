@@ -13,7 +13,7 @@ import ip.industrialProcessing.machines.BlockMachine;
 public class BlockHydroCyclone extends BlockMachine {
 
     public BlockHydroCyclone() {
-	super(ConfigMachineBlocks.getHydroCycloneBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Hydro Cyclone Separator", IndustrialProcessing.tabMachines);
+	super(ConfigMachineBlocks.getHydroCycloneBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Hydro Cyclone Separator", IndustrialProcessing.tabOreProcessing);
 
     }
     @Override

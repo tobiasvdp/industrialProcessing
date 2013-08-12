@@ -13,7 +13,7 @@ import ip.industrialProcessing.machines.BlockMachine;
 public class BlockFlotationCell extends BlockMachine {
 
     public BlockFlotationCell() {
-	super(ConfigMachineBlocks.getFlotationCellBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Flotation Cell", IndustrialProcessing.tabMachines);
+	super(ConfigMachineBlocks.getFlotationCellBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Flotation Cell", IndustrialProcessing.tabOreProcessing);
 
     }
     @Override

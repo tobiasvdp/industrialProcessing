@@ -26,7 +26,7 @@ public class BlockTransport extends BlockContainer {
 		setHardness(5F);
 		setStepSound(Block.soundAnvilFootstep);
 		setUnlocalizedName(name);
-		setCreativeTab(IndustrialProcessing.tabMachines);
+		setCreativeTab(IndustrialProcessing.tabOreProcessing);
 		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "inputTop");
 	}
 	

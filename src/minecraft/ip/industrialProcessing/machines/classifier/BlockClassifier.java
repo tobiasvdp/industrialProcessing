@@ -14,7 +14,7 @@ import ip.industrialProcessing.machines.BlockMachine;
 public class BlockClassifier extends BlockMachine {
 
     public BlockClassifier() {
-	super(ConfigMachineBlocks.getClassifierBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Spiral Classifier", IndustrialProcessing.tabMachines);
+	super(ConfigMachineBlocks.getClassifierBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Spiral Classifier", IndustrialProcessing.tabOreProcessing);
     }
 
     @Override

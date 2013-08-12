@@ -15,7 +15,7 @@ import ip.industrialProcessing.machines.BlockMachineRendered;
 public class BlockMixer extends BlockMachineRendered {
 
 	public BlockMixer() {
-		super(ConfigMachineBlocks.getMixerBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Mixer", IndustrialProcessing.tabMachines);
+		super(ConfigMachineBlocks.getMixerBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Mixer", IndustrialProcessing.tabOreProcessing);
 	}
 
 	@Override

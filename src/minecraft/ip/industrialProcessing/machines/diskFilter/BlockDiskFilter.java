@@ -15,7 +15,7 @@ import ip.industrialProcessing.machines.BlockMachineRendered;
 public class BlockDiskFilter extends BlockMachineRendered {
 
 	public BlockDiskFilter() {
-		super(ConfigMachineBlocks.getDiskFilterBlockID(), Material.iron, 1f, Block.soundMetalFootstep, "Disk Filter", IndustrialProcessing.tabMachines); 
+		super(ConfigMachineBlocks.getDiskFilterBlockID(), Material.iron, 1f, Block.soundMetalFootstep, "Disk Filter", IndustrialProcessing.tabOreProcessing); 
 	}
 
 	@Override

@@ -13,7 +13,7 @@ import ip.industrialProcessing.machines.BlockMachine;
 public class BlockDryer extends BlockMachine {
 
 	public BlockDryer() {
-		super(ConfigMachineBlocks.getDryerBlockID(), Material.iron, 1f, Block.soundMetalFootstep, "Dryer", IndustrialProcessing.tabMachines); 
+		super(ConfigMachineBlocks.getDryerBlockID(), Material.iron, 1f, Block.soundMetalFootstep, "Dryer", IndustrialProcessing.tabOreProcessing); 
 	}
 
 	@Override

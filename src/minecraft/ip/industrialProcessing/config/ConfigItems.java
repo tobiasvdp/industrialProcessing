@@ -1,5 +1,8 @@
 package ip.industrialProcessing.config;
 
+import ip.industrialProcessing.IndustrialProcessing;
+import cpw.mods.fml.common.registry.LanguageRegistry;
+
 
 public class ConfigItems {
 
@@ -56,6 +59,35 @@ public class ConfigItems {
 	public static int ItemIronMixedFragmentsID() {return getInstance().ItemIronMixedFragmentsID;}
 	public static int ItemCopperMixedFragmentsID() {return getInstance().ItemCopperMixedFragmentsID;}
 	public static int ItemTinMixedFragmentsID() {return getInstance().ItemTinMixedFragmentsID;}
+	
+	public static void addToLanguageRegistry(){
+		LanguageRegistry.addName(IndustrialProcessing.itemIronLargeChunks, "Large iron Chunks");
+		LanguageRegistry.addName(IndustrialProcessing.itemCopperLargeChunks, "Large copper Chunks");
+		LanguageRegistry.addName(IndustrialProcessing.itemTinLargeChunks, "Large tin Chunks");
+		LanguageRegistry.addName(IndustrialProcessing.itemIronSmallChunks, "Small iron Chunks");
+		LanguageRegistry.addName(IndustrialProcessing.itemCopperSmallChunks, "Small copper Chunks");
+		LanguageRegistry.addName(IndustrialProcessing.itemTinSmallChunks, "Small tin Chunks");
+		LanguageRegistry.addName(IndustrialProcessing.itemIronCrushedChunks, "Crushed iron Chunks");
+		LanguageRegistry.addName(IndustrialProcessing.itemCopperCrushedChunks, "Crushed copper Chunks");
+		LanguageRegistry.addName(IndustrialProcessing.itemTinCrushedChunks, "Crushed tin Chunks");
+		LanguageRegistry.addName(IndustrialProcessing.itemIronWashedChunks, "Washed iron Chunks");
+		LanguageRegistry.addName(IndustrialProcessing.itemCopperWashedChunks, "Washed copper Chunks");
+		LanguageRegistry.addName(IndustrialProcessing.itemTinWashedChunks, "Washed tin Chunks");
+		LanguageRegistry.addName(IndustrialProcessing.itemIronFineChunks, "Fine iron Chunks");
+		LanguageRegistry.addName(IndustrialProcessing.itemCopperFineChunks, "Fine copper Chunks");
+		LanguageRegistry.addName(IndustrialProcessing.itemTinFineChunks, "Fine tin Chunks");
+		LanguageRegistry.addName(IndustrialProcessing.itemIronOxideDust, "Iron oxide Dust");
+		LanguageRegistry.addName(IndustrialProcessing.itemCopperMineral, "Copper mineral");
+		LanguageRegistry.addName(IndustrialProcessing.itemTinOxideDust, "Tin oxide Dust");
+		LanguageRegistry.addName(IndustrialProcessing.itemIronMixedFragments, "Iron mixed fragments");
+		LanguageRegistry.addName(IndustrialProcessing.itemCopperMixedFragments, "Copper mixed fragments");
+		LanguageRegistry.addName(IndustrialProcessing.itemTinMixedFragments, "Tin mixed fragments");
+		LanguageRegistry.addName(IndustrialProcessing.itemSilicium, "Silicium");
+		LanguageRegistry.addName(IndustrialProcessing.itemZincDust, "zinc Dust");
+		LanguageRegistry.addName(IndustrialProcessing.itemCopperPurified, "Purified copper");
+		LanguageRegistry.addName(IndustrialProcessing.itemTinPurified, "Purified tin");
+		LanguageRegistry.addName(IndustrialProcessing.itemSulfur, "Sulfur");
+	}
 	
 	private ConfigItems(){
 	

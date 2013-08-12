@@ -14,7 +14,7 @@ import ip.industrialProcessing.machines.BlockMachine;
 public class BlockThickener extends BlockMachine {
 
     public BlockThickener() {
-	super(ConfigMachineBlocks.getThickenerBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Thickener", IndustrialProcessing.tabMachines);
+	super(ConfigMachineBlocks.getThickenerBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Thickener", IndustrialProcessing.tabOreProcessing);
 
     }
 

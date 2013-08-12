@@ -13,7 +13,7 @@ import ip.industrialProcessing.machines.multiblock.BlockMultiMachineCore;
 public class BlockLargeCrusher extends BlockMultiMachineCore {
 
 	public BlockLargeCrusher() {
-		super(ConfigMachineBlocks.getLargeCrusherBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Large Crusher", IndustrialProcessing.tabMachines);
+		super(ConfigMachineBlocks.getLargeCrusherBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Large Crusher", IndustrialProcessing.tabOreProcessing);
 	}
 
 	@Override
