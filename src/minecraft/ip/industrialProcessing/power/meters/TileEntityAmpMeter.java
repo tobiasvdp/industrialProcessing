@@ -41,6 +41,7 @@ public class TileEntityAmpMeter extends TileEntityPowerGenerator implements IPow
     public void updateEntity() {
 	super.updateEntity();
 	this.amps = throughput / 500f;
+	this.demand = 0;
     }
 
     @Override
