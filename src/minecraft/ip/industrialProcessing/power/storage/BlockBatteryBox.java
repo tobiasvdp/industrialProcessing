@@ -8,9 +8,11 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigBlocks;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
+import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.BlockMachineRendered;
+import ip.industrialProcessing.power.BlockPowerGenerator;
 
-public class BlockBatteryBox extends BlockMachineRendered {
+public class BlockBatteryBox extends BlockPowerGenerator {
 
     public BlockBatteryBox() {
 	super(ConfigMachineBlocks.getBatteryBoxBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Battery Box", IndustrialProcessing.tabPower);
@@ -19,6 +21,5 @@ public class BlockBatteryBox extends BlockMachineRendered {
     @Override
     public TileEntity createNewTileEntity(World world) { 
 	return new TileEntityBatteryBox();
-    }
-
+    } 
 }

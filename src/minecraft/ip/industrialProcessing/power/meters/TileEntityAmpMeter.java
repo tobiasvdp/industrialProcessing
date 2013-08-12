@@ -43,7 +43,7 @@ public class TileEntityAmpMeter extends TileEntityMachine implements IPowerAccep
     }
 
     @Override
-    public int producePower(int maxAmount) {
+    public int producePower(int maxAmount, boolean doProduce) {
 	return 0; // this isn't used
     }
 

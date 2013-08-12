@@ -11,7 +11,7 @@ import ip.industrialProcessing.power.TileEntityPowerGenerator;
 public class TileEntityBatteryBox extends TileEntityPowerGenerator implements IPowerAcceptor {
 
     public TileEntityBatteryBox() {
-	super(10000, 100); 
+	super(100);
     }
 
     private static final LocalDirection inputSide = LocalDirection.LEFT;
@@ -21,8 +21,11 @@ public class TileEntityBatteryBox extends TileEntityPowerGenerator implements IP
     int storageCapacity = 10000;
 
     @Override
-    public int producePower(int maxAmount) {
-	return Math.min(maxAmount, storedPower);
+    public int producePower(int maxAmount, boolean doProduce) {
+	int amount = Math.min(maxAmount, this.storedPower);
+	if (doProduce)
+	    this.storedPower -= amount;
+	return amount;
     }
 
     @Override
@@ -49,7 +52,7 @@ public class TileEntityBatteryBox extends TileEntityPowerGenerator implements IP
     }
 
     @Override
-    protected boolean isValidInput(int slot, int itemID) { 
+    protected boolean isValidInput(int slot, int itemID) {
 	return false;
     }
 

@@ -1,5 +1,5 @@
 package ip.industrialProcessing.power;
- 
+
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityMachine;
@@ -23,11 +23,9 @@ public class PowerDistributorManager {
     }
 
     protected TileEntityMachine entity;
+ 
 
-    protected boolean undiscovered = true;
-
-    public void searchPowerAcceptors() {
-	this.undiscovered = false;
+    public void searchPowerAcceptors() { 
 	ArrayList<PowerAcceptorConnection> connections = new ArrayList<PowerAcceptorConnection>();
 	for (int i = 0; i < ForgeDirection.VALID_DIRECTIONS.length; i++) {
 	    ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[i];
@@ -54,9 +52,11 @@ public class PowerDistributorManager {
     }
 
     protected IPowerAcceptor getAcceptor(ForgeDirection direction) {
-	TileEntity neighbor = this.entity.worldObj.getBlockTileEntity(this.entity.xCoord + direction.offsetX, this.entity.yCoord + direction.offsetY, this.entity.zCoord + direction.offsetZ);
-	if (neighbor instanceof IPowerAcceptor) {
-	    return (IPowerAcceptor) neighbor;
+	if (this.entity.worldObj != null) {
+	    TileEntity neighbor = this.entity.worldObj.getBlockTileEntity(this.entity.xCoord + direction.offsetX, this.entity.yCoord + direction.offsetY, this.entity.zCoord + direction.offsetZ);
+	    if (neighbor instanceof IPowerAcceptor) {
+		return (IPowerAcceptor) neighbor;
+	    }
 	}
 	return null;
     }
@@ -75,7 +75,7 @@ public class PowerDistributorManager {
     }
 
     public void readFromNBT(NBTTagCompound nbt) {
-	int[] directions = nbt.getIntArray("Cons"); 
+	int[] directions = nbt.getIntArray("Cons");
 	ArrayList<PowerAcceptorConnection> connections = new ArrayList<PowerAcceptorConnection>(directions.length);
 	for (int i = 0; i < directions.length; i++) {
 	    ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[directions[i]];
@@ -83,10 +83,5 @@ public class PowerDistributorManager {
 	}
 	PowerAcceptorConnection[] outputs = connections.toArray(new PowerAcceptorConnection[connections.size()]);
 	this.distributor.setOutputs(outputs);
-    }
-
-    public void update() { 
-	if (this.undiscovered)
-	    searchPowerAcceptors();
-    }
+    } 
 }

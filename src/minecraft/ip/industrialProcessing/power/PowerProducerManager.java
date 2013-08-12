@@ -24,9 +24,8 @@ public class PowerProducerManager extends PowerDistributorManager {
 	this.maxPowerOutput = maxOutput;
     }
 
-    public void update() {
-	super.update();
-	int production = this.supplier.producePower(storageCapacity - storedPower);
+    public void update() { 
+	int production = this.supplier.producePower(storageCapacity - storedPower, false);
 	this.storedPower += production;
 	// sense the network for demand (distributor updates the power
 	// distribution internally in this call)

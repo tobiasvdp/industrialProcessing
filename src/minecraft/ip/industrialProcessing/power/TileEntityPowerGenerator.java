@@ -10,12 +10,16 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 public abstract class TileEntityPowerGenerator extends TileEntityMachine implements IPowerProducer{
+     
+    private PowerDistributorManager powerManager;
+    private boolean searched = false;
+    private int maxOutput = 100; 
 
-    private PowerProducerManager powerManager; 
-
-    public TileEntityPowerGenerator(int capacity, int maxOutput)
+    public TileEntityPowerGenerator(int maxOutput)
     { 
-	this.powerManager = new PowerProducerManager(this, this, capacity, maxOutput);
+	this.maxOutput = maxOutput;
+	
+	this.powerManager = new PowerDistributorManager(this, this);
     }
       
     @Override
@@ -36,12 +40,19 @@ public abstract class TileEntityPowerGenerator extends TileEntityMachine impleme
     }
 
     @Override
-    public void updateEntity() {
-	this.powerManager.update();
-	super.updateEntity();
+    public void updateEntity() { 
+	super.updateEntity(); 
+	if(!searched )
+	    searchForPowerAcceptors();
+	int production = this.producePower(maxOutput , false);
+	int demand = this.powerManager.distributePower(production, maxOutput, false);
+	int actualProduction = this.producePower(demand, true);
+	int distributed = this.powerManager.distributePower(actualProduction, maxOutput, true);
     }
-  
-    public PowerProducerManager getProducer() { 
-	return this.powerManager;
+   
+    public void searchForPowerAcceptors()
+    {
+	this.searched = true;
+	this.powerManager.searchPowerAcceptors(); 
     }
 }

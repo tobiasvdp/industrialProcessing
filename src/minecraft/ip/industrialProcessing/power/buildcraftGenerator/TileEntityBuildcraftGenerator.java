@@ -10,21 +10,21 @@ import ip.industrialProcessing.power.TileEntityPowerGenerator;
 
 public class TileEntityBuildcraftGenerator extends TileEntityPowerGenerator implements IPowerReceptor {
 
-    private static final float CONVERSION_RATE = 2f;
+    private static final float CONVERSION_RATE = 0.5f; // for every 0.5 BC Joules, one unit of IP Power is generated
     private PowerHandler powerHandler;
 
-    public TileEntityBuildcraftGenerator() {
-	super(1000, 100); 
+    public TileEntityBuildcraftGenerator() { 
+	super(100);
 	this.powerHandler = new PowerHandler(this, Type.MACHINE);
 	this.powerHandler.configure(1, 50, 3, 15000);
 	this.powerHandler.configurePowerPerdition(2, 1);
     }
 
     @Override
-    public int producePower(int maxAmount) { 
+    public int producePower(int maxAmount, boolean doProduce) { 
 	float max = maxAmount / CONVERSION_RATE;
-	float min = Math.min(1, max);
-	return (int)(this.powerHandler.useEnergy(min, max, true) * CONVERSION_RATE); 
+	float min = max / 2;
+	return (int)(this.powerHandler.useEnergy(min, max, doProduce) * CONVERSION_RATE); 
     }
 
     @Override
