@@ -8,11 +8,11 @@ import ip.industrialProcessing.CreativeTabsIP;
 public class ConfigCreativeTabs {
 
 	public void addToLanguageRegistry(){
-		LanguageRegistry.instance().addStringLocalization("itemGroup.IPOreProc", "en_US", "IP Ore extraction");
+		LanguageRegistry.instance().addStringLocalization("IP.itemGroup.tabOreExtraction", "en_US", "IP Ore extraction");
 		((CreativeTabsIP) IndustrialProcessing.tabOreProcessing).setIcon(new ItemStack(IndustrialProcessing.blockFilter));
-		LanguageRegistry.instance().addStringLocalization("itemGroup.tabOres", "en_US", "IP ores");
+		LanguageRegistry.instance().addStringLocalization("IP.itemGroup.tabOres", "en_US", "IP ores");
 		((CreativeTabsIP) IndustrialProcessing.tabOres).setIcon(new ItemStack(IndustrialProcessing.itemIronCrushedChunks));
-		LanguageRegistry.instance().addStringLocalization("itemGroup.tabPower", "en_US", "IP Power");
+		LanguageRegistry.instance().addStringLocalization("IP.itemGroup.tabPower", "en_US", "IP Power");
 		((CreativeTabsIP) IndustrialProcessing.tabPower).setIcon(new ItemStack(IndustrialProcessing.blockWire));
 	}
 	

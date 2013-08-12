@@ -14,7 +14,7 @@ import ip.industrialProcessing.power.BlockPowerGenerator;
 public class BlockManualGenerator extends BlockPowerGenerator {
 
     public BlockManualGenerator() {
-	super(ConfigMachineBlocks.getManualGeneratorBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Crank Generator", IndustrialProcessing.tabOreProcessing);
+	super(ConfigMachineBlocks.getManualGeneratorBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Crank Generator", IndustrialProcessing.tabPower);
     }
 
     @Override

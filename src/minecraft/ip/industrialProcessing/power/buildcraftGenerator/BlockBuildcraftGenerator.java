@@ -11,7 +11,7 @@ import ip.industrialProcessing.power.BlockPowerGenerator;
 public class BlockBuildcraftGenerator extends BlockPowerGenerator {
 
     public BlockBuildcraftGenerator() {
-	super(ConfigMachineBlocks.getBuildcraftGeneratorBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Buildcraft Generator", IndustrialProcessing.tabOreProcessing);
+	super(ConfigMachineBlocks.getBuildcraftGeneratorBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Buildcraft Generator", IndustrialProcessing.tabPower);
     }
     @Override
     public TileEntity createNewTileEntity(World world) { 

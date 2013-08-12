@@ -11,7 +11,7 @@ import ip.industrialProcessing.machines.BlockMachineRendered;
 
 public class BlockAmpMeter extends BlockMachineRendered {
     public BlockAmpMeter() {
-	super(ConfigMachineBlocks.getAmpMeterBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Amp Meter", IndustrialProcessing.tabOreProcessing);
+	super(ConfigMachineBlocks.getAmpMeterBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Amp Meter", IndustrialProcessing.tabPower);
     }
 
     @Override
