@@ -7,6 +7,7 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.power.BlockPowerGenerator;
+import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
 
 public class BlockBuildcraftGenerator extends BlockPowerGenerator {
 
@@ -17,5 +18,6 @@ public class BlockBuildcraftGenerator extends BlockPowerGenerator {
     public TileEntity createNewTileEntity(World world) { 
 	return new TileEntityBuildcraftGenerator();
     }
+ 
 
 }

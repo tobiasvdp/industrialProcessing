@@ -19,8 +19,7 @@ public abstract class BlockPowerGenerator extends BlockMachine {
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
 	super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
 	TileEntityPowerGenerator generator = (TileEntityPowerGenerator) par1World.getBlockTileEntity(par2, par3, par4);
-	if (generator != null)
-	    generator.getProducer().searchPowerAcceptors(); 
+	generator.searchForPowerAcceptors();
 
     }
 }
