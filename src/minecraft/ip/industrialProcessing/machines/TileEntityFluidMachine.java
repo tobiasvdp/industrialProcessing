@@ -298,7 +298,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine implement
 	FluidTank tank = getOutputTankForFluidStack(from, resource);
 	if (tank == null)
 	    return null;
-	FluidStack amount = tank.drain(tank.getFluidAmount(), doDrain);
+	FluidStack amount = tank.drain(resource.amount, doDrain);
 	if (doDrain)
 	    onTanksChanged();
 	return amount;
@@ -310,7 +310,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine implement
 	FluidTank tank = getOutputTank(from);
 	if (tank == null)
 	    return null;
-	FluidStack amount = tank.drain(tank.getFluidAmount(), doDrain);
+	FluidStack amount = tank.drain(maxDrain, doDrain);
 	if (doDrain)
 	    onTanksChanged();
 	return amount;

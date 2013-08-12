@@ -17,7 +17,7 @@ public class TileEntityDryer extends TileEntityPoweredFluidWorkerMachine {
 
     public TileEntityDryer() {
 	super(LocalDirection.LEFT, 10000);
-	addStack(null, LocalDirection.UP, true, false); // Mixing ingredient
+	addStack(null, LocalDirection.RIGHT, false, true); // Mixing ingredient
 
 	LocalDirection[] nodirections = new LocalDirection[0];
 	// buckets!
@@ -25,9 +25,8 @@ public class TileEntityDryer extends TileEntityPoweredFluidWorkerMachine {
 	addStack(null, nodirections, false, true); // Liquid Input Empty Output
 	addStack(null, nodirections, true, false); // Liquid Output Empty Input
 	addStack(null, nodirections, false, true); // Liquid Output Full Output
-	LocalDirection[] allSides = new LocalDirection[] { LocalDirection.LEFT, LocalDirection.RIGHT, LocalDirection.FRONT, LocalDirection.BACK };
 
-	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, allSides, true, false);
+	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.UP, true, false);
 	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.DOWN, false, true);
     }
 

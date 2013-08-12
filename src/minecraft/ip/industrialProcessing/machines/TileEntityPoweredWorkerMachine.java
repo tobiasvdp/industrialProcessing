@@ -32,7 +32,7 @@ public abstract class TileEntityPoweredWorkerMachine extends TileEntityWorkerMac
     @Override
     public void doWork() {
 	int amount = PowerWorkerHelper.getWork(this.powerCapacity, this.powerStorage, this.maxWorkSpeed);
-	this.powerStorage -= work(amount);
+	this.powerStorage -= 	work(amount);
     }
 
     @Override
