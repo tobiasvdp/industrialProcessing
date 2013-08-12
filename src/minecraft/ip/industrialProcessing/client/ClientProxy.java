@@ -29,6 +29,8 @@ import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import ip.industrialProcessing.power.meters.ModelVoltMeter;
 import ip.industrialProcessing.power.meters.TileEntityAmpMeter;
 import ip.industrialProcessing.power.meters.TileEntityVoltMeter;
+import ip.industrialProcessing.power.storage.ModelBatteryBox;
+import ip.industrialProcessing.power.storage.TileEntityBatteryBox;
 import ip.industrialProcessing.power.wire.ModelWire;
 import ip.industrialProcessing.power.wire.TileEntityWire; 
 import ip.industrialProcessing.transport.fluids.ModelTransportFluids;
@@ -45,6 +47,7 @@ public class ClientProxy extends CommonProxy {
     private static final ModelAnimatedMachine voltMeter = new ModelVoltMeter(false);
     private static final ModelAnimatedMachine ampMeter = new ModelVoltMeter(true);
     private static final ModelConnected transportFluids = new ModelTransportFluids();
+    private static final ModelAnimatedMachine batteryBox = new ModelBatteryBox();
     @Override
     public void registerRenderers() {
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFilter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockFilter, "ModelFilter", filter));
@@ -84,6 +87,11 @@ public class ClientProxy extends CommonProxy {
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTransportFluids.class, new RendererTileEntityConnected(IndustrialProcessing.blockTransportFluids, "ModelTransportFluids", transportFluids));
 	ConfigRenderers.setRendererTransportFluidsId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererTransportFluidsId(), new TileEntityTransportFluids()));
+
+	
+	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBatteryBox.class, new RendererTileEntityAnimated(IndustrialProcessing.blockBatteryBox, "ModelBatteryBox", batteryBox));
+	ConfigRenderers.setRendererBatteryBoxId(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererBatteryBoxId(), new TileEntityBatteryBox()));
  
     }
 }

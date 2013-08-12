@@ -2,6 +2,7 @@ package ip.industrialProcessing.power;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.machines.BlockMachine;
+import ip.industrialProcessing.machines.BlockMachineRendered;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
@@ -9,7 +10,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public abstract class BlockPowerGenerator extends BlockMachine {
+public abstract class BlockPowerGenerator extends BlockMachineRendered {
 
     public BlockPowerGenerator(int par1, Material par2Material, float hardness, StepSound stepSound, String name, CreativeTabs tab) {
 	super(par1, par2Material, hardness, stepSound, name, tab);

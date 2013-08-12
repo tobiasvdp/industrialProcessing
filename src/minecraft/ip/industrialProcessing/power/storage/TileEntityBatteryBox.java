@@ -1,21 +1,23 @@
 package ip.industrialProcessing.power.storage;
 
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
+import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.power.IPowerAcceptor;
 import ip.industrialProcessing.power.IPowerProducer;
 import ip.industrialProcessing.power.TileEntityPowerGenerator;
 
-public class TileEntityBatteryBox extends TileEntityPowerGenerator implements IPowerAcceptor {
+public class TileEntityBatteryBox extends TileEntityPowerGenerator implements IPowerAcceptor, IAnimationProgress {
 
     public TileEntityBatteryBox() {
 	super(100);
     }
 
-    private static final LocalDirection inputSide = LocalDirection.LEFT;
-    private static final LocalDirection outputSide = LocalDirection.RIGHT;
+    private static final LocalDirection inputSide = LocalDirection.FRONT;
+    private static final LocalDirection outputSide = LocalDirection.BACK;
 
     int storedPower = 0;
     int storageCapacity = 10000;
@@ -56,4 +58,20 @@ public class TileEntityBatteryBox extends TileEntityPowerGenerator implements IP
 	return false;
     }
 
+    @Override
+    public float getAnimationProgress(float scale) { 
+	return this.storedPower * scale / this.storageCapacity;
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound nbt) { 
+        super.writeToNBT(nbt);
+        nbt.setInteger("Stored", this.storedPower);
+    }
+    
+    @Override
+    public void readFromNBT(NBTTagCompound nbt) { 
+        super.readFromNBT(nbt);
+        this.storedPower = nbt.getInteger("Stored");
+    }
 }
