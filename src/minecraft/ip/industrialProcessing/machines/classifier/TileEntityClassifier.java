@@ -20,19 +20,18 @@ public class TileEntityClassifier extends TileEntityPoweredFluidWorkerMachine {
 	super(LocalDirection.LEFT, 10000);
 	addStack(null, LocalDirection.UP, true, false); // Input Solid
 							// ingredient
-	addStack(null, LocalDirection.DOWN, false, true); // Output Solid
+	addStack(null, LocalDirection.RIGHT, false, true); // Output Solid
 							  // ingredient
 
 	LocalDirection[] nodirections = new LocalDirection[0];
-	LocalDirection[] allSides = new LocalDirection[] { LocalDirection.LEFT, LocalDirection.RIGHT, LocalDirection.FRONT, LocalDirection.BACK };
 	// buckets!
 	addStack(null, nodirections, true, false); // Liquid Input Full Input
 	addStack(null, nodirections, false, true); // Liquid Input Empty Output
 	addStack(null, nodirections, true, false); // Liquid Output Empty Input
 	addStack(null, nodirections, false, true); // Liquid Output Full Output
 
-	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, allSides, true, false);
-	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, allSides, false, true);
+	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.BACK, true, false);
+	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.DOWN, false, true);
     }
 
     private static RecipesClassifier recipes = new RecipesClassifier();
