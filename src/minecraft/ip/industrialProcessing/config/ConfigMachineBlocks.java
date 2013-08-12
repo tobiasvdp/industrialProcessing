@@ -18,6 +18,7 @@ import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGen
 import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
 import ip.industrialProcessing.power.meters.TileEntityAmpMeter;
 import ip.industrialProcessing.power.meters.TileEntityVoltMeter;
+import ip.industrialProcessing.power.storage.TileEntityBatteryBox;
 import ip.industrialProcessing.power.wire.TileEntityWire;
 import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids;
 import net.minecraft.block.Block;
@@ -54,6 +55,7 @@ public class ConfigMachineBlocks {
 	private int wireBlockID = 900;
 	private int voltMeterBlockID = 901;
 	private int ampMeterBlockID = 902;
+	private int batteryBoxBlockID = 903;
 
 	public void registerMachineBlocks() {
 		//machines
@@ -79,6 +81,7 @@ public class ConfigMachineBlocks {
 		registerMachineBlock(IndustrialProcessing.blockWire, "IP.Wire", "Wire", TileEntityWire.class);
 		registerMachineBlock(IndustrialProcessing.blockVoltMeter, "IP.Meter.Volt", "Volt Meter", TileEntityVoltMeter.class);
 		registerMachineBlock(IndustrialProcessing.blockAmpMeter, "IP.Meter.Amp", "Amp Meter", TileEntityAmpMeter.class);
+		registerMachineBlock(IndustrialProcessing.blockBatteryBox, "IP.BatteryBox", "Battery Box", TileEntityBatteryBox.class);
 		
 		//multiblocks
 		registerMachineBlock(IndustrialProcessing.blockMultiMachineInput, "MultiBlockInventory", "Multiblock hatch", TileEntityMultiMachineInput.class);
@@ -166,6 +169,9 @@ public class ConfigMachineBlocks {
 
 	public static int getAmpMeterBlockID() {
 		return getInstance().ampMeterBlockID;
+	}
+	public static int getBatteryBoxBlockID() {
+		return getInstance().batteryBoxBlockID;
 	}
 
 }
