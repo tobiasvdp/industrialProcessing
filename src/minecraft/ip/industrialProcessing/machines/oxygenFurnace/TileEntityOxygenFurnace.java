@@ -19,7 +19,11 @@ public class TileEntityOxygenFurnace extends TileEntityPoweredFluidWorkerMachine
 
 	public TileEntityOxygenFurnace() {
 		super(LocalDirection.LEFT, 10000);
-
+		LocalDirection[] nodirections = new LocalDirection[0];
+		addStack(null, nodirections, true, false);
+		addStack(null, nodirections, false, true);
+		addStack(null, nodirections, true, false);
+		addStack(null, nodirections, false, true);
 		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.UP, true, false);
 		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.DOWN, false, true);
 	}

@@ -39,7 +39,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine implement
  
 
     @Override
-    public void writeToNBT(net.minecraft.nbt.NBTTagCompound nbt) {
+    public void writeToNBT(NBTTagCompound nbt) {
 	super.writeToNBT(nbt);
 	writeTanks(nbt);
     };
@@ -57,7 +57,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine implement
     }
 
     @Override
-    public void readFromNBT(net.minecraft.nbt.NBTTagCompound nbt) {
+    public void readFromNBT(NBTTagCompound nbt) {
 	super.readFromNBT(nbt);
 	readTanks(nbt);
     };

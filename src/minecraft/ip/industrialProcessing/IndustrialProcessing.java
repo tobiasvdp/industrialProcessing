@@ -123,7 +123,6 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
 	public void preInit(FMLPreInitializationEvent event) {
 		// register listeners for events
 		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
-		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 

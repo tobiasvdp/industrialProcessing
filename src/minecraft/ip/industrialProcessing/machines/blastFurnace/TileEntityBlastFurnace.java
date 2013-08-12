@@ -19,13 +19,20 @@ public class TileEntityBlastFurnace extends TileEntityPoweredFluidWorkerMachine 
 	public static RecipesBlastFurnace recipes = new RecipesBlastFurnace();
 
 	public TileEntityBlastFurnace(World world) {
-		super(LocalDirection.LEFT, 10000);
+		super(LocalDirection.LEFT, 10000,100);
 		this.addStack(null, LocalDirection.UP, true, false);
-		this.addStack(null, LocalDirection.DOWN, false, true);
+		this.addStack(null, LocalDirection.RIGHT, true, false);
+		this.addStack(null, LocalDirection.BACK, true, false);
+		
+		LocalDirection[] nodirections = new LocalDirection[0];
+		addStack(null, nodirections, true, false);
+		addStack(null, nodirections, false, true);
+		addStack(null, nodirections, true, false);
+		addStack(null, nodirections, false, true);
 
-		addTank(FluidContainerRegistry.BUCKET_VOLUME * 50, LocalDirection.RIGHT, true, false);
-		addTank(FluidContainerRegistry.BUCKET_VOLUME * 50, LocalDirection.RIGHT, true, false);
-		addTank(FluidContainerRegistry.BUCKET_VOLUME * 50, LocalDirection.RIGHT, true, false);
+		addTank(FluidContainerRegistry.BUCKET_VOLUME * 50, nodirections, false, true);
+		addTank(FluidContainerRegistry.BUCKET_VOLUME * 50, nodirections, false, true);
+		addTank(FluidContainerRegistry.BUCKET_VOLUME * 50, nodirections, false, true);
 	}
 
 	@Override
@@ -33,16 +40,18 @@ public class TileEntityBlastFurnace extends TileEntityPoweredFluidWorkerMachine 
 		getBucketFromTank(3, 4, 0);
 		getBucketFromTank(5, 6, 1);
 		getBucketFromTank(7, 8, 1);
+		for (int i = 0;i<3;i++){
+			if (getTankInfoForSlot(i).fluid != null)
+				System.out.println("tank " + i + " " + getTankInfoForSlot(i).fluid.amount + " of " + getTankInfoForSlot(i).capacity);
+		}
 		super.updateEntity();
 	};
 
-	@SideOnly(Side.SERVER)
 	@Override
 	public boolean hasWork() {
 		return true;
 	}
 
-	@SideOnly(Side.SERVER)
 	@Override
 	public boolean canWork() {
 		return true;
