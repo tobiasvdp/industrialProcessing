@@ -23,6 +23,12 @@ public class TileEntityBatteryBox extends TileEntityPowerGenerator implements IP
     int storageCapacity = 10000;
 
     @Override
+    public void updateEntity() {
+        super.updateEntity();
+        notifyBlockChange();
+    }
+    
+    @Override
     public int producePower(int maxAmount, boolean doProduce) {
 	int amount = Math.min(maxAmount, this.storedPower);
 	if (doProduce)
