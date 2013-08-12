@@ -13,15 +13,25 @@ public class TileEntityVoltMeter extends TileEntityMachine implements IPowerAcce
 
     private LocalDirection inputSide = LocalDirection.BACK;
     private float volt;
+    private int voltAvailable;
 
     @Override
     public int acceptPower(int maxAmount, ForgeDirection side, boolean doAccept) {
 	if (!doAccept) { // sensing what's availabe on the wire in total
-	    this.volt += (maxAmount / 1000F - this.volt) / 10;
+	    this.voltAvailable += maxAmount;
 	}
 	return 0;
     }
 
+    
+    @Override
+    public void updateEntity() { 
+        super.updateEntity();
+        this.volt = voltAvailable / 500f;
+        this.voltAvailable = 0;
+    }
+    
+    
     @Override
     public boolean canAcceptPower(ForgeDirection side) {
 	LocalDirection diretion = DirectionUtils.GetLocalDirection(side, getForwardDirection());
