@@ -51,14 +51,12 @@ public class TileEntityMixer extends TileEntityPoweredFluidWorkerMachine {
 	getBucketFromTank(3, 4, 1);
 	super.updateEntity();
     };
-
-    @SideOnly(Side.SERVER)
+ 
     @Override
     public boolean hasWork() {
 	return true;
     }
-
-    @SideOnly(Side.SERVER)
+ 
     @Override
     public boolean canWork() {
 	return true;

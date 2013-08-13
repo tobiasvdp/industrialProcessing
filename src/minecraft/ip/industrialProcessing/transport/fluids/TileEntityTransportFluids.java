@@ -31,7 +31,11 @@ import ip.industrialProcessing.transport.TransportConnectionState;
 
 public class TileEntityTransportFluids extends TileEntityTransport {
 
-    FluidTank fluid = new FluidTank(2000);
+    FluidTank fluid = new FluidTank(1000);
+
+    public FluidTankInfo getTankInfo() {
+	return fluid.getInfo();
+    }
 
     @Override
     protected TransportConnectionState getState(TileEntity entity, ForgeDirection direction) {
@@ -50,22 +54,10 @@ public class TileEntityTransportFluids extends TileEntityTransport {
     }
 
     private TransportConnectionState canInsertOrExtractFluid(IFluidHandler handler, ForgeDirection from) {
-	Map<String, Fluid> fluids = FluidRegistry.getRegisteredFluids();
-	boolean canInsert = false;
-	boolean canExtract = false;
-	for (Entry<String, Fluid> fluidEntry : fluids.entrySet()) {
-	    Fluid fluid = fluidEntry.getValue();
-	    canExtract |= handler.canDrain(from, fluid);
-	    canInsert |= handler.canFill(from, fluid);
-	    if (canExtract && canInsert)
-		break;
-	}
-	if (canInsert && canExtract)
-	    return TransportConnectionState.DUAL;
-	if (canInsert)
-	    return TransportConnectionState.INPUT;
-	if (canExtract)
-	    return TransportConnectionState.OUTPUT;
+	FluidTankInfo[] info = handler.getTankInfo(from);
+	if (info != null && info.length > 0)
+	    return TransportConnectionState.DUAL; // can't decide if input only
+						  // or input/output
 	return TransportConnectionState.NONE;
     }
 
@@ -74,114 +66,104 @@ public class TileEntityTransportFluids extends TileEntityTransport {
 	super.updateEntity();
 	if (this.worldObj.isRemote)
 	    return;
-	System.out.println("Pipe has " + this.fluid.getFluidAmount() + " milibuckets of fluid");
-	int capacityLeft = this.fluid.getCapacity() / 2 - this.fluid.getFluidAmount();
-	FluidStack fluid = this.fluid.getFluid();
 
-	int totalInput = 0;
-	int totalOutput = 0;
-	int[] inputs = new int[6];
-	int[] outputs = new int[6];
-	TileEntityTransportFluids[] otherPipes = new TileEntityTransportFluids[6];
-	IFluidHandler[] tanks = new IFluidHandler[6];
+	outputToInputs();
+	inputFromOutputs();
+	equalizeToOtherPipes(); 
+    }
 
+    private void equalizeToOtherPipes() {
+	TileEntityTransportFluids[] otherPipes = new TileEntityTransportFluids[states.length];
+	int[] balances = new int[states.length];
+	int balance = 0;
 	for (int i = 0; i < states.length; i++) {
-	    TransportConnectionState state = states[i];
+	    TransportConnectionState state = this.states[i];
 	    ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[i];
 	    if (state == TransportConnectionState.TRANSPORT) {
 		TileEntityTransportFluids other = getNeighborPipe(direction);
-		otherPipes[i] = other;
 		if (other != null) {
-		    int diff = (other.fluid.getFluidAmount() - this.fluid.getFluidAmount()) / 2;
+		    int diff = (int)Math.ceil((this.fluid.getFluidAmount() - other.fluid.getFluidAmount()) / 2d);
 		    if (diff > 0) {
-			inputs[i] = diff;
-			totalInput += diff;
-		    } else {
-			outputs[i] = -diff;
-			totalOutput -= diff;
+			balance += balances[i] = diff;
+			otherPipes[i] = other;
 		    }
-		}
-	    }
-	    if (state == TransportConnectionState.OUTPUT || state == TransportConnectionState.DUAL) { // other
-												      // entity
-												      // can
-												      // output,
-												      // this
-												      // means
-												      // it's
-												      // an
-												      // input
-												      // for
-												      // us
-		IFluidHandler handler = getNeighborFluidHandler(direction);
-		tanks[i] = handler;
-		if (handler != null) {
-		    FluidStack inputStack = handler.drain(direction.getOpposite(), capacityLeft, false);
-		    if (fluid == null) {
-			fluid = inputStack;
-			if (inputStack != null) {
-			    inputs[i] = inputStack.amount;
-			    totalInput += inputStack.amount;
-			}
-		    } else if (fluid.isFluidEqual(inputStack)) {
-			inputs[i] = inputStack.amount;
-			totalInput += inputStack.amount;
-		    }
-		}
-	    }
-	    if (state == TransportConnectionState.INPUT || state == TransportConnectionState.DUAL) {// other
-												    // entity
-												    // can
-												    // input,
-												    // this
-												    // means
-												    // it's
-												    // an
-												    // output
-												    // for
-												    // us
-		IFluidHandler handler = getNeighborFluidHandler(direction);
-		tanks[i] = handler;
-		if (handler != null) {
-		    int output = handler.fill(direction.getOpposite(), fluid, false);
-		    outputs[i] = output;
-		    totalOutput += output;
 		}
 	    }
 	}
 
-	int maxOutput = this.fluid.getFluidAmount();
-	int maxInput = capacityLeft - Math.min(maxOutput, totalOutput);
+	for (int i = 0; i < balances.length; i++) {
+	    TileEntityTransportFluids other = otherPipes[i];
+	    if (other != null) {
+		FluidStack fluidStack = this.fluid.drain(balances[i], false);
+		int amount = other.fluid.fill(fluidStack, true);
+		this.fluid.drain(amount, true);
+	    }
+	}
+    }
 
-	for (int i = 0; i < 6; i++) {
-	    TransportConnectionState state = states[i];
+    private void inputFromOutputs() {
+	IFluidHandler[] handlers = new IFluidHandler[states.length];
+	int[] availableAmounts = new int[states.length];
+	int totalOutput = 0;
+	FluidStack drain = this.fluid.getFluid();
+	if (drain != null) {
+	    drain = drain.copy();
+	    drain.amount = this.fluid.getCapacity() - drain.amount;
+	}
+	int maxOutput = this.fluid.getCapacity() - this.fluid.getFluidAmount();
+	for (int i = 0; i < states.length; i++) {
+	    TransportConnectionState state = this.states[i];
 	    ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[i];
-	    if (state == TransportConnectionState.TRANSPORT) {
-		TileEntityTransportFluids other = otherPipes[i];
-		if (totalOutput > 0) {
-		    int output = outputs[i] * maxOutput / totalOutput;
-		    if (output > 0)
-			other.fluid.fill(this.fluid.drain(output, true), true);
+	    if (state == TransportConnectionState.OUTPUT || state == TransportConnectionState.DUAL) {
+		IFluidHandler handler = getNeighborFluidHandler(direction);
+		if (handler != null && (drain == null || handler.canDrain(direction.getOpposite(), drain.getFluid()))) {
+		    handlers[i] = handler;
+		    FluidStack output = drain == null ? handler.drain(direction.getOpposite(), this.fluid.getCapacity(), false) : handler.drain(direction.getOpposite(), drain, false);
+		    if (output != null)
+			totalOutput += availableAmounts[i] = output.amount;
 		}
-		if (totalInput > 0) {
-		    int input = inputs[i] * maxInput / totalInput;
-		    if (input > 0)
-			this.fluid.fill(other.fluid.drain(input, true), true);
-		}
-	    } else if ((state == TransportConnectionState.OUTPUT || state == TransportConnectionState.DUAL) && totalInput > 0) {
-		int input = inputs[i] * maxInput / totalInput;
-		if (input > 0) {
-		    IFluidHandler handler = tanks[i];
-		    FluidStack stack = handler.drain(direction.getOpposite(), input, true);
+	    }
+	} 
+	if (totalOutput > 0) {
+	    for (int i = 0; i < handlers.length; i++) {
+		IFluidHandler handler = handlers[i];
+		if (handler != null) {
+		    ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[i];
+		    int output = availableAmounts[i] * maxOutput / totalOutput;
+		    FluidStack stack = handler.drain(direction.getOpposite(), output, true);
 		    this.fluid.fill(stack, true);
 		}
-	    } else if ((state == TransportConnectionState.INPUT || state == TransportConnectionState.DUAL) && totalOutput > 0) {
-		int output = outputs[i] * maxOutput / totalOutput;
-		if (output > 0) {
-		    IFluidHandler handler = tanks[i];
-		    FluidStack outputStack = this.fluid.drain(output, false);
-		    int filled = handler.fill(direction.getOpposite(), outputStack, true);
-		    this.fluid.drain(filled, true);
+	    }
+	}
+    }
+
+    private void outputToInputs() {
+
+	FluidStack fluid = this.fluid.getFluid();
+	if (fluid != null) {
+	    IFluidHandler[] handlers = new IFluidHandler[states.length];
+	    int inputCount = 0;
+	    for (int i = 0; i < states.length; i++) {
+		TransportConnectionState state = this.states[i];
+		ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[i];
+		if (state == TransportConnectionState.INPUT || state == TransportConnectionState.DUAL) {
+		    IFluidHandler handler = getNeighborFluidHandler(direction);
+		    if (handler != null && handler.canFill(direction.getOpposite(), fluid.getFluid())) {
+			handlers[i] = handler;
+			inputCount++;
+		    }
+		}
+	    }
+	    if (inputCount > 0) {
+		fluid.copy();
+		fluid.amount /= inputCount;
+		for (int i = 0; i < handlers.length; i++) {
+		    IFluidHandler handler = handlers[i];
+		    if (handler != null) {
+			ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[i];
+			int amount = handler.fill(direction.getOpposite(), fluid, true);
+			this.fluid.drain(amount, true);
+		    }
 		}
 	    }
 	}

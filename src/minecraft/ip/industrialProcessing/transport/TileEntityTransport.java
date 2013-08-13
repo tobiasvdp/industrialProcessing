@@ -20,24 +20,24 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
     }
 
     @Override
-    public boolean canUpdate() { 
-        return unverified;
+    public boolean canUpdate() {
+	return unverified;
     }
-    
+
     @Override
-    public void updateEntity() { 
-        if(unverified)
-            searchForConnections();
+    public void updateEntity() {
+	if (unverified)
+	    updateConnections();
     }
-    
-    protected void notifyBlockChange() {
-	if (!this.worldObj.isRemote)
-	    this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-    }
+ 
 
     protected abstract TransportConnectionState getState(TileEntity entity, ForgeDirection direction);
 
     public void searchForConnections() {
+	unverified = true;
+    }
+
+    private void updateConnections() {
 	System.out.println("Verifying transport at " + xCoord + ", " + yCoord + ", " + zCoord + " on " + (this.worldObj.isRemote ? "client" : "server"));
 	boolean modified = false;
 
@@ -53,15 +53,14 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
 	if (modified)
 	    updateNetwork();
 	unverified = false; // no more ticks required to verify neighbors
-	System.out.println("States at "+xCoord+", "+yCoord+", "+zCoord+" are  UP:" +this.states[ForgeDirection.UP.ordinal()]+" DOWN:" +this.states[ForgeDirection.DOWN.ordinal()]);
+	System.out.println("States at " + xCoord + ", " + yCoord + ", " + zCoord + " are  UP:" + this.states[ForgeDirection.UP.ordinal()] + " DOWN:" + this.states[ForgeDirection.DOWN.ordinal()]);
     }
 
-    public TransportConnectionState getTransportConnection(ForgeDirection direction)
-    {
+    public TransportConnectionState getTransportConnection(ForgeDirection direction) {
 	return states[direction.ordinal()];
     }
-    
-    protected void updateNetwork() { 
+
+    protected void updateNetwork() {
 	notifyBlockChange();
     }
 
@@ -72,29 +71,29 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
 
     private TileEntity getNeighbor(ForgeDirection direction) {
 	return this.worldObj.getBlockTileEntity(this.xCoord + direction.offsetX, this.yCoord + direction.offsetY, this.zCoord + direction.offsetZ);
- 
+
     }
 
     @Override
-    public ConnectionState getConnection(ForgeDirection direction) { 
+    public ConnectionState getConnection(ForgeDirection direction) {
 	return this.states[direction.ordinal()].getConnectionState();
     }
-    
+
     @Override
-    public void writeToNBT(NBTTagCompound par1nbtTagCompound) { 
-        super.writeToNBT(par1nbtTagCompound);
-        int[] stateInts = new int[6];
-        for (int i = 0; i < stateInts.length; i++) {
+    public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
+	super.writeToNBT(par1nbtTagCompound);
+	int[] stateInts = new int[6];
+	for (int i = 0; i < stateInts.length; i++) {
 	    stateInts[i] = states[i].ordinal();
 	}
-        par1nbtTagCompound.setIntArray("TState", stateInts);
+	par1nbtTagCompound.setIntArray("TState", stateInts);
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound par1nbtTagCompound) { 
-        super.readFromNBT(par1nbtTagCompound);
-        int[] stateInts = par1nbtTagCompound.getIntArray("TState"); 
-        for (int i = 0; i < stateInts.length; i++) {
+    public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
+	super.readFromNBT(par1nbtTagCompound);
+	int[] stateInts = par1nbtTagCompound.getIntArray("TState");
+	for (int i = 0; i < stateInts.length; i++) {
 	    states[i] = TransportConnectionState.values()[stateInts[i]];
 	}
     }

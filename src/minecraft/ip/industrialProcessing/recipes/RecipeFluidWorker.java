@@ -44,7 +44,7 @@ public class RecipeFluidWorker extends RecipeWorker {
 	protected void addToOutput(int amount, RecipeOutputSlot slot) {
 		if (slot.type == RecipeSlotType.TANK) {
 			if (!this.fluidHanlder.addToTank(slot.index, slot.itemId, amount))
-				System.out.println("Failed to create recipe output?!");
+				System.out.println("Failed to create recipe output?! ");
 		} else {
 			super.addToOutput(amount, slot);
 		}
