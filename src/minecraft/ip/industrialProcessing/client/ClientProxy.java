@@ -100,7 +100,7 @@ public class ClientProxy extends CommonProxy {
 	ConfigRenderers.setRendererBatteryBoxId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererBatteryBoxId(), new TileEntityBatteryBox()));
 	
-	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlastFurnace.class, new RendererTileEntityState(IndustrialProcessing.blockBlastFurnace, "ModelBlastFurnace", new ModelStateMachine[]{blastFurnace,blastFurnaceTop}));
+	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlastFurnace.class, new RendererTileEntityState(IndustrialProcessing.blockBlastFurnace, new String[]{"ModelBlastFurnace","ModelBlastFurnaceTop"}, new ModelStateMachine[]{blastFurnace,blastFurnaceTop}));
 	ConfigRenderers.setRendererBlastFurnaceId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererBlastFurnaceId(), new TileEntityBlastFurnace()));
  

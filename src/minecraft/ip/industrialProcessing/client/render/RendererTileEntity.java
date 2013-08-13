@@ -28,14 +28,14 @@ import net.minecraftforge.fluids.FluidTankInfo;
 
 public class RendererTileEntity extends TileEntitySpecialRenderer {
     private ModelMachine model;
-    private ResourceLocation texture = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN, "textures/render/");
+    protected ResourceLocation texture = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN, "textures/render/");
     private Block block;
-    private String name;
+    protected String[] name = new String[2];
     protected boolean rotateModel = true;
 
     public RendererTileEntity(Block block, String name, ModelMachine model) {
 	this.block = block;
-	this.name = name;
+	this.name[0] = name;
 	texture = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN, "textures/render/" + name + ".png");
 	this.model = model;
     }
@@ -78,9 +78,8 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 		GL11.glRotatef((dir * -90F), 0F, 1F, 0F);
 	    GL11.glRotatef((-180F), 0F, 0F, 1F);
 	    GL11.glScalef(1f, 1f, 1f);
-	    ResourceLocation tex;
-	    tex = texture;
-	    func_110628_a(tex);
+
+	    func_110628_a(getTexture(tl, world, i, j, k, block, 0.0625f));
 	} else {
 	    GL11.glPushMatrix();
 	    GL11.glTranslatef(0.3F, 3.7F, 0.5F);
@@ -98,5 +97,8 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 
     protected void renderBlock(TileEntity tl, World world, int i, int j, int k, Block block2, float f) {
 	this.model.renderModel(f);
+    }
+    protected ResourceLocation getTexture(TileEntity tl, World world, int i, int j, int k, Block block2, float f){
+		return texture;
     }
 }
