@@ -324,7 +324,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine implement
 
     @Override
     public boolean canDrain(ForgeDirection from, Fluid fluid) {
-	FluidTank tank = getInputTankForFluid(from, fluid);
+	FluidTank tank = getOutputTankForFluid(from, fluid);
 	return tank != null;
     }
 

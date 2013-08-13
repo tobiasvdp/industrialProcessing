@@ -12,7 +12,7 @@ import net.minecraftforge.common.ForgeDirection;
 
 public abstract class TileEntityTransport extends TileEntitySynced implements IConnectedTile {
 
-    TransportConnectionState[] states = new TransportConnectionState[6];
+    protected TransportConnectionState[] states = new TransportConnectionState[6];
     private boolean unverified = true;
 
     public TileEntityTransport() {
