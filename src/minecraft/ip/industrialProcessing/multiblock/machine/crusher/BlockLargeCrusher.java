@@ -1,4 +1,4 @@
-package ip.industrialProcessing.machines.multiblock.crusher;
+package ip.industrialProcessing.multiblock.machine.crusher;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.StepSound;
@@ -8,7 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
-import ip.industrialProcessing.machines.multiblock.BlockMultiMachineCore;
+import ip.industrialProcessing.multiblock.BlockMultiMachineCore;
 
 public class BlockLargeCrusher extends BlockMultiMachineCore {
 

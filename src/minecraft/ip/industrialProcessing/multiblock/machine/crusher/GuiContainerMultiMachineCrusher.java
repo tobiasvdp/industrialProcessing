@@ -1,4 +1,4 @@
-package ip.industrialProcessing.machines.multiblock.crusher;
+package ip.industrialProcessing.multiblock.machine.crusher;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import ip.industrialProcessing.machines.ContainerMachine;

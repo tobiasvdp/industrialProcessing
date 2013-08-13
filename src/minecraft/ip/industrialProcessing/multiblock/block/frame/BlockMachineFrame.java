@@ -1,4 +1,4 @@
-package ip.industrialProcessing.machines.multiblock.machineFrame;
+package ip.industrialProcessing.multiblock.block.frame;
 
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
@@ -7,9 +7,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
-import ip.industrialProcessing.machines.multiblock.BlockMultiMachineFrame;
-import ip.industrialProcessing.machines.multiblock.IMultiblockTileEntityFrame;
-import ip.industrialProcessing.machines.multiblock.MachineFrameState;
+import ip.industrialProcessing.multiblock.BlockMultiMachineFrame;
+import ip.industrialProcessing.multiblock.IMultiblockTileEntityFrame;
+import ip.industrialProcessing.multiblock.MachineFrameState;
 
 public class BlockMachineFrame extends BlockMultiMachineFrame {
 

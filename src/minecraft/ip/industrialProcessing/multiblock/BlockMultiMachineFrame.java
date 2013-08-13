@@ -1,4 +1,4 @@
-package ip.industrialProcessing.machines.multiblock;
+package ip.industrialProcessing.multiblock;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.utils.Position;
