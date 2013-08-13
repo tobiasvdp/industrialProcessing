@@ -17,10 +17,10 @@ public class ContainerExtruder extends ContainerFluidMachine {
 	public ContainerExtruder(InventoryPlayer inventoryPlayer, TileEntityExtruder tileEntity) {
 		super(inventoryPlayer, tileEntity);
 
-		inputHotSlagFummInput = new SlotLiquid(tileEntity, 0, 8, 19);
-		inputHotSlagEmptyOutput = new SlotLiquidOutput(tileEntity, 1, 8, 53);
+		inputHotSlagFummInput = new SlotLiquid(tileEntity, 0, 35, 19);
+		inputHotSlagEmptyOutput = new SlotLiquidOutput(tileEntity, 1, 35, 53);
 
-		outputSlot = new SlotBase(tileEntity, 2, 0, 32);
+		outputSlot = new SlotBase(tileEntity, 2, 125, 33);
 
 		addSlotToContainer(inputHotSlagFummInput);
 		addSlotToContainer(inputHotSlagEmptyOutput);
