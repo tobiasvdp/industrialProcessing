@@ -17,11 +17,11 @@ public class ContainerOxygenFurnace extends ContainerFluidMachine {
 	public ContainerOxygenFurnace(InventoryPlayer inventoryPlayer, TileEntityOxygenFurnace tileEntity) {
 		super(inventoryPlayer, tileEntity);
 
-		inputPigIronFummInput = new SlotLiquid(tileEntity, 0, 8, 19);
-		inputPigIronEmptyOutput = new SlotLiquidOutput(tileEntity, 1, 8, 53);
+		inputPigIronFummInput = new SlotLiquid(tileEntity, 0, 35, 19);
+		inputPigIronEmptyOutput = new SlotLiquidOutput(tileEntity, 1, 35, 53);
 
-		inputHotSteelEmptyInput = new SlotLiquid(tileEntity, 2, 24, 19);
-		inputHotSteelFullOutput = new SlotLiquidOutput(tileEntity, 3, 24, 53);
+		inputHotSteelEmptyInput = new SlotLiquid(tileEntity, 2, 124, 19);
+		inputHotSteelFullOutput = new SlotLiquidOutput(tileEntity, 3, 124, 53);
 
 		addSlotToContainer(inputPigIronFummInput);
 		addSlotToContainer(inputPigIronEmptyOutput);

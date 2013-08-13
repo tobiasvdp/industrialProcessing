@@ -9,13 +9,13 @@ public class GuiContainerOxygenFurnace extends GuiContainerFluidMachine {
 
 	public GuiContainerOxygenFurnace(InventoryPlayer inventoryPlayer, TileEntityOxygenFurnace tileEntity) {
 		super(inventoryPlayer, tileEntity, new ContainerOxygenFurnace(inventoryPlayer, tileEntity), "Oxygen Furnace", "textures/gui/OxygenFurnace.png");
-		setProgressBarLocation(76, 34, 24, 17);
+		setProgressBarLocation(76, 35, 24, 17);
 	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
 		super.drawGuiContainerBackgroundLayer(par1, par2, par3);
-		drawTank(0, 8, 19);
-		drawTank(1, 152, 19);
+		drawTank(0, 35, 19);
+		drawTank(1, 124, 19);
 	}
 }
