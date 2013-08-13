@@ -1,11 +1,9 @@
 package ip.industrialProcessing.power.wire;
 
 import ip.industrialProcessing.power.IPowerAcceptor;
-import ip.industrialProcessing.power.WireConnectionState;
+import ip.industrialProcessing.transport.TransportConnectionState;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -48,10 +46,10 @@ public class WireNetworkMap {
 	    if (wireLocations.add(start)) {
 		for (int i = 0; i < 6; i++) {
 		    ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[i];
-		    WireConnectionState state = wire.getWireConnection(direction);
-		    if (state == WireConnectionState.WIRE) {
+		    TransportConnectionState state = wire.getTransportConnection(direction);
+		    if (state == TransportConnectionState.TRANSPORT) {
 			checkLocation(world, start.moveBy(direction), wireLocations, outputLocations);
-		    } else if (state == WireConnectionState.OUTPUT) {
+		    } else if (state == TransportConnectionState.OUTPUT) {
 			checkOutput(world, start.moveBy(direction), direction.getOpposite(), outputLocations);
 		    }
 		}

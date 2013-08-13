@@ -131,7 +131,7 @@ public class ModelTransportFluids extends ModelConnected {
     }
 
     @Override
-    public void renderModelConnected(float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down) {
+    public void renderModelConnected(float f, ConnectionState north, ConnectionState west, ConnectionState south, ConnectionState east, ConnectionState up, ConnectionState down) {
 	boolean hideCenter = false;
 	hideCenter |= renderStraigh(f, NorthSouth, NorthConnector, SouthConnector, north, south, east, west, up, down);
 	hideCenter |= renderStraigh(f, EastWest, EastConnector, WestConnector, east, west, north, south, up, down);
@@ -139,9 +139,9 @@ public class ModelTransportFluids extends ModelConnected {
 	render(Up, UpConnector, up, f);
 	render(Down, DownConnector, down, f);
 	render(North, NorthConnector, north, f);
-	render(West, WestConnector, east, f);
+	render(West, WestConnector, west, f);
 	render(South, SouthConnector, south, f);
-	render(East, EastConnector, west, f);
+	render(East, EastConnector, east, f);
 	if (!hideCenter)
 	    Center.render(f);
     }
