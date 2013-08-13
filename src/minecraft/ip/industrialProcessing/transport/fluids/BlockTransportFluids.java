@@ -1,5 +1,7 @@
 package ip.industrialProcessing.transport.fluids;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,30 +18,18 @@ import ip.industrialProcessing.transport.BlockTransport;
 
 public class BlockTransportFluids extends BlockTransport {
 
-	public BlockTransportFluids() {
-		super(ConfigTransportBlocks.BlockTransportFluidsID(), "BlockTransportFluids");
-	}
-    @Override
-    public TileEntity createNewTileEntity(World world) {
-    	return new TileEntityTransportFluids();
-    }
-    @Override
-    public int getRenderType() {
-    	return ConfigRenderers.getRendererTransportFluidsId();
-    }
-	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, int par5) {
-		TileEntityTransportFluids entity = (TileEntityTransportFluids) world.getBlockTileEntity(x, y, z);
-		entity.setNeighborChanged(true);
-		entity.senseSides(world);
-		world.markBlockForUpdate(x, y, z);
-	}
-	@Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack itemStack) {
-	int dir = MathHelper.floor_double((double) ((entityLivingBase.rotationYaw * 4F) / 360F) + 0.5D) & 3;
-	world.setBlockMetadataWithNotify(x, y, z, dir, 0);
-	TileEntityTransportFluids entity = (TileEntityTransportFluids) world.getBlockTileEntity(x, y, z);
-	entity.senseSides(world);
+    public BlockTransportFluids() {
+	//super(ConfigTransportBlocks.BlockTransportFluidsID(), "BlockTransportFluids");
+	super(ConfigTransportBlocks.BlockTransportFluidsID(), Material.glass, 1F, Block.soundGlassFootstep, "Fluid Transport Pipe", IndustrialProcessing.tabOreProcessing);
     }
 
+    @Override
+    public TileEntity createNewTileEntity(World world) {
+	return new TileEntityTransportFluids();
+    }
+
+    @Override
+    public int getRenderType() {
+	return ConfigRenderers.getRendererTransportFluidsId();
+    } 
 }
