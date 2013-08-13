@@ -1,64 +1,105 @@
 package ip.industrialProcessing.transport;
 
+import java.util.Arrays;
+
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
+import ip.industrialProcessing.client.render.ConnectionState;
+import ip.industrialProcessing.client.render.IConnectedTile;
 import ip.industrialProcessing.machines.BlockMachine;
+import ip.industrialProcessing.machines.TileEntitySynced;
+import ip.industrialProcessing.power.IPowerAcceptor;
+import ip.industrialProcessing.power.IPowerEntity;
+import ip.industrialProcessing.power.IPowerProducer;
+import ip.industrialProcessing.power.WireConnectionState;
+import ip.industrialProcessing.power.wire.TileEntityWire;
 import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TileEntityTransport extends TileEntity {
+public abstract class TileEntityTransport extends TileEntitySynced implements IConnectedTile {
 
-    private boolean[] connectedSides = new boolean[6];
-    
-    public TileEntityTransport(){
+    TransportConnectionState[] states = new TransportConnectionState[6];
+    private boolean unverified = true;
+
+    public TileEntityTransport() {
+	Arrays.fill(states, TransportConnectionState.NONE);
+    }
+
+    @Override
+    public boolean canUpdate() { 
+        return unverified;
     }
     
-	protected void notifyBlockChange() {
+    @Override
+    public void updateEntity() { 
+        if(unverified)
+            searchForConnections();
+    }
+    
+    protected void notifyBlockChange() {
 	if (!this.worldObj.isRemote)
 	    this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-    } 
-    protected ForgeDirection getForwardDirection(){
-	 int meta = this.worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-	 return BlockMachine.getForwardFromMetadata(meta);
-    }
-    public void senseSides(World world){
-		for (ForgeDirection o : ForgeDirection.VALID_DIRECTIONS) {
-			if (senseSide(world, o)){connectedSides [o.ordinal()] = true;}
-			else{connectedSides[o.ordinal()] = false;}
-		}
-	}
-	protected boolean senseSide(World world, ForgeDirection dir){
-		TileEntity entity =  world.getBlockTileEntity(this.xCoord + dir.offsetX,this.yCoord + dir.offsetY,this.zCoord + dir.offsetZ);
-		if (entity == null) return false;
-		if (entity instanceof TileEntityTransport) {return true;}
-		return false;
-	}
-	public boolean isSideConnected(ForgeDirection dir){
-		return connectedSides[dir.ordinal()];
-		
-	}
-   
-    public ForgeDirection getForward()
-    {
-	int metadata = this.getBlockMetadata();
-	return getForwardFromMetadata(metadata);
     }
 
-    public static ForgeDirection getForwardFromMetadata(int metadata) { 
-	switch(metadata)
-	{
-	case 0:
-	    return ForgeDirection.NORTH;
-	case 1:
-	    return ForgeDirection.EAST;
-	case 2:
-	    return ForgeDirection.SOUTH; 
-	case 3:
-	    return ForgeDirection.WEST;
+    protected abstract TransportConnectionState getState(TileEntity entity, ForgeDirection direction);
+
+    public void searchForConnections() {
+	System.out.println("Verifying transport at " + xCoord + ", " + yCoord + ", " + zCoord + " on " + (this.worldObj.isRemote ? "client" : "server"));
+	boolean modified = false;
+
+	for (int i = 0; i < this.states.length; i++) {
+	    TransportConnectionState newState = getNeighborState(ForgeDirection.VALID_DIRECTIONS[i]);
+	    TransportConnectionState currentState = this.states[i];
+	    if (newState != currentState) {
+		this.states[i] = newState;
+		modified = true;
+	    }
 	}
-	return null;
+	// if the network changed, update the map
+	if (modified)
+	    updateNetwork();
+	unverified = false; // no more ticks required to verify neighbors
+	System.out.println("States at "+xCoord+", "+yCoord+", "+zCoord+" are  UP:" +this.states[ForgeDirection.UP.ordinal()]+" DOWN:" +this.states[ForgeDirection.DOWN.ordinal()]);
     }
 
+    protected void updateNetwork() { 
+	notifyBlockChange();
+    }
+
+    private TransportConnectionState getNeighborState(ForgeDirection direction) {
+	TileEntity entity = getNeighbor(direction);
+	return getState(entity, direction);
+    }
+
+    private TileEntity getNeighbor(ForgeDirection direction) {
+	return this.worldObj.getBlockTileEntity(this.xCoord + direction.offsetX, this.yCoord + direction.offsetY, this.zCoord + direction.offsetZ);
+ 
+    }
+
+    @Override
+    public ConnectionState getConnection(ForgeDirection direction) { 
+	return this.states[direction.ordinal()].getConnectionState();
+    }
+    
+    @Override
+    public void writeToNBT(NBTTagCompound par1nbtTagCompound) { 
+        super.writeToNBT(par1nbtTagCompound);
+        int[] stateInts = new int[6];
+        for (int i = 0; i < stateInts.length; i++) {
+	    stateInts[i] = states[i].ordinal();
+	}
+        par1nbtTagCompound.setIntArray("TState", stateInts);
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound par1nbtTagCompound) { 
+        super.readFromNBT(par1nbtTagCompound);
+        int[] stateInts = par1nbtTagCompound.getIntArray("TState"); 
+        for (int i = 0; i < stateInts.length; i++) {
+	    states[i] = TransportConnectionState.values()[stateInts[i]];
+	}
+    }
 }

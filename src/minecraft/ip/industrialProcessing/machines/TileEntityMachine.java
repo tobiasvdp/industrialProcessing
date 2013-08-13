@@ -32,7 +32,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
-public abstract class TileEntityMachine extends TileEntity implements ISidedInventory, IMachineSlots {
+public abstract class TileEntityMachine extends TileEntitySynced implements ISidedInventory, IMachineSlots {
 
     private ArrayList<MachineItemStack> itemStacks = new ArrayList<MachineItemStack>();
     private int[][] itemStackSideSlots = new int[6][0]; 
@@ -282,21 +282,4 @@ public abstract class TileEntityMachine extends TileEntity implements ISidedInve
 	return false;
     }
 
-    @Override
-    public Packet getDescriptionPacket() { 
-	NBTTagCompound nbtTag = new NBTTagCompound();
-	this.writeToNBT(nbtTag);
-	return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
-    }
-
-    @Override
-    public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
-	readFromNBT(packet.customParam1);
-    }
-
-
-    protected void notifyBlockChange() {
-	if (!this.worldObj.isRemote)
-	    this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-    }  
 }

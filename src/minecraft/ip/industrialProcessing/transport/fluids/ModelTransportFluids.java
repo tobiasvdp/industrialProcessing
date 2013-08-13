@@ -6,189 +6,166 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.client.render.ConnectionState;
-import ip.industrialProcessing.client.render.ModelConnected; 
+import ip.industrialProcessing.client.render.ModelConnected;
 
-public class ModelTransportFluids extends ModelConnected{
+public class ModelTransportFluids extends ModelConnected {
 
-	    ModelRenderer Shape1;
-	    ModelRenderer Shape2;
-	    ModelRenderer Shape3;
-	    ModelRenderer Shape4;
-	    ModelRenderer Shape5;
-	    ModelRenderer Shape6;
-	    ModelRenderer Shape7;
-	    ModelRenderer Shape8;
-	    ModelRenderer Shape9;
-	    ModelRenderer Shape10;
-	    ModelRenderer Shape11;
-	    ModelRenderer Shape12;
-	    ModelRenderer Shape13;
-	    ModelRenderer Shape14;
-	    ModelRenderer Shape15;
-	    ModelRenderer Shape16;
-	    ModelRenderer Shape17;
-	    
-	    Entity entity;
-	  
-	  public ModelTransportFluids()
-	  {
-	    textureWidth = 64;
-	    textureHeight = 64;
-	    
-	      Shape1 = new ModelRenderer(this, 0, 0);
-	      Shape1.addBox(-1.5F, -1.5F, -1.5F, 3, 3, 3);
-	      Shape1.setRotationPoint(0F, 16F, 0F);
-	      Shape1.setTextureSize(64, 32);
-	      Shape1.mirror = true;
-	      setRotation(Shape1, 0.7853982F, 0F, 0F);
-	      Shape2 = new ModelRenderer(this, 0, 0);
-	      Shape2.addBox(-1.5F, -1.5F, -1.5F, 7, 3, 3);
-	      Shape2.setRotationPoint(2.5F, 16F, 0F);
-	      Shape2.setTextureSize(64, 32);
-	      Shape2.mirror = true;
-	      setRotation(Shape2, 0.7853982F, 0F, 0F);
-	      Shape3 = new ModelRenderer(this, 0, 0);
-	      Shape3.addBox(-1.5F, -1.5F, -1.5F, 7, 3, 3);
-	      Shape3.setRotationPoint(-6.5F, 16F, 0F);
-	      Shape3.setTextureSize(64, 32);
-	      Shape3.mirror = true;
-	      setRotation(Shape3, 0.7853982F, 0F, 0F);
-	      Shape4 = new ModelRenderer(this, 0, 0);
-	      Shape4.addBox(-1.5F, -1.5F, -1.5F, 3, 7, 3);
-	      Shape4.setRotationPoint(0F, 18.5F, 0F);
-	      Shape4.setTextureSize(64, 32);
-	      Shape4.mirror = true;
-	      setRotation(Shape4, 0F, 0.7853982F, 0F);
-	      Shape5 = new ModelRenderer(this, 0, 0);
-	      Shape5.addBox(-1.5F, -1.5F, -1.5F, 3, 7, 3);
-	      Shape5.setRotationPoint(0F, 9.5F, 0F);
-	      Shape5.setTextureSize(64, 32);
-	      Shape5.mirror = true;
-	      setRotation(Shape5, 0F, 0.7853982F, 0F);
-	      Shape6 = new ModelRenderer(this, 0, 0);
-	      Shape6.addBox(-1.5F, -1.5F, -1.5F, 3, 3, 7);
-	      Shape6.setRotationPoint(0F, 16F, 2.5F);
-	      Shape6.setTextureSize(64, 32);
-	      Shape6.mirror = true;
-	      setRotation(Shape6, 0F, 0F, 0.7853982F);
-	      Shape7 = new ModelRenderer(this, 0, 0);
-	      Shape7.addBox(-1.5F, -1.5F, -1.5F, 3, 3, 7);
-	      Shape7.setRotationPoint(0F, 16F, -6.5F);
-	      Shape7.setTextureSize(64, 32);
-	      Shape7.mirror = true;
-	      setRotation(Shape7, 0F, 0F, 0.7853982F);
-	      Shape8 = new ModelRenderer(this, 0, 0);
-	      Shape8.addBox(-1.5F, -1.5F, -1.5F, 1, 6, 6);
-	      Shape8.setRotationPoint(-6.5F, 14.5F, -1.5F);
-	      Shape8.setTextureSize(64, 32);
-	      Shape8.mirror = true;
-	      setRotation(Shape8, 0F, 0F, 0F);
-	      Shape9 = new ModelRenderer(this, 0, 0);
-	      Shape9.addBox(-1.5F, -1.5F, -1.5F, 1, 5, 5);
-	      Shape9.setRotationPoint(-6F, 15F, -1F);
-	      Shape9.setTextureSize(64, 32);
-	      Shape9.mirror = true;
-	      setRotation(Shape9, 0F, 0F, 0F);
-	      Shape10 = new ModelRenderer(this, 0, 0);
-	      Shape10.addBox(-1.5F, -1.5F, -1.5F, 1, 1, 3);
-	      Shape10.setRotationPoint(-7.5F, 13.5F, 0F);
-	      Shape10.setTextureSize(64, 32);
-	      Shape10.mirror = true;
-	      setRotation(Shape10, 0F, 0F, 0F);
-	      Shape11 = new ModelRenderer(this, 0, 0);
-	      Shape11.addBox(-1.5F, -1.5F, -1.5F, 1, 3, 1);
-	      Shape11.setRotationPoint(-7.5F, 16F, 4.5F);
-	      Shape11.setTextureSize(64, 32);
-	      Shape11.mirror = true;
-	      setRotation(Shape11, 0F, 0F, 0F);
-	      Shape12 = new ModelRenderer(this, 0, 0);
-	      Shape12.addBox(-1.5F, -1.5F, -1.5F, 1, 1, 3);
-	      Shape12.setRotationPoint(-7.5F, 20.5F, 0F);
-	      Shape12.setTextureSize(64, 32);
-	      Shape12.mirror = true;
-	      setRotation(Shape12, 0F, 0F, 0F);
-	      Shape13 = new ModelRenderer(this, 0, 0);
-	      Shape13.addBox(-1.5F, -1.5F, -1.5F, 1, 3, 1);
-	      Shape13.setRotationPoint(-7.5F, 16F, -2.5F);
-	      Shape13.setTextureSize(64, 32);
-	      Shape13.mirror = true;
-	      setRotation(Shape13, 0F, 0F, 0F);
-	      Shape14 = new ModelRenderer(this, 0, 0);
-	      Shape14.addBox(-1.5F, -1.5F, -1.5F, 1, 1, 3);
-	      Shape14.setRotationPoint(-8F, 14.5F, 0F);
-	      Shape14.setTextureSize(64, 32);
-	      Shape14.mirror = true;
-	      setRotation(Shape14, 0F, 0F, 0.7853982F);
-	      Shape15 = new ModelRenderer(this, 0, 0);
-	      Shape15.addBox(-1.5F, -1.5F, -1.5F, 1, 1, 3);
-	      Shape15.setRotationPoint(-8F, 20.5F, 0F);
-	      Shape15.setTextureSize(64, 32);
-	      Shape15.mirror = true;
-	      setRotation(Shape15, 0F, 0F, 0.7853982F);
-	      Shape16 = new ModelRenderer(this, 0, 0);
-	      Shape16.addBox(-0.5F, -1.5F, -0.5F, 1, 3, 1);
-	      Shape16.setRotationPoint(-8F, 16F, -3F);
-	      Shape16.setTextureSize(64, 32);
-	      Shape16.mirror = true;
-	      setRotation(Shape16, 0F, 0.7853982F, 0F);
-	      Shape17 = new ModelRenderer(this, 0, 0);
-	      Shape17.addBox(-0.5F, -1.5F, -0.5F, 1, 3, 1);
-	      Shape17.setRotationPoint(-8F, 16F, 3F);
-	      Shape17.setTextureSize(64, 32);
-	      Shape17.mirror = true;
-	      setRotation(Shape17, 0F, 0.7853982F, 0F);
-	  } 
-	   
-/*
-	@Override
-	public void renderModel(World world,int x,int y,int z,float f5) {
-		if (world != null){
-		TileEntityTransportFluids te = (TileEntityTransportFluids) world.getBlockTileEntity(x, y, z);
+    // fields
+    ModelRenderer Center;
+    ModelRenderer Down;
+    ModelRenderer Up;
+    ModelRenderer South;
+    ModelRenderer East;
+    ModelRenderer West;
+    ModelRenderer North;
+    ModelRenderer DownConnector;
+    ModelRenderer EastConnector;
+    ModelRenderer WestConnector;
+    ModelRenderer NorthConnector;
+    ModelRenderer SouthConnector;
+    ModelRenderer UpConnector;
+    ModelRenderer EastWest;
+    ModelRenderer NorthSouth;
+    ModelRenderer UpDown;
 
-		te.senseSides(world);
-		ForgeDirection dir = te.getForward();
-		
-	    Shape1.render(f5);
-	    Shape2.render(f5);
-	    Shape3.render(f5);
-	    Shape4.render(f5);
-	    Shape5.render(f5);
-	    if (te.isSideConnected(dir.getOpposite())){
-	    	Shape6.render(f5);
-	    }
-	    if (te.isSideConnected(dir)){
-	    	Shape7.render(f5);
-	    }
-	    Shape8.render(f5);
-	    Shape9.render(f5);
-	    Shape10.render(f5);
-	    Shape11.render(f5);
-	    Shape12.render(f5);
-	    Shape13.render(f5);
-	    Shape14.render(f5);
-	    Shape15.render(f5);
-	    Shape16.render(f5);
-	    Shape17.render(f5);
-		}else{
-		    Shape1.render(f5);
-		    Shape2.render(f5);
-		    Shape3.render(f5);
-		    Shape8.render(f5);
-		    Shape9.render(f5);
-		    Shape10.render(f5);
-		    Shape11.render(f5);
-		    Shape12.render(f5);
-		    Shape13.render(f5);
-		    Shape14.render(f5);
-		    Shape15.render(f5);
-		    Shape16.render(f5);
-		    Shape17.render(f5);
-		}
-	}
-*/ 
-	@Override
-	public void renderModelConnected(float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down) {
-  
-	}
+    public ModelTransportFluids() {
+	textureWidth = 32;
+	textureHeight = 32;
+
+	Center = new ModelRenderer(this, 0, 0);
+	Center.addBox(-3F, -3F, -3F, 6, 6, 6);
+	Center.setRotationPoint(0F, 16F, 0F);
+	Center.setTextureSize(32, 32);
+	Center.mirror = true;
+	setRotation(Center, 0F, 0F, 0F);
+	Down = new ModelRenderer(this, 0, 17);
+	Down.addBox(-2F, -8F, -2F, 4, 5, 4);
+	Down.setRotationPoint(0F, 16F, 0F);
+	Down.setTextureSize(32, 32);
+	Down.mirror = true;
+	setRotation(Down, 3.141593F, 0F, 0F);
+	Up = new ModelRenderer(this, 0, 17);
+	Up.addBox(-2F, -8F, -2F, 4, 5, 4);
+	Up.setRotationPoint(0F, 16F, 0F);
+	Up.setTextureSize(32, 32);
+	Up.mirror = true;
+	setRotation(Up, 0F, 0F, 0F);
+	South = new ModelRenderer(this, 0, 17);
+	South.addBox(-2F, -8F, -2F, 4, 5, 4);
+	South.setRotationPoint(0F, 16F, 0F);
+	South.setTextureSize(32, 32);
+	South.mirror = true;
+	setRotation(South, -1.570796F, 0F, 0F);
+	East = new ModelRenderer(this, 0, 17);
+	East.addBox(-2F, -8F, -2F, 4, 5, 4);
+	East.setRotationPoint(0F, 16F, 0F);
+	East.setTextureSize(32, 32);
+	East.mirror = true;
+	setRotation(East, 0F, 0F, 1.570796F);
+	West = new ModelRenderer(this, 0, 17);
+	West.addBox(-2F, -8F, -2F, 4, 5, 4);
+	West.setRotationPoint(0F, 16F, 0F);
+	West.setTextureSize(32, 32);
+	West.mirror = true;
+	setRotation(West, 0F, 0F, -1.570796F);
+	North = new ModelRenderer(this, 0, 17);
+	North.addBox(-2F, -8F, -2F, 4, 5, 4);
+	North.setRotationPoint(0F, 16F, 0F);
+	North.setTextureSize(32, 32);
+	North.mirror = true;
+	setRotation(North, 1.570796F, 0F, 0F);
+	DownConnector = new ModelRenderer(this, 0, 26);
+	DownConnector.addBox(-2.5F, -8F, -2.5F, 5, 1, 5);
+	DownConnector.setRotationPoint(0F, 16F, 0F);
+	DownConnector.setTextureSize(32, 32);
+	DownConnector.mirror = true;
+	setRotation(DownConnector, 0F, 0F, 3.141593F);
+	EastConnector = new ModelRenderer(this, 0, 26);
+	EastConnector.addBox(-2.5F, -8F, -2.5F, 5, 1, 5);
+	EastConnector.setRotationPoint(0F, 16F, 0F);
+	EastConnector.setTextureSize(32, 32);
+	EastConnector.mirror = true;
+	setRotation(EastConnector, 0F, 0F, 1.570796F);
+	WestConnector = new ModelRenderer(this, 0, 26);
+	WestConnector.addBox(-2.5F, -8F, -2.5F, 5, 1, 5);
+	WestConnector.setRotationPoint(0F, 16F, 0F);
+	WestConnector.setTextureSize(32, 32);
+	WestConnector.mirror = true;
+	setRotation(WestConnector, 0F, 0F, -1.570796F);
+	NorthConnector = new ModelRenderer(this, 0, 26);
+	NorthConnector.addBox(-2.5F, -8F, -2.5F, 5, 1, 5);
+	NorthConnector.setRotationPoint(0F, 16F, 0F);
+	NorthConnector.setTextureSize(32, 32);
+	NorthConnector.mirror = true;
+	setRotation(NorthConnector, 1.570796F, 0F, 0F);
+	SouthConnector = new ModelRenderer(this, 0, 26);
+	SouthConnector.addBox(-2.5F, -8F, -2.5F, 5, 1, 5);
+	SouthConnector.setRotationPoint(0F, 16F, 0F);
+	SouthConnector.setTextureSize(32, 32);
+	SouthConnector.mirror = true;
+	setRotation(SouthConnector, -1.570796F, 0F, 0F);
+	UpConnector = new ModelRenderer(this, 0, 26);
+	UpConnector.addBox(-2.5F, -8F, -2.5F, 5, 1, 5);
+	UpConnector.setRotationPoint(0F, 16F, 0F);
+	UpConnector.setTextureSize(32, 32);
+	UpConnector.mirror = true;
+	setRotation(UpConnector, 0F, 0F, 0F);
+	EastWest = new ModelRenderer(this, 16, 12);
+	EastWest.addBox(-2F, -8F, -2F, 4, 15, 4);
+	EastWest.setRotationPoint(0F, 16F, 0F);
+	EastWest.setTextureSize(32, 32);
+	EastWest.mirror = true;
+	setRotation(EastWest, 0F, 0F, 1.570796F);
+	NorthSouth = new ModelRenderer(this, 16, 12);
+	NorthSouth.addBox(-2F, -8F, -2F, 4, 15, 4);
+	NorthSouth.setRotationPoint(0F, 16F, 0F);
+	NorthSouth.setTextureSize(32, 32);
+	NorthSouth.mirror = true;
+	setRotation(NorthSouth, 1.570796F, 0F, 0F);
+	UpDown = new ModelRenderer(this, 16, 12);
+	UpDown.addBox(-2F, -8F, -2F, 4, 15, 4);
+	UpDown.setRotationPoint(0F, 16F, 0F);
+	UpDown.setTextureSize(32, 32);
+	UpDown.mirror = true;
+	setRotation(UpDown, 0F, 0F, 0F);
+    }
+
+    @Override
+    public void renderModelConnected(float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down) {
+	boolean hideCenter = false;
+	hideCenter |= renderStraigh(f, NorthSouth, NorthConnector, SouthConnector, north, south, east, west, up, down);
+	hideCenter |= renderStraigh(f, EastWest, EastConnector, WestConnector, east, west, north, south, up, down);
+	hideCenter |= renderStraigh(f, UpDown, UpConnector, DownConnector, up, down, east, west, north, south);
+	render(Up, UpConnector, up, f);
+	render(Down, DownConnector, down, f);
+	render(North, NorthConnector, north, f);
+	render(West, WestConnector, east, f);
+	render(South, SouthConnector, south, f);
+	render(East, EastConnector, west, f);
+	if (!hideCenter)
+	    Center.render(f);
+    }
+
+    private boolean renderStraigh(float f, ModelRenderer northSouth2, ModelRenderer northConnector2, ModelRenderer southConnector2, ConnectionState north2, ConnectionState south2, ConnectionState east2, ConnectionState west2, ConnectionState up2, ConnectionState down2) {
+	if (north2 == ConnectionState.DISCONNECTED)
+	    return false;
+	if (south2 == ConnectionState.DISCONNECTED)
+	    return false;
+	if (west2 != ConnectionState.DISCONNECTED)
+	    return false;
+	if (east2 != ConnectionState.DISCONNECTED)
+	    return false;
+	if (up2 != ConnectionState.DISCONNECTED)
+	    return false;
+	if (down2 != ConnectionState.DISCONNECTED)
+	    return false;
+
+	northSouth2.render(f);
+	if (north2 == ConnectionState.PLUGGED)
+	    northConnector2.render(f);
+	if (south2 == ConnectionState.PLUGGED)
+	    southConnector2.render(f);
+	return true;
+    }
 
 }

@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.IConnectedTile;
+import ip.industrialProcessing.machines.TileEntitySynced;
 import ip.industrialProcessing.power.IPowerAcceptor;
 import ip.industrialProcessing.power.IPowerEntity;
 import ip.industrialProcessing.power.IPowerProducer;
@@ -12,10 +13,12 @@ import ip.industrialProcessing.power.IPowerWire;
 import ip.industrialProcessing.power.WireConnectionState;
 import ip.industrialProcessing.power.utils.PowerAcceptorConnection;
 import ip.industrialProcessing.power.utils.PowerDistributor;
+import ip.industrialProcessing.transport.TransportConnectionState;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TileEntityWire extends TileEntity implements IConnectedTile, IPowerAcceptor, IPowerWire {
+public class TileEntityWire extends TileEntitySynced implements IConnectedTile, IPowerAcceptor, IPowerWire {
 
     PowerDistributor distributor = new PowerDistributor();
     private WireConnectionState[] states = new WireConnectionState[6];
@@ -33,7 +36,8 @@ public class TileEntityWire extends TileEntity implements IConnectedTile, IPower
 
     @Override
     public void updateEntity() {
-	verifyNeighbors();
+	if (unverified)
+	    verifyNeighbors();
     }
 
     private WireConnectionState getState(IPowerEntity powerEntity, ForgeDirection direction) {
@@ -41,8 +45,8 @@ public class TileEntityWire extends TileEntity implements IConnectedTile, IPower
 	if (powerEntity == null)
 	    return WireConnectionState.NONE;
 	// wire? wire connection:
-	if (powerEntity instanceof TileEntityWire)
-	    return WireConnectionState.WIRE;
+	if (powerEntity instanceof TileEntityWire) 
+	    return WireConnectionState.WIRE; 
 	// acceptor? output connection:
 	if (powerEntity instanceof IPowerAcceptor) {
 	    IPowerAcceptor acceptor = (IPowerAcceptor) powerEntity;
@@ -52,7 +56,7 @@ public class TileEntityWire extends TileEntity implements IConnectedTile, IPower
 	// producer? input connection:
 	if (powerEntity instanceof IPowerProducer) {
 	    IPowerProducer producer = (IPowerProducer) powerEntity;
-	    if (producer.canProducePower(direction.getOpposite()))
+	    if (producer.canOutputPower(direction.getOpposite()))
 		return WireConnectionState.INPUT;
 	}
 	// missed something? don't care about it:
@@ -60,6 +64,7 @@ public class TileEntityWire extends TileEntity implements IConnectedTile, IPower
     }
 
     public void verifyNeighbors() {
+	System.out.println("Verifying wire at " + xCoord + ", " + yCoord + ", " + zCoord + " on " + (this.worldObj.isRemote ? "client" : "server"));
 	boolean modified = false;
 
 	for (int i = 0; i < this.states.length; i++) {
@@ -79,12 +84,13 @@ public class TileEntityWire extends TileEntity implements IConnectedTile, IPower
 	// if the network changed, update the map
 	if (modified)
 	    updateNetwork();
-	unverified = true; // no more ticks required to verify neighbors
+	unverified = false; // no more ticks required to verify neighbors
     }
 
     private void updateNetwork() {
 	WireNetworkMap.UpdateNetworkAt(worldObj, xCoord, yCoord, zCoord);
-	System.out.println("network around " + xCoord + ", " + yCoord + ", " + zCoord + " found " + this.distributor.getOutputs().length+ " outputs");
+	notifyBlockChange();
+	System.out.println("network around " + xCoord + ", " + yCoord + ", " + zCoord + " found " + this.distributor.getOutputs().length + " outputs");
     }
 
     private WireConnectionState getNeighborState(ForgeDirection direction) {
@@ -134,5 +140,24 @@ public class TileEntityWire extends TileEntity implements IConnectedTile, IPower
 	    connections[i] = new PowerAcceptorConnection(acceptor, output.direction);
 	}
 	this.distributor.setOutputs(connections);
+    }
+    
+    @Override
+    public void writeToNBT(NBTTagCompound par1nbtTagCompound) { 
+        super.writeToNBT(par1nbtTagCompound);
+        int[] stateInts = new int[6];
+        for (int i = 0; i < stateInts.length; i++) {
+	    stateInts[i] = states[i].ordinal();
+	}
+        par1nbtTagCompound.setIntArray("TState", stateInts);
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound par1nbtTagCompound) { 
+        super.readFromNBT(par1nbtTagCompound);
+        int[] stateInts = par1nbtTagCompound.getIntArray("TState"); 
+        for (int i = 0; i < stateInts.length; i++) {
+	    states[i] = WireConnectionState.values()[stateInts[i]];
+	}
     }
 }

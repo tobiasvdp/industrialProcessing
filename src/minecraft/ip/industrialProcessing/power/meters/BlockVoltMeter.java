@@ -14,7 +14,7 @@ import ip.industrialProcessing.machines.BlockMachineRendered;
 public class BlockVoltMeter extends BlockMachineRendered {
 
     public BlockVoltMeter() {
-	super(ConfigMachineBlocks.getVoltMeterBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Volt Meter", IndustrialProcessing.tabOreProcessing);
+	super(ConfigMachineBlocks.getVoltMeterBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Volt Meter", IndustrialProcessing.tabPower);
     }
 
     @Override

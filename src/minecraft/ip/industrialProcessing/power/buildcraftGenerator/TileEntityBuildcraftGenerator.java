@@ -70,7 +70,7 @@ public class TileEntityBuildcraftGenerator extends TileEntityPowerGenerator impl
     }
 
     @Override
-    public boolean canProducePower(ForgeDirection opposite) {
+    public boolean canOutputPower(ForgeDirection opposite) {
 	return true;
     }
 

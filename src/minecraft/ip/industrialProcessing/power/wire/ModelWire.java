@@ -112,16 +112,5 @@ public class ModelWire extends ModelConnected {
 	render(South, SouthConnector, south, f);
 	render(East, EastConnector, east, f);
 	Center.render(f);
-    }
-
-    private void render(ModelRenderer wire, ModelRenderer connector, ConnectionState state, float f) {
-	switch (state) {
-	case PLUGGED:
-	    connector.render(f);
-	case CONNECTED:
-	    wire.render(f);
-	    break;
-	}
-    }
-
+    } 
 }

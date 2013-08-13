@@ -19,20 +19,14 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
-public class BlockTransport extends BlockContainer {
+public abstract class BlockTransport extends BlockContainer {
 
-	public BlockTransport(int par1, String name) {
-		super(par1, Material.glass);
-		setHardness(5F);
-		setStepSound(Block.soundAnvilFootstep);
-		setUnlocalizedName(name);
-		setCreativeTab(IndustrialProcessing.tabOreProcessing);
-		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "inputTop");
-	}
-	
-    @Override
-    public TileEntity createNewTileEntity(World world) {
-	return null;
+    public BlockTransport(int blockId, Material material, float hardness, StepSound sound, String name, CreativeTabs tab) {
+	super(blockId, material);
+	setHardness(hardness);
+	setStepSound(sound);
+	setUnlocalizedName(name);
+	setCreativeTab(tab);
     }
 
     @Override
@@ -63,32 +57,13 @@ public class BlockTransport extends BlockContainer {
 	// the block can render in both passes, so return true always
 	return true;
     }
-    
-    @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
-    	return false;
-    }
 
     @Override
-    public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
-    	super.breakBlock(world, x, y, z, par5, par6);
-    }
-
-    @Override
-    public boolean canPlaceBlockAt(World par1World, int x, int y, int z) {
-		boolean canPlace = true;
-		int l = par1World.getBlockId(x, y, z);
-		Block block = Block.blocksList[l];
-		if (block != null) {
-		    if (!block.isBlockReplaceable(par1World, x, y, z))
-			canPlace = false;
-		}
-		return canPlace;
-    }
-    @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack itemStack) {
-	int dir = MathHelper.floor_double((double) ((entityLivingBase.rotationYaw * 4F) / 360F) + 0.5D) & 3;
-	world.setBlockMetadataWithNotify(x, y, z, dir, 0);
+    public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
+	super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
+	TileEntityTransport transport = (TileEntityTransport) par1World.getBlockTileEntity(par2, par3, par4);
+	transport.searchForConnections();
+	System.out.println("Transport changed at " + par2 + ", " + par3 + ", " + par4);
     }
 
 }

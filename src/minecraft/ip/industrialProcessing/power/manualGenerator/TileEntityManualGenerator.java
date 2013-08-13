@@ -60,7 +60,7 @@ public class TileEntityManualGenerator extends TileEntityPowerGenerator {
     }
 
     @Override
-    public boolean canProducePower(ForgeDirection opposite) {
+    public boolean canOutputPower(ForgeDirection opposite) {
 	return true;
     }
 }
