@@ -52,7 +52,7 @@ public class TileEntityWire extends TileEntity implements IConnectedTile, IPower
 	// producer? input connection:
 	if (powerEntity instanceof IPowerProducer) {
 	    IPowerProducer producer = (IPowerProducer) powerEntity;
-	    if (producer.canProducePower(direction.getOpposite()))
+	    if (producer.canOutputPower(direction.getOpposite()))
 		return WireConnectionState.INPUT;
 	}
 	// missed something? don't care about it:
@@ -79,7 +79,7 @@ public class TileEntityWire extends TileEntity implements IConnectedTile, IPower
 	// if the network changed, update the map
 	if (modified)
 	    updateNetwork();
-	unverified = true; // no more ticks required to verify neighbors
+	unverified = false; // no more ticks required to verify neighbors
     }
 
     private void updateNetwork() {

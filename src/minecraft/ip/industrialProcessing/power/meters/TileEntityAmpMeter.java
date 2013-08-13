@@ -63,7 +63,7 @@ public class TileEntityAmpMeter extends TileEntityPowerGenerator implements IPow
     }
 
     @Override
-    public boolean canProducePower(ForgeDirection side) {
+    public boolean canOutputPower(ForgeDirection side) {
 	LocalDirection direction = DirectionUtils.GetLocalDirection(side, getForwardDirection());
 	return direction == outputSide;
     }

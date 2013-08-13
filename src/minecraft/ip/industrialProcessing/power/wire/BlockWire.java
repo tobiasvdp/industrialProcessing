@@ -15,7 +15,7 @@ import ip.industrialProcessing.machines.BlockMachineRendered;
 public class BlockWire extends BlockMachineRendered {
 
     public BlockWire() {
-	super(ConfigMachineBlocks.getWireBlockID(), Material.cloth, 1F, Block.soundClothFootstep, "Wire", IndustrialProcessing.tabOreProcessing);
+	super(ConfigMachineBlocks.getWireBlockID(), Material.cloth, 1F, Block.soundClothFootstep, "Wire", IndustrialProcessing.tabPower);
     }
 
     @Override

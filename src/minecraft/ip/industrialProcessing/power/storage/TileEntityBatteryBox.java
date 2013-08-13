@@ -37,7 +37,7 @@ public class TileEntityBatteryBox extends TileEntityPowerGenerator implements IP
     }
 
     @Override
-    public boolean canProducePower(ForgeDirection opposite) {
+    public boolean canOutputPower(ForgeDirection opposite) {
 	LocalDirection dir = DirectionUtils.GetLocalDirection(opposite, getForwardDirection());
 	return dir == outputSide;
     }

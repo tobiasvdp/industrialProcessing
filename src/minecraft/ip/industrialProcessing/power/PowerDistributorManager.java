@@ -29,7 +29,7 @@ public class PowerDistributorManager {
 	ArrayList<PowerAcceptorConnection> connections = new ArrayList<PowerAcceptorConnection>();
 	for (int i = 0; i < ForgeDirection.VALID_DIRECTIONS.length; i++) {
 	    ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[i];
-	    if (supplier.canProducePower(direction))
+	    if (supplier.canOutputPower(direction))
 		searchPowerAcceptor(direction, connections);
 	}
 	PowerAcceptorConnection[] outputs = connections.toArray(new PowerAcceptorConnection[connections.size()]);
