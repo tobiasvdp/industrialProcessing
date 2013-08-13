@@ -4,16 +4,20 @@ import java.util.Iterator;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
+import ic2.api.Direction;
+import ip.industrialProcessing.DirectionUtils;
+import ip.industrialProcessing.LocalDirection;
+import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.power.TileEntityPowerGenerator;
 import ip.industrialProcessing.recipes.Recipe;
 
-public class TileEntityManualGenerator extends TileEntityPowerGenerator {
+public class TileEntityManualGenerator extends TileEntityPowerGenerator implements IAnimationProgress {
     public TileEntityManualGenerator() {
 	super(100);
     }
 
     // each tick, this amount of mechanical energy is converted to power.
-    private static final int DRAIN_RATE = 500;
+    private static final int DRAIN_RATE = 100;
     // if the player hits, 100 mechanical energy is stored in this generator
     private static final int PLAYER_FORCE_RATE = 1000;
     // how much mechanical energy can this generator store, prevents the player
@@ -23,6 +27,23 @@ public class TileEntityManualGenerator extends TileEntityPowerGenerator {
 
     int storedPlayerForce = 0; // buffer
     private int currentProduction; // used for animation
+    private float rotation;
+    private final static LocalDirection outputDirection = LocalDirection.BACK;
+
+    @Override
+    public void updateEntity() {
+	if (Float.isNaN(this.rotation))
+	    this.rotation = 0; 
+	float log = (float) Math.log(this.storedPlayerForce + 1);
+	this.rotation += (1 / 360f) * log;
+	if (this.rotation > 1)
+	    this.rotation--;
+	super.updateEntity();
+
+	if (this.storedPlayerForce > 0) {
+	    this.storedPlayerForce -= Math.max(1, this.storedPlayerForce / 10);
+	}
+    }
 
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
@@ -45,15 +66,14 @@ public class TileEntityManualGenerator extends TileEntityPowerGenerator {
 
     @Override
     public int producePower(int maxAmount, boolean doProduce) {
-	int produce = Math.min(storedPlayerForce, maxAmount);
-	produce = Math.min(DRAIN_RATE, produce);
+	int produce = Math.min(maxAmount, (int) (Math.log(this.storedPlayerForce + 1) * DRAIN_RATE));
 	if (doProduce) {
-	    storedPlayerForce -= produce;
-	    this.currentProduction = produce;
+	    this.currentProduction += produce;
 	}
 	return produce;
     }
 
+    
     @Override
     protected boolean isValidInput(int slot, int itemID) {
 	return false;
@@ -61,6 +81,13 @@ public class TileEntityManualGenerator extends TileEntityPowerGenerator {
 
     @Override
     public boolean canOutputPower(ForgeDirection opposite) {
-	return true;
+	LocalDirection side = DirectionUtils.GetLocalDirection(opposite, getForwardDirection());
+	return side == outputDirection ;
     }
+
+    @Override
+    public float getAnimationProgress(float scale) {
+	return this.rotation * scale;
+    }
+ 
 }

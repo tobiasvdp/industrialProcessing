@@ -19,15 +19,15 @@ public class TileEntityBatteryBox extends TileEntityPowerGenerator implements IP
     private static final LocalDirection inputSide = LocalDirection.FRONT;
     private static final LocalDirection outputSide = LocalDirection.BACK;
 
-    int storedPower = 0;
-    int storageCapacity = 10000;
+    private int storedPower = 0;
+    private static final int storageCapacity = 100000;
 
     @Override
     public void updateEntity() {
-        super.updateEntity();
-        notifyBlockChange();
+	super.updateEntity();
+	notifyBlockChange();
     }
-    
+
     @Override
     public int producePower(int maxAmount, boolean doProduce) {
 	int amount = Math.min(maxAmount, this.storedPower);
@@ -55,8 +55,8 @@ public class TileEntityBatteryBox extends TileEntityPowerGenerator implements IP
 
     @Override
     public boolean canAcceptPower(ForgeDirection side) {
-	ForgeDirection forward = getForwardDirection(); 
-	LocalDirection dir = DirectionUtils.GetLocalDirection(side,forward);
+	ForgeDirection forward = getForwardDirection();
+	LocalDirection dir = DirectionUtils.GetLocalDirection(side, forward);
 	return dir == inputSide;
     }
 
@@ -66,19 +66,19 @@ public class TileEntityBatteryBox extends TileEntityPowerGenerator implements IP
     }
 
     @Override
-    public float getAnimationProgress(float scale) { 
+    public float getAnimationProgress(float scale) {
 	return this.storedPower * scale / this.storageCapacity;
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nbt) { 
-        super.writeToNBT(nbt);
-        nbt.setInteger("Stored", this.storedPower);
+    public void writeToNBT(NBTTagCompound nbt) {
+	super.writeToNBT(nbt);
+	nbt.setInteger("Stored", this.storedPower);
     }
-    
+
     @Override
-    public void readFromNBT(NBTTagCompound nbt) { 
-        super.readFromNBT(nbt);
-        this.storedPower = nbt.getInteger("Stored");
+    public void readFromNBT(NBTTagCompound nbt) {
+	super.readFromNBT(nbt);
+	this.storedPower = nbt.getInteger("Stored");
     }
 }

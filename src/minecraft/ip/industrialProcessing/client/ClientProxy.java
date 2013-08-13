@@ -31,6 +31,8 @@ import ip.industrialProcessing.machines.magneticSeparator.ModelMagneticSeperator
 import ip.industrialProcessing.machines.magneticSeparator.TileEntityMagneticSeparator;
 import ip.industrialProcessing.machines.mixer.ModelMixer;
 import ip.industrialProcessing.machines.mixer.TileEntityMixer; 
+import ip.industrialProcessing.power.manualGenerator.ModelCrankGenerator;
+import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
 import ip.industrialProcessing.power.meters.ModelVoltMeter;
 import ip.industrialProcessing.power.meters.TileEntityAmpMeter;
 import ip.industrialProcessing.power.meters.TileEntityVoltMeter;
@@ -53,6 +55,7 @@ public class ClientProxy extends CommonProxy {
     private static final ModelAnimatedMachine ampMeter = new ModelVoltMeter(true);
     private static final ModelConnected transportFluids = new ModelTransportFluids();
     private static final ModelAnimatedMachine batteryBox = new ModelBatteryBox();
+    private static final ModelAnimatedMachine crankGenerator = new ModelCrankGenerator();
     private static final ModelStateMachine blastFurnace = new ModelBlastFurnace();
     private static final ModelStateMachine blastFurnaceTop = new ModelBlastFurnaceTop();
     @Override
@@ -103,6 +106,10 @@ public class ClientProxy extends CommonProxy {
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlastFurnace.class, new RendererTileEntityState(IndustrialProcessing.blockBlastFurnace, new String[]{"ModelBlastFurnace","ModelBlastFurnaceTop"}, new ModelStateMachine[]{blastFurnace,blastFurnaceTop}));
 	ConfigRenderers.setRendererBlastFurnaceId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererBlastFurnaceId(), new TileEntityBlastFurnace()));
+
+	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityManualGenerator.class, new RendererTileEntityAnimated(IndustrialProcessing.blockManualGenerator, "ModelCrankGenerator", crankGenerator));
+	ConfigRenderers.setRendererCrankGeneratorId(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererCrankGeneratorId(), new TileEntityManualGenerator()));
  
     }
 }

@@ -2,6 +2,7 @@ package ip.industrialProcessing.config;
 
 public class ConfigRenderers {
 
+    private int rendererCrankGeneratorID;
     private int rendererWireID;
     private int rendererMixerID;
     private int rendererFilterID;
@@ -93,12 +94,23 @@ public class ConfigRenderers {
     public static void setRendererBatteryBoxId(int value) {
 	getInstance().rendererBatteryBoxID = value;
     }
-	public static int getRendererBlastFurnaceId() {
-		return getInstance().rendererBlastFurnaceID;
-	}
+
+    public static int getRendererBlastFurnaceId() {
+	return getInstance().rendererBlastFurnaceID;
+    }
+
     public static void setRendererBlastFurnaceId(int value) {
 	getInstance().rendererBlastFurnaceID = value;
     }
+
+    public static int getRendererCrankGeneratorId() {
+	return getInstance().rendererCrankGeneratorID;
+    }
+
+    public static void setRendererCrankGeneratorId(int value) {
+	getInstance().rendererCrankGeneratorID = value;
+    }
+
     private ConfigRenderers() {
 
     }
@@ -108,6 +120,5 @@ public class ConfigRenderers {
     public static ConfigRenderers getInstance() {
 	return instance;
     }
-
 
 }

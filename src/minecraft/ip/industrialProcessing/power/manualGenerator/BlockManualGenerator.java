@@ -9,6 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
+import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.power.BlockPowerGenerator;
 
 public class BlockManualGenerator extends BlockPowerGenerator {
@@ -22,6 +23,11 @@ public class BlockManualGenerator extends BlockPowerGenerator {
 	return new TileEntityManualGenerator();
     }
   
+    
+    @Override
+    public int getRenderType() { 
+        return ConfigRenderers.getRendererCrankGeneratorId();
+    }
     
     @Override
     public void onBlockClicked(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer) { 
