@@ -10,12 +10,17 @@ import ip.industrialProcessing.client.render.ModelAnimatedFluidMachine;
 import ip.industrialProcessing.client.render.ModelAnimatedMachine;
 import ip.industrialProcessing.client.render.ModelConnected;
 import ip.industrialProcessing.client.render.ModelMachine;
+import ip.industrialProcessing.client.render.ModelStateMachine;
 import ip.industrialProcessing.client.render.RendererTileEntity;
 import ip.industrialProcessing.client.render.RendererTileEntityConnected;
 import ip.industrialProcessing.client.render.RendererTileEntityFluidWorker;
 import ip.industrialProcessing.client.render.RendererTileEntityAnimated;
+import ip.industrialProcessing.client.render.RendererTileEntityState;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.machines.RendererBlock;
+import ip.industrialProcessing.machines.blastFurnace.ModelBlastFurnace;
+import ip.industrialProcessing.machines.blastFurnace.ModelBlastFurnaceTop;
+import ip.industrialProcessing.machines.blastFurnace.TileEntityBlastFurnace;
 import ip.industrialProcessing.machines.crusher.ModelCrusher;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import ip.industrialProcessing.machines.diskFilter.ModelDiskFilter;
@@ -48,6 +53,8 @@ public class ClientProxy extends CommonProxy {
     private static final ModelAnimatedMachine ampMeter = new ModelVoltMeter(true);
     private static final ModelConnected transportFluids = new ModelTransportFluids();
     private static final ModelAnimatedMachine batteryBox = new ModelBatteryBox();
+    private static final ModelStateMachine blastFurnace = new ModelBlastFurnace();
+    private static final ModelStateMachine blastFurnaceTop = new ModelBlastFurnaceTop();
     @Override
     public void registerRenderers() {
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFilter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockFilter, "ModelFilter", filter));
@@ -92,6 +99,10 @@ public class ClientProxy extends CommonProxy {
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBatteryBox.class, new RendererTileEntityAnimated(IndustrialProcessing.blockBatteryBox, "ModelBatteryBox", batteryBox));
 	ConfigRenderers.setRendererBatteryBoxId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererBatteryBoxId(), new TileEntityBatteryBox()));
+	
+	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlastFurnace.class, new RendererTileEntityState(IndustrialProcessing.blockBlastFurnace, "ModelBlastFurnace", new ModelStateMachine[]{blastFurnace,blastFurnaceTop}));
+	ConfigRenderers.setRendererBlastFurnaceId(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererBlastFurnaceId(), new TileEntityBlastFurnace()));
  
     }
 }

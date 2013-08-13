@@ -1,6 +1,7 @@
 package ip.industrialProcessing.machines;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.utils.working.IWorker;
 import ip.industrialProcessing.utils.working.IWorkingEntity;
 
@@ -13,6 +14,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.common.ForgeDirection;
 
 public class GuiContainerMachine extends GuiContainer {
 
@@ -23,6 +25,7 @@ public class GuiContainerMachine extends GuiContainer {
     protected int progressBarY = 34;
     protected int progressBarWidth = 22;
     protected int progressBarHeight = 16;
+    protected ForgeDirection progressBarSide = ForgeDirection.WEST;
 
     public GuiContainerMachine(InventoryPlayer inventoryPlayer, TileEntityMachine tileEntity, ContainerMachine container, String name, String textureLocation) {
 	super(container);
@@ -49,10 +52,15 @@ public class GuiContainerMachine extends GuiContainer {
 	if (tileEntity instanceof IWorkingEntity) {
 	    IWorkingEntity workingEntity = (IWorkingEntity) tileEntity;
 	    IWorker worker = workingEntity.getWorker();
-	    int scale = worker.getScaledProgress(progressBarWidth);
-	    if (scale > 0) {
-		this.drawTexturedModalRect(x + progressBarX, y + progressBarY, 176, 0, scale, progressBarHeight);
-	    }
+	    	if (progressBarSide == ForgeDirection.WEST){
+	    		int scale = worker.getScaledProgress(progressBarWidth);
+	    		if (scale > 0)
+	    		this.drawTexturedModalRect(x + progressBarX, y + progressBarY, 176, 0, scale, progressBarHeight);
+	    	}else{
+	    		int scale = worker.getScaledProgress(progressBarHeight);
+	    		if (scale > 0)
+	    		this.drawTexturedModalRect(x + progressBarX, y + progressBarY, 176, 0, progressBarWidth, scale);
+	    	}
 	}
     }
 
@@ -61,6 +69,9 @@ public class GuiContainerMachine extends GuiContainer {
 	progressBarY = y;
 	progressBarWidth = w;
 	progressBarHeight = h;
+    }
+    protected void setProgresBarDropside(ForgeDirection o){
+    	progressBarSide = o; 
     }
 
 }

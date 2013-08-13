@@ -14,8 +14,8 @@ public class ContainerPelletExtruder extends ContainerMachine {
 	public ContainerPelletExtruder(InventoryPlayer inventoryPlayer, TileEntityPelletExtruder tileEntity) {
 		super(inventoryPlayer, tileEntity);
 
-		inputSlot = new SlotBase(tileEntity, 0, 0, 16);
-		outputSlot = new SlotBase(tileEntity, 1, 0, 32);
+		inputSlot = new SlotBase(tileEntity, 0, 50, 31);
+		outputSlot = new SlotBase(tileEntity, 1, 110, 31);
 
 		addSlotToContainer(inputSlot);
 		addSlotToContainer(outputSlot);

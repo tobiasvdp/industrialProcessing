@@ -23,15 +23,15 @@ public class ContainerBlastFurnace extends ContainerFluidMachine {
 		
 		
 
-		inputSlotIronPellets = new SlotBase(tileEntity, 0, 0, 16);
-		inputSlotCalcareousSinterDust = new SlotBase(tileEntity, 1, 0, 32);
-		inputSlotCokes = new SlotBase(tileEntity, 2, 0, 48);
+		inputSlotIronPellets = new SlotBase(tileEntity, 0, 29, 26);
+		inputSlotCalcareousSinterDust = new SlotBase(tileEntity, 1, 8, 46);
+		inputSlotCokes = new SlotBase(tileEntity, 2, 49, 46);
 
-		inputHotSlagEmptyInput = new SlotLiquid(tileEntity, 3, 8, 19);
-		inputHotSlagFullOutput = new SlotLiquidOutput(tileEntity, 4, 8, 53);
+		inputHotSlagEmptyInput = new SlotLiquid(tileEntity, 3, 116, 19);
+		inputHotSlagFullOutput = new SlotLiquidOutput(tileEntity, 4, 116, 53);
 
-		inputPigIronEmptyInput = new SlotLiquid(tileEntity, 5, 8, 19);
-		inputPigIronFullOutput = new SlotLiquidOutput(tileEntity, 6, 8, 53);
+		inputPigIronEmptyInput = new SlotLiquid(tileEntity, 5, 134, 19);
+		inputPigIronFullOutput = new SlotLiquidOutput(tileEntity, 6, 134, 53);
 
 		addSlotToContainer(inputSlotIronPellets);
 		addSlotToContainer(inputSlotCalcareousSinterDust);

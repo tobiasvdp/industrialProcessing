@@ -16,7 +16,7 @@ public class RecipesPelletExtruder  extends RecipesMachine{
 	private void addDefaultRecipes() {
 
 		Recipe pellets= new Recipe();
-		pellets.workRequired = 30;
+		pellets.workRequired = 4000;
 		pellets.inputs = new RecipeInputSlot[] { 
 				new RecipeInputSlot(0,IndustrialProcessing.itemIronOxideDust.itemID,RecipeSlotType.INVENTORY, 64)};
 		pellets.outputs = new RecipeOutputSlot[] {

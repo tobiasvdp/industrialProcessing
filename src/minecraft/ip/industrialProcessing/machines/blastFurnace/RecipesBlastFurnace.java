@@ -16,7 +16,7 @@ public class RecipesBlastFurnace extends RecipesMachine {
 	private void addDefaultRecipes() {
 
 		Recipe pigIron= new Recipe();
-		pigIron.workRequired = 30;
+		pigIron.workRequired = 2000;
 		pigIron.inputs = new RecipeInputSlot[] { 
 				new RecipeInputSlot(0,IndustrialProcessing.itemIronOxidePellets.itemID,RecipeSlotType.INVENTORY, 10),
 				new RecipeInputSlot(1,IndustrialProcessing.itemCalcareousSinterDust.itemID,RecipeSlotType.INVENTORY, 10),

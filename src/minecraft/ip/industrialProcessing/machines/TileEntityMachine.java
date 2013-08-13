@@ -36,6 +36,7 @@ public abstract class TileEntityMachine extends TileEntity implements ISidedInve
 
     private ArrayList<MachineItemStack> itemStacks = new ArrayList<MachineItemStack>();
     private int[][] itemStackSideSlots = new int[6][0]; 
+    public boolean isDummyBlock = false;
 
      public ForgeDirection getForwardDirection(){
 	 int meta = this.worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
