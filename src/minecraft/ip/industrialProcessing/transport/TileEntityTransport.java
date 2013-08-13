@@ -1,22 +1,13 @@
 package ip.industrialProcessing.transport;
 
-import java.util.Arrays;
-
-import ip.industrialProcessing.DirectionUtils;
-import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.IConnectedTile;
-import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.TileEntitySynced;
-import ip.industrialProcessing.power.IPowerAcceptor;
-import ip.industrialProcessing.power.IPowerEntity;
-import ip.industrialProcessing.power.IPowerProducer;
-import ip.industrialProcessing.power.WireConnectionState;
-import ip.industrialProcessing.power.wire.TileEntityWire;
-import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids;
+
+import java.util.Arrays;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 public abstract class TileEntityTransport extends TileEntitySynced implements IConnectedTile {
@@ -65,6 +56,11 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
 	System.out.println("States at "+xCoord+", "+yCoord+", "+zCoord+" are  UP:" +this.states[ForgeDirection.UP.ordinal()]+" DOWN:" +this.states[ForgeDirection.DOWN.ordinal()]);
     }
 
+    public TransportConnectionState getTransportConnection(ForgeDirection direction)
+    {
+	return states[direction.ordinal()];
+    }
+    
     protected void updateNetwork() { 
 	notifyBlockChange();
     }

@@ -1,114 +1,25 @@
 package ip.industrialProcessing.power.wire;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-
-import ip.industrialProcessing.client.render.ConnectionState;
-import ip.industrialProcessing.client.render.IConnectedTile;
-import ip.industrialProcessing.machines.TileEntitySynced;
 import ip.industrialProcessing.power.IPowerAcceptor;
-import ip.industrialProcessing.power.IPowerEntity;
 import ip.industrialProcessing.power.IPowerProducer;
-import ip.industrialProcessing.power.IPowerWire;
-import ip.industrialProcessing.power.WireConnectionState;
 import ip.industrialProcessing.power.utils.PowerAcceptorConnection;
 import ip.industrialProcessing.power.utils.PowerDistributor;
+import ip.industrialProcessing.transport.TileEntityTransport;
 import ip.industrialProcessing.transport.TransportConnectionState;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TileEntityWire extends TileEntitySynced implements IConnectedTile, IPowerAcceptor, IPowerWire {
+public class TileEntityWire extends TileEntityTransport implements IPowerAcceptor {
 
-    PowerDistributor distributor = new PowerDistributor();
-    private WireConnectionState[] states = new WireConnectionState[6];
+    PowerDistributor distributor = new PowerDistributor(); 
 
-    public TileEntityWire() {
-	Arrays.fill(states, WireConnectionState.NONE);
-    }
-
-    private boolean unverified = true;
-
-    @Override
-    public boolean canUpdate() {
-	return unverified;
-    }
-
-    @Override
-    public void updateEntity() {
-	if (unverified)
-	    verifyNeighbors();
-    }
-
-    private WireConnectionState getState(IPowerEntity powerEntity, ForgeDirection direction) {
-	// nothing? no connection:
-	if (powerEntity == null)
-	    return WireConnectionState.NONE;
-	// wire? wire connection:
-	if (powerEntity instanceof TileEntityWire) 
-	    return WireConnectionState.WIRE; 
-	// acceptor? output connection:
-	if (powerEntity instanceof IPowerAcceptor) {
-	    IPowerAcceptor acceptor = (IPowerAcceptor) powerEntity;
-	    if (acceptor.canAcceptPower(direction.getOpposite()))
-		return WireConnectionState.OUTPUT;
-	}
-	// producer? input connection:
-	if (powerEntity instanceof IPowerProducer) {
-	    IPowerProducer producer = (IPowerProducer) powerEntity;
-	    if (producer.canOutputPower(direction.getOpposite()))
-		return WireConnectionState.INPUT;
-	}
-	// missed something? don't care about it:
-	return WireConnectionState.NONE;
-    }
-
-    public void verifyNeighbors() {
-	System.out.println("Verifying wire at " + xCoord + ", " + yCoord + ", " + zCoord + " on " + (this.worldObj.isRemote ? "client" : "server"));
-	boolean modified = false;
-
-	for (int i = 0; i < this.states.length; i++) {
-	    WireConnectionState newState = getNeighborState(ForgeDirection.VALID_DIRECTIONS[i]);
-	    WireConnectionState currentState = this.states[i];
-	    if (newState != currentState) {
-		this.states[i] = newState;
-		// don't care about added inputs, this doesn't change the
-		// network
-
-		boolean inputAdded = newState == WireConnectionState.INPUT;
-		boolean inputRemoved = currentState == WireConnectionState.INPUT;
-		if (!inputAdded && !inputRemoved)
-		    modified = true;
-	    }
-	}
-	// if the network changed, update the map
-	if (modified)
-	    updateNetwork();
-	unverified = false; // no more ticks required to verify neighbors
-    }
-
-    private void updateNetwork() {
+ 
+  
+    protected void updateNetwork() {
 	WireNetworkMap.UpdateNetworkAt(worldObj, xCoord, yCoord, zCoord);
 	notifyBlockChange();
 	System.out.println("network around " + xCoord + ", " + yCoord + ", " + zCoord + " found " + this.distributor.getOutputs().length + " outputs");
-    }
-
-    private WireConnectionState getNeighborState(ForgeDirection direction) {
-	IPowerEntity entity = getNeighbor(direction);
-	return getState(entity, direction);
-    }
-
-    private IPowerEntity getNeighbor(ForgeDirection direction) {
-	TileEntity entity = this.worldObj.getBlockTileEntity(this.xCoord + direction.offsetX, this.yCoord + direction.offsetY, this.zCoord + direction.offsetZ);
-	if (entity instanceof IPowerEntity)
-	    return (IPowerEntity) entity;
-	return null;
-    }
-
-    @Override
-    public ConnectionState getConnection(ForgeDirection direction) {
-	return states[direction.ordinal()].getConnectionState();
-    }
+    }   
 
     @Override
     public int acceptPower(int maxAmount, ForgeDirection side, boolean doAccept) {
@@ -126,11 +37,7 @@ public class TileEntityWire extends TileEntitySynced implements IConnectedTile, 
     public boolean canAcceptPower(ForgeDirection side) {
 	return true;
     }
-
-    @Override
-    public WireConnectionState getWireConnection(ForgeDirection direction) {
-	return this.states[direction.ordinal()];
-    }
+ 
 
     public void setOutputs(WireConnection[] outputs) {
 	PowerAcceptorConnection[] connections = new PowerAcceptorConnection[outputs.length];
@@ -141,23 +48,30 @@ public class TileEntityWire extends TileEntitySynced implements IConnectedTile, 
 	}
 	this.distributor.setOutputs(connections);
     }
-    
-    @Override
-    public void writeToNBT(NBTTagCompound par1nbtTagCompound) { 
-        super.writeToNBT(par1nbtTagCompound);
-        int[] stateInts = new int[6];
-        for (int i = 0; i < stateInts.length; i++) {
-	    stateInts[i] = states[i].ordinal();
-	}
-        par1nbtTagCompound.setIntArray("TState", stateInts);
-    }
+     
 
     @Override
-    public void readFromNBT(NBTTagCompound par1nbtTagCompound) { 
-        super.readFromNBT(par1nbtTagCompound);
-        int[] stateInts = par1nbtTagCompound.getIntArray("TState"); 
-        for (int i = 0; i < stateInts.length; i++) {
-	    states[i] = WireConnectionState.values()[stateInts[i]];
+    protected TransportConnectionState getState(TileEntity entity, ForgeDirection direction) {
+	// nothing? no connection:
+	if (entity == null)
+	    return TransportConnectionState.NONE;
+	// wire? wire connection:
+	if (entity instanceof TileEntityWire) 
+	    return TransportConnectionState.TRANSPORT; 
+	// acceptor? output connection:
+	if (entity instanceof IPowerAcceptor) {
+	    IPowerAcceptor acceptor = (IPowerAcceptor) entity;
+	    if (acceptor.canAcceptPower(direction.getOpposite()))
+		return TransportConnectionState.OUTPUT;
 	}
+	// producer? input connection:
+	if (entity instanceof IPowerProducer) {
+	    IPowerProducer producer = (IPowerProducer) entity;
+	    if (producer.canOutputPower(direction.getOpposite()))
+		return TransportConnectionState.INPUT;
+	}
+	// missed something? don't care about it:
+	return TransportConnectionState.NONE;
     }
+ 
 }
