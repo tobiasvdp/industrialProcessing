@@ -1,9 +1,9 @@
-package ip.industrialProcessing.machines.multiblock.inventory;
+package ip.industrialProcessing.multiblock.block.inventory;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
-import ip.industrialProcessing.machines.multiblock.BlockMultiMachineFrame;
-import ip.industrialProcessing.machines.multiblock.MachineFrameState;
+import ip.industrialProcessing.multiblock.BlockMultiMachineFrame;
+import ip.industrialProcessing.multiblock.MachineFrameState;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;

@@ -1,4 +1,4 @@
-package ip.industrialProcessing.machines.multiblock;
+package ip.industrialProcessing.multiblock;
 
 public interface IMultiblockTileEntityCore {
 

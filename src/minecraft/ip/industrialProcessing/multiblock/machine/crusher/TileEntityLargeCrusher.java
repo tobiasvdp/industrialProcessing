@@ -1,10 +1,10 @@
-package ip.industrialProcessing.machines.multiblock.crusher;
+package ip.industrialProcessing.multiblock.machine.crusher;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
-import ip.industrialProcessing.machines.multiblock.MultiBlockStructure;
-import ip.industrialProcessing.machines.multiblock.MultiBlockStructureBlockDescription;
-import ip.industrialProcessing.machines.multiblock.TileEntityMultiMachineCore;
+import ip.industrialProcessing.multiblock.MultiBlockStructure;
+import ip.industrialProcessing.multiblock.MultiBlockStructureBlockDescription;
+import ip.industrialProcessing.multiblock.TileEntityMultiMachineCore;
 
 public class TileEntityLargeCrusher extends TileEntityMultiMachineCore {
 

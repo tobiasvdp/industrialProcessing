@@ -1,13 +1,13 @@
-package ip.industrialProcessing.machines.multiblock;
+package ip.industrialProcessing.multiblock;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class BlockMultiMachineInventory extends BlockContainer {
+public class BlockMultiMachineTanks extends BlockContainer {
 
-	protected BlockMultiMachineInventory(int par1, Material par2Material) {
+	protected BlockMultiMachineTanks(int par1, Material par2Material) {
 		super(par1, par2Material);
 		// TODO Auto-generated constructor stub
 	}

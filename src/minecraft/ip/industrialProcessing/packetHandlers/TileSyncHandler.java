@@ -3,7 +3,7 @@ package ip.industrialProcessing.packetHandlers;
 import ip.industrialProcessing.PacketHandler;
 import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
-import ip.industrialProcessing.machines.multiblock.machineFrame.TileEntityMachineFrame; 
+import ip.industrialProcessing.multiblock.block.frame.TileEntityMachineFrame;
 import ip.industrialProcessing.utils.working.ServerWorker;
 
 import java.io.ByteArrayInputStream;
