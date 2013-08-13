@@ -3,12 +3,14 @@ package ip.industrialProcessing.machines.blastFurnace;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.machines.BlockMachineRendered;
+import ip.industrialProcessing.machines.MachineItemStack;
 
 public class BlockBlastFurnace extends BlockMachineRendered {
 
@@ -30,7 +32,7 @@ public class BlockBlastFurnace extends BlockMachineRendered {
 		if (((TileEntityBlastFurnace) tileEntity).isDummyBlock(world,x,y,z))
 			player.openGui(IndustrialProcessing.instance, 0, world, x, y-1, z);
 		else
-			if (((TileEntityBlastFurnace) tileEntity).hasDummyBlock(world,x,y,z))
+			//if (((TileEntityBlastFurnace) tileEntity).hasDummyBlock(world,x,y,z))
 			player.openGui(IndustrialProcessing.instance, 0, world, x, y, z);
 		return true;
 	}
