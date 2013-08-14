@@ -1,6 +1,7 @@
 package ip.industrialProcessing.multiblock;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.multiblock.utils.MultiblockUtils;
 import ip.industrialProcessing.utils.inventories.InventoryUtils;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.StepSound;
@@ -10,9 +11,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public abstract class BlockMultiMachineCore extends BlockContainer {
+public abstract class BlockMultiblockCore extends BlockContainer {
 
-	protected BlockMultiMachineCore(int par1, Material par2Material,
+	protected BlockMultiblockCore(int par1, Material par2Material,
 			float hardness, StepSound stepSound, String name, CreativeTabs tab) {
 		super(par1, par2Material);
 		setHardness(hardness);
@@ -30,18 +31,24 @@ public abstract class BlockMultiMachineCore extends BlockContainer {
 	}
 
 	static void breakUpdate(World world, int x, int y, int z, int blockId) {
-		MultiblockUtils.breakCore(world, x, y, z);
+		ITileEntityMultiblockCore core = (ITileEntityMultiblockCore) world.getBlockTileEntity(x, y, z);
+			if (core != null) {
+				world.setBlockToAir(x, y, z);
+			}
 	}
 
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, int par5) {
-
-		MultiblockUtils.coreNeighborUpdate(world, x, y, z); 
+		ITileEntityMultiblockCore core = (ITileEntityMultiblockCore) world.getBlockTileEntity(x, y, z);
+		if (core != null) {
+			//if (core.getState())
+			//if (!core.checkStructure())
+				world.notifyBlocksOfNeighborChange(x, y, z, world.getBlockId(x, y, z));
+		}
 		super.onNeighborBlockChange(world, x, y, z, par5);
 
 	}
  
-	
 	@Override
 	public boolean isOpaqueCube() {
 		return false;

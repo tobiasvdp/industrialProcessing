@@ -38,8 +38,7 @@ import ip.industrialProcessing.machines.magneticSeparator.BlockMagneticSeparator
 import ip.industrialProcessing.machines.magneticSeparator.TileEntityMagneticSeparator;
 import ip.industrialProcessing.machines.mixer.BlockMixer;
 import ip.industrialProcessing.machines.mixer.TileEntityMixer;
-import ip.industrialProcessing.multiblock.MachineFrameState;
-import ip.industrialProcessing.multiblock.TileEntityMultiMachineFrame;
+import ip.industrialProcessing.multiblock.TileEntityMultiblockBlock;
 import ip.industrialProcessing.machines.thickener.BlockThickener;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
 import ip.industrialProcessing.multiblock.block.frame.BlockMachineFrame;
@@ -48,6 +47,7 @@ import ip.industrialProcessing.multiblock.block.inventory.BlockMultiMachineInput
 import ip.industrialProcessing.multiblock.block.inventory.TileEntityMultiMachineInput;
 import ip.industrialProcessing.multiblock.machine.crusher.BlockLargeCrusher;
 import ip.industrialProcessing.multiblock.machine.crusher.TileEntityLargeCrusher;
+import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import ip.industrialProcessing.power.buildcraftGenerator.BlockBuildcraftGenerator;
 import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
 import ip.industrialProcessing.power.manualGenerator.BlockManualGenerator;

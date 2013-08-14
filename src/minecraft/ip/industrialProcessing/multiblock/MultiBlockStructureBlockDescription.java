@@ -46,7 +46,7 @@ public class MultiBlockStructureBlockDescription {
 				&& containsBlock(blockId2);
 	}
 
-	private boolean containsBlock(int block)
+	public boolean containsBlock(int block)
 	{
 		for(int i = 0; i < this.blockIDs.length; i++)
 		{

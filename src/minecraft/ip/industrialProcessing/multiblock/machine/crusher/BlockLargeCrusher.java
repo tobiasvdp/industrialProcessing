@@ -8,9 +8,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
-import ip.industrialProcessing.multiblock.BlockMultiMachineCore;
+import ip.industrialProcessing.multiblock.BlockMultiblockCore;
 
-public class BlockLargeCrusher extends BlockMultiMachineCore {
+public class BlockLargeCrusher extends BlockMultiblockCore {
 
 	public BlockLargeCrusher() {
 		super(ConfigMachineBlocks.getLargeCrusherBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Large Crusher", IndustrialProcessing.tabOreProcessing);
@@ -20,5 +20,4 @@ public class BlockLargeCrusher extends BlockMultiMachineCore {
 	public TileEntity createNewTileEntity(World world) { 
 		return new TileEntityLargeCrusher();
 	}
-
 }

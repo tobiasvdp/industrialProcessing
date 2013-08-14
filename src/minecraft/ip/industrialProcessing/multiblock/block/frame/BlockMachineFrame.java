@@ -7,11 +7,11 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
-import ip.industrialProcessing.multiblock.BlockMultiMachineFrame;
-import ip.industrialProcessing.multiblock.IMultiblockTileEntityFrame;
-import ip.industrialProcessing.multiblock.MachineFrameState;
+import ip.industrialProcessing.multiblock.BlockMultiblockBlock;
+import ip.industrialProcessing.multiblock.ITileEntityMultiblockBlock;
+import ip.industrialProcessing.multiblock.utils.MultiblockState;
 
-public class BlockMachineFrame extends BlockMultiMachineFrame {
+public class BlockMachineFrame extends BlockMultiblockBlock {
 
 	public BlockMachineFrame() {
 
@@ -27,7 +27,7 @@ public class BlockMachineFrame extends BlockMultiMachineFrame {
 
 	@Override
 	protected Icon registerIcon(IconRegister par1IconRegister,
-			MachineFrameState state) { 
+			MultiblockState state) { 
 		switch (state) {
 		case COMPLETED:
 			return par1IconRegister

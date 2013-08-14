@@ -2,47 +2,33 @@ package ip.industrialProcessing.multiblock.machine.crusher;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
-import ip.industrialProcessing.multiblock.MultiBlockStructure;
 import ip.industrialProcessing.multiblock.MultiBlockStructureBlockDescription;
-import ip.industrialProcessing.multiblock.TileEntityMultiMachineCore;
+import ip.industrialProcessing.multiblock.TileEntityMultiblockCore;
+import ip.industrialProcessing.multiblock.utils.MultiblockLayout;
+import ip.industrialProcessing.multiblock.utils.MultiblockUtils;
 
-public class TileEntityLargeCrusher extends TileEntityMultiMachineCore {
+public class TileEntityLargeCrusher extends TileEntityMultiblockCore {
 
-	private static MultiBlockStructure crusherStructure;
+	private static MultiblockLayout layout;
 
 	static { 
 		int inputId = ConfigMachineBlocks.getMultiMachineInputBlockID();
-		int frameId = ConfigMachineBlocks.getMachineFrameBlockID(); 
-		int blockId[][][] = new int[3][3][3];
+		int frameId = ConfigMachineBlocks.getMachineFrameBlockID();
 		
-		for (int i = 0;i<3;i++){
-			for (int j = 0;j<3;j++){
-				for (int k = 0;k<3;k++){
-					if (blockId[i][j][k] != -1){
-						blockId[i][j][k] = -1;
-					}
-				}
-			}
-		}
+		layout = new MultiblockLayout(1, 1, 1, 1, 1, 1);
+		layout.setCoreID(IndustrialProcessing.blockLargeCrusher.blockID);
+		layout.addBlockIDRelative(-1, 0,  0,inputId);
+		layout.addBlockIDRelative(1,  0,  0,inputId);
+		layout.addBlockIDRelative(0, -1,  0,inputId);
+		layout.addBlockIDRelative(0,  1,  0,inputId);
+		layout.addBlockIDRelative(0,  0, -1,inputId);
+		layout.addBlockIDRelative(0,  0,  1,inputId);
+		layout.fillBlockID(frameId);
 		
-		blockId[0][1][1]=inputId;
-		blockId[2][1][1]=frameId;
-		
-		crusherStructure = new MultiBlockStructure();
-		
-		for (int i = 0;i<3;i++){
-			for (int j = 0;j<3;j++){
-				for (int k = 0;k<3;k++){
-					if (blockId[i][j][k] != -1){
-						crusherStructure.addStructure(new MultiBlockStructureBlockDescription(i-1,j-1,k-1,blockId[i][j][k]));
-					}
-				}
-			}
-		} 
 	}
 
 	public TileEntityLargeCrusher() {
-		super(crusherStructure);
+		super(layout);
 	}
 	 
 

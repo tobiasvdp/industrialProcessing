@@ -2,8 +2,8 @@ package ip.industrialProcessing.multiblock.block.inventory;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
-import ip.industrialProcessing.multiblock.BlockMultiMachineFrame;
-import ip.industrialProcessing.multiblock.MachineFrameState;
+import ip.industrialProcessing.multiblock.BlockMultiblockBlock;
+import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -12,7 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
-public class BlockMultiMachineInput extends BlockMultiMachineFrame {
+public class BlockMultiMachineInput extends BlockMultiblockBlock {
 
 	private Icon completedIcon;
 	private Icon connectedIcon;
@@ -30,7 +30,7 @@ public class BlockMultiMachineInput extends BlockMultiMachineFrame {
 
 	@Override
 	protected Icon registerIcon(IconRegister par1IconRegister,
-			MachineFrameState state) { 
+			MultiblockState state) { 
 		switch (state) {
 		case COMPLETED:
 			return par1IconRegister

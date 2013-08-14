@@ -1,13 +1,16 @@
 package ip.industrialProcessing.multiblock;
 
-public interface IMultiblockTileEntityCore {
+import ip.industrialProcessing.multiblock.utils.MultiblockState;
 
-	boolean isStructureComplete();
-	void checkStructure();
+public interface ITileEntityMultiblockCore {
+
+	boolean isMultiblock();
+	boolean checkStructure();
 	void breakEntireStructure();
 	boolean isPartOfStructure(int x, int y, int z, int blockId);
 
 	int getCoreX();
 	int getCoreY();
 	int getCoreZ();
+	MultiblockState getState();
 }
