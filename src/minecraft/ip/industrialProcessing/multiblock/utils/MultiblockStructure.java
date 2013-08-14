@@ -1,20 +1,22 @@
-package ip.industrialProcessing.multiblock;
+package ip.industrialProcessing.multiblock.utils;
 
+import ip.industrialProcessing.multiblock.MultiBlockStructureBlockDescription;
+import ip.industrialProcessing.multiblock.TileEntityMultiblockBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class MultiblockStructure {
-		protected MultiBlockStructureBlockDescription[][][] layout;
-		protected int xCore;
-		protected int yCore;
-		protected int zCore;
-		protected int sizeLeft;
-		protected int sizeRight;
-		protected int sizeDown;
-		protected int sizeUp ;
-		protected int sizeBack;
-		protected int sizeFront;
-		
+	protected MultiBlockStructureBlockDescription[][][] layout;
+	protected int xCore;
+	protected int yCore;
+	protected int zCore;
+	protected int sizeLeft;
+	protected int sizeRight;
+	protected int sizeDown;
+	protected int sizeUp;
+	protected int sizeBack;
+	protected int sizeFront;
+
 	public MultiblockStructure(int blocksLeft, int blocksRight, int blocksFront, int blocksBack, int blocksUp, int blocksDown) {
 		layout = new MultiBlockStructureBlockDescription[blocksLeft + blocksRight + 1][blocksUp + blocksDown + 1][blocksFront + blocksBack + 1];
 		xCore = blocksLeft;
@@ -27,7 +29,8 @@ public class MultiblockStructure {
 		sizeBack = blocksBack;
 		sizeFront = blocksFront;
 	}
-	public MultiblockStructure(MultiblockStructure original,int angle){
+
+	public MultiblockStructure(MultiblockStructure original, int angle) {
 		layout = original.layout;
 		xCore = original.xCore;
 		yCore = original.yCore;
@@ -38,14 +41,15 @@ public class MultiblockStructure {
 		sizeUp = original.sizeUp;
 		sizeBack = original.sizeBack;
 		sizeFront = original.sizeFront;
-		for (int i = 0;i<angle;i++){
+		for (int i = 0; i < angle; i++) {
 			transformToAngle();
 		}
 	}
+
 	/*
 	 * Turns the provides structure 90deg
 	 */
-	public MultiblockStructure(MultiblockStructure original){
+	public MultiblockStructure(MultiblockStructure original) {
 		layout = original.layout;
 		xCore = original.xCore;
 		yCore = original.yCore;
@@ -92,6 +96,41 @@ public class MultiblockStructure {
 		layout[hor + xCore][ver + yCore][depth + zCore] = new MultiBlockStructureBlockDescription(hor, ver, depth, blockIDs);
 	}
 
+	public void fillLayer(int hor, int ver, int depth, int... blockIDs) {
+		if (hor != -1) {
+			int i = hor;
+			for (int j = 0; j < layout[i].length; j++) {
+				for (int k = 0; k < layout[i][j].length; k++) {
+					if (layout[i][j][k] == null) {
+						addBlockID(i, j, k, blockIDs);
+					}
+				}
+			}
+		}
+		if (ver != -1) {
+			for (int i = 0; i < layout.length; i++) {
+				int j = ver;
+				for (int k = 0; k < layout[i][j].length; k++) {
+					if (layout[i][j][k] == null) {
+						addBlockID(i, j, k, blockIDs);
+					}
+				}
+
+			}
+		}
+		if (depth != -1) {
+			for (int i = 0; i < layout.length; i++) {
+				for (int j = 0; j < layout[i].length; j++) {
+					int k = depth;
+					if (layout[i][j][k] == null) {
+						addBlockID(i, j, k, blockIDs);
+					}
+
+				}
+			}
+		}
+	}
+
 	public void addBlockID(int hor, int ver, int depth, int... blockIDs) {
 		layout[hor][ver][depth] = new MultiBlockStructureBlockDescription(hor - xCore, ver - yCore, depth - zCore, blockIDs);
 	}
@@ -116,11 +155,12 @@ public class MultiblockStructure {
 		for (int i = 0; i < layout.length; i++) {
 			for (int j = 0; j < layout[0].length; j++) {
 				for (int k = 0; k < layout[0][0].length; k++) {
-					if (layout[i][j][k] != null){
-					if (layout[i][j][k].getX() == x)
-						if (layout[i][j][k].getY() == y)
-							if (layout[i][j][k].getZ() == z)
-								return layout[i][j][k];
+					if (layout[i][j][k] != null) {
+						if (layout[i][j][k].getX() == x)
+							if (layout[i][j][k].getY() == y)
+								if (layout[i][j][k].getZ() == z)
+									return layout[i][j][k];
+						System.out.println(i + " " + j + " " + k);
 					}
 				}
 			}
@@ -131,7 +171,7 @@ public class MultiblockStructure {
 	public boolean hasDiscriptionBlockId(int i, int j, int k, int blockId, boolean relative) {
 		boolean isValid;
 		MultiBlockStructureBlockDescription desc = null;
-		if (!relative){
+		if (!relative) {
 			i -= xCore;
 			j -= yCore;
 			k -= zCore;
@@ -167,14 +207,14 @@ public class MultiblockStructure {
 					z = temp;
 					MultiBlockStructureBlockDescription desc = null;
 					if (this.layout[i][j][k] != null)
-						desc =  this.layout[i][j][k].copy(x, j-1, z);
-					x +=  xCore;
-					z +=  zCore;
+						desc = this.layout[i][j][k].copy(x, j - 1, z);
+					x += xCore;
+					z += zCore;
 					layout[x][j][z] = desc;
 				}
 			}
 		}
-		
+
 		this.layout = layout;
 		this.xCore = blocksLeft;
 		this.yCore = blocksDown;
@@ -199,21 +239,27 @@ public class MultiblockStructure {
 						}
 					}
 					if (!hasDiscriptionBlockId(i, j, k, blockId, false))
-						return false;
+						if (hasDiscription(i, j, k))
+							return false;
 				}
 			}
 		}
 		return true;
 	}
 
-	public boolean hasDiscription(int x, int y, int z, int blockId) {
+	public boolean hasDiscription(int x, int y, int z) {
+		x -= xCore;
+		y -= yCore;
+		z -= zCore;
 		for (int i = 0; i < layout.length; i++) {
 			for (int j = 0; j < layout[0].length; j++) {
 				for (int k = 0; k < layout[0][0].length; k++) {
-					if (layout[i][j][k].getX() == x)
-						if (layout[i][j][k].getY() == y)
-							if (layout[i][j][k].getZ() == z)
-								return true;
+					if (layout[i][j][k] != null) {
+						if (layout[i][j][k].getX() == x)
+							if (layout[i][j][k].getY() == y)
+								if (layout[i][j][k].getZ() == z)
+									return true;
+					}
 				}
 			}
 		}

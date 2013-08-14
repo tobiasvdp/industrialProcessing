@@ -68,9 +68,11 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 		if (layout.checkLayout(worldObj, xCoord, yCoord, zCoord)) {
 			state = MultiblockState.COMPLETED;
 			isMultiblock = true;
+			layout.locked = true;
 		} else {
 			state = MultiblockState.CONNECTED;
 			isMultiblock = false;
+			layout.locked = false;
 		}
 
 		if (this.state != state) {
