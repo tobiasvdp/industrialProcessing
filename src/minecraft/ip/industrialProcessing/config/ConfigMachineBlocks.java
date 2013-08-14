@@ -24,6 +24,7 @@ import ip.industrialProcessing.power.meters.TileEntityAmpMeter;
 import ip.industrialProcessing.power.meters.TileEntityVoltMeter;
 import ip.industrialProcessing.power.storage.TileEntityBatteryBox;
 import ip.industrialProcessing.power.wire.TileEntityWire;
+import ip.industrialProcessing.transport.fluids.TileEntityPump;
 import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids;
 import net.minecraft.block.Block;
 import net.minecraft.src.ModLoader;
@@ -64,7 +65,7 @@ public class ConfigMachineBlocks {
 	private int wireBlockID = 900;
 	private int voltMeterBlockID = 901;
 	private int ampMeterBlockID = 902;
-	private int batteryBoxBlockID = 903;
+	private int batteryBoxBlockID = 903; 
 
 	public void registerMachineBlocks() {
 		//machines
@@ -88,7 +89,8 @@ public class ConfigMachineBlocks {
 		registerMachineBlock(IndustrialProcessing.blockLargeCrusher, "IP.Machine.Multi.Crusher", "Large Crusher", TileEntityLargeCrusher.class);
 
 		//transport
-		registerMachineBlock(IndustrialProcessing.blockTransportFluids, "IP.Transport.Fluids", "Liquid pipe", TileEntityTransportFluids.class);
+		registerMachineBlock(IndustrialProcessing.blockTransportFluids, "IP.Transport.Fluids", "Fluid pipe", TileEntityTransportFluids.class);
+		registerMachineBlock(IndustrialProcessing.blockPump, "IP.Transport.Fluids.Pump", "Fluid pump", TileEntityPump.class);
 		
 		//power
 		registerMachineBlock(IndustrialProcessing.blockWire, "IP.Wire", "Wire", TileEntityWire.class);
@@ -197,6 +199,6 @@ public class ConfigMachineBlocks {
 	}
 	public static int getOxygenFurnaceID() {
 		return getInstance().oxygenFurnaceID;
-	}
+	} 
 
 }

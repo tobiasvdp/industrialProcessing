@@ -28,10 +28,18 @@ import ip.industrialProcessing.machines.IMachineTanks;
 import ip.industrialProcessing.machines.MachineFluidTank;
 import ip.industrialProcessing.transport.TileEntityTransport;
 import ip.industrialProcessing.transport.TransportConnectionState;
+import ip.industrialProcessing.utils.FluidTransfers;
 
 public class TileEntityTransportFluids extends TileEntityTransport {
 
     FluidTank fluid = new FluidTank(1000);
+    int pressure = 0;
+    private static int tileID;
+    private int id;
+
+    public TileEntityTransportFluids() {
+	this.id = tileID++;
+    }
 
     public FluidTankInfo getTankInfo() {
 	return fluid.getInfo();
@@ -46,6 +54,13 @@ public class TileEntityTransportFluids extends TileEntityTransport {
 						       // made (lava pipe with
 						       // water pipe ..)
 
+	if (entity instanceof TileEntityPump) {
+	    TileEntityPump pump = (TileEntityPump) entity;
+	    if (pump.isFluidOuptut(from))
+		return TransportConnectionState.OUTPUT;
+	    if (pump.isFluidInput(from))
+		return TransportConnectionState.INPUT;
+	}
 	if (entity instanceof IFluidHandler) {
 	    IFluidHandler handler = (IFluidHandler) entity;
 	    return canInsertOrExtractFluid(handler, from);
@@ -66,103 +81,118 @@ public class TileEntityTransportFluids extends TileEntityTransport {
 	super.updateEntity();
 	if (this.worldObj.isRemote)
 	    return;
-
+	handlePumps();
 	outputToInputs();
 	inputFromOutputs();
-	equalizeToOtherPipes(); 
+	equalizeToOtherPipes();
+	leakPressure();
+    }
+
+    private void leakPressure() {
+	if (this.pressure > 0)
+	    this.pressure--;
+	if (this.pressure < 0)
+	    this.pressure++;
+    }
+
+    private void handlePumps() {
+	for (int i = 0; i < states.length; i++) {
+	    TransportConnectionState state = this.states[i];
+	    ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[i];
+	    if (state == TransportConnectionState.INPUT || state == TransportConnectionState.OUTPUT) {
+		TileEntityPump pump = getNeighborPump(direction);
+		if (pump != null) {
+		    int lastPressure = this.pressure;
+		    if (pump.isFluidInput(direction.getOpposite())) {
+			int pumpPressure = pump.getInputPressure();
+
+			int flow = pumpPressure - this.pressure;
+			if (flow < 0) {
+
+			    pumpPressure -= flow / 4;
+			    this.pressure += flow / 4;
+
+			    FluidTransfers.transfer(-flow / 2, this.fluid, pump.getTank()); 
+			}
+			pump.setInputPressure(pumpPressure);
+
+		    } else if (pump.isFluidOuptut(direction.getOpposite())) {
+			int pumpPressure = pump.getOutputPressure();
+
+			int flow = pumpPressure - this.pressure;
+			if (flow > 0) {
+
+			    pumpPressure -= flow / 4;
+			    this.pressure += flow / 4;
+
+ 
+			    FluidTransfers.transfer(flow / 2, pump.getTank(), this.fluid); 
+			}
+			pump.setOutputPressure(pumpPressure);
+		    }
+		}
+	    }
+	}
     }
 
     private void equalizeToOtherPipes() {
-	TileEntityTransportFluids[] otherPipes = new TileEntityTransportFluids[states.length];
-	int[] balances = new int[states.length];
-	int balance = 0;
 	for (int i = 0; i < states.length; i++) {
 	    TransportConnectionState state = this.states[i];
 	    ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[i];
 	    if (state == TransportConnectionState.TRANSPORT) {
 		TileEntityTransportFluids other = getNeighborPipe(direction);
 		if (other != null) {
-		    int diff = (int)Math.ceil((this.fluid.getFluidAmount() - other.fluid.getFluidAmount()) / 2d);
-		    if (diff > 0) {
-			balance += balances[i] = diff;
-			otherPipes[i] = other;
+		    int flow = other.pressure - this.pressure;
+		    if (flow > 0) {
+			System.out.println(String.format("transfer from %s %s to %s %s by %s", other.id, other.pressure, this.id, this.pressure, flow / 4));
+			other.pressure -= flow / 4;
+			this.pressure += flow / 4; 
+
+			FluidTransfers.transfer(flow / 2, other.fluid, this.fluid); 
 		    }
 		}
-	    }
-	}
-
-	for (int i = 0; i < balances.length; i++) {
-	    TileEntityTransportFluids other = otherPipes[i];
-	    if (other != null) {
-		FluidStack fluidStack = this.fluid.drain(balances[i], false);
-		int amount = other.fluid.fill(fluidStack, true);
-		this.fluid.drain(amount, true);
 	    }
 	}
     }
 
     private void inputFromOutputs() {
-	IFluidHandler[] handlers = new IFluidHandler[states.length];
-	int[] availableAmounts = new int[states.length];
-	int totalOutput = 0;
-	FluidStack drain = this.fluid.getFluid();
-	if (drain != null) {
-	    drain = drain.copy();
-	    drain.amount = this.fluid.getCapacity() - drain.amount;
-	}
-	int maxOutput = this.fluid.getCapacity() - this.fluid.getFluidAmount();
-	for (int i = 0; i < states.length; i++) {
-	    TransportConnectionState state = this.states[i];
-	    ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[i];
-	    if (state == TransportConnectionState.OUTPUT || state == TransportConnectionState.DUAL) {
-		IFluidHandler handler = getNeighborFluidHandler(direction);
-		if (handler != null && (drain == null || handler.canDrain(direction.getOpposite(), drain.getFluid()))) {
-		    handlers[i] = handler;
-		    FluidStack output = drain == null ? handler.drain(direction.getOpposite(), this.fluid.getCapacity(), false) : handler.drain(direction.getOpposite(), drain, false);
-		    if (output != null)
-			totalOutput += availableAmounts[i] = output.amount;
-		}
-	    }
-	} 
-	if (totalOutput > 0) {
-	    for (int i = 0; i < handlers.length; i++) {
-		IFluidHandler handler = handlers[i];
-		if (handler != null) {
-		    ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[i];
-		    int output = availableAmounts[i] * maxOutput / totalOutput;
-		    FluidStack stack = handler.drain(direction.getOpposite(), output, true);
-		    this.fluid.fill(stack, true);
+	if (pressure < 0) {
+	    for (int i = 0; i < states.length; i++) {
+		TransportConnectionState state = this.states[i];
+		ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[i];
+		ForgeDirection from = direction.getOpposite();
+		if (state == TransportConnectionState.DUAL) {
+		    IFluidHandler other = getNeighborFluidHandler(direction);
+		    if (other != null) {
+			int flow = 0 - this.pressure;
+			if (flow > 0) {
+			    // other.pressure -= flow / 4;
+			    this.pressure += flow / 4; 
+
+			    FluidTransfers.transfer(flow / 2, other, from, this.fluid); 
+			}
+		    }
 		}
 	    }
 	}
     }
 
     private void outputToInputs() {
-
-	FluidStack fluid = this.fluid.getFluid();
-	if (fluid != null) {
-	    IFluidHandler[] handlers = new IFluidHandler[states.length];
-	    int inputCount = 0;
+	if (this.pressure > 0) {
 	    for (int i = 0; i < states.length; i++) {
 		TransportConnectionState state = this.states[i];
 		ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[i];
-		if (state == TransportConnectionState.INPUT || state == TransportConnectionState.DUAL) {
-		    IFluidHandler handler = getNeighborFluidHandler(direction);
-		    if (handler != null && handler.canFill(direction.getOpposite(), fluid.getFluid())) {
-			handlers[i] = handler;
-			inputCount++;
-		    }
-		}
-	    }
-	    if (inputCount > 0) {
-		fluid.copy();
-		fluid.amount /= inputCount;
-		for (int i = 0; i < handlers.length; i++) {
-		    IFluidHandler handler = handlers[i];
-		    if (handler != null) {
-			ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[i];
-			int amount = handler.fill(direction.getOpposite(), fluid, true);
-			this.fluid.drain(amount, true);
+		ForgeDirection from = direction.getOpposite();
+		if (state == TransportConnectionState.DUAL) {
+		    IFluidHandler other = getNeighborFluidHandler(direction);
+		    if (other != null) {
+			int flow = 0 - this.pressure;
+			if (flow < 0) {
+			    // other.pressure -= flow / 4;
+			    this.pressure += flow / 4;
+
+			    FluidTransfers.transfer(-flow / 2, this.fluid, other, from);
+			}
 		    }
 		}
 	    }
@@ -180,6 +210,13 @@ public class TileEntityTransportFluids extends TileEntityTransport {
 	TileEntity ent = this.worldObj.getBlockTileEntity(this.xCoord + direction.offsetX, this.yCoord + direction.offsetY, this.zCoord + direction.offsetZ);
 	if (ent instanceof TileEntityTransportFluids)
 	    return (TileEntityTransportFluids) ent;
+	return null;
+    }
+
+    private TileEntityPump getNeighborPump(ForgeDirection direction) {
+	TileEntity ent = this.worldObj.getBlockTileEntity(this.xCoord + direction.offsetX, this.yCoord + direction.offsetY, this.zCoord + direction.offsetZ);
+	if (ent instanceof TileEntityPump)
+	    return (TileEntityPump) ent;
 	return null;
     }
 }

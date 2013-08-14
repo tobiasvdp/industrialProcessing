@@ -28,6 +28,7 @@ import ip.industrialProcessing.power.meters.BlockAmpMeter;
 import ip.industrialProcessing.power.meters.BlockVoltMeter;
 import ip.industrialProcessing.power.storage.BlockBatteryBox;
 import ip.industrialProcessing.power.wire.BlockWire;
+import ip.industrialProcessing.transport.fluids.BlockPump;
 import ip.industrialProcessing.transport.fluids.BlockTransportFluids;
 
 public interface ISetupMachineBlocks {
@@ -64,4 +65,5 @@ public interface ISetupMachineBlocks {
 	
 	// create fluidpipe
 	public final static BlockTransportFluids blockTransportFluids = new BlockTransportFluids();
+	public final static BlockPump blockPump = new BlockPump();
 }
