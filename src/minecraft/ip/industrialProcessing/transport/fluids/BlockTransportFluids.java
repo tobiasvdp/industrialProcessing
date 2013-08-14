@@ -22,9 +22,7 @@ import ip.industrialProcessing.transport.BlockTransport;
 public class BlockTransportFluids extends BlockTransport {
 
     public BlockTransportFluids() {
-	// super(ConfigTransportBlocks.BlockTransportFluidsID(),
-	// "BlockTransportFluids");
-	super(ConfigTransportBlocks.BlockTransportFluidsID(), Material.glass, 1F, Block.soundGlassFootstep, "Fluid Transport Pipe", IndustrialProcessing.tabOreProcessing);
+	super(ConfigTransportBlocks.getBlockTransportFluidsID(), Material.glass, 1F, Block.soundGlassFootstep, "Fluid Transport Pipe", IndustrialProcessing.tabOreProcessing);
     }
 
     @Override
@@ -39,7 +37,7 @@ public class BlockTransportFluids extends BlockTransport {
 	int level = info.fluid == null ? 0 : info.fluid.amount;
 	String name = info.fluid == null ? "" : info.fluid.getFluid().getName();
 	String side = par1World.isRemote ? "client" : "server";
-	par5EntityPlayer.addChatMessage(side + " " + name + " level: " + level + "mB");
+	par5EntityPlayer.addChatMessage(side + " " + name + " level: " + level + "mB " + entity.pressure + " mbar");
 	return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer, par6, par7, par8, par9);
 
     }
