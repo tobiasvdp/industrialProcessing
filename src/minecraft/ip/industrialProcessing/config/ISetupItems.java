@@ -34,7 +34,7 @@ public interface ISetupItems {
     public final static ItemIP itemSulfur = new ItemIP(ConfigItems.ItemSulfurID(), "ItemSulfur",IndustrialProcessing.tabOres);
     
     //Iron blast furnace
-    public final static ItemIP itemIronOxidePellets = new ItemIP(ConfigItems.ItemIronOxidePelletsID(), "IitemIronOxidePellets",IndustrialProcessing.tabOres);
+    public final static ItemIP itemIronOxidePellets = new ItemIP(ConfigItems.ItemIronOxidePelletsID(), "ItemIronOxidePellets",IndustrialProcessing.tabOres);
     public final static ItemIP itemCalcareousSinterDust = new ItemIP(ConfigItems.ItemCalcareousSinterDustID(), "ItemCalcareousSinterDust",IndustrialProcessing.tabOres);
     public final static ItemIP itemCokes = new ItemIP(ConfigItems.ItemCokesID(), "ItemCokes",IndustrialProcessing.tabOres);
     public final static ItemIP itemSlag = new ItemIP(ConfigItems.ItemSlagID(), "ItemSlag",IndustrialProcessing.tabOres);
