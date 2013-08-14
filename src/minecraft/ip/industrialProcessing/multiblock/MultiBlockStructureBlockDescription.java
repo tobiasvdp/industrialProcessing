@@ -17,6 +17,9 @@ public class MultiBlockStructureBlockDescription {
 		this.z = z;
 		this.blockIDs = blockIDs;
 	}
+	public MultiBlockStructureBlockDescription copy(int x,int y,int z){
+		return new MultiBlockStructureBlockDescription(x,y,z,this.blockIDs);
+	}
 
 	public int getX() {
 		return x;

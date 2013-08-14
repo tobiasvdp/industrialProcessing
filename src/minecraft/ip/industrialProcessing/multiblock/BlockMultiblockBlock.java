@@ -45,8 +45,9 @@ public abstract class BlockMultiblockBlock extends BlockContainer {
 				// TODO: get state from frame, sub-todo: sync frame from server
 				// to client!
 				MultiblockState state = frame.getState();
-
-				state = MultiblockState.values()[par1iBlockAccess.getBlockMetadata(par2, par3, par4)];
+				// state =
+				// MultiblockState.values()[par1iBlockAccess.getBlockMetadata(par2,
+				// par3, par4)];
 				switch (state) {
 				case COMPLETED:
 					return completedIcon;
@@ -81,7 +82,7 @@ public abstract class BlockMultiblockBlock extends BlockContainer {
 	protected abstract Icon registerIcon(IconRegister iconRegister, MultiblockState state);
 
 	@Override
-	public boolean removeBlockByPlayer(World world, EntityPlayer player, int x, int y, int z){
+	public boolean removeBlockByPlayer(World world, EntityPlayer player, int x, int y, int z) {
 		ITileEntityMultiblockBlock block = (ITileEntityMultiblockBlock) world.getBlockTileEntity(x, y, z);
 		if (block != null) {
 			ITileEntityMultiblockCore core = block.getCore(world);
@@ -89,9 +90,9 @@ public abstract class BlockMultiblockBlock extends BlockContainer {
 				world.setBlockToAir(x, y, z);
 				core.checkStructure();
 				world.notifyBlocksOfNeighborChange(x, y, z, 0);
-			}
-			else{
-			world.setBlockToAir(x, y, z);
+				world.markBlockForUpdate(x, y, z);
+			} else {
+				world.setBlockToAir(x, y, z);
 			}
 		}
 		return true;
@@ -102,48 +103,51 @@ public abstract class BlockMultiblockBlock extends BlockContainer {
 		ITileEntityMultiblockBlock block = (ITileEntityMultiblockBlock) world.getBlockTileEntity(x, y, z);
 		if (block != null) {
 			ITileEntityMultiblockCore core = block.getCore(world);
-			if (core != null) {		
-				if (block.getState() != core.getState()){
+			if (core != null) {
+				if (block.getState() != core.getState()) {
 					block.setState(core.getState());
-					world.markBlockForUpdate(x, y, z);
+					if (block.getState() == MultiblockState.DISCONNECTED) {
+						block.setCore(null);
+					}
 					world.notifyBlocksOfNeighborChange(x, y, z, world.getBlockId(x, y, z));
+					world.markBlockForUpdate(x, y, z);
 				}
-			}else{
-				for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS ){
-					TileEntity neighbour = world.getBlockTileEntity(x+dir.offsetX, y+dir.offsetY, z+dir.offsetZ);
-					if (neighbour instanceof ITileEntityMultiblockBlock){
-						if (!block.hasCore()){
-						if (((ITileEntityMultiblockBlock) neighbour).hasCore()){
-							ITileEntityMultiblockCore neighbourCore = ((ITileEntityMultiblockBlock) neighbour).getCore(world);
-							if(neighbourCore.isPartOfStructure(x, y, z, world.getBlockId(x, y, z))){
-								block.setCore(((ITileEntityMultiblockCore)neighbourCore));
-								((ITileEntityMultiblockCore) neighbourCore).checkStructure();
-								if (block.getState() != neighbourCore.getState()){
-									block.setState(((ITileEntityMultiblockCore) neighbourCore).getState());
-									world.markBlockForUpdate(x, y, z);
+			} else {
+				for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+					TileEntity neighbour = world.getBlockTileEntity(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
+					if (neighbour instanceof ITileEntityMultiblockBlock) {
+						if (!block.hasCore()) {
+							if (((ITileEntityMultiblockBlock) neighbour).hasCore()) {
+								if (((ITileEntityMultiblockBlock) neighbour).getCore(world) != null) {
+									ITileEntityMultiblockCore neighbourCore = ((ITileEntityMultiblockBlock) neighbour).getCore(world);
+									if (neighbourCore.isPartOfStructure(x, y, z, world.getBlockId(x, y, z))) {
+										block.setCore(((ITileEntityMultiblockCore) neighbourCore));
+										((ITileEntityMultiblockCore) neighbourCore).checkStructure();
+										if (block.getState() != neighbourCore.getState()) {
+											block.setState(((ITileEntityMultiblockCore) neighbourCore).getState());
+											world.markBlockForUpdate(x, y, z);
+											world.notifyBlocksOfNeighborChange(x, y, z, world.getBlockId(x, y, z));
+										}
+									}
+								}
+							}
+						}
+					} else if (neighbour instanceof ITileEntityMultiblockCore) {
+						if (!block.hasCore()) {
+							if (((ITileEntityMultiblockCore) neighbour).isPartOfStructure(x, y, z, world.getBlockId(x, y, z))) {
+								block.setCore(((ITileEntityMultiblockCore) neighbour));
+								((ITileEntityMultiblockCore) neighbour).checkStructure();
+								if (block.getState() != ((ITileEntityMultiblockCore) neighbour).getState()) {
+									block.setState(((ITileEntityMultiblockCore) neighbour).getState());
 									world.notifyBlocksOfNeighborChange(x, y, z, world.getBlockId(x, y, z));
 								}
-							}	
-						}
-						}
-					}
-					else if(neighbour instanceof ITileEntityMultiblockCore){
-						if (!block.hasCore()){
-						if(((ITileEntityMultiblockCore)neighbour).isPartOfStructure(x, y, z, world.getBlockId(x, y, z))){
-						block.setCore(((ITileEntityMultiblockCore)neighbour));
-						((ITileEntityMultiblockCore) neighbour).checkStructure();
-						if (block.getState() != ((ITileEntityMultiblockCore) neighbour).getState()){
-							block.setState(((ITileEntityMultiblockCore) neighbour).getState());
-							world.notifyBlocksOfNeighborChange(x, y, z, world.getBlockId(x, y, z));
-						}
-						}
+							}
 						}
 					}
 				}
 			}
 		}
 	}
-
 
 	@Override
 	public boolean isOpaqueCube() {

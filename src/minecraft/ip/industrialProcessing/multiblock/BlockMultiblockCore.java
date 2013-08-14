@@ -24,18 +24,17 @@ public abstract class BlockMultiblockCore extends BlockContainer {
 	}
 	
 	@Override
-	public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
+	public boolean removeBlockByPlayer(World world, EntityPlayer player, int x, int y, int z){
 		InventoryUtils.DropInventoryContents(world, x, y, z);
-		breakUpdate(world, x, y, z, this.blockID);
-		super.breakBlock(world, x, y, z, par5, par6);
+		ITileEntityMultiblockCore core = (ITileEntityMultiblockCore) world.getBlockTileEntity(x, y, z);
+		if (core != null) {
+			world.setBlockToAir(x, y, z);
+			core.breakEntireStructure();
+			world.notifyBlocksOfNeighborChange(x, y, z, 0);
+		}
+		return true;
 	}
 
-	static void breakUpdate(World world, int x, int y, int z, int blockId) {
-		ITileEntityMultiblockCore core = (ITileEntityMultiblockCore) world.getBlockTileEntity(x, y, z);
-			if (core != null) {
-				world.setBlockToAir(x, y, z);
-			}
-	}
 
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, int par5) {
