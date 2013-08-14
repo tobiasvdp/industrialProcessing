@@ -25,6 +25,7 @@ import ip.industrialProcessing.power.meters.TileEntityVoltMeter;
 import ip.industrialProcessing.power.storage.TileEntityBatteryBox;
 import ip.industrialProcessing.power.wire.TileEntityWire;
 import ip.industrialProcessing.transport.fluids.TileEntityPump;
+import ip.industrialProcessing.transport.fluids.TileEntityTank;
 import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids;
 import net.minecraft.block.Block;
 import net.minecraft.src.ModLoader;
@@ -91,6 +92,7 @@ public class ConfigMachineBlocks {
 		//transport
 		registerMachineBlock(IndustrialProcessing.blockTransportFluids, "IP.Transport.Fluids", "Fluid pipe", TileEntityTransportFluids.class);
 		registerMachineBlock(IndustrialProcessing.blockPump, "IP.Transport.Fluids.Pump", "Fluid pump", TileEntityPump.class);
+		registerMachineBlock(IndustrialProcessing.blockTank, "IP.Transport.Fluids.Tank", "Fluid Tank", TileEntityTank.class);
 		
 		//power
 		registerMachineBlock(IndustrialProcessing.blockWire, "IP.Wire", "Wire", TileEntityWire.class);

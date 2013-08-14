@@ -14,6 +14,7 @@ public class ConfigRenderers {
     private int rendererTransportFluidID;
     private int rendererBatteryBoxID;
     private int rendererBlastFurnaceID;
+    private int rendererTankID;
 
     public static int getRendererFilterId() {
 	return getInstance().rendererFilterID;
@@ -85,6 +86,14 @@ public class ConfigRenderers {
 
     public static void setRendererTransportFluidsId(int value) {
 	getInstance().rendererTransportFluidID = value;
+    }
+
+    public static int getRendererTankId() {
+	return getInstance().rendererTankID;
+    }
+
+    public static void setRendererTankId(int value) {
+	getInstance().rendererTankID = value;
     }
 
     public static int getRendererBatteryBoxId() {

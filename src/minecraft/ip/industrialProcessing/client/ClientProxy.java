@@ -40,7 +40,9 @@ import ip.industrialProcessing.power.storage.ModelBatteryBox;
 import ip.industrialProcessing.power.storage.TileEntityBatteryBox;
 import ip.industrialProcessing.power.wire.ModelWire;
 import ip.industrialProcessing.power.wire.TileEntityWire; 
+import ip.industrialProcessing.transport.fluids.ModelTank;
 import ip.industrialProcessing.transport.fluids.ModelTransportFluids;
+import ip.industrialProcessing.transport.fluids.TileEntityTank;
 import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids; 
 
 public class ClientProxy extends CommonProxy {
@@ -58,6 +60,7 @@ public class ClientProxy extends CommonProxy {
     private static final ModelAnimatedMachine crankGenerator = new ModelCrankGenerator();
     private static final ModelStateMachine blastFurnace = new ModelBlastFurnace();
     private static final ModelStateMachine blastFurnaceTop = new ModelBlastFurnaceTop();
+    private static final ModelConnected tank = new ModelTank();
     @Override
     public void registerRenderers() {
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFilter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockFilter, "ModelFilter", filter));
@@ -98,6 +101,11 @@ public class ClientProxy extends CommonProxy {
 	ConfigRenderers.setRendererTransportFluidsId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererTransportFluidsId(), new TileEntityTransportFluids()));
 
+	
+	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTank.class, new RendererTileEntityConnected(IndustrialProcessing.blockTank, "ModelTank", tank));
+	ConfigRenderers.setRendererTankId(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererTankId(), new TileEntityTank()));
+	
 	
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBatteryBox.class, new RendererTileEntityAnimated(IndustrialProcessing.blockBatteryBox, "ModelBatteryBox", batteryBox));
 	ConfigRenderers.setRendererBatteryBoxId(RenderingRegistry.getNextAvailableRenderId());
