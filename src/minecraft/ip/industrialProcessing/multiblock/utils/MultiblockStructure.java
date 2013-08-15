@@ -1,6 +1,7 @@
 package ip.industrialProcessing.multiblock.utils;
 
 import ip.industrialProcessing.multiblock.TileEntityMultiblockBlock;
+import ip.industrialProcessing.multiblock.TileEntityMultiblockCore;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -150,32 +151,11 @@ public class MultiblockStructure {
 		return layout[i][j][k];
 	}
 
-	public MultiBlockStructureBlockDescription getRelativeDescription(int x, int y, int z) {
-		for (int i = 0; i < layout.length; i++) {
-			for (int j = 0; j < layout[0].length; j++) {
-				for (int k = 0; k < layout[0][0].length; k++) {
-					if (layout[i][j][k] != null) {
-						if (layout[i][j][k].getX() == x)
-							if (layout[i][j][k].getY() == y)
-								if (layout[i][j][k].getZ() == z)
-									return layout[i][j][k];
-						System.out.println(i + " " + j + " " + k);
-					}
-				}
-			}
-		}
-		return null;
-	}
+	
 
-	public boolean hasDiscriptionBlockId(int i, int j, int k, int blockId, boolean relative) {
+	public boolean hasDiscriptionBlockId(int i, int j, int k, int blockId) {
 		boolean isValid;
-		MultiBlockStructureBlockDescription desc = null;
-		if (!relative) {
-			i -= xCore;
-			j -= yCore;
-			k -= zCore;
-		}
-		desc = getRelativeDescription(i, j, k);
+		MultiBlockStructureBlockDescription desc = layout[i][j][k];
 		if (desc == null)
 			isValid = false;
 		else
@@ -226,7 +206,7 @@ public class MultiblockStructure {
 		sizeFront = blocksFront;
 	}
 
-	public boolean checkLayout(World world, int xCore, int yCore, int zCore) {
+	/*public boolean checkLayout(World world, int xCore, int yCore, int zCore) {
 		for (int i = 0; i < layout.length; i++) {
 			for (int j = 0; j < layout[0].length; j++) {
 				for (int k = 0; k < layout[0][0].length; k++) {
@@ -244,10 +224,48 @@ public class MultiblockStructure {
 			}
 		}
 		return true;
+	}*/
+	public boolean checkLayout(World world, int xCore, int yCore, int zCore) {
+		for (int i = 0; i < layout.length; i++) {
+			for (int j = 0; j < layout[0].length; j++) {
+				for (int k = 0; k < layout[0][0].length; k++) {
+					int blockId = world.getBlockId(xCore - this.xCore + i, yCore - this.yCore + j, zCore - this.zCore + k);
+					if (hasDiscription(i, j, k)){
+						if (!hasDiscriptionBlockId(i, j, k, blockId))
+							return false;
+						TileEntity te = world.getBlockTileEntity(xCore - this.xCore + i, yCore - this.yCore + j, zCore - this.zCore + k);
+						if (te instanceof TileEntityMultiblockBlock) {
+							if (((TileEntityMultiblockBlock) te).hasCore() && !((TileEntityMultiblockBlock) te).getCore().equals(world.getBlockTileEntity(xCore, yCore, zCore))) {
+								return false;
+							}
+						}
+						if (te instanceof TileEntityMultiblockCore) {
+							return false;
+						}
+					}
+				}
+			}
+		}
+		return true;
+	}
+
+	public int getxCore() {
+		return xCore;
+	}
+
+	public int getyCore() {
+		return yCore;
+	}
+
+	public int getzCore() {
+		return zCore;
 	}
 
 	public boolean hasDiscription(int x, int y, int z) {
-		x -= xCore;
+		if(layout[x][y][z]==null)
+			return false;
+		return true;
+		/*x -= xCore;
 		y -= yCore;
 		z -= zCore;
 		for (int i = 0; i < layout.length; i++) {
@@ -262,6 +280,6 @@ public class MultiblockStructure {
 				}
 			}
 		}
-		return false;
+		return false;*/
 	}
 }

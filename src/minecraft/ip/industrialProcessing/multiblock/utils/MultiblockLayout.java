@@ -23,19 +23,15 @@ public class MultiblockLayout {
 		return layouts[angle].getDescription(i, j, k);
 	}
 
-	public MultiBlockStructureBlockDescription getRelativeDescription(int x, int y, int z) {
-		return layouts[angle].getRelativeDescription(x, y, z);
-	}
-
-	public boolean hasDiscriptionBlockId(int i, int j, int k, int blockId, boolean relative) {
+	public boolean hasDiscriptionBlockId(int i, int j, int k, int blockId) {
 		boolean isValid;
-		isValid = layouts[angle].hasDiscriptionBlockId(i, j, k, blockId, relative);
+		isValid = layouts[angle].hasDiscriptionBlockId(i+layouts[angle].getxCore(), j+layouts[angle].getyCore(), k+layouts[angle].getzCore(), blockId);
 		if (!locked) {
 			if (!isValid) {
 				if (angle != 3) {
 					angle += 1;
 					System.out.println("angle set to " + angle);
-					isValid = hasDiscriptionBlockId(i, j, k, blockId, relative);
+					isValid = hasDiscriptionBlockId(i, j, k, blockId);
 				} else {
 					angle = 0;
 					System.out.println("angle set to " + angle);

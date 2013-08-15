@@ -95,6 +95,8 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements IT
 		count++;
 		if (init) {
 			setCore(searchForCore());
+			if (hasCore())
+				getCore().checkStructure();
 			init = false;
 		}
 
@@ -119,6 +121,7 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements IT
 	public void setCore(ITileEntityMultiblockCore core) {
 		if (core != null) {
 			this.setCore(core.getCoreX(), core.getCoreY(), core.getCoreZ());
+			state = MultiblockState.CONNECTED;
 		} else {
 			state = MultiblockState.DISCONNECTED;
 			this.hasCore = false;
@@ -171,20 +174,28 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements IT
 		switch (state){
 		case COMPLETED: {
 			if (getCore() != null){
-				state = getCore().getState();
+				if(getCore().isPartOfStructure(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord)))
+					state = getCore().getState();
+				else
+					setCore(null);
 			}else{
 				setCore(null);
 			}
 			break;}
 		case CONNECTED:{
 			if (getCore() != null){
-				state = getCore().getState();
+				if(getCore().isPartOfStructure(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord)))
+					state = getCore().getState();
+				else
+					setCore(null);
 			}else{
 				setCore(null);
 			}
 			break;}
 		default: {
 			setCore(searchForCore());
+			if (hasCore())
+				getCore().checkStructure();
 		}
 		}
 		if (prevState != state)
@@ -197,10 +208,12 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements IT
 			if (neighbour instanceof ITileEntityMultiblockBlock) {
 				ITileEntityMultiblockBlock tileEntityBlock = (ITileEntityMultiblockBlock) neighbour;
 				if (tileEntityBlock.hasCore()){
+					if(tileEntityBlock.getCore().isPartOfStructure(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord)))
 					return tileEntityBlock.getCore();
 				}
 			} else if (neighbour instanceof ITileEntityMultiblockCore) {
 				ITileEntityMultiblockCore tileEntityCore = (ITileEntityMultiblockCore) neighbour;
+				if(tileEntityCore.isPartOfStructure(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord)))
 				return tileEntityCore;
 			}
 		}

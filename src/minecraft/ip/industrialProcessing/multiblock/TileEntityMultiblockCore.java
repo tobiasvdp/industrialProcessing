@@ -101,7 +101,7 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 		x = x - xCoord;
 		y = y - yCoord;
 		z = z - zCoord;
-		return layout.hasDiscriptionBlockId(x, y, z, blockId, true);
+		return layout.hasDiscriptionBlockId(x, y, z, blockId);
 	}
 
 	@Override
