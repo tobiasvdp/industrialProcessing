@@ -3,6 +3,7 @@ package ip.industrialProcessing.machines;
 import ic2.api.Direction;
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
+import ip.industrialProcessing.client.render.IFluidInfo;
 import ip.industrialProcessing.recipes.IRecipeFluidWorkHandler;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeFluidWorker;
@@ -32,7 +33,7 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 
-public abstract class TileEntityFluidMachine extends TileEntityMachine implements IFluidHandler, IMachineTanks {
+public abstract class TileEntityFluidMachine extends TileEntityMachine implements IFluidHandler, IMachineTanks, IFluidInfo {
 
     private int[][] fluidTankSideslots = new int[6][0];
     private ArrayList<MachineFluidTank> fluidTanks = new ArrayList<MachineFluidTank>();
@@ -417,5 +418,13 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine implement
 
     public int getTankCount() {
 	return this.fluidTanks.size();
+    }
+    @Override
+    public FluidTankInfo[] getTanks() { 
+	FluidTankInfo[] info = new FluidTankInfo[this.fluidTanks.size()];
+	for (int i = 0; i < info.length; i++) {
+	    info[i] = this.fluidTanks.get(i).getInfo();
+	}
+        return info;
     }
 }

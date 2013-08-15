@@ -13,11 +13,12 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.IConnectedTile;
+import ip.industrialProcessing.client.render.IFluidInfo;
 import ip.industrialProcessing.machines.TileEntityFluidMachine;
 import ip.industrialProcessing.machines.TileEntitySynced;
 import ip.industrialProcessing.utils.FluidTransfers;
 
-public class TileEntityTank extends TileEntitySynced implements IFluidHandler, IConnectedTile {
+public class TileEntityTank extends TileEntitySynced implements IFluidHandler, IConnectedTile, IFluidInfo {
 
     private FluidTank tank = new FluidTank(10 * FluidContainerRegistry.BUCKET_VOLUME);
     private boolean isTop = false;
@@ -34,15 +35,14 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
 	return true;
     }
 
-    public void searchForNeighbors()
-    {
+    public void searchForNeighbors() {
 	this.unverified = true;
     }
-    
+
     @Override
     public void updateEntity() {
 	super.updateEntity();
-	if (tank.getFluidAmount() > 0 || unverified ) {
+	if (tank.getFluidAmount() > 0 || unverified) {
 	    TileEntity entityBelow = this.worldObj.getBlockTileEntity(xCoord, yCoord - 1, zCoord);
 	    if (entityBelow instanceof TileEntityTank) {
 		TileEntityTank tankBelow = (TileEntityTank) entityBelow;
@@ -78,28 +78,37 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
 	if (tank.getFluidAmount() == tank.getCapacity()) {
 	    return fillAbove(resource, doFill);
 	}
-	return tank.fill(resource, doFill);
+	int fill = tank.fill(resource, doFill); 
+	notifyBlockChange();
+	return fill;
     }
 
     private int fillAbove(FluidStack resource, boolean doFill) {
 	TileEntity entityAbove = this.worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord);
 	if (entityAbove instanceof TileEntityTank) {
 	    TileEntityTank tankAbove = (TileEntityTank) entityAbove;
-	    return tankAbove.fill(ForgeDirection.DOWN, resource, doFill);
+	    int fill = tankAbove.fill(ForgeDirection.DOWN, resource, doFill);
+	    notifyBlockChange();
+	    return fill;
 	}
 	return 0;
     }
 
     @Override
     public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
-	if (resource != null && resource.isFluidEqual(tank.getFluid()))
-	    return tank.drain(resource.amount, doDrain);
+	if (resource != null && resource.isFluidEqual(tank.getFluid())) {
+	    FluidStack drain = tank.drain(resource.amount, doDrain);
+	    notifyBlockChange();
+	    return drain;
+	}
 	return null;
     }
 
     @Override
     public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-	return tank.drain(maxDrain, doDrain);
+	FluidStack stack = tank.drain(maxDrain, doDrain);
+	notifyBlockChange();
+	return stack;
     }
 
     @Override
@@ -120,5 +129,10 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
     @Override
     public ConnectionState getConnection(ForgeDirection direction) {
 	return this.states[direction.ordinal()];
+    }
+
+    @Override
+    public FluidTankInfo[] getTanks() {
+	return new FluidTankInfo[] { this.tank.getInfo() };
     }
 }

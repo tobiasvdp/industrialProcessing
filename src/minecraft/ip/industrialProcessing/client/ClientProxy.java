@@ -9,10 +9,12 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.client.render.ModelAnimatedFluidMachine;
 import ip.industrialProcessing.client.render.ModelAnimatedMachine;
 import ip.industrialProcessing.client.render.ModelConnected;
+import ip.industrialProcessing.client.render.ModelConnectedFluid;
 import ip.industrialProcessing.client.render.ModelMachine;
 import ip.industrialProcessing.client.render.ModelStateMachine;
 import ip.industrialProcessing.client.render.RendererTileEntity;
 import ip.industrialProcessing.client.render.RendererTileEntityConnected;
+import ip.industrialProcessing.client.render.RendererTileEntityConnectedFluid;
 import ip.industrialProcessing.client.render.RendererTileEntityFluidWorker;
 import ip.industrialProcessing.client.render.RendererTileEntityAnimated;
 import ip.industrialProcessing.client.render.RendererTileEntityState;
@@ -60,7 +62,7 @@ public class ClientProxy extends CommonProxy {
     private static final ModelAnimatedMachine crankGenerator = new ModelCrankGenerator();
     private static final ModelStateMachine blastFurnace = new ModelBlastFurnace();
     private static final ModelStateMachine blastFurnaceTop = new ModelBlastFurnaceTop();
-    private static final ModelConnected tank = new ModelTank();
+    private static final ModelConnectedFluid tank = new ModelTank();
     @Override
     public void registerRenderers() {
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFilter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockFilter, "ModelFilter", filter));
@@ -102,7 +104,7 @@ public class ClientProxy extends CommonProxy {
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererTransportFluidsId(), new TileEntityTransportFluids()));
 
 	
-	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTank.class, new RendererTileEntityConnected(IndustrialProcessing.blockTank, "ModelTank", tank));
+	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTank.class, new RendererTileEntityConnectedFluid(IndustrialProcessing.blockTank, "ModelTank", tank));
 	ConfigRenderers.setRendererTankId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererTankId(), new TileEntityTank()));
 	
