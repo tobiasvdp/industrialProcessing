@@ -23,6 +23,7 @@ import net.minecraftforge.fluids.IFluidHandler;
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.ConnectionState;
+import ip.industrialProcessing.client.render.IFluidInfo;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.IMachineTanks;
 import ip.industrialProcessing.machines.MachineFluidTank;
@@ -30,7 +31,7 @@ import ip.industrialProcessing.transport.TileEntityTransport;
 import ip.industrialProcessing.transport.TransportConnectionState;
 import ip.industrialProcessing.utils.FluidTransfers;
 
-public class TileEntityTransportFluids extends TileEntityTransport {
+public class TileEntityTransportFluids extends TileEntityTransport implements IFluidInfo {
 
     FluidTank fluid = new FluidTank(1000);
     int pressure = 0;
@@ -112,7 +113,7 @@ public class TileEntityTransportFluids extends TileEntityTransport {
 			    pumpPressure -= flow / 4;
 			    this.pressure += flow / 4;
 
-			    FluidTransfers.transfer(-flow / 2, this.fluid, pump.getTank()); 
+			    FluidTransfers.transfer(-flow / 2, this.fluid, pump.getTank());
 			}
 			pump.setInputPressure(pumpPressure);
 
@@ -125,8 +126,7 @@ public class TileEntityTransportFluids extends TileEntityTransport {
 			    pumpPressure -= flow / 4;
 			    this.pressure += flow / 4;
 
- 
-			    FluidTransfers.transfer(flow / 2, pump.getTank(), this.fluid); 
+			    FluidTransfers.transfer(flow / 2, pump.getTank(), this.fluid);
 			}
 			pump.setOutputPressure(pumpPressure);
 		    }
@@ -146,9 +146,9 @@ public class TileEntityTransportFluids extends TileEntityTransport {
 		    if (flow > 0) {
 			System.out.println(String.format("transfer from %s %s to %s %s by %s", other.id, other.pressure, this.id, this.pressure, flow / 4));
 			other.pressure -= flow / 4;
-			this.pressure += flow / 4; 
+			this.pressure += flow / 4;
 
-			FluidTransfers.transfer(flow / 2, other.fluid, this.fluid); 
+			FluidTransfers.transfer(flow / 2, other.fluid, this.fluid);
 		    }
 		}
 	    }
@@ -167,9 +167,9 @@ public class TileEntityTransportFluids extends TileEntityTransport {
 			int flow = 0 - this.pressure;
 			if (flow > 0) {
 			    // other.pressure -= flow / 4;
-			    this.pressure += flow / 4; 
+			    this.pressure += flow / 4;
 
-			    FluidTransfers.transfer(flow / 2, other, from, this.fluid); 
+			    FluidTransfers.transfer(flow / 2, other, from, this.fluid);
 			}
 		    }
 		}
@@ -218,5 +218,10 @@ public class TileEntityTransportFluids extends TileEntityTransport {
 	if (ent instanceof TileEntityPump)
 	    return (TileEntityPump) ent;
 	return null;
+    }
+
+    @Override
+    public FluidTankInfo[] getTanks() {
+	return new FluidTankInfo[] { this.fluid.getInfo() };
     }
 }
