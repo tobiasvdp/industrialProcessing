@@ -23,11 +23,11 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements IT
 	}
 
 	private int count = 0;
-	private int xCore;
-	private int yCore;
-	private int zCore;
-	private boolean hasCore;
-	private boolean init;
+	protected int xCore;
+	protected int yCore;
+	protected int zCore;
+	protected boolean hasCore;
+	protected boolean init;
 	protected MultiblockState state;
 
 	@Override
@@ -208,6 +208,11 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements IT
 	public ITileEntityMultiblockCore getCore(World world) {
 		if (hasCore)
 			return (ITileEntityMultiblockCore) world.getBlockTileEntity(xCore, yCore, zCore);
+		return null;
+	}
+	public ITileEntityMultiblockCore getCore(){
+		if (hasCore)
+			return (ITileEntityMultiblockCore) worldObj.getBlockTileEntity(xCore, yCore, zCore);
 		return null;
 	}
 

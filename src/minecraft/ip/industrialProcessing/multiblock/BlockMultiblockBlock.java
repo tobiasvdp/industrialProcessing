@@ -58,7 +58,7 @@ public abstract class BlockMultiblockBlock extends BlockContainer {
 				}
 			}
 		}
-		return disconnectedIcon;
+		return completedIcon;
 	}
 
 	@Override

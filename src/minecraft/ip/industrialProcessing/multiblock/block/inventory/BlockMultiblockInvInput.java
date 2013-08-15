@@ -12,20 +12,20 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
-public class BlockMultiMachineInput extends BlockMultiblockBlock {
+public class BlockMultiblockInvInput extends BlockMultiblockBlock {
 
 	private Icon completedIcon;
 	private Icon connectedIcon;
 	private Icon disconnectedIcon;
 	
-	public BlockMultiMachineInput() {
+	public BlockMultiblockInvInput() {
 		super(ConfigMachineBlocks.getMultiMachineInputBlockID(),"BlockMultiMachineInventory",
 				IndustrialProcessing.tabOreProcessing);
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityMultiMachineInput();
+		return new TileEntityMultiblockInvInput();
 	}
 
 	@Override
@@ -35,16 +35,16 @@ public class BlockMultiMachineInput extends BlockMultiblockBlock {
 		case COMPLETED:
 			return par1IconRegister
 					.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX
-							+ "frame_full");
+							+ "MultiblockInvInput_full");
 		case CONNECTED:
 			return par1IconRegister
 					.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX
-							+ "frame_empty");
+							+ "MultiblockInvInput_empty");
 		case DISCONNECTED:
 		default:
 			return par1IconRegister
 					.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX
-							+ "frame_disconnected");
+							+ "MultiblockInvInput_disconnected");
 		}
 	}
 
