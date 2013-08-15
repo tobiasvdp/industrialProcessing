@@ -4,7 +4,10 @@ import ip.industrialProcessing.multiblock.utils.MultiblockState;
 
 import org.lwjgl.Sys;
 
+import com.google.common.base.CaseFormat;
+
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
@@ -91,59 +94,10 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements IT
 		}
 		count++;
 		if (init) {
-			ITileEntityMultiblockBlock block = (ITileEntityMultiblockBlock) worldObj.getBlockTileEntity(xCoord, yCoord, zCoord);
-			if (block != null) {
-				ITileEntityMultiblockCore core = block.getCore(worldObj);
-				if (core != null) {
-					if (block.getState() != core.getState()) {
-						block.setState(core.getState());
-						worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord));
-					}
-				} else {
-					for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-						TileEntity neighbour = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
-						if (!block.hasCore()) {
-							if (neighbour instanceof ITileEntityMultiblockBlock) {
-								if (((ITileEntityMultiblockBlock) neighbour).hasCore()) {
-									if (((ITileEntityMultiblockBlock) neighbour).getCore(worldObj) != null) {
-										ITileEntityMultiblockCore neighbourCore = ((ITileEntityMultiblockBlock) neighbour).getCore(worldObj);
-										if (neighbourCore.isPartOfStructure(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord))) {
-											block.setCore(((ITileEntityMultiblockCore) neighbourCore));
-											((ITileEntityMultiblockCore) neighbourCore).checkStructure();
-											if (block.getState() != neighbourCore.getState()) {
-												block.setState(((ITileEntityMultiblockCore) neighbourCore).getState());
-												worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-												worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord));
-											}
-										}
-									}
-								}
-							}
-
-							else if (neighbour instanceof ITileEntityMultiblockCore) {
-								if (((ITileEntityMultiblockCore) neighbour).isPartOfStructure(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord))) {
-									block.setCore(((ITileEntityMultiblockCore) neighbour));
-									((ITileEntityMultiblockCore) neighbour).checkStructure();
-									if (block.getState() != ((ITileEntityMultiblockCore) neighbour).getState()) {
-										block.setState(((ITileEntityMultiblockCore) neighbour).getState());
-										worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-										worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord));
-									}
-								}
-							}
-						}
-					}
-				}
-			}
+			setCore(searchForCore());
 			init = false;
 		}
 
-	}
-
-	@Override
-	public void removeCore() {
-		this.hasCore = false;
-		setBlockDisconnected();
 	}
 
 	@Override
@@ -166,15 +120,8 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements IT
 		if (core != null) {
 			this.setCore(core.getCoreX(), core.getCoreY(), core.getCoreZ());
 		} else {
+			state = MultiblockState.DISCONNECTED;
 			this.hasCore = false;
-		}
-	}
-
-	private void setBlockConnected(boolean structureComplete) {
-		MultiblockState newState = structureComplete ? MultiblockState.COMPLETED : MultiblockState.CONNECTED;
-		if (newState != this.state) {
-			this.state = newState;
-			updateState(newState);
 		}
 	}
 
@@ -188,29 +135,12 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements IT
 		return this.state;
 	}
 
-	private void setBlockDisconnected() {
-		if (this.state != MultiblockState.DISCONNECTED) {
-			this.state = MultiblockState.DISCONNECTED;
-			updateState(state);
-		}
-	}
-
-	protected void updateState(MultiblockState state) {
-		if (this.worldObj != null)
-			this.worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, state.ordinal(), 3);
-	}
-
 	@Override
 	public void setWorldObj(World par1World) {
 		super.setWorldObj(par1World);
 	}
-
-	public ITileEntityMultiblockCore getCore(World world) {
-		if (hasCore)
-			return (ITileEntityMultiblockCore) world.getBlockTileEntity(xCore, yCore, zCore);
-		return null;
-	}
-	public ITileEntityMultiblockCore getCore(){
+	@Override
+	public ITileEntityMultiblockCore getCore() {
 		if (hasCore)
 			return (ITileEntityMultiblockCore) worldObj.getBlockTileEntity(xCore, yCore, zCore);
 		return null;
@@ -227,5 +157,57 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements IT
 		NBTTagCompound tag = new NBTTagCompound();
 		this.writeToNBT(tag);
 		return new Packet132TileEntityData(xCoord, yCoord, zCoord, 0, tag);
+	}
+	
+	@Override 
+	public void destroyBlock(){
+		if (state == MultiblockState.COMPLETED){
+			getCore().breakMultiblock();
+		}
+	}
+	@Override
+	public void neighbourChanged(){
+		MultiblockState prevState = state;
+		switch (state){
+		case COMPLETED: {
+			if (getCore() != null){
+				state = getCore().getState();
+			}else{
+				setCore(null);
+			}
+			break;}
+		case CONNECTED:{
+			if (getCore() != null){
+				state = getCore().getState();
+			}else{
+				setCore(null);
+			}
+			break;}
+		default: {
+			setCore(searchForCore());
+		}
+		}
+		if (prevState != state)
+			onStateChanged();
+	}
+
+	public ITileEntityMultiblockCore searchForCore() {
+		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+			TileEntity neighbour = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+			if (neighbour instanceof ITileEntityMultiblockBlock) {
+				ITileEntityMultiblockBlock tileEntityBlock = (ITileEntityMultiblockBlock) neighbour;
+				if (tileEntityBlock.hasCore()){
+					return tileEntityBlock.getCore();
+				}
+			} else if (neighbour instanceof ITileEntityMultiblockCore) {
+				ITileEntityMultiblockCore tileEntityCore = (ITileEntityMultiblockCore) neighbour;
+				return tileEntityCore;
+			}
+		}
+		return null;
+	}
+	
+	public void onStateChanged(){
+		worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord));
 	}
 }

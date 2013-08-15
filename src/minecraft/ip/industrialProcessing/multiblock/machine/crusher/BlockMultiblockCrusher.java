@@ -10,14 +10,14 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.multiblock.BlockMultiblockCore;
 
-public class BlockLargeCrusher extends BlockMultiblockCore {
+public class BlockMultiblockCrusher extends BlockMultiblockCore {
 
-	public BlockLargeCrusher() {
+	public BlockMultiblockCrusher() {
 		super(ConfigMachineBlocks.getLargeCrusherBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Large Crusher", IndustrialProcessing.tabOreProcessing);
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world) { 
-		return new TileEntityLargeCrusher();
+		return new TileEntityMultiblockCrusher();
 	}
 }

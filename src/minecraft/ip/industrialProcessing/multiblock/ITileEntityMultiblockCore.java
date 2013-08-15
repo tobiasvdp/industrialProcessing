@@ -13,4 +13,5 @@ public interface ITileEntityMultiblockCore {
 	int getCoreY();
 	int getCoreZ();
 	MultiblockState getState();
+	void breakMultiblock();
 }

@@ -1,6 +1,5 @@
 package ip.industrialProcessing.multiblock.utils;
 
-import ip.industrialProcessing.multiblock.MultiBlockStructureBlockDescription;
 import ip.industrialProcessing.multiblock.TileEntityMultiblockBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -234,7 +233,7 @@ public class MultiblockStructure {
 					int blockId = world.getBlockId(xCore - this.xCore + i, yCore - this.yCore + j, zCore - this.zCore + k);
 					TileEntity te = world.getBlockTileEntity(xCore - this.xCore + i, yCore - this.yCore + j, zCore - this.zCore + k);
 					if (te instanceof TileEntityMultiblockBlock) {
-						if (((TileEntityMultiblockBlock) te).hasCore() && ((TileEntityMultiblockBlock) te).getCore(world) != null && !((TileEntityMultiblockBlock) te).getCore(world).equals(world.getBlockTileEntity(xCore, yCore, zCore))) {
+						if (((TileEntityMultiblockBlock) te).hasCore() && ((TileEntityMultiblockBlock) te).getCore() != null && !((TileEntityMultiblockBlock) te).getCore().equals(world.getBlockTileEntity(xCore, yCore, zCore))) {
 							return false;
 						}
 					}

@@ -83,70 +83,16 @@ public abstract class BlockMultiblockBlock extends BlockContainer {
 
 	@Override
 	public boolean removeBlockByPlayer(World world, EntityPlayer player, int x, int y, int z) {
-		ITileEntityMultiblockBlock block = (ITileEntityMultiblockBlock) world.getBlockTileEntity(x, y, z);
-		if (block != null) {
-			ITileEntityMultiblockCore core = block.getCore(world);
-			if (core != null) {
-				world.setBlockToAir(x, y, z);
-				core.checkStructure();
-				world.notifyBlocksOfNeighborChange(x, y, z, 0);
-				world.markBlockForUpdate(x, y, z);
-			} else {
-				world.setBlockToAir(x, y, z);
-			}
-		}
+		ITileEntityMultiblockBlock entity = (ITileEntityMultiblockBlock) world.getBlockTileEntity(x, y, z);
+		entity.destroyBlock();
+		world.setBlockToAir(x, y, z);
 		return true;
 	}
 
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, int par5) {
-		ITileEntityMultiblockBlock block = (ITileEntityMultiblockBlock) world.getBlockTileEntity(x, y, z);
-		if (block != null) {
-			ITileEntityMultiblockCore core = block.getCore(world);
-			if (core != null) {
-				if (block.getState() != core.getState()) {
-					block.setState(core.getState());
-					if (block.getState() == MultiblockState.DISCONNECTED) {
-						block.setCore(null);
-					}
-					world.notifyBlocksOfNeighborChange(x, y, z, world.getBlockId(x, y, z));
-					world.markBlockForUpdate(x, y, z);
-				}
-			} else {
-				for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-					TileEntity neighbour = world.getBlockTileEntity(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
-					if (neighbour instanceof ITileEntityMultiblockBlock) {
-						if (!block.hasCore()) {
-							if (((ITileEntityMultiblockBlock) neighbour).hasCore()) {
-								if (((ITileEntityMultiblockBlock) neighbour).getCore(world) != null) {
-									ITileEntityMultiblockCore neighbourCore = ((ITileEntityMultiblockBlock) neighbour).getCore(world);
-									if (neighbourCore.isPartOfStructure(x, y, z, world.getBlockId(x, y, z))) {
-										block.setCore(((ITileEntityMultiblockCore) neighbourCore));
-										((ITileEntityMultiblockCore) neighbourCore).checkStructure();
-										if (block.getState() != neighbourCore.getState()) {
-											block.setState(((ITileEntityMultiblockCore) neighbourCore).getState());
-											world.markBlockForUpdate(x, y, z);
-											world.notifyBlocksOfNeighborChange(x, y, z, world.getBlockId(x, y, z));
-										}
-									}
-								}
-							}
-						}
-					} else if (neighbour instanceof ITileEntityMultiblockCore) {
-						if (!block.hasCore()) {
-							if (((ITileEntityMultiblockCore) neighbour).isPartOfStructure(x, y, z, world.getBlockId(x, y, z))) {
-								block.setCore(((ITileEntityMultiblockCore) neighbour));
-								((ITileEntityMultiblockCore) neighbour).checkStructure();
-								if (block.getState() != ((ITileEntityMultiblockCore) neighbour).getState()) {
-									block.setState(((ITileEntityMultiblockCore) neighbour).getState());
-									world.notifyBlocksOfNeighborChange(x, y, z, world.getBlockId(x, y, z));
-								}
-							}
-						}
-					}
-				}
-			}
-		}
+		ITileEntityMultiblockBlock entity = (ITileEntityMultiblockBlock) world.getBlockTileEntity(x, y, z);
+		entity.neighbourChanged();
 	}
 
 	@Override
@@ -157,5 +103,15 @@ public abstract class BlockMultiblockBlock extends BlockContainer {
 	@Override
 	public boolean renderAsNormalBlock() {
 		return false;
+	}
+	
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
+		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+		if (tileEntity == null || player.isSneaking() || (((ITileEntityMultiblockBlock) tileEntity).getState() != MultiblockState.COMPLETED)) {
+			return false;
+		}
+		player.openGui(IndustrialProcessing.instance, 0, world, ((ITileEntityMultiblockBlock) tileEntity).getCoreX(), ((ITileEntityMultiblockBlock) tileEntity).getCoreY(), ((ITileEntityMultiblockBlock) tileEntity).getCoreZ());
+		return true;
 	}
 }

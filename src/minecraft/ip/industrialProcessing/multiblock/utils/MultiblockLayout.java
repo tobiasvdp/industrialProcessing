@@ -1,6 +1,5 @@
 package ip.industrialProcessing.multiblock.utils;
 
-import ip.industrialProcessing.multiblock.MultiBlockStructureBlockDescription;
 import ip.industrialProcessing.multiblock.TileEntityMultiblockBlock;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;

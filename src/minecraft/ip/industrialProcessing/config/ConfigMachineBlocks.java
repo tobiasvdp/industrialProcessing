@@ -17,7 +17,7 @@ import ip.industrialProcessing.machines.pelletExtruder.TileEntityPelletExtruder;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
 import ip.industrialProcessing.multiblock.block.frame.TileEntityMachineFrame;
 import ip.industrialProcessing.multiblock.block.inventory.TileEntityMultiblockInvInput;
-import ip.industrialProcessing.multiblock.machine.crusher.TileEntityLargeCrusher;
+import ip.industrialProcessing.multiblock.machine.crusher.TileEntityMultiblockCrusher;
 import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
 import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
 import ip.industrialProcessing.power.meters.TileEntityAmpMeter;
@@ -87,7 +87,7 @@ public class ConfigMachineBlocks {
 
 		registerMachineBlock(IndustrialProcessing.blockManualGenerator, "IP.Generator.Manual", "Crank Generator", TileEntityManualGenerator.class);
 		registerMachineBlock(IndustrialProcessing.blockBuildcraftGenerator, "IP.Generator.Buildcraft", "Buildcraft Generator", TileEntityBuildcraftGenerator.class);
-		registerMachineBlock(IndustrialProcessing.blockLargeCrusher, "IP.Machine.Multi.Crusher", "Large Crusher", TileEntityLargeCrusher.class);
+		registerMachineBlock(IndustrialProcessing.blockLargeCrusher, "IP.Machine.Multi.Crusher", "Large Crusher", TileEntityMultiblockCrusher.class);
 
 		//transport
 		registerMachineBlock(IndustrialProcessing.blockTransportFluids, "IP.Transport.Fluids", "Fluid pipe", TileEntityTransportFluids.class);

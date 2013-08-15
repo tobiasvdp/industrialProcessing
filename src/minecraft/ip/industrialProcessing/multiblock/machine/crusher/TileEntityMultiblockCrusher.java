@@ -2,13 +2,15 @@ package ip.industrialProcessing.multiblock.machine.crusher;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
-import ip.industrialProcessing.multiblock.MultiBlockStructureBlockDescription;
 import ip.industrialProcessing.multiblock.TileEntityMultiblockCore;
+import ip.industrialProcessing.multiblock.extended.inventory.TileEntityMultiblockCoreInv;
+import ip.industrialProcessing.multiblock.utils.MultiBlockStructureBlockDescription;
+import ip.industrialProcessing.multiblock.utils.MultiblockItemStack;
 import ip.industrialProcessing.multiblock.utils.MultiblockLayout;
 import ip.industrialProcessing.multiblock.utils.MultiblockStructure;
 import ip.industrialProcessing.multiblock.utils.MultiblockUtils;
 
-public class TileEntityLargeCrusher extends TileEntityMultiblockCore {
+public class TileEntityMultiblockCrusher extends TileEntityMultiblockCoreInv {
 
 	private static MultiblockLayout structure;
 
@@ -27,8 +29,9 @@ public class TileEntityLargeCrusher extends TileEntityMultiblockCore {
 		structure.commit(layout);	
 	}
 
-	public TileEntityLargeCrusher() {
+	public TileEntityMultiblockCrusher() {
 		super(structure);
+		itemStacks.add(new MultiblockItemStack(1));
 	}
 	 
 

@@ -42,6 +42,9 @@ import ip.industrialProcessing.machines.pelletExtruder.TileEntityPelletExtruder;
 import ip.industrialProcessing.machines.thickener.ContainerThickener;
 import ip.industrialProcessing.machines.thickener.GuiContainerThickener;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
+import ip.industrialProcessing.multiblock.machine.crusher.ContainerMultiblockCrusher;
+import ip.industrialProcessing.multiblock.machine.crusher.GuiContainerMultiblockCrusher;
+import ip.industrialProcessing.multiblock.machine.crusher.TileEntityMultiblockCrusher;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -83,6 +86,8 @@ public class GuiHandler implements IGuiHandler {
 			return new ContainerOxygenFurnace(player.inventory, (TileEntityOxygenFurnace)entity); 
 		if(entity  instanceof TileEntityBlastFurnace)
 			return new ContainerBlastFurnace(player.inventory, (TileEntityBlastFurnace)entity); 
+		if(entity  instanceof TileEntityMultiblockCrusher)
+			return new ContainerMultiblockCrusher(player.inventory, (TileEntityMultiblockCrusher)entity); 
 		return null;
 	}
 	 
@@ -120,6 +125,8 @@ public class GuiHandler implements IGuiHandler {
 			return new GuiContainerOxygenFurnace(player.inventory, (TileEntityOxygenFurnace)entity); 
 		if(entity  instanceof TileEntityBlastFurnace)
 			return new GuiContainerBlastFurnace(player.inventory, (TileEntityBlastFurnace)entity); 
+		if(entity  instanceof TileEntityMultiblockCrusher)
+			return new GuiContainerMultiblockCrusher(player.inventory, (TileEntityMultiblockCrusher)entity); 
 		return null;
 	}
 

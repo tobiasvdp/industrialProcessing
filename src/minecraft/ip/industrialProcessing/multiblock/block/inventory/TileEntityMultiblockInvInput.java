@@ -2,7 +2,7 @@ package ip.industrialProcessing.multiblock.block.inventory;
 
 import net.minecraft.item.ItemStack;
 import ip.industrialProcessing.multiblock.TileEntityMultiblockBlock;
-import ip.industrialProcessing.multiblock.extended.TileEntityMultiblockBlockInv;
+import ip.industrialProcessing.multiblock.extended.inventory.TileEntityMultiblockBlockInv;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 
 public class TileEntityMultiblockInvInput extends TileEntityMultiblockBlockInv {
@@ -14,7 +14,7 @@ public class TileEntityMultiblockInvInput extends TileEntityMultiblockBlockInv {
 	@Override
 	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
 		if (hasCore)
-			return getCore().canInsertItem(i, itemstack, j);
+			return getCore().canInsertItemForID(i, itemstack, inventoryID);
 		return false;
 	}
 

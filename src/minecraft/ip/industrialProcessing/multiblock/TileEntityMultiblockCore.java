@@ -20,7 +20,7 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 
 	private MultiblockLayout layout;
 	private boolean isMultiblock;
-	private MultiblockState state;
+	protected MultiblockState state;
 	private int angle;
 	private boolean init;
 
@@ -130,5 +130,10 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 		NBTTagCompound tag = new NBTTagCompound();
 		this.writeToNBT(tag);
 		return new Packet132TileEntityData(xCoord, yCoord, zCoord, 0, tag);
+	}
+
+	@Override
+	public void breakMultiblock() {
+		checkStructure();
 	}
 }

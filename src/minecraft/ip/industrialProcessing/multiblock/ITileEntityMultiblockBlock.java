@@ -15,10 +15,11 @@ public interface ITileEntityMultiblockBlock {
 	
 	boolean hasCore();
 	
-	//void setCore(int x, int y, int z);
-	void removeCore();
 	void setCore(ITileEntityMultiblockCore core);
 	void setState(MultiblockState state);
-	ITileEntityMultiblockCore getCore(World world);
-	
+	ITileEntityMultiblockCore getCore();
+	void destroyBlock();
+	void neighbourChanged();	
+	ITileEntityMultiblockCore searchForCore();
+	void onStateChanged();
 }

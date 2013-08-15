@@ -1,4 +1,4 @@
-package ip.industrialProcessing.multiblock;
+package ip.industrialProcessing.multiblock.utils;
 
 import java.util.Arrays;
 
