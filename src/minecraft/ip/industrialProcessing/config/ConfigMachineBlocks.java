@@ -16,7 +16,7 @@ import ip.industrialProcessing.machines.oxygenFurnace.TileEntityOxygenFurnace;
 import ip.industrialProcessing.machines.pelletExtruder.TileEntityPelletExtruder;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
 import ip.industrialProcessing.multiblock.block.frame.TileEntityMachineFrame;
-import ip.industrialProcessing.multiblock.block.inventory.TileEntityMultiMachineInput;
+import ip.industrialProcessing.multiblock.block.inventory.TileEntityMultiblockInvInput;
 import ip.industrialProcessing.multiblock.machine.crusher.TileEntityLargeCrusher;
 import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
 import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
@@ -99,7 +99,7 @@ public class ConfigMachineBlocks {
 		registerMachineBlock(IndustrialProcessing.blockBatteryBox, "IP.BatteryBox", "Battery Box", TileEntityBatteryBox.class);
 		
 		//multiblocks
-		registerMachineBlock(IndustrialProcessing.blockMultiMachineInput, "MultiBlockInventory", "Multiblock hatch", TileEntityMultiMachineInput.class);
+		registerMachineBlock(IndustrialProcessing.blockMultiMachineInput, "MultiBlockInventory", "Multiblock hatch", TileEntityMultiblockInvInput.class);
 		registerMachineBlock(IndustrialProcessing.blockMachineFrame, "MultiBlockFrame", "Multiblock Frame", TileEntityMachineFrame.class);
 	}
 	private void registerMachineBlock(Block block, String uniqueId, String displayName, Class tileEntity) {

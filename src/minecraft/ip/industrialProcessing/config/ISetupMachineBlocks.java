@@ -20,7 +20,7 @@ import ip.industrialProcessing.machines.oxygenFurnace.BlockOxygenFurnace;
 import ip.industrialProcessing.machines.pelletExtruder.BlockPelletExtruder;
 import ip.industrialProcessing.machines.thickener.BlockThickener;
 import ip.industrialProcessing.multiblock.block.frame.BlockMachineFrame;
-import ip.industrialProcessing.multiblock.block.inventory.BlockMultiMachineInput;
+import ip.industrialProcessing.multiblock.block.inventory.BlockMultiblockInvInput;
 import ip.industrialProcessing.multiblock.machine.crusher.BlockLargeCrusher;
 import ip.industrialProcessing.power.buildcraftGenerator.BlockBuildcraftGenerator;
 import ip.industrialProcessing.power.manualGenerator.BlockManualGenerator;
@@ -59,7 +59,7 @@ public interface ISetupMachineBlocks {
 	public final static BlockBatteryBox blockBatteryBox = new BlockBatteryBox();
 
 	// create Multiblock Machines
-	public final static BlockMultiMachineInput blockMultiMachineInput = new BlockMultiMachineInput();
+	public final static BlockMultiblockInvInput blockMultiMachineInput = new BlockMultiblockInvInput();
 	public final static BlockMachineFrame blockMachineFrame = new BlockMachineFrame();
 	public final static BlockLargeCrusher blockLargeCrusher = new BlockLargeCrusher();
 	
