@@ -11,9 +11,9 @@ import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.machines.TileEntityMachine;
-import ip.industrialProcessing.multiblock.utils.MultiblockLayout;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import ip.industrialProcessing.multiblock.utils.MultiblockUtils;
+import ip.industrialProcessing.multiblock.utils.layout.MultiblockLayout;
 import ip.industrialProcessing.recipes.Recipe;
 
 public class TileEntityMultiblockCore extends TileEntity implements ITileEntityMultiblockCore {

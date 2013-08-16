@@ -1,9 +1,9 @@
 package ip.industrialProcessing.multiblock;
 
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.multiblock.utils.MultiblockLayout;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import ip.industrialProcessing.multiblock.utils.MultiblockUtils;
+import ip.industrialProcessing.multiblock.utils.layout.MultiblockLayout;
 import ip.industrialProcessing.utils.inventories.InventoryUtils;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.ITileEntityProvider;

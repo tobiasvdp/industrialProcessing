@@ -1,10 +1,10 @@
-package ip.industrialProcessing.multiblock.utils;
+package ip.industrialProcessing.multiblock.utils.inventory;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 
-public abstract interface IMultiblockInventoryCore extends IInventory {
+public interface IMultiblockInventoryBlock extends ISidedInventory {
 
 	@Override
 	public int getSizeInventory();
@@ -38,16 +38,20 @@ public abstract interface IMultiblockInventoryCore extends IInventory {
 
 	@Override
 	public void openChest();
+
 	@Override
 	public void closeChest();
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack);
 
-	public int[] getAccessibleSlotsForID(int var1);
+	@Override
+	public int[] getAccessibleSlotsFromSide(int var1);
 
-	public boolean canInsertItemForID(int i, ItemStack itemstack, int j);
+	@Override
+	public boolean canInsertItem(int i, ItemStack itemstack, int j);
 
-	public boolean canExtractItemForID(int i, ItemStack itemstack, int j);
+	@Override
+	public boolean canExtractItem(int i, ItemStack itemstack, int j);
 
 }

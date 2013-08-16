@@ -1,4 +1,4 @@
-package ip.industrialProcessing.multiblock.utils;
+package ip.industrialProcessing.multiblock.utils.layout;
 
 import ip.industrialProcessing.multiblock.TileEntityMultiblockBlock;
 import ip.industrialProcessing.multiblock.TileEntityMultiblockCore;

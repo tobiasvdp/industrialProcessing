@@ -10,10 +10,12 @@ public class ContainerMultiblockCrusher extends ContainerMultiblockInv{
 
 	public ContainerMultiblockCrusher(InventoryPlayer inventoryPlayer, TileEntityMultiblockCrusher entity) {
 		super(inventoryPlayer, ((TileEntityMultiblockCoreInv)entity));
-		slots = new Slot[1];
+		slots = new Slot[2];
 		slots[0] = new SlotBase(tileEntity, 0, 44, 33);
+		slots[1] = new SlotBase(tileEntity, 1, 104, 33);
 
 		addSlotToContainer(slots[0]);
+		addSlotToContainer(slots[1]);
 
 		BindPlayerInventory(inventoryPlayer, this, 0);
 	}

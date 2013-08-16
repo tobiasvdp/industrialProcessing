@@ -1,6 +1,7 @@
 package ip.industrialProcessing;
 
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
+import ip.industrialProcessing.multiblock.extended.inventory.TileEntityMultiblockBlockInv;
 import ip.industrialProcessing.packetHandlers.TileSyncHandler; 
 
 import java.io.ByteArrayInputStream;
@@ -9,6 +10,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
@@ -20,6 +22,7 @@ import cpw.mods.fml.common.network.Player;
 public class PacketHandler implements IPacketHandler {
 
 	public static final String ANIMATION_SYNC = "IP.AniSync";
+	public static final String BUTTON_PRESSED = "IP.ButtonPressed";
 
 	public PacketHandler() {
 		// TODO Auto-generated constructor stub
@@ -30,6 +33,9 @@ public class PacketHandler implements IPacketHandler {
 			Packet250CustomPayload packet, Player player) { 
 		if (packet.channel.equals("IP.WorkSyncable")) {
 			TileSyncHandler.handleAnimationSync(manager, packet, player);
+		}
+		if (packet.channel.equals(BUTTON_PRESSED)) {
+			TileEntityMultiblockBlockInv.handleNewInventoryID(manager, packet, player);
 		}  
 	}
 

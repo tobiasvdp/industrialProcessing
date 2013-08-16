@@ -7,16 +7,15 @@ import org.apache.commons.lang3.ArrayUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import ip.industrialProcessing.multiblock.TileEntityMultiblockCore;
-import ip.industrialProcessing.multiblock.utils.IMultiblockInventoryBlock;
-import ip.industrialProcessing.multiblock.utils.IMultiblockInventoryCore;
-import ip.industrialProcessing.multiblock.utils.MultiblockLayout;
-import ip.industrialProcessing.multiblock.utils.MultiblockItemStack;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
+import ip.industrialProcessing.multiblock.utils.inventory.IMultiblockInventoryBlock;
+import ip.industrialProcessing.multiblock.utils.inventory.IMultiblockInventoryCore;
+import ip.industrialProcessing.multiblock.utils.inventory.MultiblockItemStack;
+import ip.industrialProcessing.multiblock.utils.layout.MultiblockLayout;
 
 public class TileEntityMultiblockCoreInv extends TileEntityMultiblockCore
 		implements IMultiblockInventoryCore {
 	
-	protected int [] inventoryIDs;
 	protected ArrayList<MultiblockItemStack> itemStacks = new ArrayList<MultiblockItemStack>();
 	
 	
@@ -116,5 +115,34 @@ public class TileEntityMultiblockCoreInv extends TileEntityMultiblockCore
 	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
 		return true;
 	}
+	public int getSlotforID(int ID){
+		for(int i = 0;i<itemStacks.size();i++){
+			if (itemStacks.get(i).hasID(ID)){
+				return i;
+			}
+		}
+		return -1;
+	}
 
+	public int prevValidID(int inventoryID) {
+		boolean isInput = itemStacks.get(inventoryID).getIsInput();
+		
+		for(int i = inventoryID-1;i>=0;i--){
+			if (itemStacks.get(i).getIsInput()==isInput){
+				return i;
+			}
+		}
+		return inventoryID;
+	}
+
+	public int nextValidID(int inventoryID) {
+		boolean isInput = itemStacks.get(inventoryID).getIsInput();
+		
+		for(int i = inventoryID+1;i<itemStacks.size();i++){
+			if (itemStacks.get(i).getIsInput()==isInput){
+				return i;
+			}
+		}
+		return inventoryID;
+	}
 }

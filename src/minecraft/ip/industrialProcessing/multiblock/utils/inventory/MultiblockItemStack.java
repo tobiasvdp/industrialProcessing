@@ -1,4 +1,4 @@
-package ip.industrialProcessing.multiblock.utils;
+package ip.industrialProcessing.multiblock.utils.inventory;
 
 import java.util.ArrayList;
 
@@ -7,7 +7,11 @@ import net.minecraft.item.ItemStack;
 public class MultiblockItemStack {
 	private ArrayList<Integer> validIDs = new ArrayList<Integer>();
 	private ItemStack itemStack;
-	public MultiblockItemStack(int... ID) {
+	private boolean input;
+	private boolean output;
+	public MultiblockItemStack(boolean input,boolean output,int... ID) {
+		this.input = input;
+		this.output = output;
 		for (int i = 0; i < ID.length; i++) {
 			addID(ID[i]);
 		}
@@ -82,6 +86,9 @@ public class MultiblockItemStack {
 		if (itemstack2 != null) {
 			itemStack = new ItemStack(itemstack2.itemID, itemstack2.stackSize, itemstack2.getItemDamage());
 		}
+	}
+	public boolean getIsInput(){
+		return input;
 	}
 
 }

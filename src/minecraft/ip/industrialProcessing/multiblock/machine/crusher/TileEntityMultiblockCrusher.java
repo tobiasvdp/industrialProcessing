@@ -4,11 +4,11 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.multiblock.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.extended.inventory.TileEntityMultiblockCoreInv;
-import ip.industrialProcessing.multiblock.utils.MultiBlockStructureBlockDescription;
-import ip.industrialProcessing.multiblock.utils.MultiblockItemStack;
-import ip.industrialProcessing.multiblock.utils.MultiblockLayout;
-import ip.industrialProcessing.multiblock.utils.MultiblockStructure;
 import ip.industrialProcessing.multiblock.utils.MultiblockUtils;
+import ip.industrialProcessing.multiblock.utils.inventory.MultiblockItemStack;
+import ip.industrialProcessing.multiblock.utils.layout.MultiBlockStructureBlockDescription;
+import ip.industrialProcessing.multiblock.utils.layout.MultiblockLayout;
+import ip.industrialProcessing.multiblock.utils.layout.MultiblockStructure;
 
 public class TileEntityMultiblockCrusher extends TileEntityMultiblockCoreInv {
 
@@ -31,8 +31,7 @@ public class TileEntityMultiblockCrusher extends TileEntityMultiblockCoreInv {
 
 	public TileEntityMultiblockCrusher() {
 		super(structure);
-		itemStacks.add(new MultiblockItemStack(1));
+		itemStacks.add(new MultiblockItemStack(true,false,0));
+		itemStacks.add(new MultiblockItemStack(true,false,1));
 	}
-	 
-
 }

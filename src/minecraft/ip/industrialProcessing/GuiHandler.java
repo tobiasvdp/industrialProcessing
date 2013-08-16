@@ -42,9 +42,12 @@ import ip.industrialProcessing.machines.pelletExtruder.TileEntityPelletExtruder;
 import ip.industrialProcessing.machines.thickener.ContainerThickener;
 import ip.industrialProcessing.machines.thickener.GuiContainerThickener;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
+import ip.industrialProcessing.multiblock.extended.inventory.TileEntityMultiblockBlockInv;
 import ip.industrialProcessing.multiblock.machine.crusher.ContainerMultiblockCrusher;
 import ip.industrialProcessing.multiblock.machine.crusher.GuiContainerMultiblockCrusher;
 import ip.industrialProcessing.multiblock.machine.crusher.TileEntityMultiblockCrusher;
+import ip.industrialProcessing.multiblock.utils.inventory.ContainerMultiblockIOSelect;
+import ip.industrialProcessing.multiblock.utils.inventory.GuiContainerMultiblockIOSelect;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -88,6 +91,8 @@ public class GuiHandler implements IGuiHandler {
 			return new ContainerBlastFurnace(player.inventory, (TileEntityBlastFurnace)entity); 
 		if(entity  instanceof TileEntityMultiblockCrusher)
 			return new ContainerMultiblockCrusher(player.inventory, (TileEntityMultiblockCrusher)entity); 
+		if(entity  instanceof TileEntityMultiblockBlockInv)
+			return new ContainerMultiblockIOSelect(player.inventory, (TileEntityMultiblockBlockInv)entity); 
 		return null;
 	}
 	 
@@ -126,7 +131,9 @@ public class GuiHandler implements IGuiHandler {
 		if(entity  instanceof TileEntityBlastFurnace)
 			return new GuiContainerBlastFurnace(player.inventory, (TileEntityBlastFurnace)entity); 
 		if(entity  instanceof TileEntityMultiblockCrusher)
-			return new GuiContainerMultiblockCrusher(player.inventory, (TileEntityMultiblockCrusher)entity); 
+			return new GuiContainerMultiblockCrusher(player.inventory, (TileEntityMultiblockCrusher)entity);
+		if(entity  instanceof TileEntityMultiblockBlockInv)
+			return new GuiContainerMultiblockIOSelect(player.inventory, (TileEntityMultiblockBlockInv)entity,1); 
 		return null;
 	}
 
