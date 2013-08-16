@@ -84,8 +84,8 @@ public abstract class BlockMultiblockBlock extends BlockContainer {
 	@Override
 	public boolean removeBlockByPlayer(World world, EntityPlayer player, int x, int y, int z) {
 		ITileEntityMultiblockBlock entity = (ITileEntityMultiblockBlock) world.getBlockTileEntity(x, y, z);
-		entity.destroyBlock();
 		world.setBlockToAir(x, y, z);
+		entity.destroyBlock();
 		return true;
 	}
 

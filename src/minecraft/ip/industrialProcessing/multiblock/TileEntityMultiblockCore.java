@@ -21,7 +21,8 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 	private MultiblockLayout layout;
 	private boolean isMultiblock;
 	protected MultiblockState state;
-	private int angle;
+	private int[] angle = new int[1];
+	private boolean locked;
 	private boolean init;
 
 	public TileEntityMultiblockCore(MultiblockLayout structure) {
@@ -32,11 +33,6 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 
 	@Override
 	public void updateEntity() {
-
-		if (init) {
-			layout.setAngle(this.angle);
-		}
-		init = false;
 	}
 
 	@Override
@@ -44,8 +40,9 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 		super.writeToNBT(par1nbtTagCompound);
 		par1nbtTagCompound.setBoolean("isFormed", this.isMultiblock);
 		par1nbtTagCompound.setBoolean("init", this.init);
+		par1nbtTagCompound.setBoolean("Locked", this.locked);
 		par1nbtTagCompound.setInteger("State", this.state.ordinal());
-		par1nbtTagCompound.setInteger("Angle", this.angle);
+		par1nbtTagCompound.setInteger("Angle", this.angle[0]);
 	}
 
 	@Override
@@ -53,8 +50,9 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 		super.readFromNBT(par1nbtTagCompound);
 		this.isMultiblock = par1nbtTagCompound.getBoolean("isFormed");
 		this.init = par1nbtTagCompound.getBoolean("init");
+		this.locked = par1nbtTagCompound.getBoolean("Locked");
 		this.state = MultiblockState.fromInt(par1nbtTagCompound.getInteger("State"));
-		this.angle = par1nbtTagCompound.getInteger("Angle");
+		this.angle[0] = par1nbtTagCompound.getInteger("Angle");
 	}
 
 	@Override
@@ -64,27 +62,24 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 
 	@Override
 	public boolean checkStructure() {
-		MultiblockState state = MultiblockState.COMPLETED;
-		if (layout.checkLayout(worldObj, xCoord, yCoord, zCoord)) {
+		MultiblockState state = MultiblockState.DISCONNECTED;
+		if (layout.checkLayout(worldObj, xCoord, yCoord, zCoord,angle)) {
 			state = MultiblockState.COMPLETED;
 			isMultiblock = true;
-			layout.locked = true;
+			locked = true;
 		} else {
 			state = MultiblockState.CONNECTED;
 			isMultiblock = false;
-			layout.locked = false;
+			locked = false;
 		}
 
 		if (this.state != state) {
 			this.state = state;
+			onStateChanged();
 			return false;
 		} else {
 			return true;
 		}
-	}
-
-	private void setState(MultiblockState state) {
-		this.state = state;
 	}
 
 	public MultiblockState getState() {
@@ -93,7 +88,8 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 
 	@Override
 	public void breakEntireStructure() {
-		setState(MultiblockState.DISCONNECTED);
+		state = MultiblockState.DISCONNECTED;
+		onStateChanged();
 	}
 
 	@Override
@@ -101,7 +97,7 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 		x = x - xCoord;
 		y = y - yCoord;
 		z = z - zCoord;
-		return layout.hasDiscriptionBlockId(x, y, z, blockId);
+		return layout.hasDiscriptionBlockId(x, y, z, blockId,locked,angle);
 	}
 
 	@Override
@@ -134,6 +130,12 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 
 	@Override
 	public void breakMultiblock() {
+		this.state = MultiblockState.CONNECTED;
+		locked = false;
+		onStateChanged();
 		checkStructure();
+	}
+	public void onStateChanged(){
+		worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord));
 	}
 }

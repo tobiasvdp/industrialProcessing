@@ -1,10 +1,12 @@
 package ip.industrialProcessing.multiblock;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.multiblock.utils.MultiblockLayout;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import ip.industrialProcessing.multiblock.utils.MultiblockUtils;
 import ip.industrialProcessing.utils.inventories.InventoryUtils;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -28,9 +30,8 @@ public abstract class BlockMultiblockCore extends BlockContainer {
 		InventoryUtils.DropInventoryContents(world, x, y, z);
 		ITileEntityMultiblockCore core = (ITileEntityMultiblockCore) world.getBlockTileEntity(x, y, z);
 		if (core != null) {
-			world.setBlockToAir(x, y, z);
 			core.breakEntireStructure();
-			world.notifyBlocksOfNeighborChange(x, y, z, 0);
+			world.setBlockToAir(x, y, z);
 		}
 		return true;
 	}

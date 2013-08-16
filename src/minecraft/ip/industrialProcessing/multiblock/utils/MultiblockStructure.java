@@ -154,11 +154,11 @@ public class MultiblockStructure {
 	
 
 	public boolean hasDiscriptionBlockId(int i, int j, int k, int blockId) {
-		boolean isValid;
+		if (i<0 || j<0 || k<0 || i>layout.length-1 || j>layout[0].length-1 || k>layout[0][0].length-1)
+			return false;
+		boolean isValid = false;
 		MultiBlockStructureBlockDescription desc = layout[i][j][k];
-		if (desc == null)
-			isValid = false;
-		else
+		if (desc != null)
 			isValid = desc.containsBlock(blockId);
 		return isValid;
 
@@ -206,25 +206,6 @@ public class MultiblockStructure {
 		sizeFront = blocksFront;
 	}
 
-	/*public boolean checkLayout(World world, int xCore, int yCore, int zCore) {
-		for (int i = 0; i < layout.length; i++) {
-			for (int j = 0; j < layout[0].length; j++) {
-				for (int k = 0; k < layout[0][0].length; k++) {
-					int blockId = world.getBlockId(xCore - this.xCore + i, yCore - this.yCore + j, zCore - this.zCore + k);
-					TileEntity te = world.getBlockTileEntity(xCore - this.xCore + i, yCore - this.yCore + j, zCore - this.zCore + k);
-					if (te instanceof TileEntityMultiblockBlock) {
-						if (((TileEntityMultiblockBlock) te).hasCore() && ((TileEntityMultiblockBlock) te).getCore() != null && !((TileEntityMultiblockBlock) te).getCore().equals(world.getBlockTileEntity(xCore, yCore, zCore))) {
-							return false;
-						}
-					}
-					if (!hasDiscriptionBlockId(i, j, k, blockId, false))
-						if (hasDiscription(i, j, k))
-							return false;
-				}
-			}
-		}
-		return true;
-	}*/
 	public boolean checkLayout(World world, int xCore, int yCore, int zCore) {
 		for (int i = 0; i < layout.length; i++) {
 			for (int j = 0; j < layout[0].length; j++) {
@@ -240,6 +221,7 @@ public class MultiblockStructure {
 							}
 						}
 						if (te instanceof TileEntityMultiblockCore) {
+							if (!te.equals(world.getBlockTileEntity(xCore, yCore, zCore)))
 							return false;
 						}
 					}
@@ -265,21 +247,5 @@ public class MultiblockStructure {
 		if(layout[x][y][z]==null)
 			return false;
 		return true;
-		/*x -= xCore;
-		y -= yCore;
-		z -= zCore;
-		for (int i = 0; i < layout.length; i++) {
-			for (int j = 0; j < layout[0].length; j++) {
-				for (int k = 0; k < layout[0][0].length; k++) {
-					if (layout[i][j][k] != null) {
-						if (layout[i][j][k].getX() == x)
-							if (layout[i][j][k].getY() == y)
-								if (layout[i][j][k].getZ() == z)
-									return true;
-					}
-				}
-			}
-		}
-		return false;*/
 	}
 }

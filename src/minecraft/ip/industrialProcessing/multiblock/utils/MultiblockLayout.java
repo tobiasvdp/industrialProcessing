@@ -8,34 +8,30 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class MultiblockLayout {
 	protected MultiblockStructure[] layouts = new MultiblockStructure[4];
-	protected int angle;
-	public boolean locked = false;
 
 	public MultiblockLayout() {
-		angle = 0;
 	}
-
 	public void setLayoutAngle(MultiblockStructure layout, int angle) {
 		layouts[angle] = layout;
 	}
 
-	public MultiBlockStructureBlockDescription getDescription(int i, int j, int k) {
+	public MultiBlockStructureBlockDescription getDescription(int i, int j, int k,int angle) {
 		return layouts[angle].getDescription(i, j, k);
 	}
 
-	public boolean hasDiscriptionBlockId(int i, int j, int k, int blockId) {
+	public boolean hasDiscriptionBlockId(int i, int j, int k, int blockId, boolean locked, int[] angle) {
 		boolean isValid;
-		isValid = layouts[angle].hasDiscriptionBlockId(i+layouts[angle].getxCore(), j+layouts[angle].getyCore(), k+layouts[angle].getzCore(), blockId);
+		isValid = layouts[angle[0]].hasDiscriptionBlockId(i+layouts[angle[0]].getxCore(), j+layouts[angle[0]].getyCore(), k+layouts[angle[0]].getzCore(), blockId);
 		if (!locked) {
 			if (!isValid) {
-				if (angle != 3) {
-					angle += 1;
-					System.out.println("angle set to " + angle);
-					isValid = hasDiscriptionBlockId(i, j, k, blockId);
-				} else {
-					angle = 0;
-					System.out.println("angle set to " + angle);
-					isValid = false;
+				angle[0] = 0;
+				while(!isValid){
+					angle[0] += 1;
+					if (angle[0] == 4){
+						angle[0] = 0;
+						return false;
+					}
+					isValid = layouts[angle[0]].hasDiscriptionBlockId(i+layouts[angle[0]].getxCore(), j+layouts[angle[0]].getyCore(), k+layouts[angle[0]].getzCore(), blockId);
 				}
 			}
 		}
@@ -43,16 +39,25 @@ public class MultiblockLayout {
 
 	}
 
-	public boolean checkLayout(World world, int xCore, int yCore, int zCore) {
-		return layouts[angle].checkLayout(world, xCore, yCore, zCore);
+	public boolean checkLayout(World world, int xCore, int yCore, int zCore, int[] angle) {
+		boolean isValid;
+		isValid = layouts[angle[0]].checkLayout(world, xCore, yCore, zCore);
+		if (!isValid) {
+			angle[0] = 0;
+			while(!isValid){
+				angle[0] += 1;
+				if (angle[0] == 4){
+					angle[0] = 0;
+					return false;
+				}
+				isValid = layouts[angle[0]].checkLayout(world, xCore, yCore, zCore);
+			}
+		}
+		return isValid;
 	}
 
-	public boolean hasDiscription(int x, int y, int z, int blockId) {
-		return layouts[angle].hasDiscription(x, y, z);
-	}
-
-	public void setAngle(int angle2) {
-		this.angle = angle2;
+	public boolean hasDiscription(int x, int y, int z, int blockId, int[] angle) {
+		return layouts[angle[0]].hasDiscription(x, y, z);
 	}
 
 	public void commit(MultiblockStructure layout) {

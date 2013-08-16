@@ -95,8 +95,10 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements IT
 		count++;
 		if (init) {
 			setCore(searchForCore());
-			if (hasCore())
+			if (hasCore()) {
 				getCore().checkStructure();
+				onStateChanged();
+			}
 			init = false;
 		}
 
@@ -142,10 +144,14 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements IT
 	public void setWorldObj(World par1World) {
 		super.setWorldObj(par1World);
 	}
+
 	@Override
 	public ITileEntityMultiblockCore getCore() {
 		if (hasCore)
 			return (ITileEntityMultiblockCore) worldObj.getBlockTileEntity(xCore, yCore, zCore);
+		else{
+			setCore(null);
+		}
 		return null;
 	}
 
@@ -161,38 +167,46 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements IT
 		this.writeToNBT(tag);
 		return new Packet132TileEntityData(xCoord, yCoord, zCoord, 0, tag);
 	}
-	
-	@Override 
-	public void destroyBlock(){
-		if (state == MultiblockState.COMPLETED){
-			getCore().breakMultiblock();
+
+	@Override
+	public void destroyBlock() {
+		if (state == MultiblockState.COMPLETED) {
+			if (getCore() != null) {
+				getCore().breakMultiblock();
+			}
 		}
 	}
+
 	@Override
-	public void neighbourChanged(){
+	public void neighbourChanged() {
 		MultiblockState prevState = state;
-		switch (state){
+		switch (state) {
 		case COMPLETED: {
-			if (getCore() != null){
-				if(getCore().isPartOfStructure(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord)))
+			if (getCore() != null) {
+				if (getCore().isPartOfStructure(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord)))
 					state = getCore().getState();
 				else
 					setCore(null);
-			}else{
+			} else {
 				setCore(null);
+				worldObj.destroyBlock(xCoord, yCoord, zCoord, true);
 			}
-			break;}
-		case CONNECTED:{
-			if (getCore() != null){
-				if(getCore().isPartOfStructure(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord)))
+			break;
+		}
+		case CONNECTED: {
+			if (getCore() != null) {
+				if (getCore().isPartOfStructure(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord)))
 					state = getCore().getState();
 				else
 					setCore(null);
-			}else{
+			} else {
 				setCore(null);
+				worldObj.destroyBlock(xCoord, yCoord, zCoord, true);
 			}
-			break;}
+			break;
+		}
 		default: {
+			hasCore = false;
 			setCore(searchForCore());
 			if (hasCore())
 				getCore().checkStructure();
@@ -207,20 +221,22 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements IT
 			TileEntity neighbour = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
 			if (neighbour instanceof ITileEntityMultiblockBlock) {
 				ITileEntityMultiblockBlock tileEntityBlock = (ITileEntityMultiblockBlock) neighbour;
-				if (tileEntityBlock.hasCore()){
-					if(tileEntityBlock.getCore().isPartOfStructure(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord)))
-					return tileEntityBlock.getCore();
+				if (tileEntityBlock.hasCore()) {
+					if (tileEntityBlock.getCore() != null) {
+						if (tileEntityBlock.getCore().isPartOfStructure(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord)))
+							return tileEntityBlock.getCore();
+					}
 				}
 			} else if (neighbour instanceof ITileEntityMultiblockCore) {
 				ITileEntityMultiblockCore tileEntityCore = (ITileEntityMultiblockCore) neighbour;
-				if(tileEntityCore.isPartOfStructure(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord)))
-				return tileEntityCore;
+				if (tileEntityCore.isPartOfStructure(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord)))
+					return tileEntityCore;
 			}
 		}
 		return null;
 	}
-	
-	public void onStateChanged(){
+
+	public void onStateChanged() {
 		worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord));
 	}
 }
