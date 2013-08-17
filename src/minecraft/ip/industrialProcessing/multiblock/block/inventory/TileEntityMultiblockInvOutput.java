@@ -10,7 +10,10 @@ public class TileEntityMultiblockInvOutput extends TileEntityMultiblockBlockInv 
 	public TileEntityMultiblockInvOutput() {
 		super();
 	}
-
+	@Override
+	public int firstValidID(){
+		return getCore().firstValidID(false);
+	}
 	@Override
 	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
 		return false;
@@ -19,8 +22,7 @@ public class TileEntityMultiblockInvOutput extends TileEntityMultiblockBlockInv 
 	@Override
 	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
 		if (hasCore)
-			return getCore().canExtractItemForID(i, itemstack, j);
+			return getCore().canExtractItemForSlot(i, itemstack);
 		return false;
 	}
-
 }

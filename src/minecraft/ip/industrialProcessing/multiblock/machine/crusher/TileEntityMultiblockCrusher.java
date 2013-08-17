@@ -34,6 +34,6 @@ public class TileEntityMultiblockCrusher extends TileEntityMultiblockCoreInv {
 	public TileEntityMultiblockCrusher() {
 		super(structure);
 		itemStacks.add(new MultiblockItemStack(true,false,0));
-		itemStacks.add(new MultiblockItemStack(true,false,1));
+		itemStacks.add(new MultiblockItemStack(false,true,1));
 	}
 }

@@ -43,5 +43,18 @@ public class ContainerMultiblockInv extends Container {
 		Slot slot = (Slot) this.inventorySlots.get(par2);
 		return slot != null ? slot.getStack() : null;
 	}
+	public void containerAddSlot(Slot slot) {
+		this.addSlotToContainer(slot);
+	}
+
+	public boolean containerMergeItemStack(ItemStack par1ItemStack, int par2,
+			int par3, boolean par4) {
+		return this.mergeItemStack(par1ItemStack, par2, par3, par4);
+	}
+
+	public Slot containerGetSlot(int slot) {
+		return getSlot(slot);
+	}
+	
 
 }

@@ -1,6 +1,10 @@
 package ip.industrialProcessing.multiblock.extended;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.PacketHandler;
 import ip.industrialProcessing.machines.ContainerMachine;
 import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.multiblock.extended.inventory.ContainerMultiblockInv;
@@ -10,9 +14,12 @@ import ip.industrialProcessing.utils.working.IWorkingEntity;
 
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.mco.McoServer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.ForgeDirection;
@@ -35,7 +42,25 @@ public class GuiContainerMultiblock  extends GuiContainer{
 	this.textureLocation = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN, textureLocation);
     }
 
-    @Override
+    private void requestServerUpdate() {
+    	ByteArrayOutputStream bos = new ByteArrayOutputStream(8);
+		DataOutputStream outputStream = new DataOutputStream(bos);
+		try {
+			outputStream.writeInt(tileEntity.xCoord);
+			outputStream.writeInt(tileEntity.yCoord);
+			outputStream.writeInt(tileEntity.zCoord);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+
+		Packet250CustomPayload packet = new Packet250CustomPayload();
+		packet.channel = PacketHandler.SYNC_CLIENT;
+		packet.data = bos.toByteArray();
+		packet.length = bos.size();
+		PacketDispatcher.sendPacketToServer(packet);
+	}
+
+	@Override
     protected void drawGuiContainerForegroundLayer(int param1, int param2) {
 	fontRenderer.drawString(name, 8, 6, 4210752);
 	fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);

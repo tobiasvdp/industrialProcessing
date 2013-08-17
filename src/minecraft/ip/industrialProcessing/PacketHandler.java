@@ -2,6 +2,7 @@ package ip.industrialProcessing;
 
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
 import ip.industrialProcessing.multiblock.extended.inventory.TileEntityMultiblockBlockInv;
+import ip.industrialProcessing.multiblock.extended.inventory.TileEntityMultiblockCoreInv;
 import ip.industrialProcessing.packetHandlers.TileSyncHandler; 
 
 import java.io.ByteArrayInputStream;
@@ -23,6 +24,7 @@ public class PacketHandler implements IPacketHandler {
 
 	public static final String ANIMATION_SYNC = "IP.AniSync";
 	public static final String BUTTON_PRESSED = "IP.ButtonPressed";
+	public static final String SYNC_CLIENT = "IP.clientSync";
 
 	public PacketHandler() {
 		// TODO Auto-generated constructor stub
@@ -36,6 +38,24 @@ public class PacketHandler implements IPacketHandler {
 		}
 		if (packet.channel.equals(BUTTON_PRESSED)) {
 			TileEntityMultiblockBlockInv.handleNewInventoryID(manager, packet, player);
+		}  
+		if (packet.channel.equals(SYNC_CLIENT)) {
+			DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
+			int x;
+			int y;
+			int z;
+
+			try {
+				x = inputStream.readInt();
+				y = inputStream.readInt();
+				z = inputStream.readInt();
+			} catch (IOException e) {
+				e.printStackTrace();
+				return;
+			}
+			EntityPlayerMP playerMP = (EntityPlayerMP) player;
+			TileEntity te = playerMP.worldObj.getBlockTileEntity(x, y, z);
+			te.worldObj.markBlockForUpdate(x, y, z);
 		}  
 	}
 

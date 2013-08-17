@@ -10,11 +10,14 @@ public class TileEntityMultiblockInvInput extends TileEntityMultiblockBlockInv {
 	public TileEntityMultiblockInvInput() {
 		super();
 	}
-
+	@Override
+	public int firstValidID(){
+		return getCore().firstValidID(true);
+	}
 	@Override
 	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
 		if (hasCore)
-			return getCore().canInsertItemForID(i, itemstack, inventoryID);
+			return getCore().canInsertItemForSlot(i, itemstack);
 		return false;
 	}
 

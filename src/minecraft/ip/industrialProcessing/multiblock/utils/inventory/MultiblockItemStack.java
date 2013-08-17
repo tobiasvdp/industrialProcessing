@@ -2,7 +2,9 @@ package ip.industrialProcessing.multiblock.utils.inventory;
 
 import java.util.ArrayList;
 
+import cpw.mods.fml.relauncher.Side;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.ForgeDirection;
 
 public class MultiblockItemStack {
 	private ArrayList<Integer> validIDs = new ArrayList<Integer>();
@@ -36,20 +38,19 @@ public class MultiblockItemStack {
 	}
 
 	public ItemStack decrStack(int ID, int amount, boolean doIt) {
-		ItemStack prevStack = itemStack.copy();
-		if (itemStack != null && itemStack.itemID == ID) {
-			if (amount < itemStack.stackSize) {
+		if (itemStack == null)
+			return null;
 
-				if (doIt)
-					prevStack = itemStack.splitStack(amount);
-				return prevStack;
-			} else if (amount == itemStack.stackSize) {
-				if (doIt)
-					itemStack = null;
-				return prevStack;
-			}
+		ItemStack stack = itemStack;
+		if (stack == null)
+			return null;
+
+		if (stack.stackSize > amount) {
+			stack = stack.splitStack(amount);
+			return stack;
 		}
-		return prevStack;
+		itemStack = null;
+		return stack;
 	}
 
 	public boolean incStack(int ID, int amount, boolean doIt) {

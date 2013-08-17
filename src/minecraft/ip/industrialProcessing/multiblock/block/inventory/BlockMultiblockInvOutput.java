@@ -27,7 +27,7 @@ public class BlockMultiblockInvOutput extends BlockMultiblockBlock {
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityMultiblockInvInput();
+		return new TileEntityMultiblockInvOutput();
 	}
 
 	@Override

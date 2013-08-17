@@ -46,12 +46,11 @@ public interface IMultiblockInventoryBlock extends ISidedInventory {
 	public boolean isItemValidForSlot(int i, ItemStack itemstack);
 
 	@Override
-	public int[] getAccessibleSlotsFromSide(int var1);
-
-	@Override
 	public boolean canInsertItem(int i, ItemStack itemstack, int j);
 
 	@Override
 	public boolean canExtractItem(int i, ItemStack itemstack, int j);
+
+	int getAccessibleSlotFromSide(int var1);
 
 }

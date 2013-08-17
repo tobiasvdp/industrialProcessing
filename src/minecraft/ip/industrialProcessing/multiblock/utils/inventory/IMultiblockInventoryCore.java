@@ -46,8 +46,8 @@ public abstract interface IMultiblockInventoryCore extends IInventory {
 
 	public int[] getAccessibleSlotsForID(int var1);
 
-	public boolean canInsertItemForID(int i, ItemStack itemstack, int j);
-
-	public boolean canExtractItemForID(int i, ItemStack itemstack, int j);
+	public boolean canExtractItemForSlot(int i, ItemStack itemstack);
+	
+	public boolean canInsertItemForSlot(int i, ItemStack itemstack);
 
 }

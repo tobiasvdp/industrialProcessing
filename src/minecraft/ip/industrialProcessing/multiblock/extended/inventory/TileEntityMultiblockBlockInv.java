@@ -23,7 +23,7 @@ import ip.industrialProcessing.multiblock.utils.inventory.IMultiblockInventoryBl
 import ip.industrialProcessing.multiblock.utils.layout.MultiblockLayout;
 
 public abstract class TileEntityMultiblockBlockInv extends TileEntityMultiblockBlock implements IMultiblockInventoryBlock {
-	public int inventoryID = 1;
+	public int inventoryID;
 
 	public static void handleNewInventoryID(INetworkManager manager, Packet250CustomPayload packet, Player player) {
 		;
@@ -51,9 +51,20 @@ public abstract class TileEntityMultiblockBlockInv extends TileEntityMultiblockB
 	public TileEntityMultiblockBlockInv() {
 		super();
 	}
+	@Override
+	public void writeToNBT(net.minecraft.nbt.NBTTagCompound par1NBTTagCompound) {
+		super.writeToNBT(par1NBTTagCompound);
+		par1NBTTagCompound.setInteger("inventoryID", this.inventoryID);
+	};
+
+	@Override
+	public void readFromNBT(net.minecraft.nbt.NBTTagCompound par1NBTTagCompound) {
+		super.readFromNBT(par1NBTTagCompound);
+		this.inventoryID = par1NBTTagCompound.getInteger("inventoryID");
+	};
 
 	public int getInventorySlot() {
-		return getCore().getSlotforID(inventoryID);
+		return inventoryID;
 	}
 
 	@Override
@@ -116,10 +127,10 @@ public abstract class TileEntityMultiblockBlockInv extends TileEntityMultiblockB
 	}
 
 	@Override
-	public int[] getAccessibleSlotsFromSide(int var1) {
+	public int getAccessibleSlotFromSide(int var1) {
 		if (hasCore)
-			return getCore().getAccessibleSlotsForID(this.inventoryID);
-		return null;
+			return this.inventoryID;
+		return -1;
 	}
 
 	@Override
@@ -159,5 +170,9 @@ public abstract class TileEntityMultiblockBlockInv extends TileEntityMultiblockB
 			state = MultiblockState.DISCONNECTED;
 			this.hasCore = false;
 		}
+	}
+	@Override
+	public int[] getAccessibleSlotsFromSide(int var1) {
+		return new int[]{inventoryID};
 	}
 }
