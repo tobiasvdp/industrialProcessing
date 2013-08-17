@@ -2,26 +2,29 @@ package ip.industrialProcessing.multiblock.extended.inventory.tank;
 
 import java.util.ArrayList;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
+import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 import ip.industrialProcessing.machines.MachineFluidTank;
 import ip.industrialProcessing.multiblock.extended.inventory.TileEntityMultiblockCoreInv;
 import ip.industrialProcessing.multiblock.utils.layout.MultiblockLayout;
 import ip.industrialProcessing.multiblock.utils.tank.MultiblockTank;
 
-public class TileEntityMultiblockCoreTank extends TileEntityMultiblockCoreInv{
+public class TileEntityMultiblockCoreTank extends TileEntityMultiblockCoreInv {
 	private ArrayList<MultiblockTank> fluidTanks = new ArrayList<MultiblockTank>();
 
 	public TileEntityMultiblockCoreTank(MultiblockLayout structure) {
 		super(structure);
 	}
-	
+
 	protected void addTank(int capacity, boolean input, boolean output) {
 		fluidTanks.add(new MultiblockTank(this, capacity, input, output));
 	}
@@ -63,16 +66,85 @@ public class TileEntityMultiblockCoreTank extends TileEntityMultiblockCoreInv{
 		}
 	}
 
+	protected void getBucketFromTank(int inputSlot, int outputSlot, int tankSlot) {
+		ItemStack bucketOutputStack = getStackInSlot(outputSlot);
+		if (bucketOutputStack == null) {
+			ItemStack inputStack = getStackInSlot(inputSlot);
+			if (inputStack != null) {
+				FluidTank tank = fluidTanks.get(tankSlot);
+				if (tank != null) {
+					ItemStack singleItem = inputStack.copy();
+					singleItem.stackSize = 1;
+
+					FluidStack fluid = tank.getFluid();
+					ItemStack filled = FluidContainerRegistry.fillFluidContainer(fluid, singleItem);
+
+					if (filled != null) {
+						FluidStack removeFluid = FluidContainerRegistry.getFluidForFilledItem(filled);
+						tank.drain(removeFluid.amount, true);
+						this.decrStackSize(inputSlot, 1);
+						setInventorySlotContents(outputSlot, filled);
+						onTanksChanged();
+					}
+				}
+			}
+		}
+	}
+
+	protected void addBucketToTank(int inputSlot, int outputSlot, int tankSlot) {
+
+		ItemStack bucketOutputStack = getStackInSlot(outputSlot);
+		if (bucketOutputStack == null) // output available
+		{
+			ItemStack inputStack = getStackInSlot(inputSlot);
+			FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(inputStack);
+			if (fluid != null) {
+				//if (isTankValidForFluid(tankSlot, fluid.fluidID)) {
+
+					ItemStack emptyContainer = getEmptyContainerFromContainer(inputStack);
+					if (emptyContainer != null) {
+						if (this.tankHasRoomFor(tankSlot, fluid)) {
+							emptyContainer.stackSize = 1;
+							this.decrStackSize(inputSlot, 1);
+							fluidTanks.get(tankSlot).fill(fluid, true);
+							this.setInventorySlotContents(outputSlot, emptyContainer);
+							onTanksChanged();
+						}
+					}
+				//}
+			}
+		}
+	}
+	
+    public boolean tankHasRoomFor(int slot, FluidStack addStack) {
+	MultiblockTank tank = fluidTanks.get(slot);
+	if (tank == null)
+	    return false;
+	FluidStack stack = tank.getFluid();
+	if (stack == null)
+	    return true;
+	return stack.isFluidEqual(addStack) && stack.amount + addStack.amount <= tank.getCapacity();
+    }
+
+	private ItemStack getEmptyContainerFromContainer(ItemStack stack) {
+		FluidContainerData[] data = FluidContainerRegistry.getRegisteredFluidContainerData();
+		for (int i = 0; i < data.length; i++) {
+			FluidContainerData containerData = data[i];
+			if (containerData.filledContainer.isItemEqual(stack))
+				return containerData.emptyContainer.copy();
+		}
+		return null;
+	}
+
 	public int fill(int tankSlot, FluidStack resource, boolean doFill) {
 		FluidTank tank = fluidTanks.get(tankSlot);
 		if (tank == null)
-		    return 0;
+			return 0;
 		int amount = tank.fill(resource, doFill);
 		if (doFill)
-		    onTanksChanged();
+			onTanksChanged();
 		return amount;
 	}
-
 
 	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
 		FluidTankInfo[] info = new FluidTankInfo[this.fluidTanks.size()];
@@ -93,17 +165,17 @@ public class TileEntityMultiblockCoreTank extends TileEntityMultiblockCoreInv{
 			return null;
 		FluidStack amount = tank.drain(resource.amount, doDrain);
 		if (doDrain)
-		    onTanksChanged();
+			onTanksChanged();
 		return amount;
 	}
 
 	public FluidStack drain(int tankSlot, int maxDrain, boolean doDrain) {
 		FluidTank tank = fluidTanks.get(tankSlot);
 		if (tank == null)
-		    return null;
+			return null;
 		FluidStack amount = tank.drain(maxDrain, doDrain);
 		if (doDrain)
-		    onTanksChanged();
+			onTanksChanged();
 		return amount;
 	}
 
