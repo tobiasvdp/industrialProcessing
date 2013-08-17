@@ -1,5 +1,9 @@
 package ip.industrialProcessing;
 
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import ip.industrialProcessing.config.ConfigAchievements;
 import ip.industrialProcessing.config.ConfigBlocks;
 import ip.industrialProcessing.config.ConfigCreativeTabs;
@@ -84,6 +88,7 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 import net.minecraftforge.oredict.OreDictionary;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -95,13 +100,33 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid = "IndustrialProcessing", name = "Industrial Processing", version = "0.0.0")
+@Mod(modid = "IndustrialProcessing", name = "Industrial Processing", version = "0.0.0", dependencies = "after:NotEnoughItems")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = { PacketHandler.ANIMATION_SYNC,PacketHandler.BUTTON_PRESSED,PacketHandler.SYNC_CLIENT }, packetHandler = PacketHandler.class)
 public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISetupMachineBlocks, ISetupItems, ISetupBlocks, ISetupFluids, ISetupAchievements, ISetupDamageSource {
 	// The instance of your mod that Forge uses.
 	@Instance("IndustrialProcessing")
 	public static IndustrialProcessing instance;
+	
+	public static Logger log;
+
+    public static Configuration config;
+
+    public static void logInfo(String message, Object... params) {
+        log.log(Level.INFO, String.format(message, params));
+    }
+
+
+    public static void logWarning(String message, Object... params) {
+        log.log(Level.WARNING, String.format(message, params));
+    }    
+
+
+    public static void logSevere(String message, Object... params) {
+        log.log(Level.SEVERE, String.format(message, params));
+    }    
+
 
 	// create namespaces: INamespace
 	// create items: ISetupItems
@@ -124,6 +149,16 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
 		// register listeners for events
 		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
 		MinecraftForge.EVENT_BUS.register(this);
+		
+		log = event.getModLog();
+        config = new Configuration(event.getSuggestedConfigurationFile());
+        config.addCustomCategoryComment("IP Nei addon", "Controls loading of recipe viewer");
+
+
+        if (event.getSide() == Side.CLIENT && !Loader.isModLoaded("NotEnoughItems")) {
+            logSevere("NEI doesn't seem to be installed... This is adviced to be able to view recipes.");
+        };
+
 	}
 
 	@EventHandler
