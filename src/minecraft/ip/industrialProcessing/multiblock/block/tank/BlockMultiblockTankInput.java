@@ -7,6 +7,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.ConfigCreativeTabs;
+import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.multiblock.BlockMultiblockBlock;
 import ip.industrialProcessing.multiblock.block.inventory.TileEntityMultiblockInvInput;
 import ip.industrialProcessing.multiblock.interfaces.ITileEntityMultiblockBlock;
@@ -18,9 +20,8 @@ public class BlockMultiblockTankInput extends BlockMultiblockBlock {
 	private Icon connectedIcon;
 	private Icon disconnectedIcon;
 	
-	public BlockMultiblockTankInput(int par1, String name, CreativeTabs tab) {
-		super(par1, name, tab);
-		// TODO Auto-generated constructor stub
+	public BlockMultiblockTankInput() {
+		super(ConfigMachineBlocks.getBlockMultiblockTankInputID(), "BlockMultiblockTankInput", IndustrialProcessing.tabOreProcessing);
 	}
 
 	@Override

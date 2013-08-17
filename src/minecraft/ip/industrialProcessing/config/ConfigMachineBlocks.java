@@ -18,6 +18,8 @@ import ip.industrialProcessing.machines.thickener.TileEntityThickener;
 import ip.industrialProcessing.multiblock.block.frame.TileEntityMachineFrame;
 import ip.industrialProcessing.multiblock.block.inventory.TileEntityMultiblockInvInput;
 import ip.industrialProcessing.multiblock.block.inventory.TileEntityMultiblockInvOutput;
+import ip.industrialProcessing.multiblock.block.tank.TileEntityMultiblockTankInput;
+import ip.industrialProcessing.multiblock.block.tank.TileEntityMultiblockTankOutput;
 import ip.industrialProcessing.multiblock.machine.crusher.TileEntityMultiblockCrusher;
 import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
 import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
@@ -60,6 +62,8 @@ public class ConfigMachineBlocks {
 	private int machineFrameBlockID = 600;
 	private int multiMachineInputBlockID = 601;
 	private int multiMachineOutputBlockID = 602;
+	private int BlockMultiblockTankInputID = 603;
+	private int BlockMultiblockTankOutputID = 604;
 	private int largeCrusherBlockID = 700;
 
 	private int manualGeneratorBlockID = 800; // Crank Generator
@@ -106,6 +110,8 @@ public class ConfigMachineBlocks {
 		registerMachineBlock(IndustrialProcessing.blockMultiMachineInput, "MultiBlockInvIn", "Multiblock import", TileEntityMultiblockInvInput.class);
 		registerMachineBlock(IndustrialProcessing.blockMultiMachineOutput, "MultiBlockInvOut", "Multiblock export", TileEntityMultiblockInvOutput.class);
 		registerMachineBlock(IndustrialProcessing.blockMachineFrame, "MultiBlockFrame", "Multiblock Frame", TileEntityMachineFrame.class);
+		registerMachineBlock(IndustrialProcessing.blockMultiblockTankInput, "MultiBlockTankIn", "Multiblock tank hatch", TileEntityMultiblockTankInput.class);
+		registerMachineBlock(IndustrialProcessing.blockMultiblockTankOutput, "MultiBlockTankOut", "Multiblock tank drain", TileEntityMultiblockTankOutput.class);
 	}
 	private void registerMachineBlock(Block block, String uniqueId, String displayName, Class tileEntity) {
 		GameRegistry.registerBlock(block, uniqueId);
@@ -208,6 +214,12 @@ public class ConfigMachineBlocks {
 	}
 	public static int getOxygenFurnaceID() {
 		return getInstance().oxygenFurnaceID;
+	} 
+	public static int getBlockMultiblockTankInputID() {
+		return getInstance().BlockMultiblockTankInputID;
+	}
+	public static int getBlockMultiblockTankOutputID() {
+		return getInstance().BlockMultiblockTankOutputID;
 	} 
 
 }

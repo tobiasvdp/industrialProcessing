@@ -19,10 +19,9 @@ public class BlockMultiblockInvInput extends BlockMultiblockBlock {
 	private Icon completedIcon;
 	private Icon connectedIcon;
 	private Icon disconnectedIcon;
-	
+
 	public BlockMultiblockInvInput() {
-		super(ConfigMachineBlocks.getMultiMachineInputBlockID(),"BlockMultiMachineInventoryinput",
-				IndustrialProcessing.tabOreProcessing);
+		super(ConfigMachineBlocks.getMultiMachineInputBlockID(), "BlockMultiMachineInventoryinput", IndustrialProcessing.tabOreProcessing);
 	}
 
 	@Override
@@ -31,25 +30,18 @@ public class BlockMultiblockInvInput extends BlockMultiblockBlock {
 	}
 
 	@Override
-	protected Icon registerIcon(IconRegister par1IconRegister,
-			MultiblockState state) { 
+	protected Icon registerIcon(IconRegister par1IconRegister, MultiblockState state) {
 		switch (state) {
 		case COMPLETED:
-			return par1IconRegister
-					.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX
-							+ "MultiblockInvInput_full");
+			return par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "MultiblockInvInput_full");
 		case CONNECTED:
-			return par1IconRegister
-					.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX
-							+ "MultiblockInvInput_empty");
+			return par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "MultiblockInvInput_empty");
 		case DISCONNECTED:
 		default:
-			return par1IconRegister
-					.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX
-							+ "MultiblockInvInput_disconnected");
+			return par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "MultiblockInvInput_disconnected");
 		}
 	}
-	
+
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
 		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);

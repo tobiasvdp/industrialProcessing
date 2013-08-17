@@ -7,6 +7,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.multiblock.BlockMultiblockBlock;
 import ip.industrialProcessing.multiblock.interfaces.ITileEntityMultiblockBlock;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
@@ -17,9 +18,8 @@ public class BlockMultiblockTankOutput extends BlockMultiblockBlock{
 	private Icon connectedIcon;
 	private Icon disconnectedIcon;
 	
-	public BlockMultiblockTankOutput(int par1, String name, CreativeTabs tab) {
-		super(par1, name, tab);
-		// TODO Auto-generated constructor stub
+	public BlockMultiblockTankOutput() {
+		super(ConfigMachineBlocks.getBlockMultiblockTankOutputID(), "BlockMultiblockTankOutput", IndustrialProcessing.tabOreProcessing);
 	}
 
 	@Override
