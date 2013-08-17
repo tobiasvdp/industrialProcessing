@@ -53,7 +53,7 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements IT
 		return this.hasCore;
 	}
 
-	private void setCore(int x, int y, int z) {
+	protected void setCore(int x, int y, int z) {
 		this.xCore = x;
 		this.yCore = y;
 		this.zCore = z;

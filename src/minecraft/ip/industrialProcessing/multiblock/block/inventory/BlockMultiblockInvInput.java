@@ -21,7 +21,7 @@ public class BlockMultiblockInvInput extends BlockMultiblockBlock {
 	private Icon disconnectedIcon;
 	
 	public BlockMultiblockInvInput() {
-		super(ConfigMachineBlocks.getMultiMachineInputBlockID(),"BlockMultiMachineInventory",
+		super(ConfigMachineBlocks.getMultiMachineInputBlockID(),"BlockMultiMachineInventoryinput",
 				IndustrialProcessing.tabOreProcessing);
 	}
 

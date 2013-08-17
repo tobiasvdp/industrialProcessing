@@ -145,4 +145,14 @@ public class TileEntityMultiblockCoreInv extends TileEntityMultiblockCore
 		}
 		return inventoryID;
 	}
+
+	public int firstValidID(boolean isInput) {
+		for(int i = 0;i<itemStacks.size();i++){
+			if (itemStacks.get(i).getIsInput()==isInput){
+				return i;
+			}
+		}
+		return 0;
+	}
+	
 }

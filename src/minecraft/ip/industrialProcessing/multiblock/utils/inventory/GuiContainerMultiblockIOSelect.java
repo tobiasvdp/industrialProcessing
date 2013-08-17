@@ -45,6 +45,8 @@ public class GuiContainerMultiblockIOSelect extends GuiContainer {
 		this.tileEntity = tileEntity;
 		if (type == 1)
 			this.name = "Input interface";
+		else if (type==2)
+			this.name = "Output interface";
 		else
 			this.name = "Fruitbasket";
 	}

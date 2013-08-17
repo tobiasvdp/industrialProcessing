@@ -14,8 +14,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.WorldServerMulti;
+import ip.industrialProcessing.multiblock.ITileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.TileEntityMultiblockBlock;
 import ip.industrialProcessing.multiblock.TileEntityMultiblockCore;
+import ip.industrialProcessing.multiblock.block.inventory.TileEntityMultiblockInvInput;
+import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import ip.industrialProcessing.multiblock.utils.inventory.IMultiblockInventoryBlock;
 import ip.industrialProcessing.multiblock.utils.layout.MultiblockLayout;
 
@@ -142,5 +145,19 @@ public abstract class TileEntityMultiblockBlockInv extends TileEntityMultiblockB
 
 	public int nextValidID() {
 		return getCore().nextValidID(inventoryID);
+	}
+	public int firstValidID(){
+		return getCore().firstValidID(this instanceof TileEntityMultiblockInvInput);
+	}
+	@Override
+	public void setCore(ITileEntityMultiblockCore core) {
+		if (core != null) {
+			this.setCore(core.getCoreX(), core.getCoreY(), core.getCoreZ());
+			state = MultiblockState.CONNECTED;
+			inventoryID = firstValidID();
+		} else {
+			state = MultiblockState.DISCONNECTED;
+			this.hasCore = false;
+		}
 	}
 }

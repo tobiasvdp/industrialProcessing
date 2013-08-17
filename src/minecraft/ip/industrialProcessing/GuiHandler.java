@@ -42,6 +42,7 @@ import ip.industrialProcessing.machines.pelletExtruder.TileEntityPelletExtruder;
 import ip.industrialProcessing.machines.thickener.ContainerThickener;
 import ip.industrialProcessing.machines.thickener.GuiContainerThickener;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
+import ip.industrialProcessing.multiblock.block.inventory.TileEntityMultiblockInvInput;
 import ip.industrialProcessing.multiblock.extended.inventory.TileEntityMultiblockBlockInv;
 import ip.industrialProcessing.multiblock.machine.crusher.ContainerMultiblockCrusher;
 import ip.industrialProcessing.multiblock.machine.crusher.GuiContainerMultiblockCrusher;
@@ -132,8 +133,10 @@ public class GuiHandler implements IGuiHandler {
 			return new GuiContainerBlastFurnace(player.inventory, (TileEntityBlastFurnace)entity); 
 		if(entity  instanceof TileEntityMultiblockCrusher)
 			return new GuiContainerMultiblockCrusher(player.inventory, (TileEntityMultiblockCrusher)entity);
-		if(entity  instanceof TileEntityMultiblockBlockInv)
+		if(entity  instanceof TileEntityMultiblockInvInput)
 			return new GuiContainerMultiblockIOSelect(player.inventory, (TileEntityMultiblockBlockInv)entity,1); 
+		if(entity  instanceof TileEntityMultiblockInvInput)
+			return new GuiContainerMultiblockIOSelect(player.inventory, (TileEntityMultiblockBlockInv)entity,2); 
 		return null;
 	}
 

@@ -17,6 +17,7 @@ import ip.industrialProcessing.machines.pelletExtruder.TileEntityPelletExtruder;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
 import ip.industrialProcessing.multiblock.block.frame.TileEntityMachineFrame;
 import ip.industrialProcessing.multiblock.block.inventory.TileEntityMultiblockInvInput;
+import ip.industrialProcessing.multiblock.block.inventory.TileEntityMultiblockInvOutput;
 import ip.industrialProcessing.multiblock.machine.crusher.TileEntityMultiblockCrusher;
 import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
 import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
@@ -58,6 +59,7 @@ public class ConfigMachineBlocks {
 
 	private int machineFrameBlockID = 600;
 	private int multiMachineInputBlockID = 601;
+	private int multiMachineOutputBlockID = 602;
 	private int largeCrusherBlockID = 700;
 
 	private int manualGeneratorBlockID = 800; // Crank Generator
@@ -101,7 +103,8 @@ public class ConfigMachineBlocks {
 		registerMachineBlock(IndustrialProcessing.blockBatteryBox, "IP.BatteryBox", "Battery Box", TileEntityBatteryBox.class);
 		
 		//multiblocks
-		registerMachineBlock(IndustrialProcessing.blockMultiMachineInput, "MultiBlockInventory", "Multiblock hatch", TileEntityMultiblockInvInput.class);
+		registerMachineBlock(IndustrialProcessing.blockMultiMachineInput, "MultiBlockInvIn", "Multiblock import", TileEntityMultiblockInvInput.class);
+		registerMachineBlock(IndustrialProcessing.blockMultiMachineOutput, "MultiBlockInvOut", "Multiblock export", TileEntityMultiblockInvOutput.class);
 		registerMachineBlock(IndustrialProcessing.blockMachineFrame, "MultiBlockFrame", "Multiblock Frame", TileEntityMachineFrame.class);
 	}
 	private void registerMachineBlock(Block block, String uniqueId, String displayName, Class tileEntity) {
@@ -146,6 +149,10 @@ public class ConfigMachineBlocks {
 
 	public static int getMultiMachineInputBlockID() {
 		return getInstance().multiMachineInputBlockID;
+	}
+	
+	public static int getMultiMachineOutputBlockID() {
+		return getInstance().multiMachineOutputBlockID;
 	}
 
 	public static int getClassifierBlockID() {
