@@ -8,9 +8,9 @@ import ip.industrialProcessing.machines.crusher.ContainerCrusher;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import ip.industrialProcessing.machines.filter.ContainerFilter;
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
-import ip.industrialProcessing.multiblock.extended.GuiContainerMultiblock;
+import ip.industrialProcessing.multiblock.GuiContainerMultiblockCore;
 
-public class GuiContainerMultiblockCrusher extends GuiContainerMultiblock {
+public class GuiContainerMultiblockCrusher extends GuiContainerMultiblockCore {
 	public GuiContainerMultiblockCrusher(InventoryPlayer inventory, TileEntityMultiblockCrusher entity) {
 		super(inventory, entity, new ContainerMultiblockCrusher(inventory, entity), "Ore Crusher","textures/gui/Crusher.png");
 	}

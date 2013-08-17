@@ -1,16 +1,10 @@
 package ip.industrialProcessing.multiblock;
 
-import java.util.HashSet;
-
-import javax.jws.Oneway;
-
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.multiblock.interfaces.ITileEntityMultiblockBlock;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
-import ip.industrialProcessing.multiblock.utils.MultiblockUtils;
-import ip.industrialProcessing.utils.Position;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
-import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -19,8 +13,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.event.terraingen.BiomeEvent.CreateDecorator;
 
 public abstract class BlockMultiblockBlock extends BlockContainer {
 
@@ -36,6 +28,7 @@ public abstract class BlockMultiblockBlock extends BlockContainer {
 		setCreativeTab(tab);
 	}
 
+	@Override
 	public Icon getBlockTexture(IBlockAccess par1iBlockAccess, int par2, int par3, int par4, int side) {
 		TileEntity tileEntity = par1iBlockAccess.getBlockTileEntity(par2, par3, par4);
 		if (tileEntity instanceof ITileEntityMultiblockBlock) {

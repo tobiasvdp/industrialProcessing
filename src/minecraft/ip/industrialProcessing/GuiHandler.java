@@ -44,12 +44,12 @@ import ip.industrialProcessing.machines.thickener.GuiContainerThickener;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
 import ip.industrialProcessing.multiblock.block.inventory.TileEntityMultiblockInvInput;
 import ip.industrialProcessing.multiblock.block.inventory.TileEntityMultiblockInvOutput;
+import ip.industrialProcessing.multiblock.extended.inventory.ContainerMultiblockBlockInv;
+import ip.industrialProcessing.multiblock.extended.inventory.GuiContainerMultiblockBlockInv;
 import ip.industrialProcessing.multiblock.extended.inventory.TileEntityMultiblockBlockInv;
 import ip.industrialProcessing.multiblock.machine.crusher.ContainerMultiblockCrusher;
 import ip.industrialProcessing.multiblock.machine.crusher.GuiContainerMultiblockCrusher;
 import ip.industrialProcessing.multiblock.machine.crusher.TileEntityMultiblockCrusher;
-import ip.industrialProcessing.multiblock.utils.inventory.ContainerMultiblockIOSelect;
-import ip.industrialProcessing.multiblock.utils.inventory.GuiContainerMultiblockIOSelect;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -94,7 +94,7 @@ public class GuiHandler implements IGuiHandler {
 		if(entity  instanceof TileEntityMultiblockCrusher)
 			return new ContainerMultiblockCrusher(player.inventory, (TileEntityMultiblockCrusher)entity); 
 		if(entity  instanceof TileEntityMultiblockBlockInv)
-			return new ContainerMultiblockIOSelect(player.inventory, (TileEntityMultiblockBlockInv)entity); 
+			return new ContainerMultiblockBlockInv(player.inventory, (TileEntityMultiblockBlockInv)entity); 
 		return null;
 	}
 	 
@@ -135,9 +135,9 @@ public class GuiHandler implements IGuiHandler {
 		if(entity  instanceof TileEntityMultiblockCrusher)
 			return new GuiContainerMultiblockCrusher(player.inventory, (TileEntityMultiblockCrusher)entity);
 		if(entity  instanceof TileEntityMultiblockInvInput)
-			return new GuiContainerMultiblockIOSelect(player.inventory, (TileEntityMultiblockBlockInv)entity,1); 
+			return new GuiContainerMultiblockBlockInv(player.inventory, (TileEntityMultiblockBlockInv)entity,1); 
 		if(entity  instanceof TileEntityMultiblockInvOutput)
-			return new GuiContainerMultiblockIOSelect(player.inventory, (TileEntityMultiblockBlockInv)entity,2); 
+			return new GuiContainerMultiblockBlockInv(player.inventory, (TileEntityMultiblockBlockInv)entity,2); 
 		return null;
 	}
 

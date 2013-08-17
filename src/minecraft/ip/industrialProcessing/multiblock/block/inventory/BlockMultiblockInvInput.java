@@ -3,7 +3,7 @@ package ip.industrialProcessing.multiblock.block.inventory;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.multiblock.BlockMultiblockBlock;
-import ip.industrialProcessing.multiblock.ITileEntityMultiblockBlock;
+import ip.industrialProcessing.multiblock.interfaces.ITileEntityMultiblockBlock;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

@@ -16,7 +16,6 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.ConfigTransportBlocks;
-import ip.industrialProcessing.multiblock.utils.MultiblockUtils;
 import ip.industrialProcessing.transport.BlockTransport;
 
 public class BlockTransportFluids extends BlockTransport {

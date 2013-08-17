@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.multiblock.BlockMultiblockBlock;
-import ip.industrialProcessing.multiblock.ITileEntityMultiblockBlock;
+import ip.industrialProcessing.multiblock.interfaces.ITileEntityMultiblockBlock;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 
 public class BlockMachineFrame extends BlockMultiblockBlock {

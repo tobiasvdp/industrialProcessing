@@ -4,7 +4,6 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.multiblock.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.extended.inventory.TileEntityMultiblockCoreInv;
-import ip.industrialProcessing.multiblock.utils.MultiblockUtils;
 import ip.industrialProcessing.multiblock.utils.inventory.MultiblockItemStack;
 import ip.industrialProcessing.multiblock.utils.layout.MultiBlockStructureBlockDescription;
 import ip.industrialProcessing.multiblock.utils.layout.MultiblockLayout;

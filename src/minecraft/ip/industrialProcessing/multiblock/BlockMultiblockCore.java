@@ -1,12 +1,11 @@
 package ip.industrialProcessing.multiblock;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.multiblock.interfaces.ITileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
-import ip.industrialProcessing.multiblock.utils.MultiblockUtils;
-import ip.industrialProcessing.multiblock.utils.layout.MultiblockLayout;
 import ip.industrialProcessing.utils.inventories.InventoryUtils;
 import net.minecraft.block.BlockContainer;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -22,7 +21,7 @@ public abstract class BlockMultiblockCore extends BlockContainer {
 		setStepSound(stepSound);
 		setUnlocalizedName(name);
 		setCreativeTab(tab);
-		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "frame_full");
+		func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "frame_full");
 	}
 
 	@Override

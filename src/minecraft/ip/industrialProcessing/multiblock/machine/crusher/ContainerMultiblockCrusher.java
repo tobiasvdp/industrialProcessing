@@ -2,11 +2,11 @@ package ip.industrialProcessing.multiblock.machine.crusher;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
-import ip.industrialProcessing.multiblock.extended.inventory.ContainerMultiblockInv;
+import ip.industrialProcessing.multiblock.extended.inventory.ContainerMultiblockCoreInv;
 import ip.industrialProcessing.multiblock.extended.inventory.TileEntityMultiblockCoreInv;
 import ip.industrialProcessing.slots.SlotBase;
 
-public class ContainerMultiblockCrusher extends ContainerMultiblockInv{
+public class ContainerMultiblockCrusher extends ContainerMultiblockCoreInv{
 
 	public ContainerMultiblockCrusher(InventoryPlayer inventoryPlayer, TileEntityMultiblockCrusher entity) {
 		super(inventoryPlayer, ((TileEntityMultiblockCoreInv)entity));

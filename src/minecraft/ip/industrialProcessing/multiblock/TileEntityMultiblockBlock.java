@@ -1,20 +1,15 @@
 package ip.industrialProcessing.multiblock;
 
+import ip.industrialProcessing.multiblock.interfaces.ITileEntityMultiblockBlock;
+import ip.industrialProcessing.multiblock.interfaces.ITileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 
-import org.lwjgl.Sys;
-
-import com.google.common.base.CaseFormat;
-
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.structure.StructureVillagePieceWeight;
 import net.minecraftforge.common.ForgeDirection;
 
 public abstract class TileEntityMultiblockBlock extends TileEntity implements ITileEntityMultiblockBlock {
@@ -216,6 +211,7 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements IT
 			onStateChanged();
 	}
 
+	@Override
 	public ITileEntityMultiblockCore searchForCore() {
 		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
 			TileEntity neighbour = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
@@ -236,6 +232,7 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements IT
 		return null;
 	}
 
+	@Override
 	public void onStateChanged() {
 		worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord));
 	}

@@ -13,9 +13,9 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import ip.industrialProcessing.machines.MachineItemStack;
 import ip.industrialProcessing.multiblock.TileEntityMultiblockCore;
+import ip.industrialProcessing.multiblock.interfaces.IMultiblockInventoryBlock;
+import ip.industrialProcessing.multiblock.interfaces.IMultiblockInventoryCore;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
-import ip.industrialProcessing.multiblock.utils.inventory.IMultiblockInventoryBlock;
-import ip.industrialProcessing.multiblock.utils.inventory.IMultiblockInventoryCore;
 import ip.industrialProcessing.multiblock.utils.inventory.MultiblockItemStack;
 import ip.industrialProcessing.multiblock.utils.layout.MultiblockLayout;
 

@@ -14,12 +14,12 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.WorldServerMulti;
-import ip.industrialProcessing.multiblock.ITileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.TileEntityMultiblockBlock;
 import ip.industrialProcessing.multiblock.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.block.inventory.TileEntityMultiblockInvInput;
+import ip.industrialProcessing.multiblock.interfaces.IMultiblockInventoryBlock;
+import ip.industrialProcessing.multiblock.interfaces.ITileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
-import ip.industrialProcessing.multiblock.utils.inventory.IMultiblockInventoryBlock;
 import ip.industrialProcessing.multiblock.utils.layout.MultiblockLayout;
 
 public abstract class TileEntityMultiblockBlockInv extends TileEntityMultiblockBlock implements IMultiblockInventoryBlock {
