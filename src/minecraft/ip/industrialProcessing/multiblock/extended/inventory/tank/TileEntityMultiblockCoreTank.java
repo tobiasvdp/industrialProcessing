@@ -10,6 +10,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
+import ip.industrialProcessing.machines.MachineFluidTank;
 import ip.industrialProcessing.multiblock.extended.inventory.TileEntityMultiblockCoreInv;
 import ip.industrialProcessing.multiblock.utils.layout.MultiblockLayout;
 import ip.industrialProcessing.multiblock.utils.tank.MultiblockTank;
@@ -19,6 +20,10 @@ public class TileEntityMultiblockCoreTank extends TileEntityMultiblockCoreInv{
 
 	public TileEntityMultiblockCoreTank(MultiblockLayout structure) {
 		super(structure);
+	}
+	
+	protected void addTank(int capacity, boolean input, boolean output) {
+		fluidTanks.add(new MultiblockTank(this, capacity, input, output));
 	}
 
 	@Override
@@ -59,7 +64,13 @@ public class TileEntityMultiblockCoreTank extends TileEntityMultiblockCoreInv{
 	}
 
 	public int fill(int tankSlot, FluidStack resource, boolean doFill) {
-		return 0;
+		FluidTank tank = fluidTanks.get(tankSlot);
+		if (tank == null)
+		    return 0;
+		int amount = tank.fill(resource, doFill);
+		if (doFill)
+		    onTanksChanged();
+		return amount;
 	}
 
 
@@ -104,6 +115,41 @@ public class TileEntityMultiblockCoreTank extends TileEntityMultiblockCoreInv{
 	public boolean canFill(int tankSlot, Fluid fluid) {
 		// TODO dependent on worker
 		return true;
+	}
+
+	public int firstValidTankID(boolean isInput) {
+		for (int i = 0; i < fluidTanks.size(); i++) {
+			if (fluidTanks.get(i).getIsInput() == isInput) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	public FluidTankInfo getFluidTankInfoForSlot(int slot) {
+		return this.fluidTanks.get(slot).getInfo();
+	}
+
+	public int prevValidTankID(int inventoryID) {
+		boolean isInput = fluidTanks.get(inventoryID).getIsInput();
+
+		for (int i = inventoryID - 1; i >= 0; i--) {
+			if (fluidTanks.get(i).getIsInput() == isInput) {
+				return i;
+			}
+		}
+		return inventoryID;
+	}
+
+	public int nextValidTankID(int inventoryID) {
+		boolean isInput = fluidTanks.get(inventoryID).getIsInput();
+
+		for (int i = inventoryID + 1; i < fluidTanks.size(); i++) {
+			if (fluidTanks.get(i).getIsInput() == isInput) {
+				return i;
+			}
+		}
+		return inventoryID;
 	}
 
 }

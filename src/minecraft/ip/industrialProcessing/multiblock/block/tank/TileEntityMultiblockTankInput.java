@@ -9,7 +9,6 @@ public class TileEntityMultiblockTankInput extends TileEntityMultiblockBlockTank
 	public TileEntityMultiblockTankInput(){
 		super();
 	}
-	
 	@Override
 	public boolean canFill(ForgeDirection from, Fluid fluid) {
 		return true;
@@ -18,6 +17,10 @@ public class TileEntityMultiblockTankInput extends TileEntityMultiblockBlockTank
 	@Override
 	public boolean canDrain(ForgeDirection from, Fluid fluid) {
 		return false;
+	}
+	@Override
+	public int firstValidID(){
+		return getCore().firstValidTankID(true);
 	}
 
 }

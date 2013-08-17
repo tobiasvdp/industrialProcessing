@@ -10,7 +10,6 @@ import ip.industrialProcessing.multiblock.utils.layout.MultiblockLayout;
 import ip.industrialProcessing.multiblock.utils.layout.MultiblockStructure;
 
 public class TileEntityMultiblockCrusher extends TileEntityMultiblockCoreInv {
-
 	private static MultiblockLayout structure;
 
 	static { 

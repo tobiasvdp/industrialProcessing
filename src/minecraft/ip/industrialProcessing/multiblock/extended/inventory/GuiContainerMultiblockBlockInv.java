@@ -18,12 +18,17 @@ import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.multiplayer.NetClientHandler;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTankInfo;
 
 public class GuiContainerMultiblockBlockInv extends GuiContainer {
 
@@ -40,12 +45,13 @@ public class GuiContainerMultiblockBlockInv extends GuiContainer {
 	public GuiContainerMultiblockBlockInv(InventoryPlayer inventoryPlayer, TileEntityMultiblockBlockInv tileEntity, int type) {
 		super(new ContainerMultiblockBlockInv(inventoryPlayer, tileEntity));
 		this.tileEntity = tileEntity;
-		if (type == 1)
-			this.name = "Input interface";
-		else if (type==2)
-			this.name = "Output interface";
-		else
-			this.name = "Fruitbasket";
+		switch(type){
+		case 0: this.name = "Input interface";break;
+		case 1: this.name = "Output interface";break;
+		case 2: this.name = "Input interface Tank";break;
+		case 3: this.name = "Output interface Tank";break;
+		default: this.name = "Fruitbasket";
+		}
 	}
 
 	@Override

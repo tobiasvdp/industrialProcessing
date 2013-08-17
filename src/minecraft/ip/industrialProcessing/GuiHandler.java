@@ -44,12 +44,19 @@ import ip.industrialProcessing.machines.thickener.GuiContainerThickener;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
 import ip.industrialProcessing.multiblock.block.inventory.TileEntityMultiblockInvInput;
 import ip.industrialProcessing.multiblock.block.inventory.TileEntityMultiblockInvOutput;
+import ip.industrialProcessing.multiblock.block.tank.TileEntityMultiblockTankInput;
+import ip.industrialProcessing.multiblock.block.tank.TileEntityMultiblockTankOutput;
 import ip.industrialProcessing.multiblock.extended.inventory.ContainerMultiblockBlockInv;
 import ip.industrialProcessing.multiblock.extended.inventory.GuiContainerMultiblockBlockInv;
 import ip.industrialProcessing.multiblock.extended.inventory.TileEntityMultiblockBlockInv;
+import ip.industrialProcessing.multiblock.extended.inventory.tank.GuiContainerMultiblockBlockTank;
+import ip.industrialProcessing.multiblock.extended.inventory.tank.TileEntityMultiblockBlockTank;
 import ip.industrialProcessing.multiblock.machine.crusher.ContainerMultiblockCrusher;
 import ip.industrialProcessing.multiblock.machine.crusher.GuiContainerMultiblockCrusher;
 import ip.industrialProcessing.multiblock.machine.crusher.TileEntityMultiblockCrusher;
+import ip.industrialProcessing.multiblock.machine.mixer.ContainerMultiblockMixer;
+import ip.industrialProcessing.multiblock.machine.mixer.GuiContainerMultiblockMixer;
+import ip.industrialProcessing.multiblock.machine.mixer.TileEntityMultiblockMixer;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -93,8 +100,12 @@ public class GuiHandler implements IGuiHandler {
 			return new ContainerBlastFurnace(player.inventory, (TileEntityBlastFurnace)entity); 
 		if(entity  instanceof TileEntityMultiblockCrusher)
 			return new ContainerMultiblockCrusher(player.inventory, (TileEntityMultiblockCrusher)entity); 
+		if(entity  instanceof TileEntityMultiblockMixer)
+			return new ContainerMultiblockMixer(player.inventory, (TileEntityMultiblockMixer)entity); 
+		if(entity  instanceof TileEntityMultiblockBlockTank)
+			return new ContainerMultiblockBlockInv(player.inventory, (TileEntityMultiblockBlockTank)entity); 
 		if(entity  instanceof TileEntityMultiblockBlockInv)
-			return new ContainerMultiblockBlockInv(player.inventory, (TileEntityMultiblockBlockInv)entity); 
+			return new ContainerMultiblockBlockInv(player.inventory, (TileEntityMultiblockBlockInv)entity);  
 		return null;
 	}
 	 
@@ -134,10 +145,16 @@ public class GuiHandler implements IGuiHandler {
 			return new GuiContainerBlastFurnace(player.inventory, (TileEntityBlastFurnace)entity); 
 		if(entity  instanceof TileEntityMultiblockCrusher)
 			return new GuiContainerMultiblockCrusher(player.inventory, (TileEntityMultiblockCrusher)entity);
+		if(entity  instanceof TileEntityMultiblockMixer)
+			return new GuiContainerMultiblockMixer(player.inventory, (TileEntityMultiblockMixer)entity);
 		if(entity  instanceof TileEntityMultiblockInvInput)
-			return new GuiContainerMultiblockBlockInv(player.inventory, (TileEntityMultiblockBlockInv)entity,1); 
+			return new GuiContainerMultiblockBlockInv(player.inventory, (TileEntityMultiblockBlockInv)entity,0); 
 		if(entity  instanceof TileEntityMultiblockInvOutput)
-			return new GuiContainerMultiblockBlockInv(player.inventory, (TileEntityMultiblockBlockInv)entity,2); 
+			return new GuiContainerMultiblockBlockInv(player.inventory, (TileEntityMultiblockBlockInv)entity,1);
+		if(entity  instanceof TileEntityMultiblockTankInput)
+			return new GuiContainerMultiblockBlockTank(player.inventory, (TileEntityMultiblockBlockTank)entity,2); 
+		if(entity  instanceof TileEntityMultiblockTankOutput)
+			return new GuiContainerMultiblockBlockTank(player.inventory, (TileEntityMultiblockBlockTank)entity,3); 
 		return null;
 	}
 

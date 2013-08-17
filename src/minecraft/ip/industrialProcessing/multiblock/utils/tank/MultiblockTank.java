@@ -6,7 +6,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
 public class MultiblockTank extends FluidTank{
-	public MultiblockTank(TileEntity tile, int capacity, int[] sides,
+	public MultiblockTank(TileEntity tile, int capacity,
 			boolean input, boolean output) {
 		super(capacity);
 		this.tile = tile;
@@ -29,5 +29,9 @@ public class MultiblockTank extends FluidTank{
 			setFluid(null);
 		}
 		return this;
+	}
+
+	public boolean getIsInput() {
+		return input;
 	}
 }
