@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.bouncycastle.crypto.util.Pack;
+
 import ip.industrialProcessing.config.ConfigAchievements;
 import ip.industrialProcessing.config.ConfigBlocks;
 import ip.industrialProcessing.config.ConfigCreativeTabs;
@@ -103,12 +105,13 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid = "IndustrialProcessing", name = "Industrial Processing", version = "0.0.0", dependencies = "after:NotEnoughItems")
-@NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = { PacketHandler.ANIMATION_SYNC,PacketHandler.BUTTON_PRESSED,PacketHandler.SYNC_CLIENT }, packetHandler = PacketHandler.class)
+@NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = { PacketHandler.ANIMATION_SYNC,PacketHandler.BUTTON_PRESSED,PacketHandler.SYNC_CLIENT, PacketHandler.SEND_INFO }, packetHandler = PacketHandler.class)
 public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISetupMachineBlocks, ISetupItems, ISetupBlocks, ISetupFluids, ISetupAchievements, ISetupDamageSource {
 	// The instance of your mod that Forge uses.
 	@Instance("IndustrialProcessing")
 	public static IndustrialProcessing instance;
 	
+	public static boolean invertShift;
 	public static Logger log;
 
     public static Configuration config;

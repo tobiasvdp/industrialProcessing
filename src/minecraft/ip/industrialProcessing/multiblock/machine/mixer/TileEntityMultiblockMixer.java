@@ -41,4 +41,10 @@ public class TileEntityMultiblockMixer extends TileEntityMultiblockCoreTank{
 		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, true, false);
 		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, false, true);
 	}
+    @Override
+    public void updateEntity() {
+    	addBucketToTank(0, 1, 0);
+		getBucketFromTank(2, 3, 1);
+	super.updateEntity();
+    };
 }

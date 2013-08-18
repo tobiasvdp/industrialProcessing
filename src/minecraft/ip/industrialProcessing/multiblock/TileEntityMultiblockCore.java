@@ -65,7 +65,6 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 			isMultiblock = false;
 			locked = false;
 		}
-		System.out.println(state);
 		if (this.state != state) {
 			this.state = state;
 			onStateChanged();

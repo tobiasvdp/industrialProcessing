@@ -1,5 +1,7 @@
 package ip.industrialProcessing.machines;
 
+import java.util.List;
+
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.utils.working.IWorker;
@@ -7,16 +9,20 @@ import ip.industrialProcessing.utils.working.IWorkingEntity;
 
 import org.lwjgl.opengl.GL11;
 
+import codechicken.nei.VisiblityData;
+import codechicken.nei.api.INEIGuiHandler;
+import codechicken.nei.api.TaggedInventoryArea;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.ForgeDirection;
 
-public class GuiContainerMachine extends GuiContainer {
+public class GuiContainerMachine extends GuiContainer{
 
     public TileEntityMachine tileEntity;
     protected String name;
@@ -73,5 +79,4 @@ public class GuiContainerMachine extends GuiContainer {
     protected void setProgresBarDropside(ForgeDirection o){
     	progressBarSide = o; 
     }
-
 }

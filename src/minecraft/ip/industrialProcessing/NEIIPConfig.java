@@ -1,17 +1,31 @@
 package ip.industrialProcessing;
 
+import ip.industrialProcessing.machines.crusher.GuiCrusher;
+import ip.industrialProcessing.nei.NeiCrusherRecipes;
+import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
+import codechicken.nei.recipe.DefaultOverlayHandler;
 
 public class NEIIPConfig implements IConfigureNEI{
+	
+	public static NeiCrusherRecipes crusherHandler = new NeiCrusherRecipes();
 
 	public NEIIPConfig() {
-		// TODO Auto-generated constructor stub
-	}
+}
 
 	@Override
 	public void loadConfig() {
-		// TODO Auto-generated method stub
+		API.hideItem(IndustrialProcessing.blockFluidDirtyWater.blockID);
+		API.hideItem(IndustrialProcessing.blockFluidExhaustGas.blockID);
+		API.hideItem(IndustrialProcessing.blockFluidOreSludgeCopper.blockID);
+		API.hideItem(IndustrialProcessing.blockFluidOreSludgeIron.blockID);
+		API.hideItem(IndustrialProcessing.blockFluidOreSludgeTin.blockID);
+		API.hideItem(IndustrialProcessing.blockFluidHotSlag.blockID);
+		API.hideItem(IndustrialProcessing.blockFluidHotSteel.blockID);
+		API.hideItem(IndustrialProcessing.blockFluidPigIron.blockID);
 		
+		API.registerGuiOverlay(GuiCrusher.class, "crafting");
+		API.registerGuiOverlayHandler(GuiCrusher.class, new DefaultOverlayHandler(), "crafting");
 	}
 
 	@Override

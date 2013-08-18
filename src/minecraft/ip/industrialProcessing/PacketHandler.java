@@ -12,6 +12,8 @@ import java.io.IOException;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.nbt.CompressedStreamTools;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet250CustomPayload;
@@ -25,6 +27,7 @@ public class PacketHandler implements IPacketHandler {
 	public static final String ANIMATION_SYNC = "IP.AniSync";
 	public static final String BUTTON_PRESSED = "IP.ButtonPressed";
 	public static final String SYNC_CLIENT = "IP.clientSync";
+	public static final String SEND_INFO = "IP.sendInfo";
 
 	public PacketHandler() {
 		// TODO Auto-generated constructor stub
@@ -75,4 +78,21 @@ public class PacketHandler implements IPacketHandler {
 		System.out.println("Sending "+packet.toString()+" to all players");
 		PacketDispatcher.sendPacketToAllPlayers(packet);
 	}
+	
+	 public static void send(String cmd, NBTTagCompound data) {
+	        NBTTagCompound nbt = new NBTTagCompound();
+
+
+	        nbt.setString("cmd", cmd);
+	        nbt.setTag("data", data);
+
+
+	        try {
+	            Packet250CustomPayload pkt = new Packet250CustomPayload(SEND_INFO, CompressedStreamTools.compress(nbt));
+	            PacketDispatcher.sendPacketToServer(pkt);
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
 }

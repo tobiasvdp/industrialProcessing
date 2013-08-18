@@ -1,10 +1,13 @@
 package ip.industrialProcessing.machines.crusher;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.NEIIPConfig;
 import ip.industrialProcessing.config.ConfigBlocks;
 import ip.industrialProcessing.config.ConfigItems;
 import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.nei.NeiCrusherRecipes;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeInputSlot;
 import ip.industrialProcessing.recipes.RecipeOutputSlot;
@@ -17,6 +20,7 @@ public class RecipesCrusher extends RecipesMachine {
 	}
 
 	private void addDefaultRecipes() {
+		
 		//copper ore to Crushed copper chunks
 		Recipe copperCrushing = new Recipe();
 		copperCrushing.inputs = new RecipeInputSlot[]{

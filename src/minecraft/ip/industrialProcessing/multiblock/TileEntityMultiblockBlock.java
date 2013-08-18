@@ -89,10 +89,13 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements IT
 		}
 		count++;
 		if (init) {
-			setCore(searchForCore());
-			if (hasCore()) {
-				getCore().checkStructure();
-				onStateChanged();
+			if (!hasCore) {
+				setCore(searchForCore());
+				if (hasCore()) {
+					getCore().checkStructure();
+					onStateChanged();
+				}
+
 			}
 			init = false;
 		}
@@ -144,7 +147,7 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements IT
 	public ITileEntityMultiblockCore getCore() {
 		if (hasCore)
 			return (ITileEntityMultiblockCore) worldObj.getBlockTileEntity(xCore, yCore, zCore);
-		else{
+		else {
 			setCore(null);
 		}
 		return null;
