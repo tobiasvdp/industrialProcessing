@@ -15,7 +15,15 @@ public class ConfigRenderers {
     private int rendererBatteryBoxID;
     private int rendererBlastFurnaceID;
     private int rendererTankID;
+    private int rendererBlockMachineFrameID;
 
+    public static int getRendererBlockMachineFrameID() {
+	return getInstance().rendererBlockMachineFrameID;
+    }
+
+    public static void setRendererBlockMachineFrameID(int value) {
+	getInstance().rendererBlockMachineFrameID = value;
+    }
     public static int getRendererFilterId() {
 	return getInstance().rendererFilterID;
     }

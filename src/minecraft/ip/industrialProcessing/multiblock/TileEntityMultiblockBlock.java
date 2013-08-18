@@ -3,8 +3,10 @@ package ip.industrialProcessing.multiblock;
 import ip.industrialProcessing.multiblock.interfaces.ITileEntityMultiblockBlock;
 import ip.industrialProcessing.multiblock.interfaces.ITileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
-
+import ip.industrialProcessing.multiblock.utils.inventory.MultiblockItemStack;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
@@ -27,6 +29,11 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements IT
 	protected boolean hasCore;
 	protected boolean init;
 	protected MultiblockState state;
+	public boolean[] connectedSides = new boolean[6];
+	
+	public boolean[] getConnectedSides(){
+		return this.connectedSides;
+	}
 
 	@Override
 	public int getCoreX() {
@@ -66,6 +73,14 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements IT
 			par1NBTTagCompound.setInteger("cz", zCore);
 			par1NBTTagCompound.setInteger("State", this.state.ordinal());
 		}
+		NBTTagList nbttaglist = new NBTTagList();
+		for (int i = 0; i < 6; ++i) {
+				NBTTagCompound nbttagcompound = new NBTTagCompound();
+				nbttagcompound.setBoolean("Side"+i, connectedSides[i]);
+				nbttaglist.appendTag(nbttagcompound);
+		}
+		par1NBTTagCompound.setTag("Sides", nbttaglist);
+		
 	};
 
 	@Override
@@ -78,6 +93,11 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements IT
 			this.yCore = par1NBTTagCompound.getInteger("cy");
 			this.zCore = par1NBTTagCompound.getInteger("cz");
 			this.state = MultiblockState.fromInt(par1NBTTagCompound.getInteger("State"));
+		}
+		NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Sides");
+		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
+			NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(i);
+			connectedSides[i] = nbttagcompound1.getBoolean("Side"+i);
 		}
 	};
 
@@ -97,6 +117,8 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements IT
 				}
 
 			}
+			checkConnectedSides();
+			
 			init = false;
 		}
 
@@ -212,6 +234,27 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements IT
 		}
 		if (prevState != state)
 			onStateChanged();
+	}
+
+	public void checkConnectedSides() {
+		int i = 0;
+		for(ForgeDirection dir: ForgeDirection.VALID_DIRECTIONS){
+			
+			TileEntity te = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+			if (te != null){
+				if(te instanceof TileEntityMultiblockBlock || te instanceof TileEntityMultiblockCore){
+					connectedSides[i] = true;
+				}else{
+					connectedSides[i] = false;
+				}
+			}
+			else{
+				connectedSides[i] = false;
+			}
+			i++;			
+		}		
+		connectedSides[0] = true;
+		
 	}
 
 	@Override
