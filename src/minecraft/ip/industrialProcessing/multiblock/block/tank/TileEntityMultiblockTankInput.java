@@ -3,23 +3,28 @@ package ip.industrialProcessing.multiblock.block.tank;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import ip.industrialProcessing.multiblock.extended.inventory.tank.TileEntityMultiblockBlockTank;
+import ip.industrialProcessing.multiblock.utils.MultiblockState;
 
-public class TileEntityMultiblockTankInput extends TileEntityMultiblockBlockTank{
+public class TileEntityMultiblockTankInput extends TileEntityMultiblockBlockTank {
 
-	public TileEntityMultiblockTankInput(){
+	public TileEntityMultiblockTankInput() {
 		super();
 	}
+
 	@Override
 	public boolean canFill(ForgeDirection from, Fluid fluid) {
-		return true;
+		if (state == MultiblockState.COMPLETED)
+			return getCore().isTankValidForFluid(inventoryID, fluid.getBlockID());
+		return false;
 	}
 
 	@Override
 	public boolean canDrain(ForgeDirection from, Fluid fluid) {
 		return false;
 	}
+
 	@Override
-	public int firstValidID(){
+	public int firstValidID() {
 		return getCore().firstValidTankID(true);
 	}
 

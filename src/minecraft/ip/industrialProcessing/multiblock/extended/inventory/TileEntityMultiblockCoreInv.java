@@ -20,7 +20,7 @@ import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import ip.industrialProcessing.multiblock.utils.inventory.MultiblockItemStack;
 import ip.industrialProcessing.multiblock.utils.layout.MultiblockLayout;
 
-public class TileEntityMultiblockCoreInv extends TileEntityMultiblockCore implements IMultiblockInventoryCore, IMachineSlots {
+public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCore implements IMultiblockInventoryCore, IMachineSlots {
 
 	protected ArrayList<MultiblockItemStack> itemStacks = new ArrayList<MultiblockItemStack>();
 
@@ -72,12 +72,6 @@ public class TileEntityMultiblockCoreInv extends TileEntityMultiblockCore implem
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		// TODO recipe dependent
-		return true;
-	}
-
-	@Override
 	public int[] getAccessibleSlotsForID(int ID) {
 		ArrayList<Integer> validSlots = new ArrayList<Integer>();
 		for (int i = 0; i < itemStacks.size(); i++) {
@@ -92,7 +86,7 @@ public class TileEntityMultiblockCoreInv extends TileEntityMultiblockCore implem
 		if (state != MultiblockState.COMPLETED)
 			return false;
 		if (itemStacks.get(i).getIsInput() && itemStacks.get(i).incStack(itemstack.itemID, itemstack.stackSize, false))
-			return true;
+			return isItemValidForSlot(i,itemstack);
 		return false;
 	}
 
@@ -101,8 +95,7 @@ public class TileEntityMultiblockCoreInv extends TileEntityMultiblockCore implem
 		if (state != MultiblockState.COMPLETED)
 			return false;
 		if (!itemStacks.get(i).getIsInput() && itemStacks.get(i).getItemStack().stackSize >= itemstack.stackSize) {
-			System.out.println(worldObj);
-			return true;
+			return isItemValidForSlot(i,itemstack);
 		}
 		return false;
 	}

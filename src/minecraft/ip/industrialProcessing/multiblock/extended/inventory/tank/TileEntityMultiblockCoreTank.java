@@ -18,7 +18,7 @@ import ip.industrialProcessing.multiblock.extended.inventory.TileEntityMultibloc
 import ip.industrialProcessing.multiblock.utils.layout.MultiblockLayout;
 import ip.industrialProcessing.multiblock.utils.tank.MultiblockTank;
 
-public class TileEntityMultiblockCoreTank extends TileEntityMultiblockCoreInv {
+public abstract class TileEntityMultiblockCoreTank extends TileEntityMultiblockCoreInv {
 	protected ArrayList<MultiblockTank> fluidTanks = new ArrayList<MultiblockTank>();
 
 	public TileEntityMultiblockCoreTank(MultiblockLayout structure) {
@@ -94,12 +94,12 @@ public class TileEntityMultiblockCoreTank extends TileEntityMultiblockCoreInv {
 	protected void addBucketToTank(int inputSlot, int outputSlot, int tankSlot) {
 
 		ItemStack bucketOutputStack = getStackInSlot(outputSlot);
-		if (bucketOutputStack == null) // output available
+		if (bucketOutputStack == null)
 		{
 			ItemStack inputStack = getStackInSlot(inputSlot);
 			FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(inputStack);
 			if (fluid != null) {
-				//if (isTankValidForFluid(tankSlot, fluid.fluidID)) {
+				if (isTankValidForFluid(tankSlot, fluid.fluidID)) {
 
 					ItemStack emptyContainer = getEmptyContainerFromContainer(inputStack);
 					if (emptyContainer != null) {
@@ -111,7 +111,7 @@ public class TileEntityMultiblockCoreTank extends TileEntityMultiblockCoreInv {
 							onTanksChanged();
 						}
 					}
-				//}
+				}
 			}
 		}
 	}
@@ -139,6 +139,8 @@ public class TileEntityMultiblockCoreTank extends TileEntityMultiblockCoreInv {
 	public int fill(int tankSlot, FluidStack resource, boolean doFill) {
 		FluidTank tank = fluidTanks.get(tankSlot);
 		if (tank == null)
+			return 0;
+		if (!isTankValidForFluid(tankSlot, resource.fluidID))
 			return 0;
 		int amount = tank.fill(resource, doFill);
 		if (doFill)
@@ -180,15 +182,13 @@ public class TileEntityMultiblockCoreTank extends TileEntityMultiblockCoreInv {
 	}
 
 	public boolean canDrain(int tankSlot, Fluid fluid) {
-		// TODO dependent on worker
-		return true;
+		return  isTankValidForFluid(tankSlot, fluid.getBlockID());
 	}
 
 	public boolean canFill(int tankSlot, Fluid fluid) {
-		// TODO dependent on worker
-		return true;
+		return isTankValidForFluid(tankSlot, fluid.getBlockID());
 	}
-
+	
 	public int firstValidTankID(boolean isInput) {
 		for (int i = 0; i < fluidTanks.size(); i++) {
 			if (fluidTanks.get(i).getIsInput() == isInput) {
@@ -223,5 +223,5 @@ public class TileEntityMultiblockCoreTank extends TileEntityMultiblockCoreInv {
 		}
 		return inventoryID;
 	}
-
+	public abstract boolean isTankValidForFluid(int slot, int fluidId);
 }

@@ -53,7 +53,9 @@ public abstract class TileEntityMultiblockBlockTank extends TileEntityMultiblock
 	}
 	@Override
 	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-		return getCore().getTankInfo(from);
+		if (getCore() != null)
+			return getCore().getTankInfo(from);
+		return null;
 	}
 	@Override
 	public int firstValidID(){

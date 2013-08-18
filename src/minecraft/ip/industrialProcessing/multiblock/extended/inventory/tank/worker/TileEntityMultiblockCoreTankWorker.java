@@ -2,6 +2,7 @@ package ip.industrialProcessing.multiblock.extended.inventory.tank.worker;
 
 import java.util.Iterator;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fluids.FluidStack;
