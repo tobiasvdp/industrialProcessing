@@ -205,7 +205,8 @@ public class ModelMultiblockFrame extends ModelMultiblock {
 		setRotation(BackBottomRight, 0F, 0F, 0F);
 	}
 
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+	public void render(Entity entity, float f, float f1, float f2, float f3,
+			float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5);
 		base.render(f5);
@@ -239,7 +240,8 @@ public class ModelMultiblockFrame extends ModelMultiblock {
 		this.entity = entity;
 	}
 
-	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5) {
+	public void setRotationAngles(float f, float f1, float f2, float f3,
+			float f4, float f5) {
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 	}
 
@@ -258,25 +260,45 @@ public class ModelMultiblockFrame extends ModelMultiblock {
 			Left.render(f5);
 		if (sides[5])
 			Right.render(f5);
-		// FrontLeft.render(f5);
-		// BackLeft.render(f5);
-		// FrontRight.render(f5);
-		// BackRight.render(f5);
-		// FrontTop.render(f5);
-		// FrontBottom.render(f5);
-		// BackTop.render(f5);
-		// BackBottom.render(f5);
-		// LeftTop.render(f5);
-		// LeftBottom.render(f5);
-		// RightTop.render(f5);
-		// RightBottom.render(f5);
-		// FrontTopRight.render(f5);
-		// FrontTopLeft.render(f5);
-		// FrontBottomRight.render(f5);
-		// FrontBottomLeft.render(f5);
-		// BackTopLeft.render(f5);
-		// BackTopRight.render(f5);
-		// BackBottomLeft.render(f5);
-		// BackBottomRight.render(f5);
+		if (sides[2]&&sides[4])
+		 FrontLeft.render(f5);
+		if (sides[3]&&sides[4])
+		 BackLeft.render(f5);
+		if (sides[2]&&sides[5])
+		 FrontRight.render(f5);
+		if (sides[3]&&sides[5])
+		 BackRight.render(f5);
+		if (sides[2]&&sides[1])
+		 FrontTop.render(f5);
+		if (sides[2]&&sides[0])
+		 FrontBottom.render(f5);
+		if (sides[3]&&sides[1])
+		 BackTop.render(f5);
+		if (sides[3]&&sides[0])
+		 BackBottom.render(f5);
+		if (sides[4]&&sides[1])
+		 LeftTop.render(f5);
+		if (sides[4]&&sides[0])
+		 LeftBottom.render(f5);
+		if (sides[5]&&sides[1])
+		 RightTop.render(f5);
+		if (sides[5]&&sides[0])
+		 RightBottom.render(f5);
+		if (sides[2]&&sides[1]&&sides[5])
+		 FrontTopRight.render(f5);
+		if (sides[2]&&sides[1]&&sides[4])
+		 FrontTopLeft.render(f5);
+		if (sides[2]&&sides[0]&&sides[5])
+		 FrontBottomRight.render(f5);
+		if (sides[2]&&sides[0]&&sides[4])
+		 FrontBottomLeft.render(f5);
+		if (sides[3]&&sides[1]&&sides[4])
+		 BackTopLeft.render(f5);
+		if (sides[3]&&sides[1]&&sides[5])
+		 BackTopRight.render(f5);
+		if (sides[3]&&sides[0]&&sides[4])
+		 BackBottomLeft.render(f5);
+		if (sides[3]&&sides[0]&&sides[5])
+		 BackBottomRight.render(f5);
 	}
 }

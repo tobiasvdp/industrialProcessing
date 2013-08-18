@@ -1,4 +1,6 @@
 package ip.industrialProcessing;
+public class NEIIPConfig{}
+/*package ip.industrialProcessing;
 
 import ip.industrialProcessing.machines.crusher.GuiCrusher;
 import ip.industrialProcessing.nei.NeiCrusherRecipes;
@@ -38,4 +40,4 @@ public class NEIIPConfig implements IConfigureNEI{
 	     return "@@VERSION@@";
 	}
 
-}
+}*/

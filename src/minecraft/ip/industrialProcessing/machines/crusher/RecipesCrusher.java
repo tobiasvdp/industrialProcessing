@@ -7,7 +7,6 @@ import ip.industrialProcessing.NEIIPConfig;
 import ip.industrialProcessing.config.ConfigBlocks;
 import ip.industrialProcessing.config.ConfigItems;
 import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.nei.NeiCrusherRecipes;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeInputSlot;
 import ip.industrialProcessing.recipes.RecipeOutputSlot;
