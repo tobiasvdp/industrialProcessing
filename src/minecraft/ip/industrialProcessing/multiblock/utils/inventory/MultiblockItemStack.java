@@ -67,7 +67,7 @@ public class MultiblockItemStack {
 	}
 
 	public boolean setStack(int ID, int amount) {
-		if (amount <= itemStack.getMaxStackSize()) {
+		if (amount <= (new ItemStack(ID,amount,0).getMaxStackSize())) {
 			itemStack = new ItemStack(ID, amount, 0);
 			return true;
 		}

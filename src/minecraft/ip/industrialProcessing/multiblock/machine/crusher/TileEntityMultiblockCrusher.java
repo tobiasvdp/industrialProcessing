@@ -1,15 +1,21 @@
 package ip.industrialProcessing.multiblock.machine.crusher;
 
+import java.util.Iterator;
+
+import net.minecraft.item.ItemStack;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
+import ip.industrialProcessing.machines.crusher.RecipesCrusher;
 import ip.industrialProcessing.multiblock.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.extended.inventory.TileEntityMultiblockCoreInv;
+import ip.industrialProcessing.multiblock.extended.inventory.worker.TileEntityMultiblockCoreInvWorker;
 import ip.industrialProcessing.multiblock.utils.inventory.MultiblockItemStack;
 import ip.industrialProcessing.multiblock.utils.layout.MultiBlockStructureBlockDescription;
 import ip.industrialProcessing.multiblock.utils.layout.MultiblockLayout;
 import ip.industrialProcessing.multiblock.utils.layout.MultiblockStructure;
+import ip.industrialProcessing.recipes.Recipe;
 
-public class TileEntityMultiblockCrusher extends TileEntityMultiblockCoreInv {
+public class TileEntityMultiblockCrusher extends TileEntityMultiblockCoreInvWorker {
 	private static MultiblockLayout structure;
 
 	static { 
@@ -28,10 +34,16 @@ public class TileEntityMultiblockCrusher extends TileEntityMultiblockCoreInv {
 		
 		structure.commit(layout);	
 	}
+	public static RecipesMultiblockCrusher recipes = new RecipesMultiblockCrusher(); 
 
 	public TileEntityMultiblockCrusher() {
-		super(structure);
+		super(structure,10);
 		itemStacks.add(new MultiblockItemStack(true,false,0));
 		itemStacks.add(new MultiblockItemStack(false,true,1));
+	}
+
+	@Override
+	public Iterator<Recipe> iterateRecipes() {
+		return recipes.iterator();
 	}
 }

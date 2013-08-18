@@ -19,7 +19,7 @@ import ip.industrialProcessing.multiblock.utils.layout.MultiblockLayout;
 import ip.industrialProcessing.multiblock.utils.tank.MultiblockTank;
 
 public class TileEntityMultiblockCoreTank extends TileEntityMultiblockCoreInv {
-	private ArrayList<MultiblockTank> fluidTanks = new ArrayList<MultiblockTank>();
+	protected ArrayList<MultiblockTank> fluidTanks = new ArrayList<MultiblockTank>();
 
 	public TileEntityMultiblockCoreTank(MultiblockLayout structure) {
 		super(structure);

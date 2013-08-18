@@ -11,6 +11,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
+import ip.industrialProcessing.machines.IMachineSlots;
 import ip.industrialProcessing.machines.MachineItemStack;
 import ip.industrialProcessing.multiblock.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.interfaces.IMultiblockInventoryBlock;
@@ -19,7 +20,7 @@ import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import ip.industrialProcessing.multiblock.utils.inventory.MultiblockItemStack;
 import ip.industrialProcessing.multiblock.utils.layout.MultiblockLayout;
 
-public class TileEntityMultiblockCoreInv extends TileEntityMultiblockCore implements IMultiblockInventoryCore {
+public class TileEntityMultiblockCoreInv extends TileEntityMultiblockCore implements IMultiblockInventoryCore, IMachineSlots {
 
 	protected ArrayList<MultiblockItemStack> itemStacks = new ArrayList<MultiblockItemStack>();
 
@@ -215,4 +216,52 @@ public class TileEntityMultiblockCoreInv extends TileEntityMultiblockCore implem
 		}
 	}
 
+	@Override
+	public boolean slotContains(int slot, int itemId, int amount) {
+		MultiblockItemStack machineStack = itemStacks.get(slot);
+		return machineStack != null && machineStack.getItemStack() != null && machineStack.getItemStack().itemID == itemId && machineStack.getItemStack().stackSize >= amount;
+	}
+
+	@Override
+	public boolean slotHasRoomFor(int slot, ItemStack stack) {
+		if (stack == null || stack.stackSize == 0)
+			return true;
+		MultiblockItemStack machineStack = itemStacks.get(slot);
+		return machineStack != null && (machineStack.getItemStack() == null || (machineStack.getItemStack().itemID == stack.itemID && (machineStack.getItemStack().stackSize + stack.stackSize < getInventoryStackLimit())));
+	}
+
+	@Override
+	public boolean slotHasRoomFor(int slot, int itemId, int amount) {
+		if (amount == 0)
+			return true;
+		MultiblockItemStack machineStack = itemStacks.get(slot);
+		return machineStack != null && (machineStack.getItemStack() == null || (machineStack.getItemStack().itemID == itemId && (machineStack.getItemStack().stackSize + amount < getInventoryStackLimit())));
+	}
+
+	@Override
+	public boolean addToSlot(int slot, int itemId, int maxAmount) {
+		if (slotHasRoomFor(slot, itemId, maxAmount)) {
+			MultiblockItemStack machineStack = itemStacks.get(slot);
+			if (machineStack.getItemStack() == null)
+				machineStack.setStack(itemId, maxAmount);
+			else
+				machineStack.getItemStack().stackSize += maxAmount;
+			onInventoryChanged();
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean removeFromSlot(int slot, int itemId, int maxAmount) {
+		if (slotContains(slot, itemId, maxAmount)) {
+			MultiblockItemStack machineStack = itemStacks.get(slot);
+			machineStack.getItemStack().stackSize -= maxAmount;
+			if (machineStack.getItemStack().stackSize == 0)
+				machineStack.setStack(null);
+			onInventoryChanged();
+			return true;
+		}
+		return false;
+	}
 }
