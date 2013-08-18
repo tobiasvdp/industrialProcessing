@@ -1,5 +1,7 @@
 package ip.industrialProcessing.multiblock.block.frame;
 
+import org.lwjgl.opengl.GL11;
+
 import ip.industrialProcessing.client.render.ModelMultiblock;
 import net.minecraft.entity.Entity;
 import net.minecraft.client.model.ModelBase;
@@ -247,8 +249,16 @@ public class ModelMultiblockFrame extends ModelMultiblock {
 
 	@Override
 	public void renderModelSides(float f5, boolean sides[]) {
+		GL11.glPushMatrix();
+		GL11.glEnable(3042 );
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_DST_ALPHA);
+		GL11.glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
+		
 		base.render(f5);
 		Bottom.render(f5);
+		
+		GL11.glDisable(3042 );
+		GL11.glPopMatrix();
 
 		if (sides[2])
 			Front.render(f5);
