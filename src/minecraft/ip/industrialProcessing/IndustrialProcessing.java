@@ -104,11 +104,14 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 
-@Mod(modid = "IndustrialProcessing", name = "Industrial Processing", version = "0.0.0", dependencies = "after:NotEnoughItems")
-@NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = { PacketHandler.ANIMATION_SYNC,PacketHandler.BUTTON_PRESSED,PacketHandler.SYNC_CLIENT, PacketHandler.SEND_INFO }, packetHandler = PacketHandler.class)
+@Mod(modid = "IndustrialProcessing", name = "Industrial Processing", version = "0.0.1", dependencies = "after:NotEnoughItems")
+@NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = { PacketHandler.ANIMATION_SYNC,PacketHandler.BUTTON_PRESSED,PacketHandler.SYNC_CLIENT, PacketHandler.SEND_INFO }, packetHandler = PacketHandler.class)
 public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISetupMachineBlocks, ISetupItems, ISetupBlocks, ISetupFluids, ISetupAchievements, ISetupDamageSource {
 	// The instance of your mod that Forge uses.
 	@Instance("IndustrialProcessing")
+	
+	
+
 	public static IndustrialProcessing instance;
 	
 	public static boolean invertShift;

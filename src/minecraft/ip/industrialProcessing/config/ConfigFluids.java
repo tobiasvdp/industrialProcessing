@@ -13,6 +13,10 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ConfigFluids {
+	
+	public ConfigFluids(){
+		
+	}
 
 	private int offset = 2500;
 	private int blockFluidBaseDirtyWaterID = offset;
@@ -73,9 +77,6 @@ public class ConfigFluids {
 		}
 	}
 	
-	private ConfigFluids(){
-	
-	}
 	
 	private static ConfigFluids instance = new ConfigFluids();
 	

@@ -11,8 +11,6 @@ import net.minecraftforge.fluids.FluidRegistry;
 
 public class ItemFluid extends Fluid{
 	
-	@SideOnly(Side.CLIENT) 
-	
 	public ItemFluid(String fluidName, int density,int viscosity) {
 		super(fluidName);
 		setDensity( density ); 
