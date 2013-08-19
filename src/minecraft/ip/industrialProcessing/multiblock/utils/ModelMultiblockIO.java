@@ -303,8 +303,8 @@ public class ModelMultiblockIO extends ModelMultiblock {
 
 		base.render(f5);
 
-		GL11.glDisable(3042);
-		GL11.glPopMatrix();
+		//GL11.glDisable(3042);
+		//GL11.glPopMatrix();
 		if (sides[0])
 			Bottom.render(f5);
 		else

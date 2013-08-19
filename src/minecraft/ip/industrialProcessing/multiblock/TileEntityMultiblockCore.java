@@ -7,6 +7,7 @@ import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import ip.industrialProcessing.multiblock.interfaces.ITileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
+import ip.industrialProcessing.multiblock.utils.layout.BlockForward;
 import ip.industrialProcessing.multiblock.utils.layout.MultiblockLayout;
 
 public class TileEntityMultiblockCore extends TileEntity implements ITileEntityMultiblockCore {
@@ -14,7 +15,7 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 	private MultiblockLayout layout;
 	private boolean isMultiblock;
 	protected MultiblockState state;
-	private int[] angle = new int[1];
+	private BlockForward angle = BlockForward.INVALID;
 	private boolean locked;
 	private boolean init;
 
@@ -35,7 +36,7 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 		par1nbtTagCompound.setBoolean("init", this.init);
 		par1nbtTagCompound.setBoolean("Locked", this.locked);
 		par1nbtTagCompound.setInteger("State", this.state.ordinal());
-		par1nbtTagCompound.setInteger("Angle", this.angle[0]);
+		par1nbtTagCompound.setInteger("Angle", this.angle.ordinal());
 	}
 
 	@Override
@@ -45,7 +46,7 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 		this.init = par1nbtTagCompound.getBoolean("init");
 		this.locked = par1nbtTagCompound.getBoolean("Locked");
 		this.state = MultiblockState.fromInt(par1nbtTagCompound.getInteger("State"));
-		this.angle[0] = par1nbtTagCompound.getInteger("Angle");
+		this.angle = BlockForward.values()[par1nbtTagCompound.getInteger("Angle")];
 	}
 
 	@Override
@@ -55,11 +56,13 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 
 	@Override
 	public boolean checkStructure() {
-		MultiblockState state = MultiblockState.DISCONNECTED;
-		if (layout.checkLayout(worldObj, xCoord, yCoord, zCoord,angle)) {
+		MultiblockState state = MultiblockState.DISCONNECTED; 
+		BlockForward newAngle = layout.getLayoutForward(worldObj, xCoord, yCoord, zCoord,angle);
+		if (newAngle != BlockForward.INVALID) {
 			state = MultiblockState.COMPLETED;
 			isMultiblock = true;
 			locked = true;
+			angle = newAngle;
 		} else {
 			state = MultiblockState.CONNECTED;
 			isMultiblock = false;
@@ -90,7 +93,14 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 		x = x - xCoord;
 		y = y - yCoord;
 		z = z - zCoord;
-		return layout.hasDiscriptionBlockId(x, y, z, blockId,locked,angle);
+		BlockForward forward = layout.hasDiscriptionBlockId(x, y, z, blockId, locked, angle);
+		if(forward != BlockForward.INVALID)
+		{
+			if(!locked)
+			this.angle = forward;
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -128,7 +138,13 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 		onStateChanged();
 		checkStructure();
 	}
-	public void onStateChanged(){
+
+	public void onStateChanged() {
 		worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord));
+	}
+
+	@Override
+	public int checkModelID(int xCoord, int yCoord, int zCoord) {
+		return layout.getModelID(xCoord - this.xCoord, yCoord - this.yCoord, zCoord - this.zCoord, angle);
 	}
 }

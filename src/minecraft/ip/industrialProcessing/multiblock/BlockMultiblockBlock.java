@@ -86,8 +86,9 @@ public abstract class BlockMultiblockBlock extends BlockContainer {
 	public void onNeighborBlockChange(World world, int x, int y, int z, int par5) {
 		super.onNeighborBlockChange(world, x, y, z, par5);
 		TileEntityMultiblockBlock entity = (TileEntityMultiblockBlock) world.getBlockTileEntity(x, y, z);
-		entity.checkConnectedSides();
 		entity.neighbourChanged();
+		entity.checkConnectedSides();
+		entity.checkModelID();
 		
 	}
 

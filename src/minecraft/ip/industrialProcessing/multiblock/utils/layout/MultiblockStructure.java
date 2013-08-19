@@ -91,18 +91,18 @@ public class MultiblockStructure {
 		layout[xCore][yCore][zCore] = new MultiBlockStructureBlockDescription(0, 0, 0, blockID);
 	}
 
-	public void addBlockIDRelative(int hor, int ver, int depth, int... blockIDs) {
+	public void addBlockIDRelative(int hor, int ver, int depth, int renderID, int... blockIDs) {
 
-		layout[hor + xCore][ver + yCore][depth + zCore] = new MultiBlockStructureBlockDescription(hor, ver, depth, blockIDs);
+		layout[hor + xCore][ver + yCore][depth + zCore] = new MultiBlockStructureBlockDescription(hor, ver, depth, renderID, blockIDs);
 	}
 
-	public void fillLayer(int hor, int ver, int depth, int... blockIDs) {
+	public void fillLayer(int hor, int ver, int depth, int renderID, int... blockIDs) {
 		if (hor != -1) {
 			int i = hor;
 			for (int j = 0; j < layout[i].length; j++) {
 				for (int k = 0; k < layout[i][j].length; k++) {
 					if (layout[i][j][k] == null) {
-						addBlockID(i, j, k, blockIDs);
+						addBlockID(i, j, k, renderID, blockIDs);
 					}
 				}
 			}
@@ -112,7 +112,7 @@ public class MultiblockStructure {
 				int j = ver;
 				for (int k = 0; k < layout[i][j].length; k++) {
 					if (layout[i][j][k] == null) {
-						addBlockID(i, j, k, blockIDs);
+						addBlockID(i, j, k, renderID, blockIDs);
 					}
 				}
 
@@ -123,7 +123,7 @@ public class MultiblockStructure {
 				for (int j = 0; j < layout[i].length; j++) {
 					int k = depth;
 					if (layout[i][j][k] == null) {
-						addBlockID(i, j, k, blockIDs);
+						addBlockID(i, j, k, renderID, blockIDs);
 					}
 
 				}
@@ -131,8 +131,8 @@ public class MultiblockStructure {
 		}
 	}
 
-	public void addBlockID(int hor, int ver, int depth, int... blockIDs) {
-		layout[hor][ver][depth] = new MultiBlockStructureBlockDescription(hor - xCore, ver - yCore, depth - zCore, blockIDs);
+	public void addBlockID(int hor, int ver, int depth, int renderID, int... blockIDs) {
+		layout[hor][ver][depth] = new MultiBlockStructureBlockDescription(hor - xCore, ver - yCore, depth - zCore, renderID, blockIDs);
 	}
 
 	public void fillBlockID(int blockID) {
@@ -151,10 +151,8 @@ public class MultiblockStructure {
 		return layout[i][j][k];
 	}
 
-	
-
 	public boolean hasDiscriptionBlockId(int i, int j, int k, int blockId) {
-		if (i<0 || j<0 || k<0 || i>layout.length-1 || j>layout[0].length-1 || k>layout[0][0].length-1)
+		if (i < 0 || j < 0 || k < 0 || i > layout.length - 1 || j > layout[0].length - 1 || k > layout[0][0].length - 1)
 			return false;
 		boolean isValid = false;
 		MultiBlockStructureBlockDescription desc = layout[i][j][k];
@@ -211,7 +209,7 @@ public class MultiblockStructure {
 			for (int j = 0; j < layout[0].length; j++) {
 				for (int k = 0; k < layout[0][0].length; k++) {
 					int blockId = world.getBlockId(xCore - this.xCore + i, yCore - this.yCore + j, zCore - this.zCore + k);
-					if (hasDiscription(i, j, k)){
+					if (hasDiscription(i, j, k)) {
 						if (!hasDiscriptionBlockId(i, j, k, blockId))
 							return false;
 						TileEntity te = world.getBlockTileEntity(xCore - this.xCore + i, yCore - this.yCore + j, zCore - this.zCore + k);
@@ -222,7 +220,7 @@ public class MultiblockStructure {
 						}
 						if (te instanceof TileEntityMultiblockCore) {
 							if (!te.equals(world.getBlockTileEntity(xCore, yCore, zCore)))
-							return false;
+								return false;
 						}
 					}
 				}
@@ -243,9 +241,15 @@ public class MultiblockStructure {
 		return zCore;
 	}
 
-	public boolean hasDiscription(int x, int y, int z) {
-		if(layout[x][y][z]==null)
+	public boolean hasDiscription(int i, int j, int k) {
+		if (layout[i][j][k] == null || i < 0 || j < 0 || k < 0 || i > layout.length - 1 || j > layout[0].length - 1 || k > layout[0][0].length - 1)
 			return false;
 		return true;
+	}
+
+	public int getModelID(int i, int j, int k) {
+		if (i < 0 || j < 0 || k < 0 || i > layout.length - 1 || j > layout[0].length - 1 || k > layout[0][0].length - 1 || layout[i][j][k] == null)
+			return 0;
+		return layout[i][j][k].getRenderID();
 	}
 }

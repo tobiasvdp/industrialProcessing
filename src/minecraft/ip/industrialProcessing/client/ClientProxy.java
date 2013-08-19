@@ -11,6 +11,7 @@ import ip.industrialProcessing.client.render.ModelAnimatedMachine;
 import ip.industrialProcessing.client.render.ModelConnected;
 import ip.industrialProcessing.client.render.ModelConnectedFluid;
 import ip.industrialProcessing.client.render.ModelMachine;
+import ip.industrialProcessing.client.render.ModelMultiblock;
 import ip.industrialProcessing.client.render.ModelStateMachine;
 import ip.industrialProcessing.client.render.RendererMultiblock;
 import ip.industrialProcessing.client.render.RendererTileEntity;
@@ -38,6 +39,7 @@ import ip.industrialProcessing.multiblock.block.frame.BlockMachineFrame;
 import ip.industrialProcessing.multiblock.block.frame.ModelMultiblockFrame;
 import ip.industrialProcessing.multiblock.block.frame.TileEntityMachineFrame;
 import ip.industrialProcessing.multiblock.block.inventory.TileEntityMultiblockInvInput;
+import ip.industrialProcessing.multiblock.block.inventory.TileEntityMultiblockInvOutput;
 import ip.industrialProcessing.multiblock.utils.ModelMultiblockIO;
 import ip.industrialProcessing.power.manualGenerator.ModelCrankGenerator;
 import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
@@ -129,13 +131,9 @@ public class ClientProxy extends CommonProxy {
 	ConfigRenderers.setRendererCrankGeneratorId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererCrankGeneratorId(), new TileEntityManualGenerator()));
 	
-	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMachineFrame.class, new RendererMultiblock(IndustrialProcessing.blockMachineFrame, "MultiblockBlock", multiblockFrame));
+	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMachineFrame.class, new RendererMultiblock(IndustrialProcessing.blockMachineFrame, new String[]{"MultiblockBlock","MultiblockBlock"},new ModelMultiblock[]{multiblockFrame,multiblockIO}));
 	ConfigRenderers.setRendererBlockMachineFrameID(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererBlockMachineFrameID(), new TileEntityMachineFrame()));
-	
-	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMultiblockInvInput.class, new RendererMultiblock(IndustrialProcessing.blockMultiMachineInput, "MultiblockBlock", multiblockIO));
-	ConfigRenderers.setrendererBlockMultiblockInvInputID(RenderingRegistry.getNextAvailableRenderId());
-	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getrendererBlockMultiblockInvInputID(), new TileEntityMultiblockInvInput()));
  
     }
 }

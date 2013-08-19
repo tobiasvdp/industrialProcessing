@@ -20,6 +20,7 @@ import ip.industrialProcessing.multiblock.block.inventory.TileEntityMultiblockIn
 import ip.industrialProcessing.multiblock.block.inventory.TileEntityMultiblockInvOutput;
 import ip.industrialProcessing.multiblock.block.tank.TileEntityMultiblockTankInput;
 import ip.industrialProcessing.multiblock.block.tank.TileEntityMultiblockTankOutput;
+import ip.industrialProcessing.multiblock.machine.blastFurnace.TileEntityMultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.machine.crusher.TileEntityMultiblockCrusher;
 import ip.industrialProcessing.multiblock.machine.mixer.TileEntityMultiblockMixer;
 import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
@@ -67,6 +68,7 @@ public class ConfigMachineBlocks {
 	private int BlockMultiblockTankOutputID = 604;
 	private int largeCrusherBlockID = 700;
 	private int largeMixerBlockID = 701;
+	private int BlockMultiblockBlastFurnaceID = 702;
 
 	private int manualGeneratorBlockID = 800; // Crank Generator
 	private int buildcraftGeneratorBlockID = 801; // Buildcraft Joule converter
@@ -115,6 +117,7 @@ public class ConfigMachineBlocks {
 		registerMachineBlock(IndustrialProcessing.blockMultiblockTankOutput, "MultiBlockTankOut", "Multiblock tank drain", TileEntityMultiblockTankOutput.class);
 		registerMachineBlock(IndustrialProcessing.blockLargeCrusher, "IP.Machine.Multi.Crusher", "Large Crusher", TileEntityMultiblockCrusher.class);
 		registerMachineBlock(IndustrialProcessing.blockMultiblockMixer, "IP.Machine.Multi.Mixer", "Large mixer", TileEntityMultiblockMixer.class);
+		registerMachineBlock(IndustrialProcessing.blockMultiblockBlastFurnace, "IP.Machine.Multi.Blast", "Large blast furnace", TileEntityMultiblockBlastFurnace.class);
 	}
 	private void registerMachineBlock(Block block, String uniqueId, String displayName, Class tileEntity) {
 		GameRegistry.registerBlock(block, uniqueId);
@@ -227,5 +230,8 @@ public class ConfigMachineBlocks {
 	public static int getlargeMixerBlockID() {
 		return getInstance().largeMixerBlockID;
 	} 
+	public static int getBlockMultiblockBlastFurnaceID() {
+		return getInstance().BlockMultiblockBlastFurnaceID;
+	}
 
 }

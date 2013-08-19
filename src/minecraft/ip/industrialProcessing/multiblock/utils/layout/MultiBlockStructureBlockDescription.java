@@ -10,27 +10,34 @@ public class MultiBlockStructureBlockDescription {
 	private int y;
 	private int z;
 	private int[] blockIDs;
+	private int renderID;
 
-	public MultiBlockStructureBlockDescription(int x, int y, int z, int... blockIDs) {
+	public MultiBlockStructureBlockDescription(int x, int y, int z,
+			int renderID, int... blockIDs) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
+		this.renderID = renderID;
 		this.blockIDs = blockIDs;
 	}
-	public MultiBlockStructureBlockDescription copy(int x,int y,int z){
-		return new MultiBlockStructureBlockDescription(x,y,z,this.blockIDs);
+
+	public MultiBlockStructureBlockDescription copy(int x, int y, int z) {
+		return new MultiBlockStructureBlockDescription(x, y, z, this.renderID,
+				this.blockIDs);
 	}
 
 	public int getX() {
 		return x;
-	}	
+	}
+
 	public int getY() {
 		return y;
 	}
+
 	public int getZ() {
 		return z;
 	}
-	
+
 	public boolean isPresent(World worldObj, int xCoord, int yCoord, int zCoord) {
 		int block = worldObj.getBlockId(xCoord + x, yCoord + y, zCoord + z);
 		return containsBlock(block);
@@ -49,11 +56,14 @@ public class MultiBlockStructureBlockDescription {
 				&& containsBlock(blockId2);
 	}
 
-	public boolean containsBlock(int block)
-	{
-		for(int i = 0; i < this.blockIDs.length; i++)
-		{
-			if(this.blockIDs[i] == block) return true;
+	public int getRenderID() {
+		return renderID;
+	}
+
+	public boolean containsBlock(int block) {
+		for (int i = 0; i < this.blockIDs.length; i++) {
+			if (this.blockIDs[i] == block)
+				return true;
 		}
 		return false;
 	}

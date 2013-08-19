@@ -14,4 +14,5 @@ public interface ITileEntityMultiblockCore {
 	int getCoreZ();
 	MultiblockState getState();
 	void breakMultiblock();
+	int checkModelID(int xCoord, int yCoord, int zCoord);
 }

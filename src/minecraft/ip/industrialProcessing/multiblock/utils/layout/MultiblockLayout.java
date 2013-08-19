@@ -1,5 +1,7 @@
 package ip.industrialProcessing.multiblock.utils.layout;
 
+import java.util.Iterator;
+
 import ip.industrialProcessing.multiblock.TileEntityMultiblockBlock;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
@@ -11,49 +13,37 @@ public class MultiblockLayout {
 
 	public MultiblockLayout() {
 	}
+
 	public void setLayoutAngle(MultiblockStructure layout, int angle) {
 		layouts[angle] = layout;
 	}
 
-	public MultiBlockStructureBlockDescription getDescription(int i, int j, int k,int angle) {
+	public MultiBlockStructureBlockDescription getDescription(int i, int j, int k, int angle) {
 		return layouts[angle].getDescription(i, j, k);
 	}
 
-	public boolean hasDiscriptionBlockId(int i, int j, int k, int blockId, boolean locked, int[] angle) {
-		boolean isValid;
-		isValid = layouts[angle[0]].hasDiscriptionBlockId(i+layouts[angle[0]].getxCore(), j+layouts[angle[0]].getyCore(), k+layouts[angle[0]].getzCore(), blockId);
-		if (!locked) {
-			if (!isValid) {
-				angle[0] = 0;
-				while(!isValid){
-					angle[0] += 1;
-					if (angle[0] == 4){
-						angle[0] = 0;
-						return false;
-					}
-					isValid = layouts[angle[0]].hasDiscriptionBlockId(i+layouts[angle[0]].getxCore(), j+layouts[angle[0]].getyCore(), k+layouts[angle[0]].getzCore(), blockId);
-				}
+	public BlockForward hasDiscriptionBlockId(int i, int j, int k, int blockId, boolean locked, BlockForward angle) {
+		if (angle != BlockForward.INVALID && layouts[angle.ordinal()].hasDiscriptionBlockId(i, j, k, blockId))
+			return angle;
+		for (BlockForward forward : BlockForward.VALID_FORWARDS) {
+			if (forward != angle) {
+				MultiblockStructure layout = layouts[forward.ordinal()];
+				if (layout.hasDiscriptionBlockId(i + layout.getxCore(), j + layout.getyCore(), k + layout.getzCore(), blockId))
+					return forward;
 			}
 		}
-		return isValid;
-
+		return BlockForward.INVALID;
 	}
 
-	public boolean checkLayout(World world, int xCore, int yCore, int zCore, int[] angle) {
-		boolean isValid;
-		isValid = layouts[angle[0]].checkLayout(world, xCore, yCore, zCore);
-		if (!isValid) {
-			angle[0] = 0;
-			while(!isValid){
-				angle[0] += 1;
-				if (angle[0] == 4){
-					angle[0] = 0;
-					return false;
-				}
-				isValid = layouts[angle[0]].checkLayout(world, xCore, yCore, zCore);
-			}
+	public BlockForward getLayoutForward(World world, int xCore, int yCore, int zCore, BlockForward angle) {
+		if (angle != BlockForward.INVALID && layouts[angle.ordinal()].checkLayout(world, xCore, yCore, zCore))
+			return angle;
+		for (BlockForward forward : BlockForward.VALID_FORWARDS) {
+			if (forward != angle)
+				if (layouts[forward.ordinal()].checkLayout(world, xCore, yCore, zCore))
+					return forward;
 		}
-		return isValid;
+		return BlockForward.INVALID;
 	}
 
 	public boolean hasDiscription(int x, int y, int z, int blockId, int[] angle) {
@@ -68,5 +58,10 @@ public class MultiblockLayout {
 		setLayoutAngle(layout, 2);
 		layout = new MultiblockStructure(layout);
 		setLayoutAngle(layout, 3);
+	}
+
+	public int getModelID(int i, int j, int k, BlockForward angle) {
+		MultiblockStructure layout = layouts[angle.ordinal()];
+		return layout.getModelID(i + layout.getxCore(), j + layout.getyCore(), k + layout.getzCore());
 	}
 }

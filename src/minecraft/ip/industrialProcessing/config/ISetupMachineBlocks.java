@@ -24,6 +24,7 @@ import ip.industrialProcessing.multiblock.block.inventory.BlockMultiblockInvInpu
 import ip.industrialProcessing.multiblock.block.inventory.BlockMultiblockInvOutput;
 import ip.industrialProcessing.multiblock.block.tank.BlockMultiblockTankInput;
 import ip.industrialProcessing.multiblock.block.tank.BlockMultiblockTankOutput;
+import ip.industrialProcessing.multiblock.machine.blastFurnace.BlockMultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.machine.crusher.BlockMultiblockCrusher;
 import ip.industrialProcessing.multiblock.machine.mixer.BlockMultiblockMixer;
 import ip.industrialProcessing.power.buildcraftGenerator.BlockBuildcraftGenerator;
@@ -71,6 +72,7 @@ public interface ISetupMachineBlocks {
 	public final static BlockMachineFrame blockMachineFrame = new BlockMachineFrame();
 	public final static BlockMultiblockCrusher blockLargeCrusher = new BlockMultiblockCrusher();
 	public final static BlockMultiblockMixer blockMultiblockMixer = new BlockMultiblockMixer();
+	public final static BlockMultiblockBlastFurnace blockMultiblockBlastFurnace = new BlockMultiblockBlastFurnace();
 	
 	// create fluidpipe
 	public final static BlockTransportFluids blockTransportFluids = new BlockTransportFluids();

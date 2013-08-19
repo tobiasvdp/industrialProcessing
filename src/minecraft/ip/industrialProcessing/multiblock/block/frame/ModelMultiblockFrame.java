@@ -257,8 +257,8 @@ public class ModelMultiblockFrame extends ModelMultiblock {
 		base.render(f5);
 		Bottom.render(f5);
 		
-		GL11.glDisable(3042 );
-		GL11.glPopMatrix();
+		//GL11.glDisable(3042 );
+		//GL11.glPopMatrix();
 
 		if (sides[2])
 			Front.render(f5);
