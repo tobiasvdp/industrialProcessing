@@ -14,8 +14,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
-public abstract class TileEntityMultiblockBlock extends TileEntity implements
-		ITileEntityMultiblockBlock {
+public abstract class TileEntityMultiblockBlock extends TileEntity implements ITileEntityMultiblockBlock {
 
 	public TileEntityMultiblockBlock() {
 		init = true;
@@ -96,13 +95,11 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements
 			this.xCore = par1NBTTagCompound.getInteger("cx");
 			this.yCore = par1NBTTagCompound.getInteger("cy");
 			this.zCore = par1NBTTagCompound.getInteger("cz");
-			this.state = MultiblockState.fromInt(par1NBTTagCompound
-					.getInteger("State"));
+			this.state = MultiblockState.fromInt(par1NBTTagCompound.getInteger("State"));
 		}
 		NBTTagList nbttaglist = par1NBTTagCompound.getTagList("Sides");
 		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
-			NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist
-					.tagAt(i);
+			NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(i);
 			connectedSides[i] = nbttagcompound1.getBoolean("Side" + i);
 		}
 	};
@@ -119,12 +116,12 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements
 				setCore(searchForCore());
 				if (hasCore()) {
 					getCore().checkStructure();
+					checkModelID();
 					onStateChanged();
 				}
 
 			}
 			checkConnectedSides();
-
 			init = false;
 		}
 
@@ -174,8 +171,7 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements
 	@Override
 	public ITileEntityMultiblockCore getCore() {
 		if (hasCore)
-			return (ITileEntityMultiblockCore) worldObj.getBlockTileEntity(
-					xCore, yCore, zCore);
+			return (ITileEntityMultiblockCore) worldObj.getBlockTileEntity(xCore, yCore, zCore);
 		else {
 			setCore(null);
 		}
@@ -210,8 +206,7 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements
 		switch (state) {
 		case COMPLETED: {
 			if (getCore() != null) {
-				if (getCore().isPartOfStructure(xCoord, yCoord, zCoord,
-						worldObj.getBlockId(xCoord, yCoord, zCoord)))
+				if (getCore().isPartOfStructure(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord)))
 					state = getCore().getState();
 				else
 					setCore(null);
@@ -223,8 +218,7 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements
 		}
 		case CONNECTED: {
 			if (getCore() != null) {
-				if (getCore().isPartOfStructure(xCoord, yCoord, zCoord,
-						worldObj.getBlockId(xCoord, yCoord, zCoord)))
+				if (getCore().isPartOfStructure(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord)))
 					state = getCore().getState();
 				else
 					setCore(null);
@@ -249,11 +243,9 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements
 		int i = 0;
 		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
 
-			TileEntity te = worldObj.getBlockTileEntity(xCoord + dir.offsetX,
-					yCoord + dir.offsetY, zCoord + dir.offsetZ);
+			TileEntity te = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
 			if (te != null) {
-				if (te instanceof TileEntityMultiblockBlock
-						|| te instanceof TileEntityMultiblockCore) {
+				if (te instanceof TileEntityMultiblockBlock || te instanceof TileEntityMultiblockCore) {
 					connectedSides[i] = true;
 				} else {
 					connectedSides[i] = false;
@@ -267,9 +259,9 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements
 
 	}
 
-	public void checkModelID(){
+	public void checkModelID() {
 		if (getCore() != null)
-			modelID = getCore().checkModelID(xCoord,yCoord,zCoord);
+			modelID = getCore().checkModelID(xCoord, yCoord, zCoord);
 		else
 			modelID = 0;
 	}
@@ -277,22 +269,18 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements
 	@Override
 	public ITileEntityMultiblockCore searchForCore() {
 		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-			TileEntity neighbour = worldObj.getBlockTileEntity(xCoord
-					+ dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+			TileEntity neighbour = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
 			if (neighbour instanceof ITileEntityMultiblockBlock) {
 				ITileEntityMultiblockBlock tileEntityBlock = (ITileEntityMultiblockBlock) neighbour;
 				if (tileEntityBlock.hasCore()) {
 					if (tileEntityBlock.getCore() != null) {
-						if (tileEntityBlock.getCore().isPartOfStructure(xCoord,
-								yCoord, zCoord,
-								worldObj.getBlockId(xCoord, yCoord, zCoord)))
+						if (tileEntityBlock.getCore().isPartOfStructure(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord)))
 							return tileEntityBlock.getCore();
 					}
 				}
 			} else if (neighbour instanceof ITileEntityMultiblockCore) {
 				ITileEntityMultiblockCore tileEntityCore = (ITileEntityMultiblockCore) neighbour;
-				if (tileEntityCore.isPartOfStructure(xCoord, yCoord, zCoord,
-						worldObj.getBlockId(xCoord, yCoord, zCoord)))
+				if (tileEntityCore.isPartOfStructure(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord)))
 					return tileEntityCore;
 			}
 		}
@@ -301,7 +289,6 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements
 
 	@Override
 	public void onStateChanged() {
-		worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord,
-				worldObj.getBlockId(xCoord, yCoord, zCoord));
+		worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord));
 	}
 }

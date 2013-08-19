@@ -23,8 +23,12 @@ public class MultiblockLayout {
 	}
 
 	public BlockForward hasDiscriptionBlockId(int i, int j, int k, int blockId, boolean locked, BlockForward angle) {
-		if (angle != BlockForward.INVALID && layouts[angle.ordinal()].hasDiscriptionBlockId(i, j, k, blockId))
-			return angle;
+		
+		if (angle != BlockForward.INVALID){
+			MultiblockStructure layout = layouts[angle.ordinal()];
+			if(layouts[angle.ordinal()].hasDiscriptionBlockId(i + layout.getxCore(), j + layout.getyCore(), k + layout.getzCore(), blockId))
+				return angle;
+		}
 		for (BlockForward forward : BlockForward.VALID_FORWARDS) {
 			if (forward != angle) {
 				MultiblockStructure layout = layouts[forward.ordinal()];

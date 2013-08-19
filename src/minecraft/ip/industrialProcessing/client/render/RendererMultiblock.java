@@ -5,6 +5,7 @@ import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.multiblock.TileEntityMultiblockBlock;
 import ip.industrialProcessing.multiblock.block.frame.BlockMachineFrame;
 import ip.industrialProcessing.multiblock.block.frame.TileEntityMachineFrame;
+import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -23,18 +24,23 @@ public class RendererMultiblock extends RendererTileEntity {
 
 	@Override
 	protected void renderBlock(TileEntity tl, World world, int i, int j, int k, Block block2, float f) {
-		if (world == null){
-			this.model[0].renderModelSides(0.0625F,((TileEntityMultiblockBlock) tl).getConnectedSides());
-		}else{
-			TileEntityMultiblockBlock tile = (TileEntityMultiblockBlock) world.getBlockTileEntity(i, j, k);
+		if (world == null) {
+			this.model[0].renderModelSides(0.0625F, ((TileEntityMultiblockBlock) tl).getConnectedSides());
+		} else {
+			TileEntityMultiblockBlock tile = (TileEntityMultiblockBlock) tl;
 			int modelID = tile.modelID;
-			this.model[modelID].renderModelSides(0.0625F,tile.getConnectedSides());
+			if (tile.getState() == MultiblockState.CONNECTED) {
+				modelID = 0;
+			}
+			if (modelID != 3){
+			this.model[modelID].renderModelSides(0.0625F, tile.getConnectedSides());
+			}
 		}
 	}
 
 	@Override
 	protected ResourceLocation getTexture(TileEntity tl, World world, int i, int j, int k, Block block2, float f) {
-		ResourceLocation tex = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN, "textures/render/" + name[0] + ".png");
+		ResourceLocation tex = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN, "textures/render/" + name[((TileEntityMultiblockBlock)tl).modelID] + ".png");
 		return tex;
 	}
 

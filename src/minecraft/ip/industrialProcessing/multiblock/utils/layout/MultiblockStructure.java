@@ -88,7 +88,7 @@ public class MultiblockStructure {
 	}
 
 	public void setCoreID(int blockID) {
-		layout[xCore][yCore][zCore] = new MultiBlockStructureBlockDescription(0, 0, 0, blockID);
+		layout[xCore][yCore][zCore] = new MultiBlockStructureBlockDescription(0, 0, 0,0, blockID);
 	}
 
 	public void addBlockIDRelative(int hor, int ver, int depth, int renderID, int... blockIDs) {

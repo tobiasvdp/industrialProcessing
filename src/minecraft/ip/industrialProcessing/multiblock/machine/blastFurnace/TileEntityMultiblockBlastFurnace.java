@@ -22,19 +22,32 @@ public class TileEntityMultiblockBlastFurnace extends
 
 		structure = new MultiblockLayout();
 
-		MultiblockStructure layout = new MultiblockStructure(2, 2, 0, 4, 5, 0);
-		layout.setCoreID(IndustrialProcessing.blockLargeCrusher.blockID);
-		for(int i = 0;i<4;i++){
+		MultiblockStructure layout = new MultiblockStructure(1, 1, 0, 2, 5, 0);
+		layout.setCoreID(IndustrialProcessing.blockMultiblockBlastFurnace.blockID);
+		layout.addBlockIDRelative(-1, 0, 0, 1, frameId);
+		layout.addBlockIDRelative(+1, 0, 0, 1, frameId);
+		layout.addBlockIDRelative(-1, 0, 1, 1, frameId);
+		layout.addBlockIDRelative(+1, 0, 1, 1, frameId);
+		layout.addBlockIDRelative(-1, 0, 2, 1, frameId);
+		layout.addBlockIDRelative(+1, 0, 2, 1, frameId);
+		layout.addBlockIDRelative(0, 0, 1, 1, frameId);
+		layout.addBlockIDRelative(0, 0, 2, 1, frameId);
+		
+		for(int i = 1;i<3;i++){
 			layout.addBlockIDRelative(-1, i, 0, 1, frameId);
 			layout.addBlockIDRelative(+1, i, 0, 1, frameId);
 			layout.addBlockIDRelative(-1, i, 1, 1, frameId);
 			layout.addBlockIDRelative(+1, i, 1, 1, frameId);
-			layout.addBlockIDRelative(-2, i, 2, 1, frameId);
-			layout.addBlockIDRelative(+2, i, 2, 1, frameId);
-			layout.addBlockIDRelative(-1, i, 3, 1, frameId);
-			layout.addBlockIDRelative(+1, i, 3, 1, frameId);
-			layout.addBlockIDRelative(0, i, 4, 1, frameId);
+			layout.addBlockIDRelative(-1, i, 2, 1, frameId);
+			layout.addBlockIDRelative(+1, i, 2, 1, frameId);
+			layout.addBlockIDRelative(0, i, 1, 3, frameId);
+			layout.addBlockIDRelative(0, i, 2, 1, frameId);
+			layout.addBlockIDRelative(0, i, 0, 1, frameId);
 		}
+		for(int i= 3;i<5;i++){
+			layout.addBlockIDRelative(0, i, 1, 3, frameId);
+		}
+		layout.addBlockIDRelative(0, 3,1, 4, frameId);
 
 		structure.commit(layout);
 	}

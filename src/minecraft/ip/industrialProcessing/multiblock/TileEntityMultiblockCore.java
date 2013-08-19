@@ -63,6 +63,7 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 			isMultiblock = true;
 			locked = true;
 			angle = newAngle;
+			System.out.println("Multiblock made");
 		} else {
 			state = MultiblockState.CONNECTED;
 			isMultiblock = false;
