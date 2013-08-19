@@ -2,140 +2,177 @@ package ip.industrialProcessing.config;
 
 public class ConfigRenderers {
 
-    private int rendererCrankGeneratorID;
-    private int rendererWireID;
-    private int rendererMixerID;
-    private int rendererFilterID;
-    private int rendererMagneticSeperatorID;
-    private int rendererCrusherID;
-    private int rendererDiskFilterID;
-    private int rendererVoltMeterID;
-    private int rendererAmpMeterID;
-    private int rendererTransportFluidID;
-    private int rendererBatteryBoxID;
-    private int rendererBlastFurnaceID;
-    private int rendererTankID;
-    private int rendererBlockMachineFrameID;
+	private int rendererCrankGeneratorID;
+	private int rendererWireID;
+	private int rendererMixerID;
+	private int rendererFilterID;
+	private int rendererMagneticSeperatorID;
+	private int rendererCrusherID;
+	private int rendererDiskFilterID;
+	private int rendererVoltMeterID;
+	private int rendererAmpMeterID;
+	private int rendererTransportFluidID;
+	private int rendererBatteryBoxID;
+	private int rendererBlastFurnaceID;
+	private int rendererTankID;
+	private int rendererBlockMachineFrameID;
+	private int rendererBlockMultiblockInvInputID;
+	private int rendererBlockMultiblockInvOutputID;
+	private int rendererBlockMultiblockTankInputID;
+	private int rendererBlockMultiblockTankOutputID;
+	
+	public static int getrendererBlockMultiblockInvInputID() {
+		return getInstance().rendererBlockMultiblockInvInputID;
+	}
 
-    public static int getRendererBlockMachineFrameID() {
-	return getInstance().rendererBlockMachineFrameID;
-    }
+	public static void setrendererBlockMultiblockInvInputID(int value) {
+		getInstance().rendererBlockMultiblockInvInputID = value;
+	}
+	
+	public static int getrendererBlockMultiblockInvOutputID() {
+		return getInstance().rendererBlockMultiblockInvOutputID;
+	}
 
-    public static void setRendererBlockMachineFrameID(int value) {
-	getInstance().rendererBlockMachineFrameID = value;
-    }
-    public static int getRendererFilterId() {
-	return getInstance().rendererFilterID;
-    }
+	public static void setrendererBlockMultiblockInvOutputID(int value) {
+		getInstance().rendererBlockMultiblockInvOutputID = value;
+	}
+	
+	public static int getrendererBlockMultiblockTankInputID() {
+		return getInstance().rendererBlockMultiblockTankInputID;
+	}
 
-    public static void setRendererFilterId(int value) {
-	getInstance().rendererFilterID = value;
-    }
+	public static void setrendererBlockMultiblockTankInputID(int value) {
+		getInstance().rendererBlockMultiblockTankInputID = value;
+	}
+	
+	public static int getrendererBlockMultiblockTankOutputID() {
+		return getInstance().rendererBlockMultiblockTankOutputID;
+	}
 
-    public static int getRendererMagneticSeperatorId() {
-	return getInstance().rendererMagneticSeperatorID;
-    }
+	public static void setrendererBlockMultiblockTankOutputID(int value) {
+		getInstance().rendererBlockMultiblockTankOutputID = value;
+	}
 
-    public static void setRendererMagneticSeperatorId(int value) {
-	getInstance().rendererMagneticSeperatorID = value;
-    }
+	public static int getRendererBlockMachineFrameID() {
+		return getInstance().rendererBlockMachineFrameID;
+	}
 
-    public static int getRendererMixerId() {
-	return getInstance().rendererMixerID;
-    }
+	public static void setRendererBlockMachineFrameID(int value) {
+		getInstance().rendererBlockMachineFrameID = value;
+	}
 
-    public static void setRendererMixerId(int value) {
-	getInstance().rendererMixerID = value;
-    }
+	public static int getRendererFilterId() {
+		return getInstance().rendererFilterID;
+	}
 
-    public static int getRendererCrusherId() {
-	return getInstance().rendererCrusherID;
-    }
+	public static void setRendererFilterId(int value) {
+		getInstance().rendererFilterID = value;
+	}
 
-    public static void setRendererCrusherId(int value) {
-	getInstance().rendererCrusherID = value;
-    }
+	public static int getRendererMagneticSeperatorId() {
+		return getInstance().rendererMagneticSeperatorID;
+	}
 
-    public static int getRendererDiskFilterId() {
-	return getInstance().rendererDiskFilterID;
-    }
+	public static void setRendererMagneticSeperatorId(int value) {
+		getInstance().rendererMagneticSeperatorID = value;
+	}
 
-    public static void setRendererDiskFilterIdId(int value) {
-	getInstance().rendererDiskFilterID = value;
-    }
+	public static int getRendererMixerId() {
+		return getInstance().rendererMixerID;
+	}
 
-    public static int getRendererWireId() {
-	return getInstance().rendererWireID;
-    }
+	public static void setRendererMixerId(int value) {
+		getInstance().rendererMixerID = value;
+	}
 
-    public static void setRendererWireId(int value) {
-	getInstance().rendererWireID = value;
-    }
+	public static int getRendererCrusherId() {
+		return getInstance().rendererCrusherID;
+	}
 
-    public static int getRendererVoltMeterId() {
-	return getInstance().rendererVoltMeterID;
-    }
+	public static void setRendererCrusherId(int value) {
+		getInstance().rendererCrusherID = value;
+	}
 
-    public static void setRendererVoltMeterId(int value) {
-	getInstance().rendererVoltMeterID = value;
-    }
+	public static int getRendererDiskFilterId() {
+		return getInstance().rendererDiskFilterID;
+	}
 
-    public static int getRendererAmpMeterId() {
-	return getInstance().rendererAmpMeterID;
-    }
+	public static void setRendererDiskFilterIdId(int value) {
+		getInstance().rendererDiskFilterID = value;
+	}
 
-    public static void setRendererAmpMeterId(int value) {
-	getInstance().rendererAmpMeterID = value;
-    }
+	public static int getRendererWireId() {
+		return getInstance().rendererWireID;
+	}
 
-    public static int getRendererTransportFluidsId() {
-	return getInstance().rendererTransportFluidID;
-    }
+	public static void setRendererWireId(int value) {
+		getInstance().rendererWireID = value;
+	}
 
-    public static void setRendererTransportFluidsId(int value) {
-	getInstance().rendererTransportFluidID = value;
-    }
+	public static int getRendererVoltMeterId() {
+		return getInstance().rendererVoltMeterID;
+	}
 
-    public static int getRendererTankId() {
-	return getInstance().rendererTankID;
-    }
+	public static void setRendererVoltMeterId(int value) {
+		getInstance().rendererVoltMeterID = value;
+	}
 
-    public static void setRendererTankId(int value) {
-	getInstance().rendererTankID = value;
-    }
+	public static int getRendererAmpMeterId() {
+		return getInstance().rendererAmpMeterID;
+	}
 
-    public static int getRendererBatteryBoxId() {
-	return getInstance().rendererBatteryBoxID;
-    }
+	public static void setRendererAmpMeterId(int value) {
+		getInstance().rendererAmpMeterID = value;
+	}
 
-    public static void setRendererBatteryBoxId(int value) {
-	getInstance().rendererBatteryBoxID = value;
-    }
+	public static int getRendererTransportFluidsId() {
+		return getInstance().rendererTransportFluidID;
+	}
 
-    public static int getRendererBlastFurnaceId() {
-	return getInstance().rendererBlastFurnaceID;
-    }
+	public static void setRendererTransportFluidsId(int value) {
+		getInstance().rendererTransportFluidID = value;
+	}
 
-    public static void setRendererBlastFurnaceId(int value) {
-	getInstance().rendererBlastFurnaceID = value;
-    }
+	public static int getRendererTankId() {
+		return getInstance().rendererTankID;
+	}
 
-    public static int getRendererCrankGeneratorId() {
-	return getInstance().rendererCrankGeneratorID;
-    }
+	public static void setRendererTankId(int value) {
+		getInstance().rendererTankID = value;
+	}
 
-    public static void setRendererCrankGeneratorId(int value) {
-	getInstance().rendererCrankGeneratorID = value;
-    }
+	public static int getRendererBatteryBoxId() {
+		return getInstance().rendererBatteryBoxID;
+	}
 
-    private ConfigRenderers() {
+	public static void setRendererBatteryBoxId(int value) {
+		getInstance().rendererBatteryBoxID = value;
+	}
 
-    }
+	public static int getRendererBlastFurnaceId() {
+		return getInstance().rendererBlastFurnaceID;
+	}
 
-    private static ConfigRenderers instance = new ConfigRenderers();
+	public static void setRendererBlastFurnaceId(int value) {
+		getInstance().rendererBlastFurnaceID = value;
+	}
 
-    public static ConfigRenderers getInstance() {
-	return instance;
-    }
+	public static int getRendererCrankGeneratorId() {
+		return getInstance().rendererCrankGeneratorID;
+	}
+
+	public static void setRendererCrankGeneratorId(int value) {
+		getInstance().rendererCrankGeneratorID = value;
+	}
+
+	private ConfigRenderers() {
+
+	}
+
+	private static ConfigRenderers instance = new ConfigRenderers();
+
+	public static ConfigRenderers getInstance() {
+		return instance;
+	}
 
 }

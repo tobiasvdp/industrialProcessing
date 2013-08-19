@@ -10,11 +10,12 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigCreativeTabs;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.multiblock.BlockMultiblockBlock;
+import ip.industrialProcessing.multiblock.BlockMultiblockBlockRendered;
 import ip.industrialProcessing.multiblock.block.inventory.TileEntityMultiblockInvInput;
 import ip.industrialProcessing.multiblock.interfaces.ITileEntityMultiblockBlock;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 
-public class BlockMultiblockTankInput extends BlockMultiblockBlock {
+public class BlockMultiblockTankInput extends BlockMultiblockBlockRendered {
 
 	private Icon completedIcon;
 	private Icon connectedIcon;

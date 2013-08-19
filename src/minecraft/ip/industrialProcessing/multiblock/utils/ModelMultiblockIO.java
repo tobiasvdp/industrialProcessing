@@ -1,13 +1,12 @@
-package ip.industrialProcessing.multiblock.block.frame;
+package ip.industrialProcessing.multiblock.utils;
+
+import ip.industrialProcessing.client.render.ModelMultiblock;
+import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.entity.Entity;
 
 import org.lwjgl.opengl.GL11;
 
-import ip.industrialProcessing.client.render.ModelMultiblock;
-import net.minecraft.entity.Entity;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
-
-public class ModelMultiblockFrame extends ModelMultiblock {
+public class ModelMultiblockIO extends ModelMultiblock {
 
 	net.minecraft.entity.Entity entity;
 
@@ -38,8 +37,14 @@ public class ModelMultiblockFrame extends ModelMultiblock {
 	ModelRenderer BackTopRight;
 	ModelRenderer BackBottomLeft;
 	ModelRenderer BackBottomRight;
+	ModelRenderer FrontO;
+	ModelRenderer RightIO;
+	ModelRenderer LeftIO;
+	ModelRenderer BackIO;
+	ModelRenderer TopIO;
+	ModelRenderer BottomIO;
 
-	public ModelMultiblockFrame() {
+	public ModelMultiblockIO() {
 		textureWidth = 64;
 		textureHeight = 64;
 
@@ -205,10 +210,46 @@ public class ModelMultiblockFrame extends ModelMultiblock {
 		BackBottomRight.setTextureSize(64, 64);
 		BackBottomRight.mirror = true;
 		setRotation(BackBottomRight, 0F, 0F, 0F);
+		FrontO = new ModelRenderer(this, 0, 28);
+		FrontO.addBox(0F, 0F, 0F, 6, 6, 1);
+		FrontO.setRotationPoint(-3F, 13F, -8F);
+		FrontO.setTextureSize(64, 32);
+		FrontO.mirror = true;
+		setRotation(FrontO, 0F, 0F, 0F);
+		RightIO = new ModelRenderer(this, 0, 35);
+		RightIO.addBox(0F, 0F, 0F, 1, 6, 6);
+		RightIO.setRotationPoint(-8F, 13F, -3F);
+		RightIO.setTextureSize(64, 32);
+		RightIO.mirror = true;
+		setRotation(RightIO, 0F, 0F, 0F);
+		LeftIO = new ModelRenderer(this, 0, 35);
+		LeftIO.addBox(0F, 0F, 0F, 1, 6, 6);
+		LeftIO.setRotationPoint(7F, 13F, -3F);
+		LeftIO.setTextureSize(64, 32);
+		LeftIO.mirror = true;
+		setRotation(LeftIO, 0F, 0F, 0F);
+		BackIO = new ModelRenderer(this, 0, 28);
+		BackIO.addBox(0F, 0F, 0F, 6, 6, 1);
+		BackIO.setRotationPoint(-3F, 13F, 7F);
+		BackIO.setTextureSize(64, 32);
+		BackIO.mirror = true;
+		setRotation(BackIO, 0F, 0F, 0F);
+		TopIO = new ModelRenderer(this, 0, 47);
+		TopIO.addBox(0F, 0F, 0F, 6, 1, 6);
+		TopIO.setRotationPoint(-3F, 8F, -3F);
+		TopIO.setTextureSize(64, 32);
+		TopIO.mirror = true;
+		setRotation(TopIO, 0F, 0F, 0F);
+		BottomIO = new ModelRenderer(this, 0, 47);
+		BottomIO.addBox(0F, 0F, 0F, 6, 1, 6);
+		BottomIO.setRotationPoint(-3F, 23F, -3F);
+		BottomIO.setTextureSize(64, 32);
+		BottomIO.mirror = true;
+		setRotation(BottomIO, 0F, 0F, 0F);
+
 	}
 
-	public void render(Entity entity, float f, float f1, float f2, float f3,
-			float f4, float f5) {
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5);
 		base.render(f5);
@@ -238,77 +279,96 @@ public class ModelMultiblockFrame extends ModelMultiblock {
 		BackTopRight.render(f5);
 		BackBottomLeft.render(f5);
 		BackBottomRight.render(f5);
+		FrontO.render(f5);
+		RightIO.render(f5);
+		LeftIO.render(f5);
+		BackIO.render(f5);
+		TopIO.render(f5);
+		BottomIO.render(f5);
 
 		this.entity = entity;
 	}
 
-	public void setRotationAngles(float f, float f1, float f2, float f3,
-			float f4, float f5) {
+	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5) {
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 	}
 
 	@Override
 	public void renderModelSides(float f5, boolean sides[]) {
-		/*GL11.glPushMatrix();
-		GL11.glEnable(3042 );
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_DST_ALPHA);
-		GL11.glColor4f(1.0f, 1.0f, 1.0f, 0.5f);*/
-		
-		base.render(f5);
-		Bottom.render(f5);
-		
-		GL11.glDisable(3042 );
-		GL11.glPopMatrix();
+		/*
+		 * GL11.glPushMatrix(); GL11.glEnable(3042 );
+		 * GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_DST_ALPHA);
+		 * GL11.glColor4f(1.0f, 1.0f, 1.0f, 0.5f);
+		 */
 
+		base.render(f5);
+
+		GL11.glDisable(3042);
+		GL11.glPopMatrix();
+		if (sides[0])
+			Bottom.render(f5);
+		else
+			BottomIO.render(f5);
 		if (sides[2])
 			Front.render(f5);
+		else
+			FrontO.render(f5);
 		if (sides[3])
 			Back.render(f5);
+		else
+			BackIO.render(f5);
 		if (sides[1])
 			Top.render(f5);
+		else
+			TopIO.render(f5);
 		if (sides[4])
 			Left.render(f5);
+		else
+			LeftIO.render(f5);
 		if (sides[5])
 			Right.render(f5);
-		if (sides[2]&&sides[4])
-		 FrontLeft.render(f5);
-		if (sides[3]&&sides[4])
-		 BackLeft.render(f5);
-		if (sides[2]&&sides[5])
-		 FrontRight.render(f5);
-		if (sides[3]&&sides[5])
-		 BackRight.render(f5);
-		if (sides[2]&&sides[1])
-		 FrontTop.render(f5);
-		if (sides[2]&&sides[0])
-		 FrontBottom.render(f5);
-		if (sides[3]&&sides[1])
-		 BackTop.render(f5);
-		if (sides[3]&&sides[0])
-		 BackBottom.render(f5);
-		if (sides[4]&&sides[1])
-		 LeftTop.render(f5);
-		if (sides[4]&&sides[0])
-		 LeftBottom.render(f5);
-		if (sides[5]&&sides[1])
-		 RightTop.render(f5);
-		if (sides[5]&&sides[0])
-		 RightBottom.render(f5);
-		if (sides[2]&&sides[1]&&sides[5])
-		 FrontTopRight.render(f5);
-		if (sides[2]&&sides[1]&&sides[4])
-		 FrontTopLeft.render(f5);
-		if (sides[2]&&sides[0]&&sides[5])
-		 FrontBottomRight.render(f5);
-		if (sides[2]&&sides[0]&&sides[4])
-		 FrontBottomLeft.render(f5);
-		if (sides[3]&&sides[1]&&sides[4])
-		 BackTopLeft.render(f5);
-		if (sides[3]&&sides[1]&&sides[5])
-		 BackTopRight.render(f5);
-		if (sides[3]&&sides[0]&&sides[4])
-		 BackBottomLeft.render(f5);
-		if (sides[3]&&sides[0]&&sides[5])
-		 BackBottomRight.render(f5);
+		else
+			RightIO.render(f5);
+		if (sides[2] && sides[4])
+			FrontLeft.render(f5);
+		if (sides[3] && sides[4])
+			BackLeft.render(f5);
+		if (sides[2] && sides[5])
+			FrontRight.render(f5);
+		if (sides[3] && sides[5])
+			BackRight.render(f5);
+		if (sides[2] && sides[1])
+			FrontTop.render(f5);
+		if (sides[2] && sides[0])
+			FrontBottom.render(f5);
+		if (sides[3] && sides[1])
+			BackTop.render(f5);
+		if (sides[3] && sides[0])
+			BackBottom.render(f5);
+		if (sides[4] && sides[1])
+			LeftTop.render(f5);
+		if (sides[4] && sides[0])
+			LeftBottom.render(f5);
+		if (sides[5] && sides[1])
+			RightTop.render(f5);
+		if (sides[5] && sides[0])
+			RightBottom.render(f5);
+		if (sides[2] && sides[1] && sides[5])
+			FrontTopRight.render(f5);
+		if (sides[2] && sides[1] && sides[4])
+			FrontTopLeft.render(f5);
+		if (sides[2] && sides[0] && sides[5])
+			FrontBottomRight.render(f5);
+		if (sides[2] && sides[0] && sides[4])
+			FrontBottomLeft.render(f5);
+		if (sides[3] && sides[1] && sides[4])
+			BackTopLeft.render(f5);
+		if (sides[3] && sides[1] && sides[5])
+			BackTopRight.render(f5);
+		if (sides[3] && sides[0] && sides[4])
+			BackBottomLeft.render(f5);
+		if (sides[3] && sides[0] && sides[5])
+			BackBottomRight.render(f5);
 	}
+
 }

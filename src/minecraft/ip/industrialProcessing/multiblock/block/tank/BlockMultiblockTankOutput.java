@@ -9,10 +9,11 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.multiblock.BlockMultiblockBlock;
+import ip.industrialProcessing.multiblock.BlockMultiblockBlockRendered;
 import ip.industrialProcessing.multiblock.interfaces.ITileEntityMultiblockBlock;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 
-public class BlockMultiblockTankOutput extends BlockMultiblockBlock{
+public class BlockMultiblockTankOutput extends BlockMultiblockBlockRendered{
 
 	private Icon completedIcon;
 	private Icon connectedIcon;

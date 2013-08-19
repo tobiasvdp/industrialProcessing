@@ -37,6 +37,8 @@ import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import ip.industrialProcessing.multiblock.block.frame.BlockMachineFrame;
 import ip.industrialProcessing.multiblock.block.frame.ModelMultiblockFrame;
 import ip.industrialProcessing.multiblock.block.frame.TileEntityMachineFrame;
+import ip.industrialProcessing.multiblock.block.inventory.TileEntityMultiblockInvInput;
+import ip.industrialProcessing.multiblock.utils.ModelMultiblockIO;
 import ip.industrialProcessing.power.manualGenerator.ModelCrankGenerator;
 import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
 import ip.industrialProcessing.power.meters.ModelVoltMeter;
@@ -68,6 +70,7 @@ public class ClientProxy extends CommonProxy {
     private static final ModelStateMachine blastFurnaceTop = new ModelBlastFurnaceTop();
     private static final ModelConnectedFluid tank = new ModelTank();
     private static final ModelMultiblockFrame multiblockFrame = new ModelMultiblockFrame();
+    private static final ModelMultiblockIO multiblockIO = new ModelMultiblockIO();
     @Override
     public void registerRenderers() {
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFilter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockFilter, "ModelFilter", filter));
@@ -129,6 +132,10 @@ public class ClientProxy extends CommonProxy {
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMachineFrame.class, new RendererMultiblock(IndustrialProcessing.blockMachineFrame, "MultiblockBlock", multiblockFrame));
 	ConfigRenderers.setRendererBlockMachineFrameID(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererBlockMachineFrameID(), new TileEntityMachineFrame()));
+	
+	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMultiblockInvInput.class, new RendererMultiblock(IndustrialProcessing.blockMultiMachineInput, "MultiblockBlock", multiblockIO));
+	ConfigRenderers.setrendererBlockMultiblockInvInputID(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getrendererBlockMultiblockInvInputID(), new TileEntityMultiblockInvInput()));
  
     }
 }
