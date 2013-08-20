@@ -65,6 +65,9 @@ public class MultiblockLayout {
 	}
 
 	public int getModelID(int i, int j, int k, BlockForward angle) {
+		if (angle == BlockForward.INVALID){
+			angle = BlockForward.NORTH;
+		}
 		MultiblockStructure layout = layouts[angle.ordinal()];
 		return layout.getModelID(i + layout.getxCore(), j + layout.getyCore(), k + layout.getzCore());
 	}

@@ -23,7 +23,7 @@ public class TileEntityMultiblockBlastFurnace extends
 		structure = new MultiblockLayout();
 
 		MultiblockStructure layout = new MultiblockStructure(1, 1, 0, 2, 5, 0);
-		layout.setCoreID(IndustrialProcessing.blockMultiblockBlastFurnace.blockID);
+		layout.setCoreID(IndustrialProcessing.blockMultiblockBlastFurnace.blockID,0);
 		layout.addBlockIDRelative(-1, 0, 0, 1, frameId);
 		layout.addBlockIDRelative(+1, 0, 0, 1, frameId);
 		layout.addBlockIDRelative(-1, 0, 1, 1, frameId);

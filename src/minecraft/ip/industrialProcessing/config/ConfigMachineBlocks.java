@@ -20,6 +20,8 @@ import ip.industrialProcessing.multiblock.block.inventory.TileEntityMultiblockIn
 import ip.industrialProcessing.multiblock.block.inventory.TileEntityMultiblockInvOutput;
 import ip.industrialProcessing.multiblock.block.tank.TileEntityMultiblockTankInput;
 import ip.industrialProcessing.multiblock.block.tank.TileEntityMultiblockTankOutput;
+import ip.industrialProcessing.multiblock.block.weldingStation.TileEntityMultiblockWeldingStationRight;
+import ip.industrialProcessing.multiblock.block.weldingStation.TileEntityMultiblockWeldingStationScreen;
 import ip.industrialProcessing.multiblock.machine.blastFurnace.TileEntityMultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.machine.crusher.TileEntityMultiblockCrusher;
 import ip.industrialProcessing.multiblock.machine.mixer.TileEntityMultiblockMixer;
@@ -67,6 +69,8 @@ public class ConfigMachineBlocks {
 	private int multiMachineOutputBlockID = 602;
 	private int BlockMultiblockTankInputID = 603;
 	private int BlockMultiblockTankOutputID = 604;
+	private int BlockMultiblockTankWeldingStationRightID = 605;
+	private int BlockMultiblockTankWeldingStationScreenID = 606;
 	private int largeCrusherBlockID = 700;
 	private int largeMixerBlockID = 701;
 	private int BlockMultiblockBlastFurnaceID = 702;
@@ -121,6 +125,8 @@ public class ConfigMachineBlocks {
 		registerMachineBlock(IndustrialProcessing.blockMultiblockMixer, "IP.Machine.Multi.Mixer", "Large mixer", TileEntityMultiblockMixer.class);
 		registerMachineBlock(IndustrialProcessing.blockMultiblockBlastFurnace, "IP.Machine.Multi.Blast", "Large blast furnace", TileEntityMultiblockBlastFurnace.class);
 		registerMachineBlock(IndustrialProcessing.blockMultiblockWeldingStation, "IP.Machine.Multi.Weld", "Welding station", TileEntityMultiblockWeldingStation.class);
+		registerMachineBlock(IndustrialProcessing.blockMultiblockWeldingStationRight, "IP.Machine.Multi.Weld.Right", "Welding station extention", TileEntityMultiblockWeldingStationRight.class);
+		registerMachineBlock(IndustrialProcessing.blockMultiblockWeldingStationScreen, "IP.Machine.Multi.Weld.Screen", "Welding station Screen", TileEntityMultiblockWeldingStationScreen.class);
 	}
 	private void registerMachineBlock(Block block, String uniqueId, String displayName, Class tileEntity) {
 		GameRegistry.registerBlock(block, uniqueId);
@@ -238,6 +244,12 @@ public class ConfigMachineBlocks {
 	}
 	public static int getBlockMultiblockWeldingStationID() {
 		return getInstance().BlockMultiblockWeldingStationID;
+	}
+	public static int getBlockMultiblockTankWeldingStationRightID() {
+		return getInstance().BlockMultiblockTankWeldingStationRightID;
+	}
+	public static int getBlockMultiblockTankWeldingStationScreenID() {
+		return getInstance().BlockMultiblockTankWeldingStationScreenID;
 	}
 
 }

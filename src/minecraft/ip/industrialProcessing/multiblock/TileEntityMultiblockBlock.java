@@ -255,7 +255,46 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements IT
 			}
 			i++;
 		}
-		connectedSides[0] = true;
+		if (worldObj.getBlockId(xCoord, yCoord - 1, zCoord) == 0)
+			connectedSides[0] = false;
+		else
+			connectedSides[0] = true;
+
+		transformConnectionsToSides();
+
+	}
+
+	private void transformConnectionsToSides() {
+		boolean temp;
+		int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+		switch (meta) {
+		case 1:
+			temp = connectedSides[2];
+			connectedSides[2] = connectedSides[5];
+			connectedSides[4] = temp;
+			temp = connectedSides[3];
+			connectedSides[3] = connectedSides[4];
+			connectedSides[5] = temp;
+			break;
+		case 2: {
+			temp = connectedSides[2];
+			connectedSides[2] = connectedSides[3];
+			connectedSides[3] = temp;
+			temp = connectedSides[4];
+			connectedSides[4] = connectedSides[5];
+			connectedSides[5] = temp;
+			break;
+		}
+		case 3:
+			temp = connectedSides[2];
+			connectedSides[2] = connectedSides[4];
+			connectedSides[5] = temp;
+			temp = connectedSides[3];
+			connectedSides[3] = connectedSides[5];
+			connectedSides[4] = temp;
+			break;
+		default:
+		}
 
 	}
 

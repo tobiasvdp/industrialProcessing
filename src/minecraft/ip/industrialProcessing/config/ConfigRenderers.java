@@ -20,7 +20,31 @@ public class ConfigRenderers {
 	private int rendererBlockMultiblockInvOutputID;
 	private int rendererBlockMultiblockTankInputID;
 	private int rendererBlockMultiblockTankOutputID;
+	private int rendererBlockMultiblockWeldingStationID;
+	private int rendererBlockMultiblockWeldingStationRightID;
+	private int rendererBlockMultiblockWeldingStationScreenID;
 	
+	public static int getrendererBlockMultiblockWeldingStationRightID() {
+		return getInstance().rendererBlockMultiblockWeldingStationScreenID;
+	}
+
+	public static void setrendererBlockMultiblockWeldingStationScreenID(int value) {
+		getInstance().rendererBlockMultiblockWeldingStationRightID = value;
+	}
+	public static int getrendererBlockMultiblockWeldingStationScreenID() {
+		return getInstance().rendererBlockMultiblockWeldingStationScreenID;
+	}
+
+	public static void setrendererBlockMultiblockWeldingStationRightID(int value) {
+		getInstance().rendererBlockMultiblockWeldingStationRightID = value;
+	}
+	public static int getrendererBlockMultiblockWeldingStationID() {
+		return getInstance().rendererBlockMultiblockWeldingStationID;
+	}
+
+	public static void setrendererBlockMultiblockWeldingStationID(int value) {
+		getInstance().rendererBlockMultiblockWeldingStationID = value;
+	}
 	public static int getrendererBlockMultiblockInvInputID() {
 		return getInstance().rendererBlockMultiblockInvInputID;
 	}

@@ -57,6 +57,9 @@ import ip.industrialProcessing.multiblock.machine.crusher.TileEntityMultiblockCr
 import ip.industrialProcessing.multiblock.machine.mixer.ContainerMultiblockMixer;
 import ip.industrialProcessing.multiblock.machine.mixer.GuiContainerMultiblockMixer;
 import ip.industrialProcessing.multiblock.machine.mixer.TileEntityMultiblockMixer;
+import ip.industrialProcessing.multiblock.machine.weldingStation.ContainerMultiblockWeldingStation;
+import ip.industrialProcessing.multiblock.machine.weldingStation.GuiContainerMultiblockWeldingStation;
+import ip.industrialProcessing.multiblock.machine.weldingStation.TileEntityMultiblockWeldingStation;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -106,6 +109,8 @@ public class GuiHandler implements IGuiHandler {
 			return new ContainerMultiblockBlockInv(player.inventory, (TileEntityMultiblockBlockTank)entity); 
 		if(entity  instanceof TileEntityMultiblockBlockInv)
 			return new ContainerMultiblockBlockInv(player.inventory, (TileEntityMultiblockBlockInv)entity);  
+		if(entity  instanceof TileEntityMultiblockWeldingStation)
+			return new ContainerMultiblockWeldingStation(player.inventory, (TileEntityMultiblockWeldingStation)entity);  
 		return null;
 	}
 	 
@@ -155,6 +160,8 @@ public class GuiHandler implements IGuiHandler {
 			return new GuiContainerMultiblockBlockTank(player.inventory, (TileEntityMultiblockBlockTank)entity,2); 
 		if(entity  instanceof TileEntityMultiblockTankOutput)
 			return new GuiContainerMultiblockBlockTank(player.inventory, (TileEntityMultiblockBlockTank)entity,3); 
+		if(entity  instanceof TileEntityMultiblockWeldingStation)
+			return new GuiContainerMultiblockWeldingStation(player.inventory, (TileEntityMultiblockWeldingStation)entity); 
 		return null;
 	}
 

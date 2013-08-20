@@ -29,7 +29,7 @@ public class TileEntityMultiblockMixer extends TileEntityMultiblockCoreTankWorke
 		structure = new MultiblockLayout();
 
 		MultiblockStructure layout = new MultiblockStructure(2, 2, 1, 1, 0, 1);
-		layout.setCoreID(IndustrialProcessing.blockMultiblockMixer.blockID);
+		layout.setCoreID(IndustrialProcessing.blockMultiblockMixer.blockID,0);
 		layout.addBlockIDRelative(-1, 0, 0, inputTankId);
 		layout.addBlockIDRelative(1, 0, 0, outputTankId);
 		layout.addBlockIDRelative(0, 0, -1, inputInvId);

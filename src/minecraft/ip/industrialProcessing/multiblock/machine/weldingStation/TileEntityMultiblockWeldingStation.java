@@ -3,6 +3,8 @@ package ip.industrialProcessing.multiblock.machine.weldingStation;
 import java.util.Iterator;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.multiblock.extended.inventory.tank.worker.TileEntityMultiblockCoreTankWorker;
@@ -19,9 +21,11 @@ public class TileEntityMultiblockWeldingStation extends TileEntityMultiblockCore
 
 		structure = new MultiblockLayout();
 
-		MultiblockStructure layout = new MultiblockStructure(0, 1, 0, 0, 0, 0);
-		layout.setCoreID(ConfigMachineBlocks.getBlockMultiblockWeldingStationID());
-		layout.addBlockIDRelative(1, 0, 0, 0,ConfigMachineBlocks.getMultiMachineInputBlockID());
+		MultiblockStructure layout = new MultiblockStructure(0, 1, 0, 0, 1, 0);
+		layout.setCoreID(ConfigMachineBlocks.getBlockMultiblockWeldingStationID(),0);
+		layout.addBlockIDRelative(1, 0, 0, 0,ConfigMachineBlocks.getBlockMultiblockTankWeldingStationRightID());
+		layout.addBlockIDRelative(0, 1, 0, 0,ConfigMachineBlocks.getBlockMultiblockTankWeldingStationScreenID());
+		layout.addBlockIDRelative(1, 1, 0, 0,ConfigMachineBlocks.getBlockMultiblockTankWeldingStationScreenID());
 
 		structure.commit(layout);
 	}
@@ -31,11 +35,23 @@ public class TileEntityMultiblockWeldingStation extends TileEntityMultiblockCore
 	public TileEntityMultiblockWeldingStation() {
 		super(structure, 100);
 		itemStacks.add(new MultiblockItemStack(true, false, 0));
-		itemStacks.add(new MultiblockItemStack(true, false, 1));
-		itemStacks.add(new MultiblockItemStack(false, true, 2));
+		itemStacks.add(new MultiblockItemStack(false, true, 1));
+		itemStacks.add(new MultiblockItemStack(true, false, 2));
+		itemStacks.add(new MultiblockItemStack(true, false, 3));
+		itemStacks.add(new MultiblockItemStack(true, false, 4));
+		itemStacks.add(new MultiblockItemStack(true, false, 5));
+		itemStacks.add(new MultiblockItemStack(true, false, 6));
+		itemStacks.add(new MultiblockItemStack(true, false, 7));
+		itemStacks.add(new MultiblockItemStack(true, false, 8));
+		itemStacks.add(new MultiblockItemStack(true, false, 9));
+		itemStacks.add(new MultiblockItemStack(true, false, 10));
+		itemStacks.add(new MultiblockItemStack(false, true, 11));
+		
+		addTank(10000, true, false);
 	}
 	@Override
 	public void updateEntity() {
+		addBucketToTank(0, 1, 0);
 		super.updateEntity();
 	}
 
@@ -45,8 +61,17 @@ public class TileEntityMultiblockWeldingStation extends TileEntityMultiblockCore
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		return recipes.isValidInput(i, itemstack.itemID);
+	public boolean isItemValidForSlot(int slot, ItemStack itemstack) {
+		int itemID = itemstack.itemID;
+		if (slot == 2)
+			return recipes.isValidInput(slot, itemID);
+		if (slot == 0) {
+			FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(new ItemStack(itemID, 1, 0));
+			if (fluid == null)
+				return false;
+			return recipes.isValidFluidInput(0, fluid.fluidID);
+		}
+		return false;
 	}
 
 	@Override

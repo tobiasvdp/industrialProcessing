@@ -24,6 +24,8 @@ import ip.industrialProcessing.multiblock.block.inventory.BlockMultiblockInvInpu
 import ip.industrialProcessing.multiblock.block.inventory.BlockMultiblockInvOutput;
 import ip.industrialProcessing.multiblock.block.tank.BlockMultiblockTankInput;
 import ip.industrialProcessing.multiblock.block.tank.BlockMultiblockTankOutput;
+import ip.industrialProcessing.multiblock.block.weldingStation.BlockMultiblockWeldingStationRight;
+import ip.industrialProcessing.multiblock.block.weldingStation.BlockMultiblockWeldingStationScreen;
 import ip.industrialProcessing.multiblock.machine.blastFurnace.BlockMultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.machine.crusher.BlockMultiblockCrusher;
 import ip.industrialProcessing.multiblock.machine.mixer.BlockMultiblockMixer;
@@ -75,6 +77,8 @@ public interface ISetupMachineBlocks {
 	public final static BlockMultiblockMixer blockMultiblockMixer = new BlockMultiblockMixer();
 	public final static BlockMultiblockBlastFurnace blockMultiblockBlastFurnace = new BlockMultiblockBlastFurnace();
 	public final static BlockMultiblockWeldingStation blockMultiblockWeldingStation = new BlockMultiblockWeldingStation();
+	public final static BlockMultiblockWeldingStationScreen blockMultiblockWeldingStationScreen = new BlockMultiblockWeldingStationScreen();
+	public final static BlockMultiblockWeldingStationRight blockMultiblockWeldingStationRight = new BlockMultiblockWeldingStationRight();
 	
 	// create fluidpipe
 	public final static BlockTransportFluids blockTransportFluids = new BlockTransportFluids();

@@ -1,10 +1,12 @@
 package ip.industrialProcessing.multiblock;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.multiblock.interfaces.ITileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import ip.industrialProcessing.multiblock.utils.layout.BlockForward;
@@ -18,6 +20,9 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 	private BlockForward angle = BlockForward.INVALID;
 	private boolean locked;
 	private boolean init;
+	private boolean[] connectedSides = new boolean[6];
+	public int modelID;
+	private int count = 0;
 
 	public TileEntityMultiblockCore(MultiblockLayout structure) {
 		this.layout = structure;
@@ -27,6 +32,16 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 
 	@Override
 	public void updateEntity() {
+		if (count == 20) {
+			count = 0;
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		}
+		count++;
+		if (init){
+			checkModelID();
+			checkConnectedSides();
+			init = false;
+		}
 	}
 
 	@Override
@@ -37,6 +52,14 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 		par1nbtTagCompound.setBoolean("Locked", this.locked);
 		par1nbtTagCompound.setInteger("State", this.state.ordinal());
 		par1nbtTagCompound.setInteger("Angle", this.angle.ordinal());
+		par1nbtTagCompound.setInteger("ModelId", this.modelID);
+		NBTTagList nbttaglist = new NBTTagList();
+		for (int i = 0; i < 6; ++i) {
+			NBTTagCompound nbttagcompound = new NBTTagCompound();
+			nbttagcompound.setBoolean("Side" + i, connectedSides[i]);
+			nbttaglist.appendTag(nbttagcompound);
+		}
+		par1nbtTagCompound.setTag("Sides", nbttaglist);
 	}
 
 	@Override
@@ -47,6 +70,12 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 		this.locked = par1nbtTagCompound.getBoolean("Locked");
 		this.state = MultiblockState.fromInt(par1nbtTagCompound.getInteger("State"));
 		this.angle = BlockForward.values()[par1nbtTagCompound.getInteger("Angle")];
+		this.modelID = par1nbtTagCompound.getInteger("ModelId");
+		NBTTagList nbttaglist = par1nbtTagCompound.getTagList("Sides");
+		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
+			NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(i);
+			connectedSides[i] = nbttagcompound1.getBoolean("Side" + i);
+		}
 	}
 
 	@Override
@@ -56,8 +85,8 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 
 	@Override
 	public boolean checkStructure() {
-		MultiblockState state = MultiblockState.DISCONNECTED; 
-		BlockForward newAngle = layout.getLayoutForward(worldObj, xCoord, yCoord, zCoord,angle);
+		MultiblockState state = MultiblockState.DISCONNECTED;
+		BlockForward newAngle = layout.getLayoutForward(worldObj, xCoord, yCoord, zCoord, angle);
 		if (newAngle != BlockForward.INVALID) {
 			state = MultiblockState.COMPLETED;
 			isMultiblock = true;
@@ -95,10 +124,9 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 		y = y - yCoord;
 		z = z - zCoord;
 		BlockForward forward = layout.hasDiscriptionBlockId(x, y, z, blockId, locked, angle);
-		if(forward != BlockForward.INVALID)
-		{
-			if(!locked)
-			this.angle = forward;
+		if (forward != BlockForward.INVALID) {
+			if (!locked)
+				this.angle = forward;
 			return true;
 		}
 		return false;
@@ -147,5 +175,72 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 	@Override
 	public int checkModelID(int xCoord, int yCoord, int zCoord) {
 		return layout.getModelID(xCoord - this.xCoord, yCoord - this.yCoord, zCoord - this.zCoord, angle);
+	}
+
+	public void checkConnectedSides() {
+		int i = 0;
+		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+
+			TileEntity te = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+			if (te != null) {
+				if (te instanceof TileEntityMultiblockBlock || te instanceof TileEntityMultiblockCore) {
+					connectedSides[i] = true;
+				} else {
+					connectedSides[i] = false;
+				}
+			} else {
+				connectedSides[i] = false;
+			}
+			i++;
+		}
+		if (worldObj.getBlockId(xCoord, yCoord - 1, zCoord) == 0)
+			connectedSides[0] = false;
+		else
+			connectedSides[0] = true;
+
+		transformConnectionsToSides();
+
+	}
+
+	private void transformConnectionsToSides() {
+		boolean temp;
+		int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+		switch (meta) {
+		case 1:
+			temp = connectedSides[2];
+			connectedSides[2] = connectedSides[5];
+			connectedSides[4] = temp;
+			temp = connectedSides[3];
+			connectedSides[3] = connectedSides[4];
+			connectedSides[5] = temp;
+			break;
+		case 2: {
+			temp = connectedSides[2];
+			connectedSides[2] = connectedSides[3];
+			connectedSides[3] = temp;
+			temp = connectedSides[4];
+			connectedSides[4] = connectedSides[5];
+			connectedSides[5] = temp;
+			break;
+		}
+		case 3:
+			temp = connectedSides[2];
+			connectedSides[2] = connectedSides[4];
+			connectedSides[5] = temp;
+			temp = connectedSides[3];
+			connectedSides[3] = connectedSides[5];
+			connectedSides[4] = temp;
+			break;
+		default:
+		}
+
+	}
+
+	public void checkModelID() {
+		modelID = checkModelID(0, 0, 0);
+	}
+
+	public boolean[] getConnectedSides() {
+		return connectedSides;
 	}
 }

@@ -28,7 +28,7 @@ public class TileEntityMultiblockCrusher extends TileEntityMultiblockCoreInvWork
 		structure = new MultiblockLayout();
 
 		MultiblockStructure layout = new MultiblockStructure(1, 1, 1, 1, 0, 1);
-		layout.setCoreID(IndustrialProcessing.blockLargeCrusher.blockID);
+		layout.setCoreID(IndustrialProcessing.blockLargeCrusher.blockID,0);
 		layout.addBlockIDRelative(-1, 0, 0,0, inputId);
 		layout.addBlockIDRelative(1, 0, 0,0, outputId);
 		layout.fillLayer(-1, 0, -1,0, frameId);

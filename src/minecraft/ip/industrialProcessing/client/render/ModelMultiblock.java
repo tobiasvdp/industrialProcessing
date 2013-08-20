@@ -16,5 +16,10 @@ public class ModelMultiblock extends ModelMachine{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void render(float f5) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
