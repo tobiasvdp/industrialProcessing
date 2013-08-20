@@ -33,6 +33,9 @@ public interface ISetupItems {
     public final static ItemIP itemTinPurified = new ItemIP(ConfigItems.ItemTinPurifiedID(), "ItemTinPurified",IndustrialProcessing.tabOres);
     public final static ItemIP itemSulfur = new ItemIP(ConfigItems.ItemSulfurID(), "ItemSulfur",IndustrialProcessing.tabOres);
     
+    public final static ItemIP itemThickStick = new ItemIP(ConfigItems.ItemThickStick(), "ItemThickStick",IndustrialProcessing.tabOreProcessing);
+    public final static ItemIP itemHammer = new ItemIP(ConfigItems.ItemHammer(), "ItemHammer",IndustrialProcessing.tabOreProcessing);
+    
     //Iron blast furnace
     public final static ItemIP itemIronOxidePellets = new ItemIP(ConfigItems.ItemIronOxidePelletsID(), "ItemIronOxidePellets",IndustrialProcessing.tabOres);
     public final static ItemIP itemCalcareousSinterDust = new ItemIP(ConfigItems.ItemCalcareousSinterDustID(), "ItemCalcareousSinterDust",IndustrialProcessing.tabOres);

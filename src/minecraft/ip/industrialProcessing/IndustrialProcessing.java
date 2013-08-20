@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import org.bouncycastle.crypto.util.Pack;
 
 import ip.industrialProcessing.config.ConfigAchievements;
+import ip.industrialProcessing.config.ConfigBaseRecipes;
 import ip.industrialProcessing.config.ConfigBlocks;
 import ip.industrialProcessing.config.ConfigCreativeTabs;
 import ip.industrialProcessing.config.ConfigDamageSource;
@@ -198,6 +199,9 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
 
 		// register renders
 		proxy.registerRenderers();
+		
+		//register basic crafting recipes
+		ConfigBaseRecipes.getInstance().addBaseRecipes();
 	}
 
 	@EventHandler

@@ -36,7 +36,11 @@ public class ConfigItems {
 	private int ItemCalcareousSinterDustID = 6527;
 	private int ItemCokesID = 6528;
 	private int ItemSlagID = 6529;
+	private int ItemThickStick = 6530;
+	private int ItemHammer = 6531;
 	
+	public static int ItemHammer(){return getInstance().ItemHammer;}
+	public static int ItemThickStick(){return getInstance().ItemThickStick;}
 	public static int ItemIronLargeChunksID(){return getInstance().ItemIronLargeChunksID;}
 	public static int ItemCopperLargeChunksID(){return getInstance().ItemCopperLargeChunksID;}
 	public static int ItemTinLargeChunksID(){return getInstance().ItemTinLargeChunksID;}
@@ -96,6 +100,9 @@ public class ConfigItems {
 		LanguageRegistry.addName(IndustrialProcessing.itemCopperPurified, "Purified copper");
 		LanguageRegistry.addName(IndustrialProcessing.itemTinPurified, "Purified tin");
 		LanguageRegistry.addName(IndustrialProcessing.itemSulfur, "Sulfur");
+		
+		LanguageRegistry.addName(IndustrialProcessing.itemThickStick, "Thick stick");
+		LanguageRegistry.addName(IndustrialProcessing.itemHammer, "Hammer");
 		
 		LanguageRegistry.addName(IndustrialProcessing.itemIronOxidePellets, "Iron pellets");
 		LanguageRegistry.addName(IndustrialProcessing.itemCalcareousSinterDust, "Calcareous sinter dust");
