@@ -1,6 +1,7 @@
 package ip.industrialProcessing.config;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.items.ItemDamage;
 import ip.industrialProcessing.items.ItemIP;
 
 public interface ISetupItems {
@@ -34,7 +35,7 @@ public interface ISetupItems {
     public final static ItemIP itemSulfur = new ItemIP(ConfigItems.ItemSulfurID(), "ItemSulfur",IndustrialProcessing.tabOres);
     
     public final static ItemIP itemThickStick = new ItemIP(ConfigItems.ItemThickStick(), "ItemThickStick",IndustrialProcessing.tabOreProcessing);
-    public final static ItemIP itemHammer = new ItemIP(ConfigItems.ItemHammer(), "ItemHammer",IndustrialProcessing.tabOreProcessing);
+    public final static ItemDamage itemHammer = new ItemDamage(ConfigItems.ItemHammer(), "ItemHammer",IndustrialProcessing.tabOreProcessing);
     
     //Iron blast furnace
     public final static ItemIP itemIronOxidePellets = new ItemIP(ConfigItems.ItemIronOxidePelletsID(), "ItemIronOxidePellets",IndustrialProcessing.tabOres);

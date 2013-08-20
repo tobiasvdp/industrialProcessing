@@ -15,7 +15,7 @@ public class ConfigBaseRecipes {
 
 	public void addBaseRecipes() {
 		GameRegistry.addShapelessRecipe(new ItemStack(IndustrialProcessing.itemThickStick), new ItemStack(Item.stick), new ItemStack(Item.stick));
-		GameRegistry.addRecipe(new ItemStack(IndustrialProcessing.itemHammer,1,15), "   ", " y ", "x  ", 'x',new ItemStack(IndustrialProcessing.itemThickStick), 'y', new ItemStack(Item.ingotIron));
+		GameRegistry.addRecipe(new ItemStack(IndustrialProcessing.itemHammer), "   ", " y ", "x  ", 'x',new ItemStack(IndustrialProcessing.itemThickStick), 'y', new ItemStack(Item.ingotIron));
 		GameRegistry.addShapedRecipe(new ItemStack(IndustrialProcessing.blockMultiblockWeldingStationScreen,2),"xxx","x x"," y ",'x',new ItemStack(Item.ingotIron),'y',new ItemStack(IndustrialProcessing.itemHammer,1,WILDCARD_VALUE) );
 		
 		GameRegistry.addShapedRecipe(new ItemStack(IndustrialProcessing.blockMultiblockWeldingStation),"xxx","yzy","iji",'x',new ItemStack(Block.stoneSingleSlab),'y',new ItemStack(Block.wood),'z',new ItemStack(Block.chest),'i',new ItemStack(IndustrialProcessing.itemThickStick),'j',new ItemStack(IndustrialProcessing.itemHammer,1,WILDCARD_VALUE) );
