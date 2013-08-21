@@ -26,9 +26,6 @@ public class ItemDamage extends Item {
 	
 	@Override
 	 public ItemStack getContainerItemStack(ItemStack itemStack) {
-		
-	     itemStack.setItemDamage(itemStack.getItemDamage() + 1);
-	     
 	     	return itemStack;
 	     	
 	    }

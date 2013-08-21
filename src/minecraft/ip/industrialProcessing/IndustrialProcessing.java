@@ -170,6 +170,9 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
 
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
+		
+		//register new crafting handler
+		GameRegistry.registerCraftingHandler(new CraftingHandler());
 		// register worldgenerator
 		GameRegistry.registerWorldGenerator(worldGen);
 

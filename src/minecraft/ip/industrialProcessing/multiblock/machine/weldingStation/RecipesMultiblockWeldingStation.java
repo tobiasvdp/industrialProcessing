@@ -13,11 +13,11 @@ public class RecipesMultiblockWeldingStation extends RecipesMachine {
 		addDefaultRecipes();
 	}
 	private void addDefaultRecipes() {
-		Recipe ironSludge= new Recipe();
-		ironSludge.workRequired = 2000;
-		ironSludge.inputs = new RecipeInputSlot[] { 
-				new RecipeInputSlot(0,FluidRegistry.getFluidID("fuel"),RecipeSlotType.TANK, 50)};
-		ironSludge.outputs = new RecipeOutputSlot[] {};
-		addRecipe(ironSludge);
+//		Recipe ironSludge= new Recipe();
+//		ironSludge.workRequired = 2000;
+//		ironSludge.inputs = new RecipeInputSlot[] { 
+//				new RecipeInputSlot(0,FluidRegistry.getFluidID("fuel"),RecipeSlotType.TANK, 50)};
+//		ironSludge.outputs = new RecipeOutputSlot[] {};
+//		addRecipe(ironSludge);
 	}
 }
