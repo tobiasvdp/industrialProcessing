@@ -212,6 +212,33 @@ public class ModelMultiblockFrameConnected extends ModelMultiblock {
 
 		this.entity = entity;
 	}
+	@Override
+	public void render(float f5) {
+		FrontLeft.render(f5);
+		BackLeft.render(f5);
+		FrontRight.render(f5);
+		BackRight.render(f5);
+		FrontTop.render(f5);
+		FrontBottom.render(f5);
+		BackTop.render(f5);
+		BackBottom.render(f5);
+		LeftTop.render(f5);
+		LeftBottom.render(f5);
+		RightTop.render(f5);
+		RightBottom.render(f5);
+		FrontTopRight.render(f5);
+		FrontTopLeft.render(f5);
+		FrontBottomRight.render(f5);
+		FrontBottomLeft.render(f5);
+		BackTopLeft.render(f5);
+		BackTopRight.render(f5);
+		BackBottomLeft.render(f5);
+		BackBottomRight.render(f5);
+		BackBar.render(f5);
+		FrontBar.render(f5);
+		LeftBar.render(f5);
+		RightBar.render(f5);
+	}
 
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5) {
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);

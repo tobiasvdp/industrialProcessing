@@ -6,6 +6,8 @@ import net.minecraftforge.common.AchievementPage;
 
 public interface ISetupAchievements {
 	public static AchievementPage achPage = new AchievementPage("Industrial Processing");
-    public static Achievement achPlacedFilter = new Achievement(ConfigAchievements.PlacedFilterID(), "placedFilter", 0, 0, IndustrialProcessing.blockFilter, null).registerAchievement();
-    public static Achievement achPlacedCrusher = new Achievement(ConfigAchievements.PlacedCrusherID(), "placedCrusher", 0, -1, IndustrialProcessing.blockCrusher, achPlacedFilter).registerAchievement();
+    public static Achievement achPlacedFilter = new Achievement(ConfigAchievements.PlacedFilterID(), "placedFilter", 0, 11, IndustrialProcessing.blockFilter, null).registerAchievement();
+    public static Achievement achPlacedCrusher = new Achievement(ConfigAchievements.PlacedCrusherID(), "placedCrusher", 0, 10, IndustrialProcessing.blockCrusher, achPlacedFilter).registerAchievement();
+    public static Achievement achHammer = new Achievement(ConfigAchievements.madeHammerID(), "madeHammer", 0, -3, IndustrialProcessing.itemHammer, null).registerAchievement();
+    public static Achievement achWeldingTable = new Achievement(ConfigAchievements.PlacedWeldingTable(), "placedWeldingTable", 0, -1, IndustrialProcessing.blockMultiblockWeldingStation, achHammer).registerAchievement().setSpecial();
 }

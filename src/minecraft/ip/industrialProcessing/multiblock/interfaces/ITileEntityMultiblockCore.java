@@ -1,5 +1,6 @@
 package ip.industrialProcessing.multiblock.interfaces;
 
+import cpw.mods.fml.common.network.Player;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 
 public interface ITileEntityMultiblockCore {

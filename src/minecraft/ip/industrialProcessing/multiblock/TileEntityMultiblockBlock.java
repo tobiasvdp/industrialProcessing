@@ -61,6 +61,7 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements IT
 		this.yCore = y;
 		this.zCore = z;
 		this.hasCore = true;
+		worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, worldObj.getBlockMetadata(xCore, yCore, zCore), 2);
 	}
 
 	@Override
@@ -114,7 +115,7 @@ public abstract class TileEntityMultiblockBlock extends TileEntity implements IT
 		if (init) {
 			if (!hasCore) {
 				setCore(searchForCore());
-				if (hasCore()) {
+				if (hasCore() && getCore() !=null) {
 					getCore().checkStructure();
 					checkModelID();
 					onStateChanged();

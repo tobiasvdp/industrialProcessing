@@ -23,12 +23,24 @@ public class ContainerMultiblockCoreInv extends Container {
 	public void BindPlayerInventory(InventoryPlayer inventoryPlayer, Container container, int offset) {
 
 		for (int i = 0; i < 9; i++) {
-			addSlotToContainer(new Slot(inventoryPlayer, i + offset, 8 + i * 18, 142));
+			addSlotToContainer(new Slot(inventoryPlayer, i, 8 + offset + i * 18, 142));
 		}
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 9; j++) {
-				int o = j + i * 9 + 9 + offset;
-				addSlotToContainer(new Slot(inventoryPlayer, o, 8 + j * 18, 84 + i * 18));
+				int o = j + i * 9 + 9;
+				addSlotToContainer(new Slot(inventoryPlayer, o, 8 + offset + j * 18, 84 + i * 18));
+			}
+		}
+	}
+	public void BindPlayerInventory(InventoryPlayer inventoryPlayer, Container container, int offsetx, int offsety) {
+
+		for (int i = 0; i < 9; i++) {
+			addSlotToContainer(new Slot(inventoryPlayer, i, 8 + offsetx + i * 18, 142+offsety));
+		}
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 9; j++) {
+				int o = j + i * 9 + 9;
+				addSlotToContainer(new Slot(inventoryPlayer, o, 8 + offsetx + j * 18, 84+offsety + i * 18));
 			}
 		}
 	}

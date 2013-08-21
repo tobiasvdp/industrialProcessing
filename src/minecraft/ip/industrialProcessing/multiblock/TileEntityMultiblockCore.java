@@ -1,5 +1,7 @@
 package ip.industrialProcessing.multiblock;
 
+import cpw.mods.fml.common.network.Player;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.INetworkManager;
@@ -15,6 +17,7 @@ import ip.industrialProcessing.multiblock.utils.layout.MultiblockLayout;
 public class TileEntityMultiblockCore extends TileEntity implements ITileEntityMultiblockCore {
 
 	private MultiblockLayout layout;
+	public EntityLivingBase creator;
 	private boolean isMultiblock;
 	protected MultiblockState state;
 	private BlockForward angle = BlockForward.INVALID;
@@ -93,6 +96,8 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 			locked = true;
 			angle = newAngle;
 			System.out.println("Multiblock made");
+			if(creator != null)
+			triggerAchievement();
 		} else {
 			state = MultiblockState.CONNECTED;
 			isMultiblock = false;
@@ -105,6 +110,10 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 		} else {
 			return true;
 		}
+	}
+
+	protected void triggerAchievement() {
+
 	}
 
 	@Override

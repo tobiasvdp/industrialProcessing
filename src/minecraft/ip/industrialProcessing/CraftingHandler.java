@@ -16,17 +16,25 @@ public class CraftingHandler implements ICraftingHandler {
 			if (stack != null && stack.getItem() != null) {
 				Item itemFromStack = stack.getItem();
 				if (itemFromStack instanceof ItemDamage) {
-					ItemStack damagedStack = new ItemStack(itemFromStack,stack.stackSize,stack.getItemDamage()+1);
-					
-					if(damagedStack.getItemDamage() >= damagedStack.getMaxDamage()){
+					ItemStack damagedStack = new ItemStack(itemFromStack, 2, stack.getItemDamage() + 1);
+
+					if (damagedStack.getItemDamage() >= damagedStack.getMaxDamage()) {
 						damagedStack.stackSize--;
 					}
-					
+
 					craftMatrix.setInventorySlotContents(i, damagedStack);
 				}
 			}
 		}
+		if (item != null && item.itemID != 0) {
+			checkAchievements(player, item);
+		}
 
+	}
+
+	public void checkAchievements(EntityPlayer player, ItemStack item) {
+		if (item.itemID == IndustrialProcessing.itemHammer.itemID)
+			player.addStat(IndustrialProcessing.achHammer, 1);
 	}
 
 	@Override

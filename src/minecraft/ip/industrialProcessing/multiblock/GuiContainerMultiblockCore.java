@@ -29,6 +29,7 @@ public class GuiContainerMultiblockCore  extends GuiContainer{
     protected int progressBarY = 34;
     protected int progressBarWidth = 22;
     protected int progressBarHeight = 16;
+    protected int textOffset = 0;
     protected ForgeDirection progressBarSide = ForgeDirection.WEST;
 
     public GuiContainerMultiblockCore(InventoryPlayer inventoryPlayer, TileEntityMultiblockCoreInv tileEntity, ContainerMultiblockCoreInv container, String name, String textureLocation) {
@@ -58,8 +59,8 @@ public class GuiContainerMultiblockCore  extends GuiContainer{
 
 	@Override
     protected void drawGuiContainerForegroundLayer(int param1, int param2) {
-	fontRenderer.drawString(name, 8, 6, 4210752);
-	fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
+	fontRenderer.drawString(name, 8 +textOffset, 6, 4210752);
+	fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8+textOffset, ySize - 96 + 2, 4210752);
     }
 
     @Override

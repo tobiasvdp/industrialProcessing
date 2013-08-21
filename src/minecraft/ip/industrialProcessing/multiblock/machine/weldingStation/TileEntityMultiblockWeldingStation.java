@@ -2,6 +2,7 @@ package ip.industrialProcessing.multiblock.machine.weldingStation;
 
 import java.util.Iterator;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -48,6 +49,10 @@ public class TileEntityMultiblockWeldingStation extends TileEntityMultiblockCore
 		itemStacks.add(new MultiblockItemStack(false, true, 11));
 		
 		addTank(10000, true, false);
+	}
+	@Override
+	protected void triggerAchievement() {
+		((EntityPlayer) creator).addStat(IndustrialProcessing.achWeldingTable, 1);
 	}
 	@Override
 	public void updateEntity() {

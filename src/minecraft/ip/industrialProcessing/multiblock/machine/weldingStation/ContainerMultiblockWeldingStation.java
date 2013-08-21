@@ -38,7 +38,7 @@ public class ContainerMultiblockWeldingStation extends ContainerMultiblockCoreIn
 		addSlotToContainer(slots[10]);
 		addSlotToContainer(slots[11]);
 		
-		BindPlayerInventory(inventoryPlayer, this, 0);
+		BindPlayerInventory(inventoryPlayer, this, -11,1);
 	}
 
 }

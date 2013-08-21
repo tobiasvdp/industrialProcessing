@@ -1,5 +1,6 @@
 package ip.industrialProcessing.multiblock;
 
+import cpw.mods.fml.common.network.Player;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.multiblock.interfaces.ITileEntityMultiblockCore;
@@ -93,6 +94,7 @@ public abstract class BlockMultiblockCore extends BlockContainer {
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack itemStack) {
 	int dir = MathHelper.floor_double((double) ((entityLivingBase.rotationYaw * 4F) / 360F) + 0.5D) & 3;
 	world.setBlockMetadataWithNotify(x, y, z, dir, 0); 
+	((TileEntityMultiblockCore) world.getBlockTileEntity(x, y, z)).creator = entityLivingBase;
 	super.onBlockPlacedBy(world, x, y, z, entityLivingBase, itemStack);
     }
       

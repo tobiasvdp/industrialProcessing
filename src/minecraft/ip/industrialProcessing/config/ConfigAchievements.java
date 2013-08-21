@@ -7,19 +7,31 @@ import net.minecraftforge.common.AchievementPage;
 public class ConfigAchievements {
 	private int placedFilter = 2001;
 	private int achPlacedCrusher = 2002;
+	private int achHammer = 2003;
+	private int achWeldingTable = 2004;
 	
 	public static int PlacedFilterID(){return getInstance().placedFilter;}
 	public static int PlacedCrusherID(){return getInstance().achPlacedCrusher;}
+	public static int madeHammerID(){return getInstance().achHammer;}
+	public static int PlacedWeldingTable(){return getInstance().achWeldingTable;}
 	
 	public void registerAchievments(){
 		IndustrialProcessing.achPage.getAchievements().add(IndustrialProcessing.achPlacedFilter);
 		IndustrialProcessing.achPage.getAchievements().add(IndustrialProcessing.achPlacedCrusher);
+		IndustrialProcessing.achPage.getAchievements().add(IndustrialProcessing.achHammer);
+		IndustrialProcessing.achPage.getAchievements().add(IndustrialProcessing.achWeldingTable);
 		AchievementPage.registerAchievementPage(IndustrialProcessing.achPage);
 		
 		LanguageRegistry.instance().addStringLocalization("achievement." + "placedFilter", "en_US", "First filter");
 		LanguageRegistry.instance().addStringLocalization("achievement." + "placedFilter" + ".desc", "en_US", "Placing your first filter");
 		LanguageRegistry.instance().addStringLocalization("achievement." + "placedCrusher", "en_US", "First crusher");
 		LanguageRegistry.instance().addStringLocalization("achievement." + "placedCrusher" + ".desc", "en_US", "Placing your first crusher");
+		
+		LanguageRegistry.instance().addStringLocalization("achievement." + "madeHammer", "en_US", "Hammer time");
+		LanguageRegistry.instance().addStringLocalization("achievement." + "madeHammer" + ".desc", "en_US", "Hit that thing");
+		
+		LanguageRegistry.instance().addStringLocalization("achievement." + "placedWeldingTable", "en_US", "Welding Table");
+		LanguageRegistry.instance().addStringLocalization("achievement." + "placedWeldingTable" + ".desc", "en_US", "The beginning of something big");
 	}
 	
 	private ConfigAchievements(){
