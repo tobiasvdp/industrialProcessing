@@ -38,7 +38,9 @@ public class ConfigItems {
 	private int ItemSlagID = 6529;
 	private int ItemThickStick = 6530;
 	private int ItemHammer = 6531;
+	private int ItemBlowingTorch = 6532;
 	
+	public static int ItemBlowingTorch(){return getInstance().ItemBlowingTorch;}
 	public static int ItemHammer(){return getInstance().ItemHammer;}
 	public static int ItemThickStick(){return getInstance().ItemThickStick;}
 	public static int ItemIronLargeChunksID(){return getInstance().ItemIronLargeChunksID;}
@@ -103,6 +105,7 @@ public class ConfigItems {
 		
 		LanguageRegistry.addName(IndustrialProcessing.itemThickStick, "Thick stick");
 		LanguageRegistry.addName(IndustrialProcessing.itemHammer, "Hammer");
+		LanguageRegistry.addName(IndustrialProcessing.itemBlowingTorch, "Blowing torch");
 		
 		LanguageRegistry.addName(IndustrialProcessing.itemIronOxidePellets, "Iron pellets");
 		LanguageRegistry.addName(IndustrialProcessing.itemCalcareousSinterDust, "Calcareous sinter dust");
