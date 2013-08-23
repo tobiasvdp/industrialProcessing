@@ -37,32 +37,8 @@ public class ServerWorker implements IWorker {
 		}
 		return workToDo;
 	}
-	public int doWork(int amount,int power) {
-		int workToDo = 0;
-		if (amount > 0) {
-			if (this.workDone == 0) {
-				onPrepareWork();
-			}
-			if (hasWork()) {
-				if (canWork()) {
-					if (workDone == 1)
-						onBeginWork();
-					workToDo = Math.min(amount, totalWork - workDone+1);
-					onWorkProgressed(workToDo);
-					if (this.workDone > this.totalWork) {
-						onEndWork();
-					}
-				}
-			} else if (workDone > 1) {
-				this.onWorkCancelled();
-			} else
-				this.workDone = 0; // prepare again next tick
 
-		}
-		return workToDo;
-	}
-
-	private void onBeginWork() {
+	protected void onBeginWork() {
 		this.handler.beginWork();
 	}
 
@@ -122,5 +98,11 @@ public class ServerWorker implements IWorker {
 	@Override
 	public boolean isWorking() {
 		return workDone > 1 && workDone <= totalWork;
+	}
+
+	@Override
+	public int doWork(int amount, int power) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

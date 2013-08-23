@@ -27,6 +27,7 @@ public abstract class TileEntityMultiblockCoreTankWorkerPowered extends TileEnti
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
+		
 		if (counttemp == 80) {
 			if (!worldObj.isRemote)
 			System.out.println(powerStorage);

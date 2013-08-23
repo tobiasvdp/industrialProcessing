@@ -11,8 +11,8 @@ import ip.industrialProcessing.utils.working.ServerWorker;
 public class RecipeWorker extends ServerWorker {
 
 	private Random random;
-	private IRecipeWorkHandler handler;
-	private Recipe recipe;
+	protected IRecipeWorkHandler handler;
+	protected Recipe recipe;
 
 	public RecipeWorker(IRecipeWorkHandler handler) {
 		super(handler, 100);
