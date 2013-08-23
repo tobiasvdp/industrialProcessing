@@ -16,4 +16,6 @@ public interface IWorker {
 
 	boolean isWorking();
 
+	int doWork(int amount, int power);
+
 }

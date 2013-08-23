@@ -261,4 +261,8 @@ public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCo
 	public boolean damageItem(int slot, int itemId) {
 		return itemStacks.get(slot).damageItem();
 	}
+
+	public boolean canInsertItem(int index, ItemStack stack, int stackSize) {
+		return canInsertItemForSlot(index,stack);
+	}
 }

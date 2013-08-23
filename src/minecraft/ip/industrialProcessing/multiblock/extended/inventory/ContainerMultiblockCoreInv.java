@@ -5,13 +5,16 @@ import ip.industrialProcessing.slots.SlotBase;
 import ip.industrialProcessing.slots.SlotOutput;
 import ip.industrialProcessing.utils.containers.ContainerUtils;
 import ip.industrialProcessing.utils.containers.IContainerAdd;
+import ip.industrialProcessing.utils.containers.VerifyingContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.tileentity.TileEntityFurnace;
 
-public class ContainerMultiblockCoreInv extends Container {
+public class ContainerMultiblockCoreInv extends VerifyingContainer {
 
 	protected TileEntityMultiblockCoreInv tileEntity;
 	protected Slot[] slots;
@@ -50,11 +53,6 @@ public class ContainerMultiblockCoreInv extends Container {
 		return tileEntity.isUseableByPlayer(entityplayer);
 	}
 
-	@Override
-	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
-		Slot slot = (Slot) this.inventorySlots.get(par2);
-		return slot != null ? slot.getStack() : null;
-	}
 	public void containerAddSlot(Slot slot) {
 		this.addSlotToContainer(slot);
 	}
@@ -67,6 +65,10 @@ public class ContainerMultiblockCoreInv extends Container {
 	public Slot containerGetSlot(int slot) {
 		return getSlot(slot);
 	}
-	
 
+	@Override
+	protected boolean canPutItemStackInSlot(ItemStack stack, Slot slot) {
+		int index = slot.getSlotIndex();
+		return this.tileEntity.canInsertItem(index, stack, stack.stackSize);
+	}
 }

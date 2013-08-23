@@ -29,7 +29,8 @@ public class GuiContainerMultiblockCore  extends GuiContainer{
     protected int progressBarY = 34;
     protected int progressBarWidth = 22;
     protected int progressBarHeight = 16;
-    protected int textOffset = 0;
+    protected int progressBarOriginx = 176;
+    protected int progressBarOriginy = 0;
     protected ForgeDirection progressBarSide = ForgeDirection.WEST;
 
     public GuiContainerMultiblockCore(InventoryPlayer inventoryPlayer, TileEntityMultiblockCoreInv tileEntity, ContainerMultiblockCoreInv container, String name, String textureLocation) {
@@ -37,6 +38,7 @@ public class GuiContainerMultiblockCore  extends GuiContainer{
 	this.tileEntity = tileEntity;
 	this.name = name;
 	this.textureLocation = new ResourceLocation(INamepace.TEXTURE_DOMAIN, textureLocation);
+	
     }
 
     private void requestServerUpdate() {
@@ -59,8 +61,8 @@ public class GuiContainerMultiblockCore  extends GuiContainer{
 
 	@Override
     protected void drawGuiContainerForegroundLayer(int param1, int param2) {
-	fontRenderer.drawString(name, 8 +textOffset, 6, 4210752);
-	fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8+textOffset, ySize - 96 + 2, 4210752);
+	fontRenderer.drawString(name, 8, 6, 4210752);
+	fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
     }
 
     @Override
@@ -78,11 +80,11 @@ public class GuiContainerMultiblockCore  extends GuiContainer{
 	    	if (progressBarSide == ForgeDirection.WEST){
 	    		int scale = worker.getScaledProgress(progressBarWidth);
 	    		if (scale > 0)
-	    		this.drawTexturedModalRect(x + progressBarX, y + progressBarY, 176, 0, scale, progressBarHeight);
+	    		this.drawTexturedModalRect(x + progressBarX, y + progressBarY, progressBarOriginx, progressBarOriginy, scale, progressBarHeight);
 	    	}else{
 	    		int scale = worker.getScaledProgress(progressBarHeight);
 	    		if (scale > 0)
-	    		this.drawTexturedModalRect(x + progressBarX, y + progressBarY, 176, 0, progressBarWidth, scale);
+	    		this.drawTexturedModalRect(x + progressBarX, y + progressBarY, progressBarOriginx, progressBarOriginy, progressBarWidth, scale);
 	    	}
 	}
     }
@@ -92,6 +94,10 @@ public class GuiContainerMultiblockCore  extends GuiContainer{
 	progressBarY = y;
 	progressBarWidth = w;
 	progressBarHeight = h;
+    }
+    protected void setProgressBarOrigin(int x,int y){
+    	progressBarOriginx = x;
+    	progressBarOriginy = y;
     }
     protected void setProgresBarDropside(ForgeDirection o){
     	progressBarSide = o; 

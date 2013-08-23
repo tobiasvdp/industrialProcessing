@@ -9,6 +9,8 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import ip.industrialProcessing.multiblock.GuiContainerMultiblockCore;
 import ip.industrialProcessing.multiblock.extended.inventory.ContainerMultiblockCoreInv;
 import ip.industrialProcessing.multiblock.extended.inventory.TileEntityMultiblockCoreInv;
+import ip.industrialProcessing.multiblock.machine.weldingStation.ContainerMultiblockWeldingStation;
+import ip.industrialProcessing.multiblock.machine.weldingStation.TileEntityMultiblockWeldingStation;
 
 public class GuiContainerMultiblockCoreTank extends GuiContainerMultiblockCore{
 	public TileEntityMultiblockCoreTank tileEntity;

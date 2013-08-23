@@ -45,4 +45,9 @@ public class ClientWorker implements IWorker {
 	return workDone > 1 && workDone <= totalWork;
     }
 
+	@Override
+	public int doWork(int amount, int power) {
+		return 0;
+	}
+
 }

@@ -9,24 +9,26 @@ import net.minecraftforge.fluids.FluidStack;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.multiblock.extended.inventory.tank.worker.TileEntityMultiblockCoreTankWorker;
+import ip.industrialProcessing.multiblock.extended.inventory.tank.worker.power.TileEntityMultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.multiblock.machine.mixer.RecipesMultiblockMixer;
 import ip.industrialProcessing.multiblock.utils.inventory.MultiblockItemStack;
 import ip.industrialProcessing.multiblock.utils.layout.MultiblockLayout;
 import ip.industrialProcessing.multiblock.utils.layout.MultiblockStructure;
 import ip.industrialProcessing.recipes.Recipe;
 
-public class TileEntityMultiblockWeldingStation extends TileEntityMultiblockCoreTankWorker {
+public class TileEntityMultiblockWeldingStation extends TileEntityMultiblockCoreTankWorkerPowered {
 	public static MultiblockLayout structure;
 
 	static {
 
 		structure = new MultiblockLayout();
 
-		MultiblockStructure layout = new MultiblockStructure(0, 1, 0, 0, 1, 0);
+		MultiblockStructure layout = new MultiblockStructure(1, 1, 0, 0, 1, 0);
 		layout.setCoreID(ConfigMachineBlocks.getBlockMultiblockWeldingStationID(),0);
 		layout.addBlockIDRelative(1, 0, 0, 0,ConfigMachineBlocks.getBlockMultiblockTankWeldingStationRightID());
 		layout.addBlockIDRelative(0, 1, 0, 0,ConfigMachineBlocks.getBlockMultiblockTankWeldingStationScreenID());
 		layout.addBlockIDRelative(1, 1, 0, 0,ConfigMachineBlocks.getBlockMultiblockTankWeldingStationScreenID());
+		layout.addBlockIDRelative(-1, 0, 0, 0,ConfigMachineBlocks.getBlockMultiblockPowerID());
 
 		structure.commit(layout);
 	}
@@ -34,7 +36,7 @@ public class TileEntityMultiblockWeldingStation extends TileEntityMultiblockCore
 	public static RecipesMultiblockWeldingStation recipes = new RecipesMultiblockWeldingStation();
 	
 	public TileEntityMultiblockWeldingStation() {
-		super(structure, 100);
+		super(structure, 10000, 50);
 		itemStacks.add(new MultiblockItemStack(true, false, 0));
 		itemStacks.add(new MultiblockItemStack(false, true, 1));
 		itemStacks.add(new MultiblockItemStack(true, false, 2));

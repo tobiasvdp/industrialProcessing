@@ -9,6 +9,7 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
+import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.multiblock.interfaces.ITileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import ip.industrialProcessing.multiblock.utils.layout.BlockForward;
@@ -16,7 +17,7 @@ import ip.industrialProcessing.multiblock.utils.layout.MultiblockLayout;
 
 public class TileEntityMultiblockCore extends TileEntity implements ITileEntityMultiblockCore {
 
-	private MultiblockLayout layout;
+	protected MultiblockLayout layout;
 	public EntityLivingBase creator;
 	private boolean isMultiblock;
 	protected MultiblockState state;
@@ -251,5 +252,9 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 
 	public boolean[] getConnectedSides() {
 		return connectedSides;
+	}
+	public ForgeDirection getForwardDirection() {
+		int meta = this.worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+		return BlockMachine.getForwardFromMetadata(meta);
 	}
 }

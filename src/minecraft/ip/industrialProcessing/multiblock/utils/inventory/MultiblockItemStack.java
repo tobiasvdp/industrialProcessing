@@ -1,6 +1,7 @@
 package ip.industrialProcessing.multiblock.utils.inventory;
 
 import ip.industrialProcessing.items.ItemDamage;
+import ip.industrialProcessing.machines.MachineItemStack;
 
 import java.util.ArrayList;
 
@@ -13,7 +14,8 @@ public class MultiblockItemStack {
 	private ItemStack itemStack;
 	private boolean input;
 	private boolean output;
-	public MultiblockItemStack(boolean input,boolean output,int... ID) {
+
+	public MultiblockItemStack(boolean input, boolean output, int... ID) {
 		this.input = input;
 		this.output = output;
 		for (int i = 0; i < ID.length; i++) {
@@ -39,19 +41,22 @@ public class MultiblockItemStack {
 		return itemStack;
 	}
 
-	public ItemStack decrStack(int ID, int amount, boolean doIt) {
-		if (itemStack == null)
+	public ItemStack decrStack(int i, int j, boolean doIt) {
+		if (this.itemStack == null)
 			return null;
-
-		ItemStack stack = itemStack;
+		ItemStack stack = this.itemStack;
 		if (stack == null)
 			return null;
 
-		if (stack.stackSize > amount) {
-			stack = stack.splitStack(amount);
+		if (stack.stackSize > j) {
+			stack = stack.splitStack(j);
+			if (itemStack.stackSize == 0)
+				itemStack = null;
 			return stack;
 		}
-		itemStack = null;
+		this.itemStack = null;
+		if (stack.stackSize == 0)
+			return null;
 		return stack;
 	}
 
@@ -69,7 +74,7 @@ public class MultiblockItemStack {
 	}
 
 	public boolean setStack(int ID, int amount) {
-		if (amount <= (new ItemStack(ID,amount,0).getMaxStackSize())) {
+		if (amount <= (new ItemStack(ID, amount, 0).getMaxStackSize())) {
 			itemStack = new ItemStack(ID, amount, 0);
 			return true;
 		}
@@ -90,11 +95,13 @@ public class MultiblockItemStack {
 			itemStack = new ItemStack(itemstack2.itemID, itemstack2.stackSize, itemstack2.getItemDamage());
 		}
 	}
-	public boolean getIsInput(){
+
+	public boolean getIsInput() {
 		return input;
 	}
-	public boolean damageItem(){
-		if (itemStack.getItem() != null && itemStack.getItem() instanceof ItemDamage){
+
+	public boolean damageItem() {
+		if (itemStack.getItem() != null && itemStack.getItem() instanceof ItemDamage) {
 			ItemStack damagedStack = new ItemStack(itemStack.getItem(), 1, itemStack.getItemDamage() + 1);
 
 			if (damagedStack.getItemDamage() >= damagedStack.getMaxDamage()) {
@@ -105,7 +112,7 @@ public class MultiblockItemStack {
 			else
 				itemStack = null;
 			return true;
-			
+
 		}
 		return false;
 	}

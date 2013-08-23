@@ -9,22 +9,17 @@ import ip.industrialProcessing.multiblock.extended.inventory.tank.GuiContainerMu
 import ip.industrialProcessing.multiblock.machine.mixer.ContainerMultiblockMixer;
 
 public class GuiContainerMultiblockWeldingStation extends GuiContainerMultiblockCoreTank {
-
 	public GuiContainerMultiblockWeldingStation(InventoryPlayer inventoryPlayer, TileEntityMultiblockWeldingStation tileEntity) {
 		super(inventoryPlayer, tileEntity, new ContainerMultiblockWeldingStation(inventoryPlayer, tileEntity), "Welding station", "textures/gui/WeldingTable.png");
-
-	}
-
-	@Override
-	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
-		textOffset = -11;
-		super.drawGuiContainerForegroundLayer(param1, param2);
+		xSize = 198;
+		ySize = 165;
+		setProgressBarLocation(106, 31, 23, 19);
+		setProgressBarOrigin(198,0);
+		
 	}
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
-		xSize = 198;
-		ySize = 165;
 		super.drawGuiContainerBackgroundLayer(par1, par2, par3);
 		drawTank(0, 8, 19);
 	}

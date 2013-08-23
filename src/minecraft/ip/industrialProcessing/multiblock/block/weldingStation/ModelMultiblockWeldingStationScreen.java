@@ -125,7 +125,7 @@ public class ModelMultiblockWeldingStationScreen extends ModelMultiblock{
 
 	@Override
 	public void renderModelSides(float f5, boolean sides[]) {
-		if (sides[5]){
+		if (sides[5] && !sides[4]){
 			LeftBB.render(f5);
 		    LeftB.render(f5);
 		    LeftBar.render(f5);
@@ -133,13 +133,19 @@ public class ModelMultiblockWeldingStationScreen extends ModelMultiblock{
 		    LeftBar.render(f5);
 		    BackRight.render(f5);
 		    
-		}else if(sides[4]){
+		}else if(sides[4] && !sides[5]){
 		    RightBB.render(f5);
 		    RightB.render(f5);
 		    RightBar.render(f5);
 		    Right.render(f5);
 		    BackLeft.render(f5);
 		    RightBar.render(f5);
+
+		}else if(sides[4] && sides[5]){
+			BackBar.render(f5);
+		    Back.render(f5);		    
+		    BackRight.render(f5);
+		    BackLeft.render(f5);
 		}else{
 		    BackBar.render(f5);
 		    RightBB.render(f5);

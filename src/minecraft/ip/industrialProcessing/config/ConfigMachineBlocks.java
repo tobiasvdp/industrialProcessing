@@ -18,6 +18,7 @@ import ip.industrialProcessing.machines.thickener.TileEntityThickener;
 import ip.industrialProcessing.multiblock.block.frame.TileEntityMachineFrame;
 import ip.industrialProcessing.multiblock.block.inventory.TileEntityMultiblockInvInput;
 import ip.industrialProcessing.multiblock.block.inventory.TileEntityMultiblockInvOutput;
+import ip.industrialProcessing.multiblock.block.power.TileEntityMultiblockPowerInput;
 import ip.industrialProcessing.multiblock.block.tank.TileEntityMultiblockTankInput;
 import ip.industrialProcessing.multiblock.block.tank.TileEntityMultiblockTankOutput;
 import ip.industrialProcessing.multiblock.block.weldingStation.TileEntityMultiblockWeldingStationRight;
@@ -71,6 +72,7 @@ public class ConfigMachineBlocks {
 	private int BlockMultiblockTankOutputID = 604;
 	private int BlockMultiblockTankWeldingStationRightID = 605;
 	private int BlockMultiblockTankWeldingStationScreenID = 606;
+	private int BlockMultiblockPowerID = 607;
 	private int largeCrusherBlockID = 700;
 	private int largeMixerBlockID = 701;
 	private int BlockMultiblockBlastFurnaceID = 702;
@@ -121,6 +123,8 @@ public class ConfigMachineBlocks {
 		registerMachineBlock(IndustrialProcessing.blockMachineFrame, "MultiBlockFrame", "Multiblock Frame", TileEntityMachineFrame.class);
 		registerMachineBlock(IndustrialProcessing.blockMultiblockTankInput, "MultiBlockTankIn", "Multiblock tank hatch", TileEntityMultiblockTankInput.class);
 		registerMachineBlock(IndustrialProcessing.blockMultiblockTankOutput, "MultiBlockTankOut", "Multiblock tank drain", TileEntityMultiblockTankOutput.class);
+		registerMachineBlock(IndustrialProcessing.blockMultiblockPowerInput, "MultiBlockPowerIn", "Multiblock power input", TileEntityMultiblockPowerInput.class);
+		
 		registerMachineBlock(IndustrialProcessing.blockLargeCrusher, "IP.Machine.Multi.Crusher", "Large Crusher", TileEntityMultiblockCrusher.class);
 		registerMachineBlock(IndustrialProcessing.blockMultiblockMixer, "IP.Machine.Multi.Mixer", "Large mixer", TileEntityMultiblockMixer.class);
 		registerMachineBlock(IndustrialProcessing.blockMultiblockBlastFurnace, "IP.Machine.Multi.Blast", "Large blast furnace", TileEntityMultiblockBlastFurnace.class);
@@ -251,5 +255,8 @@ public class ConfigMachineBlocks {
 	public static int getBlockMultiblockTankWeldingStationScreenID() {
 		return getInstance().BlockMultiblockTankWeldingStationScreenID;
 	}
+	public static int getBlockMultiblockPowerID() {
+		return getInstance().BlockMultiblockPowerID;
+	} 
 
 }
