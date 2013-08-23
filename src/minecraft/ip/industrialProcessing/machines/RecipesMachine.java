@@ -36,7 +36,7 @@ public class RecipesMachine {
 			Recipe recipe = i.next();
 			for(RecipeInputSlot input : recipe.inputs)
 			{
-				if(input.type != RecipeSlotType.INVENTORY) continue;
+				if(input.type != RecipeSlotType.INVENTORY && input.type != RecipeSlotType.DAMAGEDITEM) continue;
 				if(input.index == slot && input.itemId == itemID) return true;
 			}
 		}

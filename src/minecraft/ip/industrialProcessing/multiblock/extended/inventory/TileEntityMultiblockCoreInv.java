@@ -257,4 +257,8 @@ public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCo
 		}
 		return false;
 	}
+	@Override
+	public boolean damageItem(int slot, int itemId) {
+		return itemStacks.get(slot).damageItem();
+	}
 }

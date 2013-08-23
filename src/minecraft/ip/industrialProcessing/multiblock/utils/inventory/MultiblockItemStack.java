@@ -1,5 +1,7 @@
 package ip.industrialProcessing.multiblock.utils.inventory;
 
+import ip.industrialProcessing.items.ItemDamage;
+
 import java.util.ArrayList;
 
 import cpw.mods.fml.relauncher.Side;
@@ -90,6 +92,22 @@ public class MultiblockItemStack {
 	}
 	public boolean getIsInput(){
 		return input;
+	}
+	public boolean damageItem(){
+		if (itemStack.getItem() != null && itemStack.getItem() instanceof ItemDamage){
+			ItemStack damagedStack = new ItemStack(itemStack.getItem(), 1, itemStack.getItemDamage() + 1);
+
+			if (damagedStack.getItemDamage() >= damagedStack.getMaxDamage()) {
+				damagedStack.stackSize--;
+			}
+			if (damagedStack.stackSize != 0)
+				itemStack = damagedStack;
+			else
+				itemStack = null;
+			return true;
+			
+		}
+		return false;
 	}
 
 }

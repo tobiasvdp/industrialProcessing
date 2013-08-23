@@ -47,6 +47,10 @@ public class TileEntityMultiblockWeldingStation extends TileEntityMultiblockCore
 		itemStacks.add(new MultiblockItemStack(true, false, 9));
 		itemStacks.add(new MultiblockItemStack(true, false, 10));
 		itemStacks.add(new MultiblockItemStack(false, true, 11));
+		itemStacks.add(new MultiblockItemStack(true, false, 12));
+		itemStacks.add(new MultiblockItemStack(true, false, 13));
+		itemStacks.add(new MultiblockItemStack(true, false, 14));
+		itemStacks.add(new MultiblockItemStack(true, false, 15));
 		
 		addTank(10000, true, false);
 	}
@@ -68,7 +72,7 @@ public class TileEntityMultiblockWeldingStation extends TileEntityMultiblockCore
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack itemstack) {
 		int itemID = itemstack.itemID;
-		if (slot == 2)
+		if (slot == 2||slot > 11)
 			return recipes.isValidInput(slot, itemID);
 		if (slot == 0) {
 			FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(new ItemStack(itemID, 1, 0));

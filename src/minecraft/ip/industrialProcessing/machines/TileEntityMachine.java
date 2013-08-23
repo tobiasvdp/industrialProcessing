@@ -283,5 +283,10 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
 		}
 		return false;
 	}
+	
+	@Override
+	public boolean damageItem(int slot, int itemId) {
+		return false;
+	}
 
 }

@@ -73,7 +73,7 @@ public class RecipeWorker extends ServerWorker {
 	}
 
 	protected boolean hasInputIngredients(RecipeInputSlot slot) {
-		if (slot.type == RecipeSlotType.INVENTORY) {
+		if (slot.type == RecipeSlotType.INVENTORY || slot.type == RecipeSlotType.DAMAGEDITEM) {
 			return this.handler.slotContains(slot.index, slot.itemId,
 					slot.amount);
 		}
@@ -114,6 +114,10 @@ public class RecipeWorker extends ServerWorker {
 			if (!this.handler.removeFromSlot(slot.index, slot.itemId,
 					slot.amount))
 				System.out.println("Failed to remove recipe input?!");
+		}
+		else if (slot.type == RecipeSlotType.DAMAGEDITEM) {
+			if (!this.handler.damageItem(slot.index, slot.itemId))
+				System.out.println("Failed to damage recipe input?!");
 		}
 	}
 

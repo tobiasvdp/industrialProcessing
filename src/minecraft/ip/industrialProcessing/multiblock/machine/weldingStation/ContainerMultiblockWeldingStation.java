@@ -10,19 +10,25 @@ public class ContainerMultiblockWeldingStation extends ContainerMultiblockCoreIn
 
 	public ContainerMultiblockWeldingStation(InventoryPlayer inventoryPlayer, TileEntityMultiblockWeldingStation tileEntity) {
 		super(inventoryPlayer, tileEntity);
-		slots = new Slot[12];
-		slots[0] = new SlotBase(tileEntity, 0, 8, 19);
-		slots[1] = new SlotBase(tileEntity, 1, 8, 53);
-		slots[2] = new SlotBase(tileEntity, 2, 33, 18);
-		slots[3] = new SlotBase(tileEntity, 3, 33, 36);
-		slots[4] = new SlotBase(tileEntity, 3, 33, 54);
-		slots[5] = new SlotBase(tileEntity, 3, 51, 18);
-		slots[6] = new SlotBase(tileEntity, 3, 51, 36);
-		slots[7] = new SlotBase(tileEntity, 3, 51, 54);
-		slots[8] = new SlotBase(tileEntity, 3, 69, 18);
-		slots[9] = new SlotBase(tileEntity, 3, 69, 36);
-		slots[10] = new SlotBase(tileEntity, 3, 69, 54);
-		slots[11] = new SlotBase(tileEntity, 11, 152, 34);
+		int offset = -11;
+		slots = new Slot[16];
+		slots[0] = new SlotBase(tileEntity, 0, 8+offset, 19);
+		slots[1] = new SlotBase(tileEntity, 1, 8+offset, 53);
+		slots[2] = new SlotBase(tileEntity, 2, 33+offset, 15);
+		slots[3] = new SlotBase(tileEntity, 3, 33+offset, 33);
+		slots[4] = new SlotBase(tileEntity, 4, 33+offset, 51);
+		slots[5] = new SlotBase(tileEntity, 5, 51+offset, 15);
+		slots[6] = new SlotBase(tileEntity, 6, 51+offset, 33);
+		slots[7] = new SlotBase(tileEntity, 7, 51+offset, 51);
+		slots[8] = new SlotBase(tileEntity, 8, 69+offset, 15);
+		slots[9] = new SlotBase(tileEntity, 9, 69+offset, 33);
+		slots[10] = new SlotBase(tileEntity, 10, 69+offset, 51);
+		slots[11] = new SlotBase(tileEntity, 11, 143+offset, 33);
+		
+		slots[12] = new SlotBase(tileEntity, 12, 176+offset, 6);
+		slots[13] = new SlotBase(tileEntity, 13, 176+offset, 25);
+		slots[14] = new SlotBase(tileEntity, 14, 176+offset, 44);
+		slots[15] = new SlotBase(tileEntity, 15, 176+offset, 63);
 
 
 		addSlotToContainer(slots[0]);
@@ -38,7 +44,12 @@ public class ContainerMultiblockWeldingStation extends ContainerMultiblockCoreIn
 		addSlotToContainer(slots[10]);
 		addSlotToContainer(slots[11]);
 		
-		BindPlayerInventory(inventoryPlayer, this, -11,1);
+		addSlotToContainer(slots[12]);
+		addSlotToContainer(slots[13]);
+		addSlotToContainer(slots[14]);
+		addSlotToContainer(slots[15]);
+		
+		BindPlayerInventory(inventoryPlayer, this, offset,0);
 	}
 
 }
