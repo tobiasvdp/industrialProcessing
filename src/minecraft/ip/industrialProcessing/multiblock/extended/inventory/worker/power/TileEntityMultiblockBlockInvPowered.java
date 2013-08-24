@@ -22,7 +22,7 @@ public abstract class TileEntityMultiblockBlockInvPowered extends TileEntityMult
     }
 
     @Override
-    public float getResistance(ForgeDirection side) {
+    public float getResistance(ForgeDirection side, float voltage) {
 	if (canAcceptPower(side)) {
 	    TileEntityMultiblockCoreTankWorkerPowered core = getCore();
 	    int storage = core.getPowerStorage();

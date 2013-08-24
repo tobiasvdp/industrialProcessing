@@ -77,7 +77,7 @@ public abstract class TileEntityMultiblockCoreTankWorkerPowered extends TileEnti
     }
 
     @Override
-    public float getResistance(ForgeDirection side) {
+    public float getResistance(ForgeDirection side, float voltage) {
 	if (canAcceptPower(side)) {
 	    float available = this.powerStorage / (float) this.powerCapacity;
 	    // 0% = X ohm;

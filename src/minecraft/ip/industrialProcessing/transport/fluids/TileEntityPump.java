@@ -59,7 +59,7 @@ public class TileEntityPump extends TileEntityMachine implements IPowerAcceptor 
 
 
     @Override
-    public float getResistance(ForgeDirection side) {
+    public float getResistance(ForgeDirection side, float voltage) {
 	if (canAcceptPower(side)) {  
 	    return PowerHelper.getResistanceForStorage(this.storedPower, this.powerStorageCapacity);
 	}
