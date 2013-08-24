@@ -7,36 +7,25 @@ import buildcraft.api.power.IPowerReceptor;
 import buildcraft.api.power.PowerHandler;
 import buildcraft.api.power.PowerHandler.PowerReceiver;
 import buildcraft.api.power.PowerHandler.Type;
+import ip.industrialProcessing.power.PowerHelper;
 import ip.industrialProcessing.power.TileEntityPowerGenerator;
 
 public class TileEntityBuildcraftGenerator extends TileEntityPowerGenerator implements IPowerReceptor {
 
-    private static final float CONVERSION_RATE = 0.10f; // for every 0.5 BC
-						      // Joules, one unit of IP
-						      // Power is generated
+    private static final float JOULE_BALANCE = 0.5f; // 1 BC joule = 2 Physical
+						     // joules
+
+    private static final float GENERATOR_VOLTAGE = 0;
+
     private PowerHandler powerHandler;
-    private int convertedStored = 0;
-    private int convertedCapacity = 10000;
+
+    private float capacitance;
 
     public TileEntityBuildcraftGenerator() {
 	super(100);
 	this.powerHandler = new PowerHandler(this, Type.MACHINE);
 	this.powerHandler.configure(1, 50, 0, 15000);
 	this.powerHandler.configurePowerPerdition(2, 1);
-    }
-
-    @Override
-    public int producePower(int maxAmount, boolean doProduce) {
-	int amount = Math.min(maxAmount, this.convertedStored);
-	if (doProduce)
-	    this.convertedStored -= amount;
-	return amount;
-    }
-
-    private int convertEnergy(int maxAmount) {
-	float max = maxAmount * CONVERSION_RATE;
-	float amount = this.powerHandler.useEnergy(0, max, true);
-	return (int) (amount / CONVERSION_RATE);
     }
 
     @Override
@@ -57,11 +46,7 @@ public class TileEntityBuildcraftGenerator extends TileEntityPowerGenerator impl
 
     @Override
     public void doWork(PowerHandler workProvider) {
-	int produced = convertEnergy(this.convertedCapacity - this.convertedStored);
-	if (produced > 0) {
-	    this.convertedStored += produced;
-	    notifyBlockChange();
-	}
+	notifyBlockChange();
     }
 
     @Override
@@ -77,15 +62,28 @@ public class TileEntityBuildcraftGenerator extends TileEntityPowerGenerator impl
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
 	super.writeToNBT(nbt);
-	nbt.setInteger("Conv", this.convertedStored);
 	this.powerHandler.writeToNBT(nbt);
     }
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
 	super.readFromNBT(nbt);
-	this.convertedStored = nbt.getInteger("Conv");
 	this.powerHandler.readFromNBT(nbt);
+    }
+
+    @Override
+    public float getCharge(float charge) {
+	float voltage = getVoltage();
+	float joules = PowerHelper.getEnergy(charge, voltage) * JOULE_BALANCE;
+	float usedEnergy = this.powerHandler.useEnergy(0, joules, true);
+	return PowerHelper.getCharge(usedEnergy / JOULE_BALANCE, voltage);
+    }
+
+    @Override
+    public float getVoltage() {
+	float joules = this.powerHandler.getEnergyStored() / JOULE_BALANCE;
+	float voltage = (float) Math.sqrt(2 * joules / this.capacitance);
+	return voltage;
     }
 
 }

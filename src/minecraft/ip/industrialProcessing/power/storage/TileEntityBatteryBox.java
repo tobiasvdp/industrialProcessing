@@ -2,14 +2,17 @@ package ip.industrialProcessing.power.storage;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
+import ic2.api.Direction;
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.power.IPowerAcceptor;
 import ip.industrialProcessing.power.IPowerProducer;
+import ip.industrialProcessing.power.PowerHelper;
 import ip.industrialProcessing.power.TileEntityPowerGenerator;
 
+// This isn't an actual battery, as it has input and outputs, so the resistance defined here is the resistance the input network sees this "battery" as
 public class TileEntityBatteryBox extends TileEntityPowerGenerator implements IPowerAcceptor, IAnimationProgress {
 
     public TileEntityBatteryBox() {
@@ -19,45 +22,70 @@ public class TileEntityBatteryBox extends TileEntityPowerGenerator implements IP
     private static final LocalDirection inputSide = LocalDirection.FRONT;
     private static final LocalDirection outputSide = LocalDirection.BACK;
 
-    private int storedPower = 0;
-    private static final int storageCapacity = 100000;
+    private float charge = 0;
+    private float capacitance = 100000;
+
+    private float maxVoltage = 12;
 
     @Override
     public void updateEntity() {
 	super.updateEntity();
-	notifyBlockChange();
     }
 
     @Override
-    public int producePower(int maxAmount, boolean doProduce) {
-	int amount = Math.min(maxAmount, this.storedPower);
-	if (doProduce)
-	    this.storedPower -= amount;
-	return amount;
+    public float getAnimationProgress(float scale) {
+	return this.charge * scale / this.capacitance;
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound nbt) {
+	super.writeToNBT(nbt);
+	nbt.setFloat("Charge", this.charge);
+	nbt.setFloat("Capacity", this.capacitance);
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound nbt) {
+	super.readFromNBT(nbt);
+	this.charge = nbt.getFloat("Charge");
+	this.capacitance = nbt.getFloat("Capacity");
     }
 
     @Override
     public boolean canOutputPower(ForgeDirection opposite) {
-	LocalDirection dir = DirectionUtils.GetLocalDirection(opposite, getForwardDirection());
-	return dir == outputSide;
+	LocalDirection side = DirectionUtils.GetLocalDirection(opposite, getForwardDirection());
+	return side == outputSide;
     }
 
     @Override
-    public int acceptPower(int maxAmount, ForgeDirection side, boolean doAccept) {
-	if (canAcceptPower(side)) {
-	    int amount = Math.min(maxAmount, storageCapacity - storedPower);
-	    if (doAccept)
-		this.storedPower += amount;
-	    return amount;
-	}
-	return 0;
+    public float getVoltage() {
+	return this.charge / this.capacitance;
+    }
+
+    @Override
+    public float getResistance(ForgeDirection side) {
+	LocalDirection localSide = DirectionUtils.GetLocalDirection(side, getForwardDirection());
+	if (localSide == inputSide) {
+	    float difference = this.getVoltage() / this.maxVoltage;
+	    if (difference == 0)
+		return Float.POSITIVE_INFINITY;
+	    // TODO: find a better equation for the input resistance
+	    return 1 / difference; // the more this battery fills up, the less
+				   // it asks from the input network
+	} else
+	    return Float.POSITIVE_INFINITY; // this thing isn't even here!
+    }
+
+    @Override
+    public void applyPower(ForgeDirection side, float coulombs, float voltage) {
+	// TODO Auto-generated method stub
+
     }
 
     @Override
     public boolean canAcceptPower(ForgeDirection side) {
-	ForgeDirection forward = getForwardDirection();
-	LocalDirection dir = DirectionUtils.GetLocalDirection(side, forward);
-	return dir == inputSide;
+	LocalDirection input = DirectionUtils.GetLocalDirection(side, getForwardDirection());
+	return input == inputSide;
     }
 
     @Override
@@ -66,19 +94,7 @@ public class TileEntityBatteryBox extends TileEntityPowerGenerator implements IP
     }
 
     @Override
-    public float getAnimationProgress(float scale) {
-	return this.storedPower * scale / this.storageCapacity;
-    }
-
-    @Override
-    public void writeToNBT(NBTTagCompound nbt) {
-	super.writeToNBT(nbt);
-	nbt.setInteger("Stored", this.storedPower);
-    }
-
-    @Override
-    public void readFromNBT(NBTTagCompound nbt) {
-	super.readFromNBT(nbt);
-	this.storedPower = nbt.getInteger("Stored");
+    public float getCharge(float amount) {
+	return Math.min(amount, this.charge);
     }
 }

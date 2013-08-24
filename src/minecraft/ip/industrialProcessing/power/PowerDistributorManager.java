@@ -15,17 +15,16 @@ import net.minecraftforge.common.ForgeDirection;
 public class PowerDistributorManager {
 
     private PowerDistributor distributor = new PowerDistributor();
-    private IPowerProducer supplier;
+    private IPowerOutput supplier;
 
-    public PowerDistributorManager(TileEntityMachine entity, IPowerProducer supplier) {
+    public PowerDistributorManager(TileEntityMachine entity, IPowerOutput supplier) {
 	this.entity = entity;
 	this.supplier = supplier;
     }
 
     protected TileEntityMachine entity;
- 
 
-    public void searchPowerAcceptors() { 
+    public void searchPowerAcceptors() {
 	ArrayList<PowerAcceptorConnection> connections = new ArrayList<PowerAcceptorConnection>();
 	for (int i = 0; i < ForgeDirection.VALID_DIRECTIONS.length; i++) {
 	    ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[i];
@@ -61,8 +60,12 @@ public class PowerDistributorManager {
 	return null;
     }
 
-    public int distributePower(int storedPower, int maxPowerPerSide, boolean doDistribute) {
-	return this.distributor.distributePower(storedPower, maxPowerPerSide, doDistribute);
+    public float getResistance() {
+	return this.distributor.getResistance();
+    }
+
+    public void distributePower(float voltage, float coulombs) {
+	this.distributor.distributePower(voltage, coulombs);
     }
 
     public void writeToNBT(NBTTagCompound nbt) {
@@ -83,5 +86,34 @@ public class PowerDistributorManager {
 	}
 	PowerAcceptorConnection[] outputs = connections.toArray(new PowerAcceptorConnection[connections.size()]);
 	this.distributor.setOutputs(outputs);
-    } 
+    }
+
+    public void distributePower(IPowerProducer generator) {
+	distributePower(generator, 1 / 20F, 1f);
+    }
+
+    /**
+     * Distributes power from a generator over the network with i(t) =
+     * v(t)/R^2*tau and q(t) = i(t) * dt;
+     * 
+     * @param generator
+     *            power producer, supplies voltage
+     * @param time
+     *            time between two frames
+     * @param tau
+     *            time constant
+     */
+    public void distributePower(IPowerProducer generator, float time, float tau) {
+	float networkResistance = this.distributor.getResistance();
+	float networkResistanceSquared = networkResistance * networkResistance;
+	float voltage = generator.getVoltage();
+
+	float current = (voltage / networkResistanceSquared * tau);
+
+	float charge = current * time;
+	
+	charge = generator.getCharge(charge); // feedback to the generator
+	
+	this.distributePower(voltage, charge);
+    }
 }

@@ -9,50 +9,46 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
-public abstract class TileEntityPowerGenerator extends TileEntityMachine implements IPowerProducer{
-     
+public abstract class TileEntityPowerGenerator extends TileEntityMachine implements IPowerProducer, IPowerOutput {
+
     private PowerDistributorManager powerManager;
     private boolean searched = false;
-    private int maxOutput = 100; 
+    private int maxOutput = 100;
 
-    public TileEntityPowerGenerator(int maxOutput)
-    { 
+    public TileEntityPowerGenerator(int maxOutput) {
 	this.maxOutput = maxOutput;
-	
+
 	this.powerManager = new PowerDistributorManager(this, this);
     }
-      
+
     @Override
-    public void readFromNBT(NBTTagCompound nbt) { 
-        super.readFromNBT(nbt);
-        this.powerManager.readFromNBT(nbt);
+    public void readFromNBT(NBTTagCompound nbt) {
+	super.readFromNBT(nbt);
+	this.powerManager.readFromNBT(nbt);
     }
-    
+
     @Override
-    public void writeToNBT(NBTTagCompound nbt) { 
-        super.writeToNBT(nbt);
-        this.powerManager.writeToNBT(nbt);
+    public void writeToNBT(NBTTagCompound nbt) {
+	super.writeToNBT(nbt);
+	this.powerManager.writeToNBT(nbt);
     }
-    
+
     @Override
     public boolean canUpdate() {
 	return true;
     }
 
     @Override
-    public void updateEntity() { 
-	super.updateEntity(); 
-	if(!searched )
+    public void updateEntity() {
+	super.updateEntity();
+	if (!searched)
 	    searchForPowerAcceptors();
-	int production = this.producePower(maxOutput , false);
-	int demand = this.powerManager.distributePower(production, maxOutput, false);
-	int actualProduction = this.producePower(demand, true);
-	int distributed = this.powerManager.distributePower(actualProduction, maxOutput, true);
+
+	this.powerManager.distributePower(this);
     }
-   
-    public void searchForPowerAcceptors()
-    {
+
+    public void searchForPowerAcceptors() {
 	this.searched = true;
-	this.powerManager.searchPowerAcceptors(); 
+	this.powerManager.searchPowerAcceptors();
     }
 }

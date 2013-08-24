@@ -3,7 +3,9 @@ package ip.industrialProcessing.machines;
 import ic2.api.Direction;
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
+import ip.industrialProcessing.multiblock.extended.inventory.tank.worker.power.TileEntityMultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.power.IPowerAcceptor;
+import ip.industrialProcessing.power.PowerHelper;
 import ip.industrialProcessing.recipes.Recipe;
 
 import java.util.Iterator;
@@ -56,15 +58,19 @@ public abstract class TileEntityPoweredWorkerMachine extends TileEntityWorkerMac
     }
 
     @Override
-    public int acceptPower(int maxAmount, ForgeDirection side, boolean doAccept) {
-	if (canAcceptPower(side)) {
-	    int accept = PowerWorkerHelper.acceptPower(this.powerCapacity, this.powerStorage, maxAmount);
-	    if (doAccept) {
-		this.powerStorage += accept;
-	    }
-	    return accept;
+    public float getResistance(ForgeDirection side) {
+	if (canAcceptPower(side)) {  
+	    return PowerHelper.getResistanceForStorage(this.powerStorage, this.powerCapacity);
 	}
-	return 0;
+	return Float.POSITIVE_INFINITY;
+    }
+
+    @Override
+    public void applyPower(ForgeDirection side, float coulombs, float voltage) {
+	if (canAcceptPower(side)) { 
+	    int joules = (int) PowerHelper.getEnergy(coulombs, voltage); 
+	    this.powerStorage = Math.min(this.powerStorage + joules, this.powerCapacity);
+	}
     }
 
     @Override

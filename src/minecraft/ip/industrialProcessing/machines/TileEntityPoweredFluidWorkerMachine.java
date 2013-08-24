@@ -3,6 +3,7 @@ package ip.industrialProcessing.machines;
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.power.IPowerAcceptor;
+import ip.industrialProcessing.power.PowerHelper;
 import ip.industrialProcessing.recipes.Recipe;
 
 import java.util.Iterator;
@@ -53,18 +54,22 @@ public abstract class TileEntityPoweredFluidWorkerMachine extends TileEntityFlui
     private void writePowerStatus(NBTTagCompound nbt) {
 	nbt.setInteger("PowStor", this.powerStorage);
     }
+ 
+    @Override
+    public float getResistance(ForgeDirection side) {
+	if (canAcceptPower(side)) {  
+	    return PowerHelper.getResistanceForStorage(this.powerStorage, this.powerCapacity);
+	}
+	return Float.POSITIVE_INFINITY;
+    }
 
     @Override
-    public int acceptPower(int maxAmount, ForgeDirection side, boolean doAccept) {
-	if (canAcceptPower(side)) {
-	    int accept = PowerWorkerHelper.acceptPower(this.powerCapacity, this.powerStorage, maxAmount);
-	    if (doAccept) {
-		this.powerStorage += accept;
-	    }
-	    return accept;
+    public void applyPower(ForgeDirection side, float coulombs, float voltage) {
+	if (canAcceptPower(side)) { 
+	    int joules = (int) PowerHelper.getEnergy(coulombs, voltage); 
+	    this.powerStorage = Math.min(this.powerStorage + joules, this.powerCapacity);
 	}
-	return 0;
-    }
+    } 
 
     @Override
     public boolean canAcceptPower(ForgeDirection side) {

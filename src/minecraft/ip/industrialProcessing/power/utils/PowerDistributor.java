@@ -6,8 +6,8 @@ import ip.industrialProcessing.power.IPowerAcceptor;
 
 public class PowerDistributor {
 
-    private int totalUsage = 0;
-    private int[] usages;
+    private float totalSiemens = 0;
+    private float[] siemens;
     private PowerAcceptorConnection[] outputs = new PowerAcceptorConnection[0];
 
     public PowerAcceptorConnection[] getOutputs() {
@@ -18,29 +18,32 @@ public class PowerDistributor {
 	if (outputs == null)
 	    outputs = new PowerAcceptorConnection[0];
 	this.outputs = outputs;
-	this.usages = new int[outputs.length];
-	Arrays.fill(this.usages, 0);
-	this.totalUsage = 0;
+	this.siemens = new float[outputs.length];
+	Arrays.fill(this.siemens, 0f);
+	this.totalSiemens = 0;
     }
 
-    public int distributePower(int availablePower, int maxPerSide, boolean doDistribute) {
-	int currentTotalUsage = 0;
+    public float getResistance() {
+	this.totalSiemens = 0;
 	for (int i = 0; i < outputs.length; i++) {
 	    PowerAcceptorConnection connection = outputs[i];
 	    if (connection != null && connection.acceptor != null && connection.connectedFrom != null) {
-		int availableOutput = availablePower;
-		if (doDistribute) {
-		    // divide proportional to demand:
-		    availableOutput = availablePower * this.usages[i] / Math.max(this.totalUsage, 1);
-		}// else: give it all we've got!
-		availableOutput = Math.min(availableOutput, maxPerSide);
-		int usage = connection.acceptor.acceptPower(availableOutput, connection.connectedFrom, doDistribute);
-		this.usages[i] = usage; 
-		currentTotalUsage += usage;
-	    } else
-		usages[i] = 0;
+		totalSiemens += siemens[i] = 1/connection.acceptor.getResistance(connection.connectedFrom);
+	    }
 	}
-	totalUsage = currentTotalUsage;
-	return currentTotalUsage;
+	if(totalSiemens == 0) return Float.POSITIVE_INFINITY;
+	return 1/totalSiemens;
+    }
+
+    public void distributePower(float voltage, float coulombs) {
+	for (int i = 0; i < siemens.length; i++) {
+	    PowerAcceptorConnection connection = outputs[i];
+	    if (connection != null && connection.acceptor != null && connection.connectedFrom != null) {
+		float distribution = coulombs * this.siemens[i] / this.totalSiemens;
+		if (distribution > 0) {
+		    connection.acceptor.applyPower(connection.connectedFrom, distribution, voltage);
+		}
+	    }
+	}
     }
 }

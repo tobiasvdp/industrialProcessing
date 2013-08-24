@@ -16,64 +16,61 @@ public class TileEntityManualGenerator extends TileEntityPowerGenerator implemen
 	super(100);
     }
 
-    // each tick, this amount of mechanical energy is converted to power.
-    private static final int DRAIN_RATE = 100;
     // if the player hits, 100 mechanical energy is stored in this generator
-    private static final int PLAYER_FORCE_RATE = 1000;
+    private static final int PLAYER_FORCE_RATE = 100;
     // how much mechanical energy can this generator store, prevents the player
     // from spamming this thing
-    private static final int MAX_STORAGE = 15000; // about 15 hits in the face,
-						  // about 30 ticks to deplete
 
-    int storedPlayerForce = 0; // buffer
-    private int currentProduction; // used for animation
+    private float storedPlayerForce = 0; // buffer
     private float rotation;
     private final static LocalDirection outputDirection = LocalDirection.BACK;
 
-    @Override
-    public void updateEntity() {
-	if (Float.isNaN(this.rotation))
-	    this.rotation = 0; 
-	float log = (float) Math.log(this.storedPlayerForce + 1);
-	this.rotation += (1 / 360f) * log;
-	if (this.rotation > 1)
-	    this.rotation--;
-	super.updateEntity();
+    private static final float DRAG = 0.10f;
+    private static final float ELECTRIC_DRAG = 0.20f;
 
+    private float speed = 0;
+
+    @Override
+    public void updateEntity() { 
+	super.updateEntity();
+	if (Float.isNaN(this.rotation))
+	    this.rotation = 0;
+
+	this.rotation += speed/100f/4;
+
+	float dt = 1 / 20f;
+
+	System.out.println(this.storedPlayerForce + " " + this.speed + " " + this.rotation);
 	if (this.storedPlayerForce > 0) {
-	    this.storedPlayerForce -= Math.max(1, this.storedPlayerForce / 10);
+	    this.speed += this.storedPlayerForce * dt / 100;
+	    this.storedPlayerForce -= this.storedPlayerForce * dt;
 	}
+
+	this.speed -= DRAG * this.speed * dt;
+
+	while (rotation > 2 * Math.PI)
+	    rotation -= 2 * Math.PI;
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
 	super.writeToNBT(nbt);
-	nbt.setInteger("PlrFrc", storedPlayerForce);
+	nbt.setFloat("Force", storedPlayerForce);
+	nbt.setFloat("Speed", speed);
     }
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
 	super.readFromNBT(nbt);
-	this.storedPlayerForce = nbt.getInteger("PlrFrc");
+	this.storedPlayerForce = nbt.getFloat("Force");
+	this.speed = nbt.getFloat("Speed");
     }
 
     public void playerPushed() {
 	this.storedPlayerForce += PLAYER_FORCE_RATE;
-	if (this.storedPlayerForce > MAX_STORAGE)
-	    this.storedPlayerForce = MAX_STORAGE;
 	this.notifyBlockChange();
     }
 
-    @Override
-    public int producePower(int maxAmount, boolean doProduce) {
-	int produce = Math.min(maxAmount, (int) (Math.log(this.storedPlayerForce + 1) * DRAIN_RATE));
-	if (doProduce) {
-	    this.currentProduction += produce;
-	}
-	return produce;
-    }
-
-    
     @Override
     protected boolean isValidInput(int slot, int itemID) {
 	return false;
@@ -82,12 +79,25 @@ public class TileEntityManualGenerator extends TileEntityPowerGenerator implemen
     @Override
     public boolean canOutputPower(ForgeDirection opposite) {
 	LocalDirection side = DirectionUtils.GetLocalDirection(opposite, getForwardDirection());
-	return side == outputDirection ;
+	return side == outputDirection;
     }
 
     @Override
     public float getAnimationProgress(float scale) {
 	return this.rotation * scale;
     }
- 
+
+    @Override
+    public float getCharge(float q) {
+	// q Coulomb have been used by the network
+	this.speed -= q * ELECTRIC_DRAG; // (q = i * dt), so this can be applied
+	System.out.println(q);				 // directly
+	return q;
+    }
+
+    @Override
+    public float getVoltage() {
+	return speed * 12;
+    }
+
 }

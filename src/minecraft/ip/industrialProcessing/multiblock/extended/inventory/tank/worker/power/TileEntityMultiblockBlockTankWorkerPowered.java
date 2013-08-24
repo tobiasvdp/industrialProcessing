@@ -6,36 +6,42 @@ import ip.industrialProcessing.multiblock.extended.inventory.TileEntityMultibloc
 import ip.industrialProcessing.multiblock.extended.inventory.worker.power.TileEntityMultiblockCoreInvWorkerPowered;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import ip.industrialProcessing.power.IPowerAcceptor;
+import ip.industrialProcessing.power.PowerHelper;
 
 public abstract class TileEntityMultiblockBlockTankWorkerPowered extends TileEntityMultiblockBlockInv implements IPowerAcceptor {
 
-	public TileEntityMultiblockBlockTankWorkerPowered() {
-		super();
+    public TileEntityMultiblockBlockTankWorkerPowered() {
+	super();
 
-	}
+    }
 
-	@Override
-	public int acceptPower(int maxAmount, ForgeDirection side, boolean doAccept) {
-		if (getCore() != null && state == MultiblockState.COMPLETED) {
-			if (canAcceptPower(side)) {
-				int accept = PowerWorkerHelper.acceptPower(getCore().getPowerCapacity(), getCore().getPowerStorage(), maxAmount);
-				if (doAccept) {
-					getCore().incPowerStorage(accept);
-				}
-				return accept;
-			}
-			return 0;
-		} else {
-			return 0;
-		}
+    @Override
+    public float getResistance(ForgeDirection side) {
+	if (canAcceptPower(side)) {
+	    TileEntityMultiblockCoreTankWorkerPowered core = getCore();
+	    int storage = core.getPowerStorage();
+	    int capacity = core.getPowerCapacity();
+	    return PowerHelper.getResistanceForStorage(storage, capacity);
 	}
+	return Float.POSITIVE_INFINITY;
+    }
 
-	@Override
-	public boolean canAcceptPower(ForgeDirection side) {
-		return true;
+    @Override
+    public void applyPower(ForgeDirection side, float coulombs, float voltage) {
+	if (canAcceptPower(side)) {
+	    TileEntityMultiblockCoreTankWorkerPowered core = getCore();
+	    int joules = (int) PowerHelper.getEnergy(coulombs, voltage);
+	    core.incPowerStorage(joules);
 	}
-	@Override
-	public TileEntityMultiblockCoreTankWorkerPowered getCore() {
-		return (TileEntityMultiblockCoreTankWorkerPowered) worldObj.getBlockTileEntity(xCore, yCore, zCore);
-	}
+    }
+
+    @Override
+    public boolean canAcceptPower(ForgeDirection side) {
+	return true;
+    }
+
+    @Override
+    public TileEntityMultiblockCoreTankWorkerPowered getCore() {
+	return (TileEntityMultiblockCoreTankWorkerPowered) worldObj.getBlockTileEntity(xCore, yCore, zCore);
+    }
 }

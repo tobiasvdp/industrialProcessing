@@ -1,6 +1,7 @@
 package ip.industrialProcessing.power.wire;
 
 import ip.industrialProcessing.power.IPowerAcceptor;
+import ip.industrialProcessing.power.IPowerOutput;
 import ip.industrialProcessing.power.IPowerProducer;
 import ip.industrialProcessing.power.utils.PowerAcceptorConnection;
 import ip.industrialProcessing.power.utils.PowerDistributor;
@@ -11,19 +12,12 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class TileEntityWire extends TileEntityTransport implements IPowerAcceptor {
 
-    PowerDistributor distributor = new PowerDistributor(); 
+    PowerDistributor distributor = new PowerDistributor();
 
- 
-  
     protected void updateNetwork() {
 	WireNetworkMap.UpdateNetworkAt(worldObj, xCoord, yCoord, zCoord);
 	notifyBlockChange();
 	System.out.println("network around " + xCoord + ", " + yCoord + ", " + zCoord + " found " + this.distributor.getOutputs().length + " outputs");
-    }   
-
-    @Override
-    public int acceptPower(int maxAmount, ForgeDirection side, boolean doAccept) {
-	return distributor.distributePower(maxAmount, maxAmount, doAccept);
     }
 
     private IPowerAcceptor getAcceptorAt(WireLocation wireLocation) {
@@ -37,7 +31,6 @@ public class TileEntityWire extends TileEntityTransport implements IPowerAccepto
     public boolean canAcceptPower(ForgeDirection side) {
 	return true;
     }
- 
 
     public void setOutputs(WireConnection[] outputs) {
 	PowerAcceptorConnection[] connections = new PowerAcceptorConnection[outputs.length];
@@ -48,7 +41,6 @@ public class TileEntityWire extends TileEntityTransport implements IPowerAccepto
 	}
 	this.distributor.setOutputs(connections);
     }
-     
 
     @Override
     protected TransportConnectionState getState(TileEntity entity, ForgeDirection direction) {
@@ -56,8 +48,8 @@ public class TileEntityWire extends TileEntityTransport implements IPowerAccepto
 	if (entity == null)
 	    return TransportConnectionState.NONE;
 	// wire? wire connection:
-	if (entity instanceof TileEntityWire) 
-	    return TransportConnectionState.TRANSPORT; 
+	if (entity instanceof TileEntityWire)
+	    return TransportConnectionState.TRANSPORT;
 	// acceptor? output connection:
 	if (entity instanceof IPowerAcceptor) {
 	    IPowerAcceptor acceptor = (IPowerAcceptor) entity;
@@ -65,13 +57,23 @@ public class TileEntityWire extends TileEntityTransport implements IPowerAccepto
 		return TransportConnectionState.OUTPUT;
 	}
 	// producer? input connection:
-	if (entity instanceof IPowerProducer) {
-	    IPowerProducer producer = (IPowerProducer) entity;
+	if (entity instanceof IPowerOutput) {
+	    IPowerOutput producer = (IPowerOutput) entity;
 	    if (producer.canOutputPower(direction.getOpposite()))
 		return TransportConnectionState.INPUT;
 	}
 	// missed something? don't care about it:
 	return TransportConnectionState.NONE;
     }
- 
+
+    @Override
+    public float getResistance(ForgeDirection side) { 
+	return distributor.getResistance();
+    }
+
+    @Override
+    public void applyPower(ForgeDirection side, float coulombs, float voltage) {
+	distributor.distributePower(voltage, coulombs);
+    }
+
 }

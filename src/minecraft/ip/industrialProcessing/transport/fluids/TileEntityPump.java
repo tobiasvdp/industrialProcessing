@@ -10,6 +10,7 @@ import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.machines.TileEntitySynced;
 import ip.industrialProcessing.power.IPowerAcceptor;
+import ip.industrialProcessing.power.PowerHelper;
 
 public class TileEntityPump extends TileEntityMachine implements IPowerAcceptor {
 
@@ -55,17 +56,23 @@ public class TileEntityPump extends TileEntityMachine implements IPowerAcceptor 
         this.storedPower -= transfer;
         notifyBlockChange();
     }
-    
+
+
     @Override
-    public int acceptPower(int maxAmount, ForgeDirection side, boolean doAccept) {
-	if (canAcceptPower(side)) {
-	    int amount = Math.min(maxAmount, this.powerStorageCapacity - this.storedPower);
-	    if (doAccept)
-		this.storedPower += amount;
-	    return amount;
+    public float getResistance(ForgeDirection side) {
+	if (canAcceptPower(side)) {  
+	    return PowerHelper.getResistanceForStorage(this.storedPower, this.powerStorageCapacity);
 	}
-	return 0;
+	return Float.POSITIVE_INFINITY;
     }
+
+    @Override
+    public void applyPower(ForgeDirection side, float coulombs, float voltage) {
+	if (canAcceptPower(side)) { 
+	    int joules = (int) PowerHelper.getEnergy(coulombs, voltage); 
+	    this.storedPower = Math.min(this.storedPower + joules, this.powerStorageCapacity);
+	}
+    } 
 
     @Override
     public boolean canAcceptPower(ForgeDirection side) {
