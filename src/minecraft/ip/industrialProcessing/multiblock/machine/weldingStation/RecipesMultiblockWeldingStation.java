@@ -17,12 +17,12 @@ public class RecipesMultiblockWeldingStation extends RecipesMachine {
 	private void addDefaultRecipes() {
 		addRecipe(blowingTorch(1000, 0));
 		addRecipe(hammer(1000, 0));
-		addRecipe(smallMachineCasing(8000, 1000));
+		addRecipe(smallMachineCasing(8000, 0));
 		addRecipe(ironTips(5000,0));
 		addRecipe(ironPlates(8000,0));
-		addRecipe(ironCrushingPlate(10000, 5000));
-		addRecipe(smallMachineCasingCrusher(10000,5000));
-		addRecipe(Crusher(50000,20000));
+		addRecipe(ironCrushingPlate(10000, 0));
+		addRecipe(smallMachineCasingCrusher(10000,0));
+		addRecipe(Crusher(50000,0));
 	}
 
 	private Recipe blowingTorch(int workTime, int powerUsage) {
