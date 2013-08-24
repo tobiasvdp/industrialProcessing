@@ -53,7 +53,7 @@ public class RecipesMultiblockWeldingStation extends RecipesMachine {
 		recipe.workRequired = workTime;
 		recipe.powerRequired = powerUsage;
 		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(13, IndustrialProcessing.itemBlowingTorch.itemID, RecipeSlotType.DAMAGEDITEM, 1), new RecipeInputSlot(2, IndustrialProcessing.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(3, IndustrialProcessing.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(4, IndustrialProcessing.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(5, IndustrialProcessing.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(7, IndustrialProcessing.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(8, IndustrialProcessing.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1),
-				new RecipeInputSlot(9, IndustrialProcessing.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(10, IndustrialProcessing.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1), };
+				new RecipeInputSlot(9, IndustrialProcessing.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(10, IndustrialProcessing.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(6, Item.dyePowder.itemID,14, RecipeSlotType.INVENTORY, 1), };
 		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(11, IndustrialProcessing.itemSmallMachineCasing.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
 
 		return recipe;

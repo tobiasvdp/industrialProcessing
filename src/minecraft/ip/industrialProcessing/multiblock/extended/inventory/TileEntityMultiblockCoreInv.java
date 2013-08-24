@@ -214,6 +214,11 @@ public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCo
 		MultiblockItemStack machineStack = itemStacks.get(slot);
 		return machineStack != null && machineStack.getItemStack() != null && machineStack.getItemStack().itemID == itemId && machineStack.getItemStack().stackSize >= amount;
 	}
+	@Override
+	public boolean slotContains(int slot, int itemId,int metadata, int amount) {
+		MultiblockItemStack machineStack = itemStacks.get(slot);
+		return machineStack != null && machineStack.getItemStack() != null && machineStack.getItemStack().itemID == itemId && machineStack.getItemStack().stackSize >= amount && machineStack.getItemStack().getItemDamage() == metadata;
+	}
 
 	@Override
 	public boolean slotHasRoomFor(int slot, ItemStack stack) {

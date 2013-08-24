@@ -7,7 +7,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.item.ItemStack;
 import ip.industrialProcessing.utils.working.IWorkHandler;
-import ip.industrialProcessing.utils.working.ServerWorker; 
+import ip.industrialProcessing.utils.working.ServerWorker;
+
 public class RecipeWorker extends ServerWorker {
 
 	private Random random;
@@ -32,25 +33,24 @@ public class RecipeWorker extends ServerWorker {
 
 	@Override
 	protected void onEndWork() {
-			removeInput(recipe);
-			produceOutput(recipe);
+		removeInput(recipe);
+		produceOutput(recipe);
 		super.onEndWork();
 		this.recipe = null;
 	}
 
 	@Override
 	protected void onPrepareWork() {
-			this.recipe = this.getCurrentRecipe();
-			if (recipe != null)
-				this.totalWork = this.recipe.workRequired;
-			else
-				this.totalWork = 0;
+		this.recipe = this.getCurrentRecipe();
+		if (recipe != null)
+			this.totalWork = this.recipe.workRequired;
+		else
+			this.totalWork = 0;
 		super.onPrepareWork();
 	}
 
 	public Recipe getCurrentRecipe() {
-		for (Iterator<Recipe> iterator = this.handler.iterateRecipes(); iterator
-				.hasNext();) {
+		for (Iterator<Recipe> iterator = this.handler.iterateRecipes(); iterator.hasNext();) {
 			Recipe currentRecipe = iterator.next();
 			if (matchesInput(currentRecipe)) {
 				return currentRecipe;
@@ -74,8 +74,10 @@ public class RecipeWorker extends ServerWorker {
 
 	protected boolean hasInputIngredients(RecipeInputSlot slot) {
 		if (slot.type == RecipeSlotType.INVENTORY || slot.type == RecipeSlotType.DAMAGEDITEM) {
-			return this.handler.slotContains(slot.index, slot.itemId,
-					slot.amount);
+			if (slot.hasMetadata)
+				return this.handler.slotContains(slot.index, slot.itemId, slot.metadata, slot.amount);
+			else
+				return this.handler.slotContains(slot.index, slot.itemId, slot.amount);
 		}
 		return false;
 	}
@@ -93,8 +95,7 @@ public class RecipeWorker extends ServerWorker {
 
 	protected boolean hasOutputSpace(RecipeOutputSlot slot) {
 		if (slot.type == RecipeSlotType.INVENTORY) {
-			return this.handler.slotHasRoomFor(slot.index, slot.itemId,
-					slot.maxAmount);
+			return this.handler.slotHasRoomFor(slot.index, slot.itemId, slot.maxAmount);
 		}
 		return false;
 	}
@@ -111,11 +112,9 @@ public class RecipeWorker extends ServerWorker {
 
 	protected void removeFromInput(RecipeInputSlot slot) {
 		if (slot.type == RecipeSlotType.INVENTORY) {
-			if (!this.handler.removeFromSlot(slot.index, slot.itemId,
-					slot.amount))
+			if (!this.handler.removeFromSlot(slot.index, slot.itemId, slot.amount))
 				System.out.println("Failed to remove recipe input?!");
-		}
-		else if (slot.type == RecipeSlotType.DAMAGEDITEM) {
+		} else if (slot.type == RecipeSlotType.DAMAGEDITEM) {
 			if (!this.handler.damageItem(slot.index, slot.itemId))
 				System.out.println("Failed to damage recipe input?!");
 		}
@@ -125,15 +124,13 @@ public class RecipeWorker extends ServerWorker {
 
 		if (recipe == null || recipe.outputs == null)
 			return;
-		System.out.println("Outputting recipe after working "
-				+ recipe.workRequired);
+		System.out.println("Outputting recipe after working " + recipe.workRequired);
 		for (int i = 0; i < recipe.outputs.length; i++) {
 			RecipeOutputSlot slot = recipe.outputs[i];
 
 			double randomValue = random.nextGaussian();
 
-			int amount = getAmount(randomValue, slot.minAmount, slot.maxAmount,
-					slot.distributionCenter);
+			int amount = getAmount(randomValue, slot.minAmount, slot.maxAmount, slot.distributionCenter);
 			if (amount > 0)
 				addToOutput(amount, slot);
 		}
@@ -147,8 +144,7 @@ public class RecipeWorker extends ServerWorker {
 		}
 	}
 
-	protected int getAmount(double randomValue, int minAmount, int maxAmount,
-			double distributionCenter) {
+	protected int getAmount(double randomValue, int minAmount, int maxAmount, double distributionCenter) {
 		int size = maxAmount - minAmount;
 		if (size == 0)
 			return minAmount;
@@ -158,8 +154,7 @@ public class RecipeWorker extends ServerWorker {
 		value *= resize;
 		value = Math.max(0, Math.min(value + distributionCenter, 1));
 		int amount = (int) Math.round(value * size) + minAmount;
-		System.out.println(String.format("%s: %s-%s %s = %s", randomValue,
-				minAmount, maxAmount, distributionCenter, amount));
+		System.out.println(String.format("%s: %s-%s %s = %s", randomValue, minAmount, maxAmount, distributionCenter, amount));
 		return amount;
 	}
 }

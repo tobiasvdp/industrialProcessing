@@ -114,6 +114,11 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
 		MachineItemStack machineStack = itemStacks.get(slot);
 		return machineStack != null && machineStack.stack != null && machineStack.stack.itemID == itemId && machineStack.stack.stackSize >= amount;
 	}
+	@Override
+	public boolean slotContains(int slot, int itemId,int metadata, int amount) {
+		MachineItemStack machineStack = itemStacks.get(slot);
+		return machineStack != null && machineStack.stack != null && machineStack.stack.itemID == itemId && machineStack.stack.stackSize >= amount;
+	}
 
 	@Override
 	public boolean slotHasRoomFor(int slot, ItemStack stack) {

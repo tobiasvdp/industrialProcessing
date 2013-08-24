@@ -6,4 +6,8 @@ public class RecipeInputSlot extends RecipeSlot {
 		super(index,itemId,type);
 		this.amount = amount;
 	}
+	public RecipeInputSlot(int index,int itemId,int metadata, RecipeSlotType type,int amount){
+		super(index,itemId,metadata,type);
+		this.amount = amount;
+	}
 }
