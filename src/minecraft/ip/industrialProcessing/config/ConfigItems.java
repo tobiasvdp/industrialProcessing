@@ -98,8 +98,8 @@ public class ConfigItems {
 		LanguageRegistry.addName(IndustrialProcessing.itemInputPort, "Input port");
 		LanguageRegistry.addName(IndustrialProcessing.itemOutputPort, "Output port");
 		LanguageRegistry.addName(IndustrialProcessing.itemPowerPort, "Power port");
-		LanguageRegistry.addName(IndustrialProcessing.itemSupportBars, "Support bars");
-		LanguageRegistry.addName(IndustrialProcessing.itemCrusingPlate, "Crushing plates");
+		LanguageRegistry.addName(IndustrialProcessing.itemSupportBars, "Support bar");
+		LanguageRegistry.addName(IndustrialProcessing.itemCrusingPlate, "Crushing plate");
 		LanguageRegistry.addName(IndustrialProcessing.itemIronPlate, "Iron plate");
 		LanguageRegistry.addName(IndustrialProcessing.itemIronTips, "Iron tips");
 		LanguageRegistry.addName(IndustrialProcessing.itemSmallMachineCasingCrusher, "Crusher machine case");
