@@ -6,13 +6,13 @@ import ip.industrialProcessing.machines.PowerWorkerHelper;
 import ip.industrialProcessing.multiblock.extended.inventory.tank.worker.TileEntityMultiblockCoreTankWorker;
 import ip.industrialProcessing.multiblock.utils.layout.MultiblockLayout;
 import ip.industrialProcessing.power.IPowerAcceptor;
+import ip.industrialProcessing.recipes.RecipeFluidPowerWorker;
+import ip.industrialProcessing.recipes.RecipeFluidWorker;
+import ip.industrialProcessing.utils.working.ServerWorker;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 
 public abstract class TileEntityMultiblockCoreTankWorkerPowered extends TileEntityMultiblockCoreTankWorker implements IPowerAcceptor {
-
-	private int counttemp = 0;
-
 	private int powerStorage;
 	private int powerCapacity;
 	private int maxWorkSpeed;
@@ -25,22 +25,16 @@ public abstract class TileEntityMultiblockCoreTankWorkerPowered extends TileEnti
 	}
 
 	@Override
-	public void updateEntity() {
-		super.updateEntity();
-		
-		if (counttemp == 80) {
-			if (!worldObj.isRemote)
-			System.out.println(powerStorage);
-			counttemp = 0;
-		}
-		counttemp++;
-
+	protected ServerWorker createServerSideWorker() {
+		return new RecipeFluidPowerWorker(this);
 	}
-
+	
 	@Override
 	public void doWork() {
-		//int amount = PowerWorkerHelper.getWork(this.powerCapacity, this.powerStorage, this.maxWorkSpeed);
-		this.powerStorage -= work(amount,powerStorage);
+		work(amount,powerStorage);		
+		if (!worldObj.isRemote){
+			powerStorage = ((RecipeFluidPowerWorker) getWorker()).powerConsumption(powerStorage);
+		}
 	}
 	protected int work(int amount, int power) {
 		return this.getWorker().doWork(amount,power);

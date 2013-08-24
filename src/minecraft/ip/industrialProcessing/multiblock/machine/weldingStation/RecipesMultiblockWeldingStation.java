@@ -16,7 +16,7 @@ public class RecipesMultiblockWeldingStation extends RecipesMachine {
 	private void addDefaultRecipes() {
 		Recipe ironSludge= new Recipe();
 		ironSludge.workRequired = 4000;
-		ironSludge.powerRequired= 1000;
+		ironSludge.powerRequired= 12000;
 		ironSludge.inputs = new RecipeInputSlot[] {
 				new RecipeInputSlot(12,IndustrialProcessing.itemHammer.itemID,RecipeSlotType.DAMAGEDITEM, 1),
 				new RecipeInputSlot(13,IndustrialProcessing.itemBlowingTorch.itemID,RecipeSlotType.DAMAGEDITEM, 1),
