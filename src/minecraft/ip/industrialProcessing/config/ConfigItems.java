@@ -39,7 +39,25 @@ public class ConfigItems {
 	private int ItemThickStick = 6530;
 	private int ItemHammer = 6531;
 	private int ItemBlowingTorch = 6532;
+	private int ItemSmallMachineCasingID = 6533;
+	private int ItemInputPortID = 6534;
+	private int ItemOutputPortID = 6535;
+	private int ItemPowerPortID = 6536;
+	private int ItemSupportBarsID = 6537;
+	private int ItemCrusingPlateID = 6538;
+	private int ItemIronPlateID = 6539;
+	private int ItemIronTipsID = 6540;
+	private int ItemSmallMachineCasingCrusherID = 6541;
 	
+	public static int ItemSmallMachineCasingID(){return getInstance().ItemSmallMachineCasingID;}
+	public static int ItemInputPortID(){return getInstance().ItemInputPortID;}
+	public static int ItemOutputPortID(){return getInstance().ItemOutputPortID;}
+	public static int ItemPowerPortID(){return getInstance().ItemPowerPortID;}
+	public static int ItemSupportBarsID(){return getInstance().ItemSupportBarsID;}
+	public static int ItemCrusingPlateID(){return getInstance().ItemCrusingPlateID;}
+	public static int ItemIronPlateID(){return getInstance().ItemIronPlateID;}
+	public static int ItemIronTipsID(){return getInstance().ItemIronTipsID;}
+	public static int ItemSmallMachineCasingCrusherID(){return getInstance().ItemSmallMachineCasingCrusherID;}
 	public static int ItemBlowingTorch(){return getInstance().ItemBlowingTorch;}
 	public static int ItemHammer(){return getInstance().ItemHammer;}
 	public static int ItemThickStick(){return getInstance().ItemThickStick;}
@@ -76,6 +94,16 @@ public class ConfigItems {
 	public static int ItemSlagID() {return getInstance().ItemSlagID;}
 	
 	public static void addToLanguageRegistry(){
+		LanguageRegistry.addName(IndustrialProcessing.itemSmallMachineCasing, "Small machine casing");
+		LanguageRegistry.addName(IndustrialProcessing.itemInputPort, "Input port");
+		LanguageRegistry.addName(IndustrialProcessing.itemOutputPort, "Output port");
+		LanguageRegistry.addName(IndustrialProcessing.itemPowerPort, "Power port");
+		LanguageRegistry.addName(IndustrialProcessing.itemSupportBars, "Support bars");
+		LanguageRegistry.addName(IndustrialProcessing.itemCrusingPlate, "Crushing plates");
+		LanguageRegistry.addName(IndustrialProcessing.itemIronPlate, "Iron plate");
+		LanguageRegistry.addName(IndustrialProcessing.itemIronTips, "Iron tips");
+		LanguageRegistry.addName(IndustrialProcessing.itemSmallMachineCasingCrusher, "Crusher machine case");
+		
 		LanguageRegistry.addName(IndustrialProcessing.itemIronLargeChunks, "Large iron Chunks");
 		LanguageRegistry.addName(IndustrialProcessing.itemCopperLargeChunks, "Large copper Chunks");
 		LanguageRegistry.addName(IndustrialProcessing.itemTinLargeChunks, "Large tin Chunks");

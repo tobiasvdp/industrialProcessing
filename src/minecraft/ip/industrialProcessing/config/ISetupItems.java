@@ -33,6 +33,15 @@ public interface ISetupItems {
     public final static ItemIP itemZincDust = new ItemIP(ConfigItems.ItemZincDustID(), "ItemZincDust",IndustrialProcessing.tabOres);
     public final static ItemIP itemTinPurified = new ItemIP(ConfigItems.ItemTinPurifiedID(), "ItemTinPurified",IndustrialProcessing.tabOres);
     public final static ItemIP itemSulfur = new ItemIP(ConfigItems.ItemSulfurID(), "ItemSulfur",IndustrialProcessing.tabOres);
+    public final static ItemIP itemSmallMachineCasing = new ItemIP(ConfigItems.ItemSmallMachineCasingID(), "itemSmallMachineCasing",IndustrialProcessing.tabOres);
+    public final static ItemIP itemInputPort = new ItemIP(ConfigItems.ItemInputPortID(), "itemInputPort",IndustrialProcessing.tabOres);
+    public final static ItemIP itemOutputPort = new ItemIP(ConfigItems.ItemOutputPortID(), "itemOutputPort",IndustrialProcessing.tabOres);
+    public final static ItemIP itemPowerPort = new ItemIP(ConfigItems.ItemPowerPortID(), "itemPowerPort",IndustrialProcessing.tabOres);
+    public final static ItemIP itemSupportBars = new ItemIP(ConfigItems.ItemSupportBarsID(), "itemSupportBars",IndustrialProcessing.tabOres);
+    public final static ItemIP itemCrusingPlate = new ItemIP(ConfigItems.ItemCrusingPlateID(), "itemCrusingPlate",IndustrialProcessing.tabOres);
+    public final static ItemIP itemIronPlate = new ItemIP(ConfigItems.ItemIronPlateID(), "itemIronPlate",IndustrialProcessing.tabOres);
+    public final static ItemIP itemIronTips = new ItemIP(ConfigItems.ItemIronTipsID(), "itemIronTips",IndustrialProcessing.tabOres);
+    public final static ItemIP itemSmallMachineCasingCrusher = new ItemIP(ConfigItems.ItemSmallMachineCasingCrusherID(), "itemSmallMachineCasingCrusher",IndustrialProcessing.tabOres);
     
     public final static ItemIP itemThickStick = new ItemIP(ConfigItems.ItemThickStick(), "ItemThickStick",IndustrialProcessing.tabOreProcessing);
     public final static ItemDamage itemHammer = new ItemDamage(ConfigItems.ItemHammer(), "ItemHammer",IndustrialProcessing.tabOreProcessing);

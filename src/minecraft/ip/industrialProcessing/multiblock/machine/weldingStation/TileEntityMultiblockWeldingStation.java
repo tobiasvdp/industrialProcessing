@@ -74,7 +74,7 @@ public class TileEntityMultiblockWeldingStation extends TileEntityMultiblockCore
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack itemstack) {
 		int itemID = itemstack.itemID;
-		if (slot == 2||slot > 11)
+		if (slot > 1||slot > 11 || slot < 11)
 			return recipes.isValidInput(slot, itemID);
 		if (slot == 0) {
 			FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(new ItemStack(itemID, 1, 0));

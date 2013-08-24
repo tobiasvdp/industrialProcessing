@@ -14,13 +14,13 @@ public class ContainerMultiblockWeldingStation extends ContainerMultiblockCoreIn
 		slots[0] = new SlotBase(tileEntity, 0, 8, 16);
 		slots[1] = new SlotBase(tileEntity, 1, 8, 49);
 		slots[2] = new SlotBase(tileEntity, 2, 33, 15);
-		slots[3] = new SlotBase(tileEntity, 3, 33, 33);
-		slots[4] = new SlotBase(tileEntity, 4, 33, 51);
-		slots[5] = new SlotBase(tileEntity, 5, 51, 15);
+		slots[5] = new SlotBase(tileEntity, 5, 33, 33);
+		slots[8] = new SlotBase(tileEntity, 8, 33, 51);
+		slots[3] = new SlotBase(tileEntity, 3, 51, 15);
 		slots[6] = new SlotBase(tileEntity, 6, 51, 33);
-		slots[7] = new SlotBase(tileEntity, 7, 51, 51);
-		slots[8] = new SlotBase(tileEntity, 8, 69, 15);
-		slots[9] = new SlotBase(tileEntity, 9, 69, 33);
+		slots[9] = new SlotBase(tileEntity, 9, 51, 51);
+		slots[4] = new SlotBase(tileEntity, 4, 69, 15);
+		slots[7] = new SlotBase(tileEntity, 7, 69, 33);
 		slots[10] = new SlotBase(tileEntity, 10, 69, 51);
 		slots[11] = new SlotBase(tileEntity, 11, 143, 33);
 		
