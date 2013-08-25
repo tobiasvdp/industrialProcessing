@@ -7,6 +7,7 @@ import ip.industrialProcessing.power.utils.PowerAcceptorConnection;
 import ip.industrialProcessing.power.utils.PowerDistributor;
 import ip.industrialProcessing.transport.TileEntityTransport;
 import ip.industrialProcessing.transport.TransportConnectionState;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
@@ -34,9 +35,8 @@ public class TileEntityWire extends TileEntityTransport implements IPowerAccepto
     public void setOutputs(WireConnection[] outputs) {
 	PowerAcceptorConnection[] connections = new PowerAcceptorConnection[outputs.length];
 	for (int i = 0; i < connections.length; i++) {
-	    WireConnection output = outputs[i];
-	    IPowerAcceptor acceptor = getAcceptorAt(output);
-	    connections[i] = new PowerAcceptorConnection(acceptor, output.direction);
+	    WireConnection output = outputs[i]; 
+	    connections[i] = new PowerAcceptorConnection(output.x, output.y, output.z, output.direction);
 	}
 	this.distributor.setOutputs(connections);
     }
@@ -67,12 +67,23 @@ public class TileEntityWire extends TileEntityTransport implements IPowerAccepto
 
     @Override
     public float getResistance(ForgeDirection side, float voltage) { 
-	return distributor.getResistance(voltage);
+	return distributor.getResistance(voltage, this.worldObj);
     }
 
     @Override
     public void applyPower(ForgeDirection side, float coulombs, float voltage) {
-	distributor.distributePower(voltage, coulombs);
+	distributor.distributePower(voltage, coulombs, this.worldObj);
     }
 
+    @Override
+    public void writeToNBT(NBTTagCompound par1nbtTagCompound) { 
+        super.writeToNBT(par1nbtTagCompound);
+        distributor.writeToNBT(par1nbtTagCompound);
+    }
+    
+    @Override
+    public void readFromNBT(NBTTagCompound par1nbtTagCompound) { 
+        super.readFromNBT(par1nbtTagCompound);
+        distributor.readFromNBT(par1nbtTagCompound);
+    }
 }

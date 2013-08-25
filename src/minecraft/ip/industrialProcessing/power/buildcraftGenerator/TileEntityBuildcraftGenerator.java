@@ -31,8 +31,7 @@ public class TileEntityBuildcraftGenerator extends TileEntityPowerGenerator impl
 
     @Override
     public void updateEntity() {
-	this.powerHandler.update();
-	System.out.println(this.speed);
+	this.powerHandler.update(); 
 	super.updateEntity();
 
 	float dt = 1 / 20f;

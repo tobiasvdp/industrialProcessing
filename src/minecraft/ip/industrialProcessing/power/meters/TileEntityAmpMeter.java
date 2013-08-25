@@ -35,13 +35,14 @@ public class TileEntityAmpMeter extends TileEntityPowerGenerator implements IPow
 	super.updateEntity();
 	if (unVerified)
 	    checkOutput();
-	if (!this.worldObj.isRemote) { 
-	    this.angle = this.coulombs * 20 / 5; // * 20 = coulomb -> amp, /5 = amp -> angle
+	if (!this.worldObj.isRemote) {
+	    this.angle = this.coulombs * 20 / 5; // * 20 = coulomb -> amp, /5 =
+						 // amp -> angle
 	    if (voltage > 0) // distribute last pass
-		this.distributor.distributePower(voltage, coulombs);
+		this.distributor.distributePower(voltage, coulombs, this.worldObj);
 	    this.coulombs = 0;
 	    // fetch resistance for next pass
-	    this.resistance = this.distributor.getResistance(this.voltage);
+	    this.resistance = this.distributor.getResistance(this.voltage, this.worldObj);
 	    notifyBlockChange();
 	}
     }
@@ -91,9 +92,9 @@ public class TileEntityAmpMeter extends TileEntityPowerGenerator implements IPow
     private void checkOutput() {
 	ForgeDirection output = DirectionUtils.GetWorldDirection(outputSide, getForwardDirection());
 	IPowerAcceptor acceptor = getAcceptor(output);
-	if (acceptor == null)
+	if (acceptor == null || !acceptor.canAcceptPower(output.getOpposite()))
 	    this.distributor.setOutputs();
-	PowerAcceptorConnection connection = new PowerAcceptorConnection(acceptor, output.getOpposite());
+	PowerAcceptorConnection connection = new PowerAcceptorConnection(xCoord + output.offsetX, yCoord + output.offsetY, zCoord + output.offsetZ, output.getOpposite());
 	this.distributor.setOutputs(connection);
 	unVerified = false;
     }
@@ -113,14 +114,14 @@ public class TileEntityAmpMeter extends TileEntityPowerGenerator implements IPow
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nbt) { 
-        super.writeToNBT(nbt);
-        nbt.setFloat("Angle", this.angle);
+    public void writeToNBT(NBTTagCompound nbt) {
+	super.writeToNBT(nbt);
+	nbt.setFloat("Angle", this.angle);
     }
-    
+
     @Override
-    public void readFromNBT(NBTTagCompound nbt) { 
-        super.readFromNBT(nbt);
-        this.angle = nbt.getFloat("Angle");
+    public void readFromNBT(NBTTagCompound nbt) {
+	super.readFromNBT(nbt);
+	this.angle = nbt.getFloat("Angle");
     }
 }
