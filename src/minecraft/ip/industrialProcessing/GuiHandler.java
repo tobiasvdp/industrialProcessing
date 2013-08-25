@@ -49,6 +49,7 @@ import ip.industrialProcessing.multiblock.block.tank.TileEntityMultiblockTankOut
 import ip.industrialProcessing.multiblock.extended.inventory.ContainerMultiblockBlockInv;
 import ip.industrialProcessing.multiblock.extended.inventory.GuiContainerMultiblockBlockInv;
 import ip.industrialProcessing.multiblock.extended.inventory.TileEntityMultiblockBlockInv;
+import ip.industrialProcessing.multiblock.extended.inventory.TileEntityMultiblockCoreInv;
 import ip.industrialProcessing.multiblock.extended.inventory.tank.GuiContainerMultiblockBlockTank;
 import ip.industrialProcessing.multiblock.extended.inventory.tank.TileEntityMultiblockBlockTank;
 import ip.industrialProcessing.multiblock.machine.crusher.ContainerMultiblockCrusher;
@@ -60,6 +61,8 @@ import ip.industrialProcessing.multiblock.machine.mixer.TileEntityMultiblockMixe
 import ip.industrialProcessing.multiblock.machine.weldingStation.ContainerMultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.machine.weldingStation.GuiContainerMultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.machine.weldingStation.TileEntityMultiblockWeldingStation;
+import ip.industrialProcessing.multiblock.utils.config.ContainerMultiblockConfig;
+import ip.industrialProcessing.multiblock.utils.config.GuiContainerMultiblockConfig;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -73,6 +76,7 @@ public class GuiHandler implements IGuiHandler {
 			int x, int y, int z) {
 
 		TileEntity entity = world.getBlockTileEntity(x, y, z);
+		if(ID == 0){
 		if(entity  instanceof TileEntityFilter)
 			return new ContainerFilter(player.inventory, (TileEntityFilter)entity);
 		if(entity  instanceof TileEntityCrusher)
@@ -111,6 +115,10 @@ public class GuiHandler implements IGuiHandler {
 			return new ContainerMultiblockBlockInv(player.inventory, (TileEntityMultiblockBlockInv)entity);  
 		if(entity  instanceof TileEntityMultiblockWeldingStation)
 			return new ContainerMultiblockWeldingStation(player.inventory, (TileEntityMultiblockWeldingStation)entity);  
+		
+		}else if(ID == 1){
+			return new ContainerMultiblockConfig(player.inventory, (TileEntityMultiblockCoreInv)entity); 
+		}
 		return null;
 	}
 	 
@@ -118,8 +126,9 @@ public class GuiHandler implements IGuiHandler {
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world,
 			int x, int y, int z) {
-
+		
 		TileEntity entity = world.getBlockTileEntity(x, y, z);
+		if(ID == 0){
 		if(entity  instanceof TileEntityFilter)
 			return new GuiContainerFilter(player.inventory, (TileEntityFilter)entity);
 		if(entity  instanceof TileEntityCrusher)
@@ -162,7 +171,10 @@ public class GuiHandler implements IGuiHandler {
 			return new GuiContainerMultiblockBlockTank(player.inventory, (TileEntityMultiblockBlockTank)entity,3); 
 		if(entity  instanceof TileEntityMultiblockWeldingStation)
 			return new GuiContainerMultiblockWeldingStation(player.inventory, (TileEntityMultiblockWeldingStation)entity); 
+		
+		}else if(ID == 1){
+			return new GuiContainerMultiblockConfig(player.inventory, (TileEntityMultiblockCoreInv)entity); 
+		}
 		return null;
 	}
-
 }
