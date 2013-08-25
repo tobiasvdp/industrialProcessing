@@ -98,7 +98,6 @@ public class PowerDistributor {
 	    int y = nbttagcompound1.getInteger("Y");
 	    int z = nbttagcompound1.getInteger("Z");
 	    ForgeDirection dir = ForgeDirection.VALID_DIRECTIONS[nbttagcompound1.getInteger("Dir")];
-	    System.out.println("Acceptor at " + x + " " + y + " " + z + " " + dir);
 	    connections[i] = new PowerAcceptorConnection(x, y, z, dir);
 	}
 	this.setOutputs(connections);

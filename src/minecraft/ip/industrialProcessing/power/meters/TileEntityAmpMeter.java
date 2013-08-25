@@ -36,15 +36,15 @@ public class TileEntityAmpMeter extends TileEntityPowerGenerator implements IPow
 	if (unVerified)
 	    checkOutput();
 	if (!this.worldObj.isRemote) {
-	    this.angle = this.coulombs * 20 / 5; // * 20 = coulomb -> amp, /5 =
-						 // amp -> angle
+	    this.angle = this.coulombs * 20 / 150; // * 20 = coulomb -> amp, /25 =
+	}					 // amp -> angle
 	    if (voltage > 0) // distribute last pass
 		this.distributor.distributePower(voltage, coulombs, this.worldObj);
 	    this.coulombs = 0;
 	    // fetch resistance for next pass
 	    this.resistance = this.distributor.getResistance(this.voltage, this.worldObj);
 	    notifyBlockChange();
-	}
+	
     }
 
     @Override
