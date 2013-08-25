@@ -23,18 +23,12 @@ public class TileEntityBatteryBox extends TileEntityPowerGenerator implements IP
     private static final LocalDirection outputSide = LocalDirection.BACK;
 
     private float charge = 0;
-    private float capacitance = 100000;
-
-    private float maxVoltage = 12;
-
-    @Override
-    public void updateEntity() {
-	super.updateEntity();
-    }
+    private float capacitance = 1000; 
+ 
 
     @Override
     public float getAnimationProgress(float scale) {
-	return this.charge * scale / this.capacitance;
+	return this.getVoltage() * scale * 24f;
     }
 
     @Override
@@ -50,6 +44,12 @@ public class TileEntityBatteryBox extends TileEntityPowerGenerator implements IP
 	this.charge = nbt.getFloat("Charge");
 	this.capacitance = nbt.getFloat("Capacity");
     }
+    
+    @Override
+    public void updateEntity() {
+        System.out.println("Charge"+this.charge+" "+this.worldObj.isRemote);
+        super.updateEntity();
+    }
 
     @Override
     public boolean canOutputPower(ForgeDirection opposite) {
@@ -63,23 +63,15 @@ public class TileEntityBatteryBox extends TileEntityPowerGenerator implements IP
     }
 
     @Override
-    public float getResistance(ForgeDirection side) {
-	LocalDirection localSide = DirectionUtils.GetLocalDirection(side, getForwardDirection());
-	if (localSide == inputSide) {
-	    float difference = this.getVoltage() / this.maxVoltage;
-	    if (difference == 0)
-		return Float.POSITIVE_INFINITY;
-	    // TODO: find a better equation for the input resistance
-	    return 1 / difference; // the more this battery fills up, the less
-				   // it asks from the input network
-	} else
-	    return Float.POSITIVE_INFINITY; // this thing isn't even here!
+    public float getResistance(ForgeDirection side, float voltage) {  
+	float storedVoltage = this.getVoltage();
+	return PowerHelper.getResistanceForStorage(voltage, storedVoltage+1);
     }
 
     @Override
     public void applyPower(ForgeDirection side, float coulombs, float voltage) {
-	// TODO Auto-generated method stub
-
+	this.charge += coulombs;
+	notifyBlockChange();
     }
 
     @Override
@@ -95,6 +87,8 @@ public class TileEntityBatteryBox extends TileEntityPowerGenerator implements IP
 
     @Override
     public float getCharge(float amount) {
-	return Math.min(amount, this.charge);
-    }
+	float delta = Math.min(amount, this.charge);
+	this.charge -= delta;  
+	return delta;
+    } 
 }

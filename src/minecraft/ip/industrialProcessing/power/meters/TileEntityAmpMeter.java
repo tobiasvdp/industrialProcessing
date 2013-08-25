@@ -35,7 +35,7 @@ public class TileEntityAmpMeter extends TileEntityPowerGenerator implements IPow
     }
 
     @Override
-    public float getResistance(ForgeDirection side) {
+    public float getResistance(ForgeDirection side, float voltage) {
 	// TODO Auto-generated method stub
 	return 0;
     }

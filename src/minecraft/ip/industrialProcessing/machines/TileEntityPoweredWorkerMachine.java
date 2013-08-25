@@ -58,7 +58,7 @@ public abstract class TileEntityPoweredWorkerMachine extends TileEntityWorkerMac
     }
 
     @Override
-    public float getResistance(ForgeDirection side) {
+    public float getResistance(ForgeDirection side, float voltage) {
 	if (canAcceptPower(side)) {  
 	    return PowerHelper.getResistanceForStorage(this.powerStorage, this.powerCapacity);
 	}

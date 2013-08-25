@@ -67,8 +67,8 @@ public class TileEntityWire extends TileEntityTransport implements IPowerAccepto
     }
 
     @Override
-    public float getResistance(ForgeDirection side) { 
-	return distributor.getResistance();
+    public float getResistance(ForgeDirection side, float voltage) { 
+	return distributor.getResistance(voltage);
     }
 
     @Override

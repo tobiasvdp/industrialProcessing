@@ -68,7 +68,7 @@ public abstract class TileEntityMultiblockCoreInvWorkerPowered extends TileEntit
     }
 
     @Override
-    public float getResistance(ForgeDirection side) {
+    public float getResistance(ForgeDirection side, float voltage) {
 	if (canAcceptPower(side)) {
 	    return PowerHelper.getResistanceForStorage(this.powerStorage, this.powerCapacity);
 	}

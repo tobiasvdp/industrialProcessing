@@ -60,8 +60,8 @@ public class PowerDistributorManager {
 	return null;
     }
 
-    public float getResistance() {
-	return this.distributor.getResistance();
+    public float getResistance(float voltage) {
+	return this.distributor.getResistance(voltage);
     }
 
     public void distributePower(float voltage, float coulombs) {
@@ -104,16 +104,12 @@ public class PowerDistributorManager {
      *            time constant
      */
     public void distributePower(IPowerProducer generator, float time, float tau) {
-	float networkResistance = this.distributor.getResistance();
+	float voltage = generator.getVoltage(); 
+	float networkResistance = this.distributor.getResistance(voltage);
 	float networkResistanceSquared = networkResistance * networkResistance;
-	float voltage = generator.getVoltage();
-
 	float current = (voltage / networkResistanceSquared * tau);
-
-	float charge = current * time;
-	
+	float charge = current * time;	
 	charge = generator.getCharge(charge); // feedback to the generator
-	
 	this.distributePower(voltage, charge);
     }
 }

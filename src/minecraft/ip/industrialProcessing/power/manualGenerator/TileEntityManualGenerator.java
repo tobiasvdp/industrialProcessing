@@ -40,13 +40,13 @@ public class TileEntityManualGenerator extends TileEntityPowerGenerator implemen
 
 	float dt = 1 / 20f;
 
-	System.out.println(this.storedPlayerForce + " " + this.speed + " " + this.rotation);
+	//System.out.println(this.worldObj.isRemote+" "+this.storedPlayerForce + " " + this.speed + " " + this.rotation);
 	if (this.storedPlayerForce > 0) {
-	    this.speed += this.storedPlayerForce * dt / 100;
+	    this.speed += this.storedPlayerForce * dt / 50;
 	    this.storedPlayerForce -= this.storedPlayerForce * dt;
 	}
 
-	this.speed -= DRAG * this.speed * dt;
+	this.speed -= DRAG * this.speed * dt*10;
 
 	while (rotation > 2 * Math.PI)
 	    rotation -= 2 * Math.PI;
@@ -90,14 +90,14 @@ public class TileEntityManualGenerator extends TileEntityPowerGenerator implemen
     @Override
     public float getCharge(float q) {
 	// q Coulomb have been used by the network
-	this.speed -= q * ELECTRIC_DRAG; // (q = i * dt), so this can be applied
-	System.out.println(q);				 // directly
+	this.speed -= q * ELECTRIC_DRAG; // (q = i * dt), so this can be applied directly
 	return q;
     }
 
     @Override
     public float getVoltage() {
-	return speed * 12;
+	System.out.println("Get Voltage:" +this.speed);
+	return speed;
     }
 
 }
