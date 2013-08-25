@@ -3,6 +3,7 @@ package ip.industrialProcessing.config;
 public class ConfigRenderers {
 
 	private int rendererCrankGeneratorID;
+	private int rendererBCGeneratorID;
 	private int rendererWireID;
 	private int rendererMixerID;
 	private int rendererFilterID;
@@ -12,7 +13,7 @@ public class ConfigRenderers {
 	private int rendererVoltMeterID;
 	private int rendererAmpMeterID;
 	private int rendererTransportFluidID;
-	private int rendererBatteryBoxID;
+	private int rendererEnergyCellID;
 	private int rendererBlastFurnaceID;
 	private int rendererTankID;
 	private int rendererBlockMachineFrameID;
@@ -165,12 +166,12 @@ public class ConfigRenderers {
 		getInstance().rendererTankID = value;
 	}
 
-	public static int getRendererBatteryBoxId() {
-		return getInstance().rendererBatteryBoxID;
+	public static int getRendererEnergyCellId() {
+		return getInstance().rendererEnergyCellID;
 	}
 
-	public static void setRendererBatteryBoxId(int value) {
-		getInstance().rendererBatteryBoxID = value;
+	public static void setRendererEnergyCellId(int value) {
+		getInstance().rendererEnergyCellID = value;
 	}
 
 	public static int getRendererBlastFurnaceId() {
@@ -187,6 +188,14 @@ public class ConfigRenderers {
 
 	public static void setRendererCrankGeneratorId(int value) {
 		getInstance().rendererCrankGeneratorID = value;
+	}
+
+	public static int getRendererBCGeneratorId() {
+		return getInstance().rendererBCGeneratorID;
+	}
+
+	public static void setRendererBCGeneratorId(int value) {
+		getInstance().rendererBCGeneratorID = value;
 	}
 
 	private ConfigRenderers() {

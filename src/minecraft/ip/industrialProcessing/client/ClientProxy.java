@@ -49,13 +49,14 @@ import ip.industrialProcessing.multiblock.block.weldingStation.TileEntityMultibl
 import ip.industrialProcessing.multiblock.machine.weldingStation.TileEntityMultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.utils.ModelMultiblockIO;
 import ip.industrialProcessing.multiblock.utils.ModelMultiblockWeldingStation;
+import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
 import ip.industrialProcessing.power.manualGenerator.ModelCrankGenerator;
 import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
 import ip.industrialProcessing.power.meters.ModelVoltMeter;
 import ip.industrialProcessing.power.meters.TileEntityAmpMeter;
 import ip.industrialProcessing.power.meters.TileEntityVoltMeter;
-import ip.industrialProcessing.power.storage.ModelBatteryBox;
-import ip.industrialProcessing.power.storage.TileEntityBatteryBox;
+import ip.industrialProcessing.power.storage.ModelEnergyCell;
+import ip.industrialProcessing.power.storage.TileEntityEnergyCell;
 import ip.industrialProcessing.power.wire.ModelWire;
 import ip.industrialProcessing.power.wire.TileEntityWire;
 import ip.industrialProcessing.transport.fluids.ModelTank;
@@ -74,8 +75,9 @@ public class ClientProxy extends CommonProxy {
 	private static final ModelAnimatedMachine voltMeter = new ModelVoltMeter(false);
 	private static final ModelAnimatedMachine ampMeter = new ModelVoltMeter(true);
 	private static final ModelConnected transportFluids = new ModelTransportFluids();
-	private static final ModelAnimatedMachine batteryBox = new ModelBatteryBox();
-	private static final ModelAnimatedMachine crankGenerator = new ModelCrankGenerator();
+	private static final ModelAnimatedMachine EnergyCell = new ModelEnergyCell();
+	private static final ModelAnimatedMachine crankGenerator = new ModelCrankGenerator(true);
+	private static final ModelAnimatedMachine buildcraftGenerator = new ModelCrankGenerator(false);
 	private static final ModelStateMachine blastFurnace = new ModelBlastFurnace();
 	private static final ModelStateMachine blastFurnaceTop = new ModelBlastFurnaceTop();
 	private static final ModelConnectedFluid tank = new ModelTank();
@@ -129,9 +131,9 @@ public class ClientProxy extends CommonProxy {
 		ConfigRenderers.setRendererTankId(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererTankId(), new TileEntityTank()));
 
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBatteryBox.class, new RendererTileEntityAnimated(IndustrialProcessing.blockBatteryBox, "ModelBatteryBox", batteryBox));
-		ConfigRenderers.setRendererBatteryBoxId(RenderingRegistry.getNextAvailableRenderId());
-		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererBatteryBoxId(), new TileEntityBatteryBox()));
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEnergyCell.class, new RendererTileEntityAnimated(IndustrialProcessing.blockEnergyCell, "ModelEnergyCell", EnergyCell));
+		ConfigRenderers.setRendererEnergyCellId(RenderingRegistry.getNextAvailableRenderId());
+		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererEnergyCellId(), new TileEntityEnergyCell()));
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlastFurnace.class, new RendererTileEntityState(IndustrialProcessing.blockBlastFurnace, new String[] { "ModelBlastFurnace", "ModelBlastFurnaceTop" }, new ModelStateMachine[] { blastFurnace, blastFurnaceTop }));
 		ConfigRenderers.setRendererBlastFurnaceId(RenderingRegistry.getNextAvailableRenderId());
@@ -141,6 +143,10 @@ public class ClientProxy extends CommonProxy {
 		ConfigRenderers.setRendererCrankGeneratorId(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererCrankGeneratorId(), new TileEntityManualGenerator()));
 
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBuildcraftGenerator.class, new RendererTileEntityAnimated(IndustrialProcessing.blockBuildcraftGenerator, "ModelCrankGenerator", buildcraftGenerator));
+		ConfigRenderers.setRendererBCGeneratorId(RenderingRegistry.getNextAvailableRenderId());
+		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererBCGeneratorId(), new TileEntityBuildcraftGenerator()));
+		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMachineFrame.class, new RendererMultiblock(IndustrialProcessing.blockMachineFrame, new String[] { "MultiblockBlock", "MultiblockBlock", "MultiblockBlock", "MultiblockBlock", "MultiblockBlock" }, new ModelMultiblock[] { modelMultiblockFrameConnected, multiblockFrame, modelMultiblockFrameSidePanel, null, modelMultiblockFrameTower }));
 		ConfigRenderers.setRendererBlockMachineFrameID(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererBlockMachineFrameID(), new TileEntityMachineFrame()));

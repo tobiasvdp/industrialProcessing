@@ -16,8 +16,7 @@ public class TileEntityWire extends TileEntityTransport implements IPowerAccepto
 
     protected void updateNetwork() {
 	WireNetworkMap.UpdateNetworkAt(worldObj, xCoord, yCoord, zCoord);
-	notifyBlockChange();
-	System.out.println("network around " + xCoord + ", " + yCoord + ", " + zCoord + " found " + this.distributor.getOutputs().length + " outputs");
+	notifyBlockChange(); 
     }
 
     private IPowerAcceptor getAcceptorAt(WireLocation wireLocation) {

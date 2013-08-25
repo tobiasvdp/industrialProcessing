@@ -14,7 +14,7 @@ public class PowerDistributor {
 	return outputs;
     }
 
-    public void setOutputs(PowerAcceptorConnection[] outputs) {
+    public void setOutputs(PowerAcceptorConnection... outputs) {
 	if (outputs == null)
 	    outputs = new PowerAcceptorConnection[0];
 	this.outputs = outputs;
