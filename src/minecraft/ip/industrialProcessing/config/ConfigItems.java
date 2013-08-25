@@ -133,7 +133,7 @@ public class ConfigItems {
 		
 		LanguageRegistry.addName(IndustrialProcessing.itemThickStick, "Thick stick");
 		LanguageRegistry.addName(IndustrialProcessing.itemHammer, "Hammer");
-		LanguageRegistry.addName(IndustrialProcessing.itemBlowingTorch, "Blowing torch");
+		LanguageRegistry.addName(IndustrialProcessing.itemBlowingTorch, "Blow torch");
 		
 		LanguageRegistry.addName(IndustrialProcessing.itemIronOxidePellets, "Iron pellets");
 		LanguageRegistry.addName(IndustrialProcessing.itemCalcareousSinterDust, "Calcareous sinter dust");

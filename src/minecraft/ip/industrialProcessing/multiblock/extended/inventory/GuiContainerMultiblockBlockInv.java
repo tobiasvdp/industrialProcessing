@@ -40,8 +40,6 @@ public class GuiContainerMultiblockBlockInv extends GuiContainer {
 	protected int type;
 	protected ResourceLocation textureLocation = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/MultiblockIO.png");
 
-	// private ArrayList<GuiButton> controlList = new ArrayList<GuiButton>();
-
 	public GuiContainerMultiblockBlockInv(InventoryPlayer inventoryPlayer, TileEntityMultiblockBlockInv tileEntity, int type) {
 		super(new ContainerMultiblockBlockInv(inventoryPlayer, tileEntity));
 		this.tileEntity = tileEntity;
