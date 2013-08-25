@@ -76,17 +76,11 @@ public class BlockFluid extends BlockFluidClassic{
 	}
 
 	@Override
-	public int getQuantaValue(IBlockAccess world, int x, int y, int z) {
-		return 0;
-	}
-
-	@Override
 	public boolean canDisplace(IBlockAccess world, int x, int y, int z) {
 		if (world.getBlockMaterial(x,  y,  z).isLiquid()) return false;
 		return super.canDisplace(world, x, y, z);
 	}
-
-
+	
 	@Override
 	public boolean displaceIfPossible(World world, int x, int y, int z) {
 		if (world.getBlockMaterial(x,  y,  z).isLiquid()) return false;

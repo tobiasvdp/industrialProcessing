@@ -2,6 +2,7 @@ package ip.industrialProcessing.multiblock.utils.layout;
 
 import ip.industrialProcessing.multiblock.TileEntityMultiblockBlock;
 import ip.industrialProcessing.multiblock.TileEntityMultiblockCore;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -87,8 +88,8 @@ public class MultiblockStructure {
 		return sizeFront;
 	}
 
-	public void setCoreID(int blockID,int modelID) {
-		layout[xCore][yCore][zCore] = new MultiBlockStructureBlockDescription(0, 0, 0,modelID, blockID);
+	public void setCoreID(int blockID, int modelID) {
+		layout[xCore][yCore][zCore] = new MultiBlockStructureBlockDescription(0, 0, 0, modelID, blockID);
 	}
 
 	public void addBlockIDRelative(int hor, int ver, int depth, int renderID, int... blockIDs) {
@@ -251,5 +252,20 @@ public class MultiblockStructure {
 		if (i < 0 || j < 0 || k < 0 || i > layout.length - 1 || j > layout[0].length - 1 || k > layout[0][0].length - 1 || layout[i][j][k] == null)
 			return 0;
 		return layout[i][j][k].getRenderID();
+	}
+
+	public ItemStack[][][] getItemStackLayout(World world, int xCore, int yCore, int zCore) {
+		ItemStack[][][] itemstack = new ItemStack[layout.length][layout[0].length][layout[0][0].length];
+		for (int i = 0; i < layout.length; i++) {
+			for (int j = 0; j < layout[0].length; j++) {
+				for (int k = 0; k < layout[0][0].length; k++) {
+					int id = world.getBlockId(xCore - this.xCore + i, yCore - this.yCore + j, zCore - this.zCore + k);
+					if (id != 0) {
+						itemstack[i][j][k] = new ItemStack(id,1,0);
+					}
+				}
+			}
+		}
+		return itemstack;
 	}
 }

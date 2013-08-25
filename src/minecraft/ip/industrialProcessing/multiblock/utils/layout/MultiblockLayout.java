@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import ip.industrialProcessing.multiblock.TileEntityMultiblockBlock;
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
@@ -70,5 +71,12 @@ public class MultiblockLayout {
 		}
 		MultiblockStructure layout = layouts[angle.ordinal()];
 		return layout.getModelID(i + layout.getxCore(), j + layout.getyCore(), k + layout.getzCore());
+	}
+
+	public ItemStack[][][] getItemStackLayout(World world, int xCore, int yCore, int zCore,BlockForward angle) {
+		BlockForward angleStruct = angle;
+		if (angleStruct == BlockForward.INVALID)
+			angleStruct = BlockForward.NORTH;
+		return layouts[angleStruct.ordinal()].getItemStackLayout(world, xCore, yCore, zCore);
 	}
 }

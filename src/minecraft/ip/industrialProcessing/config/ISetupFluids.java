@@ -35,6 +35,6 @@ public interface ISetupFluids {
     public final static BlockFluid blockFluidHotSteel = new BlockFluid(ConfigFluids.blockFluidBaseHotSteelID(), itemFluidHotSteel, Material.fire, IndustrialProcessing.tabOres, false);
     public final static ContainerFluid bucketHotSteel = new ContainerFluid(ConfigFluids.BucketHotSteelID(), itemFluidHotSteel, blockFluidHotSteel, "ContainerHotSteel");
     
-    public final static ItemFluid itemFluidExhaustGas = new ItemFluid("IP.fluid.exhaustGas", 100, 200);
+    public final static ItemFluid itemFluidExhaustGas = new ItemFluid("IP.fluid.exhaustGas", 1000, 1000);
     public final static BlockFluid blockFluidExhaustGas = new BlockFluid(ConfigFluids.blockFluidBaseExhaustGasID(), itemFluidExhaustGas, Material.water, IndustrialProcessing.tabOres, false);
 }

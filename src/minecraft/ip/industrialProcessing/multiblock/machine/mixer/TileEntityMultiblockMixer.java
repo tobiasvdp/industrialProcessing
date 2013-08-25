@@ -30,10 +30,10 @@ public class TileEntityMultiblockMixer extends TileEntityMultiblockCoreTankWorke
 
 		MultiblockStructure layout = new MultiblockStructure(2, 2, 1, 1, 0, 1);
 		layout.setCoreID(IndustrialProcessing.blockMultiblockMixer.blockID,0);
-		layout.addBlockIDRelative(-1, 0, 0, inputTankId);
-		layout.addBlockIDRelative(1, 0, 0, outputTankId);
-		layout.addBlockIDRelative(0, 0, -1, inputInvId);
-		layout.fillLayer(-1, 0, -1, frameId);
+		layout.addBlockIDRelative(-1, 0, 0,0, inputTankId);
+		layout.addBlockIDRelative(1, 0, 0,0, outputTankId);
+		layout.addBlockIDRelative(0, 0, -1,0, inputInvId);
+		layout.fillLayer(-1, 0, -1, 0,frameId);
 
 		structure.commit(layout);
 	}

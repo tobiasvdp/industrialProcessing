@@ -2,6 +2,7 @@ package ip.industrialProcessing.multiblock;
 
 import cpw.mods.fml.common.network.Player;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.INetworkManager;
@@ -256,5 +257,8 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 	public ForgeDirection getForwardDirection() {
 		int meta = this.worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
 		return BlockMachine.getForwardFromMetadata(meta);
+	}
+	public ItemStack[][][] getItemStackLayout(){
+		return layout.getItemStackLayout(worldObj, xCoord, yCoord, zCoord, angle);
 	}
 }

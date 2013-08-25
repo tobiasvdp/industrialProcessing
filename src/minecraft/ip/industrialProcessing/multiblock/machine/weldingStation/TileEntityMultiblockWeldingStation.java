@@ -28,7 +28,7 @@ public class TileEntityMultiblockWeldingStation extends TileEntityMultiblockCore
 		layout.addBlockIDRelative(1, 0, 0, 0,ConfigMachineBlocks.getBlockMultiblockTankWeldingStationRightID());
 		layout.addBlockIDRelative(0, 1, 0, 0,ConfigMachineBlocks.getBlockMultiblockTankWeldingStationScreenID());
 		layout.addBlockIDRelative(1, 1, 0, 0,ConfigMachineBlocks.getBlockMultiblockTankWeldingStationScreenID());
-		layout.addBlockIDRelative(-1, 0, 0, 0,ConfigMachineBlocks.getBlockMultiblockPowerID());
+		layout.addBlockIDRelative(-1, 0, 0, 0,ConfigMachineBlocks.getBlockMultiblockPowerID(),0);
 
 		structure.commit(layout);
 	}
