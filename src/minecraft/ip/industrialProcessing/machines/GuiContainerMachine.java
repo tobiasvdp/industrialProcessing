@@ -4,11 +4,13 @@ import java.util.List;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
+import ip.industrialProcessing.power.IPowerAcceptor;
+import ip.industrialProcessing.power.IPoweredMachine;
 import ip.industrialProcessing.utils.working.IWorker;
 import ip.industrialProcessing.utils.working.IWorkingEntity;
 
 import org.lwjgl.opengl.GL11;
- 
+
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -19,7 +21,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.ForgeDirection;
 
-public class GuiContainerMachine extends GuiContainer{
+public class GuiContainerMachine extends GuiContainer {
 
     public TileEntityMachine tileEntity;
     protected String name;
@@ -55,16 +57,24 @@ public class GuiContainerMachine extends GuiContainer{
 	if (tileEntity instanceof IWorkingEntity) {
 	    IWorkingEntity workingEntity = (IWorkingEntity) tileEntity;
 	    IWorker worker = workingEntity.getWorker();
-	    	if (progressBarSide == ForgeDirection.WEST){
-	    		int scale = worker.getScaledProgress(progressBarWidth);
-	    		if (scale > 0)
-	    		this.drawTexturedModalRect(x + progressBarX, y + progressBarY, 176, 0, scale, progressBarHeight);
-	    	}else{
-	    		int scale = worker.getScaledProgress(progressBarHeight);
-	    		if (scale > 0)
-	    		this.drawTexturedModalRect(x + progressBarX, y + progressBarY, 176, 0, progressBarWidth, scale);
-	    	}
+	    if (progressBarSide == ForgeDirection.WEST) {
+		int scale = worker.getScaledProgress(progressBarWidth);
+		if (scale > 0)
+		    this.drawTexturedModalRect(x + progressBarX, y + progressBarY, 176, 0, scale, progressBarHeight);
+	    } else {
+		int scale = worker.getScaledProgress(progressBarHeight);
+		if (scale > 0)
+		    this.drawTexturedModalRect(x + progressBarX, y + progressBarY, 176, 0, progressBarWidth, scale);
+	    }
 	}
+    }
+
+    protected void drawProgressBar(int x, int y, int sourceX, int sourceY, int width, int height, int value, int max) {
+
+	int x0 = (this.width - xSize) / 2;
+	int y0 = (this.height - ySize) / 2;
+	int scaled = Math.min(width, (int)(width * value / max));
+	this.drawTexturedModalRect(x+x0, y+y0, sourceX, sourceY, scaled, height);
     }
 
     protected void setProgressBarLocation(int x, int y, int w, int h) {
@@ -73,7 +83,8 @@ public class GuiContainerMachine extends GuiContainer{
 	progressBarWidth = w;
 	progressBarHeight = h;
     }
-    protected void setProgresBarDropside(ForgeDirection o){
-    	progressBarSide = o; 
+
+    protected void setProgresBarDropside(ForgeDirection o) {
+	progressBarSide = o;
     }
 }

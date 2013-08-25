@@ -5,6 +5,7 @@ import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.multiblock.extended.inventory.tank.worker.power.TileEntityMultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.power.IPowerAcceptor;
+import ip.industrialProcessing.power.IPoweredMachine;
 import ip.industrialProcessing.power.PowerHelper;
 import ip.industrialProcessing.recipes.Recipe;
 
@@ -13,7 +14,7 @@ import java.util.Iterator;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 
-public abstract class TileEntityPoweredWorkerMachine extends TileEntityWorkerMachine implements IPowerAcceptor {
+public abstract class TileEntityPoweredWorkerMachine extends TileEntityWorkerMachine implements  IPoweredMachine {
 
     private LocalDirection powerInputSide;
     private int powerStorage;
@@ -78,4 +79,13 @@ public abstract class TileEntityPoweredWorkerMachine extends TileEntityWorkerMac
 	return this.powerInputSide == DirectionUtils.GetLocalDirection(side, getForwardDirection());
     }
 
+    @Override
+    public int getStoredPower() { 
+        return this.powerStorage;
+    }
+    
+    @Override
+    public int getPowerCapacity() { 
+        return this.powerCapacity;
+    }
 }

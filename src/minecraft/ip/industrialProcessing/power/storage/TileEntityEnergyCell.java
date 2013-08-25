@@ -23,7 +23,7 @@ public class TileEntityEnergyCell extends TileEntityPowerGenerator implements IP
     private static final LocalDirection outputSide = LocalDirection.BACK;
 
     private float storedJoules = 0;
-    private float totalJouleCapacity = 1000;
+    private float totalJouleCapacity = 50000;
 
     @Override
     public float getAnimationProgress(float scale) { 
@@ -62,7 +62,7 @@ public class TileEntityEnergyCell extends TileEntityPowerGenerator implements IP
 
     @Override
     public float getResistance(ForgeDirection side, float voltage) { 
-	return PowerHelper.getResistanceForStorage(this.storedJoules, this.totalJouleCapacity);
+	return 15+PowerHelper.getResistanceForStorage(this.storedJoules, this.totalJouleCapacity);
     }
 
     @Override

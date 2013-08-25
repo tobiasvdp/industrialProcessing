@@ -42,14 +42,14 @@ public class TileEntityManualGenerator extends TileEntityPowerGenerator implemen
 
 	//System.out.println(this.worldObj.isRemote+" "+this.storedPlayerForce + " " + this.speed + " " + this.rotation);
 	if (this.storedPlayerForce > 0) {
-	    this.speed += this.storedPlayerForce * dt / 50;
+	    this.speed += this.storedPlayerForce * dt / 20;
 	    this.storedPlayerForce -= this.storedPlayerForce * dt;
 	}
 
 	this.speed -= DRAG * this.speed * dt;
 
-	while (rotation > 2 * Math.PI)
-	    rotation -= 2 * Math.PI;
+	while (rotation > 1)
+	    rotation -= 1;
     }
 
     @Override
@@ -96,7 +96,7 @@ public class TileEntityManualGenerator extends TileEntityPowerGenerator implemen
 
     @Override
     public float getVoltage() { 
-	return speed;
+	return speed * 2;
     }
 
 }
