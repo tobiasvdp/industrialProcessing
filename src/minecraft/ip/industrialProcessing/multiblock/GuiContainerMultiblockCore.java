@@ -36,12 +36,14 @@ public class GuiContainerMultiblockCore extends GuiContainer {
 	protected int progressBarOriginx = 176;
 	protected int progressBarOriginy = 0;
 	protected ForgeDirection progressBarSide = ForgeDirection.WEST;
+	protected int ID;
 
 	public GuiContainerMultiblockCore(InventoryPlayer inventoryPlayer, TileEntityMultiblockCoreInv tileEntity, ContainerMultiblockCoreInv container, String name, String textureLocation) {
 		super(container);
 		this.tileEntity = tileEntity;
 		this.name = name;
 		this.textureLocation = new ResourceLocation(INamepace.TEXTURE_DOMAIN, textureLocation);
+		this.ID = 2;
 
 	}
 
@@ -120,7 +122,7 @@ public class GuiContainerMultiblockCore extends GuiContainer {
 		// make buttons
 		// id, x, y, width, height, text
 		buttonList.add(new GuiButton(1, 175 + x, 115 + y, 18, 18, ""));
-		GuiButton button = new GuiButton(2, 175 + x, 141 + y, 18, 18, "");
+		GuiButton button = new GuiButton(0, 175 + x, 141 + y, 18, 18, "");
 		button.enabled=false;
 		buttonList.add(button);
 
@@ -129,35 +131,27 @@ public class GuiContainerMultiblockCore extends GuiContainer {
 	@Override
 	protected void actionPerformed(GuiButton guibutton) {
 		// id is the id you give your button
-		int newID = -1;
-		switch (guibutton.id) {
-		case 1:
-			System.out.println("Button pressed");
-			break;
-		case 2:
-			// newID = tileEntity.prevValidID();
-			break;
-		}
+		
+		int subScreen = guibutton.id;
 
-		// if (newID != -1) {
-		// tileEntity.inventoryID = newID;
-		// ByteArrayOutputStream bos = new ByteArrayOutputStream(8);
-		// DataOutputStream outputStream = new DataOutputStream(bos);
-		// try {
-		// outputStream.writeInt(newID);
-		// outputStream.writeInt(tileEntity.xCoord);
-		// outputStream.writeInt(tileEntity.yCoord);
-		// outputStream.writeInt(tileEntity.zCoord);
-		// } catch (Exception ex) {
-		// ex.printStackTrace();
-		// }
-		//
-		// Packet250CustomPayload packet = new Packet250CustomPayload();
-		// packet.channel = PacketHandler.BUTTON_PRESSED;
-		// packet.data = bos.toByteArray();
-		// packet.length = bos.size();
-		// PacketDispatcher.sendPacketToServer(packet);
-		// }
+		if(ID != subScreen){
+		 ByteArrayOutputStream bos = new ByteArrayOutputStream(8);
+		 DataOutputStream outputStream = new DataOutputStream(bos);
+		 try {
+		 outputStream.writeInt(subScreen);
+		 outputStream.writeInt(tileEntity.xCoord);
+		 outputStream.writeInt(tileEntity.yCoord);
+		 outputStream.writeInt(tileEntity.zCoord);
+		 } catch (Exception ex) {
+		 ex.printStackTrace();
+		 }
+		
+		 Packet250CustomPayload packet = new Packet250CustomPayload();
+		 packet.channel = PacketHandler.SCREEN_PRESSED;
+		 packet.data = bos.toByteArray();
+		 packet.length = bos.size();
+		 PacketDispatcher.sendPacketToServer(packet);
+		 }
 	}
 
 }
