@@ -25,7 +25,7 @@ public class TileEntityManualGenerator extends TileEntityPowerGenerator implemen
     private float rotation;
     private final static LocalDirection outputDirection = LocalDirection.BACK;
 
-    private static final float DRAG = 0.10f;
+    private static final float DRAG = 1.0f;
     private static final float ELECTRIC_DRAG = 0.20f;
 
     private float speed = 0;
@@ -42,14 +42,14 @@ public class TileEntityManualGenerator extends TileEntityPowerGenerator implemen
 
 	//System.out.println(this.worldObj.isRemote+" "+this.storedPlayerForce + " " + this.speed + " " + this.rotation);
 	if (this.storedPlayerForce > 0) {
-	    this.speed += this.storedPlayerForce * dt / 50;
+	    this.speed += this.storedPlayerForce * dt / 20;
 	    this.storedPlayerForce -= this.storedPlayerForce * dt;
 	}
 
-	this.speed -= DRAG * this.speed * dt*10;
+	this.speed -= DRAG * this.speed * dt;
 
-	while (rotation > 2 * Math.PI)
-	    rotation -= 2 * Math.PI;
+	while (rotation > 1)
+	    rotation -= 1;
     }
 
     @Override
@@ -95,9 +95,8 @@ public class TileEntityManualGenerator extends TileEntityPowerGenerator implemen
     }
 
     @Override
-    public float getVoltage() {
-	System.out.println("Get Voltage:" +this.speed);
-	return speed;
+    public float getVoltage() { 
+	return speed * 2;
     }
 
 }

@@ -5,7 +5,7 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.client.model.ModelRenderer;
 import ip.industrialProcessing.client.render.ModelAnimatedMachine;
 
-public class ModelBatteryBox extends ModelAnimatedMachine {
+public class ModelEnergyCell extends ModelAnimatedMachine {
 
     // fields
     ModelRenderer Support1;
@@ -51,7 +51,7 @@ public class ModelBatteryBox extends ModelAnimatedMachine {
     ModelRenderer MeterBox1;
     ModelRenderer MeterBox2;
 
-    public ModelBatteryBox() {
+    public ModelEnergyCell() {
 	textureWidth = 64;
 	textureHeight = 32;
 

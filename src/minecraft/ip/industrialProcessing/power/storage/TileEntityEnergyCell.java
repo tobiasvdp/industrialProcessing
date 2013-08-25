@@ -13,42 +13,40 @@ import ip.industrialProcessing.power.PowerHelper;
 import ip.industrialProcessing.power.TileEntityPowerGenerator;
 
 // This isn't an actual battery, as it has input and outputs, so the resistance defined here is the resistance the input network sees this "battery" as
-public class TileEntityBatteryBox extends TileEntityPowerGenerator implements IPowerAcceptor, IAnimationProgress {
+public class TileEntityEnergyCell extends TileEntityPowerGenerator implements IPowerAcceptor, IAnimationProgress {
 
-    public TileEntityBatteryBox() {
+    public TileEntityEnergyCell() {
 	super(100);
     }
 
     private static final LocalDirection inputSide = LocalDirection.FRONT;
     private static final LocalDirection outputSide = LocalDirection.BACK;
 
-    private float charge = 0;
-    private float capacitance = 1000; 
- 
+    private float storedJoules = 0;
+    private float totalJouleCapacity = 50000;
 
     @Override
-    public float getAnimationProgress(float scale) {
-	return this.getVoltage() * scale * 24f;
+    public float getAnimationProgress(float scale) { 
+	return this.storedJoules / this.totalJouleCapacity * scale;
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
 	super.writeToNBT(nbt);
-	nbt.setFloat("Charge", this.charge);
-	nbt.setFloat("Capacity", this.capacitance);
+	nbt.setFloat("Charge", this.storedJoules);
+	nbt.setFloat("Capacity", this.totalJouleCapacity);
     }
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
 	super.readFromNBT(nbt);
-	this.charge = nbt.getFloat("Charge");
-	this.capacitance = nbt.getFloat("Capacity");
+	this.storedJoules = nbt.getFloat("Charge");
+	this.totalJouleCapacity = nbt.getFloat("Capacity");
     }
-    
+
     @Override
-    public void updateEntity() {
-        System.out.println("Charge"+this.charge+" "+this.worldObj.isRemote);
-        super.updateEntity();
+    public void updateEntity() { 
+	super.updateEntity();
     }
 
     @Override
@@ -59,19 +57,21 @@ public class TileEntityBatteryBox extends TileEntityPowerGenerator implements IP
 
     @Override
     public float getVoltage() {
-	return this.charge / this.capacitance;
+	return this.storedJoules / this.totalJouleCapacity * 12f;
     }
 
     @Override
-    public float getResistance(ForgeDirection side, float voltage) {  
-	float storedVoltage = this.getVoltage();
-	return PowerHelper.getResistanceForStorage(voltage, storedVoltage+1);
+    public float getResistance(ForgeDirection side, float voltage) { 
+	return 15+PowerHelper.getResistanceForStorage(this.storedJoules, this.totalJouleCapacity);
     }
 
     @Override
     public void applyPower(ForgeDirection side, float coulombs, float voltage) {
-	this.charge += coulombs;
-	notifyBlockChange();
+	if (this.storedJoules < this.totalJouleCapacity) {
+	    float energy = PowerHelper.getEnergy(coulombs, voltage);
+	    this.storedJoules = Math.min(this.storedJoules + energy, this.totalJouleCapacity);
+	    notifyBlockChange();
+	}
     }
 
     @Override
@@ -87,8 +87,11 @@ public class TileEntityBatteryBox extends TileEntityPowerGenerator implements IP
 
     @Override
     public float getCharge(float amount) {
-	float delta = Math.min(amount, this.charge);
-	this.charge -= delta;  
-	return delta;
-    } 
+	float voltage = getVoltage();
+	float energy = PowerHelper.getEnergy(amount, voltage);
+	float delta = Math.min(energy, this.storedJoules);
+	this.storedJoules -= delta;
+	notifyBlockChange();
+	return PowerHelper.getCharge(delta, voltage);
+    }
 }

@@ -60,9 +60,10 @@ public class ModelCrankGenerator extends ModelAnimatedMachine {
     ModelRenderer Crank2;
     ModelRenderer Crank3;
     ModelRenderer Crank1;
+    private boolean crank;
 
-    public ModelCrankGenerator() {
-
+    public ModelCrankGenerator(boolean crank) {
+	this.crank = crank;
 	textureWidth = 64;
 	textureHeight = 32;
 
@@ -407,9 +408,11 @@ public class ModelCrankGenerator extends ModelAnimatedMachine {
 	Rotor180.render(f5);
 	Rotor144m.render(f5);
 	Rotor162m.render(f5);
-	Crank2.render(f5);
-	Crank3.render(f5);
-	Crank1.render(f5);
+	if (crank) {
+	    Crank2.render(f5);
+	    Crank3.render(f5);
+	    Crank1.render(f5);
+	}
 	GL11.glPopMatrix();
 	Octagon1.render(f5);
 	Octagon2.render(f5);

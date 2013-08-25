@@ -26,7 +26,7 @@ public class TileEntityVoltMeter extends TileEntityMachine implements IPowerAcce
 	    this.inputs = 0;
 	    notifyBlockChange();
 	} 
-	this.angle = Math.min(1, averageVoltage / 24f); // MAX Voltage = 24
+	this.angle = Math.min(1, averageVoltage / 48f); // MAX Voltage = 48
     }
 
     @Override

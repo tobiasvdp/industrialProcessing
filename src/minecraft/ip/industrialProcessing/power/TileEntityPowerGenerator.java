@@ -44,7 +44,7 @@ public abstract class TileEntityPowerGenerator extends TileEntityMachine impleme
 	if (!searched)
 	    searchForPowerAcceptors();
 
-	this.powerManager.distributePower(this);
+	this.powerManager.distributePower(this, this.worldObj);
     }
 
     public void searchForPowerAcceptors() {

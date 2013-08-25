@@ -29,7 +29,6 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
 	if (unverified)
 	    updateConnections();
     }
- 
 
     protected abstract TransportConnectionState getState(TileEntity entity, ForgeDirection direction);
 
@@ -96,5 +95,6 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
 	for (int i = 0; i < stateInts.length; i++) {
 	    states[i] = TransportConnectionState.values()[stateInts[i]];
 	}
+	unverified = false;
     }
 }

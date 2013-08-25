@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 public class PowerDistributorManager {
@@ -45,7 +46,7 @@ public class PowerDistributorManager {
 	if (acceptor != null) {
 	    ForgeDirection opposite = direction.getOpposite();
 	    if (acceptor.canAcceptPower(opposite)) {
-		connections.add(new PowerAcceptorConnection(acceptor, opposite));
+		connections.add(new PowerAcceptorConnection(entity.xCoord + direction.offsetX, entity.yCoord + direction.offsetY, entity.zCoord + direction.offsetZ, opposite));
 	    }
 	}
     }
@@ -60,36 +61,43 @@ public class PowerDistributorManager {
 	return null;
     }
 
-    public float getResistance(float voltage) {
-	return this.distributor.getResistance(voltage);
+    public float getResistance(float voltage, World world) {
+	return this.distributor.getResistance(voltage, world);
     }
 
-    public void distributePower(float voltage, float coulombs) {
-	this.distributor.distributePower(voltage, coulombs);
+    public void distributePower(float voltage, float coulombs, World world) {
+	this.distributor.distributePower(voltage, coulombs, world);
     }
 
     public void writeToNBT(NBTTagCompound nbt) {
-	PowerAcceptorConnection[] connections = this.distributor.getOutputs();
-	int[] directions = new int[connections.length];
-	for (int i = 0; i < connections.length; i++) {
-	    directions[i] = connections[i].connectedFrom.getOpposite().ordinal();
-	}
-	nbt.setIntArray("Cons", directions);
+	/*
+	 * PowerAcceptorConnection[] connections =
+	 * this.distributor.getOutputs(); int[] directions = new
+	 * int[connections.length]; for (int i = 0; i < connections.length; i++)
+	 * { directions[i] =
+	 * connections[i].connectedFrom.getOpposite().ordinal(); }
+	 * nbt.setIntArray("Cons", directions);
+	 */
+	this.distributor.writeToNBT(nbt);
     }
 
     public void readFromNBT(NBTTagCompound nbt) {
-	int[] directions = nbt.getIntArray("Cons");
-	ArrayList<PowerAcceptorConnection> connections = new ArrayList<PowerAcceptorConnection>(directions.length);
-	for (int i = 0; i < directions.length; i++) {
-	    ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[directions[i]];
-	    searchPowerAcceptor(direction, connections);
-	}
-	PowerAcceptorConnection[] outputs = connections.toArray(new PowerAcceptorConnection[connections.size()]);
-	this.distributor.setOutputs(outputs);
+	this.distributor.readFromNBT(nbt);
+	/*
+	 * int[] directions = nbt.getIntArray("Cons");
+	 * ArrayList<PowerAcceptorConnection> connections = new
+	 * ArrayList<PowerAcceptorConnection>(directions.length); for (int i =
+	 * 0; i < directions.length; i++) { ForgeDirection direction =
+	 * ForgeDirection.VALID_DIRECTIONS[directions[i]];
+	 * searchPowerAcceptor(direction, connections); }
+	 * PowerAcceptorConnection[] outputs = connections.toArray(new
+	 * PowerAcceptorConnection[connections.size()]);
+	 * this.distributor.setOutputs(outputs);
+	 */
     }
 
-    public void distributePower(IPowerProducer generator) {
-	distributePower(generator, 1 / 20F, 1f);
+    public void distributePower(IPowerProducer generator, World world) {
+	distributePower(generator, 1 / 20F, 1f, world);
     }
 
     /**
@@ -103,13 +111,13 @@ public class PowerDistributorManager {
      * @param tau
      *            time constant
      */
-    public void distributePower(IPowerProducer generator, float time, float tau) {
-	float voltage = generator.getVoltage(); 
-	float networkResistance = this.distributor.getResistance(voltage);
+    public void distributePower(IPowerProducer generator, float time, float tau, World world) {
+	float voltage = generator.getVoltage();
+	float networkResistance = this.distributor.getResistance(voltage, world);
 	float networkResistanceSquared = networkResistance * networkResistance;
 	float current = (voltage / networkResistanceSquared * tau);
-	float charge = current * time;	
+	float charge = current * time;
 	charge = generator.getCharge(charge); // feedback to the generator
-	this.distributePower(voltage, charge);
+	this.distributePower(voltage, charge, world);
     }
 }

@@ -5,7 +5,7 @@ public class PowerHelper {
 	float filled = storedEnergy / maxEnergy;
 	if (filled == 1)
 	    return Float.POSITIVE_INFINITY;
-	float ohms = -1 / (float) Math.log(filled);
+	float ohms = -1 / (float) Math.log(filled) +1;
 	if (Float.isNaN(ohms))
 	    return Float.POSITIVE_INFINITY;
 	return ohms;
