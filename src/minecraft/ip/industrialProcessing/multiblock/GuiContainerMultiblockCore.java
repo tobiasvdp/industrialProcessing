@@ -121,8 +121,8 @@ public class GuiContainerMultiblockCore extends GuiContainer {
 		int y = (height - ySize) / 2;
 		// make buttons
 		// id, x, y, width, height, text
-		buttonList.add(new GuiButton(1, 175 + x, 115 + y, 18, 18, ""));
-		GuiButton button = new GuiButton(0, 175 + x, 141 + y, 18, 18, "");
+		buttonList.add(new GuiButtonCustom(1, 173 + x, 107 + y, 23, 29, ""));
+		GuiButtonCustom button = new GuiButtonCustom(0, 173 + x, 137 + y, 23, 29, "");
 		button.enabled=false;
 		buttonList.add(button);
 

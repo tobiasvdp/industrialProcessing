@@ -86,7 +86,7 @@ public class ClientProxy extends CommonProxy {
 	private static final ModelMultiblockFrameConnected modelMultiblockFrameConnected = new ModelMultiblockFrameConnected();
 	private static final ModelMultiblockFrameSidePanel modelMultiblockFrameSidePanel = new ModelMultiblockFrameSidePanel();
 	private static final ModelMultiblockFrameTower modelMultiblockFrameTower = new ModelMultiblockFrameTower();
-	private static final ModelMultiblockWeldingStation modelMultiblockWeldingStation = new ModelMultiblockWeldingStation();
+	public static final ModelMultiblockWeldingStation modelMultiblockWeldingStation = new ModelMultiblockWeldingStation();
 	private static final ModelMultiblockWeldingStationScreen modelMultiblockWeldingStationScreen = new ModelMultiblockWeldingStationScreen();
 
 	@Override

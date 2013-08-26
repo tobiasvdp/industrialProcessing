@@ -51,8 +51,7 @@ public class RendererBlock implements ISimpleBlockRenderingHandler{
         this.render(renderer, world, block, x, y, z);
         return true;
     }
-
-
+    
     @Override
     public boolean shouldRender3DInInventory()
     {

@@ -10,6 +10,7 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
+import ic2.api.Direction;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.multiblock.interfaces.ITileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
@@ -25,7 +26,7 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 	private BlockForward angle = BlockForward.INVALID;
 	private boolean locked;
 	private boolean init;
-	private boolean[] connectedSides = new boolean[6];
+	public boolean[] connectedSides = new boolean[6];
 	public int modelID;
 	private int count = 0;
 
@@ -259,6 +260,6 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 		return BlockMachine.getForwardFromMetadata(meta);
 	}
 	public ItemStack[][][] getItemStackLayout(){
-		return layout.getItemStackLayout(worldObj, xCoord, yCoord, zCoord, angle);
+		return layout.getItemStackLayout(worldObj, xCoord, yCoord, zCoord, BlockForward.NORTH);
 	}
 }

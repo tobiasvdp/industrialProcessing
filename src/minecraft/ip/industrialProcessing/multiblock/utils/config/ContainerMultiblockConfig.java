@@ -27,33 +27,33 @@ public class ContainerMultiblockConfig extends ContainerMultiblockCoreInv {
 		//blockrender.
 		Holder placeholder = new Holder();
 				
-		ItemStack[][][] layout = entity.getItemStackLayout();
-		
-		int size = layout.length * layout[0].length * layout[0][0].length;
-		int xbase = (3-layout.length)/2;
-		int ybase = (3-layout[0].length)/2;
-		int zbase = (3-layout[0][0].length)/2;
-		placeholder.setStackSize(size);
-		slots = new Slot[size];
-		
-		int count = 0;
-		for (int i = 0; i < layout.length; i++) {
-			for (int j = 0; j < layout[0].length; j++) {
-				for (int k = 0; k < layout[0][0].length; k++) {
-					ItemStack stack =  layout[i][j][k];
-					if (stack != null) {
-						slots[count] = new Slot(placeholder, count, 54+((i+xbase)*12)+((k+zbase)*12), 126-((j+ybase)*52)-((k+zbase)*8)+((i+xbase)*8));
-						slots[count].putStack(stack);
-						addSlotToContainer(slots[count]);
-					}
-					else{
-						slots[count] = new Slot(placeholder, count, 54+((i+xbase)*12)+((k+zbase)*12), 126-((j+ybase)*52)-((k+zbase)*8)+((i+xbase)*8));
-						addSlotToContainer(slots[count]);
-					}
-					count++;
-				}
-			}
-		}
+//		ItemStack[][][] layout = entity.getItemStackLayout();
+//		
+//		int size = layout.length * layout[0].length * layout[0][0].length;
+//		int xbase = (3-layout.length)/2;
+//		int ybase = (3-layout[0].length)/2;
+//		int zbase = (3-layout[0][0].length)/2;
+//		placeholder.setStackSize(size);
+//		slots = new Slot[size];
+//		
+//		int count = 0;
+//		for (int i = 0; i < layout.length; i++) {
+//			for (int j = 0; j < layout[0].length; j++) {
+//				for (int k = 0; k < layout[0][0].length; k++) {
+//					ItemStack stack =  layout[i][j][k];
+//					if (stack != null) {
+//						slots[count] = new Slot(placeholder, count, 54+((i+xbase)*12)+((k+zbase)*12), 126-((j+ybase)*52)-((k+zbase)*8)+((i+xbase)*8));
+//						slots[count].putStack(stack);
+//						addSlotToContainer(slots[count]);
+//					}
+//					else{
+//						slots[count] = new Slot(placeholder, count, 54+((i+xbase)*12)+((k+zbase)*12), 126-((j+ybase)*52)-((k+zbase)*8)+((i+xbase)*8));
+//						addSlotToContainer(slots[count]);
+//					}
+//					count++;
+//				}
+//			}
+//		}
 	}
 	public class Holder implements IInventory{
 		ItemStack[] stacks = new ItemStack[1];
