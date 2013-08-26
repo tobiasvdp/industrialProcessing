@@ -27,6 +27,8 @@ import ip.industrialProcessing.multiblock.block.tank.BlockMultiblockTankInput;
 import ip.industrialProcessing.multiblock.block.tank.BlockMultiblockTankOutput;
 import ip.industrialProcessing.multiblock.block.weldingStation.BlockMultiblockWeldingStationRight;
 import ip.industrialProcessing.multiblock.block.weldingStation.BlockMultiblockWeldingStationScreen;
+import ip.industrialProcessing.multiblock.core.block.HotPress.BLmultiblockHotPress;
+import ip.industrialProcessing.multiblock.dummy.block.BLmultiblockFrame;
 import ip.industrialProcessing.multiblock.machine.blastFurnace.BlockMultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.machine.crusher.BlockMultiblockCrusher;
 import ip.industrialProcessing.multiblock.machine.mixer.BlockMultiblockMixer;
@@ -86,4 +88,8 @@ public interface ISetupMachineBlocks {
 	public final static BlockTransportFluids blockTransportFluids = new BlockTransportFluids();
 	public final static BlockPump blockPump = new BlockPump();
 	public final static BlockTank blockTank = new BlockTank();
+	
+	//new multiblocks
+	public final static BLmultiblockFrame BLmultiblockFrame = new BLmultiblockFrame();
+	public final static BLmultiblockHotPress BLmultiblockHotPress = new BLmultiblockHotPress();
 }

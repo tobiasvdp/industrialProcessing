@@ -11,6 +11,7 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class MultiblockItemStack {
 	private ArrayList<Integer> validIDs = new ArrayList<Integer>();
+	private ArrayList<Integer> validSides = new ArrayList<Integer>();
 	private ItemStack itemStack;
 	private boolean input;
 	private boolean output;
@@ -113,6 +114,15 @@ public class MultiblockItemStack {
 				itemStack = null;
 			return true;
 
+		}
+		return false;
+	}
+
+	public boolean hasSide(int side) {
+		for (int i = 0; i < validSides.size(); i++) {
+			if (validIDs.get(i) == side) {
+				return true;
+			}
 		}
 		return false;
 	}

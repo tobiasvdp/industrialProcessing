@@ -23,6 +23,8 @@ import ip.industrialProcessing.multiblock.block.tank.TileEntityMultiblockTankInp
 import ip.industrialProcessing.multiblock.block.tank.TileEntityMultiblockTankOutput;
 import ip.industrialProcessing.multiblock.block.weldingStation.TileEntityMultiblockWeldingStationRight;
 import ip.industrialProcessing.multiblock.block.weldingStation.TileEntityMultiblockWeldingStationScreen;
+import ip.industrialProcessing.multiblock.core.block.HotPress.TEmultiblockHotPress;
+import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
 import ip.industrialProcessing.multiblock.machine.blastFurnace.TileEntityMultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.machine.crusher.TileEntityMultiblockCrusher;
 import ip.industrialProcessing.multiblock.machine.mixer.TileEntityMultiblockMixer;
@@ -85,8 +87,16 @@ public class ConfigMachineBlocks {
 	private int voltMeterBlockID = 901;
 	private int ampMeterBlockID = 902;
 	private int EnergyCellBlockID = 903; 
+	
+	//new multiblocks
+	private int BLmultiblockFrame = 720;
+	private int BLmultiblockHotPress = 721;
 
 	public void registerMachineBlocks() {
+		//new multiblocks
+		registerMachineBlock(IndustrialProcessing.BLmultiblockFrame, "IP.MBD.Frame", "Frame", TEmultiblockDummy.class);
+		registerMachineBlock(IndustrialProcessing.BLmultiblockHotPress, "IP.MBC.HotPress", "Hot press", TEmultiblockHotPress.class);
+		
 		//machines
 		registerMachineBlock(IndustrialProcessing.blockCrusher, "IP.Machine.Crusher", "Ore Crusher", TileEntityCrusher.class);
 		registerMachineBlock(IndustrialProcessing.blockFilter, "IP.Machine.Filter", "Ore Filter", TileEntityFilter.class);
@@ -142,7 +152,12 @@ public class ConfigMachineBlocks {
 	public static ConfigMachineBlocks getInstance() {
 		return instance;
 	}
-
+	public static int getBLmultiblockHotPress() {
+		return getInstance().BLmultiblockHotPress;
+	}
+	public static int getBLmultiblockFrame() {
+		return getInstance().BLmultiblockFrame;
+	}
 	public static int getFilterBlockID() {
 		return getInstance().filterBlockId;
 	}
