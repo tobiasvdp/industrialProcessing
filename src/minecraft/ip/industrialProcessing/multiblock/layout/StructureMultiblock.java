@@ -1,5 +1,6 @@
 package ip.industrialProcessing.multiblock.layout;
 
+import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
@@ -44,19 +45,12 @@ public class StructureMultiblock {
 		}
 	}
 
-	public FacingDirection isLayoutValid(World world, int xCore, int yCore, int zCore, FacingDirection dir) {
+	public MultiblockState isLayoutValid(World world, int xCore, int yCore, int zCore, FacingDirection dir) {
 		if (layouts[dir.ordinal()].isLayoutValid(world, xCore, yCore, zCore)) {
-			return dir;
+			return MultiblockState.COMPLETED;
 		} else {
-			for (FacingDirection direction : FacingDirection.values()) {
-				if (direction != FacingDirection.Invalid && direction != dir) {
-					if (layouts[direction.ordinal()].isLayoutValid(world, xCore, yCore, zCore)) {
-						return direction;
-					}
-				}
-			}
+			return MultiblockState.CONNECTED;
 		}
-		return FacingDirection.Invalid;
 	}
 
 }

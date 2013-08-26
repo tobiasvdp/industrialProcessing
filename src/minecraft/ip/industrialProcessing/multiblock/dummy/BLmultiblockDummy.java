@@ -1,6 +1,7 @@
 package ip.industrialProcessing.multiblock.dummy;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
 import ip.industrialProcessing.multiblock.interfaces.ITileEntityMultiblockBlock;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import net.minecraft.block.Block;
@@ -66,5 +67,15 @@ public class BLmultiblockDummy extends BlockContainer {
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack itemStack) {
 		super.onBlockPlacedBy(world, x, y, z, entityLivingBase, itemStack);
 		((TEmultiblockDummy)world.getBlockTileEntity(x, y, z)).searchForCore();
+	}
+	
+	@Override
+	public boolean removeBlockByPlayer(World world, EntityPlayer player, int x, int y, int z) {
+		TEmultiblockCore core = ((TEmultiblockDummy) world.getBlockTileEntity(x, y, z)).getCore();
+		((TEmultiblockDummy) world.getBlockTileEntity(x, y, z)).delCore();
+		world.setBlockToAir(x, y, z);
+		if(core!=null)
+		core.onLayoutChange();
+		return true;
 	}
 }

@@ -22,7 +22,7 @@ public final class LayoutTransformer {
 		}
 	}
 
-	private static LayoutMultiblock transformWest(LayoutMultiblock layout) {
+	private static LayoutMultiblock transformEast(LayoutMultiblock layout) {
 		LayoutMultiblock newLayout = new LayoutMultiblock(layout.getSizeFront(), layout.getSizeBack(), layout.getSizeRight(), layout.getSizeLeft(), layout.getSizeUp(), layout.getSizeDown());
 		LayoutBlockDescription[][][] layoutArray = layout.getLayout();
 				
@@ -71,7 +71,7 @@ public final class LayoutTransformer {
  		return newLayout;
 	}
 
-	private static LayoutMultiblock transformEast(LayoutMultiblock layout) {
+	private static LayoutMultiblock transformWest(LayoutMultiblock layout) {
 		LayoutMultiblock newLayout = new LayoutMultiblock(layout.getSizeBack(), layout.getSizeFront(), layout.getSizeLeft(), layout.getSizeRight(), layout.getSizeUp(), layout.getSizeDown());
 		LayoutBlockDescription[][][] layoutArray = layout.getLayout();
 		

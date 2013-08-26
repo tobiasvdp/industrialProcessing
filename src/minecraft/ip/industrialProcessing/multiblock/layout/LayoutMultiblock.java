@@ -58,7 +58,7 @@ public class LayoutMultiblock {
 				for (int k = 0; k < layout[0][0].length; k++) {
 					int xBlock = xCore - this.xCore + i;
 					int yBlock = yCore - this.yCore + j;
-					int zBlock = zCore - this.zCore + k;
+					int zBlock = zCore - this.zCore - k;
 					if (layout[i][j][k] != null) {
 						if (!layout[i][j][k].isValidID(world.getBlockId(xBlock, yBlock, zBlock))) {
 							return false;

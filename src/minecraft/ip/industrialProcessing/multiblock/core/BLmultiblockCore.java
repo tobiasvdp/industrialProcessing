@@ -51,5 +51,11 @@ public abstract class BLmultiblockCore extends BlockContainer{
 		}
 		return canPlace;
 	}
+	@Override
+	public boolean removeBlockByPlayer(World world, EntityPlayer player, int x, int y, int z) {
+		((TEmultiblockCore) world.getBlockTileEntity(x, y, z)).destroyMultiblock();
+		world.setBlockToAir(x, y, z);
+		return true;
+	}
 
 }
