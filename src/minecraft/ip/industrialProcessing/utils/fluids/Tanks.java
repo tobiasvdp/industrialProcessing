@@ -3,7 +3,7 @@ package ip.industrialProcessing.utils.fluids;
 import java.util.ArrayList;
 
 import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.multiblock.utils.tank.MultiblockTank;
+import ip.industrialProcessing.multiblock.utils.MultiblockTank;
 import ip.industrialProcessing.recipes.RecipeFluidWorker;
 import ip.industrialProcessing.utils.mapping.MappingIDtoSlot;
 import net.minecraft.item.ItemStack;

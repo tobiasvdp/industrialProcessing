@@ -2,8 +2,8 @@ package ip.industrialProcessing.multiblock.dummy;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
-import ip.industrialProcessing.multiblock.interfaces.ITileEntityMultiblockBlock;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
+import ip.industrialProcessing.utils.inventories.InventoryUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -16,7 +16,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BLmultiblockDummy extends BlockContainer {
+public abstract class BLmultiblockDummy extends BlockContainer {
 
 	public BLmultiblockDummy(int blockID, String name, CreativeTabs tab) {
 		super(blockID, Material.iron);
@@ -31,7 +31,7 @@ public class BLmultiblockDummy extends BlockContainer {
 		super.onNeighborBlockChange(world, x, y, z, par5);
 
 	}
-	
+
 	@Override
 	public boolean isOpaqueCube() {
 		return false;
@@ -41,21 +41,22 @@ public class BLmultiblockDummy extends BlockContainer {
 	public boolean renderAsNormalBlock() {
 		return false;
 	}
-    @Override
-    public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l) {
-	return false;
-    }
 
-    @Override
-    public int getRenderBlockPass() {
-	return 1;
-    }
-	
+	@Override
+	public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l) {
+		return false;
+	}
+
+	@Override
+	public int getRenderBlockPass() {
+		return 1;
+	}
+
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
-		return true;
+		return false;
 	}
-	
+
 	@Override
 	public boolean canPlaceBlockAt(World par1World, int x, int y, int z) {
 		boolean canPlace = true;
@@ -69,25 +70,21 @@ public class BLmultiblockDummy extends BlockContainer {
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world) {
-		return new TEmultiblockDummy();
-	}
-	
-	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack itemStack) {
 		super.onBlockPlacedBy(world, x, y, z, entityLivingBase, itemStack);
-		if(((TEmultiblockDummy)world.getBlockTileEntity(x, y, z)).searchForCore()){
-			((TEmultiblockDummy)world.getBlockTileEntity(x, y, z)).getCore().onLayoutChange();
+		if (((TEmultiblockDummy) world.getBlockTileEntity(x, y, z)).searchForCore()) {
+			((TEmultiblockDummy) world.getBlockTileEntity(x, y, z)).getCore().onLayoutChange();
 		}
 	}
-	
+
 	@Override
 	public boolean removeBlockByPlayer(World world, EntityPlayer player, int x, int y, int z) {
+		InventoryUtils.DropInventoryContents(world, x, y, z);
 		TEmultiblockCore core = ((TEmultiblockDummy) world.getBlockTileEntity(x, y, z)).getCore();
 		((TEmultiblockDummy) world.getBlockTileEntity(x, y, z)).delCore();
-		world.setBlockToAir(x, y, z);
-		if(core!=null)
-		core.onLayoutChange();
+		world.destroyBlock(x, y, z, true);
+		if (core != null)
+			core.onLayoutChange();
 		return true;
 	}
 }

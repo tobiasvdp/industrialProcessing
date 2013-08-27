@@ -11,7 +11,7 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
-import ip.industrialProcessing.multiblock.utils.tank.MultiblockTank;
+import ip.industrialProcessing.multiblock.utils.MultiblockTank;
 import ip.industrialProcessing.utils.fluids.ICoreTanks;
 import ip.industrialProcessing.utils.fluids.Tanks;
 import ip.industrialProcessing.utils.mapping.MappingIDtoSlot;

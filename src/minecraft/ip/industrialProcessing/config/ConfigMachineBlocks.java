@@ -15,21 +15,10 @@ import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import ip.industrialProcessing.machines.oxygenFurnace.TileEntityOxygenFurnace;
 import ip.industrialProcessing.machines.pelletExtruder.TileEntityPelletExtruder;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
-import ip.industrialProcessing.multiblock.block.frame.TileEntityMachineFrame;
-import ip.industrialProcessing.multiblock.block.inventory.TileEntityMultiblockInvInput;
-import ip.industrialProcessing.multiblock.block.inventory.TileEntityMultiblockInvOutput;
-import ip.industrialProcessing.multiblock.block.power.TileEntityMultiblockPowerInput;
-import ip.industrialProcessing.multiblock.block.tank.TileEntityMultiblockTankInput;
-import ip.industrialProcessing.multiblock.block.tank.TileEntityMultiblockTankOutput;
-import ip.industrialProcessing.multiblock.block.weldingStation.TileEntityMultiblockWeldingStationRight;
-import ip.industrialProcessing.multiblock.block.weldingStation.TileEntityMultiblockWeldingStationScreen;
 import ip.industrialProcessing.multiblock.core.block.hotPress.TEmultiblockHotPress;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
-import ip.industrialProcessing.multiblock.machine.blastFurnace.TileEntityMultiblockBlastFurnace;
-import ip.industrialProcessing.multiblock.machine.crusher.TileEntityMultiblockCrusher;
-import ip.industrialProcessing.multiblock.machine.mixer.TileEntityMultiblockMixer;
-import ip.industrialProcessing.multiblock.machine.weldingStation.TileEntityMultiblockWeldingStation;
+import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.TEmultiblockWeldingTableExt;
 import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
 import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
 import ip.industrialProcessing.power.meters.TileEntityAmpMeter;
@@ -68,19 +57,6 @@ public class ConfigMachineBlocks {
 	private int oxygenFurnaceID = 552;
 	private int pelletExtruderID = 553;
 
-	private int machineFrameBlockID = 600;
-	private int multiMachineInputBlockID = 601;
-	private int multiMachineOutputBlockID = 602;
-	private int BlockMultiblockTankInputID = 603;
-	private int BlockMultiblockTankOutputID = 604;
-	private int BlockMultiblockTankWeldingStationRightID = 605;
-	private int BlockMultiblockTankWeldingStationScreenID = 606;
-	private int BlockMultiblockPowerID = 607;
-	private int largeCrusherBlockID = 700;
-	private int largeMixerBlockID = 701;
-	private int BlockMultiblockBlastFurnaceID = 702;
-	private int BlockMultiblockWeldingStationID = 703;
-
 	private int manualGeneratorBlockID = 800; // Crank Generator
 	private int buildcraftGeneratorBlockID = 801; // Buildcraft Joule converter
 
@@ -94,13 +70,15 @@ public class ConfigMachineBlocks {
 	private int BLmultiblockHotPress = 721;
 	private int BLmultiblockWeldingStation = 722;
 	private int BLmultiblockScreen = 723;
+	private int BLmultiblockWeldingStationExt = 724;
 
 	public void registerMachineBlocks() {
-		//new multiblocks
+		//multiblocks
 		registerMachineBlock(IndustrialProcessing.BLmultiblockScreen, "IP.MBD.Screen", "Screen", TEmultiblockDummy.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockFrame, "IP.MBD.Frame", "Frame", TEmultiblockDummy.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockHotPress, "IP.MBC.HotPress", "Hot press", TEmultiblockHotPress.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockWeldingStation, "IP.MBC.WeldingStation", "Welding station", TEmultiblockWeldingStation.class);
+		registerMachineBlock(IndustrialProcessing.BLmultiblockWeldingTableExt, "IP.MBD.WeldingTableExt", "Welding station extention", TEmultiblockWeldingTableExt.class);
 		
 		//machines
 		registerMachineBlock(IndustrialProcessing.blockCrusher, "IP.Machine.Crusher", "Ore Crusher", TileEntityCrusher.class);
@@ -131,21 +109,6 @@ public class ConfigMachineBlocks {
 		registerMachineBlock(IndustrialProcessing.blockVoltMeter, "IP.Meter.Volt", "Volt Meter", TileEntityVoltMeter.class);
 		registerMachineBlock(IndustrialProcessing.blockAmpMeter, "IP.Meter.Amp", "Amp Meter", TileEntityAmpMeter.class);
 		registerMachineBlock(IndustrialProcessing.blockEnergyCell, "IP.EnergyCell", "Battery Box", TileEntityEnergyCell.class);
-		
-		//multiblocks
-		registerMachineBlock(IndustrialProcessing.blockMultiMachineInput, "MultiBlockInvIn", "Multiblock import", TileEntityMultiblockInvInput.class);
-		registerMachineBlock(IndustrialProcessing.blockMultiMachineOutput, "MultiBlockInvOut", "Multiblock export", TileEntityMultiblockInvOutput.class);
-		registerMachineBlock(IndustrialProcessing.blockMachineFrame, "MultiBlockFrame", "Multiblock Frame", TileEntityMachineFrame.class);
-		registerMachineBlock(IndustrialProcessing.blockMultiblockTankInput, "MultiBlockTankIn", "Multiblock tank hatch", TileEntityMultiblockTankInput.class);
-		registerMachineBlock(IndustrialProcessing.blockMultiblockTankOutput, "MultiBlockTankOut", "Multiblock tank drain", TileEntityMultiblockTankOutput.class);
-		registerMachineBlock(IndustrialProcessing.blockMultiblockPowerInput, "MultiBlockPowerIn", "Multiblock power input", TileEntityMultiblockPowerInput.class);
-		
-		registerMachineBlock(IndustrialProcessing.blockLargeCrusher, "IP.Machine.Multi.Crusher", "Large Crusher", TileEntityMultiblockCrusher.class);
-		registerMachineBlock(IndustrialProcessing.blockMultiblockMixer, "IP.Machine.Multi.Mixer", "Large mixer", TileEntityMultiblockMixer.class);
-		registerMachineBlock(IndustrialProcessing.blockMultiblockBlastFurnace, "IP.Machine.Multi.Blast", "Large blast furnace", TileEntityMultiblockBlastFurnace.class);
-		registerMachineBlock(IndustrialProcessing.blockMultiblockWeldingStation, "IP.Machine.Multi.Weld", "Welding station", TileEntityMultiblockWeldingStation.class);
-		registerMachineBlock(IndustrialProcessing.blockMultiblockWeldingStationRight, "IP.Machine.Multi.Weld.Right", "Welding station extention", TileEntityMultiblockWeldingStationRight.class);
-		registerMachineBlock(IndustrialProcessing.blockMultiblockWeldingStationScreen, "IP.Machine.Multi.Weld.Screen", "Welding station Screen", TileEntityMultiblockWeldingStationScreen.class);
 	}
 	private void registerMachineBlock(Block block, String uniqueId, String displayName, Class tileEntity) {
 		GameRegistry.registerBlock(block, uniqueId);
@@ -156,6 +119,9 @@ public class ConfigMachineBlocks {
 	
 	public static ConfigMachineBlocks getInstance() {
 		return instance;
+	}
+	public static int getBLmultiblockWeldingStationExt() {
+		return getInstance().BLmultiblockWeldingStationExt;
 	}
 	public static int getBLmultiblockScreen() {
 		return getInstance().BLmultiblockScreen;
@@ -186,24 +152,8 @@ public class ConfigMachineBlocks {
 		return getInstance().mixerBlockID;
 	}
 
-	public static int getMachineFrameBlockID() {
-		return getInstance().machineFrameBlockID;
-	}
-
-	public static int getLargeCrusherBlockID() {
-		return getInstance().largeCrusherBlockID;
-	}
-
 	public static int getDryerBlockID() {
 		return getInstance().dryerBlockID;
-	}
-
-	public static int getMultiMachineInputBlockID() {
-		return getInstance().multiMachineInputBlockID;
-	}
-	
-	public static int getMultiMachineOutputBlockID() {
-		return getInstance().multiMachineOutputBlockID;
 	}
 
 	public static int getClassifierBlockID() {
@@ -260,29 +210,4 @@ public class ConfigMachineBlocks {
 	public static int getOxygenFurnaceID() {
 		return getInstance().oxygenFurnaceID;
 	} 
-	public static int getBlockMultiblockTankInputID() {
-		return getInstance().BlockMultiblockTankInputID;
-	}
-	public static int getBlockMultiblockTankOutputID() {
-		return getInstance().BlockMultiblockTankOutputID;
-	} 
-	public static int getlargeMixerBlockID() {
-		return getInstance().largeMixerBlockID;
-	} 
-	public static int getBlockMultiblockBlastFurnaceID() {
-		return getInstance().BlockMultiblockBlastFurnaceID;
-	}
-	public static int getBlockMultiblockWeldingStationID() {
-		return getInstance().BlockMultiblockWeldingStationID;
-	}
-	public static int getBlockMultiblockTankWeldingStationRightID() {
-		return getInstance().BlockMultiblockTankWeldingStationRightID;
-	}
-	public static int getBlockMultiblockTankWeldingStationScreenID() {
-		return getInstance().BlockMultiblockTankWeldingStationScreenID;
-	}
-	public static int getBlockMultiblockPowerID() {
-		return getInstance().BlockMultiblockPowerID;
-	} 
-
 }

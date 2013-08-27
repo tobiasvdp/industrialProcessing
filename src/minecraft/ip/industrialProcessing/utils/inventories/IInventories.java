@@ -1,8 +1,8 @@
 package ip.industrialProcessing.utils.inventories;
 
 import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.multiblock.utils.MultiblockItemStack;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
-import ip.industrialProcessing.multiblock.utils.inventory.MultiblockItemStack;
 
 import java.util.ArrayList;
 

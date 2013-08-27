@@ -19,22 +19,11 @@ import ip.industrialProcessing.machines.mixer.BlockMixer;
 import ip.industrialProcessing.machines.oxygenFurnace.BlockOxygenFurnace;
 import ip.industrialProcessing.machines.pelletExtruder.BlockPelletExtruder;
 import ip.industrialProcessing.machines.thickener.BlockThickener;
-import ip.industrialProcessing.multiblock.block.frame.BlockMachineFrame;
-import ip.industrialProcessing.multiblock.block.inventory.BlockMultiblockInvInput;
-import ip.industrialProcessing.multiblock.block.inventory.BlockMultiblockInvOutput;
-import ip.industrialProcessing.multiblock.block.power.BlockMultiblockPowerInput;
-import ip.industrialProcessing.multiblock.block.tank.BlockMultiblockTankInput;
-import ip.industrialProcessing.multiblock.block.tank.BlockMultiblockTankOutput;
-import ip.industrialProcessing.multiblock.block.weldingStation.BlockMultiblockWeldingStationRight;
-import ip.industrialProcessing.multiblock.block.weldingStation.BlockMultiblockWeldingStationScreen;
 import ip.industrialProcessing.multiblock.core.block.hotPress.BLmultiblockHotPress;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.BLmultiblockWeldingStation;
-import ip.industrialProcessing.multiblock.dummy.block.BLmultiblockFrame;
-import ip.industrialProcessing.multiblock.dummy.block.BLmultiblockScreen;
-import ip.industrialProcessing.multiblock.machine.blastFurnace.BlockMultiblockBlastFurnace;
-import ip.industrialProcessing.multiblock.machine.crusher.BlockMultiblockCrusher;
-import ip.industrialProcessing.multiblock.machine.mixer.BlockMultiblockMixer;
-import ip.industrialProcessing.multiblock.machine.weldingStation.BlockMultiblockWeldingStation;
+import ip.industrialProcessing.multiblock.dummy.block.frame.BLmultiblockFrame;
+import ip.industrialProcessing.multiblock.dummy.block.screen.BLmultiblockScreen;
+import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.BLmultiblockWeldingTableExt;
 import ip.industrialProcessing.power.buildcraftGenerator.BlockBuildcraftGenerator;
 import ip.industrialProcessing.power.manualGenerator.BlockManualGenerator;
 import ip.industrialProcessing.power.meters.BlockAmpMeter;
@@ -71,29 +60,16 @@ public interface ISetupMachineBlocks {
 	public final static BlockVoltMeter blockVoltMeter = new BlockVoltMeter();
 	public final static BlockAmpMeter blockAmpMeter = new BlockAmpMeter();
 	public final static BlockEnergyCell blockEnergyCell = new BlockEnergyCell();
-
-	// create Multiblock Machines
-	public final static BlockMultiblockInvInput blockMultiMachineInput = new BlockMultiblockInvInput();
-	public final static BlockMultiblockInvOutput blockMultiMachineOutput = new BlockMultiblockInvOutput();
-	public final static BlockMultiblockTankInput blockMultiblockTankInput = new BlockMultiblockTankInput();
-	public final static BlockMultiblockTankOutput blockMultiblockTankOutput = new BlockMultiblockTankOutput();
-	public final static BlockMachineFrame blockMachineFrame = new BlockMachineFrame();
-	public final static BlockMultiblockCrusher blockLargeCrusher = new BlockMultiblockCrusher();
-	public final static BlockMultiblockMixer blockMultiblockMixer = new BlockMultiblockMixer();
-	public final static BlockMultiblockBlastFurnace blockMultiblockBlastFurnace = new BlockMultiblockBlastFurnace();
-	public final static BlockMultiblockWeldingStation blockMultiblockWeldingStation = new BlockMultiblockWeldingStation();
-	public final static BlockMultiblockWeldingStationScreen blockMultiblockWeldingStationScreen = new BlockMultiblockWeldingStationScreen();
-	public final static BlockMultiblockWeldingStationRight blockMultiblockWeldingStationRight = new BlockMultiblockWeldingStationRight();
-	public final static BlockMultiblockPowerInput blockMultiblockPowerInput = new BlockMultiblockPowerInput();
 	
 	// create fluidpipe
 	public final static BlockTransportFluids blockTransportFluids = new BlockTransportFluids();
 	public final static BlockPump blockPump = new BlockPump();
 	public final static BlockTank blockTank = new BlockTank();
 	
-	//new multiblocks
+	//multiblocks
 	public final static BLmultiblockFrame BLmultiblockFrame = new BLmultiblockFrame();
 	public final static BLmultiblockHotPress BLmultiblockHotPress = new BLmultiblockHotPress();
 	public final static BLmultiblockWeldingStation BLmultiblockWeldingStation= new BLmultiblockWeldingStation();
 	public final static BLmultiblockScreen BLmultiblockScreen= new BLmultiblockScreen();
+	public final static BLmultiblockWeldingTableExt BLmultiblockWeldingTableExt= new BLmultiblockWeldingTableExt();
 }

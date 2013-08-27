@@ -1,7 +1,7 @@
 package ip.industrialProcessing.multiblock.core;
 
-import ip.industrialProcessing.multiblock.TileEntityMultiblockBlock;
 import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
+import ip.industrialProcessing.utils.inventories.InventoryUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -52,7 +52,7 @@ public abstract class BLmultiblockCore extends BlockContainer {
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
-		return true;
+		return false;
 	}
 
 	@Override
@@ -83,8 +83,9 @@ public abstract class BLmultiblockCore extends BlockContainer {
 
 	@Override
 	public boolean removeBlockByPlayer(World world, EntityPlayer player, int x, int y, int z) {
+		InventoryUtils.DropInventoryContents(world, x, y, z);
 		((TEmultiblockCore) world.getBlockTileEntity(x, y, z)).destroyMultiblock();
-		world.setBlockToAir(x, y, z);
+		world.destroyBlock(x, y, z, true);
 		return true;
 	}
 

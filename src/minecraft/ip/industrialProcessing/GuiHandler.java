@@ -42,27 +42,6 @@ import ip.industrialProcessing.machines.pelletExtruder.TileEntityPelletExtruder;
 import ip.industrialProcessing.machines.thickener.ContainerThickener;
 import ip.industrialProcessing.machines.thickener.GuiContainerThickener;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
-import ip.industrialProcessing.multiblock.block.inventory.TileEntityMultiblockInvInput;
-import ip.industrialProcessing.multiblock.block.inventory.TileEntityMultiblockInvOutput;
-import ip.industrialProcessing.multiblock.block.tank.TileEntityMultiblockTankInput;
-import ip.industrialProcessing.multiblock.block.tank.TileEntityMultiblockTankOutput;
-import ip.industrialProcessing.multiblock.extended.inventory.ContainerMultiblockBlockInv;
-import ip.industrialProcessing.multiblock.extended.inventory.GuiContainerMultiblockBlockInv;
-import ip.industrialProcessing.multiblock.extended.inventory.TileEntityMultiblockBlockInv;
-import ip.industrialProcessing.multiblock.extended.inventory.TileEntityMultiblockCoreInv;
-import ip.industrialProcessing.multiblock.extended.inventory.tank.GuiContainerMultiblockBlockTank;
-import ip.industrialProcessing.multiblock.extended.inventory.tank.TileEntityMultiblockBlockTank;
-import ip.industrialProcessing.multiblock.machine.crusher.ContainerMultiblockCrusher;
-import ip.industrialProcessing.multiblock.machine.crusher.GuiContainerMultiblockCrusher;
-import ip.industrialProcessing.multiblock.machine.crusher.TileEntityMultiblockCrusher;
-import ip.industrialProcessing.multiblock.machine.mixer.ContainerMultiblockMixer;
-import ip.industrialProcessing.multiblock.machine.mixer.GuiContainerMultiblockMixer;
-import ip.industrialProcessing.multiblock.machine.mixer.TileEntityMultiblockMixer;
-import ip.industrialProcessing.multiblock.machine.weldingStation.ContainerMultiblockWeldingStation;
-import ip.industrialProcessing.multiblock.machine.weldingStation.GuiContainerMultiblockWeldingStation;
-import ip.industrialProcessing.multiblock.machine.weldingStation.TileEntityMultiblockWeldingStation;
-import ip.industrialProcessing.multiblock.utils.config.ContainerMultiblockConfig;
-import ip.industrialProcessing.multiblock.utils.config.GuiContainerMultiblockConfig;
 import ip.industrialProcessing.power.buildcraftGenerator.ContainerBuildcraftGenerator;
 import ip.industrialProcessing.power.buildcraftGenerator.GuiContainerBuildcraftGenerator;
 import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
@@ -107,20 +86,8 @@ public class GuiHandler implements IGuiHandler {
 		return new ContainerOxygenFurnace(player.inventory, (TileEntityOxygenFurnace) entity);
 	    if (entity instanceof TileEntityBlastFurnace)
 		return new ContainerBlastFurnace(player.inventory, (TileEntityBlastFurnace) entity);
-	    if (entity instanceof TileEntityMultiblockCrusher)
-		return new ContainerMultiblockCrusher(player.inventory, (TileEntityMultiblockCrusher) entity);
-	    if (entity instanceof TileEntityMultiblockMixer)
-		return new ContainerMultiblockMixer(player.inventory, (TileEntityMultiblockMixer) entity);
-	    if (entity instanceof TileEntityMultiblockBlockTank)
-		return new ContainerMultiblockBlockInv(player.inventory, (TileEntityMultiblockBlockTank) entity);
-	    if (entity instanceof TileEntityMultiblockBlockInv)
-		return new ContainerMultiblockBlockInv(player.inventory, (TileEntityMultiblockBlockInv) entity);
-	    if (entity instanceof TileEntityMultiblockWeldingStation)
-		return new ContainerMultiblockWeldingStation(player.inventory, (TileEntityMultiblockWeldingStation) entity);
 	    if (entity instanceof TileEntityBuildcraftGenerator)
 		return new ContainerBuildcraftGenerator(player.inventory, (TileEntityBuildcraftGenerator) entity);
-	} else if (ID == 1) {
-	    return new ContainerMultiblockConfig(player.inventory, (TileEntityMultiblockCoreInv) entity);
 	}
 	return null;
     }
@@ -158,26 +125,8 @@ public class GuiHandler implements IGuiHandler {
 		return new GuiContainerOxygenFurnace(player.inventory, (TileEntityOxygenFurnace) entity);
 	    if (entity instanceof TileEntityBlastFurnace)
 		return new GuiContainerBlastFurnace(player.inventory, (TileEntityBlastFurnace) entity);
-	    if (entity instanceof TileEntityMultiblockCrusher)
-		return new GuiContainerMultiblockCrusher(player.inventory, (TileEntityMultiblockCrusher) entity);
-	    if (entity instanceof TileEntityMultiblockMixer)
-		return new GuiContainerMultiblockMixer(player.inventory, (TileEntityMultiblockMixer) entity);
-	    if (entity instanceof TileEntityMultiblockInvInput)
-		return new GuiContainerMultiblockBlockInv(player.inventory, (TileEntityMultiblockBlockInv) entity, 0);
-	    if (entity instanceof TileEntityMultiblockInvOutput)
-		return new GuiContainerMultiblockBlockInv(player.inventory, (TileEntityMultiblockBlockInv) entity, 1);
-	    if (entity instanceof TileEntityMultiblockTankInput)
-		return new GuiContainerMultiblockBlockTank(player.inventory, (TileEntityMultiblockBlockTank) entity, 2);
-	    if (entity instanceof TileEntityMultiblockTankOutput)
-		return new GuiContainerMultiblockBlockTank(player.inventory, (TileEntityMultiblockBlockTank) entity, 3);
-	    if (entity instanceof TileEntityMultiblockWeldingStation)
-		return new GuiContainerMultiblockWeldingStation(player.inventory, (TileEntityMultiblockWeldingStation) entity);
-	    
 	    if (entity instanceof TileEntityBuildcraftGenerator)
 		return new GuiContainerBuildcraftGenerator(player.inventory, (TileEntityBuildcraftGenerator) entity);
-
-	} else if (ID == 1) {
-	    return new GuiContainerMultiblockConfig(player.inventory, (TileEntityMultiblockCoreInv) entity);
 	}
 	return null;
     }

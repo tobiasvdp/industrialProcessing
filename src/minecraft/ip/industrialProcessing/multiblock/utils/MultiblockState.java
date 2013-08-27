@@ -2,7 +2,6 @@ package ip.industrialProcessing.multiblock.utils;
 
 public enum MultiblockState {
 	DISCONNECTED, CONNECTED, COMPLETED;
-	
 	public static MultiblockState fromInt(int state){
 		for(MultiblockState st: MultiblockState.values()){
 			if (st.ordinal() == state)

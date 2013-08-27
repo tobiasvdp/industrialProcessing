@@ -122,10 +122,10 @@ public class MDmultiblockWeldingStation extends ModelingMultiblock{
 			Top.render(f5);
 			Desk.render(f5);
 			Back.render(f5);
-			FootRight.render(f5);
 			FootLeft.render(f5);
 			Door.render(f5);
-			HandleLeft.render(f5);
+			HandleRight.render(f5);
+			ConnectedPanelRight.render(f5);
 		}
 
 }

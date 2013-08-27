@@ -1,8 +1,6 @@
 package ip.industrialProcessing;
 
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
-import ip.industrialProcessing.multiblock.extended.inventory.TileEntityMultiblockBlockInv;
-import ip.industrialProcessing.multiblock.extended.inventory.TileEntityMultiblockCoreInv;
 import ip.industrialProcessing.packetHandlers.TileSyncHandler; 
 
 import java.io.ByteArrayInputStream;
@@ -42,7 +40,6 @@ public class PacketHandler implements IPacketHandler {
 			TileSyncHandler.handleAnimationSync(manager, packet, player);
 		}
 		if (packet.channel.equals(BUTTON_PRESSED)) {
-			TileEntityMultiblockBlockInv.handleNewInventoryID(manager, packet, player);
 		}  
 		if (packet.channel.equals(SYNC_CLIENT)) {
 			DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));

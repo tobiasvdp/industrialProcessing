@@ -1,7 +1,7 @@
 package ip.industrialProcessing.utils.fluids;
 
 import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.multiblock.utils.tank.MultiblockTank;
+import ip.industrialProcessing.multiblock.utils.MultiblockTank;
 import ip.industrialProcessing.utils.mapping.MappingIDtoSlot;
 
 import java.util.ArrayList;

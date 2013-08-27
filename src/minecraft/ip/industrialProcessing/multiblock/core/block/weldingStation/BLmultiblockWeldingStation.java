@@ -20,6 +20,6 @@ public class BLmultiblockWeldingStation extends BLmultiblockCore{
 
 	@Override
 	public int getRenderType() {
-		return ConfigRenderers.getrendererBlockMultiblockWeldingStationID();
+		return ConfigRenderers.getBLmultiblockWeldingStation();
 	}
 }

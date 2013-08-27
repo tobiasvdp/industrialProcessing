@@ -4,7 +4,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
 import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
-import ip.industrialProcessing.multiblock.utils.layout.MultiBlockStructureBlockDescription;
 
 public class LayoutMultiblock {
 
