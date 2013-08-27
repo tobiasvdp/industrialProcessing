@@ -57,6 +57,7 @@ public class TEmultiblockDummy extends TileEntity {
 		core.registerDummy(this);
 		modelConnection = core.setDummieModelConnection(this);
 		modelID = core.setDummieModelID(this);
+		setBlockRotation();
 		state = MultiblockState.CONNECTED;
 	}
 	
@@ -82,5 +83,9 @@ public class TEmultiblockDummy extends TileEntity {
 	}
 	public int getModelConnection(){
 		return modelConnection;
+	}
+	public void setBlockRotation(){
+		if(core != null)
+			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, core.getBlockMetadata(), 1);
 	}
 }

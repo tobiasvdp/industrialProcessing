@@ -25,7 +25,14 @@ public class ConfigRenderers {
 	private int rendererBlockMultiblockWeldingStationRightID;
 	private int rendererBlockMultiblockWeldingStationScreenID;
 	private int BLmultiblockWeldingStation;
+	private int BLmultiblockScreen;
 	
+	public static int getBLmultiblockScreen() {
+		return getInstance().BLmultiblockScreen;
+	}
+	public static void setBLmultiblockScreen(int value) {
+		getInstance().BLmultiblockScreen = value;
+	}
 	public static int getBLmultiblockWeldingStation() {
 		return getInstance().BLmultiblockWeldingStation;
 	}

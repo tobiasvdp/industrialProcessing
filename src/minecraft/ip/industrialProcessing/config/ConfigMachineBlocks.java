@@ -93,9 +93,11 @@ public class ConfigMachineBlocks {
 	private int BLmultiblockFrame = 720;
 	private int BLmultiblockHotPress = 721;
 	private int BLmultiblockWeldingStation = 722;
+	private int BLmultiblockScreen = 723;
 
 	public void registerMachineBlocks() {
 		//new multiblocks
+		registerMachineBlock(IndustrialProcessing.BLmultiblockScreen, "IP.MBD.Screen", "Screen", TEmultiblockDummy.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockFrame, "IP.MBD.Frame", "Frame", TEmultiblockDummy.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockHotPress, "IP.MBC.HotPress", "Hot press", TEmultiblockHotPress.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockWeldingStation, "IP.MBC.WeldingStation", "Welding station", TEmultiblockWeldingStation.class);
@@ -154,6 +156,9 @@ public class ConfigMachineBlocks {
 	
 	public static ConfigMachineBlocks getInstance() {
 		return instance;
+	}
+	public static int getBLmultiblockScreen() {
+		return getInstance().BLmultiblockScreen;
 	}
 	public static int getBLmultiblockWeldingStation() {
 		return getInstance().BLmultiblockWeldingStation;

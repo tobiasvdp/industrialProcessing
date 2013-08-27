@@ -12,11 +12,12 @@ public class TEmultiblockWeldingStation extends TEmultiblockCore{
 	static{
 		structure = new StructureMultiblock();
 		
-		LayoutMultiblock layout = new LayoutMultiblock(1, 1, 0, 0, 0, 0);
+		LayoutMultiblock layout = new LayoutMultiblock(1, 0, 0, 0, 1, 0);
 		layout.setCoreID(0,1, IndustrialProcessing.BLmultiblockWeldingStation.blockID);
 		
-		layout.setBlockID(-1, 0, 0, 0,1, IndustrialProcessing.BLmultiblockFrame.blockID);
-		layout.setBlockID(1, 0, 0, 0,2, IndustrialProcessing.BLmultiblockFrame.blockID);
+		layout.setBlockID(-1, 0, 0, 0,2, IndustrialProcessing.BLmultiblockFrame.blockID);
+		layout.setBlockID(0, 1, 0, 0,1, IndustrialProcessing.BLmultiblockScreen.blockID);
+		layout.setBlockID(-1, 1, 0, 0,2, IndustrialProcessing.BLmultiblockScreen.blockID);
 		
 		structure.addLayout(layout, FacingDirection.North);
 		structure.addLayout(LayoutTransformer.transform(layout, FacingDirection.East), FacingDirection.East);

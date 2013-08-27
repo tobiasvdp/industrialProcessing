@@ -67,6 +67,8 @@ import ip.industrialProcessing.transport.fluids.ModelTank;
 import ip.industrialProcessing.transport.fluids.ModelTransportFluids;
 import ip.industrialProcessing.transport.fluids.TileEntityTank;
 import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids;
+import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
+import ip.industrialProcessing.multiblock.dummy.block.MDmultiblockScreen;
 
 public class ClientProxy extends CommonProxy {
 	public static int renderPass;
@@ -93,6 +95,7 @@ public class ClientProxy extends CommonProxy {
 	public static final ModelMultiblockWeldingStation modelMultiblockWeldingStation = new ModelMultiblockWeldingStation();
 	private static final ModelMultiblockWeldingStationScreen modelMultiblockWeldingStationScreen = new ModelMultiblockWeldingStationScreen();
 	private static final MDmultiblockWeldingStation MDmultiblockWeldingStation = new MDmultiblockWeldingStation();
+	private static final MDmultiblockScreen MDmultiblockScreen = new MDmultiblockScreen();
 	
 	@Override
 	public void registerRenderers() {
@@ -171,5 +174,9 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TEmultiblockWeldingStation.class, new RenderingMultiblock(IndustrialProcessing.BLmultiblockWeldingStation, new String[] { "ModelMultiblockWeldingStation" }, new ModelingMultiblock[] { MDmultiblockWeldingStation }));
 		ConfigRenderers.setBLmultiblockWeldingStation(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLmultiblockWeldingStation(), new TEmultiblockWeldingStation()));
+		
+		ClientRegistry.bindTileEntitySpecialRenderer(TEmultiblockDummy.class, new RenderingMultiblock(IndustrialProcessing.BLmultiblockScreen, new String[] { "ModelMultiblockScreen" }, new ModelingMultiblock[] { MDmultiblockScreen }));
+		ConfigRenderers.setBLmultiblockScreen(RenderingRegistry.getNextAvailableRenderId());
+		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLmultiblockScreen(), new TEmultiblockDummy()));
 	}
 }

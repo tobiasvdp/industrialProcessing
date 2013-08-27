@@ -10,6 +10,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -68,6 +69,9 @@ public abstract class BLmultiblockCore extends BlockContainer {
 
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack itemStack) {
+		int dir = MathHelper.floor_double((double) ((entityLivingBase.rotationYaw * 4F) / 360F) + 0.5D) & 3;
+		world.setBlockMetadataWithNotify(x, y, z, dir, 0);
+		System.out.println(dir);
 		super.onBlockPlacedBy(world, x, y, z, entityLivingBase, itemStack);
 		TEmultiblockCore core = ((TEmultiblockCore) world.getBlockTileEntity(x, y, z));
 		core.setModelID();

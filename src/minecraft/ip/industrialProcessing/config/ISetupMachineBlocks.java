@@ -30,6 +30,7 @@ import ip.industrialProcessing.multiblock.block.weldingStation.BlockMultiblockWe
 import ip.industrialProcessing.multiblock.core.block.hotPress.BLmultiblockHotPress;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.BLmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.dummy.block.BLmultiblockFrame;
+import ip.industrialProcessing.multiblock.dummy.block.BLmultiblockScreen;
 import ip.industrialProcessing.multiblock.machine.blastFurnace.BlockMultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.machine.crusher.BlockMultiblockCrusher;
 import ip.industrialProcessing.multiblock.machine.mixer.BlockMultiblockMixer;
@@ -94,4 +95,5 @@ public interface ISetupMachineBlocks {
 	public final static BLmultiblockFrame BLmultiblockFrame = new BLmultiblockFrame();
 	public final static BLmultiblockHotPress BLmultiblockHotPress = new BLmultiblockHotPress();
 	public final static BLmultiblockWeldingStation BLmultiblockWeldingStation= new BLmultiblockWeldingStation();
+	public final static BLmultiblockScreen BLmultiblockScreen= new BLmultiblockScreen();
 }
