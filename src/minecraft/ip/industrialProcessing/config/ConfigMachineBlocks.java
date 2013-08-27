@@ -23,7 +23,8 @@ import ip.industrialProcessing.multiblock.block.tank.TileEntityMultiblockTankInp
 import ip.industrialProcessing.multiblock.block.tank.TileEntityMultiblockTankOutput;
 import ip.industrialProcessing.multiblock.block.weldingStation.TileEntityMultiblockWeldingStationRight;
 import ip.industrialProcessing.multiblock.block.weldingStation.TileEntityMultiblockWeldingStationScreen;
-import ip.industrialProcessing.multiblock.core.block.HotPress.TEmultiblockHotPress;
+import ip.industrialProcessing.multiblock.core.block.hotPress.TEmultiblockHotPress;
+import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
 import ip.industrialProcessing.multiblock.machine.blastFurnace.TileEntityMultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.machine.crusher.TileEntityMultiblockCrusher;
@@ -91,11 +92,13 @@ public class ConfigMachineBlocks {
 	//new multiblocks
 	private int BLmultiblockFrame = 720;
 	private int BLmultiblockHotPress = 721;
+	private int BLmultiblockWeldingStation = 722;
 
 	public void registerMachineBlocks() {
 		//new multiblocks
 		registerMachineBlock(IndustrialProcessing.BLmultiblockFrame, "IP.MBD.Frame", "Frame", TEmultiblockDummy.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockHotPress, "IP.MBC.HotPress", "Hot press", TEmultiblockHotPress.class);
+		registerMachineBlock(IndustrialProcessing.BLmultiblockWeldingStation, "IP.MBC.WeldingStation", "Welding station", TEmultiblockWeldingStation.class);
 		
 		//machines
 		registerMachineBlock(IndustrialProcessing.blockCrusher, "IP.Machine.Crusher", "Ore Crusher", TileEntityCrusher.class);
@@ -151,6 +154,9 @@ public class ConfigMachineBlocks {
 	
 	public static ConfigMachineBlocks getInstance() {
 		return instance;
+	}
+	public static int getBLmultiblockWeldingStation() {
+		return getInstance().BLmultiblockWeldingStation;
 	}
 	public static int getBLmultiblockHotPress() {
 		return getInstance().BLmultiblockHotPress;

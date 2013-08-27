@@ -10,6 +10,8 @@ import net.minecraftforge.common.ForgeDirection;
 public class TEmultiblockDummy extends TileEntity {
 	private TEmultiblockCore core;
 	private MultiblockState state = MultiblockState.DISCONNECTED;
+	private int modelID;
+	private int modelConnection;
 
 	public TEmultiblockDummy() {
 
@@ -22,14 +24,14 @@ public class TEmultiblockDummy extends TileEntity {
 				TEmultiblockDummy te = (TEmultiblockDummy) neighbour;
 				if(te.getCore() != null){
 					TEmultiblockCore teCore = te.getCore();
-					if (teCore.isDummyValidForStructure(this)) {
+					if (teCore.getState() != MultiblockState.COMPLETED && teCore.isDummyValidForStructure(this)) {
 						setCore(teCore);
 						return true;
 					}
 				}
 			} else if (neighbour instanceof TEmultiblockCore) {
 				TEmultiblockCore te = (TEmultiblockCore) neighbour;
-				if (te.isDummyValidForStructure(this)) {
+				if (te.getState() != MultiblockState.COMPLETED && te.isDummyValidForStructure(this)) {
 					setCore(te);
 					notifyNeighboursOfCoreSet();
 					return true;
@@ -53,6 +55,8 @@ public class TEmultiblockDummy extends TileEntity {
 	private void setCore(TEmultiblockCore te) {
 		core = te;
 		core.registerDummy(this);
+		modelConnection = core.setDummieModelConnection(this);
+		modelID = core.setDummieModelID(this);
 		state = MultiblockState.CONNECTED;
 	}
 	
@@ -65,10 +69,18 @@ public class TEmultiblockDummy extends TileEntity {
 			core.unregisterDummy(this);
 			core = null;
 			state = MultiblockState.DISCONNECTED;
+			modelID = 0;
+			modelConnection = 0;
 		}
 	}
 
 	public TEmultiblockCore getCore() {
 		return core;
+	}
+	public int getModelID(){
+		return modelID;
+	}
+	public int getModelConnection(){
+		return modelConnection;
 	}
 }

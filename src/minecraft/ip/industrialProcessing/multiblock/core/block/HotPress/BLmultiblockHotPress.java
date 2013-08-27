@@ -1,4 +1,4 @@
-package ip.industrialProcessing.multiblock.core.block.HotPress;
+package ip.industrialProcessing.multiblock.core.block.hotPress;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;

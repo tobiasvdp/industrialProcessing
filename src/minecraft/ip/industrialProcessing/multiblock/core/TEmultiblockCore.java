@@ -8,6 +8,7 @@ import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Facing;
+import net.minecraftforge.common.ForgeDirection;
 
 public class TEmultiblockCore extends TileEntity {
 
@@ -15,6 +16,8 @@ public class TEmultiblockCore extends TileEntity {
 	private ArrayList<TEmultiblockDummy> dummy = new ArrayList<TEmultiblockDummy>();
 	private FacingDirection side = FacingDirection.North;
 	private MultiblockState state = MultiblockState.CONNECTED;
+	private int modelID;
+	private int modelConnection;
 
 	public TEmultiblockCore(StructureMultiblock structure) {
 		this.structure = structure;
@@ -38,7 +41,7 @@ public class TEmultiblockCore extends TileEntity {
 			if (dir != side){
 				System.out.println("Side changed to "+dir);
 				side=dir;
-				checkIfRegisteredDummiesAreValid();
+				onSideChange();
 			}
 			return true;
 		}
@@ -74,6 +77,59 @@ public class TEmultiblockCore extends TileEntity {
 			System.out.println("State changed to "+state);
 			onStateChange();
 		}
+	}
+	public void onSideChange(){
+		checkIfRegisteredDummiesAreValid();
+		setMultiblockRotation();
+		setDummiesModelConnections();
+		setDummiesModelIDs();
+	}
+
+	private void setMultiblockRotation() {
+		int metadata = 0;
+		worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, metadata, 1);
+		for(TEmultiblockDummy te:dummy){
+			worldObj.setBlockMetadataWithNotify(te.xCoord, te.yCoord, te.zCoord, metadata, 1);
+		}
+	}
+
+	public MultiblockState getState() {
+		return state;
+	}
+	
+	public void notifyNeighboursOfCorePlaced() {
+		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+			TileEntity neighbour = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+			if (neighbour instanceof TEmultiblockDummy) {
+				TEmultiblockDummy te = (TEmultiblockDummy) neighbour;
+				if(te.getCore() == null)
+					te.searchForCore();
+			} 
+		}
+	}
+	public int getModelID(){
+		return modelID;
+	}
+	public int getModelConnection(){
+		return modelConnection;
+	}
+	public void setModelID(){
+		modelID = structure.getModelIDforBlock(0,0,0, side);
+	}
+	public void setModelConnection(){
+		modelConnection = structure.getModelConnectionforBlock(0,0,0, side);
+	}
+	public int setDummieModelID(TEmultiblockDummy te){
+		return structure.getModelIDforBlock(te.xCoord - xCoord, te.yCoord - yCoord, te.zCoord - zCoord, side);
+	}
+	public int setDummieModelConnection(TEmultiblockDummy te){
+		return structure.getModelConnectionforBlock(te.xCoord - xCoord, te.yCoord - yCoord, te.zCoord - zCoord, side);
+	}
+	public void setDummiesModelIDs(){
+		
+	}
+	public void setDummiesModelConnections(){
+		
 	}
 
 }

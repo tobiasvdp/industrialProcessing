@@ -1,4 +1,4 @@
-package ip.industrialProcessing.multiblock.core;
+package ip.industrialProcessing.multiblock.core.extend;
 
 import java.util.ArrayList;
 
@@ -9,6 +9,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
 import ip.industrialProcessing.multiblock.utils.tank.MultiblockTank;
 import ip.industrialProcessing.utils.fluids.ICoreTanks;

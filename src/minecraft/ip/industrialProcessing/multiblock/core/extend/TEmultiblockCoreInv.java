@@ -1,8 +1,9 @@
-package ip.industrialProcessing.multiblock.core;
+package ip.industrialProcessing.multiblock.core.extend;
 
 import java.util.ArrayList;
 
 import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import ip.industrialProcessing.multiblock.utils.inventory.MultiblockItemStack;

@@ -16,9 +16,17 @@ public class StructureMultiblock {
 	}
 
 	// i,j,k = coord - coord core
-	public int getRenderIDforBlock(int i, int j, int k, FacingDirection dir) {
+	public int getModelIDforBlock(int i, int j, int k, FacingDirection dir) {
 		if (dir != FacingDirection.Invalid)
-			return layouts[dir.ordinal()].getRenderIDforBlock(i, j, k);
+			return layouts[dir.ordinal()].getModelIDforBlock(i, j, k);
+		else
+			return 0;
+	}
+	
+	// i,j,k = coord - coord core
+	public int getModelConnectionforBlock(int i, int j, int k, FacingDirection dir) {
+		if (dir != FacingDirection.Invalid)
+			return layouts[dir.ordinal()].getModelConnectionforBlock(i, j, k);
 		else
 			return 0;
 	}

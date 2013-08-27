@@ -13,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BLmultiblockDummy extends BlockContainer {
@@ -40,6 +41,15 @@ public class BLmultiblockDummy extends BlockContainer {
 	public boolean renderAsNormalBlock() {
 		return false;
 	}
+    @Override
+    public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l) {
+	return false;
+    }
+
+    @Override
+    public int getRenderBlockPass() {
+	return 1;
+    }
 	
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {

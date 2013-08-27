@@ -2,15 +2,20 @@ package ip.industrialProcessing.multiblock.layout;
 
 public class LayoutBlockDescription {
 	private int[] blockIDs;
-	private int renderID;
+	private int modelID;
+	private int modelConnection;
 
-	public LayoutBlockDescription(int renderID, int... blockIDs) {
-		this.renderID = renderID;
+	public LayoutBlockDescription(int renderID,int modelConnection, int... blockIDs) {
+		this.modelID = renderID;
+		this.modelConnection = modelConnection;
 		this.blockIDs = blockIDs;
 	}
 
-	public int getRenderID() {
-		return renderID;
+	public int getModelConnection() {
+		return modelConnection;
+	}
+	public int getModelID() {
+		return modelID;
 	}
 	
 	public int[] getBlockID(){

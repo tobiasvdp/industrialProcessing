@@ -32,16 +32,22 @@ public class LayoutMultiblock {
 		sizeFront = blocksFront;
 	}
 
-	public void setCoreID(int modelID, int blockID) {
-		layout[xCore][yCore][zCore] = new LayoutBlockDescription(modelID, blockID);
+	public void setCoreID(int modelID, int renderConnection, int blockID) {
+		layout[xCore][yCore][zCore] = new LayoutBlockDescription(modelID, renderConnection, blockID);
 	}
 
-	public void setBlockID(int i, int j, int k, int renderID, int... blockIDs) {
-		layout[i + xCore][j + yCore][-k + zCore] = new LayoutBlockDescription(renderID, blockIDs);
+	public void setBlockID(int i, int j, int k, int renderID, int renderConnection, int... blockIDs) {
+		layout[i + xCore][j + yCore][-k + zCore] = new LayoutBlockDescription(renderID, renderConnection, blockIDs);
 	}
+
 	// i,j,k = coord - coord core
-	public int getRenderIDforBlock(int i, int j, int k){
-		return layout[i+xCore][j+yCore][-k+zCore].getRenderID();
+	public int getModelIDforBlock(int i, int j, int k) {
+		return layout[i + xCore][j + yCore][-k + zCore].getModelID();
+	}
+	
+	// i,j,k = coord - coord core
+	public int getModelConnectionforBlock(int i, int j, int k) {
+		return layout[i + xCore][j + yCore][-k + zCore].getModelConnection();
 	}
 
 	// i,j,k = coord - coord core
@@ -49,7 +55,7 @@ public class LayoutMultiblock {
 		int x = i + xCore;
 		int y = j + yCore;
 		int z = -k + zCore;
-		if(x>=0&&y>=0&&z>=0 && x<layout.length && y<layout[0].length & z<layout[0][0].length)
+		if (x >= 0 && y >= 0 && z >= 0 && x < layout.length && y < layout[0].length & z < layout[0][0].length)
 			return layout[x][y][z].isValidID(blockID);
 		else
 			return false;
@@ -67,7 +73,7 @@ public class LayoutMultiblock {
 							return false;
 						}
 						TileEntity te = world.getBlockTileEntity(xBlock, yBlock, zBlock);
-						if(te instanceof TEmultiblockDummy){
+						if (te instanceof TEmultiblockDummy) {
 							TEmultiblockCore teCore = ((TEmultiblockDummy) te).getCore();
 							if (teCore == null)
 								return false;
@@ -120,5 +126,5 @@ public class LayoutMultiblock {
 	public int getSizeFront() {
 		return sizeFront;
 	}
-	
+
 }

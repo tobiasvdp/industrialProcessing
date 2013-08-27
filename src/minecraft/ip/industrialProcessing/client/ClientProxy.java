@@ -13,6 +13,7 @@ import ip.industrialProcessing.client.render.ModelConnectedFluid;
 import ip.industrialProcessing.client.render.ModelMachine;
 import ip.industrialProcessing.client.render.ModelMultiblock;
 import ip.industrialProcessing.client.render.ModelStateMachine;
+import ip.industrialProcessing.client.render.ModelingMultiblock;
 import ip.industrialProcessing.client.render.RendererMultiblock;
 import ip.industrialProcessing.client.render.RendererTileEntity;
 import ip.industrialProcessing.client.render.RendererTileEntityConnected;
@@ -20,6 +21,7 @@ import ip.industrialProcessing.client.render.RendererTileEntityConnectedFluid;
 import ip.industrialProcessing.client.render.RendererTileEntityFluidWorker;
 import ip.industrialProcessing.client.render.RendererTileEntityAnimated;
 import ip.industrialProcessing.client.render.RendererTileEntityState;
+import ip.industrialProcessing.client.render.RenderingMultiblock;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.machines.RendererBlock;
 import ip.industrialProcessing.machines.blastFurnace.ModelBlastFurnace;
@@ -46,6 +48,8 @@ import ip.industrialProcessing.multiblock.block.inventory.TileEntityMultiblockIn
 import ip.industrialProcessing.multiblock.block.weldingStation.ModelMultiblockWeldingStationScreen;
 import ip.industrialProcessing.multiblock.block.weldingStation.TileEntityMultiblockWeldingStationRight;
 import ip.industrialProcessing.multiblock.block.weldingStation.TileEntityMultiblockWeldingStationScreen;
+import ip.industrialProcessing.multiblock.core.block.weldingStation.MDmultiblockWeldingStation;
+import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.machine.weldingStation.TileEntityMultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.utils.ModelMultiblockIO;
 import ip.industrialProcessing.multiblock.utils.ModelMultiblockWeldingStation;
@@ -88,7 +92,8 @@ public class ClientProxy extends CommonProxy {
 	private static final ModelMultiblockFrameTower modelMultiblockFrameTower = new ModelMultiblockFrameTower();
 	public static final ModelMultiblockWeldingStation modelMultiblockWeldingStation = new ModelMultiblockWeldingStation();
 	private static final ModelMultiblockWeldingStationScreen modelMultiblockWeldingStationScreen = new ModelMultiblockWeldingStationScreen();
-
+	private static final MDmultiblockWeldingStation MDmultiblockWeldingStation = new MDmultiblockWeldingStation();
+	
 	@Override
 	public void registerRenderers() {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFilter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockFilter, "ModelFilter", filter));
@@ -162,5 +167,9 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMultiblockWeldingStationScreen.class, new RendererMultiblock(IndustrialProcessing.blockMultiblockWeldingStationScreen, new String[] { "ModelMultiblockWeldingStationScreen" }, new ModelMultiblock[] { modelMultiblockWeldingStationScreen }));
 		ConfigRenderers.setrendererBlockMultiblockWeldingStationScreenID(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getrendererBlockMultiblockWeldingStationScreenID(), new TileEntityMultiblockWeldingStationScreen()));
+		
+		ClientRegistry.bindTileEntitySpecialRenderer(TEmultiblockWeldingStation.class, new RenderingMultiblock(IndustrialProcessing.BLmultiblockWeldingStation, new String[] { "ModelMultiblockWeldingStation" }, new ModelingMultiblock[] { MDmultiblockWeldingStation }));
+		ConfigRenderers.setBLmultiblockWeldingStation(RenderingRegistry.getNextAvailableRenderId());
+		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLmultiblockWeldingStation(), new TEmultiblockWeldingStation()));
 	}
 }
