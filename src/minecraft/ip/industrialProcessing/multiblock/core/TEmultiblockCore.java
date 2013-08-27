@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
+import ip.industrialProcessing.multiblock.tier.MultiblockTier;
+import ip.industrialProcessing.multiblock.tier.MultiblockTierRequirements;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Facing;
@@ -16,21 +18,24 @@ public class TEmultiblockCore extends TileEntity {
 	private ArrayList<TEmultiblockDummy> dummy = new ArrayList<TEmultiblockDummy>();
 	private FacingDirection side = FacingDirection.North;
 	private MultiblockState state = MultiblockState.CONNECTED;
+	private MultiblockTier tier = MultiblockTier.Invalid;
+	private MultiblockTierRequirements tierRequirments;
 	private int modelID;
 	private int modelConnection;
 
-	public TEmultiblockCore(StructureMultiblock structure) {
+	public TEmultiblockCore(StructureMultiblock structure,MultiblockTierRequirements tierRequirments) {
 		this.structure = structure;
+		this.tierRequirments = tierRequirments;
 	}
 
 	public void registerDummy(TEmultiblockDummy te) {
 		dummy.add(te);
-		System.out.println("dummy registered");
+		System.out.println("dummy registered ID:"+te.getID());
 	}
 
 	public void unregisterDummy(TEmultiblockDummy temultiblockDummy) {
 		dummy.remove(temultiblockDummy);
-		System.out.println("dummy unregistered");
+		System.out.println("dummy unregistered ID:" + temultiblockDummy.getID());
 	}
 
 	public boolean isDummyValidForStructure(TEmultiblockDummy te) {
@@ -160,6 +165,28 @@ public class TEmultiblockCore extends TileEntity {
 
 	public void setDummiesModelConnections() {
 
+	}
+
+	public void setsideFromMetadata(int dir) {
+		switch(dir){
+		case 1:{side = FacingDirection.West;break;}
+		case 2:{side = FacingDirection.North;break;}
+		case 3:{side = FacingDirection.East;break;}
+		case 0:{side = FacingDirection.South;break;}
+		default: {side = FacingDirection.North;}
+		}
+		System.out.println(side);
+	}
+	
+	public void determinateTier(){
+		MultiblockTier tier = MultiblockTier.Tier1;
+		for(int i = 0;i<tierRequirments.getTiers();i++){
+			
+		}
+	}
+
+	public int setDummieID(TEmultiblockDummy te) {
+		return structure.getIDforBlock(te.xCoord - xCoord, te.yCoord - yCoord, te.zCoord - zCoord, side);
 	}
 
 }

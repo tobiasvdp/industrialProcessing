@@ -10,6 +10,7 @@ public class TEmultiblockDummy extends TileEntity {
 	private MultiblockState state = MultiblockState.DISCONNECTED;
 	private int modelID;
 	private int modelConnection;
+	private int ID;
 
 	public TEmultiblockDummy() {
 
@@ -52,9 +53,11 @@ public class TEmultiblockDummy extends TileEntity {
 
 	private void setCore(TEmultiblockCore te) {
 		core = te;
+		ID = core.setDummieID(this);
 		core.registerDummy(this);
 		modelConnection = core.setDummieModelConnection(this);
 		modelID = core.setDummieModelID(this);
+	
 		setBlockRotation();
 		state = MultiblockState.CONNECTED;
 	}
@@ -70,6 +73,7 @@ public class TEmultiblockDummy extends TileEntity {
 			state = MultiblockState.DISCONNECTED;
 			modelID = 0;
 			modelConnection = 0;
+			ID = 0;
 		}
 	}
 
@@ -85,5 +89,9 @@ public class TEmultiblockDummy extends TileEntity {
 	public void setBlockRotation(){
 		if(core != null)
 			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, core.getBlockMetadata(), 1);
+	}
+
+	public int getID() {
+		return ID;
 	}
 }

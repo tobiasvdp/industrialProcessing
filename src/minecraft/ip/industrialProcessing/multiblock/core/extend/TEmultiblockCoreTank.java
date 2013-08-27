@@ -11,6 +11,7 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
+import ip.industrialProcessing.multiblock.tier.MultiblockTierRequirements;
 import ip.industrialProcessing.multiblock.utils.MultiblockTank;
 import ip.industrialProcessing.utils.fluids.ICoreTanks;
 import ip.industrialProcessing.utils.fluids.Tanks;
@@ -22,8 +23,8 @@ public class TEmultiblockCoreTank extends TEmultiblockCore implements ICoreTanks
 	protected RecipesMachine recipe;
 	protected MappingIDtoSlot mapping;
 	
-	public TEmultiblockCoreTank(StructureMultiblock structure) {
-		super(structure);
+	public TEmultiblockCoreTank(StructureMultiblock structure,MultiblockTierRequirements tierRequirments) {
+		super(structure, tierRequirments);
 	}
 
 	//Tank handler

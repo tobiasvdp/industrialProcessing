@@ -39,7 +39,7 @@ public final class LayoutTransformer {
 					temp = x;
 					x = -z;
 					z = temp;
-					newLayout.setBlockID(x, y, -z, layoutArray[i][j][k].getModelID(),layoutArray[i][j][k].getModelConnection(), layoutArray[i][j][k].getBlockID());
+					newLayout.setBlockID(x, y, -z, layoutArray[i][j][k].getID(), layoutArray[i][j][k].getModelID(),layoutArray[i][j][k].getModelConnection(), layoutArray[i][j][k].getBlockID());
 				}
 			}
 		}
@@ -62,7 +62,7 @@ public final class LayoutTransformer {
 					temp = x;
 					x = -z;
 					z = temp;
-					newLayout.setBlockID(x, y, -z, layoutArray[i][j][k].getModelID(),layoutArray[i][j][k].getModelConnection(), layoutArray[i][j][k].getBlockID());
+					newLayout.setBlockID(x, y, -z, layoutArray[i][j][k].getID(), layoutArray[i][j][k].getModelID(),layoutArray[i][j][k].getModelConnection(), layoutArray[i][j][k].getBlockID());
 				}
 			}
 		}
@@ -82,7 +82,7 @@ public final class LayoutTransformer {
 					int temp = x;
 					x = -z;
 					z = temp;
-					newLayout.setBlockID(x, y, -z, layoutArray[i][j][k].getModelID(),layoutArray[i][j][k].getModelConnection(), layoutArray[i][j][k].getBlockID());
+					newLayout.setBlockID(x, y, -z, layoutArray[i][j][k].getID(), layoutArray[i][j][k].getModelID(),layoutArray[i][j][k].getModelConnection(), layoutArray[i][j][k].getBlockID());
 				}
 			}
 		}

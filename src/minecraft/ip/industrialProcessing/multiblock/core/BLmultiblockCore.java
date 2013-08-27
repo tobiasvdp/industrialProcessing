@@ -71,12 +71,11 @@ public abstract class BLmultiblockCore extends BlockContainer {
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack itemStack) {
 		int dir = MathHelper.floor_double((double) ((entityLivingBase.rotationYaw * 4F) / 360F) + 0.5D) & 3;
 		world.setBlockMetadataWithNotify(x, y, z, dir, 0);
-		System.out.println(dir);
 		super.onBlockPlacedBy(world, x, y, z, entityLivingBase, itemStack);
 		TEmultiblockCore core = ((TEmultiblockCore) world.getBlockTileEntity(x, y, z));
+		core.setsideFromMetadata(dir);
 		core.setModelID();
 		core.setModelConnection();
-		System.out.println(core.getModelID() + " " + core.getModelConnection());
 		core.notifyNeighboursOfCorePlaced();
 		core.onLayoutChange();
 	}

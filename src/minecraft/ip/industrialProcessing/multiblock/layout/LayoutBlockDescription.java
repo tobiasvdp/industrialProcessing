@@ -4,11 +4,13 @@ public class LayoutBlockDescription {
 	private int[] blockIDs;
 	private int modelID;
 	private int modelConnection;
+	private int ID;
 
-	public LayoutBlockDescription(int renderID,int modelConnection, int... blockIDs) {
+	public LayoutBlockDescription(int ID, int renderID,int modelConnection, int... blockIDs) {
 		this.modelID = renderID;
 		this.modelConnection = modelConnection;
 		this.blockIDs = blockIDs;
+		this.ID = ID;
 	}
 
 	public int getModelConnection() {
@@ -16,6 +18,9 @@ public class LayoutBlockDescription {
 	}
 	public int getModelID() {
 		return modelID;
+	}
+	public int getID(){
+		return ID;
 	}
 	
 	public int[] getBlockID(){

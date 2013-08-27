@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
+import ip.industrialProcessing.multiblock.tier.MultiblockTierRequirements;
 import ip.industrialProcessing.multiblock.utils.MultiblockItemStack;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import ip.industrialProcessing.utils.inventories.IInventories;
@@ -20,8 +21,8 @@ public class TEmultiblockCoreInv extends TEmultiblockCore implements IInventorie
 	protected RecipesMachine recipes;
 	protected MultiblockState state;
 	
-	public TEmultiblockCoreInv(StructureMultiblock structure) {
-		super(structure);
+	public TEmultiblockCoreInv(StructureMultiblock structure,MultiblockTierRequirements tierRequirments) {
+		super(structure,tierRequirments);
 	}
 
 	//Inventory handler

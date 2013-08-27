@@ -203,6 +203,5 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		// Stub Method
 	}
 }
