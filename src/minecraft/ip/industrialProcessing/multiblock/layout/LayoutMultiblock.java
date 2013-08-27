@@ -1,6 +1,9 @@
 package ip.industrialProcessing.multiblock.layout;
 
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
+import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
 import ip.industrialProcessing.multiblock.utils.layout.MultiBlockStructureBlockDescription;
 
 public class LayoutMultiblock {
@@ -58,10 +61,18 @@ public class LayoutMultiblock {
 				for (int k = 0; k < layout[0][0].length; k++) {
 					int xBlock = xCore - this.xCore + i;
 					int yBlock = yCore - this.yCore + j;
-					int zBlock = zCore - this.zCore - k;
+					int zBlock = zCore + this.zCore - k;
 					if (layout[i][j][k] != null) {
 						if (!layout[i][j][k].isValidID(world.getBlockId(xBlock, yBlock, zBlock))) {
 							return false;
+						}
+						TileEntity te = world.getBlockTileEntity(xBlock, yBlock, zBlock);
+						if(te instanceof TEmultiblockDummy){
+							TEmultiblockCore teCore = ((TEmultiblockDummy) te).getCore();
+							if (teCore == null)
+								return false;
+							if (teCore != world.getBlockTileEntity(xCore, yCore, zCore))
+								return false;
 						}
 					}
 				}

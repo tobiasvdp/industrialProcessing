@@ -20,21 +20,40 @@ public class TEmultiblockDummy extends TileEntity {
 			TileEntity neighbour = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
 			if (neighbour instanceof TEmultiblockDummy) {
 				TEmultiblockDummy te = (TEmultiblockDummy) neighbour;
+				if(te.getCore() != null){
+					TEmultiblockCore teCore = te.getCore();
+					if (teCore.isDummyValidForStructure(this)) {
+						setCore(teCore);
+						return true;
+					}
+				}
 			} else if (neighbour instanceof TEmultiblockCore) {
 				TEmultiblockCore te = (TEmultiblockCore) neighbour;
 				if (te.isDummyValidForStructure(this)) {
 					setCore(te);
+					notifyNeighboursOfCoreSet();
+					return true;
 				}
 			}
 		}
 		return false;
 	}
 
+	private void notifyNeighboursOfCoreSet() {
+		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+			TileEntity neighbour = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+			if (neighbour instanceof TEmultiblockDummy) {
+				TEmultiblockDummy te = (TEmultiblockDummy) neighbour;
+				if(te.getCore() == null)
+					te.searchForCore();
+			} 
+		}
+	}
+
 	private void setCore(TEmultiblockCore te) {
 		core = te;
 		core.registerDummy(this);
 		state = MultiblockState.CONNECTED;
-		core.onLayoutChange();
 	}
 	
 	public void setState(MultiblockState state){

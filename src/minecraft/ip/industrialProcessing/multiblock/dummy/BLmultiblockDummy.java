@@ -66,7 +66,9 @@ public class BLmultiblockDummy extends BlockContainer {
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack itemStack) {
 		super.onBlockPlacedBy(world, x, y, z, entityLivingBase, itemStack);
-		((TEmultiblockDummy)world.getBlockTileEntity(x, y, z)).searchForCore();
+		if(((TEmultiblockDummy)world.getBlockTileEntity(x, y, z)).searchForCore()){
+			((TEmultiblockDummy)world.getBlockTileEntity(x, y, z)).getCore().onLayoutChange();
+		}
 	}
 	
 	@Override
