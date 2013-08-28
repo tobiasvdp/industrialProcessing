@@ -144,6 +144,13 @@ public class MDmultiblockScreen extends ModelingMultiblock {
 			BackLeft.render(f5);
 			break;
 		}
+		case 2:{
+			BackBar.render(f5);
+			Back.render(f5);
+			BackLeft.render(f5);
+			BackRight.render(f5);
+			break;
+		}
 		}
 	}
 

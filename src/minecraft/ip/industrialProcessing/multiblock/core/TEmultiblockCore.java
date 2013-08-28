@@ -101,14 +101,25 @@ public class TEmultiblockCore extends TileEntity {
 	}
 
 	public void onTierChange() {
+		configMultiblock();
+	}
 
+	private void configMultiblock() {
+		if(tier != Tiers.Invalid){
+			setDefaultModel();	
+			tierRequirments.getTier(tier).configMultiblock(this,dummy);
+		}
+	}
+	
+	public void setDefaultModel(){
+		setDummiesModelConnections();
+		setDummiesModelIDs();
 	}
 
 	public void onSideChange() {
 		checkIfRegisteredDummiesAreValid();
 		setMultiblockRotation();
-		setDummiesModelConnections();
-		setDummiesModelIDs();
+		setDefaultModel();	
 	}
 
 	private void setMultiblockRotation() {
@@ -179,11 +190,15 @@ public class TEmultiblockCore extends TileEntity {
 	}
 
 	public void setDummiesModelIDs() {
-
+		for(TEmultiblockDummy te:dummy){
+			te.setModelID(structure.getModelIDforBlock(te.xCoord - xCoord, te.yCoord - yCoord, te.zCoord - zCoord, side));
+		}
 	}
 
 	public void setDummiesModelConnections() {
-
+		for(TEmultiblockDummy te:dummy){
+			te.setModelConnection(structure.getModelConnectionforBlock(te.xCoord - xCoord, te.yCoord - yCoord, te.zCoord - zCoord, side));
+		}
 	}
 
 	public void setsideFromMetadata(int dir) {

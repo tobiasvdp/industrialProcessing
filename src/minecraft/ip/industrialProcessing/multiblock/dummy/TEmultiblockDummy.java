@@ -6,6 +6,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
 public class TEmultiblockDummy extends TileEntity {
+	public void setModelID(int modelID) {
+		this.modelID = modelID;
+	}
+
+	public void setModelConnection(int modelConnection) {
+		this.modelConnection = modelConnection;
+	}
+
 	private TEmultiblockCore core;
 	private MultiblockState state = MultiblockState.DISCONNECTED;
 	private int modelID;
