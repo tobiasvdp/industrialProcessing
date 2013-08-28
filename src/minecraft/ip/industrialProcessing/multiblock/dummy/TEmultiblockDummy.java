@@ -25,12 +25,21 @@ public class TEmultiblockDummy extends TileEntity {
 					TEmultiblockCore teCore = te.getCore();
 					if (teCore.getState() != MultiblockState.COMPLETED && teCore.isDummyValidForStructure(this)) {
 						setCore(teCore);
+						notifyNeighboursOfCoreSet();
+						return true;
+					}else if(teCore.getState() == MultiblockState.COMPLETED && teCore.isDummyValidForStructure(this,true)){
+						setCore(teCore);
+						notifyNeighboursOfCoreSet();
 						return true;
 					}
 				}
 			} else if (neighbour instanceof TEmultiblockCore) {
 				TEmultiblockCore te = (TEmultiblockCore) neighbour;
 				if (te.getState() != MultiblockState.COMPLETED && te.isDummyValidForStructure(this)) {
+					setCore(te);
+					notifyNeighboursOfCoreSet();
+					return true;
+				}else if(te.getState() == MultiblockState.COMPLETED && te.isDummyValidForStructure(this,true)){
 					setCore(te);
 					notifyNeighboursOfCoreSet();
 					return true;

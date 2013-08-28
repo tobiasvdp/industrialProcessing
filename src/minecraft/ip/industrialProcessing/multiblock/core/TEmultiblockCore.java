@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
-import ip.industrialProcessing.multiblock.tier.MultiblockTier;
-import ip.industrialProcessing.multiblock.tier.MultiblockTierRequirements;
+import ip.industrialProcessing.multiblock.tier.Tiers;
+import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Facing;
@@ -18,33 +18,34 @@ public class TEmultiblockCore extends TileEntity {
 	private ArrayList<TEmultiblockDummy> dummy = new ArrayList<TEmultiblockDummy>();
 	private FacingDirection side = FacingDirection.North;
 	private MultiblockState state = MultiblockState.CONNECTED;
-	private MultiblockTier tier = MultiblockTier.Invalid;
-	private MultiblockTierRequirements tierRequirments;
+	private Tiers tier = Tiers.Invalid;
+	private TierCollection tierRequirments;
 	private int modelID;
 	private int modelConnection;
 
-	public TEmultiblockCore(StructureMultiblock structure,MultiblockTierRequirements tierRequirments) {
+	public TEmultiblockCore(StructureMultiblock structure, TierCollection tierRequirments) {
 		this.structure = structure;
 		this.tierRequirments = tierRequirments;
 	}
 
 	public void registerDummy(TEmultiblockDummy te) {
 		dummy.add(te);
-		System.out.println("dummy registered ID:"+te.getID());
 	}
 
 	public void unregisterDummy(TEmultiblockDummy temultiblockDummy) {
 		dummy.remove(temultiblockDummy);
-		System.out.println("dummy unregistered ID:" + temultiblockDummy.getID());
 	}
 
 	public boolean isDummyValidForStructure(TEmultiblockDummy te) {
+		/*
+		 * check if the new placed block is valid, if not try other directions.
+		 * If direction is changed, take necessary actions
+		 */
 		FacingDirection dir = structure.isBlockValid(te.xCoord - xCoord, te.yCoord - yCoord, te.zCoord - zCoord, te.worldObj.getBlockId(te.xCoord, te.yCoord, te.zCoord), side, false);
 		if (dir == FacingDirection.Invalid) {
 			return false;
 		} else {
 			if (dir != side) {
-				System.out.println("Side changed to " + dir);
 				side = dir;
 				onSideChange();
 			}
@@ -53,6 +54,8 @@ public class TEmultiblockCore extends TileEntity {
 	}
 
 	public void checkIfRegisteredDummiesAreValid() {
+		// first determinate what to delete. If you delete while running trough
+		// your loop, you will mess sh* up.
 		ArrayList<TEmultiblockDummy> dummiesToBeEreased = new ArrayList<TEmultiblockDummy>();
 		for (TEmultiblockDummy te : dummy) {
 			FacingDirection dir = structure.isBlockValid(te.xCoord - xCoord, te.yCoord - yCoord, te.zCoord - zCoord, te.worldObj.getBlockId(te.xCoord, te.yCoord, te.zCoord), side, true);
@@ -77,12 +80,28 @@ public class TEmultiblockCore extends TileEntity {
 	}
 
 	public void onLayoutChange() {
+		// determinate if the state has changed. if so do necessary actions
 		MultiblockState state = structure.isLayoutValid(worldObj, xCoord, yCoord, zCoord, this.side);
 		if (state != this.state) {
 			this.state = state;
-			System.out.println("State changed to " + state);
 			onStateChange();
 		}
+		// if state is complete determinate the tier level, else reset the tier.
+		if (state == MultiblockState.COMPLETED) {
+			Tiers tier = determinateTier();
+			if (this.tier != tier) {
+				this.tier = tier;
+				onTierChange();
+			} else {
+				this.tier = tier;
+			}
+		} else {
+			this.tier = Tiers.Invalid;
+		}
+	}
+
+	public void onTierChange() {
+
 	}
 
 	public void onSideChange() {
@@ -168,25 +187,61 @@ public class TEmultiblockCore extends TileEntity {
 	}
 
 	public void setsideFromMetadata(int dir) {
-		switch(dir){
-		case 1:{side = FacingDirection.West;break;}
-		case 2:{side = FacingDirection.North;break;}
-		case 3:{side = FacingDirection.East;break;}
-		case 0:{side = FacingDirection.South;break;}
-		default: {side = FacingDirection.North;}
+		switch (dir) {
+		case 1: {
+			side = FacingDirection.West;
+			break;
 		}
-		System.out.println(side);
+		case 2: {
+			side = FacingDirection.North;
+			break;
+		}
+		case 3: {
+			side = FacingDirection.East;
+			break;
+		}
+		case 0: {
+			side = FacingDirection.South;
+			break;
+		}
+		default: {
+			side = FacingDirection.North;
+		}
+		}
 	}
-	
-	public void determinateTier(){
-		MultiblockTier tier = MultiblockTier.Tier1;
-		for(int i = 0;i<tierRequirments.getTiers();i++){
-			
+
+	public Tiers determinateTier() {
+		Tiers tier = Tiers.Tier0;
+		for (Tiers tr:Tiers.values()) {
+			if (tr.ordinal() > 0 && tr.ordinal() < tierRequirments.getAmountTiers() && tierRequirments.getTier(tr).isTierRequirementMet(this)) {
+				tier = tr;
+			}
 		}
+		System.out.println("Tier = " + tier);
+		return tier;
 	}
 
 	public int setDummieID(TEmultiblockDummy te) {
 		return structure.getIDforBlock(te.xCoord - xCoord, te.yCoord - yCoord, te.zCoord - zCoord, side);
+	}
+
+	public TEmultiblockDummy getDummyByID(int ID) {
+		for (TEmultiblockDummy te : dummy) {
+			if (te.getID() == ID) {
+				return te;
+			}
+		}
+		return null;
+	}
+
+	public boolean isDummyValidForStructure(TEmultiblockDummy te, boolean b) {
+		/*
+		 * check if the new placed block is valid. This does not change directions.
+		 */
+		FacingDirection dir = structure.isBlockValid(te.xCoord - xCoord, te.yCoord - yCoord, te.zCoord - zCoord, te.worldObj.getBlockId(te.xCoord, te.yCoord, te.zCoord), side, true);
+		if (dir == side) 
+			return true;
+		return false;
 	}
 
 }

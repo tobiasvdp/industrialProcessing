@@ -6,11 +6,11 @@ import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
 import ip.industrialProcessing.multiblock.layout.LayoutTransformer;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
-import ip.industrialProcessing.multiblock.tier.MultiblockTierRequirements;
+import ip.industrialProcessing.multiblock.tier.TierCollection;
 
 public class TEmultiblockHotPress extends TEmultiblockCore {
 	static StructureMultiblock structure;
-	static MultiblockTierRequirements tierRequirments;
+	static TierCollection tierRequirments;
 	static {
 		structure = new StructureMultiblock();
 
@@ -49,7 +49,7 @@ public class TEmultiblockHotPress extends TEmultiblockCore {
 		structure.addLayout(LayoutTransformer.transform(layout, FacingDirection.South), FacingDirection.South);
 		structure.addLayout(LayoutTransformer.transform(layout, FacingDirection.West), FacingDirection.West);
 
-		tierRequirments = new MultiblockTierRequirements(0);
+		tierRequirments = new TierCollection(0);
 	}
 
 	public TEmultiblockHotPress() {
