@@ -1,7 +1,11 @@
 package ip.industrialProcessing.multiblock.dummy;
 
 import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
+import ip.industrialProcessing.multiblock.layout.FacingDirection;
+import ip.industrialProcessing.multiblock.tier.Tiers;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
@@ -21,6 +25,59 @@ public class TEmultiblockDummy extends TileEntity {
 	private int ID;
 
 	public TEmultiblockDummy() {
+
+	}
+	
+	@Override
+	public void writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
+		writeCore(nbt);
+	}
+
+	private void writeCore(NBTTagCompound nbt) {
+		NBTTagList nbttaglist = new NBTTagList();
+
+		NBTTagCompound nbtComp = new NBTTagCompound();
+		nbtComp.setInteger("modelConnection", modelConnection);
+		nbttaglist.appendTag(nbtComp);
+
+		nbtComp = new NBTTagCompound();
+		nbtComp.setInteger("modelID", modelID);
+		nbttaglist.appendTag(nbtComp);
+		
+		nbtComp = new NBTTagCompound();
+		nbtComp.setInteger("ID", ID);
+		nbttaglist.appendTag(nbtComp);
+
+		nbtComp = new NBTTagCompound();
+		nbtComp.setInteger("state", state.ordinal());
+		nbttaglist.appendTag(nbtComp);
+		
+
+		nbt.setTag("Core", nbttaglist);
+		
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
+		readCore(nbt);
+	};
+
+	private void readCore(NBTTagCompound nbt) {
+		NBTTagList nbttaglist = nbt.getTagList("Core");
+
+		NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(0);
+		modelConnection = nbttagcompound1.getInteger("modelConnection");
+
+		nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(1);
+		modelID = nbttagcompound1.getInteger("modelID");
+		
+		nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(2);
+		ID = nbttagcompound1.getInteger("ID");
+
+		nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(3);
+		state = MultiblockState.values()[nbttagcompound1.getInteger("state")];
 
 	}
 
