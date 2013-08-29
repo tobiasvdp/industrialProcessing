@@ -6,6 +6,9 @@ import ip.industrialProcessing.multiblock.tier.Tiers;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.INetworkManager;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
@@ -19,6 +22,8 @@ public class TEmultiblockDummy extends TileEntity {
 	}
 
 	private TEmultiblockCore core;
+	private boolean loadedFromNBT;
+	private int[] coreDataFromNBT;
 	private MultiblockState state = MultiblockState.DISCONNECTED;
 	private int modelID;
 	private int modelConnection;
@@ -28,6 +33,14 @@ public class TEmultiblockDummy extends TileEntity {
 
 	}
 	
+	public TEmultiblockCore getCore(){
+		if(loadedFromNBT){
+			core = (TEmultiblockCore) worldObj.getBlockTileEntity(coreDataFromNBT[0], coreDataFromNBT[1], coreDataFromNBT[2]);
+			loadedFromNBT=false;
+		}
+		return core;
+	}
+
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
@@ -44,7 +57,7 @@ public class TEmultiblockDummy extends TileEntity {
 		nbtComp = new NBTTagCompound();
 		nbtComp.setInteger("modelID", modelID);
 		nbttaglist.appendTag(nbtComp);
-		
+
 		nbtComp = new NBTTagCompound();
 		nbtComp.setInteger("ID", ID);
 		nbttaglist.appendTag(nbtComp);
@@ -52,10 +65,26 @@ public class TEmultiblockDummy extends TileEntity {
 		nbtComp = new NBTTagCompound();
 		nbtComp.setInteger("state", state.ordinal());
 		nbttaglist.appendTag(nbtComp);
-		
 
-		nbt.setTag("Core", nbttaglist);
-		
+		NBTTagList nbttaglistCore = new NBTTagList();
+
+		if (getCore() != null) {
+			nbtComp = new NBTTagCompound();
+			nbtComp.setInteger("x", getCore().xCoord);
+			nbttaglistCore.appendTag(nbtComp);
+
+			nbtComp = new NBTTagCompound();
+			nbtComp.setInteger("y", getCore().yCoord);
+			nbttaglistCore.appendTag(nbtComp);
+
+			nbtComp = new NBTTagCompound();
+			nbtComp.setInteger("z", getCore().zCoord);
+			nbttaglistCore.appendTag(nbtComp);
+		}
+
+		nbt.setTag("Data", nbttaglist);
+		nbt.setTag("Core", nbttaglistCore);
+
 	}
 
 	@Override
@@ -65,19 +94,36 @@ public class TEmultiblockDummy extends TileEntity {
 	};
 
 	private void readCore(NBTTagCompound nbt) {
-		NBTTagList nbttaglist = nbt.getTagList("Core");
+		NBTTagList nbttaglist = nbt.getTagList("Data");
 
 		NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(0);
 		modelConnection = nbttagcompound1.getInteger("modelConnection");
 
 		nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(1);
 		modelID = nbttagcompound1.getInteger("modelID");
-		
+
 		nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(2);
 		ID = nbttagcompound1.getInteger("ID");
 
 		nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(3);
 		state = MultiblockState.values()[nbttagcompound1.getInteger("state")];
+
+		nbttaglist = nbt.getTagList("Core");
+		
+		if (nbttaglist.tagCount() != 0) {
+			nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(0);
+			int x = nbttagcompound1.getInteger("x");
+
+			nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(1);
+			int y = nbttagcompound1.getInteger("y");
+
+			nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(2);
+			int z = nbttagcompound1.getInteger("z");
+
+			loadedFromNBT = true;
+			coreDataFromNBT = new int[]{x,y,z};
+			
+		}
 
 	}
 
@@ -86,13 +132,13 @@ public class TEmultiblockDummy extends TileEntity {
 			TileEntity neighbour = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
 			if (neighbour instanceof TEmultiblockDummy) {
 				TEmultiblockDummy te = (TEmultiblockDummy) neighbour;
-				if(te.getCore() != null){
+				if (te.getCore() != null) {
 					TEmultiblockCore teCore = te.getCore();
 					if (teCore.getState() != MultiblockState.COMPLETED && teCore.isDummyValidForStructure(this)) {
 						setCore(teCore);
 						notifyNeighboursOfCoreSet();
 						return true;
-					}else if(teCore.getState() == MultiblockState.COMPLETED && teCore.isDummyValidForStructure(this,true)){
+					} else if (teCore.getState() == MultiblockState.COMPLETED && teCore.isDummyValidForStructure(this, true)) {
 						setCore(teCore);
 						notifyNeighboursOfCoreSet();
 						return true;
@@ -104,7 +150,7 @@ public class TEmultiblockDummy extends TileEntity {
 					setCore(te);
 					notifyNeighboursOfCoreSet();
 					return true;
-				}else if(te.getState() == MultiblockState.COMPLETED && te.isDummyValidForStructure(this,true)){
+				} else if (te.getState() == MultiblockState.COMPLETED && te.isDummyValidForStructure(this, true)) {
 					setCore(te);
 					notifyNeighboursOfCoreSet();
 					return true;
@@ -119,30 +165,30 @@ public class TEmultiblockDummy extends TileEntity {
 			TileEntity neighbour = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
 			if (neighbour instanceof TEmultiblockDummy) {
 				TEmultiblockDummy te = (TEmultiblockDummy) neighbour;
-				if(te.getCore() == null)
+				if (te.getCore() == null)
 					te.searchForCore();
-			} 
+			}
 		}
 	}
 
 	private void setCore(TEmultiblockCore te) {
 		core = te;
-		ID = core.setDummieID(this);
-		core.registerDummy(this);
-		modelConnection = core.setDummieModelConnection(this);
-		modelID = core.setDummieModelID(this);
-	
+		ID = getCore().setDummieID(this);
+		getCore().registerDummy(this);
+		modelConnection = getCore().setDummieModelConnection(this);
+		modelID = getCore().setDummieModelID(this);
+
 		setBlockRotation();
 		state = MultiblockState.CONNECTED;
 	}
-	
-	public void setState(MultiblockState state){
+
+	public void setState(MultiblockState state) {
 		this.state = state;
 	}
-	
-	public void delCore(){
-		if (core!= null){
-			core.unregisterDummy(this);
+
+	public void delCore() {
+		if (getCore() != null) {
+			getCore().unregisterDummy(this);
 			core = null;
 			state = MultiblockState.DISCONNECTED;
 			modelID = 0;
@@ -151,21 +197,33 @@ public class TEmultiblockDummy extends TileEntity {
 		}
 	}
 
-	public TEmultiblockCore getCore() {
-		return core;
-	}
-	public int getModelID(){
+	public int getModelID() {
 		return modelID;
 	}
-	public int getModelConnection(){
+
+	public int getModelConnection() {
 		return modelConnection;
 	}
-	public void setBlockRotation(){
-		if(core != null)
-			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, core.getBlockMetadata(), 1);
+
+	public void setBlockRotation() {
+		if (getCore() != null)
+			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, getCore().getBlockMetadata(), 1);
 	}
 
 	public int getID() {
 		return ID;
 	}
+	
+	 @Override
+	    public Packet getDescriptionPacket() { 
+		NBTTagCompound nbtTag = new NBTTagCompound();
+		this.writeToNBT(nbtTag);
+		return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
+	    }
+
+	    @Override
+	    public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
+		readFromNBT(packet.customParam1);
+	    }
+
 }

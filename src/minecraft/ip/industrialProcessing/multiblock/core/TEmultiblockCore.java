@@ -12,6 +12,9 @@ import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.INetworkManager;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Facing;
 import net.minecraftforge.common.ForgeDirection;
@@ -22,6 +25,8 @@ public class TEmultiblockCore extends TileEntity {
 	private TierCollection tierRequirments;
 
 	private ArrayList<TEmultiblockDummy> dummy = new ArrayList<TEmultiblockDummy>();
+	private boolean loadedFromNBT;
+	private int[][] dummyDataFromNBT;
 	private FacingDirection side = FacingDirection.North;
 	private MultiblockState state = MultiblockState.CONNECTED;
 	private Tiers tier = Tiers.Invalid;
@@ -32,6 +37,16 @@ public class TEmultiblockCore extends TileEntity {
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 		writeCore(nbt);
+	}
+
+	public ArrayList<TEmultiblockDummy> getDummies() {
+		if (loadedFromNBT) {
+			for (int[] coord : dummyDataFromNBT) {
+				dummy.add((TEmultiblockDummy) worldObj.getBlockTileEntity(coord[0], coord[1], coord[2]));
+			}
+			loadedFromNBT = false;
+		}
+		return dummy;
 	}
 
 	private void writeCore(NBTTagCompound nbt) {
@@ -57,8 +72,32 @@ public class TEmultiblockCore extends TileEntity {
 		nbtComp.setInteger("side", side.ordinal());
 		nbttaglist.appendTag(nbtComp);
 
+		nbtComp = new NBTTagCompound();
+		NBTTagList nbttaglistDummies = new NBTTagList();
+		for (TEmultiblockDummy te : getDummies()) {
+			if (te != null) {
+				NBTTagList nbttaglistDummie = new NBTTagList();
+				nbttaglistDummie.setName("dummy" + te.getID());
+
+				nbtComp = new NBTTagCompound();
+				nbtComp.setInteger("x", te.xCoord);
+				nbttaglistDummie.appendTag(nbtComp);
+
+				nbtComp = new NBTTagCompound();
+				nbtComp.setInteger("y", te.yCoord);
+				nbttaglistDummie.appendTag(nbtComp);
+
+				nbtComp = new NBTTagCompound();
+				nbtComp.setInteger("z", te.zCoord);
+				nbttaglistDummie.appendTag(nbtComp);
+
+				nbttaglistDummies.appendTag(nbttaglistDummie);
+			}
+		}
+
 		nbt.setTag("Core", nbttaglist);
-		
+		nbt.setTag("Dummies", nbttaglistDummies);
+
 	}
 
 	@Override
@@ -81,9 +120,24 @@ public class TEmultiblockCore extends TileEntity {
 
 		nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(3);
 		state = MultiblockState.values()[nbttagcompound1.getInteger("state")];
-		
+
 		nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(4);
 		side = FacingDirection.values()[nbttagcompound1.getInteger("side")];
+
+		getDummies().clear();
+		nbttaglist = nbt.getTagList("Dummies");
+		dummyDataFromNBT = new int[nbttaglist.tagCount()][3];
+		for (int i = 0; i < nbttaglist.tagCount(); i++) {
+			NBTTagList nbttaglistDummie = (NBTTagList) nbttaglist.tagAt(i);
+			nbttagcompound1 = (NBTTagCompound) nbttaglistDummie.tagAt(0);
+			int x = nbttagcompound1.getInteger("x");
+			nbttagcompound1 = (NBTTagCompound) nbttaglistDummie.tagAt(1);
+			int y = nbttagcompound1.getInteger("y");
+			nbttagcompound1 = (NBTTagCompound) nbttaglistDummie.tagAt(2);
+			int z = nbttagcompound1.getInteger("z");
+			loadedFromNBT = true;
+			dummyDataFromNBT[i] = new int[] { x, y, z };
+		}
 
 	}
 
@@ -93,11 +147,11 @@ public class TEmultiblockCore extends TileEntity {
 	}
 
 	public void registerDummy(TEmultiblockDummy te) {
-		dummy.add(te);
+		getDummies().add(te);
 	}
 
 	public void unregisterDummy(TEmultiblockDummy temultiblockDummy) {
-		dummy.remove(temultiblockDummy);
+		getDummies().remove(temultiblockDummy);
 	}
 
 	public boolean isDummyValidForStructure(TEmultiblockDummy te) {
@@ -121,10 +175,12 @@ public class TEmultiblockCore extends TileEntity {
 		// first determinate what to delete. If you delete while running trough
 		// your loop, you will mess sh* up.
 		ArrayList<TEmultiblockDummy> dummiesToBeEreased = new ArrayList<TEmultiblockDummy>();
-		for (TEmultiblockDummy te : dummy) {
-			FacingDirection dir = structure.isBlockValid(te.xCoord - xCoord, te.yCoord - yCoord, te.zCoord - zCoord, te.worldObj.getBlockId(te.xCoord, te.yCoord, te.zCoord), side, true);
-			if (dir == FacingDirection.Invalid)
-				dummiesToBeEreased.add(te);
+		for (TEmultiblockDummy te : getDummies()) {
+			if (te != null) {
+				FacingDirection dir = structure.isBlockValid(te.xCoord - xCoord, te.yCoord - yCoord, te.zCoord - zCoord, te.worldObj.getBlockId(te.xCoord, te.yCoord, te.zCoord), side, true);
+				if (dir == FacingDirection.Invalid)
+					dummiesToBeEreased.add(te);
+			}
 		}
 		for (TEmultiblockDummy te : dummiesToBeEreased) {
 			te.delCore();
@@ -132,14 +188,16 @@ public class TEmultiblockCore extends TileEntity {
 	}
 
 	public void destroyMultiblock() {
-		for (TEmultiblockDummy te : dummy) {
-			worldObj.destroyBlock(te.xCoord, te.yCoord, te.zCoord, true);
+		for (TEmultiblockDummy te : getDummies()) {
+			if (te != null)
+				worldObj.destroyBlock(te.xCoord, te.yCoord, te.zCoord, true);
 		}
 	}
 
 	public void onStateChange() {
-		for (TEmultiblockDummy te : dummy) {
-			te.setState(state);
+		for (TEmultiblockDummy te : getDummies()) {
+			if (te != null)
+				te.setState(state);
 		}
 	}
 
@@ -171,7 +229,7 @@ public class TEmultiblockCore extends TileEntity {
 	private void configMultiblock() {
 		if (tier != Tiers.Invalid) {
 			setDefaultModel();
-			tierRequirments.getTier(tier).configMultiblock(this, dummy);
+			tierRequirments.getTier(tier).configMultiblock(this, getDummies());
 		}
 	}
 
@@ -208,8 +266,9 @@ public class TEmultiblockCore extends TileEntity {
 			}
 			}
 			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, metadata, 1);
-			for (TEmultiblockDummy te : dummy) {
-				worldObj.setBlockMetadataWithNotify(te.xCoord, te.yCoord, te.zCoord, metadata, 1);
+			for (TEmultiblockDummy te : getDummies()) {
+				if (te != null)
+					worldObj.setBlockMetadataWithNotify(te.xCoord, te.yCoord, te.zCoord, metadata, 1);
 			}
 		}
 	}
@@ -254,14 +313,16 @@ public class TEmultiblockCore extends TileEntity {
 	}
 
 	public void setDummiesModelIDs() {
-		for (TEmultiblockDummy te : dummy) {
-			te.setModelID(structure.getModelIDforBlock(te.xCoord - xCoord, te.yCoord - yCoord, te.zCoord - zCoord, side));
+		for (TEmultiblockDummy te : getDummies()) {
+			if (te != null)
+				te.setModelID(structure.getModelIDforBlock(te.xCoord - xCoord, te.yCoord - yCoord, te.zCoord - zCoord, side));
 		}
 	}
 
 	public void setDummiesModelConnections() {
-		for (TEmultiblockDummy te : dummy) {
-			te.setModelConnection(structure.getModelConnectionforBlock(te.xCoord - xCoord, te.yCoord - yCoord, te.zCoord - zCoord, side));
+		for (TEmultiblockDummy te : getDummies()) {
+			if (te != null)
+				te.setModelConnection(structure.getModelConnectionforBlock(te.xCoord - xCoord, te.yCoord - yCoord, te.zCoord - zCoord, side));
 		}
 	}
 
@@ -305,9 +366,11 @@ public class TEmultiblockCore extends TileEntity {
 	}
 
 	public TEmultiblockDummy getDummyByID(int ID) {
-		for (TEmultiblockDummy te : dummy) {
-			if (te.getID() == ID) {
-				return te;
+		for (TEmultiblockDummy te : getDummies()) {
+			if (te != null) {
+				if (te.getID() == ID) {
+					return te;
+				}
 			}
 		}
 		return null;
@@ -322,6 +385,18 @@ public class TEmultiblockCore extends TileEntity {
 		if (dir == side)
 			return true;
 		return false;
+	}
+
+	@Override
+	public Packet getDescriptionPacket() {
+		NBTTagCompound nbtTag = new NBTTagCompound();
+		this.writeToNBT(nbtTag);
+		return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
+	}
+
+	@Override
+	public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
+		readFromNBT(packet.customParam1);
 	}
 
 }

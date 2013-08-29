@@ -18,6 +18,8 @@ import ip.industrialProcessing.machines.thickener.TileEntityThickener;
 import ip.industrialProcessing.multiblock.core.block.hotPress.TEmultiblockHotPress;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
+import ip.industrialProcessing.multiblock.dummy.block.frame.TEmultiblockFrame;
+import ip.industrialProcessing.multiblock.dummy.block.screen.TEmultiblockScreen;
 import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.TEmultiblockWeldingTableExt;
 import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
 import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
@@ -74,8 +76,8 @@ public class ConfigMachineBlocks {
 
 	public void registerMachineBlocks() {
 		//multiblocks
-		registerMachineBlock(IndustrialProcessing.BLmultiblockScreen, "IP.MBD.Screen", "Screen", TEmultiblockDummy.class);
-		registerMachineBlock(IndustrialProcessing.BLmultiblockFrame, "IP.MBD.Frame", "Frame", TEmultiblockDummy.class);
+		registerMachineBlock(IndustrialProcessing.BLmultiblockScreen, "IP.MBD.Screen", "Screen", TEmultiblockScreen.class);
+		registerMachineBlock(IndustrialProcessing.BLmultiblockFrame, "IP.MBD.Frame", "Frame", TEmultiblockFrame.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockHotPress, "IP.MBC.HotPress", "Hot press", TEmultiblockHotPress.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockWeldingStation, "IP.MBC.WeldingStation", "Welding station", TEmultiblockWeldingStation.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockWeldingTableExt, "IP.MBD.WeldingTableExt", "Welding station extention", TEmultiblockWeldingTableExt.class);

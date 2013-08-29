@@ -87,5 +87,11 @@ public abstract class BLmultiblockCore extends BlockContainer {
 		world.destroyBlock(x, y, z, true);
 		return true;
 	}
+	
+	@Override
+	public void onBlockAdded(World par1World, int par2, int par3, int par4) {
+		super.onBlockAdded(par1World, par2, par3, par4);
+		par1World.markBlockForUpdate(par2, par3, par4);
+	}
 
 }
