@@ -41,10 +41,13 @@ public class TEmultiblockWeldingStation extends TEmultiblockCore{
 		
 		tier = new Tier();
 		tier.setBlockPresent(2);
+		tier.setAction(MultiblockActionType.modelConnection, 1, 1);
 		tierRequirments.addTier(tier, Tiers.Tier1);
 		
 		tier = new Tier();
+		tier.setBlockPresent(2);
 		tier.setBlockPresent(3);
+		tier.setAction(MultiblockActionType.modelConnection, 1, 1);
 		tier.setAction(MultiblockActionType.modelConnection, 5, 2);
 		tierRequirments.addTier(tier, Tiers.Tier2);
 

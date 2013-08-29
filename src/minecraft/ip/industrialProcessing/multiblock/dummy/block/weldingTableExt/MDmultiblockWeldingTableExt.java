@@ -119,13 +119,29 @@ public class MDmultiblockWeldingTableExt extends ModelingMultiblock{
 
 	@Override
 	public void renderModel(float f5, int connection) {
-		Top.render(f5);
-		Desk.render(f5);
-		Back.render(f5);
-		FootRight.render(f5);
-		Door.render(f5);
-		HandleLeft.render(f5);
-		ConnectedPanelLeft.render(f5);
+		switch(connection){
+		case 0:{
+			Top.render(f5);
+			Desk.render(f5);
+			Back.render(f5);
+			FootRight.render(f5);
+			Door.render(f5);
+			HandleLeft.render(f5);
+			ConnectedPanelLeft.render(f5);
+			break;
+		}
+		case 1:{
+			Top.render(f5);
+			Desk.render(f5);
+			Back.render(f5);
+			Door.render(f5);
+			HandleLeft.render(f5);
+			ConnectedPanelLeft.render(f5);
+			ConnectedPanelRight.render(f5);
+			break;
+		}
+		}
+
 	}
 
 }
