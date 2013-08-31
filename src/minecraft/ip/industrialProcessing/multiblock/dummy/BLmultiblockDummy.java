@@ -54,6 +54,17 @@ public abstract class BLmultiblockDummy extends BlockContainer {
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
+		TileEntity te = world.getBlockTileEntity(x, y, z);
+		if (player.isSneaking() || te == null)
+			return false;
+		TEmultiblockDummy TEdummy = ((TEmultiblockDummy) te);
+		if (TEdummy.getState() == MultiblockState.COMPLETED) {
+			TEmultiblockCore TEcore = (TEmultiblockCore) TEdummy.getCore();
+			if (TEcore.getState() == MultiblockState.COMPLETED) {
+				player.openGui(IndustrialProcessing.instance, 0, world, TEcore.xCoord, TEcore.yCoord, TEcore.zCoord);
+				return true;
+			}
+		}
 		return false;
 	}
 
@@ -89,7 +100,7 @@ public abstract class BLmultiblockDummy extends BlockContainer {
 			core.onLayoutChange();
 		return true;
 	}
-	
+
 	@Override
 	public void onBlockAdded(World par1World, int par2, int par3, int par4) {
 		super.onBlockAdded(par1World, par2, par3, par4);

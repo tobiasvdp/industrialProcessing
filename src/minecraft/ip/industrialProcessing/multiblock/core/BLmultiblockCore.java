@@ -1,6 +1,8 @@
 package ip.industrialProcessing.multiblock.core;
 
+import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
+import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import ip.industrialProcessing.utils.inventories.InventoryUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -52,6 +54,14 @@ public abstract class BLmultiblockCore extends BlockContainer {
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
+		TileEntity te = world.getBlockTileEntity(x, y, z);
+		if (player.isSneaking() || te == null)
+			return false;
+		TEmultiblockCore TEcore = (TEmultiblockCore) te;
+		if (TEcore.getState() == MultiblockState.COMPLETED) {
+			player.openGui(IndustrialProcessing.instance, 0, world, x, y, z);
+			return true;
+		}
 		return false;
 	}
 
@@ -87,7 +97,7 @@ public abstract class BLmultiblockCore extends BlockContainer {
 		world.destroyBlock(x, y, z, true);
 		return true;
 	}
-	
+
 	@Override
 	public void onBlockAdded(World par1World, int par2, int par3, int par4) {
 		super.onBlockAdded(par1World, par2, par3, par4);

@@ -226,4 +226,8 @@ public class TEmultiblockDummy extends TileEntity {
 		readFromNBT(packet.customParam1);
 	    }
 
+		public MultiblockState getState() {
+			return state;
+		}
+
 }
