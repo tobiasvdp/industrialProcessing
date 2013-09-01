@@ -1,6 +1,9 @@
 package ip.industrialProcessing.multiblock.core.block.weldingStation;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.StatCollector;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
 import ip.industrialProcessing.multiblock.gui.CTmultiblock;
@@ -12,4 +15,13 @@ public class GUIWeldingStation extends GUImultiblock{
 		super(inventory, entity, new CTmultiblock(inventory, entity), "Welding Table", "textures/gui/WeldingTable.png");
 	}
 
+	@Override
+	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
+		super.drawGuiContainerForegroundLayer(param1, param2);
+	}
+
+	@Override
+	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
+		super.drawGuiContainerBackgroundLayer(par1, par2, par3);
+	}
 }
