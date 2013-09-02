@@ -223,7 +223,7 @@ public class TEmultiblockDummy extends TileEntity {
 
 	    @Override
 	    public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
-		readFromNBT(packet.customParam1);
+	    	readFromNBT(packet.customParam1);
 	    }
 
 		public MultiblockState getState() {
