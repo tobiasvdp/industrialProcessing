@@ -74,6 +74,7 @@ public class TEmultiblockCore extends TileEntity {
 
 		nbtComp = new NBTTagCompound();
 		NBTTagList nbttaglistDummies = new NBTTagList();
+		System.out.println("writing dummies");
 		for (TEmultiblockDummy te : getDummies()) {
 			if (te != null) {
 				NBTTagList nbttaglistDummie = new NBTTagList();

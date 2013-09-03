@@ -62,7 +62,7 @@ public class MultiblockItemStack {
 		}
 		this.itemStack = null;
 		if (stack.stackSize == 0)
-			return null;
+			stack = null;
 		return stack;
 	}
 
@@ -99,11 +99,15 @@ public class MultiblockItemStack {
 	public void setStack(ItemStack itemstack2) {
 		if (itemstack2 != null) {
 			itemStack = new ItemStack(itemstack2.itemID, itemstack2.stackSize, itemstack2.getItemDamage());
-		}
+		}else
+			itemStack = null;
 	}
 
 	public boolean getIsInput() {
 		return type==TEmultiblockItemStackType.input||type==TEmultiblockItemStackType.inout;
+	}
+	public boolean getIsOutput(){
+		return type==TEmultiblockItemStackType.output||type==TEmultiblockItemStackType.inout;
 	}
 
 	public boolean damageItem() {

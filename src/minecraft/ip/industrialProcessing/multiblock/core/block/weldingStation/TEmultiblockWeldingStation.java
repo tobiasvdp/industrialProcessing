@@ -65,11 +65,11 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreInv{
 	public TEmultiblockWeldingStation() {
 		super(structure, tierRequirments,recipes);
 		
-		//add slots
-		addItemSlot(TEmultiblockItemStackType.input).addID(0).addSide(blockSide.front);;
-		addItemSlot(TEmultiblockItemStackType.output);
+		//add slots and set default IO for multiblocks
+		addItemSlot(TEmultiblockItemStackType.inout).addID(0).addSide(blockSide.front);
+		addItemSlot(TEmultiblockItemStackType.output).addID(0).addSide(blockSide.right);
 		
-		//set default IO for multiblocks
+		
 	}
 
 }

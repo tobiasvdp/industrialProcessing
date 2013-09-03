@@ -89,7 +89,7 @@ public final class Inventories {
 		if (state != MultiblockState.COMPLETED)
 			return false;
 		MultiblockItemStack multiblockStack = itemStacks.get(i);
-		if (!multiblockStack.getIsInput() && multiblockStack.hasID(ID) && multiblockStack.hasSide(side) &&  multiblockStack.getItemStack().stackSize >= itemstack.stackSize) {
+		if (multiblockStack.getIsOutput() && multiblockStack.hasID(ID) && multiblockStack.hasSide(side) &&  multiblockStack.getItemStack().stackSize >= itemstack.stackSize) {
 			return isItemValidForSlot(i, itemstack, recipes, itemStacks);
 		}
 		return false;
@@ -111,6 +111,9 @@ public final class Inventories {
 
 	public static void readInventory(NBTTagCompound nbt, ArrayList<MultiblockItemStack> itemStacks) {
 		NBTTagList nbttaglist = nbt.getTagList("Items");
+		for(MultiblockItemStack stack: itemStacks){
+			stack.setStack(null);
+		}
 		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
 			NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(i);
 			byte b0 = nbttagcompound1.getByte("Slot");
