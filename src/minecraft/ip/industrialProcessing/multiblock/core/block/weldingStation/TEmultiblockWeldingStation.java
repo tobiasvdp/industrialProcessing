@@ -1,7 +1,11 @@
 package ip.industrialProcessing.multiblock.core.block.weldingStation;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.machines.crusher.RecipesCrusher;
+import ip.industrialProcessing.machines.mixer.RecipesMixer;
 import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
+import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreInv;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
 import ip.industrialProcessing.multiblock.layout.LayoutTransformer;
@@ -11,11 +15,15 @@ import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.TierRequirement;
 import ip.industrialProcessing.multiblock.tier.Tiers;
 import ip.industrialProcessing.multiblock.utils.MultiblockActionType;
+import ip.industrialProcessing.multiblock.utils.TEmultiblockItemStackType;
+import ip.industrialProcessing.multiblock.utils.blockSide;
 
-public class TEmultiblockWeldingStation extends TEmultiblockCore{
+public class TEmultiblockWeldingStation extends TEmultiblockCoreInv{
 	static StructureMultiblock structure;
 	static TierCollection tierRequirments;
+	static RecipesMachine recipes = new RecipesCrusher();
 	static{
+		//set layout
 		structure = new StructureMultiblock();
 		
 		LayoutMultiblock layout = new LayoutMultiblock(2, 0, 0, 0, 1, 0);
@@ -34,6 +42,8 @@ public class TEmultiblockWeldingStation extends TEmultiblockCore{
 		structure.addLayout(LayoutTransformer.transform(layout, FacingDirection.South), FacingDirection.South);
 		structure.addLayout(LayoutTransformer.transform(layout, FacingDirection.West), FacingDirection.West);
 		
+		
+		//set tiers
 		tierRequirments = new TierCollection(3);
 		
 		Tier tier = new Tier();
@@ -53,7 +63,13 @@ public class TEmultiblockWeldingStation extends TEmultiblockCore{
 
 	}
 	public TEmultiblockWeldingStation() {
-		super(structure, tierRequirments);
+		super(structure, tierRequirments,recipes);
+		
+		//add slots
+		addItemSlot(TEmultiblockItemStackType.input).addID(0).addSide(blockSide.front);;
+		addItemSlot(TEmultiblockItemStackType.output);
+		
+		//set default IO for multiblocks
 	}
 
 }

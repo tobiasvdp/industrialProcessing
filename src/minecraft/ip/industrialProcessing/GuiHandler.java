@@ -42,6 +42,7 @@ import ip.industrialProcessing.machines.pelletExtruder.TileEntityPelletExtruder;
 import ip.industrialProcessing.machines.thickener.ContainerThickener;
 import ip.industrialProcessing.machines.thickener.GuiContainerThickener;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
+import ip.industrialProcessing.multiblock.core.block.weldingStation.CTWeldingStation;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.GUIWeldingStation;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.gui.CTmultiblock;
@@ -92,7 +93,7 @@ public class GuiHandler implements IGuiHandler {
 	    if (entity instanceof TileEntityBuildcraftGenerator)
 		return new ContainerBuildcraftGenerator(player.inventory, (TileEntityBuildcraftGenerator) entity);
 	    if (entity instanceof TEmultiblockWeldingStation)
-		return new CTmultiblock(player.inventory, (TEmultiblockWeldingStation) entity);
+		return new CTWeldingStation(player.inventory, (TEmultiblockWeldingStation) entity);
 	}
 	return null;
     }

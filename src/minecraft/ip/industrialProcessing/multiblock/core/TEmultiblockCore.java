@@ -27,8 +27,8 @@ public class TEmultiblockCore extends TileEntity {
 	private ArrayList<TEmultiblockDummy> dummy = new ArrayList<TEmultiblockDummy>();
 	private boolean loadedFromNBT;
 	private int[][] dummyDataFromNBT;
-	private FacingDirection side = FacingDirection.North;
-	private MultiblockState state = MultiblockState.CONNECTED;
+	protected FacingDirection side = FacingDirection.North;
+	protected MultiblockState state = MultiblockState.CONNECTED;
 	private Tiers tier = Tiers.Invalid;
 	private int modelID;
 	private int modelConnection;
