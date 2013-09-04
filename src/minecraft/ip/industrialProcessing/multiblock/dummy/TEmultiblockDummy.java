@@ -27,7 +27,7 @@ public class TEmultiblockDummy extends TileEntity {
 	private MultiblockState state = MultiblockState.DISCONNECTED;
 	private int modelID;
 	private int modelConnection;
-	private int ID;
+	protected int ID;
 
 	public TEmultiblockDummy() {
 

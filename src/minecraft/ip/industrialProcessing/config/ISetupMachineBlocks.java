@@ -22,8 +22,12 @@ import ip.industrialProcessing.machines.thickener.BlockThickener;
 import ip.industrialProcessing.multiblock.core.block.hotPress.BLmultiblockHotPress;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.BLmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.dummy.block.frame.BLmultiblockFrame;
+import ip.industrialProcessing.multiblock.dummy.block.inventory.input.BLmultiblockInvInput;
+import ip.industrialProcessing.multiblock.dummy.block.inventory.output.BLmultiblockInvOutput;
 import ip.industrialProcessing.multiblock.dummy.block.screen.BLmultiblockScreen;
+import ip.industrialProcessing.multiblock.dummy.block.toggleButton.BLmultiblockToggleButton;
 import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.BLmultiblockWeldingTableExt;
+import ip.industrialProcessing.multiblock.core.block.elevator.BLmultiblockElevator;
 import ip.industrialProcessing.power.buildcraftGenerator.BlockBuildcraftGenerator;
 import ip.industrialProcessing.power.manualGenerator.BlockManualGenerator;
 import ip.industrialProcessing.power.meters.BlockAmpMeter;
@@ -72,4 +76,8 @@ public interface ISetupMachineBlocks {
 	public final static BLmultiblockWeldingStation BLmultiblockWeldingStation= new BLmultiblockWeldingStation();
 	public final static BLmultiblockScreen BLmultiblockScreen= new BLmultiblockScreen();
 	public final static BLmultiblockWeldingTableExt BLmultiblockWeldingTableExt= new BLmultiblockWeldingTableExt();
+	public final static BLmultiblockInvInput BLmultiblockInvInput= new BLmultiblockInvInput();
+	public final static BLmultiblockInvOutput BLmultiblockInvOutput= new BLmultiblockInvOutput();
+	public final static BLmultiblockToggleButton BLmultiblockToggleButton= new BLmultiblockToggleButton();
+	public final static BLmultiblockElevator BLmultiblockElevator= new BLmultiblockElevator();
 }

@@ -61,7 +61,7 @@ public final class Inventories {
 		return true;
 	}
 
-	public static boolean isItemValidForSlot(int slot, ItemStack itemstack,RecipesMachine recipes,ArrayList<MultiblockItemStack> itemStacks) {
+	public static boolean isItemValidForSlot(int slot, ItemStack itemstack, RecipesMachine recipes, ArrayList<MultiblockItemStack> itemStacks) {
 		int itemID = itemstack.itemID;
 		return recipes.isValidInput(slot, itemID);
 	}
@@ -69,9 +69,8 @@ public final class Inventories {
 	public static int[] getAccessibleSlotsFromSide(int ID, int side, ArrayList<MultiblockItemStack> itemStacks) {
 		ArrayList<Integer> validSlots = new ArrayList<Integer>();
 		for (int i = 0; i < itemStacks.size(); i++) {
-			if (itemStacks.get(i).hasID(ID))
-				if (itemStacks.get(i).hasSide(side))
-					validSlots.add(i);
+			if (itemStacks.get(i).hasIDandSide(ID, side))
+				validSlots.add(i);
 		}
 		return ArrayUtils.toPrimitive(validSlots.toArray(new Integer[validSlots.size()]));
 	}
@@ -80,7 +79,7 @@ public final class Inventories {
 		if (state != MultiblockState.COMPLETED)
 			return false;
 		MultiblockItemStack multiblockStack = itemStacks.get(i);
-		if (multiblockStack.getIsInput() && multiblockStack.hasID(ID) && multiblockStack.hasSide(side) && multiblockStack.incStack(itemstack.itemID, itemstack.stackSize, false))
+		if (multiblockStack.getIsInput() && multiblockStack.hasIDandSide(ID, side) && multiblockStack.incStack(itemstack.itemID, itemstack.stackSize, false))
 			return isItemValidForSlot(i, itemstack, recipes, itemStacks);
 		return false;
 	}
@@ -89,7 +88,7 @@ public final class Inventories {
 		if (state != MultiblockState.COMPLETED)
 			return false;
 		MultiblockItemStack multiblockStack = itemStacks.get(i);
-		if (multiblockStack.getIsOutput() && multiblockStack.hasID(ID) && multiblockStack.hasSide(side) &&  multiblockStack.getItemStack().stackSize >= itemstack.stackSize) {
+		if (multiblockStack.getIsOutput() && multiblockStack.hasIDandSide(ID, side) && multiblockStack.getItemStack().stackSize >= itemstack.stackSize) {
 			return isItemValidForSlot(i, itemstack, recipes, itemStacks);
 		}
 		return false;
@@ -111,7 +110,7 @@ public final class Inventories {
 
 	public static void readInventory(NBTTagCompound nbt, ArrayList<MultiblockItemStack> itemStacks) {
 		NBTTagList nbttaglist = nbt.getTagList("Items");
-		for(MultiblockItemStack stack: itemStacks){
+		for (MultiblockItemStack stack : itemStacks) {
 			stack.setStack(null);
 		}
 		for (int i = 0; i < nbttaglist.tagCount(); ++i) {

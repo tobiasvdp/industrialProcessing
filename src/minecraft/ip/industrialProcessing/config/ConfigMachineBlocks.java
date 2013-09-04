@@ -15,11 +15,16 @@ import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import ip.industrialProcessing.machines.oxygenFurnace.TileEntityOxygenFurnace;
 import ip.industrialProcessing.machines.pelletExtruder.TileEntityPelletExtruder;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
+import ip.industrialProcessing.multiblock.core.block.elevator.TEmultiblockElevator;
 import ip.industrialProcessing.multiblock.core.block.hotPress.TEmultiblockHotPress;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
+import ip.industrialProcessing.multiblock.dummy.block.frame.ENmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.frame.TEmultiblockFrame;
+import ip.industrialProcessing.multiblock.dummy.block.inventory.input.TEmultiblockInvInput;
+import ip.industrialProcessing.multiblock.dummy.block.inventory.output.TEmultiblockInvOutput;
 import ip.industrialProcessing.multiblock.dummy.block.screen.TEmultiblockScreen;
+import ip.industrialProcessing.multiblock.dummy.block.toggleButton.TEmultiblockToggleButton;
 import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.TEmultiblockWeldingTableExt;
 import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
 import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
@@ -33,6 +38,7 @@ import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids;
 import net.minecraft.block.Block;
 import net.minecraft.src.ModLoader;
 import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -73,14 +79,24 @@ public class ConfigMachineBlocks {
 	private int BLmultiblockWeldingStation = 722;
 	private int BLmultiblockScreen = 723;
 	private int BLmultiblockWeldingStationExt = 724;
+	private int BLmultiblockInvInput = 725;
+	private int BLmultiblockInvOutput = 726;
+	private int BLmultiblockToggleButton = 727;
+	private int BLmultiblockElevator = 728;
 
 	public void registerMachineBlocks() {
 		//multiblocks
+		registerMachineBlock(IndustrialProcessing.BLmultiblockElevator, "IP.MBC.Elevator", "Elevator", TEmultiblockElevator.class);
+		registerMachineBlock(IndustrialProcessing.BLmultiblockToggleButton, "IP.MBD.Toggle", "Control panel", TEmultiblockToggleButton.class);
+		registerMachineBlock(IndustrialProcessing.BLmultiblockInvInput, "IP.MBD.InvInput", "Item input", TEmultiblockInvInput.class);
+		registerMachineBlock(IndustrialProcessing.BLmultiblockInvOutput, "IP.MBD.InvOutput", "Item output", TEmultiblockInvOutput.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockScreen, "IP.MBD.Screen", "Screen", TEmultiblockScreen.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockFrame, "IP.MBD.Frame", "Frame", TEmultiblockFrame.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockHotPress, "IP.MBC.HotPress", "Hot press", TEmultiblockHotPress.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockWeldingStation, "IP.MBC.WeldingStation", "Welding station", TEmultiblockWeldingStation.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockWeldingTableExt, "IP.MBD.WeldingTableExt", "Welding station extention", TEmultiblockWeldingTableExt.class);
+		
+		//register entitys associated with multiblocks
 		
 		//machines
 		registerMachineBlock(IndustrialProcessing.blockCrusher, "IP.Machine.Crusher", "Ore Crusher", TileEntityCrusher.class);
@@ -121,6 +137,19 @@ public class ConfigMachineBlocks {
 	
 	public static ConfigMachineBlocks getInstance() {
 		return instance;
+	}
+	
+	public static int getBLmultiblockElevator() {
+		return getInstance().BLmultiblockElevator;
+	}
+	public static int getBLmultiblockToggleButton() {
+		return getInstance().BLmultiblockToggleButton;
+	}
+	public static int getBLmultiblockInvInput() {
+		return getInstance().BLmultiblockInvInput;
+	}
+	public static int getBLmultiblockInvOutput() {
+		return getInstance().BLmultiblockInvOutput;
 	}
 	public static int getBLmultiblockWeldingStationExt() {
 		return getInstance().BLmultiblockWeldingStationExt;

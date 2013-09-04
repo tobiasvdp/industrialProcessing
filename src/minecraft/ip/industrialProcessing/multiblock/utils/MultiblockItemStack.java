@@ -10,36 +10,20 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeDirection;
 
 public class MultiblockItemStack {
-	private ArrayList<Integer> validIDs = new ArrayList<Integer>();
-	private ArrayList<Integer> validSides = new ArrayList<Integer>();
+	private ArrayList<MultiblockItemStackID> validIO = new ArrayList<MultiblockItemStackID>();
 	private ItemStack itemStack;
 	private TEmultiblockItemStackType type;
 
-	public MultiblockItemStack(TEmultiblockItemStackType type, int... ID) {
+	public MultiblockItemStack(TEmultiblockItemStackType type) {
 		this.type = type;
-		for (int i = 0; i < ID.length; i++) {
-			addID(ID[i]);
-		}
 	}
 
-	public MultiblockItemStack addID(int... ID) {
-		for(int i=0;i<ID.length;i++)
-			validIDs.add(ID[i]);
-		return this;
-	}
-	public MultiblockItemStack addSide(blockSide... side) {
-		for(int i=0;i<side.length;i++)
-			validSides.add(side[i].ordinal());
+	public MultiblockItemStack addIdSide(int ID, blockSide... sides) {
+		validIO.add(new MultiblockItemStackID(ID, sides));
 		return this;
 	}
 
 	public boolean removeID(int ID) {
-		for (int i = 0; i < validIDs.size(); i++) {
-			if (validIDs.get(i) == ID) {
-				validIDs.remove(i);
-				return true;
-			}
-		}
 		return false;
 	}
 
@@ -87,27 +71,19 @@ public class MultiblockItemStack {
 		return false;
 	}
 
-	public boolean hasID(int ID) {
-		for (int i = 0; i < validIDs.size(); i++) {
-			if (validIDs.get(i) == ID) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	public void setStack(ItemStack itemstack2) {
 		if (itemstack2 != null) {
 			itemStack = new ItemStack(itemstack2.itemID, itemstack2.stackSize, itemstack2.getItemDamage());
-		}else
+		} else
 			itemStack = null;
 	}
 
 	public boolean getIsInput() {
-		return type==TEmultiblockItemStackType.input||type==TEmultiblockItemStackType.inout;
+		return type == TEmultiblockItemStackType.input || type == TEmultiblockItemStackType.inout;
 	}
-	public boolean getIsOutput(){
-		return type==TEmultiblockItemStackType.output||type==TEmultiblockItemStackType.inout;
+
+	public boolean getIsOutput() {
+		return type == TEmultiblockItemStackType.output || type == TEmultiblockItemStackType.inout;
 	}
 
 	public boolean damageItem() {
@@ -127,11 +103,10 @@ public class MultiblockItemStack {
 		return false;
 	}
 
-	public boolean hasSide(int side) {
-		for (int i = 0; i < validSides.size(); i++) {
-			if (validSides.get(i) == side) {
+	public boolean hasIDandSide(int id, int side) {
+		for (MultiblockItemStackID idAndSide : validIO) {
+			if (idAndSide.isValid(id, side))
 				return true;
-			}
 		}
 		return false;
 	}

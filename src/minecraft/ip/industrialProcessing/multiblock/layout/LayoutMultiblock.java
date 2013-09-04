@@ -59,8 +59,11 @@ public class LayoutMultiblock {
 		int x = i + xCore;
 		int y = j + yCore;
 		int z = -k + zCore;
-		if (x >= 0 && y >= 0 && z >= 0 && x < layout.length && y < layout[0].length & z < layout[0][0].length)
+		if (x >= 0 && y >= 0 && z >= 0 && x < layout.length && y < layout[0].length & z < layout[0][0].length){
+			if (layout[x][y][z] == null)
+				return false;
 			return layout[x][y][z].isValidID(blockID);
+		}
 		else
 			return false;
 	}
@@ -129,6 +132,10 @@ public class LayoutMultiblock {
 
 	public int getSizeFront() {
 		return sizeFront;
+	}
+
+	public void unsetBlockID(int i, int j, int k) {
+		layout[i + xCore][j + yCore][-k + zCore] = null;
 	}
 
 }

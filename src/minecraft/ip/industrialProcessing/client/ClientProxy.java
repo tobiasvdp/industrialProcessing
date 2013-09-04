@@ -3,6 +3,8 @@ package ip.industrialProcessing.client;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraftforge.client.MinecraftForgeClient;
 import ip.industrialProcessing.CommonProxy;
 import ip.industrialProcessing.IndustrialProcessing;
@@ -14,6 +16,7 @@ import ip.industrialProcessing.client.render.ModelMachine;
 import ip.industrialProcessing.client.render.ModelMultiblock;
 import ip.industrialProcessing.client.render.ModelStateMachine;
 import ip.industrialProcessing.client.render.ModelingMultiblock;
+import ip.industrialProcessing.client.render.RendererLivingEntity;
 import ip.industrialProcessing.client.render.RendererTileEntity;
 import ip.industrialProcessing.client.render.RendererTileEntityConnected;
 import ip.industrialProcessing.client.render.RendererTileEntityConnectedFluid;
@@ -53,7 +56,9 @@ import ip.industrialProcessing.transport.fluids.ModelTransportFluids;
 import ip.industrialProcessing.transport.fluids.TileEntityTank;
 import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids;
 import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
+import ip.industrialProcessing.multiblock.dummy.block.frame.ENmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.frame.MDmultiblockFrame;
+import ip.industrialProcessing.multiblock.dummy.block.frame.MDmultiblockFramePanel;
 import ip.industrialProcessing.multiblock.dummy.block.frame.TEmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.screen.MDmultiblockScreen;
 import ip.industrialProcessing.multiblock.dummy.block.screen.TEmultiblockScreen;
@@ -81,6 +86,7 @@ public class ClientProxy extends CommonProxy {
 	private static final MDmultiblockScreen MDmultiblockScreen = new MDmultiblockScreen();
 	private static final MDmultiblockFrame MDmultiblockFrame = new MDmultiblockFrame();
 	private static final MDmultiblockWeldingTableExt MDmultiblockWeldingTableExt = new MDmultiblockWeldingTableExt();
+	private static final MDmultiblockFramePanel MDmultiblockFramePanel = new MDmultiblockFramePanel();
 	
 	@Override
 	public void registerRenderers() {
@@ -148,12 +154,17 @@ public class ClientProxy extends CommonProxy {
 		ConfigRenderers.setBLmultiblockScreen(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLmultiblockScreen(), new TEmultiblockScreen()));
 		
-		ClientRegistry.bindTileEntitySpecialRenderer(TEmultiblockFrame.class, new RenderingMultiblock(IndustrialProcessing.BLmultiblockFrame, new String[] { "ModelMultiblockFrame" }, new ModelingMultiblock[] { MDmultiblockFrame }));
+		ClientRegistry.bindTileEntitySpecialRenderer(TEmultiblockFrame.class, new RenderingMultiblock(IndustrialProcessing.BLmultiblockFrame, new String[] { "ModelMultiblockFrame","MDmultiblockFramePanel" }, new ModelingMultiblock[] { MDmultiblockFrame,MDmultiblockFramePanel }));
 		ConfigRenderers.setBLmultiblockFrame(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLmultiblockFrame(), new TEmultiblockFrame()));
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TEmultiblockWeldingTableExt.class, new RenderingMultiblock(IndustrialProcessing.BLmultiblockWeldingTableExt, new String[] { "ModelMultiblockWeldingStation" }, new ModelingMultiblock[] { MDmultiblockWeldingTableExt }));
 		ConfigRenderers.setBLmultiblockWeldingTableExt(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLmultiblockWeldingTableExt(), new TEmultiblockWeldingTableExt()));
+		
+		RenderingRegistry.registerEntityRenderingHandler(ENmultiblockFrame.class, new RendererLivingEntity(new MDmultiblockFramePanel(), 1.0F));
+		EntityRegistry.registerModEntity(ENmultiblockFrame.class, "Platform", 0, IndustrialProcessing.instance, 80, 1, true);
+		LanguageRegistry.instance().addStringLocalization("entity.Platform.name", "en_US","Platform");
+
 	}
 }

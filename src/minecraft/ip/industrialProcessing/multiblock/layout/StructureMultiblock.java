@@ -68,5 +68,29 @@ public class StructureMultiblock {
 			return MultiblockState.CONNECTED;
 		}
 	}
+	
+	public int getSizeLeft(FacingDirection dir) {
+		return layouts[dir.ordinal()].getSizeLeft();
+	}
+
+	public int getSizeRight(FacingDirection dir) {
+		return layouts[dir.ordinal()].getSizeRight();
+	}
+
+	public int getSizeDown(FacingDirection dir) {
+		return layouts[dir.ordinal()].getSizeDown();
+	}
+
+	public int getSizeUp(FacingDirection dir) {
+		return layouts[dir.ordinal()].getSizeUp();
+	}
+
+	public int getSizeBack(FacingDirection dir) {
+		return layouts[dir.ordinal()].getSizeBack();
+	}
+
+	public int getSizeFront(FacingDirection dir) {
+		return layouts[dir.ordinal()].getSizeFront();
+	}
 
 }

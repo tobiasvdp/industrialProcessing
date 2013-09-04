@@ -32,7 +32,7 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreInv{
 		layout.setCoreID(i++,0,1, IndustrialProcessing.BLmultiblockWeldingStation.blockID);
 		
 		layout.setBlockID(-1, 0, 0,i++, 0,0, IndustrialProcessing.BLmultiblockWeldingTableExt.blockID);
-		layout.setBlockID(-2, 0, 0,i++, 0,0, IndustrialProcessing.BLmultiblockWeldingTableExt.blockID,0);
+		layout.setBlockID(-2, 0, 0,i++, 0,0, IndustrialProcessing.BLmultiblockInvInput.blockID,0);
 		layout.setBlockID(-2, 1, 0,i++, 0,1, IndustrialProcessing.BLmultiblockScreen.blockID,0);
 		layout.setBlockID(0, 1, 0,i++, 0,0, IndustrialProcessing.BLmultiblockScreen.blockID);
 		layout.setBlockID(-1, 1, 0,i++, 0,1, IndustrialProcessing.BLmultiblockScreen.blockID);
@@ -66,8 +66,8 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreInv{
 		super(structure, tierRequirments,recipes);
 		
 		//add slots and set default IO for multiblocks
-		addItemSlot(TEmultiblockItemStackType.inout).addID(0).addSide(blockSide.front);
-		addItemSlot(TEmultiblockItemStackType.output).addID(0).addSide(blockSide.right);
+		addItemSlot(TEmultiblockItemStackType.input).addIdSide(0, blockSide.right).addIdSide(2, blockSide.front);
+		addItemSlot(TEmultiblockItemStackType.output).addIdSide(0,blockSide.right);
 		
 		
 	}
