@@ -1,6 +1,10 @@
 package ip.industrialProcessing.machines;
 
 import ip.industrialProcessing.client.render.IAnimationProgress;
+import ip.industrialProcessing.machines.animation.AnimationHandler;
+import ip.industrialProcessing.machines.animation.AnimationMode;
+import ip.industrialProcessing.machines.animation.IAnimationSyncable;
+import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 import ip.industrialProcessing.recipes.IRecipeWorkHandler;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeWorker;
@@ -16,11 +20,17 @@ import java.util.Iterator;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-public abstract class TileEntityWorkerMachine extends TileEntityMachine implements IWorkHandler, IRecipeWorkHandler, IWorkingEntity, IAnimationProgress {
+public abstract class TileEntityWorkerMachine extends TileEntityMachine implements IWorkHandler, IRecipeWorkHandler, IWorkingEntity, IAnimationProgress, IAnimationSyncable {
 
+    
     public TileEntityWorkerMachine() {
 	this.serverWorker = createServerSideWorker();
 	this.clientWorker = new ClientWorker();
+	this.animationHandler = creatAnimationHandler();
+    }
+
+    protected AnimationHandler creatAnimationHandler() { 
+	return new AnimationHandler(AnimationMode.WRAP, 1f, true);
     }
 
     protected ServerWorker createServerSideWorker() {
@@ -29,6 +39,7 @@ public abstract class TileEntityWorkerMachine extends TileEntityMachine implemen
 
     protected ServerWorker serverWorker;
     protected ClientWorker clientWorker;
+    protected AnimationHandler animationHandler;
 
     public IWorker getWorker() {
 	if (this.worldObj.isRemote)
@@ -40,6 +51,7 @@ public abstract class TileEntityWorkerMachine extends TileEntityMachine implemen
     @Override
     public void updateEntity() {
 	doWork();
+	TileAnimationSyncHandler.sendAnimationData(this, this.animationHandler);
     }
 
     protected void doWork() {
@@ -52,8 +64,10 @@ public abstract class TileEntityWorkerMachine extends TileEntityMachine implemen
     }
 
     protected int work(int amount) {
-	return this.getWorker().doWork(amount);
+	int workDone = this.getWorker().doWork(amount);
+	return workDone;
     }
+
 
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
@@ -81,12 +95,29 @@ public abstract class TileEntityWorkerMachine extends TileEntityMachine implemen
     }
 
     @Override
-    public void workProgressed(int amount) {
+    public void workProgressed(int amount) { 
+	updateAnimation(amount);
+    }
+
+    protected void updateAnimation(int workDone) {
+	IWorker worker = getWorker();
+	float maxWork = worker.getTotalWork();
+	this.animationHandler.setSpeed(workDone / maxWork / this.animationHandler.DT); // each frame, workDone/maxWork % will be added to the animation
+    }
+    
+    @Override
+    public float getAnimationProgress(float scale) {
+	return this.animationHandler.getAnimationProgress(scale);
+    }
+    
+    public AnimationHandler getAnimationHandler() {
+	return animationHandler;
     }
 
     @Override
-    public void workCancelled() {
-	notifyBlockChange();
+    public void workCancelled() { 
+	this.animationHandler.setProgress(0f);
+	this.animationHandler.setSpeed(0f);
     }
 
     @Override
@@ -94,13 +125,17 @@ public abstract class TileEntityWorkerMachine extends TileEntityMachine implemen
     }
 
     @Override
-    public void beginWork() {
-	notifyBlockChange();
+    public void beginWork() { 
+	// work has started, begin animation
+	this.animationHandler.setProgress(0f);
+	this.animationHandler.setSpeed(0f);
     }
 
     @Override
-    public void workDone() {
-	notifyBlockChange();
+    public void workDone() { 
+	// work is done, no more animation
+	this.animationHandler.setProgress(this.animationHandler.getScale());
+	this.animationHandler.setSpeed(0f);
     }
 
     @Override
@@ -118,11 +153,4 @@ public abstract class TileEntityWorkerMachine extends TileEntityMachine implemen
 	return this;
     }
 
-    @Override
-    public float getAnimationProgress(float scale) {
-	IWorker worker = getWorker();
-	if (worker != null)
-	    return worker.getScaledProgress(100) / 100f * scale;
-	return 0;
-    }
 }
