@@ -23,6 +23,7 @@ public class TileEntityAmpMeter extends TileEntityPowerGenerator implements IPow
     private float resistance = Float.POSITIVE_INFINITY;
     private float coulombs = 0;
     private float angle;
+    private float outputCharge;
 
     public TileEntityAmpMeter() {
 	super(1000);
@@ -36,11 +37,11 @@ public class TileEntityAmpMeter extends TileEntityPowerGenerator implements IPow
 	if (unVerified)
 	    checkOutput();
 	if (!this.worldObj.isRemote) {
-	    this.angle = this.coulombs * 20 / 50; // * 20 = coulomb -> amp, /50 =
+	    this.angle = this.outputCharge * 20 / 50; // * 20 = coulomb -> amp, /50 =
 	}					 // amp -> angle
 	    if (voltage > 0) // distribute last pass
 		this.distributor.distributePower(voltage, coulombs, this.worldObj);
-	    this.coulombs = 0;
+	    this.coulombs = this.outputCharge = 0;
 	    // fetch resistance for next pass
 	    this.resistance = this.distributor.getResistance(this.voltage, this.worldObj);
 	    notifyBlockChange();
@@ -110,6 +111,7 @@ public class TileEntityAmpMeter extends TileEntityPowerGenerator implements IPow
     public float getCharge(float amount) {
 	float delta = Math.min(this.coulombs, amount);
 	this.coulombs -= delta;
+	this.outputCharge += delta;
 	return delta;
     }
 

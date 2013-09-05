@@ -40,9 +40,9 @@ public class GuiContainerBuildcraftGenerator extends GuiContainerMachine {
 	fontRenderer.drawString("   Voltage:", 8, 40, 4210752);
 	fontRenderer.drawString("     Power:", 8, 52, 4210752);
 
-	float volt = Math.round(this.generator.getVoltage()*2)/2f;
-	float amps = Math.round(this.generator.getLastAmps()*2)/2f;
-	float power = Math.round(volt * amps*2)/2f;
+	float volt = Math.round(this.generator.getVoltage()*10)/10f;
+	float amps = Math.round(this.generator.getLastAmps()*10)/10f;
+	float power = Math.round(volt * amps*10)/10f;
 	fontRenderer.drawString(amps+"A", 120, 28, 4210752);
 	fontRenderer.drawString(volt+"V", 120, 40, 4210752);
 	fontRenderer.drawString(power+"W", 120, 52, 4210752);
