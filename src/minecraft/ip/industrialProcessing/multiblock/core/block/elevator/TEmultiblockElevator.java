@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.DimensionManager;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.machines.crusher.RecipesCrusher;
@@ -38,7 +39,6 @@ public class TEmultiblockElevator extends TEmultiblockCore {
 			layout.setBlockID(2, j, 0, i++, 1, 0, IndustrialProcessing.BLmultiblockFrame.blockID);
 			layout.setBlockID(2, j, -3, i++, 1, 0, IndustrialProcessing.BLmultiblockFrame.blockID);
 		}
-
 
 		layout.unsetBlockID(1, 1, 0);
 		layout.unsetBlockID(2, 1, 0);
@@ -77,50 +77,56 @@ public class TEmultiblockElevator extends TEmultiblockCore {
 		findLevels();
 		setElevatorToLevel(1);
 	}
-	
+
 	private void setElevatorToLevel(int level) {
 		createPlatform(level);
 	}
-		public void createPlatform(int level){
-			if (worldObj.isRemote) {
-				switch(this.side){
-				case North : 
-					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord + 1.5, yCoord, zCoord - 0.5, levels.get(level)));
-					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord + 2.5, yCoord, zCoord - 0.5, levels.get(level)));
-					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord + 1.5, yCoord, zCoord - 1.5, levels.get(level)));
-					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord + 2.5, yCoord, zCoord - 1.5, levels.get(level)));
-					break;
-				case South : 
-					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 1.5, yCoord, zCoord + 0.5, levels.get(level)));
-					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 2.5, yCoord, zCoord + 0.5, levels.get(level)));
-					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 1.5, yCoord, zCoord + 1.5, levels.get(level)));
-					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 2.5, yCoord, zCoord + 1.5, levels.get(level)));
-					break;
-				case East : 
-					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 0.5, yCoord, zCoord + 1.5, levels.get(level)));
-					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 0.5, yCoord, zCoord + 2.5, levels.get(level)));
-					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 1.5, yCoord, zCoord + 1.5, levels.get(level)));
-					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 1.5, yCoord, zCoord + 2.5, levels.get(level)));
-					break;
-				case West : 
-					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 0.5, yCoord, zCoord - 0.5, levels.get(level)));
-					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 0.5, yCoord, zCoord - 1.5, levels.get(level)));
-					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 1.5, yCoord, zCoord - 0.5, levels.get(level)));
-					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 1.5, yCoord, zCoord - 1.5, levels.get(level)));break;
-				default: break;
-				}
+
+	public void createPlatform(int level) {
+		if (worldObj.isRemote) {
+			switch (this.side) {
+			case North:
+				worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord + 1.5, yCoord, zCoord - 0.5, levels.get(level)));
+				worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord + 2.5, yCoord, zCoord - 0.5, levels.get(level)));
+				worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord + 1.5, yCoord, zCoord - 1.5, levels.get(level)));
+				worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord + 2.5, yCoord, zCoord - 1.5, levels.get(level)));
+				break;
+			case South:
+				worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 1.5, yCoord, zCoord + 0.5, levels.get(level)));
+				worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 2.5, yCoord, zCoord + 0.5, levels.get(level)));
+				worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 1.5, yCoord, zCoord + 1.5, levels.get(level)));
+				worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 2.5, yCoord, zCoord + 1.5, levels.get(level)));
+				break;
+			case East:
+				worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 0.5, yCoord, zCoord + 1.5, levels.get(level)));
+				worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 0.5, yCoord, zCoord + 2.5, levels.get(level)));
+				worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 1.5, yCoord, zCoord + 1.5, levels.get(level)));
+				worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 1.5, yCoord, zCoord + 2.5, levels.get(level)));
+				break;
+			case West:
+				worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 0.5, yCoord, zCoord - 0.5, levels.get(level)));
+				worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 0.5, yCoord, zCoord - 1.5, levels.get(level)));
+				worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 1.5, yCoord, zCoord - 0.5, levels.get(level)));
+				worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 1.5, yCoord, zCoord - 1.5, levels.get(level)));
+				break;
+			default:
+				break;
 			}
 		}
+	}
 
-	public void findLevels(){
+	public void findLevels() {
 		levels.clear();
-		for(int i = 0;i<256;i++){
-			TileEntity te =  worldObj.getBlockTileEntity(this.xCoord, i, this.zCoord);
-			if (te != null && te instanceof TEmultiblockElevator){
+		for (int i = 0; i < 256; i++) {
+			TileEntity te = worldObj.getBlockTileEntity(this.xCoord, i, this.zCoord);
+			if (te != null && te instanceof TEmultiblockElevator) {
 				levels.add(te.yCoord);
 				System.out.println(te.yCoord);
 			}
 		}
+	}
+	public ArrayList<Integer> getLevels(){
+		return levels;
 	}
 
 }

@@ -45,6 +45,8 @@ import ip.industrialProcessing.machines.thickener.TileEntityThickener;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.CTWeldingStation;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.GUIWeldingStation;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
+import ip.industrialProcessing.multiblock.dummy.block.toggleButton.GUImultiblockToggleButton;
+import ip.industrialProcessing.multiblock.dummy.block.toggleButton.TEmultiblockToggleButton;
 import ip.industrialProcessing.multiblock.gui.CTmultiblock;
 import ip.industrialProcessing.power.buildcraftGenerator.ContainerBuildcraftGenerator;
 import ip.industrialProcessing.power.buildcraftGenerator.GuiContainerBuildcraftGenerator;
@@ -135,6 +137,8 @@ public class GuiHandler implements IGuiHandler {
 		return new GuiContainerBuildcraftGenerator(player.inventory, (TileEntityBuildcraftGenerator) entity);
 	    if (entity instanceof TEmultiblockWeldingStation)
 		return new GUIWeldingStation(player.inventory, (TEmultiblockWeldingStation) entity);
+	    if (entity instanceof TEmultiblockToggleButton)
+		return new GUImultiblockToggleButton((TEmultiblockToggleButton) entity);
 	}
 	return null;
     }

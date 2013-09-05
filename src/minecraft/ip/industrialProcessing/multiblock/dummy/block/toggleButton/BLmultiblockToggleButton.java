@@ -29,7 +29,7 @@ public class BLmultiblockToggleButton extends BLmultiblockDummy{
 			return false;
 		TEmultiblockDummy TEdummy = ((TEmultiblockDummy) te);
 		if (TEdummy.getState() == MultiblockState.COMPLETED) {
-			((TEmultiblockToggleButton) TEdummy).toggle();
+			player.openGui(IndustrialProcessing.instance, 0, world, x, y, z);
 		}
 		return true;
 	}
