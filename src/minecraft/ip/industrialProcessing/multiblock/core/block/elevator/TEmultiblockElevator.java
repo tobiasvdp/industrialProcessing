@@ -3,6 +3,7 @@ package ip.industrialProcessing.multiblock.core.block.elevator;
 import java.util.ArrayList;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.tileentity.TileEntity;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.machines.crusher.RecipesCrusher;
@@ -24,10 +25,10 @@ public class TEmultiblockElevator extends TEmultiblockCore {
 		// set layout
 		structure = new StructureMultiblock();
 
-		LayoutMultiblock layout = new LayoutMultiblock(0, 3, 0, 3, 8, 0);
+		LayoutMultiblock layout = new LayoutMultiblock(0, 3, 0, 3, 4, 0);
 
 		int i = 2;
-		for (int j = 0; j < 8; j++) {
+		for (int j = 0; j < 4; j++) {
 			for (int k = 0; k < 4; k++) {
 				layout.setBlockID(0, j, -k, i++, 1, 0, IndustrialProcessing.BLmultiblockFrame.blockID);
 				layout.setBlockID(3, j, -k, i++, 1, 0, IndustrialProcessing.BLmultiblockFrame.blockID);
@@ -38,19 +39,11 @@ public class TEmultiblockElevator extends TEmultiblockCore {
 			layout.setBlockID(2, j, -3, i++, 1, 0, IndustrialProcessing.BLmultiblockFrame.blockID);
 		}
 
-		layout.setBlockID(1, 0, -1, i++, 1, 0, IndustrialProcessing.BLmultiblockFrame.blockID);
-		layout.setBlockID(1, 0, -2, i++, 1, 0, IndustrialProcessing.BLmultiblockFrame.blockID);
-		layout.setBlockID(2, 0, -1, i++, 1, 0, IndustrialProcessing.BLmultiblockFrame.blockID);
-		layout.setBlockID(2, 0, -2, i++, 1, 0, IndustrialProcessing.BLmultiblockFrame.blockID);
 
 		layout.unsetBlockID(1, 1, 0);
 		layout.unsetBlockID(2, 1, 0);
 		layout.unsetBlockID(1, 2, 0);
 		layout.unsetBlockID(2, 2, 0);
-		layout.unsetBlockID(1, 5, 0);
-		layout.unsetBlockID(2, 5, 0);
-		layout.unsetBlockID(1, 6, 0);
-		layout.unsetBlockID(2, 6, 0);
 
 		layout.setCoreID(0, 0, 0, IndustrialProcessing.BLmultiblockElevator.blockID);
 		layout.setBlockID(0, 2, -1, 1, 0, 0, IndustrialProcessing.BLmultiblockToggleButton.blockID);
@@ -68,7 +61,7 @@ public class TEmultiblockElevator extends TEmultiblockCore {
 	}
 	private boolean toggled = false;
 	private boolean toggleLock = false;
-	private ArrayList<Entity> players = new ArrayList<Entity>();
+	private ArrayList<Integer> levels = new ArrayList<Integer>();
 
 	public TEmultiblockElevator() {
 		super(structure, tierRequirments);
@@ -81,32 +74,51 @@ public class TEmultiblockElevator extends TEmultiblockCore {
 			else
 				toggled = true;
 		}
-		searchForPlayers();
-		if (worldObj.isRemote)
-			worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 1, yCoord, zCoord + 1));
+		findLevels();
+		setElevatorToLevel(1);
 	}
-
-	@Override
-	public void updateEntity() {
-		if (toggled) {
-			for (Entity player : players) {
-				player.isAirBorne = true;
-				player.addVelocity(0, 0.2, 0);
+	
+	private void setElevatorToLevel(int level) {
+		createPlatform(level);
+	}
+		public void createPlatform(int level){
+			if (worldObj.isRemote) {
+				switch(this.side){
+				case North : 
+					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord + 1.5, yCoord, zCoord - 0.5, levels.get(level)));
+					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord + 2.5, yCoord, zCoord - 0.5, levels.get(level)));
+					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord + 1.5, yCoord, zCoord - 1.5, levels.get(level)));
+					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord + 2.5, yCoord, zCoord - 1.5, levels.get(level)));
+					break;
+				case South : 
+					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 1.5, yCoord, zCoord + 0.5, levels.get(level)));
+					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 2.5, yCoord, zCoord + 0.5, levels.get(level)));
+					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 1.5, yCoord, zCoord + 1.5, levels.get(level)));
+					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 2.5, yCoord, zCoord + 1.5, levels.get(level)));
+					break;
+				case East : 
+					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 0.5, yCoord, zCoord + 1.5, levels.get(level)));
+					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 0.5, yCoord, zCoord + 2.5, levels.get(level)));
+					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 1.5, yCoord, zCoord + 1.5, levels.get(level)));
+					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 1.5, yCoord, zCoord + 2.5, levels.get(level)));
+					break;
+				case West : 
+					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 0.5, yCoord, zCoord - 0.5, levels.get(level)));
+					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 0.5, yCoord, zCoord - 1.5, levels.get(level)));
+					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 1.5, yCoord, zCoord - 0.5, levels.get(level)));
+					worldObj.spawnEntityInWorld(new ENmultiblockFrame(worldObj, xCoord - 1.5, yCoord, zCoord - 1.5, levels.get(level)));break;
+				default: break;
+				}
 			}
 		}
-	}
 
-	public void searchForPlayers() {
-		players.clear();
-		for (Object obj : worldObj.playerEntities) {
-			Entity player = (Entity) obj;
-			if (player.posX > this.xCoord + structure.getSizeLeft(this.side) && player.posX < this.xCoord + structure.getSizeRight(this.side)) {
-				if (player.posY > this.yCoord + structure.getSizeDown(this.side) && player.posY < this.yCoord + structure.getSizeUp(this.side)) {
-					if (player.posZ > this.zCoord - structure.getSizeBack(this.side) && player.posZ < this.zCoord - structure.getSizeFront(this.side)) {
-						System.out.println("player " + player.getEntityName() + " in Elevator");
-						players.add(player);
-					}
-				}
+	public void findLevels(){
+		levels.clear();
+		for(int i = 0;i<256;i++){
+			TileEntity te =  worldObj.getBlockTileEntity(this.xCoord, i, this.zCoord);
+			if (te != null && te instanceof TEmultiblockElevator){
+				levels.add(te.yCoord);
+				System.out.println(te.yCoord);
 			}
 		}
 	}

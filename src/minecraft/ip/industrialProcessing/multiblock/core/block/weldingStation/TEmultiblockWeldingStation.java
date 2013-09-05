@@ -1,5 +1,6 @@
 package ip.industrialProcessing.multiblock.core.block.weldingStation;
 
+import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.machines.crusher.RecipesCrusher;

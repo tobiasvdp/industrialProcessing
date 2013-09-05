@@ -4,7 +4,6 @@ import java.lang.ProcessBuilder.Redirect;
 
 import org.lwjgl.opengl.GL11;
 
-import buildcraft.core.render.RenderEntityBlock;
 import ip.industrialProcessing.IndustrialProcessing;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
