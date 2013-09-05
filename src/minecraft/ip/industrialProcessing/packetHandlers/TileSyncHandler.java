@@ -2,6 +2,8 @@ package ip.industrialProcessing.packetHandlers;
 
 import ip.industrialProcessing.PacketHandler;
 import ip.industrialProcessing.machines.TileEntityMachine;
+import ip.industrialProcessing.machines.animation.AnimationHandler;
+import ip.industrialProcessing.machines.animation.IAnimationSyncable;
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
 import ip.industrialProcessing.utils.working.ServerWorker;
 
@@ -24,60 +26,26 @@ import cpw.mods.fml.relauncher.Side;
 
 public class TileSyncHandler {
 
-	public static void handleAnimationSync(INetworkManager manager,
-			Packet250CustomPayload packet, Player player) {
+    protected static TileEntity readTileEntity(DataInputStream inputStream, World worldObj) throws IOException {
 
-		Entity playerEntity = (Entity) player;
-		TileEntity tileEntity;
-		boolean isAnimated;
+	int xcoord = inputStream.readInt();
+	int ycoord = inputStream.readInt();
+	int zcoord = inputStream.readInt();
+	return worldObj.getBlockTileEntity(xcoord, ycoord, zcoord);
+    }
 
-		DataInputStream inputStream = new DataInputStream(
-				new ByteArrayInputStream(packet.data));
-		try {
-			tileEntity = readTileEntity(inputStream, playerEntity.worldObj);
-			isAnimated = inputStream.readBoolean();
-		} catch (IOException e) {
-			e.printStackTrace();
-			return;
-		}
- 
-	}
+    protected static void writeTileEntity(DataOutputStream outputStream, TileEntity entity) throws IOException {
+	outputStream.writeInt(entity.xCoord);
+	outputStream.writeInt(entity.yCoord);
+	outputStream.writeInt(entity.zCoord);
+    }
 
-	private static TileEntity readTileEntity(DataInputStream inputStream,
-			World worldObj) throws IOException {
-
-		int xcoord = inputStream.readInt();
-		int ycoord = inputStream.readInt();
-		int zcoord = inputStream.readInt();
-		return worldObj.getBlockTileEntity(xcoord, ycoord, zcoord);
-	}
-
-	private static void writeTileEntity(DataOutputStream outputStream,
-			TileEntity entity) throws IOException {
-		outputStream.writeInt(entity.xCoord);
-		outputStream.writeInt(entity.yCoord);
-		outputStream.writeInt(entity.zCoord);
-	}
-
-	public static void sendIsAnimatedSync(TileEntity entity) {
-
-		ByteArrayOutputStream bos = new ByteArrayOutputStream(4 * 5);
-		DataOutputStream outputStream = new DataOutputStream(bos);
- 
-		try {
-			writeTileEntity(outputStream, entity); // 3 * 4 bytes
-
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-
-		PacketHandler.sendCustomPacket(bos, PacketHandler.ANIMATION_SYNC);
-
-	}
-
-	public static void sendNbt(TileEntity tileEntity) {
-		Packet packet = tileEntity.getDescriptionPacket();
-		PacketHandler.sendPacket(packet);
-	}
+    protected static Packet250CustomPayload getCustomPacket(ByteArrayOutputStream bos, String channel) {
+	Packet250CustomPayload packet = new Packet250CustomPayload();
+	packet.channel = channel;
+	packet.data = bos.toByteArray();
+	packet.length = bos.size();
+	return packet;
+    }
 
 }

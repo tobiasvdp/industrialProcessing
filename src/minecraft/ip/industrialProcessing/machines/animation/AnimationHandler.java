@@ -1,27 +1,33 @@
-package ip.industrialProcessing.machines;
+package ip.industrialProcessing.machines.animation;
 
 import ip.industrialProcessing.client.render.IAnimationProgress;
 
 public class AnimationHandler implements IAnimationProgress {
-    private static final float DT = 1 / 20f;
+    public static final float DT = 1 / 20f;
     private float speed = 0f;
     private float scale = 1f;
-    private AnimationMode mode;
+    private final AnimationMode mode;
     private float progress;
     private boolean incrementing;
 
-    public void setSpeed(float speed) {
-	this.speed = Math.max(0, Math.min(speed, scale / DT));
+    public AnimationHandler(AnimationMode mode, float scale, boolean incrementing)
+    {
+	this.mode = mode;
+	this.scale = scale;
+	this.incrementing = incrementing;
     }
-
-    public void setScale(float scale) {
-	this.scale = Math.max(0, scale);
-	this.setSpeed(this.speed);
-    }
-
+    
     public float getScale() {
 	return scale;
     }
+    
+    public AnimationMode getMode() {
+	return mode;
+    }
+    
+    public void setSpeed(float speed) {
+	this.speed = Math.max(0, Math.min(speed, scale / DT));
+    } 
 
     public float getSpeed() {
 	return speed;
