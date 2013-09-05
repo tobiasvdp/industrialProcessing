@@ -22,7 +22,7 @@ public class TileAnimationSyncHandler extends TileSyncHandler {
 	double y = entity.yCoord;
 	double z = entity.zCoord;
 	int dimensionId = entity.worldObj.getWorldInfo().getVanillaDimension();
-	double range = Math.sqrt(entity.getMaxRenderDistanceSquared());
+	double range = 16;
 
 	Packet250CustomPayload packet = getAnimationPayload(entity, handler);
 	PacketDispatcher.sendPacketToAllAround(x, y, z, range, dimensionId, packet);
