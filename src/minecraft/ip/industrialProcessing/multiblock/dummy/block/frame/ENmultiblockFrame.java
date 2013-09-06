@@ -1,5 +1,6 @@
 package ip.industrialProcessing.multiblock.dummy.block.frame;
 
+import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
@@ -17,15 +18,20 @@ import net.minecraftforge.event.entity.minecart.MinecartCollisionEvent;
 
 public class ENmultiblockFrame extends EntityLiving {
 
-	private int level;
-	private boolean direction;
+	public int level;
+	public boolean direction;
 
 	public ENmultiblockFrame(World world, double x, double y, double z, Integer level, boolean upOrDown) {
 		super(world);
 		this.setSize(1F, 1F);
 		this.setPosition(x, y, z);
-		this.level = level;
+		setLevel(level);
 		this.direction = upOrDown;
+	}
+
+	public ENmultiblockFrame(World world) {
+		super(world);
+		this.setSize(1F, 1F);
 	}
 
 	@Override
@@ -35,16 +41,37 @@ public class ENmultiblockFrame extends EntityLiving {
 
 	@Override
 	public void onCollideWithPlayer(EntityPlayer par1EntityPlayer) {
-		if (direction) {
-			if (this.posY > level + 0.1)
+		if (getDirection()) {
+			if (this.posY > getLevel() + 0.1)
 				par1EntityPlayer.setVelocity(par1EntityPlayer.motionX, -0.1, par1EntityPlayer.motionZ);
 			else
 				par1EntityPlayer.setVelocity(par1EntityPlayer.motionX, 0, par1EntityPlayer.motionZ);
 		} else {
-			if (this.posY < level - 0.1)
+			if (this.posY < getLevel() - 0.1)
 				par1EntityPlayer.setVelocity(par1EntityPlayer.motionX, 0.1, par1EntityPlayer.motionZ);
 			else
 				par1EntityPlayer.setVelocity(par1EntityPlayer.motionX, 0, par1EntityPlayer.motionZ);
+		}
+	}
+
+	private int getLevel() {
+		return this.getDataWatcher().getWatchableObjectInt(17);
+	}
+	private void setLevel(int level){
+		this.getDataWatcher().updateObject(17, level);
+	}
+	
+	private boolean getDirection() {
+		if (this.getDataWatcher().getWatchableObjectByte(18) == 0)
+			return false;
+		else
+			return true;
+	}
+	private void setDirection(boolean dir){
+		if(dir){
+			this.getDataWatcher().updateObject(18,1);
+		}else{
+			this.getDataWatcher().updateObject(18,0);
 		}
 	}
 
@@ -55,12 +82,13 @@ public class ENmultiblockFrame extends EntityLiving {
 
 	@Override
 	public void onLivingUpdate() {
-		if (direction) {
-			if (this.posY > level + 0.1)
-				this.setPosition(this.posX, this.posY - 0.1, this.posZ);
+		System.out.println(worldObj + " " + this.posY + " to " + this.getLevel());
+		if (getDirection()) {
+			if (this.posY > getLevel() + 0.1)
+				setVelocity(0, -0.1, 0);
 		} else {
-			if (this.posY < level - 0.1)
-				this.setPosition(this.posX, this.posY + 0.1, this.posZ);
+			if (this.posY < getLevel() - 0.1)
+				setVelocity(0, 0.1, 0);
 		}
 	}
 
@@ -73,16 +101,36 @@ public class ENmultiblockFrame extends EntityLiving {
 	protected void entityInit() {
 		super.entityInit();
 		this.dataWatcher.addObject(16, Byte.valueOf((byte) 0));
+        this.dataWatcher.addObject(17, Integer.valueOf(0));
+        this.dataWatcher.addObject(18, Byte.valueOf((byte) 0));
 	}
 
 	@Override
-	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
-		super.writeToNBT(par1NBTTagCompound);
+	public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
 	}
 
 	@Override
-	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
-		super.readFromNBT(par1NBTTagCompound);
+	public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
 	}
 
+	public void setNewLevel(Integer integer, boolean upOrDown) {
+		setLevel(integer);
+		setDirection(upOrDown);
+	}
+	
+	@Override
+	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+    {
+        super.writeEntityToNBT(par1NBTTagCompound);
+        par1NBTTagCompound.setInteger("level", getLevel());
+        par1NBTTagCompound.setBoolean("direction", getDirection());
+    }
+
+	@Override
+    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+    {
+        super.readEntityFromNBT(par1NBTTagCompound);
+        setLevel(par1NBTTagCompound.getInteger("level"));
+        setDirection(par1NBTTagCompound.getBoolean("direction"));
+    }
 }
