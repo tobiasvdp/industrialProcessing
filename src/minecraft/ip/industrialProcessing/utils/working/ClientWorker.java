@@ -1,5 +1,9 @@
 package ip.industrialProcessing.utils.working;
-
+/**
+ * Uses the animation handler to sync the animation, no actual work is done on the clients anymore
+ *
+ */
+@Deprecated
 public class ClientWorker implements IWorker {
 
     private int totalWork = 0;

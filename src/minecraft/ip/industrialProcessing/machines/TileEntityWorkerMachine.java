@@ -51,6 +51,7 @@ public abstract class TileEntityWorkerMachine extends TileEntityMachine implemen
     @Override
     public void updateEntity() {
 	doWork();
+	this.animationHandler.update();
 	TileAnimationSyncHandler.sendAnimationData(this, this.animationHandler);
     }
 
