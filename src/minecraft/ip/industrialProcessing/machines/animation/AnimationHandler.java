@@ -34,7 +34,7 @@ public class AnimationHandler implements IAnimationProgress {
 
     @Override
     public float getAnimationProgress(float scale) {
-	return this.progress * scale;
+	return this.progress * scale / this.scale;
     }
 
     public void setAnimationProgress(float progress, float scale) {
