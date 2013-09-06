@@ -4,34 +4,48 @@ import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.machines.TileEntityMachine;
+import ip.industrialProcessing.machines.animation.AnimationHandler;
+import ip.industrialProcessing.machines.animation.AnimationMode;
+import ip.industrialProcessing.machines.animation.IAnimationSyncable;
+import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 import ip.industrialProcessing.power.IPowerAcceptor;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TileEntityVoltMeter extends TileEntityMachine implements IPowerAcceptor, IAnimationProgress {
+public class TileEntityVoltMeter extends TileEntityMachine implements IPowerAcceptor, IAnimationProgress, IAnimationSyncable {
 
     private LocalDirection inputSide = LocalDirection.BACK;
-    private float angle;
     private int producers;
     private float voltage;
-    private int inputs;
-    private float averageVoltage;
+    private int inputs; 
+    private AnimationHandler animationHandler = new AnimationHandler(AnimationMode.CLAMP, 1f, true);
 
     @Override
     public void updateEntity() {
 
 	if (!this.worldObj.isRemote) {
-	    this.averageVoltage = inputs == 0 ? 0 : this.voltage / inputs;
+	    float averageVoltage = inputs == 0 ? 0 : this.voltage / inputs;
+	    System.out.println(averageVoltage + "V" + inputs+" - "+voltage);
 	    this.voltage = 0;
 	    this.inputs = 0;
-	    notifyBlockChange();
-	} 
-	this.angle = Math.min(1, averageVoltage / 48f); // MAX Voltage = 48
+
+	    float targetAngle = Math.min(1, averageVoltage / 48f);
+	    // 0.25 sec to go from current angle to target angle?
+	    float speed = (this.animationHandler.getProgress() - targetAngle) * this.animationHandler.DT / 0.25f;
+
+	    System.out.println(averageVoltage + "V" + inputs+" - "+voltage+ " speed "+speed);
+	    boolean incrementing = speed > 0;
+	    if(!incrementing) speed = -speed;
+	    this.animationHandler.setSpeed(speed);
+	    this.animationHandler.setIncrementing(incrementing);
+	    TileAnimationSyncHandler.sendAnimationData(this, this.animationHandler);
+	}
+	this.animationHandler.update(); 
     }
 
     @Override
     public float getAnimationProgress(float scale) {
-	return this.angle;
+	return this.animationHandler.getAnimationProgress(scale);
     }
 
     @Override
@@ -60,14 +74,7 @@ public class TileEntityVoltMeter extends TileEntityMachine implements IPowerAcce
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound nbt) {
-	super.readFromNBT(nbt);
-	this.averageVoltage = nbt.getFloat("Voltage"); 
-    }
-
-    @Override
-    public void writeToNBT(NBTTagCompound nbt) {
-	super.writeToNBT(nbt);
-	nbt.setFloat("Voltage", averageVoltage); 
+    public AnimationHandler getAnimationHandler() {
+	return this.animationHandler;
     }
 }

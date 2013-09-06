@@ -1,9 +1,15 @@
 package ip.industrialProcessing.power.meters;
 
+import org.bouncycastle.asn1.x509.Targets;
+
 import ic2.api.Direction;
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.IAnimationProgress;
+import ip.industrialProcessing.machines.animation.AnimationHandler;
+import ip.industrialProcessing.machines.animation.AnimationMode;
+import ip.industrialProcessing.machines.animation.IAnimationSyncable;
+import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 import ip.industrialProcessing.power.IPowerAcceptor;
 import ip.industrialProcessing.power.TileEntityPowerGenerator;
 import ip.industrialProcessing.power.utils.PowerAcceptorConnection;
@@ -12,7 +18,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TileEntityAmpMeter extends TileEntityPowerGenerator implements IPowerAcceptor, IAnimationProgress {
+public class TileEntityAmpMeter extends TileEntityPowerGenerator implements IPowerAcceptor, IAnimationProgress, IAnimationSyncable {
 
     LocalDirection inputSide = LocalDirection.BACK;
     LocalDirection outputSide = LocalDirection.UP;
@@ -22,13 +28,14 @@ public class TileEntityAmpMeter extends TileEntityPowerGenerator implements IPow
     private float voltage = 0;
     private float resistance = Float.POSITIVE_INFINITY;
     private float coulombs = 0;
-    private float angle;
     private float outputCharge;
+    private AnimationHandler animationHandler;
 
     public TileEntityAmpMeter() {
 	super(1000);
 	unVerified = true;
 	this.distributor = new PowerDistributor();
+	this.animationHandler = new AnimationHandler(AnimationMode.CLAMP, 1, true);
     }
 
     @Override
@@ -36,16 +43,27 @@ public class TileEntityAmpMeter extends TileEntityPowerGenerator implements IPow
 	super.updateEntity();
 	if (unVerified)
 	    checkOutput();
+
 	if (!this.worldObj.isRemote) {
-	    this.angle = this.outputCharge * 20 / 50; // * 20 = coulomb -> amp, /50 =
-	}					 // amp -> angle
-	    if (voltage > 0) // distribute last pass
-		this.distributor.distributePower(voltage, coulombs, this.worldObj);
-	    this.coulombs = this.outputCharge = 0;
-	    // fetch resistance for next pass
-	    this.resistance = this.distributor.getResistance(this.voltage, this.worldObj);
-	    notifyBlockChange();
-	
+	    float targetAngle = this.outputCharge * 20 / 50;
+	    // 0.25 sec to go from current angle to target angle?
+	    float speed = (this.animationHandler.getProgress() - targetAngle) * this.animationHandler.DT / 0.25f;
+	    boolean incrementing = speed > 0;
+	    this.animationHandler.setSpeed(speed);
+	    this.animationHandler.setIncrementing(incrementing);
+	    TileAnimationSyncHandler.sendAnimationData(this, this.animationHandler);
+	}
+
+	// TODO: see if this can be done serverside only without problems with
+	// other power devices.
+
+	if (voltage > 0) // distribute last pass
+	    this.distributor.distributePower(voltage, coulombs, this.worldObj);
+	this.coulombs = this.outputCharge = 0;
+	// fetch resistance for next pass
+	this.resistance = this.distributor.getResistance(this.voltage, this.worldObj);
+
+	this.animationHandler.update();
     }
 
     @Override
@@ -61,7 +79,7 @@ public class TileEntityAmpMeter extends TileEntityPowerGenerator implements IPow
 
     @Override
     public float getAnimationProgress(float scale) {
-	return this.angle * scale;
+	return this.animationHandler.getAnimationProgress(scale);
     }
 
     @Override
@@ -116,14 +134,7 @@ public class TileEntityAmpMeter extends TileEntityPowerGenerator implements IPow
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nbt) {
-	super.writeToNBT(nbt);
-	nbt.setFloat("Angle", this.angle);
-    }
-
-    @Override
-    public void readFromNBT(NBTTagCompound nbt) {
-	super.readFromNBT(nbt);
-	this.angle = nbt.getFloat("Angle");
+    public AnimationHandler getAnimationHandler() {
+	return this.animationHandler;
     }
 }
