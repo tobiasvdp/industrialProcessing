@@ -17,12 +17,14 @@ import ip.industrialProcessing.packetHandlers.TileSyncHandler;
 
 public class TileAnimationSyncHandler extends TileSyncHandler {
 
+    // TODO: don't send the animation data every frame, speed will provide for
+    // interpolation.
     public static void sendAnimationData(TileEntity entity, AnimationHandler handler) {
 	double x = entity.xCoord;
 	double y = entity.yCoord;
 	double z = entity.zCoord;
 	int dimensionId = entity.worldObj.getWorldInfo().getVanillaDimension();
-	double range = 16;
+	double range = 32;
 
 	Packet250CustomPayload packet = getAnimationPayload(entity, handler);
 	PacketDispatcher.sendPacketToAllAround(x, y, z, range, dimensionId, packet);
@@ -43,15 +45,28 @@ public class TileAnimationSyncHandler extends TileSyncHandler {
     }
 
     protected static void writeAnimationHandler(DataOutputStream outputStream, AnimationHandler handler) throws IOException {
-	outputStream.writeFloat(handler.getProgress());
-	outputStream.writeFloat(handler.getSpeed()); 
+	float progress = handler.getProgress();
+	float speed = handler.getSpeed();
+	if (!handler.isIncrementing())
+	    speed = -speed;
+	System.out.println("Sending progress " + progress + " and speed " + speed);
+	outputStream.writeFloat(progress);
+	outputStream.writeFloat(speed);
     }
+
     protected static void readAnimationHandler(DataInputStream inputStream, AnimationHandler handler) throws IOException {
 	float progress = inputStream.readFloat();
 	float speed = inputStream.readFloat();
-	// TRANSACTIONAL: both reads need to succeed
+	boolean incrementing = true;
+	System.out.println("Received progress " + progress + " and speed " + speed);
+	if (speed < 0) {
+	    incrementing = false;
+	    speed = -speed;
+	}
+	// TRANSACTIONAL: all 3 reads need to succeed
 	handler.setProgress(progress);
 	handler.setSpeed(speed);
+	handler.setIncrementing(incrementing);
     }
 
     public static void handleAnimationSync(INetworkManager manager, Packet250CustomPayload packet, Player player) {
@@ -70,7 +85,7 @@ public class TileAnimationSyncHandler extends TileSyncHandler {
 	} catch (IOException e) {
 	    e.printStackTrace();
 	    return;
-	} 
+	}
     }
 
 }

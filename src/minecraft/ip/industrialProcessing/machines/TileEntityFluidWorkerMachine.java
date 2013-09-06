@@ -3,6 +3,7 @@ package ip.industrialProcessing.machines;
 import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
 import ip.industrialProcessing.machines.animation.AnimationMode;
+import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 import ip.industrialProcessing.recipes.IRecipeFluidWorkHandler;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeFluidWorker;
@@ -47,6 +48,8 @@ public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachin
     @Override
     public void updateEntity() {
 	doWork();
+	this.animationHandler.update();
+	TileAnimationSyncHandler.sendAnimationData(this, this.animationHandler);
     }
 
     protected void doWork() {
