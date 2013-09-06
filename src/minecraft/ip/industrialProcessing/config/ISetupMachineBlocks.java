@@ -37,6 +37,7 @@ import ip.industrialProcessing.power.wire.BlockWire;
 import ip.industrialProcessing.transport.fluids.BlockPump;
 import ip.industrialProcessing.transport.fluids.BlockTank;
 import ip.industrialProcessing.transport.fluids.BlockTransportFluids;
+import ip.industrialProcessing.multiblock.dummy.block.toggleButton.BLmultiblockToggleButton2;
 
 public interface ISetupMachineBlocks {
 	// machines
@@ -79,5 +80,6 @@ public interface ISetupMachineBlocks {
 	public final static BLmultiblockInvInput BLmultiblockInvInput= new BLmultiblockInvInput();
 	public final static BLmultiblockInvOutput BLmultiblockInvOutput= new BLmultiblockInvOutput();
 	public final static BLmultiblockToggleButton BLmultiblockToggleButton= new BLmultiblockToggleButton();
+	public final static BLmultiblockToggleButton2 BLmultiblockToggleButton2= new BLmultiblockToggleButton2();
 	public final static BLmultiblockElevator BLmultiblockElevator= new BLmultiblockElevator();
 }

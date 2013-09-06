@@ -16,14 +16,16 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.minecart.MinecartCollisionEvent;
 
 public class ENmultiblockFrame extends EntityLiving {
-	
-	private int level;
 
-	public ENmultiblockFrame(World world, double x, double y, double z, Integer level) {
+	private int level;
+	private boolean direction;
+
+	public ENmultiblockFrame(World world, double x, double y, double z, Integer level, boolean upOrDown) {
 		super(world);
 		this.setSize(1F, 1F);
 		this.setPosition(x, y, z);
 		this.level = level;
+		this.direction = upOrDown;
 	}
 
 	@Override
@@ -33,10 +35,17 @@ public class ENmultiblockFrame extends EntityLiving {
 
 	@Override
 	public void onCollideWithPlayer(EntityPlayer par1EntityPlayer) {
-		if (this.posY < level-0.1)
-			par1EntityPlayer.setVelocity(par1EntityPlayer.motionX, 0.1, par1EntityPlayer.motionZ);
-		else
-			par1EntityPlayer.setVelocity(par1EntityPlayer.motionX, 0, par1EntityPlayer.motionZ);
+		if (direction) {
+			if (this.posY > level + 0.1)
+				par1EntityPlayer.setVelocity(par1EntityPlayer.motionX, -0.1, par1EntityPlayer.motionZ);
+			else
+				par1EntityPlayer.setVelocity(par1EntityPlayer.motionX, 0, par1EntityPlayer.motionZ);
+		} else {
+			if (this.posY < level - 0.1)
+				par1EntityPlayer.setVelocity(par1EntityPlayer.motionX, 0.1, par1EntityPlayer.motionZ);
+			else
+				par1EntityPlayer.setVelocity(par1EntityPlayer.motionX, 0, par1EntityPlayer.motionZ);
+		}
 	}
 
 	@Override
@@ -46,8 +55,13 @@ public class ENmultiblockFrame extends EntityLiving {
 
 	@Override
 	public void onLivingUpdate() {
-		if (this.posY < level-0.1)
-			this.setPosition(this.posX, this.posY + 0.1, this.posZ);
+		if (direction) {
+			if (this.posY > level + 0.1)
+				this.setPosition(this.posX, this.posY - 0.1, this.posZ);
+		} else {
+			if (this.posY < level - 0.1)
+				this.setPosition(this.posX, this.posY + 0.1, this.posZ);
+		}
 	}
 
 	@Override
@@ -62,15 +76,13 @@ public class ENmultiblockFrame extends EntityLiving {
 	}
 
 	@Override
-	public void readEntityFromNBT(NBTTagCompound nbttagcompound) {
-		super.readEntityFromNBT(nbttagcompound);
-
+	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
+		super.writeToNBT(par1NBTTagCompound);
 	}
 
 	@Override
-	public void writeEntityToNBT(NBTTagCompound nbttagcompound) {
-		super.writeEntityToNBT(nbttagcompound);
-
+	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
+		super.readFromNBT(par1NBTTagCompound);
 	}
 
 }

@@ -1,28 +1,36 @@
 package ip.industrialProcessing.multiblock.dummy.block.toggleButton;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.util.ArrayList;
 
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.common.network.PacketDispatcher;
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.PacketHandler;
 import ip.industrialProcessing.multiblock.core.block.elevator.TEmultiblockElevator;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
 public class GUImultiblockToggleButton extends GuiScreen {
 	public TEmultiblockToggleButton tileEntity;
+	protected EntityPlayer player;
 	protected String name;
 	protected ResourceLocation textureLocation;
 	protected int xSize = 176;
 	protected int ySize = 166;
 
-	public GUImultiblockToggleButton(TEmultiblockToggleButton tileEntity) {
+	public GUImultiblockToggleButton(TEmultiblockToggleButton tileEntity, EntityPlayer player) {
 		this.tileEntity = tileEntity;
 		this.name = "Control panel";
 		this.textureLocation = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/ToggleButton.png");
+		this.player = player;
 	}
 
 	@Override
@@ -59,6 +67,27 @@ public class GUImultiblockToggleButton extends GuiScreen {
 	@Override
 	public void actionPerformed(GuiButton button) {
 		
+		((TEmultiblockElevator) this.tileEntity.getCore()).gotoFloor(button.id);
+		
+		ByteArrayOutputStream bos = new ByteArrayOutputStream(8);
+		DataOutputStream outputStream = new DataOutputStream(bos);
+		try {
+				outputStream.writeInt(this.tileEntity.xCoord);
+				outputStream.writeInt(this.tileEntity.yCoord);
+				outputStream.writeInt(this.tileEntity.zCoord);
+		        outputStream.writeInt(button.id);
+		} catch (Exception ex) {
+		        ex.printStackTrace();
+		}
+
+		Packet250CustomPayload packet = new Packet250CustomPayload();
+		packet.channel = PacketHandler.IP_ELEVATOR_BUTTON;
+		packet.data = bos.toByteArray();
+		packet.length = bos.size();
+		
+		PacketDispatcher.sendPacketToServer(packet);
+		
+		player.closeScreen();
 	} 
 
 }

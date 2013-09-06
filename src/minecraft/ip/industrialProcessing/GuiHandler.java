@@ -138,7 +138,7 @@ public class GuiHandler implements IGuiHandler {
 	    if (entity instanceof TEmultiblockWeldingStation)
 		return new GUIWeldingStation(player.inventory, (TEmultiblockWeldingStation) entity);
 	    if (entity instanceof TEmultiblockToggleButton)
-		return new GUImultiblockToggleButton((TEmultiblockToggleButton) entity);
+		return new GUImultiblockToggleButton((TEmultiblockToggleButton) entity, player);
 	}
 	return null;
     }

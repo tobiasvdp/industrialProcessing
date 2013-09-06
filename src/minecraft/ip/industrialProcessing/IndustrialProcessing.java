@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import org.bouncycastle.crypto.util.Pack;
 
+import ip.industrialProcessing.client.render.RendererLivingEntity;
 import ip.industrialProcessing.config.ConfigAchievements;
 import ip.industrialProcessing.config.ConfigBaseRecipes;
 import ip.industrialProcessing.config.ConfigBlocks;
@@ -48,6 +49,8 @@ import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import ip.industrialProcessing.machines.thickener.BlockThickener;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
 import ip.industrialProcessing.multiblock.core.block.hotPress.TEmultiblockHotPress;
+import ip.industrialProcessing.multiblock.dummy.block.frame.ENmultiblockFrame;
+import ip.industrialProcessing.multiblock.dummy.block.frame.MDmultiblockFramePanel;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import ip.industrialProcessing.power.buildcraftGenerator.BlockBuildcraftGenerator;
 import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
@@ -85,6 +88,7 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 import net.minecraftforge.oredict.OreDictionary;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -95,12 +99,13 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid = "IndustrialProcessing", name = "Industrial Processing", version = "0.0.1", dependencies = "after:NotEnoughItems")
-@NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = { PacketHandler.ANIMATION_SYNC,PacketHandler.BUTTON_PRESSED,PacketHandler.SYNC_CLIENT, PacketHandler.SEND_INFO, PacketHandler.SCREEN_PRESSED }, packetHandler = PacketHandler.class)
+@NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = { PacketHandler.ANIMATION_SYNC,PacketHandler.BUTTON_PRESSED,PacketHandler.SYNC_CLIENT, PacketHandler.SEND_INFO, PacketHandler.SCREEN_PRESSED, PacketHandler.IP_ELEVATOR_BUTTON }, packetHandler = PacketHandler.class)
 public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISetupMachineBlocks, ISetupItems, ISetupBlocks, ISetupFluids, ISetupAchievements, ISetupDamageSource {
 	// The instance of your mod that Forge uses.
 	@Instance("IndustrialProcessing")
@@ -199,6 +204,9 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
 		
 		//register basic crafting recipes
 		ConfigBaseRecipes.getInstance().addBaseRecipes();
+		
+		EntityRegistry.registerModEntity(ENmultiblockFrame.class, "Platform", 0, IndustrialProcessing.instance, 80, 1, true);
+		LanguageRegistry.instance().addStringLocalization("entity.Platform.name", "en_US","Platform");
 	}
 
 	@EventHandler

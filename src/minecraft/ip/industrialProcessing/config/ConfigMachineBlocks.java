@@ -83,11 +83,13 @@ public class ConfigMachineBlocks {
 	private int BLmultiblockInvOutput = 726;
 	private int BLmultiblockToggleButton = 727;
 	private int BLmultiblockElevator = 728;
+	private int BLmultiblockToggleButton2 = 729;
 
 	public void registerMachineBlocks() {
 		//multiblocks
 		registerMachineBlock(IndustrialProcessing.BLmultiblockElevator, "IP.MBC.Elevator", "Elevator", TEmultiblockElevator.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockToggleButton, "IP.MBD.Toggle", "Control panel", TEmultiblockToggleButton.class);
+		registerMachineBlock(IndustrialProcessing.BLmultiblockToggleButton2, "IP.MBD.Toggle2", "Lift call button", TEmultiblockToggleButton.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockInvInput, "IP.MBD.InvInput", "Item input", TEmultiblockInvInput.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockInvOutput, "IP.MBD.InvOutput", "Item output", TEmultiblockInvOutput.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockScreen, "IP.MBD.Screen", "Screen", TEmultiblockScreen.class);
@@ -141,6 +143,9 @@ public class ConfigMachineBlocks {
 	
 	public static int getBLmultiblockElevator() {
 		return getInstance().BLmultiblockElevator;
+	}
+	public static int getBLmultiblockToggleButton2() {
+		return getInstance().BLmultiblockToggleButton2;
 	}
 	public static int getBLmultiblockToggleButton() {
 		return getInstance().BLmultiblockToggleButton;
