@@ -14,7 +14,7 @@ public class GuiContainerDryer extends GuiContainerFluidMachine {
 	public GuiContainerDryer(InventoryPlayer inventoryPlayer,
 			TileEntityDryer tileEntity) {
 		super(inventoryPlayer, tileEntity, new ContainerDryer(inventoryPlayer, tileEntity), "Dryer", "textures/gui/Dryer.png");
-		setProgressBarLocation(76,34,24,17);
+		//setProgressBarLocation(76,34,24,17);
 	}
  
 

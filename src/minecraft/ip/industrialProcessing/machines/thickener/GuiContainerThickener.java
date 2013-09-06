@@ -12,7 +12,7 @@ public class GuiContainerThickener extends GuiContainerFluidMachine {
     public GuiContainerThickener(InventoryPlayer inventoryPlayer,
 		TileEntityThickener tileEntity) {
 	super(inventoryPlayer, tileEntity, new ContainerThickener(inventoryPlayer, tileEntity), "Thickener", "textures/gui/Thickener.png"); 
-	setProgressBarLocation(76,34,24,17);
+	//setProgressBarLocation(76,34,24,17);
 	}
 
 	

@@ -1,5 +1,6 @@
-package ip.industrialProcessing.machines;
+package ip.industrialProcessing.machines.containers;
 
+import ip.industrialProcessing.machines.TileEntityPoweredWorkerMachine;
 import net.minecraft.entity.player.InventoryPlayer;
 
 public class GuiContainerPoweredMachine extends GuiContainerMachine {
@@ -11,6 +12,11 @@ public class GuiContainerPoweredMachine extends GuiContainerMachine {
 	this.powerMachine = tileEntity;
     }
 
+    protected void addPowerInfo()
+    {
+    	
+    }
+    
     @Override
     protected void drawGuiContainerForegroundLayer(int param1, int param2) { 
         super.drawGuiContainerForegroundLayer(param1, param2); 

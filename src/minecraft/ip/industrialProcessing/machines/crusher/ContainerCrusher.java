@@ -1,6 +1,7 @@
 package ip.industrialProcessing.machines.crusher;
 
 import ip.industrialProcessing.machines.ContainerMachine;
+import ip.industrialProcessing.machines.ContainerWorkerMachine;
 import ip.industrialProcessing.slots.SlotBase;
 import ip.industrialProcessing.slots.SlotOutput;
 import ip.industrialProcessing.utils.containers.ContainerUtils;
@@ -11,7 +12,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerCrusher extends ContainerMachine {
+public class ContainerCrusher extends ContainerWorkerMachine {
 
 	protected Slot[] slots;
 	

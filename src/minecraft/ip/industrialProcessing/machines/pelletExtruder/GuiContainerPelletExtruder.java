@@ -9,7 +9,7 @@ public class GuiContainerPelletExtruder extends GuiContainerMachine {
 
 	public GuiContainerPelletExtruder(InventoryPlayer inventoryPlayer, TileEntityPelletExtruder tileEntity) {
 		super(inventoryPlayer, tileEntity, new ContainerPelletExtruder(inventoryPlayer, tileEntity), "Pellet Extruder", "textures/gui/PelletExtruder.png");
-		setProgressBarLocation(76, 31, 24, 17);
+		//setProgressBarLocation(76, 31, 24, 17);
 	}
 
 }

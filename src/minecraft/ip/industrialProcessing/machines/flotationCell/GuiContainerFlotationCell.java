@@ -12,7 +12,7 @@ public class GuiContainerFlotationCell extends GuiContainerFluidMachine {
     public GuiContainerFlotationCell(InventoryPlayer inventoryPlayer,
 		TileEntityFlotationCell tileEntity) {
 	super(inventoryPlayer, tileEntity, new ContainerFlotationCell(inventoryPlayer, tileEntity), "Flotation Cell", "textures/gui/FlotationCell.png"); 
-	setProgressBarLocation(76,34,24,17);
+	//setProgressBarLocation(76,34,24,17);
 	}
 
 	

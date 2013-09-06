@@ -1,5 +1,6 @@
-package ip.industrialProcessing.machines;
+package ip.industrialProcessing.machines.containers;
 
+import ip.industrialProcessing.machines.TileEntityFluidMachine;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.tileentity.TileEntity;

@@ -1,7 +1,10 @@
-package ip.industrialProcessing.machines;
+package ip.industrialProcessing.machines.containers;
 
+import ip.industrialProcessing.machines.TileEntityFluidMachine;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;
+import net.minecraftforge.fluids.FluidTankInfo;
+import net.minecraftforge.fluids.IFluidTank;
 
 public class ContainerFluidMachine extends ContainerMachine {
 
@@ -14,6 +17,12 @@ public class ContainerFluidMachine extends ContainerMachine {
 		this.tileEntityFluidMachine = tileEntity;
 	}
 
+	public void addTank(int slot)
+	{
+		FluidTankInfo info = this.tileEntityFluidMachine.getTankInfoForSlot(slot);
+		ProgresBarTankHandler handler = new ProgresBarTankHandler(info);
+		this.addProgressBar(handler);
+	}
 	
 	@Override
 	public void addCraftingToCrafters(ICrafting par1iCrafting) { 

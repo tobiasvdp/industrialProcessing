@@ -14,7 +14,7 @@ public class GuiContainerDiskFilter extends GuiContainerFluidMachine {
 	public GuiContainerDiskFilter(InventoryPlayer inventoryPlayer,
 			TileEntityDiskFilter tileEntity) {
 		super(inventoryPlayer, tileEntity, new ContainerDiskFilter(inventoryPlayer, tileEntity), "Disk Filter", "textures/gui/DiskFilter.png");
-		setProgressBarLocation(76,34,24,17);
+		//setProgressBarLocation(76,34,24,17);
 	}
  
 

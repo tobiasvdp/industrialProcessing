@@ -13,7 +13,7 @@ public class GuiContainerClassifier extends GuiContainerFluidMachine {
 	public GuiContainerClassifier(InventoryPlayer inventoryPlayer,
 			TileEntityClassifier tileEntity) {
 		super(inventoryPlayer, tileEntity, new ContainerClassifier(inventoryPlayer, tileEntity), "Classifier", "textures/gui/Classifier.png"); 
-		setProgressBarLocation(76,34,24,17);
+		//setProgressBarLocation(76,34,24,17);
 	}
 
 	

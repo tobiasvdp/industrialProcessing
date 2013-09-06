@@ -10,8 +10,8 @@ public class GuiContainerBlastFurnace extends GuiContainerFluidMachine {
 
 	public GuiContainerBlastFurnace(InventoryPlayer inventoryPlayer, TileEntityBlastFurnace tileEntity) {
 		super(inventoryPlayer, tileEntity, new ContainerBlastFurnace(inventoryPlayer, tileEntity), "Blast furnace", "textures/gui/BlastFurnace.png");
-		setProgressBarLocation(77, 35, 24, 17);
-		setProgresBarDropside(ForgeDirection.NORTH);
+		//setProgressBarLocation(77, 35, 24, 17);
+		//setProgresBarDropside(ForgeDirection.NORTH);
 	}
 
 	@Override

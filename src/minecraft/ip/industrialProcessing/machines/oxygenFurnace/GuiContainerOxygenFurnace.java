@@ -9,7 +9,7 @@ public class GuiContainerOxygenFurnace extends GuiContainerFluidMachine {
 
 	public GuiContainerOxygenFurnace(InventoryPlayer inventoryPlayer, TileEntityOxygenFurnace tileEntity) {
 		super(inventoryPlayer, tileEntity, new ContainerOxygenFurnace(inventoryPlayer, tileEntity), "Oxygen Furnace", "textures/gui/OxygenFurnace.png");
-		setProgressBarLocation(76, 35, 24, 17);
+		//setProgressBarLocation(76, 35, 24, 17);
 	}
 
 	@Override
