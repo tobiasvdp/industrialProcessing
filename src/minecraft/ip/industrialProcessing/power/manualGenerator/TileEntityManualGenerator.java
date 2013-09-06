@@ -8,6 +8,8 @@ import ic2.api.Direction;
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.IAnimationProgress;
+import ip.industrialProcessing.machines.animation.AnimationHandler;
+import ip.industrialProcessing.machines.animation.AnimationMode;
 import ip.industrialProcessing.power.TileEntityPowerGenerator;
 import ip.industrialProcessing.recipes.Recipe;
 
@@ -21,49 +23,43 @@ public class TileEntityManualGenerator extends TileEntityPowerGenerator implemen
     // how much mechanical energy can this generator store, prevents the player
     // from spamming this thing
 
-    private float storedPlayerForce = 0; // buffer
-    private float rotation;
+    private float storedPlayerForce = 0; // buffer     private final static LocalDirection outputDirection = LocalDirection.BACK;
     private final static LocalDirection outputDirection = LocalDirection.BACK;
-
+    
     private static final float DRAG = 1.0f;
     private static final float ELECTRIC_DRAG = 0.20f;
 
-    private float speed = 0;
+    private AnimationHandler animation = new AnimationHandler(AnimationMode.WRAP, 20f, true);
 
     @Override
     public void updateEntity() { 
-	super.updateEntity();
-	if (Float.isNaN(this.rotation))
-	    this.rotation = 0;
+	super.updateEntity(); 
+ 
+	this.animation.update();
+ 
 
-	this.rotation += speed/100f/4;
-
-	float dt = 1 / 20f;
-
+	    float speed = this.animation.getSpeed();
 	//System.out.println(this.worldObj.isRemote+" "+this.storedPlayerForce + " " + this.speed + " " + this.rotation);
 	if (this.storedPlayerForce > 0) {
-	    this.speed += this.storedPlayerForce * dt / 20;
-	    this.storedPlayerForce -= this.storedPlayerForce * dt;
+	    speed += this.storedPlayerForce * this.animation.DT / 20; 
+	    this.storedPlayerForce -= this.storedPlayerForce * this.animation.DT;
 	}
 
-	this.speed -= DRAG * this.speed * dt;
+	speed -= DRAG * speed * this.animation.DT;
 
-	while (rotation > 1)
-	    rotation -= 1;
+	this.animation.setSpeed(speed); 
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
 	super.writeToNBT(nbt);
-	nbt.setFloat("Force", storedPlayerForce);
-	nbt.setFloat("Speed", speed);
+	nbt.setFloat("Force", storedPlayerForce); 
     }
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
 	super.readFromNBT(nbt);
-	this.storedPlayerForce = nbt.getFloat("Force");
-	this.speed = nbt.getFloat("Speed");
+	this.storedPlayerForce = nbt.getFloat("Force"); 
     }
 
     public void playerPushed() {
@@ -84,19 +80,21 @@ public class TileEntityManualGenerator extends TileEntityPowerGenerator implemen
 
     @Override
     public float getAnimationProgress(float scale) {
-	return this.rotation * scale;
+	return this.animation.getAnimationProgress(scale);
     }
 
     @Override
     public float getCharge(float q) {
 	// q Coulomb have been used by the network
-	this.speed -= q * ELECTRIC_DRAG; // (q = i * dt), so this can be applied directly
+	float speed = this.animation.getSpeed();
+	speed -= q * ELECTRIC_DRAG; // (q = i * dt), so this can be applied directly
+	this.animation.setSpeed(speed);
 	return q;
     }
 
     @Override
     public float getVoltage() { 
-	return speed * 2;
+	return this.animation.getSpeed() * 2;
     }
 
 }

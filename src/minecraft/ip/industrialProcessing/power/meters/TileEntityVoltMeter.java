@@ -50,7 +50,7 @@ public class TileEntityVoltMeter extends TileEntityMachine implements IPowerAcce
 
     @Override
     public float getResistance(ForgeDirection side, float voltage) {
-	return Float.MAX_VALUE; // 10MΩ
+	return Float.POSITIVE_INFINITY; // 10000+MΩ
     }
 
     @Override
