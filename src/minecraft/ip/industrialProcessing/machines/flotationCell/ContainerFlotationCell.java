@@ -1,12 +1,10 @@
 package ip.industrialProcessing.machines.flotationCell;
 
-import net.minecraft.entity.player.InventoryPlayer;
-import ip.industrialProcessing.machines.ContainerFluidMachine;
-import ip.industrialProcessing.machines.TileEntityFluidMachine;
-import ip.industrialProcessing.slots.SlotBase;
+import ip.industrialProcessing.machines.containers.ContainerFluidMachine;
 import ip.industrialProcessing.slots.SlotLiquid;
 import ip.industrialProcessing.slots.SlotLiquidOutput;
 import ip.industrialProcessing.utils.containers.ContainerUtils;
+import net.minecraft.entity.player.InventoryPlayer;
 
 public class ContainerFlotationCell extends ContainerFluidMachine {
 

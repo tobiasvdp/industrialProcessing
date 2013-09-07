@@ -1,11 +1,11 @@
 package ip.industrialProcessing.machines.magneticSeparator;
 
-import net.minecraft.entity.player.InventoryPlayer;
-import ip.industrialProcessing.machines.ContainerMachine;
 import ip.industrialProcessing.machines.TileEntityMachine;
+import ip.industrialProcessing.machines.containers.ContainerMachine;
 import ip.industrialProcessing.slots.SlotBase;
 import ip.industrialProcessing.slots.SlotOutput;
 import ip.industrialProcessing.utils.containers.ContainerUtils;
+import net.minecraft.entity.player.InventoryPlayer;
 
 public class ContainerMagneticSeparator extends ContainerMachine {
 
