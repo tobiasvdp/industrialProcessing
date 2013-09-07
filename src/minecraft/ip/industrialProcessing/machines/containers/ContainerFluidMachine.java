@@ -1,10 +1,11 @@
 package ip.industrialProcessing.machines.containers;
 
 import ip.industrialProcessing.machines.TileEntityFluidMachine;
+
+import java.util.ArrayList;
+
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ICrafting;
 import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidTank;
 
 public class ContainerFluidMachine extends ContainerMachine {
 
@@ -17,15 +18,19 @@ public class ContainerFluidMachine extends ContainerMachine {
 		this.tileEntityFluidMachine = tileEntity;
 	}
 
-	public void addTank(int slot)
+	private ArrayList<ProgressBarHandlerInfo> tankHandlers = new ArrayList<ProgressBarHandlerInfo>();
+	protected void addTankToContainer(int tankSlot)
 	{
-		FluidTankInfo info = this.tileEntityFluidMachine.getTankInfoForSlot(slot);
-		ProgresBarTankHandler handler = new ProgresBarTankHandler(info);
-		this.addProgressBar(handler);
+		FluidTankInfo info = this.tileEntityFluidMachine.getTankInfoForSlot(tankSlot);
+		ProgressBarTankHandler handler = new ProgressBarTankHandler(this.tileEntityFluidMachine, tankSlot);
+		ProgressBarHandlerInfo handlerInfo = this.addProgressBar(handler);
+		this.tankHandlers.add(handlerInfo);
 	}
 	
-	@Override
-	public void addCraftingToCrafters(ICrafting par1iCrafting) { 
-		super.addCraftingToCrafters(par1iCrafting); 
+	public ProgressInfoTank getProgressInfoTank(int containerTankSlot)
+	{
+		ProgressBarHandlerInfo handlerInfo = this.tankHandlers.get(containerTankSlot);
+		return ProgressBarTankHandler.getInfo(handlerInfo);
 	}
+	 
 }

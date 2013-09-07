@@ -1,12 +1,11 @@
 package ip.industrialProcessing.machines.blastFurnace;
 
-import net.minecraft.entity.player.InventoryPlayer;
-import ip.industrialProcessing.machines.ContainerFluidMachine;
-import ip.industrialProcessing.machines.mixer.TileEntityMixer;
+import ip.industrialProcessing.machines.containers.ContainerFluidMachine;
 import ip.industrialProcessing.slots.SlotBase;
 import ip.industrialProcessing.slots.SlotLiquid;
 import ip.industrialProcessing.slots.SlotLiquidOutput;
 import ip.industrialProcessing.utils.containers.ContainerUtils;
+import net.minecraft.entity.player.InventoryPlayer;
 
 public class ContainerBlastFurnace extends ContainerFluidMachine {
 
@@ -20,8 +19,6 @@ public class ContainerBlastFurnace extends ContainerFluidMachine {
 
 	public ContainerBlastFurnace(InventoryPlayer inventoryPlayer, TileEntityBlastFurnace tileEntity) {
 		super(inventoryPlayer, tileEntity);
-		
-		
 
 		inputSlotIronPellets = new SlotBase(tileEntity, 0, 29, 26);
 		inputSlotCalcareousSinterDust = new SlotBase(tileEntity, 1, 8, 46);
@@ -40,10 +37,9 @@ public class ContainerBlastFurnace extends ContainerFluidMachine {
 		addSlotToContainer(inputHotSlagFullOutput);
 		addSlotToContainer(inputPigIronEmptyInput);
 		addSlotToContainer(inputPigIronFullOutput);
-		
+
 		ContainerUtils.BindPlayerInventory(inventoryPlayer, this, 0);
 
-		
 	}
 
 	@Override

@@ -1,25 +1,16 @@
-package ip.industrialProcessing.machines;
-
-import java.util.List;
+package ip.industrialProcessing.machines.containers.gui;
 
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.power.IPowerAcceptor;
-import ip.industrialProcessing.power.IPoweredMachine;
-import ip.industrialProcessing.utils.working.IWorker;
-import ip.industrialProcessing.utils.working.IWorkingEntity;
-
-import org.lwjgl.opengl.GL11;
-
+import ip.industrialProcessing.machines.TileEntityMachine;
+import ip.industrialProcessing.machines.containers.ContainerMachine;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
-import net.minecraftforge.common.ForgeDirection;
+
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.Point;
+import org.lwjgl.util.Rectangle;
 
 public class GuiContainerMachine extends GuiContainer {
 
@@ -54,6 +45,18 @@ public class GuiContainerMachine extends GuiContainer {
 		int y = (height - ySize) / 2;
 		this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 
+	}
+
+	protected void drawProgressBar(Rectangle source, Point target, int value,
+			int max, boolean horizontal) {
+		if (horizontal)
+			drawHorizontalProgressBar(target.getX(), target.getY(),
+					source.getX(), source.getY(), source.getWidth(),
+					source.getHeight(), value, max);
+		else
+			drawVerticalProgressBar(target.getX(), target.getY(),
+					source.getX(), source.getY(), source.getWidth(),
+					source.getHeight(), value, max);
 	}
 
 	protected void drawHorizontalProgressBar(int x, int y, int sourceX,

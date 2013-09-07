@@ -1,17 +1,13 @@
 package ip.industrialProcessing.multiblock.gui;
 
-import org.lwjgl.opengl.GL11;
-
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.machines.ContainerMachine;
-import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
+
+import org.lwjgl.opengl.GL11;
 
 public class GUImultiblock extends GuiContainer {
 

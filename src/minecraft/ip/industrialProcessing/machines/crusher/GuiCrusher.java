@@ -1,11 +1,10 @@
 package ip.industrialProcessing.machines.crusher;
 
+import ip.industrialProcessing.machines.containers.gui.GuiContainerWorkerMachine;
+import net.minecraft.entity.player.InventoryPlayer;
+
 import org.lwjgl.util.Point;
 import org.lwjgl.util.Rectangle;
-
-import ip.industrialProcessing.machines.GuiContainerPoweredMachine;
-import ip.industrialProcessing.machines.GuiContainerWorkerMachine;
-import net.minecraft.entity.player.InventoryPlayer;
 
 public class GuiCrusher extends GuiContainerWorkerMachine {
 
@@ -14,8 +13,13 @@ public class GuiCrusher extends GuiContainerWorkerMachine {
 
 	public GuiCrusher(InventoryPlayer inventory, TileEntityCrusher entity) {
 		super(inventory, entity, new ContainerCrusher(inventory, entity),
-				"Ore Crusher", "textures/gui/Crusher.png", PROGRESSBAR_SOURCE,
-				PROGRESSBAR_LOCATION);
+				"Ore Crusher", "textures/gui/Crusher.png");
 	}
 
+	@Override
+	protected void drawGuiContainerBackgroundLayer(float par1, int par2,
+			int par3) { 
+		super.drawGuiContainerBackgroundLayer(par1, par2, par3);
+		drawProgressBarWorker(PROGRESSBAR_SOURCE, PROGRESSBAR_LOCATION, true, 0);
+	}
 }

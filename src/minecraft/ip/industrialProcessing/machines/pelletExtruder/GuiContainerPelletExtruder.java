@@ -1,9 +1,7 @@
 package ip.industrialProcessing.machines.pelletExtruder;
 
+import ip.industrialProcessing.machines.containers.gui.GuiContainerMachine;
 import net.minecraft.entity.player.InventoryPlayer;
-import ip.industrialProcessing.machines.GuiContainerMachine;
-import ip.industrialProcessing.machines.mixer.ContainerMixer;
-import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 
 public class GuiContainerPelletExtruder extends GuiContainerMachine {
 
