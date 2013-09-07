@@ -60,6 +60,9 @@ import ip.industrialProcessing.multiblock.dummy.block.frame.ENmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.frame.MDmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.frame.MDmultiblockFramePanel;
 import ip.industrialProcessing.multiblock.dummy.block.frame.TEmultiblockFrame;
+import ip.industrialProcessing.multiblock.dummy.block.liftDoor.ENmultiblockLiftDoor;
+import ip.industrialProcessing.multiblock.dummy.block.liftDoor.MDmultiblockLiftDoor;
+import ip.industrialProcessing.multiblock.dummy.block.liftDoor.TEmultiblockLiftDoor;
 import ip.industrialProcessing.multiblock.dummy.block.screen.MDmultiblockScreen;
 import ip.industrialProcessing.multiblock.dummy.block.screen.TEmultiblockScreen;
 import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.MDmultiblockWeldingTableExt;
@@ -87,6 +90,7 @@ public class ClientProxy extends CommonProxy {
 	private static final MDmultiblockFrame MDmultiblockFrame = new MDmultiblockFrame();
 	private static final MDmultiblockWeldingTableExt MDmultiblockWeldingTableExt = new MDmultiblockWeldingTableExt();
 	private static final MDmultiblockFramePanel MDmultiblockFramePanel = new MDmultiblockFramePanel();
+	private static final MDmultiblockLiftDoor MDmultiblockLiftDoor = new MDmultiblockLiftDoor();
 	
 	@Override
 	public void registerRenderers() {
@@ -154,14 +158,19 @@ public class ClientProxy extends CommonProxy {
 		ConfigRenderers.setBLmultiblockScreen(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLmultiblockScreen(), new TEmultiblockScreen()));
 		
-		ClientRegistry.bindTileEntitySpecialRenderer(TEmultiblockFrame.class, new RenderingMultiblock(IndustrialProcessing.BLmultiblockFrame, new String[] { "ModelMultiblockFrame","MDmultiblockFramePanel" }, new ModelingMultiblock[] { MDmultiblockFrame,MDmultiblockFramePanel }));
+		ClientRegistry.bindTileEntitySpecialRenderer(TEmultiblockFrame.class, new RenderingMultiblock(IndustrialProcessing.BLmultiblockFrame, new String[] { "ModelMultiblockFrame","MDmultiblockFramePanel","MDmultiblockElevatorGroundPanel" }, new ModelingMultiblock[] { MDmultiblockFrame,MDmultiblockFramePanel,MDmultiblockFramePanel }));
 		ConfigRenderers.setBLmultiblockFrame(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLmultiblockFrame(), new TEmultiblockFrame()));
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TEmultiblockWeldingTableExt.class, new RenderingMultiblock(IndustrialProcessing.BLmultiblockWeldingTableExt, new String[] { "ModelMultiblockWeldingStation" }, new ModelingMultiblock[] { MDmultiblockWeldingTableExt }));
 		ConfigRenderers.setBLmultiblockWeldingTableExt(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLmultiblockWeldingTableExt(), new TEmultiblockWeldingTableExt()));
+		
+		//ClientRegistry.bindTileEntitySpecialRenderer(TEmultiblockLiftDoor.class, new RenderingMultiblock(IndustrialProcessing.BLmultiblockLiftDoor, new String[] {"ModelMultiblockLiftDoor"}, new ModelingMultiblock[] { MDmultiblockLiftDoor,null}));
+		ConfigRenderers.setBLmultiblockLiftDoor(RenderingRegistry.getNextAvailableRenderId());
+		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLmultiblockLiftDoor(), new TEmultiblockLiftDoor()));
 
-		RenderingRegistry.registerEntityRenderingHandler(ENmultiblockFrame.class, new RendererLivingEntity(new MDmultiblockFramePanel(), 1.0F));
+		RenderingRegistry.registerEntityRenderingHandler(ENmultiblockFrame.class, new RendererLivingEntity(new MDmultiblockFramePanel(), 1.0F,"MDmultiblockFramePanel"));
+		RenderingRegistry.registerEntityRenderingHandler(ENmultiblockLiftDoor.class, new RendererLivingEntity(new MDmultiblockLiftDoor(), 1.0F,"ModelMultiblockLiftDoor"));
 	}
 }

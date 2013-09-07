@@ -51,6 +51,7 @@ import ip.industrialProcessing.machines.thickener.TileEntityThickener;
 import ip.industrialProcessing.multiblock.core.block.hotPress.TEmultiblockHotPress;
 import ip.industrialProcessing.multiblock.dummy.block.frame.ENmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.frame.MDmultiblockFramePanel;
+import ip.industrialProcessing.multiblock.dummy.block.liftDoor.ENmultiblockLiftDoor;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import ip.industrialProcessing.power.buildcraftGenerator.BlockBuildcraftGenerator;
 import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
@@ -207,6 +208,9 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
 		
 		EntityRegistry.registerModEntity(ENmultiblockFrame.class, "Platform", 0, IndustrialProcessing.instance, 80, 1, true);
 		LanguageRegistry.instance().addStringLocalization("entity.Platform.name", "en_US","Platform");
+		
+		EntityRegistry.registerModEntity(ENmultiblockLiftDoor.class, "LiftDoor", 1, IndustrialProcessing.instance, 80, 1, true);
+		LanguageRegistry.instance().addStringLocalization("entity.LiftDoor.name", "en_US","Lift door");
 	}
 
 	@EventHandler

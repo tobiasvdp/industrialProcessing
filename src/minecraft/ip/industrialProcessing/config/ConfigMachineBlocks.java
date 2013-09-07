@@ -23,6 +23,7 @@ import ip.industrialProcessing.multiblock.dummy.block.frame.ENmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.frame.TEmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.inventory.input.TEmultiblockInvInput;
 import ip.industrialProcessing.multiblock.dummy.block.inventory.output.TEmultiblockInvOutput;
+import ip.industrialProcessing.multiblock.dummy.block.liftDoor.TEmultiblockLiftDoor;
 import ip.industrialProcessing.multiblock.dummy.block.screen.TEmultiblockScreen;
 import ip.industrialProcessing.multiblock.dummy.block.toggleButton.TEmultiblockToggleButton;
 import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.TEmultiblockWeldingTableExt;
@@ -84,9 +85,11 @@ public class ConfigMachineBlocks {
 	private int BLmultiblockToggleButton = 727;
 	private int BLmultiblockElevator = 728;
 	private int BLmultiblockToggleButton2 = 729;
+	private int BLmultiblockLiftDoor = 730;
 
 	public void registerMachineBlocks() {
 		//multiblocks
+		registerMachineBlock(IndustrialProcessing.BLmultiblockLiftDoor, "IP.MBD.LiftDoor", "Lift door", TEmultiblockLiftDoor.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockElevator, "IP.MBC.Elevator", "Elevator", TEmultiblockElevator.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockToggleButton, "IP.MBD.Toggle", "Control panel", TEmultiblockToggleButton.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockToggleButton2, "IP.MBD.Toggle2", "Lift call button", TEmultiblockToggleButton.class);
@@ -140,7 +143,9 @@ public class ConfigMachineBlocks {
 	public static ConfigMachineBlocks getInstance() {
 		return instance;
 	}
-	
+	public static int getBLmultiblockLiftDoor() {
+		return getInstance().BLmultiblockLiftDoor;
+	}
 	public static int getBLmultiblockElevator() {
 		return getInstance().BLmultiblockElevator;
 	}
