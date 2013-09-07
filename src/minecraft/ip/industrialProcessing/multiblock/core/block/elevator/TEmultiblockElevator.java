@@ -97,7 +97,7 @@ public class TEmultiblockElevator extends TEmultiblockCore {
 
 	private void setElevatorToLevel(int level) {
 		boolean upOrDown = false;
-		if (levels.get(level) < this.yCoord)
+		if (levels.get(level) < this.getLiftHeight())
 			upOrDown = true;
 		if(!liftCreated){
 			createPlatform(level, upOrDown);
