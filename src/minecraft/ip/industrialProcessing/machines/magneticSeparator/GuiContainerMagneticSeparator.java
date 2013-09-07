@@ -1,11 +1,7 @@
 package ip.industrialProcessing.machines.magneticSeparator;
 
+import ip.industrialProcessing.machines.containers.gui.GuiContainerMachine;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.tileentity.TileEntity;
-import ip.industrialProcessing.machines.ContainerMachine;
-import ip.industrialProcessing.machines.GuiContainerMachine;
-import ip.industrialProcessing.machines.filter.ContainerFilter;
-import ip.industrialProcessing.machines.filter.TileEntityFilter;
 
 public class GuiContainerMagneticSeparator extends GuiContainerMachine {
 

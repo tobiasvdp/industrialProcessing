@@ -1,17 +1,14 @@
 package ip.industrialProcessing.machines.crusher;
 
-import ip.industrialProcessing.machines.ContainerMachine;
+import ip.industrialProcessing.machines.containers.ContainerWorkerMachine;
 import ip.industrialProcessing.slots.SlotBase;
 import ip.industrialProcessing.slots.SlotOutput;
 import ip.industrialProcessing.utils.containers.ContainerUtils;
-import ip.industrialProcessing.utils.containers.IContainerAdd;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
 
-public class ContainerCrusher extends ContainerMachine {
+public class ContainerCrusher extends ContainerWorkerMachine {
 
 	protected Slot[] slots;
 	
@@ -34,6 +31,8 @@ public class ContainerCrusher extends ContainerMachine {
         addSlotToContainer(slots[1]);	
         
         ContainerUtils.BindPlayerInventory(inventoryPlayer, this, 0);
+        
+        addWorker(tileEntityCrusher.getWorker());
 	}
 	@Override
 	public int getSizeInventory() {

@@ -49,7 +49,6 @@ public class TileAnimationSyncHandler extends TileSyncHandler {
 	float speed = handler.getSpeed();
 	if (!handler.isIncrementing())
 	    speed = -speed;
-	System.out.println("Sending progress " + progress + " and speed " + speed);
 	outputStream.writeFloat(progress);
 	outputStream.writeFloat(speed);
     }
@@ -58,7 +57,6 @@ public class TileAnimationSyncHandler extends TileSyncHandler {
 	float progress = inputStream.readFloat();
 	float speed = inputStream.readFloat();
 	boolean incrementing = true;
-	System.out.println("Received progress " + progress + " and speed " + speed);
 	if (speed < 0) {
 	    incrementing = false;
 	    speed = -speed;
