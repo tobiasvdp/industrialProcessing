@@ -107,7 +107,6 @@ public class TileEntityBuildcraftGenerator extends TileEntityPowerGenerator impl
     }
 
     public float getLastAmps() {
-	System.out.println(this.lastCharge+" Coulombs");
 	return lastCharge * 20f;
     }
 

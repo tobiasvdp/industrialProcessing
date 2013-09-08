@@ -24,9 +24,9 @@ public class GuiContainerBuildcraftGenerator extends GuiContainerMachine {
 		int maxVolt = 150;
 		int maxPower = maxVolt * maxAmps;
 
-		drawHorizontalProgressBar(62, 29, 176, 0, 52, 7, amps, maxAmps);
-		drawHorizontalProgressBar(62, 41, 176, 0, 52, 7, volt, maxVolt);
-		drawHorizontalProgressBar(62, 53, 176, 0, 52, 7, power, maxPower);
+		drawHorizontalProgressBar(62, 29, 176, 0, 52, 7, amps, maxAmps, false);
+		drawHorizontalProgressBar(62, 41, 176, 0, 52, 7, volt, maxVolt, false);
+		drawHorizontalProgressBar(62, 53, 176, 0, 52, 7, power, maxPower, false);
 	}
 
 	@Override

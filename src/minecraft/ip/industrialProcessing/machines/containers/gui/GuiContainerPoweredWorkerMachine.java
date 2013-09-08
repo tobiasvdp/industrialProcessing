@@ -21,6 +21,6 @@ public class GuiContainerPoweredWorkerMachine extends GuiContainerWorkerMachine 
 
 	protected void drawProgressBarPower(Rectangle source, Point location, boolean horizontal, int containerPowerIndex) {
 		ProgressInfoPower power = this.powerContainer.getProgressInfoPower(containerPowerIndex);
-		drawProgressBar(source, location, power.storedPower, power.powerCapacity, horizontal);
+		drawProgressBar(source, location, power.storedPower, power.powerCapacity, horizontal, false);
 	}
 }

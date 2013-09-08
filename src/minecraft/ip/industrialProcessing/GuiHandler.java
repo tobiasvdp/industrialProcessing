@@ -47,11 +47,15 @@ import ip.industrialProcessing.multiblock.core.block.weldingStation.GUIWeldingSt
 import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.dummy.block.toggleButton.GUImultiblockToggleButton;
 import ip.industrialProcessing.multiblock.dummy.block.toggleButton.TEmultiblockToggleButton;
-import ip.industrialProcessing.multiblock.gui.CTmultiblock;
 import ip.industrialProcessing.power.buildcraftGenerator.ContainerBuildcraftGenerator;
 import ip.industrialProcessing.power.buildcraftGenerator.GuiContainerBuildcraftGenerator;
 import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
-import net.minecraft.client.gui.GuiMainMenu;
+import ip.industrialProcessing.power.plants.ContainerBoiler;
+import ip.industrialProcessing.power.plants.ContainerSolidBurner;
+import ip.industrialProcessing.power.plants.GuiContainerBoiler;
+import ip.industrialProcessing.power.plants.GuiContainerSolidBurner;
+import ip.industrialProcessing.power.plants.TileEntityBoiler;
+import ip.industrialProcessing.power.plants.TileEntitySolidBurner;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -59,87 +63,95 @@ import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler {
 
-    @Override
-    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+	@Override
+	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 
-	TileEntity entity = world.getBlockTileEntity(x, y, z);
-	if (ID == 0) {
-	    if (entity instanceof TileEntityFilter)
-		return new ContainerFilter(player.inventory, (TileEntityFilter) entity);
-	    if (entity instanceof TileEntityCrusher)
-		return new ContainerCrusher(player.inventory, (TileEntityCrusher) entity);
-	    if (entity instanceof TileEntityMagneticSeparator)
-		return new ContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity);
-	    if (entity instanceof TileEntityMixer)
-		return new ContainerMixer(player.inventory, (TileEntityMixer) entity);
-	    if (entity instanceof TileEntityDryer)
-		return new ContainerDryer(player.inventory, (TileEntityDryer) entity);
-	    if (entity instanceof TileEntityClassifier)
-		return new ContainerClassifier(player.inventory, (TileEntityClassifier) entity);
-	    if (entity instanceof TileEntityThickener)
-		return new ContainerThickener(player.inventory, (TileEntityThickener) entity);
-	    if (entity instanceof TileEntityFlotationCell)
-		return new ContainerFlotationCell(player.inventory, (TileEntityFlotationCell) entity);
-	    if (entity instanceof TileEntityHydroCyclone)
-		return new ContainerHydroCyclone(player.inventory, (TileEntityHydroCyclone) entity);
-	    if (entity instanceof TileEntityDiskFilter)
-		return new ContainerDiskFilter(player.inventory, (TileEntityDiskFilter) entity);
-	    if (entity instanceof TileEntityPelletExtruder)
-		return new ContainerPelletExtruder(player.inventory, (TileEntityPelletExtruder) entity);
-	    if (entity instanceof TileEntityExtruder)
-		return new ContainerExtruder(player.inventory, (TileEntityExtruder) entity);
-	    if (entity instanceof TileEntityOxygenFurnace)
-		return new ContainerOxygenFurnace(player.inventory, (TileEntityOxygenFurnace) entity);
-	    if (entity instanceof TileEntityBlastFurnace)
-		return new ContainerBlastFurnace(player.inventory, (TileEntityBlastFurnace) entity);
-	    if (entity instanceof TileEntityBuildcraftGenerator)
-		return new ContainerBuildcraftGenerator(player.inventory, (TileEntityBuildcraftGenerator) entity);
-	    if (entity instanceof TEmultiblockWeldingStation)
-		return new CTWeldingStation(player.inventory, (TEmultiblockWeldingStation) entity);
+		TileEntity entity = world.getBlockTileEntity(x, y, z);
+		if (ID == 0) {
+			if (entity instanceof TileEntityFilter)
+				return new ContainerFilter(player.inventory, (TileEntityFilter) entity);
+			if (entity instanceof TileEntityCrusher)
+				return new ContainerCrusher(player.inventory, (TileEntityCrusher) entity);
+			if (entity instanceof TileEntityMagneticSeparator)
+				return new ContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity);
+			if (entity instanceof TileEntityMixer)
+				return new ContainerMixer(player.inventory, (TileEntityMixer) entity);
+			if (entity instanceof TileEntityDryer)
+				return new ContainerDryer(player.inventory, (TileEntityDryer) entity);
+			if (entity instanceof TileEntityClassifier)
+				return new ContainerClassifier(player.inventory, (TileEntityClassifier) entity);
+			if (entity instanceof TileEntityThickener)
+				return new ContainerThickener(player.inventory, (TileEntityThickener) entity);
+			if (entity instanceof TileEntityFlotationCell)
+				return new ContainerFlotationCell(player.inventory, (TileEntityFlotationCell) entity);
+			if (entity instanceof TileEntityHydroCyclone)
+				return new ContainerHydroCyclone(player.inventory, (TileEntityHydroCyclone) entity);
+			if (entity instanceof TileEntityDiskFilter)
+				return new ContainerDiskFilter(player.inventory, (TileEntityDiskFilter) entity);
+			if (entity instanceof TileEntityPelletExtruder)
+				return new ContainerPelletExtruder(player.inventory, (TileEntityPelletExtruder) entity);
+			if (entity instanceof TileEntityExtruder)
+				return new ContainerExtruder(player.inventory, (TileEntityExtruder) entity);
+			if (entity instanceof TileEntityOxygenFurnace)
+				return new ContainerOxygenFurnace(player.inventory, (TileEntityOxygenFurnace) entity);
+			if (entity instanceof TileEntityBlastFurnace)
+				return new ContainerBlastFurnace(player.inventory, (TileEntityBlastFurnace) entity);
+			if (entity instanceof TileEntityBuildcraftGenerator)
+				return new ContainerBuildcraftGenerator(player.inventory, (TileEntityBuildcraftGenerator) entity);
+			if (entity instanceof TileEntitySolidBurner)
+				return new ContainerSolidBurner(player.inventory, (TileEntitySolidBurner) entity);
+			if (entity instanceof TileEntityBoiler)
+				return new ContainerBoiler(player.inventory, (TileEntityBoiler) entity);
+			if (entity instanceof TEmultiblockWeldingStation)
+				return new CTWeldingStation(player.inventory, (TEmultiblockWeldingStation) entity);
+		}
+		return null;
 	}
-	return null;
-    }
 
-    @Override
-    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+	@Override
+	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 
-	TileEntity entity = world.getBlockTileEntity(x, y, z);
-	if (ID == 0) {
-	    if (entity instanceof TileEntityFilter)
-		return new GuiContainerFilter(player.inventory, (TileEntityFilter) entity);
-	    if (entity instanceof TileEntityCrusher)
-		return new GuiCrusher(player.inventory, (TileEntityCrusher) entity);
-	    if (entity instanceof TileEntityMagneticSeparator)
-		return new GuiContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity);
-	    if (entity instanceof TileEntityMixer)
-		return new GuiContainerMixer(player.inventory, (TileEntityMixer) entity);
-	    if (entity instanceof TileEntityDryer)
-		return new GuiContainerDryer(player.inventory, (TileEntityDryer) entity);
-	    if (entity instanceof TileEntityClassifier)
-		return new GuiContainerClassifier(player.inventory, (TileEntityClassifier) entity);
-	    if (entity instanceof TileEntityThickener)
-		return new GuiContainerThickener(player.inventory, (TileEntityThickener) entity);
-	    if (entity instanceof TileEntityFlotationCell)
-		return new GuiContainerFlotationCell(player.inventory, (TileEntityFlotationCell) entity);
-	    if (entity instanceof TileEntityHydroCyclone)
-		return new GuiContainerHydroCyclone(player.inventory, (TileEntityHydroCyclone) entity);
-	    if (entity instanceof TileEntityDiskFilter)
-		return new GuiContainerDiskFilter(player.inventory, (TileEntityDiskFilter) entity);
-	    if (entity instanceof TileEntityPelletExtruder)
-		return new GuiContainerPelletExtruder(player.inventory, (TileEntityPelletExtruder) entity);
-	    if (entity instanceof TileEntityExtruder)
-		return new GuiContainerExtruder(player.inventory, (TileEntityExtruder) entity);
-	    if (entity instanceof TileEntityOxygenFurnace)
-		return new GuiContainerOxygenFurnace(player.inventory, (TileEntityOxygenFurnace) entity);
-	    if (entity instanceof TileEntityBlastFurnace)
-		return new GuiContainerBlastFurnace(player.inventory, (TileEntityBlastFurnace) entity);
-	    if (entity instanceof TileEntityBuildcraftGenerator)
-		return new GuiContainerBuildcraftGenerator(player.inventory, (TileEntityBuildcraftGenerator) entity);
-	    if (entity instanceof TEmultiblockWeldingStation)
-		return new GUIWeldingStation(player.inventory, (TEmultiblockWeldingStation) entity);
-	    if (entity instanceof TEmultiblockToggleButton)
-		return new GUImultiblockToggleButton((TEmultiblockToggleButton) entity, player);
+		TileEntity entity = world.getBlockTileEntity(x, y, z);
+		if (ID == 0) {
+			if (entity instanceof TileEntityFilter)
+				return new GuiContainerFilter(player.inventory, (TileEntityFilter) entity);
+			if (entity instanceof TileEntityCrusher)
+				return new GuiCrusher(player.inventory, (TileEntityCrusher) entity);
+			if (entity instanceof TileEntityMagneticSeparator)
+				return new GuiContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity);
+			if (entity instanceof TileEntityMixer)
+				return new GuiContainerMixer(player.inventory, (TileEntityMixer) entity);
+			if (entity instanceof TileEntityDryer)
+				return new GuiContainerDryer(player.inventory, (TileEntityDryer) entity);
+			if (entity instanceof TileEntityClassifier)
+				return new GuiContainerClassifier(player.inventory, (TileEntityClassifier) entity);
+			if (entity instanceof TileEntityThickener)
+				return new GuiContainerThickener(player.inventory, (TileEntityThickener) entity);
+			if (entity instanceof TileEntityFlotationCell)
+				return new GuiContainerFlotationCell(player.inventory, (TileEntityFlotationCell) entity);
+			if (entity instanceof TileEntityHydroCyclone)
+				return new GuiContainerHydroCyclone(player.inventory, (TileEntityHydroCyclone) entity);
+			if (entity instanceof TileEntityDiskFilter)
+				return new GuiContainerDiskFilter(player.inventory, (TileEntityDiskFilter) entity);
+			if (entity instanceof TileEntityPelletExtruder)
+				return new GuiContainerPelletExtruder(player.inventory, (TileEntityPelletExtruder) entity);
+			if (entity instanceof TileEntityExtruder)
+				return new GuiContainerExtruder(player.inventory, (TileEntityExtruder) entity);
+			if (entity instanceof TileEntityOxygenFurnace)
+				return new GuiContainerOxygenFurnace(player.inventory, (TileEntityOxygenFurnace) entity);
+			if (entity instanceof TileEntityBlastFurnace)
+				return new GuiContainerBlastFurnace(player.inventory, (TileEntityBlastFurnace) entity);
+			if (entity instanceof TileEntityBuildcraftGenerator)
+				return new GuiContainerBuildcraftGenerator(player.inventory, (TileEntityBuildcraftGenerator) entity);
+			if (entity instanceof TileEntitySolidBurner)
+				return new GuiContainerSolidBurner(player.inventory, (TileEntitySolidBurner) entity);
+			if (entity instanceof TileEntityBoiler)
+				return new GuiContainerBoiler(player.inventory, (TileEntityBoiler) entity);
+			if (entity instanceof TEmultiblockWeldingStation)
+				return new GUIWeldingStation(player.inventory, (TEmultiblockWeldingStation) entity);
+			if (entity instanceof TEmultiblockToggleButton)
+				return new GUImultiblockToggleButton((TEmultiblockToggleButton) entity, player);
+		}
+		return null;
 	}
-	return null;
-    }
 }
