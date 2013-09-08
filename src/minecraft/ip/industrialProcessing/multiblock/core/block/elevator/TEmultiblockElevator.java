@@ -13,6 +13,7 @@ import ip.industrialProcessing.machines.crusher.RecipesCrusher;
 import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
 import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
 import ip.industrialProcessing.multiblock.dummy.block.frame.ENmultiblockFrame;
+import ip.industrialProcessing.multiblock.dummy.block.liftDoor.TEmultiblockLiftDoor;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
 import ip.industrialProcessing.multiblock.layout.LayoutTransformer;
@@ -32,22 +33,24 @@ public class TEmultiblockElevator extends TEmultiblockCore {
 
 		LayoutMultiblock layout = new LayoutMultiblock(0, 3, 0, 3, 4, 0);
 
-		int i = 3;
+		int i = 7;
 		for (int j = 0; j < 4; j++) {
+			int model = 1;
+			if (j == 1)
+				model = 2;
 			for (int k = 0; k < 4; k++) {
-				layout.setBlockID(0, j, -k, i++, 1, 0, IndustrialProcessing.BLmultiblockFrame.blockID);
-				layout.setBlockID(3, j, -k, i++, 1, 0, IndustrialProcessing.BLmultiblockFrame.blockID);
+				layout.setBlockID(0, j, -k, i++, model, 0, IndustrialProcessing.BLmultiblockFrame.blockID);
+				layout.setBlockID(3, j, -k, i++, model, 0, IndustrialProcessing.BLmultiblockFrame.blockID);
 			}
-			layout.setBlockID(1, j, 0, i++, 1, 0, IndustrialProcessing.BLmultiblockFrame.blockID);
-			layout.setBlockID(1, j, -3, i++, 1, 0, IndustrialProcessing.BLmultiblockFrame.blockID);
-			layout.setBlockID(2, j, 0, i++, 1, 0, IndustrialProcessing.BLmultiblockFrame.blockID);
-			layout.setBlockID(2, j, -3, i++, 1, 0, IndustrialProcessing.BLmultiblockFrame.blockID);
+			layout.setBlockID(1, j, 0, i++, model, 0, IndustrialProcessing.BLmultiblockFrame.blockID);
+			layout.setBlockID(1, j, -3, i++, model, 0, IndustrialProcessing.BLmultiblockFrame.blockID);
+			layout.setBlockID(2, j, 0, i++, model, 0, IndustrialProcessing.BLmultiblockFrame.blockID);
+			layout.setBlockID(2, j, -3, i++, model, 0, IndustrialProcessing.BLmultiblockFrame.blockID);
 		}
-
-		layout.unsetBlockID(1, 1, 0);
-		layout.unsetBlockID(2, 1, 0);
-		layout.unsetBlockID(1, 2, 0);
-		layout.unsetBlockID(2, 2, 0);
+		layout.setBlockID(1, 1, 0, 3, 0, 0, IndustrialProcessing.BLmultiblockLiftDoor.blockID);
+		layout.setBlockID(1, 2, 0, 4, 0, 0, IndustrialProcessing.BLmultiblockLiftDoor.blockID);
+		layout.setBlockID(2, 1, 0, 5, 0, 1, IndustrialProcessing.BLmultiblockLiftDoor.blockID);
+		layout.setBlockID(2, 2, 0, 6, 0, 1, IndustrialProcessing.BLmultiblockLiftDoor.blockID);
 
 		layout.setCoreID(0, 0, 0, IndustrialProcessing.BLmultiblockElevator.blockID);
 		layout.setBlockID(0, 2, -1, 1, 0, 0, IndustrialProcessing.BLmultiblockToggleButton.blockID);
@@ -91,44 +94,49 @@ public class TEmultiblockElevator extends TEmultiblockCore {
 			if (levels.get(i) == this.yCoord)
 				level = i;
 		}
-		gotoFloor(level);
-		System.out.println("Going to floor " + level);
+		if (this.yCoord != liftHeight) {
+			gotoFloor(level);
+			System.out.println("Going to floor " + level);
+		}
 	}
 
 	private void setElevatorToLevel(int level) {
 		boolean upOrDown = false;
-		if (levels.get(level) < this.yCoord)
+		if (levels.get(level) < this.getLiftHeight())
 			upOrDown = true;
-		if(!liftCreated){
+		for(int y:levels){
+			((TEmultiblockElevator) worldObj.getBlockTileEntity(xCoord, y, zCoord)).closeDoors();
+		}
+		if (!liftCreated) {
 			createPlatform(level, upOrDown);
-		}else{
+		} else {
 			updatePlatform(level, upOrDown);
 		}
 	}
 
 	private void updatePlatform(int level, boolean upOrDown) {
-		for(ENmultiblockFrame en: lift){
-			en.setNewLevel(levels.get(level),upOrDown);
+		for (ENmultiblockFrame en : lift) {
+			en.setNewLevel(levels.get(level), upOrDown);
 		}
 	}
 
 	public void createPlatform(int level, boolean upOrDown) {
 		if (liftHeight == 0)
-			liftHeight= this.yCoord;
+			liftHeight = this.yCoord;
 		if (!worldObj.isRemote) {
-			spawn(level,upOrDown);
+			spawn(level, upOrDown);
 		}
-			
+
 		notifyLevels(liftHeight);
 		notifyLiftCreated();
 	}
 
 	@Override
-	public void updateEntity(){
-		if(lift.size() != 0)
+	public void updateEntity() {
+		if (lift.size() != 0)
 			liftHeight = (int) Math.round(lift.get(0).posY);
 	}
-	
+
 	private void notifyLiftCreated() {
 		for (Integer i : levels) {
 			TEmultiblockElevator te = (TEmultiblockElevator) worldObj.getBlockTileEntity(this.xCoord, i, this.zCoord);
@@ -137,41 +145,41 @@ public class TEmultiblockElevator extends TEmultiblockCore {
 		}
 	}
 
-	private void spawn(int level,boolean upOrDown) {
+	private void spawn(int level, boolean upOrDown) {
 		switch (this.side) {
 		case North:
-			lift.add(new ENmultiblockFrame(worldObj, xCoord + 1.5, liftHeight, zCoord - 0.5, levels.get(level), upOrDown));
-			lift.add(new ENmultiblockFrame(worldObj, xCoord + 2.5, liftHeight, zCoord - 0.5, levels.get(level), upOrDown));
-			lift.add(new ENmultiblockFrame(worldObj, xCoord + 1.5, liftHeight, zCoord - 1.5, levels.get(level), upOrDown));
-			lift.add(new ENmultiblockFrame(worldObj, xCoord + 2.5, liftHeight, zCoord - 1.5, levels.get(level), upOrDown));
-			for(int i=0;i<4;i++){
+			lift.add(new ENmultiblockFrame(worldObj, xCoord + 1.5, liftHeight, zCoord - 0.5, levels.get(level), upOrDown, this));
+			lift.add(new ENmultiblockFrame(worldObj, xCoord + 2.5, liftHeight, zCoord - 0.5, levels.get(level), upOrDown, this));
+			lift.add(new ENmultiblockFrame(worldObj, xCoord + 1.5, liftHeight, zCoord - 1.5, levels.get(level), upOrDown, this));
+			lift.add(new ENmultiblockFrame(worldObj, xCoord + 2.5, liftHeight, zCoord - 1.5, levels.get(level), upOrDown, this));
+			for (int i = 0; i < 4; i++) {
 				worldObj.spawnEntityInWorld(lift.get(i));
 			}
 			break;
 		case South:
-			lift.add(new ENmultiblockFrame(worldObj, xCoord - 1.5, liftHeight, zCoord + 0.5, levels.get(level), upOrDown));
-			lift.add(new ENmultiblockFrame(worldObj, xCoord - 2.5, liftHeight, zCoord + 0.5, levels.get(level), upOrDown));
-			lift.add(new ENmultiblockFrame(worldObj, xCoord - 1.5, liftHeight, zCoord + 1.5, levels.get(level), upOrDown));
-			lift.add(new ENmultiblockFrame(worldObj, xCoord - 2.5, liftHeight, zCoord + 1.5, levels.get(level), upOrDown));
-			for(int i=0;i<4;i++){
+			lift.add(new ENmultiblockFrame(worldObj, xCoord - 1.5, liftHeight, zCoord + 0.5, levels.get(level), upOrDown, this));
+			lift.add(new ENmultiblockFrame(worldObj, xCoord - 2.5, liftHeight, zCoord + 0.5, levels.get(level), upOrDown, this));
+			lift.add(new ENmultiblockFrame(worldObj, xCoord - 1.5, liftHeight, zCoord + 1.5, levels.get(level), upOrDown, this));
+			lift.add(new ENmultiblockFrame(worldObj, xCoord - 2.5, liftHeight, zCoord + 1.5, levels.get(level), upOrDown, this));
+			for (int i = 0; i < 4; i++) {
 				worldObj.spawnEntityInWorld(lift.get(i));
 			}
 			break;
 		case East:
-			lift.add(new ENmultiblockFrame(worldObj, xCoord - 0.5, liftHeight, zCoord + 1.5, levels.get(level), upOrDown));
-			lift.add(new ENmultiblockFrame(worldObj, xCoord - 0.5, liftHeight, zCoord + 2.5, levels.get(level), upOrDown));
-			lift.add(new ENmultiblockFrame(worldObj, xCoord - 1.5, liftHeight, zCoord + 1.5, levels.get(level), upOrDown));
-			lift.add(new ENmultiblockFrame(worldObj, xCoord - 1.5, liftHeight, zCoord + 2.5, levels.get(level), upOrDown));
-			for(int i=0;i<4;i++){
+			lift.add(new ENmultiblockFrame(worldObj, xCoord - 0.5, liftHeight, zCoord + 1.5, levels.get(level), upOrDown, this));
+			lift.add(new ENmultiblockFrame(worldObj, xCoord - 0.5, liftHeight, zCoord + 2.5, levels.get(level), upOrDown, this));
+			lift.add(new ENmultiblockFrame(worldObj, xCoord - 1.5, liftHeight, zCoord + 1.5, levels.get(level), upOrDown, this));
+			lift.add(new ENmultiblockFrame(worldObj, xCoord - 1.5, liftHeight, zCoord + 2.5, levels.get(level), upOrDown, this));
+			for (int i = 0; i < 4; i++) {
 				worldObj.spawnEntityInWorld(lift.get(i));
 			}
 			break;
 		case West:
-			lift.add(new ENmultiblockFrame(worldObj, xCoord - 0.5, liftHeight, zCoord - 0.5, levels.get(level), upOrDown));
-			lift.add(new ENmultiblockFrame(worldObj, xCoord - 0.5, liftHeight, zCoord - 1.5, levels.get(level), upOrDown));
-			lift.add(new ENmultiblockFrame(worldObj, xCoord - 1.5, liftHeight, zCoord - 0.5, levels.get(level), upOrDown));
-			lift.add(new ENmultiblockFrame(worldObj, xCoord - 1.5, liftHeight, zCoord - 1.5, levels.get(level), upOrDown));
-			for(int i=0;i<4;i++){
+			lift.add(new ENmultiblockFrame(worldObj, xCoord - 0.5, liftHeight, zCoord - 0.5, levels.get(level), upOrDown, this));
+			lift.add(new ENmultiblockFrame(worldObj, xCoord - 0.5, liftHeight, zCoord - 1.5, levels.get(level), upOrDown, this));
+			lift.add(new ENmultiblockFrame(worldObj, xCoord - 1.5, liftHeight, zCoord - 0.5, levels.get(level), upOrDown, this));
+			lift.add(new ENmultiblockFrame(worldObj, xCoord - 1.5, liftHeight, zCoord - 1.5, levels.get(level), upOrDown, this));
+			for (int i = 0; i < 4; i++) {
 				worldObj.spawnEntityInWorld(lift.get(i));
 			}
 			break;
@@ -224,6 +232,29 @@ public class TEmultiblockElevator extends TEmultiblockCore {
 			TEmultiblockElevator te = (TEmultiblockElevator) worldObj.getBlockTileEntity(this.xCoord, i, this.zCoord);
 			te.setLiftHeight(liftHeight);
 		}
+	}
+
+	public void openValidDoors() {
+		for (Integer i : levels) {
+			TEmultiblockElevator te = (TEmultiblockElevator) worldObj.getBlockTileEntity(this.xCoord, i, this.zCoord);
+			if (te.yCoord == liftHeight) {
+				te.openDoors();
+			}
+		}
+	}
+
+	private void openDoors() {
+		((TEmultiblockLiftDoor) getDummyByID(3)).openDoor(0);
+		((TEmultiblockLiftDoor) getDummyByID(4)).openDoor(0);
+		((TEmultiblockLiftDoor) getDummyByID(5)).openDoor(1);
+		((TEmultiblockLiftDoor) getDummyByID(6)).openDoor(1);
+	}
+
+	private void closeDoors() {
+		((TEmultiblockLiftDoor) getDummyByID(3)).closeDoor(0);
+		((TEmultiblockLiftDoor) getDummyByID(4)).closeDoor(0);
+		((TEmultiblockLiftDoor) getDummyByID(5)).closeDoor(1);
+		((TEmultiblockLiftDoor) getDummyByID(6)).closeDoor(1);
 	}
 
 }

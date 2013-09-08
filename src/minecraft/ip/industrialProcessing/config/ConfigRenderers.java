@@ -28,7 +28,14 @@ public class ConfigRenderers {
 	private int BLmultiblockScreen;
 	private int BLmultiblockFrame;
 	private int BLmultiblockWeldingTableExt;
+	private int BLmultiblockLiftDoor;
 	
+	public static int getBLmultiblockLiftDoor() {
+		return getInstance().BLmultiblockLiftDoor;
+	}
+	public static void setBLmultiblockLiftDoor(int value) {
+		getInstance().BLmultiblockLiftDoor = value;
+	}
 	public static int getBLmultiblockWeldingTableExt() {
 		return getInstance().BLmultiblockWeldingTableExt;
 	}

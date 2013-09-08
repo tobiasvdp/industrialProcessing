@@ -24,6 +24,7 @@ import ip.industrialProcessing.multiblock.core.block.weldingStation.BLmultiblock
 import ip.industrialProcessing.multiblock.dummy.block.frame.BLmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.inventory.input.BLmultiblockInvInput;
 import ip.industrialProcessing.multiblock.dummy.block.inventory.output.BLmultiblockInvOutput;
+import ip.industrialProcessing.multiblock.dummy.block.liftDoor.BLmultiblockLiftDoor;
 import ip.industrialProcessing.multiblock.dummy.block.screen.BLmultiblockScreen;
 import ip.industrialProcessing.multiblock.dummy.block.toggleButton.BLmultiblockToggleButton;
 import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.BLmultiblockWeldingTableExt;
@@ -82,4 +83,5 @@ public interface ISetupMachineBlocks {
 	public final static BLmultiblockToggleButton BLmultiblockToggleButton= new BLmultiblockToggleButton();
 	public final static BLmultiblockToggleButton2 BLmultiblockToggleButton2= new BLmultiblockToggleButton2();
 	public final static BLmultiblockElevator BLmultiblockElevator= new BLmultiblockElevator();
+	public final static BLmultiblockLiftDoor BLmultiblockLiftDoor= new BLmultiblockLiftDoor();
 }
