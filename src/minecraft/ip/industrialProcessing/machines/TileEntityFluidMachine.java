@@ -166,7 +166,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine implement
 		}
 	}
 
-	protected MachineFluidTank getTankInSlot(int i) {
+	public MachineFluidTank getTankInSlot(int i) {
 		if (i < 0 || i > this.fluidTanks.size())
 			return null;
 		return this.fluidTanks.get(i);

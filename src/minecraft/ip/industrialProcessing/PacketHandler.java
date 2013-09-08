@@ -1,6 +1,7 @@
 package ip.industrialProcessing;
 
 import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
+import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
 import ip.industrialProcessing.multiblock.core.block.elevator.TEmultiblockElevator;
 import ip.industrialProcessing.multiblock.dummy.block.toggleButton.TEmultiblockToggleButton;
@@ -27,6 +28,7 @@ import cpw.mods.fml.common.network.Player;
 public class PacketHandler implements IPacketHandler {
 
 	public static final String ANIMATION_SYNC = "IP.AniSync";
+	public static final String TANK_SYNC = "IP.TankSync";
 	public static final String BUTTON_PRESSED = "IP.ButtonPressed";
 	public static final String SYNC_CLIENT = "IP.clientSync";
 	public static final String SEND_INFO = "IP.sendInfo";
@@ -38,7 +40,9 @@ public class PacketHandler implements IPacketHandler {
 		if (packet.channel.equals(ANIMATION_SYNC)) {
 			TileAnimationSyncHandler.handleAnimationSync(manager, packet, player);
 		}
-
+		if (packet.channel.equals(TANK_SYNC)) {
+			TileTankSyncHandler.handleTankSync(manager, packet, player);
+		}
 		if (packet.channel.equals(BUTTON_PRESSED)) {
 		}
 
