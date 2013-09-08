@@ -2,6 +2,7 @@ package ip.industrialProcessing.multiblock.dummy.block.toggleButton;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
+import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.multiblock.core.block.elevator.TEmultiblockElevator;
 import ip.industrialProcessing.multiblock.dummy.BLmultiblockDummy;
 import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
@@ -31,6 +32,11 @@ public class BLmultiblockToggleButton2 extends BLmultiblockDummy{
 			((TEmultiblockElevator) TEdummy.getCore()).toggle(TEdummy.getID());
 		}
 		return true;
+	}
+	
+	@Override
+	public int getRenderType() {
+		return ConfigRenderers.getBLmultiblockToggleButton2();
 	}
 
 }

@@ -12,7 +12,7 @@ public class BLmultiblockLiftDoor extends BLmultiblockDummy{
 
 	public BLmultiblockLiftDoor() {
 		super(ConfigMachineBlocks.getBLmultiblockLiftDoor(), "MultiblockLiftDoor", IndustrialProcessing.tabPower);
-		this.setBlockBounds(0.0f, 0.0f, 0.0f, 0.01f, 0.01f, 0.01f);
+		this.setBlockBounds(1.0f, 2.0f, 1.0f, 1.0f, 2.0f, 1.0f);
 	}
 
 	@Override

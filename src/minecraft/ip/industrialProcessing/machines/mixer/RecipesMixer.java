@@ -21,7 +21,7 @@ public class RecipesMixer extends RecipesMachine {
 	private void addDefaultRecipes() {
 
 		Recipe ironSludge= new Recipe();
-		ironSludge.workRequired = 30;
+		ironSludge.workRequired = 4000;
 		ironSludge.inputs = new RecipeInputSlot[] { 
 				new RecipeInputSlot(0,FluidRegistry.WATER.getID(),RecipeSlotType.TANK, 1000) ,
 				new RecipeInputSlot(0,IndustrialProcessing.itemIronSmallChunks.itemID,RecipeSlotType.INVENTORY, 1)};
@@ -30,7 +30,7 @@ public class RecipesMixer extends RecipesMachine {
 		addRecipe(ironSludge);
 		
 		Recipe copperSludge= new Recipe();
-		copperSludge.workRequired = 30;
+		copperSludge.workRequired = 4000;
 		copperSludge.inputs = new RecipeInputSlot[] { 
 				new RecipeInputSlot(0,FluidRegistry.WATER.getID(),RecipeSlotType.TANK, 1000) ,
 				new RecipeInputSlot(0,IndustrialProcessing.itemCopperSmallChunks.itemID,RecipeSlotType.INVENTORY, 1)};
@@ -39,7 +39,7 @@ public class RecipesMixer extends RecipesMachine {
 		addRecipe(copperSludge);
 		
 		Recipe tinSludge= new Recipe();
-		tinSludge.workRequired = 30;
+		tinSludge.workRequired = 4000;
 		tinSludge.inputs = new RecipeInputSlot[] { 
 				new RecipeInputSlot(0,FluidRegistry.WATER.getID(),RecipeSlotType.TANK, 1000) ,
 				new RecipeInputSlot(0,IndustrialProcessing.itemTinSmallChunks.itemID,RecipeSlotType.INVENTORY, 1)};

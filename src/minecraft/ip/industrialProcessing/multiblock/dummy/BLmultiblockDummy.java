@@ -13,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -105,5 +106,6 @@ public abstract class BLmultiblockDummy extends BlockContainer {
 	public void onBlockAdded(World par1World, int par2, int par3, int par4) {
 		super.onBlockAdded(par1World, par2, par3, par4);
 		par1World.markBlockForUpdate(par2, par3, par4);
+		par1World.setLightValue(EnumSkyBlock.Block, par2, par3, par4, 14);
 	}
 }

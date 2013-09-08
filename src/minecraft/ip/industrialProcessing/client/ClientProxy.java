@@ -65,6 +65,8 @@ import ip.industrialProcessing.multiblock.dummy.block.liftDoor.MDmultiblockLiftD
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.TEmultiblockLiftDoor;
 import ip.industrialProcessing.multiblock.dummy.block.screen.MDmultiblockScreen;
 import ip.industrialProcessing.multiblock.dummy.block.screen.TEmultiblockScreen;
+import ip.industrialProcessing.multiblock.dummy.block.toggleButton.MDmultiblockToggleButton2;
+import ip.industrialProcessing.multiblock.dummy.block.toggleButton.TEmultiblockToggleButton;
 import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.MDmultiblockWeldingTableExt;
 import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.TEmultiblockWeldingTableExt;
 
@@ -91,6 +93,7 @@ public class ClientProxy extends CommonProxy {
 	private static final MDmultiblockWeldingTableExt MDmultiblockWeldingTableExt = new MDmultiblockWeldingTableExt();
 	private static final MDmultiblockFramePanel MDmultiblockFramePanel = new MDmultiblockFramePanel();
 	private static final MDmultiblockLiftDoor MDmultiblockLiftDoor = new MDmultiblockLiftDoor();
+	private static final MDmultiblockToggleButton2 MDmultiblockToggleButton2 = new MDmultiblockToggleButton2();
 	
 	@Override
 	public void registerRenderers() {
@@ -169,6 +172,10 @@ public class ClientProxy extends CommonProxy {
 		//ClientRegistry.bindTileEntitySpecialRenderer(TEmultiblockLiftDoor.class, new RenderingMultiblock(IndustrialProcessing.BLmultiblockLiftDoor, new String[] {"ModelMultiblockLiftDoor"}, new ModelingMultiblock[] { MDmultiblockLiftDoor,null}));
 		ConfigRenderers.setBLmultiblockLiftDoor(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLmultiblockLiftDoor(), new TEmultiblockLiftDoor()));
+		
+		ClientRegistry.bindTileEntitySpecialRenderer(TEmultiblockToggleButton.class, new RenderingMultiblock(IndustrialProcessing.BLmultiblockToggleButton2, new String[] { "ModelLiftButton" }, new ModelingMultiblock[] { MDmultiblockToggleButton2 }));
+		ConfigRenderers.setBLmultiblockToggleButton2(RenderingRegistry.getNextAvailableRenderId());
+		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLmultiblockToggleButton2(), new TEmultiblockToggleButton()));
 
 		RenderingRegistry.registerEntityRenderingHandler(ENmultiblockFrame.class, new RendererLivingEntity(new MDmultiblockFramePanel(), 1.0F,"MDmultiblockFramePanel"));
 		RenderingRegistry.registerEntityRenderingHandler(ENmultiblockLiftDoor.class, new RendererLivingEntity(new MDmultiblockLiftDoor(), 1.0F,"ModelMultiblockLiftDoor"));

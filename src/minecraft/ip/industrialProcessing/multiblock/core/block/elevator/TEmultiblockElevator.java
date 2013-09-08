@@ -94,7 +94,7 @@ public class TEmultiblockElevator extends TEmultiblockCore {
 			if (levels.get(i) == this.yCoord)
 				level = i;
 		}
-		if (this.yCoord != liftHeight) {
+		if (this.yCoord != liftHeight || !liftCreated) {
 			gotoFloor(level);
 			System.out.println("Going to floor " + level);
 		}

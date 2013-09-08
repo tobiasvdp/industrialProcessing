@@ -1,5 +1,7 @@
 package ip.industrialProcessing.multiblock.dummy.block.frame;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import ip.industrialProcessing.multiblock.core.block.elevator.TEmultiblockElevator;
 import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.Entity;
@@ -81,6 +83,18 @@ public class ENmultiblockFrame extends EntityLiving {
 		else
 			return true;
 	}
+	
+	@Override
+    @SideOnly(Side.CLIENT)
+    public int getBrightnessForRender(float par1)
+    {
+		return 14680112;
+    }
+	@Override
+    public float getBrightness(float par1)
+    {
+    	return 10.0f;
+    }
 
 	private void setDirection(boolean dir) {
 		if (dir) {

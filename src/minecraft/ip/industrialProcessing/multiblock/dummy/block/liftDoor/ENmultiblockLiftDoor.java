@@ -1,9 +1,12 @@
 package ip.industrialProcessing.multiblock.dummy.block.liftDoor;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import ip.industrialProcessing.multiblock.core.block.elevator.TEmultiblockElevator;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class ENmultiblockLiftDoor extends EntityLiving {
@@ -14,6 +17,18 @@ public class ENmultiblockLiftDoor extends EntityLiving {
 		super(world);
 		setSize(0.9f, 1.0f);
 	}
+	
+	@Override
+    @SideOnly(Side.CLIENT)
+    public int getBrightnessForRender(float par1)
+    {
+        return 14680112;
+    }
+	@Override
+    public float getBrightness(float par1)
+    {
+    	return 10.0f;
+    }
 
 	public ENmultiblockLiftDoor(World world, double x, double y, double z, int modelID, TEmultiblockElevator te) {
 		super(world);
@@ -51,19 +66,27 @@ public class ENmultiblockLiftDoor extends EntityLiving {
 	}
 
 	private boolean isOpen() {
-		return false;
+		if (this.getDataWatcher().getWatchableObjectInt(23) == 0)
+			return false;
+		else
+			return true;
 	}
 
 	private void setState(boolean dir) {
-
+		if (dir) {
+			this.getDataWatcher().updateObject(23, 1);
+		} else {
+			this.getDataWatcher().updateObject(23, 0);
+		}
 	}
 
 	@Override
 	public void onCollideWithPlayer(EntityPlayer par1EntityPlayer) {
+		
 		if (isOpen()) {
 
 		} else {
-			par1EntityPlayer.setVelocity(-par1EntityPlayer.motionX, par1EntityPlayer.motionY, -par1EntityPlayer.motionZ);
+
 		}
 	}
 
@@ -79,15 +102,19 @@ public class ENmultiblockLiftDoor extends EntityLiving {
 				if (getPos() == 8) {
 					setDir(0);
 					setPos(getPos() + 1);
+					setState(true);
 				} else {
 					setPos(getPos() + 1);
+					setState(false);
 					this.setPositionAndRotation(this.posX - 0.1, this.posY, posZ, this.rotationYaw, this.rotationPitch);
 				}
 			} else {
 				if (getPos() == 8) {
 					setDir(0);
+					setState(true);
 					setPos(getPos() + 1);
 				} else {
+					setState(false);
 					setPos(getPos() + 1);
 					this.setPositionAndRotation(this.posX + 0.1, this.posY, posZ, this.rotationYaw, this.rotationPitch);
 				}
@@ -96,17 +123,21 @@ public class ENmultiblockLiftDoor extends EntityLiving {
 			if (getModelID() == 0) {
 				if (getPos() == -1) {
 					setDir(0);
+					setState(false);
 					this.setPositionAndRotation(this.getX()+0.5, this.getY(), this.getZ()+0.5, this.rotationYaw, this.rotationPitch);
 				} else {
 					setPos(getPos() - 1);
+					setState(false);
 					this.setPositionAndRotation(this.posX + 0.1, this.posY, posZ, this.rotationYaw, this.rotationPitch);
 				}
 			} else {
 				if (getPos() == -1) {
 					setDir(0);
+					setState(false);
 					this.setPositionAndRotation(this.getX()+0.5, this.getY(), this.getZ()+0.5, this.rotationYaw, this.rotationPitch);
 				} else {
 					setPos(getPos() - 1);
+					setState(false);
 					this.setPositionAndRotation(this.posX - 0.1, this.posY, posZ, this.rotationYaw, this.rotationPitch);
 				}
 			}
@@ -128,6 +159,7 @@ public class ENmultiblockLiftDoor extends EntityLiving {
 		this.dataWatcher.addObject(20, Integer.valueOf(0));
 		this.dataWatcher.addObject(21, Integer.valueOf(0));
 		this.dataWatcher.addObject(22, Integer.valueOf(0));
+		this.dataWatcher.addObject(23, Integer.valueOf(1));
 	}
 
 	public double getX() {

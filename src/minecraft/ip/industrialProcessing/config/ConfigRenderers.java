@@ -29,7 +29,14 @@ public class ConfigRenderers {
 	private int BLmultiblockFrame;
 	private int BLmultiblockWeldingTableExt;
 	private int BLmultiblockLiftDoor;
-	
+	private int BLmultiblockToggleButton2;
+
+	public static int getBLmultiblockToggleButton2() {
+		return getInstance().BLmultiblockToggleButton2;
+	}
+	public static void setBLmultiblockToggleButton2(int value) {
+		getInstance().BLmultiblockToggleButton2 = value;
+	}
 	public static int getBLmultiblockLiftDoor() {
 		return getInstance().BLmultiblockLiftDoor;
 	}
