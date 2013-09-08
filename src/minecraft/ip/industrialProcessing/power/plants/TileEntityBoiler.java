@@ -8,6 +8,7 @@ import ip.industrialProcessing.machines.TileEntityFluidWorkerMachine;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.utils.FluidTransfers;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidContainerRegistry;
@@ -47,10 +48,20 @@ public class TileEntityBoiler extends TileEntityFluidWorkerMachine implements IH
 				FluidTransfers.transfer(100, this.getTankInSlot(1), handler, ForgeDirection.DOWN);
 			}
 		}
-		
-		
+	}
+	
+	@Override
+	public void writeToNBT(NBTTagCompound nbt) { 
+		super.writeToNBT(nbt);
+		nbt.setFloat("Heat", heat);
 	}
 
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) { 
+		super.readFromNBT(nbt);
+		this.heat = nbt.getFloat("Heat");
+	}
+	
 	private IFluidHandler getFluidHandler(int x, int y, int z) {
 		TileEntity entityAbove = this.worldObj.getBlockTileEntity(x, y, z);
 		if(entityAbove instanceof IFluidHandler)

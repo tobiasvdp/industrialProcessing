@@ -3,6 +3,7 @@ package ip.industrialProcessing.power.plants;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import ic2.api.item.Items;
@@ -17,6 +18,20 @@ public class TileEntitySolidBurner extends TileEntityMachine {
 
 	public TileEntitySolidBurner() {
 		addStack(null, LocalDirection.FRONT, true, false);
+	}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) { 
+		super.readFromNBT(nbt);
+		this.burnTimeRemaining = nbt.getInteger("BurnTimeRemaining");
+		this.totalBurnTime = nbt.getInteger("TotalBurnTime");
+	}
+	
+	@Override
+	public void writeToNBT(NBTTagCompound nbt) { 
+		super.writeToNBT(nbt);
+		nbt.setInteger("BurnTimeRemaining", this.burnTimeRemaining);
+		nbt.setInteger("TotalBurnTime", this.totalBurnTime);
 	}
 
 	@Override
