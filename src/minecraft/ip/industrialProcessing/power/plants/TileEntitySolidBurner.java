@@ -28,13 +28,10 @@ public class TileEntitySolidBurner extends TileEntityMachine {
 	public void updateEntity() {
 		super.updateEntity();
 		if (burnTimeRemaining <= 0) {
-			ItemStack stack = this.getStackInSlot(0);
-			if (stack != null) {
-				ItemStack burnStack = stack.splitStack(1);
-				int burnTime = TileEntityFurnace.getItemBurnTime(burnStack);
-				burnTimeRemaining += burnTime;
-				this.totalBurnTime = burnTime;
-			}
+			ItemStack burnStack = this.decrStackSize(0, 1);
+			int burnTime = TileEntityFurnace.getItemBurnTime(burnStack);
+			burnTimeRemaining += burnTime;
+			this.totalBurnTime = burnTime;
 		}
 		if (burnTimeRemaining > 0) {
 			burnTimeRemaining--;

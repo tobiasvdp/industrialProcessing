@@ -13,12 +13,17 @@ public class TankHandler {
 	int[] amounts;
 	private ITankSyncable fluidMachine;
 	private int[] fluidIds;
+	private int[] capacities;
 
 	public TankHandler(ITankSyncable fluidMachine, int[] tankSlots) {
 		this.fluidMachine = fluidMachine;
 		this.syncedTanks = tankSlots;
 		this.amounts = new int[tankSlots.length];
 		this.fluidIds = new int[tankSlots.length];
+		this.capacities = new int[tankSlots.length];
+		for (int i = 0; i < tankSlots.length; i++) {
+			this.capacities[i] = fluidMachine.getTankInSlot(tankSlots[i]).getCapacity();
+		}
 	}
 
 	public int getTankCount() {
@@ -43,17 +48,15 @@ public class TankHandler {
 	}
 
 	public void setFluidId(int i, int fluidId) {
-		// TODO Auto-generated method stub
-
+		this.fluidIds[i] = fluidId;
 	}
 
 	public void setAmount(int i, int amount) {
-		// TODO Auto-generated method stub
-
+		this.amounts[i] = amount;
 	}
 
 	public boolean readDataFromTanks() {
-		boolean changed = false;
+		boolean changed = true;
 		for (int i = 0; i < this.syncedTanks.length; i++) {
 			int slot = this.syncedTanks[i];
 			IFluidTank tank = fluidMachine.getTankInSlot(slot);
@@ -70,5 +73,9 @@ public class TankHandler {
 			}
 		}
 		return changed;
+	}
+
+	public int getCapacity(int l) { 
+		return this.capacities[l];
 	}
 }

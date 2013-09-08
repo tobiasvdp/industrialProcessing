@@ -29,12 +29,14 @@ public class TileTankSyncHandler extends TileSyncHandler {
 
 	private static Packet250CustomPayload getTankPayload(TileEntity entity, TankHandler handler) {
 
-		ByteArrayOutputStream bos = new ByteArrayOutputStream(4 * (3 + handler.getTankCount() * 2 * 4) );
+		int ints =  3 + handler.getTankCount() * 2; // x + y + z + tanks * (amount + fluidId)
+		int bytes = 4 * ints;
+		ByteArrayOutputStream bos = new ByteArrayOutputStream(bytes);
 		DataOutputStream outputStream = new DataOutputStream(bos);
 
 		try {
-			writeTileEntity(outputStream, entity); // 3 * 4 bytes
-			writeTankHandler(outputStream, handler); // 2 * 4 bytes
+			writeTileEntity(outputStream, entity);  
+			writeTankHandler(outputStream, handler); 
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -47,6 +49,8 @@ public class TileTankSyncHandler extends TileSyncHandler {
 		for (int i = 0; i < tanks; i++) {
 			int amount = handler.getAmount(i);
 			int fluidId = handler.getFluidID(i);
+			outputStream.writeInt(amount);
+			outputStream.writeInt(fluidId);
 		}
 	}
 

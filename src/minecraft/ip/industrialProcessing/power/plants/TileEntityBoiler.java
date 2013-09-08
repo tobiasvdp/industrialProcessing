@@ -6,10 +6,14 @@ import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.MachineFluidTank;
 import ip.industrialProcessing.machines.TileEntityFluidWorkerMachine;
 import ip.industrialProcessing.recipes.Recipe;
+import ip.industrialProcessing.utils.FluidTransfers;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidHandler;
 
 public class TileEntityBoiler extends TileEntityFluidWorkerMachine implements IHeatable {
 
@@ -36,7 +40,22 @@ public class TileEntityBoiler extends TileEntityFluidWorkerMachine implements IH
 			// the faster the heat dissipates to the environment:
 			this.heat += COOLING_RATE * (ambientTemperature - this.heat);
 			System.out.println("heat: " + this.heat + " -> " + ambientTemperature);
+			
+			IFluidHandler handler = getFluidHandler(xCoord, yCoord+1, zCoord);
+			if(handler != null)
+			{
+				FluidTransfers.transfer(100, this.getTankInSlot(1), handler, ForgeDirection.DOWN);
+			}
 		}
+		
+		
+	}
+
+	private IFluidHandler getFluidHandler(int x, int y, int z) {
+		TileEntity entityAbove = this.worldObj.getBlockTileEntity(x, y, z);
+		if(entityAbove instanceof IFluidHandler)
+			return (IFluidHandler)entityAbove;
+		return null;
 	}
 
 	@Override

@@ -1,30 +1,22 @@
 package ip.industrialProcessing.machines.mixer;
 
 import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.machines.MachineFluidTank;
-import ip.industrialProcessing.machines.TileEntityFluidMachine;
-import ip.industrialProcessing.machines.TileEntityFluidWorkerMachine;
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
+import ip.industrialProcessing.machines.animation.tanks.ITankSyncable;
+import ip.industrialProcessing.machines.animation.tanks.TankHandler;
 import ip.industrialProcessing.recipes.Recipe;
 
 import java.util.Iterator;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTank;
 
-public class TileEntityMixer extends TileEntityPoweredFluidWorkerMachine {
+public class TileEntityMixer extends TileEntityPoweredFluidWorkerMachine implements ITankSyncable {
 
 	private static RecipesMixer recipes = new RecipesMixer();
+
+	private TankHandler tankHandler;
 
 	public TileEntityMixer() {
 		super(LocalDirection.LEFT, 10000);
@@ -43,6 +35,8 @@ public class TileEntityMixer extends TileEntityPoweredFluidWorkerMachine {
 
 		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.RIGHT, true, false);
 		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.DOWN, false, true);
+
+		this.tankHandler = new TankHandler(this, new int[] { 0 });
 	}
 
 	@Override
@@ -90,6 +84,11 @@ public class TileEntityMixer extends TileEntityPoweredFluidWorkerMachine {
 	@Override
 	protected boolean isTankValidForFluid(int slot, int fluidId) {
 		return recipes.isValidFluidInput(slot, fluidId);
+	}
+
+	@Override
+	public TankHandler getTankHandler() { 
+		return this.tankHandler;
 	}
 
 }

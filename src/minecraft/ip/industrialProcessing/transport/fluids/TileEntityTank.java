@@ -56,8 +56,10 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
 		if (tank.getFluidAmount() > 0 || unverified) {
 			TileEntity entityBelow = this.worldObj.getBlockTileEntity(xCoord, yCoord - 1, zCoord);
 			if (entityBelow instanceof TileEntityTank) {
-				TileEntityTank tankBelow = (TileEntityTank) entityBelow;
-				FluidTransfers.transfer(1000, this.tank, tankBelow.tank);
+				if (!this.worldObj.isRemote) {
+					TileEntityTank tankBelow = (TileEntityTank) entityBelow;
+					FluidTransfers.transfer(1000, this.tank, tankBelow.tank);
+				}
 				states[ForgeDirection.DOWN.ordinal()] = ConnectionState.CONNECTED;
 			} else
 				states[ForgeDirection.DOWN.ordinal()] = ConnectionState.DISCONNECTED;
@@ -93,7 +95,7 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
 		if (tank.getFluidAmount() == tank.getCapacity()) {
 			return fillAbove(resource, doFill);
 		}
-		int fill = tank.fill(resource, doFill); 
+		int fill = tank.fill(resource, doFill);
 		return fill;
 	}
 
@@ -101,7 +103,7 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
 		TileEntity entityAbove = this.worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord);
 		if (entityAbove instanceof TileEntityTank) {
 			TileEntityTank tankAbove = (TileEntityTank) entityAbove;
-			int fill = tankAbove.fill(ForgeDirection.DOWN, resource, doFill); 
+			int fill = tankAbove.fill(ForgeDirection.DOWN, resource, doFill);
 			return fill;
 		}
 		return 0;
@@ -110,7 +112,7 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
 	@Override
 	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
 		if (resource != null && resource.isFluidEqual(tank.getFluid())) {
-			FluidStack drain = tank.drain(resource.amount, doDrain); 
+			FluidStack drain = tank.drain(resource.amount, doDrain);
 			return drain;
 		}
 		return null;
@@ -118,7 +120,7 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
 
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-		FluidStack stack = tank.drain(maxDrain, doDrain); 
+		FluidStack stack = tank.drain(maxDrain, doDrain);
 		return stack;
 	}
 
