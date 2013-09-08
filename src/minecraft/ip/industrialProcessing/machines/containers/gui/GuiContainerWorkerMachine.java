@@ -24,7 +24,7 @@ public class GuiContainerWorkerMachine extends GuiContainerMachine {
 
 	protected void drawProgressBarWorker(Rectangle source, Point location, boolean horizontal, int containerWorkerIndex) {
 		ProgressInfoWorker worker = this.workerContainer.getProgressInfoWorker(containerWorkerIndex);
-		drawProgressBar(source, location, worker.workDone, worker.totalWork, horizontal);
+		drawProgressBar(source, location, worker.workDone, worker.totalWork, horizontal, false);
 	}
 
 }

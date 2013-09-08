@@ -166,7 +166,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine implement
 		}
 	}
 
-	private MachineFluidTank getTankInSlot(int i) {
+	protected MachineFluidTank getTankInSlot(int i) {
 		if (i < 0 || i > this.fluidTanks.size())
 			return null;
 		return this.fluidTanks.get(i);
@@ -402,7 +402,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine implement
 			return true;
 		}
 		return false;
-	}
+	} 	
 
 	protected void onTanksChanged() {
 		this.onInventoryChanged();

@@ -31,7 +31,8 @@ public class ProgressBarPowerHandler implements IProgressBarHandler {
 	{
 		int[] values = info.getValueStorage();
 		ProgressInfoPower value = new ProgressInfoPower();
-		
+		value.powerCapacity = values[1];
+		value.storedPower = values[0];
 		return value;
 	}
 

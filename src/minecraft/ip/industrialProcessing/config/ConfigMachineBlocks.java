@@ -31,6 +31,8 @@ import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGen
 import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
 import ip.industrialProcessing.power.meters.TileEntityAmpMeter;
 import ip.industrialProcessing.power.meters.TileEntityVoltMeter;
+import ip.industrialProcessing.power.plants.TileEntityBoiler;
+import ip.industrialProcessing.power.plants.TileEntitySolidBurner;
 import ip.industrialProcessing.power.storage.TileEntityEnergyCell;
 import ip.industrialProcessing.power.wire.TileEntityWire;
 import ip.industrialProcessing.transport.fluids.TileEntityPump;
@@ -60,7 +62,7 @@ public class ConfigMachineBlocks {
 	private int flotationCellBlockID = 507;
 	private int hydroCycloneBlockID = 508;
 	private int diskFilterBlockID = 509;
-	
+
 	private int blastFurnaceID = 550;
 	private int extruderID = 551;
 	private int oxygenFurnaceID = 552;
@@ -68,13 +70,15 @@ public class ConfigMachineBlocks {
 
 	private int manualGeneratorBlockID = 800; // Crank Generator
 	private int buildcraftGeneratorBlockID = 801; // Buildcraft Joule converter
+	private int solidBurnerBlockID = 802;
+	private int boilerBlockID = 803;
 
 	private int wireBlockID = 900;
 	private int voltMeterBlockID = 901;
 	private int ampMeterBlockID = 902;
-	private int EnergyCellBlockID = 903; 
-	
-	//new multiblocks
+	private int EnergyCellBlockID = 903;
+
+	// new multiblocks
 	private int BLmultiblockFrame = 720;
 	private int BLmultiblockHotPress = 721;
 	private int BLmultiblockWeldingStation = 722;
@@ -88,7 +92,7 @@ public class ConfigMachineBlocks {
 	private int BLmultiblockLiftDoor = 730;
 
 	public void registerMachineBlocks() {
-		//multiblocks
+		// multiblocks
 		registerMachineBlock(IndustrialProcessing.BLmultiblockLiftDoor, "IP.MBD.LiftDoor", "Lift door", TEmultiblockLiftDoor.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockElevator, "IP.MBC.Elevator", "Elevator", TEmultiblockElevator.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockToggleButton, "IP.MBD.Toggle", "Control panel", TEmultiblockToggleButton.class);
@@ -100,10 +104,10 @@ public class ConfigMachineBlocks {
 		registerMachineBlock(IndustrialProcessing.BLmultiblockHotPress, "IP.MBC.HotPress", "Hot press", TEmultiblockHotPress.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockWeldingStation, "IP.MBC.WeldingStation", "Welding station", TEmultiblockWeldingStation.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockWeldingTableExt, "IP.MBD.WeldingTableExt", "Welding station extention", TEmultiblockWeldingTableExt.class);
-		
-		//register entitys associated with multiblocks
-		
-		//machines
+
+		// register entitys associated with multiblocks
+
+		// machines
 		registerMachineBlock(IndustrialProcessing.blockCrusher, "IP.Machine.Crusher", "Ore Crusher", TileEntityCrusher.class);
 		registerMachineBlock(IndustrialProcessing.blockFilter, "IP.Machine.Filter", "Ore Filter", TileEntityFilter.class);
 		registerMachineBlock(IndustrialProcessing.blockMageneticSeparator, "IP.Machine.Separator", "Magnetic Separator", TileEntityMagneticSeparator.class);
@@ -122,60 +126,75 @@ public class ConfigMachineBlocks {
 		registerMachineBlock(IndustrialProcessing.blockManualGenerator, "IP.Generator.Manual", "Crank Generator", TileEntityManualGenerator.class);
 		registerMachineBlock(IndustrialProcessing.blockBuildcraftGenerator, "IP.Generator.Buildcraft", "Buildcraft Generator", TileEntityBuildcraftGenerator.class);
 
-		//transport
+		// transport
 		registerMachineBlock(IndustrialProcessing.blockTransportFluids, "IP.Transport.Fluids", "Fluid pipe", TileEntityTransportFluids.class);
 		registerMachineBlock(IndustrialProcessing.blockPump, "IP.Transport.Fluids.Pump", "Fluid pump", TileEntityPump.class);
 		registerMachineBlock(IndustrialProcessing.blockTank, "IP.Transport.Fluids.Tank", "Fluid Tank", TileEntityTank.class);
-		
-		//power
+
+		// power
 		registerMachineBlock(IndustrialProcessing.blockWire, "IP.Wire", "Wire", TileEntityWire.class);
 		registerMachineBlock(IndustrialProcessing.blockVoltMeter, "IP.Meter.Volt", "Volt Meter", TileEntityVoltMeter.class);
 		registerMachineBlock(IndustrialProcessing.blockAmpMeter, "IP.Meter.Amp", "Amp Meter", TileEntityAmpMeter.class);
 		registerMachineBlock(IndustrialProcessing.blockEnergyCell, "IP.EnergyCell", "Battery Box", TileEntityEnergyCell.class);
+		registerMachineBlock(IndustrialProcessing.blockSolidBurner, "IP.SolidBurner", "Solid Burner", TileEntitySolidBurner.class);
+		registerMachineBlock(IndustrialProcessing.blockBoiler, "IP.Boiler", "Boiler", TileEntityBoiler.class);
 	}
+
 	private void registerMachineBlock(Block block, String uniqueId, String displayName, Class tileEntity) {
 		GameRegistry.registerBlock(block, uniqueId);
 		MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
 		LanguageRegistry.addName(block, displayName);
 		ModLoader.registerTileEntity(tileEntity, uniqueId);
 	}
-	
+
 	public static ConfigMachineBlocks getInstance() {
 		return instance;
 	}
+
 	public static int getBLmultiblockLiftDoor() {
 		return getInstance().BLmultiblockLiftDoor;
 	}
+
 	public static int getBLmultiblockElevator() {
 		return getInstance().BLmultiblockElevator;
 	}
+
 	public static int getBLmultiblockToggleButton2() {
 		return getInstance().BLmultiblockToggleButton2;
 	}
+
 	public static int getBLmultiblockToggleButton() {
 		return getInstance().BLmultiblockToggleButton;
 	}
+
 	public static int getBLmultiblockInvInput() {
 		return getInstance().BLmultiblockInvInput;
 	}
+
 	public static int getBLmultiblockInvOutput() {
 		return getInstance().BLmultiblockInvOutput;
 	}
+
 	public static int getBLmultiblockWeldingStationExt() {
 		return getInstance().BLmultiblockWeldingStationExt;
 	}
+
 	public static int getBLmultiblockScreen() {
 		return getInstance().BLmultiblockScreen;
 	}
+
 	public static int getBLmultiblockWeldingStation() {
 		return getInstance().BLmultiblockWeldingStation;
 	}
+
 	public static int getBLmultiblockHotPress() {
 		return getInstance().BLmultiblockHotPress;
 	}
+
 	public static int getBLmultiblockFrame() {
 		return getInstance().BLmultiblockFrame;
 	}
+
 	public static int getFilterBlockID() {
 		return getInstance().filterBlockId;
 	}
@@ -236,19 +255,32 @@ public class ConfigMachineBlocks {
 	public static int getAmpMeterBlockID() {
 		return getInstance().ampMeterBlockID;
 	}
+
 	public static int getEnergyCellBlockID() {
 		return getInstance().EnergyCellBlockID;
 	}
+
 	public static int getPelletExtruderID() {
 		return getInstance().pelletExtruderID;
 	}
+
 	public static int getExtruderID() {
 		return getInstance().extruderID;
 	}
+
 	public static int getBlastFurnaceID() {
 		return getInstance().blastFurnaceID;
 	}
+
 	public static int getOxygenFurnaceID() {
 		return getInstance().oxygenFurnaceID;
-	} 
+	}
+
+	public static int getSolidBurnerBlockID() {
+		return getInstance().solidBurnerBlockID;
+	}
+
+	public static int getBoilerBlockID() {
+		return getInstance().boilerBlockID;
+	}
 }

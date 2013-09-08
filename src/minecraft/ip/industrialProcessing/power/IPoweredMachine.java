@@ -1,6 +1,7 @@
 package ip.industrialProcessing.power;
 
+import ip.industrialProcessing.machines.IPowerStorage;
+
 public interface IPoweredMachine  extends IPowerAcceptor{
-    int getStoredPower();
-    int getPowerCapacity();
+    IPowerStorage getMainPowerStorage();
 }

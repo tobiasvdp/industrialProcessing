@@ -33,6 +33,8 @@ import ip.industrialProcessing.power.buildcraftGenerator.BlockBuildcraftGenerato
 import ip.industrialProcessing.power.manualGenerator.BlockManualGenerator;
 import ip.industrialProcessing.power.meters.BlockAmpMeter;
 import ip.industrialProcessing.power.meters.BlockVoltMeter;
+import ip.industrialProcessing.power.plants.BlockBoiler;
+import ip.industrialProcessing.power.plants.BlockSolidBurner;
 import ip.industrialProcessing.power.storage.BlockEnergyCell;
 import ip.industrialProcessing.power.wire.BlockWire;
 import ip.industrialProcessing.transport.fluids.BlockPump;
@@ -66,6 +68,8 @@ public interface ISetupMachineBlocks {
 	public final static BlockVoltMeter blockVoltMeter = new BlockVoltMeter();
 	public final static BlockAmpMeter blockAmpMeter = new BlockAmpMeter();
 	public final static BlockEnergyCell blockEnergyCell = new BlockEnergyCell();
+	public final static BlockSolidBurner blockSolidBurner = new BlockSolidBurner();
+	public final static BlockBoiler blockBoiler = new BlockBoiler();
 	
 	// create fluidpipe
 	public final static BlockTransportFluids blockTransportFluids = new BlockTransportFluids();

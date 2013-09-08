@@ -24,16 +24,14 @@ public class TileEntityVoltMeter extends TileEntityMachine implements IPowerAcce
     public void updateEntity() {
 
 	if (!this.worldObj.isRemote) {
-	    float averageVoltage = inputs == 0 ? 0 : this.voltage / inputs;
-	    System.out.println(averageVoltage + "V" + inputs+" - "+voltage);
+	    float averageVoltage = inputs == 0 ? 0 : this.voltage / inputs; 
 	    this.voltage = 0;
 	    this.inputs = 0;
 
 	    float targetAngle = Math.min(1, averageVoltage / 48f);
 	    // 0.25 sec to go from current angle to target angle?
-	    float speed = (this.animationHandler.getProgress() - targetAngle) * this.animationHandler.DT / 0.25f;
+	    float speed = (targetAngle - this.animationHandler.getProgress()) * this.animationHandler.DT / 0.25f;
 
-	    System.out.println(averageVoltage + "V" + inputs+" - "+voltage+ " speed "+speed);
 	    boolean incrementing = speed > 0;
 	    if(!incrementing) speed = -speed;
 	    this.animationHandler.setSpeed(speed);
