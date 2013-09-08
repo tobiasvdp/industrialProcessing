@@ -26,10 +26,8 @@ public class GuiContainerSolidBurner extends GuiContainerMachine {
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
 		super.drawGuiContainerBackgroundLayer(par1, par2, par3);
-
 		int progress = this.container.getBurnProgress();
 		int total = this.container.getBurnTotal();
-
 		drawProgressBar(BURNER_SOURCE, BURNER_LOCATION, progress, total, false, false);
 	}
 }
