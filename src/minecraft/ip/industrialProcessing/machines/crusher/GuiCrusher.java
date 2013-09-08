@@ -12,7 +12,7 @@ public class GuiCrusher extends GuiContainerPoweredWorkerMachine {
 	private static final Rectangle PROGRESSBAR_SOURCE = new Rectangle(176, 0, 22, 16);
 	private static final Point PROGRESSBAR_LOCATION = new Point(70, 34);
 	private static final Rectangle PROGRESSBAR_POWER_SOURCE = new Rectangle(176, 17, 52, 8);
-	private static final Point PROGRESSBAR_POWER_LOCATION = new Point(116, 8);
+	private static final Point PROGRESSBAR_POWER_LOCATION = new Point(117, 7);
 
 	public GuiCrusher(InventoryPlayer inventory, TileEntityCrusher entity) {
 		super(inventory, entity, new ContainerCrusher(inventory, entity),
