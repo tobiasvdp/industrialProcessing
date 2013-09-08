@@ -11,7 +11,11 @@ public class ConfigBlocks {
 
 	private int blockCopperOreID = 1000;
 	private int blockTinOreID = 1001;
+	private int blockIronFlat = 1002;
 
+	public static int blockIronFlat() {
+		return getInstance().blockIronFlat;
+	}
 	public static int BlockCopperOreID() {
 		return getInstance().blockCopperOreID;
 	}
@@ -27,6 +31,7 @@ public class ConfigBlocks {
 	public void registerOres() {
 		registerOre(IndustrialProcessing.blockCopperOre, "IP.World.CopperOre", "Copper Ore", "copper");
 		registerOre(IndustrialProcessing.blockTinOre, "IP.World.TinOre", "Tin Ore", "copper");
+		registerBlock(IndustrialProcessing.blockIronFlat, "IP.Block.IronFlat", "Flat Iron block");
 	}
 
 	private void registerOre(Block block, String uniqueId, String displayName, String oreDictionaryKey) {
@@ -34,6 +39,11 @@ public class ConfigBlocks {
 		MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
 		LanguageRegistry.addName(block, displayName);
 		OreDictionary.registerOre(oreDictionaryKey, block);
+	}
+	private void registerBlock(Block block, String uniqueId, String displayName) {
+		GameRegistry.registerBlock(block, uniqueId);
+		MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
+		LanguageRegistry.addName(block, displayName);
 	}
 
 	private static ConfigBlocks instance = new ConfigBlocks();

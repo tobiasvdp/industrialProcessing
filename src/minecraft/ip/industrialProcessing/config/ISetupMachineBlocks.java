@@ -1,10 +1,13 @@
 package ip.industrialProcessing.config;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.StepSound;
+import net.minecraft.block.material.Material;
 import net.minecraft.src.ModLoader;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import ip.industrialProcessing.buildingBlock.BLblockBase;
 import ip.industrialProcessing.machines.blastFurnace.BlockBlastFurnace;
 import ip.industrialProcessing.machines.classifier.BlockClassifier;
 import ip.industrialProcessing.machines.crusher.BlockCrusher;
@@ -43,6 +46,7 @@ import ip.industrialProcessing.transport.fluids.BlockTransportFluids;
 import ip.industrialProcessing.multiblock.dummy.block.toggleButton.BLmultiblockToggleButton2;
 
 public interface ISetupMachineBlocks {
+	
 	// machines
 	public final static BlockCrusher blockCrusher = new BlockCrusher();
 	public final static BlockFilter blockFilter = new BlockFilter();
