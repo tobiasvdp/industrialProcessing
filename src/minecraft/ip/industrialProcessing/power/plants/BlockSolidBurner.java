@@ -13,8 +13,8 @@ import ip.industrialProcessing.machines.BlockMachine;
 public class BlockSolidBurner extends BlockMachine {
 
 	public BlockSolidBurner() {
-	super(ConfigMachineBlocks.getSolidBurnerBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Solid Burner", IndustrialProcessing.tabPower);
-    }
+		super(ConfigMachineBlocks.getSolidBurnerBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Solid Burner", IndustrialProcessing.tabPower);
+	}
 	@Override
 	public TileEntity createNewTileEntity(World world) { 
 		return new TileEntitySolidBurner();

@@ -31,6 +31,7 @@ public class ConfigRenderers {
 	private int BLmultiblockLiftDoor;
 	private int BLmultiblockToggleButton2;
 	private int BLmultiblockWheel;
+	private int rendererBoilerId;
 
 	public static int getBLmultiblockWheel() {
 		return getInstance().BLmultiblockWheel;
@@ -245,6 +246,12 @@ public class ConfigRenderers {
 
 	public static void setRendererBCGeneratorId(int value) {
 		getInstance().rendererBCGeneratorID = value;
+	}
+	public static int getRendererBoilerId() { 
+		return getInstance().rendererBoilerId;
+	}
+	public static void setRendererBoilerId(int value) {
+		getInstance().rendererBoilerId = value;
 	}
 
 	private ConfigRenderers() {

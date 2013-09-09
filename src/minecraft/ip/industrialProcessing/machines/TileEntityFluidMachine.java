@@ -76,24 +76,26 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine implement
 	}
 
 	protected void getBucketFromTank(int inputSlot, int outputSlot, int tankSlot) {
-		ItemStack bucketOutputStack = getStackInSlot(outputSlot);
-		if (bucketOutputStack == null) {
-			ItemStack inputStack = getStackInSlot(inputSlot);
-			if (inputStack != null) {
-				FluidTank tank = getTankInSlot(tankSlot);
-				if (tank != null) {
-					ItemStack singleItem = inputStack.copy();
-					singleItem.stackSize = 1;
+		if (!this.worldObj.isRemote) {
+			ItemStack bucketOutputStack = getStackInSlot(outputSlot);
+			if (bucketOutputStack == null) {
+				ItemStack inputStack = getStackInSlot(inputSlot);
+				if (inputStack != null) {
+					FluidTank tank = getTankInSlot(tankSlot);
+					if (tank != null) {
+						ItemStack singleItem = inputStack.copy();
+						singleItem.stackSize = 1;
 
-					FluidStack fluid = tank.getFluid();
-					ItemStack filled = FluidContainerRegistry.fillFluidContainer(fluid, singleItem);
+						FluidStack fluid = tank.getFluid();
+						ItemStack filled = FluidContainerRegistry.fillFluidContainer(fluid, singleItem);
 
-					if (filled != null) {
-						FluidStack removeFluid = FluidContainerRegistry.getFluidForFilledItem(filled);
-						tank.drain(removeFluid.amount, true);
-						this.decrStackSize(inputSlot, 1);
-						setInventorySlotContents(outputSlot, filled);
-						onTanksChanged();
+						if (filled != null) {
+							FluidStack removeFluid = FluidContainerRegistry.getFluidForFilledItem(filled);
+							tank.drain(removeFluid.amount, true);
+							this.decrStackSize(inputSlot, 1);
+							setInventorySlotContents(outputSlot, filled);
+							onTanksChanged();
+						}
 					}
 				}
 			}
@@ -101,23 +103,24 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine implement
 	}
 
 	protected void addBucketToTank(int inputSlot, int outputSlot, int tankSlot) {
+		if (!this.worldObj.isRemote) {
+			ItemStack bucketOutputStack = getStackInSlot(outputSlot);
+			if (bucketOutputStack == null) // output available
+			{
+				ItemStack inputStack = getStackInSlot(inputSlot);
+				FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(inputStack);
+				if (fluid != null) {
+					if (isTankValidForFluid(tankSlot, fluid.fluidID)) {
 
-		ItemStack bucketOutputStack = getStackInSlot(outputSlot);
-		if (bucketOutputStack == null) // output available
-		{
-			ItemStack inputStack = getStackInSlot(inputSlot);
-			FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(inputStack);
-			if (fluid != null) {
-				if (isTankValidForFluid(tankSlot, fluid.fluidID)) {
-
-					ItemStack emptyContainer = getEmptyContainerFromContainer(inputStack);
-					if (emptyContainer != null) {
-						if (this.tankHasRoomFor(tankSlot, fluid)) {
-							emptyContainer.stackSize = 1;
-							this.decrStackSize(inputSlot, 1);
-							getTankInSlot(tankSlot).fill(fluid, true);
-							this.setInventorySlotContents(outputSlot, emptyContainer);
-							onTanksChanged();
+						ItemStack emptyContainer = getEmptyContainerFromContainer(inputStack);
+						if (emptyContainer != null) {
+							if (this.tankHasRoomFor(tankSlot, fluid)) {
+								emptyContainer.stackSize = 1;
+								this.decrStackSize(inputSlot, 1);
+								getTankInSlot(tankSlot).fill(fluid, true);
+								this.setInventorySlotContents(outputSlot, emptyContainer);
+								onTanksChanged();
+							}
 						}
 					}
 				}
@@ -402,7 +405,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine implement
 			return true;
 		}
 		return false;
-	} 	
+	}
 
 	protected void onTanksChanged() {
 		this.onInventoryChanged();

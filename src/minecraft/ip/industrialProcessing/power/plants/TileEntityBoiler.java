@@ -6,6 +6,7 @@ import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.MachineFluidTank;
 import ip.industrialProcessing.machines.TileEntityFluidWorkerMachine;
 import ip.industrialProcessing.recipes.Recipe;
+import ip.industrialProcessing.transport.fluids.IPressuredTank;
 import ip.industrialProcessing.utils.FluidTransfers;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -14,9 +15,10 @@ import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
-public class TileEntityBoiler extends TileEntityFluidWorkerMachine implements IHeatable {
+public class TileEntityBoiler extends TileEntityFluidWorkerMachine implements IHeatable, IPressuredTank {
 
 	private static RecipesBoiler recipes = new RecipesBoiler();
 	private float heat = 0;
@@ -106,6 +108,18 @@ public class TileEntityBoiler extends TileEntityFluidWorkerMachine implements IH
 
 	public int getTemperature() { 
 		return (int)this.heat;
+	}
+
+	@Override
+	public int getPressure(ForgeDirection from) {
+		FluidTankInfo[] info =getTankInfo(from);
+		if(info.length > 0)
+		{
+			FluidTankInfo tank = info[0];
+			int amount = tank.fluid == null ? 0 : tank.fluid.amount;			
+			return amount * 1000 / tank.capacity;
+		}
+		return 0;
 	}
 
 }

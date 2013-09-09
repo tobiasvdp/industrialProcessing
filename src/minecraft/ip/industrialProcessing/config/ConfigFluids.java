@@ -18,6 +18,7 @@ public class ConfigFluids {
 		
 	}
 
+	
 	private int offset = 2500;
 	private int blockFluidBaseDirtyWaterID = offset;
 	private int BucketDirtyWaterID = offset+1;
@@ -35,6 +36,8 @@ public class ConfigFluids {
 	private int blockFluidBaseHotSteelID = offset+13;
 	private int blockFluidBaseExhaustGasID = offset+14;
 	
+	private int blockFluidBaseSteamID = offset + 15; 
+	
 	public static int blockFluidBaseDirtyWaterID(){return getInstance().blockFluidBaseDirtyWaterID;}
 	public static int BucketDirtyWaterID(){return getInstance().BucketDirtyWaterID;}
 	public static int blockFluidBaseOreSludgeIronID() {return getInstance().blockFluidBaseOreSludgeIronID ;}
@@ -50,6 +53,7 @@ public class ConfigFluids {
 	public static int blockFluidBasePigIronID() {return getInstance().blockFluidBasePigIronID ;}
 	public static int blockFluidBaseHotSteelID() {return getInstance().blockFluidBaseHotSteelID ;}
 	public static int blockFluidBaseExhaustGasID() {return getInstance().blockFluidBaseExhaustGasID ;}
+	public static int blockFluidBaseSteamID() {return getInstance().blockFluidBaseSteamID ;}
 	
 	public void registerFluids(){
 		registerFluid(IndustrialProcessing.blockFluidDirtyWater, IndustrialProcessing.itemFluidDirtyWater, IndustrialProcessing.bucketDirtyWater, "Dirty water");
@@ -67,6 +71,8 @@ public class ConfigFluids {
 		registerFluid(IndustrialProcessing.blockFluidHotSteel, IndustrialProcessing.itemFluidHotSteel, IndustrialProcessing.bucketHotSteel, "Molten steel");
 		LanguageRegistry.addName(IndustrialProcessing.bucketHotSteel, "Molten steel Bucket");
 		registerFluid(IndustrialProcessing.blockFluidExhaustGas, IndustrialProcessing.itemFluidExhaustGas, null, "Exhaust gas");
+		
+		registerFluid(IndustrialProcessing.blockFluidSteam, IndustrialProcessing.itemFluidSteam, null, "Steam");
 	}
 	
 	private void registerFluid(Block block, Fluid fluid, ContainerFluid bucket, String displayName) {
@@ -75,6 +81,7 @@ public class ConfigFluids {
 		if (bucket != null){
 			FluidContainerRegistry.registerFluidContainer(new FluidContainerData(FluidRegistry.getFluidStack(fluid.getName(), FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(bucket), new ItemStack(Item.bucketEmpty)));
 		}
+		//FluidRegistry.registerFluid(fluid) is done in constructor of itemFluid;
 	}
 	
 	

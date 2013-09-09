@@ -67,14 +67,15 @@ public abstract class BlockMachine extends BlockContainer {
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack itemStack) {
 		int dir = MathHelper.floor_double((double) ((entityLivingBase.rotationYaw * 4F) / 360F) + 0.5D) & 3;
-		TileEntityMachine machine = (TileEntityMachine)world.getBlockTileEntity(x, y, z);
-		machine.setForwardDirection(getForwardFromMetadata(dir));
-		
-		world.setBlockMetadataWithNotify(x, y, z, dir, 0);
+		TileEntity entity = world.getBlockTileEntity(x, y, z);
+		if (entity instanceof TileEntityMachine) {
+			TileEntityMachine machine = (TileEntityMachine) entity;
+			machine.setForwardDirection(getForwardFromMetadata(dir));
+		}
 		super.onBlockPlacedBy(world, x, y, z, entityLivingBase, itemStack);
 	}
 
-	// TODO: use the tile entity to store orientation
+	@Deprecated
 	public ForgeDirection getForwardFromMetadata(World world, int x, int y, int z) {
 		int metadata = world.getBlockMetadata(x, y, z);
 		return getForwardFromMetadata(metadata);
@@ -92,6 +93,21 @@ public abstract class BlockMachine extends BlockContainer {
 			return ForgeDirection.WEST;
 		}
 		return null;
+	}
+
+	public static int getMetadataFromForward(ForgeDirection dir) {
+		switch (dir) {
+		case NORTH:
+			return 0;
+		case EAST:
+			return 1;
+		case SOUTH:
+			return 2;
+		case WEST:
+			return 3;
+		default:
+			return 0;
+		}
 	}
 
 }

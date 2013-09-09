@@ -37,4 +37,7 @@ public interface ISetupFluids {
     
     public final static ItemFluid itemFluidExhaustGas = new ItemFluid("IP.fluid.exhaustGas", 1000, 1000);
     public final static BlockFluid blockFluidExhaustGas = new BlockFluid(ConfigFluids.blockFluidBaseExhaustGasID(), itemFluidExhaustGas, Material.water, IndustrialProcessing.tabOres, false);
+    
+    public final static ItemFluid itemFluidSteam = new ItemFluid("Steam", 1000, 1000);
+    public final static BlockFluid blockFluidSteam = new BlockFluid(ConfigFluids.blockFluidBaseSteamID(), itemFluidSteam, Material.water, IndustrialProcessing.tabOres, false);
 }

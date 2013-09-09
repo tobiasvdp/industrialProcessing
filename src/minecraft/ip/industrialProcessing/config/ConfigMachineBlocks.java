@@ -74,6 +74,7 @@ public class ConfigMachineBlocks {
 	private int buildcraftGeneratorBlockID = 801; // Buildcraft Joule converter
 	private int solidBurnerBlockID = 802;
 	private int boilerBlockID = 803;
+	private int steamTurbineBlockID = 804;
 
 	private int wireBlockID = 900;
 	private int voltMeterBlockID = 901;
@@ -294,5 +295,9 @@ public class ConfigMachineBlocks {
 
 	public static int getBoilerBlockID() {
 		return getInstance().boilerBlockID;
+	}
+
+	public static int getSteamTurbineBlockID() { 
+		return getInstance().steamTurbineBlockID;
 	}
 }

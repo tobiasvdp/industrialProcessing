@@ -35,6 +35,8 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
 
 	public void searchForConnections() {
 		this.unverified = true;
+		if(this.worldObj.isRemote)
+			updateConnections(); // do an extra clientside check to reduce flicker.
 	}
 	
 	private void updateConnections(){
