@@ -31,7 +31,6 @@ public class RenderingMultiblock extends RendererTileEntity {
 				TEmultiblockDummy tile = (TEmultiblockDummy) tl;
 				int modelID = tile.getModelID();
 				int modelConnection = tile.getModelConnection();
-
 				if (tl instanceof IAnimationProgress) {
 					IAnimationProgress machine = (IAnimationProgress) tl;
 					float[] animation = new float[machine.getAnimationCount()];
@@ -41,6 +40,7 @@ public class RenderingMultiblock extends RendererTileEntity {
 					this.model[modelID].renderModel(0.0625F, modelConnection,animation);
 				} else {
 					this.model[modelID].renderModel(0.0625F, modelConnection);
+					System.out.println("here we are");
 				}
 			} else {
 				TEmultiblockCore tile = (TEmultiblockCore) tl;

@@ -39,12 +39,12 @@ public class TEmultiblockRollingPress extends TEmultiblockCoreInv {
 		
 		layout.setBlockID(0, 1, 0,5, 1,0, IndustrialProcessing.BLmultiblockFrame.blockID);
 		layout.setBlockID(1, 1, 0,6, 1,0, IndustrialProcessing.BLmultiblockFrame.blockID);
-		layout.setBlockID(0, 1, -3,7, 3,1, IndustrialProcessing.BLmultiblockFrame.blockID);
-		layout.setBlockID(1, 1, -3,8, 3,1, IndustrialProcessing.BLmultiblockFrame.blockID);
+		layout.setBlockID(0, 1, -3,7, 0,1, IndustrialProcessing.BLmultiblockWheelConnector.blockID);
+		layout.setBlockID(1, 1, -3,8, 0,1, IndustrialProcessing.BLmultiblockWheelConnector.blockID);
 		layout.setBlockID(0, 2, 0,9, 1,0, IndustrialProcessing.BLmultiblockFrame.blockID);
 		layout.setBlockID(1, 2, 0,10, 1,0, IndustrialProcessing.BLmultiblockFrame.blockID);
-		layout.setBlockID(0, 2, -3,11, 3,0, IndustrialProcessing.BLmultiblockFrame.blockID);
-		layout.setBlockID(1, 2, -3,12, 3,0, IndustrialProcessing.BLmultiblockFrame.blockID);
+		layout.setBlockID(0, 2, -3,11, 0,0, IndustrialProcessing.BLmultiblockWheelConnector.blockID);
+		layout.setBlockID(1, 2, -3,12, 0,0, IndustrialProcessing.BLmultiblockWheelConnector.blockID);
 		
 		layout.setBlockID(0, 1, -1,13, 0,1, IndustrialProcessing.BLmultiblockWheel.blockID);
 		layout.setBlockID(1, 1, -1,14, 0,1, IndustrialProcessing.BLmultiblockWheel.blockID);

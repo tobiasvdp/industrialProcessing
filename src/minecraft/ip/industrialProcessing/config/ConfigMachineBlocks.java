@@ -29,6 +29,7 @@ import ip.industrialProcessing.multiblock.dummy.block.screen.TEmultiblockScreen;
 import ip.industrialProcessing.multiblock.dummy.block.toggleButton.TEmultiblockToggleButton;
 import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.TEmultiblockWeldingTableExt;
 import ip.industrialProcessing.multiblock.dummy.block.wheel.TEmultiblockWheel;
+import ip.industrialProcessing.multiblock.dummy.block.wheelConnector.TEmultiblockWheelConnector;
 import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
 import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
 import ip.industrialProcessing.power.meters.TileEntityAmpMeter;
@@ -95,9 +96,11 @@ public class ConfigMachineBlocks {
 	private int BLmultiblockLiftDoor = 730;
 	private int BLmultiblockWheel = 731;
 	private int BLmultiblockRollingPress = 732;
+	private int BLmultiblockWheelConnector = 733;
 
 	public void registerMachineBlocks() {
 		// multiblocks
+		registerMachineBlock(IndustrialProcessing.BLmultiblockWheelConnector, "IP.MBD.WheelCon", "Wheel connector", TEmultiblockWheelConnector.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockLiftDoor, "IP.MBD.LiftDoor", "Lift door", TEmultiblockLiftDoor.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockElevator, "IP.MBC.Elevator", "Elevator", TEmultiblockElevator.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockToggleButton, "IP.MBD.Toggle", "Control panel", TEmultiblockToggleButton.class);
@@ -158,6 +161,9 @@ public class ConfigMachineBlocks {
 		return instance;
 	}
 
+	public static int getBLmultiblockWheelConnector() {
+		return getInstance().BLmultiblockWheelConnector;
+	}
 	public static int getBLmultiblockRollingPress() {
 		return getInstance().BLmultiblockRollingPress;
 	}

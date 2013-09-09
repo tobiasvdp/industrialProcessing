@@ -33,6 +33,7 @@ import ip.industrialProcessing.multiblock.dummy.block.screen.BLmultiblockScreen;
 import ip.industrialProcessing.multiblock.dummy.block.toggleButton.BLmultiblockToggleButton;
 import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.BLmultiblockWeldingTableExt;
 import ip.industrialProcessing.multiblock.dummy.block.wheel.BLmultiblockWheel;
+import ip.industrialProcessing.multiblock.dummy.block.wheelConnector.BLmultiblockWheelConnector;
 import ip.industrialProcessing.multiblock.core.block.elevator.BLmultiblockElevator;
 import ip.industrialProcessing.power.buildcraftGenerator.BlockBuildcraftGenerator;
 import ip.industrialProcessing.power.manualGenerator.BlockManualGenerator;
@@ -96,4 +97,5 @@ public interface ISetupMachineBlocks {
 	public final static BLmultiblockLiftDoor BLmultiblockLiftDoor= new BLmultiblockLiftDoor();
 	public final static BLmultiblockWheel BLmultiblockWheel= new BLmultiblockWheel();
 	public final static BLmultiblockRollingPress BLmultiblockRollingPress= new BLmultiblockRollingPress();
+	public final static BLmultiblockWheelConnector BLmultiblockWheelConnector= new BLmultiblockWheelConnector();
 }

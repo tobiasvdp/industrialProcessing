@@ -72,17 +72,12 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 			tessellator.setColorOpaque_F(f, f, f);
 			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) l1, (float) l2);
 
-			//int dir = world.getBlockMetadata(i, j, k);
-			
-			
-			
-			int dir = 0;
+			int dir = world.getBlockMetadata(i, j, k);
 			if(tl instanceof TileEntityMachine)
 			{
 				TileEntityMachine machine =(TileEntityMachine)tl;
 				dir = BlockMachine.getMetadataFromForward(machine.getForwardDirection());
-			}
-			
+			}			
 			
 			GL11.glPushMatrix();
 			GL11.glTranslatef(0.5F, 1.5F, 0.5F);

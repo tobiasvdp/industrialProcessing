@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 public class BLmultiblockLiftDoor extends BLmultiblockDummy{
 
 	public BLmultiblockLiftDoor() {
-		super(ConfigMachineBlocks.getBLmultiblockLiftDoor(), "MultiblockLiftDoor", IndustrialProcessing.tabPower);
+		super(ConfigMachineBlocks.getBLmultiblockLiftDoor(), "MultiblockLiftDoor", IndustrialProcessing.tabMultiblocks);
 		this.setBlockBounds(1.0f, 2.0f, 1.0f, 1.0f, 2.0f, 1.0f);
 	}
 

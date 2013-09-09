@@ -9,7 +9,7 @@ import ip.industrialProcessing.multiblock.core.BLmultiblockCore;
 public class BLmultiblockElevator extends BLmultiblockCore{
 
 	public BLmultiblockElevator() {
-		super(ConfigMachineBlocks.getBLmultiblockElevator(),"MultiblockElevator",IndustrialProcessing.tabPower);
+		super(ConfigMachineBlocks.getBLmultiblockElevator(),"MultiblockElevator",IndustrialProcessing.tabMultiblocks);
 	}
 
 	@Override

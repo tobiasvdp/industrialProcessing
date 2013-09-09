@@ -10,7 +10,7 @@ import ip.industrialProcessing.multiblock.dummy.BLmultiblockDummy;
 public class BLmultiblockScreen extends BLmultiblockDummy{
 
 	public BLmultiblockScreen() {
-		super(ConfigMachineBlocks.getBLmultiblockScreen(), "MultiblockScreen", IndustrialProcessing.tabPower);
+		super(ConfigMachineBlocks.getBLmultiblockScreen(), "MultiblockScreen", IndustrialProcessing.tabMultiblocks);
 	}
 
 	@Override

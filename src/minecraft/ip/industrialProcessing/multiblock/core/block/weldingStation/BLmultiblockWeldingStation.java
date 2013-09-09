@@ -10,7 +10,7 @@ import ip.industrialProcessing.multiblock.core.BLmultiblockCore;
 public class BLmultiblockWeldingStation extends BLmultiblockCore{
 
 	public BLmultiblockWeldingStation() {
-		super(ConfigMachineBlocks.getBLmultiblockWeldingStation(), "BLmultiblockWeldingStation", IndustrialProcessing.tabPower);
+		super(ConfigMachineBlocks.getBLmultiblockWeldingStation(), "BLmultiblockWeldingStation", IndustrialProcessing.tabMultiblocks);
 	}
 
 	@Override

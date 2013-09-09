@@ -10,7 +10,7 @@ import ip.industrialProcessing.multiblock.dummy.BLmultiblockDummy;
 public class BLmultiblockFrame extends BLmultiblockDummy{
 
 	public BLmultiblockFrame() {
-		super(ConfigMachineBlocks.getBLmultiblockFrame(), "Multiblockframe", IndustrialProcessing.tabPower);
+		super(ConfigMachineBlocks.getBLmultiblockFrame(), "Multiblockframe", IndustrialProcessing.tabMultiblocks);
 	}
 	
 	@Override

@@ -10,7 +10,7 @@ import ip.industrialProcessing.multiblock.dummy.BLmultiblockDummy;
 public class BLmultiblockWeldingTableExt extends BLmultiblockDummy{
 
 	public BLmultiblockWeldingTableExt() {
-		super(ConfigMachineBlocks.getBLmultiblockWeldingStationExt(), "MultiblockScreenExt", IndustrialProcessing.tabPower);
+		super(ConfigMachineBlocks.getBLmultiblockWeldingStationExt(), "MultiblockScreenExt", IndustrialProcessing.tabMultiblocks);
 	}
 
 	@Override

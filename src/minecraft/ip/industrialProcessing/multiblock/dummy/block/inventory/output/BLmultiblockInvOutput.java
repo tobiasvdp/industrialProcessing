@@ -11,7 +11,7 @@ import ip.industrialProcessing.multiblock.dummy.block.screen.TEmultiblockScreen;
 public class BLmultiblockInvOutput extends BLmultiblockDummy{
 
 	public BLmultiblockInvOutput() {
-		super(ConfigMachineBlocks.getBLmultiblockInvOutput(), "MultiblockInvOutput", IndustrialProcessing.tabPower);
+		super(ConfigMachineBlocks.getBLmultiblockInvOutput(), "MultiblockInvOutput", IndustrialProcessing.tabMultiblocks);
 	}
 	@Override
 	public TileEntity createNewTileEntity(World world) {

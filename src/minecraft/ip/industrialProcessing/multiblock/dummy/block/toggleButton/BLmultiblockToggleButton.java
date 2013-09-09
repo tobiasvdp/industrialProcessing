@@ -14,7 +14,7 @@ import ip.industrialProcessing.multiblock.utils.MultiblockState;
 public class BLmultiblockToggleButton extends BLmultiblockDummy{
 
 	public BLmultiblockToggleButton() {
-		super(ConfigMachineBlocks.getBLmultiblockToggleButton(),"MultiblockToggleButton",IndustrialProcessing.tabPower);
+		super(ConfigMachineBlocks.getBLmultiblockToggleButton(),"MultiblockToggleButton",IndustrialProcessing.tabMultiblocks);
 	}
 
 	@Override

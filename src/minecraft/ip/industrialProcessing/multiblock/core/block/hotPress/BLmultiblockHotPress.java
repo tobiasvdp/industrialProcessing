@@ -10,7 +10,7 @@ import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
 public class BLmultiblockHotPress extends BLmultiblockCore{
 
 	public BLmultiblockHotPress() {
-		super(ConfigMachineBlocks.getBLmultiblockHotPress(), "MultiblockHotPress", IndustrialProcessing.tabPower);
+		super(ConfigMachineBlocks.getBLmultiblockHotPress(), "MultiblockHotPress", IndustrialProcessing.tabMultiblocks);
 	}
 
 	@Override

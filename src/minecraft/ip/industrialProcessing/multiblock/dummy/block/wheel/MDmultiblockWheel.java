@@ -581,7 +581,7 @@ public class MDmultiblockWheel extends ModelingMultiblock {
 	@Override
 	public void renderModel(float f5, int connection) {
 		GL11.glPushMatrix();
-		GL11.glRotatef(0, 0.0f, 1.0f, 0.0f);
+		GL11.glRotatef(90f, 0.0f, 1.0f, 0.0f);
 		Shape1.render(f5);
 		Shape2.render(f5);
 		Shape3.render(f5);
@@ -649,7 +649,7 @@ public class MDmultiblockWheel extends ModelingMultiblock {
 	
 	public void renderModel(float f5, int modelConnection, float[] animation) {
 		GL11.glPushMatrix();
-		GL11.glRotatef(0, 0.0f, 1.0f, 0.0f);
+		GL11.glRotatef(90f, 0.0f, 1.0f, 0.0f);
 		GL11.glTranslatef(0.0f, 1.0f, 0.0f);
 		float angle = (animation[0]);
 		if(modelConnection == 0){

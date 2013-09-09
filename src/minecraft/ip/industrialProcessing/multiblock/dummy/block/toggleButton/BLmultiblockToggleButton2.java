@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 public class BLmultiblockToggleButton2 extends BLmultiblockDummy{
 
 	public BLmultiblockToggleButton2() {
-		super(ConfigMachineBlocks.getBLmultiblockToggleButton2(),"MultiblockToggleButton2",IndustrialProcessing.tabPower);
+		super(ConfigMachineBlocks.getBLmultiblockToggleButton2(),"MultiblockToggleButton2",IndustrialProcessing.tabMultiblocks);
 	}
 
 	@Override

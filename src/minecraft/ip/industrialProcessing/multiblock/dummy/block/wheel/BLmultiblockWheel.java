@@ -10,7 +10,7 @@ import ip.industrialProcessing.multiblock.dummy.BLmultiblockDummy;
 public class BLmultiblockWheel extends BLmultiblockDummy{
 
 	public BLmultiblockWheel() {
-		super(ConfigMachineBlocks.getBLmultiblockWheel(), "BLmultiblockWheel", IndustrialProcessing.tabPower);
+		super(ConfigMachineBlocks.getBLmultiblockWheel(), "BLmultiblockWheel", IndustrialProcessing.tabMultiblocks);
 	}
 
 	@Override

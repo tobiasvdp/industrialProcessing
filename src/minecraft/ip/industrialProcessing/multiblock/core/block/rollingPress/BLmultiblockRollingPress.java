@@ -10,7 +10,7 @@ import ip.industrialProcessing.multiblock.core.BLmultiblockCore;
 public class BLmultiblockRollingPress extends BLmultiblockCore{
 
 	public BLmultiblockRollingPress() {
-		super(ConfigMachineBlocks.getBLmultiblockRollingPress(), "MultiblockRollingPress", IndustrialProcessing.tabPower);
+		super(ConfigMachineBlocks.getBLmultiblockRollingPress(), "MultiblockRollingPress", IndustrialProcessing.tabMultiblocks);
 	}
 
 	@Override
@@ -20,7 +20,7 @@ public class BLmultiblockRollingPress extends BLmultiblockCore{
 	
 	@Override
 	public int getRenderType() {
-		return ConfigRenderers.getBLmultiblockFrame();
+		return 0;
 	}
 
 }
