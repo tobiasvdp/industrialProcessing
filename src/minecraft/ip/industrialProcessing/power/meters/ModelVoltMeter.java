@@ -89,7 +89,7 @@ public class ModelVoltMeter extends ModelAnimatedMachine {
 
 	@Override
 	public void renderModelAnimated(float f5, float[] progress) {
-		
+
 		Support1.render(f5);
 		Support3.render(f5);
 		Back.render(f5);

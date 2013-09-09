@@ -23,13 +23,11 @@ public class RendererTileEntityAnimated extends RendererTileEntity {
 	protected void renderBlock(TileEntity tl, World world, int i, int j, int k, Block block2, float f) {
 		float[] animation = null;
 
-		if (world != null) {
-			if (tl instanceof IAnimationProgress) {
-				IAnimationProgress machine = (IAnimationProgress) tl;
-				animation = new float[machine.getAnimationCount()];
-				for (int l = 0; l < animation.length; l++) {
-					animation[l] = machine.getAnimationProgress(1f, l);
-				}
+		if (tl instanceof IAnimationProgress) {
+			IAnimationProgress machine = (IAnimationProgress) tl;
+			animation = new float[machine.getAnimationCount()];
+			for (int l = 0; l < animation.length; l++) {
+				animation[l] = machine.getAnimationProgress(1f, l);
 			}
 		}
 		/*
