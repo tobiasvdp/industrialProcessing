@@ -37,16 +37,21 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
 	private ArrayList<MachineItemStack> itemStacks = new ArrayList<MachineItemStack>();
 	private int[][] itemStackSideSlots = new int[6][0];
 	public boolean isDummyBlock = false;
+	private ForgeDirection forwardDirection;
 
 	public ForgeDirection getForwardDirection() {
-		int meta = this.worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-		return BlockMachine.getForwardFromMetadata(meta);
+		return forwardDirection;
+		/*
+		 * int meta = this.worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+		 * return BlockMachine.getForwardFromMetadata(meta);
+		 */
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 		writeInventory(nbt);
+		nbt.setByte("ForwardDirection", (byte)this.forwardDirection.ordinal());
 	}
 
 	private void writeInventory(NBTTagCompound nbt) {
@@ -67,6 +72,7 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 		readInventory(nbt);
+		this.forwardDirection = ForgeDirection.VALID_DIRECTIONS[nbt.getByte("ForwardDirection")];
 	};
 
 	private void readInventory(NBTTagCompound nbt) {
@@ -114,8 +120,9 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
 		MachineItemStack machineStack = itemStacks.get(slot);
 		return machineStack != null && machineStack.stack != null && machineStack.stack.itemID == itemId && machineStack.stack.stackSize >= amount;
 	}
+
 	@Override
-	public boolean slotContains(int slot, int itemId,int metadata, int amount) {
+	public boolean slotContains(int slot, int itemId, int metadata, int amount) {
 		MachineItemStack machineStack = itemStacks.get(slot);
 		return machineStack != null && machineStack.stack != null && machineStack.stack.itemID == itemId && machineStack.stack.stackSize >= amount;
 	}
@@ -273,7 +280,7 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
 		if (machineStack != null && machineStack.input) {
 			if (machineStack.stack == null) {
 				return isItemValidForSlot(slotIndex, itemstack);
-			} else if(machineStack.stack.stackSize + amount <= 64){
+			} else if (machineStack.stack.stackSize + amount <= 64) {
 				return isItemValidForSlot(slotIndex, itemstack);
 			}
 		}
@@ -288,10 +295,15 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean damageItem(int slot, int itemId) {
 		return false;
+	}
+
+	public void setForwardDirection(ForgeDirection forwardFromMetadata) {
+		System.out.println(this+" is facing "+forwardFromMetadata.name());
+		this.forwardDirection = forwardFromMetadata;
 	}
 
 }
