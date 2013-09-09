@@ -30,7 +30,14 @@ public class ConfigRenderers {
 	private int BLmultiblockWeldingTableExt;
 	private int BLmultiblockLiftDoor;
 	private int BLmultiblockToggleButton2;
+	private int BLmultiblockWheel;
 
+	public static int getBLmultiblockWheel() {
+		return getInstance().BLmultiblockWheel;
+	}
+	public static void setBLmultiblockWheel(int value) {
+		getInstance().BLmultiblockWheel = value;
+	}
 	public static int getBLmultiblockToggleButton2() {
 		return getInstance().BLmultiblockToggleButton2;
 	}

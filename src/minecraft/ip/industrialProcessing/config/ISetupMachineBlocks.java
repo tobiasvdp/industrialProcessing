@@ -23,6 +23,7 @@ import ip.industrialProcessing.machines.oxygenFurnace.BlockOxygenFurnace;
 import ip.industrialProcessing.machines.pelletExtruder.BlockPelletExtruder;
 import ip.industrialProcessing.machines.thickener.BlockThickener;
 import ip.industrialProcessing.multiblock.core.block.hotPress.BLmultiblockHotPress;
+import ip.industrialProcessing.multiblock.core.block.rollingPress.BLmultiblockRollingPress;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.BLmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.dummy.block.frame.BLmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.inventory.input.BLmultiblockInvInput;
@@ -31,6 +32,7 @@ import ip.industrialProcessing.multiblock.dummy.block.liftDoor.BLmultiblockLiftD
 import ip.industrialProcessing.multiblock.dummy.block.screen.BLmultiblockScreen;
 import ip.industrialProcessing.multiblock.dummy.block.toggleButton.BLmultiblockToggleButton;
 import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.BLmultiblockWeldingTableExt;
+import ip.industrialProcessing.multiblock.dummy.block.wheel.BLmultiblockWheel;
 import ip.industrialProcessing.multiblock.core.block.elevator.BLmultiblockElevator;
 import ip.industrialProcessing.power.buildcraftGenerator.BlockBuildcraftGenerator;
 import ip.industrialProcessing.power.manualGenerator.BlockManualGenerator;
@@ -92,4 +94,6 @@ public interface ISetupMachineBlocks {
 	public final static BLmultiblockToggleButton2 BLmultiblockToggleButton2= new BLmultiblockToggleButton2();
 	public final static BLmultiblockElevator BLmultiblockElevator= new BLmultiblockElevator();
 	public final static BLmultiblockLiftDoor BLmultiblockLiftDoor= new BLmultiblockLiftDoor();
+	public final static BLmultiblockWheel BLmultiblockWheel= new BLmultiblockWheel();
+	public final static BLmultiblockRollingPress BLmultiblockRollingPress= new BLmultiblockRollingPress();
 }

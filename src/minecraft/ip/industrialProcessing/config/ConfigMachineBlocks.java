@@ -17,6 +17,7 @@ import ip.industrialProcessing.machines.pelletExtruder.TileEntityPelletExtruder;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
 import ip.industrialProcessing.multiblock.core.block.elevator.TEmultiblockElevator;
 import ip.industrialProcessing.multiblock.core.block.hotPress.TEmultiblockHotPress;
+import ip.industrialProcessing.multiblock.core.block.rollingPress.TEmultiblockRollingPress;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
 import ip.industrialProcessing.multiblock.dummy.block.frame.ENmultiblockFrame;
@@ -27,6 +28,7 @@ import ip.industrialProcessing.multiblock.dummy.block.liftDoor.TEmultiblockLiftD
 import ip.industrialProcessing.multiblock.dummy.block.screen.TEmultiblockScreen;
 import ip.industrialProcessing.multiblock.dummy.block.toggleButton.TEmultiblockToggleButton;
 import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.TEmultiblockWeldingTableExt;
+import ip.industrialProcessing.multiblock.dummy.block.wheel.TEmultiblockWheel;
 import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
 import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
 import ip.industrialProcessing.power.meters.TileEntityAmpMeter;
@@ -90,6 +92,8 @@ public class ConfigMachineBlocks {
 	private int BLmultiblockElevator = 728;
 	private int BLmultiblockToggleButton2 = 729;
 	private int BLmultiblockLiftDoor = 730;
+	private int BLmultiblockWheel = 731;
+	private int BLmultiblockRollingPress = 732;
 
 	public void registerMachineBlocks() {
 		// multiblocks
@@ -104,6 +108,8 @@ public class ConfigMachineBlocks {
 		registerMachineBlock(IndustrialProcessing.BLmultiblockHotPress, "IP.MBC.HotPress", "Hot press", TEmultiblockHotPress.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockWeldingStation, "IP.MBC.WeldingStation", "Welding station", TEmultiblockWeldingStation.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockWeldingTableExt, "IP.MBD.WeldingTableExt", "Welding station extention", TEmultiblockWeldingTableExt.class);
+		registerMachineBlock(IndustrialProcessing.BLmultiblockWheel, "IP.MBD.Wheel", "Rolling wheel", TEmultiblockWheel.class);
+		registerMachineBlock(IndustrialProcessing.BLmultiblockRollingPress, "IP.MBC.RollingPress", "Rolling press", TEmultiblockRollingPress.class);
 
 		// register entitys associated with multiblocks
 
@@ -151,6 +157,12 @@ public class ConfigMachineBlocks {
 		return instance;
 	}
 
+	public static int getBLmultiblockRollingPress() {
+		return getInstance().BLmultiblockRollingPress;
+	}
+	public static int getBLmultiblockWheel() {
+		return getInstance().BLmultiblockWheel;
+	}
 	public static int getBLmultiblockLiftDoor() {
 		return getInstance().BLmultiblockLiftDoor;
 	}
