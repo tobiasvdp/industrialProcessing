@@ -1,5 +1,7 @@
 package ip.industrialProcessing.multiblock.dummy.block.displayPanel;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import ip.industrialProcessing.client.render.ModelingMultiblock;
@@ -202,6 +204,7 @@ public class MDmultiblockDisplayPanel extends ModelingMultiblock {
 
 	@Override
 	public void renderModel(float f5, int connection) {
+		GL11.glPushMatrix();
 		base.render(f5);
 		panel.render(f5);
 		base1.render(f5);
@@ -209,10 +212,8 @@ public class MDmultiblockDisplayPanel extends ModelingMultiblock {
 		cable.render(f5);
 		rightbar.render(f5);
 		leftbar.render(f5);
+		GL11.glColor3f(0.0f, 0.0f, 0.0f);
 		visual.render(f5);
-		lightOn.render(f5);
-		lightWarning.render(f5);
-		lightOff.render(f5);
 		bar1.render(f5);
 		bar2.render(f5);
 		bar3.render(f5);
@@ -221,6 +222,16 @@ public class MDmultiblockDisplayPanel extends ModelingMultiblock {
 		ToggleButton3.render(f5);
 		ToggleButton4.render(f5);
 		ViewPanel.render(f5);
+		
+		if(connection == 0)
+			GL11.glColor3f(5.0f, 0.0f, 0.0f);
+		lightOn.render(f5);
+		
+		GL11.glColor3f(5.0f, 0.0f, 0.0f);
+		lightWarning.render(f5);
+		lightOff.render(f5);
+		
+		GL11.glPopMatrix();
 	}
 
 	@Override
