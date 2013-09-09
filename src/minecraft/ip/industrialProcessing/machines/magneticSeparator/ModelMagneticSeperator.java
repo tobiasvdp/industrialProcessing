@@ -1,11 +1,11 @@
 package ip.industrialProcessing.machines.magneticSeparator;
 
 import ip.industrialProcessing.client.render.ModelAnimatedMachine;
-import net.minecraft.client.model.ModelRenderer; 
+import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
 public class ModelMagneticSeperator extends ModelAnimatedMachine {
- 
+
 	ModelRenderer Shape5;
 	ModelRenderer Shape6;
 	ModelRenderer Shape14;
@@ -182,8 +182,7 @@ public class ModelMagneticSeperator extends ModelAnimatedMachine {
 	}
 
 	@Override
-	public void render(Entity entity, float f, float f1, float f2, float f3,
-			float f4, float f5) {
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		Shape5.render(f5);
@@ -209,13 +208,12 @@ public class ModelMagneticSeperator extends ModelAnimatedMachine {
 		Shape13.render(f5);
 		Shape16.render(f5);
 		Shape17.render(f5);
-		Shape19.render(f5); 
+		Shape19.render(f5);
 	}
- 
 
 	@Override
-	public void renderModelAnimated(float f, float progress) {
-	    // TODO: animate?
+	public void renderModelAnimated(float f, float[] progress) {
+		// TODO: animate?
 		Shape5.render(f);
 		Shape6.render(f);
 		Shape14.render(f);
@@ -239,12 +237,12 @@ public class ModelMagneticSeperator extends ModelAnimatedMachine {
 		Shape13.render(f);
 		Shape16.render(f);
 		Shape17.render(f);
-		Shape19.render(f); 
+		Shape19.render(f);
 	}
 
 	@Override
 	public void renderModel(float f) {
-	    renderModelAnimated(f, 0f);
-	} 
+		renderModelAnimated(f, new float[] { 0f });
+	}
 
 }

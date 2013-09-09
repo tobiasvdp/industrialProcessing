@@ -79,8 +79,12 @@ public class TileEntityManualGenerator extends TileEntityPowerGenerator implemen
     }
 
     @Override
-    public float getAnimationProgress(float scale) {
+    public float getAnimationProgress(float scale, int index) {
 	return this.animation.getAnimationProgress(scale);
+    }
+    @Override
+    public int getAnimationCount() { 
+    	return 1;
     }
 
     @Override

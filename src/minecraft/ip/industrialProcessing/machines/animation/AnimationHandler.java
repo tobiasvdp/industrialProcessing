@@ -2,7 +2,7 @@ package ip.industrialProcessing.machines.animation;
 
 import ip.industrialProcessing.client.render.IAnimationProgress;
 
-public class AnimationHandler implements IAnimationProgress {
+public class AnimationHandler {
 	public static final float DT = 1 / 20f;
 	private float speed = 0f;
 	private float scale = 1f;
@@ -31,11 +31,11 @@ public class AnimationHandler implements IAnimationProgress {
 	public float getSpeed() {
 		return speed;
 	}
-
-	@Override
+ 
 	public float getAnimationProgress(float scale) {
 		return this.progress * scale / this.scale;
 	}
+	 
 
 	public void setAnimationProgress(float progress, float scale) {
 		this.progress = progress / scale;

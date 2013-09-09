@@ -29,10 +29,15 @@ public class TileEntityEnergyCell extends TileEntityPowerGenerator implements IP
 	private AnimationHandler animation;
 
 	@Override
-	public float getAnimationProgress(float scale) {
+	public float getAnimationProgress(float scale, int index) {
 		return this.animation.getAnimationProgress(scale);
 	}
 
+	@Override
+	public int getAnimationCount() {
+		return 1;
+	}
+	
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);

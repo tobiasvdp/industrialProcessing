@@ -382,8 +382,8 @@ public class ModelCrankGenerator extends ModelAnimatedMachine {
     }
 
     @Override
-    public void renderModelAnimated(float f5, float progress) {
-	float angle = progress * 360;
+    public void renderModelAnimated(float f5, float[] progress) {
+	float angle = progress[0] * 360;
 	SupportLeft.render(f5);
 	SupportRight.render(f5);
 	GL11.glPushMatrix();
@@ -445,7 +445,7 @@ public class ModelCrankGenerator extends ModelAnimatedMachine {
 
     @Override
     public void renderModel(float f) {
-	renderModelAnimated(f, 0.36f);
+	renderModelAnimated(f, new float[]{0.36f});
     }
 
 }

@@ -1,5 +1,6 @@
 package ip.industrialProcessing.client.render;
 
 public interface IAnimationProgress {
-    float getAnimationProgress(float scale);
+	int getAnimationCount();
+    float getAnimationProgress(float scale, int animationIndex);
 }

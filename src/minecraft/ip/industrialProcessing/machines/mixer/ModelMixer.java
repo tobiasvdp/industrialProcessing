@@ -213,8 +213,8 @@ public class ModelMixer extends ModelAnimatedFluidMachine {
 	}
 
 	@Override
-	public void renderModelAnimated(float f1, float progress) {
-		progress = Math.max(0, Math.min(1, progress));
+	public void renderModelAnimated(float f1, float[] progressAr) {
+		float progress = Math.max(0, Math.min(1, progressAr[0]));
 		SupportBeamRightBottom.render(f1);
 		SupportBeamLeftBottom.render(f1);
 		WallFront.render(f1);

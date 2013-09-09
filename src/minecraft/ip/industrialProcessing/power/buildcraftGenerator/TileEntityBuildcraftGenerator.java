@@ -118,8 +118,12 @@ public class TileEntityBuildcraftGenerator extends TileEntityPowerGenerator impl
     }
 
     @Override
-    public float getAnimationProgress(float scale) {
+    public float getAnimationProgress(float scale ,int index) {
 	return this.rotation * scale;
     }
 
+    @Override
+    public int getAnimationCount() {
+    	return 1;
+    }
 }

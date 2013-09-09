@@ -255,80 +255,72 @@ public class ModelBoiler extends ModelAnimatedFluidMachine {
 
 	@Override
 	public void renderLiquid(float f, int tankSlot, float percentageFilled, Icon icon) {
-		if (tankSlot == 0) { // water
-			float par1 = -6.5f;
-			float par2 = -6.5f;
-			float par3 = 10f + 10f * (1 - percentageFilled);
-			int par4 = 13;
-			int par5 = 13;
-			Tessellator tessellator = Tessellator.instance;
-			tessellator.startDrawingQuads();
+		float par1 = -6f;
+		float par2 = tankSlot == 0 ? -6f : 6f;
+		
+		float height = 13f / 2 * percentageFilled ;
+		//float par3 = tankSlot == 0 ? 23 - 13/2 + height : 10f + height;
+		
+		float par3 = tankSlot == 0 ? 23 - height : 10 + height;
+		
+		int par4 = 12;
+		int par5 = tankSlot == 0 ? 16 : -16;
+		Tessellator tessellator = Tessellator.instance;
+		tessellator.startDrawingQuads();
 
-			tessellator.addVertexWithUV((double) (par1 + 0) * f, (double) par3 * f, (double) (par2 + 0) * f, (double) icon.getMinU(), (double) icon.getMinV());
-			tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) par3 * f, (double) (par2 + 0) * f, (double) icon.getMaxU(), (double) icon.getMinV());
-			tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) par3 * f, (double) (par2 + par5) * f, (double) icon.getMaxU(), (double) icon.getMaxV());
-			tessellator.addVertexWithUV((double) (par1 + 0) * f, (double) par3 * f, (double) (par2 + par5) * f, (double) icon.getMinU(), (double) icon.getMaxV());
-			tessellator.draw();
-		}
-		if (tankSlot == 1) { // steam
-			float par1 = -6.5f;
-			float par2 = -6.5f;
-			float par3 = 10f + 10f * (1 - percentageFilled);
-			int par4 = 13;
-			int par5 = 13;
-			Tessellator tessellator = Tessellator.instance;
-			tessellator.startDrawingQuads();
-
-			tessellator.addVertexWithUV((double) (par1 + 0) * f, (double) par3 * f, (double) (par2 + 0) * f, (double) icon.getMinU(), (double) icon.getMinV());
-			tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) par3 * f, (double) (par2 + 0) * f, (double) icon.getMaxU(), (double) icon.getMinV());
-			tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) par3 * f, (double) (par2 + par5) * f, (double) icon.getMaxU(), (double) icon.getMaxV());
-			tessellator.addVertexWithUV((double) (par1 + 0) * f, (double) par3 * f, (double) (par2 + par5) * f, (double) icon.getMinU(), (double) icon.getMaxV());
-			tessellator.draw();
-		}
+		tessellator.addVertexWithUV((double) (par1 + 0) * f, (double) par3 * f, (double) (par2 + 0) * f, (double) icon.getMinU(), (double) icon.getMinV());
+		tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) par3 * f, (double) (par2 + 0) * f, (double) icon.getMaxU(), (double) icon.getMinV());
+		tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) par3 * f, (double) (par2 + par5) * f, (double) icon.getMaxU(), (double) icon.getMaxV());
+		tessellator.addVertexWithUV((double) (par1 + 0) * f, (double) par3 * f, (double) (par2 + par5) * f, (double) icon.getMinU(), (double) icon.getMaxV());
+		tessellator.draw();
+		
+		tessellator.startDrawingQuads();
+		
+		tessellator.draw();
 	}
 
 	@Override
-	public void renderModelAnimated(float f5, float progress) {
+	public void renderModelAnimated(float f5, float[] progress) {
 
-	    BackPlate.render(f5);
-	    TopPlate.render(f5);
-	    BottomPlate.render(f5);
-	    LeftPlate.render(f5);
-	    Tube1.render(f5);
-	    Tube2.render(f5);
-	    Tube3.render(f5);
-	    Tube4.render(f5);
-	    Tube5.render(f5);
-	    Tube6.render(f5);
-	    Tube7.render(f5);
-	    FrontPlateLeft.render(f5);
-	    Tube8.render(f5);
-	    Tube9.render(f5);
-	    Tube10.render(f5);
-	    Tube11.render(f5);
-	    Tube12.render(f5);
-	    Tube13.render(f5);
-	    Tube14.render(f5);
-	    Tube15.render(f5);
-	    Tube16.render(f5);
-	    Tube17.render(f5);
-	    Tube18.render(f5);
-	    Tube19.render(f5);
-	    Tube20.render(f5);
-	    Tube21.render(f5);
-	    Tube22.render(f5);
-	    RightPlate.render(f5);
-	    FrontGaugeBottom.render(f5);
-	    FrontPlateRight.render(f5);
-	    FrontGaugeGlass.render(f5);
-	    FrontGaugeTop.render(f5);
-	    WaterIn.render(f5);
-	    SteamOut.render(f5);
+		BackPlate.render(f5);
+		TopPlate.render(f5);
+		BottomPlate.render(f5);
+		LeftPlate.render(f5);
+		Tube1.render(f5);
+		Tube2.render(f5);
+		Tube3.render(f5);
+		Tube4.render(f5);
+		Tube5.render(f5);
+		Tube6.render(f5);
+		Tube7.render(f5);
+		FrontPlateLeft.render(f5);
+		Tube8.render(f5);
+		Tube9.render(f5);
+		Tube10.render(f5);
+		Tube11.render(f5);
+		Tube12.render(f5);
+		Tube13.render(f5);
+		Tube14.render(f5);
+		Tube15.render(f5);
+		Tube16.render(f5);
+		Tube17.render(f5);
+		Tube18.render(f5);
+		Tube19.render(f5);
+		Tube20.render(f5);
+		Tube21.render(f5);
+		Tube22.render(f5);
+		RightPlate.render(f5);
+		FrontGaugeBottom.render(f5);
+		FrontPlateRight.render(f5);
+		FrontGaugeGlass.render(f5);
+		FrontGaugeTop.render(f5);
+		WaterIn.render(f5);
+		SteamOut.render(f5);
 	}
 
 	@Override
 	public void renderModel(float f) {
-		renderModelAnimated(f, 0f);
+		renderModelAnimated(f, null);
 	}
 
 }

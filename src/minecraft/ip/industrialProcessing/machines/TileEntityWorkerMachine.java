@@ -107,8 +107,13 @@ public abstract class TileEntityWorkerMachine extends TileEntityMachine implemen
     }
     
     @Override
-    public float getAnimationProgress(float scale) {
+    public float getAnimationProgress(float scale, int index) {
 	return this.animationHandler.getAnimationProgress(scale);
+    }
+    
+    @Override
+    public int getAnimationCount() { 
+    	return 1;
     }
     
     public AnimationHandler getAnimationHandler() {

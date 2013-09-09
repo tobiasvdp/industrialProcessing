@@ -43,8 +43,12 @@ public class TileEntityVoltMeter extends TileEntityMachine implements IPowerAcce
 	}
 
 	@Override
-	public float getAnimationProgress(float scale) {
+	public float getAnimationProgress(float scale, int index) {
 		return this.animationHandler.getAnimationProgress(scale);
+	}
+	@Override
+	public int getAnimationCount() { 
+		return 1;
 	}
 
 	@Override

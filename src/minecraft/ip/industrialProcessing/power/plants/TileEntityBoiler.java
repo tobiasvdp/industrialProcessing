@@ -5,6 +5,9 @@ import java.util.Iterator;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.MachineFluidTank;
 import ip.industrialProcessing.machines.TileEntityFluidWorkerMachine;
+import ip.industrialProcessing.machines.animation.tanks.ITankSyncable;
+import ip.industrialProcessing.machines.animation.tanks.TankHandler;
+import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.transport.fluids.IPressuredTank;
 import ip.industrialProcessing.utils.FluidTransfers;
@@ -18,10 +21,11 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
-public class TileEntityBoiler extends TileEntityFluidWorkerMachine implements IHeatable, IPressuredTank {
+public class TileEntityBoiler extends TileEntityFluidWorkerMachine implements IHeatable, IPressuredTank, ITankSyncable {
 
 	private static RecipesBoiler recipes = new RecipesBoiler();
 	private float heat = 0;
+	private TankHandler tankHandler;
 
 	public TileEntityBoiler() {
 		addTank(10 * FluidContainerRegistry.BUCKET_VOLUME, LocalDirection.BACK, true, false);
@@ -29,6 +33,8 @@ public class TileEntityBoiler extends TileEntityFluidWorkerMachine implements IH
 
 		addStack(null, new LocalDirection[0], true, false);
 		addStack(null, new LocalDirection[0], false, true);
+
+		this.tankHandler = new TankHandler(this, new int[] { 0, 1 });
 	}
 
 	@Override
@@ -43,38 +49,39 @@ public class TileEntityBoiler extends TileEntityFluidWorkerMachine implements IH
 			// the faster the heat dissipates to the environment:
 			this.heat += COOLING_RATE * (ambientTemperature - this.heat);
 			System.out.println("heat: " + this.heat + " -> " + ambientTemperature);
-			
-			IFluidHandler handler = getFluidHandler(xCoord, yCoord+1, zCoord);
-			if(handler != null)
-			{
+
+			IFluidHandler handler = getFluidHandler(xCoord, yCoord + 1, zCoord);
+			if (handler != null) {
 				FluidTransfers.transfer(100, this.getTankInSlot(1), handler, ForgeDirection.DOWN);
 			}
+			if (this.tankHandler.readDataFromTanks())
+				TileTankSyncHandler.sendTankData(this, this.tankHandler);
 		}
 	}
-	
+
 	@Override
-	public void writeToNBT(NBTTagCompound nbt) { 
+	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 		nbt.setFloat("Heat", heat);
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbt) { 
+	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 		this.heat = nbt.getFloat("Heat");
 	}
-	
+
 	private IFluidHandler getFluidHandler(int x, int y, int z) {
 		TileEntity entityAbove = this.worldObj.getBlockTileEntity(x, y, z);
-		if(entityAbove instanceof IFluidHandler)
-			return (IFluidHandler)entityAbove;
+		if (entityAbove instanceof IFluidHandler)
+			return (IFluidHandler) entityAbove;
 		return null;
 	}
 
 	@Override
 	protected void doWork() {
 		if (heat > 0) {
-			int done = work((int)((heat - 100) /10f));
+			int done = work((int) ((heat - 100) / 10f));
 			this.heat -= done / 50f;
 		}
 	}
@@ -106,20 +113,24 @@ public class TileEntityBoiler extends TileEntityFluidWorkerMachine implements IH
 		return recipes.iterator();
 	}
 
-	public int getTemperature() { 
-		return (int)this.heat;
+	public int getTemperature() {
+		return (int) this.heat;
 	}
 
 	@Override
 	public int getPressure(ForgeDirection from) {
-		FluidTankInfo[] info =getTankInfo(from);
-		if(info.length > 0)
-		{
+		FluidTankInfo[] info = getTankInfo(from);
+		if (info.length > 0) {
 			FluidTankInfo tank = info[0];
-			int amount = tank.fluid == null ? 0 : tank.fluid.amount;			
+			int amount = tank.fluid == null ? 0 : tank.fluid.amount;
 			return amount * 1000 / tank.capacity;
 		}
 		return 0;
+	}
+
+	@Override
+	public TankHandler getTankHandler() {
+		return this.tankHandler;
 	}
 
 }

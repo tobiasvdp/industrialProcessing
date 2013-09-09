@@ -251,7 +251,7 @@ public class ModelFilter extends ModelAnimatedMachine {
 	Shape24.render(f1);
     } 
     @Override
-    public void renderModelAnimated(float f1, float animated) {
+    public void renderModelAnimated(float f1, float[] animatedAr) {
 	float freq1 = 27;
 	float freq2 = 23;
 	float freq3 = 25;
@@ -259,7 +259,7 @@ public class ModelFilter extends ModelAnimatedMachine {
 
 	float distance = 0.025f;
 
-	animated = Math.max(0, Math.min(animated, 1));
+	float animated = Math.max(0, Math.min(animatedAr[0], 1));
 	float a1 = (float) Math.sin((animated) * Math.PI * freq1) * distance;
 	float a2 = (float) Math.sin((animated + 1) * Math.PI * freq2) * distance;
 	float a3 = (float) Math.sin((animated + 2) * Math.PI * freq3) * distance;
