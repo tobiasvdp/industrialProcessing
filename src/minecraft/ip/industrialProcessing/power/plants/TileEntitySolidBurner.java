@@ -15,20 +15,25 @@ public class TileEntitySolidBurner extends TileEntityMachine {
 	private int burnTimeRemaining = 0;
 	private int airTime = 0;
 	private int totalBurnTime;
+	private boolean isBurning = false;
 
 	public TileEntitySolidBurner() {
 		addStack(null, LocalDirection.FRONT, true, false);
 	}
-	
+
+	public boolean isBurning() {
+		return isBurning;
+	}
+
 	@Override
-	public void readFromNBT(NBTTagCompound nbt) { 
+	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 		this.burnTimeRemaining = nbt.getInteger("BurnTimeRemaining");
 		this.totalBurnTime = nbt.getInteger("TotalBurnTime");
 	}
-	
+
 	@Override
-	public void writeToNBT(NBTTagCompound nbt) { 
+	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 		nbt.setInteger("BurnTimeRemaining", this.burnTimeRemaining);
 		nbt.setInteger("TotalBurnTime", this.totalBurnTime);
@@ -42,19 +47,24 @@ public class TileEntitySolidBurner extends TileEntityMachine {
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
+		boolean burnState = this.isBurning;
 		if (burnTimeRemaining <= 0) {
 			ItemStack burnStack = this.decrStackSize(0, 1);
 			int burnTime = TileEntityFurnace.getItemBurnTime(burnStack);
 			burnTimeRemaining += burnTime;
 			this.totalBurnTime = burnTime;
+			this.isBurning = burnTime > 0;
 		}
 		if (burnTimeRemaining > 0) {
 			burnTimeRemaining--;
 			increaseHeat();
+			this.isBurning = true;
 		}
+		if (this.isBurning != burnState)
+			notifyBlockChange();
 	}
 
-	private void increaseHeat() { // TODO: spin up/down
+	private void increaseHeat() {
 		IHeatable boiler = getBoiler();
 		if (boiler != null) {
 			boiler.addHeat(1);

@@ -264,7 +264,7 @@ public class ModelBoiler extends ModelAnimatedFluidMachine {
 		float par3 = tankSlot == 0 ? 23 - height : 10 + height;
 		
 		int par4 = 12;
-		int par5 = tankSlot == 0 ? 16 : -16;
+		int par5 = tankSlot == 0 ? 12 : -12;
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawingQuads();
 
@@ -274,8 +274,16 @@ public class ModelBoiler extends ModelAnimatedFluidMachine {
 		tessellator.addVertexWithUV((double) (par1 + 0) * f, (double) par3 * f, (double) (par2 + par5) * f, (double) icon.getMinU(), (double) icon.getMaxV());
 		tessellator.draw();
 		
-		tessellator.startDrawingQuads();
+		if(tankSlot == 1)
+			height = -height;
 		
+		
+		float offsetV = percentageFilled * (icon.getMaxV() - icon.getMinV());
+		tessellator.startDrawingQuads();
+		tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) par3 * f, (double) (par2 + 0) * f, (double) icon.getMinU(), (double) icon.getMinV()+offsetV);
+		tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) (par3 + height) * f, (double) (par2 + 0) * f, (double) icon.getMaxU(), (double) icon.getMinV()+offsetV);
+		tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) (par3 + height) * f, (double) (par2 + par5) * f, (double) icon.getMaxU(), (double) icon.getMaxV());
+		tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) par3 * f, (double) (par2 + par5) * f, (double) icon.getMinU(), (double) icon.getMaxV());
 		tessellator.draw();
 	}
 

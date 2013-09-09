@@ -26,8 +26,12 @@ public class GuiContainerFluidMachine extends GuiContainerMachine {
 		super(inventoryPlayer, tileEntity, container, name, textureLocation);
 		this.tileEntityFluidMachine = tileEntity;
 		this.fluidContainer = container;
+		
+		
 	}
 
+	
+	
 	protected void drawProgressBarTank(Rectangle source, Point location, int containerTankSlot) {
 		ProgressInfoTank tank = this.fluidContainer.getProgressInfoTank(containerTankSlot);
 
@@ -53,6 +57,9 @@ public class GuiContainerFluidMachine extends GuiContainerMachine {
 			}
 		}
 	}
+	
+	
+	
 	/*
 	 * public void drawTank(int slot, int x, int y) { drawTank(slot, x, y, 16,
 	 * 50); }

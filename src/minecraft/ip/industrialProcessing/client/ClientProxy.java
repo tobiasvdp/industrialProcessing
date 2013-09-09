@@ -48,7 +48,9 @@ import ip.industrialProcessing.power.meters.ModelVoltMeter;
 import ip.industrialProcessing.power.meters.TileEntityAmpMeter;
 import ip.industrialProcessing.power.meters.TileEntityVoltMeter;
 import ip.industrialProcessing.power.plants.ModelBoiler;
+import ip.industrialProcessing.power.plants.ModelSolidBurner;
 import ip.industrialProcessing.power.plants.TileEntityBoiler;
+import ip.industrialProcessing.power.plants.TileEntitySolidBurner;
 import ip.industrialProcessing.power.storage.ModelEnergyCell;
 import ip.industrialProcessing.power.storage.TileEntityEnergyCell;
 import ip.industrialProcessing.power.wire.ModelWire;
@@ -92,6 +94,7 @@ public class ClientProxy extends CommonProxy {
 	private static final ModelStateMachine blastFurnaceTop = new ModelBlastFurnaceTop();
 	private static final ModelConnectedFluid tank = new ModelTank();
 	private static final ModelAnimatedFluidMachine boiler = new ModelBoiler();
+	private static final ModelMachine solidBurner = new ModelSolidBurner();
 	private static final MDmultiblockWeldingStation MDmultiblockWeldingStation = new MDmultiblockWeldingStation();
 	private static final MDmultiblockScreen MDmultiblockScreen = new MDmultiblockScreen();
 	private static final MDmultiblockFrame MDmultiblockFrame = new MDmultiblockFrame();
@@ -146,6 +149,10 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBoiler.class, new RendererTileEntityFluidWorker(IndustrialProcessing.blockBoiler, "ModelBoiler", boiler));
 		ConfigRenderers.setRendererBoilerId(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererBoilerId(), new TileEntityBoiler()));
+
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySolidBurner.class, new RendererTileEntity(IndustrialProcessing.blockSolidBurner, "ModelSolidBurner", solidBurner));
+		ConfigRenderers.setRendererSolidBurnerId(RenderingRegistry.getNextAvailableRenderId());
+		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererSolidBurnerId(), new TileEntitySolidBurner()));
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEnergyCell.class, new RendererTileEntityAnimated(IndustrialProcessing.blockEnergyCell, "ModelBatteryBox", EnergyCell));
 		ConfigRenderers.setRendererEnergyCellId(RenderingRegistry.getNextAvailableRenderId());

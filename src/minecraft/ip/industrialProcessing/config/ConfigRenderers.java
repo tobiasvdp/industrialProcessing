@@ -2,6 +2,7 @@ package ip.industrialProcessing.config;
 
 public class ConfigRenderers {
 
+	private static int rendererSolidBurnerId;
 	private int rendererCrankGeneratorID;
 	private int rendererBCGeneratorID;
 	private int rendererWireID;
@@ -253,6 +254,12 @@ public class ConfigRenderers {
 	public static void setRendererBoilerId(int value) {
 		getInstance().rendererBoilerId = value;
 	}
+	public static int getRendererSolidBurnerId() { 
+		return getInstance().rendererSolidBurnerId;
+	}
+	public static void setRendererSolidBurnerId(int value) {
+		getInstance().rendererSolidBurnerId = value;
+	} 
 
 	private ConfigRenderers() {
 
