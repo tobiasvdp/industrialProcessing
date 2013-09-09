@@ -1,13 +1,5 @@
 package ip.industrialProcessing.config;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.StepSound;
-import net.minecraft.block.material.Material;
-import net.minecraft.src.ModLoader;
-import net.minecraftforge.common.MinecraftForge;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
-import ip.industrialProcessing.buildingBlock.BLblockBase;
 import ip.industrialProcessing.machines.blastFurnace.BlockBlastFurnace;
 import ip.industrialProcessing.machines.classifier.BlockClassifier;
 import ip.industrialProcessing.machines.crusher.BlockCrusher;
@@ -22,19 +14,21 @@ import ip.industrialProcessing.machines.mixer.BlockMixer;
 import ip.industrialProcessing.machines.oxygenFurnace.BlockOxygenFurnace;
 import ip.industrialProcessing.machines.pelletExtruder.BlockPelletExtruder;
 import ip.industrialProcessing.machines.thickener.BlockThickener;
+import ip.industrialProcessing.multiblock.core.block.elevator.BLmultiblockElevator;
 import ip.industrialProcessing.multiblock.core.block.hotPress.BLmultiblockHotPress;
 import ip.industrialProcessing.multiblock.core.block.rollingPress.BLmultiblockRollingPress;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.BLmultiblockWeldingStation;
+import ip.industrialProcessing.multiblock.dummy.block.displayPanel.BLmultiblockDisplayPanel;
 import ip.industrialProcessing.multiblock.dummy.block.frame.BLmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.inventory.input.BLmultiblockInvInput;
 import ip.industrialProcessing.multiblock.dummy.block.inventory.output.BLmultiblockInvOutput;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.BLmultiblockLiftDoor;
 import ip.industrialProcessing.multiblock.dummy.block.screen.BLmultiblockScreen;
 import ip.industrialProcessing.multiblock.dummy.block.toggleButton.BLmultiblockToggleButton;
+import ip.industrialProcessing.multiblock.dummy.block.toggleButton.BLmultiblockToggleButton2;
 import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.BLmultiblockWeldingTableExt;
 import ip.industrialProcessing.multiblock.dummy.block.wheel.BLmultiblockWheel;
 import ip.industrialProcessing.multiblock.dummy.block.wheelConnector.BLmultiblockWheelConnector;
-import ip.industrialProcessing.multiblock.core.block.elevator.BLmultiblockElevator;
 import ip.industrialProcessing.power.buildcraftGenerator.BlockBuildcraftGenerator;
 import ip.industrialProcessing.power.manualGenerator.BlockManualGenerator;
 import ip.industrialProcessing.power.meters.BlockAmpMeter;
@@ -46,7 +40,6 @@ import ip.industrialProcessing.power.wire.BlockWire;
 import ip.industrialProcessing.transport.fluids.BlockPump;
 import ip.industrialProcessing.transport.fluids.BlockTank;
 import ip.industrialProcessing.transport.fluids.BlockTransportFluids;
-import ip.industrialProcessing.multiblock.dummy.block.toggleButton.BLmultiblockToggleButton2;
 
 public interface ISetupMachineBlocks {
 	
@@ -98,4 +91,5 @@ public interface ISetupMachineBlocks {
 	public final static BLmultiblockWheel BLmultiblockWheel= new BLmultiblockWheel();
 	public final static BLmultiblockRollingPress BLmultiblockRollingPress= new BLmultiblockRollingPress();
 	public final static BLmultiblockWheelConnector BLmultiblockWheelConnector= new BLmultiblockWheelConnector();
+	public final static BLmultiblockDisplayPanel BLmultiblockDisplayPanel= new BLmultiblockDisplayPanel();
 }

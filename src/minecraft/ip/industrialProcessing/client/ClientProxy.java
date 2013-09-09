@@ -1,11 +1,5 @@
 package ip.industrialProcessing.client;
 
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.registry.EntityRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
-import net.minecraftforge.client.MinecraftForgeClient;
 import ip.industrialProcessing.CommonProxy;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.client.render.ModelAnimatedFluidMachine;
@@ -13,15 +7,14 @@ import ip.industrialProcessing.client.render.ModelAnimatedMachine;
 import ip.industrialProcessing.client.render.ModelConnected;
 import ip.industrialProcessing.client.render.ModelConnectedFluid;
 import ip.industrialProcessing.client.render.ModelMachine;
-import ip.industrialProcessing.client.render.ModelMultiblock;
 import ip.industrialProcessing.client.render.ModelStateMachine;
 import ip.industrialProcessing.client.render.ModelingMultiblock;
 import ip.industrialProcessing.client.render.RendererLivingEntity;
 import ip.industrialProcessing.client.render.RendererTileEntity;
+import ip.industrialProcessing.client.render.RendererTileEntityAnimated;
 import ip.industrialProcessing.client.render.RendererTileEntityConnected;
 import ip.industrialProcessing.client.render.RendererTileEntityConnectedFluid;
 import ip.industrialProcessing.client.render.RendererTileEntityFluidWorker;
-import ip.industrialProcessing.client.render.RendererTileEntityAnimated;
 import ip.industrialProcessing.client.render.RendererTileEntityState;
 import ip.industrialProcessing.client.render.RenderingMultiblock;
 import ip.industrialProcessing.config.ConfigRenderers;
@@ -41,6 +34,25 @@ import ip.industrialProcessing.machines.mixer.ModelMixer;
 import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.MDmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
+import ip.industrialProcessing.multiblock.dummy.block.displayPanel.MDmultiblockDisplayPanel;
+import ip.industrialProcessing.multiblock.dummy.block.displayPanel.TEmultiblockDisplayPanel;
+import ip.industrialProcessing.multiblock.dummy.block.frame.ENmultiblockFrame;
+import ip.industrialProcessing.multiblock.dummy.block.frame.MDmultiblockFrame;
+import ip.industrialProcessing.multiblock.dummy.block.frame.MDmultiblockFramePanel;
+import ip.industrialProcessing.multiblock.dummy.block.frame.TEmultiblockFrame;
+import ip.industrialProcessing.multiblock.dummy.block.liftDoor.ENmultiblockLiftDoor;
+import ip.industrialProcessing.multiblock.dummy.block.liftDoor.MDmultiblockLiftDoor;
+import ip.industrialProcessing.multiblock.dummy.block.liftDoor.TEmultiblockLiftDoor;
+import ip.industrialProcessing.multiblock.dummy.block.screen.MDmultiblockScreen;
+import ip.industrialProcessing.multiblock.dummy.block.screen.TEmultiblockScreen;
+import ip.industrialProcessing.multiblock.dummy.block.toggleButton.MDmultiblockToggleButton2;
+import ip.industrialProcessing.multiblock.dummy.block.toggleButton.TEmultiblockToggleButton;
+import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.MDmultiblockWeldingTableExt;
+import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.TEmultiblockWeldingTableExt;
+import ip.industrialProcessing.multiblock.dummy.block.wheel.MDmultiblockWheel;
+import ip.industrialProcessing.multiblock.dummy.block.wheel.TEmultiblockWheel;
+import ip.industrialProcessing.multiblock.dummy.block.wheelConnector.MDmultiblockWheelConnector;
+import ip.industrialProcessing.multiblock.dummy.block.wheelConnector.TEmultiblockWheelConnector;
 import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
 import ip.industrialProcessing.power.manualGenerator.ModelCrankGenerator;
 import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
@@ -59,24 +71,8 @@ import ip.industrialProcessing.transport.fluids.ModelTank;
 import ip.industrialProcessing.transport.fluids.ModelTransportFluids;
 import ip.industrialProcessing.transport.fluids.TileEntityTank;
 import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids;
-import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
-import ip.industrialProcessing.multiblock.dummy.block.frame.ENmultiblockFrame;
-import ip.industrialProcessing.multiblock.dummy.block.frame.MDmultiblockFrame;
-import ip.industrialProcessing.multiblock.dummy.block.frame.MDmultiblockFramePanel;
-import ip.industrialProcessing.multiblock.dummy.block.frame.TEmultiblockFrame;
-import ip.industrialProcessing.multiblock.dummy.block.liftDoor.ENmultiblockLiftDoor;
-import ip.industrialProcessing.multiblock.dummy.block.liftDoor.MDmultiblockLiftDoor;
-import ip.industrialProcessing.multiblock.dummy.block.liftDoor.TEmultiblockLiftDoor;
-import ip.industrialProcessing.multiblock.dummy.block.screen.MDmultiblockScreen;
-import ip.industrialProcessing.multiblock.dummy.block.screen.TEmultiblockScreen;
-import ip.industrialProcessing.multiblock.dummy.block.toggleButton.MDmultiblockToggleButton2;
-import ip.industrialProcessing.multiblock.dummy.block.toggleButton.TEmultiblockToggleButton;
-import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.MDmultiblockWeldingTableExt;
-import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.TEmultiblockWeldingTableExt;
-import ip.industrialProcessing.multiblock.dummy.block.wheel.MDmultiblockWheel;
-import ip.industrialProcessing.multiblock.dummy.block.wheel.TEmultiblockWheel;
-import ip.industrialProcessing.multiblock.dummy.block.wheelConnector.MDmultiblockWheelConnector;
-import ip.industrialProcessing.multiblock.dummy.block.wheelConnector.TEmultiblockWheelConnector;
+import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy extends CommonProxy {
 	public static int renderPass;
@@ -107,6 +103,7 @@ public class ClientProxy extends CommonProxy {
 	private static final MDmultiblockWheel MDmultiblockWheel = new MDmultiblockWheel();
 	private static final MDmultiblockWheelConnector MDmulitblockWheelConnector = new MDmultiblockWheelConnector();
 	private static final MDmultiblockWheelConnector MDmultiblockWheelConnector = new MDmultiblockWheelConnector();
+	private static final MDmultiblockDisplayPanel MDmultiblockDisplayPanel = new MDmultiblockDisplayPanel();
 	
 	@Override
 	public void registerRenderers() {
@@ -205,6 +202,10 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TEmultiblockWheelConnector.class, new RenderingMultiblock(IndustrialProcessing.BLmultiblockWheelConnector, new String[] { "MDmultiblockWheelConnector"}, new ModelingMultiblock[] { MDmultiblockWheelConnector}));
 		ConfigRenderers.setBLmultiblockWheelConnector(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLmultiblockWheelConnector(), new TEmultiblockWheelConnector()));
+		
+		ClientRegistry.bindTileEntitySpecialRenderer(TEmultiblockDisplayPanel.class, new RenderingMultiblock(IndustrialProcessing.BLmultiblockDisplayPanel, new String[] { "MDmultiblockDisplayPanel"}, new ModelingMultiblock[] { MDmultiblockDisplayPanel}));
+		ConfigRenderers.setBLmultiblockDisplayPanel(RenderingRegistry.getNextAvailableRenderId());
+		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLmultiblockDisplayPanel(), new TEmultiblockDisplayPanel()));
 
 		RenderingRegistry.registerEntityRenderingHandler(ENmultiblockFrame.class, new RendererLivingEntity(new MDmultiblockFramePanel(), 1.0F,"MDmultiblockFramePanel"));
 		RenderingRegistry.registerEntityRenderingHandler(ENmultiblockLiftDoor.class, new RendererLivingEntity(new MDmultiblockLiftDoor(), 1.0F,"ModelMultiblockLiftDoor"));
