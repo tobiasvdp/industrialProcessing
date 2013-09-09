@@ -36,7 +36,14 @@ public class ConfigRenderers {
 	private int rendererBoilerId;
 	private int rendererTurbineId;
 	private int rendererManometerId;
+	private int BLmultiblockDisplayPanel;
 
+	public static int getBLmultiblockDisplayPanel() {
+		return getInstance().BLmultiblockDisplayPanel;
+	}
+	public static void setBLmultiblockDisplayPanel(int value) {
+		getInstance().BLmultiblockDisplayPanel = value;
+	}
 	public static int getBLmultiblockWheelConnector() {
 		return getInstance().BLmultiblockWheelConnector;
 	}
