@@ -277,19 +277,19 @@ public class ModelBoiler extends ModelAnimatedFluidMachine {
 		if(tankSlot == 1)
 			height = -height;
 		
-		
-		float offsetV = percentageFilled * (icon.getMaxV() - icon.getMinV());
+
+		float offsetV = (1-height/par5) * (icon.getMaxU() - icon.getMinU());
 		tessellator.startDrawingQuads();
-		tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) par3 * f, (double) (par2 + 0) * f, (double) icon.getMinU(), (double) icon.getMinV()+offsetV);
-		tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) (par3 + height) * f, (double) (par2 + 0) * f, (double) icon.getMaxU(), (double) icon.getMinV()+offsetV);
+		tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) par3 * f, (double) (par2 + 0) * f, (double) icon.getMinU()+offsetV, (double) icon.getMinV());
+		tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) (par3 + height) * f, (double) (par2 + 0) * f, (double) icon.getMaxU(), (double) icon.getMinV());
 		tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) (par3 + height) * f, (double) (par2 + par5) * f, (double) icon.getMaxU(), (double) icon.getMaxV());
-		tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) par3 * f, (double) (par2 + par5) * f, (double) icon.getMinU(), (double) icon.getMaxV());
+		tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) par3 * f, (double) (par2 + par5) * f, (double) icon.getMinU()+offsetV, (double) icon.getMaxV());
 		tessellator.draw();
 	}
 
 	@Override
 	public void renderModelAnimated(float f5, float[] progress) {
-
+        
 		BackPlate.render(f5);
 		TopPlate.render(f5);
 		BottomPlate.render(f5);
@@ -324,6 +324,7 @@ public class ModelBoiler extends ModelAnimatedFluidMachine {
 		FrontGaugeTop.render(f5);
 		WaterIn.render(f5);
 		SteamOut.render(f5);
+		
 	}
 
 	@Override

@@ -30,13 +30,8 @@ public class TileEntityVoltMeter extends TileEntityMachine implements IPowerAcce
 
 			float targetAngle = Math.min(1, averageVoltage / 48f);
 			// 0.25 sec to go from current angle to target angle?
-			float speed = (targetAngle - this.animationHandler.getProgress()) * this.animationHandler.DT / 0.25f;
-
-			boolean incrementing = speed > 0;
-			if (!incrementing)
-				speed = -speed;
-			this.animationHandler.setSpeed(speed);
-			this.animationHandler.setIncrementing(incrementing);
+			
+			this.animationHandler.moveToProgress(targetAngle, 0.25f); 
 			TileAnimationSyncHandler.sendAnimationData(this, this.animationHandler);
 		}
 		this.animationHandler.update();

@@ -387,8 +387,7 @@ public class ModelTank extends ModelConnectedFluid {
 			float y = 8 + top + depth;
 			int w = 14;
 			int h = 14;
-			float yBot = 8 - bottom + 16;
-			System.out.println("y:" + y + " " + fluidPercentage + " " + depth);
+			float yBot = 8 - bottom + 16; 
 			Tessellator tessellator = Tessellator.instance;
 			if (up == ConnectionState.CONNECTED || y < 1) {
 				tessellator.startDrawingQuads();

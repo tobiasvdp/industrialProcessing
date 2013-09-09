@@ -52,10 +52,13 @@ import ip.industrialProcessing.power.buildcraftGenerator.GuiContainerBuildcraftG
 import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
 import ip.industrialProcessing.power.plants.ContainerBoiler;
 import ip.industrialProcessing.power.plants.ContainerSolidBurner;
+import ip.industrialProcessing.power.plants.ContainerTurbine;
 import ip.industrialProcessing.power.plants.GuiContainerBoiler;
 import ip.industrialProcessing.power.plants.GuiContainerSolidBurner;
+import ip.industrialProcessing.power.plants.GuiContainerTurbine;
 import ip.industrialProcessing.power.plants.TileEntityBoiler;
 import ip.industrialProcessing.power.plants.TileEntitySolidBurner;
+import ip.industrialProcessing.power.plants.TileEntityTurbine;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -102,6 +105,8 @@ public class GuiHandler implements IGuiHandler {
 				return new ContainerSolidBurner(player.inventory, (TileEntitySolidBurner) entity);
 			if (entity instanceof TileEntityBoiler)
 				return new ContainerBoiler(player.inventory, (TileEntityBoiler) entity);
+			if (entity instanceof TileEntityTurbine)
+				return new ContainerTurbine(player.inventory, (TileEntityTurbine) entity);
 			if (entity instanceof TEmultiblockWeldingStation)
 				return new CTWeldingStation(player.inventory, (TEmultiblockWeldingStation) entity);
 		}
@@ -147,6 +152,8 @@ public class GuiHandler implements IGuiHandler {
 				return new GuiContainerSolidBurner(player.inventory, (TileEntitySolidBurner) entity);
 			if (entity instanceof TileEntityBoiler)
 				return new GuiContainerBoiler(player.inventory, (TileEntityBoiler) entity);
+			if (entity instanceof TileEntityTurbine)
+				return new GuiContainerTurbine(player.inventory, (TileEntityTurbine) entity);
 			if (entity instanceof TEmultiblockWeldingStation)
 				return new GUIWeldingStation(player.inventory, (TEmultiblockWeldingStation) entity);
 			if (entity instanceof TEmultiblockToggleButton)

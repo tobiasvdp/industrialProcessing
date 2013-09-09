@@ -1,29 +1,35 @@
 package ip.industrialProcessing.config;
 
 public class ConfigTransportBlocks {
-    private int blockTransportFluidsID = 3500;
-    private int blockTransportFluidPumpID = 3501;
-    private int blockTransportFluidTankID = 3502;
+	private int blockTransportFluidsID = 3500;
+	private int blockTransportFluidPumpID = 3501;
+	private int blockTransportFluidTankID = 3502;
+	private int blockTransportFluidManometerID = 3503;
 
-    public static int getBlockTransportFluidsID() {
-	return getInstance().blockTransportFluidsID;
-    }
+	public static int getBlockTransportFluidsID() {
+		return getInstance().blockTransportFluidsID;
+	}
 
-    public static int getBlockTransportFluidPumpID() {
-	return getInstance().blockTransportFluidPumpID;
-    }
-    public static int getBlockTransportFluidTankID() {
-	return getInstance().blockTransportFluidTankID;
-    }
+	public static int getBlockTransportFluidPumpID() {
+		return getInstance().blockTransportFluidPumpID;
+	}
 
+	public static int getBlockTransportFluidTankID() {
+		return getInstance().blockTransportFluidTankID;
+	}
 
-    private ConfigTransportBlocks() {
+	public static int getBlockTransportFluidManometerID() {
+		return getInstance().blockTransportFluidManometerID;
+	}
 
-    }
+	private ConfigTransportBlocks() {
 
-    private static ConfigTransportBlocks instance = new ConfigTransportBlocks();
+	}
 
-    public static ConfigTransportBlocks getInstance() {
-	return instance;
-    }
+	private static ConfigTransportBlocks instance = new ConfigTransportBlocks();
+
+	public static ConfigTransportBlocks getInstance() {
+		return instance;
+	}
+
 }

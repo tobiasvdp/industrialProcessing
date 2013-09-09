@@ -47,10 +47,7 @@ public class TileEntityAmpMeter extends TileEntityPowerGenerator implements IPow
 		if (!this.worldObj.isRemote) {
 			float targetAngle = this.outputCharge * 20 / 50;
 			// 0.25 sec to go from current angle to target angle?
-			float speed = (this.animationHandler.getProgress() - targetAngle) * this.animationHandler.DT / 0.25f;
-			boolean incrementing = speed > 0;
-			this.animationHandler.setSpeed(speed);
-			this.animationHandler.setIncrementing(incrementing);
+			this.animationHandler.moveToProgress(targetAngle, 0.25f); 
 			TileAnimationSyncHandler.sendAnimationData(this, this.animationHandler);
 		}
 

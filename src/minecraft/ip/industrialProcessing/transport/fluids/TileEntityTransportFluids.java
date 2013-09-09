@@ -38,6 +38,10 @@ public class TileEntityTransportFluids extends TileEntityTransport implements IF
 	private static int tileID;
 	private int id;
 
+	public int getPressure() {
+		return pressure;
+	}
+	
 	public TileEntityTransportFluids() {
 		this.id = tileID++;
 	}
@@ -50,10 +54,14 @@ public class TileEntityTransportFluids extends TileEntityTransport implements IF
 	protected TransportConnectionState getState(TileEntity entity, ForgeDirection direction) {
 		ForgeDirection from = direction.getOpposite();
 		if (entity instanceof TileEntityTransportFluids)
-			return TransportConnectionState.TRANSPORT; // TODO: check if
+			return TransportConnectionState.TRANSPORT;
+		// TODO: check if
 		// connection should be
 		// made (lava pipe with
 		// water pipe ..)
+		
+		if(entity instanceof TileEntityManoMeter && direction == ForgeDirection.UP)
+			return TransportConnectionState.TRANSPORT; 
 
 		if (entity instanceof TileEntityPump) {
 			TileEntityPump pump = (TileEntityPump) entity;

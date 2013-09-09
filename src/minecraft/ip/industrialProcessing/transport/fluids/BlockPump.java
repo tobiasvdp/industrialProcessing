@@ -14,13 +14,13 @@ import ip.industrialProcessing.machines.BlockMachine;
 
 public class BlockPump extends BlockMachine {
 
-    public BlockPump() {
-	super(ConfigTransportBlocks.getBlockTransportFluidPumpID(), Material.iron, 1F, Block.soundMetalFootstep, "Fluid Pump", IndustrialProcessing.tabOreProcessing);
-    }
+	public BlockPump() {
+		super(ConfigTransportBlocks.getBlockTransportFluidPumpID(), Material.iron, 1F, Block.soundMetalFootstep, "Fluid Pump", IndustrialProcessing.tabOreProcessing);
+	}
 
-    @Override
-    public TileEntity createNewTileEntity(World world) {
-	return new TileEntityPump();
-    }
+	@Override
+	public TileEntity createNewTileEntity(World world) {
+		return new TileEntityPump();
+	}
 
 }

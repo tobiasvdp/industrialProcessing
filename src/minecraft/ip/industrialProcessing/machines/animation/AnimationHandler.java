@@ -95,4 +95,15 @@ public class AnimationHandler {
 	public boolean isIncrementing() {
 		return incrementing;
 	}
+
+	public void moveToProgress(float targetProgress, float time) {
+
+		float speed = (targetProgress - this.progress) * DT / time;
+
+		boolean incrementing = speed > 0;
+		if (!incrementing)
+			speed = -speed;
+		setSpeed(speed);
+		setIncrementing(incrementing);
+	}
 }

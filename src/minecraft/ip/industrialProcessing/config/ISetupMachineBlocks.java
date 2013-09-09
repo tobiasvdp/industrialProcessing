@@ -41,8 +41,10 @@ import ip.industrialProcessing.power.meters.BlockAmpMeter;
 import ip.industrialProcessing.power.meters.BlockVoltMeter;
 import ip.industrialProcessing.power.plants.BlockBoiler;
 import ip.industrialProcessing.power.plants.BlockSolidBurner;
+import ip.industrialProcessing.power.plants.BlockTurbine;
 import ip.industrialProcessing.power.storage.BlockEnergyCell;
 import ip.industrialProcessing.power.wire.BlockWire;
+import ip.industrialProcessing.transport.fluids.BlockManoMeter;
 import ip.industrialProcessing.transport.fluids.BlockPump;
 import ip.industrialProcessing.transport.fluids.BlockTank;
 import ip.industrialProcessing.transport.fluids.BlockTransportFluids;
@@ -77,11 +79,13 @@ public interface ISetupMachineBlocks {
 	public final static BlockEnergyCell blockEnergyCell = new BlockEnergyCell();
 	public final static BlockSolidBurner blockSolidBurner = new BlockSolidBurner();
 	public final static BlockBoiler blockBoiler = new BlockBoiler();
+	public final static BlockTurbine blockTurbine = new BlockTurbine();
 	
 	// create fluidpipe
 	public final static BlockTransportFluids blockTransportFluids = new BlockTransportFluids();
 	public final static BlockPump blockPump = new BlockPump();
 	public final static BlockTank blockTank = new BlockTank();
+	public final static BlockManoMeter blockManometer = new BlockManoMeter();
 	
 	//multiblocks
 	public final static BLmultiblockFrame BLmultiblockFrame = new BLmultiblockFrame();

@@ -28,7 +28,7 @@ public class TileEntityBoiler extends TileEntityFluidWorkerMachine implements IH
 	private TankHandler tankHandler;
 
 	public TileEntityBoiler() {
-		addTank(10 * FluidContainerRegistry.BUCKET_VOLUME, LocalDirection.BACK, true, false);
+		addTank(10 * FluidContainerRegistry.BUCKET_VOLUME, LocalDirection.RIGHT, true, false);
 		addTank(10 * FluidContainerRegistry.BUCKET_VOLUME, LocalDirection.UP, false, true);
 
 		addStack(null, new LocalDirection[0], true, false);
@@ -105,7 +105,7 @@ public class TileEntityBoiler extends TileEntityFluidWorkerMachine implements IH
 
 	@Override
 	public void addHeat(int heat) {
-		this.heat += heat / 1.5f;
+		this.heat += heat * 1.5f;
 	}
 
 	@Override
@@ -119,11 +119,13 @@ public class TileEntityBoiler extends TileEntityFluidWorkerMachine implements IH
 
 	@Override
 	public int getPressure(ForgeDirection from) {
-		FluidTankInfo[] info = getTankInfo(from);
-		if (info.length > 0) {
-			FluidTankInfo tank = info[0];
-			int amount = tank.fluid == null ? 0 : tank.fluid.amount;
-			return amount * 1000 / tank.capacity;
+		if (from == ForgeDirection.UP) {
+			FluidTankInfo[] info = getTankInfo(from);
+			if (info.length > 0) {
+				FluidTankInfo tank = info[0];
+				int amount = tank.fluid == null ? 0 : tank.fluid.amount;
+				return (int) (amount * 1000 / tank.capacity * this.heat / 10);
+			}
 		}
 		return 0;
 	}

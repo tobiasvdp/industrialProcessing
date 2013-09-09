@@ -34,55 +34,73 @@ public class ConfigRenderers {
 	private int BLmultiblockWheel;
 	private int BLmultiblockWheelConnector;
 	private int rendererBoilerId;
+	private int rendererTurbineId;
+	private int rendererManometerId;
 
 	public static int getBLmultiblockWheelConnector() {
 		return getInstance().BLmultiblockWheelConnector;
 	}
+
 	public static void setBLmultiblockWheelConnector(int value) {
 		getInstance().BLmultiblockWheelConnector = value;
 	}
+
 	public static int getBLmultiblockWheel() {
 		return getInstance().BLmultiblockWheel;
 	}
+
 	public static void setBLmultiblockWheel(int value) {
 		getInstance().BLmultiblockWheel = value;
 	}
+
 	public static int getBLmultiblockToggleButton2() {
 		return getInstance().BLmultiblockToggleButton2;
 	}
+
 	public static void setBLmultiblockToggleButton2(int value) {
 		getInstance().BLmultiblockToggleButton2 = value;
 	}
+
 	public static int getBLmultiblockLiftDoor() {
 		return getInstance().BLmultiblockLiftDoor;
 	}
+
 	public static void setBLmultiblockLiftDoor(int value) {
 		getInstance().BLmultiblockLiftDoor = value;
 	}
+
 	public static int getBLmultiblockWeldingTableExt() {
 		return getInstance().BLmultiblockWeldingTableExt;
 	}
+
 	public static void setBLmultiblockWeldingTableExt(int value) {
 		getInstance().BLmultiblockWeldingTableExt = value;
 	}
+
 	public static int getBLmultiblockFrame() {
 		return getInstance().BLmultiblockFrame;
 	}
+
 	public static void setBLmultiblockFrame(int value) {
 		getInstance().BLmultiblockFrame = value;
 	}
+
 	public static int getBLmultiblockScreen() {
 		return getInstance().BLmultiblockScreen;
 	}
+
 	public static void setBLmultiblockScreen(int value) {
 		getInstance().BLmultiblockScreen = value;
 	}
+
 	public static int getBLmultiblockWeldingStation() {
 		return getInstance().BLmultiblockWeldingStation;
 	}
+
 	public static void setBLmultiblockWeldingStation(int value) {
 		getInstance().BLmultiblockWeldingStation = value;
 	}
+
 	public static int getrendererBlockMultiblockWeldingStationScreenID() {
 		return getInstance().rendererBlockMultiblockWeldingStationScreenID;
 	}
@@ -90,6 +108,7 @@ public class ConfigRenderers {
 	public static void setrendererBlockMultiblockWeldingStationScreenID(int value) {
 		getInstance().rendererBlockMultiblockWeldingStationScreenID = value;
 	}
+
 	public static int getrendererBlockMultiblockWeldingStationRightID() {
 		return getInstance().rendererBlockMultiblockWeldingStationRightID;
 	}
@@ -97,6 +116,7 @@ public class ConfigRenderers {
 	public static void setrendererBlockMultiblockWeldingStationRightID(int value) {
 		getInstance().rendererBlockMultiblockWeldingStationRightID = value;
 	}
+
 	public static int getrendererBlockMultiblockWeldingStationID() {
 		return getInstance().rendererBlockMultiblockWeldingStationID;
 	}
@@ -104,6 +124,7 @@ public class ConfigRenderers {
 	public static void setrendererBlockMultiblockWeldingStationID(int value) {
 		getInstance().rendererBlockMultiblockWeldingStationID = value;
 	}
+
 	public static int getrendererBlockMultiblockInvInputID() {
 		return getInstance().rendererBlockMultiblockInvInputID;
 	}
@@ -111,7 +132,7 @@ public class ConfigRenderers {
 	public static void setrendererBlockMultiblockInvInputID(int value) {
 		getInstance().rendererBlockMultiblockInvInputID = value;
 	}
-	
+
 	public static int getrendererBlockMultiblockInvOutputID() {
 		return getInstance().rendererBlockMultiblockInvOutputID;
 	}
@@ -119,7 +140,7 @@ public class ConfigRenderers {
 	public static void setrendererBlockMultiblockInvOutputID(int value) {
 		getInstance().rendererBlockMultiblockInvOutputID = value;
 	}
-	
+
 	public static int getrendererBlockMultiblockTankInputID() {
 		return getInstance().rendererBlockMultiblockTankInputID;
 	}
@@ -127,7 +148,7 @@ public class ConfigRenderers {
 	public static void setrendererBlockMultiblockTankInputID(int value) {
 		getInstance().rendererBlockMultiblockTankInputID = value;
 	}
-	
+
 	public static int getrendererBlockMultiblockTankOutputID() {
 		return getInstance().rendererBlockMultiblockTankOutputID;
 	}
@@ -255,18 +276,38 @@ public class ConfigRenderers {
 	public static void setRendererBCGeneratorId(int value) {
 		getInstance().rendererBCGeneratorID = value;
 	}
-	public static int getRendererBoilerId() { 
+
+	public static int getRendererBoilerId() {
 		return getInstance().rendererBoilerId;
 	}
+
 	public static void setRendererBoilerId(int value) {
 		getInstance().rendererBoilerId = value;
 	}
-	public static int getRendererSolidBurnerId() { 
+
+	public static int getRendererSolidBurnerId() {
 		return getInstance().rendererSolidBurnerId;
 	}
+
 	public static void setRendererSolidBurnerId(int value) {
 		getInstance().rendererSolidBurnerId = value;
-	} 
+	}
+
+	public static int getRendererTurbineId() {
+		return getInstance().rendererTurbineId;
+	}
+
+	public static void setRendererTurbineId(int value) {
+		getInstance().rendererTurbineId = value;
+	}
+
+	public static int getRendererManometerId() {
+		return getInstance().rendererManometerId;
+	}
+
+	public static void setRendererManometerId(int value) {
+		getInstance().rendererManometerId = value;
+	}
 
 	private ConfigRenderers() {
 

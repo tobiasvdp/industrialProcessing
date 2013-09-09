@@ -106,34 +106,28 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid = "IndustrialProcessing", name = "Industrial Processing", version = "0.0.1", dependencies = "after:NotEnoughItems")
-@NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = { PacketHandler.ANIMATION_SYNC, PacketHandler.TANK_SYNC,PacketHandler.BUTTON_PRESSED,PacketHandler.SYNC_CLIENT, PacketHandler.SEND_INFO, PacketHandler.SCREEN_PRESSED, PacketHandler.IP_ELEVATOR_BUTTON }, packetHandler = PacketHandler.class)
+@NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = { PacketHandler.ANIMATION_SYNC, PacketHandler.TANK_SYNC, PacketHandler.BUTTON_PRESSED, PacketHandler.SYNC_CLIENT, PacketHandler.SEND_INFO, PacketHandler.SCREEN_PRESSED, PacketHandler.IP_ELEVATOR_BUTTON }, packetHandler = PacketHandler.class)
 public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISetupMachineBlocks, ISetupItems, ISetupBlocks, ISetupFluids, ISetupAchievements, ISetupDamageSource {
 	// The instance of your mod that Forge uses.
 	@Instance("IndustrialProcessing")
-	
-	
-
 	public static IndustrialProcessing instance;
-	
+
 	public static boolean invertShift;
 	public static Logger log;
 
-    public static Configuration config;
+	public static Configuration config;
 
-    public static void logInfo(String message, Object... params) {
-        log.log(Level.INFO, String.format(message, params));
-    }
+	public static void logInfo(String message, Object... params) {
+		log.log(Level.INFO, String.format(message, params));
+	}
 
+	public static void logWarning(String message, Object... params) {
+		log.log(Level.WARNING, String.format(message, params));
+	}
 
-    public static void logWarning(String message, Object... params) {
-        log.log(Level.WARNING, String.format(message, params));
-    }    
-
-
-    public static void logSevere(String message, Object... params) {
-        log.log(Level.SEVERE, String.format(message, params));
-    }    
-
+	public static void logSevere(String message, Object... params) {
+		log.log(Level.SEVERE, String.format(message, params));
+	}
 
 	// create namespaces: INamespace
 	// create items: ISetupItems
@@ -156,22 +150,22 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
 		// register listeners for events
 		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
 		MinecraftForge.EVENT_BUS.register(this);
-		
+
 		log = event.getModLog();
-        config = new Configuration(event.getSuggestedConfigurationFile());
-        config.addCustomCategoryComment("IP Nei addon", "Controls loading of recipe viewer");
+		config = new Configuration(event.getSuggestedConfigurationFile());
+		config.addCustomCategoryComment("IP Nei addon", "Controls loading of recipe viewer");
 
-
-        if (event.getSide() == Side.CLIENT && !Loader.isModLoaded("NotEnoughItems")) {
-            logSevere("NEI doesn't seem to be installed... This is adviced to be able to view recipes.");
-        };
+		if (event.getSide() == Side.CLIENT && !Loader.isModLoaded("NotEnoughItems")) {
+			logSevere("NEI doesn't seem to be installed... This is adviced to be able to view recipes.");
+		}
+		;
 
 	}
 
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
-		
-		//register new crafting handler
+
+		// register new crafting handler
 		GameRegistry.registerCraftingHandler(new CraftingHandler());
 		// register worldgenerator
 		GameRegistry.registerWorldGenerator(worldGen);
@@ -196,21 +190,21 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
 
 		// register the gui handler
 		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
-		
+
 		// register creative tabs
 		ConfigCreativeTabs.getInstance().addToLanguageRegistry();
 
 		// register renders
 		proxy.registerRenderers();
-		
-		//register basic crafting recipes
+
+		// register basic crafting recipes
 		ConfigBaseRecipes.getInstance().addBaseRecipes();
-		
+
 		EntityRegistry.registerModEntity(ENmultiblockFrame.class, "Platform", 0, IndustrialProcessing.instance, 80, 1, true);
-		LanguageRegistry.instance().addStringLocalization("entity.Platform.name", "en_US","Platform");
-		
+		LanguageRegistry.instance().addStringLocalization("entity.Platform.name", "en_US", "Platform");
+
 		EntityRegistry.registerModEntity(ENmultiblockLiftDoor.class, "LiftDoor", 1, IndustrialProcessing.instance, 80, 1, true);
-		LanguageRegistry.instance().addStringLocalization("entity.LiftDoor.name", "en_US","Lift door");
+		LanguageRegistry.instance().addStringLocalization("entity.LiftDoor.name", "en_US", "Lift door");
 	}
 
 	@EventHandler
