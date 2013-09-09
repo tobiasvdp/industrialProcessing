@@ -2,6 +2,8 @@ package ip.industrialProcessing.multiblock.core.block.rollingPress;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.machines.animation.AnimationHandler;
+import ip.industrialProcessing.machines.animation.AnimationMode;
 import ip.industrialProcessing.machines.crusher.RecipesCrusher;
 import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreInv;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
@@ -34,6 +36,25 @@ public class TEmultiblockRollingPress extends TEmultiblockCoreInv {
 		layout.setBlockID(-2, 1, -1,2, 0,0, IndustrialProcessing.BLmultiblockInvInput.blockID);
 		layout.setBlockID(3, 1, -2,3, 0,0, IndustrialProcessing.BLmultiblockInvOutput.blockID);
 		layout.setBlockID(3, 1, -1,4, 0,0, IndustrialProcessing.BLmultiblockInvOutput.blockID);
+		
+		layout.setBlockID(0, 1, 0,5, 1,0, IndustrialProcessing.BLmultiblockFrame.blockID);
+		layout.setBlockID(1, 1, 0,6, 1,0, IndustrialProcessing.BLmultiblockFrame.blockID);
+		layout.setBlockID(0, 1, -3,7, 3,1, IndustrialProcessing.BLmultiblockFrame.blockID);
+		layout.setBlockID(1, 1, -3,8, 3,1, IndustrialProcessing.BLmultiblockFrame.blockID);
+		layout.setBlockID(0, 2, 0,9, 1,0, IndustrialProcessing.BLmultiblockFrame.blockID);
+		layout.setBlockID(1, 2, 0,10, 1,0, IndustrialProcessing.BLmultiblockFrame.blockID);
+		layout.setBlockID(0, 2, -3,11, 3,0, IndustrialProcessing.BLmultiblockFrame.blockID);
+		layout.setBlockID(1, 2, -3,12, 3,0, IndustrialProcessing.BLmultiblockFrame.blockID);
+		
+		layout.setBlockID(0, 1, -1,13, 0,1, IndustrialProcessing.BLmultiblockWheel.blockID);
+		layout.setBlockID(1, 1, -1,14, 0,1, IndustrialProcessing.BLmultiblockWheel.blockID);
+		layout.setBlockID(0, 1, -2,15, 0,1, IndustrialProcessing.BLmultiblockWheel.blockID);
+		layout.setBlockID(1, 1, -2,16, 0,1, IndustrialProcessing.BLmultiblockWheel.blockID);
+		layout.setBlockID(0, 2, -1,17, 0,0, IndustrialProcessing.BLmultiblockWheel.blockID);
+		layout.setBlockID(1, 2, -1,18, 0,0, IndustrialProcessing.BLmultiblockWheel.blockID);
+		layout.setBlockID(0, 2, -2,19, 0,0, IndustrialProcessing.BLmultiblockWheel.blockID);
+		layout.setBlockID(1, 2, -2,20, 0,0, IndustrialProcessing.BLmultiblockWheel.blockID);
+		
 		layout.setCoreID(0,1,0, IndustrialProcessing.BLmultiblockRollingPress.blockID);
 		
 		structure.addLayout(layout, FacingDirection.North);
@@ -63,7 +84,14 @@ public class TEmultiblockRollingPress extends TEmultiblockCoreInv {
 	}
 	public TEmultiblockRollingPress() {
 		super(structure, tierRequirments, recipes);
-		// TODO Auto-generated constructor stub
+		
+		//animation
+		this.animation = new AnimationHandler[1];
+		this.animation[0] = new AnimationHandler(AnimationMode.WRAP, 360f, true);
+		animation[0].setSpeed(20);
+		
+		this.isAnimationEnabled = new boolean[1];
+		this.isAnimationEnabled[0] = true;
 	}
 
 }

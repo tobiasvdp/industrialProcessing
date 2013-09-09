@@ -1,11 +1,34 @@
 package ip.industrialProcessing.multiblock.dummy.block.wheel;
 
+import ip.industrialProcessing.client.render.IAnimationProgress;
+import ip.industrialProcessing.machines.animation.AnimationHandler;
+import ip.industrialProcessing.machines.animation.AnimationMode;
 import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
+import ip.industrialProcessing.multiblock.utils.MultiblockState;
 
-public class TEmultiblockWheel extends TEmultiblockDummy{
-
+public class TEmultiblockWheel extends TEmultiblockDummy implements IAnimationProgress{
+	
 	public TEmultiblockWheel() {
-		// TODO Auto-generated constructor stub
+
+	}
+
+	@Override
+	public void updateEntity(){
+		if(this.getState() == MultiblockState.COMPLETED && getCore().isAnimationEnabled(0)){
+			getCore().updateAnimationProgress(0);
+		}
+	}
+
+	@Override
+	public int getAnimationCount() {
+		return 1;
+	}
+
+	@Override
+	public float getAnimationProgress(float scale, int animationIndex) {
+		if(this.getState() == MultiblockState.COMPLETED)
+			return getCore().getAnimationProgress(scale, animationIndex);
+		return 0;
 	}
 
 }

@@ -75,6 +75,7 @@ import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.MDmultiblo
 import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.TEmultiblockWeldingTableExt;
 import ip.industrialProcessing.multiblock.dummy.block.wheel.MDmultiblockWheel;
 import ip.industrialProcessing.multiblock.dummy.block.wheel.TEmultiblockWheel;
+import ip.industrialProcessing.multiblock.dummy.block.frame.MDmulitblockWheelConnector;
 
 public class ClientProxy extends CommonProxy {
 	public static int renderPass;
@@ -103,6 +104,7 @@ public class ClientProxy extends CommonProxy {
 	private static final MDmultiblockLiftDoor MDmultiblockLiftDoor = new MDmultiblockLiftDoor();
 	private static final MDmultiblockToggleButton2 MDmultiblockToggleButton2 = new MDmultiblockToggleButton2();
 	private static final MDmultiblockWheel MDmultiblockWheel = new MDmultiblockWheel();
+	private static final MDmulitblockWheelConnector MDmulitblockWheelConnector = new MDmulitblockWheelConnector();
 	
 	@Override
 	public void registerRenderers() {
@@ -178,7 +180,7 @@ public class ClientProxy extends CommonProxy {
 		ConfigRenderers.setBLmultiblockScreen(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLmultiblockScreen(), new TEmultiblockScreen()));
 		
-		ClientRegistry.bindTileEntitySpecialRenderer(TEmultiblockFrame.class, new RenderingMultiblock(IndustrialProcessing.BLmultiblockFrame, new String[] { "ModelMultiblockFrame","MDmultiblockFramePanel","MDmultiblockElevatorGroundPanel" }, new ModelingMultiblock[] { MDmultiblockFrame,MDmultiblockFramePanel,MDmultiblockFramePanel }));
+		ClientRegistry.bindTileEntitySpecialRenderer(TEmultiblockFrame.class, new RenderingMultiblock(IndustrialProcessing.BLmultiblockFrame, new String[] { "ModelMultiblockFrame","MDmultiblockFramePanel","MDmultiblockElevatorGroundPanel","MDmulitblockWheelConnector" }, new ModelingMultiblock[] { MDmultiblockFrame,MDmultiblockFramePanel,MDmultiblockFramePanel,MDmulitblockWheelConnector }));
 		ConfigRenderers.setBLmultiblockFrame(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLmultiblockFrame(), new TEmultiblockFrame()));
 		

@@ -3,6 +3,7 @@ package ip.industrialProcessing.multiblock.core;
 import java.util.ArrayList;
 
 import ip.industrialProcessing.machines.MachineItemStack;
+import ip.industrialProcessing.machines.animation.AnimationHandler;
 import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
@@ -32,7 +33,19 @@ public class TEmultiblockCore extends TileEntity {
 	private Tiers tier = Tiers.Invalid;
 	private int modelID;
 	private int modelConnection;
+	protected AnimationHandler[] animation;
+	protected boolean[] isAnimationEnabled;
 
+	public float getAnimationProgress(float scale, int animationIndex) {
+		return animation[animationIndex].getProgress();
+	}
+	public void updateAnimationProgress(int animationIndex) {
+		animation[animationIndex].update();
+	}
+	public boolean isAnimationEnabled(int animationIndex){
+		return isAnimationEnabled[animationIndex];
+	}
+	
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
