@@ -38,8 +38,15 @@ public class ConfigRenderers {
 	private int rendererTurbineId;
 	private int rendererManometerId;
 	private int BLmultiblockDisplayPanel;
+	private int BLtransportConveyorBelt;
 	private int rendererPumpId;
 
+	public static int getBLtransportConveyorBelt() {
+		return getInstance().BLtransportConveyorBelt;
+	}
+	public static void setBLtransportConveyorBelt(int value) {
+		getInstance().BLtransportConveyorBelt = value;
+	}
 	public static int getBLmultiblockDisplayPanel() {
 		return getInstance().BLmultiblockDisplayPanel;
 	}

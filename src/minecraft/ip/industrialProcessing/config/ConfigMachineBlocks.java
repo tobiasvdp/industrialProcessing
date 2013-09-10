@@ -43,6 +43,7 @@ import ip.industrialProcessing.transport.fluids.TileEntityManoMeter;
 import ip.industrialProcessing.transport.fluids.TileEntityPump;
 import ip.industrialProcessing.transport.fluids.TileEntityTank;
 import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids;
+import ip.industrialProcessing.transport.items.TEtransportConveyorBelt;
 import net.minecraft.block.Block;
 import net.minecraft.src.ModLoader;
 import net.minecraftforge.common.MinecraftForge;
@@ -100,8 +101,13 @@ public class ConfigMachineBlocks {
 	private int BLmultiblockRollingPress = 732;
 	private int BLmultiblockWheelConnector = 733;
 	private int BLmultiblockDisplayPanel = 734;
+	
+	private int BLtransportConveyorBelt = 735;
 
 	public void registerMachineBlocks() {
+		
+		registerMachineBlock(IndustrialProcessing.BLtransportConveyorBelt, "IP.Trans.CBelt", "Conveyor belt", TEtransportConveyorBelt.class);
+		
 		// multiblocks
 		registerMachineBlock(IndustrialProcessing.BLmultiblockDisplayPanel, "IP.MBD.Display", "Display panel", TEmultiblockDisplayPanel.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockWheelConnector, "IP.MBD.WheelCon", "Wheel connector", TEmultiblockWheelConnector.class);
@@ -168,6 +174,9 @@ public class ConfigMachineBlocks {
 		return instance;
 	}
 
+	public static int getBLtransportConveyorBelt() {
+		return getInstance().BLtransportConveyorBelt;
+	}
 	public static int getBLmultiblockDisplayPanel() {
 		return getInstance().BLmultiblockDisplayPanel;
 	}

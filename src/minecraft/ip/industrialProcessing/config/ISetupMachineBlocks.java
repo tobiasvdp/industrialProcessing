@@ -44,6 +44,7 @@ import ip.industrialProcessing.transport.fluids.BlockPump;
 import ip.industrialProcessing.transport.fluids.BlockRainTank;
 import ip.industrialProcessing.transport.fluids.BlockTank;
 import ip.industrialProcessing.transport.fluids.BlockTransportFluids;
+import ip.industrialProcessing.transport.items.BLtransportConveyorBelt;
 
 public interface ISetupMachineBlocks {
 
@@ -100,4 +101,6 @@ public interface ISetupMachineBlocks {
 	public final static BLmultiblockRollingPress BLmultiblockRollingPress = new BLmultiblockRollingPress();
 	public final static BLmultiblockWheelConnector BLmultiblockWheelConnector = new BLmultiblockWheelConnector();
 	public final static BLmultiblockDisplayPanel BLmultiblockDisplayPanel = new BLmultiblockDisplayPanel();
+	
+	public final static BLtransportConveyorBelt BLtransportConveyorBelt = new BLtransportConveyorBelt();
 }

@@ -108,9 +108,22 @@ public class TEmultiblockCore extends TileEntity implements ITEmultiblockCore {
 				nbttaglistDummies.appendTag(nbttaglistDummie);
 			}
 		}
+		
+		NBTTagList nbttaglistAnimation = new NBTTagList();
+		for (int i = 0;i<animation.length;i++) {
+				NBTTagList nbttaglistAni = new NBTTagList();
+				nbttaglistAni.setName("Ani" + i);
 
+				nbtComp = new NBTTagCompound();
+				nbtComp.setBoolean("enabled", isAnimationEnabled[i]);
+				nbttaglistAni.appendTag(nbtComp);
+
+				nbttaglistAnimation.appendTag(nbttaglistAni);
+		}
+		
 		nbt.setTag("Core", nbttaglist);
 		nbt.setTag("Dummies", nbttaglistDummies);
+		nbt.setTag("Animation", nbttaglistAnimation);
 
 	}
 
@@ -151,6 +164,13 @@ public class TEmultiblockCore extends TileEntity implements ITEmultiblockCore {
 			int z = nbttagcompound1.getInteger("z");
 			loadedFromNBT = true;
 			dummyDataFromNBT[i] = new int[] { x, y, z };
+		}
+		
+		nbttaglist = nbt.getTagList("Animation");
+		for (int i = 0; i < nbttaglist.tagCount(); i++) {
+			NBTTagList nbttaglistDummie = (NBTTagList) nbttaglist.tagAt(i);
+			nbttagcompound1 = (NBTTagCompound) nbttaglistDummie.tagAt(0);
+			isAnimationEnabled[i] = nbttagcompound1.getBoolean("enabled");
 		}
 
 	}
