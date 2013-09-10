@@ -20,9 +20,9 @@ public class GeneratorProgressHandler implements IProgressBarHandler {
 	public int getValue(int i) {
 		switch (i) {
 		case 0:
-			return (int) this.generator.getVoltage() * 100;
+			return (int) (this.generator.getVoltage() * 100f);
 		case 1:
-			return (int) this.generator.getLastAmps() * 100;
+			return (int) (this.generator.getLastAmps() * 100f);
 		}
 		return 0;
 	}

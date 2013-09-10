@@ -47,9 +47,9 @@ public class GuiContainerGenerator extends GuiContainerMachine {
 
 		GeneratorProgress progress = this.container.getProgress();
 
-		float volt = Math.round(progress.voltage * 10) / 10f;
-		float amps = Math.round(progress.amps * 10) / 10f;
-		float power = Math.round(volt * amps * 10) / 10f;
+		float volt = Math.round(progress.voltage * 10f) / 10f;
+		float amps = Math.round(progress.amps * 10f) / 10f;
+		float power = Math.round(progress.voltage * progress.amps * 10) / 10f;
 		fontRenderer.drawString(amps + "A", 120, 28, 4210752);
 		fontRenderer.drawString(volt + "V", 120, 40, 4210752);
 		fontRenderer.drawString(power + "W", 120, 52, 4210752);

@@ -52,7 +52,7 @@ public class TileEntityTurbine extends TileEntityFluidMachine implements IAnimat
 				int waterFill = waterTank.fill(steamDrain, true);
 				steamTank.drain(waterFill, true);
 
-				addEnergy(waterFill);
+				addEnergy(waterFill*2);
 			}
 			TileAnimationSyncHandler.sendAnimationData(this, this.animationHandler);
 
@@ -114,12 +114,12 @@ public class TileEntityTurbine extends TileEntityFluidMachine implements IAnimat
 	}
 
 	@Override
-	public int getPressure(ForgeDirection from) {
+	public float getPressure(ForgeDirection from) {
 		FluidTankInfo[] info = getTankInfo(from);
 		if (info.length > 0) {
 			FluidTankInfo tank = info[0];
 			int amount = tank.fluid == null ? 0 : tank.fluid.amount;
-			return amount * 1000 / tank.capacity;
+			return amount * 1000f / tank.capacity;
 		}
 		return 0;
 	}

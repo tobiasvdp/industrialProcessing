@@ -12,6 +12,7 @@ import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 
 public class TileEntityManoMeter extends TileEntityMachine implements IAnimationSyncable, IAnimationProgress {
 
+	private static final float MAX_PRESSURE = 4000f;
 	private LocalDirection connection = LocalDirection.DOWN;
 
 	public TileEntityManoMeter() {
@@ -31,13 +32,13 @@ public class TileEntityManoMeter extends TileEntityMachine implements IAnimation
 		super.updateEntity();
 
 		if (!this.worldObj.isRemote) {
-			int pressure = 0;
+			float pressure = 0;
 			TileEntityTransportFluids pipe = getPipe();
 
 			if (pipe != null)
 				pressure = pipe.getPressure();
 
-			float pressureProgress = pressure / 2000f + 0.5f;
+			float pressureProgress = pressure / MAX_PRESSURE + 0.5f;
 			this.animationHandler.moveToProgress(pressureProgress, 0.125f);
 			TileAnimationSyncHandler.sendAnimationData(this, this.animationHandler);
 		}

@@ -97,7 +97,7 @@ public class ClientProxy extends CommonProxy {
 	private static final ModelAnimatedMachine ampMeter = new ModelVoltMeter(true);
 	private static final ModelAnimatedMachine manoMeter = new ModelManoMeter();
 	private static final ModelAnimatedFluidMachine pump = new ModelPump();
-	private static final ModelConnected transportFluids = new ModelTransportFluids();
+	private static final ModelConnectedFluid transportFluids = new ModelTransportFluids();
 	private static final ModelAnimatedMachine EnergyCell = new ModelEnergyCell();
 	private static final ModelConnectedFluid rainTank = new ModelRainTank();
 
@@ -157,7 +157,7 @@ public class ClientProxy extends CommonProxy {
 		ConfigRenderers.setRendererAmpMeterId(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererAmpMeterId(), new TileEntityAmpMeter()));
 
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTransportFluids.class, new RendererTileEntityConnected(IndustrialProcessing.blockTransportFluids, "ModelTransportFluids", transportFluids));
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTransportFluids.class, new RendererTileEntityConnectedFluid(IndustrialProcessing.blockTransportFluids, "ModelTransportFluids", transportFluids));
 		ConfigRenderers.setRendererTransportFluidsId(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererTransportFluidsId(), new TileEntityTransportFluids()));
 
