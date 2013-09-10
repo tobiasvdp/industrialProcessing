@@ -34,6 +34,7 @@ import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
 import ip.industrialProcessing.power.meters.TileEntityAmpMeter;
 import ip.industrialProcessing.power.meters.TileEntityVoltMeter;
 import ip.industrialProcessing.power.plants.TileEntityBoiler;
+import ip.industrialProcessing.power.plants.TileEntityGenerator;
 import ip.industrialProcessing.power.plants.TileEntitySolidBurner;
 import ip.industrialProcessing.power.plants.TileEntityTurbine;
 import ip.industrialProcessing.power.storage.TileEntityEnergyCell;
@@ -76,6 +77,7 @@ public class ConfigMachineBlocks {
 	private int solidBurnerBlockID = 802;
 	private int boilerBlockID = 803;
 	private int steamTurbineBlockID = 804;
+	private int generatorBlockID = 805;
 
 	private int wireBlockID = 900;
 	private int voltMeterBlockID = 901;
@@ -137,6 +139,7 @@ public class ConfigMachineBlocks {
 
 		registerMachineBlock(IndustrialProcessing.blockManualGenerator, "IP.Generator.Manual", "Crank Generator", TileEntityManualGenerator.class);
 		registerMachineBlock(IndustrialProcessing.blockBuildcraftGenerator, "IP.Generator.Buildcraft", "Buildcraft Generator", TileEntityBuildcraftGenerator.class);
+		registerMachineBlock(IndustrialProcessing.blockGenerator, "IP.Generator", "Generator", TileEntityGenerator.class);
 
 		// transport
 		registerMachineBlock(IndustrialProcessing.blockTransportFluids, "IP.Transport.Fluids", "Fluid pipe", TileEntityTransportFluids.class);
@@ -168,6 +171,7 @@ public class ConfigMachineBlocks {
 	public static int getBLmultiblockDisplayPanel() {
 		return getInstance().BLmultiblockDisplayPanel;
 	}
+
 	public static int getBLmultiblockWheelConnector() {
 		return getInstance().BLmultiblockWheelConnector;
 	}
@@ -315,5 +319,9 @@ public class ConfigMachineBlocks {
 
 	public static int getSteamTurbineBlockID() {
 		return getInstance().steamTurbineBlockID;
+	}
+
+	public static int getGeneratorBlockID() {
+		return getInstance().generatorBlockID;
 	}
 }

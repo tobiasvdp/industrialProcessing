@@ -34,6 +34,7 @@ import ip.industrialProcessing.power.manualGenerator.BlockManualGenerator;
 import ip.industrialProcessing.power.meters.BlockAmpMeter;
 import ip.industrialProcessing.power.meters.BlockVoltMeter;
 import ip.industrialProcessing.power.plants.BlockBoiler;
+import ip.industrialProcessing.power.plants.BlockGenerator;
 import ip.industrialProcessing.power.plants.BlockSolidBurner;
 import ip.industrialProcessing.power.plants.BlockTurbine;
 import ip.industrialProcessing.power.storage.BlockEnergyCell;
@@ -64,6 +65,7 @@ public interface ISetupMachineBlocks {
 	// create generators
 	public final static BlockManualGenerator blockManualGenerator = new BlockManualGenerator();
 	public final static BlockBuildcraftGenerator blockBuildcraftGenerator = new BlockBuildcraftGenerator();
+	public final static BlockGenerator blockGenerator = new BlockGenerator();
 
 	// create wires
 	public final static BlockWire blockWire = new BlockWire();

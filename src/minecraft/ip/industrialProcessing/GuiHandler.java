@@ -51,12 +51,15 @@ import ip.industrialProcessing.power.buildcraftGenerator.ContainerBuildcraftGene
 import ip.industrialProcessing.power.buildcraftGenerator.GuiContainerBuildcraftGenerator;
 import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
 import ip.industrialProcessing.power.plants.ContainerBoiler;
+import ip.industrialProcessing.power.plants.ContainerGenerator;
 import ip.industrialProcessing.power.plants.ContainerSolidBurner;
 import ip.industrialProcessing.power.plants.ContainerTurbine;
 import ip.industrialProcessing.power.plants.GuiContainerBoiler;
+import ip.industrialProcessing.power.plants.GuiContainerGenerator;
 import ip.industrialProcessing.power.plants.GuiContainerSolidBurner;
 import ip.industrialProcessing.power.plants.GuiContainerTurbine;
 import ip.industrialProcessing.power.plants.TileEntityBoiler;
+import ip.industrialProcessing.power.plants.TileEntityGenerator;
 import ip.industrialProcessing.power.plants.TileEntitySolidBurner;
 import ip.industrialProcessing.power.plants.TileEntityTurbine;
 import net.minecraft.entity.player.EntityPlayer;
@@ -101,6 +104,8 @@ public class GuiHandler implements IGuiHandler {
 				return new ContainerBlastFurnace(player.inventory, (TileEntityBlastFurnace) entity);
 			if (entity instanceof TileEntityBuildcraftGenerator)
 				return new ContainerBuildcraftGenerator(player.inventory, (TileEntityBuildcraftGenerator) entity);
+			if (entity instanceof TileEntityGenerator)
+				return new ContainerGenerator(player.inventory, (TileEntityGenerator) entity);
 			if (entity instanceof TileEntitySolidBurner)
 				return new ContainerSolidBurner(player.inventory, (TileEntitySolidBurner) entity);
 			if (entity instanceof TileEntityBoiler)
@@ -148,6 +153,8 @@ public class GuiHandler implements IGuiHandler {
 				return new GuiContainerBlastFurnace(player.inventory, (TileEntityBlastFurnace) entity);
 			if (entity instanceof TileEntityBuildcraftGenerator)
 				return new GuiContainerBuildcraftGenerator(player.inventory, (TileEntityBuildcraftGenerator) entity);
+			if (entity instanceof TileEntityGenerator)
+				return new GuiContainerGenerator(player.inventory, (TileEntityGenerator) entity);
 			if (entity instanceof TileEntitySolidBurner)
 				return new GuiContainerSolidBurner(player.inventory, (TileEntitySolidBurner) entity);
 			if (entity instanceof TileEntityBoiler)

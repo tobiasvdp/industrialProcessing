@@ -5,6 +5,7 @@ public class ConfigRenderers {
 	private static int rendererSolidBurnerId;
 	private int rendererCrankGeneratorID;
 	private int rendererBCGeneratorID;
+	private int rendererGeneratorID;
 	private int rendererWireID;
 	private int rendererMixerID;
 	private int rendererFilterID;
@@ -283,6 +284,15 @@ public class ConfigRenderers {
 	public static void setRendererBCGeneratorId(int value) {
 		getInstance().rendererBCGeneratorID = value;
 	}
+
+	public static int getRendererGeneratorId() {
+		return getInstance().rendererGeneratorID;
+	}
+
+	public static void setRendererGeneratorId(int value) {
+		getInstance().rendererGeneratorID = value;
+	}
+
 
 	public static int getRendererBoilerId() {
 		return getInstance().rendererBoilerId;
