@@ -38,6 +38,7 @@ public class ConfigRenderers {
 	private int rendererTurbineId;
 	private int rendererManometerId;
 	private int BLmultiblockDisplayPanel;
+	private int rendererPumpId;
 
 	public static int getBLmultiblockDisplayPanel() {
 		return getInstance().BLmultiblockDisplayPanel;
@@ -318,6 +319,14 @@ public class ConfigRenderers {
 		getInstance().rendererTurbineId = value;
 	}
 
+	public static int getRendererPumpId() {
+		return getInstance().rendererPumpId;
+	}
+
+	public static void setRendererPumpId(int value) {
+		getInstance().rendererPumpId = value;
+	}
+	
 	public static int getRendererManometerId() {
 		return getInstance().rendererManometerId;
 	}

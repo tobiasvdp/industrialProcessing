@@ -47,8 +47,7 @@ public class TileEntityBoiler extends TileEntityFluidWorkerMachine implements IH
 			int ambientTemperature = (int) (this.worldObj.getBiomeGenForCoords(xCoord, zCoord).getFloatTemperature() * 20);
 			// the hotter the boiler get,
 			// the faster the heat dissipates to the environment:
-			this.heat += COOLING_RATE * (ambientTemperature - this.heat);
-			System.out.println("heat: " + this.heat + " -> " + ambientTemperature);
+			this.heat += COOLING_RATE * (ambientTemperature - this.heat); 
 
 			IFluidHandler handler = getFluidHandler(xCoord, yCoord + 1, zCoord);
 			if (handler != null) {

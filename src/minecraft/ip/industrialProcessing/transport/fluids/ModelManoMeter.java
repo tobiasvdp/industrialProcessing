@@ -255,6 +255,10 @@ public class ModelManoMeter extends ModelAnimatedMachine {
 		GL11.glRotatef(progress[0] * 90 - 45, 1, 0, 0);
 		GL11.glTranslatef(0, -center, 0);
 		Needle1.render(f5);
+
+		GL11.glTranslatef(0, center, 0);
+		GL11.glRotatef((progress[0] * 90 - 45) * -2, 1, 0, 0);
+		GL11.glTranslatef(0, -center, 0);
 		Needle2.render(f5);
 		GL11.glPopMatrix();
 		RightFrame7.render(f5);

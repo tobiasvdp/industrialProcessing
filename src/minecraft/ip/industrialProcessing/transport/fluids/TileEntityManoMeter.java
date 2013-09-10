@@ -38,7 +38,7 @@ public class TileEntityManoMeter extends TileEntityMachine implements IAnimation
 				pressure = pipe.getPressure();
 
 			float pressureProgress = pressure / 2000f + 0.5f;
-			this.animationHandler.moveToProgress(pressureProgress, 0.25f);
+			this.animationHandler.moveToProgress(pressureProgress, 0.125f);
 			TileAnimationSyncHandler.sendAnimationData(this, this.animationHandler);
 		}
 		this.animationHandler.update();

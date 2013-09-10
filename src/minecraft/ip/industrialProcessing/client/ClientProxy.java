@@ -71,9 +71,11 @@ import ip.industrialProcessing.power.storage.TileEntityEnergyCell;
 import ip.industrialProcessing.power.wire.ModelWire;
 import ip.industrialProcessing.power.wire.TileEntityWire;
 import ip.industrialProcessing.transport.fluids.ModelManoMeter;
+import ip.industrialProcessing.transport.fluids.ModelPump;
 import ip.industrialProcessing.transport.fluids.ModelTank;
 import ip.industrialProcessing.transport.fluids.ModelTransportFluids;
 import ip.industrialProcessing.transport.fluids.TileEntityManoMeter;
+import ip.industrialProcessing.transport.fluids.TileEntityPump;
 import ip.industrialProcessing.transport.fluids.TileEntityTank;
 import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -90,6 +92,7 @@ public class ClientProxy extends CommonProxy {
 	private static final ModelAnimatedMachine voltMeter = new ModelVoltMeter(false);
 	private static final ModelAnimatedMachine ampMeter = new ModelVoltMeter(true);
 	private static final ModelAnimatedMachine manoMeter = new ModelManoMeter();
+	private static final ModelAnimatedFluidMachine pump = new ModelPump();
 	private static final ModelConnected transportFluids = new ModelTransportFluids();
 	private static final ModelAnimatedMachine EnergyCell = new ModelEnergyCell();
 	private static final ModelAnimatedMachine crankGenerator = new ModelCrankGenerator(true);
@@ -158,6 +161,10 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTurbine.class, new RendererTileEntityFluidWorker(IndustrialProcessing.blockTurbine, "ModelTurbine", turbine));
 		ConfigRenderers.setRendererTurbineId(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererTurbineId(), new TileEntityTurbine()));
+
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPump.class, new RendererTileEntityFluidWorker(IndustrialProcessing.blockPump, "ModelPump", pump));
+		ConfigRenderers.setRendererPumpId(RenderingRegistry.getNextAvailableRenderId());
+		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererPumpId(), new TileEntityPump()));
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBoiler.class, new RendererTileEntityFluidWorker(IndustrialProcessing.blockBoiler, "ModelBoiler", boiler));
 		ConfigRenderers.setRendererBoilerId(RenderingRegistry.getNextAvailableRenderId());

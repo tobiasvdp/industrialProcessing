@@ -7,6 +7,8 @@ import buildcraft.api.power.IPowerReceptor;
 import buildcraft.api.power.PowerHandler;
 import buildcraft.api.power.PowerHandler.PowerReceiver;
 import buildcraft.api.power.PowerHandler.Type;
+import ip.industrialProcessing.DirectionUtils;
+import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
 import ip.industrialProcessing.machines.animation.AnimationMode;
@@ -20,6 +22,7 @@ public class TileEntityGenerator extends TileEntityPowerGenerator implements IAn
 
 	private AnimationHandler animationHandler;
 	private float lastCharge;
+	LocalDirection outputSide = LocalDirection.BACK;
 
 	public TileEntityGenerator() {
 		super(100);
@@ -42,7 +45,8 @@ public class TileEntityGenerator extends TileEntityPowerGenerator implements IAn
 
 	@Override
 	public boolean canOutputPower(ForgeDirection opposite) {
-		return true;
+		LocalDirection power = DirectionUtils.GetLocalDirection(opposite, getForwardDirection());
+		return power == outputSide;
 	}
 
 	@Override

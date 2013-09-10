@@ -152,7 +152,6 @@ public class TileEntityTransportFluids extends TileEntityTransport implements IF
 				if (other != null) {
 					int flow = other.pressure - this.pressure;
 					if (flow > 0) {
-						System.out.println(String.format("transfer from %s %s to %s %s by %s", other.id, other.pressure, this.id, this.pressure, flow / 4));
 						other.pressure -= flow / 4;
 						this.pressure += flow / 4;
 
