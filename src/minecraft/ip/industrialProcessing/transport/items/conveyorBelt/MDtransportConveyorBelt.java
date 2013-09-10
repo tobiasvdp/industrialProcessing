@@ -1,4 +1,4 @@
-package ip.industrialProcessing.transport.items;
+package ip.industrialProcessing.transport.items.conveyorBelt;
 
 import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.ModelConnected;
@@ -6,7 +6,6 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
 public class MDtransportConveyorBelt extends ModelConnected {
-	// fields
 	// fields
 	ModelRenderer Front;
 	ModelRenderer Back;
@@ -236,32 +235,57 @@ public class MDtransportConveyorBelt extends ModelConnected {
 
 	@Override
 	public void renderModelConnected(float f5, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down) {
-		Front.render(f5);
-		Back.render(f5);
-		Left.render(f5);
-		Right.render(f5);
-		FrontBack.render(f5);
-		LeftRight.render(f5);
-		RightFront1.render(f5);
-		RightFront2.render(f5);
-		RightFront3.render(f5);
-		RightFront4.render(f5);
-		RightFront5.render(f5);
-		RightBack1.render(f5);
-		RightBack2.render(f5);
-		RightBack3.render(f5);
-		RightBack4.render(f5);
-		RightBack5.render(f5);
-		LeftBack1.render(f5);
-		LeftBack2.render(f5);
-		LeftBack3.render(f5);
-		LeftBack4.render(f5);
-		LeftBack5.render(f5);
-		FrontLeft1.render(f5);
-		FrontLeft2.render(f5);
-		FrontLeft3.render(f5);
-		FrontLeft4.render(f5);
-		FrontLeft5.render(f5);
+		if (south == ConnectionState.CONNECTED) {
+			Back.render(f5);
+		}
+		if (north == ConnectionState.CONNECTED) {
+			Front.render(f5);
+		}
+		if (west == ConnectionState.CONNECTED) {
+			Left.render(f5);
+		}
+		if (east == ConnectionState.CONNECTED) {
+			Right.render(f5);
+		}
+		if (north == ConnectionState.CONNECTED && south == ConnectionState.CONNECTED) {
+			FrontBack.render(f5);
+		}
+		if (east == ConnectionState.CONNECTED && west == ConnectionState.CONNECTED) {
+			LeftRight.render(f5);
+		}
+		if (east == ConnectionState.CONNECTED && north == ConnectionState.CONNECTED) {
+			RightFront1.render(f5);
+			RightFront2.render(f5);
+			RightFront3.render(f5);
+			RightFront4.render(f5);
+			RightFront5.render(f5);
+		}
+		if (east == ConnectionState.CONNECTED && south == ConnectionState.CONNECTED) {
+			RightBack1.render(f5);
+			RightBack2.render(f5);
+			RightBack3.render(f5);
+			RightBack4.render(f5);
+			RightBack5.render(f5);
+		}
+		if (west == ConnectionState.CONNECTED && south == ConnectionState.CONNECTED) {
+			LeftBack1.render(f5);
+			LeftBack2.render(f5);
+			LeftBack3.render(f5);
+			LeftBack4.render(f5);
+			LeftBack5.render(f5);
+		}
+		if (west == ConnectionState.CONNECTED && north == ConnectionState.CONNECTED) {
+			FrontLeft1.render(f5);
+			FrontLeft2.render(f5);
+			FrontLeft3.render(f5);
+			FrontLeft4.render(f5);
+			FrontLeft5.render(f5);
+		}
+		if (east == ConnectionState.DISCONNECTED && north == ConnectionState.DISCONNECTED && south == ConnectionState.DISCONNECTED && west == ConnectionState.DISCONNECTED) {
+			Back.render(f5);
+			Front.render(f5);
+			FrontBack.render(f5);
+		}
 	}
 
 	@Override

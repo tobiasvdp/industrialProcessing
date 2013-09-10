@@ -44,7 +44,9 @@ import ip.industrialProcessing.transport.fluids.TileEntityPump;
 import ip.industrialProcessing.transport.fluids.TileEntityRainTank;
 import ip.industrialProcessing.transport.fluids.TileEntityTank;
 import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids;
-import ip.industrialProcessing.transport.items.TEtransportConveyorBelt;
+import ip.industrialProcessing.transport.items.conveyorBelt.TEtransportConveyorBelt;
+import ip.industrialProcessing.transport.items.conveyorInput.TEtransportConveyorBeltInput;
+import ip.industrialProcessing.transport.items.conveyorOutput.TEtransportConveyorBeltOutput;
 import net.minecraft.block.Block;
 import net.minecraft.src.ModLoader;
 import net.minecraftforge.common.MinecraftForge;
@@ -104,10 +106,14 @@ public class ConfigMachineBlocks {
 	private int BLmultiblockDisplayPanel = 734;
 	
 	private int BLtransportConveyorBelt = 735;
+	private int BLtransportConveyorBeltInput = 736;
+	private int BLtransportConveyorBeltOutput = 737;
 
 	public void registerMachineBlocks() {
 		
 		registerMachineBlock(IndustrialProcessing.BLtransportConveyorBelt, "IP.Trans.CBelt", "Conveyor belt", TEtransportConveyorBelt.class);
+		registerMachineBlock(IndustrialProcessing.BLtransportConveyorBeltInput, "IP.Trans.CBInput", "Conveyor belt import", TEtransportConveyorBeltInput.class);
+		registerMachineBlock(IndustrialProcessing.BLtransportConveyorBeltOutput, "IP.Trans.CBOutput", "Conveyor belt export", TEtransportConveyorBeltOutput.class);
 		
 		// multiblocks
 		registerMachineBlock(IndustrialProcessing.BLmultiblockDisplayPanel, "IP.MBD.Display", "Display panel", TEmultiblockDisplayPanel.class);
@@ -176,6 +182,12 @@ public class ConfigMachineBlocks {
 		return instance;
 	}
 
+	public static int getBLtransportConveyorBeltInput() {
+		return getInstance().BLtransportConveyorBeltInput;
+	}
+	public static int getBLtransportConveyorBeltOutput() {
+		return getInstance().BLtransportConveyorBeltOutput;
+	}
 	public static int getBLtransportConveyorBelt() {
 		return getInstance().BLtransportConveyorBelt;
 	}

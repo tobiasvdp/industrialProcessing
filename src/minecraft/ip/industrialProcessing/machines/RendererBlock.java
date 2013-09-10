@@ -58,7 +58,6 @@ public class RendererBlock implements ISimpleBlockRenderingHandler{
         return true;
     }
 
-
     @Override
     public int getRenderId()
     {
