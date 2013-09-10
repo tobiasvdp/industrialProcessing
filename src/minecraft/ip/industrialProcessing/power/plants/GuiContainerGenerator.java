@@ -1,14 +1,21 @@
 package ip.industrialProcessing.power.plants;
 
 import ip.industrialProcessing.machines.containers.gui.GuiContainerMachine;
+import ip.industrialProcessing.power.GeneratorProgress;
 import net.minecraft.entity.player.InventoryPlayer;
 
 public class GuiContainerGenerator extends GuiContainerMachine {
 
 	private TileEntityGenerator generator;
+	private ContainerGenerator container;
 
 	public GuiContainerGenerator(InventoryPlayer inventory, TileEntityGenerator entity) {
-		super(inventory, entity, new ContainerGenerator(inventory, entity), "Buildcraft Generator", "textures/gui/Generator.png");
+		this(inventory, entity, new ContainerGenerator(inventory, entity));
+	}
+
+	private GuiContainerGenerator(InventoryPlayer inventory, TileEntityGenerator entity, ContainerGenerator container) {
+		super(inventory, entity, container, "Buildcraft Generator", "textures/gui/Generator.png");
+		this.container = container;
 		this.generator = entity;
 	}
 
@@ -16,8 +23,10 @@ public class GuiContainerGenerator extends GuiContainerMachine {
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
 		super.drawGuiContainerBackgroundLayer(par1, par2, par3);
 
-		int volt = (int) this.generator.getVoltage();
-		int amps = (int) this.generator.getLastAmps();
+		GeneratorProgress progress = this.container.getProgress();
+
+		int volt = (int) progress.voltage;
+		int amps = (int) progress.amps;
 		int power = volt * amps;
 
 		int maxAmps = 50;
@@ -36,8 +45,10 @@ public class GuiContainerGenerator extends GuiContainerMachine {
 		fontRenderer.drawString("   Voltage:", 8, 40, 4210752);
 		fontRenderer.drawString("     Power:", 8, 52, 4210752);
 
-		float volt = Math.round(this.generator.getVoltage() * 10) / 10f;
-		float amps = Math.round(this.generator.getLastAmps() * 10) / 10f;
+		GeneratorProgress progress = this.container.getProgress();
+
+		float volt = Math.round(progress.voltage * 10) / 10f;
+		float amps = Math.round(progress.amps * 10) / 10f;
 		float power = Math.round(volt * amps * 10) / 10f;
 		fontRenderer.drawString(amps + "A", 120, 28, 4210752);
 		fontRenderer.drawString(volt + "V", 120, 40, 4210752);

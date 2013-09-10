@@ -10,10 +10,13 @@ import buildcraft.api.power.PowerHandler.Type;
 import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
 import ip.industrialProcessing.machines.animation.AnimationMode;
+import ip.industrialProcessing.machines.animation.IAnimationSyncable;
+import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
+import ip.industrialProcessing.power.IGeneratorProgress;
 import ip.industrialProcessing.power.PowerHelper;
 import ip.industrialProcessing.power.TileEntityPowerGenerator;
 
-public class TileEntityGenerator extends TileEntityPowerGenerator implements IAnimationProgress, IMechanicalMotion {
+public class TileEntityGenerator extends TileEntityPowerGenerator implements IAnimationProgress, IMechanicalMotion, IGeneratorProgress, IAnimationSyncable {
 
 	private AnimationHandler animationHandler;
 	private float lastCharge;
@@ -25,6 +28,11 @@ public class TileEntityGenerator extends TileEntityPowerGenerator implements IAn
 
 	@Override
 	public void updateEntity() {
+		if (!this.worldObj.isRemote) {
+			this.animationHandler.update();
+			TileAnimationSyncHandler.sendAnimationData(this, this.animationHandler);
+		}
+		super.updateEntity();
 	}
 
 	@Override
@@ -59,7 +67,7 @@ public class TileEntityGenerator extends TileEntityPowerGenerator implements IAn
 
 	@Override
 	public float getVoltage() {
-		return this.animationHandler.getSpeed();
+		return this.animationHandler.getSpeed()*100;
 	}
 
 	@Override
@@ -73,8 +81,16 @@ public class TileEntityGenerator extends TileEntityPowerGenerator implements IAn
 	}
 
 	@Override
-	public float setSpeed(float speed) {
-		this.animationHandler.setSpeed(speed);
-		return this.lastCharge;
+	public float setSpeed(ForgeDirection side, float speed) {
+		if (side == ForgeDirection.UP) {
+			this.animationHandler.setSpeed(speed);
+			return this.lastCharge;
+		}
+		return 0;
+	}
+
+	@Override
+	public AnimationHandler getAnimationHandler() {
+		return this.animationHandler;
 	}
 }

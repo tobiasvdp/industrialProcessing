@@ -12,6 +12,7 @@ import ip.industrialProcessing.machines.animation.tanks.TankHandler;
 import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
 import ip.industrialProcessing.transport.fluids.IPressuredTank;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -57,8 +58,23 @@ public class TileEntityTurbine extends TileEntityFluidMachine implements IAnimat
 
 			if (this.tankHandler.readDataFromTanks())
 				TileTankSyncHandler.sendTankData(this, this.tankHandler);
+
+			IMechanicalMotion generator = getGenerator();
+			if (generator != null) {
+				float speed = this.animationHandler.getSpeed();
+				float resistance = generator.setSpeed(ForgeDirection.UP, speed);
+				speed -= speed * resistance * this.animationHandler.DT;
+				this.animationHandler.setSpeed(speed);
+			}
 		}
 		this.animationHandler.update();
+	}
+
+	private IMechanicalMotion getGenerator() {
+		TileEntity entity = this.worldObj.getBlockTileEntity(xCoord, yCoord - 1, zCoord);
+		if (entity instanceof IMechanicalMotion)
+			return (IMechanicalMotion) entity;
+		return null;
 	}
 
 	private void addEnergy(int waterFill) {
