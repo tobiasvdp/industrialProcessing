@@ -12,7 +12,7 @@ import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TEmultiblockDummy extends TileEntity {
+public class TEmultiblockDummy extends TileEntity implements ITEmultiblockDummy {
 	public void setModelID(int modelID) {
 		this.modelID = modelID;
 	}
@@ -32,11 +32,11 @@ public class TEmultiblockDummy extends TileEntity {
 	public TEmultiblockDummy() {
 
 	}
-	
-	public TEmultiblockCore getCore(){
-		if(loadedFromNBT){
+
+	public TEmultiblockCore getCore() {
+		if (loadedFromNBT) {
 			core = (TEmultiblockCore) worldObj.getBlockTileEntity(coreDataFromNBT[0], coreDataFromNBT[1], coreDataFromNBT[2]);
-			loadedFromNBT=false;
+			loadedFromNBT = false;
 		}
 		return core;
 	}
@@ -109,7 +109,7 @@ public class TEmultiblockDummy extends TileEntity {
 		state = MultiblockState.values()[nbttagcompound1.getInteger("state")];
 
 		nbttaglist = nbt.getTagList("Core");
-		
+
 		if (nbttaglist.tagCount() != 0) {
 			nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(0);
 			int x = nbttagcompound1.getInteger("x");
@@ -121,8 +121,8 @@ public class TEmultiblockDummy extends TileEntity {
 			int z = nbttagcompound1.getInteger("z");
 
 			loadedFromNBT = true;
-			coreDataFromNBT = new int[]{x,y,z};
-			
+			coreDataFromNBT = new int[] { x, y, z };
+
 		}
 
 	}
@@ -213,21 +213,37 @@ public class TEmultiblockDummy extends TileEntity {
 	public int getID() {
 		return ID;
 	}
-	
-	 @Override
-	    public Packet getDescriptionPacket() { 
+
+	@Override
+	public Packet getDescriptionPacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		this.writeToNBT(nbtTag);
 		return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
-	    }
+	}
 
-	    @Override
-	    public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
-	    	readFromNBT(packet.customParam1);
-	    }
+	@Override
+	public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
+		readFromNBT(packet.customParam1);
+	}
 
-		public MultiblockState getState() {
-			return state;
-		}
+	@Override
+	public MultiblockState getState() {
+		return state;
+	}
+
+	@Override
+	public int getX() {
+		return this.xCoord;
+	}
+
+	@Override
+	public int getY() {
+		return this.yCoord;
+	}
+
+	@Override
+	public int getZ() {
+		return this.zCoord;
+	}
 
 }
