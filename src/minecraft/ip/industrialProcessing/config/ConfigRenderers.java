@@ -40,6 +40,7 @@ public class ConfigRenderers {
 	private int BLmultiblockDisplayPanel;
 	private int BLtransportConveyorBelt;
 	private int rendererPumpId;
+	private int rendererRainTankID;
 
 	public static int getBLtransportConveyorBelt() {
 		return getInstance().BLtransportConveyorBelt;
@@ -262,11 +263,11 @@ public class ConfigRenderers {
 	}
 
 	public static int getRendererRainTankId() {
-		return getInstance().rendererTankID;
+		return getInstance().rendererRainTankID;
 	}
 
 	public static void setRendererRainTankId(int value) {
-		getInstance().rendererTankID = value;
+		getInstance().rendererRainTankID = value;
 	}
 
 	public static int getRendererEnergyCellId() {

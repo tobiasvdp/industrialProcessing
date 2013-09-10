@@ -129,7 +129,8 @@ public class ModelPump extends ModelAnimatedFluidMachine {
 
 	@Override
 	public void renderModelAnimated(float f5, float[] progress) {
-
+		if (progress == null)
+			return;
 		Support1.render(f5);
 		Support2.render(f5);
 		GL11.glPushMatrix();
