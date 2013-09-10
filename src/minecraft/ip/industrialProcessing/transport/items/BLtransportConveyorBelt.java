@@ -8,6 +8,7 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.machines.BlockMachineRendered;
+import ip.industrialProcessing.power.wire.TileEntityWire;
 
 public class BLtransportConveyorBelt extends BlockMachineRendered{
 
@@ -24,5 +25,10 @@ public class BLtransportConveyorBelt extends BlockMachineRendered{
     public int getRenderType() {
     	return ConfigRenderers.getBLtransportConveyorBelt();
     }
-
+    @Override
+    public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
+	super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
+	TEtransportConveyorBelt conveyorBelt = (TEtransportConveyorBelt) par1World.getBlockTileEntity(par2, par3, par4);
+	conveyorBelt.searchForConnections();
+    }
 }
