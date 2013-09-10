@@ -26,7 +26,7 @@ public class TEmultiblockRollingPress extends TEmultiblockCoreInv {
 		LayoutMultiblock layout = new LayoutMultiblock(2, 3, 0, 3, 2, 0);
 
 		
-		int index = 5;
+		int index = 22;
 		for(int i = 0; i>= -3;i--){
 		for(int j = -2;j<= 3;j++){
 			layout.setBlockID(j, 0, i,index, 1,0, IndustrialProcessing.BLmultiblockFrame.blockID);
