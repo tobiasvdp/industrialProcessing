@@ -20,7 +20,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Facing;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TEmultiblockCore extends TileEntity {
+public class TEmultiblockCore extends TileEntity implements ITEmultiblockCore {
 
 	private StructureMultiblock structure;
 	private TierCollection tierRequirments;
@@ -287,6 +287,7 @@ public class TEmultiblockCore extends TileEntity {
 		}
 	}
 
+	@Override
 	public MultiblockState getState() {
 		return state;
 	}
@@ -411,6 +412,18 @@ public class TEmultiblockCore extends TileEntity {
 	@Override
 	public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
 		readFromNBT(packet.customParam1);
+	}
+	@Override
+	public int getX() {
+		return this.xCoord;
+	}
+	@Override
+	public int getY() {
+		return this.yCoord;
+	}
+	@Override
+	public int getZ() {
+		return this.zCoord;
 	}
 
 }

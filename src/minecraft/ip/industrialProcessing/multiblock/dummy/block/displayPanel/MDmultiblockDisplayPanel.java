@@ -223,12 +223,22 @@ public class MDmultiblockDisplayPanel extends ModelingMultiblock {
 		ToggleButton4.render(f5);
 		ViewPanel.render(f5);
 		
-		if(connection == 0)
+		if(connection == 0){
 			GL11.glColor3f(5.0f, 0.0f, 0.0f);
-		lightOn.render(f5);
+			lightOn.render(f5);
+		}else{
+			GL11.glColor3f(0.0f, 5.0f, 0.0f);
+			lightOn.render(f5);
+		}
 		
+		if(connection == 2){
+			GL11.glColor3f(0.0f, 5.0f, 0.0f);
+			lightWarning.render(f5);
+		}else{
+			GL11.glColor3f(5.0f, 0.0f, 0.0f);
+			lightWarning.render(f5);
+		}
 		GL11.glColor3f(5.0f, 0.0f, 0.0f);
-		lightWarning.render(f5);
 		lightOff.render(f5);
 		
 		GL11.glPopMatrix();
