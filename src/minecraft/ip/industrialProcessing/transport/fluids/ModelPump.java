@@ -133,11 +133,11 @@ public class ModelPump extends ModelAnimatedFluidMachine {
 		Support1.render(f5);
 		Support2.render(f5);
 		GL11.glPushMatrix();
-		GL11.glTranslatef(progress[0] * 10, 0, 0);
+		GL11.glTranslatef(progress[0] * -9 / 16, 0, 0);
 		Piston1.render(f5);
+		Piston2.render(f5);
 		Piston3.render(f5);
 		GL11.glPopMatrix();
-		Piston2.render(f5);
 		Side1.render(f5);
 		Side2.render(f5);
 		PowerInput.render(f5);

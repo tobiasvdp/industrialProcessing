@@ -41,11 +41,12 @@ import ip.industrialProcessing.power.storage.BlockEnergyCell;
 import ip.industrialProcessing.power.wire.BlockWire;
 import ip.industrialProcessing.transport.fluids.BlockManoMeter;
 import ip.industrialProcessing.transport.fluids.BlockPump;
+import ip.industrialProcessing.transport.fluids.BlockRainTank;
 import ip.industrialProcessing.transport.fluids.BlockTank;
 import ip.industrialProcessing.transport.fluids.BlockTransportFluids;
 
 public interface ISetupMachineBlocks {
-	
+
 	// machines
 	public final static BlockCrusher blockCrusher = new BlockCrusher();
 	public final static BlockFilter blockFilter = new BlockFilter();
@@ -75,27 +76,28 @@ public interface ISetupMachineBlocks {
 	public final static BlockSolidBurner blockSolidBurner = new BlockSolidBurner();
 	public final static BlockBoiler blockBoiler = new BlockBoiler();
 	public final static BlockTurbine blockTurbine = new BlockTurbine();
-	
+
 	// create fluidpipe
 	public final static BlockTransportFluids blockTransportFluids = new BlockTransportFluids();
 	public final static BlockPump blockPump = new BlockPump();
 	public final static BlockTank blockTank = new BlockTank();
+	public final static BlockRainTank blockRainTank = new BlockRainTank();
 	public final static BlockManoMeter blockManometer = new BlockManoMeter();
-	
-	//multiblocks
+
+	// multiblocks
 	public final static BLmultiblockFrame BLmultiblockFrame = new BLmultiblockFrame();
 	public final static BLmultiblockHotPress BLmultiblockHotPress = new BLmultiblockHotPress();
-	public final static BLmultiblockWeldingStation BLmultiblockWeldingStation= new BLmultiblockWeldingStation();
-	public final static BLmultiblockScreen BLmultiblockScreen= new BLmultiblockScreen();
-	public final static BLmultiblockWeldingTableExt BLmultiblockWeldingTableExt= new BLmultiblockWeldingTableExt();
-	public final static BLmultiblockInvInput BLmultiblockInvInput= new BLmultiblockInvInput();
-	public final static BLmultiblockInvOutput BLmultiblockInvOutput= new BLmultiblockInvOutput();
-	public final static BLmultiblockToggleButton BLmultiblockToggleButton= new BLmultiblockToggleButton();
-	public final static BLmultiblockToggleButton2 BLmultiblockToggleButton2= new BLmultiblockToggleButton2();
-	public final static BLmultiblockElevator BLmultiblockElevator= new BLmultiblockElevator();
-	public final static BLmultiblockLiftDoor BLmultiblockLiftDoor= new BLmultiblockLiftDoor();
-	public final static BLmultiblockWheel BLmultiblockWheel= new BLmultiblockWheel();
-	public final static BLmultiblockRollingPress BLmultiblockRollingPress= new BLmultiblockRollingPress();
-	public final static BLmultiblockWheelConnector BLmultiblockWheelConnector= new BLmultiblockWheelConnector();
-	public final static BLmultiblockDisplayPanel BLmultiblockDisplayPanel= new BLmultiblockDisplayPanel();
+	public final static BLmultiblockWeldingStation BLmultiblockWeldingStation = new BLmultiblockWeldingStation();
+	public final static BLmultiblockScreen BLmultiblockScreen = new BLmultiblockScreen();
+	public final static BLmultiblockWeldingTableExt BLmultiblockWeldingTableExt = new BLmultiblockWeldingTableExt();
+	public final static BLmultiblockInvInput BLmultiblockInvInput = new BLmultiblockInvInput();
+	public final static BLmultiblockInvOutput BLmultiblockInvOutput = new BLmultiblockInvOutput();
+	public final static BLmultiblockToggleButton BLmultiblockToggleButton = new BLmultiblockToggleButton();
+	public final static BLmultiblockToggleButton2 BLmultiblockToggleButton2 = new BLmultiblockToggleButton2();
+	public final static BLmultiblockElevator BLmultiblockElevator = new BLmultiblockElevator();
+	public final static BLmultiblockLiftDoor BLmultiblockLiftDoor = new BLmultiblockLiftDoor();
+	public final static BLmultiblockWheel BLmultiblockWheel = new BLmultiblockWheel();
+	public final static BLmultiblockRollingPress BLmultiblockRollingPress = new BLmultiblockRollingPress();
+	public final static BLmultiblockWheelConnector BLmultiblockWheelConnector = new BLmultiblockWheelConnector();
+	public final static BLmultiblockDisplayPanel BLmultiblockDisplayPanel = new BLmultiblockDisplayPanel();
 }

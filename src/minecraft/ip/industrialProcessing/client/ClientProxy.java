@@ -72,10 +72,12 @@ import ip.industrialProcessing.power.wire.ModelWire;
 import ip.industrialProcessing.power.wire.TileEntityWire;
 import ip.industrialProcessing.transport.fluids.ModelManoMeter;
 import ip.industrialProcessing.transport.fluids.ModelPump;
+import ip.industrialProcessing.transport.fluids.ModelRainTank;
 import ip.industrialProcessing.transport.fluids.ModelTank;
 import ip.industrialProcessing.transport.fluids.ModelTransportFluids;
 import ip.industrialProcessing.transport.fluids.TileEntityManoMeter;
 import ip.industrialProcessing.transport.fluids.TileEntityPump;
+import ip.industrialProcessing.transport.fluids.TileEntityRainTank;
 import ip.industrialProcessing.transport.fluids.TileEntityTank;
 import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -95,6 +97,8 @@ public class ClientProxy extends CommonProxy {
 	private static final ModelAnimatedFluidMachine pump = new ModelPump();
 	private static final ModelConnected transportFluids = new ModelTransportFluids();
 	private static final ModelAnimatedMachine EnergyCell = new ModelEnergyCell();
+	private static final ModelConnectedFluid rainTank = new ModelRainTank();
+
 	private static final ModelAnimatedMachine crankGenerator = new ModelCrankGenerator(true);
 	private static final ModelAnimatedMachine buildcraftGenerator = new ModelCrankGenerator(false);
 	private static final ModelStateMachine blastFurnace = new ModelBlastFurnace();
@@ -157,6 +161,10 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTank.class, new RendererTileEntityConnectedFluid(IndustrialProcessing.blockTank, "ModelTank", tank));
 		ConfigRenderers.setRendererTankId(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererTankId(), new TileEntityTank()));
+
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRainTank.class, new RendererTileEntityConnectedFluid(IndustrialProcessing.blockRainTank, "ModelRainTank", rainTank));
+		ConfigRenderers.setRendererRainTankId(RenderingRegistry.getNextAvailableRenderId());
+		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererRainTankId(), new TileEntityRainTank()));
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTurbine.class, new RendererTileEntityFluidWorker(IndustrialProcessing.blockTurbine, "ModelTurbine", turbine));
 		ConfigRenderers.setRendererTurbineId(RenderingRegistry.getNextAvailableRenderId());

@@ -254,6 +254,14 @@ public class ConfigRenderers {
 		getInstance().rendererTankID = value;
 	}
 
+	public static int getRendererRainTankId() {
+		return getInstance().rendererTankID;
+	}
+
+	public static void setRendererRainTankId(int value) {
+		getInstance().rendererTankID = value;
+	}
+
 	public static int getRendererEnergyCellId() {
 		return getInstance().rendererEnergyCellID;
 	}

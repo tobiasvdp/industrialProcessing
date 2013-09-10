@@ -54,18 +54,18 @@ public class TileEntityPump extends TileEntityMachine implements IPowerAcceptor,
 	public void updateEntity() {
 		super.updateEntity();
 		if (!this.worldObj.isRemote) {
-			int maxTransfer = Math.min(100, this.storedPower);
+			int maxTransfer = Math.min(500, this.storedPower*4);
 			int transfer = 2000 - (this.outputPressure - this.inputPressure);
 			transfer = Math.min(maxTransfer, Math.max(0, transfer));
 			int center = (this.inputPressure + this.outputPressure) / 2;
 			this.inputPressure -= transfer + center;
 			this.outputPressure += transfer - center;
-			this.storedPower -= transfer;
+			this.storedPower -= transfer / 4;
 
-			this.animationHandler.setSpeed(transfer / 2000f);
+			int mul = this.animationHandler.isIncrementing() ? 1 : 5;
+			this.animationHandler.setSpeed(transfer / 100f * mul);
 			this.animationHandler.update();
-			TileAnimationSyncHandler.sendAnimationData(this, this.animationHandler); 
-			System.out.println(transfer);
+			TileAnimationSyncHandler.sendAnimationData(this, this.animationHandler);  
 		}
 	}
 
