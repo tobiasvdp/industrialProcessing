@@ -96,6 +96,7 @@ public abstract class BlockMachine extends BlockContainer {
 	}
 
 	public static int getMetadataFromForward(ForgeDirection dir) {
+		if(dir == null) return 0;
 		switch (dir) {
 		case NORTH:
 			return 0;

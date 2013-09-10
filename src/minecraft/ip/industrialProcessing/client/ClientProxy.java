@@ -70,6 +70,7 @@ import ip.industrialProcessing.power.storage.ModelEnergyCell;
 import ip.industrialProcessing.power.storage.TileEntityEnergyCell;
 import ip.industrialProcessing.power.wire.ModelWire;
 import ip.industrialProcessing.power.wire.TileEntityWire;
+import ip.industrialProcessing.transport.fluids.ModelManoMeter;
 import ip.industrialProcessing.transport.fluids.ModelTank;
 import ip.industrialProcessing.transport.fluids.ModelTransportFluids;
 import ip.industrialProcessing.transport.fluids.TileEntityManoMeter;
@@ -88,6 +89,7 @@ public class ClientProxy extends CommonProxy {
 	private static final ModelConnected wire = new ModelWire();
 	private static final ModelAnimatedMachine voltMeter = new ModelVoltMeter(false);
 	private static final ModelAnimatedMachine ampMeter = new ModelVoltMeter(true);
+	private static final ModelAnimatedMachine manoMeter = new ModelManoMeter();
 	private static final ModelConnected transportFluids = new ModelTransportFluids();
 	private static final ModelAnimatedMachine EnergyCell = new ModelEnergyCell();
 	private static final ModelAnimatedMachine crankGenerator = new ModelCrankGenerator(true);
@@ -162,7 +164,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererBoilerId(), new TileEntityBoiler()));
 
 		// TODO: get proper model
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityManoMeter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockManometer, "ModelVoltMeter", voltMeter));
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityManoMeter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockManometer, "ModelManoMeter", manoMeter));
 		ConfigRenderers.setRendererManometerId(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererManometerId(), new TileEntityManoMeter()));
 
