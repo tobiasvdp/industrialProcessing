@@ -117,13 +117,13 @@ public class TileEntityBoiler extends TileEntityFluidWorkerMachine implements IH
 	}
 
 	@Override
-	public int getPressure(ForgeDirection from) {
+	public float getPressure(ForgeDirection from) {
 		if (from == ForgeDirection.UP) {
 			FluidTankInfo[] info = getTankInfo(from);
 			if (info.length > 0) {
 				FluidTankInfo tank = info[0];
 				int amount = tank.fluid == null ? 0 : tank.fluid.amount;
-				return (int) (amount * 1000 / tank.capacity * this.heat / 10);
+				return (amount * 1000f / tank.capacity * this.heat / 250f);
 			}
 		}
 		return 0;

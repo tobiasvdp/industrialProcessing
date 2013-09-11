@@ -389,7 +389,7 @@ public class ModelTank extends ModelConnectedFluid {
 			int h = 14;
 			float yBot = 8 - bottom + 16; 
 			Tessellator tessellator = Tessellator.instance;
-			if (up == ConnectionState.CONNECTED || y < 1) {
+			if (up == ConnectionState.CONNECTED || fluidPercentage < 1) {
 				tessellator.startDrawingQuads();
 
 				tessellator.addVertexWithUV((double) (x + 0) * f, (double) y * f, (double) (z + 0) * f, (double) icon.getMinU(), (double) icon.getMinV());

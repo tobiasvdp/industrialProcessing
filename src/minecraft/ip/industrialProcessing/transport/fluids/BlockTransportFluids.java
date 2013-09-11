@@ -36,7 +36,7 @@ public class BlockTransportFluids extends BlockTransport {
 	int level = info.fluid == null ? 0 : info.fluid.amount;
 	String name = info.fluid == null ? "" : info.fluid.getFluid().getName();
 	String side = par1World.isRemote ? "client" : "server";
-	par5EntityPlayer.addChatMessage(side + " " + name + " level: " + level + "mB " + entity.pressure + " mbar");
+	par5EntityPlayer.addChatMessage(side + " " + name + " level: " + level + "mB " + entity.getPressure() + " mbar");
 	return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer, par6, par7, par8, par9);
 
     }
