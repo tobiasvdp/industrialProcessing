@@ -40,7 +40,7 @@ public class RendererTileEntityFluidWorker extends RendererTileEntityAnimated {
 					Fluid fluid = FluidRegistry.getFluid(fluidId);
 					if (fluid != null) {
 						Icon icon = fluid.getStillIcon();
-						this.model.renderLiquid(0.0625f, l, amount / (float) capacity, icon);
+						this.model.renderLiquid(tl, 0.0625f, l, amount / (float) capacity, icon);
 					}
 				}
 			}

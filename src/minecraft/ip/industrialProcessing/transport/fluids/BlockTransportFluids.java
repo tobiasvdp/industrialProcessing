@@ -26,7 +26,7 @@ public class BlockTransportFluids extends BlockTransport {
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityValve();
+		return new TileEntityTransportFluids();
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package ip.industrialProcessing.power.meters;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.tileentity.TileEntity;
 import ip.industrialProcessing.client.render.ModelAnimatedMachine;
 
 public class ModelVoltMeter extends ModelAnimatedMachine {
@@ -88,7 +89,7 @@ public class ModelVoltMeter extends ModelAnimatedMachine {
 	}
 
 	@Override
-	public void renderModelAnimated(float f5, float[] progress) {
+	public void renderModelAnimated(TileEntity tileEntity, float f5, float[] progress) {
 
 		Support1.render(f5);
 		Support3.render(f5);
@@ -112,7 +113,7 @@ public class ModelVoltMeter extends ModelAnimatedMachine {
 
 	@Override
 	public void renderModel(float f5) {
-		renderModelAnimated(f5, new float[] { 0 });
+		renderModelAnimated(null, f5, new float[] { 0 });
 	}
 
 }

@@ -3,6 +3,7 @@ package ip.industrialProcessing.machines.magneticSeparator;
 import ip.industrialProcessing.client.render.ModelAnimatedMachine;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.tileentity.TileEntity;
 
 public class ModelMagneticSeperator extends ModelAnimatedMachine {
 
@@ -212,7 +213,7 @@ public class ModelMagneticSeperator extends ModelAnimatedMachine {
 	}
 
 	@Override
-	public void renderModelAnimated(float f, float[] progress) {
+	public void renderModelAnimated(TileEntity tileEntity, float f, float[] progress) {
 		// TODO: animate?
 		Shape5.render(f);
 		Shape6.render(f);
@@ -242,7 +243,7 @@ public class ModelMagneticSeperator extends ModelAnimatedMachine {
 
 	@Override
 	public void renderModel(float f) {
-		renderModelAnimated(f, new float[] { 0f });
+		renderModelAnimated(null, f, new float[] { 0f });
 	}
 
 }

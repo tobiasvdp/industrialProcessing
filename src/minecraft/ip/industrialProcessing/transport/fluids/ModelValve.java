@@ -1,17 +1,17 @@
 package ip.industrialProcessing.transport.fluids;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
-import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.client.render.ConnectionState;
-import ip.industrialProcessing.client.render.ModelConnected;
-import ip.industrialProcessing.client.render.ModelConnectedFluid;
+import ip.industrialProcessing.client.render.ModelConnectedFluidAnimated;
+import ip.industrialProcessing.machines.BlockMachine;
 
-public class ModelTransportFluids extends ModelConnectedFluid {
+public class ModelValve extends ModelConnectedFluidAnimated {
 
 	// fields
 	ModelRenderer Center;
@@ -31,7 +31,21 @@ public class ModelTransportFluids extends ModelConnectedFluid {
 	ModelRenderer NorthSouth;
 	ModelRenderer UpDown;
 
-	public ModelTransportFluids() {
+	ModelRenderer ValveRod12;
+	ModelRenderer ValveRod5;
+	ModelRenderer ValveRod6;
+	ModelRenderer ValveRod7;
+	ModelRenderer ValveRod8;
+	ModelRenderer ValveRod9;
+	ModelRenderer ValveRod10;
+	ModelRenderer ValveRod11;
+	ModelRenderer ValveRod1;
+	ModelRenderer ValveRod2;
+	ModelRenderer ValveRod3;
+	ModelRenderer ValveRod4;
+	ModelRenderer ValveAxle;
+
+	public ModelValve() {
 		textureWidth = 32;
 		textureHeight = 32;
 
@@ -131,78 +145,84 @@ public class ModelTransportFluids extends ModelConnectedFluid {
 		UpDown.setTextureSize(32, 32);
 		UpDown.mirror = true;
 		setRotation(UpDown, 0F, 0F, 0F);
-	}
-
-	@Override
-	public void renderModelConnected(TileEntity tl, float f, ConnectionState north, ConnectionState west, ConnectionState south, ConnectionState east, ConnectionState up, ConnectionState down) {
-		boolean hideCenter = false;
-		hideCenter |= renderStraigh(f, NorthSouth, NorthConnector, SouthConnector, north, south, east, west, up, down);
-		hideCenter |= renderStraigh(f, EastWest, EastConnector, WestConnector, east, west, north, south, up, down);
-		hideCenter |= renderStraigh(f, UpDown, UpConnector, DownConnector, up, down, east, west, north, south);
-		render(Up, UpConnector, up, f);
-		render(Down, DownConnector, down, f);
-		render(North, NorthConnector, north, f);
-		render(West, WestConnector, west, f);
-		render(South, SouthConnector, south, f);
-		render(East, EastConnector, east, f);
-		if (!hideCenter)
-			Center.render(f);
-	}
-
-	private boolean renderStraigh(float f, ModelRenderer northSouth2, ModelRenderer northConnector2, ModelRenderer southConnector2, ConnectionState north2, ConnectionState south2, ConnectionState east2, ConnectionState west2, ConnectionState up2, ConnectionState down2) {
-		if (north2 == ConnectionState.DISCONNECTED)
-			return false;
-		if (south2 == ConnectionState.DISCONNECTED)
-			return false;
-		if (west2 != ConnectionState.DISCONNECTED)
-			return false;
-		if (east2 != ConnectionState.DISCONNECTED)
-			return false;
-		if (up2 != ConnectionState.DISCONNECTED)
-			return false;
-		if (down2 != ConnectionState.DISCONNECTED)
-			return false;
-
-		northSouth2.render(f);
-		if (north2 == ConnectionState.PLUGGED)
-			northConnector2.render(f);
-		if (south2 == ConnectionState.PLUGGED)
-			southConnector2.render(f);
-		return true;
-	}
-
-	@Override
-	public void renderModelConnectedFluid(TileEntity tl, float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, Icon icon) {
-		fluidPercentage *= 0.9f;
-		boolean renderCap = (up != ConnectionState.DISCONNECTED) != (down != ConnectionState.DISCONNECTED) || (west != ConnectionState.DISCONNECTED) != (east != ConnectionState.DISCONNECTED) || (south != ConnectionState.DISCONNECTED) != (north != ConnectionState.DISCONNECTED) || (north == south && south == east && east == west && west == up && up == down && down == ConnectionState.DISCONNECTED);
-		if (up != ConnectionState.DISCONNECTED && down != ConnectionState.DISCONNECTED)
-			renderStraightY(f, icon, fluidPercentage);
-		else {
-			if (up != ConnectionState.DISCONNECTED)
-				renderUp(f, icon, fluidPercentage);
-			else if (down != ConnectionState.DISCONNECTED)
-				renderDown(f, icon, fluidPercentage);
-		}
-		if (west != ConnectionState.DISCONNECTED && east != ConnectionState.DISCONNECTED)
-			renderStraightX(f, icon, fluidPercentage);
-		else {
-			if (east != ConnectionState.DISCONNECTED)
-				renderEast(f, icon, fluidPercentage);
-			else if (west != ConnectionState.DISCONNECTED)
-				renderWest(f, icon, fluidPercentage);
-		}
-		if (north != ConnectionState.DISCONNECTED && south != ConnectionState.DISCONNECTED)
-			renderStraightZ(f, icon, fluidPercentage);
-		else {
-			if (north != ConnectionState.DISCONNECTED)
-				renderNorth(f, icon, fluidPercentage);
-			else if (south != ConnectionState.DISCONNECTED)
-				renderSouth(f, icon, fluidPercentage);
-		}
-
-		if (renderCap) {
-			renderCap(f, icon, fluidPercentage);
-		}
+		ValveRod12 = new ModelRenderer(this, 22, 0);
+		ValveRod12.addBox(-2F, -4.8285F, 0F, 4, 1, 1);
+		ValveRod12.setRotationPoint(0F, 16F, -5F);
+		ValveRod12.setTextureSize(32, 32);
+		ValveRod12.mirror = true;
+		setRotation(ValveRod12, 0F, 0F, -0.7853982F);
+		ValveRod5 = new ModelRenderer(this, 22, 4);
+		ValveRod5.addBox(-2F, -4.8285F, 0F, 4, 1, 1);
+		ValveRod5.setRotationPoint(0F, 16F, -5F);
+		ValveRod5.setTextureSize(32, 32);
+		ValveRod5.mirror = true;
+		setRotation(ValveRod5, 0F, 0F, 0F);
+		ValveRod6 = new ModelRenderer(this, 22, 0);
+		ValveRod6.addBox(-2F, -4.8285F, 0F, 4, 1, 1);
+		ValveRod6.setRotationPoint(0F, 16F, -5F);
+		ValveRod6.setTextureSize(32, 32);
+		ValveRod6.mirror = true;
+		setRotation(ValveRod6, 0F, 0F, 0.7853982F);
+		ValveRod7 = new ModelRenderer(this, 22, 0);
+		ValveRod7.addBox(-2F, -4.8285F, 0F, 4, 1, 1);
+		ValveRod7.setRotationPoint(0F, 16F, -5F);
+		ValveRod7.setTextureSize(32, 32);
+		ValveRod7.mirror = true;
+		setRotation(ValveRod7, 0F, 0F, 1.570796F);
+		ValveRod8 = new ModelRenderer(this, 22, 0);
+		ValveRod8.addBox(-2F, -4.8285F, 0F, 4, 1, 1);
+		ValveRod8.setRotationPoint(0F, 16F, -5F);
+		ValveRod8.setTextureSize(32, 32);
+		ValveRod8.mirror = true;
+		setRotation(ValveRod8, 0F, 0F, 2.356194F);
+		ValveRod9 = new ModelRenderer(this, 22, 4);
+		ValveRod9.addBox(-2F, -4.8285F, 0F, 4, 1, 1);
+		ValveRod9.setRotationPoint(0F, 16F, -5F);
+		ValveRod9.setTextureSize(32, 32);
+		ValveRod9.mirror = true;
+		setRotation(ValveRod9, 0F, 0F, 3.141593F);
+		ValveRod10 = new ModelRenderer(this, 22, 0);
+		ValveRod10.addBox(-2F, -4.8285F, 0F, 4, 1, 1);
+		ValveRod10.setRotationPoint(0F, 16F, -5F);
+		ValveRod10.setTextureSize(32, 32);
+		ValveRod10.mirror = true;
+		setRotation(ValveRod10, 0F, 0F, -2.356194F);
+		ValveRod11 = new ModelRenderer(this, 22, 0);
+		ValveRod11.addBox(-2F, -4.8285F, 0F, 4, 1, 1);
+		ValveRod11.setRotationPoint(0F, 16F, -5F);
+		ValveRod11.setTextureSize(32, 32);
+		ValveRod11.mirror = true;
+		setRotation(ValveRod11, 0F, 0F, -1.570796F);
+		ValveRod1 = new ModelRenderer(this, 22, 2);
+		ValveRod1.addBox(0F, -0.5F, 0F, 4, 1, 1);
+		ValveRod1.setRotationPoint(0F, 16F, -5F);
+		ValveRod1.setTextureSize(32, 32);
+		ValveRod1.mirror = true;
+		setRotation(ValveRod1, 0F, 0F, -1.570796F);
+		ValveRod2 = new ModelRenderer(this, 22, 0);
+		ValveRod2.addBox(0F, -0.5F, 0F, 4, 1, 1);
+		ValveRod2.setRotationPoint(0F, 16F, -5F);
+		ValveRod2.setTextureSize(32, 32);
+		ValveRod2.mirror = true;
+		setRotation(ValveRod2, 0F, 0F, 0F);
+		ValveRod3 = new ModelRenderer(this, 21, 2);
+		ValveRod3.addBox(0F, -0.5F, 0F, 4, 1, 1);
+		ValveRod3.setRotationPoint(0F, 16F, -5F);
+		ValveRod3.setTextureSize(32, 32);
+		ValveRod3.mirror = true;
+		setRotation(ValveRod3, 0F, 0F, 1.570796F);
+		ValveRod4 = new ModelRenderer(this, 21, 0);
+		ValveRod4.addBox(0F, -0.5F, 0F, 4, 1, 1);
+		ValveRod4.setRotationPoint(0F, 16F, -5F);
+		ValveRod4.setTextureSize(32, 32);
+		ValveRod4.mirror = true;
+		setRotation(ValveRod4, 0F, 0F, 3.141593F);
+		ValveAxle = new ModelRenderer(this, 24, 6);
+		ValveAxle.addBox(-1F, 0.3333333F, -1F, 2, 4, 2);
+		ValveAxle.setRotationPoint(0F, 16F, -6F);
+		ValveAxle.setTextureSize(32, 32);
+		ValveAxle.mirror = true;
+		setRotation(ValveAxle, 1.570796F, 0F, 0F);
 	}
 
 	private void renderUp(float f, Icon icon, float s) {
@@ -361,4 +381,64 @@ public class ModelTransportFluids extends ModelConnectedFluid {
 		tessellator.addVertexWithUV((double) (x + 0) * f, (double) (y + height) * f, (double) (z + 0) * f, (double) icon.getMinU() + uCorrect, (double) icon.getMaxV() - vCorrect);
 		tessellator.draw();
 	}
+
+	@Override
+	public void renderModelConnectedFluidAnimated(TileEntity tl, float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, Icon icon, float[] animation) {
+		fluidPercentage *= 0.9f;
+
+		if (north != ConnectionState.DISCONNECTED && tankSlot == ForgeDirection.NORTH.ordinal())
+			renderNorth(f, icon, fluidPercentage);
+		if (east != ConnectionState.DISCONNECTED && tankSlot == ForgeDirection.EAST.ordinal())
+			renderEast(f, icon, fluidPercentage);
+		if (south != ConnectionState.DISCONNECTED && tankSlot == ForgeDirection.SOUTH.ordinal())
+			renderSouth(f, icon, fluidPercentage);
+		if (west != ConnectionState.DISCONNECTED && tankSlot == ForgeDirection.WEST.ordinal())
+			renderWest(f, icon, fluidPercentage);
+		if (up != ConnectionState.DISCONNECTED && tankSlot == ForgeDirection.UP.ordinal())
+			renderUp(f, icon, fluidPercentage);
+		if (down != ConnectionState.DISCONNECTED && tankSlot == ForgeDirection.DOWN.ordinal())
+			renderDown(f, icon, fluidPercentage);
+	}
+
+	@Override
+	public void renderModelConnectedAnimated(TileEntity tl, float f, ConnectionState north, ConnectionState west, ConnectionState south, ConnectionState east, ConnectionState up, ConnectionState down, float[] animation) {
+		render(Up, UpConnector, up, f);
+		render(Down, DownConnector, down, f);
+		render(North, NorthConnector, north, f);
+		render(West, WestConnector, west, f);
+		render(South, SouthConnector, south, f);
+		render(East, EastConnector, east, f);
+		Center.render(f);
+
+		int dir = 0;
+		if (tl instanceof TileEntityValve) {
+			TileEntityValve valve = (TileEntityValve) tl;
+			dir = BlockMachine.getMetadataFromForward(valve.getForwardDirection());
+		}
+
+		if (animation != null) {
+			float ani = animation[0];
+			GL11.glPushMatrix();
+			float translate = 1f;
+			GL11.glTranslatef(0, translate, 0);
+			GL11.glRotatef(ani * 270f, 0, 0, 1);
+			GL11.glTranslatef(0, -translate, 0);
+			GL11.glRotatef(dir * 90, 0, 1, 0);
+			ValveAxle.render(f);
+			ValveRod1.render(f);
+			ValveRod2.render(f);
+			ValveRod3.render(f);
+			ValveRod4.render(f);
+			ValveRod5.render(f);
+			ValveRod6.render(f);
+			ValveRod7.render(f);
+			ValveRod8.render(f);
+			ValveRod9.render(f);
+			ValveRod10.render(f);
+			ValveRod11.render(f);
+			ValveRod12.render(f);
+			GL11.glPopMatrix();
+		}
+	}
+
 }

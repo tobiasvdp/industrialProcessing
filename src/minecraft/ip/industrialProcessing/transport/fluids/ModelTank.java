@@ -2,6 +2,7 @@ package ip.industrialProcessing.transport.fluids;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.ModelConnected;
@@ -307,7 +308,7 @@ public class ModelTank extends ModelConnectedFluid {
 	}
 
 	@Override
-	public void renderModelConnected(float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down) {
+	public void renderModelConnected(TileEntity tl, float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down) {
 
 		if (up == ConnectionState.CONNECTED && down == ConnectionState.CONNECTED)
 			renderCenter(f);
@@ -376,7 +377,7 @@ public class ModelTank extends ModelConnectedFluid {
 	}
 
 	@Override
-	public void renderModelConnectedFluid(float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, Icon icon) {
+	public void renderModelConnectedFluid(TileEntity tl, float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, Icon icon) {
 		if (tankSlot == 0) {
 			int bottom = down == ConnectionState.CONNECTED ? 0 : 1;
 			int top = up == ConnectionState.CONNECTED ? 0 : 1;

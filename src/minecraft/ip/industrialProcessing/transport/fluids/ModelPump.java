@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import ip.industrialProcessing.client.render.ModelAnimatedFluidMachine;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 
 public class ModelPump extends ModelAnimatedFluidMachine {
@@ -122,13 +123,13 @@ public class ModelPump extends ModelAnimatedFluidMachine {
 	}
 
 	@Override
-	public void renderLiquid(float f, int tankSlot, float percentageFilled, Icon icon) {
+	public void renderLiquid(TileEntity tl, float f, int tankSlot, float percentageFilled, Icon icon) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void renderModelAnimated(float f5, float[] progress) {
+	public void renderModelAnimated(TileEntity tileEntity, float f5, float[] progress) {
 		if (progress == null)
 			return;
 		Support1.render(f5);
@@ -153,7 +154,7 @@ public class ModelPump extends ModelAnimatedFluidMachine {
 
 	@Override
 	public void renderModel(float f) {
-		renderModelAnimated(f, new float[] { 0 });
+		renderModelAnimated(null, f, new float[] { 0 });
 	}
 
 }

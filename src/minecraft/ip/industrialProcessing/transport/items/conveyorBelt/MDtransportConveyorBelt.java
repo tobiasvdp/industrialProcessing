@@ -4,6 +4,7 @@ import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.ModelConnected;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.tileentity.TileEntity;
 
 public class MDtransportConveyorBelt extends ModelConnected {
 	// fields
@@ -234,7 +235,7 @@ public class MDtransportConveyorBelt extends ModelConnected {
 	}
 
 	@Override
-	public void renderModelConnected(float f5, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down) {
+	public void renderModelConnected(TileEntity tl, float f5, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down) {
 		if (south == ConnectionState.CONNECTED) {
 			Back.render(f5);
 		}

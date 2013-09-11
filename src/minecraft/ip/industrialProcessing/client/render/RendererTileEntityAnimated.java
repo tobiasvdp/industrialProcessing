@@ -33,6 +33,6 @@ public class RendererTileEntityAnimated extends RendererTileEntity {
 		/*
 		 * Place your rendering code here.
 		 */
-		this.model.renderModelAnimated(0.0625F, animation);
+		this.model.renderModelAnimated(tl, 0.0625F, animation);
 	}
 }

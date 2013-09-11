@@ -3,6 +3,7 @@ package ip.industrialProcessing.power.plants;
 import ip.industrialProcessing.client.render.ModelAnimatedFluidMachine;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 
 public class ModelBoiler extends ModelAnimatedFluidMachine {
@@ -254,15 +255,15 @@ public class ModelBoiler extends ModelAnimatedFluidMachine {
 	}
 
 	@Override
-	public void renderLiquid(float f, int tankSlot, float percentageFilled, Icon icon) {
+	public void renderLiquid(TileEntity tl, float f, int tankSlot, float percentageFilled, Icon icon) {
 		float par1 = -6f;
 		float par2 = tankSlot == 0 ? -6f : 6f;
-		
-		float height = 13f / 2 * percentageFilled ;
-		//float par3 = tankSlot == 0 ? 23 - 13/2 + height : 10f + height;
-		
+
+		float height = 13f / 2 * percentageFilled;
+		// float par3 = tankSlot == 0 ? 23 - 13/2 + height : 10f + height;
+
 		float par3 = tankSlot == 0 ? 23 - height : 10 + height;
-		
+
 		int par4 = 12;
 		int par5 = tankSlot == 0 ? 12 : -12;
 		Tessellator tessellator = Tessellator.instance;
@@ -273,23 +274,22 @@ public class ModelBoiler extends ModelAnimatedFluidMachine {
 		tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) par3 * f, (double) (par2 + par5) * f, (double) icon.getMaxU(), (double) icon.getMaxV());
 		tessellator.addVertexWithUV((double) (par1 + 0) * f, (double) par3 * f, (double) (par2 + par5) * f, (double) icon.getMinU(), (double) icon.getMaxV());
 		tessellator.draw();
-		
-		if(tankSlot == 1)
-			height = -height;
-		
 
-		float offsetV = (1-height/par5) * (icon.getMaxU() - icon.getMinU());
+		if (tankSlot == 1)
+			height = -height;
+
+		float offsetV = (1 - height / par5) * (icon.getMaxU() - icon.getMinU());
 		tessellator.startDrawingQuads();
-		tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) par3 * f, (double) (par2 + 0) * f, (double) icon.getMinU()+offsetV, (double) icon.getMinV());
+		tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) par3 * f, (double) (par2 + 0) * f, (double) icon.getMinU() + offsetV, (double) icon.getMinV());
 		tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) (par3 + height) * f, (double) (par2 + 0) * f, (double) icon.getMaxU(), (double) icon.getMinV());
 		tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) (par3 + height) * f, (double) (par2 + par5) * f, (double) icon.getMaxU(), (double) icon.getMaxV());
-		tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) par3 * f, (double) (par2 + par5) * f, (double) icon.getMinU()+offsetV, (double) icon.getMaxV());
+		tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) par3 * f, (double) (par2 + par5) * f, (double) icon.getMinU() + offsetV, (double) icon.getMaxV());
 		tessellator.draw();
 	}
 
 	@Override
-	public void renderModelAnimated(float f5, float[] progress) {
-        
+	public void renderModelAnimated(TileEntity tileEntity, float f5, float[] progress) {
+
 		BackPlate.render(f5);
 		TopPlate.render(f5);
 		BottomPlate.render(f5);
@@ -324,12 +324,12 @@ public class ModelBoiler extends ModelAnimatedFluidMachine {
 		FrontGaugeTop.render(f5);
 		WaterIn.render(f5);
 		SteamOut.render(f5);
-		
+
 	}
 
 	@Override
 	public void renderModel(float f) {
-		renderModelAnimated(f, null);
+		renderModelAnimated(null, f, null);
 	}
 
 }

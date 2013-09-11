@@ -11,11 +11,11 @@ import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
-public class RendererTileEntityConnectedFluid extends RendererTileEntity {
+public class RendererTileEntityConnectedFluidAnimated extends RendererTileEntityConnectedFluid {
 
-	private ModelConnectedFluid model;
+	private ModelConnectedFluidAnimated model;
 
-	public RendererTileEntityConnectedFluid(Block block, String name, ModelConnectedFluid model) {
+	public RendererTileEntityConnectedFluidAnimated(Block block, String name, ModelConnectedFluidAnimated model) {
 		super(block, name, model);
 		this.model = model;
 		this.rotateModel = false;
@@ -23,6 +23,8 @@ public class RendererTileEntityConnectedFluid extends RendererTileEntity {
 
 	@Override
 	protected void renderBlock(TileEntity tl, World world, int i, int j, int k, Block block2, float f) {
+
+		float[] animation = null;
 
 		ConnectionState north = ConnectionState.DISCONNECTED;
 		ConnectionState east = ConnectionState.DISCONNECTED;
@@ -44,9 +46,18 @@ public class RendererTileEntityConnectedFluid extends RendererTileEntity {
 		}
 		if (world == null) {
 			north = ConnectionState.PLUGGED;
-			south = ConnectionState.CONNECTED;
+			south = ConnectionState.PLUGGED;
 		}
-		this.model.renderModelConnected(null, f, north, east, south, west, up, down);
+
+		if (tl instanceof IAnimationProgress) {
+			IAnimationProgress machine = (IAnimationProgress) tl;
+			animation = new float[machine.getAnimationCount()];
+			for (int l = 0; l < animation.length; l++) {
+				animation[l] = machine.getAnimationProgress(1f, l);
+			}
+		}
+
+		this.model.renderModelConnectedAnimated(tl, f, north, east, south, west, up, down, animation);
 
 		if (tl instanceof ITankSyncable) {
 			ITankSyncable tankSync = (ITankSyncable) tl;
@@ -64,7 +75,7 @@ public class RendererTileEntityConnectedFluid extends RendererTileEntity {
 					Fluid fluid = FluidRegistry.getFluid(fluidId);
 					if (fluid != null) {
 						Icon icon = fluid.getStillIcon();
-						this.model.renderModelConnectedFluid(tl, f, north, east, south, west, up, down, l, amount / (float) capacity, icon);
+						this.model.renderModelConnectedFluidAnimated(tl, f, north, east, south, west, up, down, l, amount / (float) capacity, icon, animation);
 					}
 				}
 			}

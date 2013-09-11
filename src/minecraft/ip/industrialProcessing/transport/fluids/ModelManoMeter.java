@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import ip.industrialProcessing.client.render.ModelAnimatedMachine;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.tileentity.TileEntity;
 
 public class ModelManoMeter extends ModelAnimatedMachine {
 
@@ -219,7 +220,7 @@ public class ModelManoMeter extends ModelAnimatedMachine {
 	}
 
 	@Override
-	public void renderModelAnimated(float f5, float[] progress) {
+	public void renderModelAnimated(TileEntity tileEntity, float f5, float[] progress) {
 		GL11.glPushMatrix();
 		GL11.glRotatef(90, 0, 1, 0);
 		ConnectorTube.render(f5);
@@ -267,7 +268,7 @@ public class ModelManoMeter extends ModelAnimatedMachine {
 
 	@Override
 	public void renderModel(float f) {
-		renderModelAnimated(f, new float[] { 0.5f });
+		renderModelAnimated(null, f, new float[] { 0.5f });
 	}
 
 }
