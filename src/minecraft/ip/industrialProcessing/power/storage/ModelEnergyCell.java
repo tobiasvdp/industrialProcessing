@@ -3,6 +3,7 @@ package ip.industrialProcessing.power.storage;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.tileentity.TileEntity;
 import ip.industrialProcessing.client.render.ModelAnimatedMachine;
 
 public class ModelEnergyCell extends ModelAnimatedMachine {
@@ -311,7 +312,7 @@ public class ModelEnergyCell extends ModelAnimatedMachine {
 	}
 
 	@Override
-	public void renderModelAnimated(float f5, float[] progress) {
+	public void renderModelAnimated(TileEntity tileEntity, float f5, float[] progress) {
 		Support1.render(f5);
 		Support3.render(f5);
 		Side4.render(f5);
@@ -366,7 +367,7 @@ public class ModelEnergyCell extends ModelAnimatedMachine {
 
 	@Override
 	public void renderModel(float f) {
-		renderModelAnimated(f, new float[] { 1f });
+		renderModelAnimated(null, f, new float[] { 1f });
 	}
 
 }

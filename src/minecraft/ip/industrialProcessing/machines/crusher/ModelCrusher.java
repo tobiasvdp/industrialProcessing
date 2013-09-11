@@ -124,7 +124,7 @@ public class ModelCrusher extends ModelAnimatedMachine {
     }
 
     @Override
-    public void renderModelAnimated(float scale, float[] progress) {
+    public void renderModelAnimated(TileEntity tileEntity, float scale, float[] progress) {
 	float angle = (float) Math.cos(progress[0] * Math.PI * 6) * 1;
 	SupportBeamRight.render(scale);
 	SupportBeamLeft.render(scale);
@@ -155,6 +155,6 @@ public class ModelCrusher extends ModelAnimatedMachine {
 
     @Override
     public void renderModel(float f) {
-	renderModelAnimated(f, new float[]{0f});
+	renderModelAnimated(null, f, new float[]{0f});
     }
 }

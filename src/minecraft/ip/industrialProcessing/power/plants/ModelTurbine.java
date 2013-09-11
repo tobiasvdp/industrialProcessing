@@ -3,6 +3,7 @@ package ip.industrialProcessing.power.plants;
 import ip.industrialProcessing.client.render.ModelAnimatedFluidMachine;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 
 import org.lwjgl.opengl.GL11;
@@ -331,7 +332,7 @@ public class ModelTurbine extends ModelAnimatedFluidMachine {
 
 
 	@Override
-	public void renderLiquid(float f, int tankSlot, float percentageFilled, Icon icon) {
+	public void renderLiquid(TileEntity tl, float f, int tankSlot, float percentageFilled, Icon icon) {
 
 		float par1 = -7f;
 		float par2 = -7f;
@@ -378,7 +379,7 @@ public class ModelTurbine extends ModelAnimatedFluidMachine {
 	}
 
 	@Override
-	public void renderModelAnimated(float f5, float[] progress) {
+	public void renderModelAnimated(TileEntity tileEntity, float f5, float[] progress) {
 		
 		GL11.glPushMatrix();
 		GL11.glRotatef(progress[0] * 360f, 0, 1, 0);
@@ -434,7 +435,7 @@ public class ModelTurbine extends ModelAnimatedFluidMachine {
 
 	@Override
 	public void renderModel(float f) {
-		renderModelAnimated(f, new float[] { 0f });
+		renderModelAnimated(null, f, new float[] { 0f });
 	}
 
 }

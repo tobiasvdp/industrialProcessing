@@ -1,6 +1,7 @@
 package ip.industrialProcessing.transport.fluids;
 
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.machines.TileEntityMachine;
@@ -33,10 +34,10 @@ public class TileEntityManoMeter extends TileEntityMachine implements IAnimation
 
 		if (!this.worldObj.isRemote) {
 			float pressure = 0;
-			TileEntityTransportFluids pipe = getPipe();
+			TileEntityTransportFluidsBase pipe = getPipe();
 
 			if (pipe != null)
-				pressure = pipe.getPressure();
+				pressure = pipe.getPressure(ForgeDirection.UP);
 
 			float pressureProgress = pressure / MAX_PRESSURE + 0.5f;
 			this.animationHandler.moveToProgress(pressureProgress, 0.0125f);
@@ -45,10 +46,10 @@ public class TileEntityManoMeter extends TileEntityMachine implements IAnimation
 		this.animationHandler.update();
 	}
 
-	private TileEntityTransportFluids getPipe() {
+	private TileEntityTransportFluidsBase getPipe() {
 		TileEntity entity = this.worldObj.getBlockTileEntity(xCoord, yCoord - 1, zCoord);
-		if (entity instanceof TileEntityTransportFluids)
-			return (TileEntityTransportFluids) entity;
+		if (entity instanceof TileEntityTransportFluidsBase)
+			return (TileEntityTransportFluidsBase) entity;
 		return null;
 	}
 

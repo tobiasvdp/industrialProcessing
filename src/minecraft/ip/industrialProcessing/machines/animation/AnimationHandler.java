@@ -31,11 +31,10 @@ public class AnimationHandler {
 	public float getSpeed() {
 		return speed;
 	}
- 
+
 	public float getAnimationProgress(float scale) {
 		return this.progress * scale / this.scale;
 	}
-	 
 
 	public void setAnimationProgress(float progress, float scale) {
 		this.progress = progress / scale;
@@ -105,5 +104,10 @@ public class AnimationHandler {
 			speed = -speed;
 		setSpeed(speed);
 		setIncrementing(incrementing);
+	}
+
+	public void addSpeed(float f) {
+		this.setSpeed(this.getSpeed() + f);
+
 	}
 }

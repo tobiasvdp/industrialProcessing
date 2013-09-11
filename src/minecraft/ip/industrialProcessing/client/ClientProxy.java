@@ -6,6 +6,7 @@ import ip.industrialProcessing.client.render.ModelAnimatedFluidMachine;
 import ip.industrialProcessing.client.render.ModelAnimatedMachine;
 import ip.industrialProcessing.client.render.ModelConnected;
 import ip.industrialProcessing.client.render.ModelConnectedFluid;
+import ip.industrialProcessing.client.render.ModelConnectedFluidAnimated;
 import ip.industrialProcessing.client.render.ModelMachine;
 import ip.industrialProcessing.client.render.ModelStateMachine;
 import ip.industrialProcessing.client.render.ModelingMultiblock;
@@ -14,6 +15,7 @@ import ip.industrialProcessing.client.render.RendererTileEntity;
 import ip.industrialProcessing.client.render.RendererTileEntityAnimated;
 import ip.industrialProcessing.client.render.RendererTileEntityConnected;
 import ip.industrialProcessing.client.render.RendererTileEntityConnectedFluid;
+import ip.industrialProcessing.client.render.RendererTileEntityConnectedFluidAnimated;
 import ip.industrialProcessing.client.render.RendererTileEntityFluidWorker;
 import ip.industrialProcessing.client.render.RendererTileEntityState;
 import ip.industrialProcessing.client.render.RenderingMultiblock;
@@ -75,11 +77,13 @@ import ip.industrialProcessing.transport.fluids.ModelPump;
 import ip.industrialProcessing.transport.fluids.ModelRainTank;
 import ip.industrialProcessing.transport.fluids.ModelTank;
 import ip.industrialProcessing.transport.fluids.ModelTransportFluids;
+import ip.industrialProcessing.transport.fluids.ModelValve;
 import ip.industrialProcessing.transport.fluids.TileEntityManoMeter;
 import ip.industrialProcessing.transport.fluids.TileEntityPump;
 import ip.industrialProcessing.transport.fluids.TileEntityRainTank;
 import ip.industrialProcessing.transport.fluids.TileEntityTank;
 import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids;
+import ip.industrialProcessing.transport.fluids.TileEntityValve;
 import ip.industrialProcessing.transport.items.conveyorBelt.MDtransportConveyorBelt;
 import ip.industrialProcessing.transport.items.conveyorBelt.TEtransportConveyorBelt;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -100,6 +104,7 @@ public class ClientProxy extends CommonProxy {
 	private static final ModelConnectedFluid transportFluids = new ModelTransportFluids();
 	private static final ModelAnimatedMachine EnergyCell = new ModelEnergyCell();
 	private static final ModelConnectedFluid rainTank = new ModelRainTank();
+	private static final ModelConnectedFluidAnimated valve = new ModelValve();
 
 	private static final ModelAnimatedMachine crankGenerator = new ModelCrankGenerator(true);
 	private static final ModelAnimatedMachine buildcraftGenerator = new ModelCrankGenerator(false);
@@ -157,13 +162,17 @@ public class ClientProxy extends CommonProxy {
 		ConfigRenderers.setRendererAmpMeterId(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererAmpMeterId(), new TileEntityAmpMeter()));
 
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTransportFluids.class, new RendererTileEntityConnectedFluid(IndustrialProcessing.blockTransportFluids, "ModelTransportFluids", transportFluids));
-		ConfigRenderers.setRendererTransportFluidsId(RenderingRegistry.getNextAvailableRenderId());
-		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererTransportFluidsId(), new TileEntityTransportFluids()));
-
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTank.class, new RendererTileEntityConnectedFluid(IndustrialProcessing.blockTank, "ModelTank", tank));
 		ConfigRenderers.setRendererTankId(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererTankId(), new TileEntityTank()));
+
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityValve.class, new RendererTileEntityConnectedFluidAnimated(IndustrialProcessing.blockValve, "ModelValve", valve));
+		ConfigRenderers.setRendererValveId(RenderingRegistry.getNextAvailableRenderId());
+		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererValveId(), new TileEntityValve()));
+
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTransportFluids.class, new RendererTileEntityConnectedFluid(IndustrialProcessing.blockTransportFluids, "ModelTransportFluids", transportFluids));
+		ConfigRenderers.setRendererTransportFluidsId(RenderingRegistry.getNextAvailableRenderId());
+		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererTransportFluidsId(), new TileEntityTransportFluids()));
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRainTank.class, new RendererTileEntityConnectedFluid(IndustrialProcessing.blockRainTank, "ModelRainTank", rainTank));
 		ConfigRenderers.setRendererRainTankId(RenderingRegistry.getNextAvailableRenderId());
@@ -248,7 +257,7 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TEmultiblockDisplayPanel.class, new RenderingMultiblock(IndustrialProcessing.BLmultiblockDisplayPanel, new String[] { "MDmultiblockDisplayPanel" }, new ModelingMultiblock[] { MDmultiblockDisplayPanel }));
 		ConfigRenderers.setBLmultiblockDisplayPanel(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLmultiblockDisplayPanel(), new TEmultiblockDisplayPanel()));
-		
+
 		ClientRegistry.bindTileEntitySpecialRenderer(TEtransportConveyorBelt.class, new RendererTileEntityConnected(IndustrialProcessing.BLtransportConveyorBelt, "MDtransportConveyorBelt", MDtransportConveyorBelt));
 		ConfigRenderers.setBLtransportConveyorBelt(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLtransportConveyorBelt(), new TEtransportConveyorBelt()));

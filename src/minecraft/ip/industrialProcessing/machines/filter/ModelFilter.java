@@ -251,7 +251,7 @@ public class ModelFilter extends ModelAnimatedMachine {
 	Shape24.render(f1);
     } 
     @Override
-    public void renderModelAnimated(float f1, float[] animatedAr) {
+    public void renderModelAnimated(TileEntity tileEntity, float f1, float[] animatedAr) {
 	float freq1 = 27;
 	float freq2 = 23;
 	float freq3 = 25;

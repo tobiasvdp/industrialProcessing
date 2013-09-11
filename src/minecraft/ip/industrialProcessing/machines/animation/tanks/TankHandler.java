@@ -22,7 +22,8 @@ public class TankHandler {
 		this.fluidIds = new int[tankSlots.length];
 		this.capacities = new int[tankSlots.length];
 		for (int i = 0; i < tankSlots.length; i++) {
-			this.capacities[i] = fluidMachine.getTankInSlot(tankSlots[i]).getCapacity();
+			IFluidTank tank = fluidMachine.getTankInSlot(tankSlots[i]);
+			this.capacities[i] = tank.getCapacity();
 		}
 	}
 

@@ -4,6 +4,7 @@ import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.ModelConnectedFluid;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 
 public class ModelRainTank extends ModelConnectedFluid {
@@ -255,7 +256,7 @@ public class ModelRainTank extends ModelConnectedFluid {
 	}
 
 	@Override
-	public void renderModelConnectedFluid(float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, Icon icon) {
+	public void renderModelConnectedFluid(TileEntity tl, float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, Icon icon) {
 		if(tankSlot == 0)
 		{
 
@@ -279,7 +280,7 @@ public class ModelRainTank extends ModelConnectedFluid {
 	}
 
 	@Override
-	public void renderModelConnected(float f5, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down) {
+	public void renderModelConnected(TileEntity tl, float f5, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down) {
 
 		boolean connectedPipe = false;
 		FloorPlate.render(f5);

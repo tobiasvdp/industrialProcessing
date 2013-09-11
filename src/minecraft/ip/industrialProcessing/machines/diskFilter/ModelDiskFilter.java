@@ -3,6 +3,7 @@ package ip.industrialProcessing.machines.diskFilter;
 import ip.industrialProcessing.client.render.ModelAnimatedMachine;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 
@@ -557,7 +558,7 @@ public class ModelDiskFilter extends ModelAnimatedMachine {
 	}
 
 	@Override
-	public void renderModelAnimated(float f5, float[] progressAr) {
+	public void renderModelAnimated(TileEntity tileEntity, float f5, float[] progressAr) {
 		float progress = Math.max(0, Math.min(1, progressAr[0]));
 		SupportBeamTop.render(f5);
 		SupportBeamRightBottom.render(f5);

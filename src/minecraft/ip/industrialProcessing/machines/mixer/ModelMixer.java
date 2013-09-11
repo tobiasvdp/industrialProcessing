@@ -6,6 +6,7 @@ import org.lwjgl.util.vector.Vector;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.Entity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.util.Vec3;
 import ip.industrialProcessing.client.render.ModelAnimatedFluidMachine;
@@ -213,7 +214,7 @@ public class ModelMixer extends ModelAnimatedFluidMachine {
 	}
 
 	@Override
-	public void renderModelAnimated(float f1, float[] progressAr) {
+	public void renderModelAnimated(TileEntity tileEntity, float f1, float[] progressAr) {
 		float progress = Math.max(0, Math.min(1, progressAr[0]));
 		SupportBeamRightBottom.render(f1);
 		SupportBeamLeftBottom.render(f1);
@@ -242,7 +243,7 @@ public class ModelMixer extends ModelAnimatedFluidMachine {
 	}
 
 	@Override
-	public void renderLiquid(float f, int tankSlot, float percentageFilled, Icon icon) {
+	public void renderLiquid(TileEntity tl, float f, int tankSlot, float percentageFilled, Icon icon) {
 		// Vec3 p1 = new Vec3(-6.5F, -0.4666667F, -6.5F);//, 13, 0, 13
 		if (tankSlot == 0) {
 			float par1 = -6.5f;

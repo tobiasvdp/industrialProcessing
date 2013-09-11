@@ -3,6 +3,7 @@ package ip.industrialProcessing.power.manualGenerator;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.tileentity.TileEntity;
 import ip.industrialProcessing.client.render.ModelAnimatedMachine;
 
 public class ModelCrankGenerator extends ModelAnimatedMachine {
@@ -382,7 +383,7 @@ public class ModelCrankGenerator extends ModelAnimatedMachine {
     }
 
     @Override
-    public void renderModelAnimated(float f5, float[] progress) {
+    public void renderModelAnimated(TileEntity tileEntity, float f5, float[] progress) {
 	float angle = progress[0] * 360;
 	SupportLeft.render(f5);
 	SupportRight.render(f5);
@@ -445,7 +446,7 @@ public class ModelCrankGenerator extends ModelAnimatedMachine {
 
     @Override
     public void renderModel(float f) {
-	renderModelAnimated(f, new float[]{0.36f});
+	renderModelAnimated(null, f, new float[]{0.36f});
     }
 
 }

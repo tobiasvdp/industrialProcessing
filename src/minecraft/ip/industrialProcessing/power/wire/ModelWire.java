@@ -1,6 +1,7 @@
 package ip.industrialProcessing.power.wire;
 
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.tileentity.TileEntity;
 import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.ModelConnected;
 
@@ -104,7 +105,7 @@ public class ModelWire extends ModelConnected {
     }
 
     @Override
-    public void renderModelConnected(float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down) {
+    public void renderModelConnected(TileEntity tl, float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down) {
 	render(Up, UpConnector, up, f);
 	render(Down, DownConnector, down, f);
 	render(North, NorthConnector, north, f);
