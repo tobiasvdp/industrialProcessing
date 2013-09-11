@@ -30,8 +30,8 @@ public class TileEntityPump extends TileEntityMachine implements IPowerAcceptor,
 	private AnimationHandler animationHandler = new AnimationHandler(AnimationMode.MIRROR, 1f, true);
 	private static final int powerStorageCapacity = 1000;
 
-	private static final int PRESSURE_DIFFERENTIAL = 4000;
-	private static final int POWER_TO_PRESSURE_RATIO = 5;
+	private static final int PRESSURE_DIFFERENTIAL = 6000;
+	private static final int POWER_TO_PRESSURE_RATIO = 50;
 
 	@Override
 	protected boolean isValidInput(int slot, int itemID) {
@@ -52,17 +52,19 @@ public class TileEntityPump extends TileEntityMachine implements IPowerAcceptor,
 	public boolean canUpdate() {
 		return true;
 	}
-	
+
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
-		if (!this.worldObj.isRemote) {
-			int maxTransfer = Math.min(PRESSURE_DIFFERENTIAL / 10, this.storedPower * POWER_TO_PRESSURE_RATIO / 10);
+		if (!this.worldObj.isRemote) { 
+			int maxTransfer = Math.min(PRESSURE_DIFFERENTIAL, this.storedPower * POWER_TO_PRESSURE_RATIO);
 			float transfer = PRESSURE_DIFFERENTIAL - (this.outputPressure - this.inputPressure);
 			transfer = Math.min(maxTransfer, Math.max(0, transfer));
 			float center = (this.inputPressure + this.outputPressure) / 2;
-			this.inputPressure -= transfer + center;
-			this.outputPressure += transfer - center;
+			if (!this.animationHandler.isIncrementing()) {
+				this.inputPressure -= (transfer + center);
+				this.outputPressure += (transfer - center);
+			}
 			this.storedPower -= transfer / POWER_TO_PRESSURE_RATIO;
 
 			int mul = this.animationHandler.isIncrementing() ? 5 : 1;
@@ -75,7 +77,7 @@ public class TileEntityPump extends TileEntityMachine implements IPowerAcceptor,
 	@Override
 	public float getResistance(ForgeDirection side, float voltage) {
 		if (canAcceptPower(side)) {
-			return 1+PowerHelper.getResistanceForStorage(this.storedPower, this.powerStorageCapacity) ;
+			return 1 + PowerHelper.getResistanceForStorage(this.storedPower, this.powerStorageCapacity) / 5;
 		}
 		return Float.POSITIVE_INFINITY;
 	}

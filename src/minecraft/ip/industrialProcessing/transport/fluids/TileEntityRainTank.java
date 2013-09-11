@@ -148,7 +148,7 @@ public class TileEntityRainTank extends TileEntityFluidMachine implements IConne
 		if(from == ForgeDirection.UP) return 0;
 		
 		IFluidTank tank = getTankInSlot(0);
-		float pressure = tank.getFluidAmount() * 500f / tank.getCapacity();
+		float pressure = tank.getFluidAmount() * 1000f / tank.getCapacity();
 		if(from == ForgeDirection.DOWN) return pressure;
 		return pressure / 2;
 	}

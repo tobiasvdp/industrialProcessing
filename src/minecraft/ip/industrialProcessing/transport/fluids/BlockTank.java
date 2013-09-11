@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
@@ -29,6 +30,12 @@ public class BlockTank extends BlockMachineRendered {
         TileEntityTank tank = (TileEntityTank)par1World.getBlockTileEntity(par2, par3, par4);
         tank.searchForNeighbors();
     }
+    
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
+		// no gui
+		return false;
+	}
 
     @Override
     public int getRenderType() { 

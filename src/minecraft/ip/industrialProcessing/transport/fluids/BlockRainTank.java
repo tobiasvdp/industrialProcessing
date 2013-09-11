@@ -5,6 +5,7 @@ import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -30,6 +31,12 @@ public class BlockRainTank extends BlockMachineRendered {
 	}
 
 	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
+		// no gui 
+		return false;
+	}
+
+	@Override
 	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
 		super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
 		TileEntityRainTank rainTank = (TileEntityRainTank) par1World.getBlockTileEntity(par2, par3, par4);
@@ -42,6 +49,5 @@ public class BlockRainTank extends BlockMachineRendered {
 		TileEntityRainTank rainTank = (TileEntityRainTank) world.getBlockTileEntity(x, y, z);
 		rainTank.searchForConnections();
 	}
- 
 
 }

@@ -62,7 +62,7 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
 			if (entityBelow instanceof TileEntityTank) {
 				if (!this.worldObj.isRemote) {
 					TileEntityTank tankBelow = (TileEntityTank) entityBelow;
-					FluidTransfers.transfer(1000, this.tank, tankBelow.tank);
+					FluidTransfers.transfer(10000, this.tank, tankBelow.tank);
 				}
 				states[ForgeDirection.DOWN.ordinal()] = ConnectionState.CONNECTED;
 			} else
@@ -81,7 +81,7 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
 		if (!this.worldObj.isRemote) {
 			if (this.tankHandler.readDataFromTanks())
 				TileTankSyncHandler.sendTankData(this, this.tankHandler);
-			this.pressure = this.tank.getFluidAmount() * 500 / this.tank.getCapacity();
+			this.pressure = this.tank.getFluidAmount() * 220 / this.tank.getCapacity();
 		}
 	}
 
