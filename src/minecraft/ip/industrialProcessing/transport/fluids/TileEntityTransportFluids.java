@@ -38,8 +38,8 @@ import ip.industrialProcessing.utils.FluidTransfers;
 
 public class TileEntityTransportFluids extends TileEntityTransport implements IFluidInfo, ITankSyncable {
 
-	FluidTank tank = new FluidTank(1000);
-	private float pressure = 0;
+	protected FluidTank tank = new FluidTank(1000);
+	protected float pressure = 0;
 	private static int tileID;
 	private int id;
 	private TankHandler tankHandler = new TankHandler(this, new int[] { 0 });
@@ -70,27 +70,33 @@ public class TileEntityTransportFluids extends TileEntityTransport implements IF
 
 	@Override
 	protected TransportConnectionState getState(TileEntity entity, ForgeDirection direction) {
-		ForgeDirection from = direction.getOpposite();
-		if (entity instanceof TileEntityTransportFluids)
-			return TransportConnectionState.TRANSPORT;
-		// TODO: check if
-		// connection should be
-		// made (lava pipe with
-		// water pipe ..)
+		if (this.canConnect(direction)) {
+			ForgeDirection from = direction.getOpposite();
+			if (entity instanceof TileEntityTransportFluids) {
+				TileEntityTransportFluids other = (TileEntityTransportFluids) entity;
+				if (other.canConnect(direction.getOpposite()))
+					return TransportConnectionState.TRANSPORT;
+				return TransportConnectionState.NONE;
+			}
+			// TODO: check if
+			// connection should be
+			// made (lava pipe with
+			// water pipe ..)
 
-		if (entity instanceof TileEntityManoMeter && direction == ForgeDirection.UP)
-			return TransportConnectionState.TRANSPORT;
+			if (entity instanceof TileEntityManoMeter && direction == ForgeDirection.UP)
+				return TransportConnectionState.TRANSPORT;
 
-		if (entity instanceof TileEntityPump) {
-			TileEntityPump pump = (TileEntityPump) entity;
-			if (pump.isFluidOuptut(from))
-				return TransportConnectionState.OUTPUT;
-			if (pump.isFluidInput(from))
-				return TransportConnectionState.INPUT;
-		}
-		if (entity instanceof IFluidHandler) {
-			IFluidHandler handler = (IFluidHandler) entity;
-			return canInsertOrExtractFluid(handler, from);
+			if (entity instanceof TileEntityPump) {
+				TileEntityPump pump = (TileEntityPump) entity;
+				if (pump.isFluidOuptut(from))
+					return TransportConnectionState.OUTPUT;
+				if (pump.isFluidInput(from))
+					return TransportConnectionState.INPUT;
+			}
+			if (entity instanceof IFluidHandler) {
+				IFluidHandler handler = (IFluidHandler) entity;
+				return canInsertOrExtractFluid(handler, from);
+			}
 		}
 		return TransportConnectionState.NONE;
 	}
@@ -118,11 +124,31 @@ public class TileEntityTransportFluids extends TileEntityTransport implements IF
 			TileTankSyncHandler.sendTankData(this, this.tankHandler);
 	}
 
-	private void leakPressure() {
+	protected void leakPressure() {
 
 		this.pressure -= this.pressure * 0.005f;
 		if (Float.isNaN(this.pressure) || Float.isInfinite(this.pressure))
 			this.pressure = 0;
+	}
+
+	protected IFluidTank getTank(ForgeDirection direction) {
+		return this.tank;
+	}
+
+	protected float getPressure(ForgeDirection direction) {
+		return this.pressure;
+	}
+
+	protected void setPressure(ForgeDirection direction, float value) {
+		this.pressure = value;
+	}
+
+	protected void addPressure(ForgeDirection direction, float value) {
+		this.pressure += value;
+	}
+
+	protected boolean canConnect(ForgeDirection direction) {
+		return true;
 	}
 
 	private void handlePumps() {
@@ -132,14 +158,14 @@ public class TileEntityTransportFluids extends TileEntityTransport implements IF
 			if (state == TransportConnectionState.INPUT || state == TransportConnectionState.OUTPUT) {
 				TileEntityPump pump = getNeighborPump(direction);
 				if (pump != null) {
-					float lastPressure = this.pressure;
+					float lastPressure = this.getPressure(direction);
 					if (pump.isFluidInput(direction.getOpposite())) {
 						float pumpPressure = pump.getInputPressure();
-						float flow = pumpPressure - this.pressure;
+						float flow = pumpPressure - lastPressure;
 						if (flow < 0) {
 
 							pumpPressure -= flow / 4;
-							this.pressure += flow / 4;
+							this.addPressure(direction, flow / 4);
 
 							FluidTransfers.transfer(-(int) flow, this.tank, pump.getTank());
 						}
@@ -152,7 +178,7 @@ public class TileEntityTransportFluids extends TileEntityTransport implements IF
 						if (flow > 0) {
 
 							pumpPressure -= flow / 4;
-							this.pressure += flow / 4;
+							this.addPressure(direction, flow / 4);
 
 							FluidTransfers.transfer((int) (flow), pump.getTank(), this.tank);
 						}
@@ -174,8 +200,8 @@ public class TileEntityTransportFluids extends TileEntityTransport implements IF
 				TileEntityTransportFluids other = getNeighborPipe(direction);
 				if (other != null) {
 
-					float flow = this.pressure - other.pressure;
-					float gravFlow = getGravityFlow(other, direction); 
+					float flow = this.getPressure(direction) - other.getPressure(direction.getOpposite());
+					float gravFlow = getGravityFlow(other, direction);
 					flow += gravFlow;
 					if (flow > 0) {
 						flows[i] = flow;
@@ -197,8 +223,8 @@ public class TileEntityTransportFluids extends TileEntityTransport implements IF
 						} else if (flow < 0) {
 							FluidTransfers.transfer((int) (flow), other.tank, this.tank);
 						}
-						other.pressure += flow / 4f;
-						this.pressure -= flow / 4f;
+						other.addPressure(direction.getOpposite(), flow / 4f);
+						this.addPressure(direction, -flow / 4f);
 					}
 				}
 			}
@@ -243,12 +269,11 @@ public class TileEntityTransportFluids extends TileEntityTransport implements IF
 				IFluidHandler other = getNeighborFluidHandler(direction);
 				if (other != null) {
 					float tankPressure = getTankPressure(other, direction);
-					if (pressure < tankPressure) {
-						float flow = tankPressure - this.pressure;
+					float currentPressure = getPressure(direction);
+					if (currentPressure < tankPressure) {
+						float flow = tankPressure - currentPressure;
 						if (flow > 0) {
-							// other.pressure -= flow / 4;
-							this.pressure += flow / 4;
-
+							this.addPressure(direction, flow / 4);
 							FluidTransfers.transfer((int) (flow), other, from, this.tank);
 						}
 					}
@@ -266,12 +291,12 @@ public class TileEntityTransportFluids extends TileEntityTransport implements IF
 				IFluidHandler other = getNeighborFluidHandler(direction);
 				if (other != null) {
 					float tankPressure = getTankPressure(other, direction);
-					if (this.pressure > tankPressure) {
-						float flow = tankPressure - this.pressure;
+					float currentPressure = getPressure(direction);
+					if (currentPressure > tankPressure) {
+						float flow = tankPressure - currentPressure;
 						if (flow < 0) {
-							// other.pressure -= flow / 4;
-							this.pressure += flow / 4;
- 
+							this.addPressure(direction, +flow / 4);
+
 							FluidTransfers.transfer(-(int) (flow), this.tank, other, from);
 						}
 					}

@@ -6,6 +6,7 @@ public class ConfigTransportBlocks {
 	private int blockTransportFluidTankID = 3502;
 	private int blockTransportFluidManometerID = 3503;
 	private int blockTransportFluidRainTankID = 3504;
+	private int blockTransportFluidValveID = 3505;
 
 	public static int getBlockTransportFluidsID() {
 		return getInstance().blockTransportFluidsID;
@@ -22,11 +23,14 @@ public class ConfigTransportBlocks {
 	public static int getBlockTransportFluidManometerID() {
 		return getInstance().blockTransportFluidManometerID;
 	}
-	
+
 	public static int getBlockRainTankID() {
-		return getInstance().blockTransportFluidRainTankID; 
+		return getInstance().blockTransportFluidRainTankID;
 	}
 
+	public static int getBlockValveID() {
+		return getInstance().blockTransportFluidValveID;
+	}
 
 	private ConfigTransportBlocks() {
 
