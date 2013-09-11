@@ -46,6 +46,7 @@ import ip.industrialProcessing.transport.fluids.TileEntityPump;
 import ip.industrialProcessing.transport.fluids.TileEntityRainTank;
 import ip.industrialProcessing.transport.fluids.TileEntityTank;
 import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids;
+import ip.industrialProcessing.transport.fluids.TileEntityValve;
 import ip.industrialProcessing.transport.items.conveyorBelt.TEtransportConveyorBelt;
 import ip.industrialProcessing.transport.items.conveyorInput.TEtransportConveyorBeltInput;
 import ip.industrialProcessing.transport.items.conveyorOutput.TEtransportConveyorBeltOutput;
@@ -106,24 +107,24 @@ public class ConfigMachineBlocks {
 	private int BLmultiblockRollingPress = 732;
 	private int BLmultiblockWheelConnector = 733;
 	private int BLmultiblockDisplayPanel = 734;
-	
+
 	private int BLtransportConveyorBelt = 735;
 	private int BLtransportConveyorBeltInput = 736;
 	private int BLtransportConveyorBeltOutput = 737;
-	
+
 	private int BLlogicSwitchBox = 738;
 	private int BLlogicCable = 739;
 
 	public void registerMachineBlocks() {
-		
-		//logic
+
+		// logic
 		registerMachineBlock(IndustrialProcessing.BLlogicCable, "IP.Logic.Cable", "Cable", TElogicCable.class);
 		registerMachineBlock(IndustrialProcessing.BLlogicSwitchBox, "IP.Logic.SwBox", "Switch box", TElogicSwitchBox.class);
-		
+
 		registerMachineBlock(IndustrialProcessing.BLtransportConveyorBelt, "IP.Trans.CBelt", "Conveyor belt", TEtransportConveyorBelt.class);
 		registerMachineBlock(IndustrialProcessing.BLtransportConveyorBeltInput, "IP.Trans.CBInput", "Conveyor belt import", TEtransportConveyorBeltInput.class);
 		registerMachineBlock(IndustrialProcessing.BLtransportConveyorBeltOutput, "IP.Trans.CBOutput", "Conveyor belt export", TEtransportConveyorBeltOutput.class);
-		
+
 		// multiblocks
 		registerMachineBlock(IndustrialProcessing.BLmultiblockDisplayPanel, "IP.MBD.Display", "Display panel", TEmultiblockDisplayPanel.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockWheelConnector, "IP.MBD.WheelCon", "Wheel connector", TEmultiblockWheelConnector.class);
@@ -169,6 +170,7 @@ public class ConfigMachineBlocks {
 		registerMachineBlock(IndustrialProcessing.blockTank, "IP.Transport.Fluids.Tank", "Fluid Tank", TileEntityTank.class);
 		registerMachineBlock(IndustrialProcessing.blockManometer, "IP.Transport.Fluids.Manometer", "Manometer", TileEntityManoMeter.class);
 		registerMachineBlock(IndustrialProcessing.blockRainTank, "IP.Transport.Fluids.RainTank", "Rain Collector", TileEntityRainTank.class);
+		registerMachineBlock(IndustrialProcessing.blockValve, "IP.Transport.Fluids.Valve", "Valve", TileEntityValve.class);
 
 		// power
 		registerMachineBlock(IndustrialProcessing.blockWire, "IP.Wire", "Wire", TileEntityWire.class);
@@ -194,18 +196,23 @@ public class ConfigMachineBlocks {
 	public static int getBLlogicSwitchBox() {
 		return getInstance().BLlogicSwitchBox;
 	}
+
 	public static int getBLlogicCable() {
 		return getInstance().BLlogicCable;
 	}
+
 	public static int getBLtransportConveyorBeltInput() {
 		return getInstance().BLtransportConveyorBeltInput;
 	}
+
 	public static int getBLtransportConveyorBeltOutput() {
 		return getInstance().BLtransportConveyorBeltOutput;
 	}
+
 	public static int getBLtransportConveyorBelt() {
 		return getInstance().BLtransportConveyorBelt;
 	}
+
 	public static int getBLmultiblockDisplayPanel() {
 		return getInstance().BLmultiblockDisplayPanel;
 	}

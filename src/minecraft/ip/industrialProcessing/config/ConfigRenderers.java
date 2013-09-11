@@ -41,19 +41,24 @@ public class ConfigRenderers {
 	private int BLtransportConveyorBelt;
 	private int rendererPumpId;
 	private int rendererRainTankID;
+	private int rendererValveID;
 
 	public static int getBLtransportConveyorBelt() {
 		return getInstance().BLtransportConveyorBelt;
 	}
+
 	public static void setBLtransportConveyorBelt(int value) {
 		getInstance().BLtransportConveyorBelt = value;
 	}
+
 	public static int getBLmultiblockDisplayPanel() {
 		return getInstance().BLmultiblockDisplayPanel;
 	}
+
 	public static void setBLmultiblockDisplayPanel(int value) {
 		getInstance().BLmultiblockDisplayPanel = value;
 	}
+
 	public static int getBLmultiblockWheelConnector() {
 		return getInstance().BLmultiblockWheelConnector;
 	}
@@ -254,6 +259,14 @@ public class ConfigRenderers {
 		getInstance().rendererTransportFluidID = value;
 	}
 
+	public static int getRendererValveId() {
+		return getInstance().rendererValveID;
+	}
+
+	public static void setRendererValveId(int value) {
+		getInstance().rendererValveID = value;
+	}
+
 	public static int getRendererTankId() {
 		return getInstance().rendererTankID;
 	}
@@ -310,7 +323,6 @@ public class ConfigRenderers {
 		getInstance().rendererGeneratorID = value;
 	}
 
-
 	public static int getRendererBoilerId() {
 		return getInstance().rendererBoilerId;
 	}
@@ -342,7 +354,7 @@ public class ConfigRenderers {
 	public static void setRendererPumpId(int value) {
 		getInstance().rendererPumpId = value;
 	}
-	
+
 	public static int getRendererManometerId() {
 		return getInstance().rendererManometerId;
 	}

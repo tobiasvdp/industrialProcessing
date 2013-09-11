@@ -46,6 +46,7 @@ import ip.industrialProcessing.transport.fluids.BlockPump;
 import ip.industrialProcessing.transport.fluids.BlockRainTank;
 import ip.industrialProcessing.transport.fluids.BlockTank;
 import ip.industrialProcessing.transport.fluids.BlockTransportFluids;
+import ip.industrialProcessing.transport.fluids.BlockValve;
 import ip.industrialProcessing.transport.items.conveyorBelt.BLtransportConveyorBelt;
 import ip.industrialProcessing.transport.items.conveyorInput.BLtransportConveyorBeltInput;
 import ip.industrialProcessing.transport.items.conveyorOutput.BLtransportConveyorBeltOutput;
@@ -88,6 +89,7 @@ public interface ISetupMachineBlocks {
 	public final static BlockTank blockTank = new BlockTank();
 	public final static BlockRainTank blockRainTank = new BlockRainTank();
 	public final static BlockManoMeter blockManometer = new BlockManoMeter();
+	public final static BlockValve blockValve = new BlockValve();
 
 	// multiblocks
 	public final static BLmultiblockFrame BLmultiblockFrame = new BLmultiblockFrame();
@@ -105,13 +107,13 @@ public interface ISetupMachineBlocks {
 	public final static BLmultiblockRollingPress BLmultiblockRollingPress = new BLmultiblockRollingPress();
 	public final static BLmultiblockWheelConnector BLmultiblockWheelConnector = new BLmultiblockWheelConnector();
 	public final static BLmultiblockDisplayPanel BLmultiblockDisplayPanel = new BLmultiblockDisplayPanel();
-	
-	//transport
+
+	// transport
 	public final static BLtransportConveyorBelt BLtransportConveyorBelt = new BLtransportConveyorBelt();
 	public final static BLtransportConveyorBeltInput BLtransportConveyorBeltInput = new BLtransportConveyorBeltInput();
 	public final static BLtransportConveyorBeltOutput BLtransportConveyorBeltOutput = new BLtransportConveyorBeltOutput();
-	
-	//logic
+
+	// logic
 	public final static BLlogicCable BLlogicCable = new BLlogicCable();
 	public final static BLlogicSwitchBox BLlogicSwitchBox = new BLlogicSwitchBox();
 }

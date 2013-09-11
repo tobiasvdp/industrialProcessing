@@ -26,7 +26,8 @@ public class CreativeTabsIP extends CreativeTabs {
 	public String getTranslatedTabLabel() {
 		return "IP.itemGroup." + name;
 	}
-	public void setIcon(ItemStack item){
+
+	public void setIcon(ItemStack item) {
 		icon = item;
 	}
 }
