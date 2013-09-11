@@ -15,11 +15,22 @@ public class TElogicNode extends TileEntity implements ICommunicationNode{
 	private UTlogicNodeContainer[] nodeCollection = new UTlogicNodeContainer[6];
 	private UTBuffer[] buffer = new UTBuffer[6];
 	public String name;
+	private int placedSide = 0;
+	private boolean init = true;
 
 	public TElogicNode() {
 		for (int i = 0; i < 6; i++) {
 			nodeCollection[i] = new UTlogicNodeContainer();
 			buffer[i] = new UTBuffer(UTBusType.bus);
+		}
+	}
+	
+	@Override
+	public void updateEntity() {
+		super.updateEntity();
+		if(init){
+			placedSide = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+			init = false;
 		}
 	}
 
@@ -146,5 +157,28 @@ public class TElogicNode extends TileEntity implements ICommunicationNode{
 	@Override
 	public UTBusType getBusType() {
 		return UTBusType.bus;
+	}
+
+	@Override
+	public boolean isSideConnected(ForgeDirection side) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isSideValid(ForgeDirection side) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean hasSideActivity(ForgeDirection side) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public int getPlacedSide() {
+		return placedSide;
 	}
 }

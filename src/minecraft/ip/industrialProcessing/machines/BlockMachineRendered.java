@@ -51,6 +51,6 @@ public abstract class BlockMachineRendered extends BlockMachine {
 	@Override
 	public boolean canPlaceTorchOnTop(World world, int x, int y, int z) {
 		// TODO Auto-generated method stub
-		return true;//super.canPlaceTorchOnTop(world, x, y, z);
+		return false;//super.canPlaceTorchOnTop(world, x, y, z);
 	}
 }

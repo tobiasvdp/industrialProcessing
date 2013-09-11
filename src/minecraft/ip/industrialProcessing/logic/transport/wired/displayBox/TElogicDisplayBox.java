@@ -198,4 +198,28 @@ public class TElogicDisplayBox extends TileEntity implements ICommunicationNode,
 		buffer[side.ordinal()].put(index, value);
 		return true;
 	}
+
+	@Override
+	public boolean isSideConnected(ForgeDirection side) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isSideValid(ForgeDirection side) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean hasSideActivity(ForgeDirection side) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public int getPlacedSide() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

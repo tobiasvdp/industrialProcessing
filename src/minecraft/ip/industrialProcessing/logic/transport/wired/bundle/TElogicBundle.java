@@ -67,4 +67,28 @@ public class TElogicBundle extends TileEntity implements ICommunicationTransport
 	public UTBusType getBusType() {
 		return UTBusType.bundle;
 	}
+
+	@Override
+	public boolean isSideConnected(ForgeDirection side) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isSideValid(ForgeDirection side) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean hasSideActivity(ForgeDirection side) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public int getPlacedSide() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

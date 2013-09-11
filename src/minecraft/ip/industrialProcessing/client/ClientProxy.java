@@ -10,6 +10,7 @@ import ip.industrialProcessing.client.render.ModelMachine;
 import ip.industrialProcessing.client.render.ModelStateMachine;
 import ip.industrialProcessing.client.render.ModelingMultiblock;
 import ip.industrialProcessing.client.render.RendererLivingEntity;
+import ip.industrialProcessing.client.render.RendererLogic;
 import ip.industrialProcessing.client.render.RendererTileEntity;
 import ip.industrialProcessing.client.render.RendererTileEntityAnimated;
 import ip.industrialProcessing.client.render.RendererTileEntityConnected;
@@ -18,6 +19,8 @@ import ip.industrialProcessing.client.render.RendererTileEntityFluidWorker;
 import ip.industrialProcessing.client.render.RendererTileEntityState;
 import ip.industrialProcessing.client.render.RenderingMultiblock;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.logic.transport.wired.switchbox.MDlogicSwitchBox;
+import ip.industrialProcessing.logic.transport.wired.switchbox.TElogicSwitchBox;
 import ip.industrialProcessing.machines.RendererBlock;
 import ip.industrialProcessing.machines.blastFurnace.ModelBlastFurnace;
 import ip.industrialProcessing.machines.blastFurnace.ModelBlastFurnaceTop;
@@ -122,6 +125,7 @@ public class ClientProxy extends CommonProxy {
 	private static final MDmultiblockWheelConnector MDmultiblockWheelConnector = new MDmultiblockWheelConnector();
 	private static final MDmultiblockDisplayPanel MDmultiblockDisplayPanel = new MDmultiblockDisplayPanel();
 	private static final MDtransportConveyorBelt MDtransportConveyorBelt = new MDtransportConveyorBelt();
+	private static final MDlogicSwitchBox MDlogicSwitchBox = new MDlogicSwitchBox();
 
 	@Override
 	public void registerRenderers() {
@@ -253,6 +257,10 @@ public class ClientProxy extends CommonProxy {
 		ConfigRenderers.setBLtransportConveyorBelt(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLtransportConveyorBelt(), new TEtransportConveyorBelt()));
 
+		ClientRegistry.bindTileEntitySpecialRenderer(TElogicSwitchBox.class, new RendererLogic(IndustrialProcessing.BLlogicSwitchBox, "MDlogicSwitchBox", MDlogicSwitchBox));
+		ConfigRenderers.setBLlogicSwitchBox(RenderingRegistry.getNextAvailableRenderId());
+		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLlogicSwitchBox(), new TElogicSwitchBox()));
+		
 		RenderingRegistry.registerEntityRenderingHandler(ENmultiblockFrame.class, new RendererLivingEntity(new MDmultiblockFramePanel(), 1.0F, "MDmultiblockFramePanel"));
 		RenderingRegistry.registerEntityRenderingHandler(ENmultiblockLiftDoor.class, new RendererLivingEntity(new MDmultiblockLiftDoor(), 1.0F, "ModelMultiblockLiftDoor"));
 	}
