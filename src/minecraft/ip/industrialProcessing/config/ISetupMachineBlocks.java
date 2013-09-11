@@ -1,5 +1,7 @@
 package ip.industrialProcessing.config;
 
+import ip.industrialProcessing.logic.transport.wired.cable.BLlogicCable;
+import ip.industrialProcessing.logic.transport.wired.switchbox.BLlogicSwitchBox;
 import ip.industrialProcessing.machines.blastFurnace.BlockBlastFurnace;
 import ip.industrialProcessing.machines.classifier.BlockClassifier;
 import ip.industrialProcessing.machines.crusher.BlockCrusher;
@@ -104,7 +106,12 @@ public interface ISetupMachineBlocks {
 	public final static BLmultiblockWheelConnector BLmultiblockWheelConnector = new BLmultiblockWheelConnector();
 	public final static BLmultiblockDisplayPanel BLmultiblockDisplayPanel = new BLmultiblockDisplayPanel();
 	
+	//transport
 	public final static BLtransportConveyorBelt BLtransportConveyorBelt = new BLtransportConveyorBelt();
 	public final static BLtransportConveyorBeltInput BLtransportConveyorBeltInput = new BLtransportConveyorBeltInput();
 	public final static BLtransportConveyorBeltOutput BLtransportConveyorBeltOutput = new BLtransportConveyorBeltOutput();
+	
+	//logic
+	public final static BLlogicCable BLlogicCable = new BLlogicCable();
+	public final static BLlogicSwitchBox BLlogicSwitchBox = new BLlogicSwitchBox();
 }
