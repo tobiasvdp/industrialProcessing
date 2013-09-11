@@ -10,7 +10,7 @@ import java.util.UUID;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TElogicNode extends TileEntity implements ICommunicationNode{
+public abstract class TElogicNode extends TileEntity implements ICommunicationNode{
 
 	private UTlogicNodeContainer[] nodeCollection = new UTlogicNodeContainer[6];
 	private UTBuffer[] buffer = new UTBuffer[6];
@@ -130,10 +130,7 @@ public class TElogicNode extends TileEntity implements ICommunicationNode{
 		return true;
 	}
 
-	private void transition() {
-		// TODO Auto-generated method stub
-		
-	}
+	protected abstract void transition();
 
 	@Override
 	public boolean send(ForgeDirection side, boolean value, int index) {

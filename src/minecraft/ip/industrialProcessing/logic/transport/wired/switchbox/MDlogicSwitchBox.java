@@ -207,17 +207,29 @@ public class MDlogicSwitchBox extends ModelLogic {
 		GL11.glPushMatrix();
 		switch (side) {
 		case 2:
+			GL11.glTranslatef(0.0f, 1.0f, 0.0f);
+			GL11.glRotatef(-90, 1.0f, 0.0f, 0.0f);
+			GL11.glTranslatef(0.0f, -1.0f, 0.0f);
 			break;
 		case 3:
-			break;
-		case 4:
 			GL11.glTranslatef(0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(90, 1.0f, 0.0f, 0.0f);
 			GL11.glTranslatef(0.0f, -1.0f, 0.0f);
 			break;
+		case 4:
+			GL11.glTranslatef(0.0f, 1.0f, 0.0f);
+			GL11.glRotatef(90, 0.0f, 0.0f, 1.0f);
+			GL11.glTranslatef(0.0f, -1.0f, 0.0f);
+			break;
 		case 5:
+			GL11.glTranslatef(0.0f, 1.0f, 0.0f);
+			GL11.glRotatef(-90, 0.0f, 0.0f, 1.0f);
+			GL11.glTranslatef(0.0f, -1.0f, 0.0f);
 			break;
 		case 6:
+			GL11.glTranslatef(0.0f, 1.0f, 0.0f);
+			GL11.glRotatef(180, 0.0f, 0.0f, 1.0f);
+			GL11.glTranslatef(0.0f, -1.0f, 0.0f);
 			break;
 		default:
 			break;

@@ -19,4 +19,10 @@ public class TElogicSwitchBox extends TElogicNode {
 	public TElogicSwitchBox(){
 		super();
 	}
+
+	@Override
+	protected void transition() {
+		// TODO Auto-generated method stub
+		
+	}
 }
