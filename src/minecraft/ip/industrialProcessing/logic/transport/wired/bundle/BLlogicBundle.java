@@ -1,9 +1,9 @@
-package ip.industrialProcessing.logic.transport.wired.cable;
+package ip.industrialProcessing.logic.transport.wired.bundle;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
-import ip.industrialProcessing.logic.transport.ICommunicationNode;
 import ip.industrialProcessing.logic.transport.ICommunicationTransport;
+import ip.industrialProcessing.logic.transport.wired.cable.TElogicCable;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -13,20 +13,20 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class BLlogicCable extends BlockContainer {
+public class BLlogicBundle extends BlockContainer{
 
-	public BLlogicCable() {
-		super(ConfigMachineBlocks.getBLlogicCable(), Material.circuits);
+	public BLlogicBundle() {
+		super(ConfigMachineBlocks.getBLlogicBundle(), Material.circuits);
 		setHardness(5.0f);
 		setStepSound(Block.soundPowderFootstep);
-		setUnlocalizedName("BLlogicCable");
+		setUnlocalizedName("BLlogicBundle");
 		setCreativeTab(IndustrialProcessing.tabLogic);
 		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "inputTop");
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TElogicCable();
+		return new TElogicBundle();
 	}
 	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
