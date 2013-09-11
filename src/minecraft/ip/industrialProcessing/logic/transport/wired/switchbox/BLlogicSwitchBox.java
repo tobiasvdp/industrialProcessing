@@ -1,8 +1,11 @@
 package ip.industrialProcessing.logic.transport.wired.switchbox;
 
+import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.logic.transport.ICommunicationNode;
 import ip.industrialProcessing.logic.transport.ICommunicationTransport;
 import ip.industrialProcessing.logic.transport.wired.cable.TElogicCable;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
@@ -12,9 +15,13 @@ import net.minecraft.world.World;
 
 public class BLlogicSwitchBox extends BlockContainer {
 
-	public BLlogicSwitchBox(int par1, Material par2Material) {
-		super(par1, par2Material);
-		// TODO Auto-generated constructor stub
+	public BLlogicSwitchBox() {
+		super(ConfigMachineBlocks.getBLlogicSwitchBox(), Material.iron);
+		setHardness(5.0f);
+		setStepSound(Block.soundMetalFootstep);
+		setUnlocalizedName("BLlogicSwitchBox");
+		setCreativeTab(IndustrialProcessing.tabLogic);
+		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "inputTop");
 	}
 
 	@Override

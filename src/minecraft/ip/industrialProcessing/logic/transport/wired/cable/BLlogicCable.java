@@ -1,5 +1,7 @@
 package ip.industrialProcessing.logic.transport.wired.cable;
 
+import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.logic.transport.ICommunicationTransport;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -11,9 +13,13 @@ import net.minecraft.world.World;
 
 public class BLlogicCable extends BlockContainer {
 
-	public BLlogicCable(int par1, Material par2Material) {
-		super(par1, par2Material);
-		// TODO Auto-generated constructor stub
+	public BLlogicCable() {
+		super(ConfigMachineBlocks.getBLlogicCable(), Material.circuits);
+		setHardness(5.0f);
+		setStepSound(Block.soundPowderFootstep);
+		setUnlocalizedName("BLlogicCable");
+		setCreativeTab(IndustrialProcessing.tabLogic);
+		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "inputTop");
 	}
 
 	@Override
