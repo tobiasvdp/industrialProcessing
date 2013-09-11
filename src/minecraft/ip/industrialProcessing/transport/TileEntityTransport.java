@@ -1,5 +1,6 @@
 package ip.industrialProcessing.transport;
 
+import ip.industrialProcessing.ConnectedTileUtils;
 import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.IConnectedTile;
 import ip.industrialProcessing.machines.TileEntitySynced;
@@ -13,21 +14,21 @@ import net.minecraftforge.common.ForgeDirection;
 public abstract class TileEntityTransport extends TileEntitySynced implements IConnectedTile {
 
 	protected TransportConnectionState[] states = new TransportConnectionState[6];
-	private boolean unverified = false; 
+	private boolean unverified = false;
 
 	public TileEntityTransport() {
 		Arrays.fill(states, TransportConnectionState.NONE);
 	}
- 
+
 	@Override
-	public boolean canUpdate() { 
+	public boolean canUpdate() {
 		return true;
 	}
-	
+
 	@Override
-	public void updateEntity() { 
+	public void updateEntity() {
 		super.updateEntity();
-		if(unverified)
+		if (unverified)
 			updateConnections();
 	}
 
@@ -35,11 +36,12 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
 
 	public void searchForConnections() {
 		this.unverified = true;
-		if(this.worldObj.isRemote)
-			updateConnections(); // do an extra clientside check to reduce flicker.
+		if (this.worldObj.isRemote)
+			updateConnections(); // do an extra clientside check to reduce
+									// flicker.
 	}
-	
-	private void updateConnections(){
+
+	private void updateConnections() {
 		System.out.println("Verifying transport at " + xCoord + ", " + yCoord + ", " + zCoord + " on " + (this.worldObj.isRemote ? "client" : "server"));
 		boolean modified = false;
 
@@ -54,11 +56,11 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
 		}
 		// if the network changed, update the map
 		if (modified)
-			updateNetwork(); 
+			updateNetwork();
 		System.out.println("States at " + xCoord + ", " + yCoord + ", " + zCoord + " are  UP:" + this.states[ForgeDirection.UP.ordinal()] + " DOWN:" + this.states[ForgeDirection.DOWN.ordinal()]);
 		this.unverified = false;
 	}
- 
+
 	public TransportConnectionState getTransportConnection(ForgeDirection direction) {
 		return states[direction.ordinal()];
 	}
@@ -69,7 +71,8 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
 
 	private TransportConnectionState getNeighborState(ForgeDirection direction) {
 		TileEntity entity = getNeighbor(direction);
-		if(entity == null) return TransportConnectionState.NONE;
+		if (entity == null)
+			return TransportConnectionState.NONE;
 		return getState(entity, direction);
 	}
 
@@ -86,19 +89,12 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
 	@Override
 	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
 		super.writeToNBT(par1nbtTagCompound);
-		int[] stateInts = new int[6];
-		for (int i = 0; i < stateInts.length; i++) {
-			stateInts[i] = states[i].ordinal();
-		}
-		par1nbtTagCompound.setIntArray("TState", stateInts);
+		ConnectedTileUtils.writeToNBT(par1nbtTagCompound, this.states);
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
 		super.readFromNBT(par1nbtTagCompound);
-		int[] stateInts = par1nbtTagCompound.getIntArray("TState");
-		for (int i = 0; i < stateInts.length; i++) {
-			states[i] = TransportConnectionState.values()[stateInts[i]];
-		} 
+		ConnectedTileUtils.readFromNBT(par1nbtTagCompound, this.states);
 	}
 }

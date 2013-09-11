@@ -3,6 +3,7 @@ package ip.industrialProcessing.transport.fluids;
 import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.ModelConnectedFluid;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.Icon;
 
 public class ModelRainTank extends ModelConnectedFluid {
@@ -255,8 +256,26 @@ public class ModelRainTank extends ModelConnectedFluid {
 
 	@Override
 	public void renderModelConnectedFluid(float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, Icon icon) {
-		// TODO Auto-generated method stub
+		if(tankSlot == 0)
+		{
 
+			float x = -8f;
+			float z = -8f;
+			
+			float height = 3.5f * fluidPercentage; 
+			float y = 12.0f-height;
+			int w = 16;
+			int h = 16; 
+			Tessellator tessellator = Tessellator.instance;
+				tessellator.startDrawingQuads();
+
+				tessellator.addVertexWithUV((double) (x + 0) * f, (double) y * f, (double) (z + 0) * f, (double) icon.getMinU(), (double) icon.getMinV());
+				tessellator.addVertexWithUV((double) (x + w) * f, (double) y * f, (double) (z + 0) * f, (double) icon.getMaxU(), (double) icon.getMinV());
+				tessellator.addVertexWithUV((double) (x + w) * f, (double) y * f, (double) (z + h) * f, (double) icon.getMaxU(), (double) icon.getMaxV());
+				tessellator.addVertexWithUV((double) (x + 0) * f, (double) y * f, (double) (z + h) * f, (double) icon.getMinU(), (double) icon.getMaxV());
+				tessellator.draw();
+			
+		}
 	}
 
 	@Override
@@ -265,41 +284,40 @@ public class ModelRainTank extends ModelConnectedFluid {
 		boolean connectedPipe = false;
 		FloorPlate.render(f5);
 
-		if (north != ConnectionState.CONNECTED) {
+		if (south != ConnectionState.CONNECTED) {
 			WallBack.render(f5);
 		}
-		if (west != ConnectionState.CONNECTED) {
+		if (east != ConnectionState.CONNECTED) {
 			WallRight.render(f5);
 		}
-		if (east != ConnectionState.CONNECTED) {
+		if (west != ConnectionState.CONNECTED) {
 			WallLeft.render(f5);
 		}
-		if (south != ConnectionState.CONNECTED) {
+		if (north != ConnectionState.CONNECTED) {
 			WallFront.render(f5);
 		}
-
-		DrainRight.render(f5);
+ 
 		if (down == ConnectionState.PLUGGED) {
 			connectedPipe = true;
 			DrainBottom.render(f5);
 			DrainPipeBottom.render(f5);
 		}
-		if (north == ConnectionState.PLUGGED) {
+		if (south == ConnectionState.PLUGGED) {
 			connectedPipe = true;
 			DrainBack.render(f5);
 			DrainPipeBack.render(f5);
 		}
-		if (south == ConnectionState.PLUGGED) {
+		if (north == ConnectionState.PLUGGED) {
 			connectedPipe = true;
 			DrainFront.render(f5);
 			DrainPipeFront.render(f5);
 		}
-		if (east == ConnectionState.PLUGGED) {
+		if (west == ConnectionState.PLUGGED) {
 			connectedPipe = true;
 			DrainLeft.render(f5);
 			DrainPipeLeft.render(f5);
 		}
-		if (west == ConnectionState.PLUGGED) {
+		if (east == ConnectionState.PLUGGED) {
 			connectedPipe = true;
 			DrainRight.render(f5);
 			DrainPipeRight.render(f5);

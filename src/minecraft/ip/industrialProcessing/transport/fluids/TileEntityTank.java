@@ -26,7 +26,7 @@ import ip.industrialProcessing.machines.animation.tanks.TankHandler;
 import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
 import ip.industrialProcessing.utils.FluidTransfers;
 
-public class TileEntityTank extends TileEntitySynced implements IFluidHandler, IConnectedTile, IFluidInfo, ITankSyncable {
+public class TileEntityTank extends TileEntitySynced implements IFluidHandler, IConnectedTile, IFluidInfo, ITankSyncable, IPressuredTank {
 
 	private FluidTank tank = new FluidTank(10 * FluidContainerRegistry.BUCKET_VOLUME);
 	private boolean isTop = false;
@@ -35,6 +35,8 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
 	private ConnectionState[] states = new ConnectionState[6];
 	private boolean unverified = true;
 	private TankHandler tankHandler;
+	private float pressure;
+	private float pressureAbove;
 
 	public TileEntityTank() {
 		Arrays.fill(states, ConnectionState.DISCONNECTED);
@@ -53,6 +55,8 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
+		this.pressure = 0;
+		this.pressureAbove = 0;
 		if (tank.getFluidAmount() > 0 || unverified) {
 			TileEntity entityBelow = this.worldObj.getBlockTileEntity(xCoord, yCoord - 1, zCoord);
 			if (entityBelow instanceof TileEntityTank) {
@@ -66,15 +70,19 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
 		}
 		if (unverified) {
 			TileEntity entityAbove = this.worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord);
-			if (entityAbove instanceof TileEntityTank)
+			if (entityAbove instanceof TileEntityTank) {
+				TileEntityTank tankAbove = (TileEntityTank) entityAbove;
+				this.pressureAbove = tankAbove.getPressure(ForgeDirection.DOWN);
 				states[ForgeDirection.UP.ordinal()] = ConnectionState.CONNECTED;
-			else
+			} else
 				states[ForgeDirection.UP.ordinal()] = ConnectionState.DISCONNECTED;
 		}
 
-		if (!this.worldObj.isRemote)
+		if (!this.worldObj.isRemote) {
 			if (this.tankHandler.readDataFromTanks())
 				TileTankSyncHandler.sendTankData(this, this.tankHandler);
+			this.pressure = this.tank.getFluidAmount() * 500 / this.tank.getCapacity();
+		}
 	}
 
 	@Override
@@ -158,5 +166,14 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
 		if (slot == 0)
 			return this.tank;
 		return null;
+	}
+
+	@Override
+	public float getPressure(ForgeDirection from) {
+		if (from == ForgeDirection.UP)
+			return 0;
+		if (from == ForgeDirection.DOWN)
+			return this.pressure + this.pressureAbove;
+		return this.pressure / 2 + this.pressureAbove;
 	}
 }

@@ -5,6 +5,7 @@ import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
 import ip.industrialProcessing.machines.animation.AnimationMode;
+import ip.industrialProcessing.machines.animation.IAnimationSyncable;
 import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 import ip.industrialProcessing.power.IPowerAcceptor;
 import ip.industrialProcessing.power.PowerHelper;
@@ -13,7 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 
 // This isn't an actual battery, as it has input and outputs, so the resistance defined here is the resistance the input network sees this "battery" as
-public class TileEntityEnergyCell extends TileEntityPowerGenerator implements IPowerAcceptor, IAnimationProgress {
+public class TileEntityEnergyCell extends TileEntityPowerGenerator implements IPowerAcceptor, IAnimationProgress, IAnimationSyncable {
 
 	public TileEntityEnergyCell() {
 		super(100);
@@ -84,7 +85,7 @@ public class TileEntityEnergyCell extends TileEntityPowerGenerator implements IP
 
 	@Override
 	public float getResistance(ForgeDirection side, float voltage) {
-		return 15 + PowerHelper.getResistanceForStorage(this.storedJoules, this.totalJouleCapacity);
+		return 10 + PowerHelper.getResistanceForStorage(this.storedJoules, this.totalJouleCapacity);
 	}
 
 	@Override
@@ -115,5 +116,11 @@ public class TileEntityEnergyCell extends TileEntityPowerGenerator implements IP
 		this.storedJoules -= delta;
 		notifyBlockChange();
 		return PowerHelper.getCharge(delta, voltage);
+	}
+	
+	@Override
+	public AnimationHandler getAnimationHandler() {
+	
+		return this.animation;
 	}
 }

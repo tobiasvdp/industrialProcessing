@@ -20,6 +20,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
+import net.minecraftforge.fluids.IFluidTank;
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.ConnectionState;
@@ -27,29 +28,46 @@ import ip.industrialProcessing.client.render.IFluidInfo;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.IMachineTanks;
 import ip.industrialProcessing.machines.MachineFluidTank;
+import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
+import ip.industrialProcessing.machines.animation.tanks.ITankSyncable;
+import ip.industrialProcessing.machines.animation.tanks.TankHandler;
+import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
 import ip.industrialProcessing.transport.TileEntityTransport;
 import ip.industrialProcessing.transport.TransportConnectionState;
 import ip.industrialProcessing.utils.FluidTransfers;
 
-public class TileEntityTransportFluids extends TileEntityTransport implements IFluidInfo {
+public class TileEntityTransportFluids extends TileEntityTransport implements IFluidInfo, ITankSyncable {
 
-	FluidTank fluid = new FluidTank(1000);
-	int pressure = 0;
+	FluidTank tank = new FluidTank(1000);
+	private float pressure = 0;
 	private static int tileID;
 	private int id;
+	private TankHandler tankHandler = new TankHandler(this, new int[] { 0 });
 
-	public int getPressure() {
+	public float getPressure() {
 		return pressure;
 	}
-	
+
 	public TileEntityTransportFluids() {
 		this.id = tileID++;
 	}
 
 	public FluidTankInfo getTankInfo() {
-		return fluid.getInfo();
+		return tank.getInfo();
 	}
 
+	@Override
+	public void writeToNBT(NBTTagCompound par1nbtTagCompound) { 
+		super.writeToNBT(par1nbtTagCompound);
+		tank.writeToNBT(par1nbtTagCompound);
+	}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound par1nbtTagCompound) { 
+		super.readFromNBT(par1nbtTagCompound);
+		tank.readFromNBT(par1nbtTagCompound);
+	}
+	
 	@Override
 	protected TransportConnectionState getState(TileEntity entity, ForgeDirection direction) {
 		ForgeDirection from = direction.getOpposite();
@@ -59,9 +77,9 @@ public class TileEntityTransportFluids extends TileEntityTransport implements IF
 		// connection should be
 		// made (lava pipe with
 		// water pipe ..)
-		
-		if(entity instanceof TileEntityManoMeter && direction == ForgeDirection.UP)
-			return TransportConnectionState.TRANSPORT; 
+
+		if (entity instanceof TileEntityManoMeter && direction == ForgeDirection.UP)
+			return TransportConnectionState.TRANSPORT;
 
 		if (entity instanceof TileEntityPump) {
 			TileEntityPump pump = (TileEntityPump) entity;
@@ -95,6 +113,9 @@ public class TileEntityTransportFluids extends TileEntityTransport implements IF
 		inputFromOutputs();
 		equalizeToOtherPipes();
 		leakPressure();
+
+		if (this.tankHandler.readDataFromTanks())
+			TileTankSyncHandler.sendTankData(this, this.tankHandler);
 	}
 
 	private void leakPressure() {
@@ -111,30 +132,30 @@ public class TileEntityTransportFluids extends TileEntityTransport implements IF
 			if (state == TransportConnectionState.INPUT || state == TransportConnectionState.OUTPUT) {
 				TileEntityPump pump = getNeighborPump(direction);
 				if (pump != null) {
-					int lastPressure = this.pressure;
+					float lastPressure = this.pressure;
 					if (pump.isFluidInput(direction.getOpposite())) {
-						int pumpPressure = pump.getInputPressure();
+						float pumpPressure = pump.getInputPressure();
 
-						int flow = pumpPressure - this.pressure;
+						float flow = pumpPressure - this.pressure;
 						if (flow < 0) {
 
 							pumpPressure -= flow / 4;
 							this.pressure += flow / 4;
 
-							FluidTransfers.transfer(-flow / 2, this.fluid, pump.getTank());
+							FluidTransfers.transfer(-(int)flow / 2, this.tank, pump.getTank());
 						}
 						pump.setInputPressure(pumpPressure);
 
 					} else if (pump.isFluidOuptut(direction.getOpposite())) {
-						int pumpPressure = pump.getOutputPressure();
+						float pumpPressure = pump.getOutputPressure();
 
-						int flow = pumpPressure - this.pressure;
+						float flow = pumpPressure - this.pressure;
 						if (flow > 0) {
 
 							pumpPressure -= flow / 4;
 							this.pressure += flow / 4;
 
-							FluidTransfers.transfer(flow / 2, pump.getTank(), this.fluid);
+							FluidTransfers.transfer((int)(flow/2f), pump.getTank(), this.tank);
 						}
 						pump.setOutputPressure(pumpPressure);
 					}
@@ -150,12 +171,12 @@ public class TileEntityTransportFluids extends TileEntityTransport implements IF
 			if (state == TransportConnectionState.TRANSPORT) {
 				TileEntityTransportFluids other = getNeighborPipe(direction);
 				if (other != null) {
-					int flow = other.pressure - this.pressure;
+					float flow = other.pressure - this.pressure;
 					if (flow > 0) {
 						other.pressure -= flow / 4;
 						this.pressure += flow / 4;
 
-						FluidTransfers.transfer(flow / 2, other.fluid, this.fluid);
+						FluidTransfers.transfer((int)(flow/2f), other.tank, this.tank);
 					}
 				}
 			}
@@ -170,14 +191,14 @@ public class TileEntityTransportFluids extends TileEntityTransport implements IF
 			if (state == TransportConnectionState.DUAL) {
 				IFluidHandler other = getNeighborFluidHandler(direction);
 				if (other != null) {
-					int tankPressure = getTankPressure(other, direction);
+					float tankPressure = getTankPressure(other, direction);
 					if (pressure < tankPressure) {
-						int flow = tankPressure - this.pressure;
+						float flow = tankPressure - this.pressure;
 						if (flow > 0) {
 							// other.pressure -= flow / 4;
 							this.pressure += flow / 4;
 
-							FluidTransfers.transfer(flow / 2, other, from, this.fluid);
+							FluidTransfers.transfer((int)(flow/2f), other, from, this.tank);
 						}
 					}
 				}
@@ -186,21 +207,21 @@ public class TileEntityTransportFluids extends TileEntityTransport implements IF
 	}
 
 	private void outputToInputs() {
-			for (int i = 0; i < states.length; i++) {
-				TransportConnectionState state = this.states[i];
-				ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[i];
-				ForgeDirection from = direction.getOpposite();
-				if (state == TransportConnectionState.DUAL) {
-					IFluidHandler other = getNeighborFluidHandler(direction);
-					if (other != null) {
-						int tankPressure = getTankPressure(other, direction);
-						if (this.pressure > tankPressure) {
-						int flow = tankPressure - this.pressure;
+		for (int i = 0; i < states.length; i++) {
+			TransportConnectionState state = this.states[i];
+			ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[i];
+			ForgeDirection from = direction.getOpposite();
+			if (state == TransportConnectionState.DUAL) {
+				IFluidHandler other = getNeighborFluidHandler(direction);
+				if (other != null) {
+					float tankPressure = getTankPressure(other, direction);
+					if (this.pressure > tankPressure) {
+						float flow = tankPressure - this.pressure;
 						if (flow < 0) {
 							// other.pressure -= flow / 4;
 							this.pressure += flow / 4;
 
-							FluidTransfers.transfer(-flow / 2, this.fluid, other, from);
+							FluidTransfers.transfer(-(int)(flow/2f), this.tank, other, from);
 						}
 					}
 				}
@@ -208,10 +229,9 @@ public class TileEntityTransportFluids extends TileEntityTransport implements IF
 		}
 	}
 
-	private int getTankPressure(IFluidHandler other, ForgeDirection direction) {
-		if(other instanceof IPressuredTank)
-		{
-			IPressuredTank tank = (IPressuredTank)other;
+	private float getTankPressure(IFluidHandler other, ForgeDirection direction) {
+		if (other instanceof IPressuredTank) {
+			IPressuredTank tank = (IPressuredTank) other;
 			return tank.getPressure(direction.getOpposite());
 		}
 		return 0;
@@ -240,6 +260,18 @@ public class TileEntityTransportFluids extends TileEntityTransport implements IF
 
 	@Override
 	public FluidTankInfo[] getTanks() {
-		return new FluidTankInfo[] { this.fluid.getInfo() };
+		return new FluidTankInfo[] { this.tank.getInfo() };
+	}
+
+	@Override
+	public TankHandler getTankHandler() {
+		return this.tankHandler;
+	}
+
+	@Override
+	public IFluidTank getTankInSlot(int slot) {
+		if (slot == 0)
+			return this.tank;
+		return null;
 	}
 }

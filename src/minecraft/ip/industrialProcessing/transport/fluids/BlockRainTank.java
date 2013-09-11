@@ -4,6 +4,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
@@ -26,4 +28,20 @@ public class BlockRainTank extends BlockMachineRendered {
 	public int getRenderType() {
 		return ConfigRenderers.getRendererRainTankId();
 	}
+
+	@Override
+	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
+		super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
+		TileEntityRainTank rainTank = (TileEntityRainTank) par1World.getBlockTileEntity(par2, par3, par4);
+		rainTank.searchForConnections();
+	}
+
+	@Override
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack itemStack) {
+		super.onBlockPlacedBy(world, x, y, z, entityLivingBase, itemStack);
+		TileEntityRainTank rainTank = (TileEntityRainTank) world.getBlockTileEntity(x, y, z);
+		rainTank.searchForConnections();
+	}
+ 
+
 }
