@@ -2,6 +2,7 @@ package ip.industrialProcessing.logic.transport.wired.cable;
 
 import java.util.ArrayList;
 
+import codechicken.core.ArrayUtils;
 import ip.industrialProcessing.logic.transport.ICommunication;
 import ip.industrialProcessing.logic.transport.ICommunicationNode;
 import ip.industrialProcessing.logic.transport.ICommunicationTransport;
@@ -12,20 +13,33 @@ import net.minecraftforge.common.ForgeDirection;
 public class TElogicCable extends TileEntity implements ICommunicationTransport {
 	public boolean isEnabled = true;
 	private boolean init = true;;
-	private ArrayList<Integer> placedSide = new ArrayList<Integer>();
+	private boolean[] placedSide = new boolean[6];
 	
 	public TElogicCable() {
-		// TODO Auto-generated constructor stub
+		for(int i =0;i<6;i++){
+			placedSide[i] = false;
+		}
 	}
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
 		if(init){
-			placedSide.add(worldObj.getBlockMetadata(xCoord, yCoord, zCoord));
+			placedSide[transformToForgeDirection(worldObj.getBlockMetadata(xCoord, yCoord, zCoord))] = true;
+			System.out.println(transformToForgeDirection(worldObj.getBlockMetadata(xCoord, yCoord, zCoord)));
 			init = false;
 		}
 	}
-
+	private int transformToForgeDirection(int blockMetadata) {
+		switch(blockMetadata){
+		case 0:return 0;
+		case 1:return 1;
+		case 2:return 3;
+		case 3:return 2;
+		case 4:return 5;
+		case 5:return 4;
+		}
+		return 0;
+	}
 	@Override
 	public void sendDiscoveryPacket(ForgeDirection receivingSide, ForgeDirection sendingSide, ArrayList<ICommunicationTransport> path, ICommunicationNode node, ForgeDirection side) {
 		TileEntity te = worldObj.getBlockTileEntity(xCoord + sendingSide.offsetX, yCoord + sendingSide.offsetY, zCoord + sendingSide.offsetZ);
@@ -103,12 +117,21 @@ public class TElogicCable extends TileEntity implements ICommunicationTransport 
 
 	@Override
 	public int getPlacedSidesSize() {
-		return placedSide.size();
+		return 6;
 	}
 
 	@Override
-	public int getPlacedSide(int i) {
-		return placedSide.get(i);
+	public boolean getPlacedSide(int i) {
+		return placedSide[i];
+	}
+	@Override
+	public void addToConnectedSides(int side) {
+		placedSide[transformToForgeDirection(side)] = true;
+		System.out.println(transformToForgeDirection(side));
+	}
+	@Override
+	public boolean[] getPlacedSides() {
+		return placedSide;
 	}
 
 }

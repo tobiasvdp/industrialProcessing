@@ -18,11 +18,13 @@ public class TElogicDisplayBox extends TileEntity implements ICommunicationNode,
 	private UTlogicNodeContainer[] nodeCollection = new UTlogicNodeContainer[6];
 	private UTBuffer[] buffer = new UTBuffer[6];
 	public String name;
+	private boolean[] placedSide = new boolean[6];
 
 	public TElogicDisplayBox() {
 		for (int i = 0; i < 6; i++) {
 			nodeCollection[i] = new UTlogicNodeContainer();
 			buffer[i] = new UTBuffer(UTBusType.bus);
+			placedSide[i] = false;
 		}
 	}
 
@@ -218,12 +220,22 @@ public class TElogicDisplayBox extends TileEntity implements ICommunicationNode,
 	}
 
 	@Override
-	public int getPlacedSide(int i) {
-		return 1;
+	public boolean getPlacedSide(int i) {
+		return placedSide[i];
 	}
 
 	@Override
 	public int getPlacedSidesSize() {
-		return 1;
+		return 6;
+	}
+
+	@Override
+	public void addToConnectedSides(int side) {
+		placedSide[side] = true;
+	}
+
+	@Override
+	public boolean[] getPlacedSides() {
+		return  placedSide;
 	}
 }

@@ -15,13 +15,14 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 	private UTlogicNodeContainer[] nodeCollection = new UTlogicNodeContainer[6];
 	private UTBuffer[] buffer = new UTBuffer[6];
 	public String name;
-	private int placedSide = 0;
+	private boolean[] placedSide = new boolean[6];
 	private boolean init = true;
 
 	public TElogicNode() {
 		for (int i = 0; i < 6; i++) {
 			nodeCollection[i] = new UTlogicNodeContainer();
 			buffer[i] = new UTBuffer(UTBusType.bus);
+			placedSide[i] = false;
 		}
 	}
 	
@@ -29,7 +30,7 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 	public void updateEntity() {
 		super.updateEntity();
 		if(init){
-			placedSide = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+			placedSide[(worldObj.getBlockMetadata(xCoord, yCoord, zCoord))] = true;
 			init = false;
 		}
 	}
@@ -175,11 +176,17 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 	}
 
 	@Override
-	public int getPlacedSide(int i) {
-		return placedSide;
+	public boolean getPlacedSide(int i) {
+		return placedSide[i];
 	}
 	@Override
 	public int getPlacedSidesSize() {
-		return 1;
+		return 6;
+	}
+	public void addToConnectedSides(int side){}
+	
+	@Override
+	public boolean[] getPlacedSides() {
+		return placedSide;
 	}
 }

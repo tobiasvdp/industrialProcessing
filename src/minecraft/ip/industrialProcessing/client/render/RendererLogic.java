@@ -25,16 +25,21 @@ public class RendererLogic extends RendererTileEntity {
 			if (tl instanceof ICommunication) {
 				ICommunication com = (ICommunication) tl;
 				boolean[][] notificationLights = new boolean[6][3];
-				int[] side = new int[com.getPlacedSidesSize()];
-				for(int i1 =0;i1<com.getPlacedSidesSize();i1++){
-					side[i1] = com.getPlacedSide(i1);
-				}
+				boolean[] side = new boolean[6];
+				boolean[][] connectedSide = new boolean[6][1];
 				for(ForgeDirection dir:ForgeDirection.VALID_DIRECTIONS){
+					side[dir.ordinal()] = com.getPlacedSide(dir.ordinal());
+					TileEntity te = world.getBlockTileEntity(i+dir.offsetX, j+dir.offsetY, k+dir.offsetZ);
+					if(te instanceof ICommunication){
+						connectedSide[dir.ordinal()] = ((ICommunication)te).getPlacedSides();
+					}else{
+						connectedSide[dir.ordinal()] = null;
+					}
 					notificationLights[dir.ordinal()][0] = com.isSideConnected(dir);
 					notificationLights[dir.ordinal()][1] = com.isSideValid(dir);
 					notificationLights[dir.ordinal()][2] = com.hasSideActivity(dir);
 				}
-				this.model.renderModel(f,side, notificationLights);
+				this.model.renderModel(f,side,connectedSide, notificationLights);
 			}
 		}
 	}

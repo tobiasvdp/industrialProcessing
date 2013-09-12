@@ -4,6 +4,7 @@ import java.util.Random;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
+import ip.industrialProcessing.logic.transport.ICommunication;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.TileEntityFluidMachine;
 import ip.industrialProcessing.machines.TileEntityMachine;
@@ -77,7 +78,10 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 			{
 				TileEntityMachine machine =(TileEntityMachine)tl;
 				dir = BlockMachine.getMetadataFromForward(machine.getForwardDirection());
-			}			
+			}		
+			if(tl instanceof ICommunication){
+				dir = 0;
+			}
 			
 			GL11.glPushMatrix();
 			GL11.glTranslatef(0.5F, 1.5F, 0.5F);

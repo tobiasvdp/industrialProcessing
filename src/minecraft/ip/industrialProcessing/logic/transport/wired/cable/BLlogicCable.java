@@ -7,6 +7,7 @@ import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.logic.transport.ICommunicationNode;
 import ip.industrialProcessing.logic.transport.ICommunicationTransport;
+import ip.industrialProcessing.machines.BlockMachineRendered;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -19,15 +20,10 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BLlogicCable extends BlockContainer {
+public class BLlogicCable extends BlockMachineRendered{
 
 	public BLlogicCable() {
-		super(ConfigMachineBlocks.getBLlogicCable(), Material.circuits);
-		setHardness(5.0f);
-		setStepSound(Block.soundPowderFootstep);
-		setUnlocalizedName("BLlogicCable");
-		setCreativeTab(IndustrialProcessing.tabLogic);
-		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "inputTop");
+		super(ConfigMachineBlocks.getBLlogicCable(), Material.circuits, 5.0f, Block.soundPowderFootstep, "BLlogicCable", IndustrialProcessing.tabLogic);
 	}
 
 	@Override
@@ -81,19 +77,56 @@ public class BLlogicCable extends BlockContainer {
 	@Override
     public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity)
     {
-        this.setBlockBoundsBasedOnState(par1World, par2, par3, par4);
-        super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
+		TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
+		if (te == null){
+			this.setBlockBoundsBasedOnState(par1World, par2, par3, par4);
+		}else{
+			if(te instanceof TElogicCable){
+				TElogicCable com = (TElogicCable) te;
+				if(com.getPlacedSidesSize() > 1){
+					this.setBlockBoundsBasedOnStates(par1World, par2, par3, par4);
+				}else{
+					this.setBlockBoundsBasedOnState(par1World, par2, par3, par4);
+				}
+			}
+		}
+        
     }
-	
+	private void setBlockBoundsBasedOnStates(World par1World, int par2, int par3, int par4) {
+		TElogicCable te = (TElogicCable) par1World.getBlockTileEntity(par2, par3, par4);
+		for(int i = 0;i<te.getPlacedSidesSize();i++){
+		}
+	}
+
 	@Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
             int meta = (par1IBlockAccess.getBlockMetadata(par2, par3, par4));
-            setBoundsByMetadata(meta, 0.4f, 0.0f, 0.4f, 0.6f, 0.1f, 0.6f);
+            setBoundsByMetadata(meta, 0.0f, 0.0f, 0.0f, 1f, 0.1f, 1f);
     }
 
 	@Override
 	public int getRenderType() {
 		return ConfigRenderers.getBLlogicCable();
 	}
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
+		return super.onBlockActivated(world, x, y, z, player, metadata, what, these, are);
+	}
+	@Override
+	public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5) {
+		TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
+		if (te == null)
+			return true;
+		if (te instanceof TElogicCable){
+			TElogicCable com = (TElogicCable) te;
+			((TElogicCable) te).addToConnectedSides(par5);
+		}
+		return false;
+	}
+	@Override
+	public boolean isBlockReplaceable(World world, int x, int y, int z) {
+		return true;
+	}
+
 }
