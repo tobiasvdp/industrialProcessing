@@ -32,7 +32,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
-public abstract class TileEntityMachine extends TileEntitySynced implements ISidedInventory, IMachineSlots {
+public abstract class TileEntityMachine extends TileEntitySynced implements ISidedInventory, IMachineSlots, IRotateableEntity {
 
 	private ArrayList<MachineItemStack> itemStacks = new ArrayList<MachineItemStack>();
 	private int[][] itemStackSideSlots = new int[6][0];
@@ -40,11 +40,7 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
 	private ForgeDirection forwardDirection;
 
 	public ForgeDirection getForwardDirection() {
-		return forwardDirection;
-		/*
-		 * int meta = this.worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-		 * return BlockMachine.getForwardFromMetadata(meta);
-		 */
+		return forwardDirection; 
 	}
 
 	@Override
@@ -271,7 +267,7 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int var1) {
-		LocalDirection localFrom = DirectionUtils.GetLocalDirection(var1, getForwardDirection());
+		LocalDirection localFrom = DirectionUtils.getLocalDirection(var1, getForwardDirection());
 		return itemStackSideSlots[localFrom.ordinal()];
 	}
 

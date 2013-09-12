@@ -21,11 +21,11 @@ import ip.industrialProcessing.transport.BlockTransport;
 public class BlockTransportFluids extends BlockTransport {
 
 	public BlockTransportFluids() {
-		super(ConfigTransportBlocks.getBlockTransportFluidsID(), Material.glass, 1F, Block.soundGlassFootstep, "Fluid Pipe", IndustrialProcessing.tabOreProcessing);
+		super(ConfigTransportBlocks.getBlockTransportFluidsID(), Material.glass, 1F, Block.soundGlassFootstep, "Fluid Pipe", IndustrialProcessing.tabOreProcessing);  
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world) {
+	public TileEntity createNewTileEntity(World world) { 
 		return new TileEntityTransportFluids();
 	}
 

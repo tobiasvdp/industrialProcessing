@@ -49,7 +49,7 @@ import ip.industrialProcessing.transport.fluids.TileEntityRainTank;
 import ip.industrialProcessing.transport.fluids.TileEntityTank;
 import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids;
 import ip.industrialProcessing.transport.fluids.TileEntityValve;
-import ip.industrialProcessing.transport.items.conveyorBelt.TEtransportConveyorBelt;
+import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorBelt;
 import ip.industrialProcessing.transport.items.conveyorInput.TEtransportConveyorBeltInput;
 import ip.industrialProcessing.transport.items.conveyorOutput.TEtransportConveyorBeltOutput;
 import net.minecraft.block.Block;
@@ -127,7 +127,7 @@ public class ConfigMachineBlocks {
 		registerMachineBlock(IndustrialProcessing.BLlogicBundle, "IP.Logic.Bundle", "Bundled cables", TElogicBundle.class);
 		registerMachineBlock(IndustrialProcessing.BLlogicDisplayBox, "IP.Logic.DsBox", "Display box", TElogicDisplayBox.class);
 		
-		registerMachineBlock(IndustrialProcessing.BLtransportConveyorBelt, "IP.Trans.CBelt", "Conveyor belt", TEtransportConveyorBelt.class);
+		registerMachineBlock(IndustrialProcessing.BLtransportConveyorBelt, "IP.Trans.CBelt", "Conveyor belt", TileEntityConveyorBelt.class);
 		registerMachineBlock(IndustrialProcessing.BLtransportConveyorBeltInput, "IP.Trans.CBInput", "Conveyor belt import", TEtransportConveyorBeltInput.class);
 		registerMachineBlock(IndustrialProcessing.BLtransportConveyorBeltOutput, "IP.Trans.CBOutput", "Conveyor belt export", TEtransportConveyorBeltOutput.class);
 

@@ -11,7 +11,7 @@ public class DirectionUtils {
 
 	private static LocalDirection[] localDirections = new LocalDirection[] { LocalDirection.FRONT, LocalDirection.RIGHT, LocalDirection.BACK, LocalDirection.LEFT };
 
-	public static ForgeDirection GetWorldDirection(LocalDirection direction, ForgeDirection forward) {
+	public static ForgeDirection getWorldDirection(LocalDirection direction, ForgeDirection forward) {
 		if (forward == ForgeDirection.UP || forward == ForgeDirection.DOWN)
 			return null;
 
@@ -40,7 +40,7 @@ public class DirectionUtils {
 		return getRotationIndex(forward) * 90;
 	}
 
-	public static LocalDirection GetLocalDirection(ForgeDirection direction, ForgeDirection forward) {
+	public static LocalDirection getLocalDirection(ForgeDirection direction, ForgeDirection forward) {
 		if (direction == ForgeDirection.DOWN)
 			return LocalDirection.DOWN;
 		if (direction == ForgeDirection.UP)
@@ -55,8 +55,8 @@ public class DirectionUtils {
 		return localDirections[directionAmount];
 	}
 
-	public static LocalDirection GetLocalDirection(int directionOrdinal, ForgeDirection forwardDirection) {
+	public static LocalDirection getLocalDirection(int directionOrdinal, ForgeDirection forwardDirection) {
 		ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[directionOrdinal];
-		return GetLocalDirection(direction, forwardDirection);
+		return getLocalDirection(direction, forwardDirection);
 	}
 }

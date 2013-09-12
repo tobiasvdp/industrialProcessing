@@ -73,7 +73,7 @@ public abstract class TileEntityPoweredFluidWorkerMachine extends TileEntityFlui
 
     @Override
     public boolean canAcceptPower(ForgeDirection side) {
-	return this.powerInputSide == DirectionUtils.GetLocalDirection(side, getForwardDirection());
+	return this.powerInputSide == DirectionUtils.getLocalDirection(side, getForwardDirection());
     }
 
 }

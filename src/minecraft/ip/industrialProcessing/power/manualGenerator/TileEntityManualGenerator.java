@@ -74,7 +74,7 @@ public class TileEntityManualGenerator extends TileEntityPowerGenerator implemen
 
     @Override
     public boolean canOutputPower(ForgeDirection opposite) {
-	LocalDirection side = DirectionUtils.GetLocalDirection(opposite, getForwardDirection());
+	LocalDirection side = DirectionUtils.getLocalDirection(opposite, getForwardDirection());
 	return side == outputDirection;
     }
 

@@ -89,8 +89,8 @@ import ip.industrialProcessing.transport.fluids.TileEntityRainTank;
 import ip.industrialProcessing.transport.fluids.TileEntityTank;
 import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids;
 import ip.industrialProcessing.transport.fluids.TileEntityValve;
-import ip.industrialProcessing.transport.items.conveyorBelt.MDtransportConveyorBelt;
-import ip.industrialProcessing.transport.items.conveyorBelt.TEtransportConveyorBelt;
+import ip.industrialProcessing.transport.items.conveyorBelt.ModelConveyorBelt;
+import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorBelt;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
@@ -130,11 +130,10 @@ public class ClientProxy extends CommonProxy {
 	private static final MDmultiblockWheel MDmultiblockWheel = new MDmultiblockWheel();
 	private static final MDmultiblockWheelConnector MDmulitblockWheelConnector = new MDmultiblockWheelConnector();
 	private static final MDmultiblockWheelConnector MDmultiblockWheelConnector = new MDmultiblockWheelConnector();
-	private static final MDmultiblockDisplayPanel MDmultiblockDisplayPanel = new MDmultiblockDisplayPanel();
-	private static final MDtransportConveyorBelt MDtransportConveyorBelt = new MDtransportConveyorBelt();
+	private static final MDmultiblockDisplayPanel MDmultiblockDisplayPanel = new MDmultiblockDisplayPanel(); 
+	private static final ModelConveyorBelt conveyorBelt = new ModelConveyorBelt();  
 	private static final MDlogicSwitchBox MDlogicSwitchBox = new MDlogicSwitchBox();
-	private static final MDlogicCable MDlogicCable = new MDlogicCable();
-
+	private static final MDlogicCable MDlogicCable = new MDlogicCable(); 
 	@Override
 	public void registerRenderers() {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFilter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockFilter, "ModelFilter", filter));
@@ -265,9 +264,9 @@ public class ClientProxy extends CommonProxy {
 		ConfigRenderers.setBLmultiblockDisplayPanel(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLmultiblockDisplayPanel(), new TEmultiblockDisplayPanel()));
 
-		ClientRegistry.bindTileEntitySpecialRenderer(TEtransportConveyorBelt.class, new RendererTileEntityConnected(IndustrialProcessing.BLtransportConveyorBelt, "MDtransportConveyorBelt", MDtransportConveyorBelt));
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityConveyorBelt.class, new RendererTileEntityConnected(IndustrialProcessing.BLtransportConveyorBelt, "ModelConveyor", conveyorBelt));
 		ConfigRenderers.setBLtransportConveyorBelt(RenderingRegistry.getNextAvailableRenderId());
-		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLtransportConveyorBelt(), new TEtransportConveyorBelt()));
+		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLtransportConveyorBelt(), new TileEntityConveyorBelt()));
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TElogicSwitchBox.class, new RendererLogic(IndustrialProcessing.BLlogicSwitchBox, "MDlogicSwitchBox", MDlogicSwitchBox));
 		ConfigRenderers.setBLlogicSwitchBox(RenderingRegistry.getNextAvailableRenderId());

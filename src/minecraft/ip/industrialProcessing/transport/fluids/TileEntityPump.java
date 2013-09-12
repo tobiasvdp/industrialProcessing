@@ -39,12 +39,12 @@ public class TileEntityPump extends TileEntityMachine implements IPowerAcceptor,
 	}
 
 	public boolean isFluidOuptut(ForgeDirection from) {
-		LocalDirection direction = DirectionUtils.GetLocalDirection(from, getForwardDirection());
+		LocalDirection direction = DirectionUtils.getLocalDirection(from, getForwardDirection());
 		return direction == outputSide;
 	}
 
 	public boolean isFluidInput(ForgeDirection from) {
-		LocalDirection direction = DirectionUtils.GetLocalDirection(from, getForwardDirection());
+		LocalDirection direction = DirectionUtils.getLocalDirection(from, getForwardDirection());
 		return direction == inputSide;
 	}
 
@@ -92,7 +92,7 @@ public class TileEntityPump extends TileEntityMachine implements IPowerAcceptor,
 
 	@Override
 	public boolean canAcceptPower(ForgeDirection side) {
-		LocalDirection direction = DirectionUtils.GetLocalDirection(side, getForwardDirection());
+		LocalDirection direction = DirectionUtils.getLocalDirection(side, getForwardDirection());
 		return direction == powerSide;
 	}
 
