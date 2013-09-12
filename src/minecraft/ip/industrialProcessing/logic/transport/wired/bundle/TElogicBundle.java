@@ -10,6 +10,7 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class TElogicBundle extends TileEntity implements ICommunicationTransport{
 	public boolean isEnabled = true;
+	private boolean[] placedSide = new boolean[6];
 
 	@Override
 	public void sendDiscoveryPacket(ForgeDirection receivingSide,ForgeDirection sendingSide, ArrayList<ICommunicationTransport> path, ICommunicationNode node, ForgeDirection side) {
@@ -66,5 +67,43 @@ public class TElogicBundle extends TileEntity implements ICommunicationTransport
 	@Override
 	public UTBusType getBusType() {
 		return UTBusType.bundle;
+	}
+
+	@Override
+	public boolean isSideConnected(ForgeDirection side) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isSideValid(ForgeDirection side) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean hasSideActivity(ForgeDirection side) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean getPlacedSide(int i) {
+		return placedSide[i];
+	}
+
+	@Override
+	public int getPlacedSidesSize() {
+		return 6;
+	}
+
+	@Override
+	public void addToConnectedSides(int side) {
+		placedSide[side] = true;
+	}
+
+	@Override
+	public boolean[] getPlacedSides() {
+		return placedSide;
 	}
 }

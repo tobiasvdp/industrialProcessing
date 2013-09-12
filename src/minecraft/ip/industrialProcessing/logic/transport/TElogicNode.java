@@ -10,16 +10,28 @@ import java.util.UUID;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TElogicNode extends TileEntity implements ICommunicationNode{
+public abstract class TElogicNode extends TileEntity implements ICommunicationNode{
 
 	private UTlogicNodeContainer[] nodeCollection = new UTlogicNodeContainer[6];
 	private UTBuffer[] buffer = new UTBuffer[6];
 	public String name;
+	private boolean[] placedSide = new boolean[6];
+	private boolean init = true;
 
 	public TElogicNode() {
 		for (int i = 0; i < 6; i++) {
 			nodeCollection[i] = new UTlogicNodeContainer();
 			buffer[i] = new UTBuffer(UTBusType.bus);
+			placedSide[i] = false;
+		}
+	}
+	
+	@Override
+	public void updateEntity() {
+		super.updateEntity();
+		if(init){
+			placedSide[(worldObj.getBlockMetadata(xCoord, yCoord, zCoord))] = true;
+			init = false;
 		}
 	}
 
@@ -119,10 +131,7 @@ public class TElogicNode extends TileEntity implements ICommunicationNode{
 		return true;
 	}
 
-	private void transition() {
-		// TODO Auto-generated method stub
-		
-	}
+	protected abstract void transition();
 
 	@Override
 	public boolean send(ForgeDirection side, boolean value, int index) {
@@ -146,5 +155,38 @@ public class TElogicNode extends TileEntity implements ICommunicationNode{
 	@Override
 	public UTBusType getBusType() {
 		return UTBusType.bus;
+	}
+
+	@Override
+	public boolean isSideConnected(ForgeDirection side) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isSideValid(ForgeDirection side) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean hasSideActivity(ForgeDirection side) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean getPlacedSide(int i) {
+		return placedSide[i];
+	}
+	@Override
+	public int getPlacedSidesSize() {
+		return 6;
+	}
+	public void addToConnectedSides(int side){}
+	
+	@Override
+	public boolean[] getPlacedSides() {
+		return placedSide;
 	}
 }

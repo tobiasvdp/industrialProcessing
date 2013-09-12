@@ -18,11 +18,13 @@ public class TElogicDisplayBox extends TileEntity implements ICommunicationNode,
 	private UTlogicNodeContainer[] nodeCollection = new UTlogicNodeContainer[6];
 	private UTBuffer[] buffer = new UTBuffer[6];
 	public String name;
+	private boolean[] placedSide = new boolean[6];
 
 	public TElogicDisplayBox() {
 		for (int i = 0; i < 6; i++) {
 			nodeCollection[i] = new UTlogicNodeContainer();
 			buffer[i] = new UTBuffer(UTBusType.bus);
+			placedSide[i] = false;
 		}
 	}
 
@@ -197,5 +199,43 @@ public class TElogicDisplayBox extends TileEntity implements ICommunicationNode,
 	public boolean receive(ICommunicationNode origin, ForgeDirection side, boolean value, int index) {
 		buffer[side.ordinal()].put(index, value);
 		return true;
+	}
+
+	@Override
+	public boolean isSideConnected(ForgeDirection side) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isSideValid(ForgeDirection side) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean hasSideActivity(ForgeDirection side) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean getPlacedSide(int i) {
+		return placedSide[i];
+	}
+
+	@Override
+	public int getPlacedSidesSize() {
+		return 6;
+	}
+
+	@Override
+	public void addToConnectedSides(int side) {
+		placedSide[side] = true;
+	}
+
+	@Override
+	public boolean[] getPlacedSides() {
+		return  placedSide;
 	}
 }

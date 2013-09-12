@@ -42,7 +42,21 @@ public class ConfigRenderers {
 	private int rendererPumpId;
 	private int rendererRainTankID;
 	private int rendererValveID;
+	private int BLlogicSwitchBox;
+	private int BLlogicCable;
 
+	public static int getBLlogicCable() {
+		return getInstance().BLlogicCable;
+	}
+	public static void setBLlogicCable(int value) {
+		getInstance().BLlogicCable = value;
+	}
+	public static int getBLlogicSwitchBox() {
+		return getInstance().BLlogicSwitchBox;
+	}
+	public static void setBLlogicSwitchBox(int value) {
+		getInstance().BLlogicSwitchBox = value;
+	}
 	public static int getBLtransportConveyorBelt() {
 		return getInstance().BLtransportConveyorBelt;
 	}

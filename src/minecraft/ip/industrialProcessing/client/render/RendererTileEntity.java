@@ -1,6 +1,7 @@
 package ip.industrialProcessing.client.render;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.logic.transport.ICommunication;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.IRotateableEntity;
 import net.minecraft.block.Block;
@@ -59,13 +60,17 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 			tessellator.setColorOpaque_F(f, f, f);
 			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) l1, (float) l2);
 
-			int dir = world.getBlockMetadata(i, j, k);
+			int dir = world.getBlockMetadata(i, j, k); 
 			if (tl instanceof IRotateableEntity) {
 				IRotateableEntity machine = (IRotateableEntity) tl;
 				ForgeDirection forward = machine.getForwardDirection();
 				dir = BlockMachine.getMetadataFromForward(forward);
 			}
-
+ 	
+			if(tl instanceof ICommunication){ // TODO: get rid of this?! just don't implement IRotateableEntity if you dont want rotation 
+				dir = 0; 
+			}
+			 
 			GL11.glPushMatrix();
 			GL11.glTranslatef(0.5F, 1.5F, 0.5F);
 			// This line actually rotates the renderer.
