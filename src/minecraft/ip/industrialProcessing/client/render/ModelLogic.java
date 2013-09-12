@@ -8,5 +8,5 @@ public abstract class ModelLogic extends ModelMachine{
 		// TODO Auto-generated constructor stub
 	}
 
-	public abstract void renderModel(float f,int side, boolean[][] notificationLights);
+	public abstract void renderModel(float f,int[] side, boolean[][] notificationLights);
 }

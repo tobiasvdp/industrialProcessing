@@ -87,7 +87,13 @@ public class TElogicBundle extends TileEntity implements ICommunicationTransport
 	}
 
 	@Override
-	public int getPlacedSide() {
+	public int getPlacedSide(int i) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getPlacedSidesSize() {
 		// TODO Auto-generated method stub
 		return 0;
 	}

@@ -11,6 +11,20 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class TElogicCable extends TileEntity implements ICommunicationTransport {
 	public boolean isEnabled = true;
+	private boolean init = true;;
+	private ArrayList<Integer> placedSide = new ArrayList<Integer>();
+	
+	public TElogicCable() {
+		// TODO Auto-generated constructor stub
+	}
+	@Override
+	public void updateEntity() {
+		super.updateEntity();
+		if(init){
+			placedSide.add(worldObj.getBlockMetadata(xCoord, yCoord, zCoord));
+			init = false;
+		}
+	}
 
 	@Override
 	public void sendDiscoveryPacket(ForgeDirection receivingSide, ForgeDirection sendingSide, ArrayList<ICommunicationTransport> path, ICommunicationNode node, ForgeDirection side) {
@@ -88,9 +102,13 @@ public class TElogicCable extends TileEntity implements ICommunicationTransport 
 	}
 
 	@Override
-	public int getPlacedSide() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getPlacedSidesSize() {
+		return placedSide.size();
+	}
+
+	@Override
+	public int getPlacedSide(int i) {
+		return placedSide.get(i);
 	}
 
 }

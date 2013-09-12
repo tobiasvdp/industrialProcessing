@@ -15,5 +15,6 @@ public UTBusType getBusType();
 public boolean isSideConnected(ForgeDirection side);
 public boolean isSideValid(ForgeDirection side);
 public boolean hasSideActivity(ForgeDirection side);
-public int getPlacedSide();
+public int getPlacedSide(int i);
+public int getPlacedSidesSize();
 }

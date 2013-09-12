@@ -203,9 +203,9 @@ public class MDlogicSwitchBox extends ModelLogic {
 	}
 
 	@Override
-	public void renderModel(float f5, int side, boolean[][] notificationLights) {
+	public void renderModel(float f5, int side[], boolean[][] notificationLights) {
 		GL11.glPushMatrix();
-		switch (side) {
+		switch (side[0]) {
 		case 2:
 			GL11.glTranslatef(0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(-90, 1.0f, 0.0f, 0.0f);
@@ -213,8 +213,9 @@ public class MDlogicSwitchBox extends ModelLogic {
 			break;
 		case 3:
 			GL11.glTranslatef(0.0f, 1.0f, 0.0f);
-			GL11.glRotatef(90, 1.0f, 0.0f, 0.0f);
+			GL11.glRotatef(90, 0.0f, 0.0f, 1.0f);
 			GL11.glTranslatef(0.0f, -1.0f, 0.0f);
+
 			break;
 		case 4:
 			GL11.glTranslatef(0.0f, 1.0f, 0.0f);
@@ -223,26 +224,28 @@ public class MDlogicSwitchBox extends ModelLogic {
 			break;
 		case 5:
 			GL11.glTranslatef(0.0f, 1.0f, 0.0f);
-			GL11.glRotatef(-90, 0.0f, 0.0f, 1.0f);
+			GL11.glRotatef(90, 1.0f, 0.0f, 0.0f);
 			GL11.glTranslatef(0.0f, -1.0f, 0.0f);
 			break;
-		case 6:
+		case 0:
 			GL11.glTranslatef(0.0f, 1.0f, 0.0f);
 			GL11.glRotatef(180, 0.0f, 0.0f, 1.0f);
 			GL11.glTranslatef(0.0f, -1.0f, 0.0f);
+			break;
+		case 1:
+			Right1.render(f5);
+			Right2.render(f5);
+			Left1.render(f5);
+			Left2.render(f5);
+			Back1.render(f5);
+			Back2.render(f5);
+			Front1.render(f5);
+			Front2.render(f5);
 			break;
 		default:
 			break;
 		}
 		Base.render(f5);
-		Right1.render(f5);
-		Right2.render(f5);
-		Left1.render(f5);
-		Left2.render(f5);
-		Back1.render(f5);
-		Back2.render(f5);
-		Front1.render(f5);
-		Front2.render(f5);
 		Base2.render(f5);
 		FrontLightConnected.render(f5);
 		FrontLightValid.render(f5);

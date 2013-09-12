@@ -218,8 +218,12 @@ public class TElogicDisplayBox extends TileEntity implements ICommunicationNode,
 	}
 
 	@Override
-	public int getPlacedSide() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getPlacedSide(int i) {
+		return 1;
+	}
+
+	@Override
+	public int getPlacedSidesSize() {
+		return 1;
 	}
 }

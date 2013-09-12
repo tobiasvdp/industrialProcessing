@@ -175,7 +175,11 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 	}
 
 	@Override
-	public int getPlacedSide() {
+	public int getPlacedSide(int i) {
 		return placedSide;
+	}
+	@Override
+	public int getPlacedSidesSize() {
+		return 1;
 	}
 }

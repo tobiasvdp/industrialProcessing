@@ -25,7 +25,10 @@ public class RendererLogic extends RendererTileEntity {
 			if (tl instanceof ICommunication) {
 				ICommunication com = (ICommunication) tl;
 				boolean[][] notificationLights = new boolean[6][3];
-				int side = com.getPlacedSide();
+				int[] side = new int[com.getPlacedSidesSize()];
+				for(int i1 =0;i1<com.getPlacedSidesSize();i1++){
+					side[i1] = com.getPlacedSide(i1);
+				}
 				for(ForgeDirection dir:ForgeDirection.VALID_DIRECTIONS){
 					notificationLights[dir.ordinal()][0] = com.isSideConnected(dir);
 					notificationLights[dir.ordinal()][1] = com.isSideValid(dir);
