@@ -25,4 +25,8 @@ public class TElogicSwitchBox extends TElogicNode {
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public ForgeDirection[] setConnectableSides() {
+		return new ForgeDirection[]{ForgeDirection.NORTH, ForgeDirection.SOUTH, ForgeDirection.WEST, ForgeDirection.EAST};
+	}
 }
