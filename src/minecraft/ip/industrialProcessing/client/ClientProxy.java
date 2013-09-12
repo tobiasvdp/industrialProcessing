@@ -84,8 +84,8 @@ import ip.industrialProcessing.transport.fluids.TileEntityRainTank;
 import ip.industrialProcessing.transport.fluids.TileEntityTank;
 import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids;
 import ip.industrialProcessing.transport.fluids.TileEntityValve;
-import ip.industrialProcessing.transport.items.conveyorBelt.MDtransportConveyorBelt;
-import ip.industrialProcessing.transport.items.conveyorBelt.TEtransportConveyorBelt;
+import ip.industrialProcessing.transport.items.conveyorBelt.ModelConveyorBelt;
+import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorBelt;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
@@ -126,7 +126,7 @@ public class ClientProxy extends CommonProxy {
 	private static final MDmultiblockWheelConnector MDmulitblockWheelConnector = new MDmultiblockWheelConnector();
 	private static final MDmultiblockWheelConnector MDmultiblockWheelConnector = new MDmultiblockWheelConnector();
 	private static final MDmultiblockDisplayPanel MDmultiblockDisplayPanel = new MDmultiblockDisplayPanel();
-	private static final MDtransportConveyorBelt MDtransportConveyorBelt = new MDtransportConveyorBelt();
+	private static final ModelConveyorBelt conveyorBelt = new ModelConveyorBelt();
 
 	@Override
 	public void registerRenderers() {
@@ -258,9 +258,9 @@ public class ClientProxy extends CommonProxy {
 		ConfigRenderers.setBLmultiblockDisplayPanel(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLmultiblockDisplayPanel(), new TEmultiblockDisplayPanel()));
 
-		ClientRegistry.bindTileEntitySpecialRenderer(TEtransportConveyorBelt.class, new RendererTileEntityConnected(IndustrialProcessing.BLtransportConveyorBelt, "MDtransportConveyorBelt", MDtransportConveyorBelt));
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityConveyorBelt.class, new RendererTileEntityConnected(IndustrialProcessing.BLtransportConveyorBelt, "ModelConveyor", conveyorBelt));
 		ConfigRenderers.setBLtransportConveyorBelt(RenderingRegistry.getNextAvailableRenderId());
-		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLtransportConveyorBelt(), new TEtransportConveyorBelt()));
+		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLtransportConveyorBelt(), new TileEntityConveyorBelt()));
 
 		RenderingRegistry.registerEntityRenderingHandler(ENmultiblockFrame.class, new RendererLivingEntity(new MDmultiblockFramePanel(), 1.0F, "MDmultiblockFramePanel"));
 		RenderingRegistry.registerEntityRenderingHandler(ENmultiblockLiftDoor.class, new RendererLivingEntity(new MDmultiblockLiftDoor(), 1.0F, "ModelMultiblockLiftDoor"));

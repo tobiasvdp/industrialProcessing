@@ -27,14 +27,9 @@ public class BlockValve extends BlockTransport {
 	}
 
 	@Override
-	public void onBlockPlacedBy(World par1World, int x, int y, int z, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
-		int dir = MathHelper.floor_double((double) ((par5EntityLivingBase.rotationYaw * 4F) / 360F) + 0.5D) & 3;
-		TileEntity entity = par1World.getBlockTileEntity(x, y, z);
-		if (entity instanceof TileEntityValve) {
-			TileEntityValve machine = (TileEntityValve) entity;
-			machine.setForwardDirection(BlockMachine.getForwardFromMetadata(dir));
-		}
-		super.onBlockPlacedBy(par1World, x, y, z, par5EntityLivingBase, par6ItemStack);
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack par6ItemStack) {
+		BlockMachine.setRotation(world, x, y, z, entityLivingBase);
+		super.onBlockPlacedBy(world, x, y, z, entityLivingBase, par6ItemStack);
 	}
 
 	@Override

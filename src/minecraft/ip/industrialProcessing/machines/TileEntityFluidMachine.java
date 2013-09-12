@@ -193,7 +193,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine implement
 	private FluidTank getInputTankForFluid(ForgeDirection from, Fluid resource) {
 		if (resource == null)
 			return null;
-		LocalDirection localFrom = DirectionUtils.GetLocalDirection(from, getForwardDirection());
+		LocalDirection localFrom = DirectionUtils.getLocalDirection(from, getForwardDirection());
 		int[] sideSlots = fluidTankSideslots[localFrom.ordinal()];
 		for (int i = 0; i < sideSlots.length; i++) {
 			int slotIndex = sideSlots[i];
@@ -213,7 +213,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine implement
 	private FluidTank getInputTankForFluidStack(ForgeDirection from, FluidStack resource) {
 		if (resource == null)
 			return null;
-		LocalDirection localFrom = DirectionUtils.GetLocalDirection(from, getForwardDirection());
+		LocalDirection localFrom = DirectionUtils.getLocalDirection(from, getForwardDirection());
 		int[] sideSlots = fluidTankSideslots[localFrom.ordinal()];
 		for (int i = 0; i < sideSlots.length; i++) {
 			int slotIndex = sideSlots[i];
@@ -234,7 +234,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine implement
 	private FluidTank getOutputTankForFluid(ForgeDirection from, Fluid resource) {
 		if (resource == null)
 			return null;
-		LocalDirection localFrom = DirectionUtils.GetLocalDirection(from, getForwardDirection());
+		LocalDirection localFrom = DirectionUtils.getLocalDirection(from, getForwardDirection());
 		int[] sideSlots = fluidTankSideslots[localFrom.ordinal()];
 		for (int i = 0; i < sideSlots.length; i++) {
 			int slotIndex = sideSlots[i];
@@ -253,7 +253,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine implement
 	private FluidTank getOutputTankForFluidStack(ForgeDirection from, FluidStack resource) {
 		if (resource == null)
 			return null;
-		LocalDirection localFrom = DirectionUtils.GetLocalDirection(from, getForwardDirection());
+		LocalDirection localFrom = DirectionUtils.getLocalDirection(from, getForwardDirection());
 		int[] sideSlots = fluidTankSideslots[localFrom.ordinal()];
 		for (int i = 0; i < sideSlots.length; i++) {
 			int slotIndex = sideSlots[i];
@@ -269,7 +269,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine implement
 	}
 
 	private FluidTank getOutputTank(ForgeDirection from) {
-		LocalDirection localFrom = DirectionUtils.GetLocalDirection(from, getForwardDirection());
+		LocalDirection localFrom = DirectionUtils.getLocalDirection(from, getForwardDirection());
 		int[] sideSlots = fluidTankSideslots[localFrom.ordinal()];
 		for (int i = 0; i < sideSlots.length; i++) {
 			int slotIndex = sideSlots[i];
@@ -329,7 +329,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine implement
 
 	@Override
 	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-		LocalDirection localFrom = DirectionUtils.GetLocalDirection(from, getForwardDirection());
+		LocalDirection localFrom = DirectionUtils.getLocalDirection(from, getForwardDirection());
 		int[] sides = this.fluidTankSideslots[localFrom.ordinal()];
 
 		FluidTankInfo[] tanks = new FluidTankInfo[sides.length];

@@ -71,7 +71,7 @@ public abstract class TileEntityPoweredWorkerMachine extends TileEntityWorkerMac
 
 	@Override
 	public boolean canAcceptPower(ForgeDirection side) {
-		return this.powerInputSide == DirectionUtils.GetLocalDirection(side, getForwardDirection());
+		return this.powerInputSide == DirectionUtils.getLocalDirection(side, getForwardDirection());
 	}
  
 	@Override

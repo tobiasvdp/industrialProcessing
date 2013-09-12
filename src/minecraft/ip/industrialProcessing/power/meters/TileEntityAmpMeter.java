@@ -65,7 +65,7 @@ public class TileEntityAmpMeter extends TileEntityPowerGenerator implements IPow
 
 	@Override
 	public boolean canOutputPower(ForgeDirection opposite) {
-		LocalDirection output = DirectionUtils.GetLocalDirection(opposite, getForwardDirection());
+		LocalDirection output = DirectionUtils.getLocalDirection(opposite, getForwardDirection());
 		return output == outputSide;
 	}
 
@@ -97,7 +97,7 @@ public class TileEntityAmpMeter extends TileEntityPowerGenerator implements IPow
 
 	@Override
 	public boolean canAcceptPower(ForgeDirection side) {
-		LocalDirection input = DirectionUtils.GetLocalDirection(side, getForwardDirection());
+		LocalDirection input = DirectionUtils.getLocalDirection(side, getForwardDirection());
 		return input == inputSide;
 	}
 
@@ -111,7 +111,7 @@ public class TileEntityAmpMeter extends TileEntityPowerGenerator implements IPow
 	}
 
 	private void checkOutput() {
-		ForgeDirection output = DirectionUtils.GetWorldDirection(outputSide, getForwardDirection());
+		ForgeDirection output = DirectionUtils.getWorldDirection(outputSide, getForwardDirection());
 		IPowerAcceptor acceptor = getAcceptor(output);
 		if (acceptor == null || !acceptor.canAcceptPower(output.getOpposite()))
 			this.distributor.setOutputs();

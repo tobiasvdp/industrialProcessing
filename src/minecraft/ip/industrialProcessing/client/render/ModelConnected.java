@@ -10,7 +10,7 @@ public abstract class ModelConnected extends ModelMachine {
 		renderModelConnected(null, f, ConnectionState.PLUGGED, ConnectionState.DISCONNECTED, ConnectionState.CONNECTED, ConnectionState.DISCONNECTED, ConnectionState.DISCONNECTED, ConnectionState.DISCONNECTED);
 	}
 
-	public abstract void renderModelConnected(TileEntity tl, float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down);
+	public abstract void renderModelConnected(TileEntity tl, float f, ConnectionState north, ConnectionState west, ConnectionState south, ConnectionState east, ConnectionState up, ConnectionState down);
 
 	protected void render(ModelRenderer wire, ModelRenderer connector, ConnectionState state, float f) {
 		switch (state) {

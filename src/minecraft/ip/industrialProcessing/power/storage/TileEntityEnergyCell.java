@@ -74,7 +74,7 @@ public class TileEntityEnergyCell extends TileEntityPowerGenerator implements IP
 
 	@Override
 	public boolean canOutputPower(ForgeDirection opposite) {
-		LocalDirection side = DirectionUtils.GetLocalDirection(opposite, getForwardDirection());
+		LocalDirection side = DirectionUtils.getLocalDirection(opposite, getForwardDirection());
 		return side == outputSide;
 	}
 
@@ -99,7 +99,7 @@ public class TileEntityEnergyCell extends TileEntityPowerGenerator implements IP
 
 	@Override
 	public boolean canAcceptPower(ForgeDirection side) {
-		LocalDirection input = DirectionUtils.GetLocalDirection(side, getForwardDirection());
+		LocalDirection input = DirectionUtils.getLocalDirection(side, getForwardDirection());
 		return input == inputSide;
 	}
 

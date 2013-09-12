@@ -1,32 +1,19 @@
 package ip.industrialProcessing.client.render;
 
-import java.util.Random;
-
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.machines.BlockMachine;
-import ip.industrialProcessing.machines.TileEntityFluidMachine;
-import ip.industrialProcessing.machines.TileEntityMachine;
-import ip.industrialProcessing.machines.crusher.ModelCrusher;
-import ip.industrialProcessing.machines.filter.TileEntityFilter;
-import ip.industrialProcessing.utils.working.IWorker;
-import ip.industrialProcessing.utils.working.IWorkingEntity;
-
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
+import ip.industrialProcessing.machines.IRotateableEntity;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTankInfo;
+import net.minecraftforge.common.ForgeDirection;
+
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
 
 public class RendererTileEntity extends TileEntitySpecialRenderer {
 	private ModelMachine model;
@@ -73,16 +60,16 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) l1, (float) l2);
 
 			int dir = world.getBlockMetadata(i, j, k);
-			if(tl instanceof TileEntityMachine)
-			{
-				TileEntityMachine machine =(TileEntityMachine)tl;
-				dir = BlockMachine.getMetadataFromForward(machine.getForwardDirection());
-			}			
-			
+			if (tl instanceof IRotateableEntity) {
+				IRotateableEntity machine = (IRotateableEntity) tl;
+				ForgeDirection forward = machine.getForwardDirection();
+				dir = BlockMachine.getMetadataFromForward(forward);
+			}
+
 			GL11.glPushMatrix();
 			GL11.glTranslatef(0.5F, 1.5F, 0.5F);
 			// This line actually rotates the renderer.
-			if (rotateModel)
+			//if (rotateModel)
 				GL11.glRotatef((dir * -90F), 0F, 1F, 0F);
 			GL11.glRotatef((-180F), 0F, 0F, 1F);
 			GL11.glScalef(1f, 1f, 1f);

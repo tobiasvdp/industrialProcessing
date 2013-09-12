@@ -62,7 +62,7 @@ public class TileEntityVoltMeter extends TileEntityMachine implements IPowerAcce
 	@Override
 	public boolean canAcceptPower(ForgeDirection side) {
 		ForgeDirection forward = getForwardDirection();
-		LocalDirection local = DirectionUtils.GetLocalDirection(side, forward);
+		LocalDirection local = DirectionUtils.getLocalDirection(side, forward);
 		return local == inputSide;
 	}
 

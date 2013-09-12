@@ -66,13 +66,24 @@ public abstract class BlockMachine extends BlockContainer {
 
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack itemStack) {
-		int dir = MathHelper.floor_double((double) ((entityLivingBase.rotationYaw * 4F) / 360F) + 0.5D) & 3;
-		TileEntity entity = world.getBlockTileEntity(x, y, z);
-		if (entity instanceof TileEntityMachine) {
-			TileEntityMachine machine = (TileEntityMachine) entity;
-			machine.setForwardDirection(getForwardFromMetadata(dir));
-		}
+		BlockMachine.setRotation(world, x, y, z, entityLivingBase);
 		super.onBlockPlacedBy(world, x, y, z, entityLivingBase, itemStack);
+	}
+
+	public static void setRotation(World world, int x, int y, int z, EntityLivingBase entityLivingBase) {
+		TileEntity entity = world.getBlockTileEntity(x, y, z);
+		if (entity instanceof IRotateableEntity) {
+			setRotation((IRotateableEntity) entity, entityLivingBase);
+		}
+	}
+
+	public static void setRotation(IRotateableEntity entity, EntityLivingBase entityLivingBase) {
+		int dir = MathHelper.floor_double((double) ((entityLivingBase.rotationYaw * 4F) / 360F) + 0.5D) & 3;
+		IRotateableEntity machine = (IRotateableEntity) entity;
+		ForgeDirection forward = getForwardFromMetadata(dir);
+		if (entityLivingBase.isSneaking())
+			forward = forward.getOpposite();
+		machine.setForwardDirection(forward);
 	}
 
 	@Deprecated
@@ -96,7 +107,8 @@ public abstract class BlockMachine extends BlockContainer {
 	}
 
 	public static int getMetadataFromForward(ForgeDirection dir) {
-		if(dir == null) return 0;
+		if (dir == null)
+			return 0;
 		switch (dir) {
 		case NORTH:
 			return 0;
@@ -109,6 +121,14 @@ public abstract class BlockMachine extends BlockContainer {
 		default:
 			return 0;
 		}
+	}
+
+	public static ForgeDirection getForwardFromEntity(TileEntity tl) {
+		if (tl instanceof IRotateableEntity) {
+			IRotateableEntity rotated = (IRotateableEntity) tl;
+			return rotated.getForwardDirection();
+		}
+		return ForgeDirection.NORTH;
 	}
 
 }
