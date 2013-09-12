@@ -1,12 +1,11 @@
 package ip.industrialProcessing.logic.transport.wired.cable;
 
-import java.util.ArrayList;
-
-import codechicken.core.ArrayUtils;
-import ip.industrialProcessing.logic.transport.ICommunication;
 import ip.industrialProcessing.logic.transport.ICommunicationNode;
 import ip.industrialProcessing.logic.transport.ICommunicationTransport;
 import ip.industrialProcessing.logic.utils.UTBusType;
+
+import java.util.ArrayList;
+
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
