@@ -4,17 +4,20 @@ import ip.industrialProcessing.PacketHandler;
 import ip.industrialProcessing.logic.transport.ICommunicationNode;
 import ip.industrialProcessing.logic.transport.ICommunicationTransport;
 import ip.industrialProcessing.logic.utils.UTBusType;
+import ip.industrialProcessing.machines.TileEntitySynced;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.util.ArrayList;
 
+import cpw.mods.fml.common.asm.transformers.MarkerTransformer;
 import cpw.mods.fml.common.network.PacketDispatcher;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TElogicCable extends TileEntity implements ICommunicationTransport {
+public class TElogicCable extends TileEntitySynced implements ICommunicationTransport {
 	public boolean isEnabled = true;
 	private boolean init = true;;
 	private boolean[] placedSide = new boolean[6];
@@ -130,7 +133,12 @@ public class TElogicCable extends TileEntity implements ICommunicationTransport 
 
 	@Override
 	public int getPlacedSidesSize() {
-		return 6;
+		int count = 0;
+		for(int i = 0;i<6;i++){
+			if(placedSide[i])
+				count++;
+		}
+		return count;
 	}
 
 	@Override
@@ -182,6 +190,36 @@ public class TElogicCable extends TileEntity implements ICommunicationTransport 
 	}
 	public boolean getMultipleSides() {
 		return multipleSides;
+	}
+
+	public boolean sidePresent(int par5) {
+		int side = transformToForgeDirection(par5);
+		return placedSide[side];
+	}
+
+	@Override
+	public void removeConnectedSides(int side, boolean transform) {
+		if (transform){
+			placedSide[transformToForgeDirection(side)] = false;
+			sendSidesToServer(placedSide);
+		}else{
+			placedSide[side] = false;
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		}
+	}
+	@Override
+	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
+		for(int i = 0;i<6;i++){
+			par1nbtTagCompound.setBoolean("Sides"+i, placedSide[i]); 
+		}
+		super.writeToNBT(par1nbtTagCompound);
+	}
+	@Override
+	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
+		for(int i = 0;i<6;i++){
+			placedSide[i] = par1nbtTagCompound.getBoolean("Sides"+i);
+		}
+		super.readFromNBT(par1nbtTagCompound);
 	}
 
 }

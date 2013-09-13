@@ -212,7 +212,10 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 	}
 	@Override
 	public boolean isConnectableOnSide(ForgeDirection side) {
-		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	public void removeConnectedSides(int side, boolean transform){
+		
 	}
 }

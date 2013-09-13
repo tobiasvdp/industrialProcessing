@@ -26,6 +26,7 @@ public class BLlogicCable extends BlockMachineRendered {
 
 	public BLlogicCable() {
 		super(ConfigMachineBlocks.getBLlogicCable(), Material.circuits, 5.0f, Block.soundPowderFootstep, "BLlogicCable", IndustrialProcessing.tabLogic);
+		
 	}
 
 	@Override
@@ -82,7 +83,6 @@ public class BLlogicCable extends BlockMachineRendered {
 
 	@Override
 	public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
-		
 
 	}
 
@@ -96,7 +96,7 @@ public class BLlogicCable extends BlockMachineRendered {
 			if (te instanceof TElogicCable) {
 				TElogicCable com = (TElogicCable) te;
 				if (com.getMultipleSides()) {
-					setBlockBounds(0, 0, 0, 1.0f, 1.0f ,1.0f);
+					setBlockBounds(0, 0, 0, 1.0f, 1.0f, 1.0f);
 				} else {
 					int meta = (par1IBlockAccess.getBlockMetadata(par2, par3, par4));
 					setBoundsByMetadata(meta, 0.0f, 0.0f, 0.0f, 1f, 0.1f, 1f);
@@ -114,7 +114,7 @@ public class BLlogicCable extends BlockMachineRendered {
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
 		return false;
 	}
-	
+
 	@Override
 	public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5, ItemStack par6ItemStack) {
 		TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
@@ -122,17 +122,22 @@ public class BLlogicCable extends BlockMachineRendered {
 			return true;
 		if (te instanceof TElogicCable) {
 			TElogicCable com = (TElogicCable) te;
-			((TElogicCable) te).addToConnectedSides(par5, true);
-			((TElogicCable) te).setMultipleSides(true);
+			if (!com.sidePresent(par5)) {
+				com.addToConnectedSides(par5, true);
+				com.setMultipleSides(true);
+			}
 		}
 		return false;
 	}
 
 	@Override
 	public boolean isBlockReplaceable(World world, int x, int y, int z) {
-		return true;
+		if(world.getClosestPlayer(x, y, z, 10).getCurrentEquippedItem().getItem().itemID == ConfigMachineBlocks.getBLlogicCable())
+			return true;
+		return false;
 	}
- 
+	
+
 	@Override
 	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
 		TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
@@ -142,20 +147,28 @@ public class BLlogicCable extends BlockMachineRendered {
 			int count = 0;
 			int id = par1World.getBlockId(par2, par3, par4);
 			for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-				if (com.getPlacedSide(dir.ordinal())) {
+				int side = dir.ordinal();
+				if (side == 0)
+					side = 1;
+				else if (side == 1)
+					side = 0;
+				if (com.getPlacedSide(side)) {
 					if (!canSideStay(dir, par1World, par2, par3, par4)) {
 						destroy = true;
+						com.removeConnectedSides(side, false);
+						count++;
 					}
-					count++;
 				}
 			}
-			if(destroy){
-				for(int i = 0;i<count;i++){
+			if (destroy) {
+				for (int i = 0; i < count; i++) {
 					this.dropBlockAsItem(par1World, par2, par3, par4, 0, 1);
 				}
-				par1World.destroyBlock(par2, par3, par4, false);
+				if (com.getPlacedSidesSize() == 0) {
+					par1World.destroyBlock(par2, par3, par4, false);
+				}
 			}
-				
+
 		}
 		super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
 

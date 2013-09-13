@@ -131,6 +131,8 @@ public class PacketHandler implements IPacketHandler {
 				if(sides[i]){
 					count++;
 					com.addToConnectedSides(i,false);
+				}else{
+					com.removeConnectedSides(i, false);
 				}
 			}
 			if (count>1)

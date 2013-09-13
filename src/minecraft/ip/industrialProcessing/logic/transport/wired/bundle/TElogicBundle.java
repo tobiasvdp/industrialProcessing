@@ -117,4 +117,10 @@ public class TElogicBundle extends TileEntity implements ICommunicationTransport
 	public boolean getMultipleSides() {
 		return false;
 	}
+
+	@Override
+	public void removeConnectedSides(int side, boolean transform) {
+		// TODO Auto-generated method stub
+		
+	}
 }

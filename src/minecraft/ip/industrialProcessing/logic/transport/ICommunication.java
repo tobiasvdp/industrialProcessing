@@ -18,5 +18,6 @@ public boolean hasSideActivity(ForgeDirection side);
 public boolean getPlacedSide(int i);
 public int getPlacedSidesSize();
 public void addToConnectedSides(int side, boolean transform);
+public void removeConnectedSides(int side, boolean transform);
 public boolean[] getPlacedSides();
 }

@@ -258,4 +258,10 @@ public class TElogicDisplayBox extends TileEntity implements ICommunicationNode,
 	public boolean getMultipleSides() {
 		return false;
 	}
+
+	@Override
+	public void removeConnectedSides(int side, boolean transform) {
+		// TODO Auto-generated method stub
+		
+	}
 }
