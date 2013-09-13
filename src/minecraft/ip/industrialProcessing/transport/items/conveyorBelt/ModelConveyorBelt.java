@@ -7,8 +7,6 @@ import ip.industrialProcessing.machines.BlockMachine;
 
 import java.util.Iterator;
 
-import javax.print.attribute.standard.Destination;
-
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -330,21 +328,23 @@ public class ModelConveyorBelt extends ModelConnected {
 
 		if (tl != null) {
 			ForgeDirection forward = BlockMachine.getForwardFromEntity(tl);
+			CornerState cornerState = null;
 			if (forward != null) {
 				switch (forward) {
 				case NORTH:
-					drawConnections(tl, east, north, west, south, up, down, f5);
+					cornerState = drawConnections(tl, east, north, west, south, up, down, f5);
 					break;
 				case EAST:
-					drawConnections(tl, north, west, south, east, up, down, f5);
+					cornerState = drawConnections(tl, north, west, south, east, up, down, f5);
 					break;
 				case SOUTH:
-					drawConnections(tl, west, south, east, north, up, down, f5);
+					cornerState = drawConnections(tl, west, south, east, north, up, down, f5);
 					break;
 				case WEST:
-					drawConnections(tl, south, east, north, west, up, down, f5);
+					cornerState = drawConnections(tl, south, east, north, west, up, down, f5);
 					break;
 				default:
+					cornerState = new CornerState();
 					break;
 				}
 			} else
@@ -376,34 +376,56 @@ public class ModelConveyorBelt extends ModelConnected {
 
 				for (Iterator<MovingItemStack> iterator = belt.iterateStacks(); iterator.hasNext();) {
 					MovingItemStack stack = iterator.next();
-					renderStack(stack, tl, itemrenderer, f5);
+					renderStack(stack, tl, itemrenderer, f5, cornerState);
 				}
 			}
 		}
 	}
 
-	private void renderStack(MovingItemStack stack, TileEntity tl, RenderItem itemrenderer, float scale) {
+	private void renderStack(MovingItemStack stack, TileEntity tl, RenderItem itemrenderer, float scale, CornerState state) {
 		ItemStack items = stack.stack;
- 
+		if (state == null)
+			state = new CornerState();
+
 		EntityItem entity = new EntityItem(tl.worldObj, tl.xCoord, tl.yCoord, tl.zCoord, items);
-		entity.hoverStart = 1+(float)Math.cos(stack.progress * Math.PI*2);
+		entity.hoverStart = 0;// 1 + (float) Math.cos(stack.progress * Math.PI *
+								// 2);
 
 		float x = 0;
 		float y = 0;
-		float z = 0; 
+		float z = 0;
 		float travelProgress = -(stack.progress - 0.5f);
+		float angle = 0;
 		if (stack.progress < 0.5f) {
 			switch (stack.source) {
 			case LEFT:
-				x = travelProgress;
-				y = 0;
-				z = 0;
+				if (state.rightBend) {
+					float angleProgress = (float) (stack.progress * Math.PI / 2);
+					x = 0.5f - (float) Math.sin(angleProgress) * 0.5f;
+					z = 0.5f - (float) Math.cos(angleProgress) * 0.5f;
+
+					angle = -90+ angleProgress / (float)Math.PI * 180;
+				} else {
+					x = travelProgress;
+					y = 0;
+					z = 0;
+				angle = -90;
+				}
 				break;
 
 			case RIGHT:
-				x = -travelProgress;
-				y = 0;
-				z = 0; 
+				if (state.leftBend) {
+					float angleProgress = (float) (stack.progress * Math.PI / 2);
+					x = -0.5f + (float) Math.sin(angleProgress) * 0.5f;
+					z = 0.5f - (float) Math.cos(angleProgress) * 0.5f;
+
+					angle = 90-angleProgress / (float)Math.PI * 180;
+				} else {
+					x = -travelProgress;
+					y = 0;
+					z = 0;
+				angle = 90;
+				}
 				break;
 			case FRONT:
 				x = 0;
@@ -436,42 +458,64 @@ public class ModelConveyorBelt extends ModelConnected {
 				z = 0;
 				break;
 			case BACK:
-				x = 0;
-				y = 0;
-				z = -travelProgress;
+				if (stack.source == LocalDirection.LEFT && state.rightBend) {
+					float angleProgress = (float) (stack.progress * Math.PI / 2);
+					x = 0.5f - (float) Math.sin(angleProgress) * 0.5f;
+					z = 0.5f - (float) Math.cos(angleProgress) * 0.5f;
+					angle =  -90+angleProgress / (float)Math.PI * 180;
+					
+				} else if (stack.source == LocalDirection.RIGHT && state.leftBend) {
+					float angleProgress = (float) (stack.progress * Math.PI / 2);
+					x = -0.5f + (float) Math.sin(angleProgress) * 0.5f;
+					z = 0.5f - (float) Math.cos(angleProgress) * 0.5f;
+
+					angle = 90-angleProgress / (float)Math.PI * 180;
+				} else {
+					x = 0;
+					y = 0;
+					z = -travelProgress;
+					angle = 0;
+				}
 				break;
 			default:
 				break;
 			}
 		}
-
 		if (items.getItem().isFull3D())
 			y -= 0.25f;
-		//entity.hoverStart = 10; 
+		int dir = -BlockMachine.getMetadataFromForward(BlockMachine.getForwardFromEntity(tl));
 		
-		//angle = (float)(Math.atan2(x, z) * 180 / Math.PI);
-		float angle = 90 * BlockMachine.getMetadataFromForward(BlockMachine.getForwardFromEntity(tl));
+		//if(dir % 2 == 0) angle += 90;
+		
+		float worldAngle = 90;//-90 * dir;
 		GL11.glPushMatrix();
-		//GL11.glRotatef(angle, 0, 1, 0);
-		itemrenderer.doRenderItem(entity, x, y + 1, z, 0, 10 * scale * 0.5f);
+		GL11.glTranslatef(x, y + 1.4f, z);
+		GL11.glRotatef(180, 1, 0, 0);
+		GL11.glRotatef(worldAngle, 0, 1, 0);
+		GL11.glRotatef(-angle, 0, 1, 0);
+		itemrenderer.doRenderItem(entity, 0, 0, 0, 0, scale);
 		GL11.glPopMatrix();
 
-		System.out.println("ModelConveyorBelt.renderStack()");
 	}
 
-	private void drawConnections(TileEntity tl, ConnectionState right, ConnectionState back, ConnectionState left, ConnectionState front, ConnectionState top, ConnectionState bottom, float f5) {
+	private CornerState drawConnections(TileEntity tl, ConnectionState right, ConnectionState back, ConnectionState left, ConnectionState front, ConnectionState top, ConnectionState bottom, float f5) {
 		boolean turn = false;
+		CornerState state = new CornerState();
 		if (right != ConnectionState.DISCONNECTED && left == ConnectionState.DISCONNECTED && back == ConnectionState.DISCONNECTED) {
 			if (top != ConnectionState.DISCONNECTED || bottom != ConnectionState.DISCONNECTED)
 				drawCornerRight(tl, f5);
-			else
+			else {
 				drawTurnRight(tl, f5);
+				state.rightBend = true;
+			}
 			turn = true;
 		} else if (right == ConnectionState.DISCONNECTED && left != ConnectionState.DISCONNECTED && back == ConnectionState.DISCONNECTED) {
 			if (top != ConnectionState.DISCONNECTED || bottom != ConnectionState.DISCONNECTED)
 				drawCornerLeft(tl, f5);
-			else
+			else {
 				drawTurnLeft(tl, f5);
+				state.leftBend = true;
+			}
 			turn = true;
 		} else {
 			if (back == ConnectionState.DISCONNECTED) {
@@ -540,6 +584,8 @@ public class ModelConveyorBelt extends ModelConnected {
 			}
 			ConnectorFrontSide6.render(f5);
 		}
+
+		return state;
 	}
 
 	private void drawAngle(TileEntity tl, int xCorner, int yCorner, float f, float startAngle, boolean invert) {
