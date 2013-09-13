@@ -88,7 +88,7 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 		super.updateEntity();
 		if (!this.worldObj.isRemote) {
 			if (!this.itemStacks.isEmpty()) {
-				float speed = 1f; // one unit per second
+				float speed = 1; // one unit per second
 				float DT = 1 / 20f;
 
 				boolean upOutput = isOutput(ForgeDirection.UP.ordinal());
