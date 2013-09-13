@@ -46,11 +46,15 @@ public class BlockConveyorBelt extends BlockMachineRendered {
 	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
 		// TODO Auto-generated method stub
 		super.onEntityCollidedWithBlock(par1World, par2, par3, par4, par5Entity);
+		TileEntityConveyorBelt conveyorBelt = (TileEntityConveyorBelt) par1World.getBlockTileEntity(par2, par3, par4);
 		if (par5Entity instanceof EntityItem) {
 			EntityItem item = (EntityItem) par5Entity;
-			TileEntityConveyorBelt conveyorBelt = (TileEntityConveyorBelt) par1World.getBlockTileEntity(par2, par3, par4);
-			conveyorBelt.addItemStack(item.getEntityItem(), null);
-			item.setDead();
+			if (!item.isDead) {
+				conveyorBelt.addItemStack(item.getEntityItem(), null);
+				item.setDead();
+			}
+		} else if (par5Entity instanceof EntityLivingBase) {
+			conveyorBelt.moveEntity((EntityLivingBase) par5Entity);
 		}
 	}
 

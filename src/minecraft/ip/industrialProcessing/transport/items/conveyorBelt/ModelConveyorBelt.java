@@ -397,53 +397,55 @@ public class ModelConveyorBelt extends ModelConnected {
 		float travelProgress = -(stack.progress - 0.5f);
 		float angle = 0;
 		if (stack.progress < 0.5f) {
-			switch (stack.source) {
-			case LEFT:
-				if (state.rightBend) {
-					float angleProgress = (float) (stack.progress * Math.PI / 2);
-					x = 0.5f - (float) Math.sin(angleProgress) * 0.5f;
-					z = 0.5f - (float) Math.cos(angleProgress) * 0.5f;
+			if (stack.source != null) {
+				switch (stack.source) {
+				case LEFT:
+					if (state.rightBend) {
+						float angleProgress = (float) (stack.progress * Math.PI / 2);
+						x = 0.5f - (float) Math.sin(angleProgress) * 0.5f;
+						z = 0.5f - (float) Math.cos(angleProgress) * 0.5f;
 
-					angle = -90+ angleProgress / (float)Math.PI * 180;
-				} else {
-					x = travelProgress;
+						angle = -90 + angleProgress / (float) Math.PI * 180;
+					} else {
+						x = travelProgress;
+						y = 0;
+						z = 0;
+						angle = -90;
+					}
+					break;
+
+				case RIGHT:
+					if (state.leftBend) {
+						float angleProgress = (float) (stack.progress * Math.PI / 2);
+						x = -0.5f + (float) Math.sin(angleProgress) * 0.5f;
+						z = 0.5f - (float) Math.cos(angleProgress) * 0.5f;
+
+						angle = 90 - angleProgress / (float) Math.PI * 180;
+					} else {
+						x = -travelProgress;
+						y = 0;
+						z = 0;
+						angle = 90;
+					}
+					break;
+				case FRONT:
+					x = 0;
 					y = 0;
+					z = -travelProgress;
+					break;
+				case UP:
+					x = 0;
+					y = -travelProgress;
 					z = 0;
-				angle = -90;
-				}
-				break;
-
-			case RIGHT:
-				if (state.leftBend) {
-					float angleProgress = (float) (stack.progress * Math.PI / 2);
-					x = -0.5f + (float) Math.sin(angleProgress) * 0.5f;
-					z = 0.5f - (float) Math.cos(angleProgress) * 0.5f;
-
-					angle = 90-angleProgress / (float)Math.PI * 180;
-				} else {
-					x = -travelProgress;
-					y = 0;
+					break;
+				case DOWN:
+					x = 0;
+					y = travelProgress;
 					z = 0;
-				angle = 90;
+					break;
+				default:
+					break;
 				}
-				break;
-			case FRONT:
-				x = 0;
-				y = 0;
-				z = -travelProgress;
-				break;
-			case UP:
-				x = 0;
-				y = -travelProgress;
-				z = 0;
-				break;
-			case DOWN:
-				x = 0;
-				y = travelProgress;
-				z = 0;
-				break;
-			default:
-				break;
 			}
 		} else {
 			switch (stack.destination) {
@@ -462,14 +464,14 @@ public class ModelConveyorBelt extends ModelConnected {
 					float angleProgress = (float) (stack.progress * Math.PI / 2);
 					x = 0.5f - (float) Math.sin(angleProgress) * 0.5f;
 					z = 0.5f - (float) Math.cos(angleProgress) * 0.5f;
-					angle =  -90+angleProgress / (float)Math.PI * 180;
-					
+					angle = -90 + angleProgress / (float) Math.PI * 180;
+
 				} else if (stack.source == LocalDirection.RIGHT && state.leftBend) {
 					float angleProgress = (float) (stack.progress * Math.PI / 2);
 					x = -0.5f + (float) Math.sin(angleProgress) * 0.5f;
 					z = 0.5f - (float) Math.cos(angleProgress) * 0.5f;
 
-					angle = 90-angleProgress / (float)Math.PI * 180;
+					angle = 90 - angleProgress / (float) Math.PI * 180;
 				} else {
 					x = 0;
 					y = 0;
@@ -481,18 +483,12 @@ public class ModelConveyorBelt extends ModelConnected {
 				break;
 			}
 		}
-		if (items.getItem().isFull3D())
-			y -= 0.25f;
-		int dir = -BlockMachine.getMetadataFromForward(BlockMachine.getForwardFromEntity(tl));
-		
-		//if(dir % 2 == 0) angle += 90;
-		
-		float worldAngle = 90;//-90 * dir;
+
+		float worldAngle = 90;
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y + 1.4f, z);
 		GL11.glRotatef(180, 1, 0, 0);
-		GL11.glRotatef(worldAngle, 0, 1, 0);
-		GL11.glRotatef(-angle, 0, 1, 0);
+		GL11.glRotatef(worldAngle - angle, 0, 1, 0);
 		itemrenderer.doRenderItem(entity, 0, 0, 0, 0, scale);
 		GL11.glPopMatrix();
 

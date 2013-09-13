@@ -3,7 +3,6 @@ package ip.industrialProcessing.transport.items.conveyorBelt;
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.IRotateableEntity;
-import ip.industrialProcessing.machines.MachineItemStack;
 import ip.industrialProcessing.transport.TileEntityTransport;
 import ip.industrialProcessing.transport.TransportConnectionState;
 import ip.industrialProcessing.utils.ItemTransfers;
@@ -13,6 +12,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -27,6 +28,7 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 	private ForgeDirection forwardDirection = ForgeDirection.NORTH;
 	private ArrayList<MovingItemStack> itemStacks = new ArrayList<MovingItemStack>();
 	private int pullTicks = 0;
+	float speed = 1; // one unit per second
 
 	@Override
 	protected TransportConnectionState getState(TileEntity entity, ForgeDirection direction) {
@@ -88,7 +90,6 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 		super.updateEntity();
 		if (!this.worldObj.isRemote) {
 			if (!this.itemStacks.isEmpty()) {
-				float speed = 1; // one unit per second
 				float DT = 1 / 20f;
 
 				boolean upOutput = isOutput(ForgeDirection.UP.ordinal());
@@ -119,7 +120,7 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 							}
 						}
 					}
-					
+
 				}
 			}
 
@@ -203,13 +204,11 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 		ForgeDirection direction = DirectionUtils.getWorldDirection(stack.destination, this.forwardDirection);
 		TileEntityConveyorBelt conveyor = getConveyor(direction);
 		if (conveyor != null) {
-			System.out.println("Transfering " + stack.stack.stackSize + " " + stack.stack.getDisplayName() + " to conveyor");
 			conveyor.addItemStack(stack.stack, direction.getOpposite());
 			return true;
 		} else {
 			ISidedInventory sidedInventory = getSidedInventory(direction);
 			if (sidedInventory != null) {
-				System.out.println("Transfering " + stack.stack.stackSize + " " + stack.stack.getDisplayName() + " to sided inventory " + sidedInventory);
 				ItemStack rest = ItemTransfers.transfer(stack.stack, sidedInventory, direction.getOpposite());
 				if (rest == null || rest.stackSize <= 0)
 					return true;
@@ -219,7 +218,6 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 					stack.source = stack.destination;
 					stack.destination = LocalDirection.FRONT; // bounce back
 				} else {
-					System.out.println("Transfering " + stack.stack.stackSize + " " + stack.stack.getDisplayName() + " to air");
 					float dx = direction.offsetX + (float) rnd.nextGaussian();
 					float dy = direction.offsetY + 5;
 					float dz = direction.offsetZ + (float) rnd.nextGaussian();
@@ -230,7 +228,6 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 			} else {
 				IInventory inventory = getInventory(direction);
 				if (inventory != null) {
-					System.out.println("Transfering " + stack.stack.stackSize + " " + stack.stack.getDisplayName() + " to inventory" + inventory);
 					ItemStack rest = ItemTransfers.transfer(stack.stack, inventory);
 					if (rest == null || rest.stackSize <= 0)
 						return true;
@@ -243,7 +240,6 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 						stack.progress = 0;
 						return false;
 					} else {
-						System.out.println("Transfering " + stack.stack.stackSize + " " + stack.stack.getDisplayName() + " to air");
 						float dx = direction.offsetX + (float) rnd.nextGaussian();
 						float dy = direction.offsetY + 5;
 						float dz = direction.offsetZ + (float) rnd.nextGaussian();
@@ -251,7 +247,6 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 						return true;
 					}
 				} else {
-					System.out.println("Transfering " + stack.stack.stackSize + " " + stack.stack.getDisplayName() + " to air");
 					float dx = direction.offsetX;
 					float dy = direction.offsetY;
 					float dz = direction.offsetZ;
@@ -261,9 +256,8 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 			}
 		}
 	}
-	
-	public Iterator<MovingItemStack> iterateStacks()
-	{
+
+	public Iterator<MovingItemStack> iterateStacks() {
 		return this.itemStacks.iterator();
 	}
 
@@ -275,11 +269,11 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 	}
 
 	public void addItemStack(ItemStack stack, ForgeDirection source) {
-		if(source == null) source = ForgeDirection.UNKNOWN;
 		MovingItemStack movingStack = new MovingItemStack();
 		movingStack.stack = stack;
 		if (source == null) {
 			movingStack.progress = 0.5f;
+			movingStack.source = null;
 		} else {
 			movingStack.progress = 0;
 			LocalDirection localSource = DirectionUtils.getLocalDirection(source, this.forwardDirection);
@@ -316,7 +310,8 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 				nbttagcompound1.setByte("Slot", (byte) i);
 				nbttagcompound1.setInteger("Dest", machineStack.destination.ordinal());
-				nbttagcompound1.setInteger("Src", machineStack.source.ordinal());
+				if (machineStack.source != null)
+					nbttagcompound1.setInteger("Src", machineStack.source.ordinal());
 				nbttagcompound1.setFloat("Progress", machineStack.progress);
 				machineStack.stack.writeToNBT(nbttagcompound1);
 				nbttaglist.appendTag(nbttagcompound1);
@@ -411,6 +406,31 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 			AxisAlignedBB axisalignedbb1 = AxisAlignedBB.getAABBPool().getAABB(xCoord + minX / 16d + 0.5f, yCoord + minY / 16d + 0.5f, zCoord + minZ / 16d + 0.5f, xCoord + maxX / 16d + 0.5f, yCoord + maxY / 16d + 0.5f, zCoord + maxZ / 16d + 0.5f);
 			if (axisalignedbb1 != null && par5AxisAlignedBB.intersectsWith(axisalignedbb1)) {
 				par6List.add(axisalignedbb1);
+			}
+		}
+	}
+
+	public void moveEntity(EntityLivingBase par5Entity) {
+
+		double x = (-this.forwardDirection.offsetX * speed / 5 - par5Entity.motionX) / 5;
+		double y = (-this.forwardDirection.offsetY * speed / 5 - par5Entity.motionY) / 5;
+		double z = (-this.forwardDirection.offsetZ * speed / 5 - par5Entity.motionZ) / 5;
+
+		par5Entity.addVelocity(x, y, z);
+
+		if (par5Entity instanceof EntityPlayerMP) {
+			EntityPlayerMP player = (EntityPlayerMP) par5Entity;		
+			
+			IInventory inventory = player.inventory;
+			if (player != null) {
+				for (int i = this.itemStacks.size() - 1; i >= 0; i--) {
+					MovingItemStack stack = this.itemStacks.get(i);
+					ItemStack rest = ItemTransfers.transfer(stack.stack, inventory);
+					if (rest != null && rest.stackSize > 0)
+						stack.stack = rest;
+					else
+						this.itemStacks.remove(i);
+				}
 			}
 		}
 	}
