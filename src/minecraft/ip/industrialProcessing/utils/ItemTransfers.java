@@ -86,6 +86,7 @@ public class ItemTransfers {
 	}
 
 	public static boolean canInsert(ItemStack stack, IInventory inventory) { 
+		if(inventory == null) return false;
 		for (int i = 0; i < inventory.getSizeInventory(); i++) {
 			if (canInsert(stack, inventory, i))
 				return true;
@@ -94,6 +95,7 @@ public class ItemTransfers {
 	}
 
 	public static boolean canInsert(ItemStack stack, IInventory inventory, int slot) {
+		if(inventory == null) return false;
 		if (inventory.isItemValidForSlot(slot, stack)) {
 			ItemStack inhabitingStack = inventory.getStackInSlot(slot);
 			if(inhabitingStack == null)

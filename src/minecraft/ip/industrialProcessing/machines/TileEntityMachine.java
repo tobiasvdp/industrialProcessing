@@ -62,7 +62,7 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
 				nbttaglist.appendTag(nbttagcompound1);
 			}
 		}
-		nbt.setTag("Items", nbttaglist);
+		nbt.setTag("Items", nbttaglist); 
 	}
 
 	@Override

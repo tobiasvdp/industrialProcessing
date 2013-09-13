@@ -1,10 +1,20 @@
 package ip.industrialProcessing.transport.items.conveyorBelt;
 
+import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.ModelConnected;
 import ip.industrialProcessing.machines.BlockMachine;
+
+import java.util.Iterator;
+
+import javax.print.attribute.standard.Destination;
+
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
@@ -360,8 +370,93 @@ public class ModelConveyorBelt extends ModelConnected {
 				ConnectorBotomSupport2.render(f5);
 				ConnectorBotomSupport1.render(f5);
 			}
+			if (tl instanceof TileEntityConveyorBelt) {
+				RenderItem itemrenderer = (RenderItem) RenderManager.instance.getEntityClassRenderObject(EntityItem.class);
+				TileEntityConveyorBelt belt = (TileEntityConveyorBelt) tl;
 
+				for (Iterator<MovingItemStack> iterator = belt.iterateStacks(); iterator.hasNext();) {
+					MovingItemStack stack = iterator.next();
+					renderStack(stack, tl, itemrenderer, f5);
+				}
+			}
 		}
+	}
+
+	private void renderStack(MovingItemStack stack, TileEntity tl, RenderItem itemrenderer, float scale) {
+		ItemStack items = stack.stack;
+ 
+		EntityItem entity = new EntityItem(tl.worldObj, tl.xCoord, tl.yCoord, tl.zCoord, items);
+		entity.hoverStart = 1+(float)Math.cos(stack.progress * Math.PI*2);
+
+		float x = 0;
+		float y = 0;
+		float z = 0; 
+		float travelProgress = -(stack.progress - 0.5f);
+		if (stack.progress < 0.5f) {
+			switch (stack.source) {
+			case LEFT:
+				x = travelProgress;
+				y = 0;
+				z = 0;
+				break;
+
+			case RIGHT:
+				x = -travelProgress;
+				y = 0;
+				z = 0; 
+				break;
+			case FRONT:
+				x = 0;
+				y = 0;
+				z = -travelProgress;
+				break;
+			case UP:
+				x = 0;
+				y = -travelProgress;
+				z = 0;
+				break;
+			case DOWN:
+				x = 0;
+				y = travelProgress;
+				z = 0;
+				break;
+			default:
+				break;
+			}
+		} else {
+			switch (stack.destination) {
+			case UP:
+				x = 0;
+				y = travelProgress;
+				z = 0;
+				break;
+			case DOWN:
+				x = 0;
+				y = -travelProgress;
+				z = 0;
+				break;
+			case BACK:
+				x = 0;
+				y = 0;
+				z = -travelProgress;
+				break;
+			default:
+				break;
+			}
+		}
+
+		if (items.getItem().isFull3D())
+			y -= 0.25f;
+		//entity.hoverStart = 10; 
+		
+		//angle = (float)(Math.atan2(x, z) * 180 / Math.PI);
+		float angle = 90 * BlockMachine.getMetadataFromForward(BlockMachine.getForwardFromEntity(tl));
+		GL11.glPushMatrix();
+		//GL11.glRotatef(angle, 0, 1, 0);
+		itemrenderer.doRenderItem(entity, x, y + 1, z, 0, 10 * scale * 0.5f);
+		GL11.glPopMatrix();
+
+		System.out.println("ModelConveyorBelt.renderStack()");
 	}
 
 	private void drawConnections(TileEntity tl, ConnectionState right, ConnectionState back, ConnectionState left, ConnectionState front, ConnectionState top, ConnectionState bottom, float f5) {

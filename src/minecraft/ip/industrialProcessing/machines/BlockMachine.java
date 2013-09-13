@@ -129,6 +129,5 @@ public abstract class BlockMachine extends BlockContainer {
 			return rotated.getForwardDirection();
 		}
 		return ForgeDirection.NORTH;
-	}
-
+	} 
 }

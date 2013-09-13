@@ -3,11 +3,13 @@ package ip.industrialProcessing.transport.items.conveyorBelt;
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.IRotateableEntity;
+import ip.industrialProcessing.machines.MachineItemStack;
 import ip.industrialProcessing.transport.TileEntityTransport;
 import ip.industrialProcessing.transport.TransportConnectionState;
 import ip.industrialProcessing.utils.ItemTransfers;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -15,6 +17,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.ForgeDirection;
@@ -37,7 +40,7 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 			ISidedInventory inventory = (ISidedInventory) entity;
 			int[] slots = inventory.getAccessibleSlotsFromSide(direction.getOpposite().ordinal());
 			if (slots != null && slots.length > 0) {
-				if (direction == this.forwardDirection)
+				if (direction == this.forwardDirection.getOpposite())
 					// this conveyor is connected to an input
 					return TransportConnectionState.INPUT;
 				else if (direction == ForgeDirection.UP || direction == ForgeDirection.DOWN)
@@ -47,7 +50,7 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 					return TransportConnectionState.OUTPUT;
 			}
 		} else if (entity instanceof IInventory) {
-			if (direction == this.forwardDirection)
+			if (direction == this.forwardDirection.getOpposite())
 				// this conveyor is connected to an input
 				return TransportConnectionState.INPUT;
 			else if (direction == ForgeDirection.UP || direction == ForgeDirection.DOWN)
@@ -64,6 +67,22 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 		return true;
 	}
 
+	private boolean canInsert(MovingItemStack stack, ForgeDirection direction, IInventory destinationInventory) {
+		if (stack.destination == LocalDirection.BACK && stack.source != LocalDirection.DOWN) {
+			if (destinationInventory instanceof ISidedInventory) {
+				if (canInsert((ISidedInventory) destinationInventory, stack.stack, direction.getOpposite()))
+					return true;
+			} else if (canInsert(destinationInventory, stack.stack))
+				return true;
+		}
+		return false;
+	}
+
+	private boolean isOutput(int index) {
+		TransportConnectionState state = this.states[index];
+		return state == TransportConnectionState.OUTPUT || state == TransportConnectionState.DUAL;
+	}
+
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
@@ -72,103 +91,86 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 				float speed = 1f; // one unit per second
 				float DT = 1 / 20f;
 
-				int upIndex = ForgeDirection.UP.ordinal();
-				int downIndex = ForgeDirection.DOWN.ordinal();
+				boolean upOutput = isOutput(ForgeDirection.UP.ordinal());
+				boolean downOutput = isOutput(ForgeDirection.DOWN.ordinal());
 
-				TransportConnectionState upState = this.states[upIndex];
-				boolean upOutput = upState == TransportConnectionState.OUTPUT || upState == TransportConnectionState.DUAL;
+				IInventory downInventory = getInventory(ForgeDirection.DOWN);
+				IInventory upInventory = getInventory(ForgeDirection.UP);
 
-				TransportConnectionState downState = this.states[downIndex];
-				boolean downOutput = downState == TransportConnectionState.OUTPUT || downState == TransportConnectionState.DUAL;
-
-				IInventory downInventory = null;
-				ISidedInventory downSidedInventory = null;
-				if (downOutput) {
-					downSidedInventory = getSidedInventory(ForgeDirection.DOWN);
-					if (downSidedInventory == null)
-						downInventory = getInventory(ForgeDirection.DOWN);
-				}
-
-				IInventory upInventory = null;
-				ISidedInventory upSidedInventory = null;
-				if (upOutput) {
-					upSidedInventory = getSidedInventory(ForgeDirection.UP);
-					if (upSidedInventory == null)
-						upInventory = getInventory(ForgeDirection.UP);
-				}
-
-				for (int i = this.itemStacks.size() - 1; i > 0; i--) {
+				for (int i = this.itemStacks.size() - 1; i >= 0; i--) {
 					MovingItemStack stack = this.itemStacks.get(i);
 					stack.progress += speed * DT;
+
 					if (stack.progress >= 1) {
 						if (outputStack(stack))
 							this.itemStacks.remove(i);
 					}
+
 					if (downOutput || upOutput) {
 						if (stack.destination == LocalDirection.BACK) {
 							if (stack.progress > 0.5f - 4 * speed * DT && stack.progress < 0.5 + 4 * speed * DT) {
-								if (downOutput && stack.destination == LocalDirection.BACK && stack.source != LocalDirection.DOWN) {
-									if (downSidedInventory != null) {
-										if (canInsert(downSidedInventory, stack.stack, ForgeDirection.UP)) {
-											stack.destination = LocalDirection.DOWN;
-										}
-									} else if (downInventory != null) {
-										if (canInsert(downInventory, stack.stack)) {
-											stack.destination = LocalDirection.DOWN;
-										}
-									}
-								}
-								if (upOutput && stack.destination == LocalDirection.BACK && stack.source != LocalDirection.UP) {
-									if (upSidedInventory != null) {
-										if (canInsert(upSidedInventory, stack.stack, ForgeDirection.DOWN)) {
-											stack.destination = LocalDirection.UP;
-										}
-									} else if (upInventory != null) {
-										if (canInsert(upInventory, stack.stack)) {
-											stack.destination = LocalDirection.UP;
-										}
+								if (canInsert(stack, ForgeDirection.DOWN, downInventory)) {
+									stack.destination = LocalDirection.DOWN;
+								} else {
+									if (canInsert(stack, ForgeDirection.UP, upInventory)) {
+										stack.destination = LocalDirection.UP;
 									}
 								}
 							}
 						}
 					}
+					
 				}
 			}
+
 			if (pullTicks++ > 20) {
-				for (int i = 0; i < states.length; i++) {
-					if (states[i] == TransportConnectionState.OUTPUT || states[i] == TransportConnectionState.DUAL) {
-						ForgeDirection direction = ForgeDirection.getOrientation(i);
-						if (direction != this.forwardDirection) {
-							ISidedInventory sidedInventory = getSidedInventory(direction);
-							if (sidedInventory != null) {
-								int[] slots = sidedInventory.getAccessibleSlotsFromSide(direction.getOpposite().ordinal());
-								for (int j = slots.length - 1; j >= 0; j--) {
-									ItemStack stack = sidedInventory.getStackInSlot(slots[j]);
-									sidedInventory.canExtractItem(slots[j], stack, direction.getOpposite().ordinal());
-									ItemStack item = sidedInventory.decrStackSize(slots[j], 1);
-									if (item != null) {
-										addItemStack(item, direction.getOpposite());
-										break;
-									}
-								}
-							} else {
-								IInventory inventory = getInventory(direction);
-								if (inventory != null) {
-									for (int j = inventory.getSizeInventory() - 1; j >= 0; j--) {
-										ItemStack item = inventory.decrStackSize(j, 1);
-										if (item != null) {
-											addItemStack(item, direction.getOpposite());
-											break;
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-				pullTicks = 0;
+				takeFromInput(1);
 			}
 		}
+
+		notifyBlockChange();
+	}
+
+	private void takeFromInput(int maxStackSize) {
+		for (int i = 0; i < states.length; i++) {
+			if (states[i] == TransportConnectionState.OUTPUT || states[i] == TransportConnectionState.DUAL) {
+				ForgeDirection direction = ForgeDirection.getOrientation(i);
+				// not the conveyor output side? then it's a conveyor input!
+				if (direction != this.forwardDirection.getOpposite()) {
+					ItemStack stack = pullStack(direction);
+					if (stack != null)
+						addItemStack(stack, direction);
+				}
+			}
+		}
+		pullTicks = 0;
+	}
+
+	private ItemStack pullStack(ForgeDirection direction) {
+		IInventory inventory = getInventory(direction);
+		ForgeDirection opposite = direction.getOpposite();
+		if (inventory != null) {
+			if (inventory instanceof ISidedInventory) {
+				ISidedInventory sidedInventory = (ISidedInventory) inventory;
+				int[] slots = sidedInventory.getAccessibleSlotsFromSide(opposite.ordinal());
+				for (int j = slots.length - 1; j >= 0; j--) {
+					ItemStack stack = sidedInventory.getStackInSlot(slots[j]);
+					sidedInventory.canExtractItem(slots[j], stack, opposite.ordinal());
+					ItemStack item = sidedInventory.decrStackSize(slots[j], 1);
+					if (item != null) {
+						return item;
+					}
+				}
+			} else {
+				for (int j = inventory.getSizeInventory() - 1; j >= 0; j--) {
+					ItemStack item = inventory.decrStackSize(j, 1);
+					if (item != null) {
+						return item;
+					}
+				}
+			}
+		}
+		return null;
 	}
 
 	private boolean canInsert(ISidedInventory downSidedInventory, ItemStack stack, ForgeDirection side) {
@@ -191,6 +193,9 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 		if (entity instanceof IInventory)
 			return (IInventory) entity;
 		return null;
+	}
+
+	private void networkStack(MovingItemStack stack, StackEvent event, int index) {
 	}
 
 	private boolean outputStack(MovingItemStack stack) {
@@ -256,6 +261,11 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 			}
 		}
 	}
+	
+	public Iterator<MovingItemStack> iterateStacks()
+	{
+		return this.itemStacks.iterator();
+	}
 
 	private TileEntityConveyorBelt getConveyor(ForgeDirection direction) {
 		TileEntity entity = this.worldObj.getBlockTileEntity(xCoord + direction.offsetX, yCoord + direction.offsetY, zCoord + direction.offsetZ);
@@ -265,6 +275,7 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 	}
 
 	public void addItemStack(ItemStack stack, ForgeDirection source) {
+		if(source == null) source = ForgeDirection.UNKNOWN;
 		MovingItemStack movingStack = new MovingItemStack();
 		movingStack.stack = stack;
 		if (source == null) {
@@ -275,7 +286,10 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 			movingStack.source = localSource;
 		}
 		movingStack.destination = LocalDirection.BACK;
+		int index = this.itemStacks.size();
 		this.itemStacks.add(movingStack);
+		networkStack(movingStack, StackEvent.ADD, index);
+
 	}
 
 	@Override
@@ -290,15 +304,48 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
-		super.writeToNBT(par1nbtTagCompound);
-		par1nbtTagCompound.setInteger("Forward", this.forwardDirection.ordinal());
+	public void writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
+		nbt.setInteger("Forward", this.forwardDirection.ordinal());
+
+		nbt.setInteger("StackCount", this.itemStacks.size());
+		NBTTagList nbttaglist = new NBTTagList();
+		for (int i = 0; i < this.itemStacks.size(); ++i) {
+			MovingItemStack machineStack = this.itemStacks.get(i);
+			if (machineStack.stack != null) {
+				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+				nbttagcompound1.setByte("Slot", (byte) i);
+				nbttagcompound1.setInteger("Dest", machineStack.destination.ordinal());
+				nbttagcompound1.setInteger("Src", machineStack.source.ordinal());
+				nbttagcompound1.setFloat("Progress", machineStack.progress);
+				machineStack.stack.writeToNBT(nbttagcompound1);
+				nbttaglist.appendTag(nbttagcompound1);
+			}
+		}
+		nbt.setTag("Stacks", nbttaglist);
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
-		super.readFromNBT(par1nbtTagCompound);
-		this.forwardDirection = ForgeDirection.getOrientation(par1nbtTagCompound.getInteger("Forward"));
+	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
+		this.forwardDirection = ForgeDirection.getOrientation(nbt.getInteger("Forward"));
+		this.itemStacks.clear();
+		LocalDirection[] directions = LocalDirection.values();
+		NBTTagList nbttaglist = nbt.getTagList("Stacks");
+		int stackCount = nbt.getInteger("StackCount");
+		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
+			NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(i);
+			byte b0 = nbttagcompound1.getByte("Slot");
+
+			if (b0 >= 0 && b0 < stackCount) {
+				MovingItemStack machineStack = new MovingItemStack();
+				machineStack.stack = ItemStack.loadItemStackFromNBT(nbttagcompound1);
+				machineStack.destination = directions[nbttagcompound1.getInteger("Dest")];
+				machineStack.source = directions[nbttagcompound1.getInteger("Src")];
+				machineStack.progress = nbttagcompound1.getFloat("Progress");
+				this.itemStacks.add(machineStack);
+			}
+		}
 	}
 
 	public void addCollisionBoxes(List par6List, AxisAlignedBB par5AxisAlignedBB) {

@@ -65,6 +65,7 @@ public abstract class BlockTransport extends BlockContainer {
 		TileEntityTransport transport = (TileEntityTransport)entity;
 		transport.searchForConnections();
 	}
+ 
 	
 	@Override
 	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
