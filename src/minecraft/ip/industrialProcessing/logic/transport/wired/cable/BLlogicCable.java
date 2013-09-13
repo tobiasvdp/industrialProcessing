@@ -132,12 +132,7 @@ public class BLlogicCable extends BlockMachineRendered {
 	public boolean isBlockReplaceable(World world, int x, int y, int z) {
 		return true;
 	}
-
-	@Override
-	public void onNeighborTileChange(World world, int x, int y, int z, int tileX, int tileY, int tileZ) {
-		super.onNeighborTileChange(world, x, y, z, tileX, tileY, tileZ);
-	}
-
+ 
 	@Override
 	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
 		TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
