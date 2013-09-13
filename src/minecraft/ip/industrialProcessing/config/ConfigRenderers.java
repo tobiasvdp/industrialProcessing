@@ -44,7 +44,14 @@ public class ConfigRenderers {
 	private int rendererValveID;
 	private int BLlogicSwitchBox;
 	private int BLlogicCable;
+	private int BLlogicAnd;
 
+	public static int getBLlogicAnd() {
+		return getInstance().BLlogicAnd;
+	}
+	public static void setBLlogicAnd(int value) {
+		getInstance().BLlogicAnd = value;
+	}
 	public static int getBLlogicCable() {
 		return getInstance().BLlogicCable;
 	}

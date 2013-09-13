@@ -142,7 +142,7 @@ public class BLlogicCable extends BlockMachineRendered {
 	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
 		TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
 		if (te != null) {
-			ICommunication com = (ICommunication) te;
+			ICommunicationTransport com = (ICommunicationTransport) te;
 			boolean destroy = false;
 			int count = 0;
 			int id = par1World.getBlockId(par2, par3, par4);
@@ -164,8 +164,11 @@ public class BLlogicCable extends BlockMachineRendered {
 				for (int i = 0; i < count; i++) {
 					this.dropBlockAsItem(par1World, par2, par3, par4, 0, 1);
 				}
+				System.out.println(com.getPlacedSidesSize());
 				if (com.getPlacedSidesSize() == 0) {
 					par1World.destroyBlock(par2, par3, par4, false);
+				}else if(com.getPlacedSidesSize() == 1){
+					com.setMultipleSides(false);
 				}
 			}
 

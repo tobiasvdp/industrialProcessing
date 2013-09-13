@@ -33,4 +33,12 @@ public class UTBuffer {
 		return buffer;
 	}
 
+	public Object get() {
+		return buffer[0];
+	}
+	
+	public Object get(int i) {
+		return buffer[i];
+	}
+
 }

@@ -17,7 +17,7 @@ public class ConfigCreativeTabs {
 		LanguageRegistry.instance().addStringLocalization("IP.itemGroup.tabMultiblocks", "en_US", "IP Multiblocks");
 		((CreativeTabsIP) IndustrialProcessing.tabMultiblocks).setIcon(new ItemStack(IndustrialProcessing.BLmultiblockWheelConnector));
 		LanguageRegistry.instance().addStringLocalization("IP.itemGroup.tabLogic", "en_US", "IP Logic");
-		((CreativeTabsIP) IndustrialProcessing.tabMultiblocks).setIcon(new ItemStack(IndustrialProcessing.BLlogicSwitchBox));
+		((CreativeTabsIP) IndustrialProcessing.tabLogic).setIcon(new ItemStack(IndustrialProcessing.BLlogicSwitchBox));
 	}
 	
 	public ConfigCreativeTabs() {

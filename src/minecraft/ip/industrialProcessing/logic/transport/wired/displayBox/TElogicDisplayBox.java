@@ -264,4 +264,10 @@ public class TElogicDisplayBox extends TileEntity implements ICommunicationNode,
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public UTBuffer getBuffer(ForgeDirection dir) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

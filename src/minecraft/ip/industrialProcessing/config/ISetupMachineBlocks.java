@@ -1,5 +1,6 @@
 package ip.industrialProcessing.config;
 
+import ip.industrialProcessing.logic.functions.and.BLlogicAnd;
 import ip.industrialProcessing.logic.transport.wired.bundle.BLlogicBundle;
 import ip.industrialProcessing.logic.transport.wired.cable.BLlogicCable;
 import ip.industrialProcessing.logic.transport.wired.displayBox.BLlogicDisplayBox;
@@ -120,4 +121,5 @@ public interface ISetupMachineBlocks {
 	public final static BLlogicSwitchBox BLlogicSwitchBox = new BLlogicSwitchBox();
 	public final static BLlogicBundle BLlogicBundle = new BLlogicBundle();
 	public final static BLlogicDisplayBox BLlogicDisplayBox = new BLlogicDisplayBox();
+	public final static BLlogicAnd BLlogicAnd = new BLlogicAnd();
 }

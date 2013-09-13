@@ -218,4 +218,7 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 	public void removeConnectedSides(int side, boolean transform){
 		
 	}
+	public UTBuffer getBuffer(ForgeDirection dir){
+		return buffer[dir.ordinal()];
+	}
 }

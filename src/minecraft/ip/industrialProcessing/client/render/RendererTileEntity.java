@@ -60,22 +60,26 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 			tessellator.setColorOpaque_F(f, f, f);
 			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) l1, (float) l2);
 
-			int dir = world.getBlockMetadata(i, j, k); 
+			int rotationAxis = 0;
+			int dir = world.getBlockMetadata(i, j, k); 			
+			
+
 			if (tl instanceof IRotateableEntity) {
 				IRotateableEntity machine = (IRotateableEntity) tl;
 				ForgeDirection forward = machine.getForwardDirection();
 				dir = BlockMachine.getMetadataFromForward(forward);
-			}
- 	
+			}			
 			if(tl instanceof ICommunication){ // TODO: get rid of this?! just don't implement IRotateableEntity if you dont want rotation 
 				dir = 0; 
 			}
+ 	
+
 			 
 			GL11.glPushMatrix();
 			GL11.glTranslatef(0.5F, 1.5F, 0.5F);
 			// This line actually rotates the renderer.
 			//if (rotateModel)
-				GL11.glRotatef((dir * -90F), 0F, 1F, 0F);
+			GL11.glRotatef((dir * -90F), 0F, 1F, 0F);
 			GL11.glRotatef((-180F), 0F, 0F, 1F);
 			GL11.glScalef(1f, 1f, 1f);
 
