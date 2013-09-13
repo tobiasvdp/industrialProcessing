@@ -16,9 +16,11 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 	private UTBuffer[] buffer = new UTBuffer[6];
 	public String name;
 	private boolean[] placedSide = new boolean[6];
+	private ForgeDirection[] conectableSides;
 	private boolean init = true;
 
 	public TElogicNode() {
+		conectableSides = setConnectableSides();
 		for (int i = 0; i < 6; i++) {
 			nodeCollection[i] = new UTlogicNodeContainer();
 			buffer[i] = new UTBuffer(UTBusType.bus);
@@ -188,5 +190,10 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 	@Override
 	public boolean[] getPlacedSides() {
 		return placedSide;
+	}
+	@Override
+	public boolean isConnectableOnSide(ForgeDirection side) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

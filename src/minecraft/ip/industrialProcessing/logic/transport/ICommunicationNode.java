@@ -18,6 +18,8 @@ public interface ICommunicationNode extends ICommunication{
 	public UTBusType getBusType(ForgeDirection side);
 	public boolean send(ForgeDirection side,boolean value);
 	public boolean send(ForgeDirection side,boolean value, int index);
-	boolean receive(ICommunicationNode origin,ForgeDirection side, boolean value);
-	boolean receive(ICommunicationNode origin,ForgeDirection side, boolean value, int index);
+	public boolean receive(ICommunicationNode origin,ForgeDirection side, boolean value);
+	public boolean receive(ICommunicationNode origin,ForgeDirection side, boolean value, int index);
+	public boolean isConnectableOnSide(ForgeDirection side);
+	public ForgeDirection[] setConnectableSides();
 }
