@@ -1,5 +1,7 @@
 package ip.industrialProcessing;
 
+import ip.industrialProcessing.logic.transport.ICommunication;
+import ip.industrialProcessing.logic.transport.ICommunicationTransport;
 import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
@@ -34,6 +36,7 @@ public class PacketHandler implements IPacketHandler {
 	public static final String SEND_INFO = "IP.sendInfo";
 	public static final String SCREEN_PRESSED = "IP.ScreenPressed";
 	public static final String IP_ELEVATOR_BUTTON = "IP.MB.EL.Button";
+	public static final String IP_LOGIC_SYNCSIDE = "IP.Lg.SyncSide";
 
 	@Override
 	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {
@@ -102,6 +105,38 @@ public class PacketHandler implements IPacketHandler {
 			}
 			EntityPlayer playerMP = (EntityPlayer) player;
 			playerMP.openGui(IndustrialProcessing.instance, screenID, playerMP.worldObj, x, y, z);
+		}
+		
+		if (packet.channel.equals(IP_LOGIC_SYNCSIDE)) {
+			DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
+			int x;
+			int y;
+			int z;
+			boolean sides[] = new boolean[6];
+			try {
+				x = inputStream.readInt();
+				y = inputStream.readInt();
+				z = inputStream.readInt();
+				for(int i = 0;i<sides.length;i++){
+					sides[i] = inputStream.readBoolean();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+				return;
+			}
+			EntityPlayer playerMP = (EntityPlayer) player;
+			ICommunicationTransport com = (ICommunicationTransport)playerMP.worldObj.getBlockTileEntity(x, y, z);
+			int count = 0;
+			for(int i = 0;i<sides.length;i++){
+				if(sides[i]){
+					count++;
+					com.addToConnectedSides(i);
+				}
+			}
+			if (count>1)
+				com.setMultipleSides(true);
+			else
+				com.setMultipleSides(false);
 		}
 	}
 
