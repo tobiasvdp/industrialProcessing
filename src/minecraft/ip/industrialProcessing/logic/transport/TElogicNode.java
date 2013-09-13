@@ -87,6 +87,7 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 		if (!this.nodeCollection[side.ordinal()].contains(node)) {
 			this.nodeCollection[side.ordinal()].add(node);
 			this.nodeCollection[side.ordinal()].addSide(originSide);
+			this.buffer[side.ordinal()] = new UTBuffer(getBusType(side));
 		}
 	}
 

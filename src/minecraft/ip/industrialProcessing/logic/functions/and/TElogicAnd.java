@@ -21,12 +21,11 @@ public class TElogicAnd extends TElogicNode implements IRotateableEntity {
 
 	@Override
 	protected void transition() {
-		if (getBusType() == UTBusType.cable) {
 			boolean right = (Boolean) getBuffer(ForgeDirection.EAST).get();
 			boolean left = (Boolean) getBuffer(ForgeDirection.WEST).get();
 			boolean front = left && right;
 			send(ForgeDirection.NORTH, front);
-		}
+			System.out.println(left + " " + right + " gives " + front);
 	}
 
 	@Override
