@@ -30,8 +30,7 @@ public class TElogicCable extends TileEntity implements ICommunicationTransport 
 	public void updateEntity() {
 		super.updateEntity();
 		if (init) {
-			placedSide[transformToForgeDirection(worldObj.getBlockMetadata(xCoord, yCoord, zCoord))] = true;
-			System.out.println(transformToForgeDirection(worldObj.getBlockMetadata(xCoord, yCoord, zCoord)));
+			addToConnectedSides(worldObj.getBlockMetadata(xCoord, yCoord, zCoord), true);
 			init = false;
 		}
 	}
@@ -140,9 +139,13 @@ public class TElogicCable extends TileEntity implements ICommunicationTransport 
 	}
 
 	@Override
-	public void addToConnectedSides(int side) {
-		placedSide[transformToForgeDirection(side)] = true;
-		sendSidesToServer(placedSide);
+	public void addToConnectedSides(int side, boolean transform) {
+		if (transform){
+			placedSide[transformToForgeDirection(side)] = true;
+			sendSidesToServer(placedSide);
+		}else{
+			placedSide[side] = true;
+		}
 	}
 
 	private void sendSidesToServer(boolean[] placedSide) {

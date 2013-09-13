@@ -130,7 +130,7 @@ public class PacketHandler implements IPacketHandler {
 			for(int i = 0;i<sides.length;i++){
 				if(sides[i]){
 					count++;
-					com.addToConnectedSides(i);
+					com.addToConnectedSides(i,false);
 				}
 			}
 			if (count>1)

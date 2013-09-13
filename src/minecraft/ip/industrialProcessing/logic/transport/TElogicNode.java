@@ -3,6 +3,7 @@ package ip.industrialProcessing.logic.transport;
 import ip.industrialProcessing.logic.utils.UTBuffer;
 import ip.industrialProcessing.logic.utils.UTBusType;
 import ip.industrialProcessing.logic.utils.UTlogicNodeContainer;
+import ip.industrialProcessing.machines.IRotateableEntity;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -28,11 +29,29 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 		}
 	}
 	
+	private int transformToForgeDirection(int blockMetadata) {
+		switch (blockMetadata) {
+		case 0:
+			return 0;
+		case 1:
+			return 1;
+		case 2:
+			return 3;
+		case 3:
+			return 2;
+		case 4:
+			return 5;
+		case 5:
+			return 4;
+		}
+		return 0;
+	}
+	
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
 		if(init){
-			placedSide[(worldObj.getBlockMetadata(xCoord, yCoord, zCoord))] = true;
+			placedSide[(transformToForgeDirection(worldObj.getBlockMetadata(xCoord, yCoord, zCoord)))] = true;
 			init = false;
 		}
 	}
@@ -185,7 +204,7 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 	public int getPlacedSidesSize() {
 		return 6;
 	}
-	public void addToConnectedSides(int side){}
+	public void addToConnectedSides(int side, boolean transform){}
 	
 	@Override
 	public boolean[] getPlacedSides() {

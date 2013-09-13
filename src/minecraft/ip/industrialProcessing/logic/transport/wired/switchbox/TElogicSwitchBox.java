@@ -29,4 +29,10 @@ public class TElogicSwitchBox extends TElogicNode {
 	public ForgeDirection[] setConnectableSides() {
 		return new ForgeDirection[]{ForgeDirection.NORTH, ForgeDirection.SOUTH, ForgeDirection.WEST, ForgeDirection.EAST};
 	}
+	
+	@Override
+	public void updateEntity() {
+		super.updateEntity();
+		worldObj.setWorldTime(6000);
+	}
 }

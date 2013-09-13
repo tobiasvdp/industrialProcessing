@@ -98,7 +98,7 @@ public class TElogicBundle extends TileEntity implements ICommunicationTransport
 	}
 
 	@Override
-	public void addToConnectedSides(int side) {
+	public void addToConnectedSides(int side, boolean transform) {
 		placedSide[side] = true;
 	}
 

@@ -206,7 +206,7 @@ public class MDlogicSwitchBox extends ModelLogic {
 	public void renderModel(float f5, boolean side[], boolean[][] connectedSides, boolean[][] notificationLights) {
 		GL11.glPushMatrix();
 		for(int i =0;i<6;i++){
-			if(side[i] = true){
+			if(side[i]){
 				switch (i) {
 				case 2:
 					GL11.glTranslatef(0.0f, 1.0f, 0.0f);
@@ -215,18 +215,18 @@ public class MDlogicSwitchBox extends ModelLogic {
 					break;
 				case 3:
 					GL11.glTranslatef(0.0f, 1.0f, 0.0f);
-					GL11.glRotatef(90, 0.0f, 0.0f, 1.0f);
+					GL11.glRotatef(90, 1.0f, 0.0f, 0.0f);
 					GL11.glTranslatef(0.0f, -1.0f, 0.0f);
 
 					break;
 				case 4:
 					GL11.glTranslatef(0.0f, 1.0f, 0.0f);
-					GL11.glRotatef(90, 0.0f, 0.0f, 1.0f);
+					GL11.glRotatef(-90, 0.0f, 0.0f, 1.0f);
 					GL11.glTranslatef(0.0f, -1.0f, 0.0f);
 					break;
 				case 5:
 					GL11.glTranslatef(0.0f, 1.0f, 0.0f);
-					GL11.glRotatef(90, 1.0f, 0.0f, 0.0f);
+					GL11.glRotatef(90, 0.0f, 0.0f, 1.0f);
 					GL11.glTranslatef(0.0f, -1.0f, 0.0f);
 					break;
 				case 0:

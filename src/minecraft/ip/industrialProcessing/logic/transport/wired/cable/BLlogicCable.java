@@ -122,7 +122,7 @@ public class BLlogicCable extends BlockMachineRendered {
 			return true;
 		if (te instanceof TElogicCable) {
 			TElogicCable com = (TElogicCable) te;
-			((TElogicCable) te).addToConnectedSides(par5);
+			((TElogicCable) te).addToConnectedSides(par5, true);
 			((TElogicCable) te).setMultipleSides(true);
 		}
 		return false;
@@ -142,7 +142,7 @@ public class BLlogicCable extends BlockMachineRendered {
 			int count = 0;
 			int id = par1World.getBlockId(par2, par3, par4);
 			for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-				if (com.getPlacedSide(dir.getOpposite().ordinal())) {
+				if (com.getPlacedSide(dir.ordinal())) {
 					if (!canSideStay(dir, par1World, par2, par3, par4)) {
 						destroy = true;
 					}

@@ -230,7 +230,7 @@ public class TElogicDisplayBox extends TileEntity implements ICommunicationNode,
 	}
 
 	@Override
-	public void addToConnectedSides(int side) {
+	public void addToConnectedSides(int side, boolean transform) {
 		placedSide[side] = true;
 	}
 
