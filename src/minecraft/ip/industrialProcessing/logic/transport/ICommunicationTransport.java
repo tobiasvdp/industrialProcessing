@@ -12,4 +12,6 @@ public interface ICommunicationTransport extends ICommunication{
 	public void sendDiscoveryPacket(ForgeDirection receivingSide,ForgeDirection sendingSide,ArrayList<ICommunicationTransport> path, ICommunicationNode node, ForgeDirection side);
 	public boolean ContainsThis(ArrayList<ICommunicationTransport> path);
 	public void requestRecheck();
+	public void setMultipleSides(boolean b);
+	public boolean getMultipleSides();
 }

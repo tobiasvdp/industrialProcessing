@@ -241,13 +241,21 @@ public class TElogicDisplayBox extends TileEntity implements ICommunicationNode,
 
 	@Override
 	public boolean isConnectableOnSide(ForgeDirection side) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public ForgeDirection[] setConnectableSides() {
-		// TODO Auto-generated method stub
 		return new ForgeDirection[]{ForgeDirection.NORTH, ForgeDirection.SOUTH, ForgeDirection.WEST, ForgeDirection.EAST};
+	}
+
+	@Override
+	public void setMultipleSides(boolean b) {
+		
+	}
+
+	@Override
+	public boolean getMultipleSides() {
+		return false;
 	}
 }
