@@ -2,6 +2,7 @@ package ip.industrialProcessing.logic.functions.or;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
+import ip.industrialProcessing.utils.ISidedRotation;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -23,16 +24,17 @@ public class BLlogicOr extends BlockContainer {
 	public TileEntity createNewTileEntity(World world) {
 		return new TElogicOr();
 	}
+
 	@Override
-	public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5, ItemStack par6ItemStack) {
-System.out.println("BLlogicOr.canPlaceBlockOnSide()");
-		return super.canPlaceBlockOnSide(par1World, par2, par3, par4, par5, par6ItemStack);
+	public int onBlockPlaced(World par1World, int par2, int par3, int par4, int par5, float par6, float par7, float par8, int par9) {
+		return par5;
 	}
+
 	@Override
-	public boolean rotateBlock(World worldObj, int x, int y, int z, ForgeDirection axis) {
-System.out.println("BLlogicOr.rotateBlock()");
-return true;
+	public void onPostBlockPlaced(World par1World, int par2, int par3, int par4, int par5) {
+		ISidedRotation te = (ISidedRotation) par1World.getBlockTileEntity(par2, par3, par4);
+		System.out.println(par5);
+		super.onPostBlockPlaced(par1World, par2, par3, par4, par5);
 	}
-	
 
 }
