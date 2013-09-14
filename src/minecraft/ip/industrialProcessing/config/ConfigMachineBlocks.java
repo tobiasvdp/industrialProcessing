@@ -2,6 +2,7 @@ package ip.industrialProcessing.config;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.logic.functions.and.TElogicAnd;
+import ip.industrialProcessing.logic.functions.or.TElogicOr;
 import ip.industrialProcessing.logic.transport.wired.bundle.TElogicBundle;
 import ip.industrialProcessing.logic.transport.wired.cable.TElogicCable;
 import ip.industrialProcessing.logic.transport.wired.displayBox.TElogicDisplayBox;
@@ -120,6 +121,7 @@ public class ConfigMachineBlocks {
 	private int BLlogicBundle = 740;
 	private int BLlogicDisplayBox = 741;
 	private int BLlogicAnd = 742;
+	private int BLlogicOr = 743;
 
 	public void registerMachineBlocks() {
 
@@ -129,6 +131,7 @@ public class ConfigMachineBlocks {
 		registerMachineBlock(IndustrialProcessing.BLlogicBundle, "IP.Logic.Bundle", "Bundled cables", TElogicBundle.class);
 		registerMachineBlock(IndustrialProcessing.BLlogicDisplayBox, "IP.Logic.DsBox", "Display box", TElogicDisplayBox.class);
 		registerMachineBlock(IndustrialProcessing.BLlogicAnd, "IP.Logic.And", "And gate", TElogicAnd.class);
+		registerMachineBlock(IndustrialProcessing.BLlogicOr, "IP.Logic.Or", "Or gate", TElogicOr.class);
 		
 		registerMachineBlock(IndustrialProcessing.BLtransportConveyorBelt, "IP.Trans.CBelt", "Conveyor belt", TileEntityConveyorBelt.class);
 		registerMachineBlock(IndustrialProcessing.BLtransportConveyorBeltInput, "IP.Trans.CBInput", "Conveyor belt import", TEtransportConveyorBeltInput.class);
@@ -202,6 +205,9 @@ public class ConfigMachineBlocks {
 		return instance;
 	}
 
+	public static int getBLlogicOr() {
+		return getInstance().BLlogicOr;
+	}	
 	public static int getBLlogicAnd() {
 		return getInstance().BLlogicAnd;
 	}	
