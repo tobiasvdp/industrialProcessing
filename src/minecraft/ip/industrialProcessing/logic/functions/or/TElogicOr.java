@@ -6,28 +6,27 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class TElogicOr extends TileEntity implements ISidedRotation {
 
+	private ForgeDirection orientationSide;
+	private ForgeDirection orientationRotation;
+	
 	@Override
 	public void setOrientationSide(ForgeDirection side) {
-		// TODO Auto-generated method stub
-
+		orientationSide = side;
 	}
 
 	@Override
 	public void setOrientationSide(int metadata) {
-		// TODO Auto-generated method stub
-
+		orientationSide = SIDEDTRANSFORMER.transformMetaToForgeDirection(metadata);
 	}
 
 	@Override
 	public ForgeDirection getOrientationSide() {
-		// TODO Auto-generated method stub
-		return null;
+		return orientationSide;
 	}
 
 	@Override
-	public int getOrientationRotation() {
-		// TODO Auto-generated method stub
-		return 0;
+	public ForgeDirection getOrientationRotation() {
+		return orientationRotation;
 	}
 
 	@Override
@@ -46,6 +45,16 @@ public class TElogicOr extends TileEntity implements ISidedRotation {
 	public float getGLrotationZ() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public void setOrientationRotation(float rotationYaw, float rotationPitch) {
+		orientationRotation = SIDEDTRANSFORMER.transformSideAndLookToForgeDirection(orientationSide, rotationYaw, rotationPitch);
+	}
+
+	@Override
+	public void setOrientationRotation(ForgeDirection dir) {
+		orientationRotation = dir;
 	}
 
 }

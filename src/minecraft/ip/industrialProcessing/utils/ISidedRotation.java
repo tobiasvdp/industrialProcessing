@@ -8,14 +8,14 @@ public interface ISidedRotation {
 
 	public void setOrientationSide(ForgeDirection side);
 	public void setOrientationSide(int metadata);
+	public void setOrientationRotation(float rotationYaw, float rotationPitch);
+	public void setOrientationRotation(ForgeDirection dir);
 	
 	public ForgeDirection getOrientationSide();
-	public int getOrientationRotation();
+	public ForgeDirection getOrientationRotation();
 	
 	public float getGLrotationX();
 	public float getGLrotationY();
 	public float getGLrotationZ();
-	
-	
 	
 }
