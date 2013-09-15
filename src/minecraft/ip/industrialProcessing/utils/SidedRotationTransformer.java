@@ -4,8 +4,19 @@ import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.ForgeDirection;
 
 public class SidedRotationTransformer {
-	private static final int[][] ROTATION_MATRIX_Side = { { 1, 0, 3, 2, 5, 4, 6 }, { 0,1,2,3,4,5,6 }, { 2, 3, 1, 0, 4, 5, 6 }, { 3, 2, 0, 1, 5, 4, 6 }, { 5, 4, 1, 0, 3, 2, 6 }, { 4, 5, 0, 1, 2, 3, 6 }, { 0, 1, 2, 3, 4, 5, 6 }};
-	private static final int[][] ROTATION_MATRIX_Rotation = { { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 5, 4, 6 }, { 0, 1, 2, 3, 3, 2, 6 }, { 0, 1, 2, 3, 2, 3, 6 }, { 0, 1, 2, 3, 4, 5, 6 }};
+	private static final int[][] ROTATION_MATRIX_Side = { { 1, 0, 3, 2, 5, 4, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 2, 3, 1, 0, 4, 5, 6 }, { 3, 2, 0, 1, 5, 4, 6 }, { 5, 4, 1, 0, 3, 2, 6 }, { 4, 5, 0, 1, 2, 3, 6 }, { 0, 1, 2, 3, 4, 5, 6 } };
+	private static final int[][] ROTATION_MATRIX_Rotation = { { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 5, 4, 6 }, { 0, 1, 2, 3, 3, 2, 6 }, { 0, 1, 2, 3, 2, 3, 6 }, { 0, 1, 2, 3, 4, 5, 6 } };
+	
+	private static final int[][][] ROTATION_MATRIX_RotationSided = { 
+		{{ 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 3, 2, 5, 4, 6 }, { 0, 1, 4, 5, 3, 2, 6 }, { 0, 1, 5, 4, 2, 3, 6 }, { 0, 1, 2, 3, 4, 5, 6 }},
+		{{ 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 1, 0, 2, 3, 5, 4, 6 }, { 1, 0, 3, 2, 4, 5, 6 }, { 1, 0, 4, 5, 2, 3, 6 }, { 1, 0, 5, 4, 3, 2, 6 }, { 0, 1, 2, 3, 4, 5, 6 }}, 
+		{{ 2, 3, 0, 1, 5, 4, 6 }, { 2, 3, 1, 0, 4, 5, 6 }, { 2, 3, 2, 3, 4, 5, 6 }, { 2, 3, 2, 3, 4, 5, 6 }, { 2, 3, 4, 5, 0, 1, 6 }, { 2, 3, 5, 4, 1, 0, 6 }, { 2, 3, 2, 3, 4, 5, 6 }}, 
+		{{ 3, 2, 0, 1, 4, 5, 6 }, { 3, 2, 1, 0, 5, 4, 6 }, { 3, 2, 2, 3, 4, 5, 6 }, { 3, 2, 2, 3, 4, 5, 6 }, { 3, 2, 5, 4, 1, 0, 6 }, { 3, 2, 4, 5, 0, 1, 6 }, { 3, 2, 2, 3, 4, 5, 6 }}, 
+		{{ 4, 5, 0, 1, 2, 3, 6 }, { 4, 5, 1, 0, 3, 2, 6 }, { 4, 5, 2, 3, 1, 0, 6 }, { 4, 5, 3, 2, 0, 1, 6 }, { 4, 5, 2, 3, 4, 5, 6 }, { 4, 5, 2, 3, 4, 5, 6 }, { 4, 5, 2, 3, 4, 5, 6 }}, 
+		{{ 5, 4, 0, 1, 3, 2, 6 }, { 5, 4, 1, 0, 2, 3, 6 }, { 5, 4, 3, 2, 0, 1, 6 }, { 5, 4, 3, 2, 1, 0, 6 }, { 5, 4, 2, 3, 4, 5, 6 }, { 5, 4, 2, 3, 4, 5, 6 }, { 5, 4, 2, 3, 4, 5, 6 }},
+		{{ 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }}, 
+		};
+	
 
 	public static ForgeDirection transformMetaToForgeDirection(int meta) {
 		switch (meta) {
@@ -27,9 +38,29 @@ public class SidedRotationTransformer {
 	}
 
 	public static ForgeDirection InternalToExternalDirection(ISidedRotation rot, ForgeDirection dir) {
+		/*
 		System.out.println(rot.getOrientationSide());
 		ForgeDirection side = ForgeDirection.getOrientation(ROTATION_MATRIX_Side[rot.getOrientationSide().ordinal()][dir.ordinal()]);
 		System.out.println(side);
+		switch (rot.getOrientationSide()) {
+		case DOWN:
+			break;
+		case EAST:
+			break;
+		case NORTH:
+			break;
+		case SOUTH:
+			break;
+		case UNKNOWN:
+			break;
+		case UP:
+			break;
+		case WEST:
+			break;
+		default:
+			break;
+		}*/
+		System.out.println(ForgeDirection.getOrientation(ROTATION_MATRIX_RotationSided[rot.getOrientationSide().ordinal()][rot.getOrientationRotation().ordinal()][dir.ordinal()]));
 		return ForgeDirection.UNKNOWN;
 	}
 
