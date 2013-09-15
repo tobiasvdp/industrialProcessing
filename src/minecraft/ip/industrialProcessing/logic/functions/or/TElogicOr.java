@@ -57,4 +57,9 @@ public class TElogicOr extends TileEntity implements ISidedRotation {
 		orientationRotation = dir;
 	}
 
+	@Override
+	public ForgeDirection getExternalForgeDirection(ForgeDirection side) {
+		return SIDEDTRANSFORMER.InternalToExternalDirection(this, side);
+	}
+
 }
