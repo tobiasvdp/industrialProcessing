@@ -76,6 +76,7 @@ public class ModelConveyorBelt extends ModelConnected {
 	// corners
 	ModelRenderer ForwardCornerOut;
 	ModelRenderer ForwardCornerCenter;
+	ModelRenderer ForwardCornerIn3;
 	ModelRenderer ForwardCornerIn2;
 	ModelRenderer ForwardCornerIn1;
 
@@ -322,6 +323,12 @@ public class ModelConveyorBelt extends ModelConnected {
 		ForwardCornerCenter.setTextureSize(64, 32);
 		ForwardCornerCenter.mirror = true;
 		setRotation(ForwardCornerCenter, 1.570796F, 0F, 0F);
+		ForwardCornerIn3 = new ModelRenderer(this, 0, 0);
+		ForwardCornerIn3.addBox(-4F, 0F, 0F, 8, 4, 1);
+		ForwardCornerIn3.setRotationPoint(0, 24F, -8F);
+		ForwardCornerIn3.setTextureSize(64, 32);
+		ForwardCornerIn3.mirror = true;
+		setRotation(ForwardCornerIn3, 1.570796F, 0, 0F);
 		ForwardCornerIn2 = new ModelRenderer(this, 0, 0);
 		ForwardCornerIn2.addBox(-4F, 0F, 0F, 8, 4, 1);
 		ForwardCornerIn2.setRotationPoint(8F, 24F, 0F);
@@ -589,12 +596,18 @@ public class ModelConveyorBelt extends ModelConnected {
 			}
 			turn = true;
 		} else {
-			if (back == ConnectionState.DISCONNECTED) {
-				ForwardCornerOut.render(f5);
-				ForwardCornerCenter.render(f5);
-			} else {
+
+			if (back != ConnectionState.DISCONNECTED && front != ConnectionState.DISCONNECTED) {
 				Forward.render(f5);
+			} else {
+				ForwardCornerCenter.render(f5);
+				if (back != ConnectionState.DISCONNECTED) {
+					ForwardCornerIn3.render(f5);
+				} else if (front != ConnectionState.DISCONNECTED) {
+					ForwardCornerOut.render(f5);
+				}
 			}
+ 
 			if (left != ConnectionState.DISCONNECTED) {
 				InputRight.render(f5);
 				InputRightElev.render(f5);

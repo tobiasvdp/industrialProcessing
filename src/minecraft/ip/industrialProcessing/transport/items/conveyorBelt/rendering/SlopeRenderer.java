@@ -143,7 +143,7 @@ public class SlopeRenderer extends ShapeRenderer {
 			float y4 = pos.y - 0.5f + normalY;
 
 			tessellator.startDrawingQuads();
-			tessellator.setNormal(0, 2, 0);
+			tessellator.setNormal(0, -1, 0);
 			tessellator.addVertexWithUV((x1) * f, (y1) * f, (z1 - lastNormalZ) * f, uMin, vStart);
 			tessellator.addVertexWithUV((x2) * f, (y1) * f, (z2 - lastNormalZ) * f, uMax, vStart);
 			tessellator.addVertexWithUV((x4) * f, (y3) * f, (z4 - normalZ) * f, uMax, vEnd);
@@ -151,7 +151,7 @@ public class SlopeRenderer extends ShapeRenderer {
 			tessellator.draw();
 
 			tessellator.startDrawingQuads();
-			tessellator.setNormal(0, -2, 0);
+			tessellator.setNormal(0, 1, 0);
 			tessellator.addVertexWithUV((x2) * f, (y2) * f, (z2 + lastNormalZ) * f, uMin + bottomUv, vStart);
 			tessellator.addVertexWithUV((x1) * f, (y2) * f, (z1 + lastNormalZ) * f, uMax + bottomUv, vStart);
 			tessellator.addVertexWithUV((x3) * f, (y4) * f, (z3 + normalZ) * f, uMax + bottomUv, vEnd);

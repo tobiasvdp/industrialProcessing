@@ -27,6 +27,14 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class TileEntityConveyorBelt extends TileEntityTransport implements IRotateableEntity {
 
+	public float minXBounds = 1;
+	public float minYBounds = 1;
+	public float minZBounds = 1;
+
+	public float maxXBounds = -1;
+	public float maxYBounds = -1;
+	public float maxZBounds = -1;
+
 	private ForgeDirection forwardDirection = ForgeDirection.NORTH;
 	private ArrayList<MovingItemStack> itemStacks = new ArrayList<MovingItemStack>();
 	private int pullTicks = 0;
@@ -214,6 +222,8 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 
 			SlopeState a = belt.getConnectionLevel(direction);
 			if (a != SlopeState.NONE && a == this.getConnectionLevel(direction.getOpposite()).getOpposite()) {
+
+				if(direction == forwardDirection.getOpposite() || direction == belt.forwardDirection)
 				return TransportConnectionState.TRANSPORT;
 
 			}
@@ -384,7 +394,7 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 		Random rnd = new Random();
 		ForgeDirection direction = DirectionUtils.getWorldDirection(stack.destination, this.forwardDirection);
 		if (stack.destination == LocalDirection.BACK) {
-			TileEntityConveyorBelt conveyor = getConveyor(direction, this.frontSlope); 
+			TileEntityConveyorBelt conveyor = getConveyor(direction, this.frontSlope);
 			if (conveyor != null && conveyor.states[direction.getOpposite().ordinal()] == TransportConnectionState.TRANSPORT) {
 				System.out.println("TileEntityConveyorBelt.outputStack()");
 				conveyor.addItemStack(stack.stack, direction.getOpposite());
@@ -455,7 +465,7 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 	}
 
 	public void addItemStack(ItemStack stack, ForgeDirection source) {
-		System.out.println("TileEntityConveyorBelt.addItemStack()"+source);
+		System.out.println("TileEntityConveyorBelt.addItemStack()" + source);
 		MovingItemStack movingStack = new MovingItemStack();
 		movingStack.stack = stack;
 		if (source == null) {
@@ -542,16 +552,16 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 
 			if (states[i] != TransportConnectionState.NONE || i == this.forwardDirection.ordinal()) {
 
-				double minX = -4d + Math.min(0, direction.offsetX) * 4;
-				double maxX = 4d + Math.max(0, direction.offsetX) * 4;
+				float minX = (-4f + Math.min(0, direction.offsetX) * 4) / 16f;
+				float maxX = (4f + Math.max(0, direction.offsetX) * 4) / 16f;
 
-				double minZ = -4d + Math.min(0, -direction.offsetZ) * 4;
-				double maxZ = 4d + Math.max(0, -direction.offsetZ) * 4;
+				float minZ = (-4f + Math.min(0, -direction.offsetZ) * 4) / 16f;
+				float maxZ = (4f + Math.max(0, -direction.offsetZ) * 4) / 16f;
 
-				double minY = -8;
-				double maxY = -7;
+				float minY = -8f / 16f;
+				float maxY = -7f / 16f;
 
-				AxisAlignedBB axisalignedbb1 = AxisAlignedBB.getAABBPool().getAABB(xCoord + minX / 16d + 0.5f, yCoord + minY / 16d + 0.5f, zCoord + minZ / 16d + 0.5f, xCoord + maxX / 16d + 0.5f, yCoord + maxY / 16d + 0.5f, zCoord + maxZ / 16d + 0.5f);
+				AxisAlignedBB axisalignedbb1 = AxisAlignedBB.getAABBPool().getAABB(xCoord + minX + 0.5f, yCoord + minY + 0.5f, zCoord + minZ + 0.5f, xCoord + maxX + 0.5f, yCoord + maxY + 0.5f, zCoord + maxZ + 0.5f);
 				if (axisalignedbb1 != null && par5AxisAlignedBB.intersectsWith(axisalignedbb1)) {
 					par6List.add(axisalignedbb1);
 				}
@@ -559,26 +569,27 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 				if (states[i] != TransportConnectionState.NONE && states[i] != TransportConnectionState.TRANSPORT) {
 					minY += 1;
 					maxY += 8;
-					axisalignedbb1 = AxisAlignedBB.getAABBPool().getAABB(xCoord + minX / 16d + 0.5f, yCoord + minY / 16d + 0.5f, zCoord + minZ / 16d + 0.5f, xCoord + maxX / 16d + 0.5f, yCoord + maxY / 16d + 0.5f, zCoord + maxZ / 16d + 0.5f);
+					axisalignedbb1 = AxisAlignedBB.getAABBPool().getAABB(xCoord + minX + 0.5f, yCoord + minY + 0.5f, zCoord + minZ + 0.5f, xCoord + maxX + 0.5f, yCoord + maxY + 0.5f, zCoord + maxZ + 0.5f);
 					if (axisalignedbb1 != null && par5AxisAlignedBB.intersectsWith(axisalignedbb1)) {
 						par6List.add(axisalignedbb1);
 					}
 				}
 			}
+
 		}
 
 		TransportConnectionState up = states[ForgeDirection.UP.ordinal()];
 		if (up != TransportConnectionState.NONE && up != TransportConnectionState.TRANSPORT) {
-			double minX = -4d;
-			double maxX = 4d;
+			float minX = -4f / 16f;
+			float maxX = 4f / 16f;
 
-			double minZ = -4d;
-			double maxZ = 4d;
+			float minZ = -4f / 16f;
+			float maxZ = 4f / 16f;
 
-			double minY = -8;
-			double maxY = 8;
+			float minY = -8f / 16f;
+			float maxY = 8f / 16f;
 
-			AxisAlignedBB axisalignedbb1 = AxisAlignedBB.getAABBPool().getAABB(xCoord + minX / 16d + 0.5f, yCoord + minY / 16d + 0.5f, zCoord + minZ / 16d + 0.5f, xCoord + maxX / 16d + 0.5f, yCoord + maxY / 16d + 0.5f, zCoord + maxZ / 16d + 0.5f);
+			AxisAlignedBB axisalignedbb1 = AxisAlignedBB.getAABBPool().getAABB(xCoord + minX + 0.5f, yCoord + minY + 0.5f, zCoord + minZ + 0.5f, xCoord + maxX + 0.5f, yCoord + maxY + 0.5f, zCoord + maxZ + 0.5f);
 			if (axisalignedbb1 != null && par5AxisAlignedBB.intersectsWith(axisalignedbb1)) {
 				par6List.add(axisalignedbb1);
 			}
@@ -586,20 +597,21 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 
 		TransportConnectionState down = states[ForgeDirection.DOWN.ordinal()];
 		if (down != TransportConnectionState.NONE && down != TransportConnectionState.TRANSPORT) {
-			double minX = -4d;
-			double maxX = 4d;
+			float minX = -4f / 16f;
+			float maxX = 4f / 16f;
 
-			double minZ = -4d;
-			double maxZ = 4d;
+			float minZ = -4f / 16f;
+			float maxZ = 4f / 16f;
 
-			double minY = -8;
-			double maxY = 1;
+			float minY = -8f / 16f;
+			float maxY = 1f / 16f;
 
-			AxisAlignedBB axisalignedbb1 = AxisAlignedBB.getAABBPool().getAABB(xCoord + minX / 16d + 0.5f, yCoord + minY / 16d + 0.5f, zCoord + minZ / 16d + 0.5f, xCoord + maxX / 16d + 0.5f, yCoord + maxY / 16d + 0.5f, zCoord + maxZ / 16d + 0.5f);
+			AxisAlignedBB axisalignedbb1 = AxisAlignedBB.getAABBPool().getAABB(xCoord + minX + 0.5f, yCoord + minY + 0.5f, zCoord + minZ + 0.5f, xCoord + maxX + 0.5f, yCoord + maxY + 0.5f, zCoord + maxZ + 0.5f);
 			if (axisalignedbb1 != null && par5AxisAlignedBB.intersectsWith(axisalignedbb1)) {
 				par6List.add(axisalignedbb1);
 			}
 		}
+
 	}
 
 	public void moveEntity(EntityLivingBase par5Entity) {
@@ -625,5 +637,53 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 				}
 			}
 		}
+	}
+
+	public void setBounds() {
+		float minX = -4f / 16f;
+		float minY = -8f / 16f;
+		float minZ = -4f / 16f;
+
+		float maxX = 4f / 16f;
+		float maxY = -7f / 16f;
+		float maxZ = 4f / 16f;
+
+		for (int i = 0; i < states.length; i++) {
+
+			ForgeDirection dir = ForgeDirection.getOrientation(i);
+			if (states[i] != TransportConnectionState.NONE) {
+
+				float dx = dir.offsetX / 4f;
+				float dy = dir.offsetY / 4f;
+				float dz = dir.offsetZ / 4f;
+				minX += Math.min(0, dx);
+				minY += Math.min(0, dy);
+				minZ += Math.min(0, dz);
+				maxX += Math.max(0, dx);
+				maxY += Math.max(0, dy);
+				maxZ += Math.max(0, dz);
+				if (states[i] != TransportConnectionState.TRANSPORT) {
+					maxY += 10 / 16f;
+				}
+			} else if (dir == this.forwardDirection.getOpposite() && this.backSlope == SlopeState.FLAT) {
+				float dx = dir.offsetX / 4f;
+				float dy = dir.offsetY / 4f;
+				float dz = dir.offsetZ / 4f;
+				minX += Math.min(0, dx);
+				minY += Math.min(0, dy);
+				minZ += Math.min(0, dz);
+				maxX += Math.max(0, dx);
+				maxY += Math.max(0, dy);
+				maxZ += Math.max(0, dz);
+			}
+		}
+
+		if (this.frontSlope == SlopeState.DOWN || this.backSlope == SlopeState.DOWN)
+			minY = Math.min(minY, -1f);
+
+		if (this.frontSlope == SlopeState.UP || this.backSlope == SlopeState.UP)
+			maxY = Math.max(maxY, 0);
+
+		this.getBlockType().setBlockBounds(minX + 0.5f, minY + 0.5f, minZ + 0.5f, maxX + 0.5f, maxY + 0.5f, maxZ + 0.5f);
 	}
 }

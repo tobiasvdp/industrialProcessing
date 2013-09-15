@@ -69,7 +69,7 @@ public class BendRenderer extends ShapeRenderer {
 			float y4 = sinEnd * 12 - yCorner; 
 
 			tessellator.startDrawingQuads();
-			tessellator.setNormal(0, 2, 0);
+			tessellator.setNormal(0, -1, 0);
 			tessellator.addVertexWithUV((x1) * f, (y) * f, (y1) * f, uMin, vStart);
 			tessellator.addVertexWithUV((x2) * f, (y) * f, (y2) * f, uMax, vStart);
 			tessellator.addVertexWithUV((x4) * f, (y) * f, (y4) * f, uMax, vEnd);
@@ -77,7 +77,7 @@ public class BendRenderer extends ShapeRenderer {
 			tessellator.draw();
 
 			tessellator.startDrawingQuads();
-			tessellator.setNormal(0, -2, 0);
+			tessellator.setNormal(0, 1, 0);
 			tessellator.addVertexWithUV((x2) * f, (y + 1) * f, (y2) * f, uMin + bottomUv, vStart);
 			tessellator.addVertexWithUV((x1) * f, (y + 1) * f, (y1) * f, uMax + bottomUv, vStart);
 			tessellator.addVertexWithUV((x3) * f, (y + 1) * f, (y3) * f, uMax + bottomUv, vEnd);

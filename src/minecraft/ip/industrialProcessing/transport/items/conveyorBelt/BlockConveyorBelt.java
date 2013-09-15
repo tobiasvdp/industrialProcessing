@@ -17,13 +17,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.Explosion;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockConveyorBelt extends BlockMachineRendered {
 
 	public BlockConveyorBelt() {
 		super(ConfigMachineBlocks.getBLtransportConveyorBelt(), Material.iron, 5.0f, Block.soundMetalFootstep, "Conveyor", IndustrialProcessing.tabPower);
-		this.setBlockBounds(0.0f, 0.0f, 0.0f, 1.0f, 0.1f, 1.0f);
+		
 	}
 
 	@Override
@@ -95,6 +96,13 @@ public class BlockConveyorBelt extends BlockMachineRendered {
 		super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
 		TileEntityConveyorBelt conveyorBelt = (TileEntityConveyorBelt) par1World.getBlockTileEntity(par2, par3, par4);
 		conveyorBelt.searchForConnections();
+	}
+	
+	@Override
+	public void setBlockBoundsBasedOnState(IBlockAccess par1iBlockAccess, int par2, int par3, int par4) {
+		TileEntityConveyorBelt cb = (TileEntityConveyorBelt) par1iBlockAccess.getBlockTileEntity(par2, par3, par4);
+		cb.setBounds();
+//		super.setBlockBoundsBasedOnState(par1iBlockAccess, par2, par3, par4);
 	}
 
 	@Override
