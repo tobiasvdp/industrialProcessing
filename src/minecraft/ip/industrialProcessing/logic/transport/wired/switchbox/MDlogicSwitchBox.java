@@ -5,6 +5,7 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import ip.industrialProcessing.client.render.ModelLogic;
+import ip.industrialProcessing.logic.utils.UTBuffer;
 
 public class MDlogicSwitchBox extends ModelLogic {
 	// fields
@@ -203,7 +204,7 @@ public class MDlogicSwitchBox extends ModelLogic {
 	}
 
 	@Override
-	public void renderModel(float f5, boolean side[], boolean[][] connectedSides, boolean[][] notificationLights) {
+	public void renderModel(float f5, boolean side[], boolean[][] connectedSides, boolean[][] notificationLights, UTBuffer[] levels) {
 		GL11.glPushMatrix();
 		for(int i =0;i<6;i++){
 			if(side[i]){
