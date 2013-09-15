@@ -1,13 +1,18 @@
 package ip.industrialProcessing.logic.functions.or;
 
+import ip.industrialProcessing.logic.transport.TElogicNode;
 import ip.industrialProcessing.utils.ISidedRotation;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TElogicOr extends TileEntity implements ISidedRotation {
+public class TElogicOr extends TElogicNode implements ISidedRotation {
 
 	private ForgeDirection orientationSide;
 	private ForgeDirection orientationRotation;
+	
+	public TElogicOr() {
+		super();
+	}
 	
 	@Override
 	public void setOrientationSide(ForgeDirection side) {
@@ -60,6 +65,33 @@ public class TElogicOr extends TileEntity implements ISidedRotation {
 	@Override
 	public ForgeDirection getExternalForgeDirection(ForgeDirection side) {
 		return SIDEDTRANSFORMER.InternalToExternalDirection(this, side);
+	}
+
+	@Override
+	public float getGLsideX() {
+		return SIDEDTRANSFORMER.getGLsideX(getOrientationSide());
+	}
+
+	@Override
+	public float getGLsideY() {
+		return SIDEDTRANSFORMER.getGLsideY(getOrientationSide());
+	}
+
+	@Override
+	public float getGLsideZ() {
+		return SIDEDTRANSFORMER.getGLsideZ(getOrientationSide());
+	}
+
+	@Override
+	public ForgeDirection[] setConnectableSides() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected void transition() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

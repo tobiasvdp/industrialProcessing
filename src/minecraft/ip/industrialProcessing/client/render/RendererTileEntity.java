@@ -4,6 +4,7 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.logic.transport.ICommunication;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.IRotateableEntity;
+import ip.industrialProcessing.utils.ISidedRotation;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
@@ -58,24 +59,26 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 			int l1 = l % 65536;
 			int l2 = l / 65536;
 			tessellator.setColorOpaque_F(f, f, f);
-			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) l1, (float) l2);
-
-			int rotationAxis = 0;
-			int dir = world.getBlockMetadata(i, j, k); 			
+			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) l1, (float) l2);			
 			
-
+			GL11.glPushMatrix();
+			
+			int dir = world.getBlockMetadata(i, j, k); 
+			
 			if (tl instanceof IRotateableEntity) {
 				IRotateableEntity machine = (IRotateableEntity) tl;
 				ForgeDirection forward = machine.getForwardDirection();
 				dir = BlockMachine.getMetadataFromForward(forward);
 			}			
-			if(tl instanceof ICommunication){ // TODO: get rid of this?! just don't implement IRotateableEntity if you dont want rotation 
+			if(tl instanceof ISidedRotation){
 				dir = 0; 
+				ISidedRotation sidedRotation = (ISidedRotation) tl;
+				
+				GL11.glTranslatef(0.0f, 1.0f, 0.0f);
+				GL11.glRotatef(90, sidedRotation.getGLsideX(), sidedRotation.getGLsideY(), sidedRotation.getGLsideZ());
+				GL11.glTranslatef(0.0f, -1.0f, 0.0f);
 			}
- 	
-
-			 
-			GL11.glPushMatrix();
+ 
 			GL11.glTranslatef(0.5F, 1.5F, 0.5F);
 			// This line actually rotates the renderer.
 			//if (rotateModel)
