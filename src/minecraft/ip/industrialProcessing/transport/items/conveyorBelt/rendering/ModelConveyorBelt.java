@@ -1,9 +1,14 @@
-package ip.industrialProcessing.transport.items.conveyorBelt;
+package ip.industrialProcessing.transport.items.conveyorBelt.rendering;
 
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.ModelConnected;
 import ip.industrialProcessing.machines.BlockMachine;
+import ip.industrialProcessing.transport.items.conveyorBelt.CornerState;
+import ip.industrialProcessing.transport.items.conveyorBelt.MovingItemStack;
+import ip.industrialProcessing.transport.items.conveyorBelt.SlopeState;
+import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorBelt;
+import ip.industrialProcessing.utils.IPMath;
 
 import java.util.Iterator;
 
@@ -17,6 +22,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Vector2f;
+import org.omg.PortableInterceptor.DISCARDING;
 
 public class ModelConveyorBelt extends ModelConnected {
 
@@ -71,6 +78,12 @@ public class ModelConveyorBelt extends ModelConnected {
 	ModelRenderer ForwardCornerCenter;
 	ModelRenderer ForwardCornerIn2;
 	ModelRenderer ForwardCornerIn1;
+
+	// bends
+
+	BendRenderer bend1;
+	BendRenderer bend2;
+	private SlopeCombiner slopeCombiner;
 
 	public ModelConveyorBelt() {
 		textureWidth = 64;
@@ -321,68 +334,101 @@ public class ModelConveyorBelt extends ModelConnected {
 		ForwardCornerIn1.setTextureSize(64, 32);
 		ForwardCornerIn1.mirror = true;
 		setRotation(ForwardCornerIn1, 1.570796F, 1.570796F, 0F);
+
+		bend1 = new BendRenderer(8, -8, (float) -Math.PI / 2, false);
+		bend2 = new BendRenderer(-8, -8, (float) Math.PI, true);
+
+		slopeCombiner = new SlopeCombiner();
 	}
 
 	@Override
 	public void renderModelConnected(TileEntity tl, float f5, ConnectionState north, ConnectionState west, ConnectionState south, ConnectionState east, ConnectionState up, ConnectionState down) {
 
 		if (tl != null) {
-			ForgeDirection forward = BlockMachine.getForwardFromEntity(tl);
-			CornerState cornerState = null;
-			if (forward != null) {
-				switch (forward) {
-				case NORTH:
-					cornerState = drawConnections(tl, east, north, west, south, up, down, f5);
-					break;
-				case EAST:
-					cornerState = drawConnections(tl, north, west, south, east, up, down, f5);
-					break;
-				case SOUTH:
-					cornerState = drawConnections(tl, west, south, east, north, up, down, f5);
-					break;
-				case WEST:
-					cornerState = drawConnections(tl, south, east, north, west, up, down, f5);
-					break;
-				default:
-					cornerState = new CornerState();
-					break;
-				}
-			} else
-				Forward.render(f5);
 
-			if (up == ConnectionState.PLUGGED) {
-				ConnectorTopTube2.render(f5);
-				ConnectorTop.render(f5);
-				ConnectorTopSide2.render(f5);
-				ConnectorTopSide4.render(f5);
-				ConnectorTopSide1.render(f5);
-				ConnectorTopSide3.render(f5);
-			}
-			if (down == ConnectionState.PLUGGED) {
-				ConnectorBottomCenter.render(f5);
-				ConnectorBottom.render(f5);
-				ConnectorBotomEdge1.render(f5);
-				ConnectorBotomEdge4.render(f5);
-				ConnectorBotomEdge2.render(f5);
-				ConnectorBotomEdge3.render(f5);
-				ConnectorBotomSupport3.render(f5);
-				ConnectorBotomSupport4.render(f5);
-				ConnectorBotomSupport2.render(f5);
-				ConnectorBotomSupport1.render(f5);
-			}
 			if (tl instanceof TileEntityConveyorBelt) {
-				RenderItem itemrenderer = (RenderItem) RenderManager.instance.getEntityClassRenderObject(EntityItem.class);
+
 				TileEntityConveyorBelt belt = (TileEntityConveyorBelt) tl;
 
+				SlopeState back = belt.getBackSlope();
+				SlopeState front = belt.getFrontSlope();
+				CornerState cornerState = null;
+
+				ForgeDirection forward = BlockMachine.getForwardFromEntity(tl);
+				if (forward != null) {
+					if (back == SlopeState.FLAT && front == SlopeState.FLAT) {
+						switch (forward) {
+						case NORTH:
+							cornerState = drawConnections(tl, east, north, west, south, up, down, f5);
+							break;
+						case EAST:
+							cornerState = drawConnections(tl, north, west, south, east, up, down, f5);
+							break;
+						case SOUTH:
+							cornerState = drawConnections(tl, west, south, east, north, up, down, f5);
+							break;
+						case WEST:
+							cornerState = drawConnections(tl, south, east, north, west, up, down, f5);
+							break;
+						default:
+							cornerState = new CornerState();
+							break;
+						}
+
+						if (up == ConnectionState.PLUGGED) {
+							ConnectorTopTube2.render(f5);
+							ConnectorTop.render(f5);
+							ConnectorTopSide2.render(f5);
+							ConnectorTopSide4.render(f5);
+							ConnectorTopSide1.render(f5);
+							ConnectorTopSide3.render(f5);
+						}
+						if (down == ConnectionState.PLUGGED) {
+							ConnectorBottomCenter.render(f5);
+							ConnectorBottom.render(f5);
+							ConnectorBotomEdge1.render(f5);
+							ConnectorBotomEdge4.render(f5);
+							ConnectorBotomEdge2.render(f5);
+							ConnectorBotomEdge3.render(f5);
+							ConnectorBotomSupport3.render(f5);
+							ConnectorBotomSupport4.render(f5);
+							ConnectorBotomSupport2.render(f5);
+							ConnectorBotomSupport1.render(f5);
+						}
+					} else {
+						switch (forward) {
+						case NORTH:
+							drawSpline(tl, front, back, south, north, f5);
+							break;
+						case EAST:
+							drawSpline(tl, front, back, east, west, f5);
+							break;
+						case SOUTH:
+							drawSpline(tl, front, back, north, south, f5);
+							break;
+						case WEST:
+							drawSpline(tl, front, back, west, east, f5);
+							break;
+						default:
+							break;
+						}
+					}
+				}
+				RenderItem itemrenderer = (RenderItem) RenderManager.instance.getEntityClassRenderObject(EntityItem.class);
 				for (Iterator<MovingItemStack> iterator = belt.iterateStacks(); iterator.hasNext();) {
 					MovingItemStack stack = iterator.next();
-					renderStack(stack, tl, itemrenderer, f5, cornerState);
+					renderStack(stack, tl, itemrenderer, f5, cornerState, front, back);
 				}
 			}
 		}
 	}
 
-	private void renderStack(MovingItemStack stack, TileEntity tl, RenderItem itemrenderer, float scale, CornerState state) {
+	private void drawSpline(TileEntity tl, SlopeState frontSlope, SlopeState backSlope, ConnectionState frontState, ConnectionState backState, float f) {
+		SlopeRenderer renderer = slopeCombiner.getRenderer(frontSlope, frontState != ConnectionState.DISCONNECTED, backSlope, backState != ConnectionState.DISCONNECTED);
+		renderer.render(f);
+	}
+
+	private void renderStack(MovingItemStack stack, TileEntity tl, RenderItem itemrenderer, float scale, CornerState state, SlopeState frontSlope, SlopeState backSlope) {
 		ItemStack items = stack.stack;
 		if (state == null)
 			state = new CornerState();
@@ -396,91 +442,118 @@ public class ModelConveyorBelt extends ModelConnected {
 		float z = 0;
 		float travelProgress = -(stack.progress - 0.5f);
 		float angle = 0;
-		if (stack.progress < 0.5f) {
-			if (stack.source != null) {
-				switch (stack.source) {
-				case LEFT:
-					if (state.rightBend) {
+		float diveAngle = 0;
+		if (frontSlope != SlopeState.FLAT || backSlope != SlopeState.FLAT) {
+			x = 0;
+
+			float frontLevel = (frontSlope.ordinal() - 1) / 2f;
+			float backLevel = (backSlope.ordinal() - 1) / 2f;
+
+			float yStart = -backLevel;
+			float yEnd = -frontLevel;
+
+			float angleStart = backLevel * 90;
+			float angleEnd = -frontLevel * 90;
+
+			float yMid = (yStart + yEnd) / 2f;
+			if (frontSlope == backSlope || frontSlope == SlopeState.FLAT || backSlope == SlopeState.FLAT)
+				yMid = 0;
+
+			Vector2f start = new Vector2f(-0.5f, yStart);
+			Vector2f mid = new Vector2f(0, yMid);
+			Vector2f end = new Vector2f(0.5f, yEnd);
+
+			diveAngle = (((angleEnd - angleStart) * stack.progress + angleStart));
+			Vector2f yz = IPMath.bezier(start, mid, end, stack.progress);
+			y = yz.y;
+			z = yz.x;
+		} else {
+			if (stack.progress < 0.5f) {
+				if (stack.source != null) {
+					switch (stack.source) {
+					case LEFT:
+						if (state.rightBend) {
+							float angleProgress = (float) (stack.progress * Math.PI / 2);
+							x = 0.5f - (float) Math.sin(angleProgress) * 0.5f;
+							z = 0.5f - (float) Math.cos(angleProgress) * 0.5f;
+
+							angle = -90 + angleProgress / (float) Math.PI * 180;
+						} else {
+							x = travelProgress;
+							y = 0;
+							z = 0;
+							angle = -90;
+						}
+						break;
+
+					case RIGHT:
+						if (state.leftBend) {
+							float angleProgress = (float) (stack.progress * Math.PI / 2);
+							x = -0.5f + (float) Math.sin(angleProgress) * 0.5f;
+							z = 0.5f - (float) Math.cos(angleProgress) * 0.5f;
+
+							angle = 90 - angleProgress / (float) Math.PI * 180;
+						} else {
+							x = -travelProgress;
+							y = 0;
+							z = 0;
+							angle = 90;
+						}
+						break;
+					case FRONT:
+						x = 0;
+						y = 0;
+						z = -travelProgress;
+						break;
+					case UP:
+						x = 0;
+						y = -travelProgress;
+						z = 0;
+						break;
+					case DOWN:
+						x = 0;
+						y = travelProgress;
+						z = 0;
+						break;
+					default:
+						break;
+					}
+				}
+			} else {
+				switch (stack.destination) {
+				case UP:
+					x = 0;
+					y = travelProgress;
+					z = 0;
+					break;
+				case DOWN:
+					x = 0;
+					y = -travelProgress;
+					z = 0;
+					break;
+				case BACK:
+					if (stack.source == LocalDirection.LEFT && state.rightBend) {
 						float angleProgress = (float) (stack.progress * Math.PI / 2);
 						x = 0.5f - (float) Math.sin(angleProgress) * 0.5f;
 						z = 0.5f - (float) Math.cos(angleProgress) * 0.5f;
-
 						angle = -90 + angleProgress / (float) Math.PI * 180;
-					} else {
-						x = travelProgress;
-						y = 0;
-						z = 0;
-						angle = -90;
-					}
-					break;
 
-				case RIGHT:
-					if (state.leftBend) {
+					} else if (stack.source == LocalDirection.RIGHT && state.leftBend) {
 						float angleProgress = (float) (stack.progress * Math.PI / 2);
 						x = -0.5f + (float) Math.sin(angleProgress) * 0.5f;
 						z = 0.5f - (float) Math.cos(angleProgress) * 0.5f;
 
 						angle = 90 - angleProgress / (float) Math.PI * 180;
 					} else {
-						x = -travelProgress;
+						x = 0;
 						y = 0;
-						z = 0;
-						angle = 90;
+						z = -travelProgress;
+						angle = 0;
 					}
-					break;
-				case FRONT:
-					x = 0;
-					y = 0;
-					z = -travelProgress;
-					break;
-				case UP:
-					x = 0;
-					y = -travelProgress;
-					z = 0;
-					break;
-				case DOWN:
-					x = 0;
-					y = travelProgress;
-					z = 0;
 					break;
 				default:
 					break;
 				}
-			}
-		} else {
-			switch (stack.destination) {
-			case UP:
-				x = 0;
-				y = travelProgress;
-				z = 0;
-				break;
-			case DOWN:
-				x = 0;
-				y = -travelProgress;
-				z = 0;
-				break;
-			case BACK:
-				if (stack.source == LocalDirection.LEFT && state.rightBend) {
-					float angleProgress = (float) (stack.progress * Math.PI / 2);
-					x = 0.5f - (float) Math.sin(angleProgress) * 0.5f;
-					z = 0.5f - (float) Math.cos(angleProgress) * 0.5f;
-					angle = -90 + angleProgress / (float) Math.PI * 180;
-
-				} else if (stack.source == LocalDirection.RIGHT && state.leftBend) {
-					float angleProgress = (float) (stack.progress * Math.PI / 2);
-					x = -0.5f + (float) Math.sin(angleProgress) * 0.5f;
-					z = 0.5f - (float) Math.cos(angleProgress) * 0.5f;
-
-					angle = 90 - angleProgress / (float) Math.PI * 180;
-				} else {
-					x = 0;
-					y = 0;
-					z = -travelProgress;
-					angle = 0;
-				}
-				break;
-			default:
-				break;
 			}
 		}
 
@@ -488,7 +561,9 @@ public class ModelConveyorBelt extends ModelConnected {
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y + 1.4f, z);
 		GL11.glRotatef(180, 1, 0, 0);
-		GL11.glRotatef(worldAngle - angle, 0, 1, 0);
+		GL11.glRotatef(worldAngle, 0, 1, 0);
+		GL11.glRotatef(-angle, 0, 1, 0);
+		GL11.glRotatef(diveAngle, 0, 0, -1);
 		itemrenderer.doRenderItem(entity, 0, 0, 0, 0, scale);
 		GL11.glPopMatrix();
 
@@ -584,91 +659,6 @@ public class ModelConveyorBelt extends ModelConnected {
 		return state;
 	}
 
-	private void drawAngle(TileEntity tl, int xCorner, int yCorner, float f, float startAngle, boolean invert) {
-
-		Tessellator tessellator = Tessellator.instance;
-		float uMin = 10 / 64f;
-		float uMax = 18 / 64f;
-		float vMin = 1 / 32f;
-		float vMax = 17 / 32f;
-
-		float y = 23;
-
-		int segments = 16;
-
-		float vLen = (invert ? (vMin - vMax) : (vMax - vMin)) / segments;
-		float vStart = (invert ? vMax : vMin);
-		float segmentAngle = (float) Math.PI / (2 * segments);
-
-		float bottomUv = -9 / 64f;
-
-		float sideUMin = 0;
-		float sideUMax = 1 / 32f;
-		for (int i = 0; i < segments; i++) {
-			float endAngle = startAngle + segmentAngle;
-			float vEnd = vStart + vLen;
-
-			float cosStart = (float) Math.cos(startAngle);
-			float sinStart = (float) Math.sin(startAngle);
-
-			float cosEnd = (float) Math.cos(endAngle);
-			float sinEnd = (float) Math.sin(endAngle);
-
-			float x1 = cosStart * 4 - xCorner;
-			float x2 = cosStart * 12 - xCorner;
-
-			float x3 = cosEnd * 4 - xCorner;
-			float x4 = cosEnd * 12 - xCorner;
-
-			float y1 = sinStart * 4 - yCorner;
-			float y2 = sinStart * 12 - yCorner;
-
-			float y3 = sinEnd * 4 - yCorner;
-			float y4 = sinEnd * 12 - yCorner;
-			/*
-			 * x1 = x3 = -4 + i; x2 = x4 = 4 + i;
-			 * 
-			 * y1 = y3 = (float) i * 16f / segments -8 ; y2 = y4 = (float) (i +
-			 * 1) * 16f / segments -8;
-			 */
-
-			tessellator.startDrawingQuads();
-			tessellator.setNormal(0, 2, 0);
-			tessellator.addVertexWithUV((x1) * f, (y) * f, (y1) * f, uMin, vStart);
-			tessellator.addVertexWithUV((x2) * f, (y) * f, (y2) * f, uMax, vStart);
-			tessellator.addVertexWithUV((x4) * f, (y) * f, (y4) * f, uMax, vEnd);
-			tessellator.addVertexWithUV((x3) * f, (y) * f, (y3) * f, uMin, vEnd);
-			tessellator.draw();
-
-			tessellator.startDrawingQuads();
-			tessellator.setNormal(0, -2, 0);
-			tessellator.addVertexWithUV((x2) * f, (y + 1) * f, (y2) * f, uMin + bottomUv, vStart);
-			tessellator.addVertexWithUV((x1) * f, (y + 1) * f, (y1) * f, uMax + bottomUv, vStart);
-			tessellator.addVertexWithUV((x3) * f, (y + 1) * f, (y3) * f, uMax + bottomUv, vEnd);
-			tessellator.addVertexWithUV((x4) * f, (y + 1) * f, (y4) * f, uMin + bottomUv, vEnd);
-			tessellator.draw();
-
-			tessellator.startDrawingQuads();
-			tessellator.setNormal((cosStart + cosEnd) / 2, 0, (sinStart + sinEnd) / 2);
-			tessellator.addVertexWithUV((x2) * f, (y) * f, (y2) * f, sideUMin, vStart);
-			tessellator.addVertexWithUV((x2) * f, (y + 1) * f, (y2) * f, sideUMax, vStart);
-			tessellator.addVertexWithUV((x4) * f, (y + 1) * f, (y4) * f, sideUMax, vEnd);
-			tessellator.addVertexWithUV((x4) * f, (y) * f, (y4) * f, sideUMin, vEnd);
-			tessellator.draw();
-
-			tessellator.startDrawingQuads();
-			tessellator.setNormal((cosStart + cosEnd) / 2, 0, (sinStart + sinEnd) / 2);
-			tessellator.addVertexWithUV((x1) * f, (y + 1) * f, (y1) * f, sideUMin, vStart);
-			tessellator.addVertexWithUV((x1) * f, (y) * f, (y1) * f, sideUMax, vStart);
-			tessellator.addVertexWithUV((x3) * f, (y) * f, (y3) * f, sideUMax, vEnd);
-			tessellator.addVertexWithUV((x3) * f, (y + 1) * f, (y3) * f, sideUMin, vEnd);
-			tessellator.draw();
-
-			vStart = vEnd;
-			startAngle = endAngle;
-		}
-	}
-
 	private void drawCornerLeft(TileEntity tl, float f5) {
 		ForwardCornerOut.render(f5);
 		ForwardCornerCenter.render(f5);
@@ -684,10 +674,10 @@ public class ModelConveyorBelt extends ModelConnected {
 	}
 
 	private void drawTurnLeft(TileEntity tl, float f) {
-		drawAngle(tl, 8, -8, f, (float) -Math.PI / 2, false);
+		this.bend1.render(f);
 	}
 
 	private void drawTurnRight(TileEntity tl, float f) {
-		drawAngle(tl, -8, -8, f, (float) Math.PI, true);
+		this.bend2.render(f);
 	}
 }

@@ -12,9 +12,11 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
 public class BlockConveyorBelt extends BlockMachineRendered {
@@ -32,6 +34,25 @@ public class BlockConveyorBelt extends BlockMachineRendered {
 	@Override
 	public int getRenderType() {
 		return ConfigRenderers.getBLtransportConveyorBelt();
+	}
+
+	@Override
+	public void onBlockDestroyedByPlayer(World par1World, int par2, int par3, int par4, int par5) {
+		super.onBlockDestroyedByPlayer(par1World, par2, par3, par4, par5);
+		notifyDestroyed(par1World, par2, par3 - 1, par4);
+		notifyDestroyed(par1World, par2, par3 + 1, par4);
+	}
+
+	private void notifyDestroyed(World par1World, int i, int j, int k) { 
+		int id = par1World.getBlockId(i, j, k);
+		par1World.notifyBlockChange(i, j, k, id);
+	}
+
+	@Override
+	public void onBlockDestroyedByExplosion(World par1World, int par2, int par3, int par4, Explosion par5Explosion) {
+		super.onBlockDestroyedByExplosion(par1World, par2, par3, par4, par5Explosion);
+		notifyDestroyed(par1World, par2, par3 - 1, par4);
+		notifyDestroyed(par1World, par2, par3 + 1, par4);
 	}
 
 	@Override
@@ -56,6 +77,17 @@ public class BlockConveyorBelt extends BlockMachineRendered {
 		} else if (par5Entity instanceof EntityLivingBase) {
 			conveyorBelt.moveEntity((EntityLivingBase) par5Entity);
 		}
+	}
+
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
+
+		if (!player.isSneaking()) {
+			TileEntityConveyorBelt conveyorBelt = (TileEntityConveyorBelt) world.getBlockTileEntity(x, y, z);
+			conveyorBelt.toggleSlope();
+			return true;
+		}
+		return super.onBlockActivated(world, x, y, z, player, metadata, what, these, are);
 	}
 
 	@Override

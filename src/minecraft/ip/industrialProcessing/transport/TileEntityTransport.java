@@ -41,10 +41,10 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
 									// flicker.
 	}
 
-	private void updateConnections() {
+	protected void updateConnections() {
 		System.out.println("Verifying transport at " + xCoord + ", " + yCoord + ", " + zCoord + " on " + (this.worldObj.isRemote ? "client" : "server"));
 		boolean modified = false;
-
+		beginConnectionUpdate();
 		for (int i = 0; i < this.states.length; i++) {
 			ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[i];
 			TransportConnectionState newState = getNeighborState(direction);
@@ -59,6 +59,9 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
 			updateNetwork();
 		System.out.println("States at " + xCoord + ", " + yCoord + ", " + zCoord + " are  UP:" + this.states[ForgeDirection.UP.ordinal()] + " DOWN:" + this.states[ForgeDirection.DOWN.ordinal()]);
 		this.unverified = false;
+	}
+
+	protected void beginConnectionUpdate() {
 	}
 
 	public TransportConnectionState getTransportConnection(ForgeDirection direction) {
@@ -76,9 +79,8 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
 		return getState(entity, direction);
 	}
 
-	private TileEntity getNeighbor(ForgeDirection direction) {
+	protected TileEntity getNeighbor(ForgeDirection direction) {
 		return this.worldObj.getBlockTileEntity(this.xCoord + direction.offsetX, this.yCoord + direction.offsetY, this.zCoord + direction.offsetZ);
-
 	}
 
 	@Override

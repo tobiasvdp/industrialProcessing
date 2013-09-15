@@ -12,6 +12,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import org.lwjgl.Sys;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.IInventory;
@@ -30,12 +32,191 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 	private int pullTicks = 0;
 	float speed = 1; // one unit per second
 
+	int frontMask = 2;
+	int backMask = 2;
+	private SlopeState frontSlope = SlopeState.FLAT;
+	private SlopeState backSlope = SlopeState.FLAT;
+
+	public SlopeState getFrontSlope() {
+		return frontSlope;
+	}
+
+	public SlopeState getBackSlope() {
+		return backSlope;
+	}
+
+	public void toggleSlope() {
+
+		SlopeState oldFront = this.frontSlope;
+		SlopeState oldBack = this.backSlope;
+		if (frontMask == 0 || backMask == 0)
+			return; // something wrong
+		int front;
+		int back;
+		SlopeState[] values = SlopeState.values();
+		int totalOrdinal = frontSlope.ordinal() + backSlope.ordinal() * 3;
+
+		do {
+			totalOrdinal++;
+			totalOrdinal %= 9;
+			front = totalOrdinal % 3;
+			back = totalOrdinal / 3;
+
+			frontSlope = values[front];
+			backSlope = values[back];
+		} while (!isInMask(frontSlope, frontMask) || !isInMask(backSlope, backMask));
+
+		if (oldFront != frontSlope) {
+			TileEntityConveyorBelt forward = getConveyor(this.forwardDirection.getOpposite(), this.frontSlope);
+			if (forward != null) {
+				if (forward.backSlope == SlopeState.FLAT) {
+					if (frontSlope == SlopeState.UP)
+						forward.backSlope = SlopeState.DOWN;
+					else if (frontSlope == SlopeState.DOWN)
+						forward.backSlope = SlopeState.UP;
+				}
+				forward.searchForConnections();
+			}
+		}
+		if (oldBack != backSlope) {
+			TileEntityConveyorBelt backward = getConveyor(this.forwardDirection, this.backSlope);
+			if (backward != null) {
+				if (backward.backSlope == SlopeState.FLAT) {
+					if (frontSlope == SlopeState.UP)
+						backward.backSlope = SlopeState.DOWN;
+					else if (frontSlope == SlopeState.DOWN)
+						backward.backSlope = SlopeState.UP;
+				}
+				backward.searchForConnections();
+			}
+		}
+		this.searchForConnections();
+	}
+
+	@Override
+	protected void beginConnectionUpdate() {
+		boolean canGoDown = this.isAir(ForgeDirection.DOWN);
+		backMask = checkMask(this.forwardDirection, canGoDown, false);
+		frontMask = checkMask(this.forwardDirection.getOpposite(), canGoDown, true);
+		System.out.println("TileEntityConveyorBelt.beginConnectionUpdate()" + frontMask + " " + backMask);
+		if (!isInMask(frontSlope, frontMask)) {
+			this.frontSlope = getSlopeFromMask(frontMask);
+		}
+		if (!isInMask(backSlope, backMask)) {
+			this.backSlope = getSlopeFromMask(backMask);
+		}
+	}
+
+	private SlopeState getSlopeFromMask(int mask) {
+		if (isInMask(SlopeState.UP, mask))
+			return SlopeState.UP;
+		if (isInMask(SlopeState.DOWN, mask))
+			return SlopeState.DOWN;
+
+		return SlopeState.FLAT;
+	}
+
+	private boolean isInMask(SlopeState slope, int mask) {
+
+		int maskBit = 1 << slope.ordinal();
+
+		return (maskBit & mask) == maskBit;
+	}
+
+	private int checkMask(ForgeDirection dir, boolean canGoDown, boolean checkOpposite) {
+		int mask = 1 << SlopeState.FLAT.ordinal();
+		if (isAir(dir))
+			mask += checkMask(dir, SlopeState.UP, checkOpposite);
+		if (canGoDown)
+			mask += checkMask(dir, SlopeState.DOWN, checkOpposite);
+
+		return mask;
+	}
+
+	private int checkMask(ForgeDirection dir, SlopeState slope, boolean checkOpposite) {
+		TileEntity top = getTileEntity(dir, slope);
+		if (top instanceof TileEntityConveyorBelt) {
+			TileEntityConveyorBelt belt = (TileEntityConveyorBelt) top;
+			if ((belt.forwardDirection == dir && !checkOpposite) || (checkOpposite && belt.forwardDirection.getOpposite() == dir))
+				return 1 << slope.ordinal();
+		}
+		return 0;
+	}
+
+	private boolean isAir(ForgeDirection dir, SlopeState slope) {
+		int x = xCoord + dir.offsetX;
+		int y = yCoord + dir.offsetY + slope.ordinal() - 1;
+		int z = zCoord + dir.offsetZ;
+		boolean air = this.worldObj.isAirBlock(x, y, z);
+		if (!air) {
+			return this.worldObj.getBlockTileEntity(x, y, z) instanceof TileEntityConveyorBelt;
+		}
+		return air;
+	}
+
+	private boolean isAir(ForgeDirection dir) {
+		int x = xCoord + dir.offsetX;
+		int y = yCoord + dir.offsetY;
+		int z = zCoord + dir.offsetZ;
+
+		boolean air = this.worldObj.isAirBlock(x, y, z);
+		if (!air) {
+			return this.worldObj.getBlockTileEntity(x, y, z) instanceof TileEntityConveyorBelt;
+		}
+		return air;
+	}
+
+	private TileEntity getTileEntity(ForgeDirection dir, SlopeState slope) {
+		int x = xCoord + dir.offsetX;
+		int y = yCoord + dir.offsetY + slope.ordinal() - 1;
+		int z = zCoord + dir.offsetZ;
+		return this.worldObj.getBlockTileEntity(x, y, z);
+	}
+
+	@Override
+	protected TileEntity getNeighbor(ForgeDirection direction) {
+
+		LocalDirection local = DirectionUtils.getLocalDirection(direction, this.forwardDirection);
+
+		boolean sloped = (frontSlope != SlopeState.FLAT || backSlope != SlopeState.FLAT);
+
+		if (sloped && (local != LocalDirection.FRONT && local != LocalDirection.BACK))
+			return null; // no neighbors at the sides!
+
+		int yOffset = 0;
+		if (local == LocalDirection.BACK)
+			yOffset = this.frontSlope.ordinal() - 1;
+		else if (local == LocalDirection.FRONT)
+			yOffset = this.backSlope.ordinal() - 1;
+
+		TileEntity ent = this.worldObj.getBlockTileEntity(xCoord + direction.offsetX, yCoord + direction.offsetY + yOffset, zCoord + direction.offsetZ);
+
+		return ent;
+
+	}
+
+	protected SlopeState getConnectionLevel(ForgeDirection side) {
+		if (side == this.forwardDirection) {
+			return this.frontSlope;
+		} else if (side == this.forwardDirection.getOpposite()) {
+			return this.backSlope;
+		} else if (this.backSlope == SlopeState.FLAT && this.frontSlope == SlopeState.FLAT)
+			return SlopeState.FLAT;
+		else
+			return SlopeState.NONE;
+	}
+
 	@Override
 	protected TransportConnectionState getState(TileEntity entity, ForgeDirection direction) {
+
 		if (entity instanceof TileEntityConveyorBelt) {
-			TileEntityConveyorBelt other = (TileEntityConveyorBelt) entity;
-			if (other.forwardDirection == direction)
+			TileEntityConveyorBelt belt = (TileEntityConveyorBelt) entity;
+
+			SlopeState a = belt.getConnectionLevel(direction);
+			if (a != SlopeState.NONE && a == this.getConnectionLevel(direction.getOpposite()).getOpposite()) {
 				return TransportConnectionState.TRANSPORT;
+
+			}
 		}
 
 		if (entity instanceof ISidedInventory) {
@@ -202,21 +383,47 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 	private boolean outputStack(MovingItemStack stack) {
 		Random rnd = new Random();
 		ForgeDirection direction = DirectionUtils.getWorldDirection(stack.destination, this.forwardDirection);
-		TileEntityConveyorBelt conveyor = getConveyor(direction);
-		if (conveyor != null) {
-			conveyor.addItemStack(stack.stack, direction.getOpposite());
-			return true;
+		if (stack.destination == LocalDirection.BACK) {
+			TileEntityConveyorBelt conveyor = getConveyor(direction, this.frontSlope); 
+			if (conveyor != null && conveyor.states[direction.getOpposite().ordinal()] == TransportConnectionState.TRANSPORT) {
+				System.out.println("TileEntityConveyorBelt.outputStack()");
+				conveyor.addItemStack(stack.stack, direction.getOpposite());
+				return true;
+			}
+		}
+
+		ISidedInventory sidedInventory = getSidedInventory(direction);
+		if (sidedInventory != null) {
+			ItemStack rest = ItemTransfers.transfer(stack.stack, sidedInventory, direction.getOpposite());
+			if (rest == null || rest.stackSize <= 0)
+				return true;
+
+			if (stack.destination != LocalDirection.BACK) {
+				stack.stack = rest;
+				stack.source = stack.destination;
+				stack.destination = LocalDirection.FRONT; // bounce back
+			} else {
+				float dx = direction.offsetX + (float) rnd.nextGaussian();
+				float dy = direction.offsetY + 5;
+				float dz = direction.offsetZ + (float) rnd.nextGaussian();
+				ItemTransfers.launch(stack.stack, this.worldObj, this.xCoord + 0.5f + dx * 0.5f, this.yCoord + 0.2f, this.zCoord + 0.5f + dz * 0.5f, dx / 10, dy / 10, dz / 10);
+				return true;
+			}
+			return false;
 		} else {
-			ISidedInventory sidedInventory = getSidedInventory(direction);
-			if (sidedInventory != null) {
-				ItemStack rest = ItemTransfers.transfer(stack.stack, sidedInventory, direction.getOpposite());
+			IInventory inventory = getInventory(direction);
+			if (inventory != null) {
+				ItemStack rest = ItemTransfers.transfer(stack.stack, inventory);
 				if (rest == null || rest.stackSize <= 0)
 					return true;
-
-				if (stack.destination != LocalDirection.BACK) {
-					stack.stack = rest;
+				stack.stack = rest;
+				if (stack.destination != LocalDirection.BACK) { // send to
+																// output!
 					stack.source = stack.destination;
-					stack.destination = LocalDirection.FRONT; // bounce back
+					stack.destination = LocalDirection.BACK; // bounce back
+
+					stack.progress = 0;
+					return false;
 				} else {
 					float dx = direction.offsetX + (float) rnd.nextGaussian();
 					float dy = direction.offsetY + 5;
@@ -224,51 +431,31 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 					ItemTransfers.launch(stack.stack, this.worldObj, this.xCoord + 0.5f + dx * 0.5f, this.yCoord + 0.2f, this.zCoord + 0.5f + dz * 0.5f, dx / 10, dy / 10, dz / 10);
 					return true;
 				}
-				return false;
 			} else {
-				IInventory inventory = getInventory(direction);
-				if (inventory != null) {
-					ItemStack rest = ItemTransfers.transfer(stack.stack, inventory);
-					if (rest == null || rest.stackSize <= 0)
-						return true;
-					stack.stack = rest;
-					if (stack.destination != LocalDirection.BACK) { // send to
-																	// output!
-						stack.source = stack.destination;
-						stack.destination = LocalDirection.BACK; // bounce back
-
-						stack.progress = 0;
-						return false;
-					} else {
-						float dx = direction.offsetX + (float) rnd.nextGaussian();
-						float dy = direction.offsetY + 5;
-						float dz = direction.offsetZ + (float) rnd.nextGaussian();
-						ItemTransfers.launch(stack.stack, this.worldObj, this.xCoord + 0.5f + dx * 0.5f, this.yCoord + 0.2f, this.zCoord + 0.5f + dz * 0.5f, dx / 10, dy / 10, dz / 10);
-						return true;
-					}
-				} else {
-					float dx = direction.offsetX;
-					float dy = direction.offsetY;
-					float dz = direction.offsetZ;
-					ItemTransfers.launch(stack.stack, this.worldObj, this.xCoord + 0.5f + dx * 0.5f, this.yCoord + 0.2f, this.zCoord + 0.5f + dz * 0.5f, dx / 10, dy / 10, dz / 10);
-					return true;
-				}
+				float dx = direction.offsetX;
+				float dy = direction.offsetY;
+				float dz = direction.offsetZ;
+				ItemTransfers.launch(stack.stack, this.worldObj, this.xCoord + 0.5f + dx * 0.5f, this.yCoord + 0.2f, this.zCoord + 0.5f + dz * 0.5f, dx / 10, dy / 10, dz / 10);
+				return true;
 			}
 		}
+
 	}
 
 	public Iterator<MovingItemStack> iterateStacks() {
 		return this.itemStacks.iterator();
 	}
 
-	private TileEntityConveyorBelt getConveyor(ForgeDirection direction) {
-		TileEntity entity = this.worldObj.getBlockTileEntity(xCoord + direction.offsetX, yCoord + direction.offsetY, zCoord + direction.offsetZ);
+	private TileEntityConveyorBelt getConveyor(ForgeDirection direction, SlopeState slope) {
+		int slopeOffsetY = slope.ordinal() - 1;
+		TileEntity entity = this.worldObj.getBlockTileEntity(xCoord + direction.offsetX, yCoord + direction.offsetY + slopeOffsetY, zCoord + direction.offsetZ);
 		if (entity instanceof TileEntityConveyorBelt)
 			return (TileEntityConveyorBelt) entity;
 		return null;
 	}
 
 	public void addItemStack(ItemStack stack, ForgeDirection source) {
+		System.out.println("TileEntityConveyorBelt.addItemStack()"+source);
 		MovingItemStack movingStack = new MovingItemStack();
 		movingStack.stack = stack;
 		if (source == null) {
@@ -301,6 +488,8 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 		nbt.setInteger("Forward", this.forwardDirection.ordinal());
+		nbt.setInteger("FrontSlope", this.frontSlope.ordinal());
+		nbt.setInteger("BackSlope", this.backSlope.ordinal());
 
 		nbt.setInteger("StackCount", this.itemStacks.size());
 		NBTTagList nbttaglist = new NBTTagList();
@@ -324,6 +513,9 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 		this.forwardDirection = ForgeDirection.getOrientation(nbt.getInteger("Forward"));
+		SlopeState[] states = SlopeState.values();
+		this.frontSlope = states[nbt.getInteger("FrontSlope")];
+		this.backSlope = states[nbt.getInteger("BackSlope")];
 		this.itemStacks.clear();
 		LocalDirection[] directions = LocalDirection.values();
 		NBTTagList nbttaglist = nbt.getTagList("Stacks");
@@ -419,8 +611,8 @@ public class TileEntityConveyorBelt extends TileEntityTransport implements IRota
 		par5Entity.addVelocity(x, y, z);
 
 		if (par5Entity instanceof EntityPlayerMP) {
-			EntityPlayerMP player = (EntityPlayerMP) par5Entity;		
-			
+			EntityPlayerMP player = (EntityPlayerMP) par5Entity;
+
 			IInventory inventory = player.inventory;
 			if (player != null) {
 				for (int i = this.itemStacks.size() - 1; i >= 0; i--) {

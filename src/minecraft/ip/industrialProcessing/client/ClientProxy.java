@@ -91,8 +91,8 @@ import ip.industrialProcessing.transport.fluids.TileEntityRainTank;
 import ip.industrialProcessing.transport.fluids.TileEntityTank;
 import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids;
 import ip.industrialProcessing.transport.fluids.TileEntityValve;
-import ip.industrialProcessing.transport.items.conveyorBelt.ModelConveyorBelt;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorBelt;
+import ip.industrialProcessing.transport.items.conveyorBelt.rendering.ModelConveyorBelt;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
