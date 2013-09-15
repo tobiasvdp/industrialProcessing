@@ -4,7 +4,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.ForgeDirection;
 
 public class SidedRotationTransformer {
-	private static final int[][] ROTATION_MATRIX_Side = { { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 1, 0, 2, 3, 5, 4, 6 }, { 5, 4, 2, 3, 3, 2, 6 }, { 4, 5, 2, 3, 2, 3, 6 }, { 0, 1, 2, 3, 4, 5, 6 }};
+	private static final int[][] ROTATION_MATRIX_Side = { { 1, 0, 3, 2, 5, 4, 6 }, { 0,1,2,3,4,5,6 }, { 2, 3, 1, 0, 4, 5, 6 }, { 3, 2, 0, 1, 5, 4, 6 }, { 5, 4, 1, 0, 3, 2, 6 }, { 4, 5, 0, 1, 2, 3, 6 }, { 0, 1, 2, 3, 4, 5, 6 }};
 	private static final int[][] ROTATION_MATRIX_Rotation = { { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 5, 4, 6 }, { 0, 1, 2, 3, 3, 2, 6 }, { 0, 1, 2, 3, 2, 3, 6 }, { 0, 1, 2, 3, 4, 5, 6 }};
 
 	public static ForgeDirection transformMetaToForgeDirection(int meta) {
@@ -27,9 +27,10 @@ public class SidedRotationTransformer {
 	}
 
 	public static ForgeDirection InternalToExternalDirection(ISidedRotation rot, ForgeDirection dir) {
-		System.out.println(getRotatedForgeDirection(rot.getOrientationSide(), dir));
-		ForgeDirection forgeSides = ForgeDirection.getOrientation(ROTATION_MATRIX_Side[rot.getOrientationSide().ordinal()][dir.ordinal()]);
-		return forgeSides.UNKNOWN;
+		System.out.println(rot.getOrientationSide());
+		ForgeDirection side = ForgeDirection.getOrientation(ROTATION_MATRIX_Side[rot.getOrientationSide().ordinal()][dir.ordinal()]);
+		System.out.println(side);
+		return ForgeDirection.UNKNOWN;
 	}
 
 	public static ForgeDirection transformSideAndLookToForgeDirection(ForgeDirection side, float rotationYaw, float rotationPitch) {
