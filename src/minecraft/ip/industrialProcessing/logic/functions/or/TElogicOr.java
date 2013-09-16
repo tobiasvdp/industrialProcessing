@@ -36,20 +36,17 @@ public class TElogicOr extends TElogicNode implements ISidedRotation {
 
 	@Override
 	public float getGLrotationX() {
-		// TODO Auto-generated method stub
-		return 0;
+		return SIDEDTRANSFORMER.getGLrotationX(getOrientationSide(), getOrientationRotation());
 	}
 
 	@Override
 	public float getGLrotationY() {
-		// TODO Auto-generated method stub
-		return 0;
+		return SIDEDTRANSFORMER.getGLrotationY(getOrientationSide(), getOrientationRotation());
 	}
 
 	@Override
 	public float getGLrotationZ() {
-		// TODO Auto-generated method stub
-		return 0;
+		return SIDEDTRANSFORMER.getGLrotationZ(getOrientationSide(), getOrientationRotation());
 	}
 
 	@Override
@@ -81,6 +78,17 @@ public class TElogicOr extends TElogicNode implements ISidedRotation {
 	public float getGLsideZ() {
 		return SIDEDTRANSFORMER.getGLsideZ(getOrientationSide());
 	}
+
+	@Override
+	public float getGLsideAngle() {
+		return SIDEDTRANSFORMER.getGLsideAngle(getOrientationSide());
+	}
+
+	@Override
+	public float getGLrotationAngle() {
+		return SIDEDTRANSFORMER.getGLrotationAngle(getOrientationSide(), getOrientationRotation());
+	}
+	
 
 	@Override
 	public ForgeDirection[] setConnectableSides() {

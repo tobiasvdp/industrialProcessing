@@ -59,34 +59,45 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 			int l1 = l % 65536;
 			int l2 = l / 65536;
 			tessellator.setColorOpaque_F(f, f, f);
-			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) l1, (float) l2);			
-			
+			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) l1, (float) l2);
+
 			GL11.glPushMatrix();
-			
-			int dir = world.getBlockMetadata(i, j, k); 
-			
+
+			int dir = world.getBlockMetadata(i, j, k);
+
 			if (tl instanceof IRotateableEntity) {
 				IRotateableEntity machine = (IRotateableEntity) tl;
 				ForgeDirection forward = machine.getForwardDirection();
 				dir = BlockMachine.getMetadataFromForward(forward);
-			}			
-			if(tl instanceof ISidedRotation){
-				dir = 0; 
-				ISidedRotation sidedRotation = (ISidedRotation) tl;
-				
-				GL11.glTranslatef(0.0f, 1.0f, 0.0f);
-				GL11.glRotatef(90, sidedRotation.getGLsideX(), sidedRotation.getGLsideY(), sidedRotation.getGLsideZ());
-				GL11.glTranslatef(0.0f, -1.0f, 0.0f);
 			}
- 
+			if (tl instanceof ISidedRotation) {
+				dir = 2;
+			}
+
 			GL11.glTranslatef(0.5F, 1.5F, 0.5F);
 			// This line actually rotates the renderer.
-			//if (rotateModel)
+			// if (rotateModel)
 			GL11.glRotatef((dir * -90F), 0F, 1F, 0F);
 			GL11.glRotatef((-180F), 0F, 0F, 1F);
 			GL11.glScalef(1f, 1f, 1f);
 
+			if (tl instanceof ISidedRotation) {
+				ISidedRotation sidedRotation = (ISidedRotation) tl;
+
+				GL11.glTranslatef(0.0f, 1.0f, 0.0f);
+				
+				//rotate according to side
+				GL11.glRotatef(sidedRotation.getGLsideAngle(), sidedRotation.getGLsideX(), sidedRotation.getGLsideY(), sidedRotation.getGLsideZ());
+
+				//rotate according to rotation
+				GL11.glRotatef(sidedRotation.getGLrotationAngle(), sidedRotation.getGLrotationX(),sidedRotation.getGLrotationY(),sidedRotation.getGLrotationZ());
+				
+				GL11.glTranslatef(0.0f, -1.0f, 0.0f);
+				
+			}
+
 			func_110628_a(getTexture(tl, world, i, j, k, block, 0.0625f));
+
 		} else {
 			GL11.glPushMatrix();
 			GL11.glTranslatef(0.3F, 3.7F, 0.5F);

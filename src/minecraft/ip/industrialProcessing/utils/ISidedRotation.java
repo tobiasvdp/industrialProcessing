@@ -17,11 +17,15 @@ public interface ISidedRotation {
 	public float getGLrotationX();
 	public float getGLrotationY();
 	public float getGLrotationZ();
+	public float getGLrotationAngle();	
 	
 	public float getGLsideX();
 	public float getGLsideY();
 	public float getGLsideZ();
+	public float getGLsideAngle();
 	
 	public ForgeDirection getExternalForgeDirection(ForgeDirection side);
+
+	
 	
 }

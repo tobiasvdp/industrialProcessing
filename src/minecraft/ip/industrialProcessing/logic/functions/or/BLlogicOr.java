@@ -35,13 +35,11 @@ public class BLlogicOr extends BlockMachineRendered {
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
 		ISidedRotation te = (ISidedRotation) par1World.getBlockTileEntity(par2, par3, par4);
 
-		int metadata = par1World.getBlockMetadata(par2, par3, par4);
-		te.setOrientationSide(metadata);
-
+		te.setOrientationSide(par1World.getBlockMetadata(par2, par3, par4));
 		te.setOrientationRotation(par5EntityLivingBase.rotationYaw, par5EntityLivingBase.rotationPitch);
 
-		te.getExternalForgeDirection(ForgeDirection.WEST);
-
+		System.out.println(te.getGLrotationAngle() + " " + te.getGLrotationX()+" "+ te.getGLrotationY()+" "+ te.getGLrotationZ());
+		
 		super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLivingBase, par6ItemStack);
 	}
 	
