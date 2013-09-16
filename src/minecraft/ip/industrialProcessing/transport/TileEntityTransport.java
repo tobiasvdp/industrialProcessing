@@ -73,13 +73,13 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
 	}
 
 	private TransportConnectionState getNeighborState(ForgeDirection direction) {
-		TileEntity entity = getNeighbor(direction);
+		TileEntity entity = getConnectionNeighbor(direction);
 		if (entity == null)
 			return TransportConnectionState.NONE;
 		return getState(entity, direction);
 	}
 
-	protected TileEntity getNeighbor(ForgeDirection direction) {
+	protected TileEntity getConnectionNeighbor(ForgeDirection direction) {
 		return this.worldObj.getBlockTileEntity(this.xCoord + direction.offsetX, this.yCoord + direction.offsetY, this.zCoord + direction.offsetZ);
 	}
 

@@ -44,6 +44,13 @@ public class ItemTransfers {
 		return stack;
 	}
 
+	public static ItemStack transfer(ItemStack stack, IInventory inventory, ForgeDirection direction) {
+		if (inventory instanceof ISidedInventory) {
+			return transfer(stack, (ISidedInventory) inventory, direction);
+		}
+		return transfer(stack, inventory);
+	}
+
 	public static ItemStack transfer(ItemStack stack, IInventory inventory) {
 		for (int i = 0; i < inventory.getSizeInventory(); i++) {
 			stack = transfer(stack, inventory, i);
@@ -85,8 +92,9 @@ public class ItemTransfers {
 		return entityItem;
 	}
 
-	public static boolean canInsert(ItemStack stack, IInventory inventory) { 
-		if(inventory == null) return false;
+	public static boolean canInsert(ItemStack stack, IInventory inventory) {
+		if (inventory == null)
+			return false;
 		for (int i = 0; i < inventory.getSizeInventory(); i++) {
 			if (canInsert(stack, inventory, i))
 				return true;
@@ -95,10 +103,11 @@ public class ItemTransfers {
 	}
 
 	public static boolean canInsert(ItemStack stack, IInventory inventory, int slot) {
-		if(inventory == null) return false;
+		if (inventory == null)
+			return false;
 		if (inventory.isItemValidForSlot(slot, stack)) {
 			ItemStack inhabitingStack = inventory.getStackInSlot(slot);
-			if(inhabitingStack == null)
+			if (inhabitingStack == null)
 				return true;
 			if (!inhabitingStack.isStackable())
 				return false;
@@ -108,6 +117,13 @@ public class ItemTransfers {
 				return true;
 		}
 		return false;
+	}
+	public static boolean canInsert(ItemStack stack, IInventory inventory, ForgeDirection side) {
+		if(inventory instanceof ISidedInventory)
+		{
+			return canInsert(stack, (ISidedInventory)inventory, side);
+		}else
+			return canInsert(stack, inventory);
 	}
 
 	public static boolean canInsert(ItemStack stack, ISidedInventory inventory, ForgeDirection side) {

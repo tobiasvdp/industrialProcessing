@@ -8,4 +8,5 @@ public class MovingItemStack {
 	public LocalDirection source;
 	public LocalDirection destination;
 	public float progress;
+	public boolean routed;
 }
