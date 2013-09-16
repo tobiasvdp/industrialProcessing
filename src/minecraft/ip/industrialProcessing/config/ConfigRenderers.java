@@ -45,7 +45,14 @@ public class ConfigRenderers {
 	private int BLlogicSwitchBox;
 	private int BLlogicCable;
 	private int BLlogicAnd;
+	private int BLlogicOr;
 
+	public static int getBLlogicOr() {
+		return getInstance().BLlogicOr;
+	}
+	public static void setBLlogicOr(int value) {
+		getInstance().BLlogicOr = value;
+	}
 	public static int getBLlogicAnd() {
 		return getInstance().BLlogicAnd;
 	}

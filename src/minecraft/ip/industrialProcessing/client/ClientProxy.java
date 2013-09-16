@@ -23,6 +23,8 @@ import ip.industrialProcessing.client.render.RenderingMultiblock;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.logic.functions.and.MDlogicAnd;
 import ip.industrialProcessing.logic.functions.and.TElogicAnd;
+import ip.industrialProcessing.logic.functions.or.MDlogicOr;
+import ip.industrialProcessing.logic.functions.or.TElogicOr;
 import ip.industrialProcessing.logic.transport.wired.cable.MDlogicCable;
 import ip.industrialProcessing.logic.transport.wired.cable.TElogicCable;
 import ip.industrialProcessing.logic.transport.wired.switchbox.MDlogicSwitchBox;
@@ -137,6 +139,7 @@ public class ClientProxy extends CommonProxy {
 	private static final MDlogicSwitchBox MDlogicSwitchBox = new MDlogicSwitchBox();
 	private static final MDlogicCable MDlogicCable = new MDlogicCable();
 	private static final MDlogicAnd MDlogicAnd = new MDlogicAnd(); 
+	private static final MDlogicOr MDlogicOr = new MDlogicOr(); 
 	@Override
 	public void registerRenderers() {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFilter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockFilter, "ModelFilter", filter));
@@ -282,6 +285,10 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TElogicAnd.class, new RendererLogic(IndustrialProcessing.BLlogicAnd, "MDlogicAnd", MDlogicAnd));
 		ConfigRenderers.setBLlogicAnd(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLlogicAnd(), new TElogicAnd()));
+		
+		ClientRegistry.bindTileEntitySpecialRenderer(TElogicOr.class, new RendererLogic(IndustrialProcessing.BLlogicOr, "MDlogicAnd", MDlogicOr));
+		ConfigRenderers.setBLlogicOr(RenderingRegistry.getNextAvailableRenderId());
+		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLlogicOr(), new TElogicOr()));
 		
 		RenderingRegistry.registerEntityRenderingHandler(ENmultiblockFrame.class, new RendererLivingEntity(new MDmultiblockFramePanel(), 1.0F, "MDmultiblockFramePanel"));
 		RenderingRegistry.registerEntityRenderingHandler(ENmultiblockLiftDoor.class, new RendererLivingEntity(new MDmultiblockLiftDoor(), 1.0F, "ModelMultiblockLiftDoor"));

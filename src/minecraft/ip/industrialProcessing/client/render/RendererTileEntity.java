@@ -4,6 +4,7 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.logic.transport.ICommunication;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.IRotateableEntity;
+import ip.industrialProcessing.utils.ISidedRotation;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
@@ -60,30 +61,43 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 			tessellator.setColorOpaque_F(f, f, f);
 			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) l1, (float) l2);
 
-			int rotationAxis = 0;
-			int dir = world.getBlockMetadata(i, j, k); 			
-			
+			GL11.glPushMatrix();
+
+			int dir = world.getBlockMetadata(i, j, k);
 
 			if (tl instanceof IRotateableEntity) {
 				IRotateableEntity machine = (IRotateableEntity) tl;
 				ForgeDirection forward = machine.getForwardDirection();
 				dir = BlockMachine.getMetadataFromForward(forward);
-			}			
-			if(tl instanceof ICommunication){ // TODO: get rid of this?! just don't implement IRotateableEntity if you dont want rotation 
-				dir = 0; 
 			}
- 	
+			if (tl instanceof ISidedRotation) {
+				dir = 2;
+			}
 
-			 
-			GL11.glPushMatrix();
 			GL11.glTranslatef(0.5F, 1.5F, 0.5F);
 			// This line actually rotates the renderer.
-			//if (rotateModel)
+			// if (rotateModel)
 			GL11.glRotatef((dir * -90F), 0F, 1F, 0F);
 			GL11.glRotatef((-180F), 0F, 0F, 1F);
 			GL11.glScalef(1f, 1f, 1f);
 
+			if (tl instanceof ISidedRotation) {
+				ISidedRotation sidedRotation = (ISidedRotation) tl;
+
+				GL11.glTranslatef(0.0f, 1.0f, 0.0f);
+				
+				//rotate according to side
+				GL11.glRotatef(sidedRotation.getGLsideAngle(), sidedRotation.getGLsideX(), sidedRotation.getGLsideY(), sidedRotation.getGLsideZ());
+
+				//rotate according to rotation
+				GL11.glRotatef(sidedRotation.getGLrotationAngle(), sidedRotation.getGLrotationX(),sidedRotation.getGLrotationY(),sidedRotation.getGLrotationZ());
+				
+				GL11.glTranslatef(0.0f, -1.0f, 0.0f);
+				
+			}
+
 			func_110628_a(getTexture(tl, world, i, j, k, block, 0.0625f));
+
 		} else {
 			GL11.glPushMatrix();
 			GL11.glTranslatef(0.3F, 3.7F, 0.5F);

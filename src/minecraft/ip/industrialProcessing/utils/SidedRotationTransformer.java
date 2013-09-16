@@ -6,17 +6,11 @@ import net.minecraftforge.common.ForgeDirection;
 public class SidedRotationTransformer {
 	private static final int[][] ROTATION_MATRIX_Side = { { 1, 0, 3, 2, 5, 4, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 2, 3, 1, 0, 4, 5, 6 }, { 3, 2, 0, 1, 5, 4, 6 }, { 5, 4, 1, 0, 3, 2, 6 }, { 4, 5, 0, 1, 2, 3, 6 }, { 0, 1, 2, 3, 4, 5, 6 } };
 	private static final int[][] ROTATION_MATRIX_Rotation = { { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 5, 4, 6 }, { 0, 1, 2, 3, 3, 2, 6 }, { 0, 1, 2, 3, 2, 3, 6 }, { 0, 1, 2, 3, 4, 5, 6 } };
-	
-	private static final int[][][] ROTATION_MATRIX_RotationSided = { 
-		{{ 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 3, 2, 5, 4, 6 }, { 0, 1, 4, 5, 3, 2, 6 }, { 0, 1, 5, 4, 2, 3, 6 }, { 0, 1, 2, 3, 4, 5, 6 }},
-		{{ 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 1, 0, 2, 3, 5, 4, 6 }, { 1, 0, 3, 2, 4, 5, 6 }, { 1, 0, 4, 5, 2, 3, 6 }, { 1, 0, 5, 4, 3, 2, 6 }, { 0, 1, 2, 3, 4, 5, 6 }}, 
-		{{ 2, 3, 0, 1, 5, 4, 6 }, { 2, 3, 1, 0, 4, 5, 6 }, { 2, 3, 2, 3, 4, 5, 6 }, { 2, 3, 2, 3, 4, 5, 6 }, { 2, 3, 4, 5, 0, 1, 6 }, { 2, 3, 5, 4, 1, 0, 6 }, { 2, 3, 2, 3, 4, 5, 6 }}, 
-		{{ 3, 2, 0, 1, 4, 5, 6 }, { 3, 2, 1, 0, 5, 4, 6 }, { 3, 2, 2, 3, 4, 5, 6 }, { 3, 2, 2, 3, 4, 5, 6 }, { 3, 2, 5, 4, 1, 0, 6 }, { 3, 2, 4, 5, 0, 1, 6 }, { 3, 2, 2, 3, 4, 5, 6 }}, 
-		{{ 4, 5, 0, 1, 2, 3, 6 }, { 4, 5, 1, 0, 3, 2, 6 }, { 4, 5, 2, 3, 1, 0, 6 }, { 4, 5, 3, 2, 0, 1, 6 }, { 4, 5, 2, 3, 4, 5, 6 }, { 4, 5, 2, 3, 4, 5, 6 }, { 4, 5, 2, 3, 4, 5, 6 }}, 
-		{{ 5, 4, 0, 1, 3, 2, 6 }, { 5, 4, 1, 0, 2, 3, 6 }, { 5, 4, 3, 2, 0, 1, 6 }, { 5, 4, 3, 2, 1, 0, 6 }, { 5, 4, 2, 3, 4, 5, 6 }, { 5, 4, 2, 3, 4, 5, 6 }, { 5, 4, 2, 3, 4, 5, 6 }},
-		{{ 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }}, 
-		};
-	
+
+	private static final int[][][] ROTATION_MATRIX_RotationSided = { { { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 3, 2, 5, 4, 6 }, { 0, 1, 4, 5, 3, 2, 6 }, { 0, 1, 5, 4, 2, 3, 6 }, { 0, 1, 2, 3, 4, 5, 6 } }, { { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 1, 0, 2, 3, 5, 4, 6 }, { 1, 0, 3, 2, 4, 5, 6 }, { 1, 0, 4, 5, 2, 3, 6 }, { 1, 0, 5, 4, 3, 2, 6 }, { 0, 1, 2, 3, 4, 5, 6 } }, { { 2, 3, 0, 1, 5, 4, 6 }, { 2, 3, 1, 0, 4, 5, 6 }, { 2, 3, 2, 3, 4, 5, 6 }, { 2, 3, 2, 3, 4, 5, 6 }, { 2, 3, 4, 5, 0, 1, 6 }, { 2, 3, 5, 4, 1, 0, 6 }, { 2, 3, 2, 3, 4, 5, 6 } }, { { 3, 2, 0, 1, 4, 5, 6 }, { 3, 2, 1, 0, 5, 4, 6 }, { 3, 2, 2, 3, 4, 5, 6 }, { 3, 2, 2, 3, 4, 5, 6 }, { 3, 2, 4, 5, 1, 0, 6 }, { 3, 2, 5, 4, 0, 1, 6 }, { 3, 2, 2, 3, 4, 5, 6 } },
+			{ { 4, 5, 0, 1, 2, 3, 6 }, { 4, 5, 1, 0, 3, 2, 6 }, { 4, 5, 2, 3, 1, 0, 6 }, { 4, 5, 3, 2, 0, 1, 6 }, { 4, 5, 2, 3, 4, 5, 6 }, { 4, 5, 2, 3, 4, 5, 6 }, { 4, 5, 2, 3, 4, 5, 6 } }, { { 5, 4, 0, 1, 3, 2, 6 }, { 5, 4, 1, 0, 2, 3, 6 }, { 5, 4, 3, 2, 0, 1, 6 }, { 5, 4, 3, 2, 1, 0, 6 }, { 5, 4, 2, 3, 4, 5, 6 }, { 5, 4, 2, 3, 4, 5, 6 }, { 5, 4, 2, 3, 4, 5, 6 } }, { { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 0, 1, 2, 3, 4, 5, 6 } }, };
+
+	private static final float[][] GL_ROTATION_MATRIX = { { 0.0f, 0.0f, 0.0f, 180.0f, 270.0f, 90.0f }, { 0.0f, 0.0f, 0.0f, 180.0f, 90.0f, 270, 0f }, { 180.0f, 0.0f, 0.0f, 0.0f, 270.0f, 90.0f }, { 0.0f, 180.0f, 0.0f, 0.0f, 270.0f, 90.0f }, { 90.0f, 270.0f,0.0f,180.0f,0.0f,0.0f }, { 270.0f,90.0f,0.0f,180.0f,0.0f,0.0f }, { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f } };
 
 	public static ForgeDirection transformMetaToForgeDirection(int meta) {
 		switch (meta) {
@@ -38,30 +32,7 @@ public class SidedRotationTransformer {
 	}
 
 	public static ForgeDirection InternalToExternalDirection(ISidedRotation rot, ForgeDirection dir) {
-		/*
-		System.out.println(rot.getOrientationSide());
-		ForgeDirection side = ForgeDirection.getOrientation(ROTATION_MATRIX_Side[rot.getOrientationSide().ordinal()][dir.ordinal()]);
-		System.out.println(side);
-		switch (rot.getOrientationSide()) {
-		case DOWN:
-			break;
-		case EAST:
-			break;
-		case NORTH:
-			break;
-		case SOUTH:
-			break;
-		case UNKNOWN:
-			break;
-		case UP:
-			break;
-		case WEST:
-			break;
-		default:
-			break;
-		}*/
-		System.out.println(ForgeDirection.getOrientation(ROTATION_MATRIX_RotationSided[rot.getOrientationSide().ordinal()][rot.getOrientationRotation().ordinal()][dir.ordinal()]));
-		return ForgeDirection.UNKNOWN;
+		return ForgeDirection.getOrientation(ROTATION_MATRIX_RotationSided[rot.getOrientationSide().ordinal()][rot.getOrientationRotation().ordinal()][dir.ordinal()]);
 	}
 
 	public static ForgeDirection transformSideAndLookToForgeDirection(ForgeDirection side, float rotationYaw, float rotationPitch) {
@@ -114,6 +85,8 @@ public class SidedRotationTransformer {
 			return rotationYaw - 90;
 		case SOUTH:
 			return rotationYaw - 360;
+		default:
+			break;
 		}
 		return rotationYaw;
 	}
@@ -134,5 +107,62 @@ public class SidedRotationTransformer {
 			return ForgeDirection.EAST;
 		}
 		return ForgeDirection.UNKNOWN;
+	}
+
+	public static float getGLrotationX(ForgeDirection side, ForgeDirection rotation) {
+		return 0.0f;
+	}
+
+	public static float getGLrotationY(ForgeDirection side, ForgeDirection rotation) {
+		switch (side) {
+		case DOWN:
+		case UP:
+		case NORTH:
+		case SOUTH:
+		case WEST:
+		case EAST:
+			return 1.0f;
+		default:
+			return 0.0f;
+		}
+
+	}
+
+	public static float getGLrotationZ(ForgeDirection side, ForgeDirection rotation) {
+		return 0.0f;
+	}
+
+	public float getGLrotationAngle(ForgeDirection orientationSide, ForgeDirection rotation) {
+		return GL_ROTATION_MATRIX[orientationSide.ordinal()][rotation.ordinal()];
+	}
+
+	public static float getGLsideX(ForgeDirection side) {
+		if (side == ForgeDirection.NORTH)
+			return 1.0f;
+		if (side == ForgeDirection.SOUTH)
+			return -1.0f;
+		return 0.0f;
+	}
+
+	public static float getGLsideY(ForgeDirection side) {
+		return 0.0f;
+	}
+
+	public static float getGLsideZ(ForgeDirection side) {
+		if (side == ForgeDirection.UP)
+			return 1.0f;
+		if (side == ForgeDirection.WEST)
+			return 1.0f;
+		if (side == ForgeDirection.EAST)
+			return -1.0f;
+		return 0.0f;
+	}
+
+	public float getGLsideAngle(ForgeDirection orientationSide) {
+		if (orientationSide == ForgeDirection.DOWN)
+			return 0.0f;
+		if (orientationSide == ForgeDirection.UP)
+			return 180.0f;
+		return 90;
 	}
 }
