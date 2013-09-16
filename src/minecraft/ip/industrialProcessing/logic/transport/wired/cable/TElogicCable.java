@@ -4,6 +4,7 @@ import ip.industrialProcessing.PacketHandler;
 import ip.industrialProcessing.logic.transport.ICommunicationNode;
 import ip.industrialProcessing.logic.transport.ICommunicationTransport;
 import ip.industrialProcessing.logic.utils.UTBusType;
+import ip.industrialProcessing.logic.utils.UTsendDiscoveryPacket;
 import ip.industrialProcessing.machines.TileEntitySynced;
 
 import java.io.ByteArrayOutputStream;
@@ -22,6 +23,7 @@ public class TElogicCable extends TileEntitySynced implements ICommunicationTran
 	private boolean init = true;;
 	private boolean[] placedSide = new boolean[6];
 	private boolean multipleSides;
+	private ArrayList<UTsendDiscoveryPacket> sendDiscoveryBuffer = new ArrayList<UTsendDiscoveryPacket>();
 
 	public TElogicCable() {
 		for (int i = 0; i < 6; i++) {
@@ -57,17 +59,22 @@ public class TElogicCable extends TileEntitySynced implements ICommunicationTran
 	}
 
 	@Override
-	public void sendDiscoveryPacket(ForgeDirection receivingSide, ForgeDirection sendingSide, ArrayList<ICommunicationTransport> path, ICommunicationNode node, ForgeDirection side) {
-		TileEntity te = worldObj.getBlockTileEntity(xCoord + sendingSide.offsetX, yCoord + sendingSide.offsetY, zCoord + sendingSide.offsetZ);
-		if (te instanceof ICommunicationNode) {
-			ICommunicationNode com = (ICommunicationNode) te;
-			com.ReceiveDiscoveryPacket(sendingSide.getOpposite(), path, node, side);
+	public void sendDiscoveryPackets() {
+		for (UTsendDiscoveryPacket packet : sendDiscoveryBuffer) {
+			TileEntity te = worldObj.getBlockTileEntity(xCoord + packet.getSendingSide().offsetX, yCoord + packet.getSendingSide().offsetY, zCoord + packet.getSendingSide().offsetZ);
+			if (te instanceof ICommunicationNode) {
+				ICommunicationNode com = (ICommunicationNode) te;
+				System.out.println("Connecting to node");
+				com.ReceiveDiscoveryPacket(packet.getSendingSide().getOpposite(), packet.getPath(), packet.getNode(), packet.getSide());
+			}
+			if (te instanceof ICommunicationTransport) {
+				ICommunicationTransport com = (ICommunicationTransport) te;
+				if (com.getBusType() == getBusType())
+					System.out.println("Connecting to wire");
+					com.ReceiveDiscoveryPacket(packet.getSendingSide().getOpposite(), packet.getPath(), packet.getNode(), packet.getSide());
+			}
 		}
-		if (te instanceof ICommunicationTransport) {
-			ICommunicationTransport com = (ICommunicationTransport) te;
-			if (com.getBusType() == getBusType())
-				com.ReceiveDiscoveryPacket(sendingSide.getOpposite(), path, node, side);
-		}
+		sendDiscoveryBuffer.clear();
 	}
 
 	@Override
@@ -76,7 +83,7 @@ public class TElogicCable extends TileEntitySynced implements ICommunicationTran
 			path.add(this);
 			for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
 				if (dir != receivedSide) {
-					this.sendDiscoveryPacket(receivedSide, dir, path, node, side);
+					this.ScheduleSendDiscoveryPacket(receivedSide, dir, path, node, side);
 				}
 			}
 		}
@@ -93,8 +100,10 @@ public class TElogicCable extends TileEntitySynced implements ICommunicationTran
 
 	@Override
 	public void requestRecheck() {
+		System.out.println("recheck");
 		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-			this.sendDiscoveryPacket(null, dir, new ArrayList<ICommunicationTransport>(), null, null);
+			sendDiscoveryBuffer.add(new UTsendDiscoveryPacket(null, dir, new ArrayList<ICommunicationTransport>(), null, null));
+			this.sendDiscoveryPackets();
 		}
 	}
 
@@ -134,8 +143,8 @@ public class TElogicCable extends TileEntitySynced implements ICommunicationTran
 	@Override
 	public int getPlacedSidesSize() {
 		int count = 0;
-		for(int i = 0;i<6;i++){
-			if(placedSide[i])
+		for (int i = 0; i < 6; i++) {
+			if (placedSide[i])
 				count++;
 		}
 		return count;
@@ -148,10 +157,10 @@ public class TElogicCable extends TileEntitySynced implements ICommunicationTran
 
 	@Override
 	public void addToConnectedSides(int side, boolean transform) {
-		if (transform){
+		if (transform) {
 			placedSide[transformToForgeDirection(side)] = true;
 			sendSidesToServer(placedSide);
-		}else{
+		} else {
 			placedSide[side] = true;
 		}
 	}
@@ -175,7 +184,7 @@ public class TElogicCable extends TileEntitySynced implements ICommunicationTran
 			packet.channel = PacketHandler.IP_LOGIC_SYNCSIDE;
 			packet.data = bos.toByteArray();
 			packet.length = bos.size();
-			
+
 			PacketDispatcher.sendPacketToServer(packet);
 		}
 	}
@@ -188,6 +197,7 @@ public class TElogicCable extends TileEntitySynced implements ICommunicationTran
 	public void setMultipleSides(boolean b) {
 		multipleSides = b;
 	}
+
 	public boolean getMultipleSides() {
 		return multipleSides;
 	}
@@ -199,27 +209,35 @@ public class TElogicCable extends TileEntitySynced implements ICommunicationTran
 
 	@Override
 	public void removeConnectedSides(int side, boolean transform) {
-		if (transform){
+		if (transform) {
 			placedSide[transformToForgeDirection(side)] = false;
 			sendSidesToServer(placedSide);
-		}else{
+		} else {
 			placedSide[side] = false;
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		}
 	}
+
 	@Override
 	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
-		for(int i = 0;i<6;i++){
-			par1nbtTagCompound.setBoolean("Sides"+i, placedSide[i]); 
+		for (int i = 0; i < 6; i++) {
+			par1nbtTagCompound.setBoolean("Sides" + i, placedSide[i]);
 		}
 		super.writeToNBT(par1nbtTagCompound);
 	}
+
 	@Override
 	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
-		for(int i = 0;i<6;i++){
-			placedSide[i] = par1nbtTagCompound.getBoolean("Sides"+i);
+		for (int i = 0; i < 6; i++) {
+			placedSide[i] = par1nbtTagCompound.getBoolean("Sides" + i);
 		}
 		super.readFromNBT(par1nbtTagCompound);
+	}
+
+	@Override
+	public void ScheduleSendDiscoveryPacket(ForgeDirection receivingSide, ForgeDirection sendingSide, ArrayList<ICommunicationTransport> path, ICommunicationNode node, ForgeDirection side) {
+		sendDiscoveryBuffer.add(new UTsendDiscoveryPacket(receivingSide, sendingSide, path, node, side));
+		this.worldObj.scheduleBlockUpdateWithPriority(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord), 1, -1);
 	}
 
 }

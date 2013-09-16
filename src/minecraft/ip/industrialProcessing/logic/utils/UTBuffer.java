@@ -26,9 +26,7 @@ public class UTBuffer {
 	}
 
 	public void put(int index, Object value) {
-		System.out.println(index + " " + value.getClass());
 		buffer[index] = value;
-		System.out.println(buffer[index]);
 	}
 
 	public Object[] iterate() {
@@ -41,6 +39,10 @@ public class UTBuffer {
 	
 	public Object get(int i) {
 		return buffer[i];
+	}
+	
+	public int size(){
+		return buffer.length;
 	}
 
 }

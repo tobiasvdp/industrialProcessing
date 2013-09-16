@@ -1,6 +1,7 @@
 package ip.industrialProcessing.logic.transport.wired.switchbox;
 
 import java.util.List;
+import java.util.Random;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
@@ -102,8 +103,10 @@ public class BLlogicSwitchBox extends BlockMachineRendered {
 			if (com.getBusType(dir) == UTBusType.bundle)
 				com.send(dir, true, 5);
 			if (com.getBusType(dir) == UTBusType.cable){
-				System.out.println("sending boolean");
-				com.send(dir, true);
+				if ((Boolean) com.getBuffer(dir).get())
+					com.send(dir, false);
+				else
+					com.send(dir, true);
 			}
 		}
 		return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer, par6, par7, par8, par9);
@@ -113,6 +116,14 @@ public class BLlogicSwitchBox extends BlockMachineRendered {
 	public int getRenderType() {
 		return ConfigRenderers.getBLlogicSwitchBox();
 	}
+	
+	@Override
+	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
+		System.out.println("ticked " +par1World +  " " + par1World.getTotalWorldTime());
+		super.updateTick(par1World, par2, par3, par4, par5Random);
+	}
+	
+	
 
 
 

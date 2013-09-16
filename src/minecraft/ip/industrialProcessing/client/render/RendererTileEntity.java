@@ -70,6 +70,9 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 				ForgeDirection forward = machine.getForwardDirection();
 				dir = BlockMachine.getMetadataFromForward(forward);
 			}
+			if(tl instanceof ICommunication){
+				dir = 0;
+			}
 			if (tl instanceof ISidedRotation) {
 				dir = 2;
 			}
