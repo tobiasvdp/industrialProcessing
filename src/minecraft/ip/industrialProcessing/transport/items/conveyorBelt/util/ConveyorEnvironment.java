@@ -8,6 +8,8 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class ConveyorEnvironment {
 	public static TileEntity getNeighbor(TileEntity ent, ForgeDirection direction, SlopeState slope) {
+		if (slope == SlopeState.NONE)
+			slope = SlopeState.FLAT;
 		return getNeighbor(ent, direction.offsetX, direction.offsetY + (slope.ordinal() - 1), direction.offsetZ);
 	}
 
@@ -44,14 +46,20 @@ public class ConveyorEnvironment {
 		return isAir(ent, direction.offsetX, direction.offsetY + (slope.ordinal() - 1), direction.offsetZ);
 	}
 
-	public static boolean canConnect(TileEntityConveyorConnectionsBase a, TileEntityConveyorConnectionsBase b, ForgeDirection direction, SlopeState slope, ConnectionMode aMode) {
+	public static boolean canConnect(TileEntityConveyorConnectionsBase a, TileEntityConveyorConnectionsBase b, ForgeDirection direction, SlopeState aSlope, ConnectionMode aMode, boolean dubbleCheck) {
 
 		ForgeDirection bDirection = direction.getOpposite();
-		if(aMode == ConnectionMode.NONE) return false;
+		if (aMode == ConnectionMode.NONE)
+			return false;
 		ConnectionMode bMode = b.getConnectionMode(bDirection);
-		if(bMode == ConnectionMode.NONE) return false;
-		
-		if (slope == b.getSlope(bDirection)) {			
+		if (bMode == ConnectionMode.NONE)
+			return false;
+		SlopeState bSlope = b.getSlope(bDirection);
+
+		int aY = a.yCoord;
+		int bY = b.yCoord;
+
+		if (bY == (aY + aSlope.ordinal() - 1) && (!dubbleCheck || aY == (bY + bSlope.ordinal() - 1))) {
 			if (aMode.canConnect(bMode)) {
 				return true;
 			}
@@ -59,10 +67,10 @@ public class ConveyorEnvironment {
 		return false;
 	}
 
-	public static boolean canConnect(TileEntityConveyorConnectionsBase a, TileEntityConveyorConnectionsBase b, ForgeDirection direction) {
- 
+	public static boolean canConnect(TileEntityConveyorConnectionsBase a, TileEntityConveyorConnectionsBase b, ForgeDirection direction, boolean dubbleCheck) {
+
 		ConnectionMode aMode = a.getConnectionMode(direction);
 		SlopeState aSlope = a.getSlope(direction);
-		return canConnect(a, b, direction, aSlope, aMode);
+		return canConnect(a, b, direction, aSlope, aMode, dubbleCheck);
 	}
 }

@@ -6,26 +6,27 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class DataUtils {
 
-	public static <T> T getItem(ForgeDirection world, T[] data, T defaultValue, ForgeDirection forward) {
+	public static <T> T getItem(ForgeDirection world, T[] data, T defaultValue, ForgeDirection forward, int maxIndex) {
 		LocalDirection local = DirectionUtils.getLocalDirection(world, forward);
-		return getItem(local, data, defaultValue);
+		return getItem(local, data, defaultValue, maxIndex);
 	}
 
-	public static <T> T getItem(LocalDirection local, T[] data, T defaultValue) {
+	public static <T> T getItem(LocalDirection local, T[] data, T defaultValue, int maxIndex) {
 		int index = local.ordinal();
-		if (index > 3)
+		if (index > maxIndex)
 			return defaultValue;
 		return data[index];
-	}
+	} 
 
-	public static <T> void setItem(ForgeDirection world, T[] data, T value, ForgeDirection forward) {
+
+	public static <T> void setItem(ForgeDirection world, T[] data, T value, ForgeDirection forward, int maxIndex) {
 		LocalDirection local = DirectionUtils.getLocalDirection(world, forward);
-		setItem(local, data, value);
+		setItem(local, data, value, maxIndex);
 	}
 
-	public static <T> void setItem(LocalDirection local, T[] data, T value) {
+	public static <T> void setItem(LocalDirection local, T[] data, T value, int maxIndex) {
 		int index = local.ordinal();
-		if (index > 3)
+		if (index > maxIndex)
 			return;
 		data[index] = value;
 	}

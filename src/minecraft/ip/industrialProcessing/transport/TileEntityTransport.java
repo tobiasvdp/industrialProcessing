@@ -74,7 +74,7 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
 
 	private TransportConnectionState getNeighborState(ForgeDirection direction) {
 		TileEntity entity = getConnectionNeighbor(direction);
-		if (entity == null)
+		if (entity == null) 
 			return TransportConnectionState.NONE;
 		return getState(entity, direction);
 	}

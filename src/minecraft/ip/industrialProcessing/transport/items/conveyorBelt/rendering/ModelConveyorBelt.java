@@ -357,8 +357,8 @@ public class ModelConveyorBelt extends ModelConnected {
 
 				TileEntityConveyorBelt belt = (TileEntityConveyorBelt) tl;
 
-				SlopeState back = belt.getSlope(LocalDirection.BACK);
-				SlopeState front = belt.getSlope(LocalDirection.FRONT);
+				SlopeState back = belt.getSlope(LocalDirection.FRONT);
+				SlopeState front = belt.getSlope(LocalDirection.BACK);
 				CornerState cornerState = null;
 
 				ForgeDirection forward = BlockMachine.getForwardFromEntity(tl);

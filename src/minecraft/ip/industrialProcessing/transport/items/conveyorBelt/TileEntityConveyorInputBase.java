@@ -23,10 +23,10 @@ public abstract class TileEntityConveyorInputBase extends TileEntityConveyorInte
 		super.updateEntity();
 		if (ticks++ > updateCycle) {
 			ticks = 0;
-			extractFromInputs();
+			//extractFromInputs();
 		}
 	}
-
+	
 	@Override
 	protected TransportConnectionState handleInventoryState(TileEntity entity, ForgeDirection direction) {
 		ConnectionMode mode = getConnectionMode(direction);
@@ -61,24 +61,35 @@ public abstract class TileEntityConveyorInputBase extends TileEntityConveyorInte
 	}
 
 	@Override
-	protected LocalDirection findOutput(ItemStack stack) {
-
+	protected LocalDirection findOutput(ItemStack stack, LocalDirection source) {
 		for (int i = 0; i < 6; i++) {
 			ForgeDirection direction = ForgeDirection.getOrientation(i);
-			if (isOutput(direction)) {
-				TileEntity neighbor = ConveyorEnvironment.getNeighbor(this, direction);
-				if (neighbor instanceof IInventory){
-					if(ItemTransfers.canInsert(stack, (IInventory) neighbor, direction.getOpposite()))
-					return DirectionUtils.getLocalDirection(direction, this.forwardDirection);
-				}else
-					System.out.println("TileEntityConveyorInputBase.findOutput() where shall i go?");
+			LocalDirection local = DirectionUtils.getLocalDirection(direction, this.forwardDirection);
+			if (local != source) {
+				if (isOutput(direction)) {
+					TransportConnectionState state = this.states[direction.ordinal()];
+					if (state != TransportConnectionState.NONE && state != TransportConnectionState.INPUT) {
+						TileEntity neighbor = ConveyorEnvironment.getNeighbor(this, direction);
+						if (neighbor instanceof IInventory) {
+							if (ItemTransfers.canInsert(stack, (IInventory) neighbor, direction.getOpposite()))
+								return local;
+						} else
+							return local;
+					}
+				}
 			}
+		}
+		for (int i = 5; i > 0; i--) {
+			ForgeDirection direction = ForgeDirection.getOrientation(i);
+			LocalDirection local = DirectionUtils.getLocalDirection(direction, this.forwardDirection);
+			if (local != source && isOutput(direction)) 
+					return local; 			
 		}
 		return LocalDirection.UP;
 	}
 
 	public void extractFromInputs() {
-		for (int i = 0; i < 6; i++) {
+		for (int i = 5; i >= 0; i--) {
 			ForgeDirection direction = ForgeDirection.getOrientation(i);
 			TransportConnectionState state = this.states[i];
 			if (state == TransportConnectionState.INPUT || state == TransportConnectionState.DUAL) {

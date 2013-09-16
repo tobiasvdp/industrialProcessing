@@ -1,6 +1,7 @@
 package ip.industrialProcessing.transport.items.conveyorBelt;
 
 import java.util.List;
+import java.util.Random;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
@@ -96,6 +97,19 @@ public class BlockConveyorBelt extends BlockMachineRendered {
 		super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
 		TileEntityConveyorBelt conveyorBelt = (TileEntityConveyorBelt) par1World.getBlockTileEntity(par2, par3, par4);
 		conveyorBelt.searchForConnections();
+	}
+	
+	
+	@Override
+	public boolean canConnectRedstone(IBlockAccess world, int x, int y, int z, int side) { 
+		return true;
+	}
+	
+	@Override
+	public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
+		TileEntityConveyorBelt cb = (TileEntityConveyorBelt) world.getBlockTileEntity(x, y, z);
+		cb.breakBlock();
+		super.breakBlock(world, x, y, z, par5, par6);
 	}
 	
 	@Override

@@ -1,5 +1,6 @@
 package ip.industrialProcessing.transport.items.conveyorBelt;
 
+import ic2.api.Direction;
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.transport.TransportConnectionState;
@@ -137,14 +138,11 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
 	protected abstract ItemStack outputToTileEntity(MovingItemStack stack, TileEntity neighbor, ForgeDirection direction);
 
 	protected void rerouteStack(MovingItemStack stack) {
-		ConnectionMode connection = getConnectionMode(stack.destination);
-		if (!isOutput(stack.destination)) {
-			stack.destination = findOutput(stack.stack);
-		}
+		stack.destination = findOutput(stack.stack, stack.source);
 		stack.routed = true;
 	}
 
-	protected LocalDirection findOutput(ItemStack stack) {
+	protected LocalDirection findOutput(ItemStack stack, LocalDirection source) {
 		for (int i = 0; i < 6; i++) {
 			ForgeDirection direction = ForgeDirection.getOrientation(i);
 			if (isOutput(direction))
@@ -154,23 +152,18 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
 	}
 
 	private boolean isOutput(LocalDirection local) {
-		ConnectionMode mode = this.getConnectionMode(local);
 
-		if (mode == ConnectionMode.OUTPUT || mode == ConnectionMode.DUAL) {
-			ForgeDirection direction = DirectionUtils.getWorldDirection(local, this.forwardDirection);
-			TransportConnectionState state = this.states[direction.ordinal()];
-			if (state != TransportConnectionState.NONE)
-				return true;
-		}
-		return false;
+		ForgeDirection direction = DirectionUtils.getWorldDirection(local, this.forwardDirection);
+		return isOutput(direction);
 	}
 
 	protected boolean isOutput(ForgeDirection direction) {
 		ConnectionMode mode = this.getConnectionMode(direction);
 		if (mode == ConnectionMode.OUTPUT || mode == ConnectionMode.DUAL) {
-			TransportConnectionState state = this.states[direction.ordinal()];
-			if (state != TransportConnectionState.NONE)
-				return true;
+			// TransportConnectionState state =
+			// this.states[direction.ordinal()];
+			// if (state != TransportConnectionState.NONE)
+			return true;
 		}
 		return false;
 	}
@@ -221,4 +214,11 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
 		}
 	}
 
+
+	public void breakBlock() {
+		for (int i = this.itemStacks.size()-1; i >=0; i--) {
+			outputToAir(this.itemStacks.get(i), ForgeDirection.UP);
+			this.itemStacks.remove(i);
+		}
+	}
 }
