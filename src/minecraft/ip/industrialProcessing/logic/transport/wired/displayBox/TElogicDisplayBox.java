@@ -9,6 +9,7 @@ import ip.industrialProcessing.logic.transport.ICommunicationTransport;
 import ip.industrialProcessing.logic.utils.UTBuffer;
 import ip.industrialProcessing.logic.utils.UTBusType;
 import ip.industrialProcessing.logic.utils.UTlogicNodeContainer;
+import ip.industrialProcessing.logic.utils.UTsendDiscoveryPacket;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
@@ -19,6 +20,7 @@ public class TElogicDisplayBox extends TileEntity implements ICommunicationNode,
 	private UTBuffer[] buffer = new UTBuffer[6];
 	public String name;
 	private boolean[] placedSide = new boolean[6];
+	private ArrayList<UTsendDiscoveryPacket> sendDiscoveryBuffer = new ArrayList<UTsendDiscoveryPacket>();
 
 	public TElogicDisplayBox() {
 		for (int i = 0; i < 6; i++) {
@@ -40,7 +42,7 @@ public class TElogicDisplayBox extends TileEntity implements ICommunicationNode,
 			path.add(this);
 			for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
 				if (dir != receivedSide) {
-					this.sendDiscoveryPacket(receivedSide, dir, path, node, side);
+					this.ScheduleSendDiscoveryPacket(receivedSide, dir, path, node, side);
 				}
 			}
 		}
@@ -62,22 +64,20 @@ public class TElogicDisplayBox extends TileEntity implements ICommunicationNode,
 	}
 
 	@Override
-	public void sendDiscoveryPacket(ForgeDirection receivingSide, ForgeDirection sendingSide, ArrayList<ICommunicationTransport> path, ICommunicationNode node, ForgeDirection side) {
-		TileEntity te = worldObj.getBlockTileEntity(xCoord + sendingSide.offsetX, yCoord + sendingSide.offsetY, zCoord + sendingSide.offsetZ);
-		if (te instanceof ICommunicationTransport) {
-			ICommunicationTransport com = (ICommunicationTransport) te;
-			if (com.getBusType() == getBusType())
-				com.ReceiveDiscoveryPacket(sendingSide.getOpposite(), path, node, side);
-			if (receivingSide != null)
-				buffer[sendingSide.ordinal()] = buffer[receivingSide.ordinal()];
-
-		} else if (te instanceof ICommunicationNode) {
-			ICommunicationNode com = (ICommunicationNode) te;
-			com.ReceiveDiscoveryPacket(sendingSide.getOpposite(), path, node, side);
-			if (receivingSide != null)
-				buffer[sendingSide.ordinal()] = buffer[receivingSide.ordinal()];
+	public void sendDiscoveryPackets() {
+		for (UTsendDiscoveryPacket packet : sendDiscoveryBuffer) {
+			TileEntity te = worldObj.getBlockTileEntity(xCoord + packet.getSendingSide().offsetX, yCoord + packet.getSendingSide().offsetY, zCoord + packet.getSendingSide().offsetZ);
+			if (te instanceof ICommunicationNode) {
+				ICommunicationNode com = (ICommunicationNode) te;
+				com.ReceiveDiscoveryPacket(packet.getSendingSide().getOpposite(), packet.getPath(), packet.getNode(), packet.getSide());
+			}
+			if (te instanceof ICommunicationTransport) {
+				ICommunicationTransport com = (ICommunicationTransport) te;
+				if (com.getBusType() == getBusType())
+					com.ReceiveDiscoveryPacket(packet.getSendingSide().getOpposite(), packet.getPath(), packet.getNode(), packet.getSide());
+			}
 		}
-
+		sendDiscoveryBuffer.clear();
 	}
 
 	@Override
@@ -92,7 +92,8 @@ public class TElogicDisplayBox extends TileEntity implements ICommunicationNode,
 	@Override
 	public void requestRecheck() {
 		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-			this.sendDiscoveryPacket(null, dir, new ArrayList<ICommunicationTransport>(), null, null);
+			sendDiscoveryBuffer.add(new UTsendDiscoveryPacket(null, dir, new ArrayList<ICommunicationTransport>(), null, null));
+			this.sendDiscoveryPackets();
 		}
 	}
 
@@ -269,5 +270,28 @@ public class TElogicDisplayBox extends TileEntity implements ICommunicationNode,
 	public UTBuffer getBuffer(ForgeDirection dir) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public void ScheduleSendDiscoveryPacket(ForgeDirection receivingSide, ForgeDirection sendingSide, ArrayList<ICommunicationTransport> path, ICommunicationNode node, ForgeDirection side) {
+		sendDiscoveryBuffer.add(new UTsendDiscoveryPacket(receivingSide, sendingSide, path, node, side));
+		this.worldObj.scheduleBlockUpdateWithPriority(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord), 1, -1);
+	}
+
+	@Override
+	public boolean scheduleSend(ForgeDirection side, boolean value) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean scheduleSend(ForgeDirection side, boolean value, int index) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void scheduleSendDiscoveryPacket(ForgeDirection sendingSide) {
+		// TODO Auto-generated method stub
+		
 	}
 }

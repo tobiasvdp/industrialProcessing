@@ -98,8 +98,13 @@ public class TElogicOr extends TElogicNode implements ISidedRotation {
 
 	@Override
 	protected void transition() {
-		// TODO Auto-generated method stub
-		
+		System.out.println(getBuffer(SIDEDTRANSFORMER.InternalToExternalDirection(this, ForgeDirection.EAST)).get());
+		System.out.println(getBuffer(SIDEDTRANSFORMER.InternalToExternalDirection(this, ForgeDirection.WEST)).get());
+		if((Boolean) getBuffer(SIDEDTRANSFORMER.InternalToExternalDirection(this, ForgeDirection.EAST)).get()||(Boolean) getBuffer(SIDEDTRANSFORMER.InternalToExternalDirection(this, ForgeDirection.WEST)).get())
+			send(SIDEDTRANSFORMER.InternalToExternalDirection(this, ForgeDirection.NORTH), true);
+		else
+			send(SIDEDTRANSFORMER.InternalToExternalDirection(this, ForgeDirection.NORTH), false);
+		System.out.println(getBuffer(SIDEDTRANSFORMER.InternalToExternalDirection(this, ForgeDirection.NORTH)).get());
 	}
 
 }

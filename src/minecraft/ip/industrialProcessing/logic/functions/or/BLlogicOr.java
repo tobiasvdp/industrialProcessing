@@ -37,12 +37,14 @@ public class BLlogicOr extends BlockMachineRendered {
 
 		te.setOrientationSide(par1World.getBlockMetadata(par2, par3, par4));
 		te.setOrientationRotation(par5EntityLivingBase.rotationYaw, par5EntityLivingBase.rotationPitch);
-
-		System.out.println(te.getGLrotationAngle() + " " + te.getGLrotationX()+" "+ te.getGLrotationY()+" "+ te.getGLrotationZ());
 		
+		if (par5EntityLivingBase.isSneaking()) {
+			te.setOrientationRotation(te.getOrientationRotation().getOpposite());
+		}
+
 		super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLivingBase, par6ItemStack);
 	}
-	
+
 	@Override
 	public int getRenderType() {
 		return ConfigRenderers.getBLlogicOr();

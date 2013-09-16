@@ -1,6 +1,7 @@
 package ip.industrialProcessing.logic.transport.wired.cable;
 
 import java.util.List;
+import java.util.Random;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
@@ -181,5 +182,13 @@ public class BLlogicCable extends BlockMachineRendered {
 		if (par1World.getBlockId(par2 + dir.offsetX, par3 + dir.offsetY, par4 + dir.offsetZ) == 0)
 			return false;
 		return true;
+	}
+	
+	@Override
+	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
+		ICommunicationTransport te = (ICommunicationTransport) par1World.getBlockTileEntity(par2, par3, par4);
+		System.out.println("sending packets " + par1World + " " + par2 +" " + par3+" " + par4);
+		te.sendDiscoveryPackets();
+		super.updateTick(par1World, par2, par3, par4, par5Random);
 	}
 }
