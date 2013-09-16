@@ -101,7 +101,7 @@ public class BlockConveyorBelt extends BlockMachineRendered {
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess par1iBlockAccess, int par2, int par3, int par4) {
 		TileEntityConveyorBelt cb = (TileEntityConveyorBelt) par1iBlockAccess.getBlockTileEntity(par2, par3, par4);
-		cb.setBounds();
+		//cb.setBounds();
 //		super.setBlockBoundsBasedOnState(par1iBlockAccess, par2, par3, par4);
 	}
 
