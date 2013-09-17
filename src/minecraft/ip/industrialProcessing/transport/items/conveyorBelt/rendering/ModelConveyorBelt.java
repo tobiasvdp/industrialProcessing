@@ -351,6 +351,8 @@ public class ModelConveyorBelt extends ModelConnected {
 	@Override
 	public void renderModelConnected(TileEntity tl, float f5, ConnectionState north, ConnectionState west, ConnectionState south, ConnectionState east, ConnectionState up, ConnectionState down) {
 
+		GL11.glPushMatrix();
+		GL11.glTranslatef(0, -0.5f, 0);
 		if (tl != null) {
 
 			if (tl instanceof TileEntityConveyorBelt) {
@@ -428,6 +430,7 @@ public class ModelConveyorBelt extends ModelConnected {
 				}
 			}
 		}
+		GL11.glPopMatrix();
 	}
 
 	private void drawSpline(TileEntity tl, SlopeState frontSlope, SlopeState backSlope, ConnectionState frontState, ConnectionState backState, float f) {

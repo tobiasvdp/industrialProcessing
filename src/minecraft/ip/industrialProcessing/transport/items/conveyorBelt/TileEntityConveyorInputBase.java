@@ -23,7 +23,7 @@ public abstract class TileEntityConveyorInputBase extends TileEntityConveyorInte
 		super.updateEntity();
 		if (ticks++ > updateCycle) {
 			ticks = 0;
-			//extractFromInputs();
+			extractFromInputs();
 		}
 	}
 	
@@ -68,7 +68,7 @@ public abstract class TileEntityConveyorInputBase extends TileEntityConveyorInte
 			if (local != source) {
 				if (isOutput(direction)) {
 					TransportConnectionState state = this.states[direction.ordinal()];
-					if (state != TransportConnectionState.NONE && state != TransportConnectionState.INPUT) {
+					if (state.isOutput()) {
 						TileEntity neighbor = ConveyorEnvironment.getNeighbor(this, direction);
 						if (neighbor instanceof IInventory) {
 							if (ItemTransfers.canInsert(stack, (IInventory) neighbor, direction.getOpposite()))

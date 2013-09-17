@@ -48,6 +48,8 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
 		for (int i = 0; i < this.states.length; i++) {
 			ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[i];
 			TransportConnectionState newState = getNeighborState(direction);
+			if (newState == TransportConnectionState.NONE)
+				newState = getSupportState(direction);
 			TransportConnectionState currentState = this.states[i];
 			if (newState != currentState) {
 				this.states[i] = newState;
@@ -59,6 +61,13 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
 			updateNetwork();
 		System.out.println("States at " + xCoord + ", " + yCoord + ", " + zCoord + " are  UP:" + this.states[ForgeDirection.UP.ordinal()] + " DOWN:" + this.states[ForgeDirection.DOWN.ordinal()]);
 		this.unverified = false;
+	}
+
+	private TransportConnectionState getSupportState(ForgeDirection direction) {
+		if (this.worldObj.isBlockFullCube(this.xCoord + direction.offsetX, this.yCoord + direction.offsetY, this.zCoord + direction.offsetZ)) {
+			return TransportConnectionState.SUPPORTED;
+		}
+		return TransportConnectionState.NONE;
 	}
 
 	protected void beginConnectionUpdate() {
@@ -74,7 +83,7 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
 
 	private TransportConnectionState getNeighborState(ForgeDirection direction) {
 		TileEntity entity = getConnectionNeighbor(direction);
-		if (entity == null) 
+		if (entity == null)
 			return TransportConnectionState.NONE;
 		return getState(entity, direction);
 	}

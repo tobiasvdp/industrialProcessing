@@ -1,5 +1,7 @@
 package ip.industrialProcessing.transport.items.conveyorBelt;
 
+import ip.industrialProcessing.transport.TransportConnectionState;
+
 import java.util.List;
 
 import net.minecraft.entity.EntityLivingBase;
@@ -10,53 +12,144 @@ import net.minecraftforge.common.ForgeDirection;
 
 public abstract class TileEntityConveyorInteractionBase extends TileEntityConveyorTransportBase {
 
-	public void addCollisionBoxes(List par6List, AxisAlignedBB par5AxisAlignedBB) {
+	public void setBounds() {
+		float xMin = -4 / 16f;
+		float yMin = -8 / 16f;
+		float zMin = -4 / 16f;
+		float xMax = 4 / 16f;
+		float yMax = -7 / 16f;
+		float zMax = 4 / 16f;
+
+		for (int i = 2; i < 6; i++) {
+			ForgeDirection direction = ForgeDirection.getOrientation(i);
+			TransportConnectionState state = this.states[i];
+			if (state.isConnected()) {
+				float dx = direction.offsetX / 2f;
+				float dz = direction.offsetZ / 2f;
+
+				SlopeState slope = getSlope(direction);
+
+				float dy = -0.5f + (slope == SlopeState.NONE ? 0 : (slope.ordinal() - 1) / 2f);
+
+				xMin = Math.min(xMin, dx);
+				yMin = Math.min(yMin, dy);
+				zMin = Math.min(zMin, dz);
+
+				xMax = Math.max(xMax, dx);
+				yMax = Math.max(yMax, dy);
+				zMax = Math.max(zMax, dz);
+
+			}
+		}
+		this.getBlockType().setBlockBounds(xMin + 0.5f, yMin + 1f, zMin + 0.5f, xMax + 0.5f, yMax + 1f, zMax + 0.5f);
 
 	}
 
-	public void moveEntity(EntityLivingBase par5Entity) {
-		double dx = this.xCoord - par5Entity.posX;
-		double dy = this.yCoord - par5Entity.posY;
-		double dz = this.zCoord - par5Entity.posZ;
-
-		double bestMatch = 0;
-		ForgeDirection bestQuadrant = ForgeDirection.UNKNOWN;
+	public void addCollisionBoxes(List par6List, AxisAlignedBB par5AxisAlignedBB) {
+		addCollisionBox(par6List, par5AxisAlignedBB, 0.5 - 4 / 16d, 0.5 - 8 / 16d, 1 - 4 / 16d, 0.5 + 4 / 16d, 1 - 7 / 16d, 0.5 + 4 / 16d);
 		for (int i = 2; i < 6; i++) {
 			ForgeDirection direction = ForgeDirection.getOrientation(i);
-			double match = (direction.offsetX * dx) + (direction.offsetZ * dz);
-			if (match > bestMatch) {
-				bestQuadrant = direction;
-				bestMatch = match;
+			TransportConnectionState state = this.states[i];
+			if (state.isConnected()) {
+				SlopeState slope = getSlope(direction);
+				double a = 4 / 16f;
+				double b = 8 / 16f;
+
+				double c = 0.5f;
+
+				double d = 7 / 16f;
+
+				ForgeDirection angular = direction.getRotation(ForgeDirection.UP);
+
+				double x1 = angular.offsetX * a + direction.offsetX * a;
+				double x2 = angular.offsetX * b + direction.offsetX * a;
+
+				double z1 = angular.offsetZ * a + direction.offsetZ * a;
+				double z2 = angular.offsetZ * b + direction.offsetZ * a;
+
+				double xMin = c + Math.min(x1, x2);
+				double xMax = c + Math.max(x1, x2);
+				double zMin = c + Math.min(z1, z2);
+				double zMax = c + Math.max(z1, z2);
+
+				double oY = slope == SlopeState.NONE ? 0 : 0.5f * (slope.ordinal() - 1);
+				double yMin = c - b + Math.min(0, oY);
+				double yMax = c - d + Math.max(0, oY);
+				addCollisionBox(par6List, par5AxisAlignedBB, xMin, yMin + 0.5f, zMin, xMax, yMax + 0.5f, zMax);
 			}
 		}
-		if (bestQuadrant != ForgeDirection.UNKNOWN) {
+	}
 
-			ConnectionMode mode = getConnectionMode(bestQuadrant);
+	private void addCollisionBox(List par6List, AxisAlignedBB par5AxisAlignedBB, double xMin, double yMin, double zMin, double xMax, double yMax, double zMax) {
+		AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(xCoord + xMin, yCoord + yMin, zCoord + zMin, xCoord + xMax, yCoord + yMax, zCoord + zMax);
+		if (bb.intersectsWith(par5AxisAlignedBB)) {
+			par6List.add(bb);
+		}
+	}
 
-			double tx = 0;
-			double tz;
-			if (mode == ConnectionMode.OUTPUT) {
-				tx = 0.5 + bestQuadrant.offsetX;
-				tz = 0.5 + bestQuadrant.offsetZ;
-			} else if (mode == ConnectionMode.INPUT) {
-				tx = 0.5;
-				tz = 0.5;
-			} else
-				return;
+	public void moveEntity(EntityLivingBase par5Entity) {
+		if (false) {
+			double dx = par5Entity.posX - this.xCoord - 0.5f;
+			double dy = par5Entity.posY - this.yCoord - 1.0f + par5Entity.height;
+			double dz = par5Entity.posZ - this.zCoord - 0.5f;
 
-			double vx = (tx - dx);
-			double vz = (tz - dz);
+			ForgeDirection output = ForgeDirection.UP;
+			for (int i = 2; i < 6; i++) {
+				ForgeDirection direction = ForgeDirection.getOrientation(i);
+				if (isOutput(direction)) {
+					output = direction;
+					break;
+				}
+			}
 
-			double len = Math.sqrt(vx * vx + vz * vz);
+			SlopeState slope = getSlope(output);
+			if (slope == SlopeState.NONE)
+				slope = SlopeState.FLAT;
 
-			vx /= len * this.speed;
-			vz /= len * this.speed;
+			double tx = output.offsetX;
+			double ty = output.offsetY + slope.ordinal() - 1;
+			double tz = output.offsetZ;
+
+			double vx = (tx - dx) / 3;
+			double vy = (ty - dy) / 3;
+			double vz = (tz - dz) / 3;
 
 			double dvx = vx - par5Entity.motionX;
+			double dvy = vy - par5Entity.motionZ;
 			double dvz = vz - par5Entity.motionZ;
 
-			par5Entity.addVelocity(dvx, 0, dvz);
-
+			par5Entity.addVelocity(dvx / 4, dvy, dvz / 4);
 		}
+		/*
+		 * System.out.println("TileEntityConveyorInteractionBase.moveEntity()" +
+		 * dx + "," + dy + "," + dz); double bestMatch = 0; ForgeDirection
+		 * bestQuadrant = ForgeDirection.UNKNOWN; for (int i = 2; i < 6; i++) {
+		 * ForgeDirection direction = ForgeDirection.getOrientation(i); double
+		 * match = (direction.offsetX * dx) + (direction.offsetZ * dz); if
+		 * (match > bestMatch) { bestQuadrant = direction; bestMatch = match; }
+		 * }
+		 * 
+		 * if (bestQuadrant != ForgeDirection.UNKNOWN) {
+		 * 
+		 * ConnectionMode mode = getConnectionMode(bestQuadrant);
+		 * 
+		 * double tx = 0; double tz; if (mode == ConnectionMode.OUTPUT) { tx =
+		 * bestQuadrant.offsetX; tz = bestQuadrant.offsetZ; } else if (mode ==
+		 * ConnectionMode.INPUT) { tx = 0; tz = 0; } else return;
+		 * 
+		 * System.out.println("dir: " + bestQuadrant); double vx = (tx - dx);
+		 * double vz = (tz - dz);
+		 * 
+		 * double len = Math.sqrt(vx * vx + vz * vz);
+		 * 
+		 * vx /= len * this.speed; vz /= len * this.speed;
+		 * 
+		 * double dvx = vx - par5Entity.motionX; double dvz = vz -
+		 * par5Entity.motionZ;
+		 * 
+		 * par5Entity.addVelocity(dvx / 5, 0, dvz / 5);
+		 * 
+		 * }
+		 */
 	}
 }
