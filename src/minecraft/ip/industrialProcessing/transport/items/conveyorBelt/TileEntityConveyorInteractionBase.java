@@ -41,12 +41,16 @@ public abstract class TileEntityConveyorInteractionBase extends TileEntityConvey
 
 			}
 		}
-		this.getBlockType().setBlockBounds(xMin + 0.5f, yMin + 1f, zMin + 0.5f, xMax + 0.5f, yMax + 1f, zMax + 0.5f);
-
+		
+		//this.getBlockType().setBlockBounds(xMin + 0.5f, yMin + 1f, zMin + 0.5f, xMax + 0.5f, yMax + 1f, zMax + 0.5f);
+		this.getBlockType().setBlockBounds(0,0,0,1,1,1);
 	}
 
 	public void addCollisionBoxes(List par6List, AxisAlignedBB par5AxisAlignedBB) {
-		addCollisionBox(par6List, par5AxisAlignedBB, 0.5 - 4 / 16d, 0.5 - 8 / 16d, 1 - 4 / 16d, 0.5 + 4 / 16d, 1 - 7 / 16d, 0.5 + 4 / 16d);
+		
+		double r = 4/16d;
+		
+		addCollisionBox(par6List, par5AxisAlignedBB, 0.5 - r, 1 - 8 / 16d, 0.5 - r, 0.5 + r, 1 - 7 / 16d, 0.5 + r);
 		for (int i = 2; i < 6; i++) {
 			ForgeDirection direction = ForgeDirection.getOrientation(i);
 			TransportConnectionState state = this.states[i];
@@ -60,7 +64,7 @@ public abstract class TileEntityConveyorInteractionBase extends TileEntityConvey
 				double d = 7 / 16f;
 
 				ForgeDirection angular = direction.getRotation(ForgeDirection.UP);
-
+ 
 				double x1 = angular.offsetX * a + direction.offsetX * a;
 				double x2 = angular.offsetX * b + direction.offsetX * a;
 

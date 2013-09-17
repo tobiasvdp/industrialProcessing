@@ -3,6 +3,7 @@ package ip.industrialProcessing.transport.items.conveyorBelt;
 import java.util.List;
 import java.util.Random;
 
+import ic2.api.item.Items;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
@@ -14,6 +15,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -83,13 +86,17 @@ public class BlockConveyorBelt extends BlockMachineRendered {
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
-
-		if (!player.isSneaking()) {
+ 
+		ItemStack tool = new ItemStack(Item.stick, 1); 
+		ItemStack playerItem = player.inventory.getCurrentItem();
+		
+		if (playerItem != null && tool.isItemEqual(playerItem)) {
 			TileEntityConveyorBelt conveyorBelt = (TileEntityConveyorBelt) world.getBlockTileEntity(x, y, z);
 			conveyorBelt.toggleSlope();
-			return true;
+			return false;
 		}
-		return super.onBlockActivated(world, x, y, z, player, metadata, what, these, are);
+		return false;
+		//return super.onBlockActivated(world, x, y, z, player, metadata, what, these, are);
 	}
 
 	@Override

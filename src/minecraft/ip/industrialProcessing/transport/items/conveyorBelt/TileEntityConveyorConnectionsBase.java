@@ -100,11 +100,14 @@ public abstract class TileEntityConveyorConnectionsBase extends TileEntityTransp
 			int front = totalOrdinal % 3;
 			int back = totalOrdinal / 3;
 
-			allOk = setSlope(values[front], LocalDirection.FRONT) && setSlope(values[back], LocalDirection.BACK);
+			allOk = (back != front || back == SlopeState.FLAT.ordinal()) && setSlope(values[front], LocalDirection.FRONT) && setSlope(values[back], LocalDirection.BACK);
 		} while (!allOk);
 
-		this.searchForConnections();
-
+		int blockId = this.worldObj.getBlockId(xCoord, yCoord + 1, zCoord);
+		this.worldObj.notifyBlockChange(xCoord, yCoord + 1, zCoord, blockId);
+		this.worldObj.notifyBlockChange(xCoord, yCoord, zCoord, this.getBlockType().blockID);
+		blockId = this.worldObj.getBlockId(xCoord, yCoord - 1, zCoord);
+		this.worldObj.notifyBlockChange(xCoord, yCoord - 1, zCoord, blockId);
 	}
 
 	@Override
