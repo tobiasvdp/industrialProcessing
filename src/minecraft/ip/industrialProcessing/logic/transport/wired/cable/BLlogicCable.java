@@ -123,10 +123,10 @@ public class BLlogicCable extends BlockMachineRendered {
 			return true;
 		if (te instanceof TElogicCable) {
 			TElogicCable com = (TElogicCable) te;
-			if (!com.sidePresent(par5)) {
+			/*if (!com.sidePresent(par5)) {
 				com.addToConnectedSides(par5, true);
 				com.setMultipleSides(true);
-			}
+			}*/
 		}
 		return false;
 	}
@@ -153,24 +153,24 @@ public class BLlogicCable extends BlockMachineRendered {
 					side = 1;
 				else if (side == 1)
 					side = 0;
-				if (com.getPlacedSide(side)) {
+				/*if (com.getPlacedSide(side)) {
 					if (!canSideStay(dir, par1World, par2, par3, par4)) {
 						destroy = true;
-						com.removeConnectedSides(side, false);
+						//com.removeConnectedSides(side, false);
 						count++;
 					}
-				}
+				}*/
 			}
 			if (destroy) {
 				for (int i = 0; i < count; i++) {
 					this.dropBlockAsItem(par1World, par2, par3, par4, 0, 1);
 				}
-				System.out.println(com.getPlacedSidesSize());
+				/*System.out.println(com.getPlacedSidesSize());
 				if (com.getPlacedSidesSize() == 0) {
 					par1World.destroyBlock(par2, par3, par4, false);
 				}else if(com.getPlacedSidesSize() == 1){
 					com.setMultipleSides(false);
-				}
+				}*/
 			}
 
 		}
@@ -188,7 +188,7 @@ public class BLlogicCable extends BlockMachineRendered {
 	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
 		ICommunicationTransport te = (ICommunicationTransport) par1World.getBlockTileEntity(par2, par3, par4);
 		System.out.println("sending packets " + par1World + " " + par2 +" " + par3+" " + par4);
-		te.sendDiscoveryPackets();
+		//te.sendDiscoveryPackets();
 		super.updateTick(par1World, par2, par3, par4, par5Random);
 	}
 }
