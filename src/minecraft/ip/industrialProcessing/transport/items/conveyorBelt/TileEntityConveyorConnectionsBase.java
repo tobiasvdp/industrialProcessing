@@ -46,7 +46,7 @@ public abstract class TileEntityConveyorConnectionsBase extends TileEntityTransp
 		setConnectionMode(LocalDirection.DOWN, ConnectionMode.DUAL);
 	}
 
-	private void setSlopeMode(LocalDirection local, Boolean value) {
+	public void setSlopeMode(LocalDirection local, Boolean value) {
 		DataUtils.setItem(local, this.canSlope, value, 3);
 	}
 

@@ -21,8 +21,10 @@ import net.minecraftforge.common.ForgeDirection;
 public abstract class TileEntityConveyorTransportBase extends TileEntityConveyorConnectionsBase {
 
 	private Random rnd = new Random();
-	private ArrayList<MovingItemStack> itemStacks = new ArrayList<MovingItemStack>();
+	protected ArrayList<MovingItemStack> itemStacks = new ArrayList<MovingItemStack>();
 	protected float speed = 1f;
+	private int clusterTicks = 0;
+	private int maxClusterTicks = 10;
 
 	private boolean[] canReverse = new boolean[6];
 
@@ -49,6 +51,11 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
 			if (!this.itemStacks.isEmpty()) {
 				float DT = 1 / 20f;
 
+				if (clusterTicks++ < maxClusterTicks) {
+					clusterItems();
+					clusterTicks = 0;
+				}
+
 				for (int i = this.itemStacks.size() - 1; i >= 0; i--) {
 					MovingItemStack stack = this.itemStacks.get(i);
 					stack.progress += speed * DT;
@@ -66,30 +73,67 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
 		notifyBlockChange();
 	}
 
+	public void clusterItems() {
+
+		for (int i = this.itemStacks.size() - 1; i >= 0; i--) {
+			MovingItemStack stackA = this.itemStacks.get(i);
+			if (stackA.stack == null) {
+				this.itemStacks.remove(i);
+				continue;
+			}
+			if (stackA.stack.isStackable()) {
+				int available = stackA.stack.getMaxStackSize() - stackA.stack.stackSize;
+				if (available > 0) {
+					for (int j = this.itemStacks.size() - 1; j > i; j--) {
+						MovingItemStack stackB = this.itemStacks.get(j);
+						if (stackB.stack == null) {
+							this.itemStacks.remove(j);
+							continue;
+						}
+						if (stackA.stack.isItemEqual(stackB.stack)) {
+							available = Math.min(available, stackB.stack.stackSize);
+							stackA.stack.stackSize += available;
+							stackB.stack.stackSize -= available;
+							if (stackB.stack.stackSize <= 0)
+								this.itemStacks.remove(j);
+						}
+					}
+				}
+			}
+		}
+	}
+
 	private boolean outputStack(MovingItemStack stack) {
 		LocalDirection outputLocal = stack.destination;
+
 		if (isOutput(outputLocal)) {
 			ForgeDirection direction = DirectionUtils.getWorldDirection(outputLocal, this.forwardDirection);
-			SlopeState slope = getSlope(outputLocal);
-			TileEntity neighbor = ConveyorEnvironment.getNeighbor(this, direction, slope);
-			if (neighbor instanceof TileEntityConveyorTransportBase) {
-				return outputToConveyor(stack, (TileEntityConveyorTransportBase) neighbor, direction.getOpposite());
-			} else {
-				ItemStack rest = outputToTileEntity(stack, neighbor, direction);
-				if (rest != null && rest.stackSize > 0) {
-					if (canReverse[outputLocal.ordinal()]) {
-						stack.stack = rest;
-						// return to routing
-						stack.source = stack.destination;
-						stack.progress = 0;
-						stack.routed = false;
-						return false;
-					} else {
-						outputToAir(stack, direction);
+			TransportConnectionState state = this.states[direction.ordinal()];
+			if (state.isConnected()) {
+				SlopeState slope = getSlope(outputLocal);
+				TileEntity neighbor = ConveyorEnvironment.getNeighbor(this, direction, slope);
+				if (neighbor instanceof TileEntityConveyorTransportBase) {
+					return outputToConveyor(stack, (TileEntityConveyorTransportBase) neighbor, direction.getOpposite());
+				} else {
+					ItemStack rest = outputToTileEntity(stack, neighbor, direction);
+					if (rest != null && rest.stackSize > 0) {
+						if (canReverse[outputLocal.ordinal()]) {
+							stack.stack = rest;
+							// return to routing
+							stack.source = stack.destination;
+							stack.progress = 0;
+							stack.routed = false;
+							return false;
+						} else {
+							outputToAir(stack, direction);
+							return true;
+						}
+					} else
 						return true;
-					}
-				} else
-					return true;
+				}
+			} else {
+				outputToAir(stack, direction);
+				return true;
 			}
 		}
 		return false;
@@ -145,10 +189,12 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
 	protected LocalDirection findOutput(ItemStack stack, LocalDirection source) {
 		for (int i = 0; i < 6; i++) {
 			ForgeDirection direction = ForgeDirection.getOrientation(i);
-			if (isOutput(direction))
+
+			ConnectionMode mode = this.getConnectionMode(direction);
+			if (mode.isOutput(true))
 				return DirectionUtils.getLocalDirection(direction, this.forwardDirection);
 		}
-		return LocalDirection.UP;
+		return LocalDirection.BACK;
 	}
 
 	private boolean isOutput(LocalDirection local) {
@@ -214,9 +260,8 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
 		}
 	}
 
-
 	public void breakBlock() {
-		for (int i = this.itemStacks.size()-1; i >=0; i--) {
+		for (int i = this.itemStacks.size() - 1; i >= 0; i--) {
 			outputToAir(this.itemStacks.get(i), ForgeDirection.UP);
 			this.itemStacks.remove(i);
 		}

@@ -10,4 +10,9 @@ public enum ConnectionMode {
 		}
 		return false;
 	}
+	
+	public boolean isOutput(boolean strict)
+	{
+		return strict ? this == OUTPUT: this == OUTPUT || this == DUAL;
+	}
 }

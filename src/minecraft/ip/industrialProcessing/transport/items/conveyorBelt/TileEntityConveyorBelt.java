@@ -27,18 +27,16 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TileEntityConveyorBelt extends TileEntityConveyorInputBase {
+public class TileEntityConveyorBelt extends TileEntityConveyorInteractionBase {
 
 	public TileEntityConveyorBelt()
 	{
 		setConnectionMode(LocalDirection.BACK, ConnectionMode.OUTPUT);
 	}
-	
+
 	@Override
 	protected ItemStack outputToTileEntity(MovingItemStack stack, TileEntity neighbor, ForgeDirection direction) {
-		if (neighbor instanceof IInventory) {
-			return ItemTransfers.transfer(stack.stack, (IInventory) neighbor, direction.getOpposite());
-		}
+		// can't output to tile entities!
 		return stack.stack;
 	}
 }

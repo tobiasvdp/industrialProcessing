@@ -1,10 +1,14 @@
 package ip.industrialProcessing.transport.items.conveyorBelt;
 
 import ip.industrialProcessing.transport.TransportConnectionState;
+import ip.industrialProcessing.utils.ItemTransfers;
 
+import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -41,15 +45,16 @@ public abstract class TileEntityConveyorInteractionBase extends TileEntityConvey
 
 			}
 		}
-		
-		//this.getBlockType().setBlockBounds(xMin + 0.5f, yMin + 1f, zMin + 0.5f, xMax + 0.5f, yMax + 1f, zMax + 0.5f);
-		this.getBlockType().setBlockBounds(0,0,0,1,1,1);
+
+		// this.getBlockType().setBlockBounds(xMin + 0.5f, yMin + 1f, zMin +
+		// 0.5f, xMax + 0.5f, yMax + 1f, zMax + 0.5f);
+		this.getBlockType().setBlockBounds(0, 0, 0, 1, 1, 1);
 	}
 
 	public void addCollisionBoxes(List par6List, AxisAlignedBB par5AxisAlignedBB) {
-		
-		double r = 4/16d;
-		
+
+		double r = 4 / 16d;
+
 		addCollisionBox(par6List, par5AxisAlignedBB, 0.5 - r, 1 - 8 / 16d, 0.5 - r, 0.5 + r, 1 - 7 / 16d, 0.5 + r);
 		for (int i = 2; i < 6; i++) {
 			ForgeDirection direction = ForgeDirection.getOrientation(i);
@@ -64,7 +69,7 @@ public abstract class TileEntityConveyorInteractionBase extends TileEntityConvey
 				double d = 7 / 16f;
 
 				ForgeDirection angular = direction.getRotation(ForgeDirection.UP);
- 
+
 				double x1 = angular.offsetX * a + direction.offsetX * a;
 				double x2 = angular.offsetX * b + direction.offsetX * a;
 
@@ -92,38 +97,50 @@ public abstract class TileEntityConveyorInteractionBase extends TileEntityConvey
 	}
 
 	public void moveEntity(EntityLivingBase par5Entity) {
-		if (false) {
-			double dx = par5Entity.posX - this.xCoord - 0.5f;
-			double dy = par5Entity.posY - this.yCoord - 1.0f + par5Entity.height;
-			double dz = par5Entity.posZ - this.zCoord - 0.5f;
 
-			ForgeDirection output = ForgeDirection.UP;
-			for (int i = 2; i < 6; i++) {
-				ForgeDirection direction = ForgeDirection.getOrientation(i);
-				if (isOutput(direction)) {
-					output = direction;
-					break;
-				}
+		
+		if (par5Entity instanceof EntityPlayerMP) {
+			EntityPlayer player = (EntityPlayer) par5Entity;
+			for (int i = this.itemStacks.size() - 1; i >= 0; i--) {
+				MovingItemStack stack = this.itemStacks.get(i);
+				ItemStack rest = ItemTransfers.transfer(stack.stack, player.inventory);
+				if (rest != null && rest.stackSize > 0) {
+					stack.stack = rest;
+				} else
+					this.itemStacks.remove(i);
 			}
-
-			SlopeState slope = getSlope(output);
-			if (slope == SlopeState.NONE)
-				slope = SlopeState.FLAT;
-
-			double tx = output.offsetX;
-			double ty = output.offsetY + slope.ordinal() - 1;
-			double tz = output.offsetZ;
-
-			double vx = (tx - dx) / 3;
-			double vy = (ty - dy) / 3;
-			double vz = (tz - dz) / 3;
-
-			double dvx = vx - par5Entity.motionX;
-			double dvy = vy - par5Entity.motionZ;
-			double dvz = vz - par5Entity.motionZ;
-
-			par5Entity.addVelocity(dvx / 4, dvy, dvz / 4);
 		}
+
+		double dx = par5Entity.posX - this.xCoord - 0.5f;
+		double dy = par5Entity.posY - this.yCoord - 1.0f + par5Entity.height;
+		double dz = par5Entity.posZ - this.zCoord - 0.5f;
+
+		ForgeDirection output = ForgeDirection.UP;
+		for (int i = 2; i < 6; i++) {
+			ForgeDirection direction = ForgeDirection.getOrientation(i);
+			if (isOutput(direction)) {
+				output = direction;
+				break;
+			}
+		}
+
+		SlopeState slope = getSlope(output);
+		if (slope == SlopeState.NONE)
+			slope = SlopeState.FLAT;
+
+		double tx = output.offsetX;
+		double ty = output.offsetY + slope.ordinal() - 1;
+		double tz = output.offsetZ;
+
+		double vx = (tx - dx) / 3;
+		double vy = (ty - dy) / 3;
+		double vz = (tz - dz) / 3;
+
+		double dvx = vx - par5Entity.motionX;
+		double dvy = vy - par5Entity.motionZ;
+		double dvz = vz - par5Entity.motionZ;
+
+		par5Entity.addVelocity(dvx / 6, dvy / 4, dvz / 6);
 		/*
 		 * System.out.println("TileEntityConveyorInteractionBase.moveEntity()" +
 		 * dx + "," + dy + "," + dz); double bestMatch = 0; ForgeDirection

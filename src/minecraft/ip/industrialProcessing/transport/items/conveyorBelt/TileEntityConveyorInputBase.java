@@ -100,6 +100,15 @@ public abstract class TileEntityConveyorInputBase extends TileEntityConveyorInte
 		}
 	}
 
+	
+	@Override
+	protected ItemStack outputToTileEntity(MovingItemStack stack, TileEntity neighbor, ForgeDirection direction) {
+		if (neighbor instanceof IInventory) {
+			return ItemTransfers.transfer(stack.stack, (IInventory) neighbor, direction.getOpposite());
+		}
+		return stack.stack;
+	}
+	
 	private ItemStack pullFromSide(ForgeDirection direction) {
 
 		TileEntity neighbor = ConveyorEnvironment.getNeighbor(this, direction);

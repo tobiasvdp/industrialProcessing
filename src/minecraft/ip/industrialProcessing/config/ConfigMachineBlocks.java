@@ -52,7 +52,7 @@ import ip.industrialProcessing.transport.fluids.TileEntityTank;
 import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids;
 import ip.industrialProcessing.transport.fluids.TileEntityValve;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorBelt;
-import ip.industrialProcessing.transport.items.conveyorInput.TEtransportConveyorBeltInput;
+import ip.industrialProcessing.transport.items.conveyorInput.TileEntityConveyorInput;
 import ip.industrialProcessing.transport.items.conveyorOutput.TEtransportConveyorBeltOutput;
 import net.minecraft.block.Block;
 import net.minecraft.src.ModLoader;
@@ -134,7 +134,7 @@ public class ConfigMachineBlocks {
 		registerMachineBlock(IndustrialProcessing.BLlogicOr, "IP.Logic.Or", "Or gate", TElogicOr.class);
 		
 		registerMachineBlock(IndustrialProcessing.BLtransportConveyorBelt, "IP.Trans.CBelt", "Conveyor belt", TileEntityConveyorBelt.class);
-		registerMachineBlock(IndustrialProcessing.BLtransportConveyorBeltInput, "IP.Trans.CBInput", "Conveyor belt import", TEtransportConveyorBeltInput.class);
+		registerMachineBlock(IndustrialProcessing.BLtransportConveyorBeltInput, "IP.Trans.CBInput", "Conveyor belt import", TileEntityConveyorInput.class);
 		registerMachineBlock(IndustrialProcessing.BLtransportConveyorBeltOutput, "IP.Trans.CBOutput", "Conveyor belt export", TEtransportConveyorBeltOutput.class);
 
 		// multiblocks
@@ -233,7 +233,7 @@ public class ConfigMachineBlocks {
 		return getInstance().BLtransportConveyorBeltOutput;
 	}
 
-	public static int getBLtransportConveyorBelt() {
+	public static int getBlockTransportConveyorBelt() {
 		return getInstance().BLtransportConveyorBelt;
 	}
 

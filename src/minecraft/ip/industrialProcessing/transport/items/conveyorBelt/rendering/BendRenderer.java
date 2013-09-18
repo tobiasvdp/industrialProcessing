@@ -54,7 +54,7 @@ public class BendRenderer extends ShapeRenderer {
 		
 		for (int i = 0; i < segments; i++) {
 
-			float y = 23;
+			float y = 23-8F;
 
 			float endAngle = startAngle + segmentAngle;
 			float vEnd = vStart + vLen;
@@ -267,7 +267,7 @@ public class BendRenderer extends ShapeRenderer {
 		vMin = 0 / 32f;
 		vMax = 1 / 32f;
 
-		float y = 23;
+		float y = 23-8F;
 
 		tessellator.startDrawingQuads();
 		tessellator.setNormal(0, 0, 1);

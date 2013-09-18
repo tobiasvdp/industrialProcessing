@@ -94,6 +94,7 @@ import ip.industrialProcessing.transport.fluids.TileEntityTank;
 import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids;
 import ip.industrialProcessing.transport.fluids.TileEntityValve;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorBelt;
+import ip.industrialProcessing.transport.items.conveyorBelt.rendering.ModelConveyorBase;
 import ip.industrialProcessing.transport.items.conveyorBelt.rendering.ModelConveyorBelt;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -135,7 +136,7 @@ public class ClientProxy extends CommonProxy {
 	private static final MDmultiblockWheelConnector MDmulitblockWheelConnector = new MDmultiblockWheelConnector();
 	private static final MDmultiblockWheelConnector MDmultiblockWheelConnector = new MDmultiblockWheelConnector();
 	private static final MDmultiblockDisplayPanel MDmultiblockDisplayPanel = new MDmultiblockDisplayPanel(); 
-	private static final ModelConveyorBelt conveyorBelt = new ModelConveyorBelt();  
+	private static final ModelConnected conveyorBelt = new ModelConveyorBelt();  
 	private static final MDlogicSwitchBox MDlogicSwitchBox = new MDlogicSwitchBox();
 	private static final MDlogicCable MDlogicCable = new MDlogicCable();
 	private static final MDlogicAnd MDlogicAnd = new MDlogicAnd(); 

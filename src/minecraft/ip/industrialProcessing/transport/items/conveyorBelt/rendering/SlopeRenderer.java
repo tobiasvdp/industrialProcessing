@@ -113,7 +113,7 @@ public class SlopeRenderer extends ShapeRenderer {
 		lastPos = IPMath.bezier(start, mid, end, backCap);
 
 		capZstart = lastPos.x;
-		capYstart = lastPos.y;
+		capYstart = lastPos.y-8F;
 
 		capNormalStartZ = lastNormalZ = IPMath.lerp(endNormalZ, startNormalZ, backCap);
 		capNormalStartY = lastNormalY = IPMath.lerp(endNormalY, startNormalY, backCap);
@@ -125,7 +125,7 @@ public class SlopeRenderer extends ShapeRenderer {
 		capNormalEndZ = IPMath.lerp(endNormalZ, startNormalZ, frontCap);
 		capNormalEndY = IPMath.lerp(endNormalY, startNormalY, frontCap);
 		capZend = cap.x;
-		capYend = cap.y;
+		capYend = cap.y-8F;
 
 		// maxSegments = maxSegments - startSegment +1;
 		for (int i = startSegment; i <= maxSegments; i++) {
@@ -165,10 +165,10 @@ public class SlopeRenderer extends ShapeRenderer {
 			float dy = normalZ * normalZ / normalY + normalY;
 			float lastDy = lastNormalZ * lastNormalZ / lastNormalY + lastNormalY;
 
-			float y1 = lastPos.y - 0.5f - lastDy;
-			float y2 = lastPos.y - 0.5f + lastDy;
-			float y3 = pos.y - 0.5f - dy;
-			float y4 = pos.y - 0.5f + dy;
+			float y1 = lastPos.y - 0.5f - lastDy - 8F;
+			float y2 = lastPos.y - 0.5f + lastDy - 8F;
+			float y3 = pos.y - 0.5f - dy - 8F;
+			float y4 = pos.y - 0.5f + dy - 8F;
 
 			tessellator.startDrawingQuads();
 			tessellator.setNormal(0, -1, 0);
