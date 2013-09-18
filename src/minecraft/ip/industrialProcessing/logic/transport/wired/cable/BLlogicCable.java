@@ -45,14 +45,14 @@ public class BLlogicCable extends BlockMachineRendered {
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
 		ICommunicationTransport com = (ICommunicationTransport) par1World.getBlockTileEntity(par2, par3, par4);
 		com.isEnabled(true);
-		com.requestRecheck();
+		com.createRecheckPacket();
 	}
 
 	@Override
 	public boolean removeBlockByPlayer(World world, EntityPlayer player, int x, int y, int z) {
 		ICommunicationTransport com = (ICommunicationTransport) world.getBlockTileEntity(x, y, z);
 		com.isEnabled(false);
-		com.requestRecheck();
+		com.createRecheckPacket();
 		super.removeBlockByPlayer(world, player, x, y, z);
 		return true;
 	}
@@ -96,12 +96,12 @@ public class BLlogicCable extends BlockMachineRendered {
 		} else {
 			if (te instanceof TElogicCable) {
 				TElogicCable com = (TElogicCable) te;
-				if (com.getMultipleSides()) {
+				/*if (com.getMultipleSides()) {
 					setBlockBounds(0, 0, 0, 1.0f, 1.0f, 1.0f);
 				} else {
 					int meta = (par1IBlockAccess.getBlockMetadata(par2, par3, par4));
 					setBoundsByMetadata(meta, 0.0f, 0.0f, 0.0f, 1f, 0.1f, 1f);
-				}
+				}*/
 			}
 		}
 	}
@@ -186,9 +186,8 @@ public class BLlogicCable extends BlockMachineRendered {
 	
 	@Override
 	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
-		ICommunicationTransport te = (ICommunicationTransport) par1World.getBlockTileEntity(par2, par3, par4);
-		System.out.println("sending packets " + par1World + " " + par2 +" " + par3+" " + par4);
-		//te.sendDiscoveryPackets();
+		ICommunication te = (ICommunication) par1World.getBlockTileEntity(par2, par3, par4);
+		te.Send();
 		super.updateTick(par1World, par2, par3, par4, par5Random);
 	}
 }

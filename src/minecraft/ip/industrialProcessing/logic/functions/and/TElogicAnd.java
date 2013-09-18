@@ -4,6 +4,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.logic.transport.TElogicNode;
 import ip.industrialProcessing.logic.utils.UTBusType;
+import ip.industrialProcessing.logic.utils.UTpacket;
 import ip.industrialProcessing.machines.IRotateableEntity;
 
 public class TElogicAnd extends TElogicNode implements IRotateableEntity {
@@ -15,16 +16,10 @@ public class TElogicAnd extends TElogicNode implements IRotateableEntity {
 	}
 
 	@Override
-	public ForgeDirection[] setConnectableSides() {
-		return new ForgeDirection[] { ForgeDirection.EAST, ForgeDirection.WEST, ForgeDirection.NORTH };
-	}
-
-	@Override
-	protected void transition() {
+	public void transition() {
 			boolean right = (Boolean) getBuffer(ForgeDirection.EAST).get();
 			boolean left = (Boolean) getBuffer(ForgeDirection.WEST).get();
 			boolean front = left && right;
-			send(ForgeDirection.NORTH, front);
 			System.out.println(left + " " + right + " gives " + front);
 	}
 
@@ -50,5 +45,23 @@ public class TElogicAnd extends TElogicNode implements IRotateableEntity {
 		// TODO Auto-generated method stub
 		super.readFromNBT(par1nbtTagCompound);
 		this.forwardDirection = ForgeDirection.VALID_DIRECTIONS[par1nbtTagCompound.getByte("ForwardDirection")];
+	}
+
+	@Override
+	public ForgeDirection[] setConnectableInputSides() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ForgeDirection[] setConnectableOutputSides() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void ExtendedReceive(UTpacket packet) {
+		// TODO Auto-generated method stub
+		
 	}
 }

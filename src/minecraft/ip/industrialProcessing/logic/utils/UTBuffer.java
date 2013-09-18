@@ -2,31 +2,23 @@ package ip.industrialProcessing.logic.utils;
 
 public class UTBuffer {
 
-	Object[] buffer;
-	UTBusType type;
+	UTVariable[] buffer;
+	UTBufferType type;
 	
-	public UTBuffer(UTBusType type) {
-		this.type = type;
-		if(type == UTBusType.bundle){
-			buffer = new Object[16];
-			for(int i = 0;i<15;i++){
-				buffer[i] = new Boolean(false);
-			}
+	public UTBuffer(UTBufferType type, int size) {
+		buffer = new UTVariable[size];
+		for(int i = 0;i<size;i++){
+			buffer[i] = new UTVariable(-1);
 		}
-		if(type == UTBusType.cable){
-			buffer = new Object[1];
-			buffer[0] = new Boolean(false);
-		}
-		if(type == UTBusType.bus){
-			buffer = new Object[32];
-			for(int i = 0;i<31;i++){
-				buffer[i] = new Integer(0);
-			}
-		}	
 	}
 
 	public void put(int index, Object value) {
-		buffer[index] = value;
+		buffer[index].value = value;
+	}
+	
+	public void put(int index, int ID, Object value) {
+		buffer[index].value = value;
+		buffer[index].ID = ID;
 	}
 
 	public Object[] iterate() {
@@ -44,5 +36,4 @@ public class UTBuffer {
 	public int size(){
 		return buffer.length;
 	}
-
 }

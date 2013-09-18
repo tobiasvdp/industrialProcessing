@@ -13,6 +13,7 @@ public interface ICommunicationNode extends ICommunication{
 	public UTlogicNodeContainer getConnectionsOnSide(ForgeDirection side);
 	public void registerNode(ForgeDirection side, ICommunicationNode node, ForgeDirection originSide);
 	public void removeNode(ICommunicationNode node);
+	public void removeNode(ICommunicationNode node, ForgeDirection dir);
 
 	public UTBuffer getBuffer(ForgeDirection dir);
 	
@@ -22,8 +23,10 @@ public interface ICommunicationNode extends ICommunication{
 	public ForgeDirection[] getConnectableOutputSides();
 	
 	public void createDiscoveryPacket();
+	public void createDiscoveryPacket(ForgeDirection dir);
 	public void createDestructionPacket();
 	public void createDataPacket();
+	public void createDataPacket(ForgeDirection dir, Object... data);
 	
 	public void transition();
 }

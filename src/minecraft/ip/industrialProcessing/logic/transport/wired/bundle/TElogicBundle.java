@@ -66,21 +66,9 @@ public class TElogicBundle extends TileEntity implements ICommunicationTransport
 	}
 
 	@Override
-	public void requestRecheck() {
+	public void createRecheckPacket() {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public void setMultipleSides(boolean b) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean getMultipleSides() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 }

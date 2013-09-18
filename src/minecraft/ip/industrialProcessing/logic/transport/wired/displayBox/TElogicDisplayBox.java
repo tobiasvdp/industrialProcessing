@@ -35,24 +35,6 @@ public class TElogicDisplayBox extends TElogicNode implements ICommunicationNode
 	}
 
 	@Override
-	public void requestRecheck() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setMultipleSides(boolean b) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean getMultipleSides() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public ForgeDirection[] setConnectableInputSides() {
 		// TODO Auto-generated method stub
 		return null;
@@ -72,6 +54,12 @@ public class TElogicDisplayBox extends TElogicNode implements ICommunicationNode
 
 	@Override
 	public void ExtendedReceive(UTpacket packet) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void createRecheckPacket() {
 		// TODO Auto-generated method stub
 		
 	}

@@ -30,7 +30,7 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 		conectableOutputSides = setConnectableInputSides();
 		for (int i = 0; i < 6; i++) {
 			nodeCollection[i] = new UTlogicNodeContainer();
-			buffer[i] = new UTBuffer(UTBusType.bus);
+			buffer[i] = new UTBuffer(UTBufferType.Bit, 1);
 		}
 	}
 	
@@ -58,10 +58,6 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 	public ForgeDirection[] getConnectableOutputSides(){
 		return conectableOutputSides;
 	}
-
-	/*
-	 * start of rotation implementation
-	 */
 	
 	@Override
 	public void setOrientationSide(ForgeDirection side) {
@@ -144,6 +140,13 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 			this.registerNode(((ForgeDirection)packet.getData(0)), (ICommunicationNode) packet.getData(2), ((ForgeDirection)packet.getData(3)));
 			((ICommunicationNode) packet.getData(2)).registerNode(((ForgeDirection)packet.getData(3)), this, (ForgeDirection) (packet.getData(0)));
 		}
+		if(packet.getType() == UTpacketType.recheck){
+			nodeCollection[((ForgeDirection)packet.getData(0)).ordinal()].clear();
+			createDiscoveryPacket();
+		}
+		if(packet.getType() == UTpacketType.destroy){
+			this.removeNode((ICommunicationNode) packet.getData(2));
+		}
 		ExtendedReceive(packet);
 	}
 
@@ -158,18 +161,34 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 	@Override
 	public void Send() {
 		for(UTpacket packet:packets){
+			if(packet.getType() == UTpacketType.destroy){
+				ForgeDirection sendingSide = (ForgeDirection) packet.getData(0);
+				for(int i =0;i<nodeCollection[sendingSide.ordinal()].getSize();i++){
+					ICommunicationNode com = nodeCollection[sendingSide.ordinal()].getNode(i);
+					packet.setData(0, nodeCollection[sendingSide.ordinal()].getSide(i));		
+					com.Receive(packet);
+				}
+			}
 			if(packet.getType() == UTpacketType.discovery){
 				ForgeDirection sendingSide = (ForgeDirection) packet.getData(0);
 				nodeCollection[sendingSide.ordinal()].clear();
 				TileEntity te = worldObj.getBlockTileEntity(xCoord + sendingSide.offsetX, yCoord + sendingSide.offsetY, zCoord + sendingSide.offsetZ);
 				if (te instanceof ICommunication) {
+					System.out.println("Sent packet to "+te.xCoord + " " + te.yCoord + " " + te.zCoord);
 					ICommunication com = (ICommunication) te;
-					buffer[sendingSide.ordinal()] = new UTBuffer(com.getBusType());
+					initiateBuffer(buffer[sendingSide.ordinal()], getBusType(sendingSide));
 					com.Receive(packet);
+					
 				}
 			}
 		}
 		packets.clear();
+	}
+
+	private void initiateBuffer(UTBuffer utBuffer, UTBusType busType) {
+		if(busType == UTBusType.cable){
+			utBuffer = new UTBuffer(UTBufferType.Bit, 1);
+		}
 	}
 
 	@Override
@@ -197,7 +216,7 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 			System.out.println("Registered node");
 			this.nodeCollection[side.ordinal()].add(node);
 			this.nodeCollection[side.ordinal()].addSide(originSide);
-			this.buffer[side.ordinal()] = new UTBuffer(getBusType(side));
+			initiateBuffer(this.buffer[side.ordinal()],getBusType(side));
 		}
 	}
 
@@ -208,21 +227,41 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 			sideContainer.remove(node);
 		}
 	}
+	
+	@Override
+	public void removeNode(ICommunicationNode node, ForgeDirection dir) {
+		System.out.println("Unregistered node ");
+		nodeCollection[dir.ordinal()].remove(node);
+	}
 
 	@Override
 	public UTBuffer getBuffer(ForgeDirection dir) {
 		return buffer[dir.ordinal()];
 	}
-	
+	@Override
 	public void createDiscoveryPacket(){
 		for(ForgeDirection sendingSide: ForgeDirection.VALID_DIRECTIONS)
 			packets.add(new UTpacket(UTpacketType.discovery, sendingSide.getOpposite(), new ArrayList<ICommunicationTransport>(), this, sendingSide));
 		this.scheduleSend();
 	}
-	public void createDestructionPacket(){
-		
+	@Override
+	public void createDiscoveryPacket(ForgeDirection dir){
+		packets.add(new UTpacket(UTpacketType.discovery, dir.getOpposite(), new ArrayList<ICommunicationTransport>(), this, dir));
+		this.scheduleSend();
 	}
+	@Override
+	public void createDestructionPacket(){
+		for(ForgeDirection sendingSide: ForgeDirection.VALID_DIRECTIONS)
+			packets.add(new UTpacket(UTpacketType.destroy, sendingSide.getOpposite(), new ArrayList<ICommunicationTransport>(), this, sendingSide));
+		this.Send();
+	}
+	@Override
 	public void createDataPacket(){
 		
+	}
+	@Override
+	public void createDataPacket(ForgeDirection dir, Object... data) {
+		packets.add(new UTpacket(UTpacketType.data,data ));
+		this.scheduleSend();
 	}
 }

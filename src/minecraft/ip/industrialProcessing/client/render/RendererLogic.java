@@ -25,7 +25,7 @@ public class RendererLogic extends RendererTileEntity {
 			this.model.renderModel(f);
 		} else {
 			if (tl instanceof ICommunication) {
-				ICommunication com = (ICommunication) tl;
+				/*ICommunication com = (ICommunication) tl;
 				boolean[][] notificationLights = new boolean[6][3];
 				boolean[] side = new boolean[6];
 				boolean[][] connectedSide = new boolean[6][1];
@@ -49,7 +49,8 @@ public class RendererLogic extends RendererTileEntity {
 					notificationLights[dir.ordinal()][1] = com.isSideValid(dir);
 					notificationLights[dir.ordinal()][2] = com.hasSideActivity(dir);
 				}
-				this.model.renderModel(f, side, connectedSide, notificationLights, levels);
+				this.model.renderModel(f, side, connectedSide, notificationLights, levels);*/
+				this.model.renderModel(f);
 			}
 		}
 	}
