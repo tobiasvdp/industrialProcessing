@@ -35,16 +35,14 @@ public class BLlogicDisplayBox extends BlockContainer {
 		ICommunicationTransport comTrans = (ICommunicationTransport) par1World.getBlockTileEntity(par2, par3, par4);
 		ICommunicationNode comNode = (ICommunicationNode) par1World.getBlockTileEntity(par2, par3, par4);
 		comTrans.isEnabled(true);
-		comNode.createRandomName();
-		comTrans.requestRecheck();
+		//comTrans.requestRecheck();
 	}
 	@Override
 	public boolean removeBlockByPlayer(World world, EntityPlayer player, int x, int y, int z) {
 		ICommunicationTransport comTrans = (ICommunicationTransport) world.getBlockTileEntity(x, y, z);
 		ICommunicationNode comNode = (ICommunicationNode) world.getBlockTileEntity(x, y, z);
-		comNode.sendDestructionPacket();
 		comTrans.isEnabled(false);
-		comTrans.requestRecheck();
+		//comTrans.requestRecheck();
 		super.removeBlockByPlayer(world, player, x, y, z);
 		return true;
 	}

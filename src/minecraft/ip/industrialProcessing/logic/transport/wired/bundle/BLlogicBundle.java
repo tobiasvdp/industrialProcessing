@@ -33,13 +33,13 @@ public class BLlogicBundle extends BlockContainer{
 		super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLivingBase, par6ItemStack);
 		ICommunicationTransport com = (ICommunicationTransport) par1World.getBlockTileEntity(par2, par3, par4);
 		com.isEnabled(true);
-		com.requestRecheck();
+		//com.requestRecheck();
 	}
 	@Override
 	public boolean removeBlockByPlayer(World world, EntityPlayer player, int x, int y, int z) {
 		ICommunicationTransport com = (ICommunicationTransport) world.getBlockTileEntity(x, y, z);
 		com.isEnabled(false);
-		com.requestRecheck();
+		//com.requestRecheck();
 		super.removeBlockByPlayer(world, player, x, y, z);
 		return true;
 	}

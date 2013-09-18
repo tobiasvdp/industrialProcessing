@@ -127,7 +127,7 @@ public class PacketHandler implements IPacketHandler {
 			EntityPlayer playerMP = (EntityPlayer) player;
 			ICommunicationTransport com = (ICommunicationTransport)playerMP.worldObj.getBlockTileEntity(x, y, z);
 			int count = 0;
-			for(int i = 0;i<sides.length;i++){
+			/*for(int i = 0;i<sides.length;i++){
 				if(sides[i]){
 					count++;
 					com.addToConnectedSides(i,false);
@@ -138,7 +138,7 @@ public class PacketHandler implements IPacketHandler {
 			if (count>1)
 				com.setMultipleSides(true);
 			else
-				com.setMultipleSides(false);
+				com.setMultipleSides(false);*/
 		}
 	}
 

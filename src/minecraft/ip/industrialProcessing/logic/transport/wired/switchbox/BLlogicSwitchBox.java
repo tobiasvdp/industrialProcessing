@@ -38,8 +38,6 @@ public class BLlogicSwitchBox extends BlockMachineRendered {
 	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
 		ICommunicationNode com = (ICommunicationNode) par1World.getBlockTileEntity(par2, par3, par4);
-		com.createRandomName();
-		com.sendDiscoveryPacket();
 	}
 
 	private void setBoundsByMetadata(int metadata, float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
@@ -90,7 +88,6 @@ public class BLlogicSwitchBox extends BlockMachineRendered {
 	@Override
 	public boolean removeBlockByPlayer(World world, EntityPlayer player, int x, int y, int z) {
 		ICommunicationNode com = (ICommunicationNode) world.getBlockTileEntity(x, y, z);
-		com.sendDestructionPacket();
 		super.removeBlockByPlayer(world, player, x, y, z);
 		return true;
 	}
@@ -100,14 +97,7 @@ public class BLlogicSwitchBox extends BlockMachineRendered {
 		ICommunicationNode com = (ICommunicationNode) par1World.getBlockTileEntity(par2, par3, par4);
 		
 		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-			if (com.getBusType(dir) == UTBusType.bundle)
-				com.send(dir, true, 5);
-			if (com.getBusType(dir) == UTBusType.cable){
-				if ((Boolean) com.getBuffer(dir).get())
-					com.send(dir, false);
-				else
-					com.send(dir, true);
-			}
+
 		}
 		return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer, par6, par7, par8, par9);
 	}

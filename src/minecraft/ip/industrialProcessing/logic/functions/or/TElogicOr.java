@@ -1,6 +1,7 @@
 package ip.industrialProcessing.logic.functions.or;
 
 import ip.industrialProcessing.logic.transport.TElogicNode;
+import ip.industrialProcessing.logic.utils.UTpacket;
 import ip.industrialProcessing.utils.ISidedRotation;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
@@ -9,11 +10,11 @@ public class TElogicOr extends TElogicNode implements ISidedRotation {
 
 	private ForgeDirection orientationSide;
 	private ForgeDirection orientationRotation;
-	
+
 	public TElogicOr() {
 		super();
 	}
-	
+
 	@Override
 	public void setOrientationSide(ForgeDirection side) {
 		orientationSide = side;
@@ -88,23 +89,34 @@ public class TElogicOr extends TElogicNode implements ISidedRotation {
 	public float getGLrotationAngle() {
 		return SIDEDTRANSFORMER.getGLrotationAngle(getOrientationSide(), getOrientationRotation());
 	}
-	
 
 	@Override
-	public ForgeDirection[] setConnectableSides() {
+	public void transition() {
+		System.out.println(getBuffer(SIDEDTRANSFORMER.InternalToExternalDirection(this, ForgeDirection.EAST)).get());
+		System.out.println(getBuffer(SIDEDTRANSFORMER.InternalToExternalDirection(this, ForgeDirection.WEST)).get());
+		if ((Boolean) getBuffer(SIDEDTRANSFORMER.InternalToExternalDirection(this, ForgeDirection.EAST)).get() || (Boolean) getBuffer(SIDEDTRANSFORMER.InternalToExternalDirection(this, ForgeDirection.WEST)).get()) {
+		}
+		else {
+		}
+
+		System.out.println(getBuffer(SIDEDTRANSFORMER.InternalToExternalDirection(this, ForgeDirection.NORTH)).get());
+	}
+
+	@Override
+	public ForgeDirection[] setConnectableInputSides() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	protected void transition() {
-		System.out.println(getBuffer(SIDEDTRANSFORMER.InternalToExternalDirection(this, ForgeDirection.EAST)).get());
-		System.out.println(getBuffer(SIDEDTRANSFORMER.InternalToExternalDirection(this, ForgeDirection.WEST)).get());
-		if((Boolean) getBuffer(SIDEDTRANSFORMER.InternalToExternalDirection(this, ForgeDirection.EAST)).get()||(Boolean) getBuffer(SIDEDTRANSFORMER.InternalToExternalDirection(this, ForgeDirection.WEST)).get())
-			send(SIDEDTRANSFORMER.InternalToExternalDirection(this, ForgeDirection.NORTH), true);
-		else
-			send(SIDEDTRANSFORMER.InternalToExternalDirection(this, ForgeDirection.NORTH), false);
-		System.out.println(getBuffer(SIDEDTRANSFORMER.InternalToExternalDirection(this, ForgeDirection.NORTH)).get());
+	public ForgeDirection[] setConnectableOutputSides() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
+	@Override
+	public void ExtendedReceive(UTpacket packet) {
+		// TODO Auto-generated method stub
+		
+	}
 }

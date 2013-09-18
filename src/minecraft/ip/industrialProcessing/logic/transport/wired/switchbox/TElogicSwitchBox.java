@@ -12,6 +12,7 @@ import ip.industrialProcessing.logic.transport.TElogicNode;
 import ip.industrialProcessing.logic.utils.UTBuffer;
 import ip.industrialProcessing.logic.utils.UTBusType;
 import ip.industrialProcessing.logic.utils.UTlogicNodeContainer;
+import ip.industrialProcessing.logic.utils.UTpacket;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
@@ -21,18 +22,26 @@ public class TElogicSwitchBox extends TElogicNode {
 	}
 
 	@Override
-	protected void transition() {
+	public ForgeDirection[] setConnectableInputSides() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ForgeDirection[] setConnectableOutputSides() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void transition() {
 		// TODO Auto-generated method stub
 		
 	}
+
 	@Override
-	public ForgeDirection[] setConnectableSides() {
-		return new ForgeDirection[]{ForgeDirection.NORTH, ForgeDirection.SOUTH, ForgeDirection.WEST, ForgeDirection.EAST};
-	}
-	
-	@Override
-	public void updateEntity() {
-		super.updateEntity();
-		worldObj.setWorldTime(6000);
+	public void ExtendedReceive(UTpacket packet) {
+		// TODO Auto-generated method stub
+		
 	}
 }
