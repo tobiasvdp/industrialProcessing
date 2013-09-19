@@ -161,7 +161,7 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 	@Override
 	public void Send() {
 		for(UTpacket packet:packets){
-			if(packet.getType() == UTpacketType.destroy){
+			if(packet.getType() == UTpacketType.destroy || packet.getType() == UTpacketType.data){
 				ForgeDirection sendingSide = (ForgeDirection) packet.getData(0);
 				for(int i =0;i<nodeCollection[sendingSide.ordinal()].getSize();i++){
 					ICommunicationNode com = nodeCollection[sendingSide.ordinal()].getNode(i);
@@ -252,7 +252,7 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 	@Override
 	public void createDestructionPacket(){
 		for(ForgeDirection sendingSide: ForgeDirection.VALID_DIRECTIONS)
-			packets.add(new UTpacket(UTpacketType.destroy, sendingSide.getOpposite(), new ArrayList<ICommunicationTransport>(), this, sendingSide));
+			packets.add(new UTpacket(UTpacketType.destroy, sendingSide, new ArrayList<ICommunicationTransport>(), this, sendingSide));
 		this.Send();
 	}
 	@Override
@@ -261,7 +261,7 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 	}
 	@Override
 	public void createDataPacket(ForgeDirection dir, Object... data) {
-		packets.add(new UTpacket(UTpacketType.data,data ));
+		packets.add(new UTpacket(UTpacketType.data, dir,data ));
 		this.scheduleSend();
 	}
 }
