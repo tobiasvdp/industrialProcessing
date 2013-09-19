@@ -3,6 +3,7 @@ package ip.industrialProcessing.logic.transport;
 import ip.industrialProcessing.logic.utils.UTBuffer;
 import ip.industrialProcessing.logic.utils.UTBufferType;
 import ip.industrialProcessing.logic.utils.UTBusType;
+import ip.industrialProcessing.logic.utils.UTVariable;
 import ip.industrialProcessing.logic.utils.UTlogicNodeContainer;
 import ip.industrialProcessing.logic.utils.UTpacket;
 import ip.industrialProcessing.logic.utils.UTpacketType;
@@ -260,7 +261,7 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 		
 	}
 	@Override
-	public void createDataPacket(ForgeDirection dir, Object... data) {
+	public void createDataPacket(ForgeDirection dir, UTVariable... data) {
 		packets.add(new UTpacket(UTpacketType.data, dir,data ));
 		this.scheduleSend();
 	}
