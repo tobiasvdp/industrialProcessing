@@ -12,6 +12,7 @@ public class TileEntityConveyorOutput extends TileEntityConveyorInventoryBase {
 		super();
 		Arrays.fill(this.connections, ConnectionMode.INVENTORYOUTPUT);
 		setConnectionMode(LocalDirection.FRONT, ConnectionMode.INPUT);
+		setConnectionMode(LocalDirection.BACK, ConnectionMode.OUTPUT);
 	}
 
 }

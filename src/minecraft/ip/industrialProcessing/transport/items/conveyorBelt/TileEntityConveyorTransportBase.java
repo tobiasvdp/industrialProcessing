@@ -65,7 +65,11 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
 							this.itemStacks.remove(i);
 					} else if (stack.progress > 0.5f && !stack.routed) {
 						rerouteStack(stack);
-						stack.routed = true;
+						if (stack.destination == LocalDirection.UNKNOWN) {
+							outputToAir(stack, ForgeDirection.UP);
+							this.itemStacks.remove(i);
+						} else
+							stack.routed = true;
 					}
 				}
 			}
@@ -186,7 +190,8 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
 	protected abstract ItemStack outputToTileEntity(MovingItemStack stack, TileEntity neighbor, ForgeDirection direction);
 
 	protected void rerouteStack(MovingItemStack stack) {
-		stack.destination = findOutput(stack.stack, stack.source);
+		LocalDirection out = findOutput(stack.stack, stack.source);
+		stack.destination = out;
 		stack.routed = true;
 	}
 

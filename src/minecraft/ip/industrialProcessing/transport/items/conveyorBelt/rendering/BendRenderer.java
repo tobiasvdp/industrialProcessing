@@ -24,15 +24,15 @@ public class BendRenderer extends ShapeRenderer {
 		Tessellator tessellator = Tessellator.instance;
 		float uMin = 10 / 64f;
 		float uMax = 18 / 64f;
-		float vMin = 1 / 32f;
-		float vMax = 17 / 32f;
+		float vMin = 1 / 64f;
+		float vMax = 17 / 64f;
 		
 		float startAngle = this.startAngle;
 
 		float uMins = 60 / 64f;
 		float uMaxs = 61 / 64f;
-		float vMins = 16 / 32f;
-		float vMaxs = 32 / 32f;
+		float vMins = 16 / 64f;
+		float vMaxs = 32 / 64f;
 
 		int segments = 16;
 
@@ -264,8 +264,8 @@ public class BendRenderer extends ShapeRenderer {
 		}
 		uMin = 9 / 64f;
 		uMax = 17 / 64f;
-		vMin = 0 / 32f;
-		vMax = 1 / 32f;
+		vMin = 0 / 64f;
+		vMax = 1 / 64f;
 
 		float y = 23-8F;
 

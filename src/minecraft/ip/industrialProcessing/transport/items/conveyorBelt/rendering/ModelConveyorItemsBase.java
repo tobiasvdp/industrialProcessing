@@ -38,7 +38,7 @@ public abstract class ModelConveyorItemsBase extends ModelOrientedConveyorBase {
 				path = new BendPath(false);
 			}
 		} else {
-			if (front.isConnected() && back.isConnected() && !left.isConnected() && !right.isConnected()) {
+			if (front.isConnected() && back.isConnected() && !left.isConnected() && !right.isConnected() && !up.isConnected() && !down.isConnected()) {
 				path = new SlopePath(tl, front, back);
 				renderStraight(tl, f, forward, front, right, back, left, up, down);
 			} else {
@@ -64,13 +64,16 @@ public abstract class ModelConveyorItemsBase extends ModelOrientedConveyorBase {
 
 		EntityItem entity = new EntityItem(tl.worldObj, tl.xCoord, tl.yCoord, tl.zCoord, stack.stack);
 		entity.hoverStart = 0;
-				
+
+		float scale = 1.5f;
+		float oneOverScale = 1f / scale;
 		GL11.glPushMatrix();
-		GL11.glTranslatef(state.x, state.y + 0.8f, state.z);
+		GL11.glScalef(oneOverScale, oneOverScale, oneOverScale);
+		GL11.glTranslatef(state.x * scale, state.y * scale + 0.9f * scale, state.z * scale);
 		GL11.glRotatef(180, 1, 0, 0);
 		GL11.glRotatef(state.pitch, 1, 0, 0);
-		GL11.glRotatef(state.heading, 0, 1, 0); 
+		GL11.glRotatef(state.heading, 0, 1, 0);
 		itemrenderer.doRenderItem(entity, 0, 0, 0, 0, f5);
 		GL11.glPopMatrix();
-	} 
+	}
 }

@@ -275,7 +275,6 @@ public class ModelRainTank extends ModelConnectedOrientedFluid {
 			tessellator.addVertexWithUV((double) (x + w) * f, (double) y * f, (double) (z + h) * f, (double) icon.getMaxU(), (double) icon.getMaxV());
 			tessellator.addVertexWithUV((double) (x + 0) * f, (double) y * f, (double) (z + h) * f, (double) icon.getMinU(), (double) icon.getMaxV());
 			tessellator.draw();
-
 		}
 	}
 

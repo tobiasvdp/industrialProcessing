@@ -51,8 +51,10 @@ public class TileEntityRainTank extends TileEntityFluidMachine implements IConne
 
 			if (this.worldObj.isRaining()) {
 				int y = this.worldObj.getTopSolidOrLiquidBlock(xCoord, zCoord);
+				
+				int rain = (int)(1 * this.worldObj.getBiomeGenForCoords(xCoord, zCoord).rainfall);
 				if (y == yCoord + 1) {
-					tank.fill(new FluidStack(FluidRegistry.WATER, 1), true);
+					tank.fill(new FluidStack(FluidRegistry.WATER, rain), true);
 				}
 			}
 

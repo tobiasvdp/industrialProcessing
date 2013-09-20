@@ -45,13 +45,13 @@ public class SlopeRenderer extends ShapeRenderer {
 		Tessellator tessellator = Tessellator.instance;
 		float uMin = 10 / 64f;
 		float uMax = 18 / 64f;
-		float vMin = 1 / 32f;
-		float vMax = 17 / 32f;
+		float vMin = 1 / 64f;
+		float vMax = 17 / 64f;
 
 		float uMins = 61 / 64f;
 		float uMaxs = 62 / 64f;
-		float vMins = 16 / 32f;
-		float vMaxs = 32 / 32f;
+		float vMins = 16 / 64f;
+		float vMaxs = 32 / 64f;
 
 		float vLen = (vMax - vMin) / segments;
 		float vStart = vMin;
@@ -341,8 +341,8 @@ public class SlopeRenderer extends ShapeRenderer {
 
 		uMin = 1 / 64f;
 		uMax = 9 / 64f;
-		vMin = 0 / 32f;
-		vMax = 1 / 32f;
+		vMin = 0 / 64f;
+		vMax = 1 / 64f;
 		if (renderCapStart) {
 			float cdy = capNormalStartZ * capNormalStartZ / capNormalStartY + capNormalStartY;
 

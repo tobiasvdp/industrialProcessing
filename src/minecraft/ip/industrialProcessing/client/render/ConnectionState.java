@@ -10,4 +10,8 @@ public enum ConnectionState {
 	{
 		return this == SUPPORTED;
 	}
+	public boolean isPlugged()
+	{
+		return this == PLUGGED;
+	}
 }

@@ -9,7 +9,7 @@ public abstract class ModelOrientedConveyorBase extends ModelConnectedOriented {
 
 	@Override
 	protected void renderModelConnectedOriented(TileEntity tl, float f, ForgeDirection forward, ConnectionState front, ConnectionState right, ConnectionState back, ConnectionState left, ConnectionState up, ConnectionState down) {
-		
+
 		if (front.isConnected() && (left.isConnected() != right.isConnected()) && !back.isConnected()) {
 			if (left.isConnected()) {
 				renderLeftToFrontBend(tl, f, forward, front, right, back, left, up, down);
@@ -31,7 +31,16 @@ public abstract class ModelOrientedConveyorBase extends ModelConnectedOriented {
 			if (right.isConnected())
 				renderRight(tl, f, forward, front, right, back, left, up, down);
 		}
+		if (up.isConnected())
+			renderUp(tl, f, forward, front, right, back, left, up, down);
+
+		if (down.isConnected())
+			renderDown(tl, f, forward, front, right, back, left, up, down);
 	}
+
+	protected abstract void renderDown(TileEntity tl, float f, ForgeDirection forward, ConnectionState front, ConnectionState right, ConnectionState back, ConnectionState left, ConnectionState up, ConnectionState down);
+
+	protected abstract void renderUp(TileEntity tl, float f, ForgeDirection forward, ConnectionState front, ConnectionState right, ConnectionState back, ConnectionState left, ConnectionState up, ConnectionState down);
 
 	protected abstract void renderLeft(TileEntity tl, float f, ForgeDirection forward, ConnectionState front, ConnectionState right, ConnectionState back, ConnectionState left, ConnectionState up, ConnectionState down);
 

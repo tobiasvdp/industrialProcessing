@@ -21,14 +21,12 @@ public class BendPath extends ItemPath {
 
 		if (left) {
 			pos.x = -0.5f + (float) Math.sin(angleProgress) * 0.5f;
-			pos.z = 0.5f - (float) Math.cos(angleProgress) * 0.5f;
-			System.out.println(pos.x + "," + pos.z);
-			pos.heading = this.baseHeading + angleProgress / (float) Math.PI * 180;
+			pos.z = 0.5f - (float) Math.cos(angleProgress) * 0.5f; 
+			pos.heading = this.baseHeading - 180 + angleProgress / (float) Math.PI * 180;
 		}else
 		{
 			pos.x = 0.5f - (float) Math.sin(angleProgress) * 0.5f;
-			pos.z = 0.5f - (float) Math.cos(angleProgress) * 0.5f;
-			System.out.println(pos.x + "," + pos.z);
+			pos.z = 0.5f - (float) Math.cos(angleProgress) * 0.5f; 
 			pos.heading = this.baseHeading - angleProgress / (float) Math.PI * 180;			
 		}
 		return pos;

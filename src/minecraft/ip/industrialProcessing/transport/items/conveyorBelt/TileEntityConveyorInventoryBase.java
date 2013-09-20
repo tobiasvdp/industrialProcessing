@@ -26,7 +26,7 @@ public abstract class TileEntityConveyorInventoryBase extends TileEntityConveyor
 			extractFromInputs();
 		}
 	}
-	
+
 	@Override
 	protected TransportConnectionState handleInventoryState(TileEntity entity, ForgeDirection direction) {
 		ConnectionMode mode = getConnectionMode(direction);
@@ -50,15 +50,15 @@ public abstract class TileEntityConveyorInventoryBase extends TileEntityConveyor
 	private TransportConnectionState getConnectionFromMode(ConnectionMode mode) {
 		switch (mode) {
 		case INPUT:
-			return TransportConnectionState.NONE;
+			return TransportConnectionState.INPUT;
 		case OUTPUT:
-			return TransportConnectionState.NONE;
+			return TransportConnectionState.OUTPUT;
 		case INVENTORYINPUT:
 			return TransportConnectionState.INPUT;
 		case INVENTORYOUTPUT:
 			return TransportConnectionState.OUTPUT;
 		case DUAL:
-			return TransportConnectionState.NONE;
+			return TransportConnectionState.DUAL;
 		default:
 			return TransportConnectionState.NONE;
 		}
@@ -66,30 +66,50 @@ public abstract class TileEntityConveyorInventoryBase extends TileEntityConveyor
 
 	@Override
 	protected LocalDirection findOutput(ItemStack stack, LocalDirection source) {
+
 		for (int i = 0; i < 6; i++) {
 			ForgeDirection direction = ForgeDirection.getOrientation(i);
-			LocalDirection local = DirectionUtils.getLocalDirection(direction, this.forwardDirection);
-			if (local != source) {
-				if (isOutput(direction)) {
-					TransportConnectionState state = this.states[direction.ordinal()];
-					if (state.isOutput()) {
-						TileEntity neighbor = ConveyorEnvironment.getNeighbor(this, direction);
-						if (neighbor instanceof IInventory) {
-							if (ItemTransfers.canInsert(stack, (IInventory) neighbor, direction.getOpposite()))
-								return local;
-						} else
-							return local;
-					}
+			TransportConnectionState state = this.states[direction.ordinal()];
+			if (state.isOutput()) {
+				LocalDirection local = DirectionUtils.getLocalDirection(direction, this.forwardDirection);
+				if (local != source) {
+					ConnectionMode mode = this.getConnectionMode(local);
+					if (mode.isInventoryOutput())
+						return local;
 				}
 			}
 		}
-		for (int i = 5; i > 0; i--) {
+
+		for (int i = 0; i < 6; i++) {
 			ForgeDirection direction = ForgeDirection.getOrientation(i);
-			LocalDirection local = DirectionUtils.getLocalDirection(direction, this.forwardDirection);
-			if (local != source && isOutput(direction)) 
-					return local; 			
+			TransportConnectionState state = this.states[direction.ordinal()];
+			if (state.isConnected()) {
+				LocalDirection local = DirectionUtils.getLocalDirection(direction, this.forwardDirection);
+				if (local != source) {
+					ConnectionMode mode = this.getConnectionMode(local);
+					if (mode.isOutput(false))
+						return local;
+				}
+			}
 		}
-		return LocalDirection.UP;
+
+		/*
+		 * for (int i = 0; i < 6; i++) { ForgeDirection direction =
+		 * ForgeDirection.getOrientation(i); LocalDirection local =
+		 * DirectionUtils.getLocalDirection(direction, this.forwardDirection);
+		 * if (local != source) { if (isOutput(direction)) {
+		 * TransportConnectionState state = this.states[direction.ordinal()]; if
+		 * (state.isOutput()) { TileEntity neighbor =
+		 * ConveyorEnvironment.getNeighbor(this, direction); if (neighbor
+		 * instanceof IInventory) { if (ItemTransfers.canInsert(stack,
+		 * (IInventory) neighbor, direction.getOpposite())) return local; } else
+		 * return local; } } } } for (int i = 5; i > 0; i--) { ForgeDirection
+		 * direction = ForgeDirection.getOrientation(i); LocalDirection local =
+		 * DirectionUtils.getLocalDirection(direction, this.forwardDirection);
+		 * if (local != source && isOutput(direction)) return local; } return
+		 * LocalDirection.UP;
+		 */
+		return LocalDirection.UNKNOWN;
 	}
 
 	public void extractFromInputs() {
@@ -104,7 +124,6 @@ public abstract class TileEntityConveyorInventoryBase extends TileEntityConveyor
 		}
 	}
 
-	
 	@Override
 	protected ItemStack outputToTileEntity(MovingItemStack stack, TileEntity neighbor, ForgeDirection direction) {
 		if (neighbor instanceof IInventory) {
@@ -112,7 +131,7 @@ public abstract class TileEntityConveyorInventoryBase extends TileEntityConveyor
 		}
 		return stack.stack;
 	}
-	
+
 	private ItemStack pullFromSide(ForgeDirection direction) {
 
 		TileEntity neighbor = ConveyorEnvironment.getNeighbor(this, direction);
