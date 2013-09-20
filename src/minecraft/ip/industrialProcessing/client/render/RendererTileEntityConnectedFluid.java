@@ -46,7 +46,7 @@ public class RendererTileEntityConnectedFluid extends RendererTileEntity {
 			north = ConnectionState.PLUGGED;
 			south = ConnectionState.CONNECTED;
 		}
-		this.model.renderModelConnected(null, f, north, east, south, west, up, down);
+		this.model.renderModelConnected(tl, f, north, east, south, west, up, down);
 
 		if (tl instanceof ITankSyncable) {
 			ITankSyncable tankSync = (ITankSyncable) tl;

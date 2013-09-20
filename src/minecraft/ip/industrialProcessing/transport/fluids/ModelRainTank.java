@@ -1,13 +1,14 @@
 package ip.industrialProcessing.transport.fluids;
 
 import ip.industrialProcessing.client.render.ConnectionState;
-import ip.industrialProcessing.client.render.ModelConnectedFluid;
+import ip.industrialProcessing.client.render.ModelConnectedOrientedFluid;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
+import net.minecraftforge.common.ForgeDirection;
 
-public class ModelRainTank extends ModelConnectedFluid {
+public class ModelRainTank extends ModelConnectedOrientedFluid {
 
 	// fields
 	ModelRenderer FloorPlate;
@@ -256,31 +257,30 @@ public class ModelRainTank extends ModelConnectedFluid {
 	}
 
 	@Override
-	public void renderModelConnectedFluid(TileEntity tl, float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, Icon icon) {
-		if(tankSlot == 0)
-		{
+	public void renderModelConnectedOrientedFluid(TileEntity tl, float f, ForgeDirection forward, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, Icon icon) {
+		if (tankSlot == 0) {
 
 			float x = -8f;
 			float z = -8f;
-			
-			float height = 3.5f * fluidPercentage; 
-			float y = 12.0f-height;
-			int w = 16;
-			int h = 16; 
-			Tessellator tessellator = Tessellator.instance;
-				tessellator.startDrawingQuads();
 
-				tessellator.addVertexWithUV((double) (x + 0) * f, (double) y * f, (double) (z + 0) * f, (double) icon.getMinU(), (double) icon.getMinV());
-				tessellator.addVertexWithUV((double) (x + w) * f, (double) y * f, (double) (z + 0) * f, (double) icon.getMaxU(), (double) icon.getMinV());
-				tessellator.addVertexWithUV((double) (x + w) * f, (double) y * f, (double) (z + h) * f, (double) icon.getMaxU(), (double) icon.getMaxV());
-				tessellator.addVertexWithUV((double) (x + 0) * f, (double) y * f, (double) (z + h) * f, (double) icon.getMinU(), (double) icon.getMaxV());
-				tessellator.draw();
-			
+			float height = 3.5f * fluidPercentage;
+			float y = 12.0f - height;
+			int w = 16;
+			int h = 16;
+			Tessellator tessellator = Tessellator.instance;
+			tessellator.startDrawingQuads();
+			tessellator.setNormal(0, -1, 0);
+			tessellator.addVertexWithUV((double) (x + 0) * f, (double) y * f, (double) (z + 0) * f, (double) icon.getMinU(), (double) icon.getMinV());
+			tessellator.addVertexWithUV((double) (x + w) * f, (double) y * f, (double) (z + 0) * f, (double) icon.getMaxU(), (double) icon.getMinV());
+			tessellator.addVertexWithUV((double) (x + w) * f, (double) y * f, (double) (z + h) * f, (double) icon.getMaxU(), (double) icon.getMaxV());
+			tessellator.addVertexWithUV((double) (x + 0) * f, (double) y * f, (double) (z + h) * f, (double) icon.getMinU(), (double) icon.getMaxV());
+			tessellator.draw();
+
 		}
 	}
 
 	@Override
-	public void renderModelConnected(TileEntity tl, float f5, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down) {
+	public void renderModelConnectedOriented(TileEntity tl, float f5, ForgeDirection forward, ConnectionState south, ConnectionState west, ConnectionState north, ConnectionState east, ConnectionState up, ConnectionState down) {
 
 		boolean connectedPipe = false;
 		FloorPlate.render(f5);
@@ -297,7 +297,7 @@ public class ModelRainTank extends ModelConnectedFluid {
 		if (north != ConnectionState.CONNECTED) {
 			WallFront.render(f5);
 		}
- 
+
 		if (down == ConnectionState.PLUGGED) {
 			connectedPipe = true;
 			DrainBottom.render(f5);
@@ -329,18 +329,17 @@ public class ModelRainTank extends ModelConnectedFluid {
 			DrainPipeTop.render(f5);
 			DrainGrate.render(f5);
 		}
-		
- 
+
 		Corner3.render(f5);
 		Corner1.render(f5);
 		Corner4.render(f5);
 		Corner2.render(f5);
-		
+
 		SupportBottomFront.render(f5);
 		SupportBottomBack.render(f5);
 		SupportBotomLeft.render(f5);
 		SupportBottomRight.render(f5);
-		
+
 		SupportDiagonalBack1.render(f5);
 		SupportDiagonalRight2.render(f5);
 		SupportDiagonalFront2.render(f5);

@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
-public abstract class TileEntityConveyorInputBase extends TileEntityConveyorInteractionBase {
+public abstract class TileEntityConveyorInventoryBase extends TileEntityConveyorInteractionBase {
 
 	private int updateCycle = 20;
 	private int ticks = 0;
@@ -50,11 +50,15 @@ public abstract class TileEntityConveyorInputBase extends TileEntityConveyorInte
 	private TransportConnectionState getConnectionFromMode(ConnectionMode mode) {
 		switch (mode) {
 		case INPUT:
-			return TransportConnectionState.INPUT;
+			return TransportConnectionState.NONE;
 		case OUTPUT:
+			return TransportConnectionState.NONE;
+		case INVENTORYINPUT:
+			return TransportConnectionState.INPUT;
+		case INVENTORYOUTPUT:
 			return TransportConnectionState.OUTPUT;
 		case DUAL:
-			return TransportConnectionState.DUAL;
+			return TransportConnectionState.NONE;
 		default:
 			return TransportConnectionState.NONE;
 		}

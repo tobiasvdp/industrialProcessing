@@ -13,7 +13,7 @@ public class DataUtils {
 
 	public static <T> T getItem(LocalDirection local, T[] data, T defaultValue, int maxIndex) {
 		int index = local.ordinal();
-		if (index > maxIndex)
+		if (index > maxIndex || index < 0 || index >= data.length)
 			return defaultValue;
 		return data[index];
 	} 

@@ -53,7 +53,7 @@ import ip.industrialProcessing.transport.fluids.BlockTransportFluids;
 import ip.industrialProcessing.transport.fluids.BlockValve;
 import ip.industrialProcessing.transport.items.conveyorBelt.BlockConveyorBelt;
 import ip.industrialProcessing.transport.items.conveyorInput.BlockConveyorInput;
-import ip.industrialProcessing.transport.items.conveyorOutput.BLtransportConveyorBeltOutput;
+import ip.industrialProcessing.transport.items.conveyorOutput.BlockConveyorOutput;
 
 public interface ISetupMachineBlocks {
 
@@ -113,9 +113,9 @@ public interface ISetupMachineBlocks {
 	public final static BLmultiblockDisplayPanel BLmultiblockDisplayPanel = new BLmultiblockDisplayPanel();
 
 	// transport
-	public final static BlockConveyorBelt BLtransportConveyorBelt = new BlockConveyorBelt();
-	public final static BlockConveyorInput BLtransportConveyorBeltInput = new BlockConveyorInput();
-	public final static BLtransportConveyorBeltOutput BLtransportConveyorBeltOutput = new BLtransportConveyorBeltOutput();
+	public final static BlockConveyorBelt blockConveyorBelt = new BlockConveyorBelt();
+	public final static BlockConveyorInput blockConveyorBeltInput = new BlockConveyorInput();
+	public final static BlockConveyorOutput blockConveyorOutput = new BlockConveyorOutput();
 
 	// logic
 	public final static BLlogicCable BLlogicCable = new BLlogicCable();

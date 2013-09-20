@@ -86,16 +86,20 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
 				if (available > 0) {
 					for (int j = this.itemStacks.size() - 1; j > i; j--) {
 						MovingItemStack stackB = this.itemStacks.get(j);
-						if (stackB.stack == null) {
-							this.itemStacks.remove(j);
-							continue;
-						}
-						if (stackA.stack.isItemEqual(stackB.stack)) {
-							available = Math.min(available, stackB.stack.stackSize);
-							stackA.stack.stackSize += available;
-							stackB.stack.stackSize -= available;
-							if (stackB.stack.stackSize <= 0)
-								this.itemStacks.remove(j);
+						if (stackB.progress > 0.5 == stackA.progress > 0.5) {
+							if ((stackB.progress > 0.5 && stackB.destination == stackA.destination) || (stackB.progress <= 0.5 && stackB.source == stackA.source)) {
+								if (stackB.stack == null) {
+									this.itemStacks.remove(j);
+									continue;
+								}
+								if (stackA.stack.isItemEqual(stackB.stack)) {
+									available = Math.min(available, stackB.stack.stackSize);
+									stackA.stack.stackSize += available;
+									stackB.stack.stackSize -= available;
+									if (stackB.stack.stackSize <= 0)
+										this.itemStacks.remove(j);
+								}
+							}
 						}
 					}
 				}
@@ -191,7 +195,7 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
 			ForgeDirection direction = ForgeDirection.getOrientation(i);
 
 			ConnectionMode mode = this.getConnectionMode(direction);
-			if (mode.isOutput(true))
+			if (mode.isOutput(true) || mode.isInventoryOutput())
 				return DirectionUtils.getLocalDirection(direction, this.forwardDirection);
 		}
 		return LocalDirection.BACK;
@@ -205,13 +209,7 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
 
 	protected boolean isOutput(ForgeDirection direction) {
 		ConnectionMode mode = this.getConnectionMode(direction);
-		if (mode == ConnectionMode.OUTPUT || mode == ConnectionMode.DUAL) {
-			// TransportConnectionState state =
-			// this.states[direction.ordinal()];
-			// if (state != TransportConnectionState.NONE)
-			return true;
-		}
-		return false;
+		return mode.isOutput(false) || mode.isInventoryOutput();
 	}
 
 	@Override
