@@ -38,7 +38,7 @@ public class BlockConveyorBelt extends BlockConveyorBase {
 
 	@Override
 	public int getRenderType() {
-		return ConfigRenderers.getBLtransportConveyorBelt();
+		return ConfigRenderers.getRendererConveyorBeltID();
 	}
 
 }

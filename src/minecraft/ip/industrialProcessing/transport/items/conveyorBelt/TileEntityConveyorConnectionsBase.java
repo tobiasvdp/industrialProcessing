@@ -155,8 +155,8 @@ public abstract class TileEntityConveyorConnectionsBase extends TileEntityTransp
 	@Override
 	protected TransportConnectionState getState(TileEntity entity, ForgeDirection direction) {
 
-		if (entity instanceof TileEntityConveyorBelt) {
-			TileEntityConveyorBelt belt = (TileEntityConveyorBelt) entity;
+		if (entity instanceof TileEntityConveyorConnectionsBase) {
+			TileEntityConveyorConnectionsBase belt = (TileEntityConveyorConnectionsBase) entity;
 
 			if (ConveyorEnvironment.canConnect(this, belt, direction, true))
 				return TransportConnectionState.TRANSPORT;
@@ -188,26 +188,23 @@ public abstract class TileEntityConveyorConnectionsBase extends TileEntityTransp
 
 		SlopeState[] possibleSlopeStates = SlopeState.values();
 		int[] ordinals = par1nbtTagCompound.getIntArray("Slopes");
-		slopes = new SlopeState[ordinals.length];
-		for (int i = 0; i < ordinals.length; i++) {
+		for (int i = 0; i < Math.min(slopes.length, ordinals.length); i++) {
 			slopes[i] = possibleSlopeStates[ordinals[i]];
 		}
 
 		ConnectionMode[] possibleConnectionModes = ConnectionMode.values();
 		ordinals = par1nbtTagCompound.getIntArray("ConnectionModes");
-		connections = new ConnectionMode[ordinals.length];
-		for (int i = 0; i < ordinals.length; i++) {
+		for (int i = 0; i < Math.min(connections.length, ordinals.length); i++) {
 			connections[i] = possibleConnectionModes[ordinals[i]];
 		}
 
 		slopeMasks = par1nbtTagCompound.getIntArray("SlopeMasks");
 
-		canSlope = readFromNBT(par1nbtTagCompound, "CanSlopes");
+		canSlope = readFromNBT(par1nbtTagCompound, "CanSlopes", canSlope);
 	}
 
-	private Boolean[] readFromNBT(NBTTagCompound par1nbtTagCompound, String string) {
+	private Boolean[] readFromNBT(NBTTagCompound par1nbtTagCompound, String string, Boolean[] data) {
 		byte[] ordinals = par1nbtTagCompound.getByteArray(string);
-		Boolean[] data = new Boolean[ordinals.length];
 		for (int i = 0; i < ordinals.length; i++) {
 			data[i] = (ordinals[i] != 0);
 		}

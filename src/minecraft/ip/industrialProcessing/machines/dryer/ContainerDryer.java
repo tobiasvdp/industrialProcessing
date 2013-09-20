@@ -34,6 +34,9 @@ public class ContainerDryer extends ContainerFluidMachine {
 		addSlotToContainer(outputDirtyWaterFullOutput);
 
 		ContainerUtils.BindPlayerInventory(inventoryPlayer, this, 0);
+		
+		addTankToContainer(0);
+		addTankToContainer(1);
 	}
 
 	@Override

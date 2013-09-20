@@ -38,7 +38,9 @@ public class ConfigRenderers {
 	private int rendererTurbineId;
 	private int rendererManometerId;
 	private int BLmultiblockDisplayPanel;
-	private int BLtransportConveyorBelt;
+	private int rendererConveyorBelt;
+	private int rendererConveyorInput;
+	private int rendererConveyorOutput;
 	private int rendererPumpId;
 	private int rendererRainTankID;
 	private int rendererValveID;
@@ -50,33 +52,57 @@ public class ConfigRenderers {
 	public static int getBLlogicOr() {
 		return getInstance().BLlogicOr;
 	}
+
 	public static void setBLlogicOr(int value) {
 		getInstance().BLlogicOr = value;
 	}
+
 	public static int getBLlogicAnd() {
 		return getInstance().BLlogicAnd;
 	}
+
 	public static void setBLlogicAnd(int value) {
 		getInstance().BLlogicAnd = value;
 	}
+
 	public static int getBLlogicCable() {
 		return getInstance().BLlogicCable;
 	}
+
 	public static void setBLlogicCable(int value) {
 		getInstance().BLlogicCable = value;
 	}
+
 	public static int getBLlogicSwitchBox() {
 		return getInstance().BLlogicSwitchBox;
 	}
+
 	public static void setBLlogicSwitchBox(int value) {
 		getInstance().BLlogicSwitchBox = value;
 	}
-	public static int getBLtransportConveyorBelt() {
-		return getInstance().BLtransportConveyorBelt;
+
+	public static int getRendererConveyorBeltID() {
+		return getInstance().rendererConveyorBelt;
 	}
 
-	public static void setBLtransportConveyorBelt(int value) {
-		getInstance().BLtransportConveyorBelt = value;
+	public static void setRendererConveyorBeltID(int value) {
+		getInstance().rendererConveyorBelt = value;
+	}
+
+	public static int getRendererConveyorInputID() {
+		return getInstance().rendererConveyorInput;
+	}
+
+	public static void setRendererConveyorInputID(int value) {
+		getInstance().rendererConveyorInput = value;
+	}
+
+	public static int getRendererConveyorOutputID() {
+		return getInstance().rendererConveyorOutput;
+	}
+
+	public static void setRendererConveyorOutputID(int value) {
+		getInstance().rendererConveyorOutput = value;
 	}
 
 	public static int getBLmultiblockDisplayPanel() {

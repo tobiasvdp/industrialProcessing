@@ -1,5 +1,7 @@
 package ip.industrialProcessing.transport.items.conveyorBelt.rendering;
 
+import org.lwjgl.opengl.GL11;
+
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.transport.items.conveyorBelt.CornerState;
@@ -340,8 +342,15 @@ public class ModelConveyorBelt extends ModelConveyorItemsBase {
 
 	@Override
 	protected void renderLeft(TileEntity tl, float f5, ForgeDirection forward, ConnectionState front, ConnectionState right, ConnectionState back, ConnectionState left, ConnectionState up, ConnectionState down) {
-		InputRight.render(f5);
-		InputRightElev.render(f5);
+		//InputRight.render(f5);
+		//InputRightElev.render(f5);
+
+		GL11.glPushMatrix();
+		GL11.glRotatef(90, 0, 1, 0);
+		ForwardCornerIn3.render(f5);
+		ForwardCornerIn3Body.render(f5);
+		ForwardCornerIn3Bottom.render(f5);
+		GL11.glPopMatrix();
 		Support23Right.render(f5);
 		Support18Right.render(f5);
 		Support22Right.render(f5);
@@ -350,8 +359,16 @@ public class ModelConveyorBelt extends ModelConveyorItemsBase {
 
 	@Override
 	protected void renderRight(TileEntity tl, float f5, ForgeDirection forward, ConnectionState front, ConnectionState right, ConnectionState back, ConnectionState left, ConnectionState up, ConnectionState down) {
-		InputLeft.render(f5);
-		InputLeftElev.render(f5);
+		
+		
+		//InputLeft.render(f5);
+		//InputLeftElev.render(f5);
+		GL11.glPushMatrix();
+		GL11.glRotatef(-90, 0, 1, 0);
+		ForwardCornerIn3.render(f5);
+		ForwardCornerIn3Body.render(f5);
+		ForwardCornerIn3Bottom.render(f5);
+		GL11.glPopMatrix();
 		Support16Left.render(f5);
 		Support17Left.render(f5);
 		Support20Left.render(f5);
@@ -363,6 +380,7 @@ public class ModelConveyorBelt extends ModelConveyorItemsBase {
 		ForwardCornerOutBody.render(f5);
 		ForwardCornerOutBottom.render(f5);
 		ForwardCornerOut.render(f5);
+		
 		Support11Back.render(f5);
 		Support8Back.render(f5);
 		Support7Back.render(f5);

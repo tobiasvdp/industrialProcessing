@@ -10,8 +10,7 @@ public class GuiContainerDryer extends GuiContainerFluidMachine {
 
 	private static final Rectangle TANK_SOURCE = new Rectangle(176, 17, 16, 50);
 	public GuiContainerDryer(InventoryPlayer inventoryPlayer, TileEntityDryer tileEntity) {
-		super(inventoryPlayer, tileEntity, new ContainerDryer(inventoryPlayer, tileEntity), "Dryer", "textures/gui/Dryer.png");
-		// setProgressBarLocation(76,34,24,17);
+		super(inventoryPlayer, tileEntity, new ContainerDryer(inventoryPlayer, tileEntity), "Dryer", "textures/gui/Dryer.png"); 
 	}
 
 	@Override

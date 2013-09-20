@@ -53,7 +53,7 @@ import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids;
 import ip.industrialProcessing.transport.fluids.TileEntityValve;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorBelt;
 import ip.industrialProcessing.transport.items.conveyorInput.TileEntityConveyorInput;
-import ip.industrialProcessing.transport.items.conveyorOutput.TEtransportConveyorBeltOutput;
+import ip.industrialProcessing.transport.items.conveyorOutput.TileEntityConveyorOutput;
 import net.minecraft.block.Block;
 import net.minecraft.src.ModLoader;
 import net.minecraftforge.common.MinecraftForge;
@@ -132,10 +132,10 @@ public class ConfigMachineBlocks {
 		registerMachineBlock(IndustrialProcessing.BLlogicDisplayBox, "IP.Logic.DsBox", "Display box", TElogicDisplayBox.class);
 		registerMachineBlock(IndustrialProcessing.BLlogicAnd, "IP.Logic.And", "And gate", TElogicAnd.class);
 		registerMachineBlock(IndustrialProcessing.BLlogicOr, "IP.Logic.Or", "Or gate", TElogicOr.class);
-		
-		registerMachineBlock(IndustrialProcessing.BLtransportConveyorBelt, "IP.Trans.CBelt", "Conveyor belt", TileEntityConveyorBelt.class);
-		registerMachineBlock(IndustrialProcessing.BLtransportConveyorBeltInput, "IP.Trans.CBInput", "Conveyor belt import", TileEntityConveyorInput.class);
-		registerMachineBlock(IndustrialProcessing.BLtransportConveyorBeltOutput, "IP.Trans.CBOutput", "Conveyor belt export", TEtransportConveyorBeltOutput.class);
+
+		registerMachineBlock(IndustrialProcessing.blockConveyorBelt, "IP.Trans.CBelt", "Conveyor belt", TileEntityConveyorBelt.class);
+		registerMachineBlock(IndustrialProcessing.blockConveyorBeltInput, "IP.Trans.CBInput", "Conveyor belt import", TileEntityConveyorInput.class);
+		registerMachineBlock(IndustrialProcessing.blockConveyorOutput, "IP.Trans.CBOutput", "Conveyor belt export", TileEntityConveyorOutput.class);
 
 		// multiblocks
 		registerMachineBlock(IndustrialProcessing.BLmultiblockDisplayPanel, "IP.MBD.Display", "Display panel", TEmultiblockDisplayPanel.class);
@@ -207,16 +207,20 @@ public class ConfigMachineBlocks {
 
 	public static int getBLlogicOr() {
 		return getInstance().BLlogicOr;
-	}	
+	}
+
 	public static int getBLlogicAnd() {
 		return getInstance().BLlogicAnd;
-	}	
+	}
+
 	public static int getBLlogicDisplayBox() {
 		return getInstance().BLlogicDisplayBox;
-	}	
+	}
+
 	public static int getBLlogicBundle() {
 		return getInstance().BLlogicBundle;
-	}	
+	}
+
 	public static int getBLlogicSwitchBox() {
 		return getInstance().BLlogicSwitchBox;
 	}

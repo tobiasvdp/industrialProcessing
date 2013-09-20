@@ -41,6 +41,10 @@ public class ContainerDiskFilter extends ContainerFluidMachine {
 		addSlotToContainer(outputDirtyWaterFullOutput);
 
 		ContainerUtils.BindPlayerInventory(inventoryPlayer, this, 0);
+		
+		addTankToContainer(0);
+		addTankToContainer(1);
+		addTankToContainer(2);
 	}
 
 	@Override

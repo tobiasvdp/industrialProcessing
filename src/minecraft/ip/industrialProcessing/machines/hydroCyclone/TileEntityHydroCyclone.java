@@ -34,11 +34,11 @@ public class TileEntityHydroCyclone extends TileEntityPoweredFluidWorkerMachine 
 	LocalDirection[] allSides = new LocalDirection[] { LocalDirection.LEFT, LocalDirection.RIGHT, LocalDirection.FRONT, LocalDirection.BACK };
 
 	// 0: input tank
-	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, allSides, true, false);
+	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.UP, true, false);
 	// 1: paste output tank
 	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.DOWN, false, true);
 	// 2: dirty water output tank
-	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, allSides, false, true);
+	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.RIGHT, false, true);
 
     }
 

@@ -37,6 +37,9 @@ public class ContainerClassifier extends ContainerFluidMachine {
 		addSlotToContainer(inputMixedFullOutput);
 
 		ContainerUtils.BindPlayerInventory(inventoryPlayer, this, 0);
+		
+		addTankToContainer(0);
+		addTankToContainer(1);
 	}
 
 }
