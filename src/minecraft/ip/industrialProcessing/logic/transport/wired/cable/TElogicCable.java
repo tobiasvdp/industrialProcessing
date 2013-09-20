@@ -31,6 +31,4 @@ public class TElogicCable extends TElogicTransport {
 		// TODO Auto-generated method stub
 		
 	}
-
-
 }

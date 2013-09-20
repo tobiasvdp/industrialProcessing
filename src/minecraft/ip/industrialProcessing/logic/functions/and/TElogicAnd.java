@@ -17,10 +17,10 @@ public class TElogicAnd extends TElogicNode implements IRotateableEntity {
 
 	@Override
 	public void transition() {
-			boolean right = (Boolean) getBuffer(ForgeDirection.EAST).get();
-			boolean left = (Boolean) getBuffer(ForgeDirection.WEST).get();
-			boolean front = left && right;
-			System.out.println(left + " " + right + " gives " + front);
+			//boolean right = (Boolean) getBuffer(ForgeDirection.EAST).get();
+			//boolean left = (Boolean) getBuffer(ForgeDirection.WEST).get();
+			//boolean front = left && right;
+			//System.out.println(left + " " + right + " gives " + front);
 	}
 
 	@Override

@@ -65,7 +65,8 @@ public class BLlogicOr extends BlockMachineRendered {
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float clickX, float clickY, float clickZ) {
 		ICommunicationNode com = (ICommunicationNode) world.getBlockTileEntity(x, y, z);
-		com.createDataPacket(ForgeDirection.EAST, new UTVariable(0,0,true));
+		com.createDataPacket(ForgeDirection.EAST, new UTVariable(0,0,true)); 
+		System.out.println("this value: " + com.getBuffer(ForgeDirection.EAST).get().value);
 		return super.onBlockActivated(world, x, y, z, player, metadata, clickX, clickY, clickZ);
 	}
 

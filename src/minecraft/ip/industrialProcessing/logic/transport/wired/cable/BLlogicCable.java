@@ -53,6 +53,9 @@ public class BLlogicCable extends BlockMachineRendered {
 		ICommunicationTransport com = (ICommunicationTransport) world.getBlockTileEntity(x, y, z);
 		com.isEnabled(false);
 		com.createRecheckPacket();
+		for(int i=0;i<com.getBlockSidesCount();i++){
+			this.dropBlockAsItem_do(world, x, y, z, new ItemStack(this));
+		}
 		super.removeBlockByPlayer(world, player, x, y, z);
 		return true;
 	}
@@ -94,14 +97,14 @@ public class BLlogicCable extends BlockMachineRendered {
 			int meta = (par1IBlockAccess.getBlockMetadata(par2, par3, par4));
 			setBoundsByMetadata(meta, 0.0f, 0.0f, 0.0f, 1f, 0.1f, 1f);
 		} else {
-			if (te instanceof TElogicCable) {
-				TElogicCable com = (TElogicCable) te;
-				/*if (com.getMultipleSides()) {
+			if (te instanceof ICommunicationTransport) {
+				ICommunicationTransport com = (ICommunicationTransport) te;
+				if (com.hasMultipleBlockSides()) {
 					setBlockBounds(0, 0, 0, 1.0f, 1.0f, 1.0f);
 				} else {
 					int meta = (par1IBlockAccess.getBlockMetadata(par2, par3, par4));
 					setBoundsByMetadata(meta, 0.0f, 0.0f, 0.0f, 1f, 0.1f, 1f);
-				}*/
+				}
 			}
 		}
 	}
@@ -121,12 +124,11 @@ public class BLlogicCable extends BlockMachineRendered {
 		TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
 		if (te == null)
 			return true;
-		if (te instanceof TElogicCable) {
-			TElogicCable com = (TElogicCable) te;
-			/*if (!com.sidePresent(par5)) {
-				com.addToConnectedSides(par5, true);
-				com.setMultipleSides(true);
-			}*/
+		if (te instanceof ICommunicationTransport) {
+			ICommunicationTransport com = (ICommunicationTransport) te;
+			if (!com.hasBlockSide(par5)) {
+				com.addToBlockside(par5);
+			}
 		}
 		return false;
 	}
@@ -153,24 +155,22 @@ public class BLlogicCable extends BlockMachineRendered {
 					side = 1;
 				else if (side == 1)
 					side = 0;
-				/*if (com.getPlacedSide(side)) {
+				if (com.hasBlockSide(side)) {
 					if (!canSideStay(dir, par1World, par2, par3, par4)) {
 						destroy = true;
-						//com.removeConnectedSides(side, false);
+						com.removeFromBlockside(side);
 						count++;
 					}
-				}*/
+				}
 			}
 			if (destroy) {
 				for (int i = 0; i < count; i++) {
 					this.dropBlockAsItem(par1World, par2, par3, par4, 0, 1);
 				}
-				/*System.out.println(com.getPlacedSidesSize());
-				if (com.getPlacedSidesSize() == 0) {
+				System.out.println(com.getBlockSidesCount());
+				if (com.getBlockSidesCount() == 0) {
 					par1World.destroyBlock(par2, par3, par4, false);
-				}else if(com.getPlacedSidesSize() == 1){
-					com.setMultipleSides(false);
-				}*/
+				}
 			}
 
 		}
