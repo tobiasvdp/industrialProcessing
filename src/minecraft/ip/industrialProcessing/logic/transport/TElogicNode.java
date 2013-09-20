@@ -140,6 +140,7 @@ public abstract class TElogicNode extends TileEntitySynced implements ICommunica
 	@Override
 	public void Receive(UTpacket packet) {
 		if(packet.getType() == UTpacketType.discovery){
+			System.out.println("Recieved on node side "+((ForgeDirection)packet.getData(0)));
 			this.registerNode(((ForgeDirection)packet.getData(0)), (ICommunicationNode) packet.getData(2), ((ForgeDirection)packet.getData(3)));
 			((ICommunicationNode) packet.getData(2)).registerNode(((ForgeDirection)packet.getData(3)), this, (ForgeDirection) (packet.getData(0)));
 		}
@@ -156,6 +157,7 @@ public abstract class TElogicNode extends TileEntitySynced implements ICommunica
 			for(UTVariable item:array){
 				buffer[receivingSide.ordinal()].put(item);
 			}
+			System.out.println(buffer[receivingSide.ordinal()].get().value);
 		}
 		ExtendedReceive(packet);
 	}
@@ -176,7 +178,7 @@ public abstract class TElogicNode extends TileEntitySynced implements ICommunica
 				for(int i =0;i<nodeCollection[sendingSide.ordinal()].getSize();i++){
 					ICommunicationNode com = nodeCollection[sendingSide.ordinal()].getNode(i);
 					packet.setData(0, nodeCollection[sendingSide.ordinal()].getSide(i));
-					System.out.println("packet send to "+sendingSide);
+					System.out.println("packet send to "+nodeCollection[sendingSide.ordinal()].getSide(i));
 					com.Receive(packet);
 				}
 			}
@@ -251,17 +253,17 @@ public abstract class TElogicNode extends TileEntitySynced implements ICommunica
 
 	@Override
 	public UTBuffer getBuffer(ForgeDirection dir) {
-		return buffer[dir.ordinal()];
+		return buffer[SIDEDTRANSFORMER.InternalToExternalDirection(this, dir).ordinal()];
 	}
 	@Override
 	public void createDiscoveryPacket(){
 		for(ForgeDirection sendingSide: ForgeDirection.VALID_DIRECTIONS)
-			packets.add(new UTpacket(UTpacketType.discovery, sendingSide.getOpposite(), new ArrayList<ICommunicationTransport>(), this, sendingSide));
+			packets.add(new UTpacket(UTpacketType.discovery, sendingSide, new ArrayList<ICommunicationTransport>(), this, sendingSide));
 		this.scheduleSend();
 	}
 	@Override
 	public void createDiscoveryPacket(ForgeDirection dir){
-		packets.add(new UTpacket(UTpacketType.discovery, dir.getOpposite(), new ArrayList<ICommunicationTransport>(), this, dir));
+		packets.add(new UTpacket(UTpacketType.discovery, dir, new ArrayList<ICommunicationTransport>(), this, dir));
 		this.scheduleSend();
 	}
 	@Override
@@ -276,8 +278,12 @@ public abstract class TElogicNode extends TileEntitySynced implements ICommunica
 	}
 	@Override
 	public void createDataPacket(ForgeDirection dir, UTVariable... data) {
+		System.out.println(SIDEDTRANSFORMER.InternalToExternalDirection(this, dir));
 		packets.add(new UTpacket(UTpacketType.data, SIDEDTRANSFORMER.InternalToExternalDirection(this, dir),data ));
 		this.scheduleSend();
+		for(UTVariable item:data){
+			buffer[SIDEDTRANSFORMER.InternalToExternalDirection(this, dir).ordinal()].put(item);
+		}
 	}
 	
 	@Override

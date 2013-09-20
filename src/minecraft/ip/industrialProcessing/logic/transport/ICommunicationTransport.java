@@ -13,4 +13,10 @@ public interface ICommunicationTransport extends ICommunication{
 	public boolean ContainsThis(ArrayList<ICommunicationTransport> path);
 	
 	public void createRecheckPacket();
+	
+	public void addToBlockside(int par5);
+	public void removeFromBlockside(int par5);
+	public boolean hasBlockSide(int side);
+	public boolean hasMultipleBlockSides();
+	public int getBlockSidesCount();
 }

@@ -25,7 +25,7 @@ public class UTBuffer {
 		return buffer;
 	}
 
-	public Object get() {
+	public UTVariable get() {
 		return buffer[0];
 	}
 	

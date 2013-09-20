@@ -289,7 +289,7 @@ public class MDlogicAnd extends ModelLogic {
 		IC2.render(f5);
 		drawPane.render(f5);
 		System.out.println(levels[3].get().getClass());
-		if (levels[3] != null &&  levels[3].get() instanceof Boolean && (Boolean) levels[3].get()) {
+		/*if (levels[3] != null &&  levels[3].get() instanceof Boolean && (Boolean) levels[3].get()) {
 			LaneLeft.render(f5);
 		}else{
 			GL11.glPushMatrix();
@@ -312,7 +312,7 @@ public class MDlogicAnd extends ModelLogic {
 			GL11.glColor3f(0.2f, 0.2f, 0.2f);
 			LaneFront.render(f5);
 			GL11.glPopMatrix();
-		}
+		}*/
 		
 		GL11.glPopMatrix();
 	}

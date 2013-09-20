@@ -64,4 +64,34 @@ public class TElogicDisplayBox extends TElogicNode implements ICommunicationNode
 		
 	}
 
+	@Override
+	public void addToBlockside(int par5) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeFromBlockside(int par5) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean hasBlockSide(int side) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean hasMultipleBlockSides() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public int getBlockSidesCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
