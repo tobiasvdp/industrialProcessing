@@ -8,7 +8,7 @@ public class UTBuffer {
 	public UTBuffer(UTBufferType type, int size) {
 		buffer = new UTVariable[size];
 		for(int i = 0;i<size;i++){
-			buffer[i] = new UTVariable(-1);
+			buffer[i] = new UTVariable(i,-1,null);
 		}
 	}
 
@@ -35,5 +35,9 @@ public class UTBuffer {
 	
 	public int size(){
 		return buffer.length;
+	}
+
+	public void put(UTVariable item) {
+		buffer[item.index] = new UTVariable(item);
 	}
 }

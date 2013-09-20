@@ -8,6 +8,7 @@ import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.logic.transport.ICommunication;
 import ip.industrialProcessing.logic.transport.ICommunicationNode;
 import ip.industrialProcessing.logic.transport.ICommunicationTransport;
+import ip.industrialProcessing.logic.utils.UTVariable;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.utils.ISidedRotation;
 import net.minecraft.block.Block;
@@ -62,14 +63,29 @@ public class BLlogicOr extends BlockMachineRendered {
 	}
 
 	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float clickX, float clickY, float clickZ) {
+		ICommunicationNode com = (ICommunicationNode) world.getBlockTileEntity(x, y, z);
+		com.createDataPacket(ForgeDirection.EAST, new UTVariable(0,0,true));
+		return super.onBlockActivated(world, x, y, z, player, metadata, clickX, clickY, clickZ);
+	}
+
+	@Override
 	public boolean removeBlockByPlayer(World world, EntityPlayer player, int x, int y, int z) {
 		ICommunicationNode com = (ICommunicationNode) world.getBlockTileEntity(x, y, z);
 		com.createDestructionPacket();
 		super.removeBlockByPlayer(world, player, x, y, z);
 		return true;
 	}
+
 	@Override
 	public int getRenderType() {
 		return ConfigRenderers.getBLlogicOr();
+	}
+
+	@Override
+	public void onBlockAdded(World par1World, int par2, int par3, int par4) {
+		if (par1World.isRemote)
+			par1World.markBlockForUpdate(par2, par3, par4);
+		super.onBlockAdded(par1World, par2, par3, par4);
 	}
 }
