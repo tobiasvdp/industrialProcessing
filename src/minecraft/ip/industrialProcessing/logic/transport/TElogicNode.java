@@ -8,7 +8,7 @@ import ip.industrialProcessing.logic.utils.UTlogicNodeContainer;
 import ip.industrialProcessing.logic.utils.UTpacket;
 import ip.industrialProcessing.logic.utils.UTpacketType;
 import ip.industrialProcessing.machines.TileEntitySynced;
-import ip.industrialProcessing.utils.ISidedRotation;
+import ip.industrialProcessing.utils.rotation.ISidedRotation;
 
 import java.util.ArrayList;
 

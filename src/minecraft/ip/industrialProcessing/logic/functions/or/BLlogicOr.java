@@ -10,7 +10,7 @@ import ip.industrialProcessing.logic.transport.ICommunicationNode;
 import ip.industrialProcessing.logic.transport.ICommunicationTransport;
 import ip.industrialProcessing.logic.utils.UTVariable;
 import ip.industrialProcessing.machines.BlockMachineRendered;
-import ip.industrialProcessing.utils.ISidedRotation;
+import ip.industrialProcessing.utils.rotation.ISidedRotation;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;

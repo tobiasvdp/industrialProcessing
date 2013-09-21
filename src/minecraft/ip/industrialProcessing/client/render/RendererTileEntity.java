@@ -4,7 +4,7 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.logic.transport.ICommunication;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.IRotateableEntity;
-import ip.industrialProcessing.utils.ISidedRotation;
+import ip.industrialProcessing.utils.rotation.ISidedRotation;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;

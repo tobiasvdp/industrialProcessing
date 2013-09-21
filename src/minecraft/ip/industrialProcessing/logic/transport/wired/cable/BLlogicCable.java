@@ -27,7 +27,7 @@ public class BLlogicCable extends BlockMachineRendered {
 
 	public BLlogicCable() {
 		super(ConfigMachineBlocks.getBLlogicCable(), Material.circuits, 5.0f, Block.soundPowderFootstep, "BLlogicCable", IndustrialProcessing.tabLogic);
-		
+		this.setBlockBounds(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 	}
 
 	@Override
@@ -95,15 +95,15 @@ public class BLlogicCable extends BlockMachineRendered {
 		TileEntity te = par1IBlockAccess.getBlockTileEntity(par2, par3, par4);
 		if (te == null) {
 			int meta = (par1IBlockAccess.getBlockMetadata(par2, par3, par4));
-			setBoundsByMetadata(meta, 0.0f, 0.0f, 0.0f, 1f, 0.1f, 1f);
+			setBoundsByMetadata(meta, 0.0f, 0.0f, 0.0f, 1f, 0.0f, 1f);
 		} else {
 			if (te instanceof ICommunicationTransport) {
 				ICommunicationTransport com = (ICommunicationTransport) te;
 				if (com.hasMultipleBlockSides()) {
-					setBlockBounds(0, 0, 0, 1.0f, 1.0f, 1.0f);
+					setBlockBounds(0, 0, 0, 1.0f, 0.0f, 1.0f);
 				} else {
 					int meta = (par1IBlockAccess.getBlockMetadata(par2, par3, par4));
-					setBoundsByMetadata(meta, 0.0f, 0.0f, 0.0f, 1f, 0.1f, 1f);
+					setBoundsByMetadata(meta, 0.0f, 0.0f, 0.0f, 1f, 0.0f, 1f);
 				}
 			}
 		}

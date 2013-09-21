@@ -2,7 +2,7 @@ package ip.industrialProcessing.logic.functions.or;
 
 import ip.industrialProcessing.logic.transport.TElogicNode;
 import ip.industrialProcessing.logic.utils.UTpacket;
-import ip.industrialProcessing.utils.ISidedRotation;
+import ip.industrialProcessing.utils.rotation.ISidedRotation;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;

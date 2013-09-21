@@ -1,4 +1,4 @@
-package ip.industrialProcessing.utils;
+package ip.industrialProcessing.utils.rotation;
 
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.common.ForgeDirection;
