@@ -1,5 +1,6 @@
 package ip.industrialProcessing.machines.animation;
 
+import net.minecraft.nbt.NBTTagCompound;
 import ip.industrialProcessing.client.render.IAnimationProgress;
 
 public class AnimationHandler {
@@ -109,5 +110,18 @@ public class AnimationHandler {
 	public void addSpeed(float f) {
 		this.setSpeed(this.getSpeed() + f);
 
+	}
+
+	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
+		this.speed = par1nbtTagCompound.getFloat("AnimationSpeed");
+		this.progress = par1nbtTagCompound.getFloat("AnimationProgress");
+		this.incrementing = par1nbtTagCompound.getBoolean("AnimationIncrementing");
+	}
+
+	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
+
+		par1nbtTagCompound.setFloat("AnimationSpeed", this.speed);
+		par1nbtTagCompound.setFloat("AnimationProgress", this.progress);
+		par1nbtTagCompound.setBoolean("AnimationIncrementing", this.incrementing);
 	}
 }

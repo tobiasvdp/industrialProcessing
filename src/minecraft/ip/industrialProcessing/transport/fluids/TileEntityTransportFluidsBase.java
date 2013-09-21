@@ -7,6 +7,7 @@ import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
 import ip.industrialProcessing.transport.TileEntityTransport;
 import ip.industrialProcessing.transport.TransportConnectionState;
 import ip.industrialProcessing.utils.FluidTransfers;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidTankInfo;
@@ -75,6 +76,13 @@ public abstract class TileEntityTransportFluidsBase extends TileEntityTransport 
 
 		if (this.tankHandler.readDataFromTanks())
 			TileTankSyncHandler.sendTankData(this, this.tankHandler);
+	}
+	
+	
+	@Override
+	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
+		// TODO Auto-generated method stub
+		super.writeToNBT(par1nbtTagCompound);
 	}
 
 	protected abstract void leakPressure();

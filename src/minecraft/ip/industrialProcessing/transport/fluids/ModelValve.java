@@ -1,17 +1,16 @@
 package ip.industrialProcessing.transport.fluids;
 
-import org.lwjgl.opengl.GL11;
-
+import ip.industrialProcessing.client.render.ConnectionState;
+import ip.industrialProcessing.client.render.ModelConnectedOrientedFluidAnimated;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraftforge.common.ForgeDirection;
-import ip.industrialProcessing.client.render.ConnectionState;
-import ip.industrialProcessing.client.render.ModelConnectedFluidAnimated;
-import ip.industrialProcessing.machines.BlockMachine;
 
-public class ModelValve extends ModelConnectedFluidAnimated {
+import org.lwjgl.opengl.GL11;
+
+public class ModelValve extends ModelConnectedOrientedFluidAnimated {
 
 	// fields
 	ModelRenderer Center;
@@ -383,7 +382,7 @@ public class ModelValve extends ModelConnectedFluidAnimated {
 	}
 
 	@Override
-	public void renderModelConnectedFluidAnimated(TileEntity tl, float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, Icon icon, float[] animation) {
+	protected void renderModelConnectedOrientedFluidAnimated(TileEntity tl, float f, ForgeDirection forward, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, Icon icon, float[] animation) {
 		fluidPercentage *= 0.9f;
 
 		if (north != ConnectionState.DISCONNECTED && tankSlot == ForgeDirection.NORTH.ordinal())
@@ -401,20 +400,20 @@ public class ModelValve extends ModelConnectedFluidAnimated {
 	}
 
 	@Override
-	public void renderModelConnectedAnimated(TileEntity tl, float f, ConnectionState north, ConnectionState west, ConnectionState south, ConnectionState east, ConnectionState up, ConnectionState down, float[] animation) {
+	protected void renderModelConnectedOrientedAnimated(TileEntity tl, float f, ForgeDirection forward, ConnectionState north, ConnectionState west, ConnectionState south, ConnectionState east, ConnectionState up, ConnectionState down, float[] animation) {
 		render(Up, UpConnector, up, f);
 		render(Down, DownConnector, down, f);
-		render(North, NorthConnector, north, f);
-		render(West, WestConnector, west, f);
-		render(South, SouthConnector, south, f);
-		render(East, EastConnector, east, f);
+		render(North, NorthConnector, south, f);
+		render(West, WestConnector, east, f);
+		render(South, SouthConnector, north, f);
+		render(East, EastConnector, west, f);
 		Center.render(f);
-
+		/*
+		 * int dir = 0; if (tl instanceof TileEntityValve) { TileEntityValve
+		 * valve = (TileEntityValve) tl; dir =
+		 * BlockMachine.getMetadataFromForward(valve.getForwardDirection()); }
+		 */
 		int dir = 0;
-		if (tl instanceof TileEntityValve) {
-			TileEntityValve valve = (TileEntityValve) tl;
-			dir = BlockMachine.getMetadataFromForward(valve.getForwardDirection());
-		}
 
 		if (animation != null) {
 			float ani = animation[0];
@@ -422,8 +421,7 @@ public class ModelValve extends ModelConnectedFluidAnimated {
 			float translate = 1f;
 			GL11.glTranslatef(0, translate, 0);
 			GL11.glRotatef(ani * 270f, 0, 0, 1);
-			GL11.glTranslatef(0, -translate, 0);
-			GL11.glRotatef(dir * 90, 0, 1, 0);
+			GL11.glTranslatef(0, -translate, 0); 
 			ValveAxle.render(f);
 			ValveRod1.render(f);
 			ValveRod2.render(f);

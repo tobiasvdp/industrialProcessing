@@ -8,9 +8,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
+import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.machines.BlockMachine;
+import ip.industrialProcessing.machines.BlockMachineRendered;
 
-public class BlockDryer extends BlockMachine {
+public class BlockDryer extends BlockMachineRendered {
 
 	public BlockDryer() {
 		super(ConfigMachineBlocks.getDryerBlockID(), Material.iron, 1f, Block.soundMetalFootstep, "Dryer", IndustrialProcessing.tabOreProcessing); 
@@ -21,4 +23,9 @@ public class BlockDryer extends BlockMachine {
 		return new TileEntityDryer();
 	}
 
+	
+	@Override
+	public int getRenderType() { 
+		return ConfigRenderers.getRendererDryerId();
+	}
 }

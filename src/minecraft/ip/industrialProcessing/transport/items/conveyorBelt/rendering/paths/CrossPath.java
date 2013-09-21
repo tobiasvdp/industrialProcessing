@@ -29,8 +29,7 @@ public class CrossPath extends ItemPath {
 			state.y = inbound.offsetY * d;
 			state.z = inbound.offsetZ * d; 
 			mul = -1;
-		} else {
-			System.out.println("CrossPath.getPosition()"+stack.destination);
+		} else { 
 			float d = stack.progress - 0.5f;
 			LocalDirection outbound = stack.destination;
 			state.x = outbound.offsetX * d;

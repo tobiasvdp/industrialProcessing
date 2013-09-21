@@ -98,7 +98,7 @@ public abstract class TileEntityConveyorInteractionBase extends TileEntityConvey
 
 	public void moveEntity(EntityLivingBase par5Entity) {
 
-		
+
 		if (par5Entity instanceof EntityPlayerMP) {
 			EntityPlayer player = (EntityPlayer) par5Entity;
 			for (int i = this.itemStacks.size() - 1; i >= 0; i--) {
@@ -110,7 +110,10 @@ public abstract class TileEntityConveyorInteractionBase extends TileEntityConvey
 					this.itemStacks.remove(i);
 			}
 		}
-
+ 
+		if (par5Entity.posY - par5Entity.yOffset < this.yCoord + 0.5f)
+			return;
+		
 		double dx = par5Entity.posX - this.xCoord - 0.5f;
 		double dy = par5Entity.posY - this.yCoord - 1.0f + par5Entity.height;
 		double dz = par5Entity.posZ - this.zCoord - 0.5f;

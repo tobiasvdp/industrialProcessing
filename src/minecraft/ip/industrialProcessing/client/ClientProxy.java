@@ -37,6 +37,8 @@ import ip.industrialProcessing.machines.crusher.ModelCrusher;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import ip.industrialProcessing.machines.diskFilter.ModelDiskFilter;
 import ip.industrialProcessing.machines.diskFilter.TileEntityDiskFilter;
+import ip.industrialProcessing.machines.dryer.ModelDryer;
+import ip.industrialProcessing.machines.dryer.TileEntityDryer;
 import ip.industrialProcessing.machines.filter.ModelFilter;
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
 import ip.industrialProcessing.machines.magneticSeparator.ModelMagneticSeperator;
@@ -109,6 +111,7 @@ public class ClientProxy extends CommonProxy {
 	private static final ModelAnimatedFluidMachine mixer = new ModelMixer();
 	private static final ModelCrusher crusher = new ModelCrusher();
 	private static final ModelAnimatedMachine diskFilter = new ModelDiskFilter();
+	private static final ModelMachine dryer = new ModelDryer();
 	private static final ModelConnected wire = new ModelWire();
 	private static final ModelAnimatedMachine voltMeter = new ModelVoltMeter(false);
 	private static final ModelAnimatedMachine ampMeter = new ModelVoltMeter(true);
@@ -164,6 +167,10 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrusher.class, new RendererTileEntityAnimated(IndustrialProcessing.blockCrusher, "ModelCrusher", crusher));
 		ConfigRenderers.setRendererCrusherId(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererCrusherId(), new TileEntityCrusher()));
+
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDryer.class, new RendererTileEntity(IndustrialProcessing.blockDryer, "ModelDryer", dryer));
+		ConfigRenderers.setRendererDryerId(RenderingRegistry.getNextAvailableRenderId());
+		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererDryerId(), new TileEntityDryer()));
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDiskFilter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockDiskFilter, "ModelDiskFilter", diskFilter));
 		ConfigRenderers.setRendererDiskFilterIdId(RenderingRegistry.getNextAvailableRenderId());

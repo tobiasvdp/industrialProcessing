@@ -3,6 +3,7 @@ package ip.industrialProcessing.machines;
 import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
 import ip.industrialProcessing.machines.animation.AnimationMode;
+import ip.industrialProcessing.machines.animation.IAnimationSyncable;
 import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 import ip.industrialProcessing.recipes.IRecipeFluidWorkHandler;
 import ip.industrialProcessing.recipes.Recipe;
@@ -18,7 +19,7 @@ import java.util.Iterator;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachine implements IRecipeFluidWorkHandler, IAnimationProgress {
+public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachine implements IRecipeFluidWorkHandler, IAnimationProgress, IAnimationSyncable {
 
 	public TileEntityFluidWorkerMachine() {
 		this.serverWorker = createServerSideWorker();
@@ -94,7 +95,7 @@ public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachin
 	public void workProgressed(int amount) {
 		updateAnimation(amount);
 	}
-
+ 
 	protected void updateAnimation(int workDone) {
 		IWorker worker = getWorker();
 		float maxWork = worker.getTotalWork();
@@ -154,4 +155,5 @@ public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachin
 	public TileEntity getTileEntity() {
 		return this;
 	}
+	 
 }

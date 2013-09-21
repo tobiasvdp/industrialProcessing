@@ -1,13 +1,14 @@
 package ip.industrialProcessing.machines.dryer;
 
 import ip.industrialProcessing.machines.containers.ContainerFluidMachine;
+import ip.industrialProcessing.machines.containers.ContainerPoweredFluidWorkerMachine;
 import ip.industrialProcessing.slots.SlotBase;
 import ip.industrialProcessing.slots.SlotLiquid;
 import ip.industrialProcessing.slots.SlotLiquidOutput;
 import ip.industrialProcessing.utils.containers.ContainerUtils;
 import net.minecraft.entity.player.InventoryPlayer;
 
-public class ContainerDryer extends ContainerFluidMachine {
+public class ContainerDryer extends ContainerPoweredFluidWorkerMachine {
 
 	private TileEntityDryer tileEntityDryer;
 	private SlotBase outputSlot;
@@ -37,6 +38,9 @@ public class ContainerDryer extends ContainerFluidMachine {
 		
 		addTankToContainer(0);
 		addTankToContainer(1);
+        
+        addWorkerToContainer(tileEntityDryer.getWorker());
+        addPowerToContainer(tileEntityDryer.getMainPowerStorage());
 	}
 
 	@Override

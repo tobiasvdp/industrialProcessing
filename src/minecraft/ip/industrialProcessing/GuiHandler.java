@@ -7,7 +7,7 @@ import ip.industrialProcessing.machines.classifier.ContainerClassifier;
 import ip.industrialProcessing.machines.classifier.GuiContainerClassifier;
 import ip.industrialProcessing.machines.classifier.TileEntityClassifier;
 import ip.industrialProcessing.machines.crusher.ContainerCrusher;
-import ip.industrialProcessing.machines.crusher.GuiCrusher;
+import ip.industrialProcessing.machines.crusher.GuiContainerCrusher;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import ip.industrialProcessing.machines.diskFilter.ContainerDiskFilter;
 import ip.industrialProcessing.machines.diskFilter.GuiContainerDiskFilter;
@@ -126,7 +126,7 @@ public class GuiHandler implements IGuiHandler {
 			if (entity instanceof TileEntityFilter)
 				return new GuiContainerFilter(player.inventory, (TileEntityFilter) entity);
 			if (entity instanceof TileEntityCrusher)
-				return new GuiCrusher(player.inventory, (TileEntityCrusher) entity);
+				return new GuiContainerCrusher(player.inventory, (TileEntityCrusher) entity);
 			if (entity instanceof TileEntityMagneticSeparator)
 				return new GuiContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity);
 			if (entity instanceof TileEntityMixer)
