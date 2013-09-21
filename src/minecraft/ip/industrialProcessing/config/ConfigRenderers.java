@@ -11,6 +11,7 @@ public class ConfigRenderers {
 	private int rendererFilterID;
 	private int rendererMagneticSeperatorID;
 	private int rendererCrusherID;
+	private int rendererDryerID;
 	private int rendererDiskFilterID;
 	private int rendererVoltMeterID;
 	private int rendererAmpMeterID;
@@ -271,6 +272,14 @@ public class ConfigRenderers {
 
 	public static void setRendererCrusherId(int value) {
 		getInstance().rendererCrusherID = value;
+	}
+
+	public static int getRendererDryerId() {
+		return getInstance().rendererDryerID;
+	}
+
+	public static void setRendererDryerId(int value) {
+		getInstance().rendererDryerID = value;
 	}
 
 	public static int getRendererDiskFilterId() {

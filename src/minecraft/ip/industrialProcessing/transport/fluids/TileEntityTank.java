@@ -167,6 +167,12 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
 			return this.tank;
 		return null;
 	}
+	
+	@Override
+	public int getTankCount() { 
+		return 1;
+	}
+
 
 	@Override
 	public float getPressure(ForgeDirection from) {

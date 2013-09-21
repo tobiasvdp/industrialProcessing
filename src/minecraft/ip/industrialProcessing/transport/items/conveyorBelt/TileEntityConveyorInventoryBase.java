@@ -92,23 +92,7 @@ public abstract class TileEntityConveyorInventoryBase extends TileEntityConveyor
 				}
 			}
 		}
-
-		/*
-		 * for (int i = 0; i < 6; i++) { ForgeDirection direction =
-		 * ForgeDirection.getOrientation(i); LocalDirection local =
-		 * DirectionUtils.getLocalDirection(direction, this.forwardDirection);
-		 * if (local != source) { if (isOutput(direction)) {
-		 * TransportConnectionState state = this.states[direction.ordinal()]; if
-		 * (state.isOutput()) { TileEntity neighbor =
-		 * ConveyorEnvironment.getNeighbor(this, direction); if (neighbor
-		 * instanceof IInventory) { if (ItemTransfers.canInsert(stack,
-		 * (IInventory) neighbor, direction.getOpposite())) return local; } else
-		 * return local; } } } } for (int i = 5; i > 0; i--) { ForgeDirection
-		 * direction = ForgeDirection.getOrientation(i); LocalDirection local =
-		 * DirectionUtils.getLocalDirection(direction, this.forwardDirection);
-		 * if (local != source && isOutput(direction)) return local; } return
-		 * LocalDirection.UP;
-		 */
+ 
 		return LocalDirection.UNKNOWN;
 	}
 
@@ -142,7 +126,7 @@ public abstract class TileEntityConveyorInventoryBase extends TileEntityConveyor
 				if (inventory instanceof ISidedInventory) {
 					ISidedInventory sidedInventory = (ISidedInventory) inventory;
 					int[] slots = sidedInventory.getAccessibleSlotsFromSide(opposite.ordinal());
-					for (int j = slots.length - 1; j >= 0; j--) {
+					for (int j = 0; j < slots.length; j++) {
 						ItemStack stack = sidedInventory.getStackInSlot(slots[j]);
 						sidedInventory.canExtractItem(slots[j], stack, opposite.ordinal());
 						ItemStack item = sidedInventory.decrStackSize(slots[j], 1);
@@ -151,7 +135,7 @@ public abstract class TileEntityConveyorInventoryBase extends TileEntityConveyor
 						}
 					}
 				} else {
-					for (int j = inventory.getSizeInventory() - 1; j >= 0; j--) {
+					for (int j = 0; j <  inventory.getSizeInventory(); j++) {
 						ItemStack item = inventory.decrStackSize(j, 1);
 						if (item != null) {
 							return item;

@@ -41,18 +41,16 @@ public class TileEntityTransportFluids extends TileEntityTransportFluidsBase {
 	private FluidTank tank = new FluidTank(1000);
 	private float pressure = 0;
 
-	public TileEntityTransportFluids()
-	{
-		 this.tankHandler = new TankHandler(this, new int[] { 0 });
+	public TileEntityTransportFluids() {
+		this.tankHandler = new TankHandler(this, new int[] { 0 });
 	}
-	
+
 	@Override
 	protected void leakPressure() {
 		this.pressure -= this.pressure * 0.005f;
 		if (Float.isNaN(this.pressure) || Float.isInfinite(this.pressure))
 			this.pressure = 0;
 	}
- 
 
 	@Override
 	protected IFluidTank getTank(ForgeDirection direction) {
@@ -63,7 +61,6 @@ public class TileEntityTransportFluids extends TileEntityTransportFluidsBase {
 	protected float getPressure(ForgeDirection direction) {
 		return this.pressure;
 	}
- 
 
 	@Override
 	protected void addPressure(ForgeDirection direction, float value) {
@@ -76,12 +73,31 @@ public class TileEntityTransportFluids extends TileEntityTransportFluidsBase {
 	}
 
 	@Override
-	public IFluidTank getTankInSlot(int slot) { 
+	public IFluidTank getTankInSlot(int slot) {
 		return this.tank;
 	}
 
 	@Override
-	protected boolean canConnect(ForgeDirection direction) { 
+	public int getTankCount() {
+		return 1;
+	}
+
+	@Override
+	protected boolean canConnect(ForgeDirection direction) {
 		return true;
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
+		super.readFromNBT(par1nbtTagCompound);
+		this.tank.readFromNBT(par1nbtTagCompound);
+		this.pressure = par1nbtTagCompound.getFloat("Pressure");
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
+		super.writeToNBT(par1nbtTagCompound);
+		this.tank.writeToNBT(par1nbtTagCompound);
+		par1nbtTagCompound.setFloat("Pressure", this.pressure);
 	}
 }

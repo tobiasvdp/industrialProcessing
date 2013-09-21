@@ -244,7 +244,8 @@ public class ModelMixer extends ModelAnimatedFluidMachine {
 
 	@Override
 	public void renderLiquid(TileEntity tl, float f, int tankSlot, float percentageFilled, Icon icon) {
-		// Vec3 p1 = new Vec3(-6.5F, -0.4666667F, -6.5F);//, 13, 0, 13
+		// Vec3 p1 = new Vec3(-6.5F, -0.4666667F, -6.5F);//, 13, 0, 13 
+
 		if (tankSlot == 0) {
 			float par1 = -6.5f;
 			float par2 = -6.5f;
@@ -253,7 +254,7 @@ public class ModelMixer extends ModelAnimatedFluidMachine {
 			int par5 = 13;
 			Tessellator tessellator = Tessellator.instance;
 			tessellator.startDrawingQuads();
-
+			tessellator.setNormal(0, -1, 0);
 			tessellator.addVertexWithUV((double) (par1 + 0) * f, (double) par3 * f, (double) (par2 + 0) * f, (double) icon.getMinU(), (double) icon.getMinV());
 			tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) par3 * f, (double) (par2 + 0) * f, (double) icon.getMaxU(), (double) icon.getMinV());
 			tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) par3 * f, (double) (par2 + par5) * f, (double) icon.getMaxU(), (double) icon.getMaxV());

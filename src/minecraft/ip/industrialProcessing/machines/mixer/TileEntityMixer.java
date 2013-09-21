@@ -4,6 +4,7 @@ import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
 import ip.industrialProcessing.machines.animation.tanks.ITankSyncable;
 import ip.industrialProcessing.machines.animation.tanks.TankHandler;
+import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
 import ip.industrialProcessing.recipes.Recipe;
 
 import java.util.Iterator;
@@ -43,6 +44,8 @@ public class TileEntityMixer extends TileEntityPoweredFluidWorkerMachine impleme
 	public void updateEntity() {
 		addBucketToTank(1, 2, 0);
 		getBucketFromTank(3, 4, 1);
+		if (this.tankHandler.readDataFromTanks())
+			TileTankSyncHandler.sendTankData(this, this.tankHandler);
 		super.updateEntity();
 	};
 
@@ -87,7 +90,7 @@ public class TileEntityMixer extends TileEntityPoweredFluidWorkerMachine impleme
 	}
 
 	@Override
-	public TankHandler getTankHandler() { 
+	public TankHandler getTankHandler() {
 		return this.tankHandler;
 	}
 

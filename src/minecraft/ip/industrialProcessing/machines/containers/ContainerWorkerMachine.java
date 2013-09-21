@@ -21,7 +21,7 @@ public class ContainerWorkerMachine extends ContainerMachine {
 
 	ArrayList<ProgressBarHandlerInfo> workerHandlers = new ArrayList<ProgressBarHandlerInfo>();	
 	
-	protected void addWorker(IWorker worker) {
+	protected void addWorkerToContainer(IWorker worker) {
 		IProgressBarHandler handler = new ProgressBarWorkerHandler(worker);
 		ProgressBarHandlerInfo info = addProgressBar(handler);
 		this.workerHandlers.add(info); 

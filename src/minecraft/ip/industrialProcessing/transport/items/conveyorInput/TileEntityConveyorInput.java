@@ -12,9 +12,7 @@ import ip.industrialProcessing.transport.items.conveyorBelt.ConnectionMode;
 import ip.industrialProcessing.transport.items.conveyorBelt.MovingItemStack;
 import ip.industrialProcessing.transport.items.conveyorBelt.SlopeState;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorBelt;
-import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorInventoryBase;
-import ip.industrialProcessing.transport.items.interfaces.IItemAcceptor;
-import ip.industrialProcessing.transport.items.interfaces.IItemAcceptorInput;
+import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorInventoryBase; 
 
 public class TileEntityConveyorInput extends TileEntityConveyorInventoryBase {
 

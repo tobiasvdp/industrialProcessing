@@ -4,6 +4,8 @@ import java.util.Arrays;
 
 import org.lwjgl.Sys;
 
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
@@ -12,6 +14,7 @@ import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.IAnimationProgress;
+import ip.industrialProcessing.machines.IRotateableEntity;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
 import ip.industrialProcessing.machines.animation.AnimationMode;
 import ip.industrialProcessing.machines.animation.IAnimationSyncable;
@@ -20,7 +23,7 @@ import ip.industrialProcessing.machines.animation.tanks.TankHandler;
 import ip.industrialProcessing.transport.TransportConnectionState;
 import ip.industrialProcessing.utils.FluidTransfers;
 
-public class TileEntityValve extends TileEntityTransportFluidsBase implements IAnimationProgress, IAnimationSyncable {
+public class TileEntityValve extends TileEntityTransportFluidsBase implements IAnimationProgress, IAnimationSyncable, IRotateableEntity {
 	private AnimationHandler animationHandler = new AnimationHandler(AnimationMode.CLAMP, 1f, true);
 	private final FluidTank[] tanks = new FluidTank[6];
 	private float[] pressures = new float[6];
@@ -141,6 +144,11 @@ public class TileEntityValve extends TileEntityTransportFluidsBase implements IA
 	}
 
 	@Override
+	public int getTankCount() {
+		return this.tanks.length;
+	}
+
+	@Override
 	public FluidTankInfo[] getTanks() {
 		FluidTankInfo[] info = new FluidTankInfo[6];
 		for (int i = 0; i < tanks.length; i++) {
@@ -198,7 +206,41 @@ public class TileEntityValve extends TileEntityTransportFluidsBase implements IA
 		this.frontDirection = forwardFromMetadata;
 	}
 
-	public ForgeDirection getForwardDirection() { 
+	public ForgeDirection getForwardDirection() {
 		return this.frontDirection;
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
+		super.readFromNBT(par1nbtTagCompound);
+		this.animationHandler.readFromNBT(par1nbtTagCompound);
+
+		this.tank.readFromNBT(par1nbtTagCompound);
+		this.pressure = par1nbtTagCompound.getFloat("Pressure");
+
+		NBTTagList list = par1nbtTagCompound.getTagList("Tanks");
+		for (int i = 0; i < list.tagCount(); i++) {
+			NBTTagCompound compound = (NBTTagCompound) list.tagAt(i);
+			this.tanks[i].readFromNBT(compound);
+			this.pressures[i] = compound.getFloat("Pressure");
+		}
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
+		super.writeToNBT(par1nbtTagCompound);
+		this.animationHandler.writeToNBT(par1nbtTagCompound);
+
+		this.tank.writeToNBT(par1nbtTagCompound);
+		par1nbtTagCompound.setFloat("Pressure", this.pressure);
+
+		NBTTagList list = new NBTTagList();
+		for (int i = 0; i < 6; i++) {
+			NBTTagCompound compound = new NBTTagCompound();
+			this.tanks[i].writeToNBT(compound);
+			this.pressures[i] = compound.getFloat("Pressure");
+			list.appendTag(compound);
+		}
+		par1nbtTagCompound.setTag("Tanks", list);
 	}
 }

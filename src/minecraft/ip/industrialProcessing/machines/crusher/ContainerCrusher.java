@@ -32,8 +32,8 @@ public class ContainerCrusher extends ContainerPoweredWorkerMachine {
         
         ContainerUtils.BindPlayerInventory(inventoryPlayer, this, 0);
         
-        addWorker(tileEntityCrusher.getWorker());
-        addPower(tileEntityCrusher.getMainPowerStorage());
+        addWorkerToContainer(tileEntityCrusher.getWorker());
+        addPowerToContainer(tileEntityCrusher.getMainPowerStorage());
 	}
 	@Override
 	public int getSizeInventory() {

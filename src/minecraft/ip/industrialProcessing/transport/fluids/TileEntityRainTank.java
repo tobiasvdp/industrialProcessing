@@ -16,6 +16,7 @@ import java.util.Arrays;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -52,7 +53,8 @@ public class TileEntityRainTank extends TileEntityFluidMachine implements IConne
 			if (this.worldObj.isRaining()) {
 				int y = this.worldObj.getTopSolidOrLiquidBlock(xCoord, zCoord);
 				
-				int rain = (int)(1 * this.worldObj.getBiomeGenForCoords(xCoord, zCoord).rainfall);
+				BiomeGenBase biome = this.worldObj.getBiomeGenForCoords(xCoord, zCoord); 
+				int rain = (int)(10 * biome.rainfall);
 				if (y == yCoord + 1) {
 					tank.fill(new FluidStack(FluidRegistry.WATER, rain), true);
 				}

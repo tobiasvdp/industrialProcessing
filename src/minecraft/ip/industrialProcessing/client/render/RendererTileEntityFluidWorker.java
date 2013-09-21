@@ -36,7 +36,7 @@ public class RendererTileEntityFluidWorker extends RendererTileEntityAnimated {
 				int amount = handler.getAmount(l);
 				int fluidId = handler.getFluidID(l);
 				int capacity = handler.getCapacity(l);
-				if (fluidId >= 0) {
+				if (fluidId > 0) {
 					Fluid fluid = FluidRegistry.getFluid(fluidId);
 					if (fluid != null) {
 						Icon icon = fluid.getStillIcon();
