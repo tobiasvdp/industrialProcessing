@@ -1,9 +1,9 @@
 package ip.industrialProcessing.logic.transport.wired.bundle;
 
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.config.ConfigMachineBlocks;
+import ip.industrialProcessing.logic.IPLogic;
+import ip.industrialProcessing.logic.config.ConfigLogic;
 import ip.industrialProcessing.logic.transport.ICommunicationTransport;
-import ip.industrialProcessing.logic.transport.wired.cable.TElogicCable;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -16,11 +16,11 @@ import net.minecraft.world.World;
 public class BLlogicBundle extends BlockContainer{
 
 	public BLlogicBundle() {
-		super(ConfigMachineBlocks.getBLlogicBundle(), Material.circuits);
+		super(ConfigLogic.getBLlogicBundle(), Material.circuits);
 		setHardness(5.0f);
 		setStepSound(Block.soundPowderFootstep);
 		setUnlocalizedName("BLlogicBundle");
-		setCreativeTab(IndustrialProcessing.tabLogic);
+		setCreativeTab(IPLogic.tabLogic);
 		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "inputTop");
 	}
 

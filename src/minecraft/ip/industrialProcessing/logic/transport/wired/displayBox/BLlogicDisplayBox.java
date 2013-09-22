@@ -1,10 +1,10 @@
 package ip.industrialProcessing.logic.transport.wired.displayBox;
 
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.config.ConfigMachineBlocks;
+import ip.industrialProcessing.logic.IPLogic;
+import ip.industrialProcessing.logic.config.ConfigLogic;
 import ip.industrialProcessing.logic.transport.ICommunicationNode;
 import ip.industrialProcessing.logic.transport.ICommunicationTransport;
-import ip.industrialProcessing.logic.transport.wired.cable.TElogicCable;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -17,11 +17,11 @@ import net.minecraft.world.World;
 public class BLlogicDisplayBox extends BlockContainer {
 
 	public BLlogicDisplayBox() {
-		super(ConfigMachineBlocks.getBLlogicDisplayBox(), Material.iron);
+		super(ConfigLogic.getBLlogicDisplayBox(), Material.iron);
 		setHardness(5.0f);
 		setStepSound(Block.soundMetalFootstep);
 		setUnlocalizedName("BLlogicDisplayBox");
-		setCreativeTab(IndustrialProcessing.tabLogic);
+		setCreativeTab(IPLogic.tabLogic);
 		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "inputTop");
 	}
 

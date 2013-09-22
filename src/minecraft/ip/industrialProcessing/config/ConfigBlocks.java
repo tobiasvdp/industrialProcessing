@@ -1,6 +1,7 @@
 package ip.industrialProcessing.config;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.api.config.ConfigCategories;
 import net.minecraft.block.Block;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;

@@ -45,7 +45,7 @@ public class GuiContainerBoiler extends GuiContainerFluidMachine {
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) { 
 		super.drawGuiContainerForegroundLayer(param1, param2);
 		int temp = this.container.getTemperature();
-		fontRenderer.drawStringWithShadow(temp+"°C", 98, 56, 0xFFFFFF);
+		fontRenderer.drawStringWithShadow(temp+"C", 98, 56, 0xFFFFFF);
 	}
 
 }

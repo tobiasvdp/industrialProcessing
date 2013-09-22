@@ -1,7 +1,7 @@
-package ip.industrialProcessing.client.render;
+package ip.industrialProcessing.logic.client;
 
+import ip.industrialProcessing.api.rendering.ModelMachine;
 import ip.industrialProcessing.logic.utils.UTBuffer;
-import net.minecraftforge.common.ForgeDirection;
 
 public abstract class ModelLogic extends ModelMachine{
 

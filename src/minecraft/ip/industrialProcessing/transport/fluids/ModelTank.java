@@ -4,10 +4,10 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
+import ip.industrialProcessing.api.rendering.ModelMachine;
 import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.ModelConnected;
 import ip.industrialProcessing.client.render.ModelConnectedFluid;
-import ip.industrialProcessing.client.render.ModelMachine;
 import ip.industrialProcessing.client.render.ModelStateMachine;
 
 public class ModelTank extends ModelConnectedFluid {

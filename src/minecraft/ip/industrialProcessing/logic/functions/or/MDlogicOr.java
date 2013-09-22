@@ -1,11 +1,11 @@
 package ip.industrialProcessing.logic.functions.or;
 
-import org.lwjgl.opengl.GL11;
-
+import ip.industrialProcessing.logic.client.ModelLogic;
+import ip.industrialProcessing.logic.utils.UTBuffer;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import ip.industrialProcessing.client.render.ModelLogic;
-import ip.industrialProcessing.logic.utils.UTBuffer;
+
+import org.lwjgl.opengl.GL11;
 
 public class MDlogicOr extends ModelLogic {
 	// fields

@@ -2,8 +2,8 @@ package ip.industrialProcessing.machines.filter;
 
 import org.lwjgl.opengl.GL11;
 
+import ip.industrialProcessing.api.rendering.ModelMachine;
 import ip.industrialProcessing.client.render.ModelAnimatedMachine;
-import ip.industrialProcessing.client.render.ModelMachine;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;

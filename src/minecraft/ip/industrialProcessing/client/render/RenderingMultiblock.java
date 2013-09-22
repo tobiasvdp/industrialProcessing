@@ -1,6 +1,7 @@
 package ip.industrialProcessing.client.render;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.api.rendering.RendererTileEntity;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
 import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
 import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;

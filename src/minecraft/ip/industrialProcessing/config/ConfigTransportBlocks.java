@@ -1,6 +1,7 @@
 package ip.industrialProcessing.config;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.api.config.ConfigCategories;
 
 public class ConfigTransportBlocks {
 	private int blockTransportFluidsID = IndustrialProcessing.config.get(ConfigCategories.transport.toString(),"FluidPipeID",3500).getInt();

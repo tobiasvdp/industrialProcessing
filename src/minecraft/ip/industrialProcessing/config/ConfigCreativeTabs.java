@@ -3,7 +3,7 @@ package ip.industrialProcessing.config;
 import ip.industrialProcessing.IndustrialProcessing;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import ip.industrialProcessing.CreativeTabsIP;
+import ip.industrialProcessing.api.utils.CreativeTabsIP;
 
 public class ConfigCreativeTabs {
 
@@ -16,8 +16,7 @@ public class ConfigCreativeTabs {
 		((CreativeTabsIP) IndustrialProcessing.tabPower).setIcon(new ItemStack(IndustrialProcessing.blockWire));
 		LanguageRegistry.instance().addStringLocalization("IP.itemGroup.tabMultiblocks", "en_US", "IP Multiblocks");
 		((CreativeTabsIP) IndustrialProcessing.tabMultiblocks).setIcon(new ItemStack(IndustrialProcessing.BLmultiblockWheelConnector));
-		LanguageRegistry.instance().addStringLocalization("IP.itemGroup.tabLogic", "en_US", "IP Logic");
-		((CreativeTabsIP) IndustrialProcessing.tabLogic).setIcon(new ItemStack(IndustrialProcessing.BLlogicSwitchBox));
+
 	}
 	
 	public ConfigCreativeTabs() {

@@ -1,13 +1,11 @@
 package ip.industrialProcessing.logic.functions.and;
 
+import ip.industrialProcessing.logic.transport.TElogicNode;
+import ip.industrialProcessing.logic.utils.UTpacket;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
-import ip.industrialProcessing.logic.transport.TElogicNode;
-import ip.industrialProcessing.logic.utils.UTBusType;
-import ip.industrialProcessing.logic.utils.UTpacket;
-import ip.industrialProcessing.machines.IRotateableEntity;
 
-public class TElogicAnd extends TElogicNode implements IRotateableEntity {
+public class TElogicAnd extends TElogicNode {
 
 	private ForgeDirection forwardDirection;
 
@@ -21,16 +19,6 @@ public class TElogicAnd extends TElogicNode implements IRotateableEntity {
 			//boolean left = (Boolean) getBuffer(ForgeDirection.WEST).get();
 			//boolean front = left && right;
 			//System.out.println(left + " " + right + " gives " + front);
-	}
-
-	@Override
-	public ForgeDirection getForwardDirection() {
-		return forwardDirection;
-	}
-
-	@Override
-	public void setForwardDirection(ForgeDirection forwardFromMetadata) {
-		this.forwardDirection = forwardFromMetadata;
 	}
 
 	@Override

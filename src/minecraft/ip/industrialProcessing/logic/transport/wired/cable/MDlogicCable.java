@@ -3,7 +3,7 @@ package ip.industrialProcessing.logic.transport.wired.cable;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.model.ModelRenderer;
-import ip.industrialProcessing.client.render.ModelLogic;
+import ip.industrialProcessing.logic.client.ModelLogic;
 import ip.industrialProcessing.logic.utils.UTBuffer;
 
 public class MDlogicCable extends ModelLogic {

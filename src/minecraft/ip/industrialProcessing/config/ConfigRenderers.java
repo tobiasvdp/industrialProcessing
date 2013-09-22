@@ -45,42 +45,6 @@ public class ConfigRenderers {
 	private int rendererPumpId;
 	private int rendererRainTankID;
 	private int rendererValveID;
-	private int BLlogicSwitchBox;
-	private int BLlogicCable;
-	private int BLlogicAnd;
-	private int BLlogicOr;
-
-	public static int getBLlogicOr() {
-		return getInstance().BLlogicOr;
-	}
-
-	public static void setBLlogicOr(int value) {
-		getInstance().BLlogicOr = value;
-	}
-
-	public static int getBLlogicAnd() {
-		return getInstance().BLlogicAnd;
-	}
-
-	public static void setBLlogicAnd(int value) {
-		getInstance().BLlogicAnd = value;
-	}
-
-	public static int getBLlogicCable() {
-		return getInstance().BLlogicCable;
-	}
-
-	public static void setBLlogicCable(int value) {
-		getInstance().BLlogicCable = value;
-	}
-
-	public static int getBLlogicSwitchBox() {
-		return getInstance().BLlogicSwitchBox;
-	}
-
-	public static void setBLlogicSwitchBox(int value) {
-		getInstance().BLlogicSwitchBox = value;
-	}
 
 	public static int getRendererConveyorBeltID() {
 		return getInstance().rendererConveyorBelt;

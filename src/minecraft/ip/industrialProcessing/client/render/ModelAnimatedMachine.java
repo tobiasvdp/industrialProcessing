@@ -1,5 +1,6 @@
 package ip.industrialProcessing.client.render;
 
+import ip.industrialProcessing.api.rendering.ModelMachine;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 

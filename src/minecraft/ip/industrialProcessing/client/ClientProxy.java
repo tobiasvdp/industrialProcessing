@@ -2,17 +2,17 @@ package ip.industrialProcessing.client;
 
 import ip.industrialProcessing.CommonProxy;
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.api.rendering.ModelMachine;
+import ip.industrialProcessing.api.rendering.RendererBlock;
+import ip.industrialProcessing.api.rendering.RendererTileEntity;
 import ip.industrialProcessing.client.render.ModelAnimatedFluidMachine;
 import ip.industrialProcessing.client.render.ModelAnimatedMachine;
 import ip.industrialProcessing.client.render.ModelConnected;
 import ip.industrialProcessing.client.render.ModelConnectedFluid;
 import ip.industrialProcessing.client.render.ModelConnectedFluidAnimated;
-import ip.industrialProcessing.client.render.ModelMachine;
 import ip.industrialProcessing.client.render.ModelStateMachine;
 import ip.industrialProcessing.client.render.ModelingMultiblock;
 import ip.industrialProcessing.client.render.RendererLivingEntity;
-import ip.industrialProcessing.client.render.RendererLogic;
-import ip.industrialProcessing.client.render.RendererTileEntity;
 import ip.industrialProcessing.client.render.RendererTileEntityAnimated;
 import ip.industrialProcessing.client.render.RendererTileEntityConnected;
 import ip.industrialProcessing.client.render.RendererTileEntityConnectedFluid;
@@ -21,6 +21,7 @@ import ip.industrialProcessing.client.render.RendererTileEntityFluidWorker;
 import ip.industrialProcessing.client.render.RendererTileEntityState;
 import ip.industrialProcessing.client.render.RenderingMultiblock;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.logic.config.RendererLogic;
 import ip.industrialProcessing.logic.functions.and.MDlogicAnd;
 import ip.industrialProcessing.logic.functions.and.TElogicAnd;
 import ip.industrialProcessing.logic.functions.or.MDlogicOr;
@@ -29,7 +30,6 @@ import ip.industrialProcessing.logic.transport.wired.cable.MDlogicCable;
 import ip.industrialProcessing.logic.transport.wired.cable.TElogicCable;
 import ip.industrialProcessing.logic.transport.wired.switchbox.MDlogicSwitchBox;
 import ip.industrialProcessing.logic.transport.wired.switchbox.TElogicSwitchBox;
-import ip.industrialProcessing.machines.RendererBlock;
 import ip.industrialProcessing.machines.blastFurnace.ModelBlastFurnace;
 import ip.industrialProcessing.machines.blastFurnace.ModelBlastFurnaceTop;
 import ip.industrialProcessing.machines.blastFurnace.TileEntityBlastFurnace;
@@ -145,10 +145,6 @@ public class ClientProxy extends CommonProxy {
 	private static final ModelConnected conveyorBelt = new ModelConveyorBelt();
 	private static final ModelConnected conveyorInput = new ModelConveyorInput();
 	private static final ModelConnected conveyorOutput = new ModelConveyorOutput();
-	private static final MDlogicSwitchBox MDlogicSwitchBox = new MDlogicSwitchBox();
-	private static final MDlogicCable MDlogicCable = new MDlogicCable();
-	private static final MDlogicAnd MDlogicAnd = new MDlogicAnd();
-	private static final MDlogicOr MDlogicOr = new MDlogicOr();
 
 	@Override
 	public void registerRenderers() {
@@ -294,22 +290,6 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityConveyorOutput.class, new RendererTileEntityConnected(IndustrialProcessing.blockConveyorOutput, "ModelConveyorOutput", conveyorOutput));
 		ConfigRenderers.setRendererConveyorOutputID(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererConveyorOutputID(), new TileEntityConveyorOutput()));
-
-		ClientRegistry.bindTileEntitySpecialRenderer(TElogicSwitchBox.class, new RendererLogic(IndustrialProcessing.BLlogicSwitchBox, "MDlogicSwitchBox", MDlogicSwitchBox));
-		ConfigRenderers.setBLlogicSwitchBox(RenderingRegistry.getNextAvailableRenderId());
-		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLlogicSwitchBox(), new TElogicSwitchBox()));
-
-		ClientRegistry.bindTileEntitySpecialRenderer(TElogicCable.class, new RendererLogic(IndustrialProcessing.BLlogicCable, "MDlogicCable", MDlogicCable));
-		ConfigRenderers.setBLlogicCable(RenderingRegistry.getNextAvailableRenderId());
-		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLlogicCable(), new TElogicCable()));
-
-		ClientRegistry.bindTileEntitySpecialRenderer(TElogicAnd.class, new RendererLogic(IndustrialProcessing.BLlogicAnd, "MDlogicAnd", MDlogicAnd));
-		ConfigRenderers.setBLlogicAnd(RenderingRegistry.getNextAvailableRenderId());
-		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLlogicAnd(), new TElogicAnd()));
-
-		ClientRegistry.bindTileEntitySpecialRenderer(TElogicOr.class, new RendererLogic(IndustrialProcessing.BLlogicOr, "MDlogicAnd", MDlogicOr));
-		ConfigRenderers.setBLlogicOr(RenderingRegistry.getNextAvailableRenderId());
-		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLlogicOr(), new TElogicOr()));
 
 		RenderingRegistry.registerEntityRenderingHandler(ENmultiblockFrame.class, new RendererLivingEntity(new MDmultiblockFramePanel(), 1.0F, "MDmultiblockFramePanel"));
 		RenderingRegistry.registerEntityRenderingHandler(ENmultiblockLiftDoor.class, new RendererLivingEntity(new MDmultiblockLiftDoor(), 1.0F, "ModelMultiblockLiftDoor"));

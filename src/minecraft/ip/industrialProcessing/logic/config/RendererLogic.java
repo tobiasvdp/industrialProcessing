@@ -1,5 +1,7 @@
-package ip.industrialProcessing.client.render;
+package ip.industrialProcessing.logic.config;
 
+import ip.industrialProcessing.api.rendering.RendererTileEntity;
+import ip.industrialProcessing.logic.client.ModelLogic;
 import ip.industrialProcessing.logic.transport.ICommunication;
 import ip.industrialProcessing.logic.transport.ICommunicationNode;
 import ip.industrialProcessing.logic.utils.UTBuffer;

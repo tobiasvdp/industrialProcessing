@@ -116,12 +116,4 @@ public interface ISetupMachineBlocks {
 	public final static BlockConveyorBelt blockConveyorBelt = new BlockConveyorBelt();
 	public final static BlockConveyorInput blockConveyorBeltInput = new BlockConveyorInput();
 	public final static BlockConveyorOutput blockConveyorOutput = new BlockConveyorOutput();
-
-	// logic
-	public final static BLlogicCable BLlogicCable = new BLlogicCable();
-	public final static BLlogicSwitchBox BLlogicSwitchBox = new BLlogicSwitchBox();
-	public final static BLlogicBundle BLlogicBundle = new BLlogicBundle();
-	public final static BLlogicDisplayBox BLlogicDisplayBox = new BLlogicDisplayBox();
-	public final static BLlogicAnd BLlogicAnd = new BLlogicAnd();
-	public final static BLlogicOr BLlogicOr = new BLlogicOr();
 }

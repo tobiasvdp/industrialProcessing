@@ -1,5 +1,6 @@
 package ip.industrialProcessing.client.render;
 
+import ip.industrialProcessing.api.rendering.RendererTileEntity;
 import ip.industrialProcessing.machines.animation.tanks.ITankSyncable;
 import ip.industrialProcessing.machines.animation.tanks.TankHandler;
 import net.minecraft.block.Block;

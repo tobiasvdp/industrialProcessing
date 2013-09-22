@@ -2,9 +2,8 @@ package ip.industrialProcessing.logic.functions.or;
 
 import java.util.Random;
 
-import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.config.ConfigMachineBlocks;
-import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.logic.IPLogic;
+import ip.industrialProcessing.logic.config.ConfigLogic;
 import ip.industrialProcessing.logic.transport.ICommunication;
 import ip.industrialProcessing.logic.transport.ICommunicationNode;
 import ip.industrialProcessing.logic.transport.ICommunicationTransport;
@@ -25,7 +24,7 @@ import net.minecraftforge.common.ForgeDirection;
 public class BLlogicOr extends BlockMachineRendered {
 
 	public BLlogicOr() {
-		super(ConfigMachineBlocks.getBLlogicOr(), Material.iron, 5.0f, Block.soundMetalFootstep, "BLlogicOr", IndustrialProcessing.tabLogic);
+		super(ConfigLogic.getBLlogicOr(), Material.iron, 5.0f, Block.soundMetalFootstep, "BLlogicOr", IPLogic.tabLogic);
 	}
 
 	@Override
@@ -80,7 +79,7 @@ public class BLlogicOr extends BlockMachineRendered {
 
 	@Override
 	public int getRenderType() {
-		return ConfigRenderers.getBLlogicOr();
+		return ConfigLogic.getRDlogicOr();
 	}
 
 	@Override

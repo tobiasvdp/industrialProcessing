@@ -1,6 +1,5 @@
 package ip.industrialProcessing.logic.transport;
 
-import ip.industrialProcessing.logic.utils.UTBuffer;
 import ip.industrialProcessing.logic.utils.UTBusType;
 import ip.industrialProcessing.logic.utils.UTpacket;
 import ip.industrialProcessing.logic.utils.UTpacketType;

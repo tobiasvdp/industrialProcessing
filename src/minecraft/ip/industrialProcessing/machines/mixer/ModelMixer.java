@@ -9,8 +9,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.util.Vec3;
+import ip.industrialProcessing.api.rendering.ModelMachine;
 import ip.industrialProcessing.client.render.ModelAnimatedFluidMachine;
-import ip.industrialProcessing.client.render.ModelMachine;
 
 public class ModelMixer extends ModelAnimatedFluidMachine {
 	// fields

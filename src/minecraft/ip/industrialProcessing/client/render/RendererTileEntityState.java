@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.api.rendering.RendererTileEntity;
 import ip.industrialProcessing.machines.TileEntityMachine;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.OpenGlHelper;

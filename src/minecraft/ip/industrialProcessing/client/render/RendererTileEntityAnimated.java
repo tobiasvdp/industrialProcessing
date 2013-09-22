@@ -1,5 +1,6 @@
 package ip.industrialProcessing.client.render;
 
+import ip.industrialProcessing.api.rendering.RendererTileEntity;
 import ip.industrialProcessing.machines.TileEntityFluidMachine;
 import ip.industrialProcessing.utils.working.IWorker;
 import ip.industrialProcessing.utils.working.IWorkingEntity;

@@ -1,13 +1,5 @@
 package ip.industrialProcessing.logic.utils;
 
-import ip.industrialProcessing.logic.transport.ICommunicationNode;
-import ip.industrialProcessing.logic.transport.ICommunicationTransport;
-
-import java.util.ArrayList;
-
-import com.google.common.base.Objects;
-
-import net.minecraftforge.common.ForgeDirection;
 
 public class UTpacket {
 	private UTpacketType type;

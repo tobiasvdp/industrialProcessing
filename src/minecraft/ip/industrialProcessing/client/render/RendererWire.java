@@ -1,5 +1,6 @@
 package ip.industrialProcessing.client.render;
 
+import ip.industrialProcessing.api.rendering.RendererTileEntity;
 import ip.industrialProcessing.logic.transport.ICommunication;
 import ip.industrialProcessing.logic.transport.ICommunicationTransport;
 import net.minecraft.block.Block;

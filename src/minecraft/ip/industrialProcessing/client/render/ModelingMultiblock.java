@@ -1,5 +1,7 @@
 package ip.industrialProcessing.client.render;
 
+import ip.industrialProcessing.api.rendering.ModelMachine;
+
 public class ModelingMultiblock extends ModelMachine{
 
 	public ModelingMultiblock() {

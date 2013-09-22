@@ -1,6 +1,5 @@
 package ip.industrialProcessing.logic.utils;
 
-import ip.industrialProcessing.logic.transport.ICommunication;
 import ip.industrialProcessing.logic.transport.ICommunicationNode;
 
 import java.util.ArrayList;

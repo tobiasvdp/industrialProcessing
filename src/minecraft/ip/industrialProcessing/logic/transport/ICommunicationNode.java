@@ -1,10 +1,6 @@
 package ip.industrialProcessing.logic.transport;
 
-import java.util.ArrayList;
-
 import ip.industrialProcessing.logic.utils.UTBuffer;
-import ip.industrialProcessing.logic.utils.UTBufferType;
-import ip.industrialProcessing.logic.utils.UTBusType;
 import ip.industrialProcessing.logic.utils.UTVariable;
 import ip.industrialProcessing.logic.utils.UTlogicNodeContainer;
 import net.minecraftforge.common.ForgeDirection;

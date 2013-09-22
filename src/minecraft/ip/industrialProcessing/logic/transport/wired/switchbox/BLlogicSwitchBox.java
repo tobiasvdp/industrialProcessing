@@ -1,18 +1,14 @@
 package ip.industrialProcessing.logic.transport.wired.switchbox;
 
+import ip.industrialProcessing.logic.IPLogic;
+import ip.industrialProcessing.logic.config.ConfigLogic;
+import ip.industrialProcessing.logic.transport.ICommunicationNode;
+import ip.industrialProcessing.machines.BlockMachineRendered;
+
 import java.util.List;
 import java.util.Random;
 
-import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.config.ConfigMachineBlocks;
-import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.logic.transport.ICommunicationNode;
-import ip.industrialProcessing.logic.transport.ICommunicationTransport;
-import ip.industrialProcessing.logic.transport.wired.cable.TElogicCable;
-import ip.industrialProcessing.logic.utils.UTBusType;
-import ip.industrialProcessing.machines.BlockMachineRendered;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -27,7 +23,7 @@ import net.minecraftforge.common.ForgeDirection;
 public class BLlogicSwitchBox extends BlockMachineRendered {
 
 	public BLlogicSwitchBox() {
-		super(ConfigMachineBlocks.getBLlogicSwitchBox(), Material.iron, 5.0f, Block.soundMetalFootstep, "BLlogicSwitchBox", IndustrialProcessing.tabLogic);
+		super(ConfigLogic.getBLlogicSwitchBox(), Material.iron, 5.0f, Block.soundMetalFootstep, "BLlogicSwitchBox", IPLogic.tabLogic);
 	}
 
 	@Override
@@ -104,7 +100,7 @@ public class BLlogicSwitchBox extends BlockMachineRendered {
 
 	@Override
 	public int getRenderType() {
-		return ConfigRenderers.getBLlogicSwitchBox();
+		return ConfigLogic.getRDlogicSwitchBox();
 	}
 	
 	@Override

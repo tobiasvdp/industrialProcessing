@@ -1,6 +1,7 @@
 package ip.industrialProcessing.config;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.api.config.ConfigCategories;
 import ip.industrialProcessing.logic.functions.and.TElogicAnd;
 import ip.industrialProcessing.logic.functions.or.TElogicOr;
 import ip.industrialProcessing.logic.transport.wired.bundle.TElogicBundle;
@@ -117,22 +118,7 @@ public class ConfigMachineBlocks {
 	private int BLtransportConveyorBeltInput = IndustrialProcessing.config.get(ConfigCategories.transport.toString(),"ConveyorBeltInputID",736).getInt();
 	private int BLtransportConveyorBeltOutput = IndustrialProcessing.config.get(ConfigCategories.transport.toString(),"ConveyorBeltOutputID",737).getInt();
 
-	private int BLlogicSwitchBox = IndustrialProcessing.config.get(ConfigCategories.logic.toString(),"SwitchBoxID",738).getInt();
-	private int BLlogicCable = IndustrialProcessing.config.get(ConfigCategories.logic.toString(),"CableID",739).getInt();
-	private int BLlogicBundle = IndustrialProcessing.config.get(ConfigCategories.logic.toString(),"BundleID",740).getInt();
-	private int BLlogicDisplayBox = IndustrialProcessing.config.get(ConfigCategories.logic.toString(),"DisplayBoxID",741).getInt();
-	private int BLlogicAnd = IndustrialProcessing.config.get(ConfigCategories.logic.toString(),"AndGateID",742).getInt();
-	private int BLlogicOr = IndustrialProcessing.config.get(ConfigCategories.logic.toString(),"OrGateID",743).getInt();
-
 	public void registerMachineBlocks() {
-
-		// logic
-		registerMachineBlock(IndustrialProcessing.BLlogicCable, "IP.Logic.Cable", "Cable", TElogicCable.class);
-		registerMachineBlock(IndustrialProcessing.BLlogicSwitchBox, "IP.Logic.SwBox", "Switch box", TElogicSwitchBox.class);
-		registerMachineBlock(IndustrialProcessing.BLlogicBundle, "IP.Logic.Bundle", "Bundled cables", TElogicBundle.class);
-		registerMachineBlock(IndustrialProcessing.BLlogicDisplayBox, "IP.Logic.DsBox", "Display box", TElogicDisplayBox.class);
-		registerMachineBlock(IndustrialProcessing.BLlogicAnd, "IP.Logic.And", "And gate", TElogicAnd.class);
-		registerMachineBlock(IndustrialProcessing.BLlogicOr, "IP.Logic.Or", "Or gate", TElogicOr.class);
 
 		registerMachineBlock(IndustrialProcessing.blockConveyorBelt, "IP.Trans.CBelt", "Conveyor belt", TileEntityConveyorBelt.class);
 		registerMachineBlock(IndustrialProcessing.blockConveyorBeltInput, "IP.Trans.CBInput", "Conveyor belt import", TileEntityConveyorInput.class);
@@ -204,30 +190,6 @@ public class ConfigMachineBlocks {
 
 	public static ConfigMachineBlocks getInstance() {
 		return instance;
-	}
-
-	public static int getBLlogicOr() {
-		return getInstance().BLlogicOr;
-	}
-
-	public static int getBLlogicAnd() {
-		return getInstance().BLlogicAnd;
-	}
-
-	public static int getBLlogicDisplayBox() {
-		return getInstance().BLlogicDisplayBox;
-	}
-
-	public static int getBLlogicBundle() {
-		return getInstance().BLlogicBundle;
-	}
-
-	public static int getBLlogicSwitchBox() {
-		return getInstance().BLlogicSwitchBox;
-	}
-
-	public static int getBLlogicCable() {
-		return getInstance().BLlogicCable;
 	}
 
 	public static int getBLtransportConveyorBeltInput() {

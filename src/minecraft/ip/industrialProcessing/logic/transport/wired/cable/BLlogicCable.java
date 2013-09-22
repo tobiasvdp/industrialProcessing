@@ -1,17 +1,15 @@
 package ip.industrialProcessing.logic.transport.wired.cable;
 
+import ip.industrialProcessing.logic.IPLogic;
+import ip.industrialProcessing.logic.config.ConfigLogic;
+import ip.industrialProcessing.logic.transport.ICommunication;
+import ip.industrialProcessing.logic.transport.ICommunicationTransport;
+import ip.industrialProcessing.machines.BlockMachineRendered;
+
 import java.util.List;
 import java.util.Random;
 
-import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.config.ConfigMachineBlocks;
-import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.logic.transport.ICommunication;
-import ip.industrialProcessing.logic.transport.ICommunicationNode;
-import ip.industrialProcessing.logic.transport.ICommunicationTransport;
-import ip.industrialProcessing.machines.BlockMachineRendered;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -26,7 +24,7 @@ import net.minecraftforge.common.ForgeDirection;
 public class BLlogicCable extends BlockMachineRendered {
 
 	public BLlogicCable() {
-		super(ConfigMachineBlocks.getBLlogicCable(), Material.circuits, 5.0f, Block.soundPowderFootstep, "BLlogicCable", IndustrialProcessing.tabLogic);
+		super(ConfigLogic.getBLlogicCable(), Material.circuits, 5.0f, Block.soundPowderFootstep, "BLlogicCable", IPLogic.tabLogic);
 		this.setBlockBounds(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 	}
 
@@ -111,7 +109,7 @@ public class BLlogicCable extends BlockMachineRendered {
 
 	@Override
 	public int getRenderType() {
-		return ConfigRenderers.getBLlogicCable();
+		return ConfigLogic.getRDlogicCable();
 	}
 
 	@Override
@@ -135,7 +133,7 @@ public class BLlogicCable extends BlockMachineRendered {
 
 	@Override
 	public boolean isBlockReplaceable(World world, int x, int y, int z) {
-		if(world.getClosestPlayer(x, y, z, 10).getCurrentEquippedItem().getItem().itemID == ConfigMachineBlocks.getBLlogicCable())
+		if(world.getClosestPlayer(x, y, z, 10).getCurrentEquippedItem().getItem().itemID == ConfigLogic.getBLlogicCable())
 			return true;
 		return false;
 	}

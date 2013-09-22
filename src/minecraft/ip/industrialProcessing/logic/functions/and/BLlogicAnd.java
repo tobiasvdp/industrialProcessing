@@ -1,8 +1,7 @@
 package ip.industrialProcessing.logic.functions.and;
 
-import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.config.ConfigMachineBlocks;
-import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.logic.IPLogic;
+import ip.industrialProcessing.logic.config.ConfigLogic;
 import ip.industrialProcessing.logic.transport.ICommunicationNode;
 import ip.industrialProcessing.logic.transport.wired.switchbox.TElogicSwitchBox;
 import ip.industrialProcessing.logic.utils.UTBusType;
@@ -25,7 +24,7 @@ import net.minecraftforge.common.ForgeDirection;
 public class BLlogicAnd  extends BlockMachineRendered {
 
 	public BLlogicAnd() {
-		super(ConfigMachineBlocks.getBLlogicAnd(), Material.iron, 5.0f, Block.soundMetalFootstep, "BLlogicAnd", IndustrialProcessing.tabLogic);
+		super(ConfigLogic.getBLlogicAnd(), Material.iron, 5.0f, Block.soundMetalFootstep, "BLlogicAnd", IPLogic.tabLogic);
 	}
 
 	@Override
@@ -101,7 +100,7 @@ public class BLlogicAnd  extends BlockMachineRendered {
 
 	@Override
 	public int getRenderType() {
-		return ConfigRenderers.getBLlogicAnd();
+		return ConfigLogic.getRDlogicAnd();
 	}
 	
 }

@@ -1,6 +1,6 @@
 package ip.industrialProcessing.power.plants;
 
-import ip.industrialProcessing.client.render.ModelMachine;
+import ip.industrialProcessing.api.rendering.ModelMachine;
 import net.minecraft.client.model.ModelRenderer;
 
 public class ModelSolidBurner extends ModelMachine {
