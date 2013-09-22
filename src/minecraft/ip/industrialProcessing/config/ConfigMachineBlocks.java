@@ -56,6 +56,7 @@ import ip.industrialProcessing.transport.items.conveyorInput.TileEntityConveyorI
 import ip.industrialProcessing.transport.items.conveyorOutput.TileEntityConveyorOutput;
 import net.minecraft.block.Block;
 import net.minecraft.src.ModLoader;
+import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -67,61 +68,61 @@ public class ConfigMachineBlocks {
 	}
 
 	private static ConfigMachineBlocks instance = new ConfigMachineBlocks();
-	private int crusherBlockID = 500;
-	private int filterBlockId = 501;
-	private int magneticSeparatorBlockID = 502;
-	private int mixerBlockID = 503;
-	private int dryerBlockID = 504;
-	private int classifierBlockID = 505;
-	private int thickenerBlockID = 506;
-	private int flotationCellBlockID = 507;
-	private int hydroCycloneBlockID = 508;
-	private int diskFilterBlockID = 509;
+	private int crusherBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "CrusherID", 500).getInt();
+	private int filterBlockId = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "FilterID", 501).getInt();
+	private int magneticSeparatorBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "MagneticSeparatorID", 502).getInt();
+	private int mixerBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "MixerID", 503).getInt();
+	private int dryerBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "DryerID", 504).getInt();
+	private int classifierBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "ClassifierID", 505).getInt();
+	private int thickenerBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "ThickenerID", 506).getInt();
+	private int flotationCellBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "FlotationCellID", 507).getInt();
+	private int hydroCycloneBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "HydroCycloneID", 508).getInt();
+	private int diskFilterBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "DiskFilterID", 509).getInt();
 
-	private int blastFurnaceID = 550;
-	private int extruderID = 551;
-	private int oxygenFurnaceID = 552;
-	private int pelletExtruderID = 553;
+	private int blastFurnaceID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(),"BlastFurnaceID",550).getInt();
+	private int extruderID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(),"ExtruderID",551).getInt();
+	private int oxygenFurnaceID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(),"OxygenFurnaceID",552).getInt();
+	private int pelletExtruderID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(),"PelletExtruderID",553).getInt();
 
-	private int manualGeneratorBlockID = 800; // Crank Generator
-	private int buildcraftGeneratorBlockID = 801; // Buildcraft Joule converter
-	private int solidBurnerBlockID = 802;
-	private int boilerBlockID = 803;
-	private int steamTurbineBlockID = 804;
-	private int generatorBlockID = 805;
+	private int manualGeneratorBlockID = IndustrialProcessing.config.get(ConfigCategories.power.toString(),"ManualGeneratorID",800).getInt(); 
+	private int buildcraftGeneratorBlockID = IndustrialProcessing.config.get(ConfigCategories.power.toString(),"BCGeneratorID",801).getInt(); 
+	private int solidBurnerBlockID = IndustrialProcessing.config.get(ConfigCategories.power.toString(),"SolidBurnerID",802).getInt();
+	private int boilerBlockID = IndustrialProcessing.config.get(ConfigCategories.power.toString(),"BoilerID",803).getInt();
+	private int steamTurbineBlockID = IndustrialProcessing.config.get(ConfigCategories.power.toString(),"SteamTurbineID",804).getInt();
+	private int generatorBlockID = IndustrialProcessing.config.get(ConfigCategories.power.toString(),"GeneratorID",805).getInt();
 
-	private int wireBlockID = 900;
-	private int voltMeterBlockID = 901;
-	private int ampMeterBlockID = 902;
-	private int EnergyCellBlockID = 903;
+	private int wireBlockID = IndustrialProcessing.config.get(ConfigCategories.power.toString(),"WireID",900).getInt();
+	private int voltMeterBlockID = IndustrialProcessing.config.get(ConfigCategories.power.toString(),"VoltMeterID",901).getInt();
+	private int ampMeterBlockID = IndustrialProcessing.config.get(ConfigCategories.power.toString(),"AmpMeterID",902).getInt();
+	private int EnergyCellBlockID = IndustrialProcessing.config.get(ConfigCategories.power.toString(),"EnergyCellID",903).getInt();
 
 	// new multiblocks
-	private int BLmultiblockFrame = 720;
-	private int BLmultiblockHotPress = 721;
-	private int BLmultiblockWeldingStation = 722;
-	private int BLmultiblockScreen = 723;
-	private int BLmultiblockWeldingStationExt = 724;
-	private int BLmultiblockInvInput = 725;
-	private int BLmultiblockInvOutput = 726;
-	private int BLmultiblockToggleButton = 727;
-	private int BLmultiblockElevator = 728;
-	private int BLmultiblockToggleButton2 = 729;
-	private int BLmultiblockLiftDoor = 730;
-	private int BLmultiblockWheel = 731;
-	private int BLmultiblockRollingPress = 732;
-	private int BLmultiblockWheelConnector = 733;
-	private int BLmultiblockDisplayPanel = 734;
+	private int BLmultiblockFrame = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(),"FrameID",720).getInt();
+	private int BLmultiblockHotPress = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(),"HotPressID",721).getInt();
+	private int BLmultiblockWeldingStation = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(),"WeldingStationID",722).getInt();
+	private int BLmultiblockScreen = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(),"ScreenID",723).getInt();
+	private int BLmultiblockWeldingStationExt = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(),"WeldingStationExtID",724).getInt();
+	private int BLmultiblockInvInput = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(),"InvInputID",725).getInt();
+	private int BLmultiblockInvOutput = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(),"InvOutputID",726).getInt();
+	private int BLmultiblockToggleButton = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(),"ToggleButtonID",727).getInt();
+	private int BLmultiblockElevator = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(),"ElevatorID",728).getInt();
+	private int BLmultiblockToggleButton2 = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(),"ToggleButton2ID",729).getInt();
+	private int BLmultiblockLiftDoor = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(),"LiftDoorID",730).getInt();
+	private int BLmultiblockWheel = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(),"WheelID",731).getInt();
+	private int BLmultiblockRollingPress = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(),"RollingPressID",732).getInt();
+	private int BLmultiblockWheelConnector = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(),"WheelConnectorID",733).getInt();
+	private int BLmultiblockDisplayPanel = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(),"DisplayPanelID",734).getInt();
 
-	private int BLtransportConveyorBelt = 735;
-	private int BLtransportConveyorBeltInput = 736;
-	private int BLtransportConveyorBeltOutput = 737;
+	private int BLtransportConveyorBelt = IndustrialProcessing.config.get(ConfigCategories.transport.toString(),"ConveyorBeltID",735).getInt();
+	private int BLtransportConveyorBeltInput = IndustrialProcessing.config.get(ConfigCategories.transport.toString(),"ConveyorBeltInputID",736).getInt();
+	private int BLtransportConveyorBeltOutput = IndustrialProcessing.config.get(ConfigCategories.transport.toString(),"ConveyorBeltOutputID",737).getInt();
 
-	private int BLlogicSwitchBox = 738;
-	private int BLlogicCable = 739;
-	private int BLlogicBundle = 740;
-	private int BLlogicDisplayBox = 741;
-	private int BLlogicAnd = 742;
-	private int BLlogicOr = 743;
+	private int BLlogicSwitchBox = IndustrialProcessing.config.get(ConfigCategories.logic.toString(),"SwitchBoxID",738).getInt();
+	private int BLlogicCable = IndustrialProcessing.config.get(ConfigCategories.logic.toString(),"CableID",739).getInt();
+	private int BLlogicBundle = IndustrialProcessing.config.get(ConfigCategories.logic.toString(),"BundleID",740).getInt();
+	private int BLlogicDisplayBox = IndustrialProcessing.config.get(ConfigCategories.logic.toString(),"DisplayBoxID",741).getInt();
+	private int BLlogicAnd = IndustrialProcessing.config.get(ConfigCategories.logic.toString(),"AndGateID",742).getInt();
+	private int BLlogicOr = IndustrialProcessing.config.get(ConfigCategories.logic.toString(),"OrGateID",743).getInt();
 
 	public void registerMachineBlocks() {
 

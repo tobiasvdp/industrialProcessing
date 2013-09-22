@@ -9,9 +9,9 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ConfigBlocks {
 
-	private int blockCopperOreID = 1000;
-	private int blockTinOreID = 1001;
-	private int blockIronFlat = 1002;
+	private int blockCopperOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(),"CopperID",1000).getInt();
+	private int blockTinOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(),"TinID",1001).getInt();
+	private int blockIronFlat = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(),"IronFlatID",1002).getInt();
 
 	public static int blockIronFlat() {
 		return getInstance().blockIronFlat;

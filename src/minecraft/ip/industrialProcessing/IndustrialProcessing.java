@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import org.bouncycastle.crypto.util.Pack;
 
+import net.minecraftforge.common.Configuration;
 import ip.industrialProcessing.client.render.RendererLivingEntity;
 import ip.industrialProcessing.config.ConfigAchievements;
 import ip.industrialProcessing.config.ConfigBaseRecipes;
@@ -81,6 +82,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.AchievementPage;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.Property;
 import net.minecraftforge.event.Event.Result;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
@@ -147,19 +149,21 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		
+		
 		// register listeners for events
 		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
 		MinecraftForge.EVENT_BUS.register(this);
 		MinecraftForge.EVENT_BUS.register(new EventHookContainerClass());
+		
 
 		log = event.getModLog();
+		
+		//load config file
 		config = new Configuration(event.getSuggestedConfigurationFile());
-		config.addCustomCategoryComment("IP Nei addon", "Controls loading of recipe viewer");
-
-		if (event.getSide() == Side.CLIENT && !Loader.isModLoaded("NotEnoughItems")) {
-			logSevere("NEI doesn't seem to be installed... This is adviced to be able to view recipes.");
-		}
-		;
+		config.load();
+		
+		boolean useConfig = config.get(Configuration.CATEGORY_GENERAL, "useConfig", true).getBoolean(true);
 
 	}
 
@@ -206,6 +210,8 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
 
 		EntityRegistry.registerModEntity(ENmultiblockLiftDoor.class, "LiftDoor", 1, IndustrialProcessing.instance, 80, 1, true);
 		LanguageRegistry.instance().addStringLocalization("entity.LiftDoor.name", "en_US", "Lift door");
+		
+		config.save();
 	}
 
 	@EventHandler

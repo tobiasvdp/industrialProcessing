@@ -14,7 +14,7 @@ public class EventHookContainerClass {
 	public void blockPlaced(PlayerInteractEvent event) {
 		if (event.action == Action.RIGHT_CLICK_BLOCK) {
 			ForgeDirection dir = ForgeDirection.getOrientation(event.face);
-			TileEntity te = event.entityPlayer.worldObj.getBlockTileEntity(event.x + dir.offsetX, event.y+dir.offsetY, event.z+dir.offsetZ);
+			TileEntity te = event.entityPlayer.worldObj.getBlockTileEntity(event.x + dir.offsetX, event.y + dir.offsetY, event.z + dir.offsetZ);
 			if (te instanceof IBlockInBlock) {
 				IBlockInBlock container = (IBlockInBlock) te;
 				container.addBlockToContainer(dir.getOpposite());
@@ -30,6 +30,12 @@ public class EventHookContainerClass {
 		TileEntity te = evt.player.worldObj.getBlockTileEntity(hitpos.blockX, hitpos.blockY, hitpos.blockZ);
 		if (te instanceof IBlockInBlock) {
 			evt.setCanceled(true);
+		} else {
+			ForgeDirection dir = ForgeDirection.getOrientation(hitpos.sideHit);
+			te = evt.player.worldObj.getBlockTileEntity(hitpos.blockX + dir.offsetX, hitpos.blockY + dir.offsetY, hitpos.blockZ + dir.offsetZ);
+			if (te instanceof IBlockInBlock) {
+				evt.setCanceled(true);
+			}
 		}
 	}
 
