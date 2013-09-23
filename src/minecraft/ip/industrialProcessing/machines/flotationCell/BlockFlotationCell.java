@@ -8,9 +8,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
+import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.machines.BlockMachine;
+import ip.industrialProcessing.machines.BlockMachineRendered;
 
-public class BlockFlotationCell extends BlockMachine {
+public class BlockFlotationCell extends BlockMachineRendered {
 
     public BlockFlotationCell() {
 	super(ConfigMachineBlocks.getFlotationCellBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Flotation Cell", IndustrialProcessing.tabOreProcessing);
@@ -21,4 +23,8 @@ public class BlockFlotationCell extends BlockMachine {
 	return new TileEntityFlotationCell();
     }
 
+    @Override
+    public int getRenderType() {
+	return ConfigRenderers.getRendererFlotationCellId();
+    }
 }

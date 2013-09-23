@@ -21,15 +21,6 @@ import ip.industrialProcessing.client.render.RendererTileEntityFluidWorker;
 import ip.industrialProcessing.client.render.RendererTileEntityState;
 import ip.industrialProcessing.client.render.RenderingMultiblock;
 import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.logic.config.RendererLogic;
-import ip.industrialProcessing.logic.functions.and.MDlogicAnd;
-import ip.industrialProcessing.logic.functions.and.TElogicAnd;
-import ip.industrialProcessing.logic.functions.or.MDlogicOr;
-import ip.industrialProcessing.logic.functions.or.TElogicOr;
-import ip.industrialProcessing.logic.transport.wired.cable.MDlogicCable;
-import ip.industrialProcessing.logic.transport.wired.cable.TElogicCable;
-import ip.industrialProcessing.logic.transport.wired.switchbox.MDlogicSwitchBox;
-import ip.industrialProcessing.logic.transport.wired.switchbox.TElogicSwitchBox;
 import ip.industrialProcessing.machines.blastFurnace.ModelBlastFurnace;
 import ip.industrialProcessing.machines.blastFurnace.ModelBlastFurnaceTop;
 import ip.industrialProcessing.machines.blastFurnace.TileEntityBlastFurnace;
@@ -41,6 +32,8 @@ import ip.industrialProcessing.machines.dryer.ModelDryer;
 import ip.industrialProcessing.machines.dryer.TileEntityDryer;
 import ip.industrialProcessing.machines.filter.ModelFilter;
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
+import ip.industrialProcessing.machines.flotationCell.ModelFlotationCell;
+import ip.industrialProcessing.machines.flotationCell.TileEntityFlotationCell;
 import ip.industrialProcessing.machines.magneticSeparator.ModelMagneticSeperator;
 import ip.industrialProcessing.machines.magneticSeparator.TileEntityMagneticSeparator;
 import ip.industrialProcessing.machines.mixer.ModelMixer;
@@ -112,6 +105,7 @@ public class ClientProxy extends CommonProxy {
 	private static final ModelCrusher crusher = new ModelCrusher();
 	private static final ModelAnimatedMachine diskFilter = new ModelDiskFilter();
 	private static final ModelMachine dryer = new ModelDryer();
+	private static final ModelMachine flotationCell = new ModelFlotationCell();
 	private static final ModelConnected wire = new ModelWire();
 	private static final ModelAnimatedMachine voltMeter = new ModelVoltMeter(false);
 	private static final ModelAnimatedMachine ampMeter = new ModelVoltMeter(true);
@@ -167,6 +161,10 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDryer.class, new RendererTileEntity(IndustrialProcessing.blockDryer, "ModelDryer", dryer));
 		ConfigRenderers.setRendererDryerId(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererDryerId(), new TileEntityDryer()));
+
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFlotationCell.class, new RendererTileEntity(IndustrialProcessing.blockFlotationCell, "ModelFlotationCell", flotationCell));
+		ConfigRenderers.setRendererFlotationCellId(RenderingRegistry.getNextAvailableRenderId());
+		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererFlotationCellId(), new TileEntityFlotationCell()));
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDiskFilter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockDiskFilter, "ModelDiskFilter", diskFilter));
 		ConfigRenderers.setRendererDiskFilterIdId(RenderingRegistry.getNextAvailableRenderId());
