@@ -2,7 +2,7 @@ package ip.industrialProcessing.logic.client;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import ip.industrialProcessing.api.rendering.RendererBlock;
+import ip.industrialProcessing.api.rendering.RendererTileBlock;
 import ip.industrialProcessing.logic.CommonProxy;
 import ip.industrialProcessing.logic.IPLogic;
 import ip.industrialProcessing.logic.config.ConfigLogic;
@@ -26,18 +26,18 @@ public class ClientProxy extends CommonProxy {
 	public void registerRenderers() {
 	ClientRegistry.bindTileEntitySpecialRenderer(TElogicSwitchBox.class, new RendererLogic(IPLogic.BLlogicSwitchBox, "MDlogicSwitchBox", MDlogicSwitchBox));
 	ConfigLogic.setRDlogicSwitchBox(RenderingRegistry.getNextAvailableRenderId());
-	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigLogic.getRDlogicSwitchBox(), new TElogicSwitchBox()));
+	RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigLogic.getRDlogicSwitchBox(), new TElogicSwitchBox()));
 
 	ClientRegistry.bindTileEntitySpecialRenderer(TElogicCable.class, new RendererLogic(IPLogic.BLlogicCable, "MDlogicCable", MDlogicCable));
 	ConfigLogic.setRDlogicCable(RenderingRegistry.getNextAvailableRenderId());
-	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigLogic.getRDlogicCable(), new TElogicCable()));
+	RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigLogic.getRDlogicCable(), new TElogicCable()));
 
 	ClientRegistry.bindTileEntitySpecialRenderer(TElogicAnd.class, new RendererLogic(IPLogic.BLlogicAnd, "MDlogicAnd", MDlogicAnd));
 	ConfigLogic.setRDlogicAnd(RenderingRegistry.getNextAvailableRenderId());
-	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigLogic.getRDlogicAnd(), new TElogicAnd()));
+	RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigLogic.getRDlogicAnd(), new TElogicAnd()));
 
 	ClientRegistry.bindTileEntitySpecialRenderer(TElogicOr.class, new RendererLogic(IPLogic.BLlogicOr, "MDlogicAnd", MDlogicOr));
 	ConfigLogic.setRDlogicOr(RenderingRegistry.getNextAvailableRenderId());
-	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigLogic.getRDlogicOr(), new TElogicOr()));
+	RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigLogic.getRDlogicOr(), new TElogicOr()));
 	}
 }

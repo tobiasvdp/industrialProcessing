@@ -2,6 +2,7 @@ package ip.industrialProcessing.power.plants;
 
 import ip.industrialProcessing.api.rendering.ModelMachine;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.tileentity.TileEntity;
 
 public class ModelSolidBurner extends ModelMachine {
 
@@ -154,7 +155,7 @@ public class ModelSolidBurner extends ModelMachine {
 	}
 
 	@Override
-	public void renderModel(float f5) {
+	public void renderModel(TileEntity tileEntity, float f5) {
 	    Support2.render(f5);
 	    Support1.render(f5);
 	    Hull.render(f5);

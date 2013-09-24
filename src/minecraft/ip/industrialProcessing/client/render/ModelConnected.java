@@ -7,7 +7,7 @@ import net.minecraft.tileentity.TileEntity;
 public abstract class ModelConnected extends ModelMachine {
 
 	@Override
-	public void renderModel(float f) {
+	public void renderModel(TileEntity tileEntity, float f) {
 		renderModelConnected(null, f, ConnectionState.PLUGGED, ConnectionState.DISCONNECTED, ConnectionState.CONNECTED, ConnectionState.DISCONNECTED, ConnectionState.DISCONNECTED, ConnectionState.DISCONNECTED);
 	}
 

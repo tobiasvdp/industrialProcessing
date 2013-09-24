@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.tileentity.TileEntity;
 import ip.industrialProcessing.client.render.ModelingMultiblock;
 
 public class MDmultiblockDisplayPanel extends ModelingMultiblock {
@@ -180,7 +181,7 @@ public class MDmultiblockDisplayPanel extends ModelingMultiblock {
 	}
 
 	@Override
-	public void renderModel(float f5) {
+	public void renderModel(TileEntity tileEntity, float f5) {
 		base.render(f5);
 		panel.render(f5);
 		base1.render(f5);

@@ -2,6 +2,7 @@ package ip.industrialProcessing.multiblock.dummy.block.screen;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.tileentity.TileEntity;
 import ip.industrialProcessing.client.render.ModelingMultiblock;
 
 public class MDmultiblockScreen extends ModelingMultiblock {
@@ -155,7 +156,7 @@ public class MDmultiblockScreen extends ModelingMultiblock {
 	}
 
 	@Override
-	public void renderModel(float f5) {
+	public void renderModel(TileEntity tileEntity, float f5) {
 		BackBar.render(f5);
 		RightBB.render(f5);
 		LeftBB.render(f5);

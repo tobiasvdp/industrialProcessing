@@ -1,6 +1,6 @@
 package ip.industrialProcessing.machines.classifier;
 
-import ip.industrialProcessing.machines.containers.ContainerFluidMachine;
+import ip.industrialProcessing.machines.containers.ContainerPoweredFluidWorkerMachine;
 import ip.industrialProcessing.slots.SlotBase;
 import ip.industrialProcessing.slots.SlotLiquid;
 import ip.industrialProcessing.slots.SlotLiquidOutput;
@@ -8,7 +8,7 @@ import ip.industrialProcessing.slots.SlotOutput;
 import ip.industrialProcessing.utils.containers.ContainerUtils;
 import net.minecraft.entity.player.InventoryPlayer;
 
-public class ContainerClassifier extends ContainerFluidMachine {
+public class ContainerClassifier extends ContainerPoweredFluidWorkerMachine {
 
 	private SlotBase inputSlot;
 	private SlotLiquid inputWaterFullInput;
@@ -40,6 +40,9 @@ public class ContainerClassifier extends ContainerFluidMachine {
 		
 		addTankToContainer(0);
 		addTankToContainer(1);
+
+        addWorkerToContainer(tileEntity.getWorker());
+        addPowerToContainer(tileEntity.getMainPowerStorage());
 	}
 
 }

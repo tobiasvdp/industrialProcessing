@@ -22,7 +22,7 @@ public class RendererWire extends RendererTileEntity {
 	@Override
 	protected void renderBlock(TileEntity tl, World world, int i, int j, int k, Block block2, float f) {
 		if (world == null) {
-			this.model.renderModel(f);
+			this.model.renderModel(null, f);
 		} else {
 			if (tl instanceof ICommunicationTransport) {
 				ICommunicationTransport com = (ICommunicationTransport) tl;

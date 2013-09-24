@@ -3,6 +3,7 @@ package ip.industrialProcessing.multiblock.dummy.block.frame;
 import ip.industrialProcessing.client.render.ModelingMultiblock;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.tileentity.TileEntity;
 
 public class MDmultiblockFramePanel extends ModelingMultiblock {
 	// fields
@@ -31,7 +32,7 @@ public class MDmultiblockFramePanel extends ModelingMultiblock {
 	}
 
 	@Override
-	public void renderModel(float f5) {
+	public void renderModel(TileEntity tileEntity, float f5) {
 		Shape1.render(f5);
 	}
 

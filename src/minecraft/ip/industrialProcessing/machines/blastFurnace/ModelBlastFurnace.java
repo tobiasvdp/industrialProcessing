@@ -158,7 +158,7 @@ public class ModelBlastFurnace extends ModelStateMachine {
 	}
 
 	@Override
-	public void renderModel(float f) {
+	public void renderModel(TileEntity tileEntity, float f) {
 		renderModel(f,"");
 		
 	}

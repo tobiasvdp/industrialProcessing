@@ -30,7 +30,7 @@ public class RendererTileEntityState extends RendererTileEntity {
 		if (((TileEntityMachine)tl).isDummyBlock)
 			m = 1;
 	
-	this.model[m].renderModel(0.0625F); 
+	this.model[m].renderModel(null, 0.0625F); 
     }
     @Override
     protected ResourceLocation getTexture(TileEntity tl, World world, int i, int j, int k, Block block2, float f){

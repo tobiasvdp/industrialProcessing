@@ -328,7 +328,7 @@ public class ModelBoiler extends ModelAnimatedFluidMachine {
 	}
 
 	@Override
-	public void renderModel(float f) {
+	public void renderModel(TileEntity tileEntity, float f) {
 		renderModelAnimated(null, f, null);
 	}
 

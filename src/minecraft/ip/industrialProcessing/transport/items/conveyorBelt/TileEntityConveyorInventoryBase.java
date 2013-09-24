@@ -1,7 +1,5 @@
 package ip.industrialProcessing.transport.items.conveyorBelt;
 
-import org.lwjgl.Sys;
-
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.transport.TransportConnectionState;
@@ -74,8 +72,14 @@ public abstract class TileEntityConveyorInventoryBase extends TileEntityConveyor
 				LocalDirection local = DirectionUtils.getLocalDirection(direction, this.forwardDirection);
 				if (local != source) {
 					ConnectionMode mode = this.getConnectionMode(local);
-					if (mode.isInventoryOutput())
-						return local;
+					if (mode.isInventoryOutput()) {
+						TileEntity neighbor = ConveyorEnvironment.getNeighbor(this, direction);
+						if (neighbor instanceof IInventory) {
+							IInventory inventory = (IInventory) neighbor;
+							if (ItemTransfers.canInsert(stack, inventory))
+								return local;
+						}
+					}
 				}
 			}
 		}
@@ -92,7 +96,7 @@ public abstract class TileEntityConveyorInventoryBase extends TileEntityConveyor
 				}
 			}
 		}
- 
+
 		return LocalDirection.UNKNOWN;
 	}
 
@@ -135,7 +139,7 @@ public abstract class TileEntityConveyorInventoryBase extends TileEntityConveyor
 						}
 					}
 				} else {
-					for (int j = 0; j <  inventory.getSizeInventory(); j++) {
+					for (int j = 0; j < inventory.getSizeInventory(); j++) {
 						ItemStack item = inventory.decrStackSize(j, 1);
 						if (item != null) {
 							return item;

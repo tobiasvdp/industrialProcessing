@@ -2,16 +2,20 @@ package ip.industrialProcessing.config;
 
 public class ConfigRenderers {
 
-	private static int rendererSolidBurnerId;
+	private int rendererSolidBurnerId;
 	private int rendererCrankGeneratorID;
 	private int rendererBCGeneratorID;
 	private int rendererGeneratorID;
 	private int rendererWireID;
 	private int rendererMixerID;
 	private int rendererFilterID;
+	private int rendererPlatformID;
 	private int rendererMagneticSeperatorID;
 	private int rendererCrusherID;
 	private int rendererDryerID;
+	private int rendererThickenerID;
+	private int rendererClassifierID;
+	private int rendererFlotationCellID;
 	private int rendererDiskFilterID;
 	private int rendererVoltMeterID;
 	private int rendererAmpMeterID;
@@ -206,6 +210,13 @@ public class ConfigRenderers {
 		getInstance().rendererBlockMachineFrameID = value;
 	}
 
+	public static int getRendererPlatformId() {
+		return getInstance().rendererPlatformID;
+	}
+
+	public static void setRendererPlatformId(int value) {
+		getInstance().rendererPlatformID = value;
+	}
 	public static int getRendererFilterId() {
 		return getInstance().rendererFilterID;
 	}
@@ -244,6 +255,30 @@ public class ConfigRenderers {
 
 	public static void setRendererDryerId(int value) {
 		getInstance().rendererDryerID = value;
+	}
+
+	public static int getRendererThickenerId() {
+		return getInstance().rendererThickenerID;
+	}
+
+	public static void setRendererThickenerId(int value) {
+		getInstance().rendererThickenerID = value;
+	}
+
+	public static int getRendererClassifierId() {
+		return getInstance().rendererClassifierID;
+	}
+
+	public static void setRendererClassifierId(int value) {
+		getInstance().rendererClassifierID = value;
+	}
+
+	public static int getRendererFlotationCellId() {
+		return getInstance().rendererFlotationCellID;
+	}
+
+	public static void setRendererFlotationCellId(int value) {
+		getInstance().rendererFlotationCellID = value;
 	}
 
 	public static int getRendererDiskFilterId() {

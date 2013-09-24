@@ -154,7 +154,7 @@ public class ModelCrusher extends ModelAnimatedMachine {
     }
 
     @Override
-    public void renderModel(float f) {
+    public void renderModel(TileEntity tileEntity, float f) {
 	renderModelAnimated(null, f, new float[]{0f});
     }
 }

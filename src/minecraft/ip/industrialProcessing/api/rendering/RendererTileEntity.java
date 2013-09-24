@@ -117,7 +117,7 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 	}
 
 	protected void renderBlock(TileEntity tl, World world, int i, int j, int k, Block block2, float f) {
-		this.model.renderModel(f);
+		this.model.renderModel(null, f);
 	}
 
 	protected ResourceLocation getTexture(TileEntity tl, World world, int i, int j, int k, Block block2, float f) {

@@ -71,7 +71,7 @@ public class TileEntityGenerator extends TileEntityPowerGenerator implements IAn
 
 	@Override
 	public float getVoltage() {
-		return this.animationHandler.getSpeed()*100;
+		return this.animationHandler.getSpeed()*150;
 	}
 
 	@Override
