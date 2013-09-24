@@ -116,7 +116,7 @@ public class RecipesCrusher extends RecipesMachine {
 		IronCrushing2.workRequired = 3000;		
 		addRecipe(IronCrushing2);
 		
-		//Washed iron to fine ores chunks
+		//Washed iron to fine ores chunksùyji
 		Recipe ironCrushing3 = new Recipe();
 		ironCrushing3.inputs = new RecipeInputSlot[]{
 				new RecipeInputSlot(0, IndustrialProcessing.itemIronWashedChunks.itemID, RecipeSlotType.INVENTORY, 1)
@@ -127,5 +127,29 @@ public class RecipesCrusher extends RecipesMachine {
 		};
 		ironCrushing3.workRequired = 3000;		
 		addRecipe(ironCrushing3);
+	}
+	
+	private Recipe copperOreToCrushedChuncks(){
+		return null;
+	}
+	
+	private Recipe tinOreToCrushedChuncks(){
+		return null;
+	}
+	
+	private Recipe silverOreToCrushedChuncks(){
+		return null;
+	}
+	
+	private Recipe goldOreToCrushedChuncks(){
+		return null;
+	}
+	
+	private Recipe ironOreToCrushedChuncks(){
+		return null;
+	}
+	
+	private Recipe coalTounknown(){
+		return null;
 	}
 }
