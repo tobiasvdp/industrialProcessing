@@ -1,5 +1,6 @@
 package ip.industrialProcessing.multiblock.dummy.block.toggleButton;
 
+import net.minecraft.tileentity.TileEntity;
 import ip.industrialProcessing.client.render.ModelingMultiblock;
 
 public class MDmultiblockToggleButton extends  ModelingMultiblock{
@@ -9,7 +10,7 @@ public class MDmultiblockToggleButton extends  ModelingMultiblock{
 	}
 	
 	@Override
-	public void renderModel(float f) {
+	public void renderModel(TileEntity tileEntity, float f) {
 		// TODO Auto-generated method stub
 		
 	}

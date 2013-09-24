@@ -2,6 +2,7 @@ package ip.industrialProcessing.multiblock.core.block.weldingStation;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.tileentity.TileEntity;
 import ip.industrialProcessing.client.render.ModelingMultiblock;
 
 public class MDmultiblockWeldingStation extends ModelingMultiblock{
@@ -107,7 +108,7 @@ public class MDmultiblockWeldingStation extends ModelingMultiblock{
 		}
 
 		@Override
-		public void renderModel(float f5) {
+		public void renderModel(TileEntity tileEntity, float f5) {
 			Top.render(f5);
 			Desk.render(f5);
 			Back.render(f5);

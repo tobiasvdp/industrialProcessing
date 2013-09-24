@@ -112,7 +112,7 @@ public class ModelVoltMeter extends ModelAnimatedMachine {
 	}
 
 	@Override
-	public void renderModel(float f5) {
+	public void renderModel(TileEntity tileEntity, float f5) {
 		renderModelAnimated(null, f5, new float[] { 0 });
 	}
 

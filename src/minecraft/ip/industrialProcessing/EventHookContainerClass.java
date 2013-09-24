@@ -27,14 +27,16 @@ public class EventHookContainerClass {
 	@ForgeSubscribe
 	public void onBlockHighlightEvent(DrawBlockHighlightEvent evt) {
 		MovingObjectPosition hitpos = evt.player.rayTrace(70D, 1.0f);
-		TileEntity te = evt.player.worldObj.getBlockTileEntity(hitpos.blockX, hitpos.blockY, hitpos.blockZ);
-		if (te instanceof IBlockInBlock) {
-			evt.setCanceled(true);
-		} else {
-			ForgeDirection dir = ForgeDirection.getOrientation(hitpos.sideHit);
-			te = evt.player.worldObj.getBlockTileEntity(hitpos.blockX + dir.offsetX, hitpos.blockY + dir.offsetY, hitpos.blockZ + dir.offsetZ);
+		if (hitpos != null) {
+			TileEntity te = evt.player.worldObj.getBlockTileEntity(hitpos.blockX, hitpos.blockY, hitpos.blockZ);
 			if (te instanceof IBlockInBlock) {
 				evt.setCanceled(true);
+			} else {
+				ForgeDirection dir = ForgeDirection.getOrientation(hitpos.sideHit);
+				te = evt.player.worldObj.getBlockTileEntity(hitpos.blockX + dir.offsetX, hitpos.blockY + dir.offsetY, hitpos.blockZ + dir.offsetZ);
+				if (te instanceof IBlockInBlock) {
+					evt.setCanceled(true);
+				}
 			}
 		}
 	}

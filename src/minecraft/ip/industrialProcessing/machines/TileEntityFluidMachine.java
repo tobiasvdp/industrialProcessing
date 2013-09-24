@@ -1,39 +1,25 @@
 package ip.industrialProcessing.machines;
 
-import ic2.api.Direction;
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.IFluidInfo;
-import ip.industrialProcessing.recipes.IRecipeFluidWorkHandler;
-import ip.industrialProcessing.recipes.Recipe;
-import ip.industrialProcessing.recipes.RecipeFluidWorker;
-import ip.industrialProcessing.recipes.RecipeWorker;
-import ip.industrialProcessing.utils.working.ServerWorker;
+import ip.industrialProcessing.transport.fluids.IPressuredTank;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import javax.activity.InvalidActivityException;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidIdMapPacket;
-import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
-import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 
-public abstract class TileEntityFluidMachine extends TileEntityMachine implements IFluidHandler, IMachineTanks, IFluidInfo {
+public abstract class TileEntityFluidMachine extends TileEntityMachine implements IFluidHandler, IMachineTanks, IFluidInfo, IPressuredTank {
 
 	private int[][] fluidTankSideslots = new int[6][0];
 	private ArrayList<MachineFluidTank> fluidTanks = new ArrayList<MachineFluidTank>();
@@ -430,5 +416,19 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine implement
 			info[i] = this.fluidTanks.get(i).getInfo();
 		}
 		return info;
+	}
+
+	@Override
+	public float getPressure(ForgeDirection from) {
+		FluidTankInfo[] info = getTankInfo(from);
+		float pressure = 0;
+		for (int i = 0; i < info.length; i++) {
+			FluidTankInfo tank = info[i];
+			if(tank.fluid != null)
+			{
+				pressure += (float)tank.fluid.amount / tank.capacity;
+			}
+		}
+		return pressure * 500 / info.length;
 	}
 }

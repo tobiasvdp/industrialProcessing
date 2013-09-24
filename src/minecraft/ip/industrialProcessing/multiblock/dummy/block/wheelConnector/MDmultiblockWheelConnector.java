@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.tileentity.TileEntity;
 import ip.industrialProcessing.client.render.ModelingMultiblock;
 
 public class MDmultiblockWheelConnector extends ModelingMultiblock {
@@ -101,7 +102,7 @@ public class MDmultiblockWheelConnector extends ModelingMultiblock {
 	}
 
 	@Override
-	public void renderModel(float f5) {
+	public void renderModel(TileEntity tileEntity, float f5) {
 		base.render(f5);
 		Bottom.render(f5);
 		bottomright.render(f5);

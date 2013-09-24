@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.tileentity.TileEntity;
 import ip.industrialProcessing.client.render.ModelingMultiblock;
 
 public class MDmultiblockLiftDoor extends ModelingMultiblock {
@@ -94,7 +95,7 @@ public class MDmultiblockLiftDoor extends ModelingMultiblock {
 	}
 
 	@Override
-	public void renderModel(float f5) {
+	public void renderModel(TileEntity tileEntity, float f5) {
 		front.render(f5);
 		back.render(f5);
 		backpanel.render(f5);

@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.tileentity.TileEntity;
 import ip.industrialProcessing.logic.client.ModelLogic;
 import ip.industrialProcessing.logic.utils.UTBuffer;
 
@@ -268,7 +269,7 @@ public class MDlogicSwitchBox extends ModelLogic {
 	}
 
 	@Override
-	public void renderModel(float f5) {
+	public void renderModel(TileEntity tileEntity, float f5) {
 		Base.render(f5);
 		Right1.render(f5);
 		Right2.render(f5);

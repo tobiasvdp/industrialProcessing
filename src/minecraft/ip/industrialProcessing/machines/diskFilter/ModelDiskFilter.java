@@ -494,7 +494,7 @@ public class ModelDiskFilter extends ModelAnimatedMachine {
 	}
 
 	@Override
-	public void renderModel(float f5) {
+	public void renderModel(TileEntity tileEntity, float f5) {
 		SupportBeamTop.render(f5);
 		SupportBeamRightBottom.render(f5);
 		SupportBeamLeftBottom.render(f5);

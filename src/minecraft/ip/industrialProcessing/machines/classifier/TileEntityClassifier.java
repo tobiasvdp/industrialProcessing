@@ -1,26 +1,28 @@
 package ip.industrialProcessing.machines.classifier;
 
+import ip.industrialProcessing.LocalDirection;
+import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
+import ip.industrialProcessing.machines.animation.tanks.ITankSyncable;
+import ip.industrialProcessing.machines.animation.tanks.TankHandler;
+import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
+import ip.industrialProcessing.recipes.Recipe;
+
 import java.util.Iterator;
 
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.machines.TileEntityFluidMachine;
-import ip.industrialProcessing.machines.TileEntityFluidWorkerMachine;
-import ip.industrialProcessing.machines.TileEntityMachine;
-import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
-import ip.industrialProcessing.recipes.Recipe;
 
-public class TileEntityClassifier extends TileEntityPoweredFluidWorkerMachine {
+public class TileEntityClassifier extends TileEntityPoweredFluidWorkerMachine implements ITankSyncable {
+
+	private TankHandler tankHandler;
 
 	public TileEntityClassifier() {
 		super(LocalDirection.LEFT, 10000);
 		addStack(null, LocalDirection.UP, true, false); // Input Solid
 		// ingredient
-		addStack(null, LocalDirection.RIGHT, false, true); // Output Solid
+		addStack(null, new LocalDirection[] { LocalDirection.FRONT, LocalDirection.BACK }, false, true); // Output
+																											// Solid
 		// ingredient
 
 		LocalDirection[] nodirections = new LocalDirection[0];
@@ -30,8 +32,17 @@ public class TileEntityClassifier extends TileEntityPoweredFluidWorkerMachine {
 		addStack(null, nodirections, true, false); // Liquid Output Empty Input
 		addStack(null, nodirections, false, true); // Liquid Output Full Output
 
-		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.BACK, true, false);
+		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.RIGHT, true, false);
 		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.DOWN, false, true);
+
+		this.tankHandler = new TankHandler(this, new int[] { 0 }); 
+	}
+	
+	@Override
+	public void updateEntity() { 
+		super.updateEntity();
+		if(this.tankHandler.readDataFromTanks())
+			TileTankSyncHandler.sendTankData(this, this.tankHandler);
 	}
 
 	private static RecipesClassifier recipes = new RecipesClassifier();
@@ -64,6 +75,11 @@ public class TileEntityClassifier extends TileEntityPoweredFluidWorkerMachine {
 	@Override
 	protected boolean isTankValidForFluid(int slot, int fluidId) {
 		return recipes.isValidFluidInput(slot, fluidId);
+	}
+
+	@Override
+	public TankHandler getTankHandler() { 
+		return this.tankHandler;
 	}
 
 }

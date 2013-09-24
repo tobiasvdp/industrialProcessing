@@ -224,7 +224,7 @@ public class ModelFilter extends ModelAnimatedMachine {
     }
  
     @Override
-    public void renderModel(float f1) {
+    public void renderModel(TileEntity tileEntity, float f1) {
 	plateShape3.render(f1);
 	plateShape4.render(f1);
 	plateShape2.render(f1);

@@ -189,7 +189,7 @@ public class ModelMixer extends ModelAnimatedFluidMachine {
 	}
 
 	@Override
-	public void renderModel(float f1) {
+	public void renderModel(TileEntity tileEntity, float f1) {
 		SupportBeamRightBottom.render(f1);
 		SupportBeamLeftBottom.render(f1);
 		WallFront.render(f1);

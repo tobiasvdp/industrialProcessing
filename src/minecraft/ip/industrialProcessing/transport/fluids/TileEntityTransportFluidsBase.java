@@ -15,11 +15,12 @@ import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fluids.IFluidTank;
 
 public abstract class TileEntityTransportFluidsBase extends TileEntityTransport implements IFluidInfo, ITankSyncable {
- 
-	protected TankHandler tankHandler;
- 
 
-	public TileEntityTransportFluidsBase() { 
+	private static final int CONNECTION_GROUPS = 16;
+	protected TankHandler tankHandler;
+	private int connectionGroup;
+
+	public TileEntityTransportFluidsBase() {
 	}
 
 	@Override
@@ -28,14 +29,10 @@ public abstract class TileEntityTransportFluidsBase extends TileEntityTransport 
 			ForgeDirection from = direction.getOpposite();
 			if (entity instanceof TileEntityTransportFluidsBase) {
 				TileEntityTransportFluidsBase other = (TileEntityTransportFluidsBase) entity;
-				if (other.canConnect(direction.getOpposite()))
+				if (other.connectionGroup == this.connectionGroup && other.canConnect(direction.getOpposite()))
 					return TransportConnectionState.TRANSPORT;
 				return TransportConnectionState.NONE;
 			}
-			// TODO: check if
-			// connection should be
-			// made (lava pipe with
-			// water pipe ..)
 
 			if (entity instanceof TileEntityManoMeter && direction == ForgeDirection.UP)
 				return TransportConnectionState.TRANSPORT;
@@ -77,19 +74,23 @@ public abstract class TileEntityTransportFluidsBase extends TileEntityTransport 
 		if (this.tankHandler.readDataFromTanks())
 			TileTankSyncHandler.sendTankData(this, this.tankHandler);
 	}
-	
-	
+
 	@Override
-	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
-		// TODO Auto-generated method stub
+	public void writeToNBT(NBTTagCompound par1nbtTagCompound) { 
 		super.writeToNBT(par1nbtTagCompound);
+		par1nbtTagCompound.setInteger("Group", this.connectionGroup);
 	}
 
+	@Override
+	public void readFromNBT(NBTTagCompound par1nbtTagCompound) { 
+		super.readFromNBT(par1nbtTagCompound);
+		this.connectionGroup = par1nbtTagCompound.getInteger("Group");
+	}
 	protected abstract void leakPressure();
 
 	protected abstract IFluidTank getTank(ForgeDirection direction);
 
-	protected abstract float getPressure(ForgeDirection direction); 
+	protected abstract float getPressure(ForgeDirection direction);
 
 	protected abstract void addPressure(ForgeDirection direction, float value);
 
@@ -291,4 +292,19 @@ public abstract class TileEntityTransportFluidsBase extends TileEntityTransport 
 
 	@Override
 	public abstract IFluidTank getTankInSlot(int slot);
+
+	public void cycleGroups(boolean sneaking) {
+		if (sneaking)
+			connectionGroup--;
+		else
+			connectionGroup++;
+		
+		if (connectionGroup < 0)
+			connectionGroup += CONNECTION_GROUPS;
+		else if (connectionGroup >= CONNECTION_GROUPS)
+			connectionGroup -= CONNECTION_GROUPS;
+		
+		searchForConnections();
+		this.worldObj.notifyBlockChange(xCoord, yCoord, zCoord, getBlockType().blockID);
+	}
 }

@@ -9,17 +9,23 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigBlocks;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
+import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.machines.BlockMachine;
+import ip.industrialProcessing.machines.BlockMachineRendered;
 
-public class BlockClassifier extends BlockMachine {
+public class BlockClassifier extends BlockMachineRendered {
 
-    public BlockClassifier() {
-	super(ConfigMachineBlocks.getClassifierBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Spiral Classifier", IndustrialProcessing.tabOreProcessing);
-    }
+	public BlockClassifier() {
+		super(ConfigMachineBlocks.getClassifierBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Spiral Classifier", IndustrialProcessing.tabOreProcessing);
+	}
 
-    @Override
-    public TileEntity createNewTileEntity(World world) { 
-	return new TileEntityClassifier();
-    }
+	@Override
+	public TileEntity createNewTileEntity(World world) {
+		return new TileEntityClassifier();
+	}
 
+	@Override
+	public int getRenderType() {
+		return ConfigRenderers.getRendererClassifierId();
+	}
 }

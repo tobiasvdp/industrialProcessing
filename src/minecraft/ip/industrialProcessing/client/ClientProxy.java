@@ -24,6 +24,8 @@ import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.machines.blastFurnace.ModelBlastFurnace;
 import ip.industrialProcessing.machines.blastFurnace.ModelBlastFurnaceTop;
 import ip.industrialProcessing.machines.blastFurnace.TileEntityBlastFurnace;
+import ip.industrialProcessing.machines.classifier.ModelClassifier;
+import ip.industrialProcessing.machines.classifier.TileEntityClassifier;
 import ip.industrialProcessing.machines.crusher.ModelCrusher;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import ip.industrialProcessing.machines.diskFilter.ModelDiskFilter;
@@ -105,6 +107,7 @@ public class ClientProxy extends CommonProxy {
 	private static final ModelCrusher crusher = new ModelCrusher();
 	private static final ModelAnimatedMachine diskFilter = new ModelDiskFilter();
 	private static final ModelMachine dryer = new ModelDryer();
+	private static final ModelAnimatedFluidMachine classifier = new ModelClassifier();
 	private static final ModelMachine flotationCell = new ModelFlotationCell();
 	private static final ModelConnected wire = new ModelWire();
 	private static final ModelAnimatedMachine voltMeter = new ModelVoltMeter(false);
@@ -161,6 +164,10 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDryer.class, new RendererTileEntity(IndustrialProcessing.blockDryer, "ModelDryer", dryer));
 		ConfigRenderers.setRendererDryerId(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererDryerId(), new TileEntityDryer()));
+
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityClassifier.class, new RendererTileEntityFluidWorker(IndustrialProcessing.blockClassifier, "ModelClassifier", classifier));
+		ConfigRenderers.setRendererClassifierId(RenderingRegistry.getNextAvailableRenderId());
+		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererClassifierId(), new TileEntityClassifier()));
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFlotationCell.class, new RendererTileEntity(IndustrialProcessing.blockFlotationCell, "ModelFlotationCell", flotationCell));
 		ConfigRenderers.setRendererFlotationCellId(RenderingRegistry.getNextAvailableRenderId());

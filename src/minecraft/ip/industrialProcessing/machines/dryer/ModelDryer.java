@@ -2,6 +2,7 @@ package ip.industrialProcessing.machines.dryer;
 
 import ip.industrialProcessing.api.rendering.ModelMachine;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.tileentity.TileEntity;
 
 public class ModelDryer extends ModelMachine {
 
@@ -196,7 +197,7 @@ public class ModelDryer extends ModelMachine {
 	}
 
 	@Override
-	public void renderModel(float f5) {
+	public void renderModel(TileEntity tileEntity, float f5) {
 		Support1.render(f5);
 		Support2.render(f5);
 		Tumbler1.render(f5);

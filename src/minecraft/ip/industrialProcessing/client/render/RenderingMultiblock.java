@@ -26,7 +26,7 @@ public class RenderingMultiblock extends RendererTileEntity {
 	protected void renderBlock(TileEntity tl, World world, int i, int j, int k, Block block2, float f) {
 
 		if (world == null) {
-			this.model[0].renderModel(0.0625F);
+			this.model[0].renderModel(null, 0.0625F);
 		} else {
 
 			if (tl instanceof TEmultiblockDummy) {

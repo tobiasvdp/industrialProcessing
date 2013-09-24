@@ -12,6 +12,7 @@ public class ConfigRenderers {
 	private int rendererMagneticSeperatorID;
 	private int rendererCrusherID;
 	private int rendererDryerID;
+	private int rendererClassifierID;
 	private int rendererFlotationCellID;
 	private int rendererDiskFilterID;
 	private int rendererVoltMeterID;
@@ -247,6 +248,13 @@ public class ConfigRenderers {
 		getInstance().rendererDryerID = value;
 	}
 
+	public static int getRendererClassifierId() {
+		return getInstance().rendererClassifierID;
+	}
+
+	public static void setRendererClassifierId(int value) {
+		getInstance().rendererClassifierID = value;
+	}
 
 	public static int getRendererFlotationCellId() {
 		return getInstance().rendererFlotationCellID;
