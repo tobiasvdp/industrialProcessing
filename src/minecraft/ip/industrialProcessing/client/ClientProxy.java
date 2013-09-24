@@ -40,6 +40,8 @@ import ip.industrialProcessing.machines.magneticSeparator.ModelMagneticSeperator
 import ip.industrialProcessing.machines.magneticSeparator.TileEntityMagneticSeparator;
 import ip.industrialProcessing.machines.mixer.ModelMixer;
 import ip.industrialProcessing.machines.mixer.TileEntityMixer;
+import ip.industrialProcessing.machines.thickener.ModelThickener;
+import ip.industrialProcessing.machines.thickener.TileEntityThickener;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.MDmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.dummy.block.displayPanel.MDmultiblockDisplayPanel;
@@ -108,6 +110,7 @@ public class ClientProxy extends CommonProxy {
 	private static final ModelAnimatedMachine diskFilter = new ModelDiskFilter();
 	private static final ModelMachine dryer = new ModelDryer();
 	private static final ModelAnimatedFluidMachine classifier = new ModelClassifier();
+	private static final ModelAnimatedFluidMachine thickener = new ModelThickener();
 	private static final ModelMachine flotationCell = new ModelFlotationCell();
 	private static final ModelConnected wire = new ModelWire();
 	private static final ModelAnimatedMachine voltMeter = new ModelVoltMeter(false);
@@ -164,6 +167,10 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDryer.class, new RendererTileEntity(IndustrialProcessing.blockDryer, "ModelDryer", dryer));
 		ConfigRenderers.setRendererDryerId(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererDryerId(), new TileEntityDryer()));
+
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityThickener.class, new RendererTileEntity(IndustrialProcessing.blockThickener, "ModelThickener", thickener));
+		ConfigRenderers.setRendererThickenerId(RenderingRegistry.getNextAvailableRenderId());
+		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererThickenerId(), new TileEntityThickener()));
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityClassifier.class, new RendererTileEntityFluidWorker(IndustrialProcessing.blockClassifier, "ModelClassifier", classifier));
 		ConfigRenderers.setRendererClassifierId(RenderingRegistry.getNextAvailableRenderId());

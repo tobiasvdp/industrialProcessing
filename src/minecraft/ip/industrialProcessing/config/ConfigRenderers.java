@@ -2,7 +2,7 @@ package ip.industrialProcessing.config;
 
 public class ConfigRenderers {
 
-	private static int rendererSolidBurnerId;
+	private int rendererSolidBurnerId;
 	private int rendererCrankGeneratorID;
 	private int rendererBCGeneratorID;
 	private int rendererGeneratorID;
@@ -12,6 +12,7 @@ public class ConfigRenderers {
 	private int rendererMagneticSeperatorID;
 	private int rendererCrusherID;
 	private int rendererDryerID;
+	private int rendererThickenerID;
 	private int rendererClassifierID;
 	private int rendererFlotationCellID;
 	private int rendererDiskFilterID;
@@ -246,6 +247,14 @@ public class ConfigRenderers {
 
 	public static void setRendererDryerId(int value) {
 		getInstance().rendererDryerID = value;
+	}
+
+	public static int getRendererThickenerId() {
+		return getInstance().rendererThickenerID;
+	}
+
+	public static void setRendererThickenerId(int value) {
+		getInstance().rendererThickenerID = value;
 	}
 
 	public static int getRendererClassifierId() {
