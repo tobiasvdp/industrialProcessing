@@ -9,9 +9,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class BLblockBase extends Block{
+public class BlockBase extends Block{
 
-	public BLblockBase(int blockID,String name,float hardness, Material blockMaterial, StepSound stepSound) {
+	public BlockBase(int blockID,String name,float hardness, Material blockMaterial, StepSound stepSound) {
 		super(blockID, blockMaterial);
 		setHardness(hardness);
 		setStepSound(stepSound);

@@ -1,10 +1,14 @@
 package ip.industrialProcessing.decoration;
 
+import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.ConfigBlocks;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
 public class BlockPlatform extends BlockDecoration {
-	public BlockPlatform(int par1, Material par2Material) {
-		super(par1, par2Material);
-	}
+
+    public BlockPlatform() {
+	super(ConfigBlocks.getPlatformBlockID(), Material.iron, 1f, Block.soundMetalFootstep, "Walkway", IndustrialProcessing.tabPower);
+    }
 
 }

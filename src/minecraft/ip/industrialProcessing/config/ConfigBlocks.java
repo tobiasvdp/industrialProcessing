@@ -12,10 +12,17 @@ public class ConfigBlocks {
 
 	private int blockCopperOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(),"CopperID",1000).getInt();
 	private int blockTinOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(),"TinID",1001).getInt();
-	private int blockIronFlat = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(),"IronFlatID",1002).getInt();
+	private int blockIronFlatID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(),"IronFlatID",1002).getInt();
+	
+	private int blockPlatformID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(),"PlatformFlatID",2001).getInt();
 
+
+	public static int getPlatformBlockID() {
+		return getInstance().blockPlatformID;
+	}
+	
 	public static int blockIronFlat() {
-		return getInstance().blockIronFlat;
+		return getInstance().blockIronFlatID;
 	}
 	public static int BlockCopperOreID() {
 		return getInstance().blockCopperOreID;
@@ -33,6 +40,8 @@ public class ConfigBlocks {
 		registerOre(IndustrialProcessing.blockCopperOre, "IP.World.CopperOre", "Copper Ore", "copper");
 		registerOre(IndustrialProcessing.blockTinOre, "IP.World.TinOre", "Tin Ore", "copper");
 		registerBlock(IndustrialProcessing.blockIronFlat, "IP.Block.IronFlat", "Flat Iron block");
+		
+		registerBlock(IndustrialProcessing.blockPlatform, "IP.Block.Platform", "Walkway");
 	}
 
 	private void registerOre(Block block, String uniqueId, String displayName, String oreDictionaryKey) {
