@@ -90,7 +90,16 @@ public class RecipesCrusher extends RecipesMachine {
 	}
 
 	private Recipe copperOreToCrushedChuncks() {
-		return null;
+		Recipe recipe = new Recipe();
+		recipe.inputs = new RecipeInputSlot[]{
+				new RecipeInputSlot(0, IndustrialProcessing.blockCopperOre.blockID, RecipeSlotType.INVENTORY, 1)
+		};
+		
+		recipe.outputs = new RecipeOutputSlot[]{
+				new RecipeOutputSlot(1, IndustrialProcessing.itemCopperCrushedChunks.itemID, RecipeSlotType.INVENTORY, 1, 3, 0)
+		};
+		recipe.workRequired = 3000;
+		return recipe;
 	}
 
 	private Recipe tinOreToCrushedChuncks() {
