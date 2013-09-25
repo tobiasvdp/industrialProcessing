@@ -12,17 +12,37 @@ public class ConfigBlocks {
 
 	private int blockCopperOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(),"CopperID",1000).getInt();
 	private int blockTinOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(),"TinID",1001).getInt();
-	private int blockIronFlatID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(),"IronFlatID",1002).getInt();
+	private int blockGalenaOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(),"GalenaID",1002).getInt();
+	private int blockRutileOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(),"RutileID",1003).getInt();
+	private int blockChromiteOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(),"ChromiteID",1004).getInt();
+	private int blockCinnebarOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(),"CinnebarID",1005).getInt();
+	private int blockTaliaOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(),"TaliaID",1006).getInt();
+	
+	private int blockIronFlatID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(),"IronFlatID",1007).getInt();
 	
 	private int blockPlatformID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(),"PlatformFlatID",2001).getInt();
 
-
+	public static int getBlockChromiteOreID() {
+		return getInstance().blockChromiteOreID;
+	}
+	public static int getBlockCinnebarOreID() {
+		return getInstance().blockCinnebarOreID;
+	}
+	public static int getBlockTaliaOreID() {
+		return getInstance().blockTaliaOreID;
+	}
+	public static int getBlockRutileOreID() {
+		return getInstance().blockRutileOreID;
+	}
 	public static int getPlatformBlockID() {
 		return getInstance().blockPlatformID;
 	}
 	
 	public static int blockIronFlat() {
 		return getInstance().blockIronFlatID;
+	}
+	public static int BlockGalenaOreID() {
+		return getInstance().blockGalenaOreID;
 	}
 	public static int BlockCopperOreID() {
 		return getInstance().blockCopperOreID;
@@ -38,7 +58,13 @@ public class ConfigBlocks {
 
 	public void registerOres() {
 		registerOre(IndustrialProcessing.blockCopperOre, "IP.World.CopperOre", "Copper Ore", "copper");
-		registerOre(IndustrialProcessing.blockTinOre, "IP.World.TinOre", "Tin Ore", "copper");
+		registerOre(IndustrialProcessing.blockTinOre, "IP.World.TinOre", "Tin Ore", "tin");
+		registerOre(IndustrialProcessing.blockGalenaOre, "IP.World.GalenaOre", "Galena Ore", "silver");
+		OreDictionary.registerOre("galena", IndustrialProcessing.blockGalenaOre);
+		registerOre(IndustrialProcessing.blockRutileOre, "IP.World.RutileOre", "Rutile Ore", "rutile");
+		registerOre(IndustrialProcessing.blockChromiteOre, "IP.World.ChromiteOre", "Chromite Ore", "chromite");
+		registerOre(IndustrialProcessing.blockCinnebarOre, "IP.World.CinnebarOre", "Cinnebar Ore", "cinnebar");
+		registerOre(IndustrialProcessing.blockTaliaOre, "IP.World.TaliaOre", "Thalium Ore", "talia");
 		registerBlock(IndustrialProcessing.blockIronFlat, "IP.Block.IronFlat", "Flat Iron block");
 		
 		registerBlock(IndustrialProcessing.blockPlatform, "IP.Block.Platform", "Walkway");
