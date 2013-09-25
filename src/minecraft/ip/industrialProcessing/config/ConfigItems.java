@@ -48,6 +48,34 @@ public class ConfigItems {
 	private int ItemIronPlateID = 6539;
 	private int ItemIronTipsID = 6540;
 	private int ItemSmallMachineCasingCrusherID = 6541;
+	private int itemGalenaCrushedChunksID;
+	private int itemGalenaSmallChunksID;
+	private int itemGalenaLargeChunksID;
+	private int itemGalenaWashedChunksID;
+	private int itemGalenaFineChunksID;
+	private int itemRutileCrushedCrystalsID;
+	private int itemRutileSmallCrushedCrystalsID;
+	private int itemRutileLargeCrushedCrystalsID;
+	private int itemRutileFineCrushedCrystalsID;
+	private int itemCinnebarCrushedCrystalsID;
+	private int itemCinnebarSmallCrushedCrystalsID;
+	private int itemCinnebarLargeCrushedCrystalsID;
+	private int itemCinnebarFineCrushedCrystalsID;
+	private int itemChromiteCrushedChunksID;
+	private int itemChromiteSmallChunksID;
+	private int itemChromiteLargeChunksID;
+	private int itemChromiteWashedChunksID;
+	private int itemChromiteFineChunksID;
+	private int itemGoldCrushedChunksID;
+	private int itemGoldSmallChunksID;
+	private int itemGoldLargeChunksID;
+	private int itemGoldWashedChunksID;
+	private int itemGoldFineChunksID;
+	private int itemTaliaCrushedChunksID;
+	private int itemTaliaSmallChunksID;
+	private int itemTaliaLargeChunksID;
+	private int itemTaliaWashedChunksID;
+	private int itemTaliaFineChunksID;
 	
 	public static int ItemSmallMachineCasingID(){return getInstance().ItemSmallMachineCasingID;}
 	public static int ItemInputPortID(){return getInstance().ItemInputPortID;}

@@ -64,7 +64,7 @@ public class ConfigBlocks {
 		registerOre(IndustrialProcessing.blockRutileOre, "IP.World.RutileOre", "Rutile Ore", "rutile");
 		registerOre(IndustrialProcessing.blockChromiteOre, "IP.World.ChromiteOre", "Chromite Ore", "chromite");
 		registerOre(IndustrialProcessing.blockCinnebarOre, "IP.World.CinnebarOre", "Cinnebar Ore", "cinnebar");
-		registerOre(IndustrialProcessing.blockTaliaOre, "IP.World.TaliaOre", "Thalium Ore", "talia");
+		registerOre(IndustrialProcessing.blockTaliaOre, "IP.World.TaliaOre", "Thallium Ore", "talia");
 		registerBlock(IndustrialProcessing.blockIronFlat, "IP.Block.IronFlat", "Flat Iron block");
 		
 		registerBlock(IndustrialProcessing.blockPlatform, "IP.Block.Platform", "Walkway");
