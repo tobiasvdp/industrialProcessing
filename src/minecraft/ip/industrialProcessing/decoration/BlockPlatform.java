@@ -8,12 +8,12 @@ import net.minecraft.block.material.Material;
 
 public class BlockPlatform extends BlockDecoration {
 
-    public BlockPlatform() {
-	super(ConfigBlocks.getPlatformBlockID(), Material.iron, 1f, Block.soundMetalFootstep, "Walkway", IndustrialProcessing.tabPower);
-    }
+	public BlockPlatform() {
+		super(ConfigBlocks.getPlatformBlockID(), Material.iron, 1f, Block.soundMetalFootstep, "Walkway", IndustrialProcessing.tabPower);
+	}
 
-    @Override
-    public int getRenderType() {
-	return ConfigRenderers.getRendererPlatformId();
-    }
+	@Override
+	public int getRenderType() {
+		return ConfigRenderers.getRendererPlatformId();
+	}
 }
