@@ -27,7 +27,7 @@ public class RendererTileBlock implements ISimpleBlockRenderingHandler{
         renderBlocks.overrideBlockTexture = par1Block.getBlockTexture(iblockaccess, par2, par3, par4, 0);
 
 
-        renderBlocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.92F, 1.0F);
+        renderBlocks.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
         renderBlocks.renderStandardBlock(par1Block, par2, par3, par4);
 
 
@@ -37,11 +37,11 @@ public class RendererTileBlock implements ISimpleBlockRenderingHandler{
     @Override
     public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
     {
-        GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
-        GL11.glTranslatef(-0.5F, -1.1F, -0.1F);
-        GL11.glScalef(0.7F, 0.6F, 0.7F);
-        TileEntityRenderer.instance.renderTileEntityAt(table, 0.0D, 0.0D, 0.0D, 0.0F);
-        GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+	GL11.glPushMatrix(); 
+	GL11.glRotatef(180, 1, 0, 0);
+	GL11.glTranslatef(0, -1, 0); 
+        TileEntityRenderer.instance.renderTileEntityAt(table, 0.0D, 0.0D, 0.0D, 0.0F); 
+        GL11.glPopMatrix();
     }
 
 
