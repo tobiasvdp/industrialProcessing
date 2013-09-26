@@ -52,6 +52,7 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 		// This will make your block brightness dependent from surroundings
 		// lighting.
 		float animation = 0;
+		GL11.glPushMatrix();
 		if (world != null) {
 
 			float f = block.getBlockBrightness(world, i, j, k);
@@ -61,7 +62,6 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 			tessellator.setColorOpaque_F(f, f, f);
 			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) l1, (float) l2);
 
-			GL11.glPushMatrix();
 
 			int dir = world.getBlockMetadata(i, j, k);
 
@@ -102,12 +102,14 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 			func_110628_a(getTexture(tl, world, i, j, k, block, 0.0625f));
 
 		} else {
+		    /*
 			GL11.glPushMatrix();
 			GL11.glTranslatef(0.3F, 3.7F, 0.5F);
 			GL11.glRotatef((90F), 0F, 1F, 0F);
 			GL11.glRotatef((-180F), 0F, 0F, 1F);
 			GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 			GL11.glScalef(1.5f, 1.5f, 1.5f);
+			*/
 			this.func_110628_a(texture);
 		}
 
