@@ -77,6 +77,20 @@ public class ConfigItems {
 	private int itemTaliaWashedChunksID = 6570;
 	private int itemTaliaFineChunksID = 6571;
 	
+	private int itemGalenaDustID = 6572;
+	private int itemRutileDustID = 6573;
+	private int itemCinnebarDustID = 6574;
+	private int itemChromiteDustID = 6575;
+	private int itemGoldDustID = 6576;
+	private int itemTaliaDustID = 6577;
+	
+	public static int itemGalenaDustID(){return getInstance().itemGalenaDustID;}
+	public static int itemRutileDustID(){return getInstance().itemRutileDustID;}
+	public static int itemCinnebarDustID(){return getInstance().itemCinnebarDustID;}
+	public static int itemChromiteDustID(){return getInstance().itemChromiteDustID;}
+	public static int itemGoldDustID(){return getInstance().itemGoldDustID;}
+	public static int itemTaliaDustID(){return getInstance().itemTaliaDustID;}
+	
 	public static int itemCinnebarCrystalsID(){return getInstance().itemCinnebarCrystalsID;}
 	public static int itemRutileCrystalsID(){return getInstance().itemRutileCrystalsID;}
 	public static int itemGalenaCrushedChunksID(){return getInstance().itemGalenaCrushedChunksID;}

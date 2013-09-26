@@ -18,107 +18,120 @@ public class RecipesCrusher extends RecipesMachine {
 	}
 
 	private void addDefaultRecipes() {
+		addRecipe(copperOreToCrushedChunks());
+		addRecipe(tinOreToCrushedChunks());
+		addRecipe(ironOreToCrushedChunks());
+		addRecipe(goldOreToCrushedChunks());
+		addRecipe(galenaOreToCrushedChunks());
 
-		// copper ore to Crushed copper chunks
-		Recipe copperCrushing = new Recipe();
-		copperCrushing.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.blockCopperOre.blockID, RecipeSlotType.INVENTORY, 1) };
-		copperCrushing.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemCopperCrushedChunks.itemID, RecipeSlotType.INVENTORY, 1, 3, 0) };
-		copperCrushing.workRequired = 3000;
-		addRecipe(copperCrushing);
+		addRecipe(ironLargeToCrushedChunks());
+		addRecipe(tinLargeToCrushedChunks());
+		addRecipe(copperLargeToCrushedChunks());
 
-		// Large copper to Crushed copper chunks
-		Recipe copperCrushing2 = new Recipe();
-		copperCrushing2.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemCopperLargeChunks.itemID, RecipeSlotType.INVENTORY, 1) };
+		addRecipe(ironWashedToFineChunks());
+		addRecipe(tinWashedToFineChunks());
+		addRecipe(copperWashedToFineChunks());
+	}
 
-		copperCrushing2.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemCopperCrushedChunks.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
-		copperCrushing2.workRequired = 3000;
-		addRecipe(copperCrushing2);
-
-		// Washed copper to fine ores chunks
-		Recipe copperCrushing3 = new Recipe();
-		copperCrushing3.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemCopperWashedChunks.itemID, RecipeSlotType.INVENTORY, 1) };
-		copperCrushing3.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemCopperFineChunks.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
-		copperCrushing3.workRequired = 3000;
-		addRecipe(copperCrushing3);
-
-		// Tin ore to Crushed Tin chunks
+	private Recipe tinOreToCrushedChunks() {
 		Recipe TinCrushing = new Recipe();
 		TinCrushing.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.blockTinOre.blockID, RecipeSlotType.INVENTORY, 1) };
 
 		TinCrushing.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemTinCrushedChunks.itemID, RecipeSlotType.INVENTORY, 1, 3, 0) };
 		TinCrushing.workRequired = 3000;
-		addRecipe(TinCrushing);
+		return TinCrushing;
+	}
 
-		// Large Tin to Crushed Tin chunks
+	private Recipe tinLargeToCrushedChunks() {
 		Recipe TinCrushing2 = new Recipe();
 		TinCrushing2.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemTinLargeChunks.itemID, RecipeSlotType.INVENTORY, 1) };
 
 		TinCrushing2.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemTinCrushedChunks.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
 		TinCrushing2.workRequired = 3000;
-		addRecipe(TinCrushing2);
+		return TinCrushing2;
+	}
 
-		// Washed tin to fine ores chunks
+	private Recipe tinWashedToFineChunks() {
 		Recipe tinCrushing3 = new Recipe();
 		tinCrushing3.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemTinWashedChunks.itemID, RecipeSlotType.INVENTORY, 1) };
 
 		tinCrushing3.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemTinFineChunks.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
 		tinCrushing3.workRequired = 3000;
-		addRecipe(tinCrushing3);
+		return tinCrushing3;
+	}
 
-		// Iron ore to Crushed Iron chunks
+	private Recipe galenaOreToCrushedChunks() {
+		Recipe recipe = new Recipe();
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.blockGalenaOre.blockID, RecipeSlotType.INVENTORY, 1) };
+
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemGalenaCrushedChunks.itemID, RecipeSlotType.INVENTORY, 1, 3, 0) };
+		recipe.workRequired = 3000;
+		return recipe;
+	}
+
+	private Recipe goldOreToCrushedChunks() {
+		Recipe recipe = new Recipe();
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Block.oreGold.blockID, RecipeSlotType.INVENTORY, 1) };
+
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemGoldCrushedChunks.itemID, RecipeSlotType.INVENTORY, 1, 3, 0) };
+		recipe.workRequired = 3000;
+		return recipe;
+	}
+
+	private Recipe ironOreToCrushedChunks() {
 		Recipe IronCrushing = new Recipe();
 		IronCrushing.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Block.oreIron.blockID, RecipeSlotType.INVENTORY, 1) };
 
 		IronCrushing.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemIronCrushedChunks.itemID, RecipeSlotType.INVENTORY, 1, 3, 0) };
 		IronCrushing.workRequired = 3000;
-		addRecipe(IronCrushing);
+		return IronCrushing;
+	}
 
+	private Recipe ironLargeToCrushedChunks() {
 		// Large Iron to Crushed Iron chunks
 		Recipe IronCrushing2 = new Recipe();
 		IronCrushing2.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemIronLargeChunks.itemID, RecipeSlotType.INVENTORY, 1) };
 
 		IronCrushing2.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemIronCrushedChunks.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
 		IronCrushing2.workRequired = 3000;
-		addRecipe(IronCrushing2);
+		return IronCrushing2;
+	}
 
+	private Recipe ironWashedToFineChunks() {
 		// Washed iron to fine ores chunks
 		Recipe ironCrushing3 = new Recipe();
 		ironCrushing3.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemIronWashedChunks.itemID, RecipeSlotType.INVENTORY, 1) };
 		ironCrushing3.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemIronFineChunks.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
 		ironCrushing3.workRequired = 3000;
-		addRecipe(ironCrushing3);
+		return ironCrushing3;
 	}
 
-	private Recipe copperOreToCrushedChuncks() {
-		Recipe recipe = new Recipe();
-		recipe.inputs = new RecipeInputSlot[]{
-				new RecipeInputSlot(0, IndustrialProcessing.blockCopperOre.blockID, RecipeSlotType.INVENTORY, 1)
-		};
-		
-		recipe.outputs = new RecipeOutputSlot[]{
-				new RecipeOutputSlot(1, IndustrialProcessing.itemCopperCrushedChunks.itemID, RecipeSlotType.INVENTORY, 1, 3, 0)
-		};
-		recipe.workRequired = 3000;
-		return recipe;
+	private Recipe copperOreToCrushedChunks() {
+		Recipe copperCrushing = new Recipe();
+		copperCrushing.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.blockCopperOre.blockID, RecipeSlotType.INVENTORY, 1) };
+		copperCrushing.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemCopperCrushedChunks.itemID, RecipeSlotType.INVENTORY, 1, 3, 0) };
+		copperCrushing.workRequired = 3000;
+		return copperCrushing;
 	}
 
-	private Recipe tinOreToCrushedChuncks() {
-		return null;
+	private Recipe copperLargeToCrushedChunks() {
+		Recipe copperCrushing2 = new Recipe();
+		copperCrushing2.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemCopperLargeChunks.itemID, RecipeSlotType.INVENTORY, 1) };
+
+		copperCrushing2.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemCopperCrushedChunks.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
+		copperCrushing2.workRequired = 3000;
+		return copperCrushing2;
 	}
 
-	private Recipe silverOreToCrushedChuncks() {
-		return null;
+	private Recipe copperWashedToFineChunks() {
+		Recipe copperCrushing3 = new Recipe();
+		copperCrushing3.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemCopperWashedChunks.itemID, RecipeSlotType.INVENTORY, 1) };
+		copperCrushing3.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemCopperFineChunks.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
+		copperCrushing3.workRequired = 3000;
+		return copperCrushing3;
 	}
 
-	private Recipe goldOreToCrushedChuncks() {
-		return null;
-	}
-
-	private Recipe ironOreToCrushedChuncks() {
-		return null;
-	}
-
-	private Recipe coalTounknown() {
+	private Recipe coalToUnknown() {
 		return null;
 	}
 }
