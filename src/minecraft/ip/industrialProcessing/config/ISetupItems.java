@@ -48,34 +48,40 @@ public interface ISetupItems {
     public final static ItemIP itemGalenaLargeChunks = new ItemIP(ConfigItems.itemGalenaLargeChunksID(), "itemGalenaLargeChunks",IndustrialProcessing.tabOres);
     public final static ItemIP itemGalenaFineChunks = new ItemIP(ConfigItems.itemGalenaFineChunksID(), "itemGalenaFineChunks",IndustrialProcessing.tabOres);
     public final static ItemIP itemGalenaWashedChunks = new ItemIP(ConfigItems.itemGalenaWashedChunksID(), "itemGalenaWashedChunks",IndustrialProcessing.tabOres);
+    public final static ItemIP itemGalenaDust = new ItemIP(ConfigItems.itemGalenaDustID(), "itemGalenaDust",IndustrialProcessing.tabOres);
 
     public final static ItemIP itemChromiteCrushedChunks = new ItemIP(ConfigItems.itemChromiteCrushedChunksID(), "itemChromiteCrushedChunks",IndustrialProcessing.tabOres);
     public final static ItemIP itemChromiteSmallChunks = new ItemIP(ConfigItems.itemChromiteSmallChunksID(), "itemChromiteSmallChunks",IndustrialProcessing.tabOres);
     public final static ItemIP itemChromiteLargeChunks = new ItemIP(ConfigItems.itemChromiteLargeChunksID(), "itemChromiteLargeChunks",IndustrialProcessing.tabOres);
     public final static ItemIP itemChromiteFineChunks = new ItemIP(ConfigItems.itemChromiteFineChunksID(), "itemChromiteFineChunks",IndustrialProcessing.tabOres);
     public final static ItemIP itemChromiteWashedChunks = new ItemIP(ConfigItems.itemChromiteWashedChunksID(), "itemChromiteWashedChunks",IndustrialProcessing.tabOres);
+    public final static ItemIP itemChromiteDust = new ItemIP(ConfigItems.itemChromiteDustID(), "itemChromiteDust",IndustrialProcessing.tabOres);
     
     public final static ItemIP itemTaliaCrushedChunks = new ItemIP(ConfigItems.itemTaliaCrushedChunksID(), "itemTaliaCrushedChunks",IndustrialProcessing.tabOres);
     public final static ItemIP itemTaliaSmallChunks = new ItemIP(ConfigItems.itemTaliaSmallChunksID(), "itemTaliaSmallChunks",IndustrialProcessing.tabOres);
     public final static ItemIP itemTaliaLargeChunks = new ItemIP(ConfigItems.itemTaliaLargeChunksID(), "itemTaliaLargeChunks",IndustrialProcessing.tabOres);
     public final static ItemIP itemTaliaFineChunks = new ItemIP(ConfigItems.itemTaliaFineChunksID(), "itemTaliaFineChunks",IndustrialProcessing.tabOres);
     public final static ItemIP itemTaliaWashedChunks = new ItemIP(ConfigItems.itemTaliaWashedChunksID(), "itemTaliaWashedChunks",IndustrialProcessing.tabOres);
+    public final static ItemIP itemTaliaDust = new ItemIP(ConfigItems.itemTaliaDustID(), "itemTaliaDust",IndustrialProcessing.tabOres);
     
     public final static ItemIP itemGoldCrushedChunks = new ItemIP(ConfigItems.itemGoldCrushedChunksID(), "itemGoldCrushedChunks",IndustrialProcessing.tabOres);
     public final static ItemIP itemGoldSmallChunks = new ItemIP(ConfigItems.itemGoldSmallChunksID(), "itemGoldSmallChunks",IndustrialProcessing.tabOres);
     public final static ItemIP itemGoldLargeChunks = new ItemIP(ConfigItems.itemGoldLargeChunksID(), "itemGoldLargeChunks",IndustrialProcessing.tabOres);
     public final static ItemIP itemGoldFineChunks = new ItemIP(ConfigItems.itemGoldFineChunksID(), "itemGoldFineChunks",IndustrialProcessing.tabOres);
     public final static ItemIP itemGoldWashedChunks = new ItemIP(ConfigItems.itemGoldWashedChunksID(), "itemGoldWashedChunks",IndustrialProcessing.tabOres);
+    public final static ItemIP itemGoldDust = new ItemIP(ConfigItems.itemGoldDustID(), "itemGoldDust",IndustrialProcessing.tabOres);
     
     public final static ItemIP itemCinnebarCrystals = new ItemIP(ConfigItems.itemCinnebarCrystalsID(), "itemCinnebarCrystals",IndustrialProcessing.tabOres);
     public final static ItemIP itemCinnebarLargeCrushedCrystals = new ItemIP(ConfigItems.itemCinnebarLargeCrushedCrystalsID(), "itemCinnebarLargeCrushedCrystals",IndustrialProcessing.tabOres);
     public final static ItemIP itemCinnebarSmallCrushedCrystals = new ItemIP(ConfigItems.itemCinnebarSmallCrushedCrystalsID(), "itemCinnebarSmallCrushedCrystals",IndustrialProcessing.tabOres);
     public final static ItemIP itemCinnebarFineCrushedCrystals = new ItemIP(ConfigItems.itemCinnebarFineCrushedCrystalsID(), "itemCinnebarFineCrushedCrystals",IndustrialProcessing.tabOres);
+    public final static ItemIP itemCinnebarDust = new ItemIP(ConfigItems.itemCinnebarDustID(), "itemCinnebarDust",IndustrialProcessing.tabOres);
     
     public final static ItemIP itemRutileCrystals = new ItemIP(ConfigItems.itemRutileCrystalsID(), "itemRutileCrystals",IndustrialProcessing.tabOres);
     public final static ItemIP itemRutileLargeCrushedCrystals = new ItemIP(ConfigItems.itemRutileLargeCrushedCrystalsID(), "itemRutileLargeCrushedCrystals",IndustrialProcessing.tabOres);
     public final static ItemIP itemRutileSmallCrushedCrystals = new ItemIP(ConfigItems.itemRutileSmallCrushedCrystalsID(), "itemRutileSmallCrushedCrystals",IndustrialProcessing.tabOres);
     public final static ItemIP itemRutileFineCrushedCrystals = new ItemIP(ConfigItems.itemRutileFineCrushedCrystalsID(), "itemRutileFineCrushedCrystals",IndustrialProcessing.tabOres);
+    public final static ItemIP itemRutileDust = new ItemIP(ConfigItems.itemRutileDustID(), "itemRutileDust",IndustrialProcessing.tabOres);
     
     public final static ItemIP itemThickStick = new ItemIP(ConfigItems.ItemThickStick(), "ItemThickStick",IndustrialProcessing.tabOreProcessing);
     public final static ItemDamage itemHammer = new ItemDamage(ConfigItems.ItemHammer(), "ItemHammer",IndustrialProcessing.tabOreProcessing);

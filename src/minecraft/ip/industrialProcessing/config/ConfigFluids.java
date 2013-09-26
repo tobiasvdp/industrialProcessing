@@ -23,21 +23,44 @@ public class ConfigFluids {
 	private int offset = 2500;
 	private int blockFluidBaseDirtyWaterID = IndustrialProcessing.config.get(ConfigCategories.fluids.toString(),"DirtyWaterID",offset).getInt();
 	private int BucketDirtyWaterID = offset+1;
+	
 	private int blockFluidBaseOreSludgeIronID = IndustrialProcessing.config.get(ConfigCategories.fluids.toString(),"IronSludgeID",offset+2).getInt();
 	private int blockFluidBaseOreSludgeCopperID = IndustrialProcessing.config.get(ConfigCategories.fluids.toString(),"CopperSludgeID",offset+3).getInt();
 	private int blockFluidBaseOreSludgeTinID = IndustrialProcessing.config.get(ConfigCategories.fluids.toString(),"TinSludgeID",offset+4).getInt();
+	
 	private int BucketOreSludgeIronID = offset+5;
 	private int BucketOreSludgeCopperID = offset+6;
 	private int BucketOreSludgeTinID = offset+7;
+	
 	private int BucketHotSlagID = offset+8;
 	private int BucketPigIronID = offset+9;
 	private int BucketHotSteelID = offset+10;
+	
 	private int blockFluidBaseHotSlagID = IndustrialProcessing.config.get(ConfigCategories.fluids.toString(),"HotSlagID",offset+11).getInt();
 	private int blockFluidBasePigIronID = IndustrialProcessing.config.get(ConfigCategories.fluids.toString(),"PigIronID",offset+12).getInt();
 	private int blockFluidBaseHotSteelID = IndustrialProcessing.config.get(ConfigCategories.fluids.toString(),"HotSteelID",offset+13).getInt();
 	private int blockFluidBaseExhaustGasID = IndustrialProcessing.config.get(ConfigCategories.fluids.toString(),"ExhaustGasID",offset+14).getInt();
 	
-	private int blockFluidBaseSteamID = IndustrialProcessing.config.get(ConfigCategories.fluids.toString(),"SteamID",offset + 15).getInt(); 
+	private int blockFluidBaseSteamID = IndustrialProcessing.config.get(ConfigCategories.fluids.toString(),"SteamID",offset + 15).getInt();
+	
+	private int bucketOreSludgeChromiteID = offset+16;
+	private int bucketOreSludgeGalenaID = offset+17;
+	private int bucketOreSludgeGoldID = offset+18;
+	private int bucketOreSludgeTaliaID = offset+19;
+	
+	private int blockFluidBaseOreSludgeChromiteID = IndustrialProcessing.config.get(ConfigCategories.fluids.toString(),"ChromiteSludgeID",offset+20).getInt();
+	private int blockFluidBaseOreSludgeGalenaID = IndustrialProcessing.config.get(ConfigCategories.fluids.toString(),"GalenaSludgeID",offset+21).getInt();
+	private int blockFluidBaseOreSludgeGoldID = IndustrialProcessing.config.get(ConfigCategories.fluids.toString(),"GoldSludgeID",offset+22).getInt();
+	private int blockFluidBaseOreSludgeTaliaID = IndustrialProcessing.config.get(ConfigCategories.fluids.toString(),"TaliaSludgeID",offset+23).getInt();
+	
+	public static int bucketOreSludgeChromiteID(){return getInstance().bucketOreSludgeChromiteID;}
+	public static int bucketOreSludgeGalenaID(){return getInstance().bucketOreSludgeGalenaID;}
+	public static int bucketOreSludgeGoldID(){return getInstance().bucketOreSludgeGoldID;}
+	public static int bucketOreSludgeTaliaID(){return getInstance().bucketOreSludgeTaliaID;}
+	public static int blockFluidBaseOreSludgeChromiteID(){return getInstance().blockFluidBaseOreSludgeChromiteID;}
+	public static int blockFluidBaseOreSludgeGalenaID(){return getInstance().blockFluidBaseOreSludgeGalenaID;}
+	public static int blockFluidBaseOreSludgeGoldID(){return getInstance().blockFluidBaseOreSludgeGoldID;}
+	public static int blockFluidBaseOreSludgeTaliaID(){return getInstance().blockFluidBaseOreSludgeTaliaID;}
 	
 	public static int blockFluidBaseDirtyWaterID(){return getInstance().blockFluidBaseDirtyWaterID;}
 	public static int BucketDirtyWaterID(){return getInstance().BucketDirtyWaterID;}
@@ -74,6 +97,15 @@ public class ConfigFluids {
 		registerFluid(IndustrialProcessing.blockFluidExhaustGas, IndustrialProcessing.itemFluidExhaustGas, null, "Exhaust gas");
 		
 		registerFluid(IndustrialProcessing.blockFluidSteam, IndustrialProcessing.itemFluidSteam, null, "Steam");
+		
+		registerFluid(IndustrialProcessing.blockFluidOreSludgeChromite, IndustrialProcessing.itemFluidOreSludgeChromite, IndustrialProcessing.bucketOreSludgeChromite, "Chromite ore sludge");
+		LanguageRegistry.addName(IndustrialProcessing.bucketOreSludgeChromite, "Chromite sludge Bucket");
+		registerFluid(IndustrialProcessing.blockFluidOreSludgeGalena, IndustrialProcessing.itemFluidOreSludgeGalena, IndustrialProcessing.bucketOreSludgeGalena, "Galena ore sludge");
+		LanguageRegistry.addName(IndustrialProcessing.bucketOreSludgeGalena, "Galena sludge Bucket");
+		registerFluid(IndustrialProcessing.blockFluidOreSludgeGold, IndustrialProcessing.itemFluidOreSludgeGold, IndustrialProcessing.bucketOreSludgeGold, "Gold ore sludge");
+		LanguageRegistry.addName(IndustrialProcessing.bucketOreSludgeGold, "Gold sludge Bucket");
+		registerFluid(IndustrialProcessing.blockFluidOreSludgeTalia, IndustrialProcessing.itemFluidOreSludgeTalia, IndustrialProcessing.bucketOreSludgeTalia, "Thalium ore sludge");
+		LanguageRegistry.addName(IndustrialProcessing.bucketOreSludgeTalia, "Thalium sludge Bucket");
 	}
 	
 	private void registerFluid(Block block, Fluid fluid, ContainerFluid bucket, String displayName) {
