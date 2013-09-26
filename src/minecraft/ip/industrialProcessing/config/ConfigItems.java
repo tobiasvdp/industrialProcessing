@@ -48,35 +48,63 @@ public class ConfigItems {
 	private int ItemIronPlateID = 6539;
 	private int ItemIronTipsID = 6540;
 	private int ItemSmallMachineCasingCrusherID = 6541;
-	private int itemGalenaCrushedChunksID;
-	private int itemGalenaSmallChunksID;
-	private int itemGalenaLargeChunksID;
-	private int itemGalenaWashedChunksID;
-	private int itemGalenaFineChunksID;
-	private int itemRutileCrushedCrystalsID;
-	private int itemRutileSmallCrushedCrystalsID;
-	private int itemRutileLargeCrushedCrystalsID;
-	private int itemRutileFineCrushedCrystalsID;
-	private int itemCinnebarCrushedCrystalsID;
-	private int itemCinnebarSmallCrushedCrystalsID;
-	private int itemCinnebarLargeCrushedCrystalsID;
-	private int itemCinnebarFineCrushedCrystalsID;
-	private int itemChromiteCrushedChunksID;
-	private int itemChromiteSmallChunksID;
-	private int itemChromiteLargeChunksID;
-	private int itemChromiteWashedChunksID;
-	private int itemChromiteFineChunksID;
-	private int itemGoldCrushedChunksID;
-	private int itemGoldSmallChunksID;
-	private int itemGoldLargeChunksID;
-	private int itemGoldWashedChunksID;
-	private int itemGoldFineChunksID;
-	private int itemTaliaCrushedChunksID;
-	private int itemTaliaSmallChunksID;
-	private int itemTaliaLargeChunksID;
-	private int itemTaliaWashedChunksID;
-	private int itemTaliaFineChunksID;
+	private int itemGalenaCrushedChunksID = 6542;
+	private int itemGalenaSmallChunksID = 6543;
+	private int itemGalenaLargeChunksID = 6544;
+	private int itemGalenaWashedChunksID = 6545;
+	private int itemGalenaFineChunksID = 6546;
+	private int itemRutileCrystalsID = 6547;
+	private int itemRutileSmallCrushedCrystalsID = 6549;
+	private int itemRutileLargeCrushedCrystalsID = 6550;
+	private int itemRutileFineCrushedCrystalsID = 6551;
+	private int itemCinnebarCrystalsID = 6552;
+	private int itemCinnebarSmallCrushedCrystalsID = 6554;
+	private int itemCinnebarLargeCrushedCrystalsID = 6555;
+	private int itemCinnebarFineCrushedCrystalsID = 6556;
+	private int itemChromiteCrushedChunksID = 6557;
+	private int itemChromiteSmallChunksID = 6558;
+	private int itemChromiteLargeChunksID = 6559;
+	private int itemChromiteWashedChunksID = 6560;
+	private int itemChromiteFineChunksID = 6561;
+	private int itemGoldCrushedChunksID = 6562;
+	private int itemGoldSmallChunksID = 6563;
+	private int itemGoldLargeChunksID = 6564;
+	private int itemGoldWashedChunksID = 6565;
+	private int itemGoldFineChunksID = 6566;
+	private int itemTaliaCrushedChunksID = 6567;
+	private int itemTaliaSmallChunksID = 6568;
+	private int itemTaliaLargeChunksID = 6569;
+	private int itemTaliaWashedChunksID = 6570;
+	private int itemTaliaFineChunksID = 6571;
 	
+	public static int itemCinnebarCrystalsID(){return getInstance().itemCinnebarCrystalsID;}
+	public static int itemRutileCrystalsID(){return getInstance().itemRutileCrystalsID;}
+	public static int itemGalenaCrushedChunksID(){return getInstance().itemGalenaCrushedChunksID;}
+	public static int itemGalenaSmallChunksID(){return getInstance().itemGalenaSmallChunksID;}
+	public static int itemGalenaLargeChunksID(){return getInstance().itemGalenaLargeChunksID;}
+	public static int itemGalenaWashedChunksID(){return getInstance().itemGalenaWashedChunksID;}
+	public static int itemGalenaFineChunksID(){return getInstance().itemGalenaFineChunksID;}
+	public static int itemRutileSmallCrushedCrystalsID(){return getInstance().itemRutileSmallCrushedCrystalsID;}
+	public static int itemRutileLargeCrushedCrystalsID(){return getInstance().itemRutileLargeCrushedCrystalsID;}
+	public static int itemRutileFineCrushedCrystalsID(){return getInstance().itemRutileFineCrushedCrystalsID;}
+	public static int itemCinnebarSmallCrushedCrystalsID(){return getInstance().itemCinnebarSmallCrushedCrystalsID;}
+	public static int itemCinnebarLargeCrushedCrystalsID(){return getInstance().itemCinnebarLargeCrushedCrystalsID;}
+	public static int itemCinnebarFineCrushedCrystalsID(){return getInstance().itemCinnebarFineCrushedCrystalsID;}
+	public static int itemChromiteCrushedChunksID(){return getInstance().itemChromiteCrushedChunksID;}
+	public static int itemChromiteSmallChunksID(){return getInstance().itemChromiteSmallChunksID;}
+	public static int itemChromiteLargeChunksID(){return getInstance().itemChromiteLargeChunksID;}
+	public static int itemChromiteWashedChunksID(){return getInstance().itemChromiteWashedChunksID;}
+	public static int itemChromiteFineChunksID(){return getInstance().itemChromiteFineChunksID;}
+	public static int itemGoldCrushedChunksID(){return getInstance().itemGoldCrushedChunksID;}
+	public static int itemGoldSmallChunksID(){return getInstance().itemGoldSmallChunksID;}
+	public static int itemGoldLargeChunksID(){return getInstance().itemGoldLargeChunksID;}
+	public static int itemGoldWashedChunksID(){return getInstance().itemGoldWashedChunksID;}
+	public static int itemGoldFineChunksID(){return getInstance().itemGoldFineChunksID;}
+	public static int itemTaliaCrushedChunksID(){return getInstance().itemTaliaCrushedChunksID;}
+	public static int itemTaliaSmallChunksID(){return getInstance().itemTaliaSmallChunksID;}
+	public static int itemTaliaLargeChunksID(){return getInstance().itemTaliaLargeChunksID;}
+	public static int itemTaliaWashedChunksID(){return getInstance().itemTaliaWashedChunksID;}
+	public static int itemTaliaFineChunksID(){return getInstance().itemTaliaFineChunksID;}
 	public static int ItemSmallMachineCasingID(){return getInstance().ItemSmallMachineCasingID;}
 	public static int ItemInputPortID(){return getInstance().ItemInputPortID;}
 	public static int ItemOutputPortID(){return getInstance().ItemOutputPortID;}
