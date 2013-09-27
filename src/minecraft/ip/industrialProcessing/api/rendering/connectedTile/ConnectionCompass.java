@@ -1,12 +1,12 @@
 package ip.industrialProcessing.api.rendering.connectedTile;
 
 public class ConnectionCompass {
-	public boolean connectionN;
-	public boolean connectionNE;
-	public boolean connectionE;
-	public boolean connectionSE;
-	public boolean connectionS;
-	public boolean connectionSW;
-	public boolean connectionW;
-	public boolean connectionNW;
+	public TileConnection connectionN;
+	public TileConnection connectionNE;
+	public TileConnection connectionE;
+	public TileConnection connectionSE;
+	public TileConnection connectionS;
+	public TileConnection connectionSW;
+	public TileConnection connectionW;
+	public TileConnection connectionNW;
 }

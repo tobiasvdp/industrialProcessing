@@ -20,7 +20,7 @@ public class FloorConnectedSide extends ObjMesh {
 	public ObjMesh cloneTransformed(Matrix4f transform) {
 		FloorConnectedSide other = new FloorConnectedSide();
 		other.quads = cloneQuads(this.quads, transform);
-		return null;
+		return other;
 	}
 
 }
