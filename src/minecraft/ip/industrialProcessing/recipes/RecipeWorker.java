@@ -113,18 +113,17 @@ public class RecipeWorker extends ServerWorker {
 	protected void removeFromInput(RecipeInputSlot slot) {
 		if (slot.type == RecipeSlotType.INVENTORY) {
 			if (!this.handler.removeFromSlot(slot.index, slot.itemId, slot.amount))
-				System.out.println("Failed to remove recipe input?!");
+				System.err.println("Failed to remove recipe input?!");
 		} else if (slot.type == RecipeSlotType.DAMAGEDITEM) {
-			if (!this.handler.damageItem(slot.index, slot.itemId))
-				System.out.println("Failed to damage recipe input?!");
+			if (!this.handler.damageItem(slot.index, slot.itemId)) 
+				System.err.println("Failed to damage recipe input?!");
 		}
 	}
 
 	protected void produceOutput(Recipe recipe) {
 
 		if (recipe == null || recipe.outputs == null)
-			return;
-		System.out.println("Outputting recipe after working " + recipe.workRequired);
+			return; 
 		for (int i = 0; i < recipe.outputs.length; i++) {
 			RecipeOutputSlot slot = recipe.outputs[i];
 
@@ -140,7 +139,7 @@ public class RecipeWorker extends ServerWorker {
 	protected void addToOutput(int amount, RecipeOutputSlot slot) {
 		if (slot.type == RecipeSlotType.INVENTORY) {
 			if (!this.handler.addToSlot(slot.index, slot.itemId, amount))
-				System.out.println("Failed to create recipe output?!");
+				System.err.println("Failed to create recipe output?!");
 		}
 	}
 
@@ -153,8 +152,7 @@ public class RecipeWorker extends ServerWorker {
 		double resize = Math.abs(0.5 - distributionCenter) + 1;
 		value *= resize;
 		value = Math.max(0, Math.min(value + distributionCenter, 1));
-		int amount = (int) Math.round(value * size) + minAmount;
-		System.out.println(String.format("%s: %s-%s %s = %s", randomValue, minAmount, maxAmount, distributionCenter, amount));
+		int amount = (int) Math.round(value * size) + minAmount; 
 		return amount;
 	}
 }
