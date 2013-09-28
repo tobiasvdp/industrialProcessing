@@ -46,10 +46,10 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
 
 	@Override
 	public void updateEntity() {
+		float DT = 1 / 20f;
 		super.updateEntity();
 		if (!this.worldObj.isRemote) {
 			if (!this.itemStacks.isEmpty()) {
-				float DT = 1 / 20f;
 
 				if (clusterTicks++ < maxClusterTicks) {
 					clusterItems();
@@ -61,8 +61,10 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
 					stack.progress += speed * DT;
 
 					if (stack.progress >= 1) {
-						if (outputStack(stack))
+						if (outputStack(stack)) {
 							this.itemStacks.remove(i);
+							syncConveyor();
+						}
 					} else if (stack.progress > 0.5f && !stack.routed) {
 						rerouteStack(stack);
 						if (stack.destination == LocalDirection.UNKNOWN) {
@@ -73,8 +75,13 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
 					}
 				}
 			}
+		} else {
+			for (int i = this.itemStacks.size() - 1; i >= 0; i--) {
+				MovingItemStack stack = this.itemStacks.get(i);
+				stack.progress += speed * DT;
+			}
+
 		}
-		notifyBlockChange();
 	}
 
 	public void clusterItems() {
@@ -94,14 +101,17 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
 							if ((stackB.progress > 0.5 && stackB.destination == stackA.destination) || (stackB.progress <= 0.5 && stackB.source == stackA.source)) {
 								if (stackB.stack == null) {
 									this.itemStacks.remove(j);
+									syncConveyor();
 									continue;
 								}
 								if (stackA.stack.isItemEqual(stackB.stack)) {
 									available = Math.min(available, stackB.stack.stackSize);
 									stackA.stack.stackSize += available;
 									stackB.stack.stackSize -= available;
-									if (stackB.stack.stackSize <= 0)
+									if (stackB.stack.stackSize <= 0) {
 										this.itemStacks.remove(j);
+										syncConveyor();
+									}
 								}
 							}
 						}
@@ -109,6 +119,11 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
 				}
 			}
 		}
+	}
+
+	private void syncConveyor() {
+		// TODO: this shouldn't be NBT based!
+		notifyBlockChange();
 	}
 
 	private boolean outputStack(MovingItemStack stack) {
@@ -172,6 +187,7 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
 		movingStack.destination = LocalDirection.BACK;
 		int index = this.itemStacks.size();
 		this.itemStacks.add(movingStack);
+		syncConveyor();
 
 	}
 
@@ -191,7 +207,10 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
 
 	protected void rerouteStack(MovingItemStack stack) {
 		LocalDirection out = findOutput(stack.stack, stack.source);
-		stack.destination = out;
+		if (out != stack.destination) {
+			stack.destination = out;
+			syncConveyor();
+		}
 		stack.routed = true;
 	}
 
