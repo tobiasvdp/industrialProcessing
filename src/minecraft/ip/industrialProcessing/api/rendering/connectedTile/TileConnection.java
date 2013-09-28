@@ -1,5 +1,5 @@
 package ip.industrialProcessing.api.rendering.connectedTile;
 
 public enum TileConnection {
-	WALL, AIR, GROUND, MACHINE, CONNECTED, STAIRS
+	WALL, AIR, GROUND, MACHINE, CONNECTED, STAIRS, STAIRSSIDE, STAIRSTOP, CONNECTEDSTAIRS
 }

@@ -203,17 +203,33 @@ public class ModelPlatform extends ModelBlock {
 
 	private void renderCorner(Icon icon, Vector3f position, TileConnection connectionE, TileConnection connectionSE, TileConnection connectionS, ObjMesh meshCornerOutside, ObjMesh meshCornerFull, ObjMesh meshCornerInside, ObjMesh straight1, ObjMesh straight2, ObjMesh meshHandRailOutside, ObjMesh meshHandRailStraight1, ObjMesh meshHandRailStraight2, ObjMesh meshHandRailCap1, ObjMesh meshHandRailCap2, ObjMesh meshHandRailCornerInside) {
 
-		boolean stateE = (connectionE == TileConnection.AIR || connectionE == TileConnection.GROUND || connectionE == TileConnection.MACHINE);
-		boolean stateSE = (connectionSE == TileConnection.AIR || connectionSE == TileConnection.GROUND || connectionSE == TileConnection.MACHINE);
-		boolean stateS = (connectionS == TileConnection.AIR || connectionS == TileConnection.GROUND || connectionS == TileConnection.MACHINE);
+		boolean airStateE = connectionE == TileConnection.AIR || connectionE == TileConnection.STAIRSTOP || connectionE == TileConnection.STAIRSSIDE;
+		boolean airStateSE = connectionSE == TileConnection.AIR || connectionSE == TileConnection.STAIRSTOP || connectionSE == TileConnection.STAIRSSIDE;
+		boolean airStateS = connectionS == TileConnection.AIR || connectionS == TileConnection.STAIRSTOP || connectionS == TileConnection.STAIRSSIDE;
 
-		boolean airStateE = connectionE == TileConnection.AIR;
-		boolean airStateSE = connectionSE == TileConnection.AIR;
-		boolean airStateS = connectionS == TileConnection.AIR;
+		boolean stateE = (airStateE || connectionE == TileConnection.GROUND || connectionE == TileConnection.MACHINE);
+		boolean stateSE = (airStateSE || connectionSE == TileConnection.GROUND || connectionSE == TileConnection.MACHINE);
+		boolean stateS = (airStateS || connectionS == TileConnection.GROUND || connectionS == TileConnection.MACHINE);
+
+		boolean wallE = connectionE == TileConnection.WALL;
+		boolean wallS = connectionS == TileConnection.WALL;
 
 		boolean groundSE = connectionSE == TileConnection.GROUND || connectionSE == TileConnection.MACHINE;
 		boolean stairsE = connectionE == TileConnection.STAIRS;
 		boolean stairsS = connectionS == TileConnection.STAIRS;
+
+		boolean stairsSideE = connectionE == TileConnection.STAIRSSIDE;
+		boolean stairsSideS = connectionS == TileConnection.STAIRSSIDE;
+
+		boolean stairTopE = connectionE == TileConnection.STAIRSTOP;
+		boolean stairTopS = connectionS == TileConnection.STAIRSTOP;
+
+		boolean connectedSE = connectionSE == TileConnection.CONNECTED;
+		boolean connectedS = connectionS == TileConnection.CONNECTED;
+		boolean connectedE = connectionE == TileConnection.CONNECTED;
+
+		boolean connectedStairsS = connectionS == TileConnection.CONNECTEDSTAIRS;
+		boolean connectedStairsE = connectionE == TileConnection.CONNECTEDSTAIRS;
 
 		if (stateE && stateS) {
 			meshCornerOutside.renderMesh(false, icon, position);
@@ -222,13 +238,19 @@ public class ModelPlatform extends ModelBlock {
 				straight2.renderMesh(false, icon, position);
 			else if (stairsS)
 				straight1.renderMesh(false, icon, position);
-			else
-				meshCornerFull.renderMesh(false, icon, position);
+			else {
+				if (connectionSE == TileConnection.STAIRS)
+					meshCornerInside.renderMesh(false, icon, position);
+				else
+					meshCornerFull.renderMesh(false, icon, position);
+			}
 		} else if (!stateE && !stateS && stateSE) {
 			if (stairsE)
 				straight2.renderMesh(false, icon, position);
 			else if (stairsS)
 				straight1.renderMesh(false, icon, position);
+			else if (wallE && wallS)
+				meshCornerFull.renderMesh(false, icon, position);
 			else
 				meshCornerInside.renderMesh(false, icon, position);
 		} else if (stateS) {
@@ -239,21 +261,21 @@ public class ModelPlatform extends ModelBlock {
 
 		if (airStateE && airStateS) // both sides are disconnected
 			meshHandRailOutside.renderMesh(false, icon, position);
-		else if (!stateE && !stateS && airStateSE) // both sides are connected,
-													// corner-touching block is
-													// not connected
-			meshHandRailCornerInside.renderMesh(false, icon, position);
-		else {
+		else if (!stateE && !stateS && airStateSE) {
+			// both sides are connected, corner-touching block is not connected
+			if (!(wallE && wallS))
+				meshHandRailCornerInside.renderMesh(false, icon, position);
+		} else {
 			if (stateE && !stateS && airStateE) {
-				if (groundSE)
-					meshHandRailCap2.renderMesh(false, icon, position);
-				else
+				if ((!groundSE || connectedStairsS|| wallS) && !(stairTopE && connectedSE) && !(stairsSideE && connectedSE))
 					meshHandRailStraight2.renderMesh(false, icon, position);
-			} else if (stateS && !stateE && airStateS) {
-				if (groundSE)
-					meshHandRailCap1.renderMesh(false, icon, position);
 				else
+					meshHandRailCap2.renderMesh(false, icon, position);
+			} else if (stateS && !stateE && airStateS) {
+				if ((!groundSE || connectedStairsE || wallE) && !(stairTopS && connectedSE) && !(stairsSideS && connectedSE))
 					meshHandRailStraight1.renderMesh(false, icon, position);
+				else
+					meshHandRailCap1.renderMesh(false, icon, position);
 			}
 
 			if (stateE && stateS) {
@@ -285,12 +307,12 @@ public class ModelPlatform extends ModelBlock {
 
 	private void renderConnection(Icon icon, Vector3f position, TileConnection connection, ObjMesh meshConnected, ObjMesh meshUnconnected, ObjMesh handrail) {
 
-		if (connection == TileConnection.AIR || connection == TileConnection.GROUND || connection == TileConnection.MACHINE || connection == TileConnection.STAIRS) {
+		if (connection == TileConnection.AIR || connection == TileConnection.GROUND || connection == TileConnection.MACHINE || connection == TileConnection.STAIRSTOP || connection == TileConnection.STAIRS || connection == TileConnection.STAIRSSIDE) {
 			meshUnconnected.renderMesh(false, icon, position);
 		} else
 			meshConnected.renderMesh(false, icon, position);
 
-		if (connection == TileConnection.AIR)
+		if (connection == TileConnection.AIR || connection == TileConnection.STAIRSTOP || connection == TileConnection.STAIRSSIDE)
 			handrail.renderMesh(false, icon, position);
 
 	}

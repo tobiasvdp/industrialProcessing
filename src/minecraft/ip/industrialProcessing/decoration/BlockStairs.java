@@ -138,14 +138,14 @@ public class BlockStairs extends BlockDecoration {
 			this.setBlockBounds(minX2, minY2, minZ2, maxX2, maxY2, maxZ2);
 			super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 
-			if (compass.connectionW == TileConnection.AIR) {
+			if (compass.connectionW == TileConnection.AIR || compass.connectionW == TileConnection.GROUND) {
 				this.setBlockBounds(minXL1, minY1, minZ1, maxXL1, maxY1 + 1.2f, maxZ1);
 				super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 				this.setBlockBounds(minXL2, minY2, minZ2, maxXL2, maxY2 + 1.2f, maxZ2);
 				super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 			}
 
-			if (compass.connectionE == TileConnection.AIR) {
+			if (compass.connectionE == TileConnection.AIR || compass.connectionE == TileConnection.GROUND) {
 				this.setBlockBounds(minXR1, minY1, minZ1, maxXR1, maxY1 + 1.2f, maxZ1);
 				super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 				this.setBlockBounds(minXR2, minY2, minZ2, maxXR2, maxY2 + 1.2f, maxZ2);
@@ -158,14 +158,14 @@ public class BlockStairs extends BlockDecoration {
 			this.setBlockBounds(minX2, minY2, minZ1, maxX2, maxY2, maxZ1);
 			super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 
-			if (compass.connectionW == TileConnection.AIR) {
+			if (compass.connectionW == TileConnection.AIR || compass.connectionW == TileConnection.GROUND) {
 				this.setBlockBounds(minXL1, minY1, minZ2, maxXL1, maxY1 + 1.2f, maxZ2);
 				super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 				this.setBlockBounds(minXL2, minY2, minZ1, maxXL2, maxY2 + 1.2f, maxZ1);
 				super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 			}
 
-			if (compass.connectionE == TileConnection.AIR) {
+			if (compass.connectionE == TileConnection.AIR || compass.connectionE == TileConnection.GROUND) {
 				this.setBlockBounds(minXR1, minY1, minZ2, maxXR1, maxY1 + 1.2f, maxZ2);
 				super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 				this.setBlockBounds(minXR2, minY2, minZ1, maxXR2, maxY2 + 1.2f, maxZ1);
@@ -178,13 +178,13 @@ public class BlockStairs extends BlockDecoration {
 			this.setBlockBounds(minZ2, minY2, minX2, maxZ2, maxY2, maxX2);
 			super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 
-			if (compass.connectionN == TileConnection.AIR) {
+			if (compass.connectionN == TileConnection.AIR || compass.connectionN == TileConnection.GROUND) {
 				this.setBlockBounds(minZ1, minY1, minXL1, maxZ1, maxY1 + 1.2f, maxXL1);
 				super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 				this.setBlockBounds(minZ2, minY2, minXL2, maxZ2, maxY2 + 1.2f, maxXL2);
 				super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 			}
-			if (compass.connectionS == TileConnection.AIR) {
+			if (compass.connectionS == TileConnection.AIR || compass.connectionS == TileConnection.GROUND) {
 				this.setBlockBounds(minZ1, minY1, minXR1, maxZ1, maxY1 + 1.2f, maxXR1);
 				super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 				this.setBlockBounds(minZ2, minY2, minXR2, maxZ2, maxY2 + 1.2f, maxXR2);
@@ -197,13 +197,13 @@ public class BlockStairs extends BlockDecoration {
 			this.setBlockBounds(minZ1, minY2, minX2, maxZ1, maxY2, maxX2);
 			super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 
-			if (compass.connectionN == TileConnection.AIR) {
+			if (compass.connectionN == TileConnection.AIR || compass.connectionN == TileConnection.GROUND) {
 				this.setBlockBounds(minZ2, minY1, minXL1, maxZ2, maxY1 + 1.2f, maxXL1);
 				super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 				this.setBlockBounds(minZ1, minY2, minXL2, maxZ1, maxY2 + 1.2f, maxXL2);
 				super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 			}
-			if (compass.connectionS == TileConnection.AIR) {
+			if (compass.connectionS == TileConnection.AIR || compass.connectionS == TileConnection.GROUND) {
 				this.setBlockBounds(minZ2, minY1, minXR1, maxZ2, maxY1 + 1.2f, maxXR1);
 				super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 				this.setBlockBounds(minZ1, minY2, minXR2, maxZ1, maxY2 + 1.2f, maxXR2);

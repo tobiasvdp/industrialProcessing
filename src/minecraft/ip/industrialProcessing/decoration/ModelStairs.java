@@ -23,7 +23,7 @@ public class ModelStairs extends ModelBlock {
 
 	StairsCap1[] stairsCap1 = new StairsCap1[4];
 	StairsCap2[] stairsCap2 = new StairsCap2[4];
-	
+
 	StairsConnected1[] stairsConnected1 = new StairsConnected1[4];
 	StairsConnected2[] stairsConnected2 = new StairsConnected2[4];
 
@@ -55,11 +55,11 @@ public class ModelStairs extends ModelBlock {
 		Icon icon = block.getIcon(0, 0);
 		Vector3f position = new Vector3f(0, 0, 0);
 		GL11.glPushMatrix();
-		//GL11.glTranslatef(0, -0.5f, 0);
-		//GL11.glScalef(0.7f, 0.7f, 0.7f);
+		// GL11.glTranslatef(0, -0.5f, 0);
+		// GL11.glScalef(0.7f, 0.7f, 0.7f);
 		stairs[0].renderMesh(true, icon, position);
 		handrail1[0].renderMesh(true, icon, position);
-		//handrail2[0].renderMesh(true, icon, position);
+		// handrail2[0].renderMesh(true, icon, position);
 		stairsCap1[0].renderMesh(true, icon, position);
 		stairsCap2[0].renderMesh(true, icon, position);
 		GL11.glPopMatrix();
@@ -95,15 +95,13 @@ public class ModelStairs extends ModelBlock {
 
 		stairs[rotation].renderMesh(false, icon, position);
 		if (lefts[rotation] != TileConnection.CONNECTED) {
-			if (lefts[rotation] != TileConnection.GROUND)
-				handrail1[rotation].renderMesh(false, icon, position);
+			handrail1[rotation].renderMesh(false, icon, position);
 			stairsCap1[rotation].renderMesh(false, icon, position);
 		} else {
 			stairsConnected1[rotation].renderMesh(false, icon, position);
 		}
 		if (rights[rotation] != TileConnection.CONNECTED) {
-			if (rights[rotation] != TileConnection.GROUND)
-				handrail2[rotation].renderMesh(false, icon, position);
+			handrail2[rotation].renderMesh(false, icon, position);
 			stairsCap2[rotation].renderMesh(false, icon, position);
 		} else {
 			stairsConnected2[rotation].renderMesh(false, icon, position);

@@ -61,11 +61,9 @@ public class BlockPlatform extends BlockDecoration {
 			return TileConnection.CONNECTED;
 		} else if (id == ConfigBlocks.getStairsBlockID()) {
 			if (isStairsFacing(world, x2, y2, z2, dx, dy, dz))
-				return TileConnection.STAIRS;
-			if (!isSolid(world, x2, y2 - 1, z2))
-				return TileConnection.AIR;
+				return TileConnection.STAIRS; 
 			else
-				return TileConnection.GROUND;
+				return TileConnection.STAIRSSIDE; 
 		} else {
 			TileEntity entity = world.getBlockTileEntity(x2, y2, z2);
 			if (entity instanceof IInventory) {
@@ -73,12 +71,14 @@ public class BlockPlatform extends BlockDecoration {
 			} else if (isSolid(world, x2, y2, z2)) {
 				return TileConnection.WALL;
 			} else if (!isSolid(world, x2, y2 - 1, z2)) {
-				int idBelow = world.getBlockId(x2, y2-1, z2);
+				int idBelow = world.getBlockId(x2, y2 - 1, z2);
 				if (idBelow == ConfigBlocks.getStairsBlockID()) {
-					if (isStairsFacing(world, x2, y2-1, z2, -dx, -dy, -dz)) {
-						return TileConnection.CONNECTED;
-					}
-				}
+					if (isStairsFacing(world, x2, y2 - 1, z2, -dx, -dy, -dz)) {
+						return TileConnection.CONNECTEDSTAIRS;
+					}else
+						return TileConnection.STAIRSTOP;
+				} else if (idBelow == ladder.blockID)
+					return TileConnection.GROUND;
 				return TileConnection.AIR;
 			} else {
 				return TileConnection.GROUND;
