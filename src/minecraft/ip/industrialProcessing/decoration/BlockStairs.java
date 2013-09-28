@@ -70,6 +70,8 @@ public class BlockStairs extends BlockDecoration {
 		int y2 = y + dy;
 		int z2 = z + dz;
 		int id = world.getBlockId(x2, y2, z2);
+		if (isSolid(world, x2, y2, z2))
+			return TileConnection.WALL;
 		if (id == ConfigBlocks.getStairsBlockID()) {
 			int meta2 = world.getBlockMetadata(x2, y2, z2);
 			if (meta == meta2)

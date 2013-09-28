@@ -95,13 +95,15 @@ public class ModelStairs extends ModelBlock {
 
 		stairs[rotation].renderMesh(false, icon, position);
 		if (lefts[rotation] != TileConnection.CONNECTED) {
-			handrail1[rotation].renderMesh(false, icon, position);
+			if (lefts[rotation] != TileConnection.WALL)
+				handrail1[rotation].renderMesh(false, icon, position);
 			stairsCap1[rotation].renderMesh(false, icon, position);
 		} else {
 			stairsConnected1[rotation].renderMesh(false, icon, position);
 		}
 		if (rights[rotation] != TileConnection.CONNECTED) {
-			handrail2[rotation].renderMesh(false, icon, position);
+			if (rights[rotation] != TileConnection.WALL)
+				handrail2[rotation].renderMesh(false, icon, position);
 			stairsCap2[rotation].renderMesh(false, icon, position);
 		} else {
 			stairsConnected2[rotation].renderMesh(false, icon, position);

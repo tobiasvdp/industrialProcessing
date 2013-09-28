@@ -239,7 +239,7 @@ public class ModelPlatform extends ModelBlock {
 			else if (stairsS)
 				straight1.renderMesh(false, icon, position);
 			else {
-				if (connectionSE == TileConnection.STAIRS)
+				if (connectionSE == TileConnection.CONNECTEDSTAIRS || connectionSE == TileConnection.STAIRS)
 					meshCornerInside.renderMesh(false, icon, position);
 				else
 					meshCornerFull.renderMesh(false, icon, position);
