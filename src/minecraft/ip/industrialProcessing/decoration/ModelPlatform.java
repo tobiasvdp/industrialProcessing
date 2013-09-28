@@ -213,10 +213,12 @@ public class ModelPlatform extends ModelBlock {
 
 		boolean wallE = connectionE == TileConnection.WALL;
 		boolean wallS = connectionS == TileConnection.WALL;
+		boolean wallSE = connectionSE == TileConnection.WALL;
 
 		boolean groundSE = connectionSE == TileConnection.GROUND || connectionSE == TileConnection.MACHINE;
 		boolean stairsE = connectionE == TileConnection.STAIRS;
 		boolean stairsS = connectionS == TileConnection.STAIRS;
+		boolean stairsSE = connectionSE == TileConnection.STAIRS;
 
 		boolean stairsSideE = connectionE == TileConnection.STAIRSSIDE;
 		boolean stairsSideS = connectionS == TileConnection.STAIRSSIDE;
@@ -230,78 +232,121 @@ public class ModelPlatform extends ModelBlock {
 
 		boolean connectedStairsS = connectionS == TileConnection.CONNECTEDSTAIRS;
 		boolean connectedStairsE = connectionE == TileConnection.CONNECTEDSTAIRS;
+		boolean connectedStairsSE = connectionSE == TileConnection.CONNECTEDSTAIRS;
 
-		if (stateE && stateS) {
+		boolean floorStateE = stateE || stairsE;
+		boolean floorStateS = stateS || stairsS;
+		boolean floorStateSE = stateSE || stairsSE;
+
+		if (floorStateE && floorStateS) {
 			meshCornerOutside.renderMesh(false, icon, position);
-		} else if (!stateE && !stateS && !stateSE) {
-			if (stairsE)
-				straight2.renderMesh(false, icon, position);
-			else if (stairsS)
-				straight1.renderMesh(false, icon, position);
-			else {
-				if (connectionSE == TileConnection.CONNECTEDSTAIRS || connectionSE == TileConnection.STAIRS)
-					meshCornerInside.renderMesh(false, icon, position);
-				else
-					meshCornerFull.renderMesh(false, icon, position);
-			}
-		} else if (!stateE && !stateS && stateSE) {
-			if (stairsE)
-				straight2.renderMesh(false, icon, position);
-			else if (stairsS)
-				straight1.renderMesh(false, icon, position);
-			else if (wallE && wallS)
-				meshCornerFull.renderMesh(false, icon, position);
-			else
-				meshCornerInside.renderMesh(false, icon, position);
-		} else if (stateS) {
-			straight1.renderMesh(false, icon, position);
-		} else if (stateE) {
+		} else if (floorStateE && !floorStateS) {
 			straight2.renderMesh(false, icon, position);
+		} else if (floorStateS && !floorStateE) {
+			straight1.renderMesh(false, icon, position);
+		} else { // !S, !E
+			if (floorStateSE) {
+				meshCornerInside.renderMesh(false, icon, position);
+			} else {
+				if (connectedStairsSE ^ (connectedStairsE ^ connectedStairsS)) {
+					meshCornerInside.renderMesh(false, icon, position);
+				} else {
+					meshCornerFull.renderMesh(false, icon, position);
+				}
+			}
 		}
 
-		if (airStateE && airStateS) // both sides are disconnected
-			meshHandRailOutside.renderMesh(false, icon, position);
-		else if (!stateE && !stateS && airStateSE) {
-			// both sides are connected, corner-touching block is not connected
-			if (!(wallE && wallS))
-				meshHandRailCornerInside.renderMesh(false, icon, position);
-		} else {
-			if (stateE && !stateS && airStateE) {
-				if ((!groundSE || connectedStairsS|| wallS) && !(stairTopE && connectedSE) && !(stairsSideE && connectedSE))
-					meshHandRailStraight2.renderMesh(false, icon, position);
-				else
-					meshHandRailCap2.renderMesh(false, icon, position);
-			} else if (stateS && !stateE && airStateS) {
-				if ((!groundSE || connectedStairsE || wallE) && !(stairTopS && connectedSE) && !(stairsSideS && connectedSE))
-					meshHandRailStraight1.renderMesh(false, icon, position);
-				else
-					meshHandRailCap1.renderMesh(false, icon, position);
-			}
+		boolean railStateE = stateE && connectionE != TileConnection.GROUND && connectionE != TileConnection.MACHINE;
+		boolean railStateS = stateS && connectionS != TileConnection.GROUND && connectionS != TileConnection.MACHINE;
+		boolean railStateSE = stateSE && connectionSE != TileConnection.GROUND && connectionSE != TileConnection.MACHINE;
 
-			if (stateE && stateS) {
-				if (airStateE)
+		if (railStateE && railStateS) {
+			meshHandRailOutside.renderMesh(false, icon, position);
+		} else if (railStateE && !railStateS) {
+			if (!wallS && !connectedStairsS && !stairsS && !stairsSE && !connectedStairsSE) {
+				if (!railStateSE && !connectedSE) {
 					meshHandRailCap2.renderMesh(false, icon, position);
-				else if (airStateS)
+				} else if (railStateE && !connectedS) {
+					meshHandRailCap2.renderMesh(false, icon, position);
+				} else
+					meshHandRailStraight2.renderMesh(false, icon, position);
+			} else {
+				meshHandRailStraight2.renderMesh(false, icon, position);
+			}
+		} else if (railStateS && !railStateE) {
+			if (!wallE && !connectedStairsE && !stairsE && !stairsSE && !connectedStairsSE) {
+				if (!railStateSE && !connectedSE) {
 					meshHandRailCap1.renderMesh(false, icon, position);
+				} else if (railStateS && !connectedE) {
+					meshHandRailCap1.renderMesh(false, icon, position);
+				} else {
+					meshHandRailStraight1.renderMesh(false, icon, position);
+				}
+			} else {
+				meshHandRailStraight1.renderMesh(false, icon, position);
+			}
+		} else { // !S, !E
+			if (!connectedStairsSE) {
+				if (!stairsSE) {
+					if ((stairsE && stairsS) || (connectedStairsS && connectedStairsE)) {
+						meshHandRailCornerInside.renderMesh(false, icon, position);
+					} else if ((railStateSE || connectedSE) && ((connectedS && connectedStairsE) || (connectedE && connectedStairsS))) {
+						meshHandRailCornerInside.renderMesh(false, icon, position);
+					} else if ((railStateSE || connectedSE) && ((connectedS && stairsE) || (connectedE && stairsS))) {
+						meshHandRailCornerInside.renderMesh(false, icon, position);
+					}
+				} else if (!(stairsS || stairsE) && (connectedE && connectedS)) {
+					meshHandRailCornerInside.renderMesh(false, icon, position);
+				}
+			} else if (!(connectedStairsS || connectedStairsE) && (connectedE && connectedS)) {
+				meshHandRailCornerInside.renderMesh(false, icon, position);
+			}
+			if (railStateSE && connectedE && connectedS) {
+				meshHandRailCornerInside.renderMesh(false, icon, position);
 			}
 		}
 
 		/*
-		 * if (airStateE && airStateS) { meshHandRailOutside.renderMesh(false,
-		 * icon, position); } else if (airStateS) { if (stateE || (connectionSE
-		 * != TileConnection.AIR && connectionSE != TileConnection.CONNECTED &&
-		 * connectionE != TileConnection.STAIRS))
-		 * meshHandRailCap1.renderMesh(false, icon, position); else
-		 * meshHandRailStraight1.renderMesh(false, icon, position); } else if
-		 * (airStateE) { if (stateS || (connectionSE != TileConnection.AIR &&
-		 * connectionSE != TileConnection.CONNECTED && connectionS !=
-		 * TileConnection.STAIRS)) meshHandRailCap2.renderMesh(false, icon,
-		 * position); else meshHandRailStraight2.renderMesh(false, icon,
-		 * position); } if ((connectionE == TileConnection.CONNECTED ||
-		 * connectionE != TileConnection.STAIRS) && (connectionS ==
-		 * TileConnection.CONNECTED || connectionS == TileConnection.STAIRS) &&
-		 * !airStateE && airStateSE) meshHandRailCornerInside.renderMesh(false,
-		 * icon, position);
+		 * if (airStateE && airStateS) // both sides are disconnected
+		 * meshHandRailOutside.renderMesh(false, icon, position); else if
+		 * (!stateE && !stateS && airStateSE) { // both sides are connected,
+		 * corner-touching block is not connected if (!(wallE && wallS))
+		 * meshHandRailCornerInside.renderMesh(false, icon, position); } else {
+		 * if (stateE && !stateS && airStateE) { if ((!groundSE ||
+		 * connectedStairsS || wallS)) meshHandRailStraight2.renderMesh(false,
+		 * icon, position); else meshHandRailCap2.renderMesh(false, icon,
+		 * position); } else if (stateS && !stateE && airStateS) { if
+		 * ((!groundSE || connectedStairsE || wallE))
+		 * meshHandRailStraight1.renderMesh(false, icon, position); else
+		 * meshHandRailCap1.renderMesh(false, icon, position); }
+		 * 
+		 * if (stateE && stateS) { if (airStateE)
+		 * meshHandRailCap2.renderMesh(false, icon, position); else if
+		 * (airStateS) meshHandRailCap1.renderMesh(false, icon, position); } if
+		 * ((stairsSE && (connectedE && connectedS)) || ((stairsS || stairsE) &&
+		 * !stateSE)) meshHandRailCornerInside.renderMesh(false, icon,
+		 * position);
+		 * 
+		 * if ((connectedStairsSE && (connectedE && connectedS)) ||
+		 * ((connectedStairsS || connectedStairsE) && !stateSE && !stairTopS &&
+		 * !stairTopE)) meshHandRailCornerInside.renderMesh(false, icon,
+		 * position); }
+		 * 
+		 * /* if (airStateE && airStateS) {
+		 * meshHandRailOutside.renderMesh(false, icon, position); } else if
+		 * (airStateS) { if (stateE || (connectionSE != TileConnection.AIR &&
+		 * connectionSE != TileConnection.CONNECTED && connectionE !=
+		 * TileConnection.STAIRS)) meshHandRailCap1.renderMesh(false, icon,
+		 * position); else meshHandRailStraight1.renderMesh(false, icon,
+		 * position); } else if (airStateE) { if (stateS || (connectionSE !=
+		 * TileConnection.AIR && connectionSE != TileConnection.CONNECTED &&
+		 * connectionS != TileConnection.STAIRS))
+		 * meshHandRailCap2.renderMesh(false, icon, position); else
+		 * meshHandRailStraight2.renderMesh(false, icon, position); } if
+		 * ((connectionE == TileConnection.CONNECTED || connectionE !=
+		 * TileConnection.STAIRS) && (connectionS == TileConnection.CONNECTED ||
+		 * connectionS == TileConnection.STAIRS) && !airStateE && airStateSE)
+		 * meshHandRailCornerInside.renderMesh(false, icon, position);
 		 */
 	}
 
