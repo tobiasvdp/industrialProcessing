@@ -24,8 +24,9 @@ public abstract class ObjMesh {
 
 	protected void renderQuad(ObjQuad quad, boolean startDraw, Icon icon, Vector3f position) {
 		Tessellator tessellator = Tessellator.instance;
-		if (startDraw)
-			tessellator.startDrawingQuads();
+		if (startDraw) {
+			tessellator.startDrawingQuads(); 
+		}
 
 		float minU = icon == null ? 0 : icon.getMinU();
 		float maxU = icon == null ? 1 : icon.getMaxU();
@@ -43,8 +44,8 @@ public abstract class ObjMesh {
 		float sy = 1 / 1.6f;
 		float sz = 1 / 1.6f;
 
-		tessellator.setNormal(quad.normal.x, quad.normal.y, quad.normal.z);  
-		
+		tessellator.setNormal(quad.normal.x, quad.normal.y, quad.normal.z);
+
 		tessellator.addVertexWithUV(quad.position1.x * sx + dx, quad.position1.y * sy + dy, quad.position1.z * sz + dz, quad.uv1.x * du + minU, quad.uv1.y * dv + minV);
 
 		tessellator.addVertexWithUV(quad.position2.x * sx + dx, quad.position2.y * sy + dy, quad.position2.z * sz + dz, quad.uv2.x * du + minU, quad.uv2.y * dv + minV);

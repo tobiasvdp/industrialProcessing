@@ -24,6 +24,7 @@ import ip.industrialProcessing.client.render.RendererTileEntityState;
 import ip.industrialProcessing.client.render.RenderingMultiblock;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.decoration.ModelPlatform;
+import ip.industrialProcessing.decoration.ModelStairs;
 import ip.industrialProcessing.machines.blastFurnace.ModelBlastFurnace;
 import ip.industrialProcessing.machines.blastFurnace.ModelBlastFurnaceTop;
 import ip.industrialProcessing.machines.blastFurnace.TileEntityBlastFurnace;
@@ -149,11 +150,15 @@ public class ClientProxy extends CommonProxy {
 	private static final ModelConnected conveyorInput = new ModelConveyorInput();
 	private static final ModelConnected conveyorOutput = new ModelConveyorOutput();
 	private static final ModelBlock platform = new ModelPlatform();
+	private static final ModelBlock stairs = new ModelStairs();
 
 	@Override
 	public void registerRenderers() {
 		ConfigRenderers.setRendererPlatformId(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererPlatformId(), platform));
+		
+		ConfigRenderers.setRendererStairsId(RenderingRegistry.getNextAvailableRenderId());
+		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererStairsId(), stairs));
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFilter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockFilter, "ModelFilter", filter));
 		ConfigRenderers.setRendererFilterId(RenderingRegistry.getNextAvailableRenderId());

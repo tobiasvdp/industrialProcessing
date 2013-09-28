@@ -10,40 +10,51 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ConfigBlocks {
 
-	private int blockCopperOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(),"CopperID",1000).getInt();
-	private int blockTinOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(),"TinID",1001).getInt();
-	private int blockGalenaOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(),"GalenaID",1002).getInt();
-	private int blockRutileOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(),"RutileID",1003).getInt();
-	private int blockChromiteOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(),"ChromiteID",1004).getInt();
-	private int blockCinnebarOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(),"CinnebarID",1005).getInt();
-	private int blockTaliaOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(),"TaliaID",1006).getInt();
-	
-	private int blockIronFlatID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(),"IronFlatID",1007).getInt();
-	
-	private int blockPlatformID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(),"PlatformFlatID",2001).getInt();
+	private int blockCopperOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(), "CopperID", 1000).getInt();
+	private int blockTinOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(), "TinID", 1001).getInt();
+	private int blockGalenaOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(), "GalenaID", 1002).getInt();
+	private int blockRutileOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(), "RutileID", 1003).getInt();
+	private int blockChromiteOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(), "ChromiteID", 1004).getInt();
+	private int blockCinnebarOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(), "CinnebarID", 1005).getInt();
+	private int blockTaliaOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(), "TaliaID", 1006).getInt();
+
+	private int blockIronFlatID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "IronFlatID", 1007).getInt();
+
+	private int blockPlatformID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "PlatformFlatID", 2001).getInt();
+	private int blockStairsID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "PlatformStairsID", 2002).getInt();
 
 	public static int getBlockChromiteOreID() {
 		return getInstance().blockChromiteOreID;
 	}
+
 	public static int getBlockCinnebarOreID() {
 		return getInstance().blockCinnebarOreID;
 	}
+
 	public static int getBlockTaliaOreID() {
 		return getInstance().blockTaliaOreID;
 	}
+
 	public static int getBlockRutileOreID() {
 		return getInstance().blockRutileOreID;
 	}
+
 	public static int getPlatformBlockID() {
 		return getInstance().blockPlatformID;
 	}
-	
+
+	public static int getStairsBlockID() {
+		return getInstance().blockStairsID;
+	}
+
 	public static int blockIronFlat() {
 		return getInstance().blockIronFlatID;
 	}
+
 	public static int BlockGalenaOreID() {
 		return getInstance().blockGalenaOreID;
 	}
+
 	public static int BlockCopperOreID() {
 		return getInstance().blockCopperOreID;
 	}
@@ -66,8 +77,9 @@ public class ConfigBlocks {
 		registerOre(IndustrialProcessing.blockCinnebarOre, "IP.World.CinnebarOre", "Cinnebar Ore", "cinnebar");
 		registerOre(IndustrialProcessing.blockTaliaOre, "IP.World.TaliaOre", "Thallium Ore", "talia");
 		registerBlock(IndustrialProcessing.blockIronFlat, "IP.Block.IronFlat", "Flat Iron block");
-		
+
 		registerBlock(IndustrialProcessing.blockPlatform, "IP.Block.Platform", "Walkway");
+		registerBlock(IndustrialProcessing.blockStairs, "IP.Block.Stairs", "Walkway Stairs");
 	}
 
 	private void registerOre(Block block, String uniqueId, String displayName, String oreDictionaryKey) {
@@ -76,6 +88,7 @@ public class ConfigBlocks {
 		LanguageRegistry.addName(block, displayName);
 		OreDictionary.registerOre(oreDictionaryKey, block);
 	}
+
 	private void registerBlock(Block block, String uniqueId, String displayName) {
 		GameRegistry.registerBlock(block, uniqueId);
 		MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);

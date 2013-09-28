@@ -26,6 +26,12 @@ public class BlockPlatform extends BlockDecoration {
 		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "platformFloor");
 	}
 
+	protected BlockPlatform(int id, String name) {
+		super(id, Material.iron, 1f, Block.soundMetalFootstep, name, IndustrialProcessing.tabPower);
+		this.setBlockBounds(0, 0, 0, 1, 1 / 16f, 1);
+		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "platformFloor");
+	}
+
 	@Override
 	public int getRenderType() {
 		return ConfigRenderers.getRendererPlatformId();
@@ -33,46 +39,70 @@ public class BlockPlatform extends BlockDecoration {
 
 	public ConnectionCompass getConnections(IBlockAccess world, int x, int y, int z) {
 		ConnectionCompass compass = new ConnectionCompass();
-		compass.connectionN = getConnection(world, x, y, z - 1);
-		compass.connectionNE = getConnection(world, x + 1, y, z - 1);
-		compass.connectionE = getConnection(world, x + 1, y, z);
-		compass.connectionSE = getConnection(world, x + 1, y, z + 1);
-		compass.connectionS = getConnection(world, x, y, z + 1);
-		compass.connectionSW = getConnection(world, x - 1, y, z + 1);
-		compass.connectionW = getConnection(world, x - 1, y, z);
-		compass.connectionNW = getConnection(world, x - 1, y, z - 1);
+
+		compass.connectionN = getConnection(world, x, y, z, 0, 0, -1);
+		compass.connectionE = getConnection(world, x, y, z, 1, 0, 0);
+		compass.connectionS = getConnection(world, x, y, z, 0, 0, 1);
+		compass.connectionW = getConnection(world, x, y, z, -1, 0, 0);
+
+		compass.connectionNE = getConnection(world, x, y, z, 1, 0, -1);
+		compass.connectionSE = getConnection(world, x, y, z, 1, 0, 1);
+		compass.connectionSW = getConnection(world, x, y, z, -1, 0, 1);
+		compass.connectionNW = getConnection(world, x, y, z, -1, 0, -1);
 		return compass;
 	}
 
-	private TileConnection getConnection(IBlockAccess world, int x, int y, int z) {
-
-		int id = world.getBlockId(x, y, z);
-		if (id == this.blockID)
+	protected TileConnection getConnection(IBlockAccess world, int x, int y, int z, int dx, int dy, int dz) {
+		int x2 = x + dx;
+		int y2 = y + dy;
+		int z2 = z + dz;
+		int id = world.getBlockId(x2, y2, z2);
+		if (id == ConfigBlocks.getPlatformBlockID()) {
 			return TileConnection.CONNECTED;
-
-		TileEntity entity = world.getBlockTileEntity(x, y, z);
-		if (entity instanceof IInventory)
-			return TileConnection.MACHINE;
-
-		boolean sideSolid = isSolid(world, x, y, z);
-		if (sideSolid) {
-			return TileConnection.WALL;
-		} else {
-			boolean belowSolid = isSolid(world, x, y - 1, z);
-
-			if (belowSolid)
+		} else if (id == ConfigBlocks.getStairsBlockID()) {
+			if (isStairsFacing(world, x2, y2, z2, dx, dy, dz))
+				return TileConnection.STAIRS;
+			if (!isSolid(world, x2, y2 - 1, z2))
+				return TileConnection.AIR;
+			else
 				return TileConnection.GROUND;
-			else {
-				id = world.getBlockId(x, y - 1, z);
-				if (id == ladder.blockID || id == trapdoor.blockID)
-					return TileConnection.GROUND;
-				else
-					return TileConnection.AIR;
+		} else {
+			TileEntity entity = world.getBlockTileEntity(x2, y2, z2);
+			if (entity instanceof IInventory) {
+				return TileConnection.MACHINE;
+			} else if (isSolid(world, x2, y2, z2)) {
+				return TileConnection.WALL;
+			} else if (!isSolid(world, x2, y2 - 1, z2)) {
+				int idBelow = world.getBlockId(x2, y2-1, z2);
+				if (idBelow == ConfigBlocks.getStairsBlockID()) {
+					if (isStairsFacing(world, x2, y2-1, z2, -dx, -dy, -dz)) {
+						return TileConnection.CONNECTED;
+					}
+				}
+				return TileConnection.AIR;
+			} else {
+				return TileConnection.GROUND;
 			}
 		}
+
 	}
 
-	private boolean isSolid(IBlockAccess world, int x, int y, int z) {
+	private boolean isStairsFacing(IBlockAccess world, int x2, int y2, int z2, int dx, int dy, int dz) {
+		int meta = world.getBlockMetadata(x2, y2, z2);
+		switch (meta) {
+		case 1:
+			return dx == -1;
+		case 0:
+			return dz == -1;
+		case 3:
+			return dx == 1;
+		case 2:
+			return dz == 1;
+		}
+		return false;
+	}
+
+	protected boolean isSolid(IBlockAccess world, int x, int y, int z) {
 		if (world.isBlockOpaqueCube(x, y, z))
 			return true;
 		if (world.isBlockNormalCube(x, y, z))
@@ -82,11 +112,11 @@ public class BlockPlatform extends BlockDecoration {
 
 	@Override
 	public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
- 
+
 		addCollision(ForgeDirection.NORTH, world, x, y, z, par5AxisAlignedBB, par6List, par7Entity);
 		addCollision(ForgeDirection.EAST, world, x, y, z, par5AxisAlignedBB, par6List, par7Entity);
 		addCollision(ForgeDirection.SOUTH, world, x, y, z, par5AxisAlignedBB, par6List, par7Entity);
-		addCollision(ForgeDirection.WEST, world, x, y, z, par5AxisAlignedBB, par6List, par7Entity); 
+		addCollision(ForgeDirection.WEST, world, x, y, z, par5AxisAlignedBB, par6List, par7Entity);
 		AxisAlignedBB axisalignedbb1 = AxisAlignedBB.getBoundingBox(0 + x, 0 + y, 0 + z, 1 + x, 1 / 16f + y, 1 + z);
 
 		if (axisalignedbb1 != null && par5AxisAlignedBB.intersectsWith(axisalignedbb1)) {
@@ -95,8 +125,8 @@ public class BlockPlatform extends BlockDecoration {
 	}
 
 	private void addCollision(ForgeDirection direction, World world, int x, int y, int z, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
- 
-		TileConnection connection = getConnection(world, x + direction.offsetX, y + direction.offsetY, z + direction.offsetZ);
+
+		TileConnection connection = getConnection(world, x, y, z, direction.offsetX, direction.offsetY, direction.offsetZ);
 
 		if (connection == TileConnection.AIR) {
 

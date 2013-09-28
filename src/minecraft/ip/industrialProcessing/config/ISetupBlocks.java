@@ -4,6 +4,7 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.buildingBlock.BlockIP;
 import ip.industrialProcessing.buildingBlock.BlockOreIP;
 import ip.industrialProcessing.decoration.BlockPlatform;
+import ip.industrialProcessing.decoration.BlockStairs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockOre;
 import net.minecraft.block.material.Material;
@@ -20,4 +21,5 @@ public interface ISetupBlocks {
     public final static BlockIP blockIronFlat = new BlockIP(ConfigBlocks.getInstance().blockIronFlat(), "ip.block.ironflat", 5.0f, Material.iron, Block.soundMetalFootstep);
     
     public final static BlockPlatform blockPlatform = new BlockPlatform();
+    public final static BlockStairs blockStairs = new BlockStairs();
 }

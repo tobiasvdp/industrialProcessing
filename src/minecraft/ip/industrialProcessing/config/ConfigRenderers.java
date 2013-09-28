@@ -10,6 +10,7 @@ public class ConfigRenderers {
 	private int rendererMixerID;
 	private int rendererFilterID;
 	private int rendererPlatformID;
+	private int rendererStairsID;
 	private int rendererMagneticSeperatorID;
 	private int rendererCrusherID;
 	private int rendererDryerID;
@@ -208,6 +209,13 @@ public class ConfigRenderers {
 
 	public static void setRendererBlockMachineFrameID(int value) {
 		getInstance().rendererBlockMachineFrameID = value;
+	}
+	public static int getRendererStairsId() {
+		return getInstance().rendererStairsID;
+	}
+
+	public static void setRendererStairsId(int value) {
+		getInstance().rendererStairsID = value;
 	}
 
 	public static int getRendererPlatformId() {

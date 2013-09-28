@@ -146,7 +146,7 @@ public class ModelPlatform extends ModelBlock {
 	public void renderInventory(Block block, int metadata, int modelID, RenderBlocks renderer) {
 
 		Tessellator tessellator = Tessellator.instance;
-		tessellator.setColorOpaque(255, 255, 255);
+		// tessellator.setColorOpaque(255, 255, 255);
 		Icon icon = block.getIcon(0, 0);
 		Vector3f position = new Vector3f(0, 0, 0);
 		meshCenter.renderMesh(true, icon, position);
@@ -162,6 +162,12 @@ public class ModelPlatform extends ModelBlock {
 		meshHandRailCornerOutsideNorthWest.renderMesh(true, icon, position);
 		meshHandRailCornerOutsideSouthEast.renderMesh(true, icon, position);
 		meshHandRailCornerOutsideSouthWest.renderMesh(true, icon, position);
+
+		meshCornerOutsideNorthEast.renderMesh(true, icon, position);
+		meshCornerOutsideNorthWest.renderMesh(true, icon, position);
+
+		meshCornerOutsideSouthEast.renderMesh(true, icon, position);
+		meshCornerOutsideSouthWest.renderMesh(true, icon, position);
 	}
 
 	@Override
@@ -205,38 +211,81 @@ public class ModelPlatform extends ModelBlock {
 		boolean airStateSE = connectionSE == TileConnection.AIR;
 		boolean airStateS = connectionS == TileConnection.AIR;
 
+		boolean groundSE = connectionSE == TileConnection.GROUND || connectionSE == TileConnection.MACHINE;
+		boolean stairsE = connectionE == TileConnection.STAIRS;
+		boolean stairsS = connectionS == TileConnection.STAIRS;
+
 		if (stateE && stateS) {
 			meshCornerOutside.renderMesh(false, icon, position);
 		} else if (!stateE && !stateS && !stateSE) {
-			meshCornerFull.renderMesh(false, icon, position);
+			if (stairsE)
+				straight2.renderMesh(false, icon, position);
+			else if (stairsS)
+				straight1.renderMesh(false, icon, position);
+			else
+				meshCornerFull.renderMesh(false, icon, position);
 		} else if (!stateE && !stateS && stateSE) {
-			meshCornerInside.renderMesh(false, icon, position);
+			if (stairsE)
+				straight2.renderMesh(false, icon, position);
+			else if (stairsS)
+				straight1.renderMesh(false, icon, position);
+			else
+				meshCornerInside.renderMesh(false, icon, position);
 		} else if (stateS) {
 			straight1.renderMesh(false, icon, position);
 		} else if (stateE) {
 			straight2.renderMesh(false, icon, position);
 		}
 
-		if (airStateE && airStateS) {
+		if (airStateE && airStateS) // both sides are disconnected
 			meshHandRailOutside.renderMesh(false, icon, position);
-		} else if (airStateS) {
-			if (stateE || (connectionSE != TileConnection.AIR && connectionSE != TileConnection.CONNECTED))
-				meshHandRailCap1.renderMesh(false, icon, position);
-			else
-				meshHandRailStraight1.renderMesh(false, icon, position);
-		} else if (airStateE) {
-			if (stateS || (connectionSE != TileConnection.AIR && connectionSE != TileConnection.CONNECTED))
-				meshHandRailCap2.renderMesh(false, icon, position);
-			else
-				meshHandRailStraight2.renderMesh(false, icon, position);
-		}
-		if (connectionE == TileConnection.CONNECTED && connectionS == TileConnection.CONNECTED  && !airStateE && airStateSE)
+		else if (!stateE && !stateS && airStateSE) // both sides are connected,
+													// corner-touching block is
+													// not connected
 			meshHandRailCornerInside.renderMesh(false, icon, position);
+		else {
+			if (stateE && !stateS && airStateE) {
+				if (groundSE)
+					meshHandRailCap2.renderMesh(false, icon, position);
+				else
+					meshHandRailStraight2.renderMesh(false, icon, position);
+			} else if (stateS && !stateE && airStateS) {
+				if (groundSE)
+					meshHandRailCap1.renderMesh(false, icon, position);
+				else
+					meshHandRailStraight1.renderMesh(false, icon, position);
+			}
+
+			if (stateE && stateS) {
+				if (airStateE)
+					meshHandRailCap2.renderMesh(false, icon, position);
+				else if (airStateS)
+					meshHandRailCap1.renderMesh(false, icon, position);
+			}
+		}
+
+		/*
+		 * if (airStateE && airStateS) { meshHandRailOutside.renderMesh(false,
+		 * icon, position); } else if (airStateS) { if (stateE || (connectionSE
+		 * != TileConnection.AIR && connectionSE != TileConnection.CONNECTED &&
+		 * connectionE != TileConnection.STAIRS))
+		 * meshHandRailCap1.renderMesh(false, icon, position); else
+		 * meshHandRailStraight1.renderMesh(false, icon, position); } else if
+		 * (airStateE) { if (stateS || (connectionSE != TileConnection.AIR &&
+		 * connectionSE != TileConnection.CONNECTED && connectionS !=
+		 * TileConnection.STAIRS)) meshHandRailCap2.renderMesh(false, icon,
+		 * position); else meshHandRailStraight2.renderMesh(false, icon,
+		 * position); } if ((connectionE == TileConnection.CONNECTED ||
+		 * connectionE != TileConnection.STAIRS) && (connectionS ==
+		 * TileConnection.CONNECTED || connectionS == TileConnection.STAIRS) &&
+		 * !airStateE && airStateSE) meshHandRailCornerInside.renderMesh(false,
+		 * icon, position);
+		 */
 	}
 
 	private void renderConnection(Icon icon, Vector3f position, TileConnection connection, ObjMesh meshConnected, ObjMesh meshUnconnected, ObjMesh handrail) {
 
-		if (connection == TileConnection.AIR || connection == TileConnection.GROUND || connection == TileConnection.MACHINE) {
+		if (connection == TileConnection.AIR || connection == TileConnection.GROUND || connection == TileConnection.MACHINE || connection == TileConnection.STAIRS) {
 			meshUnconnected.renderMesh(false, icon, position);
 		} else
 			meshConnected.renderMesh(false, icon, position);
