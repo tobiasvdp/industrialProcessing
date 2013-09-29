@@ -7,7 +7,8 @@ package ip.industrialProcessing.utils.working;
 public class ClientWorker implements IWorker {
 
     private int totalWork = 0;
-    private int workDone = 0; // don't start working when placed
+    private int workDone = 0;
+	private float efficiency = 1; // don't start working when placed
 
     public int doWork(int amount) {
 	int workDoneInStep = Math.min(amount, totalWork - workDone);

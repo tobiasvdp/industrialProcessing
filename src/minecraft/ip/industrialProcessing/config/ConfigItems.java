@@ -85,6 +85,9 @@ public class ConfigItems {
 	private int itemTaliaDustID = 6577;
 	private int itemLeadDustID = 6578;
 	
+	private int itemHexKeyID = 6579;
+	
+	public static int itemHexKeyID(){return getInstance().itemHexKeyID;}
 	public static int itemLeadDustID(){return getInstance().itemLeadDustID;}
 	public static int itemSilverDustID(){return getInstance().itemSilverDustID;}
 	public static int itemRutileDustID(){return getInstance().itemRutileDustID;}
@@ -166,6 +169,7 @@ public class ConfigItems {
 	public static int ItemSlagID() {return getInstance().ItemSlagID;}
 	
 	public static void addToLanguageRegistry(){
+		LanguageRegistry.addName(IndustrialProcessing.itemHexKey, "Hex Key");
 		LanguageRegistry.addName(IndustrialProcessing.itemSmallMachineCasing, "Small machine casing");
 		LanguageRegistry.addName(IndustrialProcessing.itemInputPort, "Input port");
 		LanguageRegistry.addName(IndustrialProcessing.itemOutputPort, "Output port");
