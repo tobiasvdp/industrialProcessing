@@ -3,6 +3,7 @@ package ip.industrialProcessing;
 import ip.industrialProcessing.logic.transport.ICommunication;
 import ip.industrialProcessing.logic.transport.ICommunicationTransport;
 import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
+import ip.industrialProcessing.machines.animation.conveyors.TileConveyorSyncHandler;
 import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
 import ip.industrialProcessing.multiblock.core.block.elevator.TEmultiblockElevator;
@@ -30,6 +31,7 @@ import cpw.mods.fml.common.network.Player;
 public class PacketHandler implements IPacketHandler {
 
 	public static final String ANIMATION_SYNC = "IP.AniSync";
+	public static final String CONVEYOR_SYNC = "IP.ConvSync";
 	public static final String TANK_SYNC = "IP.TankSync";
 	public static final String BUTTON_PRESSED = "IP.ButtonPressed";
 	public static final String SYNC_CLIENT = "IP.clientSync";
@@ -42,11 +44,11 @@ public class PacketHandler implements IPacketHandler {
 	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {
 		if (packet.channel.equals(ANIMATION_SYNC)) {
 			TileAnimationSyncHandler.handleAnimationSync(manager, packet, player);
-		}
-		if (packet.channel.equals(TANK_SYNC)) {
+		} else if (packet.channel.equals(TANK_SYNC)) {
 			TileTankSyncHandler.handleTankSync(manager, packet, player);
-		}
-		if (packet.channel.equals(BUTTON_PRESSED)) {
+		} else if (packet.channel.equals(BUTTON_PRESSED)) {
+		} else if (packet.channel.equals(CONVEYOR_SYNC)) {
+			TileConveyorSyncHandler.handleConveyorSync(manager, packet, player);
 		}
 
 		// TODO: move this away from here, please!
@@ -106,7 +108,7 @@ public class PacketHandler implements IPacketHandler {
 			EntityPlayer playerMP = (EntityPlayer) player;
 			playerMP.openGui(IndustrialProcessing.instance, screenID, playerMP.worldObj, x, y, z);
 		}
-		
+
 		if (packet.channel.equals(IP_LOGIC_SYNCSIDE)) {
 			DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
 			int x;
@@ -117,7 +119,7 @@ public class PacketHandler implements IPacketHandler {
 				x = inputStream.readInt();
 				y = inputStream.readInt();
 				z = inputStream.readInt();
-				for(int i = 0;i<sides.length;i++){
+				for (int i = 0; i < sides.length; i++) {
 					sides[i] = inputStream.readBoolean();
 				}
 			} catch (IOException e) {
@@ -125,20 +127,14 @@ public class PacketHandler implements IPacketHandler {
 				return;
 			}
 			EntityPlayer playerMP = (EntityPlayer) player;
-			ICommunicationTransport com = (ICommunicationTransport)playerMP.worldObj.getBlockTileEntity(x, y, z);
+			ICommunicationTransport com = (ICommunicationTransport) playerMP.worldObj.getBlockTileEntity(x, y, z);
 			int count = 0;
-			/*for(int i = 0;i<sides.length;i++){
-				if(sides[i]){
-					count++;
-					com.addToConnectedSides(i,false);
-				}else{
-					com.removeConnectedSides(i, false);
-				}
-			}
-			if (count>1)
-				com.setMultipleSides(true);
-			else
-				com.setMultipleSides(false);*/
+			/*
+			 * for(int i = 0;i<sides.length;i++){ if(sides[i]){ count++;
+			 * com.addToConnectedSides(i,false); }else{
+			 * com.removeConnectedSides(i, false); } } if (count>1)
+			 * com.setMultipleSides(true); else com.setMultipleSides(false);
+			 */
 		}
 	}
 

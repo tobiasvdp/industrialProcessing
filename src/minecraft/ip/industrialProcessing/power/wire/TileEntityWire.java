@@ -1,5 +1,7 @@
 package ip.industrialProcessing.power.wire;
 
+import java.util.List;
+
 import ip.industrialProcessing.power.IPowerAcceptor;
 import ip.industrialProcessing.power.IPowerOutput;
 import ip.industrialProcessing.power.IPowerProducer;
@@ -7,8 +9,10 @@ import ip.industrialProcessing.power.utils.PowerAcceptorConnection;
 import ip.industrialProcessing.power.utils.PowerDistributor;
 import ip.industrialProcessing.transport.TileEntityTransport;
 import ip.industrialProcessing.transport.TransportConnectionState;
+import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.ForgeDirection;
 
 public class TileEntityWire extends TileEntityTransport implements IPowerAcceptor {
@@ -89,4 +93,5 @@ public class TileEntityWire extends TileEntityTransport implements IPowerAccepto
 		super.readFromNBT(par1nbtTagCompound);
 		distributor.readFromNBT(par1nbtTagCompound);
 	}
+
 }

@@ -108,7 +108,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid = "IndustrialProcessing", name = "Industrial Processing", version = "0.0.1", dependencies = "after:NotEnoughItems")
-@NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = { PacketHandler.ANIMATION_SYNC, PacketHandler.TANK_SYNC, PacketHandler.BUTTON_PRESSED, PacketHandler.SYNC_CLIENT, PacketHandler.SEND_INFO, PacketHandler.SCREEN_PRESSED, PacketHandler.IP_ELEVATOR_BUTTON, PacketHandler.IP_LOGIC_SYNCSIDE }, packetHandler = PacketHandler.class)
+@NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = { PacketHandler.ANIMATION_SYNC, PacketHandler.TANK_SYNC, PacketHandler.CONVEYOR_SYNC, PacketHandler.BUTTON_PRESSED, PacketHandler.SYNC_CLIENT, PacketHandler.SEND_INFO, PacketHandler.SCREEN_PRESSED, PacketHandler.IP_ELEVATOR_BUTTON, PacketHandler.IP_LOGIC_SYNCSIDE }, packetHandler = PacketHandler.class)
 public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISetupMachineBlocks, ISetupItems, ISetupBlocks, ISetupFluids, ISetupAchievements, ISetupDamageSource {
 	// The instance of your mod that Forge uses.
 	@Instance("IndustrialProcessing")

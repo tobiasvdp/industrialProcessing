@@ -1,14 +1,19 @@
 package ip.industrialProcessing.transport.fluids;
 
+import java.util.List;
+
 import ip.industrialProcessing.client.render.IFluidInfo;
 import ip.industrialProcessing.machines.animation.tanks.ITankSyncable;
 import ip.industrialProcessing.machines.animation.tanks.TankHandler;
 import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
 import ip.industrialProcessing.transport.TileEntityTransport;
 import ip.industrialProcessing.transport.TransportConnectionState;
+import ip.industrialProcessing.transport.items.conveyorBelt.SlopeState;
 import ip.industrialProcessing.utils.FluidTransfers;
+import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
@@ -76,16 +81,17 @@ public abstract class TileEntityTransportFluidsBase extends TileEntityTransport 
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound par1nbtTagCompound) { 
+	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
 		super.writeToNBT(par1nbtTagCompound);
 		par1nbtTagCompound.setInteger("Group", this.connectionGroup);
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound par1nbtTagCompound) { 
+	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
 		super.readFromNBT(par1nbtTagCompound);
 		this.connectionGroup = par1nbtTagCompound.getInteger("Group");
 	}
+
 	protected abstract void leakPressure();
 
 	protected abstract IFluidTank getTank(ForgeDirection direction);
@@ -298,13 +304,78 @@ public abstract class TileEntityTransportFluidsBase extends TileEntityTransport 
 			connectionGroup--;
 		else
 			connectionGroup++;
-		
+
 		if (connectionGroup < 0)
 			connectionGroup += CONNECTION_GROUPS;
 		else if (connectionGroup >= CONNECTION_GROUPS)
 			connectionGroup -= CONNECTION_GROUPS;
-		
+
 		searchForConnections();
 		this.worldObj.notifyBlockChange(xCoord, yCoord, zCoord, getBlockType().blockID);
+	}
+
+	public void setBounds() {
+
+		float xMin = -3 / 16f;
+		float yMin = -3 / 16f;
+		float zMin = -3 / 16f;
+		float xMax = 3 / 16f;
+		float yMax = 3 / 16f;
+		float zMax = 3 / 16f;
+
+		for (int i = 0; i < 6; i++) {
+			ForgeDirection direction = ForgeDirection.getOrientation(i);
+			TransportConnectionState state = this.states[i];
+			if (state.isConnected()) {
+				float dx = direction.offsetX / 2f;
+				float dz = direction.offsetZ / 2f;
+				float dy = direction.offsetY / 2f;
+
+				xMin = Math.min(xMin, dx);
+				yMin = Math.min(yMin, dy);
+				zMin = Math.min(zMin, dz);
+
+				xMax = Math.max(xMax, dx);
+				yMax = Math.max(yMax, dy);
+				zMax = Math.max(zMax, dz);
+
+			}
+		}
+
+		this.getBlockType().setBlockBounds(xMin + 0.5f, yMin + 0.5f, zMin + 0.5f, xMax + 0.5f, yMax + 0.5f, zMax + 0.5f);
+	}
+
+	public void addCollisionBoxesToList(AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
+
+		for (int i = 0; i < 6; i++) {
+			ForgeDirection direction = ForgeDirection.getOrientation(i);
+			TransportConnectionState state = this.states[i];
+			if (state.isConnected()) {
+
+				double xMin = -3 / 16f;
+				double yMin = -3 / 16f;
+				double zMin = -3 / 16f;
+				double xMax = 3 / 16f;
+				double yMax = 3 / 16f;
+				double zMax = 3 / 16f;
+
+				double dx = direction.offsetX / 2f;
+				double dz = direction.offsetZ / 2f;
+				double dy = direction.offsetY / 2f;
+
+				xMin = Math.min(xMin, dx) + xCoord + 0.5f;
+				yMin = Math.min(yMin, dy) + yCoord + 0.5f;
+				zMin = Math.min(zMin, dz) + zCoord + 0.5f;
+
+				xMax = Math.max(xMax, dx) + xCoord + 0.5f;
+				yMax = Math.max(yMax, dy) + yCoord + 0.5f;
+				zMax = Math.max(zMax, dz) + zCoord + 0.5f;
+
+				AxisAlignedBB bbx = AxisAlignedBB.getBoundingBox(xMin, yMin, zMin, xMax, yMax, zMax);
+				if (bbx.intersectsWith(par5AxisAlignedBB)) {
+					par6List.add(bbx);
+				}
+			}
+		} 
 	}
 }

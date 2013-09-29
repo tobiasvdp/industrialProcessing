@@ -50,6 +50,7 @@ public class ConfigRenderers {
 	private int rendererPumpId;
 	private int rendererRainTankID;
 	private int rendererValveID;
+	private int rendererCrystalID;
 
 	public static int getRendererConveyorBeltID() {
 		return getInstance().rendererConveyorBelt;
@@ -210,6 +211,7 @@ public class ConfigRenderers {
 	public static void setRendererBlockMachineFrameID(int value) {
 		getInstance().rendererBlockMachineFrameID = value;
 	}
+
 	public static int getRendererStairsId() {
 		return getInstance().rendererStairsID;
 	}
@@ -225,6 +227,15 @@ public class ConfigRenderers {
 	public static void setRendererPlatformId(int value) {
 		getInstance().rendererPlatformID = value;
 	}
+
+	public static int getRendererCrystalId() {
+		return getInstance().rendererCrystalID;
+	}
+
+	public static void setRendererCrystalId(int value) {
+		getInstance().rendererCrystalID = value;
+	}
+
 	public static int getRendererFilterId() {
 		return getInstance().rendererFilterID;
 	}

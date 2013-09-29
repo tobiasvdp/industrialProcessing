@@ -3,6 +3,9 @@ package ip.industrialProcessing.transport.items.conveyorBelt;
 import ic2.api.Direction;
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
+import ip.industrialProcessing.machines.animation.conveyors.IConveyor;
+import ip.industrialProcessing.machines.animation.conveyors.IConveyorStack;
+import ip.industrialProcessing.machines.animation.conveyors.TileConveyorSyncHandler;
 import ip.industrialProcessing.transport.TransportConnectionState;
 import ip.industrialProcessing.transport.items.conveyorBelt.util.ConveyorEnvironment;
 import ip.industrialProcessing.utils.ItemTransfers;
@@ -18,7 +21,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
-public abstract class TileEntityConveyorTransportBase extends TileEntityConveyorConnectionsBase {
+public abstract class TileEntityConveyorTransportBase extends TileEntityConveyorConnectionsBase  implements IConveyor {
 
 	private Random rnd = new Random();
 	protected ArrayList<MovingItemStack> itemStacks = new ArrayList<MovingItemStack>();
@@ -121,9 +124,8 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
 		}
 	}
 
-	private void syncConveyor() {
-		// TODO: this shouldn't be NBT based!
-		notifyBlockChange();
+	protected void syncConveyor() {
+		TileConveyorSyncHandler.sendConveyorData(this,  this);
 	}
 
 	private boolean outputStack(MovingItemStack stack) {
@@ -287,5 +289,31 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
 			outputToAir(this.itemStacks.get(i), ForgeDirection.UP);
 			this.itemStacks.remove(i);
 		}
+	}
+	
+	@Override
+	public IConveyorStack getStack(int index) { 
+		return this.itemStacks.get(index);
+	}
+	
+	@Override
+	public int getStackCount() { 
+		return this.itemStacks.size();
+	}
+	
+	@Override
+	public void clearStacks() {
+		this.itemStacks.clear();
+	}
+	
+	@Override
+	public void addStack(ItemStack stack, LocalDirection destination, LocalDirection source, float progress) {
+		MovingItemStack movingStack = new MovingItemStack();
+		movingStack.stack = stack;
+		movingStack.destination = destination;
+		movingStack.source = source;
+		movingStack.progress = progress;
+		movingStack.routed = false; 
+		this.itemStacks.add(movingStack);
 	}
 }

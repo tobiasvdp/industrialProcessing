@@ -309,16 +309,15 @@ public class ModelTank extends ModelConnectedFluid {
 
 	@Override
 	public void renderModelConnected(TileEntity tl, float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down) {
-
-		if (up == ConnectionState.CONNECTED && down == ConnectionState.CONNECTED)
-			renderCenter(f);
-		else if (up != ConnectionState.CONNECTED && down != ConnectionState.CONNECTED)
-			renderSingle(f);
-		else if (up != ConnectionState.CONNECTED && down == ConnectionState.CONNECTED)
-			renderTop(f);
-		else if (up == ConnectionState.CONNECTED && down != ConnectionState.CONNECTED)
-			renderBottom(f);
-
+		/*
+		 * if (up == ConnectionState.CONNECTED && down ==
+		 * ConnectionState.CONNECTED) renderCenter(f); else if (up !=
+		 * ConnectionState.CONNECTED && down != ConnectionState.CONNECTED)
+		 * renderSingle(f); else if (up != ConnectionState.CONNECTED && down ==
+		 * ConnectionState.CONNECTED) renderTop(f); else if (up ==
+		 * ConnectionState.CONNECTED && down != ConnectionState.CONNECTED)
+		 * renderBottom(f);
+		 */
 		// TODO: connectors
 	}
 
@@ -382,13 +381,13 @@ public class ModelTank extends ModelConnectedFluid {
 			int bottom = down == ConnectionState.CONNECTED ? 0 : 1;
 			int top = up == ConnectionState.CONNECTED ? 0 : 1;
 
-			float x = -7f;
-			float z = -7f;
+			float x = -6f;
+			float z = -6f;
 			float depth = (16 - bottom - top) * (1 - fluidPercentage);
 			float y = 8 + top + depth;
-			int w = 14;
-			int h = 14;
-			float yBot = 8 - bottom + 16; 
+			int w = 12;
+			int h = 12;
+			float yBot = 8 - bottom + 16;
 			Tessellator tessellator = Tessellator.instance;
 			if (up == ConnectionState.CONNECTED || fluidPercentage < 1) {
 				tessellator.startDrawingQuads();
@@ -406,15 +405,7 @@ public class ModelTank extends ModelConnectedFluid {
 			tessellator.addVertexWithUV((double) (x + w - 4) * f, (double) (y) * f, (double) (z + h) * f, (double) icon.getMaxU() - uOffset, (double) icon.getMinV() + vOffset);
 			tessellator.addVertexWithUV((double) (x + w - 4) * f, (double) (yBot) * f, (double) (z + h) * f, (double) icon.getMaxU() - uOffset, (double) icon.getMaxV());
 			tessellator.addVertexWithUV((double) (x + 4) * f, (double) (yBot) * f, (double) (z + h) * f, (double) icon.getMinU() + uOffset, (double) icon.getMaxV());
-			tessellator.draw();
-
-			tessellator.startDrawingQuads();
-			tessellator.addVertexWithUV((double) (x + w - 4) * f, (double) (y) * f, (double) (z) * f, (double) icon.getMinU() + uOffset, (double) icon.getMinV() + vOffset);
-			tessellator.addVertexWithUV((double) (x + 4) * f, (double) (y) * f, (double) (z) * f, (double) icon.getMaxU() - uOffset, (double) icon.getMinV() + vOffset);
-			tessellator.addVertexWithUV((double) (x + 4) * f, (double) (yBot) * f, (double) (z) * f, (double) icon.getMaxU() - uOffset, (double) icon.getMaxV());
-			tessellator.addVertexWithUV((double) (x + w - 4) * f, (double) (yBot) * f, (double) (z) * f, (double) icon.getMinU() + uOffset, (double) icon.getMaxV());
-			tessellator.draw();
-
+			tessellator.draw(); 
 		}
 	}
 

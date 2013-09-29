@@ -18,7 +18,7 @@ public abstract class TileEntityConveyorInteractionBase extends TileEntityConvey
 
 	public void setBounds() {
 		float xMin = -4 / 16f;
-		float yMin = -8 / 16f;
+		float yMin = -16 / 16f;
 		float zMin = -4 / 16f;
 		float xMax = 4 / 16f;
 		float yMax = -7 / 16f;
@@ -46,9 +46,8 @@ public abstract class TileEntityConveyorInteractionBase extends TileEntityConvey
 			}
 		}
 
-		// this.getBlockType().setBlockBounds(xMin + 0.5f, yMin + 1f, zMin +
-		// 0.5f, xMax + 0.5f, yMax + 1f, zMax + 0.5f);
-		this.getBlockType().setBlockBounds(0, 0, 0, 1, 1, 1);
+		this.getBlockType().setBlockBounds(xMin + 0.5f, yMin + 1f, zMin + 0.5f, xMax + 0.5f, yMax + 1f, zMax + 0.5f);
+		// this.getBlockType().setBlockBounds(0, 0, 0, 1, 1, 1);
 	}
 
 	public void addCollisionBoxes(List par6List, AxisAlignedBB par5AxisAlignedBB) {
@@ -98,22 +97,25 @@ public abstract class TileEntityConveyorInteractionBase extends TileEntityConvey
 
 	public void moveEntity(EntityLivingBase par5Entity) {
 
-
 		if (par5Entity instanceof EntityPlayerMP) {
 			EntityPlayer player = (EntityPlayer) par5Entity;
 			for (int i = this.itemStacks.size() - 1; i >= 0; i--) {
 				MovingItemStack stack = this.itemStacks.get(i);
 				ItemStack rest = ItemTransfers.transfer(stack.stack, player.inventory);
 				if (rest != null && rest.stackSize > 0) {
+					if (rest.stackSize != stack.stack.stackSize)
+						syncConveyor();
 					stack.stack = rest;
-				} else
+				} else {
 					this.itemStacks.remove(i);
+					syncConveyor();
+				}
 			}
 		}
- 
+
 		if (par5Entity.posY - par5Entity.yOffset < this.yCoord + 0.5f)
 			return;
-		
+
 		double dx = par5Entity.posX - this.xCoord - 0.5f;
 		double dy = par5Entity.posY - this.yCoord - 1.0f + par5Entity.height;
 		double dz = par5Entity.posZ - this.zCoord - 0.5f;
@@ -144,36 +146,5 @@ public abstract class TileEntityConveyorInteractionBase extends TileEntityConvey
 		double dvz = vz - par5Entity.motionZ;
 
 		par5Entity.addVelocity(dvx / 6, dvy / 4, dvz / 6);
-		/*
-		 * System.out.println("TileEntityConveyorInteractionBase.moveEntity()" +
-		 * dx + "," + dy + "," + dz); double bestMatch = 0; ForgeDirection
-		 * bestQuadrant = ForgeDirection.UNKNOWN; for (int i = 2; i < 6; i++) {
-		 * ForgeDirection direction = ForgeDirection.getOrientation(i); double
-		 * match = (direction.offsetX * dx) + (direction.offsetZ * dz); if
-		 * (match > bestMatch) { bestQuadrant = direction; bestMatch = match; }
-		 * }
-		 * 
-		 * if (bestQuadrant != ForgeDirection.UNKNOWN) {
-		 * 
-		 * ConnectionMode mode = getConnectionMode(bestQuadrant);
-		 * 
-		 * double tx = 0; double tz; if (mode == ConnectionMode.OUTPUT) { tx =
-		 * bestQuadrant.offsetX; tz = bestQuadrant.offsetZ; } else if (mode ==
-		 * ConnectionMode.INPUT) { tx = 0; tz = 0; } else return;
-		 * 
-		 * System.out.println("dir: " + bestQuadrant); double vx = (tx - dx);
-		 * double vz = (tz - dz);
-		 * 
-		 * double len = Math.sqrt(vx * vx + vz * vz);
-		 * 
-		 * vx /= len * this.speed; vz /= len * this.speed;
-		 * 
-		 * double dvx = vx - par5Entity.motionX; double dvz = vz -
-		 * par5Entity.motionZ;
-		 * 
-		 * par5Entity.addVelocity(dvx / 5, 0, dvz / 5);
-		 * 
-		 * }
-		 */
 	}
 }
