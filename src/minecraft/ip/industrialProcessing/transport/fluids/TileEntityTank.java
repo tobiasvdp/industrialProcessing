@@ -57,6 +57,17 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
 		super.updateEntity();
 		this.pressure = 0;
 		this.pressureAbove = 0;
+		if (unverified) {
+			for (int i = 0; i < 6; i++) {
+				ForgeDirection dir = ForgeDirection.getOrientation(i);
+				TileEntity tank = this.worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+				if (tank instanceof TileEntityTransportFluidsBase)
+					states[i] = ConnectionState.PLUGGED;
+				else
+					states[i] = ConnectionState.DISCONNECTED;
+			}
+		}
+
 		if (tank.getFluidAmount() > 0 || unverified) {
 			TileEntity entityBelow = this.worldObj.getBlockTileEntity(xCoord, yCoord - 1, zCoord);
 			if (entityBelow instanceof TileEntityTank) {
@@ -65,8 +76,7 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
 					FluidTransfers.transfer(10000, this.tank, tankBelow.tank);
 				}
 				states[ForgeDirection.DOWN.ordinal()] = ConnectionState.CONNECTED;
-			} else
-				states[ForgeDirection.DOWN.ordinal()] = ConnectionState.DISCONNECTED;
+			}
 		}
 		if (unverified) {
 			TileEntity entityAbove = this.worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord);
@@ -74,8 +84,7 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
 				TileEntityTank tankAbove = (TileEntityTank) entityAbove;
 				this.pressureAbove = tankAbove.getPressure(ForgeDirection.DOWN);
 				states[ForgeDirection.UP.ordinal()] = ConnectionState.CONNECTED;
-			} else
-				states[ForgeDirection.UP.ordinal()] = ConnectionState.DISCONNECTED;
+			}
 		}
 
 		if (!this.worldObj.isRemote) {
@@ -167,12 +176,11 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
 			return this.tank;
 		return null;
 	}
-	
+
 	@Override
-	public int getTankCount() { 
+	public int getTankCount() {
 		return 1;
 	}
-
 
 	@Override
 	public float getPressure(ForgeDirection from) {

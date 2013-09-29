@@ -36,7 +36,10 @@ public abstract class ObjMesh {
 
 		float du = maxU - minU;
 		float dv = maxV - minV;
-
+		 
+		dv *= -1;
+		minV = maxV;
+		
 		float dx = 0.5f + position.x;
 		float dy = 0.0f + position.y;
 		float dz = 0.5f + position.z;
@@ -44,7 +47,7 @@ public abstract class ObjMesh {
 		float sy = 1 / 1.6f;
 		float sz = 1 / 1.6f;
 
-		tessellator.setNormal(quad.normal.x, quad.normal.y, quad.normal.z);
+		tessellator.setNormal(-quad.normal.x, -quad.normal.y, -quad.normal.z);
 
 		tessellator.addVertexWithUV(quad.position1.x * sx + dx, quad.position1.y * sy + dy, quad.position1.z * sz + dz, quad.uv1.x * du + minU, quad.uv1.y * dv + minV);
 
