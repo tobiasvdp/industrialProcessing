@@ -49,6 +49,48 @@ public class RecipesCrusher extends RecipesMachine {
 		addRecipe(cinnebarLargeToSmall(3000));
 		addRecipe(RutileLargeToSmall(3000));
 		
+		addRecipe(cinnebarSmallToFine(3000));
+		addRecipe(RutileSmallToFine(3000));
+		
+		addRecipe(cinnebarFineToDust(3000));
+		addRecipe(RutileFineToDust(3000));
+		
+	}
+
+	private Recipe RutileFineToDust(int workTime) {
+		Recipe recipe = new Recipe();
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemRutileFineCrushedCrystals.itemID, RecipeSlotType.INVENTORY, 1) };
+
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemRutileDust.itemID, RecipeSlotType.INVENTORY, 1, 3, 0) };
+		recipe.workRequired = workTime;
+		return recipe;
+	}
+
+	private Recipe cinnebarFineToDust(int workTime) {
+		Recipe recipe = new Recipe();
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemRutileFineCrushedCrystals.itemID, RecipeSlotType.INVENTORY, 1) };
+
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemRutileDust.itemID, RecipeSlotType.INVENTORY, 1, 3, 0) };
+		recipe.workRequired = workTime;
+		return recipe;
+	}
+
+	private Recipe RutileSmallToFine(int workTime) {
+		Recipe recipe = new Recipe();
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemRutileSmallCrushedCrystals.itemID, RecipeSlotType.INVENTORY, 1) };
+
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemRutileFineCrushedCrystals.itemID, RecipeSlotType.INVENTORY, 1, 3, 0) };
+		recipe.workRequired = workTime;
+		return recipe;
+	}
+
+	private Recipe cinnebarSmallToFine(int workTime) {
+		Recipe recipe = new Recipe();
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemRutileSmallCrushedCrystals.itemID, RecipeSlotType.INVENTORY, 1) };
+
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemRutileFineCrushedCrystals.itemID, RecipeSlotType.INVENTORY, 1, 3, 0) };
+		recipe.workRequired = workTime;
+		return recipe;
 	}
 
 	private Recipe RutileLargeToSmall(int workTime) {
@@ -152,7 +194,7 @@ public class RecipesCrusher extends RecipesMachine {
 
 	private Recipe cinnebarCrystalToLarge(int workTime) {
 		Recipe recipe = new Recipe();
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemCinnebarCrystals.itemID, RecipeSlotType.INVENTORY, 1) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.blockCinnebar.blockID, RecipeSlotType.INVENTORY, 1) };
 
 		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemCinnebarLargeCrushedCrystals.itemID, RecipeSlotType.INVENTORY, 1, 3, 0) };
 		recipe.workRequired = workTime;

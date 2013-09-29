@@ -41,6 +41,16 @@ public class TileEntityDryer extends TileEntityPoweredFluidWorkerMachine {
 	private static RecipesDryer recipes = new RecipesDryer();
 
 	@Override
+	public boolean hasWork() {
+		return true;
+	}
+
+	@Override
+	public boolean canWork() {
+		return true;
+	}
+	
+	@Override
 	public Iterator<Recipe> iterateRecipes() {
 		return recipes.iterator();
 	}
