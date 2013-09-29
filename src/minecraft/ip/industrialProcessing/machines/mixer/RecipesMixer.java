@@ -14,27 +14,68 @@ import ip.industrialProcessing.recipes.RecipeSlotType;
 public class RecipesMixer extends RecipesMachine {
 
 	public RecipesMixer() {
-		addDefaultRecipes();
+		addRecipe(ironSmallToSludge(3000));
+		addRecipe(copperSmallToSludge(3000));
+		addRecipe(tinSmallToSludge(3000));
+		addRecipe(goldSmallToSludge(3000));
+		addRecipe(galenaSmallToSludge(3000));
+		addRecipe(chromiteSmallToSludge(3000));
+		addRecipe(taliaSmallToSludge(3000));
 	}
 
-	private void addDefaultRecipes() {
+	private Recipe taliaSmallToSludge(int i) {
+		Recipe recipe = new Recipe();
+		recipe.workRequired = i;
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.WATER.getID(), RecipeSlotType.TANK, 1000), new RecipeInputSlot(0, IndustrialProcessing.itemTaliaSmallChunks.itemID, RecipeSlotType.INVENTORY, 1) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidOreSludgeTalia.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
+		return recipe;
+	}
 
-		Recipe ironSludge = new Recipe();
-		ironSludge.workRequired = 2000;
-		ironSludge.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.WATER.getID(), RecipeSlotType.TANK, 1000), new RecipeInputSlot(0, IndustrialProcessing.itemIronSmallChunks.itemID, RecipeSlotType.INVENTORY, 1) };
-		ironSludge.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidOreSludgeIron.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
-		addRecipe(ironSludge);
+	private Recipe chromiteSmallToSludge(int i) {
+		Recipe recipe = new Recipe();
+		recipe.workRequired = i;
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.WATER.getID(), RecipeSlotType.TANK, 1000), new RecipeInputSlot(0, IndustrialProcessing.itemChromiteSmallChunks.itemID, RecipeSlotType.INVENTORY, 1) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidOreSludgeChromite.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
+		return recipe;
+	}
 
-		Recipe copperSludge = new Recipe();
-		copperSludge.workRequired = 2000;
-		copperSludge.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.WATER.getID(), RecipeSlotType.TANK, 1000), new RecipeInputSlot(0, IndustrialProcessing.itemCopperSmallChunks.itemID, RecipeSlotType.INVENTORY, 1) };
-		copperSludge.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidOreSludgeCopper.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
-		addRecipe(copperSludge);
+	private Recipe galenaSmallToSludge(int i) {
+		Recipe recipe = new Recipe();
+		recipe.workRequired = i;
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.WATER.getID(), RecipeSlotType.TANK, 1000), new RecipeInputSlot(0, IndustrialProcessing.itemGalenaSmallChunks.itemID, RecipeSlotType.INVENTORY, 1) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidOreSludgeGalena.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
+		return recipe;
+	}
 
-		Recipe tinSludge = new Recipe();
-		tinSludge.workRequired = 2000;
-		tinSludge.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.WATER.getID(), RecipeSlotType.TANK, 1000), new RecipeInputSlot(0, IndustrialProcessing.itemTinSmallChunks.itemID, RecipeSlotType.INVENTORY, 1) };
-		tinSludge.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidOreSludgeTin.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
-		addRecipe(tinSludge);
+	private Recipe goldSmallToSludge(int i) {
+		Recipe recipe = new Recipe();
+		recipe.workRequired = i;
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.WATER.getID(), RecipeSlotType.TANK, 1000), new RecipeInputSlot(0, IndustrialProcessing.itemGoldSmallChunks.itemID, RecipeSlotType.INVENTORY, 1) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidOreSludgeGold.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
+		return recipe;
+	}
+
+	private Recipe tinSmallToSludge(int i) {
+		Recipe recipe = new Recipe();
+		recipe.workRequired = i;
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.WATER.getID(), RecipeSlotType.TANK, 1000), new RecipeInputSlot(0, IndustrialProcessing.itemTinSmallChunks.itemID, RecipeSlotType.INVENTORY, 1) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidOreSludgeTin.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
+		return recipe;
+	}
+
+	private Recipe copperSmallToSludge(int i) {
+		Recipe recipe = new Recipe();
+		recipe.workRequired = i;
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.WATER.getID(), RecipeSlotType.TANK, 1000), new RecipeInputSlot(0, IndustrialProcessing.itemCopperSmallChunks.itemID, RecipeSlotType.INVENTORY, 1) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidOreSludgeCopper.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
+		return recipe;
+	}
+
+	private Recipe ironSmallToSludge(int i) {
+		Recipe recipe = new Recipe();
+		recipe.workRequired = i;
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.WATER.getID(), RecipeSlotType.TANK, 1000), new RecipeInputSlot(0, IndustrialProcessing.itemIronSmallChunks.itemID, RecipeSlotType.INVENTORY, 1) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidOreSludgeIron.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
+		return recipe;
 	}
 }

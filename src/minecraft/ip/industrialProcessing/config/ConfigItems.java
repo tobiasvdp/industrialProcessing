@@ -77,14 +77,19 @@ public class ConfigItems {
 	private int itemTaliaWashedChunksID = 6570;
 	private int itemTaliaFineChunksID = 6571;
 	
-	private int itemGalenaDustID = 6572;
+	private int itemSilverDustID = 6572;
 	private int itemRutileDustID = 6573;
 	private int itemCinnebarDustID = 6574;
 	private int itemChromiteDustID = 6575;
 	private int itemGoldDustID = 6576;
 	private int itemTaliaDustID = 6577;
+	private int itemLeadDustID = 6578;
 	
-	public static int itemGalenaDustID(){return getInstance().itemGalenaDustID;}
+	private int itemHexKeyID = 6579;
+	
+	public static int itemHexKeyID(){return getInstance().itemHexKeyID;}
+	public static int itemLeadDustID(){return getInstance().itemLeadDustID;}
+	public static int itemSilverDustID(){return getInstance().itemSilverDustID;}
 	public static int itemRutileDustID(){return getInstance().itemRutileDustID;}
 	public static int itemCinnebarDustID(){return getInstance().itemCinnebarDustID;}
 	public static int itemChromiteDustID(){return getInstance().itemChromiteDustID;}
@@ -164,6 +169,7 @@ public class ConfigItems {
 	public static int ItemSlagID() {return getInstance().ItemSlagID;}
 	
 	public static void addToLanguageRegistry(){
+		LanguageRegistry.addName(IndustrialProcessing.itemHexKey, "Hex Key");
 		LanguageRegistry.addName(IndustrialProcessing.itemSmallMachineCasing, "Small machine casing");
 		LanguageRegistry.addName(IndustrialProcessing.itemInputPort, "Input port");
 		LanguageRegistry.addName(IndustrialProcessing.itemOutputPort, "Output port");

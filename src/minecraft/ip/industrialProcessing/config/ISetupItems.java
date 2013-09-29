@@ -48,7 +48,8 @@ public interface ISetupItems {
     public final static ItemIP itemGalenaLargeChunks = new ItemIP(ConfigItems.itemGalenaLargeChunksID(), "itemGalenaLargeChunks",IndustrialProcessing.tabOres);
     public final static ItemIP itemGalenaFineChunks = new ItemIP(ConfigItems.itemGalenaFineChunksID(), "itemGalenaFineChunks",IndustrialProcessing.tabOres);
     public final static ItemIP itemGalenaWashedChunks = new ItemIP(ConfigItems.itemGalenaWashedChunksID(), "itemGalenaWashedChunks",IndustrialProcessing.tabOres);
-    public final static ItemIP itemGalenaDust = new ItemIP(ConfigItems.itemGalenaDustID(), "itemGalenaDust",IndustrialProcessing.tabOres);
+    public final static ItemIP itemSilverDust = new ItemIP(ConfigItems.itemSilverDustID(), "itemSilverDust",IndustrialProcessing.tabOres);
+    public final static ItemIP itemLeadDust = new ItemIP(ConfigItems.itemLeadDustID(), "itemLeadDust",IndustrialProcessing.tabOres);
 
     public final static ItemIP itemChromiteCrushedChunks = new ItemIP(ConfigItems.itemChromiteCrushedChunksID(), "itemChromiteCrushedChunks",IndustrialProcessing.tabOres);
     public final static ItemIP itemChromiteSmallChunks = new ItemIP(ConfigItems.itemChromiteSmallChunksID(), "itemChromiteSmallChunks",IndustrialProcessing.tabOres);
@@ -92,5 +93,7 @@ public interface ISetupItems {
     public final static ItemIP itemCalcareousSinterDust = new ItemIP(ConfigItems.ItemCalcareousSinterDustID(), "ItemCalcareousSinterDust",IndustrialProcessing.tabOres);
     public final static ItemIP itemCokes = new ItemIP(ConfigItems.ItemCokesID(), "ItemCokes",IndustrialProcessing.tabOres);
     public final static ItemIP itemSlag = new ItemIP(ConfigItems.ItemSlagID(), "ItemSlag",IndustrialProcessing.tabOres);
+    
+    public final static ItemIP itemHexKey = new ItemIP(ConfigItems.itemHexKeyID(), "itemHexKey",IndustrialProcessing.tabPower);
     
 }
