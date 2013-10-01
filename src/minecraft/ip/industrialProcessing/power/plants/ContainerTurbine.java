@@ -35,8 +35,8 @@ public class ContainerTurbine extends ContainerFluidMachine {
 		
 
 
-		addSlotToContainer(new SlotBase(tileEntity, 0, 8, 19));
-		addSlotToContainer(new SlotBase(tileEntity, 1, 8, 69-16));
+		addSlotToContainer(new SlotBase(tileEntity, 0, 152, 19));
+		addSlotToContainer(new SlotBase(tileEntity, 1, 152, 69-16));
 		
 		ContainerUtils.BindPlayerInventory(inventoryPlayer, this, 0);
 	}

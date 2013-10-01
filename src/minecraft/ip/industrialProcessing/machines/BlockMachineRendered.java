@@ -26,7 +26,7 @@ public abstract class BlockMachineRendered extends BlockMachine {
 
 	@Override
 	public boolean renderAsNormalBlock() {
-		return true;
+		return false;
 	}
 
 	@Override
