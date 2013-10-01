@@ -71,6 +71,7 @@ public class ModelTankBlock extends ModelBlock {
 			Icon tankIcon = block.getIcon(0, 0);
 			Icon tankFeaturesIcon = block.getIcon(1, 0);
 
+
 			if (up == ConnectionState.CONNECTED && down == ConnectionState.CONNECTED) {
 				center.renderMesh(false, tankIcon, position);
 				centerFeatures.renderMesh(false, tankFeaturesIcon, position);
@@ -91,7 +92,7 @@ public class ModelTankBlock extends ModelBlock {
 					connector[i].renderMesh(false, tankFeaturesIcon, position);
 			}
 		}
-		return false;
+		return true;
 	}
 
 }
