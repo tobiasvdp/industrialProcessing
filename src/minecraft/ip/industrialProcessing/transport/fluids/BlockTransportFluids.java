@@ -49,6 +49,26 @@ public class BlockTransportFluids extends BlockTransport {
 		return ConfigRenderers.getRendererTransportFluidsId();
 	}
 
+	@Override
+	public int getLightValue(IBlockAccess world, int x, int y, int z) {
+
+		TileEntityTransportFluidsBase entity = (TileEntityTransportFluidsBase) world.getBlockTileEntity(x, y, z);
+		FluidTankInfo[] subTanks = entity.getTanks();
+
+		int lum = 0;
+		int tanks = 0;
+
+		for (int i = 0; i < subTanks.length; i++) {
+			FluidTankInfo tank = subTanks[i];
+			if (tank.fluid != null) {
+				lum += tank.fluid.getFluid().getLuminosity();
+				tanks++;
+			}
+		}
+		if (tanks > 0)
+			return lum / tanks;
+		return super.getLightValue(world, x, y, z);
+	}
 
 	public static boolean cycleConnectionStatesOnActivated(TileEntityTransportFluidsBase entity, EntityPlayer par5EntityPlayer) {
 		if (par5EntityPlayer != null) {

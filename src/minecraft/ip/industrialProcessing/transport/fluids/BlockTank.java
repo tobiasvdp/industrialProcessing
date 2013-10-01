@@ -8,7 +8,9 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidTankInfo;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.ConfigTransportBlocks;
@@ -41,6 +43,17 @@ public class BlockTank extends BlockMachineRendered {
 
 		this.tankIcon = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "tankSide");
 		this.tankFeaturesIcon = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "tankFeatures");
+	}
+
+	@Override
+	public int getLightValue(IBlockAccess world, int x, int y, int z) {
+
+		TileEntityTank tank = (TileEntityTank) world.getBlockTileEntity(x, y, z);
+		FluidTankInfo[] subTanks = tank.getTanks();
+		FluidTankInfo mainTank = subTanks[0];
+		if (mainTank.fluid != null)
+			return mainTank.fluid.getFluid().getLuminosity();
+		return super.getLightValue(world, x, y, z);
 	}
 
 	@Override

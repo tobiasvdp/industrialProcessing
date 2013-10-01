@@ -13,13 +13,15 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 
-public class BlockStairs extends BlockDecoration {
+public class BlockStairs extends BlockScaffolding {
 
 	public BlockStairs() {
 		super(ConfigBlocks.getStairsBlockID(), Material.iron, 1f, Block.soundMetalFootstep, "Walkway stairs", IndustrialProcessing.tabPower);
@@ -39,6 +41,27 @@ public class BlockStairs extends BlockDecoration {
 		dir %= 4;
 
 		par1World.setBlockMetadataWithNotify(par2, par3, par4, dir, 2);
+	}
+
+	protected boolean placeScaffolding(World par1World, int x, int y, int z, ItemStack stack, ForgeDirection placeTarget, EntityPlayer par5EntityPlayer, int distance) {
+
+		if (distance > 5)
+			return false;
+		int tx = x + placeTarget.offsetX;
+		int ty = y + placeTarget.offsetY;
+		int tz = z + placeTarget.offsetZ;
+
+		if (isStairsFacing(par1World, x, y, z, placeTarget.offsetX, placeTarget.offsetY, placeTarget.offsetZ)) {
+			ty++;
+		}
+
+		int blockID = par1World.getBlockId(tx, ty, tz);
+		Block block = blocksList[blockID];
+		if (block instanceof BlockScaffolding) {
+			BlockScaffolding scaffold = (BlockScaffolding) block;
+			return scaffold.placeScaffolding(par1World, tx, ty, tz, stack, placeTarget, par5EntityPlayer, distance++);
+		}
+		return stack.tryPlaceItemIntoWorld(par5EntityPlayer, par1World, tx, ty + 1, tz, 0, 0, 0, 0);
 	}
 
 	public ConnectionCompass getConnections(IBlockAccess world, int x, int y, int z) {
@@ -63,6 +86,21 @@ public class BlockStairs extends BlockDecoration {
 		compass.connectionSW = getConnection(world, x, y, z, -1, dyS + dyW, 1, meta);
 		compass.connectionNW = getConnection(world, x, y, z, -1, dyN + dyW, -1, meta);
 		return compass;
+	}
+
+	public static boolean isStairsFacing(IBlockAccess world, int x2, int y2, int z2, int dx, int dy, int dz) {
+		int meta = world.getBlockMetadata(x2, y2, z2);
+		switch (meta) {
+		case 1:
+			return dx == -1;
+		case 0:
+			return dz == -1;
+		case 3:
+			return dx == 1;
+		case 2:
+			return dz == 1;
+		}
+		return false;
 	}
 
 	protected TileConnection getConnection(IBlockAccess world, int x, int y, int z, int dx, int dy, int dz, int meta) {
@@ -135,8 +173,6 @@ public class BlockStairs extends BlockDecoration {
 		rights[2] = compass.connectionE;
 		rights[3] = compass.connectionN;
 
-		boolean forceRailing = true;
-
 		switch (dir) {
 		case 2:
 			this.setBlockBounds(minX1, minY1, minZ1, maxX1, maxY1, maxZ1);
@@ -144,14 +180,14 @@ public class BlockStairs extends BlockDecoration {
 			this.setBlockBounds(minX2, minY2, minZ2, maxX2, maxY2, maxZ2);
 			super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 
-			if (forceRailing || compass.connectionW == TileConnection.AIR || compass.connectionW == TileConnection.GROUND) {
+			if (compass.connectionW == TileConnection.AIR || compass.connectionW == TileConnection.GROUND) {
 				this.setBlockBounds(minXL1, minY1, minZ1, maxXL1, maxY1S, maxZ1);
 				super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 				this.setBlockBounds(minXL2, minY2, minZ2, maxXL2, maxY2S, maxZ2);
 				super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 			}
 
-			if (forceRailing || compass.connectionE == TileConnection.AIR || compass.connectionE == TileConnection.GROUND) {
+			if (compass.connectionE == TileConnection.AIR || compass.connectionE == TileConnection.GROUND) {
 				this.setBlockBounds(minXR1, minY1, minZ1, maxXR1, maxY1S, maxZ1);
 				super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 				this.setBlockBounds(minXR2, minY2, minZ2, maxXR2, maxY2S, maxZ2);
@@ -164,14 +200,14 @@ public class BlockStairs extends BlockDecoration {
 			this.setBlockBounds(minX2, minY2, minZ1, maxX2, maxY2, maxZ1);
 			super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 
-			if (forceRailing || compass.connectionW == TileConnection.AIR || compass.connectionW == TileConnection.GROUND) {
+			if (compass.connectionW == TileConnection.AIR || compass.connectionW == TileConnection.GROUND) {
 				this.setBlockBounds(minXL1, minY1, minZ2, maxXL1, maxY1S, maxZ2);
 				super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 				this.setBlockBounds(minXL2, minY2, minZ1, maxXL2, maxY2S, maxZ1);
 				super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 			}
 
-			if (forceRailing || compass.connectionE == TileConnection.AIR || compass.connectionE == TileConnection.GROUND) {
+			if (compass.connectionE == TileConnection.AIR || compass.connectionE == TileConnection.GROUND) {
 				this.setBlockBounds(minXR1, minY1, minZ2, maxXR1, maxY1S, maxZ2);
 				super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 				this.setBlockBounds(minXR2, minY2, minZ1, maxXR2, maxY2S, maxZ1);
@@ -184,13 +220,13 @@ public class BlockStairs extends BlockDecoration {
 			this.setBlockBounds(minZ2, minY2, minX2, maxZ2, maxY2, maxX2);
 			super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 
-			if (forceRailing || compass.connectionN == TileConnection.AIR || compass.connectionN == TileConnection.GROUND) {
+			if (compass.connectionN == TileConnection.AIR || compass.connectionN == TileConnection.GROUND) {
 				this.setBlockBounds(minZ1, minY1, minXL1, maxZ1, maxY1S, maxXL1);
 				super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 				this.setBlockBounds(minZ2, minY2, minXL2, maxZ2, maxY2S, maxXL2);
 				super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 			}
-			if (forceRailing || compass.connectionS == TileConnection.AIR || compass.connectionS == TileConnection.GROUND) {
+			if (compass.connectionS == TileConnection.AIR || compass.connectionS == TileConnection.GROUND) {
 				this.setBlockBounds(minZ1, minY1, minXR1, maxZ1, maxY1S, maxXR1);
 				super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 				this.setBlockBounds(minZ2, minY2, minXR2, maxZ2, maxY2S, maxXR2);
@@ -203,13 +239,13 @@ public class BlockStairs extends BlockDecoration {
 			this.setBlockBounds(minZ1, minY2, minX2, maxZ1, maxY2, maxX2);
 			super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 
-			if (forceRailing || compass.connectionN == TileConnection.AIR || compass.connectionN == TileConnection.GROUND) {
+			if (compass.connectionN == TileConnection.AIR || compass.connectionN == TileConnection.GROUND) {
 				this.setBlockBounds(minZ2, minY1, minXL1, maxZ2, maxY1S, maxXL1);
 				super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 				this.setBlockBounds(minZ1, minY2, minXL2, maxZ1, maxY2S, maxXL2);
 				super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 			}
-			if (forceRailing || compass.connectionS == TileConnection.AIR || compass.connectionS == TileConnection.GROUND) {
+			if (compass.connectionS == TileConnection.AIR || compass.connectionS == TileConnection.GROUND) {
 				this.setBlockBounds(minZ2, minY1, minXR1, maxZ2, maxY1S, maxXR1);
 				super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 				this.setBlockBounds(minZ1, minY2, minXR2, maxZ1, maxY2S, maxXR2);

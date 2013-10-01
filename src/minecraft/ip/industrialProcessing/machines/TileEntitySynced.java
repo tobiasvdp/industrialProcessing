@@ -20,7 +20,15 @@ public class TileEntitySynced extends TileEntity {
 	}
 
 	protected void notifyBlockChange() {
-		if (!this.worldObj.isRemote)
+		if (!this.worldObj.isRemote) {
 			this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+
+			StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
+			StackTraceElement e = stacktrace[2];// maybe this number needs to be
+												// corrected
+			String methodName = e.getMethodName();
+			String className = e.getClassName();
+			System.out.println(methodName + " in " + className);
+		}
 	}
 }
