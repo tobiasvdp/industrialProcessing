@@ -51,11 +51,20 @@ public class ConfigRenderers {
 	private int rendererRainTankID;
 	private int rendererValveID;
 	private int rendererCrystalID;
-
+	private int rendererMultiblockBlastFurnaceID;
+	
 	public static int getRendererConveyorBeltID() {
 		return getInstance().rendererConveyorBelt;
 	}
 
+	public static void setRendererMultiblockBlastFurnaceID(int value) {
+		getInstance().rendererMultiblockBlastFurnaceID = value;
+	}
+
+	public static int getrendererMultiblockBlastFurnaceID() {
+		return getInstance().rendererMultiblockBlastFurnaceID;
+	}
+	
 	public static void setRendererConveyorBeltID(int value) {
 		getInstance().rendererConveyorBelt = value;
 	}

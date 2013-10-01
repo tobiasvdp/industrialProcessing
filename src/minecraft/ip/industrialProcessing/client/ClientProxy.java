@@ -1,6 +1,7 @@
 package ip.industrialProcessing.client;
 
 import ip.industrialProcessing.CommonProxy;
+import ip.industrialProcessing.multiblock.core.block.blastFurnace.MDmultiblockBlastFurnace;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.rendering.ModelMachine;
 import ip.industrialProcessing.api.rendering.RendererBlock;
@@ -47,6 +48,7 @@ import ip.industrialProcessing.machines.mixer.ModelMixer;
 import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import ip.industrialProcessing.machines.thickener.ModelThickener;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
+import ip.industrialProcessing.multiblock.core.block.blastFurnace.TEmultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.MDmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.dummy.block.displayPanel.MDmultiblockDisplayPanel;
@@ -139,6 +141,7 @@ public class ClientProxy extends CommonProxy {
 	private static final ModelAnimatedFluidMachine turbine = new ModelTurbine();
 	private static final ModelAnimatedMachine generator = new ModelCrankGenerator(false);
 	private static final MDmultiblockWeldingStation MDmultiblockWeldingStation = new MDmultiblockWeldingStation();
+	private static final MDmultiblockBlastFurnace MDmultiblockBlastFurnace = new MDmultiblockBlastFurnace();
 	private static final MDmultiblockScreen MDmultiblockScreen = new MDmultiblockScreen();
 	private static final MDmultiblockFrame MDmultiblockFrame = new MDmultiblockFrame();
 	private static final MDmultiblockWeldingTableExt MDmultiblockWeldingTableExt = new MDmultiblockWeldingTableExt();
@@ -291,6 +294,10 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TEmultiblockWeldingTableExt.class, new RenderingMultiblock(IndustrialProcessing.BLmultiblockWeldingTableExt, new String[] { "ModelMultiblockWeldingStation" }, new ModelingMultiblock[] { MDmultiblockWeldingTableExt }));
 		ConfigRenderers.setBLmultiblockWeldingTableExt(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getBLmultiblockWeldingTableExt(), new TEmultiblockWeldingTableExt()));
+		
+		ClientRegistry.bindTileEntitySpecialRenderer(TEmultiblockBlastFurnace.class, new RenderingMultiblock(IndustrialProcessing.BLmultiblockBlastFurnace, new String[] { "ModelBlastFurnace" }, new ModelingMultiblock[] { MDmultiblockBlastFurnace }));
+		ConfigRenderers.setRendererMultiblockBlastFurnaceID(RenderingRegistry.getNextAvailableRenderId());
+		RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getrendererMultiblockBlastFurnaceID(), new TEmultiblockBlastFurnace()));
 
 		// ClientRegistry.bindTileEntitySpecialRenderer(TEmultiblockLiftDoor.class,
 		// new RenderingMultiblock(IndustrialProcessing.BLmultiblockLiftDoor,

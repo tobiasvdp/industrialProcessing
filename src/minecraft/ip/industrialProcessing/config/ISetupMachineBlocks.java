@@ -20,6 +20,7 @@ import ip.industrialProcessing.machines.mixer.BlockMixer;
 import ip.industrialProcessing.machines.oxygenFurnace.BlockOxygenFurnace;
 import ip.industrialProcessing.machines.pelletExtruder.BlockPelletExtruder;
 import ip.industrialProcessing.machines.thickener.BlockThickener;
+import ip.industrialProcessing.multiblock.core.block.blastFurnace.BLmultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.core.block.elevator.BLmultiblockElevator;
 import ip.industrialProcessing.multiblock.core.block.hotPress.BLmultiblockHotPress;
 import ip.industrialProcessing.multiblock.core.block.rollingPress.BLmultiblockRollingPress;
@@ -111,7 +112,7 @@ public interface ISetupMachineBlocks {
 	public final static BLmultiblockRollingPress BLmultiblockRollingPress = new BLmultiblockRollingPress();
 	public final static BLmultiblockWheelConnector BLmultiblockWheelConnector = new BLmultiblockWheelConnector();
 	public final static BLmultiblockDisplayPanel BLmultiblockDisplayPanel = new BLmultiblockDisplayPanel();
-
+	public final static BLmultiblockBlastFurnace BLmultiblockBlastFurnace = new BLmultiblockBlastFurnace();
 	// transport
 	public final static BlockConveyorBelt blockConveyorBelt = new BlockConveyorBelt();
 	public final static BlockConveyorInput blockConveyorBeltInput = new BlockConveyorInput();

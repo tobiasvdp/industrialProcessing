@@ -22,6 +22,7 @@ import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import ip.industrialProcessing.machines.oxygenFurnace.TileEntityOxygenFurnace;
 import ip.industrialProcessing.machines.pelletExtruder.TileEntityPelletExtruder;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
+import ip.industrialProcessing.multiblock.core.block.blastFurnace.TEmultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.core.block.elevator.TEmultiblockElevator;
 import ip.industrialProcessing.multiblock.core.block.hotPress.TEmultiblockHotPress;
 import ip.industrialProcessing.multiblock.core.block.rollingPress.TEmultiblockRollingPress;
@@ -113,6 +114,7 @@ public class ConfigMachineBlocks {
 	private int BLmultiblockRollingPress = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(),"RollingPressID",732).getInt();
 	private int BLmultiblockWheelConnector = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(),"WheelConnectorID",733).getInt();
 	private int BLmultiblockDisplayPanel = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(),"DisplayPanelID",734).getInt();
+	private int BLmultiblockBlastFurnace = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(),"BLmultiblockBlastFurnace",750).getInt();
 
 	private int BLtransportConveyorBelt = IndustrialProcessing.config.get(ConfigCategories.transport.toString(),"ConveyorBeltID",735).getInt();
 	private int BLtransportConveyorBeltInput = IndustrialProcessing.config.get(ConfigCategories.transport.toString(),"ConveyorBeltInputID",736).getInt();
@@ -125,6 +127,7 @@ public class ConfigMachineBlocks {
 		registerMachineBlock(IndustrialProcessing.blockConveyorOutput, "IP.Trans.CBOutput", "Conveyor belt export", TileEntityConveyorOutput.class);
 
 		// multiblocks
+		registerMachineBlock(IndustrialProcessing.BLmultiblockBlastFurnace, "IP.MBC.BlastFur", "Blast furnace", TEmultiblockBlastFurnace.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockDisplayPanel, "IP.MBD.Display", "Display panel", TEmultiblockDisplayPanel.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockWheelConnector, "IP.MBD.WheelCon", "Wheel connector", TEmultiblockWheelConnector.class);
 		registerMachineBlock(IndustrialProcessing.BLmultiblockLiftDoor, "IP.MBD.LiftDoor", "Lift door", TEmultiblockLiftDoor.class);
@@ -190,6 +193,10 @@ public class ConfigMachineBlocks {
 
 	public static ConfigMachineBlocks getInstance() {
 		return instance;
+	}
+	
+	public static int getBLmultiblockBlastFurnace() {
+		return getInstance().BLmultiblockBlastFurnace;
 	}
 
 	public static int getBLtransportConveyorBeltInput() {
