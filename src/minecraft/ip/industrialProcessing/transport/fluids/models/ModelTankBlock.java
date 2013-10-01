@@ -32,6 +32,16 @@ public class ModelTankBlock extends ModelBlock {
 
 	public ModelTankBlock() {
 
+		Matrix4f rotation = Matrix4f.rotate((float) Math.PI / 2, new Vector3f(0, 1, 0), new Matrix4f(), null);
+
+		connector[ForgeDirection.EAST.ordinal()] = new TankConnector();
+
+		connector[ForgeDirection.NORTH.ordinal()] = (TankConnector) connector[ForgeDirection.EAST.ordinal()].cloneTransformed(rotation);
+		connector[ForgeDirection.WEST.ordinal()] = (TankConnector) connector[ForgeDirection.NORTH.ordinal()].cloneTransformed(rotation);
+		connector[ForgeDirection.SOUTH.ordinal()] = (TankConnector) connector[ForgeDirection.WEST.ordinal()].cloneTransformed(rotation);
+
+		connector[ForgeDirection.UP.ordinal()] = new TankConnectorUp();
+		connector[ForgeDirection.DOWN.ordinal()] = new TankConnectorDown();
 	}
 
 	@Override
@@ -42,22 +52,6 @@ public class ModelTankBlock extends ModelBlock {
 		single.renderMesh(true, icon, position);
 		icon = block.getIcon(1, 0);
 		singleFeatures.renderMesh(true, icon, position);
-
-		Matrix4f rotation = Matrix4f.rotate((float) Math.PI / 2, new Vector3f(0, 1, 0), new Matrix4f(), null);
-
-		connector[ForgeDirection.EAST.ordinal()] = new TankConnector();
-
-		connector[ForgeDirection.NORTH.ordinal()] = (TankConnector) connector[ForgeDirection.EAST.ordinal()].cloneTransformed(rotation);
-		connector[ForgeDirection.WEST.ordinal()] = (TankConnector) connector[ForgeDirection.NORTH.ordinal()].cloneTransformed(rotation);
-		connector[ForgeDirection.SOUTH.ordinal()] = (TankConnector) connector[ForgeDirection.WEST.ordinal()].cloneTransformed(rotation);
-
-		rotation = Matrix4f.translate(new Vector3f(13/16f, -13/16f, 0), new Matrix4f(), null);
-		rotation = Matrix4f.rotate((float) Math.PI / 2, new Vector3f(0, 0, -1), new Matrix4f(), rotation);
-		connector[ForgeDirection.UP.ordinal()] = (TankConnector) connector[ForgeDirection.EAST.ordinal()].cloneTransformed(rotation);
-
-		rotation = Matrix4f.translate(new Vector3f(-13/16f, 13/16f, 0), new Matrix4f(), null);
-		rotation = Matrix4f.rotate((float) Math.PI / 2, new Vector3f(0, 0, 1), new Matrix4f(), rotation); 
-		connector[ForgeDirection.DOWN.ordinal()] = (TankConnector) connector[ForgeDirection.EAST.ordinal()].cloneTransformed(rotation);
 	}
 
 	@Override
@@ -84,7 +78,7 @@ public class ModelTankBlock extends ModelBlock {
 				single.renderMesh(false, tankIcon, position);
 				singleFeatures.renderMesh(false, tankFeaturesIcon, position);
 			} else if (up != ConnectionState.CONNECTED && down == ConnectionState.CONNECTED) {
-				// top.renderMesh(false, tankIcon, position);
+				top.renderMesh(false, tankIcon, position);
 				topFeatures.renderMesh(false, tankFeaturesIcon, position);
 			} else if (up == ConnectionState.CONNECTED && down != ConnectionState.CONNECTED) {
 				bottom.renderMesh(false, tankIcon, position);

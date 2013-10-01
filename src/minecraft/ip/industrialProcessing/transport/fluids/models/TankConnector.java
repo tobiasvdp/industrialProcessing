@@ -19,6 +19,11 @@ public class TankConnector extends ObjMesh {
 		this.quads[5] = new ObjQuad(new Vector3f(0.6f, 1.1f, -0.3f), new Vector3f(0.6f, 0.5f, -0.3f), new Vector3f(0.6f, 0.5f, 0.3f), new Vector3f(0.6f, 1.1f, 0.3f), new Vector2f(1.0f, 1.0f), new Vector2f(1.0f, 0.625f), new Vector2f(0.625f, 0.625f), new Vector2f(0.625f, 1.0f), new Vector3f(-4.0f, 0.0f, 0.0f));
 	}
 
+	protected TankConnector(int quads) {
+		this.quads = new ObjQuad[quads];
+
+	}
+
 	@Override
 	public ObjMesh cloneTransformed(Matrix4f transform) {
 		TankConnector clone = new TankConnector();

@@ -367,7 +367,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine implement
 		FluidStack newStack = new FluidStack(itemId, amount);
 		if (stack == null) {
 			tank.setFluid(newStack);
-			super.notifyBlockChange();
+			onTanksChanged();
 			return true;
 		} else if (stack.fluidID == itemId && stack.amount + amount <= tank.getCapacity()) {
 			tank.fill(newStack, true);
@@ -394,8 +394,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine implement
 	}
 
 	protected void onTanksChanged() {
-		this.onInventoryChanged();
-		super.notifyBlockChange();
+		this.onInventoryChanged(); 
 	}
 
 	public FluidTankInfo getTankInfoForSlot(int slot) {

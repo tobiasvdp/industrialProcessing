@@ -19,7 +19,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
-public class BlockPlatform extends BlockDecoration {
+public class BlockPlatform extends BlockScaffolding {
 
 	public BlockPlatform() {
 		super(ConfigBlocks.getPlatformBlockID(), Material.iron, 1f, Block.soundMetalFootstep, "Walkway", IndustrialProcessing.tabPower);
@@ -61,7 +61,7 @@ public class BlockPlatform extends BlockDecoration {
 		if (id == ConfigBlocks.getPlatformBlockID()) {
 			return TileConnection.CONNECTED;
 		} else if (id == ConfigBlocks.getStairsBlockID()) {
-			if (isStairsFacing(world, x2, y2, z2, dx, dy, dz))
+			if (BlockStairs.isStairsFacing(world, x2, y2, z2, dx, dy, dz))
 				return TileConnection.STAIRS; 
 			else
 				return TileConnection.STAIRSSIDE; 
@@ -74,7 +74,7 @@ public class BlockPlatform extends BlockDecoration {
 			} else if (!isSolid(world, x2, y2 - 1, z2)) {
 				int idBelow = world.getBlockId(x2, y2 - 1, z2);
 				if (idBelow == ConfigBlocks.getStairsBlockID()) {
-					if (isStairsFacing(world, x2, y2 - 1, z2, -dx, -dy, -dz)) {
+					if (BlockStairs.isStairsFacing(world, x2, y2 - 1, z2, -dx, -dy, -dz)) {
 						return TileConnection.CONNECTEDSTAIRS;
 					}else
 						return TileConnection.STAIRSTOP;
@@ -86,21 +86,6 @@ public class BlockPlatform extends BlockDecoration {
 			}
 		}
 
-	}
-
-	private boolean isStairsFacing(IBlockAccess world, int x2, int y2, int z2, int dx, int dy, int dz) {
-		int meta = world.getBlockMetadata(x2, y2, z2);
-		switch (meta) {
-		case 1:
-			return dx == -1;
-		case 0:
-			return dz == -1;
-		case 3:
-			return dx == 1;
-		case 2:
-			return dz == 1;
-		}
-		return false;
 	}
 
 	protected boolean isSolid(IBlockAccess world, int x, int y, int z) {
@@ -129,7 +114,7 @@ public class BlockPlatform extends BlockDecoration {
 
 		TileConnection connection = getConnection(world, x, y, z, direction.offsetX, direction.offsetY, direction.offsetZ);
 
-		if (connection == TileConnection.AIR) {
+		if (connection == TileConnection.AIR || connection == TileConnection.STAIRSTOP || connection == TileConnection.STAIRSSIDE) {
 
 			double x0 = Math.abs(direction.offsetZ) / 2f;
 			double z0 = Math.abs(direction.offsetX) / 2f;
