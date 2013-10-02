@@ -1,7 +1,10 @@
 package ip.industrialProcessing.transport.fluids;
 
+import org.lwjgl.opengl.GL11;
+
 import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.ModelConnectedOrientedFluid;
+import ip.industrialProcessing.machines.BlockMachine;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.tileentity.TileEntity;
@@ -260,6 +263,10 @@ public class ModelRainTank extends ModelConnectedOrientedFluid {
 	public void renderModelConnectedOrientedFluid(TileEntity tl, float f, ForgeDirection forward, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, Icon icon) {
 		if (tankSlot == 0) {
 
+			int dir = BlockMachine.getMetadataFromForward(BlockMachine.getForwardFromEntity(tl));
+
+			GL11.glPushMatrix();
+			GL11.glRotatef(90 * dir, 0, -1, 0);
 			float x = -8f;
 			float z = -8f;
 
@@ -275,6 +282,7 @@ public class ModelRainTank extends ModelConnectedOrientedFluid {
 			tessellator.addVertexWithUV((double) (x + w) * f, (double) y * f, (double) (z + h) * f, (double) icon.getMaxU(), (double) icon.getMaxV());
 			tessellator.addVertexWithUV((double) (x + 0) * f, (double) y * f, (double) (z + h) * f, (double) icon.getMinU(), (double) icon.getMaxV());
 			tessellator.draw();
+			GL11.glPopMatrix();
 		}
 	}
 

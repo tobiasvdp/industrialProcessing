@@ -15,15 +15,19 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.ConfigItems;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 
 public abstract class BlockConveyorBase extends BlockMachineRendered {
 
+	private ItemStack tool = new ItemStack(IndustrialProcessing.itemHexKey, 1);
+
 	public BlockConveyorBase(int blockID, Material material, float hardness, StepSound stepSound, String name, CreativeTabs creativeTab) {
 		super(blockID, material, hardness, stepSound, name, creativeTab);
-	} 
-		
+	}
+
 	@Override
 	public void onBlockDestroyedByPlayer(World par1World, int par2, int par3, int par4, int par5) {
 		super.onBlockDestroyedByPlayer(par1World, par2, par3, par4, par5);
@@ -52,7 +56,7 @@ public abstract class BlockConveyorBase extends BlockMachineRendered {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) { 
+	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
 		super.onEntityCollidedWithBlock(par1World, par2, par3, par4, par5Entity);
 		TileEntityConveyorInteractionBase conveyorBelt = (TileEntityConveyorInteractionBase) par1World.getBlockTileEntity(par2, par3, par4);
 		if (par5Entity instanceof EntityItem) {
@@ -69,7 +73,6 @@ public abstract class BlockConveyorBase extends BlockMachineRendered {
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
 
-		ItemStack tool = new ItemStack(Item.stick, 1);
 		ItemStack playerItem = player.inventory.getCurrentItem();
 
 		if (playerItem != null && tool.isItemEqual(playerItem)) {
@@ -77,7 +80,7 @@ public abstract class BlockConveyorBase extends BlockMachineRendered {
 			conveyorBelt.toggleSlope();
 			return false;
 		}
-		return false; 
+		return false;
 	}
 
 	@Override
@@ -104,7 +107,7 @@ public abstract class BlockConveyorBase extends BlockMachineRendered {
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess par1iBlockAccess, int par2, int par3, int par4) {
 		TileEntityConveyorInteractionBase cb = (TileEntityConveyorInteractionBase) par1iBlockAccess.getBlockTileEntity(par2, par3, par4);
-		cb.setBounds(); 
+		cb.setBounds();
 	}
 
 	@Override
