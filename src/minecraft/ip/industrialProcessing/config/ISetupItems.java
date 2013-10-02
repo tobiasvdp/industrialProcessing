@@ -2,6 +2,7 @@ package ip.industrialProcessing.config;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.items.ItemDamage;
+import ip.industrialProcessing.items.ItemGuide;
 import ip.industrialProcessing.items.ItemIP;
 
 public interface ISetupItems {
@@ -96,4 +97,5 @@ public interface ISetupItems {
     
     public final static ItemIP itemHexKey = new ItemIP(ConfigItems.itemHexKeyID(), "itemHexKey",IndustrialProcessing.tabPower);
     
+    public final static ItemGuide itemGuide = new ItemGuide(ConfigItems.getItemGuideID(), "itemGuide", IndustrialProcessing.tabPower);
 }
