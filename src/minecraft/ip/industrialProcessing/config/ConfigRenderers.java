@@ -52,11 +52,19 @@ public class ConfigRenderers {
 	private int rendererValveID;
 	private int rendererCrystalID;
 	private int rendererMultiblockBlastFurnaceID;
+	private int rendererMultiblockBlastFurnaceTowerID;
 	
 	public static int getRendererConveyorBeltID() {
 		return getInstance().rendererConveyorBelt;
 	}
 
+	public static void setRendererMultiblockBlastFurnaceTowerID(int value) {
+		getInstance().rendererMultiblockBlastFurnaceTowerID = value;
+	}
+
+	public static int getrendererMultiblockBlastFurnaceTowerID() {
+		return getInstance().rendererMultiblockBlastFurnaceTowerID;
+	}
 	public static void setRendererMultiblockBlastFurnaceID(int value) {
 		getInstance().rendererMultiblockBlastFurnaceID = value;
 	}

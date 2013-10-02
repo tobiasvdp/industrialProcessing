@@ -2,7 +2,9 @@ package ip.industrialProcessing.multiblock.core.block.blastFurnace;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
+import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreInv;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
 import ip.industrialProcessing.multiblock.layout.LayoutTransformer;
@@ -12,9 +14,10 @@ import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
 import ip.industrialProcessing.multiblock.utils.MultiblockActionType;
 
-public class TEmultiblockBlastFurnace extends TEmultiblockCore {
+public class TEmultiblockBlastFurnace extends TEmultiblockCoreInv {
 	static StructureMultiblock structure;
 	static TierCollection tierRequirments;
+	static RecipesMachine recipes = new RecipesMultiblockBlastFurnace();
 	static{
 		//set layout
 		structure = new StructureMultiblock();
@@ -23,6 +26,7 @@ public class TEmultiblockBlastFurnace extends TEmultiblockCore {
 		
 		int i = 0;
 		layout.setCoreID(i++,0,0, IndustrialProcessing.BLmultiblockBlastFurnace.blockID);
+		layout.setBlockID(0, 1, 0, i++, 0, 0, IndustrialProcessing.BLmultiblockBlastFurnaceTower.blockID);
 		
 		structure.addLayout(layout, FacingDirection.North);
 		structure.addLayout(LayoutTransformer.transform(layout, FacingDirection.East), FacingDirection.East);
@@ -38,6 +42,6 @@ public class TEmultiblockBlastFurnace extends TEmultiblockCore {
 
 	}
 	public TEmultiblockBlastFurnace() {
-		super(structure, tierRequirments);
+		super(structure, tierRequirments,recipes);
 	}
 }
