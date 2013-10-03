@@ -6,7 +6,7 @@ import ip.industrialProcessing.config.ConfigBlocks;
 public class BlockCinnebar extends BlockCrystal {
 
 	public BlockCinnebar() {
-		super(ConfigBlocks.getBlockCinnebarCrystalID(), "Cinnebar Crystal", IndustrialProcessing.tabOreProcessing, "cinnebarCrystal");
+		super(ConfigBlocks.getBlockCinnebarCrystalID(), "Cinnebar Crystal", IndustrialProcessing.tabOres, "cinnebarCrystal");
 	}
 
 }

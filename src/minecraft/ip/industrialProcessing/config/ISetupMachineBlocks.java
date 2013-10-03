@@ -1,11 +1,5 @@
 package ip.industrialProcessing.config;
 
-import ip.industrialProcessing.logic.functions.and.BLlogicAnd;
-import ip.industrialProcessing.logic.functions.or.BLlogicOr;
-import ip.industrialProcessing.logic.transport.wired.bundle.BLlogicBundle;
-import ip.industrialProcessing.logic.transport.wired.cable.BLlogicCable;
-import ip.industrialProcessing.logic.transport.wired.displayBox.BLlogicDisplayBox;
-import ip.industrialProcessing.logic.transport.wired.switchbox.BLlogicSwitchBox;
 import ip.industrialProcessing.machines.blastFurnace.BlockBlastFurnace;
 import ip.industrialProcessing.machines.classifier.BlockClassifier;
 import ip.industrialProcessing.machines.crusher.BlockCrusher;
@@ -19,6 +13,9 @@ import ip.industrialProcessing.machines.magneticSeparator.BlockMagneticSeparator
 import ip.industrialProcessing.machines.mixer.BlockMixer;
 import ip.industrialProcessing.machines.oxygenFurnace.BlockOxygenFurnace;
 import ip.industrialProcessing.machines.pelletExtruder.BlockPelletExtruder;
+import ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator.BlockIncubator;
+import ip.industrialProcessing.machines.plants.waste.waterTreatment.tricklingFilter.BlockTricklingFilter;
+import ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatmentStation.BlockWaterTreatmentStation;
 import ip.industrialProcessing.machines.thickener.BlockThickener;
 import ip.industrialProcessing.multiblock.core.block.elevator.BLmultiblockElevator;
 import ip.industrialProcessing.multiblock.core.block.hotPress.BLmultiblockHotPress;
@@ -72,6 +69,9 @@ public interface ISetupMachineBlocks {
 	public final static BlockExtruder blockExtruder = new BlockExtruder();
 	public final static BlockOxygenFurnace blockOxygenFurnace = new BlockOxygenFurnace();
 	public final static BlockPelletExtruder blockPelletExtruder = new BlockPelletExtruder();
+	public final static BlockIncubator blockIncubator = new BlockIncubator();
+	public final static BlockTricklingFilter blockTricklingFilter = new BlockTricklingFilter();
+	public final static BlockWaterTreatmentStation blockWaterTreatmentStation = new BlockWaterTreatmentStation();
 
 	// create generators
 	public final static BlockManualGenerator blockManualGenerator = new BlockManualGenerator();
