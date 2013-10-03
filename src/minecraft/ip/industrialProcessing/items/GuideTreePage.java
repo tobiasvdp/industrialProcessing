@@ -27,7 +27,7 @@ public class GuideTreePage extends GuidePage {
 
     @Override
     public ItemStack getIconStack() { 
-	return new ItemStack(IndustrialProcessing.itemIronFineChunks);
+	return new ItemStack(IndustrialProcessing.itemSmallMachineCasing);
     }
 
 }

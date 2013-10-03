@@ -53,27 +53,25 @@ public class GuiGuide extends GuiScreen {
 	super.drawScreen(mouseX, mouseY, par3);
 	mc.renderEngine.func_110577_a(this.textureLocation);
 	GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-
 	GL11.glPushMatrix();
 	GL11.glTranslatef(0, 0, 64f);
 	int x = (width - X_SIZE) / 2;
 	int y = (height - Y_SIZE - 23) / 2;
-	GL11.glPushMatrix();
-	GL11.glTranslatef(0, 0, -48f);
 	for (int i = 0; i < pages.length; i++) {
 	    Point icon = pages[i].getIconLocation();
 	    boolean active = page == pages[i];
-	    if(active)
-		GL11.glTranslatef(0, 0, 48f);
-	    this.zLevel = active ? 10 : 0;
+	    GL11.glPushMatrix();
+	    if (active) {
+		GL11.glTranslatef(0, 0, 1f);
+	    } else {
+		GL11.glTranslatef(0, 0, -32f);
+	    }
 	    drawTab(SOURCE_INACTIVE_TAB, SOURCE_ACTIVE_TAB, new Point(TAB_OFFSET + i * TAB_WIDTH, 199), active);
 	    if (icon != null)
 		this.drawTexturedModalRect(x + TAB_OFFSET + i * TAB_WIDTH + 4, y + 200 + (active ? 4 : 0), icon.x, icon.y, 16, 16);
 	    this.zLevel = 0;
-	    if(active)
-		GL11.glTranslatef(0, 0, -48f);
+	    GL11.glPopMatrix();
 	}
-	GL11.glPopMatrix();
 
 	this.drawTexturedModalRect(x, y, 0, 0, X_SIZE, Y_SIZE);
 
@@ -85,9 +83,8 @@ public class GuiGuide extends GuiScreen {
 	}
 	if (this.page != null) {
 	    GL11.glDisable(GL11.GL_LIGHTING);
-	    GL11.glDisable(GL11.GL_DEPTH_TEST);
-	    this.fontRenderer.drawString("IP Guide", x + MARGIN_LEFT, y + MARGIN_TOP, 0xffffff);
-	    this.fontRenderer.drawString(this.page.getTitle(), x + MARGIN_LEFT, y + MARGIN_TOP + 10, 4210752);
+	    GL11.glDisable(GL11.GL_DEPTH_TEST); 
+	    this.fontRenderer.drawString("IP Guide "+this.page.getTitle(), x + MARGIN_LEFT, y + MARGIN_TOP, 4210752);
 	    GL11.glPushMatrix();
 	    GL11.glTranslatef(x, y, 0);
 	    this.page.drawScreen(mouseX - x, mouseY - y);
@@ -96,20 +93,22 @@ public class GuiGuide extends GuiScreen {
 	    GL11.glEnable(GL11.GL_DEPTH_TEST);
 	}
 	RenderHelper.enableGUIStandardItemLighting();
-	GL11.glPushMatrix();
-	GL11.glTranslatef(0, 0, -48f);
-	for (int i = 0; i < pages.length; i++) {
+	GL11.glTranslatef(0, 0, -32f);
 
+	for (int i = 0; i < pages.length; i++) {
+	    GL11.glPushMatrix();
+	    itemRenderer.zLevel = 0;
 	    ItemStack stack = pages[i].getIconStack();
 	    boolean active = page == pages[i];
-	    if(active)
-		GL11.glTranslatef(0, 0, 48f);
+	    if (active) {
+		GL11.glTranslatef(0, 0, 64f);
+	    }
+
 	    if (stack != null)
-		GuiTools.drawItemStack(stack, x + TAB_OFFSET + i * TAB_WIDTH + 4, y + 200 + (active ? 4 : 0), "paper?", itemRenderer, fontRenderer, this.mc.func_110434_K());
-	    if(active)
-		GL11.glTranslatef(0, 0, -48f);
+		GuiTools.drawItemStack(stack, x + TAB_OFFSET + i * TAB_WIDTH + 4, y + 200 + (active ? 4 : 0), null, itemRenderer, fontRenderer, this.mc.func_110434_K());
+
+	    GL11.glPopMatrix();
 	}
-	GL11.glPopMatrix();
 	GL11.glPopMatrix();
     }
 
