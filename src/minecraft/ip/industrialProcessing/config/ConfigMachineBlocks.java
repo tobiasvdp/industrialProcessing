@@ -21,6 +21,9 @@ import ip.industrialProcessing.machines.magneticSeparator.TileEntityMagneticSepa
 import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import ip.industrialProcessing.machines.oxygenFurnace.TileEntityOxygenFurnace;
 import ip.industrialProcessing.machines.pelletExtruder.TileEntityPelletExtruder;
+import ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator.TileEntityIncubator;
+import ip.industrialProcessing.machines.plants.waste.waterTreatment.tricklingFilter.TileEntityTricklingFilter;
+import ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatmentStation.TileEntityWaterTreatmentStation;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.TEmultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.core.block.elevator.TEmultiblockElevator;
@@ -86,6 +89,9 @@ public class ConfigMachineBlocks {
 	private int extruderID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(),"ExtruderID",551).getInt();
 	private int oxygenFurnaceID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(),"OxygenFurnaceID",552).getInt();
 	private int pelletExtruderID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(),"PelletExtruderID",553).getInt();
+	private int incubatorID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(),"incubatorID",554).getInt();
+	private int tricklingFilterID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(),"tricklingFilterID",555).getInt();
+	private int waterTreatmentStationID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(),"waterTreatmentStationID",556).getInt();
 
 	private int manualGeneratorBlockID = IndustrialProcessing.config.get(ConfigCategories.power.toString(),"ManualGeneratorID",800).getInt(); 
 	private int buildcraftGeneratorBlockID = IndustrialProcessing.config.get(ConfigCategories.power.toString(),"BCGeneratorID",801).getInt(); 
@@ -150,6 +156,10 @@ public class ConfigMachineBlocks {
 		// register entitys associated with multiblocks
 
 		// machines
+		registerMachineBlock(IndustrialProcessing.blockIncubator, "IP.Machine.Incubator", "Incubator", TileEntityIncubator.class);
+		registerMachineBlock(IndustrialProcessing.blockTricklingFilter, "IP.Machine.Trickler", "Trickling Filter", TileEntityTricklingFilter.class);
+		registerMachineBlock(IndustrialProcessing.blockWaterTreatmentStation, "IP.Machine.Treatment", "Water treatment station", TileEntityWaterTreatmentStation.class);
+		
 		registerMachineBlock(IndustrialProcessing.blockCrusher, "IP.Machine.Crusher", "Ore Crusher", TileEntityCrusher.class);
 		registerMachineBlock(IndustrialProcessing.blockFilter, "IP.Machine.Filter", "Ore Filter", TileEntityFilter.class);
 		registerMachineBlock(IndustrialProcessing.blockMageneticSeparator, "IP.Machine.Separator", "Magnetic Separator", TileEntityMagneticSeparator.class);
@@ -198,6 +208,16 @@ public class ConfigMachineBlocks {
 		return instance;
 	}
 
+	public static int getIncubatorID() {
+		return getInstance().incubatorID;
+	}
+	public static int getTricklingFilterID() {
+		return getInstance().tricklingFilterID;
+	}
+	public static int getWaterTreatmentStationID() {
+		return getInstance().waterTreatmentStationID;
+	}
+	
 	public static int getBLmultiblockBlastFurnaceTower() {
 		return getInstance().BLmultiblockBlastFurnaceTower;
 	}
