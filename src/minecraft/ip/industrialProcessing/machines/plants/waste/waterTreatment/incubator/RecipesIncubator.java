@@ -16,14 +16,14 @@ public class RecipesIncubator extends RecipesMachine{
 	}
 
 	private void addDefaultRecipes() {
-		addRecipe(rottenFleshToCulture(9000));
+		addRecipe(rottenFleshToCulture(12000));
 	}
 	
 	private Recipe rottenFleshToCulture(int workTime) {
 		Recipe recipe = new Recipe();
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.rottenFlesh.itemID, RecipeSlotType.INVENTORY, 1) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.rottenFlesh.itemID, RecipeSlotType.INVENTORY, 3) };
 
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemGrownCulture.itemID, RecipeSlotType.INVENTORY, 5, 20, 0) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemGrownCulture.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
 		recipe.workRequired = workTime;
 		return recipe;
 	}

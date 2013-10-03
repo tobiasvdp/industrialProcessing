@@ -83,16 +83,22 @@ public class ConfigItems {
 	private int itemGoldDustID = 6576;
 	private int itemTaliaDustID = 6577;
 	private int itemLeadDustID = 6578;
+	private int itemCoalDustID = 6579;
 
-	private int itemHexKeyID = 6579;
-	private int itemWrenchID = 6580;
-	private int itemGuideID = 6581;
-	private int itemGrownCultureID = 6582;
+	private int itemHexKeyID = 6580;
+	private int itemWrenchID = 6581;
+	private int itemGuideID = 6582;
+	private int itemGrownCultureID = 6583;
+	private int itemActiveCoalID = 6584;
 
 	public static int itemGrownCultureID() {
 		return getInstance().itemGrownCultureID;
 	}
 
+	public static int itemActiveCoalID() {
+		return getInstance().itemActiveCoalID;
+	}
+	
 	public static int itemWrenchID() {
 		return getInstance().itemWrenchID;
 	}
@@ -120,7 +126,9 @@ public class ConfigItems {
 	public static int itemChromiteDustID() {
 		return getInstance().itemChromiteDustID;
 	}
-
+	public static int itemCoalDustID() {
+		return getInstance().itemCoalDustID;
+	}
 	public static int itemGoldDustID() {
 		return getInstance().itemGoldDustID;
 	}
@@ -414,6 +422,8 @@ public class ConfigItems {
 	}
 
 	public static void addToLanguageRegistry() {
+		LanguageRegistry.addName(IndustrialProcessing.itemActiveCoal, "Activated coal");
+		LanguageRegistry.addName(IndustrialProcessing.itemCoalDust, "Coal dust");
 		LanguageRegistry.addName(IndustrialProcessing.itemGrownCulture, "Grown culture");
 		LanguageRegistry.addName(IndustrialProcessing.itemWrench, "Wrench");
 		LanguageRegistry.addName(IndustrialProcessing.itemHexKey, "Hex Key");
