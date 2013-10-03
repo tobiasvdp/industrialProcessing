@@ -1,6 +1,7 @@
 package ip.industrialProcessing.items;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.client.render.gui.GuiTools;
 import ip.industrialProcessing.client.render.gui.ToolTip;
 
 import java.awt.Point;
@@ -8,19 +9,24 @@ import java.awt.Rectangle;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
 public class GuiGuide extends GuiScreen {
 
+    protected static RenderItem itemRenderer = new RenderItem();
     private static final int X_SIZE = 256;
     private static final int Y_SIZE = 202;
     private static final Rectangle SOURCE_ACTIVE_TAB = new Rectangle(24, 202, 24, 26);
     private static final Rectangle SOURCE_INACTIVE_TAB = new Rectangle(0, 202, 24, 26);
-    private static final GuidePage[] pages = new GuidePage[] { new GuideTreePage(), new GuideTreePage(), new GuideTreePage(), new GuideTreePage(), new GuideTreePage() };
+    private static final GuidePage[] pages = new GuidePage[] { new GuideCraftingPage(), new GuideToolPage(), new GuideTreePage() };
     private static final int TAB_OFFSET = 3;
     private static final int TAB_WIDTH = 24;
     private static final int MARGIN_LEFT = 10;
@@ -47,20 +53,29 @@ public class GuiGuide extends GuiScreen {
 	super.drawScreen(mouseX, mouseY, par3);
 	mc.renderEngine.func_110577_a(this.textureLocation);
 	GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
- 
+
+	GL11.glPushMatrix();
+	GL11.glTranslatef(0, 0, 64f);
 	int x = (width - X_SIZE) / 2;
 	int y = (height - Y_SIZE - 23) / 2;
+	GL11.glPushMatrix();
+	GL11.glTranslatef(0, 0, -48f);
 	for (int i = 0; i < pages.length; i++) {
 	    Point icon = pages[i].getIconLocation();
 	    boolean active = page == pages[i];
+	    if(active)
+		GL11.glTranslatef(0, 0, 48f);
 	    this.zLevel = active ? 10 : 0;
 	    drawTab(SOURCE_INACTIVE_TAB, SOURCE_ACTIVE_TAB, new Point(TAB_OFFSET + i * TAB_WIDTH, 199), active);
-	    this.drawTexturedModalRect(x+TAB_OFFSET + i * TAB_WIDTH+4, y+200 + (active ? 4 : 0), icon.x, icon.y, 16, 16);
-	    this.zLevel=0;
+	    if (icon != null)
+		this.drawTexturedModalRect(x + TAB_OFFSET + i * TAB_WIDTH + 4, y + 200 + (active ? 4 : 0), icon.x, icon.y, 16, 16);
+	    this.zLevel = 0;
+	    if(active)
+		GL11.glTranslatef(0, 0, -48f);
 	}
-	
-	this.drawTexturedModalRect(x, y, 0, 0, X_SIZE, Y_SIZE);
+	GL11.glPopMatrix();
 
+	this.drawTexturedModalRect(x, y, 0, 0, X_SIZE, Y_SIZE);
 
 	int tab = hoverTab(mouseX, mouseY);
 	if (tab >= 0) {
@@ -80,6 +95,22 @@ public class GuiGuide extends GuiScreen {
 	    GL11.glEnable(GL11.GL_LIGHTING);
 	    GL11.glEnable(GL11.GL_DEPTH_TEST);
 	}
+	RenderHelper.enableGUIStandardItemLighting();
+	GL11.glPushMatrix();
+	GL11.glTranslatef(0, 0, -48f);
+	for (int i = 0; i < pages.length; i++) {
+
+	    ItemStack stack = pages[i].getIconStack();
+	    boolean active = page == pages[i];
+	    if(active)
+		GL11.glTranslatef(0, 0, 48f);
+	    if (stack != null)
+		GuiTools.drawItemStack(stack, x + TAB_OFFSET + i * TAB_WIDTH + 4, y + 200 + (active ? 4 : 0), "paper?", itemRenderer, fontRenderer, this.mc.func_110434_K());
+	    if(active)
+		GL11.glTranslatef(0, 0, -48f);
+	}
+	GL11.glPopMatrix();
+	GL11.glPopMatrix();
     }
 
     @Override
@@ -93,7 +124,8 @@ public class GuiGuide extends GuiScreen {
 
 	x -= (width - X_SIZE) / 2;
 	y -= (height - Y_SIZE - 23) / 2;
-	this.page.mouseClicked(x, y, par3);
+	if (page != null)
+	    this.page.mouseClicked(x, y, par3);
     }
 
     private int hoverTab(int x, int y) {

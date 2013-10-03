@@ -5,7 +5,8 @@ import java.awt.Point;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
- 
+import net.minecraft.item.ItemStack;
+
 public abstract class GuidePage extends Gui {
     private FontRenderer fontRenderer;
     private Minecraft mc;
@@ -23,4 +24,6 @@ public abstract class GuidePage extends Gui {
 
     public void mouseClicked(double d, double e, int par3) {
     }
+
+    public abstract ItemStack getIconStack();
 }

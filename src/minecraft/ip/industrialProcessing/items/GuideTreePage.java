@@ -1,14 +1,17 @@
 package ip.industrialProcessing.items;
 
+import ip.industrialProcessing.IndustrialProcessing;
+
 import java.awt.Point;
+
+import net.minecraft.item.ItemStack;
  
 
 public class GuideTreePage extends GuidePage {
 
     @Override
-    public String getTitle() {
-	// TODO Auto-generated method stub
-	return null;
+    public String getTitle() { 
+	return "Ore Processing";
     }
 
     @Override
@@ -19,7 +22,12 @@ public class GuideTreePage extends GuidePage {
 
     @Override
     public Point getIconLocation() { 
-	return new Point(0, 228);
+	return null;
+    }
+
+    @Override
+    public ItemStack getIconStack() { 
+	return new ItemStack(IndustrialProcessing.itemIronFineChunks);
     }
 
 }
