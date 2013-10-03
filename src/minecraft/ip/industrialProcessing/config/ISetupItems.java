@@ -99,4 +99,6 @@ public interface ISetupItems {
     public final static ItemIP itemWrench = new ItemIP(ConfigItems.itemWrenchID(), "itemWrench",IndustrialProcessing.tabPower);
     
     public final static ItemGuide itemGuide = new ItemGuide(ConfigItems.getItemGuideID(), "itemGuide", IndustrialProcessing.tabPower);
+    
+    public final static ItemIP itemGrownCulture = new ItemIP(ConfigItems.itemGrownCultureID(), "itemGrownCulture", IndustrialProcessing.tabOres);
 }
