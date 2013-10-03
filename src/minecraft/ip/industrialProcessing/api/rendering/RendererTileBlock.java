@@ -24,6 +24,7 @@ public class RendererTileBlock implements ISimpleBlockRenderingHandler{
 
     public void render(RenderBlocks renderBlocks, IBlockAccess iblockaccess, Block par1Block, int par2, int par3, int par4)
     {
+    	/*
         renderBlocks.overrideBlockTexture = par1Block.getBlockTexture(iblockaccess, par2, par3, par4, 0);
 
 
@@ -32,6 +33,7 @@ public class RendererTileBlock implements ISimpleBlockRenderingHandler{
 
 
         renderBlocks.clearOverrideBlockTexture();
+        */
     }
   
     @Override

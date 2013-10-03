@@ -17,10 +17,12 @@ import ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator.Bl
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.tricklingFilter.BlockTricklingFilter;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatmentStation.BlockWaterTreatmentStation;
 import ip.industrialProcessing.machines.thickener.BlockThickener;
+import ip.industrialProcessing.multiblock.core.block.blastFurnace.BLmultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.core.block.elevator.BLmultiblockElevator;
 import ip.industrialProcessing.multiblock.core.block.hotPress.BLmultiblockHotPress;
 import ip.industrialProcessing.multiblock.core.block.rollingPress.BLmultiblockRollingPress;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.BLmultiblockWeldingStation;
+import ip.industrialProcessing.multiblock.dummy.block.blastFurnaceTower.BLmultiblockBlastFurnaceTower;
 import ip.industrialProcessing.multiblock.dummy.block.displayPanel.BLmultiblockDisplayPanel;
 import ip.industrialProcessing.multiblock.dummy.block.frame.BLmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.inventory.input.BLmultiblockInvInput;
@@ -111,7 +113,8 @@ public interface ISetupMachineBlocks {
 	public final static BLmultiblockRollingPress BLmultiblockRollingPress = new BLmultiblockRollingPress();
 	public final static BLmultiblockWheelConnector BLmultiblockWheelConnector = new BLmultiblockWheelConnector();
 	public final static BLmultiblockDisplayPanel BLmultiblockDisplayPanel = new BLmultiblockDisplayPanel();
-
+	public final static BLmultiblockBlastFurnace BLmultiblockBlastFurnace = new BLmultiblockBlastFurnace();
+	public final static BLmultiblockBlastFurnaceTower BLmultiblockBlastFurnaceTower = new BLmultiblockBlastFurnaceTower();
 	// transport
 	public final static BlockConveyorBelt blockConveyorBelt = new BlockConveyorBelt();
 	public final static BlockConveyorInput blockConveyorBeltInput = new BlockConveyorInput();
