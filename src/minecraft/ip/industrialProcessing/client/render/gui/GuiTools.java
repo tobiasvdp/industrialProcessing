@@ -39,14 +39,15 @@ public class GuiTools {
     }
 
     public static void drawItemStack(ItemStack par1ItemStack, int par2, int par3, String par4Str, RenderItem itemRenderer, FontRenderer fontRenderer, TextureManager textureManager) {
-	GL11.glTranslatef(0.0F, 0.0F, 16.0F);
+
 	FontRenderer font = null;
 	if (par1ItemStack != null)
 	    font = par1ItemStack.getItem().getFontRenderer(par1ItemStack);
 	if (font == null)
 	    font = fontRenderer;
 	itemRenderer.renderItemAndEffectIntoGUI(font, textureManager, par1ItemStack, par2, par3);
-	//itemRenderer.renderItemOverlayIntoGUI(font, textureManager, par1ItemStack, par2, par3, par4Str);
+	if (par4Str != null)
+	    itemRenderer.renderItemOverlayIntoGUI(font, textureManager, par1ItemStack, par2, par3, par4Str);
 
     }
 }
