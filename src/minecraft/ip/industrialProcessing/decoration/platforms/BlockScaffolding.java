@@ -32,11 +32,12 @@ public class BlockScaffolding extends BlockDecoration {
 					ForgeDirection placeTarget = BlockMachine.getForwardFromMetadata(dir).getOpposite();
 
 					if (placeScaffolding(par1World, par2, par3, par4, stack, placeTarget, par5EntityPlayer, 0)) {
-						// TODO: if not creative
-						stack.stackSize--;
-						if (stack.stackSize <= 0)
-							par5EntityPlayer.inventory.setInventorySlotContents(par5EntityPlayer.inventory.currentItem, null);
-						return true;
+						if(!par5EntityPlayer.capabilities.isCreativeMode){
+							stack.stackSize--;
+							if (stack.stackSize <= 0)
+								par5EntityPlayer.inventory.setInventorySlotContents(par5EntityPlayer.inventory.currentItem, null);
+							return true;
+						}
 					}
 				}
 			}
