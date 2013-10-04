@@ -56,4 +56,9 @@ public interface ISetupFluids {
     
     public final static ItemFluid itemFluidSteam = new ItemFluid("Steam", 1000, 1000);
     public final static BlockFluid blockFluidSteam = new BlockFluid(ConfigFluids.blockFluidBaseSteamID(), itemFluidSteam, Material.water, IndustrialProcessing.tabOres, false);
+    
+    public final static ItemFluid itemFluidfiltyWater = new ItemFluid("filtyWater", 2000, 2000);
+    public final static BlockFluid blockFluidfiltyWater = new BlockFluid(ConfigFluids.blockFluidBasefiltyWaterID(), itemFluidfiltyWater, Material.fire, IndustrialProcessing.tabOres, false);
+    public final static ContainerFluid bucketfiltyWater = new ContainerFluid(ConfigFluids.BucketfiltyWaterID(), itemFluidfiltyWater, blockFluidfiltyWater, "ContainerfiltyWater");
+    
 }

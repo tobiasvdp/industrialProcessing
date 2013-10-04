@@ -11,22 +11,24 @@ import ip.industrialProcessing.machines.TileEntityPoweredWorkerMachine;
 import ip.industrialProcessing.machines.crusher.RecipesCrusher;
 import ip.industrialProcessing.recipes.Recipe;
 
-public class TileEntityIncubator extends TileEntityPoweredWorkerMachine{
-	public static RecipesIncubator recipes = new RecipesIncubator();
-	public TileEntityIncubator() {
-		super(LocalDirection.LEFT, 10000,100);
-		
-		this.addStack(null, LocalDirection.UP, true, false);
-		this.addStack(null, LocalDirection.DOWN, false, true);
-	}
+public class TileEntityIncubator extends TileEntityPoweredWorkerMachine {
+    public static RecipesIncubator recipes = new RecipesIncubator();
 
-	@Override
-	public Iterator<Recipe> iterateRecipes() {
-		return recipes.iterator();
-	}
+    public TileEntityIncubator() {
+	super(LocalDirection.LEFT, 10000, 100);
 
-	@Override
-	protected boolean isValidInput(int slot, int itemID) {
-		return recipes.isValidInput(slot, itemID);
-	}
+	this.addStack(null, LocalDirection.UP, true, false);
+	this.addStack(null, LocalDirection.DOWN, false, true);
+    }
+
+    @Override
+    public Iterator<Recipe> iterateRecipes() {
+	return recipes.iterator();
+    }
+
+    @Override
+    protected boolean isValidInput(int slot, int itemID) {
+	return recipes.isValidInput(slot, itemID);
+    }
+
 }
