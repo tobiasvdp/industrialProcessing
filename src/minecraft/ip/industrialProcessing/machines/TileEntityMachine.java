@@ -129,7 +129,7 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
 		if (stack == null || stack.stackSize == 0)
 			return true;
 		MachineItemStack machineStack = itemStacks.get(slot);
-		return machineStack != null && (machineStack.stack == null || (machineStack.stack.itemID == stack.itemID && (machineStack.stack.stackSize + stack.stackSize < getInventoryStackLimit())));
+		return machineStack != null && (machineStack.stack == null || (machineStack.stack.itemID == stack.itemID && (machineStack.stack.stackSize + stack.stackSize < stack.getMaxStackSize())));
 	}
 
 	@Override
@@ -137,7 +137,7 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
 		if (amount == 0)
 			return true;
 		MachineItemStack machineStack = itemStacks.get(slot);
-		return machineStack != null && (machineStack.stack == null || (machineStack.stack.itemID == itemId && (machineStack.stack.stackSize + amount < getInventoryStackLimit())));
+		return machineStack != null && (machineStack.stack == null || (machineStack.stack.itemID == itemId && (machineStack.stack.stackSize + amount < machineStack.stack.getMaxStackSize())));
 	}
 
 	protected void addStack(ItemStack stack, LocalDirection side, boolean input, boolean output) {
@@ -241,6 +241,10 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
 	public int getInventoryStackLimit() {
 		return 64;
 	}
+	
+	public int getInventoryStackLimit(int slot) {
+		return 64;
+	}
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
@@ -295,7 +299,8 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
 
 	@Override
 	public boolean damageItem(int slot, int itemId) {
-		return false;
+		itemStacks.get(slot).stack.setItemDamage(itemStacks.get(slot).stack.getItemDamage()+1);
+		return itemStacks.get(slot).stack.getItemDamage()>=itemStacks.get(slot).stack.getMaxDamage();
 	}
 
 	public void setForwardDirection(ForgeDirection forwardFromMetadata) {

@@ -84,6 +84,7 @@ public interface ISetupItems {
     public final static ItemIP itemRutileSmallCrushedCrystals = new ItemIP(ConfigItems.itemRutileSmallCrushedCrystalsID(), "itemRutileSmallCrushedCrystals",IndustrialProcessing.tabOres);
     public final static ItemIP itemRutileFineCrushedCrystals = new ItemIP(ConfigItems.itemRutileFineCrushedCrystalsID(), "itemRutileFineCrushedCrystals",IndustrialProcessing.tabOres);
     public final static ItemIP itemRutileDust = new ItemIP(ConfigItems.itemRutileDustID(), "itemRutileDust",IndustrialProcessing.tabOres);
+    public final static ItemIP itemCoalDust = new ItemIP(ConfigItems.itemCoalDustID(), "itemCoalDust",IndustrialProcessing.tabOres);
     
     public final static ItemIP itemThickStick = new ItemIP(ConfigItems.ItemThickStick(), "ItemThickStick",IndustrialProcessing.tabOreProcessing);
     public final static ItemDamage itemHammer = new ItemDamage(ConfigItems.ItemHammer(), "ItemHammer",IndustrialProcessing.tabOreProcessing);
@@ -99,4 +100,7 @@ public interface ISetupItems {
     public final static ItemIP itemWrench = new ItemIP(ConfigItems.itemWrenchID(), "itemWrench",IndustrialProcessing.tabPower);
     
     public final static ItemGuide itemGuide = new ItemGuide(ConfigItems.getItemGuideID(), "itemGuide", IndustrialProcessing.tabPower);
+    
+    public final static ItemDamage itemGrownCulture = new ItemDamage(ConfigItems.itemGrownCultureID(), "itemGrownCulture", IndustrialProcessing.tabOres,20);
+    public final static ItemDamage itemActiveCoal = new ItemDamage(ConfigItems.itemActiveCoalID(), "itemActiveCoalDust", IndustrialProcessing.tabOres,25);
 }

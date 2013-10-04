@@ -53,6 +53,9 @@ public class ConfigFluids {
 	private int blockFluidBaseOreSludgeGoldID = IndustrialProcessing.config.get(ConfigCategories.fluids.toString(),"GoldSludgeID",offset+22).getInt();
 	private int blockFluidBaseOreSludgeTaliaID = IndustrialProcessing.config.get(ConfigCategories.fluids.toString(),"TaliaSludgeID",offset+23).getInt();
 	
+	private int blockFluidBasefiltyWaterID = offset+24;
+	private int BucketfiltyWaterID = offset+25;
+	
 	public static int bucketOreSludgeChromiteID(){return getInstance().bucketOreSludgeChromiteID;}
 	public static int bucketOreSludgeGalenaID(){return getInstance().bucketOreSludgeGalenaID;}
 	public static int bucketOreSludgeGoldID(){return getInstance().bucketOreSludgeGoldID;}
@@ -79,9 +82,13 @@ public class ConfigFluids {
 	public static int blockFluidBaseExhaustGasID() {return getInstance().blockFluidBaseExhaustGasID ;}
 	public static int blockFluidBaseSteamID() {return getInstance().blockFluidBaseSteamID ;}
 	
+	public static int blockFluidBasefiltyWaterID() {return getInstance().blockFluidBasefiltyWaterID ;}
+	public static int BucketfiltyWaterID() {return getInstance().BucketfiltyWaterID ;}
 	public void registerFluids(){
 		registerFluid(IndustrialProcessing.blockFluidDirtyWater, IndustrialProcessing.itemFluidDirtyWater, IndustrialProcessing.bucketDirtyWater, "Dirty water");
 		LanguageRegistry.addName(IndustrialProcessing.bucketDirtyWater, "Dirty water Bucket");
+		registerFluid(IndustrialProcessing.blockFluidfiltyWater, IndustrialProcessing.itemFluidfiltyWater, IndustrialProcessing.bucketfiltyWater, "Filty water");
+		LanguageRegistry.addName(IndustrialProcessing.bucketfiltyWater, "Filty water Bucket");
 		registerFluid(IndustrialProcessing.blockFluidOreSludgeIron, IndustrialProcessing.itemFluidOreSludgeIron, IndustrialProcessing.bucketOreSludgeIron, "Iron ore sludge");
 		LanguageRegistry.addName(IndustrialProcessing.bucketOreSludgeIron, "Iron sludge Bucket");
 		registerFluid(IndustrialProcessing.blockFluidOreSludgeCopper, IndustrialProcessing.itemFluidOreSludgeCopper, IndustrialProcessing.bucketOreSludgeCopper, "Copper ore sludge");

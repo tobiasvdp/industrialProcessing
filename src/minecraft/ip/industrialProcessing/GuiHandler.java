@@ -40,6 +40,15 @@ import ip.industrialProcessing.machines.oxygenFurnace.TileEntityOxygenFurnace;
 import ip.industrialProcessing.machines.pelletExtruder.ContainerPelletExtruder;
 import ip.industrialProcessing.machines.pelletExtruder.GuiContainerPelletExtruder;
 import ip.industrialProcessing.machines.pelletExtruder.TileEntityPelletExtruder;
+import ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator.ContainerIncubator;
+import ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator.GuiContainerIncubator;
+import ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator.TileEntityIncubator;
+import ip.industrialProcessing.machines.plants.waste.waterTreatment.tricklingFilter.ContainerTricklingFilter;
+import ip.industrialProcessing.machines.plants.waste.waterTreatment.tricklingFilter.GuiContainerTricklingFilter;
+import ip.industrialProcessing.machines.plants.waste.waterTreatment.tricklingFilter.TileEntityTricklingFilter;
+import ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatmentStation.ContainerWaterTreatmentStation;
+import ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatmentStation.GuiContainerWaterTreatmentStation;
+import ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatmentStation.TileEntityWaterTreatmentStation;
 import ip.industrialProcessing.machines.thickener.ContainerThickener;
 import ip.industrialProcessing.machines.thickener.GuiContainerThickener;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
@@ -117,6 +126,12 @@ public class GuiHandler implements IGuiHandler {
 		return new ContainerTurbine(player.inventory, (TileEntityTurbine) entity);
 	    if (entity instanceof TEmultiblockWeldingStation)
 		return new CTWeldingStation(player.inventory, (TEmultiblockWeldingStation) entity);
+	    if (entity instanceof TileEntityIncubator)
+		return new ContainerIncubator(player.inventory, (TileEntityIncubator) entity);
+	    if (entity instanceof TileEntityWaterTreatmentStation)
+		return new ContainerWaterTreatmentStation(player.inventory, (TileEntityWaterTreatmentStation) entity);
+	    if (entity instanceof TileEntityTricklingFilter)
+		return new ContainerTricklingFilter(player.inventory, (TileEntityTricklingFilter) entity);
 	} else if (ID == GUIDE_ID) {
 	    return null;
 	}
@@ -170,6 +185,12 @@ public class GuiHandler implements IGuiHandler {
 		return new GUIWeldingStation(player.inventory, (TEmultiblockWeldingStation) entity);
 	    if (entity instanceof TEmultiblockToggleButton)
 		return new GUImultiblockToggleButton((TEmultiblockToggleButton) entity, player);
+	    if (entity instanceof TileEntityIncubator)
+		return new GuiContainerIncubator(player.inventory, (TileEntityIncubator) entity);
+	    if (entity instanceof TileEntityWaterTreatmentStation)
+		return new GuiContainerWaterTreatmentStation(player.inventory, (TileEntityWaterTreatmentStation) entity);
+	    if (entity instanceof TileEntityTricklingFilter)
+		return new GuiContainerTricklingFilter(player.inventory, (TileEntityTricklingFilter) entity);
 	}else if(ID == GUIDE_ID)
 	{
 	    return new GuiGuide(player);

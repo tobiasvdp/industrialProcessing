@@ -2,30 +2,33 @@ package ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator;
 
 import java.util.Iterator;
 
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
+import ip.industrialProcessing.machines.TileEntityPoweredWorkerMachine;
+import ip.industrialProcessing.machines.crusher.RecipesCrusher;
 import ip.industrialProcessing.recipes.Recipe;
 
-public class TileEntityIncubator extends TileEntityPoweredFluidWorkerMachine{
-	public TileEntityIncubator() {
-		super(LocalDirection.LEFT, 10000);
-	}
+public class TileEntityIncubator extends TileEntityPoweredWorkerMachine {
+    public static RecipesIncubator recipes = new RecipesIncubator();
 
-	@Override
-	public Iterator<Recipe> iterateRecipes() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public TileEntityIncubator() {
+	super(LocalDirection.LEFT, 10000, 100);
 
-	@Override
-	protected boolean isTankValidForFluid(int slot, int fluidId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	this.addStack(null, LocalDirection.UP, true, false);
+	this.addStack(null, LocalDirection.DOWN, false, true);
+    }
 
-	@Override
-	protected boolean isValidInput(int slot, int itemID) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public Iterator<Recipe> iterateRecipes() {
+	return recipes.iterator();
+    }
+
+    @Override
+    protected boolean isValidInput(int slot, int itemID) {
+	return recipes.isValidInput(slot, itemID);
+    }
+
 }
