@@ -41,7 +41,7 @@ public class TileEntityDiskFilter extends TileEntityPoweredFluidWorkerMachine {
 		super.updateEntity();
 	};
 
-	private static RecipesDiskFilter recipes = new RecipesDiskFilter();
+	public static RecipesDiskFilter recipes = new RecipesDiskFilter();
 
 	@Override
 	public Iterator<Recipe> iterateRecipes() {

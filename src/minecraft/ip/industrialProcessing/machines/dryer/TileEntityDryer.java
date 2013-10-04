@@ -38,7 +38,7 @@ public class TileEntityDryer extends TileEntityPoweredFluidWorkerMachine {
 		super.updateEntity();
 	};
 
-	private static RecipesDryer recipes = new RecipesDryer();
+	public static RecipesDryer recipes = new RecipesDryer();
 
 	@Override
 	public boolean hasWork() {

@@ -45,7 +45,7 @@ public class TileEntityClassifier extends TileEntityPoweredFluidWorkerMachine im
 			TileTankSyncHandler.sendTankData(this, this.tankHandler);
 	}
 
-	private static RecipesClassifier recipes = new RecipesClassifier();
+	public static RecipesClassifier recipes = new RecipesClassifier();
 
 	@Override
 	public Iterator<Recipe> iterateRecipes() {

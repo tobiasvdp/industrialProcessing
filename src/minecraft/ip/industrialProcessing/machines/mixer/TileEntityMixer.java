@@ -15,7 +15,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class TileEntityMixer extends TileEntityPoweredFluidWorkerMachine implements ITankSyncable {
 
-	private static RecipesMixer recipes = new RecipesMixer();
+	public static RecipesMixer recipes = new RecipesMixer();
 
 	private TankHandler tankHandler;
 
