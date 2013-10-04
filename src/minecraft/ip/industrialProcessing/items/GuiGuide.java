@@ -39,7 +39,7 @@ public class GuiGuide extends GuiScreen {
 
     public GuiGuide(EntityPlayer player) {
 	this.player = player;
-	this.textureLocation = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/Guide.png");
+	this.textureLocation = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/Guide.png"); 
     }
 
     @Override
@@ -83,14 +83,12 @@ public class GuiGuide extends GuiScreen {
 	}
 	if (this.page != null) {
 	    GL11.glDisable(GL11.GL_LIGHTING);
-	    GL11.glDisable(GL11.GL_DEPTH_TEST); 
-	    this.fontRenderer.drawString("IP Guide "+this.page.getTitle(), x + MARGIN_LEFT, y + MARGIN_TOP, 4210752);
-	    GL11.glPushMatrix();
-	    GL11.glTranslatef(x, y, 0);
-	    this.page.drawScreen(mouseX - x, mouseY - y);
-	    GL11.glPopMatrix();
+	    GL11.glDisable(GL11.GL_DEPTH_TEST);
+	    this.fontRenderer.drawString("IP Guide " + this.page.getTitle(), x + MARGIN_LEFT, y + MARGIN_TOP, 4210752);
+	    mc.renderEngine.func_110577_a(this.textureLocation);
+	    this.page.drawScreen(mouseX, mouseY, x, y); 
 	    GL11.glEnable(GL11.GL_LIGHTING);
-	    GL11.glEnable(GL11.GL_DEPTH_TEST);
+	    GL11.glEnable(GL11.GL_DEPTH_TEST); 
 	}
 	RenderHelper.enableGUIStandardItemLighting();
 	GL11.glTranslatef(0, 0, -32f);
@@ -125,6 +123,14 @@ public class GuiGuide extends GuiScreen {
 	y -= (height - Y_SIZE - 23) / 2;
 	if (page != null)
 	    this.page.mouseClicked(x, y, par3);
+    }
+    
+    @Override
+    protected void mouseMovedOrUp(int x, int y, int par3) {
+        // TODO Auto-generated method stub
+        super.mouseMovedOrUp(x, y, par3);
+	if (page != null)
+	    this.page.mouseUp(x, y, par3);
     }
 
     private int hoverTab(int x, int y) {

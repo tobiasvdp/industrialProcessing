@@ -18,7 +18,7 @@ public class GuideCraftingPage extends GuidePage {
     }
 
     @Override
-    public void drawScreen(int i, int j) {
+    public void drawScreen(int mouseX, int mouseY, int x, int y) {
 	 
     }
 

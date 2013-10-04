@@ -24,12 +24,12 @@ public class GuideToolPage extends GuidePage {
     }
 
     @Override
-    public void drawScreen(int mouseX, int mouseY) {
+    public void drawScreen(int mouseX, int mouseY, int x, int y) {
 	int i = 0;
-	drawItemStack(new ItemStack(IndustrialProcessing.itemWrench), 10, ++i * 26 + 10, "Used to rotate machines");
-	drawItemStack(new ItemStack(IndustrialProcessing.itemHexKey), 10, ++i * 26 + 10, "Used to modify machines");
-	drawItemStack(new ItemStack(IndustrialProcessing.itemBlowingTorch), 10, ++i * 26 + 10, "Used in the welding table");
-	drawItemStack(new ItemStack(IndustrialProcessing.itemHammer), 10, ++i * 26 + 10, "Used to do stuff");
+	drawItemStack(new ItemStack(IndustrialProcessing.itemWrench), x + 10, ++i * 26 + 10 + y, "Used to rotate machines");
+	drawItemStack(new ItemStack(IndustrialProcessing.itemHexKey), x + 10, ++i * 26 + 10 + y, "Used to modify machines");
+	drawItemStack(new ItemStack(IndustrialProcessing.itemBlowingTorch), x + 10, ++i * 26 + 10 + y, "Used in the welding table");
+	drawItemStack(new ItemStack(IndustrialProcessing.itemHammer), x + 10, ++i * 26 + 10 + y, "Used to do stuff");
     }
 
     private void drawItemStack(ItemStack stack, int x, int y, String description) {
