@@ -7,7 +7,7 @@ import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 public class CenterPiece001 extends ObjMesh{
 	public CenterPiece001(){
-		this.quads = new ObjQuad[61];
+		this.quads = new ObjQuad[65];
 		this.quads[0] = new ObjQuad(new Vector3f(-0.3f, 0.6f, -0.3f),new Vector3f(-0.3f, 0.6f, 0.3f),new Vector3f(-0.3f, 0.8f, 0.3f),new Vector3f(-0.3f, 0.8f, -0.3f),new Vector2f(0.7505f, 0.5625f),new Vector2f(0.7505f, 0.9375f),new Vector2f(0.6255f, 0.9375f),new Vector2f(0.6255f, 0.5625f),new Vector3f(-4.0f, 0.0f, 0.0f));
 		this.quads[1] = new ObjQuad(new Vector3f(0.3f, 0.6f, 0.3f),new Vector3f(0.3f, 0.6f, -0.3f),new Vector3f(0.3f, 0.8f, -0.3f),new Vector3f(0.3f, 0.8f, 0.3f),new Vector2f(0.7505f, 0.5625f),new Vector2f(0.7505f, 0.9375f),new Vector2f(0.6255f, 0.9375f),new Vector2f(0.6255f, 0.5625f),new Vector3f(4.0f, 0.0f, 0.0f));
 		this.quads[2] = new ObjQuad(new Vector3f(0.4f, 0.5f, -0.4f),new Vector3f(0.4f, 0.5f, 0.4f),new Vector3f(-0.4f, 0.5f, 0.4f),new Vector3f(-0.4f, 0.5f, -0.4f),new Vector2f(0.5f, 0.5f),new Vector2f(0.0f, 0.5f),new Vector2f(0.0f, 0.0f),new Vector2f(0.5f, 0.0f),new Vector3f(0.0f, -4.0f, 0.0f));
@@ -69,6 +69,10 @@ public class CenterPiece001 extends ObjMesh{
 		this.quads[58] = new ObjQuad(new Vector3f(0.2f, 0.1f, -0.2f),new Vector3f(0.3f, 0.1f, -0.2f),new Vector3f(0.3f, 0.5f, -0.2f),new Vector3f(0.2f, 0.5f, -0.2f),new Vector2f(0.75f, 0.5f),new Vector2f(0.6875f, 0.5f),new Vector2f(0.6875f, 0.25f),new Vector2f(0.75f, 0.25f),new Vector3f(4.0E-6f, 0.0f, 4.0f));
 		this.quads[59] = new ObjQuad(new Vector3f(-0.3f, 0.6f, -0.3f),new Vector3f(-0.3f, 0.8f, -0.3f),new Vector3f(0.3f, 0.8f, -0.3f),new Vector3f(0.3f, 0.6f, -0.3f),new Vector2f(0.75f, 0.938f),new Vector2f(0.625f, 0.938f),new Vector2f(0.625f, 0.563f),new Vector2f(0.75f, 0.563f),new Vector3f(0.0f, 0.0f, -4.0f));
 		this.quads[60] = new ObjQuad(new Vector3f(0.3f, 0.6f, 0.3f),new Vector3f(0.3f, 0.8f, 0.3f),new Vector3f(-0.3f, 0.8f, 0.3f),new Vector3f(-0.3f, 0.6f, 0.3f),new Vector2f(0.75f, 0.938f),new Vector2f(0.625f, 0.938f),new Vector2f(0.625f, 0.563f),new Vector2f(0.75f, 0.563f),new Vector3f(0.0f, 0.0f, 4.0f));
+		this.quads[61] = new ObjQuad(new Vector3f(-0.3f, 0.6f, -0.3f),new Vector3f(-0.4f, 0.6f, -0.300002f),new Vector3f(-0.4f, 0.6f, 0.3f),new Vector3f(-0.3f, 0.6f, 0.3f),new Vector2f(0.8125f, 0.9375f),new Vector2f(0.75f, 0.937501f),new Vector2f(0.75f, 0.5625f),new Vector2f(0.8125f, 0.5625f),new Vector3f(0.0f, 4.0f, 0.0f));
+		this.quads[62] = new ObjQuad(new Vector3f(0.3f, 0.8f, -0.3f),new Vector3f(0.4f, 0.8f, -0.3f),new Vector3f(0.4f, 0.8f, 0.3f),new Vector3f(0.3f, 0.8f, 0.3f),new Vector2f(0.625f, 0.9375f),new Vector2f(0.5625f, 0.9375f),new Vector2f(0.5625f, 0.5625f),new Vector2f(0.625f, 0.5625f),new Vector3f(0.0f, -4.0f, 0.0f));
+		this.quads[63] = new ObjQuad(new Vector3f(0.3f, 0.6f, 0.3f),new Vector3f(0.4f, 0.6f, 0.3f),new Vector3f(0.4f, 0.6f, -0.3f),new Vector3f(0.3f, 0.6f, -0.3f),new Vector2f(0.75f, 0.5625f),new Vector2f(0.8125f, 0.5625f),new Vector2f(0.8125f, 0.9375f),new Vector2f(0.75f, 0.9375f),new Vector3f(0.0f, 4.0f, 0.0f));
+		this.quads[64] = new ObjQuad(new Vector3f(-0.3f, 0.8f, 0.3f),new Vector3f(-0.4f, 0.8f, 0.3f),new Vector3f(-0.4f, 0.8f, -0.300002f),new Vector3f(-0.3f, 0.8f, -0.3f),new Vector2f(0.5625f, 0.5625f),new Vector2f(0.625f, 0.5625f),new Vector2f(0.625f, 0.937501f),new Vector2f(0.5625f, 0.9375f),new Vector3f(0.0f, -4.0f, 0.0f));
 	}
 	@Override
 	public ObjMesh cloneTransformed(Matrix4f transform) {

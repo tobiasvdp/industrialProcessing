@@ -333,6 +333,7 @@ public class ObjConverter {
 	// object_name is the user-defined object name. There is no default.
 	private void processGroupName(String line) {
 		if (file != null) {
+			System.out.println("Processed "+file.title);
 			FileWriter outFile;
 			try {
 				outFile = new FileWriter("D:\\Minecraft\\forge\\mcp\\src\\minecraft\\ip\\industrialProcessing\\transport\\items\\conveyorModels\\"+file.title + ".java");

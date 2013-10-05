@@ -8,6 +8,8 @@ import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.IConnectedTile;
 import ip.industrialProcessing.client.render.ModelBlock;
 import ip.industrialProcessing.machines.BlockMachine;
+import ip.industrialProcessing.transport.items.conveyorBelt.SlopeState;
+import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorConnectionsBase;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -28,6 +30,7 @@ public class ModelConveyorBeltBlock extends ModelBlock {
 	ObjRotator rightIn = new ObjRotator(new RightIn001(), 1);
 	ObjRotator centerPiece = new ObjRotator(new CenterPiece001(), 1);
 	ObjRotator backIn = new ObjRotator(new BackIn001(), 1);
+	ObjSlopeRotationCombiner slopes = new ObjSlopeRotationCombiner();
 
 	@Override
 	public void renderInventory(Block block, int metadata, int modelID, RenderBlocks renderer) {
@@ -51,16 +54,18 @@ public class ModelConveyorBeltBlock extends ModelBlock {
 		Icon icon = block.getIcon(0, 0);
 		Icon iconCenter = block.getIcon(1, 0);
 
-		if (entity instanceof IConnectedTile) {
-			IConnectedTile connectedTile = (IConnectedTile) entity;
-			ConnectionState front = getState(connectedTile, forward, LocalDirection.BACK);
-			ConnectionState left = getState(connectedTile, forward, LocalDirection.RIGHT);
-			ConnectionState right = getState(connectedTile, forward, LocalDirection.LEFT);
-			ConnectionState back = getState(connectedTile, forward, LocalDirection.FRONT);
+		if (entity instanceof TileEntityConveyorConnectionsBase) {
+			TileEntityConveyorConnectionsBase belt = (TileEntityConveyorConnectionsBase) entity;
+			ConnectionState front = getState(belt, forward, LocalDirection.BACK);
+			ConnectionState left = getState(belt, forward, LocalDirection.RIGHT);
+			ConnectionState right = getState(belt, forward, LocalDirection.LEFT);
+			ConnectionState back = getState(belt, forward, LocalDirection.FRONT);
 
-			System.out.println(front + " " + left + " " + back + " " + right);
-			if (front.isConnected() && back.isConnected() && !left.isConnected() && !right.isConnected()) {
-				straight.getRotated(dir).renderMesh(false, icon, position);
+			SlopeState fs = belt.getSlope(LocalDirection.BACK);
+			SlopeState bs = belt.getSlope(LocalDirection.FRONT);
+
+			if (fs != SlopeState.FLAT || bs != SlopeState.FLAT || front.isConnected() && back.isConnected() && !left.isConnected() && !right.isConnected()) {
+				slopes.getRenderer(fs, bs).getRotated(dir).renderMesh(false, icon, position); 
 			} else if (front.isConnected() && left.isConnected() && !back.isConnected() && !right.isConnected()) {
 				cornerLeft.getRotated(dir).renderMesh(false, icon, position);
 			} else if (front.isConnected() && right.isConnected() && !back.isConnected() && !left.isConnected()) {
@@ -82,7 +87,6 @@ public class ModelConveyorBeltBlock extends ModelBlock {
 						frontOut.getRotated(dir).renderMesh(false, icon, position);
 					centerPiece.getRotated(dir).renderMesh(false, iconCenter, position);
 				}
-
 			}
 		}
 		return true;
