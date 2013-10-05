@@ -20,7 +20,7 @@ public class RecipesTricklingFilter extends RecipesMachine{
 	private Recipe filtyToDirty(int i) {
 		Recipe recipe = new Recipe();
 		recipe.workRequired = i;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidfiltyWater.getName()), RecipeSlotType.TANK, 1000), new RecipeInputSlot(0, IndustrialProcessing.itemGrownCulture.itemID, RecipeSlotType.DAMAGEDITEM, 1) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 1000), new RecipeInputSlot(0, IndustrialProcessing.itemGrownCulture.itemID, RecipeSlotType.DAMAGEDITEM, 1) };
 		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
 		return recipe;
 	}
