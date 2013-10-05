@@ -56,6 +56,9 @@ public class ConfigFluids {
 	private int blockFluidBasefiltyWaterID = offset+24;
 	private int BucketfiltyWaterID = offset+25;
 	
+	private int blockFluidBaseGritSludgeID = offset+26;
+	private int BucketGritSludgeID = offset+27;
+	
 	public static int bucketOreSludgeChromiteID(){return getInstance().bucketOreSludgeChromiteID;}
 	public static int bucketOreSludgeGalenaID(){return getInstance().bucketOreSludgeGalenaID;}
 	public static int bucketOreSludgeGoldID(){return getInstance().bucketOreSludgeGoldID;}
@@ -84,7 +87,12 @@ public class ConfigFluids {
 	
 	public static int blockFluidBasefiltyWaterID() {return getInstance().blockFluidBasefiltyWaterID ;}
 	public static int BucketfiltyWaterID() {return getInstance().BucketfiltyWaterID ;}
+	
+	public static int blockFluidBaseGritSludgeID() {return getInstance().blockFluidBaseGritSludgeID ;}
+	public static int BucketGritSludgeID() {return getInstance().BucketGritSludgeID ;}
 	public void registerFluids(){
+		registerFluid(IndustrialProcessing.blockFluidGritSludge, IndustrialProcessing.itemFluidGritSludge, IndustrialProcessing.bucketGritSludge, "Grit sludge");
+		LanguageRegistry.addName(IndustrialProcessing.bucketGritSludge, "Grit sludge Bucket");
 		registerFluid(IndustrialProcessing.blockFluidDirtyWater, IndustrialProcessing.itemFluidDirtyWater, IndustrialProcessing.bucketDirtyWater, "Dirty water");
 		LanguageRegistry.addName(IndustrialProcessing.bucketDirtyWater, "Dirty water Bucket");
 		registerFluid(IndustrialProcessing.blockFluidfiltyWater, IndustrialProcessing.itemFluidfiltyWater, IndustrialProcessing.bucketfiltyWater, "Filty water");

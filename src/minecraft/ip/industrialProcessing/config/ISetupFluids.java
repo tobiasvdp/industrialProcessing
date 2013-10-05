@@ -61,4 +61,8 @@ public interface ISetupFluids {
     public final static BlockFluid blockFluidfiltyWater = new BlockFluid(ConfigFluids.blockFluidBasefiltyWaterID(), itemFluidfiltyWater, Material.fire, IndustrialProcessing.tabOres, false);
     public final static ContainerFluid bucketfiltyWater = new ContainerFluid(ConfigFluids.BucketfiltyWaterID(), itemFluidfiltyWater, blockFluidfiltyWater, "ContainerfiltyWater");
     
+    public final static ItemFluid itemFluidGritSludge = new ItemFluid("gritSludge", 2000, 2000);
+    public final static BlockFluid blockFluidGritSludge = new BlockFluid(ConfigFluids.blockFluidBaseGritSludgeID(), itemFluidGritSludge, Material.fire, IndustrialProcessing.tabOres, false);
+    public final static ContainerFluid bucketGritSludge = new ContainerFluid(ConfigFluids.BucketGritSludgeID(), itemFluidGritSludge, blockFluidGritSludge, "ContainerGritSludge");
+    
 }
