@@ -197,7 +197,7 @@ public class RecipesCrusher extends RecipesMachine {
 
 	private Recipe RutileCrystalToLarge(int workTime) {
 		Recipe recipe = new Recipe();
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemRutileCrystals.itemID, RecipeSlotType.INVENTORY, 1) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.blockRutile.blockID, RecipeSlotType.INVENTORY, 1) };
 
 		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemRutileLargeCrushedCrystals.itemID, RecipeSlotType.INVENTORY, 1, 3, 0) };
 		recipe.workRequired = workTime;

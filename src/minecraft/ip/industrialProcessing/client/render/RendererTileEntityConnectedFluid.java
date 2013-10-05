@@ -1,5 +1,6 @@
 package ip.industrialProcessing.client.render;
 
+import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.rendering.RendererTileEntity;
 import ip.industrialProcessing.machines.animation.tanks.ITankSyncable;
 import ip.industrialProcessing.machines.animation.tanks.TankHandler;
@@ -7,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
@@ -70,5 +72,9 @@ public class RendererTileEntityConnectedFluid extends RendererTileEntity {
 				}
 			}
 		}
+	}
+	@Override
+	protected ResourceLocation getTexture(TileEntity tl, World world, int i, int j, int k, Block block2, float f) {
+		return texture = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN, "textures/render/" + name + ".png");
 	}
 }

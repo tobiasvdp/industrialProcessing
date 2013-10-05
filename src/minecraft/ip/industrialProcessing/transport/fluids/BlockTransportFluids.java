@@ -34,6 +34,18 @@ public class BlockTransportFluids extends BlockTransport {
 	}
 
 	@Override
+	public boolean recolourBlock(World world, int x, int y, int z, ForgeDirection side, int colour) {
+        int meta = world.getBlockMetadata(x, y, z);
+        if (meta != colour)
+        {
+            world.setBlockMetadataWithNotify(x, y, z, colour, 3);
+            ((TileEntityTransportFluidsBase)world.getBlockTileEntity(x, y, z)).setConnectionGroup(colour);
+            return true;
+        }
+		return false;
+	}
+
+	@Override
 	public TileEntity createNewTileEntity(World world) {
 		return new TileEntityTransportFluids();
 	}
