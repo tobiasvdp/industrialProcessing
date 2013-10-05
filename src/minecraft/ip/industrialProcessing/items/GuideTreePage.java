@@ -11,9 +11,14 @@ import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import ip.industrialProcessing.machines.diskFilter.TileEntityDiskFilter;
 import ip.industrialProcessing.machines.dryer.TileEntityDryer;
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
+import ip.industrialProcessing.machines.flotationCell.TileEntityFlotationCell;
+import ip.industrialProcessing.machines.hydroCyclone.TileEntityHydroCyclone;
 import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import ip.industrialProcessing.machines.oxygenFurnace.TileEntityOxygenFurnace;
 import ip.industrialProcessing.machines.pelletExtruder.TileEntityPelletExtruder;
+import ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator.TileEntityIncubator;
+import ip.industrialProcessing.machines.plants.waste.waterTreatment.tricklingFilter.TileEntityTricklingFilter;
+import ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatmentStation.TileEntityWaterTreatmentStation;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.TEmultiblockBlastFurnace;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeSlotType;
@@ -49,8 +54,8 @@ public class GuideTreePage extends GuidePanoramaPage {
 
 	private static ItemStack[] baseStacks = new ItemStack[] { new ItemStack(IndustrialProcessing.blockRutile), new ItemStack(IndustrialProcessing.blockCinnebar), new ItemStack(IndustrialProcessing.blockChromiteOre), new ItemStack(IndustrialProcessing.blockCopperOre), new ItemStack(IndustrialProcessing.blockGalenaOre), new ItemStack(IndustrialProcessing.blockTinOre), new ItemStack(IndustrialProcessing.blockTaliaOre), new ItemStack(Block.oreGold), new ItemStack(Block.oreIron), new ItemStack(ItemCoal.coal) };
 
-	RecipesMachine[] handlers = new RecipesMachine[] { TileEntityCrusher.recipes, TileEntityFilter.recipes, TileEntityMixer.recipes, TileEntityDryer.recipes, TileEntityClassifier.recipes, TileEntityDiskFilter.recipes, TileEntityPelletExtruder.recipes, TileEntityOxygenFurnace.recipes, TEmultiblockBlastFurnace.recipes, TEmultiblockBlastFurnace.recipes };
-	int[] blocks = new int[] { ConfigMachineBlocks.getCrusherBlockID(), ConfigMachineBlocks.getFilterBlockID(), ConfigMachineBlocks.getMixerBlockID(), ConfigMachineBlocks.getDryerBlockID(), ConfigMachineBlocks.getClassifierBlockID(), ConfigMachineBlocks.getDiskFilterBlockID(), ConfigMachineBlocks.getPelletExtruderID(), ConfigMachineBlocks.getOxygenFurnaceID(), ConfigMachineBlocks.getBLmultiblockBlastFurnace(), ConfigMachineBlocks.getBLmultiblockWeldingStation() };
+	RecipesMachine[] handlers = new RecipesMachine[] { TileEntityCrusher.recipes, TileEntityFilter.recipes, TileEntityMixer.recipes, TileEntityDryer.recipes, TileEntityClassifier.recipes, TileEntityDiskFilter.recipes, TileEntityPelletExtruder.recipes, TileEntityOxygenFurnace.recipes, TEmultiblockBlastFurnace.recipes, TEmultiblockBlastFurnace.recipes, TileEntityHydroCyclone.recipes, TileEntityFlotationCell.recipes, TileEntityTricklingFilter.recipes, TileEntityIncubator.recipes, TileEntityWaterTreatmentStation.recipes };
+	int[] blocks = new int[] { ConfigMachineBlocks.getCrusherBlockID(), ConfigMachineBlocks.getFilterBlockID(), ConfigMachineBlocks.getMixerBlockID(), ConfigMachineBlocks.getDryerBlockID(), ConfigMachineBlocks.getClassifierBlockID(), ConfigMachineBlocks.getDiskFilterBlockID(), ConfigMachineBlocks.getPelletExtruderID(), ConfigMachineBlocks.getOxygenFurnaceID(), ConfigMachineBlocks.getBLmultiblockBlastFurnace(), ConfigMachineBlocks.getBLmultiblockWeldingStation(), ConfigMachineBlocks.getHydroCycloneBlockID(), ConfigMachineBlocks.getFlotationCellBlockID(), ConfigMachineBlocks.getTricklingFilterID(), ConfigMachineBlocks.getIncubatorID(), ConfigMachineBlocks.getWaterTreatmentStationID() };
 	private ItemStack selectedStack;
 	private ItemStack hoverStack;
 	private boolean mouseInside;

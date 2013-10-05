@@ -80,12 +80,12 @@ public class TileEntityEnergyCell extends TileEntityPowerGenerator implements IP
 
 	@Override
 	public float getVoltage() {
-		return this.storedJoules / this.totalJouleCapacity * 12f;
+		return this.storedJoules / this.totalJouleCapacity * 240f;
 	}
 
 	@Override
 	public float getResistance(ForgeDirection side, float voltage) {
-		return 10 + PowerHelper.getResistanceForStorage(this.storedJoules, this.totalJouleCapacity);
+		return PowerHelper.getResistanceForStorage(this.storedJoules, this.totalJouleCapacity);
 	}
 
 	@Override

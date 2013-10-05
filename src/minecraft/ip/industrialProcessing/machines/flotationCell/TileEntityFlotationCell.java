@@ -51,7 +51,7 @@ public class TileEntityFlotationCell extends TileEntityPoweredFluidWorkerMachine
 		super.updateEntity();
 	};
 
-	private static RecipesFlotationCell recipes = new RecipesFlotationCell();
+	public static RecipesFlotationCell recipes = new RecipesFlotationCell();
 
 	@Override
 	public Iterator<Recipe> iterateRecipes() {

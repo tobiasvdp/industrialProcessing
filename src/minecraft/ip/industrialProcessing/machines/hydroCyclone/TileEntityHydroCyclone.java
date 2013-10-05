@@ -50,7 +50,7 @@ public class TileEntityHydroCyclone extends TileEntityPoweredFluidWorkerMachine 
 	super.updateEntity();
     };
 
-    private static RecipesHydroCyclone recipes = new RecipesHydroCyclone();
+    public static RecipesHydroCyclone recipes = new RecipesHydroCyclone();
 
     @Override
     public Iterator<Recipe> iterateRecipes() {
