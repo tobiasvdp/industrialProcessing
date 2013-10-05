@@ -8,7 +8,7 @@ import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.transport.items.conveyorBelt.MovingItemStack;
 import ip.industrialProcessing.transport.items.conveyorBelt.SlopeState;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorConnectionsBase;
-import ip.industrialProcessing.transport.items.conveyorBelt.rendering.ModelConveyorBelt;
+import ip.industrialProcessing.transport.items.conveyorBelt.rendering.ModelConveyorBeltTile;
 import ip.industrialProcessing.utils.IPMath;
 import net.minecraft.tileentity.TileEntity;
 

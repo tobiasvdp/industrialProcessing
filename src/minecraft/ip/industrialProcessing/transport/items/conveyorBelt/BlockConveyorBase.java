@@ -26,6 +26,7 @@ public abstract class BlockConveyorBase extends BlockMachineRendered {
 
 	public BlockConveyorBase(int blockID, Material material, float hardness, StepSound stepSound, String name, CreativeTabs creativeTab) {
 		super(blockID, material, hardness, stepSound, name, creativeTab);
+		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "conveyor");		
 	}
 
 	@Override

@@ -4,13 +4,16 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 public class ObjConverter {
+
 	public static void main(String[] args) {
 		ObjConverter cv = new ObjConverter();
 		try {
@@ -40,6 +43,7 @@ public class ObjConverter {
 	private final static String OBJ_USEMTL = "usemtl";
 	File objFile = null;
 
+	ObjMeshFile file = null;
 	ArrayList<Vector3f> pos = new ArrayList<Vector3f>();
 	ArrayList<Vector3f> normal = new ArrayList<Vector3f>();
 	ArrayList<Vector2f> uv = new ArrayList<Vector2f>();
@@ -93,7 +97,7 @@ public class ObjConverter {
 		}
 		bufferedReader.close();
 
-		System.err.println("Loaded " + lineCount + " lines");
+		processGroupName("g ");
 	}
 
 	// @TODO: processVertex calls parseFloatList with params expecting
@@ -285,16 +289,17 @@ public class ObjConverter {
 		line = line.substring(OBJ_FACE.length()).trim();
 		int[] verticeIndexAry = StringUtils.parseListVerticeNTuples(line, 3);
 		int loopi = 0;
-		System.out.print("this.quads[" + index++ + "] = new ObjQuad(");
+
+		this.file.constructorBody += "		this.quads[" + index++ + "] = new ObjQuad(";
 		while (loopi < verticeIndexAry.length) {
 			Vector3f v = pos.get(getIndex(verticeIndexAry[loopi], pos.size()));
-			System.out.print("new Vector3f(" + v.x + "f, " + v.y + "f, " + v.z + "f),");
+			this.file.constructorBody += ("new Vector3f(" + v.x + "f, " + v.y + "f, " + v.z + "f),");
 			loopi += 3;
 		}
 		loopi = 0;
 		while (loopi < verticeIndexAry.length) {
 			Vector2f v = uv.get(getIndex(verticeIndexAry[loopi + 1], uv.size()));
-			System.out.print("new Vector2f(" + v.x + "f, " + v.y + "f),");
+			this.file.constructorBody += ("new Vector2f(" + v.x + "f, " + v.y + "f),");
 			loopi += 3;
 		}
 		Vector3f nl = new Vector3f(0, 0, 0);
@@ -304,7 +309,8 @@ public class ObjConverter {
 			nl = Vector3f.add(nl, v, nl);
 			loopi += 3;
 		}
-		System.out.println("new Vector3f(" + nl.x + "f, " + nl.y + "f, " + nl.z + "f));");
+		this.file.constructorBody += ("new Vector3f(" + nl.x + "f, " + nl.y + "f, " + nl.z + "f));\n\r");
+		this.file.quadCount++;
 		// builder.addFace(verticeIndexAry);
 	}
 
@@ -326,9 +332,23 @@ public class ObjConverter {
 	//
 	// object_name is the user-defined object name. There is no default.
 	private void processGroupName(String line) {
+		if (file != null) {
+			FileWriter outFile;
+			try {
+				outFile = new FileWriter("D:\\Minecraft\\forge\\mcp\\src\\minecraft\\ip\\industrialProcessing\\transport\\items\\conveyorModels\\"+file.title + ".java");
+				PrintWriter out = new PrintWriter(outFile);
+				out.print(file.toString());
+				out.close();
+				outFile.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+		}
 		this.group = (line.substring(OBJ_OBJECT_NAME.length()).trim());
 		this.index = 0;
-		System.out.println("  " + group);
+		file = new ObjMeshFile();
+		file.title = this.group;
 	}
 
 }
