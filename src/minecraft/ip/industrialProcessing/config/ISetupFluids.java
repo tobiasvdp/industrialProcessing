@@ -58,11 +58,19 @@ public interface ISetupFluids {
     public final static BlockFluid blockFluidSteam = new BlockFluid(ConfigFluids.blockFluidBaseSteamID(), itemFluidSteam, Material.water, IndustrialProcessing.tabOres, false);
     
     public final static ItemFluid itemFluidfiltyWater = new ItemFluid("filtyWater", 2000, 2000);
-    public final static BlockFluid blockFluidfiltyWater = new BlockFluid(ConfigFluids.blockFluidBasefiltyWaterID(), itemFluidfiltyWater, Material.fire, IndustrialProcessing.tabOres, false);
+    public final static BlockFluid blockFluidfiltyWater = new BlockFluid(ConfigFluids.blockFluidBasefiltyWaterID(), itemFluidfiltyWater, Material.water, IndustrialProcessing.tabOres, false);
     public final static ContainerFluid bucketfiltyWater = new ContainerFluid(ConfigFluids.BucketfiltyWaterID(), itemFluidfiltyWater, blockFluidfiltyWater, "ContainerfiltyWater");
     
     public final static ItemFluid itemFluidGritSludge = new ItemFluid("gritSludge", 2000, 2000);
-    public final static BlockFluid blockFluidGritSludge = new BlockFluid(ConfigFluids.blockFluidBaseGritSludgeID(), itemFluidGritSludge, Material.fire, IndustrialProcessing.tabOres, false);
+    public final static BlockFluid blockFluidGritSludge = new BlockFluid(ConfigFluids.blockFluidBaseGritSludgeID(), itemFluidGritSludge, Material.water, IndustrialProcessing.tabOres, false);
     public final static ContainerFluid bucketGritSludge = new ContainerFluid(ConfigFluids.BucketGritSludgeID(), itemFluidGritSludge, blockFluidGritSludge, "ContainerGritSludge");
+    
+    public final static ItemFluid itemFluidUncleanWater = new ItemFluid("uncleanWater", 2000, 2000);
+    public final static BlockFluid blockFluidUncleanWater = new BlockFluid(ConfigFluids.blockFluidBaseUncleanWaterID(), itemFluidUncleanWater, Material.water, IndustrialProcessing.tabOres, false);
+    public final static ContainerFluid bucketUncleanWater = new ContainerFluid(ConfigFluids.BucketUncleanWaterID(), itemFluidUncleanWater, blockFluidUncleanWater, "ContainerUncleanWater");
+    
+    public final static ItemFluid itemFluidResidu = new ItemFluid("residu", 2000, 2000);
+    public final static BlockFluid blockFluidResidu = new BlockFluid(ConfigFluids.blockFluidBaseResiduID(), itemFluidResidu, Material.water, IndustrialProcessing.tabOres, false);
+    public final static ContainerFluid bucketResidu = new ContainerFluid(ConfigFluids.BucketResiduID(), itemFluidResidu, blockFluidResidu, "ContainerResidu");
     
 }

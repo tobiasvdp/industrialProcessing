@@ -68,9 +68,9 @@ public class RecipesCrusher extends RecipesMachine {
 
 	private Recipe cinnebarFineToDust(int workTime) {
 		Recipe recipe = new Recipe();
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemRutileFineCrushedCrystals.itemID, RecipeSlotType.INVENTORY, 1) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemCinnebarFineCrushedCrystals.itemID, RecipeSlotType.INVENTORY, 1) };
 
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemRutileDust.itemID, RecipeSlotType.INVENTORY, 1, 3, 0) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemCinnebarDust.itemID, RecipeSlotType.INVENTORY, 1, 3, 0) };
 		recipe.workRequired = workTime;
 		return recipe;
 	}
@@ -86,9 +86,9 @@ public class RecipesCrusher extends RecipesMachine {
 
 	private Recipe cinnebarSmallToFine(int workTime) {
 		Recipe recipe = new Recipe();
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemRutileSmallCrushedCrystals.itemID, RecipeSlotType.INVENTORY, 1) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemCinnebarSmallCrushedCrystals.itemID, RecipeSlotType.INVENTORY, 1) };
 
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemRutileFineCrushedCrystals.itemID, RecipeSlotType.INVENTORY, 1, 3, 0) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemCinnebarFineCrushedCrystals.itemID, RecipeSlotType.INVENTORY, 1, 3, 0) };
 		recipe.workRequired = workTime;
 		return recipe;
 	}

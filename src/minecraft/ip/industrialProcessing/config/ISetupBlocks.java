@@ -21,6 +21,7 @@ public interface ISetupBlocks {
 	public static final Block blockTaliaOre = (new BlockOre(ConfigBlocks.getBlockTaliaOreID())).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("blockTaliaOre").func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "blockTaliaOre").setCreativeTab(IndustrialProcessing.tabOres);
 
 	public final static BlockIP blockIronFlat = new BlockIP(ConfigBlocks.getInstance().blockIronFlat(), "ip.block.ironflat", 5.0f, Material.iron, Block.soundMetalFootstep);
+	public final static BlockIP blockGrit = (BlockIP) new BlockIP(ConfigBlocks.getInstance().blockGrit(), "Grit", 1.0f, Material.ground, Block.soundGravelFootstep).setCreativeTab(IndustrialProcessing.tabOres);
 
 	public final static BlockPlatform blockPlatform = new BlockPlatform();
 	public final static BlockStairs blockStairs = new BlockStairs();
