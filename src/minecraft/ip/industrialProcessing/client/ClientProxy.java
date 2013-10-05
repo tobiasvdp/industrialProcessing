@@ -103,9 +103,10 @@ import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids;
 import ip.industrialProcessing.transport.fluids.TileEntityValve;
 import ip.industrialProcessing.transport.fluids.models.ModelTankBlock;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorBelt;
-import ip.industrialProcessing.transport.items.conveyorBelt.rendering.ModelConveyorBelt;
+import ip.industrialProcessing.transport.items.conveyorBelt.rendering.ModelConveyorBeltTile;
 import ip.industrialProcessing.transport.items.conveyorInput.ModelConveyorInput;
 import ip.industrialProcessing.transport.items.conveyorInput.TileEntityConveyorInput;
+import ip.industrialProcessing.transport.items.conveyorModels.ModelConveyorBeltBlock;
 import ip.industrialProcessing.transport.items.conveyorOutput.ModelConveyorOutput;
 import ip.industrialProcessing.transport.items.conveyorOutput.TileEntityConveyorOutput;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -155,7 +156,8 @@ public class ClientProxy extends CommonProxy {
 	private static final MDmultiblockWheelConnector MDmulitblockWheelConnector = new MDmultiblockWheelConnector();
 	private static final MDmultiblockWheelConnector MDmultiblockWheelConnector = new MDmultiblockWheelConnector();
 	private static final MDmultiblockDisplayPanel MDmultiblockDisplayPanel = new MDmultiblockDisplayPanel();
-	private static final ModelConnected conveyorBelt = new ModelConveyorBelt();
+	private static final ModelConnected conveyorBelt = new ModelConveyorBeltTile();
+	private static final ModelBlock conveyorBeltBlock = new ModelConveyorBeltBlock();
 	private static final ModelConnected conveyorInput = new ModelConveyorInput();
 	private static final ModelConnected conveyorOutput = new ModelConveyorOutput();
 	private static final ModelBlock platform = new ModelPlatform();
@@ -177,11 +179,17 @@ public class ClientProxy extends CommonProxy {
 		// block & tile entity
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTank.class, new RendererTileEntityConnectedFluid(IndustrialProcessing.blockTank, "ModelTank", tankEntity));
+
 		ConfigRenderers.setRendererTankId(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererTankId(), tankBlock));
-		
+
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityConveyorBelt.class, new RendererTileEntityConnected(IndustrialProcessing.blockConveyorBelt, "ModelConveyor", conveyorBelt));
+
+		ConfigRenderers.setRendererConveyorBeltID(RenderingRegistry.getNextAvailableRenderId());
+		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererConveyorBeltID(), conveyorBeltBlock));
+
 		// 100% tile entity
-		
+
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFilter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockFilter, "ModelFilter", filter));
 		ConfigRenderers.setRendererFilterId(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererFilterId(), new TileEntityFilter()));
@@ -297,11 +305,11 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TEmultiblockWeldingTableExt.class, new RenderingMultiblock(IndustrialProcessing.BLmultiblockWeldingTableExt, new String[] { "ModelMultiblockWeldingStation" }, new ModelingMultiblock[] { MDmultiblockWeldingTableExt }));
 		ConfigRenderers.setBLmultiblockWeldingTableExt(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getBLmultiblockWeldingTableExt(), new TEmultiblockWeldingTableExt()));
-		
+
 		ClientRegistry.bindTileEntitySpecialRenderer(TEmultiblockBlastFurnace.class, new RenderingMultiblock(IndustrialProcessing.BLmultiblockBlastFurnace, new String[] { "ModelBlastFurnace" }, new ModelingMultiblock[] { MDmultiblockBlastFurnace }));
 		ConfigRenderers.setRendererMultiblockBlastFurnaceID(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getrendererMultiblockBlastFurnaceID(), new TEmultiblockBlastFurnace()));
-		
+
 		ClientRegistry.bindTileEntitySpecialRenderer(TEmultiblockBlastFurnaceTower.class, new RenderingMultiblock(IndustrialProcessing.BLmultiblockBlastFurnaceTower, new String[] { "ModelBlastFurnaceTower" }, new ModelingMultiblock[] { MDmultiblockBlastFurnaceTower }));
 		ConfigRenderers.setRendererMultiblockBlastFurnaceTowerID(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getrendererMultiblockBlastFurnaceTowerID(), new TEmultiblockBlastFurnaceTower()));
@@ -328,10 +336,6 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TEmultiblockDisplayPanel.class, new RenderingMultiblock(IndustrialProcessing.BLmultiblockDisplayPanel, new String[] { "MDmultiblockDisplayPanel" }, new ModelingMultiblock[] { MDmultiblockDisplayPanel }));
 		ConfigRenderers.setBLmultiblockDisplayPanel(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getBLmultiblockDisplayPanel(), new TEmultiblockDisplayPanel()));
-
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityConveyorBelt.class, new RendererTileEntityConnected(IndustrialProcessing.blockConveyorBelt, "ModelConveyor", conveyorBelt));
-		ConfigRenderers.setRendererConveyorBeltID(RenderingRegistry.getNextAvailableRenderId());
-		RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererConveyorBeltID(), new TileEntityConveyorBelt()));
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityConveyorInput.class, new RendererTileEntityConnected(IndustrialProcessing.blockConveyorBeltInput, "ModelConveyorInput", conveyorInput));
 		ConfigRenderers.setRendererConveyorInputID(RenderingRegistry.getNextAvailableRenderId());

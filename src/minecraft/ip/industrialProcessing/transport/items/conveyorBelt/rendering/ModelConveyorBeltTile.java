@@ -1,35 +1,30 @@
 package ip.industrialProcessing.transport.items.conveyorBelt.rendering;
 
-import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.ConnectionState;
-import ip.industrialProcessing.transport.items.conveyorBelt.CornerState;
+import ip.industrialProcessing.client.render.ModelConnectedOriented;
 import ip.industrialProcessing.transport.items.conveyorBelt.MovingItemStack;
-import ip.industrialProcessing.transport.items.conveyorBelt.SlopeState;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorTransportBase;
 import ip.industrialProcessing.transport.items.conveyorBelt.rendering.paths.BendPath;
 import ip.industrialProcessing.transport.items.conveyorBelt.rendering.paths.CrossPath;
 import ip.industrialProcessing.transport.items.conveyorBelt.rendering.paths.ItemPath;
 import ip.industrialProcessing.transport.items.conveyorBelt.rendering.paths.PathState;
 import ip.industrialProcessing.transport.items.conveyorBelt.rendering.paths.SlopePath;
-import ip.industrialProcessing.utils.IPMath;
 
 import java.util.Iterator;
 
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Vector2f;
 
-public abstract class ModelConveyorItemsBase extends ModelOrientedConveyorBase {
+public class ModelConveyorBeltTile extends ModelConnectedOriented {
 
 	@Override
 	protected void renderModelConnectedOriented(TileEntity tl, float f, ForgeDirection forward, ConnectionState front, ConnectionState right, ConnectionState back, ConnectionState left, ConnectionState up, ConnectionState down) {
-		super.renderModelConnectedOriented(tl, f, forward, front, right, back, left, up, down);
+		//super.renderModelConnectedOriented(tl, f, forward, front, right, back, left, up, down);
 		ItemPath path = null;
 		if (front.isConnected() && (left.isConnected() != right.isConnected()) && !back.isConnected()) {
 			if (left.isConnected()) {
@@ -40,7 +35,6 @@ public abstract class ModelConveyorItemsBase extends ModelOrientedConveyorBase {
 		} else {
 			if (front.isConnected() && back.isConnected() && !left.isConnected() && !right.isConnected() && !up.isConnected() && !down.isConnected()) {
 				path = new SlopePath(tl, front, back);
-				renderStraight(tl, f, forward, front, right, back, left, up, down);
 			} else {
 				path = new CrossPath(tl, front, left, right, back, up, down);
 			}
