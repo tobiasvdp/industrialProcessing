@@ -90,6 +90,7 @@ public abstract class BlockConveyorBase extends BlockMachineRendered {
 		TileEntityConveyorConnectionsBase conveyorBelt = (TileEntityConveyorConnectionsBase) par1World.getBlockTileEntity(par2, par3, par4);
 		conveyorBelt.searchForConnections();
 	}
+	
 
 	@Override
 	public boolean canConnectRedstone(IBlockAccess world, int x, int y, int z, int side) {

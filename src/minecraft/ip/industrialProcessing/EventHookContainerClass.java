@@ -1,8 +1,12 @@
 package ip.industrialProcessing;
 
+import ip.industrialProcessing.machines.IRotateableEntity;
 import ip.industrialProcessing.utils.blockContainer.IBlockInBlock;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.World;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.event.ForgeSubscribe;
@@ -15,6 +19,10 @@ public class EventHookContainerClass {
 		if (event.action == Action.RIGHT_CLICK_BLOCK) {
 			ForgeDirection dir = ForgeDirection.getOrientation(event.face);
 			TileEntity te = event.entityPlayer.worldObj.getBlockTileEntity(event.x + dir.offsetX, event.y + dir.offsetY, event.z + dir.offsetZ);
+			if(event.entityPlayer.getCurrentEquippedItem() != null && event.entityPlayer.getCurrentEquippedItem().itemID == IndustrialProcessing.itemWrench.itemID){
+				setRotation(event.entityPlayer.worldObj, event.x, event.y, event.z, event.entityPlayer);
+				event.setCanceled(true);
+			}
 			if (te instanceof IBlockInBlock) {
 				IBlockInBlock container = (IBlockInBlock) te;
 				container.addBlockToContainer(dir.getOpposite());
@@ -23,7 +31,37 @@ public class EventHookContainerClass {
 			}
 		}
 	}
+	
+	public static void setRotation(World world, int x, int y, int z, EntityLivingBase entityLivingBase) {
+		TileEntity entity = world.getBlockTileEntity(x, y, z);
+		if (entity instanceof IRotateableEntity) {
+			setRotation((IRotateableEntity) entity, entityLivingBase);
+		}
+	}
 
+	public static void setRotation(IRotateableEntity entity, EntityLivingBase entityLivingBase) {
+		int dir = MathHelper.floor_double((double) ((entityLivingBase.rotationYaw * 4F) / 360F) + 0.5D) & 3;
+		IRotateableEntity machine = (IRotateableEntity) entity;
+		ForgeDirection forward = getForwardFromMetadata(dir);
+		if (entityLivingBase.isSneaking())
+			forward = forward.getOpposite();
+		machine.setForwardDirection(forward);
+	}
+	
+	public static ForgeDirection getForwardFromMetadata(int metadata) {
+		switch (metadata) {
+		case 0:
+			return ForgeDirection.NORTH;
+		case 1:
+			return ForgeDirection.EAST;
+		case 2:
+			return ForgeDirection.SOUTH;
+		case 3:
+			return ForgeDirection.WEST;
+		}
+		return null;
+	}
+	
 	@ForgeSubscribe
 	public void onBlockHighlightEvent(DrawBlockHighlightEvent evt) {
 		MovingObjectPosition hitpos = evt.player.rayTrace(70D, 1.0f);
