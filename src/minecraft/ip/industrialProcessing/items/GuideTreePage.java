@@ -6,21 +6,14 @@ import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.machines.blastFurnace.TileEntityBlastFurnace;
-import ip.industrialProcessing.machines.classifier.RecipesClassifier;
 import ip.industrialProcessing.machines.classifier.TileEntityClassifier;
-import ip.industrialProcessing.machines.crusher.RecipesCrusher;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
-import ip.industrialProcessing.machines.diskFilter.RecipesDiskFilter;
 import ip.industrialProcessing.machines.diskFilter.TileEntityDiskFilter;
-import ip.industrialProcessing.machines.dryer.RecipesDryer;
 import ip.industrialProcessing.machines.dryer.TileEntityDryer;
-import ip.industrialProcessing.machines.filter.RecipesFilter;
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
-import ip.industrialProcessing.machines.mixer.RecipesMixer;
 import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import ip.industrialProcessing.machines.oxygenFurnace.TileEntityOxygenFurnace;
 import ip.industrialProcessing.machines.pelletExtruder.TileEntityPelletExtruder;
-import ip.industrialProcessing.recipes.IRecipeWorkHandler;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeSlotType;
 
@@ -28,26 +21,38 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.IFluidBlock;
 
 import org.lwjgl.opengl.GL11;
 
 public class GuideTreePage extends GuidePanoramaPage {
 
+	private static final int FILL_COLOR = 0xffc6c6c6;
+	private static final int HIGHLIGT_COLOR = 0xffffffff;
+	private static final int SHADOW_COLOR = 0x88000000;
+
+	private static ItemStack[] baseStacks = new ItemStack[] { new ItemStack(IndustrialProcessing.blockChromiteOre), new ItemStack(IndustrialProcessing.blockCinnebar), new ItemStack(IndustrialProcessing.blockCopperOre), new ItemStack(IndustrialProcessing.blockGalenaOre), new ItemStack(IndustrialProcessing.blockTinOre), new ItemStack(IndustrialProcessing.blockRutileOre), new ItemStack(IndustrialProcessing.blockTaliaOre), new ItemStack(Block.oreGold), new ItemStack(Block.oreIron) };
+
 	RecipesMachine[] handlers = new RecipesMachine[] { TileEntityCrusher.recipes, TileEntityFilter.recipes, TileEntityMixer.recipes, TileEntityDryer.recipes, TileEntityClassifier.recipes, TileEntityDiskFilter.recipes, TileEntityPelletExtruder.recipes, TileEntityOxygenFurnace.recipes, TileEntityBlastFurnace.recipes };
-	int[] blocks = new int[] { ConfigMachineBlocks.getCrusherBlockID(), ConfigMachineBlocks.getFilterBlockID(), ConfigMachineBlocks.getMixerBlockID(), ConfigMachineBlocks.getDryerBlockID(), ConfigMachineBlocks.getClassifierBlockID(), ConfigMachineBlocks.getDiskFilterBlockID(), ConfigMachineBlocks.getPelletExtruderID(), ConfigMachineBlocks.getBlastFurnaceID() };
+	int[] blocks = new int[] { ConfigMachineBlocks.getCrusherBlockID(), ConfigMachineBlocks.getFilterBlockID(), ConfigMachineBlocks.getMixerBlockID(), ConfigMachineBlocks.getDryerBlockID(), ConfigMachineBlocks.getClassifierBlockID(), ConfigMachineBlocks.getDiskFilterBlockID(), ConfigMachineBlocks.getPelletExtruderID(), ConfigMachineBlocks.getOxygenFurnaceID(), ConfigMachineBlocks.getBlastFurnaceID() };
+	private ItemStack selectedStack;
+	private ItemStack hoverStack;
 
 	public GuideTreePage() {
-		super(new Rectangle(0, 0, 246, 172), new Point(5, 25));
+		super(new Rectangle(0, 0, 246 - 32, 178), new Point(5 + 32, 18));
+		this.selectedStack = new ItemStack(IndustrialProcessing.blockCopperOre);
 	}
-
-	private HashSet<Integer> items = new HashSet<Integer>();
 
 	@Override
 	public String getTitle() {
@@ -55,109 +60,223 @@ public class GuideTreePage extends GuidePanoramaPage {
 	}
 
 	@Override
+	public void drawScreen(int mouseX, int mouseY, int x, int y) {
+
+		this.hoverStack = null;
+		super.drawScreen(mouseX, mouseY, x, y);
+		GL11.glEnable(GL11.GL_DEPTH_TEST);
+		for (int i = 0; i < baseStacks.length; i++) {
+			int ix = i % 2;
+			int iy = i / 2;
+			drawStack(baseStacks[i], x + 8 + ix * 16, y + 32 + iy * 16, mouseX, mouseY, true);
+		}
+		GL11.glDisable(GL11.GL_DEPTH_TEST);
+	}
+
+	@Override
 	protected void drawPane(int mouseX, int mouseY) {
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
-		items.clear();
 		GL11.glPushMatrix();
 		GL11.glTranslatef(1, 1, 11);
-		drawTree(new ItemStack(IndustrialProcessing.blockCopperOre), 16, 16, RecipeSlotType.INVENTORY, mouseX, mouseY);
+		HashSet<Integer> items = new HashSet<Integer>();
+		if (this.selectedStack != null)
+			drawTree(this.selectedStack, 16, 16, getType(this.selectedStack), mouseX, mouseY, items);
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 		GL11.glPopMatrix();
 		GL11.glColor4d(1, 1, 1, 1);
-
 	}
 
-	private void drawStack(ItemStack stack, int x, int y, int mouseX, int mouseY) {
-		if(stack == null) return;
+	private RecipeSlotType getType(ItemStack stack) {
+		if (stack == null)
+			return RecipeSlotType.INVENTORY;
+		if (Block.blocksList.length > stack.itemID) {
+			Block block = Block.blocksList[stack.itemID];
+			if (block instanceof IFluidBlock)
+				return RecipeSlotType.TANK;
+			return RecipeSlotType.INVENTORY;
+		} else {
+			return RecipeSlotType.INVENTORY;
+		}
+	}
+
+	@Override
+	public void mouseClicked(int x, int y, int par3) {
+		super.mouseClicked(x, y, par3);
+		if (this.hoverStack != null) {
+			this.selectedStack = this.hoverStack;
+		}
+	}
+
+	private void drawStack(ItemStack stack, int x, int y, int mouseX, int mouseY, boolean clickAble) {
+		if (stack == null)
+			return;
 		Minecraft mc = Minecraft.getMinecraft();
 		GL11.glPushMatrix();
 		GL11.glTranslatef(-1, -1, 11);
-		drawRect(x - 1, y - 1, x + 17, y + 17, 0xff555555);
-		drawRect(x, y , x + 17, y + 17, 0xffffffff);
-		drawRect(x, y, x + 16, y + 16, 0xffc6c6c6);
+		// drawRect(x - 1, y - 1, x + 17, y + 17, HIGHLIGT_COLOR);
+		GL11.glPushMatrix();
+		drawRect(x, y, x + 16, y + 16, FILL_COLOR);
+		GL11.glTranslatef(1, 1, -20);
+		drawRect(x, y, x + 16, y + 16, SHADOW_COLOR);
+		GL11.glPopMatrix();
 		GL11.glEnable(GL11.GL_LIGHTING);
 		RenderHelper.enableGUIStandardItemLighting();
 		GuiTools.drawItemStack(stack, x, y, null, GuiGuide.itemRenderer, mc.fontRenderer, mc.renderEngine);
 
-		Rectangle rect = new Rectangle(x,y,16,16);
-		if(rect.contains(mouseX,mouseY))
-		{
+		Rectangle rect = new Rectangle(x, y, 16, 16);
+		if (rect.contains(mouseX, mouseY)) {
 			ToolTip tip = new ToolTip(stack.getDisplayName());
-			ToolTip.renderToolTip(tip, mouseX+16, mouseY, 10, mc.fontRenderer);
+			ToolTip.renderToolTip(tip, mouseX + 16, mouseY, 10, mc.fontRenderer);
+			if (clickAble)
+				this.hoverStack = stack;
 		}
 		GL11.glDisable(GL11.GL_LIGHTING);
 		RenderHelper.disableStandardItemLighting();
 		GL11.glPopMatrix();
- 
+
 	}
 
-	private int drawTree(ItemStack stack, int x, int y, RecipeSlotType type, int mouseX, int mouseY) {
-		drawStack(stack, x, y, mouseX, mouseY);
+	private int drawTree(ItemStack stack, int x, int y, RecipeSlotType type, int mouseX, int mouseY, HashSet<Integer> items) {
+		drawStack(stack, x, y, mouseX, mouseY, true);
 		int dy = 0;
-		int lineColor = 0xff555555;//0xffc6c6c6;
-		int lineShadow = 0xffffffff;
 		if (!items.contains(stack.itemID)) {
 			items.add(stack.itemID);
 
-			for (int i = 0; i < handlers.length; i++) { // handlers.length
-				RecipesMachine handler = handlers[i];
-				boolean hasRecipe = false;
-				for (Iterator<Recipe> iterator = handler.iterator(); iterator.hasNext();) {
-					Recipe recipe = iterator.next();
-					for (int j = 0; j < recipe.inputs.length; j++) {
-						int id = 0;
-						if (type == RecipeSlotType.INVENTORY) {
-							id = recipe.inputs[j].itemId;
-						} else if (type == RecipeSlotType.TANK) {
-							int fluidId = recipe.inputs[j].itemId;
-							Fluid fluid = FluidRegistry.getFluid(fluidId);
-							if (fluid == null)
-								continue;
-							id = fluid.getBlockID();
-						}
-						if (id == stack.itemID) {
-							hasRecipe = true;
-							for (int j2 = 0; j2 < recipe.outputs.length; j2++) {
+			for (int machineIndex = 0; machineIndex < handlers.length; machineIndex++) { // handlers.length
 
-								GL11.glPushMatrix();
-								GL11.glTranslatef(-1, -1, -11);
-								drawRect(x + 48 + 8, y + 8 + dy, x + 64, y + 9 + dy, lineColor);
-								drawRect(x + 48 + 7, y + 8, x + 48 + 8, y + 9 + dy, lineColor);
-								GL11.glPopMatrix();
-								drawRect(x + 48 + 8, y + 8 + dy, x + 64, y + 9 + dy, lineShadow);
-								drawRect(x + 48 + 7, y + 8, x + 48 + 8, y + 9 + dy, lineShadow);
-
-								if (recipe.outputs[j2].type == RecipeSlotType.INVENTORY) {
-									dy += drawTree(new ItemStack(recipe.outputs[j2].itemId, 0, 0), x + 64, y + dy + 0, RecipeSlotType.INVENTORY, mouseX, mouseY);
-								} else if (recipe.outputs[j2].type == RecipeSlotType.TANK) {
-									int fid = FluidRegistry.getFluid(recipe.outputs[j2].itemId).getBlockID();
-									dy += drawTree(new ItemStack(fid, 0, 0), x + 64, y + dy + 0, RecipeSlotType.TANK, mouseX, mouseY);
-								}
-							}
-						}
-					}
+				int ddy = drawMachine(x + 32, y + dy, stack, type, mouseX, mouseY, machineIndex, items);
+				if (ddy > 0) {
+					drawVerticalLineShadowed(x + 22, y + 6, y + dy + 8);
 				}
-				if (hasRecipe) {
-					drawStack(new ItemStack(blocks[i], 1, 0), x + 32, y + 16, mouseX, mouseY);
-					GL11.glPushMatrix();
-					GL11.glTranslatef(-1, -1, -11);
-					drawRect(x + 40, y + 40, x + 48 + 8, y + 41, lineColor);
-					drawRect(x + 40, y + 32, x + 41, y + 40, lineColor);
-					drawRect(x + 39 + 16, y + 8, x + 40 + 16, y + 40, lineColor);
+				dy += ddy;
+			}
 
-					drawRect(x + 16, y + 8, x + 32 + 8, y + 9, lineColor);
-					drawRect(x + 40, y + 8, x + 41, y + 16, lineColor);
-					GL11.glPopMatrix();
-					drawRect(x + 40, y + 40, x + 48 + 8, y + 41, lineShadow);
-					drawRect(x + 40, y + 32, x + 41, y + 40, lineShadow);
-					drawRect(x + 39 + 16, y + 8, x + 40 + 16, y + 40, lineShadow);
+			int ddy = drawCrafting(x + 32, y + dy, stack, type, mouseX, mouseY, items);
+			if (ddy > 0) {
+				drawVerticalLineShadowed(x + 22, y + 6, y + dy + 8);
+			}
+			dy += ddy;
+		}
+		if (dy > 0) {
+			drawHorizontalLineShadowed(x + 15, y + 7, x + 22);
+		}
+		return Math.max(dy, 32);
+	}
 
-					drawRect(x + 16, y + 8, x + 32 + 8, y + 9, lineShadow);
-					drawRect(x + 40, y + 8, x + 41, y + 16, lineShadow);
+	private int drawCrafting(int x, int y, ItemStack stack, RecipeSlotType type, int mouseX, int mouseY, HashSet<Integer> items) {
+		if (type != RecipeSlotType.INVENTORY) // TODO: dump liquids in
+												// containers for crafting?
+			return 0;
+
+		boolean hasCrafting = false;
+		int dy = 0;
+
+		List recipes = CraftingManager.getInstance().getRecipeList();
+		for (int i = 0; i < recipes.size(); i++) {
+			IRecipe recipe = (IRecipe) recipes.get(i);
+			if (hasInput(recipe, stack)) {
+				hasCrafting = true;
+				ItemStack output = recipe.getRecipeOutput();
+				drawTree(output, x + 32, y + dy, RecipeSlotType.INVENTORY, mouseX, mouseY, items);
+			}
+		}
+
+		if (hasCrafting) {
+			drawStack(new ItemStack(Block.workbench), x, y, mouseX, mouseY, false);
+			drawHorizontalLineShadowed(x - 9, y + 7, x);
+			drawHorizontalLineShadowed(x + 15, y + 7, x + 23);
+			return Math.max(dy, 32);
+		}
+		return dy;
+	}
+
+	private boolean hasInput(IRecipe recipe, ItemStack stack) {
+
+		if (recipe instanceof ShapedRecipes) {
+			ShapedRecipes recipeShaped = (ShapedRecipes) recipe;
+			for (int j = 0; j < recipeShaped.recipeItems.length; j++) {
+				ItemStack stackRecipe = recipeShaped.recipeItems[j];
+				if (stackRecipe != null) {
+					if (stackRecipe.isItemEqual(stack)) {
+						return true;
+					}
 				}
 			}
 		}
-		return 64 + Math.min(dy, 0);
+		return false;
+	}
+
+	private void drawHorizontalLineShadowed(int x1, int y, int x2) {
+		this.zLevel = 0;
+		GL11.glPushMatrix();
+		this.drawHorizontalLine(x1, x2, y, HIGHLIGT_COLOR);
+		GL11.glTranslatef(1, 1, -10);
+		this.drawHorizontalLine(x1, x2, y, SHADOW_COLOR);
+		GL11.glPopMatrix();
+	}
+
+	private void drawVerticalLineShadowed(int x, int y1, int y2) {
+		this.zLevel = 0;
+		GL11.glPushMatrix();
+		this.drawVerticalLine(x, y1, y2, HIGHLIGT_COLOR);
+		GL11.glTranslatef(1, 1, -10);
+		this.drawVerticalLine(x, y1, y2, SHADOW_COLOR);
+		GL11.glPopMatrix();
+	}
+
+	private int drawMachine(int x, int y, ItemStack stack, RecipeSlotType type, int mouseX, int mouseY, int machineIndex, HashSet<Integer> items) {
+		RecipesMachine handler = handlers[machineIndex];
+		int dy = 0;
+		boolean hasRecipe = false;
+		for (Iterator<Recipe> iterator = handler.iterator(); iterator.hasNext();) {
+			Recipe recipe = iterator.next();
+			if (hasInput(recipe, stack, type)) {
+				hasRecipe = true;
+				dy += drawRecipe(x + 32, y + dy, stack, type, mouseX, mouseY, recipe, items);
+			}
+		}
+		if (hasRecipe) {
+			drawHorizontalLineShadowed(x - 9, y + 7, x);
+			drawHorizontalLineShadowed(x + 15, y + 7, x + 23);
+			drawStack(new ItemStack(blocks[machineIndex], 1, 0), x, y, mouseX, mouseY, false);
+			dy = Math.max(dy, 16);
+		}
+		return dy;
+	}
+
+	private boolean hasInput(Recipe recipe, ItemStack stack, RecipeSlotType type) {
+		for (int j = 0; j < recipe.inputs.length; j++) {
+			int id = 0;
+			if (type == RecipeSlotType.INVENTORY) {
+				id = recipe.inputs[j].itemId;
+			} else if (type == RecipeSlotType.TANK) {
+				int fluidId = recipe.inputs[j].itemId;
+				Fluid fluid = FluidRegistry.getFluid(fluidId);
+				if (fluid == null)
+					continue;
+				id = fluid.getBlockID();
+			}
+			if (id == stack.itemID)
+				return true;
+		}
+		return false;
+	}
+
+	private int drawRecipe(int x, int y, ItemStack stack, RecipeSlotType type, int mouseX, int mouseY, Recipe recipe, HashSet<Integer> items) {
+		int dy = 0;
+		for (int j2 = 0; j2 < recipe.outputs.length; j2++) {
+
+			drawVerticalLineShadowed(x - 8, y + 6, y + dy + 8);
+			drawHorizontalLineShadowed(x - 8, y + 7 + dy, x);
+			if (recipe.outputs[j2].type == RecipeSlotType.INVENTORY) {
+				dy += drawTree(new ItemStack(recipe.outputs[j2].itemId, 0, 0), x, y + dy, RecipeSlotType.INVENTORY, mouseX, mouseY, items);
+			} else if (recipe.outputs[j2].type == RecipeSlotType.TANK) {
+				int fid = FluidRegistry.getFluid(recipe.outputs[j2].itemId).getBlockID();
+				dy += drawTree(new ItemStack(fid, 0, 0), x, y + dy, RecipeSlotType.TANK, mouseX, mouseY, items);
+			}
+		}
+
+		return dy;
 	}
 
 	@Override

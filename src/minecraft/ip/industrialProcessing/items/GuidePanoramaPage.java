@@ -29,7 +29,6 @@ public abstract class GuidePanoramaPage extends GuidePage {
 	private int lastDragY;
 	private boolean last;
 
-
 	public GuidePanoramaPage(Rectangle rectangle, Point location) {
 		this.rectangle = rectangle;
 		this.location = location;
@@ -55,25 +54,25 @@ public abstract class GuidePanoramaPage extends GuidePage {
 		Minecraft mc = Minecraft.getMinecraft();
 		ScaledResolution res = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
 
-		int sSW = rectangle.width;
-		int sSH = rectangle.height;
-		int sSL = location.x + x;
-		int sST = location.y + y + sSH;
+		int sSW = rectangle.width - 8;
+		int sSH = rectangle.height - 8;
+		int sSL = location.x + x + 4;
+		int sST = location.y + y + 4 + sSH;
 
 		int sL = sSL * mc.displayWidth / res.getScaledWidth();
 		int sT = mc.displayHeight - sST * mc.displayHeight / res.getScaledHeight();
 		int sW = sSW * mc.displayWidth / res.getScaledWidth();
-		int sH = sSH * mc.displayHeight / res.getScaledHeight(); 
+		int sH = sSH * mc.displayHeight / res.getScaledHeight();
 		GL11.glScissor(sL, sT, sW, sH);
 		this.zLevel = 0;
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 		GL11.glEnable(GL11.GL_SCISSOR_TEST);
 		drawBackground(x, y);
 		GL11.glPushMatrix();
-		
+
 		int dx = -offsetX + x + location.x + 5;
 		int dy = -offsetY + y + location.y + 5;
-		
+
 		GL11.glTranslatef(dx, dy, 0);
 		drawPane(mouseX - dx, mouseY - dy);
 		GL11.glPopMatrix();
@@ -106,8 +105,8 @@ public abstract class GuidePanoramaPage extends GuidePage {
 	}
 
 	private void drawBackground(int x, int y) {
-		y += rectangle.y + 30;
-		x += rectangle.x + 10;
+		y += rectangle.y + location.y + 5;
+		x += rectangle.x + location.x + 5;
 		rnd = new Random(150);
 		Minecraft mc = Minecraft.getMinecraft();
 		mc.renderEngine.func_110577_a(TextureMap.field_110575_b);
