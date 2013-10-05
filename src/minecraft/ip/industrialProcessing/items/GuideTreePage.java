@@ -14,6 +14,7 @@ import ip.industrialProcessing.machines.filter.TileEntityFilter;
 import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import ip.industrialProcessing.machines.oxygenFurnace.TileEntityOxygenFurnace;
 import ip.industrialProcessing.machines.pelletExtruder.TileEntityPelletExtruder;
+import ip.industrialProcessing.multiblock.core.block.blastFurnace.TEmultiblockBlastFurnace;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeSlotType;
 
@@ -26,8 +27,10 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.item.ItemCoal;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraftforge.fluids.Fluid;
@@ -36,18 +39,21 @@ import net.minecraftforge.fluids.IFluidBlock;
 
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+
 public class GuideTreePage extends GuidePanoramaPage {
 
 	private static final int FILL_COLOR = 0xffc6c6c6;
 	private static final int HIGHLIGT_COLOR = 0xffffffff;
 	private static final int SHADOW_COLOR = 0x88000000;
 
-	private static ItemStack[] baseStacks = new ItemStack[] { new ItemStack(IndustrialProcessing.blockChromiteOre), new ItemStack(IndustrialProcessing.blockCinnebar), new ItemStack(IndustrialProcessing.blockCopperOre), new ItemStack(IndustrialProcessing.blockGalenaOre), new ItemStack(IndustrialProcessing.blockTinOre), new ItemStack(IndustrialProcessing.blockRutileOre), new ItemStack(IndustrialProcessing.blockTaliaOre), new ItemStack(Block.oreGold), new ItemStack(Block.oreIron) };
+	private static ItemStack[] baseStacks = new ItemStack[] { new ItemStack(IndustrialProcessing.blockRutile), new ItemStack(IndustrialProcessing.blockCinnebar), new ItemStack(IndustrialProcessing.blockChromiteOre), new ItemStack(IndustrialProcessing.blockCopperOre), new ItemStack(IndustrialProcessing.blockGalenaOre), new ItemStack(IndustrialProcessing.blockTinOre), new ItemStack(IndustrialProcessing.blockTaliaOre), new ItemStack(Block.oreGold), new ItemStack(Block.oreIron), new ItemStack(ItemCoal.coal) };
 
-	RecipesMachine[] handlers = new RecipesMachine[] { TileEntityCrusher.recipes, TileEntityFilter.recipes, TileEntityMixer.recipes, TileEntityDryer.recipes, TileEntityClassifier.recipes, TileEntityDiskFilter.recipes, TileEntityPelletExtruder.recipes, TileEntityOxygenFurnace.recipes, TileEntityBlastFurnace.recipes };
-	int[] blocks = new int[] { ConfigMachineBlocks.getCrusherBlockID(), ConfigMachineBlocks.getFilterBlockID(), ConfigMachineBlocks.getMixerBlockID(), ConfigMachineBlocks.getDryerBlockID(), ConfigMachineBlocks.getClassifierBlockID(), ConfigMachineBlocks.getDiskFilterBlockID(), ConfigMachineBlocks.getPelletExtruderID(), ConfigMachineBlocks.getOxygenFurnaceID(), ConfigMachineBlocks.getBlastFurnaceID() };
+	RecipesMachine[] handlers = new RecipesMachine[] { TileEntityCrusher.recipes, TileEntityFilter.recipes, TileEntityMixer.recipes, TileEntityDryer.recipes, TileEntityClassifier.recipes, TileEntityDiskFilter.recipes, TileEntityPelletExtruder.recipes, TileEntityOxygenFurnace.recipes, TEmultiblockBlastFurnace.recipes, TEmultiblockBlastFurnace.recipes };
+	int[] blocks = new int[] { ConfigMachineBlocks.getCrusherBlockID(), ConfigMachineBlocks.getFilterBlockID(), ConfigMachineBlocks.getMixerBlockID(), ConfigMachineBlocks.getDryerBlockID(), ConfigMachineBlocks.getClassifierBlockID(), ConfigMachineBlocks.getDiskFilterBlockID(), ConfigMachineBlocks.getPelletExtruderID(), ConfigMachineBlocks.getOxygenFurnaceID(), ConfigMachineBlocks.getBLmultiblockBlastFurnace(), ConfigMachineBlocks.getBLmultiblockWeldingStation() };
 	private ItemStack selectedStack;
 	private ItemStack hoverStack;
+	private boolean mouseInside;
 
 	public GuideTreePage() {
 		super(new Rectangle(0, 0, 246 - 32, 178), new Point(5 + 32, 18));
@@ -68,13 +74,14 @@ public class GuideTreePage extends GuidePanoramaPage {
 		for (int i = 0; i < baseStacks.length; i++) {
 			int ix = i % 2;
 			int iy = i / 2;
-			drawStack(baseStacks[i], x + 8 + ix * 16, y + 32 + iy * 16, mouseX, mouseY, true);
+			drawStack(baseStacks[i], x + 8 + ix * 16, y + 32 + iy * 16, mouseX, mouseY, true, true);
 		}
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 	}
 
 	@Override
-	protected void drawPane(int mouseX, int mouseY) {
+	protected void drawPane(int mouseX, int mouseY, boolean mouseInside) {
+		this.mouseInside = mouseInside;
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glPushMatrix();
 		GL11.glTranslatef(1, 1, 11);
@@ -107,7 +114,7 @@ public class GuideTreePage extends GuidePanoramaPage {
 		}
 	}
 
-	private void drawStack(ItemStack stack, int x, int y, int mouseX, int mouseY, boolean clickAble) {
+	private void drawStack(ItemStack stack, int x, int y, int mouseX, int mouseY, boolean clickAble, boolean tooltip) {
 		if (stack == null)
 			return;
 		Minecraft mc = Minecraft.getMinecraft();
@@ -124,7 +131,7 @@ public class GuideTreePage extends GuidePanoramaPage {
 		GuiTools.drawItemStack(stack, x, y, null, GuiGuide.itemRenderer, mc.fontRenderer, mc.renderEngine);
 
 		Rectangle rect = new Rectangle(x, y, 16, 16);
-		if (rect.contains(mouseX, mouseY)) {
+		if (tooltip && rect.contains(mouseX, mouseY)) {
 			ToolTip tip = new ToolTip(stack.getDisplayName());
 			ToolTip.renderToolTip(tip, mouseX + 16, mouseY, 10, mc.fontRenderer);
 			if (clickAble)
@@ -137,7 +144,7 @@ public class GuideTreePage extends GuidePanoramaPage {
 	}
 
 	private int drawTree(ItemStack stack, int x, int y, RecipeSlotType type, int mouseX, int mouseY, HashSet<Integer> items) {
-		drawStack(stack, x, y, mouseX, mouseY, true);
+		drawStack(stack, x, y, mouseX, mouseY, true, this.mouseInside);
 		int dy = 0;
 		if (!items.contains(stack.itemID)) {
 			items.add(stack.itemID);
@@ -156,11 +163,36 @@ public class GuideTreePage extends GuidePanoramaPage {
 				drawVerticalLineShadowed(x + 22, y + 6, y + dy + 8);
 			}
 			dy += ddy;
+
+			ddy = drawFurnace(x + 32, y + dy, stack, type, mouseX, mouseY, items);
+			if (ddy > 0) {
+				drawVerticalLineShadowed(x + 22, y + 6, y + dy + 8);
+			}
+			dy += ddy;
 		}
 		if (dy > 0) {
 			drawHorizontalLineShadowed(x + 15, y + 7, x + 22);
 		}
 		return Math.max(dy, 32);
+	}
+
+	private int drawFurnace(int x, int y, ItemStack stack, RecipeSlotType type, int mouseX, int mouseY, HashSet<Integer> items) {
+		if (type != RecipeSlotType.INVENTORY) // TODO: dump liquids in
+			// containers for crafting?
+			return 0;
+
+		int dy = 0;
+		ItemStack output = FurnaceRecipes.smelting().getSmeltingResult(stack);
+		if (output != null) {
+			drawVerticalLineShadowed(x + 24, y + 6, y + dy + 8);
+			drawHorizontalLineShadowed(x + 24, y + 7 + dy, x + 32);
+			dy += drawTree(output, x + 32, y + dy, RecipeSlotType.INVENTORY, mouseX, mouseY, items);
+			drawStack(new ItemStack(Block.furnaceBurning), x, y, mouseX, mouseY, false, this.mouseInside);
+			drawHorizontalLineShadowed(x - 9, y + 7, x);
+			drawHorizontalLineShadowed(x + 15, y + 7, x + 23);
+			return Math.max(dy, 32);
+		}
+		return dy;
 	}
 
 	private int drawCrafting(int x, int y, ItemStack stack, RecipeSlotType type, int mouseX, int mouseY, HashSet<Integer> items) {
@@ -177,12 +209,14 @@ public class GuideTreePage extends GuidePanoramaPage {
 			if (hasInput(recipe, stack)) {
 				hasCrafting = true;
 				ItemStack output = recipe.getRecipeOutput();
-				drawTree(output, x + 32, y + dy, RecipeSlotType.INVENTORY, mouseX, mouseY, items);
+				drawVerticalLineShadowed(x + 24, y + 6, y + dy + 8);
+				drawHorizontalLineShadowed(x + 24, y + 7 + dy, x + 32);
+				dy += drawTree(output, x + 32, y + dy, RecipeSlotType.INVENTORY, mouseX, mouseY, items);
 			}
 		}
 
 		if (hasCrafting) {
-			drawStack(new ItemStack(Block.workbench), x, y, mouseX, mouseY, false);
+			drawStack(new ItemStack(Block.workbench), x, y, mouseX, mouseY, false, this.mouseInside);
 			drawHorizontalLineShadowed(x - 9, y + 7, x);
 			drawHorizontalLineShadowed(x + 15, y + 7, x + 23);
 			return Math.max(dy, 32);
@@ -238,7 +272,7 @@ public class GuideTreePage extends GuidePanoramaPage {
 		if (hasRecipe) {
 			drawHorizontalLineShadowed(x - 9, y + 7, x);
 			drawHorizontalLineShadowed(x + 15, y + 7, x + 23);
-			drawStack(new ItemStack(blocks[machineIndex], 1, 0), x, y, mouseX, mouseY, false);
+			drawStack(new ItemStack(blocks[machineIndex], 1, 0), x, y, mouseX, mouseY, false, this.mouseInside);
 			dy = Math.max(dy, 16);
 		}
 		return dy;
@@ -256,7 +290,7 @@ public class GuideTreePage extends GuidePanoramaPage {
 					continue;
 				id = fluid.getBlockID();
 			}
-			if (id == stack.itemID)
+			if (id == stack.itemID && type == recipe.inputs[j].type)
 				return true;
 		}
 		return false;

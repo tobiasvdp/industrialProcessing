@@ -17,7 +17,7 @@ import ip.industrialProcessing.multiblock.utils.MultiblockActionType;
 public class TEmultiblockBlastFurnace extends TEmultiblockCoreInv {
 	static StructureMultiblock structure;
 	static TierCollection tierRequirments;
-	static RecipesMachine recipes = new RecipesMultiblockBlastFurnace();
+	public static RecipesMachine recipes = new RecipesMultiblockBlastFurnace();
 	static{
 		//set layout
 		structure = new StructureMultiblock();

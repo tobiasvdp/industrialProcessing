@@ -21,7 +21,8 @@ public class ConfigBlocks {
 	private int blockIronFlatID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "IronFlatID", 1007).getInt();
 
 	private int blockCinnebarCrystalID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(), "CinnebarCrystalID", 1008).getInt();
-	private int blockGritID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "blockGritID", 1009).getInt();
+	private int blockRutileCrystalID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(), "RutileCrystalID", 1009).getInt();
+	private int blockGritID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "blockGritID", 1010).getInt();
 
 	private int blockPlatformID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "PlatformFlatID", 2001).getInt();
 	private int blockStairsID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "PlatformStairsID", 2002).getInt();
@@ -41,6 +42,11 @@ public class ConfigBlocks {
 	public static int getBlockCinnebarCrystalID() {
 		return getInstance().blockCinnebarCrystalID;
 	}
+	
+	public static int getBlockRutileCrystalID() {
+		return getInstance().blockRutileCrystalID;
+	}
+
 
 	public static int getBlockTaliaOreID() {
 		return getInstance().blockTaliaOreID;
@@ -94,6 +100,7 @@ public class ConfigBlocks {
 		registerBlock(IndustrialProcessing.blockStairs, "IP.Block.Stairs", "Walkway Stairs");
 
 		registerBlock(IndustrialProcessing.blockCinnebar, "IP.World.Cinnebar", "Cinnebar Crystal");
+		registerBlock(IndustrialProcessing.blockRutile, "IP.World.Rutile", "Rutile Crystal");
 	}
 
 	private void registerOre(Block block, String uniqueId, String displayName, String oreDictionaryKey) {

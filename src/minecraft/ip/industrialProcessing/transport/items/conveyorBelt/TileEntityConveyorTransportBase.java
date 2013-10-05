@@ -82,6 +82,8 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
 			for (int i = this.itemStacks.size() - 1; i >= 0; i--) {
 				MovingItemStack stack = this.itemStacks.get(i);
 				stack.progress += speed * DT;
+				if(stack.progress >= 1)
+					this.itemStacks.remove(i);
 			}
 
 		}
