@@ -17,6 +17,8 @@ public class RecipesIncubator extends RecipesMachine{
 
 	private void addDefaultRecipes() {
 		addRecipe(rottenFleshToCulture(12000));
+		addRecipe(meatToRottenFlesh(12000));
+		addRecipe(porkToRottenFlesh(12000));
 	}
 	
 	private Recipe rottenFleshToCulture(int workTime) {
@@ -24,6 +26,24 @@ public class RecipesIncubator extends RecipesMachine{
 		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.rottenFlesh.itemID, RecipeSlotType.INVENTORY, 3) };
 
 		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemGrownCulture.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
+		recipe.workRequired = workTime;
+		return recipe;
+	}
+	
+	private Recipe meatToRottenFlesh(int workTime) {
+		Recipe recipe = new Recipe();
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.beefRaw.itemID, RecipeSlotType.INVENTORY, 3) };
+
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, Item.rottenFlesh.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
+		recipe.workRequired = workTime;
+		return recipe;
+	}
+	
+	private Recipe porkToRottenFlesh(int workTime) {
+		Recipe recipe = new Recipe();
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.porkRaw.itemID, RecipeSlotType.INVENTORY, 3) };
+
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, Item.rottenFlesh.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
 		recipe.workRequired = workTime;
 		return recipe;
 	}

@@ -65,6 +65,9 @@ public class ConfigFluids {
 	private int blockFluidBaseResiduID = offset+30;
 	private int BucketResiduID = offset+31;
 	
+	private int blockFluidBaseMicrobialWaterID = offset+32;
+	private int BucketMicrobialWaterID = offset+33;
+	
 	public static int bucketOreSludgeChromiteID(){return getInstance().bucketOreSludgeChromiteID;}
 	public static int bucketOreSludgeGalenaID(){return getInstance().bucketOreSludgeGalenaID;}
 	public static int bucketOreSludgeGoldID(){return getInstance().bucketOreSludgeGoldID;}
@@ -102,7 +105,16 @@ public class ConfigFluids {
 	
 	public static int blockFluidBaseResiduID() {return getInstance().blockFluidBaseResiduID ;}
 	public static int BucketResiduID() {return getInstance().BucketResiduID ;}
+	
+	public static int blockFluidBaseMicrobialWaterID() {return getInstance().blockFluidBaseMicrobialWaterID ;}
+	public static int BucketMicrobialWaterID() {return getInstance().BucketMicrobialWaterID ;}
 	public void registerFluids(){
+		registerFluid(IndustrialProcessing.blockFluidMicrobialWater, IndustrialProcessing.itemFluidMicrobialWater, IndustrialProcessing.bucketMicrobialWater, "Microbial water");
+		LanguageRegistry.addName(IndustrialProcessing.bucketMicrobialWater, "Microbial water Bucket");
+		registerFluid(IndustrialProcessing.blockFluidUncleanWater, IndustrialProcessing.itemFluidUncleanWater, IndustrialProcessing.bucketUncleanWater, "Unclean water");
+		LanguageRegistry.addName(IndustrialProcessing.bucketUncleanWater, "Unclean water Bucket");
+		registerFluid(IndustrialProcessing.blockFluidResidu, IndustrialProcessing.itemFluidResidu, IndustrialProcessing.bucketResidu, "Residu");
+		LanguageRegistry.addName(IndustrialProcessing.bucketResidu, "Residu Bucket");
 		registerFluid(IndustrialProcessing.blockFluidGritSludge, IndustrialProcessing.itemFluidGritSludge, IndustrialProcessing.bucketGritSludge, "Grit sludge");
 		LanguageRegistry.addName(IndustrialProcessing.bucketGritSludge, "Grit sludge Bucket");
 		registerFluid(IndustrialProcessing.blockFluidDirtyWater, IndustrialProcessing.itemFluidDirtyWater, IndustrialProcessing.bucketDirtyWater, "Dirty water");

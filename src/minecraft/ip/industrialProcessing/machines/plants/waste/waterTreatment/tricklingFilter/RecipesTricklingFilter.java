@@ -14,14 +14,14 @@ public class RecipesTricklingFilter extends RecipesMachine{
 	}
 
 	private void addDefaultRecipes() {
-		addRecipe(filtyToDirty(3000));
+		addRecipe(uncleanToWater(3000));
 	}
 	
-	private Recipe filtyToDirty(int i) {
+	private Recipe uncleanToWater(int i) {
 		Recipe recipe = new Recipe();
 		recipe.workRequired = i;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 1000), new RecipeInputSlot(0, IndustrialProcessing.itemGrownCulture.itemID, RecipeSlotType.DAMAGEDITEM, 1) };
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidUncleanWater.getName()), RecipeSlotType.TANK, 1000), new RecipeInputSlot(0, IndustrialProcessing.itemGrownCulture.itemID, RecipeSlotType.DAMAGEDITEM, 1) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidMicrobialWater.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
 		return recipe;
 	}
 }

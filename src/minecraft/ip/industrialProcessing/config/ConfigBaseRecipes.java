@@ -15,6 +15,7 @@ public class ConfigBaseRecipes {
 
 	public void addBaseRecipes() {
 		GameRegistry.addShapelessRecipe(new ItemStack(IndustrialProcessing.itemThickStick), new ItemStack(Item.stick), new ItemStack(Item.stick));
+		GameRegistry.addShapelessRecipe(new ItemStack(IndustrialProcessing.itemActiveCoal), new ItemStack(IndustrialProcessing.itemCoalDust), new ItemStack(IndustrialProcessing.itemGrownCulture));
 		GameRegistry.addRecipe(new ItemStack(IndustrialProcessing.itemHammer), "   ", " y ", "x  ", 'x',new ItemStack(IndustrialProcessing.itemThickStick), 'y', new ItemStack(Item.ingotIron));
 		//GameRegistry.addShapedRecipe(new ItemStack(IndustrialProcessing.blockMultiblockWeldingStationScreen),"xxx","x x"," y ",'x',new ItemStack(Item.ingotIron),'y',new ItemStack(IndustrialProcessing.itemHammer,1,WILDCARD_VALUE) );
 		GameRegistry.addRecipe(new ItemStack(IndustrialProcessing.itemBlowingTorch), "   ", " y ", "x  ", 'x',new ItemStack(Item.ingotIron), 'y', new ItemStack(Item.flintAndSteel));
