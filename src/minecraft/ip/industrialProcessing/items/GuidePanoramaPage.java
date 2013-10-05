@@ -19,8 +19,8 @@ import org.lwjgl.opengl.GL11;
 public abstract class GuidePanoramaPage extends GuidePage {
 
 	private Rectangle rectangle;
-	private int offsetX;
-	private int offsetY;
+	protected int offsetX;
+	protected int offsetY;
 	private Point location;
 	private ResourceLocation textureLocation;
 	private Random rnd = new Random(15665);
@@ -49,6 +49,8 @@ public abstract class GuidePanoramaPage extends GuidePage {
 			last = true;
 		}
 
+		int scale = 1;
+
 		offsetY = Math.max(0, offsetY);
 		offsetX = Math.max(0, offsetX);
 
@@ -66,16 +68,19 @@ public abstract class GuidePanoramaPage extends GuidePage {
 		int sH = sSH * mc.displayHeight / res.getScaledHeight();
 		GL11.glScissor(sL, sT, sW, sH);
 		this.zLevel = 0;
+
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 		GL11.glEnable(GL11.GL_SCISSOR_TEST);
-		drawBackground(x, y);
 		GL11.glPushMatrix();
+		GL11.glScalef(1f / scale, 1f / scale, 1);
 
-		int dx = -offsetX + x + location.x + 5;
-		int dy = -offsetY + y + location.y + 5;
+		int dx = -offsetX + (x + location.x + 5) * scale;
+		int dy = -offsetY + (y + location.y + 5) * scale;
 
-		Rectangle containment = new Rectangle(location.x + 5+x, location.y + 5+y, rectangle.width - 10, rectangle.height - 10);
-		boolean mouseInside = containment.contains(mouseX, mouseY); 
+		Rectangle containment = new Rectangle(location.x + 5 + x, location.y + 5 + y, rectangle.width - 10, rectangle.height - 10);
+		boolean mouseInside = containment.contains(mouseX, mouseY);
+
+		drawBackground((x +  location.x + 5) / scale, (y + location.y + 5) / scale);
 		GL11.glTranslatef(dx, dy, 0);
 		drawPane(mouseX - dx, mouseY - dy, mouseInside);
 		GL11.glPopMatrix();
@@ -108,8 +113,6 @@ public abstract class GuidePanoramaPage extends GuidePage {
 	}
 
 	private void drawBackground(int x, int y) {
-		y += rectangle.y + location.y + 5;
-		x += rectangle.x + location.x + 5;
 		rnd = new Random(150);
 		Minecraft mc = Minecraft.getMinecraft();
 		mc.renderEngine.func_110577_a(TextureMap.field_110575_b);

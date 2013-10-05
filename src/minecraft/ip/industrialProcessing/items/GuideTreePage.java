@@ -116,6 +116,8 @@ public class GuideTreePage extends GuidePanoramaPage {
 		super.mouseClicked(x, y, par3);
 		if (this.hoverStack != null) {
 			this.selectedStack = this.hoverStack;
+			this.offsetX = 0;
+			this.offsetY = 0;
 		}
 	}
 
@@ -174,9 +176,13 @@ public class GuideTreePage extends GuidePanoramaPage {
 				drawVerticalLineShadowed(x + 22, y + 6, y + dy + 8);
 			}
 			dy += ddy;
-		}
-		if (dy > 0) {
-			drawHorizontalLineShadowed(x + 15, y + 7, x + 22);
+			if (dy > 0) {
+				drawHorizontalLineShadowed(x + 15, y + 7, x + 22);
+			}
+		} else {
+			drawHorizontalLineShadowed(x + 15, y + 7, x + 17);
+			drawHorizontalLineShadowed(x + 19, y + 7, x + 21);
+			drawHorizontalLineShadowed(x + 23, y + 7, x + 25);
 		}
 		return Math.max(dy, 32);
 	}
@@ -267,10 +273,13 @@ public class GuideTreePage extends GuidePanoramaPage {
 		RecipesMachine handler = handlers[machineIndex];
 		int dy = 0;
 		boolean hasRecipe = false;
+		int lastDy = 0;
 		for (Iterator<Recipe> iterator = handler.iterator(); iterator.hasNext();) {
 			Recipe recipe = iterator.next();
 			if (hasInput(recipe, stack, type)) {
 				hasRecipe = true;
+				drawVerticalLineShadowed(x + 24, y + 6 + lastDy, y + dy + 8);
+				lastDy = dy;
 				dy += drawRecipe(x + 32, y + dy, stack, type, mouseX, mouseY, recipe, items);
 			}
 		}
