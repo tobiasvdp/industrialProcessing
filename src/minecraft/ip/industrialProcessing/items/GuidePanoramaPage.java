@@ -48,6 +48,7 @@ public abstract class GuidePanoramaPage extends GuidePage {
 			lastDragY = mouseY;
 			last = true;
 		}
+
 		offsetY = Math.max(0, offsetY);
 		offsetX = Math.max(0, offsetX);
 
@@ -73,8 +74,10 @@ public abstract class GuidePanoramaPage extends GuidePage {
 		int dx = -offsetX + x + location.x + 5;
 		int dy = -offsetY + y + location.y + 5;
 
+		Rectangle containment = new Rectangle(location.x + 5+x, location.y + 5+y, rectangle.width - 10, rectangle.height - 10);
+		boolean mouseInside = containment.contains(mouseX, mouseY); 
 		GL11.glTranslatef(dx, dy, 0);
-		drawPane(mouseX - dx, mouseY - dy);
+		drawPane(mouseX - dx, mouseY - dy, mouseInside);
 		GL11.glPopMatrix();
 		mc.renderEngine.func_110577_a(this.textureLocation);
 		GL11.glDisable(GL11.GL_ALPHA_TEST);
@@ -156,6 +159,6 @@ public abstract class GuidePanoramaPage extends GuidePage {
 		return i * mc.displayHeight / res.getScaledHeight();
 	}
 
-	protected abstract void drawPane(int mouseX, int mouseY);
+	protected abstract void drawPane(int mouseX, int mouseY, boolean mouseInside);
 
 }

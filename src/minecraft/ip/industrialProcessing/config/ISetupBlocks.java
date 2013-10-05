@@ -4,6 +4,7 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.buildingBlock.BlockIP;
 import ip.industrialProcessing.buildingBlock.BlockOreIP;
 import ip.industrialProcessing.decoration.crystals.BlockCinnebar;
+import ip.industrialProcessing.decoration.crystals.BlockRutile;
 import ip.industrialProcessing.decoration.platforms.BlockPlatform;
 import ip.industrialProcessing.decoration.platforms.BlockStairs;
 import net.minecraft.block.Block;
@@ -24,4 +25,5 @@ public interface ISetupBlocks {
 	public final static BlockPlatform blockPlatform = new BlockPlatform();
 	public final static BlockStairs blockStairs = new BlockStairs();
 	public final static BlockCinnebar blockCinnebar = new BlockCinnebar();
+	public final static BlockRutile blockRutile = new BlockRutile();
 }
