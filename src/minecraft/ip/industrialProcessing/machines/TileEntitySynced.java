@@ -17,6 +17,7 @@ public class TileEntitySynced extends TileEntity {
 	@Override
 	public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
 		readFromNBT(packet.customParam1);
+		this.worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 	}
 
 	protected void notifyBlockChange() {

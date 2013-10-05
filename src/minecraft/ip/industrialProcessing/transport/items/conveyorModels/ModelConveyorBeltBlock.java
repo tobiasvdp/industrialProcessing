@@ -41,7 +41,7 @@ public class ModelConveyorBeltBlock extends ModelBlock {
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
-
+		System.out.println("ModelConveyorBeltBlock.renderWorldBlock()");
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
 		tessellator.setColorOpaque(255, 255, 255);
@@ -65,7 +65,7 @@ public class ModelConveyorBeltBlock extends ModelBlock {
 			SlopeState bs = belt.getSlope(LocalDirection.FRONT);
 
 			if (fs != SlopeState.FLAT || bs != SlopeState.FLAT || front.isConnected() && back.isConnected() && !left.isConnected() && !right.isConnected()) {
-				slopes.getRenderer(fs, bs).getRotated(dir).renderMesh(false, icon, position); 
+				slopes.getRenderer(fs, bs).getRotated(dir).renderMesh(false, icon, position);
 			} else if (front.isConnected() && left.isConnected() && !back.isConnected() && !right.isConnected()) {
 				cornerLeft.getRotated(dir).renderMesh(false, icon, position);
 			} else if (front.isConnected() && right.isConnected() && !back.isConnected() && !left.isConnected()) {

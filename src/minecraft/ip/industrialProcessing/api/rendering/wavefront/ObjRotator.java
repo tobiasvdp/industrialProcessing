@@ -8,9 +8,13 @@ public class ObjRotator {
 	private int offset;
 
 	public ObjRotator(ObjMesh baseMesh, int offset) {
-		this.meshes = new ObjMesh[4];
+		this(baseMesh, offset, 4);
+	}
+
+	public ObjRotator(ObjMesh baseMesh, int offset, int amount) {
+		this.meshes = new ObjMesh[amount];
 		this.meshes[0] = baseMesh;
-		Matrix4f rotation = Matrix4f.rotate((float) Math.PI / 2, new Vector3f(0, 1, 0), new Matrix4f(), null);
+		Matrix4f rotation = Matrix4f.rotate((float) (Math.PI * 2 / amount), new Vector3f(0, 1, 0), new Matrix4f(), null);
 		for (int i = 1; i < this.meshes.length; i++) {
 			this.meshes[i] = this.meshes[i - 1].cloneTransformed(rotation);
 		}

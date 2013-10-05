@@ -38,10 +38,10 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
 	protected abstract TransportConnectionState getState(TileEntity entity, ForgeDirection direction);
 
 	public void searchForConnections() {
-		this.unverified = true;
-		if (this.worldObj.isRemote)
-			updateConnections(); // do an extra clientside check to reduce
-									// flicker.
+		 this.unverified = true;
+		// if (this.worldObj.isRemote)
+		//updateConnections(); // do an extra clientside check to reduce
+								// flicker.
 	}
 
 	protected void updateConnections() {
@@ -59,10 +59,10 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
 				modified = true;
 			}
 		}
+		System.out.println("States at " + xCoord + ", " + yCoord + ", " + zCoord + " are  UP:" + this.states[ForgeDirection.UP.ordinal()] + " DOWN:" + this.states[ForgeDirection.DOWN.ordinal()]);
 		// if the network changed, update the map
 		if (modified)
 			updateNetwork();
-		System.out.println("States at " + xCoord + ", " + yCoord + ", " + zCoord + " are  UP:" + this.states[ForgeDirection.UP.ordinal()] + " DOWN:" + this.states[ForgeDirection.DOWN.ordinal()]);
 		this.unverified = false;
 	}
 
@@ -79,18 +79,20 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
 	public TransportConnectionState getTransportConnection(ForgeDirection direction) {
 		return states[direction.ordinal()];
 	}
-    /**
-     * Sets the block ID and metadata at a given location. Args: X, Y, Z, new block ID, new metadata, flags. Flag 1 will
-     * cause a block update. Flag 2 will send the change to clients (you almost always want this). Flag 4 prevents the
-     * block from being re-rendered, if this is a client world. Flags can be added together.
-     */
+
+	/**
+	 * Sets the block ID and metadata at a given location. Args: X, Y, Z, new
+	 * block ID, new metadata, flags. Flag 1 will cause a block update. Flag 2
+	 * will send the change to clients (you almost always want this). Flag 4
+	 * prevents the block from being re-rendered, if this is a client world.
+	 * Flags can be added together.
+	 */
 	protected void updateNetwork() {
 		notifyBlockChange();
-		this.worldObj.notifyBlockChange(xCoord, yCoord, zCoord, 3);
-		this.worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+		System.out.println("TileEntityTransport.updateNetwork()");		
 	}
 
-	private TransportConnectionState getNeighborState(ForgeDirection direction) {
+	public TransportConnectionState getNeighborState(ForgeDirection direction) {
 		TileEntity entity = getConnectionNeighbor(direction);
 		if (entity == null)
 			return TransportConnectionState.NONE;

@@ -14,7 +14,7 @@ public class ObjMeshFile {
 	public String toString() {
 
 		StringBuilder builder = new StringBuilder();
-		builder.append("package ip.industrialProcessing.transport.items.conveyorModels;\n\r");
+		builder.append("package ip.industrialProcessing.transport.fluids.models.pipe;\n\r");
 		builder.append("import ip.industrialProcessing.api.rendering.wavefront.ObjMesh;\n\r");
 		builder.append("import ip.industrialProcessing.api.rendering.wavefront.ObjQuad;\n\r");
 		builder.append("\n\r");

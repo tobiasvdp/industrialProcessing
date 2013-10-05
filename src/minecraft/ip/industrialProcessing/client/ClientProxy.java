@@ -102,6 +102,7 @@ import ip.industrialProcessing.transport.fluids.TileEntityTank;
 import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids;
 import ip.industrialProcessing.transport.fluids.TileEntityValve;
 import ip.industrialProcessing.transport.fluids.models.ModelTankBlock;
+import ip.industrialProcessing.transport.fluids.models.pipe.ModelPipeBlock;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorBelt;
 import ip.industrialProcessing.transport.items.conveyorBelt.rendering.ModelConveyorBeltTile;
 import ip.industrialProcessing.transport.items.conveyorInput.ModelConveyorInput;
@@ -139,6 +140,7 @@ public class ClientProxy extends CommonProxy {
 	private static final ModelStateMachine blastFurnaceTop = new ModelBlastFurnaceTop();
 	private static final ModelConnectedFluid tankEntity = new ModelTank();
 	private static final ModelBlock tankBlock = new ModelTankBlock();
+	private static final ModelBlock pipeBlock = new ModelPipeBlock();
 	private static final ModelAnimatedFluidMachine boiler = new ModelBoiler();
 	private static final ModelMachine solidBurner = new ModelSolidBurner();
 	private static final ModelAnimatedFluidMachine turbine = new ModelTurbine();
@@ -187,6 +189,11 @@ public class ClientProxy extends CommonProxy {
 
 		ConfigRenderers.setRendererConveyorBeltID(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererConveyorBeltID(), conveyorBeltBlock));
+
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTransportFluids.class, new RendererTileEntityConnectedFluid(IndustrialProcessing.blockTransportFluids, "ModelTransportFluids", transportFluids));
+
+		ConfigRenderers.setRendererTransportFluidsId(RenderingRegistry.getNextAvailableRenderId());
+		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererTransportFluidsId(), pipeBlock));
 
 		// 100% tile entity
 
@@ -241,10 +248,6 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityValve.class, new RendererTileEntityConnectedFluidAnimated(IndustrialProcessing.blockValve, "ModelValve", valve));
 		ConfigRenderers.setRendererValveId(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererValveId(), new TileEntityValve()));
-
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTransportFluids.class, new RendererTileEntityConnectedFluid(IndustrialProcessing.blockTransportFluids, "ModelTransportFluids", transportFluids));
-		ConfigRenderers.setRendererTransportFluidsId(RenderingRegistry.getNextAvailableRenderId());
-		RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererTransportFluidsId(), new TileEntityTransportFluids()));
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRainTank.class, new RendererTileEntityConnectedFluid(IndustrialProcessing.blockRainTank, "ModelRainTank", rainTank));
 		ConfigRenderers.setRendererRainTankId(RenderingRegistry.getNextAvailableRenderId());

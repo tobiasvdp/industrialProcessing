@@ -108,6 +108,8 @@ public abstract class TileEntityConveyorConnectionsBase extends TileEntityTransp
 		this.worldObj.notifyBlockChange(xCoord, yCoord, zCoord, this.getBlockType().blockID);
 		blockId = this.worldObj.getBlockId(xCoord, yCoord - 1, zCoord);
 		this.worldObj.notifyBlockChange(xCoord, yCoord - 1, zCoord, blockId);
+		
+		this.notifyBlockChange();
 	}
 
 	@Override
