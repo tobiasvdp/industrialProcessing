@@ -9,13 +9,15 @@ import net.minecraftforge.fluids.FluidStack;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityFluidMachine;
 import ip.industrialProcessing.machines.TileEntityFluidWorkerMachine;
+import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
 import ip.industrialProcessing.machines.thickener.RecipesThickener;
 import ip.industrialProcessing.recipes.Recipe;
 
-public class TileEntityFlotationCell extends TileEntityFluidWorkerMachine {
+public class TileEntityFlotationCell extends TileEntityPoweredFluidWorkerMachine {
 
 	public TileEntityFlotationCell() {
-
+		super(LocalDirection.LEFT, 10000,100);
+		
 		LocalDirection[] nodirections = new LocalDirection[0];
 		// buckets!
 		// 0: Liquid Input Full Input

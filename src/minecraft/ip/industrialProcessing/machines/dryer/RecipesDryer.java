@@ -1,5 +1,6 @@
 package ip.industrialProcessing.machines.dryer;
 
+import net.minecraft.block.Block;
 import net.minecraftforge.fluids.FluidRegistry;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.machines.RecipesMachine;
@@ -18,7 +19,25 @@ public class RecipesDryer extends RecipesMachine {
     	addRecipe(galenaSludgeToCleanChunks(3000));
     	addRecipe(taliaSludgeToCleanChunks(3000));
     	addRecipe(chromiteSludgeToCleanChunks(3000));
+    	addRecipe(gritSludgeToGrit(3000));
+    	addRecipe(residuToSand(3000));
     }
+    
+    private Recipe gritSludgeToGrit(int i) {
+		Recipe recipe = new Recipe();
+		recipe.workRequired = i;
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidGritSludge.getName()), RecipeSlotType.TANK, 1000) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, IndustrialProcessing.blockGrit.blockID, RecipeSlotType.INVENTORY, 1, 1, 0) };
+		return recipe;
+	}
+    
+    private Recipe residuToSand(int i) {
+		Recipe recipe = new Recipe();
+		recipe.workRequired = i;
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidResidu.getName()), RecipeSlotType.TANK, 1000) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, Block.sand.blockID, RecipeSlotType.INVENTORY, 1, 1, 0) };
+		return recipe;
+	}
 
     private Recipe chromiteSludgeToCleanChunks(int i) {
 		Recipe recipe = new Recipe();
