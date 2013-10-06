@@ -87,8 +87,7 @@ import ip.industrialProcessing.power.plants.TileEntitySolidBurner;
 import ip.industrialProcessing.power.plants.TileEntityTurbine;
 import ip.industrialProcessing.power.storage.ModelEnergyCell;
 import ip.industrialProcessing.power.storage.TileEntityEnergyCell;
-import ip.industrialProcessing.power.wire.ModelWire;
-import ip.industrialProcessing.power.wire.TileEntityWire;
+import ip.industrialProcessing.power.wire.models.ModelWireBlock;
 import ip.industrialProcessing.transport.fluids.ModelManoMeter;
 import ip.industrialProcessing.transport.fluids.ModelPump;
 import ip.industrialProcessing.transport.fluids.ModelRainTank;
@@ -103,6 +102,7 @@ import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids;
 import ip.industrialProcessing.transport.fluids.TileEntityValve;
 import ip.industrialProcessing.transport.fluids.models.ModelTankBlock;
 import ip.industrialProcessing.transport.fluids.models.pipe.ModelPipeBlock;
+import ip.industrialProcessing.transport.fluids.models.pipe.ModelValveBlock;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorBelt;
 import ip.industrialProcessing.transport.items.conveyorBelt.rendering.ModelConveyorBeltTile;
 import ip.industrialProcessing.transport.items.conveyorInput.ModelConveyorInput;
@@ -124,7 +124,7 @@ public class ClientProxy extends CommonProxy {
 	private static final ModelAnimatedFluidMachine classifier = new ModelClassifier();
 	private static final ModelAnimatedFluidMachine thickener = new ModelThickener();
 	private static final ModelMachine flotationCell = new ModelFlotationCell();
-	private static final ModelConnected wire = new ModelWire();
+	private static final ModelBlock wire = new ModelWireBlock();
 	private static final ModelAnimatedMachine voltMeter = new ModelVoltMeter(false);
 	private static final ModelAnimatedMachine ampMeter = new ModelVoltMeter(true);
 	private static final ModelAnimatedMachine manoMeter = new ModelManoMeter();
@@ -132,7 +132,8 @@ public class ClientProxy extends CommonProxy {
 	private static final ModelConnectedFluid transportFluids = new ModelTransportFluids();
 	private static final ModelAnimatedMachine EnergyCell = new ModelEnergyCell();
 	private static final ModelConnectedFluid rainTank = new ModelRainTank();
-	private static final ModelConnectedFluidAnimated valve = new ModelValve();
+	private static final ModelConnectedFluidAnimated valveTile = new ModelValve();
+	private static final ModelBlock valveBlock = new ModelValveBlock();
 
 	private static final ModelAnimatedMachine crankGenerator = new ModelCrankGenerator(true);
 	private static final ModelAnimatedMachine buildcraftGenerator = new ModelCrankGenerator(false);
@@ -178,6 +179,9 @@ public class ClientProxy extends CommonProxy {
 		ConfigRenderers.setRendererStairsId(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererStairsId(), stairs));
 
+		ConfigRenderers.setRendererWireId(RenderingRegistry.getNextAvailableRenderId());
+		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererWireId(), wire));
+
 		// block & tile entity
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTank.class, new RendererTileEntityConnectedFluid(IndustrialProcessing.blockTank, "ModelTank", tankEntity));
@@ -195,6 +199,10 @@ public class ClientProxy extends CommonProxy {
 		ConfigRenderers.setRendererTransportFluidsId(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererTransportFluidsId(), pipeBlock));
 
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityValve.class, new RendererTileEntityConnectedFluidAnimated(IndustrialProcessing.blockValve, "ModelValve", valveTile));
+
+		ConfigRenderers.setRendererValveId(RenderingRegistry.getNextAvailableRenderId());
+		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererValveId(), valveBlock));
 		// 100% tile entity
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFilter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockFilter, "ModelFilter", filter));
@@ -233,10 +241,6 @@ public class ClientProxy extends CommonProxy {
 		ConfigRenderers.setRendererDiskFilterIdId(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererDiskFilterId(), new TileEntityDiskFilter()));
 
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWire.class, new RendererTileEntityConnected(IndustrialProcessing.blockWire, "ModelWire", wire));
-		ConfigRenderers.setRendererWireId(RenderingRegistry.getNextAvailableRenderId());
-		RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererWireId(), new TileEntityWire()));
-
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityVoltMeter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockVoltMeter, "ModelVoltMeter", voltMeter));
 		ConfigRenderers.setRendererVoltMeterId(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererVoltMeterId(), new TileEntityVoltMeter()));
@@ -244,10 +248,6 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAmpMeter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockAmpMeter, "ModelAmpMeter", ampMeter));
 		ConfigRenderers.setRendererAmpMeterId(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererAmpMeterId(), new TileEntityAmpMeter()));
-
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityValve.class, new RendererTileEntityConnectedFluidAnimated(IndustrialProcessing.blockValve, "ModelValve", valve));
-		ConfigRenderers.setRendererValveId(RenderingRegistry.getNextAvailableRenderId());
-		RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererValveId(), new TileEntityValve()));
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRainTank.class, new RendererTileEntityConnectedFluid(IndustrialProcessing.blockRainTank, "ModelRainTank", rainTank));
 		ConfigRenderers.setRendererRainTankId(RenderingRegistry.getNextAvailableRenderId());

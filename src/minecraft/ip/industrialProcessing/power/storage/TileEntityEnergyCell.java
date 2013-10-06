@@ -38,7 +38,7 @@ public class TileEntityEnergyCell extends TileEntityPowerGenerator implements IP
 	public int getAnimationCount() {
 		return 1;
 	}
-	
+
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
@@ -69,7 +69,7 @@ public class TileEntityEnergyCell extends TileEntityPowerGenerator implements IP
 			TileAnimationSyncHandler.sendAnimationData(this, this.animation);
 		}
 		this.animation.update();
-		
+
 	}
 
 	@Override
@@ -117,10 +117,10 @@ public class TileEntityEnergyCell extends TileEntityPowerGenerator implements IP
 		notifyBlockChange();
 		return PowerHelper.getCharge(delta, voltage);
 	}
-	
+
 	@Override
 	public AnimationHandler getAnimationHandler() {
-	
+
 		return this.animation;
 	}
 }
