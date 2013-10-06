@@ -35,27 +35,19 @@ public class BlockTransportFluids extends BlockTransport {
 
 	@Override
 	public boolean recolourBlock(World world, int x, int y, int z, ForgeDirection side, int colour) {
-        int meta = world.getBlockMetadata(x, y, z);
-        if (meta != colour)
-        {
-            ((TileEntityTransportFluidsBase)world.getBlockTileEntity(x, y, z)).setConnectionGroup(colour);
-            world.setBlockMetadataWithNotify(x, y, z, colour, 3);
-            return true;
-        }
+
+		int meta = world.getBlockMetadata(x, y, z);
+		if (meta != colour) {
+			world.setBlockMetadataWithNotify(x, y, z, colour, 3);
+			((TileEntityTransportFluidsBase) world.getBlockTileEntity(x, y, z)).setConnectionGroup(colour);
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
 		return new TileEntityTransportFluids();
-	}
-
-	@Override
-	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
-		TileEntityTransportFluidsBase entity = (TileEntityTransportFluidsBase) par1World.getBlockTileEntity(par2, par3, par4);
-		if (BlockTransportFluids.cycleConnectionStatesOnActivated(entity, par5EntityPlayer))
-			return true;
-		return false;
 	}
 
 	@Override
@@ -66,36 +58,29 @@ public class BlockTransportFluids extends BlockTransport {
 	@Override
 	public int getLightValue(IBlockAccess world, int x, int y, int z) {
 
-		TileEntityTransportFluidsBase entity = (TileEntityTransportFluidsBase) world.getBlockTileEntity(x, y, z);
-		FluidTankInfo[] subTanks = entity.getTanks();
+		TileEntity entity = world.getBlockTileEntity(x, y, z);
+		if (entity instanceof TileEntityTransportFluidsBase) {
+			TileEntityTransportFluidsBase fluidBase = (TileEntityTransportFluidsBase) entity;
+			FluidTankInfo[] subTanks = fluidBase.getTanks();
 
-		int lum = 0;
-		int tanks = 0;
+			if (subTanks != null) {
+				int lum = 0;
+				int tanks = 0;
 
-		for (int i = 0; i < subTanks.length; i++) {
-			FluidTankInfo tank = subTanks[i];
-			if (tank.fluid != null) {
-				lum += tank.fluid.getFluid().getLuminosity();
-				tanks++;
+				for (int i = 0; i < subTanks.length; i++) {
+					FluidTankInfo tank = subTanks[i];
+					if (tank.fluid != null) {
+						lum += tank.fluid.getFluid().getLuminosity();
+						tanks++;
+					}
+				}
+				if (tanks > 0)
+					return lum / tanks;
 			}
 		}
-		if (tanks > 0)
-			return lum / tanks;
 		return super.getLightValue(world, x, y, z);
 	}
-
-	public static boolean cycleConnectionStatesOnActivated(TileEntityTransportFluidsBase entity, EntityPlayer par5EntityPlayer) {
-		if (par5EntityPlayer != null) {
-			ItemStack item = par5EntityPlayer.inventory.getCurrentItem();
-			if (item != null) {
-				if (new ItemStack(Item.stick).isItemEqual(item)) {
-					entity.cycleGroups(par5EntityPlayer.isSneaking());
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+ 
 	Icon[] icon = new Icon[16];
 	@Override
 	public void registerIcons(IconRegister par1IconRegister) {

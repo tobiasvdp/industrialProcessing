@@ -13,6 +13,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import ip.industrialProcessing.api.rendering.connectedTile.ConnectionCompass;
 import ip.industrialProcessing.api.rendering.connectedTile.TileConnection;
+import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
 import ip.industrialProcessing.client.render.ModelBlock;
 
 public class ModelStairs extends ModelBlock {
@@ -66,21 +67,19 @@ public class ModelStairs extends ModelBlock {
 	}
 
 	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
+	public boolean renderWorldBlock(WorldReference reference, int modelId, RenderBlocks renderer) {
 
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.setColorOpaque(255, 255, 255);
-		tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
-		Icon icon = block.getIcon(0, 0);
-		int rotation = world.getBlockMetadata(x, y, z);
+		Icon icon = reference.getIcon(0);
+		int rotation = reference.getBlockMetadata();
 		rotation %= 4;
-
-		Vector3f position = new Vector3f(x, y, z);
+ 
 
 		ConnectionCompass compass = new ConnectionCompass();
 
-		if (block instanceof BlockStairs)
-			compass = ((BlockStairs) block).getConnections(world, x, y, z);
+		if (reference.block instanceof BlockStairs)
+			compass = ((BlockStairs) reference.block).getConnections(reference.world, reference.x, reference.y, reference.z);
 
 		TileConnection[] lefts = new TileConnection[4];
 		lefts[0] = compass.connectionE;
@@ -95,20 +94,20 @@ public class ModelStairs extends ModelBlock {
 
 		boolean forceRailing = true;
 
-		stairs[rotation].renderMesh(false, icon, position);
+		stairs[rotation].renderMesh(false, icon, reference);
 		if (lefts[rotation] != TileConnection.CONNECTED) {
 			if (forceRailing || lefts[rotation] != TileConnection.WALL)
-				handrail1[rotation].renderMesh(false, icon, position);
-			stairsCap1[rotation].renderMesh(false, icon, position);
+				handrail1[rotation].renderMesh(false, icon, reference);
+			stairsCap1[rotation].renderMesh(false, icon, reference);
 		} else {
-			stairsConnected1[rotation].renderMesh(false, icon, position);
+			stairsConnected1[rotation].renderMesh(false, icon, reference);
 		}
 		if (rights[rotation] != TileConnection.CONNECTED) {
 			if (forceRailing || rights[rotation] != TileConnection.WALL)
-				handrail2[rotation].renderMesh(false, icon, position);
-			stairsCap2[rotation].renderMesh(false, icon, position);
+				handrail2[rotation].renderMesh(false, icon, reference);
+			stairsCap2[rotation].renderMesh(false, icon, reference);
 		} else {
-			stairsConnected2[rotation].renderMesh(false, icon, position);
+			stairsConnected2[rotation].renderMesh(false, icon, reference);
 		}
 		return true;
 	}
