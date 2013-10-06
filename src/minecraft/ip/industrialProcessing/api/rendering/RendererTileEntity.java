@@ -63,19 +63,19 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) l1, (float) l2);
 
 
-			int dir = world.getBlockMetadata(i, j, k);
+			int dir = 0; //world.getBlockMetadata(i, j, k);
 
 			if (tl instanceof IRotateableEntity) {
 				IRotateableEntity machine = (IRotateableEntity) tl;
 				ForgeDirection forward = machine.getForwardDirection();
-				dir = BlockMachine.getMetadataFromForward(forward); 
+				dir = BlockMachine.getMetadataFromForward(forward);  
 			}
 			if(tl instanceof ICommunication){
 				dir = 0;
 			}
 			if (tl instanceof ISidedRotation) {
 				dir = 2;
-			}
+			} 
 
 			GL11.glTranslatef(0.5F, 1.5F, 0.5F);
 			// This line actually rotates the renderer.
