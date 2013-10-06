@@ -39,7 +39,6 @@ public class TileEntityManualGenerator extends TileEntityPowerGenerator implemen
  
 
 	    float speed = this.animation.getSpeed();
-	//System.out.println(this.worldObj.isRemote+" "+this.storedPlayerForce + " " + this.speed + " " + this.rotation);
 	if (this.storedPlayerForce > 0) {
 	    speed += this.storedPlayerForce * this.animation.DT / 20; 
 	    this.storedPlayerForce -= this.storedPlayerForce * this.animation.DT;

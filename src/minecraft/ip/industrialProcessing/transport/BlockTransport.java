@@ -77,7 +77,6 @@ public abstract class BlockTransport extends BlockContainer {
 		super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
 		TileEntityTransport transport = (TileEntityTransport) par1World.getBlockTileEntity(par2, par3, par4);
 		transport.searchForConnections();
-		System.out.println("Transport changed at " + par2 + ", " + par3 + ", " + par4);
 	}
 
 	@Override

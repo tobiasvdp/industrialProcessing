@@ -23,10 +23,11 @@ public abstract class TileEntityTransportFluidsBase extends TileEntityTransport 
 
 	private static final int CONNECTION_GROUPS = 16;
 	protected TankHandler tankHandler;
-	private int connectionGroup;
+	private int connectionGroup=1;
 
 	public void setConnectionGroup(int color){
 		connectionGroup = color;
+		updateConnections();
 	}
 	
 	public TileEntityTransportFluidsBase() {

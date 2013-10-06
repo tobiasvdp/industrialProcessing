@@ -29,7 +29,6 @@ public class TileEntitySynced extends TileEntity {
 												// corrected
 			String methodName = e.getMethodName();
 			String className = e.getClassName();
-			System.out.println(methodName + " in " + className);
 		}
 	}
 }

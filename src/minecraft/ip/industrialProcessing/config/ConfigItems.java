@@ -90,7 +90,15 @@ public class ConfigItems {
 	private int itemGuideID = 6582;
 	private int itemGrownCultureID = 6583;
 	private int itemActiveCoalID = 6584;
+	
+	private int itemPaintBrushID = 6585;
+	//allocate next 16 ints
+	
+	private int itemItem = 6601;
 
+	public static int itemPaintBrushID() {
+		return getInstance().itemPaintBrushID;
+	}
 	public static int itemGrownCultureID() {
 		return getInstance().itemGrownCultureID;
 	}

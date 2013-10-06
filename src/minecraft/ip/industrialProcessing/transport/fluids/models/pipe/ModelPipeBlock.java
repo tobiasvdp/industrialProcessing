@@ -47,7 +47,6 @@ public class ModelPipeBlock extends ModelBlock {
 
 
 		Icon icon = reference.getIcon(0);
-
 		if (entity instanceof IConnectedTile) {
 			IConnectedTile tile = (IConnectedTile) entity;
 			ConnectionState up = tile.getConnection(ForgeDirection.UP);
