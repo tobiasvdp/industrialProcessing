@@ -60,7 +60,6 @@ public class ModelCrystal extends ModelBlock {
 		Icon icon = reference.getIcon(0);
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.setColorOpaque(255, 255, 255);
-		tessellator.setBrightness(reference.baseBrightness);
 		renderModels(reference.x ^ reference.y ^ reference.z, icon, reference);
 		return false;
 	}

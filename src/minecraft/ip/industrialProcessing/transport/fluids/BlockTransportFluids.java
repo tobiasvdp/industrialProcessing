@@ -51,14 +51,6 @@ public class BlockTransportFluids extends BlockTransport {
 	}
 
 	@Override
-	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
-		TileEntityTransportFluidsBase entity = (TileEntityTransportFluidsBase) par1World.getBlockTileEntity(par2, par3, par4);
-		if (BlockTransportFluids.cycleConnectionStatesOnActivated(entity, par5EntityPlayer))
-			return true;
-		return false;
-	}
-
-	@Override
 	public int getRenderType() {
 		return ConfigRenderers.getRendererTransportFluidsId();
 	}
@@ -88,19 +80,7 @@ public class BlockTransportFluids extends BlockTransport {
 		}
 		return super.getLightValue(world, x, y, z);
 	}
-
-	public static boolean cycleConnectionStatesOnActivated(TileEntityTransportFluidsBase entity, EntityPlayer par5EntityPlayer) {
-		if (par5EntityPlayer != null) {
-			ItemStack item = par5EntityPlayer.inventory.getCurrentItem();
-			if (item != null) {
-				if (new ItemStack(Item.stick).isItemEqual(item)) {
-					entity.cycleGroups(par5EntityPlayer.isSneaking());
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+ 
 	Icon[] icon = new Icon[16];
 	@Override
 	public void registerIcons(IconRegister par1IconRegister) {

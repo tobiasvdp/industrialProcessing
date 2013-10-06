@@ -83,6 +83,7 @@ public abstract class TileEntityTransportFluidsBase extends TileEntityTransport 
 
 		if (this.tankHandler.readDataFromTanks())
 			TileTankSyncHandler.sendTankData(this, this.tankHandler);
+		 
 	}
 
 	@Override

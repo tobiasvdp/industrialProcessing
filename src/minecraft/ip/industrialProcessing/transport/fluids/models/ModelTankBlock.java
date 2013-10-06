@@ -59,7 +59,6 @@ public class ModelTankBlock extends ModelBlock {
 	public boolean renderWorldBlock(WorldReference reference, int modelId, RenderBlocks renderer) {
 		TileEntity entity = reference.getBlockTileEntity();
 		Tessellator tessellator = Tessellator.instance;
-		tessellator.setBrightness(reference.baseBrightness);
 		tessellator.setColorOpaque(255, 255, 255);
 
 		if (entity instanceof TileEntityTank) {

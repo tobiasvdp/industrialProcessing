@@ -27,6 +27,9 @@ public class RendererBlock implements ISimpleBlockRenderingHandler {
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
 
+		if (block == null || world == null) {
+			return false;
+		}
 		renderer.overrideBlockTexture = block.getBlockTexture(world, x, y, z, 0);
 
 		renderer.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1F, 1.0F);

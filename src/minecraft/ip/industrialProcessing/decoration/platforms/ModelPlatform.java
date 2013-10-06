@@ -180,7 +180,6 @@ public class ModelPlatform extends ModelBlock {
 
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.setColorOpaque(255, 255, 255);
-		tessellator.setBrightness(reference.baseBrightness);
 		Icon icon = reference.getIcon(0); 
 		meshCenter.renderMesh(false, icon, reference);
 
