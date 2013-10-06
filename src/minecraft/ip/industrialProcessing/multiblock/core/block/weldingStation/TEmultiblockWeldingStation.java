@@ -33,8 +33,6 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreInv{
 		layout.setCoreID(i++,0,1, IndustrialProcessing.BLmultiblockWeldingStation.blockID);
 		
 		layout.setBlockID(-1, 0, 0,i++, 0,0, IndustrialProcessing.BLmultiblockWeldingTableExt.blockID);
-		layout.setBlockID(-2, 0, 0,i++, 0,0, IndustrialProcessing.BLmultiblockInvInput.blockID,0);
-		layout.setBlockID(-2, 1, 0,i++, 0,1, IndustrialProcessing.BLmultiblockScreen.blockID,0);
 		layout.setBlockID(0, 1, 0,i++, 0,0, IndustrialProcessing.BLmultiblockScreen.blockID);
 		layout.setBlockID(-1, 1, 0,i++, 0,1, IndustrialProcessing.BLmultiblockScreen.blockID);
 		
@@ -45,23 +43,10 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreInv{
 		
 		
 		//set tiers
-		tierRequirments = new TierCollection(3);
+		tierRequirments = new TierCollection(1);
 		
 		Tier tier = new Tier();
 		tierRequirments.addTier(tier, Tiers.Tier0);
-		
-		tier = new Tier();
-		tier.setBlockPresent(2);
-		tier.setAction(MultiblockActionType.modelConnection, 1, 1);
-		tierRequirments.addTier(tier, Tiers.Tier1);
-		
-		tier = new Tier();
-		tier.setBlockPresent(2);
-		tier.setBlockPresent(3);
-		tier.setAction(MultiblockActionType.modelConnection, 1, 1);
-		tier.setAction(MultiblockActionType.modelConnection, 5, 2);
-		tierRequirments.addTier(tier, Tiers.Tier2);
-
 	}
 	public TEmultiblockWeldingStation() {
 		super(structure, tierRequirments,recipes);

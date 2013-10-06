@@ -99,7 +99,7 @@ public abstract class BLmultiblockDummy extends BlockContainer {
 		world.destroyBlock(x, y, z, true);
 		if (core != null)
 			core.onLayoutChange();
-		return true;
+		return false;
 	}
 
 	@Override

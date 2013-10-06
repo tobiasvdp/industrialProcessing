@@ -11,190 +11,96 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class WorldGeneration implements IWorldGenerator {
 
-    public WorldGeneration() {
-	// TODO Auto-generated constructor stub
-    }
+	public WorldGeneration() {
+		// TODO Auto-generated constructor stub
+	}
 
-    @Override
-    public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
-	// copper ore
-	int maxSpawn = 6;
-	int minSpawn = 3;
-	int rep = maxSpawn - random.nextInt(maxSpawn - minSpawn);
-	int minLayer = 30;
-	int maxLayer = 50;
-	for (int i = 0; i < rep; i++) {
-	    int x = chunkX * 16 + random.nextInt(16);
-	    int y = maxLayer - random.nextInt(maxLayer - minLayer);
-	    int z = chunkZ * 16 + random.nextInt(16);
-	    int blockId = world.getBlockId(x, y, z);
-	    if (blockId == 1 || blockId == 3 || blockId == 13) {
-		world.setBlock(x, y, z, ConfigBlocks.BlockCopperOreID());
-		int group = random.nextInt(10);
-		switch (group) {
-		case 0:
-		case 1:
-		case 2:
-		    group = 1;
-		    break;
-		case 3:
-		case 4:
-		case 5:
-		case 6:
-		    group = 2;
-		    break;
-		default:
-		    group = 3;
-		    break;
-		}
-		for (int a = 0; a < group; a++) {
-		    int side = random.nextInt(6);
-		    switch (side) {
-		    case 0:
-			y = y + 1;
-			break;
-		    case 1:
-			y = y - 1;
-			break;
-		    case 2:
-			x = x + 1;
-			break;
-		    case 3:
-			x = x - 1;
-			break;
-		    case 4:
-			z = z + 1;
-			break;
-		    case 5:
-			z = z - 1;
-			break;
-		    default:
-			break;
-		    }
-		    if (blockId == 1 || blockId == 3 || blockId == 13) {
-			world.setBlock(x, y, z, ConfigBlocks.BlockCopperOreID());
-		    }
-		}
-	    }
+	@Override
+	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
+		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 3, 6, 40, 60, 2, 4, IndustrialProcessing.blockTinOre.blockID);
+		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 2, 5, 30, 60, 2, 4, IndustrialProcessing.blockCopperOre.blockID);
+		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 1, 3, 5, 40, 1, 3, IndustrialProcessing.blockGalenaOre.blockID);
+		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 2, 3, 10, 60, 1, 3, IndustrialProcessing.blockCinnebarOre.blockID);
+		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 1, 4, 1, 8, 2, 3, IndustrialProcessing.blockRutileOre.blockID);
+		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 1, 2, 1, 40, 1, 3, IndustrialProcessing.blockChromiteOre.blockID);
+		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 1, 1, 1, 20, 1, 1, IndustrialProcessing.blockTaliaOre.blockID);
 	}
-	// tin ore
-	maxSpawn = 6;
-	minSpawn = 3;
-	rep = maxSpawn - random.nextInt(maxSpawn - minSpawn);
-	minLayer = 30;
-	maxLayer = 50;
-	for (int i = 0; i < rep; i++) {
-	    int x = chunkX * 16 + random.nextInt(16);
-	    int y = maxLayer - random.nextInt(maxLayer - minLayer);
-	    int z = chunkZ * 16 + random.nextInt(16);
-	    int blockId = world.getBlockId(x, y, z);
-	    if (blockId == 1 || blockId == 3 || blockId == 13) {
-		world.setBlock(x, y, z, ConfigBlocks.BlockTinOreID());
-		int group = random.nextInt(10);
-		switch (group) {
-		case 0:
-		case 1:
-		case 2:
-		    group = 1;
-		    break;
-		case 3:
-		case 4:
-		case 5:
-		case 6:
-		    group = 2;
-		    break;
-		default:
-		    group = 3;
-		    break;
+
+	private boolean generateOre(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider, int minSpawn, int maxSpawn, int minLayer, int maxLayer, int minAmount, int maxAmount, int oreID) {
+		//times to place in chunk
+		int rep;
+		if(maxSpawn != minSpawn)
+			rep = maxSpawn - random.nextInt(maxSpawn - minSpawn);
+		else
+			rep = maxSpawn;
+		int count = 0;
+		
+		for (int i = 0; i < rep; i++) {
+			// get random coordinate
+			int x = chunkX * 16 + random.nextInt(16);
+			int y;
+			if(maxLayer != minLayer)
+				y = maxLayer - random.nextInt(maxLayer - minLayer);
+			else
+				y = maxLayer;
+			int z = chunkZ * 16 + random.nextInt(16);
+
+			// check if id is replaceable
+			boolean isReplacable = false;
+			int blockId = world.getBlockId(x, y, z);
+			if (blockId == 1 || blockId == 3 || blockId == 13) {
+				isReplacable = true;
+			}
+
+			// replace if possible
+			if (isReplacable) {
+				world.setBlock(x, y, z, oreID);
+			} else {
+				if (count < 50)
+					i--;
+				count++;
+			}
+
+			// amount of surrounding ores
+			int surround;
+			if(maxAmount != minAmount)
+				surround = maxAmount - random.nextInt(maxAmount - minAmount);
+			else
+				surround = maxAmount;
+
+			// generate surrounding ores
+			if (isReplacable) {
+				for (int a = 0; a < surround; a++) {
+					int side = random.nextInt(6);
+					switch (side) {
+					case 0:
+						y = y + 1;
+						break;
+					case 1:
+						y = y - 1;
+						break;
+					case 2:
+						x = x + 1;
+						break;
+					case 3:
+						x = x - 1;
+						break;
+					case 4:
+						z = z + 1;
+						break;
+					case 5:
+						z = z - 1;
+						break;
+					default:
+						break;
+					}
+					if (blockId == 1 || blockId == 3 || blockId == 13) {
+						world.setBlock(x, y, z, oreID);
+					}
+				}
+			}
 		}
-		for (int a = 0; a < group; a++) {
-		    int side = random.nextInt(6);
-		    switch (side) {
-		    case 0:
-			y = y + 1;
-			break;
-		    case 1:
-			y = y - 1;
-			break;
-		    case 2:
-			x = x + 1;
-			break;
-		    case 3:
-			x = x - 1;
-			break;
-		    case 4:
-			z = z + 1;
-			break;
-		    case 5:
-			z = z - 1;
-			break;
-		    default:
-			break;
-		    }
-		    if (blockId == 1 || blockId == 3 || blockId == 13) {
-			world.setBlock(x, y, z, ConfigBlocks.BlockTinOreID());
-		    }
-		}
-	    }
+		return true;
 	}
-	// silver ore spawn
-	maxSpawn = 5;
-	minSpawn = 2;
-	rep = maxSpawn - random.nextInt(maxSpawn - minSpawn);
-	minLayer = 5;
-	maxLayer = 30;
-	for (int i = 0; i < rep; i++) {
-	    int x = chunkX * 16 + random.nextInt(16);
-	    int y = maxLayer - random.nextInt(maxLayer - minLayer);
-	    int z = chunkZ * 16 + random.nextInt(16);
-	    int blockId = world.getBlockId(x, y, z);
-	    if (blockId == 1 || blockId == 3 || blockId == 13) {
-		world.setBlock(x, y, z, ConfigBlocks.BlockGalenaOreID());
-		int group = random.nextInt(10);
-		switch (group) {
-		case 0:
-		case 1:
-		case 2:
-		    group = 1;
-		    break;
-		case 3:
-		case 4:
-		case 5:
-		case 6:
-		default:
-		    group = 2;
-		    break;
-		}
-		for (int a = 0; a < group; a++) {
-		    int side = random.nextInt(6);
-		    switch (side) {
-		    case 0:
-			y = y + 1;
-			break;
-		    case 1:
-			y = y - 1;
-			break;
-		    case 2:
-			x = x + 1;
-			break;
-		    case 3:
-			x = x - 1;
-			break;
-		    case 4:
-			z = z + 1;
-			break;
-		    case 5:
-			z = z - 1;
-			break;
-		    default:
-			break;
-		    }
-		    if (blockId == 1 || blockId == 3 || blockId == 13) {
-			world.setBlock(x, y, z, ConfigBlocks.BlockGalenaOreID());
-		    }
-		}
-	    }
-	}
-    }
 
 }

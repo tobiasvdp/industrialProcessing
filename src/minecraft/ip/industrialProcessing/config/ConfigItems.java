@@ -430,6 +430,9 @@ public class ConfigItems {
 	}
 
 	public static void addToLanguageRegistry() {
+		LanguageRegistry.addName(IndustrialProcessing.itemCinnebarSmallCrushedCrystals, "Small crushed cinnebar crystals");
+		LanguageRegistry.addName(IndustrialProcessing.itemCinnebarLargeCrushedCrystals, "Large crushed cinnebar crystals");
+		
 		LanguageRegistry.addName(IndustrialProcessing.itemActiveCoal, "Activated coal");
 		LanguageRegistry.addName(IndustrialProcessing.itemCoalDust, "Coal dust");
 		LanguageRegistry.addName(IndustrialProcessing.itemGrownCulture, "Grown culture");
