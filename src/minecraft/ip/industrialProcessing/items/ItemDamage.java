@@ -27,6 +27,16 @@ public class ItemDamage extends Item {
 		func_111206_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + name);
 
 	}
+	public ItemDamage(int ID,int maxDamage, String name, CreativeTabs tab) {
+		super(ID);
+		setMaxStackSize(1);
+		setMaxDamage(maxDamage);
+		setCreativeTab(tab);
+		setUnlocalizedName(name);
+		setNoRepair();
+		func_111206_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + name);
+
+	}
 
 	@Override
 	public boolean doesContainerItemLeaveCraftingGrid(ItemStack itemstack) {

@@ -45,7 +45,6 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
 	}
 
 	protected void updateConnections() {
-		System.out.println("Verifying transport at " + xCoord + ", " + yCoord + ", " + zCoord + " on " + (this.worldObj.isRemote ? "client" : "server"));
 		boolean modified = false;
 		beginConnectionUpdate();
 		for (int i = 0; i < this.states.length; i++) {
@@ -59,7 +58,6 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
 				modified = true;
 			}
 		}
-		System.out.println("States at " + xCoord + ", " + yCoord + ", " + zCoord + " are  UP:" + this.states[ForgeDirection.UP.ordinal()] + " DOWN:" + this.states[ForgeDirection.DOWN.ordinal()]);
 		// if the network changed, update the map
 		if (modified)
 			updateNetwork();
@@ -88,8 +86,7 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
 	 * Flags can be added together.
 	 */
 	protected void updateNetwork() {
-		notifyBlockChange();
-		System.out.println("TileEntityTransport.updateNetwork()");		
+		notifyBlockChange();	
 	}
 
 	public TransportConnectionState getNeighborState(ForgeDirection direction) {

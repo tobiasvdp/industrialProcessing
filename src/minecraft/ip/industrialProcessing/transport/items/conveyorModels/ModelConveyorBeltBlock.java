@@ -41,7 +41,6 @@ public class ModelConveyorBeltBlock extends ModelBlock {
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
-		System.out.println("ModelConveyorBeltBlock.renderWorldBlock()");
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
 		tessellator.setColorOpaque(255, 255, 255);

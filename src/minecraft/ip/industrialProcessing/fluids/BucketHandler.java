@@ -45,9 +45,6 @@ public class BucketHandler {
 
 
 		int blockID = world.getBlockId(pos.blockX, pos.blockY, pos.blockZ);
-
-		System.out.println(pos.blockX + " "+pos.blockY+" "+pos.blockZ);
-
 		Item bucket = buckets.get(Block.blocksList[blockID]);
 		if (bucket != null && world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0) {
 			world.setBlock(pos.blockX, pos.blockY, pos.blockZ, 0);

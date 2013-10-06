@@ -4,6 +4,7 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.items.ItemDamage;
 import ip.industrialProcessing.items.ItemGuide;
 import ip.industrialProcessing.items.ItemIP;
+import ip.industrialProcessing.items.ItemPaintBrush;
 
 public interface ISetupItems {
 	
@@ -103,4 +104,22 @@ public interface ISetupItems {
     
     public final static ItemDamage itemGrownCulture = new ItemDamage(ConfigItems.itemGrownCultureID(), "itemGrownCulture", IndustrialProcessing.tabOres,20);
     public final static ItemDamage itemActiveCoal = new ItemDamage(ConfigItems.itemActiveCoalID(), "itemActiveCoalDust", IndustrialProcessing.tabOres,25);
+        
+    public final static ItemPaintBrush paintBrushWhite = new ItemPaintBrush(ConfigItems.itemPaintBrushID() + 0, 0);
+    public final static ItemPaintBrush paintBrushOrange = new ItemPaintBrush(ConfigItems.itemPaintBrushID() + 1, 1);
+    public final static ItemPaintBrush paintBrushMagenta = new ItemPaintBrush(ConfigItems.itemPaintBrushID() + 2, 2);
+    public final static ItemPaintBrush paintBrushLightBlue = new ItemPaintBrush(ConfigItems.itemPaintBrushID() + 3, 3);
+    public final static ItemPaintBrush paintBrushYellow = new ItemPaintBrush(ConfigItems.itemPaintBrushID() + 4, 4);
+    public final static ItemPaintBrush paintBrushLime = new ItemPaintBrush(ConfigItems.itemPaintBrushID() + 5, 5);
+    public final static ItemPaintBrush paintBrushPink = new ItemPaintBrush(ConfigItems.itemPaintBrushID() + 6, 6);
+    public final static ItemPaintBrush paintBrushGray = new ItemPaintBrush(ConfigItems.itemPaintBrushID() + 7, 7);
+    public final static ItemPaintBrush paintBrushLightGray = new ItemPaintBrush(ConfigItems.itemPaintBrushID() + 8, 8);
+    public final static ItemPaintBrush paintBrushCyan = new ItemPaintBrush(ConfigItems.itemPaintBrushID() + 9, 9);
+    public final static ItemPaintBrush paintBrushPurple = new ItemPaintBrush(ConfigItems.itemPaintBrushID() + 10, 10);
+    public final static ItemPaintBrush paintBrushBlue = new ItemPaintBrush(ConfigItems.itemPaintBrushID() + 11, 11);
+    public final static ItemPaintBrush paintBrushBrown = new ItemPaintBrush(ConfigItems.itemPaintBrushID() + 12, 12);
+    public final static ItemPaintBrush paintBrushGreen = new ItemPaintBrush(ConfigItems.itemPaintBrushID() + 13, 13);
+    public final static ItemPaintBrush paintBrushRed = new ItemPaintBrush(ConfigItems.itemPaintBrushID() + 14, 14);
+    public final static ItemPaintBrush paintBrushBlack = new ItemPaintBrush(ConfigItems.itemPaintBrushID() + 15, 15);
+    public final static ItemPaintBrush paintBrush = new ItemPaintBrush(ConfigItems.itemPaintBrushID() + 16, 16);
 }

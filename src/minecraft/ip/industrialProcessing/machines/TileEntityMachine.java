@@ -304,7 +304,6 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
 	}
 
 	public void setForwardDirection(ForgeDirection forwardFromMetadata) {
-		System.out.println(this + " is facing " + forwardFromMetadata.name());
 		this.forwardDirection = forwardFromMetadata;
 	}
 

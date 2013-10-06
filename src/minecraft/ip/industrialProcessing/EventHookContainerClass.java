@@ -26,7 +26,6 @@ public class EventHookContainerClass {
 			if (te instanceof IBlockInBlock) {
 				IBlockInBlock container = (IBlockInBlock) te;
 				container.addBlockToContainer(dir.getOpposite());
-				System.out.println(dir.getOpposite());
 				event.setCanceled(true);
 			}
 		}
