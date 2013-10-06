@@ -46,7 +46,7 @@ public class ModelPipeBlock extends ModelBlock {
 
 		Vector3f position = new Vector3f(x, y, z);
 
-		Icon icon = block.getIcon(0, 0);
+		Icon icon = block.getIcon(0, world.getBlockMetadata(x, y, z));
 
 		if (entity instanceof IConnectedTile) {
 			IConnectedTile tile = (IConnectedTile) entity;

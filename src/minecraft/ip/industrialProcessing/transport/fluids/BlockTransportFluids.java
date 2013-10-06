@@ -5,6 +5,7 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatMessageComponent;
+import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -29,8 +31,6 @@ public class BlockTransportFluids extends BlockTransport {
 
 	public BlockTransportFluids() {
 		super(ConfigTransportBlocks.getBlockTransportFluidsID(), Material.glass, 1F, Block.soundGlassFootstep, "Fluid Pipe", IndustrialProcessing.tabOreProcessing);
-
-		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "pipe");
 	}
 
 	@Override
@@ -95,5 +95,16 @@ public class BlockTransportFluids extends BlockTransport {
 			}
 		}
 		return false;
+	}
+	Icon[] icon = new Icon[16];
+	@Override
+	public void registerIcons(IconRegister par1IconRegister) {
+		for(int i = 0;i<16;i++){
+			icon[i] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "pipe"+i);
+		}
+	}
+	@Override
+	public Icon getIcon(int par1, int par2) {
+		return icon[par2];
 	}
 }
