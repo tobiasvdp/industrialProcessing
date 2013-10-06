@@ -121,5 +121,5 @@ public interface ISetupItems {
     public final static ItemPaintBrush paintBrushGreen = new ItemPaintBrush(ConfigItems.itemPaintBrushID() + 13, 13);
     public final static ItemPaintBrush paintBrushRed = new ItemPaintBrush(ConfigItems.itemPaintBrushID() + 14, 14);
     public final static ItemPaintBrush paintBrushBlack = new ItemPaintBrush(ConfigItems.itemPaintBrushID() + 15, 15);
-    public final static ItemPaintBrush paintBrush = new ItemPaintBrush(ConfigItems.itemPaintBrushID() + 16, 16);
+    public final static ItemIP paintBrush = new ItemIP(ConfigItems.itemPaintBrushID() + 16, "paintBrush16", IndustrialProcessing.tabOres);
 }

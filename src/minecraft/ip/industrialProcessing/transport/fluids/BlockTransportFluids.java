@@ -38,8 +38,8 @@ public class BlockTransportFluids extends BlockTransport {
         int meta = world.getBlockMetadata(x, y, z);
         if (meta != colour)
         {
-            world.setBlockMetadataWithNotify(x, y, z, colour, 3);
             ((TileEntityTransportFluidsBase)world.getBlockTileEntity(x, y, z)).setConnectionGroup(colour);
+            world.setBlockMetadataWithNotify(x, y, z, colour, 3);
             return true;
         }
 		return false;
@@ -106,5 +106,9 @@ public class BlockTransportFluids extends BlockTransport {
 	@Override
 	public Icon getIcon(int par1, int par2) {
 		return icon[par2];
+	}
+	@Override
+	public int onBlockPlaced(World par1World, int par2, int par3, int par4, int par5, float par6, float par7, float par8, int par9) {
+		return 1;
 	}
 }
