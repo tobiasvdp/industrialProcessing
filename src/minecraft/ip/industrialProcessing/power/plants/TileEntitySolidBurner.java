@@ -30,6 +30,7 @@ public class TileEntitySolidBurner extends TileEntityMachine {
 		super.readFromNBT(nbt);
 		this.burnTimeRemaining = nbt.getInteger("BurnTimeRemaining");
 		this.totalBurnTime = nbt.getInteger("TotalBurnTime");
+		this.isBurning = nbt.getBoolean("IsBurning");
 	}
 
 	@Override
@@ -37,6 +38,7 @@ public class TileEntitySolidBurner extends TileEntityMachine {
 		super.writeToNBT(nbt);
 		nbt.setInteger("BurnTimeRemaining", this.burnTimeRemaining);
 		nbt.setInteger("TotalBurnTime", this.totalBurnTime);
+		nbt.setBoolean("IsBurning", this.isBurning);
 	}
 
 	@Override

@@ -35,13 +35,12 @@ public class BlockTransportFluids extends BlockTransport {
 
 	@Override
 	public boolean recolourBlock(World world, int x, int y, int z, ForgeDirection side, int colour) {
-        int meta = world.getBlockMetadata(x, y, z);
-        if (meta != colour)
-        {
-            world.setBlockMetadataWithNotify(x, y, z, colour, 3);
-            ((TileEntityTransportFluidsBase)world.getBlockTileEntity(x, y, z)).setConnectionGroup(colour);
-            return true;
-        }
+		int meta = world.getBlockMetadata(x, y, z);
+		if (meta != colour) {
+			world.setBlockMetadataWithNotify(x, y, z, colour, 3);
+			((TileEntityTransportFluidsBase) world.getBlockTileEntity(x, y, z)).setConnectionGroup(colour);
+			return true;
+		}
 		return false;
 	}
 
@@ -66,21 +65,26 @@ public class BlockTransportFluids extends BlockTransport {
 	@Override
 	public int getLightValue(IBlockAccess world, int x, int y, int z) {
 
-		TileEntityTransportFluidsBase entity = (TileEntityTransportFluidsBase) world.getBlockTileEntity(x, y, z);
-		FluidTankInfo[] subTanks = entity.getTanks();
+		TileEntity entity = world.getBlockTileEntity(x, y, z);
+		if (entity instanceof TileEntityTransportFluidsBase) {
+			TileEntityTransportFluidsBase fluidBase = (TileEntityTransportFluidsBase) entity;
+			FluidTankInfo[] subTanks = fluidBase.getTanks();
 
-		int lum = 0;
-		int tanks = 0;
+			if (subTanks != null) {
+				int lum = 0;
+				int tanks = 0;
 
-		for (int i = 0; i < subTanks.length; i++) {
-			FluidTankInfo tank = subTanks[i];
-			if (tank.fluid != null) {
-				lum += tank.fluid.getFluid().getLuminosity();
-				tanks++;
+				for (int i = 0; i < subTanks.length; i++) {
+					FluidTankInfo tank = subTanks[i];
+					if (tank.fluid != null) {
+						lum += tank.fluid.getFluid().getLuminosity();
+						tanks++;
+					}
+				}
+				if (tanks > 0)
+					return lum / tanks;
 			}
 		}
-		if (tanks > 0)
-			return lum / tanks;
 		return super.getLightValue(world, x, y, z);
 	}
 

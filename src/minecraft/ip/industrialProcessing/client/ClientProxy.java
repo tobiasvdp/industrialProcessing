@@ -101,6 +101,7 @@ import ip.industrialProcessing.transport.fluids.TileEntityTank;
 import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids;
 import ip.industrialProcessing.transport.fluids.TileEntityValve;
 import ip.industrialProcessing.transport.fluids.models.ModelTankBlock;
+import ip.industrialProcessing.transport.fluids.models.meter.ModelManometerBlock;
 import ip.industrialProcessing.transport.fluids.models.pipe.ModelPipeBlock;
 import ip.industrialProcessing.transport.fluids.models.pipe.ModelValveBlock;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorBelt;
@@ -166,6 +167,7 @@ public class ClientProxy extends CommonProxy {
 	private static final ModelBlock platform = new ModelPlatform();
 	private static final ModelBlock stairs = new ModelStairs();
 	private static final ModelBlock crystal = new ModelCrystal();
+	private static final ModelBlock manometerBlock = new ModelManometerBlock();
 
 	@Override
 	public void registerRenderers() {
@@ -203,6 +205,12 @@ public class ClientProxy extends CommonProxy {
 
 		ConfigRenderers.setRendererValveId(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererValveId(), valveBlock));
+		
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityManoMeter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockManometer, "ModelManoMeter", manoMeter));
+		
+		ConfigRenderers.setRendererManometerId(RenderingRegistry.getNextAvailableRenderId());
+		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererManometerId(), manometerBlock));
+
 		// 100% tile entity
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFilter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockFilter, "ModelFilter", filter));
@@ -264,10 +272,6 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBoiler.class, new RendererTileEntityFluidWorker(IndustrialProcessing.blockBoiler, "ModelBoiler", boiler));
 		ConfigRenderers.setRendererBoilerId(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererBoilerId(), new TileEntityBoiler()));
-
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityManoMeter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockManometer, "ModelManoMeter", manoMeter));
-		ConfigRenderers.setRendererManometerId(RenderingRegistry.getNextAvailableRenderId());
-		RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererManometerId(), new TileEntityManoMeter()));
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySolidBurner.class, new RendererTileEntity(IndustrialProcessing.blockSolidBurner, "ModelSolidBurner", solidBurner));
 		ConfigRenderers.setRendererSolidBurnerId(RenderingRegistry.getNextAvailableRenderId());

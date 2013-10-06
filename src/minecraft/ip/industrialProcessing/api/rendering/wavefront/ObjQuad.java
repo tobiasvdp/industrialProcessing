@@ -19,28 +19,41 @@ public class ObjQuad {
 	public Vector2f uv4;
 
 	public ObjQuad(Vector3f position1, Vector3f position2, Vector3f position3, Vector3f position4, Vector2f uv1, Vector2f uv2, Vector2f uv3, Vector2f uv4, Vector3f normal) {
-		this.position1 = position1;
-		this.position2 = position2;
-		this.position3 = position3;
-		this.position4 = position4;
-		this.uv1 = uv1;
-		this.uv2 = uv2;
-		this.uv3 = uv3;
-		this.uv4 = uv4;
+		this.position1 = scalePosition(position1);
+		this.position2 = scalePosition(position2);
+		this.position3 = scalePosition(position3);
+		this.position4 = scalePosition(position4);
+		this.uv1 = roundUV(uv1);
+		this.uv2 = roundUV(uv2);
+		this.uv3 = roundUV(uv3);
+		this.uv4 = roundUV(uv4);
 		this.normal = normal;
 	}
 
 	// Enable use of triangles by adding a degenerate vertex
 	public ObjQuad(Vector3f position1, Vector3f position2, Vector3f position3, Vector2f uv1, Vector2f uv2, Vector2f uv3, Vector3f normal) {
-		this.position1 = position1;
-		this.position2 = position2;
-		this.position3 = position3;
-		this.position4 = position3;
-		this.uv1 = uv1;
-		this.uv2 = uv2;
-		this.uv3 = uv3;
-		this.uv4 = uv3;
+		this.position1 = scalePosition(position1);
+		this.position2 = scalePosition(position2);
+		this.position3 = scalePosition(position3);
+		this.position4 = scalePosition(position3);
+		this.uv1 = roundUV(uv1);
+		this.uv2 = roundUV(uv2);
+		this.uv3 = roundUV(uv3);
+		this.uv4 = roundUV(uv3);
 		this.normal = normal;
+	}
+
+	private Vector3f scalePosition(Vector3f position32) {
+		float x = position32.x / 1.6f;
+		float y = position32.y / 1.6f;
+		float z = position32.z / 1.6f;
+		return new Vector3f(x, y, z);
+	}
+
+	private Vector2f roundUV(Vector2f uv) {
+		float u = Math.round(uv.x * 16f) / 16f;
+		float v = Math.round(uv.y * 16f) / 16f;
+		return new Vector2f(u, v);
 	}
 
 	public ObjQuad() {

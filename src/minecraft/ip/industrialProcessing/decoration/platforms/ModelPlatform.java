@@ -3,12 +3,12 @@ package ip.industrialProcessing.decoration.platforms;
 import ip.industrialProcessing.api.rendering.connectedTile.ConnectionCompass;
 import ip.industrialProcessing.api.rendering.connectedTile.TileConnection;
 import ip.industrialProcessing.api.rendering.wavefront.ObjMesh;
+import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
 import ip.industrialProcessing.client.render.ModelBlock;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.Icon;
-import net.minecraft.world.IBlockAccess;
 
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
@@ -171,37 +171,36 @@ public class ModelPlatform extends ModelBlock {
 	}
 
 	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
+	public boolean renderWorldBlock(WorldReference reference, int modelId, RenderBlocks renderer) {
 
 		ConnectionCompass compass = new ConnectionCompass();
 
-		if (block instanceof BlockPlatform)
-			compass = ((BlockPlatform) block).getConnections(world, x, y, z);
+		if (reference.block instanceof BlockPlatform)
+			compass = ((BlockPlatform) reference.block).getConnections(reference.world, reference.x, reference.y, reference.z);
 
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.setColorOpaque(255, 255, 255);
-		tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
-		Icon icon = block.getIcon(0, 0);
-		Vector3f position = new Vector3f(x, y, z);
-		meshCenter.renderMesh(false, icon, position);
+		tessellator.setBrightness(reference.baseBrightness);
+		Icon icon = reference.getIcon(0); 
+		meshCenter.renderMesh(false, icon, reference);
 
-		renderConnection(icon, position, compass.connectionS, meshConnectedSouth, meshUnconnectedSouth, meshHandRailStraightSouth);
-		renderConnection(icon, position, compass.connectionN, meshConnectedNorth, meshUnconnectedNorth, meshHandRailStraightNorth);
-		renderConnection(icon, position, compass.connectionE, meshConnectedEast, meshUnconnectedEast, meshHandRailStraightEast);
-		renderConnection(icon, position, compass.connectionW, meshConnectedWest, meshUnconnectedWest, meshHandRailStraightWest);
+		renderConnection(icon, reference, compass.connectionS, meshConnectedSouth, meshUnconnectedSouth, meshHandRailStraightSouth);
+		renderConnection(icon, reference, compass.connectionN, meshConnectedNorth, meshUnconnectedNorth, meshHandRailStraightNorth);
+		renderConnection(icon, reference, compass.connectionE, meshConnectedEast, meshUnconnectedEast, meshHandRailStraightEast);
+		renderConnection(icon, reference, compass.connectionW, meshConnectedWest, meshUnconnectedWest, meshHandRailStraightWest);
 
-		renderCorner(icon, position, compass.connectionW, compass.connectionSW, compass.connectionS, meshCornerOutsideSouthWest, meshCornerFullSouthWest, meshCornerInsideSouthWest, meshCornerStraight1SouthWest, meshCornerStraight2SouthWest, meshHandRailCornerOutsideSouthWest, meshHandRailCornerStraight1SouthWest, meshHandRailCornerStraight2SouthWest, meshHandRailCornerCap1SouthWest, meshHandRailCornerCap2SouthWest, meshHandRailCornerInsideSouthWest);
+		renderCorner(icon, reference, compass.connectionW, compass.connectionSW, compass.connectionS, meshCornerOutsideSouthWest, meshCornerFullSouthWest, meshCornerInsideSouthWest, meshCornerStraight1SouthWest, meshCornerStraight2SouthWest, meshHandRailCornerOutsideSouthWest, meshHandRailCornerStraight1SouthWest, meshHandRailCornerStraight2SouthWest, meshHandRailCornerCap1SouthWest, meshHandRailCornerCap2SouthWest, meshHandRailCornerInsideSouthWest);
 
-		renderCorner(icon, position, compass.connectionS, compass.connectionSE, compass.connectionE, meshCornerOutsideSouthEast, meshCornerFullSouthEast, meshCornerInsideSouthEast, meshCornerStraight1SouthEast, meshCornerStraight2SouthEast, meshHandRailCornerOutsideSouthEast, meshHandRailCornerStraight1SouthEast, meshHandRailCornerStraight2SouthEast, meshHandRailCornerCap1SouthEast, meshHandRailCornerCap2SouthEast, meshHandRailCornerInsideSouthEast);
+		renderCorner(icon, reference, compass.connectionS, compass.connectionSE, compass.connectionE, meshCornerOutsideSouthEast, meshCornerFullSouthEast, meshCornerInsideSouthEast, meshCornerStraight1SouthEast, meshCornerStraight2SouthEast, meshHandRailCornerOutsideSouthEast, meshHandRailCornerStraight1SouthEast, meshHandRailCornerStraight2SouthEast, meshHandRailCornerCap1SouthEast, meshHandRailCornerCap2SouthEast, meshHandRailCornerInsideSouthEast);
 
-		renderCorner(icon, position, compass.connectionE, compass.connectionNE, compass.connectionN, meshCornerOutsideNorthEast, meshCornerFullNorthEast, meshCornerInsideNorthEast, meshCornerStraight1NorthEast, meshCornerStraight2NorthEast, meshHandRailCornerOutsideNorthEast, meshHandRailCornerStraight1NorthEast, meshHandRailCornerStraight2NorthEast, meshHandRailCornerCap1NorthEast, meshHandRailCornerCap2NorthEast, meshHandRailCornerInsideNorthEast);
+		renderCorner(icon, reference, compass.connectionE, compass.connectionNE, compass.connectionN, meshCornerOutsideNorthEast, meshCornerFullNorthEast, meshCornerInsideNorthEast, meshCornerStraight1NorthEast, meshCornerStraight2NorthEast, meshHandRailCornerOutsideNorthEast, meshHandRailCornerStraight1NorthEast, meshHandRailCornerStraight2NorthEast, meshHandRailCornerCap1NorthEast, meshHandRailCornerCap2NorthEast, meshHandRailCornerInsideNorthEast);
 
-		renderCorner(icon, position, compass.connectionN, compass.connectionNW, compass.connectionW, meshCornerOutsideNorthWest, meshCornerFullNorthWest, meshCornerInsideNorthWest, meshCornerStraight1NorthWest, meshCornerStraight2NorthWest, meshHandRailCornerOutsideNorthWest, meshHandRailCornerStraight1NorthWest, meshHandRailCornerStraight2NorthWest, meshHandRailCornerCap1NorthWest, meshHandRailCornerCap2NorthWest, meshHandRailCornerInsideNorthWest);
+		renderCorner(icon, reference, compass.connectionN, compass.connectionNW, compass.connectionW, meshCornerOutsideNorthWest, meshCornerFullNorthWest, meshCornerInsideNorthWest, meshCornerStraight1NorthWest, meshCornerStraight2NorthWest, meshHandRailCornerOutsideNorthWest, meshHandRailCornerStraight1NorthWest, meshHandRailCornerStraight2NorthWest, meshHandRailCornerCap1NorthWest, meshHandRailCornerCap2NorthWest, meshHandRailCornerInsideNorthWest);
 
 		return true;
 	}
 
-	private void renderCorner(Icon icon, Vector3f position, TileConnection connectionE, TileConnection connectionSE, TileConnection connectionS, ObjMesh meshCornerOutside, ObjMesh meshCornerFull, ObjMesh meshCornerInside, ObjMesh straight1, ObjMesh straight2, ObjMesh meshHandRailOutside, ObjMesh meshHandRailStraight1, ObjMesh meshHandRailStraight2, ObjMesh meshHandRailCap1, ObjMesh meshHandRailCap2, ObjMesh meshHandRailCornerInside) {
+	private void renderCorner(Icon icon, WorldReference position, TileConnection connectionE, TileConnection connectionSE, TileConnection connectionS, ObjMesh meshCornerOutside, ObjMesh meshCornerFull, ObjMesh meshCornerInside, ObjMesh straight1, ObjMesh straight2, ObjMesh meshHandRailOutside, ObjMesh meshHandRailStraight1, ObjMesh meshHandRailStraight2, ObjMesh meshHandRailCap1, ObjMesh meshHandRailCap2, ObjMesh meshHandRailCornerInside) {
 
 		boolean airStateE = connectionE == TileConnection.AIR || connectionE == TileConnection.STAIRSTOP || connectionE == TileConnection.STAIRSSIDE;
 		boolean airStateSE = connectionSE == TileConnection.AIR || connectionSE == TileConnection.STAIRSTOP || connectionSE == TileConnection.STAIRSSIDE;
@@ -306,51 +305,9 @@ public class ModelPlatform extends ModelBlock {
 			}
 		}
 
-		/*
-		 * if (airStateE && airStateS) // both sides are disconnected
-		 * meshHandRailOutside.renderMesh(false, icon, position); else if
-		 * (!stateE && !stateS && airStateSE) { // both sides are connected,
-		 * corner-touching block is not connected if (!(wallE && wallS))
-		 * meshHandRailCornerInside.renderMesh(false, icon, position); } else {
-		 * if (stateE && !stateS && airStateE) { if ((!groundSE ||
-		 * connectedStairsS || wallS)) meshHandRailStraight2.renderMesh(false,
-		 * icon, position); else meshHandRailCap2.renderMesh(false, icon,
-		 * position); } else if (stateS && !stateE && airStateS) { if
-		 * ((!groundSE || connectedStairsE || wallE))
-		 * meshHandRailStraight1.renderMesh(false, icon, position); else
-		 * meshHandRailCap1.renderMesh(false, icon, position); }
-		 * 
-		 * if (stateE && stateS) { if (airStateE)
-		 * meshHandRailCap2.renderMesh(false, icon, position); else if
-		 * (airStateS) meshHandRailCap1.renderMesh(false, icon, position); } if
-		 * ((stairsSE && (connectedE && connectedS)) || ((stairsS || stairsE) &&
-		 * !stateSE)) meshHandRailCornerInside.renderMesh(false, icon,
-		 * position);
-		 * 
-		 * if ((connectedStairsSE && (connectedE && connectedS)) ||
-		 * ((connectedStairsS || connectedStairsE) && !stateSE && !stairTopS &&
-		 * !stairTopE)) meshHandRailCornerInside.renderMesh(false, icon,
-		 * position); }
-		 * 
-		 * /* if (airStateE && airStateS) {
-		 * meshHandRailOutside.renderMesh(false, icon, position); } else if
-		 * (airStateS) { if (stateE || (connectionSE != TileConnection.AIR &&
-		 * connectionSE != TileConnection.CONNECTED && connectionE !=
-		 * TileConnection.STAIRS)) meshHandRailCap1.renderMesh(false, icon,
-		 * position); else meshHandRailStraight1.renderMesh(false, icon,
-		 * position); } else if (airStateE) { if (stateS || (connectionSE !=
-		 * TileConnection.AIR && connectionSE != TileConnection.CONNECTED &&
-		 * connectionS != TileConnection.STAIRS))
-		 * meshHandRailCap2.renderMesh(false, icon, position); else
-		 * meshHandRailStraight2.renderMesh(false, icon, position); } if
-		 * ((connectionE == TileConnection.CONNECTED || connectionE !=
-		 * TileConnection.STAIRS) && (connectionS == TileConnection.CONNECTED ||
-		 * connectionS == TileConnection.STAIRS) && !airStateE && airStateSE)
-		 * meshHandRailCornerInside.renderMesh(false, icon, position);
-		 */
 	}
 
-	private void renderConnection(Icon icon, Vector3f position, TileConnection connection, ObjMesh meshConnected, ObjMesh meshUnconnected, ObjMesh handrail) {
+	private void renderConnection(Icon icon, WorldReference position, TileConnection connection, ObjMesh meshConnected, ObjMesh meshUnconnected, ObjMesh handrail) {
 
 		if (connection == TileConnection.AIR || connection == TileConnection.GROUND || connection == TileConnection.MACHINE || connection == TileConnection.STAIRSTOP || connection == TileConnection.STAIRS || connection == TileConnection.STAIRSSIDE) {
 			meshUnconnected.renderMesh(false, icon, position);

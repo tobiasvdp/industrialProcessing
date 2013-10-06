@@ -1,5 +1,6 @@
 package ip.industrialProcessing.api.rendering;
 
+import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
 import ip.industrialProcessing.client.render.ModelBlock;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -29,7 +30,9 @@ public class RendererBlock implements ISimpleBlockRenderingHandler {
 		renderer.overrideBlockTexture = block.getBlockTexture(world, x, y, z, 0);
 
 		renderer.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1F, 1.0F);
-		boolean result = model.renderWorldBlock(world, x, y, z, block, modelId, renderer);
+
+		WorldReference reference = new WorldReference(world, x, y, z, block);
+		boolean result = model.renderWorldBlock(reference, modelId, renderer);
 
 		renderer.clearOverrideBlockTexture();
 		return result;

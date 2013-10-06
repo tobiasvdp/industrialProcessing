@@ -1,9 +1,9 @@
 package ip.industrialProcessing.transport.items.conveyorModels;
 
-import ic2.api.Direction;
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.api.rendering.wavefront.ObjRotator;
+import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
 import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.IConnectedTile;
 import ip.industrialProcessing.client.render.ModelBlock;
@@ -15,7 +15,6 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
-import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.ForgeDirection;
 
 import org.lwjgl.util.vector.Vector3f;
@@ -36,23 +35,22 @@ public class ModelConveyorBeltBlock extends ModelBlock {
 	public void renderInventory(Block block, int metadata, int modelID, RenderBlocks renderer) {
 		Vector3f position = new Vector3f(0, 0, 0);
 		Icon icon = block.getIcon(0, 0);
+
 		straight.getRotated(0).renderMesh(true, icon, position);
 	}
 
 	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
+	public boolean renderWorldBlock(WorldReference reference, int modelId, RenderBlocks renderer) {
 		System.out.println("ModelConveyorBeltBlock.renderWorldBlock()");
 		Tessellator tessellator = Tessellator.instance;
-		tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
 		tessellator.setColorOpaque(255, 255, 255);
 
-		TileEntity entity = world.getBlockTileEntity(x, y, z);
+		TileEntity entity = reference.getBlockTileEntity();
 		ForgeDirection forward = BlockMachine.getForwardFromEntity(entity);
 		int dir = 4 - BlockMachine.getMetadataFromForward(forward);
 
-		Vector3f position = new Vector3f(x, y, z);
-		Icon icon = block.getIcon(0, 0);
-		Icon iconCenter = block.getIcon(1, 0);
+		Icon icon = reference.getIcon(0);
+		Icon iconCenter = reference.getIcon(1);
 
 		if (entity instanceof TileEntityConveyorConnectionsBase) {
 			TileEntityConveyorConnectionsBase belt = (TileEntityConveyorConnectionsBase) entity;
@@ -65,27 +63,27 @@ public class ModelConveyorBeltBlock extends ModelBlock {
 			SlopeState bs = belt.getSlope(LocalDirection.FRONT);
 
 			if (fs != SlopeState.FLAT || bs != SlopeState.FLAT || front.isConnected() && back.isConnected() && !left.isConnected() && !right.isConnected()) {
-				slopes.getRenderer(fs, bs).getRotated(dir).renderMesh(false, icon, position);
+				slopes.getRenderer(fs, bs).getRotated(dir).renderMesh(false, icon, reference);
 			} else if (front.isConnected() && left.isConnected() && !back.isConnected() && !right.isConnected()) {
-				cornerLeft.getRotated(dir).renderMesh(false, icon, position);
+				cornerLeft.getRotated(dir).renderMesh(false, icon, reference);
 			} else if (front.isConnected() && right.isConnected() && !back.isConnected() && !left.isConnected()) {
-				cornerRight.getRotated(dir).renderMesh(false, icon, position);
+				cornerRight.getRotated(dir).renderMesh(false, icon, reference);
 			} else {
 				if (left.isConnected())
-					leftIn.getRotated(dir).renderMesh(false, icon, position);
+					leftIn.getRotated(dir).renderMesh(false, icon, reference);
 
 				if (right.isConnected())
-					rightIn.getRotated(dir).renderMesh(false, icon, position);
+					rightIn.getRotated(dir).renderMesh(false, icon, reference);
 
 				if (back.isConnected())
-					backIn.getRotated(dir).renderMesh(false, icon, position);
+					backIn.getRotated(dir).renderMesh(false, icon, reference);
 
 				if (front.isConnected() && back.isConnected()) {
-					straight.getRotated(dir).renderMesh(false, icon, position);
+					straight.getRotated(dir).renderMesh(false, icon, reference);
 				} else {
 					if (front.isConnected())
-						frontOut.getRotated(dir).renderMesh(false, icon, position);
-					centerPiece.getRotated(dir).renderMesh(false, iconCenter, position);
+						frontOut.getRotated(dir).renderMesh(false, icon, reference);
+					centerPiece.getRotated(dir).renderMesh(false, iconCenter, reference);
 				}
 			}
 		}

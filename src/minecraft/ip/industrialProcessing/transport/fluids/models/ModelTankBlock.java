@@ -1,5 +1,6 @@
 package ip.industrialProcessing.transport.fluids.models;
 
+import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
 import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.ModelBlock;
 import ip.industrialProcessing.transport.fluids.TileEntityTank;
@@ -55,10 +56,10 @@ public class ModelTankBlock extends ModelBlock {
 	}
 
 	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
-		TileEntity entity = world.getBlockTileEntity(x, y, z);
+	public boolean renderWorldBlock(WorldReference reference, int modelId, RenderBlocks renderer) {
+		TileEntity entity = reference.getBlockTileEntity();
 		Tessellator tessellator = Tessellator.instance;
-		tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
+		tessellator.setBrightness(reference.baseBrightness);
 		tessellator.setColorOpaque(255, 255, 255);
 
 		if (entity instanceof TileEntityTank) {
@@ -66,30 +67,27 @@ public class ModelTankBlock extends ModelBlock {
 			ConnectionState up = tank.getConnection(ForgeDirection.UP);
 			ConnectionState down = tank.getConnection(ForgeDirection.DOWN);
 
-			Vector3f position = new Vector3f(x, y, z);
-
-			Icon tankIcon = block.getIcon(0, 0);
-			Icon tankFeaturesIcon = block.getIcon(1, 0);
-
+			Icon tankIcon = reference.getIcon(0);
+			Icon tankFeaturesIcon = reference.getIcon(1);
 
 			if (up == ConnectionState.CONNECTED && down == ConnectionState.CONNECTED) {
-				center.renderMesh(false, tankIcon, position);
-				centerFeatures.renderMesh(false, tankFeaturesIcon, position);
+				center.renderMesh(false, tankIcon, reference);
+				centerFeatures.renderMesh(false, tankFeaturesIcon, reference);
 			} else if (up != ConnectionState.CONNECTED && down != ConnectionState.CONNECTED) {
-				single.renderMesh(false, tankIcon, position);
-				singleFeatures.renderMesh(false, tankFeaturesIcon, position);
+				single.renderMesh(false, tankIcon, reference);
+				singleFeatures.renderMesh(false, tankFeaturesIcon, reference);
 			} else if (up != ConnectionState.CONNECTED && down == ConnectionState.CONNECTED) {
-				top.renderMesh(false, tankIcon, position);
-				topFeatures.renderMesh(false, tankFeaturesIcon, position);
+				top.renderMesh(false, tankIcon, reference);
+				topFeatures.renderMesh(false, tankFeaturesIcon, reference);
 			} else if (up == ConnectionState.CONNECTED && down != ConnectionState.CONNECTED) {
-				bottom.renderMesh(false, tankIcon, position);
-				bottomFeatures.renderMesh(false, tankFeaturesIcon, position);
+				bottom.renderMesh(false, tankIcon, reference);
+				bottomFeatures.renderMesh(false, tankFeaturesIcon, reference);
 			}
 
 			for (int i = 0; i < 6; i++) {
 				ConnectionState con = tank.getConnection(ForgeDirection.getOrientation(i));
 				if (con == ConnectionState.PLUGGED)
-					connector[i].renderMesh(false, tankFeaturesIcon, position);
+					connector[i].renderMesh(false, tankFeaturesIcon, reference);
 			}
 		}
 		return true;
