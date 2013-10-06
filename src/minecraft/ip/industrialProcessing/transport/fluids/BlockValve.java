@@ -24,6 +24,7 @@ public class BlockValve extends BlockTransport {
 
 	public BlockValve() {
 		super(ConfigTransportBlocks.getBlockValveID(), Material.glass, 1F, Block.soundGlassFootstep, "Fluid Pipe Valve", IndustrialProcessing.tabOreProcessing);
+		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "valve");
 	}
 
 	@Override

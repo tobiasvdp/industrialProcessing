@@ -72,9 +72,5 @@ public class RendererTileEntityConnectedFluid extends RendererTileEntity {
 				}
 			}
 		}
-	}
-	@Override
-	protected ResourceLocation getTexture(TileEntity tl, World world, int i, int j, int k, Block block2, float f) {
-		return texture = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN, "textures/render/" + name + ".png");
-	}
+	} 
 }

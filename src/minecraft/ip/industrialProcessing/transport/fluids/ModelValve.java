@@ -13,23 +13,6 @@ import org.lwjgl.opengl.GL11;
 public class ModelValve extends ModelConnectedOrientedFluidAnimated {
 
 	// fields
-	ModelRenderer Center;
-	ModelRenderer Down;
-	ModelRenderer Up;
-	ModelRenderer South;
-	ModelRenderer East;
-	ModelRenderer West;
-	ModelRenderer North;
-	ModelRenderer DownConnector;
-	ModelRenderer EastConnector;
-	ModelRenderer WestConnector;
-	ModelRenderer NorthConnector;
-	ModelRenderer SouthConnector;
-	ModelRenderer UpConnector;
-	ModelRenderer EastWest;
-	ModelRenderer NorthSouth;
-	ModelRenderer UpDown;
-
 	ModelRenderer ValveRod12;
 	ModelRenderer ValveRod5;
 	ModelRenderer ValveRod6;
@@ -47,103 +30,7 @@ public class ModelValve extends ModelConnectedOrientedFluidAnimated {
 	public ModelValve() {
 		textureWidth = 32;
 		textureHeight = 32;
-
-		Center = new ModelRenderer(this, 0, 0);
-		Center.addBox(-3F, -3F, -3F, 6, 6, 6);
-		Center.setRotationPoint(0F, 16F, 0F);
-		Center.setTextureSize(32, 32);
-		Center.mirror = true;
-		setRotation(Center, 0F, 0F, 0F);
-		Down = new ModelRenderer(this, 0, 17);
-		Down.addBox(-2F, -8F, -2F, 4, 5, 4);
-		Down.setRotationPoint(0F, 16F, 0F);
-		Down.setTextureSize(32, 32);
-		Down.mirror = true;
-		setRotation(Down, 3.141593F, 0F, 0F);
-		Up = new ModelRenderer(this, 0, 17);
-		Up.addBox(-2F, -8F, -2F, 4, 5, 4);
-		Up.setRotationPoint(0F, 16F, 0F);
-		Up.setTextureSize(32, 32);
-		Up.mirror = true;
-		setRotation(Up, 0F, 0F, 0F);
-		South = new ModelRenderer(this, 0, 17);
-		South.addBox(-2F, -8F, -2F, 4, 5, 4);
-		South.setRotationPoint(0F, 16F, 0F);
-		South.setTextureSize(32, 32);
-		South.mirror = true;
-		setRotation(South, -1.570796F, 0F, 0F);
-		East = new ModelRenderer(this, 0, 17);
-		East.addBox(-2F, -8F, -2F, 4, 5, 4);
-		East.setRotationPoint(0F, 16F, 0F);
-		East.setTextureSize(32, 32);
-		East.mirror = true;
-		setRotation(East, 0F, 0F, 1.570796F);
-		West = new ModelRenderer(this, 0, 17);
-		West.addBox(-2F, -8F, -2F, 4, 5, 4);
-		West.setRotationPoint(0F, 16F, 0F);
-		West.setTextureSize(32, 32);
-		West.mirror = true;
-		setRotation(West, 0F, 0F, -1.570796F);
-		North = new ModelRenderer(this, 0, 17);
-		North.addBox(-2F, -8F, -2F, 4, 5, 4);
-		North.setRotationPoint(0F, 16F, 0F);
-		North.setTextureSize(32, 32);
-		North.mirror = true;
-		setRotation(North, 1.570796F, 0F, 0F);
-		DownConnector = new ModelRenderer(this, 0, 26);
-		DownConnector.addBox(-2.5F, -8F, -2.5F, 5, 1, 5);
-		DownConnector.setRotationPoint(0F, 16F, 0F);
-		DownConnector.setTextureSize(32, 32);
-		DownConnector.mirror = true;
-		setRotation(DownConnector, 0F, 0F, 3.141593F);
-		EastConnector = new ModelRenderer(this, 0, 26);
-		EastConnector.addBox(-2.5F, -8F, -2.5F, 5, 1, 5);
-		EastConnector.setRotationPoint(0F, 16F, 0F);
-		EastConnector.setTextureSize(32, 32);
-		EastConnector.mirror = true;
-		setRotation(EastConnector, 0F, 0F, 1.570796F);
-		WestConnector = new ModelRenderer(this, 0, 26);
-		WestConnector.addBox(-2.5F, -8F, -2.5F, 5, 1, 5);
-		WestConnector.setRotationPoint(0F, 16F, 0F);
-		WestConnector.setTextureSize(32, 32);
-		WestConnector.mirror = true;
-		setRotation(WestConnector, 0F, 0F, -1.570796F);
-		NorthConnector = new ModelRenderer(this, 0, 26);
-		NorthConnector.addBox(-2.5F, -8F, -2.5F, 5, 1, 5);
-		NorthConnector.setRotationPoint(0F, 16F, 0F);
-		NorthConnector.setTextureSize(32, 32);
-		NorthConnector.mirror = true;
-		setRotation(NorthConnector, 1.570796F, 0F, 0F);
-		SouthConnector = new ModelRenderer(this, 0, 26);
-		SouthConnector.addBox(-2.5F, -8F, -2.5F, 5, 1, 5);
-		SouthConnector.setRotationPoint(0F, 16F, 0F);
-		SouthConnector.setTextureSize(32, 32);
-		SouthConnector.mirror = true;
-		setRotation(SouthConnector, -1.570796F, 0F, 0F);
-		UpConnector = new ModelRenderer(this, 0, 26);
-		UpConnector.addBox(-2.5F, -8F, -2.5F, 5, 1, 5);
-		UpConnector.setRotationPoint(0F, 16F, 0F);
-		UpConnector.setTextureSize(32, 32);
-		UpConnector.mirror = true;
-		setRotation(UpConnector, 0F, 0F, 0F);
-		EastWest = new ModelRenderer(this, 16, 12);
-		EastWest.addBox(-2F, -8F, -2F, 4, 15, 4);
-		EastWest.setRotationPoint(0F, 16F, 0F);
-		EastWest.setTextureSize(32, 32);
-		EastWest.mirror = true;
-		setRotation(EastWest, 0F, 0F, 1.570796F);
-		NorthSouth = new ModelRenderer(this, 16, 12);
-		NorthSouth.addBox(-2F, -8F, -2F, 4, 15, 4);
-		NorthSouth.setRotationPoint(0F, 16F, 0F);
-		NorthSouth.setTextureSize(32, 32);
-		NorthSouth.mirror = true;
-		setRotation(NorthSouth, 1.570796F, 0F, 0F);
-		UpDown = new ModelRenderer(this, 16, 12);
-		UpDown.addBox(-2F, -8F, -2F, 4, 15, 4);
-		UpDown.setRotationPoint(0F, 16F, 0F);
-		UpDown.setTextureSize(32, 32);
-		UpDown.mirror = true;
-		setRotation(UpDown, 0F, 0F, 0F);
+		
 		ValveRod12 = new ModelRenderer(this, 22, 0);
 		ValveRod12.addBox(-2F, -4.8285F, 0F, 4, 1, 1);
 		ValveRod12.setRotationPoint(0F, 16F, -5F);
@@ -401,13 +288,7 @@ public class ModelValve extends ModelConnectedOrientedFluidAnimated {
 
 	@Override
 	protected void renderModelConnectedOrientedAnimated(TileEntity tl, float f, ForgeDirection forward, ConnectionState north, ConnectionState west, ConnectionState south, ConnectionState east, ConnectionState up, ConnectionState down, float[] animation) {
-		render(Up, UpConnector, up, f);
-		render(Down, DownConnector, down, f);
-		render(North, NorthConnector, south, f);
-		render(West, WestConnector, east, f);
-		render(South, SouthConnector, north, f);
-		render(East, EastConnector, west, f);
-		Center.render(f);
+
 		/*
 		 * int dir = 0; if (tl instanceof TileEntityValve) { TileEntityValve
 		 * valve = (TileEntityValve) tl; dir =

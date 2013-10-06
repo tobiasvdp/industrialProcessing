@@ -19,6 +19,7 @@ public class BlockWire extends BlockTransport {
 
 	public BlockWire() {
 		super(ConfigMachineBlocks.getWireBlockID(), Material.cloth, 1F, Block.soundClothFootstep, "Wire", IndustrialProcessing.tabPower);
+		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "wire");
 	}
 
 	@Override
