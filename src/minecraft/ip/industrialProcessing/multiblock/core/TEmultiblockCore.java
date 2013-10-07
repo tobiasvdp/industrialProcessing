@@ -36,6 +36,28 @@ public class TEmultiblockCore extends TileEntity implements ITEmultiblockCore {
     protected AnimationHandler[] animation;
     protected boolean[] isAnimationEnabled;
 
+    public ForgeDirection getForwardDirection() {
+	return FacingDirectionToForge(side);
+    }
+
+    private ForgeDirection FacingDirectionToForge(FacingDirection side2) {
+	switch (side2){
+	case East:
+	    return ForgeDirection.WEST;
+	case Invalid:
+	    return ForgeDirection.UNKNOWN;
+	case North:
+	    return ForgeDirection.SOUTH;
+	case South:
+	    return ForgeDirection.NORTH;
+	case West:
+	    return ForgeDirection.EAST;
+	default:
+	    return ForgeDirection.UNKNOWN;
+	
+	}
+    }
+
     public float getAnimationProgress(float scale, int animationIndex) {
 	return animation[animationIndex].getProgress();
     }

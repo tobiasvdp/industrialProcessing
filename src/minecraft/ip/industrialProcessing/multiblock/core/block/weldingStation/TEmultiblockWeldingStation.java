@@ -1,12 +1,20 @@
 package ip.industrialProcessing.multiblock.core.block.weldingStation;
 
+import java.util.Iterator;
+
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTankInfo;
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.machines.crusher.RecipesCrusher;
 import ip.industrialProcessing.machines.mixer.RecipesMixer;
 import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
 import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreInv;
+import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
 import ip.industrialProcessing.multiblock.layout.LayoutTransformer;
@@ -18,8 +26,9 @@ import ip.industrialProcessing.multiblock.tier.Tiers;
 import ip.industrialProcessing.multiblock.utils.MultiblockActionType;
 import ip.industrialProcessing.multiblock.utils.TEmultiblockItemStackType;
 import ip.industrialProcessing.multiblock.utils.blockSide;
+import ip.industrialProcessing.recipes.Recipe;
 
-public class TEmultiblockWeldingStation extends TEmultiblockCoreInv{
+public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowered{
 	static StructureMultiblock structure;
 	static TierCollection tierRequirments;
 	static RecipesMachine recipes = new RecipesCrusher();
@@ -49,13 +58,77 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreInv{
 		tierRequirments.addTier(tier, Tiers.Tier0);
 	}
 	public TEmultiblockWeldingStation() {
-		super(structure, tierRequirments,recipes);
+		super(structure, tierRequirments,recipes, LocalDirection.LEFT,10000,100);
 		
 		//add slots and set default IO for multiblocks
-		addItemSlot(TEmultiblockItemStackType.input).addIdSide(0, blockSide.right).addIdSide(2, blockSide.front);
-		addItemSlot(TEmultiblockItemStackType.output).addIdSide(0,blockSide.right);
+		//addItemSlot(TEmultiblockItemStackType.input).addIdSide(0, blockSide.right).addIdSide(2, blockSide.front);
+		//addItemSlot(TEmultiblockItemStackType.output).addIdSide(0,blockSide.right);
 		
 		
 	}
-
+	@Override
+	public void addTank(int capacity, boolean input, boolean output) {
+	    // TODO Auto-generated method stub
+	    
+	}
+	@Override
+	public int fill(int ID, ForgeDirection from, FluidStack resource, boolean doFill) {
+	    // TODO Auto-generated method stub
+	    return 0;
+	}
+	@Override
+	public FluidStack drain(int ID, ForgeDirection from, FluidStack resource, boolean doDrain) {
+	    // TODO Auto-generated method stub
+	    return null;
+	}
+	@Override
+	public FluidStack drain(int ID, ForgeDirection from, int maxDrain, boolean doDrain) {
+	    // TODO Auto-generated method stub
+	    return null;
+	}
+	@Override
+	public boolean canDrain(int ID, ForgeDirection from, Fluid fluid) {
+	    // TODO Auto-generated method stub
+	    return false;
+	}
+	@Override
+	public boolean canFill(int ID, ForgeDirection from, Fluid fluid) {
+	    // TODO Auto-generated method stub
+	    return false;
+	}
+	@Override
+	public boolean isTankValidForFluid(int ID, ForgeDirection from, int fluidId) {
+	    // TODO Auto-generated method stub
+	    return false;
+	}
+	@Override
+	public FluidTankInfo[] getTankInfo(int ID, ForgeDirection from) {
+	    // TODO Auto-generated method stub
+	    return null;
+	}
+	@Override
+	public int[] getAccessibleSlotsFromSide(int ID, int side) {
+	    // TODO Auto-generated method stub
+	    return null;
+	}
+	@Override
+	public boolean canInsertItem(int i, ItemStack itemstack, int ID, int side) {
+	    // TODO Auto-generated method stub
+	    return false;
+	}
+	@Override
+	public boolean canExtractItem(int i, ItemStack itemstack, int ID, int side) {
+	    // TODO Auto-generated method stub
+	    return false;
+	}
+	@Override
+	protected boolean isTankValidForFluid(int slot, int fluidId) {
+	    // TODO Auto-generated method stub
+	    return false;
+	}
+	@Override
+	protected boolean isValidInput(int slot, int itemID) {
+	    // TODO Auto-generated method stub
+	    return false;
+	}
 }

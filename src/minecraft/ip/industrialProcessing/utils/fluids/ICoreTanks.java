@@ -1,7 +1,10 @@
 package ip.industrialProcessing.utils.fluids;
 
+import ip.industrialProcessing.client.render.IFluidInfo;
+import ip.industrialProcessing.machines.IMachineTanks;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.multiblock.utils.MultiblockTank;
+import ip.industrialProcessing.transport.fluids.IPressuredTank;
 import ip.industrialProcessing.utils.mapping.MappingIDtoSlot;
 
 import java.util.ArrayList;
@@ -16,7 +19,7 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
-public interface ICoreTanks extends IFluidHandler {
+public interface ICoreTanks extends IFluidHandler,IMachineTanks, IFluidInfo, IPressuredTank {
 	public void readTanks(NBTTagCompound nbt);
 
 	public void writeTanks(NBTTagCompound nbt);
