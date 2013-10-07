@@ -99,22 +99,22 @@ public class TEmultiblockInvInput extends TEmultiblockDummy implements ISidedInv
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int var1) {
-		if (getCore() != null)
-			return getCore().getAccessibleSlotsFromSide(this.ID, var1);
+		//if (getCore() != null)
+			//return getCore().getAccessibleSlotsFromSide(this.ID, var1);
 		return null;
 	}
 
 	@Override
 	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
-		if (getCore() != null)
-			return getCore().canInsertItem(i, itemstack, this.ID, j);
+		//if (getCore() != null)
+			//return getCore().canInsertItem(i, itemstack, this.ID, j);
 		return false;
 	}
 
 	@Override
 	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
-		if (getCore() != null)
-			return getCore().canExtractItem(i, itemstack, this.ID, j);
+		//if (getCore() != null)
+			//return getCore().canExtractItem(i, itemstack, this.ID, j);
 		return false;
 	}
 

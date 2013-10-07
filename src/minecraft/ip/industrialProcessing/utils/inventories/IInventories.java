@@ -20,13 +20,4 @@ import net.minecraftforge.fluids.FluidStack;
 
 public interface IInventories extends ISidedInventory, IMachineSlots {
 
-	public int[] getAccessibleSlotsFromSide(int ID, int side);
-
-	public boolean canInsertItem(int i, ItemStack itemstack, int ID, int side);
-
-	public boolean canExtractItem(int i, ItemStack itemstack, int ID, int side);
-
-	public void writeInventory(NBTTagCompound nbt);
-
-	public void readInventory(NBTTagCompound nbt);
 }

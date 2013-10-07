@@ -59,76 +59,28 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowere
 	}
 	public TEmultiblockWeldingStation() {
 		super(structure, tierRequirments,recipes, LocalDirection.LEFT,10000,100);
-		
 		//add slots and set default IO for multiblocks
-		//addItemSlot(TEmultiblockItemStackType.input).addIdSide(0, blockSide.right).addIdSide(2, blockSide.front);
-		//addItemSlot(TEmultiblockItemStackType.output).addIdSide(0,blockSide.right);
-		
-		
-	}
-	@Override
-	public void addTank(int capacity, boolean input, boolean output) {
-	    // TODO Auto-generated method stub
-	    
-	}
-	@Override
-	public int fill(int ID, ForgeDirection from, FluidStack resource, boolean doFill) {
-	    // TODO Auto-generated method stub
-	    return 0;
-	}
-	@Override
-	public FluidStack drain(int ID, ForgeDirection from, FluidStack resource, boolean doDrain) {
-	    // TODO Auto-generated method stub
-	    return null;
-	}
-	@Override
-	public FluidStack drain(int ID, ForgeDirection from, int maxDrain, boolean doDrain) {
-	    // TODO Auto-generated method stub
-	    return null;
-	}
-	@Override
-	public boolean canDrain(int ID, ForgeDirection from, Fluid fluid) {
-	    // TODO Auto-generated method stub
-	    return false;
-	}
-	@Override
-	public boolean canFill(int ID, ForgeDirection from, Fluid fluid) {
-	    // TODO Auto-generated method stub
-	    return false;
-	}
-	@Override
-	public boolean isTankValidForFluid(int ID, ForgeDirection from, int fluidId) {
-	    // TODO Auto-generated method stub
-	    return false;
-	}
-	@Override
-	public FluidTankInfo[] getTankInfo(int ID, ForgeDirection from) {
-	    // TODO Auto-generated method stub
-	    return null;
-	}
-	@Override
-	public int[] getAccessibleSlotsFromSide(int ID, int side) {
-	    // TODO Auto-generated method stub
-	    return null;
-	}
-	@Override
-	public boolean canInsertItem(int i, ItemStack itemstack, int ID, int side) {
-	    // TODO Auto-generated method stub
-	    return false;
-	}
-	@Override
-	public boolean canExtractItem(int i, ItemStack itemstack, int ID, int side) {
-	    // TODO Auto-generated method stub
-	    return false;
+		this.addStack(null, LocalDirection.UP, true, false);
+		this.addStack(null, LocalDirection.UP, true, false);
+		this.addStack(null, LocalDirection.UP, true, false);
+		this.addStack(null, LocalDirection.UP, true, false);
+		this.addStack(null, LocalDirection.UP, true, false);
+		this.addStack(null, LocalDirection.UP, true, false);
+		this.addStack(null, LocalDirection.UP, true, false);
+		this.addStack(null, LocalDirection.UP, true, false);
+		this.addStack(null, LocalDirection.UP, true, false);
+		this.addStack(null, LocalDirection.UP, true, false);
+		this.addStack(null, LocalDirection.UP, true, false);
+		this.addStack(null, LocalDirection.UP, true, false);
+		this.addStack(null, LocalDirection.UP, true, false);
+		this.addStack(null, LocalDirection.RIGHT, false, true);	
 	}
 	@Override
 	protected boolean isTankValidForFluid(int slot, int fluidId) {
-	    // TODO Auto-generated method stub
 	    return false;
 	}
 	@Override
 	protected boolean isValidInput(int slot, int itemID) {
-	    // TODO Auto-generated method stub
-	    return false;
+		return recipes.isValidInput(slot, itemID);
 	}
 }

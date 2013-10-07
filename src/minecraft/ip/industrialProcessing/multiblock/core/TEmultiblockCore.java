@@ -10,6 +10,7 @@ import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
 import ip.industrialProcessing.multiblock.tier.Tiers;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -476,5 +477,9 @@ public class TEmultiblockCore extends TileEntity implements ITEmultiblockCore {
     public int getZ() {
 	return this.zCoord;
     }
+
+	public boolean canInteractWith(EntityPlayer entityplayer) {
+		return (state == MultiblockState.COMPLETED);
+	}
 
 }

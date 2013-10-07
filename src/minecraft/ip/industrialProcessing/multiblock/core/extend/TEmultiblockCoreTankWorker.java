@@ -24,12 +24,14 @@ import ip.industrialProcessing.utils.working.WorkUtils;
 
 public abstract class TEmultiblockCoreTankWorker extends TEmultiblockCoreTank implements IRecipeFluidWorkHandler, IAnimationProgress, IAnimationSyncable {
 
-    public TEmultiblockCoreTankWorker(StructureMultiblock structure, TierCollection tierRequirments, RecipesMachine recipe) {
-	super(structure, tierRequirments, recipe);
-	this.recipe = recipe;
-	this.serverWorker = createServerSideWorker();
-	this.clientWorker = new ClientWorker();
-    }
+	public TEmultiblockCoreTankWorker(StructureMultiblock structure, TierCollection tierRequirments, RecipesMachine recipe) {
+		super(structure, tierRequirments, recipe);
+		this.recipe = recipe;
+		this.serverWorker = createServerSideWorker();
+		this.clientWorker = new ClientWorker();
+		this.animationHandler = this.creatAnimationHandler();
+	}
+
 	protected AnimationHandler creatAnimationHandler() {
 		return new AnimationHandler(AnimationMode.WRAP, 1f, true);
 	}
@@ -38,14 +40,14 @@ public abstract class TEmultiblockCoreTankWorker extends TEmultiblockCoreTank im
 		return new RecipeFluidWorker(this);
 	}
 
-	private RecipesMachine recipe ;
+	private RecipesMachine recipe;
 	private ServerWorker serverWorker;
 	private ClientWorker clientWorker;
 	private AnimationHandler animationHandler;
-	
+
 	@Override
 	public Iterator<Recipe> iterateRecipes() {
-	    return recipe.iterator();
+		return recipe.iterator();
 	}
 
 	public IWorker getWorker() {
@@ -58,8 +60,10 @@ public abstract class TEmultiblockCoreTankWorker extends TEmultiblockCoreTank im
 	@Override
 	public void updateEntity() {
 		doWork();
-		this.animationHandler.update();
-		TileAnimationSyncHandler.sendAnimationData(this, this.animationHandler);
+		if (animationHandler != null) {
+			this.animationHandler.update();
+			TileAnimationSyncHandler.sendAnimationData(this, this.animationHandler);
+		}
 	}
 
 	protected void doWork() {
