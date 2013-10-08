@@ -102,4 +102,7 @@ public class BlockIndustrialSapling extends BlockSapling {
         return true;
     }
 
+    public int damageDropped(int par1) {
+        return par1;
+    }
 }

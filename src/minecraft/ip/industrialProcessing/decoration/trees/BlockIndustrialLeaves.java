@@ -176,4 +176,9 @@ public class BlockIndustrialLeaves extends BlockLeaves {
     public int damageDropped(int par1) {
         return par1;
     }
+
+    @Override
+    public boolean isFlammable(IBlockAccess world, int x, int y, int z, int metadata, ForgeDirection face) {
+        return true;
+    }
 }

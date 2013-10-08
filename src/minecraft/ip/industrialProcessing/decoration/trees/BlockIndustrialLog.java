@@ -4,12 +4,16 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigBlocks;
 
 import java.util.List;
+import java.util.Random;
 
 import net.minecraft.block.BlockLog;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -18,8 +22,6 @@ public class BlockIndustrialLog extends BlockLog {
     private Icon[] tree_side;
     private Icon[] tree_top;
 
- 
-    
     public BlockIndustrialLog() {
         super(ConfigBlocks.getLogID());
         this.setCreativeTab(IndustrialProcessing.tabOres);
@@ -64,5 +66,24 @@ public class BlockIndustrialLog extends BlockLog {
         for (int i = 0; i < IndustrialTrees.getTreeCount(); i++) {
             par3List.add(new ItemStack(par1, 1, i));
         }
+    }
+
+    @Override
+    public boolean isFlammable(IBlockAccess world, int x, int y, int z, int metadata, ForgeDirection face) {
+        return true;
+    }
+    
+    @Override
+    public int idDropped(int par1, Random par2Random, int par3) {
+        return this.blockID;
+    }
+
+    @Override
+    public int idPicked(World par1World, int par2, int par3, int par4) {
+        return this.blockID;
+    }
+
+    public int damageDropped(int par1) {
+        return par1;
     }
 }

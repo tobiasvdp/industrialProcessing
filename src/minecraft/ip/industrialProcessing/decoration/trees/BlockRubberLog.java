@@ -29,9 +29,8 @@ public class BlockRubberLog extends Block {
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
 
         ItemStack playerStack = par5EntityPlayer.inventory.getCurrentItem();
-        if (playerStack != null) {
-            ItemStack knife = new ItemStack(IndustrialProcessing.itemKnife);
-            if (playerStack.isItemEqual(knife)) {
+        if (playerStack != null) { 
+            if (playerStack.itemID == IndustrialProcessing.itemKnife.itemID) {
                 if (par6 > 1) {
                     int meta = par1World.getBlockMetadata(par2, par3, par4);
 
@@ -121,5 +120,6 @@ public class BlockRubberLog extends Block {
             }
         }
     }
+ 
 
 }

@@ -49,15 +49,31 @@ public class BlockManualTreeTap extends BlockMachineRendered {
                 int d = i % 4;
                 ForgeDirection direction = BlockMachine.getForwardFromMetadata(d);
 
-                int id = world.getBlockId(x - direction.offsetX, y - direction.offsetY, z - direction.offsetZ);
-                if (id == ConfigBlocks.getRubberLogID()) {
-                    if (BlockRubberLog.isCarved(world, x - direction.offsetX, y - direction.offsetY, z - direction.offsetZ, direction.ordinal())) {
-                        ((IRotateableEntity) entity).setForwardDirection(direction);
-                        break;
-                    }
+                boolean isConnected = canStayAt(world, x, y, z, direction);
+                if (isConnected) {
+                    ((IRotateableEntity) entity).setForwardDirection(direction);
+                    break;
                 }
             }
+
         }
+    }
+
+    private static boolean canStayAt(World world, int x, int y, int z, ForgeDirection direction) {
+        int id = world.getBlockId(x - direction.offsetX, y - direction.offsetY, z - direction.offsetZ);
+        if (id == ConfigBlocks.getRubberLogID()) {
+            if (BlockRubberLog.isCarved(world, x - direction.offsetX, y - direction.offsetY, z - direction.offsetZ, direction.ordinal())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean canBlockStay(World par1World, int par2, int par3, int par4) {
+        TileEntity entity = par1World.getBlockTileEntity(par2, par3, par4);
+        ForgeDirection dir = BlockMachine.getForwardFromEntity(entity);
+        return canStayAt(par1World, par2, par3, par4, dir);
     }
 
     /**
