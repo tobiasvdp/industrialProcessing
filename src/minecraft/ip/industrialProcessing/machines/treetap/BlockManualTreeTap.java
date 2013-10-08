@@ -68,6 +68,13 @@ public class BlockManualTreeTap extends BlockMachineRendered {
         }
         return false;
     }
+    
+    @Override
+    public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
+    	super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
+    	if(!canBlockStay(par1World, par2, par3, par4))
+    		par1World.destroyBlock(par2, par3, par4, true);
+    }
 
     @Override
     public boolean canBlockStay(World par1World, int par2, int par3, int par4) {
