@@ -1,13 +1,5 @@
 package ip.industrialProcessing;
 
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import org.bouncycastle.crypto.util.Pack;
-
-import net.minecraftforge.common.Configuration;
-import ip.industrialProcessing.client.render.RendererLivingEntity;
 import ip.industrialProcessing.config.ConfigAchievements;
 import ip.industrialProcessing.config.ConfigBaseRecipes;
 import ip.industrialProcessing.config.ConfigBlocks;
@@ -24,75 +16,16 @@ import ip.industrialProcessing.config.ISetupDamageSource;
 import ip.industrialProcessing.config.ISetupFluids;
 import ip.industrialProcessing.config.ISetupItems;
 import ip.industrialProcessing.config.ISetupMachineBlocks;
-import ip.industrialProcessing.fluids.BlockFluid;
+import ip.industrialProcessing.decoration.trees.EventBonemealIndustrialTree;
 import ip.industrialProcessing.fluids.BucketHandler;
-import ip.industrialProcessing.fluids.ContainerFluid;
-import ip.industrialProcessing.fluids.ItemFluid;
-import ip.industrialProcessing.items.*;
-import ip.industrialProcessing.machines.classifier.BlockClassifier;
-import ip.industrialProcessing.machines.classifier.TileEntityClassifier;
-import ip.industrialProcessing.machines.crusher.BlockCrusher;
-import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
-import ip.industrialProcessing.machines.diskFilter.BlockDiskFilter;
-import ip.industrialProcessing.machines.diskFilter.TileEntityDiskFilter;
-import ip.industrialProcessing.machines.dryer.BlockDryer;
-import ip.industrialProcessing.machines.dryer.TileEntityDryer;
-import ip.industrialProcessing.machines.filter.BlockFilter;
-import ip.industrialProcessing.machines.filter.TileEntityFilter;
-import ip.industrialProcessing.machines.flotationCell.BlockFlotationCell;
-import ip.industrialProcessing.machines.flotationCell.TileEntityFlotationCell;
-import ip.industrialProcessing.machines.hydroCyclone.BlockHydroCyclone;
-import ip.industrialProcessing.machines.hydroCyclone.TileEntityHydroCyclone;
-import ip.industrialProcessing.machines.magneticSeparator.BlockMagneticSeparator;
-import ip.industrialProcessing.machines.magneticSeparator.TileEntityMagneticSeparator;
-import ip.industrialProcessing.machines.mixer.BlockMixer;
-import ip.industrialProcessing.machines.mixer.TileEntityMixer;
-import ip.industrialProcessing.machines.thickener.BlockThickener;
-import ip.industrialProcessing.machines.thickener.TileEntityThickener;
-import ip.industrialProcessing.multiblock.core.block.hotPress.TEmultiblockHotPress;
 import ip.industrialProcessing.multiblock.dummy.block.frame.ENmultiblockFrame;
-import ip.industrialProcessing.multiblock.dummy.block.frame.MDmultiblockFramePanel;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.ENmultiblockLiftDoor;
-import ip.industrialProcessing.multiblock.utils.MultiblockState;
-import ip.industrialProcessing.power.buildcraftGenerator.BlockBuildcraftGenerator;
-import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
-import ip.industrialProcessing.power.manualGenerator.BlockManualGenerator;
-import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
-import ip.industrialProcessing.power.meters.BlockAmpMeter;
-import ip.industrialProcessing.power.meters.BlockVoltMeter;
-import ip.industrialProcessing.power.meters.TileEntityAmpMeter;
-import ip.industrialProcessing.power.meters.TileEntityVoltMeter;
-import ip.industrialProcessing.power.wire.BlockWire;
-import ip.industrialProcessing.power.wire.TileEntityWire;
-import ip.industrialProcessing.transport.fluids.BlockTransportFluids;
-import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids;
-import ip.industrialProcessing.utils.DamageSourceIP;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockOre;
-import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.src.ModLoader;
-import net.minecraft.stats.Achievement;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraftforge.common.AchievementPage;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.Property;
-import net.minecraftforge.event.Event.Result;
-import net.minecraftforge.event.ForgeSubscribe;
-import net.minecraftforge.event.entity.player.FillBucketEvent;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
-import net.minecraftforge.oredict.OreDictionary;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -105,7 +38,6 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid = "IndustrialProcessing", name = "Industrial Processing", version = "0.0.1", dependencies = "after:NotEnoughItems")
 @NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = { PacketHandler.ANIMATION_SYNC, PacketHandler.TANK_SYNC, PacketHandler.CONVEYOR_SYNC, PacketHandler.BUTTON_PRESSED, PacketHandler.SYNC_CLIENT, PacketHandler.SEND_INFO, PacketHandler.SCREEN_PRESSED, PacketHandler.IP_ELEVATOR_BUTTON, PacketHandler.IP_LOGIC_SYNCSIDE }, packetHandler = PacketHandler.class)
@@ -155,6 +87,7 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
 		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
 		MinecraftForge.EVENT_BUS.register(this);
 		MinecraftForge.EVENT_BUS.register(new EventHookContainerClass());
+		MinecraftForge.EVENT_BUS.register(new EventBonemealIndustrialTree());
 		
 
 		log = event.getModLog();
