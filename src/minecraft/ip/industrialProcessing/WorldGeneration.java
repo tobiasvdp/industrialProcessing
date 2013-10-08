@@ -32,7 +32,7 @@ public class WorldGeneration implements IWorldGenerator {
         generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 2, 5, 30, 60, 2, 4, ISetupBlocks.blockCopperOre.blockID);
         generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 1, 3, 5, 40, 1, 3, ISetupBlocks.blockGalenaOre.blockID);
         generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 2, 3, 10, 60, 1, 3, ISetupBlocks.blockCinnebarOre.blockID);
-        generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 1, 4, 1, 8, 2, 3, ISetupBlocks.blockRutileOre.blockID);
+        generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 1, 2, 1, 8, 2, 3, ISetupBlocks.blockRutileOre.blockID);
         generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 1, 2, 1, 40, 1, 3, ISetupBlocks.blockChromiteOre.blockID);
         generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 1, 1, 1, 20, 1, 1, ISetupBlocks.blockTaliaOre.blockID);
 

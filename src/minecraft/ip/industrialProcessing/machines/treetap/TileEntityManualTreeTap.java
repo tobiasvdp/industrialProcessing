@@ -19,7 +19,7 @@ public class TileEntityManualTreeTap extends TileEntityWorkerMachine {
 
     @Override
     protected boolean isValidInput(int slot, int itemID) {
-        return recipes.isValidInput(0, itemID);
+        return recipes.isValidInput(slot, itemID);
     }
 
     @Override

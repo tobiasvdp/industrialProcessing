@@ -4,6 +4,7 @@ import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.api.tanks.IPfluidTank;
 import ip.industrialProcessing.api.tanks.ITank;
+import ip.industrialProcessing.machines.MachineFluidTank;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
@@ -33,6 +34,17 @@ public abstract class TEmultiblockCoreTank extends TEmultiblockCoreInv implement
 	super.writeToNBT(nbt);
 	writeTanks(nbt);
     };
+    
+    protected void addTank(int capacity, int multiblockID, ForgeDirection[] sides, boolean input, boolean output) {
+		int index = fluidTanks.size();
+
+		int[] sideIndices = new int[sides.length];
+		for (int i = 0; i < sideIndices.length; i++) {
+			sideIndices[i] = sides[i].ordinal();
+		}
+
+		fluidTanks.add(new IPMultiblockFluidTank(this, capacity, index, sideIndices, input, output, multiblockID));
+	}
 
     public void writeTanks(NBTTagCompound nbt) {
 	NBTTagList nbttaglist = new NBTTagList();
