@@ -42,112 +42,111 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 @Mod(modid = "IndustrialProcessing", name = "Industrial Processing", version = "0.0.1", dependencies = "after:NotEnoughItems")
 @NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = { PacketHandler.ANIMATION_SYNC, PacketHandler.TANK_SYNC, PacketHandler.CONVEYOR_SYNC, PacketHandler.BUTTON_PRESSED, PacketHandler.SYNC_CLIENT, PacketHandler.SEND_INFO, PacketHandler.SCREEN_PRESSED, PacketHandler.IP_ELEVATOR_BUTTON, PacketHandler.IP_LOGIC_SYNCSIDE }, packetHandler = PacketHandler.class)
 public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISetupMachineBlocks, ISetupItems, ISetupBlocks, ISetupFluids, ISetupAchievements, ISetupDamageSource {
-	// The instance of your mod that Forge uses.
-	@Instance("IndustrialProcessing")
-	public static IndustrialProcessing instance;
+    // The instance of your mod that Forge uses.
+    @Instance("IndustrialProcessing")
+    public static IndustrialProcessing instance;
 
-	public static boolean invertShift;
-	public static Logger log;
+    public static boolean invertShift;
+    public static Logger log;
 
-	public static Configuration config;
+    public static Configuration config;
 
-	public static void logInfo(String message, Object... params) {
-		log.log(Level.INFO, String.format(message, params));
-	}
+    public static void logInfo(String message, Object... params) {
+        log.log(Level.INFO, String.format(message, params));
+    }
 
-	public static void logWarning(String message, Object... params) {
-		log.log(Level.WARNING, String.format(message, params));
-	}
+    public static void logWarning(String message, Object... params) {
+        log.log(Level.WARNING, String.format(message, params));
+    }
 
-	public static void logSevere(String message, Object... params) {
-		log.log(Level.SEVERE, String.format(message, params));
-	}
+    public static void logSevere(String message, Object... params) {
+        log.log(Level.SEVERE, String.format(message, params));
+    }
 
-	// create namespaces: INamespace
-	// create items: ISetupItems
-	// create fluids: ISetupFluids
-	// create ores: ISetupBlocks
-	// create Machines, power, etc: ISetupMachineBlocks
-	// create achievements: ISetupAchievements
-	// create damagesources: ISetupDamageSource
-	// create creative tab: ISetupCreativeTabs
+    // create namespaces: INamespace
+    // create items: ISetupItems
+    // create fluids: ISetupFluids
+    // create ores: ISetupBlocks
+    // create Machines, power, etc: ISetupMachineBlocks
+    // create achievements: ISetupAchievements
+    // create damagesources: ISetupDamageSource
+    // create creative tab: ISetupCreativeTabs
 
-	// create worldgen
-	public static WorldGeneration worldGen = new WorldGeneration();
+    // create worldgen
+    public static WorldGeneration worldGen = new WorldGeneration();
 
-	// Says where the client and server 'proxy' code is loaded.
-	@SidedProxy(clientSide = "ip.industrialProcessing.client.ClientProxy", serverSide = "ip.industrialProcessing.CommonProxy")
-	public static CommonProxy proxy;
+    // Says where the client and server 'proxy' code is loaded.
+    @SidedProxy(clientSide = "ip.industrialProcessing.client.ClientProxy", serverSide = "ip.industrialProcessing.CommonProxy")
+    public static CommonProxy proxy;
 
-	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
-		
-		
-		// register listeners for events
-		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
-		MinecraftForge.EVENT_BUS.register(this);
-		MinecraftForge.EVENT_BUS.register(new EventHookContainerClass());
-		MinecraftForge.EVENT_BUS.register(new EventBonemealIndustrialTree());
-		
+    @EventHandler
+    public void preInit(FMLPreInitializationEvent event) {
 
-		log = event.getModLog();
-		
-		//load config file
-		config = new Configuration(event.getSuggestedConfigurationFile());
-		config.load();
-		
-		boolean useConfig = config.get(Configuration.CATEGORY_GENERAL, "useConfig", true).getBoolean(true);
+        // register listeners for events
+        MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
+        MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(new EventHookContainerClass());
+        MinecraftForge.EVENT_BUS.register(new EventBonemealIndustrialTree());
 
-	}
+        log = event.getModLog();
 
-	@EventHandler
-	public void load(FMLInitializationEvent event) {
+        // load config file
+        config = new Configuration(event.getSuggestedConfigurationFile());
+        config.load();
 
-		// register new crafting handler
-		GameRegistry.registerCraftingHandler(new CraftingHandler());
-		// register worldgenerator
-		GameRegistry.registerWorldGenerator(worldGen);
+        boolean useConfig = config.get(Configuration.CATEGORY_GENERAL, "useConfig", true).getBoolean(true);
 
-		// register machines, power, transport
-		ConfigMachineBlocks.getInstance().registerMachineBlocks();
+    }
 
-		// register ores
-		ConfigBlocks.getInstance().registerOres();
+    @EventHandler
+    public void load(FMLInitializationEvent event) {
 
-		// register item name's
-		ConfigItems.getInstance().addToLanguageRegistry();
+        // register new crafting handler
+        GameRegistry.registerCraftingHandler(new CraftingHandler());
+        // register worldgenerator
+        GameRegistry.registerWorldGenerator(worldGen);
 
-		// add death display messages
-		ConfigDamageSource.getInstance().addToLanguageRegistry();
+        // register machines, power, transport
+        ConfigMachineBlocks.getInstance().registerMachineBlocks();
 
-		// register achievements
-		ConfigAchievements.getInstance().registerAchievments();
+        // register ores
+        ConfigBlocks.getInstance().registerOres();
 
-		// register fluid
-		ConfigFluids.getInstance().registerFluids();
+        ConfigItems.getInstance();
+        // register item name's
+        ConfigItems.addToLanguageRegistry();
 
-		// register the gui handler
-		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
+        // add death display messages
+        ConfigDamageSource.getInstance().addToLanguageRegistry();
 
-		// register creative tabs
-		ConfigCreativeTabs.getInstance().addToLanguageRegistry();
+        // register achievements
+        ConfigAchievements.getInstance().registerAchievments();
 
-		// register renders
-		proxy.registerRenderers();
+        // register fluid
+        ConfigFluids.getInstance().registerFluids();
 
-		// register basic crafting recipes
-		ConfigBaseRecipes.getInstance().addBaseRecipes();
+        // register the gui handler
+        NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
 
-		EntityRegistry.registerModEntity(ENmultiblockFrame.class, "Platform", 0, IndustrialProcessing.instance, 80, 1, true);
-		LanguageRegistry.instance().addStringLocalization("entity.Platform.name", "en_US", "Platform");
+        // register creative tabs
+        ConfigCreativeTabs.getInstance().addToLanguageRegistry();
 
-		EntityRegistry.registerModEntity(ENmultiblockLiftDoor.class, "LiftDoor", 1, IndustrialProcessing.instance, 80, 1, true);
-		LanguageRegistry.instance().addStringLocalization("entity.LiftDoor.name", "en_US", "Lift door");
-		
-		config.save();
-	}
+        // register renders
+        proxy.registerRenderers();
 
-	@EventHandler
-	public void postInit(FMLPostInitializationEvent event) {
-	}
+        // register basic crafting recipes
+        ConfigBaseRecipes.getInstance().addBaseRecipes();
+
+        EntityRegistry.registerModEntity(ENmultiblockFrame.class, "Platform", 0, IndustrialProcessing.instance, 80, 1, true);
+        LanguageRegistry.instance().addStringLocalization("entity.Platform.name", "en_US", "Platform");
+
+        EntityRegistry.registerModEntity(ENmultiblockLiftDoor.class, "LiftDoor", 1, IndustrialProcessing.instance, 80, 1, true);
+        LanguageRegistry.instance().addStringLocalization("entity.LiftDoor.name", "en_US", "Lift door");
+
+        config.save();
+    }
+
+    @EventHandler
+    public void postInit(FMLPostInitializationEvent event) {
+    }
 }

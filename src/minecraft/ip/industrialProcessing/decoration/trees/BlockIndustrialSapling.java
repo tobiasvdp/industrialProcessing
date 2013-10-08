@@ -26,8 +26,8 @@ public class BlockIndustrialSapling extends BlockSapling {
     private Icon[] saplingIcon;
 
     public BlockIndustrialSapling() {
-	super(ConfigBlocks.getSaplingID());
-	this.setCreativeTab(IndustrialProcessing.tabOres);
+        super(ConfigBlocks.getSaplingID());
+        this.setCreativeTab(IndustrialProcessing.tabOres);
     }
 
     @SideOnly(Side.CLIENT)
@@ -35,8 +35,8 @@ public class BlockIndustrialSapling extends BlockSapling {
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
      */
     public Icon getIcon(int par1, int par2) {
-	par2 %= this.saplingIcon.length;
-	return this.saplingIcon[par2];
+        par2 %= this.saplingIcon.length;
+        return this.saplingIcon[par2];
     }
 
     @SideOnly(Side.CLIENT)
@@ -44,9 +44,9 @@ public class BlockIndustrialSapling extends BlockSapling {
      * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
      */
     public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List) {
-	for (int i = 0; i < IndustrialTrees.getTreeCount(); i++) {
-	    par3List.add(new ItemStack(par1, 1, i));
-	}
+        for (int i = 0; i < IndustrialTrees.getTreeCount(); i++) {
+            par3List.add(new ItemStack(par1, 1, i));
+        }
     }
 
     @SideOnly(Side.CLIENT)
@@ -55,37 +55,37 @@ public class BlockIndustrialSapling extends BlockSapling {
      * is the only chance you get to register icons.
      */
     public void registerIcons(IconRegister par1IconRegister) {
-	this.saplingIcon = new Icon[IndustrialTrees.getTreeCount()];
+        this.saplingIcon = new Icon[IndustrialTrees.getTreeCount()];
 
-	for (int i = 0; i < this.saplingIcon.length; ++i) {
-	    this.saplingIcon[i] = par1IconRegister.registerIcon(IndustrialTrees.getSaplingTexture(i));
-	}
+        for (int i = 0; i < this.saplingIcon.length; ++i) {
+            this.saplingIcon[i] = par1IconRegister.registerIcon(IndustrialTrees.getSaplingTexture(i));
+        }
     }
 
     /**
      * Determines if the same sapling is present at the given location.
      */
     public boolean isSameSapling(World par1World, int par2, int par3, int par4, int par5) {
-	return par1World.getBlockId(par2, par3, par4) == this.blockID && (par1World.getBlockMetadata(par2, par3, par4)) == par5;
+        return par1World.getBlockId(par2, par3, par4) == this.blockID && (par1World.getBlockMetadata(par2, par3, par4)) == par5;
     }
 
     @Override
     public void markOrGrowMarked(World par1World, int par2, int par3, int par4, Random par5Random) {
-	if (par5Random.nextInt(5) == 0) {
-	    this.growTree(par1World, par2, par3, par4, par5Random);
-	}
+        if (par5Random.nextInt(5) == 0) {
+            this.growTree(par1World, par2, par3, par4, par5Random);
+        }
     }
 
     /**
      * Attempts to grow a sapling into a tree
      */
     public void growTree(World par1World, int par2, int par3, int par4, Random par5Random) {
-	if (!TerrainGen.saplingGrowTree(par1World, par5Random, par2, par3, par4))
-	    return;
+        if (!TerrainGen.saplingGrowTree(par1World, par5Random, par2, par3, par4))
+            return;
 
-	int meta = par1World.getBlockMetadata(par2, par3, par4);
-	WorldGenIndustrialTree tree = new WorldGenIndustrialTree(ConfigBlocks.getLogID(), ConfigBlocks.getLeavesID(), meta);
-	tree.generate(par1World, par5Random, par2, par3, par4);
+        int meta = par1World.getBlockMetadata(par2, par3, par4);
+        WorldGenIndustrialTree tree = new WorldGenIndustrialTree(ConfigBlocks.getLogID(), ConfigBlocks.getLeavesID(), meta);
+        tree.generate(par1World, par5Random, par2, par3, par4);
     }
 
 }
