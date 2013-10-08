@@ -11,7 +11,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 public class GuiContainerManualTreeTap extends GuiContainerWorkerMachine {
 
     private static final Rectangle PROGRESSBAR_SOURCE = new Rectangle(176, 0, 22, 16);
-    private static final Point PROGRESSBAR_LOCATION = new Point(70, 34);
+    private static final Point PROGRESSBAR_LOCATION = new Point(76, 31);
 
     public GuiContainerManualTreeTap(InventoryPlayer inventoryPlayer, TileEntityManualTreeTap tileEntity) {
         super(inventoryPlayer, tileEntity, new ContainerManualTreeTap(inventoryPlayer, tileEntity), "Manual Treetap", "textures/gui/ManualTreeTap.png");
