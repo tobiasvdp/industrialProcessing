@@ -8,9 +8,15 @@ import ip.industrialProcessing.utils.working.IWorker;
 public class HandlerWorker implements IHandlerWorker{
 
 	private IWorker worker;
+	private boolean[] hasChanged;
+	private int offset;
 
 	public HandlerWorker(IWorker worker) {
 		this.worker = worker;
+		this.hasChanged = new boolean[getValueCount()];
+		for(int i = 0;i<getValueCount();i++){
+		    hasChanged[i] = false;
+		}
 	}
 	
 	@Override
@@ -44,5 +50,29 @@ public class HandlerWorker implements IHandlerWorker{
 		info.workDone = values[0];
 		info.totalWork = values[1];
 		return info;
+	}
+	@Override
+	public boolean hasChanged(int i) {
+	    return hasChanged[i];
+	}
+	@Override
+	public int getIndexOffset() {
+	    return this.offset;
+	}
+
+	@Override
+	public void setIndexOffset(int offset) {
+	    this.offset = offset;
+	}
+
+	@Override
+	public void put(int index, int par2) {
+	    hasChanged[index] = true;
+		switch (index) {
+		case 0:
+			this.worker.setWorkDone(par2);
+		case 1:
+			this.worker.setTotalWork(par2);
+		}
 	}
 }

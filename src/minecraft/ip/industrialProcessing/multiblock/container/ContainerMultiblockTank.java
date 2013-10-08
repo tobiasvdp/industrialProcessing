@@ -3,7 +3,6 @@ package ip.industrialProcessing.multiblock.container;
 import java.util.ArrayList;
 
 import net.minecraftforge.fluids.FluidTankInfo;
-import ip.industrialProcessing.api.TileEntity.ITank;
 import ip.industrialProcessing.api.handlers.HandlerTank;
 import ip.industrialProcessing.api.handlers.IHandlerTank;
 import ip.industrialProcessing.api.handlers.InfoTank;
@@ -26,9 +25,9 @@ public class ContainerMultiblockTank extends ContainerMultiblockInv {
 	
 	protected void addTankToContainer(int tankSlot)
 	{
-		IHandlerTank handler = new HandlerTank(((ITank)this.core), tankSlot);
+		/*IHandlerTank handler = new HandlerTank(((ITank)this.core), tankSlot);
 		this.addHandler(handler);
-		this.tankHandlers.add(handler);
+		this.tankHandlers.add(handler);*/
 	}
 	
 	public InfoTank getLevelInfoTank(int containerTankSlot)
