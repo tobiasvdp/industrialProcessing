@@ -23,15 +23,15 @@ public class BlockOreIP extends BlockOre {
 		super.harvestBlock(par1World, par2EntityPlayer, par3, par4, par5, par6);
 		if (this.blockID == IndustrialProcessing.blockCinnebarOre.blockID) {
 			Random random = new Random();
-			ItemTransfers.launch(new ItemStack(IndustrialProcessing.itemCinnebarLargeCrushedCrystals,random.nextInt(1)), par1World, par3, par4, par5, random.nextFloat()/2, random.nextFloat()/2, random.nextFloat()/2);
-			ItemTransfers.launch(new ItemStack(IndustrialProcessing.itemCinnebarSmallCrushedCrystals,random.nextInt(2)), par1World, par3, par4, par5, random.nextFloat()/2, random.nextFloat()/2, random.nextFloat()/2);
+			ItemTransfers.launch(new ItemStack(IndustrialProcessing.itemCinnebarLargeCrushedCrystals,random.nextInt(2)), par1World, par3, par4, par5, random.nextFloat()/2, random.nextFloat()/2, random.nextFloat()/2);
+			ItemTransfers.launch(new ItemStack(IndustrialProcessing.itemCinnebarSmallCrushedCrystals,random.nextInt(3)), par1World, par3, par4, par5, random.nextFloat()/2, random.nextFloat()/2, random.nextFloat()/2);
 			par1World.setBlock(par3, par4, par5, IndustrialProcessing.blockCinnebar.blockID);
 		}
 		if (this.blockID == IndustrialProcessing.blockRutileOre.blockID) {
 			Random random = new Random();
 			ItemTransfers.launch(new ItemStack(IndustrialProcessing.itemRutileLargeCrushedCrystals,random.nextInt(1)), par1World, par3, par4, par5, random.nextFloat()/2, random.nextFloat()/2, random.nextFloat()/2);
 			ItemTransfers.launch(new ItemStack(IndustrialProcessing.itemRutileSmallCrushedCrystals,random.nextInt(2)), par1World, par3, par4, par5, random.nextFloat()/2, random.nextFloat()/2, random.nextFloat()/2);
-			par1World.setBlock(par3, par4, par5, IndustrialProcessing.blockRutileOre.blockID);
+			par1World.setBlock(par3, par4, par5, IndustrialProcessing.blockRutile.blockID);
 		}
 	}
 

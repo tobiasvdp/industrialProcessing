@@ -246,4 +246,17 @@ public class TEmultiblockDummy extends TileEntity implements ITEmultiblockDummy 
 		return this.zCoord;
 	}
 
+	@Override
+	public ForgeDirection getForwardDirection() {
+		if (getCore() != null)
+			return this.getCore().getForwardDirection();
+		return ForgeDirection.NORTH;
+	}
+
+	@Override
+	public void setForwardDirection(ForgeDirection forward) {
+		// TODO Auto-generated method stub
+
+	}
+
 }

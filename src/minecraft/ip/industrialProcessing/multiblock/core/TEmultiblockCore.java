@@ -38,7 +38,7 @@ public class TEmultiblockCore extends TileEntity implements ITEmultiblockCore {
     protected boolean[] isAnimationEnabled;
 
     public ForgeDirection getForwardDirection() {
-	return FacingDirectionToForge(side);
+    	return FacingDirectionToForge(side);
     }
 
     private ForgeDirection FacingDirectionToForge(FacingDirection side2) {
@@ -480,6 +480,12 @@ public class TEmultiblockCore extends TileEntity implements ITEmultiblockCore {
 
 	public boolean canInteractWith(EntityPlayer entityplayer) {
 		return (state == MultiblockState.COMPLETED);
+	}
+
+	@Override
+	public void setForwardDirection(ForgeDirection forward) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
