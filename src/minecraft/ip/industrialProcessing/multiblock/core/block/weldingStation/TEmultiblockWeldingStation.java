@@ -83,4 +83,29 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowere
 	protected boolean isValidInput(int slot, int itemID) {
 		return recipes.isValidInput(slot, itemID);
 	}
+	@Override
+	public boolean tankContains(int slot, int itemId, int amount) {
+	    // TODO Auto-generated method stub
+	    return false;
+	}
+	@Override
+	public boolean tankHasRoomFor(int slot, FluidStack stack) {
+	    // TODO Auto-generated method stub
+	    return false;
+	}
+	@Override
+	public boolean tankHasRoomFor(int slot, int itemId, int amount) {
+	    // TODO Auto-generated method stub
+	    return false;
+	}
+	@Override
+	public boolean addToTank(int index, int itemId, int amount) {
+	    // TODO Auto-generated method stub
+	    return false;
+	}
+	@Override
+	public boolean removeFromTank(int index, int itemId, int amount) {
+	    // TODO Auto-generated method stub
+	    return false;
+	}
 }

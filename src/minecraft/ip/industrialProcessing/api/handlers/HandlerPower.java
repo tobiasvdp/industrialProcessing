@@ -5,9 +5,15 @@ import ip.industrialProcessing.utils.working.IWorker;
 
 public class HandlerPower implements IHandlerPower{
 	private IPowerStorage power;
+	private boolean[] hasChanged;
+	private int offset;
 
 	public HandlerPower(IPowerStorage power) {
 		this.power = power;
+		this.hasChanged = new boolean[getValueCount()];
+		for(int i = 0;i<getValueCount();i++){
+		    hasChanged[i] = false;
+		}
 	}
 	
 	@Override
@@ -41,5 +47,31 @@ public class HandlerPower implements IHandlerPower{
 		info.storedPower = values[0];
 		info.powerCapacity = values[1];
 		return info;
+	}
+
+	@Override
+	public boolean hasChanged(int i) {
+	    return hasChanged[i];
+	}
+
+	@Override
+	public int getIndexOffset() {
+	    return this.offset;
+	}
+
+	@Override
+	public void setIndexOffset(int offset) {
+	    this.offset = offset;
+	}
+
+	@Override
+	public void put(int index, int par2) {
+	    hasChanged[index] = true;
+		switch (index) {
+		case 0:
+			this.power.setStoredPower(par2);
+		case 1:
+			this.power.setPowerCapacity(par2);
+		}
 	}
 }

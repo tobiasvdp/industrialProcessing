@@ -47,4 +47,16 @@ public class SimplePowerStorage implements IPowerStorage {
 	public void writeToNBT(NBTTagCompound nbt) {
 		nbt.setInteger("PowerStorage", this.powerStorage);
 	}
+
+	@Override
+	public void setStoredPower(int power) {
+	    // TODO Auto-generated method stub
+	    
+	}
+
+	@Override
+	public void setPowerCapacity(int powerCapacity) {
+	    // TODO Auto-generated method stub
+	    
+	}
 }
