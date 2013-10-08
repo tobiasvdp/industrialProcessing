@@ -76,38 +76,46 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowere
 		this.addStack(null, LocalDirection.RIGHT, false, true);	
 		
 		this.addTank(10000, 0, new ForgeDirection[]{ForgeDirection.NORTH}, true, false);
+		this.addTank(10000, 0, new ForgeDirection[]{ForgeDirection.NORTH}, true, false);
+	}
+	@Override
+	public void updateEntity() {
+		System.out.println(fluidTanks.get(0).getFluidAmount() + "/" + fluidTanks.get(0).getCapacity());
+		System.out.println(fluidTanks.get(1).getFluidAmount() + "/" + fluidTanks.get(0).getCapacity());
+		super.updateEntity();
 	}
 	@Override
 	protected boolean isTankValidForFluid(int slot, int fluidId) {
-	    return false;
-	}
-	@Override
-	protected boolean isValidInput(int slot, int itemID) {
-		return recipes.isValidInput(slot, itemID);
+	    return true;
 	}
 	@Override
 	public boolean tankContains(int slot, int itemId, int amount) {
-	    // TODO Auto-generated method stub
-	    return false;
+		// TODO Auto-generated method stub
+		return false;
 	}
 	@Override
 	public boolean tankHasRoomFor(int slot, FluidStack stack) {
-	    // TODO Auto-generated method stub
-	    return false;
+		// TODO Auto-generated method stub
+		return false;
 	}
 	@Override
 	public boolean tankHasRoomFor(int slot, int itemId, int amount) {
-	    // TODO Auto-generated method stub
-	    return false;
+		// TODO Auto-generated method stub
+		return false;
 	}
 	@Override
 	public boolean addToTank(int index, int itemId, int amount) {
-	    // TODO Auto-generated method stub
-	    return false;
+		// TODO Auto-generated method stub
+		return false;
 	}
 	@Override
 	public boolean removeFromTank(int index, int itemId, int amount) {
-	    // TODO Auto-generated method stub
-	    return false;
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	protected boolean isValidInput(int slot, int itemID) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
