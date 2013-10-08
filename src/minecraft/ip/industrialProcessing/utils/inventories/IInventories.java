@@ -1,5 +1,6 @@
 package ip.industrialProcessing.utils.inventories;
 
+import ip.industrialProcessing.machines.IMachineSlots;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.multiblock.utils.MultiblockItemStack;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
@@ -17,15 +18,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-public interface IInventories extends ISidedInventory {
+public interface IInventories extends ISidedInventory, IMachineSlots {
 
-	public int[] getAccessibleSlotsFromSide(int ID, int side);
-
-	public boolean canInsertItem(int i, ItemStack itemstack, int ID, int side);
-
-	public boolean canExtractItem(int i, ItemStack itemstack, int ID, int side);
-
-	public void writeInventory(NBTTagCompound nbt);
-
-	public void readInventory(NBTTagCompound nbt);
 }

@@ -1,5 +1,6 @@
 package ip.industrialProcessing.multiblock.core.block.blastFurnace;
 
+import net.minecraft.item.ItemStack;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.machines.RecipesMachine;
@@ -43,5 +44,10 @@ public class TEmultiblockBlastFurnace extends TEmultiblockCoreInv {
 	}
 	public TEmultiblockBlastFurnace() {
 		super(structure, tierRequirments,recipes);
+	}
+	@Override
+	protected boolean isValidInput(int slot, int itemID) {
+	    // TODO Auto-generated method stub
+	    return false;
 	}
 }

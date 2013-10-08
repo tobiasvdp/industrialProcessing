@@ -10,6 +10,7 @@ import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
 import ip.industrialProcessing.multiblock.tier.Tiers;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -35,6 +36,28 @@ public class TEmultiblockCore extends TileEntity implements ITEmultiblockCore {
     private int modelConnection;
     protected AnimationHandler[] animation;
     protected boolean[] isAnimationEnabled;
+
+    public ForgeDirection getForwardDirection() {
+	return FacingDirectionToForge(side);
+    }
+
+    private ForgeDirection FacingDirectionToForge(FacingDirection side2) {
+	switch (side2){
+	case East:
+	    return ForgeDirection.WEST;
+	case Invalid:
+	    return ForgeDirection.UNKNOWN;
+	case North:
+	    return ForgeDirection.SOUTH;
+	case South:
+	    return ForgeDirection.NORTH;
+	case West:
+	    return ForgeDirection.EAST;
+	default:
+	    return ForgeDirection.UNKNOWN;
+	
+	}
+    }
 
     public float getAnimationProgress(float scale, int animationIndex) {
 	return animation[animationIndex].getProgress();
@@ -454,5 +477,9 @@ public class TEmultiblockCore extends TileEntity implements ITEmultiblockCore {
     public int getZ() {
 	return this.zCoord;
     }
+
+	public boolean canInteractWith(EntityPlayer entityplayer) {
+		return (state == MultiblockState.COMPLETED);
+	}
 
 }

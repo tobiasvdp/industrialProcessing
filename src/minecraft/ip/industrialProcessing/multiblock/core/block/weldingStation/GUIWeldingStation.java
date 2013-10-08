@@ -7,12 +7,13 @@ import net.minecraft.util.StatCollector;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
 import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreInv;
+import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.multiblock.gui.CTmultiblock;
 import ip.industrialProcessing.multiblock.gui.GUImultiblock;
 
 public class GUIWeldingStation extends GUImultiblock{
 
-	public GUIWeldingStation(InventoryPlayer inventory, TEmultiblockCoreInv entity) {
+	public GUIWeldingStation(InventoryPlayer inventory, TEmultiblockCoreTankWorkerPowered entity) {
 		super(inventory, entity, new CTWeldingStation(inventory, entity), "Welding Table", "textures/gui/WeldingTable.png");
 	}
 
