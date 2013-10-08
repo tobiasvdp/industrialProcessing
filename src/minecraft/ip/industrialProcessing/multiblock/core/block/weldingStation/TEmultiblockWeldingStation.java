@@ -74,6 +74,8 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowere
 		this.addStack(null, LocalDirection.UP, true, false);
 		this.addStack(null, LocalDirection.UP, true, false);
 		this.addStack(null, LocalDirection.RIGHT, false, true);	
+		
+		this.addTank(10000, 0, new ForgeDirection[]{ForgeDirection.NORTH}, true, false);
 	}
 	@Override
 	protected boolean isTankValidForFluid(int slot, int fluidId) {

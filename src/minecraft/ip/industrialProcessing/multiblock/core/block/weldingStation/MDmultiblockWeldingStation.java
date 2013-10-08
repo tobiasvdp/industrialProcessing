@@ -128,5 +128,15 @@ public class MDmultiblockWeldingStation extends ModelingMultiblock{
 			HandleRight.render(f5);
 			ConnectedPanelRight.render(f5);
 		}
-
+		
+		@Override
+		public void renderModel(float f5, int connection, float[] animation) {
+			Top.render(f5);
+			Desk.render(f5);
+			Back.render(f5);
+			FootLeft.render(f5);
+			Door.render(f5);
+			HandleRight.render(f5);
+			ConnectedPanelRight.render(f5);
+		}
 }
