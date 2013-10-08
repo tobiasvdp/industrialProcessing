@@ -26,6 +26,10 @@ public class BlockManualTreeTap extends BlockMachineRendered {
         func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "manualTreeTap");
     }
 
+    protected BlockManualTreeTap(int automaticTreeTapBlockID, Material iron, float f, StepSound soundmetalfootstep, String string, CreativeTabs taboreprocessing) {
+        super(automaticTreeTapBlockID, iron, f, soundmetalfootstep, string, taboreprocessing);
+    }
+
     @Override
     public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5) {
 
@@ -68,12 +72,12 @@ public class BlockManualTreeTap extends BlockMachineRendered {
         }
         return false;
     }
-    
+
     @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
-    	super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
-    	if(!canBlockStay(par1World, par2, par3, par4))
-    		par1World.destroyBlock(par2, par3, par4, true);
+        super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
+        if (!canBlockStay(par1World, par2, par3, par4))
+            par1World.destroyBlock(par2, par3, par4, true);
     }
 
     @Override
