@@ -18,9 +18,12 @@ public class BlockIndustrialLog extends BlockLog {
     private Icon[] tree_side;
     private Icon[] tree_top;
 
+ 
+    
     public BlockIndustrialLog() {
-	super(ConfigBlocks.getLogID());
-	this.setCreativeTab(IndustrialProcessing.tabOres);
+        super(ConfigBlocks.getLogID());
+        this.setCreativeTab(IndustrialProcessing.tabOres);
+        this.setHardness(2.0F).setStepSound(soundWoodFootstep).setUnlocalizedName("log");
     }
 
     /**
@@ -30,25 +33,25 @@ public class BlockIndustrialLog extends BlockLog {
      */
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-	this.tree_side = new Icon[IndustrialTrees.getTreeCount()];
-	this.tree_top = new Icon[IndustrialTrees.getTreeCount()];
+        this.tree_side = new Icon[IndustrialTrees.getTreeCount()];
+        this.tree_top = new Icon[IndustrialTrees.getTreeCount()];
 
-	for (int i = 0; i < this.tree_side.length; ++i) {
-	    this.tree_side[i] = par1IconRegister.registerIcon(IndustrialTrees.getLogSideTexture(i));
-	    this.tree_top[i] = par1IconRegister.registerIcon(IndustrialTrees.getLogTopTexture(i));
-	}
+        for (int i = 0; i < this.tree_side.length; ++i) {
+            this.tree_side[i] = par1IconRegister.registerIcon(IndustrialTrees.getLogSideTexture(i));
+            this.tree_top[i] = par1IconRegister.registerIcon(IndustrialTrees.getLogTopTexture(i));
+        }
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     protected Icon func_111048_c(int par1) {
-	return this.tree_side[par1];
+        return this.tree_side[par1];
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     protected Icon func_111049_d(int par1) {
-	return this.tree_top[par1];
+        return this.tree_top[par1];
     }
 
     /**
@@ -58,8 +61,8 @@ public class BlockIndustrialLog extends BlockLog {
     @SideOnly(Side.CLIENT)
     @Override
     public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List) {
-	for (int i = 0; i < IndustrialTrees.getTreeCount(); i++) {
-	    par3List.add(new ItemStack(par1, 1, i));
-	}
+        for (int i = 0; i < IndustrialTrees.getTreeCount(); i++) {
+            par3List.add(new ItemStack(par1, 1, i));
+        }
     }
 }

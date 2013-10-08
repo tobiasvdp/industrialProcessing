@@ -25,6 +25,7 @@ public class BlockPlatform extends BlockScaffolding {
 		super(ConfigBlocks.getPlatformBlockID(), Material.iron, 1f, Block.soundMetalFootstep, "Walkway", IndustrialProcessing.tabPower);
 		this.setBlockBounds(0, 0, 0, 1, 1 / 16f, 1);
 		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "platformFloor");
+		setStepSound(soundMetalFootstep);
 	}
 
 	protected BlockPlatform(int id, String name) {

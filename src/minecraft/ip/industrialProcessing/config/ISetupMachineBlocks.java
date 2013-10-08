@@ -17,6 +17,8 @@ import ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator.Bl
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.tricklingFilter.BlockTricklingFilter;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatmentStation.BlockWaterTreatmentStation;
 import ip.industrialProcessing.machines.thickener.BlockThickener;
+import ip.industrialProcessing.machines.treetap.BlockAutomaticTreeTap;
+import ip.industrialProcessing.machines.treetap.BlockManualTreeTap;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.BLmultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.core.block.elevator.BLmultiblockElevator;
 import ip.industrialProcessing.multiblock.core.block.hotPress.BLmultiblockHotPress;
@@ -56,67 +58,70 @@ import ip.industrialProcessing.transport.items.conveyorOutput.BlockConveyorOutpu
 
 public interface ISetupMachineBlocks {
 
-	// machines
-	public final static BlockCrusher blockCrusher = new BlockCrusher();
-	public final static BlockFilter blockFilter = new BlockFilter();
-	public final static BlockMagneticSeparator blockMageneticSeparator = new BlockMagneticSeparator();
-	public final static BlockMixer blockMixer = new BlockMixer();
-	public final static BlockDryer blockDryer = new BlockDryer();
-	public final static BlockClassifier blockClassifier = new BlockClassifier();
-	public final static BlockThickener blockThickener = new BlockThickener();
-	public final static BlockFlotationCell blockFlotationCell = new BlockFlotationCell();
-	public final static BlockHydroCyclone blockHydroCyclone = new BlockHydroCyclone();
-	public final static BlockDiskFilter blockDiskFilter = new BlockDiskFilter();
-	public final static BlockBlastFurnace blockBlastFurnace = new BlockBlastFurnace();
-	public final static BlockExtruder blockExtruder = new BlockExtruder();
-	public final static BlockOxygenFurnace blockOxygenFurnace = new BlockOxygenFurnace();
-	public final static BlockPelletExtruder blockPelletExtruder = new BlockPelletExtruder();
-	public final static BlockIncubator blockIncubator = new BlockIncubator();
-	public final static BlockTricklingFilter blockTricklingFilter = new BlockTricklingFilter();
-	public final static BlockWaterTreatmentStation blockWaterTreatmentStation = new BlockWaterTreatmentStation();
+    // machines
+    public final static BlockCrusher blockCrusher = new BlockCrusher();
+    public final static BlockFilter blockFilter = new BlockFilter();
+    public final static BlockMagneticSeparator blockMageneticSeparator = new BlockMagneticSeparator();
+    public final static BlockMixer blockMixer = new BlockMixer();
+    public final static BlockDryer blockDryer = new BlockDryer();
+    public final static BlockClassifier blockClassifier = new BlockClassifier();
+    public final static BlockThickener blockThickener = new BlockThickener();
+    public final static BlockFlotationCell blockFlotationCell = new BlockFlotationCell();
+    public final static BlockHydroCyclone blockHydroCyclone = new BlockHydroCyclone();
+    public final static BlockDiskFilter blockDiskFilter = new BlockDiskFilter();
+    public final static BlockBlastFurnace blockBlastFurnace = new BlockBlastFurnace();
+    public final static BlockExtruder blockExtruder = new BlockExtruder();
+    public final static BlockOxygenFurnace blockOxygenFurnace = new BlockOxygenFurnace();
+    public final static BlockPelletExtruder blockPelletExtruder = new BlockPelletExtruder();
+    public final static BlockIncubator blockIncubator = new BlockIncubator();
+    public final static BlockTricklingFilter blockTricklingFilter = new BlockTricklingFilter();
+    public final static BlockWaterTreatmentStation blockWaterTreatmentStation = new BlockWaterTreatmentStation();
 
-	// create generators
-	public final static BlockManualGenerator blockManualGenerator = new BlockManualGenerator();
-	public final static BlockBuildcraftGenerator blockBuildcraftGenerator = new BlockBuildcraftGenerator();
-	public final static BlockGenerator blockGenerator = new BlockGenerator();
+    // create generators
+    public final static BlockManualGenerator blockManualGenerator = new BlockManualGenerator();
+    public final static BlockBuildcraftGenerator blockBuildcraftGenerator = new BlockBuildcraftGenerator();
+    public final static BlockGenerator blockGenerator = new BlockGenerator();
 
-	// create wires
-	public final static BlockWire blockWire = new BlockWire();
-	public final static BlockVoltMeter blockVoltMeter = new BlockVoltMeter();
-	public final static BlockAmpMeter blockAmpMeter = new BlockAmpMeter();
-	public final static BlockEnergyCell blockEnergyCell = new BlockEnergyCell();
-	public final static BlockSolidBurner blockSolidBurner = new BlockSolidBurner();
-	public final static BlockBoiler blockBoiler = new BlockBoiler();
-	public final static BlockTurbine blockTurbine = new BlockTurbine();
+    // create wires
+    public final static BlockWire blockWire = new BlockWire();
+    public final static BlockVoltMeter blockVoltMeter = new BlockVoltMeter();
+    public final static BlockAmpMeter blockAmpMeter = new BlockAmpMeter();
+    public final static BlockEnergyCell blockEnergyCell = new BlockEnergyCell();
+    public final static BlockSolidBurner blockSolidBurner = new BlockSolidBurner();
+    public final static BlockBoiler blockBoiler = new BlockBoiler();
+    public final static BlockTurbine blockTurbine = new BlockTurbine();
 
-	// create fluidpipe
-	public final static BlockTransportFluids blockTransportFluids = new BlockTransportFluids();
-	public final static BlockPump blockPump = new BlockPump();
-	public final static BlockTank blockTank = new BlockTank();
-	public final static BlockRainTank blockRainTank = new BlockRainTank();
-	public final static BlockManoMeter blockManometer = new BlockManoMeter();
-	public final static BlockValve blockValve = new BlockValve();
+    // create fluidpipe
+    public final static BlockTransportFluids blockTransportFluids = new BlockTransportFluids();
+    public final static BlockPump blockPump = new BlockPump();
+    public final static BlockTank blockTank = new BlockTank();
+    public final static BlockRainTank blockRainTank = new BlockRainTank();
+    public final static BlockManoMeter blockManometer = new BlockManoMeter();
+    public final static BlockValve blockValve = new BlockValve();
 
-	// multiblocks
-	public final static BLmultiblockFrame BLmultiblockFrame = new BLmultiblockFrame();
-	public final static BLmultiblockHotPress BLmultiblockHotPress = new BLmultiblockHotPress();
-	public final static BLmultiblockWeldingStation BLmultiblockWeldingStation = new BLmultiblockWeldingStation();
-	public final static BLmultiblockScreen BLmultiblockScreen = new BLmultiblockScreen();
-	public final static BLmultiblockWeldingTableExt BLmultiblockWeldingTableExt = new BLmultiblockWeldingTableExt();
-	public final static BLmultiblockInvInput BLmultiblockInvInput = new BLmultiblockInvInput();
-	public final static BLmultiblockInvOutput BLmultiblockInvOutput = new BLmultiblockInvOutput();
-	public final static BLmultiblockToggleButton BLmultiblockToggleButton = new BLmultiblockToggleButton();
-	public final static BLmultiblockToggleButton2 BLmultiblockToggleButton2 = new BLmultiblockToggleButton2();
-	public final static BLmultiblockElevator BLmultiblockElevator = new BLmultiblockElevator();
-	public final static BLmultiblockLiftDoor BLmultiblockLiftDoor = new BLmultiblockLiftDoor();
-	public final static BLmultiblockWheel BLmultiblockWheel = new BLmultiblockWheel();
-	public final static BLmultiblockRollingPress BLmultiblockRollingPress = new BLmultiblockRollingPress();
-	public final static BLmultiblockWheelConnector BLmultiblockWheelConnector = new BLmultiblockWheelConnector();
-	public final static BLmultiblockDisplayPanel BLmultiblockDisplayPanel = new BLmultiblockDisplayPanel();
-	public final static BLmultiblockBlastFurnace BLmultiblockBlastFurnace = new BLmultiblockBlastFurnace();
-	public final static BLmultiblockBlastFurnaceTower BLmultiblockBlastFurnaceTower = new BLmultiblockBlastFurnaceTower();
-	// transport
-	public final static BlockConveyorBelt blockConveyorBelt = new BlockConveyorBelt();
-	public final static BlockConveyorInput blockConveyorBeltInput = new BlockConveyorInput();
-	public final static BlockConveyorOutput blockConveyorOutput = new BlockConveyorOutput();
+    // multiblocks
+    public final static BLmultiblockFrame BLmultiblockFrame = new BLmultiblockFrame();
+    public final static BLmultiblockHotPress BLmultiblockHotPress = new BLmultiblockHotPress();
+    public final static BLmultiblockWeldingStation BLmultiblockWeldingStation = new BLmultiblockWeldingStation();
+    public final static BLmultiblockScreen BLmultiblockScreen = new BLmultiblockScreen();
+    public final static BLmultiblockWeldingTableExt BLmultiblockWeldingTableExt = new BLmultiblockWeldingTableExt();
+    public final static BLmultiblockInvInput BLmultiblockInvInput = new BLmultiblockInvInput();
+    public final static BLmultiblockInvOutput BLmultiblockInvOutput = new BLmultiblockInvOutput();
+    public final static BLmultiblockToggleButton BLmultiblockToggleButton = new BLmultiblockToggleButton();
+    public final static BLmultiblockToggleButton2 BLmultiblockToggleButton2 = new BLmultiblockToggleButton2();
+    public final static BLmultiblockElevator BLmultiblockElevator = new BLmultiblockElevator();
+    public final static BLmultiblockLiftDoor BLmultiblockLiftDoor = new BLmultiblockLiftDoor();
+    public final static BLmultiblockWheel BLmultiblockWheel = new BLmultiblockWheel();
+    public final static BLmultiblockRollingPress BLmultiblockRollingPress = new BLmultiblockRollingPress();
+    public final static BLmultiblockWheelConnector BLmultiblockWheelConnector = new BLmultiblockWheelConnector();
+    public final static BLmultiblockDisplayPanel BLmultiblockDisplayPanel = new BLmultiblockDisplayPanel();
+    public final static BLmultiblockBlastFurnace BLmultiblockBlastFurnace = new BLmultiblockBlastFurnace();
+    public final static BLmultiblockBlastFurnaceTower BLmultiblockBlastFurnaceTower = new BLmultiblockBlastFurnaceTower();
+    // transport
+    public final static BlockConveyorBelt blockConveyorBelt = new BlockConveyorBelt();
+    public final static BlockConveyorInput blockConveyorBeltInput = new BlockConveyorInput();
+    public final static BlockConveyorOutput blockConveyorOutput = new BlockConveyorOutput();
+
+    public final static BlockManualTreeTap blockManualTreetap = new BlockManualTreeTap();
+    public final static BlockAutomaticTreeTap blockAutomaticTreetap = new BlockAutomaticTreeTap();
 }

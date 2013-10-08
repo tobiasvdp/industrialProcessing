@@ -10,6 +10,7 @@ import ip.industrialProcessing.decoration.platforms.BlockStairs;
 import ip.industrialProcessing.decoration.trees.BlockIndustrialLeaves;
 import ip.industrialProcessing.decoration.trees.BlockIndustrialLog;
 import ip.industrialProcessing.decoration.trees.BlockIndustrialSapling;
+import ip.industrialProcessing.decoration.trees.BlockRubberLog;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockOre;
 import net.minecraft.block.material.Material;
@@ -33,5 +34,6 @@ public interface ISetupBlocks {
 
     public final static BlockIndustrialLeaves blockLeaves = new BlockIndustrialLeaves();
     public final static BlockIndustrialLog blockLog = new BlockIndustrialLog();
+    public final static BlockRubberLog blockRubberLog = new BlockRubberLog();
     public final static BlockIndustrialSapling blockSapling = new BlockIndustrialSapling();
 }

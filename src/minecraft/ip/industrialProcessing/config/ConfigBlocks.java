@@ -28,121 +28,124 @@ public class ConfigBlocks {
     private int blockPlatformID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "PlatformFlatID", 2001).getInt();
     private int blockStairsID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "PlatformStairsID", 2002).getInt();
 
-    private int blockLogID =  IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "TreeLogID", 2004).getInt();
-    private int blockLeavesID =  IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "TreeLeavesID", 2005).getInt();
-    private int blockSaplingID =  IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "TreeSaplingID", 2006).getInt();
-    
+    private int blockLogID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "TreeLogID", 2004).getInt();
+    private int blockLeavesID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "TreeLeavesID", 2005).getInt();
+    private int blockSaplingID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "TreeSaplingID", 2006).getInt();
+    private int blockRubberLogID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "RubberTreeLogID", 2007).getInt();
+
     public static int blockGrit() {
-	return getInstance().blockGritID;
+        return getInstance().blockGritID;
     }
 
     public static int getBlockChromiteOreID() {
-	return getInstance().blockChromiteOreID;
+        return getInstance().blockChromiteOreID;
     }
 
     public static int getBlockCinnebarOreID() {
-	return getInstance().blockCinnebarOreID;
+        return getInstance().blockCinnebarOreID;
     }
 
     public static int getBlockCinnebarCrystalID() {
-	return getInstance().blockCinnebarCrystalID;
+        return getInstance().blockCinnebarCrystalID;
     }
 
     public static int getBlockRutileCrystalID() {
-	return getInstance().blockRutileCrystalID;
+        return getInstance().blockRutileCrystalID;
     }
 
     public static int getBlockTaliaOreID() {
-	return getInstance().blockTaliaOreID;
+        return getInstance().blockTaliaOreID;
     }
 
     public static int getBlockRutileOreID() {
-	return getInstance().blockRutileOreID;
+        return getInstance().blockRutileOreID;
     }
 
     public static int getPlatformBlockID() {
-	return getInstance().blockPlatformID;
+        return getInstance().blockPlatformID;
     }
 
     public static int getStairsBlockID() {
-	return getInstance().blockStairsID;
+        return getInstance().blockStairsID;
     }
 
     public static int blockIronFlat() {
-	return getInstance().blockIronFlatID;
+        return getInstance().blockIronFlatID;
     }
 
     public static int BlockGalenaOreID() {
-	return getInstance().blockGalenaOreID;
+        return getInstance().blockGalenaOreID;
     }
 
     public static int BlockCopperOreID() {
-	return getInstance().blockCopperOreID;
+        return getInstance().blockCopperOreID;
     }
 
     public static int BlockTinOreID() {
-	return getInstance().blockTinOreID;
+        return getInstance().blockTinOreID;
     }
 
     public static int getLeavesID() {
-	return getInstance().blockLeavesID;
-    } 
-    
+        return getInstance().blockLeavesID;
+    }
+
     public static int getLogID() {
-	return getInstance().blockLogID;
+        return getInstance().blockLogID;
     }
-    
+
+    public static int getRubberLogID() {
+        return getInstance().blockRubberLogID;
+    }
+
     public static int getSaplingID() {
-	return getInstance().blockSaplingID;
+        return getInstance().blockSaplingID;
     }
-
-
 
     private ConfigBlocks() {
 
     }
 
     public void registerOres() {
-	registerOre(IndustrialProcessing.blockCopperOre, "IP.World.CopperOre", "Copper Ore", "copper");
-	registerOre(IndustrialProcessing.blockTinOre, "IP.World.TinOre", "Tin Ore", "tin");
-	registerOre(IndustrialProcessing.blockGalenaOre, "IP.World.GalenaOre", "Galena Ore", "silver");
-	OreDictionary.registerOre("galena", IndustrialProcessing.blockGalenaOre);
-	registerOre(IndustrialProcessing.blockRutileOre, "IP.World.RutileOre", "Rutile Ore", "rutile");
-	registerOre(IndustrialProcessing.blockChromiteOre, "IP.World.ChromiteOre", "Chromite Ore", "chromite");
-	registerOre(IndustrialProcessing.blockCinnebarOre, "IP.World.CinnebarOre", "Cinnebar Ore", "cinnebar");
-	registerOre(IndustrialProcessing.blockTaliaOre, "IP.World.TaliaOre", "Thallium Ore", "talia");
-	registerBlock(IndustrialProcessing.blockIronFlat, "IP.Block.IronFlat", "Flat Iron block");
+        registerOre(IndustrialProcessing.blockCopperOre, "IP.World.CopperOre", "Copper Ore", "copper");
+        registerOre(IndustrialProcessing.blockTinOre, "IP.World.TinOre", "Tin Ore", "tin");
+        registerOre(IndustrialProcessing.blockGalenaOre, "IP.World.GalenaOre", "Galena Ore", "silver");
+        OreDictionary.registerOre("galena", IndustrialProcessing.blockGalenaOre);
+        registerOre(IndustrialProcessing.blockRutileOre, "IP.World.RutileOre", "Rutile Ore", "rutile");
+        registerOre(IndustrialProcessing.blockChromiteOre, "IP.World.ChromiteOre", "Chromite Ore", "chromite");
+        registerOre(IndustrialProcessing.blockCinnebarOre, "IP.World.CinnebarOre", "Cinnebar Ore", "cinnebar");
+        registerOre(IndustrialProcessing.blockTaliaOre, "IP.World.TaliaOre", "Thallium Ore", "talia");
+        registerBlock(IndustrialProcessing.blockIronFlat, "IP.Block.IronFlat", "Flat Iron block");
 
-	registerBlock(IndustrialProcessing.blockPlatform, "IP.Block.Platform", "Walkway");
-	registerBlock(IndustrialProcessing.blockGrit, "IP.Block.Grit", "Grit");
-	registerBlock(IndustrialProcessing.blockStairs, "IP.Block.Stairs", "Walkway Stairs");
+        registerBlock(IndustrialProcessing.blockPlatform, "IP.Block.Platform", "Walkway");
+        registerBlock(IndustrialProcessing.blockGrit, "IP.Block.Grit", "Grit");
+        registerBlock(IndustrialProcessing.blockStairs, "IP.Block.Stairs", "Walkway Stairs");
 
-	registerBlock(IndustrialProcessing.blockCinnebar, "IP.World.Cinnebar", "Cinnebar Crystal");
-	registerBlock(IndustrialProcessing.blockRutile, "IP.World.Rutile", "Rutile Crystal");
-	
+        registerBlock(IndustrialProcessing.blockCinnebar, "IP.World.Cinnebar", "Cinnebar Crystal");
+        registerBlock(IndustrialProcessing.blockRutile, "IP.World.Rutile", "Rutile Crystal");
 
-	registerBlock(IndustrialProcessing.blockLeaves, "IP.World.Tree.Leaves", "Leaves");
-	registerBlock(IndustrialProcessing.blockLog, "IP.World.Tree.Log", "Log");
-	registerBlock(IndustrialProcessing.blockSapling, "IP.World.Tree.Sapling", "Sapling");
+        registerBlock(IndustrialProcessing.blockLeaves, "IP.World.Tree.Leaves", "Leaves");
+        registerBlock(IndustrialProcessing.blockLog, "IP.World.Tree.Log", "Log");
+        registerBlock(IndustrialProcessing.blockRubberLog, "IP.World.Tree.Log.Rubber", "Rubber Log");
+        registerBlock(IndustrialProcessing.blockSapling, "IP.World.Tree.Sapling", "Sapling");
     }
 
     private void registerOre(Block block, String uniqueId, String displayName, String oreDictionaryKey) {
-	GameRegistry.registerBlock(block, uniqueId);
-	MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
-	LanguageRegistry.addName(block, displayName);
-	OreDictionary.registerOre(oreDictionaryKey, block);
+        GameRegistry.registerBlock(block, uniqueId);
+        MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
+        LanguageRegistry.addName(block, displayName);
+        OreDictionary.registerOre(oreDictionaryKey, block);
     }
 
     private void registerBlock(Block block, String uniqueId, String displayName) {
-	GameRegistry.registerBlock(block, uniqueId);
-	MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
-	LanguageRegistry.addName(block, displayName);
+        GameRegistry.registerBlock(block, uniqueId);
+        MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
+        LanguageRegistry.addName(block, displayName);
     }
 
     private static ConfigBlocks instance = new ConfigBlocks();
 
     public static ConfigBlocks getInstance() {
-	return instance;
+        return instance;
     }
 
 }

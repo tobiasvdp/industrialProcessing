@@ -73,7 +73,7 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
     // create creative tab: ISetupCreativeTabs
 
     // create worldgen
-    public static WorldGeneration worldGen = new WorldGeneration();
+    public static WorldGeneration worldGen;
 
     // Says where the client and server 'proxy' code is loaded.
     @SidedProxy(clientSide = "ip.industrialProcessing.client.ClientProxy", serverSide = "ip.industrialProcessing.CommonProxy")
@@ -103,8 +103,6 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
 
         // register new crafting handler
         GameRegistry.registerCraftingHandler(new CraftingHandler());
-        // register worldgenerator
-        GameRegistry.registerWorldGenerator(worldGen);
 
         // register machines, power, transport
         ConfigMachineBlocks.getInstance().registerMachineBlocks();
@@ -144,6 +142,10 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
         LanguageRegistry.instance().addStringLocalization("entity.LiftDoor.name", "en_US", "Lift door");
 
         config.save();
+
+        // register worldgenerator
+        worldGen = new WorldGeneration();
+        GameRegistry.registerWorldGenerator(worldGen);
     }
 
     @EventHandler

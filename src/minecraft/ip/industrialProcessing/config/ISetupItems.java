@@ -89,6 +89,7 @@ public interface ISetupItems {
     
     public final static ItemIP itemThickStick = new ItemIP(ConfigItems.ItemThickStick(), "ItemThickStick",IndustrialProcessing.tabOreProcessing);
     public final static ItemDamage itemHammer = new ItemDamage(ConfigItems.ItemHammer(), "ItemHammer",IndustrialProcessing.tabOreProcessing);
+    public final static ItemDamage itemKnife = new ItemDamage(ConfigItems.ItemKnife(), "ItemKnife",IndustrialProcessing.tabOreProcessing);
     public final static ItemDamage itemBlowingTorch = new ItemDamage(ConfigItems.ItemBlowingTorch(), "ItemBlowingTorch",IndustrialProcessing.tabOreProcessing);
     
     //Iron blast furnace

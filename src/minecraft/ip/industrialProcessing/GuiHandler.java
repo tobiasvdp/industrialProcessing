@@ -52,6 +52,9 @@ import ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatme
 import ip.industrialProcessing.machines.thickener.ContainerThickener;
 import ip.industrialProcessing.machines.thickener.GuiContainerThickener;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
+import ip.industrialProcessing.machines.treetap.ContainerManualTreeTap;
+import ip.industrialProcessing.machines.treetap.GuiContainerManualTreeTap;
+import ip.industrialProcessing.machines.treetap.TileEntityManualTreeTap;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.CTWeldingStation;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.GUIWeldingStation;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
@@ -132,6 +135,8 @@ public class GuiHandler implements IGuiHandler {
                 return new ContainerWaterTreatmentStation(player.inventory, (TileEntityWaterTreatmentStation) entity);
             if (entity instanceof TileEntityTricklingFilter)
                 return new ContainerTricklingFilter(player.inventory, (TileEntityTricklingFilter) entity);
+            if (entity instanceof TileEntityManualTreeTap)
+                return new ContainerManualTreeTap(player.inventory, (TileEntityManualTreeTap) entity);
         } else if (ID == GUIDE_ID)
             return null;
         return null;
@@ -190,6 +195,8 @@ public class GuiHandler implements IGuiHandler {
                 return new GuiContainerWaterTreatmentStation(player.inventory, (TileEntityWaterTreatmentStation) entity);
             if (entity instanceof TileEntityTricklingFilter)
                 return new GuiContainerTricklingFilter(player.inventory, (TileEntityTricklingFilter) entity);
+            if (entity instanceof TileEntityManualTreeTap)
+                return new GuiContainerManualTreeTap(player.inventory, (TileEntityManualTreeTap) entity);
         } else if (ID == GUIDE_ID)
             return new GuiGuide(player);
         return null;

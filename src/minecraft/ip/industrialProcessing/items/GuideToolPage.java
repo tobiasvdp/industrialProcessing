@@ -30,6 +30,7 @@ public class GuideToolPage extends GuidePage {
 		drawItemStack(new ItemStack(IndustrialProcessing.itemHexKey), x + 10, ++i * 26 + 10 + y, "Used to modify machines");
 		drawItemStack(new ItemStack(IndustrialProcessing.itemBlowingTorch), x + 10, ++i * 26 + 10 + y, "Used in the welding table");
 		drawItemStack(new ItemStack(IndustrialProcessing.itemHammer), x + 10, ++i * 26 + 10 + y, "Used to do stuff");
+		drawItemStack(new ItemStack(IndustrialProcessing.itemKnife), x + 10, ++i * 26 + 10 + y, "Used to carve rubber trees");
 	}
 
 	private void drawItemStack(ItemStack stack, int x, int y, String description) {

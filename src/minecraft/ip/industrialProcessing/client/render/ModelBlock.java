@@ -10,7 +10,7 @@ public abstract class ModelBlock extends ModelBase {
 
 	public abstract void renderInventory(Block block, int metadata, int modelID, RenderBlocks renderer);
 
-	public abstract boolean renderWorldBlock(WorldReference world, int modelId, RenderBlocks renderer);
+	public abstract boolean renderWorldBlock(WorldReference reference, int modelId, RenderBlocks renderer);
 
 
 	

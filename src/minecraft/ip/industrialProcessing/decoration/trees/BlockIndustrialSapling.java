@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenBigTree;
 import net.minecraft.world.gen.feature.WorldGenForest;
@@ -19,6 +20,7 @@ import net.minecraft.world.gen.feature.WorldGenHugeTrees;
 import net.minecraft.world.gen.feature.WorldGenTaiga2;
 import net.minecraft.world.gen.feature.WorldGenTrees;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.event.terraingen.TerrainGen;
 
 public class BlockIndustrialSapling extends BlockSapling {
@@ -28,6 +30,7 @@ public class BlockIndustrialSapling extends BlockSapling {
     public BlockIndustrialSapling() {
         super(ConfigBlocks.getSaplingID());
         this.setCreativeTab(IndustrialProcessing.tabOres);
+        this.setHardness(0.0F).setStepSound(soundGrassFootstep).setUnlocalizedName("sapling");
     }
 
     @SideOnly(Side.CLIENT)
@@ -71,8 +74,10 @@ public class BlockIndustrialSapling extends BlockSapling {
 
     @Override
     public void markOrGrowMarked(World par1World, int par2, int par3, int par4, Random par5Random) {
-        if (par5Random.nextInt(5) == 0) {
-            this.growTree(par1World, par2, par3, par4, par5Random);
+        if (!par1World.isRemote) {
+            if (par5Random.nextInt(5) == 0) {
+                this.growTree(par1World, par2, par3, par4, par5Random);
+            }
         }
     }
 
@@ -84,8 +89,17 @@ public class BlockIndustrialSapling extends BlockSapling {
             return;
 
         int meta = par1World.getBlockMetadata(par2, par3, par4);
-        WorldGenIndustrialTree tree = new WorldGenIndustrialTree(ConfigBlocks.getLogID(), ConfigBlocks.getLeavesID(), meta);
+        int block = ConfigBlocks.getLogID();
+        if (meta == 0) {
+            block = ConfigBlocks.getRubberLogID();
+        }
+        WorldGenIndustrialTree tree = new WorldGenIndustrialTree(block, ConfigBlocks.getLeavesID(), meta);
         tree.generate(par1World, par5Random, par2, par3, par4);
+    }
+
+    @Override
+    public boolean isFlammable(IBlockAccess world, int x, int y, int z, int metadata, ForgeDirection face) {
+        return true;
     }
 
 }

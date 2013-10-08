@@ -27,6 +27,7 @@ public class BlockStairs extends BlockScaffolding {
 		super(ConfigBlocks.getStairsBlockID(), Material.iron, 1f, Block.soundMetalFootstep, "Walkway stairs", IndustrialProcessing.tabPower);
 		this.setBlockBounds(0, 0, 0, 1, 2, 1);
 		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "platformFloor");
+		setStepSound(soundMetalFootstep);
 	}
 
 	@Override

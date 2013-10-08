@@ -47,6 +47,8 @@ import ip.industrialProcessing.machines.mixer.ModelMixer;
 import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import ip.industrialProcessing.machines.thickener.ModelThickener;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
+import ip.industrialProcessing.machines.treetap.model.ModelAutomaticTreeTapBlock;
+import ip.industrialProcessing.machines.treetap.model.ModelManualTreeTapBlock;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.MDmultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.TEmultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.MDmultiblockWeldingStation;
@@ -168,6 +170,8 @@ public class ClientProxy extends CommonProxy {
 	private static final ModelBlock stairs = new ModelStairs();
 	private static final ModelBlock crystal = new ModelCrystal();
 	private static final ModelBlock manometerBlock = new ModelManometerBlock();
+    private static final ModelBlock automaticTreeTapBlock = new ModelAutomaticTreeTapBlock();
+    private static final ModelBlock manualTreeTapBlock = new ModelManualTreeTapBlock();
 
 	@Override
 	public void registerRenderers() {
@@ -183,6 +187,14 @@ public class ClientProxy extends CommonProxy {
 
 		ConfigRenderers.setRendererWireId(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererWireId(), wire));
+		
+
+        ConfigRenderers.setRendererAutomaticTreeTapID(RenderingRegistry.getNextAvailableRenderId());
+        RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererAutomaticTreeTapID(), automaticTreeTapBlock));
+        
+
+        ConfigRenderers.setRendererManualTreeTapID(RenderingRegistry.getNextAvailableRenderId());
+        RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererManualTreeTapID(), manualTreeTapBlock));
 
 		// block & tile entity
 
