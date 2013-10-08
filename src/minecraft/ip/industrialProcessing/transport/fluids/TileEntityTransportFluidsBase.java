@@ -39,7 +39,7 @@ public abstract class TileEntityTransportFluidsBase extends TileEntityTransport 
 			ForgeDirection from = direction.getOpposite();
 			if (entity instanceof TileEntityTransportFluidsBase) {
 				TileEntityTransportFluidsBase other = (TileEntityTransportFluidsBase) entity;
-				if (other.connectionGroup == this.connectionGroup && other.canConnect(direction.getOpposite()))
+				if ((other.connectionGroup == this.connectionGroup || other.connectionGroup == 1 || this.connectionGroup == 1) && other.canConnect(direction.getOpposite()))
 					return TransportConnectionState.TRANSPORT;
 				return TransportConnectionState.NONE;
 			}
