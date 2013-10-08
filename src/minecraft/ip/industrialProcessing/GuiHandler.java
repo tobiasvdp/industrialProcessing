@@ -52,8 +52,11 @@ import ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatme
 import ip.industrialProcessing.machines.thickener.ContainerThickener;
 import ip.industrialProcessing.machines.thickener.GuiContainerThickener;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
+import ip.industrialProcessing.machines.treetap.ContainerAutomaticTreeTap;
 import ip.industrialProcessing.machines.treetap.ContainerManualTreeTap;
+import ip.industrialProcessing.machines.treetap.GuiContainerAutomaticTreeTap;
 import ip.industrialProcessing.machines.treetap.GuiContainerManualTreeTap;
+import ip.industrialProcessing.machines.treetap.TileEntityAutomaticTreeTap;
 import ip.industrialProcessing.machines.treetap.TileEntityManualTreeTap;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.CTWeldingStation;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.GUIWeldingStation;
@@ -137,6 +140,8 @@ public class GuiHandler implements IGuiHandler {
                 return new ContainerTricklingFilter(player.inventory, (TileEntityTricklingFilter) entity);
             if (entity instanceof TileEntityManualTreeTap)
                 return new ContainerManualTreeTap(player.inventory, (TileEntityManualTreeTap) entity);
+            if (entity instanceof TileEntityAutomaticTreeTap)
+                return new ContainerAutomaticTreeTap(player.inventory, (TileEntityAutomaticTreeTap) entity);
         } else if (ID == GUIDE_ID)
             return null;
         return null;
@@ -197,6 +202,8 @@ public class GuiHandler implements IGuiHandler {
                 return new GuiContainerTricklingFilter(player.inventory, (TileEntityTricklingFilter) entity);
             if (entity instanceof TileEntityManualTreeTap)
                 return new GuiContainerManualTreeTap(player.inventory, (TileEntityManualTreeTap) entity);
+            if (entity instanceof TileEntityAutomaticTreeTap)
+                return new GuiContainerAutomaticTreeTap(player.inventory, (TileEntityAutomaticTreeTap) entity);
         } else if (ID == GUIDE_ID)
             return new GuiGuide(player);
         return null;
