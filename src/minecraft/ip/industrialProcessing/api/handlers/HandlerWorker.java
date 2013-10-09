@@ -8,15 +8,12 @@ import ip.industrialProcessing.utils.working.IWorker;
 public class HandlerWorker implements IHandlerWorker{
 
 	private IWorker worker;
-	private boolean[] hasChanged;
+	private InfoWorker prevInfo;
 	private int offset;
 
 	public HandlerWorker(IWorker worker) {
 		this.worker = worker;
-		this.hasChanged = new boolean[getValueCount()];
-		for(int i = 0;i<getValueCount();i++){
-		    hasChanged[i] = false;
-		}
+		prevInfo = new InfoWorker();
 	}
 	
 	@Override
@@ -38,11 +35,10 @@ public class HandlerWorker implements IHandlerWorker{
 
 	public static InfoWorker getInfo(IHandlerWorker handler)
 	{
-		/*InfoWorker info = new InfoWorker();
-		int[] values = handler.getValueStorage();
-		info.workDone = values[0];
-		info.totalWork = values[1];
-		return info;*/return null;
+		InfoWorker workerInfo = new InfoWorker();
+		workerInfo.workDone = handler.getValue(0);
+		workerInfo.totalWork = handler.getValue(1);
+		return workerInfo;
 	}
 	@Override
 	public int getIndexOffset() {
@@ -56,7 +52,6 @@ public class HandlerWorker implements IHandlerWorker{
 
 	@Override
 	public void put(int index, int par2) {
-	    hasChanged[index] = true;
 		switch (index) {
 		case 0:
 			this.worker.setWorkDone(par2);
@@ -67,13 +62,18 @@ public class HandlerWorker implements IHandlerWorker{
 
 	@Override
 	public int getPrevValue(int i) {
-	    // TODO Auto-generated method stub
-	    return 0;
+		switch (i) {
+		case 0:
+		    return prevInfo.workDone;
+		case 1:
+		    return prevInfo.totalWork;
+		}
+		return 0;
 	}
 
 	@Override
 	public void newToOldValues() {
-	    // TODO Auto-generated method stub
-	    
+		prevInfo.totalWork = worker.getTotalWork();
+		prevInfo.workDone = worker.getWorkDone();
 	}
 }

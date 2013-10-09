@@ -5,15 +5,12 @@ import ip.industrialProcessing.utils.working.IWorker;
 
 public class HandlerPower implements IHandlerPower{
 	private IPowerStorage power;
-	private boolean[] hasChanged;
+	private InfoPower prevInfo;
 	private int offset;
 
 	public HandlerPower(IPowerStorage power) {
 		this.power = power;
-		this.hasChanged = new boolean[getValueCount()];
-		for(int i = 0;i<getValueCount();i++){
-		    hasChanged[i] = false;
-		}
+		prevInfo = new InfoPower();
 	}
 	
 	@Override
@@ -34,12 +31,10 @@ public class HandlerPower implements IHandlerPower{
 
 	public static InfoPower getInfo(IHandlerPower handler)
 	{
-	    /*
-		InfoPower info = new InfoPower();
-		int[] values = handler.getValueStorage();
-		info.storedPower = values[0];
-		info.powerCapacity = values[1];
-		return info;*/return null;
+		InfoPower powerInfo = new InfoPower();
+		powerInfo.storedPower = handler.getValue(0);
+		powerInfo.powerCapacity = handler.getValue(1);
+		return powerInfo;
 	}
 
 	@Override
@@ -54,7 +49,6 @@ public class HandlerPower implements IHandlerPower{
 
 	@Override
 	public void put(int index, int par2) {
-	    hasChanged[index] = true;
 		switch (index) {
 		case 0:
 			this.power.setStoredPower(par2);
@@ -65,13 +59,18 @@ public class HandlerPower implements IHandlerPower{
 
 	@Override
 	public int getPrevValue(int i) {
-	    // TODO Auto-generated method stub
-	    return 0;
+		switch (i) {
+		case 0:
+		    return prevInfo.storedPower;
+		case 1:
+		    return prevInfo.powerCapacity;
+		}
+		return 0;
 	}
 
 	@Override
 	public void newToOldValues() {
-	    // TODO Auto-generated method stub
-	    
+		prevInfo.powerCapacity = power.getPowerCapacity();
+		prevInfo.storedPower = power.getStoredPower();
 	}
 }

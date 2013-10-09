@@ -17,7 +17,7 @@ import ip.industrialProcessing.machines.BlockMachineRendered;
 public class BlockRainTank extends BlockMachineRendered {
 
 	public BlockRainTank() {
-		super(ConfigTransportBlocks.getBlockRainTankID(), Material.iron, 1F, Block.soundMetalFootstep, "Rain Collector", IndustrialProcessing.tabOreProcessing);
+		super(ConfigTransportBlocks.getBlockRainTankID(), Material.iron, 1F, Block.soundMetalFootstep, "Rain Collector", IndustrialProcessing.tabFluid);
 	}
 
 	@Override

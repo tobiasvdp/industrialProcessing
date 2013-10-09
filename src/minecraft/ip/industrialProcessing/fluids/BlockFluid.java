@@ -30,10 +30,10 @@ public class BlockFluid extends BlockFluidClassic{
     protected Icon[] theIcon;
     protected boolean doDamage;
 	
-	public BlockFluid(int id, Fluid fluid, Material material, CreativeTabs tab,boolean doDamage) {
+	public BlockFluid(int id, Fluid fluid, Material material,boolean doDamage) {
 		super(id, fluid, material);
 		setUnlocalizedName("Block"+fluid.getUnlocalizedName());
-		setCreativeTab(tab);
+		setCreativeTab(IndustrialProcessing.tabFluid);
 		this.disableStats();
 		this.doDamage = doDamage;
 	}

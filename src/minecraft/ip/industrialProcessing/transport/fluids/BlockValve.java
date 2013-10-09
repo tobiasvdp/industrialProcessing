@@ -23,7 +23,7 @@ import net.minecraft.world.World;
 public class BlockValve extends BlockTransport {
 
 	public BlockValve() {
-		super(ConfigTransportBlocks.getBlockValveID(), Material.glass, 1F, Block.soundGlassFootstep, "Fluid Pipe Valve", IndustrialProcessing.tabOreProcessing);
+		super(ConfigTransportBlocks.getBlockValveID(), Material.glass, 1F, Block.soundGlassFootstep, "Fluid Pipe Valve", IndustrialProcessing.tabFluid);
 		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "valve");
 	}
 
