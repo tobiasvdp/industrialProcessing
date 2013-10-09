@@ -23,7 +23,7 @@ import net.minecraftforge.fluids.FluidTankInfo;
 
 public abstract class TEmultiblockCoreTank extends TEmultiblockCoreInv implements ITank, IMultiblockTanks {
 
-	protected ArrayList<IPMultiblockFluidTank> fluidTanks = new ArrayList<IPMultiblockFluidTank>();
+	public ArrayList<IPMultiblockFluidTank> fluidTanks = new ArrayList<IPMultiblockFluidTank>();
 
 	public TEmultiblockCoreTank(StructureMultiblock structure, TierCollection tierRequirments, RecipesMachine recipe) {
 		super(structure, tierRequirments, recipe);

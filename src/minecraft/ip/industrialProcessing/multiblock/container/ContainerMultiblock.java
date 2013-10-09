@@ -29,11 +29,12 @@ public abstract class ContainerMultiblock extends VerifyingContainer {
 
     private ArrayList<IHandler> handlers = new ArrayList<IHandler>();
 
-    private int handlerCount;
+    private int handlerOffset =0;
 
     protected void addHandler(IHandler handler) {
 	handlers.add(handler);
-	handlerCount++;
+	handler.setIndexOffset(handlerOffset);
+	handlerOffset += handler.getValueCount();
     }
 
     @Override
@@ -45,13 +46,11 @@ public abstract class ContainerMultiblock extends VerifyingContainer {
 	    for (int j = 0; j < handlers.size(); j++) {
 		IHandler handler = handlers.get(j);
 		for (int k = 0; k < handler.getValueCount(); k++) {
-		    int index = k;
-		    int value = handler.getValue(k);
-		    if (handler.hasChanged(k)) {
-			System.out.println("send update");
-			icrafting.sendProgressBarUpdate(this, index + handler.getIndexOffset(), value);
+			if(handler.getValue(k) != handler.getPrevValue(k)){
+			icrafting.sendProgressBarUpdate(this, k + handler.getIndexOffset(), handler.getValue(k));
 		    }
 		}
+		handler.newToOldValues();
 	    }
 	}
     }
@@ -73,7 +72,6 @@ public abstract class ContainerMultiblock extends VerifyingContainer {
 	}
 	
 	int index = par1 - handler.getIndexOffset();
-	System.out.println("put update");
 	handler.put(index,par2);
     }
 
