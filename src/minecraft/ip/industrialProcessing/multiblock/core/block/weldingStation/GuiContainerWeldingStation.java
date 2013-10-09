@@ -13,9 +13,9 @@ import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorker
 import ip.industrialProcessing.multiblock.gui.CTmultiblock;
 import ip.industrialProcessing.multiblock.gui.GUImultiblock;
 
-public class GUIWeldingStation extends GUImultiblock{
+public class GuiContainerWeldingStation extends GUImultiblock{
 
-	public GUIWeldingStation(InventoryPlayer inventory, TEmultiblockCoreTankWorkerPowered entity) {
+	public GuiContainerWeldingStation(InventoryPlayer inventory, TEmultiblockCoreTankWorkerPowered entity) {
 		super(inventory, entity, new ContainerWeldingStation(inventory, entity), "Welding Table", "textures/gui/WeldingTable.png");
 	}
 
