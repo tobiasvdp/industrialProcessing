@@ -306,9 +306,13 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
     }
 
     public void setForwardDirection(ForgeDirection forwardFromMetadata) {
-	this.forwardDirection = forwardFromMetadata; 
+	this.forwardDirection = forwardFromMetadata;
 	if (this.worldObj != null)
 	    this.worldObj.notifyBlockChange(xCoord, yCoord, zCoord, this.getBlockType().blockID);
     }
 
+    @Override
+    public boolean canWrenchRotate() {
+	return true;
+    }
 }

@@ -15,7 +15,7 @@ import net.minecraftforge.common.ForgeDirection;
 public class ItemWrench extends ItemIP {
 
     public ItemWrench() {
-	super(ConfigItems.itemWrenchID(), "wrench", IndustrialProcessing.tabPower);
+	super(ConfigItems.itemWrenchID(), "itemWrench", IndustrialProcessing.tabPower);
     }
 
     @Override
@@ -29,11 +29,13 @@ public class ItemWrench extends ItemIP {
 
     @Override
     public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World world, int x, int y, int z, int side, float par8, float par9, float par10) {
-	TileEntity entity = world.getBlockTileEntity(x, y, z); 
+	TileEntity entity = world.getBlockTileEntity(x, y, z);
 	if (entity instanceof IRotateableEntity) {
 	    IRotateableEntity item = (IRotateableEntity) entity;
-	    BlockMachine.setRotation(item, par2EntityPlayer);
-	    return true;
+	    if (item.canWrenchRotate()) {
+		BlockMachine.setRotation(item, par2EntityPlayer);
+		return true;
+	    }
 	}
 	return super.onItemUse(par1ItemStack, par2EntityPlayer, world, x, y, z, side, par8, par9, par10);
     }

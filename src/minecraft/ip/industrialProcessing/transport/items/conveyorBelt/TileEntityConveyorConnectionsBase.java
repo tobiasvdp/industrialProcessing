@@ -34,7 +34,7 @@ public abstract class TileEntityConveyorConnectionsBase extends TileEntityTransp
 	this.forwardDirection = forward;
 	searchForConnections();
 	notifyBlockChange();
-	if(this.worldObj!= null)
+	if (this.worldObj != null)
 	    this.worldObj.notifyBlockChange(xCoord, yCoord, zCoord, this.getBlockType().blockID);
     }
 
@@ -242,4 +242,8 @@ public abstract class TileEntityConveyorConnectionsBase extends TileEntityTransp
 	par1nbtTagCompound.setIntArray(string, ordinals);
     }
 
+    @Override
+    public boolean canWrenchRotate() {
+	return true;
+    }
 }
