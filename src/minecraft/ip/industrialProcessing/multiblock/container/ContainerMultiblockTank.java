@@ -2,6 +2,7 @@ package ip.industrialProcessing.multiblock.container;
 
 import java.util.ArrayList;
 
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraftforge.fluids.FluidTankInfo;
 import ip.industrialProcessing.api.handlers.HandlerTank;
 import ip.industrialProcessing.api.handlers.IHandlerTank;
@@ -17,8 +18,8 @@ public class ContainerMultiblockTank extends ContainerMultiblockInv {
 
 	private TEmultiblockCoreTank core;
 
-	public ContainerMultiblockTank(TEmultiblockCoreTank core) {
-		super(core);
+	public ContainerMultiblockTank(InventoryPlayer inventory,TEmultiblockCoreTank core) {
+		super(inventory,core);
 		this.core = core;
 	}
 	

@@ -58,7 +58,8 @@ import ip.industrialProcessing.machines.treetap.GuiContainerAutomaticTreeTap;
 import ip.industrialProcessing.machines.treetap.GuiContainerManualTreeTap;
 import ip.industrialProcessing.machines.treetap.TileEntityAutomaticTreeTap;
 import ip.industrialProcessing.machines.treetap.TileEntityManualTreeTap;
-import ip.industrialProcessing.multiblock.core.block.weldingStation.CTWeldingStation;
+import ip.industrialProcessing.multiblock.container.ContainerMultiblockTankWorkerPowered;
+import ip.industrialProcessing.multiblock.core.block.weldingStation.ContainerWeldingStation;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.GUIWeldingStation;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.dummy.block.toggleButton.GUImultiblockToggleButton;
@@ -131,7 +132,7 @@ public class GuiHandler implements IGuiHandler {
             if (entity instanceof TileEntityTurbine)
                 return new ContainerTurbine(player.inventory, (TileEntityTurbine) entity);
             if (entity instanceof TEmultiblockWeldingStation)
-                return new CTWeldingStation(player.inventory, (TEmultiblockWeldingStation) entity);
+                return new ContainerWeldingStation(player.inventory, (TEmultiblockWeldingStation) entity);
             if (entity instanceof TileEntityIncubator)
                 return new ContainerIncubator(player.inventory, (TileEntityIncubator) entity);
             if (entity instanceof TileEntityWaterTreatmentStation)

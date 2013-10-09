@@ -15,6 +15,7 @@ public class HandlerTank implements IHandlerTank {
 
     public HandlerTank(IPfluidTank tank) {
 	this.tank = tank;
+	prevInfo = new InfoTank();
     }
 
     @Override

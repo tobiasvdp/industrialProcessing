@@ -34,26 +34,15 @@ public class HandlerWorker implements IHandlerWorker{
 		}
 		return 0;
 	}
-	
-	@Override
-	public int[] getValueStorage() {
-		int[] value = new int[2];
-		value[0] = worker.getWorkDone();
-		value[1] = worker.getTotalWork();
-		return value;
-	}
+
 
 	public static InfoWorker getInfo(IHandlerWorker handler)
 	{
-		InfoWorker info = new InfoWorker();
+		/*InfoWorker info = new InfoWorker();
 		int[] values = handler.getValueStorage();
 		info.workDone = values[0];
 		info.totalWork = values[1];
-		return info;
-	}
-	@Override
-	public boolean hasChanged(int i) {
-	    return hasChanged[i];
+		return info;*/return null;
 	}
 	@Override
 	public int getIndexOffset() {
@@ -74,5 +63,17 @@ public class HandlerWorker implements IHandlerWorker{
 		case 1:
 			this.worker.setTotalWork(par2);
 		}
+	}
+
+	@Override
+	public int getPrevValue(int i) {
+	    // TODO Auto-generated method stub
+	    return 0;
+	}
+
+	@Override
+	public void newToOldValues() {
+	    // TODO Auto-generated method stub
+	    
 	}
 }

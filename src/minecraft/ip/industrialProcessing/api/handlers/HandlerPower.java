@@ -31,27 +31,15 @@ public class HandlerPower implements IHandlerPower{
 		}
 		return 0;
 	}
-	
-	@Override
-	public int[] getValueStorage() {
-		int[] value = new int[2];
-		value[0] = power.getStoredPower();
-		value[1] = power.getPowerCapacity();
-		return value;
-	}
 
 	public static InfoPower getInfo(IHandlerPower handler)
 	{
+	    /*
 		InfoPower info = new InfoPower();
 		int[] values = handler.getValueStorage();
 		info.storedPower = values[0];
 		info.powerCapacity = values[1];
-		return info;
-	}
-
-	@Override
-	public boolean hasChanged(int i) {
-	    return hasChanged[i];
+		return info;*/return null;
 	}
 
 	@Override
@@ -73,5 +61,17 @@ public class HandlerPower implements IHandlerPower{
 		case 1:
 			this.power.setPowerCapacity(par2);
 		}
+	}
+
+	@Override
+	public int getPrevValue(int i) {
+	    // TODO Auto-generated method stub
+	    return 0;
+	}
+
+	@Override
+	public void newToOldValues() {
+	    // TODO Auto-generated method stub
+	    
 	}
 }

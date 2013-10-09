@@ -1,6 +1,7 @@
 package ip.industrialProcessing.multiblock.gui;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.multiblock.container.ContainerMultiblock;
 import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -15,7 +16,7 @@ public class GUImultiblock extends GuiContainer {
 	private ResourceLocation textureLocation;
 	private String name;
 
-	public GUImultiblock(InventoryPlayer inventoryPlayer, TEmultiblockCore tileEntity, CTmultiblock cTmultiblock, String name, String textureLocation) {
+	public GUImultiblock(InventoryPlayer inventoryPlayer, TEmultiblockCore tileEntity, ContainerMultiblock cTmultiblock, String name, String textureLocation) {
 		super(cTmultiblock);
 		this.tileEntity = tileEntity;
 		this.name = name;

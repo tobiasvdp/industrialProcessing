@@ -1,6 +1,7 @@
 package ip.industrialProcessing.multiblock.container;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
@@ -12,8 +13,8 @@ public class ContainerMultiblockInv extends ContainerMultiblock implements ICont
 
 	private TEmultiblockCoreInv core;
 
-	public ContainerMultiblockInv(TEmultiblockCoreInv core) {
-		super(core);
+	public ContainerMultiblockInv(InventoryPlayer inventory,TEmultiblockCoreInv core) {
+		super(inventory,core);
 		this.core = core;
 	}
 	

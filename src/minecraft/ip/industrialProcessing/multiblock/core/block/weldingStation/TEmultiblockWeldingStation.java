@@ -79,8 +79,7 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowere
 	}
 	@Override
 	public void updateEntity() {
-		System.out.println(fluidTanks.get(0).getFluidAmount() + "/" + fluidTanks.get(0).getCapacity());
-		System.out.println(fluidTanks.get(1).getFluidAmount() + "/" + fluidTanks.get(0).getCapacity());
+		System.out.println(worldObj + " " + fluidTanks.get(0).getFluidAmount() + "/" + fluidTanks.get(0).getCapacity());
 		super.updateEntity();
 	}
 	@Override

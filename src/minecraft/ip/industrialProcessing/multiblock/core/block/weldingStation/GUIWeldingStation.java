@@ -5,6 +5,8 @@ import org.lwjgl.opengl.GL11;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.StatCollector;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
+import ip.industrialProcessing.multiblock.container.ContainerMultiblock;
+import ip.industrialProcessing.multiblock.container.ContainerMultiblockTankWorkerPowered;
 import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
 import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreInv;
 import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorkerPowered;
@@ -14,7 +16,7 @@ import ip.industrialProcessing.multiblock.gui.GUImultiblock;
 public class GUIWeldingStation extends GUImultiblock{
 
 	public GUIWeldingStation(InventoryPlayer inventory, TEmultiblockCoreTankWorkerPowered entity) {
-		super(inventory, entity, new CTWeldingStation(inventory, entity), "Welding Table", "textures/gui/WeldingTable.png");
+		super(inventory, entity, new ContainerWeldingStation(inventory, entity), "Welding Table", "textures/gui/WeldingTable.png");
 	}
 
 	@Override
