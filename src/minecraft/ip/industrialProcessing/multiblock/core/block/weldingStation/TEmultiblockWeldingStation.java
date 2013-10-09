@@ -78,11 +78,6 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowere
 		this.addTank(10000, 0, new ForgeDirection[]{ForgeDirection.NORTH}, true, false);
 	}
 	@Override
-	public void updateEntity() {
-		System.out.println(worldObj + " " + fluidTanks.get(0).getFluidAmount() + "/" + fluidTanks.get(0).getCapacity());
-		super.updateEntity();
-	}
-	@Override
 	protected boolean isTankValidForFluid(int slot, int fluidId) {
 	    return true;
 	}
