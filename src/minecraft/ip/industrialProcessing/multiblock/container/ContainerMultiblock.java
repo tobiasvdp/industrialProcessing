@@ -52,7 +52,8 @@ public abstract class ContainerMultiblock extends VerifyingContainer {
 			icrafting.sendProgressBarUpdate(this, k + handler.getIndexOffset(), handler.getValue(k));
 		    }
 		}
-		handler.newToOldValues();
+		if(i == this.crafters.size() -1)
+		    handler.newToOldValues();
 	    }
 	}
     }
