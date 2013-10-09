@@ -2,6 +2,7 @@ package ip.industrialProcessing.multiblock.core.block.weldingStation;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
+import ip.industrialProcessing.multiblock.container.ContainerMultiblockTankWorkerPowered;
 import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
 import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreInv;
 import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorkerPowered;
@@ -9,12 +10,14 @@ import ip.industrialProcessing.multiblock.gui.CTmultiblock;
 import ip.industrialProcessing.slots.SlotBase;
 import ip.industrialProcessing.slots.SlotOutput;
 
-public class CTWeldingStation extends CTmultiblock {
+public class CTWeldingStation extends ContainerMultiblockTankWorkerPowered {
+
+	private SlotBase[] slots;
 
 	public CTWeldingStation(InventoryPlayer inventory, TEmultiblockCoreTankWorkerPowered entity) {
-		super(inventory, entity);
+		super(entity);
 
-		slots = new Slot[14];
+		slots = new SlotBase[14];
 		slots[0] = new SlotBase(entity, 0, 33, 15);
 		slots[1] = new SlotBase(entity, 1, 51, 15);
 		slots[2] = new SlotBase(entity, 2, 69, 15);
@@ -31,5 +34,7 @@ public class CTWeldingStation extends CTmultiblock {
 		slots[13] = new SlotOutput(entity, 13, 143, 33);
 
 		BindSlots(slots, inventory, this);
+		
+		addTankToContainer(0)
 	}
 }

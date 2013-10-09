@@ -76,7 +76,6 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowere
 		this.addStack(null, LocalDirection.RIGHT, false, true);	
 		
 		this.addTank(10000, 0, new ForgeDirection[]{ForgeDirection.NORTH}, true, false);
-		this.addTank(10000, 0, new ForgeDirection[]{ForgeDirection.NORTH}, true, false);
 	}
 	@Override
 	public void updateEntity() {
