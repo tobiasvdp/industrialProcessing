@@ -29,8 +29,7 @@ public class ItemWrench extends ItemIP {
 
     @Override
     public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World world, int x, int y, int z, int side, float par8, float par9, float par10) {
-	TileEntity entity = world.getBlockTileEntity(x, y, z);
-	System.out.println(entity + " " + world.isRemote);
+	TileEntity entity = world.getBlockTileEntity(x, y, z); 
 	if (entity instanceof IRotateableEntity) {
 	    IRotateableEntity item = (IRotateableEntity) entity;
 	    BlockMachine.setRotation(item, par2EntityPlayer);
