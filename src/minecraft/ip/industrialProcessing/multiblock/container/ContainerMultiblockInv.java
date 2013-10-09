@@ -21,7 +21,7 @@ public class ContainerMultiblockInv extends ContainerMultiblock implements ICont
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
 		if(super.canInteractWith(entityplayer)){
-			this.core.isUseableByPlayer(entityplayer);
+			return this.core.isUseableByPlayer(entityplayer);
 		}
 		return false;
 	}

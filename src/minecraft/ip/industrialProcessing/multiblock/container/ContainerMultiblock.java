@@ -26,7 +26,7 @@ public abstract class ContainerMultiblock extends VerifyingContainer {
 
     @Override
     public boolean canInteractWith(EntityPlayer entityplayer) {
-	return core.canInteractWith(entityplayer);
+    	return core.canInteractWith(entityplayer);
     }
 
     private ArrayList<IHandler> handlers = new ArrayList<IHandler>();
