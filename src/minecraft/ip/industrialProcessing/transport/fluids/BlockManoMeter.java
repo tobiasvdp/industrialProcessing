@@ -16,7 +16,7 @@ import ip.industrialProcessing.machines.BlockMachineRendered;
 public class BlockManoMeter extends BlockMachineRendered {
 
 	public BlockManoMeter() {
-		super(ConfigTransportBlocks.getBlockTransportFluidManometerID(), Material.iron, 1F, Block.soundMetalFootstep, "Manometer", IndustrialProcessing.tabOreProcessing);
+		super(ConfigTransportBlocks.getBlockTransportFluidManometerID(), Material.iron, 1F, Block.soundMetalFootstep, "Manometer", IndustrialProcessing.tabFluid);
 		setBlockBounds(0, 0, 0.25f, 1, 1, 0.75f);
 		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "manometer");
 	}

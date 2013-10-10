@@ -17,7 +17,7 @@ import ip.industrialProcessing.machines.BlockMachineRendered;
 public class BlockPump extends BlockMachineRendered {
 
 	public BlockPump() {
-		super(ConfigTransportBlocks.getBlockTransportFluidPumpID(), Material.iron, 1F, Block.soundMetalFootstep, "Fluid Pump", IndustrialProcessing.tabOreProcessing);
+		super(ConfigTransportBlocks.getBlockTransportFluidPumpID(), Material.iron, 1F, Block.soundMetalFootstep, "Fluid Pump", IndustrialProcessing.tabFluid);
 	}
 
 	@Override
