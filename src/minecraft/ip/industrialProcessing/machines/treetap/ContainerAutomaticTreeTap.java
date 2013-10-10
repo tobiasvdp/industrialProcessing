@@ -1,14 +1,13 @@
 package ip.industrialProcessing.machines.treetap;
 
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Slot;
-import ip.industrialProcessing.machines.TileEntityFluidMachine;
 import ip.industrialProcessing.machines.containers.ContainerFluidMachine;
-import ip.industrialProcessing.machines.containers.IProgressBarHandler;
 import ip.industrialProcessing.machines.containers.ProgressBarHandlerInfo;
 import ip.industrialProcessing.utils.containers.ContainerUtils;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Slot;
+import net.minecraft.tileentity.TileEntity;
 
-public class ContainerAutomaticTreeTap extends ContainerFluidMachine {
+public class ContainerAutomaticTreeTap extends ContainerFluidMachine<TileEntityAutomaticTreeTap> {
 
     private ProgressBarHandlerInfo progressInfo;
     

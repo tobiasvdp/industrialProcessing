@@ -1,18 +1,17 @@
 package ip.industrialProcessing.machines.containers;
 
 import ip.industrialProcessing.machines.IPowerStorage;
-import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
-import ip.industrialProcessing.machines.TileEntityPoweredWorkerMachine;
 
 import java.util.ArrayList;
 
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.tileentity.TileEntity;
 
-public class ContainerPoweredFluidWorkerMachine extends ContainerFluidWorkerMachine {
+public class ContainerPoweredFluidWorkerMachine<T extends TileEntity & IMachineContainerEntity & IFluidMachineContainerEntity> extends ContainerFluidWorkerMachine<T> {
 
-	private TileEntityPoweredFluidWorkerMachine tileEntityPoweredWorkerMachine;
+	private T tileEntityPoweredWorkerMachine;
 
-	public ContainerPoweredFluidWorkerMachine(InventoryPlayer inventoryPlayer, TileEntityPoweredFluidWorkerMachine tileEntity) {
+	public ContainerPoweredFluidWorkerMachine(InventoryPlayer inventoryPlayer, T tileEntity) {
 		super(inventoryPlayer, tileEntity);
 		this.tileEntityPoweredWorkerMachine = tileEntity;
 	}

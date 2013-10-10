@@ -4,6 +4,7 @@ import ic2.api.Direction;
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.IAnimationProgress;
+import ip.industrialProcessing.machines.containers.IMachineContainerEntity;
 import ip.industrialProcessing.packetHandlers.TileSyncHandler;
 import ip.industrialProcessing.recipes.IRecipeWorkHandler;
 import ip.industrialProcessing.recipes.RecipeWorker;
@@ -32,7 +33,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
-public abstract class TileEntityMachine extends TileEntitySynced implements ISidedInventory, IMachineSlots, IRotateableEntity {
+public abstract class TileEntityMachine extends TileEntitySynced implements ISidedInventory, IMachineSlots, IRotateableEntity, IMachineContainerEntity {
 
     private ArrayList<MachineItemStack> itemStacks = new ArrayList<MachineItemStack>();
     private int[][] itemStackSideSlots = new int[6][0];

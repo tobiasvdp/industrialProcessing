@@ -47,6 +47,7 @@ public class ConfigRenderers {
     private int rendererConveyorBelt;
     private int rendererConveyorInput;
     private int rendererConveyorOutput;
+    private int rendererConveyorSorter;
     private int rendererPumpId;
     private int rendererRainTankID;
     private int rendererValveID;
@@ -104,6 +105,14 @@ public class ConfigRenderers {
         getInstance().rendererConveyorInput = value;
     }
 
+    public static int getRendererConveyorSorterID() {
+        return getInstance().rendererConveyorSorter;
+    }
+
+    public static void setRendererConveyorSorterID(int value) {
+        getInstance().rendererConveyorSorter = value;
+    }
+    
     public static int getRendererConveyorOutputID() {
         return getInstance().rendererConveyorOutput;
     }
