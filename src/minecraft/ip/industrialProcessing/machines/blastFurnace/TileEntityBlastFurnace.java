@@ -168,4 +168,8 @@ public class TileEntityBlastFurnace extends TileEntityPoweredFluidWorkerMachine 
 		}
 		return false;
     }}
+
+    @Override
+    public void addPressure(ForgeDirection from, float pressure) { 
+    }
 }

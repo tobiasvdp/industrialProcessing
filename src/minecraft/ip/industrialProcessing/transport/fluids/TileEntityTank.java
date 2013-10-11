@@ -190,4 +190,7 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
 			return this.pressure + this.pressureAbove;
 		return this.pressure / 2 + this.pressureAbove;
 	}
+	@Override
+	public void addPressure(ForgeDirection from, float pressure) { 
+	}
 }

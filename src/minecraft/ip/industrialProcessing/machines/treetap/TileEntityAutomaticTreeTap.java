@@ -1,5 +1,6 @@
 package ip.industrialProcessing.machines.treetap;
 
+import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -55,5 +56,9 @@ public class TileEntityAutomaticTreeTap extends TileEntityFluidMachine {
     @Override
     public boolean canWrenchRotate() {
 	return false;
+    }
+
+    @Override
+    public void addPressure(ForgeDirection from, float pressure) {
     }
 }

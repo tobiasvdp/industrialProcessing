@@ -431,4 +431,8 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine implement
 		}
 		return pressure * 500 / info.length;
 	}
+	
+	@Override
+	public void addPressure(ForgeDirection from, float pressure) { 
+	}
 }

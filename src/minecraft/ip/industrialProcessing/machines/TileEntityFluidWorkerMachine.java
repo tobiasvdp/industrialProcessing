@@ -18,6 +18,7 @@ import java.util.Iterator;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.ForgeDirection;
 
 public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachine implements IRecipeFluidWorkHandler, IAnimationProgress, IAnimationSyncable {
 
@@ -146,4 +147,7 @@ public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachin
 	return this;
     }
 
+    @Override
+    public void addPressure(ForgeDirection from, float pressure) { 
+    }
 }

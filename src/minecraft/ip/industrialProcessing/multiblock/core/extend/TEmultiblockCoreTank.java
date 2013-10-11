@@ -238,4 +238,8 @@ public abstract class TEmultiblockCoreTank extends TEmultiblockCoreInv implement
 		}
 		return pressure * 500 / info.length;
 	}
+	
+	@Override
+	public void addPressure(ForgeDirection from, float pressure) { 
+	}
 }
