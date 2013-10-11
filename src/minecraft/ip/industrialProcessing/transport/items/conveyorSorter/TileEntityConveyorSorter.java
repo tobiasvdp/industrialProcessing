@@ -69,6 +69,7 @@ public class TileEntityConveyorSorter extends TileEntityConveyorInventoryBase im
 		    }
 		}
 	    }
+	    return LocalDirection.BACK;
 	}
 	return super.findOutput(stack, source);
     }
