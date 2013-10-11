@@ -30,9 +30,7 @@ public class BlockConveyorSorter extends BlockConveyorBase {
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
-
-	//boolean result = super.onBlockActivated(world, x, y, z, player, metadata, what, these, are);
 	player.openGui(IndustrialProcessing.instance, 0, world, x, y, z);
-	return false;
+	return true;
     }
 }

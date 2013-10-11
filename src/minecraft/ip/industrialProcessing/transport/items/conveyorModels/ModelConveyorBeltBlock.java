@@ -21,78 +21,77 @@ import org.lwjgl.util.vector.Vector3f;
 
 public class ModelConveyorBeltBlock extends ModelBlock {
 
-	ObjRotator straight = new ObjRotator(new Straight001(), 0);
-	ObjRotator cornerLeft = new ObjRotator(new CornerLeft001(), 4);
-	ObjRotator cornerRight = new ObjRotator(new CornerRight001(), 2);
-	ObjRotator frontOut = new ObjRotator(new FrontOut001(), 1);
-	ObjRotator leftIn = new ObjRotator(new LeftIn001(), 1);
-	ObjRotator rightIn = new ObjRotator(new RightIn001(), 1);
-	ObjRotator centerPiece = new ObjRotator(new CenterPiece001(), 1);
-	ObjRotator backIn = new ObjRotator(new BackIn001(), 1);
-	ObjSlopeRotationCombiner slopes = new ObjSlopeRotationCombiner();
+    protected ObjRotator straight = new ObjRotator(new Straight001(), 0);
+    protected ObjRotator cornerLeft = new ObjRotator(new CornerLeft001(), 4);
+    protected ObjRotator cornerRight = new ObjRotator(new CornerRight001(), 2);
+    protected ObjRotator frontOut = new ObjRotator(new FrontOut001(), 1);
+    protected ObjRotator leftIn = new ObjRotator(new LeftIn001(), 1);
+    protected ObjRotator rightIn = new ObjRotator(new RightIn001(), 1);
+    protected ObjRotator centerPiece = new ObjRotator(new CenterPiece001(), 1);
+    protected ObjRotator backIn = new ObjRotator(new BackIn001(), 1);
+    protected ObjSlopeRotationCombiner slopes = new ObjSlopeRotationCombiner();
 
-	@Override
-	public void renderInventory(Block block, int metadata, int modelID, RenderBlocks renderer) {
-		Vector3f position = new Vector3f(0, 0, 0);
-		Icon icon = block.getIcon(0, 0);
+    @Override
+    public void renderInventory(Block block, int metadata, int modelID, RenderBlocks renderer) {
+	Vector3f position = new Vector3f(0, 0, 0);
+	Icon icon = block.getIcon(0, 0);
 
-		straight.getRotated(0).renderMesh(true, icon, position);
-	}
+	straight.getRotated(0).renderMesh(true, icon, position);
+    }
 
-	@Override
-	public boolean renderWorldBlock(WorldReference reference, int modelId, RenderBlocks renderer) {
-		System.out.println("ModelConveyorBeltBlock.renderWorldBlock()");
-		Tessellator tessellator = Tessellator.instance;
-		tessellator.setColorOpaque(255, 255, 255);
+    @Override
+    public boolean renderWorldBlock(WorldReference reference, int modelId, RenderBlocks renderer) {
+	Tessellator tessellator = Tessellator.instance;
+	tessellator.setColorOpaque(255, 255, 255);
 
-		TileEntity entity = reference.getBlockTileEntity();
-		ForgeDirection forward = BlockMachine.getForwardFromEntity(entity);
-		int dir = 4 - BlockMachine.getMetadataFromForward(forward);
+	TileEntity entity = reference.getBlockTileEntity();
+	ForgeDirection forward = BlockMachine.getForwardFromEntity(entity);
+	int dir = 4 - BlockMachine.getMetadataFromForward(forward);
 
-		Icon icon = reference.getIcon(0);
-		Icon iconCenter = reference.getIcon(1);
+	Icon icon = reference.getIcon(0);
+	Icon iconCenter = reference.getIcon(1);
 
-		if (entity instanceof TileEntityConveyorConnectionsBase) {
-			TileEntityConveyorConnectionsBase belt = (TileEntityConveyorConnectionsBase) entity;
-			ConnectionState front = getState(belt, forward, LocalDirection.BACK);
-			ConnectionState left = getState(belt, forward, LocalDirection.RIGHT);
-			ConnectionState right = getState(belt, forward, LocalDirection.LEFT);
-			ConnectionState back = getState(belt, forward, LocalDirection.FRONT);
+	if (entity instanceof TileEntityConveyorConnectionsBase) {
+	    TileEntityConveyorConnectionsBase belt = (TileEntityConveyorConnectionsBase) entity;
+	    ConnectionState front = getState(belt, forward, LocalDirection.BACK);
+	    ConnectionState left = getState(belt, forward, LocalDirection.RIGHT);
+	    ConnectionState right = getState(belt, forward, LocalDirection.LEFT);
+	    ConnectionState back = getState(belt, forward, LocalDirection.FRONT);
 
-			SlopeState fs = belt.getSlope(LocalDirection.BACK);
-			SlopeState bs = belt.getSlope(LocalDirection.FRONT);
+	    SlopeState fs = belt.getSlope(LocalDirection.BACK);
+	    SlopeState bs = belt.getSlope(LocalDirection.FRONT);
 
-			if (fs != SlopeState.FLAT || bs != SlopeState.FLAT || front.isConnected() && back.isConnected() && !left.isConnected() && !right.isConnected()) {
-				slopes.getRenderer(fs, bs).getRotated(dir).renderMesh(false, icon, reference);
-			} else if (front.isConnected() && left.isConnected() && !back.isConnected() && !right.isConnected()) {
-				cornerLeft.getRotated(dir).renderMesh(false, icon, reference);
-			} else if (front.isConnected() && right.isConnected() && !back.isConnected() && !left.isConnected()) {
-				cornerRight.getRotated(dir).renderMesh(false, icon, reference);
-			} else {
-				if (left.isConnected())
-					leftIn.getRotated(dir).renderMesh(false, icon, reference);
+	    if (fs != SlopeState.FLAT || bs != SlopeState.FLAT || front.isConnected() && back.isConnected() && !left.isConnected() && !right.isConnected()) {
+		slopes.getRenderer(fs, bs).getRotated(dir).renderMesh(false, icon, reference);
+	    } else if (front.isConnected() && left.isConnected() && !back.isConnected() && !right.isConnected()) {
+		cornerLeft.getRotated(dir).renderMesh(false, icon, reference);
+	    } else if (front.isConnected() && right.isConnected() && !back.isConnected() && !left.isConnected()) {
+		cornerRight.getRotated(dir).renderMesh(false, icon, reference);
+	    } else {
+		if (left.isConnected())
+		    leftIn.getRotated(dir).renderMesh(false, icon, reference);
 
-				if (right.isConnected())
-					rightIn.getRotated(dir).renderMesh(false, icon, reference);
+		if (right.isConnected())
+		    rightIn.getRotated(dir).renderMesh(false, icon, reference);
 
-				if (back.isConnected())
-					backIn.getRotated(dir).renderMesh(false, icon, reference);
+		if (back.isConnected())
+		    backIn.getRotated(dir).renderMesh(false, icon, reference);
 
-				if (front.isConnected() && back.isConnected()) {
-					straight.getRotated(dir).renderMesh(false, icon, reference);
-				} else {
-					if (front.isConnected())
-						frontOut.getRotated(dir).renderMesh(false, icon, reference);
-					centerPiece.getRotated(dir).renderMesh(false, iconCenter, reference);
-				}
-			}
+		if (front.isConnected() && back.isConnected()) {
+		    straight.getRotated(dir).renderMesh(false, icon, reference);
+		} else {
+		    if (front.isConnected())
+			frontOut.getRotated(dir).renderMesh(false, icon, reference);
+		    centerPiece.getRotated(dir).renderMesh(false, iconCenter, reference);
 		}
-		return true;
+	    }
 	}
+	return true;
+    }
 
-	private ConnectionState getState(IConnectedTile entity, ForgeDirection forward, LocalDirection direction) {
-		ForgeDirection world = DirectionUtils.getWorldDirection(direction, forward);
-		return entity.getConnection(world);
-	}
+    protected ConnectionState getState(IConnectedTile entity, ForgeDirection forward, LocalDirection direction) {
+	ForgeDirection world = DirectionUtils.getWorldDirection(direction, forward);
+	return entity.getConnection(world);
+    }
 
 }
