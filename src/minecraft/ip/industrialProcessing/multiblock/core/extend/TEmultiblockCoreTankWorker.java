@@ -24,149 +24,151 @@ import ip.industrialProcessing.utils.working.WorkUtils;
 
 public abstract class TEmultiblockCoreTankWorker extends TEmultiblockCoreTank implements IRecipeFluidWorkHandler, IAnimationProgress, IAnimationSyncable {
 
-	public TEmultiblockCoreTankWorker(StructureMultiblock structure, TierCollection tierRequirments, RecipesMachine recipe) {
-		super(structure, tierRequirments, recipe);
-		this.recipe = recipe;
-		this.serverWorker = createServerSideWorker();
-		this.clientWorker = new ClientWorker();
-		this.animationHandler = this.creatAnimationHandler();
+    public TEmultiblockCoreTankWorker(StructureMultiblock structure, TierCollection tierRequirments, RecipesMachine recipe) {
+	super(structure, tierRequirments, recipe);
+	this.recipe = recipe;
+	this.serverWorker = createServerSideWorker();
+	this.clientWorker = new ClientWorker();
+	this.animationHandler = this.creatAnimationHandler();
+    }
+
+    protected AnimationHandler creatAnimationHandler() {
+	return new AnimationHandler(AnimationMode.WRAP, 1f, true);
+    }
+
+    protected ServerWorker createServerSideWorker() {
+	return new RecipeFluidWorker(this);
+    }
+
+    private RecipesMachine recipe;
+    private ServerWorker serverWorker;
+    private ClientWorker clientWorker;
+    private AnimationHandler animationHandler;
+
+    @Override
+    public Iterator<Recipe> iterateRecipes() {
+	return recipe.iterator();
+    }
+
+    public IWorker getWorker() {
+	if (this.worldObj.isRemote)
+	    return clientWorker;
+	else
+	    return serverWorker;
+    }
+
+    @Override
+    public void updateEntity() {
+	super.updateEntity();
+	if (!worldObj.isRemote)
+	    doWork();
+	if (animationHandler != null) {
+	    this.animationHandler.update();
+	    TileAnimationSyncHandler.sendAnimationData(this, this.animationHandler);
 	}
+    }
 
-	protected AnimationHandler creatAnimationHandler() {
-		return new AnimationHandler(AnimationMode.WRAP, 1f, true);
+    protected void doWork() {
+	work(1);
+    }
+
+    @Override
+    public boolean canUpdate() {
+	return true;
+    }
+
+    protected int work(int amount) {
+	return this.getWorker().doWork(amount);
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound nbt) {
+	super.writeToNBT(nbt);
+	writeWorker(nbt);
+    };
+
+    private void writeWorker(NBTTagCompound nbt) {
+	if (this.worldObj.isRemote) {
+	    WorkUtils.writeToNBT(clientWorker, nbt);
+	} else {
+	    WorkUtils.writeToNBT(serverWorker, nbt);
 	}
+    }
 
-	protected ServerWorker createServerSideWorker() {
-		return new RecipeFluidWorker(this);
-	}
+    @Override
+    public void readFromNBT(NBTTagCompound nbt) {
+	super.readFromNBT(nbt);
+	readWorker(nbt);
+    };
 
-	private RecipesMachine recipe;
-	private ServerWorker serverWorker;
-	private ClientWorker clientWorker;
-	private AnimationHandler animationHandler;
+    private void readWorker(NBTTagCompound nbt) {
+	WorkUtils.readFromNBT(clientWorker, nbt);
+	WorkUtils.readFromNBT(serverWorker, nbt);
+    }
 
-	@Override
-	public Iterator<Recipe> iterateRecipes() {
-		return recipe.iterator();
-	}
+    @Override
+    public void workProgressed(int amount) {
+	updateAnimation(amount);
+    }
 
-	public IWorker getWorker() {
-		if (this.worldObj.isRemote)
-			return clientWorker;
-		else
-			return serverWorker;
-	}
+    protected void updateAnimation(int workDone) {
+	IWorker worker = getWorker();
+	float maxWork = worker.getTotalWork();
+	// each frame, workDone/maxWork % will be added to the animation
+	this.animationHandler.setSpeed(workDone / maxWork / this.animationHandler.DT);
+    }
 
-	@Override
-	public void updateEntity() {
-		doWork();
-		if (animationHandler != null) {
-			this.animationHandler.update();
-			TileAnimationSyncHandler.sendAnimationData(this, this.animationHandler);
-		}
-	}
+    @Override
+    public float getAnimationProgress(float scale, int index) {
+	return this.animationHandler.getAnimationProgress(scale);
+    }
 
-	protected void doWork() {
-		work(1);
-	}
+    @Override
+    public int getAnimationCount() {
+	return 1;
+    }
 
-	@Override
-	public boolean canUpdate() {
-		return true;
-	}
+    public AnimationHandler getAnimationHandler() {
+	return animationHandler;
+    }
 
-	protected int work(int amount) {
-		return this.getWorker().doWork(amount);
-	}
+    @Override
+    public void workCancelled() {
+	this.animationHandler.setProgress(0f);
+	this.animationHandler.setSpeed(0f);
+    }
 
-	@Override
-	public void writeToNBT(NBTTagCompound nbt) {
-		super.writeToNBT(nbt);
-		writeWorker(nbt);
-	};
+    @Override
+    public void prepareWork() {
+    }
 
-	private void writeWorker(NBTTagCompound nbt) {
-		if (this.worldObj.isRemote) {
-			WorkUtils.writeToNBT(clientWorker, nbt);
-		} else {
-			WorkUtils.writeToNBT(serverWorker, nbt);
-		}
-	}
+    @Override
+    public void beginWork() {
+	// work has started, begin animation
+	this.animationHandler.setProgress(0f);
+	this.animationHandler.setSpeed(0f);
+    }
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
-		super.readFromNBT(nbt);
-		readWorker(nbt);
-	};
+    @Override
+    public void workDone() {
+	// work is done, no more animation
+	this.animationHandler.setProgress(this.animationHandler.getScale());
+	this.animationHandler.setSpeed(0f);
+    }
 
-	private void readWorker(NBTTagCompound nbt) {
-		WorkUtils.readFromNBT(clientWorker, nbt);
-		WorkUtils.readFromNBT(serverWorker, nbt);
-	}
+    @Override
+    public boolean hasWork() {
+	return true;
+    }
 
-	@Override
-	public void workProgressed(int amount) {
-		updateAnimation(amount);
-	}
+    @Override
+    public boolean canWork() {
+	return true;
+    }
 
-	protected void updateAnimation(int workDone) {
-		IWorker worker = getWorker();
-		float maxWork = worker.getTotalWork();
-		// each frame, workDone/maxWork % will be added to the animation
-		this.animationHandler.setSpeed(workDone / maxWork / this.animationHandler.DT);
-	}
-
-	@Override
-	public float getAnimationProgress(float scale, int index) {
-		return this.animationHandler.getAnimationProgress(scale);
-	}
-
-	@Override
-	public int getAnimationCount() {
-		return 1;
-	}
-
-	public AnimationHandler getAnimationHandler() {
-		return animationHandler;
-	}
-
-	@Override
-	public void workCancelled() {
-		this.animationHandler.setProgress(0f);
-		this.animationHandler.setSpeed(0f);
-	}
-
-	@Override
-	public void prepareWork() {
-	}
-
-	@Override
-	public void beginWork() {
-		// work has started, begin animation
-		this.animationHandler.setProgress(0f);
-		this.animationHandler.setSpeed(0f);
-	}
-
-	@Override
-	public void workDone() {
-		// work is done, no more animation
-		this.animationHandler.setProgress(this.animationHandler.getScale());
-		this.animationHandler.setSpeed(0f);
-	}
-
-	@Override
-	public boolean hasWork() {
-		return true;
-	}
-
-	@Override
-	public boolean canWork() {
-		return true;
-	}
-
-	@Override
-	public TileEntity getTileEntity() {
-		return this;
-	}
+    @Override
+    public TileEntity getTileEntity() {
+	return this;
+    }
 
 }

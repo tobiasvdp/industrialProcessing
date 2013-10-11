@@ -61,6 +61,7 @@ public abstract class ContainerMultiblock extends VerifyingContainer {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void updateProgressBar(int par1, int par2) {
+	    System.out.println("syncing " + par1 + " " + par2);
 		super.updateProgressBar(par1, par2);
 		IHandler handler = null;
 

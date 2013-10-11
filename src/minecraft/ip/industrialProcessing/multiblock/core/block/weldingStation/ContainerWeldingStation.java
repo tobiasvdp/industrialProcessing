@@ -31,6 +31,8 @@ public class ContainerWeldingStation extends ContainerMultiblockTankWorkerPowere
 	BindSlots(slots, inventory, this);
 
 	addTankToContainer(0);
+	addPowerToContainer(core.getMainPowerStorage());
+	addWorkerToContainer(core.getWorker());
     }
 
 }

@@ -51,10 +51,12 @@ public class HandlerPower implements IHandlerPower{
 	public void put(int index, int par2) {
 		switch (index) {
 		case 0:
-			this.power.setStoredPower(par2);
+			this.power.setStoredPower(par2);break;
 		case 1:
-			this.power.setPowerCapacity(par2);
+			this.power.setPowerCapacity(par2);break;
 		}
+		prevInfo.powerCapacity = power.getPowerCapacity();
+		prevInfo.storedPower = power.getStoredPower();
 	}
 
 	@Override
