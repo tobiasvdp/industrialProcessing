@@ -35,16 +35,18 @@ public abstract class TileEntityPoweredWorkerMachine extends TileEntityWorkerMac
     public void doWork() {
 	Recipe recipe = ((RecipeWorker) this.worker).getCurrentRecipe();
 
-	int amount = PowerWorkerHelper.getWork(this.storage, this.maxWorkSpeed);
+	if (recipe != null) {
+	    int amount = PowerWorkerHelper.getWork(this.storage, this.maxWorkSpeed);
 
-	if (recipe.powerRequired > 0)
-	    amount /= recipe.powerRequired;
+	    if (recipe.powerRequired > 0)
+		amount /= recipe.powerRequired;
 
-	int maxWork = this.storage.drainPower(amount, false);
-	int maxPower = work(maxWork);
-	if (recipe.powerRequired > 0)
-	    maxPower *= recipe.powerRequired;
-	this.storage.drainPower(maxPower, true);
+	    int maxWork = this.storage.drainPower(amount, false);
+	    int maxPower = work(maxWork);
+	    if (recipe.powerRequired > 0)
+		maxPower *= recipe.powerRequired;
+	    this.storage.drainPower(maxPower, true);
+	}
     }
 
     @Override
