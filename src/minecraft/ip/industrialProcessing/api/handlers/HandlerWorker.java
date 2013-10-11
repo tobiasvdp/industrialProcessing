@@ -54,9 +54,9 @@ public class HandlerWorker implements IHandlerWorker{
 	public void put(int index, int par2) {
 		switch (index) {
 		case 0:
-			this.worker.setWorkDone(par2);
+			this.worker.setWorkDone(par2);break;
 		case 1:
-			this.worker.setTotalWork(par2);
+			this.worker.setTotalWork(par2);break;
 		}
 	}
 

@@ -1,6 +1,8 @@
 package ip.industrialProcessing.multiblock.core.block.weldingStation;
 
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.Point;
+import org.lwjgl.util.Rectangle;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.StatCollector;
@@ -15,6 +17,9 @@ import ip.industrialProcessing.multiblock.gui.GUImultiblock;
 
 public class GuiContainerWeldingStation extends GUImultiblock{
 
+	private static final Rectangle PROGRESSBAR_SOURCE = new Rectangle(176, 0, 22, 16);
+	private static final Point PROGRESSBAR_LOCATION = new Point(70, 34);
+	
 	public GuiContainerWeldingStation(InventoryPlayer inventory, TEmultiblockCoreTankWorkerPowered entity) {
 		super(inventory, entity, new ContainerWeldingStation(inventory, entity), "Welding Table", "textures/gui/WeldingTable.png");
 	}
@@ -27,5 +32,6 @@ public class GuiContainerWeldingStation extends GUImultiblock{
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
 		super.drawGuiContainerBackgroundLayer(par1, par2, par3);
+		drawProgressBarWorker(PROGRESSBAR_SOURCE, PROGRESSBAR_LOCATION, true, 0);
 	}
 }

@@ -31,7 +31,7 @@ import ip.industrialProcessing.recipes.Recipe;
 public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowered{
 	static StructureMultiblock structure;
 	static TierCollection tierRequirments;
-	static RecipesMachine recipes = new RecipesCrusher();
+	static RecipesMachine recipes = new RecipesWeldingStation();
 	static{
 		//set layout
 		structure = new StructureMultiblock();
@@ -59,7 +59,6 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowere
 	}
 	public TEmultiblockWeldingStation() {
 		super(structure, tierRequirments,recipes, LocalDirection.LEFT,10000,100);
-		//add slots and set default IO for multiblocks
 		this.addStack(null, LocalDirection.UP, true, false);
 		this.addStack(null, LocalDirection.UP, true, false);
 		this.addStack(null, LocalDirection.UP, true, false);
@@ -76,6 +75,11 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowere
 		this.addStack(null, LocalDirection.RIGHT, false, true);	
 		
 		this.addTank(10000, 0, new ForgeDirection[]{ForgeDirection.NORTH}, true, false);
+	}
+	@Override
+	public void updateEntity() {
+	    System.out.println(worldObj + " work :" + getWorker().getWorkDone() + "/" + getWorker().getTotalWork());
+	super.updateEntity();
 	}
 	@Override
 	protected boolean isTankValidForFluid(int slot, int fluidId) {
@@ -108,7 +112,6 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowere
 	}
 	@Override
 	protected boolean isValidInput(int slot, int itemID) {
-		// TODO Auto-generated method stub
-		return false;
+		return recipes.isValidInput(slot, itemID);
 	}
 }
