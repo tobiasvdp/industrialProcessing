@@ -23,7 +23,7 @@ import net.minecraftforge.common.ForgeDirection;
 public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachine implements IRecipeFluidWorkHandler, IAnimationProgress, IAnimationSyncable {
 
     public TileEntityFluidWorkerMachine() {
-	this.serverWorker = createServerSideWorker();
+	this.worker = createServerSideWorker();
 	this.animationHandler = creatAnimationHandler();
     }
 
@@ -35,11 +35,11 @@ public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachin
 	return new RecipeFluidWorker(this);
     }
 
-    protected ServerWorker serverWorker;
+    protected ServerWorker worker;
     protected AnimationHandler animationHandler;
 
     public IWorker getWorker() {
-	return serverWorker;
+	return worker;
     }
 
     @Override
@@ -69,7 +69,7 @@ public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachin
     };
 
     private void writeWorker(NBTTagCompound nbt) {
-	WorkUtils.writeToNBT(serverWorker, nbt);
+	WorkUtils.writeToNBT(worker, nbt);
     }
 
     @Override
@@ -79,7 +79,7 @@ public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachin
     };
 
     private void readWorker(NBTTagCompound nbt) {
-	WorkUtils.readFromNBT(serverWorker, nbt);
+	WorkUtils.readFromNBT(worker, nbt);
     }
 
     @Override
