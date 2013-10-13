@@ -336,7 +336,7 @@ public class ObjConverter {
 			System.out.println("Processed "+file.title);
 			FileWriter outFile;
 			try {
-				outFile = new FileWriter("D:\\Minecraft\\forge\\mcp\\src\\minecraft\\ip\\industrialProcessing\\machines\\treetap\\model\\"+file.title + ".java");
+				outFile = new FileWriter("D:\\Minecraft\\forge\\mcp\\src\\minecraft\\ip\\industrialProcessing\\transport\\items\\conveyorModels\\"+file.title + ".java");
 				PrintWriter out = new PrintWriter(outFile);
 				out.print(file.toString());
 				out.close();

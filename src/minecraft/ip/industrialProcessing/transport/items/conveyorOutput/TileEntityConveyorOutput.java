@@ -9,10 +9,13 @@ import java.util.Arrays;
 public class TileEntityConveyorOutput extends TileEntityConveyorInventoryBase {
 
 	public TileEntityConveyorOutput() {
-		super();
-		Arrays.fill(this.connections, ConnectionMode.INVENTORYOUTPUT);
+		super(); 
 		setConnectionMode(LocalDirection.FRONT, ConnectionMode.INPUT);
-		setConnectionMode(LocalDirection.BACK, ConnectionMode.OUTPUT);
+		setConnectionMode(LocalDirection.BACK, ConnectionMode.INPUT);
+        setConnectionMode(LocalDirection.LEFT, ConnectionMode.INPUT);
+        setConnectionMode(LocalDirection.LEFT, ConnectionMode.INPUT);
+        setConnectionMode(LocalDirection.UP, ConnectionMode.INPUT);
+        setConnectionMode(LocalDirection.DOWN, ConnectionMode.INVENTORYOUTPUT);
 	}
 
 }
