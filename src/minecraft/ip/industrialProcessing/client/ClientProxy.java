@@ -109,11 +109,13 @@ import ip.industrialProcessing.transport.fluids.models.pipe.ModelValveBlock;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorBelt;
 import ip.industrialProcessing.transport.items.conveyorBelt.rendering.ModelConveyorBeltTile;
 import ip.industrialProcessing.transport.items.conveyorInput.ModelConveyorInput;
-import ip.industrialProcessing.transport.items.conveyorInput.TileEntityConveyorInput;
 import ip.industrialProcessing.transport.items.conveyorModels.ModelConveyorBeltBlock;
 import ip.industrialProcessing.transport.items.conveyorModels.ModelConveyorOutputBlock;
 import ip.industrialProcessing.transport.items.conveyorOutput.ModelConveyorOutput;
 import ip.industrialProcessing.transport.items.conveyorOutput.TileEntityConveyorOutput;
+import ip.industrialProcessing.transport.items.conveyorSorter.ModelConveyorSorter;
+import ip.industrialProcessing.transport.items.conveyorSorter.ModelConveyorSorterBlock;
+import ip.industrialProcessing.transport.items.conveyorSorter.TileEntityConveyorSorter;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
@@ -166,8 +168,10 @@ public class ClientProxy extends CommonProxy {
     private static final ModelConnected conveyorBelt = new ModelConveyorBeltTile();
     private static final ModelBlock conveyorBeltBlock = new ModelConveyorBeltBlock();
     private static final ModelBlock conveyorOutputBlock = new ModelConveyorOutputBlock();
+    private static final ModelBlock conveyorSorterBlock = new ModelConveyorSorterBlock();
     private static final ModelConnected conveyorInput = new ModelConveyorInput();
-    private static final ModelConnected conveyorOutput = new ModelConveyorOutput();
+    private static final ModelConnected conveyorOutput = new ModelConveyorOutput(); 
+    private static final ModelConnected conveyorSorter = new ModelConveyorSorter();
     private static final ModelBlock platform = new ModelPlatform();
     private static final ModelBlock stairs = new ModelStairs();
     private static final ModelBlock crystal = new ModelCrystal();
@@ -197,6 +201,11 @@ public class ClientProxy extends CommonProxy {
         RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererManualTreeTapID(), manualTreeTapBlock));
 
         // block & tile entity
+
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityConveyorSorter.class, new RendererTileEntityConnected(IndustrialProcessing.blockConveyorSorter, "ModelConveyorSorter", conveyorSorter));
+
+        ConfigRenderers.setRendererConveyorSorterID(RenderingRegistry.getNextAvailableRenderId());
+        RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererConveyorSorterID(), conveyorSorterBlock));
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTank.class, new RendererTileEntityConnectedFluid(IndustrialProcessing.blockTank, "ModelTank", tankEntity));
 
@@ -338,7 +347,6 @@ public class ClientProxy extends CommonProxy {
         ConfigRenderers.setRendererMultiblockBlastFurnaceTowerID(RenderingRegistry.getNextAvailableRenderId());
         RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getrendererMultiblockBlastFurnaceTowerID(), new TEmultiblockBlastFurnaceTower()));
 
-  
         ConfigRenderers.setBLmultiblockLiftDoor(RenderingRegistry.getNextAvailableRenderId());
         RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getBLmultiblockLiftDoor(), new TEmultiblockLiftDoor()));
 

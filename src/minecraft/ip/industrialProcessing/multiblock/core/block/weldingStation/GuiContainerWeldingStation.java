@@ -1,20 +1,27 @@
 package ip.industrialProcessing.multiblock.core.block.weldingStation;
 
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.Point;
+import org.lwjgl.util.Rectangle;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.StatCollector;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
+import ip.industrialProcessing.multiblock.container.ContainerMultiblock;
+import ip.industrialProcessing.multiblock.container.ContainerMultiblockTankWorkerPowered;
 import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
 import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreInv;
 import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.multiblock.gui.CTmultiblock;
 import ip.industrialProcessing.multiblock.gui.GUImultiblock;
 
-public class GUIWeldingStation extends GUImultiblock{
+public class GuiContainerWeldingStation extends GUImultiblock{
 
-	public GUIWeldingStation(InventoryPlayer inventory, TEmultiblockCoreTankWorkerPowered entity) {
-		super(inventory, entity, new CTWeldingStation(inventory, entity), "Welding Table", "textures/gui/WeldingTable.png");
+	private static final Rectangle PROGRESSBAR_SOURCE = new Rectangle(176, 0, 22, 16);
+	private static final Point PROGRESSBAR_LOCATION = new Point(70, 34);
+	
+	public GuiContainerWeldingStation(InventoryPlayer inventory, TEmultiblockCoreTankWorkerPowered entity) {
+		super(inventory, entity, new ContainerWeldingStation(inventory, entity), "Welding Table", "textures/gui/WeldingTable.png");
 	}
 
 	@Override
@@ -25,5 +32,6 @@ public class GUIWeldingStation extends GUImultiblock{
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
 		super.drawGuiContainerBackgroundLayer(par1, par2, par3);
+		drawProgressBarWorker(PROGRESSBAR_SOURCE, PROGRESSBAR_LOCATION, true, 0);
 	}
 }

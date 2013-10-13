@@ -2,13 +2,14 @@ package ip.industrialProcessing.machines.containers;
 
 import ip.industrialProcessing.machines.TileEntityFluidMachine;
 import net.minecraftforge.fluids.FluidTankInfo;
+import net.minecraftforge.fluids.IFluidContainerItem;
 
 public class ProgressBarTankHandler implements IProgressBarHandler {
 
-	private TileEntityFluidMachine machine;
+	private IFluidMachineContainerEntity machine;
 	private int slot;
 
-	public ProgressBarTankHandler(TileEntityFluidMachine machine, int slot) {
+	public ProgressBarTankHandler(IFluidMachineContainerEntity machine, int slot) {
 		this.machine = machine;
 		this.slot = slot;
 	}

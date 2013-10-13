@@ -23,7 +23,7 @@ public class BlockTank extends BlockMachineRendered {
     private Icon tankFeaturesIcon;
 
     public BlockTank() {
-        super(ConfigTransportBlocks.getBlockTransportFluidTankID(), Material.iron, 1F, Block.soundMetalFootstep, "Fluid Tank", IndustrialProcessing.tabOreProcessing);
+        super(ConfigTransportBlocks.getBlockTransportFluidTankID(), Material.iron, 1F, Block.soundMetalFootstep, "Fluid Tank", IndustrialProcessing.tabFluid);
     }
 
     @Override

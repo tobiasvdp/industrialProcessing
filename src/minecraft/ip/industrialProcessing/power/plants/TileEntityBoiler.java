@@ -134,4 +134,8 @@ public class TileEntityBoiler extends TileEntityFluidWorkerMachine implements IH
 		return this.tankHandler;
 	}
 
+	@Override
+	public void addPressure(ForgeDirection from, float pressure) { 
+	}
+
 }

@@ -84,8 +84,7 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
 
         // register listeners for events
         MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
-        MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.register(new EventHookContainerClass());
+        MinecraftForge.EVENT_BUS.register(this); 
         MinecraftForge.EVENT_BUS.register(new EventBonemealIndustrialTree());
 
         log = event.getModLog();

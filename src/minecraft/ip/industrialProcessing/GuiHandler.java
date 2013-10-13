@@ -58,8 +58,8 @@ import ip.industrialProcessing.machines.treetap.GuiContainerAutomaticTreeTap;
 import ip.industrialProcessing.machines.treetap.GuiContainerManualTreeTap;
 import ip.industrialProcessing.machines.treetap.TileEntityAutomaticTreeTap;
 import ip.industrialProcessing.machines.treetap.TileEntityManualTreeTap;
-import ip.industrialProcessing.multiblock.core.block.weldingStation.CTWeldingStation;
-import ip.industrialProcessing.multiblock.core.block.weldingStation.GUIWeldingStation;
+import ip.industrialProcessing.multiblock.core.block.weldingStation.ContainerWeldingStation;
+import ip.industrialProcessing.multiblock.core.block.weldingStation.GuiContainerWeldingStation;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.dummy.block.toggleButton.GUImultiblockToggleButton;
 import ip.industrialProcessing.multiblock.dummy.block.toggleButton.TEmultiblockToggleButton;
@@ -78,6 +78,9 @@ import ip.industrialProcessing.power.plants.TileEntityBoiler;
 import ip.industrialProcessing.power.plants.TileEntityGenerator;
 import ip.industrialProcessing.power.plants.TileEntitySolidBurner;
 import ip.industrialProcessing.power.plants.TileEntityTurbine;
+import ip.industrialProcessing.transport.items.conveyorSorter.ContainerSorter;
+import ip.industrialProcessing.transport.items.conveyorSorter.GuiContainerSorter;
+import ip.industrialProcessing.transport.items.conveyorSorter.TileEntityConveyorSorter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -131,7 +134,7 @@ public class GuiHandler implements IGuiHandler {
             if (entity instanceof TileEntityTurbine)
                 return new ContainerTurbine(player.inventory, (TileEntityTurbine) entity);
             if (entity instanceof TEmultiblockWeldingStation)
-                return new CTWeldingStation(player.inventory, (TEmultiblockWeldingStation) entity);
+                return new ContainerWeldingStation(player.inventory, (TEmultiblockWeldingStation) entity);
             if (entity instanceof TileEntityIncubator)
                 return new ContainerIncubator(player.inventory, (TileEntityIncubator) entity);
             if (entity instanceof TileEntityWaterTreatmentStation)
@@ -142,6 +145,8 @@ public class GuiHandler implements IGuiHandler {
                 return new ContainerManualTreeTap(player.inventory, (TileEntityManualTreeTap) entity);
             if (entity instanceof TileEntityAutomaticTreeTap)
                 return new ContainerAutomaticTreeTap(player.inventory, (TileEntityAutomaticTreeTap) entity);
+            if (entity instanceof TileEntityConveyorSorter)
+                return new ContainerSorter(player.inventory, (TileEntityConveyorSorter) entity);
         } else if (ID == GUIDE_ID)
             return null;
         return null;
@@ -191,7 +196,7 @@ public class GuiHandler implements IGuiHandler {
             if (entity instanceof TileEntityTurbine)
                 return new GuiContainerTurbine(player.inventory, (TileEntityTurbine) entity);
             if (entity instanceof TEmultiblockWeldingStation)
-                return new GUIWeldingStation(player.inventory, (TEmultiblockWeldingStation) entity);
+                return new GuiContainerWeldingStation(player.inventory, (TEmultiblockWeldingStation) entity);
             if (entity instanceof TEmultiblockToggleButton)
                 return new GUImultiblockToggleButton((TEmultiblockToggleButton) entity, player);
             if (entity instanceof TileEntityIncubator)
@@ -204,6 +209,8 @@ public class GuiHandler implements IGuiHandler {
                 return new GuiContainerManualTreeTap(player.inventory, (TileEntityManualTreeTap) entity);
             if (entity instanceof TileEntityAutomaticTreeTap)
                 return new GuiContainerAutomaticTreeTap(player.inventory, (TileEntityAutomaticTreeTap) entity);
+            if (entity instanceof TileEntityConveyorSorter)
+                return new GuiContainerSorter(player.inventory, (TileEntityConveyorSorter) entity);
         } else if (ID == GUIDE_ID)
             return new GuiGuide(player);
         return null;

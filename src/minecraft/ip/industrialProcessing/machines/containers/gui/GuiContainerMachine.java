@@ -2,10 +2,10 @@ package ip.industrialProcessing.machines.containers.gui;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.client.render.gui.ToolTip;
-import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.machines.containers.ContainerMachine;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
@@ -15,14 +15,14 @@ import org.lwjgl.util.Rectangle;
 
 public class GuiContainerMachine extends GuiContainer {
 
-    public TileEntityMachine tileEntity;
+    public TileEntity tileEntity;
     protected String name;
     protected ResourceLocation textureLocation;
     protected int mouseX;
     protected int mouseY;
     protected ToolTip toolTip;
 
-    public GuiContainerMachine(InventoryPlayer inventoryPlayer, TileEntityMachine tileEntity, ContainerMachine container, String name, String textureLocation) {
+    public GuiContainerMachine(InventoryPlayer inventoryPlayer, TileEntity tileEntity, ContainerMachine container, String name, String textureLocation) {
 	super(container);
 	this.tileEntity = tileEntity;
 	this.name = name;

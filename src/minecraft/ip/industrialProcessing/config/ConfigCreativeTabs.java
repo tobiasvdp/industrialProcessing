@@ -13,9 +13,11 @@ public class ConfigCreativeTabs {
 		LanguageRegistry.instance().addStringLocalization("IP.itemGroup.tabOres", "en_US", "IP ores");
 		((CreativeTabsIP) IndustrialProcessing.tabOres).setIcon(new ItemStack(IndustrialProcessing.itemIronCrushedChunks));
 		LanguageRegistry.instance().addStringLocalization("IP.itemGroup.tabPower", "en_US", "IP Power");
-		((CreativeTabsIP) IndustrialProcessing.tabPower).setIcon(new ItemStack(IndustrialProcessing.blockWire));
+		((CreativeTabsIP) IndustrialProcessing.tabPower).setIcon(new ItemStack(IndustrialProcessing.blockEnergyCell));
 		LanguageRegistry.instance().addStringLocalization("IP.itemGroup.tabMultiblocks", "en_US", "IP Multiblocks");
-		((CreativeTabsIP) IndustrialProcessing.tabMultiblocks).setIcon(new ItemStack(IndustrialProcessing.BLmultiblockWheelConnector));
+		((CreativeTabsIP) IndustrialProcessing.tabMultiblocks).setIcon(new ItemStack(IndustrialProcessing.BLmultiblockDisplayPanel));
+		LanguageRegistry.instance().addStringLocalization("IP.itemGroup.tabFluid", "en_US", "IP Fluids");
+		((CreativeTabsIP) IndustrialProcessing.tabFluid).setIcon(new ItemStack(IndustrialProcessing.blockManometer));
 
 	}
 	

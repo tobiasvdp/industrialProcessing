@@ -12,28 +12,37 @@ import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.power.IPoweredMachine;
 import ip.industrialProcessing.power.PowerHelper;
+import ip.industrialProcessing.recipes.Recipe;
+import ip.industrialProcessing.recipes.RecipeWorker;
 
 public abstract class TEmultiblockCoreTankWorkerPowered extends TEmultiblockCoreTankWorker implements IPoweredMachine {
 
-    public TEmultiblockCoreTankWorkerPowered(StructureMultiblock structure, TierCollection tierRequirments, RecipesMachine recipe, LocalDirection powerInput,int powerCapacity, int maxWorkSpeed) {
+    public TEmultiblockCoreTankWorkerPowered(StructureMultiblock structure, TierCollection tierRequirments, RecipesMachine recipe, LocalDirection powerInput, int powerCapacity, int maxWorkSpeed) {
 	super(structure, tierRequirments, recipe);
-	this.powerInputSide = powerInput; 
+	this.powerInputSide = powerInput;
 	this.maxWorkSpeed = maxWorkSpeed;
 	this.storage = new SimplePowerStorage(powerCapacity);
     }
 
     private LocalDirection powerInputSide;
     private int maxWorkSpeed;
-
     private SimplePowerStorage storage;
 
     @Override
     public void doWork() {
-	int amount = PowerWorkerHelper.getWork(this.storage, this.maxWorkSpeed);
+	Recipe recipe = ((RecipeWorker) this.getWorker()).getCurrentRecipe();
 
-	int maxWork = this.storage.drainPower(amount, false);
-	int maxPower = work(maxWork);
-	this.storage.drainPower(maxPower, true);
+	int amount = PowerWorkerHelper.getWork(this.storage, this.maxWorkSpeed);
+	if (recipe != null) {
+	    if (recipe.powerRequired > 0)
+		amount /= recipe.powerRequired;
+
+	    int maxWork = this.storage.drainPower(amount, false);
+	    int maxPower = work(maxWork);
+	    if (recipe.powerRequired > 0)
+		maxPower *= recipe.powerRequired;
+	    this.storage.drainPower(maxPower, true);
+	}
     }
 
     @Override

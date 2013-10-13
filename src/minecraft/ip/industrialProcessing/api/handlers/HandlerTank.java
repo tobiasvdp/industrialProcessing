@@ -1,5 +1,7 @@
 package ip.industrialProcessing.api.handlers;
 
+import ip.industrialProcessing.api.tanks.IIPfluidTank;
+import ip.industrialProcessing.api.tanks.IPfluidTank;
 import ip.industrialProcessing.api.tanks.ITank;
 import ip.industrialProcessing.machines.TileEntityFluidMachine;
 import ip.industrialProcessing.machines.containers.ProgressBarHandlerInfo;
@@ -7,18 +9,13 @@ import ip.industrialProcessing.machines.containers.ProgressInfoTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 
 public class HandlerTank implements IHandlerTank {
-    private ITank tank;
-    private int slot;
-    private boolean[] hasChanged;
+    private IPfluidTank tank;
+    private InfoTank prevInfo;
     private int offset;
 
-    public HandlerTank(ITank tank, int slot) {
+    public HandlerTank(IPfluidTank tank) {
 	this.tank = tank;
-	this.slot = slot;
-	this.hasChanged = new boolean[getValueCount()];
-	for (int i = 0; i < getValueCount(); i++) {
-	    hasChanged[i] = false;
-	}
+	prevInfo = new InfoTank();
     }
 
     @Override
@@ -29,40 +26,15 @@ public class HandlerTank implements IHandlerTank {
     @Override
     public int getValue(int i) {
 
-	/*FluidTankInfo tank = this.tank.getTankInfoForSlot(this.slot);
 	switch (i) {
 	case 0:
-	    return tank.fluid == null ? 0 : tank.fluid.amount;
+	    return tank.getFluidAmount();
 	case 1:
-	    return tank.capacity;
+	    return tank.getTankCapacity();
 	case 2:
-	    return tank.fluid == null ? -1 : tank.fluid.fluidID;
-	}*/
+	    return tank.getFluidID();
+	}
 	return 0;
-    }
-
-    @Override
-    public int[] getValueStorage() {
-	/*int[] value = new int[3];
-	FluidTankInfo tank = this.tank.getTankInfoForSlot(this.slot);
-	value[0] = tank.fluid == null ? 0 : tank.fluid.amount;
-	value[1] = tank.capacity;
-	value[2] = tank.fluid == null ? -1 : tank.fluid.fluidID;
-	return value;*/return null;
-    }
-
-    public static InfoTank getInfo(IHandlerTank handler) {
-	InfoTank value = new InfoTank();
-	int[] store = handler.getValueStorage();
-	value.amount = store[0];
-	value.capacity = store[1];
-	value.fluidId = store[2];
-	return value;
-    }
-
-    @Override
-    public boolean hasChanged(int i) {
-	return hasChanged[i];
     }
 
     @Override
@@ -77,16 +49,42 @@ public class HandlerTank implements IHandlerTank {
 
     @Override
     public void put(int index, int par2) {
-	/*hasChanged[index] = true;
-	tank.getTankInfoForSlot(par2);
 	switch (index) {
 	case 0:
-	    this.tank.setTankAmount(par2);
+	    this.tank.setFluidAmount(par2);break;
 	case 1:
-	    this.tank.setTankCapacity(par2);
+	    this.tank.setTankCapacity(par2);break;
 
 	case 2:
-	    this.tank.setTankFluidID(par2);
-	}*/
+	    this.tank.setFluidID(par2);break;
+	}
     }
+
+	@Override
+	public int getPrevValue(int i) {
+		switch (i) {
+		case 0:
+		    return prevInfo.amount;
+		case 1:
+		    return prevInfo.capacity;
+		case 2:
+		    return prevInfo.fluidId;
+		}
+		return 0;
+	}
+
+	@Override
+	public void newToOldValues() {
+		prevInfo.amount = tank.getFluidAmount();
+		prevInfo.capacity = tank.getTankCapacity();
+		prevInfo.fluidId = tank.getFluidID();
+	}
+
+	public static InfoTank getInfo(IHandlerTank handler) {
+		InfoTank tankInfo = new InfoTank();
+		tankInfo.amount = handler.getValue(0);
+		tankInfo.capacity = handler.getValue(1);
+		tankInfo.fluidId = handler.getValue(2);
+		return tankInfo;
+	}
 }

@@ -3,6 +3,7 @@ package ip.industrialProcessing.machines;
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.IFluidInfo;
+import ip.industrialProcessing.machines.containers.IFluidMachineContainerEntity;
 import ip.industrialProcessing.transport.fluids.IPressuredTank;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
-public abstract class TileEntityFluidMachine extends TileEntityMachine implements IFluidHandler, IMachineTanks, IFluidInfo, IPressuredTank {
+public abstract class TileEntityFluidMachine extends TileEntityMachine implements IFluidHandler, IMachineTanks, IFluidInfo, IPressuredTank, IFluidMachineContainerEntity {
 
 	private int[][] fluidTankSideslots = new int[6][0];
 	private ArrayList<MachineFluidTank> fluidTanks = new ArrayList<MachineFluidTank>();
@@ -429,5 +430,9 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine implement
 			}
 		}
 		return pressure * 500 / info.length;
+	}
+	
+	@Override
+	public void addPressure(ForgeDirection from, float pressure) { 
 	}
 }

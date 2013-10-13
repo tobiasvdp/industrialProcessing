@@ -2,6 +2,7 @@ package ip.industrialProcessing.multiblock.container;
 
 import java.util.ArrayList;
 
+import net.minecraft.entity.player.InventoryPlayer;
 import ip.industrialProcessing.api.handlers.HandlerWorker;
 import ip.industrialProcessing.api.handlers.IHandlerWorker;
 import ip.industrialProcessing.api.handlers.InfoWorker;
@@ -17,8 +18,8 @@ public class ContainerMultiblockTankWorker extends ContainerMultiblockTank {
 
 	private TEmultiblockCoreTankWorker core;
 
-	public ContainerMultiblockTankWorker(TEmultiblockCoreTankWorker core) {
-		super(core);
+	public ContainerMultiblockTankWorker(InventoryPlayer inventory,TEmultiblockCoreTankWorker core) {
+		super(inventory,core);
 		this.core = core;
 	}
 	ArrayList<IHandlerWorker> workerHandlers = new ArrayList<IHandlerWorker>();

@@ -43,7 +43,7 @@ public class ModelCrystal extends ModelBlock {
 		Icon icon = block.getIcon(0, 0);
 		Vector3f position = new Vector3f(-0.5f, -0.5f, -0.5f);
 		GL11.glPushMatrix();
-		GL11.glTranslatef(0, 0.25f, 0);
+		GL11.glTranslatef(0, 0.45f, 0);
 		GL11.glScalef(2f, 2f, 2f);
 
 		Random rnd = new Random(0);

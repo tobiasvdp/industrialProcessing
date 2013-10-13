@@ -31,7 +31,7 @@ import ip.industrialProcessing.recipes.Recipe;
 public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowered{
 	static StructureMultiblock structure;
 	static TierCollection tierRequirments;
-	static RecipesMachine recipes = new RecipesCrusher();
+	static RecipesMachine recipes = new RecipesWeldingStation();
 	static{
 		//set layout
 		structure = new StructureMultiblock();
@@ -59,7 +59,6 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowere
 	}
 	public TEmultiblockWeldingStation() {
 		super(structure, tierRequirments,recipes, LocalDirection.LEFT,10000,100);
-		//add slots and set default IO for multiblocks
 		this.addStack(null, LocalDirection.UP, true, false);
 		this.addStack(null, LocalDirection.UP, true, false);
 		this.addStack(null, LocalDirection.UP, true, false);
@@ -78,36 +77,41 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowere
 		this.addTank(10000, 0, new ForgeDirection[]{ForgeDirection.NORTH}, true, false);
 	}
 	@Override
+	public void updateEntity() {
+	    System.out.println(worldObj + " work :" + getWorker().getWorkDone() + "/" + getWorker().getTotalWork());
+	super.updateEntity();
+	}
+	@Override
 	protected boolean isTankValidForFluid(int slot, int fluidId) {
-	    return false;
+	    return true;
+	}
+	@Override
+	public boolean tankContains(int slot, int itemId, int amount) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public boolean tankHasRoomFor(int slot, FluidStack stack) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public boolean tankHasRoomFor(int slot, int itemId, int amount) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public boolean addToTank(int index, int itemId, int amount) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public boolean removeFromTank(int index, int itemId, int amount) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	@Override
 	protected boolean isValidInput(int slot, int itemID) {
 		return recipes.isValidInput(slot, itemID);
-	}
-	@Override
-	public boolean tankContains(int slot, int itemId, int amount) {
-	    // TODO Auto-generated method stub
-	    return false;
-	}
-	@Override
-	public boolean tankHasRoomFor(int slot, FluidStack stack) {
-	    // TODO Auto-generated method stub
-	    return false;
-	}
-	@Override
-	public boolean tankHasRoomFor(int slot, int itemId, int amount) {
-	    // TODO Auto-generated method stub
-	    return false;
-	}
-	@Override
-	public boolean addToTank(int index, int itemId, int amount) {
-	    // TODO Auto-generated method stub
-	    return false;
-	}
-	@Override
-	public boolean removeFromTank(int index, int itemId, int amount) {
-	    // TODO Auto-generated method stub
-	    return false;
 	}
 }

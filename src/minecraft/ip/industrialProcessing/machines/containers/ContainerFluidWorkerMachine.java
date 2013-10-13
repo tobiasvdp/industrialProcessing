@@ -6,12 +6,13 @@ import ip.industrialProcessing.utils.working.IWorker;
 import java.util.ArrayList;
 
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.tileentity.TileEntity;
 
-public class ContainerFluidWorkerMachine extends ContainerFluidMachine {
+public class ContainerFluidWorkerMachine<T extends TileEntity & IMachineContainerEntity & IFluidMachineContainerEntity> extends ContainerFluidMachine<T> {
 
-	private TileEntityFluidWorkerMachine workerEntity;
+	private T workerEntity;
 
-	public ContainerFluidWorkerMachine(InventoryPlayer inventoryPlayer, TileEntityFluidWorkerMachine tileEntity) {
+	public ContainerFluidWorkerMachine(InventoryPlayer inventoryPlayer, T tileEntity) {
 		super(inventoryPlayer, tileEntity);
 		this.workerEntity = tileEntity;
 	}

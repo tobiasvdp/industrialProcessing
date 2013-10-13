@@ -19,9 +19,9 @@ public class RecipesWeldingStation extends RecipesMachine {
 	private Recipe something(int workTime, int power) {
 		Recipe recipe = new Recipe();
 		
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(1, Item.coal.itemID, RecipeSlotType.INVENTORY, 1) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.coal.itemID, RecipeSlotType.INVENTORY, 1) };
 		
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(13, IndustrialProcessing.itemCoalDust.itemID, RecipeSlotType.INVENTORY, 1, 3, 0) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(13, IndustrialProcessing.itemCoalDust.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
 		
 		recipe.workRequired = workTime;
 		recipe.powerRequired = power;

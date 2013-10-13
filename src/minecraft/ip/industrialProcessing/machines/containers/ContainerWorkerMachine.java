@@ -8,13 +8,14 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;
+import net.minecraft.tileentity.TileEntity;
 
-public class ContainerWorkerMachine extends ContainerMachine {
+public class ContainerWorkerMachine<T extends TileEntity & IMachineContainerEntity> extends ContainerMachine<T> {
 
-	private TileEntityWorkerMachine workerEntity;
+	private T workerEntity;
 
 	public ContainerWorkerMachine(InventoryPlayer inventoryPlayer,
-			TileEntityWorkerMachine tileEntity) {
+			T tileEntity) {
 		super(inventoryPlayer, tileEntity);
 		this.workerEntity = tileEntity;
 	}

@@ -8,15 +8,12 @@ import ip.industrialProcessing.utils.working.IWorker;
 public class HandlerWorker implements IHandlerWorker{
 
 	private IWorker worker;
-	private boolean[] hasChanged;
+	private InfoWorker prevInfo;
 	private int offset;
 
 	public HandlerWorker(IWorker worker) {
 		this.worker = worker;
-		this.hasChanged = new boolean[getValueCount()];
-		for(int i = 0;i<getValueCount();i++){
-		    hasChanged[i] = false;
-		}
+		prevInfo = new InfoWorker();
 	}
 	
 	@Override
@@ -34,26 +31,14 @@ public class HandlerWorker implements IHandlerWorker{
 		}
 		return 0;
 	}
-	
-	@Override
-	public int[] getValueStorage() {
-		int[] value = new int[2];
-		value[0] = worker.getWorkDone();
-		value[1] = worker.getTotalWork();
-		return value;
-	}
+
 
 	public static InfoWorker getInfo(IHandlerWorker handler)
 	{
-		InfoWorker info = new InfoWorker();
-		int[] values = handler.getValueStorage();
-		info.workDone = values[0];
-		info.totalWork = values[1];
-		return info;
-	}
-	@Override
-	public boolean hasChanged(int i) {
-	    return hasChanged[i];
+		InfoWorker workerInfo = new InfoWorker();
+		workerInfo.workDone = handler.getValue(0);
+		workerInfo.totalWork = handler.getValue(1);
+		return workerInfo;
 	}
 	@Override
 	public int getIndexOffset() {
@@ -67,12 +52,28 @@ public class HandlerWorker implements IHandlerWorker{
 
 	@Override
 	public void put(int index, int par2) {
-	    hasChanged[index] = true;
 		switch (index) {
 		case 0:
-			this.worker.setWorkDone(par2);
+			this.worker.setWorkDone(par2);break;
 		case 1:
-			this.worker.setTotalWork(par2);
+			this.worker.setTotalWork(par2);break;
 		}
+	}
+
+	@Override
+	public int getPrevValue(int i) {
+		switch (i) {
+		case 0:
+		    return prevInfo.workDone;
+		case 1:
+		    return prevInfo.totalWork;
+		}
+		return 0;
+	}
+
+	@Override
+	public void newToOldValues() {
+		prevInfo.totalWork = worker.getTotalWork();
+		prevInfo.workDone = worker.getWorkDone();
 	}
 }

@@ -21,8 +21,7 @@ import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 
 public abstract class BlockConveyorBase extends BlockMachineRendered {
-
-	private ItemStack tool = new ItemStack(IndustrialProcessing.itemHexKey, 1);
+ 
 
 	public BlockConveyorBase(int blockID, Material material, float hardness, StepSound stepSound, String name, CreativeTabs creativeTab) {
 		super(blockID, material, hardness, stepSound, name, creativeTab);
@@ -76,11 +75,12 @@ public abstract class BlockConveyorBase extends BlockMachineRendered {
 
 		ItemStack playerItem = player.inventory.getCurrentItem();
 
-		if (playerItem != null && tool.isItemEqual(playerItem)) {
+		if (playerItem != null && (playerItem.itemID == IndustrialProcessing.itemHexKey.itemID)) {
 			TileEntityConveyorConnectionsBase conveyorBelt = (TileEntityConveyorConnectionsBase) world.getBlockTileEntity(x, y, z);
 			conveyorBelt.toggleSlope();
 			return false;
 		}
+		
 		return false;
 	}
 
