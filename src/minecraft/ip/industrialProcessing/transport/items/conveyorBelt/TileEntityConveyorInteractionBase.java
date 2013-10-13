@@ -88,7 +88,7 @@ public abstract class TileEntityConveyorInteractionBase extends TileEntityConvey
 		}
 	}
 
-	private void addCollisionBox(List par6List, AxisAlignedBB par5AxisAlignedBB, double xMin, double yMin, double zMin, double xMax, double yMax, double zMax) {
+	protected void addCollisionBox(List par6List, AxisAlignedBB par5AxisAlignedBB, double xMin, double yMin, double zMin, double xMax, double yMax, double zMax) {
 		AxisAlignedBB bb = AxisAlignedBB.getBoundingBox(xCoord + xMin, yCoord + yMin, zCoord + zMin, xCoord + xMax, yCoord + yMax, zCoord + zMax);
 		if (bb.intersectsWith(par5AxisAlignedBB)) {
 			par6List.add(bb);

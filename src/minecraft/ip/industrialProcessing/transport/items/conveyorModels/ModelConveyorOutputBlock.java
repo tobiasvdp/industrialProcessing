@@ -1,6 +1,7 @@
 package ip.industrialProcessing.transport.items.conveyorModels;
 
 import ip.industrialProcessing.DirectionUtils;
+import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.api.rendering.wavefront.ObjRotator;
 import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
@@ -33,7 +34,7 @@ public class ModelConveyorOutputBlock extends ModelBlock {
         Icon icon1 = block.getIcon(1, 0);
         Icon icon2 = block.getIcon(2, 0);
 
-        bottom.renderMesh(true, icon, position);
+        bottom.renderMesh(true, icon2, position);
 
         for (int i = 0; i < 4; i++) {
             hopperSideFull.getRotated(i).renderMesh(true, icon1, position);
@@ -52,11 +53,12 @@ public class ModelConveyorOutputBlock extends ModelBlock {
 
         if (entity instanceof TileEntityConveyorConnectionsBase) {
             TileEntityConveyorConnectionsBase belt = (TileEntityConveyorConnectionsBase) entity;
-
-            Icon icon = reference.getIcon(0);
-            Icon icon1 = reference.getIcon(1);
-            Icon icon2 = reference.getIcon(2);
-            bottom.renderMesh(false, icon, reference);
+ 
+            
+            Icon iconConveyor = reference.getIcon(0);
+            Icon iconSide = reference.getIcon(1);
+            Icon iconHopper = reference.getIcon(2);
+            bottom.renderMesh(false, iconHopper, reference);
 
             for (int i = 2; i < 6; i++) {
 
@@ -67,10 +69,10 @@ public class ModelConveyorOutputBlock extends ModelBlock {
                 
                 dir =  4 - BlockMachine.getMetadataFromForward(direction)+1;
                 if (state.isConnected()) {
-                    hopperSideIntake.getRotated(dir).renderMesh(false, icon1, reference);
-                    hopperIntakeConveyor.getRotated(dir).renderMesh(false, icon2, reference);
+                    hopperSideIntake.getRotated(dir).renderMesh(false, iconSide, reference);
+                    hopperIntakeConveyor.getRotated(dir).renderMesh(false, iconConveyor, reference);
                 } else {
-                    hopperSideFull.getRotated(dir).renderMesh(false, icon1, reference);
+                    hopperSideFull.getRotated(dir).renderMesh(false, iconSide, reference);
                 }
             }
         }
