@@ -14,7 +14,7 @@ import net.minecraftforge.common.ForgeDirection;
 
 public abstract class TileEntityConveyorInventoryBase extends TileEntityConveyorInteractionBase {
 
-	private int updateCycle = 20;
+	private int updateCycle = 10;
 	private int ticks = 0;
 
 	@Override
@@ -40,8 +40,8 @@ public abstract class TileEntityConveyorInventoryBase extends TileEntityConveyor
 					return getConnectionFromMode(mode);
 				} else
 					return TransportConnectionState.NONE;
-			} else
-				return getConnectionFromMode(mode);
+			}// else
+			//	return getConnectionFromMode(mode);
 		}
 		return TransportConnectionState.NONE;
 	}
