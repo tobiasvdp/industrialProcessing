@@ -33,6 +33,9 @@ public class FluidTree {
             if (validateCandidate(current, world, x, y, z)) {
                 candidateSet.add(current);
             }
+            // stop as soon as a candidate is found.
+            if (!candidateSet.isEmpty())
+                return false;
             for (int i = 0; i < 6; i++) {
                 ForgeDirection direction = ForgeDirection.getOrientation(i);
                 FluidCoordinate neighbor = getNeighbor(current, direction, world, x, y, z);
@@ -52,7 +55,7 @@ public class FluidTree {
     }
 
     protected boolean validateCandidate(FluidCoordinate current, World world, int x, int y, int z) {
-        int blockId = current.blockId;  
+        int blockId = current.blockId;
         // id >= 0 && !air .. results in id > 0
         if (blockId > 0 && blockId < Block.blocksList.length) {
             return FluidUtils.canDrainBlock(blockId, world, x + current.x, y + current.y, z + current.z);
@@ -116,7 +119,7 @@ public class FluidTree {
             if (block instanceof IFluidBlock)
                 return true;
             if (block instanceof BlockFluid)
-                return true; 
+                return true;
         }
         return false;
     }

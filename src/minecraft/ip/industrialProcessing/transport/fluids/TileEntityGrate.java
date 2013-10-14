@@ -39,7 +39,7 @@ public class TileEntityGrate extends TileEntityFluidMachine {
 
         FluidTank tank = getTankInSlot(0);
         skip++;
-        if (skip == 20) {
+        if (skip == 10) {
             skip = 0;
             if (this.pressure > 0) {
                 if (tank.getFluidAmount() > FluidContainerRegistry.BUCKET_VOLUME) {
