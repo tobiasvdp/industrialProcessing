@@ -10,6 +10,7 @@ public class ConfigTransportBlocks {
 	private int blockTransportFluidManometerID = IndustrialProcessing.config.get(ConfigCategories.transport.toString(),"FluidManometerID",3503).getInt();
 	private int blockTransportFluidRainTankID = IndustrialProcessing.config.get(ConfigCategories.transport.toString(),"FluidRaintankID",3504).getInt();
 	private int blockTransportFluidValveID = IndustrialProcessing.config.get(ConfigCategories.transport.toString(),"FluidValveID",3505).getInt();
+	private int blockTransportFluidGrateID = IndustrialProcessing.config.get(ConfigCategories.transport.toString(),"FluidGrateID",3506).getInt();
 
 	public static int getBlockTransportFluidsID() {
 		return getInstance().blockTransportFluidsID;
@@ -26,6 +27,11 @@ public class ConfigTransportBlocks {
 	public static int getBlockTransportFluidManometerID() {
 		return getInstance().blockTransportFluidManometerID;
 	}
+	
+    public static int getBlockTransportFluidGrateID() {
+        return getInstance().blockTransportFluidGrateID;
+    }
+
 
 	public static int getBlockRainTankID() {
 		return getInstance().blockTransportFluidRainTankID;

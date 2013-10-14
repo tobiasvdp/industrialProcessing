@@ -46,6 +46,7 @@ import ip.industrialProcessing.power.plants.BlockSolidBurner;
 import ip.industrialProcessing.power.plants.BlockTurbine;
 import ip.industrialProcessing.power.storage.BlockEnergyCell;
 import ip.industrialProcessing.power.wire.BlockWire;
+import ip.industrialProcessing.transport.fluids.BlockGrate;
 import ip.industrialProcessing.transport.fluids.BlockManoMeter;
 import ip.industrialProcessing.transport.fluids.BlockPump;
 import ip.industrialProcessing.transport.fluids.BlockRainTank;
@@ -98,6 +99,7 @@ public interface ISetupMachineBlocks {
     public final static BlockTank blockTank = new BlockTank();
     public final static BlockRainTank blockRainTank = new BlockRainTank();
     public final static BlockManoMeter blockManometer = new BlockManoMeter();
+    public final static BlockGrate blockGrate = new BlockGrate();
     public final static BlockValve blockValve = new BlockValve();
 
     // multiblocks
