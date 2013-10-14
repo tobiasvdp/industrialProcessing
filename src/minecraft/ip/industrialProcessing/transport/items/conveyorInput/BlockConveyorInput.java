@@ -29,4 +29,9 @@ public class BlockConveyorInput extends BlockConveyorBase{
 	public int getRenderType() { 
 		return ConfigRenderers.getRendererConveyorInputID();
 	}
+	
+	@Override
+	public boolean renderAsNormalBlock() {
+	    return true;
+	}
 }

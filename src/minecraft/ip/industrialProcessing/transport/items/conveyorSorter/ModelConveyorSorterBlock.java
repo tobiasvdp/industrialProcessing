@@ -61,21 +61,23 @@ public class ModelConveyorSorterBlock extends ModelConveyorBeltBlock {
 
             if (fs != SlopeState.FLAT || bs != SlopeState.FLAT || front.isConnected() && back.isConnected() && !left.isConnected() && !right.isConnected()) {
                 slopes.getRenderer(fs, bs).getRotated(dir).renderMesh(false, icon, reference);
-            } else if (front.isConnected() && left.isConnected() && !back.isConnected() && !right.isConnected()) {
-                cornerLeft.getRotated(dir).renderMesh(false, icon, reference);
-            } else if (front.isConnected() && right.isConnected() && !back.isConnected() && !left.isConnected()) {
-                cornerRight.getRotated(dir).renderMesh(false, icon, reference);
             } else {
-                if (left.isConnected())
+                boolean requireBack = false;
+
+                if (left.isConnected()) {
                     leftOut.getRotated(dir).renderMesh(false, icon, reference);
+                    requireBack = true;
+                }
 
-                if (right.isConnected())
+                if (right.isConnected()) {
                     rightOut.getRotated(dir).renderMesh(false, icon, reference);
+                    requireBack = true;
+                }
 
-                if (back.isConnected())
+                if (back.isConnected() || requireBack)
                     backIn.getRotated(dir).renderMesh(false, icon, reference);
 
-                if (front.isConnected() && back.isConnected()) {
+                if (front.isConnected() && (back.isConnected() || requireBack)) {
                     straight.getRotated(dir).renderMesh(false, icon, reference);
                 } else {
                     if (front.isConnected())

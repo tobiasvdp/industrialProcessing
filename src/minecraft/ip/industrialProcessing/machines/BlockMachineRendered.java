@@ -28,12 +28,7 @@ public abstract class BlockMachineRendered extends BlockMachine {
 	public boolean renderAsNormalBlock() {
 		return false;
 	}
-
-	@Override
-	public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l) {
-		return false;
-	}
-
+ 
 	@Override
 	public int getRenderBlockPass() {
 		return 1;
