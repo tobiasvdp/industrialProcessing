@@ -106,6 +106,7 @@ import ip.industrialProcessing.transport.fluids.models.ModelTankBlock;
 import ip.industrialProcessing.transport.fluids.models.meter.ModelManometerBlock;
 import ip.industrialProcessing.transport.fluids.models.pipe.ModelPipeBlock;
 import ip.industrialProcessing.transport.fluids.models.pipe.ModelValveBlock;
+import ip.industrialProcessing.transport.fluids.models.raintank.ModelRainTankBlock;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorBelt;
 import ip.industrialProcessing.transport.items.conveyorBelt.rendering.ModelConveyorBeltTile;
 import ip.industrialProcessing.transport.items.conveyorInput.ModelConveyorInput;
@@ -138,6 +139,7 @@ public class ClientProxy extends CommonProxy {
     private static final ModelConnectedFluid transportFluids = new ModelTransportFluids();
     private static final ModelAnimatedMachine EnergyCell = new ModelEnergyCell();
     private static final ModelConnectedFluid rainTank = new ModelRainTank();
+    private static final ModelBlock rainTankBlock = new ModelRainTankBlock();
     private static final ModelConnectedFluidAnimated valveTile = new ModelValve();
     private static final ModelBlock valveBlock = new ModelValveBlock();
 
@@ -170,7 +172,7 @@ public class ClientProxy extends CommonProxy {
     private static final ModelBlock conveyorOutputBlock = new ModelConveyorOutputBlock();
     private static final ModelBlock conveyorSorterBlock = new ModelConveyorSorterBlock();
     private static final ModelConnected conveyorInput = new ModelConveyorInput();
-    private static final ModelConnected conveyorOutput = new ModelConveyorOutput(); 
+    private static final ModelConnected conveyorOutput = new ModelConveyorOutput();
     private static final ModelConnected conveyorSorter = new ModelConveyorSorter();
     private static final ModelBlock platform = new ModelPlatform();
     private static final ModelBlock stairs = new ModelStairs();
@@ -237,6 +239,10 @@ public class ClientProxy extends CommonProxy {
         ConfigRenderers.setRendererManometerId(RenderingRegistry.getNextAvailableRenderId());
         RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererManometerId(), manometerBlock));
 
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRainTank.class, new RendererTileEntityConnectedFluid(IndustrialProcessing.blockRainTank, "ModelRainTank", rainTank));
+        ConfigRenderers.setRendererRainTankId(RenderingRegistry.getNextAvailableRenderId());
+        RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererRainTankId(), rainTankBlock));
+
         // 100% tile entity
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFilter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockFilter, "ModelFilter", filter));
@@ -282,10 +288,6 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAmpMeter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockAmpMeter, "ModelAmpMeter", ampMeter));
         ConfigRenderers.setRendererAmpMeterId(RenderingRegistry.getNextAvailableRenderId());
         RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererAmpMeterId(), new TileEntityAmpMeter()));
-
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRainTank.class, new RendererTileEntityConnectedFluid(IndustrialProcessing.blockRainTank, "ModelRainTank", rainTank));
-        ConfigRenderers.setRendererRainTankId(RenderingRegistry.getNextAvailableRenderId());
-        RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererRainTankId(), new TileEntityRainTank()));
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTurbine.class, new RendererTileEntityFluidWorker(IndustrialProcessing.blockTurbine, "ModelTurbine", turbine));
         ConfigRenderers.setRendererTurbineId(RenderingRegistry.getNextAvailableRenderId());

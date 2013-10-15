@@ -13,7 +13,7 @@ public class FluidTree {
     HashSet<FluidCoordinate> candidateSet = new HashSet<FluidCoordinate>();
     HashSet<FluidCoordinate> closedSet = new HashSet<FluidCoordinate>();
     HashSet<FluidCoordinate> openSet = new HashSet<FluidCoordinate>();
-    protected int halfSize = 32;
+    protected int halfSize = 64;
 
     public FluidTree() {
         openSet.add(new FluidCoordinate(0, 0, 0, -1, 0));
