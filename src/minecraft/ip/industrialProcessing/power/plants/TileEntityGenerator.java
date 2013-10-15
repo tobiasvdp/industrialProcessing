@@ -23,6 +23,7 @@ public class TileEntityGenerator extends TileEntityPowerGenerator implements IAn
 	private AnimationHandler animationHandler;
 	private float lastCharge;
 	LocalDirection outputSide = LocalDirection.BACK;
+    LocalDirection inputSide = LocalDirection.FRONT;
 
 	public TileEntityGenerator() {
 		super(100);
@@ -86,7 +87,8 @@ public class TileEntityGenerator extends TileEntityPowerGenerator implements IAn
 
 	@Override
 	public float setSpeed(ForgeDirection side, float speed) {
-		if (side == ForgeDirection.UP) {
+	    ForgeDirection direction = DirectionUtils.getWorldDirection(this.inputSide, this.getForwardDirection());
+		if (side == direction) {
 			this.animationHandler.setSpeed(speed);
 			return this.lastCharge;
 		}

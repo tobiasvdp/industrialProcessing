@@ -81,12 +81,15 @@ import ip.industrialProcessing.power.meters.ModelVoltMeter;
 import ip.industrialProcessing.power.meters.TileEntityAmpMeter;
 import ip.industrialProcessing.power.meters.TileEntityVoltMeter;
 import ip.industrialProcessing.power.plants.ModelBoiler;
+import ip.industrialProcessing.power.plants.ModelGenerator;
 import ip.industrialProcessing.power.plants.ModelSolidBurner;
 import ip.industrialProcessing.power.plants.ModelTurbine;
 import ip.industrialProcessing.power.plants.TileEntityBoiler;
 import ip.industrialProcessing.power.plants.TileEntityGenerator;
 import ip.industrialProcessing.power.plants.TileEntitySolidBurner;
 import ip.industrialProcessing.power.plants.TileEntityTurbine;
+import ip.industrialProcessing.power.plants.models.ModelGeneratorBlock;
+import ip.industrialProcessing.power.plants.models.ModelTurbineBlock;
 import ip.industrialProcessing.power.storage.ModelEnergyCell;
 import ip.industrialProcessing.power.storage.TileEntityEnergyCell;
 import ip.industrialProcessing.power.wire.models.ModelWireBlock;
@@ -152,8 +155,7 @@ public class ClientProxy extends CommonProxy {
     private static final ModelBlock pipeBlock = new ModelPipeBlock();
     private static final ModelAnimatedFluidMachine boiler = new ModelBoiler();
     private static final ModelMachine solidBurner = new ModelSolidBurner();
-    private static final ModelAnimatedFluidMachine turbine = new ModelTurbine();
-    private static final ModelAnimatedMachine generator = new ModelCrankGenerator(false);
+    private static final ModelAnimatedFluidMachine turbine = new ModelTurbine(); 
     private static final MDmultiblockWeldingStation MDmultiblockWeldingStation = new MDmultiblockWeldingStation();
     private static final MDmultiblockBlastFurnace MDmultiblockBlastFurnace = new MDmultiblockBlastFurnace();
     private static final MDmultiblockBlastFurnaceTower MDmultiblockBlastFurnaceTower = new MDmultiblockBlastFurnaceTower();
@@ -180,6 +182,10 @@ public class ClientProxy extends CommonProxy {
     private static final ModelBlock manometerBlock = new ModelManometerBlock();
     private static final ModelBlock automaticTreeTapBlock = new ModelAutomaticTreeTapBlock();
     private static final ModelBlock manualTreeTapBlock = new ModelManualTreeTapBlock();
+    private static final ModelBlock modelTurbineBlock = new ModelTurbineBlock();
+
+    private static final ModelAnimatedMachine generator = new ModelGenerator();
+    private static final ModelBlock modelGeneratorBlock = new ModelGeneratorBlock();
 
     @Override
     public void registerRenderers() {
@@ -243,6 +249,13 @@ public class ClientProxy extends CommonProxy {
         ConfigRenderers.setRendererRainTankId(RenderingRegistry.getNextAvailableRenderId());
         RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererRainTankId(), rainTankBlock));
 
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTurbine.class, new RendererTileEntityFluidWorker(IndustrialProcessing.blockTurbine, "ModelTurbine", turbine));
+        ConfigRenderers.setRendererTurbineId(RenderingRegistry.getNextAvailableRenderId());
+        RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererTurbineId(), modelTurbineBlock));
+
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGenerator.class, new RendererTileEntityAnimated(IndustrialProcessing.blockGenerator, "ModelGenerator", generator));
+        ConfigRenderers.setRendererGeneratorId(RenderingRegistry.getNextAvailableRenderId());
+        RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererGeneratorId(), modelGeneratorBlock));
         // 100% tile entity
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFilter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockFilter, "ModelFilter", filter));
@@ -289,10 +302,6 @@ public class ClientProxy extends CommonProxy {
         ConfigRenderers.setRendererAmpMeterId(RenderingRegistry.getNextAvailableRenderId());
         RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererAmpMeterId(), new TileEntityAmpMeter()));
 
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTurbine.class, new RendererTileEntityFluidWorker(IndustrialProcessing.blockTurbine, "ModelTurbine", turbine));
-        ConfigRenderers.setRendererTurbineId(RenderingRegistry.getNextAvailableRenderId());
-        RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererTurbineId(), new TileEntityTurbine()));
-
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPump.class, new RendererTileEntityFluidWorker(IndustrialProcessing.blockPump, "ModelPump", pump));
         ConfigRenderers.setRendererPumpId(RenderingRegistry.getNextAvailableRenderId());
         RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererPumpId(), new TileEntityPump()));
@@ -316,10 +325,6 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityManualGenerator.class, new RendererTileEntityAnimated(IndustrialProcessing.blockManualGenerator, "ModelCrankGenerator", crankGenerator));
         ConfigRenderers.setRendererCrankGeneratorId(RenderingRegistry.getNextAvailableRenderId());
         RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererCrankGeneratorId(), new TileEntityManualGenerator()));
-
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGenerator.class, new RendererTileEntityAnimated(IndustrialProcessing.blockGenerator, "ModelCrankGenerator", generator));
-        ConfigRenderers.setRendererGeneratorId(RenderingRegistry.getNextAvailableRenderId());
-        RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererGeneratorId(), new TileEntityGenerator()));
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBuildcraftGenerator.class, new RendererTileEntityAnimated(IndustrialProcessing.blockBuildcraftGenerator, "ModelCrankGenerator", buildcraftGenerator));
         ConfigRenderers.setRendererBCGeneratorId(RenderingRegistry.getNextAvailableRenderId());

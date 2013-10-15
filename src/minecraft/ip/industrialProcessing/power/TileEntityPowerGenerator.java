@@ -16,39 +16,39 @@ public abstract class TileEntityPowerGenerator extends TileEntityMachine impleme
     private int maxOutput = 100;
 
     public TileEntityPowerGenerator(int maxOutput) {
-	this.maxOutput = maxOutput;
+        this.maxOutput = maxOutput;
 
-	this.powerManager = new PowerDistributorManager(this, this);
+        this.powerManager = new PowerDistributorManager(this, this);
     }
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
-	super.readFromNBT(nbt);
-	this.powerManager.readFromNBT(nbt);
+        super.readFromNBT(nbt);
+        this.powerManager.readFromNBT(nbt);
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
-	super.writeToNBT(nbt);
-	this.powerManager.writeToNBT(nbt);
+        super.writeToNBT(nbt);
+        this.powerManager.writeToNBT(nbt);
     }
 
     @Override
     public boolean canUpdate() {
-	return true;
+        return true;
     }
 
     @Override
     public void updateEntity() {
-	super.updateEntity();
-	if (!searched)
-	    searchForPowerAcceptors();
+        super.updateEntity();
+        if (!searched)
+            searchForPowerAcceptors();
 
-	this.powerManager.distributePower(this, this.worldObj);
+        this.powerManager.distributePower(this, this.worldObj);
     }
 
     public void searchForPowerAcceptors() {
-	this.searched = true;
-	this.powerManager.searchPowerAcceptors();
+        this.searched = true;
+        this.powerManager.searchPowerAcceptors();
     }
 }

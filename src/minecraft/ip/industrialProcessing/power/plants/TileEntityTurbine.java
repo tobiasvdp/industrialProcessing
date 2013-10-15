@@ -1,5 +1,7 @@
 package ip.industrialProcessing.power.plants;
 
+import ic2.api.Direction;
+import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.machines.TileEntityFluidMachine;
@@ -22,118 +24,121 @@ import net.minecraftforge.fluids.IFluidTank;
 
 public class TileEntityTurbine extends TileEntityFluidMachine implements IAnimationSyncable, IAnimationProgress, IPressuredTank, ITankSyncable {
 
-	private static final float DRAG = 0.1f;
-	private AnimationHandler animationHandler;
-	private TankHandler tankHandler;
+    private static final float DRAG = 0.1f;
+    private AnimationHandler animationHandler;
+    private TankHandler tankHandler;
+    private LocalDirection motionOutputDirection = LocalDirection.FRONT;
 
-	public TileEntityTurbine() {
-		addTank(10 * FluidContainerRegistry.BUCKET_VOLUME, LocalDirection.BACK, false, true);
-		addTank(10 * FluidContainerRegistry.BUCKET_VOLUME, LocalDirection.UP, true, false);
+    public TileEntityTurbine() {
+        addTank(10 * FluidContainerRegistry.BUCKET_VOLUME, LocalDirection.DOWN, false, true);
+        addTank(10 * FluidContainerRegistry.BUCKET_VOLUME, LocalDirection.FRONT, true, false);
 
-		addStack(null, new LocalDirection[0], true, false);
-		addStack(null, new LocalDirection[0], false, true);
-		this.tankHandler = new TankHandler(this, new int[] { 0 });
-		this.animationHandler = new AnimationHandler(AnimationMode.WRAP, 1f, true);
-	}
+        addStack(null, new LocalDirection[0], true, false);
+        addStack(null, new LocalDirection[0], false, true);
+        this.tankHandler = new TankHandler(this, new int[] { 0 });
+        this.animationHandler = new AnimationHandler(AnimationMode.WRAP, 1f, true);
+    }
 
-	@Override
-	public void updateEntity() {
-		getBucketFromTank(0, 1, 0);
+    @Override
+    public void updateEntity() {
+        getBucketFromTank(0, 1, 0);
 
-		if (!this.worldObj.isRemote) {
-			IFluidTank steamTank = getTankInSlot(1); // steam
-			IFluidTank waterTank = getTankInSlot(0); // water
-			int amount = steamTank.getFluidAmount() / 100;
-			FluidStack steamDrain = steamTank.drain(amount, false);
+        if (!this.worldObj.isRemote) {
+            IFluidTank steamTank = getTankInSlot(1); // steam
+            IFluidTank waterTank = getTankInSlot(0); // water
+            int amount = steamTank.getFluidAmount() / 100;
+            FluidStack steamDrain = steamTank.drain(amount, false);
 
-			if (steamDrain != null) {
-				int steamID = steamDrain.fluidID;
-				steamDrain.fluidID = FluidRegistry.WATER.getID();
-				int waterFill = waterTank.fill(steamDrain, true);
-				steamTank.drain(waterFill, true);
+            if (steamDrain != null) {
+                int steamID = steamDrain.fluidID;
+                steamDrain.fluidID = FluidRegistry.WATER.getID();
+                int waterFill = waterTank.fill(steamDrain, true);
+                steamTank.drain(waterFill, true);
 
-				addEnergy(waterFill*2);
-			}
-			TileAnimationSyncHandler.sendAnimationData(this, this.animationHandler);
+                addEnergy(waterFill * 2);
+            }
+            TileAnimationSyncHandler.sendAnimationData(this, this.animationHandler);
 
-			if (this.tankHandler.readDataFromTanks())
-				TileTankSyncHandler.sendTankData(this, this.tankHandler);
+            if (this.tankHandler.readDataFromTanks())
+                TileTankSyncHandler.sendTankData(this, this.tankHandler);
 
-			IMechanicalMotion generator = getGenerator();
-			if (generator != null) {
-				float speed = this.animationHandler.getSpeed();
-				float resistance = generator.setSpeed(ForgeDirection.UP, speed);
-				speed -= speed * resistance * this.animationHandler.DT;
-				this.animationHandler.setSpeed(speed);
-			}
-		}
-		this.animationHandler.update();
-	}
+            ForgeDirection generatorDirection = DirectionUtils.getWorldDirection(motionOutputDirection, this.getForwardDirection());
+            IMechanicalMotion generator = getGenerator(generatorDirection.getOpposite()); 
+            if (generator != null) {
+                float speed = this.animationHandler.getSpeed();
+                float resistance = generator.setSpeed(generatorDirection, speed);
+                speed -= speed * resistance * this.animationHandler.DT;
+                this.animationHandler.setSpeed(speed);
+            }
+        }
+        this.animationHandler.update();
+    }
 
-	private IMechanicalMotion getGenerator() {
-		TileEntity entity = this.worldObj.getBlockTileEntity(xCoord, yCoord - 1, zCoord);
-		if (entity instanceof IMechanicalMotion)
-			return (IMechanicalMotion) entity;
-		return null;
-	}
+    private IMechanicalMotion getGenerator(ForgeDirection dir) {
 
-	private void addEnergy(int waterFill) {
-		float speed = this.animationHandler.getSpeed();
-		speed += waterFill * this.animationHandler.DT / 500;
-		speed -= speed * DRAG * this.animationHandler.DT;
-		this.animationHandler.setSpeed(speed);
-	}
+        TileEntity entity = this.worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+        if (entity instanceof IMechanicalMotion)
+            return (IMechanicalMotion) entity;
+        return null;
+    }
 
-	@Override
-	protected boolean isTankValidForFluid(int slot, int fluidId) {
-		return slot == 1 && fluidId == FluidRegistry.getFluid("steam").getID();
-	}
+    private void addEnergy(int waterFill) {
+        float speed = this.animationHandler.getSpeed();
+        speed += waterFill * this.animationHandler.DT / 500;
+        speed -= speed * DRAG * this.animationHandler.DT;
+        this.animationHandler.setSpeed(speed);
+    }
 
-	@Override
-	protected boolean isValidInput(int slot, int itemID) {
-		if (slot == 0) { // fluid input container input slot
-			// only empty containers
-			return FluidContainerRegistry.isEmptyContainer(new ItemStack(itemID, 1, 0));
-		}
-		return false;
-	}
+    @Override
+    protected boolean isTankValidForFluid(int slot, int fluidId) {
+        return slot == 1 && fluidId == FluidRegistry.getFluid("steam").getID();
+    }
 
-	@Override
-	public AnimationHandler getAnimationHandler() {
-		return this.animationHandler;
-	}
+    @Override
+    protected boolean isValidInput(int slot, int itemID) {
+        if (slot == 0) { // fluid input container input slot
+            // only empty containers
+            return FluidContainerRegistry.isEmptyContainer(new ItemStack(itemID, 1, 0));
+        }
+        return false;
+    }
 
-	@Override
-	public int getAnimationCount() {
-		return 1;
-	}
+    @Override
+    public AnimationHandler getAnimationHandler() {
+        return this.animationHandler;
+    }
 
-	@Override
-	public float getAnimationProgress(float scale, int animationIndex) {
-		return this.animationHandler.getAnimationProgress(scale);
-	}
+    @Override
+    public int getAnimationCount() {
+        return 1;
+    }
 
-	@Override
-	public float getPressure(ForgeDirection from) {
-		FluidTankInfo[] info = getTankInfo(from);
-		if (info.length > 0) {
-			FluidTankInfo tank = info[0];
-			int amount = tank.fluid == null ? 0 : tank.fluid.amount;
-			return amount * 1000f / tank.capacity;
-		}
-		return 0;
-	}
+    @Override
+    public float getAnimationProgress(float scale, int animationIndex) {
+        return this.animationHandler.getAnimationProgress(scale);
+    }
 
-	public int getRPM() {
+    @Override
+    public float getPressure(ForgeDirection from) {
+        FluidTankInfo[] info = getTankInfo(from);
+        if (info.length > 0) {
+            FluidTankInfo tank = info[0];
+            int amount = tank.fluid == null ? 0 : tank.fluid.amount;
+            return amount * 1000f / tank.capacity;
+        }
+        return 0;
+    }
 
-		float rotationsPerSecond = this.animationHandler.getSpeed();
-		float radPerSecond = rotationsPerSecond * 2 * 3.14159f;
-		return (int) (radPerSecond / 0.104720f);
-	}
+    public int getRPM() {
 
-	@Override
-	public TankHandler getTankHandler() {
-		return this.tankHandler;
-	}
+        float rotationsPerSecond = this.animationHandler.getSpeed();
+        float radPerSecond = rotationsPerSecond * 2 * 3.14159f;
+        return (int) (radPerSecond / 0.104720f);
+    }
+
+    @Override
+    public TankHandler getTankHandler() {
+        return this.tankHandler;
+    }
 
 }

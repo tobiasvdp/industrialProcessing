@@ -32,10 +32,7 @@ public class FluidTree {
             closedSet.add(current);
             if (validateCandidate(current, world, x, y, z)) {
                 candidateSet.add(current);
-            }
-            // stop as soon as a candidate is found.
-            if (!candidateSet.isEmpty())
-                return false;
+            } 
             for (int i = 0; i < 6; i++) {
                 ForgeDirection direction = ForgeDirection.getOrientation(i);
                 FluidCoordinate neighbor = getNeighbor(current, direction, world, x, y, z);
@@ -50,7 +47,7 @@ public class FluidTree {
 
             }
             return true;
-        }
+        } 
         return false;
     }
 

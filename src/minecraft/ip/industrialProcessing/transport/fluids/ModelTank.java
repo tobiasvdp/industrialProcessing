@@ -438,6 +438,7 @@ public class ModelTank extends ModelConnectedFluid {
 			float uOffset = 4f / 16f * (icon.getMaxU() - icon.getMinU());
 			tessellator.startDrawingQuads();
 			tessellator.setNormal(0, 0, -1);
+            tessellator.setBrightness(lightLevel);
 			tessellator.addVertexWithUV((double) (x + 4) * f, (double) (y) * f, (double) (z + h) * f, (double) icon.getMinU() + uOffset, (double) icon.getMinV() + vOffset);
 			tessellator.addVertexWithUV((double) (x + w - 4) * f, (double) (y) * f, (double) (z + h) * f, (double) icon.getMaxU() - uOffset, (double) icon.getMinV() + vOffset);
 			tessellator.addVertexWithUV((double) (x + w - 4) * f, (double) (yBot) * f, (double) (z + h) * f, (double) icon.getMaxU() - uOffset, (double) icon.getMaxV());

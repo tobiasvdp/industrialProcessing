@@ -1,441 +1,114 @@
 package ip.industrialProcessing.power.plants;
 
 import ip.industrialProcessing.client.render.ModelAnimatedFluidMachine;
+import ip.industrialProcessing.power.plants.models.GeneratorAxle;
+import ip.industrialProcessing.power.plants.models.TurbineAxle;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Vector3f;
 
 public class ModelTurbine extends ModelAnimatedFluidMachine {
 
-	// fields
-	ModelRenderer Axle1;
-	ModelRenderer Axle2;
-	ModelRenderer Axle3;
-	ModelRenderer Axle4;
-	ModelRenderer Axle5;
-	ModelRenderer Axle6;
-	ModelRenderer TopWall1;
-	ModelRenderer TopWall2;
-	ModelRenderer TopWall3;
-	ModelRenderer TopWall4;
-	ModelRenderer TopWall5;
-	ModelRenderer TopWall6;
-	ModelRenderer TopWall7;
-	ModelRenderer TopWall8;
-	ModelRenderer Rotor1;
-	ModelRenderer Rotor2;
-	ModelRenderer Rotor3;
-	ModelRenderer Rotor4;
-	ModelRenderer Rotor5;
-	ModelRenderer Rotor6;
-	ModelRenderer Rotor7;
-	ModelRenderer Rotor8;
-	ModelRenderer Rotor9;
-	ModelRenderer Rotor10;
-	ModelRenderer Rotor11;
-	ModelRenderer Rotor12;
-	ModelRenderer Rotor13;
-	ModelRenderer Rotor14;
-	ModelRenderer Rotor15;
-	ModelRenderer Rotor16;
-	ModelRenderer Rotor17;
-	ModelRenderer Rotor18;
-	ModelRenderer Rotor19;
-	ModelRenderer Rotor20;
-	ModelRenderer Rotor21;
-	ModelRenderer Rotor22;
-	ModelRenderer Rotor23;
-	ModelRenderer Rotor24;
-	ModelRenderer Wall1;
-	ModelRenderer Wall2;
-	ModelRenderer Wall3;
-	ModelRenderer Wall4;
-	ModelRenderer Wall5;
-	ModelRenderer Wall6;
-	ModelRenderer Wall7;
-	ModelRenderer Wall8;
-	ModelRenderer GlassTop;
-	ModelRenderer FloorPlate;
-	ModelRenderer TopPlate;
-	ModelRenderer WaterOutput;
-	ModelRenderer GlassFrame1;
-	ModelRenderer GlassFrame2;
-	ModelRenderer GlassFrame3;
-	ModelRenderer GlassFrame4;
-	ModelRenderer GlassFrame5;
-	ModelRenderer GlassFrame6;
-	ModelRenderer Glass1;
-	ModelRenderer Glass2;
-	ModelRenderer Glass3;
-	ModelRenderer SteamInput;
-	ModelRenderer WaterOutPadding1;
-	ModelRenderer WaterOutPadding2;
-	ModelRenderer WaterOutPadding3;
-	ModelRenderer WaterOutPadding4;
+    TurbineAxle axle = new TurbineAxle();
+    public ModelTurbine() {
+    }
 
-	public ModelTurbine() {
-		textureWidth = 64;
-		textureHeight = 32;
+    @Override
+    public void renderLiquid(TileEntity tl, float f, int tankSlot, float percentageFilled, Icon icon) {
 
-		Axle1 = new ModelRenderer(this, 30, 0);
-		Axle1.addBox(-8F, -0.13F, -0.5F, 16, 1, 1);
-		Axle1.setRotationPoint(0F, 17F, 0F);
-		Axle1.setTextureSize(64, 32);
-		Axle1.mirror = true;
-		setRotation(Axle1, -2.094395F, 0F, 1.570796F);
-		Axle2 = new ModelRenderer(this, 30, 0);
-		Axle2.addBox(-8F, -0.13F, -0.5F, 16, 1, 1);
-		Axle2.setRotationPoint(0F, 17F, 0F);
-		Axle2.setTextureSize(64, 32);
-		Axle2.mirror = true;
-		setRotation(Axle2, 0F, 0F, 1.570796F);
-		Axle3 = new ModelRenderer(this, 30, 0);
-		Axle3.addBox(-8F, -0.13F, -0.5F, 16, 1, 1);
-		Axle3.setRotationPoint(0F, 17F, 0F);
-		Axle3.setTextureSize(64, 32);
-		Axle3.mirror = true;
-		setRotation(Axle3, 1.047198F, 0F, 1.570796F);
-		Axle4 = new ModelRenderer(this, 30, 0);
-		Axle4.addBox(-8F, -0.13F, -0.5F, 16, 1, 1);
-		Axle4.setRotationPoint(0F, 17F, 0F);
-		Axle4.setTextureSize(64, 32);
-		Axle4.mirror = true;
-		setRotation(Axle4, 2.094395F, 0F, 1.570796F);
-		Axle5 = new ModelRenderer(this, 30, 0);
-		Axle5.addBox(-8F, -0.13F, -0.5F, 16, 1, 1);
-		Axle5.setRotationPoint(0F, 17F, 0F);
-		Axle5.setTextureSize(64, 32);
-		Axle5.mirror = true;
-		setRotation(Axle5, 3.141593F, 0F, 1.570796F);
-		Axle6 = new ModelRenderer(this, 30, 0);
-		Axle6.addBox(-8F, -0.13F, -0.5F, 16, 1, 1);
-		Axle6.setRotationPoint(0F, 17F, 0F);
-		Axle6.setTextureSize(64, 32);
-		Axle6.mirror = true;
-		setRotation(Axle6, -1.047198F, 0F, 1.570796F);
-		TopWall1 = new ModelRenderer(this, 0, 26);
-		TopWall1.addBox(-3F, 0F, 6.2425F, 6, 5, 1);
-		TopWall1.setRotationPoint(0F, 9F, 0F);
-		TopWall1.setTextureSize(64, 32);
-		TopWall1.mirror = true;
-		setRotation(TopWall1, 0F, 3.141593F, 0F);
-		TopWall2 = new ModelRenderer(this, 0, 26);
-		TopWall2.addBox(-3F, 0F, 6.2425F, 6, 5, 1);
-		TopWall2.setRotationPoint(0F, 9F, 0F);
-		TopWall2.setTextureSize(64, 32);
-		TopWall2.mirror = true;
-		setRotation(TopWall2, 0F, 2.356194F, 0F);
-		TopWall3 = new ModelRenderer(this, 0, 26);
-		TopWall3.addBox(-3F, 0F, 6.2425F, 6, 5, 1);
-		TopWall3.setRotationPoint(0F, 9F, 0F);
-		TopWall3.setTextureSize(64, 32);
-		TopWall3.mirror = true;
-		setRotation(TopWall3, 0F, 0F, 0F);
-		TopWall4 = new ModelRenderer(this, 0, 26);
-		TopWall4.addBox(-3F, 0F, 6.2425F, 6, 5, 1);
-		TopWall4.setRotationPoint(0F, 9F, 0F);
-		TopWall4.setTextureSize(64, 32);
-		TopWall4.mirror = true;
-		setRotation(TopWall4, 0F, -0.7853982F, 0F);
-		TopWall5 = new ModelRenderer(this, 0, 26);
-		TopWall5.addBox(-3F, 0F, 6.2425F, 6, 5, 1);
-		TopWall5.setRotationPoint(0F, 9F, 0F);
-		TopWall5.setTextureSize(64, 32);
-		TopWall5.mirror = true;
-		setRotation(TopWall5, 0F, -1.570796F, 0F);
-		TopWall6 = new ModelRenderer(this, 0, 26);
-		TopWall6.addBox(-3F, 0F, 6.2425F, 6, 5, 1);
-		TopWall6.setRotationPoint(0F, 9F, 0F);
-		TopWall6.setTextureSize(64, 32);
-		TopWall6.mirror = true;
-		setRotation(TopWall6, 0F, -2.356194F, 0F);
-		TopWall7 = new ModelRenderer(this, 0, 26);
-		TopWall7.addBox(-3F, 0F, 6.2425F, 6, 5, 1);
-		TopWall7.setRotationPoint(0F, 9F, 0F);
-		TopWall7.setTextureSize(64, 32);
-		TopWall7.mirror = true;
-		setRotation(TopWall7, 0F, 0.7853982F, 0F);
-		TopWall8 = new ModelRenderer(this, 0, 26);
-		TopWall8.addBox(-3F, 0F, 6.2425F, 6, 5, 1);
-		TopWall8.setRotationPoint(0F, 9F, 0F);
-		TopWall8.setTextureSize(64, 32);
-		TopWall8.mirror = true;
+        float par1 = -7f;
+        float par2 = -7f;
 
-		setRotation(TopWall8, 0F, 1.570796F, 0F);
-		Rotor1 = new ModelRenderer(this, 0, 0);
-		Rotor1.addBox(-0.5F, 0F, 0.5F, 2, 1, 6);
-		Rotor1.setRotationPoint(0F, 10F, 0F);
-		Rotor1.setTextureSize(64, 32);
-		Rotor1.mirror = true;
-		setRotation(Rotor1, 0F, 0f, 0.3490659F);
-		
-		Wall1 = new ModelRenderer(this, 0, 7);
-		Wall1.addBox(0F, 0F, 0F, 3, 9, 1);
-		Wall1.setRotationPoint(-7F, 14F, 4F);
-		Wall1.setTextureSize(64, 32);
-		Wall1.mirror = true;
-		setRotation(Wall1, 0F, -1.570796F, 0F);
-		Wall2 = new ModelRenderer(this, 0, 7);
-		Wall2.addBox(0F, 0F, 0F, 3, 9, 1);
-		Wall2.setRotationPoint(4F, 14F, 7F);
-		Wall2.setTextureSize(64, 32);
-		Wall2.mirror = true;
-		setRotation(Wall2, 0F, 0F, 0F);
-		Wall3 = new ModelRenderer(this, 0, 7);
-		Wall3.addBox(0F, 0F, 0F, 3, 9, 1);
-		Wall3.setRotationPoint(7F, 14F, -4F);
-		Wall3.setTextureSize(64, 32);
-		Wall3.mirror = true;
-		setRotation(Wall3, 0F, 1.570796F, 0F);
-		Wall4 = new ModelRenderer(this, 0, 7);
-		Wall4.addBox(0F, 0F, 0F, 3, 9, 1);
-		Wall4.setRotationPoint(-4F, 14F, -7F);
-		Wall4.setTextureSize(64, 32);
-		Wall4.mirror = true;
-		setRotation(Wall4, 0F, 3.141593F, 0F);
-		Wall5 = new ModelRenderer(this, 8, 7);
-		Wall5.addBox(0F, 0F, 0F, 4, 9, 1);
-		Wall5.setRotationPoint(-7F, 14F, -8F);
-		Wall5.setTextureSize(64, 32);
-		Wall5.mirror = true;
-		setRotation(Wall5, 0F, -1.570796F, 0F);
-		Wall6 = new ModelRenderer(this, 8, 7);
-		Wall6.addBox(0F, 0F, 0F, 4, 9, 1);
-		Wall6.setRotationPoint(-8F, 14F, 7F);
-		Wall6.setTextureSize(64, 32);
-		Wall6.mirror = true;
-		setRotation(Wall6, 0F, 0F, 0F);
-		Wall7 = new ModelRenderer(this, 8, 7);
-		Wall7.addBox(0F, 0F, 0F, 4, 9, 1);
-		Wall7.setRotationPoint(7F, 14F, 8F);
-		Wall7.setTextureSize(64, 32);
-		Wall7.mirror = true;
-		setRotation(Wall7, 0F, 1.570796F, 0F);
-		Wall8 = new ModelRenderer(this, 8, 7);
-		Wall8.addBox(0F, 0F, 0F, 4, 9, 1);
-		Wall8.setRotationPoint(8F, 14F, -7F);
-		Wall8.setTextureSize(64, 32);
-		Wall8.mirror = true;
-		setRotation(Wall8, 0F, 3.141593F, 0F);
-		GlassTop = new ModelRenderer(this, 36, 18);
-		GlassTop.addBox(-7F, -7F, 0F, 14, 14, 0);
-		GlassTop.setRotationPoint(0F, 9.5F, 0F);
-		GlassTop.setTextureSize(64, 32);
-		GlassTop.mirror = true;
-		setRotation(GlassTop, 1.570796F, 0F, 0F);
-		FloorPlate = new ModelRenderer(this, 0, 17);
-		FloorPlate.addBox(-7F, -7F, 0F, 14, 14, 1);
-		FloorPlate.setRotationPoint(0F, 24F, 0F);
-		FloorPlate.setTextureSize(64, 32);
-		FloorPlate.mirror = true;
-		setRotation(FloorPlate, 1.570796F, 0F, 0F);
-		TopPlate = new ModelRenderer(this, 36, 4);
-		TopPlate.addBox(-7F, -7F, 0F, 14, 14, 0);
-		TopPlate.setRotationPoint(0F, 14F, 0F);
-		TopPlate.setTextureSize(64, 32);
-		TopPlate.mirror = true;
-		setRotation(TopPlate, -1.570796F, 0F, 0F);
-		WaterOutput = new ModelRenderer(this, 16, 0);
-		WaterOutput.addBox(-3F, -3F, 0F, 6, 6, 1);
-		WaterOutput.setRotationPoint(0F, 16F, 7F);
-		WaterOutput.setTextureSize(64, 32);
-		WaterOutput.mirror = true;
-		setRotation(WaterOutput, 0F, 0F, 0F);
-		GlassFrame1 = new ModelRenderer(this, 36, 2);
-		GlassFrame1.addBox(0F, 0F, 0F, 8, 1, 1);
-		GlassFrame1.setRotationPoint(7F, 14F, 4F);
-		GlassFrame1.setTextureSize(64, 32);
-		GlassFrame1.mirror = true;
-		setRotation(GlassFrame1, 0F, 1.570796F, 0F);
-		GlassFrame2 = new ModelRenderer(this, 36, 2);
-		GlassFrame2.addBox(0F, 0F, 0F, 8, 1, 1);
-		GlassFrame2.setRotationPoint(7F, 22F, 4F);
-		GlassFrame2.setTextureSize(64, 32);
-		GlassFrame2.mirror = true;
-		setRotation(GlassFrame2, 0F, 1.570796F, 0F);
-		GlassFrame3 = new ModelRenderer(this, 36, 2);
-		GlassFrame3.addBox(0F, 0F, 0F, 8, 1, 1);
-		GlassFrame3.setRotationPoint(-8F, 14F, 4F);
-		GlassFrame3.setTextureSize(64, 32);
-		GlassFrame3.mirror = true;
-		setRotation(GlassFrame3, 0F, 1.570796F, 0F);
-		GlassFrame4 = new ModelRenderer(this, 36, 2);
-		GlassFrame4.addBox(0F, 0F, 0F, 8, 1, 1);
-		GlassFrame4.setRotationPoint(-8F, 22F, 4F);
-		GlassFrame4.setTextureSize(64, 32);
-		GlassFrame4.mirror = true;
-		setRotation(GlassFrame4, 0F, 1.570796F, 0F);
-		GlassFrame5 = new ModelRenderer(this, 36, 2);
-		GlassFrame5.addBox(0F, 0F, 0F, 8, 1, 1);
-		GlassFrame5.setRotationPoint(-4F, 14F, -8F);
-		GlassFrame5.setTextureSize(64, 32);
-		GlassFrame5.mirror = true;
-		setRotation(GlassFrame5, 0F, 0F, 0F);
-		GlassFrame6 = new ModelRenderer(this, 36, 2);
-		GlassFrame6.addBox(0F, 0F, 0F, 8, 1, 1);
-		GlassFrame6.setRotationPoint(-4F, 22F, -8F);
-		GlassFrame6.setTextureSize(64, 32);
-		GlassFrame6.mirror = true;
-		setRotation(GlassFrame6, 0F, 0F, 0F);
-		Glass1 = new ModelRenderer(this, 18, 9);
-		Glass1.addBox(0F, 0F, 0F, 8, 7, 1);
-		Glass1.setRotationPoint(-8F, 15F, 4F);
-		Glass1.setTextureSize(64, 32);
-		Glass1.mirror = true;
-		setRotation(Glass1, 0F, 1.570796F, 0F);
-		Glass2 = new ModelRenderer(this, 18, 9);
-		Glass2.addBox(0F, 0F, 0F, 8, 7, 1);
-		Glass2.setRotationPoint(-4F, 15F, -8F);
-		Glass2.setTextureSize(64, 32);
-		Glass2.mirror = true;
-		setRotation(Glass2, 0F, 0F, 0F);
-		Glass3 = new ModelRenderer(this, 18, 9);
-		Glass3.addBox(0F, 0F, 0F, 8, 7, 1);
-		Glass3.setRotationPoint(7F, 15F, 4F);
-		Glass3.setTextureSize(64, 32);
-		Glass3.mirror = true;
-		setRotation(Glass3, 0F, 1.570796F, 0F);
-		SteamInput = new ModelRenderer(this, 16, 0);
-		SteamInput.addBox(-3F, -3F, 0F, 6, 6, 1);
-		SteamInput.setRotationPoint(0F, 9F, 0F);
-		SteamInput.setTextureSize(64, 32);
-		SteamInput.mirror = true;
-		setRotation(SteamInput, 1.570796F, 0F, 0F);
-		WaterOutPadding1 = new ModelRenderer(this, 0, 18);
-		WaterOutPadding1.addBox(0F, 0F, 0F, 5, 1, 1);
-		WaterOutPadding1.setRotationPoint(3F, 19F, 7F);
-		WaterOutPadding1.setTextureSize(64, 32);
-		WaterOutPadding1.mirror = true;
-		setRotation(WaterOutPadding1, 0F, 0F, -1.570796F);
-		WaterOutPadding2 = new ModelRenderer(this, 36, 3);
-		WaterOutPadding2.addBox(0F, 0F, 0F, 8, 3, 1);
-		WaterOutPadding2.setRotationPoint(-4F, 19F, 7F);
-		WaterOutPadding2.setTextureSize(64, 32);
-		WaterOutPadding2.mirror = true;
-		setRotation(WaterOutPadding2, 0F, 0F, 0F);
-		WaterOutPadding3 = new ModelRenderer(this, 0, 18);
-		WaterOutPadding3.addBox(0F, 0F, 0F, 5, 1, 1);
-		WaterOutPadding3.setRotationPoint(-4F, 19F, 7F);
-		WaterOutPadding3.setTextureSize(64, 32);
-		WaterOutPadding3.mirror = true;
-		setRotation(WaterOutPadding3, 0F, 0F, -1.570796F);
-		WaterOutPadding4 = new ModelRenderer(this, 36, 2);
-		WaterOutPadding4.addBox(0F, 0F, 0F, 8, 1, 1);
-		WaterOutPadding4.setRotationPoint(-4F, 22F, 7F);
-		WaterOutPadding4.setTextureSize(64, 32);
-		WaterOutPadding4.mirror = true;
-		setRotation(WaterOutPadding4, 0F, 0F, 0F);
-	}
+        int lightLevel = tl.blockType.getMixedBrightnessForBlock(tl.worldObj, tl.xCoord, tl.yCoord, tl.zCoord);
+        float height = 6.5f * percentageFilled;
+        // float par3 = tankSlot == 0 ? 23 - 13/2 + height : 10f + height;
 
+        float par3 = 23 - height;
 
-	@Override
-	public void renderLiquid(TileEntity tl, float f, int tankSlot, float percentageFilled, Icon icon) {
+        int par4 = 14;
+        int par5 = 14;
+        Tessellator tessellator = Tessellator.instance;
+        tessellator.startDrawingQuads();
+        tessellator.setBrightness(lightLevel);
+        tessellator.setNormal(0, -1, 0);
+        tessellator.addVertexWithUV((double) (par1 + 0) * f, (double) par3 * f, (double) (par2 + 0) * f, (double) icon.getMinU(), (double) icon.getMinV());
+        tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) par3 * f, (double) (par2 + 0) * f, (double) icon.getMaxU(), (double) icon.getMinV());
+        tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) par3 * f, (double) (par2 + par5) * f, (double) icon.getMaxU(), (double) icon.getMaxV());
+        tessellator.addVertexWithUV((double) (par1 + 0) * f, (double) par3 * f, (double) (par2 + par5) * f, (double) icon.getMinU(), (double) icon.getMaxV());
+        tessellator.draw();
+    }
 
-		float par1 = -7f;
-		float par2 = -7f;
-		
-		float height = 7f * percentageFilled ;
-		//float par3 = tankSlot == 0 ? 23 - 13/2 + height : 10f + height;
-		
-		float par3 =  23 - height ;
-		
-		int par4 = 14;
-		int par5 = 14 ;
-		Tessellator tessellator = Tessellator.instance;
-		tessellator.startDrawingQuads();
+    @Override
+    public void renderModelAnimated(TileEntity tileEntity, float f5, float[] progress) {
 
-		tessellator.addVertexWithUV((double) (par1 + 0) * f, (double) par3 * f, (double) (par2 + 0) * f, (double) icon.getMinU(), (double) icon.getMinV());
-		tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) par3 * f, (double) (par2 + 0) * f, (double) icon.getMaxU(), (double) icon.getMinV());
-		tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) par3 * f, (double) (par2 + par5) * f, (double) icon.getMaxU(), (double) icon.getMaxV());
-		tessellator.addVertexWithUV((double) (par1 + 0) * f, (double) par3 * f, (double) (par2 + par5) * f, (double) icon.getMinU(), (double) icon.getMaxV());
-		tessellator.draw();
-		 
-		
-		float offsetU = (1-height/par4) * (icon.getMaxU() - icon.getMinU());
-		tessellator.startDrawingQuads();
-		tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) par3 * f, (double) (par2 + 0) * f, (double) icon.getMinU()+offsetU, (double) icon.getMinV());
-		tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) (par3 + height) * f, (double) (par2 + 0) * f, (double) icon.getMaxU(), (double) icon.getMinV());
-		tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) (par3 + height) * f, (double) (par2 + par5) * f, (double) icon.getMaxU(), (double) icon.getMaxV());
-		tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) par3 * f, (double) (par2 + par5) * f, (double) icon.getMinU()+offsetU, (double) icon.getMaxV());
-		tessellator.draw();
+        float angle = progress == null ? 0 : progress[0];
+        Vector3f position = new Vector3f(0, 0, 0);
+        GL11.glPushMatrix();
+        GL11.glRotatef(-90, 0, 1, 0);
+        GL11.glTranslatef(0, 1, 0);
+        GL11.glRotatef(angle * 360, 1, 0, 0);
+        Icon icon = getIcon();
+        axle.renderMesh(true, icon, position); 
+        GL11.glPopMatrix();
+    }
 
-		tessellator.startDrawingQuads();
-		tessellator.addVertexWithUV((double) (par1) * f, (double) (par3 + height) * f, (double) (par2 + 0) * f, (double) icon.getMinU()+offsetU, (double) icon.getMinV());
-		tessellator.addVertexWithUV((double) (par1 ) * f, (double) (par3 + 0) * f, (double) (par2 + 0) * f, (double) icon.getMaxU(), (double) icon.getMinV());
-		tessellator.addVertexWithUV((double) (par1) * f, (double) (par3 + 0) * f, (double) (par2 + par5) * f, (double) icon.getMaxU(), (double) icon.getMaxV());
-		tessellator.addVertexWithUV((double) (par1 ) * f, (double) (par3 + height) * f, (double) (par2 + par5) * f, (double) icon.getMinU()+offsetU, (double) icon.getMaxV());
-		tessellator.draw();
+    private Icon getIcon() {
 
-		float offsetV = (1-height/par4) * (icon.getMaxV() - icon.getMinV());
-		tessellator.startDrawingQuads();
-		tessellator.addVertexWithUV((double) (par1 + 0) * f, (double) (par3 + height)  * f, (double) (par2 + 0) * f, (double) icon.getMinU(), (double) icon.getMinV()+offsetV);
-		tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) (par3 + height)  * f, (double) (par2 + 0) * f, (double) icon.getMaxU(), (double) icon.getMinV()+offsetV);
-		tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) (par3 + 0)  * f, (double) (par2 + 0) * f, (double) icon.getMaxU(), (double) icon.getMaxV());
-		tessellator.addVertexWithUV((double) (par1 + 0) * f, (double) (par3 + 0)  * f, (double) (par2 + 0) * f, (double) icon.getMinU(), (double) icon.getMaxV());
-		tessellator.draw();
-	}
+        return new Icon() {
 
-	@Override
-	public void renderModelAnimated(TileEntity tileEntity, float f5, float[] progress) {
-		
-		GL11.glPushMatrix();
-		GL11.glRotatef(progress[0] * 360f, 0, 1, 0);
-		Axle1.render(f5);
-		Axle2.render(f5);
-		Axle3.render(f5);
-		Axle4.render(f5);
-		Axle5.render(f5);
-		Axle6.render(f5);
-		int blades = 12;
-		
-		for (int i = 0; i < blades; i++) { 
-			GL11.glRotatef(360f / blades, 0, 1, 0);
-			Rotor1.render(f5);
-		}
-		GL11.glPopMatrix();
-		TopWall1.render(f5);
-		TopWall2.render(f5);
-		TopWall3.render(f5);
-		TopWall4.render(f5);
-		TopWall5.render(f5);
-		TopWall6.render(f5);
-		TopWall7.render(f5);
-		TopWall8.render(f5);
-		Wall1.render(f5);
-		Wall2.render(f5);
-		Wall3.render(f5);
-		Wall4.render(f5);
-		Wall5.render(f5);
-		Wall6.render(f5);
-		Wall7.render(f5);
-		Wall8.render(f5);
-		GlassTop.render(f5);
-		FloorPlate.render(f5);
-		TopPlate.render(f5);
-		WaterOutput.render(f5);
-		GlassFrame1.render(f5);
-		GlassFrame2.render(f5);
-		GlassFrame3.render(f5);
-		GlassFrame4.render(f5);
-		GlassFrame5.render(f5);
-		GlassFrame6.render(f5);
-		Glass1.render(f5);
-		Glass2.render(f5);
-		Glass3.render(f5);
-		SteamInput.render(f5);
-		WaterOutPadding1.render(f5);
-		WaterOutPadding2.render(f5);
-		WaterOutPadding3.render(f5);
-		WaterOutPadding4.render(f5);
-		
-	}
+            @Override
+            public int getOriginY() {
+                return 0;
+            }
 
-	@Override
-	public void renderModel(TileEntity tileEntity, float f) {
-		renderModelAnimated(null, f, new float[] { 0f });
-	}
+            @Override
+            public int getOriginX() {
+                return 0;
+            }
+
+            @Override
+            public float getMinV() {
+                return 0;
+            }
+
+            @Override
+            public float getMinU() {
+                return 0;
+            }
+
+            @Override
+            public float getMaxV() {
+                return 1;
+            }
+
+            @Override
+            public float getMaxU() {
+                return 1;
+            }
+
+            @Override
+            public float getInterpolatedV(double d0) {
+                return (getMinV() + getMaxV()) * (float) d0 + getMinV();
+            }
+
+            @Override
+            public float getInterpolatedU(double d0) {
+                return (getMinU() + getMaxU()) * (float) d0 + getMinU();
+            }
+
+            @Override
+            public String getIconName() {
+                return "icon";
+            }
+        };
+    }
+    @Override
+    public void renderModel(TileEntity tileEntity, float f) {
+        renderModelAnimated(null, f, new float[] { 0f });
+    }
 
 }
