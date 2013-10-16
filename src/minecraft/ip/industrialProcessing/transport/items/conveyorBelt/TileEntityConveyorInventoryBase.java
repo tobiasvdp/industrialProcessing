@@ -40,10 +40,17 @@ public abstract class TileEntityConveyorInventoryBase extends TileEntityConveyor
 					return getConnectionFromMode(mode);
 				} else
 					return TransportConnectionState.NONE;
-			}// else
+			}
+			else
+			    return handleInventoryState(inventory, direction);
+			// else
 			//	return getConnectionFromMode(mode);
 		}
 		return TransportConnectionState.NONE;
+	}
+
+	protected TransportConnectionState handleInventoryState(IInventory inventory, ForgeDirection direction) {
+	    return TransportConnectionState.DUAL;
 	}
 
 	private TransportConnectionState getConnectionFromMode(ConnectionMode mode) {
