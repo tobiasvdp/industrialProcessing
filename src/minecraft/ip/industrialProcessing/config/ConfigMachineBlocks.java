@@ -2,6 +2,8 @@ package ip.industrialProcessing.config;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.config.ConfigCategories;
+import ip.industrialProcessing.decoration.light.TileEntityElectricLamp;
+import ip.industrialProcessing.decoration.light.TileEntityPetrolLamp;
 import ip.industrialProcessing.machines.blastFurnace.TileEntityBlastFurnace;
 import ip.industrialProcessing.machines.classifier.TileEntityClassifier;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
@@ -96,6 +98,8 @@ public class ConfigMachineBlocks {
     private int boilerBlockID = IndustrialProcessing.config.get(ConfigCategories.power.toString(), "BoilerID", 803).getInt();
     private int steamTurbineBlockID = IndustrialProcessing.config.get(ConfigCategories.power.toString(), "SteamTurbineID", 804).getInt();
     private int generatorBlockID = IndustrialProcessing.config.get(ConfigCategories.power.toString(), "GeneratorID", 805).getInt();
+    private int petrolLampBlockID = IndustrialProcessing.config.get(ConfigCategories.power.toString(), "PetrolLampID", 806).getInt();
+    private int electricLampBlockID = IndustrialProcessing.config.get(ConfigCategories.power.toString(), "ElectricLampID", 807).getInt();
 
     private int wireBlockID = IndustrialProcessing.config.get(ConfigCategories.power.toString(), "WireID", 900).getInt();
     private int voltMeterBlockID = IndustrialProcessing.config.get(ConfigCategories.power.toString(), "VoltMeterID", 901).getInt();
@@ -179,6 +183,8 @@ public class ConfigMachineBlocks {
         registerMachineBlock(IndustrialProcessing.blockManualGenerator, "IP.Generator.Manual", "Crank Generator", TileEntityManualGenerator.class);
         registerMachineBlock(IndustrialProcessing.blockBuildcraftGenerator, "IP.Generator.Buildcraft", "Buildcraft Generator", TileEntityBuildcraftGenerator.class);
         registerMachineBlock(IndustrialProcessing.blockGenerator, "IP.Generator", "Generator", TileEntityGenerator.class);
+        registerMachineBlock(IndustrialProcessing.blockPetrolLamp, "IP.Lamp.Petrol", "Petrol Lamp", TileEntityPetrolLamp.class);
+        registerMachineBlock(IndustrialProcessing.blockElectricLamp, "IP.Lamp.Electric", "Electric Lamp", TileEntityElectricLamp.class);
 
         // transport
         registerMachineBlock(IndustrialProcessing.blockTransportFluids, "IP.Transport.Fluids", "Fluid pipe", TileEntityTransportFluids.class);
@@ -413,4 +419,12 @@ public class ConfigMachineBlocks {
     public static int getGeneratorBlockID() {
         return getInstance().generatorBlockID;
     }
+
+    public static int getBlockPetrolLamp() {
+        return getInstance().petrolLampBlockID;
+    }
+
+    public static int getBlockElectricLamp() {
+        return getInstance().electricLampBlockID;
+    }  
 }

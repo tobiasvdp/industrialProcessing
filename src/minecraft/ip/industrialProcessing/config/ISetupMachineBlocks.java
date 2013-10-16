@@ -1,5 +1,7 @@
 package ip.industrialProcessing.config;
 
+import ip.industrialProcessing.decoration.light.BlockElectricLamp;
+import ip.industrialProcessing.decoration.light.BlockPetrolLamp;
 import ip.industrialProcessing.machines.blastFurnace.BlockBlastFurnace;
 import ip.industrialProcessing.machines.classifier.BlockClassifier;
 import ip.industrialProcessing.machines.crusher.BlockCrusher;
@@ -83,7 +85,8 @@ public interface ISetupMachineBlocks {
     public final static BlockManualGenerator blockManualGenerator = new BlockManualGenerator();
     public final static BlockBuildcraftGenerator blockBuildcraftGenerator = new BlockBuildcraftGenerator();
     public final static BlockGenerator blockGenerator = new BlockGenerator();
-
+    public final static BlockPetrolLamp blockPetrolLamp = new BlockPetrolLamp();
+    public final static BlockElectricLamp blockElectricLamp = new BlockElectricLamp();
     // create wires
     public final static BlockWire blockWire = new BlockWire();
     public final static BlockVoltMeter blockVoltMeter = new BlockVoltMeter();
