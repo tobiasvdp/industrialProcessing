@@ -11,11 +11,16 @@ public class ConfigTransportBlocks {
 	private int blockTransportFluidRainTankID = IndustrialProcessing.config.get(ConfigCategories.transport.toString(),"FluidRaintankID",3504).getInt();
 	private int blockTransportFluidValveID = IndustrialProcessing.config.get(ConfigCategories.transport.toString(),"FluidValveID",3505).getInt();
 	private int blockTransportFluidGrateID = IndustrialProcessing.config.get(ConfigCategories.transport.toString(),"FluidGrateID",3506).getInt();
+	private int blockTransportFluidsWoodID = IndustrialProcessing.config.get(ConfigCategories.transport.toString(),"FluidPipeWoodID",3507).getInt();
 
 	public static int getBlockTransportFluidsID() {
 		return getInstance().blockTransportFluidsID;
+	} 
+	
+	public static int getBlockTransportFluidsWoodID() {
+		return getInstance().blockTransportFluidsWoodID;
 	}
-
+	
 	public static int getBlockTransportFluidPumpID() {
 		return getInstance().blockTransportFluidPumpID;
 	}
