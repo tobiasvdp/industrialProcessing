@@ -96,7 +96,20 @@ public class ConfigItems {
 
     private int itemItem = 6601;
     private int ItemKnife = 6602;
+    private int itemCopperIngotID = 6603;
+    private int itemSilverIngotID = 6604;
+    private int itemTinIngotID = 6605;
 
+    public static int itemCopperIngotID() {
+        return getInstance().itemCopperIngotID;
+    }
+    public static int itemSilverIngotID() {
+        return getInstance().itemSilverIngotID;
+    }
+    public static int itemTinIngotID() {
+        return getInstance().itemTinIngotID;
+    }
+    
     public static int itemPaintBrushID() {
         return getInstance().itemPaintBrushID;
     }

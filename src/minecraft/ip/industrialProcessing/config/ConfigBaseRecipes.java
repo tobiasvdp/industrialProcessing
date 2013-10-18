@@ -22,6 +22,9 @@ public class ConfigBaseRecipes {
 		GameRegistry.addShapedRecipe(new ItemStack(IndustrialProcessing.BLmultiblockScreen),"xxx","x x"," y ",'x',new ItemStack(Item.ingotIron),'y',new ItemStack(IndustrialProcessing.itemHammer,1,WILDCARD_VALUE) );
 		GameRegistry.addShapedRecipe(new ItemStack(IndustrialProcessing.BLmultiblockWeldingStation),"xxx","yzy","iji",'x',new ItemStack(Block.stoneSingleSlab),'y',new ItemStack(Block.planks,1,WILDCARD_VALUE),'z',new ItemStack(Block.workbench),'i',new ItemStack(IndustrialProcessing.itemThickStick),'j',new ItemStack(IndustrialProcessing.itemHammer,1,WILDCARD_VALUE) );
 		GameRegistry.addShapedRecipe(new ItemStack(IndustrialProcessing.BLmultiblockWeldingTableExt),"xxx","yzy","iji",'x',new ItemStack(Block.stoneSingleSlab),'y',new ItemStack(Block.planks,1,WILDCARD_VALUE),'z',new ItemStack(Block.chest),'i',new ItemStack(Item.stick),'j',new ItemStack(IndustrialProcessing.itemHammer,1,WILDCARD_VALUE) );
+		GameRegistry.addSmelting(IndustrialProcessing.itemCopperMineral.itemID, new ItemStack(IndustrialProcessing.itemCopperIngot), 0);
+		GameRegistry.addSmelting(IndustrialProcessing.itemTinOxideDust.itemID, new ItemStack(IndustrialProcessing.itemTinIngot), 0);
+		GameRegistry.addSmelting(IndustrialProcessing.itemSilverDust.itemID, new ItemStack(IndustrialProcessing.itemSilverIngot), 0);
 	}
 
 	private static ConfigBaseRecipes instance = new ConfigBaseRecipes();
