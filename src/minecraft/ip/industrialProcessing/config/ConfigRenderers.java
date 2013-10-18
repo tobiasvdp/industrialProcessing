@@ -56,6 +56,7 @@ public class ConfigRenderers {
     private int rendererMultiblockBlastFurnaceTowerID;
     private int rendererManualTreeTapID;
     private int rendererAutomaticTreeTapID;
+    private int rendererWireMillId;
 
     public static int getRendererManualTreeTapID() {
         return getInstance().rendererManualTreeTapID;
@@ -497,6 +498,13 @@ public class ConfigRenderers {
 
     public static ConfigRenderers getInstance() {
         return instance;
+    }
+    public static int getRendererWireMillId() {
+        return getInstance().rendererWireMillId;
+    }
+
+    public static void setRendererWireMillId(int value) {
+        getInstance().rendererWireMillId = value;
     }
 
 }

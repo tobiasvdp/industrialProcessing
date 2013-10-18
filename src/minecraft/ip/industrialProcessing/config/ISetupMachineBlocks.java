@@ -21,6 +21,7 @@ import ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatme
 import ip.industrialProcessing.machines.thickener.BlockThickener;
 import ip.industrialProcessing.machines.treetap.BlockAutomaticTreeTap;
 import ip.industrialProcessing.machines.treetap.BlockManualTreeTap;
+import ip.industrialProcessing.machines.wireMill.BlockWireMill;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.BLmultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.core.block.elevator.BLmultiblockElevator;
 import ip.industrialProcessing.multiblock.core.block.hotPress.BLmultiblockHotPress;
@@ -80,6 +81,7 @@ public interface ISetupMachineBlocks {
     public final static BlockIncubator blockIncubator = new BlockIncubator();
     public final static BlockTricklingFilter blockTricklingFilter = new BlockTricklingFilter();
     public final static BlockWaterTreatmentStation blockWaterTreatmentStation = new BlockWaterTreatmentStation();
+    public final static BlockWireMill blockWireMill = new BlockWireMill();
 
     // create generators
     public final static BlockManualGenerator blockManualGenerator = new BlockManualGenerator();

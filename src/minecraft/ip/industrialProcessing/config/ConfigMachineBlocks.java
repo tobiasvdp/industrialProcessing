@@ -23,6 +23,7 @@ import ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatme
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
 import ip.industrialProcessing.machines.treetap.TileEntityAutomaticTreeTap;
 import ip.industrialProcessing.machines.treetap.TileEntityManualTreeTap;
+import ip.industrialProcessing.machines.wireMill.TileEntityWireMill;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.TEmultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.core.block.elevator.TEmultiblockElevator;
 import ip.industrialProcessing.multiblock.core.block.hotPress.TEmultiblockHotPress;
@@ -91,6 +92,7 @@ public class ConfigMachineBlocks {
     private int incubatorID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "incubatorID", 554).getInt();
     private int tricklingFilterID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "tricklingFilterID", 555).getInt();
     private int waterTreatmentStationID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "waterTreatmentStationID", 556).getInt();
+    private int wireMillBlockID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "wireMillBlockID", 557).getInt();
 
     private int manualGeneratorBlockID = IndustrialProcessing.config.get(ConfigCategories.power.toString(), "ManualGeneratorID", 800).getInt();
     private int buildcraftGeneratorBlockID = IndustrialProcessing.config.get(ConfigCategories.power.toString(), "BCGeneratorID", 801).getInt();
@@ -179,6 +181,7 @@ public class ConfigMachineBlocks {
         registerMachineBlock(IndustrialProcessing.blockExtruder, "IP.Machine.Extruder", "Extruder", TileEntityExtruder.class);
         registerMachineBlock(IndustrialProcessing.blockOxygenFurnace, "IP.Machine.OxygenFurnace", "Oxygen Furnace", TileEntityOxygenFurnace.class);
         registerMachineBlock(IndustrialProcessing.blockPelletExtruder, "IP.Machine.PelletExtruder", "Pellet Extruder", TileEntityPelletExtruder.class);
+        registerMachineBlock(IndustrialProcessing.blockWireMill, "IP.Machine.WireMill", "Wire mill", TileEntityWireMill.class);
 
         registerMachineBlock(IndustrialProcessing.blockManualGenerator, "IP.Generator.Manual", "Crank Generator", TileEntityManualGenerator.class);
         registerMachineBlock(IndustrialProcessing.blockBuildcraftGenerator, "IP.Generator.Buildcraft", "Buildcraft Generator", TileEntityBuildcraftGenerator.class);
@@ -426,5 +429,9 @@ public class ConfigMachineBlocks {
 
     public static int getBlockElectricLamp() {
         return getInstance().electricLampBlockID;
+    }
+
+    public static int getWireMillBlockID() {
+	return getInstance().wireMillBlockID;
     }  
 }

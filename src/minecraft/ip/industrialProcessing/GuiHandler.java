@@ -58,6 +58,9 @@ import ip.industrialProcessing.machines.treetap.GuiContainerAutomaticTreeTap;
 import ip.industrialProcessing.machines.treetap.GuiContainerManualTreeTap;
 import ip.industrialProcessing.machines.treetap.TileEntityAutomaticTreeTap;
 import ip.industrialProcessing.machines.treetap.TileEntityManualTreeTap;
+import ip.industrialProcessing.machines.wireMill.ContainerWireMill;
+import ip.industrialProcessing.machines.wireMill.GuiContainerWireMill;
+import ip.industrialProcessing.machines.wireMill.TileEntityWireMill;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.ContainerWeldingStation;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.GuiContainerWeldingStation;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
@@ -147,6 +150,8 @@ public class GuiHandler implements IGuiHandler {
                 return new ContainerAutomaticTreeTap(player.inventory, (TileEntityAutomaticTreeTap) entity);
             if (entity instanceof TileEntityConveyorSorter)
                 return new ContainerSorter(player.inventory, (TileEntityConveyorSorter) entity);
+            if (entity instanceof TileEntityWireMill)
+                return new ContainerWireMill(player.inventory, (TileEntityWireMill) entity);
         } else if (ID == GUIDE_ID)
             return null;
         return null;
@@ -211,6 +216,8 @@ public class GuiHandler implements IGuiHandler {
                 return new GuiContainerAutomaticTreeTap(player.inventory, (TileEntityAutomaticTreeTap) entity);
             if (entity instanceof TileEntityConveyorSorter)
                 return new GuiContainerSorter(player.inventory, (TileEntityConveyorSorter) entity);
+            if (entity instanceof TileEntityWireMill)
+                return new GuiContainerWireMill(player.inventory, (TileEntityWireMill) entity);
         } else if (ID == GUIDE_ID)
             return new GuiGuide(player);
         return null;
