@@ -1,22 +1,27 @@
-package ip.industrialProcessing.transport.fluids;
+package ip.industrialProcessing.power.wire;
 
 import java.util.List;
 
+import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.rendering.BlockModelUtils;
-import ip.industrialProcessing.config.ConfigTransportBlocks;
+import ip.industrialProcessing.config.ConfigMachineBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
 
-public class BlockTransportFluidsStone extends BlockTransportFluids {
+public class BlockWireWood extends BlockWire {
 
-    public BlockTransportFluidsStone() {
-        super(ConfigTransportBlocks.getBlockTransportFluidsStoneID(), Material.rock, Block.soundStoneFootstep, "Stone-embedded Fluid Pipe");
+    public BlockWireWood() {
+        super(ConfigMachineBlocks.getWireWoodBlockID(), Material.wood, Block.soundWoodFootstep, "Wood-embedded Wire");
+    }
+
+    public void getSubBlocks(int par1, net.minecraft.creativetab.CreativeTabs par2CreativeTabs, List par3List) {
+        BlockModelUtils.getWoodSubBlocks(par1, par2CreativeTabs, par3List);
     }
 
     @Override
@@ -35,24 +40,5 @@ public class BlockTransportFluidsStone extends BlockTransportFluids {
         if (axisalignedbb1 != null && par5AxisAlignedBB.intersectsWith(axisalignedbb1)) {
             par6List.add(axisalignedbb1);
         }
-    }
-
-    @Override
-    public boolean recolourBlock(World world, int x, int y, int z, ForgeDirection side, int colour) {
-        return false;
-    }
-
-    @Override
-    public int damageDropped(int par1) {
-        return par1;
-    }
-    
-    public void getSubBlocks(int par1, net.minecraft.creativetab.CreativeTabs par2CreativeTabs, List par3List) {
-        BlockModelUtils.getStoneSubBlocks(par1, par2CreativeTabs, par3List);
-    };
-
-    @Override
-    public int onBlockPlaced(World par1World, int par2, int par3, int par4, int par5, float par6, float par7, float par8, int par9) {
-        return par9;
     }
 }

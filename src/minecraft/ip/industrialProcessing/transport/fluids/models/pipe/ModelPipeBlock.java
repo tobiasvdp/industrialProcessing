@@ -1,23 +1,23 @@
 package ip.industrialProcessing.transport.fluids.models.pipe;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Vector3f;
-
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.common.ForgeDirection;
+import ip.industrialProcessing.api.rendering.BlockModelUtils;
 import ip.industrialProcessing.api.rendering.wavefront.ObjRotator;
 import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
 import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.IConnectedTile;
 import ip.industrialProcessing.client.render.ModelBlock;
+import ip.industrialProcessing.power.wire.BlockWireWood;
 import ip.industrialProcessing.transport.fluids.BlockTransportFluidsStone;
 import ip.industrialProcessing.transport.fluids.BlockTransportFluidsWood;
-import ip.industrialProcessing.transport.fluids.TileEntityTank;
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
+import net.minecraftforge.common.ForgeDirection;
+
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Vector3f;
 
 public class ModelPipeBlock extends ModelBlock {
 
@@ -39,7 +39,11 @@ public class ModelPipeBlock extends ModelBlock {
         capUp.renderMesh(true, icon, position);
         capDown.renderMesh(true, icon, position);
         if (block instanceof BlockTransportFluidsWood || block instanceof BlockTransportFluidsStone) {
-            Icon caseIcon = getIcon(block, metadata);
+            Icon caseIcon;
+            if (block instanceof BlockTransportFluidsWood)
+                caseIcon = BlockModelUtils.getEmbeddedWoodIcon(block, metadata);
+            else
+                caseIcon = BlockModelUtils.getEmbeddedStoneIcon(block, metadata);
             if (caseIcon != null) {
                 GL11.glPushMatrix();
                 GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
@@ -81,34 +85,6 @@ public class ModelPipeBlock extends ModelBlock {
         }
     }
 
-    private Icon getIcon(Block block, int meta) {
-        if (block instanceof BlockTransportFluidsWood)
-            return Block.planks.getIcon(0, meta);
-        else if (block instanceof BlockTransportFluidsStone) {
-            switch (meta) {
-            case 0:
-                return Block.stone.getIcon(0, 0);
-            case 1:
-                return Block.cobblestone.getIcon(0, 0);
-            case 2:
-                return Block.cobblestoneMossy.getIcon(0, 0);
-            case 3:
-                return Block.stoneBrick.getIcon(0, 0);
-            case 4:
-                return Block.stoneBrick.getIcon(0, 1);
-            case 5:
-                return Block.stoneBrick.getIcon(0, 2);
-            case 6:
-                return Block.stoneBrick.getIcon(0, 3);
-            case 7:
-                return Block.brick.getIcon(0, 0);
-            default:
-                return null;
-            }
-        }
-        return null;
-    }
-
     @Override
     public boolean renderWorldBlock(WorldReference reference, int modelId, RenderBlocks renderer) {
         TileEntity entity = reference.getBlockTileEntity();
@@ -118,7 +94,12 @@ public class ModelPipeBlock extends ModelBlock {
         if (reference.block instanceof BlockTransportFluidsWood || reference.block instanceof BlockTransportFluidsStone) {
             renderer.renderAllFaces = true;
             Icon icon = reference.getIcon(0);
-            renderer.overrideBlockTexture = getIcon(reference.block, reference.getBlockMetadata());
+            Icon caseIcon;
+            if (reference.block instanceof BlockTransportFluidsWood)
+                caseIcon = BlockModelUtils.getEmbeddedWoodIcon(reference.block, reference.getBlockMetadata());
+            else
+                caseIcon = BlockModelUtils.getEmbeddedStoneIcon(reference.block, reference.getBlockMetadata());
+            renderer.overrideBlockTexture = caseIcon;
             renderer.renderStandardBlock(reference.block, reference.x, reference.y, reference.z);
 
             if (entity instanceof IConnectedTile) {

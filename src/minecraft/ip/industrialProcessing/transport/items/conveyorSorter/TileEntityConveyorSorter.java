@@ -68,11 +68,11 @@ public class TileEntityConveyorSorter extends TileEntityConveyorInventoryBase im
                     if(slots[i] == null)emptySlots++;
                     if (slots[i] != null && slots[i].itemID == stack.itemID) {
                         if (i < 9) {
-                            ForgeDirection right = DirectionUtils.getWorldDirection(LocalDirection.LEFT, this.forwardDirection);
+                            ForgeDirection right = DirectionUtils.getWorldDirection(LocalDirection.RIGHT, this.forwardDirection);
                             if (states[right.ordinal()].isConnected())
                                 return LocalDirection.RIGHT;
                         } else {
-                            ForgeDirection left = DirectionUtils.getWorldDirection(LocalDirection.RIGHT, this.forwardDirection);
+                            ForgeDirection left = DirectionUtils.getWorldDirection(LocalDirection.LEFT, this.forwardDirection);
                             if (states[left.ordinal()].isConnected())
                                 return LocalDirection.LEFT;
                         }
@@ -84,10 +84,10 @@ public class TileEntityConveyorSorter extends TileEntityConveyorInventoryBase im
                 ArrayList<LocalDirection> outputs = new ArrayList<LocalDirection>();
                 outputs.add(LocalDirection.BACK);
 
-                ForgeDirection right = DirectionUtils.getWorldDirection(LocalDirection.LEFT, this.forwardDirection);
+                ForgeDirection right = DirectionUtils.getWorldDirection(LocalDirection.RIGHT, this.forwardDirection);
                 if (states[right.ordinal()].isConnected())
                     outputs.add(LocalDirection.RIGHT);
-                ForgeDirection left = DirectionUtils.getWorldDirection(LocalDirection.RIGHT, this.forwardDirection);
+                ForgeDirection left = DirectionUtils.getWorldDirection(LocalDirection.LEFT, this.forwardDirection);
                 if (states[left.ordinal()].isConnected())
                     outputs.add(LocalDirection.LEFT);                        
                 return outputs.get(rnd.nextInt(outputs.size()));

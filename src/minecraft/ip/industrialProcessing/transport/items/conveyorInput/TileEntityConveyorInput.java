@@ -18,13 +18,13 @@ import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorIn
 public class TileEntityConveyorInput extends TileEntityConveyorInventoryBase {
 
     public TileEntityConveyorInput() {
-	super();
-	Arrays.fill(this.connections, ConnectionMode.INVENTORYINPUT);
-	setConnectionMode(LocalDirection.BACK, ConnectionMode.OUTPUT);
+        super();
+        Arrays.fill(this.connections, ConnectionMode.INVENTORYINPUT);
+        setConnectionMode(LocalDirection.BACK, ConnectionMode.OUTPUT);
     }
 
     @Override
     protected TransportConnectionState handleInventoryState(IInventory inventory, ForgeDirection direction) {
-	return TransportConnectionState.INPUT;
+        return TransportConnectionState.INPUT;
     }
 }

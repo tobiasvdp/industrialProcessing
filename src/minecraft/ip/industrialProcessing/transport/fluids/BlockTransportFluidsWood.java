@@ -2,6 +2,7 @@ package ip.industrialProcessing.transport.fluids;
 
 import java.util.List;
 
+import ip.industrialProcessing.api.rendering.BlockModelUtils;
 import ip.industrialProcessing.config.ConfigTransportBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -46,11 +47,8 @@ public class BlockTransportFluidsWood extends BlockTransportFluids {
         return par1;
     }
 
-    public void getSubBlocks(int par1, net.minecraft.creativetab.CreativeTabs par2CreativeTabs, List par3List) {
-        par3List.add(new ItemStack(par1, 1, 0));
-        par3List.add(new ItemStack(par1, 1, 1));
-        par3List.add(new ItemStack(par1, 1, 2));
-        par3List.add(new ItemStack(par1, 1, 3));
+    public void getSubBlocks(int par1, net.minecraft.creativetab.CreativeTabs par2CreativeTabs, List par3List) { 
+        BlockModelUtils.getWoodSubBlocks(par1, par2CreativeTabs, par3List);
     };
 
     @Override
