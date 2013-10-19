@@ -99,6 +99,8 @@ public class ConfigItems {
     private int itemCopperIngotID = 6603;
     private int itemSilverIngotID = 6604;
     private int itemTinIngotID = 6605;
+    
+    private int itemCopperWireID = 6606;
 
     public static int itemCopperIngotID() {
         return getInstance().itemCopperIngotID;
@@ -445,12 +447,22 @@ public class ConfigItems {
     public static int ItemSlagID() {
         return getInstance().ItemSlagID;
     }
+    
+    public static int getItemCopperWireID() {
+        return getInstance().itemCopperWireID;
+    }
 
     public static int getItemGuideID() {
         return getInstance().itemGuideID;
     }
 
     public static void addToLanguageRegistry() {
+    	LanguageRegistry.addName(IndustrialProcessing.itemCopperWire, "Copper wire");
+    	
+    	LanguageRegistry.addName(IndustrialProcessing.itemCopperIngot, "Copper ingot");
+    	LanguageRegistry.addName(IndustrialProcessing.itemTinIngot, "Tin ingot");
+    	LanguageRegistry.addName(IndustrialProcessing.itemSilverIngot, "Silver ingot");
+    	
         LanguageRegistry.addName(IndustrialProcessing.itemCinnebarSmallCrushedCrystals, "Small crushed cinnebar crystals");
         LanguageRegistry.addName(IndustrialProcessing.itemCinnebarLargeCrushedCrystals, "Large crushed cinnebar crystals");
 

@@ -128,4 +128,6 @@ public interface ISetupItems {
     public final static ItemIP itemCopperIngot = new ItemIP(ConfigItems.itemCopperIngotID(), "ItemCopperIngot",IndustrialProcessing.tabOres);
     public final static ItemIP itemTinIngot = new ItemIP(ConfigItems.itemTinIngotID(), "ItemTinIngot",IndustrialProcessing.tabOres);
     public final static ItemIP itemSilverIngot = new ItemIP(ConfigItems.itemSilverIngotID(), "ItemSilverIngot",IndustrialProcessing.tabOres);
+    
+    public final static ItemIP itemCopperWire = new ItemIP(ConfigItems.getItemCopperWireID(), "ItemCopperWire",IndustrialProcessing.tabOres);
 }

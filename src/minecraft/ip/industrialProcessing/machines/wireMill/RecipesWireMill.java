@@ -10,14 +10,14 @@ import ip.industrialProcessing.recipes.RecipeSlotType;
 
 public class RecipesWireMill extends RecipesMachine {
     public RecipesWireMill(){
-	addRecipe(coalToDust(3000,0));
+	addRecipe(copperToWire(3000,0));
     }
 
-    private Recipe coalToDust(int workTime, int powerConsumption) {
+    private Recipe copperToWire(int workTime, int powerConsumption) {
 	Recipe recipe = new Recipe();
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.coal.itemID, RecipeSlotType.INVENTORY, 1) };
+	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemCopperIngot.itemID, RecipeSlotType.INVENTORY, 3) };
 
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemCoalDust.itemID, RecipeSlotType.INVENTORY, 1, 3, 0) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemCopperWire.itemID, RecipeSlotType.INVENTORY, 12, 16, 0) };
 	recipe.workRequired = workTime;
 	recipe.powerRequired = powerConsumption;
 	return recipe;
