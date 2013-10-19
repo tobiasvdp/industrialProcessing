@@ -12,10 +12,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
-public class BlockTransportFluidsWood extends BlockTransportFluids {
+public class BlockTransportFluidsStone extends BlockTransportFluids {
 
-    public BlockTransportFluidsWood() {
-        super(ConfigTransportBlocks.getBlockTransportFluidsWoodID(), Material.wood, Block.soundWoodFootstep, "Wood-embedded Fluid Pipe");
+    public BlockTransportFluidsStone() {
+        super(ConfigTransportBlocks.getBlockTransportFluidsStoneID(), Material.rock, Block.soundStoneFootstep, "Stone-embedded Fluid Pipe");
     }
 
     @Override
@@ -40,17 +40,21 @@ public class BlockTransportFluidsWood extends BlockTransportFluids {
     public boolean recolourBlock(World world, int x, int y, int z, ForgeDirection side, int colour) {
         return false;
     }
-    
+
     @Override
     public int damageDropped(int par1) {
         return par1;
     }
-
+    
     public void getSubBlocks(int par1, net.minecraft.creativetab.CreativeTabs par2CreativeTabs, List par3List) {
-        par3List.add(new ItemStack(par1, 1, 0));
-        par3List.add(new ItemStack(par1, 1, 1));
-        par3List.add(new ItemStack(par1, 1, 2));
-        par3List.add(new ItemStack(par1, 1, 3));
+        par3List.add(new ItemStack(par1, 1, 0)); // smoothstone
+        par3List.add(new ItemStack(par1, 1, 1)); // cobblestone
+        par3List.add(new ItemStack(par1, 1, 2)); // mossy cobblestone
+        par3List.add(new ItemStack(par1, 1, 3)); // stone brick
+        par3List.add(new ItemStack(par1, 1, 4)); // mossy stone brick
+        par3List.add(new ItemStack(par1, 1, 5)); // cracked stone brick
+        par3List.add(new ItemStack(par1, 1, 6)); // carved stone brick
+        par3List.add(new ItemStack(par1, 1, 7)); // clay brick
     };
 
     @Override

@@ -55,6 +55,7 @@ import ip.industrialProcessing.transport.fluids.BlockPump;
 import ip.industrialProcessing.transport.fluids.BlockRainTank;
 import ip.industrialProcessing.transport.fluids.BlockTank;
 import ip.industrialProcessing.transport.fluids.BlockTransportFluids;
+import ip.industrialProcessing.transport.fluids.BlockTransportFluidsStone;
 import ip.industrialProcessing.transport.fluids.BlockTransportFluidsWood;
 import ip.industrialProcessing.transport.fluids.BlockValve;
 import ip.industrialProcessing.transport.items.conveyorBelt.BlockConveyorBelt;
@@ -102,6 +103,7 @@ public interface ISetupMachineBlocks {
     // create fluidpipe
     public final static BlockTransportFluids blockTransportFluids = new BlockTransportFluids();
     public final static BlockTransportFluidsWood blockTransportFluidsWood = new BlockTransportFluidsWood();
+    public final static BlockTransportFluidsStone blockTransportFluidsStone = new BlockTransportFluidsStone();
     public final static BlockPump blockPump = new BlockPump();
     public final static BlockTank blockTank = new BlockTank();
     public final static BlockRainTank blockRainTank = new BlockRainTank();

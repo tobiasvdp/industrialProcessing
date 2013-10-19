@@ -23,7 +23,7 @@ public abstract class TileEntityTransportFluidsBase extends TileEntityTransport 
 
     private static final int CONNECTION_GROUPS = 16;
     protected TankHandler tankHandler;
-    private int connectionGroup = 1;
+    protected int connectionGroup = 1;
 
     public void setConnectionGroup(int color) {
         connectionGroup = color;
@@ -39,6 +39,7 @@ public abstract class TileEntityTransportFluidsBase extends TileEntityTransport 
             ForgeDirection from = direction.getOpposite();
             if (entity instanceof TileEntityTransportFluidsBase) {
                 TileEntityTransportFluidsBase other = (TileEntityTransportFluidsBase) entity;
+                System.out.println(other.connectionGroup + " " + this.connectionGroup);
                 if ((other.connectionGroup == this.connectionGroup || other.connectionGroup == 1 || this.connectionGroup == 1) && other.canConnect(direction.getOpposite()))
                     return TransportConnectionState.TRANSPORT;
                 return TransportConnectionState.NONE;

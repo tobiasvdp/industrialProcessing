@@ -13,6 +13,8 @@ public abstract class ObjMesh {
     public abstract ObjMesh cloneTransformed(Matrix4f transform);
 
     public void renderMesh(boolean startDraw, Icon icon, WorldReference position) {
+        Tessellator tessellator = Tessellator.instance;
+        tessellator.setColorOpaque(255, 255, 255); 
         renderQuads(this.quads, startDraw, icon, position);
     }
 
@@ -58,7 +60,7 @@ public abstract class ObjMesh {
         Vector3f normal = quad.normal;
         normal.normalise();
 
-        tessellator.setNormal(normal.x, normal.y, normal.z);
+        //tessellator.setNormal(normal.x, normal.y, normal.z);
         tessellator.setBrightness(position.getBrightness(quad.position1, normal));
         tessellator.addVertexWithUV(quad.position1.x + dx, quad.position1.y + dy, quad.position1.z + dz, quad.uv1.x * du + minU, quad.uv1.y * dv + minV);
 
