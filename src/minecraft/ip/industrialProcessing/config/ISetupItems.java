@@ -130,4 +130,8 @@ public interface ISetupItems {
     public final static ItemIP itemSilverIngot = new ItemIP(ConfigItems.itemSilverIngotID(), "ItemSilverIngot",IndustrialProcessing.tabOres);
     
     public final static ItemIP itemCopperWire = new ItemIP(ConfigItems.getItemCopperWireID(), "ItemCopperWire",IndustrialProcessing.tabOres);
+    public final static ItemIP itemCopperWireInsulated = new ItemIP(ConfigItems.getItemCopperWireInsulatedID(), "ItemCopperWireInsulated",IndustrialProcessing.tabOres);
+    public final static ItemIP itemCopperCoil = new ItemIP(ConfigItems.getItemCopperCoilID(), "ItemCopperCoil",IndustrialProcessing.tabOres);
+    public final static ItemIP itemElectroMagnet = new ItemIP(ConfigItems.getItemElectroMagnetID(), "ItemElectroMagnet",IndustrialProcessing.tabOres);
+    public final static ItemIP itemMotorFrame = new ItemIP(ConfigItems.getItemMotorFrameID(), "ItemMotorFrame",IndustrialProcessing.tabOres);
 }

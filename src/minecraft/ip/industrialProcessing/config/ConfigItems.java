@@ -101,7 +101,17 @@ public class ConfigItems {
     private int itemTinIngotID = 6605;
     
     private int itemCopperWireID = 6606;
+    private int itemCopperWireInsulatedID = 6607;
+    private int itemCopperCoilID = 6608;
+    private int itemElectroMangetID = 6609;
+    private int itemMotorFrameID = 6610;
 
+    public static int getItemElectroMagnetID(){
+    	return getInstance().itemElectroMangetID;
+    }
+    public static int getItemCopperWireInsulatedID() {
+        return getInstance().itemCopperWireInsulatedID;
+    }
     public static int itemCopperIngotID() {
         return getInstance().itemCopperIngotID;
     }
@@ -455,8 +465,19 @@ public class ConfigItems {
     public static int getItemGuideID() {
         return getInstance().itemGuideID;
     }
+    
+    public static int getItemCopperCoilID() {
+        return getInstance().itemCopperCoilID;
+    }
+    public static int getItemMotorFrameID() {
+        return getInstance().itemMotorFrameID;
+    }
 
     public static void addToLanguageRegistry() {
+    	LanguageRegistry.addName(IndustrialProcessing.itemMotorFrame, "Motor frame");
+    	LanguageRegistry.addName(IndustrialProcessing.itemElectroMagnet, "Electromagnet");
+    	LanguageRegistry.addName(IndustrialProcessing.itemCopperWireInsulated, "Insulated copper wire");
+    	LanguageRegistry.addName(IndustrialProcessing.itemCopperCoil, "Copper coil");
     	LanguageRegistry.addName(IndustrialProcessing.itemCopperWire, "Copper wire");
     	
     	LanguageRegistry.addName(IndustrialProcessing.itemCopperIngot, "Copper ingot");

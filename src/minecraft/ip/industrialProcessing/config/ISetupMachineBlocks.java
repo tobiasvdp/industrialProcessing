@@ -11,6 +11,7 @@ import ip.industrialProcessing.machines.extruder.BlockExtruder;
 import ip.industrialProcessing.machines.filter.BlockFilter;
 import ip.industrialProcessing.machines.flotationCell.BlockFlotationCell;
 import ip.industrialProcessing.machines.hydroCyclone.BlockHydroCyclone;
+import ip.industrialProcessing.machines.insulator.BlockInsulator;
 import ip.industrialProcessing.machines.magneticSeparator.BlockMagneticSeparator;
 import ip.industrialProcessing.machines.mixer.BlockMixer;
 import ip.industrialProcessing.machines.oxygenFurnace.BlockOxygenFurnace;
@@ -18,6 +19,7 @@ import ip.industrialProcessing.machines.pelletExtruder.BlockPelletExtruder;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator.BlockIncubator;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.tricklingFilter.BlockTricklingFilter;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatmentStation.BlockWaterTreatmentStation;
+import ip.industrialProcessing.machines.spoolWindingMachine.BlockSpoolWindingMachine;
 import ip.industrialProcessing.machines.thickener.BlockThickener;
 import ip.industrialProcessing.machines.treetap.BlockAutomaticTreeTap;
 import ip.industrialProcessing.machines.treetap.BlockManualTreeTap;
@@ -86,6 +88,8 @@ public interface ISetupMachineBlocks {
     public final static BlockTricklingFilter blockTricklingFilter = new BlockTricklingFilter();
     public final static BlockWaterTreatmentStation blockWaterTreatmentStation = new BlockWaterTreatmentStation();
     public final static BlockWireMill blockWireMill = new BlockWireMill();
+    public final static BlockInsulator blockInsulator = new BlockInsulator();
+    public final static BlockSpoolWindingMachine blockSpoolWindingMachine = new BlockSpoolWindingMachine();
 
     // create generators
     public final static BlockManualGenerator blockManualGenerator = new BlockManualGenerator();

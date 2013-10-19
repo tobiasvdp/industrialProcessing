@@ -28,6 +28,9 @@ import ip.industrialProcessing.machines.flotationCell.TileEntityFlotationCell;
 import ip.industrialProcessing.machines.hydroCyclone.ContainerHydroCyclone;
 import ip.industrialProcessing.machines.hydroCyclone.GuiContainerHydroCyclone;
 import ip.industrialProcessing.machines.hydroCyclone.TileEntityHydroCyclone;
+import ip.industrialProcessing.machines.insulator.ContainerInsulator;
+import ip.industrialProcessing.machines.insulator.GuiContainerInsulator;
+import ip.industrialProcessing.machines.insulator.TileEntityInsulator;
 import ip.industrialProcessing.machines.magneticSeparator.ContainerMagneticSeparator;
 import ip.industrialProcessing.machines.magneticSeparator.GuiContainerMagneticSeparator;
 import ip.industrialProcessing.machines.magneticSeparator.TileEntityMagneticSeparator;
@@ -49,6 +52,9 @@ import ip.industrialProcessing.machines.plants.waste.waterTreatment.tricklingFil
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatmentStation.ContainerWaterTreatmentStation;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatmentStation.GuiContainerWaterTreatmentStation;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatmentStation.TileEntityWaterTreatmentStation;
+import ip.industrialProcessing.machines.spoolWindingMachine.ContainerSpoolWindingMachine;
+import ip.industrialProcessing.machines.spoolWindingMachine.GuiContainerSpoolWindingMachine;
+import ip.industrialProcessing.machines.spoolWindingMachine.TileEntitySpoolWindingMachine;
 import ip.industrialProcessing.machines.thickener.ContainerThickener;
 import ip.industrialProcessing.machines.thickener.GuiContainerThickener;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
@@ -152,6 +158,10 @@ public class GuiHandler implements IGuiHandler {
                 return new ContainerSorter(player.inventory, (TileEntityConveyorSorter) entity);
             if (entity instanceof TileEntityWireMill)
                 return new ContainerWireMill(player.inventory, (TileEntityWireMill) entity);
+            if (entity instanceof TileEntityInsulator)
+                return new ContainerInsulator(player.inventory, (TileEntityInsulator) entity);
+            if (entity instanceof TileEntitySpoolWindingMachine)
+                return new ContainerSpoolWindingMachine(player.inventory, (TileEntitySpoolWindingMachine) entity);
         } else if (ID == GUIDE_ID)
             return null;
         return null;
@@ -218,6 +228,10 @@ public class GuiHandler implements IGuiHandler {
                 return new GuiContainerSorter(player.inventory, (TileEntityConveyorSorter) entity);
             if (entity instanceof TileEntityWireMill)
                 return new GuiContainerWireMill(player.inventory, (TileEntityWireMill) entity);
+            if (entity instanceof TileEntityInsulator)
+                return new GuiContainerInsulator(player.inventory, (TileEntityInsulator) entity);
+            if (entity instanceof TileEntitySpoolWindingMachine)
+                return new GuiContainerSpoolWindingMachine(player.inventory, (TileEntitySpoolWindingMachine) entity);
         } else if (ID == GUIDE_ID)
             return new GuiGuide(player);
         return null;

@@ -13,6 +13,7 @@ import ip.industrialProcessing.machines.extruder.TileEntityExtruder;
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
 import ip.industrialProcessing.machines.flotationCell.TileEntityFlotationCell;
 import ip.industrialProcessing.machines.hydroCyclone.TileEntityHydroCyclone;
+import ip.industrialProcessing.machines.insulator.TileEntityInsulator;
 import ip.industrialProcessing.machines.magneticSeparator.TileEntityMagneticSeparator;
 import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import ip.industrialProcessing.machines.oxygenFurnace.TileEntityOxygenFurnace;
@@ -20,6 +21,7 @@ import ip.industrialProcessing.machines.pelletExtruder.TileEntityPelletExtruder;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator.TileEntityIncubator;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.tricklingFilter.TileEntityTricklingFilter;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatmentStation.TileEntityWaterTreatmentStation;
+import ip.industrialProcessing.machines.spoolWindingMachine.TileEntitySpoolWindingMachine;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
 import ip.industrialProcessing.machines.treetap.TileEntityAutomaticTreeTap;
 import ip.industrialProcessing.machines.treetap.TileEntityManualTreeTap;
@@ -97,6 +99,8 @@ public class ConfigMachineBlocks {
     private int tricklingFilterID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "tricklingFilterID", 555).getInt();
     private int waterTreatmentStationID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "waterTreatmentStationID", 556).getInt();
     private int wireMillBlockID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "wireMillBlockID", 557).getInt();
+    private int insulatorBlockID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "insulatorBlockID", 558).getInt();
+    private int spoolWindingMachineBlockID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "spoolWindingMachineBlockID", 559).getInt();
 
     private int manualGeneratorBlockID = IndustrialProcessing.config.get(ConfigCategories.power.toString(), "ManualGeneratorID", 800).getInt();
     private int buildcraftGeneratorBlockID = IndustrialProcessing.config.get(ConfigCategories.power.toString(), "BCGeneratorID", 801).getInt();
@@ -189,6 +193,8 @@ public class ConfigMachineBlocks {
         registerMachineBlock(IndustrialProcessing.blockExtruder, "IP.Machine.Extruder", "Extruder", TileEntityExtruder.class);
         registerMachineBlock(IndustrialProcessing.blockOxygenFurnace, "IP.Machine.OxygenFurnace", "Oxygen Furnace", TileEntityOxygenFurnace.class);
         registerMachineBlock(IndustrialProcessing.blockPelletExtruder, "IP.Machine.PelletExtruder", "Pellet Extruder", TileEntityPelletExtruder.class);
+        registerMachineBlock(IndustrialProcessing.blockInsulator, "IP.Machine.Insulator", "Insulator", TileEntityInsulator.class);
+        registerMachineBlock(IndustrialProcessing.blockSpoolWindingMachine, "IP.Machine.SpoolWinding", "Spool winding machine", TileEntitySpoolWindingMachine.class);
 
         registerMachineBlock(IndustrialProcessing.blockManualGenerator, "IP.Generator.Manual", "Crank Generator", TileEntityManualGenerator.class);
         registerMachineBlock(IndustrialProcessing.blockBuildcraftGenerator, "IP.Generator.Buildcraft", "Buildcraft Generator", TileEntityBuildcraftGenerator.class);
@@ -238,6 +244,14 @@ public class ConfigMachineBlocks {
 
     public static ConfigMachineBlocks getInstance() {
         return instance;
+    }
+    
+    public static int getInsulatorBlockID() {
+        return getInstance().insulatorBlockID;
+    }
+    
+    public static int getSpoolWindingMachineBlockID() {
+        return getInstance().spoolWindingMachineBlockID;
     }
 
     public static int getIncubatorID() {

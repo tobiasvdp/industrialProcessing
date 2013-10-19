@@ -57,7 +57,24 @@ public class ConfigRenderers {
     private int rendererManualTreeTapID;
     private int rendererAutomaticTreeTapID;
     private int rendererWireMillId;
+    private int rendererInsulatorId;
+    private int rendererSpoolWindingMachineId;
 
+    public static int getRendererInsulatorID() {
+        return getInstance().rendererInsulatorId;
+    }
+
+    public static void setRendererInsulatorID(int value) {
+        getInstance().rendererInsulatorId = value;
+    }
+    public static int getRendererSpoolWindingMachineID() {
+        return getInstance().rendererSpoolWindingMachineId;
+    }
+
+    public static void setRendererSpoolWindingMachineID(int value) {
+        getInstance().rendererSpoolWindingMachineId = value;
+    }
+    
     public static int getRendererManualTreeTapID() {
         return getInstance().rendererManualTreeTapID;
     }
