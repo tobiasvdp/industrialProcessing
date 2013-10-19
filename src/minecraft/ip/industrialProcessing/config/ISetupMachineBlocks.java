@@ -49,6 +49,8 @@ import ip.industrialProcessing.power.plants.BlockSolidBurner;
 import ip.industrialProcessing.power.plants.BlockTurbine;
 import ip.industrialProcessing.power.storage.BlockEnergyCell;
 import ip.industrialProcessing.power.wire.BlockWire;
+import ip.industrialProcessing.power.wire.BlockWireStone;
+import ip.industrialProcessing.power.wire.BlockWireWood;
 import ip.industrialProcessing.transport.fluids.BlockGrate;
 import ip.industrialProcessing.transport.fluids.BlockManoMeter;
 import ip.industrialProcessing.transport.fluids.BlockPump;
@@ -93,6 +95,8 @@ public interface ISetupMachineBlocks {
     public final static BlockElectricLamp blockElectricLamp = new BlockElectricLamp();
     // create wires
     public final static BlockWire blockWire = new BlockWire();
+    public final static BlockWireWood blockWireWood = new BlockWireWood();
+    public final static BlockWireStone blockWireStone = new BlockWireStone();
     public final static BlockVoltMeter blockVoltMeter = new BlockVoltMeter();
     public final static BlockAmpMeter blockAmpMeter = new BlockAmpMeter();
     public final static BlockEnergyCell blockEnergyCell = new BlockEnergyCell();

@@ -64,6 +64,8 @@ import ip.industrialProcessing.transport.items.conveyorInput.TileEntityConveyorI
 import ip.industrialProcessing.transport.items.conveyorOutput.TileEntityConveyorOutput;
 import ip.industrialProcessing.transport.items.conveyorSorter.TileEntityConveyorSorter;
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemBlockWithMetadata;
 import net.minecraft.src.ModLoader;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -112,6 +114,9 @@ public class ConfigMachineBlocks {
 
     private int manualTreeTapID = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "ManualTreeTapId", 904).getInt();
     private int automaticTreeTapID = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "AutomaticTreeTapId", 905).getInt();
+    private int wireWoodBlockID = IndustrialProcessing.config.get(ConfigCategories.power.toString(), "WireWoodID", 906).getInt();
+    private int wireStoneBlockID = IndustrialProcessing.config.get(ConfigCategories.power.toString(), "WireStoneID", 907).getInt();
+
     // new multiblocks
     private int BLmultiblockFrame = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "FrameID", 720).getInt();
     private int BLmultiblockHotPress = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "HotPressID", 721).getInt();
@@ -193,8 +198,8 @@ public class ConfigMachineBlocks {
 
         // transport
         registerMachineBlock(IndustrialProcessing.blockTransportFluids, "IP.Transport.Fluids", "Fluid Pipe", TileEntityTransportFluids.class);
-        registerMachineBlock(IndustrialProcessing.blockTransportFluidsWood, "IP.Transport.Fluids.Wood", "Wood-embedded Fluid Pipe", TileEntityTransportFluidsWood.class);
-        registerMachineBlock(IndustrialProcessing.blockTransportFluidsStone, "IP.Transport.Fluids.Stone", "Stone-embedded Fluid Pipe", TileEntityTransportFluidsStone.class);
+        registerMachineBlock(IndustrialProcessing.blockTransportFluidsWood, ItemBlockWithMetadata.class, "IP.Transport.Fluids.Wood", "Wood-embedded Fluid Pipe", TileEntityTransportFluidsWood.class);
+        registerMachineBlock(IndustrialProcessing.blockTransportFluidsStone, ItemBlockWithMetadata.class, "IP.Transport.Fluids.Stone", "Stone-embedded Fluid Pipe", TileEntityTransportFluidsStone.class);
         registerMachineBlock(IndustrialProcessing.blockPump, "IP.Transport.Fluids.Pump", "Fluid pump", TileEntityPump.class);
         registerMachineBlock(IndustrialProcessing.blockTank, "IP.Transport.Fluids.Tank", "Fluid Tank", TileEntityTank.class);
         registerMachineBlock(IndustrialProcessing.blockManometer, "IP.Transport.Fluids.Manometer", "Manometer", TileEntityManoMeter.class);
@@ -204,6 +209,8 @@ public class ConfigMachineBlocks {
 
         // power
         registerMachineBlock(IndustrialProcessing.blockWire, "IP.Wire", "Wire", TileEntityWire.class);
+        registerMachineBlock(IndustrialProcessing.blockWireWood, ItemBlockWithMetadata.class, "IP.Wire.Wood", "Wood-embedded Wire", TileEntityWire.class);
+        registerMachineBlock(IndustrialProcessing.blockWireStone, ItemBlockWithMetadata.class, "IP.Wire.Stone", "Stone-embedded Wire", TileEntityWire.class);
         registerMachineBlock(IndustrialProcessing.blockVoltMeter, "IP.Meter.Volt", "Volt Meter", TileEntityVoltMeter.class);
         registerMachineBlock(IndustrialProcessing.blockAmpMeter, "IP.Meter.Amp", "Amp Meter", TileEntityAmpMeter.class);
         registerMachineBlock(IndustrialProcessing.blockEnergyCell, "IP.EnergyCell", "Battery Box", TileEntityEnergyCell.class);
@@ -217,6 +224,13 @@ public class ConfigMachineBlocks {
 
     private void registerMachineBlock(Block block, String uniqueId, String displayName, Class tileEntity) {
         GameRegistry.registerBlock(block, uniqueId);
+        MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
+        LanguageRegistry.addName(block, displayName);
+        ModLoader.registerTileEntity(tileEntity, uniqueId);
+    }
+
+    private void registerMachineBlock(Block block, Class<? extends ItemBlock> itemBlock, String uniqueId, String displayName, Class tileEntity) {
+        GameRegistry.registerBlock(block, itemBlock, uniqueId);
         MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
         LanguageRegistry.addName(block, displayName);
         ModLoader.registerTileEntity(tileEntity, uniqueId);
@@ -373,6 +387,14 @@ public class ConfigMachineBlocks {
 
     public static int getWireBlockID() {
         return getInstance().wireBlockID;
+    }
+
+    public static int getWireStoneBlockID() {
+        return getInstance().wireStoneBlockID;
+    }
+
+    public static int getWireWoodBlockID() {
+        return getInstance().wireWoodBlockID;
     }
 
     public static int getVoltMeterBlockID() {
