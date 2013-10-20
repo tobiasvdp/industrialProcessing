@@ -105,9 +105,17 @@ public class ConfigItems {
     private int itemCopperCoilID = 6608;
     private int itemElectroMangetID = 6609;
     private int itemMotorFrameID = 6610;
+    private int itemMotorStatorID = 6611;
+    private int itemMotorRotorID = 6612;
 
     public static int getItemElectroMagnetID(){
     	return getInstance().itemElectroMangetID;
+    }
+    public static int getItemMotorStatorID() {
+        return getInstance().itemMotorStatorID;
+    }
+    public static int getItemMotorRotorID() {
+        return getInstance().itemMotorRotorID;
     }
     public static int getItemCopperWireInsulatedID() {
         return getInstance().itemCopperWireInsulatedID;
@@ -474,6 +482,8 @@ public class ConfigItems {
     }
 
     public static void addToLanguageRegistry() {
+    	LanguageRegistry.addName(IndustrialProcessing.itemMotorStator, "Motor stator");
+    	LanguageRegistry.addName(IndustrialProcessing.itemMotorRotor, "Motor rotor");
     	LanguageRegistry.addName(IndustrialProcessing.itemMotorFrame, "Motor frame");
     	LanguageRegistry.addName(IndustrialProcessing.itemElectroMagnet, "Electromagnet");
     	LanguageRegistry.addName(IndustrialProcessing.itemCopperWireInsulated, "Insulated copper wire");

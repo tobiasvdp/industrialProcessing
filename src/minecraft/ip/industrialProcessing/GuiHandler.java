@@ -16,6 +16,9 @@ import ip.industrialProcessing.machines.diskFilter.TileEntityDiskFilter;
 import ip.industrialProcessing.machines.dryer.ContainerDryer;
 import ip.industrialProcessing.machines.dryer.GuiContainerDryer;
 import ip.industrialProcessing.machines.dryer.TileEntityDryer;
+import ip.industrialProcessing.machines.electrolyser.ContainerElectrolyser;
+import ip.industrialProcessing.machines.electrolyser.GuiContainerElectrolyser;
+import ip.industrialProcessing.machines.electrolyser.TileEntityElectrolyser;
 import ip.industrialProcessing.machines.extruder.ContainerExtruder;
 import ip.industrialProcessing.machines.extruder.GuiContainerExtruder;
 import ip.industrialProcessing.machines.extruder.TileEntityExtruder;
@@ -43,6 +46,21 @@ import ip.industrialProcessing.machines.oxygenFurnace.TileEntityOxygenFurnace;
 import ip.industrialProcessing.machines.pelletExtruder.ContainerPelletExtruder;
 import ip.industrialProcessing.machines.pelletExtruder.GuiContainerPelletExtruder;
 import ip.industrialProcessing.machines.pelletExtruder.TileEntityPelletExtruder;
+import ip.industrialProcessing.machines.plants.oilRefinary.AlkylationUnit.ContainerAlkylationUnit;
+import ip.industrialProcessing.machines.plants.oilRefinary.AlkylationUnit.GuiContainerAlkylationUnit;
+import ip.industrialProcessing.machines.plants.oilRefinary.AlkylationUnit.TileEntityAlkylationUnit;
+import ip.industrialProcessing.machines.plants.oilRefinary.asphaltBlower.ContainerAsphaltBlower;
+import ip.industrialProcessing.machines.plants.oilRefinary.asphaltBlower.GuiContainerAsphaltBlower;
+import ip.industrialProcessing.machines.plants.oilRefinary.asphaltBlower.TileEntityAsphaltBlower;
+import ip.industrialProcessing.machines.plants.oilRefinary.gasProcessor.ContainerGasProcessor;
+import ip.industrialProcessing.machines.plants.oilRefinary.gasProcessor.GuiContainerGasProcessor;
+import ip.industrialProcessing.machines.plants.oilRefinary.gasProcessor.TileEntityGasProcessor;
+import ip.industrialProcessing.machines.plants.oilRefinary.isomerizationReactor.ContainerIsomerizationReactor;
+import ip.industrialProcessing.machines.plants.oilRefinary.isomerizationReactor.GuiContainerIsomerizationReactor;
+import ip.industrialProcessing.machines.plants.oilRefinary.isomerizationReactor.TileEntityIsomerizationReactor;
+import ip.industrialProcessing.machines.plants.oilRefinary.sourWaterStripper.ContainerSourWaterStripper;
+import ip.industrialProcessing.machines.plants.oilRefinary.sourWaterStripper.GuiContainerSourWaterStripper;
+import ip.industrialProcessing.machines.plants.oilRefinary.sourWaterStripper.TileEntitySourWaterStripper;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator.ContainerIncubator;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator.GuiContainerIncubator;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator.TileEntityIncubator;
@@ -162,6 +180,18 @@ public class GuiHandler implements IGuiHandler {
                 return new ContainerInsulator(player.inventory, (TileEntityInsulator) entity);
             if (entity instanceof TileEntitySpoolWindingMachine)
                 return new ContainerSpoolWindingMachine(player.inventory, (TileEntitySpoolWindingMachine) entity);
+            if (entity instanceof TileEntityElectrolyser)
+                return new ContainerElectrolyser(player.inventory, (TileEntityElectrolyser) entity);
+            if (entity instanceof TileEntitySourWaterStripper)
+                return new ContainerSourWaterStripper(player.inventory, (TileEntitySourWaterStripper) entity);
+            if (entity instanceof TileEntityAlkylationUnit)
+                return new ContainerAlkylationUnit(player.inventory, (TileEntityAlkylationUnit) entity);
+            if (entity instanceof TileEntityAsphaltBlower)
+                return new ContainerAsphaltBlower(player.inventory, (TileEntityAsphaltBlower) entity);
+            if (entity instanceof TileEntityGasProcessor)
+                return new ContainerGasProcessor(player.inventory, (TileEntityGasProcessor) entity);
+            if (entity instanceof TileEntityIsomerizationReactor)
+                return new ContainerIsomerizationReactor(player.inventory, (TileEntityIsomerizationReactor) entity);
         } else if (ID == GUIDE_ID)
             return null;
         return null;
@@ -232,6 +262,18 @@ public class GuiHandler implements IGuiHandler {
                 return new GuiContainerInsulator(player.inventory, (TileEntityInsulator) entity);
             if (entity instanceof TileEntitySpoolWindingMachine)
                 return new GuiContainerSpoolWindingMachine(player.inventory, (TileEntitySpoolWindingMachine) entity);
+            if (entity instanceof TileEntityElectrolyser)
+                return new GuiContainerElectrolyser(player.inventory, (TileEntityElectrolyser) entity);
+            if (entity instanceof TileEntitySourWaterStripper)
+                return new GuiContainerSourWaterStripper(player.inventory, (TileEntitySourWaterStripper) entity);
+            if (entity instanceof TileEntityAlkylationUnit)
+                return new GuiContainerAlkylationUnit(player.inventory, (TileEntityAlkylationUnit) entity);
+            if (entity instanceof TileEntityAsphaltBlower)
+                return new GuiContainerAsphaltBlower(player.inventory, (TileEntityAsphaltBlower) entity);
+            if (entity instanceof TileEntityGasProcessor)
+                return new GuiContainerGasProcessor(player.inventory, (TileEntityGasProcessor) entity);
+            if (entity instanceof TileEntityIsomerizationReactor)
+                return new GuiContainerIsomerizationReactor(player.inventory, (TileEntityIsomerizationReactor) entity);
         } else if (ID == GUIDE_ID)
             return new GuiGuide(player);
         return null;

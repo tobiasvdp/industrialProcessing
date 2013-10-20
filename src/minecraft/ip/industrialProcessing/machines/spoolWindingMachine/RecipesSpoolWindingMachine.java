@@ -14,9 +14,9 @@ public RecipesSpoolWindingMachine(){
 }
 private Recipe coalToDust(int workTime, int powerConsumption) {
 	Recipe recipe = new Recipe();
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.coal.itemID, RecipeSlotType.INVENTORY, 1) };
+	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemCopperWireInsulated.itemID, RecipeSlotType.INVENTORY, 3) };
 
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(2, IndustrialProcessing.itemCoalDust.itemID, RecipeSlotType.INVENTORY, 1, 3, 0) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(2, IndustrialProcessing.itemCopperCoil.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
 	recipe.workRequired = workTime;
 	recipe.powerRequired = powerConsumption;
 	return recipe;

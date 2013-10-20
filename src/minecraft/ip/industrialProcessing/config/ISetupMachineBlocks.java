@@ -7,6 +7,7 @@ import ip.industrialProcessing.machines.classifier.BlockClassifier;
 import ip.industrialProcessing.machines.crusher.BlockCrusher;
 import ip.industrialProcessing.machines.diskFilter.BlockDiskFilter;
 import ip.industrialProcessing.machines.dryer.BlockDryer;
+import ip.industrialProcessing.machines.electrolyser.blockElectrolyser;
 import ip.industrialProcessing.machines.extruder.BlockExtruder;
 import ip.industrialProcessing.machines.filter.BlockFilter;
 import ip.industrialProcessing.machines.flotationCell.BlockFlotationCell;
@@ -16,6 +17,11 @@ import ip.industrialProcessing.machines.magneticSeparator.BlockMagneticSeparator
 import ip.industrialProcessing.machines.mixer.BlockMixer;
 import ip.industrialProcessing.machines.oxygenFurnace.BlockOxygenFurnace;
 import ip.industrialProcessing.machines.pelletExtruder.BlockPelletExtruder;
+import ip.industrialProcessing.machines.plants.oilRefinary.AlkylationUnit.BlockAlkylationUnit;
+import ip.industrialProcessing.machines.plants.oilRefinary.asphaltBlower.BlockAsphaltBlower;
+import ip.industrialProcessing.machines.plants.oilRefinary.gasProcessor.BlockGasProcessor;
+import ip.industrialProcessing.machines.plants.oilRefinary.isomerizationReactor.BlockIsomerizationReactor;
+import ip.industrialProcessing.machines.plants.oilRefinary.sourWaterStripper.BlockSourWaterStripper;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator.BlockIncubator;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.tricklingFilter.BlockTricklingFilter;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatmentStation.BlockWaterTreatmentStation;
@@ -90,6 +96,12 @@ public interface ISetupMachineBlocks {
     public final static BlockWireMill blockWireMill = new BlockWireMill();
     public final static BlockInsulator blockInsulator = new BlockInsulator();
     public final static BlockSpoolWindingMachine blockSpoolWindingMachine = new BlockSpoolWindingMachine();
+    public final static blockElectrolyser blockElectrolyser = new blockElectrolyser();
+    public final static BlockSourWaterStripper blockSourWaterStripper = new BlockSourWaterStripper();
+    public final static BlockAlkylationUnit blockAlkylationUnit = new BlockAlkylationUnit();
+    public final static BlockAsphaltBlower blockAsphaltBlower = new BlockAsphaltBlower();
+    public final static BlockGasProcessor blockGasProcessor = new BlockGasProcessor();
+    public final static BlockIsomerizationReactor blockIsomerizationReactor = new BlockIsomerizationReactor();
 
     // create generators
     public final static BlockManualGenerator blockManualGenerator = new BlockManualGenerator();

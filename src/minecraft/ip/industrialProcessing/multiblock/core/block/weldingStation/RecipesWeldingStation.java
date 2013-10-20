@@ -14,14 +14,14 @@ public class RecipesWeldingStation extends RecipesMachine {
 	}
 
 	private void addDefaultRecipes() {
-		addRecipe(something(3000,0));
+		addRecipe(motorStator(3000,0));
 	}
-	private Recipe something(int workTime, int power) {
+	private Recipe motorStator(int workTime, int power) {
 		Recipe recipe = new Recipe();
 		
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.coal.itemID, RecipeSlotType.INVENTORY, 1) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(3, IndustrialProcessing.itemCopperCoil.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(4, IndustrialProcessing.itemCopperCoil.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(5, IndustrialProcessing.itemCopperCoil.itemID, RecipeSlotType.INVENTORY, 1) };
 		
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(13, IndustrialProcessing.itemCoalDust.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(13, IndustrialProcessing.itemMotorStator.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
 		
 		recipe.workRequired = workTime;
 		recipe.powerRequired = power;

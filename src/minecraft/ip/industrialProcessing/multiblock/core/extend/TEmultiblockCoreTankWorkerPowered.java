@@ -30,19 +30,24 @@ public abstract class TEmultiblockCoreTankWorkerPowered extends TEmultiblockCore
 
     @Override
     public void doWork() {
-	Recipe recipe = ((RecipeWorker) this.getWorker()).getCurrentRecipe();
+    	Recipe recipe = ((RecipeWorker) getWorker()).getCurrentRecipe();
 
-	int amount = PowerWorkerHelper.getWork(this.storage, this.maxWorkSpeed);
-	if (recipe != null) {
-	    if (recipe.powerRequired > 0)
-		amount /= recipe.powerRequired;
+    	if (recipe != null) {
+    	    int amount = PowerWorkerHelper.getWork(this.storage, this.maxWorkSpeed);
+    	    int maxWork = this.storage.drainPower(amount, false);
+    	    
+    	    if (recipe.powerRequired > 0)
+    		maxWork /= recipe.powerRequired;
+    	    else
+    		maxWork =  this.maxWorkSpeed;
 
-	    int maxWork = this.storage.drainPower(amount, false);
-	    int maxPower = work(maxWork);
-	    if (recipe.powerRequired > 0)
-		maxPower *= recipe.powerRequired;
-	    this.storage.drainPower(maxPower, true);
-	}
+    	    int maxPower = work(maxWork);
+    	    
+    	    if (recipe.powerRequired > 0) {
+    		maxPower *= recipe.powerRequired;
+    		this.storage.drainPower(maxPower, true);
+    	    }
+    	}
     }
 
     @Override

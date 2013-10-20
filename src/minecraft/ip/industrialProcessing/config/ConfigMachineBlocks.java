@@ -9,6 +9,7 @@ import ip.industrialProcessing.machines.classifier.TileEntityClassifier;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import ip.industrialProcessing.machines.diskFilter.TileEntityDiskFilter;
 import ip.industrialProcessing.machines.dryer.TileEntityDryer;
+import ip.industrialProcessing.machines.electrolyser.TileEntityElectrolyser;
 import ip.industrialProcessing.machines.extruder.TileEntityExtruder;
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
 import ip.industrialProcessing.machines.flotationCell.TileEntityFlotationCell;
@@ -18,6 +19,11 @@ import ip.industrialProcessing.machines.magneticSeparator.TileEntityMagneticSepa
 import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import ip.industrialProcessing.machines.oxygenFurnace.TileEntityOxygenFurnace;
 import ip.industrialProcessing.machines.pelletExtruder.TileEntityPelletExtruder;
+import ip.industrialProcessing.machines.plants.oilRefinary.AlkylationUnit.TileEntityAlkylationUnit;
+import ip.industrialProcessing.machines.plants.oilRefinary.asphaltBlower.TileEntityAsphaltBlower;
+import ip.industrialProcessing.machines.plants.oilRefinary.gasProcessor.TileEntityGasProcessor;
+import ip.industrialProcessing.machines.plants.oilRefinary.isomerizationReactor.TileEntityIsomerizationReactor;
+import ip.industrialProcessing.machines.plants.oilRefinary.sourWaterStripper.TileEntitySourWaterStripper;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator.TileEntityIncubator;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.tricklingFilter.TileEntityTricklingFilter;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatmentStation.TileEntityWaterTreatmentStation;
@@ -101,6 +107,12 @@ public class ConfigMachineBlocks {
     private int wireMillBlockID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "wireMillBlockID", 557).getInt();
     private int insulatorBlockID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "insulatorBlockID", 558).getInt();
     private int spoolWindingMachineBlockID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "spoolWindingMachineBlockID", 559).getInt();
+    private int electrolyserBlockID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "electrolyserBlockID", 560).getInt();
+    private int sourWaterStripperID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "sourWaterStripperBlockID", 561).getInt();
+    private int alkylationUnitID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "alkylationUnitID", 562).getInt();
+    private int asphaltBlowerID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "asphaltBlowerID", 563).getInt();
+    private int gasProcessorID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "gasProcessorID", 564).getInt();
+    private int isomerizationReactorID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "isomerizationReactorID", 565).getInt();
 
     private int manualGeneratorBlockID = IndustrialProcessing.config.get(ConfigCategories.power.toString(), "ManualGeneratorID", 800).getInt();
     private int buildcraftGeneratorBlockID = IndustrialProcessing.config.get(ConfigCategories.power.toString(), "BCGeneratorID", 801).getInt();
@@ -146,7 +158,13 @@ public class ConfigMachineBlocks {
     private int BLtransportConveyorBeltSorter = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "ConveyorBeltSorterID", 744).getInt();
 
     public void registerMachineBlocks() {
-
+    	registerMachineBlock(IndustrialProcessing.blockAlkylationUnit, "IP.Machine.AlkUnit", "Alkylation unit", TileEntityAlkylationUnit.class);
+    	registerMachineBlock(IndustrialProcessing.blockGasProcessor, "IP.Machine.GasProc", "Gas processor", TileEntityGasProcessor.class);
+    	registerMachineBlock(IndustrialProcessing.blockAsphaltBlower, "IP.Machine.AspBlow", "Asphalt blower", TileEntityAsphaltBlower.class);
+    	registerMachineBlock(IndustrialProcessing.blockIsomerizationReactor, "IP.Machine.IsoReac", "Isomerization reactor", TileEntityIsomerizationReactor.class);
+    	registerMachineBlock(IndustrialProcessing.blockSourWaterStripper, "IP.Machine.SRstrip", "Sour water Stripper", TileEntitySourWaterStripper.class);
+    	registerMachineBlock(IndustrialProcessing.blockElectrolyser, "IP.Machine.Ellyser", "Electrolyser", TileEntityElectrolyser.class);
+    	
         registerMachineBlock(IndustrialProcessing.blockConveyorBelt, "IP.Trans.CBelt", "Conveyor belt", TileEntityConveyorBelt.class);
         registerMachineBlock(IndustrialProcessing.blockConveyorBeltInput, "IP.Trans.CBInput", "Conveyor belt import", TileEntityConveyorInput.class);
         registerMachineBlock(IndustrialProcessing.blockConveyorOutput, "IP.Trans.CBOutput", "Conveyor belt export", TileEntityConveyorOutput.class);
@@ -245,7 +263,27 @@ public class ConfigMachineBlocks {
     public static ConfigMachineBlocks getInstance() {
         return instance;
     }
+
+    public static int getAlkylationUnitBlockID() {
+        return getInstance().alkylationUnitID;
+    }
+    public static int getAsphaltBlowerBlockID() {
+        return getInstance().asphaltBlowerID;
+    }
+    public static int getGasProcessorBlockID() {
+        return getInstance().gasProcessorID;
+    }
+    public static int getIsomerizationReactorBlockID() {
+        return getInstance().isomerizationReactorID;
+    }
     
+    public static int getSourWaterStripperBlockID() {
+        return getInstance().sourWaterStripperID;
+    }
+    
+    public static int getElectrolyserBlockID() {
+        return getInstance().electrolyserBlockID;
+    }
     public static int getInsulatorBlockID() {
         return getInstance().insulatorBlockID;
     }

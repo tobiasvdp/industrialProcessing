@@ -82,4 +82,50 @@ public interface ISetupFluids {
     public final static BlockFluid blockFluidResidu = new BlockFluid(ConfigFluids.blockFluidBaseResiduID(), itemFluidResidu, Material.water, false);
     public final static ContainerFluid bucketResidu = new ContainerFluid(ConfigFluids.BucketResiduID(), itemFluidResidu, blockFluidResidu, "ContainerResidu");
 
+    public final static ItemFluid itemFluidAir = new ItemFluid("air", 1000, 1000);
+    public final static BlockFluid blockFluidAir = new BlockFluid(ConfigFluids.getAirFluidBlockID(), itemFluidAir, Material.water, false);
+    
+    public final static ItemFluid itemFluidCO2 = new ItemFluid("CO2", 1000, 1000);
+    public final static BlockFluid blockFluidCO2 = new BlockFluid(ConfigFluids.getCO2FluidBlockID(), itemFluidCO2, Material.water, false);
+    
+    public final static ItemFluid itemFluidH2 = new ItemFluid("H2", 1000, 1000);
+    public final static BlockFluid blockFluidH2 = new BlockFluid(ConfigFluids.getH2FluidBlockID(), itemFluidH2, Material.water, false);
+    
+    public final static ItemFluid itemFluidH2S = new ItemFluid("H2S", 1000, 1000);
+    public final static BlockFluid blockFluidH2S = new BlockFluid(ConfigFluids.getH2SFluidBlockID(), itemFluidH2S, Material.water, false);
+    
+    public final static ItemFluid itemFluidIsoButane = new ItemFluid("IsoButane", 1000, 1000);
+    public final static BlockFluid blockFluidIsoButane = new BlockFluid(ConfigFluids.getIsoButaneFluidBlockID(), itemFluidIsoButane, Material.water, false);
+    
+    public final static ItemFluid itemFluidButane = new ItemFluid("Butane", 1000, 1000);
+    public final static BlockFluid blockFluidButane = new BlockFluid(ConfigFluids.getButaneFluidBlockID(), itemFluidButane, Material.water, false);
+    
+    public final static ItemFluid itemFluidAlkylate = new ItemFluid("Alkylate", 1000, 1000);
+    public final static BlockFluid blockFluidAlkylate = new BlockFluid(ConfigFluids.getAlkylateFluidBlockID(), itemFluidAlkylate, Material.water, false);
+    
+    public final static ItemFluid itemFluidGasMix = new ItemFluid("GasMix", 1000, 1000);
+    public final static BlockFluid blockFluidGasMix = new BlockFluid(ConfigFluids.getGasMixFluidBlockID(), itemFluidGasMix, Material.water, false);
+    
+    public final static ItemFluid itemFluidFuelGas = new ItemFluid("FuelGas", 1000, 1000);
+    public final static BlockFluid blockFluidFuelGas = new BlockFluid(ConfigFluids.getFuelGasFluidBlockID(), itemFluidFuelGas, Material.water, false);
+    
+    public final static ItemFluid itemFluidUnsweetenedLPG = new ItemFluid("UnsweetenedLPG", 1000, 1000);
+    public final static BlockFluid blockFluidUnsweetenedLPG = new BlockFluid(ConfigFluids.getUnsweetenedLPGFluidBlockID(), itemFluidUnsweetenedLPG, Material.water, false);
+    
+    public final static ItemFluid itemFluidUnsweetenedButane = new ItemFluid("UnsweetenedButane", 1000, 1000);
+    public final static BlockFluid blockFluidUnsweetenedButane = new BlockFluid(ConfigFluids.getUnsweetenedButaneFluidBlockID(), itemFluidUnsweetenedButane, Material.water, false);
+    
+    public final static ItemFluid itemFluidParaffinicNaphtha = new ItemFluid("ParaffinicNaphtha", 1000, 1000);
+    public final static BlockFluid blockFluidParaffinicNaphtha = new BlockFluid(ConfigFluids.getParaffinicNaphthaFluidBlockID(), itemFluidParaffinicNaphtha, Material.water, false);
+    
+    public final static ItemFluid itemFluidIsomerate = new ItemFluid("Isomerate", 1000, 1000);
+    public final static BlockFluid blockFluidIsomerate = new BlockFluid(ConfigFluids.getIsomerateFluidBlockID(), itemFluidIsomerate, Material.water, false);
+   
+    public final static ItemFluid itemFluidAsphaltSludge = new ItemFluid("AsphaltSludge", 1000, 1000);
+    public final static BlockFluid blockFluidAsphaltSludge = new BlockFluid(ConfigFluids.getAsphaltSludgeFluidBlockID(), itemFluidAsphaltSludge, Material.water, false);
+    public final static ContainerFluid bucketAsphaltSludge = new ContainerFluid(ConfigFluids.getAsphaltSludgeFluidBucketID(), itemFluidAsphaltSludge, blockFluidAsphaltSludge, "ContainerAsphaltSludge");
+    
+    public final static ItemFluid itemFluidSourWater = new ItemFluid("SourWater", 1000, 1000);
+    public final static BlockFluid blockFluidSourWater = new BlockFluid(ConfigFluids.getSourWaterFluidBlockID(), itemFluidSourWater, Material.water, false);
+    public final static ContainerFluid bucketSourWater = new ContainerFluid(ConfigFluids.getSourWaterFluidBucketID(), itemFluidSourWater, blockFluidSourWater, "ContainerSourWater");
 }
