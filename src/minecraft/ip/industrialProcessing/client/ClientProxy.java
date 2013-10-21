@@ -80,6 +80,9 @@ import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
 import ip.industrialProcessing.power.meters.ModelVoltMeter;
 import ip.industrialProcessing.power.meters.TileEntityAmpMeter;
 import ip.industrialProcessing.power.meters.TileEntityVoltMeter;
+import ip.industrialProcessing.power.motor.TileEntityElectroMotor;
+import ip.industrialProcessing.power.motor.models.ModelElectroMotorBlock;
+import ip.industrialProcessing.power.motor.models.ModelElectroMotorTile;
 import ip.industrialProcessing.power.plants.ModelBoiler;
 import ip.industrialProcessing.power.plants.ModelGenerator;
 import ip.industrialProcessing.power.plants.ModelSolidBurner;
@@ -109,6 +112,7 @@ import ip.industrialProcessing.transport.fluids.models.ModelTankBlock;
 import ip.industrialProcessing.transport.fluids.models.meter.ModelManometerBlock;
 import ip.industrialProcessing.transport.fluids.models.pipe.ModelPipeBlock;
 import ip.industrialProcessing.transport.fluids.models.pipe.ModelValveBlock;
+import ip.industrialProcessing.transport.fluids.models.pump.ModelPumpBlock;
 import ip.industrialProcessing.transport.fluids.models.raintank.ModelRainTankBlock;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorBelt;
 import ip.industrialProcessing.transport.items.conveyorBelt.rendering.ModelConveyorBeltTile;
@@ -138,7 +142,8 @@ public class ClientProxy extends CommonProxy {
     private static final ModelAnimatedMachine voltMeter = new ModelVoltMeter(false);
     private static final ModelAnimatedMachine ampMeter = new ModelVoltMeter(true);
     private static final ModelAnimatedMachine manoMeter = new ModelManoMeter();
-    private static final ModelAnimatedFluidMachine pump = new ModelPump();
+    private static final ModelAnimatedMachine pump = new ModelPump();
+    private static final ModelBlock modelPumpBlock = new ModelPumpBlock();
     private static final ModelConnectedFluid transportFluids = new ModelTransportFluids();
     private static final ModelAnimatedMachine EnergyCell = new ModelEnergyCell();
     private static final ModelConnectedFluid rainTank = new ModelRainTank();
@@ -155,7 +160,7 @@ public class ClientProxy extends CommonProxy {
     private static final ModelBlock pipeBlock = new ModelPipeBlock();
     private static final ModelAnimatedFluidMachine boiler = new ModelBoiler();
     private static final ModelMachine solidBurner = new ModelSolidBurner();
-    private static final ModelAnimatedFluidMachine turbine = new ModelTurbine(); 
+    private static final ModelAnimatedFluidMachine turbine = new ModelTurbine();
     private static final MDmultiblockWeldingStation MDmultiblockWeldingStation = new MDmultiblockWeldingStation();
     private static final MDmultiblockBlastFurnace MDmultiblockBlastFurnace = new MDmultiblockBlastFurnace();
     private static final MDmultiblockBlastFurnaceTower MDmultiblockBlastFurnaceTower = new MDmultiblockBlastFurnaceTower();
@@ -186,6 +191,9 @@ public class ClientProxy extends CommonProxy {
 
     private static final ModelAnimatedMachine generator = new ModelGenerator();
     private static final ModelBlock modelGeneratorBlock = new ModelGeneratorBlock();
+
+    private static final ModelAnimatedMachine modelElectroMotorTile = new ModelElectroMotorTile();
+    private static final ModelBlock modelElectroMotorBlock = new ModelElectroMotorBlock();
 
     @Override
     public void registerRenderers() {
@@ -256,6 +264,14 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGenerator.class, new RendererTileEntityAnimated(IndustrialProcessing.blockGenerator, "ModelGenerator", generator));
         ConfigRenderers.setRendererGeneratorId(RenderingRegistry.getNextAvailableRenderId());
         RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererGeneratorId(), modelGeneratorBlock));
+
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityElectroMotor.class, new RendererTileEntityAnimated(IndustrialProcessing.blockElectroMotor, "ModelGenerator", modelElectroMotorTile));
+        ConfigRenderers.setRendererElectroMotorId(RenderingRegistry.getNextAvailableRenderId());
+        RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererElectroMotorId(), modelElectroMotorBlock));
+
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPump.class, new RendererTileEntityAnimated(IndustrialProcessing.blockPump, "ModelPump", pump));
+        ConfigRenderers.setRendererPumpId(RenderingRegistry.getNextAvailableRenderId());
+        RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererPumpId(), modelPumpBlock));
         // 100% tile entity
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFilter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockFilter, "ModelFilter", filter));
@@ -301,10 +317,6 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAmpMeter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockAmpMeter, "ModelAmpMeter", ampMeter));
         ConfigRenderers.setRendererAmpMeterId(RenderingRegistry.getNextAvailableRenderId());
         RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererAmpMeterId(), new TileEntityAmpMeter()));
-
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPump.class, new RendererTileEntityFluidWorker(IndustrialProcessing.blockPump, "ModelPump", pump));
-        ConfigRenderers.setRendererPumpId(RenderingRegistry.getNextAvailableRenderId());
-        RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererPumpId(), new TileEntityPump()));
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBoiler.class, new RendererTileEntityFluidWorker(IndustrialProcessing.blockBoiler, "ModelBoiler", boiler));
         ConfigRenderers.setRendererBoilerId(RenderingRegistry.getNextAvailableRenderId());

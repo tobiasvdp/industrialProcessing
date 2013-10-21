@@ -7,6 +7,7 @@ public class ConfigRenderers {
     private int rendererBCGeneratorID;
     private int rendererGeneratorID;
     private int rendererWireID;
+    private int rendererElectroMotorID;
     private int rendererMixerID;
     private int rendererFilterID;
     private int rendererPlatformID;
@@ -357,11 +358,19 @@ public class ConfigRenderers {
     public static int getRendererWireId() {
         return getInstance().rendererWireID;
     }
-
+    
     public static void setRendererWireId(int value) {
         getInstance().rendererWireID = value;
     }
+    
+    public static int getRendererElectroMotorId() {
+        return getInstance().rendererElectroMotorID;
+    }
 
+    public static void setRendererElectroMotorId(int value) {
+        getInstance().rendererElectroMotorID = value;
+    }
+    
     public static int getRendererVoltMeterId() {
         return getInstance().rendererVoltMeterID;
     }

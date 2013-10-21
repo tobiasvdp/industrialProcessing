@@ -15,72 +15,81 @@ import cpw.mods.fml.common.network.Player;
 import ip.industrialProcessing.PacketHandler;
 import ip.industrialProcessing.packetHandlers.TileSyncHandler;
 
-public class TileAnimationSyncHandler extends TileSyncHandler { 
-	public static void sendAnimationData(TileEntity entity, AnimationHandler handler) {
-		double x = entity.xCoord;
-		double y = entity.yCoord;
-		double z = entity.zCoord;
-		int dimensionId = entity.worldObj.getWorldInfo().getVanillaDimension();
-		double range = 32;
+public class TileAnimationSyncHandler extends TileSyncHandler {
+    static int skip = 0;
 
-		Packet250CustomPayload packet = getAnimationPayload(entity, handler);
-		PacketDispatcher.sendPacketToAllAround(x, y, z, range, dimensionId, packet);
-	}
+    public static void sendAnimationData(TileEntity entity, AnimationHandler handler) {
+        if (handler.isChanged()) {
+            if (skip < 3)
+                skip++;
+            else {
+                skip = 0;
+                double x = entity.xCoord;
+                double y = entity.yCoord;
+                double z = entity.zCoord;
+                int dimensionId = entity.worldObj.getWorldInfo().getVanillaDimension();
+                double range = 32;
 
-	private static Packet250CustomPayload getAnimationPayload(TileEntity entity, AnimationHandler handler) {
+                Packet250CustomPayload packet = getAnimationPayload(entity, handler);
+                PacketDispatcher.sendPacketToAllAround(x, y, z, range, dimensionId, packet);
+            }
+        }
+    }
 
-		ByteArrayOutputStream bos = new ByteArrayOutputStream(4 * 5);
-		DataOutputStream outputStream = new DataOutputStream(bos);
+    private static Packet250CustomPayload getAnimationPayload(TileEntity entity, AnimationHandler handler) {
 
-		try {
-			writeTileEntity(outputStream, entity); // 3 * 4 bytes
-			writeAnimationHandler(outputStream, handler); // 2 * 4 bytes
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return getCustomPacket(bos, PacketHandler.ANIMATION_SYNC);
-	}
+        ByteArrayOutputStream bos = new ByteArrayOutputStream(4 * 5);
+        DataOutputStream outputStream = new DataOutputStream(bos);
 
-	protected static void writeAnimationHandler(DataOutputStream outputStream, AnimationHandler handler) throws IOException {
-		float progress = handler.getProgress();
-		float speed = handler.getSpeed();
-		if (!handler.isIncrementing())
-			speed = -speed;
-		outputStream.writeFloat(progress);
-		outputStream.writeFloat(speed);
-	}
+        try {
+            writeTileEntity(outputStream, entity); // 3 * 4 bytes
+            writeAnimationHandler(outputStream, handler); // 2 * 4 bytes
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return getCustomPacket(bos, PacketHandler.ANIMATION_SYNC);
+    }
 
-	protected static void readAnimationHandler(DataInputStream inputStream, AnimationHandler handler) throws IOException {
-		float progress = inputStream.readFloat();
-		float speed = inputStream.readFloat();
-		boolean incrementing = true;
-		if (speed < 0) {
-			incrementing = false;
-			speed = -speed;
-		}
-		// TRANSACTIONAL: all 3 reads need to succeed
-		handler.setProgress(progress);
-		handler.setSpeed(speed);
-		handler.setIncrementing(incrementing);
-	}
+    protected static void writeAnimationHandler(DataOutputStream outputStream, AnimationHandler handler) throws IOException {
+        float progress = handler.getProgress();
+        float speed = handler.getSpeed();
+        if (!handler.isIncrementing())
+            speed = -speed;
+        outputStream.writeFloat(progress);
+        outputStream.writeFloat(speed);
+    }
 
-	public static void handleAnimationSync(INetworkManager manager, Packet250CustomPayload packet, Player player) {
+    protected static void readAnimationHandler(DataInputStream inputStream, AnimationHandler handler) throws IOException {
+        float progress = inputStream.readFloat();
+        float speed = inputStream.readFloat();
+        boolean incrementing = true;
+        if (speed < 0) {
+            incrementing = false;
+            speed = -speed;
+        }
+        // TRANSACTIONAL: all 3 reads need to succeed
+        handler.setProgress(progress);
+        handler.setSpeed(speed);
+        handler.setIncrementing(incrementing);
+    }
 
-		Entity playerEntity = (Entity) player;
-		TileEntity tileEntity;
-		boolean isAnimated;
+    public static void handleAnimationSync(INetworkManager manager, Packet250CustomPayload packet, Player player) {
 
-		DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
-		try {
-			tileEntity = readTileEntity(inputStream, playerEntity.worldObj);
-			if (tileEntity instanceof IAnimationSyncable) {
-				IAnimationSyncable syncable = (IAnimationSyncable) tileEntity;
-				readAnimationHandler(inputStream, syncable.getAnimationHandler());
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-			return;
-		}
-	}
+        Entity playerEntity = (Entity) player;
+        TileEntity tileEntity;
+        boolean isAnimated;
+
+        DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
+        try {
+            tileEntity = readTileEntity(inputStream, playerEntity.worldObj);
+            if (tileEntity instanceof IAnimationSyncable) {
+                IAnimationSyncable syncable = (IAnimationSyncable) tileEntity;
+                readAnimationHandler(inputStream, syncable.getAnimationHandler());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+    }
 
 }

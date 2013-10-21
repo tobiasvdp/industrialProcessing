@@ -60,12 +60,10 @@ public class TileEntityElectricLamp extends TileEntity implements IPowerAcceptor
                 TileAnimationSyncHandler.sendAnimationData(this, handler);
                 updateDelay = 5;
                 lastLight = light;
-                System.out.println(light + "light");
             }
             this.supplies = 0;
             this.voltage = 0;
             if (updateDelay-- == 0) {
-                System.out.println(String.format("update %s %s %s", xCoord, yCoord, zCoord));
                 worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
             }
         }

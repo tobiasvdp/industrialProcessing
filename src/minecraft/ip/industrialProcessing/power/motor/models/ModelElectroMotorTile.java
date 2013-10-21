@@ -1,17 +1,17 @@
-package ip.industrialProcessing.transport.fluids;
-
-import ip.industrialProcessing.client.render.ModelAnimatedMachine;
-import ip.industrialProcessing.power.plants.models.TurbineAxle;
-import ip.industrialProcessing.transport.fluids.models.pump.PumpAxle;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+package ip.industrialProcessing.power.motor.models;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector3f;
 
-public class ModelPump extends ModelAnimatedMachine {
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
+import ip.industrialProcessing.client.render.ModelAnimatedMachine;
+import ip.industrialProcessing.power.plants.models.TurbineAxle;
 
-    PumpAxle axle = new PumpAxle();
+public class ModelElectroMotorTile extends ModelAnimatedMachine {
+
+    ElectroMotorShaft axle = new ElectroMotorShaft();
 
     @Override
     public void renderModelAnimated(TileEntity tileEntity, float f5, float[] progress) {

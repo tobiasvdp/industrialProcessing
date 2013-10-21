@@ -44,6 +44,7 @@ import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGen
 import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
 import ip.industrialProcessing.power.meters.TileEntityAmpMeter;
 import ip.industrialProcessing.power.meters.TileEntityVoltMeter;
+import ip.industrialProcessing.power.motor.TileEntityElectroMotor;
 import ip.industrialProcessing.power.plants.TileEntityBoiler;
 import ip.industrialProcessing.power.plants.TileEntityGenerator;
 import ip.industrialProcessing.power.plants.TileEntitySolidBurner;
@@ -116,6 +117,7 @@ public class ConfigMachineBlocks {
     private int automaticTreeTapID = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "AutomaticTreeTapId", 905).getInt();
     private int wireWoodBlockID = IndustrialProcessing.config.get(ConfigCategories.power.toString(), "WireWoodID", 906).getInt();
     private int wireStoneBlockID = IndustrialProcessing.config.get(ConfigCategories.power.toString(), "WireStoneID", 907).getInt();
+    private int electroMotorBlockID = IndustrialProcessing.config.get(ConfigCategories.power.toString(), "ElectroMotorID", 908).getInt();
 
     // new multiblocks
     private int BLmultiblockFrame = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "FrameID", 720).getInt();
@@ -217,6 +219,7 @@ public class ConfigMachineBlocks {
         registerMachineBlock(IndustrialProcessing.blockSolidBurner, "IP.SolidBurner", "Solid Burner", TileEntitySolidBurner.class);
         registerMachineBlock(IndustrialProcessing.blockBoiler, "IP.Boiler", "Boiler", TileEntityBoiler.class);
         registerMachineBlock(IndustrialProcessing.blockTurbine, "IP.Turbine", "Turbine", TileEntityTurbine.class);
+        registerMachineBlock(IndustrialProcessing.blockElectroMotor, "IP.Motor.Electric", "Electro Motor", TileEntityElectroMotor.class);
 
         registerMachineBlock(IndustrialProcessing.blockManualTreetap, "IP.TreeTap.Manual", "Manual Treetap", TileEntityManualTreeTap.class);
         registerMachineBlock(IndustrialProcessing.blockAutomaticTreetap, "IP.TreeTap.Automatic", "Automatic Treetap", TileEntityAutomaticTreeTap.class);
@@ -387,6 +390,10 @@ public class ConfigMachineBlocks {
 
     public static int getWireBlockID() {
         return getInstance().wireBlockID;
+    }
+
+    public static int getElectroMotorBlockID() {
+        return getInstance().electroMotorBlockID;
     }
 
     public static int getWireStoneBlockID() {

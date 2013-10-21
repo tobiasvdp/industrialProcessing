@@ -94,7 +94,8 @@ public class TileEntityValve extends TileEntityTransportFluidsBase implements IA
 
             this.animationHandler.update();
             TileAnimationSyncHandler.sendAnimationData(this, this.animationHandler);
-        }
+        } else
+            this.animationHandler.update();
     }
 
     @Override

@@ -22,72 +22,72 @@ public abstract class TileEntityPoweredWorkerMachine extends TileEntityWorkerMac
     private SimplePowerStorage storage;
 
     public TileEntityPoweredWorkerMachine(LocalDirection powerInput, int powerCapacity, int maxWorkSpeed) {
-	this.powerInputSide = powerInput;
-	this.maxWorkSpeed = maxWorkSpeed;
-	this.storage = new SimplePowerStorage(powerCapacity);
+        this.powerInputSide = powerInput;
+        this.maxWorkSpeed = maxWorkSpeed;
+        this.storage = new SimplePowerStorage(powerCapacity);
     }
 
     public TileEntityPoweredWorkerMachine(LocalDirection powerInput, int powerCapacity) {
-	this(powerInput, powerCapacity, PowerWorkerHelper.DEFAULT_WORK_SPEED);
+        this(powerInput, powerCapacity, PowerWorkerHelper.DEFAULT_WORK_SPEED);
     }
 
     @Override
     public void doWork() {
-	Recipe recipe = ((RecipeWorker) this.worker).getCurrentRecipe();
+        Recipe recipe = ((RecipeWorker) this.worker).getCurrentRecipe();
 
-	if (recipe != null) {
-	    int amount = PowerWorkerHelper.getWork(this.storage, this.maxWorkSpeed);
-	    int maxWork = this.storage.drainPower(amount, false);
-	    
-	    if (recipe.powerRequired > 0)
-		maxWork /= recipe.powerRequired;
-	    else
-		maxWork =  this.maxWorkSpeed;
+        if (recipe != null) {
+            int amount = PowerWorkerHelper.getWork(this.storage, this.maxWorkSpeed);
+            int maxWork = this.storage.drainPower(amount, false);
 
-	    int maxPower = work(maxWork);
-	    
-	    if (recipe.powerRequired > 0) {
-		maxPower *= recipe.powerRequired;
-		this.storage.drainPower(maxPower, true);
-	    }
-	}
+            if (recipe.powerRequired > 0)
+                maxWork /= recipe.powerRequired;
+            else
+                maxWork = this.maxWorkSpeed;
+
+            int maxPower = work(maxWork);
+
+            if (recipe.powerRequired > 0) {
+                maxPower *= recipe.powerRequired;
+                this.storage.drainPower(maxPower, true);
+            }
+        }
     }
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
-	super.readFromNBT(nbt);
-	this.storage.readFromNBT(nbt);
+        super.readFromNBT(nbt);
+        this.storage.readFromNBT(nbt);
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
-	super.writeToNBT(nbt);
-	this.storage.writeToNBT(nbt);
+        super.writeToNBT(nbt);
+        this.storage.writeToNBT(nbt);
     }
 
     @Override
     public float getResistance(ForgeDirection side, float voltage) {
-	if (canAcceptPower(side)) {
-	    return PowerHelper.getResistanceForStorage(this.storage);
-	}
-	return Float.POSITIVE_INFINITY;
+        if (canAcceptPower(side)) {
+            return PowerHelper.getResistanceForStorage(this.storage);
+        }
+        return Float.POSITIVE_INFINITY;
     }
 
     @Override
     public void applyPower(ForgeDirection side, float coulombs, float voltage) {
-	if (canAcceptPower(side)) {
-	    int joules = (int) PowerHelper.getEnergy(coulombs, voltage);
-	    this.storage.fillPower(joules, true);
-	}
+        if (canAcceptPower(side)) {
+            int joules = (int) PowerHelper.getEnergy(coulombs, voltage);
+            this.storage.fillPower(joules, true);
+        }
     }
 
     @Override
     public boolean canAcceptPower(ForgeDirection side) {
-	return this.powerInputSide == DirectionUtils.getLocalDirection(side, getForwardDirection());
+        return this.powerInputSide == DirectionUtils.getLocalDirection(side, getForwardDirection());
     }
 
     @Override
     public IPowerStorage getMainPowerStorage() {
-	return this.storage;
+        return this.storage;
     }
 }

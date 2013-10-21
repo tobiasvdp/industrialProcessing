@@ -90,7 +90,7 @@ public class TileEntityGenerator extends TileEntityPowerGenerator implements IAn
 	    ForgeDirection direction = DirectionUtils.getWorldDirection(this.inputSide, this.getForwardDirection());
 		if (side == direction) {
 			this.animationHandler.setSpeed(speed);
-			return this.lastCharge;
+			return this.lastCharge/30;
 		}
 		return 0;
 	}

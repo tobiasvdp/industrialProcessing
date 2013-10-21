@@ -14,7 +14,7 @@ public abstract class ObjMesh {
 
     public void renderMesh(boolean startDraw, Icon icon, WorldReference position) {
         Tessellator tessellator = Tessellator.instance;
-        tessellator.setColorOpaque(255, 255, 255); 
+        tessellator.setColorOpaque(255, 255, 255);
         renderQuads(this.quads, startDraw, icon, position);
     }
 
@@ -60,7 +60,16 @@ public abstract class ObjMesh {
         Vector3f normal = quad.normal;
         normal.normalise();
 
-        //tessellator.setNormal(normal.x, normal.y, normal.z);
+        // tessellator.setColorOpaque_F(normal.x, normal.y, normal.z);
+        // tessellator.setNormal(normal.x, normal.y, normal.z);
+
+        Vector3f up = new Vector3f(1, 1, 0);
+        up.normalise();
+
+        float darken = (Vector3f.dot(up, normal) + 1) / 2f;
+        int normalBrightness = (int) (255 * (darken + 1) / 2f);
+
+        tessellator.setColorOpaque(normalBrightness, normalBrightness, normalBrightness);
         tessellator.setBrightness(position.getBrightness(quad.position1, normal));
         tessellator.addVertexWithUV(quad.position1.x + dx, quad.position1.y + dy, quad.position1.z + dz, quad.uv1.x * du + minU, quad.uv1.y * dv + minV);
 
@@ -98,7 +107,6 @@ public abstract class ObjMesh {
         float dx = 0.0f + position.x;
         float dy = -0.5f + position.y;
         float dz = 0.0f + position.z;
- 
 
         Vector3f normal = quad.normal;
         normal.normalise();

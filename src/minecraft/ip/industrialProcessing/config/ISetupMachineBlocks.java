@@ -43,6 +43,7 @@ import ip.industrialProcessing.power.buildcraftGenerator.BlockBuildcraftGenerato
 import ip.industrialProcessing.power.manualGenerator.BlockManualGenerator;
 import ip.industrialProcessing.power.meters.BlockAmpMeter;
 import ip.industrialProcessing.power.meters.BlockVoltMeter;
+import ip.industrialProcessing.power.motor.BlockElectroMotor;
 import ip.industrialProcessing.power.plants.BlockBoiler;
 import ip.industrialProcessing.power.plants.BlockGenerator;
 import ip.industrialProcessing.power.plants.BlockSolidBurner;
@@ -93,6 +94,8 @@ public interface ISetupMachineBlocks {
     public final static BlockGenerator blockGenerator = new BlockGenerator();
     public final static BlockPetrolLamp blockPetrolLamp = new BlockPetrolLamp();
     public final static BlockElectricLamp blockElectricLamp = new BlockElectricLamp();
+    public final static BlockElectroMotor blockElectroMotor = new BlockElectroMotor();
+    
     // create wires
     public final static BlockWire blockWire = new BlockWire();
     public final static BlockWireWood blockWireWood = new BlockWireWood();
