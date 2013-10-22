@@ -58,7 +58,72 @@ public class ConfigRenderers {
     private int rendererManualTreeTapID;
     private int rendererAutomaticTreeTapID;
     private int rendererWireMillId;
+    private int rendererInsulatorId;
+    private int rendererSpoolWindingMachineId;
+    private int rendererElectrolyserId;
+    private int rendererSourWaterStripperId;
+    private int rendererAlkylationUnitId;
+    private int rendererAsphaltBlowerId;
+    private int rendererGasProcessorId;
+    private int rendererIsomerizationReactorId;
 
+    public static int getRendererIsomerizationReactorId() {
+        return getInstance().rendererIsomerizationReactorId;
+    }
+
+    public static void setRendererIsomerizationReactorId(int value) {
+        getInstance().rendererIsomerizationReactorId = value;
+    }
+    public static int getRendererGasProcessorId() {
+        return getInstance().rendererGasProcessorId;
+    }
+
+    public static void setRendererGasProcessorId(int value) {
+        getInstance().rendererGasProcessorId = value;
+    }
+    public static int getRendererAsphaltBlowerId() {
+        return getInstance().rendererAsphaltBlowerId;
+    }
+
+    public static void setRendererAsphaltBlowerId(int value) {
+        getInstance().rendererAsphaltBlowerId = value;
+    }
+    public static int getRendererAlkylationUnitId() {
+        return getInstance().rendererAlkylationUnitId;
+    }
+
+    public static void setRendererAlkylationUnitId(int value) {
+        getInstance().rendererAlkylationUnitId = value;
+    }
+    public static int getRendererSourWaterStripperId() {
+        return getInstance().rendererSourWaterStripperId;
+    }
+
+    public static void setRendererSourWaterStripperId(int value) {
+        getInstance().rendererSourWaterStripperId = value;
+    }
+    public static int getRendererElectrolyserId() {
+        return getInstance().rendererElectrolyserId;
+    }
+
+    public static void setRendererElectrolyserId(int value) {
+        getInstance().rendererElectrolyserId = value;
+    }
+    public static int getRendererInsulatorID() {
+        return getInstance().rendererInsulatorId;
+    }
+
+    public static void setRendererInsulatorID(int value) {
+        getInstance().rendererInsulatorId = value;
+    }
+    public static int getRendererSpoolWindingMachineID() {
+        return getInstance().rendererSpoolWindingMachineId;
+    }
+
+    public static void setRendererSpoolWindingMachineID(int value) {
+        getInstance().rendererSpoolWindingMachineId = value;
+    }
+    
     public static int getRendererManualTreeTapID() {
         return getInstance().rendererManualTreeTapID;
     }

@@ -17,8 +17,8 @@ import ip.industrialProcessing.multiblock.gui.GUImultiblock;
 
 public class GuiContainerWeldingStation extends GUImultiblock{
 
-	private static final Rectangle PROGRESSBAR_SOURCE = new Rectangle(176, 0, 22, 16);
-	private static final Point PROGRESSBAR_LOCATION = new Point(70, 34);
+	private static final Rectangle PROGRESSBAR_SOURCE = new Rectangle(198, 0, 22, 16);
+	private static final Point PROGRESSBAR_LOCATION = new Point(106, 31);
 	
 	public GuiContainerWeldingStation(InventoryPlayer inventory, TEmultiblockCoreTankWorkerPowered entity) {
 		super(inventory, entity, new ContainerWeldingStation(inventory, entity), "Welding Table", "textures/gui/WeldingTable.png");

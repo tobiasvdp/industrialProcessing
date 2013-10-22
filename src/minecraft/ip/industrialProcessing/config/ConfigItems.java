@@ -99,7 +99,27 @@ public class ConfigItems {
     private int itemCopperIngotID = 6603;
     private int itemSilverIngotID = 6604;
     private int itemTinIngotID = 6605;
+    
+    private int itemCopperWireID = 6606;
+    private int itemCopperWireInsulatedID = 6607;
+    private int itemCopperCoilID = 6608;
+    private int itemElectroMangetID = 6609;
+    private int itemMotorFrameID = 6610;
+    private int itemMotorStatorID = 6611;
+    private int itemMotorRotorID = 6612;
 
+    public static int getItemElectroMagnetID(){
+    	return getInstance().itemElectroMangetID;
+    }
+    public static int getItemMotorStatorID() {
+        return getInstance().itemMotorStatorID;
+    }
+    public static int getItemMotorRotorID() {
+        return getInstance().itemMotorRotorID;
+    }
+    public static int getItemCopperWireInsulatedID() {
+        return getInstance().itemCopperWireInsulatedID;
+    }
     public static int itemCopperIngotID() {
         return getInstance().itemCopperIngotID;
     }
@@ -445,12 +465,35 @@ public class ConfigItems {
     public static int ItemSlagID() {
         return getInstance().ItemSlagID;
     }
+    
+    public static int getItemCopperWireID() {
+        return getInstance().itemCopperWireID;
+    }
 
     public static int getItemGuideID() {
         return getInstance().itemGuideID;
     }
+    
+    public static int getItemCopperCoilID() {
+        return getInstance().itemCopperCoilID;
+    }
+    public static int getItemMotorFrameID() {
+        return getInstance().itemMotorFrameID;
+    }
 
     public static void addToLanguageRegistry() {
+    	LanguageRegistry.addName(IndustrialProcessing.itemMotorStator, "Motor stator");
+    	LanguageRegistry.addName(IndustrialProcessing.itemMotorRotor, "Motor rotor");
+    	LanguageRegistry.addName(IndustrialProcessing.itemMotorFrame, "Motor frame");
+    	LanguageRegistry.addName(IndustrialProcessing.itemElectroMagnet, "Electromagnet");
+    	LanguageRegistry.addName(IndustrialProcessing.itemCopperWireInsulated, "Insulated copper wire");
+    	LanguageRegistry.addName(IndustrialProcessing.itemCopperCoil, "Copper coil");
+    	LanguageRegistry.addName(IndustrialProcessing.itemCopperWire, "Copper wire");
+    	
+    	LanguageRegistry.addName(IndustrialProcessing.itemCopperIngot, "Copper ingot");
+    	LanguageRegistry.addName(IndustrialProcessing.itemTinIngot, "Tin ingot");
+    	LanguageRegistry.addName(IndustrialProcessing.itemSilverIngot, "Silver ingot");
+    	
         LanguageRegistry.addName(IndustrialProcessing.itemCinnebarSmallCrushedCrystals, "Small crushed cinnebar crystals");
         LanguageRegistry.addName(IndustrialProcessing.itemCinnebarLargeCrushedCrystals, "Large crushed cinnebar crystals");
 

@@ -20,6 +20,7 @@ public class ContainerMixer extends ContainerPoweredFluidWorkerMachine {
 		super(inventoryPlayer, tileEntity);
 
 		inputSlot = new SlotBase(tileEntity, 0, 44, 35);
+		
 		inputWaterFullInput = new SlotLiquid(tileEntity, 1, 8, 19);
 		inputWaterEmptyOutput = new SlotLiquidOutput(tileEntity, 2, 8, 53);
 
