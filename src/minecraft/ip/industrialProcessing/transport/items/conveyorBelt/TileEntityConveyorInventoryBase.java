@@ -140,10 +140,12 @@ public abstract class TileEntityConveyorInventoryBase extends TileEntityConveyor
                     for (int j = 0; j < slots.length; j++) {
                         if (worldObj.rand.nextGaussian() > 1) {
                             ItemStack stack = sidedInventory.getStackInSlot(slots[j]);
-                            sidedInventory.canExtractItem(slots[j], stack, opposite.ordinal());
-                            ItemStack item = sidedInventory.decrStackSize(slots[j], 1);
-                            if (item != null) {
-                                return item;
+                            if (stack != null) {
+                                sidedInventory.canExtractItem(slots[j], stack, opposite.ordinal());
+                                ItemStack item = sidedInventory.decrStackSize(slots[j], 1);
+                                if (item != null) {
+                                    return item;
+                                }
                             }
                         }
                     }

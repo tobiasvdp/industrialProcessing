@@ -14,13 +14,13 @@ import ip.industrialProcessing.recipes.RecipeSlotType;
 public class RecipesMixer extends RecipesMachine {
 
     public RecipesMixer() {
-        addRecipe(ironSmallToSludge(3000, 1));
-        addRecipe(copperSmallToSludge(3000, 1));
-        addRecipe(tinSmallToSludge(3000, 1));
-        addRecipe(goldSmallToSludge(3000, 1));
-        addRecipe(galenaSmallToSludge(3000, 1));
-        addRecipe(chromiteSmallToSludge(3000, 1));
-        addRecipe(taliaSmallToSludge(3000, 1));
+        addRecipe(ironSmallToSludge(2000, 1));
+        addRecipe(copperSmallToSludge(2000, 1));
+        addRecipe(tinSmallToSludge(2000, 1));
+        addRecipe(goldSmallToSludge(2000, 1));
+        addRecipe(galenaSmallToSludge(2000, 1));
+        addRecipe(chromiteSmallToSludge(2000, 1));
+        addRecipe(taliaSmallToSludge(2000, 1));
     }
 
     private Recipe taliaSmallToSludge(int i, int powerConsumption) {

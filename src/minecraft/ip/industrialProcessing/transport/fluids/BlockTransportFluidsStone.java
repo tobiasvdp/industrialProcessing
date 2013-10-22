@@ -36,6 +36,12 @@ public class BlockTransportFluidsStone extends BlockTransportFluids {
             par6List.add(axisalignedbb1);
         }
     }
+    
+    @Override
+    public int getDamageValue(World par1World, int par2, int par3, int par4) {
+        return par1World.getBlockMetadata(par2, par3, par4);
+    }
+     
 
     @Override
     public boolean recolourBlock(World world, int x, int y, int z, ForgeDirection side, int colour) {
