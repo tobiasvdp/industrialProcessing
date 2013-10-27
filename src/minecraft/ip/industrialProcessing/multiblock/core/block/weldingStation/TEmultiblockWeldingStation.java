@@ -28,37 +28,37 @@ import ip.industrialProcessing.multiblock.utils.TEmultiblockItemStackType;
 import ip.industrialProcessing.multiblock.utils.blockSide;
 import ip.industrialProcessing.recipes.Recipe;
 
-public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowered{
+public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowered {
 	static StructureMultiblock structure;
 	static TierCollection tierRequirments;
 	static RecipesMachine recipes = new RecipesWeldingStation();
-	static{
-		//set layout
+	static {
+		// set layout
 		structure = new StructureMultiblock();
-		
+
 		LayoutMultiblock layout = new LayoutMultiblock(2, 0, 0, 0, 1, 0);
-		
+
 		int i = 0;
-		layout.setCoreID(i++,0,1, IndustrialProcessing.BLmultiblockWeldingStation.blockID);
-		
-		layout.setBlockID(-1, 0, 0,i++, 0,0, IndustrialProcessing.BLmultiblockWeldingTableExt.blockID);
-		layout.setBlockID(0, 1, 0,i++, 0,0, IndustrialProcessing.BLmultiblockScreen.blockID);
-		layout.setBlockID(-1, 1, 0,i++, 0,1, IndustrialProcessing.BLmultiblockScreen.blockID);
-		
+		layout.setCoreID(i++, 0, 1, IndustrialProcessing.BLmultiblockWeldingStation.blockID);
+
+		layout.setBlockID(-1, 0, 0, i++, 0, 0, IndustrialProcessing.BLmultiblockWeldingTableExt.blockID);
+		layout.setBlockID(0, 1, 0, i++, 0, 0, IndustrialProcessing.BLmultiblockScreen.blockID);
+		layout.setBlockID(-1, 1, 0, i++, 0, 1, IndustrialProcessing.BLmultiblockScreen.blockID);
+
 		structure.addLayout(layout, FacingDirection.North);
 		structure.addLayout(LayoutTransformer.transform(layout, FacingDirection.East), FacingDirection.East);
 		structure.addLayout(LayoutTransformer.transform(layout, FacingDirection.South), FacingDirection.South);
 		structure.addLayout(LayoutTransformer.transform(layout, FacingDirection.West), FacingDirection.West);
-		
-		
-		//set tiers
+
+		// set tiers
 		tierRequirments = new TierCollection(1);
-		
+
 		Tier tier = new Tier();
 		tierRequirments.addTier(tier, Tiers.Tier0);
 	}
+
 	public TEmultiblockWeldingStation() {
-		super(structure, tierRequirments,recipes, LocalDirection.LEFT,10000,100);
+		super(structure, tierRequirments, recipes, LocalDirection.LEFT, 10000, 100);
 		this.addStack(null, LocalDirection.UP, true, false);
 		this.addStack(null, LocalDirection.UP, true, false);
 		this.addStack(null, LocalDirection.UP, true, false);
@@ -72,44 +72,51 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowere
 		this.addStack(null, LocalDirection.UP, true, false);
 		this.addStack(null, LocalDirection.UP, true, false);
 		this.addStack(null, LocalDirection.UP, true, false);
-		this.addStack(null, LocalDirection.RIGHT, false, true);	
-		
-		this.addTank(10000, 0, new ForgeDirection[]{ForgeDirection.NORTH}, true, false);
+		this.addStack(null, LocalDirection.RIGHT, false, true);
+
+		this.addTank(10000, 0, new ForgeDirection[] { ForgeDirection.NORTH }, true, false);
 	}
+
 	@Override
 	public void updateEntity() {
-	    System.out.println(worldObj + " work :" + getWorker().getWorkDone() + "/" + getWorker().getTotalWork());
-	super.updateEntity();
+		super.updateEntity();
 	}
+
 	@Override
 	protected boolean isTankValidForFluid(int slot, int fluidId) {
-	    return true;
+		return true;
 	}
+
 	@Override
 	public boolean tankContains(int slot, int itemId, int amount) {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
 	@Override
 	public boolean tankHasRoomFor(int slot, FluidStack stack) {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
 	@Override
 	public boolean tankHasRoomFor(int slot, int itemId, int amount) {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
 	@Override
 	public boolean addToTank(int index, int itemId, int amount) {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
 	@Override
 	public boolean removeFromTank(int index, int itemId, int amount) {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
 	@Override
 	protected boolean isValidInput(int slot, int itemID) {
 		return recipes.isValidInput(slot, itemID);

@@ -14,11 +14,14 @@ import ip.industrialProcessing.multiblock.utils.tanks.IPMultiblockFluidTank;
 
 import java.util.ArrayList;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 
 public abstract class TEmultiblockCoreTank extends TEmultiblockCoreInv implements ITank, IMultiblockTanks {
@@ -34,7 +37,60 @@ public abstract class TEmultiblockCoreTank extends TEmultiblockCoreInv implement
 		super.writeToNBT(nbt);
 		writeTanks(nbt);
 	};
+	/*
+	protected void getBucketFromTank(int inputSlot, int outputSlot, int tankSlot) {
+		if (!this.worldObj.isRemote) {
+			ItemStack bucketOutputStack = getStackInSlot(outputSlot);
+			if (bucketOutputStack == null) {
+				ItemStack inputStack = getStackInSlot(inputSlot);
+				if (inputStack != null) {
+					FluidTank tank = getTankInSlot(tankSlot);
+					if (tank != null) {
+						ItemStack singleItem = inputStack.copy();
+						singleItem.stackSize = 1;
 
+						FluidStack fluid = tank.getFluid();
+						ItemStack filled = FluidContainerRegistry.fillFluidContainer(fluid, singleItem);
+
+						if (filled != null) {
+							FluidStack removeFluid = FluidContainerRegistry.getFluidForFilledItem(filled);
+							tank.drain(removeFluid.amount, true);
+							this.decrStackSize(inputSlot, 1);
+							setInventorySlotContents(outputSlot, filled);
+							onTanksChanged();
+						}
+					}
+				}
+			}
+		}
+	}
+
+	protected void addBucketToTank(int inputSlot, int outputSlot, int tankSlot) {
+		if (!this.worldObj.isRemote) {
+			ItemStack bucketOutputStack = getStackInSlot(outputSlot);
+			if (bucketOutputStack == null) // output available
+			{
+				ItemStack inputStack = getStackInSlot(inputSlot);
+				FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(inputStack);
+				if (fluid != null) {
+					if (isTankValidForFluid(tankSlot, fluid.fluidID)) {
+
+						ItemStack emptyContainer = getEmptyContainerFromContainer(inputStack);
+						if (emptyContainer != null) {
+							if (this.tankHasRoomFor(tankSlot, fluid)) {
+								emptyContainer.stackSize = 1;
+								this.decrStackSize(inputSlot, 1);
+								getTankInSlot(tankSlot).fill(fluid, true);
+								this.setInventorySlotContents(outputSlot, emptyContainer);
+								onTanksChanged();
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+*/
 	protected void addTank(int capacity, int multiblockID, ForgeDirection[] sides, boolean input, boolean output) {
 		int index = fluidTanks.size();
 

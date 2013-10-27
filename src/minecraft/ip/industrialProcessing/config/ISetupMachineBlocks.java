@@ -33,15 +33,18 @@ import ip.industrialProcessing.machines.wireMill.BlockWireMill;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.BLmultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.core.block.elevator.BLmultiblockElevator;
 import ip.industrialProcessing.multiblock.core.block.hotPress.BLmultiblockHotPress;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.atmosphericDestilationTower.BlockAtmosphericDestilationTower;
 import ip.industrialProcessing.multiblock.core.block.rollingPress.BLmultiblockRollingPress;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.BLmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.dummy.block.blastFurnaceTower.BLmultiblockBlastFurnaceTower;
+import ip.industrialProcessing.multiblock.dummy.block.destilationTray.BlockDestilationTray;
 import ip.industrialProcessing.multiblock.dummy.block.displayPanel.BLmultiblockDisplayPanel;
 import ip.industrialProcessing.multiblock.dummy.block.frame.BLmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.inventory.input.BLmultiblockInvInput;
 import ip.industrialProcessing.multiblock.dummy.block.inventory.output.BLmultiblockInvOutput;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.BLmultiblockLiftDoor;
 import ip.industrialProcessing.multiblock.dummy.block.screen.BLmultiblockScreen;
+import ip.industrialProcessing.multiblock.dummy.block.tankPlating.BlockTankPlating;
 import ip.industrialProcessing.multiblock.dummy.block.toggleButton.BLmultiblockToggleButton;
 import ip.industrialProcessing.multiblock.dummy.block.toggleButton.BLmultiblockToggleButton2;
 import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.BLmultiblockWeldingTableExt;
@@ -152,6 +155,10 @@ public interface ISetupMachineBlocks {
     public final static BLmultiblockDisplayPanel BLmultiblockDisplayPanel = new BLmultiblockDisplayPanel();
     public final static BLmultiblockBlastFurnace BLmultiblockBlastFurnace = new BLmultiblockBlastFurnace();
     public final static BLmultiblockBlastFurnaceTower BLmultiblockBlastFurnaceTower = new BLmultiblockBlastFurnaceTower();
+    public final static BlockAtmosphericDestilationTower blockAtmosphericDestilationTower = new BlockAtmosphericDestilationTower();
+    public final static BlockTankPlating blockTankPlating = new BlockTankPlating();
+    public final static BlockDestilationTray blockDestilationTray = new BlockDestilationTray();
+    
     // transport
     public final static BlockConveyorBelt blockConveyorBelt = new BlockConveyorBelt();
     public final static BlockConveyorInput blockConveyorBeltInput = new BlockConveyorInput();

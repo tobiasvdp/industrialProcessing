@@ -35,15 +35,18 @@ import ip.industrialProcessing.machines.wireMill.TileEntityWireMill;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.TEmultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.core.block.elevator.TEmultiblockElevator;
 import ip.industrialProcessing.multiblock.core.block.hotPress.TEmultiblockHotPress;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.atmosphericDestilationTower.TileEntityAtmosphericDestilationTower;
 import ip.industrialProcessing.multiblock.core.block.rollingPress.TEmultiblockRollingPress;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.dummy.block.blastFurnaceTower.TEmultiblockBlastFurnaceTower;
+import ip.industrialProcessing.multiblock.dummy.block.destilationTray.TileEntityDestilationTray;
 import ip.industrialProcessing.multiblock.dummy.block.displayPanel.TEmultiblockDisplayPanel;
 import ip.industrialProcessing.multiblock.dummy.block.frame.TEmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.inventory.input.TEmultiblockInvInput;
 import ip.industrialProcessing.multiblock.dummy.block.inventory.output.TEmultiblockInvOutput;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.TEmultiblockLiftDoor;
 import ip.industrialProcessing.multiblock.dummy.block.screen.TEmultiblockScreen;
+import ip.industrialProcessing.multiblock.dummy.block.tankPlating.TileEntityTankPlating;
 import ip.industrialProcessing.multiblock.dummy.block.toggleButton.TEmultiblockToggleButton;
 import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.TEmultiblockWeldingTableExt;
 import ip.industrialProcessing.multiblock.dummy.block.wheel.TEmultiblockWheel;
@@ -153,6 +156,9 @@ public class ConfigMachineBlocks {
     private int BLmultiblockDisplayPanel = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "DisplayPanelID", 734).getInt();
     private int BLmultiblockBlastFurnace = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "BLmultiblockBlastFurnace", 750).getInt();
     private int BLmultiblockBlastFurnaceTower = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "BLmultiblockBlastFurnaceTower", 751).getInt();
+    private int blockAtmosphericDestilationTowerID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "blockAtmosphericDestilationTowerID", 752).getInt();
+    private int blockDestilationTrayID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "blockDestilationTrayID", 753).getInt();
+    private int blockTankPlatingID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "blockTankPlatingID", 754).getInt();
 
     private int BLtransportConveyorBelt = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "ConveyorBeltID", 735).getInt();
     private int BLtransportConveyorBeltInput = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "ConveyorBeltInputID", 736).getInt();
@@ -173,6 +179,9 @@ public class ConfigMachineBlocks {
         registerMachineBlock(IndustrialProcessing.blockConveyorSorter, "IP.Trans.CBSorter", "Conveyor belt sorter", TileEntityConveyorSorter.class);
 
         // multiblocks
+        registerMachineBlock(IndustrialProcessing.blockTankPlating, "IP.MBD.TPlat", "Tank plating", TileEntityTankPlating.class);
+        registerMachineBlock(IndustrialProcessing.blockDestilationTray, "IP.MBD.DestTray", "Destilation Tray", TileEntityDestilationTray.class);
+        registerMachineBlock(IndustrialProcessing.blockAtmosphericDestilationTower, "IP.MBC.AtmDest", "Atmospheric Destilation base", TileEntityAtmosphericDestilationTower.class);
         registerMachineBlock(IndustrialProcessing.BLmultiblockBlastFurnaceTower, "IP.MBD.BlastTow", "Blast furnace tower", TEmultiblockBlastFurnaceTower.class);
         registerMachineBlock(IndustrialProcessing.BLmultiblockBlastFurnace, "IP.MBC.BlastFur", "Blast furnace", TEmultiblockBlastFurnace.class);
         registerMachineBlock(IndustrialProcessing.BLmultiblockDisplayPanel, "IP.MBD.Display", "Display panel", TEmultiblockDisplayPanel.class);
@@ -267,6 +276,15 @@ public class ConfigMachineBlocks {
         return instance;
     }
 
+    public static int getBlockTankPlatingID() {
+        return getInstance().blockTankPlatingID;
+    }
+    public static int getBlockDestilationTrayID() {
+        return getInstance().blockDestilationTrayID;
+    }
+    public static int getBlockAtmosphericDestilationTowerID() {
+        return getInstance().blockAtmosphericDestilationTowerID;
+    }
     public static int getAlkylationUnitBlockID() {
         return getInstance().alkylationUnitID;
     }

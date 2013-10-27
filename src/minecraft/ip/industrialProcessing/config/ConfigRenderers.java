@@ -66,7 +66,31 @@ public class ConfigRenderers {
     private int rendererAsphaltBlowerId;
     private int rendererGasProcessorId;
     private int rendererIsomerizationReactorId;
+    private int rendererTankPlating;
+    private int rendererDestilationTray;
+    private int rendererAtmosphericDestilationTower;
 
+    public static int getRendererAtmosphericDestilationTower() {
+        return getInstance().rendererAtmosphericDestilationTower;
+    }
+
+    public static void setRendererAtmosphericDestilationTower(int value) {
+        getInstance().rendererAtmosphericDestilationTower = value;
+    }
+    public static int getRendererTankPlating() {
+        return getInstance().rendererTankPlating;
+    }
+
+    public static void setRendererTankPlating(int value) {
+        getInstance().rendererTankPlating = value;
+    }
+    public static int getRendererDestilationTray() {
+        return getInstance().rendererDestilationTray;
+    }
+
+    public static void setRendererDestilationTray(int value) {
+        getInstance().rendererDestilationTray = value;
+    }
     public static int getRendererIsomerizationReactorId() {
         return getInstance().rendererIsomerizationReactorId;
     }
