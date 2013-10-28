@@ -1,8 +1,8 @@
 package ip.industrialProcessing.multiblock.dummy.block.tankPlating;
 
-import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
+import ip.industrialProcessing.multiblock.dummy.extend.TileEntityMultiblockDummyTank;
 
-public class TileEntityTankPlating extends TEmultiblockDummy{
+public class TileEntityTankPlating extends TileEntityMultiblockDummyTank{
 
 	public TileEntityTankPlating() {
 		super();

@@ -38,6 +38,14 @@ public class StructureMultiblock {
 		else
 			return 0;
 	}
+	
+	// i,j,k = coord - coord core
+	public int getGroupIDforBlock(int i, int j, int k, FacingDirection dir) {
+		if (dir != FacingDirection.Invalid)
+			return layouts[dir.ordinal()].getGroupIDforBlock(i, j, k);
+		else
+			return 0;
+	}
 
 	// i,j,k = coord - coord core
 	public FacingDirection isBlockValid(int i, int j, int k, int blockID, FacingDirection dir, boolean isSideLocked) {

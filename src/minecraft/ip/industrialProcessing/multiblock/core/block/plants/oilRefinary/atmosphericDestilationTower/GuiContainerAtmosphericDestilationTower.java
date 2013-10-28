@@ -10,10 +10,10 @@ import ip.industrialProcessing.multiblock.gui.GUImultiblock;
 
 public class GuiContainerAtmosphericDestilationTower extends GUImultiblock {
 	
-	private static final Rectangle PROGRESSBAR_SOURCE = new Rectangle(198, 0, 22, 16);
-	private static final Point PROGRESSBAR_LOCATION = new Point(106, 31);
+	private static final Rectangle PROGRESSBAR_SOURCE = new Rectangle(200, 0, 22, 16);
+	private static final Point PROGRESSBAR_LOCATION = new Point(76, 34);
 	
-	private static final Rectangle TANK_SOURCE = new Rectangle(176, 17, 16, 50);
+	private static final Rectangle TANK_SOURCE = new Rectangle(200, 17, 16, 50);
 	
 	public GuiContainerAtmosphericDestilationTower(InventoryPlayer inventory, TEmultiblockCoreTankWorkerPowered core){
 		super(inventory, core, new ContainerAtmosphericDestilationTower(inventory, core), "Atmospheric destilator", "textures/gui/AtmosphericDestilator.png");
@@ -26,11 +26,12 @@ public class GuiContainerAtmosphericDestilationTower extends GUImultiblock {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
+		super.drawGuiContainerBackgroundLayer(par1, par2, par3);
 		
 		drawProgressBarTank(TANK_SOURCE, new Point(8, 19), 0);
 		drawProgressBarTank(TANK_SOURCE, new Point(152, 19), 1);
 		
-		super.drawGuiContainerBackgroundLayer(par1, par2, par3);
+		
 		drawProgressBarWorker(PROGRESSBAR_SOURCE, PROGRESSBAR_LOCATION, true, 0);
 	}
 }

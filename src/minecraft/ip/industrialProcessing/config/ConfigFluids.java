@@ -288,6 +288,49 @@ public class ConfigFluids {
     public static int getUnsweetenedLPGFluidBlockID() {
         return getInstance().blockFluidBaseUnsweetenedLPGID;
     }
+    
+    public static int getAtmoshepicBottomsFluidBlock() {
+        return getInstance().blockFluidBaseAtmosphericBottoms;
+    }
+
+    public static int getAtmoshepicBottomsFluidBucket() {
+        return getInstance().bucketAtmosphericBottoms;
+    }
+    public static int getGasOilFluidBlock() {
+        return getInstance().blockFluidBaseGasOil;
+    }
+
+    public static int getGasOilFluidBucket() {
+        return getInstance().bucketGasOil;
+    }
+    public static int getDieselOilFluidBlock() {
+        return getInstance().blockFluidBaseDieselOil;
+    }
+
+    public static int getDieselOilFluidBucket() {
+        return getInstance().bucketDieselOil;
+    }
+    public static int getKeroseneFluidBlock() {
+        return getInstance().blockFluidBaseKerosene;
+    }
+
+    public static int getKeroseneFluidBucket() {
+        return getInstance().bucketKerosene;
+    }
+    public static int getHeavyNaphthaFluidBlock() {
+        return getInstance().blockFluidBaseHeavyNaphtha;
+    }
+
+    public static int getHeavyNaphthaFluidBucket() {
+        return getInstance().bucketHeavyNaphtha;
+    }
+    public static int getLightNaphthaFluidBlock() {
+        return getInstance().blockFluidBaseLightNaphtha;
+    }
+
+    public static int getLightNaphthaFluidBucket() {
+        return getInstance().bucketLightNaphtha;
+    }
 
     private int offset = 2500;
 
@@ -424,6 +467,24 @@ public class ConfigFluids {
     private int bucketMixedSludgeGoldID = offset + 65;
 
     private int bucketMixedSludgeTaliaID = offset + 66;
+    
+    private int blockFluidBaseLightNaphtha = offset + 67;
+    private int bucketLightNaphtha = offset + 68;
+    
+    private int blockFluidBaseHeavyNaphtha = offset + 69;
+    private int bucketHeavyNaphtha = offset + 70;
+    
+    private int blockFluidBaseKerosene = offset + 71;
+    private int bucketKerosene = offset + 72;
+    
+    private int blockFluidBaseDieselOil = offset + 73;
+    private int bucketDieselOil = offset + 74;
+    
+    private int blockFluidBaseGasOil = offset + 75;
+    private int bucketGasOil = offset + 76;
+    
+    private int blockFluidBaseAtmosphericBottoms = offset + 77;
+    private int bucketAtmosphericBottoms = offset + 78;
 
     public ConfigFluids() {
 
@@ -450,6 +511,24 @@ public class ConfigFluids {
         registerFluid(IndustrialProcessing.blockFluidFuelGas, IndustrialProcessing.itemFluidFuelGas, null, "Fuel gas");
         registerFluid(IndustrialProcessing.blockFluidGasMix, IndustrialProcessing.itemFluidGasMix, null, "Gas mix");
 
+        registerFluid(IndustrialProcessing.blockFluidLightNaphtha, IndustrialProcessing.itemFluidLightNaphtha, IndustrialProcessing.bucketLightNaphtha, "Light naphtha");
+        LanguageRegistry.addName(IndustrialProcessing.bucketLightNaphtha, "Light naphtha Bucket");
+        
+        registerFluid(IndustrialProcessing.blockFluidHeavyNaphtha, IndustrialProcessing.itemFluidHeavyNaphtha, IndustrialProcessing.bucketHeavyNaphtha, "Heavy naphtha");
+        LanguageRegistry.addName(IndustrialProcessing.bucketHeavyNaphtha, "Heavy naphtha Bucket");
+        
+        registerFluid(IndustrialProcessing.blockFluidKerosene, IndustrialProcessing.itemFluidKerosene, IndustrialProcessing.bucketKerosene, "Kerosene");
+        LanguageRegistry.addName(IndustrialProcessing.bucketKerosene, "Kerosene Bucket");
+        
+        registerFluid(IndustrialProcessing.blockFluidDieselOil, IndustrialProcessing.itemFluidDieselOil, IndustrialProcessing.bucketDieselOil, "Diesel oil");
+        LanguageRegistry.addName(IndustrialProcessing.bucketDieselOil, "Diesel oil Bucket");
+        
+        registerFluid(IndustrialProcessing.blockFluidGasOil, IndustrialProcessing.itemFluidGasOil, IndustrialProcessing.bucketGasOil, "Gasoil");
+        LanguageRegistry.addName(IndustrialProcessing.bucketGasOil, "Gasoil Bucket");
+        
+        registerFluid(IndustrialProcessing.blockFluidAtmosphericBottoms, IndustrialProcessing.itemFluidAtmosphericBottoms, IndustrialProcessing.bucketAtmosphericBottoms, "Atmospheric bottoms");
+        LanguageRegistry.addName(IndustrialProcessing.bucketAtmosphericBottoms, "Atmospheric bottoms Bucket");
+        
         registerFluid(IndustrialProcessing.blockFluidAsphaltSludge, IndustrialProcessing.itemFluidAsphaltSludge, IndustrialProcessing.bucketAsphaltSludge, "Asphalt sludge");
         LanguageRegistry.addName(IndustrialProcessing.bucketAsphaltSludge, "Asphalt sludge Bucket");
 

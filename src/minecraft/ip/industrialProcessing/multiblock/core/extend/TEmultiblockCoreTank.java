@@ -334,4 +334,47 @@ public abstract class TEmultiblockCoreTank extends TEmultiblockCoreInv implement
 			return true;
 		return stack.fluidID == itemId && stack.amount + amount <= tank.getCapacity();
 	}
+	
+	public boolean tankContains(int slot, int itemId, int amount) {
+		IPfluidTank tank = getTankInSlot(slot);
+		if (tank == null)
+			return false;
+		FluidStack stack = tank.getFluid();
+		if (stack == null)
+			return false;
+		return stack.fluidID == itemId && stack.amount >= amount;
+	}
+
+	public boolean addToTank(int index, int itemId, int amount) {
+		IPfluidTank tank = getTankInSlot(index);
+		if (tank == null)
+			return false;
+		FluidStack stack = tank.getFluid();
+		FluidStack newStack = new FluidStack(itemId, amount);
+		if (stack == null) {
+			tank.setFluid(newStack);
+			onInventoryChanged();
+			return true;
+		} else if (stack.fluidID == itemId && stack.amount + amount <= tank.getCapacity()) {
+			tank.fill(newStack, true);
+			onInventoryChanged();
+			return true;
+		}
+		return false;
+	}
+
+	public boolean removeFromTank(int index, int itemId, int amount) {
+		IPfluidTank tank = getTankInSlot(index);
+		if (tank == null)
+			return false;
+		FluidStack stack = tank.getFluid();
+		if (stack == null)
+			return false;
+		if (stack.fluidID == itemId && stack.amount >= amount) {
+			tank.drain(amount, true);
+			onInventoryChanged();
+			return true;
+		}
+		return false;
+	}
 }

@@ -32,11 +32,15 @@ public class LayoutMultiblock {
 	}
 
 	public void setCoreID(int ID, int modelID, int renderConnection, int blockID) {
-		layout[xCore][yCore][zCore] = new LayoutBlockDescription(ID, modelID, renderConnection, blockID);
+		layout[xCore][yCore][zCore] = new LayoutBlockDescription(ID, modelID, renderConnection,0, blockID);
 	}
 
 	public void setBlockID(int i, int j, int k,int ID, int renderID, int renderConnection, int... blockIDs) {
-		layout[i + xCore][j + yCore][-k + zCore] = new LayoutBlockDescription(ID, renderID, renderConnection, blockIDs);
+		layout[i + xCore][j + yCore][-k + zCore] = new LayoutBlockDescription(ID, renderID, renderConnection,0, blockIDs);
+	}
+	
+	public void setBlockIDwithGroup(int i, int j, int k,int ID, int renderID, int renderConnection,int groupID, int... blockIDs) {
+		layout[i + xCore][j + yCore][-k + zCore] = new LayoutBlockDescription(ID, renderID, renderConnection,groupID, blockIDs);
 	}
 
 	// i,j,k = coord - coord core
@@ -52,6 +56,11 @@ public class LayoutMultiblock {
 	// i,j,k = coord - coord core
 	public int getIDforBlock(int i, int j, int k) {
 		return layout[i + xCore][j + yCore][-k + zCore].getID();
+	}
+	
+	// i,j,k = coord - coord core
+	public int getGroupIDforBlock(int i, int j, int k) {
+		return layout[i + xCore][j + yCore][-k + zCore].getGroupID();
 	}
 
 	// i,j,k = coord - coord core

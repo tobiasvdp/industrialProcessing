@@ -7,6 +7,30 @@ import ip.industrialProcessing.fluids.ItemFluid;
 import net.minecraft.block.material.Material;
 
 public interface ISetupFluids {
+	
+	public final static ItemFluid itemFluidLightNaphtha = new ItemFluid("LightNaphtha", 1000, 1000);
+    public final static BlockFluid blockFluidLightNaphtha = new BlockFluid(ConfigFluids.getLightNaphthaFluidBlock(), itemFluidLightNaphtha, Material.water, true);
+    public final static ContainerFluid bucketLightNaphtha = new ContainerFluid(ConfigFluids.getLightNaphthaFluidBucket(), itemFluidLightNaphtha, blockFluidLightNaphtha, "ContainerLightNaphtha");
+    
+    public final static ItemFluid itemFluidHeavyNaphtha = new ItemFluid("HeavyNaphtha", 1000, 1000);
+    public final static BlockFluid blockFluidHeavyNaphtha = new BlockFluid(ConfigFluids.getHeavyNaphthaFluidBlock(), itemFluidHeavyNaphtha, Material.water, true);
+    public final static ContainerFluid bucketHeavyNaphtha = new ContainerFluid(ConfigFluids.getHeavyNaphthaFluidBucket(), itemFluidHeavyNaphtha, blockFluidHeavyNaphtha, "ContainerHeavyNaphtha");
+    
+    public final static ItemFluid itemFluidKerosene = new ItemFluid("Kerosene", 1000, 1000);
+    public final static BlockFluid blockFluidKerosene = new BlockFluid(ConfigFluids.getKeroseneFluidBlock(), itemFluidKerosene, Material.water, true);
+    public final static ContainerFluid bucketKerosene = new ContainerFluid(ConfigFluids.getKeroseneFluidBucket(), itemFluidKerosene, blockFluidKerosene, "ContainerKerosene");
+    
+    public final static ItemFluid itemFluidDieselOil = new ItemFluid("DieselOil", 1000, 1000);
+    public final static BlockFluid blockFluidDieselOil = new BlockFluid(ConfigFluids.getDieselOilFluidBlock(), itemFluidDieselOil, Material.water, true);
+    public final static ContainerFluid bucketDieselOil = new ContainerFluid(ConfigFluids.getDieselOilFluidBucket(), itemFluidDieselOil, blockFluidDieselOil, "ContainerDieselOil");
+    
+    public final static ItemFluid itemFluidGasOil = new ItemFluid("GasOil", 1000, 1000);
+    public final static BlockFluid blockFluidGasOil = new BlockFluid(ConfigFluids.getGasOilFluidBlock(), itemFluidGasOil, Material.water, true);
+    public final static ContainerFluid bucketGasOil = new ContainerFluid(ConfigFluids.getGasOilFluidBucket(), itemFluidGasOil, blockFluidGasOil, "ContainerGasOil");
+    
+    public final static ItemFluid itemFluidAtmosphericBottoms = new ItemFluid("AtmosphericBottoms", 1000, 1000);
+    public final static BlockFluid blockFluidAtmosphericBottoms = new BlockFluid(ConfigFluids.getAtmoshepicBottomsFluidBlock(), itemFluidAtmosphericBottoms, Material.water, true);
+    public final static ContainerFluid bucketAtmosphericBottoms = new ContainerFluid(ConfigFluids.getAtmoshepicBottomsFluidBucket(), itemFluidAtmosphericBottoms, blockFluidAtmosphericBottoms, "ContainerAtmosphericBottoms");
 
     public final static ItemFluid itemFluidMicrobialWater = new ItemFluid("MicrobialWater", 1000, 1000);
     public final static BlockFluid blockFluidMicrobialWater = new BlockFluid(ConfigFluids.blockFluidBaseMicrobialWaterID(), itemFluidMicrobialWater, Material.water, true);
