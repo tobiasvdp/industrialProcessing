@@ -72,23 +72,20 @@ public class TileEntityAtmosphericDestilationTower extends TEmultiblockCoreTankW
 		LocalDirection[] nodirections = new LocalDirection[0];
 		
 		this.addStack(null, nodirections, true, false);
-		this.addStack(null, nodirections, true, false);
+		this.addStack(null, nodirections, false, true);
 		this.addTank(10000, 0, new ForgeDirection[]{ForgeDirection.NORTH}, true, false);
 		this.addTank(10000, 0, new ForgeDirection[]{ForgeDirection.WEST}, false, true);
 	}
 	
 	@Override
 	public void updateEntity() {
-		//addBucketToTank(1, 2, 0);
-		//getBucketFromTank(3, 4, 1);
+		addBucketToTank(0, 1, 0);
 		super.updateEntity();
 	};
 	
 	@Override
 	protected boolean isValidInput(int slot, int itemID) {
-		if (slot == 0)
-			return recipes.isValidInput(slot, itemID);
-		if (slot == 1) { // fluid input container input slot, only filled
+		if (slot == 0) { // fluid input container input slot, only filled
 			// containers with correct fluid
 			FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(new ItemStack(itemID, 1, 0));
 			if (fluid == null)
@@ -105,33 +102,20 @@ public class TileEntityAtmosphericDestilationTower extends TEmultiblockCoreTankW
 
 	@Override
 	public boolean tankContains(int slot, int itemId, int amount) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean tankHasRoomFor(int slot, FluidStack stack) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean tankHasRoomFor(int slot, int itemId, int amount) {
-		// TODO Auto-generated method stub
-		return false;
+	    // TODO Auto-generated method stub
+	    return false;
 	}
 
 	@Override
 	public boolean addToTank(int index, int itemId, int amount) {
-		// TODO Auto-generated method stub
-		return false;
+	    // TODO Auto-generated method stub
+	    return false;
 	}
 
 	@Override
 	public boolean removeFromTank(int index, int itemId, int amount) {
-		// TODO Auto-generated method stub
-		return false;
+	    // TODO Auto-generated method stub
+	    return false;
 	}
-	
 	
 }

@@ -15,8 +15,8 @@ public class ContainerAtmosphericDestilationTower  extends ContainerMultiblockTa
 	public ContainerAtmosphericDestilationTower(InventoryPlayer inventory, TEmultiblockCoreTankWorkerPowered core){
 		super(inventory, core);
 		
-		inputWaterFullInput = new SlotLiquid(core, 1, 8, 19);
-		inputWaterEmptyOutput = new SlotLiquidOutput(core, 2, 8, 53);
+		inputWaterFullInput = new SlotLiquid(core, 0, 8, 19);
+		inputWaterEmptyOutput = new SlotLiquidOutput(core, 1, 8, 53);
 		
 		addSlotToContainer(inputWaterFullInput);
 		addSlotToContainer(inputWaterEmptyOutput);

@@ -23,6 +23,7 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
+import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 
 public abstract class TEmultiblockCoreTank extends TEmultiblockCoreInv implements ITank, IMultiblockTanks {
 
@@ -37,7 +38,7 @@ public abstract class TEmultiblockCoreTank extends TEmultiblockCoreInv implement
 		super.writeToNBT(nbt);
 		writeTanks(nbt);
 	};
-	/*
+	
 	protected void getBucketFromTank(int inputSlot, int outputSlot, int tankSlot) {
 		if (!this.worldObj.isRemote) {
 			ItemStack bucketOutputStack = getStackInSlot(outputSlot);
@@ -57,7 +58,7 @@ public abstract class TEmultiblockCoreTank extends TEmultiblockCoreInv implement
 							tank.drain(removeFluid.amount, true);
 							this.decrStackSize(inputSlot, 1);
 							setInventorySlotContents(outputSlot, filled);
-							onTanksChanged();
+							onInventoryChanged();
 						}
 					}
 				}
@@ -82,7 +83,7 @@ public abstract class TEmultiblockCoreTank extends TEmultiblockCoreInv implement
 								this.decrStackSize(inputSlot, 1);
 								getTankInSlot(tankSlot).fill(fluid, true);
 								this.setInventorySlotContents(outputSlot, emptyContainer);
-								onTanksChanged();
+								onInventoryChanged();
 							}
 						}
 					}
@@ -90,7 +91,6 @@ public abstract class TEmultiblockCoreTank extends TEmultiblockCoreInv implement
 			}
 		}
 	}
-*/
 	protected void addTank(int capacity, int multiblockID, ForgeDirection[] sides, boolean input, boolean output) {
 		int index = fluidTanks.size();
 
@@ -297,5 +297,41 @@ public abstract class TEmultiblockCoreTank extends TEmultiblockCoreInv implement
 	
 	@Override
 	public void addPressure(ForgeDirection from, float pressure) { 
+	}
+	
+	public IPfluidTank getTankInSlot(int i) {
+		if (i < 0 || i > this.fluidTanks.size())
+			return null;
+		return this.fluidTanks.get(i);
+		
+	}
+	private ItemStack getEmptyContainerFromContainer(ItemStack stack) {
+		FluidContainerData[] data = FluidContainerRegistry.getRegisteredFluidContainerData();
+		for (int i = 0; i < data.length; i++) {
+			FluidContainerData containerData = data[i];
+			if (containerData.filledContainer.isItemEqual(stack))
+				return containerData.emptyContainer.copy();
+		}
+		return null;
+	}
+	
+	public boolean tankHasRoomFor(int slot, FluidStack addStack) {
+		IPfluidTank tank = getTankInSlot(slot);
+		if (tank == null)
+			return false;
+		FluidStack stack = tank.getFluid();
+		if (stack == null)
+			return true;
+		return stack.isFluidEqual(addStack) && stack.amount + addStack.amount <= tank.getCapacity();
+	}
+
+	public boolean tankHasRoomFor(int slot, int itemId, int amount) {
+	    IPfluidTank tank = getTankInSlot(slot);
+		if (tank == null)
+			return false;
+		FluidStack stack = tank.getFluid();
+		if (stack == null)
+			return true;
+		return stack.fluidID == itemId && stack.amount + amount <= tank.getCapacity();
 	}
 }
