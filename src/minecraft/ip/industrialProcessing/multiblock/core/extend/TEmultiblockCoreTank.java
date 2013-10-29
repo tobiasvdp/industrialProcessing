@@ -223,7 +223,7 @@ public abstract class TEmultiblockCoreTank extends TEmultiblockCoreInv implement
 		int totalAmount = 0;
 		IPMultiblockFluidTank[] tanks = getTanksOnSide(multiblockID, from);
 		for (int i = 0; i < tanks.length; i++) {
-			if (tanks[i] != null && tanks[i].output) {
+			if (tanks[i] != null && tanks[i].output && tanks[i].getFluid() != null) {
 				FluidStack stack = tanks[i].drain(maxDrain, doDrain);
 				totalAmount += stack.amount;
 				maxDrain -= stack.amount;
@@ -231,7 +231,9 @@ public abstract class TEmultiblockCoreTank extends TEmultiblockCoreInv implement
 		}
 		if (doDrain)
 			onInventoryChanged();
-		return new FluidStack(tanks[0].getFluid(), totalAmount);
+		if(tanks[0].getFluid() != null)
+		    return new FluidStack(tanks[0].getFluid(), totalAmount);
+		return null;
 	}
 
 	@Override

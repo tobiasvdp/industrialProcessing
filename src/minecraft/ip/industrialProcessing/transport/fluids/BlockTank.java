@@ -1,21 +1,20 @@
 package ip.industrialProcessing.transport.fluids;
 
+import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.ConfigTransportBlocks;
+import ip.industrialProcessing.machines.BlockMachineRendered;
 import net.minecraft.block.Block;
-import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidTankInfo;
-import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.config.ConfigTransportBlocks;
-import ip.industrialProcessing.machines.BlockMachine;
-import ip.industrialProcessing.machines.BlockMachineRendered;
+import net.minecraftforge.fluids.IFluidContainerItem;
 
 public class BlockTank extends BlockMachineRendered {
 
@@ -73,7 +72,12 @@ public class BlockTank extends BlockMachineRendered {
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
-        // no gui
+        if(player.getCurrentEquippedItem().getItem() instanceof IFluidContainerItem){
+            //int amount = ((TileEntityTank)world.getBlockTileEntity(x, y, z)).fill(ForgeDirection.UP, ((IFluidContainerItem)player.getCurrentEquippedItem().getItem()).getFluid(player.getCurrentEquippedItem()), true);
+            //((IFluidContainerItem)player.getCurrentEquippedItem().getItem()).drain(player.getCurrentEquippedItem(), amount, true);
+            return true;
+        }
+            
         return false;
     }
 

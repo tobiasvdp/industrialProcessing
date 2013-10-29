@@ -10,13 +10,16 @@ import ip.industrialProcessing.multiblock.gui.GUImultiblock;
 
 public class GuiContainerAtmosphericDestilationTower extends GUImultiblock {
 	
-	private static final Rectangle PROGRESSBAR_SOURCE = new Rectangle(200, 0, 22, 16);
-	private static final Point PROGRESSBAR_LOCATION = new Point(76, 34);
+	private static final Rectangle PROGRESSBAR_SOURCE = new Rectangle(0, 167, 130, 58);
+	private static final Point PROGRESSBAR_LOCATION = new Point(33, 9);
 	
 	private static final Rectangle TANK_SOURCE = new Rectangle(200, 17, 16, 50);
+	private static final Rectangle TANK_SOURCE2 = new Rectangle(200, 17, 16, 24);
 	
 	public GuiContainerAtmosphericDestilationTower(InventoryPlayer inventory, TEmultiblockCoreTankWorkerPowered core){
 		super(inventory, core, new ContainerAtmosphericDestilationTower(inventory, core), "Atmospheric destilator", "textures/gui/AtmosphericDestilator.png");
+		nameX = xSize / 2 - 30;
+		nameY = ySize - 96 + 2;
 	}
 	
 	@Override
@@ -29,7 +32,13 @@ public class GuiContainerAtmosphericDestilationTower extends GUImultiblock {
 		super.drawGuiContainerBackgroundLayer(par1, par2, par3);
 		
 		drawProgressBarTank(TANK_SOURCE, new Point(8, 19), 0);
-		drawProgressBarTank(TANK_SOURCE, new Point(152, 19), 1);
+		drawProgressBarTank(TANK_SOURCE, new Point(152, 19), 6);
+		drawProgressBarTank(TANK_SOURCE, new Point(133, 19), 5);
+		drawProgressBarTank(TANK_SOURCE, new Point(114, 19), 4);
+		drawProgressBarTank(TANK_SOURCE, new Point(95, 19), 3);
+		drawProgressBarTank(TANK_SOURCE, new Point(76, 19), 2);
+		drawProgressBarTank(TANK_SOURCE2, new Point(57, 19), 1);
+		drawProgressBarTank(TANK_SOURCE2, new Point(57, 45), 7);
 		
 		
 		drawProgressBarWorker(PROGRESSBAR_SOURCE, PROGRESSBAR_LOCATION, true, 0);

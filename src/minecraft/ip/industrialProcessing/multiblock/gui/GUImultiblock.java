@@ -33,6 +33,8 @@ public class GUImultiblock extends GuiContainer {
     private ContainerMultiblock container;
     protected int mouseX;
     protected int mouseY;
+    protected int nameX = 8;
+    protected int nameY = 6;
     protected ToolTip toolTip;
 
     public GUImultiblock(InventoryPlayer inventoryPlayer, TEmultiblockCore tileEntity, ContainerMultiblock cTmultiblock, String name, String textureLocation) {
@@ -60,7 +62,7 @@ public class GUImultiblock extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int param1, int param2) {
-	fontRenderer.drawString(name, 8, 6, 4210752);
+	fontRenderer.drawString(name, nameX, nameY, 4210752);
 	fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
     }
 

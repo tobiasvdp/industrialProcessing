@@ -25,6 +25,12 @@ public class ContainerAtmosphericDestilationTower  extends ContainerMultiblockTa
 		
 		addTankToContainer(0);
 		addTankToContainer(1);
+		addTankToContainer(2);
+		addTankToContainer(3);
+		addTankToContainer(4);
+		addTankToContainer(5);
+		addTankToContainer(6);
+		addTankToContainer(7);
 		
 		addPowerToContainer(core.getMainPowerStorage());
 		addWorkerToContainer(core.getWorker());

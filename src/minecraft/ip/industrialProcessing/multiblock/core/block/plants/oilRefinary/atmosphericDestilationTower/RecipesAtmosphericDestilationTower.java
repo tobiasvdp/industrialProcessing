@@ -14,7 +14,7 @@ public class RecipesAtmosphericDestilationTower extends RecipesMachine {
 	}
 
 	private void addDefaultRecipes() {
-		addRecipe(filtyToDirty(3000, 0));
+		addRecipe(filtyToDirty(12000, 0));
 	}
 
 	private Recipe filtyToDirty(int i, int power) {
@@ -22,7 +22,7 @@ public class RecipesAtmosphericDestilationTower extends RecipesMachine {
 		recipe.workRequired = i;
 		recipe.powerRequired = power;
 		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidfiltyWater.getName()), RecipeSlotType.TANK, 100) };
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 100, 100, 0.5)};
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidAtmosphericBottoms.getName()), RecipeSlotType.TANK, 100, 100, 0.5),new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidGasOil.getName()), RecipeSlotType.TANK, 100, 100, 0.5),new RecipeOutputSlot(3, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDieselOil.getName()), RecipeSlotType.TANK, 100, 100, 0.5),new RecipeOutputSlot(4, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidKerosene.getName()), RecipeSlotType.TANK, 100, 100, 0.5),new RecipeOutputSlot(5, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidHeavyNaphtha.getName()), RecipeSlotType.TANK, 100, 100, 0.5),new RecipeOutputSlot(6, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidLightNaphtha.getName()), RecipeSlotType.TANK, 100, 100, 0.5),new RecipeOutputSlot(7, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidGasMix.getName()), RecipeSlotType.TANK, 100, 100, 0.5)};
 		return recipe;
 	}
 }

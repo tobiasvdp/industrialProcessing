@@ -139,13 +139,13 @@ public class TileEntityAtmosphericDestilationTower extends TEmultiblockCoreTankW
 		this.addStack(null, nodirections, true, false);
 		this.addStack(null, nodirections, false, true);
 		this.addTank(10000, 1, ForgeDirection.VALID_DIRECTIONS, true, false);
-		this.addTank(10000, 0, new ForgeDirection[] { ForgeDirection.DOWN }, false, true);
+		this.addTank(5000, 0, new ForgeDirection[] { ForgeDirection.DOWN }, false, true);
 		this.addTank(10000, 2, ForgeDirection.VALID_DIRECTIONS, false, true);
 		this.addTank(10000, 3, ForgeDirection.VALID_DIRECTIONS, false, true);
 		this.addTank(10000, 4, ForgeDirection.VALID_DIRECTIONS, false, true);
 		this.addTank(10000, 5, ForgeDirection.VALID_DIRECTIONS, false, true);
 		this.addTank(10000, 6, ForgeDirection.VALID_DIRECTIONS, false, true);
-		this.addTank(10000, 8, new ForgeDirection[] { ForgeDirection.UP }, false, true);
+		this.addTank(5000, 8, new ForgeDirection[] { ForgeDirection.UP }, false, true);
 	}
 
 	@Override
