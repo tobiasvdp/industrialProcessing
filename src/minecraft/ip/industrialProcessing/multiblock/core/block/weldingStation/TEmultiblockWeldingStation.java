@@ -83,7 +83,7 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowere
 	}
 
 	@Override
-	protected boolean isTankValidForFluid(int slot, int fluidId) {
+	protected boolean isTankValidForFluid(int groupid, int slot, int fluidId) {
 		return true;
 	}
 

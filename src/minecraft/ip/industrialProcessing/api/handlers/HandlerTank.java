@@ -87,4 +87,9 @@ public class HandlerTank implements IHandlerTank {
 		tankInfo.fluidId = handler.getValue(2);
 		return tankInfo;
 	}
+
+	@Override
+	public void resetPrevValue() {
+		prevInfo = new InfoTank();
+	}
 }

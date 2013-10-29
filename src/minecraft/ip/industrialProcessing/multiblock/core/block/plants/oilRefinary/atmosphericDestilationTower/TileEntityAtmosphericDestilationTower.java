@@ -167,8 +167,16 @@ public class TileEntityAtmosphericDestilationTower extends TEmultiblockCoreTankW
 	}
 
 	@Override
-	protected boolean isTankValidForFluid(int slot, int fluidId) {
-		return recipes.isValidFluidInput(slot, fluidId);
+	protected boolean isTankValidForFluid(int groupid, int slot, int fluidId) {
+		if(groupid == -1)
+			return recipes.isValidFluidInput(slot, fluidId);
+		else{
+			if(getTankInSlot(slot).getMultiblockID() == groupid){
+				return recipes.isValidFluidInput(slot, fluidId);
+			}else{
+				return false;
+			}
+		}
 	}
 
 }

@@ -76,4 +76,9 @@ public class HandlerWorker implements IHandlerWorker{
 		prevInfo.totalWork = worker.getTotalWork();
 		prevInfo.workDone = worker.getWorkDone();
 	}
+
+	@Override
+	public void resetPrevValue() {
+		prevInfo = new InfoWorker();
+	}
 }

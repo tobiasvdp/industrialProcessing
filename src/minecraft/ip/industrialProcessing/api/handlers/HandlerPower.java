@@ -75,4 +75,9 @@ public class HandlerPower implements IHandlerPower{
 		prevInfo.powerCapacity = power.getPowerCapacity();
 		prevInfo.storedPower = power.getStoredPower();
 	}
+
+	@Override
+	public void resetPrevValue() {
+		prevInfo = new InfoPower();
+	}
 }

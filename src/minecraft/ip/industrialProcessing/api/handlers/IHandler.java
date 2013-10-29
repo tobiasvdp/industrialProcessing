@@ -5,6 +5,7 @@ public interface IHandler {
 	
 	int getValue(int i);
 	int getPrevValue(int i);
+	void resetPrevValue();
 	
 	void newToOldValues();
 	
@@ -12,4 +13,6 @@ public interface IHandler {
 	void setIndexOffset(int offset);
 	
 	void put(int index, int par2);
+
+	
 }

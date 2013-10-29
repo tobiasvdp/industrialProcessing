@@ -10,11 +10,11 @@ import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTank;
 import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
 
 public class TileEntityMultiblockDummyTank extends TEmultiblockDummy implements IFluidHandler {
-	
-	public TileEntityMultiblockDummyTank(){
+
+	public TileEntityMultiblockDummyTank() {
 		super();
 	}
-	
+
 	@Override
 	public TEmultiblockCoreTank getCore() {
 		if (loadedFromNBT) {
@@ -26,32 +26,44 @@ public class TileEntityMultiblockDummyTank extends TEmultiblockDummy implements 
 
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-		return this.getCore().fill(getGroup(),from, resource, doFill);
+		if (this.getCore() != null)
+			return this.getCore().fill(getGroup(), from, resource, doFill);
+		return 0;
 	}
 
 	@Override
 	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain) {
-		return this.getCore().drain(getGroup(), from, resource, doDrain);
+		if (this.getCore() != null)
+			return this.getCore().drain(getGroup(), from, resource, doDrain);
+		return null;
 	}
 
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-		return this.getCore().drain(getGroup(), from, maxDrain, doDrain);
+		if (this.getCore() != null)
+			return this.getCore().drain(getGroup(), from, maxDrain, doDrain);
+		return null;
 	}
 
 	@Override
 	public boolean canFill(ForgeDirection from, Fluid fluid) {
-		return this.getCore().canFill(getGroup(), from, fluid);
+		if (this.getCore() != null)
+			return this.getCore().canFill(getGroup(), from, fluid);
+		return false;
 	}
 
 	@Override
 	public boolean canDrain(ForgeDirection from, Fluid fluid) {
-		return this.getCore().canDrain(getGroup(), from, fluid);
+		if (this.getCore() != null)
+			return this.getCore().canDrain(getGroup(), from, fluid);
+		return false;
 	}
 
 	@Override
 	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-		return this.getCore().getTankInfo(getGroup(), from);
+		if (this.getCore() != null)
+			return this.getCore().getTankInfo(getGroup(), from);
+		return null;
 	}
 
 }

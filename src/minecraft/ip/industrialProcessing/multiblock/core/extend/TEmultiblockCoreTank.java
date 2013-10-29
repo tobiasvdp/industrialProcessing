@@ -74,7 +74,7 @@ public abstract class TEmultiblockCoreTank extends TEmultiblockCoreInv implement
 				ItemStack inputStack = getStackInSlot(inputSlot);
 				FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(inputStack);
 				if (fluid != null) {
-					if (isTankValidForFluid(tankSlot, fluid.fluidID)) {
+					if (isTankValidForFluid(-1,tankSlot, fluid.fluidID)) {
 
 						ItemStack emptyContainer = getEmptyContainerFromContainer(inputStack);
 						if (emptyContainer != null) {
@@ -203,50 +203,38 @@ public abstract class TEmultiblockCoreTank extends TEmultiblockCoreInv implement
 
 	@Override
 	public FluidStack drain(int multiblockID, ForgeDirection from, FluidStack resource, boolean doDrain) {
-		int totalAmount = 0;
 		IPMultiblockFluidTank[] tanks = getTanksOnSide(multiblockID, from);
-		for (int i = 0; i < tanks.length; i++) {
-			if (tanks[i] == null)
-				return null;
-			FluidStack stack = tanks[i].drain(resource.amount, doDrain);
-			totalAmount += stack.amount;
-			resource.amount = resource.amount - stack.amount;
-
-		}
+		if (tanks[0] == null)
+			return null;
+		FluidStack amount = tanks[0].drain(resource.amount, doDrain);
 		if (doDrain)
 			onInventoryChanged();
-		return new FluidStack(resource.fluidID, totalAmount);
+		return amount;
 	}
 
 	@Override
 	public FluidStack drain(int multiblockID, ForgeDirection from, int maxDrain, boolean doDrain) {
-		int totalAmount = 0;
+
 		IPMultiblockFluidTank[] tanks = getTanksOnSide(multiblockID, from);
-		for (int i = 0; i < tanks.length; i++) {
-			if (tanks[i] != null && tanks[i].output && tanks[i].getFluid() != null) {
-				FluidStack stack = tanks[i].drain(maxDrain, doDrain);
-				totalAmount += stack.amount;
-				maxDrain -= stack.amount;
-			}
-		}
+		if (tanks[0] == null)
+			return null;
+		FluidStack amount = tanks[0].drain(maxDrain, doDrain);
 		if (doDrain)
 			onInventoryChanged();
-		if(tanks[0].getFluid() != null)
-		    return new FluidStack(tanks[0].getFluid(), totalAmount);
-		return null;
+		return amount;
 	}
 
 	@Override
 	public boolean canFill(int multiblockID, ForgeDirection from, Fluid fluid) {
 		IPMultiblockFluidTank[] tanks = getTanksOnSide(multiblockID, from);
 		for (int i = 0; i < tanks.length; i++) {
-			if (tanks[i].input && isTankValidForFluid(tanks[i].slot, fluid.getID()))
+			if (tanks[i].input && isTankValidForFluid(multiblockID,tanks[i].slot, fluid.getID()))
 				return true;
 		}
 		return false;
 	}
 
-	protected abstract boolean isTankValidForFluid(int slot, int fluidId);
+	protected abstract boolean isTankValidForFluid(int groupid,int slot, int fluidId);
 
 	@Override
 	public boolean canDrain(int multiblockID, ForgeDirection from, Fluid fluid) {
@@ -301,7 +289,7 @@ public abstract class TEmultiblockCoreTank extends TEmultiblockCoreInv implement
 	public void addPressure(ForgeDirection from, float pressure) { 
 	}
 	
-	public IPfluidTank getTankInSlot(int i) {
+	public IPMultiblockFluidTank getTankInSlot(int i) {
 		if (i < 0 || i > this.fluidTanks.size())
 			return null;
 		return this.fluidTanks.get(i);

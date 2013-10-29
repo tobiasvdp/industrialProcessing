@@ -24,6 +24,9 @@ public abstract class ContainerMultiblock extends VerifyingContainer {
 
 	public ContainerMultiblock(InventoryPlayer inventory, TEmultiblockCore core) {
 		this.core = core;
+		for (int j = 0; j < handlers.size(); j++) {
+			IHandler handler = handlers.get(j);
+		}
 	}
 
 	@Override
