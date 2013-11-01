@@ -35,7 +35,16 @@ import ip.industrialProcessing.machines.wireMill.TileEntityWireMill;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.TEmultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.core.block.elevator.TEmultiblockElevator;
 import ip.industrialProcessing.multiblock.core.block.hotPress.TEmultiblockHotPress;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.CatalyticReformer.TileEntityCatalyticReformer;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.amineTreater.TileEntityAmineTreater;
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.atmosphericDestilationTower.TileEntityAtmosphericDestilationTower;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.clausSulfurPlant.TileEntityClausSulfurPlant;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.delayedCoker.TileEntityDelayedCoker;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.fluidCatalyticCracker.TileEntityFluidCatalyticCracker;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.hydroCracker.TileEntityHydroCracker;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.hydroTreater.TileEntityHydroTreater;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.meroxTreater.TileEntityMeroxTreater;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.vacuumDestilationTower.TileEntityVacuumDestilationTower;
 import ip.industrialProcessing.multiblock.core.block.rollingPress.TEmultiblockRollingPress;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.dummy.block.blastFurnaceTower.TEmultiblockBlastFurnaceTower;
@@ -159,6 +168,15 @@ public class ConfigMachineBlocks {
     private int blockAtmosphericDestilationTowerID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "blockAtmosphericDestilationTowerID", 752).getInt();
     private int blockDestilationTrayID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "blockDestilationTrayID", 753).getInt();
     private int blockTankPlatingID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "blockTankPlatingID", 754).getInt();
+    private int blockAmineTreaterID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "blockAmineTreaterID", 755).getInt();
+    private int blockCatalyticReformerID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "blockCatalyticReformerID", 756).getInt();
+    private int blockClausSulfurPlantID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "blockClausSulfurPlantID", 757).getInt();
+    private int blockDelayedCokerID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "blockDelayedCokerID", 758).getInt();
+    private int blockFluidCatalyticCrackerID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "blockFluidCatalyticCrackerID", 759).getInt();
+    private int blockHydroCrackerID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "blockHydroCrackerID", 760).getInt();
+    private int blockHydroTreaterID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "blockHydroTreaterID", 761).getInt();
+    private int blockMeroxTreaterID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "blockMeroxTreaterID", 762).getInt();
+    private int blockVacuumDestilationTowerID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "blockVacuumDestilationTowerID", 763).getInt();
 
     private int BLtransportConveyorBelt = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "ConveyorBeltID", 735).getInt();
     private int BLtransportConveyorBeltInput = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "ConveyorBeltInputID", 736).getInt();
@@ -179,6 +197,16 @@ public class ConfigMachineBlocks {
         registerMachineBlock(IndustrialProcessing.blockConveyorSorter, "IP.Trans.CBSorter", "Conveyor belt sorter", TileEntityConveyorSorter.class);
 
         // multiblocks
+        registerMachineBlock(IndustrialProcessing.blockAmineTreater, "IP.MBC.AmTr", "Amine treater", TileEntityAmineTreater.class);
+        registerMachineBlock(IndustrialProcessing.blockCatalyticReformer, "IP.MBC.CatRef", "Catalytic reformer", TileEntityCatalyticReformer.class);
+        registerMachineBlock(IndustrialProcessing.blockClausSulfurPlant, "IP.MBC.ClSulf", "Claus sulfur plant", TileEntityClausSulfurPlant.class);
+        registerMachineBlock(IndustrialProcessing.blockDelayedCoker, "IP.MBC.DelCoke", "Delayed coker", TileEntityDelayedCoker.class);
+        registerMachineBlock(IndustrialProcessing.blockFluidCatalyticCracker, "IP.MBc.CatCrack", "Fluid catalytic cracker", TileEntityFluidCatalyticCracker.class);
+        registerMachineBlock(IndustrialProcessing.blockHydroCracker, "IP.MBC.HydrCrack", "Hydro cracker", TileEntityHydroCracker.class);
+        registerMachineBlock(IndustrialProcessing.blockHydroTreater, "IP.MBC.HydrTr", "Hydro treater", TileEntityHydroTreater.class);
+        registerMachineBlock(IndustrialProcessing.blockMeroxTreater, "IP.MBC.MerTr", "Merox Treater", TileEntityMeroxTreater.class);
+        registerMachineBlock(IndustrialProcessing.blockVacuumDestilationTower, "IP.MBC.VacDest", "Vacuum Destilation base", TileEntityVacuumDestilationTower.class);
+        
         registerMachineBlock(IndustrialProcessing.blockTankPlating, "IP.MBD.TPlat", "Tank plating", TileEntityTankPlating.class);
         registerMachineBlock(IndustrialProcessing.blockDestilationTray, "IP.MBD.DestTray", "Destilation Tray", TileEntityDestilationTray.class);
         registerMachineBlock(IndustrialProcessing.blockAtmosphericDestilationTower, "IP.MBC.AtmDest", "Atmospheric Destilation base", TileEntityAtmosphericDestilationTower.class);
@@ -274,6 +302,42 @@ public class ConfigMachineBlocks {
 
     public static ConfigMachineBlocks getInstance() {
         return instance;
+    }
+        
+    public static int getBlockAmineTreaterID() {
+        return getInstance().blockAmineTreaterID;
+    }
+    
+    public static int getBlockCatalyticReformerID() {
+        return getInstance().blockCatalyticReformerID;
+    }
+    
+    public static int getBlockClausSulfurPlantID() {
+        return getInstance().blockClausSulfurPlantID;
+    }
+    
+    public static int getBlockDelayedCokerID() {
+        return getInstance().blockDelayedCokerID;
+    }
+    
+    public static int getBlockFluidCatalyticCrackerID() {
+        return getInstance().blockFluidCatalyticCrackerID;
+    }
+    
+    public static int getBlockHydroCrackerID() {
+        return getInstance().blockHydroCrackerID;
+    }
+    
+    public static int getBlockHydroTreaterID() {
+        return getInstance().blockHydroTreaterID;
+    }
+    
+    public static int getBlockMeroxTreaterID() {
+        return getInstance().blockMeroxTreaterID;
+    }
+    
+    public static int getBlockVacuumDestilationTowerID() {
+        return getInstance().blockVacuumDestilationTowerID;
     }
 
     public static int getBlockTankPlatingID() {

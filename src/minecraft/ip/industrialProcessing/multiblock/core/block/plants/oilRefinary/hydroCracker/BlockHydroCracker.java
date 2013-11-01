@@ -1,5 +1,23 @@
 package ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.hydroCracker;
 
-public class BlockHydroCracker {
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.ConfigMachineBlocks;
+import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.multiblock.core.BLmultiblockCore;
 
+public class BlockHydroCracker extends BLmultiblockCore{
+public BlockHydroCracker(){
+	super(ConfigMachineBlocks.getBlockHydroCrackerID(), "BlockHydroCracker", IndustrialProcessing.tabMultiblocks);
+}
+
+@Override
+public TileEntity createNewTileEntity(World world) {
+	return new TileEntityHydroCracker();
+}
+@Override
+public int getRenderType() {
+	return ConfigRenderers.getRendererHydroCracker();
+}
 }

@@ -1,5 +1,23 @@
 package ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.meroxTreater;
 
-public class BlockMeroxTreater {
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.ConfigMachineBlocks;
+import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.multiblock.core.BLmultiblockCore;
 
+public class BlockMeroxTreater extends BLmultiblockCore{
+public BlockMeroxTreater(){
+	super(ConfigMachineBlocks.getBlockMeroxTreaterID(), "BlockMeroxTreater", IndustrialProcessing.tabMultiblocks);
+}
+
+@Override
+public TileEntity createNewTileEntity(World world) {
+	return new TileEntityMeroxTreater();
+}
+@Override
+public int getRenderType() {
+	return ConfigRenderers.getRendererMeroxTreater();
+}
 }

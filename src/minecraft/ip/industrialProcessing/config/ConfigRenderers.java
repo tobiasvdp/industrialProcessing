@@ -69,7 +69,87 @@ public class ConfigRenderers {
     private int rendererTankPlating;
     private int rendererDestilationTray;
     private int rendererAtmosphericDestilationTower;
+    private int rendererAmineTreater;
+    private int rendererCatalyticReformer;
+    private int rendererClausSulfurPlant;
+    private int rendererDelayedCoker;
+    private int rendererFluidCatalyticCracker;
+    private int rendererHydroCracker;
+    private int rendererHydroTreater;
+    private int rendererMeroxTreater;
+    private int rendererVacuumDestilationTower;
+    
+    public static int getRendererCatalyticReformer() {
+        return getInstance().rendererCatalyticReformer;
+    }
 
+    public static void setRendererCatalyticReformer(int value) {
+        getInstance().rendererCatalyticReformer = value;
+    }
+    public static int getRendererAmineTreater() {
+        return getInstance().rendererAmineTreater;
+    }
+
+    public static void setRendererAmineTreater(int value) {
+        getInstance().rendererAmineTreater = value;
+    }
+
+    public static int getRendererVacuumDestilationTower() {
+        return getInstance().rendererVacuumDestilationTower;
+    }
+
+    public static void setRendererVacuumDestilationTower(int value) {
+        getInstance().rendererVacuumDestilationTower = value;
+    }
+    
+    public static int getRendererMeroxTreater() {
+        return getInstance().rendererMeroxTreater;
+    }
+
+    public static void setRendererMeroxTreater(int value) {
+        getInstance().rendererMeroxTreater = value;
+    }
+    
+    public static int getRendererHydroTreater() {
+        return getInstance().rendererHydroTreater;
+    }
+
+    public static void setRendererHydroTreater(int value) {
+        getInstance().rendererHydroTreater = value;
+    }
+    
+    public static int getRendererHydroCracker() {
+        return getInstance().rendererHydroCracker;
+    }
+
+    public static void setRendererHydroCracker(int value) {
+        getInstance().rendererHydroCracker = value;
+    }
+    
+    public static int getRendererFluidCatalyticCracker() {
+        return getInstance().rendererFluidCatalyticCracker;
+    }
+
+    public static void setRendererFluidCatalyticCracker(int value) {
+        getInstance().rendererFluidCatalyticCracker = value;
+    }
+    
+    public static int getRendererDelayedCoker() {
+        return getInstance().rendererDelayedCoker;
+    }
+
+    public static void setRendererDelayedCoker(int value) {
+        getInstance().rendererDelayedCoker = value;
+    }
+    
+    public static int getRendererClausSulfurPlant() {
+        return getInstance().rendererClausSulfurPlant;
+    }
+
+    public static void setRendererClausSulfurPlant(int value) {
+        getInstance().rendererClausSulfurPlant = value;
+    }
+    
     public static int getRendererAtmosphericDestilationTower() {
         return getInstance().rendererAtmosphericDestilationTower;
     }

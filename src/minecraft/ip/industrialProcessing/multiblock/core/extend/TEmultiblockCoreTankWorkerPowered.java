@@ -17,8 +17,8 @@ import ip.industrialProcessing.recipes.RecipeWorker;
 
 public abstract class TEmultiblockCoreTankWorkerPowered extends TEmultiblockCoreTankWorker implements IPoweredMachine {
 
-    public TEmultiblockCoreTankWorkerPowered(StructureMultiblock structure, TierCollection tierRequirments, RecipesMachine recipe, LocalDirection powerInput, int powerCapacity, int maxWorkSpeed) {
-	super(structure, tierRequirments, recipe);
+    public TEmultiblockCoreTankWorkerPowered(StructureMultiblock structure, TierCollection tierRequirments, RecipesMachine recipes, LocalDirection powerInput, int powerCapacity, int maxWorkSpeed) {
+	super(structure, tierRequirments, recipes);
 	this.powerInputSide = powerInput;
 	this.maxWorkSpeed = maxWorkSpeed;
 	this.storage = new SimplePowerStorage(powerCapacity);

@@ -1,5 +1,14 @@
 package ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.fluidCatalyticCracker;
 
-public class RecipesFluidCatalyticCracker {
+import ip.industrialProcessing.machines.RecipesMachine;
 
+public class RecipesFluidCatalyticCracker extends RecipesMachine {
+	public RecipesFluidCatalyticCracker() {
+		addDefaultRecipes();
+	}
+
+	private void addDefaultRecipes() {
+		// TODO Auto-generated method stub
+
+	}
 }

@@ -33,7 +33,16 @@ import ip.industrialProcessing.machines.wireMill.BlockWireMill;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.BLmultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.core.block.elevator.BLmultiblockElevator;
 import ip.industrialProcessing.multiblock.core.block.hotPress.BLmultiblockHotPress;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.CatalyticReformer.BlockCatalyticReformer;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.amineTreater.BlockAmineTreater;
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.atmosphericDestilationTower.BlockAtmosphericDestilationTower;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.clausSulfurPlant.BlockClausSulfurPlant;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.delayedCoker.BlockDelayedCoker;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.fluidCatalyticCracker.BlockFluidCatalyticCracker;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.hydroCracker.BlockHydroCracker;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.hydroTreater.BlockHydroTreater;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.meroxTreater.BlockMeroxTreater;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.vacuumDestilationTower.BlockVacuumDestilationTower;
 import ip.industrialProcessing.multiblock.core.block.rollingPress.BLmultiblockRollingPress;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.BLmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.dummy.block.blastFurnaceTower.BLmultiblockBlastFurnaceTower;
@@ -158,6 +167,16 @@ public interface ISetupMachineBlocks {
     public final static BlockAtmosphericDestilationTower blockAtmosphericDestilationTower = new BlockAtmosphericDestilationTower();
     public final static BlockTankPlating blockTankPlating = new BlockTankPlating();
     public final static BlockDestilationTray blockDestilationTray = new BlockDestilationTray();
+    public final static BlockAmineTreater blockAmineTreater = new BlockAmineTreater();
+    public final static BlockCatalyticReformer blockCatalyticReformer = new BlockCatalyticReformer();
+    public final static BlockClausSulfurPlant blockClausSulfurPlant = new BlockClausSulfurPlant();
+    public final static BlockDelayedCoker blockDelayedCoker = new BlockDelayedCoker();
+    public final static BlockFluidCatalyticCracker blockFluidCatalyticCracker = new  BlockFluidCatalyticCracker();
+    public final static BlockHydroCracker blockHydroCracker = new BlockHydroCracker();
+    public final static BlockHydroTreater blockHydroTreater = new BlockHydroTreater();
+    public final static BlockMeroxTreater blockMeroxTreater = new BlockMeroxTreater();
+    public final static BlockVacuumDestilationTower blockVacuumDestilationTower = new BlockVacuumDestilationTower();
+    
     
     // transport
     public final static BlockConveyorBelt blockConveyorBelt = new BlockConveyorBelt();
