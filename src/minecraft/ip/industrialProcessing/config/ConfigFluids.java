@@ -331,7 +331,39 @@ public class ConfigFluids {
     public static int getLightNaphthaFluidBucket() {
         return getInstance().bucketLightNaphtha;
     }
+    
+    public static int getUntreatedKeroseneFluidBlock() {
+        return getInstance().blockFluidBaseUntreatedKerosene;
+    }
 
+    public static int getUntreatedKeroseneFluidBucket() {
+        return getInstance().bucketUntreatedKerosene;
+    }
+    
+    public static int getUntreatedDieselOilFluidBlock() {
+        return getInstance().blockFluidBaseUntreatedDieselOil;
+    }
+
+    public static int getUntreatedDieselOilFluidBucket() {
+        return getInstance().bucketUntreatedDieselOil;
+    }
+    
+    public static int getHeavyvacuumGasOilFluidBlock() {
+        return getInstance().blockFluidBaseHeavyvacuumGasOil;
+    }
+
+    public static int getHeavyvacuumGasOilFluidBucket() {
+        return getInstance().bucketHeavyvacuumGasOil;
+    }
+    
+    public static int getLightvacuumGasOilFluidBlock() {
+        return getInstance().blockFluidBaseLightvacuumGasOil;
+    }
+
+    public static int getLightvacuumGasOilFluidBucket() {
+        return getInstance().bucketLightvacuumGasOil;
+    }
+    
     private int offset = 2500;
 
     private int blockFluidBaseDirtyWaterID = IndustrialProcessing.config.get(ConfigCategories.fluids.toString(), "DirtyWaterID", offset).getInt();
@@ -485,6 +517,18 @@ public class ConfigFluids {
     
     private int blockFluidBaseAtmosphericBottoms = offset + 77;
     private int bucketAtmosphericBottoms = offset + 78;
+    
+    private int blockFluidBaseUntreatedKerosene = offset + 79;
+    private int bucketUntreatedKerosene = offset + 80;
+    
+    private int blockFluidBaseUntreatedDieselOil = offset + 81;
+    private int bucketUntreatedDieselOil = offset + 82;
+    
+    private int blockFluidBaseHeavyvacuumGasOil = offset + 83;
+    private int bucketHeavyvacuumGasOil = offset + 84;
+    
+    private int blockFluidBaseLightvacuumGasOil = offset + 85;
+    private int bucketLightvacuumGasOil = offset + 86;
 
     public ConfigFluids() {
 
@@ -510,7 +554,19 @@ public class ConfigFluids {
         registerFluid(IndustrialProcessing.blockFluidUnsweetenedButane, IndustrialProcessing.itemFluidUnsweetenedButane, null, "Unsweetened Butane");
         registerFluid(IndustrialProcessing.blockFluidFuelGas, IndustrialProcessing.itemFluidFuelGas, null, "Fuel gas");
         registerFluid(IndustrialProcessing.blockFluidGasMix, IndustrialProcessing.itemFluidGasMix, null, "Gas mix");
+        
+        registerFluid(IndustrialProcessing.blockFluidLightVacuumGasOil, IndustrialProcessing.itemFluidLightVacuumGasOil, IndustrialProcessing.bucketLightVacuumGasOil, "Light vacuum gasOil");
+        LanguageRegistry.addName(IndustrialProcessing.bucketLightVacuumGasOil, "Light vacuum gasOil Bucket");
 
+        registerFluid(IndustrialProcessing.blockFluidHeavyvacuumGasOil, IndustrialProcessing.itemFluidHeavyvacuumGasOil, IndustrialProcessing.bucketHeavyvacuumGasOil, "Heavy vacuum gasOil");
+        LanguageRegistry.addName(IndustrialProcessing.bucketHeavyvacuumGasOil, "Heavy vacuum gasOil Bucket");
+        
+        registerFluid(IndustrialProcessing.blockFluidUntreatedDieselOil, IndustrialProcessing.itemFluidUntreatedDieselOil, IndustrialProcessing.bucketUntreatedDieselOil, "Untreated diesel Oil");
+        LanguageRegistry.addName(IndustrialProcessing.bucketUntreatedDieselOil, "Untreated diesel Oil Bucket");
+
+        registerFluid(IndustrialProcessing.blockFluidUntreatedKerosene, IndustrialProcessing.itemFluidUntreatedKerosene, IndustrialProcessing.bucketUntreatedKerosene, "Untreated kerosene");
+        LanguageRegistry.addName(IndustrialProcessing.bucketUntreatedKerosene, "Untreated kerosene Bucket");
+        
         registerFluid(IndustrialProcessing.blockFluidLightNaphtha, IndustrialProcessing.itemFluidLightNaphtha, IndustrialProcessing.bucketLightNaphtha, "Light naphtha");
         LanguageRegistry.addName(IndustrialProcessing.bucketLightNaphtha, "Light naphtha Bucket");
         

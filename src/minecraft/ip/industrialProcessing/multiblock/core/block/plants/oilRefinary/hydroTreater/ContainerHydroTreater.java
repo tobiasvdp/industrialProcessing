@@ -10,13 +10,18 @@ public class ContainerHydroTreater  extends ContainerMultiblockTankWorkerPowered
 	public ContainerHydroTreater(InventoryPlayer inventory, TEmultiblockCoreTankWorkerPowered core){
 		super(inventory, core);
 
+		addTankToContainer(0);
+		addTankToContainer(1);
+		addTankToContainer(2);
+		addTankToContainer(3);
+		
 		addPowerToContainer(core.getMainPowerStorage());
 		addWorkerToContainer(core.getWorker());
 	}
 	
 	@Override
 	public int getSizeInventory() {
-		return 2;
+		return 0;
 	}
 
 }

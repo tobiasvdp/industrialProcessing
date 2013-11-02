@@ -16,9 +16,25 @@ public interface ISetupFluids {
     public final static BlockFluid blockFluidHeavyNaphtha = new BlockFluid(ConfigFluids.getHeavyNaphthaFluidBlock(), itemFluidHeavyNaphtha, Material.water, true);
     public final static ContainerFluid bucketHeavyNaphtha = new ContainerFluid(ConfigFluids.getHeavyNaphthaFluidBucket(), itemFluidHeavyNaphtha, blockFluidHeavyNaphtha, "ContainerHeavyNaphtha");
     
+    public final static ItemFluid itemFluidLightVacuumGasOil = new ItemFluid("LightVacuumGasOil", 1000, 1000);
+    public final static BlockFluid blockFluidLightVacuumGasOil = new BlockFluid(ConfigFluids.getLightvacuumGasOilFluidBlock(), itemFluidLightVacuumGasOil, Material.water, true);
+    public final static ContainerFluid bucketLightVacuumGasOil = new ContainerFluid(ConfigFluids.getLightvacuumGasOilFluidBucket(), itemFluidLightVacuumGasOil, blockFluidLightVacuumGasOil, "ContainerLightVacuumGasOil");
+    
+    public final static ItemFluid itemFluidHeavyvacuumGasOil = new ItemFluid("HeavyvacuumGasOil", 1000, 1000);
+    public final static BlockFluid blockFluidHeavyvacuumGasOil = new BlockFluid(ConfigFluids.getHeavyvacuumGasOilFluidBlock(), itemFluidHeavyvacuumGasOil, Material.water, true);
+    public final static ContainerFluid bucketHeavyvacuumGasOil = new ContainerFluid(ConfigFluids.getHeavyvacuumGasOilFluidBucket(), itemFluidHeavyvacuumGasOil, blockFluidHeavyvacuumGasOil, "ContainerHeavyvacuumGasOil");
+    
+    public final static ItemFluid itemFluidUntreatedKerosene = new ItemFluid("UntreatedKerosene", 1000, 1000);
+    public final static BlockFluid blockFluidUntreatedKerosene = new BlockFluid(ConfigFluids.getUntreatedKeroseneFluidBlock(), itemFluidUntreatedKerosene, Material.water, true);
+    public final static ContainerFluid bucketUntreatedKerosene = new ContainerFluid(ConfigFluids.getUntreatedKeroseneFluidBucket(), itemFluidUntreatedKerosene, blockFluidUntreatedKerosene, "ContainerUntreatedKerosene");
+    
     public final static ItemFluid itemFluidKerosene = new ItemFluid("Kerosene", 1000, 1000);
     public final static BlockFluid blockFluidKerosene = new BlockFluid(ConfigFluids.getKeroseneFluidBlock(), itemFluidKerosene, Material.water, true);
     public final static ContainerFluid bucketKerosene = new ContainerFluid(ConfigFluids.getKeroseneFluidBucket(), itemFluidKerosene, blockFluidKerosene, "ContainerKerosene");
+    
+    public final static ItemFluid itemFluidUntreatedDieselOil = new ItemFluid("UntreatedDieselOil", 1000, 1000);
+    public final static BlockFluid blockFluidUntreatedDieselOil = new BlockFluid(ConfigFluids.getUntreatedDieselOilFluidBlock(), itemFluidUntreatedDieselOil, Material.water, true);
+    public final static ContainerFluid bucketUntreatedDieselOil = new ContainerFluid(ConfigFluids.getUntreatedDieselOilFluidBucket(), itemFluidUntreatedDieselOil, blockFluidUntreatedDieselOil, "ContainerUntreatedDieselOil");
     
     public final static ItemFluid itemFluidDieselOil = new ItemFluid("DieselOil", 1000, 1000);
     public final static BlockFluid blockFluidDieselOil = new BlockFluid(ConfigFluids.getDieselOilFluidBlock(), itemFluidDieselOil, Material.water, true);

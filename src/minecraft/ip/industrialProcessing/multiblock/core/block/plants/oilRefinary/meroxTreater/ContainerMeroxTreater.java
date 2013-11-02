@@ -9,6 +9,10 @@ public class ContainerMeroxTreater extends ContainerMultiblockTankWorkerPowered{
 	
 	public ContainerMeroxTreater(InventoryPlayer inventory, TEmultiblockCoreTankWorkerPowered core){
 		super(inventory, core);
+		
+		addTankToContainer(0);
+		addTankToContainer(1);
+		addTankToContainer(2);
 
 		addPowerToContainer(core.getMainPowerStorage());
 		addWorkerToContainer(core.getWorker());
@@ -16,6 +20,6 @@ public class ContainerMeroxTreater extends ContainerMultiblockTankWorkerPowered{
 	
 	@Override
 	public int getSizeInventory() {
-		return 2;
+		return 0;
 	}
 }

@@ -26,6 +26,12 @@ public class GuiContainerHydroTreater extends GUImultiblock {
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
 		super.drawGuiContainerBackgroundLayer(par1, par2, par3);
+		
+		drawProgressBarTank(TANK_SOURCE, new Point(8, 19), 0);
+		drawProgressBarTank(TANK_SOURCE, new Point(152, 19), 1);
+		drawProgressBarTank(TANK_SOURCE, new Point(28, 19), 2);
+		drawProgressBarTank(TANK_SOURCE, new Point(132, 19), 3);
+		
 		drawProgressBarWorker(PROGRESSBAR_SOURCE, PROGRESSBAR_LOCATION, true, 0);
 	}
 

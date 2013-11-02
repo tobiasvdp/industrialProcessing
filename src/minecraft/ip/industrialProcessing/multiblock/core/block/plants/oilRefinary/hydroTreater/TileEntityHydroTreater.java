@@ -1,5 +1,6 @@
 package ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.hydroTreater;
 
+import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorkerPowered;
@@ -37,17 +38,20 @@ public class TileEntityHydroTreater extends TEmultiblockCoreTankWorkerPowered  {
 	public TileEntityHydroTreater(){
 		super(structure, tierRequirments, recipes, LocalDirection.LEFT, 10000, 100);
 		LocalDirection[] nodirections = new LocalDirection[0];
+		
+		addTank(10000, 0, new ForgeDirection[] { ForgeDirection.UP }, true, false);
+		addTank(10000, 0, new ForgeDirection[] { ForgeDirection.DOWN }, false, true);
+		addTank(10000, 0, new ForgeDirection[] { ForgeDirection.NORTH }, true, false);
+		addTank(10000, 0, new ForgeDirection[] { ForgeDirection.WEST }, false, true);
 	}
 
 	@Override
 	protected boolean isTankValidForFluid(int groupid, int slot, int fluidId) {
-		// TODO Auto-generated method stub
-		return false;
+		return recipes.isValidFluidInput(slot, fluidId);
 	}
 
 	@Override
 	protected boolean isValidInput(int slot, int itemID) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 }
