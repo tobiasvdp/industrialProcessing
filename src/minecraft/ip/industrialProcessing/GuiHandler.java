@@ -85,9 +85,36 @@ import ip.industrialProcessing.machines.treetap.TileEntityManualTreeTap;
 import ip.industrialProcessing.machines.wireMill.ContainerWireMill;
 import ip.industrialProcessing.machines.wireMill.GuiContainerWireMill;
 import ip.industrialProcessing.machines.wireMill.TileEntityWireMill;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.CatalyticReformer.ContainerCatalyticReformer;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.CatalyticReformer.GuiContainerCatalyticReformer;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.CatalyticReformer.TileEntityCatalyticReformer;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.amineTreater.ContainerAmineTreater;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.amineTreater.GuiContainerAmineTreater;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.amineTreater.TileEntityAmineTreater;
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.atmosphericDestilationTower.ContainerAtmosphericDestilationTower;
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.atmosphericDestilationTower.GuiContainerAtmosphericDestilationTower;
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.atmosphericDestilationTower.TileEntityAtmosphericDestilationTower;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.clausSulfurPlant.ContainerClausSulfurPlant;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.clausSulfurPlant.GuiContainerClausSulfurPlant;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.clausSulfurPlant.TileEntityClausSulfurPlant;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.delayedCoker.ContainerDelayedCoker;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.delayedCoker.GuiContainerDelayedCoker;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.delayedCoker.TileEntityDelayedCoker;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.fluidCatalyticCracker.ContainerFluidCatalyticCracker;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.fluidCatalyticCracker.GuiContainerFluidCatalyticCracker;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.fluidCatalyticCracker.TileEntityFluidCatalyticCracker;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.hydroCracker.ContainerHydroCracker;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.hydroCracker.GuiContainerHydroCracker;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.hydroCracker.TileEntityHydroCracker;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.hydroTreater.ContainerHydroTreater;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.hydroTreater.GuiContainerHydroTreater;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.hydroTreater.TileEntityHydroTreater;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.meroxTreater.ContainerMeroxTreater;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.meroxTreater.GuiContainerMeroxTreater;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.meroxTreater.TileEntityMeroxTreater;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.vacuumDestilationTower.ContainerVacuumDestilationTower;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.vacuumDestilationTower.GuiContainerVacuumDestilationTower;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.vacuumDestilationTower.TileEntityVacuumDestilationTower;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.ContainerWeldingStation;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.GuiContainerWeldingStation;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
@@ -197,6 +224,24 @@ public class GuiHandler implements IGuiHandler {
                 return new ContainerIsomerizationReactor(player.inventory, (TileEntityIsomerizationReactor) entity);
             if (entity instanceof TileEntityAtmosphericDestilationTower)
                 return new ContainerAtmosphericDestilationTower(player.inventory, (TileEntityAtmosphericDestilationTower) entity);
+            if (entity instanceof TileEntityAmineTreater)
+                return new ContainerAmineTreater(player.inventory, (TileEntityAmineTreater) entity);
+            if (entity instanceof TileEntityCatalyticReformer)
+                return new ContainerCatalyticReformer(player.inventory, (TileEntityCatalyticReformer) entity);
+            if (entity instanceof TileEntityClausSulfurPlant)
+                return new ContainerClausSulfurPlant(player.inventory, (TileEntityClausSulfurPlant) entity);
+            if (entity instanceof TileEntityDelayedCoker)
+                return new ContainerDelayedCoker(player.inventory, (TileEntityDelayedCoker) entity);
+            if (entity instanceof TileEntityFluidCatalyticCracker)
+                return new ContainerFluidCatalyticCracker(player.inventory, (TileEntityFluidCatalyticCracker) entity);
+            if (entity instanceof TileEntityHydroCracker)
+                return new ContainerHydroCracker(player.inventory, (TileEntityHydroCracker) entity);
+            if (entity instanceof TileEntityHydroTreater)
+                return new ContainerHydroTreater(player.inventory, (TileEntityHydroTreater) entity);
+            if (entity instanceof TileEntityMeroxTreater)
+                return new ContainerMeroxTreater(player.inventory, (TileEntityMeroxTreater) entity);
+            if (entity instanceof TileEntityVacuumDestilationTower)
+                return new ContainerVacuumDestilationTower(player.inventory, (TileEntityVacuumDestilationTower) entity);
         } else if (ID == GUIDE_ID)
             return null;
         return null;
@@ -281,6 +326,24 @@ public class GuiHandler implements IGuiHandler {
                 return new GuiContainerIsomerizationReactor(player.inventory, (TileEntityIsomerizationReactor) entity);
             if (entity instanceof TileEntityAtmosphericDestilationTower)
                 return new GuiContainerAtmosphericDestilationTower(player.inventory, (TileEntityAtmosphericDestilationTower) entity);
+            if (entity instanceof TileEntityAmineTreater)
+                return new GuiContainerAmineTreater(player.inventory, (TileEntityAmineTreater) entity);
+            if (entity instanceof TileEntityCatalyticReformer)
+                return new GuiContainerCatalyticReformer(player.inventory, (TileEntityCatalyticReformer) entity);
+            if (entity instanceof TileEntityClausSulfurPlant)
+                return new GuiContainerClausSulfurPlant(player.inventory, (TileEntityClausSulfurPlant) entity);
+            if (entity instanceof TileEntityDelayedCoker)
+                return new GuiContainerDelayedCoker(player.inventory, (TileEntityDelayedCoker) entity);
+            if (entity instanceof TileEntityFluidCatalyticCracker)
+                return new GuiContainerFluidCatalyticCracker(player.inventory, (TileEntityFluidCatalyticCracker) entity);
+            if (entity instanceof TileEntityHydroCracker)
+                return new GuiContainerHydroCracker(player.inventory, (TileEntityHydroCracker) entity);
+            if (entity instanceof TileEntityHydroTreater)
+                return new GuiContainerHydroTreater(player.inventory, (TileEntityHydroTreater) entity);
+            if (entity instanceof TileEntityMeroxTreater)
+                return new GuiContainerMeroxTreater(player.inventory, (TileEntityMeroxTreater) entity);
+            if (entity instanceof TileEntityVacuumDestilationTower)
+                return new GuiContainerVacuumDestilationTower(player.inventory, (TileEntityVacuumDestilationTower) entity);
         } else if (ID == GUIDE_ID)
             return new GuiGuide(player);
         return null;
