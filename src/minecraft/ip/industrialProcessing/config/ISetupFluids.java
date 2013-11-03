@@ -12,9 +12,17 @@ public interface ISetupFluids {
     public final static BlockFluid blockFluidLightNaphtha = new BlockFluid(ConfigFluids.getLightNaphthaFluidBlock(), itemFluidLightNaphtha, Material.water, true);
     public final static ContainerFluid bucketLightNaphtha = new ContainerFluid(ConfigFluids.getLightNaphthaFluidBucket(), itemFluidLightNaphtha, blockFluidLightNaphtha, "ContainerLightNaphtha");
     
+    public final static ItemFluid itemFluidParaffinicNaphtha = new ItemFluid("ParaffinicNaphtha", 1000, 1000);
+    public final static BlockFluid blockFluidParaffinicNaphtha = new BlockFluid(ConfigFluids.getParaffinicNaphthaFluidBlock(), itemFluidParaffinicNaphtha, Material.water, true);
+    public final static ContainerFluid bucketParaffinicNaphtha = new ContainerFluid(ConfigFluids.getParaffinicNaphthaFluidBucket(), itemFluidParaffinicNaphtha, blockFluidParaffinicNaphtha, "ContainerParaffinicNaphtha");
+    
     public final static ItemFluid itemFluidHeavyNaphtha = new ItemFluid("HeavyNaphtha", 1000, 1000);
     public final static BlockFluid blockFluidHeavyNaphtha = new BlockFluid(ConfigFluids.getHeavyNaphthaFluidBlock(), itemFluidHeavyNaphtha, Material.water, true);
     public final static ContainerFluid bucketHeavyNaphtha = new ContainerFluid(ConfigFluids.getHeavyNaphthaFluidBucket(), itemFluidHeavyNaphtha, blockFluidHeavyNaphtha, "ContainerHeavyNaphtha");
+    
+    public final static ItemFluid itemFluidHeavyVirginNaphtha = new ItemFluid("HeavyVirginNaphtha", 1000, 1000);
+    public final static BlockFluid blockFluidHeavyVirginNaphtha = new BlockFluid(ConfigFluids.getHeavyVirginNaphthaFluidBlock(), itemFluidHeavyVirginNaphtha, Material.water, true);
+    public final static ContainerFluid bucketHeavyVirginNaphtha = new ContainerFluid(ConfigFluids.getHeavyVirginNaphthaFluidBucket(), itemFluidHeavyVirginNaphtha, blockFluidHeavyVirginNaphtha, "ContainerHeavyVirginNaphtha");
     
     public final static ItemFluid itemFluidLightVacuumGasOil = new ItemFluid("LightVacuumGasOil", 1000, 1000);
     public final static BlockFluid blockFluidLightVacuumGasOil = new BlockFluid(ConfigFluids.getLightvacuumGasOilFluidBlock(), itemFluidLightVacuumGasOil, Material.water, true);
@@ -154,9 +162,6 @@ public interface ISetupFluids {
 
     public final static ItemFluid itemFluidUnsweetenedButane = new ItemFluid("UnsweetenedButane", 1000, 1000);
     public final static BlockFluid blockFluidUnsweetenedButane = new BlockFluid(ConfigFluids.getUnsweetenedButaneFluidBlockID(), itemFluidUnsweetenedButane, Material.water, false);
-
-    public final static ItemFluid itemFluidParaffinicNaphtha = new ItemFluid("ParaffinicNaphtha", 1000, 1000);
-    public final static BlockFluid blockFluidParaffinicNaphtha = new BlockFluid(ConfigFluids.getParaffinicNaphthaFluidBlockID(), itemFluidParaffinicNaphtha, Material.water, false);
 
     public final static ItemFluid itemFluidIsomerate = new ItemFluid("Isomerate", 1000, 1000);
     public final static BlockFluid blockFluidIsomerate = new BlockFluid(ConfigFluids.getIsomerateFluidBlockID(), itemFluidIsomerate, Material.water, false);
