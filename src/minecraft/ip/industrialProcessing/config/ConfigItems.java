@@ -494,6 +494,7 @@ public class ConfigItems {
     	LanguageRegistry.addName(IndustrialProcessing.itemCopperWireInsulated, "Insulated copper wire");
     	LanguageRegistry.addName(IndustrialProcessing.itemCopperCoil, "Copper coil");
     	LanguageRegistry.addName(IndustrialProcessing.itemCopperWire, "Copper wire");
+    	LanguageRegistry.addName(IndustrialProcessing.itemCrankWheel, "Crank wheel");
     	
     	LanguageRegistry.addName(IndustrialProcessing.itemCopperIngot, "Copper ingot");
     	LanguageRegistry.addName(IndustrialProcessing.itemTinIngot, "Tin ingot");

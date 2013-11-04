@@ -24,6 +24,7 @@ import ip.industrialProcessing.multiblock.dummy.block.liftDoor.ENmultiblockLiftD
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import net.minecraft.block.Block;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;
