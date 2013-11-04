@@ -364,6 +364,22 @@ public class ConfigFluids {
         return getInstance().bucketLightvacuumGasOil;
     }
     
+    public static int getHeavyVirginNaphthaFluidBlock() {
+        return getInstance().blockFluidBaseHeavyVirginNaphtha;
+    }
+
+    public static int getHeavyVirginNaphthaFluidBucket() {
+        return getInstance().bucketHeavyVirginNaphtha;
+    }
+    
+    public static int getParaffinicNaphthaFluidBlock() {
+        return getInstance().blockFluidBaseParaffinicNaphtha;
+    }
+
+    public static int getParaffinicNaphthaFluidBucket() {
+        return getInstance().bucketParaffinicNaphtha;
+    }
+    
     private int offset = 2500;
 
     private int blockFluidBaseDirtyWaterID = IndustrialProcessing.config.get(ConfigCategories.fluids.toString(), "DirtyWaterID", offset).getInt();
@@ -529,6 +545,12 @@ public class ConfigFluids {
     
     private int blockFluidBaseLightvacuumGasOil = offset + 85;
     private int bucketLightvacuumGasOil = offset + 86;
+    
+    private int blockFluidBaseHeavyVirginNaphtha = offset + 87;
+    private int bucketHeavyVirginNaphtha = offset + 88;
+    
+    private int blockFluidBaseParaffinicNaphtha = offset + 89;
+    private int bucketParaffinicNaphtha = offset + 90;
 
     public ConfigFluids() {
 
@@ -554,6 +576,12 @@ public class ConfigFluids {
         registerFluid(IndustrialProcessing.blockFluidUnsweetenedButane, IndustrialProcessing.itemFluidUnsweetenedButane, null, "Unsweetened Butane");
         registerFluid(IndustrialProcessing.blockFluidFuelGas, IndustrialProcessing.itemFluidFuelGas, null, "Fuel gas");
         registerFluid(IndustrialProcessing.blockFluidGasMix, IndustrialProcessing.itemFluidGasMix, null, "Gas mix");
+        
+        registerFluid(IndustrialProcessing.blockFluidParaffinicNaphtha, IndustrialProcessing.itemFluidParaffinicNaphtha, IndustrialProcessing.bucketParaffinicNaphtha, "Paraffinic naphtha");
+        LanguageRegistry.addName(IndustrialProcessing.bucketParaffinicNaphtha, "Paraffinic naphtha Bucket");
+        
+        registerFluid(IndustrialProcessing.blockFluidHeavyVirginNaphtha, IndustrialProcessing.itemFluidHeavyVirginNaphtha, IndustrialProcessing.bucketHeavyVirginNaphtha, "Heavy virgin naphtha");
+        LanguageRegistry.addName(IndustrialProcessing.bucketHeavyVirginNaphtha, "Heavy virgin naphtha Bucket");
         
         registerFluid(IndustrialProcessing.blockFluidLightVacuumGasOil, IndustrialProcessing.itemFluidLightVacuumGasOil, IndustrialProcessing.bucketLightVacuumGasOil, "Light vacuum gasOil");
         LanguageRegistry.addName(IndustrialProcessing.bucketLightVacuumGasOil, "Light vacuum gasOil Bucket");

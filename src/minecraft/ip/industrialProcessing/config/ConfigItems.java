@@ -107,7 +107,12 @@ public class ConfigItems {
     private int itemMotorFrameID = 6610;
     private int itemMotorStatorID = 6611;
     private int itemMotorRotorID = 6612;
+    
+    private int itemCrankWheelID = 6613;
 
+    public static int getItemCrankWheelID(){
+    	return getInstance().itemCrankWheelID;
+    }
     public static int getItemElectroMagnetID(){
     	return getInstance().itemElectroMangetID;
     }

@@ -137,4 +137,6 @@ public interface ISetupItems {
     public final static ItemIP itemMotorStator = new ItemIP(ConfigItems.getItemMotorStatorID(), "ItemMotorStator",IndustrialProcessing.tabOres);
     public final static ItemIP itemMotorRotor = new ItemIP(ConfigItems.getItemMotorRotorID(), "ItemMotorRotor",IndustrialProcessing.tabOres);
     
+    public final static ItemIP itemCrankWheel = new ItemIP(ConfigItems.getItemCrankWheelID(), "ItemCrankWheel",IndustrialProcessing.tabOres);
+    
 }
