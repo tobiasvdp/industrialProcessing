@@ -114,7 +114,15 @@ public class ConfigItems {
     private int itemIronRodID = 6616;
     private int itemCarbonBrushID = 6617;
     private int itemSlipRingID = 6618;
-
+    private int itemIronBowlID = 6619;
+    private int itemIronBracketID = 6620;
+    
+    public static int getItemIronBracketID(){
+    	return getInstance().itemIronBracketID;
+    }
+    public static int getItemIronBowlID(){
+    	return getInstance().itemIronBowlID;
+    }
     public static int getItemCarbonBrushID(){
     	return getInstance().itemCarbonBrushID;
     }

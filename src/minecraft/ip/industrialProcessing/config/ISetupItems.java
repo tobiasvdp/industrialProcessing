@@ -142,5 +142,7 @@ public interface ISetupItems {
     public final static ItemIP itemIronT = new ItemIP(ConfigItems.getItemIronTID(), "ItemIronT",IndustrialProcessing.tabOres);
     public final static ItemIP itemCarbonBrush = new ItemIP(ConfigItems.getItemCarbonBrushID(), "ItemCarbonBrush",IndustrialProcessing.tabOres);
     public final static ItemIP itemSlipRing = new ItemIP(ConfigItems.getItemSlipRingID(), "ItemSlipRing",IndustrialProcessing.tabOres);
+    public final static ItemIP itemIronBowl = new ItemIP(ConfigItems.getItemIronBowlID(), "ItemIronBowl",IndustrialProcessing.tabOres);
+    public final static ItemIP itemIronBracket = new ItemIP(ConfigItems.getItemIronBracketID(), "ItemIronBracket",IndustrialProcessing.tabOres);
     
 }
