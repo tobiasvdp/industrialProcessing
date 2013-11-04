@@ -42,7 +42,6 @@ public class ConfigItems {
     private int ItemInputPortID = 6534;
     private int ItemOutputPortID = 6535;
     private int ItemPowerPortID = 6536;
-    private int ItemSupportBarsID = 6537;
     private int ItemCrusingPlateID = 6538;
     private int ItemIronPlateID = 6539;
     private int ItemIronTipsID = 6540;
@@ -109,7 +108,25 @@ public class ConfigItems {
     private int itemMotorRotorID = 6612;
     
     private int itemCrankWheelID = 6613;
+    
+    private int itemIronBarID = 6614;
+    private int itemIronTID = 6615;
+    private int itemIronRodID = 6616;
+    private int itemCarbonBrushID = 6617;
+    private int itemSlipRingID = 6618;
 
+    public static int getItemCarbonBrushID(){
+    	return getInstance().itemCarbonBrushID;
+    }
+    public static int getItemIronRodID(){
+    	return getInstance().itemIronRodID;
+    }
+    public static int getItemIronBarID(){
+    	return getInstance().itemIronBarID;
+    }
+    public static int getItemIronTID(){
+    	return getInstance().itemIronTID;
+    }
     public static int getItemCrankWheelID(){
     	return getInstance().itemCrankWheelID;
     }
@@ -315,10 +332,6 @@ public class ConfigItems {
         return getInstance().ItemPowerPortID;
     }
 
-    public static int ItemSupportBarsID() {
-        return getInstance().ItemSupportBarsID;
-    }
-
     public static int ItemCrusingPlateID() {
         return getInstance().ItemCrusingPlateID;
     }
@@ -485,8 +498,16 @@ public class ConfigItems {
     public static int getItemMotorFrameID() {
         return getInstance().itemMotorFrameID;
     }
+    public static int getItemSlipRingID() {
+        return getInstance().itemSlipRingID;
+    }
 
     public static void addToLanguageRegistry() {
+    	LanguageRegistry.addName(IndustrialProcessing.itemSlipRing, "Slip ring");
+    	LanguageRegistry.addName(IndustrialProcessing.itemCarbonBrush, "Carbon brush");
+    	LanguageRegistry.addName(IndustrialProcessing.itemIronT, "Iron T-shape");
+    	LanguageRegistry.addName(IndustrialProcessing.itemIronRod, "Iron rod");
+    	LanguageRegistry.addName(IndustrialProcessing.itemIronBar, "Iron bar");
     	LanguageRegistry.addName(IndustrialProcessing.itemMotorStator, "Motor stator");
     	LanguageRegistry.addName(IndustrialProcessing.itemMotorRotor, "Motor rotor");
     	LanguageRegistry.addName(IndustrialProcessing.itemMotorFrame, "Motor frame");
@@ -512,7 +533,6 @@ public class ConfigItems {
         LanguageRegistry.addName(IndustrialProcessing.itemInputPort, "Input port");
         LanguageRegistry.addName(IndustrialProcessing.itemOutputPort, "Output port");
         LanguageRegistry.addName(IndustrialProcessing.itemPowerPort, "Power port");
-        LanguageRegistry.addName(IndustrialProcessing.itemSupportBars, "Support bar");
         LanguageRegistry.addName(IndustrialProcessing.itemCrusingPlate, "Crushing plate");
         LanguageRegistry.addName(IndustrialProcessing.itemIronPlate, "Iron plate");
         LanguageRegistry.addName(IndustrialProcessing.itemIronTips, "Iron tips");
