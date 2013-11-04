@@ -569,8 +569,7 @@ public class ConfigFluids {
     public void registerFluids() {
         registerFluid(IndustrialProcessing.blockFluidIsoButane, IndustrialProcessing.itemFluidIsoButane, null, "Isobutane");
         registerFluid(IndustrialProcessing.blockFluidButane, IndustrialProcessing.itemFluidButane, null, "Butane");
-        registerFluid(IndustrialProcessing.blockFluidAlkylate, IndustrialProcessing.itemFluidAlkylate, null, "Alkylate");
-        registerFluid(IndustrialProcessing.blockFluidParaffinicNaphtha, IndustrialProcessing.itemFluidParaffinicNaphtha, null, "Paraffinic Naphtha");
+        registerFluid(IndustrialProcessing.blockFluidAlkylate, IndustrialProcessing.itemFluidAlkylate, null, "Alkylate"); 
         registerFluid(IndustrialProcessing.blockFluidIsomerate, IndustrialProcessing.itemFluidIsomerate, null, "Isomerate");
         registerFluid(IndustrialProcessing.blockFluidUnsweetenedLPG, IndustrialProcessing.itemFluidUnsweetenedLPG, null, "Unsweetened LPG");
         registerFluid(IndustrialProcessing.blockFluidUnsweetenedButane, IndustrialProcessing.itemFluidUnsweetenedButane, null, "Unsweetened Butane");
