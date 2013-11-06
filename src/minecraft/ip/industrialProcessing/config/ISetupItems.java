@@ -144,5 +144,6 @@ public interface ISetupItems {
     public final static ItemIP itemSlipRing = new ItemIP(ConfigItems.getItemSlipRingID(), "ItemSlipRing",IndustrialProcessing.tabOres);
     public final static ItemIP itemIronBowl = new ItemIP(ConfigItems.getItemIronBowlID(), "ItemIronBowl",IndustrialProcessing.tabOres);
     public final static ItemIP itemIronBracket = new ItemIP(ConfigItems.getItemIronBracketID(), "ItemIronBracket",IndustrialProcessing.tabOres);
+    public final static ItemDamage itemDrawPlate = new ItemDamage(ConfigItems.getItemDrawPlateID(), "ItemDrawPlate",IndustrialProcessing.tabOres,8);
     
 }

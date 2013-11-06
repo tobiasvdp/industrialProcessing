@@ -2,6 +2,7 @@ package ip.industrialProcessing;
 
 import ip.industrialProcessing.config.ISetupAchievements;
 import ip.industrialProcessing.config.ISetupItems;
+import ip.industrialProcessing.fluids.ContainerFluid;
 import ip.industrialProcessing.items.ItemDamage;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -25,6 +26,9 @@ public class CraftingHandler implements ICraftingHandler {
                     }
 
                     craftMatrix.setInventorySlotContents(i, damagedStack);
+                }
+                if (itemFromStack instanceof ContainerFluid) {
+                    craftMatrix.setInventorySlotContents(i, new ItemStack(Item.bucketEmpty,2));
                 }
             }
         }

@@ -25,6 +25,7 @@ public class RecipesWeldingStation extends RecipesMachine {
 		addRecipe(ironBowl(3000,0));
 		addRecipe(ironBracket(3000,0));
 		addRecipe(manualTreeTap(3000,0));
+		addRecipe(drawPlate(3000,0));
 		
 	}
 	private Recipe manualTreeTap(int workTime, int power) {
@@ -93,6 +94,15 @@ public class RecipesWeldingStation extends RecipesMachine {
 		Recipe recipe = new Recipe();
 		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(6, IndustrialProcessing.itemIronBar.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(8, IndustrialProcessing.itemIronBar.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(4, IndustrialProcessing.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1)};
 		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(13, IndustrialProcessing.itemIronBracket.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
+		
+		recipe.workRequired = workTime;
+		recipe.powerRequired = power;
+		return recipe;
+	}
+	private Recipe drawPlate(int workTime, int power) {
+		Recipe recipe = new Recipe();
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(1, IndustrialProcessing.itemIronBar.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(7, IndustrialProcessing.itemIronBar.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(4, IndustrialProcessing.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1)};
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(13, IndustrialProcessing.itemDrawPlate.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
 		
 		recipe.workRequired = workTime;
 		recipe.powerRequired = power;
