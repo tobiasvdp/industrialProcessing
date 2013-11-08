@@ -117,7 +117,11 @@ public class ConfigItems {
     private int itemIronBowlID = 6619;
     private int itemIronBracketID = 6620;
     private int itemDrawPlateID = 6621;
+    private int itemPestleID = 6622;
 
+    public static int getItemPestleID(){
+    	return getInstance().itemPestleID;
+    }
     public static int getItemDrawPlateID(){
     	return getInstance().itemDrawPlateID;
     }
@@ -515,6 +519,7 @@ public class ConfigItems {
     }
 
     public static void addToLanguageRegistry() {
+    	LanguageRegistry.addName(IndustrialProcessing.itemPestle, "Pestle");
     	LanguageRegistry.addName(IndustrialProcessing.itemDrawPlate, "Draw plate");
     	LanguageRegistry.addName(IndustrialProcessing.itemSlipRing, "Slip ring");
     	LanguageRegistry.addName(IndustrialProcessing.itemCarbonBrush, "Carbon brush");

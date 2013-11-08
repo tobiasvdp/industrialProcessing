@@ -15,6 +15,8 @@ public class ConfigBaseRecipes {
 
 	public void addBaseRecipes() {
 		GameRegistry.addShapelessRecipe(new ItemStack(IndustrialProcessing.itemThickStick), new ItemStack(Item.stick), new ItemStack(Item.stick));
+		GameRegistry.addShapelessRecipe(new ItemStack(IndustrialProcessing.itemPestle), new ItemStack(IndustrialProcessing.itemThickStick), new ItemStack(IndustrialProcessing.itemKnife,1,WILDCARD_VALUE));
+		GameRegistry.addShapelessRecipe(new ItemStack(IndustrialProcessing.itemCoalDust), new ItemStack(Item.coal), new ItemStack(IndustrialProcessing.itemIronBowl,1,WILDCARD_VALUE),new ItemStack(IndustrialProcessing.itemPestle,1,WILDCARD_VALUE));
 		GameRegistry.addShapelessRecipe(new ItemStack(IndustrialProcessing.itemElectroMagnet), new ItemStack(IndustrialProcessing.itemIronBar), new ItemStack(IndustrialProcessing.itemCopperCoil));
 		GameRegistry.addShapelessRecipe(new ItemStack(IndustrialProcessing.itemCopperWireInsulated), new ItemStack(IndustrialProcessing.bucketFluidLatex,1,WILDCARD_VALUE), new ItemStack(IndustrialProcessing.itemCopperWire));
 		GameRegistry.addShapelessRecipe(new ItemStack(IndustrialProcessing.itemCopperWire), new ItemStack(IndustrialProcessing.itemCopperIngot), new ItemStack(IndustrialProcessing.itemDrawPlate,1,WILDCARD_VALUE));
@@ -24,6 +26,7 @@ public class ConfigBaseRecipes {
 		GameRegistry.addRecipe(new ItemStack(IndustrialProcessing.itemBlowingTorch), "   ", " y ", "x  ", 'x',new ItemStack(Item.ingotIron), 'y', new ItemStack(Item.flintAndSteel));
 		
 		GameRegistry.addRecipe(new ItemStack(IndustrialProcessing.itemCrankWheel), "  x", "xxx", "x  ", 'x',new ItemStack(IndustrialProcessing.itemThickStick));
+		GameRegistry.addRecipe(new ItemStack(IndustrialProcessing.itemCarbonBrush,8), "xxx", "xyx", "xxx", 'x',new ItemStack(IndustrialProcessing.itemCoalDust),'y',new ItemStack(IndustrialProcessing.bucketFluidLatex,1,WILDCARD_VALUE));
 		
 		GameRegistry.addShapedRecipe(new ItemStack(IndustrialProcessing.BLmultiblockScreen),"xxx","x x"," y ",'x',new ItemStack(Item.ingotIron),'y',new ItemStack(IndustrialProcessing.itemHammer,1,WILDCARD_VALUE) );
 		GameRegistry.addShapedRecipe(new ItemStack(IndustrialProcessing.BLmultiblockWeldingStation),"xxx","yzy","iji",'x',new ItemStack(Block.stoneSingleSlab),'y',new ItemStack(Block.planks,1,WILDCARD_VALUE),'z',new ItemStack(Block.workbench),'i',new ItemStack(IndustrialProcessing.itemThickStick),'j',new ItemStack(IndustrialProcessing.itemHammer,1,WILDCARD_VALUE) );
