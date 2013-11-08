@@ -43,7 +43,7 @@ public class TileEntityAutomaticTreeTap extends TileEntityFluidMachine {
 	    if(id == IndustrialProcessing.blockRubberLog.blockID)
 		tank.fill(new FluidStack(IndustrialProcessing.itemFluidLatex, 1), true);
 	    else if(id == IndustrialProcessing.blockPineLog.blockID)
-		tank.fill(new FluidStack(IndustrialProcessing.itemFluidResidu, 1), true);
+		tank.fill(new FluidStack(IndustrialProcessing.itemFluidResin, 1), true);
 	    totalProgress++;
 	    if (totalProgress >= FluidContainerRegistry.BUCKET_VOLUME) {
 		totalProgress = 0;

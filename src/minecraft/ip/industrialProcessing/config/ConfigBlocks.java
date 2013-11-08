@@ -32,10 +32,10 @@ public class ConfigBlocks {
     private int blockLeavesID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "TreeLeavesID", 2005).getInt();
     private int blockSaplingID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "TreeSaplingID", 2006).getInt();
     private int blockRubberLogID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "RubberTreeLogID", 2007).getInt();
- 
-    private int blockPineLogID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "PineTreeLogID", 2007).getInt();
- 
     private int blockMachineBlockID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "blockMachineBlockID", 2008).getInt();
+ 
+    private int blockPineLogID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "PineTreeLogID", 2009).getInt();
+ 
  
     public static int blockMachineBlock() {
         return getInstance().blockMachineBlockID;
