@@ -4,6 +4,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import org.lwjgl.opengl.GL11;
@@ -41,8 +42,12 @@ public class GuiTools {
     public static void drawItemStack(ItemStack par1ItemStack, int par2, int par3, String par4Str, RenderItem itemRenderer, FontRenderer fontRenderer, TextureManager textureManager) {
 
 	FontRenderer font = null;
-	if (par1ItemStack != null)
-	    font = par1ItemStack.getItem().getFontRenderer(par1ItemStack);
+	if (par1ItemStack != null) {
+	    Item it = par1ItemStack.getItem();
+	    if (it != null) {
+		font = it.getFontRenderer(par1ItemStack);
+	    }
+	}
 	if (font == null)
 	    font = fontRenderer;
 	itemRenderer.renderItemAndEffectIntoGUI(font, textureManager, par1ItemStack, par2, par3);

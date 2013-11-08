@@ -33,6 +33,7 @@ public class ConfigBlocks {
     private int blockLeavesID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "TreeLeavesID", 2005).getInt();
     private int blockSaplingID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "TreeSaplingID", 2006).getInt();
     private int blockRubberLogID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "RubberTreeLogID", 2007).getInt();
+    private int blockPineLogID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "PineTreeLogID", 2007).getInt();
 
     public static int blockAsphalt() {
         return getInstance().blockAsphaltID;
@@ -102,6 +103,10 @@ public class ConfigBlocks {
         return getInstance().blockRubberLogID;
     }
 
+    public static int getPineLogID() {
+        return getInstance().blockPineLogID;
+    }
+    
     public static int getSaplingID() {
         return getInstance().blockSaplingID;
     }
@@ -132,6 +137,7 @@ public class ConfigBlocks {
         registerBlock(IndustrialProcessing.blockLeaves, "IP.World.Tree.Leaves", "Leaves");
         registerBlock(IndustrialProcessing.blockLog, "IP.World.Tree.Log", "Log");
         registerBlock(IndustrialProcessing.blockRubberLog, "IP.World.Tree.Log.Rubber", "Rubber Log");
+        registerBlock(IndustrialProcessing.blockPineLog, "IP.World.Tree.Log.Pine", "Pine Log");
         registerBlock(IndustrialProcessing.blockSapling, "IP.World.Tree.Sapling", "Sapling");
     }
 

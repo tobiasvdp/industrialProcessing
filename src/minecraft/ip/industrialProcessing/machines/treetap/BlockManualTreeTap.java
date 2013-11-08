@@ -65,7 +65,7 @@ public class BlockManualTreeTap extends BlockMachineRendered {
 
     private static boolean canStayAt(World world, int x, int y, int z, ForgeDirection direction) {
         int id = world.getBlockId(x - direction.offsetX, y - direction.offsetY, z - direction.offsetZ);
-        if (id == ConfigBlocks.getRubberLogID()) {
+        if (id == IndustrialProcessing.blockRubberLog.blockID || id == IndustrialProcessing.blockPineLog.blockID) {
             if (BlockRubberLog.isCarved(world, x - direction.offsetX, y - direction.offsetY, z - direction.offsetZ, direction.ordinal())) {
                 return true;
             }

@@ -32,12 +32,18 @@ public class TileEntityAutomaticTreeTap extends TileEntityFluidMachine {
     @Override
     public void updateEntity() {
 	super.updateEntity();
-
+	
+	ForgeDirection direction = this.getForwardDirection();
+        int id = worldObj.getBlockId(xCoord - direction.offsetX, yCoord - direction.offsetY, zCoord - direction.offsetZ);
+ 
 	counter++;
 	if (counter == MAX_COUNTER) {
 	    counter = 0;
 	    IFluidTank tank = this.getTankInSlot(0);
-	    tank.fill(new FluidStack(IndustrialProcessing.itemFluidLatex, 1), true);
+	    if(id == IndustrialProcessing.blockRubberLog.blockID)
+		tank.fill(new FluidStack(IndustrialProcessing.itemFluidLatex, 1), true);
+	    else if(id == IndustrialProcessing.blockPineLog.blockID)
+		tank.fill(new FluidStack(IndustrialProcessing.itemFluidResidu, 1), true);
 	    totalProgress++;
 	    if (totalProgress >= FluidContainerRegistry.BUCKET_VOLUME) {
 		totalProgress = 0;

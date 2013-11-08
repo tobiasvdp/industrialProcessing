@@ -8,9 +8,9 @@ import ip.industrialProcessing.config.ConfigBlocks;
 
 public class IndustrialTrees {
 
-    private static String[] names = new String[] { "Rubber" };
-    private static String[] textures = new String[] { "rubber" };
-    private static int[] colors = new int[] { 0xff0000, 0x4e6904 };
+    private static String[] names = new String[] { "Rubber", "Pine" };
+    private static String[] textures = new String[] { "rubber", "pine" };
+    private static int[] colors = new int[] { 0xffffff, 0x4e6904 };
 
     public static String getName(int index) {
         index %= names.length;
