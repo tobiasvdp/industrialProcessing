@@ -10,10 +10,10 @@ import ip.industrialProcessing.recipes.RecipeSlotType;
 
 public class RecipesInsulator extends RecipesMachine {
 	public RecipesInsulator() {
-		addRecipe(coalToDust(3000, 0));
+		addRecipe(insulate(3000, 0));
 	}
 
-	private Recipe coalToDust(int workTime, int powerConsumption) {
+	private Recipe insulate(int workTime, int powerConsumption) {
 		Recipe recipe = new Recipe();
 		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemCopperWire.itemID, RecipeSlotType.INVENTORY, 1) };
 

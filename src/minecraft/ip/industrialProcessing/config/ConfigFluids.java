@@ -380,6 +380,14 @@ public class ConfigFluids {
         return getInstance().bucketParaffinicNaphtha;
     }
     
+    public static int getResinFluidBlockID() {
+        return getInstance().blockFluidBaseResin;
+    }
+
+    public static int getResinFluidBucketID() {
+        return getInstance().bucketResin;
+    }
+    
     private int offset = 2500;
 
     private int blockFluidBaseDirtyWaterID = IndustrialProcessing.config.get(ConfigCategories.fluids.toString(), "DirtyWaterID", offset).getInt();
@@ -551,6 +559,9 @@ public class ConfigFluids {
     
     private int blockFluidBaseParaffinicNaphtha = offset + 89;
     private int bucketParaffinicNaphtha = offset + 90;
+    
+    private int blockFluidBaseResin = offset + 91;
+    private int bucketResin = offset + 92;
 
     public ConfigFluids() {
 
@@ -575,6 +586,9 @@ public class ConfigFluids {
         registerFluid(IndustrialProcessing.blockFluidUnsweetenedButane, IndustrialProcessing.itemFluidUnsweetenedButane, null, "Unsweetened Butane");
         registerFluid(IndustrialProcessing.blockFluidFuelGas, IndustrialProcessing.itemFluidFuelGas, null, "Fuel gas");
         registerFluid(IndustrialProcessing.blockFluidGasMix, IndustrialProcessing.itemFluidGasMix, null, "Gas mix");
+        
+        registerFluid(IndustrialProcessing.blockFluidResin, IndustrialProcessing.itemFluidResin, IndustrialProcessing.bucketResin, "Resin");
+        LanguageRegistry.addName(IndustrialProcessing.bucketResin, "Resin Bucket");
         
         registerFluid(IndustrialProcessing.blockFluidParaffinicNaphtha, IndustrialProcessing.itemFluidParaffinicNaphtha, IndustrialProcessing.bucketParaffinicNaphtha, "Paraffinic naphtha");
         LanguageRegistry.addName(IndustrialProcessing.bucketParaffinicNaphtha, "Paraffinic naphtha Bucket");
@@ -675,6 +689,22 @@ public class ConfigFluids {
         LanguageRegistry.addName(IndustrialProcessing.bucketOreSludgeGold, "Gold sludge Bucket");
         registerFluid(IndustrialProcessing.blockFluidOreSludgeTalia, IndustrialProcessing.itemFluidOreSludgeTalia, IndustrialProcessing.bucketOreSludgeTalia, "Thalium ore sludge");
         LanguageRegistry.addName(IndustrialProcessing.bucketOreSludgeTalia, "Thalium sludge Bucket");
+        
+        registerFluid(IndustrialProcessing.blockFluidMixedSludgeIron, IndustrialProcessing.itemFluidMixedSludgeIron, IndustrialProcessing.bucketMixedSludgeIron, "Iron ore mixedSludge");
+        LanguageRegistry.addName(IndustrialProcessing.bucketMixedSludgeIron, "Iron mixedSludge Bucket");
+        registerFluid(IndustrialProcessing.blockFluidMixedSludgeCopper, IndustrialProcessing.itemFluidMixedSludgeCopper, IndustrialProcessing.bucketMixedSludgeCopper, "Copper ore mixedSludge");
+        LanguageRegistry.addName(IndustrialProcessing.bucketMixedSludgeCopper, "Copper mixedSludge Bucket");
+        registerFluid(IndustrialProcessing.blockFluidMixedSludgeTin, IndustrialProcessing.itemFluidMixedSludgeTin, IndustrialProcessing.bucketMixedSludgeTin, "Tin ore mixedSludge");
+        LanguageRegistry.addName(IndustrialProcessing.bucketMixedSludgeTin, "Tin mixedSludge Bucket");
+        registerFluid(IndustrialProcessing.blockFluidMixedSludgeChromite, IndustrialProcessing.itemFluidMixedSludgeChromite, IndustrialProcessing.bucketMixedSludgeChromite, "Chromite ore mixedSludge");
+        LanguageRegistry.addName(IndustrialProcessing.bucketMixedSludgeChromite, "Chromite mixedSludge Bucket");
+        registerFluid(IndustrialProcessing.blockFluidMixedSludgeGalena, IndustrialProcessing.itemFluidMixedSludgeGalena, IndustrialProcessing.bucketMixedSludgeGalena, "Galena ore mixedSludge");
+        LanguageRegistry.addName(IndustrialProcessing.bucketMixedSludgeGalena, "Galena mixedSludge Bucket");
+        registerFluid(IndustrialProcessing.blockFluidMixedSludgeGold, IndustrialProcessing.itemFluidMixedSludgeGold, IndustrialProcessing.bucketMixedSludgeGold, "Gold ore mixedSludge");
+        LanguageRegistry.addName(IndustrialProcessing.bucketMixedSludgeGold, "Gold mixedSludge Bucket");
+        registerFluid(IndustrialProcessing.blockFluidMixedSludgeTalia, IndustrialProcessing.itemFluidMixedSludgeTalia, IndustrialProcessing.bucketMixedSludgeTalia, "Thalium ore mixedSludge");
+        LanguageRegistry.addName(IndustrialProcessing.bucketMixedSludgeTalia, "Thalium mixedSludge Bucket");
+        
     }
 
 }

@@ -10,7 +10,6 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ConfigBlocks {
 
-    private static int leave;
     private int blockCopperOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(), "CopperID", 1000).getInt();
     private int blockTinOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(), "TinID", 1001).getInt();
     private int blockGalenaOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(), "GalenaID", 1002).getInt();
@@ -33,8 +32,15 @@ public class ConfigBlocks {
     private int blockLeavesID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "TreeLeavesID", 2005).getInt();
     private int blockSaplingID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "TreeSaplingID", 2006).getInt();
     private int blockRubberLogID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "RubberTreeLogID", 2007).getInt();
+ 
     private int blockPineLogID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "PineTreeLogID", 2007).getInt();
-
+ 
+    private int blockMachineBlockID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "blockMachineBlockID", 2008).getInt();
+ 
+    public static int blockMachineBlock() {
+        return getInstance().blockMachineBlockID;
+    }
+    
     public static int blockAsphalt() {
         return getInstance().blockAsphaltID;
     }
@@ -139,6 +145,8 @@ public class ConfigBlocks {
         registerBlock(IndustrialProcessing.blockRubberLog, "IP.World.Tree.Log.Rubber", "Rubber Log");
         registerBlock(IndustrialProcessing.blockPineLog, "IP.World.Tree.Log.Pine", "Pine Log");
         registerBlock(IndustrialProcessing.blockSapling, "IP.World.Tree.Sapling", "Sapling");
+        
+        registerBlock(IndustrialProcessing.blockMachineBlock, "IP.Block.MachineB", "Machine block");
     }
 
     private void registerOre(Block block, String uniqueId, String displayName, String oreDictionaryKey) {
