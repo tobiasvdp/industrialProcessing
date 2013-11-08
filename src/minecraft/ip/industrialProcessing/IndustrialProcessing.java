@@ -103,6 +103,9 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
 
         // register new crafting handler
         GameRegistry.registerCraftingHandler(new CraftingHandler());
+        
+        //register new fuel handler
+        GameRegistry.registerFuelHandler(new FuelHandler());
 
         // register machines, power, transport
         ConfigMachineBlocks.getInstance().registerMachineBlocks();

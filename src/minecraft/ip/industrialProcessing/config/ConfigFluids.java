@@ -380,6 +380,14 @@ public class ConfigFluids {
         return getInstance().bucketParaffinicNaphtha;
     }
     
+    public static int getResinFluidBlockID() {
+        return getInstance().blockFluidBaseResin;
+    }
+
+    public static int getResinFluidBucketID() {
+        return getInstance().bucketResin;
+    }
+    
     private int offset = 2500;
 
     private int blockFluidBaseDirtyWaterID = IndustrialProcessing.config.get(ConfigCategories.fluids.toString(), "DirtyWaterID", offset).getInt();
@@ -551,6 +559,9 @@ public class ConfigFluids {
     
     private int blockFluidBaseParaffinicNaphtha = offset + 89;
     private int bucketParaffinicNaphtha = offset + 90;
+    
+    private int blockFluidBaseResin = offset + 91;
+    private int bucketResin = offset + 92;
 
     public ConfigFluids() {
 
@@ -575,6 +586,9 @@ public class ConfigFluids {
         registerFluid(IndustrialProcessing.blockFluidUnsweetenedButane, IndustrialProcessing.itemFluidUnsweetenedButane, null, "Unsweetened Butane");
         registerFluid(IndustrialProcessing.blockFluidFuelGas, IndustrialProcessing.itemFluidFuelGas, null, "Fuel gas");
         registerFluid(IndustrialProcessing.blockFluidGasMix, IndustrialProcessing.itemFluidGasMix, null, "Gas mix");
+        
+        registerFluid(IndustrialProcessing.blockFluidResin, IndustrialProcessing.itemFluidResin, IndustrialProcessing.bucketResin, "Resin");
+        LanguageRegistry.addName(IndustrialProcessing.bucketResin, "Resin Bucket");
         
         registerFluid(IndustrialProcessing.blockFluidParaffinicNaphtha, IndustrialProcessing.itemFluidParaffinicNaphtha, IndustrialProcessing.bucketParaffinicNaphtha, "Paraffinic naphtha");
         LanguageRegistry.addName(IndustrialProcessing.bucketParaffinicNaphtha, "Paraffinic naphtha Bucket");

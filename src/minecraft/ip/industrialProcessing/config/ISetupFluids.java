@@ -201,5 +201,9 @@ public interface ISetupFluids {
     public final static ItemFluid itemFluidMixedSludgeTin = new ItemFluid("MixedSludgeTin", 1000, 1000);
     public final static BlockFluid blockFluidMixedSludgeTin = new BlockFluid(ConfigFluids.blockFluidBaseMixedSludgeTinID(), itemFluidMixedSludgeTin, Material.water, false);
     public final static ContainerFluid bucketMixedSludgeTin = new ContainerFluid(ConfigFluids.BucketMixedSludgeTinID(), itemFluidMixedSludgeTin, blockFluidMixedSludgeTin, "ContainerMixedSludgeTin");
+    
+    public final static ItemFluid itemFluidResin = new ItemFluid("Resin", 1000, 1000);
+    public final static BlockFluid blockFluidResin = new BlockFluid(ConfigFluids.getResinFluidBlockID(), itemFluidResin, Material.water, false);
+    public final static ContainerFluid bucketResin = new ContainerFluid(ConfigFluids.getResinFluidBucketID(), itemFluidResin, blockFluidResin, "ContainerResin");
 
 }
