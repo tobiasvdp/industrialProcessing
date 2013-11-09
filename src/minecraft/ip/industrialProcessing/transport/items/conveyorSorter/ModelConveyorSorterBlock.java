@@ -32,9 +32,9 @@ public class ModelConveyorSorterBlock extends ModelConveyorBeltBlock {
         Vector3f position = new Vector3f(0, 0, 0);
         Icon icon = block.getIcon(0, 0);
 
-        straight.getRotated(0).renderMesh(true, icon, position);
-        leftOut.getRotated(0).renderMesh(true, icon, position);
-        rightOut.getRotated(0).renderMesh(true, icon, position);
+        straight.getRotated(0).renderMesh(icon);
+        leftOut.getRotated(0).renderMesh(icon);
+        rightOut.getRotated(0).renderMesh(icon);
     }
 
     @Override

@@ -36,8 +36,8 @@ public class ModelPipeBlock extends ModelBlock {
 
         Vector3f position = new Vector3f(0, 0, 0);
         Icon icon = block.getIcon(0, 0);
-        capUp.renderMesh(true, icon, position);
-        capDown.renderMesh(true, icon, position);
+        capUp.renderMesh(icon);
+        capDown.renderMesh(icon);
         if (block instanceof BlockTransportFluidsWood || block instanceof BlockTransportFluidsStone) {
             Icon caseIcon;
             if (block instanceof BlockTransportFluidsWood)
@@ -81,7 +81,7 @@ public class ModelPipeBlock extends ModelBlock {
                 GL11.glPopMatrix();
             }
         } else {
-            straightVertical.renderMesh(true, icon, position);
+            straightVertical.renderMesh(icon);
         }
     }
 

@@ -3,6 +3,8 @@ package ip.industrialProcessing.config;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.config.ConfigCategories;
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemBlockWithMetadata;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -33,18 +35,17 @@ public class ConfigBlocks {
     private int blockSaplingID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "TreeSaplingID", 2006).getInt();
     private int blockRubberLogID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "RubberTreeLogID", 2007).getInt();
     private int blockMachineBlockID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "blockMachineBlockID", 2008).getInt();
- 
+
     private int blockPineLogID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "PineTreeLogID", 2009).getInt();
- 
- 
+
     public static int blockMachineBlock() {
         return getInstance().blockMachineBlockID;
     }
-    
+
     public static int blockAsphalt() {
         return getInstance().blockAsphaltID;
     }
-    
+
     public static int blockGrit() {
         return getInstance().blockGritID;
     }
@@ -112,7 +113,7 @@ public class ConfigBlocks {
     public static int getPineLogID() {
         return getInstance().blockPineLogID;
     }
-    
+
     public static int getSaplingID() {
         return getInstance().blockSaplingID;
     }
@@ -140,12 +141,12 @@ public class ConfigBlocks {
         registerBlock(IndustrialProcessing.blockCinnebar, "IP.World.Cinnebar", "Cinnebar Crystal");
         registerBlock(IndustrialProcessing.blockRutile, "IP.World.Rutile", "Rutile Crystal");
 
-        registerBlock(IndustrialProcessing.blockLeaves, "IP.World.Tree.Leaves", "Leaves");
-        registerBlock(IndustrialProcessing.blockLog, "IP.World.Tree.Log", "Log");
+        registerBlock(IndustrialProcessing.blockLeaves, ItemBlockWithMetadata.class, "IP.World.Tree.Leaves", "Leaves");
+        registerBlock(IndustrialProcessing.blockLog, ItemBlockWithMetadata.class, "IP.World.Tree.Log", "Log");
         registerBlock(IndustrialProcessing.blockRubberLog, "IP.World.Tree.Log.Rubber", "Rubber Log");
         registerBlock(IndustrialProcessing.blockPineLog, "IP.World.Tree.Log.Pine", "Pine Log");
-        registerBlock(IndustrialProcessing.blockSapling, "IP.World.Tree.Sapling", "Sapling");
-        
+        registerBlock(IndustrialProcessing.blockSapling, ItemBlockWithMetadata.class, "IP.World.Tree.Sapling", "Sapling");
+
         registerBlock(IndustrialProcessing.blockMachineBlock, "IP.Block.MachineB", "Machine block");
     }
 
@@ -162,11 +163,16 @@ public class ConfigBlocks {
         LanguageRegistry.addName(block, displayName);
     }
 
+    private void registerBlock(Block block, Class<? extends ItemBlock> itemBlock, String uniqueId, String displayName) {
+        GameRegistry.registerBlock(block, itemBlock, uniqueId);
+        MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
+        LanguageRegistry.addName(block, displayName);
+    }
+
     private static ConfigBlocks instance = new ConfigBlocks();
 
     public static ConfigBlocks getInstance() {
         return instance;
     }
-
 
 }

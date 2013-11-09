@@ -21,7 +21,7 @@ public class ModelManualTreeTapBlock extends ModelBlock {
         Tessellator tessellator = Tessellator.instance;
         Icon icon = block.getIcon(0, 0);
         Vector3f position = new Vector3f(0, 0, 0);
-        tap.getRotated(0).renderMesh(true, icon, position);
+        tap.getRotated(0).renderMesh(icon);
     }
 
     @Override

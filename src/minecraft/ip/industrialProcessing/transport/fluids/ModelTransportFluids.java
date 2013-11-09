@@ -20,7 +20,9 @@ public class ModelTransportFluids extends ModelConnectedFluid {
 
 	@Override
 	public void renderModelConnectedFluid(TileEntity tl, float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, Icon icon) {
-		fluidPercentage *= 0.9f;
+		fluidPercentage *= 0.9f; 
+		Tessellator tessellator = Tessellator.instance;
+        tessellator.startDrawingQuads();
 		boolean renderCap = (up != ConnectionState.DISCONNECTED) != (down != ConnectionState.DISCONNECTED) || (west != ConnectionState.DISCONNECTED) != (east != ConnectionState.DISCONNECTED) || (south != ConnectionState.DISCONNECTED) != (north != ConnectionState.DISCONNECTED) || (north == south && south == east && east == west && west == up && up == down && down == ConnectionState.DISCONNECTED);
 		if (up != ConnectionState.DISCONNECTED && down != ConnectionState.DISCONNECTED)
 			renderStraightY(f, icon, fluidPercentage);
@@ -50,6 +52,7 @@ public class ModelTransportFluids extends ModelConnectedFluid {
 		if (renderCap) {
 			renderCap(f, icon, fluidPercentage);
 		}
+		tessellator.draw();
 	}
 
 	private void renderUp(float f, Icon icon, float s) {
@@ -162,13 +165,12 @@ public class ModelTransportFluids extends ModelConnectedFluid {
 		float vH = (16 - Math.abs(height)) / 2;
 		float uCorrect = uSize * uW / 16;
 		float vCorrect = vSize * vH / 16;
-
-		tessellator.startDrawingQuads();
+ 
 		tessellator.addVertexWithUV((double) (x + 0) * f, (double) y * f, (double) (z + 0) * f, (double) icon.getMinU() + uCorrect, (double) icon.getMinV() + vCorrect);
 		tessellator.addVertexWithUV((double) (x + width) * f, (double) y * f, (double) (z + 0) * f, (double) icon.getMaxU() - uCorrect, (double) icon.getMinV() + vCorrect);
 		tessellator.addVertexWithUV((double) (x + width) * f, (double) y * f, (double) (z + height) * f, (double) icon.getMaxU() - uCorrect, (double) icon.getMaxV() - vCorrect);
 		tessellator.addVertexWithUV((double) (x + 0) * f, (double) y * f, (double) (z + height) * f, (double) icon.getMinU() + uCorrect, (double) icon.getMaxV() - vCorrect);
-		tessellator.draw();
+		
 	}
 
 	private void drawZPlane(float f, float x, float y, float z, float width, float height, Icon icon) {
@@ -182,12 +184,11 @@ public class ModelTransportFluids extends ModelConnectedFluid {
 		float uCorrect = uSize * uW / 16;
 		float vCorrect = vSize * vH / 16;
 
-		tessellator.startDrawingQuads();
 		tessellator.addVertexWithUV((double) (x + 0) * f, (double) y * f, (double) (z + 0) * f, (double) icon.getMinU() + uCorrect, (double) icon.getMinV() + vCorrect);
 		tessellator.addVertexWithUV((double) (x + width) * f, (double) y * f, (double) (z + 0) * f, (double) icon.getMaxU() - uCorrect, (double) icon.getMinV() + vCorrect);
 		tessellator.addVertexWithUV((double) (x + width) * f, (double) (y + height) * f, (double) (z + 0) * f, (double) icon.getMaxU() - uCorrect, (double) icon.getMaxV() - vCorrect);
 		tessellator.addVertexWithUV((double) (x + 0) * f, (double) (y + height) * f, (double) (z + 0) * f, (double) icon.getMinU() + uCorrect, (double) icon.getMaxV() - vCorrect);
-		tessellator.draw();
+		
 	}
 
 	private void drawXPlane(float f, float x, float y, float z, float width, float height, Icon icon) {
@@ -200,12 +201,11 @@ public class ModelTransportFluids extends ModelConnectedFluid {
 		float vH = (16 - Math.abs(height)) / 2;
 		float uCorrect = uSize * uW / 16;
 		float vCorrect = vSize * vH / 16;
-
-		tessellator.startDrawingQuads();
+ 
 		tessellator.addVertexWithUV((double) (x + 0) * f, (double) y * f, (double) (z + 0) * f, (double) icon.getMinU() + uCorrect, (double) icon.getMinV() + vCorrect);
 		tessellator.addVertexWithUV((double) (x + 0) * f, (double) y * f, (double) (z + width) * f, (double) icon.getMaxU() - uCorrect, (double) icon.getMinV() + vCorrect);
 		tessellator.addVertexWithUV((double) (x + 0) * f, (double) (y + height) * f, (double) (z + width) * f, (double) icon.getMaxU() - uCorrect, (double) icon.getMaxV() - vCorrect);
 		tessellator.addVertexWithUV((double) (x + 0) * f, (double) (y + height) * f, (double) (z + 0) * f, (double) icon.getMinU() + uCorrect, (double) icon.getMaxV() - vCorrect);
-		tessellator.draw();
+	 
 	}
 }

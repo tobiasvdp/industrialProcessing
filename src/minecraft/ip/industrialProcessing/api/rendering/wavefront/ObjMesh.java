@@ -1,12 +1,37 @@
 package ip.industrialProcessing.api.rendering.wavefront;
 
+import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.Icon;
 
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 
 public abstract class ObjMesh {
+
+    private boolean compiled = false;
+    private int displayList;
+
+    private void compileDisplayList(Icon icon) {
+        this.displayList = GLAllocation.generateDisplayLists(1);
+        GL11.glNewList(this.displayList, GL11.GL_COMPILE);
+        Tessellator tessellator = Tessellator.instance;
+
+        doRenderMesh(icon);
+
+        GL11.glEndList();
+        this.compiled = true;
+    }
+
+    public void renderMesh(Icon icon) {
+
+        if (!compiled) {
+            compileDisplayList(icon);
+        }
+
+        GL11.glCallList(this.displayList);
+    }
 
     protected ObjQuad[] quads;
 
@@ -18,8 +43,8 @@ public abstract class ObjMesh {
         renderQuads(this.quads, startDraw, icon, position);
     }
 
-    public void renderMesh(boolean startDraw, Icon icon, Vector3f position) {
-        renderQuads(this.quads, startDraw, icon, position);
+    public void doRenderMesh(Icon icon) {
+        renderQuads(this.quads, true, icon, new Vector3f(0,0,0));
     }
 
     protected void renderQuads(ObjQuad[] quads, boolean startDraw, Icon icon, WorldReference position) {

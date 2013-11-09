@@ -50,9 +50,9 @@ public class ModelTankBlock extends ModelBlock {
 
 		Vector3f position = new Vector3f(0, 0, 0);
 		Icon icon = block.getIcon(0, 0);
-		single.renderMesh(true, icon, position);
+		single.renderMesh(icon);
 		icon = block.getIcon(1, 0);
-		singleFeatures.renderMesh(true, icon, position);
+		singleFeatures.renderMesh(icon);
 	}
 
 	@Override

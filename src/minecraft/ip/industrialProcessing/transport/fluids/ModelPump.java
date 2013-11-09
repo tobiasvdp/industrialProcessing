@@ -23,7 +23,7 @@ public class ModelPump extends ModelAnimatedMachine {
         GL11.glTranslatef(0, 1, 0);
         GL11.glRotatef(angle * 360, 1, 0, 0);
         Icon icon = getIcon();
-        axle.renderMesh(true, icon, position);
+        axle.renderMesh(icon);
         GL11.glPopMatrix();
     }
 

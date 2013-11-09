@@ -18,7 +18,8 @@ public class TileEntitySolidBurner extends TileEntityMachine {
 	private boolean isBurning = false;
 
 	public TileEntitySolidBurner() {
-		addStack(null, LocalDirection.LEFT, true, false);
+		addStack(null, new LocalDirection[]{ LocalDirection.LEFT, LocalDirection.RIGHT}, true, false);
+        addStack(null, LocalDirection.DOWN, false, true);
 	}
 
 	public boolean isBurning() {
