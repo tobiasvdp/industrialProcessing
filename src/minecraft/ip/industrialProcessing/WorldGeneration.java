@@ -150,6 +150,7 @@ public class WorldGeneration implements IWorldGenerator {
                     default:
                         break;
                     }
+                    blockId = world.getBlockId(x, y, z);
                     if (blockId == 1 || blockId == 3 || blockId == 13) {
                         world.setBlock(x, y, z, oreID);
                     }
