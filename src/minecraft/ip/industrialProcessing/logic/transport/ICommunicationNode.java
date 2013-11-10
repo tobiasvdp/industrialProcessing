@@ -16,8 +16,8 @@ public interface ICommunicationNode extends ICommunication{
 	
 	public ForgeDirection[] setConnectableInputSides();
 	public ForgeDirection[] setConnectableOutputSides();
-	public ForgeDirection[] getConnectableInputSides();
-	public ForgeDirection[] getConnectableOutputSides();
+	public boolean isValidInput(ForgeDirection dir);
+	public boolean isValidOutput(ForgeDirection dir);
 	
 	public void createDiscoveryPacket();
 	public void createDiscoveryPacket(ForgeDirection dir);
