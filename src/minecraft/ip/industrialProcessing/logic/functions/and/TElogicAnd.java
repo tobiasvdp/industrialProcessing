@@ -1,50 +1,41 @@
 package ip.industrialProcessing.logic.functions.and;
 
 import ip.industrialProcessing.logic.transport.TElogicNode;
+import ip.industrialProcessing.logic.utils.UTVariable;
 import ip.industrialProcessing.logic.utils.UTpacket;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 
 public class TElogicAnd extends TElogicNode {
 
-	private ForgeDirection forwardDirection;
-
-	public TElogicAnd() {
-		super();
-	}
-
-	@Override
-	public void transition() {
-			//boolean right = (Boolean) getBuffer(ForgeDirection.EAST).get();
-			//boolean left = (Boolean) getBuffer(ForgeDirection.WEST).get();
-			//boolean front = left && right;
-			//System.out.println(left + " " + right + " gives " + front);
-	}
-
-	@Override
-	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
-		super.writeToNBT(par1nbtTagCompound);
-		if (this.forwardDirection != null)
-			par1nbtTagCompound.setByte("ForwardDirection", (byte) this.forwardDirection.ordinal());
-	}
-
-	@Override
-	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
-		// TODO Auto-generated method stub
-		super.readFromNBT(par1nbtTagCompound);
-		this.forwardDirection = ForgeDirection.VALID_DIRECTIONS[par1nbtTagCompound.getByte("ForwardDirection")];
-	}
-
 	@Override
 	public ForgeDirection[] setConnectableInputSides() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ForgeDirection[] { ForgeDirection.EAST, ForgeDirection.WEST };
 	}
 
 	@Override
 	public ForgeDirection[] setConnectableOutputSides() {
-		// TODO Auto-generated method stub
-		return null;
+		return new ForgeDirection[] { ForgeDirection.NORTH };
+	}
+
+	@Override
+	public void transition() {
+		if (getBuffer(ForgeDirection.EAST).get().ID == 0 && getBuffer(ForgeDirection.WEST).get().ID == 0) {
+			System.out.println(((Boolean) getBuffer(ForgeDirection.EAST).get().value) + " " + ((Boolean) getBuffer(ForgeDirection.WEST).get().value));
+			if (((Boolean) getBuffer(ForgeDirection.EAST).get().value) == true && ((Boolean) getBuffer(ForgeDirection.WEST).get().value) == true) {
+				System.out.println("Valid");
+				if (getBuffer(ForgeDirection.NORTH).get().ID == 0 && ((Boolean) getBuffer(ForgeDirection.NORTH).get().value) == true) {
+				} else {
+					createDataPacket(ForgeDirection.NORTH, new UTVariable(0, 0, true));
+				}
+			} else {
+				System.out.println("Not valid");
+				if (getBuffer(ForgeDirection.NORTH).get().ID == 0 && ((Boolean) getBuffer(ForgeDirection.NORTH).get().value) == false) {
+				} else {
+					createDataPacket(ForgeDirection.NORTH, new UTVariable(0, 0, false));
+				}
+			}
+		}
 	}
 
 	@Override
@@ -52,4 +43,5 @@ public class TElogicAnd extends TElogicNode {
 		// TODO Auto-generated method stub
 		
 	}
+
 }
