@@ -135,6 +135,7 @@ public interface ISetupItems {
     public final static ItemIP itemMotorFrame = new ItemIP(ConfigItems.getItemMotorFrameID(), "ItemMotorFrame",IndustrialProcessing.tabOres);
     public final static ItemIP itemMotorStator = new ItemIP(ConfigItems.getItemMotorStatorID(), "ItemMotorStator",IndustrialProcessing.tabOres);
     public final static ItemIP itemMotorRotor = new ItemIP(ConfigItems.getItemMotorRotorID(), "ItemMotorRotor",IndustrialProcessing.tabOres);
+    public final static ItemIP itemMotorPoleAxis = new ItemIP(ConfigItems.getItemMotorPoleAxisID(), "ItemMotorPoleAxis",IndustrialProcessing.tabOres);
     
     public final static ItemIP itemCrankWheel = new ItemIP(ConfigItems.getItemCrankWheelID(), "ItemCrankWheel",IndustrialProcessing.tabOres);
     public final static ItemIP itemIronBar = new ItemIP(ConfigItems.getItemIronBarID(), "ItemIronBar",IndustrialProcessing.tabOres);
@@ -146,5 +147,14 @@ public interface ISetupItems {
     public final static ItemIP itemIronBracket = new ItemIP(ConfigItems.getItemIronBracketID(), "ItemIronBracket",IndustrialProcessing.tabOres);
     public final static ItemDamage itemDrawPlate = new ItemDamage(ConfigItems.getItemDrawPlateID(), "ItemDrawPlate",IndustrialProcessing.tabOres,8);
     public final static ItemDamage itemPestle = new ItemDamage(ConfigItems.getItemPestleID(), "ItemPestle",IndustrialProcessing.tabOres,3);
+    
+    public final static ItemIP itemScreen = new ItemIP(ConfigItems.getItemScreenID(), "ItemScreen",IndustrialProcessing.tabOres);
+    public final static ItemIP itemFrame = new ItemIP(ConfigItems.getItemFrameID(), "ItemFrame",IndustrialProcessing.tabOres);
+    public final static ItemIP itemWovenPatern = new ItemIP(ConfigItems.getItemWovenPaternID(), "ItemWovenPatern",IndustrialProcessing.tabOres);
+    public final static ItemIP itemMixingHook = new ItemIP(ConfigItems.getItemMixingHookID(), "ItemMixingHook",IndustrialProcessing.tabOres);
+    public final static ItemIP itemHeatingElement = new ItemIP(ConfigItems.getItemHeatingElementID(), "ItemHeatingElement",IndustrialProcessing.tabOres);
+    public final static ItemIP itemTumbler = new ItemIP(ConfigItems.getItemTumblerID(), "ItemTumbler",IndustrialProcessing.tabOres);
+    public final static ItemIP itemRakeArm = new ItemIP(ConfigItems.getItemRakeArmID(), "ItemRakeArm",IndustrialProcessing.tabOres);
+    public final static ItemIP itemDisk = new ItemIP(ConfigItems.getItemDiskID(), "ItemDisk",IndustrialProcessing.tabOres);
     
 }

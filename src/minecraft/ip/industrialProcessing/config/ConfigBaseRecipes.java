@@ -14,10 +14,13 @@ public class ConfigBaseRecipes {
 	}
 
 	public void addBaseRecipes() {
+		GameRegistry.addShapelessRecipe(new ItemStack(IndustrialProcessing.itemWovenPatern), new ItemStack(Item.leather), new ItemStack(IndustrialProcessing.itemKnife,1,WILDCARD_VALUE));
 		GameRegistry.addShapelessRecipe(new ItemStack(IndustrialProcessing.itemThickStick), new ItemStack(Item.stick), new ItemStack(Item.stick));
+		GameRegistry.addShapelessRecipe(new ItemStack(IndustrialProcessing.itemScreen), new ItemStack(IndustrialProcessing.itemWovenPatern), new ItemStack(IndustrialProcessing.itemFrame));
 		GameRegistry.addShapelessRecipe(new ItemStack(IndustrialProcessing.itemPestle), new ItemStack(IndustrialProcessing.itemThickStick), new ItemStack(IndustrialProcessing.itemKnife,1,WILDCARD_VALUE));
 		GameRegistry.addShapelessRecipe(new ItemStack(IndustrialProcessing.itemCoalDust), new ItemStack(Item.coal), new ItemStack(IndustrialProcessing.itemIronBowl,1,WILDCARD_VALUE),new ItemStack(IndustrialProcessing.itemPestle,1,WILDCARD_VALUE));
 		GameRegistry.addShapelessRecipe(new ItemStack(IndustrialProcessing.itemElectroMagnet), new ItemStack(IndustrialProcessing.itemIronBar), new ItemStack(IndustrialProcessing.itemCopperCoil));
+		GameRegistry.addShapelessRecipe(new ItemStack(IndustrialProcessing.itemCopperCoil), new ItemStack(IndustrialProcessing.itemThickStick), new ItemStack(IndustrialProcessing.itemCopperWireInsulated));
 		GameRegistry.addShapelessRecipe(new ItemStack(IndustrialProcessing.itemCopperWireInsulated), new ItemStack(IndustrialProcessing.bucketFluidLatex,1,WILDCARD_VALUE), new ItemStack(IndustrialProcessing.itemCopperWire));
 		GameRegistry.addShapelessRecipe(new ItemStack(IndustrialProcessing.itemCopperWire), new ItemStack(IndustrialProcessing.itemCopperIngot), new ItemStack(IndustrialProcessing.itemDrawPlate,1,WILDCARD_VALUE));
 		GameRegistry.addShapelessRecipe(new ItemStack(IndustrialProcessing.itemActiveCoal), new ItemStack(IndustrialProcessing.itemCoalDust), new ItemStack(IndustrialProcessing.itemGrownCulture));

@@ -118,7 +118,42 @@ public class ConfigItems {
     private int itemIronBracketID = 6620;
     private int itemDrawPlateID = 6621;
     private int itemPestleID = 6622;
+    private int itemMotorPoleAxisID = 6623;
+    
+    private int itemScreenID = 6624;
+    private int itemFrameID = 6625;
+    private int itemWovenPaternID = 6626;
+    private int itemMixingHookID = 6627;
+    private int itemHeatingElementID = 6628;
+    private int itemTumblerID = 6629;
+    private int itemRakeArmID = 6630;
+    private int itemDiskID = 6631;
 
+    public static int getItemScreenID(){
+    	return getInstance().itemScreenID;
+    }
+    public static int getItemFrameID(){
+    	return getInstance().itemFrameID;
+    }
+    public static int getItemWovenPaternID(){
+    	return getInstance().itemWovenPaternID;
+    }
+    public static int getItemMixingHookID(){
+    	return getInstance().itemMixingHookID;
+    }
+    public static int getItemHeatingElementID(){
+    	return getInstance().itemHeatingElementID;
+    }
+    public static int getItemTumblerID(){
+    	return getInstance().itemTumblerID;
+    }
+    public static int getItemRakeArmID(){
+    	return getInstance().itemRakeArmID;
+    }
+    public static int getItemDiskID(){
+    	return getInstance().itemDiskID;
+    }
+    
     public static int getItemPestleID(){
     	return getInstance().itemPestleID;
     }
@@ -154,6 +189,9 @@ public class ConfigItems {
     }
     public static int getItemMotorRotorID() {
         return getInstance().itemMotorRotorID;
+    }
+    public static int getItemMotorPoleAxisID() {
+        return getInstance().itemMotorPoleAxisID;
     }
     public static int getItemCopperWireInsulatedID() {
         return getInstance().itemCopperWireInsulatedID;
@@ -519,6 +557,15 @@ public class ConfigItems {
     }
 
     public static void addToLanguageRegistry() {
+    	LanguageRegistry.addName(IndustrialProcessing.itemScreen, "Screen");
+    	LanguageRegistry.addName(IndustrialProcessing.itemFrame, "Frame");
+    	LanguageRegistry.addName(IndustrialProcessing.itemWovenPatern, "Woven pattern");
+    	LanguageRegistry.addName(IndustrialProcessing.itemMixingHook, "Mixing hook");
+    	LanguageRegistry.addName(IndustrialProcessing.itemHeatingElement, "Heating element");
+    	LanguageRegistry.addName(IndustrialProcessing.itemTumbler, "Tumbler");
+    	LanguageRegistry.addName(IndustrialProcessing.itemRakeArm, "Rake arm");
+    	LanguageRegistry.addName(IndustrialProcessing.itemDisk, "Disk");
+    	
     	LanguageRegistry.addName(IndustrialProcessing.itemPestle, "Pestle");
     	LanguageRegistry.addName(IndustrialProcessing.itemDrawPlate, "Draw plate");
     	LanguageRegistry.addName(IndustrialProcessing.itemSlipRing, "Slip ring");
