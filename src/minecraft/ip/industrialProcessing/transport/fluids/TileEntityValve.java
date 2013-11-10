@@ -28,8 +28,7 @@ public class TileEntityValve extends TileEntityTransportFluidsBase implements IA
     private final FluidTank[] tanks = new FluidTank[6];
     private float[] pressures = new float[6];
     private float pressure;
-    private FluidTank tank;
-    // TODO: add orientation!
+    private FluidTank tank; 
     private ForgeDirection frontDirection = ForgeDirection.NORTH;
     private float moveForce;
     private float moveSpeed;
@@ -167,6 +166,8 @@ public class TileEntityValve extends TileEntityTransportFluidsBase implements IA
 
     @Override
     protected boolean canConnect(ForgeDirection direction) {
+        
+        
         return direction != frontDirection;
     }
 
