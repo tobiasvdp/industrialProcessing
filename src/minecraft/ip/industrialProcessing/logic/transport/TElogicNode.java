@@ -284,8 +284,10 @@ public abstract class TElogicNode extends TileEntitySynced implements ICommunica
 	}
 
 	@Override
-	public void createDataPacket() {
-
+	public void createDataPacket( UTVariable... data) {
+		for(ForgeDirection dir:ForgeDirection.VALID_DIRECTIONS){
+			createDataPacket(dir, data);
+		}
 	}
 
 	@Override

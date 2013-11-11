@@ -1,9 +1,8 @@
-package ip.industrialProcessing.logic.functions.and;
+package ip.industrialProcessing.logic.function.and;
 
 import ip.industrialProcessing.logic.transport.TElogicNode;
 import ip.industrialProcessing.logic.utils.UTVariable;
 import ip.industrialProcessing.logic.utils.UTpacket;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 
 public class TElogicAnd extends TElogicNode {
@@ -21,7 +20,7 @@ public class TElogicAnd extends TElogicNode {
 	@Override
 	public void transition() {
 		if (getBuffer(ForgeDirection.EAST).get().ID == 0 && getBuffer(ForgeDirection.WEST).get().ID == 0) {
-			System.out.println(((Boolean) getBuffer(ForgeDirection.EAST).get().value) + " " + ((Boolean) getBuffer(ForgeDirection.WEST).get().value));
+			System.out.println((getBuffer(ForgeDirection.EAST).get().value) + " " + (getBuffer(ForgeDirection.WEST).get().value));
 			if (((Boolean) getBuffer(ForgeDirection.EAST).get().value) == true && ((Boolean) getBuffer(ForgeDirection.WEST).get().value) == true) {
 				System.out.println("Valid");
 				if (getBuffer(ForgeDirection.NORTH).get().ID == 0 && ((Boolean) getBuffer(ForgeDirection.NORTH).get().value) == true) {

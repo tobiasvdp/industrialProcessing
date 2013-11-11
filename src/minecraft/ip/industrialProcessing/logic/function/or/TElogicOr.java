@@ -1,9 +1,6 @@
-package ip.industrialProcessing.logic.functions.or;
-
-import javax.swing.text.StyledEditorKit.ForegroundAction;
+package ip.industrialProcessing.logic.function.or;
 
 import ip.industrialProcessing.logic.transport.TElogicNode;
-import ip.industrialProcessing.logic.utils.UTBuffer;
 import ip.industrialProcessing.logic.utils.UTVariable;
 import ip.industrialProcessing.logic.utils.UTpacket;
 import net.minecraftforge.common.ForgeDirection;
@@ -23,7 +20,7 @@ public class TElogicOr extends TElogicNode {
 	@Override
 	public void transition() {
 		if (getBuffer(ForgeDirection.EAST).get().ID == 0 && getBuffer(ForgeDirection.WEST).get().ID == 0) {
-			System.out.println(((Boolean) getBuffer(ForgeDirection.EAST).get().value) + " " + ((Boolean) getBuffer(ForgeDirection.WEST).get().value));
+			System.out.println((getBuffer(ForgeDirection.EAST).get().value) + " " + (getBuffer(ForgeDirection.WEST).get().value));
 			if (((Boolean) getBuffer(ForgeDirection.EAST).get().value) == true || ((Boolean) getBuffer(ForgeDirection.WEST).get().value) == true) {
 				System.out.println("Valid");
 				if (getBuffer(ForgeDirection.NORTH).get().ID == 0 && ((Boolean) getBuffer(ForgeDirection.NORTH).get().value) == true) {

@@ -1,7 +1,7 @@
 package ip.industrialProcessing.logic.config;
 
-import ip.industrialProcessing.logic.functions.and.BLlogicAnd;
-import ip.industrialProcessing.logic.functions.or.BLlogicOr;
+import ip.industrialProcessing.logic.function.and.BLlogicAnd;
+import ip.industrialProcessing.logic.function.or.BLlogicOr;
 import ip.industrialProcessing.logic.transport.wired.bundle.BLlogicBundle;
 import ip.industrialProcessing.logic.transport.wired.cable.BLlogicCable;
 import ip.industrialProcessing.logic.transport.wired.displayBox.BLlogicDisplayBox;
