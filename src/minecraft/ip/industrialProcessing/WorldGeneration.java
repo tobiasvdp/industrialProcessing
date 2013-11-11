@@ -1,6 +1,5 @@
 package ip.industrialProcessing;
 
-import ip.industrialProcessing.config.ConfigBlocks;
 import ip.industrialProcessing.config.ISetupBlocks;
 import ip.industrialProcessing.decoration.trees.IndustrialTrees;
 import ip.industrialProcessing.decoration.trees.WorldGenIndustrialTree;

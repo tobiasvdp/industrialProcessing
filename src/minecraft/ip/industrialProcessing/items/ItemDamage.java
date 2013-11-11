@@ -1,6 +1,7 @@
 package ip.industrialProcessing.items;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.INamepace;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -14,7 +15,7 @@ public class ItemDamage extends Item {
 		setCreativeTab(tab);
 		setUnlocalizedName(name);
 		setNoRepair();
-		func_111206_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + name);
+		func_111206_d(INamepace.TEXTURE_NAME_PREFIX + name);
 
 	}
 	public ItemDamage(int ID, String name, CreativeTabs tab, int maxDamage) {
@@ -24,7 +25,7 @@ public class ItemDamage extends Item {
 		setCreativeTab(tab);
 		setUnlocalizedName(name);
 		setNoRepair();
-		func_111206_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + name);
+		func_111206_d(INamepace.TEXTURE_NAME_PREFIX + name);
 
 	}
 	public ItemDamage(int ID,int maxDamage, String name, CreativeTabs tab) {
@@ -34,7 +35,7 @@ public class ItemDamage extends Item {
 		setCreativeTab(tab);
 		setUnlocalizedName(name);
 		setNoRepair();
-		func_111206_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + name);
+		func_111206_d(INamepace.TEXTURE_NAME_PREFIX + name);
 
 	}
 

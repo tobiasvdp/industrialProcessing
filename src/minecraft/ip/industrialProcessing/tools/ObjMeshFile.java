@@ -1,10 +1,5 @@
 package ip.industrialProcessing.tools;
 
-import ip.industrialProcessing.api.rendering.wavefront.ObjMesh;
-import ip.industrialProcessing.decoration.crystals.meshes.Crystal4;
-
-import org.lwjgl.util.vector.Matrix4f;
-
 public class ObjMeshFile {
 	public String title= "ObjMeshItem";
 	public String constructorBody = "";

@@ -1,30 +1,13 @@
 package ip.industrialProcessing.fluids;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumMovingObjectType;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.ForgeSubscribe;
-import net.minecraftforge.event.Event.Result;
-import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidContainerItem;
-import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
-import net.minecraftforge.fluids.FluidRegistry;
-import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.items.ItemIP;
-import net.minecraftforge.event.Event.Result;
-import net.minecraftforge.event.Event;
-import net.minecraftforge.event.EventPriority;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 
 public class ContainerFluid extends ItemBucket implements IFluidContainerItem {
 	private int capacity;
@@ -34,10 +17,10 @@ public class ContainerFluid extends ItemBucket implements IFluidContainerItem {
 		super(itemId, block.blockID);
 		setUnlocalizedName("Container" + fluid.getName());
 		setMaxStackSize(1);
-		setCreativeTab(IndustrialProcessing.tabFluid);
+		setCreativeTab(ISetupCreativeTabs.tabFluid);
 		this.capacity = 1000;
-		BucketHandler.INSTANCE.buckets.put(block, this);
-		func_111206_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + texture);
+		BucketHandler.buckets.put(block, this);
+		func_111206_d(INamepace.TEXTURE_NAME_PREFIX + texture);
 	}
 
 	@Override

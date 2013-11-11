@@ -1,36 +1,14 @@
 package ip.industrialProcessing.machines;
 
-import ic2.api.Direction;
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.machines.containers.IMachineContainerEntity;
-import ip.industrialProcessing.packetHandlers.TileSyncHandler;
-import ip.industrialProcessing.recipes.IRecipeWorkHandler;
-import ip.industrialProcessing.recipes.RecipeWorker;
-import ip.industrialProcessing.utils.inventories.InventoryUtils;
-import ip.industrialProcessing.utils.working.ClientWorker;
-import ip.industrialProcessing.utils.working.IWorkHandler;
-import ip.industrialProcessing.utils.working.IWorker;
-import ip.industrialProcessing.utils.working.IWorkingEntity;
-import ip.industrialProcessing.utils.working.ServerWorker;
-import ip.industrialProcessing.utils.working.WorkUtils;
-
 import java.util.ArrayList;
-import java.util.Stack;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet132TileEntityData;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 public abstract class TileEntityMachine extends TileEntitySynced implements ISidedInventory, IMachineSlots, IRotateableEntity, IMachineContainerEntity {
@@ -40,7 +18,8 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
     public boolean isDummyBlock = false;
     private ForgeDirection forwardDirection;
 
-    public ForgeDirection getForwardDirection() {
+    @Override
+	public ForgeDirection getForwardDirection() {
 	return forwardDirection;
     }
 
@@ -306,7 +285,8 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
 	return itemStacks.get(slot).stack.getItemDamage() >= itemStacks.get(slot).stack.getMaxDamage();
     }
 
-    public void setForwardDirection(ForgeDirection forwardFromMetadata) {
+    @Override
+	public void setForwardDirection(ForgeDirection forwardFromMetadata) {
 	this.forwardDirection = forwardFromMetadata;
 	if (this.worldObj != null)
 	    this.worldObj.notifyBlockChange(xCoord, yCoord, zCoord, this.getBlockType().blockID);

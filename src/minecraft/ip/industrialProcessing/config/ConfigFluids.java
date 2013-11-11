@@ -578,132 +578,132 @@ public class ConfigFluids {
     }
 
     public void registerFluids() {
-        registerFluid(IndustrialProcessing.blockFluidIsoButane, IndustrialProcessing.itemFluidIsoButane, null, "Isobutane");
-        registerFluid(IndustrialProcessing.blockFluidButane, IndustrialProcessing.itemFluidButane, null, "Butane");
-        registerFluid(IndustrialProcessing.blockFluidAlkylate, IndustrialProcessing.itemFluidAlkylate, null, "Alkylate"); 
-        registerFluid(IndustrialProcessing.blockFluidIsomerate, IndustrialProcessing.itemFluidIsomerate, null, "Isomerate");
-        registerFluid(IndustrialProcessing.blockFluidUnsweetenedLPG, IndustrialProcessing.itemFluidUnsweetenedLPG, null, "Unsweetened LPG");
-        registerFluid(IndustrialProcessing.blockFluidUnsweetenedButane, IndustrialProcessing.itemFluidUnsweetenedButane, null, "Unsweetened Butane");
-        registerFluid(IndustrialProcessing.blockFluidFuelGas, IndustrialProcessing.itemFluidFuelGas, null, "Fuel gas");
-        registerFluid(IndustrialProcessing.blockFluidGasMix, IndustrialProcessing.itemFluidGasMix, null, "Gas mix");
+        registerFluid(ISetupFluids.blockFluidIsoButane, ISetupFluids.itemFluidIsoButane, null, "Isobutane");
+        registerFluid(ISetupFluids.blockFluidButane, ISetupFluids.itemFluidButane, null, "Butane");
+        registerFluid(ISetupFluids.blockFluidAlkylate, ISetupFluids.itemFluidAlkylate, null, "Alkylate"); 
+        registerFluid(ISetupFluids.blockFluidIsomerate, ISetupFluids.itemFluidIsomerate, null, "Isomerate");
+        registerFluid(ISetupFluids.blockFluidUnsweetenedLPG, ISetupFluids.itemFluidUnsweetenedLPG, null, "Unsweetened LPG");
+        registerFluid(ISetupFluids.blockFluidUnsweetenedButane, ISetupFluids.itemFluidUnsweetenedButane, null, "Unsweetened Butane");
+        registerFluid(ISetupFluids.blockFluidFuelGas, ISetupFluids.itemFluidFuelGas, null, "Fuel gas");
+        registerFluid(ISetupFluids.blockFluidGasMix, ISetupFluids.itemFluidGasMix, null, "Gas mix");
         
-        registerFluid(IndustrialProcessing.blockFluidResin, IndustrialProcessing.itemFluidResin, IndustrialProcessing.bucketResin, "Resin");
-        LanguageRegistry.addName(IndustrialProcessing.bucketResin, "Resin Bucket");
+        registerFluid(ISetupFluids.blockFluidResin, ISetupFluids.itemFluidResin, ISetupFluids.bucketResin, "Resin");
+        LanguageRegistry.addName(ISetupFluids.bucketResin, "Resin Bucket");
         
-        registerFluid(IndustrialProcessing.blockFluidParaffinicNaphtha, IndustrialProcessing.itemFluidParaffinicNaphtha, IndustrialProcessing.bucketParaffinicNaphtha, "Paraffinic naphtha");
-        LanguageRegistry.addName(IndustrialProcessing.bucketParaffinicNaphtha, "Paraffinic naphtha Bucket");
+        registerFluid(ISetupFluids.blockFluidParaffinicNaphtha, ISetupFluids.itemFluidParaffinicNaphtha, ISetupFluids.bucketParaffinicNaphtha, "Paraffinic naphtha");
+        LanguageRegistry.addName(ISetupFluids.bucketParaffinicNaphtha, "Paraffinic naphtha Bucket");
         
-        registerFluid(IndustrialProcessing.blockFluidHeavyVirginNaphtha, IndustrialProcessing.itemFluidHeavyVirginNaphtha, IndustrialProcessing.bucketHeavyVirginNaphtha, "Heavy virgin naphtha");
-        LanguageRegistry.addName(IndustrialProcessing.bucketHeavyVirginNaphtha, "Heavy virgin naphtha Bucket");
+        registerFluid(ISetupFluids.blockFluidHeavyVirginNaphtha, ISetupFluids.itemFluidHeavyVirginNaphtha, ISetupFluids.bucketHeavyVirginNaphtha, "Heavy virgin naphtha");
+        LanguageRegistry.addName(ISetupFluids.bucketHeavyVirginNaphtha, "Heavy virgin naphtha Bucket");
         
-        registerFluid(IndustrialProcessing.blockFluidLightVacuumGasOil, IndustrialProcessing.itemFluidLightVacuumGasOil, IndustrialProcessing.bucketLightVacuumGasOil, "Light vacuum gasOil");
-        LanguageRegistry.addName(IndustrialProcessing.bucketLightVacuumGasOil, "Light vacuum gasOil Bucket");
+        registerFluid(ISetupFluids.blockFluidLightVacuumGasOil, ISetupFluids.itemFluidLightVacuumGasOil, ISetupFluids.bucketLightVacuumGasOil, "Light vacuum gasOil");
+        LanguageRegistry.addName(ISetupFluids.bucketLightVacuumGasOil, "Light vacuum gasOil Bucket");
 
-        registerFluid(IndustrialProcessing.blockFluidHeavyvacuumGasOil, IndustrialProcessing.itemFluidHeavyvacuumGasOil, IndustrialProcessing.bucketHeavyvacuumGasOil, "Heavy vacuum gasOil");
-        LanguageRegistry.addName(IndustrialProcessing.bucketHeavyvacuumGasOil, "Heavy vacuum gasOil Bucket");
+        registerFluid(ISetupFluids.blockFluidHeavyvacuumGasOil, ISetupFluids.itemFluidHeavyvacuumGasOil, ISetupFluids.bucketHeavyvacuumGasOil, "Heavy vacuum gasOil");
+        LanguageRegistry.addName(ISetupFluids.bucketHeavyvacuumGasOil, "Heavy vacuum gasOil Bucket");
         
-        registerFluid(IndustrialProcessing.blockFluidUntreatedDieselOil, IndustrialProcessing.itemFluidUntreatedDieselOil, IndustrialProcessing.bucketUntreatedDieselOil, "Untreated diesel Oil");
-        LanguageRegistry.addName(IndustrialProcessing.bucketUntreatedDieselOil, "Untreated diesel Oil Bucket");
+        registerFluid(ISetupFluids.blockFluidUntreatedDieselOil, ISetupFluids.itemFluidUntreatedDieselOil, ISetupFluids.bucketUntreatedDieselOil, "Untreated diesel Oil");
+        LanguageRegistry.addName(ISetupFluids.bucketUntreatedDieselOil, "Untreated diesel Oil Bucket");
 
-        registerFluid(IndustrialProcessing.blockFluidUntreatedKerosene, IndustrialProcessing.itemFluidUntreatedKerosene, IndustrialProcessing.bucketUntreatedKerosene, "Untreated kerosene");
-        LanguageRegistry.addName(IndustrialProcessing.bucketUntreatedKerosene, "Untreated kerosene Bucket");
+        registerFluid(ISetupFluids.blockFluidUntreatedKerosene, ISetupFluids.itemFluidUntreatedKerosene, ISetupFluids.bucketUntreatedKerosene, "Untreated kerosene");
+        LanguageRegistry.addName(ISetupFluids.bucketUntreatedKerosene, "Untreated kerosene Bucket");
         
-        registerFluid(IndustrialProcessing.blockFluidLightNaphtha, IndustrialProcessing.itemFluidLightNaphtha, IndustrialProcessing.bucketLightNaphtha, "Light naphtha");
-        LanguageRegistry.addName(IndustrialProcessing.bucketLightNaphtha, "Light naphtha Bucket");
+        registerFluid(ISetupFluids.blockFluidLightNaphtha, ISetupFluids.itemFluidLightNaphtha, ISetupFluids.bucketLightNaphtha, "Light naphtha");
+        LanguageRegistry.addName(ISetupFluids.bucketLightNaphtha, "Light naphtha Bucket");
         
-        registerFluid(IndustrialProcessing.blockFluidHeavyNaphtha, IndustrialProcessing.itemFluidHeavyNaphtha, IndustrialProcessing.bucketHeavyNaphtha, "Heavy naphtha");
-        LanguageRegistry.addName(IndustrialProcessing.bucketHeavyNaphtha, "Heavy naphtha Bucket");
+        registerFluid(ISetupFluids.blockFluidHeavyNaphtha, ISetupFluids.itemFluidHeavyNaphtha, ISetupFluids.bucketHeavyNaphtha, "Heavy naphtha");
+        LanguageRegistry.addName(ISetupFluids.bucketHeavyNaphtha, "Heavy naphtha Bucket");
         
-        registerFluid(IndustrialProcessing.blockFluidKerosene, IndustrialProcessing.itemFluidKerosene, IndustrialProcessing.bucketKerosene, "Kerosene");
-        LanguageRegistry.addName(IndustrialProcessing.bucketKerosene, "Kerosene Bucket");
+        registerFluid(ISetupFluids.blockFluidKerosene, ISetupFluids.itemFluidKerosene, ISetupFluids.bucketKerosene, "Kerosene");
+        LanguageRegistry.addName(ISetupFluids.bucketKerosene, "Kerosene Bucket");
         
-        registerFluid(IndustrialProcessing.blockFluidDieselOil, IndustrialProcessing.itemFluidDieselOil, IndustrialProcessing.bucketDieselOil, "Diesel oil");
-        LanguageRegistry.addName(IndustrialProcessing.bucketDieselOil, "Diesel oil Bucket");
+        registerFluid(ISetupFluids.blockFluidDieselOil, ISetupFluids.itemFluidDieselOil, ISetupFluids.bucketDieselOil, "Diesel oil");
+        LanguageRegistry.addName(ISetupFluids.bucketDieselOil, "Diesel oil Bucket");
         
-        registerFluid(IndustrialProcessing.blockFluidGasOil, IndustrialProcessing.itemFluidGasOil, IndustrialProcessing.bucketGasOil, "Gasoil");
-        LanguageRegistry.addName(IndustrialProcessing.bucketGasOil, "Gasoil Bucket");
+        registerFluid(ISetupFluids.blockFluidGasOil, ISetupFluids.itemFluidGasOil, ISetupFluids.bucketGasOil, "Gasoil");
+        LanguageRegistry.addName(ISetupFluids.bucketGasOil, "Gasoil Bucket");
         
-        registerFluid(IndustrialProcessing.blockFluidAtmosphericBottoms, IndustrialProcessing.itemFluidAtmosphericBottoms, IndustrialProcessing.bucketAtmosphericBottoms, "Atmospheric bottoms");
-        LanguageRegistry.addName(IndustrialProcessing.bucketAtmosphericBottoms, "Atmospheric bottoms Bucket");
+        registerFluid(ISetupFluids.blockFluidAtmosphericBottoms, ISetupFluids.itemFluidAtmosphericBottoms, ISetupFluids.bucketAtmosphericBottoms, "Atmospheric bottoms");
+        LanguageRegistry.addName(ISetupFluids.bucketAtmosphericBottoms, "Atmospheric bottoms Bucket");
         
-        registerFluid(IndustrialProcessing.blockFluidAsphaltSludge, IndustrialProcessing.itemFluidAsphaltSludge, IndustrialProcessing.bucketAsphaltSludge, "Asphalt sludge");
-        LanguageRegistry.addName(IndustrialProcessing.bucketAsphaltSludge, "Asphalt sludge Bucket");
+        registerFluid(ISetupFluids.blockFluidAsphaltSludge, ISetupFluids.itemFluidAsphaltSludge, ISetupFluids.bucketAsphaltSludge, "Asphalt sludge");
+        LanguageRegistry.addName(ISetupFluids.bucketAsphaltSludge, "Asphalt sludge Bucket");
 
-        registerFluid(IndustrialProcessing.blockFluidH2S, IndustrialProcessing.itemFluidH2S, null, "H2S");
+        registerFluid(ISetupFluids.blockFluidH2S, ISetupFluids.itemFluidH2S, null, "H2S");
 
-        registerFluid(IndustrialProcessing.blockFluidSourWater, IndustrialProcessing.itemFluidSourWater, IndustrialProcessing.bucketSourWater, "Sour water");
-        LanguageRegistry.addName(IndustrialProcessing.bucketSourWater, "Sour water Bucket");
+        registerFluid(ISetupFluids.blockFluidSourWater, ISetupFluids.itemFluidSourWater, ISetupFluids.bucketSourWater, "Sour water");
+        LanguageRegistry.addName(ISetupFluids.bucketSourWater, "Sour water Bucket");
 
-        registerFluid(IndustrialProcessing.blockFluidH2, IndustrialProcessing.itemFluidH2, null, "H2");
-        registerFluid(IndustrialProcessing.blockFluidCO2, IndustrialProcessing.itemFluidCO2, null, "CO2");
-        registerFluid(IndustrialProcessing.blockFluidAir, IndustrialProcessing.itemFluidAir, null, "Air");
+        registerFluid(ISetupFluids.blockFluidH2, ISetupFluids.itemFluidH2, null, "H2");
+        registerFluid(ISetupFluids.blockFluidCO2, ISetupFluids.itemFluidCO2, null, "CO2");
+        registerFluid(ISetupFluids.blockFluidAir, ISetupFluids.itemFluidAir, null, "Air");
 
-        registerFluid(IndustrialProcessing.blockFluidLatex, IndustrialProcessing.itemFluidLatex, IndustrialProcessing.bucketFluidLatex, "Latex");
-        LanguageRegistry.addName(IndustrialProcessing.bucketFluidLatex, "Latex Bucket");
+        registerFluid(ISetupFluids.blockFluidLatex, ISetupFluids.itemFluidLatex, ISetupFluids.bucketFluidLatex, "Latex");
+        LanguageRegistry.addName(ISetupFluids.bucketFluidLatex, "Latex Bucket");
 
-        registerFluid(IndustrialProcessing.blockFluidMicrobialWater, IndustrialProcessing.itemFluidMicrobialWater, IndustrialProcessing.bucketMicrobialWater, "Microbial water");
-        LanguageRegistry.addName(IndustrialProcessing.bucketMicrobialWater, "Microbial water Bucket");
+        registerFluid(ISetupFluids.blockFluidMicrobialWater, ISetupFluids.itemFluidMicrobialWater, ISetupFluids.bucketMicrobialWater, "Microbial water");
+        LanguageRegistry.addName(ISetupFluids.bucketMicrobialWater, "Microbial water Bucket");
 
-        registerFluid(IndustrialProcessing.blockFluidUncleanWater, IndustrialProcessing.itemFluidUncleanWater, IndustrialProcessing.bucketUncleanWater, "Unclean water");
-        LanguageRegistry.addName(IndustrialProcessing.bucketUncleanWater, "Unclean water Bucket");
+        registerFluid(ISetupFluids.blockFluidUncleanWater, ISetupFluids.itemFluidUncleanWater, ISetupFluids.bucketUncleanWater, "Unclean water");
+        LanguageRegistry.addName(ISetupFluids.bucketUncleanWater, "Unclean water Bucket");
 
-        registerFluid(IndustrialProcessing.blockFluidResidu, IndustrialProcessing.itemFluidResidu, IndustrialProcessing.bucketResidu, "Residu");
-        LanguageRegistry.addName(IndustrialProcessing.bucketResidu, "Residu Bucket");
+        registerFluid(ISetupFluids.blockFluidResidu, ISetupFluids.itemFluidResidu, ISetupFluids.bucketResidu, "Residu");
+        LanguageRegistry.addName(ISetupFluids.bucketResidu, "Residu Bucket");
 
-        registerFluid(IndustrialProcessing.blockFluidGritSludge, IndustrialProcessing.itemFluidGritSludge, IndustrialProcessing.bucketGritSludge, "Grit sludge");
-        LanguageRegistry.addName(IndustrialProcessing.bucketGritSludge, "Grit sludge Bucket");
+        registerFluid(ISetupFluids.blockFluidGritSludge, ISetupFluids.itemFluidGritSludge, ISetupFluids.bucketGritSludge, "Grit sludge");
+        LanguageRegistry.addName(ISetupFluids.bucketGritSludge, "Grit sludge Bucket");
 
-        registerFluid(IndustrialProcessing.blockFluidDirtyWater, IndustrialProcessing.itemFluidDirtyWater, IndustrialProcessing.bucketDirtyWater, "Dirty water");
-        LanguageRegistry.addName(IndustrialProcessing.bucketDirtyWater, "Dirty water Bucket");
+        registerFluid(ISetupFluids.blockFluidDirtyWater, ISetupFluids.itemFluidDirtyWater, ISetupFluids.bucketDirtyWater, "Dirty water");
+        LanguageRegistry.addName(ISetupFluids.bucketDirtyWater, "Dirty water Bucket");
 
-        registerFluid(IndustrialProcessing.blockFluidfiltyWater, IndustrialProcessing.itemFluidfiltyWater, IndustrialProcessing.bucketfiltyWater, "Filty water");
-        LanguageRegistry.addName(IndustrialProcessing.bucketfiltyWater, "Filty water Bucket");
+        registerFluid(ISetupFluids.blockFluidfiltyWater, ISetupFluids.itemFluidfiltyWater, ISetupFluids.bucketfiltyWater, "Filty water");
+        LanguageRegistry.addName(ISetupFluids.bucketfiltyWater, "Filty water Bucket");
 
-        registerFluid(IndustrialProcessing.blockFluidOreSludgeIron, IndustrialProcessing.itemFluidOreSludgeIron, IndustrialProcessing.bucketOreSludgeIron, "Iron ore sludge");
-        LanguageRegistry.addName(IndustrialProcessing.bucketOreSludgeIron, "Iron sludge Bucket");
+        registerFluid(ISetupFluids.blockFluidOreSludgeIron, ISetupFluids.itemFluidOreSludgeIron, ISetupFluids.bucketOreSludgeIron, "Iron ore sludge");
+        LanguageRegistry.addName(ISetupFluids.bucketOreSludgeIron, "Iron sludge Bucket");
 
-        registerFluid(IndustrialProcessing.blockFluidOreSludgeCopper, IndustrialProcessing.itemFluidOreSludgeCopper, IndustrialProcessing.bucketOreSludgeCopper, "Copper ore sludge");
-        LanguageRegistry.addName(IndustrialProcessing.bucketOreSludgeCopper, "Copper sludge Bucket");
+        registerFluid(ISetupFluids.blockFluidOreSludgeCopper, ISetupFluids.itemFluidOreSludgeCopper, ISetupFluids.bucketOreSludgeCopper, "Copper ore sludge");
+        LanguageRegistry.addName(ISetupFluids.bucketOreSludgeCopper, "Copper sludge Bucket");
 
-        registerFluid(IndustrialProcessing.blockFluidOreSludgeTin, IndustrialProcessing.itemFluidOreSludgeTin, IndustrialProcessing.bucketOreSludgeTin, "Tin ore sludge");
-        LanguageRegistry.addName(IndustrialProcessing.bucketOreSludgeTin, "Tin sludge Bucket");
+        registerFluid(ISetupFluids.blockFluidOreSludgeTin, ISetupFluids.itemFluidOreSludgeTin, ISetupFluids.bucketOreSludgeTin, "Tin ore sludge");
+        LanguageRegistry.addName(ISetupFluids.bucketOreSludgeTin, "Tin sludge Bucket");
 
-        registerFluid(IndustrialProcessing.blockFluidHotSlag, IndustrialProcessing.itemFluidHotSlag, IndustrialProcessing.bucketHotSlag, "Hot slag");
-        LanguageRegistry.addName(IndustrialProcessing.bucketHotSlag, "Hot slag Bucket");
+        registerFluid(ISetupFluids.blockFluidHotSlag, ISetupFluids.itemFluidHotSlag, ISetupFluids.bucketHotSlag, "Hot slag");
+        LanguageRegistry.addName(ISetupFluids.bucketHotSlag, "Hot slag Bucket");
 
-        registerFluid(IndustrialProcessing.blockFluidPigIron, IndustrialProcessing.itemFluidPigIron, IndustrialProcessing.bucketPigIron, "Pig iron");
-        LanguageRegistry.addName(IndustrialProcessing.bucketPigIron, "Pig iron Bucket");
+        registerFluid(ISetupFluids.blockFluidPigIron, ISetupFluids.itemFluidPigIron, ISetupFluids.bucketPigIron, "Pig iron");
+        LanguageRegistry.addName(ISetupFluids.bucketPigIron, "Pig iron Bucket");
 
-        registerFluid(IndustrialProcessing.blockFluidHotSteel, IndustrialProcessing.itemFluidHotSteel, IndustrialProcessing.bucketHotSteel, "Molten steel");
-        LanguageRegistry.addName(IndustrialProcessing.bucketHotSteel, "Molten steel Bucket");
+        registerFluid(ISetupFluids.blockFluidHotSteel, ISetupFluids.itemFluidHotSteel, ISetupFluids.bucketHotSteel, "Molten steel");
+        LanguageRegistry.addName(ISetupFluids.bucketHotSteel, "Molten steel Bucket");
 
-        registerFluid(IndustrialProcessing.blockFluidExhaustGas, IndustrialProcessing.itemFluidExhaustGas, null, "Exhaust gas");
+        registerFluid(ISetupFluids.blockFluidExhaustGas, ISetupFluids.itemFluidExhaustGas, null, "Exhaust gas");
 
-        registerFluid(IndustrialProcessing.blockFluidSteam, IndustrialProcessing.itemFluidSteam, null, "Steam");
+        registerFluid(ISetupFluids.blockFluidSteam, ISetupFluids.itemFluidSteam, null, "Steam");
 
-        registerFluid(IndustrialProcessing.blockFluidOreSludgeChromite, IndustrialProcessing.itemFluidOreSludgeChromite, IndustrialProcessing.bucketOreSludgeChromite, "Chromite ore sludge");
-        LanguageRegistry.addName(IndustrialProcessing.bucketOreSludgeChromite, "Chromite sludge Bucket");
-        registerFluid(IndustrialProcessing.blockFluidOreSludgeGalena, IndustrialProcessing.itemFluidOreSludgeGalena, IndustrialProcessing.bucketOreSludgeGalena, "Galena ore sludge");
-        LanguageRegistry.addName(IndustrialProcessing.bucketOreSludgeGalena, "Galena sludge Bucket");
-        registerFluid(IndustrialProcessing.blockFluidOreSludgeGold, IndustrialProcessing.itemFluidOreSludgeGold, IndustrialProcessing.bucketOreSludgeGold, "Gold ore sludge");
-        LanguageRegistry.addName(IndustrialProcessing.bucketOreSludgeGold, "Gold sludge Bucket");
-        registerFluid(IndustrialProcessing.blockFluidOreSludgeTalia, IndustrialProcessing.itemFluidOreSludgeTalia, IndustrialProcessing.bucketOreSludgeTalia, "Thalium ore sludge");
-        LanguageRegistry.addName(IndustrialProcessing.bucketOreSludgeTalia, "Thalium sludge Bucket");
+        registerFluid(ISetupFluids.blockFluidOreSludgeChromite, ISetupFluids.itemFluidOreSludgeChromite, ISetupFluids.bucketOreSludgeChromite, "Chromite ore sludge");
+        LanguageRegistry.addName(ISetupFluids.bucketOreSludgeChromite, "Chromite sludge Bucket");
+        registerFluid(ISetupFluids.blockFluidOreSludgeGalena, ISetupFluids.itemFluidOreSludgeGalena, ISetupFluids.bucketOreSludgeGalena, "Galena ore sludge");
+        LanguageRegistry.addName(ISetupFluids.bucketOreSludgeGalena, "Galena sludge Bucket");
+        registerFluid(ISetupFluids.blockFluidOreSludgeGold, ISetupFluids.itemFluidOreSludgeGold, ISetupFluids.bucketOreSludgeGold, "Gold ore sludge");
+        LanguageRegistry.addName(ISetupFluids.bucketOreSludgeGold, "Gold sludge Bucket");
+        registerFluid(ISetupFluids.blockFluidOreSludgeTalia, ISetupFluids.itemFluidOreSludgeTalia, ISetupFluids.bucketOreSludgeTalia, "Thalium ore sludge");
+        LanguageRegistry.addName(ISetupFluids.bucketOreSludgeTalia, "Thalium sludge Bucket");
         
-        registerFluid(IndustrialProcessing.blockFluidMixedSludgeIron, IndustrialProcessing.itemFluidMixedSludgeIron, IndustrialProcessing.bucketMixedSludgeIron, "Iron ore mixedSludge");
-        LanguageRegistry.addName(IndustrialProcessing.bucketMixedSludgeIron, "Iron mixedSludge Bucket");
-        registerFluid(IndustrialProcessing.blockFluidMixedSludgeCopper, IndustrialProcessing.itemFluidMixedSludgeCopper, IndustrialProcessing.bucketMixedSludgeCopper, "Copper ore mixedSludge");
-        LanguageRegistry.addName(IndustrialProcessing.bucketMixedSludgeCopper, "Copper mixedSludge Bucket");
-        registerFluid(IndustrialProcessing.blockFluidMixedSludgeTin, IndustrialProcessing.itemFluidMixedSludgeTin, IndustrialProcessing.bucketMixedSludgeTin, "Tin ore mixedSludge");
-        LanguageRegistry.addName(IndustrialProcessing.bucketMixedSludgeTin, "Tin mixedSludge Bucket");
-        registerFluid(IndustrialProcessing.blockFluidMixedSludgeChromite, IndustrialProcessing.itemFluidMixedSludgeChromite, IndustrialProcessing.bucketMixedSludgeChromite, "Chromite ore mixedSludge");
-        LanguageRegistry.addName(IndustrialProcessing.bucketMixedSludgeChromite, "Chromite mixedSludge Bucket");
-        registerFluid(IndustrialProcessing.blockFluidMixedSludgeGalena, IndustrialProcessing.itemFluidMixedSludgeGalena, IndustrialProcessing.bucketMixedSludgeGalena, "Galena ore mixedSludge");
-        LanguageRegistry.addName(IndustrialProcessing.bucketMixedSludgeGalena, "Galena mixedSludge Bucket");
-        registerFluid(IndustrialProcessing.blockFluidMixedSludgeGold, IndustrialProcessing.itemFluidMixedSludgeGold, IndustrialProcessing.bucketMixedSludgeGold, "Gold ore mixedSludge");
-        LanguageRegistry.addName(IndustrialProcessing.bucketMixedSludgeGold, "Gold mixedSludge Bucket");
-        registerFluid(IndustrialProcessing.blockFluidMixedSludgeTalia, IndustrialProcessing.itemFluidMixedSludgeTalia, IndustrialProcessing.bucketMixedSludgeTalia, "Thalium ore mixedSludge");
-        LanguageRegistry.addName(IndustrialProcessing.bucketMixedSludgeTalia, "Thalium mixedSludge Bucket");
+        registerFluid(ISetupFluids.blockFluidMixedSludgeIron, ISetupFluids.itemFluidMixedSludgeIron, ISetupFluids.bucketMixedSludgeIron, "Iron ore mixedSludge");
+        LanguageRegistry.addName(ISetupFluids.bucketMixedSludgeIron, "Iron mixedSludge Bucket");
+        registerFluid(ISetupFluids.blockFluidMixedSludgeCopper, ISetupFluids.itemFluidMixedSludgeCopper, ISetupFluids.bucketMixedSludgeCopper, "Copper ore mixedSludge");
+        LanguageRegistry.addName(ISetupFluids.bucketMixedSludgeCopper, "Copper mixedSludge Bucket");
+        registerFluid(ISetupFluids.blockFluidMixedSludgeTin, ISetupFluids.itemFluidMixedSludgeTin, ISetupFluids.bucketMixedSludgeTin, "Tin ore mixedSludge");
+        LanguageRegistry.addName(ISetupFluids.bucketMixedSludgeTin, "Tin mixedSludge Bucket");
+        registerFluid(ISetupFluids.blockFluidMixedSludgeChromite, ISetupFluids.itemFluidMixedSludgeChromite, ISetupFluids.bucketMixedSludgeChromite, "Chromite ore mixedSludge");
+        LanguageRegistry.addName(ISetupFluids.bucketMixedSludgeChromite, "Chromite mixedSludge Bucket");
+        registerFluid(ISetupFluids.blockFluidMixedSludgeGalena, ISetupFluids.itemFluidMixedSludgeGalena, ISetupFluids.bucketMixedSludgeGalena, "Galena ore mixedSludge");
+        LanguageRegistry.addName(ISetupFluids.bucketMixedSludgeGalena, "Galena mixedSludge Bucket");
+        registerFluid(ISetupFluids.blockFluidMixedSludgeGold, ISetupFluids.itemFluidMixedSludgeGold, ISetupFluids.bucketMixedSludgeGold, "Gold ore mixedSludge");
+        LanguageRegistry.addName(ISetupFluids.bucketMixedSludgeGold, "Gold mixedSludge Bucket");
+        registerFluid(ISetupFluids.blockFluidMixedSludgeTalia, ISetupFluids.itemFluidMixedSludgeTalia, ISetupFluids.bucketMixedSludgeTalia, "Thalium ore mixedSludge");
+        LanguageRegistry.addName(ISetupFluids.bucketMixedSludgeTalia, "Thalium mixedSludge Bucket");
         
     }
 

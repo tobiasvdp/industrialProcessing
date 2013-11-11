@@ -1,7 +1,5 @@
 package ip.industrialProcessing.power;
 
-import ip.industrialProcessing.DirectionUtils;
-import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.power.utils.PowerAcceptorConnection;
 import ip.industrialProcessing.power.utils.PowerDistributor;

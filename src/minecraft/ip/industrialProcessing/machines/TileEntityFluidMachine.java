@@ -398,6 +398,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine implement
 		this.onInventoryChanged(); 
 	}
 
+	@Override
 	public FluidTankInfo getTankInfoForSlot(int slot) {
 		MachineFluidTank tank = this.getTankInSlot(slot);
 		if (tank != null)

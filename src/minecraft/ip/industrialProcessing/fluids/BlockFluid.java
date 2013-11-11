@@ -3,27 +3,19 @@ package ip.industrialProcessing.fluids;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
+import ip.industrialProcessing.config.ISetupDamageSource;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.Icon;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.event.ForgeSubscribe;
-import net.minecraftforge.event.Event.Result;
-import net.minecraftforge.event.entity.player.FillBucketEvent;
-import net.minecraftforge.event.terraingen.BiomeEvent.CreateDecorator;
-import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.BlockFluidClassic;
-import net.minecraftforge.fluids.BlockFluidFinite;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidBlock;
 
 public class BlockFluid extends BlockFluidClassic {
 
@@ -34,18 +26,20 @@ public class BlockFluid extends BlockFluidClassic {
     public BlockFluid(int id, Fluid fluid, Material material, boolean doDamage) {
         super(id, fluid, material);
         setUnlocalizedName("Block" + fluid.getUnlocalizedName());
-        setCreativeTab(IndustrialProcessing.tabFluid);
+        setCreativeTab(ISetupCreativeTabs.tabFluid);
         this.disableStats();
         this.doDamage = doDamage;
     }
 
-    public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
+    @Override
+	public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
         if (doDamage) {
-            par5Entity.attackEntityFrom(IndustrialProcessing.DamageDirtyWater, 2.0F);
+            par5Entity.attackEntityFrom(ISetupDamageSource.DamageDirtyWater, 2.0F);
         }
     }
 
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     public int getRenderBlockPass() {
         return this.blockMaterial == Material.water ? 1 : 0;
     }
@@ -56,9 +50,10 @@ public class BlockFluid extends BlockFluidClassic {
         return par1 != 0 && par1 != 1 ? this.theIcon[1] : this.theIcon[0];
     }
 
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister par1IconRegister) {
-        this.theIcon = new Icon[] { par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + this.getFluid().getName() + "_still"), par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + this.getFluid().getName() + "_flow") };
+        this.theIcon = new Icon[] { par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + this.getFluid().getName() + "_still"), par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + this.getFluid().getName() + "_flow") };
         this.getFluid().setIcons(theIcon[0], theIcon[1]);
     }
 

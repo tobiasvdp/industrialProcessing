@@ -14,10 +14,10 @@ public class ConfigAchievements {
 	public static int madeHammerID(){return getInstance().achHammer;}
 	
 	public void registerAchievments(){
-		IndustrialProcessing.achPage.getAchievements().add(IndustrialProcessing.achPlacedFilter);
-		IndustrialProcessing.achPage.getAchievements().add(IndustrialProcessing.achPlacedCrusher);
-		IndustrialProcessing.achPage.getAchievements().add(IndustrialProcessing.achHammer);
-		AchievementPage.registerAchievementPage(IndustrialProcessing.achPage);
+		ISetupAchievements.achPage.getAchievements().add(ISetupAchievements.achPlacedFilter);
+		ISetupAchievements.achPage.getAchievements().add(ISetupAchievements.achPlacedCrusher);
+		ISetupAchievements.achPage.getAchievements().add(ISetupAchievements.achHammer);
+		AchievementPage.registerAchievementPage(ISetupAchievements.achPage);
 		
 		LanguageRegistry.instance().addStringLocalization("achievement." + "placedFilter", "en_US", "First filter");
 		LanguageRegistry.instance().addStringLocalization("achievement." + "placedFilter" + ".desc", "en_US", "Placing your first filter");
