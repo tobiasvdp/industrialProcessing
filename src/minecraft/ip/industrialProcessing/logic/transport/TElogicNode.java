@@ -26,7 +26,7 @@ public abstract class TElogicNode extends TileEntitySynced implements ICommunica
 	private ForgeDirection[] conectableInputSides;
 	private ForgeDirection[] conectableOutputSides;
 
-	private ArrayList<UTpacket> packets = new ArrayList<UTpacket>();
+	protected ArrayList<UTpacket> packets = new ArrayList<UTpacket>();
 
 	public TElogicNode() {
 		conectableInputSides = setConnectableInputSides();
@@ -165,7 +165,7 @@ public abstract class TElogicNode extends TileEntitySynced implements ICommunica
 	}
 
 	@Override
-	public abstract void ExtendedReceive(UTpacket packet);
+	public void ExtendedReceive(UTpacket packet){}
 
 	@Override
 	public void scheduleSend() {
@@ -205,9 +205,13 @@ public abstract class TElogicNode extends TileEntitySynced implements ICommunica
 
 				}
 			}
+			ExtendedSend(packet);
 		}
 		packets.clear();
 	}
+	
+	@Override
+	public void ExtendedSend(UTpacket packet){}
 
 	private void initiateBuffer(UTBuffer utBuffer, UTBusType busType) {
 		if (busType == UTBusType.cable) {

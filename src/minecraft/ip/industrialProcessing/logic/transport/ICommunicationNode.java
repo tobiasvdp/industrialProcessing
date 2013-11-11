@@ -24,7 +24,6 @@ public interface ICommunicationNode extends ICommunication{
 	public void createDestructionPacket();
 	public void createDataPacket( UTVariable... data);
 	public void createDataPacket(ForgeDirection dir,  UTVariable... data);
-	public void createDataPacket(ICommunicationNode node,  UTVariable... data);
 	
 	public void transition();
 }

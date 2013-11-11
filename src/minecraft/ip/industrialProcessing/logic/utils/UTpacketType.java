@@ -1,5 +1,5 @@
 package ip.industrialProcessing.logic.utils;
 
 public enum UTpacketType {
-discovery, data, destroy, recheck,request;
+discovery, data, destroy, recheck,request,deliver;
 }

@@ -8,6 +8,7 @@ public interface ICommunication {
 	
 public void Receive(UTpacket packet);
 public void ExtendedReceive(UTpacket packet);
+public void ExtendedSend(UTpacket packet);
 
 public void scheduleSend();
 public void Send();

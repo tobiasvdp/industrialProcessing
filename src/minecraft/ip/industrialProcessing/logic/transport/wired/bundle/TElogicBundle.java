@@ -101,4 +101,10 @@ public class TElogicBundle extends TileEntity implements ICommunicationTransport
 		return 0;
 	}
 
+	@Override
+	public void ExtendedSend(UTpacket packet) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

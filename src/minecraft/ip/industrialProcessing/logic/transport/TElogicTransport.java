@@ -60,9 +60,12 @@ public abstract class TElogicTransport extends TileEntity implements ICommunicat
 					com.Receive(packet);
 				}
 			}
+			ExtendedSend(packet);
 		}
 		packets.clear();
 	}
+	@Override
+	public void ExtendedSend(UTpacket packet){}
 
 	@Override
 	public UTBusType getBusType(ForgeDirection side) {
