@@ -8,7 +8,7 @@ public class UTBuffer {
 	public UTBuffer(UTBufferType type, int size) {
 		buffer = new UTVariable[size];
 		for(int i = 0;i<size;i++){
-			buffer[i] = new UTVariable(i,-1,null);
+			buffer[i] = new UTVariable(i,UTVariableType.unknown,null);
 		}
 	}
 
@@ -16,7 +16,7 @@ public class UTBuffer {
 		buffer[index].value = value;
 	}
 	
-	public void put(int index, int ID, Object value) {
+	public void put(int index, UTVariableType ID, Object value) {
 		buffer[index].value = value;
 		buffer[index].ID = ID;
 	}

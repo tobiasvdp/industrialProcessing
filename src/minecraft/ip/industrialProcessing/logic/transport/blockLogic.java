@@ -13,6 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.logic.config.ConfigLogic;
 import ip.industrialProcessing.logic.utils.UTVariable;
+import ip.industrialProcessing.logic.utils.UTVariableType;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.utils.rotation.ISidedRotation;
 
@@ -54,9 +55,9 @@ public abstract class blockLogic extends BlockMachineRendered{
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float clickX, float clickY, float clickZ) {
 		ICommunicationNode com = (ICommunicationNode) world.getBlockTileEntity(x, y, z);
 		if(((UTVariable)com.getBuffer(ForgeDirection.NORTH).get(0)).value != null && ((Boolean)((UTVariable)com.getBuffer(ForgeDirection.NORTH).get(0)).value) == false)
-			com.createDataPacket(ForgeDirection.NORTH, new UTVariable(0,0,true));
+			com.createDataPacket(ForgeDirection.NORTH, new UTVariable(0,UTVariableType.bit,true));
 		else
-			com.createDataPacket(ForgeDirection.NORTH, new UTVariable(0,0,false));
+			com.createDataPacket(ForgeDirection.NORTH, new UTVariable(0,UTVariableType.bit,false));
 		return super.onBlockActivated(world, x, y, z, player, metadata, clickX, clickY, clickZ);
 	}
 

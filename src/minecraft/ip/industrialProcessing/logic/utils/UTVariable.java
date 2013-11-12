@@ -2,11 +2,11 @@ package ip.industrialProcessing.logic.utils;
 
 public class UTVariable {
 
-	public int ID;
+	public UTVariableType ID;
 	public int index;
 	public Object value;
 	
-	public UTVariable(int index, int ID, Object value) {
+	public UTVariable(int index, UTVariableType ID, Object value) {
 		this.ID = ID;
 		this.value = value;
 	}
