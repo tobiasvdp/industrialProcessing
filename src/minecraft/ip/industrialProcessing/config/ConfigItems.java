@@ -117,7 +117,46 @@ public class ConfigItems {
     private int itemIronBowlID = 6619;
     private int itemIronBracketID = 6620;
     private int itemDrawPlateID = 6621;
+    private int itemPestleID = 6622;
+    private int itemMotorPoleAxisID = 6623;
+    
+    private int itemScreenID = 6624;
+    private int itemFrameID = 6625;
+    private int itemWovenPaternID = 6626;
+    private int itemMixingHookID = 6627;
+    private int itemHeatingElementID = 6628;
+    private int itemTumblerID = 6629;
+    private int itemRakeArmID = 6630;
+    private int itemDiskID = 6631;
 
+    public static int getItemScreenID(){
+    	return getInstance().itemScreenID;
+    }
+    public static int getItemFrameID(){
+    	return getInstance().itemFrameID;
+    }
+    public static int getItemWovenPaternID(){
+    	return getInstance().itemWovenPaternID;
+    }
+    public static int getItemMixingHookID(){
+    	return getInstance().itemMixingHookID;
+    }
+    public static int getItemHeatingElementID(){
+    	return getInstance().itemHeatingElementID;
+    }
+    public static int getItemTumblerID(){
+    	return getInstance().itemTumblerID;
+    }
+    public static int getItemRakeArmID(){
+    	return getInstance().itemRakeArmID;
+    }
+    public static int getItemDiskID(){
+    	return getInstance().itemDiskID;
+    }
+    
+    public static int getItemPestleID(){
+    	return getInstance().itemPestleID;
+    }
     public static int getItemDrawPlateID(){
     	return getInstance().itemDrawPlateID;
     }
@@ -150,6 +189,9 @@ public class ConfigItems {
     }
     public static int getItemMotorRotorID() {
         return getInstance().itemMotorRotorID;
+    }
+    public static int getItemMotorPoleAxisID() {
+        return getInstance().itemMotorPoleAxisID;
     }
     public static int getItemCopperWireInsulatedID() {
         return getInstance().itemCopperWireInsulatedID;
@@ -515,78 +557,88 @@ public class ConfigItems {
     }
 
     public static void addToLanguageRegistry() {
-    	LanguageRegistry.addName(IndustrialProcessing.itemDrawPlate, "Draw plate");
-    	LanguageRegistry.addName(IndustrialProcessing.itemSlipRing, "Slip ring");
-    	LanguageRegistry.addName(IndustrialProcessing.itemCarbonBrush, "Carbon brush");
-    	LanguageRegistry.addName(IndustrialProcessing.itemIronT, "Iron T-shape");
-    	LanguageRegistry.addName(IndustrialProcessing.itemIronRod, "Iron rod");
-    	LanguageRegistry.addName(IndustrialProcessing.itemIronBar, "Iron bar");
-    	LanguageRegistry.addName(IndustrialProcessing.itemMotorStator, "Motor stator");
-    	LanguageRegistry.addName(IndustrialProcessing.itemMotorRotor, "Motor rotor");
-    	LanguageRegistry.addName(IndustrialProcessing.itemMotorFrame, "Motor frame");
-    	LanguageRegistry.addName(IndustrialProcessing.itemElectroMagnet, "Electromagnet");
-    	LanguageRegistry.addName(IndustrialProcessing.itemCopperWireInsulated, "Insulated copper wire");
-    	LanguageRegistry.addName(IndustrialProcessing.itemCopperCoil, "Copper coil");
-    	LanguageRegistry.addName(IndustrialProcessing.itemCopperWire, "Copper wire");
-    	LanguageRegistry.addName(IndustrialProcessing.itemCrankWheel, "Crank wheel");
+    	LanguageRegistry.addName(ISetupItems.itemScreen, "Screen");
+    	LanguageRegistry.addName(ISetupItems.itemFrame, "Frame");
+    	LanguageRegistry.addName(ISetupItems.itemWovenPatern, "Woven pattern");
+    	LanguageRegistry.addName(ISetupItems.itemMixingHook, "Mixing hook");
+    	LanguageRegistry.addName(ISetupItems.itemHeatingElement, "Heating element");
+    	LanguageRegistry.addName(ISetupItems.itemTumbler, "Tumbler");
+    	LanguageRegistry.addName(ISetupItems.itemRakeArm, "Rake arm");
+    	LanguageRegistry.addName(ISetupItems.itemDisk, "Disk");
     	
-    	LanguageRegistry.addName(IndustrialProcessing.itemCopperIngot, "Copper ingot");
-    	LanguageRegistry.addName(IndustrialProcessing.itemTinIngot, "Tin ingot");
-    	LanguageRegistry.addName(IndustrialProcessing.itemSilverIngot, "Silver ingot");
+    	LanguageRegistry.addName(ISetupItems.itemPestle, "Pestle");
+    	LanguageRegistry.addName(ISetupItems.itemDrawPlate, "Draw plate");
+    	LanguageRegistry.addName(ISetupItems.itemSlipRing, "Slip ring");
+    	LanguageRegistry.addName(ISetupItems.itemCarbonBrush, "Carbon brush");
+    	LanguageRegistry.addName(ISetupItems.itemIronT, "Iron T-shape");
+    	LanguageRegistry.addName(ISetupItems.itemIronRod, "Iron rod");
+    	LanguageRegistry.addName(ISetupItems.itemIronBar, "Iron bar");
+    	LanguageRegistry.addName(ISetupItems.itemMotorStator, "Motor stator");
+    	LanguageRegistry.addName(ISetupItems.itemMotorRotor, "Motor rotor");
+    	LanguageRegistry.addName(ISetupItems.itemMotorFrame, "Motor frame");
+    	LanguageRegistry.addName(ISetupItems.itemElectroMagnet, "Electromagnet");
+    	LanguageRegistry.addName(ISetupItems.itemCopperWireInsulated, "Insulated copper wire");
+    	LanguageRegistry.addName(ISetupItems.itemCopperCoil, "Copper coil");
+    	LanguageRegistry.addName(ISetupItems.itemCopperWire, "Copper wire");
+    	LanguageRegistry.addName(ISetupItems.itemCrankWheel, "Crank wheel");
     	
-        LanguageRegistry.addName(IndustrialProcessing.itemCinnebarSmallCrushedCrystals, "Small crushed cinnebar crystals");
-        LanguageRegistry.addName(IndustrialProcessing.itemCinnebarLargeCrushedCrystals, "Large crushed cinnebar crystals");
+    	LanguageRegistry.addName(ISetupItems.itemCopperIngot, "Copper ingot");
+    	LanguageRegistry.addName(ISetupItems.itemTinIngot, "Tin ingot");
+    	LanguageRegistry.addName(ISetupItems.itemSilverIngot, "Silver ingot");
+    	
+        LanguageRegistry.addName(ISetupItems.itemCinnebarSmallCrushedCrystals, "Small crushed cinnebar crystals");
+        LanguageRegistry.addName(ISetupItems.itemCinnebarLargeCrushedCrystals, "Large crushed cinnebar crystals");
 
-        LanguageRegistry.addName(IndustrialProcessing.itemActiveCoal, "Activated coal");
-        LanguageRegistry.addName(IndustrialProcessing.itemCoalDust, "Coal dust");
-        LanguageRegistry.addName(IndustrialProcessing.itemGrownCulture, "Grown culture");
-        LanguageRegistry.addName(IndustrialProcessing.itemWrench, "Wrench");
-        LanguageRegistry.addName(IndustrialProcessing.itemHexKey, "Hex Key");
-        LanguageRegistry.addName(IndustrialProcessing.itemSmallMachineCasing, "Small machine casing");
-        LanguageRegistry.addName(IndustrialProcessing.itemInputPort, "Input port");
-        LanguageRegistry.addName(IndustrialProcessing.itemOutputPort, "Output port");
-        LanguageRegistry.addName(IndustrialProcessing.itemPowerPort, "Power port");
-        LanguageRegistry.addName(IndustrialProcessing.itemCrusingPlate, "Crushing plate");
-        LanguageRegistry.addName(IndustrialProcessing.itemIronPlate, "Iron plate");
-        LanguageRegistry.addName(IndustrialProcessing.itemIronTips, "Iron tips");
-        LanguageRegistry.addName(IndustrialProcessing.itemSmallMachineCasingCrusher, "Crusher machine case");
+        LanguageRegistry.addName(ISetupItems.itemActiveCoal, "Activated coal");
+        LanguageRegistry.addName(ISetupItems.itemCoalDust, "Coal dust");
+        LanguageRegistry.addName(ISetupItems.itemGrownCulture, "Grown culture");
+        LanguageRegistry.addName(ISetupItems.itemWrench, "Wrench");
+        LanguageRegistry.addName(ISetupItems.itemHexKey, "Hex Key");
+        LanguageRegistry.addName(ISetupItems.itemSmallMachineCasing, "Small machine casing");
+        LanguageRegistry.addName(ISetupItems.itemInputPort, "Input port");
+        LanguageRegistry.addName(ISetupItems.itemOutputPort, "Output port");
+        LanguageRegistry.addName(ISetupItems.itemPowerPort, "Power port");
+        LanguageRegistry.addName(ISetupItems.itemCrusingPlate, "Crushing plate");
+        LanguageRegistry.addName(ISetupItems.itemIronPlate, "Iron plate");
+        LanguageRegistry.addName(ISetupItems.itemIronTips, "Iron tips");
+        LanguageRegistry.addName(ISetupItems.itemSmallMachineCasingCrusher, "Crusher machine case");
 
-        LanguageRegistry.addName(IndustrialProcessing.itemIronLargeChunks, "Large iron Chunks");
-        LanguageRegistry.addName(IndustrialProcessing.itemCopperLargeChunks, "Large copper Chunks");
-        LanguageRegistry.addName(IndustrialProcessing.itemTinLargeChunks, "Large tin Chunks");
-        LanguageRegistry.addName(IndustrialProcessing.itemIronSmallChunks, "Small iron Chunks");
-        LanguageRegistry.addName(IndustrialProcessing.itemCopperSmallChunks, "Small copper Chunks");
-        LanguageRegistry.addName(IndustrialProcessing.itemTinSmallChunks, "Small tin Chunks");
-        LanguageRegistry.addName(IndustrialProcessing.itemIronCrushedChunks, "Crushed iron Chunks");
-        LanguageRegistry.addName(IndustrialProcessing.itemCopperCrushedChunks, "Crushed copper Chunks");
-        LanguageRegistry.addName(IndustrialProcessing.itemTinCrushedChunks, "Crushed tin Chunks");
-        LanguageRegistry.addName(IndustrialProcessing.itemIronWashedChunks, "Washed iron Chunks");
-        LanguageRegistry.addName(IndustrialProcessing.itemCopperWashedChunks, "Washed copper Chunks");
-        LanguageRegistry.addName(IndustrialProcessing.itemTinWashedChunks, "Washed tin Chunks");
-        LanguageRegistry.addName(IndustrialProcessing.itemIronFineChunks, "Fine iron Chunks");
-        LanguageRegistry.addName(IndustrialProcessing.itemCopperFineChunks, "Fine copper Chunks");
-        LanguageRegistry.addName(IndustrialProcessing.itemTinFineChunks, "Fine tin Chunks");
-        LanguageRegistry.addName(IndustrialProcessing.itemIronOxideDust, "Iron oxide Dust");
-        LanguageRegistry.addName(IndustrialProcessing.itemCopperMineral, "Copper mineral");
-        LanguageRegistry.addName(IndustrialProcessing.itemTinOxideDust, "Tin oxide Dust");
-        LanguageRegistry.addName(IndustrialProcessing.itemIronMixedFragments, "Iron mixed fragments");
-        LanguageRegistry.addName(IndustrialProcessing.itemCopperMixedFragments, "Copper mixed fragments");
-        LanguageRegistry.addName(IndustrialProcessing.itemTinMixedFragments, "Tin mixed fragments");
-        LanguageRegistry.addName(IndustrialProcessing.itemSilicium, "Silicium");
-        LanguageRegistry.addName(IndustrialProcessing.itemZincDust, "zinc Dust");
-        LanguageRegistry.addName(IndustrialProcessing.itemCopperPurified, "Purified copper");
-        LanguageRegistry.addName(IndustrialProcessing.itemTinPurified, "Purified tin");
-        LanguageRegistry.addName(IndustrialProcessing.itemSulfur, "Sulfur");
+        LanguageRegistry.addName(ISetupItems.itemIronLargeChunks, "Large iron Chunks");
+        LanguageRegistry.addName(ISetupItems.itemCopperLargeChunks, "Large copper Chunks");
+        LanguageRegistry.addName(ISetupItems.itemTinLargeChunks, "Large tin Chunks");
+        LanguageRegistry.addName(ISetupItems.itemIronSmallChunks, "Small iron Chunks");
+        LanguageRegistry.addName(ISetupItems.itemCopperSmallChunks, "Small copper Chunks");
+        LanguageRegistry.addName(ISetupItems.itemTinSmallChunks, "Small tin Chunks");
+        LanguageRegistry.addName(ISetupItems.itemIronCrushedChunks, "Crushed iron Chunks");
+        LanguageRegistry.addName(ISetupItems.itemCopperCrushedChunks, "Crushed copper Chunks");
+        LanguageRegistry.addName(ISetupItems.itemTinCrushedChunks, "Crushed tin Chunks");
+        LanguageRegistry.addName(ISetupItems.itemIronWashedChunks, "Washed iron Chunks");
+        LanguageRegistry.addName(ISetupItems.itemCopperWashedChunks, "Washed copper Chunks");
+        LanguageRegistry.addName(ISetupItems.itemTinWashedChunks, "Washed tin Chunks");
+        LanguageRegistry.addName(ISetupItems.itemIronFineChunks, "Fine iron Chunks");
+        LanguageRegistry.addName(ISetupItems.itemCopperFineChunks, "Fine copper Chunks");
+        LanguageRegistry.addName(ISetupItems.itemTinFineChunks, "Fine tin Chunks");
+        LanguageRegistry.addName(ISetupItems.itemIronOxideDust, "Iron oxide Dust");
+        LanguageRegistry.addName(ISetupItems.itemCopperMineral, "Copper mineral");
+        LanguageRegistry.addName(ISetupItems.itemTinOxideDust, "Tin oxide Dust");
+        LanguageRegistry.addName(ISetupItems.itemIronMixedFragments, "Iron mixed fragments");
+        LanguageRegistry.addName(ISetupItems.itemCopperMixedFragments, "Copper mixed fragments");
+        LanguageRegistry.addName(ISetupItems.itemTinMixedFragments, "Tin mixed fragments");
+        LanguageRegistry.addName(ISetupItems.itemSilicium, "Silicium");
+        LanguageRegistry.addName(ISetupItems.itemZincDust, "zinc Dust");
+        LanguageRegistry.addName(ISetupItems.itemCopperPurified, "Purified copper");
+        LanguageRegistry.addName(ISetupItems.itemTinPurified, "Purified tin");
+        LanguageRegistry.addName(ISetupItems.itemSulfur, "Sulfur");
 
-        LanguageRegistry.addName(IndustrialProcessing.itemThickStick, "Thick stick");
-        LanguageRegistry.addName(IndustrialProcessing.itemHammer, "Hammer");
-        LanguageRegistry.addName(IndustrialProcessing.itemKnife, "Knife");
-        LanguageRegistry.addName(IndustrialProcessing.itemBlowingTorch, "Blow torch");
+        LanguageRegistry.addName(ISetupItems.itemThickStick, "Thick stick");
+        LanguageRegistry.addName(ISetupItems.itemHammer, "Hammer");
+        LanguageRegistry.addName(ISetupItems.itemKnife, "Knife");
+        LanguageRegistry.addName(ISetupItems.itemBlowingTorch, "Blow torch");
 
-        LanguageRegistry.addName(IndustrialProcessing.itemIronOxidePellets, "Iron pellets");
-        LanguageRegistry.addName(IndustrialProcessing.itemCalcareousSinterDust, "Calcareous sinter dust");
-        LanguageRegistry.addName(IndustrialProcessing.itemCokes, "Cokes");
-        LanguageRegistry.addName(IndustrialProcessing.itemSlag, "Slag");
+        LanguageRegistry.addName(ISetupItems.itemIronOxidePellets, "Iron pellets");
+        LanguageRegistry.addName(ISetupItems.itemCalcareousSinterDust, "Calcareous sinter dust");
+        LanguageRegistry.addName(ISetupItems.itemCokes, "Cokes");
+        LanguageRegistry.addName(ISetupItems.itemSlag, "Slag");
     }
 
     private ConfigItems() {

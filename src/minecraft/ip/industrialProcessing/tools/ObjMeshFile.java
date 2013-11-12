@@ -1,10 +1,5 @@
 package ip.industrialProcessing.tools;
 
-import ip.industrialProcessing.api.rendering.wavefront.ObjMesh;
-import ip.industrialProcessing.decoration.crystals.meshes.Crystal4;
-
-import org.lwjgl.util.vector.Matrix4f;
-
 public class ObjMeshFile {
 	public String title= "ObjMeshItem";
 	public String constructorBody = "";
@@ -14,7 +9,7 @@ public class ObjMeshFile {
 	public String toString() {
 
 		StringBuilder builder = new StringBuilder();
-		builder.append("package ip.industrialProcessing.transport.fluids.models.pump;\n\r");
+		builder.append("package ip.industrialProcessing.power.plants.models.boiler;\n\r");
 		builder.append("import ip.industrialProcessing.api.rendering.wavefront.ObjMesh;\n\r");
 		builder.append("import ip.industrialProcessing.api.rendering.wavefront.ObjQuad;\n\r");
 		builder.append("\n\r");

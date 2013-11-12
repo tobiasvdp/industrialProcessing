@@ -1,8 +1,8 @@
 package ip.industrialProcessing.items;
 
-import ic2.api.item.Items;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.client.render.gui.GuiTools;
+import ip.industrialProcessing.config.ISetupItems;
 
 import java.awt.Point;
 
@@ -26,11 +26,11 @@ public class GuideToolPage extends GuidePage {
 	@Override
 	public void drawScreen(int mouseX, int mouseY, int x, int y) {
 		int i = 0;
-		drawItemStack(new ItemStack(IndustrialProcessing.itemWrench), x + 10, ++i * 26 + 10 + y, "Used to rotate machines");
-		drawItemStack(new ItemStack(IndustrialProcessing.itemHexKey), x + 10, ++i * 26 + 10 + y, "Used to modify machines");
-		drawItemStack(new ItemStack(IndustrialProcessing.itemBlowingTorch), x + 10, ++i * 26 + 10 + y, "Used in the welding table");
-		drawItemStack(new ItemStack(IndustrialProcessing.itemHammer), x + 10, ++i * 26 + 10 + y, "Used to do stuff");
-		drawItemStack(new ItemStack(IndustrialProcessing.itemKnife), x + 10, ++i * 26 + 10 + y, "Used to carve rubber trees");
+		drawItemStack(new ItemStack(ISetupItems.itemWrench), x + 10, ++i * 26 + 10 + y, "Used to rotate machines");
+		drawItemStack(new ItemStack(ISetupItems.itemHexKey), x + 10, ++i * 26 + 10 + y, "Used to modify machines");
+		drawItemStack(new ItemStack(ISetupItems.itemBlowingTorch), x + 10, ++i * 26 + 10 + y, "Used in the welding table");
+		drawItemStack(new ItemStack(ISetupItems.itemHammer), x + 10, ++i * 26 + 10 + y, "Used to do stuff");
+		drawItemStack(new ItemStack(ISetupItems.itemKnife), x + 10, ++i * 26 + 10 + y, "Used to carve rubber trees");
 	}
 
 	private void drawItemStack(ItemStack stack, int x, int y, String description) {
@@ -47,7 +47,7 @@ public class GuideToolPage extends GuidePage {
 
 	@Override
 	public ItemStack getIconStack() {
-		return new ItemStack(IndustrialProcessing.itemWrench);
+		return new ItemStack(ISetupItems.itemWrench);
 	}
 
 }

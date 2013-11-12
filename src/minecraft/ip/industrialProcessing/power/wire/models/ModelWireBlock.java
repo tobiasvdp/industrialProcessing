@@ -37,8 +37,8 @@ public class ModelWireBlock extends ModelBlock {
 
         Vector3f position = new Vector3f(0, 0, 0);
         Icon icon = block.getIcon(0, 0);
-        capUp.renderMesh(true, icon, position);
-        capDown.renderMesh(true, icon, position);
+        capUp.renderMesh(icon);
+        capDown.renderMesh(icon);
 
         if (block instanceof BlockWireWood || block instanceof BlockWireStone) {
             Icon caseIcon;
@@ -83,7 +83,7 @@ public class ModelWireBlock extends ModelBlock {
                 GL11.glPopMatrix();
             }
         } else {
-            straightVertical.renderMesh(true, icon, position);
+            straightVertical.renderMesh(icon);
         }
     }
 

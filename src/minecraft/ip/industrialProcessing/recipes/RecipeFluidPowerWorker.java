@@ -23,6 +23,7 @@ public class RecipeFluidPowerWorker extends RecipeFluidWorker implements IRecipe
 		}
 	}
 
+	@Override
 	public int doWork(int amount, int powerLeft) {
 		int workToDo = 0;
 		int powerToUse = 0;

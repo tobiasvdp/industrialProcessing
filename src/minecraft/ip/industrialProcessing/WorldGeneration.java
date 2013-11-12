@@ -1,6 +1,5 @@
 package ip.industrialProcessing;
 
-import ip.industrialProcessing.config.ConfigBlocks;
 import ip.industrialProcessing.config.ISetupBlocks;
 import ip.industrialProcessing.decoration.trees.IndustrialTrees;
 import ip.industrialProcessing.decoration.trees.WorldGenIndustrialTree;
@@ -21,8 +20,7 @@ public class WorldGeneration implements IWorldGenerator {
     public WorldGeneration() {
         this.treeGenerators = new WorldGenIndustrialTree[IndustrialTrees.getTreeCount()];
         for (int i = 0; i < treeGenerators.length; i++) {
-            int block = i == 0 ? ConfigBlocks.getRubberLogID() : ConfigBlocks.getLogID();
-            this.treeGenerators[i] = new WorldGenIndustrialTree(block, ConfigBlocks.getLeavesID(), i);
+            this.treeGenerators[i] = WorldGenIndustrialTree.Create(i);
         }
     }
 
@@ -54,7 +52,7 @@ public class WorldGeneration implements IWorldGenerator {
             int max = 0;
 
             if (biome.isHighHumidity())
-                max+=2;
+                max += 2;
             if (biome.rainfall > 1)
                 max++;
             if (biome.canSpawnLightningBolt())
@@ -150,6 +148,7 @@ public class WorldGeneration implements IWorldGenerator {
                     default:
                         break;
                     }
+                    blockId = world.getBlockId(x, y, z);
                     if (blockId == 1 || blockId == 3 || blockId == 13) {
                         world.setBlock(x, y, z, oreID);
                     }

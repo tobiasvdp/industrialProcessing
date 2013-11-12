@@ -6,15 +6,10 @@ import ip.industrialProcessing.machines.animation.AnimationMode;
 import ip.industrialProcessing.machines.animation.IAnimationSyncable;
 import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 import ip.industrialProcessing.recipes.IRecipeFluidWorkHandler;
-import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeFluidWorker;
-import ip.industrialProcessing.recipes.RecipeWorker;
-import ip.industrialProcessing.utils.working.ClientWorker;
 import ip.industrialProcessing.utils.working.IWorker;
 import ip.industrialProcessing.utils.working.ServerWorker;
 import ip.industrialProcessing.utils.working.WorkUtils;
-
-import java.util.Iterator;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -91,7 +86,7 @@ public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachin
 	IWorker worker = getWorker();
 	float maxWork = worker.getTotalWork();
 	// each frame, workDone/maxWork % will be added to the animation
-	this.animationHandler.setSpeed(workDone / maxWork / this.animationHandler.DT);
+	this.animationHandler.setSpeed(workDone / maxWork / AnimationHandler.DT);
     }
 
     @Override
@@ -104,7 +99,8 @@ public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachin
 	return 1;
     }
 
-    public AnimationHandler getAnimationHandler() {
+    @Override
+	public AnimationHandler getAnimationHandler() {
 	return animationHandler;
     }
 

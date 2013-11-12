@@ -26,14 +26,12 @@ public abstract class ShapeRenderer {
 
 	protected abstract void drawShape(float par1);
 
-	public void render(float par1) { 
-		drawShape(par1);
-		/*
+	public void render(float par1) {  
+		
 		if (!compiled) {
 			compileDisplayList(par1);
 		}
 
 		GL11.glCallList(this.displayList);
-		*/
 	}
 }

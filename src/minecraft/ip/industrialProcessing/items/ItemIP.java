@@ -1,6 +1,7 @@
 package ip.industrialProcessing.items;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.INamepace;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
@@ -11,7 +12,7 @@ public class ItemIP extends Item {
 		setMaxStackSize(64);
 		setCreativeTab(tab);
 		setUnlocalizedName(name);
-		func_111206_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + name);
+		func_111206_d(INamepace.TEXTURE_NAME_PREFIX + name);
 	}
 
 }

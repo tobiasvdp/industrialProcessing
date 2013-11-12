@@ -8,9 +8,12 @@ import ip.industrialProcessing.config.ConfigBlocks;
 
 public class IndustrialTrees {
 
-    private static String[] names = new String[] { "Rubber" };
-    private static String[] textures = new String[] { "rubber" };
-    private static int[] colors = new int[] { 0xff0000, 0x4e6904 };
+    private static String[] names = new String[] { "Rubber", "Pine" };
+    private static String[] textures = new String[] { "rubber", "pine" };
+    private static int[] colors = new int[] { 0xffffff, 0x4e6904 };
+    private static float[] slopes = new float[] { 1.5f, 2.5f };
+    private static int[] minHeight = new int[] { 3, 5 };
+    private static int[] maxHeight = new int[] { 8, 15 };
 
     public static String getName(int index) {
         index %= names.length;
@@ -53,5 +56,20 @@ public class IndustrialTrees {
     public static String getLeavesTexture(int index, boolean opaque) {
         index %= textures.length;
         return IndustrialProcessing.TEXTURE_NAME_PREFIX + textures[index] + "_leaves" + (opaque ? "_opaque" : "");
+    }
+
+    public static float getSlope(int meta) {
+        meta %= textures.length;
+        return slopes[meta];
+    }
+
+    public static int getMinHeight(int meta) {
+        meta %= textures.length;
+        return minHeight[meta];
+    }
+
+    public static int getMaxHeight(int meta) {
+        meta %= textures.length;
+        return maxHeight[meta];
     }
 }

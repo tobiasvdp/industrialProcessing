@@ -1,5 +1,7 @@
 package ip.industrialProcessing.transport.fluids;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.Entity;
@@ -20,7 +22,14 @@ public class ModelTransportFluids extends ModelConnectedFluid {
 
 	@Override
 	public void renderModelConnectedFluid(TileEntity tl, float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, Icon icon) {
-		fluidPercentage *= 0.9f;
+		fluidPercentage *= 0.9f; 
+		Tessellator tessellator = Tessellator.instance;
+        tessellator.startDrawingQuads();
+        int lightLevel = tl.blockType.getMixedBrightnessForBlock(tl.worldObj, tl.xCoord, tl.yCoord, tl.zCoord);
+        tessellator.setBrightness(lightLevel); 
+        tessellator.setColorOpaque(255, 255, 255);  
+        GL11.glEnable(GL11.GL_BLEND); 
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		boolean renderCap = (up != ConnectionState.DISCONNECTED) != (down != ConnectionState.DISCONNECTED) || (west != ConnectionState.DISCONNECTED) != (east != ConnectionState.DISCONNECTED) || (south != ConnectionState.DISCONNECTED) != (north != ConnectionState.DISCONNECTED) || (north == south && south == east && east == west && west == up && up == down && down == ConnectionState.DISCONNECTED);
 		if (up != ConnectionState.DISCONNECTED && down != ConnectionState.DISCONNECTED)
 			renderStraightY(f, icon, fluidPercentage);
@@ -50,6 +59,9 @@ public class ModelTransportFluids extends ModelConnectedFluid {
 		if (renderCap) {
 			renderCap(f, icon, fluidPercentage);
 		}
+		tessellator.draw();
+ 
+		GL11.glDisable(GL11.GL_BLEND);
 	}
 
 	private void renderUp(float f, Icon icon, float s) {
@@ -163,12 +175,14 @@ public class ModelTransportFluids extends ModelConnectedFluid {
 		float uCorrect = uSize * uW / 16;
 		float vCorrect = vSize * vH / 16;
 
-		tessellator.startDrawingQuads();
+		int sign = (int)Math.signum(width * height);		
+        tessellator.setNormal(0, -sign, 0);
+        
 		tessellator.addVertexWithUV((double) (x + 0) * f, (double) y * f, (double) (z + 0) * f, (double) icon.getMinU() + uCorrect, (double) icon.getMinV() + vCorrect);
 		tessellator.addVertexWithUV((double) (x + width) * f, (double) y * f, (double) (z + 0) * f, (double) icon.getMaxU() - uCorrect, (double) icon.getMinV() + vCorrect);
 		tessellator.addVertexWithUV((double) (x + width) * f, (double) y * f, (double) (z + height) * f, (double) icon.getMaxU() - uCorrect, (double) icon.getMaxV() - vCorrect);
 		tessellator.addVertexWithUV((double) (x + 0) * f, (double) y * f, (double) (z + height) * f, (double) icon.getMinU() + uCorrect, (double) icon.getMaxV() - vCorrect);
-		tessellator.draw();
+		
 	}
 
 	private void drawZPlane(float f, float x, float y, float z, float width, float height, Icon icon) {
@@ -182,12 +196,14 @@ public class ModelTransportFluids extends ModelConnectedFluid {
 		float uCorrect = uSize * uW / 16;
 		float vCorrect = vSize * vH / 16;
 
-		tessellator.startDrawingQuads();
+        int sign = (int)Math.signum(width * height);
+        tessellator.setNormal(0, 0, -sign);
+        
 		tessellator.addVertexWithUV((double) (x + 0) * f, (double) y * f, (double) (z + 0) * f, (double) icon.getMinU() + uCorrect, (double) icon.getMinV() + vCorrect);
 		tessellator.addVertexWithUV((double) (x + width) * f, (double) y * f, (double) (z + 0) * f, (double) icon.getMaxU() - uCorrect, (double) icon.getMinV() + vCorrect);
 		tessellator.addVertexWithUV((double) (x + width) * f, (double) (y + height) * f, (double) (z + 0) * f, (double) icon.getMaxU() - uCorrect, (double) icon.getMaxV() - vCorrect);
 		tessellator.addVertexWithUV((double) (x + 0) * f, (double) (y + height) * f, (double) (z + 0) * f, (double) icon.getMinU() + uCorrect, (double) icon.getMaxV() - vCorrect);
-		tessellator.draw();
+		
 	}
 
 	private void drawXPlane(float f, float x, float y, float z, float width, float height, Icon icon) {
@@ -201,11 +217,13 @@ public class ModelTransportFluids extends ModelConnectedFluid {
 		float uCorrect = uSize * uW / 16;
 		float vCorrect = vSize * vH / 16;
 
-		tessellator.startDrawingQuads();
+        int sign = (int)Math.signum(width * height);        
+		tessellator.setNormal(-sign, 0, 0);
+		
 		tessellator.addVertexWithUV((double) (x + 0) * f, (double) y * f, (double) (z + 0) * f, (double) icon.getMinU() + uCorrect, (double) icon.getMinV() + vCorrect);
 		tessellator.addVertexWithUV((double) (x + 0) * f, (double) y * f, (double) (z + width) * f, (double) icon.getMaxU() - uCorrect, (double) icon.getMinV() + vCorrect);
 		tessellator.addVertexWithUV((double) (x + 0) * f, (double) (y + height) * f, (double) (z + width) * f, (double) icon.getMaxU() - uCorrect, (double) icon.getMaxV() - vCorrect);
 		tessellator.addVertexWithUV((double) (x + 0) * f, (double) (y + height) * f, (double) (z + 0) * f, (double) icon.getMinU() + uCorrect, (double) icon.getMaxV() - vCorrect);
-		tessellator.draw();
+	 
 	}
 }

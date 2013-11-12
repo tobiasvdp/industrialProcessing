@@ -149,25 +149,25 @@ public class ModelPlatform extends ModelBlock {
 		// tessellator.setColorOpaque(255, 255, 255);
 		Icon icon = block.getIcon(0, 0);
 		Vector3f position = new Vector3f(0, 0, 0);
-		meshCenter.renderMesh(true, icon, position);
-		meshUnconnectedSouth.renderMesh(true, icon, position);
-		meshUnconnectedEast.renderMesh(true, icon, position);
-		meshUnconnectedNorth.renderMesh(true, icon, position);
-		meshUnconnectedWest.renderMesh(true, icon, position);
-		meshHandRailStraightEast.renderMesh(true, icon, position);
-		meshHandRailStraightWest.renderMesh(true, icon, position);
-		meshHandRailStraightNorth.renderMesh(true, icon, position);
-		meshHandRailStraightSouth.renderMesh(true, icon, position);
-		meshHandRailCornerOutsideNorthEast.renderMesh(true, icon, position);
-		meshHandRailCornerOutsideNorthWest.renderMesh(true, icon, position);
-		meshHandRailCornerOutsideSouthEast.renderMesh(true, icon, position);
-		meshHandRailCornerOutsideSouthWest.renderMesh(true, icon, position);
+		meshCenter.renderMesh(icon);
+		meshUnconnectedSouth.renderMesh(icon);
+		meshUnconnectedEast.renderMesh(icon);
+		meshUnconnectedNorth.renderMesh(icon);
+		meshUnconnectedWest.renderMesh(icon);
+		meshHandRailStraightEast.renderMesh(icon);
+		meshHandRailStraightWest.renderMesh(icon);
+		meshHandRailStraightNorth.renderMesh(icon);
+		meshHandRailStraightSouth.renderMesh(icon);
+		meshHandRailCornerOutsideNorthEast.renderMesh(icon);
+		meshHandRailCornerOutsideNorthWest.renderMesh(icon);
+		meshHandRailCornerOutsideSouthEast.renderMesh(icon);
+		meshHandRailCornerOutsideSouthWest.renderMesh(icon);
 
-		meshCornerOutsideNorthEast.renderMesh(true, icon, position);
-		meshCornerOutsideNorthWest.renderMesh(true, icon, position);
+		meshCornerOutsideNorthEast.renderMesh(icon);
+		meshCornerOutsideNorthWest.renderMesh(icon);
 
-		meshCornerOutsideSouthEast.renderMesh(true, icon, position);
-		meshCornerOutsideSouthWest.renderMesh(true, icon, position);
+		meshCornerOutsideSouthEast.renderMesh(icon);
+		meshCornerOutsideSouthWest.renderMesh(icon);
 	}
 
 	@Override

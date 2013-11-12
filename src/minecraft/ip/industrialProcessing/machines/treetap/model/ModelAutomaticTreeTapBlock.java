@@ -23,8 +23,8 @@ public class ModelAutomaticTreeTapBlock extends ModelBlock {
         Icon icon = block.getIcon(0, 0);
         Icon icon2 = block.getIcon(1, 0);
         Vector3f position = new Vector3f(0, 0, 0);
-        tap.getRotated(0).renderMesh(true, icon, position);
-        tank.getRotated(0).renderMesh(true, icon2, position);
+        tap.getRotated(0).renderMesh(icon);
+        tank.getRotated(0).renderMesh(icon2);
     }
 
     @Override
@@ -37,8 +37,8 @@ public class ModelAutomaticTreeTapBlock extends ModelBlock {
         TileEntity entity = reference.getBlockTileEntity();
         int dir = BlockMachine.getMetadataFromForward(BlockMachine.getForwardFromEntity(entity));
 
-        tap.getRotated(2-dir).renderMesh(false, icon, reference);
-        tank.getRotated(2-dir).renderMesh(false, icon2, reference);
+        tap.getRotated(2 - dir).renderMesh(false, icon, reference);
+        tank.getRotated(2 - dir).renderMesh(false, icon2, reference);
         return true;
     }
 }

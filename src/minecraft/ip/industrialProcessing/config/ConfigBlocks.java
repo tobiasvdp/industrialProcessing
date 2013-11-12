@@ -3,6 +3,8 @@ package ip.industrialProcessing.config;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.config.ConfigCategories;
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemBlockWithMetadata;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -32,17 +34,18 @@ public class ConfigBlocks {
     private int blockLeavesID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "TreeLeavesID", 2005).getInt();
     private int blockSaplingID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "TreeSaplingID", 2006).getInt();
     private int blockRubberLogID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "RubberTreeLogID", 2007).getInt();
-    
     private int blockMachineBlockID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "blockMachineBlockID", 2008).getInt();
+
+    private int blockPineLogID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "PineTreeLogID", 2009).getInt();
 
     public static int blockMachineBlock() {
         return getInstance().blockMachineBlockID;
     }
-    
+
     public static int blockAsphalt() {
         return getInstance().blockAsphaltID;
     }
-    
+
     public static int blockGrit() {
         return getInstance().blockGritID;
     }
@@ -107,6 +110,10 @@ public class ConfigBlocks {
         return getInstance().blockRubberLogID;
     }
 
+    public static int getPineLogID() {
+        return getInstance().blockPineLogID;
+    }
+
     public static int getSaplingID() {
         return getInstance().blockSaplingID;
     }
@@ -116,30 +123,31 @@ public class ConfigBlocks {
     }
 
     public void registerOres() {
-        registerOre(IndustrialProcessing.blockCopperOre, "IP.World.CopperOre", "Copper Ore", "copper");
-        registerOre(IndustrialProcessing.blockTinOre, "IP.World.TinOre", "Tin Ore", "tin");
-        registerOre(IndustrialProcessing.blockGalenaOre, "IP.World.GalenaOre", "Galena Ore", "silver");
-        OreDictionary.registerOre("galena", IndustrialProcessing.blockGalenaOre);
-        registerOre(IndustrialProcessing.blockRutileOre, "IP.World.RutileOre", "Rutile Ore", "rutile");
-        registerOre(IndustrialProcessing.blockChromiteOre, "IP.World.ChromiteOre", "Chromite Ore", "chromite");
-        registerOre(IndustrialProcessing.blockCinnebarOre, "IP.World.CinnebarOre", "Cinnebar Ore", "cinnebar");
-        registerOre(IndustrialProcessing.blockTaliaOre, "IP.World.TaliaOre", "Thallium Ore", "talia");
-        registerBlock(IndustrialProcessing.blockIronFlat, "IP.Block.IronFlat", "Flat Iron block");
+        registerOre(ISetupBlocks.blockCopperOre, "IP.World.CopperOre", "Copper Ore", "copper");
+        registerOre(ISetupBlocks.blockTinOre, "IP.World.TinOre", "Tin Ore", "tin");
+        registerOre(ISetupBlocks.blockGalenaOre, "IP.World.GalenaOre", "Galena Ore", "silver");
+        OreDictionary.registerOre("galena", ISetupBlocks.blockGalenaOre);
+        registerOre(ISetupBlocks.blockRutileOre, "IP.World.RutileOre", "Rutile Ore", "rutile");
+        registerOre(ISetupBlocks.blockChromiteOre, "IP.World.ChromiteOre", "Chromite Ore", "chromite");
+        registerOre(ISetupBlocks.blockCinnebarOre, "IP.World.CinnebarOre", "Cinnebar Ore", "cinnebar");
+        registerOre(ISetupBlocks.blockTaliaOre, "IP.World.TaliaOre", "Thallium Ore", "talia");
+        registerBlock(ISetupBlocks.blockIronFlat, "IP.Block.IronFlat", "Flat Iron block");
 
-        registerBlock(IndustrialProcessing.blockPlatform, "IP.Block.Platform", "Walkway");
-        registerBlock(IndustrialProcessing.blockGrit, "IP.Block.Grit", "Grit");
-        registerBlock(IndustrialProcessing.blockAsphalt, "IP.Block.Asphalt", "Asphalt");
-        registerBlock(IndustrialProcessing.blockStairs, "IP.Block.Stairs", "Walkway Stairs");
+        registerBlock(ISetupBlocks.blockPlatform, "IP.Block.Platform", "Walkway");
+        registerBlock(ISetupBlocks.blockGrit, "IP.Block.Grit", "Grit");
+        registerBlock(ISetupBlocks.blockAsphalt, "IP.Block.Asphalt", "Asphalt");
+        registerBlock(ISetupBlocks.blockStairs, "IP.Block.Stairs", "Walkway Stairs");
 
-        registerBlock(IndustrialProcessing.blockCinnebar, "IP.World.Cinnebar", "Cinnebar Crystal");
-        registerBlock(IndustrialProcessing.blockRutile, "IP.World.Rutile", "Rutile Crystal");
+        registerBlock(ISetupBlocks.blockCinnebar, "IP.World.Cinnebar", "Cinnebar Crystal");
+        registerBlock(ISetupBlocks.blockRutile, "IP.World.Rutile", "Rutile Crystal");
 
-        registerBlock(IndustrialProcessing.blockLeaves, "IP.World.Tree.Leaves", "Leaves");
-        registerBlock(IndustrialProcessing.blockLog, "IP.World.Tree.Log", "Log");
-        registerBlock(IndustrialProcessing.blockRubberLog, "IP.World.Tree.Log.Rubber", "Rubber Log");
-        registerBlock(IndustrialProcessing.blockSapling, "IP.World.Tree.Sapling", "Sapling");
-        
-        registerBlock(IndustrialProcessing.blockMachineBlock, "IP.Block.MachineB", "Machine block");
+        registerBlock(ISetupBlocks.blockLeaves, ItemBlockWithMetadata.class, "IP.World.Tree.Leaves", "Leaves");
+        registerBlock(ISetupBlocks.blockLog, ItemBlockWithMetadata.class, "IP.World.Tree.Log", "Log");
+        registerBlock(ISetupBlocks.blockRubberLog, "IP.World.Tree.Log.Rubber", "Rubber Log");
+        registerBlock(ISetupBlocks.blockPineLog, "IP.World.Tree.Log.Pine", "Pine Log");
+        registerBlock(ISetupBlocks.blockSapling, ItemBlockWithMetadata.class, "IP.World.Tree.Sapling", "Sapling");
+
+        registerBlock(ISetupBlocks.blockMachineBlock, "IP.Block.MachineB", "Machine block");
     }
 
     private void registerOre(Block block, String uniqueId, String displayName, String oreDictionaryKey) {
@@ -155,11 +163,16 @@ public class ConfigBlocks {
         LanguageRegistry.addName(block, displayName);
     }
 
+    private void registerBlock(Block block, Class<? extends ItemBlock> itemBlock, String uniqueId, String displayName) {
+        GameRegistry.registerBlock(block, itemBlock, uniqueId);
+        MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
+        LanguageRegistry.addName(block, displayName);
+    }
+
     private static ConfigBlocks instance = new ConfigBlocks();
 
     public static ConfigBlocks getInstance() {
         return instance;
     }
-
 
 }

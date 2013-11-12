@@ -7,7 +7,6 @@ import ip.industrialProcessing.machines.animation.IAnimationSyncable;
 import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 import ip.industrialProcessing.recipes.IRecipeWorkHandler;
 import ip.industrialProcessing.recipes.RecipeWorker;
-import ip.industrialProcessing.utils.working.ClientWorker;
 import ip.industrialProcessing.utils.working.IWorkHandler;
 import ip.industrialProcessing.utils.working.IWorker;
 import ip.industrialProcessing.utils.working.IWorkingEntity;
@@ -34,7 +33,8 @@ public abstract class TileEntityWorkerMachine extends TileEntityMachine implemen
     protected ServerWorker worker;
     protected AnimationHandler animationHandler;
 
-    public IWorker getWorker() {
+    @Override
+	public IWorker getWorker() {
 	return worker;
     }
 
@@ -88,7 +88,7 @@ public abstract class TileEntityWorkerMachine extends TileEntityMachine implemen
 	IWorker worker = getWorker();
 	float maxWork = worker.getTotalWork();
 	// each frame, workDone/maxWork % will be added to the animation
-	this.animationHandler.setSpeed(workDone / maxWork / this.animationHandler.DT);
+	this.animationHandler.setSpeed(workDone / maxWork / AnimationHandler.DT);
     }
 
     @Override
@@ -101,7 +101,8 @@ public abstract class TileEntityWorkerMachine extends TileEntityMachine implemen
 	return 1;
     }
 
-    public AnimationHandler getAnimationHandler() {
+    @Override
+	public AnimationHandler getAnimationHandler() {
 	return animationHandler;
     }
 

@@ -24,8 +24,8 @@ public class ModelGenerator extends ModelAnimatedMachine {
         GL11.glTranslatef(0, 1, 0);
         GL11.glRotatef(angle * 360, 1, 0, 0);
         Icon icon = getIcon(0);
-        axle.renderMesh(true, icon, position);
-        axleRing.renderMesh(true, icon, position);
+        axle.renderMesh(icon);
+        axleRing.renderMesh(icon);
         GL11.glPopMatrix();
     }
 

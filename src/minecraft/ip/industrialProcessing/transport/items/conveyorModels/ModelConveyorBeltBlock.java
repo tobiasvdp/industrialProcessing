@@ -36,7 +36,7 @@ public class ModelConveyorBeltBlock extends ModelBlock {
 	Vector3f position = new Vector3f(0, 0, 0);
 	Icon icon = block.getIcon(0, 0);
 
-	straight.getRotated(0).renderMesh(true, icon, position);
+	straight.getRotated(0).renderMesh(icon);
     }
 
     @Override

@@ -88,12 +88,8 @@ public class BlockIndustrialSapling extends BlockSapling {
         if (!TerrainGen.saplingGrowTree(par1World, par5Random, par2, par3, par4))
             return;
 
-        int meta = par1World.getBlockMetadata(par2, par3, par4);
-        int block = ConfigBlocks.getLogID();
-        if (meta == 0) {
-            block = ConfigBlocks.getRubberLogID();
-        }
-        WorldGenIndustrialTree tree = new WorldGenIndustrialTree(block, ConfigBlocks.getLeavesID(), meta);
+        int meta = par1World.getBlockMetadata(par2, par3, par4); 
+        WorldGenIndustrialTree tree =  WorldGenIndustrialTree.Create(meta);
         tree.generate(par1World, par5Random, par2, par3, par4);
     }
 

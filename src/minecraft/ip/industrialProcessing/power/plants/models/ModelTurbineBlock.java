@@ -25,8 +25,8 @@ public class ModelTurbineBlock extends ModelBlock {
         Icon iconFeatures = block.getIcon(0, 0);
         Icon iconHull = block.getIcon(1, 0);
 
-        features.getRotated(dir).renderMesh(true, iconFeatures, position);
-        hull.getRotated(dir).renderMesh(true, iconHull, position);
+        features.getRotated(dir).renderMesh(iconFeatures);
+        hull.getRotated(dir).renderMesh(iconHull);
     }
 
     @Override

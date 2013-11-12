@@ -43,26 +43,30 @@ public class WorldReference {
         for (int x = -1; x <= 1; x++) {
             for (int y = -1; y <= 1; y++) {
                 for (int z = -1; z <= 1; z++) {
-                    this.neighborBrightness[x + 1][y + 1][z + 1] = getBrightness(x, y, z, baseBrightness);
+
+                    this.neighborBrightness[x + 1][y + 1][z + 1] = searchBrightness(x, y, z, baseBrightness);
                 }
             }
         }
     }
 
-    protected int getBrightness(int dx, int dy, int dz, int baseBrightness) {
-        Block other = block;
-        // dy += 1;
-        if (dx != 0 || dy != 0 || dz != 0) {
-            int id = world.getBlockId(x + dx, y + dy, z + dz);
-            other = Block.blocksList[id];
-            if (other == null)
+    protected int searchBrightness(int dx, int dy, int dz, int baseBrightness) {
+        if (Minecraft.isAmbientOcclusionEnabled()) {
+            Block other = block;
+            // dy += 1;
+            if (dx != 0 || dy != 0 || dz != 0) {
+                int id = world.getBlockId(x + dx, y + dy, z + dz);
+                other = Block.blocksList[id];
+                if (other == null)
+                    return baseBrightness;
+            } else
                 return baseBrightness;
+            return getBrightness(world, x + dx, y + dy, z + dz, other);
         } else
             return baseBrightness;
-        return getBrightness(world, x + dx, y + dy, z + dz, other);
     }
 
-    public int getBrightness(Vector3f position, Vector3f normal) {
+    public int calculateBrightness(Vector3f position, Vector3f normal) {
         if (Minecraft.isAmbientOcclusionEnabled()) {
             normal.normalise();
             float dx = position.x + normal.x / 4f;

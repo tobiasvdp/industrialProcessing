@@ -28,7 +28,6 @@ public abstract class TElogicTransport extends TileEntity implements ICommunicat
 			if (!ContainsThis(((ArrayList<ICommunicationTransport>)packet.getData(1)))){
 				((ArrayList<ICommunicationTransport>)packet.getData(1)).add(this);
 				ForgeDirection receivingside = ((ForgeDirection)packet.getData(0));
-				System.out.println("Packet recieved on " + xCoord +" "+ yCoord +" "+ zCoord + " " +receivingside);
 				for(ForgeDirection dir:ForgeDirection.VALID_DIRECTIONS){
 					if(dir != receivingside){
 						packet.setData(0, dir);
@@ -57,14 +56,16 @@ public abstract class TElogicTransport extends TileEntity implements ICommunicat
 				TileEntity te = worldObj.getBlockTileEntity(xCoord + sendingSide.offsetX, yCoord + sendingSide.offsetY, zCoord + sendingSide.offsetZ);
 				if (te instanceof ICommunication) {
 					ICommunication com = (ICommunication) te;
-					System.out.println("relay packet to "+te.xCoord + " " + te.yCoord + " " + te.zCoord + "on side "+sendingSide);
 					packet.setData(0, sendingSide.getOpposite());
 					com.Receive(packet);
 				}
 			}
+			ExtendedSend(packet);
 		}
 		packets.clear();
 	}
+	@Override
+	public void ExtendedSend(UTpacket packet){}
 
 	@Override
 	public UTBusType getBusType(ForgeDirection side) {

@@ -32,7 +32,7 @@ public class BlockManoMeter extends BlockMachineRendered {
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess par1iBlockAccess, int par2, int par3, int par4) {
 		ForgeDirection direction = BlockMachine.getForwardFromEntity(par1iBlockAccess.getBlockTileEntity(par2, par3, par4));
-
+		
 		if (direction.ordinal() < 2)
 			setBlockBounds(0, 0, 0, 1, 1, 1);
 		else if (direction.ordinal() < 4)

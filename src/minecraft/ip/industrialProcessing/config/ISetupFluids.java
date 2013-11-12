@@ -1,6 +1,5 @@
 package ip.industrialProcessing.config;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.fluids.BlockFluid;
 import ip.industrialProcessing.fluids.ContainerFluid;
 import ip.industrialProcessing.fluids.ItemFluid;

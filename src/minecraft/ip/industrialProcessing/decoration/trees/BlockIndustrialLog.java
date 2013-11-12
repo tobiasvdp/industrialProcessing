@@ -72,7 +72,7 @@ public class BlockIndustrialLog extends BlockLog {
     public boolean isFlammable(IBlockAccess world, int x, int y, int z, int metadata, ForgeDirection face) {
         return true;
     }
-    
+
     @Override
     public int idDropped(int par1, Random par2Random, int par3) {
         return this.blockID;
