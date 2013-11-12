@@ -16,7 +16,7 @@ public class ConfigBaseRecipes {
 	public void addBaseRecipes() {
 		GameRegistry.addShapelessRecipe(new ItemStack(IndustrialProcessing.itemThickStick), new ItemStack(Item.stick), new ItemStack(Item.stick));
 		GameRegistry.addShapelessRecipe(new ItemStack(IndustrialProcessing.itemElectroMagnet), new ItemStack(IndustrialProcessing.itemIronBar), new ItemStack(IndustrialProcessing.itemCopperCoil));
-		GameRegistry.addShapelessRecipe(new ItemStack(IndustrialProcessing.itemCopperWireInsulated), new ItemStack(IndustrialProcessing.bucketFluidLatex,1,WILDCARD_VALUE), new ItemStack(IndustrialProcessing.itemCopperWire));
+		GameRegistry.addShapelessRecipe(new ItemStack(IndustrialProcessing.itemCopperWireInsulated), new ItemStack(IndustrialProcessing.bucketResin,1,WILDCARD_VALUE), new ItemStack(IndustrialProcessing.itemCopperWire));
 		GameRegistry.addShapelessRecipe(new ItemStack(IndustrialProcessing.itemCopperWire), new ItemStack(IndustrialProcessing.itemCopperIngot), new ItemStack(IndustrialProcessing.itemDrawPlate,1,WILDCARD_VALUE));
 		GameRegistry.addShapelessRecipe(new ItemStack(IndustrialProcessing.itemActiveCoal), new ItemStack(IndustrialProcessing.itemCoalDust), new ItemStack(IndustrialProcessing.itemGrownCulture));
 		GameRegistry.addRecipe(new ItemStack(IndustrialProcessing.itemHammer), "   ", " y ", "x  ", 'x',new ItemStack(IndustrialProcessing.itemThickStick), 'y', new ItemStack(Item.ingotIron));
