@@ -84,7 +84,7 @@ public class ConfigLogic {
 		GameRegistry.registerBlock(block, uniqueId);
 		MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
 		LanguageRegistry.addName(block, displayName);
-		ModLoader.registerTileEntity(tileEntity, uniqueId);
+		GameRegistry.registerTileEntity(tileEntity, uniqueId);
 	}
 	
 	public static ConfigLogic getInstance() {

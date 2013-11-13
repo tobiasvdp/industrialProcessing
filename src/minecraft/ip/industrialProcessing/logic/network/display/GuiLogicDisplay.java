@@ -21,7 +21,9 @@ public class GuiLogicDisplay extends GuiScreen {
 	UTlogicNodeContainer container = entity.getConnectionsOnSide(ForgeDirection.NORTH);
 	System.out.println("Printout");
 	for(ICommunicationNode node:container.iterate()){
+		System.out.println(node);
 	}
+	
     }
 
     @Override
