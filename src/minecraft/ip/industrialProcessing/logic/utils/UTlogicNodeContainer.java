@@ -16,7 +16,8 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class UTlogicNodeContainer {
 	private ArrayList<ICommunicationNode> nodes = new ArrayList<ICommunicationNode>();
-	private int[][] temp;
+	private int[][] listLocation;
+	private int[] listSides;
 	boolean isListLoaded = false;
 	private ArrayList<ForgeDirection> sides = new ArrayList<ForgeDirection>();
 	private TileEntity te;
@@ -47,21 +48,25 @@ public class UTlogicNodeContainer {
 		if (nodes.size() == 0)
 			return null;
 		NBTTagList list = new NBTTagList();
-		int i = 0;
-		for (ICommunicationNode node : nodes) {
-			TileEntity te = ((TileEntity) node);
+		for (int i =0;i< nodes.size();i++) {
+			TileEntity te = ((TileEntity) nodes.get(i));
 			NBTTagCompound compound = new NBTTagCompound();
-			compound.setIntArray("node" + i++, new int[] { te.xCoord, te.yCoord, te.zCoord });
+			compound.setIntArray("loc" + i, new int[] { te.xCoord, te.yCoord, te.zCoord });
+			ForgeDirection dir = sides.get(i);
+			compound.setInteger("side"+i, dir.ordinal());
 			list.appendTag(compound);
+			
 		}
 		return list;
 	}
 
 	public void readFromNBT(NBTTagList nbtTagList) {
-		temp = new int[nbtTagList.tagCount()][3];
+		listLocation = new int[nbtTagList.tagCount()][3];
+		listSides = new int[nbtTagList.tagCount()];
 		for (int i = 0; i < nbtTagList.tagCount(); i++) {
 			NBTTagCompound compound = (NBTTagCompound) nbtTagList.tagAt(i);
-			temp[i] = compound.getIntArray("node" + i);
+			listLocation[i] = compound.getIntArray("loc" + i);
+			listSides[i] = compound.getInteger("side"+i);
 		}
 		isListLoaded = false;
 	}
@@ -103,15 +108,19 @@ public class UTlogicNodeContainer {
 	}
 
 	private void loadList() {
-		if (temp != null) {
+		if (listLocation != null) {
 			this.nodes = new ArrayList<ICommunicationNode>();
+			this.sides = new ArrayList<ForgeDirection>();
 			World world = te.worldObj;
-			for (int[] data : temp) {
-				TileEntity te = world.getBlockTileEntity(data[0], data[1], data[2]);
+			for (int i =0;i<nodes.size();i++) {
+				TileEntity te = world.getBlockTileEntity(listLocation[i][0], listLocation[i][1], listLocation[i][2]);
 				if (te instanceof ICommunicationNode)
 					this.add((ICommunicationNode) te);
+				ForgeDirection dir = ForgeDirection.values()[listSides[i]];
+				addSide(dir);
 			}
-			temp = new int[1][3];
+			listLocation = null;
+			listSides = null;
 			isListLoaded = true;
 		}
 	}
