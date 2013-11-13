@@ -54,10 +54,6 @@ public abstract class blockLogic extends BlockMachineRendered{
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float clickX, float clickY, float clickZ) {
 		ICommunicationNode com = (ICommunicationNode) world.getBlockTileEntity(x, y, z);
-		if(((UTVariable)com.getBuffer(ForgeDirection.NORTH).get(0)).value != null && ((Boolean)((UTVariable)com.getBuffer(ForgeDirection.NORTH).get(0)).value) == false)
-			com.createDataPacket(ForgeDirection.NORTH, new UTVariable(0,UTVariableType.bit,true));
-		else
-			com.createDataPacket(ForgeDirection.NORTH, new UTVariable(0,UTVariableType.bit,false));
 		return super.onBlockActivated(world, x, y, z, player, metadata, clickX, clickY, clickZ);
 	}
 

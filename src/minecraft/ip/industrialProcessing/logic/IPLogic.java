@@ -1,5 +1,6 @@
 package ip.industrialProcessing.logic;
 
+import ip.industrialProcessing.logic.GuiHandler;
 import ip.industrialProcessing.api.utils.CreativeTabsIP;
 import ip.industrialProcessing.logic.config.ConfigLogic;
 import ip.industrialProcessing.logic.config.ISetupLogic;
@@ -12,6 +13,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 
 @Mod(modid = "IPLogic",name = "Industrial Processing Logic", version = "0.0.1", dependencies = "required-after:IndustrialProcessing")
 public class IPLogic implements ISetupLogic{
@@ -37,6 +39,9 @@ public class IPLogic implements ISetupLogic{
 		ConfigLogic.getInstance().register();
 		proxy.registerRenderers();
 		config.save();
+		
+		 // register the gui handler
+	        NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
 	}
 	
 	@EventHandler

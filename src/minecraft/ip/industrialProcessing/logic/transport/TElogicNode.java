@@ -21,7 +21,7 @@ public abstract class TElogicNode extends TileEntitySynced implements ICommunica
     private ForgeDirection orientationSide;
     private ForgeDirection orientationRotation;
 
-    private UTlogicNodeContainer[] nodeCollection = new UTlogicNodeContainer[6];
+    protected UTlogicNodeContainer[] nodeCollection = new UTlogicNodeContainer[6];
     protected UTBuffer[] buffer = new UTBuffer[6];
     private ForgeDirection[] conectableInputSides;
     private ForgeDirection[] conectableOutputSides;

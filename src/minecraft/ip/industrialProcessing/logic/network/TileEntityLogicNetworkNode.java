@@ -5,6 +5,7 @@ import ip.industrialProcessing.logic.transport.ICommunicationNode;
 import ip.industrialProcessing.logic.transport.TElogicNode;
 import ip.industrialProcessing.logic.utils.UTVariable;
 import ip.industrialProcessing.logic.utils.UTVariableType;
+import ip.industrialProcessing.logic.utils.UTlogicNodeContainer;
 import ip.industrialProcessing.logic.utils.UTpacket;
 import ip.industrialProcessing.logic.utils.UTpacketType;
 
@@ -14,22 +15,20 @@ public abstract class TileEntityLogicNetworkNode extends TElogicNode implements 
     public void ExtendedReceive(UTpacket packet) {
 	super.ExtendedReceive(packet);
 	if (packet.getType() == UTpacketType.deliver) {
-	    UTVariable[] data = new UTVariable[packet.lenght() - 1];
-	    for (int i = 1; i < packet.lenght(); i++) {
-		data[i - 1] = (UTVariable) packet.getData(i);
-	    }
+	    UTVariable[] data = (UTVariable[]) packet.getData(2);
 	    setData(data);
 	}
 	if (packet.getType() == UTpacketType.request) {
-	    UTVariableType type = ((UTVariable) packet.getData(1)).ID;
+	    UTVariableType type = ((UTVariable[]) packet.getData(2))[0].ID;
 	    UTVariable[] data = getData(type);
 	    if (data != null) {
-		createDeliverPacket((ICommunicationNode) packet.getData(0), data);
+		createDeliverPacket((ICommunicationNode) packet.getData(1), (ICommunicationNode) packet.getData(0), data);
 	    }
 	}
     }
 
     public abstract void setData(UTVariable[] data);
+
     public abstract UTVariable[] getData(UTVariableType type);
 
     @Override
@@ -46,15 +45,25 @@ public abstract class TileEntityLogicNetworkNode extends TElogicNode implements 
     }
 
     @Override
-    public void createDeliverPacket(ICommunicationNode node, UTVariable... data) {
-	packets.add(new UTpacket(UTpacketType.deliver, node, data));
+    public void createDeliverPacket(ICommunicationNode dest, ICommunicationNode origin, UTVariable... data) {
+	packets.add(new UTpacket(UTpacketType.deliver, dest, origin, data));
 	this.scheduleSend();
     }
 
     @Override
-    public void createRequestPacket(ICommunicationNode node, UTVariable... data) {
-	packets.add(new UTpacket(UTpacketType.request, node, data));
+    public void createRequestPacket(ICommunicationNode dest, ICommunicationNode origin, UTVariable... data) {
+	packets.add(new UTpacket(UTpacketType.request, dest, origin, data));
 	this.scheduleSend();
+    }
+
+    public void sendToAll() {
+	for (ForgeDirection dir : getConnectableOutputSides()) {
+	    UTlogicNodeContainer container = getConnectionsOnSide(dir);
+	    for (ICommunicationNode node : container.iterate()) {
+		createRequestPacket(node, this, new UTVariable(UTVariableType.power));
+		System.out.println("send packet to " + node);
+	    }
+	}
     }
 
 }

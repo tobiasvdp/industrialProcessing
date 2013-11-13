@@ -1,8 +1,10 @@
 package ip.industrialProcessing.machines;
 
+import cpw.mods.fml.common.Loader;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupItems;
+import ip.industrialProcessing.logic.IPLogic;
 import ip.industrialProcessing.utils.inventories.InventoryUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -30,8 +32,13 @@ public abstract class BlockMachine extends BlockContainer {
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float clickX, float clickY, float clickZ) {
 	TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
-	if (tileEntity == null || player.isSneaking()) {
+	if (tileEntity == null || player.isSneaking()){
 	    return false;
+	}
+	if(Loader.isModLoaded("IPLogic")){
+	    if(checkIfEquiped(player)){
+		return false;
+	    }
 	}
 	ItemStack stack = player.inventory.getCurrentItem();
 	if (stack != null) {
@@ -41,6 +48,12 @@ public abstract class BlockMachine extends BlockContainer {
 
 	player.openGui(IndustrialProcessing.instance, 0, world, x, y, z);
 	return true;
+    }
+
+    private boolean checkIfEquiped(EntityPlayer player) {
+	if(player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().itemID == IPLogic.BlockMachineInterface.blockID)
+	    return true;
+	return false;
     }
 
     @Override
