@@ -19,7 +19,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
 @Mod(modid = "IPLogic",name = "Industrial Processing Logic", version = "0.0.1", dependencies = "required-after:IndustrialProcessing")
-@NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = { }, packetHandler = PacketHandler.class)
+@NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = {PacketHandler.channel}, packetHandler = PacketHandler.class)
 public class IPLogic implements ISetupLogic{
 	@Instance("IPLogic")
 	public static IPLogic instance;

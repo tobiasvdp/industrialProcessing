@@ -112,7 +112,7 @@ public class UTlogicNodeContainer {
 			this.nodes = new ArrayList<ICommunicationNode>();
 			this.sides = new ArrayList<ForgeDirection>();
 			World world = te.worldObj;
-			for (int i =0;i<nodes.size();i++) {
+			for (int i =0;i<listLocation.length;i++) {
 				TileEntity te = world.getBlockTileEntity(listLocation[i][0], listLocation[i][1], listLocation[i][2]);
 				if (te instanceof ICommunicationNode)
 					this.add((ICommunicationNode) te);

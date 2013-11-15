@@ -377,7 +377,7 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 	this.worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
     }
 
-    protected void notifyBlockChange() {
+    public void notifyBlockChange() {
 	if (!this.worldObj.isRemote) {
 	    this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 
@@ -388,5 +388,15 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 	    String className = e.getClassName();
 	}
 
+    }
+    int k =0;
+    @Override
+    public void updateEntity() {
+    	super.updateEntity();
+    	if(k ==20){
+    		notifyBlockChange();
+    		k=0;
+    	}
+    	k++;
     }
 }

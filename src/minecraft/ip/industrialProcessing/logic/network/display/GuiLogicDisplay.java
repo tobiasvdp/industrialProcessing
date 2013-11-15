@@ -18,7 +18,7 @@ public class GuiLogicDisplay extends GuiScreen {
 
     public GuiLogicDisplay(TileEntityLogicDisplay entity) {
 	this.textureLocation = new ResourceLocation(INamepace.TEXTURE_DOMAIN, "textures/gui/Guide.png");
-	UTlogicNodeContainer container = entity.getConnectionsOnSide(ForgeDirection.NORTH);
+	UTlogicNodeContainer container = entity.getConnectionsOnSide(entity.getExternalForgeDirection(ForgeDirection.NORTH));
 	System.out.println("Printout");
 	for(ICommunicationNode node:container.iterate()){
 		System.out.println(node);
