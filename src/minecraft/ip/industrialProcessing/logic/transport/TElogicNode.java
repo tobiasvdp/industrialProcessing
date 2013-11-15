@@ -389,14 +389,4 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 	}
 
     }
-    int k =0;
-    @Override
-    public void updateEntity() {
-    	super.updateEntity();
-    	if(k ==20){
-    		notifyBlockChange();
-    		k=0;
-    	}
-    	k++;
-    }
 }

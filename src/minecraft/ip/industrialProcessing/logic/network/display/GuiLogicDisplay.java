@@ -1,29 +1,32 @@
 package ip.industrialProcessing.logic.network.display;
 
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.logic.PacketHandler;
+
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.network.packet.Packet250CustomPayload;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import ip.industrialProcessing.config.INamepace;
-import ip.industrialProcessing.logic.transport.ICommunicationNode;
-import ip.industrialProcessing.logic.utils.UTlogicNodeContainer;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.ForgeDirection;
+import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class GuiLogicDisplay extends GuiScreen {
     private static final int X_SIZE = 256;
     private static final int Y_SIZE = 202;
     private ResourceLocation textureLocation;
+    private TileEntity entity;
 
     public GuiLogicDisplay(TileEntityLogicDisplay entity) {
 	this.textureLocation = new ResourceLocation(INamepace.TEXTURE_DOMAIN, "textures/gui/Guide.png");
-	UTlogicNodeContainer container = entity.getConnectionsOnSide(entity.getExternalForgeDirection(ForgeDirection.NORTH));
-	System.out.println("Printout");
-	for(ICommunicationNode node:container.iterate()){
-		System.out.println(node);
-	}
-	
+	this.entity = entity;
+	requestNodes();
     }
 
     @Override
@@ -51,5 +54,28 @@ public class GuiLogicDisplay extends GuiScreen {
     @Override
     public void drawBackground(int par1) {
 	drawWorldBackground(par1);
+    }
+    
+    public void requestNodes(){
+    	ByteArrayOutputStream bos = new ByteArrayOutputStream(8);
+    	DataOutputStream outputStream = new DataOutputStream(bos);
+    	try {
+    		outputStream.writeInt(this.entity.xCoord);
+    		outputStream.writeInt(this.entity.yCoord);
+    		outputStream.writeInt(this.entity.zCoord);
+    	} catch (Exception ex) {
+    	        ex.printStackTrace();
+    	}
+
+    	Packet250CustomPayload packet = new Packet250CustomPayload();
+    	packet.channel = PacketHandler.DISPLAY_GET_NODES;
+    	packet.data = bos.toByteArray();
+    	packet.length = bos.size();
+    	
+    	PacketDispatcher.sendPacketToServer(packet);
+    } 
+    @Override
+    public boolean doesGuiPauseGame() {
+    	return false;
     }
 }
