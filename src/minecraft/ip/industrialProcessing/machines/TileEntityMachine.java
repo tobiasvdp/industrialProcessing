@@ -4,6 +4,7 @@ import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.logic.api.network.interfaces.IMachineInterface;
 import ip.industrialProcessing.logic.api.network.interfaces.InterfaceType;
+import ip.industrialProcessing.logic.api.network.interfaces.StatusType;
 import ip.industrialProcessing.machines.containers.IMachineContainerEntity;
 
 import java.util.ArrayList;
@@ -19,11 +20,18 @@ import net.minecraftforge.common.ForgeDirection;
 public abstract class TileEntityMachine extends TileEntitySynced implements ISidedInventory, IMachineSlots, IRotateableEntity, IMachineContainerEntity, IMachineInterface {
 
 	private String name;
+	protected StatusType status = StatusType.active;
+	private boolean enabled = true;
     private ArrayList<MachineItemStack> itemStacks = new ArrayList<MachineItemStack>();
     private int[][] itemStackSideSlots = new int[6][0];
     public boolean isDummyBlock = false;
     private ForgeDirection forwardDirection;
 
+    @Override
+    public boolean canUpdate() {
+    	return enabled;
+    }
+    
     @Override
 	public ForgeDirection getForwardDirection() {
 	return forwardDirection;
@@ -314,6 +322,11 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
     public String setName(String name){
     	this.name = name;
     	return name;
+    }
+    public StatusType getStatus(){
+    	if (enabled)
+    		return status;
+    	return StatusType.disabled;
     }
     
 }

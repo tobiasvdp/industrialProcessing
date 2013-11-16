@@ -50,11 +50,6 @@ public abstract class TileEntityWorkerMachine extends TileEntityMachine implemen
 	work(1);
     }
 
-    @Override
-    public boolean canUpdate() {
-	return true;
-    }
-
     protected int work(int amount) {
 	int workDone = this.getWorker().doWork(amount);
 	return workDone;

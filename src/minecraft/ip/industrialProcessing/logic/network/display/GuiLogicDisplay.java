@@ -95,16 +95,7 @@ public class GuiLogicDisplay extends GuiScreen {
 			break;
 		case interfaces:
 			ILogicInterface interfaces = (ILogicInterface) node;
-			if(interfaces.isMachineCapable(InterfaceType.power)){
-				String power = "";
-				for(UTVariable var:interfaces.getData(UTVariableType.power)){
-					IPowerStorage storage = (IPowerStorage) var.value;
-					power = power + storage.getStoredPower()+"/"+storage.getPowerCapacity()+" "; 
-				}
-				return power;
-			}
-			
-			break;
+			return interfaces.getMachine().getStatus().toString();
 		case networkedNode:
 			break;
 		case node:

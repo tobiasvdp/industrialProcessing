@@ -48,11 +48,6 @@ public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachin
 	work(1);
     }
 
-    @Override
-    public boolean canUpdate() {
-	return true;
-    }
-
     protected int work(int amount) {
 	return this.getWorker().doWork(amount);
     }
