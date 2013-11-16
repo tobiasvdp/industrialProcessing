@@ -2,9 +2,11 @@ package ip.industrialProcessing.logic.network.display;
 
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.logic.PacketHandler;
+import ip.industrialProcessing.logic.transport.ICommunicationNode;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
+import java.util.ArrayList;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
@@ -22,10 +24,12 @@ public class GuiLogicDisplay extends GuiScreen {
     private static final int Y_SIZE = 202;
     private ResourceLocation textureLocation;
     private TileEntity entity;
+    private ArrayList<ICommunicationNode> nodes;
 
     public GuiLogicDisplay(TileEntityLogicDisplay entity) {
 	this.textureLocation = new ResourceLocation(INamepace.TEXTURE_DOMAIN, "textures/gui/Guide.png");
 	this.entity = entity;
+	nodes = new ArrayList<ICommunicationNode>();
 	requestNodes();
     }
 
@@ -78,4 +82,20 @@ public class GuiLogicDisplay extends GuiScreen {
     public boolean doesGuiPauseGame() {
     	return false;
     }
+
+	public void addNode(ICommunicationNode te) {
+		nodes.add(te);
+	}
+
+	int offsetDisplayedNodes = 0;
+	int offset = 10;
+	int widthTab = 100;
+	int heightTab = 50;
+	public void drawTabbedNodes() {
+		for(int i= 0;i<6 && nodes.get(i+offsetDisplayedNodes) != null;i++){
+			int x = i%3*(widthTab+offsetDisplayedNodes)+offsetDisplayedNodes;
+			int y = i/3*(heightTab+offsetDisplayedNodes)+offsetDisplayedNodes;
+			drawGradientRect(x,y , x+widthTab, y+heightTab, 16711680, 8323072);
+		}
+	}
 }
