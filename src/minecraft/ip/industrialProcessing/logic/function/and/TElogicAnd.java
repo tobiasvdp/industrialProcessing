@@ -1,6 +1,7 @@
 package ip.industrialProcessing.logic.function.and;
 
 import ip.industrialProcessing.logic.transport.TElogicNode;
+import ip.industrialProcessing.logic.utils.UTLogicType;
 import ip.industrialProcessing.logic.utils.UTVariable;
 import ip.industrialProcessing.logic.utils.UTVariableType;
 import ip.industrialProcessing.logic.utils.UTpacket;
@@ -43,5 +44,15 @@ public class TElogicAnd extends TElogicNode {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public String getName() {
+		return "And gate";
+	}
+	
+    @Override
+    public UTLogicType getLogicType(){
+    	return UTLogicType.gate;
+    }
 
 }

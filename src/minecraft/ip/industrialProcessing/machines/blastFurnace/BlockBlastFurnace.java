@@ -20,7 +20,9 @@ public class BlockBlastFurnace extends BlockMachineRendered {
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityBlastFurnace();
+		TileEntityBlastFurnace te = new TileEntityBlastFurnace();
+		te.setName(getLocalizedName());
+		return te;
 	}
 
 	@Override
@@ -29,25 +31,28 @@ public class BlockBlastFurnace extends BlockMachineRendered {
 		if (tileEntity == null || player.isSneaking()) {
 			return false;
 		}
-		if (((TileEntityBlastFurnace) tileEntity).isDummyBlock(world,x,y,z))
-			player.openGui(IndustrialProcessing.instance, 0, world, x, y-1, z);
+		if (((TileEntityBlastFurnace) tileEntity).isDummyBlock(world, x, y, z))
+			player.openGui(IndustrialProcessing.instance, 0, world, x, y - 1, z);
 		else
-			//if (((TileEntityBlastFurnace) tileEntity).hasDummyBlock(world,x,y,z))
+			// if (((TileEntityBlastFurnace)
+			// tileEntity).hasDummyBlock(world,x,y,z))
 			player.openGui(IndustrialProcessing.instance, 0, world, x, y, z);
 		return true;
 	}
+
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, int par5) {
 		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
-		if (((TileEntityBlastFurnace) tileEntity).isDummyBlock(world,x,y,z) != ((TileEntityBlastFurnace) tileEntity).isDummyBlock){
-			world.destroyBlock(x, y,z, false);
+		if (((TileEntityBlastFurnace) tileEntity).isDummyBlock(world, x, y, z) != ((TileEntityBlastFurnace) tileEntity).isDummyBlock) {
+			world.destroyBlock(x, y, z, false);
 			world.setBlock(x, y, z, ConfigMachineBlocks.getBlastFurnaceID());
 		}
-		
+
 	}
-    @Override
-    public int getRenderType() {
-    	return ConfigRenderers.getRendererBlastFurnaceId();
-    }
+
+	@Override
+	public int getRenderType() {
+		return ConfigRenderers.getRendererBlastFurnaceId();
+	}
 
 }

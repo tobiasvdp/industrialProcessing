@@ -2,17 +2,23 @@ package ip.industrialProcessing.machines;
 
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
+import ip.industrialProcessing.logic.api.network.interfaces.IMachineInterface;
+import ip.industrialProcessing.logic.api.network.interfaces.InterfaceType;
 import ip.industrialProcessing.machines.containers.IMachineContainerEntity;
+
 import java.util.ArrayList;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.ForgeDirection;
 
-public abstract class TileEntityMachine extends TileEntitySynced implements ISidedInventory, IMachineSlots, IRotateableEntity, IMachineContainerEntity {
+public abstract class TileEntityMachine extends TileEntitySynced implements ISidedInventory, IMachineSlots, IRotateableEntity, IMachineContainerEntity, IMachineInterface {
 
+	private String name;
     private ArrayList<MachineItemStack> itemStacks = new ArrayList<MachineItemStack>();
     private int[][] itemStackSideSlots = new int[6][0];
     public boolean isDummyBlock = false;
@@ -296,4 +302,18 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
     public boolean canWrenchRotate() {
 	return true;
     }
+    
+    @Override
+    public InterfaceType[] getConnectionTypes(){
+    	return new InterfaceType[]{InterfaceType.single,InterfaceType.inventory};
+    };
+    
+    public String getName(){
+    	return this.name;
+    }
+    public String setName(String name){
+    	this.name = name;
+    	return name;
+    }
+    
 }

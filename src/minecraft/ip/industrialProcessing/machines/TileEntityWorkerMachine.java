@@ -1,6 +1,7 @@
 package ip.industrialProcessing.machines;
 
 import ip.industrialProcessing.client.render.IAnimationProgress;
+import ip.industrialProcessing.logic.api.network.interfaces.InterfaceType;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
 import ip.industrialProcessing.machines.animation.AnimationMode;
 import ip.industrialProcessing.machines.animation.IAnimationSyncable;
@@ -144,5 +145,9 @@ public abstract class TileEntityWorkerMachine extends TileEntityMachine implemen
     public TileEntity getTileEntity() {
 	return this;
     }
+    @Override
+    public InterfaceType[] getConnectionTypes(){
+    	return new InterfaceType[]{InterfaceType.single,InterfaceType.inventory,InterfaceType.worker,InterfaceType.power};
+    };
 
 }

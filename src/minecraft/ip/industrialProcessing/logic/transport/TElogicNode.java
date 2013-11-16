@@ -4,6 +4,7 @@ import ip.industrialProcessing.logic.network.display.TileEntityLogicDisplay;
 import ip.industrialProcessing.logic.utils.UTBuffer;
 import ip.industrialProcessing.logic.utils.UTBufferType;
 import ip.industrialProcessing.logic.utils.UTBusType;
+import ip.industrialProcessing.logic.utils.UTLogicType;
 import ip.industrialProcessing.logic.utils.UTVariable;
 import ip.industrialProcessing.logic.utils.UTlogicNodeContainer;
 import ip.industrialProcessing.logic.utils.UTpacket;
@@ -388,5 +389,10 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 	    String className = e.getClassName();
 	}
 
+    }
+    
+    @Override
+    public UTLogicType getLogicType(){
+    	return UTLogicType.node;
     }
 }

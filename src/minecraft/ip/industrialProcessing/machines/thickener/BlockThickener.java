@@ -18,7 +18,9 @@ public class BlockThickener extends BlockMachineRendered {
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityThickener();
+		TileEntityThickener te = new TileEntityThickener();
+		te.setName(getLocalizedName());
+		return te;
 	}
 
 	@Override

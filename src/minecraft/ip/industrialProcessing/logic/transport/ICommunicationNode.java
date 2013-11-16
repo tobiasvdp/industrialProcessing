@@ -26,4 +26,6 @@ public interface ICommunicationNode extends ICommunication{
 	public void createDataPacket(ForgeDirection dir,  UTVariable... data);
 	
 	public void transition();
+	
+	public String getName();
 }

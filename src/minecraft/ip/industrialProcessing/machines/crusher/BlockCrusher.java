@@ -33,7 +33,9 @@ public class BlockCrusher extends BlockMachineRendered {
 
     @Override
     public TileEntity createNewTileEntity(World world) {
-	return new TileEntityCrusher();
+    	TileEntityCrusher te = new TileEntityCrusher();
+    	te.setName(this.getLocalizedName());
+    	return te;
     }
 
     @Override

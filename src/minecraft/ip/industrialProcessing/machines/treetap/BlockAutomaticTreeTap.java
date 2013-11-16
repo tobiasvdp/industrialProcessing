@@ -27,7 +27,9 @@ public class BlockAutomaticTreeTap extends BlockManualTreeTap {
 
     @Override
     public TileEntity createNewTileEntity(World world) {
-        return new TileEntityAutomaticTreeTap();
+    	TileEntityAutomaticTreeTap te = new TileEntityAutomaticTreeTap();
+    	te.setName(getLocalizedName());
+        return te;
     }
 
     @Override

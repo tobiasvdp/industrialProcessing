@@ -18,7 +18,9 @@ public class blockElectrolyser extends BlockMachineRendered {
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityElectrolyser();
+		TileEntityElectrolyser te = new TileEntityElectrolyser();
+		te.setName(getLocalizedName());
+		return te;
 	}
 	
     @Override

@@ -1,6 +1,7 @@
 package ip.industrialProcessing.machines;
 
 import ip.industrialProcessing.client.render.IAnimationProgress;
+import ip.industrialProcessing.logic.api.network.interfaces.InterfaceType;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
 import ip.industrialProcessing.machines.animation.AnimationMode;
 import ip.industrialProcessing.machines.animation.IAnimationSyncable;
@@ -10,7 +11,6 @@ import ip.industrialProcessing.recipes.RecipeFluidWorker;
 import ip.industrialProcessing.utils.working.IWorker;
 import ip.industrialProcessing.utils.working.ServerWorker;
 import ip.industrialProcessing.utils.working.WorkUtils;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
@@ -146,4 +146,9 @@ public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachin
     @Override
     public void addPressure(ForgeDirection from, float pressure) { 
     }
+    
+    @Override
+    public InterfaceType[] getConnectionTypes(){
+    	return new InterfaceType[]{InterfaceType.single,InterfaceType.inventory,InterfaceType.tank,InterfaceType.worker};
+    };
 }

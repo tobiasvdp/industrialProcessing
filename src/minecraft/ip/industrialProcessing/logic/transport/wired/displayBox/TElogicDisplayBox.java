@@ -94,4 +94,10 @@ public class TElogicDisplayBox extends TElogicNode implements ICommunicationNode
 		return 0;
 	}
 
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -18,7 +18,9 @@ public class BlockGasProcessor  extends BlockMachineRendered {
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityGasProcessor();
+		TileEntityGasProcessor te = new TileEntityGasProcessor();
+		te.setName(getLocalizedName());
+		return te;
 	}
 	
     @Override

@@ -1,6 +1,7 @@
 package ip.industrialProcessing.logic.transport;
 
 import ip.industrialProcessing.logic.utils.UTBusType;
+import ip.industrialProcessing.logic.utils.UTLogicType;
 import ip.industrialProcessing.logic.utils.UTpacket;
 import ip.industrialProcessing.logic.utils.UTpacketType;
 import ip.industrialProcessing.utils.blockContainer.IBlockInBlock;
@@ -150,5 +151,10 @@ public abstract class TElogicTransport extends TileEntity implements ICommunicat
 	public void addBlockToContainer(ForgeDirection dir) {
 		System.out.println("adding to side is " + dir);
 	}
+	
+    @Override
+    public UTLogicType getLogicType(){
+    	return UTLogicType.transport;
+    }
 
 }

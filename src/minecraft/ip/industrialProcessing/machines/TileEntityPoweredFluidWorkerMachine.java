@@ -2,11 +2,11 @@ package ip.industrialProcessing.machines;
 
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
+import ip.industrialProcessing.logic.api.network.interfaces.InterfaceType;
 import ip.industrialProcessing.power.IPoweredMachine;
 import ip.industrialProcessing.power.PowerHelper;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeWorker;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 
@@ -86,4 +86,8 @@ public abstract class TileEntityPoweredFluidWorkerMachine extends TileEntityFlui
     public IPowerStorage getMainPowerStorage() {
 	return this.storage;
     }
+    @Override
+    public InterfaceType[] getConnectionTypes(){
+    	return new InterfaceType[]{InterfaceType.single,InterfaceType.inventory,InterfaceType.tank,InterfaceType.worker,InterfaceType.power};
+    };
 }

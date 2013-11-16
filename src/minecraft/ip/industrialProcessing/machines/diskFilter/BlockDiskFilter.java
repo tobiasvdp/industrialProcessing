@@ -19,8 +19,10 @@ public class BlockDiskFilter extends BlockMachineRendered {
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world) { 
-		return new TileEntityDiskFilter();
+	public TileEntity createNewTileEntity(World world) {
+		TileEntityDiskFilter te =  new TileEntityDiskFilter();
+		te.setName(getLocalizedName());
+		return te;
 	}
 	
     @Override

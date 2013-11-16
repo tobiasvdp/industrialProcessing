@@ -2,6 +2,7 @@ package ip.industrialProcessing.logic.network;
 
 import ip.industrialProcessing.logic.transport.ICommunicationNode;
 import ip.industrialProcessing.logic.transport.TElogicNode;
+import ip.industrialProcessing.logic.utils.UTLogicType;
 import ip.industrialProcessing.logic.utils.UTVariable;
 import ip.industrialProcessing.logic.utils.UTVariableType;
 import ip.industrialProcessing.logic.utils.UTlogicNodeContainer;
@@ -66,5 +67,10 @@ public abstract class TileEntityLogicNetworkNode extends TElogicNode implements 
 			}
 		}
 	}
+	
+    @Override
+    public UTLogicType getLogicType(){
+    	return UTLogicType.networkedNode;
+    }
 
 }

@@ -1,6 +1,7 @@
 package ip.industrialProcessing.logic.function.or;
 
 import ip.industrialProcessing.logic.transport.TElogicNode;
+import ip.industrialProcessing.logic.utils.UTLogicType;
 import ip.industrialProcessing.logic.utils.UTVariable;
 import ip.industrialProcessing.logic.utils.UTVariableType;
 import ip.industrialProcessing.logic.utils.UTpacket;
@@ -43,4 +44,14 @@ public class TElogicOr extends TElogicNode {
 		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	public String getName() {
+		return "Or gate";
+	}
+	
+    @Override
+    public UTLogicType getLogicType(){
+    	return UTLogicType.gate;
+    }
 }

@@ -38,4 +38,9 @@ public class TileEntityLogicDisplay extends TileEntityLogicNetworkNode{
 	return null;
     }
 
+	@Override
+	public String getName() {
+		return "Display";
+	}
+
 }
