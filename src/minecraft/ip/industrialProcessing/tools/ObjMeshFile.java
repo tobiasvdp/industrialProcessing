@@ -9,7 +9,7 @@ public class ObjMeshFile {
 	public String toString() {
 
 		StringBuilder builder = new StringBuilder();
-		builder.append("package ip.industrialProcessing.multiblock.dummy.block.destilationTray.model;\n\r");
+		builder.append("package ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.atmosphericDestilationTower.model;\n\r");
 		builder.append("import ip.industrialProcessing.api.rendering.wavefront.ObjMesh;\n\r");
 		builder.append("import ip.industrialProcessing.api.rendering.wavefront.ObjQuad;\n\r");
 		builder.append("\n\r");

@@ -1,4 +1,4 @@
-package ip.industrialProcessing.multiblock.dummy.block.destilationTray.model;
+package ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.atmosphericDestilationTower.model;
 
 import org.lwjgl.util.vector.Vector3f;
 
@@ -12,14 +12,15 @@ import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
 import ip.industrialProcessing.client.render.ModelBlock;
 import ip.industrialProcessing.machines.BlockMachine;
 
-public class ModelDistillationElementBlock extends ModelBlock {
+public class ModelAtmosphericDestillationTowerBlock extends ModelBlock {
 
-    ObjRotator hull = new ObjRotator(new DestillationElementHull(), 0);
-    ObjRotator features = new ObjRotator(new DestillationElementFeatures(), 0);
-    DestillationConnectors connectors = new DestillationConnectors();
-
+    
+    ObjRotator features = new ObjRotator(new DestillationCore(), 0);
+    ObjRotator hull = new ObjRotator(new DestillationCoreHull(), 0);
+    DestillationCoreConnectors connectors = new DestillationCoreConnectors();
+    
     @Override
-    public void renderInventory(Block block, int metadata, int modelID, RenderBlocks renderer) { 
+    public void renderInventory(Block block, int metadata, int modelID, RenderBlocks renderer) {
         Vector3f position = new Vector3f(0, 0, 0);
         Icon iconFeatures = block.getIcon(0, 0);
         Icon iconHull = block.getIcon(1, 0);

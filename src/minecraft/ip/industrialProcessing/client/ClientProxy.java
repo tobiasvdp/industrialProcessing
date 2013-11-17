@@ -1,7 +1,6 @@
 package ip.industrialProcessing.client;
 
 import ip.industrialProcessing.CommonProxy;
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.rendering.ModelMachine;
 import ip.industrialProcessing.api.rendering.RendererBlock;
 import ip.industrialProcessing.api.rendering.RendererTileBlock;
@@ -52,6 +51,7 @@ import ip.industrialProcessing.machines.treetap.model.ModelAutomaticTreeTapBlock
 import ip.industrialProcessing.machines.treetap.model.ModelManualTreeTapBlock;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.MDmultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.TEmultiblockBlastFurnace;
+import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.atmosphericDestilationTower.model.ModelAtmosphericDestillationTowerBlock;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.MDmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.dummy.block.blastFurnaceTower.MDmultiblockBlastFurnaceTower;
@@ -204,6 +204,7 @@ public class ClientProxy extends CommonProxy {
     private static final ModelBoilerBlock modelBoilerBlock = new ModelBoilerBlock();
 
     private static final ModelDistillationElementBlock destillationElementBlock = new ModelDistillationElementBlock();
+    private static final ModelAtmosphericDestillationTowerBlock destillationTowerBlock = new ModelAtmosphericDestillationTowerBlock();
     @Override
     public void registerRenderers() {
         // 100% block
@@ -231,6 +232,8 @@ public class ClientProxy extends CommonProxy {
         ConfigRenderers.setRendererDestilationTray(RenderingRegistry.getNextAvailableRenderId());
         RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererDestilationTray(), destillationElementBlock));
 
+        ConfigRenderers.setRendererAtmosphericDestilationTower(RenderingRegistry.getNextAvailableRenderId());
+        RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererAtmosphericDestilationTower(), destillationTowerBlock));
         // block & tile entity
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityConveyorSorter.class, new RendererTileEntityConnected(ISetupMachineBlocks.blockConveyorSorter, "ModelConveyorSorter", conveyorSorter));
@@ -250,7 +253,6 @@ public class ClientProxy extends CommonProxy {
 
         // Conveyor Output
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityConveyorOutput.class, new RendererTileEntityConnected(ISetupMachineBlocks.blockConveyorOutput, "ModelConveyor", conveyorOutput));
-
         ConfigRenderers.setRendererConveyorOutputID(RenderingRegistry.getNextAvailableRenderId());
         RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererConveyorOutputID(), conveyorOutputBlock));
 
