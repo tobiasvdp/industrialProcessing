@@ -123,31 +123,31 @@ public class ConfigBlocks {
     }
 
     public void registerOres() {
-        registerOre(IndustrialProcessing.blockCopperOre, "IP.World.CopperOre", "Copper Ore", "copper");
-        registerOre(IndustrialProcessing.blockTinOre, "IP.World.TinOre", "Tin Ore", "tin");
-        registerOre(IndustrialProcessing.blockGalenaOre, "IP.World.GalenaOre", "Galena Ore", "silver");
-        OreDictionary.registerOre("galena", IndustrialProcessing.blockGalenaOre);
-        registerOre(IndustrialProcessing.blockRutileOre, "IP.World.RutileOre", "Rutile Ore", "rutile");
-        registerOre(IndustrialProcessing.blockChromiteOre, "IP.World.ChromiteOre", "Chromite Ore", "chromite");
-        registerOre(IndustrialProcessing.blockCinnebarOre, "IP.World.CinnebarOre", "Cinnebar Ore", "cinnebar");
-        registerOre(IndustrialProcessing.blockTaliaOre, "IP.World.TaliaOre", "Thallium Ore", "talia");
-        registerBlock(IndustrialProcessing.blockIronFlat, "IP.Block.IronFlat", "Flat Iron block");
+        registerOre(ISetupBlocks.blockCopperOre, "IP.World.CopperOre", "Copper Ore", "copper");
+        registerOre(ISetupBlocks.blockTinOre, "IP.World.TinOre", "Tin Ore", "tin");
+        registerOre(ISetupBlocks.blockGalenaOre, "IP.World.GalenaOre", "Galena Ore", "silver");
+        OreDictionary.registerOre("galena", ISetupBlocks.blockGalenaOre);
+        registerOre(ISetupBlocks.blockRutileOre, "IP.World.RutileOre", "Rutile Ore", "rutile");
+        registerOre(ISetupBlocks.blockChromiteOre, "IP.World.ChromiteOre", "Chromite Ore", "chromite");
+        registerOre(ISetupBlocks.blockCinnebarOre, "IP.World.CinnebarOre", "Cinnebar Ore", "cinnebar");
+        registerOre(ISetupBlocks.blockTaliaOre, "IP.World.TaliaOre", "Thallium Ore", "talia");
+        registerBlock(ISetupBlocks.blockIronFlat, "IP.Block.IronFlat", "Flat Iron block");
 
-        registerBlock(IndustrialProcessing.blockPlatform, "IP.Block.Platform", "Walkway");
-        registerBlock(IndustrialProcessing.blockGrit, "IP.Block.Grit", "Grit");
-        registerBlock(IndustrialProcessing.blockAsphalt, "IP.Block.Asphalt", "Asphalt");
-        registerBlock(IndustrialProcessing.blockStairs, "IP.Block.Stairs", "Walkway Stairs");
+        registerBlock(ISetupBlocks.blockPlatform, "IP.Block.Platform", "Walkway");
+        registerBlock(ISetupBlocks.blockGrit, "IP.Block.Grit", "Grit");
+        registerBlock(ISetupBlocks.blockAsphalt, "IP.Block.Asphalt", "Asphalt");
+        registerBlock(ISetupBlocks.blockStairs, "IP.Block.Stairs", "Walkway Stairs");
 
-        registerBlock(IndustrialProcessing.blockCinnebar, "IP.World.Cinnebar", "Cinnebar Crystal");
-        registerBlock(IndustrialProcessing.blockRutile, "IP.World.Rutile", "Rutile Crystal");
+        registerBlock(ISetupBlocks.blockCinnebar, "IP.World.Cinnebar", "Cinnebar Crystal");
+        registerBlock(ISetupBlocks.blockRutile, "IP.World.Rutile", "Rutile Crystal");
 
-        registerBlock(IndustrialProcessing.blockLeaves, ItemBlockWithMetadata.class, "IP.World.Tree.Leaves", "Leaves");
-        registerBlock(IndustrialProcessing.blockLog, ItemBlockWithMetadata.class, "IP.World.Tree.Log", "Log");
-        registerBlock(IndustrialProcessing.blockRubberLog, "IP.World.Tree.Log.Rubber", "Rubber Log");
-        registerBlock(IndustrialProcessing.blockPineLog, "IP.World.Tree.Log.Pine", "Pine Log");
-        registerBlock(IndustrialProcessing.blockSapling, ItemBlockWithMetadata.class, "IP.World.Tree.Sapling", "Sapling");
+        registerBlock(ISetupBlocks.blockLeaves, ItemBlockWithMetadata.class, "IP.World.Tree.Leaves", "Leaves");
+        registerBlock(ISetupBlocks.blockLog, ItemBlockWithMetadata.class, "IP.World.Tree.Log", "Log");
+        registerBlock(ISetupBlocks.blockRubberLog, "IP.World.Tree.Log.Rubber", "Rubber Log");
+        registerBlock(ISetupBlocks.blockPineLog, "IP.World.Tree.Log.Pine", "Pine Log");
+        registerBlock(ISetupBlocks.blockSapling, ItemBlockWithMetadata.class, "IP.World.Tree.Sapling", "Sapling");
 
-        registerBlock(IndustrialProcessing.blockMachineBlock, "IP.Block.MachineB", "Machine block");
+        registerBlock(ISetupBlocks.blockMachineBlock, "IP.Block.MachineB", "Machine block");
     }
 
     private void registerOre(Block block, String uniqueId, String displayName, String oreDictionaryKey) {

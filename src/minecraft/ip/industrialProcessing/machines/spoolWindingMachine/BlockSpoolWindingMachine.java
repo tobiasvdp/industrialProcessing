@@ -17,7 +17,9 @@ public class BlockSpoolWindingMachine extends BlockMachineRendered{
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntitySpoolWindingMachine();
+		TileEntitySpoolWindingMachine te = new TileEntitySpoolWindingMachine();
+		te.setName(getLocalizedName());
+		return te;
 	}
 	
     @Override

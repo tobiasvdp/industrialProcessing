@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import ip.industrialProcessing.logic.transport.ICommunicationNode;
 import ip.industrialProcessing.logic.transport.ICommunicationTransport;
 import ip.industrialProcessing.logic.utils.UTBusType;
+import ip.industrialProcessing.logic.utils.UTLogicType;
 import ip.industrialProcessing.logic.utils.UTpacket;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
@@ -99,6 +100,18 @@ public class TElogicBundle extends TileEntity implements ICommunicationTransport
 	public int getBlockSidesCount() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public void ExtendedSend(UTpacket packet) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public UTLogicType getLogicType() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

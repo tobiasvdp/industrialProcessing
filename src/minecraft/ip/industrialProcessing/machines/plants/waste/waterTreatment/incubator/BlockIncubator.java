@@ -16,7 +16,9 @@ public class BlockIncubator extends BlockMachineRendered{
 	}
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityIncubator();
+		TileEntityIncubator te = new TileEntityIncubator();
+		te.setName(getLocalizedName());
+		return te;
 	}
 	
     @Override

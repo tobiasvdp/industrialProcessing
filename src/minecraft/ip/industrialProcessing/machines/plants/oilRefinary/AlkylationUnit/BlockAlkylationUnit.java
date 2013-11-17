@@ -18,7 +18,9 @@ public class BlockAlkylationUnit  extends BlockMachineRendered {
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityAlkylationUnit();
+		TileEntityAlkylationUnit te = new TileEntityAlkylationUnit();
+		te.setName(getLocalizedName());
+		return te;
 	}
 	
     @Override

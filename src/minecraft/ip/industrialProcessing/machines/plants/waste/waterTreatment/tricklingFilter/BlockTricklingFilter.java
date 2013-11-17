@@ -16,7 +16,9 @@ public class BlockTricklingFilter extends BlockMachineRendered{
 	}
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityTricklingFilter();
+		TileEntityTricklingFilter te = new TileEntityTricklingFilter();
+		te.setName(getLocalizedName());
+		return te;
 	}
 	
     @Override

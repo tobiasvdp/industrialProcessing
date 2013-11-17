@@ -1,46 +1,39 @@
 package ip.industrialProcessing.machines;
 
-import ic2.api.Direction;
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.client.render.IAnimationProgress;
+import ip.industrialProcessing.logic.api.network.interfaces.IMachineInterface;
+import ip.industrialProcessing.logic.api.network.interfaces.InterfaceType;
+import ip.industrialProcessing.logic.api.network.interfaces.StatusType;
 import ip.industrialProcessing.machines.containers.IMachineContainerEntity;
-import ip.industrialProcessing.packetHandlers.TileSyncHandler;
-import ip.industrialProcessing.recipes.IRecipeWorkHandler;
-import ip.industrialProcessing.recipes.RecipeWorker;
-import ip.industrialProcessing.utils.inventories.InventoryUtils;
-import ip.industrialProcessing.utils.working.ClientWorker;
-import ip.industrialProcessing.utils.working.IWorkHandler;
-import ip.industrialProcessing.utils.working.IWorker;
-import ip.industrialProcessing.utils.working.IWorkingEntity;
-import ip.industrialProcessing.utils.working.ServerWorker;
-import ip.industrialProcessing.utils.working.WorkUtils;
 
 import java.util.ArrayList;
-import java.util.Stack;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet132TileEntityData;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.ForgeDirection;
 
-public abstract class TileEntityMachine extends TileEntitySynced implements ISidedInventory, IMachineSlots, IRotateableEntity, IMachineContainerEntity {
+public abstract class TileEntityMachine extends TileEntitySynced implements ISidedInventory, IMachineSlots, IRotateableEntity, IMachineContainerEntity, IMachineInterface {
 
+	private String name;
+	protected StatusType status = StatusType.active;
+	private boolean enabled = true;
     private ArrayList<MachineItemStack> itemStacks = new ArrayList<MachineItemStack>();
     private int[][] itemStackSideSlots = new int[6][0];
     public boolean isDummyBlock = false;
     private ForgeDirection forwardDirection;
 
-    public ForgeDirection getForwardDirection() {
+    @Override
+    public boolean canUpdate() {
+    	return enabled;
+    }
+    
+    @Override
+	public ForgeDirection getForwardDirection() {
 	return forwardDirection;
     }
 
@@ -306,7 +299,8 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
 	return itemStacks.get(slot).stack.getItemDamage() >= itemStacks.get(slot).stack.getMaxDamage();
     }
 
-    public void setForwardDirection(ForgeDirection forwardFromMetadata) {
+    @Override
+	public void setForwardDirection(ForgeDirection forwardFromMetadata) {
 	this.forwardDirection = forwardFromMetadata;
 	if (this.worldObj != null)
 	    this.worldObj.notifyBlockChange(xCoord, yCoord, zCoord, this.getBlockType().blockID);
@@ -316,4 +310,23 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
     public boolean canWrenchRotate() {
 	return true;
     }
+    
+    @Override
+    public InterfaceType[] getConnectionTypes(){
+    	return new InterfaceType[]{InterfaceType.single,InterfaceType.inventory};
+    };
+    
+    public String getName(){
+    	return this.name;
+    }
+    public String setName(String name){
+    	this.name = name;
+    	return name;
+    }
+    public StatusType getStatus(){
+    	if (enabled)
+    		return status;
+    	return StatusType.disabled;
+    }
+    
 }

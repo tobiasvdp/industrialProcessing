@@ -122,7 +122,9 @@ public class BlockManualTreeTap extends BlockMachineRendered {
 
     @Override
     public TileEntity createNewTileEntity(World world) {
-        return new TileEntityManualTreeTap();
+    	TileEntityManualTreeTap te = new TileEntityManualTreeTap();
+    	te.setName(getLocalizedName());
+        return te;
     }
 
     @Override

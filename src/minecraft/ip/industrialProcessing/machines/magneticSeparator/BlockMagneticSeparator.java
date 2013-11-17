@@ -22,7 +22,9 @@ public class BlockMagneticSeparator extends BlockMachineRendered {
 	}
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityMagneticSeparator();
+		TileEntityMagneticSeparator te = new TileEntityMagneticSeparator();
+		te.setName(getLocalizedName());
+		return te;
 	}
     @Override
     public int getRenderType()

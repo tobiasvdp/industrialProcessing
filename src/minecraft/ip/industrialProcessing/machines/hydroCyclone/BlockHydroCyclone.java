@@ -12,13 +12,16 @@ import ip.industrialProcessing.machines.BlockMachine;
 
 public class BlockHydroCyclone extends BlockMachine {
 
-    public BlockHydroCyclone() {
-	super(ConfigMachineBlocks.getHydroCycloneBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Hydro Cyclone Separator", IndustrialProcessing.tabOreProcessing);
+	public BlockHydroCyclone() {
+		super(ConfigMachineBlocks.getHydroCycloneBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Hydro Cyclone Separator", IndustrialProcessing.tabOreProcessing);
 
-    }
-    @Override
-    public TileEntity createNewTileEntity(World world) { 
-	return new TileEntityHydroCyclone();
-    }
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World world) {
+		TileEntityHydroCyclone te = new TileEntityHydroCyclone();
+		te.setName(getLocalizedName());
+		return te;
+	}
 
 }

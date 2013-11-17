@@ -17,7 +17,9 @@ public class BlockOxygenFurnace extends BlockMachine{
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityOxygenFurnace();
+		TileEntityOxygenFurnace te = new TileEntityOxygenFurnace();
+		te.setName(getLocalizedName());
+		return te;
 	}
 
 }

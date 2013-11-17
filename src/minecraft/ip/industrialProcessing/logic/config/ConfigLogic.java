@@ -3,8 +3,10 @@ package ip.industrialProcessing.logic.config;
 import ip.industrialProcessing.api.config.ConfigCategories;
 import ip.industrialProcessing.api.utils.CreativeTabsIP;
 import ip.industrialProcessing.logic.IPLogic;
-import ip.industrialProcessing.logic.functions.and.TElogicAnd;
-import ip.industrialProcessing.logic.functions.or.TElogicOr;
+import ip.industrialProcessing.logic.function.and.TElogicAnd;
+import ip.industrialProcessing.logic.function.or.TElogicOr;
+import ip.industrialProcessing.logic.network.display.TileEntityLogicDisplay;
+import ip.industrialProcessing.logic.network.interfaces.machine.TileEntityMachineInterface;
 import ip.industrialProcessing.logic.transport.wired.bundle.TElogicBundle;
 import ip.industrialProcessing.logic.transport.wired.cable.TElogicCable;
 import ip.industrialProcessing.logic.transport.wired.displayBox.TElogicDisplayBox;
@@ -24,6 +26,8 @@ public class ConfigLogic {
 	private int BLlogicDisplayBox = IPLogic.config.get(ConfigCategories.logic.toString(),"DisplayBoxID",741).getInt();
 	private int BLlogicAnd = IPLogic.config.get(ConfigCategories.logic.toString(),"AndGateID",742).getInt();
 	private int BLlogicOr = IPLogic.config.get(ConfigCategories.logic.toString(),"OrGateID",743).getInt();
+	private int BlockMachineInterface = IPLogic.config.get(ConfigCategories.logic.toString(),"BlockMachineInterface",844).getInt();
+	private int BlockLogicDisplay = IPLogic.config.get(ConfigCategories.logic.toString(),"BlockLogicDisplay",845).getInt();
 	
 	private int RDlogicSwitchBox;
 	private int RDlogicCable;
@@ -72,17 +76,27 @@ public class ConfigLogic {
 		register(IPLogic.BLlogicDisplayBox, "IP.Logic.DsBox", "Display box", TElogicDisplayBox.class);
 		register(IPLogic.BLlogicAnd, "IP.Logic.And", "And gate", TElogicAnd.class);
 		register(IPLogic.BLlogicOr, "IP.Logic.Or", "Or gate", TElogicOr.class);
+		register(IPLogic.BlockMachineInterface, "IP.Logic.MInt", "Interface", TileEntityMachineInterface.class);
+		register(IPLogic.BlockLogicDisplay, "IP.Logic.Display", "Display", TileEntityLogicDisplay.class);
 	}
 	
 	private void register(Block block, String uniqueId, String displayName, Class tileEntity) {
 		GameRegistry.registerBlock(block, uniqueId);
 		MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
 		LanguageRegistry.addName(block, displayName);
-		ModLoader.registerTileEntity(tileEntity, uniqueId);
+		GameRegistry.registerTileEntity(tileEntity, uniqueId);
 	}
 	
 	public static ConfigLogic getInstance() {
 		return instance ;
+	}
+	
+	public static int getBlockLogicDisplay() {
+		return getInstance().BlockLogicDisplay;
+	}
+	
+	public static int getBlockMachineInterface() {
+		return getInstance().BlockMachineInterface;
 	}
 	
 	public static int getBLlogicOr() {

@@ -16,7 +16,9 @@ public class BlockPelletExtruder extends BlockMachine{
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityPelletExtruder();
+		TileEntityPelletExtruder te = new TileEntityPelletExtruder();
+		te.setName(getLocalizedName());
+		return te;
 	}
 
 }

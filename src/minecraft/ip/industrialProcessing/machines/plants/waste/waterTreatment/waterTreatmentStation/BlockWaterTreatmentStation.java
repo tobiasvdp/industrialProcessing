@@ -18,7 +18,9 @@ public class BlockWaterTreatmentStation extends BlockMachineRendered{
 	}
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityWaterTreatmentStation();
+		TileEntityWaterTreatmentStation te = new TileEntityWaterTreatmentStation();
+		te.setName(getLocalizedName());
+		return te;
 	}
 	
     @Override

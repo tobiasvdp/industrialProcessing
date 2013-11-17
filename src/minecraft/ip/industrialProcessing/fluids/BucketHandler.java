@@ -1,8 +1,6 @@
 package ip.industrialProcessing.fluids;
 
-	import ip.industrialProcessing.IndustrialProcessing;
-
-import java.util.HashMap;
+	import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.block.Block;

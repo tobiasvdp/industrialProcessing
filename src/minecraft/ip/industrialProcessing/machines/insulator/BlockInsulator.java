@@ -17,7 +17,9 @@ public class BlockInsulator extends BlockMachineRendered{
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityInsulator();
+		TileEntityInsulator te =  new TileEntityInsulator();
+		te.setName(getLocalizedName());
+		return te;
 	}
 	
     @Override

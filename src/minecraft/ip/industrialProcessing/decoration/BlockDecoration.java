@@ -1,6 +1,7 @@
 package ip.industrialProcessing.decoration;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.INamepace;
 import net.minecraft.block.Block;
 import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
@@ -14,7 +15,7 @@ public abstract class BlockDecoration extends Block {
 		setStepSound(stepSound);
 		setUnlocalizedName(name);
 		setCreativeTab(tab);
-		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "inputTop");
+		func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "inputTop");
 	}
 
 	@Override

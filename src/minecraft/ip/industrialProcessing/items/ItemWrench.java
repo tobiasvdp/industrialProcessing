@@ -1,21 +1,19 @@
 package ip.industrialProcessing.items;
 
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.config.ConfigBlocks;
 import ip.industrialProcessing.config.ConfigItems;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.IRotateableEntity;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
 
 public class ItemWrench extends ItemIP {
 
     public ItemWrench() {
-	super(ConfigItems.itemWrenchID(), "itemWrench", IndustrialProcessing.tabPower);
+	super(ConfigItems.itemWrenchID(), "itemWrench", ISetupCreativeTabs.tabPower);
     }
 
     @Override

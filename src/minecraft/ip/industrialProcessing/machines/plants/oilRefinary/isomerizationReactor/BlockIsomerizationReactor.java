@@ -18,7 +18,9 @@ public class BlockIsomerizationReactor  extends BlockMachineRendered {
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityIsomerizationReactor();
+		TileEntityIsomerizationReactor te= new TileEntityIsomerizationReactor();
+		te.setName(getLocalizedName());
+		return te;
 	}
 	
     @Override
