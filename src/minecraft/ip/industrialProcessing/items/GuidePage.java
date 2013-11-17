@@ -8,8 +8,8 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.item.ItemStack;
 
 public abstract class GuidePage extends Gui {
-    private FontRenderer fontRenderer;
-    private Minecraft mc;
+    protected FontRenderer fontRenderer;
+    protected Minecraft mc;
 
     public GuidePage() {
 	this.mc = Minecraft.getMinecraft();

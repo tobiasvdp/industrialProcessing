@@ -133,6 +133,7 @@ public class GuideTreePage extends GuidePanoramaPage {
 		GL11.glTranslatef(1, 1, -20);
 		drawRect(x, y, x + 16, y + 16, SHADOW_COLOR);
 		GL11.glPopMatrix();
+
 		GL11.glEnable(GL11.GL_LIGHTING);
 		RenderHelper.enableGUIStandardItemLighting();
 		GuiTools.drawItemStack(stack, x, y, null, GuiGuide.itemRenderer, mc.fontRenderer, mc.renderEngine);

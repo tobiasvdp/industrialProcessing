@@ -27,7 +27,7 @@ public class GuiGuide extends GuiScreen {
 	private static final int Y_SIZE = 202;
 	private static final Rectangle SOURCE_ACTIVE_TAB = new Rectangle(24, 202, 24, 26);
 	private static final Rectangle SOURCE_INACTIVE_TAB = new Rectangle(0, 202, 24, 26);
-	private static final GuidePage[] pages = new GuidePage[] { new GuideCraftingPage(), new GuideToolPage(), new GuideTreePage() };
+	private static final GuidePage[] pages = new GuidePage[] { new GuideMachinePage(), new GuideToolPage(), new GuideTreePage() };
 	private static final int TAB_OFFSET = 3;
 	private static final int TAB_WIDTH = 24;
 	private static final int MARGIN_LEFT = 10;
