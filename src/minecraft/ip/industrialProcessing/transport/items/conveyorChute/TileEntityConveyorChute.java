@@ -30,7 +30,7 @@ public class TileEntityConveyorChute extends TileEntityConveyorInventoryBase {
         setConnectionMode(LocalDirection.DOWN, ConnectionMode.ANYOUTPUT);
         Arrays.fill(canReverse, false);
         Arrays.fill(canSlope, false);
-        canReverse[ForgeDirection.DOWN.ordinal()] = true;
+        canReverse[LocalDirection.DOWN.ordinal()] = true; 
     }
 
     @Override

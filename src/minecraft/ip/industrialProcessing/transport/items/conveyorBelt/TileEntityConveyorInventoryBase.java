@@ -2,10 +2,12 @@ package ip.industrialProcessing.transport.items.conveyorBelt;
 
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.machines.animation.conveyors.IConveyor;
 import ip.industrialProcessing.transport.TransportConnectionState;
 import ip.industrialProcessing.transport.items.conveyorBelt.util.ConveyorEnvironment;
 import ip.industrialProcessing.utils.ItemTransfers;
+
+import java.util.ArrayList;
+
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -134,33 +136,7 @@ public abstract class TileEntityConveyorInventoryBase extends TileEntityConveyor
         if (neighbor instanceof IInventory) {
             IInventory inventory = (IInventory) neighbor;
             ForgeDirection opposite = direction.getOpposite();
-            if (inventory != null) {
-                if (inventory instanceof ISidedInventory) {
-                    ISidedInventory sidedInventory = (ISidedInventory) inventory;
-                    int[] slots = sidedInventory.getAccessibleSlotsFromSide(opposite.ordinal());
-                    for (int j = 0; j < slots.length; j++) {
-                        if (worldObj.rand.nextGaussian() > 1) {
-                            ItemStack stack = sidedInventory.getStackInSlot(slots[j]);
-                            if (stack != null) {
-                                sidedInventory.canExtractItem(slots[j], stack, opposite.ordinal());
-                                ItemStack item = sidedInventory.decrStackSize(slots[j], 1);
-                                if (item != null) {
-                                    return item;
-                                }
-                            }
-                        }
-                    }
-                } else {
-                    for (int j = 0; j < inventory.getSizeInventory(); j++) {
-                        if (worldObj.rand.nextGaussian() > 1) {
-                            ItemStack item = inventory.decrStackSize(j, 1);
-                            if (item != null) {
-                                return item;
-                            }
-                        }
-                    }
-                }
-            }
+            return ItemTransfers.extract(opposite, inventory);
         }
         return null;
     }

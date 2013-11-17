@@ -1,5 +1,9 @@
 package ip.industrialProcessing.utils;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Random;
+
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -135,4 +139,49 @@ public class ItemTransfers {
 		}
 		return false;
 	}
+
+    public static ItemStack extract(ForgeDirection opposite, IInventory inventory) {
+        if(inventory instanceof ISidedInventory)
+        {
+            return extract(opposite, (ISidedInventory)inventory);
+        }
+        int[] slots = getSlots(inventory.getSizeInventory());
+        return extract(slots, inventory);
+    }
+    
+    private static int[] getSlots(int sizeInventory) {
+        int[] slots = new int[sizeInventory];
+        for (int i = 0; i < slots.length; i++) {
+            slots[i] = i;
+        }
+        return slots;
+    }
+
+    public static ItemStack extract(ForgeDirection direction, ISidedInventory inventory)
+    {
+        int[] slots = inventory.getAccessibleSlotsFromSide(direction.ordinal());
+        return extract(slots, inventory);
+    }
+
+    public static ItemStack extract(int[] slots, IInventory inventory) { 
+        shuffle(slots);
+        for (int i = 0; i < slots.length; i++) {
+            ItemStack stack = inventory.decrStackSize(slots[i], 1);
+            if(stack != null && stack.stackSize > 0)
+                return stack;
+        }        
+        return null;
+    }
+
+    private static void shuffle(int[] array) {
+        int index, temp;
+        Random random = new Random();
+        for (int i = array.length - 1; i > 0; i--)
+        {
+            index = random.nextInt(i + 1);
+            temp = array[index];
+            array[index] = array[i];
+            array[i] = temp;
+        }
+    }
 }
