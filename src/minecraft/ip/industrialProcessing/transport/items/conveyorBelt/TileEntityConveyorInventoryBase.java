@@ -31,6 +31,7 @@ public abstract class TileEntityConveyorInventoryBase extends TileEntityConveyor
         ConnectionMode mode = getConnectionMode(direction);
         if (mode == ConnectionMode.NONE)
             return TransportConnectionState.NONE;
+        if(mode.isInventory())
         if (entity instanceof IInventory) {
             IInventory inventory = (IInventory) entity;
             if (inventory instanceof ISidedInventory) {
@@ -41,27 +42,27 @@ public abstract class TileEntityConveyorInventoryBase extends TileEntityConveyor
                 } else
                     return TransportConnectionState.NONE;
             } else
-                return handleInventoryState(inventory, direction);
+                return handleInventoryState(inventory, direction, mode);
             // else
             // return getConnectionFromMode(mode);
         }
         return TransportConnectionState.NONE;
     }
 
-    protected TransportConnectionState handleInventoryState(IInventory inventory, ForgeDirection direction) {
+    protected TransportConnectionState handleInventoryState(IInventory inventory, ForgeDirection direction, ConnectionMode mode) {
         return TransportConnectionState.DUAL;
     }
 
     private TransportConnectionState getConnectionFromMode(ConnectionMode mode) {
         switch (mode) {
         case INPUT:
+        case INVENTORYINPUT:
+        case ANYINPUT:
             return TransportConnectionState.INPUT;
         case OUTPUT:
-            return TransportConnectionState.OUTPUT;
-        case INVENTORYINPUT:
-            return TransportConnectionState.INPUT;
         case INVENTORYOUTPUT:
-            return TransportConnectionState.OUTPUT;
+        case ANYOUTPUT:
+            return TransportConnectionState.OUTPUT;  
         case DUAL:
             return TransportConnectionState.DUAL;
         default:

@@ -19,8 +19,7 @@ public class ModelBoilerBlock extends ModelBlock {
     ObjRotator features = new ObjRotator(new BoilerFeatures(), 0);
 
     @Override
-    public void renderInventory(Block block, int metadata, int modelID, RenderBlocks renderer) {
-        // TODO Auto-generated method stub
+    public void renderInventory(Block block, int metadata, int modelID, RenderBlocks renderer) { 
         int dir = 0;
 
         Vector3f position = new Vector3f(0, 0, 0);

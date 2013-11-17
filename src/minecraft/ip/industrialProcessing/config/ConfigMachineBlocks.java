@@ -81,6 +81,7 @@ import ip.industrialProcessing.transport.fluids.TileEntityTransportFluidsStone;
 import ip.industrialProcessing.transport.fluids.TileEntityTransportFluidsWood;
 import ip.industrialProcessing.transport.fluids.TileEntityValve;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorBelt;
+import ip.industrialProcessing.transport.items.conveyorChute.TileEntityConveyorChute;
 import ip.industrialProcessing.transport.items.conveyorInput.TileEntityConveyorInput;
 import ip.industrialProcessing.transport.items.conveyorOutput.TileEntityConveyorOutput;
 import ip.industrialProcessing.transport.items.conveyorSorter.TileEntityConveyorSorter;
@@ -182,6 +183,7 @@ public class ConfigMachineBlocks {
     private int BLtransportConveyorBeltInput = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "ConveyorBeltInputID", 736).getInt();
     private int BLtransportConveyorBeltOutput = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "ConveyorBeltOutputID", 737).getInt();
     private int BLtransportConveyorBeltSorter = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "ConveyorBeltSorterID", 744).getInt();
+    private int BLtransportConveyorShute = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "ConveyorShuteID", 745).getInt();
 
     public void registerMachineBlocks() {
     	registerMachineBlock(IndustrialProcessing.blockAlkylationUnit, "IP.Machine.AlkUnit", "Alkylation unit", TileEntityAlkylationUnit.class);
@@ -195,7 +197,9 @@ public class ConfigMachineBlocks {
         registerMachineBlock(IndustrialProcessing.blockConveyorBeltInput, "IP.Trans.CBInput", "Conveyor belt import", TileEntityConveyorInput.class);
         registerMachineBlock(IndustrialProcessing.blockConveyorOutput, "IP.Trans.CBOutput", "Conveyor belt export", TileEntityConveyorOutput.class);
         registerMachineBlock(IndustrialProcessing.blockConveyorSorter, "IP.Trans.CBSorter", "Conveyor belt sorter", TileEntityConveyorSorter.class);
+        registerMachineBlock(IndustrialProcessing.blockConveyorChute, "IP.Trans.CBShute", "Conveyor shute", TileEntityConveyorChute.class);
 
+        
         // multiblocks
         registerMachineBlock(IndustrialProcessing.blockAmineTreater, "IP.MBC.AmTr", "Amine treater", TileEntityAmineTreater.class);
         registerMachineBlock(IndustrialProcessing.blockCatalyticReformer, "IP.MBC.CatRef", "Catalytic reformer", TileEntityCatalyticReformer.class);
@@ -407,6 +411,10 @@ public class ConfigMachineBlocks {
 
     public static int getBLtransportConveyorBeltSorter() {
         return getInstance().BLtransportConveyorBeltSorter;
+    }
+    
+    public static int getBLtransportConveyorShute() {
+        return getInstance().BLtransportConveyorShute;
     }
 
     public static int getBlockTransportConveyorBelt() {

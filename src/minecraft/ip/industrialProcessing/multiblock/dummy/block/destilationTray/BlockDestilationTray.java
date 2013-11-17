@@ -5,11 +5,14 @@ import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.multiblock.dummy.BLmultiblockDummy;
 import ip.industrialProcessing.multiblock.dummy.block.tankPlating.TileEntityTankPlating;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 public class BlockDestilationTray  extends BLmultiblockDummy{
 
+    Icon[] icons = new Icon[3];
 	public BlockDestilationTray() {
 		super(ConfigMachineBlocks.getBlockDestilationTrayID(), "BlockDestilationTray", IndustrialProcessing.tabMultiblocks);
 	}
@@ -24,4 +27,16 @@ public class BlockDestilationTray  extends BLmultiblockDummy{
 		return ConfigRenderers.getRendererDestilationTray();
 	}
 
+    @Override
+    public Icon getIcon(int par1, int par2) {
+        par1 %= icons.length;        
+        return icons[par1];
+    }
+
+    @Override
+    public void registerIcons(IconRegister par1IconRegister) {
+        icons[1] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "tankSide");
+        icons[0] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "tankFeatures");
+        icons[2] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "burnerGrill");
+    }
 }

@@ -25,8 +25,9 @@ public class TileEntityConveyorOutput extends TileEntityConveyorInventoryBase {
         setConnectionMode(LocalDirection.LEFT, ConnectionMode.INPUT);
         setConnectionMode(LocalDirection.LEFT, ConnectionMode.INPUT);
         setConnectionMode(LocalDirection.UP, ConnectionMode.INVENTORYINPUT);
-        setConnectionMode(LocalDirection.DOWN, ConnectionMode.INVENTORYOUTPUT);
+        setConnectionMode(LocalDirection.DOWN, ConnectionMode.ANYOUTPUT);
         Arrays.fill(canReverse, false);
+        Arrays.fill(canSlope, false);
     }
 
     @Override
@@ -46,7 +47,7 @@ public class TileEntityConveyorOutput extends TileEntityConveyorInventoryBase {
     }
 
     @Override
-    protected TransportConnectionState handleInventoryState(IInventory inventory, ForgeDirection direction) {
+    protected TransportConnectionState handleInventoryState(IInventory inventory, ForgeDirection direction, ConnectionMode mode) {
         return TransportConnectionState.OUTPUT;
     }
     @Override

@@ -32,6 +32,6 @@ public class BlockConveyorInput extends BlockConveyorBase{
 	
 	@Override
 	public boolean renderAsNormalBlock() {
-	    return true;
+	    return false;
 	}
 }

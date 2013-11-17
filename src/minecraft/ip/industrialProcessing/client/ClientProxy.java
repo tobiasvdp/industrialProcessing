@@ -55,6 +55,7 @@ import ip.industrialProcessing.multiblock.core.block.weldingStation.MDmultiblock
 import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.dummy.block.blastFurnaceTower.MDmultiblockBlastFurnaceTower;
 import ip.industrialProcessing.multiblock.dummy.block.blastFurnaceTower.TEmultiblockBlastFurnaceTower;
+import ip.industrialProcessing.multiblock.dummy.block.destilationTray.model.ModelDistillationElementBlock;
 import ip.industrialProcessing.multiblock.dummy.block.displayPanel.MDmultiblockDisplayPanel;
 import ip.industrialProcessing.multiblock.dummy.block.displayPanel.TEmultiblockDisplayPanel;
 import ip.industrialProcessing.multiblock.dummy.block.frame.ENmultiblockFrame;
@@ -89,7 +90,6 @@ import ip.industrialProcessing.power.plants.ModelSolidBurner;
 import ip.industrialProcessing.power.plants.ModelTurbine;
 import ip.industrialProcessing.power.plants.TileEntityBoiler;
 import ip.industrialProcessing.power.plants.TileEntityGenerator;
-import ip.industrialProcessing.power.plants.TileEntitySolidBurner;
 import ip.industrialProcessing.power.plants.TileEntityTurbine;
 import ip.industrialProcessing.power.plants.models.ModelGeneratorBlock;
 import ip.industrialProcessing.power.plants.models.ModelTurbineBlock;
@@ -120,6 +120,7 @@ import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorBe
 import ip.industrialProcessing.transport.items.conveyorBelt.rendering.ModelConveyorBeltTile;
 import ip.industrialProcessing.transport.items.conveyorInput.ModelConveyorInput;
 import ip.industrialProcessing.transport.items.conveyorModels.ModelConveyorBeltBlock;
+import ip.industrialProcessing.transport.items.conveyorModels.ModelConveyorChuteBlock;
 import ip.industrialProcessing.transport.items.conveyorModels.ModelConveyorOutputBlock;
 import ip.industrialProcessing.transport.items.conveyorOutput.ModelConveyorOutput;
 import ip.industrialProcessing.transport.items.conveyorOutput.TileEntityConveyorOutput;
@@ -180,6 +181,7 @@ public class ClientProxy extends CommonProxy {
     private static final ModelBlock conveyorBeltBlock = new ModelConveyorBeltBlock();
     private static final ModelBlock conveyorOutputBlock = new ModelConveyorOutputBlock();
     private static final ModelBlock conveyorSorterBlock = new ModelConveyorSorterBlock();
+    private static final ModelBlock conveyorChuteBlock = new ModelConveyorChuteBlock();
     private static final ModelConnected conveyorInput = new ModelConveyorInput();
     private static final ModelConnected conveyorOutput = new ModelConveyorOutput();
     private static final ModelConnected conveyorSorter = new ModelConveyorSorter();
@@ -200,6 +202,7 @@ public class ClientProxy extends CommonProxy {
     private static final ModelSolidBurnerBlock solidBurnerBlock = new ModelSolidBurnerBlock();
     private static final ModelBoilerBlock modelBoilerBlock = new ModelBoilerBlock();
 
+    private static final ModelDistillationElementBlock destillationElementBlock = new ModelDistillationElementBlock();
     @Override
     public void registerRenderers() {
         // 100% block
@@ -223,6 +226,9 @@ public class ClientProxy extends CommonProxy {
 
         ConfigRenderers.setRendererSolidBurnerId(RenderingRegistry.getNextAvailableRenderId());
         RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererSolidBurnerId(), solidBurnerBlock));
+        
+        ConfigRenderers.setRendererDestilationTray(RenderingRegistry.getNextAvailableRenderId());
+        RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererDestilationTray(), destillationElementBlock));
 
         // block & tile entity
 
@@ -241,23 +247,26 @@ public class ClientProxy extends CommonProxy {
         ConfigRenderers.setRendererConveyorBeltID(RenderingRegistry.getNextAvailableRenderId());
         RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererConveyorBeltID(), conveyorBeltBlock));
 
+        // Conveyor Output
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityConveyorOutput.class, new RendererTileEntityConnected(IndustrialProcessing.blockConveyorOutput, "ModelConveyor", conveyorOutput));
-
         ConfigRenderers.setRendererConveyorOutputID(RenderingRegistry.getNextAvailableRenderId());
         RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererConveyorOutputID(), conveyorOutputBlock));
 
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTransportFluids.class, new RendererTileEntityConnectedFluid(IndustrialProcessing.blockTransportFluids, "ModelTransportFluids", transportFluids));
+     // Conveyor Chute
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityConveyorOutput.class, new RendererTileEntityConnected(IndustrialProcessing.blockConveyorChute, "ModelConveyor", conveyorOutput));
+        ConfigRenderers.setRendererConveyorChuteID(RenderingRegistry.getNextAvailableRenderId());
+        RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererConveyorChuteID(), conveyorChuteBlock));
 
+        
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTransportFluids.class, new RendererTileEntityConnectedFluid(IndustrialProcessing.blockTransportFluids, "ModelTransportFluids", transportFluids));
         ConfigRenderers.setRendererTransportFluidsId(RenderingRegistry.getNextAvailableRenderId());
         RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererTransportFluidsId(), pipeBlock));
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityValve.class, new RendererTileEntityConnectedFluidAnimated(IndustrialProcessing.blockValve, "ModelValve", valveTile));
-
         ConfigRenderers.setRendererValveId(RenderingRegistry.getNextAvailableRenderId());
         RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererValveId(), valveBlock));
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityManoMeter.class, new RendererTileEntityAnimated(IndustrialProcessing.blockManometer, "ModelManoMeter", manoMeter));
-
         ConfigRenderers.setRendererManometerId(RenderingRegistry.getNextAvailableRenderId());
         RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererManometerId(), manometerBlock));
 
