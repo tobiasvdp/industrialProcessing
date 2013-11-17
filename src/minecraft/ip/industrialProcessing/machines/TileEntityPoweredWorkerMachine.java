@@ -50,9 +50,9 @@ public abstract class TileEntityPoweredWorkerMachine extends TileEntityWorkerMac
                 maxPower *= recipe.powerRequired;
                 this.storage.drainPower(maxPower, true);
             }
-            else
-        		status = StatusType.idle;
-        }
+            
+        }else
+        	status = StatusType.idle;
     }
 
     @Override
