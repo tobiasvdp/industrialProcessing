@@ -27,7 +27,8 @@ public class PacketHandler implements IPacketHandler {
 
 	public static final String channel = "ip.logic";
 	public static final String channelStoC = "ip.logic.StoC";
-	public static final String DISPLAY_GET_NODES = "ip.logic.dnode";
+	public static final String DISPLAY_GET_NODES = "ip.logic.dNode";
+	public static final String DISPLAY_GET_DATA = "ip.logic.dData";
 
 	@Override
 	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {

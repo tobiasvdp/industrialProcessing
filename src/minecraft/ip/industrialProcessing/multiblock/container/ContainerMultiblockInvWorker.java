@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import net.minecraft.entity.player.InventoryPlayer;
 import ip.industrialProcessing.api.handlers.HandlerWorker;
 import ip.industrialProcessing.api.handlers.IHandlerWorker;
-import ip.industrialProcessing.api.handlers.InfoWorker;
+import ip.industrialProcessing.api.info.InfoWorker;
 import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreInv;
 import ip.industrialProcessing.utils.working.IWorker;
 
