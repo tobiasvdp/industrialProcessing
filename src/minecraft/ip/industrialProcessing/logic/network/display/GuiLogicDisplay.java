@@ -15,6 +15,7 @@ import java.io.DataOutputStream;
 import java.util.ArrayList;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
@@ -35,9 +36,15 @@ public class GuiLogicDisplay extends GuiScreen {
 	private TileEntity entity;
 	private ArrayList<ICommunicationNode> nodes;
 	private ArrayList<int[]> drawMachines = new ArrayList<int[]>();
+	private int viewID = 0;
+	private ICommunicationNode activeNode;
+
+	// private FontRenderer fontLcd = new FontRenderer(mc.gameSettings,new
+	// ResourceLocation(INamepace.TEXTURE_DOMAIN, "textures/font/lcd.png"),
+	// mc.renderEngine, false);
 
 	public GuiLogicDisplay(TileEntityLogicDisplay entity) {
-		this.textureLocation = new ResourceLocation(INamepace.TEXTURE_DOMAIN, "textures/gui/Guide.png");
+		this.textureLocation = new ResourceLocation(INamepace.TEXTURE_DOMAIN, "textures/gui/LogicGui.png");
 		this.entity = entity;
 		nodes = new ArrayList<ICommunicationNode>();
 		requestNodes();
@@ -70,27 +77,88 @@ public class GuiLogicDisplay extends GuiScreen {
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		int x = (width - X_SIZE) / 2;
 		int y = (height - Y_SIZE - 23) / 2;
-		this.drawTexturedModalRect(x, y, 0, 0, X_SIZE, Y_SIZE);
-		this.drawMachine();
-		super.drawScreen(mouseX, mouseY, par3);
+		// this.drawTexturedModalRect(x, y, 0, 0, X_SIZE, Y_SIZE);
+		if (viewID == 0) {
+			this.drawOverview();
+			GuiButton guibutton = (GuiButton) this.buttonList.get(0);
+			guibutton.drawButton(this.mc, mouseX, mouseY);
+			guibutton = (GuiButton) this.buttonList.get(1);
+			guibutton.drawButton(this.mc, mouseX, mouseY);
+		}
+		if (viewID == 1) {
+			this.drawMachine(x, y);
+		}
 		GL11.glPopMatrix();
 		RenderHelper.disableStandardItemLighting();
 
 	}
 
-	private void drawMachine() {
+	private void drawMachine(int x, int y) {
+		Color color1 = new Color(227, 129, 63);
+		Color color2 = new Color(210, 92, 13);
+		Color color3 = new Color(180, 180, 180);
+		Color color4 = new Color(220, 220, 220);
+		Color color5 = new Color(0, 0, 0);
+		Color color6 = new Color(20, 20, 20);
+		drawGradientRect(x + 10, y + 10, x + X_SIZE - 10, y + Y_SIZE - 10, color1.getRGB(), color2.getRGB());
+		drawGradientRect(x + 30, y + 50, x + X_SIZE - 30, y + Y_SIZE - 50, color3.getRGB(), color4.getRGB());
+		drawGradientRect(x + 40, y + 60, x + X_SIZE - 40, y + Y_SIZE - 60, color5.getRGB(), color6.getRGB());
+		this.drawTexturedModalRect(x + 15, y + 15, 0, 0, 15, 15);
+		this.drawTexturedModalRect(x + 15, y + Y_SIZE - 30, 0, 0, 15, 15);
+		this.drawTexturedModalRect(x + X_SIZE - 30, y + 15, 0, 0, 15, 15);
+		this.drawTexturedModalRect(x + X_SIZE - 30, y + Y_SIZE - 30, 0, 0, 15, 15);
+
+		switch (activeNode.getLogicType()) {
+		case gate:
+			break;
+		case interfaces:
+			ILogicInterface interfaces = (ILogicInterface) activeNode;
+			fontRenderer.drawString(interfaces.getMachine().getName(), x + 45, y + 65, 4210752);
+			fontRenderer.drawString("Status: "+interfaces.getMachine().getStatus().toString(), x + 45, y + 80, 4210752);
+			for(InterfaceType type:interfaces.getMachine().getConnectionTypes()){
+				switch (type) {
+				case inventory:
+					break;
+				case multi:
+					break;
+				case power:
+					IPowerStorage storage = (IPowerStorage) ((UTVariable[])interfaces.getData(UTVariableType.power))[0].value;
+					fontRenderer.drawString("Power: "+storage.getStoredPower()+"/"+storage.getPowerCapacity(), x + 45, y + 95, 4210752);
+					break;
+				case single:
+					break;
+				case tank:
+					break;
+				case worker:
+					break;
+				default:
+					break;
+				}
+			}
+		case networkedNode:
+			break;
+		case node:
+			break;
+		case transport:
+			break;
+		default:
+			break;
+		}
+	}
+
+	private void drawOverview() {
 		for (int[] frame : drawMachines) {
 			TileEntity te = (TileEntity) nodes.get(frame[6]);
 			drawGradientRect(frame[0], frame[1], frame[2], frame[3], frame[4], frame[5]);
 			fontRenderer.drawString(nodes.get(frame[6]).getName(), frame[0] + 5, frame[1] + 5, 4210752);
 			fontRenderer.drawString("X:" + te.xCoord + " Y:" + te.yCoord + " Z:" + te.zCoord, frame[0] + 5, frame[1] + 15, 4210752);
 			fontRenderer.drawString(drawMachineInfo(nodes.get(frame[6])), frame[0] + 5, frame[1] + 30, 4210752);
-						
+
 		}
 	}
 
 	private String drawMachineInfo(ICommunicationNode node) {
-		switch (node.getLogicType()){
+		switch (node.getLogicType()) {
 		case gate:
 			break;
 		case interfaces:
@@ -171,14 +239,28 @@ public class GuiLogicDisplay extends GuiScreen {
 
 	@Override
 	protected void actionPerformed(GuiButton par1GuiButton) {
-		if (par1GuiButton.id == 0 && offsetDisplayedNodes >=6) {
+		if (par1GuiButton.id == 0 && offsetDisplayedNodes >= 6) {
 			offsetDisplayedNodes = offsetDisplayedNodes - 6;
 			drawTabbedNodes();
-		}
-		else if (par1GuiButton.id == 1 && offsetDisplayedNodes <= nodes.size()-6) {
+		} else if (par1GuiButton.id == 1 && offsetDisplayedNodes <= nodes.size() - 6) {
 			offsetDisplayedNodes = offsetDisplayedNodes + 6;
 			drawTabbedNodes();
 		}
 		super.actionPerformed(par1GuiButton);
+	}
+
+	@Override
+	protected void mouseClicked(int par1, int par2, int par3) {
+		if (viewID == 0) {
+			super.mouseClicked(par1, par2, par3);
+			for (int[] frame : drawMachines) {
+				if (par1 > frame[0] && par1 < frame[2]) {
+					if (par2 > frame[1] && par2 < frame[3]) {
+						activeNode = nodes.get(frame[6]);
+						viewID = 1;
+					}
+				}
+			}
+		}
 	}
 }
