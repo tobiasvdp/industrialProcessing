@@ -1,5 +1,6 @@
 package ip.industrialProcessing.api.handlers;
 
+import ip.industrialProcessing.api.info.InfoPower;
 import ip.industrialProcessing.machines.IPowerStorage;
 import ip.industrialProcessing.utils.working.IWorker;
 

@@ -14,6 +14,8 @@ import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
 import ip.industrialProcessing.machines.TileEntityPoweredWorkerMachine;
 import ip.industrialProcessing.power.IPoweredMachine;
+import ip.industrialProcessing.utils.working.IWorker;
+import ip.industrialProcessing.utils.working.IWorkingEntity;
 
 public class TileEntityMachineInterface extends TileEntityLogicNetworkNode implements ILogicInterface{
 
@@ -70,9 +72,29 @@ public class TileEntityMachineInterface extends TileEntityLogicNetworkNode imple
 	@Override
 	public UTVariable[] getData(UTVariableType type) {
 		if (getMachine() != null) {
-			if (type == UTVariableType.power && machine instanceof IPoweredMachine) {
-				IPoweredMachine powerMachine = (IPoweredMachine) machine;
-				return new UTVariable[] { new UTVariable(0, UTVariableType.power, powerMachine.getMainPowerStorage()) };
+			switch (type){
+			case bit:
+				break;
+			case power:
+				if (machine instanceof IPoweredMachine) {
+					IPoweredMachine powerMachine = (IPoweredMachine) machine;
+					return new UTVariable[] { new UTVariable(0, UTVariableType.power, powerMachine.getMainPowerStorage()) };
+				}
+				break;
+			case slot:
+				break;
+			case tank:
+				break;
+			case unknown:
+				break;
+			case work:
+				if (machine instanceof IWorkingEntity) {
+					IWorker worker = ((IWorkingEntity) machine).getWorker();
+					return new UTVariable[] { new UTVariable(0, UTVariableType.work, worker) };
+				}
+				break;
+			default:
+				break;
 			}
 		}
 		return null;

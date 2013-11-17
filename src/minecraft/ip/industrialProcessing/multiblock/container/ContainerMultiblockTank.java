@@ -6,7 +6,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraftforge.fluids.FluidTankInfo;
 import ip.industrialProcessing.api.handlers.HandlerTank;
 import ip.industrialProcessing.api.handlers.IHandlerTank;
-import ip.industrialProcessing.api.handlers.InfoTank;
+import ip.industrialProcessing.api.info.InfoTank;
 import ip.industrialProcessing.api.tanks.IPfluidTank;
 import ip.industrialProcessing.machines.containers.ProgressBarHandlerInfo;
 import ip.industrialProcessing.machines.containers.ProgressBarTankHandler;

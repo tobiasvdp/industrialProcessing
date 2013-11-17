@@ -1,5 +1,6 @@
 package ip.industrialProcessing.api.handlers;
 
+import ip.industrialProcessing.api.info.InfoTank;
 import ip.industrialProcessing.api.tanks.IIPfluidTank;
 import ip.industrialProcessing.api.tanks.IPfluidTank;
 import ip.industrialProcessing.api.tanks.ITank;

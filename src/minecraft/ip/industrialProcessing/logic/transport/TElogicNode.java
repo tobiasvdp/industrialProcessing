@@ -39,7 +39,7 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 		conectableOutputSides = setConnectableOutputSides();
 		for (int i = 0; i < 6; i++) {
 			nodeCollection[i] = new UTlogicNodeContainer(this);
-			buffer[i] = new UTBuffer(UTBufferType.Bit, 1);
+			buffer[i] = new UTBuffer(UTBufferType.Bit);
 		}
 	}
 
@@ -223,10 +223,10 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 
 	private void initiateBuffer(UTBuffer utBuffer, UTBusType busType) {
 		if (busType == UTBusType.cable) {
-			utBuffer = new UTBuffer(UTBufferType.Bit, 1);
+			utBuffer = new UTBuffer(UTBufferType.Bit);
 		}
 		if (busType == UTBusType.bundle) {
-			utBuffer = new UTBuffer(UTBufferType.Bit, 16);
+			utBuffer = new UTBuffer(UTBufferType.Bit);
 		}
 	}
 

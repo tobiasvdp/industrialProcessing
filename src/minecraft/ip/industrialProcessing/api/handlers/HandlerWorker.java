@@ -1,6 +1,7 @@
 package ip.industrialProcessing.api.handlers;
 
 import net.minecraftforge.fluids.FluidTankInfo;
+import ip.industrialProcessing.api.info.InfoWorker;
 import ip.industrialProcessing.machines.containers.ProgressBarHandlerInfo;
 import ip.industrialProcessing.machines.containers.ProgressInfoWorker;
 import ip.industrialProcessing.utils.working.IWorker;

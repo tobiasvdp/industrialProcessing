@@ -1,8 +1,8 @@
 package ip.industrialProcessing.multiblock.gui;
 
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.api.handlers.InfoTank;
-import ip.industrialProcessing.api.handlers.InfoWorker;
+import ip.industrialProcessing.api.info.InfoTank;
+import ip.industrialProcessing.api.info.InfoWorker;
 import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.machines.containers.ProgressInfoTank;
 import ip.industrialProcessing.machines.containers.ProgressInfoWorker;

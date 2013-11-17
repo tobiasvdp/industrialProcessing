@@ -1,4 +1,4 @@
-package ip.industrialProcessing.api.handlers;
+package ip.industrialProcessing.api.info;
 
 public class InfoTank {
 	public int amount = -1;

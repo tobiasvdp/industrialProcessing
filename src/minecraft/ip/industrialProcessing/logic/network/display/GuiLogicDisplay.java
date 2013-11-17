@@ -1,13 +1,17 @@
 package ip.industrialProcessing.logic.network.display;
 
+import ip.industrialProcessing.api.info.InfoMachine;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.logic.PacketHandler;
 import ip.industrialProcessing.logic.api.network.interfaces.ILogicInterface;
 import ip.industrialProcessing.logic.api.network.interfaces.InterfaceType;
 import ip.industrialProcessing.logic.transport.ICommunicationNode;
+import ip.industrialProcessing.logic.utils.UTBuffer;
+import ip.industrialProcessing.logic.utils.UTBufferType;
 import ip.industrialProcessing.logic.utils.UTVariable;
 import ip.industrialProcessing.logic.utils.UTVariableType;
 import ip.industrialProcessing.machines.IPowerStorage;
+import ip.industrialProcessing.utils.working.IWorker;
 
 import java.awt.Color;
 import java.io.ByteArrayOutputStream;
@@ -35,9 +39,13 @@ public class GuiLogicDisplay extends GuiScreen {
 	private ResourceLocation textureLocation;
 	private TileEntity entity;
 	private ArrayList<ICommunicationNode> nodes;
+	UTBuffer buffer;
 	private ArrayList<int[]> drawMachines = new ArrayList<int[]>();
+
 	private int viewID = 0;
-	private ICommunicationNode activeNode;
+	private int activeNode;
+
+	private int delaySyncData = 0;
 
 	// private FontRenderer fontLcd = new FontRenderer(mc.gameSettings,new
 	// ResourceLocation(INamepace.TEXTURE_DOMAIN, "textures/font/lcd.png"),
@@ -47,6 +55,7 @@ public class GuiLogicDisplay extends GuiScreen {
 		this.textureLocation = new ResourceLocation(INamepace.TEXTURE_DOMAIN, "textures/gui/LogicGui.png");
 		this.entity = entity;
 		nodes = new ArrayList<ICommunicationNode>();
+		buffer = new UTBuffer(UTBufferType.collection);
 		requestNodes();
 	}
 
@@ -68,6 +77,10 @@ public class GuiLogicDisplay extends GuiScreen {
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float par3) {
+		delaySyncData++;
+		if (delaySyncData == 20) {
+			delaySyncData = 0;
+		}
 		drawDefaultBackground();
 		mc.renderEngine.func_110577_a(this.textureLocation);
 		RenderHelper.disableStandardItemLighting();
@@ -108,28 +121,30 @@ public class GuiLogicDisplay extends GuiScreen {
 		this.drawTexturedModalRect(x + X_SIZE - 30, y + 15, 0, 0, 15, 15);
 		this.drawTexturedModalRect(x + X_SIZE - 30, y + Y_SIZE - 30, 0, 0, 15, 15);
 
-		switch (activeNode.getLogicType()) {
+		switch (nodes.get(activeNode).getLogicType()) {
 		case gate:
 			break;
 		case interfaces:
-			ILogicInterface interfaces = (ILogicInterface) activeNode;
+			ILogicInterface interfaces = (ILogicInterface) nodes.get(activeNode);
 			fontRenderer.drawString(interfaces.getMachine().getName(), x + 45, y + 65, 4210752);
-			fontRenderer.drawString("Status: "+interfaces.getMachine().getStatus().toString(), x + 45, y + 80, 4210752);
-			for(InterfaceType type:interfaces.getMachine().getConnectionTypes()){
+			fontRenderer.drawString("Status: " + interfaces.getMachine().getStatus().toString(), x + 45, y + 80, 4210752);
+			for (InterfaceType type : interfaces.getMachine().getConnectionTypes()) {
 				switch (type) {
 				case inventory:
 					break;
 				case multi:
 					break;
 				case power:
-					IPowerStorage storage = (IPowerStorage) ((UTVariable[])interfaces.getData(UTVariableType.power))[0].value;
-					fontRenderer.drawString("Power: "+storage.getStoredPower()+"/"+storage.getPowerCapacity(), x + 45, y + 95, 4210752);
+					IPowerStorage storage = (IPowerStorage) ((UTVariable[]) interfaces.getData(UTVariableType.power))[0].value;
+					fontRenderer.drawString("Power: " + storage.getStoredPower() + "/" + storage.getPowerCapacity(), x + 45, y + 95, 4210752);
 					break;
 				case single:
 					break;
 				case tank:
 					break;
 				case worker:
+					IWorker worker = (IWorker) ((UTVariable[]) interfaces.getData(UTVariableType.work))[0].value;
+					fontRenderer.drawString("Work progress: " + worker.getWorkDone() + "/" + worker.getTotalWork(), x + 45, y + 110, 4210752);
 					break;
 				default:
 					break;
@@ -152,18 +167,17 @@ public class GuiLogicDisplay extends GuiScreen {
 			drawGradientRect(frame[0], frame[1], frame[2], frame[3], frame[4], frame[5]);
 			fontRenderer.drawString(nodes.get(frame[6]).getName(), frame[0] + 5, frame[1] + 5, 4210752);
 			fontRenderer.drawString("X:" + te.xCoord + " Y:" + te.yCoord + " Z:" + te.zCoord, frame[0] + 5, frame[1] + 15, 4210752);
-			fontRenderer.drawString(drawMachineInfo(nodes.get(frame[6])), frame[0] + 5, frame[1] + 30, 4210752);
-
+			fontRenderer.drawString(drawMachineInfo(frame[6]), frame[0] + 5, frame[1] + 30, 4210752);
 		}
 	}
 
-	private String drawMachineInfo(ICommunicationNode node) {
-		switch (node.getLogicType()) {
+	private String drawMachineInfo(int node) {
+		switch (nodes.get(node).getLogicType()) {
 		case gate:
 			break;
 		case interfaces:
-			ILogicInterface interfaces = (ILogicInterface) node;
-			return interfaces.getMachine().getStatus().toString();
+			requestData(node, UTVariableType.status);
+			return ((InfoMachine) buffer.get(node).value).status.toString();
 		case networkedNode:
 			break;
 		case node:
@@ -200,6 +214,33 @@ public class GuiLogicDisplay extends GuiScreen {
 		PacketDispatcher.sendPacketToServer(packet);
 	}
 
+	public void requestData(int nodeIndex, UTVariableType type) {
+		if (delaySyncData == 0) {
+			ByteArrayOutputStream bos = new ByteArrayOutputStream(8);
+			DataOutputStream outputStream = new DataOutputStream(bos);
+			try {
+				outputStream.writeInt(this.entity.xCoord);
+				outputStream.writeInt(this.entity.yCoord);
+				outputStream.writeInt(this.entity.zCoord);
+				outputStream.writeInt(nodeIndex);
+				outputStream.writeInt(type.ordinal());
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+
+			Packet250CustomPayload packet = new Packet250CustomPayload();
+			packet.channel = PacketHandler.DISPLAY_GET_DATA;
+			packet.data = bos.toByteArray();
+			packet.length = bos.size();
+
+			PacketDispatcher.sendPacketToServer(packet);
+		}
+	}
+	
+	public void setData(){
+		
+	} 
+
 	@Override
 	public boolean doesGuiPauseGame() {
 		return false;
@@ -207,9 +248,26 @@ public class GuiLogicDisplay extends GuiScreen {
 
 	public void addNode(ICommunicationNode te) {
 		nodes.add(te);
+		switch(te.getLogicType()){
+		case gate:
+			break;
+		case interfaces:
+			buffer.add(0, UTVariableType.machine, new InfoMachine());
+			break;
+		case networkedNode:
+			break;
+		case node:
+			break;
+		case transport:
+			break;
+		default:
+			buffer.add(0, UTVariableType.unknown, new UTBuffer(UTBufferType.Integer));
+			break;
+		
+		}
 	}
 
-	int offsetDisplayedNodes = 0;
+	public int offsetDisplayedNodes = 0;
 	int offset = 5;
 	int widthTab = 120;
 	int heightTab = 50;
@@ -256,7 +314,7 @@ public class GuiLogicDisplay extends GuiScreen {
 			for (int[] frame : drawMachines) {
 				if (par1 > frame[0] && par1 < frame[2]) {
 					if (par2 > frame[1] && par2 < frame[3]) {
-						activeNode = nodes.get(frame[6]);
+						activeNode = frame[6];
 						viewID = 1;
 					}
 				}
