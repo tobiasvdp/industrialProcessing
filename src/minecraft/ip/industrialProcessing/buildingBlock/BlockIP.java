@@ -3,6 +3,8 @@ package ip.industrialProcessing.buildingBlock;
 import java.util.Random;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.items.ItemIP;
 import net.minecraft.block.Block;
 import net.minecraft.block.StepSound;
@@ -21,8 +23,8 @@ public class BlockIP extends Block {
 		setHardness(hardness);
 		setStepSound(stepSound);
 		setUnlocalizedName(name);
-		setCreativeTab(IndustrialProcessing.tabPower);
-		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + name);
+		setCreativeTab(ISetupCreativeTabs.tabPower);
+		func_111022_d(INamepace.TEXTURE_NAME_PREFIX + name);
 	}
 
 	public BlockIP(int blockID, String name, float hardness, Material blockMaterial, StepSound stepSound, ItemIP dropitem) {
@@ -30,15 +32,15 @@ public class BlockIP extends Block {
 		setHardness(hardness);
 		setStepSound(stepSound);
 		setUnlocalizedName(name);
-		setCreativeTab(IndustrialProcessing.tabOres);
-		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + name);
+		setCreativeTab(ISetupCreativeTabs.tabOres);
+		func_111022_d(INamepace.TEXTURE_NAME_PREFIX + name);
 		this.dropItems = true;
 		this.dropItem = dropitem;
 	}
 
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack itemStack) {
-		int dir = MathHelper.floor_double((double) ((entityLivingBase.rotationYaw * 4F) / 360F) + 0.5D) & 3;
+		int dir = MathHelper.floor_double((entityLivingBase.rotationYaw * 4F) / 360F + 0.5D) & 3;
 		world.setBlockMetadataWithNotify(x, y, z, dir, 0);
 		super.onBlockPlacedBy(world, x, y, z, entityLivingBase, itemStack);
 	}

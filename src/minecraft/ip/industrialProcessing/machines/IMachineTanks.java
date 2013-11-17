@@ -1,6 +1,5 @@
 package ip.industrialProcessing.machines;
 
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
 public interface IMachineTanks {

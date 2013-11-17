@@ -1,9 +1,7 @@
 package ip.industrialProcessing.config;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.utils.CreativeTabsIP;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
 
 public interface ISetupCreativeTabs {
     public static CreativeTabs tabOreProcessing = new CreativeTabsIP(CreativeTabs.getNextID(), "tabOreExtraction");

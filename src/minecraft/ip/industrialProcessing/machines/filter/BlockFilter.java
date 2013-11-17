@@ -46,6 +46,8 @@ public class BlockFilter extends BlockMachineRendered {
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityFilter();
+		TileEntityFilter te = new TileEntityFilter();
+		te.setName(getLocalizedName());
+		return te;
 	}
 }

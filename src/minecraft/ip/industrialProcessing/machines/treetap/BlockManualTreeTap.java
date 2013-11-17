@@ -35,7 +35,7 @@ public class BlockManualTreeTap extends BlockMachineRendered {
 
         ForgeDirection side = ForgeDirection.getOrientation(par5).getOpposite();
         int id = par1World.getBlockId(par2 + side.offsetX, par3 + side.offsetY, par4 + side.offsetZ);
-        if (id == ConfigBlocks.getRubberLogID()) {
+        if (id == IndustrialProcessing.blockPineLog.blockID || id == IndustrialProcessing.blockRubberLog.blockID) {
             return BlockRubberLog.isCarved(par1World, par2 + side.offsetX, par3 + side.offsetY, par4 + side.offsetZ, par5);
         } else
             return false;
@@ -122,7 +122,9 @@ public class BlockManualTreeTap extends BlockMachineRendered {
 
     @Override
     public TileEntity createNewTileEntity(World world) {
-        return new TileEntityManualTreeTap();
+    	TileEntityManualTreeTap te = new TileEntityManualTreeTap();
+    	te.setName(getLocalizedName());
+        return te;
     }
 
     @Override

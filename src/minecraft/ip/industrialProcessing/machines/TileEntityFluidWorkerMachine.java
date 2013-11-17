@@ -1,21 +1,16 @@
 package ip.industrialProcessing.machines;
 
 import ip.industrialProcessing.client.render.IAnimationProgress;
+import ip.industrialProcessing.logic.api.network.interfaces.InterfaceType;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
 import ip.industrialProcessing.machines.animation.AnimationMode;
 import ip.industrialProcessing.machines.animation.IAnimationSyncable;
 import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 import ip.industrialProcessing.recipes.IRecipeFluidWorkHandler;
-import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeFluidWorker;
-import ip.industrialProcessing.recipes.RecipeWorker;
-import ip.industrialProcessing.utils.working.ClientWorker;
 import ip.industrialProcessing.utils.working.IWorker;
 import ip.industrialProcessing.utils.working.ServerWorker;
 import ip.industrialProcessing.utils.working.WorkUtils;
-
-import java.util.Iterator;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
@@ -53,11 +48,6 @@ public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachin
 	work(1);
     }
 
-    @Override
-    public boolean canUpdate() {
-	return true;
-    }
-
     protected int work(int amount) {
 	return this.getWorker().doWork(amount);
     }
@@ -91,7 +81,7 @@ public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachin
 	IWorker worker = getWorker();
 	float maxWork = worker.getTotalWork();
 	// each frame, workDone/maxWork % will be added to the animation
-	this.animationHandler.setSpeed(workDone / maxWork / this.animationHandler.DT);
+	this.animationHandler.setSpeed(workDone / maxWork / AnimationHandler.DT);
     }
 
     @Override
@@ -104,7 +94,8 @@ public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachin
 	return 1;
     }
 
-    public AnimationHandler getAnimationHandler() {
+    @Override
+	public AnimationHandler getAnimationHandler() {
 	return animationHandler;
     }
 
@@ -150,4 +141,9 @@ public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachin
     @Override
     public void addPressure(ForgeDirection from, float pressure) { 
     }
+    
+    @Override
+    public InterfaceType[] getConnectionTypes(){
+    	return new InterfaceType[]{InterfaceType.single,InterfaceType.inventory,InterfaceType.tank,InterfaceType.worker};
+    };
 }

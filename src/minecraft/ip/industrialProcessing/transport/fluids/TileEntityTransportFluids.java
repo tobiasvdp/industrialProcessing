@@ -47,7 +47,7 @@ public class TileEntityTransportFluids extends TileEntityTransportFluidsBase {
 
 	@Override
 	protected void leakPressure() {
-		this.pressure -= this.pressure * 0.005f;
+		this.pressure -= this.pressure * 0.15f;
 		if (Float.isNaN(this.pressure) || Float.isInfinite(this.pressure))
 			this.pressure = 0;
 	}

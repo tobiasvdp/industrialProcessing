@@ -3,6 +3,7 @@ package ip.industrialProcessing.api.rendering;
 import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
 import ip.industrialProcessing.client.render.ModelBlock;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;
 
@@ -30,6 +31,9 @@ public class RendererBlock implements ISimpleBlockRenderingHandler {
 		if (block == null || world == null) {
 			return false;
 		}
+	    Minecraft mc = Minecraft.getMinecraft();
+	    mc.mcProfiler.startSection("IP");
+	    mc.mcProfiler.startSection(block.getUnlocalizedName());
 		renderer.overrideBlockTexture = block.getBlockTexture(world, x, y, z, 0);
 
 		renderer.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1F, 1.0F);
@@ -38,6 +42,8 @@ public class RendererBlock implements ISimpleBlockRenderingHandler {
 		boolean result = model.renderWorldBlock(reference, modelId, renderer);
 
 		renderer.clearOverrideBlockTexture();
+		mc.mcProfiler.endSection();
+		mc.mcProfiler.endSection();
 		return result;
 	}
 

@@ -1,6 +1,7 @@
 package ip.industrialProcessing.items;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.INamepace;
 
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -32,7 +33,7 @@ public abstract class GuidePanoramaPage extends GuidePage {
 	public GuidePanoramaPage(Rectangle rectangle, Point location) {
 		this.rectangle = rectangle;
 		this.location = location;
-		this.textureLocation = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/GuideDropShadowOverlay.png");
+		this.textureLocation = new ResourceLocation(INamepace.TEXTURE_DOMAIN, "textures/gui/GuideDropShadowOverlay.png");
 	}
 
 	@Override

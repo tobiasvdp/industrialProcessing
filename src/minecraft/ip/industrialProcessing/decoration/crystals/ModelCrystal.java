@@ -49,7 +49,7 @@ public class ModelCrystal extends ModelBlock {
 		Random rnd = new Random(0);
 		for (int i = 0; i < meshes.length; i++) {
 			if (rnd.nextGaussian() > 0) {
-				meshes[i].renderMesh(true, icon, position);
+				meshes[i].renderMesh( icon);
 			}
 		}
 		GL11.glPopMatrix();

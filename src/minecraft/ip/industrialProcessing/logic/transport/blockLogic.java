@@ -1,37 +1,27 @@
-package ip.industrialProcessing.logic.functions.or;
+package ip.industrialProcessing.logic.transport;
 
 import java.util.Random;
 
-import ip.industrialProcessing.logic.IPLogic;
-import ip.industrialProcessing.logic.config.ConfigLogic;
-import ip.industrialProcessing.logic.transport.ICommunication;
-import ip.industrialProcessing.logic.transport.ICommunicationNode;
-import ip.industrialProcessing.logic.transport.ICommunicationTransport;
-import ip.industrialProcessing.logic.utils.UTVariable;
-import ip.industrialProcessing.machines.BlockMachineRendered;
-import ip.industrialProcessing.utils.rotation.ISidedRotation;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
+import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+import ip.industrialProcessing.logic.config.ConfigLogic;
+import ip.industrialProcessing.logic.utils.UTVariable;
+import ip.industrialProcessing.logic.utils.UTVariableType;
+import ip.industrialProcessing.machines.BlockMachineRendered;
+import ip.industrialProcessing.utils.rotation.ISidedRotation;
 
-public class BLlogicOr extends BlockMachineRendered {
+public abstract class blockLogic extends BlockMachineRendered{
 
-	public BLlogicOr() {
-		super(ConfigLogic.getBLlogicOr(), Material.iron, 5.0f, Block.soundMetalFootstep, "BLlogicOr", IPLogic.tabLogic);
+	public blockLogic(int par1, Material par2Material, float hardness, StepSound stepSound, String name, CreativeTabs tab) {
+		super(par1, par2Material, hardness, stepSound, name, tab);
 	}
-
-	@Override
-	public TileEntity createNewTileEntity(World world) {
-		return new TElogicOr();
-	}
-
 	@Override
 	public int onBlockPlaced(World par1World, int par2, int par3, int par4, int par5, float par6, float par7, float par8, int par9) {
 		return par5;
@@ -64,8 +54,6 @@ public class BLlogicOr extends BlockMachineRendered {
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float clickX, float clickY, float clickZ) {
 		ICommunicationNode com = (ICommunicationNode) world.getBlockTileEntity(x, y, z);
-		com.createDataPacket(ForgeDirection.EAST, new UTVariable(0,0,true)); 
-		System.out.println("this value: " + com.getBuffer(ForgeDirection.EAST).get().value);
 		return super.onBlockActivated(world, x, y, z, player, metadata, clickX, clickY, clickZ);
 	}
 
@@ -78,14 +66,11 @@ public class BLlogicOr extends BlockMachineRendered {
 	}
 
 	@Override
-	public int getRenderType() {
-		return ConfigLogic.getRDlogicOr();
-	}
-
-	@Override
 	public void onBlockAdded(World par1World, int par2, int par3, int par4) {
 		if (par1World.isRemote)
 			par1World.markBlockForUpdate(par2, par3, par4);
 		super.onBlockAdded(par1World, par2, par3, par4);
 	}
+	@Override
+	public abstract int getRenderType();
 }

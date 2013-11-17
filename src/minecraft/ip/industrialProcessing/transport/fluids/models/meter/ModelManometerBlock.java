@@ -24,8 +24,8 @@ public class ModelManometerBlock extends ModelBlock {
 		Vector3f position = new Vector3f(0, 0, 0);
 		Icon icon = block.getIcon(0, 0);
         Icon icon2 = block.getIcon(1, 0);
-		center.getRotated(0).renderMesh(true, icon, position);
-        cover.getRotated(0).renderMesh(true, icon2, position);
+		center.getRotated(0).renderMesh(icon);
+        cover.getRotated(0).renderMesh(icon2);
 	}
 
 	@Override

@@ -16,14 +16,16 @@ public interface ICommunicationNode extends ICommunication{
 	
 	public ForgeDirection[] setConnectableInputSides();
 	public ForgeDirection[] setConnectableOutputSides();
-	public ForgeDirection[] getConnectableInputSides();
-	public ForgeDirection[] getConnectableOutputSides();
+	public boolean isValidInput(ForgeDirection dir);
+	public boolean isValidOutput(ForgeDirection dir);
 	
 	public void createDiscoveryPacket();
 	public void createDiscoveryPacket(ForgeDirection dir);
 	public void createDestructionPacket();
-	public void createDataPacket();
+	public void createDataPacket( UTVariable... data);
 	public void createDataPacket(ForgeDirection dir,  UTVariable... data);
 	
 	public void transition();
+	
+	public String getName();
 }

@@ -1,12 +1,39 @@
 package ip.industrialProcessing.api.rendering.wavefront;
 
+import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.Icon;
 
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 
 public abstract class ObjMesh {
+
+    private boolean compiled = false;
+    private int displayList;
+
+    private void compileDisplayList(Icon icon) {
+        this.displayList = GLAllocation.generateDisplayLists(1);
+        GL11.glNewList(this.displayList, GL11.GL_COMPILE);
+        Tessellator tessellator = Tessellator.instance;
+
+        tessellator.startDrawingQuads();
+        doRenderMesh(icon);
+        tessellator.draw();
+
+        GL11.glEndList();
+        this.compiled = true;
+    }
+
+    public void renderMesh(Icon icon) {
+
+        if (!compiled) {
+            compileDisplayList(icon);
+        }
+
+        GL11.glCallList(this.displayList);
+    }
 
     protected ObjQuad[] quads;
 
@@ -18,8 +45,8 @@ public abstract class ObjMesh {
         renderQuads(this.quads, startDraw, icon, position);
     }
 
-    public void renderMesh(boolean startDraw, Icon icon, Vector3f position) {
-        renderQuads(this.quads, startDraw, icon, position);
+    public void doRenderMesh(Icon icon) {
+        renderQuads(this.quads, false, icon, new Vector3f(0,0,0));
     }
 
     protected void renderQuads(ObjQuad[] quads, boolean startDraw, Icon icon, WorldReference position) {
@@ -70,16 +97,16 @@ public abstract class ObjMesh {
         int normalBrightness = (int) (255 * (darken + 1) / 2f);
 
         tessellator.setColorOpaque(normalBrightness, normalBrightness, normalBrightness);
-        tessellator.setBrightness(position.getBrightness(quad.position1, normal));
+        tessellator.setBrightness(position.calculateBrightness(quad.position1, normal));
         tessellator.addVertexWithUV(quad.position1.x + dx, quad.position1.y + dy, quad.position1.z + dz, quad.uv1.x * du + minU, quad.uv1.y * dv + minV);
 
-        tessellator.setBrightness(position.getBrightness(quad.position2, normal));
+        tessellator.setBrightness(position.calculateBrightness(quad.position2, normal));
         tessellator.addVertexWithUV(quad.position2.x + dx, quad.position2.y + dy, quad.position2.z + dz, quad.uv2.x * du + minU, quad.uv2.y * dv + minV);
 
-        tessellator.setBrightness(position.getBrightness(quad.position3, normal));
+        tessellator.setBrightness(position.calculateBrightness(quad.position3, normal));
         tessellator.addVertexWithUV(quad.position3.x + dx, quad.position3.y + dy, quad.position3.z + dz, quad.uv3.x * du + minU, quad.uv3.y * dv + minV);
 
-        tessellator.setBrightness(position.getBrightness(quad.position4, normal));
+        tessellator.setBrightness(position.calculateBrightness(quad.position4, normal));
         tessellator.addVertexWithUV(quad.position4.x + dx, quad.position4.y + dy, quad.position4.z + dz, quad.uv4.x * du + minU, quad.uv4.y * dv + minV);
 
         if (startDraw)

@@ -20,7 +20,9 @@ public class BlockMixer extends BlockMachineRendered {
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityMixer();
+		TileEntityMixer te = new TileEntityMixer();
+		te.setName(getLocalizedName());
+		return te;
 	}
 	
     @Override

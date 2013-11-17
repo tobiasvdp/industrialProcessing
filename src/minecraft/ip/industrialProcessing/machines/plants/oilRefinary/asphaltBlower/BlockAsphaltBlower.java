@@ -18,7 +18,9 @@ public class BlockAsphaltBlower  extends BlockMachineRendered {
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityAsphaltBlower();
+		TileEntityAsphaltBlower te = new TileEntityAsphaltBlower();
+		te.setName(getLocalizedName());
+		return te;
 	}
 	
     @Override

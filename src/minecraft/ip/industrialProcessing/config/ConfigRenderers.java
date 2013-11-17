@@ -48,6 +48,7 @@ public class ConfigRenderers {
     private int rendererConveyorBelt;
     private int rendererConveyorInput;
     private int rendererConveyorOutput;
+    private int rendererConveyorChute;
     private int rendererConveyorSorter;
     private int rendererPumpId;
     private int rendererRainTankID;
@@ -290,6 +291,14 @@ public class ConfigRenderers {
 
     public static void setRendererConveyorOutputID(int value) {
         getInstance().rendererConveyorOutput = value;
+    }
+
+    public static int getRendererConveyorChuteID() {
+        return getInstance().rendererConveyorChute;
+    }
+
+    public static void setRendererConveyorChuteID(int value) {
+        getInstance().rendererConveyorChute = value;
     }
 
     public static int getBLmultiblockDisplayPanel() {

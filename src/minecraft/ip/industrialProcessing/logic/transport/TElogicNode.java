@@ -1,8 +1,10 @@
 package ip.industrialProcessing.logic.transport;
 
+import ip.industrialProcessing.logic.network.display.TileEntityLogicDisplay;
 import ip.industrialProcessing.logic.utils.UTBuffer;
 import ip.industrialProcessing.logic.utils.UTBufferType;
 import ip.industrialProcessing.logic.utils.UTBusType;
+import ip.industrialProcessing.logic.utils.UTLogicType;
 import ip.industrialProcessing.logic.utils.UTVariable;
 import ip.industrialProcessing.logic.utils.UTlogicNodeContainer;
 import ip.industrialProcessing.logic.utils.UTpacket;
@@ -13,30 +15,34 @@ import ip.industrialProcessing.utils.rotation.ISidedRotation;
 import java.util.ArrayList;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.INetworkManager;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
-public abstract class TElogicNode extends TileEntitySynced implements ICommunicationNode, ISidedRotation{
-	
+public abstract class TElogicNode extends TileEntity implements ICommunicationNode, ISidedRotation {
+
 	private ForgeDirection orientationSide;
 	private ForgeDirection orientationRotation;
-	
-	private UTlogicNodeContainer[] nodeCollection = new UTlogicNodeContainer[6];
-	private UTBuffer[] buffer = new UTBuffer[6];
+
+	protected UTlogicNodeContainer[] nodeCollection = new UTlogicNodeContainer[6];
+	protected UTBuffer[] buffer = new UTBuffer[6];
 	private ForgeDirection[] conectableInputSides;
 	private ForgeDirection[] conectableOutputSides;
-	
-	private ArrayList<UTpacket> packets = new ArrayList<UTpacket>();
+
+	protected ArrayList<UTpacket> packets = new ArrayList<UTpacket>();
 
 	public TElogicNode() {
 		conectableInputSides = setConnectableInputSides();
-		conectableOutputSides = setConnectableInputSides();
+		conectableOutputSides = setConnectableOutputSides();
 		for (int i = 0; i < 6; i++) {
-			nodeCollection[i] = new UTlogicNodeContainer();
+			nodeCollection[i] = new UTlogicNodeContainer(this);
 			buffer[i] = new UTBuffer(UTBufferType.Bit, 1);
 		}
 	}
-	
+
 	private int transformToForgeDirection(int blockMetadata) {
 		switch (blockMetadata) {
 		case 0:
@@ -54,14 +60,15 @@ public abstract class TElogicNode extends TileEntitySynced implements ICommunica
 		}
 		return 0;
 	}
-	
-	public ForgeDirection[] getConnectableInputSides(){
+
+	public ForgeDirection[] getConnectableInputSides() {
 		return conectableInputSides;
 	}
-	public ForgeDirection[] getConnectableOutputSides(){
+
+	public ForgeDirection[] getConnectableOutputSides() {
 		return conectableOutputSides;
 	}
-	
+
 	@Override
 	public void setOrientationSide(ForgeDirection side) {
 		orientationSide = side;
@@ -139,31 +146,33 @@ public abstract class TElogicNode extends TileEntitySynced implements ICommunica
 
 	@Override
 	public void Receive(UTpacket packet) {
-		if(packet.getType() == UTpacketType.discovery){
-			System.out.println("Recieved on node side "+((ForgeDirection)packet.getData(0)));
-			this.registerNode(((ForgeDirection)packet.getData(0)), (ICommunicationNode) packet.getData(2), ((ForgeDirection)packet.getData(3)));
-			((ICommunicationNode) packet.getData(2)).registerNode(((ForgeDirection)packet.getData(3)), this, (ForgeDirection) (packet.getData(0)));
+		if (packet.getType() == UTpacketType.discovery) {
+			this.registerNode(((ForgeDirection) packet.getData(0)), (ICommunicationNode) packet.getData(2), ((ForgeDirection) packet.getData(3)));
+			((ICommunicationNode) packet.getData(2)).registerNode(((ForgeDirection) packet.getData(3)), this, (ForgeDirection) (packet.getData(0)));
 		}
-		if(packet.getType() == UTpacketType.recheck){
-			nodeCollection[((ForgeDirection)packet.getData(0)).ordinal()].clear();
+		if (packet.getType() == UTpacketType.recheck) {
+			nodeCollection[((ForgeDirection) packet.getData(0)).ordinal()].clear();
 			createDiscoveryPacket();
 		}
-		if(packet.getType() == UTpacketType.destroy){
+		if (packet.getType() == UTpacketType.destroy) {
 			this.removeNode((ICommunicationNode) packet.getData(2));
 		}
-		if(packet.getType() == UTpacketType.data){
-			ForgeDirection receivingSide = (ForgeDirection) packet.getData(0);
-			UTVariable[] array = (UTVariable[]) packet.getData(1);
-			for(UTVariable item:array){
-				buffer[receivingSide.ordinal()].put(item);
+		if (packet.getType() == UTpacketType.data) {
+			if (isValidInput((ForgeDirection) packet.getData(0))) {
+				ForgeDirection receivingSide = (ForgeDirection) packet.getData(0);
+				UTVariable[] array = (UTVariable[]) packet.getData(1);
+				for (UTVariable item : array) {
+					buffer[receivingSide.ordinal()].put(item);
+				}
+				transition();
 			}
-			System.out.println(buffer[receivingSide.ordinal()].get().value);
 		}
 		ExtendedReceive(packet);
 	}
 
 	@Override
-	public abstract void ExtendedReceive(UTpacket packet);
+	public void ExtendedReceive(UTpacket packet) {
+	}
 
 	@Override
 	public void scheduleSend() {
@@ -172,38 +181,51 @@ public abstract class TElogicNode extends TileEntitySynced implements ICommunica
 
 	@Override
 	public void Send() {
-		for(UTpacket packet:packets){
-			if(packet.getType() == UTpacketType.destroy || packet.getType() == UTpacketType.data){
+		for (UTpacket packet : packets) {
+			if (packet.getType() == UTpacketType.data) {
+				if (isValidOutput((ForgeDirection) packet.getData(0))) {
+					ForgeDirection sendingSide = (ForgeDirection) packet.getData(0);
+					for (int i = 0; i < nodeCollection[sendingSide.ordinal()].getSize(); i++) {
+						ICommunicationNode com = nodeCollection[sendingSide.ordinal()].getNode(i);
+						packet.setData(0, nodeCollection[sendingSide.ordinal()].getSide(i));
+						com.Receive(packet);
+					}
+				}
+			}
+			if (packet.getType() == UTpacketType.destroy) {
 				ForgeDirection sendingSide = (ForgeDirection) packet.getData(0);
-				for(int i =0;i<nodeCollection[sendingSide.ordinal()].getSize();i++){
+				for (int i = 0; i < nodeCollection[sendingSide.ordinal()].getSize(); i++) {
 					ICommunicationNode com = nodeCollection[sendingSide.ordinal()].getNode(i);
 					packet.setData(0, nodeCollection[sendingSide.ordinal()].getSide(i));
-					System.out.println("packet send to "+nodeCollection[sendingSide.ordinal()].getSide(i));
 					com.Receive(packet);
 				}
 			}
-			if(packet.getType() == UTpacketType.discovery){
+			if (packet.getType() == UTpacketType.discovery) {
 				ForgeDirection sendingSide = (ForgeDirection) packet.getData(0);
 				nodeCollection[sendingSide.ordinal()].clear();
 				TileEntity te = worldObj.getBlockTileEntity(xCoord + sendingSide.offsetX, yCoord + sendingSide.offsetY, zCoord + sendingSide.offsetZ);
 				if (te instanceof ICommunication) {
-					System.out.println("Sent packet to "+te.xCoord + " " + te.yCoord + " " + te.zCoord);
 					ICommunication com = (ICommunication) te;
 					initiateBuffer(buffer[sendingSide.ordinal()], getBusType(sendingSide));
 					packet.setData(0, sendingSide.getOpposite());
 					com.Receive(packet);
-					
+
 				}
 			}
+			ExtendedSend(packet);
 		}
 		packets.clear();
 	}
 
+	@Override
+	public void ExtendedSend(UTpacket packet) {
+	}
+
 	private void initiateBuffer(UTBuffer utBuffer, UTBusType busType) {
-		if(busType == UTBusType.cable){
+		if (busType == UTBusType.cable) {
 			utBuffer = new UTBuffer(UTBufferType.Bit, 1);
 		}
-		if(busType == UTBusType.bundle){
+		if (busType == UTBusType.bundle) {
 			utBuffer = new UTBuffer(UTBufferType.Bit, 16);
 		}
 	}
@@ -215,11 +237,11 @@ public abstract class TElogicNode extends TileEntitySynced implements ICommunica
 
 	@Override
 	public UTBusType getBusType(ForgeDirection side) {
-			TileEntity te = worldObj.getBlockTileEntity(xCoord + side.offsetX, yCoord + side.offsetY, zCoord + side.offsetZ);
-			if (te instanceof ICommunication) {
-				return ((ICommunication) te).getBusType();
-			}
-			return UTBusType.invalid;
+		TileEntity te = worldObj.getBlockTileEntity(xCoord + side.offsetX, yCoord + side.offsetY, zCoord + side.offsetZ);
+		if (te instanceof ICommunication) {
+			return ((ICommunication) te).getBusType();
+		}
+		return UTBusType.invalid;
 	}
 
 	@Override
@@ -230,24 +252,21 @@ public abstract class TElogicNode extends TileEntitySynced implements ICommunica
 	@Override
 	public void registerNode(ForgeDirection side, ICommunicationNode node, ForgeDirection originSide) {
 		if (!this.nodeCollection[side.ordinal()].contains(node)) {
-			System.out.println("Registered node");
 			this.nodeCollection[side.ordinal()].add(node);
 			this.nodeCollection[side.ordinal()].addSide(originSide);
-			initiateBuffer(this.buffer[side.ordinal()],getBusType(side));
+			initiateBuffer(this.buffer[side.ordinal()], getBusType(side));
 		}
 	}
 
 	@Override
 	public void removeNode(ICommunicationNode node) {
-		System.out.println("Unregistered node ");
 		for (UTlogicNodeContainer sideContainer : this.nodeCollection) {
 			sideContainer.remove(node);
 		}
 	}
-	
+
 	@Override
 	public void removeNode(ICommunicationNode node, ForgeDirection dir) {
-		System.out.println("Unregistered node ");
 		nodeCollection[dir.ordinal()].remove(node);
 	}
 
@@ -255,49 +274,125 @@ public abstract class TElogicNode extends TileEntitySynced implements ICommunica
 	public UTBuffer getBuffer(ForgeDirection dir) {
 		return buffer[SIDEDTRANSFORMER.InternalToExternalDirection(this, dir).ordinal()];
 	}
+
 	@Override
-	public void createDiscoveryPacket(){
-		for(ForgeDirection sendingSide: ForgeDirection.VALID_DIRECTIONS)
+	public void createDiscoveryPacket() {
+		for (ForgeDirection sendingSide : ForgeDirection.VALID_DIRECTIONS)
 			packets.add(new UTpacket(UTpacketType.discovery, sendingSide, new ArrayList<ICommunicationTransport>(), this, sendingSide));
 		this.scheduleSend();
 	}
+
 	@Override
-	public void createDiscoveryPacket(ForgeDirection dir){
+	public void createDiscoveryPacket(ForgeDirection dir) {
 		packets.add(new UTpacket(UTpacketType.discovery, dir, new ArrayList<ICommunicationTransport>(), this, dir));
 		this.scheduleSend();
 	}
+
 	@Override
-	public void createDestructionPacket(){
-		for(ForgeDirection sendingSide: ForgeDirection.VALID_DIRECTIONS)
+	public void createDestructionPacket() {
+		for (ForgeDirection sendingSide : ForgeDirection.VALID_DIRECTIONS)
 			packets.add(new UTpacket(UTpacketType.destroy, sendingSide, new ArrayList<ICommunicationTransport>(), this, sendingSide));
 		this.Send();
 	}
+
 	@Override
-	public void createDataPacket(){
-		
+	public void createDataPacket(UTVariable... data) {
+		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+			createDataPacket(dir, data);
+		}
 	}
+
 	@Override
 	public void createDataPacket(ForgeDirection dir, UTVariable... data) {
-		System.out.println(SIDEDTRANSFORMER.InternalToExternalDirection(this, dir));
-		packets.add(new UTpacket(UTpacketType.data, SIDEDTRANSFORMER.InternalToExternalDirection(this, dir),data ));
+		packets.add(new UTpacket(UTpacketType.data, SIDEDTRANSFORMER.InternalToExternalDirection(this, dir), data));
 		this.scheduleSend();
-		for(UTVariable item:data){
+		for (UTVariable item : data) {
 			buffer[SIDEDTRANSFORMER.InternalToExternalDirection(this, dir).ordinal()].put(item);
 		}
 	}
-	
+
 	@Override
 	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
 		super.writeToNBT(par1nbtTagCompound);
 		par1nbtTagCompound.setInteger("orientationSide", orientationSide.ordinal());
 		par1nbtTagCompound.setInteger("orientationRotation", orientationRotation.ordinal());
-		
+
+		int i = 0;
+		for (UTlogicNodeContainer container : nodeCollection) {
+			NBTTagList list = container.writeToNBT();
+			if (list != null)
+				par1nbtTagCompound.setTag("nodes" + i, list);
+			i++;
+		}
 	}
+
 	@Override
 	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
 		super.readFromNBT(par1nbtTagCompound);
 		orientationSide = ForgeDirection.getOrientation(par1nbtTagCompound.getInteger("orientationSide"));
 		orientationRotation = ForgeDirection.getOrientation(par1nbtTagCompound.getInteger("orientationRotation"));
-		
+
+		int i = 0;
+		for (UTlogicNodeContainer container : nodeCollection) {
+			NBTTagList list = par1nbtTagCompound.getTagList("nodes" + i);
+			if(list.tagCount() != 0)
+				container.readFromNBT(list);
+			i++;
+		}
 	}
+
+	public boolean isInvNameLocalized() {
+		return false;
+	}
+
+	@Override
+	public boolean isValidInput(ForgeDirection dir) {
+		for (ForgeDirection d : conectableInputSides) {
+			if (getExternalForgeDirection(d) == dir) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean isValidOutput(ForgeDirection dir) {
+		for (ForgeDirection d : conectableOutputSides) {
+			if (getExternalForgeDirection(d) == dir) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+    @Override
+    public Packet getDescriptionPacket() {
+	NBTTagCompound nbtTag = new NBTTagCompound();
+	this.writeToNBT(nbtTag);
+	return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
+    }
+
+    @Override
+    public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
+	readFromNBT(packet.customParam1);
+	this.worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+    }
+
+    public void notifyBlockChange() {
+	if (!this.worldObj.isRemote) {
+	    this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+
+	    StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
+	    StackTraceElement e = stacktrace[2];// maybe this number needs to be
+						// corrected
+	    String methodName = e.getMethodName();
+	    String className = e.getClassName();
+	}
+
+    }
+    
+    @Override
+    public UTLogicType getLogicType(){
+    	return UTLogicType.node;
+    }
 }

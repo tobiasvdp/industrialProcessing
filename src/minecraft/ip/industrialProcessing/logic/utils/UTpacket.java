@@ -25,5 +25,8 @@ public class UTpacket {
 	public UTpacketType getType(){
 		return type;
 	}
+	public int lenght(){
+	    return data.length;
+	}
 
 }

@@ -3,10 +3,6 @@ package ip.industrialProcessing.recipes;
 import java.util.Iterator;
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.item.ItemStack;
-import ip.industrialProcessing.utils.working.IWorkHandler;
 import ip.industrialProcessing.utils.working.ServerWorker;
 
 public class RecipeWorker extends ServerWorker {

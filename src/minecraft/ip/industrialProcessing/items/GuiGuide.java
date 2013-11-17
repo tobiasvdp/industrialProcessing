@@ -3,17 +3,15 @@ package ip.industrialProcessing.items;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.client.render.gui.GuiTools;
 import ip.industrialProcessing.client.render.gui.ToolTip;
+import ip.industrialProcessing.config.INamepace;
 
 import java.awt.Point;
 import java.awt.Rectangle;
 
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -40,7 +38,7 @@ public class GuiGuide extends GuiScreen {
 
 	public GuiGuide(EntityPlayer player) {
 		this.player = player;
-		this.textureLocation = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/Guide.png");
+		this.textureLocation = new ResourceLocation(INamepace.TEXTURE_DOMAIN, "textures/gui/Guide.png");
 	}
 
 	@Override

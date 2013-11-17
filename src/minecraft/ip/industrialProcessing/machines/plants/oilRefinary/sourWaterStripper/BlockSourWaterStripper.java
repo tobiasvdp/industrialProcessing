@@ -18,7 +18,9 @@ public class BlockSourWaterStripper extends BlockMachineRendered {
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TileEntitySourWaterStripper();
+		TileEntitySourWaterStripper te = new TileEntitySourWaterStripper();
+		te.setName(getLocalizedName());
+		return te;
 	}
 	
     @Override

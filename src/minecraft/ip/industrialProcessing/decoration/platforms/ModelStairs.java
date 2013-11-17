@@ -58,11 +58,11 @@ public class ModelStairs extends ModelBlock {
 		GL11.glPushMatrix();
 		// GL11.glTranslatef(0, -0.5f, 0);
 		// GL11.glScalef(0.7f, 0.7f, 0.7f);
-		stairs[0].renderMesh(true, icon, position);
-		handrail1[0].renderMesh(true, icon, position);
+		stairs[0].renderMesh(icon);
+		handrail1[0].renderMesh(icon);
 		// handrail2[0].renderMesh(true, icon, position);
-		stairsCap1[0].renderMesh(true, icon, position);
-		stairsCap2[0].renderMesh(true, icon, position);
+		stairsCap1[0].renderMesh(icon);
+		stairsCap2[0].renderMesh(icon);
 		GL11.glPopMatrix();
 	}
 

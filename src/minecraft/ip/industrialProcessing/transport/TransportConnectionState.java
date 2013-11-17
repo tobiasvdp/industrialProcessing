@@ -9,7 +9,7 @@ public enum TransportConnectionState {
 		switch (this) {
 		case DUAL:
 		case OUTPUT:
-		case INPUT:
+		case INPUT: 
 			return ConnectionState.PLUGGED;
 		case TRANSPORT:
 			return ConnectionState.CONNECTED;

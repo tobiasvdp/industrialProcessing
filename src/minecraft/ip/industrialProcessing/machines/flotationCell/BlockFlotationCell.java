@@ -14,17 +14,20 @@ import ip.industrialProcessing.machines.BlockMachineRendered;
 
 public class BlockFlotationCell extends BlockMachineRendered {
 
-    public BlockFlotationCell() {
-	super(ConfigMachineBlocks.getFlotationCellBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Flotation Cell", IndustrialProcessing.tabOreProcessing);
+	public BlockFlotationCell() {
+		super(ConfigMachineBlocks.getFlotationCellBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Flotation Cell", IndustrialProcessing.tabOreProcessing);
 
-    }
-    @Override
-    public TileEntity createNewTileEntity(World world) { 
-	return new TileEntityFlotationCell();
-    }
+	}
 
-    @Override
-    public int getRenderType() {
-	return ConfigRenderers.getRendererFlotationCellId();
-    }
+	@Override
+	public TileEntity createNewTileEntity(World world) {
+		TileEntityFlotationCell te = new TileEntityFlotationCell();
+		te.setName(getLocalizedName());
+		return te;
+	}
+
+	@Override
+	public int getRenderType() {
+		return ConfigRenderers.getRendererFlotationCellId();
+	}
 }

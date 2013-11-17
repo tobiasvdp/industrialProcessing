@@ -1,19 +1,17 @@
 package ip.industrialProcessing.items;
 
-import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 
 public class ItemPaintBrush extends ItemDamage {
 	public int color;
 	public ItemPaintBrush(int ID, int color) {
-		super(ID, 16, "paintBrush" + color, IndustrialProcessing.tabOres);
+		super(ID, 16, "paintBrush" + color, ISetupCreativeTabs.tabOres);
 		this.color = color;
 	}
 

@@ -20,7 +20,9 @@ public class BlockDryer extends BlockMachineRendered {
 
 	@Override
 	public TileEntity createNewTileEntity(World world) { 
-		return new TileEntityDryer();
+		TileEntityDryer te = new TileEntityDryer();
+		te.setName(getLocalizedName());
+		return te;
 	}
 
 	

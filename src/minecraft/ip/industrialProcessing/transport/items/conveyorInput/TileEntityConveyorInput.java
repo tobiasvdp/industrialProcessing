@@ -24,7 +24,7 @@ public class TileEntityConveyorInput extends TileEntityConveyorInventoryBase {
     }
 
     @Override
-    protected TransportConnectionState handleInventoryState(IInventory inventory, ForgeDirection direction) {
+    protected TransportConnectionState handleInventoryState(IInventory inventory, ForgeDirection direction, ConnectionMode mode) {
         return TransportConnectionState.INPUT;
     }
 }

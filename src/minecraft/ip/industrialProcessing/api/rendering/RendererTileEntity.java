@@ -6,6 +6,7 @@ import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.IRotateableEntity;
 import ip.industrialProcessing.utils.rotation.ISidedRotation;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -51,6 +52,15 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 		Tessellator tessellator = Tessellator.instance;
 		// This will make your block brightness dependent from surroundings
 		// lighting.
+		Minecraft mc = Minecraft.getMinecraft();
+		String name = "??";
+		if(mc.mcProfiler.profilingEnabled)
+		{
+		    name = tl.getClass().getName();
+		    name = name.substring(name.lastIndexOf('.')+1);
+		}
+        mc.mcProfiler.startSection("IP");
+		mc.mcProfiler.startSection(name);
 		float animation = 0;
 		GL11.glPushMatrix();
 		if (world != null) {
@@ -116,6 +126,8 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 		renderBlock(tl, world, i, j, k, block, 0.0625f);
 
 		GL11.glPopMatrix();
+		mc.mcProfiler.endSection();
+        mc.mcProfiler.endSection();
 	}
 
 	protected void renderBlock(TileEntity tl, World world, int i, int j, int k, Block block2, float f) {

@@ -34,10 +34,10 @@ public class ModelConveyorOutputBlock extends ModelBlock {
         Icon icon1 = block.getIcon(1, 0);
         Icon icon2 = block.getIcon(2, 0);
 
-        bottom.renderMesh(true, icon2, position);
+        bottom.renderMesh(icon2);
 
         for (int i = 0; i < 4; i++) {
-            hopperSideFull.getRotated(i).renderMesh(true, icon1, position);
+            hopperSideFull.getRotated(i).renderMesh(icon1);
         }
     }
 
@@ -53,8 +53,7 @@ public class ModelConveyorOutputBlock extends ModelBlock {
 
         if (entity instanceof TileEntityConveyorConnectionsBase) {
             TileEntityConveyorConnectionsBase belt = (TileEntityConveyorConnectionsBase) entity;
- 
-            
+
             Icon iconConveyor = reference.getIcon(0);
             Icon iconSide = reference.getIcon(1);
             Icon iconHopper = reference.getIcon(2);
@@ -65,9 +64,8 @@ public class ModelConveyorOutputBlock extends ModelBlock {
                 ForgeDirection direction = ForgeDirection.getOrientation(i);
 
                 ConnectionState state = belt.getConnection(direction);
- 
-                
-                dir =  4 - BlockMachine.getMetadataFromForward(direction)+1;
+
+                dir = 4 - BlockMachine.getMetadataFromForward(direction) + 1;
                 if (state.isConnected()) {
                     hopperSideIntake.getRotated(dir).renderMesh(false, iconSide, reference);
                     hopperIntakeConveyor.getRotated(dir).renderMesh(false, iconConveyor, reference);

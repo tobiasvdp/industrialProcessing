@@ -34,14 +34,14 @@ public class ModelRainTankBlock extends ModelBlock {
         Icon icon = block.getIcon(0, 0);
         Icon icon1 = block.getIcon(1, 0);
         Icon icon2 = block.getIcon(2, 0);
-        frame.renderMesh(true, icon, position);
-        bottom.renderMesh(true, icon1, position);
+        frame.renderMesh(icon);
+        bottom.renderMesh(icon1);
         for (int i = 0; i < 4; i++) {
-            corners.getRotated(i).renderMesh(true, icon1, position);
-            sides.getRotated(i).renderMesh(true, icon1, position);
+            corners.getRotated(i).renderMesh(icon1);
+            sides.getRotated(i).renderMesh(icon1);
         }
-        pipeCenter.renderMesh(true, icon2, position);
-        pipeDown.renderMesh(true, icon2, position);
+        pipeCenter.renderMesh(icon2);
+        pipeDown.renderMesh(icon2);
     }
 
     @Override

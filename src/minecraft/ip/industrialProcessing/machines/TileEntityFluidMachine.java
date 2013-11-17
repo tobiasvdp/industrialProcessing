@@ -3,6 +3,7 @@ package ip.industrialProcessing.machines;
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.IFluidInfo;
+import ip.industrialProcessing.logic.api.network.interfaces.InterfaceType;
 import ip.industrialProcessing.machines.containers.IFluidMachineContainerEntity;
 import ip.industrialProcessing.transport.fluids.IPressuredTank;
 
@@ -398,6 +399,7 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine implement
 		this.onInventoryChanged(); 
 	}
 
+	@Override
 	public FluidTankInfo getTankInfoForSlot(int slot) {
 		MachineFluidTank tank = this.getTankInSlot(slot);
 		if (tank != null)
@@ -435,4 +437,9 @@ public abstract class TileEntityFluidMachine extends TileEntityMachine implement
 	@Override
 	public void addPressure(ForgeDirection from, float pressure) { 
 	}
+	
+    @Override
+    public InterfaceType[] getConnectionTypes(){
+    	return new InterfaceType[]{InterfaceType.single,InterfaceType.inventory,InterfaceType.tank};
+    };
 }

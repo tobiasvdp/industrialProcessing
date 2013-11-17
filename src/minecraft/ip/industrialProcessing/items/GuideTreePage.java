@@ -4,8 +4,9 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.client.render.gui.GuiTools;
 import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
+import ip.industrialProcessing.config.ISetupBlocks;
+import ip.industrialProcessing.config.ISetupItems;
 import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.machines.blastFurnace.TileEntityBlastFurnace;
 import ip.industrialProcessing.machines.classifier.TileEntityClassifier;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import ip.industrialProcessing.machines.diskFilter.TileEntityDiskFilter;
@@ -44,8 +45,6 @@ import net.minecraftforge.fluids.IFluidBlock;
 
 import org.lwjgl.opengl.GL11;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-
 public class GuideTreePage extends GuidePanoramaPage {
 
 	private static final int FILL_COLOR = 0xffc6c6c6;
@@ -62,7 +61,7 @@ public class GuideTreePage extends GuidePanoramaPage {
 
 	public GuideTreePage() {
 		super(new Rectangle(0, 0, 246 - 32, 178), new Point(5 + 32, 18));
-		this.selectedStack = new ItemStack(IndustrialProcessing.blockCopperOre);
+		this.selectedStack = new ItemStack(ISetupBlocks.blockCopperOre);
 	}
 
 	@Override
@@ -335,7 +334,7 @@ public class GuideTreePage extends GuidePanoramaPage {
 
 	@Override
 	public ItemStack getIconStack() {
-		return new ItemStack(IndustrialProcessing.itemSmallMachineCasing);
+		return new ItemStack(ISetupItems.itemSmallMachineCasing);
 	}
 
 }

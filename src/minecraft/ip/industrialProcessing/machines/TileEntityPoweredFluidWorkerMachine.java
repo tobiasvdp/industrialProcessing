@@ -2,14 +2,12 @@ package ip.industrialProcessing.machines;
 
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.power.IPowerAcceptor;
+import ip.industrialProcessing.logic.api.network.interfaces.InterfaceType;
+import ip.industrialProcessing.logic.api.network.interfaces.StatusType;
 import ip.industrialProcessing.power.IPoweredMachine;
 import ip.industrialProcessing.power.PowerHelper;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeWorker;
-
-import java.util.Iterator;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 
@@ -35,11 +33,15 @@ public abstract class TileEntityPoweredFluidWorkerMachine extends TileEntityFlui
 	Recipe recipe = ((RecipeWorker) this.worker).getCurrentRecipe();
 
 	if (recipe != null) {
+		status = StatusType.working;
 	    int amount = PowerWorkerHelper.getWork(this.storage, this.maxWorkSpeed);
 	    int maxWork = this.storage.drainPower(amount, false);
 	    
-	    if (recipe.powerRequired > 0)
+	    if (recipe.powerRequired > 0){
 		maxWork /= recipe.powerRequired;
+		if(maxWork == 0)
+			status = StatusType.lowPower;
+	    }
 	    else
 		maxWork =  this.maxWorkSpeed;
 
@@ -49,7 +51,8 @@ public abstract class TileEntityPoweredFluidWorkerMachine extends TileEntityFlui
 		maxPower *= recipe.powerRequired;
 		this.storage.drainPower(maxPower, true);
 	    }
-	}
+	}else
+		status = StatusType.idle;
     }
 
     @Override
@@ -89,4 +92,8 @@ public abstract class TileEntityPoweredFluidWorkerMachine extends TileEntityFlui
     public IPowerStorage getMainPowerStorage() {
 	return this.storage;
     }
+    @Override
+    public InterfaceType[] getConnectionTypes(){
+    	return new InterfaceType[]{InterfaceType.single,InterfaceType.inventory,InterfaceType.tank,InterfaceType.worker,InterfaceType.power};
+    };
 }

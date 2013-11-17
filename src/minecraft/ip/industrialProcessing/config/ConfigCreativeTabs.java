@@ -9,15 +9,15 @@ public class ConfigCreativeTabs {
 
 	public void addToLanguageRegistry(){
 		LanguageRegistry.instance().addStringLocalization("IP.itemGroup.tabOreExtraction", "en_US", "IP Ore extraction");
-		((CreativeTabsIP) IndustrialProcessing.tabOreProcessing).setIcon(new ItemStack(IndustrialProcessing.blockFilter));
+		((CreativeTabsIP) ISetupCreativeTabs.tabOreProcessing).setIcon(new ItemStack(ISetupMachineBlocks.blockFilter));
 		LanguageRegistry.instance().addStringLocalization("IP.itemGroup.tabOres", "en_US", "IP ores");
-		((CreativeTabsIP) IndustrialProcessing.tabOres).setIcon(new ItemStack(IndustrialProcessing.itemIronCrushedChunks));
+		((CreativeTabsIP) ISetupCreativeTabs.tabOres).setIcon(new ItemStack(ISetupItems.itemIronCrushedChunks));
 		LanguageRegistry.instance().addStringLocalization("IP.itemGroup.tabPower", "en_US", "IP Power");
-		((CreativeTabsIP) IndustrialProcessing.tabPower).setIcon(new ItemStack(IndustrialProcessing.blockEnergyCell));
+		((CreativeTabsIP) ISetupCreativeTabs.tabPower).setIcon(new ItemStack(ISetupMachineBlocks.blockEnergyCell));
 		LanguageRegistry.instance().addStringLocalization("IP.itemGroup.tabMultiblocks", "en_US", "IP Multiblocks");
-		((CreativeTabsIP) IndustrialProcessing.tabMultiblocks).setIcon(new ItemStack(IndustrialProcessing.BLmultiblockDisplayPanel));
+		((CreativeTabsIP) ISetupCreativeTabs.tabMultiblocks).setIcon(new ItemStack(ISetupMachineBlocks.BLmultiblockDisplayPanel));
 		LanguageRegistry.instance().addStringLocalization("IP.itemGroup.tabFluid", "en_US", "IP Fluids");
-		((CreativeTabsIP) IndustrialProcessing.tabFluid).setIcon(new ItemStack(IndustrialProcessing.blockManometer));
+		((CreativeTabsIP) ISetupCreativeTabs.tabFluid).setIcon(new ItemStack(ISetupMachineBlocks.blockManometer));
 
 	}
 	

@@ -32,6 +32,7 @@ public class TileEntityConveyorBelt extends TileEntityConveyorInteractionBase {
 	public TileEntityConveyorBelt()
 	{
 		setConnectionMode(LocalDirection.BACK, ConnectionMode.OUTPUT);
+		setConnectionMode(LocalDirection.UP, ConnectionMode.INPUT);
 	}
 
 	@Override
