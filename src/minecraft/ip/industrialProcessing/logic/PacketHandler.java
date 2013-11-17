@@ -1,8 +1,11 @@
 package ip.industrialProcessing.logic;
 
+import ip.industrialProcessing.api.info.InfoMachine;
 import ip.industrialProcessing.logic.network.display.GuiLogicDisplay;
 import ip.industrialProcessing.logic.transport.ICommunicationNode;
 import ip.industrialProcessing.logic.transport.TElogicNode;
+import ip.industrialProcessing.logic.utils.UTBuffer;
+import ip.industrialProcessing.logic.utils.UTVariableType;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -10,6 +13,9 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.EOFException;
 import java.io.IOException;
+import java.util.ArrayList;
+
+import org.apache.commons.lang3.ArrayUtils;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
@@ -87,6 +93,82 @@ public class PacketHandler implements IPacketHandler {
 						e.printStackTrace();
 					} finally {
 						guiLogicDisplay.drawTabbedNodes();
+					}
+				}
+			}
+		}
+		else 	if (packet.channel == DISPLAY_GET_DATA) {
+			DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
+			EntityPlayer playerMP = (EntityPlayer) player;
+			if (!playerMP.worldObj.isRemote) {
+				int x;
+				int y;
+				int z;
+				int node;
+				UTVariableType type;
+				try {
+					x = inputStream.readInt();
+					y = inputStream.readInt();
+					z = inputStream.readInt();
+					node = inputStream.readInt();
+					type = UTVariableType.values()[inputStream.readInt()];
+				} catch (IOException e) {
+					e.printStackTrace();
+					return;
+				}
+				try {
+					ByteArrayOutputStream bos = new ByteArrayOutputStream(8);
+					DataOutputStream outputStream = new DataOutputStream(bos);
+					TElogicNode te = (TElogicNode) playerMP.worldObj.getBlockTileEntity(x, y, z);
+					
+					outputStream.writeInt(node);
+					outputStream.writeInt(type.ordinal());
+					
+					UTBuffer buffer = te.getBuffer(te.getExternalForgeDirection(ForgeDirection.NORTH));
+					switch(buffer.get(node).ID){
+					case machine:
+						switch(type){
+						case status:
+							outputStream.writeInt(((InfoMachine)buffer.get(node).value).status.ordinal());
+							break;
+						default:
+							break;
+						}
+						break;
+					default:
+						break;
+					}
+							
+
+
+					Packet250CustomPayload packetSend = new Packet250CustomPayload();
+					packetSend.channel = PacketHandler.DISPLAY_GET_DATA;
+					packetSend.data = bos.toByteArray();
+					packetSend.length = bos.size();
+
+					PacketDispatcher.sendPacketToPlayer(packetSend, player);
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			} else {
+				EntityClientPlayerMP client = (EntityClientPlayerMP) player;
+				GuiScreen screen = Minecraft.getMinecraft().currentScreen;
+				if (screen instanceof GuiLogicDisplay) {
+					GuiLogicDisplay guiLogicDisplay = (GuiLogicDisplay) screen;
+					int node =0;
+					UTVariableType type = UTVariableType.unknown;
+					ArrayList<Integer> value = new ArrayList<Integer>();
+					try {
+						node = inputStream.readInt();
+						type = UTVariableType.values()[inputStream.readInt()];
+						while(true){
+							value.add(inputStream.readInt());
+						}
+
+					} catch (IOException e) {
+						e.printStackTrace();
+					} finally {
+						guiLogicDisplay.setData(node, type, ArrayUtils.toPrimitive((Integer[])value.toArray()));
 					}
 				}
 			}

@@ -5,6 +5,7 @@ import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.logic.PacketHandler;
 import ip.industrialProcessing.logic.api.network.interfaces.ILogicInterface;
 import ip.industrialProcessing.logic.api.network.interfaces.InterfaceType;
+import ip.industrialProcessing.logic.api.network.interfaces.StatusType;
 import ip.industrialProcessing.logic.transport.ICommunicationNode;
 import ip.industrialProcessing.logic.utils.UTBuffer;
 import ip.industrialProcessing.logic.utils.UTBufferType;
@@ -237,8 +238,28 @@ public class GuiLogicDisplay extends GuiScreen {
 		}
 	}
 	
-	public void setData(){
+	public void setData(int node,UTVariableType type, int[] value){
+		switch(nodes.get(node).getLogicType()){
+		case gate:
+			break;
+		case interfaces:
+			switch(type){
+			case status:
+				((InfoMachine)buffer.get(node).value).status = StatusType.values()[value[0]];
+				break;
+			default:
+				break;}
+			break;
+		case networkedNode:
+			break;
+		case node:
+			break;
+		case transport:
+			break;
+		default:
+			break;
 		
+		}
 	} 
 
 	@Override
