@@ -1,12 +1,17 @@
 package ip.industrialProcessing.logic.network.interfaces.machine;
 
+import java.util.Iterator;
+
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
+import ip.industrialProcessing.api.info.IExpirable;
 import ip.industrialProcessing.logic.api.network.interfaces.ILogicInterface;
 import ip.industrialProcessing.logic.api.network.interfaces.IMachineInterface;
 import ip.industrialProcessing.logic.api.network.interfaces.InterfaceType;
 import ip.industrialProcessing.logic.network.TileEntityLogicNetworkNode;
+import ip.industrialProcessing.logic.transport.ICommunicationNode;
+import ip.industrialProcessing.logic.utils.UTBuffer;
 import ip.industrialProcessing.logic.utils.UTLogicType;
 import ip.industrialProcessing.logic.utils.UTVariable;
 import ip.industrialProcessing.logic.utils.UTVariableType;
@@ -17,7 +22,7 @@ import ip.industrialProcessing.power.IPoweredMachine;
 import ip.industrialProcessing.utils.working.IWorker;
 import ip.industrialProcessing.utils.working.IWorkingEntity;
 
-public class TileEntityMachineInterface extends TileEntityLogicNetworkNode implements ILogicInterface{
+public class TileEntityMachineInterface extends TileEntityLogicNetworkNode implements ILogicInterface {
 
 	IMachineInterface machine = null;
 
@@ -31,8 +36,8 @@ public class TileEntityMachineInterface extends TileEntityLogicNetworkNode imple
 	public boolean isMachineCapable(InterfaceType type) {
 		IMachineInterface machine = getMachine();
 		if (machine != null) {
-			for(InterfaceType cap:machine.getConnectionTypes()){
-				if(type == cap)
+			for (InterfaceType cap : machine.getConnectionTypes()) {
+				if (type == cap)
 					return true;
 			}
 			return false;
@@ -63,7 +68,7 @@ public class TileEntityMachineInterface extends TileEntityLogicNetworkNode imple
 	}
 
 	@Override
-	public void setData(UTVariable[] data) {
+	public void setData(UTVariable[] data, ICommunicationNode node) {
 		if (getMachine() != null) {
 
 		}
@@ -72,7 +77,7 @@ public class TileEntityMachineInterface extends TileEntityLogicNetworkNode imple
 	@Override
 	public UTVariable[] getData(UTVariableType type) {
 		if (getMachine() != null) {
-			switch (type){
+			switch (type) {
 			case bit:
 				break;
 			case power:
@@ -93,6 +98,8 @@ public class TileEntityMachineInterface extends TileEntityLogicNetworkNode imple
 					return new UTVariable[] { new UTVariable(0, UTVariableType.work, worker) };
 				}
 				break;
+			case status:
+				return new UTVariable[] { new UTVariable(0, UTVariableType.status, machine.getStatus()) };
 			default:
 				break;
 			}
@@ -108,10 +115,10 @@ public class TileEntityMachineInterface extends TileEntityLogicNetworkNode imple
 		}
 		return "Machine interface";
 	}
-	
-    @Override
-    public UTLogicType getLogicType(){
-    	return UTLogicType.interfaces;
-    }
+
+	@Override
+	public UTLogicType getLogicType() {
+		return UTLogicType.interfaces;
+	}
 
 }

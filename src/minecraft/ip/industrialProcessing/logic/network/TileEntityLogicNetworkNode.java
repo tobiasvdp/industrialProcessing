@@ -30,7 +30,7 @@ public abstract class TileEntityLogicNetworkNode extends TElogicNode implements 
 	super.ExtendedReceive(packet);
 	if (packet.getType() == UTpacketType.deliver) {
 	    UTVariable[] data = (UTVariable[]) packet.getData(2);
-	    setData(data);
+	    setData(data,(ICommunicationNode)packet.getData(1));
 	}
 	if (packet.getType() == UTpacketType.request) {
 	    UTVariableType type = ((UTVariable[]) packet.getData(2))[0].ID;
@@ -41,7 +41,7 @@ public abstract class TileEntityLogicNetworkNode extends TElogicNode implements 
 	}
     }
 
-    public abstract void setData(UTVariable[] data);
+    public abstract void setData(UTVariable[] data, ICommunicationNode node);
 
     public abstract UTVariable[] getData(UTVariableType type);
 

@@ -3,6 +3,7 @@ package ip.industrialProcessing.logic.utils;
 import ip.industrialProcessing.api.info.InfoMachine;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.ListIterator;
 
 public class UTBuffer {
@@ -30,10 +31,6 @@ public class UTBuffer {
 			buffer.get(index).value = value;
 			buffer.get(index).ID = ID;
 		}
-	}
-
-	public ListIterator iterate() {
-		return buffer.listIterator();
 	}
 
 	public UTVariable get() {

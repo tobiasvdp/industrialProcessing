@@ -25,6 +25,10 @@ public class UTlogicNodeContainer {
 	public UTlogicNodeContainer(TileEntity te) {
 		this.te = te;
 	}
+	
+	public int getIndex(ICommunicationNode node){
+		return nodes.indexOf(node);
+	}
 
 	public void add(ICommunicationNode te) {
 		nodes.add(te);

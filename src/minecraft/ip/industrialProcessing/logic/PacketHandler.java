@@ -139,6 +139,15 @@ public class PacketHandler implements IPacketHandler {
 							    tile.createRequestPacket(nodeCom, tile, new UTVariable(UTVariableType.status));
 							}
 							break;
+						case power:
+							outputStream.writeInt(((InfoMachine)buffer.get(node).value).power.powerCapacity);
+							outputStream.writeInt(((InfoMachine)buffer.get(node).value).power.storedPower);
+							if(((InfoMachine)buffer.get(node).value).power.isExpired()){
+							    TileEntityLogicNetworkNode tile = (TileEntityLogicNetworkNode) playerMP.worldObj.getBlockTileEntity(x, y, z);
+							    ICommunicationNode nodeCom = te.getConnectionsOnSide(te.getExternalForgeDirection(ForgeDirection.NORTH)).getNode(node);
+							    tile.createRequestPacket(nodeCom, tile, new UTVariable(UTVariableType.power));
+							}
+							break;
 						default:
 							break;
 						}
@@ -156,7 +165,6 @@ public class PacketHandler implements IPacketHandler {
 
 					PacketDispatcher.sendPacketToPlayer(packetSend, player);
 				} catch (Exception ex) {
-					ex.printStackTrace();
 				}
 			} else {
 				EntityClientPlayerMP client = (EntityClientPlayerMP) player;
@@ -174,7 +182,6 @@ public class PacketHandler implements IPacketHandler {
 						}
 
 					} catch (IOException e) {
-						e.printStackTrace();
 					} finally {
 					    int[] values = new int[value.size()];
 					    	for(int i =0;i<value.size();i++){

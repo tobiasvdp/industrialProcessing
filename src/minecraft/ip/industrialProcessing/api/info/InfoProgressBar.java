@@ -7,9 +7,13 @@ public class InfoProgressBar implements IExpirable{
 	ttl = 20;
     }
 
-    public void tick() {
-	this.ttl--;
-    }
+	public boolean tick() {
+		if (ttl > 0){
+			this.ttl--;
+			return true;
+		}
+		return false;
+	}
 
     public boolean isExpired() {
 	if (this.ttl > 0)
