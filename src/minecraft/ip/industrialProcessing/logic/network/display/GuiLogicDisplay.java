@@ -127,6 +127,7 @@ public class GuiLogicDisplay extends GuiScreen {
 			break;
 		case interfaces:
 			ILogicInterface interfaces = (ILogicInterface) nodes.get(activeNode);
+			InfoMachine machine = ((InfoMachine) buffer.get(activeNode).value);
 			fontRenderer.drawString(interfaces.getMachine().getName(), x + 45, y + 65, 4210752);
 			fontRenderer.drawString("Status: " + drawMachineInfo(activeNode), x + 45, y + 80, 4210752);
 			for (InterfaceType type : interfaces.getMachine().getConnectionTypes()) {
@@ -137,7 +138,6 @@ public class GuiLogicDisplay extends GuiScreen {
 					break;
 				case power:
 					requestData(activeNode, UTVariableType.power);
-					InfoMachine machine = ((InfoMachine) buffer.get(activeNode).value);
 					fontRenderer.drawString("Power: " + machine.power.storedPower + "/" + machine.power.powerCapacity, x + 45, y + 95, 4210752);
 					break;
 				case single:
@@ -145,8 +145,8 @@ public class GuiLogicDisplay extends GuiScreen {
 				case tank:
 					break;
 				case worker:
-					//IWorker worker = (IWorker) ((UTVariable[]) interfaces.getData(UTVariableType.work))[0].value;
-					//fontRenderer.drawString("Work progress: " + worker.getWorkDone() + "/" + worker.getTotalWork(), x + 45, y + 110, 4210752);
+					requestData(activeNode, UTVariableType.work);
+					fontRenderer.drawString("Work: " + machine.worker.workDone + "/" + machine.worker.totalWork, x + 45, y + 110, 4210752);
 					break;
 				default:
 					break;
@@ -251,6 +251,10 @@ public class GuiLogicDisplay extends GuiScreen {
 			case power:
 				((InfoMachine)buffer.get(node).value).power.powerCapacity = value[0];
 				((InfoMachine)buffer.get(node).value).power.storedPower = value[1];
+				break;
+			case work:
+				((InfoMachine)buffer.get(node).value).worker.totalWork = value[0];
+				((InfoMachine)buffer.get(node).value).worker.workDone = value[1];
 				break;
 			default:
 				break;}

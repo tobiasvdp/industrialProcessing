@@ -13,6 +13,7 @@ import ip.industrialProcessing.logic.utils.UTVariable;
 import ip.industrialProcessing.logic.utils.UTVariableType;
 import ip.industrialProcessing.logic.utils.UTlogicNodeContainer;
 import ip.industrialProcessing.machines.IPowerStorage;
+import ip.industrialProcessing.utils.working.IWorker;
 
 public class TileEntityLogicDisplay extends TileEntityLogicNetworkNode {
 	boolean tick = true;
@@ -55,6 +56,14 @@ public class TileEntityLogicDisplay extends TileEntityLogicNetworkNode {
 							InfoMachine machine = (InfoMachine) buffer.get(index).value;
 							machine.status = (StatusType) data[0].value;
 							machine.ttl = 40;
+						}
+					} else if (var.ID == UTVariableType.work) {
+						if (buffer.get(index).ID == UTVariableType.machine) {
+							InfoMachine machine = (InfoMachine) buffer.get(index).value;
+							IWorker worker = (IWorker) data[0].value;
+							machine.worker.totalWork = worker.getTotalWork();
+							machine.worker.workDone = worker.getWorkDone();
+							machine.power.ttl = 20;
 						}
 					}
 				}
