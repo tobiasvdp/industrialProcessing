@@ -1,10 +1,13 @@
 package ip.industrialProcessing.logic;
 
+import ip.industrialProcessing.api.info.IExpirable;
 import ip.industrialProcessing.api.info.InfoMachine;
+import ip.industrialProcessing.logic.network.TileEntityLogicNetworkNode;
 import ip.industrialProcessing.logic.network.display.GuiLogicDisplay;
 import ip.industrialProcessing.logic.transport.ICommunicationNode;
 import ip.industrialProcessing.logic.transport.TElogicNode;
 import ip.industrialProcessing.logic.utils.UTBuffer;
+import ip.industrialProcessing.logic.utils.UTVariable;
 import ip.industrialProcessing.logic.utils.UTVariableType;
 
 import java.io.ByteArrayInputStream;
@@ -124,12 +127,17 @@ public class PacketHandler implements IPacketHandler {
 					outputStream.writeInt(node);
 					outputStream.writeInt(type.ordinal());
 					
-					UTBuffer buffer = te.getBuffer(te.getExternalForgeDirection(ForgeDirection.NORTH));
+					UTBuffer buffer = te.getBuffer(ForgeDirection.NORTH);
 					switch(buffer.get(node).ID){
 					case machine:
 						switch(type){
 						case status:
 							outputStream.writeInt(((InfoMachine)buffer.get(node).value).status.ordinal());
+							if(((InfoMachine)buffer.get(node).value).isExpired()){
+							    TileEntityLogicNetworkNode tile = (TileEntityLogicNetworkNode) playerMP.worldObj.getBlockTileEntity(x, y, z);
+							    ICommunicationNode nodeCom = te.getConnectionsOnSide(te.getExternalForgeDirection(ForgeDirection.NORTH)).getNode(node);
+							    tile.createRequestPacket(nodeCom, tile, new UTVariable(UTVariableType.status));
+							}
 							break;
 						default:
 							break;
@@ -168,7 +176,11 @@ public class PacketHandler implements IPacketHandler {
 					} catch (IOException e) {
 						e.printStackTrace();
 					} finally {
-						guiLogicDisplay.setData(node, type, ArrayUtils.toPrimitive((Integer[])value.toArray()));
+					    int[] values = new int[value.size()];
+					    	for(int i =0;i<value.size();i++){
+					    	    values[i] = value.get(i);
+					    	}
+						guiLogicDisplay.setData(node, type, values);
 					}
 				}
 			}

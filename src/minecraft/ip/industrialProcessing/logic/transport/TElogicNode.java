@@ -206,7 +206,7 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 				TileEntity te = worldObj.getBlockTileEntity(xCoord + sendingSide.offsetX, yCoord + sendingSide.offsetY, zCoord + sendingSide.offsetZ);
 				if (te instanceof ICommunication) {
 					ICommunication com = (ICommunication) te;
-					initiateBuffer(buffer[sendingSide.ordinal()], getBusType(sendingSide));
+					//initiateBuffer(buffer[sendingSide.ordinal()], getBusType(sendingSide));
 					packet.setData(0, sendingSide.getOpposite());
 					com.Receive(packet);
 
@@ -221,7 +221,7 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 	public void ExtendedSend(UTpacket packet) {
 	}
 
-	private void initiateBuffer(UTBuffer utBuffer, UTBusType busType) {
+	public void initiateBuffer(UTBuffer utBuffer, UTBusType busType) {
 		if (busType == UTBusType.cable) {
 			utBuffer = new UTBuffer(UTBufferType.Bit);
 		}
@@ -272,7 +272,7 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 
 	@Override
 	public UTBuffer getBuffer(ForgeDirection dir) {
-		return buffer[SIDEDTRANSFORMER.InternalToExternalDirection(this, dir).ordinal()];
+		return buffer[getExternalForgeDirection(dir).ordinal()];
 	}
 
 	@Override
