@@ -3,6 +3,7 @@ package ip.industrialProcessing.logic.network.interfaces.machine;
 import java.util.Iterator;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidTankInfo;
@@ -89,6 +90,14 @@ public class TileEntityMachineInterface extends TileEntityLogicNetworkNode imple
 				}
 				break;
 			case slot:
+				if (machine instanceof IInventory) {
+			    	IInventory inv = ((IInventory)machine);
+				UTVariable[] vars = new UTVariable[inv.getSizeInventory()];
+				for(int i=0;i<inv.getSizeInventory();i++){
+				    vars[i] = new UTVariable(0, UTVariableType.slot, inv.getStackInSlot(i));
+				}
+				return vars;
+			}
 				break;
 			case tank:
 				if (machine instanceof IFluidInfo) {
