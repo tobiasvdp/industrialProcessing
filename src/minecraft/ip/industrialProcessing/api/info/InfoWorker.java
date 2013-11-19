@@ -2,7 +2,7 @@ package ip.industrialProcessing.api.info;
 
 public class InfoWorker implements IExpirable{
     public int workDone = -1;
-    public int totalWork;
+    public int totalWork  = -1;
 
     public int ttl;
 

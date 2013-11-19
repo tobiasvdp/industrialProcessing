@@ -1,8 +1,8 @@
 package ip.industrialProcessing.api.info;
 
 public class InfoPower implements IExpirable{
-    public int storedPower;
-    public int powerCapacity;
+    public int storedPower = -1;
+    public int powerCapacity = -1;
 
     public int ttl;
 

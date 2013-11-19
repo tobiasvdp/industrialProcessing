@@ -25,100 +25,15 @@ public class TileEntityAtmosphericDestilationTower extends TEmultiblockCoreTankW
 		// set layout
 		structure = new StructureMultiblock();
 
-		LayoutMultiblock layout = new LayoutMultiblock(1, 1, 1, 1, 6, 0);
+		LayoutMultiblock layout = new LayoutMultiblock(0, 0, 0, 0, 3, 0);
 		int tankPlating = IndustrialProcessing.blockTankPlating.blockID;
 
 		int i = 0;
 		layout.setCoreID(i++, 0, 1, IndustrialProcessing.blockAtmosphericDestilationTower.blockID);
 
-		layout.setBlockIDwithGroup(-1, 0, -1, i++, 0, 0,1, tankPlating);
-		layout.setBlockIDwithGroup(-1, 0, 0, i++, 0, 0,1, tankPlating);
-		layout.setBlockIDwithGroup(-1, 0, 1, i++, 0, 0,1, tankPlating);
-
-		layout.setBlockIDwithGroup(1, 0, -1, i++, 0, 0,1, tankPlating);
-		layout.setBlockIDwithGroup(1, 0, 0, i++, 0, 0,1, tankPlating);
-		layout.setBlockIDwithGroup(1, 0, 1, i++, 0, 0,1, tankPlating);
-
-		layout.setBlockIDwithGroup(0, 0, -1, i++, 0, 0,1, tankPlating);
-		layout.setBlockIDwithGroup(0, 0, 1, i++, 0, 0,1, tankPlating);
-
-		// layer 1
-		layout.setBlockIDwithGroup(-1, 1, -1, i++, 0, 0,2, tankPlating);
-		layout.setBlockIDwithGroup(-1, 1, 0, i++, 0, 0,2, tankPlating);
-		layout.setBlockIDwithGroup(-1, 1, 1, i++, 0, 0,2, tankPlating);
-
-		layout.setBlockIDwithGroup(1, 1, -1, i++, 0, 0,2, tankPlating);
-		layout.setBlockIDwithGroup(1, 1, 0, i++, 0, 0,2, tankPlating);
-		layout.setBlockIDwithGroup(1, 1, 1, i++, 0, 0,2, tankPlating);
-
-		layout.setBlockIDwithGroup(0, 1, -1, i++, 0, 0,2, tankPlating);
-		layout.setBlockIDwithGroup(0, 1, 1, i++, 0, 0,2, tankPlating);
 		layout.setBlockIDwithGroup(0, 1, 0, i++, 0, 0,2, IndustrialProcessing.blockDestilationTray.blockID);
-
-		// layer 2
-		layout.setBlockIDwithGroup(-1, 2, -1, i++, 0, 0,3, tankPlating);
-		layout.setBlockIDwithGroup(-1, 2, 0, i++, 0, 0,3, tankPlating);
-		layout.setBlockIDwithGroup(-1, 2, 1, i++, 0, 0,3, tankPlating);
-
-		layout.setBlockIDwithGroup(1, 2, -1, i++, 0, 0,3, tankPlating);
-		layout.setBlockIDwithGroup(1, 2, 0, i++, 0, 0,3, tankPlating);
-		layout.setBlockIDwithGroup(1, 2, 1, i++, 0, 0,3, tankPlating);
-
-		layout.setBlockIDwithGroup(0, 2, -1, i++, 0, 0,3, tankPlating);
-		layout.setBlockIDwithGroup(0, 2, 1, i++, 0, 0,3, tankPlating);
 		layout.setBlockIDwithGroup(0, 2, 0, i++, 0, 0,3, IndustrialProcessing.blockDestilationTray.blockID);
-
-		// layer 3
-		layout.setBlockIDwithGroup(-1, 3, -1, i++, 0, 0,4, tankPlating);
-		layout.setBlockIDwithGroup(-1, 3, 0, i++, 0, 0,4, tankPlating);
-		layout.setBlockIDwithGroup(-1, 3, 1, i++, 0, 0,4, tankPlating);
-
-		layout.setBlockIDwithGroup(1, 3, -1, i++, 0, 0,4, tankPlating);
-		layout.setBlockIDwithGroup(1, 3, 0, i++, 0, 0,4, tankPlating);
-		layout.setBlockIDwithGroup(1, 3, 1, i++, 0, 0,4, tankPlating);
-
-		layout.setBlockIDwithGroup(0, 3, -1, i++, 0, 0,4, tankPlating);
-		layout.setBlockIDwithGroup(0, 3, 1, i++, 0, 0,4, tankPlating);
 		layout.setBlockIDwithGroup(0, 3, 0, i++, 0, 0,4, IndustrialProcessing.blockDestilationTray.blockID);
-
-		// layer 4
-		layout.setBlockIDwithGroup(-1, 4, -1, i++, 0, 0,5, tankPlating);
-		layout.setBlockIDwithGroup(-1, 4, 0, i++, 0, 0,5, tankPlating);
-		layout.setBlockIDwithGroup(-1, 4, 1, i++, 0, 0,5, tankPlating);
-
-		layout.setBlockIDwithGroup(1, 4, -1, i++, 0, 0,5, tankPlating);
-		layout.setBlockIDwithGroup(1, 4, 0, i++, 0, 0,5, tankPlating);
-		layout.setBlockIDwithGroup(1, 4, 1, i++, 0, 0,5, tankPlating);
-
-		layout.setBlockIDwithGroup(0, 4, -1, i++, 0, 0,5, tankPlating);
-		layout.setBlockIDwithGroup(0, 4, 1, i++, 0, 0,5, tankPlating);
-		layout.setBlockIDwithGroup(0, 4, 0, i++, 0, 0,5, IndustrialProcessing.blockDestilationTray.blockID);
-
-		// layer 5
-		layout.setBlockIDwithGroup(-1, 5, -1, i++, 0, 0,6, tankPlating);
-		layout.setBlockIDwithGroup(-1, 5, 0, i++, 0, 0,6, tankPlating);
-		layout.setBlockIDwithGroup(-1, 5, 1, i++, 0, 0,6, tankPlating);
-
-		layout.setBlockIDwithGroup(1, 5, -1, i++, 0, 0,6, tankPlating);
-		layout.setBlockIDwithGroup(1, 5, 0, i++, 0, 0,6, tankPlating);
-		layout.setBlockIDwithGroup(1, 5, 1, i++, 0, 0,6, tankPlating);
-
-		layout.setBlockIDwithGroup(0, 5, -1, i++, 0, 0,6, tankPlating);
-		layout.setBlockIDwithGroup(0, 5, 1, i++, 0, 0,6, tankPlating);
-		layout.setBlockIDwithGroup(0, 5, 0, i++, 0, 0,6, IndustrialProcessing.blockDestilationTray.blockID);
-
-		// layer 6
-		layout.setBlockIDwithGroup(-1, 6, -1, i++, 0, 0,7, tankPlating);
-		layout.setBlockIDwithGroup(-1, 6, 0, i++, 0, 0,7, tankPlating);
-		layout.setBlockIDwithGroup(-1, 6, 1, i++, 0, 0,7, tankPlating);
-
-		layout.setBlockIDwithGroup(1, 6, -1, i++, 0, 0,7, tankPlating);
-		layout.setBlockIDwithGroup(1, 6, 0, i++, 0, 0,7, tankPlating);
-		layout.setBlockIDwithGroup(1, 6, 1, i++, 0, 0,7, tankPlating);
-
-		layout.setBlockIDwithGroup(0, 6, -1, i++, 0, 0,7, tankPlating);
-		layout.setBlockIDwithGroup(0, 6, 1, i++, 0, 0,7, tankPlating);
-		layout.setBlockIDwithGroup(0, 6, 0, i++, 0, 0,8, tankPlating);
 
 		structure.addLayout(layout, FacingDirection.North);
 		structure.addLayout(LayoutTransformer.transform(layout, FacingDirection.East), FacingDirection.East);
@@ -138,14 +53,14 @@ public class TileEntityAtmosphericDestilationTower extends TEmultiblockCoreTankW
 
 		this.addStack(null, nodirections, true, false);
 		this.addStack(null, nodirections, false, true);
-		this.addTank(10000, 1, ForgeDirection.VALID_DIRECTIONS, true, false);
-		this.addTank(5000, 0, new ForgeDirection[] { ForgeDirection.DOWN }, false, true);
-		this.addTank(10000, 2, ForgeDirection.VALID_DIRECTIONS, false, true);
-		this.addTank(10000, 3, ForgeDirection.VALID_DIRECTIONS, false, true);
-		this.addTank(10000, 4, ForgeDirection.VALID_DIRECTIONS, false, true);
-		this.addTank(10000, 5, ForgeDirection.VALID_DIRECTIONS, false, true);
-		this.addTank(10000, 6, ForgeDirection.VALID_DIRECTIONS, false, true);
-		this.addTank(5000, 8, new ForgeDirection[] { ForgeDirection.UP }, false, true);
+		this.addTank(10000, 0, new ForgeDirection[] { ForgeDirection.EAST }, true, false);
+		this.addTank(5000, 0, new ForgeDirection[] { ForgeDirection.WEST }, false, true);
+		this.addTank(10000, 2, new ForgeDirection[] { ForgeDirection.EAST }, false, true);
+		this.addTank(10000, 2, new ForgeDirection[] { ForgeDirection.WEST }, false, true);
+		this.addTank(10000, 3, new ForgeDirection[] { ForgeDirection.EAST }, false, true);
+		this.addTank(10000, 3, new ForgeDirection[] { ForgeDirection.WEST }, false, true);
+		this.addTank(10000, 4, new ForgeDirection[] { ForgeDirection.EAST }, false, true);
+		this.addTank(5000, 4, new ForgeDirection[] { ForgeDirection.WEST }, false, true);
 	}
 
 	@Override

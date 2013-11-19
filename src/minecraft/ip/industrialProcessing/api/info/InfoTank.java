@@ -2,8 +2,8 @@ package ip.industrialProcessing.api.info;
 
 public class InfoTank implements IExpirable{
     public int amount = -1;
-    public int capacity;
-    public int fluidId;
+    public int capacity  = -1;
+    public int fluidId  = -1;
 
     public int ttl;
 

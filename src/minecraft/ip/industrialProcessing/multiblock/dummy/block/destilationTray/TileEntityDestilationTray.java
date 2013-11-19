@@ -1,12 +1,11 @@
 package ip.industrialProcessing.multiblock.dummy.block.destilationTray;
 
-import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
+import ip.industrialProcessing.multiblock.dummy.extend.TileEntityMultiblockDummyTank;
 
-public class TileEntityDestilationTray extends TEmultiblockDummy{
+public class TileEntityDestilationTray extends TileEntityMultiblockDummyTank {
 
-	public TileEntityDestilationTray() {
-		super();
-	}
-
+    public TileEntityDestilationTray() {
+	super();
+    }
 
 }

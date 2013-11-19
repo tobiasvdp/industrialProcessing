@@ -5,7 +5,9 @@ import java.util.Iterator;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.fluids.FluidTankInfo;
 import ip.industrialProcessing.api.info.IExpirable;
+import ip.industrialProcessing.client.render.IFluidInfo;
 import ip.industrialProcessing.logic.api.network.interfaces.ILogicInterface;
 import ip.industrialProcessing.logic.api.network.interfaces.IMachineInterface;
 import ip.industrialProcessing.logic.api.network.interfaces.InterfaceType;
@@ -89,6 +91,14 @@ public class TileEntityMachineInterface extends TileEntityLogicNetworkNode imple
 			case slot:
 				break;
 			case tank:
+				if (machine instanceof IFluidInfo) {
+				    	FluidTankInfo[] info = ((IFluidInfo)machine).getTanks();
+					UTVariable[] vars = new UTVariable[info.length];
+					for(int i=0;i<info.length;i++){
+					    vars[i] = new UTVariable(0, UTVariableType.tank, info[i]);
+					}
+					return vars;
+				}
 				break;
 			case unknown:
 				break;
