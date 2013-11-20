@@ -3,6 +3,7 @@ package ip.industrialProcessing.logic.network.display;
 import org.apache.commons.lang3.text.WordUtils;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
@@ -61,6 +62,13 @@ public class TileEntityLogicDisplay extends TileEntityLogicNetworkNode {
 							InfoMachine machine = (InfoMachine) buffer.get(index).value;
 							machine.status = (StatusType) data[0].value;
 							machine.ttl = 40;
+						}
+					} else if (var.ID == UTVariableType.coord) {
+						if (buffer.get(index).ID == UTVariableType.machine) {
+							InfoMachine machine = (InfoMachine) buffer.get(index).value;
+							machine.x = (Integer) data[0].value;
+							machine.y = (Integer) data[1].value;
+							machine.z = (Integer) data[2].value;
 						}
 					} else if (var.ID == UTVariableType.work) {
 						if (buffer.get(index).ID == UTVariableType.machine) {
@@ -153,5 +161,4 @@ public class TileEntityLogicDisplay extends TileEntityLogicNetworkNode {
 	public String getName() {
 		return "Display";
 	}
-
 }

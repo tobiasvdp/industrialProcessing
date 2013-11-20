@@ -194,6 +194,16 @@ public class PacketHandler implements IPacketHandler {
 								tile.createRequestPacket(nodeCom, tile, new UTVariable(UTVariableType.slot));
 							}
 							break;
+						case name:
+							break;
+						case coord:
+							outputStream.writeInt(((InfoMachine) buffer.get(node).value).x);
+							outputStream.writeInt(((InfoMachine) buffer.get(node).value).y);
+							outputStream.writeInt(((InfoMachine) buffer.get(node).value).z);
+							TileEntityLogicNetworkNode tile = (TileEntityLogicNetworkNode) playerMP.worldObj.getBlockTileEntity(x, y, z);
+							ICommunicationNode nodeCom = te.getConnectionsOnSide(te.getExternalForgeDirection(ForgeDirection.NORTH)).getNode(node);
+							tile.createRequestPacket(nodeCom, tile, new UTVariable(UTVariableType.coord));
+							break;
 						default:
 							break;
 						}

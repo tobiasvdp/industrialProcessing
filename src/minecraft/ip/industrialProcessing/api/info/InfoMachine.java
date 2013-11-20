@@ -10,6 +10,10 @@ public class InfoMachine implements IExpirable {
 	public ArrayList<InfoTank> tanks = new ArrayList<InfoTank>();
 	public ArrayList<InfoSlot> slots = new ArrayList<InfoSlot>();
 	public StatusType status = StatusType.idle;
+	public String name = "";
+	public int x;
+	public int y;
+	public int z;
 
 	public int ttl;
 

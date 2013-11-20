@@ -364,7 +364,7 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 		}
 		return false;
 	}
-	
+	/*
     @Override
     public Packet getDescriptionPacket() {
 	NBTTagCompound nbtTag = new NBTTagCompound();
@@ -377,7 +377,7 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 	readFromNBT(packet.customParam1);
 	this.worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
     }
-
+	 
     public void notifyBlockChange() {
 	if (!this.worldObj.isRemote) {
 	    this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
@@ -390,7 +390,7 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 	}
 
     }
-    
+    */
     @Override
     public UTLogicType getLogicType(){
     	return UTLogicType.node;

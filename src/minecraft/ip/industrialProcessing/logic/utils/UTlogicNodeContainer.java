@@ -27,6 +27,8 @@ public class UTlogicNodeContainer {
 	}
 	
 	public int getIndex(ICommunicationNode node){
+		if (isListLoaded == false)
+			loadList();
 		return nodes.indexOf(node);
 	}
 

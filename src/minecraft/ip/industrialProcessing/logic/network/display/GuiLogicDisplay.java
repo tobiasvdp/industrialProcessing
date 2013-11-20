@@ -187,10 +187,26 @@ public class GuiLogicDisplay extends GuiScreen {
 		for (int[] frame : drawMachines) {
 			TileEntity te = (TileEntity) nodes.get(frame[6]);
 			drawGradientRect(frame[0], frame[1], frame[2], frame[3], frame[4], frame[5]);
-			fontRenderer.drawString(nodes.get(frame[6]).getName(), frame[0] + 5, frame[1] + 5, 4210752);
-			fontRenderer.drawString("X:" + te.xCoord + " Y:" + te.yCoord + " Z:" + te.zCoord, frame[0] + 5, frame[1] + 15, 4210752);
+			fontRenderer.drawString(drawMachineName(frame[6]), frame[0] + 5, frame[1] + 5, 4210752);
+			fontRenderer.drawString(drawMachineCoordinates(frame[6]), frame[0] + 5, frame[1] + 15, 4210752);
 			fontRenderer.drawString(drawMachineInfo(frame[6]), frame[0] + 5, frame[1] + 30, 4210752);
 		}
+	}
+
+	private String drawMachineCoordinates(int frame) {
+		InfoMachine machine = ((InfoMachine) buffer.get(frame).value);
+		if(machine.x == 0 && machine.y == 0 && machine.z == 0){
+			requestData(frame, UTVariableType.coord);
+		}
+		return "X:" + machine.x + " Y:" + machine.y + " Z:" + machine.z;
+	}
+
+	private String drawMachineName(int frame) {
+		InfoMachine machine = ((InfoMachine) buffer.get(frame).value);
+		if(machine.name.equals("")){
+			requestData(frame, UTVariableType.name);
+		}
+		return machine.name;
 	}
 
 	private String drawMachineInfo(int node) {
@@ -294,6 +310,14 @@ public class GuiLogicDisplay extends GuiScreen {
 					slot.damage = value[i++];
 					slot.id = value[i++];
 				}
+				break;
+			case name:
+				//((InfoMachine) buffer.get(node).value).name = value[0]+"";
+				break;
+			case coord:
+				((InfoMachine) buffer.get(node).value).x = value[0];
+				((InfoMachine) buffer.get(node).value).y = value[1];
+				((InfoMachine) buffer.get(node).value).z = value[2];
 				break;
 			default:
 				break;
