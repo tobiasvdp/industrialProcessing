@@ -70,6 +70,11 @@ public class TileEntityLogicDisplay extends TileEntityLogicNetworkNode {
 							machine.y = (Integer) data[1].value;
 							machine.z = (Integer) data[2].value;
 						}
+					} else if (var.ID == UTVariableType.name) {
+						if (buffer.get(index).ID == UTVariableType.machine) {
+							InfoMachine machine = (InfoMachine) buffer.get(index).value;
+							machine.name = (String) data[0].value;
+						}
 					} else if (var.ID == UTVariableType.work) {
 						if (buffer.get(index).ID == UTVariableType.machine) {
 							InfoMachine machine = (InfoMachine) buffer.get(index).value;
