@@ -11,6 +11,7 @@ import ip.industrialProcessing.api.info.IExpirable;
 import ip.industrialProcessing.api.info.InfoMachine;
 import ip.industrialProcessing.api.info.InfoSlot;
 import ip.industrialProcessing.api.info.InfoTank;
+import ip.industrialProcessing.logic.api.network.interfaces.InterfaceType;
 import ip.industrialProcessing.logic.api.network.interfaces.StatusType;
 import ip.industrialProcessing.logic.network.TileEntityLogicNetworkNode;
 import ip.industrialProcessing.logic.transport.ICommunicationNode;
@@ -62,6 +63,11 @@ public class TileEntityLogicDisplay extends TileEntityLogicNetworkNode {
 							InfoMachine machine = (InfoMachine) buffer.get(index).value;
 							machine.status = (StatusType) data[0].value;
 							machine.ttl = 40;
+						}
+					} else if (var.ID == UTVariableType.interfaceTypes) {
+						if (buffer.get(index).ID == UTVariableType.machine) {
+							InfoMachine machine = (InfoMachine) buffer.get(index).value;
+							machine.interfaceTypes = (InterfaceType[]) data[0].value;
 						}
 					} else if (var.ID == UTVariableType.coord) {
 						if (buffer.get(index).ID == UTVariableType.machine) {

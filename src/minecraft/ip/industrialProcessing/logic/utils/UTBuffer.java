@@ -72,4 +72,8 @@ public class UTBuffer {
 	public void add(int i, UTVariableType type, Object object) {
 		buffer.add(new UTVariable(i,type,object));
 	}
+
+	public void clear() {
+		buffer.clear();
+	}
 }

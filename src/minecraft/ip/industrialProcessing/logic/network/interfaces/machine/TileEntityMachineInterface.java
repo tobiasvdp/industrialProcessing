@@ -124,6 +124,8 @@ public class TileEntityMachineInterface extends TileEntityLogicNetworkNode imple
 				return new UTVariable[] { new UTVariable(0, UTVariableType.coord, te.xCoord),new UTVariable(0, UTVariableType.coord, te.yCoord),new UTVariable(0, UTVariableType.coord, te.zCoord) };
 			case name:
 				return new UTVariable[] {new UTVariable(0, UTVariableType.name, machine.getName())};
+			case interfaceTypes:
+				return new UTVariable[] {new UTVariable(0,UTVariableType.interfaceTypes,machine.getConnectionTypes())};
 			default:
 				break;
 			}

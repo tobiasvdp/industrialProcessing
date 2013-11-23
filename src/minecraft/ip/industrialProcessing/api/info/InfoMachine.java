@@ -2,6 +2,7 @@ package ip.industrialProcessing.api.info;
 
 import java.util.ArrayList;
 
+import ip.industrialProcessing.logic.api.network.interfaces.InterfaceType;
 import ip.industrialProcessing.logic.api.network.interfaces.StatusType;
 
 public class InfoMachine implements IExpirable {
@@ -10,6 +11,7 @@ public class InfoMachine implements IExpirable {
 	public ArrayList<InfoTank> tanks = new ArrayList<InfoTank>();
 	public ArrayList<InfoSlot> slots = new ArrayList<InfoSlot>();
 	public StatusType status = StatusType.idle;
+	public InterfaceType[] interfaceTypes;
 	public String name = "";
 	public int x;
 	public int y;

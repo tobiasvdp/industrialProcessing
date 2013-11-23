@@ -4,6 +4,7 @@ import ip.industrialProcessing.api.info.IExpirable;
 import ip.industrialProcessing.api.info.InfoMachine;
 import ip.industrialProcessing.api.info.InfoSlot;
 import ip.industrialProcessing.api.info.InfoTank;
+import ip.industrialProcessing.logic.api.network.interfaces.InterfaceType;
 import ip.industrialProcessing.logic.network.TileEntityLogicNetworkNode;
 import ip.industrialProcessing.logic.network.display.GuiLogicDisplay;
 import ip.industrialProcessing.logic.transport.ICommunicationNode;
@@ -129,6 +130,10 @@ public class PacketHandler implements IPacketHandler {
 					outputStream.writeInt(type.ordinal());
 
 					UTBuffer buffer = te.getBuffer(ForgeDirection.NORTH);
+					if (node >= buffer.size() || buffer.get(node) == null) {
+						TileEntityLogicNetworkNode tile = (TileEntityLogicNetworkNode) playerMP.worldObj.getBlockTileEntity(x, y, z);
+						tile.fillBufferFromNodelist();
+					}
 					switch (buffer.get(node).ID) {
 					case machine:
 						switch (type) {
@@ -195,6 +200,15 @@ public class PacketHandler implements IPacketHandler {
 							}
 							break;
 						case name:
+							InfoMachine machine3 = ((InfoMachine) buffer.get(node).value);
+							String name = machine3.name;
+							if (name != null) {
+								for (int i = 0; i < name.length(); i++)
+									outputStream.writeInt(name.charAt(i));
+							}
+							TileEntityLogicNetworkNode tile2 = (TileEntityLogicNetworkNode) playerMP.worldObj.getBlockTileEntity(x, y, z);
+							ICommunicationNode nodeCom2 = te.getConnectionsOnSide(te.getExternalForgeDirection(ForgeDirection.NORTH)).getNode(node);
+							tile2.createRequestPacket(nodeCom2, tile2, new UTVariable(UTVariableType.name));
 							break;
 						case coord:
 							outputStream.writeInt(((InfoMachine) buffer.get(node).value).x);
@@ -203,6 +217,17 @@ public class PacketHandler implements IPacketHandler {
 							TileEntityLogicNetworkNode tile = (TileEntityLogicNetworkNode) playerMP.worldObj.getBlockTileEntity(x, y, z);
 							ICommunicationNode nodeCom = te.getConnectionsOnSide(te.getExternalForgeDirection(ForgeDirection.NORTH)).getNode(node);
 							tile.createRequestPacket(nodeCom, tile, new UTVariable(UTVariableType.coord));
+							break;
+						case interfaceTypes:
+							InfoMachine machine4 = ((InfoMachine) buffer.get(node).value);
+							if (machine4.interfaceTypes != null) {
+								for (InterfaceType interfaceType : machine4.interfaceTypes) {
+									outputStream.writeInt(interfaceType.ordinal());
+								}
+							}
+							TileEntityLogicNetworkNode tile3 = (TileEntityLogicNetworkNode) playerMP.worldObj.getBlockTileEntity(x, y, z);
+							ICommunicationNode nodeCom3 = te.getConnectionsOnSide(te.getExternalForgeDirection(ForgeDirection.NORTH)).getNode(node);
+							tile3.createRequestPacket(nodeCom3, tile3, new UTVariable(UTVariableType.interfaceTypes));
 							break;
 						default:
 							break;

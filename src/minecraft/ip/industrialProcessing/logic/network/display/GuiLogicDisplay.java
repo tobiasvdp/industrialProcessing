@@ -135,41 +135,46 @@ public class GuiLogicDisplay extends GuiScreen {
 		case gate:
 			break;
 		case interfaces:
-			ILogicInterface interfaces = (ILogicInterface) nodes.get(activeNode);
 			InfoMachine machine = ((InfoMachine) buffer.get(activeNode).value);
-			fontRenderer.drawString(interfaces.getMachine().getName(), x + 40, y + 45, 4210752);
+			fontRenderer.drawString(drawMachineName(activeNode), x + 40, y + 45, 4210752);
 			fontRenderer.drawString("Status: " + drawMachineInfo(activeNode), x + 40, y + 70, 4210752);
-			for (InterfaceType type : interfaces.getMachine().getConnectionTypes()) {
-				switch (type) {
-				case inventory:
-					requestData(activeNode, UTVariableType.slot);
-					fontRenderer.drawString("Inventory", x + 40, y + 125, 4210752);
-					for (int i = 0; i < machine.slots.size(); i++) {
-						InfoSlot slot = machine.slots.get(i);
-						//drawItemStack(new ItemStack(slot.id,slot.amount,slot.damage), x+40 + (i%2)*20, y+140 + (i/2)*20, "");
+			if (machine.interfaceTypes == null) {
+				requestData(activeNode, UTVariableType.interfaceTypes);
+			} else {
+				for (InterfaceType type : machine.interfaceTypes) {
+					switch (type) {
+					case inventory:
+						requestData(activeNode, UTVariableType.slot);
+						fontRenderer.drawString("Inventory", x + 40, y + 125, 4210752);
+						for (int i = 0; i < machine.slots.size(); i++) {
+							InfoSlot slot = machine.slots.get(i);
+							// drawItemStack(new
+							// ItemStack(slot.id,slot.amount,slot.damage), x+40
+							// + (i%2)*20, y+140 + (i/2)*20, "");
+						}
+						break;
+					case power:
+						requestData(activeNode, UTVariableType.power);
+						drawGradientRect(x + 140, y + 35, x + 160, y + 115, color3.getRGB(), color4.getRGB());
+						drawGradientRect(x + 142, y + 40, x + 158, y + 110, color5.getRGB(), color6.getRGB());
+						int size = machine.power.storedPower * 70 / machine.power.powerCapacity;
+						mc.renderEngine.func_110577_a(this.textureLocation);
+						this.drawTexturedModalRect(x + 142, y + 110 - size, 15, 70 - size, 16, size);
+						fontRenderer.drawString("Power: " + machine.power.storedPower + "/" + machine.power.powerCapacity, x + 40, y + 80, 4210752);
+						break;
+					case tank:
+						requestData(activeNode, UTVariableType.tank);
+						for (int i = 0; i < machine.tanks.size(); i++) {
+							fontRenderer.drawString("tank " + i + ":(" + machine.tanks.get(i).fluidId + ") " + machine.tanks.get(i).amount + "/" + machine.tanks.get(i).capacity, x + 40, y + 125 + i * 15, 4210752);
+						}
+						break;
+					case worker:
+						requestData(activeNode, UTVariableType.work);
+						fontRenderer.drawString("Work: " + machine.worker.workDone + "/" + machine.worker.totalWork, x + 40, y + 90, 4210752);
+						break;
+					default:
+						break;
 					}
-					break;
-				case power:
-					requestData(activeNode, UTVariableType.power);
-					drawGradientRect(x + 140, y + 35, x + 160, y + 115, color3.getRGB(), color4.getRGB());
-					drawGradientRect(x + 142, y + 40, x + 158, y + 110, color5.getRGB(), color6.getRGB());
-					int size = machine.power.storedPower * 70 / machine.power.powerCapacity;
-					mc.renderEngine.func_110577_a(this.textureLocation);
-					this.drawTexturedModalRect(x+142,y+110-size , 15, 70-size, 16, size);
-					fontRenderer.drawString("Power: " + machine.power.storedPower + "/" + machine.power.powerCapacity, x + 40, y + 80, 4210752);
-					break;
-				case tank:
-					requestData(activeNode, UTVariableType.tank);
-					for (int i = 0; i < machine.tanks.size(); i++) {
-						fontRenderer.drawString("tank " + i + ":(" + machine.tanks.get(i).fluidId + ") " + machine.tanks.get(i).amount + "/" + machine.tanks.get(i).capacity, x + 40, y + 125 + i * 15, 4210752);
-					}
-					break;
-				case worker:
-					requestData(activeNode, UTVariableType.work);
-					fontRenderer.drawString("Work: " + machine.worker.workDone + "/" + machine.worker.totalWork, x + 40, y + 90, 4210752);
-					break;
-				default:
-					break;
 				}
 			}
 		case networkedNode:
@@ -195,7 +200,7 @@ public class GuiLogicDisplay extends GuiScreen {
 
 	private String drawMachineCoordinates(int frame) {
 		InfoMachine machine = ((InfoMachine) buffer.get(frame).value);
-		if(machine.x == 0 && machine.y == 0 && machine.z == 0){
+		if (machine.x == 0 && machine.y == 0 && machine.z == 0) {
 			requestData(frame, UTVariableType.coord);
 		}
 		return "X:" + machine.x + " Y:" + machine.y + " Z:" + machine.z;
@@ -203,7 +208,7 @@ public class GuiLogicDisplay extends GuiScreen {
 
 	private String drawMachineName(int frame) {
 		InfoMachine machine = ((InfoMachine) buffer.get(frame).value);
-		if(machine.name.equals("")){
+		if (machine.name.equals("")) {
 			requestData(frame, UTVariableType.name);
 		}
 		return machine.name;
@@ -312,12 +317,24 @@ public class GuiLogicDisplay extends GuiScreen {
 				}
 				break;
 			case name:
-				//((InfoMachine) buffer.get(node).value).name = value[0]+"";
+				String name = "";
+				for (int i = 0; i < value.length; i++)
+					name = name + ((char) value[i]);
+				((InfoMachine) buffer.get(node).value).name = name;
 				break;
 			case coord:
 				((InfoMachine) buffer.get(node).value).x = value[0];
 				((InfoMachine) buffer.get(node).value).y = value[1];
 				((InfoMachine) buffer.get(node).value).z = value[2];
+				break;
+			case interfaceTypes:
+				InfoMachine machine = ((InfoMachine) buffer.get(node).value);
+				if (value.length != 0) {
+					machine.interfaceTypes = new InterfaceType[value.length];
+					for (int i = 0; i < value.length; i++) {
+						machine.interfaceTypes[i] = InterfaceType.values()[value[i]];
+					}
+				}
 				break;
 			default:
 				break;
@@ -416,119 +433,106 @@ public class GuiLogicDisplay extends GuiScreen {
 			}
 		}
 	}
-	
-	private void drawItemStack(ItemStack par1ItemStack, int par2, int par3, String par4Str)
-    {
-        GL11.glTranslatef(0.0F, 0.0F, 32.0F);
-        this.zLevel = 200.0F;
-        itemRenderer.zLevel = 200.0F;
-        FontRenderer font = null;
-        if (par1ItemStack != null) font = par1ItemStack.getItem().getFontRenderer(par1ItemStack);
-        if (font == null) font = fontRenderer;
-        drawRect(par2, par3, par2 + 20, par3+20, Color.darkGray.getRGB());
-        drawRect(par2+1, par3+1, par2 + 19, par3+19, Color.lightGray.getRGB());
-        itemRenderer.renderItemAndEffectIntoGUI(font, this.mc.func_110434_K(), par1ItemStack, par2+2, par3+2);
-        itemRenderer.renderItemOverlayIntoGUI(font, this.mc.func_110434_K(), par1ItemStack, par2+2, par3+2 - (this.draggedStack == null ? 0 : 8), par4Str);
-        this.zLevel = 0.0F;
-        itemRenderer.zLevel = 0.0F;
-    }
 
-    protected void drawItemStackTooltip(ItemStack par1ItemStack, int par2, int par3)
-    {
-        List list = par1ItemStack.getTooltip(this.mc.thePlayer, this.mc.gameSettings.advancedItemTooltips);
+	private void drawItemStack(ItemStack par1ItemStack, int par2, int par3, String par4Str) {
+		GL11.glTranslatef(0.0F, 0.0F, 32.0F);
+		this.zLevel = 200.0F;
+		itemRenderer.zLevel = 200.0F;
+		FontRenderer font = null;
+		if (par1ItemStack != null)
+			font = par1ItemStack.getItem().getFontRenderer(par1ItemStack);
+		if (font == null)
+			font = fontRenderer;
+		drawRect(par2, par3, par2 + 20, par3 + 20, Color.darkGray.getRGB());
+		drawRect(par2 + 1, par3 + 1, par2 + 19, par3 + 19, Color.lightGray.getRGB());
+		itemRenderer.renderItemAndEffectIntoGUI(font, this.mc.func_110434_K(), par1ItemStack, par2 + 2, par3 + 2);
+		itemRenderer.renderItemOverlayIntoGUI(font, this.mc.func_110434_K(), par1ItemStack, par2 + 2, par3 + 2 - (this.draggedStack == null ? 0 : 8), par4Str);
+		this.zLevel = 0.0F;
+		itemRenderer.zLevel = 0.0F;
+	}
 
-        for (int k = 0; k < list.size(); ++k)
-        {
-            if (k == 0)
-            {
-                list.set(k, "\u00a7" + Integer.toHexString(par1ItemStack.getRarity().rarityColor) + (String)list.get(k));
-            }
-            else
-            {
-                list.set(k, EnumChatFormatting.GRAY + (String)list.get(k));
-            }
-        }
+	protected void drawItemStackTooltip(ItemStack par1ItemStack, int par2, int par3) {
+		List list = par1ItemStack.getTooltip(this.mc.thePlayer, this.mc.gameSettings.advancedItemTooltips);
 
-        FontRenderer font = par1ItemStack.getItem().getFontRenderer(par1ItemStack);
-        drawHoveringText(list, par2, par3, (font == null ? fontRenderer : font));
-    }
-    
-    protected void drawHoveringText(List par1List, int par2, int par3, FontRenderer font)
-    {
-        if (!par1List.isEmpty())
-        {
-            GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-            RenderHelper.disableStandardItemLighting();
-            GL11.glDisable(GL11.GL_LIGHTING);
-            GL11.glDisable(GL11.GL_DEPTH_TEST);
-            int k = 0;
-            Iterator iterator = par1List.iterator();
+		for (int k = 0; k < list.size(); ++k) {
+			if (k == 0) {
+				list.set(k, "\u00a7" + Integer.toHexString(par1ItemStack.getRarity().rarityColor) + (String) list.get(k));
+			} else {
+				list.set(k, EnumChatFormatting.GRAY + (String) list.get(k));
+			}
+		}
 
-            while (iterator.hasNext())
-            {
-                String s = (String)iterator.next();
-                int l = font.getStringWidth(s);
+		FontRenderer font = par1ItemStack.getItem().getFontRenderer(par1ItemStack);
+		drawHoveringText(list, par2, par3, (font == null ? fontRenderer : font));
+	}
 
-                if (l > k)
-                {
-                    k = l;
-                }
-            }
+	protected void drawHoveringText(List par1List, int par2, int par3, FontRenderer font) {
+		if (!par1List.isEmpty()) {
+			GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+			RenderHelper.disableStandardItemLighting();
+			GL11.glDisable(GL11.GL_LIGHTING);
+			GL11.glDisable(GL11.GL_DEPTH_TEST);
+			int k = 0;
+			Iterator iterator = par1List.iterator();
 
-            int i1 = par2 + 12;
-            int j1 = par3 - 12;
-            int k1 = 8;
+			while (iterator.hasNext()) {
+				String s = (String) iterator.next();
+				int l = font.getStringWidth(s);
 
-            if (par1List.size() > 1)
-            {
-                k1 += 2 + (par1List.size() - 1) * 10;
-            }
+				if (l > k) {
+					k = l;
+				}
+			}
 
-            if (i1 + k > this.width)
-            {
-                i1 -= 28 + k;
-            }
+			int i1 = par2 + 12;
+			int j1 = par3 - 12;
+			int k1 = 8;
 
-            if (j1 + k1 + 6 > this.height)
-            {
-                j1 = this.height - k1 - 6;
-            }
+			if (par1List.size() > 1) {
+				k1 += 2 + (par1List.size() - 1) * 10;
+			}
 
-            this.zLevel = 300.0F;
-            itemRenderer.zLevel = 300.0F;
-            int l1 = -267386864;
-            this.drawGradientRect(i1 - 3, j1 - 4, i1 + k + 3, j1 - 3, l1, l1);
-            this.drawGradientRect(i1 - 3, j1 + k1 + 3, i1 + k + 3, j1 + k1 + 4, l1, l1);
-            this.drawGradientRect(i1 - 3, j1 - 3, i1 + k + 3, j1 + k1 + 3, l1, l1);
-            this.drawGradientRect(i1 - 4, j1 - 3, i1 - 3, j1 + k1 + 3, l1, l1);
-            this.drawGradientRect(i1 + k + 3, j1 - 3, i1 + k + 4, j1 + k1 + 3, l1, l1);
-            int i2 = 1347420415;
-            int j2 = (i2 & 16711422) >> 1 | i2 & -16777216;
-            this.drawGradientRect(i1 - 3, j1 - 3 + 1, i1 - 3 + 1, j1 + k1 + 3 - 1, i2, j2);
-            this.drawGradientRect(i1 + k + 2, j1 - 3 + 1, i1 + k + 3, j1 + k1 + 3 - 1, i2, j2);
-            this.drawGradientRect(i1 - 3, j1 - 3, i1 + k + 3, j1 - 3 + 1, i2, i2);
-            this.drawGradientRect(i1 - 3, j1 + k1 + 2, i1 + k + 3, j1 + k1 + 3, j2, j2);
+			if (i1 + k > this.width) {
+				i1 -= 28 + k;
+			}
 
-            for (int k2 = 0; k2 < par1List.size(); ++k2)
-            {
-                String s1 = (String)par1List.get(k2);
-                font.drawStringWithShadow(s1, i1, j1, -1);
+			if (j1 + k1 + 6 > this.height) {
+				j1 = this.height - k1 - 6;
+			}
 
-                if (k2 == 0)
-                {
-                    j1 += 2;
-                }
+			this.zLevel = 300.0F;
+			itemRenderer.zLevel = 300.0F;
+			int l1 = -267386864;
+			this.drawGradientRect(i1 - 3, j1 - 4, i1 + k + 3, j1 - 3, l1, l1);
+			this.drawGradientRect(i1 - 3, j1 + k1 + 3, i1 + k + 3, j1 + k1 + 4, l1, l1);
+			this.drawGradientRect(i1 - 3, j1 - 3, i1 + k + 3, j1 + k1 + 3, l1, l1);
+			this.drawGradientRect(i1 - 4, j1 - 3, i1 - 3, j1 + k1 + 3, l1, l1);
+			this.drawGradientRect(i1 + k + 3, j1 - 3, i1 + k + 4, j1 + k1 + 3, l1, l1);
+			int i2 = 1347420415;
+			int j2 = (i2 & 16711422) >> 1 | i2 & -16777216;
+			this.drawGradientRect(i1 - 3, j1 - 3 + 1, i1 - 3 + 1, j1 + k1 + 3 - 1, i2, j2);
+			this.drawGradientRect(i1 + k + 2, j1 - 3 + 1, i1 + k + 3, j1 + k1 + 3 - 1, i2, j2);
+			this.drawGradientRect(i1 - 3, j1 - 3, i1 + k + 3, j1 - 3 + 1, i2, i2);
+			this.drawGradientRect(i1 - 3, j1 + k1 + 2, i1 + k + 3, j1 + k1 + 3, j2, j2);
 
-                j1 += 10;
-            }
+			for (int k2 = 0; k2 < par1List.size(); ++k2) {
+				String s1 = (String) par1List.get(k2);
+				font.drawStringWithShadow(s1, i1, j1, -1);
 
-            this.zLevel = 0.0F;
-            itemRenderer.zLevel = 0.0F;
-            GL11.glEnable(GL11.GL_LIGHTING);
-            GL11.glEnable(GL11.GL_DEPTH_TEST);
-            RenderHelper.enableStandardItemLighting();
-            GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-        }
-    }
+				if (k2 == 0) {
+					j1 += 2;
+				}
+
+				j1 += 10;
+			}
+
+			this.zLevel = 0.0F;
+			itemRenderer.zLevel = 0.0F;
+			GL11.glEnable(GL11.GL_LIGHTING);
+			GL11.glEnable(GL11.GL_DEPTH_TEST);
+			RenderHelper.enableStandardItemLighting();
+			GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+		}
+	}
 
 }

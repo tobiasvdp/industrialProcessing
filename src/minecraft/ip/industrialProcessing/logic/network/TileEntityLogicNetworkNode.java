@@ -103,7 +103,19 @@ public abstract class TileEntityLogicNetworkNode extends TElogicNode implements 
 			addToBuffer(node, this.buffer[side.ordinal()]);
 		}
 	}
-
+	
+	public void fillBufferFromNodelist(){
+		for(ForgeDirection dir:ForgeDirection.VALID_DIRECTIONS){
+			UTBuffer buffer = this.buffer[dir.ordinal()];
+			UTlogicNodeContainer container = nodeCollection[dir.ordinal()];
+			buffer.clear();
+			for(int i =0;i<container.getSize();i++){
+				ICommunicationNode node = container.getNode(i);
+				addToBuffer(node, buffer);
+			}
+		}
+	}
+	
 	protected void addToBuffer(ICommunicationNode node, UTBuffer buffer) {
 		switch (node.getLogicType()) {
 		case gate:

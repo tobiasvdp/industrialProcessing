@@ -43,6 +43,7 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
 	writeInventory(nbt);
 	if (this.forwardDirection != null)
 	    nbt.setByte("ForwardDirection", (byte) this.forwardDirection.ordinal());
+	nbt.setString("Name", this.name);
     }
 
     private void writeInventory(NBTTagCompound nbt) {
@@ -64,6 +65,7 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
 	super.readFromNBT(nbt);
 	readInventory(nbt);
 	this.forwardDirection = ForgeDirection.VALID_DIRECTIONS[nbt.getByte("ForwardDirection")];
+	this.name = nbt.getString("Name");
     };
 
     private void readInventory(NBTTagCompound nbt) {
