@@ -20,6 +20,7 @@ import ip.industrialProcessing.logic.utils.UTVariable;
 import ip.industrialProcessing.logic.utils.UTVariableType;
 import ip.industrialProcessing.logic.utils.UTlogicNodeContainer;
 import ip.industrialProcessing.machines.IPowerStorage;
+import ip.industrialProcessing.machines.MachineItemStack;
 import ip.industrialProcessing.utils.working.IWorker;
 
 public class TileEntityLogicDisplay extends TileEntityLogicNetworkNode {
@@ -110,16 +111,23 @@ public class TileEntityLogicDisplay extends TileEntityLogicNetworkNode {
 						if (buffer.get(index).ID == UTVariableType.machine) {
 							InfoMachine machine = (InfoMachine) buffer.get(index).value;
 							for (int i = 0; i < data.length; i++) {
-								ItemStack info = (ItemStack) data[i].value;
+								MachineItemStack info = (MachineItemStack) data[i].value;
 								InfoSlot slot = machine.getOrSetSlot(i);
-								if (info != null) {
-									slot.amount = info.stackSize;
-									slot.damage = info.getItemDamage();
-									slot.id = info.itemID;
+								if (info != null && info.stack != null) {
+									slot.amount = info.stack.stackSize;
+									slot.damage = info.stack.getItemDamage();
+									slot.id = info.stack.itemID;
+									if (info.input)
+										slot.input = true;
+									if (info.output)
+										slot.output = true;
+
 								} else {
 									slot.amount = 0;
 									slot.damage = 0;
 									slot.id = 0;
+									slot.input = false;
+									slot.output = false;
 								}
 								slot.ttl = 20;
 							}

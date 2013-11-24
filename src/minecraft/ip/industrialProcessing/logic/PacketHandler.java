@@ -189,6 +189,14 @@ public class PacketHandler implements IPacketHandler {
 								outputStream.writeInt(slot.amount);
 								outputStream.writeInt(slot.damage);
 								outputStream.writeInt(slot.id);
+								if(slot.input)
+									outputStream.writeInt(1);
+								else
+									outputStream.writeInt(0);
+								if(slot.output)
+									outputStream.writeInt(1);
+								else
+									outputStream.writeInt(0);
 								if (slot.isExpired()) {
 									expired2 = true;
 								}

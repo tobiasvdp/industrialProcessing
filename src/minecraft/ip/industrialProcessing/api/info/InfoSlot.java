@@ -4,6 +4,8 @@ public class InfoSlot {
     public int amount = -1;
     public int id = -1;
     public int damage = -1;
+    public boolean input = false;
+    public boolean output = false;
 
     public int ttl;
 

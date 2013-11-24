@@ -12,4 +12,8 @@ public interface IMachineSlots {
 	boolean addToSlot(int index, int itemId, int maxAmount);
 	boolean removeFromSlot(int index, int itemId, int maxAmount);
 	boolean damageItem(int slot, int itemId);
+	
+	public MachineItemStack getMachineStack(int i);
+	
+	public int getSizeInventory();
 }

@@ -18,6 +18,7 @@ import ip.industrialProcessing.logic.utils.UTBuffer;
 import ip.industrialProcessing.logic.utils.UTLogicType;
 import ip.industrialProcessing.logic.utils.UTVariable;
 import ip.industrialProcessing.logic.utils.UTVariableType;
+import ip.industrialProcessing.machines.IMachineSlots;
 import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
 import ip.industrialProcessing.machines.TileEntityPoweredWorkerMachine;
@@ -90,11 +91,11 @@ public class TileEntityMachineInterface extends TileEntityLogicNetworkNode imple
 				}
 				break;
 			case slot:
-				if (machine instanceof IInventory) {
-			    	IInventory inv = ((IInventory)machine);
+				if (machine instanceof IMachineSlots) {
+					IMachineSlots inv = ((IMachineSlots)machine);
 				UTVariable[] vars = new UTVariable[inv.getSizeInventory()];
 				for(int i=0;i<inv.getSizeInventory();i++){
-				    vars[i] = new UTVariable(0, UTVariableType.slot, inv.getStackInSlot(i));
+				    vars[i] = new UTVariable(0, UTVariableType.slot, inv.getMachineStack(i));
 				}
 				return vars;
 			}

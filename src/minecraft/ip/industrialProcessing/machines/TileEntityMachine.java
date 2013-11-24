@@ -43,7 +43,8 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
 	writeInventory(nbt);
 	if (this.forwardDirection != null)
 	    nbt.setByte("ForwardDirection", (byte) this.forwardDirection.ordinal());
-	nbt.setString("Name", this.name);
+	if(this.name != null && this.name!="")
+		nbt.setString("Name", this.name);
     }
 
     private void writeInventory(NBTTagCompound nbt) {
@@ -175,7 +176,8 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
 	return machineStack.stack;
     }
 
-    protected MachineItemStack getMachineStack(int i) {
+    @Override
+    public MachineItemStack getMachineStack(int i) {
 	if (i < 0 || i >= this.itemStacks.size())
 	    return null;
 	return this.itemStacks.get(i);

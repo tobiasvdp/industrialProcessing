@@ -170,7 +170,7 @@ public abstract class TEmultiblockCoreInv extends TEmultiblockCore implements II
 		return machineStack.stack;
 	}
 
-	protected MachineItemStack getMachineStack(int i) {
+	public MachineItemStack getMachineStack(int i) {
 		if (i < 0 || i >= this.itemStacks.size())
 			return null;
 		return this.itemStacks.get(i);

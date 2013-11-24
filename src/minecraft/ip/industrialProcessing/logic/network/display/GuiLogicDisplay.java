@@ -29,10 +29,14 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
@@ -124,8 +128,8 @@ public class GuiLogicDisplay extends GuiScreen {
 		Color color5 = new Color(0, 0, 0);
 		Color color6 = new Color(20, 20, 20);
 		drawGradientRect(x + 10, y + 10, x + X_SIZE - 10, y + Y_SIZE - 10, color1.getRGB(), color2.getRGB());
-		drawGradientRect(x + 30, y + 35, x + 130, y + 115, color3.getRGB(), color4.getRGB());
-		drawGradientRect(x + 35, y + 40, x + 125, y + 110, color5.getRGB(), color6.getRGB());
+		drawGradientRect(x + 30, y + 35, x + 160, y + 115, color3.getRGB(), color4.getRGB());
+		drawGradientRect(x + 35, y + 40, x + 155, y + 110, color5.getRGB(), color6.getRGB());
 		this.drawTexturedModalRect(x + 15, y + 15, 0, 0, 15, 15);
 		this.drawTexturedModalRect(x + 15, y + Y_SIZE - 30, 0, 0, 15, 15);
 		this.drawTexturedModalRect(x + X_SIZE - 30, y + 15, 0, 0, 15, 15);
@@ -148,18 +152,21 @@ public class GuiLogicDisplay extends GuiScreen {
 						fontRenderer.drawString("Inventory", x + 40, y + 125, 4210752);
 						for (int i = 0; i < machine.slots.size(); i++) {
 							InfoSlot slot = machine.slots.get(i);
-							// drawItemStack(new
-							// ItemStack(slot.id,slot.amount,slot.damage), x+40
-							// + (i%2)*20, y+140 + (i/2)*20, "");
+							if(slot.input){
+								//drawItemStack(new ItemStack(slot.id, slot.amount, slot.damage), x + 40 + (i % 2) * 20, y + 140 + (i / 2) * 20, "");
+							}
+							if(slot.output){
+								//drawItemStack(new ItemStack(slot.id, slot.amount, slot.damage), x + 140 + (i % 2) * 20, y + 140 + (i / 2) * 20, "");
+							}
 						}
 						break;
 					case power:
 						requestData(activeNode, UTVariableType.power);
-						drawGradientRect(x + 140, y + 35, x + 160, y + 115, color3.getRGB(), color4.getRGB());
-						drawGradientRect(x + 142, y + 40, x + 158, y + 110, color5.getRGB(), color6.getRGB());
+						drawGradientRect(x + 170, y + 35, x + 190, y + 115, color3.getRGB(), color4.getRGB());
+						drawGradientRect(x + 172, y + 40, x + 188, y + 110, color5.getRGB(), color6.getRGB());
 						int size = machine.power.storedPower * 70 / machine.power.powerCapacity;
 						mc.renderEngine.func_110577_a(this.textureLocation);
-						this.drawTexturedModalRect(x + 142, y + 110 - size, 15, 70 - size, 16, size);
+						this.drawTexturedModalRect(x + 172, y + 110 - size, 15, 70 - size, 16, size);
 						fontRenderer.drawString("Power: " + machine.power.storedPower + "/" + machine.power.powerCapacity, x + 40, y + 80, 4210752);
 						break;
 					case tank:
@@ -171,6 +178,9 @@ public class GuiLogicDisplay extends GuiScreen {
 					case worker:
 						requestData(activeNode, UTVariableType.work);
 						fontRenderer.drawString("Work: " + machine.worker.workDone + "/" + machine.worker.totalWork, x + 40, y + 90, 4210752);
+						mc.renderEngine.func_110577_a(this.textureLocation);
+						drawTexturedModalRect(width/2-22, y+140, 30, 0, 44, 25);
+						drawTexturedModalRect(width/2-22, y+140, 30, 25, 44*machine.worker.workDone/machine.worker.totalWork, 25);
 						break;
 					default:
 						break;
@@ -186,6 +196,10 @@ public class GuiLogicDisplay extends GuiScreen {
 		default:
 			break;
 		}
+	}
+
+	public void drawTank() {
+
 	}
 
 	private void drawOverview() {
@@ -314,6 +328,14 @@ public class GuiLogicDisplay extends GuiScreen {
 					slot.amount = value[i++];
 					slot.damage = value[i++];
 					slot.id = value[i++];
+					if (value[i++] == 1)
+						slot.input = true;
+					else
+						slot.input = false;
+					if (value[i++] == 1)
+						slot.output = true;
+					else
+						slot.output = false;
 				}
 				break;
 			case name:
@@ -431,107 +453,6 @@ public class GuiLogicDisplay extends GuiScreen {
 					}
 				}
 			}
-		}
-	}
-
-	private void drawItemStack(ItemStack par1ItemStack, int par2, int par3, String par4Str) {
-		GL11.glTranslatef(0.0F, 0.0F, 32.0F);
-		this.zLevel = 200.0F;
-		itemRenderer.zLevel = 200.0F;
-		FontRenderer font = null;
-		if (par1ItemStack != null)
-			font = par1ItemStack.getItem().getFontRenderer(par1ItemStack);
-		if (font == null)
-			font = fontRenderer;
-		drawRect(par2, par3, par2 + 20, par3 + 20, Color.darkGray.getRGB());
-		drawRect(par2 + 1, par3 + 1, par2 + 19, par3 + 19, Color.lightGray.getRGB());
-		itemRenderer.renderItemAndEffectIntoGUI(font, this.mc.func_110434_K(), par1ItemStack, par2 + 2, par3 + 2);
-		itemRenderer.renderItemOverlayIntoGUI(font, this.mc.func_110434_K(), par1ItemStack, par2 + 2, par3 + 2 - (this.draggedStack == null ? 0 : 8), par4Str);
-		this.zLevel = 0.0F;
-		itemRenderer.zLevel = 0.0F;
-	}
-
-	protected void drawItemStackTooltip(ItemStack par1ItemStack, int par2, int par3) {
-		List list = par1ItemStack.getTooltip(this.mc.thePlayer, this.mc.gameSettings.advancedItemTooltips);
-
-		for (int k = 0; k < list.size(); ++k) {
-			if (k == 0) {
-				list.set(k, "\u00a7" + Integer.toHexString(par1ItemStack.getRarity().rarityColor) + (String) list.get(k));
-			} else {
-				list.set(k, EnumChatFormatting.GRAY + (String) list.get(k));
-			}
-		}
-
-		FontRenderer font = par1ItemStack.getItem().getFontRenderer(par1ItemStack);
-		drawHoveringText(list, par2, par3, (font == null ? fontRenderer : font));
-	}
-
-	protected void drawHoveringText(List par1List, int par2, int par3, FontRenderer font) {
-		if (!par1List.isEmpty()) {
-			GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-			RenderHelper.disableStandardItemLighting();
-			GL11.glDisable(GL11.GL_LIGHTING);
-			GL11.glDisable(GL11.GL_DEPTH_TEST);
-			int k = 0;
-			Iterator iterator = par1List.iterator();
-
-			while (iterator.hasNext()) {
-				String s = (String) iterator.next();
-				int l = font.getStringWidth(s);
-
-				if (l > k) {
-					k = l;
-				}
-			}
-
-			int i1 = par2 + 12;
-			int j1 = par3 - 12;
-			int k1 = 8;
-
-			if (par1List.size() > 1) {
-				k1 += 2 + (par1List.size() - 1) * 10;
-			}
-
-			if (i1 + k > this.width) {
-				i1 -= 28 + k;
-			}
-
-			if (j1 + k1 + 6 > this.height) {
-				j1 = this.height - k1 - 6;
-			}
-
-			this.zLevel = 300.0F;
-			itemRenderer.zLevel = 300.0F;
-			int l1 = -267386864;
-			this.drawGradientRect(i1 - 3, j1 - 4, i1 + k + 3, j1 - 3, l1, l1);
-			this.drawGradientRect(i1 - 3, j1 + k1 + 3, i1 + k + 3, j1 + k1 + 4, l1, l1);
-			this.drawGradientRect(i1 - 3, j1 - 3, i1 + k + 3, j1 + k1 + 3, l1, l1);
-			this.drawGradientRect(i1 - 4, j1 - 3, i1 - 3, j1 + k1 + 3, l1, l1);
-			this.drawGradientRect(i1 + k + 3, j1 - 3, i1 + k + 4, j1 + k1 + 3, l1, l1);
-			int i2 = 1347420415;
-			int j2 = (i2 & 16711422) >> 1 | i2 & -16777216;
-			this.drawGradientRect(i1 - 3, j1 - 3 + 1, i1 - 3 + 1, j1 + k1 + 3 - 1, i2, j2);
-			this.drawGradientRect(i1 + k + 2, j1 - 3 + 1, i1 + k + 3, j1 + k1 + 3 - 1, i2, j2);
-			this.drawGradientRect(i1 - 3, j1 - 3, i1 + k + 3, j1 - 3 + 1, i2, i2);
-			this.drawGradientRect(i1 - 3, j1 + k1 + 2, i1 + k + 3, j1 + k1 + 3, j2, j2);
-
-			for (int k2 = 0; k2 < par1List.size(); ++k2) {
-				String s1 = (String) par1List.get(k2);
-				font.drawStringWithShadow(s1, i1, j1, -1);
-
-				if (k2 == 0) {
-					j1 += 2;
-				}
-
-				j1 += 10;
-			}
-
-			this.zLevel = 0.0F;
-			itemRenderer.zLevel = 0.0F;
-			GL11.glEnable(GL11.GL_LIGHTING);
-			GL11.glEnable(GL11.GL_DEPTH_TEST);
-			RenderHelper.enableStandardItemLighting();
-			GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		}
 	}
 
