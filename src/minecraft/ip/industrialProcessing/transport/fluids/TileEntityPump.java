@@ -30,7 +30,7 @@ public class TileEntityPump extends TileEntityMachine implements IAnimationProgr
     private AnimationHandler animationHandler = new AnimationHandler(AnimationMode.WRAP, 1f, true);
 
     private float speed;
-    private static final int PRESSURE_DIFFERENTIAL = 6000;
+    private static final int PRESSURE_DIFFERENTIAL = 10000;
     private static final int POWER_TO_PRESSURE_RATIO = 50;
 
     @Override
