@@ -18,6 +18,7 @@ import ip.industrialProcessing.config.ISetupItems;
 import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.decoration.trees.EventBonemealIndustrialTree;
 import ip.industrialProcessing.fluids.BucketHandler;
+import ip.industrialProcessing.fluids.ContainerHandler;
 import ip.industrialProcessing.multiblock.dummy.block.frame.ENmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.ENmultiblockLiftDoor;
 
@@ -83,6 +84,7 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
     public void preInit(FMLPreInitializationEvent event) {
 
         // register listeners for events
+        MinecraftForge.EVENT_BUS.register(ContainerHandler.INSTANCE);
         MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
         MinecraftForge.EVENT_BUS.register(this); 
         MinecraftForge.EVENT_BUS.register(new EventBonemealIndustrialTree());

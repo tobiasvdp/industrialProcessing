@@ -2,7 +2,7 @@ package ip.industrialProcessing.config;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.config.ConfigCategories;
-import ip.industrialProcessing.fluids.ContainerFluid;
+import ip.industrialProcessing.items.ItemIPBucket;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -567,7 +567,7 @@ public class ConfigFluids {
 
     }
 
-    private void registerFluid(Block block, Fluid fluid, ContainerFluid bucket, String displayName) {
+    private void registerFluid(Block block, Fluid fluid, ItemIPBucket bucket, String displayName) {
         GameRegistry.registerBlock(block, "BlockFluid" + fluid.getName());
         LanguageRegistry.addName(block, displayName);
         if (bucket != null) {
