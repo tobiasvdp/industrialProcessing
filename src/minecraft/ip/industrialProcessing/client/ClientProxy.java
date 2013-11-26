@@ -41,6 +41,7 @@ import ip.industrialProcessing.machines.filter.ModelFilter;
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
 import ip.industrialProcessing.machines.flotationCell.ModelFlotationCell;
 import ip.industrialProcessing.machines.flotationCell.TileEntityFlotationCell;
+import ip.industrialProcessing.machines.flotationCell.model.ModelFlotationCellBlock;
 import ip.industrialProcessing.machines.magneticSeparator.ModelMagneticSeperator;
 import ip.industrialProcessing.machines.magneticSeparator.TileEntityMagneticSeparator;
 import ip.industrialProcessing.machines.mixer.ModelMixer;
@@ -205,6 +206,7 @@ public class ClientProxy extends CommonProxy {
 
     private static final ModelDistillationElementBlock destillationElementBlock = new ModelDistillationElementBlock();
     private static final ModelAtmosphericDestillationTowerBlock destillationTowerBlock = new ModelAtmosphericDestillationTowerBlock();
+    private static final ModelFlotationCellBlock flotationCellBlock = new ModelFlotationCellBlock();
     @Override
     public void registerRenderers() {
         // 100% block
@@ -233,9 +235,15 @@ public class ClientProxy extends CommonProxy {
         RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererDestilationTray(), destillationElementBlock));
 
         ConfigRenderers.setRendererAtmosphericDestilationTower(RenderingRegistry.getNextAvailableRenderId());
-        RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererAtmosphericDestilationTower(), destillationTowerBlock));
+        RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererAtmosphericDestilationTower(), destillationTowerBlock)); 
+        
         // block & tile entity
 
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFlotationCell.class, new RendererTileEntity(ISetupMachineBlocks.blockFlotationCell, "ModelFlotationCell", flotationCell));
+        
+        ConfigRenderers.setRendererFlotationCellId(RenderingRegistry.getNextAvailableRenderId());
+        RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererFlotationCellId(), flotationCellBlock));
+        
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityConveyorSorter.class, new RendererTileEntityConnected(ISetupMachineBlocks.blockConveyorSorter, "ModelConveyorSorter", conveyorSorter));
 
         ConfigRenderers.setRendererConveyorSorterID(RenderingRegistry.getNextAvailableRenderId());
@@ -329,10 +337,7 @@ public class ClientProxy extends CommonProxy {
         ConfigRenderers.setRendererClassifierId(RenderingRegistry.getNextAvailableRenderId());
         RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererClassifierId(), new TileEntityClassifier()));
 
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFlotationCell.class, new RendererTileEntity(ISetupMachineBlocks.blockFlotationCell, "ModelFlotationCell", flotationCell));
-        ConfigRenderers.setRendererFlotationCellId(RenderingRegistry.getNextAvailableRenderId());
-        RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererFlotationCellId(), new TileEntityFlotationCell()));
-
+ 
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDiskFilter.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockDiskFilter, "ModelDiskFilter", diskFilter));
         ConfigRenderers.setRendererDiskFilterIdId(RenderingRegistry.getNextAvailableRenderId());
         RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererDiskFilterId(), new TileEntityDiskFilter()));

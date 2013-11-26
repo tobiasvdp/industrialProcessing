@@ -4,15 +4,21 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.ConfigTransportBlocks;
 import ip.industrialProcessing.machines.BlockMachineRendered;
+import ip.industrialProcessing.utils.FluidTransfers;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidContainerItem;
 
@@ -50,7 +56,7 @@ public class BlockTank extends BlockMachineRendered {
         TileEntity entity = world.getBlockTileEntity(x, y, z);
         if (entity instanceof TileEntityTank) {
             TileEntityTank tank = (TileEntityTank) entity;
-            
+
             FluidTankInfo[] subTanks = tank.getTanks();
             FluidTankInfo mainTank = subTanks[0];
             if (mainTank.fluid != null)
@@ -72,12 +78,12 @@ public class BlockTank extends BlockMachineRendered {
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
-        if(player.getCurrentEquippedItem().getItem() instanceof IFluidContainerItem){
-            //int amount = ((TileEntityTank)world.getBlockTileEntity(x, y, z)).fill(ForgeDirection.UP, ((IFluidContainerItem)player.getCurrentEquippedItem().getItem()).getFluid(player.getCurrentEquippedItem()), true);
-            //((IFluidContainerItem)player.getCurrentEquippedItem().getItem()).drain(player.getCurrentEquippedItem(), amount, true);
-            return true;
+
+        TileEntity te = world.getBlockTileEntity(x, y, z);
+        if (te instanceof TileEntityTank) {
+            if (FluidTransfers.handleRightClick(player, (TileEntityTank) te, what, these, are))
+                return true;
         }
-            
         return false;
     }
 

@@ -2,6 +2,7 @@ package ip.industrialProcessing.transport.fluids.models;
 
 import ip.industrialProcessing.api.rendering.wavefront.ObjMesh;
 import ip.industrialProcessing.api.rendering.wavefront.ObjQuad;
+import ip.industrialProcessing.power.plants.models.GeneratorFeatures;
 
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector2f;
@@ -51,8 +52,9 @@ public class TankBottom extends ObjMesh {
 
 	@Override
 	public ObjMesh cloneTransformed(Matrix4f transform) {
-		// TODO Auto-generated method stub
-		return null;
+	    TankBottom other = new TankBottom();
+        other.quads = cloneQuads(this.quads, transform);
+        return other;
 	}
 
 }

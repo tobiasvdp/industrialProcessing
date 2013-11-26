@@ -40,8 +40,9 @@ public class TankBottomFeatures extends ObjMesh {
 
 	@Override
 	public ObjMesh cloneTransformed(Matrix4f transform) {
-		// TODO Auto-generated method stub
-		return null;
+        TankBottomFeatures other = new TankBottomFeatures();
+        other.quads = cloneQuads(this.quads, transform);
+        return other;
 	}
 
 }

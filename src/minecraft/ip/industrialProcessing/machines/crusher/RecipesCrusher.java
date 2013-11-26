@@ -2,6 +2,7 @@ package ip.industrialProcessing.machines.crusher;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.NEIIPConfig;
@@ -57,9 +58,21 @@ public class RecipesCrusher extends RecipesMachine {
         addRecipe(RutileFineToDust(3000, 1));
 
         addRecipe(coalToDust(3000, 1));
+        
+        addRecipe(bonemeal(3000, 1));
 
     }
 
+    private Recipe bonemeal(int workTime, int powerConsumption) {
+        Recipe recipe = new Recipe();
+        recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.bone.itemID, RecipeSlotType.INVENTORY, 1) };
+
+        recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, Item.dyePowder.itemID, 16, RecipeSlotType.INVENTORY, 3, 6, 0.25) };
+        recipe.workRequired = workTime;
+        recipe.powerRequired = powerConsumption;
+        return recipe;
+    }
+    
     private Recipe coalToDust(int workTime, int powerConsumption) {
         Recipe recipe = new Recipe();
         recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.coal.itemID, RecipeSlotType.INVENTORY, 1) };

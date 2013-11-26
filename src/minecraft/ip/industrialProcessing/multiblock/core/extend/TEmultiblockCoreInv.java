@@ -92,11 +92,11 @@ public abstract class TEmultiblockCoreInv extends TEmultiblockCore implements II
 	}
 
 	@Override
-	public boolean addToSlot(int slot, int itemId, int amount) {
-		if (slotHasRoomFor(slot, itemId, amount)) {
+	public boolean addToSlot(int slot, int itemId, int amount, int damage) {
+		if (slotHasRoomFor(slot, itemId, amount, damage)) {
 			MachineItemStack machineStack = itemStacks.get(slot);
 			if (machineStack.stack == null)
-				machineStack.stack = new ItemStack(itemId, amount, 0);
+				machineStack.stack = new ItemStack(itemId, amount, damage);
 			else
 				machineStack.stack.stackSize += amount;
 			onInventoryChanged();
@@ -126,11 +126,11 @@ public abstract class TEmultiblockCoreInv extends TEmultiblockCore implements II
 	}
 
 	@Override
-	public boolean slotHasRoomFor(int slot, int itemId, int amount) {
+	public boolean slotHasRoomFor(int slot, int itemId, int amount, int damage) {
 		if (amount == 0)
 			return true;
 		MachineItemStack machineStack = itemStacks.get(slot);
-		return machineStack != null && (machineStack.stack == null || (machineStack.stack.itemID == itemId && (machineStack.stack.stackSize + amount < machineStack.stack.getMaxStackSize())));
+		return machineStack != null && (machineStack.stack == null || (machineStack.stack.itemID == itemId && machineStack.stack.getItemDamage() == damage && (machineStack.stack.stackSize + amount < machineStack.stack.getMaxStackSize())));
 	}
 
 	protected void addStack(ItemStack stack, LocalDirection side, boolean input, boolean output) {

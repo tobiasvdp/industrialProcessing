@@ -140,6 +140,20 @@ public class ItemTransfers {
 		return false;
 	}
 
+	public static ItemStack consumeContainer(ItemStack stack) {
+        if (stack.stackSize == 1) {
+                if (stack.getItem().hasContainerItem()) {
+                        return stack.getItem().getContainerItemStack(stack);
+                } else {
+                        return null;
+                }
+        } else {
+                stack.splitStack(1);
+
+                return stack;
+        }
+    }
+    
     public static ItemStack extract(ForgeDirection opposite, IInventory inventory) {
         if(inventory instanceof ISidedInventory)
         {

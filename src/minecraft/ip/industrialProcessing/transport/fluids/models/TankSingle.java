@@ -65,8 +65,9 @@ public class TankSingle extends ObjMesh {
 
 	@Override
 	public ObjMesh cloneTransformed(Matrix4f transform) {
-		// TODO Auto-generated method stub
-		return null;
+	    TankSingle other = new TankSingle();
+        other.quads = cloneQuads(this.quads, transform);
+        return other;
 	}
 
 }

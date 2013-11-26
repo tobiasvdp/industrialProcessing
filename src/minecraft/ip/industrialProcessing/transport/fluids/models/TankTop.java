@@ -43,8 +43,9 @@ public class TankTop extends ObjMesh {
 
 	@Override
 	public ObjMesh cloneTransformed(Matrix4f transform) {
-		// TODO Auto-generated method stub
-		return null;
+	    TankTop other = new TankTop();
+        other.quads = cloneQuads(this.quads, transform);
+        return other;
 	}
 
 }

@@ -1,24 +1,25 @@
-package ip.industrialProcessing.power.plants.models;
+package ip.industrialProcessing.machines.flotationCell.model;
 
-import ip.industrialProcessing.api.rendering.wavefront.ObjRotator;
-import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
-import ip.industrialProcessing.client.render.ModelBlock;
-import ip.industrialProcessing.machines.BlockMachine;
+import org.lwjgl.util.vector.Vector3f;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraftforge.common.ForgeDirection;
+import ip.industrialProcessing.api.rendering.wavefront.ObjRotator;
+import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
+import ip.industrialProcessing.client.render.ModelBlock;
+import ip.industrialProcessing.machines.BlockMachine;
 
-import org.lwjgl.util.vector.Vector3f;
+public class ModelFlotationCellBlock extends ModelBlock {
 
-public class ModelGeneratorBlock extends ModelBlock {
-
-    ObjRotator features = new ObjRotator(new GeneratorFeatures(), 0);
-    ObjRotator hull = new ObjRotator(new GeneratorHull(), 0);
-
+    ObjRotator features = new ObjRotator(new FlotationCellFeatures(), 0);
+    ObjRotator hull = new ObjRotator(new FlotationCellHull(), 0);
+    
     @Override
     public void renderInventory(Block block, int metadata, int modelID, RenderBlocks renderer) {
+
         int dir = 0;
 
         Vector3f position = new Vector3f(0, 0, 0);
