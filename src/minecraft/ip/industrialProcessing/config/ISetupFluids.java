@@ -204,5 +204,172 @@ public interface ISetupFluids {
     public final static ItemFluid itemFluidResin = new ItemFluid("Resin", 1000, 1000);
     public final static BlockFluid blockFluidResin = new BlockFluid(ConfigFluids.getResinFluidBlockID(), itemFluidResin, Material.water, false);
     public final static ContainerFluid bucketResin = new ContainerFluid(ConfigFluids.getResinFluidBucketID(), itemFluidResin, blockFluidResin, "ContainerResin");
+    
+    public final static ItemFluid itemFluidThickTinSludge = new ItemFluid("IP.fluid.ThickTinSludge", 2000, 2000);
+    public final static BlockFluid blockFluidThickTinSludge = new BlockFluid(ConfigFluids.getBlockFluidBaseThickTinSludgeID(), itemFluidThickTinSludge, Material.water, false);
+    public final static ContainerFluid bucketThickTinSludge = new ContainerFluid(ConfigFluids.getBucketThickTinSludgeID(), itemFluidThickTinSludge, blockFluidThickTinSludge, "ContainerThickTinSludge");
+    
+    public final static ItemFluid itemFluidThickCopperSludge = new ItemFluid("IP.fluid.ThickCopperSludge", 2000, 2000);
+    public final static BlockFluid blockFluidThickCopperSludge = new BlockFluid(ConfigFluids.getBlockFluidBaseThickCopperSludgeID(), itemFluidThickCopperSludge, Material.water, false);
+    public final static ContainerFluid bucketThickCopperSludge = new ContainerFluid(ConfigFluids.getBucketThickCopperSludgeID(), itemFluidThickCopperSludge, blockFluidThickCopperSludge, "ContainerThickCopperSludge");
+    
+    public final static ItemFluid itemFluidThickTaliaSludge = new ItemFluid("IP.fluid.ThickTaliaSludge", 2000, 2000);
+    public final static BlockFluid blockFluidThickTaliaSludge = new BlockFluid(ConfigFluids.getBlockFluidBaseThickTaliaSludgeID(), itemFluidThickTaliaSludge, Material.water, false);
+    public final static ContainerFluid bucketThickTaliaSludge = new ContainerFluid(ConfigFluids.getBucketThickTaliaSludgeID(), itemFluidThickTaliaSludge, blockFluidThickTaliaSludge, "ContainerThickTaliaSludge");
+    
+    public final static ItemFluid itemFluidThickGoldSludge = new ItemFluid("IP.fluid.ThickGoldSludge", 2000, 2000);
+    public final static BlockFluid blockFluidThickGoldSludge = new BlockFluid(ConfigFluids.getBlockFluidBaseThickGoldSludgeID(), itemFluidThickGoldSludge, Material.water, false);
+    public final static ContainerFluid bucketThickGoldSludge = new ContainerFluid(ConfigFluids.getBucketThickGoldSludgeID(), itemFluidThickGoldSludge, blockFluidThickGoldSludge, "ContainerThickGoldSludge");
+    
+    public final static ItemFluid itemFluidThickGalenaSludge = new ItemFluid("IP.fluid.ThickGalenaSludge", 2000, 2000);
+    public final static BlockFluid blockFluidThickGalenaSludge = new BlockFluid(ConfigFluids.getBlockFluidBaseThickGalenaSludgeID(), itemFluidThickGalenaSludge, Material.water, false);
+    public final static ContainerFluid bucketThickGalenaSludge = new ContainerFluid(ConfigFluids.getBucketThickGalenaSludgeID(), itemFluidThickGalenaSludge, blockFluidThickGalenaSludge, "ContainerThickGalenaSludge");
+    
+    public final static ItemFluid itemFluidThickChromiteSludge = new ItemFluid("IP.fluid.ThickChromiteSludge", 2000, 2000);
+    public final static BlockFluid blockFluidThickChromiteSludge = new BlockFluid(ConfigFluids.getBlockFluidBaseThickChromiteSludgeID(), itemFluidThickChromiteSludge, Material.water, false);
+    public final static ContainerFluid bucketThickChromiteSludge = new ContainerFluid(ConfigFluids.getBucketThickChromiteSludgeID(), itemFluidThickChromiteSludge, blockFluidThickChromiteSludge, "ContainerThickChromiteSludge");
+    
+    public final static ItemFluid itemFluidThickIronSludge = new ItemFluid("IP.fluid.ThickIronSludge", 2000, 2000);
+    public final static BlockFluid blockFluidThickIronSludge = new BlockFluid(ConfigFluids.getBlockFluidBaseThickIronSludgeID(), itemFluidThickIronSludge, Material.water, false);
+    public final static ContainerFluid bucketThickIronSludge = new ContainerFluid(ConfigFluids.getBucketThickIronSludgeID(), itemFluidThickIronSludge, blockFluidThickIronSludge, "ContainerThickIronSludge");
+    
+    public final static ItemFluid itemFluidFlotationTinSediment = new ItemFluid("IP.fluid.FlotationTinSediment", 2000, 2000);
+    public final static BlockFluid blockFluidFlotationTinSediment = new BlockFluid(ConfigFluids.getBlockFluidBaseFlotationTinSedimentID(), itemFluidFlotationTinSediment, Material.water, false);
+    public final static ContainerFluid bucketFlotationTinSediment = new ContainerFluid(ConfigFluids.getBucketFlotationTinSedimentID(), itemFluidFlotationTinSediment, blockFluidFlotationTinSediment, "ContainerFlotationTinSediment");
+    
+    public final static ItemFluid itemFluidFlotationCopperSediment = new ItemFluid("IP.fluid.FlotationCopperSediment", 2000, 2000);
+    public final static BlockFluid blockFluidFlotationCopperSediment = new BlockFluid(ConfigFluids.getBlockFluidBaseFlotationCopperSedimentID(), itemFluidFlotationCopperSediment, Material.water, false);
+    public final static ContainerFluid bucketFlotationCopperSediment = new ContainerFluid(ConfigFluids.getBucketFlotationCopperSedimentID(), itemFluidFlotationCopperSediment, blockFluidFlotationCopperSediment, "ContainerFlotationCopperSediment");
+    
+    public final static ItemFluid itemFluidFlotationTaliaSediment = new ItemFluid("IP.fluid.FlotationTaliaSediment", 2000, 2000);
+    public final static BlockFluid blockFluidFlotationTaliaSediment = new BlockFluid(ConfigFluids.getBlockFluidBaseFlotationTaliaSedimentID(), itemFluidFlotationTaliaSediment, Material.water, false);
+    public final static ContainerFluid bucketFlotationTaliaSediment = new ContainerFluid(ConfigFluids.getBucketFlotationTaliaSedimentID(), itemFluidFlotationTaliaSediment, blockFluidFlotationTaliaSediment, "ContainerFlotationTaliaSediment");
+    
+    public final static ItemFluid itemFluidFlotationGoldSediment = new ItemFluid("IP.fluid.FlotationGoldSediment", 2000, 2000);
+    public final static BlockFluid blockFluidFlotationGoldSediment = new BlockFluid(ConfigFluids.getBlockFluidBaseFlotationGoldSedimentID(), itemFluidFlotationGoldSediment, Material.water, false);
+    public final static ContainerFluid bucketFlotationGoldSediment = new ContainerFluid(ConfigFluids.getBucketFlotationGoldSedimentID(), itemFluidFlotationGoldSediment, blockFluidFlotationGoldSediment, "ContainerFlotationGoldSediment");
+    
+    public final static ItemFluid itemFluidFlotationGalenaSediment = new ItemFluid("IP.fluid.FlotationGalenaSediment", 2000, 2000);
+    public final static BlockFluid blockFluidFlotationGalenaSediment = new BlockFluid(ConfigFluids.getBlockFluidBaseFlotationGalenaSedimentID(), itemFluidFlotationGalenaSediment, Material.water, false);
+    public final static ContainerFluid bucketFlotationGalenaSediment = new ContainerFluid(ConfigFluids.getBucketFlotationGalenaSedimentID(), itemFluidFlotationGalenaSediment, blockFluidFlotationGalenaSediment, "ContainerFlotationGalenaSediment");
+    
+    public final static ItemFluid itemFluidFlotationChromiteSediment = new ItemFluid("IP.fluid.FlotationChromiteSediment", 2000, 2000);
+    public final static BlockFluid blockFluidFlotationChromiteSediment = new BlockFluid(ConfigFluids.getBlockFluidBaseFlotationChromiteSedimentID(), itemFluidFlotationChromiteSediment, Material.water, false);
+    public final static ContainerFluid bucketFlotationChromiteSediment = new ContainerFluid(ConfigFluids.getBucketFlotationChromiteSedimentID(), itemFluidFlotationChromiteSediment, blockFluidFlotationChromiteSediment, "ContainerFlotationChromiteSediment");
+    
+    public final static ItemFluid itemFluidFlotationIronSediment = new ItemFluid("IP.fluid.FlotationIronSediment", 2000, 2000);
+    public final static BlockFluid blockFluidFlotationIronSediment = new BlockFluid(ConfigFluids.getBlockFluidBaseFlotationIronSedimentID(), itemFluidFlotationIronSediment, Material.water, false);
+    public final static ContainerFluid bucketFlotationIronSediment = new ContainerFluid(ConfigFluids.getBucketFlotationIronSedimentID(), itemFluidFlotationIronSediment, blockFluidFlotationIronSediment, "ContainerFlotationIronSediment");
+    
+    public final static ItemFluid itemFluidCycloneTinSediment = new ItemFluid("IP.fluid.CycloneTinSediment", 2000, 2000);
+    public final static BlockFluid blockFluidCycloneTinSediment = new BlockFluid(ConfigFluids.getBlockFluidBaseCycloneTinSedimentID(), itemFluidCycloneTinSediment, Material.water, false);
+    public final static ContainerFluid bucketCycloneTinSediment = new ContainerFluid(ConfigFluids.getBucketCycloneTinSedimentID(), itemFluidCycloneTinSediment, blockFluidCycloneTinSediment, "ContainerCycloneTinSediment");
+    
+    public final static ItemFluid itemFluidCycloneCopperSediment = new ItemFluid("IP.fluid.CycloneCopperSediment", 2000, 2000);
+    public final static BlockFluid blockFluidCycloneCopperSediment = new BlockFluid(ConfigFluids.getBlockFluidBaseCycloneCopperSedimentID(), itemFluidCycloneCopperSediment, Material.water, false);
+    public final static ContainerFluid bucketCycloneCopperSediment = new ContainerFluid(ConfigFluids.getBucketCycloneCopperSedimentID(), itemFluidCycloneCopperSediment, blockFluidCycloneCopperSediment, "ContainerCycloneCopperSediment");
+    
+    public final static ItemFluid itemFluidCycloneTaliaSediment = new ItemFluid("IP.fluid.CycloneTaliaSediment", 2000, 2000);
+    public final static BlockFluid blockFluidCycloneTaliaSediment = new BlockFluid(ConfigFluids.getBlockFluidBaseCycloneTaliaSedimentID(), itemFluidCycloneTaliaSediment, Material.water, false);
+    public final static ContainerFluid bucketCycloneTaliaSediment = new ContainerFluid(ConfigFluids.getBucketCycloneTaliaSedimentID(), itemFluidCycloneTaliaSediment, blockFluidCycloneTaliaSediment, "ContainerCycloneTaliaSediment");
+    
+    public final static ItemFluid itemFluidCycloneGoldSediment = new ItemFluid("IP.fluid.CycloneGoldSediment", 2000, 2000);
+    public final static BlockFluid blockFluidCycloneGoldSediment = new BlockFluid(ConfigFluids.getBlockFluidBaseCycloneGoldSedimentID(), itemFluidCycloneGoldSediment, Material.water, false);
+    public final static ContainerFluid bucketCycloneGoldSediment = new ContainerFluid(ConfigFluids.getBucketCycloneGoldSedimentID(), itemFluidCycloneGoldSediment, blockFluidCycloneGoldSediment, "ContainerCycloneGoldSediment");
+    
+    public final static ItemFluid itemFluidCycloneGalenaSediment = new ItemFluid("IP.fluid.CycloneGalenaSediment", 2000, 2000);
+    public final static BlockFluid blockFluidCycloneGalenaSediment = new BlockFluid(ConfigFluids.getBlockFluidBaseCycloneGalenaSedimentID(), itemFluidCycloneGalenaSediment, Material.water, false);
+    public final static ContainerFluid bucketCycloneGalenaSediment = new ContainerFluid(ConfigFluids.getBucketCycloneGalenaSedimentID(), itemFluidCycloneGalenaSediment, blockFluidCycloneGalenaSediment, "ContainerCycloneGalenaSediment");
+    
+    public final static ItemFluid itemFluidCycloneChromiteSediment = new ItemFluid("IP.fluid.CycloneChromiteSediment", 2000, 2000);
+    public final static BlockFluid blockFluidCycloneChromiteSediment = new BlockFluid(ConfigFluids.getBlockFluidBaseCycloneChromiteSedimentID(), itemFluidCycloneChromiteSediment, Material.water, false);
+    public final static ContainerFluid bucketCycloneChromiteSediment = new ContainerFluid(ConfigFluids.getBucketCycloneChromiteSedimentID(), itemFluidCycloneChromiteSediment, blockFluidCycloneChromiteSediment, "ContainerCycloneChromiteSediment");
+    
+    public final static ItemFluid itemFluidCycloneIronSediment = new ItemFluid("IP.fluid.CycloneIronSediment", 2000, 2000);
+    public final static BlockFluid blockFluidCycloneIronSediment = new BlockFluid(ConfigFluids.getBlockFluidBaseCycloneIronSedimentID(), itemFluidCycloneIronSediment, Material.water, false);
+    public final static ContainerFluid bucketCycloneIronSediment = new ContainerFluid(ConfigFluids.getBucketCycloneIronSedimentID(), itemFluidCycloneIronSediment, blockFluidCycloneIronSediment, "ContainerCycloneIronSediment");
+    
+    public final static ItemFluid itemFluidConcentratedTinSludge = new ItemFluid("IP.fluid.ConcentratedTinSludge", 2000, 2000);
+    public final static BlockFluid blockFluidConcentratedTinSludge = new BlockFluid(ConfigFluids.getBlockFluidBaseConcentratedTinSludgeID(), itemFluidConcentratedTinSludge, Material.water, false);
+    public final static ContainerFluid bucketConcentratedTinSludge = new ContainerFluid(ConfigFluids.getBucketConcentratedTinSludgeID(), itemFluidConcentratedTinSludge, blockFluidConcentratedTinSludge, "ContainerConcentratedTinSludge");
+    
+    public final static ItemFluid itemFluidConcentratedCopperSludge = new ItemFluid("IP.fluid.ConcentratedCopperSludge", 2000, 2000);
+    public final static BlockFluid blockFluidConcentratedCopperSludge = new BlockFluid(ConfigFluids.getBlockFluidBaseConcentratedCopperSludgeID(), itemFluidConcentratedCopperSludge, Material.water, false);
+    public final static ContainerFluid bucketConcentratedCopperSludge = new ContainerFluid(ConfigFluids.getBucketConcentratedCopperSludgeID(), itemFluidConcentratedCopperSludge, blockFluidConcentratedCopperSludge, "ContainerConcentratedCopperSludge");
+    
+    public final static ItemFluid itemFluidConcentratedTaliaSludge = new ItemFluid("IP.fluid.ConcentratedTaliaSludge", 2000, 2000);
+    public final static BlockFluid blockFluidConcentratedTaliaSludge = new BlockFluid(ConfigFluids.getBlockFluidBaseConcentratedTaliaSludgeID(), itemFluidConcentratedTaliaSludge, Material.water, false);
+    public final static ContainerFluid bucketConcentratedTaliaSludge = new ContainerFluid(ConfigFluids.getBucketConcentratedTaliaSludgeID(), itemFluidConcentratedTaliaSludge, blockFluidConcentratedTaliaSludge, "ContainerConcentratedTaliaSludge");
+    
+    public final static ItemFluid itemFluidConcentratedGoldSludge = new ItemFluid("IP.fluid.ConcentratedGoldSludge", 2000, 2000);
+    public final static BlockFluid blockFluidConcentratedGoldSludge = new BlockFluid(ConfigFluids.getBlockFluidBaseConcentratedGoldSludgeID(), itemFluidConcentratedGoldSludge, Material.water, false);
+    public final static ContainerFluid bucketConcentratedGoldSludge = new ContainerFluid(ConfigFluids.getBucketConcentratedGoldSludgeID(), itemFluidConcentratedGoldSludge, blockFluidConcentratedGoldSludge, "ContainerConcentratedGoldSludge");
+    
+    public final static ItemFluid itemFluidConcentratedGalenaSludge = new ItemFluid("IP.fluid.ConcentratedGalenaSludge", 2000, 2000);
+    public final static BlockFluid blockFluidConcentratedGalenaSludge = new BlockFluid(ConfigFluids.getBlockFluidBaseConcentratedGalenaSludgeID(), itemFluidConcentratedGalenaSludge, Material.water, false);
+    public final static ContainerFluid bucketConcentratedGalenaSludge = new ContainerFluid(ConfigFluids.getBucketConcentratedGalenaSludgeID(), itemFluidConcentratedGalenaSludge, blockFluidConcentratedGalenaSludge, "ContainerConcentratedGalenaSludge");
+    
+    public final static ItemFluid itemFluidConcentratedChromiteSludge = new ItemFluid("IP.fluid.ConcentratedChromiteSludge", 2000, 2000);
+    public final static BlockFluid blockFluidConcentratedChromiteSludge = new BlockFluid(ConfigFluids.getBlockFluidBaseConcentratedChromiteSludgeID(), itemFluidConcentratedChromiteSludge, Material.water, false);
+    public final static ContainerFluid bucketConcentratedChromiteSludge = new ContainerFluid(ConfigFluids.getBucketConcentratedChromiteSludgeID(), itemFluidConcentratedChromiteSludge, blockFluidConcentratedChromiteSludge, "ContainerConcentratedChromiteSludge");
+    
+    public final static ItemFluid itemFluidConcentratedIronSludge = new ItemFluid("IP.fluid.ConcentratedIronSludge", 2000, 2000);
+    public final static BlockFluid blockFluidConcentratedIronSludge = new BlockFluid(ConfigFluids.getBlockFluidBaseConcentratedIronSludgeID(), itemFluidConcentratedIronSludge, Material.water, false);
+    public final static ContainerFluid bucketConcentratedIronSludge = new ContainerFluid(ConfigFluids.getBucketConcentratedIronSludgeID(), itemFluidConcentratedIronSludge, blockFluidConcentratedIronSludge, "ContainerConcentratedIronSludge");
 
+    public final static ItemFluid itemFluidLightTinSediment = new ItemFluid("IP.fluid.LightTinSediment", 2000, 2000);
+    public final static BlockFluid blockFluidLightTinSediment = new BlockFluid(ConfigFluids.getBlockFluidBaseLightTinSedimentID(), itemFluidLightTinSediment, Material.water, false);
+    public final static ContainerFluid bucketLightTinSediment = new ContainerFluid(ConfigFluids.getBucketLightTinSedimentID(), itemFluidLightTinSediment, blockFluidLightTinSediment, "ContainerLightTinSediment");
+    
+    public final static ItemFluid itemFluidLightCopperSediment = new ItemFluid("IP.fluid.LightCopperSediment", 2000, 2000);
+    public final static BlockFluid blockFluidLightCopperSediment = new BlockFluid(ConfigFluids.getBlockFluidBaseLightCopperSedimentID(), itemFluidLightCopperSediment, Material.water, false);
+    public final static ContainerFluid bucketLightCopperSediment = new ContainerFluid(ConfigFluids.getBucketLightCopperSedimentID(), itemFluidLightCopperSediment, blockFluidLightCopperSediment, "ContainerLightCopperSediment");
+    
+    public final static ItemFluid itemFluidLightTaliaSediment = new ItemFluid("IP.fluid.LightTaliaSediment", 2000, 2000);
+    public final static BlockFluid blockFluidLightTaliaSediment = new BlockFluid(ConfigFluids.getBlockFluidBaseLightTaliaSedimentID(), itemFluidLightTaliaSediment, Material.water, false);
+    public final static ContainerFluid bucketLightTaliaSediment = new ContainerFluid(ConfigFluids.getBucketLightTaliaSedimentID(), itemFluidLightTaliaSediment, blockFluidLightTaliaSediment, "ContainerLightTaliaSediment");
+    
+    public final static ItemFluid itemFluidLightGoldSediment = new ItemFluid("IP.fluid.LightGoldSediment", 2000, 2000);
+    public final static BlockFluid blockFluidLightGoldSediment = new BlockFluid(ConfigFluids.getBlockFluidBaseLightGoldSedimentID(), itemFluidLightGoldSediment, Material.water, false);
+    public final static ContainerFluid bucketLightGoldSediment = new ContainerFluid(ConfigFluids.getBucketLightGoldSedimentID(), itemFluidLightGoldSediment, blockFluidLightGoldSediment, "ContainerLightGoldSediment");
+    
+    public final static ItemFluid itemFluidLightGalenaSediment = new ItemFluid("IP.fluid.LightGalenaSediment", 2000, 2000);
+    public final static BlockFluid blockFluidLightGalenaSediment = new BlockFluid(ConfigFluids.getBlockFluidBaseLightGalenaSedimentID(), itemFluidLightGalenaSediment, Material.water, false);
+    public final static ContainerFluid bucketLightGalenaSediment = new ContainerFluid(ConfigFluids.getBucketLightGalenaSedimentID(), itemFluidLightGalenaSediment, blockFluidLightGalenaSediment, "ContainerLightGalenaSediment");
+    
+    public final static ItemFluid itemFluidLightChromiteSediment = new ItemFluid("IP.fluid.LightChromiteSediment", 2000, 2000);
+    public final static BlockFluid blockFluidLightChromiteSediment = new BlockFluid(ConfigFluids.getBlockFluidBaseLightChromiteSedimentID(), itemFluidLightChromiteSediment, Material.water, false);
+    public final static ContainerFluid bucketLightChromiteSediment = new ContainerFluid(ConfigFluids.getBucketLightChromiteSedimentID(), itemFluidLightChromiteSediment, blockFluidLightChromiteSediment, "ContainerLightChromiteSediment");
+    
+    public final static ItemFluid itemFluidLightIronSediment = new ItemFluid("IP.fluid.LightIronSediment", 2000, 2000);
+    public final static BlockFluid blockFluidLightIronSediment = new BlockFluid(ConfigFluids.getBlockFluidBaseLightIronSedimentID(), itemFluidLightIronSediment, Material.water, false);
+    public final static ContainerFluid bucketLightIronSediment = new ContainerFluid(ConfigFluids.getBucketLightIronSedimentID(), itemFluidLightIronSediment, blockFluidLightIronSediment, "ContainerLightIronSediment");
+
+    public final static ItemFluid itemFluidThickTinSediment = new ItemFluid("IP.fluid.ThickTinSediment", 2000, 2000);
+    public final static BlockFluid blockFluidThickTinSediment = new BlockFluid(ConfigFluids.getBlockFluidBaseThickTinSedimentID(), itemFluidThickTinSediment, Material.water, false);
+    public final static ContainerFluid bucketThickTinSediment = new ContainerFluid(ConfigFluids.getBucketThickTinSedimentID(), itemFluidThickTinSediment, blockFluidThickTinSediment, "ContainerThickTinSediment");
+    
+    public final static ItemFluid itemFluidThickCopperSediment = new ItemFluid("IP.fluid.ThickCopperSediment", 2000, 2000);
+    public final static BlockFluid blockFluidThickCopperSediment = new BlockFluid(ConfigFluids.getBlockFluidBaseThickCopperSedimentID(), itemFluidThickCopperSediment, Material.water, false);
+    public final static ContainerFluid bucketThickCopperSediment = new ContainerFluid(ConfigFluids.getBucketThickCopperSedimentID(), itemFluidThickCopperSediment, blockFluidThickCopperSediment, "ContainerThickCopperSediment");
+    
+    public final static ItemFluid itemFluidThickTaliaSediment = new ItemFluid("IP.fluid.ThickTaliaSediment", 2000, 2000);
+    public final static BlockFluid blockFluidThickTaliaSediment = new BlockFluid(ConfigFluids.getBlockFluidBaseThickTaliaSedimentID(), itemFluidThickTaliaSediment, Material.water, false);
+    public final static ContainerFluid bucketThickTaliaSediment = new ContainerFluid(ConfigFluids.getBucketThickTaliaSedimentID(), itemFluidThickTaliaSediment, blockFluidThickTaliaSediment, "ContainerThickTaliaSediment");
+    
+    public final static ItemFluid itemFluidThickGoldSediment = new ItemFluid("IP.fluid.ThickGoldSediment", 2000, 2000);
+    public final static BlockFluid blockFluidThickGoldSediment = new BlockFluid(ConfigFluids.getBlockFluidBaseThickGoldSedimentID(), itemFluidThickGoldSediment, Material.water, false);
+    public final static ContainerFluid bucketThickGoldSediment = new ContainerFluid(ConfigFluids.getBucketThickGoldSedimentID(), itemFluidThickGoldSediment, blockFluidThickGoldSediment, "ContainerThickGoldSediment");
+    
+    public final static ItemFluid itemFluidThickGalenaSediment = new ItemFluid("IP.fluid.ThickGalenaSediment", 2000, 2000);
+    public final static BlockFluid blockFluidThickGalenaSediment = new BlockFluid(ConfigFluids.getBlockFluidBaseThickGalenaSedimentID(), itemFluidThickGalenaSediment, Material.water, false);
+    public final static ContainerFluid bucketThickGalenaSediment = new ContainerFluid(ConfigFluids.getBucketThickGalenaSedimentID(), itemFluidThickGalenaSediment, blockFluidThickGalenaSediment, "ContainerThickGalenaSediment");
+    
+    public final static ItemFluid itemFluidThickChromiteSediment = new ItemFluid("IP.fluid.ThickChromiteSediment", 2000, 2000);
+    public final static BlockFluid blockFluidThickChromiteSediment = new BlockFluid(ConfigFluids.getBlockFluidBaseThickChromiteSedimentID(), itemFluidThickChromiteSediment, Material.water, false);
+    public final static ContainerFluid bucketThickChromiteSediment = new ContainerFluid(ConfigFluids.getBucketThickChromiteSedimentID(), itemFluidThickChromiteSediment, blockFluidThickChromiteSediment, "ContainerThickChromiteSediment");
+    
+    public final static ItemFluid itemFluidThickIronSediment = new ItemFluid("IP.fluid.ThickIronSediment", 2000, 2000);
+    public final static BlockFluid blockFluidThickIronSediment = new BlockFluid(ConfigFluids.getBlockFluidBaseThickIronSedimentID(), itemFluidThickIronSediment, Material.water, false);
+    public final static ContainerFluid bucketThickIronSediment = new ContainerFluid(ConfigFluids.getBucketThickIronSedimentID(), itemFluidThickIronSediment, blockFluidThickIronSediment, "ContainerThickIronSediment");
 }

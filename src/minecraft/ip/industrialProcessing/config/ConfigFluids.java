@@ -16,6 +16,58 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 public class ConfigFluids {
 
     private static ConfigFluids instance = new ConfigFluids();
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     public static int blockFluidBaseDirtyWaterID() {
         return getInstance().blockFluidBaseDirtyWaterID;
@@ -388,6 +440,377 @@ public class ConfigFluids {
         return getInstance().bucketResin;
     }
     
+    
+    
+    
+    
+    
+    
+    public static int getBlockFluidBaseThickTinSludgeID() {
+        return getInstance().blockFluidBaseThickTinSludgeID;
+    }
+
+    public static int getBucketThickTinSludgeID() {
+        return getInstance().bucketThickTinSludgeID;
+    }
+    
+    public static int getBlockFluidBaseThickCopperSludgeID() {
+        return getInstance().blockFluidBaseThickCopperSludgeID;
+    }
+
+    public static int getBucketThickCopperSludgeID() {
+        return getInstance().bucketThickCopperSludgeID;
+    }
+    
+    public static int getBlockFluidBaseThickTaliaSludgeID() {
+        return getInstance().blockFluidBaseThickTaliaSludgeID;
+    }
+
+    public static int getBucketThickTaliaSludgeID() {
+        return getInstance().bucketThickTaliaSludgeID;
+    }
+    
+    public static int getBlockFluidBaseThickGoldSludgeID() {
+        return getInstance().blockFluidBaseThickGoldSludgeID;
+    }
+
+    public static int getBucketThickGoldSludgeID() {
+        return getInstance().bucketThickGoldSludgeID;
+    }
+    
+    public static int getBlockFluidBaseThickGalenaSludgeID() {
+        return getInstance().blockFluidBaseThickGalenaSludgeID;
+    }
+
+    public static int getBucketThickGalenaSludgeID() {
+        return getInstance().bucketThickGalenaSludgeID;
+    }
+    
+    public static int getBlockFluidBaseThickChromiteSludgeID() {
+        return getInstance().blockFluidBaseThickChromiteSludgeID;
+    }
+
+    public static int getBucketThickChromiteSludgeID() {
+        return getInstance().bucketThickChromiteSludgeID;
+    }
+    
+    public static int getBlockFluidBaseThickIronSludgeID() {
+        return getInstance().blockFluidBaseThickIronSludgeID;
+    }
+
+    public static int getBucketThickIronSludgeID() {
+        return getInstance().bucketThickIronSludgeID;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public static int getBlockFluidBaseFlotationTinSedimentID() {
+        return getInstance().blockFluidBaseFlotationTinSedimentID;
+    }
+
+    public static int getBucketFlotationTinSedimentID() {
+        return getInstance().bucketFlotationTinSedimentID;
+    }
+    
+    public static int getBlockFluidBaseFlotationCopperSedimentID() {
+        return getInstance().blockFluidBaseFlotationCopperSedimentID;
+    }
+
+    public static int getBucketFlotationCopperSedimentID() {
+        return getInstance().bucketFlotationCopperSedimentID;
+    }
+    
+    public static int getBlockFluidBaseFlotationTaliaSedimentID() {
+        return getInstance().blockFluidBaseFlotationTaliaSedimentID;
+    }
+
+    public static int getBucketFlotationTaliaSedimentID() {
+        return getInstance().bucketFlotationTaliaSedimentID;
+    }
+    
+    public static int getBlockFluidBaseFlotationGoldSedimentID() {
+        return getInstance().blockFluidBaseFlotationGoldSedimentID;
+    }
+
+    public static int getBucketFlotationGoldSedimentID() {
+        return getInstance().bucketFlotationGoldSedimentID;
+    }
+    
+    public static int getBlockFluidBaseFlotationGalenaSedimentID() {
+        return getInstance().blockFluidBaseFlotationGalenaSedimentID;
+    }
+
+    public static int getBucketFlotationGalenaSedimentID() {
+        return getInstance().bucketFlotationGalenaSedimentID;
+    }
+    
+    public static int getBlockFluidBaseFlotationChromiteSedimentID() {
+        return getInstance().blockFluidBaseFlotationChromiteSedimentID;
+    }
+
+    public static int getBucketFlotationChromiteSedimentID() {
+        return getInstance().bucketFlotationChromiteSedimentID;
+    }
+    
+    public static int getBlockFluidBaseFlotationIronSedimentID() {
+        return getInstance().blockFluidBaseFlotationIronSedimentID;
+    }
+
+    public static int getBucketFlotationIronSedimentID() {
+        return getInstance().bucketFlotationIronSedimentID;
+    }
+    
+    
+    
+    
+    
+    
+    public static int getBlockFluidBaseCycloneTinSedimentID() {
+        return getInstance().blockFluidBaseCycloneTinSedimentID;
+    }
+
+    public static int getBucketCycloneTinSedimentID() {
+        return getInstance().bucketCycloneTinSedimentID;
+    }
+    
+    public static int getBlockFluidBaseCycloneCopperSedimentID() {
+        return getInstance().blockFluidBaseCycloneCopperSedimentID;
+    }
+
+    public static int getBucketCycloneCopperSedimentID() {
+        return getInstance().bucketCycloneCopperSedimentID;
+    }
+    
+    public static int getBlockFluidBaseCycloneTaliaSedimentID() {
+        return getInstance().blockFluidBaseCycloneTaliaSedimentID;
+    }
+
+    public static int getBucketCycloneTaliaSedimentID() {
+        return getInstance().bucketCycloneTaliaSedimentID;
+    }
+    
+    public static int getBlockFluidBaseCycloneGoldSedimentID() {
+        return getInstance().blockFluidBaseCycloneGoldSedimentID;
+    }
+
+    public static int getBucketCycloneGoldSedimentID() {
+        return getInstance().bucketCycloneGoldSedimentID;
+    }
+    
+    public static int getBlockFluidBaseCycloneGalenaSedimentID() {
+        return getInstance().blockFluidBaseCycloneGalenaSedimentID;
+    }
+
+    public static int getBucketCycloneGalenaSedimentID() {
+        return getInstance().bucketCycloneGalenaSedimentID;
+    }
+    
+    public static int getBlockFluidBaseCycloneChromiteSedimentID() {
+        return getInstance().blockFluidBaseCycloneChromiteSedimentID;
+    }
+
+    public static int getBucketCycloneChromiteSedimentID() {
+        return getInstance().bucketCycloneChromiteSedimentID;
+    }
+    
+    public static int getBlockFluidBaseCycloneIronSedimentID() {
+        return getInstance().blockFluidBaseCycloneIronSedimentID;
+    }
+
+    public static int getBucketCycloneIronSedimentID() {
+        return getInstance().bucketCycloneIronSedimentID;
+    }
+    
+    
+    
+    public static int getBlockFluidBaseThickTinSedimentID() {
+        return getInstance().blockFluidBaseThickTinSedimentID;
+    }
+
+    public static int getBucketThickTinSedimentID() {
+        return getInstance().bucketThickTinSedimentID;
+    }
+    
+    public static int getBlockFluidBaseThickCopperSedimentID() {
+        return getInstance().blockFluidBaseThickCopperSedimentID;
+    }
+
+    public static int getBucketThickCopperSedimentID() {
+        return getInstance().bucketThickCopperSedimentID;
+    }
+    
+    public static int getBlockFluidBaseThickTaliaSedimentID() {
+        return getInstance().blockFluidBaseThickTaliaSedimentID;
+    }
+
+    public static int getBucketThickTaliaSedimentID() {
+        return getInstance().bucketThickTaliaSedimentID;
+    }
+    
+    public static int getBlockFluidBaseThickGoldSedimentID() {
+        return getInstance().blockFluidBaseThickGoldSedimentID;
+    }
+
+    public static int getBucketThickGoldSedimentID() {
+        return getInstance().bucketThickGoldSedimentID;
+    }
+    
+    public static int getBlockFluidBaseThickGalenaSedimentID() {
+        return getInstance().blockFluidBaseThickGalenaSedimentID;
+    }
+
+    public static int getBucketThickGalenaSedimentID() {
+        return getInstance().bucketThickGalenaSedimentID;
+    }
+    
+    public static int getBlockFluidBaseThickChromiteSedimentID() {
+        return getInstance().blockFluidBaseThickChromiteSedimentID;
+    }
+
+    public static int getBucketThickChromiteSedimentID() {
+        return getInstance().bucketThickChromiteSedimentID;
+    }
+    
+    public static int getBlockFluidBaseThickIronSedimentID() {
+        return getInstance().blockFluidBaseThickIronSedimentID;
+    }
+
+    public static int getBucketThickIronSedimentID() {
+        return getInstance().bucketThickIronSedimentID;
+    }
+    
+    
+    public static int getBlockFluidBaseLightTinSedimentID() {
+        return getInstance().blockFluidBaseLightTinSedimentID;
+    }
+
+    public static int getBucketLightTinSedimentID() {
+        return getInstance().bucketLightTinSedimentID;
+    }
+    
+    public static int getBlockFluidBaseLightCopperSedimentID() {
+        return getInstance().blockFluidBaseLightCopperSedimentID;
+    }
+
+    public static int getBucketLightCopperSedimentID() {
+        return getInstance().bucketLightCopperSedimentID;
+    }
+    
+    public static int getBlockFluidBaseLightTaliaSedimentID() {
+        return getInstance().blockFluidBaseLightTaliaSedimentID;
+    }
+
+    public static int getBucketLightTaliaSedimentID() {
+        return getInstance().bucketLightTaliaSedimentID;
+    }
+    
+    public static int getBlockFluidBaseLightGoldSedimentID() {
+        return getInstance().blockFluidBaseLightGoldSedimentID;
+    }
+
+    public static int getBucketLightGoldSedimentID() {
+        return getInstance().bucketLightGoldSedimentID;
+    }
+    
+    public static int getBlockFluidBaseLightGalenaSedimentID() {
+        return getInstance().blockFluidBaseLightGalenaSedimentID;
+    }
+
+    public static int getBucketLightGalenaSedimentID() {
+        return getInstance().bucketLightGalenaSedimentID;
+    }
+    
+    public static int getBlockFluidBaseLightChromiteSedimentID() {
+        return getInstance().blockFluidBaseLightChromiteSedimentID;
+    }
+
+    public static int getBucketLightChromiteSedimentID() {
+        return getInstance().bucketLightChromiteSedimentID;
+    }
+    
+    public static int getBlockFluidBaseLightIronSedimentID() {
+        return getInstance().blockFluidBaseLightIronSedimentID;
+    }
+
+    public static int getBucketLightIronSedimentID() {
+        return getInstance().bucketLightIronSedimentID;
+    }
+    
+    
+    
+    
+    
+    
+    public static int getBlockFluidBaseConcentratedTinSludgeID() {
+        return getInstance().blockFluidBaseConcentratedTinSludgeID;
+    }
+
+    public static int getBucketConcentratedTinSludgeID() {
+        return getInstance().bucketConcentratedTinSludgeID;
+    }
+    
+    public static int getBlockFluidBaseConcentratedCopperSludgeID() {
+        return getInstance().blockFluidBaseConcentratedCopperSludgeID;
+    }
+
+    public static int getBucketConcentratedCopperSludgeID() {
+        return getInstance().bucketConcentratedCopperSludgeID;
+    }
+    
+    public static int getBlockFluidBaseConcentratedTaliaSludgeID() {
+        return getInstance().blockFluidBaseConcentratedTaliaSludgeID;
+    }
+
+    public static int getBucketConcentratedTaliaSludgeID() {
+        return getInstance().bucketConcentratedTaliaSludgeID;
+    }
+    
+    public static int getBlockFluidBaseConcentratedGoldSludgeID() {
+        return getInstance().blockFluidBaseConcentratedGoldSludgeID;
+    }
+
+    public static int getBucketConcentratedGoldSludgeID() {
+        return getInstance().bucketConcentratedGoldSludgeID;
+    }
+    
+    public static int getBlockFluidBaseConcentratedGalenaSludgeID() {
+        return getInstance().blockFluidBaseConcentratedGalenaSludgeID;
+    }
+
+    public static int getBucketConcentratedGalenaSludgeID() {
+        return getInstance().bucketConcentratedGalenaSludgeID;
+    }
+    
+    public static int getBlockFluidBaseConcentratedChromiteSludgeID() {
+        return getInstance().blockFluidBaseConcentratedChromiteSludgeID;
+    }
+
+    public static int getBucketConcentratedChromiteSludgeID() {
+        return getInstance().bucketConcentratedChromiteSludgeID;
+    }
+    
+    public static int getBlockFluidBaseConcentratedIronSludgeID() {
+        return getInstance().blockFluidBaseConcentratedIronSludgeID;
+    }
+
+    public static int getBucketConcentratedIronSludgeID() {
+        return getInstance().	bucketConcentratedIronSludgeID;
+    }
+    
+    
     private int offset = 2500;
 
     private int blockFluidBaseDirtyWaterID = IndustrialProcessing.config.get(ConfigCategories.fluids.toString(), "DirtyWaterID", offset).getInt();
@@ -562,6 +985,132 @@ public class ConfigFluids {
     
     private int blockFluidBaseResin = offset + 91;
     private int bucketResin = offset + 92;
+
+    private int blockFluidBaseThickTinSludgeID = offset + 93;
+    private int bucketThickTinSludgeID = offset + 94;
+    
+    private int blockFluidBaseThickCopperSludgeID = offset + 95;
+    private int bucketThickCopperSludgeID = offset + 96;
+    
+    private int blockFluidBaseThickTaliaSludgeID = offset + 97;
+    private int bucketThickTaliaSludgeID = offset + 98;
+    
+    private int blockFluidBaseThickGoldSludgeID = offset + 99;
+    private int bucketThickGoldSludgeID = offset + 100;
+    
+    private int blockFluidBaseThickGalenaSludgeID = offset + 101;
+    private int bucketThickGalenaSludgeID = offset + 102;
+    
+    private int blockFluidBaseThickChromiteSludgeID = offset + 103;
+    private int bucketThickChromiteSludgeID = offset + 104;
+    
+    private int blockFluidBaseThickIronSludgeID = offset + 105;
+    private int bucketThickIronSludgeID = offset + 106;
+
+    private int blockFluidBaseFlotationTinSedimentID = offset + 107;
+    private int bucketFlotationTinSedimentID = offset + 108;
+    
+    private int blockFluidBaseFlotationCopperSedimentID = offset + 109;
+    private int bucketFlotationCopperSedimentID = offset + 110;
+    
+    private int blockFluidBaseFlotationTaliaSedimentID = offset + 111;
+    private int bucketFlotationTaliaSedimentID = offset + 112;
+    
+    private int blockFluidBaseFlotationGoldSedimentID = offset + 113;
+    private int bucketFlotationGoldSedimentID = offset + 114;
+    
+    private int blockFluidBaseFlotationGalenaSedimentID = offset + 115;
+    private int bucketFlotationGalenaSedimentID = offset + 116;
+    
+    private int blockFluidBaseFlotationChromiteSedimentID = offset + 117;
+    private int bucketFlotationChromiteSedimentID = offset + 118;
+    
+    private int blockFluidBaseFlotationIronSedimentID = offset + 119;
+    private int bucketFlotationIronSedimentID = offset + 120;
+
+    private int blockFluidBaseCycloneTinSedimentID = offset + 121;
+    private int bucketCycloneTinSedimentID = offset + 122;
+    
+    private int blockFluidBaseCycloneCopperSedimentID = offset + 123;
+    private int bucketCycloneCopperSedimentID = offset + 124;
+    
+    private int blockFluidBaseCycloneTaliaSedimentID = offset + 125;
+    private int bucketCycloneTaliaSedimentID = offset + 126;
+    
+    private int blockFluidBaseCycloneGoldSedimentID = offset + 127;
+    private int bucketCycloneGoldSedimentID = offset + 128;
+    
+    private int blockFluidBaseCycloneGalenaSedimentID = offset + 129;
+    private int bucketCycloneGalenaSedimentID = offset + 130;
+    
+    private int blockFluidBaseCycloneChromiteSedimentID = offset + 131;
+    private int bucketCycloneChromiteSedimentID = offset + 132;
+    
+    private int blockFluidBaseCycloneIronSedimentID = offset + 133;
+    private int bucketCycloneIronSedimentID = offset + 134;
+    
+    private int blockFluidBaseThickTinSedimentID = offset + 135;
+    private int bucketThickTinSedimentID = offset + 136;
+    
+    private int blockFluidBaseThickCopperSedimentID = offset + 137;
+    private int bucketThickCopperSedimentID = offset + 138;
+    
+    private int blockFluidBaseThickTaliaSedimentID = offset + 139;
+    private int bucketThickTaliaSedimentID = offset + 140;
+    
+    private int blockFluidBaseThickGoldSedimentID = offset + 141;
+    private int bucketThickGoldSedimentID = offset + 142;
+    
+    private int blockFluidBaseThickGalenaSedimentID = offset + 143;
+    private int bucketThickGalenaSedimentID = offset + 144;
+    
+    private int blockFluidBaseThickChromiteSedimentID = offset + 145;
+    private int bucketThickChromiteSedimentID = offset + 146;
+    
+    private int blockFluidBaseThickIronSedimentID = offset + 147;
+    private int bucketThickIronSedimentID = offset + 148;
+    
+    private int blockFluidBaseLightTinSedimentID = offset + 149;
+    private int bucketLightTinSedimentID = offset + 150;
+    
+    private int blockFluidBaseLightCopperSedimentID = offset + 151;
+    private int bucketLightCopperSedimentID = offset + 152;
+    
+    private int blockFluidBaseLightTaliaSedimentID = offset + 153;
+    private int bucketLightTaliaSedimentID = offset + 154;
+    
+    private int blockFluidBaseLightGoldSedimentID = offset + 155;
+    private int bucketLightGoldSedimentID = offset + 156;
+    
+    private int blockFluidBaseLightGalenaSedimentID = offset + 157;
+    private int bucketLightGalenaSedimentID = offset + 158;
+    
+    private int blockFluidBaseLightChromiteSedimentID = offset + 159;
+    private int bucketLightChromiteSedimentID = offset + 160;
+    
+    private int blockFluidBaseLightIronSedimentID = offset + 161;
+    private int bucketLightIronSedimentID = offset + 162;
+    
+    private int blockFluidBaseConcentratedTinSludgeID = offset + 163;
+    private int bucketConcentratedTinSludgeID = offset + 164;
+    
+    private int blockFluidBaseConcentratedCopperSludgeID = offset + 165;
+    private int bucketConcentratedCopperSludgeID = offset + 166;
+    
+    private int blockFluidBaseConcentratedTaliaSludgeID = offset + 167;
+    private int bucketConcentratedTaliaSludgeID = offset + 168;
+    
+    private int blockFluidBaseConcentratedGoldSludgeID = offset + 169;
+    private int bucketConcentratedGoldSludgeID = offset + 170;
+    
+    private int blockFluidBaseConcentratedGalenaSludgeID = offset + 171;
+    private int bucketConcentratedGalenaSludgeID = offset + 172;
+    
+    private int blockFluidBaseConcentratedChromiteSludgeID = offset + 173;
+    private int bucketConcentratedChromiteSludgeID = offset + 174;
+    
+    private int blockFluidBaseConcentratedIronSludgeID = offset + 175;
+    private int bucketConcentratedIronSludgeID = offset + 176;
 
     public ConfigFluids() {
 
