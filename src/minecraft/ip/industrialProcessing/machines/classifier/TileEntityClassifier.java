@@ -21,7 +21,7 @@ public class TileEntityClassifier extends TileEntityPoweredFluidWorkerMachine im
 		super(LocalDirection.LEFT, 10000);
 		addStack(null, LocalDirection.UP, true, false); // Input Solid
 		// ingredient
-		addStack(null, LocalDirection.RIGHT, false, true); // Output
+		addStack(null, new LocalDirection[] { LocalDirection.FRONT, LocalDirection.BACK }, false, true); // Output
 																											// Solid
 		// ingredient
 
@@ -32,7 +32,7 @@ public class TileEntityClassifier extends TileEntityPoweredFluidWorkerMachine im
 		addStack(null, nodirections, true, false); // Liquid Output Empty Input
 		addStack(null, nodirections, false, true); // Liquid Output Full Output
 
-		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.BACK, true, false);
+		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.RIGHT, true, false);
 		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.DOWN, false, true);
 
 		this.tankHandler = new TankHandler(this, new int[] { 0 }); 
