@@ -22,7 +22,7 @@ public class RecipesThickener extends RecipesMachine {
 		recipe.workRequired = i;
 		recipe.powerRequired = powerConsumption;
 		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidMixedSludgeIron.getName()), RecipeSlotType.TANK, 1000)};
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing..getName()), RecipeSlotType.TANK, 1000, 1000, 0.5),new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidfiltyWater.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidThickIronSludge.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5),new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidfiltyWater.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
 		return recipe;
 	}
 }
