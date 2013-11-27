@@ -13,7 +13,7 @@ import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 
 public class TileEntityManoMeter extends TileEntityMachine implements IAnimationSyncable, IAnimationProgress {
 
-	private static final float MAX_PRESSURE = 4000f;
+	private static final float MAX_PRESSURE = 8000f;
 	private LocalDirection connection = LocalDirection.DOWN;
 
 	public TileEntityManoMeter() {

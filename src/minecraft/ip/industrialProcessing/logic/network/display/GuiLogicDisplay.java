@@ -28,6 +28,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.inventory.Container;
@@ -47,7 +48,7 @@ import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class GuiLogicDisplay extends GuiScreen {
 	private static final int X_SIZE = 256;
-	private static final int Y_SIZE = 202;
+	private static final int Y_SIZE = 178;
 	private ResourceLocation textureLocation;
 	private TileEntity entity;
 	private ArrayList<ICommunicationNode> nodes;
@@ -123,25 +124,26 @@ public class GuiLogicDisplay extends GuiScreen {
 	private void drawMachine(int x, int y) {
 		Color color1 = new Color(227, 129, 63);
 		Color color2 = new Color(210, 92, 13);
-		Color color3 = new Color(180, 180, 180);
-		Color color4 = new Color(220, 220, 220);
-		Color color5 = new Color(0, 0, 0);
-		Color color6 = new Color(20, 20, 20);
-		drawGradientRect(x + 10, y + 10, x + X_SIZE - 10, y + Y_SIZE - 10, color1.getRGB(), color2.getRGB());
-		drawGradientRect(x + 30, y + 35, x + 160, y + 115, color3.getRGB(), color4.getRGB());
-		drawGradientRect(x + 35, y + 40, x + 155, y + 110, color5.getRGB(), color6.getRGB());
-		this.drawTexturedModalRect(x + 15, y + 15, 0, 0, 15, 15);
-		this.drawTexturedModalRect(x + 15, y + Y_SIZE - 30, 0, 0, 15, 15);
-		this.drawTexturedModalRect(x + X_SIZE - 30, y + 15, 0, 0, 15, 15);
-		this.drawTexturedModalRect(x + X_SIZE - 30, y + Y_SIZE - 30, 0, 0, 15, 15);
+
+		this.drawColoredTexturedModalRect(x, y, 0, 78, this.X_SIZE, 178, 255, 255, 255);
+		/*
+		 * this.drawColoredTexturedModalRect(x + 15, y + 15, 0, 0, 15, 15, 255,
+		 * 255, 255); this.drawColoredTexturedModalRect(x + 15, y + Y_SIZE - 30,
+		 * 0, 0, 15, 15, 255, 255, 255); this.drawColoredTexturedModalRect(x +
+		 * X_SIZE - 30, y + 15, 0, 0, 15, 15, 255, 255, 255);
+		 * this.drawColoredTexturedModalRect(x + X_SIZE - 30, y + Y_SIZE - 30,
+		 * 0, 0, 15, 15, 255, 255, 255);
+		 */
 
 		switch (nodes.get(activeNode).getLogicType()) {
 		case gate:
 			break;
 		case interfaces:
 			InfoMachine machine = ((InfoMachine) buffer.get(activeNode).value);
-			fontRenderer.drawString(drawMachineName(activeNode), x + 40, y + 45, 4210752);
-			fontRenderer.drawString("Status: " + drawMachineInfo(activeNode), x + 40, y + 70, 4210752);
+			drawPane(10, 10, 130, 60);
+			fontRenderer.drawString(drawMachineName(activeNode), x + 20, y + 20, 4210752);
+			fontRenderer.drawString("Status: ", x + 20, y + 35, 4210752);
+			fontRenderer.drawString(drawMachineInfo(activeNode), x + 60, y + 35, 4210752);
 			if (machine.interfaceTypes == null) {
 				requestData(activeNode, UTVariableType.interfaceTypes);
 			} else {
@@ -149,25 +151,32 @@ public class GuiLogicDisplay extends GuiScreen {
 					switch (type) {
 					case inventory:
 						requestData(activeNode, UTVariableType.slot);
-						fontRenderer.drawString("Inventory", x + 40, y + 125, 4210752);
+						mc.renderEngine.func_110577_a(this.textureLocation);
 						for (int i = 0; i < machine.slots.size(); i++) {
 							InfoSlot slot = machine.slots.get(i);
-							if(slot.input){
-								//drawItemStack(new ItemStack(slot.id, slot.amount, slot.damage), x + 40 + (i % 2) * 20, y + 140 + (i / 2) * 20, "");
+							if (slot.input) {
+								int xpos = x + 40 + (i % 2) * 20;
+								int ypos = y + 140 + (i / 2) * 20;
+								this.drawColoredTexturedModalRect(xpos, ypos, 74, 0, 18,18, 255, 255, 255);
+								drawItemStack(new ItemStack(slot.id, slot.amount, slot.damage), x + 40 + (i % 2) * 20, y + 140 + (i / 2) * 20, null);
 							}
-							if(slot.output){
-								//drawItemStack(new ItemStack(slot.id, slot.amount, slot.damage), x + 140 + (i % 2) * 20, y + 140 + (i / 2) * 20, "");
+							if (slot.output) {
+								drawItemStack(new ItemStack(slot.id, slot.amount, slot.damage), x + 140 + (i % 2) * 20, y + 140 + (i / 2) * 20, null);
 							}
 						}
 						break;
 					case power:
 						requestData(activeNode, UTVariableType.power);
-						drawGradientRect(x + 170, y + 35, x + 190, y + 115, color3.getRGB(), color4.getRGB());
-						drawGradientRect(x + 172, y + 40, x + 188, y + 110, color5.getRGB(), color6.getRGB());
+						// drawGradientRect(x + 170, y + 35, x + 190, y + 115,
+						// color3.getRGB(), color4.getRGB());
+						// drawGradientRect(x + 172, y + 40, x + 188, y + 110,
+						// color5.getRGB(), color6.getRGB());
 						int size = machine.power.storedPower * 70 / machine.power.powerCapacity;
 						mc.renderEngine.func_110577_a(this.textureLocation);
-						this.drawTexturedModalRect(x + 172, y + 110 - size, 15, 70 - size, 16, size);
-						fontRenderer.drawString("Power: " + machine.power.storedPower + "/" + machine.power.powerCapacity, x + 40, y + 80, 4210752);
+						this.drawColoredTexturedModalRect(x + 172, y + 110 - size, 15, 70 - size, 15, size, 255, 255, 255);
+						fontRenderer.drawString("Power: ", x + 20, y + 45, 4210752);
+						fontRenderer.drawString(machine.power.storedPower + "", x + 60, y + 45, 4210752);
+						fontRenderer.drawString("/" + machine.power.powerCapacity, x + 90, y + 45, 4210752);
 						break;
 					case tank:
 						requestData(activeNode, UTVariableType.tank);
@@ -177,10 +186,13 @@ public class GuiLogicDisplay extends GuiScreen {
 						break;
 					case worker:
 						requestData(activeNode, UTVariableType.work);
-						fontRenderer.drawString("Work: " + machine.worker.workDone + "/" + machine.worker.totalWork, x + 40, y + 90, 4210752);
+						fontRenderer.drawString("Work: ", x + 20, y + 55, 4210752);
+						fontRenderer.drawString(machine.worker.workDone + "", x + 60, y + 55, 4210752);
+						fontRenderer.drawString("/" + machine.worker.totalWork, x + 90, y + 55, 4210752);
 						mc.renderEngine.func_110577_a(this.textureLocation);
-						drawTexturedModalRect(width/2-22, y+140, 30, 0, 44, 25);
-						drawTexturedModalRect(width/2-22, y+140, 30, 25, 44*machine.worker.workDone/machine.worker.totalWork, 25);
+						Tessellator.instance.setColorOpaque(255, 0, 0);
+						drawColoredTexturedModalRect(width / 2 - 22, y + 140, 30, 0, 44, 25, 255, 255, 255);
+						drawColoredTexturedModalRect(width / 2 - 22, y + 140, 30, 25, 44 * machine.worker.workDone / machine.worker.totalWork, 25, 255, 255, 255);
 						break;
 					default:
 						break;
@@ -196,6 +208,31 @@ public class GuiLogicDisplay extends GuiScreen {
 		default:
 			break;
 		}
+	}
+
+	private void drawPane(int x, int y, int width, int height) {
+		int xAbs = (this.width - X_SIZE) / 2;
+		int yAbs = (this.height - Y_SIZE - 23) / 2;
+		Color color3 = new Color(180, 180, 180);
+		Color color4 = new Color(220, 220, 220);
+		Color color5 = new Color(0, 0, 0);
+		Color color6 = new Color(20, 20, 20);
+		drawGradientRect(xAbs + x, yAbs + y, xAbs + x + width, yAbs + y + height, color3.getRGB(), color4.getRGB());
+		drawGradientRect(xAbs + x + 5, yAbs + y + 5, xAbs + x + width - 5, yAbs + y + height - 5, color5.getRGB(), color6.getRGB());
+	}
+
+	private void drawColoredTexturedModalRect(int par1, int par2, int par3, int par4, int par5, int par6, int r, int g, int b) {
+
+		float f = 0.00390625F;
+		float f1 = 0.00390625F;
+		Tessellator tessellator = Tessellator.instance;
+		tessellator.startDrawingQuads();
+		tessellator.setColorOpaque(r, g, b);
+		tessellator.addVertexWithUV((double) (par1 + 0), (double) (par2 + par6), (double) this.zLevel, (double) ((float) (par3 + 0) * f), (double) ((float) (par4 + par6) * f1));
+		tessellator.addVertexWithUV((double) (par1 + par5), (double) (par2 + par6), (double) this.zLevel, (double) ((float) (par3 + par5) * f), (double) ((float) (par4 + par6) * f1));
+		tessellator.addVertexWithUV((double) (par1 + par5), (double) (par2 + 0), (double) this.zLevel, (double) ((float) (par3 + par5) * f), (double) ((float) (par4 + 0) * f1));
+		tessellator.addVertexWithUV((double) (par1 + 0), (double) (par2 + 0), (double) this.zLevel, (double) ((float) (par3 + 0) * f), (double) ((float) (par4 + 0) * f1));
+		tessellator.draw();
 	}
 
 	public void drawTank() {
@@ -454,6 +491,27 @@ public class GuiLogicDisplay extends GuiScreen {
 				}
 			}
 		}
+	}
+
+	private void drawItemStack(ItemStack par1ItemStack, int par2, int par3, String par4Str) {
+		GL11.glPushMatrix();
+		GL11.glEnable(GL11.GL_LIGHTING);
+		RenderHelper.enableStandardItemLighting();
+		GL11.glTranslatef(0.0F, 0.0F, 32.0F);
+		this.zLevel = 200.0F;
+		itemRenderer.zLevel = 200.0F;
+		FontRenderer font = null;
+		if (par1ItemStack != null)
+			font = par1ItemStack.getItem().getFontRenderer(par1ItemStack);
+		if (font == null)
+			font = fontRenderer;
+		itemRenderer.renderItemAndEffectIntoGUI(font, this.mc.func_110434_K(), par1ItemStack, par2, par3);
+		itemRenderer.renderItemOverlayIntoGUI(font, this.mc.func_110434_K(), par1ItemStack, par2, par3 - (this.draggedStack == null ? 0 : 8), par4Str);
+		this.zLevel = 0.0F;
+		itemRenderer.zLevel = 0.0F;
+		RenderHelper.disableStandardItemLighting();
+		GL11.glDisable(GL11.GL_LIGHTING);
+		GL11.glPopMatrix();
 	}
 
 }

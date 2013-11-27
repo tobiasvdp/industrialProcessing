@@ -157,4 +157,9 @@ public interface ISetupItems {
     public final static ItemIP itemRakeArm = new ItemIP(ConfigItems.getItemRakeArmID(), "ItemRakeArm",IndustrialProcessing.tabOres);
     public final static ItemIP itemDisk = new ItemIP(ConfigItems.getItemDiskID(), "ItemDisk",IndustrialProcessing.tabOres);
     
+    public final static ItemIP itemTaliaMixedFragments = new ItemIP(ConfigItems.getItemTaliaMixedFragmentsID(), "itemTaliaMixedFragments",IndustrialProcessing.tabOres);
+    public final static ItemIP itemGoldMixedFragments = new ItemIP(ConfigItems.getItemGoldMixedFragmentsID(), "itemGoldMixedFragments",IndustrialProcessing.tabOres);
+    public final static ItemIP itemGalenaMixedFragments = new ItemIP(ConfigItems.getItemGalenaMixedFragmentsID(), "itemGalenaMixedFragments",IndustrialProcessing.tabOres);
+    public final static ItemIP itemChromiteMixedFragments = new ItemIP(ConfigItems.getItemChromiteMixedFragmentsID(), "itemChromiteMixedFragments",IndustrialProcessing.tabOres);
+    
 }
