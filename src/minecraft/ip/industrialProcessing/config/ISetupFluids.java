@@ -371,6 +371,33 @@ public interface ISetupFluids {
 
 	public final static ItemFluid itemFluidThickIronSediment = new ItemFluid("IP.fluid.ThickIronSediment", 2000, 2000);
 	public final static BlockFluid blockFluidThickIronSediment = new BlockFluid(ConfigFluids.getBlockFluidBaseThickIronSedimentID(), itemFluidThickIronSediment, Material.water, false);
-	public final static ItemIPBucket  bucketThickIronSediment = new ItemIPBucket(ConfigFluids.getBucketThickIronSedimentID(), itemFluidThickIronSediment, blockFluidThickIronSediment, "ThickIronSediment");
-}
+	public final static ItemIPBucket bucketThickIronSediment = new ItemIPBucket(ConfigFluids.getBucketThickIronSedimentID(), itemFluidThickIronSediment, blockFluidThickIronSediment, "ThickIronSediment");
 
+	public final static ItemFluid itemFluidPasteTinSediment = new ItemFluid("IP.fluid.PasteTinSediment", 2000, 2000);
+	public final static BlockFluid blockFluidPasteTinSediment = new BlockFluid(ConfigFluids.getBlockFluidBasePasteTinSedimentID(), itemFluidPasteTinSediment, Material.water, false);
+	public final static ItemIPBucket bucketPasteTinSediment = new ItemIPBucket(ConfigFluids.getBucketPasteTinSedimentID(), itemFluidPasteTinSediment, blockFluidPasteTinSediment, "ContainerPasteTinSediment");
+
+	public final static ItemFluid itemFluidPasteCopperSediment = new ItemFluid("IP.fluid.PasteCopperSediment", 2000, 2000);
+	public final static BlockFluid blockFluidPasteCopperSediment = new BlockFluid(ConfigFluids.getBlockFluidBasePasteCopperSedimentID(), itemFluidPasteCopperSediment, Material.water, false);
+	public final static ItemIPBucket bucketPasteCopperSediment = new ItemIPBucket(ConfigFluids.getBucketPasteCopperSedimentID(), itemFluidPasteCopperSediment, blockFluidPasteCopperSediment, "ContainerPasteCopperSediment");
+
+	public final static ItemFluid itemFluidPasteTaliaSediment = new ItemFluid("IP.fluid.PasteTaliaSediment", 2000, 2000);
+	public final static BlockFluid blockFluidPasteTaliaSediment = new BlockFluid(ConfigFluids.getBlockFluidBasePasteTaliaSedimentID(), itemFluidPasteTaliaSediment, Material.water, false);
+	public final static ItemIPBucket bucketPasteTaliaSediment = new ItemIPBucket(ConfigFluids.getBucketPasteTaliaSedimentID(), itemFluidPasteTaliaSediment, blockFluidPasteTaliaSediment, "ContainerPasteTaliaSediment");
+
+	public final static ItemFluid itemFluidPasteGoldSediment = new ItemFluid("IP.fluid.PasteGoldSediment", 2000, 2000);
+	public final static BlockFluid blockFluidPasteGoldSediment = new BlockFluid(ConfigFluids.getBlockFluidBasePasteGoldSedimentID(), itemFluidPasteGoldSediment, Material.water, false);
+	public final static ItemIPBucket bucketPasteGoldSediment = new ItemIPBucket(ConfigFluids.getBucketPasteGoldSedimentID(), itemFluidPasteGoldSediment, blockFluidPasteGoldSediment, "ContainerPasteGoldSediment");
+
+	public final static ItemFluid itemFluidPasteGalenaSediment = new ItemFluid("IP.fluid.PasteGalenaSediment", 2000, 2000);
+	public final static BlockFluid blockFluidPasteGalenaSediment = new BlockFluid(ConfigFluids.getBlockFluidBasePasteGalenaSedimentID(), itemFluidPasteGalenaSediment, Material.water, false);
+	public final static ItemIPBucket bucketPasteGalenaSediment = new ItemIPBucket(ConfigFluids.getBucketPasteGalenaSedimentID(), itemFluidPasteGalenaSediment, blockFluidPasteGalenaSediment, "ContainerPasteGalenaSediment");
+
+	public final static ItemFluid itemFluidPasteChromiteSediment = new ItemFluid("IP.fluid.PasteChromiteSediment", 2000, 2000);
+	public final static BlockFluid blockFluidPasteChromiteSediment = new BlockFluid(ConfigFluids.getBlockFluidBasePasteChromiteSedimentID(), itemFluidPasteChromiteSediment, Material.water, false);
+	public final static ItemIPBucket bucketPasteChromiteSediment = new ItemIPBucket(ConfigFluids.getBucketPasteChromiteSedimentID(), itemFluidPasteChromiteSediment, blockFluidPasteChromiteSediment, "ContainerPasteChromiteSediment");
+
+	public final static ItemFluid itemFluidPasteIronSediment = new ItemFluid("IP.fluid.PasteIronSediment", 2000, 2000);
+	public final static BlockFluid blockFluidPasteIronSediment = new BlockFluid(ConfigFluids.getBlockFluidBasePasteIronSedimentID(), itemFluidPasteIronSediment, Material.water, false);
+	public final static ItemIPBucket bucketPasteIronSediment = new ItemIPBucket(ConfigFluids.getBucketPasteIronSedimentID(), itemFluidPasteIronSediment, blockFluidPasteIronSediment, "PasteIronSediment");
+}

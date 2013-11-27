@@ -729,6 +729,62 @@ public class ConfigFluids {
 	public static int getBucketConcentratedIronSludgeID() {
 		return getInstance().bucketConcentratedIronSludgeID;
 	}
+	
+	public static int getBlockFluidBasePasteTinSedimentID() {
+		return getInstance().blockFluidBasePasteTinSedimentID;
+	}
+
+	public static int getBucketPasteTinSedimentID() {
+		return getInstance().bucketPasteTinSedimentID;
+	}
+
+	public static int getBlockFluidBasePasteCopperSedimentID() {
+		return getInstance().blockFluidBasePasteCopperSedimentID;
+	}
+
+	public static int getBucketPasteCopperSedimentID() {
+		return getInstance().bucketPasteCopperSedimentID;
+	}
+
+	public static int getBlockFluidBasePasteTaliaSedimentID() {
+		return getInstance().blockFluidBasePasteTaliaSedimentID;
+	}
+
+	public static int getBucketPasteTaliaSedimentID() {
+		return getInstance().bucketPasteTaliaSedimentID;
+	}
+
+	public static int getBlockFluidBasePasteGoldSedimentID() {
+		return getInstance().blockFluidBasePasteGoldSedimentID;
+	}
+
+	public static int getBucketPasteGoldSedimentID() {
+		return getInstance().bucketPasteGoldSedimentID;
+	}
+
+	public static int getBlockFluidBasePasteGalenaSedimentID() {
+		return getInstance().blockFluidBasePasteGalenaSedimentID;
+	}
+
+	public static int getBucketPasteGalenaSedimentID() {
+		return getInstance().bucketPasteGalenaSedimentID;
+	}
+
+	public static int getBlockFluidBasePasteChromiteSedimentID() {
+		return getInstance().blockFluidBasePasteChromiteSedimentID;
+	}
+
+	public static int getBucketPasteChromiteSedimentID() {
+		return getInstance().bucketPasteChromiteSedimentID;
+	}
+
+	public static int getBlockFluidBasePasteIronSedimentID() {
+		return getInstance().blockFluidBasePasteIronSedimentID;
+	}
+
+	public static int getBucketPasteIronSedimentID() {
+		return getInstance().bucketPasteIronSedimentID;
+	}
 
 	private int offset = 2500;
 
@@ -1030,6 +1086,27 @@ public class ConfigFluids {
 
 	private int blockFluidBaseConcentratedIronSludgeID = offset + 175;
 	private int bucketConcentratedIronSludgeID = offset + 176;
+	
+	private int blockFluidBasePasteTinSedimentID = offset + 177;
+	private int bucketPasteTinSedimentID = offset + 178;
+
+	private int blockFluidBasePasteCopperSedimentID = offset + 179;
+	private int bucketPasteCopperSedimentID = offset + 180;
+
+	private int blockFluidBasePasteTaliaSedimentID = offset + 181;
+	private int bucketPasteTaliaSedimentID = offset + 182;
+
+	private int blockFluidBasePasteGoldSedimentID = offset + 183;
+	private int bucketPasteGoldSedimentID = offset + 184;
+
+	private int blockFluidBasePasteGalenaSedimentID = offset + 185;
+	private int bucketPasteGalenaSedimentID = offset + 186;
+
+	private int blockFluidBasePasteChromiteSedimentID = offset + 187;
+	private int bucketPasteChromiteSedimentID = offset + 188;
+
+	private int blockFluidBasePasteIronSedimentID = offset + 189;
+	private int bucketPasteIronSedimentID = offset + 190;
 
 	public ConfigFluids() {
 
