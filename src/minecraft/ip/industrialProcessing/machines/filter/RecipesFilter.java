@@ -36,7 +36,7 @@ public class RecipesFilter extends RecipesMachine {
         recipe.workRequired = i;
         recipe.powerRequired = powerConsumption;
         recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemTaliaFineChunks.itemID, RecipeSlotType.INVENTORY, 1) };
-        recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemTaliaDust.itemID, RecipeSlotType.INVENTORY, 0, 1, 0) };
+        recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemTaliaDust.itemID, RecipeSlotType.INVENTORY, 0, 1, 0), new RecipeOutputSlot(2, IndustrialProcessing.itemTaliaMixedFragments.itemID, RecipeSlotType.INVENTORY, 1, 2, 0.75) };
         return recipe;
     }
 
@@ -45,7 +45,7 @@ public class RecipesFilter extends RecipesMachine {
         recipe.workRequired = i;
         recipe.powerRequired = powerConsumption;
         recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemChromiteFineChunks.itemID, RecipeSlotType.INVENTORY, 1) };
-        recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemChromiteDust.itemID, RecipeSlotType.INVENTORY, 0, 1, 0) };
+        recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemChromiteDust.itemID, RecipeSlotType.INVENTORY, 0, 1, 0), new RecipeOutputSlot(2, IndustrialProcessing.itemChromiteMixedFragments.itemID, RecipeSlotType.INVENTORY, 1, 2, 0.75) };
         return recipe;
     }
 
@@ -54,7 +54,7 @@ public class RecipesFilter extends RecipesMachine {
         recipe.workRequired = i;
         recipe.powerRequired = powerConsumption;
         recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemGalenaFineChunks.itemID, RecipeSlotType.INVENTORY, 1) };
-        recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemLeadDust.itemID, RecipeSlotType.INVENTORY, 0, 1, 0) };
+        recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemLeadDust.itemID, RecipeSlotType.INVENTORY, 0, 1, 0), new RecipeOutputSlot(2, IndustrialProcessing.itemGalenaMixedFragments.itemID, RecipeSlotType.INVENTORY, 1, 2, 0.75) };
         return recipe;
     }
 
@@ -63,7 +63,7 @@ public class RecipesFilter extends RecipesMachine {
         recipe.workRequired = i;
         recipe.powerRequired = powerConsumption;
         recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemGoldFineChunks.itemID, RecipeSlotType.INVENTORY, 1) };
-        recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemGoldDust.itemID, RecipeSlotType.INVENTORY, 0, 1, 0) };
+        recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemGoldDust.itemID, RecipeSlotType.INVENTORY, 0, 1, 0), new RecipeOutputSlot(2, IndustrialProcessing.itemGoldMixedFragments.itemID, RecipeSlotType.INVENTORY, 1, 2, 0.75) };
         return recipe;
     }
 
