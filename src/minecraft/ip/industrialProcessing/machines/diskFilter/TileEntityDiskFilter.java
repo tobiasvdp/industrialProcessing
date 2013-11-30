@@ -29,7 +29,7 @@ public class TileEntityDiskFilter extends TileEntityPoweredFluidWorkerMachine {
 		addStack(null, nodirections, false, true); // Liquid Output Full Output 
 
 		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.UP, true, false);
-		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.FRONT, true, false);
+		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.BACK, true, false);
 		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.DOWN, false, true);
 	}
 

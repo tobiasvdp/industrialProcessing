@@ -20,6 +20,7 @@ public class GuiContainerDiskFilter extends GuiContainerFluidMachine {
 		super.drawGuiContainerBackgroundLayer(par1, par2, par3);
 
 		drawProgressBarTank(TANK_SOURCE, new Point(8, 19), 0);
-		drawProgressBarTank(TANK_SOURCE, new Point(152, 19), 1);
+		drawProgressBarTank(TANK_SOURCE, new Point(44, 19), 1);
+		drawProgressBarTank(TANK_SOURCE, new Point(152, 19), 2);
 	}
 }

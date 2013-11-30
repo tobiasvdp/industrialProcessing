@@ -128,7 +128,25 @@ public class ConfigItems {
     private int itemTumblerID = 6629;
     private int itemRakeArmID = 6630;
     private int itemDiskID = 6631;
+    
+    private int itemTaliaMixedFragmentsID = 6632;
+    private int itemGoldMixedFragmentsID = 6633;
+    private int itemGalenaMixedFragmentsID = 6634;
+    private int itemChromiteMixedFragmentsID = 6635;
 
+    public static int getItemTaliaMixedFragmentsID(){
+    	return getInstance().itemTaliaMixedFragmentsID;
+    }
+    public static int getItemGoldMixedFragmentsID(){
+    	return getInstance().itemGoldMixedFragmentsID;
+    }
+    public static int getItemGalenaMixedFragmentsID(){
+    	return getInstance().itemGalenaMixedFragmentsID;
+    }
+    public static int getItemChromiteMixedFragmentsID(){
+    	return getInstance().itemChromiteMixedFragmentsID;
+    }
+    
     public static int getItemScreenID(){
     	return getInstance().itemScreenID;
     }

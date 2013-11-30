@@ -5,6 +5,8 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupItems;
 import ip.industrialProcessing.logic.IPLogic;
+import ip.industrialProcessing.transport.fluids.TileEntityTank;
+import ip.industrialProcessing.utils.FluidTransfers;
 import ip.industrialProcessing.utils.inventories.InventoryUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -18,6 +20,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.fluids.IFluidHandler;
 
 public abstract class BlockMachine extends BlockContainer {
     public BlockMachine(int par1, Material par2Material, float hardness, StepSound stepSound, String name, CreativeTabs tab) {
@@ -46,6 +49,11 @@ public abstract class BlockMachine extends BlockContainer {
 		return false;
 	}
 
+        TileEntity te = world.getBlockTileEntity(x, y, z);
+        if (te instanceof IFluidHandler) {
+            if (FluidTransfers.handleRightClick(player, (IFluidHandler) te, clickX, clickY, clickZ))
+                return true;
+        }
 	player.openGui(IndustrialProcessing.instance, 0, world, x, y, z);
 	return true;
     }

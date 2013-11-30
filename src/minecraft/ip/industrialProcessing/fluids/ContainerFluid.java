@@ -13,13 +13,13 @@ public class ContainerFluid extends ItemBucket implements IFluidContainerItem {
 	private int capacity;
 	private int isFull;
 
-	public ContainerFluid(int itemId, Fluid fluid, BlockFluid block, String texture) {
+	public ContainerFluid(int itemId, Fluid fluid, BlockFluid block, String texture, int capacity) {
 		super(itemId, block.blockID);
 		setUnlocalizedName("Container" + fluid.getName());
 		setMaxStackSize(1);
 		setCreativeTab(ISetupCreativeTabs.tabFluid);
-		this.capacity = 1000;
-		BucketHandler.buckets.put(block, this);
+		this.capacity = capacity;
+		ContainerHandler.containers.put(block, this);
 		func_111206_d(INamepace.TEXTURE_NAME_PREFIX + texture);
 	}
 

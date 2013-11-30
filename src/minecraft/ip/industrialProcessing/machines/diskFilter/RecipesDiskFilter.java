@@ -15,25 +15,75 @@ public class RecipesDiskFilter extends RecipesMachine {
     }
 
     private void addDefaultRecipes() {
-
-	Recipe ironSludge = new Recipe();
-	ironSludge.workRequired = 30;
-	ironSludge.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidOreSludgeIron.getName()), RecipeSlotType.TANK, 1000) };
-	ironSludge.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, IndustrialProcessing.itemIronWashedChunks.itemID, RecipeSlotType.INVENTORY, 1, 2, 0), new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 0, 1000, 0.5) };
-	addRecipe(ironSludge);
-
-	Recipe copperSludge = new Recipe();
-	copperSludge.workRequired = 30;
-	copperSludge.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidOreSludgeCopper.getName()), RecipeSlotType.TANK, 1000) };
-	copperSludge.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, IndustrialProcessing.itemCopperWashedChunks.itemID, RecipeSlotType.INVENTORY, 1, 2, 0), new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 0, 1000, 0.5) };
-	addRecipe(copperSludge);
-
-	Recipe tinSludge = new Recipe();
-	tinSludge.workRequired = 30;
-	tinSludge.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidOreSludgeTin.getName()), RecipeSlotType.TANK, 1000) };
-	tinSludge.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, IndustrialProcessing.itemTinWashedChunks.itemID, RecipeSlotType.INVENTORY, 1, 2, 0), new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 0, 1000, 0.5) };
-	addRecipe(tinSludge);
-
+	addRecipe(IronSedimentToDust(3000, 1));
+	addRecipe(TinSedimentToDust(3000, 1));
+	addRecipe(CopperSedimentToDust(3000, 1));
+	addRecipe(GoldSedimentToDust(3000, 1));
+	addRecipe(TaliaSedimentToDust(3000, 1));
+	addRecipe(GalenaSedimentToDust(3000, 1));
+	addRecipe(ChromiteSedimentToDust(3000, 1));
     }
 
+    private Recipe IronSedimentToDust(int i, int powerConsumption) {
+	Recipe recipe = new Recipe();
+	recipe.workRequired = i;
+	recipe.powerRequired = powerConsumption;
+	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidThickIronSediment.getName()), RecipeSlotType.TANK, 1000), new RecipeInputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidLightIronSediment.getName()), RecipeSlotType.TANK, 1000) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, IndustrialProcessing.itemIronOxideDust.itemID, RecipeSlotType.INVENTORY, 1, 1, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
+	return recipe;
+    }
+
+    private Recipe GoldSedimentToDust(int i, int powerConsumption) {
+	Recipe recipe = new Recipe();
+	recipe.workRequired = i;
+	recipe.powerRequired = powerConsumption;
+	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidThickGoldSediment.getName()), RecipeSlotType.TANK, 1000), new RecipeInputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidLightGoldSediment.getName()), RecipeSlotType.TANK, 1000) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, IndustrialProcessing.itemGoldDust.itemID, RecipeSlotType.INVENTORY, 1, 1, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
+	return recipe;
+    }
+
+    private Recipe TinSedimentToDust(int i, int powerConsumption) {
+	Recipe recipe = new Recipe();
+	recipe.workRequired = i;
+	recipe.powerRequired = powerConsumption;
+	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidThickTinSediment.getName()), RecipeSlotType.TANK, 1000), new RecipeInputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidLightTinSediment.getName()), RecipeSlotType.TANK, 1000) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, IndustrialProcessing.itemTinOxideDust.itemID, RecipeSlotType.INVENTORY, 1, 1, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
+	return recipe;
+    }
+
+    private Recipe CopperSedimentToDust(int i, int powerConsumption) {
+	Recipe recipe = new Recipe();
+	recipe.workRequired = i;
+	recipe.powerRequired = powerConsumption;
+	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidThickCopperSediment.getName()), RecipeSlotType.TANK, 1000), new RecipeInputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidLightCopperSediment.getName()), RecipeSlotType.TANK, 1000) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, IndustrialProcessing.itemCopperMineral.itemID, RecipeSlotType.INVENTORY, 1, 1, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
+	return recipe;
+    }
+
+    private Recipe ChromiteSedimentToDust(int i, int powerConsumption) {
+	Recipe recipe = new Recipe();
+	recipe.workRequired = i;
+	recipe.powerRequired = powerConsumption;
+	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidThickChromiteSediment.getName()), RecipeSlotType.TANK, 1000), new RecipeInputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidLightChromiteSediment.getName()), RecipeSlotType.TANK, 1000) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, IndustrialProcessing.itemChromiteDust.itemID, RecipeSlotType.INVENTORY, 1, 1, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
+	return recipe;
+    }
+
+    private Recipe GalenaSedimentToDust(int i, int powerConsumption) {
+	Recipe recipe = new Recipe();
+	recipe.workRequired = i;
+	recipe.powerRequired = powerConsumption;
+	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidThickGalenaSediment.getName()), RecipeSlotType.TANK, 1000), new RecipeInputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidLightGalenaSediment.getName()), RecipeSlotType.TANK, 1000) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, IndustrialProcessing.itemLeadDust.itemID, RecipeSlotType.INVENTORY, 1, 1, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
+	return recipe;
+    }
+
+    private Recipe TaliaSedimentToDust(int i, int powerConsumption) {
+	Recipe recipe = new Recipe();
+	recipe.workRequired = i;
+	recipe.powerRequired = powerConsumption;
+	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidThickTaliaSediment.getName()), RecipeSlotType.TANK, 1000), new RecipeInputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidLightTaliaSediment.getName()), RecipeSlotType.TANK, 1000) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, IndustrialProcessing.itemTaliaDust.itemID, RecipeSlotType.INVENTORY, 1, 1, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
+	return recipe;
+    }
 }

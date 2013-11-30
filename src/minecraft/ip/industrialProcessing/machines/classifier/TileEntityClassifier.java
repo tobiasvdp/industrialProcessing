@@ -41,6 +41,8 @@ public class TileEntityClassifier extends TileEntityPoweredFluidWorkerMachine im
 	@Override
 	public void updateEntity() { 
 		super.updateEntity();
+		addBucketToTank(2, 3, 0);
+		getBucketFromTank(4, 5, 1);
 		if(this.tankHandler.readDataFromTanks())
 			TileTankSyncHandler.sendTankData(this, this.tankHandler);
 	}
@@ -54,16 +56,11 @@ public class TileEntityClassifier extends TileEntityPoweredFluidWorkerMachine im
 
 	@Override
 	protected boolean isValidInput(int slot, int itemID) {
-		if (slot == 0) // 0 is the recipe slot, others are buckets for liquid
-			// containers
+		if (slot == 0) 
 			return recipes.isValidInput(slot, itemID);
-
-		if (slot == 4) // fluid output container input slot, only empty
-			// container
+		if (slot == 4)
 			return FluidContainerRegistry.isEmptyContainer(new ItemStack(itemID, 1, 0));
-
-		if (slot == 2) { // fluid input container input slot, only filled
-			// containers with correct fluid
+		if (slot == 2) { 
 			FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(new ItemStack(itemID, 1, 0));
 			if (fluid == null)
 				return false;
