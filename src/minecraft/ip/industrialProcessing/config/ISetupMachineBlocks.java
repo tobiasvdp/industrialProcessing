@@ -2,7 +2,6 @@ package ip.industrialProcessing.config;
 
 import ip.industrialProcessing.decoration.light.BlockElectricLamp;
 import ip.industrialProcessing.decoration.light.BlockPetrolLamp;
-import ip.industrialProcessing.machines.blastFurnace.BlockBlastFurnace;
 import ip.industrialProcessing.machines.classifier.BlockClassifier;
 import ip.industrialProcessing.machines.crusher.BlockCrusher;
 import ip.industrialProcessing.machines.diskFilter.BlockDiskFilter;
@@ -100,7 +99,6 @@ public interface ISetupMachineBlocks {
     public final static BlockFlotationCell blockFlotationCell = new BlockFlotationCell();
     public final static BlockHydroCyclone blockHydroCyclone = new BlockHydroCyclone();
     public final static BlockDiskFilter blockDiskFilter = new BlockDiskFilter();
-    public final static BlockBlastFurnace blockBlastFurnace = new BlockBlastFurnace();
     public final static BlockExtruder blockExtruder = new BlockExtruder();
     public final static BlockOxygenFurnace blockOxygenFurnace = new BlockOxygenFurnace();
     public final static BlockPelletExtruder blockPelletExtruder = new BlockPelletExtruder();

@@ -26,9 +26,6 @@ import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.decoration.crystals.ModelCrystal;
 import ip.industrialProcessing.decoration.platforms.ModelPlatform;
 import ip.industrialProcessing.decoration.platforms.ModelStairs;
-import ip.industrialProcessing.machines.blastFurnace.ModelBlastFurnace;
-import ip.industrialProcessing.machines.blastFurnace.ModelBlastFurnaceTop;
-import ip.industrialProcessing.machines.blastFurnace.TileEntityBlastFurnace;
 import ip.industrialProcessing.machines.classifier.ModelClassifier;
 import ip.industrialProcessing.machines.classifier.TileEntityClassifier;
 import ip.industrialProcessing.machines.crusher.ModelCrusher;
@@ -158,8 +155,6 @@ public class ClientProxy extends CommonProxy {
 
     private static final ModelAnimatedMachine crankGenerator = new ModelCrankGenerator(true);
     private static final ModelAnimatedMachine buildcraftGenerator = new ModelCrankGenerator(false);
-    private static final ModelStateMachine blastFurnace = new ModelBlastFurnace();
-    private static final ModelStateMachine blastFurnaceTop = new ModelBlastFurnaceTop();
     private static final ModelConnectedFluid tankEntity = new ModelTank();
     private static final ModelBlock tankBlock = new ModelTankBlock();
     private static final ModelBlock pipeBlock = new ModelPipeBlock();
@@ -353,10 +348,6 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEnergyCell.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockEnergyCell, "ModelBatteryBox", EnergyCell));
         ConfigRenderers.setRendererEnergyCellId(RenderingRegistry.getNextAvailableRenderId());
         RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererEnergyCellId(), new TileEntityEnergyCell()));
-
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlastFurnace.class, new RendererTileEntityState(ISetupMachineBlocks.blockBlastFurnace, new String[] { "ModelBlastFurnace", "ModelBlastFurnaceTop" }, new ModelStateMachine[] { blastFurnace, blastFurnaceTop }));
-        ConfigRenderers.setRendererBlastFurnaceId(RenderingRegistry.getNextAvailableRenderId());
-        RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererBlastFurnaceId(), new TileEntityBlastFurnace()));
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityManualGenerator.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockManualGenerator, "ModelCrankGenerator", crankGenerator));
         ConfigRenderers.setRendererCrankGeneratorId(RenderingRegistry.getNextAvailableRenderId());

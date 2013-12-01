@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 
 public class BlockIP extends Block {
 	boolean dropItems = false;
-	ItemIP dropItem;
+	int dropItem;
 
 	public BlockIP(int blockID, String name, float hardness, Material blockMaterial, StepSound stepSound) {
 		super(blockID, blockMaterial);
@@ -27,7 +27,7 @@ public class BlockIP extends Block {
 		func_111022_d(INamepace.TEXTURE_NAME_PREFIX + name);
 	}
 
-	public BlockIP(int blockID, String name, float hardness, Material blockMaterial, StepSound stepSound, ItemIP dropitem) {
+	public BlockIP(int blockID, String name, float hardness, Material blockMaterial, StepSound stepSound, int dropitem) {
 		super(blockID, blockMaterial);
 		setHardness(hardness);
 		setStepSound(stepSound);
@@ -48,7 +48,7 @@ public class BlockIP extends Block {
 	@Override
 	public int idDropped(int par1, Random par2Random, int par3) {
 		if (this.dropItems) {
-			return this.dropItem.itemID;
+			return this.dropItem;
 		}
 		return super.idDropped(par1, par2Random, par3);
 	}

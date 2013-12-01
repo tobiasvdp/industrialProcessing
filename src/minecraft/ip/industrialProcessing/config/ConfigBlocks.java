@@ -37,7 +37,18 @@ public class ConfigBlocks {
     private int blockMachineBlockID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "blockMachineBlockID", 2008).getInt();
 
     private int blockPineLogID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "PineTreeLogID", 2009).getInt();
+    
+    private int blockCobbleLimestoneID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "blockCobbleLimestoneID", 2010).getInt();
+    private int blockLimestoneID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "blockLimestoneID", 2011).getInt();
 
+    public static int getBlockCobbleLimestoneID() {
+        return getInstance().blockCobbleLimestoneID;
+    }
+    
+    public static int getBlockLimestoneID() {
+        return getInstance().blockLimestoneID;
+    }
+    
     public static int blockMachineBlock() {
         return getInstance().blockMachineBlockID;
     }
@@ -133,6 +144,8 @@ public class ConfigBlocks {
         registerOre(ISetupBlocks.blockTaliaOre, "IP.World.TaliaOre", "Thallium Ore", "talia");
         registerBlock(ISetupBlocks.blockIronFlat, "IP.Block.IronFlat", "Flat Iron block");
 
+        registerBlock(ISetupBlocks.blockCobbleLimestone, "IP.Block.cobbleLime", "Cobble limestone");
+        registerBlock(ISetupBlocks.blockLimestone, "IP.Block.limestone", "Limestone");
         registerBlock(ISetupBlocks.blockPlatform, "IP.Block.Platform", "Walkway");
         registerBlock(ISetupBlocks.blockGrit, "IP.Block.Grit", "Grit");
         registerBlock(ISetupBlocks.blockAsphalt, "IP.Block.Asphalt", "Asphalt");

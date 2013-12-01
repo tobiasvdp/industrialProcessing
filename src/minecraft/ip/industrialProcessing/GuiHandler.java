@@ -1,9 +1,6 @@
 package ip.industrialProcessing;
 
 import ip.industrialProcessing.items.GuiGuide;
-import ip.industrialProcessing.machines.blastFurnace.ContainerBlastFurnace;
-import ip.industrialProcessing.machines.blastFurnace.GuiContainerBlastFurnace;
-import ip.industrialProcessing.machines.blastFurnace.TileEntityBlastFurnace;
 import ip.industrialProcessing.machines.classifier.ContainerClassifier;
 import ip.industrialProcessing.machines.classifier.GuiContainerClassifier;
 import ip.industrialProcessing.machines.classifier.TileEntityClassifier;
@@ -178,8 +175,6 @@ public class GuiHandler implements IGuiHandler {
                 return new ContainerExtruder(player.inventory, (TileEntityExtruder) entity);
             if (entity instanceof TileEntityOxygenFurnace)
                 return new ContainerOxygenFurnace(player.inventory, (TileEntityOxygenFurnace) entity);
-            if (entity instanceof TileEntityBlastFurnace)
-                return new ContainerBlastFurnace(player.inventory, (TileEntityBlastFurnace) entity);
             if (entity instanceof TileEntityBuildcraftGenerator)
                 return new ContainerBuildcraftGenerator(player.inventory, (TileEntityBuildcraftGenerator) entity);
             if (entity instanceof TileEntityGenerator)
@@ -278,8 +273,6 @@ public class GuiHandler implements IGuiHandler {
                 return new GuiContainerExtruder(player.inventory, (TileEntityExtruder) entity);
             if (entity instanceof TileEntityOxygenFurnace)
                 return new GuiContainerOxygenFurnace(player.inventory, (TileEntityOxygenFurnace) entity);
-            if (entity instanceof TileEntityBlastFurnace)
-                return new GuiContainerBlastFurnace(player.inventory, (TileEntityBlastFurnace) entity);
             if (entity instanceof TileEntityBuildcraftGenerator)
                 return new GuiContainerBuildcraftGenerator(player.inventory, (TileEntityBuildcraftGenerator) entity);
             if (entity instanceof TileEntityGenerator)

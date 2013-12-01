@@ -29,7 +29,9 @@ public interface ISetupBlocks {
     public final static BlockIP blockGrit = (BlockIP) new BlockIP(ConfigBlocks.getInstance().blockGrit(), "Grit", 1.0f, Material.ground, Block.soundGravelFootstep).setCreativeTab(IndustrialProcessing.tabOres);
     public final static BlockIP blockAsphalt = (BlockIP) new BlockIP(ConfigBlocks.getInstance().blockAsphalt(), "Asphalt", 1.0f, Material.clay, Block.soundStoneFootstep).setCreativeTab(IndustrialProcessing.tabOres);
     public final static BlockIP blockMachineBlock = (BlockIP) new BlockIP(ConfigBlocks.getInstance().blockMachineBlock(), "MachineBlock", 1.0f, Material.iron, Block.soundMetalFootstep).setCreativeTab(IndustrialProcessing.tabOres);
-
+    public final static BlockIP blockCobbleLimestone = (BlockIP) new BlockIP(ConfigBlocks.getInstance().getBlockCobbleLimestoneID(), "blockCobbleLimestone", 1.0f, Material.ground, Block.soundStoneFootstep).setCreativeTab(IndustrialProcessing.tabOres);
+    public final static BlockIP blockLimestone = (BlockIP) new BlockIP(ConfigBlocks.getInstance().getBlockLimestoneID(), "blockLimestone", 1.0f, Material.ground, Block.soundStoneFootstep,IndustrialProcessing.blockCobbleLimestone.blockID).setCreativeTab(IndustrialProcessing.tabOres);
+    
     public final static BlockPlatform blockPlatform = new BlockPlatform();
     public final static BlockStairs blockStairs = new BlockStairs();
     public final static BlockCinnebar blockCinnebar = new BlockCinnebar();
