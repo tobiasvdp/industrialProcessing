@@ -10,6 +10,7 @@ import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.BlockMachineRendered;
+import ip.industrialProcessing.transport.steve.railway.suspended.cart.EntityFloatingCart;
 import ip.industrialProcessing.utils.Position;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;

@@ -133,7 +133,21 @@ public class ConfigItems {
     private int itemGoldMixedFragmentsID = 6633;
     private int itemGalenaMixedFragmentsID = 6634;
     private int itemChromiteMixedFragmentsID = 6635;
+    
+    private int itemLimestoneDustID = 6636;
+    private int itemIronSinterID = 6637;
+    
+    private int itemSuspenedCartID = 6638;
 
+    public static int getItemSuspenedCartID(){
+    	return getInstance().itemSuspenedCartID;
+    }
+    public static int getItemIronSinterID(){
+    	return getInstance().itemIronSinterID;
+    }
+    public static int getItemLimestoneDustID(){
+    	return getInstance().itemLimestoneDustID;
+    }
     public static int getItemTaliaMixedFragmentsID(){
     	return getInstance().itemTaliaMixedFragmentsID;
     }
@@ -575,6 +589,7 @@ public class ConfigItems {
     }
 
     public static void addToLanguageRegistry() {
+    	LanguageRegistry.addName(ISetupItems.itemSupendedCart, "Suspended Cart");
     	LanguageRegistry.addName(ISetupItems.itemScreen, "Screen");
     	LanguageRegistry.addName(ISetupItems.itemFrame, "Frame");
     	LanguageRegistry.addName(ISetupItems.itemWovenPatern, "Woven pattern");
@@ -657,6 +672,8 @@ public class ConfigItems {
         LanguageRegistry.addName(ISetupItems.itemCalcareousSinterDust, "Calcareous sinter dust");
         LanguageRegistry.addName(ISetupItems.itemCokes, "Cokes");
         LanguageRegistry.addName(ISetupItems.itemSlag, "Slag");
+        LanguageRegistry.addName(ISetupItems.itemLimestoneDust, "Limestone dust");
+        LanguageRegistry.addName(ISetupItems.itemIronSinter, "Iron sinter");
     }
 
     private ConfigItems() {
