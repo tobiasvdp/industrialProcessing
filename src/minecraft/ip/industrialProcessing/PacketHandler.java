@@ -6,11 +6,13 @@ import ip.industrialProcessing.machines.animation.conveyors.TileConveyorSyncHand
 import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
 import ip.industrialProcessing.multiblock.core.block.elevator.TEmultiblockElevator;
 import ip.industrialProcessing.multiblock.dummy.block.toggleButton.TEmultiblockToggleButton;
+import ip.industrialProcessing.transport.steve.railway.suspended.cart.EntityFloatingCart;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.INetworkManager;
@@ -30,6 +32,7 @@ public class PacketHandler implements IPacketHandler {
     public static final String SCREEN_PRESSED = "IP.ScreenPressed";
     public static final String IP_ELEVATOR_BUTTON = "IP.MB.EL.Button";
     public static final String IP_LOGIC_SYNCSIDE = "IP.Lg.SyncSide";
+    public static final String IP_ENTITY_INTERACT = "IP.En.Int";
 
     @Override
     public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {
@@ -40,6 +43,20 @@ public class PacketHandler implements IPacketHandler {
         } else if (packet.channel.equals(BUTTON_PRESSED)) {
         } else if (packet.channel.equals(CONVEYOR_SYNC)) {
             TileConveyorSyncHandler.handleConveyorSync(manager, packet, player);
+        } else if (packet.channel.equals(IP_ENTITY_INTERACT)) {
+            DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
+            int id;
+            try {
+                    id = inputStream.read();
+            } catch (IOException e) {
+                    e.printStackTrace();
+                    return;
+            }
+            EntityPlayer playerMP = (EntityPlayer) player;
+            Entity ent = (Entity) playerMP.worldObj.loadedEntityList.get(id);
+            if(ent instanceof EntityFloatingCart){
+            	((EntityFloatingCart)ent).interact(playerMP);
+            }
         }
 
         // TODO: move this away from here, please!
