@@ -78,12 +78,8 @@ public class EntityFloatingCart extends Entity {
 	public void onUpdate() {
 		if (getOccupied()) {
 			EntityPlayer player = getRider();
-			player.prevPosX = this.posX;
-			player.prevPosY = this.posY;
-			player.prevPosZ = this.posZ;
-			player.posX = this.posX;
-			player.posY = this.posY;
-			player.posZ = this.posZ;
+			player.setPosition(this.posX, this.posY, this.posZ);
+			player.setVelocity(0, 0, 0);
 		}
 		//System.out.println(worldObj.toString() + " " + getOccupied());
 		super.onUpdate();

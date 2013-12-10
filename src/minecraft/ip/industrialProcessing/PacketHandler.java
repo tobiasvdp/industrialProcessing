@@ -45,17 +45,21 @@ public class PacketHandler implements IPacketHandler {
             TileConveyorSyncHandler.handleConveyorSync(manager, packet, player);
         } else if (packet.channel.equals(IP_ENTITY_INTERACT)) {
             DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
-            int id;
+            String name ="";
             try {
-                    id = inputStream.read();
+            	while(inputStream.available() >0)
+                    name += inputStream.readChar();
             } catch (IOException e) {
                     e.printStackTrace();
                     return;
             }
+            System.out.println(name);
             EntityPlayer playerMP = (EntityPlayer) player;
-            Entity ent = (Entity) playerMP.worldObj.loadedEntityList.get(id);
-            if(ent instanceof EntityFloatingCart){
-            	((EntityFloatingCart)ent).interact(playerMP);
+            for(Object ent : playerMP.worldObj.loadedEntityList.toArray()){
+            	if(ent != null && ent instanceof EntityFloatingCart){
+            		if(name.equals(((Entity)ent).getEntityName()))
+            				((EntityFloatingCart)ent).interact(playerMP);
+            	}
             }
         }
 
