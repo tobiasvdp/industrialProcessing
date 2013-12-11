@@ -75,16 +75,6 @@ public class RecipesCrusher extends RecipesMachine {
         recipe.powerRequired = powerConsumption;
         return recipe;
     }
-
-    private Recipe limestoneToDust(int workTime, int powerConsumption) {
-        Recipe recipe = new Recipe();
-        recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.blockCobbleLimestone.blockID, RecipeSlotType.INVENTORY, 1) };
-
-        recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemLimestoneDust.itemID, RecipeSlotType.INVENTORY, 1, 2, 0) };
-        recipe.workRequired = workTime;
-        recipe.powerRequired = powerConsumption;
-        return recipe;
-    }
     
     private Recipe coalToDust(int workTime, int powerConsumption) {
         Recipe recipe = new Recipe();

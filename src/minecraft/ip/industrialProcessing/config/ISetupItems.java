@@ -98,11 +98,7 @@ public interface ISetupItems {
     public final static ItemIP itemCalcareousSinterDust = new ItemIP(ConfigItems.ItemCalcareousSinterDustID(), "ItemCalcareousSinterDust",IndustrialProcessing.tabOres);
     public final static ItemIP itemCokes = new ItemIP(ConfigItems.ItemCokesID(), "ItemCokes",IndustrialProcessing.tabOres);
     public final static ItemIP itemSlag = new ItemIP(ConfigItems.ItemSlagID(), "ItemSlag",IndustrialProcessing.tabOres);
-    
-    public final static ItemIP itemLimestoneDust = new ItemIP(ConfigItems.getItemLimestoneDustID(), "ItemLimestoneDust",IndustrialProcessing.tabOres);
-    
-    
-    
+        
     public final static ItemIP itemHexKey = new ItemIP(ConfigItems.itemHexKeyID(), "itemHexKey",IndustrialProcessing.tabPower);
     public final static ItemWrench itemWrench = new ItemWrench();
     
@@ -170,6 +166,6 @@ public interface ISetupItems {
     public final static ItemIP itemLimestoneDust = new ItemIP(ConfigItems.getItemLimestoneDustID(), "itemLimestoneDust",IndustrialProcessing.tabOres);
     public final static ItemIP itemIronSinter = new ItemIP(ConfigItems.getItemIronSinterID(), "ItemIronOxidePellets",IndustrialProcessing.tabOres);
     
-    public final static ItemSuspendedCart itemSupendedCart = new ItemSuspendedCart(ConfigItems.getItemSuspenedCartID(), "ItemSupendedCart",1,IndustrialProcessing.tabOres);
+    public final static ItemSuspendedCart itemSupendedCart = new ItemSuspendedCart(ConfigItems.getItemSuspendedCartID(), "ItemSupendedCart",1,IndustrialProcessing.tabOres);
     
 }

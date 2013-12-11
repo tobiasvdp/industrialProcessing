@@ -134,7 +134,15 @@ public class ConfigItems {
     private int itemGalenaMixedFragmentsID = 6634;
     private int itemChromiteMixedFragmentsID = 6635;
     private int itemLimestoneDustID = 6636;
+    private int itemIronSinterID = 6637;
+    private int itemSuspendedCartID = 6638;
 
+    public static int getItemIronSinterID(){
+    	return getInstance().itemIronSinterID;
+    }
+    public static int getItemSuspendedCartID(){
+    	return getInstance().itemSuspendedCartID;
+    }
     public static int getItemLimestoneDustID(){
     	return getInstance().itemLimestoneDustID;
     }
