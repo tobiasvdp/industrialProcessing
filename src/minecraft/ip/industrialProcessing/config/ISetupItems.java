@@ -98,6 +98,10 @@ public interface ISetupItems {
     public final static ItemIP itemCokes = new ItemIP(ConfigItems.ItemCokesID(), "ItemCokes",IndustrialProcessing.tabOres);
     public final static ItemIP itemSlag = new ItemIP(ConfigItems.ItemSlagID(), "ItemSlag",IndustrialProcessing.tabOres);
     
+    public final static ItemIP itemLimestoneDust = new ItemIP(ConfigItems.getItemLimestoneDustID(), "ItemLimestoneDust",IndustrialProcessing.tabOres);
+    
+    
+    
     public final static ItemIP itemHexKey = new ItemIP(ConfigItems.itemHexKeyID(), "itemHexKey",IndustrialProcessing.tabPower);
     public final static ItemWrench itemWrench = new ItemWrench();
     

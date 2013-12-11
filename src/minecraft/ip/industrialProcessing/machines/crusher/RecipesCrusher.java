@@ -20,6 +20,8 @@ public class RecipesCrusher extends RecipesMachine {
     }
 
     private void addDefaultRecipes() {
+	addRecipe(limestoneToDust(3000, 1));
+	
         // pass 1
         addRecipe(copperOreToCrushedChunks(3000, 1));
         addRecipe(tinOreToCrushedChunks(3000, 1));
@@ -68,6 +70,16 @@ public class RecipesCrusher extends RecipesMachine {
         recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.bone.itemID, RecipeSlotType.INVENTORY, 1) };
 
         recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, Item.dyePowder.itemID, 16, RecipeSlotType.INVENTORY, 3, 6, 0.25) };
+        recipe.workRequired = workTime;
+        recipe.powerRequired = powerConsumption;
+        return recipe;
+    }
+
+    private Recipe limestoneToDust(int workTime, int powerConsumption) {
+        Recipe recipe = new Recipe();
+        recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.blockCobbleLimestone.blockID, RecipeSlotType.INVENTORY, 1) };
+
+        recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemLimestoneDust.itemID, RecipeSlotType.INVENTORY, 1, 2, 0) };
         recipe.workRequired = workTime;
         recipe.powerRequired = powerConsumption;
         return recipe;

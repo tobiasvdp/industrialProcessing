@@ -133,7 +133,11 @@ public class ConfigItems {
     private int itemGoldMixedFragmentsID = 6633;
     private int itemGalenaMixedFragmentsID = 6634;
     private int itemChromiteMixedFragmentsID = 6635;
+    private int itemLimestoneDustID = 6636;
 
+    public static int getItemLimestoneDustID(){
+    	return getInstance().itemLimestoneDustID;
+    }
     public static int getItemTaliaMixedFragmentsID(){
     	return getInstance().itemTaliaMixedFragmentsID;
     }
@@ -575,6 +579,7 @@ public class ConfigItems {
     }
 
     public static void addToLanguageRegistry() {
+	LanguageRegistry.addName(ISetupItems.itemLimestoneDust, "Limestone dust");
     	LanguageRegistry.addName(ISetupItems.itemScreen, "Screen");
     	LanguageRegistry.addName(ISetupItems.itemFrame, "Frame");
     	LanguageRegistry.addName(ISetupItems.itemWovenPatern, "Woven pattern");
