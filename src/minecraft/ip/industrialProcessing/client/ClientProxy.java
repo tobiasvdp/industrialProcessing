@@ -126,6 +126,9 @@ import ip.industrialProcessing.transport.items.conveyorOutput.TileEntityConveyor
 import ip.industrialProcessing.transport.items.conveyorSorter.ModelConveyorSorter;
 import ip.industrialProcessing.transport.items.conveyorSorter.ModelConveyorSorterBlock;
 import ip.industrialProcessing.transport.items.conveyorSorter.TileEntityConveyorSorter;
+import ip.industrialProcessing.transport.steve.railway.suspended.cart.EntityFloatingCart;
+import ip.industrialProcessing.transport.steve.railway.suspended.cart.ModelFloatingCart;
+import ip.industrialProcessing.transport.steve.railway.suspended.cart.RenderFloatingCart;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
@@ -202,6 +205,7 @@ public class ClientProxy extends CommonProxy {
     private static final ModelDistillationElementBlock destillationElementBlock = new ModelDistillationElementBlock();
     private static final ModelAtmosphericDestillationTowerBlock destillationTowerBlock = new ModelAtmosphericDestillationTowerBlock();
     private static final ModelFlotationCellBlock flotationCellBlock = new ModelFlotationCellBlock();
+   
     @Override
     public void registerRenderers() {
         // 100% block
@@ -402,5 +406,8 @@ public class ClientProxy extends CommonProxy {
 
         RenderingRegistry.registerEntityRenderingHandler(ENmultiblockFrame.class, new RendererLivingEntity(new MDmultiblockFramePanel(), 1.0F, "MDmultiblockFramePanel"));
         RenderingRegistry.registerEntityRenderingHandler(ENmultiblockLiftDoor.class, new RendererLivingEntity(new MDmultiblockLiftDoor(), 1.0F, "ModelMultiblockLiftDoor"));
+        
+        RenderingRegistry.registerEntityRenderingHandler(EntityFloatingCart.class, new RenderFloatingCart(new ModelFloatingCart(), 0.5F));
+
     }
 }

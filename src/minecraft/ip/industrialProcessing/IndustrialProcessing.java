@@ -8,6 +8,7 @@ import ip.industrialProcessing.config.ConfigDamageSource;
 import ip.industrialProcessing.config.ConfigFluids;
 import ip.industrialProcessing.config.ConfigItems;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
+import ip.industrialProcessing.config.ConfigTransportBlocks;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupAchievements;
 import ip.industrialProcessing.config.ISetupBlocks;
@@ -16,11 +17,13 @@ import ip.industrialProcessing.config.ISetupDamageSource;
 import ip.industrialProcessing.config.ISetupFluids;
 import ip.industrialProcessing.config.ISetupItems;
 import ip.industrialProcessing.config.ISetupMachineBlocks;
+import ip.industrialProcessing.config.ISetupTransportBlocks;
 import ip.industrialProcessing.decoration.trees.EventBonemealIndustrialTree;
 import ip.industrialProcessing.fluids.BucketHandler;
 import ip.industrialProcessing.fluids.ContainerHandler;
 import ip.industrialProcessing.multiblock.dummy.block.frame.ENmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.ENmultiblockLiftDoor;
+import ip.industrialProcessing.utils.EventEntityRightClick;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,8 +44,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = "IndustrialProcessing", name = "Industrial Processing", version = "0.0.1", dependencies = "after:NotEnoughItems")
-@NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = { PacketHandler.ANIMATION_SYNC, PacketHandler.TANK_SYNC, PacketHandler.CONVEYOR_SYNC, PacketHandler.BUTTON_PRESSED, PacketHandler.SYNC_CLIENT, PacketHandler.SEND_INFO, PacketHandler.SCREEN_PRESSED, PacketHandler.IP_ELEVATOR_BUTTON, PacketHandler.IP_LOGIC_SYNCSIDE }, packetHandler = PacketHandler.class)
-public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISetupMachineBlocks, ISetupItems, ISetupBlocks, ISetupFluids, ISetupAchievements, ISetupDamageSource {
+@NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = { PacketHandler.ANIMATION_SYNC, PacketHandler.TANK_SYNC, PacketHandler.CONVEYOR_SYNC, PacketHandler.BUTTON_PRESSED, PacketHandler.SYNC_CLIENT, PacketHandler.SEND_INFO, PacketHandler.SCREEN_PRESSED, PacketHandler.IP_ELEVATOR_BUTTON, PacketHandler.IP_LOGIC_SYNCSIDE, PacketHandler.IP_ENTITY_INTERACT }, packetHandler = PacketHandler.class)
+public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISetupMachineBlocks, ISetupItems, ISetupBlocks, ISetupFluids, ISetupAchievements, ISetupDamageSource, ISetupTransportBlocks {
     // The instance of your mod that Forge uses.
     @Instance("IndustrialProcessing")
     public static IndustrialProcessing instance;
@@ -86,7 +89,8 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
         // register listeners for events
         MinecraftForge.EVENT_BUS.register(ContainerHandler.INSTANCE);
         MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
-        MinecraftForge.EVENT_BUS.register(this); 
+        MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(new EventEntityRightClick()); 
         MinecraftForge.EVENT_BUS.register(new EventBonemealIndustrialTree());
 
         log = event.getModLog();
@@ -110,6 +114,9 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
 
         // register machines, power, transport
         ConfigMachineBlocks.getInstance().registerMachineBlocks();
+        
+        //register transport
+        ConfigTransportBlocks.getInstance().register();
 
         // register ores
         ConfigBlocks.getInstance().registerOres();

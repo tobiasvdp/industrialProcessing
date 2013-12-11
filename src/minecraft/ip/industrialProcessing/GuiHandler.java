@@ -31,6 +31,9 @@ import ip.industrialProcessing.machines.hydroCyclone.TileEntityHydroCyclone;
 import ip.industrialProcessing.machines.insulator.ContainerInsulator;
 import ip.industrialProcessing.machines.insulator.GuiContainerInsulator;
 import ip.industrialProcessing.machines.insulator.TileEntityInsulator;
+import ip.industrialProcessing.machines.kiln.ContainerKiln;
+import ip.industrialProcessing.machines.kiln.GuiContainerKiln;
+import ip.industrialProcessing.machines.kiln.TileEntityKiln;
 import ip.industrialProcessing.machines.magneticSeparator.ContainerMagneticSeparator;
 import ip.industrialProcessing.machines.magneticSeparator.GuiContainerMagneticSeparator;
 import ip.industrialProcessing.machines.magneticSeparator.TileEntityMagneticSeparator;
@@ -67,6 +70,9 @@ import ip.industrialProcessing.machines.plants.waste.waterTreatment.tricklingFil
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatmentStation.ContainerWaterTreatmentStation;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatmentStation.GuiContainerWaterTreatmentStation;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatmentStation.TileEntityWaterTreatmentStation;
+import ip.industrialProcessing.machines.sinter.ContainerSinter;
+import ip.industrialProcessing.machines.sinter.GuiContainerSinter;
+import ip.industrialProcessing.machines.sinter.TileEntitySinter;
 import ip.industrialProcessing.machines.spoolWindingMachine.ContainerSpoolWindingMachine;
 import ip.industrialProcessing.machines.spoolWindingMachine.GuiContainerSpoolWindingMachine;
 import ip.industrialProcessing.machines.spoolWindingMachine.TileEntitySpoolWindingMachine;
@@ -237,6 +243,10 @@ public class GuiHandler implements IGuiHandler {
                 return new ContainerMeroxTreater(player.inventory, (TileEntityMeroxTreater) entity);
             if (entity instanceof TileEntityVacuumDestilationTower)
                 return new ContainerVacuumDestilationTower(player.inventory, (TileEntityVacuumDestilationTower) entity);
+            if (entity instanceof TileEntitySinter)
+                return new ContainerSinter(player.inventory, (TileEntitySinter) entity);
+            if (entity instanceof TileEntityKiln)
+                return new ContainerKiln(player.inventory, (TileEntityKiln) entity);
         } else if (ID == GUIDE_ID)
             return null;
         return null;
@@ -337,6 +347,10 @@ public class GuiHandler implements IGuiHandler {
                 return new GuiContainerMeroxTreater(player.inventory, (TileEntityMeroxTreater) entity);
             if (entity instanceof TileEntityVacuumDestilationTower)
                 return new GuiContainerVacuumDestilationTower(player.inventory, (TileEntityVacuumDestilationTower) entity);
+            if (entity instanceof TileEntitySinter)
+                return new GuiContainerSinter(player.inventory, (TileEntitySinter) entity);
+            if (entity instanceof TileEntityKiln)
+                return new GuiContainerKiln(player.inventory, (TileEntityKiln) entity);
         } else if (ID == GUIDE_ID)
             return new GuiGuide(player);
         return null;

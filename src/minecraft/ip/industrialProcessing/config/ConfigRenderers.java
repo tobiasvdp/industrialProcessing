@@ -79,6 +79,24 @@ public class ConfigRenderers {
     private int rendererHydroTreater;
     private int rendererMeroxTreater;
     private int rendererVacuumDestilationTower;
+    private int rendererSinter;
+    private int rendererKiln;
+
+    public static int getRendererKilnId() {
+        return getInstance().rendererKiln;
+    }
+
+    public static void setRendererKilnId(int value) {
+        getInstance().rendererKiln = value;
+    }
+    
+    public static int getRendererSinterId() {
+        return getInstance().rendererSinter;
+    }
+
+    public static void setRendererSinterId(int value) {
+        getInstance().rendererSinter = value;
+    }
     
     public static int getRendererCatalyticReformer() {
         return getInstance().rendererCatalyticReformer;

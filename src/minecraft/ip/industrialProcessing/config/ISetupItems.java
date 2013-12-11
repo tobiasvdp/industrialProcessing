@@ -4,6 +4,7 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.items.ItemDamage;
 import ip.industrialProcessing.items.ItemGuide;
 import ip.industrialProcessing.items.ItemIP;
+import ip.industrialProcessing.items.ItemSuspendedCart;
 import ip.industrialProcessing.items.ItemPaintBrush;
 import ip.industrialProcessing.items.ItemWrench;
 
@@ -165,5 +166,10 @@ public interface ISetupItems {
     public final static ItemIP itemGoldMixedFragments = new ItemIP(ConfigItems.getItemGoldMixedFragmentsID(), "itemGoldMixedFragments",IndustrialProcessing.tabOres);
     public final static ItemIP itemGalenaMixedFragments = new ItemIP(ConfigItems.getItemGalenaMixedFragmentsID(), "itemGalenaMixedFragments",IndustrialProcessing.tabOres);
     public final static ItemIP itemChromiteMixedFragments = new ItemIP(ConfigItems.getItemChromiteMixedFragmentsID(), "itemChromiteMixedFragments",IndustrialProcessing.tabOres);
+    
+    public final static ItemIP itemLimestoneDust = new ItemIP(ConfigItems.getItemLimestoneDustID(), "itemLimestoneDust",IndustrialProcessing.tabOres);
+    public final static ItemIP itemIronSinter = new ItemIP(ConfigItems.getItemIronSinterID(), "ItemIronOxidePellets",IndustrialProcessing.tabOres);
+    
+    public final static ItemSuspendedCart itemSupendedCart = new ItemSuspendedCart(ConfigItems.getItemSuspenedCartID(), "ItemSupendedCart",1,IndustrialProcessing.tabOres);
     
 }
