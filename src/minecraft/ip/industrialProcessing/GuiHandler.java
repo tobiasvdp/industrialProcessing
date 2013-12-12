@@ -88,6 +88,9 @@ import ip.industrialProcessing.machines.treetap.TileEntityManualTreeTap;
 import ip.industrialProcessing.machines.wireMill.ContainerWireMill;
 import ip.industrialProcessing.machines.wireMill.GuiContainerWireMill;
 import ip.industrialProcessing.machines.wireMill.TileEntityWireMill;
+import ip.industrialProcessing.multiblock.core.block.blastFurnace.ContainerMultiblockBlastFurnace;
+import ip.industrialProcessing.multiblock.core.block.blastFurnace.GuiContainerMultiblockBlastFurnace;
+import ip.industrialProcessing.multiblock.core.block.blastFurnace.TEmultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.CatalyticReformer.ContainerCatalyticReformer;
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.CatalyticReformer.GuiContainerCatalyticReformer;
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.CatalyticReformer.TileEntityCatalyticReformer;
@@ -247,6 +250,8 @@ public class GuiHandler implements IGuiHandler {
                 return new ContainerSinter(player.inventory, (TileEntitySinter) entity);
             if (entity instanceof TileEntityKiln)
                 return new ContainerKiln(player.inventory, (TileEntityKiln) entity);
+            if (entity instanceof TEmultiblockBlastFurnace)
+                return new ContainerMultiblockBlastFurnace(player.inventory, (TEmultiblockBlastFurnace) entity);
         } else if (ID == GUIDE_ID)
             return null;
         return null;
@@ -351,6 +356,8 @@ public class GuiHandler implements IGuiHandler {
                 return new GuiContainerSinter(player.inventory, (TileEntitySinter) entity);
             if (entity instanceof TileEntityKiln)
                 return new GuiContainerKiln(player.inventory, (TileEntityKiln) entity);
+            if (entity instanceof TEmultiblockBlastFurnace)
+                return new GuiContainerMultiblockBlastFurnace(player.inventory, (TEmultiblockBlastFurnace) entity);
         } else if (ID == GUIDE_ID)
             return new GuiGuide(player);
         return null;
