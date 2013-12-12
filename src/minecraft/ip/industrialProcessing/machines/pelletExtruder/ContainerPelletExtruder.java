@@ -1,30 +1,45 @@
 package ip.industrialProcessing.machines.pelletExtruder;
 
-import ip.industrialProcessing.machines.containers.ContainerMachine;
+import ip.industrialProcessing.machines.containers.ContainerPoweredWorkerMachine;
+import ip.industrialProcessing.machines.kiln.TileEntityKiln;
 import ip.industrialProcessing.slots.SlotBase;
+import ip.industrialProcessing.slots.SlotOutput;
 import ip.industrialProcessing.utils.containers.ContainerUtils;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Slot;
 
-public class ContainerPelletExtruder extends ContainerMachine {
+public class ContainerPelletExtruder extends ContainerPoweredWorkerMachine {
 
-	private SlotBase inputSlot;
-	private SlotBase outputSlot;
+    protected Slot[] slots;
 
-	public ContainerPelletExtruder(InventoryPlayer inventoryPlayer, TileEntityPelletExtruder tileEntity) {
-		super(inventoryPlayer, tileEntity);
+    protected TileEntityPelletExtruder tileEntityPE;
 
-		inputSlot = new SlotBase(tileEntity, 0, 50, 31);
-		outputSlot = new SlotBase(tileEntity, 1, 110, 31);
+    @Override
+    public boolean canInteractWith(EntityPlayer entityplayer) {
+	return tileEntityPE.isUseableByPlayer(entityplayer);
+    }
 
-		addSlotToContainer(inputSlot);
-		addSlotToContainer(outputSlot);
+    public ContainerPelletExtruder(InventoryPlayer inventoryPlayer, TileEntityPelletExtruder tileEntityPE) {
+	super(inventoryPlayer, tileEntityPE);
+	this.tileEntityPE = tileEntityPE;
 
-		ContainerUtils.BindPlayerInventory(inventoryPlayer, this, 0);
-	}
+	slots = new Slot[2];
+	slots[0] = new SlotBase(tileEntityPE, 0, 50, 31);
+	slots[1] = new SlotOutput(tileEntityPE, 1, 110, 31);
 
-	@Override
-	public int getSizeInventory() {
-		return 2;
-	}
+	addSlotToContainer(slots[0]);
+	addSlotToContainer(slots[1]);
+
+	ContainerUtils.BindPlayerInventory(inventoryPlayer, this, 0);
+
+	addWorkerToContainer(tileEntityPE.getWorker());
+	addPowerToContainer(tileEntityPE.getMainPowerStorage());
+    }
+
+    @Override
+    public int getSizeInventory() {
+	return slots.length;
+    }
 
 }

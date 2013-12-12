@@ -136,7 +136,11 @@ public class ConfigItems {
     private int itemLimestoneDustID = 6636;
     private int itemIronSinterID = 6637;
     private int itemSuspendedCartID = 6638;
+    private int itemCokePelletID = 6639;
 
+    public static int getItemCokePelletID() {
+	return getInstance().itemCokePelletID;
+    }
     public static int getItemIronSinterID(){
     	return getInstance().itemIronSinterID;
     }
@@ -587,6 +591,7 @@ public class ConfigItems {
     }
 
     public static void addToLanguageRegistry() {
+	LanguageRegistry.addName(ISetupItems.itemCokePellet, "Coke pellet");
 	LanguageRegistry.addName(ISetupItems.itemLimestoneDust, "Limestone dust");
     	LanguageRegistry.addName(ISetupItems.itemScreen, "Screen");
     	LanguageRegistry.addName(ISetupItems.itemFrame, "Frame");
@@ -666,7 +671,7 @@ public class ConfigItems {
         LanguageRegistry.addName(ISetupItems.itemKnife, "Knife");
         LanguageRegistry.addName(ISetupItems.itemBlowingTorch, "Blow torch");
 
-        LanguageRegistry.addName(ISetupItems.itemIronOxidePellets, "Iron pellets");
+        LanguageRegistry.addName(ISetupItems.itemIronSinter, "Iron sinter");
         LanguageRegistry.addName(ISetupItems.itemCalcareousSinterDust, "Calcareous sinter dust");
         LanguageRegistry.addName(ISetupItems.itemCokes, "Cokes");
         LanguageRegistry.addName(ISetupItems.itemSlag, "Slag");

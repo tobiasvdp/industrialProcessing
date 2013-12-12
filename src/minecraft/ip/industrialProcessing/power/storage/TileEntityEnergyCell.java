@@ -25,7 +25,7 @@ public class TileEntityEnergyCell extends TileEntityPowerGenerator implements IP
 	private static final LocalDirection outputSide = LocalDirection.BACK;
 
 	private float storedJoules = 0;
-	private float totalJouleCapacity = 50000;
+	private float totalJouleCapacity = 100000;
 
 	private AnimationHandler animation;
 
@@ -58,7 +58,7 @@ public class TileEntityEnergyCell extends TileEntityPowerGenerator implements IP
 		super.updateEntity();
 		if (!this.worldObj.isRemote) {
 			float targetProgress = (float) this.storedJoules / this.totalJouleCapacity;
-			float speed = (targetProgress - this.animation.getProgress()) * this.animation.DT * 0.5f;
+			float speed = (targetProgress - this.animation.getProgress()) ;
 			boolean incrementing = true;
 			if (speed < 0) {
 				speed = -speed;
@@ -66,10 +66,11 @@ public class TileEntityEnergyCell extends TileEntityPowerGenerator implements IP
 			}
 			this.animation.setSpeed(speed);
 			this.animation.setIncrementing(incrementing);
-			TileAnimationSyncHandler.sendAnimationData(this, this.animation);
-		}
 		this.animation.update();
-
+			TileAnimationSyncHandler.sendAnimationData(this, this.animation);
+			System.out.println(this.storedJoules+" -> "+targetProgress);
+		}else
+			this.animation.update();
 	}
 
 	@Override

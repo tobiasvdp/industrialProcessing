@@ -37,7 +37,8 @@ public class TileEntityKiln extends TileEntityPoweredWorkerMachine implements IH
 	@Override
 	public void updateEntity() {
 		((SimplePowerStorage)getMainPowerStorage()).drainPower(1, true);
-		super.updateEntity();
+		if(getMainPowerStorage().getStoredPower() > 8000)
+		    super.updateEntity();
 		
 	}
 	
