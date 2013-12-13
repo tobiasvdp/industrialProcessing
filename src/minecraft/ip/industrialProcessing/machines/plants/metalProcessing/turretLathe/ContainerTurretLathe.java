@@ -5,7 +5,7 @@ import ip.industrialProcessing.machines.containers.ContainerPoweredFluidWorkerMa
 import ip.industrialProcessing.slots.SlotBase;
 import ip.industrialProcessing.utils.containers.ContainerUtils;
 import net.minecraft.entity.player.InventoryPlayer;
-import buildcraft.core.gui.slots.SlotOutput;
+import ip.industrialProcessing.slots.SlotOutput;
 
 public class ContainerTurretLathe  extends ContainerPoweredFluidWorkerMachine {
 

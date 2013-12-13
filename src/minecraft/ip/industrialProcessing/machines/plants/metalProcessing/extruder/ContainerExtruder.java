@@ -1,6 +1,6 @@
 package ip.industrialProcessing.machines.plants.metalProcessing.extruder;
 
-import buildcraft.core.gui.slots.SlotOutput;
+import ip.industrialProcessing.slots.SlotOutput;
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
 import ip.industrialProcessing.machines.containers.ContainerFluidMachine;
 import ip.industrialProcessing.machines.containers.ContainerPoweredFluidWorkerMachine;
