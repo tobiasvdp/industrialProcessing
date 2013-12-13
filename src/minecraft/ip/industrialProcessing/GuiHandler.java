@@ -16,9 +16,6 @@ import ip.industrialProcessing.machines.dryer.TileEntityDryer;
 import ip.industrialProcessing.machines.electrolyser.ContainerElectrolyser;
 import ip.industrialProcessing.machines.electrolyser.GuiContainerElectrolyser;
 import ip.industrialProcessing.machines.electrolyser.TileEntityElectrolyser;
-import ip.industrialProcessing.machines.extruder.ContainerExtruder;
-import ip.industrialProcessing.machines.extruder.GuiContainerExtruder;
-import ip.industrialProcessing.machines.extruder.TileEntityExtruder;
 import ip.industrialProcessing.machines.filter.ContainerFilter;
 import ip.industrialProcessing.machines.filter.GuiContainerFilter;
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
@@ -46,6 +43,18 @@ import ip.industrialProcessing.machines.oxygenFurnace.TileEntityOxygenFurnace;
 import ip.industrialProcessing.machines.pelletExtruder.ContainerPelletExtruder;
 import ip.industrialProcessing.machines.pelletExtruder.GuiContainerPelletExtruder;
 import ip.industrialProcessing.machines.pelletExtruder.TileEntityPelletExtruder;
+import ip.industrialProcessing.machines.plants.metalProcessing.extruder.ContainerExtruder;
+import ip.industrialProcessing.machines.plants.metalProcessing.extruder.GuiContainerExtruder;
+import ip.industrialProcessing.machines.plants.metalProcessing.extruder.TileEntityExtruder;
+import ip.industrialProcessing.machines.plants.metalProcessing.sandCaster.ContainerSandCaster;
+import ip.industrialProcessing.machines.plants.metalProcessing.sandCaster.GuiContainerSandCaster;
+import ip.industrialProcessing.machines.plants.metalProcessing.sandCaster.TileEntitySandCaster;
+import ip.industrialProcessing.machines.plants.metalProcessing.turretLathe.ContainerTurretLathe;
+import ip.industrialProcessing.machines.plants.metalProcessing.turretLathe.GuiContainerTurretLathe;
+import ip.industrialProcessing.machines.plants.metalProcessing.turretLathe.TileEntityTurretLathe;
+import ip.industrialProcessing.machines.plants.metalProcessing.vacuumCaster.ContainerVacuumCaster;
+import ip.industrialProcessing.machines.plants.metalProcessing.vacuumCaster.GuiContainerVacuumCaster;
+import ip.industrialProcessing.machines.plants.metalProcessing.vacuumCaster.TileEntityVacuumCaster;
 import ip.industrialProcessing.machines.plants.oilRefinary.AlkylationUnit.ContainerAlkylationUnit;
 import ip.industrialProcessing.machines.plants.oilRefinary.AlkylationUnit.GuiContainerAlkylationUnit;
 import ip.industrialProcessing.machines.plants.oilRefinary.AlkylationUnit.TileEntityAlkylationUnit;
@@ -252,6 +261,12 @@ public class GuiHandler implements IGuiHandler {
                 return new ContainerKiln(player.inventory, (TileEntityKiln) entity);
             if (entity instanceof TEmultiblockBlastFurnace)
                 return new ContainerMultiblockBlastFurnace(player.inventory, (TEmultiblockBlastFurnace) entity);
+            if (entity instanceof TileEntitySandCaster)
+                return new ContainerSandCaster(player.inventory, (TileEntitySandCaster) entity);
+            if (entity instanceof TileEntityVacuumCaster)
+                return new ContainerVacuumCaster(player.inventory, (TileEntityVacuumCaster) entity);
+            if (entity instanceof TileEntityTurretLathe)
+                return new ContainerTurretLathe(player.inventory, (TileEntityTurretLathe) entity);
         } else if (ID == GUIDE_ID)
             return null;
         return null;
@@ -358,6 +373,12 @@ public class GuiHandler implements IGuiHandler {
                 return new GuiContainerKiln(player.inventory, (TileEntityKiln) entity);
             if (entity instanceof TEmultiblockBlastFurnace)
                 return new GuiContainerMultiblockBlastFurnace(player.inventory, (TEmultiblockBlastFurnace) entity);
+            if (entity instanceof TileEntitySandCaster)
+                return new GuiContainerSandCaster(player.inventory, (TileEntitySandCaster) entity);
+            if (entity instanceof TileEntityVacuumCaster)
+                return new GuiContainerVacuumCaster(player.inventory, (TileEntityVacuumCaster) entity);
+            if (entity instanceof TileEntityTurretLathe)
+                return new GuiContainerTurretLathe(player.inventory, (TileEntityTurretLathe) entity);
         } else if (ID == GUIDE_ID)
             return new GuiGuide(player);
         return null;

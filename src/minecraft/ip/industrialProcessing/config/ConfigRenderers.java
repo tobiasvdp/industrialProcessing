@@ -81,6 +81,26 @@ public class ConfigRenderers {
     private int rendererVacuumDestilationTower;
     private int rendererSinter;
     private int rendererKiln;
+    private int rendererExtruder;
+    private int rendererVacuumCaster;
+    private int rendererTurretLathe;
+    private int rendererSandCaster;
+
+    public static int getRendererSandCasterId() {
+        return getInstance().rendererSandCaster;
+    }
+    
+    public static int getRendererTurretLatheId() {
+        return getInstance().rendererTurretLathe;
+    }
+    
+    public static int getRendererVacuumCasterId() {
+        return getInstance().rendererVacuumCaster;
+    }
+    
+    public static int getRendererExtruderId() {
+        return getInstance().rendererExtruder;
+    }
 
     public static int getRendererKilnId() {
         return getInstance().rendererKiln;

@@ -23,63 +23,60 @@ public class TEmultiblockBlastFurnace extends TEmultiblockCoreTankWorkerPowered 
 	static StructureMultiblock structure;
 	static TierCollection tierRequirments;
 	public static RecipesMachine recipes = new RecipesMultiblockBlastFurnace();
-	static{
-		//set layout
+	static {
+		// set layout
 		structure = new StructureMultiblock();
-		
+
 		LayoutMultiblock layout = new LayoutMultiblock(0, 0, 0, 0, 1, 0);
-		
+
 		int i = 0;
-		layout.setCoreID(i++,0,0, IndustrialProcessing.BLmultiblockBlastFurnace.blockID);
-		layout.setBlockID(0, 1, 0, i++, 0, 0, IndustrialProcessing.BLmultiblockBlastFurnaceTower.blockID);
-		
+		layout.setCoreID(i++, 0, 0, IndustrialProcessing.BLmultiblockBlastFurnace.blockID);
+		layout.setBlockIDwithGroup(0, 1, 0, i++, 0, 0,1, IndustrialProcessing.BLmultiblockBlastFurnaceTower.blockID);
+
 		structure.addLayout(layout, FacingDirection.North);
 		structure.addLayout(LayoutTransformer.transform(layout, FacingDirection.East), FacingDirection.East);
 		structure.addLayout(LayoutTransformer.transform(layout, FacingDirection.South), FacingDirection.South);
 		structure.addLayout(LayoutTransformer.transform(layout, FacingDirection.West), FacingDirection.West);
-		
-		
-		//set tiers
+
+		// set tiers
 		tierRequirments = new TierCollection(1);
-		
+
 		Tier tier = new Tier();
 		tierRequirments.addTier(tier, Tiers.Tier0);
 
 	}
+
 	public TEmultiblockBlastFurnace() {
 		super(structure, tierRequirments, recipes, LocalDirection.LEFT, 10000, 100);
 		LocalDirection[] nodirections = new LocalDirection[0];
-		
+
 		this.addStack(null, nodirections, true, false);
 		this.addStack(null, nodirections, true, false);
 		this.addTank(10000, 0, new ForgeDirection[] { ForgeDirection.UNKNOWN }, true, false);
-		
-		this.addTank(10000, 1, new ForgeDirection[] { ForgeDirection.UP }, false, true);
-		this.addTank(10000, 0, new ForgeDirection[] { ForgeDirection.WEST }, false, true);
+
 		this.addTank(10000, 0, new ForgeDirection[] { ForgeDirection.DOWN }, false, true);
-		
+		this.addTank(10000, 0, new ForgeDirection[] { ForgeDirection.WEST }, false, true);
+		this.addTank(10000, 1, new ForgeDirection[] { ForgeDirection.UP }, false, true);
+
 	}
-	
+
 	@Override
 	public void updateEntity() {
 		this.fill(0, ForgeDirection.UNKNOWN, new FluidStack(IndustrialProcessing.itemFluidAir, 5), true);
 		super.updateEntity();
 	}
-	
+
 	@Override
 	protected boolean isValidInput(int slot, int itemID) {
-	    return recipes.isValidInput(slot, itemID);
+		return recipes.isValidInput(slot, itemID);
 	}
+
 	@Override
 	protected boolean isTankValidForFluid(int groupid, int slot, int fluidId) {
-		if(groupid == -1)
+		if (getTankInSlot(slot).getMultiblockID() == groupid) {
 			return recipes.isValidFluidInput(slot, fluidId);
-		else{
-			if(getTankInSlot(slot).getMultiblockID() == groupid){
-				return recipes.isValidFluidInput(slot, fluidId);
-			}else{
-				return false;
-			}
+		} else {
+			return false;
 		}
 	}
 }

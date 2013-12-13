@@ -10,7 +10,6 @@ import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import ip.industrialProcessing.machines.diskFilter.TileEntityDiskFilter;
 import ip.industrialProcessing.machines.dryer.TileEntityDryer;
 import ip.industrialProcessing.machines.electrolyser.TileEntityElectrolyser;
-import ip.industrialProcessing.machines.extruder.TileEntityExtruder;
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
 import ip.industrialProcessing.machines.flotationCell.TileEntityFlotationCell;
 import ip.industrialProcessing.machines.hydroCyclone.TileEntityHydroCyclone;
@@ -20,6 +19,10 @@ import ip.industrialProcessing.machines.magneticSeparator.TileEntityMagneticSepa
 import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import ip.industrialProcessing.machines.oxygenFurnace.TileEntityOxygenFurnace;
 import ip.industrialProcessing.machines.pelletExtruder.TileEntityPelletExtruder;
+import ip.industrialProcessing.machines.plants.metalProcessing.extruder.TileEntityExtruder;
+import ip.industrialProcessing.machines.plants.metalProcessing.sandCaster.TileEntitySandCaster;
+import ip.industrialProcessing.machines.plants.metalProcessing.turretLathe.TileEntityTurretLathe;
+import ip.industrialProcessing.machines.plants.metalProcessing.vacuumCaster.TileEntityVacuumCaster;
 import ip.industrialProcessing.machines.plants.oilRefinary.AlkylationUnit.TileEntityAlkylationUnit;
 import ip.industrialProcessing.machines.plants.oilRefinary.asphaltBlower.TileEntityAsphaltBlower;
 import ip.industrialProcessing.machines.plants.oilRefinary.gasProcessor.TileEntityGasProcessor;
@@ -115,6 +118,9 @@ public class ConfigMachineBlocks {
     private int diskFilterBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "DiskFilterID", 509).getInt();
     private int sinterBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "sinterBlockID", 510).getInt();
     private int kilnBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "kilnBlockID", 511).getInt();
+    private int vacuumCasterBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "vacuumCasterBlockID", 512).getInt();
+    private int turretLatheBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "turretLatheBlockID", 513).getInt();
+    private int sandCasterBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "sandCasterBlockID", 514).getInt();
 
     private int blastFurnaceID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "BlastFurnaceID", 550).getInt();
     private int extruderID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "ExtruderID", 551).getInt();
@@ -197,6 +203,10 @@ public class ConfigMachineBlocks {
     	registerMachineBlock(ISetupMachineBlocks.blockIsomerizationReactor, "IP.Machine.IsoReac", "Isomerization reactor", TileEntityIsomerizationReactor.class);
     	registerMachineBlock(ISetupMachineBlocks.blockSourWaterStripper, "IP.Machine.SRstrip", "Sour water Stripper", TileEntitySourWaterStripper.class);
     	registerMachineBlock(ISetupMachineBlocks.blockElectrolyser, "IP.Machine.Ellyser", "Electrolyser", TileEntityElectrolyser.class);
+    	
+    	registerMachineBlock(ISetupMachineBlocks.blockVacuumCaster, "IP.Machine.VacCast", "Vacuum caster", TileEntityVacuumCaster.class);
+    	registerMachineBlock(ISetupMachineBlocks.blockSandCaster, "IP.Machine.SandCast", "Sand caster", TileEntitySandCaster.class);
+    	registerMachineBlock(ISetupMachineBlocks.blockTurretLathe, "IP.Machine.TurrLat", "Turret lathe", TileEntityTurretLathe.class);
     	
 
         registerMachineBlock(ISetupMachineBlocks.blockConveyorBelt, "IP.Trans.CBelt", "Conveyor belt", TileEntityConveyorBelt.class);
@@ -313,7 +323,19 @@ public class ConfigMachineBlocks {
     public static ConfigMachineBlocks getInstance() {
         return instance;
     }
-        
+
+    public static int getBlockVacuumCasterID() {
+        return getInstance().vacuumCasterBlockID;
+    }
+    
+    public static int getBlockTurretLatheID() {
+        return getInstance().turretLatheBlockID;
+    }
+    
+    public static int getBlockSandCasterID() {
+        return getInstance().sandCasterBlockID;
+    }
+    
     public static int getBlockAmineTreaterID() {
         return getInstance().blockAmineTreaterID;
     }

@@ -7,7 +7,6 @@ import ip.industrialProcessing.machines.crusher.BlockCrusher;
 import ip.industrialProcessing.machines.diskFilter.BlockDiskFilter;
 import ip.industrialProcessing.machines.dryer.BlockDryer;
 import ip.industrialProcessing.machines.electrolyser.blockElectrolyser;
-import ip.industrialProcessing.machines.extruder.BlockExtruder;
 import ip.industrialProcessing.machines.filter.BlockFilter;
 import ip.industrialProcessing.machines.flotationCell.BlockFlotationCell;
 import ip.industrialProcessing.machines.hydroCyclone.BlockHydroCyclone;
@@ -17,6 +16,10 @@ import ip.industrialProcessing.machines.magneticSeparator.BlockMagneticSeparator
 import ip.industrialProcessing.machines.mixer.BlockMixer;
 import ip.industrialProcessing.machines.oxygenFurnace.BlockOxygenFurnace;
 import ip.industrialProcessing.machines.pelletExtruder.BlockPelletExtruder;
+import ip.industrialProcessing.machines.plants.metalProcessing.extruder.BlockExtruder;
+import ip.industrialProcessing.machines.plants.metalProcessing.sandCaster.BlockSandCaster;
+import ip.industrialProcessing.machines.plants.metalProcessing.turretLathe.BlockTurretLathe;
+import ip.industrialProcessing.machines.plants.metalProcessing.vacuumCaster.BlockVacuumCaster;
 import ip.industrialProcessing.machines.plants.oilRefinary.AlkylationUnit.BlockAlkylationUnit;
 import ip.industrialProcessing.machines.plants.oilRefinary.asphaltBlower.BlockAsphaltBlower;
 import ip.industrialProcessing.machines.plants.oilRefinary.gasProcessor.BlockGasProcessor;
@@ -118,6 +121,9 @@ public interface ISetupMachineBlocks {
     public final static BlockIsomerizationReactor blockIsomerizationReactor = new BlockIsomerizationReactor();
     public final static BlockSinter blockSinter = new BlockSinter();
     public final static BlockKiln blockKiln = new BlockKiln();
+    public final static BlockSandCaster blockSandCaster = new BlockSandCaster();
+    public final static BlockTurretLathe blockTurretLathe = new BlockTurretLathe();
+    public final static BlockVacuumCaster blockVacuumCaster = new BlockVacuumCaster();
 
     // create generators
     public final static BlockManualGenerator blockManualGenerator = new BlockManualGenerator();
