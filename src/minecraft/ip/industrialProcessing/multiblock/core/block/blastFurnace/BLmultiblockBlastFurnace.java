@@ -22,4 +22,5 @@ public class BLmultiblockBlastFurnace  extends BLmultiblockCore{
 		return ConfigRenderers.getrendererMultiblockBlastFurnaceID();
 	}
 
+
 }

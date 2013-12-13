@@ -133,7 +133,6 @@ public class MDmultiblockBlastFurnace extends ModelingMultiblock {
 
 		
 		public void renderModel(float f5, int connection) {
-			
 			footBack.render(f5);
 			panelLeft.render(f5);
 			panelBottom.render(f5);
@@ -166,5 +165,23 @@ public class MDmultiblockBlastFurnace extends ModelingMultiblock {
 			panelFront.render(f5);
 			panelBack.render(f5);
 			outputBack.render(f5);
+		}
+		
+		@Override
+		public void renderModel(float f, int modelConnection, float[] animation) {
+			footBack.render(f);
+			panelLeft.render(f);
+			panelBottom.render(f);
+			footFront.render(f);
+			ouputLeft.render(f);
+			outputTop.render(f);
+			outputBottom.render(f);
+			ouputBottomExp.render(f);
+			outputRight.render(f);
+			panelTop.render(f);
+			panelRight.render(f);
+			panelFront.render(f);
+			panelBack.render(f);
+			outputBack.render(f);
 		}
 }

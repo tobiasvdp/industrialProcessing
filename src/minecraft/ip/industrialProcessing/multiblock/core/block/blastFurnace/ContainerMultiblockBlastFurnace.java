@@ -13,7 +13,7 @@ public class ContainerMultiblockBlastFurnace extends ContainerMultiblockTankWork
 		
 		Slot[] slots = new Slot[2];		
 		slots[0] = new SlotBase(core, 0, 35, 22);
-		slots[1] = new SlotOutput(core, 1, 35, 49);
+		slots[1] = new SlotBase(core, 1, 35, 49);
 		
 		addSlotToContainer(slots[0]);
 		addSlotToContainer(slots[1]);

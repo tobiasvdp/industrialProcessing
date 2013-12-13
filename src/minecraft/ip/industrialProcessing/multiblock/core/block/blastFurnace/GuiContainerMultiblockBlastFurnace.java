@@ -9,14 +9,15 @@ import org.lwjgl.util.Point;
 import org.lwjgl.util.Rectangle;
 
 public class GuiContainerMultiblockBlastFurnace extends GUImultiblock {
-	private static final Rectangle PROGRESSBAR_SOURCE = new Rectangle(0, 167, 130, 58);
-	private static final Point PROGRESSBAR_LOCATION = new Point(33, 9);
+	private static final Rectangle PROGRESSBAR_SOURCE = new Rectangle(176, 0, 22, 16);
+	private static final Point PROGRESSBAR_LOCATION = new Point(76, 34);
 	
-	private static final Rectangle TANK_SOURCE = new Rectangle(200, 17, 16, 50);
-	private static final Rectangle TANK_SOURCE2 = new Rectangle(200, 17, 16, 24);
+	private static final Rectangle TANK_SOURCE = new Rectangle(176, 17, 16, 50);
 	
 	public GuiContainerMultiblockBlastFurnace(InventoryPlayer inventory, TEmultiblockCoreTankWorkerPowered core){
 		super(inventory, core, new ContainerMultiblockBlastFurnace(inventory, core), "Blast furnace", "textures/gui/BlastFurnace.png");
+		xSize = 176;
+		ySize = 166;
 	}
 	
 	@Override
@@ -31,7 +32,7 @@ public class GuiContainerMultiblockBlastFurnace extends GUImultiblock {
 		drawProgressBarTank(TANK_SOURCE, new Point(8, 19), 0);
 		drawProgressBarTank(TANK_SOURCE, new Point(116, 19), 1);
 		drawProgressBarTank(TANK_SOURCE, new Point(134, 19), 2);
-		drawProgressBarTank(TANK_SOURCE2, new Point(152, 19), 3);
+		drawProgressBarTank(TANK_SOURCE, new Point(152, 19), 3);
 		
 		
 		drawProgressBarWorker(PROGRESSBAR_SOURCE, PROGRESSBAR_LOCATION, true, 0);

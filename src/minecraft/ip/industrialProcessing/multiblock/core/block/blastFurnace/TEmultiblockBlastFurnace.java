@@ -62,7 +62,7 @@ public class TEmultiblockBlastFurnace extends TEmultiblockCoreTankWorkerPowered 
 	
 	@Override
 	public void updateEntity() {
-		this.fill(0, ForgeDirection.UNKNOWN, new FluidStack(IndustrialProcessing.itemFluidAir, 100), true);
+		this.fill(0, ForgeDirection.UNKNOWN, new FluidStack(IndustrialProcessing.itemFluidAir, 5), true);
 		super.updateEntity();
 	}
 	
