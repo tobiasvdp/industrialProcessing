@@ -70,6 +70,9 @@ import ip.industrialProcessing.machines.plants.oilRefinary.isomerizationReactor.
 import ip.industrialProcessing.machines.plants.oilRefinary.sourWaterStripper.ContainerSourWaterStripper;
 import ip.industrialProcessing.machines.plants.oilRefinary.sourWaterStripper.GuiContainerSourWaterStripper;
 import ip.industrialProcessing.machines.plants.oilRefinary.sourWaterStripper.TileEntitySourWaterStripper;
+import ip.industrialProcessing.machines.plants.waste.exhaust.coolingUnit.ContainerCoolingUnit;
+import ip.industrialProcessing.machines.plants.waste.exhaust.coolingUnit.GuiContainerCoolingUnit;
+import ip.industrialProcessing.machines.plants.waste.exhaust.coolingUnit.TileEntityCoolingUnit;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator.ContainerIncubator;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator.GuiContainerIncubator;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator.TileEntityIncubator;
@@ -267,6 +270,8 @@ public class GuiHandler implements IGuiHandler {
                 return new ContainerVacuumCaster(player.inventory, (TileEntityVacuumCaster) entity);
             if (entity instanceof TileEntityTurretLathe)
                 return new ContainerTurretLathe(player.inventory, (TileEntityTurretLathe) entity);
+            if (entity instanceof TileEntityCoolingUnit)
+                return new ContainerCoolingUnit(player.inventory, (TileEntityCoolingUnit) entity);
         } else if (ID == GUIDE_ID)
             return null;
         return null;
@@ -379,6 +384,8 @@ public class GuiHandler implements IGuiHandler {
                 return new GuiContainerVacuumCaster(player.inventory, (TileEntityVacuumCaster) entity);
             if (entity instanceof TileEntityTurretLathe)
                 return new GuiContainerTurretLathe(player.inventory, (TileEntityTurretLathe) entity);
+            if (entity instanceof TileEntityCoolingUnit)
+                return new GuiContainerCoolingUnit(player.inventory, (TileEntityCoolingUnit) entity);
         } else if (ID == GUIDE_ID)
             return new GuiGuide(player);
         return null;

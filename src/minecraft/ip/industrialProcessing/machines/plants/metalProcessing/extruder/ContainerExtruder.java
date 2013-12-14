@@ -19,7 +19,7 @@ public class ContainerExtruder   extends ContainerPoweredFluidWorkerMachine {
 		super(inventoryPlayer, tileEntity);
 		this.tileEntity = tileEntity;
 
-		outputSlot = new SlotOutput(tileEntity, 0, 116, 36);
+		outputSlot = new SlotOutput(tileEntity, 0, 116, 35);
 		
 		addSlotToContainer(outputSlot);
 

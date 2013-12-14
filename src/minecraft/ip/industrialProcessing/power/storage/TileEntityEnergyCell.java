@@ -68,7 +68,6 @@ public class TileEntityEnergyCell extends TileEntityPowerGenerator implements IP
 			this.animation.setIncrementing(incrementing);
 		this.animation.update();
 			TileAnimationSyncHandler.sendAnimationData(this, this.animation);
-			System.out.println(this.storedJoules+" -> "+targetProgress);
 		}else
 			this.animation.update();
 	}

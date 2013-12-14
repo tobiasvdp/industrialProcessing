@@ -1,5 +1,6 @@
 package ip.industrialProcessing.machines.plants.metalProcessing.extruder;
 
+import net.minecraft.item.Item;
 import net.minecraftforge.fluids.FluidRegistry;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.machines.RecipesMachine;
@@ -16,6 +17,7 @@ public class RecipesExtruder extends RecipesMachine {
 
 	private void addDefaultRecipes() {
 		addRecipe(hotSlagToSlag(3000, 1));
+		addRecipe(CastIronIngot(3000, 0));
 	}
 
 	private Recipe hotSlagToSlag(int work, int power) {
@@ -23,7 +25,16 @@ public class RecipesExtruder extends RecipesMachine {
 		slag.workRequired = work;
 		slag.powerRequired = power;
 		slag.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidHotSlag.getName()), RecipeSlotType.TANK, 1000) };
-		slag.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(2, IndustrialProcessing.itemSlag.itemID, RecipeSlotType.INVENTORY, 1, 2, 0) };
+		slag.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, IndustrialProcessing.itemSlag.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
 		return slag;
+	}
+
+	private Recipe CastIronIngot(int work, int power) {
+		Recipe recipe = new Recipe();
+		recipe.workRequired = work;
+		recipe.powerRequired = power;
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidPigIron.getName()), RecipeSlotType.TANK, 200)};
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, IndustrialProcessing.itemIronBar.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
+		return recipe;
 	}
 }

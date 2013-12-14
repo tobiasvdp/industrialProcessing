@@ -168,4 +168,9 @@ public interface ISetupItems {
     
     public final static ItemSuspendedCart itemSupendedCart = new ItemSuspendedCart(ConfigItems.getItemSuspendedCartID(), "ItemSupendedCart",1,IndustrialProcessing.tabOres);
     
+    public final static ItemIP itemFlask = new ItemIP(ConfigItems.getItemFlaskID(), "itemFlask", IndustrialProcessing.tabOres);
+    public final static ItemIP itemCastingMulsh = new ItemIP(ConfigItems.getItemCastingMulshID(), "itemCastingMulsh", IndustrialProcessing.tabOres);
+    public final static ItemIP itemSandCast = new ItemIP(ConfigItems.getItemSandCastID(), "itemSandCast", IndustrialProcessing.tabOres);
+    public final static ItemDamage itemSandCastIngot = new ItemDamage(ConfigItems.getItemSandCastIngotID(), "itemSandCastIngot", IndustrialProcessing.tabOres,32);
+    
 }

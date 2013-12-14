@@ -85,6 +85,7 @@ public class ConfigRenderers {
     private int rendererVacuumCaster;
     private int rendererTurretLathe;
     private int rendererSandCaster;
+    private int rendererCoolingUnit;
 
     public static int getRendererSandCasterId() {
         return getInstance().rendererSandCaster;
@@ -92,6 +93,9 @@ public class ConfigRenderers {
     
     public static int getRendererTurretLatheId() {
         return getInstance().rendererTurretLathe;
+    }
+    public static int getRendererCoolingUnitId() {
+        return getInstance().rendererCoolingUnit;
     }
     
     public static int getRendererVacuumCasterId() {

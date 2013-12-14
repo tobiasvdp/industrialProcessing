@@ -28,6 +28,7 @@ import ip.industrialProcessing.machines.plants.oilRefinary.asphaltBlower.TileEnt
 import ip.industrialProcessing.machines.plants.oilRefinary.gasProcessor.TileEntityGasProcessor;
 import ip.industrialProcessing.machines.plants.oilRefinary.isomerizationReactor.TileEntityIsomerizationReactor;
 import ip.industrialProcessing.machines.plants.oilRefinary.sourWaterStripper.TileEntitySourWaterStripper;
+import ip.industrialProcessing.machines.plants.waste.exhaust.coolingUnit.TileEntityCoolingUnit;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator.TileEntityIncubator;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.tricklingFilter.TileEntityTricklingFilter;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatmentStation.TileEntityWaterTreatmentStation;
@@ -121,6 +122,7 @@ public class ConfigMachineBlocks {
     private int vacuumCasterBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "vacuumCasterBlockID", 512).getInt();
     private int turretLatheBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "turretLatheBlockID", 513).getInt();
     private int sandCasterBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "sandCasterBlockID", 514).getInt();
+    private int coolingUnitBlockID= IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "coolingUnitBlockID", 515).getInt();
 
     private int blastFurnaceID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "BlastFurnaceID", 550).getInt();
     private int extruderID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "ExtruderID", 551).getInt();
@@ -207,6 +209,7 @@ public class ConfigMachineBlocks {
     	registerMachineBlock(ISetupMachineBlocks.blockVacuumCaster, "IP.Machine.VacCast", "Vacuum caster", TileEntityVacuumCaster.class);
     	registerMachineBlock(ISetupMachineBlocks.blockSandCaster, "IP.Machine.SandCast", "Sand caster", TileEntitySandCaster.class);
     	registerMachineBlock(ISetupMachineBlocks.blockTurretLathe, "IP.Machine.TurrLat", "Turret lathe", TileEntityTurretLathe.class);
+    	registerMachineBlock(ISetupMachineBlocks.blockCoolingUnit, "IP.Machine.CoolUn", "Cooling unit", TileEntityCoolingUnit.class);
     	
 
         registerMachineBlock(ISetupMachineBlocks.blockConveyorBelt, "IP.Trans.CBelt", "Conveyor belt", TileEntityConveyorBelt.class);
@@ -324,6 +327,9 @@ public class ConfigMachineBlocks {
         return instance;
     }
 
+    public static int getBlockCoolingUnitID() {
+        return getInstance().coolingUnitBlockID;
+    }
     public static int getBlockVacuumCasterID() {
         return getInstance().vacuumCasterBlockID;
     }

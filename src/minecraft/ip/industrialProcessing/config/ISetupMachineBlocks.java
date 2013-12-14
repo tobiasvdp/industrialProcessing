@@ -25,6 +25,7 @@ import ip.industrialProcessing.machines.plants.oilRefinary.asphaltBlower.BlockAs
 import ip.industrialProcessing.machines.plants.oilRefinary.gasProcessor.BlockGasProcessor;
 import ip.industrialProcessing.machines.plants.oilRefinary.isomerizationReactor.BlockIsomerizationReactor;
 import ip.industrialProcessing.machines.plants.oilRefinary.sourWaterStripper.BlockSourWaterStripper;
+import ip.industrialProcessing.machines.plants.waste.exhaust.coolingUnit.BlockCoolingUnit;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator.BlockIncubator;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.tricklingFilter.BlockTricklingFilter;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatmentStation.BlockWaterTreatmentStation;
@@ -124,6 +125,7 @@ public interface ISetupMachineBlocks {
     public final static BlockSandCaster blockSandCaster = new BlockSandCaster();
     public final static BlockTurretLathe blockTurretLathe = new BlockTurretLathe();
     public final static BlockVacuumCaster blockVacuumCaster = new BlockVacuumCaster();
+    public final static BlockCoolingUnit blockCoolingUnit = new BlockCoolingUnit();
 
     // create generators
     public final static BlockManualGenerator blockManualGenerator = new BlockManualGenerator();

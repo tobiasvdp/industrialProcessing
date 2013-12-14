@@ -17,8 +17,8 @@ public class ContainerTurretLathe  extends ContainerPoweredFluidWorkerMachine {
 		super(inventoryPlayer, tileEntity);
 		this.tileEntity = tileEntity;
 
-		inputSlot = new SlotBase(tileEntity, 0, 44, 36);
-		outputSlot = new SlotOutput(tileEntity, 1, 116, 36);
+		inputSlot = new SlotBase(tileEntity, 0, 44, 35);
+		outputSlot = new SlotOutput(tileEntity, 1, 116, 35);
 		
 		addSlotToContainer(inputSlot);
 		addSlotToContainer(outputSlot);

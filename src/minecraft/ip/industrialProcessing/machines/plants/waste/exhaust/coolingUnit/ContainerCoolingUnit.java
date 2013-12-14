@@ -1,31 +1,25 @@
-package ip.industrialProcessing.machines.plants.metalProcessing.sandCaster;
+package ip.industrialProcessing.machines.plants.waste.exhaust.coolingUnit;
 
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
 import ip.industrialProcessing.machines.containers.ContainerPoweredFluidWorkerMachine;
 import ip.industrialProcessing.slots.SlotBase;
+import ip.industrialProcessing.slots.SlotOutput;
 import ip.industrialProcessing.utils.containers.ContainerUtils;
 import net.minecraft.entity.player.InventoryPlayer;
-import ip.industrialProcessing.slots.SlotOutput;
 
-public class ContainerSandCaster   extends ContainerPoweredFluidWorkerMachine {
+public class ContainerCoolingUnit  extends ContainerPoweredFluidWorkerMachine {
 
 	private TileEntityPoweredFluidWorkerMachine tileEntity;
-	private SlotBase inputSlot;
-	private SlotOutput outputSlot;
 
-	public ContainerSandCaster(InventoryPlayer inventoryPlayer, TileEntityPoweredFluidWorkerMachine tileEntity) {
+	public ContainerCoolingUnit(InventoryPlayer inventoryPlayer, TileEntityPoweredFluidWorkerMachine tileEntity) {
 		super(inventoryPlayer, tileEntity);
 		this.tileEntity = tileEntity;
-
-		inputSlot = new SlotBase(tileEntity, 0, 44, 35);
-		outputSlot = new SlotOutput(tileEntity, 1, 116, 35);
-		
-		addSlotToContainer(inputSlot);
-		addSlotToContainer(outputSlot);
 
 		ContainerUtils.BindPlayerInventory(inventoryPlayer, this, 0);
 		
 		addTankToContainer(0);
+		addTankToContainer(1);
+		addTankToContainer(2);
         
         addWorkerToContainer(tileEntity.getWorker());
         addPowerToContainer(tileEntity.getMainPowerStorage());
@@ -33,7 +27,7 @@ public class ContainerSandCaster   extends ContainerPoweredFluidWorkerMachine {
 
 	@Override
 	public int getSizeInventory() {
-		return 2;
+		return 0;
 	}
 
 }
