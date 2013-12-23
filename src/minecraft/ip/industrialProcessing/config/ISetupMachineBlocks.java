@@ -12,7 +12,6 @@ import ip.industrialProcessing.machines.flotationCell.BlockFlotationCell;
 import ip.industrialProcessing.machines.hydroCyclone.BlockHydroCyclone;
 import ip.industrialProcessing.machines.insulator.BlockInsulator;
 import ip.industrialProcessing.machines.kiln.BlockKiln;
-import ip.industrialProcessing.machines.magneticSeparator.BlockMagneticSeparator;
 import ip.industrialProcessing.machines.mixer.BlockMixer;
 import ip.industrialProcessing.machines.oxygenFurnace.BlockOxygenFurnace;
 import ip.industrialProcessing.machines.pelletExtruder.BlockPelletExtruder;
@@ -20,6 +19,10 @@ import ip.industrialProcessing.machines.plants.metalProcessing.extruder.BlockExt
 import ip.industrialProcessing.machines.plants.metalProcessing.sandCaster.BlockSandCaster;
 import ip.industrialProcessing.machines.plants.metalProcessing.turretLathe.BlockTurretLathe;
 import ip.industrialProcessing.machines.plants.metalProcessing.vacuumCaster.BlockVacuumCaster;
+import ip.industrialProcessing.machines.plants.nonFerroProcessing.magneticSeparator.BlockMagneticSeparator;
+import ip.industrialProcessing.machines.plants.nonFerroProcessing.quenchTank.BlockQuenchTank;
+import ip.industrialProcessing.machines.plants.nonFerroProcessing.roaster.BlockRoaster;
+import ip.industrialProcessing.machines.plants.nonFerroProcessing.smelter.BlockSmelter;
 import ip.industrialProcessing.machines.plants.oilRefinary.AlkylationUnit.BlockAlkylationUnit;
 import ip.industrialProcessing.machines.plants.oilRefinary.asphaltBlower.BlockAsphaltBlower;
 import ip.industrialProcessing.machines.plants.oilRefinary.gasProcessor.BlockGasProcessor;
@@ -126,6 +129,9 @@ public interface ISetupMachineBlocks {
     public final static BlockTurretLathe blockTurretLathe = new BlockTurretLathe();
     public final static BlockVacuumCaster blockVacuumCaster = new BlockVacuumCaster();
     public final static BlockCoolingUnit blockCoolingUnit = new BlockCoolingUnit();
+    public final static BlockQuenchTank blockQuenchTank = new BlockQuenchTank();
+    public final static BlockRoaster blockRoaster = new BlockRoaster();
+    public final static BlockSmelter blockSmelter = new BlockSmelter();
 
     // create generators
     public final static BlockManualGenerator blockManualGenerator = new BlockManualGenerator();

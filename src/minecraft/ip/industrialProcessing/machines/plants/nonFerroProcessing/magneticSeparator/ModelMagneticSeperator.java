@@ -1,4 +1,4 @@
-package ip.industrialProcessing.machines.magneticSeparator;
+package ip.industrialProcessing.machines.plants.nonFerroProcessing.magneticSeparator;
 
 import ip.industrialProcessing.client.render.ModelAnimatedMachine;
 import net.minecraft.client.model.ModelRenderer;

@@ -6,11 +6,19 @@ import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import ip.industrialProcessing.slots.SlotBase;
 import ip.industrialProcessing.slots.SlotLiquid;
 import ip.industrialProcessing.slots.SlotLiquidOutput;
+import ip.industrialProcessing.slots.SlotOutput;
 import ip.industrialProcessing.utils.containers.ContainerUtils;
 
 public class ContainerElectrolyser extends ContainerPoweredFluidWorkerMachine{
+	
+	private SlotOutput outputSlot;
+	
 	public ContainerElectrolyser(InventoryPlayer inventoryPlayer, TileEntityElectrolyser tileEntity) {
 		super(inventoryPlayer, tileEntity);
+		
+		outputSlot = new SlotOutput(tileEntity, 1, 116, 35);
+		
+		addSlotToContainer(outputSlot);
 
 		ContainerUtils.BindPlayerInventory(inventoryPlayer, this, 0);
 
@@ -25,6 +33,6 @@ public class ContainerElectrolyser extends ContainerPoweredFluidWorkerMachine{
 	
 	@Override
 	public int getSizeInventory() {
-		return 0;
+		return 1;
 	}
 }

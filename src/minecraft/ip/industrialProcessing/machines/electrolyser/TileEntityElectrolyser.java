@@ -26,6 +26,8 @@ public class TileEntityElectrolyser extends TileEntityPoweredFluidWorkerMachine{
 		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.DOWN, false, true);
 		
 		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.RIGHT, false, true);
+		
+		addStack(null, LocalDirection.BACK, false, true);
 	}
 	
 	@Override

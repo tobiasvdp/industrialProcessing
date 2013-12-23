@@ -31,9 +31,6 @@ import ip.industrialProcessing.machines.insulator.TileEntityInsulator;
 import ip.industrialProcessing.machines.kiln.ContainerKiln;
 import ip.industrialProcessing.machines.kiln.GuiContainerKiln;
 import ip.industrialProcessing.machines.kiln.TileEntityKiln;
-import ip.industrialProcessing.machines.magneticSeparator.ContainerMagneticSeparator;
-import ip.industrialProcessing.machines.magneticSeparator.GuiContainerMagneticSeparator;
-import ip.industrialProcessing.machines.magneticSeparator.TileEntityMagneticSeparator;
 import ip.industrialProcessing.machines.mixer.ContainerMixer;
 import ip.industrialProcessing.machines.mixer.GuiContainerMixer;
 import ip.industrialProcessing.machines.mixer.TileEntityMixer;
@@ -55,6 +52,18 @@ import ip.industrialProcessing.machines.plants.metalProcessing.turretLathe.TileE
 import ip.industrialProcessing.machines.plants.metalProcessing.vacuumCaster.ContainerVacuumCaster;
 import ip.industrialProcessing.machines.plants.metalProcessing.vacuumCaster.GuiContainerVacuumCaster;
 import ip.industrialProcessing.machines.plants.metalProcessing.vacuumCaster.TileEntityVacuumCaster;
+import ip.industrialProcessing.machines.plants.nonFerroProcessing.magneticSeparator.ContainerMagneticSeparator;
+import ip.industrialProcessing.machines.plants.nonFerroProcessing.magneticSeparator.GuiContainerMagneticSeparator;
+import ip.industrialProcessing.machines.plants.nonFerroProcessing.magneticSeparator.TileEntityMagneticSeparator;
+import ip.industrialProcessing.machines.plants.nonFerroProcessing.quenchTank.ContainerQuenchTank;
+import ip.industrialProcessing.machines.plants.nonFerroProcessing.quenchTank.GuiContainerQuenchTank;
+import ip.industrialProcessing.machines.plants.nonFerroProcessing.quenchTank.TileEntityQuenchTank;
+import ip.industrialProcessing.machines.plants.nonFerroProcessing.roaster.ContainerRoaster;
+import ip.industrialProcessing.machines.plants.nonFerroProcessing.roaster.GuiContainerRoaster;
+import ip.industrialProcessing.machines.plants.nonFerroProcessing.roaster.TileEntityRoaster;
+import ip.industrialProcessing.machines.plants.nonFerroProcessing.smelter.ContainerSmelter;
+import ip.industrialProcessing.machines.plants.nonFerroProcessing.smelter.GuiContainerSmelter;
+import ip.industrialProcessing.machines.plants.nonFerroProcessing.smelter.TileEntitySmelter;
 import ip.industrialProcessing.machines.plants.oilRefinary.AlkylationUnit.ContainerAlkylationUnit;
 import ip.industrialProcessing.machines.plants.oilRefinary.AlkylationUnit.GuiContainerAlkylationUnit;
 import ip.industrialProcessing.machines.plants.oilRefinary.AlkylationUnit.TileEntityAlkylationUnit;
@@ -272,6 +281,12 @@ public class GuiHandler implements IGuiHandler {
                 return new ContainerTurretLathe(player.inventory, (TileEntityTurretLathe) entity);
             if (entity instanceof TileEntityCoolingUnit)
                 return new ContainerCoolingUnit(player.inventory, (TileEntityCoolingUnit) entity);
+            if (entity instanceof TileEntityRoaster)
+                return new ContainerRoaster(player.inventory, (TileEntityRoaster) entity);
+            if (entity instanceof TileEntitySmelter)
+                return new ContainerSmelter(player.inventory, (TileEntitySmelter) entity);
+            if (entity instanceof TileEntityQuenchTank)
+                return new ContainerQuenchTank(player.inventory, (TileEntityQuenchTank) entity);
         } else if (ID == GUIDE_ID)
             return null;
         return null;
@@ -386,6 +401,12 @@ public class GuiHandler implements IGuiHandler {
                 return new GuiContainerTurretLathe(player.inventory, (TileEntityTurretLathe) entity);
             if (entity instanceof TileEntityCoolingUnit)
                 return new GuiContainerCoolingUnit(player.inventory, (TileEntityCoolingUnit) entity);
+            if (entity instanceof TileEntityRoaster)
+                return new GuiContainerRoaster(player.inventory, (TileEntityRoaster) entity);
+            if (entity instanceof TileEntitySmelter)
+                return new GuiContainerSmelter(player.inventory, (TileEntitySmelter) entity);
+            if (entity instanceof TileEntityQuenchTank)
+                return new GuiContainerQuenchTank(player.inventory, (TileEntityQuenchTank) entity);
         } else if (ID == GUIDE_ID)
             return new GuiGuide(player);
         return null;

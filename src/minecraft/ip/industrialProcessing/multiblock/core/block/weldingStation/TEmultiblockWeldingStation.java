@@ -2,6 +2,7 @@ package ip.industrialProcessing.multiblock.core.block.weldingStation;
 
 import java.util.Iterator;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
@@ -27,8 +28,9 @@ import ip.industrialProcessing.multiblock.utils.MultiblockActionType;
 import ip.industrialProcessing.multiblock.utils.TEmultiblockItemStackType;
 import ip.industrialProcessing.multiblock.utils.blockSide;
 import ip.industrialProcessing.recipes.Recipe;
+import ip.industrialProcessing.utils.IHeatStorage;
 
-public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowered {
+public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowered implements IHeatStorage {
 	static StructureMultiblock structure;
 	static TierCollection tierRequirments;
 	static RecipesMachine recipes = new RecipesWeldingStation();
@@ -57,8 +59,14 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowere
 		tierRequirments.addTier(tier, Tiers.Tier0);
 	}
 
+	private float T1;
+	private float T2;
+	private int burnTime;
+	private int totalTime;
+
 	public TEmultiblockWeldingStation() {
 		super(structure, tierRequirments, recipes, LocalDirection.LEFT, 10000, 100);
+		LocalDirection[] nodirections = new LocalDirection[0];
 		this.addStack(null, LocalDirection.UP, true, false);
 		this.addStack(null, LocalDirection.UP, true, false);
 		this.addStack(null, LocalDirection.UP, true, false);
@@ -73,13 +81,28 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowere
 		this.addStack(null, LocalDirection.UP, true, false);
 		this.addStack(null, LocalDirection.UP, true, false);
 		this.addStack(null, LocalDirection.RIGHT, false, true);
+		this.addStack(null, nodirections, true, false);
 
-		this.addTank(10000, 0, new ForgeDirection[] { ForgeDirection.NORTH }, true, false);
+		T1 = 20;
+		T2 = 20;
+		burnTime = 0;
+		totalTime = 1;
 	}
 
 	@Override
 	public void updateEntity() {
+		transferHeat();
+		tickFuel();
+		if (burnTime == 0)
+			ConsumeFuel(getStackInSlot(14));
+		System.out.println(T1 + "/" + T2);
 		super.updateEntity();
+	}
+
+	@Override
+	public void doWork() {
+		if (getHeat() > 1538)
+			super.doWork();
 	}
 
 	@Override
@@ -88,37 +111,65 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowere
 	}
 
 	@Override
-	public boolean tankContains(int slot, int itemId, int amount) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean tankHasRoomFor(int slot, FluidStack stack) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean tankHasRoomFor(int slot, int itemId, int amount) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean addToTank(int index, int itemId, int amount) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean removeFromTank(int index, int itemId, int amount) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	protected boolean isValidInput(int slot, int itemID) {
+		if (slot == 14 && itemID == Item.coal.itemID) {
+			return true;
+		}
 		return recipes.isValidInput(slot, itemID);
+	}
+
+	@Override
+	public void ConsumeFuel(ItemStack stack) {
+		if (stack != null && stack.itemID == Item.coal.itemID && stack.stackSize > 0) {
+			this.removeFromSlot(14, stack.itemID, 1);
+			burnTime = 3600;
+			totalTime = 3600;
+			T2 = 2700;
+		}
+	}
+
+	@Override
+	public float getHeat() {
+		return T1;
+	}
+
+	@Override
+	public float getMaxHeat() {
+		return 3000;
+	}
+
+	@Override
+	public float getCoolingFactor() {
+		return (float) 0.0008;
+	}
+
+	@Override
+	public int getScaledHeat(int maxSize) {
+		return (int) (getHeat() * maxSize / getMaxHeat());
+	}
+
+	@Override
+	public void tickFuel() {
+		if (burnTime > 0)
+			burnTime--;
+	}
+
+	@Override
+	public float getHeatFuel() {
+		return T2;
+	}
+
+	@Override
+	public void transferHeat() {
+		T1 = T1 - getCoolingFactor() * (T1 - T2);
+		if (burnTime > 0)
+			T2 = (float) (T2 * 0.99995);
+		else
+			T2 = T2 - getCoolingFactor() * (T2 - 20);
+	}
+
+	@Override
+	public int getScaledBurnTime(int size) {
+		return burnTime * size / totalTime;
 	}
 }

@@ -86,7 +86,22 @@ public class ConfigRenderers {
     private int rendererTurretLathe;
     private int rendererSandCaster;
     private int rendererCoolingUnit;
+    private int rendererSmelter;
+    private int rendererRoaster;
+    private int rendererQuechTank;
 
+    public static int getRendererSmelterId() {
+        return getInstance().rendererSmelter;
+    }
+    
+    public static int getRendererRoasterId() {
+        return getInstance().rendererRoaster;
+    }
+    
+    public static int getRendererQuenchTankId() {
+        return getInstance().rendererQuechTank;
+    }
+    
     public static int getRendererSandCasterId() {
         return getInstance().rendererSandCaster;
     }

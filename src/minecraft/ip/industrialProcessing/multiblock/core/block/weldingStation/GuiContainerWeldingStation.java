@@ -18,10 +18,19 @@ import ip.industrialProcessing.multiblock.gui.GUImultiblock;
 public class GuiContainerWeldingStation extends GUImultiblock{
 
 	private static final Rectangle PROGRESSBAR_SOURCE = new Rectangle(198, 0, 22, 16);
-	private static final Point PROGRESSBAR_LOCATION = new Point(106, 31);
+	private static final Point PROGRESSBAR_LOCATION = new Point(120, 31);
+	
+	private static final Rectangle THERMO_SOURCE = new Rectangle(204, 22, 5, 35);
+	private static final Point THERMO_LOCATION = new Point(13, 15);
+	
+	private static final Rectangle BURN_SOURCE = new Rectangle(198, 86, 14, 14);
+	private static final Point BURN_LOCATION = new Point(27, 35);
+	
+	private TEmultiblockWeldingStation te;
 	
 	public GuiContainerWeldingStation(InventoryPlayer inventory, TEmultiblockCoreTankWorkerPowered entity) {
 		super(inventory, entity, new ContainerWeldingStation(inventory, entity), "Welding Table", "textures/gui/WeldingTable.png");
+		te = (TEmultiblockWeldingStation) entity;
 	}
 
 	@Override
@@ -33,5 +42,15 @@ public class GuiContainerWeldingStation extends GUImultiblock{
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
 		super.drawGuiContainerBackgroundLayer(par1, par2, par3);
 		drawProgressBarWorker(PROGRESSBAR_SOURCE, PROGRESSBAR_LOCATION, true, 0);
+		
+	    int x = (width - xSize) / 2;
+	    int y = (height - ySize) / 2;
+		
+		int burnScale = te.getScaledBurnTime(BURN_SOURCE.getHeight());
+		this.drawTexturedModalRect(BURN_LOCATION.getX()+x, BURN_LOCATION.getY() + y + BURN_SOURCE.getHeight() - burnScale, BURN_SOURCE.getX(), BURN_SOURCE.getY()+(14-burnScale), BURN_SOURCE.getWidth(), burnScale);
+		
+		int tempScale = te.getScaledHeat(THERMO_SOURCE.getHeight());
+		this.drawTexturedModalRect(THERMO_LOCATION.getX()+x, THERMO_LOCATION.getY() + y + THERMO_SOURCE.getHeight()-tempScale, THERMO_SOURCE.getX(), THERMO_SOURCE.getY() + THERMO_SOURCE.getHeight() - tempScale, THERMO_SOURCE.getWidth(), tempScale);
+		
 	}
 }

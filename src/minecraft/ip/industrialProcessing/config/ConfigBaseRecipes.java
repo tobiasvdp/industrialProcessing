@@ -35,7 +35,7 @@ public class ConfigBaseRecipes {
 		
 		GameRegistry.addShapedRecipe(new ItemStack(ISetupMachineBlocks.BLmultiblockScreen),"xxx","x x"," y ",'x',new ItemStack(Item.ingotIron),'y',new ItemStack(ISetupItems.itemHammer,1,WILDCARD_VALUE) );
 		GameRegistry.addShapedRecipe(new ItemStack(ISetupMachineBlocks.BLmultiblockWeldingStation),"xxx","yzy","iji",'x',new ItemStack(Block.stoneSingleSlab),'y',new ItemStack(Block.planks,1,WILDCARD_VALUE),'z',new ItemStack(Block.workbench),'i',new ItemStack(ISetupItems.itemThickStick),'j',new ItemStack(ISetupItems.itemHammer,1,WILDCARD_VALUE) );
-		GameRegistry.addShapedRecipe(new ItemStack(ISetupMachineBlocks.BLmultiblockWeldingTableExt),"xxx","yzy","iji",'x',new ItemStack(Block.stoneSingleSlab),'y',new ItemStack(Block.planks,1,WILDCARD_VALUE),'z',new ItemStack(Block.chest),'i',new ItemStack(Item.stick),'j',new ItemStack(ISetupItems.itemHammer,1,WILDCARD_VALUE) );
+		GameRegistry.addShapedRecipe(new ItemStack(ISetupMachineBlocks.BLmultiblockWeldingTableExt),"xxx","yzy","iji",'x',new ItemStack(Block.stoneSingleSlab),'y',new ItemStack(Block.planks,1,WILDCARD_VALUE),'z',new ItemStack(Block.chest),'i',new ItemStack(ISetupItems.itemThickStick),'j',new ItemStack(ISetupItems.itemHammer,1,WILDCARD_VALUE) );
 		GameRegistry.addSmelting(ISetupBlocks.blockCopperOre.blockID, new ItemStack(ISetupItems.itemCopperIngot), 0);
 		GameRegistry.addSmelting(ISetupBlocks.blockTinOre.blockID, new ItemStack(ISetupItems.itemTinIngot), 0);
 		GameRegistry.addSmelting(ISetupBlocks.blockGalenaOre.blockID, new ItemStack(ISetupItems.itemSilverIngot), 0);
