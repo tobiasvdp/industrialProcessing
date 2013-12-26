@@ -112,6 +112,9 @@ import ip.industrialProcessing.machines.wireMill.TileEntityWireMill;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.ContainerMultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.GuiContainerMultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.TEmultiblockBlastFurnace;
+import ip.industrialProcessing.multiblock.core.block.plants.blacksmith.bloomery.ContainerBloomery;
+import ip.industrialProcessing.multiblock.core.block.plants.blacksmith.bloomery.GuiContainerBloomery;
+import ip.industrialProcessing.multiblock.core.block.plants.blacksmith.bloomery.TileEntityBloomery;
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.CatalyticReformer.ContainerCatalyticReformer;
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.CatalyticReformer.GuiContainerCatalyticReformer;
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.CatalyticReformer.TileEntityCatalyticReformer;
@@ -173,6 +176,7 @@ import cpw.mods.fml.common.network.IGuiHandler;
 public class GuiHandler implements IGuiHandler {
 
     public static final int GUIDE_ID = 1;
+    public static final int ANVIL_ID = 2;
 
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
@@ -287,8 +291,14 @@ public class GuiHandler implements IGuiHandler {
                 return new ContainerSmelter(player.inventory, (TileEntitySmelter) entity);
             if (entity instanceof TileEntityQuenchTank)
                 return new ContainerQuenchTank(player.inventory, (TileEntityQuenchTank) entity);
-        } else if (ID == GUIDE_ID)
-            return null;
+            if (entity instanceof TileEntityBloomery)
+                return new ContainerBloomery(player.inventory, (TileEntityBloomery) entity);
+        } else if (ID == GUIDE_ID){
+        	return null;
+        }
+        else if( ID == ANVIL_ID){
+        	return null;
+        }
         return null;
     }
 
@@ -407,8 +417,14 @@ public class GuiHandler implements IGuiHandler {
                 return new GuiContainerSmelter(player.inventory, (TileEntitySmelter) entity);
             if (entity instanceof TileEntityQuenchTank)
                 return new GuiContainerQuenchTank(player.inventory, (TileEntityQuenchTank) entity);
-        } else if (ID == GUIDE_ID)
+            if (entity instanceof TileEntityBloomery)
+                return new GuiContainerBloomery(player.inventory, (TileEntityBloomery) entity);
+        } else if (ID == GUIDE_ID){
             return new GuiGuide(player);
+           }
+        else if( ID == ANVIL_ID){
+        	return null;
+        }
         return null;
     }
 }

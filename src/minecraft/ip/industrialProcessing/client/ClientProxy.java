@@ -24,6 +24,7 @@ import ip.industrialProcessing.client.render.RenderingMultiblock;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.decoration.crystals.ModelCrystal;
+import ip.industrialProcessing.decoration.light.PetrolLamp.model.ModelPetrolLamp;
 import ip.industrialProcessing.decoration.platforms.ModelPlatform;
 import ip.industrialProcessing.decoration.platforms.ModelStairs;
 import ip.industrialProcessing.machines.classifier.ModelClassifier;
@@ -41,6 +42,8 @@ import ip.industrialProcessing.machines.flotationCell.TileEntityFlotationCell;
 import ip.industrialProcessing.machines.flotationCell.model.ModelFlotationCellBlock;
 import ip.industrialProcessing.machines.mixer.ModelMixer;
 import ip.industrialProcessing.machines.mixer.TileEntityMixer;
+import ip.industrialProcessing.machines.plants.blacksmith.anvil.model.ModelAnvil;
+import ip.industrialProcessing.machines.plants.blacksmith.grindingStone.model.ModelGrindingStone;
 import ip.industrialProcessing.machines.plants.nonFerroProcessing.magneticSeparator.ModelMagneticSeperator;
 import ip.industrialProcessing.machines.plants.nonFerroProcessing.magneticSeparator.TileEntityMagneticSeparator;
 import ip.industrialProcessing.machines.thickener.ModelThickener;
@@ -49,9 +52,11 @@ import ip.industrialProcessing.machines.treetap.model.ModelAutomaticTreeTapBlock
 import ip.industrialProcessing.machines.treetap.model.ModelManualTreeTapBlock;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.MDmultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.TEmultiblockBlastFurnace;
+import ip.industrialProcessing.multiblock.core.block.plants.blacksmith.bloomery.model.ModelBloomery;
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.atmosphericDestilationTower.model.ModelAtmosphericDestillationTowerBlock;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.MDmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
+import ip.industrialProcessing.multiblock.dummy.block.bellows.model.ModelBellows;
 import ip.industrialProcessing.multiblock.dummy.block.blastFurnaceTower.MDmultiblockBlastFurnaceTower;
 import ip.industrialProcessing.multiblock.dummy.block.blastFurnaceTower.TEmultiblockBlastFurnaceTower;
 import ip.industrialProcessing.multiblock.dummy.block.destilationTray.model.ModelDistillationElementBlock;
@@ -205,6 +210,12 @@ public class ClientProxy extends CommonProxy {
     private static final ModelDistillationElementBlock destillationElementBlock = new ModelDistillationElementBlock();
     private static final ModelAtmosphericDestillationTowerBlock destillationTowerBlock = new ModelAtmosphericDestillationTowerBlock();
     private static final ModelFlotationCellBlock flotationCellBlock = new ModelFlotationCellBlock();
+    
+    private static final ModelAnvil modelAnvil = new ModelAnvil();
+    private static final ModelGrindingStone modelGrindingStone = new ModelGrindingStone();
+    private static final ModelPetrolLamp modelPetrolLamp = new ModelPetrolLamp();
+    private static final ModelBellows modelBellows = new ModelBellows();
+    private static final ModelBloomery modelBloomery = new ModelBloomery();
    
     @Override
     public void registerRenderers() {
@@ -234,7 +245,22 @@ public class ClientProxy extends CommonProxy {
         RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererDestilationTray(), destillationElementBlock));
 
         ConfigRenderers.setRendererAtmosphericDestilationTower(RenderingRegistry.getNextAvailableRenderId());
-        RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererAtmosphericDestilationTower(), destillationTowerBlock)); 
+        RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererAtmosphericDestilationTower(), destillationTowerBlock));
+        
+        ConfigRenderers.setRendererAnvilId(RenderingRegistry.getNextAvailableRenderId());
+        RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererAnvilId(), modelAnvil));
+        
+        ConfigRenderers.setRendererGrindingStoneId(RenderingRegistry.getNextAvailableRenderId());
+        RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererGrindingStoneId(), modelGrindingStone));
+        
+        ConfigRenderers.setRendererPetrolLampId(RenderingRegistry.getNextAvailableRenderId());
+        RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererPetrolLampId(), modelPetrolLamp));
+        
+        ConfigRenderers.setRendererBellowsId(RenderingRegistry.getNextAvailableRenderId());
+        RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererBellowsId(), modelBellows));
+        
+        ConfigRenderers.setRendererBloomeryId(RenderingRegistry.getNextAvailableRenderId());
+        RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererBloomeryId(), modelBloomery)); 
         
         // block & tile entity
 

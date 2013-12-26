@@ -1,7 +1,7 @@
 package ip.industrialProcessing.config;
 
 import ip.industrialProcessing.decoration.light.BlockElectricLamp;
-import ip.industrialProcessing.decoration.light.BlockPetrolLamp;
+import ip.industrialProcessing.decoration.light.PetrolLamp.BlockPetrolLamp;
 import ip.industrialProcessing.machines.classifier.BlockClassifier;
 import ip.industrialProcessing.machines.crusher.BlockCrusher;
 import ip.industrialProcessing.machines.diskFilter.BlockDiskFilter;
@@ -15,6 +15,8 @@ import ip.industrialProcessing.machines.kiln.BlockKiln;
 import ip.industrialProcessing.machines.mixer.BlockMixer;
 import ip.industrialProcessing.machines.oxygenFurnace.BlockOxygenFurnace;
 import ip.industrialProcessing.machines.pelletExtruder.BlockPelletExtruder;
+import ip.industrialProcessing.machines.plants.blacksmith.anvil.BlockAnvil;
+import ip.industrialProcessing.machines.plants.blacksmith.grindingStone.BlockGrindingStone;
 import ip.industrialProcessing.machines.plants.metalProcessing.extruder.BlockExtruder;
 import ip.industrialProcessing.machines.plants.metalProcessing.sandCaster.BlockSandCaster;
 import ip.industrialProcessing.machines.plants.metalProcessing.turretLathe.BlockTurretLathe;
@@ -41,6 +43,7 @@ import ip.industrialProcessing.machines.wireMill.BlockWireMill;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.BLmultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.core.block.elevator.BLmultiblockElevator;
 import ip.industrialProcessing.multiblock.core.block.hotPress.BLmultiblockHotPress;
+import ip.industrialProcessing.multiblock.core.block.plants.blacksmith.bloomery.BlockBloomery;
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.CatalyticReformer.BlockCatalyticReformer;
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.amineTreater.BlockAmineTreater;
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.atmosphericDestilationTower.BlockAtmosphericDestilationTower;
@@ -53,6 +56,7 @@ import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.meroxTre
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.vacuumDestilationTower.BlockVacuumDestilationTower;
 import ip.industrialProcessing.multiblock.core.block.rollingPress.BLmultiblockRollingPress;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.BLmultiblockWeldingStation;
+import ip.industrialProcessing.multiblock.dummy.block.bellows.BlockBellows;
 import ip.industrialProcessing.multiblock.dummy.block.blastFurnaceTower.BLmultiblockBlastFurnaceTower;
 import ip.industrialProcessing.multiblock.dummy.block.destilationTray.BlockDestilationTray;
 import ip.industrialProcessing.multiblock.dummy.block.displayPanel.BLmultiblockDisplayPanel;
@@ -132,6 +136,10 @@ public interface ISetupMachineBlocks {
     public final static BlockQuenchTank blockQuenchTank = new BlockQuenchTank();
     public final static BlockRoaster blockRoaster = new BlockRoaster();
     public final static BlockSmelter blockSmelter = new BlockSmelter();
+    public final static BlockGrindingStone blockGrindingStone = new BlockGrindingStone();
+    public final static BlockAnvil blockAnvil = new BlockAnvil();
+    public final static BlockBellows blockBellows = new BlockBellows();
+    public final static BlockBloomery blockBloomery = new BlockBloomery();
 
     // create generators
     public final static BlockManualGenerator blockManualGenerator = new BlockManualGenerator();

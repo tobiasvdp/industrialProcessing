@@ -48,9 +48,9 @@ public class TEmultiblockCore extends TileEntity implements ITEmultiblockCore {
 		case Invalid:
 			return ForgeDirection.UNKNOWN;
 		case North:
-			return ForgeDirection.SOUTH;
-		case South:
 			return ForgeDirection.NORTH;
+		case South:
+			return ForgeDirection.SOUTH;
 		case West:
 			return ForgeDirection.EAST;
 		default:

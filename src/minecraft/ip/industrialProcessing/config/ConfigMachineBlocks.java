@@ -3,7 +3,7 @@ package ip.industrialProcessing.config;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.config.ConfigCategories;
 import ip.industrialProcessing.decoration.light.TileEntityElectricLamp;
-import ip.industrialProcessing.decoration.light.TileEntityPetrolLamp;
+import ip.industrialProcessing.decoration.light.PetrolLamp.TileEntityPetrolLamp;
 import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.machines.classifier.TileEntityClassifier;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
@@ -18,6 +18,7 @@ import ip.industrialProcessing.machines.kiln.TileEntityKiln;
 import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import ip.industrialProcessing.machines.oxygenFurnace.TileEntityOxygenFurnace;
 import ip.industrialProcessing.machines.pelletExtruder.TileEntityPelletExtruder;
+import ip.industrialProcessing.machines.plants.blacksmith.grindingStone.TileEntityGrindingStone;
 import ip.industrialProcessing.machines.plants.metalProcessing.extruder.TileEntityExtruder;
 import ip.industrialProcessing.machines.plants.metalProcessing.sandCaster.TileEntitySandCaster;
 import ip.industrialProcessing.machines.plants.metalProcessing.turretLathe.TileEntityTurretLathe;
@@ -44,6 +45,7 @@ import ip.industrialProcessing.machines.wireMill.TileEntityWireMill;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.TEmultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.core.block.elevator.TEmultiblockElevator;
 import ip.industrialProcessing.multiblock.core.block.hotPress.TEmultiblockHotPress;
+import ip.industrialProcessing.multiblock.core.block.plants.blacksmith.bloomery.TileEntityBloomery;
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.CatalyticReformer.TileEntityCatalyticReformer;
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.amineTreater.TileEntityAmineTreater;
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.atmosphericDestilationTower.TileEntityAtmosphericDestilationTower;
@@ -56,6 +58,7 @@ import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.meroxTre
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.vacuumDestilationTower.TileEntityVacuumDestilationTower;
 import ip.industrialProcessing.multiblock.core.block.rollingPress.TEmultiblockRollingPress;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
+import ip.industrialProcessing.multiblock.dummy.block.bellows.TileEntityBellows;
 import ip.industrialProcessing.multiblock.dummy.block.blastFurnaceTower.TEmultiblockBlastFurnaceTower;
 import ip.industrialProcessing.multiblock.dummy.block.destilationTray.TileEntityDestilationTray;
 import ip.industrialProcessing.multiblock.dummy.block.displayPanel.TEmultiblockDisplayPanel;
@@ -129,7 +132,11 @@ public class ConfigMachineBlocks {
     private int roasterBlockID= IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "roasterBlockID", 516).getInt();
     private int smelterBlockID= IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "smelterBlockID", 517).getInt();
     private int quenchTankBlockID= IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "quenchTankBlockID", 518).getInt();
-
+    private int grindingStoneBlockID= IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "grindingStoneBlockID", 519).getInt();
+    private int anvilBlockID= IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "anvilBlockID", 520).getInt();
+    private int bellowsBlockID= IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "bellowsBlockID", 521).getInt();
+    private int bloomeryBlockID= IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "bloomeryBlockID", 522).getInt();
+    
     private int blastFurnaceID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "BlastFurnaceID", 550).getInt();
     private int extruderID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "ExtruderID", 551).getInt();
     private int oxygenFurnaceID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "OxygenFurnaceID", 552).getInt();
@@ -219,6 +226,9 @@ public class ConfigMachineBlocks {
     	registerMachineBlock(ISetupMachineBlocks.blockSmelter, "IP.Machine.Smelt", "Smelter", TileEntitySmelter.class);
     	registerMachineBlock(ISetupMachineBlocks.blockRoaster, "IP.Machine.Roast", "Roaster", TileEntityRoaster.class);
     	registerMachineBlock(ISetupMachineBlocks.blockQuenchTank, "IP.Machine.Quench", "QuenchTank", TileEntityQuenchTank.class);
+    	registerMachineBlock(ISetupMachineBlocks.blockGrindingStone, "IP.Machine.GrStone", "Grinding stone", TileEntityGrindingStone.class);
+    	registerMachineBlock(ISetupMachineBlocks.blockBellows, "IP.Machine.Bellow", "Bellows", TileEntityBellows.class);
+    	registerMachineBlock(ISetupMachineBlocks.blockBloomery, "IP.MBC.Bloom", "Bloomery", TileEntityBloomery.class);
     	
 
         registerMachineBlock(ISetupMachineBlocks.blockConveyorBelt, "IP.Trans.CBelt", "Conveyor belt", TileEntityConveyorBelt.class);
@@ -336,6 +346,18 @@ public class ConfigMachineBlocks {
         return instance;
     }
 
+    public static int getBlockBloomeryID() {
+        return getInstance().bloomeryBlockID;
+    }
+    public static int getBlockBellowsID() {
+        return getInstance().bellowsBlockID;
+    }
+    public static int getBlockGrindingStoneID() {
+        return getInstance().grindingStoneBlockID;
+    }
+    public static int getBlockAnvilID() {
+        return getInstance().anvilBlockID;
+    }
     public static int getBlockSmelterID() {
         return getInstance().smelterBlockID;
     }

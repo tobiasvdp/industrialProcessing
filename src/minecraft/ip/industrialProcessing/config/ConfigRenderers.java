@@ -89,7 +89,49 @@ public class ConfigRenderers {
     private int rendererSmelter;
     private int rendererRoaster;
     private int rendererQuechTank;
+    private int rendererAnvil;
+    private int rendererGrindingStone;
+    private int rendererPetrolLamp;
+    private int rendererBellows;
+    private int rendererBloomery;
 
+    public static int getRendererBloomeryId() {
+        return getInstance().rendererBloomery;
+    }
+    
+    public static void setRendererBloomeryId(int id) {
+        getInstance().rendererBloomery = id;
+    }
+    
+    public static int getRendererBellowsId() {
+        return getInstance().rendererBellows;
+    }
+    
+    public static void setRendererBellowsId(int id) {
+        getInstance().rendererBellows = id;
+    }
+    
+    public static int getRendererPetrolLampId() {
+        return getInstance().rendererPetrolLamp;
+    }
+    
+    public static void setRendererPetrolLampId(int id) {
+        getInstance().rendererPetrolLamp = id;
+    }
+    
+    public static int getRendererAnvilId() {
+        return getInstance().rendererAnvil;
+    }
+    
+    public static void setRendererAnvilId(int id) {
+        getInstance().rendererAnvil = id;
+    }
+    public static void setRendererGrindingStoneId(int id) {
+        getInstance().rendererGrindingStone = id;
+    }
+    public static int getRendererGrindingStoneId() {
+        return getInstance().rendererGrindingStone;
+    }
     public static int getRendererSmelterId() {
         return getInstance().rendererSmelter;
     }

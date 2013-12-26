@@ -1,51 +1,38 @@
-package ip.industrialProcessing.multiblock.core.block.weldingStation;
-
-import java.util.Iterator;
+package ip.industrialProcessing.multiblock.core.block.plants.blacksmith.bloomery;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTankInfo;
+import net.minecraft.nbt.NBTTagCompound;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.machines.crusher.RecipesCrusher;
-import ip.industrialProcessing.machines.mixer.RecipesMixer;
-import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
+import ip.industrialProcessing.multiblock.core.block.weldingStation.RecipesWeldingStation;
 import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreInv;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorkerPowered;
+import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorker;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
 import ip.industrialProcessing.multiblock.layout.LayoutTransformer;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
 import ip.industrialProcessing.multiblock.tier.Tier;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
-import ip.industrialProcessing.multiblock.tier.TierRequirement;
 import ip.industrialProcessing.multiblock.tier.Tiers;
-import ip.industrialProcessing.multiblock.utils.MultiblockActionType;
-import ip.industrialProcessing.multiblock.utils.TEmultiblockItemStackType;
-import ip.industrialProcessing.multiblock.utils.blockSide;
-import ip.industrialProcessing.recipes.Recipe;
+import ip.industrialProcessing.utils.IBreakable;
 import ip.industrialProcessing.utils.IHeatStorage;
 
-public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowered implements IHeatStorage {
+public class TileEntityBloomery extends TEmultiblockCoreTankWorker implements IHeatStorage, IBreakable {
 	static StructureMultiblock structure;
 	static TierCollection tierRequirments;
-	static RecipesMachine recipes = new RecipesWeldingStation();
+	static RecipesMachine recipes = new RecipesBloomery();
 	static {
 		// set layout
 		structure = new StructureMultiblock();
 
-		LayoutMultiblock layout = new LayoutMultiblock(2, 0, 0, 0, 1, 0);
+		LayoutMultiblock layout = new LayoutMultiblock(0, 1, 0, 0, 0, 0);
 
 		int i = 0;
-		layout.setCoreID(i++, 0, 1, IndustrialProcessing.BLmultiblockWeldingStation.blockID);
+		layout.setCoreID(i++, 0, 1, IndustrialProcessing.blockBloomery.blockID);
 
-		layout.setBlockID(-1, 0, 0, i++, 0, 0, IndustrialProcessing.BLmultiblockWeldingTableExt.blockID);
-		layout.setBlockID(0, 1, 0, i++, 0, 0, IndustrialProcessing.BLmultiblockScreen.blockID);
-		layout.setBlockID(-1, 1, 0, i++, 0, 1, IndustrialProcessing.BLmultiblockScreen.blockID);
+		layout.setBlockID(1, 0, 0, i++, 0, 0, IndustrialProcessing.blockBellows.blockID);
 
 		structure.addLayout(layout, FacingDirection.North);
 		structure.addLayout(LayoutTransformer.transform(layout, FacingDirection.East), FacingDirection.East);
@@ -64,29 +51,22 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowere
 	private int burnTime;
 	private int totalTime;
 
-	public TEmultiblockWeldingStation() {
-		super(structure, tierRequirments, recipes, LocalDirection.LEFT, 10000, 100);
+	private int liveTime;
+	private int totalLiveTime;
+
+	public TileEntityBloomery() {
+		super(structure, tierRequirments, recipes);
 		LocalDirection[] nodirections = new LocalDirection[0];
-		this.addStack(null, LocalDirection.UP, true, false);
-		this.addStack(null, LocalDirection.UP, true, false);
-		this.addStack(null, LocalDirection.UP, true, false);
-		this.addStack(null, LocalDirection.UP, true, false);
-		this.addStack(null, LocalDirection.UP, true, false);
-		this.addStack(null, LocalDirection.UP, true, false);
-		this.addStack(null, LocalDirection.UP, true, false);
-		this.addStack(null, LocalDirection.UP, true, false);
-		this.addStack(null, LocalDirection.UP, true, false);
-		this.addStack(null, LocalDirection.UP, true, false);
-		this.addStack(null, LocalDirection.UP, true, false);
-		this.addStack(null, LocalDirection.UP, true, false);
-		this.addStack(null, LocalDirection.UP, true, false);
-		this.addStack(null, LocalDirection.RIGHT, false, true);
+		this.addStack(null, nodirections, true, false);
+		this.addStack(null, nodirections, true, false);
 		this.addStack(null, nodirections, true, false);
 
 		T1 = 20;
 		T2 = 20;
 		burnTime = 0;
 		totalTime = 1;
+
+		SetLiveTime(15000);
 	}
 
 	@Override
@@ -94,7 +74,11 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowere
 		transferHeat();
 		tickFuel();
 		if (burnTime == 0)
-			ConsumeFuel(getStackInSlot(14));
+			ConsumeFuel(getStackInSlot(2));
+		if (getHeat() > 1538)
+			if (TickLiveTime())
+				destroyBlock();
+
 		super.updateEntity();
 	}
 
@@ -111,7 +95,7 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowere
 
 	@Override
 	protected boolean isValidInput(int slot, int itemID) {
-		if (slot == 14 && itemID == Item.coal.itemID) {
+		if (slot == 2 && itemID == Item.coal.itemID) {
 			return true;
 		}
 		return recipes.isValidInput(slot, itemID);
@@ -120,7 +104,7 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowere
 	@Override
 	public void ConsumeFuel(ItemStack stack) {
 		if (stack != null && stack.itemID == Item.coal.itemID && stack.stackSize > 0) {
-			this.removeFromSlot(14, stack.itemID, 1);
+			this.removeFromSlot(2, stack.itemID, 1);
 			burnTime = 3600;
 			totalTime = 3600;
 			T2 = 2700;
@@ -139,7 +123,7 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowere
 
 	@Override
 	public float getCoolingFactor() {
-		return (float) 0.0008;
+		return (float) 0.0016;
 	}
 
 	@Override
@@ -171,4 +155,54 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowere
 	public int getScaledBurnTime(int size) {
 		return burnTime * size / totalTime;
 	}
+
+	@Override
+	public void SetLiveTime(int time) {
+		totalLiveTime = time;
+		liveTime = totalLiveTime;
+	}
+
+	@Override
+	public boolean TickLiveTime() {
+		liveTime--;
+		if (liveTime <= 0)
+			return true;
+		return false;
+	}
+
+	@Override
+	public void destroyBlock() {
+		this.destroyMultiblock();
+		this.worldObj.destroyBlock(xCoord, yCoord, zCoord, false);
+		worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+	}
+
+	@Override
+	public int getScaledLiveTime(int scale) {
+		return liveTime * scale / totalLiveTime;
+	}
+	
+@Override
+public void writeToNBT(NBTTagCompound nbt) {
+	nbt.setInteger("T1",(int)T1);
+	nbt.setInteger("T2",(int)T2);
+	nbt.setInteger("burnTime",burnTime);
+	nbt.setInteger("totalTime",totalTime);
+
+	nbt.setInteger("liveTime",liveTime);
+	nbt.setInteger("totalLiveTime",totalLiveTime);
+	super.writeToNBT(nbt);
+}
+@Override
+public void readFromNBT(NBTTagCompound nbt) {
+	T1 = nbt.getInteger("T1");
+	T2 = nbt.getInteger("T2");
+	burnTime = nbt.getInteger("burnTime");
+	totalTime = nbt.getInteger("totalTime");
+
+	liveTime = nbt.getInteger("liveTime");
+	totalLiveTime = nbt.getInteger("totalLiveTime");
+	super.readFromNBT(nbt);
+}
+
 }
