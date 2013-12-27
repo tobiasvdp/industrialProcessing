@@ -40,6 +40,8 @@ import ip.industrialProcessing.machines.oxygenFurnace.TileEntityOxygenFurnace;
 import ip.industrialProcessing.machines.pelletExtruder.ContainerPelletExtruder;
 import ip.industrialProcessing.machines.pelletExtruder.GuiContainerPelletExtruder;
 import ip.industrialProcessing.machines.pelletExtruder.TileEntityPelletExtruder;
+import ip.industrialProcessing.machines.plants.blacksmith.anvil.ContainerAnvil;
+import ip.industrialProcessing.machines.plants.blacksmith.anvil.GuiContainerAnvil;
 import ip.industrialProcessing.machines.plants.metalProcessing.extruder.ContainerExtruder;
 import ip.industrialProcessing.machines.plants.metalProcessing.extruder.GuiContainerExtruder;
 import ip.industrialProcessing.machines.plants.metalProcessing.extruder.TileEntityExtruder;
@@ -297,7 +299,7 @@ public class GuiHandler implements IGuiHandler {
         	return null;
         }
         else if( ID == ANVIL_ID){
-        	return null;
+        	return new ContainerAnvil(player.inventory, world, x, y, z);
         }
         return null;
     }
@@ -423,7 +425,7 @@ public class GuiHandler implements IGuiHandler {
             return new GuiGuide(player);
            }
         else if( ID == ANVIL_ID){
-        	return null;
+        	return new GuiContainerAnvil(player.inventory, world, x, y, z);
         }
         return null;
     }

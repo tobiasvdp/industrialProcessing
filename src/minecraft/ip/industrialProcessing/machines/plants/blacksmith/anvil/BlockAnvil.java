@@ -89,12 +89,8 @@ public class BlockAnvil extends Block {
 		if (player.isSneaking()) {
 			return false;
 		} else {
-			if (world.isRemote) {
-				return true;
-			} else {
-				player.openGui(IndustrialProcessing.instance,2, world, x, y, z);
-				return true;
-			}
+			player.openGui(IndustrialProcessing.instance,2, world, x, y, z);
+			return true;
 		}
 	}
 

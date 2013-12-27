@@ -17,12 +17,9 @@ public class RecipesWeldingStation extends RecipesMachine {
 		addRecipe(motorStator(3000,0));
 		addRecipe(ironT(3000,0));
 		addRecipe(ironFrame(3000,0));
-		addRecipe(ironBar(3000,0));
-		addRecipe(ironPlate(3000,0));
 		addRecipe(ironMachineBlock(3000, 0));
 		addRecipe(motorRotor(3000,0));
 		addRecipe(slipRing(3000,0));
-		addRecipe(ironBowl(3000,0));
 		addRecipe(ironBracket(3000,0));
 		addRecipe(manualTreeTap(3000,0));
 		addRecipe(drawPlate(3000,0));
@@ -31,7 +28,6 @@ public class RecipesWeldingStation extends RecipesMachine {
 		addRecipe(generator(3000,0));
 		addRecipe(crankGenerator(3000,0));
 		addRecipe(crushingPlate(3000,0));
-		addRecipe(ironTips(3000,0));
 		addRecipe(crusher(3000,0));
 		addRecipe(frame(3000,0));
 		addRecipe(mixer(3000,0));
@@ -65,17 +61,6 @@ public class RecipesWeldingStation extends RecipesMachine {
 		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(3, IndustrialProcessing.itemCrusingPlate.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(4, IndustrialProcessing.blockMachineBlock.blockID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(5, IndustrialProcessing.itemCrusingPlate.itemID, RecipeSlotType.INVENTORY, 1) };
 		
 		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(13, IndustrialProcessing.blockCrusher.blockID, RecipeSlotType.INVENTORY, 1, 1, 0) };
-		
-		recipe.workRequired = workTime;
-		recipe.powerRequired = power;
-		return recipe;
-	}
-	private Recipe ironTips(int workTime, int power) {
-		Recipe recipe = new Recipe();
-		
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.ingotIron.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(2, Item.ingotIron.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(6, Item.ingotIron.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(8, Item.ingotIron.itemID, RecipeSlotType.INVENTORY, 1)};
-		
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(13, IndustrialProcessing.itemIronTips.itemID, RecipeSlotType.INVENTORY, 12, 12, 0) };
 		
 		recipe.workRequired = workTime;
 		recipe.powerRequired = power;
@@ -211,33 +196,6 @@ public class RecipesWeldingStation extends RecipesMachine {
 		Recipe recipe = new Recipe();
 		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(1, IndustrialProcessing.itemIronBar.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(7, IndustrialProcessing.itemIronBar.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(4, IndustrialProcessing.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1)};
 		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(13, IndustrialProcessing.itemDrawPlate.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
-		
-		recipe.workRequired = workTime;
-		recipe.powerRequired = power;
-		return recipe;
-	}
-	private Recipe ironBowl(int workTime, int power) {
-		Recipe recipe = new Recipe();
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(3, Item.ingotIron.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(5, Item.ingotIron.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(7, Item.ingotIron.itemID, RecipeSlotType.INVENTORY, 1)};
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(13, IndustrialProcessing.itemIronBowl.itemID, RecipeSlotType.INVENTORY, 3, 3, 0) };
-		
-		recipe.workRequired = workTime;
-		recipe.powerRequired = power;
-		return recipe;
-	}
-	private Recipe ironBar(int workTime, int power) {
-		Recipe recipe = new Recipe();
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(2, Item.ingotIron.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(4, Item.ingotIron.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(6, Item.ingotIron.itemID, RecipeSlotType.INVENTORY, 1)};
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(13, IndustrialProcessing.itemIronBar.itemID, RecipeSlotType.INVENTORY, 8, 8, 0) };
-		
-		recipe.workRequired = workTime;
-		recipe.powerRequired = power;
-		return recipe;
-	}
-	private Recipe ironPlate(int workTime, int power) {
-		Recipe recipe = new Recipe();
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.ingotIron.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(1, Item.ingotIron.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(3, Item.ingotIron.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(4, Item.ingotIron.itemID, RecipeSlotType.INVENTORY, 1)};
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(13, IndustrialProcessing.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 4, 4, 0) };
 		
 		recipe.workRequired = workTime;
 		recipe.powerRequired = power;

@@ -34,8 +34,6 @@ public class ConfigBaseRecipes {
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemActiveCoal), new ItemStack(ISetupItems.itemCoalDust), new ItemStack(ISetupItems.itemGrownCulture));
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemSandCast), new ItemStack(ISetupItems.itemCastingMulsh), new ItemStack(ISetupItems.itemFlask));
 		GameRegistry.addRecipe(new ItemStack(ISetupItems.itemHammer), "   ", " y ", "x  ", 'x', new ItemStack(ISetupItems.itemThickStick), 'y', new ItemStack(Item.ingotIron));
-		GameRegistry.addRecipe(new ItemStack(ISetupItems.itemKnife), "  y", " y ", "x  ", 'x', new ItemStack(ISetupItems.itemThickStick), 'y', new ItemStack(Item.ingotIron));
-		GameRegistry.addRecipe(new ItemStack(ISetupItems.itemBlowingTorch), "   ", " y ", "x  ", 'x', new ItemStack(Item.ingotIron), 'y', new ItemStack(Item.flintAndSteel));
 		GameRegistry.addRecipe(new ItemStack(ISetupItems.itemCastingMulsh, 4), "xyx", "yzy", "xyx", 'x', new ItemStack(Block.sand), 'y', new ItemStack(Item.clay), 'z', new ItemStack(Item.bucketWater));
 		GameRegistry.addRecipe(new ItemStack(ISetupItems.itemFlask), " x ", "x x", " x ", 'x', new ItemStack(Block.woodSingleSlab, 1, WILDCARD_VALUE));
 
@@ -43,7 +41,6 @@ public class ConfigBaseRecipes {
 		GameRegistry.addRecipe(new ItemStack(ISetupItems.itemCarbonBrush, 8), "xxx", "xyx", "xxx", 'x', new ItemStack(ISetupItems.itemCoalDust), 'y', new ItemStack(ISetupFluids.bucketFluidLatex, 1, WILDCARD_VALUE));
 
 		// welding station
-		GameRegistry.addShapedRecipe(new ItemStack(ISetupMachineBlocks.BLmultiblockScreen), "xxx", "x x", " y ", 'x', new ItemStack(Item.ingotIron), 'y', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
 		GameRegistry.addShapedRecipe(new ItemStack(ISetupMachineBlocks.BLmultiblockWeldingStation), "xxx", "yzy", "iji", 'x', new ItemStack(Block.stoneSingleSlab), 'y', new ItemStack(Block.planks, 1, WILDCARD_VALUE), 'z', new ItemStack(Block.workbench), 'i', new ItemStack(ISetupItems.itemThickStick), 'j', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
 		GameRegistry.addShapedRecipe(new ItemStack(ISetupMachineBlocks.BLmultiblockWeldingTableExt), "xxx", "yzy", "iji", 'x', new ItemStack(Block.stoneSingleSlab), 'y', new ItemStack(Block.planks, 1, WILDCARD_VALUE), 'z', new ItemStack(Block.chest), 'i', new ItemStack(ISetupItems.itemThickStick), 'j', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
 
