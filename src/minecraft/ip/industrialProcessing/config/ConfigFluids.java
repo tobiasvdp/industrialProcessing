@@ -1183,6 +1183,15 @@ public class ConfigFluids {
 		registerFluid(ISetupFluids.blockFluidCO2, ISetupFluids.itemFluidCO2, null, "CO2");
 		registerFluid(ISetupFluids.blockFluidAir, ISetupFluids.itemFluidAir, null, "Air");
 
+		registerFluid(ISetupFluids.blockFluidCycloneChromiteSediment, ISetupFluids.itemFluidCycloneChromiteSediment,ISetupFluids.bucketCycloneChromiteSediment, "Cyclone Chromite Sediment");
+		registerFluid(ISetupFluids.blockFluidCycloneCopperSediment, ISetupFluids.itemFluidCycloneCopperSediment,ISetupFluids.bucketCycloneCopperSediment, "Cyclone Copper Sediment");
+		registerFluid(ISetupFluids.blockFluidCycloneGalenaSediment, ISetupFluids.itemFluidCycloneGalenaSediment,ISetupFluids.bucketCycloneGalenaSediment, "Cyclone Galena Sediment");
+		registerFluid(ISetupFluids.blockFluidCycloneTinSediment, ISetupFluids.itemFluidCycloneTinSediment,ISetupFluids.bucketCycloneTinSediment, "Cyclone Tin Sediment");
+		registerFluid(ISetupFluids.blockFluidCycloneGoldSediment, ISetupFluids.itemFluidCycloneGoldSediment,ISetupFluids.bucketCycloneGoldSediment, "Cyclone Gold Sediment");
+		registerFluid(ISetupFluids.blockFluidCycloneIronSediment, ISetupFluids.itemFluidCycloneIronSediment,ISetupFluids.bucketCycloneIronSediment, "Cyclone Iron Sediment");
+		registerFluid(ISetupFluids.blockFluidCycloneTaliaSediment, ISetupFluids.itemFluidCycloneTaliaSediment,ISetupFluids.bucketCycloneTaliaSediment, "Cyclone Talia Sediment");
+		 
+		
 		registerFluid(ISetupFluids.blockFluidLatex, ISetupFluids.itemFluidLatex, ISetupFluids.bucketFluidLatex, "Latex");
 		LanguageRegistry.addName(ISetupFluids.bucketFluidLatex, "Latex Bucket");
 

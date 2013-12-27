@@ -45,6 +45,8 @@ import net.minecraftforge.fluids.IFluidBlock;
 
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.common.Mod.Item;
+
 public class GuideTreePage extends GuidePanoramaPage {
 
 	private static final int FILL_COLOR = 0xffc6c6c6;
@@ -123,6 +125,7 @@ public class GuideTreePage extends GuidePanoramaPage {
 	private void drawStack(ItemStack stack, int x, int y, int mouseX, int mouseY, boolean clickAble, boolean tooltip) {
 		if (stack == null)
 			return;
+		try{
 		Minecraft mc = Minecraft.getMinecraft();
 		GL11.glPushMatrix();
 		GL11.glTranslatef(-1, -1, 11);
@@ -139,7 +142,7 @@ public class GuideTreePage extends GuidePanoramaPage {
 
 		Rectangle rect = new Rectangle(x, y, 16, 16);
 		if (tooltip && rect.contains(mouseX, mouseY)) {
-			ToolTip tip = new ToolTip(stack.getDisplayName());
+			ToolTip tip = new ToolTip(stack.getDisplayName()+":"+stack.itemID);
 			ToolTip.renderToolTip(tip, mouseX + 16, mouseY, 10, mc.fontRenderer);
 			if (clickAble)
 				this.hoverStack = stack;
@@ -147,7 +150,11 @@ public class GuideTreePage extends GuidePanoramaPage {
 		GL11.glDisable(GL11.GL_LIGHTING);
 		RenderHelper.disableStandardItemLighting();
 		GL11.glPopMatrix();
-
+		}catch(NullPointerException e)
+		{
+			ToolTip tip = new ToolTip("ERROR: "+stack.itemID);
+		    ToolTip.renderToolTip(tip, x, y, 10, mc.fontRenderer);
+		}
 	}
 
 	private int drawTree(ItemStack stack, int x, int y, RecipeSlotType type, int mouseX, int mouseY, HashSet<Integer> items) {
