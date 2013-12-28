@@ -4,7 +4,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import ip.industrialProcessing.client.render.ModelingMultiblock;
-
+@Deprecated
 public class MDmultiblockBlastFurnace extends ModelingMultiblock {
 	// fields
 		ModelRenderer footBack;

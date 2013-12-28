@@ -1,26 +1,44 @@
 package ip.industrialProcessing.multiblock.core.block.blastFurnace;
 
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.multiblock.core.BLmultiblockCore;
 
-public class BLmultiblockBlastFurnace  extends BLmultiblockCore{
-	public BLmultiblockBlastFurnace() {
-		super(ConfigMachineBlocks.getBLmultiblockBlastFurnace(), "BLmultiblockBlastFurnace", IndustrialProcessing.tabMultiblocks);
-	}
+public class BLmultiblockBlastFurnace extends BLmultiblockCore {
+    Icon[] icons = new Icon[6];
 
-	@Override
-	public TileEntity createNewTileEntity(World world) {
-		return new TEmultiblockBlastFurnace();
-	}
-	@Override
-	public int getRenderType() {
-		return ConfigRenderers.getrendererMultiblockBlastFurnaceID();
-	}
+    public BLmultiblockBlastFurnace() {
+	super(ConfigMachineBlocks.getBLmultiblockBlastFurnace(), "BLmultiblockBlastFurnace", IndustrialProcessing.tabMultiblocks);
+    }
 
+    @Override
+    public TileEntity createNewTileEntity(World world) {
+	return new TEmultiblockBlastFurnace();
+    }
 
+    @Override
+    public int getRenderType() {
+	return ConfigRenderers.getrendererMultiblockBlastFurnaceID();
+    }
+
+    @Override
+    public Icon getIcon(int par1, int par2) {
+	return icons[par1 % icons.length];
+    }
+
+    @Override
+    public void registerIcons(IconRegister par1IconRegister) {
+        icons[0] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "MachineConnectorFiller");
+        icons[1] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "tankSide");
+        icons[2] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "conveyorHopperFeatures");
+        icons[3] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "tankFeatures");
+        icons[4] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "grill");
+        icons[5] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "generatorFeatures");
+    }
 }
