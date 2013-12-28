@@ -47,7 +47,7 @@ public class TileEntityTransportFluids extends TileEntityTransportFluidsBase {
 
 	@Override
 	protected void leakPressure() {
-		this.pressure -= this.pressure * 0.00015f;
+		this.pressure -= this.pressure * 0.005f;
 		if (Float.isNaN(this.pressure) || Float.isInfinite(this.pressure))
 			this.pressure = 0;
 	}
@@ -91,6 +91,12 @@ public class TileEntityTransportFluids extends TileEntityTransportFluidsBase {
 	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
 		super.readFromNBT(par1nbtTagCompound);
 		this.tank.readFromNBT(par1nbtTagCompound);
+		if(tank.getFluidAmount() > tank.getCapacity())
+		{
+		    FluidStack fluidStack = tank.getFluid();
+		    fluidStack.amount = tank.getCapacity();
+		    tank.setFluid(fluidStack);
+		}
 		this.pressure = par1nbtTagCompound.getFloat("Pressure");
 	}
 

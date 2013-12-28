@@ -1,20 +1,21 @@
 package ip.industrialProcessing.transport.fluids;
 
-import java.util.List;
-
 import ip.industrialProcessing.client.render.IFluidInfo;
 import ip.industrialProcessing.machines.animation.tanks.ITankSyncable;
 import ip.industrialProcessing.machines.animation.tanks.TankHandler;
 import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
 import ip.industrialProcessing.transport.TileEntityTransport;
 import ip.industrialProcessing.transport.TransportConnectionState;
-import ip.industrialProcessing.transport.items.conveyorBelt.SlopeState;
 import ip.industrialProcessing.utils.FluidTransfers;
+
+import java.util.List;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fluids.IFluidTank;
@@ -26,8 +27,8 @@ public abstract class TileEntityTransportFluidsBase extends TileEntityTransport 
     protected int connectionGroup = 1;
 
     public void setConnectionGroup(int color) {
-        connectionGroup = color;
-        updateConnections();
+	connectionGroup = color;
+	updateConnections();
     }
 
     public TileEntityTransportFluidsBase() {
@@ -35,68 +36,243 @@ public abstract class TileEntityTransportFluidsBase extends TileEntityTransport 
 
     @Override
     protected TransportConnectionState getState(TileEntity entity, ForgeDirection direction) {
-        if (this.canConnect(direction)) {
-            ForgeDirection from = direction.getOpposite();
-            if (entity instanceof TileEntityTransportFluidsBase) {
-                TileEntityTransportFluidsBase other = (TileEntityTransportFluidsBase) entity;
-                System.out.println(other.connectionGroup + " " + this.connectionGroup);
-                if ((other.connectionGroup == this.connectionGroup || other.connectionGroup == 1 || this.connectionGroup == 1) && other.canConnect(direction.getOpposite()))
-                    return TransportConnectionState.TRANSPORT;
-                return TransportConnectionState.NONE;
-            }
+	if (this.canConnect(direction)) {
+	    ForgeDirection from = direction.getOpposite();
+	    if (entity instanceof TileEntityTransportFluidsBase) {
+		TileEntityTransportFluidsBase other = (TileEntityTransportFluidsBase) entity;
+		System.out.println(other.connectionGroup + " " + this.connectionGroup);
+		if ((other.connectionGroup == this.connectionGroup || other.connectionGroup == 1 || this.connectionGroup == 1) && other.canConnect(direction.getOpposite()))
+		    return TransportConnectionState.TRANSPORT;
+		return TransportConnectionState.NONE;
+	    }
 
-            if (entity instanceof TileEntityManoMeter && direction == ForgeDirection.UP)
-                return TransportConnectionState.TRANSPORT;
+	    if (entity instanceof TileEntityManoMeter && direction == ForgeDirection.UP)
+		return TransportConnectionState.TRANSPORT;
 
-            if (entity instanceof TileEntityPump) {
-                TileEntityPump pump = (TileEntityPump) entity;
-                if (pump.isFluidOuptut(from))
-                    return TransportConnectionState.OUTPUT;
-                if (pump.isFluidInput(from))
-                    return TransportConnectionState.INPUT;
-            }
-            if (entity instanceof IFluidHandler) {
-                IFluidHandler handler = (IFluidHandler) entity;
-                return canInsertOrExtractFluid(handler, from);
-            }
-        }
-        return TransportConnectionState.NONE;
+	    if (entity instanceof TileEntityPump) {
+		TileEntityPump pump = (TileEntityPump) entity;
+		if (pump.isFluidOuptut(from))
+		    return TransportConnectionState.OUTPUT;
+		if (pump.isFluidInput(from))
+		    return TransportConnectionState.INPUT;
+	    }
+	    if (entity instanceof IFluidHandler) {
+		IFluidHandler handler = (IFluidHandler) entity;
+		return canInsertOrExtractFluid(handler, from);
+	    }
+	}
+	return TransportConnectionState.NONE;
     }
 
     private TransportConnectionState canInsertOrExtractFluid(IFluidHandler handler, ForgeDirection from) {
-        FluidTankInfo[] info = handler.getTankInfo(from);
-        if (info != null && info.length > 0)
-            return TransportConnectionState.DUAL; // can't decide if input only
-        // or input/output
-        return TransportConnectionState.NONE;
+	FluidTankInfo[] info = handler.getTankInfo(from);
+	if (info != null && info.length > 0)
+	    return TransportConnectionState.DUAL; // can't decide if input only
+	// or input/output
+	return TransportConnectionState.NONE;
     }
 
     @Override
     public void updateEntity() {
-        super.updateEntity();
-        if (this.worldObj.isRemote)
-            return;
-        handlePumps();
-        outputToInputs();
-        inputFromOutputs();
-        equalizeToOtherPipes();
-        leakPressure();
+	super.updateEntity();
+	if (this.worldObj.isRemote)
+	    return;
+	handleSides();
+	leakPressure();
 
-        if (this.tankHandler.readDataFromTanks())
-            TileTankSyncHandler.sendTankData(this, this.tankHandler);
+	if (this.tankHandler.readDataFromTanks())
+	    TileTankSyncHandler.sendTankData(this, this.tankHandler);
 
+    }
+
+    private void handleSides() {
+
+	float totalIncomingPressureDifference = 0f;
+	float totalOutgoingPressureDifference = 0f;
+	int totalIncomingVolumeDifference = 0;
+	int totalOutgoingVolumeDifference = 0;
+	float[] pressureDifferences = new float[6];
+	int[] volumeDifferences = new int[6];
+	for (int i = 0; i < pressureDifferences.length; i++) {
+	    ForgeDirection direction = ForgeDirection.getOrientation(i);
+	    if (isConnected(direction)) {
+		float pressure = getPressure(direction);
+
+		IFluidTank tank = getTank(direction);
+		int fluidAmount = tank.getFluidAmount();
+
+		float pressureDifference = pressure;
+		int volumeDifference = fluidAmount;
+
+		TileEntity entity = getNeighbor(direction);
+
+		ForgeDirection oppositeDirection = direction.getOpposite();
+		if (entity instanceof TileEntityPump) {
+		    pressureDifference -= getPumpPressure((TileEntityPump) entity, oppositeDirection, pressure);
+		    volumeDifference -= getPumpVolume((TileEntityPump) entity, oppositeDirection);
+		} else if (entity instanceof TileEntityTransportFluidsBase) {
+		    pressureDifference -= getPipePressure((TileEntityTransportFluidsBase) entity, oppositeDirection, pressure);
+		    volumeDifference -= getPipeVolume((TileEntityTransportFluidsBase) entity, oppositeDirection);
+		} else if (entity instanceof IFluidHandler) {
+		    pressureDifference -= getFluidHandlerPressure((IFluidHandler) entity, oppositeDirection, pressure);
+		    volumeDifference -= getFluidHandlerVolume((IFluidHandler) entity, oppositeDirection);
+		} else
+		    continue;
+		pressureDifferences[i] = pressureDifference;
+		volumeDifferences[i] = volumeDifference;
+		if (pressureDifference < 0)
+		    totalIncomingPressureDifference -= pressureDifference;
+		else if (pressureDifference > 0) // other pressure is lower
+		    totalOutgoingPressureDifference += pressureDifference;
+
+		if (volumeDifference < 0)
+		    totalIncomingVolumeDifference -= volumeDifference;
+		else if (volumeDifference > 0)
+		    totalOutgoingVolumeDifference += volumeDifference;
+
+	    }
+	}
+	if (totalIncomingPressureDifference > 0 || totalOutgoingPressureDifference > 0)
+	    System.out.println(totalIncomingPressureDifference + "-><-" + totalOutgoingPressureDifference);
+	for (int i = 0; i < volumeDifferences.length; i++) {
+
+	    ForgeDirection direction = ForgeDirection.getOrientation(i);
+	    if (isConnected(direction)) {
+		float pressureFlow = pressureDifferences[i];
+		float flowRate = 0f;
+		
+		float equalizeFlow = volumeDifferences[i] / 1000f;
+		 
+		
+		if (pressureFlow < 0)
+		    flowRate = -pressureFlow / totalIncomingPressureDifference;
+		else if (pressureFlow > 0)
+		    flowRate = pressureFlow / totalOutgoingPressureDifference;
+
+		int volumeDifference = volumeDifferences[i];
+
+		float volumeFlowRate = Math.abs(volumeDifference) / 1000f;
+		if (volumeFlowRate > 1)
+		    volumeFlowRate = 1;
+		// TODO: balance this for equilibrium 
+
+		this.transferPressure(direction, pressureFlow * flowRate * 0.75f);
+		
+		pressureFlow = Math.max(-1000, Math.min(1000, pressureFlow));
+		
+		int bucketFlow = (int)(pressureFlow * flowRate);
+		System.out.println("bf:"+bucketFlow);
+		this.transfer(direction,bucketFlow); 
+		// TODO: measure how much we can transfer and use that ..
+	    }
+	}
+    }
+
+    private void transferPressure(ForgeDirection direction, float amount) {
+	if (amount == 0)
+	    return;
+	TileEntity entity = getNeighbor(direction);
+	ForgeDirection oppositeDirection = direction.getOpposite();
+	if (entity instanceof TileEntityPump) {
+	    TileEntityPump pump = (TileEntityPump) entity;
+	    if (pump.isFluidInput(oppositeDirection))
+		pump.setInputPressure(pump.getInputPressure() + amount);
+	    else if (pump.isFluidOuptut(oppositeDirection))
+		pump.setOutputPressure(pump.getOutputPressure() + amount);
+	} else if (entity instanceof TileEntityTransportFluidsBase) {
+	    TileEntityTransportFluidsBase other = (TileEntityTransportFluidsBase) entity;
+	    other.addPressure(oppositeDirection, amount);
+	} else if (entity instanceof IFluidHandler) {
+	    if (entity instanceof IPressuredTank) {
+		IPressuredTank pressuredTank = (IPressuredTank) entity;
+		pressuredTank.addPressure(oppositeDirection, amount);
+	    }
+	} else
+	    return;
+	this.addPressure(direction, -amount);
+    }
+
+    private void transfer(ForgeDirection direction, int amount) {
+	if (amount == 0)
+	    return;
+	TileEntity entity = getNeighbor(direction);
+	IFluidTank tank = getTank(direction);
+	ForgeDirection oppositeDirection = direction.getOpposite();
+	if (entity instanceof TileEntityPump) {
+	    if (amount > 0)
+		FluidTransfers.transfer(amount, tank, ((TileEntityPump) entity).getTank());
+	    else
+		FluidTransfers.transfer(-amount, ((TileEntityPump) entity).getTank(), tank);
+	} else if (entity instanceof TileEntityTransportFluidsBase) {
+	    IFluidTank otherTank = ((TileEntityTransportFluidsBase) entity).getTank(oppositeDirection);
+	    if (amount > 0)
+		FluidTransfers.transfer(amount, tank, otherTank);
+	    else
+		FluidTransfers.transfer(-amount, otherTank, tank);
+	} else if (entity instanceof IFluidHandler) {
+	    if (amount > 0)
+		FluidTransfers.transfer(amount, tank, (IFluidHandler) entity, oppositeDirection);
+	    else
+		FluidTransfers.transfer(-amount, (IFluidHandler) entity, oppositeDirection, tank);
+	}
+    }
+
+    private int getFluidHandlerVolume(IFluidHandler entity, ForgeDirection oppositeDirection) {
+	FluidTankInfo[] info = entity.getTankInfo(oppositeDirection);
+	int volume = 0;
+	if (info != null) {
+	    for (int i = 0; i < info.length; i++) {
+		FluidStack stack = info[i].fluid;
+		if (stack != null)
+		    volume += stack.amount;
+	    }
+	}
+	return volume;
+    }
+
+    private int getPipeVolume(TileEntityTransportFluidsBase entity, ForgeDirection oppositeDirection) {
+	IFluidTank tank = entity.getTank(oppositeDirection);
+	return tank.getFluidAmount();
+    }
+
+    private int getPumpVolume(TileEntityPump entity, ForgeDirection oppositeDirection) {
+	IFluidTank tank = entity.getTank();
+	return tank.getFluidAmount();
+    }
+
+    private boolean isConnected(ForgeDirection direction) {
+	TransportConnectionState state = this.states[direction.ordinal()];
+	return state.isConnected();
+    }
+
+    private float getFluidHandlerPressure(IFluidHandler entity, ForgeDirection direction, float equalPressure) {
+	if (entity instanceof IPressuredTank)
+	    return ((IPressuredTank) entity).getPressure(direction);
+	return 0;
+    }
+
+    private float getPipePressure(TileEntityTransportFluidsBase entity, ForgeDirection direction, float equalPressure) {
+	return entity.getPressure(direction);
+    }
+
+    private float getPumpPressure(TileEntityPump entity, ForgeDirection direction, float equalPressure) {
+	if (entity.isFluidInput(direction))
+	    return entity.getInputPressure();
+	else if (entity.isFluidOuptut(direction))
+	    return entity.getOutputPressure();
+	return equalPressure;
     }
 
     @Override
     public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
-        super.writeToNBT(par1nbtTagCompound);
-        par1nbtTagCompound.setInteger("Group", this.connectionGroup);
+	super.writeToNBT(par1nbtTagCompound);
+	par1nbtTagCompound.setInteger("Group", this.connectionGroup);
     }
 
     @Override
     public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
-        super.readFromNBT(par1nbtTagCompound);
-        this.connectionGroup = par1nbtTagCompound.getInteger("Group");
+	super.readFromNBT(par1nbtTagCompound);
+	this.connectionGroup = par1nbtTagCompound.getInteger("Group");
     }
 
     protected abstract void leakPressure();
@@ -109,198 +285,63 @@ public abstract class TileEntityTransportFluidsBase extends TileEntityTransport 
 
     protected abstract boolean canConnect(ForgeDirection direction);
 
-    private void handlePumps() {
-        for (int i = 0; i < states.length; i++) {
-            TransportConnectionState state = this.states[i];
-            ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[i];
-            if (state == TransportConnectionState.INPUT || state == TransportConnectionState.OUTPUT) {
-                TileEntityPump pump = getNeighborPump(direction);
-                if (pump != null) {
-                    float lastPressure = this.getPressure(direction);
-                    IFluidTank tank = this.getTank(direction);
-                    if (pump.isFluidInput(direction.getOpposite())) {
-                        float pumpPressure = pump.getInputPressure();
-                        float flow = pumpPressure - lastPressure;
-                        if (flow < 0) {
-
-                            pumpPressure -= flow / 4;
-                            this.addPressure(direction, flow / 4);
-
-                            FluidTransfers.transfer(-(int) flow, tank, pump.getTank());
-                        }
-                        pump.setInputPressure(pumpPressure);
-
-                    } else if (pump.isFluidOuptut(direction.getOpposite())) {
-                        float pumpPressure = pump.getOutputPressure();
-
-                        float flow = pumpPressure - lastPressure;
-                        if (flow > 0) {
-
-                            pumpPressure -= flow / 4;
-                            this.addPressure(direction, flow / 4);
-
-                            FluidTransfers.transfer((int) (flow), pump.getTank(), tank);
-                        }
-                        pump.setOutputPressure(pumpPressure);
-                    }
-                }
-            }
-        }
-    }
-
-    private void equalizeToOtherPipes() {
-
-        float totalDifference = 0;
-        float[] flows = new float[6];
-        for (int i = 0; i < states.length; i++) {
-            TransportConnectionState state = this.states[i];
-            ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[i];
-            if (state == TransportConnectionState.TRANSPORT) {
-                TileEntityTransportFluidsBase other = getNeighborPipe(direction);
-                if (other != null) {
-
-                    float flow = this.getPressure(direction) - other.getPressure(direction.getOpposite());
-                    float gravFlow = getGravityFlow(other, direction);
-                    flow += gravFlow;
-                    if (flow > 0) {
-                        flows[i] = flow;
-                        totalDifference += Math.abs(flow);
-                    }
-                }
-            }
-        }
-        if (totalDifference > 0) {
-            for (int i = 0; i < states.length; i++) {
-                TransportConnectionState state = this.states[i];
-                ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[i];
-                if (state == TransportConnectionState.TRANSPORT) {
-                    TileEntityTransportFluidsBase other = getNeighborPipe(direction);
-                    if (other != null) {
-                        IFluidTank tank = this.getTank(direction);
-                        IFluidTank otherTank = other.getTank(direction.getOpposite());
-                        float flow = flows[i] * flows[i] / totalDifference;
-                        if (flow > 0) {
-                            FluidTransfers.transfer((int) (flow), tank, otherTank);
-                        } else if (flow < 0) {
-                            FluidTransfers.transfer((int) (flow), otherTank, tank);
-                        }
-                        other.addPressure(direction.getOpposite(), flow / 4f);
-                        this.addPressure(direction, -flow / 4f);
-                    }
-                }
-            }
-        }
-    }
-
     private float getGravityFlow(TileEntityTransportFluidsBase other, ForgeDirection direction) {
 
-        float scale = 0.15f;// 15f;
-        float amount = this.getTank(direction).getFluidAmount();
-        float otherAmount = other.getTank(direction.getOpposite()).getFluidAmount();
+	float scale = 0.15f;// 15f;
+	float amount = this.getTank(direction).getFluidAmount();
+	float otherAmount = other.getTank(direction.getOpposite()).getFluidAmount();
 
-        if (direction == ForgeDirection.DOWN) {
-            // other tank is below this tank.
-            return amount * scale;
-        }
+	if (direction == ForgeDirection.DOWN) {
+	    // other tank is below this tank.
+	    return amount * scale;
+	}
 
-        if (direction == ForgeDirection.UP) {
-            // other tank is above this tank.
-            return -otherAmount * scale;
-        }
+	if (direction == ForgeDirection.UP) {
+	    // other tank is above this tank.
+	    return -otherAmount * scale;
+	}
 
-        return (amount - otherAmount) * scale;
-    }
-
-    /*
-     * private float getPressure(ForgeDirection direction) { float extra = 1;//
-     * this.tank.getFluidAmount() * -100f / this.tank.getCapacity(); //extra =
-     * this.pressure; if (direction == ForgeDirection.DOWN) return this.pressure
-     * + extra;// output to below else if (direction == ForgeDirection.UP)
-     * return this.pressure; // output to above else return this.pressure +
-     * extra / 2; // sides
-     * 
-     * }
-     */
-    private void inputFromOutputs() {
-        for (int i = 0; i < states.length; i++) {
-            TransportConnectionState state = this.states[i];
-            ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[i];
-            ForgeDirection from = direction.getOpposite();
-            if (state == TransportConnectionState.DUAL) {
-                IFluidHandler other = getNeighborFluidHandler(direction);
-                if (other != null) {
-                    float tankPressure = getTankPressure(other, direction);
-                    float currentPressure = getPressure(direction);
-                    if (currentPressure < tankPressure) {
-                        float flow = tankPressure - currentPressure;
-                        if (flow > 0) {
-                            this.addPressure(direction, flow / 4);
-                            this.addTankPressure(other, direction, -flow / 4);
-                            FluidTransfers.transfer((int) (flow), other, from, this.getTank(direction));
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private void outputToInputs() {
-        for (int i = 0; i < states.length; i++) {
-            TransportConnectionState state = this.states[i];
-            ForgeDirection direction = ForgeDirection.VALID_DIRECTIONS[i];
-            ForgeDirection from = direction.getOpposite();
-            if (state == TransportConnectionState.DUAL) {
-                IFluidHandler other = getNeighborFluidHandler(direction);
-                if (other != null) {
-                    float tankPressure = getTankPressure(other, direction);
-                    float currentPressure = getPressure(direction);
-                    if (currentPressure > tankPressure) {
-                        float flow = tankPressure - currentPressure;
-                        if (flow < 0) {
-                            this.addPressure(direction, +flow / 4);
-                            this.addTankPressure(other, direction, -flow / 4);
-                            FluidTransfers.transfer(-(int) (flow), this.getTank(direction), other, from);
-                        }
-                    }
-                }
-            }
-        }
+	return (amount - otherAmount) * scale;
     }
 
     private void addTankPressure(IFluidHandler other, ForgeDirection direction, float flow) {
-        if (other instanceof IPressuredTank) {
-            IPressuredTank tank = (IPressuredTank) other;
-            tank.addPressure(direction.getOpposite(), flow);
-        }
+	if (other instanceof IPressuredTank) {
+	    IPressuredTank tank = (IPressuredTank) other;
+	    tank.addPressure(direction.getOpposite(), flow);
+	}
     }
 
     private float getTankPressure(IFluidHandler other, ForgeDirection direction) {
-        if (other instanceof IPressuredTank) {
-            IPressuredTank tank = (IPressuredTank) other;
-            return tank.getPressure(direction.getOpposite());
-        }
-        return 0;
+	if (other instanceof IPressuredTank) {
+	    IPressuredTank tank = (IPressuredTank) other;
+	    return tank.getPressure(direction.getOpposite());
+	}
+	return 0;
     }
 
     private IFluidHandler getNeighborFluidHandler(ForgeDirection direction) {
-        TileEntity ent = this.worldObj.getBlockTileEntity(this.xCoord + direction.offsetX, this.yCoord + direction.offsetY, this.zCoord + direction.offsetZ);
-        if (ent instanceof IFluidHandler)
-            return (IFluidHandler) ent;
-        return null;
+	TileEntity ent = getNeighbor(direction);
+	if (ent instanceof IFluidHandler)
+	    return (IFluidHandler) ent;
+	return null;
+    }
+
+    private TileEntity getNeighbor(ForgeDirection direction) {
+	return this.worldObj.getBlockTileEntity(this.xCoord + direction.offsetX, this.yCoord + direction.offsetY, this.zCoord + direction.offsetZ);
     }
 
     private TileEntityTransportFluidsBase getNeighborPipe(ForgeDirection direction) {
-        TileEntity ent = this.worldObj.getBlockTileEntity(this.xCoord + direction.offsetX, this.yCoord + direction.offsetY, this.zCoord + direction.offsetZ);
-        if (ent instanceof TileEntityTransportFluidsBase)
-            return (TileEntityTransportFluidsBase) ent;
-        return null;
+	TileEntity ent = getNeighbor(direction);
+	if (ent instanceof TileEntityTransportFluidsBase)
+	    return (TileEntityTransportFluidsBase) ent;
+	return null;
     }
 
     private TileEntityPump getNeighborPump(ForgeDirection direction) {
-        TileEntity ent = this.worldObj.getBlockTileEntity(this.xCoord + direction.offsetX, this.yCoord + direction.offsetY, this.zCoord + direction.offsetZ);
-        if (ent instanceof TileEntityPump)
-            return (TileEntityPump) ent;
-        return null;
+	TileEntity ent = getNeighbor(direction);
+	if (ent instanceof TileEntityPump)
+	    return (TileEntityPump) ent;
+	return null;
     }
 
     @Override
@@ -308,89 +349,89 @@ public abstract class TileEntityTransportFluidsBase extends TileEntityTransport 
 
     @Override
     public TankHandler getTankHandler() {
-        return this.tankHandler;
+	return this.tankHandler;
     }
 
     @Override
     public abstract IFluidTank getTankInSlot(int slot);
 
     public void cycleGroups(boolean sneaking) {
-        if (sneaking)
-            connectionGroup--;
-        else
-            connectionGroup++;
+	if (sneaking)
+	    connectionGroup--;
+	else
+	    connectionGroup++;
 
-        if (connectionGroup < 0)
-            connectionGroup += CONNECTION_GROUPS;
-        else if (connectionGroup >= CONNECTION_GROUPS)
-            connectionGroup -= CONNECTION_GROUPS;
+	if (connectionGroup < 0)
+	    connectionGroup += CONNECTION_GROUPS;
+	else if (connectionGroup >= CONNECTION_GROUPS)
+	    connectionGroup -= CONNECTION_GROUPS;
 
-        searchForConnections();
-        this.worldObj.notifyBlockChange(xCoord, yCoord, zCoord, getBlockType().blockID);
+	searchForConnections();
+	this.worldObj.notifyBlockChange(xCoord, yCoord, zCoord, getBlockType().blockID);
     }
 
     public void setBounds() {
 
-        float xMin = -3 / 16f;
-        float yMin = -3 / 16f;
-        float zMin = -3 / 16f;
-        float xMax = 3 / 16f;
-        float yMax = 3 / 16f;
-        float zMax = 3 / 16f;
+	float xMin = -3 / 16f;
+	float yMin = -3 / 16f;
+	float zMin = -3 / 16f;
+	float xMax = 3 / 16f;
+	float yMax = 3 / 16f;
+	float zMax = 3 / 16f;
 
-        for (int i = 0; i < 6; i++) {
-            ForgeDirection direction = ForgeDirection.getOrientation(i);
-            TransportConnectionState state = this.states[i];
-            if (state.isConnected()) {
-                float dx = direction.offsetX / 2f;
-                float dz = direction.offsetZ / 2f;
-                float dy = direction.offsetY / 2f;
+	for (int i = 0; i < 6; i++) {
+	    ForgeDirection direction = ForgeDirection.getOrientation(i);
+	    TransportConnectionState state = this.states[i];
+	    if (state.isConnected()) {
+		float dx = direction.offsetX / 2f;
+		float dz = direction.offsetZ / 2f;
+		float dy = direction.offsetY / 2f;
 
-                xMin = Math.min(xMin, dx);
-                yMin = Math.min(yMin, dy);
-                zMin = Math.min(zMin, dz);
+		xMin = Math.min(xMin, dx);
+		yMin = Math.min(yMin, dy);
+		zMin = Math.min(zMin, dz);
 
-                xMax = Math.max(xMax, dx);
-                yMax = Math.max(yMax, dy);
-                zMax = Math.max(zMax, dz);
+		xMax = Math.max(xMax, dx);
+		yMax = Math.max(yMax, dy);
+		zMax = Math.max(zMax, dz);
 
-            }
-        }
+	    }
+	}
 
-        this.getBlockType().setBlockBounds(xMin + 0.5f, yMin + 0.5f, zMin + 0.5f, xMax + 0.5f, yMax + 0.5f, zMax + 0.5f);
+	this.getBlockType().setBlockBounds(xMin + 0.5f, yMin + 0.5f, zMin + 0.5f, xMax + 0.5f, yMax + 0.5f, zMax + 0.5f);
     }
 
     public void addCollisionBoxesToList(AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
 
-        for (int i = 0; i < 6; i++) {
-            ForgeDirection direction = ForgeDirection.getOrientation(i);
-            TransportConnectionState state = this.states[i];
-            if (state.isConnected()) {
+	for (int i = 0; i < 6; i++) {
+	    ForgeDirection direction = ForgeDirection.getOrientation(i);
+	    TransportConnectionState state = this.states[i];
+	    if (state.isConnected()) {
 
-                double xMin = -3 / 16f;
-                double yMin = -3 / 16f;
-                double zMin = -3 / 16f;
-                double xMax = 3 / 16f;
-                double yMax = 3 / 16f;
-                double zMax = 3 / 16f;
+		double xMin = -3 / 16f;
+		double yMin = -3 / 16f;
+		double zMin = -3 / 16f;
+		double xMax = 3 / 16f;
+		double yMax = 3 / 16f;
+		double zMax = 3 / 16f;
 
-                double dx = direction.offsetX / 2f;
-                double dz = direction.offsetZ / 2f;
-                double dy = direction.offsetY / 2f;
+		double dx = direction.offsetX / 2f;
+		double dz = direction.offsetZ / 2f;
+		double dy = direction.offsetY / 2f;
 
-                xMin = Math.min(xMin, dx) + xCoord + 0.5f;
-                yMin = Math.min(yMin, dy) + yCoord + 0.5f;
-                zMin = Math.min(zMin, dz) + zCoord + 0.5f;
+		xMin = Math.min(xMin, dx) + xCoord + 0.5f;
+		yMin = Math.min(yMin, dy) + yCoord + 0.5f;
+		zMin = Math.min(zMin, dz) + zCoord + 0.5f;
 
-                xMax = Math.max(xMax, dx) + xCoord + 0.5f;
-                yMax = Math.max(yMax, dy) + yCoord + 0.5f;
-                zMax = Math.max(zMax, dz) + zCoord + 0.5f;
+		xMax = Math.max(xMax, dx) + xCoord + 0.5f;
+		yMax = Math.max(yMax, dy) + yCoord + 0.5f;
+		zMax = Math.max(zMax, dz) + zCoord + 0.5f;
 
-                AxisAlignedBB bbx = AxisAlignedBB.getBoundingBox(xMin, yMin, zMin, xMax, yMax, zMax);
-                if (bbx.intersectsWith(par5AxisAlignedBB)) {
-                    par6List.add(bbx);
-                }
-            }
-        }
+		AxisAlignedBB bbx = AxisAlignedBB.getBoundingBox(xMin, yMin, zMin, xMax, yMax, zMax);
+		if (bbx.intersectsWith(par5AxisAlignedBB)) {
+		    par6List.add(bbx);
+		}
+	    }
+	}
     }
 }
