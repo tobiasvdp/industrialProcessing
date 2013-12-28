@@ -11,7 +11,6 @@ import ip.industrialProcessing.client.render.ModelBlock;
 import ip.industrialProcessing.client.render.ModelConnected;
 import ip.industrialProcessing.client.render.ModelConnectedFluid;
 import ip.industrialProcessing.client.render.ModelConnectedFluidAnimated;
-import ip.industrialProcessing.client.render.ModelStateMachine;
 import ip.industrialProcessing.client.render.ModelingMultiblock;
 import ip.industrialProcessing.client.render.RendererLivingEntity;
 import ip.industrialProcessing.client.render.RendererTileEntityAnimated;
@@ -19,7 +18,6 @@ import ip.industrialProcessing.client.render.RendererTileEntityConnected;
 import ip.industrialProcessing.client.render.RendererTileEntityConnectedFluid;
 import ip.industrialProcessing.client.render.RendererTileEntityConnectedFluidAnimated;
 import ip.industrialProcessing.client.render.RendererTileEntityFluidWorker;
-import ip.industrialProcessing.client.render.RendererTileEntityState;
 import ip.industrialProcessing.client.render.RenderingMultiblock;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.ISetupMachineBlocks;
@@ -33,6 +31,7 @@ import ip.industrialProcessing.machines.crusher.ModelCrusher;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import ip.industrialProcessing.machines.diskFilter.ModelDiskFilter;
 import ip.industrialProcessing.machines.diskFilter.TileEntityDiskFilter;
+import ip.industrialProcessing.machines.diskFilter.model.ModelDiskFilterBlock;
 import ip.industrialProcessing.machines.dryer.ModelDryer;
 import ip.industrialProcessing.machines.dryer.TileEntityDryer;
 import ip.industrialProcessing.machines.filter.ModelFilter;
@@ -50,8 +49,6 @@ import ip.industrialProcessing.machines.thickener.ModelThickener;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
 import ip.industrialProcessing.machines.treetap.model.ModelAutomaticTreeTapBlock;
 import ip.industrialProcessing.machines.treetap.model.ModelManualTreeTapBlock;
-import ip.industrialProcessing.multiblock.core.block.blastFurnace.MDmultiblockBlastFurnace;
-import ip.industrialProcessing.multiblock.core.block.blastFurnace.TEmultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.model.ModelBlastFurnaceCoreBlock;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.model.ModelBlastFurnaceTopBlock;
 import ip.industrialProcessing.multiblock.core.block.plants.blacksmith.bloomery.model.ModelBloomery;
@@ -59,8 +56,6 @@ import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.atmosphe
 import ip.industrialProcessing.multiblock.core.block.weldingStation.MDmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.dummy.block.bellows.model.ModelBellows;
-import ip.industrialProcessing.multiblock.dummy.block.blastFurnaceTower.MDmultiblockBlastFurnaceTower;
-import ip.industrialProcessing.multiblock.dummy.block.blastFurnaceTower.TEmultiblockBlastFurnaceTower;
 import ip.industrialProcessing.multiblock.dummy.block.destilationTray.model.ModelDistillationElementBlock;
 import ip.industrialProcessing.multiblock.dummy.block.displayPanel.MDmultiblockDisplayPanel;
 import ip.industrialProcessing.multiblock.dummy.block.displayPanel.TEmultiblockDisplayPanel;
@@ -146,6 +141,7 @@ public class ClientProxy extends CommonProxy {
     private static final ModelAnimatedFluidMachine mixer = new ModelMixer();
     private static final ModelCrusher crusher = new ModelCrusher();
     private static final ModelAnimatedMachine diskFilter = new ModelDiskFilter();
+    private static final ModelDiskFilterBlock diskFilterBlock = new ModelDiskFilterBlock();
     private static final ModelMachine dryer = new ModelDryer();
     private static final ModelAnimatedFluidMachine classifier = new ModelClassifier();
     private static final ModelAnimatedFluidMachine thickener = new ModelThickener();
@@ -270,8 +266,14 @@ public class ClientProxy extends CommonProxy {
 	ConfigRenderers.setRendererMultiblockBlastFurnaceTowerID(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getrendererMultiblockBlastFurnaceTowerID(), MDmultiblockBlastFurnaceTower));
 
+	
 	// block & tile entity
+ 
+	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDiskFilter.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockDiskFilter, "ModelDiskFilter", diskFilter));
+	ConfigRenderers.setRendererDiskFilterIdId(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererDiskFilterId(), diskFilterBlock));
 
+	
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFlotationCell.class, new RendererTileEntity(ISetupMachineBlocks.blockFlotationCell, "ModelFlotationCell", flotationCell));
 
 	ConfigRenderers.setRendererFlotationCellId(RenderingRegistry.getNextAvailableRenderId());
@@ -369,10 +371,6 @@ public class ClientProxy extends CommonProxy {
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityClassifier.class, new RendererTileEntityFluidWorker(ISetupMachineBlocks.blockClassifier, "ModelClassifier", classifier));
 	ConfigRenderers.setRendererClassifierId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererClassifierId(), new TileEntityClassifier()));
-
-	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDiskFilter.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockDiskFilter, "ModelDiskFilter", diskFilter));
-	ConfigRenderers.setRendererDiskFilterIdId(RenderingRegistry.getNextAvailableRenderId());
-	RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererDiskFilterId(), new TileEntityDiskFilter()));
 
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityVoltMeter.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockVoltMeter, "ModelVoltMeter", voltMeter));
 	ConfigRenderers.setRendererVoltMeterId(RenderingRegistry.getNextAvailableRenderId());

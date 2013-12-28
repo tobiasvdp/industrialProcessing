@@ -9,6 +9,8 @@ import net.minecraftforge.fluids.IFluidTank;
 
 public class TankHandler {
 
+
+    	private int skipTime;
 	private int[] syncedTanks;
 	int[] amounts;
 	private ITankSyncable fluidMachine;
@@ -57,22 +59,24 @@ public class TankHandler {
 	}
 
 	public boolean readDataFromTanks() {
-		boolean changed = true;
+		boolean changed = (skipTime = skipTime++%40) == 0;
+		
 		for (int i = 0; i < this.syncedTanks.length; i++) {
 			int slot = this.syncedTanks[i];
 			IFluidTank tank = fluidMachine.getTankInSlot(slot);
 			FluidStack stack = tank.getFluid();
 			int amount = stack == null ? 0 : stack.amount;
-			if (amount != this.amounts[i]) {
-				this.amounts[i] = amount;
-				changed = true;
+			float diff = Math.abs((amount - this.amounts[i]) / (float)tank.getCapacity());
+			if (diff > 0.1) {
+				this.amounts[i] = amount; 
+				changed = true; 
 			}
 			int fluidID = stack == null ? -1 : stack.fluidID;
 			if (fluidID != this.fluidIds[i]) {
 				this.fluidIds[i] = fluidID;
 				changed = true;
 			}
-		}
+		}  
 		return changed;
 	}
 
