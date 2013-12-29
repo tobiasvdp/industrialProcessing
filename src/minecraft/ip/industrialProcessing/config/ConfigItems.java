@@ -142,6 +142,62 @@ public class ConfigItems {
 	private int itemCastingMulshID = 6641;
 	private int itemSandCastID = 6642;
 	private int itemSandCastIngotID = 6643;
+	private int itemCopperPlateID = 6644;
+	
+	private int itemCopperBoardID = 6645;
+	private int itemElectricComponentsID = 6646;
+	private int itemIsolationBoardID = 6647;
+	private int itemPCBoardID = 6648;
+	private int itemPCBoardWiredID = 6649;
+	private int itemSolderID = 6650;
+	private int itemSolderEmptyID = 6651;
+	private int itemSolderingIronID = 6652;
+	private int itemStripBoardID = 6653;
+	private int itemStripBoardWiredID = 6654;
+
+	public static int getItemCopperBoardID() {
+		return getInstance().itemCopperBoardID;
+	}
+	
+	public static int getItemElectricComponentsID() {
+		return getInstance().itemElectricComponentsID;
+	}
+	
+	public static int getItemIsolationBoardID() {
+		return getInstance().itemIsolationBoardID;
+	}
+	
+	public static int getItemPCBoardID() {
+		return getInstance().itemPCBoardID;
+	}
+	
+	public static int getItemPCBoardWiredID() {
+		return getInstance().itemPCBoardWiredID;
+	}
+	
+	public static int getItemSolderID() {
+		return getInstance().itemSolderID;
+	}
+	
+	public static int getItemSolderEmptyID() {
+		return getInstance().itemSolderEmptyID;
+	}
+	
+	public static int getItemSolderingIronID() {
+		return getInstance().itemSolderingIronID;
+	}
+	
+	public static int getItemStripBoardID() {
+		return getInstance().itemStripBoardID;
+	}
+	
+	public static int getItemStripBoardWiredID() {
+		return getInstance().itemStripBoardWiredID;
+	}
+	
+	public static int getItemCopperPlateID() {
+		return getInstance().itemCopperPlateID;
+	}
 
 	public static int getItemFlaskID() {
 		return getInstance().itemFlaskID;
@@ -644,6 +700,18 @@ public class ConfigItems {
 	}
 
 	public static void addToLanguageRegistry() {
+		
+		LanguageRegistry.addName(ISetupItems.itemCopperBoard , "Copper board");
+		LanguageRegistry.addName(ISetupItems.itemElectricComponents , "Electronic components");
+		LanguageRegistry.addName(ISetupItems.itemIsolationBoard , "Isolation board");
+		LanguageRegistry.addName(ISetupItems.itemPCBoard , "PCB");
+		LanguageRegistry.addName(ISetupItems.itemPCBoardWired , "PCB circuit");
+		LanguageRegistry.addName(ISetupItems.itemSolder , "Solder");
+		LanguageRegistry.addName(ISetupItems.itemSolderEmpty , "Empty solder ring");
+		LanguageRegistry.addName(ISetupItems.itemSolderingIron , "Soldering iron");
+		LanguageRegistry.addName(ISetupItems.itemStripBoard , "Stripboard");
+		LanguageRegistry.addName(ISetupItems.itemStripBoardWired , "Stripboard circuit");
+		LanguageRegistry.addName(ISetupItems.itemCopperPlate, "Copper plate");
 		LanguageRegistry.addName(ISetupItems.itemCastingMulsh, "Casting mulsh");
 		LanguageRegistry.addName(ISetupItems.itemSandCast, "Sand cast");
 		LanguageRegistry.addName(ISetupItems.itemSandCastIngot, "Sand cast: Ingot");

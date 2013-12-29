@@ -24,7 +24,7 @@ import net.minecraftforge.common.ForgeDirection;
 public abstract class TEmultiblockCoreInv extends TEmultiblockCore implements IInventories {
 
 	protected RecipesMachine recipes;
-	private ArrayList<MachineItemStack> itemStacks = new ArrayList<MachineItemStack>();
+	protected ArrayList<MachineItemStack> itemStacks = new ArrayList<MachineItemStack>();
 	private int[][] itemStackSideSlots = new int[6][0];
 	public boolean isDummyBlock = false;
 	private ForgeDirection forwardDirection;
@@ -81,7 +81,7 @@ public abstract class TEmultiblockCoreInv extends TEmultiblockCore implements II
 	@Override
 	public boolean removeFromSlot(int slot, int itemId, int amount) {
 		if (slotContains(slot, itemId, amount)) {
-			MachineItemStack machineStack = itemStacks.get(slot);
+			MachineItemStack machineStack = getMachineStack(slot);
 			machineStack.stack.stackSize -= amount;
 			if (machineStack.stack.stackSize == 0)
 				machineStack.stack = null;
@@ -94,7 +94,7 @@ public abstract class TEmultiblockCoreInv extends TEmultiblockCore implements II
 	@Override
 	public boolean addToSlot(int slot, int itemId, int amount, int damage) {
 		if (slotHasRoomFor(slot, itemId, amount, damage)) {
-			MachineItemStack machineStack = itemStacks.get(slot);
+			MachineItemStack machineStack = getMachineStack(slot);
 			if (machineStack.stack == null)
 				machineStack.stack = new ItemStack(itemId, amount, damage);
 			else
@@ -107,13 +107,13 @@ public abstract class TEmultiblockCoreInv extends TEmultiblockCore implements II
 
 	@Override
 	public boolean slotContains(int slot, int itemId, int amount) {
-		MachineItemStack machineStack = itemStacks.get(slot);
+		MachineItemStack machineStack = getMachineStack(slot);
 		return machineStack != null && machineStack.stack != null && machineStack.stack.itemID == itemId && machineStack.stack.stackSize >= amount;
 	}
 
 	@Override
 	public boolean slotContains(int slot, int itemId, int metadata, int amount) {
-		MachineItemStack machineStack = itemStacks.get(slot);
+		MachineItemStack machineStack = getMachineStack(slot);
 		return machineStack != null && machineStack.stack != null && machineStack.stack.itemID == itemId && machineStack.stack.stackSize >= amount;
 	}
 
@@ -121,7 +121,7 @@ public abstract class TEmultiblockCoreInv extends TEmultiblockCore implements II
 	public boolean slotHasRoomFor(int slot, ItemStack stack) {
 		if (stack == null || stack.stackSize == 0)
 			return true;
-		MachineItemStack machineStack = itemStacks.get(slot);
+		MachineItemStack machineStack = getMachineStack(slot);
 		return machineStack != null && (machineStack.stack == null || (machineStack.stack.itemID == stack.itemID && (machineStack.stack.stackSize + stack.stackSize < stack.getMaxStackSize())));
 	}
 
@@ -129,7 +129,7 @@ public abstract class TEmultiblockCoreInv extends TEmultiblockCore implements II
 	public boolean slotHasRoomFor(int slot, int itemId, int amount, int damage) {
 		if (amount == 0)
 			return true;
-		MachineItemStack machineStack = itemStacks.get(slot);
+		MachineItemStack machineStack = getMachineStack(slot);
 		return machineStack != null && (machineStack.stack == null || (machineStack.stack.itemID == itemId && machineStack.stack.getItemDamage() == damage && (machineStack.stack.stackSize + amount < machineStack.stack.getMaxStackSize())));
 	}
 
@@ -292,8 +292,8 @@ public abstract class TEmultiblockCoreInv extends TEmultiblockCore implements II
 
 	@Override
 	public boolean damageItem(int slot, int itemId) {
-		itemStacks.get(slot).stack.setItemDamage(itemStacks.get(slot).stack.getItemDamage()+1);
-		return itemStacks.get(slot).stack.getItemDamage()>=itemStacks.get(slot).stack.getMaxDamage();
+		getMachineStack(slot).stack.setItemDamage(getMachineStack(slot).stack.getItemDamage()+1);
+		return getMachineStack(slot).stack.getItemDamage()>=getMachineStack(slot).stack.getMaxDamage();
 	}
 	
 	

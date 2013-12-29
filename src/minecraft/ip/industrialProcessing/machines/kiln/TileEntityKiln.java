@@ -19,7 +19,7 @@ public class TileEntityKiln extends TileEntityPoweredWorkerMachine implements IH
 		super(LocalDirection.UNKNOWN, 100000, 100); // does 100 work per tick, lasts
 												// 100 ticks
 		this.addStack(null, LocalDirection.UP, true, false);
-		this.addStack(null, LocalDirection.DOWN, false, true);
+		this.addStack(null, LocalDirection.RIGHT, false, true);
 	}
 
 	@Override

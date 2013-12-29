@@ -37,6 +37,8 @@ public class LayoutBlockDescription {
 		for (int i = 0; i < this.blockIDs.length; i++) {
 			if (this.blockIDs[i] == blockID)
 				return true;
+			if (this.blockIDs[i] == -1)
+				return true;
 		}
 		return false;
 	}

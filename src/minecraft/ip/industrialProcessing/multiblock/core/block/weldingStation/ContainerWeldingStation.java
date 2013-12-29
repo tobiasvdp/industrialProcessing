@@ -1,5 +1,6 @@
 package ip.industrialProcessing.multiblock.core.block.weldingStation;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import ip.industrialProcessing.multiblock.container.ContainerMultiblockTankWorkerPowered;
@@ -10,8 +11,9 @@ import ip.industrialProcessing.slots.SlotOutput;
 public class ContainerWeldingStation extends ContainerMultiblockTankWorkerPowered {
 	private Slot[] slots;
 
-	public ContainerWeldingStation(InventoryPlayer inventory, TEmultiblockCoreTankWorkerPowered core) {
-		super(inventory, core);
+	public ContainerWeldingStation(EntityPlayer player, TEmultiblockCoreTankWorkerPowered core) {
+		super(player.inventory, core);
+		((TEmultiblockWeldingStation)core).openGui = 0;
 
 		slots = new SlotBase[15];
 		slots[0] = new SlotBase(core, 0, 58, 15);
@@ -30,7 +32,7 @@ public class ContainerWeldingStation extends ContainerMultiblockTankWorkerPowere
 		slots[13] = new SlotOutput(core, 13, 152, 33);
 		slots[14] = new SlotBase(core, 14, 26, 51);
 
-		BindSlots(slots, inventory, this);
+		BindSlots(slots, player.inventory, this);
 
 		addPowerToContainer(core.getMainPowerStorage());
 		addWorkerToContainer(core.getWorker());
