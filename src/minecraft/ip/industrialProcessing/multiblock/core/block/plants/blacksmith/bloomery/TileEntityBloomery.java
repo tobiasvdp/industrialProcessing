@@ -1,5 +1,7 @@
 package ip.industrialProcessing.multiblock.core.block.plants.blacksmith.bloomery;
 
+import java.util.Iterator;
+
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -16,6 +18,7 @@ import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
 import ip.industrialProcessing.multiblock.tier.Tier;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
+import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.utils.IBreakable;
 import ip.industrialProcessing.utils.IHeatStorage;
 import ip.industrialProcessing.utils.inventories.InventoryUtils;
@@ -23,7 +26,7 @@ import ip.industrialProcessing.utils.inventories.InventoryUtils;
 public class TileEntityBloomery extends TEmultiblockCoreTankWorker implements IHeatStorage, IBreakable {
 	static StructureMultiblock structure;
 	static TierCollection tierRequirments;
-	static RecipesMachine recipes = new RecipesBloomery();
+	static RecipesMachine recipes = new RecipesBloomery(Tiers.Invalid);
 	static {
 		// set layout
 		structure = new StructureMultiblock();
@@ -34,7 +37,7 @@ public class TileEntityBloomery extends TEmultiblockCoreTankWorker implements IH
 		layout.setCoreID(i++, 0, 1, IndustrialProcessing.blockBloomery.blockID);
 
 		layout.setBlockID(1, 0, 0, i++, 0, 0, IndustrialProcessing.blockBellows.blockID);
-		layout.setBlockID(0, 1, 0, i++, 0, 0, IndustrialProcessing.blockBellows.blockID,-1);
+		layout.setBlockID(0, 1, 0, i++, 0, 0, IndustrialProcessing.blockIronBowl.blockID, -1);
 
 		structure.addLayout(layout, FacingDirection.North);
 		structure.addLayout(LayoutTransformer.transform(layout, FacingDirection.East), FacingDirection.East);
@@ -46,7 +49,7 @@ public class TileEntityBloomery extends TEmultiblockCoreTankWorker implements IH
 		Tier tier = new Tier();
 		tierRequirments.addTier(tier, Tiers.Tier0);
 		tier = new Tier();
-		tier.setBlockIDPresent(2, IndustrialProcessing.blockBellows.blockID);
+		tier.setBlockIDPresent(2, IndustrialProcessing.blockIronBowl.blockID);
 		tierRequirments.addTier(tier, Tiers.Tier1);
 	}
 
@@ -62,6 +65,8 @@ public class TileEntityBloomery extends TEmultiblockCoreTankWorker implements IH
 		super(structure, tierRequirments, recipes);
 		LocalDirection[] nodirections = new LocalDirection[0];
 		this.addStack(null, nodirections, true, false);
+		this.addStack(null, nodirections, false, true);
+		this.addStack(null, nodirections, true, false);
 		this.addStack(null, nodirections, true, false);
 		this.addStack(null, nodirections, true, false);
 
@@ -72,6 +77,25 @@ public class TileEntityBloomery extends TEmultiblockCoreTankWorker implements IH
 
 		SetLiveTime(15000);
 	}
+
+	//tier management
+	@Override
+	public void onTierChange() {
+		super.onTierChange();
+		recipes = new RecipesBloomery(getTier());
+	}
+
+	@Override
+	protected void setNbtLoadedRecipes(Tiers tier) {
+		super.setNbtLoadedRecipes(tier);
+		recipes = new RecipesBloomery(tier);
+	}
+
+	@Override
+	public Iterator<Recipe> iterateRecipes() {
+		return recipes.iterator();
+	}
+	//end of tier management
 
 	@Override
 	public void updateEntity() {
@@ -105,6 +129,7 @@ public class TileEntityBloomery extends TEmultiblockCoreTankWorker implements IH
 		return recipes.isValidInput(slot, itemID);
 	}
 
+	//burner management
 	@Override
 	public void ConsumeFuel(ItemStack stack) {
 		if (stack != null && stack.itemID == Item.coal.itemID && stack.stackSize > 0) {
@@ -186,28 +211,30 @@ public class TileEntityBloomery extends TEmultiblockCoreTankWorker implements IH
 	public int getScaledLiveTime(int scale) {
 		return liveTime * scale / totalLiveTime;
 	}
-	
-@Override
-public void writeToNBT(NBTTagCompound nbt) {
-	nbt.setInteger("T1",(int)T1);
-	nbt.setInteger("T2",(int)T2);
-	nbt.setInteger("burnTime",burnTime);
-	nbt.setInteger("totalTime",totalTime);
 
-	nbt.setInteger("liveTime",liveTime);
-	nbt.setInteger("totalLiveTime",totalLiveTime);
-	super.writeToNBT(nbt);
-}
-@Override
-public void readFromNBT(NBTTagCompound nbt) {
-	T1 = nbt.getInteger("T1");
-	T2 = nbt.getInteger("T2");
-	burnTime = nbt.getInteger("burnTime");
-	totalTime = nbt.getInteger("totalTime");
+	@Override
+	public void writeToNBT(NBTTagCompound nbt) {
+		nbt.setInteger("T1", (int) T1);
+		nbt.setInteger("T2", (int) T2);
+		nbt.setInteger("burnTime", burnTime);
+		nbt.setInteger("totalTime", totalTime);
 
-	liveTime = nbt.getInteger("liveTime");
-	totalLiveTime = nbt.getInteger("totalLiveTime");
-	super.readFromNBT(nbt);
-}
+		nbt.setInteger("liveTime", liveTime);
+		nbt.setInteger("totalLiveTime", totalLiveTime);
+		super.writeToNBT(nbt);
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+		T1 = nbt.getInteger("T1");
+		T2 = nbt.getInteger("T2");
+		burnTime = nbt.getInteger("burnTime");
+		totalTime = nbt.getInteger("totalTime");
+
+		liveTime = nbt.getInteger("liveTime");
+		totalLiveTime = nbt.getInteger("totalLiveTime");
+		super.readFromNBT(nbt);
+	}
+	//end of burner management
 
 }

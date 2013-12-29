@@ -11,6 +11,9 @@ import ip.industrialProcessing.multiblock.container.ContainerMultiblockTank;
 import ip.industrialProcessing.multiblock.container.ContainerMultiblockTankWorker;
 import ip.industrialProcessing.multiblock.container.ContainerMultiblockTankWorkerPowered;
 import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
+import ip.industrialProcessing.multiblock.core.block.plants.blacksmith.bloomery.ContainerBloomery;
+import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorker;
+import ip.industrialProcessing.multiblock.tier.Tiers;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -47,7 +50,17 @@ public class GUImultiblock extends GuiContainer {
 	ySize = 166;
     }
     
-    @Override
+    public GUImultiblock(InventoryPlayer inventoryPlayer, TEmultiblockCore tileEntity, ContainerMultiblock cTmultiblock, String name, String textureLocation, Tiers tier) {
+    	super(cTmultiblock);
+    	this.container = cTmultiblock;
+    	this.tileEntity = tileEntity;
+    	this.name = name;
+    	this.textureLocation = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN, textureLocation+tier.ordinal()+".png");
+    	xSize = 198;
+    	ySize = 166;
+	}
+
+	@Override
     public void drawScreen(int par1, int par2, float par3) {
 	this.mouseX = par1;
 	this.mouseY = par2;

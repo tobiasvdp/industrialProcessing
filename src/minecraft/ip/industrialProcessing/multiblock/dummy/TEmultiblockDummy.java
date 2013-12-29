@@ -280,4 +280,11 @@ public class TEmultiblockDummy extends TileEntity implements ITEmultiblockDummy 
 	public boolean canWrenchRotate() {
 		return false;
 	}
+
+	@Override
+	public Tiers getTier() {
+		if (getCore() != null)
+			return this.getCore().getTier();
+		return Tiers.Invalid;
+	}
 }

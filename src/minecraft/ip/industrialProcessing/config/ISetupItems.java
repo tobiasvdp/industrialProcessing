@@ -46,6 +46,7 @@ public interface ISetupItems {
     public final static ItemIP itemIronPlate = new ItemIP(ConfigItems.ItemIronPlateID(), "itemIronPlate",IndustrialProcessing.tabOres);
     public final static ItemIP itemIronTips = new ItemIP(ConfigItems.ItemIronTipsID(), "itemIronTips",IndustrialProcessing.tabOres);
     public final static ItemIP itemSmallMachineCasingCrusher = new ItemIP(ConfigItems.ItemSmallMachineCasingCrusherID(), "itemSmallMachineCasingCrusher",IndustrialProcessing.tabOres);
+    public final static ItemIP itemFiberGlass = new ItemIP(ConfigItems.ItemFiberGlassID(), "itemFiberGlass",IndustrialProcessing.tabOres);
     
     public final static ItemIP itemGalenaCrushedChunks = new ItemIP(ConfigItems.itemGalenaCrushedChunksID(), "itemGalenaCrushedChunks",IndustrialProcessing.tabOres);
     public final static ItemIP itemGalenaSmallChunks = new ItemIP(ConfigItems.itemGalenaSmallChunksID(), "itemGalenaSmallChunks",IndustrialProcessing.tabOres);
@@ -88,6 +89,8 @@ public interface ISetupItems {
     public final static ItemIP itemRutileFineCrushedCrystals = new ItemIP(ConfigItems.itemRutileFineCrushedCrystalsID(), "itemRutileFineCrushedCrystals",IndustrialProcessing.tabOres);
     public final static ItemIP itemRutileDust = new ItemIP(ConfigItems.itemRutileDustID(), "itemRutileDust",IndustrialProcessing.tabOres);
     public final static ItemIP itemCoalDust = new ItemIP(ConfigItems.itemCoalDustID(), "itemCoalDust",IndustrialProcessing.tabOres);
+    public final static ItemIP itemHardenedSandDust = new ItemIP(ConfigItems.itemHardenedSandDustID(), "itemHardenedSandDust",IndustrialProcessing.tabOres);
+    public final static ItemIP itemAluminumDust = new ItemIP(ConfigItems.itemAluminumDustID(), "itemAluminumDust",IndustrialProcessing.tabOres);
     
     public final static ItemIP itemThickStick = new ItemIP(ConfigItems.ItemThickStick(), "ItemThickStick",IndustrialProcessing.tabOreProcessing);
     public final static ItemDamage itemHammer = new ItemDamage(ConfigItems.ItemHammer(), "ItemHammer",IndustrialProcessing.tabOreProcessing);

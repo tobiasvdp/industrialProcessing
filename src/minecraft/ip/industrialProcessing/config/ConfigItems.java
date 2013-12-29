@@ -154,7 +154,21 @@ public class ConfigItems {
 	private int itemSolderingIronID = 6652;
 	private int itemStripBoardID = 6653;
 	private int itemStripBoardWiredID = 6654;
+	private int itemHardenedSandDustID = 6655;
+	private int itemAluminumDustID = 6656;
+	private int itemFiberGlassID = 6657;
+	
+	public static int ItemFiberGlassID() {
+		return getInstance().itemFiberGlassID;
+	}
 
+	public static int itemAluminumDustID() {
+		return getInstance().itemAluminumDustID;
+	}
+	public static int itemHardenedSandDustID() {
+		return getInstance().itemHardenedSandDustID;
+	}
+	
 	public static int getItemCopperBoardID() {
 		return getInstance().itemCopperBoardID;
 	}
@@ -700,7 +714,9 @@ public class ConfigItems {
 	}
 
 	public static void addToLanguageRegistry() {
-		
+		LanguageRegistry.addName(ISetupItems.itemFiberGlass , "Fiber glass");
+		LanguageRegistry.addName(ISetupItems.itemAluminumDust , "Aluminum dust");
+		LanguageRegistry.addName(ISetupItems.itemHardenedSandDust , "Hardened sand dust");
 		LanguageRegistry.addName(ISetupItems.itemCopperBoard , "Copper board");
 		LanguageRegistry.addName(ISetupItems.itemElectricComponents , "Electronic components");
 		LanguageRegistry.addName(ISetupItems.itemIsolationBoard , "Isolation board");

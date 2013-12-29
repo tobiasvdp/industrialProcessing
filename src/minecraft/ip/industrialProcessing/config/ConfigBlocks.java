@@ -19,6 +19,7 @@ public class ConfigBlocks {
     private int blockChromiteOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(), "ChromiteID", 1004).getInt();
     private int blockCinnebarOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(), "CinnebarID", 1005).getInt();
     private int blockTaliaOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(), "TaliaID", 1006).getInt();
+    private int blockBauxiteOreID = IndustrialProcessing.config.get(ConfigCategories.ore.toString(), "BauxiteOreID", 1012).getInt();
 
     private int blockIronFlatID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "IronFlatID", 1007).getInt();
 
@@ -40,7 +41,17 @@ public class ConfigBlocks {
     
     private int blockCobbleLimestoneID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "blockCobbleLimestoneID", 2010).getInt();
     private int blockLimestoneID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "blockLimestoneID", 2011).getInt();
+    private int blockHardSandID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "blockHardSandID", 2012).getInt();
 
+    
+    public static int getBlockHardSandID() {
+        return getInstance().blockHardSandID;
+    }
+    
+    public static int getBlockBauxiteID() {
+        return getInstance().blockBauxiteOreID;
+    }
+    
     public static int getBlockCobbleLimestoneID() {
         return getInstance().blockCobbleLimestoneID;
     }
@@ -134,6 +145,7 @@ public class ConfigBlocks {
     }
 
     public void registerOres() {
+    	registerOre(ISetupBlocks.blockBauxiteOre, "IP.World.BauxiteOre", "Bauxite Ore", "bauxite");
         registerOre(ISetupBlocks.blockCopperOre, "IP.World.CopperOre", "Copper Ore", "copper");
         registerOre(ISetupBlocks.blockTinOre, "IP.World.TinOre", "Tin Ore", "tin");
         registerOre(ISetupBlocks.blockGalenaOre, "IP.World.GalenaOre", "Galena Ore", "silver");
@@ -142,8 +154,9 @@ public class ConfigBlocks {
         registerOre(ISetupBlocks.blockChromiteOre, "IP.World.ChromiteOre", "Chromite Ore", "chromite");
         registerOre(ISetupBlocks.blockCinnebarOre, "IP.World.CinnebarOre", "Cinnebar Ore", "cinnebar");
         registerOre(ISetupBlocks.blockTaliaOre, "IP.World.TaliaOre", "Thallium Ore", "talia");
+        
         registerBlock(ISetupBlocks.blockIronFlat, "IP.Block.IronFlat", "Flat Iron block");
-
+        registerBlock(ISetupBlocks.blockHardSand, "IP.Block.HardSand", "Hardened sand");
         registerBlock(ISetupBlocks.blockCobbleLimestone, "IP.Block.cobbleLime", "Cobble limestone");
         registerBlock(ISetupBlocks.blockLimestone, "IP.Block.limestone", "Limestone");
         registerBlock(ISetupBlocks.blockPlatform, "IP.Block.Platform", "Walkway");

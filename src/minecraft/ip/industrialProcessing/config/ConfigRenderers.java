@@ -94,7 +94,16 @@ public class ConfigRenderers {
     private int rendererPetrolLamp;
     private int rendererBellows;
     private int rendererBloomery;
+    private int rendererIronBowl;
 
+    public static int getRendererIronBowlId() {
+        return getInstance().rendererIronBowl;
+    }
+    
+    public static void setRendererIronBowlId(int id) {
+        getInstance().rendererIronBowl = id;
+    }
+    
     public static int getRendererBloomeryId() {
         return getInstance().rendererBloomery;
     }

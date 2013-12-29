@@ -63,6 +63,7 @@ import ip.industrialProcessing.multiblock.dummy.block.frame.ENmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.frame.MDmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.frame.MDmultiblockFramePanel;
 import ip.industrialProcessing.multiblock.dummy.block.frame.TEmultiblockFrame;
+import ip.industrialProcessing.multiblock.dummy.block.ironBowl.model.ModelIronBowl;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.ENmultiblockLiftDoor;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.MDmultiblockLiftDoor;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.TEmultiblockLiftDoor;
@@ -214,6 +215,7 @@ public class ClientProxy extends CommonProxy {
     private static final ModelPetrolLamp modelPetrolLamp = new ModelPetrolLamp();
     private static final ModelBellows modelBellows = new ModelBellows();
     private static final ModelBloomery modelBloomery = new ModelBloomery();
+    private static final ModelIronBowl modelIronBowl = new ModelIronBowl();
 
     @Override
     public void registerRenderers() {
@@ -265,6 +267,9 @@ public class ClientProxy extends CommonProxy {
 
 	ConfigRenderers.setRendererMultiblockBlastFurnaceTowerID(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getrendererMultiblockBlastFurnaceTowerID(), MDmultiblockBlastFurnaceTower));
+	
+	ConfigRenderers.setRendererIronBowlId(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererIronBowlId(), modelIronBowl));
 
 	
 	// block & tile entity
