@@ -52,11 +52,17 @@ public class Tier {
 		for (TierRequirement req : blockidpresent) {
 			boolean isValid = false;
 			TEmultiblockDummy dummy = te.getDummyByID(req.getID());
-			int blockID = dummy.worldObj.getBlockMetadata(dummy.xCoord, dummy.yCoord, dummy.zCoord);
+			int blockID = 0;
+			if(dummy != null){
+				blockID = dummy.getBlockType().blockID;
+			}
 			for (int id : req.getBlockIDs()) {
 				if (id == blockID)
 					isValid = true;
+				if(id == -1)
+					isValid = true;
 			}
+			
 			if (!isValid)
 				return false;
 		}

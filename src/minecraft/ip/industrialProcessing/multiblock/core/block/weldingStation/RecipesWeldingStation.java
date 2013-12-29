@@ -14,6 +14,7 @@ public class RecipesWeldingStation extends RecipesMachine {
 	}
 
 	private void addDefaultRecipes() {
+		//welding
 		addRecipe(motorStator(3000,0));
 		addRecipe(ironT(3000,0));
 		addRecipe(ironFrame(3000,0));
@@ -31,8 +32,35 @@ public class RecipesWeldingStation extends RecipesMachine {
 		addRecipe(crusher(3000,0));
 		addRecipe(frame(3000,0));
 		addRecipe(mixer(3000,0));
+		addRecipe(copperBoard(3000,0));
+		
+		//soldering
+		addRecipe(something(3000,0));
 		
 	}
+	private Recipe something(int workTime, int power) {
+		Recipe recipe = new Recipe();
+		
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(15, IndustrialProcessing.itemStripBoard.itemID, RecipeSlotType.INVENTORY, 1)};
+		
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(21, IndustrialProcessing.itemStripBoardWired.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
+		
+		recipe.workRequired = workTime;
+		recipe.powerRequired = power;
+		return recipe;
+	}
+	private Recipe copperBoard(int workTime, int power) {
+		Recipe recipe = new Recipe();
+		
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(1, IndustrialProcessing.itemCopperPlate.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(4, IndustrialProcessing.itemIsolationBoard.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(7, IndustrialProcessing.itemCopperPlate.itemID, RecipeSlotType.INVENTORY, 1)};
+		
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(13, IndustrialProcessing.itemCopperBoard.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
+		
+		recipe.workRequired = workTime;
+		recipe.powerRequired = power;
+		return recipe;
+	}
+
 	private Recipe mixer(int workTime, int power) {
 		Recipe recipe = new Recipe();
 		

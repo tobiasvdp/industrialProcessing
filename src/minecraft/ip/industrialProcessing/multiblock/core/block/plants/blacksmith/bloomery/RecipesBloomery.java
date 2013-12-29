@@ -2,6 +2,7 @@ package ip.industrialProcessing.multiblock.core.block.plants.blacksmith.bloomery
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeInputSlot;
@@ -15,8 +16,19 @@ public class RecipesBloomery extends RecipesMachine {
 
 	private void addDefaultRecipes() {
 		addRecipe(iron(750,0));
+		addRecipe(copper(500,0));
 	}
-	
+
+    private Recipe copper(int workTime, int powerConsumption) {
+        Recipe recipe = new Recipe();
+        recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.blockCopperOre.blockID, RecipeSlotType.INVENTORY, 1) };
+
+        recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemCopperIngot.itemID, RecipeSlotType.INVENTORY, 1, 1, 0.25) };
+        recipe.workRequired = workTime;
+        recipe.powerRequired = powerConsumption;
+        return recipe;
+    }
+    
     private Recipe iron(int workTime, int powerConsumption) {
         Recipe recipe = new Recipe();
         recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Block.oreIron.blockID, RecipeSlotType.INVENTORY, 1) };

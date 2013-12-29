@@ -18,6 +18,7 @@ import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
 import ip.industrialProcessing.utils.IBreakable;
 import ip.industrialProcessing.utils.IHeatStorage;
+import ip.industrialProcessing.utils.inventories.InventoryUtils;
 
 public class TileEntityBloomery extends TEmultiblockCoreTankWorker implements IHeatStorage, IBreakable {
 	static StructureMultiblock structure;
@@ -27,12 +28,13 @@ public class TileEntityBloomery extends TEmultiblockCoreTankWorker implements IH
 		// set layout
 		structure = new StructureMultiblock();
 
-		LayoutMultiblock layout = new LayoutMultiblock(0, 1, 0, 0, 0, 0);
+		LayoutMultiblock layout = new LayoutMultiblock(0, 1, 0, 0, 1, 0);
 
 		int i = 0;
 		layout.setCoreID(i++, 0, 1, IndustrialProcessing.blockBloomery.blockID);
 
 		layout.setBlockID(1, 0, 0, i++, 0, 0, IndustrialProcessing.blockBellows.blockID);
+		layout.setBlockID(0, 1, 0, i++, 0, 0, IndustrialProcessing.blockBellows.blockID,-1);
 
 		structure.addLayout(layout, FacingDirection.North);
 		structure.addLayout(LayoutTransformer.transform(layout, FacingDirection.East), FacingDirection.East);
@@ -40,10 +42,12 @@ public class TileEntityBloomery extends TEmultiblockCoreTankWorker implements IH
 		structure.addLayout(LayoutTransformer.transform(layout, FacingDirection.West), FacingDirection.West);
 
 		// set tiers
-		tierRequirments = new TierCollection(1);
-
+		tierRequirments = new TierCollection(2);
 		Tier tier = new Tier();
 		tierRequirments.addTier(tier, Tiers.Tier0);
+		tier = new Tier();
+		tier.setBlockIDPresent(2, IndustrialProcessing.blockBellows.blockID);
+		tierRequirments.addTier(tier, Tiers.Tier1);
 	}
 
 	private float T1;
@@ -173,6 +177,7 @@ public class TileEntityBloomery extends TEmultiblockCoreTankWorker implements IH
 	@Override
 	public void destroyBlock() {
 		this.destroyMultiblock();
+		InventoryUtils.DropInventoryContents(this.worldObj, this.xCoord, this.yCoord, this.zCoord);
 		this.worldObj.destroyBlock(xCoord, yCoord, zCoord, false);
 		worldObj.setBlockToAir(xCoord, yCoord, zCoord);
 	}
