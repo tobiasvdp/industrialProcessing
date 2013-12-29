@@ -70,7 +70,7 @@ public class TankHandler {
 	    FluidStack stack = tank.getFluid();
 	    int amount = stack == null ? 0 : stack.amount;
 	    float diff = Math.abs((amount - this.amounts[i]) / (float) tank.getCapacity());
-	    if (diff > 0.1 || (amount == 0 && this.amounts[i] > 0) || (amount == tank.getCapacity() && this.amounts[i] < tank.getCapacity())) {
+	    if (diff > 0.05 || (amount == 0 && this.amounts[i] > 0) || (amount == tank.getCapacity() && this.amounts[i] < tank.getCapacity())) {
 		this.amounts[i] = amount;
 		changed = true;
 	    }

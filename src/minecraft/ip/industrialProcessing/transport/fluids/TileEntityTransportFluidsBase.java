@@ -91,8 +91,12 @@ public abstract class TileEntityTransportFluidsBase extends TileEntityTransport 
 	float totalOutgoingPressureDifference = 0f;
 	int totalIncomingVolumeDifference = 0;
 	int totalOutgoingVolumeDifference = 0;
+	int totalOutgoingCapacity = 0;
+	int totalIncomingCapacity = 0;
 	float[] pressureDifferences = new float[6];
 	int[] volumeDifferences = new int[6];
+	int[] outgoingCapacities = new int[6];
+	int[] incomingCapacities = new int[6];
 	for (int i = 0; i < pressureDifferences.length; i++) {
 	    ForgeDirection direction = ForgeDirection.getOrientation(i);
 	    if (isConnected(direction)) {
@@ -100,26 +104,48 @@ public abstract class TileEntityTransportFluidsBase extends TileEntityTransport 
 
 		IFluidTank tank = getTank(direction);
 		int fluidAmount = tank.getFluidAmount();
+		int tankCapacity = tank.getCapacity();
 
 		float pressureDifference = pressure;
 		int volumeDifference = fluidAmount;
-
 		TileEntity entity = getNeighbor(direction);
 
 		ForgeDirection oppositeDirection = direction.getOpposite();
+
+		int volume = 0;
+		int capacity = 0;
+		int outgoingCapacity = 0;
+		int incomingCapacity = 0;
+
 		if (entity instanceof TileEntityPump) {
 		    pressureDifference -= getPumpPressure((TileEntityPump) entity, oppositeDirection, pressure);
-		    volumeDifference -= getPumpVolume((TileEntityPump) entity, oppositeDirection);
+		    volume = getPumpVolume((TileEntityPump) entity, oppositeDirection);
+		    capacity = getPumpCapacity((TileEntityPump) entity, oppositeDirection);
+		    volumeDifference -= volume;
 		} else if (entity instanceof TileEntityTransportFluidsBase) {
 		    pressureDifference -= getPipePressure((TileEntityTransportFluidsBase) entity, oppositeDirection, pressure);
-		    volumeDifference -= getPipeVolume((TileEntityTransportFluidsBase) entity, oppositeDirection);
+		    volume = getPipeVolume((TileEntityTransportFluidsBase) entity, oppositeDirection);
+		    capacity = getPipeCapacity((TileEntityTransportFluidsBase) entity, oppositeDirection);
+		    volumeDifference -= volume;
 		} else if (entity instanceof IFluidHandler) {
 		    pressureDifference -= getFluidHandlerPressure((IFluidHandler) entity, oppositeDirection, pressure);
-		    volumeDifference -= getFluidHandlerVolume((IFluidHandler) entity, oppositeDirection);
+		    volume = getFluidHandlerVolume((IFluidHandler) entity, oppositeDirection);
+		    capacity = getFluidHandlerCapacity((IFluidHandler) entity, oppositeDirection);
+		    volumeDifference -= volume;
 		} else
 		    continue;
+
+		outgoingCapacity = Math.min(capacity - volume, fluidAmount);
+		incomingCapacity = Math.min(tankCapacity - fluidAmount, volume);
+
+		outgoingCapacities[i] = outgoingCapacity;
+		incomingCapacities[i] = incomingCapacity;
 		pressureDifferences[i] = pressureDifference;
 		volumeDifferences[i] = volumeDifference;
+
+		totalIncomingCapacity += incomingCapacity;
+		totalOutgoingCapacity += outgoingCapacity;
+
 		if (pressureDifference < 0)
 		    totalIncomingPressureDifference -= pressureDifference;
 		else if (pressureDifference > 0) // other pressure is lower
@@ -140,10 +166,9 @@ public abstract class TileEntityTransportFluidsBase extends TileEntityTransport 
 	    if (isConnected(direction)) {
 		float pressureFlow = pressureDifferences[i];
 		float flowRate = 0f;
-		
+
 		float equalizeFlow = volumeDifferences[i] / 1000f;
-		 
-		
+
 		if (pressureFlow < 0)
 		    flowRate = -pressureFlow / totalIncomingPressureDifference;
 		else if (pressureFlow > 0)
@@ -154,18 +179,45 @@ public abstract class TileEntityTransportFluidsBase extends TileEntityTransport 
 		float volumeFlowRate = Math.abs(volumeDifference) / 1000f;
 		if (volumeFlowRate > 1)
 		    volumeFlowRate = 1;
-		// TODO: balance this for equilibrium 
+		// TODO: balance this for equilibrium
 
 		this.transferPressure(direction, pressureFlow * flowRate * 0.75f);
-		
-		pressureFlow = Math.max(-1000, Math.min(1000, pressureFlow));
-		
-		int bucketFlow = (int)(pressureFlow * flowRate);
-		System.out.println("bf:"+bucketFlow);
-		this.transfer(direction,bucketFlow); 
-		// TODO: measure how much we can transfer and use that ..
+ 
+
+		if (pressureFlow > 0 && totalOutgoingCapacity > 0) {
+		    int outgoingVolume = outgoingCapacities[i] * outgoingCapacities[i] / totalOutgoingCapacity / 2;
+		    this.transfer(direction, outgoingVolume);
+		} else if(totalIncomingCapacity > 0){
+		    int incomingVolume = incomingCapacities[i] * incomingCapacities[i] / totalIncomingCapacity / 2;
+		    this.transfer(direction, -incomingVolume);
+		}
 	    }
 	}
+    }
+
+    private int getFluidHandlerCapacity(IFluidHandler entity, ForgeDirection oppositeDirection) {
+	int capacity = 0;
+	FluidTankInfo[] info = entity.getTankInfo(oppositeDirection);
+	if (info != null) {
+	    for (int i = 0; i < info.length; i++) {
+		capacity += info[i].capacity;
+	    }
+	}
+	return capacity;
+    }
+
+    private int getPipeCapacity(TileEntityTransportFluidsBase entity, ForgeDirection oppositeDirection) {
+	IFluidTank tank = entity.getTank(oppositeDirection);
+	if (tank == null)
+	    return 0;
+	return tank.getCapacity();
+    }
+
+    private int getPumpCapacity(TileEntityPump entity, ForgeDirection oppositeDirection) {
+	IFluidTank tank = entity.tank;
+	if (tank == null)
+	    return 0;
+	return tank.getCapacity();
     }
 
     private void transferPressure(ForgeDirection direction, float amount) {

@@ -81,8 +81,10 @@ public class BlockTank extends BlockMachineRendered {
 
         TileEntity te = world.getBlockTileEntity(x, y, z);
         if (te instanceof TileEntityTank) {
-            if (FluidTransfers.handleRightClick(player, (TileEntityTank) te, what, these, are))
+            TileEntityTank tank = (TileEntityTank)te;
+            if (FluidTransfers.handleRightClick(player, tank, what, these, are))
                 return true;
+            tank.showDebug(player);
         }
         return false;
     }
