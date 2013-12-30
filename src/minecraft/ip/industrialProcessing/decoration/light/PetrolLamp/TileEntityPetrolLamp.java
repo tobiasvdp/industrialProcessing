@@ -16,6 +16,9 @@ public class TileEntityPetrolLamp extends TileEntityMachine {
 	
 	public void increaseBurnTime(int val){
 		burnTime += val;
+		if(!worldObj.isRemote){
+			this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		}
 	}
 
 	@Override
@@ -46,6 +49,7 @@ public class TileEntityPetrolLamp extends TileEntityMachine {
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		burnTime = nbt.getInteger("burnTime");
+		lightChanged = true;
 		super.readFromNBT(nbt);
 	}
 	

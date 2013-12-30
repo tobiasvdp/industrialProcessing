@@ -82,7 +82,6 @@ public class WorldGeneration implements IWorldGenerator {
 		}
 	}
 
-	int placeid = 0;
 
 	private boolean generateOre(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider, int minSpawn, int maxSpawn, int minLayer, int maxLayer, int minAmount, int maxAmount, int oreID) {
 		chunkX = chunkX*16;
@@ -99,7 +98,6 @@ public class WorldGeneration implements IWorldGenerator {
 			int i1 = chunk_X + randomGenerator.nextInt(16);
 			int j1 = randomGenerator.nextInt(par4 - par3) + par3;
 			int k1 = chunk_Z + randomGenerator.nextInt(16);
-            System.out.println("x:"+i1+" y:"+ j1+" z:"+ k1);
 			par2WorldGenerator.generate(world, randomGenerator, i1, j1, k1);
 		}
 	}

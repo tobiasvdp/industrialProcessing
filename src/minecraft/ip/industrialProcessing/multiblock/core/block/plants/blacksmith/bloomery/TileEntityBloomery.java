@@ -1,12 +1,17 @@
 package ip.industrialProcessing.multiblock.core.block.plants.blacksmith.bloomery;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.util.Iterator;
 
+import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.packet.Packet250CustomPayload;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
+import ip.industrialProcessing.PacketHandler;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.RecipesWeldingStation;
 import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreInv;
@@ -26,7 +31,7 @@ import ip.industrialProcessing.utils.inventories.InventoryUtils;
 public class TileEntityBloomery extends TEmultiblockCoreTankWorker implements IHeatStorage, IBreakable {
 	static StructureMultiblock structure;
 	static TierCollection tierRequirments;
-	static RecipesMachine recipes = new RecipesBloomery(Tiers.Invalid);
+	private RecipesBloomery recipes = new RecipesBloomery(Tiers.Invalid);
 	static {
 		// set layout
 		structure = new StructureMultiblock();
@@ -62,7 +67,7 @@ public class TileEntityBloomery extends TEmultiblockCoreTankWorker implements IH
 	private int totalLiveTime;
 
 	public TileEntityBloomery() {
-		super(structure, tierRequirments, recipes);
+		super(structure, tierRequirments, new RecipesBloomery(Tiers.Invalid));
 		LocalDirection[] nodirections = new LocalDirection[0];
 		this.addStack(null, nodirections, true, false);
 		this.addStack(null, nodirections, false, true);
@@ -95,6 +100,7 @@ public class TileEntityBloomery extends TEmultiblockCoreTankWorker implements IH
 	public Iterator<Recipe> iterateRecipes() {
 		return recipes.iterator();
 	}
+	
 	//end of tier management
 
 	@Override

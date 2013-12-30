@@ -11,11 +11,17 @@ import ip.industrialProcessing.recipes.RecipeOutputSlot;
 import ip.industrialProcessing.recipes.RecipeSlotType;
 
 public class RecipesBloomery extends RecipesMachine {
+	private Tiers tier;
+
+	public Tiers getTier() {
+		return tier;
+	}
 	public RecipesBloomery(Tiers tier) {
 		if (tier == Tiers.Tier0)
 			addDefaultRecipes();
 		if (tier == Tiers.Tier1)
 			addTier1Recipes();
+		this.tier = tier;
 	}
 
 	private void addDefaultRecipes() {

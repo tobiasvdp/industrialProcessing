@@ -1,5 +1,6 @@
 package ip.industrialProcessing.multiblock.core.block.weldingStation;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.machines.RecipesMachine;
@@ -33,6 +34,7 @@ public class RecipesWeldingStation extends RecipesMachine {
 		addRecipe(frame(3000,0));
 		addRecipe(mixer(3000,0));
 		addRecipe(copperBoard(3000,0));
+		addRecipe(lamp(2000,0));
 		
 		//soldering
 		addRecipe(something(3000,0));
@@ -44,6 +46,18 @@ public class RecipesWeldingStation extends RecipesMachine {
 		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(15, IndustrialProcessing.itemStripBoard.itemID, RecipeSlotType.INVENTORY, 1)};
 		
 		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(21, IndustrialProcessing.itemStripBoardWired.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
+		
+		recipe.workRequired = workTime;
+		recipe.powerRequired = power;
+		return recipe;
+	}
+	
+	private Recipe lamp(int workTime, int power) {
+		Recipe recipe = new Recipe();
+		
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.ingotIron.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(1, Item.ingotIron.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(2, Item.ingotIron.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(3, Block.glass.blockID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(5, Block.glass.blockID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(6, Item.ingotIron.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(7, Item.ingotIron.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(8, Item.ingotIron.itemID, RecipeSlotType.INVENTORY, 1)};
+		
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(13, IndustrialProcessing.blockPetrolLamp.blockID, RecipeSlotType.INVENTORY, 3, 3, 0) };
 		
 		recipe.workRequired = workTime;
 		recipe.powerRequired = power;
