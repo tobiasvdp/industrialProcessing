@@ -27,18 +27,41 @@ public class RecipesBloomery extends RecipesMachine {
 	private void addDefaultRecipes() {
 		addRecipe(iron(750,0));
 		addRecipe(copper(500,0));
+		addRecipe(tin(450,0));
 	}
 	private void addTier1Recipes() {
 		addRecipe(iron3(1500,0));
 		addRecipe(copper3(1000,0));
+		addRecipe(tin3(900,0));
 		addRecipe(pr4(500,0));
+		addRecipe(solderingAlloyIngot(500,0));
 	}
 
+    private Recipe solderingAlloyIngot(int workTime, int powerConsumption) {
+        Recipe recipe = new Recipe();
+        recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.blockGalenaOre.blockID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(3, IndustrialProcessing.blockTinOre.blockID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(4, IndustrialProcessing.blockTinOre.blockID, RecipeSlotType.INVENTORY, 1) };
+
+        recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemSolderAlloyIngot.itemID, RecipeSlotType.INVENTORY, 2, 2, 0.25) };
+        recipe.workRequired = workTime;
+        recipe.powerRequired = powerConsumption;
+        return recipe;
+    }
+	
     private Recipe pr4(int workTime, int powerConsumption) {
         Recipe recipe = new Recipe();
         recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemLimestoneDust.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(3, Block.glass.blockID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(4, IndustrialProcessing.itemSilicium.itemID, RecipeSlotType.INVENTORY, 1) };
 
         recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemFiberGlass.itemID, RecipeSlotType.INVENTORY, 3, 3, 0.25) };
+        recipe.workRequired = workTime;
+        recipe.powerRequired = powerConsumption;
+        return recipe;
+    }
+    
+    private Recipe tin3(int workTime, int powerConsumption) {
+        Recipe recipe = new Recipe();
+        recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.blockTinOre.blockID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(3, IndustrialProcessing.blockTinOre.blockID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(4, IndustrialProcessing.blockTinOre.blockID, RecipeSlotType.INVENTORY, 1) };
+
+        recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemTinIngot.itemID, RecipeSlotType.INVENTORY, 3, 3, 0.25) };
         recipe.workRequired = workTime;
         recipe.powerRequired = powerConsumption;
         return recipe;
@@ -64,6 +87,16 @@ public class RecipesBloomery extends RecipesMachine {
         return recipe;
     }
 
+    private Recipe tin(int workTime, int powerConsumption) {
+        Recipe recipe = new Recipe();
+        recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.blockTinOre.blockID, RecipeSlotType.INVENTORY, 1) };
+
+        recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemTinIngot.itemID, RecipeSlotType.INVENTORY, 1, 1, 0.25) };
+        recipe.workRequired = workTime;
+        recipe.powerRequired = powerConsumption;
+        return recipe;
+    }
+    
     private Recipe copper(int workTime, int powerConsumption) {
         Recipe recipe = new Recipe();
         recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.blockCopperOre.blockID, RecipeSlotType.INVENTORY, 1) };

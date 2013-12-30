@@ -181,14 +181,18 @@ public interface ISetupItems {
     
     public final static ItemIP itemCopperBoard = new ItemIP(ConfigItems.getItemCopperBoardID(), "ItemCopperBoard", IndustrialProcessing.tabOres);
     public final static ItemIP itemElectricComponents = new ItemIP(ConfigItems.getItemElectricComponentsID(), "ItemElectricComponents", IndustrialProcessing.tabOres);
+    public final static ItemIP itemnhardenedIsolationBoard = new ItemIP(ConfigItems.getItemUnhardenedIsolationBoardID(), "itemnhardenedIsolationBoard", IndustrialProcessing.tabOres);
     public final static ItemIP itemIsolationBoard = new ItemIP(ConfigItems.getItemIsolationBoardID(), "ItemIsolationBoard", IndustrialProcessing.tabOres);
     public final static ItemIP itemPCBoard = new ItemIP(ConfigItems.getItemPCBoardID(), "ItemPCBoard", IndustrialProcessing.tabOres);
     public final static ItemIP itemPCBoardWired = new ItemIP(ConfigItems.getItemPCBoardWiredID(), "ItemPCBoardWired", IndustrialProcessing.tabOres);
-    public final static ItemIP itemSolder = new ItemIP(ConfigItems.getItemSolderID(), "ItemSolder", IndustrialProcessing.tabOres);
+    public final static ItemDamage itemSolder = new ItemDamage(ConfigItems.getItemSolderID(), "ItemSolder", IndustrialProcessing.tabOres,64);
     public final static ItemIP itemSolderEmpty = new ItemIP(ConfigItems.getItemSolderEmptyID(), "ItemSolderEmpty", IndustrialProcessing.tabOres);
-    public final static ItemSolderingIron itemSolderingIron = new ItemSolderingIron(ConfigItems.getItemSolderingIronID(), 12, "ItemSolderingIron", IndustrialProcessing.tabOres);
+    public final static ItemDamage itemSolderingIron = new ItemDamage(ConfigItems.getItemSolderingIronID(), "ItemSolderingIron", IndustrialProcessing.tabOres,320);
     public final static ItemIP itemStripBoard = new ItemIP(ConfigItems.getItemStripBoardID(), "ItemStripBoard", IndustrialProcessing.tabOres);
     public final static ItemIP itemStripBoardWired = new ItemIP(ConfigItems.getItemStripBoardWiredID(), "ItemStripBoardWired", IndustrialProcessing.tabOres);
+    public final static ItemIP itemSolderAlloyWire = new ItemIP(ConfigItems.getItemSolderAlloyWireID(), "ItemSolderAlloyWire", IndustrialProcessing.tabOres);
+    public final static ItemIP itemSolderAlloyIngot = new ItemIP(ConfigItems.getItemSolderAlloyIngotID(), "ItemSolderAlloyIngot", IndustrialProcessing.tabOres);
+    public final static ItemIP itemRedstoneCircuitry = new ItemIP(ConfigItems.getItemRedstoneCircuitryID(), "ItemRedstoneCircuitry", IndustrialProcessing.tabOres);
     
     
 }

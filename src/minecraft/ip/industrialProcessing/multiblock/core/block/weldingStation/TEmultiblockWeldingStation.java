@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -179,5 +180,23 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowere
 	@Override
 	public int getScaledBurnTime(int size) {
 		return burnTime * size / totalTime;
+	}
+	
+	@Override
+	public void writeToNBT(NBTTagCompound nbt) {
+		nbt.setInteger("T1", (int) T1);
+		nbt.setInteger("T2", (int) T2);
+		nbt.setInteger("burnTime", burnTime);
+		nbt.setInteger("totalTime", totalTime);
+		super.writeToNBT(nbt);
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+		T1 = nbt.getInteger("T1");
+		T2 = nbt.getInteger("T2");
+		burnTime = nbt.getInteger("burnTime");
+		totalTime = nbt.getInteger("totalTime");
+		super.readFromNBT(nbt);
 	}
 }

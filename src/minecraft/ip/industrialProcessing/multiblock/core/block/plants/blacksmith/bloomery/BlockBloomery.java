@@ -12,6 +12,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockBloomery extends BLmultiblockCore {
@@ -65,6 +66,15 @@ public class BlockBloomery extends BLmultiblockCore {
 			par1World.spawnParticle("flame", d0, d1, d2 - 0.2f, 0.0D, 0.0D, 0.0D);
 		}
 		super.randomDisplayTick(par1World, par2, par3, par4, par5Random);
+	}
+	
+	@Override
+	public int getLightValue(IBlockAccess world, int x, int y, int z) {
+		TileEntityBloomery te = (TileEntityBloomery) world.getBlockTileEntity(x, y, z);
+		if (te.getHeat() > 1538) {
+			return 10;
+		}
+		return 0;
 	}
 
 }

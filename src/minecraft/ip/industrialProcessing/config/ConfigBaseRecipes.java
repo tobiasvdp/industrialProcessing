@@ -37,13 +37,17 @@ public class ConfigBaseRecipes {
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemCopperCoil), new ItemStack(ISetupItems.itemThickStick), new ItemStack(ISetupItems.itemCopperWireInsulated));
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemCopperWireInsulated), new ItemStack(ISetupFluids.bucketFluidLatex, 1, WILDCARD_VALUE), new ItemStack(ISetupItems.itemCopperWire));
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemCopperWire), new ItemStack(ISetupItems.itemCopperIngot), new ItemStack(ISetupItems.itemDrawPlate, 1, WILDCARD_VALUE));
+		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemSolderAlloyWire), new ItemStack(ISetupItems.itemSolderAlloyIngot), new ItemStack(ISetupItems.itemDrawPlate, 1, WILDCARD_VALUE));
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemActiveCoal), new ItemStack(ISetupItems.itemCoalDust), new ItemStack(ISetupItems.itemGrownCulture));
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemSandCast), new ItemStack(ISetupItems.itemCastingMulsh), new ItemStack(ISetupItems.itemFlask));
+		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemnhardenedIsolationBoard), new ItemStack(IndustrialProcessing.bucketResin), new ItemStack(ISetupItems.itemFiberGlass));
+		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemRedstoneCircuitry,2), new ItemStack(Item.redstone),new ItemStack(Item.redstone), new ItemStack(Item.ingotIron), new ItemStack(Item.leather));
 		GameRegistry.addRecipe(new ItemStack(ISetupItems.itemHammer), "   ", " y ", "x  ", 'x', new ItemStack(ISetupItems.itemThickStick), 'y', new ItemStack(Item.ingotIron));
 		GameRegistry.addRecipe(new ItemStack(ISetupItems.itemCastingMulsh, 4), "xyx", "yzy", "xyx", 'x', new ItemStack(Block.sand), 'y', new ItemStack(Item.clay), 'z', new ItemStack(Item.bucketWater));
 		GameRegistry.addRecipe(new ItemStack(ISetupItems.itemFlask), " x ", "x x", " x ", 'x', new ItemStack(Block.woodSingleSlab, 1, WILDCARD_VALUE));
 		GameRegistry.addRecipe(new ItemStack(IndustrialProcessing.blockIronBowl), "   ", "xyx","   ", 'x', new ItemStack(IndustrialProcessing.itemThickStick),'y', new ItemStack(IndustrialProcessing.itemIronBowl, 1, WILDCARD_VALUE));
 		GameRegistry.addRecipe(new ItemStack(IndustrialProcessing.itemSilicium,8), "xxx", "xyx","xxx", 'x', new ItemStack(IndustrialProcessing.itemHardenedSandDust),'y', new ItemStack(IndustrialProcessing.itemAluminumDust));
+		GameRegistry.addRecipe(new ItemStack(IndustrialProcessing.itemSolderEmpty,1), "xyx", " z ","xyx", 'x', new ItemStack(Item.leather),'y', new ItemStack(Block.planks,1,WILDCARD_VALUE),'z',new ItemStack(Item.stick));
 
 		GameRegistry.addRecipe(new ItemStack(ISetupItems.itemCrankWheel), "  x", "xxx", "x  ", 'x', new ItemStack(ISetupItems.itemThickStick));
 		GameRegistry.addRecipe(new ItemStack(ISetupItems.itemCarbonBrush, 8), "xxx", "xyx", "xxx", 'x', new ItemStack(ISetupItems.itemCoalDust), 'y', new ItemStack(ISetupFluids.bucketFluidLatex, 1, WILDCARD_VALUE));
@@ -64,14 +68,13 @@ public class ConfigBaseRecipes {
 		// anvil
 		GameRegistry.addShapedRecipe(new ItemStack(ISetupMachineBlocks.blockAnvil), "zzz", "zxz", "zyz", 'x', new ItemStack(Block.blockIron), 'y', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE), 'z', new ItemStack(Item.ingotIron));
 
-		GameRegistry.addSmelting(ISetupBlocks.blockCopperOre.blockID, new ItemStack(ISetupItems.itemCopperIngot), 0);
-		GameRegistry.addSmelting(ISetupBlocks.blockTinOre.blockID, new ItemStack(ISetupItems.itemTinIngot), 0);
 		GameRegistry.addSmelting(ISetupBlocks.blockGalenaOre.blockID, new ItemStack(ISetupItems.itemSilverIngot), 0);
 		GameRegistry.addSmelting(ISetupItems.itemCopperMineral.itemID, new ItemStack(ISetupItems.itemCopperIngot), 0);
 		GameRegistry.addSmelting(ISetupItems.itemTinOxideDust.itemID, new ItemStack(ISetupItems.itemTinIngot), 0);
 		GameRegistry.addSmelting(ISetupItems.itemSilverDust.itemID, new ItemStack(ISetupItems.itemSilverIngot), 0);
 		GameRegistry.addSmelting(Block.sand.blockID, new ItemStack(IndustrialProcessing.blockHardSand), 0);
 		GameRegistry.addSmelting(IndustrialProcessing.blockHardSand.blockID, new ItemStack(Block.glass), 0);
+		GameRegistry.addSmelting(IndustrialProcessing.itemnhardenedIsolationBoard.itemID, new ItemStack(IndustrialProcessing.itemIsolationBoard), 0);
 
 	}
 

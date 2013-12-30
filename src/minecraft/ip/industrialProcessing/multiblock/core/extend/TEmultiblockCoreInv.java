@@ -114,7 +114,7 @@ public abstract class TEmultiblockCoreInv extends TEmultiblockCore implements II
 	@Override
 	public boolean slotContains(int slot, int itemId, int metadata, int amount) {
 		MachineItemStack machineStack = getMachineStack(slot);
-		return machineStack != null && machineStack.stack != null && machineStack.stack.itemID == itemId && machineStack.stack.stackSize >= amount;
+		return machineStack != null && machineStack.stack != null && machineStack.stack.itemID == itemId && machineStack.stack.stackSize >= amount && machineStack.stack.getItemDamage() == metadata;
 	}
 
 	@Override

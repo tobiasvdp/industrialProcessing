@@ -157,7 +157,20 @@ public class ConfigItems {
 	private int itemHardenedSandDustID = 6655;
 	private int itemAluminumDustID = 6656;
 	private int itemFiberGlassID = 6657;
-	
+	private int itemUnhardenedIsolationBoardID = 6658;
+	private int itemSolderAlloyWireID = 6659;
+	private int itemSolderAlloyIngotID = 6660;
+	private int ItemRedstoneCircuitryID = 6661;
+
+	public static int getItemRedstoneCircuitryID() {
+		return getInstance().ItemRedstoneCircuitryID;
+	}
+	public static int getItemSolderAlloyIngotID() {
+		return getInstance().itemSolderAlloyIngotID;
+	}
+	public static int getItemSolderAlloyWireID() {
+		return getInstance().itemSolderAlloyWireID;
+	}
 	public static int ItemFiberGlassID() {
 		return getInstance().itemFiberGlassID;
 	}
@@ -179,6 +192,10 @@ public class ConfigItems {
 	
 	public static int getItemIsolationBoardID() {
 		return getInstance().itemIsolationBoardID;
+	}
+	
+	public static int getItemUnhardenedIsolationBoardID() {
+		return getInstance().itemUnhardenedIsolationBoardID;
 	}
 	
 	public static int getItemPCBoardID() {
@@ -714,6 +731,10 @@ public class ConfigItems {
 	}
 
 	public static void addToLanguageRegistry() {
+		LanguageRegistry.addName(ISetupItems.itemRedstoneCircuitry , "Redstone circuitry");
+		LanguageRegistry.addName(ISetupItems.itemSolderAlloyIngot , "Solder alloy ingo");
+		LanguageRegistry.addName(ISetupItems.itemSolderAlloyWire , "Solder alloy wire");
+		LanguageRegistry.addName(ISetupItems.itemnhardenedIsolationBoard , "Unhardened isolation board");
 		LanguageRegistry.addName(ISetupItems.itemFiberGlass , "Fiber glass");
 		LanguageRegistry.addName(ISetupItems.itemAluminumDust , "Aluminum dust");
 		LanguageRegistry.addName(ISetupItems.itemHardenedSandDust , "Hardened sand dust");
