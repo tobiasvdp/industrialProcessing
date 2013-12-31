@@ -1,11 +1,15 @@
 package ip.industrialProcessing.config;
 
+import java.util.ArrayList;
+
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.config.ConfigCategories;
 import ip.industrialProcessing.decoration.light.TileEntityElectricLamp;
 import ip.industrialProcessing.decoration.light.PetrolLamp.TileEntityPetrolLamp;
+import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.machines.classifier.TileEntityClassifier;
+import ip.industrialProcessing.machines.crusher.RecipesCrusher;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import ip.industrialProcessing.machines.diskFilter.TileEntityDiskFilter;
 import ip.industrialProcessing.machines.dryer.TileEntityDryer;
@@ -84,6 +88,9 @@ import ip.industrialProcessing.power.plants.TileEntitySolidBurner;
 import ip.industrialProcessing.power.plants.TileEntityTurbine;
 import ip.industrialProcessing.power.storage.TileEntityEnergyCell;
 import ip.industrialProcessing.power.wire.TileEntityWire;
+import ip.industrialProcessing.recipes.Recipe;
+import ip.industrialProcessing.recipes.RecipeInputSlot;
+import ip.industrialProcessing.recipes.RecipeOutputSlot;
 import ip.industrialProcessing.recipes.recipeRegistry.RecipeRegistry;
 import ip.industrialProcessing.transport.fluids.TileEntityGrate;
 import ip.industrialProcessing.transport.fluids.TileEntityManoMeter;
@@ -100,11 +107,14 @@ import ip.industrialProcessing.transport.items.conveyorInput.TileEntityConveyorI
 import ip.industrialProcessing.transport.items.conveyorOutput.TileEntityConveyorOutput;
 import ip.industrialProcessing.transport.items.conveyorSorter.TileEntityConveyorSorter;
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemBlockWithMetadata;
+import net.minecraft.item.ItemStack;
 import net.minecraft.src.ModLoader;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.FluidStack;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -281,7 +291,7 @@ public class ConfigMachineBlocks {
         registerMachineBlock(ISetupMachineBlocks.blockWaterTreatmentStation, "IP.Machine.Treatment", "Water treatment station", TileEntityWaterTreatmentStation.class);
         registerMachineBlock(ISetupMachineBlocks.blockWireMill, "IP.Machine.WireMill", "Wire mill", TileEntityWireMill.class);
 
-        registerMachineBlock(ISetupMachineBlocks.blockCrusher, "IP.Machine.Crusher", "Ore Crusher", TileEntityCrusher.class);
+        registerMachineBlock(ISetupMachineBlocks.blockCrusher, "IP.Machine.Crusher", "Ore Crusher", TileEntityCrusher.class, new RecipesCrusher());
         registerMachineBlock(ISetupMachineBlocks.blockFilter, "IP.Machine.Filter", "Ore Filter", TileEntityFilter.class);
         registerMachineBlock(ISetupMachineBlocks.blockMageneticSeparator, "IP.Machine.Separator", "Magnetic Separator", TileEntityMagneticSeparator.class);
         registerMachineBlock(ISetupMachineBlocks.blockMixer, "IP.Machine.Mixer", "Mixer", TileEntityMixer.class);
@@ -330,8 +340,12 @@ public class ConfigMachineBlocks {
 
         registerMachineBlock(ISetupMachineBlocks.blockManualTreetap, "IP.TreeTap.Manual", "Manual Treetap", TileEntityManualTreeTap.class);
         registerMachineBlock(ISetupMachineBlocks.blockAutomaticTreetap, "IP.TreeTap.Automatic", "Automatic Treetap", TileEntityAutomaticTreeTap.class);
+        
+        //Recipe Recipe = new Recipe(new RecipeInputSlot[]{new RecipeInputSlot(0,new ItemStack(Item.dyePowder,1,16))}, new RecipeOutputSlot[]{new RecipeOutputSlot(1,new ItemStack(IndustrialProcessing.itemCarbonBrush))}, 3000, 0);
+        //System.out.println("test");
     }
 
+    @Deprecated
     private void registerMachineBlock(Block block, String uniqueId, String displayName, Class tileEntity) {
         GameRegistry.registerBlock(block, uniqueId);
         MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
@@ -339,11 +353,28 @@ public class ConfigMachineBlocks {
         ModLoader.registerTileEntity(tileEntity, uniqueId);
     }
 
+    @Deprecated
     private void registerMachineBlock(Block block, Class<? extends ItemBlock> itemBlock, String uniqueId, String displayName, Class tileEntity) {
         GameRegistry.registerBlock(block, itemBlock, uniqueId);
         MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
         LanguageRegistry.addName(block, displayName);
         ModLoader.registerTileEntity(tileEntity, uniqueId);
+    }
+    
+    private void registerMachineBlock(Block block, String uniqueId, String displayName, Class tileEntity, RecipesMachine recipe) {
+        GameRegistry.registerBlock(block, uniqueId);
+        MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
+        LanguageRegistry.addName(block, displayName);
+        ModLoader.registerTileEntity(tileEntity, uniqueId);
+        RecipeRegistry.registerMachinesRecipes(recipe, block);
+    }
+
+    private void registerMachineBlock(Block block, Class<? extends ItemBlock> itemBlock, String uniqueId, String displayName, Class tileEntity, RecipesMachine recipe) {
+        GameRegistry.registerBlock(block, itemBlock, uniqueId);
+        MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
+        LanguageRegistry.addName(block, displayName);
+        ModLoader.registerTileEntity(tileEntity, uniqueId);
+        RecipeRegistry.registerMachinesRecipes(recipe, block);
     }
 
     public static ConfigMachineBlocks getInstance() {
