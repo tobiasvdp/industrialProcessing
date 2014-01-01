@@ -92,7 +92,6 @@ import ip.industrialProcessing.power.wire.TileEntityWire;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeInputSlot;
 import ip.industrialProcessing.recipes.RecipeOutputSlot;
-import ip.industrialProcessing.recipes.recipeRegistry.RecipeRegistry;
 import ip.industrialProcessing.transport.fluids.TileEntityGrate;
 import ip.industrialProcessing.transport.fluids.TileEntityManoMeter;
 import ip.industrialProcessing.transport.fluids.TileEntityPump;
@@ -107,6 +106,9 @@ import ip.industrialProcessing.transport.items.conveyorChute.TileEntityConveyorC
 import ip.industrialProcessing.transport.items.conveyorInput.TileEntityConveyorInput;
 import ip.industrialProcessing.transport.items.conveyorOutput.TileEntityConveyorOutput;
 import ip.industrialProcessing.transport.items.conveyorSorter.TileEntityConveyorSorter;
+import ip.industrialProcessing.utils.registry.BlockRegistry;
+import ip.industrialProcessing.utils.registry.BlockType;
+import ip.industrialProcessing.utils.registry.RecipeRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -348,6 +350,7 @@ public class ConfigMachineBlocks {
         MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
         LanguageRegistry.addName(block, displayName);
         ModLoader.registerTileEntity(tileEntity, uniqueId);
+        BlockRegistry.RegisterBlock(block, BlockType.Machine);
 		try {
 			Field[] declaredFields = tileEntity.getFields();
 			for(Field field:declaredFields){
@@ -368,6 +371,7 @@ public class ConfigMachineBlocks {
         MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
         LanguageRegistry.addName(block, displayName);
         ModLoader.registerTileEntity(tileEntity, uniqueId);
+        BlockRegistry.RegisterBlock(block, BlockType.Machine);
 		try {
 			Field[] declaredFields = tileEntity.getFields();
 			for(Field field:declaredFields){
