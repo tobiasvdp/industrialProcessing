@@ -35,7 +35,7 @@ import ip.industrialProcessing.utils.IHeatStorage;
 public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowered implements IHeatStorage {
 	static StructureMultiblock structure;
 	static TierCollection tierRequirments;
-	static RecipesMachine recipes = new RecipesWeldingStation();
+	public static RecipesMachine recipes = new RecipesWeldingStation();
 	static {
 		// set layout
 		structure = new StructureMultiblock();

@@ -27,7 +27,7 @@ import net.minecraftforge.liquids.LiquidStack;
 
 public class TileEntityCrusher extends TileEntityPoweredWorkerMachine {
 
-	public static RecipesMachine recipes = new RecipesMachine(RecipeRegistry.getRecipesForMachine(IndustrialProcessing.blockCrusher));
+	public static RecipesMachine recipes = new RecipesCrusher();
 
 	public TileEntityCrusher() {
 		super(LocalDirection.LEFT, 10000, 100); // does 100 work per tick, lasts

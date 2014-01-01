@@ -1,5 +1,6 @@
 package ip.industrialProcessing.config;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import ip.industrialProcessing.IndustrialProcessing;
@@ -291,7 +292,7 @@ public class ConfigMachineBlocks {
         registerMachineBlock(ISetupMachineBlocks.blockWaterTreatmentStation, "IP.Machine.Treatment", "Water treatment station", TileEntityWaterTreatmentStation.class);
         registerMachineBlock(ISetupMachineBlocks.blockWireMill, "IP.Machine.WireMill", "Wire mill", TileEntityWireMill.class);
 
-        registerMachineBlock(ISetupMachineBlocks.blockCrusher, "IP.Machine.Crusher", "Ore Crusher", TileEntityCrusher.class, new RecipesCrusher());
+        registerMachineBlock(ISetupMachineBlocks.blockCrusher, "IP.Machine.Crusher", "Ore Crusher", TileEntityCrusher.class);
         registerMachineBlock(ISetupMachineBlocks.blockFilter, "IP.Machine.Filter", "Ore Filter", TileEntityFilter.class);
         registerMachineBlock(ISetupMachineBlocks.blockMageneticSeparator, "IP.Machine.Separator", "Magnetic Separator", TileEntityMagneticSeparator.class);
         registerMachineBlock(ISetupMachineBlocks.blockMixer, "IP.Machine.Mixer", "Mixer", TileEntityMixer.class);
@@ -339,42 +340,47 @@ public class ConfigMachineBlocks {
         registerMachineBlock(ISetupMachineBlocks.blockElectroMotor, "IP.Motor.Electric", "Electro Motor", TileEntityElectroMotor.class);
 
         registerMachineBlock(ISetupMachineBlocks.blockManualTreetap, "IP.TreeTap.Manual", "Manual Treetap", TileEntityManualTreeTap.class);
-        registerMachineBlock(ISetupMachineBlocks.blockAutomaticTreetap, "IP.TreeTap.Automatic", "Automatic Treetap", TileEntityAutomaticTreeTap.class);
-        
-        //Recipe Recipe = new Recipe(new RecipeInputSlot[]{new RecipeInputSlot(0,new ItemStack(Item.dyePowder,1,16))}, new RecipeOutputSlot[]{new RecipeOutputSlot(1,new ItemStack(IndustrialProcessing.itemCarbonBrush))}, 3000, 0);
-        //System.out.println("test");
+        registerMachineBlock(ISetupMachineBlocks.blockAutomaticTreetap, "IP.TreeTap.Automatic", "Automatic Treetap", TileEntityAutomaticTreeTap.class);        
     }
 
-    @Deprecated
     private void registerMachineBlock(Block block, String uniqueId, String displayName, Class tileEntity) {
         GameRegistry.registerBlock(block, uniqueId);
         MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
         LanguageRegistry.addName(block, displayName);
         ModLoader.registerTileEntity(tileEntity, uniqueId);
+		try {
+			Field[] declaredFields = tileEntity.getFields();
+			for(Field field:declaredFields){
+				RecipesMachine recipes = new RecipesMachine();
+				Object recipe = field.get(recipes);
+				if(recipe instanceof RecipesMachine){
+					RecipeRegistry.registerMachinesRecipes((RecipesMachine) recipe, block);
+				}
+			}
+		} catch (IllegalArgumentException e) {
+		} catch (SecurityException e) {
+		} catch (IllegalAccessException e) {
+		}
     }
 
-    @Deprecated
     private void registerMachineBlock(Block block, Class<? extends ItemBlock> itemBlock, String uniqueId, String displayName, Class tileEntity) {
         GameRegistry.registerBlock(block, itemBlock, uniqueId);
         MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
         LanguageRegistry.addName(block, displayName);
         ModLoader.registerTileEntity(tileEntity, uniqueId);
-    }
-    
-    private void registerMachineBlock(Block block, String uniqueId, String displayName, Class tileEntity, RecipesMachine recipe) {
-        GameRegistry.registerBlock(block, uniqueId);
-        MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
-        LanguageRegistry.addName(block, displayName);
-        ModLoader.registerTileEntity(tileEntity, uniqueId);
-        RecipeRegistry.registerMachinesRecipes(recipe, block);
-    }
-
-    private void registerMachineBlock(Block block, Class<? extends ItemBlock> itemBlock, String uniqueId, String displayName, Class tileEntity, RecipesMachine recipe) {
-        GameRegistry.registerBlock(block, itemBlock, uniqueId);
-        MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
-        LanguageRegistry.addName(block, displayName);
-        ModLoader.registerTileEntity(tileEntity, uniqueId);
-        RecipeRegistry.registerMachinesRecipes(recipe, block);
+		try {
+			Field[] declaredFields = tileEntity.getFields();
+			for(Field field:declaredFields){
+				RecipesMachine recipes = new RecipesMachine();
+				Object recipe = field.get(recipes);
+				if(recipe instanceof RecipesMachine){
+					RecipeRegistry.registerMachinesRecipes((RecipesMachine) recipe, block);
+				}
+			}
+		} catch (IllegalArgumentException e) {
+		} catch (SecurityException e) {
+		} catch (IllegalAccessException e) {
+		}
     }
 
     public static ConfigMachineBlocks getInstance() {
