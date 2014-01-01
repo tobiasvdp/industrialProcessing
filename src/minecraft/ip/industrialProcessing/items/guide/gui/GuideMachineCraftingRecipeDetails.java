@@ -37,7 +37,7 @@ public class GuideMachineCraftingRecipeDetails extends GuideMachineRecipeDetails
 	    for (int i = 0; i < shaped.recipeItems.length; i++) {
 		ItemStack stack = shaped.recipeItems[i];
 		if (stack != null) {
-		    if (drawTooltipStack(x + 18 * (i / 3), y + 18 * (i % 3), stack, mouseX, mouseY)) {
+		    if (drawTooltipStack(x + 18 * (i % 3), y + 18 * (i / 3), stack, mouseX, mouseY)) {
 			this.hover = stack;
 		    }
 		}
