@@ -2,6 +2,7 @@ package ip.industrialProcessing.config;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.config.ConfigCategories;
@@ -294,7 +295,7 @@ public class ConfigMachineBlocks {
         registerMachineBlock(ISetupMachineBlocks.blockWaterTreatmentStation, "IP.Machine.Treatment", "Water treatment station", TileEntityWaterTreatmentStation.class);
         registerMachineBlock(ISetupMachineBlocks.blockWireMill, "IP.Machine.WireMill", "Wire mill", TileEntityWireMill.class);
 
-        registerMachineBlock(ISetupMachineBlocks.blockCrusher, "IP.Machine.Crusher", "Ore Crusher", TileEntityCrusher.class);
+        registerMachineBlock(ISetupMachineBlocks.blockCrusher, "IP.Machine.Crusher", "Ore Crusher", TileEntityCrusher.class, BlockType.Machine,BlockType.Grinding);
         registerMachineBlock(ISetupMachineBlocks.blockFilter, "IP.Machine.Filter", "Ore Filter", TileEntityFilter.class);
         registerMachineBlock(ISetupMachineBlocks.blockMageneticSeparator, "IP.Machine.Separator", "Magnetic Separator", TileEntityMagneticSeparator.class);
         registerMachineBlock(ISetupMachineBlocks.blockMixer, "IP.Machine.Mixer", "Mixer", TileEntityMixer.class);
@@ -342,7 +343,10 @@ public class ConfigMachineBlocks {
         registerMachineBlock(ISetupMachineBlocks.blockElectroMotor, "IP.Motor.Electric", "Electro Motor", TileEntityElectroMotor.class);
 
         registerMachineBlock(ISetupMachineBlocks.blockManualTreetap, "IP.TreeTap.Manual", "Manual Treetap", TileEntityManualTreeTap.class);
-        registerMachineBlock(ISetupMachineBlocks.blockAutomaticTreetap, "IP.TreeTap.Automatic", "Automatic Treetap", TileEntityAutomaticTreeTap.class);        
+        registerMachineBlock(ISetupMachineBlocks.blockAutomaticTreetap, "IP.TreeTap.Automatic", "Automatic Treetap", TileEntityAutomaticTreeTap.class);
+        
+         Block[] blocks = BlockRegistry.getBlocksByTagArray(BlockType.Grinding, BlockType.Machine);
+         System.out.println("It's a me");
     }
 
     private void registerMachineBlock(Block block, String uniqueId, String displayName, Class tileEntity) {
@@ -365,6 +369,27 @@ public class ConfigMachineBlocks {
 		} catch (IllegalAccessException e) {
 		}
     }
+    
+    private void registerMachineBlock(Block block, String uniqueId, String displayName, Class tileEntity, BlockType... type) {
+        GameRegistry.registerBlock(block, uniqueId);
+        MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
+        LanguageRegistry.addName(block, displayName);
+        ModLoader.registerTileEntity(tileEntity, uniqueId);
+        BlockRegistry.RegisterBlock(block, type);
+		try {
+			Field[] declaredFields = tileEntity.getFields();
+			for(Field field:declaredFields){
+				RecipesMachine recipes = new RecipesMachine();
+				Object recipe = field.get(recipes);
+				if(recipe instanceof RecipesMachine){
+					RecipeRegistry.registerMachinesRecipes((RecipesMachine) recipe, block);
+				}
+			}
+		} catch (IllegalArgumentException e) {
+		} catch (SecurityException e) {
+		} catch (IllegalAccessException e) {
+		}
+    }
 
     private void registerMachineBlock(Block block, Class<? extends ItemBlock> itemBlock, String uniqueId, String displayName, Class tileEntity) {
         GameRegistry.registerBlock(block, itemBlock, uniqueId);
@@ -372,6 +397,27 @@ public class ConfigMachineBlocks {
         LanguageRegistry.addName(block, displayName);
         ModLoader.registerTileEntity(tileEntity, uniqueId);
         BlockRegistry.RegisterBlock(block, new BlockType[]{BlockType.Machine});
+		try {
+			Field[] declaredFields = tileEntity.getFields();
+			for(Field field:declaredFields){
+				RecipesMachine recipes = new RecipesMachine();
+				Object recipe = field.get(recipes);
+				if(recipe instanceof RecipesMachine){
+					RecipeRegistry.registerMachinesRecipes((RecipesMachine) recipe, block);
+				}
+			}
+		} catch (IllegalArgumentException e) {
+		} catch (SecurityException e) {
+		} catch (IllegalAccessException e) {
+		}
+    }
+    
+    private void registerMachineBlock(Block block, Class<? extends ItemBlock> itemBlock, String uniqueId, String displayName, Class tileEntity, BlockType... type) {
+        GameRegistry.registerBlock(block, itemBlock, uniqueId);
+        MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
+        LanguageRegistry.addName(block, displayName);
+        ModLoader.registerTileEntity(tileEntity, uniqueId);
+        BlockRegistry.RegisterBlock(block, type);
 		try {
 			Field[] declaredFields = tileEntity.getFields();
 			for(Field field:declaredFields){
