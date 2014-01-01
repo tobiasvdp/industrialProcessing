@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 import ip.industrialProcessing.machines.containers.ContainerPoweredWorkerMachine;
 import ip.industrialProcessing.recipes.Recipe;
-import ip.industrialProcessing.recipes.recipeRegistry.RecipeRegistry;
 import ip.industrialProcessing.slots.SlotBase;
 import ip.industrialProcessing.slots.SlotOutput;
 import ip.industrialProcessing.utils.containers.ContainerUtils;
+import ip.industrialProcessing.utils.registry.RecipeRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;

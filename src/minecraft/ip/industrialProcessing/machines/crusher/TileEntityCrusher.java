@@ -12,7 +12,7 @@ import ip.industrialProcessing.machines.TileEntityPoweredWorkerMachine;
 import ip.industrialProcessing.machines.TileEntityWorkerMachine;
 import ip.industrialProcessing.power.IPowerAcceptor;
 import ip.industrialProcessing.recipes.Recipe;
-import ip.industrialProcessing.recipes.recipeRegistry.RecipeRegistry;
+import ip.industrialProcessing.utils.registry.RecipeRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;

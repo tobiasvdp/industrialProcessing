@@ -1,4 +1,4 @@
-package ip.industrialProcessing.recipes.recipeRegistry;
+package ip.industrialProcessing.utils.registry;
 
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.machines.crusher.RecipesCrusher;
@@ -97,22 +97,6 @@ public class RecipeRegistry {
 
 	public static Block getBlockForRecipe(Recipe recipe) {
 		return recipes.get(recipe);
-	}
-
-	public static ArrayList<Block> getTileEntityForRecipe(ArrayList<Recipe> recipe) {
-		ArrayList<Block> list = new ArrayList<Block>();
-		Iterator<Recipe> targetRecipes = recipe.iterator();
-		Iterator<Entry<Recipe, Block>> iterator = recipes.entrySet().iterator();
-		while (iterator.hasNext()) {
-			Entry<Recipe, Block> set = iterator.next();
-			while (targetRecipes.hasNext()) {
-				Recipe target = targetRecipes.next();
-				if (target == set.getKey())
-					list.add(set.getValue());
-			}
-			targetRecipes = recipe.iterator();
-		}
-		return list;
 	}
 
 	public static ArrayList<Recipe> getRecipesForMachine(Block block) {

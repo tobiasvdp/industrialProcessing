@@ -3,21 +3,28 @@ package ip.industrialProcessing.items;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.client.render.gui.GuiTools;
 import ip.industrialProcessing.client.render.gui.ToolTip;
+import ip.industrialProcessing.utils.registry.BlockRegistry;
 
 import java.awt.Point;
 import java.awt.Rectangle;
 
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
 
 public class GuideMachinePage extends GuidePage {
 
-    private Block[] machines = new Block[] { IndustrialProcessing.blockCrusher, IndustrialProcessing.blockClassifier, IndustrialProcessing.blockDiskFilter, IndustrialProcessing.blockDryer, IndustrialProcessing.blockElectrolyser, IndustrialProcessing.blockExtruder, IndustrialProcessing.blockFilter, IndustrialProcessing.blockFlotationCell, IndustrialProcessing.blockHydroCyclone, IndustrialProcessing.blockInsulator, IndustrialProcessing.blockMageneticSeparator, IndustrialProcessing.blockMixer, IndustrialProcessing.blockOxygenFurnace, IndustrialProcessing.blockPelletExtruder, IndustrialProcessing.blockSpoolWindingMachine, IndustrialProcessing.blockThickener, IndustrialProcessing.blockWireMill };
+    private Block[] machines = BlockRegistry.getMachinesArray();
     private Block hover;
     private Block selectedMachine;
+    
+    public GuideMachinePage() {
+		super();
+		
+	}
 
     @Override
     public Point getIconLocation() {
