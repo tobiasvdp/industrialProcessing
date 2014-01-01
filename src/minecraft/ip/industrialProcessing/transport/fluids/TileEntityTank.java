@@ -63,6 +63,7 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
     public void updateEntity() {
 	super.updateEntity();
 	if (unverified) {
+	    System.out.println("Tank update at :" + xCoord + " " + yCoord + " " + zCoord);
 	    tanksAbove = getTanks(ForgeDirection.UP);
 	    tanksBelow = getTanks(ForgeDirection.DOWN);
 
@@ -124,22 +125,10 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
 		    otherTank.tanksAbove = this.tanksAbove + i;
 		    otherTank.tanksBelow = this.tanksBelow - i;
 		}
-		otherTank.setState(ForgeDirection.UP, otherTank.tanksAbove > 0); // if
-										 // there
-										 // are
-										 // tanks
-										 // below,
-										 // it
-										 // is
-										 // connected!
-		otherTank.setState(ForgeDirection.DOWN, otherTank.tanksBelow > 0); // if
-										   // there
-										   // are
-										   // tanks
-										   // above,
-										   // it
-										   // is
-										   // connected!
+		otherTank.setState(ForgeDirection.UP, otherTank.tanksAbove > 0);
+		// if there are tanks below, it is connected!
+		otherTank.setState(ForgeDirection.DOWN, otherTank.tanksBelow > 0);
+		// if there are tanks above, it is connected!
 	    }
 	}
     }

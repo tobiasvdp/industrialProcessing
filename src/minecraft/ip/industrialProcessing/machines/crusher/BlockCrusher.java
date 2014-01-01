@@ -10,6 +10,8 @@ import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.BlockMachineRendered;
+import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.recipes.IRecipeBlock;
 import ip.industrialProcessing.transport.steve.railway.suspended.cart.EntityFloatingCart;
 import ip.industrialProcessing.utils.Position;
 import net.minecraft.block.Block;
@@ -26,7 +28,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
-public class BlockCrusher extends BlockMachineRendered {
+public class BlockCrusher extends BlockMachineRendered implements IRecipeBlock {
 
     public BlockCrusher() {
         super(ConfigMachineBlocks.getCrusherBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Ore Crusher", IndustrialProcessing.tabOreProcessing);
@@ -59,6 +61,11 @@ public class BlockCrusher extends BlockMachineRendered {
                 par1World.spawnParticle("smoke", par2 + 0.5f + offsetX, par3 + 0.5f + offsetZ, par4 + 0.5f, x, -0.001f, z);
             }
         }
+    }
+
+    @Override
+    public RecipesMachine getRecipes() { 
+	return TileEntityCrusher.recipes;
     }
 
 }

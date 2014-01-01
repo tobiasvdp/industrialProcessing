@@ -12,8 +12,10 @@ import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.BlockMachineRendered;
+import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.recipes.IRecipeBlock;
 
-public class BlockClassifier extends BlockMachineRendered {
+public class BlockClassifier extends BlockMachineRendered implements IRecipeBlock {
 
 	public BlockClassifier() {
 		super(ConfigMachineBlocks.getClassifierBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Spiral Classifier", IndustrialProcessing.tabOreProcessing);
@@ -27,5 +29,10 @@ public class BlockClassifier extends BlockMachineRendered {
 	@Override
 	public int getRenderType() {
 		return ConfigRenderers.getRendererClassifierId();
+	}
+
+	@Override
+	public RecipesMachine getRecipes() { 
+	    return TileEntityClassifier.recipes;
 	}
 }
