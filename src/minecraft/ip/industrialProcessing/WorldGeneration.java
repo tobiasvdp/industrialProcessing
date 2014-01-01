@@ -30,13 +30,13 @@ public class WorldGeneration implements IWorldGenerator {
 
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
-		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 15, 25, 30, 60, 2, 4, ISetupBlocks.blockTinOre.blockID);
-		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 18, 27, 25, 60, 2, 4, ISetupBlocks.blockCopperOre.blockID);
-		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 8, 14, 5, 40, 1, 3, ISetupBlocks.blockGalenaOre.blockID);
-		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 4, 10, 10, 60, 1, 3, ISetupBlocks.blockCinnebarOre.blockID);
-		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 4, 6, 1, 8, 2, 3, ISetupBlocks.blockRutileOre.blockID);
-		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 6, 8, 1, 40, 1, 3, ISetupBlocks.blockChromiteOre.blockID);
-		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 0, 1, 1, 20, 1, 1, ISetupBlocks.blockTaliaOre.blockID);
+		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 20, 25, 30, 60, 2, 4, ISetupBlocks.blockTinOre.blockID);
+		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 22, 27, 25, 60, 2, 4, ISetupBlocks.blockCopperOre.blockID);
+		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 12, 14, 5, 40, 1, 3, ISetupBlocks.blockGalenaOre.blockID);
+		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 7, 10, 10, 60, 1, 3, ISetupBlocks.blockCinnebarOre.blockID);
+		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 6, 8, 1, 8, 2, 3, ISetupBlocks.blockRutileOre.blockID);
+		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 7, 10, 1, 40, 1, 3, ISetupBlocks.blockChromiteOre.blockID);
+		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 1, 1, 1, 20, 1, 1, ISetupBlocks.blockTaliaOre.blockID);
 		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 20, 30, 30, 85, 6, 10, ISetupBlocks.blockLimestone.blockID);
 		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 15, 25, 0, 85, 6, 10, ISetupBlocks.blockBauxiteOre.blockID);
 
