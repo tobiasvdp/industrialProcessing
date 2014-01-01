@@ -9,9 +9,9 @@ import net.minecraft.block.Block;
 
 
 public class BlockRegistry {
-	private static HashMap<Block, BlockType> array = new HashMap<Block, BlockType>();
+	private static HashMap<Block, BlockType[]> array = new HashMap<Block, BlockType[]>();
 	
-	public static void RegisterBlock(Block block,BlockType type){
+	public static void RegisterBlock(Block block,BlockType[] type){
 		array.put(block,type);
 	}
 	
@@ -21,21 +21,29 @@ public class BlockRegistry {
 	
 	public static Iterator<Block> getMachines(){
 		ArrayList<Block> list = new ArrayList<Block>();
-		Iterator<Entry<Block, BlockType>> it = array.entrySet().iterator();
+		Iterator<Entry<Block, BlockType[]>> it = array.entrySet().iterator();
 		while(it.hasNext()){
-			Entry<Block, BlockType> set = it.next();
-			if (set.getValue() == BlockType.Machine)
+			Entry<Block, BlockType[]> set = it.next();
+			if (ContainsTag(set.getValue(),BlockType.Machine))
 				list.add(set.getKey());
 		}
 		return list.iterator();
 	}
 	
+	private static boolean ContainsTag(BlockType[] value, BlockType machine) {
+		for(int i =0;i<value.length;i++){
+			if(value[i] == machine)
+				return true;
+		}
+		return false;
+	}
+
 	public static Block[] getMachinesArray(){
 		ArrayList<Block> list = new ArrayList<Block>();
-		Iterator<Entry<Block, BlockType>> it = array.entrySet().iterator();
+		Iterator<Entry<Block, BlockType[]>> it = array.entrySet().iterator();
 		while(it.hasNext()){
-			Entry<Block, BlockType> set = it.next();
-			if (set.getValue() == BlockType.Machine)
+			Entry<Block, BlockType[]> set = it.next();
+			if (ContainsTag(set.getValue(),BlockType.Machine))
 				list.add(set.getKey());
 		}
 		Block[] blocks = new Block[list.size()];

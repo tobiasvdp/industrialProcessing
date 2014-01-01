@@ -350,7 +350,7 @@ public class ConfigMachineBlocks {
         MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
         LanguageRegistry.addName(block, displayName);
         ModLoader.registerTileEntity(tileEntity, uniqueId);
-        BlockRegistry.RegisterBlock(block, BlockType.Machine);
+        BlockRegistry.RegisterBlock(block, new BlockType[]{BlockType.Machine});
 		try {
 			Field[] declaredFields = tileEntity.getFields();
 			for(Field field:declaredFields){
@@ -371,7 +371,7 @@ public class ConfigMachineBlocks {
         MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
         LanguageRegistry.addName(block, displayName);
         ModLoader.registerTileEntity(tileEntity, uniqueId);
-        BlockRegistry.RegisterBlock(block, BlockType.Machine);
+        BlockRegistry.RegisterBlock(block, new BlockType[]{BlockType.Machine});
 		try {
 			Field[] declaredFields = tileEntity.getFields();
 			for(Field field:declaredFields){
