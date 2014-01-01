@@ -1,7 +1,8 @@
-package ip.industrialProcessing.items;
+package ip.industrialProcessing.items.guide;
 
 import ip.industrialProcessing.GuiHandler;
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.items.ItemIP;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

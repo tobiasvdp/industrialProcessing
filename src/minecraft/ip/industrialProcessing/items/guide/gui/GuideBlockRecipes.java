@@ -1,4 +1,4 @@
-package ip.industrialProcessing.items;
+package ip.industrialProcessing.items.guide.gui;
 
 import ip.industrialProcessing.machines.RecipesMachine;
 import net.minecraft.block.Block;

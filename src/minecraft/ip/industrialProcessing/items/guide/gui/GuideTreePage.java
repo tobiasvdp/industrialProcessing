@@ -1,4 +1,4 @@
-package ip.industrialProcessing.items;
+package ip.industrialProcessing.items.guide.gui;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.client.render.gui.GuiTools;
@@ -49,10 +49,7 @@ import net.minecraftforge.fluids.IFluidBlock;
 import org.lwjgl.opengl.GL11;
 
 public class GuideTreePage extends GuidePanoramaPage {
-
-    private static final int FILL_COLOR = 0xffc6c6c6;
-    private static final int HIGHLIGT_COLOR = 0xffffffff;
-    private static final int SHADOW_COLOR = 0x88000000;
+ 
 
     private static ItemStack[] baseStacks = new ItemStack[] { new ItemStack(IndustrialProcessing.blockRutile), new ItemStack(IndustrialProcessing.blockCinnebar), new ItemStack(IndustrialProcessing.blockChromiteOre), new ItemStack(IndustrialProcessing.blockCopperOre), new ItemStack(IndustrialProcessing.blockGalenaOre), new ItemStack(IndustrialProcessing.blockTinOre), new ItemStack(IndustrialProcessing.blockTaliaOre), new ItemStack(Block.oreGold), new ItemStack(Block.oreIron), new ItemStack(ItemCoal.coal) };
 

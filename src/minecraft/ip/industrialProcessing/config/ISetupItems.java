@@ -2,12 +2,11 @@ package ip.industrialProcessing.config;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.items.ItemDamage;
-import ip.industrialProcessing.items.ItemGuide;
 import ip.industrialProcessing.items.ItemIP;
-import ip.industrialProcessing.items.ItemSuspendedCart;
 import ip.industrialProcessing.items.ItemPaintBrush;
+import ip.industrialProcessing.items.ItemSuspendedCart;
 import ip.industrialProcessing.items.ItemWrench;
-import ip.industrialProcessing.items.solderingIron.ItemSolderingIron;
+import ip.industrialProcessing.items.guide.ItemGuide;
 
 public interface ISetupItems {
 	

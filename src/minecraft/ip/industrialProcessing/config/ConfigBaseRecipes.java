@@ -1,11 +1,11 @@
 package ip.industrialProcessing.config;
 
+import ip.industrialProcessing.IndustrialProcessing;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

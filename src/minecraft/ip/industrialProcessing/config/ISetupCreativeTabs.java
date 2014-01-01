@@ -10,4 +10,8 @@ public interface ISetupCreativeTabs {
     public static CreativeTabs tabMultiblocks = new CreativeTabsIP(CreativeTabs.getNextID(), "tabMultiblocks");
     public static CreativeTabs tabFluid = new CreativeTabsIP(CreativeTabs.getNextID(), "tabFluid");
 
+    
+    public static CreativeTabs[] allIPTabs = new CreativeTabs[]{
+	tabOreProcessing, tabOres, tabPower, tabMultiblocks,tabFluid    
+    };
 }

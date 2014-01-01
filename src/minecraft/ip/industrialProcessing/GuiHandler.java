@@ -1,6 +1,6 @@
 package ip.industrialProcessing;
 
-import ip.industrialProcessing.items.GuiGuide;
+import ip.industrialProcessing.items.guide.gui.GuiGuide;
 import ip.industrialProcessing.machines.classifier.ContainerClassifier;
 import ip.industrialProcessing.machines.classifier.GuiContainerClassifier;
 import ip.industrialProcessing.machines.classifier.TileEntityClassifier;

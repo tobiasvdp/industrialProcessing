@@ -1,4 +1,4 @@
-package ip.industrialProcessing.items;
+package ip.industrialProcessing.items.guide.gui;
 
 import java.awt.Point;
 
@@ -11,6 +11,10 @@ public abstract class GuidePage extends Gui {
     protected FontRenderer fontRenderer;
     protected Minecraft mc;
 
+    public static final int FILL_COLOR = 0xffc6c6c6;
+    public static final int HIGHLIGT_COLOR = 0xffffffff;
+    public static final int SHADOW_COLOR = 0x88000000;
+    
     public GuidePage() {
 	this.mc = Minecraft.getMinecraft();
 	this.fontRenderer = mc.fontRenderer;
