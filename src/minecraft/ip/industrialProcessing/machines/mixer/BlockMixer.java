@@ -11,8 +11,10 @@ import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.BlockMachineRendered;
+import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.recipes.IRecipeBlock;
 
-public class BlockMixer extends BlockMachineRendered {
+public class BlockMixer extends BlockMachineRendered implements IRecipeBlock {
 
 	public BlockMixer() {
 		super(ConfigMachineBlocks.getMixerBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Mixer", IndustrialProcessing.tabOreProcessing);
@@ -29,6 +31,11 @@ public class BlockMixer extends BlockMachineRendered {
     public int getRenderType()
     {
         return ConfigRenderers.getRendererMixerId();
+    }
+
+    @Override
+    public RecipesMachine getRecipes() { 
+	return TileEntityMixer.recipes;
     }
 
 }

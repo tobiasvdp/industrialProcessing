@@ -7,8 +7,10 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.machines.BlockMachine;
+import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.recipes.IRecipeBlock;
 
-public class BlockPelletExtruder extends BlockMachine{
+public class BlockPelletExtruder extends BlockMachine implements IRecipeBlock{
 
 	public BlockPelletExtruder() {
 		super(ConfigMachineBlocks.getPelletExtruderID(), Material.iron, 1F, Block.soundMetalFootstep, "Pellet Extruder", IndustrialProcessing.tabOreProcessing);
@@ -19,6 +21,11 @@ public class BlockPelletExtruder extends BlockMachine{
 		TileEntityPelletExtruder te = new TileEntityPelletExtruder();
 		te.setName(getLocalizedName());
 		return te;
+	}
+
+	@Override
+	public RecipesMachine getRecipes() { 
+	    return TileEntityPelletExtruder.recipes;
 	}
 
 }

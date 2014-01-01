@@ -6,7 +6,7 @@ import ip.industrialProcessing.machines.classifier.BlockClassifier;
 import ip.industrialProcessing.machines.crusher.BlockCrusher;
 import ip.industrialProcessing.machines.diskFilter.BlockDiskFilter;
 import ip.industrialProcessing.machines.dryer.BlockDryer;
-import ip.industrialProcessing.machines.electrolyser.blockElectrolyser;
+import ip.industrialProcessing.machines.electrolyser.BlockElectrolyser;
 import ip.industrialProcessing.machines.filter.BlockFilter;
 import ip.industrialProcessing.machines.flotationCell.BlockFlotationCell;
 import ip.industrialProcessing.machines.hydroCyclone.BlockHydroCyclone;
@@ -122,7 +122,7 @@ public interface ISetupMachineBlocks {
     public final static BlockWireMill blockWireMill = new BlockWireMill();
     public final static BlockInsulator blockInsulator = new BlockInsulator();
     public final static BlockSpoolWindingMachine blockSpoolWindingMachine = new BlockSpoolWindingMachine();
-    public final static blockElectrolyser blockElectrolyser = new blockElectrolyser();
+    public final static BlockElectrolyser blockElectrolyser = new BlockElectrolyser();
     public final static BlockSourWaterStripper blockSourWaterStripper = new BlockSourWaterStripper();
     public final static BlockAlkylationUnit blockAlkylationUnit = new BlockAlkylationUnit();
     public final static BlockAsphaltBlower blockAsphaltBlower = new BlockAsphaltBlower();

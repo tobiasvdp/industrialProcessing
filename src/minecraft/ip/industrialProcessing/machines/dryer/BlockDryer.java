@@ -11,8 +11,10 @@ import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.BlockMachineRendered;
+import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.recipes.IRecipeBlock;
 
-public class BlockDryer extends BlockMachineRendered {
+public class BlockDryer extends BlockMachineRendered implements IRecipeBlock{
 
 	public BlockDryer() {
 		super(ConfigMachineBlocks.getDryerBlockID(), Material.iron, 1f, Block.soundMetalFootstep, "Dryer", IndustrialProcessing.tabOreProcessing); 
@@ -29,5 +31,10 @@ public class BlockDryer extends BlockMachineRendered {
 	@Override
 	public int getRenderType() { 
 		return ConfigRenderers.getRendererDryerId();
+	}
+
+	@Override
+	public RecipesMachine getRecipes() { 
+	    return TileEntityDryer.recipes;
 	}
 }

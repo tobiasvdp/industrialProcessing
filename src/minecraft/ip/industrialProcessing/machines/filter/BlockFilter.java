@@ -12,6 +12,8 @@ import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.BlockMachineRendered;
+import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.recipes.IRecipeBlock;
 import ip.industrialProcessing.utils.inventories.InventoryUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -28,26 +30,28 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockFilter extends BlockMachineRendered {
+public class BlockFilter extends BlockMachineRendered implements IRecipeBlock {
 
-	private Icon[] textures;
-	
-	public BlockFilter() {
-		super(ConfigMachineBlocks.getFilterBlockID(), Material.iron, 1F,
-		Block.soundMetalFootstep, "Ore Filter",
-		IndustrialProcessing.tabOreProcessing);
-	}			
+    private Icon[] textures;
 
-    @Override
-    public int getRenderType()
-    {
-        return ConfigRenderers.getRendererFilterId();
+    public BlockFilter() {
+	super(ConfigMachineBlocks.getFilterBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Ore Filter", IndustrialProcessing.tabOreProcessing);
     }
 
-	@Override
-	public TileEntity createNewTileEntity(World world) {
-		TileEntityFilter te = new TileEntityFilter();
-		te.setName(getLocalizedName());
-		return te;
-	}
+    @Override
+    public int getRenderType() {
+	return ConfigRenderers.getRendererFilterId();
+    }
+
+    @Override
+    public TileEntity createNewTileEntity(World world) {
+	TileEntityFilter te = new TileEntityFilter();
+	te.setName(getLocalizedName());
+	return te;
+    }
+
+    @Override
+    public RecipesMachine getRecipes() { 
+	return TileEntityFilter.recipes;
+    }
 }

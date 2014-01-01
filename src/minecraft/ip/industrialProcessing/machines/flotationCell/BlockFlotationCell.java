@@ -13,8 +13,10 @@ import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.BlockMachineRendered;
+import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.recipes.IRecipeBlock;
 
-public class BlockFlotationCell extends BlockMachineRendered {
+public class BlockFlotationCell extends BlockMachineRendered implements IRecipeBlock {
 
     private Icon[] icons = new Icon[2];
 
@@ -45,6 +47,11 @@ public class BlockFlotationCell extends BlockMachineRendered {
     public void registerIcons(IconRegister par1IconRegister) { 
         this.icons[1] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "tankSide");
         this.icons[0] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "tankFeatures");
+    }
+
+    @Override
+    public RecipesMachine getRecipes() { 
+	return TileEntityFlotationCell.recipes;
     }
 
 }

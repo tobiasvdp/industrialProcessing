@@ -7,9 +7,11 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.machines.BlockMachine;
+import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.machines.pelletExtruder.TileEntityPelletExtruder;
+import ip.industrialProcessing.recipes.IRecipeBlock;
 
-public class BlockOxygenFurnace extends BlockMachine{
+public class BlockOxygenFurnace extends BlockMachine implements IRecipeBlock{
 
 	public BlockOxygenFurnace() {
 		super(ConfigMachineBlocks.getOxygenFurnaceID(), Material.iron, 1F, Block.soundMetalFootstep, "Oxygen Furnace", IndustrialProcessing.tabOreProcessing);
@@ -20,6 +22,11 @@ public class BlockOxygenFurnace extends BlockMachine{
 		TileEntityOxygenFurnace te = new TileEntityOxygenFurnace();
 		te.setName(getLocalizedName());
 		return te;
+	}
+
+	@Override
+	public RecipesMachine getRecipes() { 
+	    return TileEntityOxygenFurnace.recipes;
 	}
 
 }

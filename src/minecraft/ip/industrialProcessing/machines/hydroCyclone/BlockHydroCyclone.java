@@ -9,8 +9,10 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.machines.BlockMachine;
+import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.recipes.IRecipeBlock;
 
-public class BlockHydroCyclone extends BlockMachine {
+public class BlockHydroCyclone extends BlockMachine implements IRecipeBlock {
 
 	public BlockHydroCyclone() {
 		super(ConfigMachineBlocks.getHydroCycloneBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Hydro Cyclone Separator", IndustrialProcessing.tabOreProcessing);
@@ -22,6 +24,11 @@ public class BlockHydroCyclone extends BlockMachine {
 		TileEntityHydroCyclone te = new TileEntityHydroCyclone();
 		te.setName(getLocalizedName());
 		return te;
+	}
+
+	@Override
+	public RecipesMachine getRecipes() { 
+	    return TileEntityHydroCyclone.recipes;
 	}
 
 }

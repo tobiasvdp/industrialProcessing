@@ -46,7 +46,7 @@ public class TileEntityThickener extends TileEntityPoweredFluidWorkerMachine {
 		super.updateEntity();
 	};
 
-	private static RecipesThickener recipes = new RecipesThickener();
+	public final static RecipesThickener recipes = new RecipesThickener();
 
 	@Override
 	public Iterator<Recipe> iterateRecipes() {
