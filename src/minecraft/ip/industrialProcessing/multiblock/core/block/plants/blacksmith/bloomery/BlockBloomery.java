@@ -6,7 +6,9 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.machines.BlockMachineRendered;
+import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.multiblock.core.BLmultiblockCore;
+import ip.industrialProcessing.recipes.IRecipeBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -15,7 +17,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockBloomery extends BLmultiblockCore {
+public class BlockBloomery extends BLmultiblockCore implements IRecipeBlock{
 
 	private Icon[] icons = new Icon[1];
 
@@ -75,6 +77,11 @@ public class BlockBloomery extends BLmultiblockCore {
 			return 10;
 		}
 		return 0;
+	}
+
+	@Override
+	public RecipesMachine getRecipes() {
+		return TileEntityBloomery.recipesStatic;
 	}
 
 }

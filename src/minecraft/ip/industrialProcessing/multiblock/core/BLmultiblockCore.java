@@ -3,6 +3,7 @@ package ip.industrialProcessing.multiblock.core;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
+import ip.industrialProcessing.recipes.IRecipeBlock;
 import ip.industrialProcessing.utils.inventories.InventoryUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -16,7 +17,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public abstract class BLmultiblockCore extends BlockContainer {
+public abstract class BLmultiblockCore extends BlockContainer{
 
 	public BLmultiblockCore(int blockID, String name, CreativeTabs tab) {
 		super(blockID, Material.iron);

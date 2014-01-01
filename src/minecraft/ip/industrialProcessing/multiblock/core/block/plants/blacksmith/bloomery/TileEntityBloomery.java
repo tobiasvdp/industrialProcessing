@@ -31,6 +31,7 @@ import ip.industrialProcessing.utils.inventories.InventoryUtils;
 public class TileEntityBloomery extends TEmultiblockCoreTankWorker implements IHeatStorage, IBreakable {
 	static StructureMultiblock structure;
 	static TierCollection tierRequirments;
+	public static RecipesBloomery recipesStatic = new RecipesBloomery(Tiers.all);
 	public RecipesBloomery recipes = new RecipesBloomery(Tiers.Invalid);
 	static {
 		// set layout

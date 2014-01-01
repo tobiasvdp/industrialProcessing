@@ -21,6 +21,10 @@ public class RecipesBloomery extends RecipesMachine {
 			addDefaultRecipes();
 		if (tier == Tiers.Tier1)
 			addTier1Recipes();
+		if(tier == Tiers.all){
+			addDefaultRecipes();
+			addTier1Recipes();
+		}	
 		this.tier = tier;
 	}
 

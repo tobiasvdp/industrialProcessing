@@ -5,9 +5,11 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.multiblock.core.BLmultiblockCore;
+import ip.industrialProcessing.recipes.IRecipeBlock;
 
-public class BLmultiblockWeldingStation extends BLmultiblockCore{
+public class BLmultiblockWeldingStation extends BLmultiblockCore implements IRecipeBlock{
 
 	public BLmultiblockWeldingStation() {
 		super(ConfigMachineBlocks.getBLmultiblockWeldingStation(), "BLmultiblockWeldingStation", IndustrialProcessing.tabMultiblocks);
@@ -21,5 +23,10 @@ public class BLmultiblockWeldingStation extends BLmultiblockCore{
 	@Override
 	public int getRenderType() {
 		return ConfigRenderers.getBLmultiblockWeldingStation();
+	}
+
+	@Override
+	public RecipesMachine getRecipes() {
+		return TEmultiblockWeldingStation.recipes;
 	}
 }
