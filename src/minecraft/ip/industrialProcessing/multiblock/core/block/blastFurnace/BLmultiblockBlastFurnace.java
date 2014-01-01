@@ -8,9 +8,11 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.multiblock.core.BLmultiblockCore;
+import ip.industrialProcessing.recipes.IRecipeBlock;
 
-public class BLmultiblockBlastFurnace extends BLmultiblockCore {
+public class BLmultiblockBlastFurnace extends BLmultiblockCore implements IRecipeBlock{
     Icon[] icons = new Icon[6];
 
     public BLmultiblockBlastFurnace() {
@@ -41,4 +43,9 @@ public class BLmultiblockBlastFurnace extends BLmultiblockCore {
         icons[4] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "grill");
         icons[5] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "generatorFeatures");
     }
+
+	@Override
+	public RecipesMachine getRecipes() {
+		return TEmultiblockBlastFurnace.recipes;
+	}
 }
