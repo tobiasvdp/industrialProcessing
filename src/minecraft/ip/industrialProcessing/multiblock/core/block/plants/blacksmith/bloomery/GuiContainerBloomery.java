@@ -25,7 +25,7 @@ public class GuiContainerBloomery extends GUImultiblock{
 	private TileEntityBloomery te;
 	
 	public GuiContainerBloomery(InventoryPlayer inventory, TEmultiblockCoreTankWorker entity) {
-		super(inventory, entity, new ContainerBloomery(inventory, entity), "Bloomery", "textures/gui/Bloomery.png");
+		super(inventory, entity, new ContainerBloomery(inventory, entity), "Bloomery", "textures/gui/Bloomery",entity.getTier());
 		te = (TileEntityBloomery) entity;
 	}
 

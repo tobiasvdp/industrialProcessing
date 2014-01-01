@@ -21,6 +21,7 @@ import ip.industrialProcessing.client.render.RendererTileEntityFluidWorker;
 import ip.industrialProcessing.client.render.RenderingMultiblock;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.ISetupMachineBlocks;
+import ip.industrialProcessing.decoration.block.machineBlock.model.ModelMachineBlock;
 import ip.industrialProcessing.decoration.crystals.ModelCrystal;
 import ip.industrialProcessing.decoration.light.PetrolLamp.model.ModelPetrolLamp;
 import ip.industrialProcessing.decoration.platforms.ModelPlatform;
@@ -63,6 +64,7 @@ import ip.industrialProcessing.multiblock.dummy.block.frame.ENmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.frame.MDmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.frame.MDmultiblockFramePanel;
 import ip.industrialProcessing.multiblock.dummy.block.frame.TEmultiblockFrame;
+import ip.industrialProcessing.multiblock.dummy.block.ironBowl.model.ModelIronBowl;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.ENmultiblockLiftDoor;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.MDmultiblockLiftDoor;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.TEmultiblockLiftDoor;
@@ -214,6 +216,8 @@ public class ClientProxy extends CommonProxy {
     private static final ModelPetrolLamp modelPetrolLamp = new ModelPetrolLamp();
     private static final ModelBellows modelBellows = new ModelBellows();
     private static final ModelBloomery modelBloomery = new ModelBloomery();
+    private static final ModelIronBowl modelIronBowl = new ModelIronBowl();
+    private static final ModelMachineBlock modelMachineBlock = new ModelMachineBlock();
 
     @Override
     public void registerRenderers() {
@@ -265,6 +269,12 @@ public class ClientProxy extends CommonProxy {
 
 	ConfigRenderers.setRendererMultiblockBlastFurnaceTowerID(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getrendererMultiblockBlastFurnaceTowerID(), MDmultiblockBlastFurnaceTower));
+	
+	ConfigRenderers.setRendererIronBowlId(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererIronBowlId(), modelIronBowl));
+	
+	ConfigRenderers.setRendererMachineBlockId(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererMachineBlockId(), modelMachineBlock));
 
 	
 	// block & tile entity

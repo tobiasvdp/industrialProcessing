@@ -1,5 +1,6 @@
 package ip.industrialProcessing.multiblock.core.block.weldingStation;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.machines.RecipesMachine;
@@ -33,6 +34,8 @@ public class RecipesWeldingStation extends RecipesMachine {
 		addRecipe(frame(3000,0));
 		addRecipe(mixer(3000,0));
 		addRecipe(copperBoard(3000,0));
+		addRecipe(lamp(2000,0));
+		addRecipe(solder(4000,0));
 		
 		//soldering
 		addRecipe(something(3000,0));
@@ -41,9 +44,32 @@ public class RecipesWeldingStation extends RecipesMachine {
 	private Recipe something(int workTime, int power) {
 		Recipe recipe = new Recipe();
 		
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(15, IndustrialProcessing.itemStripBoard.itemID, RecipeSlotType.INVENTORY, 1)};
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(15, IndustrialProcessing.itemStripBoard.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(16, IndustrialProcessing.itemRedstoneCircuitry.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(17, IndustrialProcessing.itemCopperWire.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(18, IndustrialProcessing.itemRedstoneCircuitry.itemID, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(19, IndustrialProcessing.itemSolder.itemID, RecipeSlotType.DAMAGEDITEM, 1),new RecipeInputSlot(20, IndustrialProcessing.itemSolderingIron.itemID, RecipeSlotType.DAMAGEDITEM, 1)};
 		
 		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(21, IndustrialProcessing.itemStripBoardWired.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
+		
+		recipe.workRequired = workTime;
+		recipe.powerRequired = power;
+		return recipe;
+	}
+
+	private Recipe solder(int workTime, int power) {
+		Recipe recipe = new Recipe();
+		
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemSolderAlloyWire.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(1, IndustrialProcessing.itemSolderAlloyWire.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(2, IndustrialProcessing.itemSolderAlloyWire.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(3, IndustrialProcessing.itemSolderAlloyWire.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(5, IndustrialProcessing.itemSolderAlloyWire.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(6, IndustrialProcessing.itemSolderAlloyWire.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(7, IndustrialProcessing.itemSolderAlloyWire.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(8, IndustrialProcessing.itemSolderAlloyWire.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(4, IndustrialProcessing.itemSolderEmpty.itemID, RecipeSlotType.INVENTORY, 1)};
+		
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(13, IndustrialProcessing.itemSolder.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
+		
+		recipe.workRequired = workTime;
+		recipe.powerRequired = power;
+		return recipe;
+	}
+	private Recipe lamp(int workTime, int power) {
+		Recipe recipe = new Recipe();
+		
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.ingotIron.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(1, Item.ingotIron.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(2, Item.ingotIron.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(3, Block.glass.blockID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(5, Block.glass.blockID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(6, Item.ingotIron.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(7, Item.ingotIron.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(8, Item.ingotIron.itemID, RecipeSlotType.INVENTORY, 1)};
+		
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(13, IndustrialProcessing.blockPetrolLamp.blockID, RecipeSlotType.INVENTORY, 3, 3, 0) };
 		
 		recipe.workRequired = workTime;
 		recipe.powerRequired = power;
@@ -86,7 +112,7 @@ public class RecipesWeldingStation extends RecipesMachine {
 	private Recipe crusher(int workTime, int power) {
 		Recipe recipe = new Recipe();
 		
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(3, IndustrialProcessing.itemCrusingPlate.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(4, IndustrialProcessing.blockMachineBlock.blockID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(5, IndustrialProcessing.itemCrusingPlate.itemID, RecipeSlotType.INVENTORY, 1) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(7, IndustrialProcessing.itemStripBoardWired.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(3, IndustrialProcessing.itemCrusingPlate.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(4, IndustrialProcessing.blockMachineBlock.blockID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(5, IndustrialProcessing.itemCrusingPlate.itemID, RecipeSlotType.INVENTORY, 1) };
 		
 		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(13, IndustrialProcessing.blockCrusher.blockID, RecipeSlotType.INVENTORY, 1, 1, 0) };
 		
@@ -231,7 +257,7 @@ public class RecipesWeldingStation extends RecipesMachine {
 	}
 	private Recipe ironMachineBlock(int workTime, int power) {
 		Recipe recipe = new Recipe();
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(1, IndustrialProcessing.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(3, IndustrialProcessing.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(4, IndustrialProcessing.BLmultiblockFrame.blockID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(5, IndustrialProcessing.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(6, IndustrialProcessing.itemIronBar.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(7, IndustrialProcessing.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(8, IndustrialProcessing.itemIronBar.itemID, RecipeSlotType.INVENTORY, 1)};
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.dyePowder.itemID,14, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(2, Item.dyePowder.itemID,14, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(1, IndustrialProcessing.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(3, IndustrialProcessing.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(4, IndustrialProcessing.BLmultiblockFrame.blockID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(5, IndustrialProcessing.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(6, IndustrialProcessing.itemIronBar.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(7, IndustrialProcessing.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(8, IndustrialProcessing.itemIronBar.itemID, RecipeSlotType.INVENTORY, 1)};
 		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(13, IndustrialProcessing.blockMachineBlock.blockID, RecipeSlotType.INVENTORY, 1, 1, 0) };
 		
 		recipe.workRequired = workTime;

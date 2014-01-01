@@ -171,6 +171,7 @@ public class TEmultiblockCore extends TileEntity implements ITEmultiblockCore {
 
 		nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(2);
 		tier = Tiers.values()[nbttagcompound1.getInteger("tier")];
+		setNbtLoadedRecipes(tier);
 
 		nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(3);
 		state = MultiblockState.values()[nbttagcompound1.getInteger("state")];
@@ -201,6 +202,10 @@ public class TEmultiblockCore extends TileEntity implements ITEmultiblockCore {
 				isAnimationEnabled[i] = nbttagcompound1.getBoolean("enabled");
 			}
 		}
+
+	}
+
+	protected void setNbtLoadedRecipes(Tiers tier2) {
 
 	}
 
@@ -503,5 +508,10 @@ public class TEmultiblockCore extends TileEntity implements ITEmultiblockCore {
 	@Override
 	public boolean canWrenchRotate() {
 		return false;
+	}
+
+	@Override
+	public Tiers getTier() {
+		return tier;
 	}
 }

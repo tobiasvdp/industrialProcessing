@@ -1,11 +1,16 @@
 package ip.industrialProcessing.config;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.config.ConfigCategories;
 import ip.industrialProcessing.decoration.light.TileEntityElectricLamp;
 import ip.industrialProcessing.decoration.light.PetrolLamp.TileEntityPetrolLamp;
+import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.machines.classifier.TileEntityClassifier;
+import ip.industrialProcessing.machines.crusher.RecipesCrusher;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import ip.industrialProcessing.machines.diskFilter.TileEntityDiskFilter;
 import ip.industrialProcessing.machines.dryer.TileEntityDryer;
@@ -65,6 +70,7 @@ import ip.industrialProcessing.multiblock.dummy.block.displayPanel.TEmultiblockD
 import ip.industrialProcessing.multiblock.dummy.block.frame.TEmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.inventory.input.TEmultiblockInvInput;
 import ip.industrialProcessing.multiblock.dummy.block.inventory.output.TEmultiblockInvOutput;
+import ip.industrialProcessing.multiblock.dummy.block.ironBowl.TileEntityIronBowl;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.TEmultiblockLiftDoor;
 import ip.industrialProcessing.multiblock.dummy.block.screen.TEmultiblockScreen;
 import ip.industrialProcessing.multiblock.dummy.block.tankPlating.TileEntityTankPlating;
@@ -83,6 +89,10 @@ import ip.industrialProcessing.power.plants.TileEntitySolidBurner;
 import ip.industrialProcessing.power.plants.TileEntityTurbine;
 import ip.industrialProcessing.power.storage.TileEntityEnergyCell;
 import ip.industrialProcessing.power.wire.TileEntityWire;
+import ip.industrialProcessing.recipes.Recipe;
+import ip.industrialProcessing.recipes.RecipeInputSlot;
+import ip.industrialProcessing.recipes.RecipeOutputSlot;
+import ip.industrialProcessing.recipes.recipeRegistry.RecipeRegistry;
 import ip.industrialProcessing.transport.fluids.TileEntityGrate;
 import ip.industrialProcessing.transport.fluids.TileEntityManoMeter;
 import ip.industrialProcessing.transport.fluids.TileEntityPump;
@@ -98,11 +108,14 @@ import ip.industrialProcessing.transport.items.conveyorInput.TileEntityConveyorI
 import ip.industrialProcessing.transport.items.conveyorOutput.TileEntityConveyorOutput;
 import ip.industrialProcessing.transport.items.conveyorSorter.TileEntityConveyorSorter;
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemBlockWithMetadata;
+import net.minecraft.item.ItemStack;
 import net.minecraft.src.ModLoader;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.FluidStack;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -136,6 +149,7 @@ public class ConfigMachineBlocks {
     private int anvilBlockID= IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "anvilBlockID", 520).getInt();
     private int bellowsBlockID= IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "bellowsBlockID", 521).getInt();
     private int bloomeryBlockID= IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "bloomeryBlockID", 522).getInt();
+    private int ironBowlBlockID= IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "ironBowlBlockID", 523).getInt();
     
     private int blastFurnaceID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "BlastFurnaceID", 550).getInt();
     private int extruderID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "ExtruderID", 551).getInt();
@@ -227,8 +241,9 @@ public class ConfigMachineBlocks {
     	registerMachineBlock(ISetupMachineBlocks.blockRoaster, "IP.Machine.Roast", "Roaster", TileEntityRoaster.class);
     	registerMachineBlock(ISetupMachineBlocks.blockQuenchTank, "IP.Machine.Quench", "QuenchTank", TileEntityQuenchTank.class);
     	registerMachineBlock(ISetupMachineBlocks.blockGrindingStone, "IP.Machine.GrStone", "Grinding stone", TileEntityGrindingStone.class);
-    	registerMachineBlock(ISetupMachineBlocks.blockBellows, "IP.Machine.Bellow", "Bellows", TileEntityBellows.class);
+    	registerMachineBlock(ISetupMachineBlocks.blockBellows, "IP.MBD.Bellow", "Bellows", TileEntityBellows.class);
     	registerMachineBlock(ISetupMachineBlocks.blockBloomery, "IP.MBC.Bloom", "Bloomery", TileEntityBloomery.class);
+    	registerMachineBlock(ISetupMachineBlocks.blockIronBowl, "IP.MBD.IBowl", "Iron bowl", TileEntityIronBowl.class);
     	
 
         registerMachineBlock(ISetupMachineBlocks.blockConveyorBelt, "IP.Trans.CBelt", "Conveyor belt", TileEntityConveyorBelt.class);
@@ -296,7 +311,7 @@ public class ConfigMachineBlocks {
         registerMachineBlock(ISetupMachineBlocks.blockManualGenerator, "IP.Generator.Manual", "Crank Generator", TileEntityManualGenerator.class);
         registerMachineBlock(ISetupMachineBlocks.blockBuildcraftGenerator, "IP.Generator.Buildcraft", "Buildcraft Generator", TileEntityBuildcraftGenerator.class);
         registerMachineBlock(ISetupMachineBlocks.blockGenerator, "IP.Generator", "Generator", TileEntityGenerator.class);
-        registerMachineBlock(ISetupMachineBlocks.blockPetrolLamp, "IP.Lamp.Petrol", "Petrol Lamp", TileEntityPetrolLamp.class);
+        registerMachineBlock(ISetupMachineBlocks.blockPetrolLamp, "IP.Lamp.Petrol", "Hanging Lamp", TileEntityPetrolLamp.class);
         registerMachineBlock(ISetupMachineBlocks.blockElectricLamp, "IP.Lamp.Electric", "Electric Lamp", TileEntityElectricLamp.class);
         registerMachineBlock(ISetupMachineBlocks.blockSinter, "IP.Machine.Sinter", "Sinter", TileEntitySinter.class);
         registerMachineBlock(ISetupMachineBlocks.blockKiln, "IP.Machine.kiln", "Kiln", TileEntityKiln.class);
@@ -325,7 +340,7 @@ public class ConfigMachineBlocks {
         registerMachineBlock(ISetupMachineBlocks.blockElectroMotor, "IP.Motor.Electric", "Electro Motor", TileEntityElectroMotor.class);
 
         registerMachineBlock(ISetupMachineBlocks.blockManualTreetap, "IP.TreeTap.Manual", "Manual Treetap", TileEntityManualTreeTap.class);
-        registerMachineBlock(ISetupMachineBlocks.blockAutomaticTreetap, "IP.TreeTap.Automatic", "Automatic Treetap", TileEntityAutomaticTreeTap.class);
+        registerMachineBlock(ISetupMachineBlocks.blockAutomaticTreetap, "IP.TreeTap.Automatic", "Automatic Treetap", TileEntityAutomaticTreeTap.class);        
     }
 
     private void registerMachineBlock(Block block, String uniqueId, String displayName, Class tileEntity) {
@@ -333,6 +348,19 @@ public class ConfigMachineBlocks {
         MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
         LanguageRegistry.addName(block, displayName);
         ModLoader.registerTileEntity(tileEntity, uniqueId);
+		try {
+			Field[] declaredFields = tileEntity.getFields();
+			for(Field field:declaredFields){
+				RecipesMachine recipes = new RecipesMachine();
+				Object recipe = field.get(recipes);
+				if(recipe instanceof RecipesMachine){
+					RecipeRegistry.registerMachinesRecipes((RecipesMachine) recipe, block);
+				}
+			}
+		} catch (IllegalArgumentException e) {
+		} catch (SecurityException e) {
+		} catch (IllegalAccessException e) {
+		}
     }
 
     private void registerMachineBlock(Block block, Class<? extends ItemBlock> itemBlock, String uniqueId, String displayName, Class tileEntity) {
@@ -340,12 +368,28 @@ public class ConfigMachineBlocks {
         MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
         LanguageRegistry.addName(block, displayName);
         ModLoader.registerTileEntity(tileEntity, uniqueId);
+		try {
+			Field[] declaredFields = tileEntity.getFields();
+			for(Field field:declaredFields){
+				RecipesMachine recipes = new RecipesMachine();
+				Object recipe = field.get(recipes);
+				if(recipe instanceof RecipesMachine){
+					RecipeRegistry.registerMachinesRecipes((RecipesMachine) recipe, block);
+				}
+			}
+		} catch (IllegalArgumentException e) {
+		} catch (SecurityException e) {
+		} catch (IllegalAccessException e) {
+		}
     }
 
     public static ConfigMachineBlocks getInstance() {
         return instance;
     }
 
+    public static int getBlockIronBowlID() {
+        return getInstance().ironBowlBlockID;
+    }
     public static int getBlockBloomeryID() {
         return getInstance().bloomeryBlockID;
     }

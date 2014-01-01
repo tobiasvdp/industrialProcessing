@@ -1,6 +1,10 @@
 package ip.industrialProcessing.machines.crusher;
 
+import java.util.ArrayList;
+
 import ip.industrialProcessing.machines.containers.ContainerPoweredWorkerMachine;
+import ip.industrialProcessing.recipes.Recipe;
+import ip.industrialProcessing.recipes.recipeRegistry.RecipeRegistry;
 import ip.industrialProcessing.slots.SlotBase;
 import ip.industrialProcessing.slots.SlotOutput;
 import ip.industrialProcessing.utils.containers.ContainerUtils;
