@@ -208,10 +208,7 @@ public class TileEntityBloomery extends TEmultiblockCoreTankWorker implements IH
 
 	@Override
 	public void destroyBlock() {
-		this.destroyMultiblock();
-		InventoryUtils.DropInventoryContents(this.worldObj, this.xCoord, this.yCoord, this.zCoord);
-		this.worldObj.destroyBlock(xCoord, yCoord, zCoord, false);
-		worldObj.setBlockToAir(xCoord, yCoord, zCoord);
+		this.getBlockType().removeBlockByPlayer(worldObj, null, xCoord, yCoord, zCoord);
 	}
 
 	@Override

@@ -91,14 +91,13 @@ public abstract class BLmultiblockCore extends BlockContainer{
 		core.notifyNeighboursOfCorePlaced();
 		core.onLayoutChange();
 	}
-
-	@Override
-	public boolean removeBlockByPlayer(World world, EntityPlayer player, int x, int y, int z) {
+	
+    @Override
+    public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
 		InventoryUtils.DropInventoryContents(world, x, y, z);
 		((TEmultiblockCore) world.getBlockTileEntity(x, y, z)).destroyMultiblock();
-		world.destroyBlock(x, y, z, true);
-		return true;
-	}
+    	super.breakBlock(world, x, y, z, par5, par6);
+    }
 
 	@Override
 	public void onBlockAdded(World par1World, int par2, int par3, int par4) {

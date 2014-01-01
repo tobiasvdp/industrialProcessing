@@ -2,6 +2,7 @@ package ip.industrialProcessing.multiblock.core.block.plants.blacksmith.bloomery
 
 import java.util.Random;
 
+import ic2.api.item.Items;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
@@ -12,12 +13,16 @@ import ip.industrialProcessing.recipes.IRecipeBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockBloomery extends BLmultiblockCore implements IRecipeBlock{
+public class BlockBloomery extends BLmultiblockCore implements IRecipeBlock {
 
 	private Icon[] icons = new Icon[1];
 
@@ -69,7 +74,7 @@ public class BlockBloomery extends BLmultiblockCore implements IRecipeBlock{
 		}
 		super.randomDisplayTick(par1World, par2, par3, par4, par5Random);
 	}
-	
+
 	@Override
 	public int getLightValue(IBlockAccess world, int x, int y, int z) {
 		TileEntityBloomery te = (TileEntityBloomery) world.getBlockTileEntity(x, y, z);
@@ -82,6 +87,39 @@ public class BlockBloomery extends BLmultiblockCore implements IRecipeBlock{
 	@Override
 	public RecipesMachine getRecipes() {
 		return TileEntityBloomery.recipesStatic;
+	}
+
+	@Override
+	public int idDropped(int par1, Random par2Random, int par3) {
+		return 0;
+	}
+
+	@Override
+	public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
+		Random rand = new Random();
+		ItemStack[] items = new ItemStack[] {new ItemStack(Item.brick,3),new ItemStack(Block.sand,2),new ItemStack(IndustrialProcessing.itemHardenedSandDust),new ItemStack(Block.cobblestone)};
+		for (int i = 0; i < items.length; i++) {
+			ItemStack item = items[i];
+			if (item != null && item.stackSize > 0) {
+				float rx = rand.nextFloat() * 0.8F + 0.1F;
+				float ry = rand.nextFloat() * 0.8F + 0.1F;
+				float rz = rand.nextFloat() * 0.8F + 0.1F;
+
+				EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z + rz, new ItemStack(item.itemID, item.stackSize, item.getItemDamage()));
+
+				if (item.hasTagCompound()) {
+					entityItem.getEntityItem().setTagCompound((NBTTagCompound) item.getTagCompound().copy());
+				}
+
+				float factor = 0.05F;
+				entityItem.motionX = rand.nextGaussian() * factor;
+				entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
+				entityItem.motionZ = rand.nextGaussian() * factor;
+				world.spawnEntityInWorld(entityItem);
+				item.stackSize = 0;
+			}
+		}
+		super.breakBlock(world, x, y, z, par5, par6);
 	}
 
 }
