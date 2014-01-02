@@ -54,10 +54,12 @@ import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.hydroCra
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.hydroTreater.BlockHydroTreater;
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.meroxTreater.BlockMeroxTreater;
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.vacuumDestilationTower.BlockVacuumDestilationTower;
+import ip.industrialProcessing.multiblock.core.block.plants.storage.container.BlockContainer;
 import ip.industrialProcessing.multiblock.core.block.rollingPress.BLmultiblockRollingPress;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.BLmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.dummy.block.bellows.BlockBellows;
 import ip.industrialProcessing.multiblock.dummy.block.blastFurnaceTower.BLmultiblockBlastFurnaceTower;
+import ip.industrialProcessing.multiblock.dummy.block.containerWall.BlockContainerWall;
 import ip.industrialProcessing.multiblock.dummy.block.destilationTray.BlockDestilationTray;
 import ip.industrialProcessing.multiblock.dummy.block.displayPanel.BLmultiblockDisplayPanel;
 import ip.industrialProcessing.multiblock.dummy.block.frame.BLmultiblockFrame;
@@ -203,6 +205,8 @@ public interface ISetupMachineBlocks {
     public final static BlockHydroTreater blockHydroTreater = new BlockHydroTreater();
     public final static BlockMeroxTreater blockMeroxTreater = new BlockMeroxTreater();
     public final static BlockVacuumDestilationTower blockVacuumDestilationTower = new BlockVacuumDestilationTower();
+    public final static BlockContainer blockContainer = new BlockContainer();
+    public final static BlockContainerWall blockContainerWall = new BlockContainerWall();
     
     
     // transport

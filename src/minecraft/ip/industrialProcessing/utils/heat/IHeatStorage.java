@@ -1,4 +1,4 @@
-package ip.industrialProcessing.utils;
+package ip.industrialProcessing.utils.heat;
 
 import net.minecraft.item.ItemStack;
 
@@ -14,12 +14,26 @@ public interface IHeatStorage {
 	
 	//get the temperature of the fuel
 	public float getHeatFuel();
+	public void setHeatFuel(float val);
 	
 	//get heat
 	public float getHeat();
+	public void setHeat(float val);
 	
 	//set the maximum heat temp
 	public float getMaxHeat();
+	
+	//burnTime
+	public int getBurnTime();
+	public void setBurnTime(int val);
+	
+	
+	//max burntime
+	public int getMaxBurnTime();
+	public void setMaxBurnTime(int val);
+	
+	//set the required Heat Level
+	public float requiredHeatLevel();
 	
 	//get the coolent factor
 	public float getCoolingFactor();

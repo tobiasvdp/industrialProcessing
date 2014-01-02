@@ -2,7 +2,7 @@ package ip.industrialProcessing.machines.animation.conveyors;
 
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.PacketHandler;
-import ip.industrialProcessing.packetHandlers.TileSyncHandler;
+import ip.industrialProcessing.utils.packetHandlers.TileSyncHandler;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

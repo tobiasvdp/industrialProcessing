@@ -21,7 +21,7 @@ public class ContainerAtmosphericDestilationTower  extends ContainerMultiblockTa
 		addSlotToContainer(inputWaterFullInput);
 		addSlotToContainer(inputWaterEmptyOutput);
 		
-		BindPlayerInventory(inventory, this, 0);
+		BindPlayerInventory(inventory, this, 0,0,0);
 		
 		addTankToContainer(0);
 		addTankToContainer(1);

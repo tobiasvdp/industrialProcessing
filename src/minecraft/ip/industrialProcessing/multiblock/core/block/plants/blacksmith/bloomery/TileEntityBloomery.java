@@ -25,7 +25,8 @@ import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.utils.IBreakable;
-import ip.industrialProcessing.utils.IHeatStorage;
+import ip.industrialProcessing.utils.heat.HeatStorage;
+import ip.industrialProcessing.utils.heat.IHeatStorage;
 import ip.industrialProcessing.utils.inventories.InventoryUtils;
 
 public class TileEntityBloomery extends TEmultiblockCoreTankWorker implements IHeatStorage, IBreakable {
@@ -76,10 +77,7 @@ public class TileEntityBloomery extends TEmultiblockCoreTankWorker implements IH
 		this.addStack(null, nodirections, true, false);
 		this.addStack(null, nodirections, true, false);
 
-		T1 = 20;
-		T2 = 20;
-		burnTime = 0;
-		totalTime = 1;
+		HeatStorage.construction(this);
 
 		SetLiveTime(15000);
 	}
@@ -106,11 +104,8 @@ public class TileEntityBloomery extends TEmultiblockCoreTankWorker implements IH
 
 	@Override
 	public void updateEntity() {
-		transferHeat();
-		tickFuel();
-		if (burnTime == 0)
-			ConsumeFuel(getStackInSlot(2));
-		if (getHeat() > 1538)
+		HeatStorage.onUpdateEntity(this, this, 2);
+		if (getHeat() > requiredHeatLevel())
 			if (TickLiveTime())
 				destroyBlock();
 
@@ -119,7 +114,7 @@ public class TileEntityBloomery extends TEmultiblockCoreTankWorker implements IH
 
 	@Override
 	public void doWork() {
-		if (getHeat() > 1538)
+		if (HeatStorage.onDoWork(this))
 			super.doWork();
 	}
 
@@ -130,8 +125,8 @@ public class TileEntityBloomery extends TEmultiblockCoreTankWorker implements IH
 
 	@Override
 	protected boolean isValidInput(int slot, int itemID) {
-		if (slot == 2 && itemID == Item.coal.itemID) {
-			return true;
+		if (slot == 2) {
+			return HeatStorage.onIsValidInput(itemID);
 		}
 		return recipes.isValidInput(slot, itemID);
 	}
@@ -139,22 +134,37 @@ public class TileEntityBloomery extends TEmultiblockCoreTankWorker implements IH
 	//burner management
 	@Override
 	public void ConsumeFuel(ItemStack stack) {
-		if (stack != null && stack.itemID == Item.coal.itemID && stack.stackSize > 0) {
-			this.removeFromSlot(2, stack.itemID, 1);
-			burnTime = 3600;
-			totalTime = 3600;
-			T2 = 2700;
-		}
+		HeatStorage.ConsumeFuel(this.worldObj,this,this, this, stack,2);
 	}
 
 	@Override
-	public float getHeat() {
-		return T1;
+	public int getScaledHeat(int maxSize) {
+		return HeatStorage.getScaledHeat(this, maxSize);
 	}
 
+	@Override
+	public void tickFuel() {
+		HeatStorage.tickFuel(this);
+	}
+
+	@Override
+	public void transferHeat() {
+		HeatStorage.transferHeat(this);
+	}
+
+	@Override
+	public int getScaledBurnTime(int size) {
+		return HeatStorage.getScaledBurnTime(this, size);
+	}
+	
 	@Override
 	public float getMaxHeat() {
 		return 3000;
+	}
+
+	@Override
+	public float requiredHeatLevel() {
+		return 1537;
 	}
 
 	@Override
@@ -163,35 +173,45 @@ public class TileEntityBloomery extends TEmultiblockCoreTankWorker implements IH
 	}
 
 	@Override
-	public int getScaledHeat(int maxSize) {
-		return (int) (getHeat() * maxSize / getMaxHeat());
-	}
-
-	@Override
-	public void tickFuel() {
-		if (burnTime > 0)
-			burnTime--;
-	}
-
-	@Override
 	public float getHeatFuel() {
 		return T2;
 	}
 
 	@Override
-	public void transferHeat() {
-		T1 = T1 - getCoolingFactor() * (T1 - T2);
-		if (burnTime > 0)
-			T2 = (float) (T2 * 0.99995);
-		else
-			T2 = T2 - getCoolingFactor() * (T2 - 20);
+	public float getHeat() {
+		return T1;
 	}
 
 	@Override
-	public int getScaledBurnTime(int size) {
-		return burnTime * size / totalTime;
+	public void setHeatFuel(float val) {
+		T2 = val;
 	}
 
+	@Override
+	public void setHeat(float val) {
+		T1 = val;
+	}
+
+	@Override
+	public int getBurnTime() {
+		return burnTime;
+	}
+
+	@Override
+	public void setBurnTime(int val) {
+		burnTime = val;
+	}
+
+	@Override
+	public int getMaxBurnTime() {
+		return totalTime;
+	}
+
+	@Override
+	public void setMaxBurnTime(int val) {
+		totalTime = val;
+	}
+	
 	@Override
 	public void SetLiveTime(int time) {
 		totalLiveTime = time;
@@ -218,10 +238,7 @@ public class TileEntityBloomery extends TEmultiblockCoreTankWorker implements IH
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
-		nbt.setInteger("T1", (int) T1);
-		nbt.setInteger("T2", (int) T2);
-		nbt.setInteger("burnTime", burnTime);
-		nbt.setInteger("totalTime", totalTime);
+		HeatStorage.onWriteToNBT(this, nbt);
 
 		nbt.setInteger("liveTime", liveTime);
 		nbt.setInteger("totalLiveTime", totalLiveTime);
@@ -230,10 +247,7 @@ public class TileEntityBloomery extends TEmultiblockCoreTankWorker implements IH
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
-		T1 = nbt.getInteger("T1");
-		T2 = nbt.getInteger("T2");
-		burnTime = nbt.getInteger("burnTime");
-		totalTime = nbt.getInteger("totalTime");
+		HeatStorage.onReadFromNBT(this, nbt);
 
 		liveTime = nbt.getInteger("liveTime");
 		totalLiveTime = nbt.getInteger("totalLiveTime");

@@ -145,15 +145,16 @@ public class ConfigBlocks {
     }
 
     public void registerOres() {
-    	registerOre(ISetupBlocks.blockBauxiteOre, "IP.World.BauxiteOre", "Bauxite Ore", "bauxite");
-        registerOre(ISetupBlocks.blockCopperOre, "IP.World.CopperOre", "Copper Ore", "copper");
-        registerOre(ISetupBlocks.blockTinOre, "IP.World.TinOre", "Tin Ore", "tin");
-        registerOre(ISetupBlocks.blockGalenaOre, "IP.World.GalenaOre", "Galena Ore", "silver");
+    	registerOre(ISetupBlocks.blockBauxiteOre, "IP.World.BauxiteOre", "Bauxite Ore", "bauxite",1);
+        registerOre(ISetupBlocks.blockCopperOre, "IP.World.CopperOre", "Copper Ore", "copper",1);
+        registerOre(ISetupBlocks.blockTinOre, "IP.World.TinOre", "Tin Ore", "tin",1);
+        registerOre(ISetupBlocks.blockGalenaOre, "IP.World.GalenaOre", "Galena Ore", "silver",2);
         OreDictionary.registerOre("galena", ISetupBlocks.blockGalenaOre);
-        registerOre(ISetupBlocks.blockRutileOre, "IP.World.RutileOre", "Rutile Ore", "rutile");
-        registerOre(ISetupBlocks.blockChromiteOre, "IP.World.ChromiteOre", "Chromite Ore", "chromite");
-        registerOre(ISetupBlocks.blockCinnebarOre, "IP.World.CinnebarOre", "Cinnebar Ore", "cinnebar");
-        registerOre(ISetupBlocks.blockTaliaOre, "IP.World.TaliaOre", "Thallium Ore", "talia");
+        OreDictionary.registerOre("lead", ISetupBlocks.blockGalenaOre);
+        registerOre(ISetupBlocks.blockRutileOre, "IP.World.RutileOre", "Rutile Ore", "rutile",2);
+        registerOre(ISetupBlocks.blockChromiteOre, "IP.World.ChromiteOre", "Chromite Ore", "chromite",2);
+        registerOre(ISetupBlocks.blockCinnebarOre, "IP.World.CinnebarOre", "Cinnebar Ore", "cinnebar",1);
+        registerOre(ISetupBlocks.blockTaliaOre, "IP.World.TaliaOre", "Thallium Ore", "talia",3);
         
         registerBlock(ISetupBlocks.blockIronFlat, "IP.Block.IronFlat", "Flat Iron block");
         registerBlock(ISetupBlocks.blockHardSand, "IP.Block.HardSand", "Hardened sand");
@@ -177,9 +178,9 @@ public class ConfigBlocks {
         registerBlock(ISetupBlocks.blockMachineBlock, "IP.Block.MachineB", "Machine block");
     }
 
-    private void registerOre(Block block, String uniqueId, String displayName, String oreDictionaryKey) {
+    private void registerOre(Block block, String uniqueId, String displayName, String oreDictionaryKey,int level) {
         GameRegistry.registerBlock(block, uniqueId);
-        MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
+        MinecraftForge.setBlockHarvestLevel(block, "pickaxe", level);
         LanguageRegistry.addName(block, displayName);
         OreDictionary.registerOre(oreDictionaryKey, block);
     }

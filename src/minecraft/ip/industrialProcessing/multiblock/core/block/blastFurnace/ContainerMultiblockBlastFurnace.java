@@ -18,7 +18,7 @@ public class ContainerMultiblockBlastFurnace extends ContainerMultiblockTankWork
 		addSlotToContainer(slots[0]);
 		addSlotToContainer(slots[1]);
 		
-		BindPlayerInventory(inventory, this, 0);
+		BindPlayerInventory(inventory, this, 0,0,0);
 		
 		addTankToContainer(0);
 		addTankToContainer(1);

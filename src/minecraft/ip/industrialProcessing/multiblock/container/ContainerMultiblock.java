@@ -88,18 +88,23 @@ public abstract class ContainerMultiblock extends VerifyingContainer {
 		for (int i = 0; i < slots.length; i++) {
 			me.addSlotToContainer(slots[i]);
 		}
-		BindPlayerInventory(inventory, me, 0);
+		BindPlayerInventory(inventory, me, 0,0,0);
 	}
-
-	protected void BindPlayerInventory(InventoryPlayer inventoryPlayer, ContainerMultiblock container, int offset) {
+	public void BindSlots(Slot[] slots, InventoryPlayer inventory, ContainerMultiblock me,int offsetx,int offsety) {
+		for (int i = 0; i < slots.length; i++) {
+			me.addSlotToContainer(slots[i]);
+		}
+		BindPlayerInventory(inventory, me, 0,offsetx,offsety);
+	}
+	protected void BindPlayerInventory(InventoryPlayer inventoryPlayer, ContainerMultiblock container, int offset,int offsetx,int offsety) {
 
 		for (int i = 0; i < 9; i++) {
-			container.addSlotToContainer(new Slot(inventoryPlayer, i + offset, 8 + i * 18, 142));
+			container.addSlotToContainer(new Slot(inventoryPlayer, i + offset, offsetx + 8 + i * 18, offsety + 142));
 		}
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 9; j++) {
 				int o = j + i * 9 + 9 + offset;
-				container.addSlotToContainer(new Slot(inventoryPlayer, o, 8 + j * 18, 84 + i * 18));
+				container.addSlotToContainer(new Slot(inventoryPlayer, o, offsetx + 8 + j * 18, offsety + 84 + i * 18));
 			}
 		}
 	}

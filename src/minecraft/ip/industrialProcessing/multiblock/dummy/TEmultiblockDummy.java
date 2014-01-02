@@ -1,5 +1,10 @@
 package ip.industrialProcessing.multiblock.dummy;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+
+import cpw.mods.fml.common.network.PacketDispatcher;
+import ip.industrialProcessing.PacketHandler;
 import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
@@ -9,6 +14,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
+import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
@@ -25,6 +31,7 @@ public class TEmultiblockDummy extends TileEntity implements ITEmultiblockDummy 
 	protected boolean loadedFromNBT;
 	protected int[] coreDataFromNBT;
 	private MultiblockState state = MultiblockState.DISCONNECTED;
+	private boolean needRenderUpdate = false;
 	private int modelID;
 	private int modelConnection;
 	private int groupID;
@@ -65,6 +72,10 @@ public class TEmultiblockDummy extends TileEntity implements ITEmultiblockDummy 
 
 		nbtComp = new NBTTagCompound();
 		nbtComp.setInteger("state", state.ordinal());
+		nbttaglist.appendTag(nbtComp);
+		
+		nbtComp = new NBTTagCompound();
+		nbtComp.setBoolean("needRenderUpdate", needRenderUpdate);
 		nbttaglist.appendTag(nbtComp);
 		
 		nbtComp = new NBTTagCompound();
@@ -115,6 +126,9 @@ public class TEmultiblockDummy extends TileEntity implements ITEmultiblockDummy 
 		state = MultiblockState.values()[nbttagcompound1.getInteger("state")];
 		
 		nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(4);
+		needRenderUpdate = nbttagcompound1.getBoolean("needRenderUpdate");
+		
+		nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(5);
 		groupID = nbttagcompound1.getInteger("groupID");
 
 		nbttaglist = nbt.getTagList("Core");
@@ -193,6 +207,18 @@ public class TEmultiblockDummy extends TileEntity implements ITEmultiblockDummy 
 
 	public void setState(MultiblockState state) {
 		this.state = state;
+		needRenderUpdate = true;
+		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+	}
+	
+	@Override
+	public void updateEntity() {
+		super.updateEntity();
+		if(needRenderUpdate){
+			this.worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+			needRenderUpdate = false;
+		}
+		super.updateEntity();
 	}
 
 	public void delCore() {

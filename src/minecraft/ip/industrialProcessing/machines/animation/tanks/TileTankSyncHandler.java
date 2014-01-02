@@ -13,7 +13,7 @@ import net.minecraft.tileentity.TileEntity;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
 import ip.industrialProcessing.PacketHandler;
-import ip.industrialProcessing.packetHandlers.TileSyncHandler;
+import ip.industrialProcessing.utils.packetHandlers.TileSyncHandler;
 
 public class TileTankSyncHandler extends TileSyncHandler { 
 	public static void sendTankData(TileEntity entity, TankHandler handler) {

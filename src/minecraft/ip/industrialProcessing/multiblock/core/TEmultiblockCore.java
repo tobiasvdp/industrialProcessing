@@ -256,13 +256,15 @@ public class TEmultiblockCore extends TileEntity implements ITEmultiblockCore {
 	}
 
 	public void destroyMultiblock() {
-		for (TEmultiblockDummy te : getDummies()) {
+		ArrayList<TEmultiblockDummy> list = (ArrayList<TEmultiblockDummy>) getDummies().clone();
+		for (TEmultiblockDummy te : list) {
 			if (te != null)
 				worldObj.destroyBlock(te.xCoord, te.yCoord, te.zCoord, true);
 		}
 	}
 
 	public void onStateChange() {
+		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		for (TEmultiblockDummy te : getDummies()) {
 			if (te != null)
 				te.setState(state);
@@ -514,4 +516,5 @@ public class TEmultiblockCore extends TileEntity implements ITEmultiblockCore {
 	public Tiers getTier() {
 		return tier;
 	}
+
 }

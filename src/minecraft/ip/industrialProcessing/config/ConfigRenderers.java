@@ -96,6 +96,24 @@ public class ConfigRenderers {
     private int rendererBloomery;
     private int rendererIronBowl;
     private int rendererMachineBlock;
+    private int rendererContainerWall;
+    private int rendererContainer;
+    
+	public static void setRendererContainer(int var) {
+		getInstance().rendererContainer = var;
+	}
+    
+	public static int getRendererContainer() {
+		return getInstance().rendererContainer;
+	}
+    
+	public static void setRendererContainerWall(int var) {
+		getInstance().rendererContainerWall = var;
+	}
+    
+	public static int getRendererContainerWall() {
+		return getInstance().rendererContainerWall;
+	}
 
     public static int getRendererMachineBlockId() {
         return getInstance().rendererMachineBlock;

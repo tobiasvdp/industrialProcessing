@@ -30,7 +30,8 @@ import ip.industrialProcessing.multiblock.utils.MultiblockActionType;
 import ip.industrialProcessing.multiblock.utils.TEmultiblockItemStackType;
 import ip.industrialProcessing.multiblock.utils.blockSide;
 import ip.industrialProcessing.recipes.Recipe;
-import ip.industrialProcessing.utils.IHeatStorage;
+import ip.industrialProcessing.utils.heat.HeatStorage;
+import ip.industrialProcessing.utils.heat.IHeatStorage;
 
 public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowered implements IHeatStorage {
 	static StructureMultiblock structure;
@@ -93,24 +94,18 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowere
 		this.addStack(null, nodirections, true, false);
 		this.addStack(null, nodirections, false, true);
 
-		T1 = 20;
-		T2 = 20;
-		burnTime = 0;
-		totalTime = 1;
+		HeatStorage.construction(this);
 	}
 
 	@Override
 	public void updateEntity() {
-		transferHeat();
-		tickFuel();
-		if (burnTime == 0)
-			ConsumeFuel(getStackInSlot(14));
+		HeatStorage.onUpdateEntity(this, this, 14);
 		super.updateEntity();
 	}
 
 	@Override
 	public void doWork() {
-		if (getHeat() > 1538)
+		if (HeatStorage.onDoWork(this))
 			super.doWork();
 	}
 
@@ -121,25 +116,47 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowere
 
 	@Override
 	protected boolean isValidInput(int slot, int itemID) {
-		if (slot == 14 && itemID == Item.coal.itemID) {
-			return true;
+		if (slot == 14) {
+			return HeatStorage.onIsValidInput(itemID);
 		}
 		return recipes.isValidInput(slot, itemID);
 	}
 
 	@Override
 	public void ConsumeFuel(ItemStack stack) {
-		if (stack != null && stack.itemID == Item.coal.itemID && stack.stackSize > 0) {
-			this.removeFromSlot(14, stack.itemID, 1);
-			burnTime = 3600;
-			totalTime = 3600;
-			T2 = 2700;
-		}
+		HeatStorage.ConsumeFuel(this.worldObj,this,this, this, stack,14);
 	}
 
 	@Override
-	public float getHeat() {
-		return T1;
+	public int getScaledHeat(int maxSize) {
+		return HeatStorage.getScaledHeat(this, maxSize);
+	}
+
+	@Override
+	public void tickFuel() {
+		HeatStorage.tickFuel(this);
+	}
+
+	@Override
+	public void transferHeat() {
+		HeatStorage.transferHeat(this);
+	}
+
+	@Override
+	public int getScaledBurnTime(int size) {
+		return HeatStorage.getScaledBurnTime(this, size);
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound nbt) {
+		HeatStorage.onWriteToNBT(this, nbt);
+		super.writeToNBT(nbt);
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+		HeatStorage.onReadFromNBT(this, nbt);
+		super.readFromNBT(nbt);
 	}
 
 	@Override
@@ -148,19 +165,13 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowere
 	}
 
 	@Override
+	public float requiredHeatLevel() {
+		return 1537;
+	}
+
+	@Override
 	public float getCoolingFactor() {
 		return (float) 0.0008;
-	}
-
-	@Override
-	public int getScaledHeat(int maxSize) {
-		return (int) (getHeat() * maxSize / getMaxHeat());
-	}
-
-	@Override
-	public void tickFuel() {
-		if (burnTime > 0)
-			burnTime--;
 	}
 
 	@Override
@@ -169,34 +180,37 @@ public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowere
 	}
 
 	@Override
-	public void transferHeat() {
-		T1 = T1 - getCoolingFactor() * (T1 - T2);
-		if (burnTime > 0)
-			T2 = (float) (T2 * 0.99995);
-		else
-			T2 = T2 - getCoolingFactor() * (T2 - 20);
+	public float getHeat() {
+		return T1;
 	}
 
 	@Override
-	public int getScaledBurnTime(int size) {
-		return burnTime * size / totalTime;
-	}
-	
-	@Override
-	public void writeToNBT(NBTTagCompound nbt) {
-		nbt.setInteger("T1", (int) T1);
-		nbt.setInteger("T2", (int) T2);
-		nbt.setInteger("burnTime", burnTime);
-		nbt.setInteger("totalTime", totalTime);
-		super.writeToNBT(nbt);
+	public void setHeatFuel(float val) {
+		T2 = val;
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
-		T1 = nbt.getInteger("T1");
-		T2 = nbt.getInteger("T2");
-		burnTime = nbt.getInteger("burnTime");
-		totalTime = nbt.getInteger("totalTime");
-		super.readFromNBT(nbt);
+	public void setHeat(float val) {
+		T1 = val;
+	}
+
+	@Override
+	public int getBurnTime() {
+		return burnTime;
+	}
+
+	@Override
+	public void setBurnTime(int val) {
+		burnTime = val;
+	}
+
+	@Override
+	public int getMaxBurnTime() {
+		return totalTime;
+	}
+
+	@Override
+	public void setMaxBurnTime(int val) {
+		totalTime = val;
 	}
 }

@@ -62,10 +62,12 @@ import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.hydroCra
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.hydroTreater.TileEntityHydroTreater;
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.meroxTreater.TileEntityMeroxTreater;
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.vacuumDestilationTower.TileEntityVacuumDestilationTower;
+import ip.industrialProcessing.multiblock.core.block.plants.storage.container.TileEntityContainer;
 import ip.industrialProcessing.multiblock.core.block.rollingPress.TEmultiblockRollingPress;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.dummy.block.bellows.TileEntityBellows;
 import ip.industrialProcessing.multiblock.dummy.block.blastFurnaceTower.TEmultiblockBlastFurnaceTower;
+import ip.industrialProcessing.multiblock.dummy.block.containerWall.TileEntityContainerWall;
 import ip.industrialProcessing.multiblock.dummy.block.destilationTray.TileEntityDestilationTray;
 import ip.industrialProcessing.multiblock.dummy.block.displayPanel.TEmultiblockDisplayPanel;
 import ip.industrialProcessing.multiblock.dummy.block.frame.TEmultiblockFrame;
@@ -221,6 +223,8 @@ public class ConfigMachineBlocks {
     private int blockHydroTreaterID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "blockHydroTreaterID", 761).getInt();
     private int blockMeroxTreaterID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "blockMeroxTreaterID", 762).getInt();
     private int blockVacuumDestilationTowerID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "blockVacuumDestilationTowerID", 763).getInt();
+    private int containerBlockID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "containerBlockID", 764).getInt();
+    private int containerWallBlockID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "containerWallBlockID", 765).getInt();
 
     private int BLtransportConveyorBelt = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "ConveyorBeltID", 735).getInt();
     private int BLtransportConveyorBeltInput = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "ConveyorBeltInputID", 736).getInt();
@@ -256,6 +260,8 @@ public class ConfigMachineBlocks {
         registerMachineBlock(ISetupMachineBlocks.blockConveyorChute, "IP.Trans.CBShute", "Conveyor shute", TileEntityConveyorChute.class,BlockType.Machine,BlockType.Transport);
         
         // multiblocks
+        registerMachineBlock(ISetupMachineBlocks.blockContainerWall, "IP.MBD.Cont", "Container wall", TileEntityContainerWall.class, BlockType.Machine,BlockType.Storage,BlockType.Dummy);
+        registerMachineBlock(ISetupMachineBlocks.blockContainer, "IP.MBC.Cont", "Container", TileEntityContainer.class, BlockType.Machine,BlockType.Storage);
         registerMachineBlock(ISetupMachineBlocks.blockAmineTreater, "IP.MBC.AmTr", "Amine treater", TileEntityAmineTreater.class, BlockType.Machine,BlockType.Refinary);
         registerMachineBlock(ISetupMachineBlocks.blockCatalyticReformer, "IP.MBC.CatRef", "Catalytic reformer", TileEntityCatalyticReformer.class, BlockType.Machine,BlockType.Refinary);
         registerMachineBlock(ISetupMachineBlocks.blockClausSulfurPlant, "IP.MBC.ClSulf", "Claus sulfur plant", TileEntityClausSulfurPlant.class, BlockType.Machine,BlockType.Refinary);
@@ -441,6 +447,9 @@ public class ConfigMachineBlocks {
     }
     public static int getBlockBloomeryID() {
         return getInstance().bloomeryBlockID;
+    }
+    public static int getBlockContainerWallID() {
+        return getInstance().containerWallBlockID;
     }
     public static int getBlockBellowsID() {
         return getInstance().bellowsBlockID;
@@ -782,4 +791,8 @@ public class ConfigMachineBlocks {
     public static int getKilnBlockID() {
         return getInstance().kilnBlockID;
     }
+
+	public static int getBlockContainerID() {
+		return getInstance().containerBlockID;
+	}
 }

@@ -54,9 +54,11 @@ import ip.industrialProcessing.multiblock.core.block.blastFurnace.model.ModelBla
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.model.ModelBlastFurnaceTopBlock;
 import ip.industrialProcessing.multiblock.core.block.plants.blacksmith.bloomery.model.ModelBloomery;
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.atmosphericDestilationTower.model.ModelAtmosphericDestillationTowerBlock;
+import ip.industrialProcessing.multiblock.core.block.plants.storage.container.model.ModelContainer;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.MDmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.dummy.block.bellows.model.ModelBellows;
+import ip.industrialProcessing.multiblock.dummy.block.containerWall.model.ModelContainerWall;
 import ip.industrialProcessing.multiblock.dummy.block.destilationTray.model.ModelDistillationElementBlock;
 import ip.industrialProcessing.multiblock.dummy.block.displayPanel.MDmultiblockDisplayPanel;
 import ip.industrialProcessing.multiblock.dummy.block.displayPanel.TEmultiblockDisplayPanel;
@@ -218,6 +220,8 @@ public class ClientProxy extends CommonProxy {
     private static final ModelBloomery modelBloomery = new ModelBloomery();
     private static final ModelIronBowl modelIronBowl = new ModelIronBowl();
     private static final ModelMachineBlock modelMachineBlock = new ModelMachineBlock();
+    private static final ModelContainerWall modelContainerWall = new ModelContainerWall();
+    private static final ModelContainer modelContainer = new ModelContainer();
 
     @Override
     public void registerRenderers() {
@@ -276,7 +280,11 @@ public class ClientProxy extends CommonProxy {
 	ConfigRenderers.setRendererMachineBlockId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererMachineBlockId(), modelMachineBlock));
 
+	ConfigRenderers.setRendererContainerWall(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererContainerWall(), modelContainerWall));
 	
+	ConfigRenderers.setRendererContainer(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererContainer(), modelContainer));
 	// block & tile entity
  
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDiskFilter.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockDiskFilter, "ModelDiskFilter", diskFilter));

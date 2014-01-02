@@ -5,13 +5,13 @@ import ip.industrialProcessing.machines.SimplePowerStorage;
 import ip.industrialProcessing.machines.TileEntityPoweredWorkerMachine;
 import ip.industrialProcessing.power.plants.IHeatable;
 import ip.industrialProcessing.recipes.Recipe;
-import ip.industrialProcessing.utils.IHeatStorage;
+import ip.industrialProcessing.utils.heat.IHeatStorage;
 
 import java.util.Iterator;
 
 import net.minecraft.item.ItemStack;
 
-public class TileEntityKiln extends TileEntityPoweredWorkerMachine implements IHeatable,IHeatStorage{
+public class TileEntityKiln extends TileEntityPoweredWorkerMachine implements IHeatable{
 
 	public static RecipesKiln recipes = new RecipesKiln();
 
@@ -44,60 +44,5 @@ public class TileEntityKiln extends TileEntityPoweredWorkerMachine implements IH
 		    super.updateEntity();
 		
 	}
-
-	@Override
-	public void ConsumeFuel(ItemStack stack) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public float getHeat() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public float getMaxHeat() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public float getCoolingFactor() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getScaledHeat(int maxSize) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void transferHeat() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void tickFuel() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public float getHeatFuel() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getScaledBurnTime(int size) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
 
 }

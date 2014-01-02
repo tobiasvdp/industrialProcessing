@@ -147,6 +147,9 @@ import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.meroxTre
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.vacuumDestilationTower.ContainerVacuumDestilationTower;
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.vacuumDestilationTower.GuiContainerVacuumDestilationTower;
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.vacuumDestilationTower.TileEntityVacuumDestilationTower;
+import ip.industrialProcessing.multiblock.core.block.plants.storage.container.ContainerContainer;
+import ip.industrialProcessing.multiblock.core.block.plants.storage.container.GuiContainerContainer;
+import ip.industrialProcessing.multiblock.core.block.plants.storage.container.TileEntityContainer;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.ContainerSolderingIron;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.ContainerWeldingStation;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.GuiContainerSolderingIron;
@@ -298,6 +301,8 @@ public class GuiHandler implements IGuiHandler {
 				return new ContainerQuenchTank(player.inventory, (TileEntityQuenchTank) entity);
 			if (entity instanceof TileEntityBloomery)
 				return new ContainerBloomery(player.inventory, (TileEntityBloomery) entity);
+			if (entity instanceof TileEntityContainer)
+				return new ContainerContainer(player.inventory, (TileEntityContainer) entity);
 		} else if (ID == GUIDE_ID) {
 			return null;
 		} else if (ID == SOLDERINGIRON_ID) {
@@ -425,6 +430,8 @@ public class GuiHandler implements IGuiHandler {
 				return new GuiContainerQuenchTank(player.inventory, (TileEntityQuenchTank) entity);
 			if (entity instanceof TileEntityBloomery)
 				return new GuiContainerBloomery(player.inventory, (TileEntityBloomery) entity);
+			if (entity instanceof TileEntityContainer)
+				return new GuiContainerContainer(player.inventory, (TileEntityContainer) entity);
 		} else if (ID == GUIDE_ID) {
 			return new GuiGuide(player);
 		} else if (ID == SOLDERINGIRON_ID) {
