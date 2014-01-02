@@ -89,7 +89,9 @@ public class TileEntityTransportFluids extends TileEntityTransportFluidsBase {
 
 	@Override
 	public void readFromNBT(NBTTagCompound par1nbtTagCompound) { 
-		
+		super.readFromNBT(par1nbtTagCompound);
+		this.tank.readFromNBT(par1nbtTagCompound);
+		this.pressure = par1nbtTagCompound.getFloat("Pressure");
 	}
 
 	@Override
