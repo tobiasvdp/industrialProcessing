@@ -24,8 +24,12 @@ public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCo
 
 	protected RecipesMachine recipes;
 	protected ArrayList<MultiblockItemStack> itemStacks = new ArrayList<MultiblockItemStack>();
-	private int[][] itemStackSideSlots = new int[6][0];
+	protected int[][][] itemStackSideSlots;
 	public boolean isDummyBlock = false;
+	
+	public void setInventoryGroupArray(int i){
+		itemStackSideSlots = new int[i][6][0];
+	}
 
 	public TileEntityMultiblockCoreInv(StructureMultiblock structure, TierCollection tierRequirments, RecipesMachine recipes) {
 		super(structure, tierRequirments);
@@ -153,11 +157,11 @@ public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCo
 
 		for (int i = 0; i < sideIndices.length; i++) {
 			int sideIndex = sideIndices[i];
-			int[] slots = itemStackSideSlots[sideIndex];
+			int[] slots = itemStackSideSlots[multiblockID][sideIndex];
 			int[] newSlots = new int[slots.length + 1];
 			System.arraycopy(slots, 0, newSlots, 0, slots.length);
 			newSlots[slots.length] = index;
-			itemStackSideSlots[sideIndex] = newSlots;
+			itemStackSideSlots[multiblockID][sideIndex] = newSlots;
 		}
 	}
 
@@ -268,8 +272,7 @@ public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCo
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int var1) {
-		LocalDirection localFrom = DirectionUtils.getLocalDirection(var1, getForwardDirection());
-		return itemStackSideSlots[localFrom.ordinal()];
+		return getAccessibleSlotsFromSide(0, var1);
 	}
 
 	@Override
@@ -352,7 +355,8 @@ public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCo
 	}
 	
 	public int[] getAccessibleSlotsFromSide(int multiblockID,int var1){
-		 return null;
+		LocalDirection localFrom = DirectionUtils.getLocalDirection(var1, getForwardDirection());
+		return itemStackSideSlots[multiblockID][localFrom.ordinal()];
 	 }
 	 public boolean canInsertItem(int multiblockID,int i, ItemStack itemstack, int j){
 		 MultiblockItemStack machineStack = getMultiblockStack(i);
