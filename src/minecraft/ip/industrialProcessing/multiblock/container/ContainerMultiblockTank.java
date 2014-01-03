@@ -11,14 +11,14 @@ import ip.industrialProcessing.api.tanks.IPfluidTank;
 import ip.industrialProcessing.machines.containers.ProgressBarHandlerInfo;
 import ip.industrialProcessing.machines.containers.ProgressBarTankHandler;
 import ip.industrialProcessing.machines.containers.ProgressInfoTank;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreInv;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTank;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreInv;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTank;
 
 public class ContainerMultiblockTank extends ContainerMultiblockInv {
 
-	private TEmultiblockCoreTank core;
+	private TileEntityMultiblockCoreTank core;
 
-	public ContainerMultiblockTank(InventoryPlayer inventory,TEmultiblockCoreTank core) {
+	public ContainerMultiblockTank(InventoryPlayer inventory,TileEntityMultiblockCoreTank core) {
 		super(inventory,core);
 		this.core = core;
 	}

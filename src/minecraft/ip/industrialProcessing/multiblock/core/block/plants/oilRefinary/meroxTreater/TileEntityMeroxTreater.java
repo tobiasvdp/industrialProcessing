@@ -3,7 +3,7 @@ package ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.meroxTr
 import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorkerPowered;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
 import ip.industrialProcessing.multiblock.layout.LayoutTransformer;
@@ -12,7 +12,7 @@ import ip.industrialProcessing.multiblock.tier.Tier;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
 
-public class TileEntityMeroxTreater extends TEmultiblockCoreTankWorkerPowered  {
+public class TileEntityMeroxTreater extends TileEntityMultiblockCoreTankWorkerPowered  {
 	private static StructureMultiblock structure;
 	private static TierCollection tierRequirments;
 	private static RecipesMeroxTreater recipes = new RecipesMeroxTreater();

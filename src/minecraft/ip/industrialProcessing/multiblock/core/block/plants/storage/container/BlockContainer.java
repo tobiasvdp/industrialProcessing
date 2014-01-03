@@ -17,13 +17,13 @@ import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.multiblock.core.BLmultiblockCore;
-import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
+import ip.industrialProcessing.multiblock.core.BlockMultiblockCore;
+import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.core.block.plants.blacksmith.bloomery.TileEntityBloomery;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 
-public class BlockContainer extends BLmultiblockCore{
+public class BlockContainer extends BlockMultiblockCore{
 	private Icon[] icons = new Icon[1];
 
 	public BlockContainer() {

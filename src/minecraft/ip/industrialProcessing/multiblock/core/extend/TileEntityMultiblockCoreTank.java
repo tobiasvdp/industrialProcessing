@@ -8,9 +8,9 @@ import ip.industrialProcessing.machines.MachineFluidTank;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
-import ip.industrialProcessing.multiblock.utils.tanks.IIPMultiblockFluidTank;
+import ip.industrialProcessing.multiblock.utils.tanks.IMultiblockFluidTank;
 import ip.industrialProcessing.multiblock.utils.tanks.IMultiblockTanks;
-import ip.industrialProcessing.multiblock.utils.tanks.IPMultiblockFluidTank;
+import ip.industrialProcessing.multiblock.utils.tanks.MultiblockFluidTank;
 
 import java.util.ArrayList;
 
@@ -25,11 +25,11 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 
-public abstract class TEmultiblockCoreTank extends TEmultiblockCoreInv implements ITank, IMultiblockTanks {
+public abstract class TileEntityMultiblockCoreTank extends TileEntityMultiblockCoreInv implements ITank, IMultiblockTanks {
 
-	public ArrayList<IPMultiblockFluidTank> fluidTanks = new ArrayList<IPMultiblockFluidTank>();
+	public ArrayList<MultiblockFluidTank> fluidTanks = new ArrayList<MultiblockFluidTank>();
 
-	public TEmultiblockCoreTank(StructureMultiblock structure, TierCollection tierRequirments, RecipesMachine recipe) {
+	public TileEntityMultiblockCoreTank(StructureMultiblock structure, TierCollection tierRequirments, RecipesMachine recipe) {
 		super(structure, tierRequirments, recipe);
 	}
 
@@ -99,13 +99,13 @@ public abstract class TEmultiblockCoreTank extends TEmultiblockCoreInv implement
 			sideIndices[i] = sides[i].ordinal();
 		}
 
-		fluidTanks.add(new IPMultiblockFluidTank(this, capacity, index, sideIndices, input, output, multiblockID));
+		fluidTanks.add(new MultiblockFluidTank(this, capacity, index, sideIndices, input, output, multiblockID));
 	}
 
 	public void writeTanks(NBTTagCompound nbt) {
 		NBTTagList nbttaglist = new NBTTagList();
 		for (int i = 0; i < this.fluidTanks.size(); ++i) {
-			IPMultiblockFluidTank tank = this.fluidTanks.get(i);
+			MultiblockFluidTank tank = this.fluidTanks.get(i);
 			NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 			nbttagcompound1.setByte("Slot", (byte) i);
 			tank.writeToNBT(nbttagcompound1);
@@ -127,7 +127,7 @@ public abstract class TEmultiblockCoreTank extends TEmultiblockCoreInv implement
 			byte b0 = nbttagcompound1.getByte("Slot");
 
 			if (b0 >= 0 && b0 < this.fluidTanks.size()) {
-				IPMultiblockFluidTank tank = this.fluidTanks.get(b0);
+				MultiblockFluidTank tank = this.fluidTanks.get(b0);
 				tank.readFromNBT(nbttagcompound1);
 			}
 		}
@@ -183,7 +183,7 @@ public abstract class TEmultiblockCoreTank extends TEmultiblockCoreInv implement
 		if (resource != null) {
 			int amount = 0;
 			int totalAmount = resource.amount;
-			IPMultiblockFluidTank[] tanks = getTanksOnSide(multiblockID, from);
+			MultiblockFluidTank[] tanks = getTanksOnSide(multiblockID, from);
 			for (int i = 0; i < tanks.length; i++) {
 				if (tanks[i] == null)
 					return 0;
@@ -203,7 +203,7 @@ public abstract class TEmultiblockCoreTank extends TEmultiblockCoreInv implement
 
 	@Override
 	public FluidStack drain(int multiblockID, ForgeDirection from, FluidStack resource, boolean doDrain) {
-		IPMultiblockFluidTank[] tanks = getTanksOnSide(multiblockID, from);
+		MultiblockFluidTank[] tanks = getTanksOnSide(multiblockID, from);
 		if (tanks[0] == null)
 			return null;
 		FluidStack amount = tanks[0].drain(resource.amount, doDrain);
@@ -215,7 +215,7 @@ public abstract class TEmultiblockCoreTank extends TEmultiblockCoreInv implement
 	@Override
 	public FluidStack drain(int multiblockID, ForgeDirection from, int maxDrain, boolean doDrain) {
 
-		IPMultiblockFluidTank[] tanks = getTanksOnSide(multiblockID, from);
+		MultiblockFluidTank[] tanks = getTanksOnSide(multiblockID, from);
 		if (tanks[0] == null)
 			return null;
 		FluidStack amount = tanks[0].drain(maxDrain, doDrain);
@@ -226,7 +226,7 @@ public abstract class TEmultiblockCoreTank extends TEmultiblockCoreInv implement
 
 	@Override
 	public boolean canFill(int multiblockID, ForgeDirection from, Fluid fluid) {
-		IPMultiblockFluidTank[] tanks = getTanksOnSide(multiblockID, from);
+		MultiblockFluidTank[] tanks = getTanksOnSide(multiblockID, from);
 		for (int i = 0; i < tanks.length; i++) {
 			if (tanks[i].input && isTankValidForFluid(multiblockID,tanks[i].slot, fluid.getID()))
 				return true;
@@ -238,7 +238,7 @@ public abstract class TEmultiblockCoreTank extends TEmultiblockCoreInv implement
 
 	@Override
 	public boolean canDrain(int multiblockID, ForgeDirection from, Fluid fluid) {
-		IPMultiblockFluidTank[] tanks = getTanksOnSide(multiblockID, from);
+		MultiblockFluidTank[] tanks = getTanksOnSide(multiblockID, from);
 		for (int i = 0; i < tanks.length; i++) {
 			if (tanks[i].output)
 				return true;
@@ -246,16 +246,16 @@ public abstract class TEmultiblockCoreTank extends TEmultiblockCoreInv implement
 		return false;
 	}
 
-	private IPMultiblockFluidTank[] getTanksOnSide(int multiblockID, ForgeDirection from) {
+	private MultiblockFluidTank[] getTanksOnSide(int multiblockID, ForgeDirection from) {
 		from = ForgeDirection.getOrientation(transformSideToLayoutSide(from.ordinal()));
-		ArrayList<IPMultiblockFluidTank> tanks = new ArrayList<IPMultiblockFluidTank>();
+		ArrayList<MultiblockFluidTank> tanks = new ArrayList<MultiblockFluidTank>();
 		for (int i = 0; i < fluidTanks.size(); i++) {
-			IPMultiblockFluidTank fluidTank = fluidTanks.get(i);
+			MultiblockFluidTank fluidTank = fluidTanks.get(i);
 			if (fluidTank.getMultiblockID() == multiblockID && fluidTank.isConnectedToSide(from)) {
 				tanks.add(fluidTank);
 			}
 		}
-		IPMultiblockFluidTank[] tank = new IPMultiblockFluidTank[tanks.size()];
+		MultiblockFluidTank[] tank = new MultiblockFluidTank[tanks.size()];
 		for (int i = 0; i < tank.length; i++) {
 			tank[i] = tanks.get(i);
 		}
@@ -264,7 +264,7 @@ public abstract class TEmultiblockCoreTank extends TEmultiblockCoreInv implement
 
 	@Override
 	public FluidTankInfo[] getTankInfo(int multiblockID, ForgeDirection from) {
-		IPMultiblockFluidTank[] tanks = getTanksOnSide(multiblockID, from);
+		MultiblockFluidTank[] tanks = getTanksOnSide(multiblockID, from);
 		FluidTankInfo[] tanksInfo = new FluidTankInfo[tanks.length];
 		for (int i = 0; i < tanks.length; i++) {
 			tanksInfo[i] = tanks[i].getInfo();
@@ -289,7 +289,7 @@ public abstract class TEmultiblockCoreTank extends TEmultiblockCoreInv implement
 	public void addPressure(ForgeDirection from, float pressure) { 
 	}
 	
-	public IPMultiblockFluidTank getTankInSlot(int i) {
+	public MultiblockFluidTank getTankInSlot(int i) {
 		if (i < 0 || i > this.fluidTanks.size())
 			return null;
 		return this.fluidTanks.get(i);

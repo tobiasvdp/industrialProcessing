@@ -1,7 +1,7 @@
 package ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.hydroCracker;
 
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.atmosphericDestilationTower.ContainerAtmosphericDestilationTower;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorkerPowered;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.multiblock.gui.GUImultiblock;
 import net.minecraft.entity.player.InventoryPlayer;
 
@@ -14,7 +14,7 @@ public class GuiContainerHydroCracker extends GUImultiblock {
 	private static final Point PROGRESSBAR_LOCATION = new Point(33, 9);
 	private static final Rectangle TANK_SOURCE = new Rectangle(200, 17, 16, 50);
 	
-	public GuiContainerHydroCracker(InventoryPlayer inventory, TEmultiblockCoreTankWorkerPowered core){
+	public GuiContainerHydroCracker(InventoryPlayer inventory, TileEntityMultiblockCoreTankWorkerPowered core){
 		super(inventory, core, new ContainerHydroCracker(inventory, core), "Hydro cracker", "textures/gui/HydroCracker.png");
 	}
 	

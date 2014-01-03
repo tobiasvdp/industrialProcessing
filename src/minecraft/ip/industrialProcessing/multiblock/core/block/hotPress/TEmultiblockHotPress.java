@@ -1,14 +1,14 @@
 package ip.industrialProcessing.multiblock.core.block.hotPress;
 
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
+import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
 import ip.industrialProcessing.multiblock.layout.LayoutTransformer;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 
-public class TEmultiblockHotPress extends TEmultiblockCore {
+public class TEmultiblockHotPress extends TileEntityMultiblockCore {
 	static StructureMultiblock structure;
 	static TierCollection tierRequirments;
 	static {

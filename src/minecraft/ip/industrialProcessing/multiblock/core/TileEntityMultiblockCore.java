@@ -21,7 +21,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Facing;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TEmultiblockCore extends TileEntity implements ITEmultiblockCore {
+public class TileEntityMultiblockCore extends TileEntity implements ITileEntityMultiblockCore {
 
 	private StructureMultiblock structure;
 	private TierCollection tierRequirments;
@@ -209,7 +209,7 @@ public class TEmultiblockCore extends TileEntity implements ITEmultiblockCore {
 
 	}
 
-	public TEmultiblockCore(StructureMultiblock structure, TierCollection tierRequirments) {
+	public TileEntityMultiblockCore(StructureMultiblock structure, TierCollection tierRequirments) {
 		this.structure = structure;
 		this.tierRequirments = tierRequirments;
 	}

@@ -1,7 +1,7 @@
 package ip.industrialProcessing.multiblock.core.block.weldingStation;
 
 import ip.industrialProcessing.multiblock.container.ContainerMultiblockTankWorkerPowered;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorkerPowered;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.slots.SlotBase;
 import ip.industrialProcessing.slots.SlotOutput;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,7 +10,7 @@ import net.minecraft.inventory.Slot;
 public class ContainerSolderingIron extends ContainerMultiblockTankWorkerPowered {
 	private Slot[] slots;
 
-	public ContainerSolderingIron(EntityPlayer player, TEmultiblockCoreTankWorkerPowered core) {
+	public ContainerSolderingIron(EntityPlayer player, TileEntityMultiblockCoreTankWorkerPowered core) {
 		super(player.inventory, core);
 		((TEmultiblockWeldingStation)core).openGui = 1;
 

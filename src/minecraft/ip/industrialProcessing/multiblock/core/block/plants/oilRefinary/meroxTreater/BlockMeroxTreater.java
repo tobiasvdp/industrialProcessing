@@ -5,9 +5,9 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.multiblock.core.BLmultiblockCore;
+import ip.industrialProcessing.multiblock.core.BlockMultiblockCore;
 
-public class BlockMeroxTreater extends BLmultiblockCore{
+public class BlockMeroxTreater extends BlockMultiblockCore{
 public BlockMeroxTreater(){
 	super(ConfigMachineBlocks.getBlockMeroxTreaterID(), "BlockMeroxTreater", IndustrialProcessing.tabMultiblocks);
 }

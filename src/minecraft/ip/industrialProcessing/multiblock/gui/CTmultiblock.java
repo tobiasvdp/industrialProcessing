@@ -1,6 +1,6 @@
 package ip.industrialProcessing.multiblock.gui;
 
-import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
+import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
 import ip.industrialProcessing.utils.containers.ContainerUtils;
 import ip.industrialProcessing.utils.containers.IContainerAdd;
@@ -15,7 +15,7 @@ public class CTmultiblock extends VerifyingContainer {
 
 	protected Slot[] slots;
 
-	public CTmultiblock(InventoryPlayer inventory, TEmultiblockCore entity) {
+	public CTmultiblock(InventoryPlayer inventory, TileEntityMultiblockCore entity) {
 
 	}
 

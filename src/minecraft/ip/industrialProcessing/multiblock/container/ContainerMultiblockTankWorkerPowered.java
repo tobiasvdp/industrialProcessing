@@ -11,14 +11,14 @@ import ip.industrialProcessing.machines.containers.IProgressBarHandler;
 import ip.industrialProcessing.machines.containers.ProgressBarHandlerInfo;
 import ip.industrialProcessing.machines.containers.ProgressBarPowerHandler;
 import ip.industrialProcessing.machines.containers.ProgressInfoPower;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorker;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorkerPowered;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorker;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
 
 public class ContainerMultiblockTankWorkerPowered extends ContainerMultiblockTankWorker {
 
-	private TEmultiblockCoreTankWorkerPowered core;
+	private TileEntityMultiblockCoreTankWorkerPowered core;
 
-	public ContainerMultiblockTankWorkerPowered(InventoryPlayer inventory,TEmultiblockCoreTankWorkerPowered core) {
+	public ContainerMultiblockTankWorkerPowered(InventoryPlayer inventory,TileEntityMultiblockCoreTankWorkerPowered core) {
 		super(inventory,core);
 		this.core = core;
 	}

@@ -1,13 +1,13 @@
 package ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.fluidCatalyticCracker;
 
 import ip.industrialProcessing.multiblock.container.ContainerMultiblockTankWorkerPowered;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorkerPowered;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
 import net.minecraft.entity.player.InventoryPlayer;
 
 public class ContainerFluidCatalyticCracker extends ContainerMultiblockTankWorkerPowered{
 
 	
-	public ContainerFluidCatalyticCracker(InventoryPlayer inventory, TEmultiblockCoreTankWorkerPowered core){
+	public ContainerFluidCatalyticCracker(InventoryPlayer inventory, TileEntityMultiblockCoreTankWorkerPowered core){
 		super(inventory, core);
 
 		addPowerToContainer(core.getMainPowerStorage());

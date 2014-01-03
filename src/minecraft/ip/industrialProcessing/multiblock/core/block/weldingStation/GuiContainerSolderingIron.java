@@ -6,7 +6,7 @@ import java.io.DataOutputStream;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.PacketHandler;
 import ip.industrialProcessing.machines.plants.blacksmith.anvil.ContainerAnvil;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorkerPowered;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.multiblock.gui.GUImultiblock;
 import ip.industrialProcessing.utils.gui.IPButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -42,7 +42,7 @@ public class GuiContainerSolderingIron extends GUImultiblock {
 	private TEmultiblockWeldingStation te;
 	private EntityPlayer player;
 
-	public GuiContainerSolderingIron(EntityPlayer player, TEmultiblockCoreTankWorkerPowered entity) {
+	public GuiContainerSolderingIron(EntityPlayer player, TileEntityMultiblockCoreTankWorkerPowered entity) {
 		super(player.inventory, entity, new ContainerSolderingIron(player, entity), "Welding Table", "textures/gui/SolderingIron.png");
 		te = (TEmultiblockWeldingStation) entity;
 		this.player = player;

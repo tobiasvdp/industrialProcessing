@@ -10,15 +10,15 @@ import ip.industrialProcessing.machines.containers.IProgressBarHandler;
 import ip.industrialProcessing.machines.containers.ProgressBarHandlerInfo;
 import ip.industrialProcessing.machines.containers.ProgressBarWorkerHandler;
 import ip.industrialProcessing.machines.containers.ProgressInfoWorker;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTank;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorker;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTank;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorker;
 import ip.industrialProcessing.utils.working.IWorker;
 
 public class ContainerMultiblockTankWorker extends ContainerMultiblockTank {
 
-	private TEmultiblockCoreTankWorker core;
+	private TileEntityMultiblockCoreTankWorker core;
 
-	public ContainerMultiblockTankWorker(InventoryPlayer inventory,TEmultiblockCoreTankWorker core) {
+	public ContainerMultiblockTankWorker(InventoryPlayer inventory,TileEntityMultiblockCoreTankWorker core) {
 		super(inventory,core);
 		this.core = core;
 	}

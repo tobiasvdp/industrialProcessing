@@ -2,8 +2,8 @@ package ip.industrialProcessing.multiblock.core.block.plants.blacksmith.bloomery
 
 import ip.industrialProcessing.multiblock.core.block.weldingStation.ContainerWeldingStation;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorker;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorkerPowered;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorker;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.multiblock.gui.GUImultiblock;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -24,7 +24,7 @@ public class GuiContainerBloomery extends GUImultiblock{
 	
 	private TileEntityBloomery te;
 	
-	public GuiContainerBloomery(InventoryPlayer inventory, TEmultiblockCoreTankWorker entity) {
+	public GuiContainerBloomery(InventoryPlayer inventory, TileEntityMultiblockCoreTankWorker entity) {
 		super(inventory, entity, new ContainerBloomery(inventory, entity), "Bloomery", "textures/gui/Bloomery",entity.getTier());
 		te = (TileEntityBloomery) entity;
 	}

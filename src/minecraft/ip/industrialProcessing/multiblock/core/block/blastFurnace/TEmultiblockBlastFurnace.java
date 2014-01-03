@@ -7,9 +7,9 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreInv;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorkerPowered;
+import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreInv;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
 import ip.industrialProcessing.multiblock.layout.LayoutTransformer;
@@ -19,7 +19,7 @@ import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
 import ip.industrialProcessing.multiblock.utils.MultiblockActionType;
 
-public class TEmultiblockBlastFurnace extends TEmultiblockCoreTankWorkerPowered {
+public class TEmultiblockBlastFurnace extends TileEntityMultiblockCoreTankWorkerPowered {
 	static StructureMultiblock structure;
 	static TierCollection tierRequirments;
 	public static RecipesMachine recipes = new RecipesMultiblockBlastFurnace();

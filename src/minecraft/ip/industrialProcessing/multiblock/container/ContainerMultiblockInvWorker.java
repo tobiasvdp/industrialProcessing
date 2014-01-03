@@ -6,12 +6,12 @@ import net.minecraft.entity.player.InventoryPlayer;
 import ip.industrialProcessing.api.handlers.HandlerWorker;
 import ip.industrialProcessing.api.handlers.IHandlerWorker;
 import ip.industrialProcessing.api.info.InfoWorker;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreInv;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreInv;
 import ip.industrialProcessing.utils.working.IWorker;
 
 public class ContainerMultiblockInvWorker extends ContainerMultiblockInv {
 
-	public ContainerMultiblockInvWorker(InventoryPlayer inventory,TEmultiblockCoreInv core) {
+	public ContainerMultiblockInvWorker(InventoryPlayer inventory,TileEntityMultiblockCoreInv core) {
 		super(inventory,core);
 		// TODO Auto-generated constructor stub
 	}

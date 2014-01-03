@@ -1,7 +1,7 @@
 package ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.meroxTreater;
 
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.atmosphericDestilationTower.ContainerAtmosphericDestilationTower;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorkerPowered;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.multiblock.gui.GUImultiblock;
 import net.minecraft.entity.player.InventoryPlayer;
 
@@ -14,7 +14,7 @@ public class GuiContainerMeroxTreater extends GUImultiblock {
 	private static final Point PROGRESSBAR_LOCATION = new Point(33, 9);
 	private static final Rectangle TANK_SOURCE = new Rectangle(200, 17, 16, 50);
 	
-	public GuiContainerMeroxTreater(InventoryPlayer inventory, TEmultiblockCoreTankWorkerPowered core){
+	public GuiContainerMeroxTreater(InventoryPlayer inventory, TileEntityMultiblockCoreTankWorkerPowered core){
 		super(inventory, core, new ContainerMeroxTreater(inventory, core), "Merox treater", "textures/gui/MeroxTreater.png");
 	}
 	

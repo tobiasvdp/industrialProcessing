@@ -4,16 +4,16 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreInv;
+import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreInv;
 import ip.industrialProcessing.utils.containers.IContainerAdd;
 import ip.industrialProcessing.utils.containers.IContainerTransfer;
 
 public class ContainerMultiblockInv extends ContainerMultiblock implements IContainerAdd, IContainerTransfer{
 
-	private TEmultiblockCoreInv core;
+	private TileEntityMultiblockCoreInv core;
 
-	public ContainerMultiblockInv(InventoryPlayer inventory,TEmultiblockCoreInv core) {
+	public ContainerMultiblockInv(InventoryPlayer inventory,TileEntityMultiblockCoreInv core) {
 		super(inventory,core);
 		this.core = core;
 	}

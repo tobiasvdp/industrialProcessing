@@ -1,7 +1,7 @@
 package ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.clausSulfurPlant;
 
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.atmosphericDestilationTower.ContainerAtmosphericDestilationTower;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorkerPowered;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.multiblock.gui.GUImultiblock;
 import net.minecraft.entity.player.InventoryPlayer;
 
@@ -14,7 +14,7 @@ public class GuiContainerClausSulfurPlant  extends GUImultiblock {
 	private static final Point PROGRESSBAR_LOCATION = new Point(33, 9);
 	private static final Rectangle TANK_SOURCE = new Rectangle(200, 17, 16, 50);
 	
-	public GuiContainerClausSulfurPlant(InventoryPlayer inventory, TEmultiblockCoreTankWorkerPowered core){
+	public GuiContainerClausSulfurPlant(InventoryPlayer inventory, TileEntityMultiblockCoreTankWorkerPowered core){
 		super(inventory, core, new ContainerClausSulfurPlant(inventory, core), "Claus sulfur plant", "textures/gui/ClausSulfurPlant.png");
 	}
 	

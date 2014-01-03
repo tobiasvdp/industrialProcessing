@@ -5,9 +5,9 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.multiblock.core.BLmultiblockCore;
+import ip.industrialProcessing.multiblock.core.BlockMultiblockCore;
 
-public class BlockHydroCracker extends BLmultiblockCore{
+public class BlockHydroCracker extends BlockMultiblockCore{
 public BlockHydroCracker(){
 	super(ConfigMachineBlocks.getBlockHydroCrackerID(), "BlockHydroCracker", IndustrialProcessing.tabMultiblocks);
 }

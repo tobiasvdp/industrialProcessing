@@ -1,13 +1,13 @@
 package ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.meroxTreater;
 
 import ip.industrialProcessing.multiblock.container.ContainerMultiblockTankWorkerPowered;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorkerPowered;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
 import net.minecraft.entity.player.InventoryPlayer;
 
 public class ContainerMeroxTreater extends ContainerMultiblockTankWorkerPowered{
 
 	
-	public ContainerMeroxTreater(InventoryPlayer inventory, TEmultiblockCoreTankWorkerPowered core){
+	public ContainerMeroxTreater(InventoryPlayer inventory, TileEntityMultiblockCoreTankWorkerPowered core){
 		super(inventory, core);
 		
 		addTankToContainer(0);

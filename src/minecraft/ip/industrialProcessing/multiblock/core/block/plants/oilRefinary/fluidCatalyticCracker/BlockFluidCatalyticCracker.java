@@ -5,9 +5,9 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.multiblock.core.BLmultiblockCore;
+import ip.industrialProcessing.multiblock.core.BlockMultiblockCore;
 
-public class BlockFluidCatalyticCracker extends BLmultiblockCore{
+public class BlockFluidCatalyticCracker extends BlockMultiblockCore{
 	public BlockFluidCatalyticCracker(){
 		super(ConfigMachineBlocks.getBlockFluidCatalyticCrackerID(), "BlockFluidCatalyticCracker", IndustrialProcessing.tabMultiblocks);
 	}

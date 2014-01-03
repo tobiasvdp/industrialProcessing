@@ -1,7 +1,7 @@
 package ip.industrialProcessing.multiblock.core.block.blastFurnace;
 
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.atmosphericDestilationTower.ContainerAtmosphericDestilationTower;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorkerPowered;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.multiblock.gui.GUImultiblock;
 import net.minecraft.entity.player.InventoryPlayer;
 
@@ -14,7 +14,7 @@ public class GuiContainerMultiblockBlastFurnace extends GUImultiblock {
 	
 	private static final Rectangle TANK_SOURCE = new Rectangle(176, 17, 16, 50);
 	
-	public GuiContainerMultiblockBlastFurnace(InventoryPlayer inventory, TEmultiblockCoreTankWorkerPowered core){
+	public GuiContainerMultiblockBlastFurnace(InventoryPlayer inventory, TileEntityMultiblockCoreTankWorkerPowered core){
 		super(inventory, core, new ContainerMultiblockBlastFurnace(inventory, core), "Blast furnace", "textures/gui/BlastFurnace.png");
 		xSize = 176;
 		ySize = 166;

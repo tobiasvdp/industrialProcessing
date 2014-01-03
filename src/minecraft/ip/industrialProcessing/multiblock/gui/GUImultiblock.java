@@ -10,9 +10,9 @@ import ip.industrialProcessing.multiblock.container.ContainerMultiblock;
 import ip.industrialProcessing.multiblock.container.ContainerMultiblockTank;
 import ip.industrialProcessing.multiblock.container.ContainerMultiblockTankWorker;
 import ip.industrialProcessing.multiblock.container.ContainerMultiblockTankWorkerPowered;
-import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
+import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.core.block.plants.blacksmith.bloomery.ContainerBloomery;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorker;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorker;
 import ip.industrialProcessing.multiblock.tier.Tiers;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -30,7 +30,7 @@ import org.lwjgl.util.Rectangle;
 
 public class GUImultiblock extends GuiContainer {
 
-    private TEmultiblockCore tileEntity;
+    private TileEntityMultiblockCore tileEntity;
     private ResourceLocation textureLocation;
     private String name;
     private ContainerMultiblock container;
@@ -40,7 +40,7 @@ public class GUImultiblock extends GuiContainer {
     protected int nameY = 6;
     protected ToolTip toolTip;
 
-    public GUImultiblock(InventoryPlayer inventoryPlayer, TEmultiblockCore tileEntity, ContainerMultiblock cTmultiblock, String name, String textureLocation) {
+    public GUImultiblock(InventoryPlayer inventoryPlayer, TileEntityMultiblockCore tileEntity, ContainerMultiblock cTmultiblock, String name, String textureLocation) {
 	super(cTmultiblock);
 	this.container = cTmultiblock;
 	this.tileEntity = tileEntity;
@@ -50,7 +50,7 @@ public class GUImultiblock extends GuiContainer {
 	ySize = 166;
     }
     
-    public GUImultiblock(InventoryPlayer inventoryPlayer, TEmultiblockCore tileEntity, ContainerMultiblock cTmultiblock, String name, String textureLocation, Tiers tier) {
+    public GUImultiblock(InventoryPlayer inventoryPlayer, TileEntityMultiblockCore tileEntity, ContainerMultiblock cTmultiblock, String name, String textureLocation, Tiers tier) {
     	super(cTmultiblock);
     	this.container = cTmultiblock;
     	this.tileEntity = tileEntity;

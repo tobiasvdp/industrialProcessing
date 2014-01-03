@@ -1,11 +1,5 @@
 package ip.industrialProcessing.multiblock.core.extend;
 
-import java.util.Iterator;
-
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.fluids.FluidStack;
 import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
@@ -15,16 +9,23 @@ import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.recipes.IRecipeFluidWorkHandler;
+import ip.industrialProcessing.recipes.IRecipeWorkHandler;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeFluidWorker;
+import ip.industrialProcessing.recipes.RecipeWorker;
 import ip.industrialProcessing.utils.working.ClientWorker;
 import ip.industrialProcessing.utils.working.IWorker;
 import ip.industrialProcessing.utils.working.ServerWorker;
 import ip.industrialProcessing.utils.working.WorkUtils;
 
-public abstract class TEmultiblockCoreTankWorker extends TEmultiblockCoreTank implements IRecipeFluidWorkHandler, IAnimationProgress, IAnimationSyncable {
+import java.util.Iterator;
 
-    public TEmultiblockCoreTankWorker(StructureMultiblock structure, TierCollection tierRequirments, RecipesMachine recipe) {
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+
+public abstract class TileEntityMultiblockCoreInvWorker extends TileEntityMultiblockCoreInv implements IRecipeWorkHandler, IAnimationProgress, IAnimationSyncable {
+
+    public TileEntityMultiblockCoreInvWorker(StructureMultiblock structure, TierCollection tierRequirments, RecipesMachine recipe) {
 	super(structure, tierRequirments, recipe);
 	this.recipe = recipe;
 	this.serverWorker = createServerSideWorker();
@@ -37,7 +38,7 @@ public abstract class TEmultiblockCoreTankWorker extends TEmultiblockCoreTank im
     }
 
     protected ServerWorker createServerSideWorker() {
-	return new RecipeFluidWorker(this);
+	return new RecipeWorker(this);
     }
 
     private RecipesMachine recipe;
@@ -170,5 +171,4 @@ public abstract class TEmultiblockCoreTankWorker extends TEmultiblockCoreTank im
     public TileEntity getTileEntity() {
 	return this;
     }
-
 }

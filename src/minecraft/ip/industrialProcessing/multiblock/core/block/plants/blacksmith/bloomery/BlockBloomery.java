@@ -8,7 +8,7 @@ import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.multiblock.core.BLmultiblockCore;
+import ip.industrialProcessing.multiblock.core.BlockMultiblockCore;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -22,7 +22,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockBloomery extends BLmultiblockCore implements IRecipeBlock {
+public class BlockBloomery extends BlockMultiblockCore implements IRecipeBlock {
 
 	private Icon[] icons = new Icon[1];
 

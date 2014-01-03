@@ -10,7 +10,7 @@ import net.minecraftforge.common.DimensionManager;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.machines.crusher.RecipesCrusher;
-import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
+import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
 import ip.industrialProcessing.multiblock.dummy.block.frame.ENmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.TEmultiblockLiftDoor;
@@ -24,7 +24,7 @@ import ip.industrialProcessing.multiblock.tier.Tiers;
 import ip.industrialProcessing.multiblock.utils.MultiblockActionType;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 
-public class TEmultiblockElevator extends TEmultiblockCore {
+public class TEmultiblockElevator extends TileEntityMultiblockCore {
 	static StructureMultiblock structure;
 	static TierCollection tierRequirments;
 	static {

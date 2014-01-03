@@ -6,10 +6,10 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.multiblock.core.BLmultiblockCore;
+import ip.industrialProcessing.multiblock.core.BlockMultiblockCore;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 
-public class BLmultiblockWeldingStation extends BLmultiblockCore implements IRecipeBlock{
+public class BLmultiblockWeldingStation extends BlockMultiblockCore implements IRecipeBlock{
 
 	public BLmultiblockWeldingStation() {
 		super(ConfigMachineBlocks.getBLmultiblockWeldingStation(), "BLmultiblockWeldingStation", IndustrialProcessing.tabMultiblocks);

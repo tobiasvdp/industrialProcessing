@@ -6,14 +6,13 @@ import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.MachineItemStack;
 import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
+import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
-import ip.industrialProcessing.multiblock.utils.MultiblockItemStack;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
-import ip.industrialProcessing.multiblock.utils.TEmultiblockItemStackType;
+import ip.industrialProcessing.multiblock.utils.inventory.IMultiblockInventories;
+import ip.industrialProcessing.multiblock.utils.inventory.MultiblockItemStack;
 import ip.industrialProcessing.utils.inventories.IInventories;
-import ip.industrialProcessing.utils.inventories.Inventories;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -21,15 +20,14 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
-public abstract class TEmultiblockCoreInv extends TEmultiblockCore implements IInventories {
+public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCore implements IInventories,IMultiblockInventories {
 
 	protected RecipesMachine recipes;
-	protected ArrayList<MachineItemStack> itemStacks = new ArrayList<MachineItemStack>();
+	protected ArrayList<MultiblockItemStack> itemStacks = new ArrayList<MultiblockItemStack>();
 	private int[][] itemStackSideSlots = new int[6][0];
 	public boolean isDummyBlock = false;
-	private ForgeDirection forwardDirection;
 
-	public TEmultiblockCoreInv(StructureMultiblock structure, TierCollection tierRequirments, RecipesMachine recipes) {
+	public TileEntityMultiblockCoreInv(StructureMultiblock structure, TierCollection tierRequirments, RecipesMachine recipes) {
 		super(structure, tierRequirments);
 		this.recipes = recipes;
 	}
@@ -40,14 +38,12 @@ public abstract class TEmultiblockCoreInv extends TEmultiblockCore implements II
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 		writeInventory(nbt);
-		if (this.forwardDirection != null)
-			nbt.setByte("ForwardDirection", (byte) this.forwardDirection.ordinal());
 	}
 
 	public void writeInventory(NBTTagCompound nbt) {
 		NBTTagList nbttaglist = new NBTTagList();
 		for (int i = 0; i < this.itemStacks.size(); ++i) {
-			MachineItemStack machineStack = this.itemStacks.get(i);
+			MultiblockItemStack machineStack = this.itemStacks.get(i);
 			if (machineStack.stack != null) {
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 				nbttagcompound1.setByte("Slot", (byte) i);
@@ -62,7 +58,6 @@ public abstract class TEmultiblockCoreInv extends TEmultiblockCore implements II
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 		readInventory(nbt);
-		this.forwardDirection = ForgeDirection.VALID_DIRECTIONS[nbt.getByte("ForwardDirection")];
 	};
 
 	public void readInventory(NBTTagCompound nbt) {
@@ -72,7 +67,7 @@ public abstract class TEmultiblockCoreInv extends TEmultiblockCore implements II
 			byte b0 = nbttagcompound1.getByte("Slot");
 
 			if (b0 >= 0 && b0 < itemStacks.size()) {
-				MachineItemStack machineStack = this.itemStacks.get(b0);
+				MultiblockItemStack machineStack = this.itemStacks.get(b0);
 				machineStack.stack = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 			}
 		}
@@ -137,15 +132,24 @@ public abstract class TEmultiblockCoreInv extends TEmultiblockCore implements II
 		int index = itemStacks.size();
 		addStack(stack, new LocalDirection[] { side }, input, output);
 	}
+	
+	protected void addStack(ItemStack stack,int multiblockID, LocalDirection side, boolean input, boolean output) {
+		int index = itemStacks.size();
+		addStack(stack, multiblockID,new LocalDirection[] { side }, input, output);
+	}
 
 	protected void addStack(ItemStack stack, LocalDirection[] sides, boolean input, boolean output) {
+		addStack(stack, 0, sides, input, output);
+	}
+	
+	protected void addStack(ItemStack stack,int multiblockID, LocalDirection[] sides, boolean input, boolean output) {
 		int index = itemStacks.size();
 		int[] sideIndices = new int[sides.length];
 		for (int i = 0; i < sideIndices.length; i++) {
 			sideIndices[i] = sides[i].ordinal();
 		}
 
-		itemStacks.add(new MachineItemStack(stack, sideIndices, input, output));
+		itemStacks.add(new MultiblockItemStack(stack,multiblockID, sideIndices, input, output));
 
 		for (int i = 0; i < sideIndices.length; i++) {
 			int sideIndex = sideIndices[i];
@@ -270,24 +274,12 @@ public abstract class TEmultiblockCoreInv extends TEmultiblockCore implements II
 
 	@Override
 	public boolean canInsertItem(int slotIndex, ItemStack itemstack, int amount) {
-		MachineItemStack machineStack = getMachineStack(slotIndex);
-		if (machineStack != null && machineStack.input) {
-			if (machineStack.stack == null) {
-				return isItemValidForSlot(slotIndex, itemstack);
-			} else if (machineStack.stack.stackSize + amount <= 64) {
-				return isItemValidForSlot(slotIndex, itemstack);
-			}
-		}
-		return false;
+		return canInsertItem(0, slotIndex, itemstack, amount);
 	}
 
 	@Override
 	public boolean canExtractItem(int slotIndex, ItemStack itemstack, int amount) {
-		MachineItemStack machineStack = getMachineStack(slotIndex);
-		if (machineStack != null && machineStack.output) {
-			return true;
-		}
-		return false;
+		return canExtractItem(0, slotIndex, itemstack, amount);
 	}
 
 	@Override
@@ -358,6 +350,36 @@ public abstract class TEmultiblockCoreInv extends TEmultiblockCore implements II
 		}
 		return side;
 	}
+	
+	public int[] getAccessibleSlotsFromSide(int multiblockID,int var1){
+		 return null;
+	 }
+	 public boolean canInsertItem(int multiblockID,int i, ItemStack itemstack, int j){
+		 MultiblockItemStack machineStack = getMultiblockStack(i);
+			if (machineStack != null && machineStack.input && machineStack.getMultiblockID() == multiblockID) {
+				if (machineStack.stack == null) {
+					return isItemValidForSlot(i, itemstack);
+				} else if (machineStack.stack.stackSize + j <= 64) {
+					return isItemValidForSlot(i, itemstack);
+				}
+			}
+			return false;
+	 }
+
+	public boolean canExtractItem(int multiblockID,int i, ItemStack itemstack, int j){
+		MultiblockItemStack machineStack = getMultiblockStack(i);
+		if (machineStack != null && machineStack.output && machineStack.getMultiblockID() == multiblockID) {
+			return true;
+		}
+		return false;
+	}
+
+	public MultiblockItemStack getMultiblockStack(int i) {
+		if (i < 0 || i >= this.itemStacks.size())
+			return null;
+		return this.itemStacks.get(i);
+	}
+
 
 
 }

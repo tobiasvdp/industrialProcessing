@@ -5,7 +5,7 @@ import java.io.DataOutputStream;
 
 import cpw.mods.fml.common.network.PacketDispatcher;
 import ip.industrialProcessing.PacketHandler;
-import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
+import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
@@ -27,7 +27,7 @@ public class TEmultiblockDummy extends TileEntity implements ITEmultiblockDummy 
 		this.modelConnection = modelConnection;
 	}
 
-	protected TEmultiblockCore core;
+	protected TileEntityMultiblockCore core;
 	protected boolean loadedFromNBT;
 	protected int[] coreDataFromNBT;
 	private MultiblockState state = MultiblockState.DISCONNECTED;
@@ -41,9 +41,9 @@ public class TEmultiblockDummy extends TileEntity implements ITEmultiblockDummy 
 
 	}
 
-	public TEmultiblockCore getCore() {
+	public TileEntityMultiblockCore getCore() {
 		if (loadedFromNBT) {
-			core = (TEmultiblockCore) worldObj.getBlockTileEntity(coreDataFromNBT[0], coreDataFromNBT[1], coreDataFromNBT[2]);
+			core = (TileEntityMultiblockCore) worldObj.getBlockTileEntity(coreDataFromNBT[0], coreDataFromNBT[1], coreDataFromNBT[2]);
 			loadedFromNBT = false;
 		}
 		return core;
@@ -156,7 +156,7 @@ public class TEmultiblockDummy extends TileEntity implements ITEmultiblockDummy 
 			if (neighbour instanceof TEmultiblockDummy) {
 				TEmultiblockDummy te = (TEmultiblockDummy) neighbour;
 				if (te.getCore() != null) {
-					TEmultiblockCore teCore = te.getCore();
+					TileEntityMultiblockCore teCore = te.getCore();
 					if (teCore.getState() != MultiblockState.COMPLETED && teCore.isDummyValidForStructure(this)) {
 						setCore(teCore);
 						notifyNeighboursOfCoreSet();
@@ -167,8 +167,8 @@ public class TEmultiblockDummy extends TileEntity implements ITEmultiblockDummy 
 						return true;
 					}
 				}
-			} else if (neighbour instanceof TEmultiblockCore) {
-				TEmultiblockCore te = (TEmultiblockCore) neighbour;
+			} else if (neighbour instanceof TileEntityMultiblockCore) {
+				TileEntityMultiblockCore te = (TileEntityMultiblockCore) neighbour;
 				if (te.getState() != MultiblockState.COMPLETED && te.isDummyValidForStructure(this)) {
 					setCore(te);
 					notifyNeighboursOfCoreSet();
@@ -194,7 +194,7 @@ public class TEmultiblockDummy extends TileEntity implements ITEmultiblockDummy 
 		}
 	}
 
-	private void setCore(TEmultiblockCore te) {
+	private void setCore(TileEntityMultiblockCore te) {
 		core = te;
 		ID = getCore().setDummieID(this);
 		getCore().registerDummy(this);

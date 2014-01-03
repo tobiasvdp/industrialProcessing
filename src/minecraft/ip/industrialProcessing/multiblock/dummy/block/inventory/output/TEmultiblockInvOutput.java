@@ -3,8 +3,8 @@ package ip.industrialProcessing.multiblock.dummy.block.inventory.output;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
-import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreInv;
+import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreInv;
 import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
 
 public class TEmultiblockInvOutput extends TEmultiblockDummy implements ISidedInventory{
@@ -14,9 +14,9 @@ public class TEmultiblockInvOutput extends TEmultiblockDummy implements ISidedIn
 	}
 
 	@Override
-	public TEmultiblockCoreInv getCore() {
-		TEmultiblockCore te = super.getCore();
-		return (TEmultiblockCoreInv) te;
+	public TileEntityMultiblockCoreInv getCore() {
+		TileEntityMultiblockCore te = super.getCore();
+		return (TileEntityMultiblockCoreInv) te;
 	}
 
 	@Override

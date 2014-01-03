@@ -6,7 +6,7 @@ import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
 import ip.industrialProcessing.machines.animation.AnimationMode;
 import ip.industrialProcessing.machines.crusher.RecipesCrusher;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreInv;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreInv;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
 import ip.industrialProcessing.multiblock.layout.LayoutTransformer;
@@ -16,7 +16,7 @@ import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
 import ip.industrialProcessing.multiblock.utils.MultiblockActionType;
 
-public class TEmultiblockRollingPress extends TEmultiblockCoreInv {
+public class TEmultiblockRollingPress extends TileEntityMultiblockCoreInv {
 	static StructureMultiblock structure;
 	static TierCollection tierRequirments;
 	static RecipesMachine recipes = new RecipesCrusher();

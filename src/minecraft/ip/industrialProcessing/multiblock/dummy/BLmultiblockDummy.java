@@ -3,7 +3,7 @@ package ip.industrialProcessing.multiblock.dummy;
 import java.util.Random;
 
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
+import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import ip.industrialProcessing.utils.inventories.InventoryUtils;
 import net.minecraft.block.Block;
@@ -62,7 +62,7 @@ public abstract class BLmultiblockDummy extends BlockContainer {
 			return false;
 		TEmultiblockDummy TEdummy = ((TEmultiblockDummy) te);
 		if (TEdummy.getState() == MultiblockState.COMPLETED) {
-			TEmultiblockCore TEcore = (TEmultiblockCore) TEdummy.getCore();
+			TileEntityMultiblockCore TEcore = (TileEntityMultiblockCore) TEdummy.getCore();
 			if (TEcore.getState() == MultiblockState.COMPLETED) {
 				player.openGui(IndustrialProcessing.instance, 0, world, TEcore.xCoord, TEcore.yCoord, TEcore.zCoord);
 				return true;
@@ -96,7 +96,7 @@ public abstract class BLmultiblockDummy extends BlockContainer {
     @Override
     public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
 		InventoryUtils.DropInventoryContents(world, x, y, z);
-		TEmultiblockCore core = ((TEmultiblockDummy) world.getBlockTileEntity(x, y, z)).getCore();
+		TileEntityMultiblockCore core = ((TEmultiblockDummy) world.getBlockTileEntity(x, y, z)).getCore();
 		((TEmultiblockDummy) world.getBlockTileEntity(x, y, z)).delCore();
 		world.destroyBlock(x, y, z, true);
 		if (core != null){

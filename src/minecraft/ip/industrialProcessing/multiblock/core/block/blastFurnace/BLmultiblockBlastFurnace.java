@@ -9,10 +9,10 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.multiblock.core.BLmultiblockCore;
+import ip.industrialProcessing.multiblock.core.BlockMultiblockCore;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 
-public class BLmultiblockBlastFurnace extends BLmultiblockCore implements IRecipeBlock{
+public class BLmultiblockBlastFurnace extends BlockMultiblockCore implements IRecipeBlock{
     Icon[] icons = new Icon[6];
 
     public BLmultiblockBlastFurnace() {

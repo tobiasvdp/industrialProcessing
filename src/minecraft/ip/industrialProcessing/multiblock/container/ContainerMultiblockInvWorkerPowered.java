@@ -7,11 +7,11 @@ import ip.industrialProcessing.api.handlers.HandlerPower;
 import ip.industrialProcessing.api.handlers.IHandlerPower;
 import ip.industrialProcessing.api.info.InfoPower;
 import ip.industrialProcessing.machines.IPowerStorage;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreInv;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreInv;
 
 public class ContainerMultiblockInvWorkerPowered extends ContainerMultiblockInvWorker {
 
-	public ContainerMultiblockInvWorkerPowered(InventoryPlayer inventory,TEmultiblockCoreInv core) {
+	public ContainerMultiblockInvWorkerPowered(InventoryPlayer inventory,TileEntityMultiblockCoreInv core) {
 		super(inventory,core);
 		// TODO Auto-generated constructor stub
 	}

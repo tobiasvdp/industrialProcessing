@@ -5,7 +5,7 @@ import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
 import ip.industrialProcessing.client.render.ModelBlock;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.plants.blacksmith.anvil.model.Box002;
-import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
+import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -36,7 +36,7 @@ public class ModelContainer extends ModelBlock {
     	TileEntity entity = reference.getBlockTileEntity();
         ForgeDirection forward = BlockMachine.getForwardFromEntity(entity);
         int dir = BlockMachine.getMetadataFromForward(forward);
-        TEmultiblockCore core = (TEmultiblockCore) entity;
+        TileEntityMultiblockCore core = (TileEntityMultiblockCore) entity;
         
         Icon iconHull = reference.getIcon(0);
         

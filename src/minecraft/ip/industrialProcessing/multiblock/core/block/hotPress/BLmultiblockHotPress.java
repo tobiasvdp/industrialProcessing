@@ -4,10 +4,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
-import ip.industrialProcessing.multiblock.core.BLmultiblockCore;
-import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
+import ip.industrialProcessing.multiblock.core.BlockMultiblockCore;
+import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 
-public class BLmultiblockHotPress extends BLmultiblockCore{
+public class BLmultiblockHotPress extends BlockMultiblockCore{
 
 	public BLmultiblockHotPress() {
 		super(ConfigMachineBlocks.getBLmultiblockHotPress(), "MultiblockHotPress", IndustrialProcessing.tabMultiblocks);

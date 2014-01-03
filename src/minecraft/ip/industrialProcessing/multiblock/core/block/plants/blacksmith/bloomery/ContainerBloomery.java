@@ -2,8 +2,8 @@ package ip.industrialProcessing.multiblock.core.block.plants.blacksmith.bloomery
 
 import ip.industrialProcessing.multiblock.container.ContainerMultiblockTankWorker;
 import ip.industrialProcessing.multiblock.container.ContainerMultiblockTankWorkerPowered;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorker;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorkerPowered;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorker;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.multiblock.tier.Tiers;
 import ip.industrialProcessing.slots.SlotBase;
 import ip.industrialProcessing.slots.SlotOutput;
@@ -13,7 +13,7 @@ import net.minecraft.inventory.Slot;
 public class ContainerBloomery extends ContainerMultiblockTankWorker {
 	private Slot[] slots;
 
-	public ContainerBloomery(InventoryPlayer inventory, TEmultiblockCoreTankWorker core) {
+	public ContainerBloomery(InventoryPlayer inventory, TileEntityMultiblockCoreTankWorker core) {
 		super(inventory, core);
 
 		if (core.getTier() == Tiers.Tier0) {

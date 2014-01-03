@@ -5,8 +5,8 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
-import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTank;
+import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTank;
 import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
 
 public class TileEntityMultiblockDummyTank extends TEmultiblockDummy implements IFluidHandler {
@@ -16,12 +16,12 @@ public class TileEntityMultiblockDummyTank extends TEmultiblockDummy implements 
 	}
 
 	@Override
-	public TEmultiblockCoreTank getCore() {
+	public TileEntityMultiblockCoreTank getCore() {
 		if (loadedFromNBT) {
-			core = (TEmultiblockCore) worldObj.getBlockTileEntity(coreDataFromNBT[0], coreDataFromNBT[1], coreDataFromNBT[2]);
+			core = (TileEntityMultiblockCore) worldObj.getBlockTileEntity(coreDataFromNBT[0], coreDataFromNBT[1], coreDataFromNBT[2]);
 			loadedFromNBT = false;
 		}
-		return (TEmultiblockCoreTank) core;
+		return (TileEntityMultiblockCoreTank) core;
 	}
 
 	@Override

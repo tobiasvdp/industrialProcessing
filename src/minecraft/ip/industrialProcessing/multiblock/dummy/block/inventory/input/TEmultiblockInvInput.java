@@ -3,16 +3,16 @@ package ip.industrialProcessing.multiblock.dummy.block.inventory.input;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
-import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreInv;
+import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreInv;
 import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
 
 public class TEmultiblockInvInput extends TEmultiblockDummy implements ISidedInventory {
 
 	@Override
-	public TEmultiblockCoreInv getCore() {
-		TEmultiblockCore te = super.getCore();
-		return (TEmultiblockCoreInv) te;
+	public TileEntityMultiblockCoreInv getCore() {
+		TileEntityMultiblockCore te = super.getCore();
+		return (TileEntityMultiblockCoreInv) te;
 	}
 
 	public TEmultiblockInvInput() {

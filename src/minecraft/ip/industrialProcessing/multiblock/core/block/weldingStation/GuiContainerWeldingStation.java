@@ -19,9 +19,9 @@ import ip.industrialProcessing.PacketHandler;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import ip.industrialProcessing.multiblock.container.ContainerMultiblock;
 import ip.industrialProcessing.multiblock.container.ContainerMultiblockTankWorkerPowered;
-import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreInv;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorkerPowered;
+import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreInv;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.multiblock.gui.CTmultiblock;
 import ip.industrialProcessing.multiblock.gui.GUImultiblock;
 import ip.industrialProcessing.utils.gui.IPButton;
@@ -43,7 +43,7 @@ public class GuiContainerWeldingStation extends GUImultiblock {
 	private TEmultiblockWeldingStation te;
 	private EntityPlayer player;
 
-	public GuiContainerWeldingStation(EntityPlayer player, TEmultiblockCoreTankWorkerPowered entity) {
+	public GuiContainerWeldingStation(EntityPlayer player, TileEntityMultiblockCoreTankWorkerPowered entity) {
 		super(player.inventory, entity, new ContainerWeldingStation(player, entity), "Welding Table", "textures/gui/WeldingTable.png");
 		te = (TEmultiblockWeldingStation) entity;
 		this.player = player;

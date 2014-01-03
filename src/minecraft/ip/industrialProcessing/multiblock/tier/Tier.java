@@ -1,6 +1,6 @@
 package ip.industrialProcessing.multiblock.tier;
 
-import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
+import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
 import ip.industrialProcessing.multiblock.utils.MultiblockActionType;
 
@@ -38,7 +38,7 @@ public class Tier {
 		}
 	}
 
-	public boolean isTierRequirementMet(TEmultiblockCore te) {
+	public boolean isTierRequirementMet(TileEntityMultiblockCore te) {
 		if (!areBlocksPresent(te)) {
 			return false;
 		}
@@ -48,7 +48,7 @@ public class Tier {
 		return true;
 	}
 
-	private boolean areBlockIdsPresent(TEmultiblockCore te) {
+	private boolean areBlockIdsPresent(TileEntityMultiblockCore te) {
 		for (TierRequirement req : blockidpresent) {
 			boolean isValid = false;
 			TEmultiblockDummy dummy = te.getDummyByID(req.getID());
@@ -70,7 +70,7 @@ public class Tier {
 	}
 
 	// Only use dummy blocks here
-	private boolean areBlocksPresent(TEmultiblockCore te) {
+	private boolean areBlocksPresent(TileEntityMultiblockCore te) {
 		for (TierRequirement req : blockpresent) {
 			TEmultiblockDummy dummy = te.getDummyByID(req.getID());
 			if (dummy == null)
@@ -79,13 +79,13 @@ public class Tier {
 		return true;
 	}
 
-	public void configMultiblock(TEmultiblockCore tEmultiblockCore, ArrayList<TEmultiblockDummy> dummy) {
-		configMultiblockModelIDs(tEmultiblockCore,dummy);
-		configMultiblockModelConnections(tEmultiblockCore,dummy);
+	public void configMultiblock(TileEntityMultiblockCore tileEntityMultiblockCore, ArrayList<TEmultiblockDummy> dummy) {
+		configMultiblockModelIDs(tileEntityMultiblockCore,dummy);
+		configMultiblockModelConnections(tileEntityMultiblockCore,dummy);
 		
 	}
 
-	private void configMultiblockModelConnections(TEmultiblockCore tEmultiblockCore, ArrayList<TEmultiblockDummy> dummy) {
+	private void configMultiblockModelConnections(TileEntityMultiblockCore tileEntityMultiblockCore, ArrayList<TEmultiblockDummy> dummy) {
 		for(int[] id:modelConnection){
 			int registeredID = id[0];
 			int newValue = id[1];
@@ -103,7 +103,7 @@ public class Tier {
 		return false;
 	}
 
-	private void configMultiblockModelIDs(TEmultiblockCore tEmultiblockCore, ArrayList<TEmultiblockDummy> dummy) {
+	private void configMultiblockModelIDs(TileEntityMultiblockCore tileEntityMultiblockCore, ArrayList<TEmultiblockDummy> dummy) {
 		for(int[] id:modelID){
 			int registeredID = id[0];
 			int newValue = id[1];

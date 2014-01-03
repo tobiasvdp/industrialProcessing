@@ -5,7 +5,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import org.lwjgl.util.Point;
 import org.lwjgl.util.Rectangle;
 
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorkerPowered;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.multiblock.gui.GUImultiblock;
 
 public class GuiContainerAtmosphericDestilationTower extends GUImultiblock {
@@ -16,7 +16,7 @@ public class GuiContainerAtmosphericDestilationTower extends GUImultiblock {
 	private static final Rectangle TANK_SOURCE = new Rectangle(200, 17, 16, 50);
 	private static final Rectangle TANK_SOURCE2 = new Rectangle(200, 17, 16, 24);
 	
-	public GuiContainerAtmosphericDestilationTower(InventoryPlayer inventory, TEmultiblockCoreTankWorkerPowered core){
+	public GuiContainerAtmosphericDestilationTower(InventoryPlayer inventory, TileEntityMultiblockCoreTankWorkerPowered core){
 		super(inventory, core, new ContainerAtmosphericDestilationTower(inventory, core), "Atmospheric destilator", "textures/gui/AtmosphericDestilator.png");
 		nameX = xSize / 2 - 30;
 		nameY = ySize - 96 + 2;

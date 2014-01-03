@@ -14,15 +14,15 @@ import ip.industrialProcessing.api.info.InfoTank;
 import ip.industrialProcessing.machines.containers.IProgressBarHandler;
 import ip.industrialProcessing.machines.containers.ProgressBarHandlerInfo;
 import ip.industrialProcessing.machines.containers.ProgressInfoTank;
-import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
+import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.gui.CTmultiblock;
 import ip.industrialProcessing.utils.containers.VerifyingContainer;
 
 public abstract class ContainerMultiblock extends VerifyingContainer {
 
-	private TEmultiblockCore core;
+	private TileEntityMultiblockCore core;
 
-	public ContainerMultiblock(InventoryPlayer inventory, TEmultiblockCore core) {
+	public ContainerMultiblock(InventoryPlayer inventory, TileEntityMultiblockCore core) {
 		this.core = core;
 		for (int j = 0; j < handlers.size(); j++) {
 			IHandler handler = handlers.get(j);

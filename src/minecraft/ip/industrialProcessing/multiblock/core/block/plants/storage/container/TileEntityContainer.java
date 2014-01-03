@@ -3,7 +3,7 @@ package ip.industrialProcessing.multiblock.core.block.plants.storage.container;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreInv;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreInv;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
 import ip.industrialProcessing.multiblock.layout.LayoutTransformer;
@@ -12,7 +12,7 @@ import ip.industrialProcessing.multiblock.tier.Tier;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
 
-public class TileEntityContainer extends TEmultiblockCoreInv {
+public class TileEntityContainer extends TileEntityMultiblockCoreInv {
 	static StructureMultiblock structure;
 	static TierCollection tierRequirments;
 	static {

@@ -1,6 +1,6 @@
 package ip.industrialProcessing.multiblock.utils.tanks;
 
-public interface IIPMultiblockFluidTank {
+public interface IMultiblockFluidTank {
     void setMultiblockID(int id);
     int getMultiblockID();
 }

@@ -1,7 +1,5 @@
 package ip.industrialProcessing.multiblock.core.extend;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.IPowerStorage;
@@ -14,10 +12,12 @@ import ip.industrialProcessing.power.IPoweredMachine;
 import ip.industrialProcessing.power.PowerHelper;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeWorker;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.ForgeDirection;
 
-public abstract class TEmultiblockCoreTankWorkerPowered extends TEmultiblockCoreTankWorker implements IPoweredMachine {
+public abstract class TileEntityMultiblockCoreInvWorkerPowered extends TileEntityMultiblockCoreInvWorker implements IPoweredMachine {
 
-    public TEmultiblockCoreTankWorkerPowered(StructureMultiblock structure, TierCollection tierRequirments, RecipesMachine recipes, LocalDirection powerInput, int powerCapacity, int maxWorkSpeed) {
+    public TileEntityMultiblockCoreInvWorkerPowered(StructureMultiblock structure, TierCollection tierRequirments, RecipesMachine recipes, LocalDirection powerInput, int powerCapacity, int maxWorkSpeed) {
 	super(structure, tierRequirments, recipes);
 	this.powerInputSide = powerInput;
 	this.maxWorkSpeed = maxWorkSpeed;
@@ -87,5 +87,6 @@ public abstract class TEmultiblockCoreTankWorkerPowered extends TEmultiblockCore
     public IPowerStorage getMainPowerStorage() {
 	return this.storage;
     }
+
 
 }

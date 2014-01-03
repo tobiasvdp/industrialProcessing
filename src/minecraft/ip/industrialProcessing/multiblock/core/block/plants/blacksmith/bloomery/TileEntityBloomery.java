@@ -14,8 +14,8 @@ import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.PacketHandler;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.RecipesWeldingStation;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreInv;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorker;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreInv;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorker;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
 import ip.industrialProcessing.multiblock.layout.LayoutTransformer;
@@ -29,7 +29,7 @@ import ip.industrialProcessing.utils.heat.HeatStorage;
 import ip.industrialProcessing.utils.heat.IHeatStorage;
 import ip.industrialProcessing.utils.inventories.InventoryUtils;
 
-public class TileEntityBloomery extends TEmultiblockCoreTankWorker implements IHeatStorage, IBreakable {
+public class TileEntityBloomery extends TileEntityMultiblockCoreTankWorker implements IHeatStorage, IBreakable {
 	static StructureMultiblock structure;
 	static TierCollection tierRequirments;
 	public static RecipesBloomery recipesStatic = new RecipesBloomery(Tiers.all);

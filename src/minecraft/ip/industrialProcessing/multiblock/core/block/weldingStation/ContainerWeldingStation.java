@@ -4,14 +4,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import ip.industrialProcessing.multiblock.container.ContainerMultiblockTankWorkerPowered;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorkerPowered;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.slots.SlotBase;
 import ip.industrialProcessing.slots.SlotOutput;
 
 public class ContainerWeldingStation extends ContainerMultiblockTankWorkerPowered {
 	private Slot[] slots;
 
-	public ContainerWeldingStation(EntityPlayer player, TEmultiblockCoreTankWorkerPowered core) {
+	public ContainerWeldingStation(EntityPlayer player, TileEntityMultiblockCoreTankWorkerPowered core) {
 		super(player.inventory, core);
 		((TEmultiblockWeldingStation)core).openGui = 0;
 

@@ -17,9 +17,9 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public abstract class BLmultiblockCore extends BlockContainer{
+public abstract class BlockMultiblockCore extends BlockContainer{
 
-	public BLmultiblockCore(int blockID, String name, CreativeTabs tab) {
+	public BlockMultiblockCore(int blockID, String name, CreativeTabs tab) {
 		super(blockID, Material.iron);
 		setHardness(1F);
 		setStepSound(Block.soundMetalFootstep);
@@ -59,7 +59,7 @@ public abstract class BLmultiblockCore extends BlockContainer{
 		TileEntity te = world.getBlockTileEntity(x, y, z);
 		if (player.isSneaking() || te == null)
 			return false;
-		TEmultiblockCore TEcore = (TEmultiblockCore) te;
+		TileEntityMultiblockCore TEcore = (TileEntityMultiblockCore) te;
 		if (TEcore.getState() == MultiblockState.COMPLETED) {
 			player.openGui(IndustrialProcessing.instance, 0, world, x, y, z);
 			return true;
@@ -84,7 +84,7 @@ public abstract class BLmultiblockCore extends BlockContainer{
 		int dir = MathHelper.floor_double((double) ((entityLivingBase.rotationYaw * 4F) / 360F) + 0.5D) & 3;
 		world.setBlockMetadataWithNotify(x, y, z, dir, 0);
 		super.onBlockPlacedBy(world, x, y, z, entityLivingBase, itemStack);
-		TEmultiblockCore core = ((TEmultiblockCore) world.getBlockTileEntity(x, y, z));
+		TileEntityMultiblockCore core = ((TileEntityMultiblockCore) world.getBlockTileEntity(x, y, z));
 		core.setsideFromMetadata(dir);
 		core.setModelID();
 		core.setModelConnection();
@@ -95,7 +95,7 @@ public abstract class BLmultiblockCore extends BlockContainer{
     @Override
     public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
 		InventoryUtils.DropInventoryContents(world, x, y, z);
-		((TEmultiblockCore) world.getBlockTileEntity(x, y, z)).destroyMultiblock();
+		((TileEntityMultiblockCore) world.getBlockTileEntity(x, y, z)).destroyMultiblock();
     	super.breakBlock(world, x, y, z, par5, par6);
     }
 

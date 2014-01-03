@@ -15,9 +15,9 @@ import ip.industrialProcessing.machines.MachineItemStack;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.machines.crusher.RecipesCrusher;
 import ip.industrialProcessing.machines.mixer.RecipesMixer;
-import ip.industrialProcessing.multiblock.core.TEmultiblockCore;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreInv;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorkerPowered;
+import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreInv;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
 import ip.industrialProcessing.multiblock.layout.LayoutTransformer;
@@ -27,13 +27,12 @@ import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.TierRequirement;
 import ip.industrialProcessing.multiblock.tier.Tiers;
 import ip.industrialProcessing.multiblock.utils.MultiblockActionType;
-import ip.industrialProcessing.multiblock.utils.TEmultiblockItemStackType;
 import ip.industrialProcessing.multiblock.utils.blockSide;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.utils.heat.HeatStorage;
 import ip.industrialProcessing.utils.heat.IHeatStorage;
 
-public class TEmultiblockWeldingStation extends TEmultiblockCoreTankWorkerPowered implements IHeatStorage {
+public class TEmultiblockWeldingStation extends TileEntityMultiblockCoreTankWorkerPowered implements IHeatStorage {
 	static StructureMultiblock structure;
 	static TierCollection tierRequirments;
 	public static RecipesMachine recipes = new RecipesWeldingStation();

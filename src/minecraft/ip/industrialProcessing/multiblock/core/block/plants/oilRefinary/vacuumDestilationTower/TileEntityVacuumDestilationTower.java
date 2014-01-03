@@ -2,7 +2,7 @@ package ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.vacuumD
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.multiblock.core.extend.TEmultiblockCoreTankWorkerPowered;
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
 import ip.industrialProcessing.multiblock.layout.LayoutTransformer;
@@ -11,7 +11,7 @@ import ip.industrialProcessing.multiblock.tier.Tier;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
 
-public class TileEntityVacuumDestilationTower extends TEmultiblockCoreTankWorkerPowered  {
+public class TileEntityVacuumDestilationTower extends TileEntityMultiblockCoreTankWorkerPowered  {
 	private static StructureMultiblock structure;
 	private static TierCollection tierRequirments;
 	private static RecipesVacuumDestilationTower recipes = new RecipesVacuumDestilationTower();
