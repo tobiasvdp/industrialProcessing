@@ -24,16 +24,16 @@ public class TileEntityContainer extends TileEntityMultiblockCoreInv {
 		int i = 0;
 		layout.setCoreID(i++, 0, 1, IndustrialProcessing.blockContainer.blockID);
 		for (int j = 0; j < 6; j++) {
-			layout.setBlockID(1, 0, -j, i++, 0, 0, IndustrialProcessing.blockContainerWall.blockID);
-			layout.setBlockID(-1, 0, -j, i++, 0, 0, IndustrialProcessing.blockContainerWall.blockID);
-			layout.setBlockID(0, +1, -j, i++, 0, 0, IndustrialProcessing.blockContainerWall.blockID);
-			layout.setBlockID(1, +1, -j, i++, 0, 0, IndustrialProcessing.blockContainerWall.blockID);
-			layout.setBlockID(-1, +1, -j, i++, 0, 0, IndustrialProcessing.blockContainerWall.blockID);
-			layout.setBlockID(0, -1, -j, i++, 0, 0, IndustrialProcessing.blockContainerWall.blockID);
-			layout.setBlockID(1, -1, -j, i++, 0, 0, IndustrialProcessing.blockContainerWall.blockID);
-			layout.setBlockID(-1, -1, -j, i++, 0, 0, IndustrialProcessing.blockContainerWall.blockID);
+			layout.setBlockIDwithGroup(1, 0, -j, i++, 0, 0,0, IndustrialProcessing.blockContainerWall.blockID);
+			layout.setBlockIDwithGroup(-1, 0, -j, i++, 0, 0,0, IndustrialProcessing.blockContainerWall.blockID);
+			layout.setBlockIDwithGroup(0, +1, -j, i++, 0, 0,0, IndustrialProcessing.blockContainerWall.blockID);
+			layout.setBlockIDwithGroup(1, +1, -j, i++, 0, 0,0, IndustrialProcessing.blockContainerWall.blockID);
+			layout.setBlockIDwithGroup(-1, +1, -j, i++, 0, 0,0, IndustrialProcessing.blockContainerWall.blockID);
+			layout.setBlockIDwithGroup(0, -1, -j, i++, 0, 0,0, IndustrialProcessing.blockContainerWall.blockID);
+			layout.setBlockIDwithGroup(1, -1, -j, i++, 0, 0,0, IndustrialProcessing.blockContainerWall.blockID);
+			layout.setBlockIDwithGroup(-1, -1, -j, i++, 0, 0,0, IndustrialProcessing.blockContainerWall.blockID);
 			if (j == 5)
-				layout.setBlockID(0, 0, -j, i++, 0, 0, IndustrialProcessing.blockContainerWall.blockID);
+				layout.setBlockIDwithGroup(0, 0, -j, i++, 0, 0,0, IndustrialProcessing.blockContainerWall.blockID);
 		}
 
 		structure.addLayout(layout, FacingDirection.North);
@@ -50,8 +50,9 @@ public class TileEntityContainer extends TileEntityMultiblockCoreInv {
 	public TileEntityContainer() {
 		super(structure, tierRequirments, null);
 		LocalDirection[] nodirections = new LocalDirection[0];
+		setInventoryGroupArray(1);
 		for (int i = 0; i < 117; i++)
-			addStack(null, nodirections, true, true);
+			addStack(null,0, new LocalDirection[]{LocalDirection.BACK,LocalDirection.DOWN,LocalDirection.FRONT,LocalDirection.LEFT,LocalDirection.RIGHT,LocalDirection.UP}, true, true);
 	}
 
 	@Override

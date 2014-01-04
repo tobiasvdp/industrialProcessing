@@ -185,7 +185,7 @@ public abstract class TileEntityMultiblockCoreTank extends TileEntityMultiblockC
 			int totalAmount = resource.amount;
 			MultiblockFluidTank[] tanks = getTanksOnSide(multiblockID, from);
 			for (int i = 0; i < tanks.length; i++) {
-				if (tanks[i] == null)
+				if (tanks[i] == null || !tanks[i].input)
 					return 0;
 				amount += tanks[i].fill(resource, doFill);
 				if (doFill)
@@ -204,7 +204,7 @@ public abstract class TileEntityMultiblockCoreTank extends TileEntityMultiblockC
 	@Override
 	public FluidStack drain(int multiblockID, ForgeDirection from, FluidStack resource, boolean doDrain) {
 		MultiblockFluidTank[] tanks = getTanksOnSide(multiblockID, from);
-		if (tanks[0] == null)
+		if (tanks[0] == null || !tanks[0].output)
 			return null;
 		FluidStack amount = tanks[0].drain(resource.amount, doDrain);
 		if (doDrain)
@@ -216,7 +216,7 @@ public abstract class TileEntityMultiblockCoreTank extends TileEntityMultiblockC
 	public FluidStack drain(int multiblockID, ForgeDirection from, int maxDrain, boolean doDrain) {
 
 		MultiblockFluidTank[] tanks = getTanksOnSide(multiblockID, from);
-		if (tanks[0] == null)
+		if (tanks[0] == null || !tanks[0].output)
 			return null;
 		FluidStack amount = tanks[0].drain(maxDrain, doDrain);
 		if (doDrain)
