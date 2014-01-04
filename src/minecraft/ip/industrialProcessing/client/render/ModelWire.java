@@ -1,7 +1,7 @@
 package ip.industrialProcessing.client.render;
 
 import ip.industrialProcessing.api.rendering.ModelMachine;
-import ip.industrialProcessing.logic.utils.UTBuffer;
+import ip.industrialProcessing.subMod.logic.utils.UTBuffer;
 
 public abstract class ModelWire extends ModelMachine{
 

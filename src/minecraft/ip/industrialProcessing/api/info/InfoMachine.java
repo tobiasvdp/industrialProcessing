@@ -2,8 +2,8 @@ package ip.industrialProcessing.api.info;
 
 import java.util.ArrayList;
 
-import ip.industrialProcessing.logic.api.network.interfaces.InterfaceType;
-import ip.industrialProcessing.logic.api.network.interfaces.StatusType;
+import ip.industrialProcessing.subMod.logic.api.network.interfaces.InterfaceType;
+import ip.industrialProcessing.subMod.logic.api.network.interfaces.StatusType;
 
 public class InfoMachine implements IExpirable {
 	public InfoPower power = new InfoPower();

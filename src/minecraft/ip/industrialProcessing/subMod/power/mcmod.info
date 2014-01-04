@@ -1,0 +1,22 @@
+[
+{
+  "modid": "IPPower",
+  "name": "Industrial Processing Power",
+  "description": "Industrial Processing Power",
+  "version": "0.0.1",
+  "mcversion": "1.6.2",
+  "url": "http://none.com/",
+  "updateUrl": "",
+  "authors": [
+    "Tobiasvdp","SGStino"
+  ],
+  "credits": "Created by Tobiasvdp and SGStino",
+  "logoFile": "",
+  "screenshots": [ ],
+  "parent":"IndustrialProcessing",
+
+  "dependencies": [
+     "IndustrialProcessing"
+  ]
+}
+]

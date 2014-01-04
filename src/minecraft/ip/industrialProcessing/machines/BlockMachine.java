@@ -4,7 +4,7 @@ import cpw.mods.fml.common.Loader;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupItems;
-import ip.industrialProcessing.logic.IPLogic;
+import ip.industrialProcessing.subMod.logic.IPLogic;
 import ip.industrialProcessing.transport.fluids.TileEntityTank;
 import ip.industrialProcessing.utils.FluidTransfers;
 import ip.industrialProcessing.utils.inventories.InventoryUtils;
