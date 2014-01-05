@@ -22,6 +22,7 @@ import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
 import ip.industrialProcessing.multiblock.layout.LayoutTransformer;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
+import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.multiblock.tier.Tier;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.TierRequirement;
@@ -35,7 +36,7 @@ import ip.industrialProcessing.utils.heat.IHeatStorage;
 public class TEmultiblockWeldingStation extends TileEntityMultiblockCoreTankWorkerPowered implements IHeatStorage {
 	static StructureMultiblock structure;
 	static TierCollection tierRequirments;
-	public static RecipesMachine recipes = new RecipesWeldingStation();
+	public static RecipesMultiblock recipes = new RecipesWeldingStation();
 	static {
 		// set layout
 		structure = new StructureMultiblock();

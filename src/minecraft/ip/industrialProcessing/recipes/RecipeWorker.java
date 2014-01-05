@@ -58,7 +58,7 @@ public class RecipeWorker extends ServerWorker {
         return null;
     }
 
-    private boolean matchesInput(Recipe currentRecipe) {
+    protected boolean matchesInput(Recipe currentRecipe) {
         if (currentRecipe == null)
             return false;
         if (currentRecipe.inputs == null)

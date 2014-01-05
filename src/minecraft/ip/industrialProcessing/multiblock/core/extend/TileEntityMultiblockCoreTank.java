@@ -7,6 +7,7 @@ import ip.industrialProcessing.api.tanks.ITank;
 import ip.industrialProcessing.machines.MachineFluidTank;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
+import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.utils.tanks.IMultiblockFluidTank;
 import ip.industrialProcessing.multiblock.utils.tanks.IMultiblockTanks;
@@ -29,8 +30,8 @@ public abstract class TileEntityMultiblockCoreTank extends TileEntityMultiblockC
 
 	public ArrayList<MultiblockFluidTank> fluidTanks = new ArrayList<MultiblockFluidTank>();
 
-	public TileEntityMultiblockCoreTank(StructureMultiblock structure, TierCollection tierRequirments, RecipesMachine recipe) {
-		super(structure, tierRequirments, recipe);
+	public TileEntityMultiblockCoreTank(StructureMultiblock structure, TierCollection tierRequirments, RecipesMultiblock recipes) {
+		super(structure, tierRequirments, recipes);
 	}
 
 	@Override

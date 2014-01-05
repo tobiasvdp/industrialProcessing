@@ -13,6 +13,8 @@ import ip.industrialProcessing.machines.animation.AnimationMode;
 import ip.industrialProcessing.machines.animation.IAnimationSyncable;
 import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
+import ip.industrialProcessing.multiblock.recipes.RecipeMultiblockFluidWorker;
+import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.recipes.IRecipeFluidWorkHandler;
 import ip.industrialProcessing.recipes.Recipe;
@@ -24,9 +26,9 @@ import ip.industrialProcessing.utils.working.WorkUtils;
 
 public abstract class TileEntityMultiblockCoreTankWorker extends TileEntityMultiblockCoreTank implements IRecipeFluidWorkHandler, IAnimationProgress, IAnimationSyncable {
 
-    public TileEntityMultiblockCoreTankWorker(StructureMultiblock structure, TierCollection tierRequirments, RecipesMachine recipe) {
-	super(structure, tierRequirments, recipe);
-	this.recipe = recipe;
+    public TileEntityMultiblockCoreTankWorker(StructureMultiblock structure, TierCollection tierRequirments, RecipesMultiblock recipes) {
+	super(structure, tierRequirments, recipes);
+	this.recipe = recipes;
 	this.serverWorker = createServerSideWorker();
 	this.clientWorker = new ClientWorker();
 	this.animationHandler = this.creatAnimationHandler();
@@ -37,10 +39,10 @@ public abstract class TileEntityMultiblockCoreTankWorker extends TileEntityMulti
     }
 
     protected ServerWorker createServerSideWorker() {
-	return new RecipeFluidWorker(this);
+	return new RecipeMultiblockFluidWorker(this);
     }
 
-    private RecipesMachine recipe;
+    private RecipesMultiblock recipe;
     private ServerWorker serverWorker;
     private ClientWorker clientWorker;
     private AnimationHandler animationHandler;

@@ -8,6 +8,7 @@ import ip.industrialProcessing.machines.MachineItemStack;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
+import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import ip.industrialProcessing.multiblock.utils.inventory.IMultiblockInventories;
@@ -22,7 +23,7 @@ import net.minecraftforge.common.ForgeDirection;
 
 public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCore implements IInventories,IMultiblockInventories {
 
-	protected RecipesMachine recipes;
+	protected RecipesMultiblock recipes;
 	protected ArrayList<MultiblockItemStack> itemStacks = new ArrayList<MultiblockItemStack>();
 	protected int[][][] itemStackSideSlots;
 	public boolean isDummyBlock = false;
@@ -31,9 +32,9 @@ public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCo
 		itemStackSideSlots = new int[i][6][0];
 	}
 
-	public TileEntityMultiblockCoreInv(StructureMultiblock structure, TierCollection tierRequirments, RecipesMachine recipes) {
+	public TileEntityMultiblockCoreInv(StructureMultiblock structure, TierCollection tierRequirments, RecipesMultiblock recipes2) {
 		super(structure, tierRequirments);
-		this.recipes = recipes;
+		this.recipes = recipes2;
 	}
 
 	// inventory core handler

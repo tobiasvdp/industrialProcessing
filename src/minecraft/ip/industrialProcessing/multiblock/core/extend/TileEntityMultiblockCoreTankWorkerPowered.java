@@ -9,6 +9,7 @@ import ip.industrialProcessing.machines.PowerWorkerHelper;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.machines.SimplePowerStorage;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
+import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.power.IPoweredMachine;
 import ip.industrialProcessing.power.PowerHelper;
@@ -17,7 +18,7 @@ import ip.industrialProcessing.recipes.RecipeWorker;
 
 public abstract class TileEntityMultiblockCoreTankWorkerPowered extends TileEntityMultiblockCoreTankWorker implements IPoweredMachine {
 
-    public TileEntityMultiblockCoreTankWorkerPowered(StructureMultiblock structure, TierCollection tierRequirments, RecipesMachine recipes, LocalDirection powerInput, int powerCapacity, int maxWorkSpeed) {
+    public TileEntityMultiblockCoreTankWorkerPowered(StructureMultiblock structure, TierCollection tierRequirments, RecipesMultiblock recipes, LocalDirection powerInput, int powerCapacity, int maxWorkSpeed) {
 	super(structure, tierRequirments, recipes);
 	this.powerInputSide = powerInput;
 	this.maxWorkSpeed = maxWorkSpeed;
