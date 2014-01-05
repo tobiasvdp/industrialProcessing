@@ -1,8 +1,9 @@
 package ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.vacuumDestilationTower;
 
 import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 
-public class RecipesVacuumDestilationTower extends RecipesMachine {
+public class RecipesVacuumDestilationTower extends RecipesMultiblock {
 	public RecipesVacuumDestilationTower() {
 		addDefaultRecipes();
 	}

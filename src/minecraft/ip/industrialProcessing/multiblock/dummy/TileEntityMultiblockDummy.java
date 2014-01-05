@@ -18,7 +18,7 @@ import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TEmultiblockDummy extends TileEntity implements ITEmultiblockDummy {
+public class TileEntityMultiblockDummy extends TileEntity implements ITileEntityMultiblockDummy {
 	public void setModelID(int modelID) {
 		this.modelID = modelID;
 	}
@@ -37,7 +37,7 @@ public class TEmultiblockDummy extends TileEntity implements ITEmultiblockDummy 
 	private int groupID;
 	protected int ID;
 
-	public TEmultiblockDummy() {
+	public TileEntityMultiblockDummy() {
 
 	}
 
@@ -153,8 +153,8 @@ public class TEmultiblockDummy extends TileEntity implements ITEmultiblockDummy 
 	public boolean searchForCore() {
 		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
 			TileEntity neighbour = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
-			if (neighbour instanceof TEmultiblockDummy) {
-				TEmultiblockDummy te = (TEmultiblockDummy) neighbour;
+			if (neighbour instanceof TileEntityMultiblockDummy) {
+				TileEntityMultiblockDummy te = (TileEntityMultiblockDummy) neighbour;
 				if (te.getCore() != null) {
 					TileEntityMultiblockCore teCore = te.getCore();
 					if (teCore.getState() != MultiblockState.COMPLETED && teCore.isDummyValidForStructure(this)) {
@@ -186,8 +186,8 @@ public class TEmultiblockDummy extends TileEntity implements ITEmultiblockDummy 
 	private void notifyNeighboursOfCoreSet() {
 		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
 			TileEntity neighbour = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
-			if (neighbour instanceof TEmultiblockDummy) {
-				TEmultiblockDummy te = (TEmultiblockDummy) neighbour;
+			if (neighbour instanceof TileEntityMultiblockDummy) {
+				TileEntityMultiblockDummy te = (TileEntityMultiblockDummy) neighbour;
 				if (te.getCore() == null)
 					te.searchForCore();
 			}

@@ -7,9 +7,9 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTank;
-import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
+import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
 
-public class TileEntityMultiblockDummyTank extends TEmultiblockDummy implements IFluidHandler {
+public class TileEntityMultiblockDummyTank extends TileEntityMultiblockDummy implements IFluidHandler {
 
 	public TileEntityMultiblockDummyTank() {
 		super();

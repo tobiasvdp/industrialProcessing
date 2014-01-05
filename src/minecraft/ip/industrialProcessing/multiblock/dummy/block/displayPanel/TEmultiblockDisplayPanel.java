@@ -9,7 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.multiblock.ITEmultiblock;
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
-import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
+import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 
 public class TEmultiblockDisplayPanel extends TileEntity {

@@ -20,6 +20,8 @@ import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
 import ip.industrialProcessing.multiblock.layout.LayoutTransformer;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
+import ip.industrialProcessing.multiblock.recipes.RecipeMultiblock;
+import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.multiblock.tier.Tier;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
@@ -32,8 +34,7 @@ import ip.industrialProcessing.utils.inventories.InventoryUtils;
 public class TileEntityBloomery extends TileEntityMultiblockCoreTankWorker implements IHeatStorage, IBreakable {
 	static StructureMultiblock structure;
 	static TierCollection tierRequirments;
-	public static RecipesBloomery recipesStatic = new RecipesBloomery(Tiers.all);
-	public RecipesBloomery recipes = new RecipesBloomery(Tiers.Invalid);
+	public static RecipesMultiblock recipes = new RecipesBloomery();
 	static {
 		// set layout
 		structure = new StructureMultiblock();
@@ -69,7 +70,7 @@ public class TileEntityBloomery extends TileEntityMultiblockCoreTankWorker imple
 	private int totalLiveTime;
 
 	public TileEntityBloomery() {
-		super(structure, tierRequirments, new RecipesBloomery(Tiers.Invalid));
+		super(structure, tierRequirments, new RecipesBloomery());
 		LocalDirection[] nodirections = new LocalDirection[0];
 		this.addStack(null, nodirections, true, false);
 		this.addStack(null, nodirections, false, true);
@@ -82,25 +83,10 @@ public class TileEntityBloomery extends TileEntityMultiblockCoreTankWorker imple
 		SetLiveTime(15000);
 	}
 
-	//tier management
 	@Override
-	public void onTierChange() {
-		super.onTierChange();
-		recipes = new RecipesBloomery(getTier());
-	}
-
-	@Override
-	protected void setNbtLoadedRecipes(Tiers tier) {
-		super.setNbtLoadedRecipes(tier);
-		recipes = new RecipesBloomery(tier);
-	}
-
-	@Override
-	public Iterator<Recipe> iterateRecipes() {
+	public Iterator<RecipeMultiblock> iterateRecipes() {
 		return recipes.iterator();
 	}
-	
-	//end of tier management
 
 	@Override
 	public void updateEntity() {
@@ -128,7 +114,7 @@ public class TileEntityBloomery extends TileEntityMultiblockCoreTankWorker imple
 		if (slot == 2) {
 			return HeatStorage.onIsValidInput(itemID);
 		}
-		return recipes.isValidInput(slot, itemID);
+		return recipes.isValidInput(slot, itemID,getTier());
 	}
 
 	//burner management

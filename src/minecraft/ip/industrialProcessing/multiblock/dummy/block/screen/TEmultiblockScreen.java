@@ -1,8 +1,8 @@
 package ip.industrialProcessing.multiblock.dummy.block.screen;
 
-import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
+import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
 
-public class TEmultiblockScreen extends TEmultiblockDummy{
+public class TEmultiblockScreen extends TileEntityMultiblockDummy{
 
 	public TEmultiblockScreen() {
 		super();

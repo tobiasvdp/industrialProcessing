@@ -14,6 +14,7 @@ import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
 import ip.industrialProcessing.multiblock.layout.LayoutTransformer;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
+import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.multiblock.tier.Tier;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
@@ -22,7 +23,7 @@ import ip.industrialProcessing.multiblock.utils.MultiblockActionType;
 public class TEmultiblockBlastFurnace extends TileEntityMultiblockCoreTankWorkerPowered {
 	static StructureMultiblock structure;
 	static TierCollection tierRequirments;
-	public static RecipesMachine recipes = new RecipesMultiblockBlastFurnace();
+	public static RecipesMultiblock recipes = new RecipesMultiblockBlastFurnace();
 	static {
 		// set layout
 		structure = new StructureMultiblock();
@@ -70,13 +71,13 @@ public class TEmultiblockBlastFurnace extends TileEntityMultiblockCoreTankWorker
 
 	@Override
 	protected boolean isValidInput(int slot, int itemID) {
-		return recipes.isValidInput(slot, itemID);
+		return recipes.isValidInput(slot, itemID,getTier());
 	}
 
 	@Override
 	protected boolean isTankValidForFluid(int groupid, int slot, int fluidId) {
 		if (getTankInSlot(slot).getMultiblockID() == groupid) {
-			return recipes.isValidFluidInput(slot, fluidId);
+			return recipes.isValidFluidInput(slot, fluidId,getTier());
 		} else {
 			return false;
 		}

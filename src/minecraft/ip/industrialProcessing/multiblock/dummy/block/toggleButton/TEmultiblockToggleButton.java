@@ -1,9 +1,9 @@
 package ip.industrialProcessing.multiblock.dummy.block.toggleButton;
 
 import ip.industrialProcessing.multiblock.core.block.elevator.TEmultiblockElevator;
-import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
+import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
 
-public class TEmultiblockToggleButton extends TEmultiblockDummy {
+public class TEmultiblockToggleButton extends TileEntityMultiblockDummy {
 
 	public TEmultiblockToggleButton(){
 		super();

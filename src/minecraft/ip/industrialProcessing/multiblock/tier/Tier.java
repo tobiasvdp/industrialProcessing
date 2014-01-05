@@ -1,7 +1,7 @@
 package ip.industrialProcessing.multiblock.tier;
 
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
-import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
+import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
 import ip.industrialProcessing.multiblock.utils.MultiblockActionType;
 
 import java.util.ArrayList;
@@ -51,7 +51,7 @@ public class Tier {
 	private boolean areBlockIdsPresent(TileEntityMultiblockCore te) {
 		for (TierRequirement req : blockidpresent) {
 			boolean isValid = false;
-			TEmultiblockDummy dummy = te.getDummyByID(req.getID());
+			TileEntityMultiblockDummy dummy = te.getDummyByID(req.getID());
 			int blockID = 0;
 			if(dummy != null){
 				blockID = dummy.getBlockType().blockID;
@@ -72,20 +72,20 @@ public class Tier {
 	// Only use dummy blocks here
 	private boolean areBlocksPresent(TileEntityMultiblockCore te) {
 		for (TierRequirement req : blockpresent) {
-			TEmultiblockDummy dummy = te.getDummyByID(req.getID());
+			TileEntityMultiblockDummy dummy = te.getDummyByID(req.getID());
 			if (dummy == null)
 				return false;
 		}
 		return true;
 	}
 
-	public void configMultiblock(TileEntityMultiblockCore tileEntityMultiblockCore, ArrayList<TEmultiblockDummy> dummy) {
+	public void configMultiblock(TileEntityMultiblockCore tileEntityMultiblockCore, ArrayList<TileEntityMultiblockDummy> dummy) {
 		configMultiblockModelIDs(tileEntityMultiblockCore,dummy);
 		configMultiblockModelConnections(tileEntityMultiblockCore,dummy);
 		
 	}
 
-	private void configMultiblockModelConnections(TileEntityMultiblockCore tileEntityMultiblockCore, ArrayList<TEmultiblockDummy> dummy) {
+	private void configMultiblockModelConnections(TileEntityMultiblockCore tileEntityMultiblockCore, ArrayList<TileEntityMultiblockDummy> dummy) {
 		for(int[] id:modelConnection){
 			int registeredID = id[0];
 			int newValue = id[1];
@@ -93,8 +93,8 @@ public class Tier {
 		}
 	}
 
-	private boolean setNewModelConnectionToDummy(ArrayList<TEmultiblockDummy> dummy, int registeredID, int newValue) {
-		for(TEmultiblockDummy te:dummy){
+	private boolean setNewModelConnectionToDummy(ArrayList<TileEntityMultiblockDummy> dummy, int registeredID, int newValue) {
+		for(TileEntityMultiblockDummy te:dummy){
 			if (te.getID() == registeredID){
 				te.setModelConnection(newValue);
 				return true;
@@ -103,15 +103,15 @@ public class Tier {
 		return false;
 	}
 
-	private void configMultiblockModelIDs(TileEntityMultiblockCore tileEntityMultiblockCore, ArrayList<TEmultiblockDummy> dummy) {
+	private void configMultiblockModelIDs(TileEntityMultiblockCore tileEntityMultiblockCore, ArrayList<TileEntityMultiblockDummy> dummy) {
 		for(int[] id:modelID){
 			int registeredID = id[0];
 			int newValue = id[1];
 			setNewModelIDToDummy(dummy,registeredID,newValue);
 		}
 	}
-	private boolean setNewModelIDToDummy(ArrayList<TEmultiblockDummy> dummy,int registeredID, int newValue){
-		for(TEmultiblockDummy te:dummy){
+	private boolean setNewModelIDToDummy(ArrayList<TileEntityMultiblockDummy> dummy,int registeredID, int newValue){
+		for(TileEntityMultiblockDummy te:dummy){
 			if (te.getID() == registeredID){
 				te.setModelID(newValue);
 				return true;

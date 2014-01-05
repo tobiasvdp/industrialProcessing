@@ -7,9 +7,11 @@ import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.multiblock.core.BlockMultiblockCore;
+import ip.industrialProcessing.multiblock.recipes.IRecipeMultiblock;
+import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 
-public class BLmultiblockWeldingStation extends BlockMultiblockCore implements IRecipeBlock{
+public class BLmultiblockWeldingStation extends BlockMultiblockCore implements IRecipeMultiblock{
 
 	public BLmultiblockWeldingStation() {
 		super(ConfigMachineBlocks.getBLmultiblockWeldingStation(), "BLmultiblockWeldingStation", IndustrialProcessing.tabMultiblocks);
@@ -26,7 +28,7 @@ public class BLmultiblockWeldingStation extends BlockMultiblockCore implements I
 	}
 
 	@Override
-	public RecipesMachine getRecipes() {
+	public RecipesMultiblock getRecipes() {
 		return TEmultiblockWeldingStation.recipes;
 	}
 }

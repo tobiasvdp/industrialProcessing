@@ -4,7 +4,7 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.rendering.RendererTileEntity;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
-import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
+import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
 import ip.industrialProcessing.multiblock.dummy.block.displayPanel.TEmultiblockDisplayPanel;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import net.minecraft.block.Block;
@@ -29,8 +29,8 @@ public class RenderingMultiblock extends RendererTileEntity {
 			this.model[0].renderModel(null, 0.0625F);
 		} else {
 
-			if (tl instanceof TEmultiblockDummy) {
-				TEmultiblockDummy tile = (TEmultiblockDummy) tl;
+			if (tl instanceof TileEntityMultiblockDummy) {
+				TileEntityMultiblockDummy tile = (TileEntityMultiblockDummy) tl;
 				int modelID = tile.getModelID();
 				int modelConnection = tile.getModelConnection();
 				if (tl instanceof IAnimationProgress) {
@@ -80,8 +80,8 @@ public class RenderingMultiblock extends RendererTileEntity {
 	@Override
 	protected ResourceLocation getTexture(TileEntity tl, World world, int i, int j, int k, Block block2, float f) {
 		ResourceLocation tex;
-		if (tl instanceof TEmultiblockDummy)
-			tex = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN, "textures/render/" + name[((TEmultiblockDummy) tl).getModelID()] + ".png");
+		if (tl instanceof TileEntityMultiblockDummy)
+			tex = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN, "textures/render/" + name[((TileEntityMultiblockDummy) tl).getModelID()] + ".png");
 		else if(tl instanceof TileEntityMultiblockCore)
 			tex = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN, "textures/render/" + name[((TileEntityMultiblockCore) tl).getModelID()] + ".png");
 		else

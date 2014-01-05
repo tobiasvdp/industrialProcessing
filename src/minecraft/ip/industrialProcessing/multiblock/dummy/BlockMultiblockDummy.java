@@ -19,9 +19,9 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public abstract class BLmultiblockDummy extends BlockContainer {
+public abstract class BlockMultiblockDummy extends BlockContainer {
 
-	public BLmultiblockDummy(int blockID, String name, CreativeTabs tab) {
+	public BlockMultiblockDummy(int blockID, String name, CreativeTabs tab) {
 		super(blockID, Material.iron);
 		setHardness(1F);
 		setStepSound(Block.soundMetalFootstep);
@@ -60,7 +60,7 @@ public abstract class BLmultiblockDummy extends BlockContainer {
 		TileEntity te = world.getBlockTileEntity(x, y, z);
 		if (player.isSneaking() || te == null)
 			return false;
-		TEmultiblockDummy TEdummy = ((TEmultiblockDummy) te);
+		TileEntityMultiblockDummy TEdummy = ((TileEntityMultiblockDummy) te);
 		if (TEdummy.getState() == MultiblockState.COMPLETED) {
 			TileEntityMultiblockCore TEcore = (TileEntityMultiblockCore) TEdummy.getCore();
 			if (TEcore.getState() == MultiblockState.COMPLETED) {
@@ -88,21 +88,21 @@ public abstract class BLmultiblockDummy extends BlockContainer {
 		int dir = MathHelper.floor_double((double) ((entityLivingBase.rotationYaw * 4F) / 360F) + 0.5D) & 3;
 		world.setBlockMetadataWithNotify(x, y, z, dir, 0);
 		super.onBlockPlacedBy(world, x, y, z, entityLivingBase, itemStack);
-		if (((TEmultiblockDummy) world.getBlockTileEntity(x, y, z)).searchForCore()) {
-			((TEmultiblockDummy) world.getBlockTileEntity(x, y, z)).getCore().onLayoutChange();
+		if (((TileEntityMultiblockDummy) world.getBlockTileEntity(x, y, z)).searchForCore()) {
+			((TileEntityMultiblockDummy) world.getBlockTileEntity(x, y, z)).getCore().onLayoutChange();
 		}
 	}
 
     @Override
     public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
 		InventoryUtils.DropInventoryContents(world, x, y, z);
-		TileEntityMultiblockCore core = ((TEmultiblockDummy) world.getBlockTileEntity(x, y, z)).getCore();
-		((TEmultiblockDummy) world.getBlockTileEntity(x, y, z)).delCore();
+		TileEntityMultiblockCore core = ((TileEntityMultiblockDummy) world.getBlockTileEntity(x, y, z)).getCore();
+		((TileEntityMultiblockDummy) world.getBlockTileEntity(x, y, z)).delCore();		
 		world.destroyBlock(x, y, z, true);
+		super.breakBlock(world, x, y, z, par5, par6);
 		if (core != null){
 			core.onLayoutChange();
 		}
-    	super.breakBlock(world, x, y, z, par5, par6);
     }
 
 	@Override

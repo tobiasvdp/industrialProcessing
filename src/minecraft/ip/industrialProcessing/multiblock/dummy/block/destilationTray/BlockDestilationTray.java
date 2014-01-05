@@ -3,14 +3,14 @@ package ip.industrialProcessing.multiblock.dummy.block.destilationTray;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.multiblock.dummy.BLmultiblockDummy;
+import ip.industrialProcessing.multiblock.dummy.BlockMultiblockDummy;
 import ip.industrialProcessing.multiblock.dummy.block.tankPlating.TileEntityTankPlating;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
-public class BlockDestilationTray  extends BLmultiblockDummy{
+public class BlockDestilationTray  extends BlockMultiblockDummy{
 
     Icon[] icons = new Icon[3];
 	public BlockDestilationTray() {

@@ -3,12 +3,12 @@ package ip.industrialProcessing.multiblock.dummy.block.liftDoor;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.multiblock.dummy.BLmultiblockDummy;
+import ip.industrialProcessing.multiblock.dummy.BlockMultiblockDummy;
 import ip.industrialProcessing.multiblock.dummy.block.screen.TEmultiblockScreen;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class BLmultiblockLiftDoor extends BLmultiblockDummy{
+public class BLmultiblockLiftDoor extends BlockMultiblockDummy{
 
 	public BLmultiblockLiftDoor() {
 		super(ConfigMachineBlocks.getBLmultiblockLiftDoor(), "MultiblockLiftDoor", IndustrialProcessing.tabMultiblocks);

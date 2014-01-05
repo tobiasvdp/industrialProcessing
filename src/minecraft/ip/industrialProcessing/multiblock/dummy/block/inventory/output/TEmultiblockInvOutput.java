@@ -5,9 +5,9 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreInv;
-import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
+import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
 
-public class TEmultiblockInvOutput extends TEmultiblockDummy implements ISidedInventory{
+public class TEmultiblockInvOutput extends TileEntityMultiblockDummy implements ISidedInventory{
 
 	public TEmultiblockInvOutput() {
 		super();

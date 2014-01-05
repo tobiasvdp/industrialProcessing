@@ -1,8 +1,9 @@
 package ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.clausSulfurPlant;
 
 import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 
-public class RecipesClausSulfurPlant extends RecipesMachine {
+public class RecipesClausSulfurPlant extends RecipesMultiblock {
 	public RecipesClausSulfurPlant() {
 		addDefaultRecipes();
 	}

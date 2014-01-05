@@ -25,7 +25,7 @@ public class IPLogic implements ISetupLogic {
 
 	public static CreativeTabs tabLogic = new CreativeTabsIP(CreativeTabs.getNextID(), "tabLogic");
 
-	@SidedProxy(clientSide = "ip.industrialProcessing.logic.client.ClientProxy", serverSide = "ip.industrialProcessing.logic.CommonProxy")
+	@SidedProxy(clientSide = "ip.industrialProcessing.subMod.logic.client.ClientProxy", serverSide = "ip.industrialProcessing.subMod.logic.CommonProxy")
 	public static CommonProxy proxy;
 
 	@EventHandler

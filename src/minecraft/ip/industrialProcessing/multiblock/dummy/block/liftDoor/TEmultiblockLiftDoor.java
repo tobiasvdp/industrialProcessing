@@ -1,9 +1,9 @@
 package ip.industrialProcessing.multiblock.dummy.block.liftDoor;
 
 import ip.industrialProcessing.multiblock.core.block.elevator.TEmultiblockElevator;
-import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
+import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
 
-public class TEmultiblockLiftDoor extends TEmultiblockDummy {
+public class TEmultiblockLiftDoor extends TileEntityMultiblockDummy {
 	boolean init = true;
 	ENmultiblockLiftDoor door;
 

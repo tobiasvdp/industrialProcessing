@@ -11,7 +11,7 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.machines.crusher.RecipesCrusher;
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
-import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
+import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
 import ip.industrialProcessing.multiblock.dummy.block.frame.ENmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.TEmultiblockLiftDoor;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;

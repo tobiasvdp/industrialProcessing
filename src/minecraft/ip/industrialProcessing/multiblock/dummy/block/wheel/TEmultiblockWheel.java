@@ -3,10 +3,10 @@ package ip.industrialProcessing.multiblock.dummy.block.wheel;
 import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
 import ip.industrialProcessing.machines.animation.AnimationMode;
-import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
+import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 
-public class TEmultiblockWheel extends TEmultiblockDummy implements IAnimationProgress{
+public class TEmultiblockWheel extends TileEntityMultiblockDummy implements IAnimationProgress{
 	
 	public TEmultiblockWheel() {
 

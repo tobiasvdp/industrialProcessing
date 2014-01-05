@@ -7,11 +7,11 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigTransportBlocks;
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
-import ip.industrialProcessing.multiblock.dummy.BLmultiblockDummy;
-import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
+import ip.industrialProcessing.multiblock.dummy.BlockMultiblockDummy;
+import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 
-public class BLmultiblockToggleButton extends BLmultiblockDummy{
+public class BLmultiblockToggleButton extends BlockMultiblockDummy{
 
 	public BLmultiblockToggleButton() {
 		super(ConfigMachineBlocks.getBLmultiblockToggleButton(),"MultiblockToggleButton",IndustrialProcessing.tabMultiblocks);
@@ -27,7 +27,7 @@ public class BLmultiblockToggleButton extends BLmultiblockDummy{
 		TileEntity te = world.getBlockTileEntity(x, y, z);
 		if (player.isSneaking() || te == null)
 			return false;
-		TEmultiblockDummy TEdummy = ((TEmultiblockDummy) te);
+		TileEntityMultiblockDummy TEdummy = ((TileEntityMultiblockDummy) te);
 		if (TEdummy.getState() == MultiblockState.COMPLETED) {
 			player.openGui(IndustrialProcessing.instance, 0, world, x, y, z);
 		}

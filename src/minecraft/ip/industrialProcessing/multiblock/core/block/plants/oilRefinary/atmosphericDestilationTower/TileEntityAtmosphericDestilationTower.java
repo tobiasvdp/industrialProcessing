@@ -12,6 +12,7 @@ import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
 import ip.industrialProcessing.multiblock.layout.LayoutTransformer;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
+import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.multiblock.tier.Tier;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
@@ -19,7 +20,7 @@ import ip.industrialProcessing.multiblock.tier.Tiers;
 public class TileEntityAtmosphericDestilationTower extends TileEntityMultiblockCoreTankWorkerPowered {
 	private static StructureMultiblock structure;
 	private static TierCollection tierRequirments;
-	private static RecipesAtmosphericDestilationTower recipes = new RecipesAtmosphericDestilationTower();
+	private static RecipesMultiblock recipes = new RecipesAtmosphericDestilationTower();
 
 	static {
 		// set layout
@@ -76,7 +77,7 @@ public class TileEntityAtmosphericDestilationTower extends TileEntityMultiblockC
 			FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(new ItemStack(itemID, 1, 0));
 			if (fluid == null)
 				return false;
-			return recipes.isValidFluidInput(0, fluid.fluidID);
+			return recipes.isValidFluidInput(0, fluid.fluidID,getTier());
 		}
 		return false;
 	}
@@ -84,10 +85,10 @@ public class TileEntityAtmosphericDestilationTower extends TileEntityMultiblockC
 	@Override
 	protected boolean isTankValidForFluid(int groupid, int slot, int fluidId) {
 		if(groupid == -1)
-			return recipes.isValidFluidInput(slot, fluidId);
+			return recipes.isValidFluidInput(slot, fluidId,getTier());
 		else{
 			if(getTankInSlot(slot).getMultiblockID() == groupid){
-				return recipes.isValidFluidInput(slot, fluidId);
+				return recipes.isValidFluidInput(slot, fluidId,getTier());
 			}else{
 				return false;
 			}

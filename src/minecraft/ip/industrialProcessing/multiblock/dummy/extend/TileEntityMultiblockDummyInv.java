@@ -6,9 +6,9 @@ import net.minecraft.item.ItemStack;
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreInv;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTank;
-import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
+import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
 
-public class TileEntityMultiblockDummyInv extends TEmultiblockDummy implements ISidedInventory{
+public class TileEntityMultiblockDummyInv extends TileEntityMultiblockDummy implements ISidedInventory{
 
 	@Override
 	public TileEntityMultiblockCoreInv getCore() {

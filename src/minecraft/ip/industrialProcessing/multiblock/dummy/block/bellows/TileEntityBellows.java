@@ -1,8 +1,8 @@
 package ip.industrialProcessing.multiblock.dummy.block.bellows;
 
-import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
+import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
 
-public class TileEntityBellows extends TEmultiblockDummy {
+public class TileEntityBellows extends TileEntityMultiblockDummy {
 	public TileEntityBellows() {
 		super();
 	}

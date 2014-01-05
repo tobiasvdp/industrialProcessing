@@ -1,8 +1,9 @@
 package ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.fluidCatalyticCracker;
 
 import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 
-public class RecipesFluidCatalyticCracker extends RecipesMachine {
+public class RecipesFluidCatalyticCracker extends RecipesMultiblock {
 	public RecipesFluidCatalyticCracker() {
 		addDefaultRecipes();
 	}

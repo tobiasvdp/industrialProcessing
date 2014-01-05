@@ -1,7 +1,7 @@
 package ip.industrialProcessing.multiblock.core;
 
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
+import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 import ip.industrialProcessing.utils.inventories.InventoryUtils;

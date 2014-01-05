@@ -7,6 +7,7 @@ import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
 import ip.industrialProcessing.multiblock.layout.LayoutTransformer;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
+import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.multiblock.tier.Tier;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
@@ -14,7 +15,7 @@ import ip.industrialProcessing.multiblock.tier.Tiers;
 public class TileEntityAmineTreater extends TileEntityMultiblockCoreTankWorkerPowered  {
 	private static StructureMultiblock structure;
 	private static TierCollection tierRequirments;
-	private static RecipesAmineTreater recipes = new RecipesAmineTreater();
+	private static RecipesMultiblock recipes = new RecipesAmineTreater();
 	
 	static {
 		// set layout

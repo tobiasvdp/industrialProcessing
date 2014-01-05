@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import ip.industrialProcessing.machines.MachineItemStack;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
-import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
+import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
 import ip.industrialProcessing.multiblock.tier.Tiers;
@@ -26,7 +26,7 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 	private StructureMultiblock structure;
 	private TierCollection tierRequirments;
 
-	private ArrayList<TEmultiblockDummy> dummy = new ArrayList<TEmultiblockDummy>();
+	private ArrayList<TileEntityMultiblockDummy> dummy = new ArrayList<TileEntityMultiblockDummy>();
 	private boolean loadedFromNBT;
 	private int[][] dummyDataFromNBT;
 	protected FacingDirection side = FacingDirection.North;
@@ -77,10 +77,10 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 		writeCore(nbt);
 	}
 
-	public ArrayList<TEmultiblockDummy> getDummies() {
+	public ArrayList<TileEntityMultiblockDummy> getDummies() {
 		if (loadedFromNBT) {
 			for (int[] coord : dummyDataFromNBT) {
-				dummy.add((TEmultiblockDummy) worldObj.getBlockTileEntity(coord[0], coord[1], coord[2]));
+				dummy.add((TileEntityMultiblockDummy) worldObj.getBlockTileEntity(coord[0], coord[1], coord[2]));
 			}
 			loadedFromNBT = false;
 		}
@@ -113,7 +113,7 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 		nbtComp = new NBTTagCompound();
 		NBTTagList nbttaglistDummies = new NBTTagList();
 		System.out.println("writing dummies");
-		for (TEmultiblockDummy te : getDummies()) {
+		for (TileEntityMultiblockDummy te : getDummies()) {
 			if (te != null) {
 				NBTTagList nbttaglistDummie = new NBTTagList();
 				nbttaglistDummie.setName("dummy" + te.getID());
@@ -214,15 +214,15 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 		this.tierRequirments = tierRequirments;
 	}
 
-	public void registerDummy(TEmultiblockDummy te) {
+	public void registerDummy(TileEntityMultiblockDummy te) {
 		getDummies().add(te);
 	}
 
-	public void unregisterDummy(TEmultiblockDummy temultiblockDummy) {
+	public void unregisterDummy(TileEntityMultiblockDummy temultiblockDummy) {
 		getDummies().remove(temultiblockDummy);
 	}
 
-	public boolean isDummyValidForStructure(TEmultiblockDummy te) {
+	public boolean isDummyValidForStructure(TileEntityMultiblockDummy te) {
 		/*
 		 * check if the new placed block is valid, if not try other directions.
 		 * If direction is changed, take necessary actions
@@ -242,22 +242,22 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 	public void checkIfRegisteredDummiesAreValid() {
 		// first determinate what to delete. If you delete while running trough
 		// your loop, you will mess sh* up.
-		ArrayList<TEmultiblockDummy> dummiesToBeEreased = new ArrayList<TEmultiblockDummy>();
-		for (TEmultiblockDummy te : getDummies()) {
+		ArrayList<TileEntityMultiblockDummy> dummiesToBeEreased = new ArrayList<TileEntityMultiblockDummy>();
+		for (TileEntityMultiblockDummy te : getDummies()) {
 			if (te != null) {
 				FacingDirection dir = structure.isBlockValid(te.xCoord - xCoord, te.yCoord - yCoord, te.zCoord - zCoord, te.worldObj.getBlockId(te.xCoord, te.yCoord, te.zCoord), side, true);
 				if (dir == FacingDirection.Invalid)
 					dummiesToBeEreased.add(te);
 			}
 		}
-		for (TEmultiblockDummy te : dummiesToBeEreased) {
+		for (TileEntityMultiblockDummy te : dummiesToBeEreased) {
 			te.delCore();
 		}
 	}
 
 	public void destroyMultiblock() {
-		ArrayList<TEmultiblockDummy> list = (ArrayList<TEmultiblockDummy>) getDummies().clone();
-		for (TEmultiblockDummy te : list) {
+		ArrayList<TileEntityMultiblockDummy> list = (ArrayList<TileEntityMultiblockDummy>) getDummies().clone();
+		for (TileEntityMultiblockDummy te : list) {
 			if (te != null)
 				worldObj.destroyBlock(te.xCoord, te.yCoord, te.zCoord, true);
 		}
@@ -265,7 +265,7 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 
 	public void onStateChange() {
 		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-		for (TEmultiblockDummy te : getDummies()) {
+		for (TileEntityMultiblockDummy te : getDummies()) {
 			if (te != null)
 				te.setState(state);
 		}
@@ -293,6 +293,7 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 	}
 
 	public void onTierChange() {
+		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		configMultiblock();
 	}
 
@@ -337,7 +338,7 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 			}
 			}
 			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, metadata, 1);
-			for (TEmultiblockDummy te : getDummies()) {
+			for (TileEntityMultiblockDummy te : getDummies()) {
 				if (te != null)
 					worldObj.setBlockMetadataWithNotify(te.xCoord, te.yCoord, te.zCoord, metadata, 1);
 			}
@@ -352,8 +353,8 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 	public void notifyNeighboursOfCorePlaced() {
 		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
 			TileEntity neighbour = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
-			if (neighbour instanceof TEmultiblockDummy) {
-				TEmultiblockDummy te = (TEmultiblockDummy) neighbour;
+			if (neighbour instanceof TileEntityMultiblockDummy) {
+				TileEntityMultiblockDummy te = (TileEntityMultiblockDummy) neighbour;
 				if (te.getCore() == null)
 					te.searchForCore();
 			}
@@ -376,34 +377,34 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 		modelConnection = structure.getModelConnectionforBlock(0, 0, 0, side);
 	}
 
-	public int setDummieModelID(TEmultiblockDummy te) {
+	public int setDummieModelID(TileEntityMultiblockDummy te) {
 		return structure.getModelIDforBlock(te.xCoord - xCoord, te.yCoord - yCoord, te.zCoord - zCoord, side);
 	}
 
-	public int setDummieModelConnection(TEmultiblockDummy te) {
+	public int setDummieModelConnection(TileEntityMultiblockDummy te) {
 		return structure.getModelConnectionforBlock(te.xCoord - xCoord, te.yCoord - yCoord, te.zCoord - zCoord, side);
 	}
 
-	public int setDummieGroupID(TEmultiblockDummy te) {
+	public int setDummieGroupID(TileEntityMultiblockDummy te) {
 		return structure.getGroupIDforBlock(te.xCoord - xCoord, te.yCoord - yCoord, te.zCoord - zCoord, side);
 	}
 
 	public void setDummiesModelIDs() {
-		for (TEmultiblockDummy te : getDummies()) {
+		for (TileEntityMultiblockDummy te : getDummies()) {
 			if (te != null)
 				te.setModelID(structure.getModelIDforBlock(te.xCoord - xCoord, te.yCoord - yCoord, te.zCoord - zCoord, side));
 		}
 	}
 
 	public void setDummiesModelConnections() {
-		for (TEmultiblockDummy te : getDummies()) {
+		for (TileEntityMultiblockDummy te : getDummies()) {
 			if (te != null)
 				te.setModelConnection(structure.getModelConnectionforBlock(te.xCoord - xCoord, te.yCoord - yCoord, te.zCoord - zCoord, side));
 		}
 	}
 
 	public void setDummiesGroupIDs() {
-		for (TEmultiblockDummy te : getDummies()) {
+		for (TileEntityMultiblockDummy te : getDummies()) {
 			if (te != null)
 				te.setGroup(structure.getGroupIDforBlock(te.xCoord - xCoord, te.yCoord - yCoord, te.zCoord - zCoord, side));
 		}
@@ -444,12 +445,12 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 		return tier;
 	}
 
-	public int setDummieID(TEmultiblockDummy te) {
+	public int setDummieID(TileEntityMultiblockDummy te) {
 		return structure.getIDforBlock(te.xCoord - xCoord, te.yCoord - yCoord, te.zCoord - zCoord, side);
 	}
 
-	public TEmultiblockDummy getDummyByID(int ID) {
-		for (TEmultiblockDummy te : getDummies()) {
+	public TileEntityMultiblockDummy getDummyByID(int ID) {
+		for (TileEntityMultiblockDummy te : getDummies()) {
 			if (te != null) {
 				if (te.getID() == ID) {
 					return te;
@@ -459,7 +460,7 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 		return null;
 	}
 
-	public boolean isDummyValidForStructure(TEmultiblockDummy te, boolean b) {
+	public boolean isDummyValidForStructure(TileEntityMultiblockDummy te, boolean b) {
 		/*
 		 * check if the new placed block is valid. This does not change
 		 * directions.

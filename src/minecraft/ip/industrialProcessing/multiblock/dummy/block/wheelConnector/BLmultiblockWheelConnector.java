@@ -6,9 +6,9 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.multiblock.dummy.BLmultiblockDummy;
+import ip.industrialProcessing.multiblock.dummy.BlockMultiblockDummy;
 
-public class BLmultiblockWheelConnector extends BLmultiblockDummy {
+public class BLmultiblockWheelConnector extends BlockMultiblockDummy {
 
 	public BLmultiblockWheelConnector() {
 		super(ConfigMachineBlocks.getBLmultiblockWheelConnector(), "BLmultiblockWheelConnector", IndustrialProcessing.tabMultiblocks);

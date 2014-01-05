@@ -13,6 +13,8 @@ import ip.industrialProcessing.machines.animation.AnimationMode;
 import ip.industrialProcessing.machines.animation.IAnimationSyncable;
 import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
+import ip.industrialProcessing.multiblock.recipes.IRecipeMultiblockFluidWorkHandler;
+import ip.industrialProcessing.multiblock.recipes.RecipeMultiblock;
 import ip.industrialProcessing.multiblock.recipes.RecipeMultiblockFluidWorker;
 import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
@@ -24,7 +26,7 @@ import ip.industrialProcessing.utils.working.IWorker;
 import ip.industrialProcessing.utils.working.ServerWorker;
 import ip.industrialProcessing.utils.working.WorkUtils;
 
-public abstract class TileEntityMultiblockCoreTankWorker extends TileEntityMultiblockCoreTank implements IRecipeFluidWorkHandler, IAnimationProgress, IAnimationSyncable {
+public abstract class TileEntityMultiblockCoreTankWorker extends TileEntityMultiblockCoreTank implements IRecipeMultiblockFluidWorkHandler, IAnimationProgress, IAnimationSyncable {
 
     public TileEntityMultiblockCoreTankWorker(StructureMultiblock structure, TierCollection tierRequirments, RecipesMultiblock recipes) {
 	super(structure, tierRequirments, recipes);
@@ -48,7 +50,7 @@ public abstract class TileEntityMultiblockCoreTankWorker extends TileEntityMulti
     private AnimationHandler animationHandler;
 
     @Override
-    public Iterator<Recipe> iterateRecipes() {
+    public Iterator<RecipeMultiblock> iterateRecipes() {
 	return recipe.iterator();
     }
 

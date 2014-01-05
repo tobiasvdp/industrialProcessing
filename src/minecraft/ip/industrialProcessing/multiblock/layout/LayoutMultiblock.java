@@ -3,7 +3,7 @@ package ip.industrialProcessing.multiblock.layout;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
-import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
+import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
 
 public class LayoutMultiblock {
 
@@ -89,8 +89,8 @@ public class LayoutMultiblock {
 							return false;
 						}
 						TileEntity te = world.getBlockTileEntity(xBlock, yBlock, zBlock);
-						if (te instanceof TEmultiblockDummy) {
-							TileEntityMultiblockCore teCore = ((TEmultiblockDummy) te).getCore();
+						if (te instanceof TileEntityMultiblockDummy) {
+							TileEntityMultiblockCore teCore = ((TileEntityMultiblockDummy) te).getCore();
 							if (teCore == null)
 								return false;
 							if (teCore != world.getBlockTileEntity(xCore, yCore, zCore))

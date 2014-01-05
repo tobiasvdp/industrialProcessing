@@ -8,6 +8,7 @@ import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
 import ip.industrialProcessing.multiblock.layout.LayoutTransformer;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
+import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.multiblock.tier.Tier;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
@@ -15,7 +16,7 @@ import ip.industrialProcessing.multiblock.tier.Tiers;
 public class TileEntityMeroxTreater extends TileEntityMultiblockCoreTankWorkerPowered  {
 	private static StructureMultiblock structure;
 	private static TierCollection tierRequirments;
-	private static RecipesMeroxTreater recipes = new RecipesMeroxTreater();
+	private static RecipesMultiblock recipes = new RecipesMeroxTreater();
 	static {
 		// set layout
 		structure = new StructureMultiblock();
@@ -46,7 +47,7 @@ public class TileEntityMeroxTreater extends TileEntityMultiblockCoreTankWorkerPo
 
 	@Override
 	protected boolean isTankValidForFluid(int groupid, int slot, int fluidId) {
-		return recipes.isValidFluidInput(slot, fluidId);
+		return recipes.isValidFluidInput(slot, fluidId,getTier());
 	}
 
 	@Override

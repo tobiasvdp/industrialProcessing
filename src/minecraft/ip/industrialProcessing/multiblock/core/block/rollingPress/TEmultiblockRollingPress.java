@@ -11,6 +11,7 @@ import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
 import ip.industrialProcessing.multiblock.layout.LayoutTransformer;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
+import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.multiblock.tier.Tier;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
@@ -19,7 +20,7 @@ import ip.industrialProcessing.multiblock.utils.MultiblockActionType;
 public class TEmultiblockRollingPress extends TileEntityMultiblockCoreInv {
 	static StructureMultiblock structure;
 	static TierCollection tierRequirments;
-	static RecipesMachine recipes = new RecipesCrusher();
+	static RecipesMultiblock recipes = null;
 	static{
 		//set layout
 		structure = new StructureMultiblock();

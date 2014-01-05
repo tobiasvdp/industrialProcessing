@@ -10,9 +10,11 @@ import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.multiblock.core.BlockMultiblockCore;
+import ip.industrialProcessing.multiblock.recipes.IRecipeMultiblock;
+import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 
-public class BLmultiblockBlastFurnace extends BlockMultiblockCore implements IRecipeBlock{
+public class BLmultiblockBlastFurnace extends BlockMultiblockCore implements IRecipeMultiblock{
     Icon[] icons = new Icon[6];
 
     public BLmultiblockBlastFurnace() {
@@ -45,7 +47,7 @@ public class BLmultiblockBlastFurnace extends BlockMultiblockCore implements IRe
     }
 
 	@Override
-	public RecipesMachine getRecipes() {
+	public RecipesMultiblock getRecipes() {
 		return TEmultiblockBlastFurnace.recipes;
 	}
 }

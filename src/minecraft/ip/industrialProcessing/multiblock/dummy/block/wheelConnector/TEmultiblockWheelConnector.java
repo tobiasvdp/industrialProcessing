@@ -1,10 +1,10 @@
 package ip.industrialProcessing.multiblock.dummy.block.wheelConnector;
 
 import ip.industrialProcessing.client.render.IAnimationProgress;
-import ip.industrialProcessing.multiblock.dummy.TEmultiblockDummy;
+import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 
-public class TEmultiblockWheelConnector extends TEmultiblockDummy implements IAnimationProgress {
+public class TEmultiblockWheelConnector extends TileEntityMultiblockDummy implements IAnimationProgress {
 
 	public TEmultiblockWheelConnector() {
 		super();

@@ -7,9 +7,9 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.multiblock.dummy.BLmultiblockDummy;
+import ip.industrialProcessing.multiblock.dummy.BlockMultiblockDummy;
 
-public class BLmultiblockBlastFurnaceTower extends BLmultiblockDummy {
+public class BLmultiblockBlastFurnaceTower extends BlockMultiblockDummy {
     Icon[] icons = new Icon[5];
     
     public BLmultiblockBlastFurnaceTower() {

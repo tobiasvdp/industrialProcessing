@@ -119,7 +119,7 @@ public class TEmultiblockWeldingStation extends TileEntityMultiblockCoreTankWork
 		if (slot == 14) {
 			return HeatStorage.onIsValidInput(itemID);
 		}
-		return recipes.isValidInput(slot, itemID);
+		return recipes.isValidInput(slot, itemID,getTier());
 	}
 
 	@Override

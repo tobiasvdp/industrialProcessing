@@ -7,6 +7,8 @@ import ip.industrialProcessing.machines.animation.AnimationMode;
 import ip.industrialProcessing.machines.animation.IAnimationSyncable;
 import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
+import ip.industrialProcessing.multiblock.recipes.IRecipeMultiblockWorkHandler;
+import ip.industrialProcessing.multiblock.recipes.RecipeMultiblock;
 import ip.industrialProcessing.multiblock.recipes.RecipeMultiblockWorker;
 import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
@@ -25,7 +27,7 @@ import java.util.Iterator;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-public abstract class TileEntityMultiblockCoreInvWorker extends TileEntityMultiblockCoreInv implements IRecipeWorkHandler, IAnimationProgress, IAnimationSyncable {
+public abstract class TileEntityMultiblockCoreInvWorker extends TileEntityMultiblockCoreInv implements IRecipeMultiblockWorkHandler, IAnimationProgress, IAnimationSyncable {
 
     public TileEntityMultiblockCoreInvWorker(StructureMultiblock structure, TierCollection tierRequirments, RecipesMultiblock recipes) {
 	super(structure, tierRequirments, recipes);
@@ -40,7 +42,7 @@ public abstract class TileEntityMultiblockCoreInvWorker extends TileEntityMultib
     }
 
     protected ServerWorker createServerSideWorker() {
-	return new RecipeMultiblockWorker(this);
+    	return new RecipeMultiblockWorker(this);
     }
 
     private RecipesMultiblock recipe;
@@ -49,8 +51,8 @@ public abstract class TileEntityMultiblockCoreInvWorker extends TileEntityMultib
     private AnimationHandler animationHandler;
 
     @Override
-    public Iterator<Recipe> iterateRecipes() {
-	return recipe.iterator();
+    public Iterator<RecipeMultiblock> iterateRecipes() {
+    	return recipe.iterator();
     }
 
     public IWorker getWorker() {

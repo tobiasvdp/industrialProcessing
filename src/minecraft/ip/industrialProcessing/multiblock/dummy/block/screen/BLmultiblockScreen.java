@@ -5,9 +5,9 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.multiblock.dummy.BLmultiblockDummy;
+import ip.industrialProcessing.multiblock.dummy.BlockMultiblockDummy;
 
-public class BLmultiblockScreen extends BLmultiblockDummy{
+public class BLmultiblockScreen extends BlockMultiblockDummy{
 
 	public BLmultiblockScreen() {
 		super(ConfigMachineBlocks.getBLmultiblockScreen(), "MultiblockScreen", IndustrialProcessing.tabMultiblocks);
