@@ -40,12 +40,12 @@ public class GuiContainerWeldingStation extends GUImultiblock {
 	private static final IPButton BUTTON_WELDING = new IPButton(176, 108, 21, 28);
 	private static final IPButton BUTTON_SOLDERING = new IPButton(176, 137, 21, 28);
 
-	private TEmultiblockWeldingStation te;
+	private TileEntityMultiblockWeldingStation te;
 	private EntityPlayer player;
 
 	public GuiContainerWeldingStation(EntityPlayer player, TileEntityMultiblockCoreTankWorkerPowered entity) {
 		super(player.inventory, entity, new ContainerWeldingStation(player, entity), "Welding Table", "textures/gui/WeldingTable.png");
-		te = (TEmultiblockWeldingStation) entity;
+		te = (TileEntityMultiblockWeldingStation) entity;
 		this.player = player;
 	}
 

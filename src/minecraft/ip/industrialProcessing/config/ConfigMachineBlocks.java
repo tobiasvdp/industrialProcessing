@@ -64,7 +64,7 @@ import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.meroxTre
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.vacuumDestilationTower.TileEntityVacuumDestilationTower;
 import ip.industrialProcessing.multiblock.core.block.plants.storage.container.TileEntityContainer;
 import ip.industrialProcessing.multiblock.core.block.rollingPress.TEmultiblockRollingPress;
-import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
+import ip.industrialProcessing.multiblock.core.block.weldingStation.TileEntityMultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.dummy.block.bellows.TileEntityBellows;
 import ip.industrialProcessing.multiblock.dummy.block.blastFurnaceTower.TEmultiblockBlastFurnaceTower;
 import ip.industrialProcessing.multiblock.dummy.block.containerWall.TileEntityContainerWall;
@@ -75,10 +75,10 @@ import ip.industrialProcessing.multiblock.dummy.block.inventory.input.TEmultiblo
 import ip.industrialProcessing.multiblock.dummy.block.inventory.output.TEmultiblockInvOutput;
 import ip.industrialProcessing.multiblock.dummy.block.ironBowl.TileEntityIronBowl;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.TEmultiblockLiftDoor;
-import ip.industrialProcessing.multiblock.dummy.block.screen.TEmultiblockScreen;
+import ip.industrialProcessing.multiblock.dummy.block.screen.TileEntityScreen;
 import ip.industrialProcessing.multiblock.dummy.block.tankPlating.TileEntityTankPlating;
 import ip.industrialProcessing.multiblock.dummy.block.toggleButton.TEmultiblockToggleButton;
-import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.TEmultiblockWeldingTableExt;
+import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.TileEntityMultiblockWeldingTable;
 import ip.industrialProcessing.multiblock.dummy.block.wheel.TEmultiblockWheel;
 import ip.industrialProcessing.multiblock.dummy.block.wheelConnector.TEmultiblockWheelConnector;
 import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
@@ -285,11 +285,11 @@ public class ConfigMachineBlocks {
         registerMachineBlock(ISetupMachineBlocks.BLmultiblockToggleButton2, "IP.MBD.Toggle2", "Lift call button", TEmultiblockToggleButton.class);
         registerMachineBlock(ISetupMachineBlocks.BLmultiblockInvInput, "IP.MBD.InvInput", "Item input", TEmultiblockInvInput.class);
         registerMachineBlock(ISetupMachineBlocks.BLmultiblockInvOutput, "IP.MBD.InvOutput", "Item output", TEmultiblockInvOutput.class);
-        registerMachineBlock(ISetupMachineBlocks.BLmultiblockScreen, "IP.MBD.Screen", "Screen", TEmultiblockScreen.class);
+        registerMachineBlock(ISetupMachineBlocks.BLmultiblockScreen, "IP.MBD.Screen", "Screen", TileEntityScreen.class);
         registerMachineBlock(ISetupMachineBlocks.BLmultiblockFrame, "IP.MBD.Frame", "Frame", TEmultiblockFrame.class);
         registerMachineBlock(ISetupMachineBlocks.BLmultiblockHotPress, "IP.MBC.HotPress", "Hot press", TEmultiblockHotPress.class);
-        registerMachineBlock(ISetupMachineBlocks.BLmultiblockWeldingStation, "IP.MBC.WeldingStation", "Welding station", TEmultiblockWeldingStation.class);
-        registerMachineBlock(ISetupMachineBlocks.BLmultiblockWeldingTableExt, "IP.MBD.WeldingTableExt", "Welding table", TEmultiblockWeldingTableExt.class);
+        registerMachineBlock(ISetupMachineBlocks.BLmultiblockWeldingStation, "IP.MBC.WeldingStation", "Welding station", TileEntityMultiblockWeldingStation.class);
+        registerMachineBlock(ISetupMachineBlocks.BLmultiblockWeldingTableExt, "IP.MBD.WeldingTableExt", "Welding table", TileEntityMultiblockWeldingTable.class);
         registerMachineBlock(ISetupMachineBlocks.BLmultiblockWheel, "IP.MBD.Wheel", "Rolling wheel", TEmultiblockWheel.class);
         registerMachineBlock(ISetupMachineBlocks.BLmultiblockRollingPress, "IP.MBC.RollingPress", "Rolling press", TEmultiblockRollingPress.class);
 

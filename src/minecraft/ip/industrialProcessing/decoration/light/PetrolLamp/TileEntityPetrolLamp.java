@@ -9,6 +9,7 @@ public class TileEntityPetrolLamp extends TileEntityMachine {
 
 	private int burnTime;
 	public boolean lightChanged = true;
+	public boolean count = true;
 	
 	public int getBurnTime() {
 		return burnTime;
@@ -23,7 +24,7 @@ public class TileEntityPetrolLamp extends TileEntityMachine {
 
 	@Override
 	public void updateEntity() {
-		if (burnTime > 0)
+		if (burnTime > 0 && count)
 			burnTime--;
 		super.updateEntity();
 	}
@@ -49,6 +50,7 @@ public class TileEntityPetrolLamp extends TileEntityMachine {
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		burnTime = nbt.getInteger("burnTime");
+		count = nbt.getBoolean("count");
 		lightChanged = true;
 		super.readFromNBT(nbt);
 	}
@@ -56,6 +58,7 @@ public class TileEntityPetrolLamp extends TileEntityMachine {
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
 		nbt.setInteger("burnTime", burnTime);
+		nbt.setBoolean("count", count);
 		super.writeToNBT(nbt);
 	}
 

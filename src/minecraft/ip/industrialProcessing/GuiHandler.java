@@ -154,7 +154,7 @@ import ip.industrialProcessing.multiblock.core.block.weldingStation.ContainerSol
 import ip.industrialProcessing.multiblock.core.block.weldingStation.ContainerWeldingStation;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.GuiContainerSolderingIron;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.GuiContainerWeldingStation;
-import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
+import ip.industrialProcessing.multiblock.core.block.weldingStation.TileEntityMultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.dummy.block.toggleButton.GUImultiblockToggleButton;
 import ip.industrialProcessing.multiblock.dummy.block.toggleButton.TEmultiblockToggleButton;
 import ip.industrialProcessing.power.buildcraftGenerator.ContainerBuildcraftGenerator;
@@ -227,8 +227,8 @@ public class GuiHandler implements IGuiHandler {
 				return new ContainerBoiler(player.inventory, (TileEntityBoiler) entity);
 			if (entity instanceof TileEntityTurbine)
 				return new ContainerTurbine(player.inventory, (TileEntityTurbine) entity);
-			if (entity instanceof TEmultiblockWeldingStation)
-				return new ContainerWeldingStation(player, (TEmultiblockWeldingStation) entity);
+			if (entity instanceof TileEntityMultiblockWeldingStation)
+				return new ContainerWeldingStation(player, (TileEntityMultiblockWeldingStation) entity);
 			if (entity instanceof TileEntityIncubator)
 				return new ContainerIncubator(player.inventory, (TileEntityIncubator) entity);
 			if (entity instanceof TileEntityWaterTreatmentStation)
@@ -306,7 +306,7 @@ public class GuiHandler implements IGuiHandler {
 		} else if (ID == GUIDE_ID) {
 			return null;
 		} else if (ID == SOLDERINGIRON_ID) {
-			return new ContainerSolderingIron(player, (TEmultiblockWeldingStation)entity);
+			return new ContainerSolderingIron(player, (TileEntityMultiblockWeldingStation)entity);
 		} else if (ID == ANVIL_ID) {
 			return new ContainerAnvil(player.inventory, world, x, y, z);
 		}
@@ -354,8 +354,8 @@ public class GuiHandler implements IGuiHandler {
 				return new GuiContainerBoiler(player.inventory, (TileEntityBoiler) entity);
 			if (entity instanceof TileEntityTurbine)
 				return new GuiContainerTurbine(player.inventory, (TileEntityTurbine) entity);
-			if (entity instanceof TEmultiblockWeldingStation)
-				return new GuiContainerWeldingStation(player, (TEmultiblockWeldingStation) entity);
+			if (entity instanceof TileEntityMultiblockWeldingStation)
+				return new GuiContainerWeldingStation(player, (TileEntityMultiblockWeldingStation) entity);
 			if (entity instanceof TEmultiblockToggleButton)
 				return new GUImultiblockToggleButton((TEmultiblockToggleButton) entity, player);
 			if (entity instanceof TileEntityIncubator)
@@ -435,7 +435,7 @@ public class GuiHandler implements IGuiHandler {
 		} else if (ID == GUIDE_ID) {
 			return new GuiGuide(player);
 		} else if (ID == SOLDERINGIRON_ID) {
-			return new GuiContainerSolderingIron(player, (TEmultiblockWeldingStation)entity);
+			return new GuiContainerSolderingIron(player, (TileEntityMultiblockWeldingStation)entity);
 		} else if (ID == ANVIL_ID) {
 			return new GuiContainerAnvil(player.inventory, world, x, y, z);
 		}

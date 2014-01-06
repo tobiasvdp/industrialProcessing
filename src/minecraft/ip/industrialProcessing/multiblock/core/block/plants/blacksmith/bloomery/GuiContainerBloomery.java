@@ -1,7 +1,7 @@
 package ip.industrialProcessing.multiblock.core.block.plants.blacksmith.bloomery;
 
 import ip.industrialProcessing.multiblock.core.block.weldingStation.ContainerWeldingStation;
-import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
+import ip.industrialProcessing.multiblock.core.block.weldingStation.TileEntityMultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorker;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.multiblock.gui.GUImultiblock;

@@ -39,12 +39,12 @@ public class GuiContainerSolderingIron extends GUImultiblock {
 	private static final IPButton BUTTON_SOLDERING = new IPButton(176,137,21,28);
 	
 
-	private TEmultiblockWeldingStation te;
+	private TileEntityMultiblockWeldingStation te;
 	private EntityPlayer player;
 
 	public GuiContainerSolderingIron(EntityPlayer player, TileEntityMultiblockCoreTankWorkerPowered entity) {
 		super(player.inventory, entity, new ContainerSolderingIron(player, entity), "Welding Table", "textures/gui/SolderingIron.png");
-		te = (TEmultiblockWeldingStation) entity;
+		te = (TileEntityMultiblockWeldingStation) entity;
 		this.player = player;
 	}
 

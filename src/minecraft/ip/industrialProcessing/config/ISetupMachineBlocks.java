@@ -56,7 +56,7 @@ import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.meroxTre
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.vacuumDestilationTower.BlockVacuumDestilationTower;
 import ip.industrialProcessing.multiblock.core.block.plants.storage.container.BlockContainer;
 import ip.industrialProcessing.multiblock.core.block.rollingPress.BLmultiblockRollingPress;
-import ip.industrialProcessing.multiblock.core.block.weldingStation.BLmultiblockWeldingStation;
+import ip.industrialProcessing.multiblock.core.block.weldingStation.BlockMultiblockWeldingStation;
 import ip.industrialProcessing.multiblock.dummy.block.bellows.BlockBellows;
 import ip.industrialProcessing.multiblock.dummy.block.blastFurnaceTower.BLmultiblockBlastFurnaceTower;
 import ip.industrialProcessing.multiblock.dummy.block.containerWall.BlockContainerWall;
@@ -67,11 +67,11 @@ import ip.industrialProcessing.multiblock.dummy.block.inventory.input.BLmultiblo
 import ip.industrialProcessing.multiblock.dummy.block.inventory.output.BLmultiblockInvOutput;
 import ip.industrialProcessing.multiblock.dummy.block.ironBowl.BlockIronBowl;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.BLmultiblockLiftDoor;
-import ip.industrialProcessing.multiblock.dummy.block.screen.BLmultiblockScreen;
+import ip.industrialProcessing.multiblock.dummy.block.screen.BlockScreen;
 import ip.industrialProcessing.multiblock.dummy.block.tankPlating.BlockTankPlating;
 import ip.industrialProcessing.multiblock.dummy.block.toggleButton.BLmultiblockToggleButton;
 import ip.industrialProcessing.multiblock.dummy.block.toggleButton.BLmultiblockToggleButton2;
-import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.BLmultiblockWeldingTableExt;
+import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.BlockMultiblockWeldingTable;
 import ip.industrialProcessing.multiblock.dummy.block.wheel.BLmultiblockWheel;
 import ip.industrialProcessing.multiblock.dummy.block.wheelConnector.BLmultiblockWheelConnector;
 import ip.industrialProcessing.power.buildcraftGenerator.BlockBuildcraftGenerator;
@@ -178,9 +178,9 @@ public interface ISetupMachineBlocks {
     // multiblocks
     public final static BLmultiblockFrame BLmultiblockFrame = new BLmultiblockFrame();
     public final static BLmultiblockHotPress BLmultiblockHotPress = new BLmultiblockHotPress();
-    public final static BLmultiblockWeldingStation BLmultiblockWeldingStation = new BLmultiblockWeldingStation();
-    public final static BLmultiblockScreen BLmultiblockScreen = new BLmultiblockScreen();
-    public final static BLmultiblockWeldingTableExt BLmultiblockWeldingTableExt = new BLmultiblockWeldingTableExt();
+    public final static BlockMultiblockWeldingStation BLmultiblockWeldingStation = new BlockMultiblockWeldingStation();
+    public final static BlockScreen BLmultiblockScreen = new BlockScreen();
+    public final static BlockMultiblockWeldingTable BLmultiblockWeldingTableExt = new BlockMultiblockWeldingTable();
     public final static BLmultiblockInvInput BLmultiblockInvInput = new BLmultiblockInvInput();
     public final static BLmultiblockInvOutput BLmultiblockInvOutput = new BLmultiblockInvOutput();
     public final static BLmultiblockToggleButton BLmultiblockToggleButton = new BLmultiblockToggleButton();

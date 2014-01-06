@@ -33,7 +33,7 @@ import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.utils.heat.HeatStorage;
 import ip.industrialProcessing.utils.heat.IHeatStorage;
 
-public class TEmultiblockWeldingStation extends TileEntityMultiblockCoreTankWorkerPowered implements IHeatStorage {
+public class TileEntityMultiblockWeldingStation extends TileEntityMultiblockCoreTankWorkerPowered implements IHeatStorage {
 	static StructureMultiblock structure;
 	static TierCollection tierRequirments;
 	public static RecipesMultiblock recipes = new RecipesWeldingStation();
@@ -46,7 +46,7 @@ public class TEmultiblockWeldingStation extends TileEntityMultiblockCoreTankWork
 		int i = 0;
 		layout.setCoreID(i++, 0, 1, IndustrialProcessing.BLmultiblockWeldingStation.blockID);
 
-		layout.setBlockID(-1, 0, 0, i++, 0, 0, IndustrialProcessing.BLmultiblockWeldingTableExt.blockID);
+		layout.setBlockID(-1, 0, 0, i++, 0, 1, IndustrialProcessing.BLmultiblockWeldingTableExt.blockID);
 		layout.setBlockID(0, 1, 0, i++, 0, 0, IndustrialProcessing.BLmultiblockScreen.blockID);
 		layout.setBlockID(-1, 1, 0, i++, 0, 1, IndustrialProcessing.BLmultiblockScreen.blockID);
 
@@ -68,7 +68,7 @@ public class TEmultiblockWeldingStation extends TileEntityMultiblockCoreTankWork
 	private int totalTime;
 	public int openGui = 0;
 
-	public TEmultiblockWeldingStation() {
+	public TileEntityMultiblockWeldingStation() {
 		super(structure, tierRequirments, recipes, LocalDirection.LEFT, 10000, 100);
 		LocalDirection[] nodirections = new LocalDirection[0];
 		this.addStack(null, nodirections, true, false);

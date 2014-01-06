@@ -2,9 +2,9 @@ package ip.industrialProcessing.multiblock.dummy.block.weldingTableExt;
 
 import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
 
-public class TEmultiblockWeldingTableExt extends TileEntityMultiblockDummy{
+public class TileEntityMultiblockWeldingTable extends TileEntityMultiblockDummy{
 
-	public TEmultiblockWeldingTableExt() {
+	public TileEntityMultiblockWeldingTable() {
 		super();
 	}
 

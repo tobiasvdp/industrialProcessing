@@ -1,15 +1,19 @@
 package ip.industrialProcessing.multiblock.dummy.block.screen;
 
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.multiblock.dummy.BlockMultiblockDummy;
 
-public class BLmultiblockScreen extends BlockMultiblockDummy{
+public class BlockScreen extends BlockMultiblockDummy{
 
-	public BLmultiblockScreen() {
+	private Icon[] icons = new Icon[1];
+
+	public BlockScreen() {
 		super(ConfigMachineBlocks.getBLmultiblockScreen(), "MultiblockScreen", IndustrialProcessing.tabMultiblocks);
 	}
 
@@ -20,6 +24,17 @@ public class BLmultiblockScreen extends BlockMultiblockDummy{
 
 	@Override
 	public TileEntity createNewTileEntity(World world) {
-		return new TEmultiblockScreen();
+		return new TileEntityScreen();
 	}
+	
+    @Override
+    public Icon getIcon(int par1, int par2) {
+        par1 %= icons.length;        
+        return icons[par1];
+    }
+
+    @Override
+    public void registerIcons(IconRegister par1IconRegister) {
+        icons [0] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "iron_block");
+    }
 }

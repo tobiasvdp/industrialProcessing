@@ -55,8 +55,8 @@ import ip.industrialProcessing.multiblock.core.block.blastFurnace.model.ModelBla
 import ip.industrialProcessing.multiblock.core.block.plants.blacksmith.bloomery.model.ModelBloomery;
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.atmosphericDestilationTower.model.ModelAtmosphericDestillationTowerBlock;
 import ip.industrialProcessing.multiblock.core.block.plants.storage.container.model.ModelContainer;
-import ip.industrialProcessing.multiblock.core.block.weldingStation.MDmultiblockWeldingStation;
-import ip.industrialProcessing.multiblock.core.block.weldingStation.TEmultiblockWeldingStation;
+import ip.industrialProcessing.multiblock.core.block.weldingStation.TileEntityMultiblockWeldingStation;
+import ip.industrialProcessing.multiblock.core.block.weldingStation.model.ModelWeldingStation;
 import ip.industrialProcessing.multiblock.dummy.block.bellows.model.ModelBellows;
 import ip.industrialProcessing.multiblock.dummy.block.containerWall.model.ModelContainerWall;
 import ip.industrialProcessing.multiblock.dummy.block.destilationTray.model.ModelDistillationElementBlock;
@@ -70,12 +70,12 @@ import ip.industrialProcessing.multiblock.dummy.block.ironBowl.model.ModelIronBo
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.ENmultiblockLiftDoor;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.MDmultiblockLiftDoor;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.TEmultiblockLiftDoor;
-import ip.industrialProcessing.multiblock.dummy.block.screen.MDmultiblockScreen;
-import ip.industrialProcessing.multiblock.dummy.block.screen.TEmultiblockScreen;
+import ip.industrialProcessing.multiblock.dummy.block.screen.TileEntityScreen;
+import ip.industrialProcessing.multiblock.dummy.block.screen.model.ModelScreen;
 import ip.industrialProcessing.multiblock.dummy.block.toggleButton.MDmultiblockToggleButton2;
 import ip.industrialProcessing.multiblock.dummy.block.toggleButton.TEmultiblockToggleButton;
-import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.MDmultiblockWeldingTableExt;
-import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.TEmultiblockWeldingTableExt;
+import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.TileEntityMultiblockWeldingTable;
+import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.model.ModelWeldingTable;
 import ip.industrialProcessing.multiblock.dummy.block.wheel.MDmultiblockWheel;
 import ip.industrialProcessing.multiblock.dummy.block.wheel.TEmultiblockWheel;
 import ip.industrialProcessing.multiblock.dummy.block.wheelConnector.MDmultiblockWheelConnector;
@@ -171,12 +171,9 @@ public class ClientProxy extends CommonProxy {
     private static final ModelAnimatedFluidMachine boiler = new ModelBoiler();
     private static final ModelMachine solidBurner = new ModelSolidBurner();
     private static final ModelAnimatedFluidMachine turbine = new ModelTurbine();
-    private static final MDmultiblockWeldingStation MDmultiblockWeldingStation = new MDmultiblockWeldingStation();
     private static final ModelBlastFurnaceCoreBlock MDmultiblockBlastFurnace = new ModelBlastFurnaceCoreBlock();
     private static final ModelBlastFurnaceTopBlock MDmultiblockBlastFurnaceTower = new ModelBlastFurnaceTopBlock();
-    private static final MDmultiblockScreen MDmultiblockScreen = new MDmultiblockScreen();
     private static final MDmultiblockFrame MDmultiblockFrame = new MDmultiblockFrame();
-    private static final MDmultiblockWeldingTableExt MDmultiblockWeldingTableExt = new MDmultiblockWeldingTableExt();
     private static final MDmultiblockFramePanel MDmultiblockFramePanel = new MDmultiblockFramePanel();
     private static final MDmultiblockLiftDoor MDmultiblockLiftDoor = new MDmultiblockLiftDoor();
     private static final MDmultiblockToggleButton2 MDmultiblockToggleButton2 = new MDmultiblockToggleButton2();
@@ -222,6 +219,9 @@ public class ClientProxy extends CommonProxy {
     private static final ModelMachineBlock modelMachineBlock = new ModelMachineBlock();
     private static final ModelContainerWall modelContainerWall = new ModelContainerWall();
     private static final ModelContainer modelContainer = new ModelContainer();
+    private static final ModelScreen modelScreen = new ModelScreen();
+    private static final ModelWeldingStation modelWeldingStation = new ModelWeldingStation();
+    private static final ModelWeldingTable modelWeldingTable = new ModelWeldingTable(); 
 
     @Override
     public void registerRenderers() {
@@ -285,6 +285,16 @@ public class ClientProxy extends CommonProxy {
 	
 	ConfigRenderers.setRendererContainer(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererContainer(), modelContainer));
+	
+	ConfigRenderers.setBLmultiblockScreen(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLmultiblockScreen(), modelScreen));
+
+	ConfigRenderers.setBLmultiblockWeldingStation(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLmultiblockWeldingStation(), modelWeldingStation));
+	
+	ConfigRenderers.setBLmultiblockWeldingTableExt(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLmultiblockWeldingTableExt(), modelWeldingTable));
+	
 	// block & tile entity
  
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDiskFilter.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockDiskFilter, "ModelDiskFilter", diskFilter));
@@ -410,21 +420,9 @@ public class ClientProxy extends CommonProxy {
 	ConfigRenderers.setRendererBCGeneratorId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererBCGeneratorId(), new TileEntityBuildcraftGenerator()));
 
-	ClientRegistry.bindTileEntitySpecialRenderer(TEmultiblockWeldingStation.class, new RenderingMultiblock(ISetupMachineBlocks.BLmultiblockWeldingStation, new String[] { "ModelMultiblockWeldingStation" }, new ModelingMultiblock[] { MDmultiblockWeldingStation }));
-	ConfigRenderers.setBLmultiblockWeldingStation(RenderingRegistry.getNextAvailableRenderId());
-	RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getBLmultiblockWeldingStation(), new TEmultiblockWeldingStation()));
-
-	ClientRegistry.bindTileEntitySpecialRenderer(TEmultiblockScreen.class, new RenderingMultiblock(ISetupMachineBlocks.BLmultiblockScreen, new String[] { "ModelMultiblockScreen" }, new ModelingMultiblock[] { MDmultiblockScreen }));
-	ConfigRenderers.setBLmultiblockScreen(RenderingRegistry.getNextAvailableRenderId());
-	RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getBLmultiblockScreen(), new TEmultiblockScreen()));
-
 	ClientRegistry.bindTileEntitySpecialRenderer(TEmultiblockFrame.class, new RenderingMultiblock(ISetupMachineBlocks.BLmultiblockFrame, new String[] { "ModelMultiblockFrame", "MDmultiblockFramePanel", "MDmultiblockElevatorGroundPanel" }, new ModelingMultiblock[] { MDmultiblockFrame, MDmultiblockFramePanel, MDmultiblockFramePanel }));
 	ConfigRenderers.setBLmultiblockFrame(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getBLmultiblockFrame(), new TEmultiblockFrame()));
-
-	ClientRegistry.bindTileEntitySpecialRenderer(TEmultiblockWeldingTableExt.class, new RenderingMultiblock(ISetupMachineBlocks.BLmultiblockWeldingTableExt, new String[] { "ModelMultiblockWeldingStation" }, new ModelingMultiblock[] { MDmultiblockWeldingTableExt }));
-	ConfigRenderers.setBLmultiblockWeldingTableExt(RenderingRegistry.getNextAvailableRenderId());
-	RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getBLmultiblockWeldingTableExt(), new TEmultiblockWeldingTableExt()));
 
 	ConfigRenderers.setBLmultiblockLiftDoor(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getBLmultiblockLiftDoor(), new TEmultiblockLiftDoor()));

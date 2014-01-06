@@ -4,7 +4,7 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.multiblock.dummy.BlockMultiblockDummy;
-import ip.industrialProcessing.multiblock.dummy.block.screen.TEmultiblockScreen;
+import ip.industrialProcessing.multiblock.dummy.block.screen.TileEntityScreen;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 

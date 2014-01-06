@@ -13,7 +13,7 @@ public class ContainerWeldingStation extends ContainerMultiblockTankWorkerPowere
 
 	public ContainerWeldingStation(EntityPlayer player, TileEntityMultiblockCoreTankWorkerPowered core) {
 		super(player.inventory, core);
-		((TEmultiblockWeldingStation)core).openGui = 0;
+		((TileEntityMultiblockWeldingStation)core).openGui = 0;
 
 		slots = new SlotBase[15];
 		slots[0] = new SlotBase(core, 0, 58, 15);

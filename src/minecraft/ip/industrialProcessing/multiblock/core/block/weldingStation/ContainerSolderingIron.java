@@ -12,7 +12,7 @@ public class ContainerSolderingIron extends ContainerMultiblockTankWorkerPowered
 
 	public ContainerSolderingIron(EntityPlayer player, TileEntityMultiblockCoreTankWorkerPowered core) {
 		super(player.inventory, core);
-		((TEmultiblockWeldingStation)core).openGui = 1;
+		((TileEntityMultiblockWeldingStation)core).openGui = 1;
 
 		slots = new SlotBase[22];
 		slots[0] = new SlotBase(core, 0, -18, -18);
