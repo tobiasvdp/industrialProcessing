@@ -192,6 +192,8 @@ public interface ISetupItems {
     public final static ItemIP itemSolderAlloyWire = new ItemIP(ConfigItems.getItemSolderAlloyWireID(), "ItemSolderAlloyWire", IndustrialProcessing.tabOres);
     public final static ItemIP itemSolderAlloyIngot = new ItemIP(ConfigItems.getItemSolderAlloyIngotID(), "ItemSolderAlloyIngot", IndustrialProcessing.tabOres);
     public final static ItemIP itemRedstoneCircuitry = new ItemIP(ConfigItems.getItemRedstoneCircuitryID(), "ItemRedstoneCircuitry", IndustrialProcessing.tabOres);
+    public final static ItemIP itemSmallEngine = new ItemIP(ConfigItems.getItemSmallEngineID(), "ItemSmallEngine", IndustrialProcessing.tabOres);
+    public final static ItemIP itemCopperBar = new ItemIP(ConfigItems.getItemCopperBarID(), "ItemCopperBar",IndustrialProcessing.tabOres);
     
     
 }

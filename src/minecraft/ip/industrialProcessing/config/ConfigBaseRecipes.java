@@ -49,6 +49,11 @@ public class ConfigBaseRecipes {
 		GameRegistry.addRecipe(new ItemStack(IndustrialProcessing.blockIronBowl), "   ", "xyx","   ", 'x', new ItemStack(IndustrialProcessing.itemThickStick),'y', new ItemStack(IndustrialProcessing.itemIronBowl, 1, WILDCARD_VALUE));
 		GameRegistry.addRecipe(new ItemStack(IndustrialProcessing.itemSilicium,8), "xxx", "xyx","xxx", 'x', new ItemStack(IndustrialProcessing.itemHardenedSandDust),'y', new ItemStack(IndustrialProcessing.itemAluminumDust));
 		GameRegistry.addRecipe(new ItemStack(IndustrialProcessing.itemSolderEmpty,1), "xyx", " z ","xyx", 'x', new ItemStack(Item.leather),'y', new ItemStack(Block.planks,1,WILDCARD_VALUE),'z',new ItemStack(Item.stick));
+		GameRegistry.addRecipe(new ItemStack(IndustrialProcessing.blockWire,6), "xxx", "yyy","   ", 'x', new ItemStack(Block.cloth,1,WILDCARD_VALUE),'y', new ItemStack(IndustrialProcessing.itemCopperBar));
+		GameRegistry.addRecipe(new ItemStack(IndustrialProcessing.blockWire,6), "   ", "xxx", "yyy",'x', new ItemStack(Block.cloth,1,WILDCARD_VALUE),'y', new ItemStack(IndustrialProcessing.itemCopperBar));
+		GameRegistry.addRecipe(new ItemStack(IndustrialProcessing.blockWire,6), "yyy", "xxx","   ", 'x', new ItemStack(Block.cloth,1,WILDCARD_VALUE),'y', new ItemStack(IndustrialProcessing.itemCopperBar));
+		GameRegistry.addRecipe(new ItemStack(IndustrialProcessing.blockWire,6), "   ", "yyy", "xxx",'x', new ItemStack(Block.cloth,1,WILDCARD_VALUE),'y', new ItemStack(IndustrialProcessing.itemCopperBar));
+		GameRegistry.addShapelessRecipe(new ItemStack(IndustrialProcessing.blockWire,2),new ItemStack(Block.cloth,1,WILDCARD_VALUE), new ItemStack(IndustrialProcessing.itemCopperBar));
 
 		GameRegistry.addRecipe(new ItemStack(ISetupItems.itemCrankWheel), "  x", "xxx", "x  ", 'x', new ItemStack(ISetupItems.itemThickStick));
 		GameRegistry.addRecipe(new ItemStack(ISetupItems.itemCarbonBrush, 8), "xxx", "xyx", "xxx", 'x', new ItemStack(ISetupItems.itemCoalDust), 'y', new ItemStack(ISetupFluids.bucketFluidLatex, 1, WILDCARD_VALUE));

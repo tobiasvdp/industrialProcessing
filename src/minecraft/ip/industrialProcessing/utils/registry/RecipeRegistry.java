@@ -2,6 +2,8 @@ package ip.industrialProcessing.utils.registry;
 
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.machines.crusher.RecipesCrusher;
+import ip.industrialProcessing.multiblock.recipes.RecipeMultiblock;
+import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.recipes.IRecipeWorkHandler;
 import ip.industrialProcessing.recipes.Recipe;
 
@@ -22,6 +24,13 @@ public class RecipeRegistry {
 
 	public static void registerMachinesRecipes(RecipesMachine recipe, Block block) {
 		Iterator<Recipe> list = recipe.iterator();
+		while (list.hasNext()) {
+			recipes.put(list.next(), block);
+		}
+	}
+	
+	public static void registerMachinesRecipes(RecipesMultiblock recipe, Block block) {
+		Iterator<RecipeMultiblock> list = recipe.iterator();
 		while (list.hasNext()) {
 			recipes.put(list.next(), block);
 		}
