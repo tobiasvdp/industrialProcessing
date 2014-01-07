@@ -81,6 +81,7 @@ import ip.industrialProcessing.multiblock.dummy.block.toggleButton.TEmultiblockT
 import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.TileEntityMultiblockWeldingTable;
 import ip.industrialProcessing.multiblock.dummy.block.wheel.TEmultiblockWheel;
 import ip.industrialProcessing.multiblock.dummy.block.wheelConnector.TEmultiblockWheelConnector;
+import ip.industrialProcessing.multiblock.recipes.IRecipeMultiblock;
 import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
 import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
 import ip.industrialProcessing.power.meters.TileEntityAmpMeter;
@@ -92,6 +93,7 @@ import ip.industrialProcessing.power.plants.TileEntitySolidBurner;
 import ip.industrialProcessing.power.plants.TileEntityTurbine;
 import ip.industrialProcessing.power.storage.TileEntityEnergyCell;
 import ip.industrialProcessing.power.wire.TileEntityWire;
+import ip.industrialProcessing.recipes.IRecipeBlock;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeInputSlot;
 import ip.industrialProcessing.recipes.RecipeOutputSlot;
@@ -359,19 +361,10 @@ public class ConfigMachineBlocks {
         LanguageRegistry.addName(block, displayName);
         ModLoader.registerTileEntity(tileEntity, uniqueId);
         BlockRegistry.RegisterBlock(block, new BlockType[]{BlockType.Machine});
-		try {
-			Field[] declaredFields = tileEntity.getFields();
-			for(Field field:declaredFields){
-				RecipesMachine recipes = new RecipesMachine();
-				Object recipe = field.get(recipes);
-				if(recipe instanceof RecipesMachine){
-					RecipeRegistry.registerMachinesRecipes((RecipesMachine) recipe, block);
-				}
-			}
-		} catch (IllegalArgumentException e) {
-		} catch (SecurityException e) {
-		} catch (IllegalAccessException e) {
-		}
+        if(block instanceof IRecipeBlock)
+        	RecipeRegistry.registerMachinesRecipes(((IRecipeBlock)block).getRecipes(),block);
+        if(block instanceof IRecipeMultiblock)
+        	RecipeRegistry.registerMachinesRecipes(((IRecipeMultiblock)block).getRecipes(),block);
     }
     
     private void registerMachineBlock(Block block, String uniqueId, String displayName, Class tileEntity, BlockType... type) {
@@ -380,19 +373,10 @@ public class ConfigMachineBlocks {
         LanguageRegistry.addName(block, displayName);
         ModLoader.registerTileEntity(tileEntity, uniqueId);
         BlockRegistry.RegisterBlock(block, type);
-		try {
-			Field[] declaredFields = tileEntity.getFields();
-			for(Field field:declaredFields){
-				RecipesMachine recipes = new RecipesMachine();
-				Object recipe = field.get(recipes);
-				if(recipe instanceof RecipesMachine){
-					RecipeRegistry.registerMachinesRecipes((RecipesMachine) recipe, block);
-				}
-			}
-		} catch (IllegalArgumentException e) {
-		} catch (SecurityException e) {
-		} catch (IllegalAccessException e) {
-		}
+        if(block instanceof IRecipeBlock)
+        	RecipeRegistry.registerMachinesRecipes(((IRecipeBlock)block).getRecipes(),block);
+        if(block instanceof IRecipeMultiblock)
+        	RecipeRegistry.registerMachinesRecipes(((IRecipeMultiblock)block).getRecipes(),block);
     }
 
     @Deprecated
@@ -402,19 +386,11 @@ public class ConfigMachineBlocks {
         LanguageRegistry.addName(block, displayName);
         ModLoader.registerTileEntity(tileEntity, uniqueId);
         BlockRegistry.RegisterBlock(block, new BlockType[]{BlockType.Machine});
-		try {
-			Field[] declaredFields = tileEntity.getFields();
-			for(Field field:declaredFields){
-				RecipesMachine recipes = new RecipesMachine();
-				Object recipe = field.get(recipes);
-				if(recipe instanceof RecipesMachine){
-					RecipeRegistry.registerMachinesRecipes((RecipesMachine) recipe, block);
-				}
-			}
-		} catch (IllegalArgumentException e) {
-		} catch (SecurityException e) {
-		} catch (IllegalAccessException e) {
-		}
+        if(block instanceof IRecipeBlock)
+        	RecipeRegistry.registerMachinesRecipes(((IRecipeBlock)block).getRecipes(),block);
+        if(block instanceof IRecipeMultiblock)
+        	RecipeRegistry.registerMachinesRecipes(((IRecipeMultiblock)block).getRecipes(),block);
+		
     }
     
     private void registerMachineBlock(Block block, Class<? extends ItemBlock> itemBlock, String uniqueId, String displayName, Class tileEntity, BlockType... type) {
@@ -423,19 +399,10 @@ public class ConfigMachineBlocks {
         LanguageRegistry.addName(block, displayName);
         ModLoader.registerTileEntity(tileEntity, uniqueId);
         BlockRegistry.RegisterBlock(block, type);
-		try {
-			Field[] declaredFields = tileEntity.getFields();
-			for(Field field:declaredFields){
-				RecipesMachine recipes = new RecipesMachine();
-				Object recipe = field.get(recipes);
-				if(recipe instanceof RecipesMachine){
-					RecipeRegistry.registerMachinesRecipes((RecipesMachine) recipe, block);
-				}
-			}
-		} catch (IllegalArgumentException e) {
-		} catch (SecurityException e) {
-		} catch (IllegalAccessException e) {
-		}
+        if(block instanceof IRecipeBlock)
+        	RecipeRegistry.registerMachinesRecipes(((IRecipeBlock)block).getRecipes(),block);
+        if(block instanceof IRecipeMultiblock)
+        	RecipeRegistry.registerMachinesRecipes(((IRecipeMultiblock)block).getRecipes(),block);
     }
 
     public static ConfigMachineBlocks getInstance() {

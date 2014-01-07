@@ -161,7 +161,15 @@ public class ConfigItems {
 	private int itemSolderAlloyWireID = 6659;
 	private int itemSolderAlloyIngotID = 6660;
 	private int ItemRedstoneCircuitryID = 6661;
+	private int itemSmallEngineID = 6662;
+	private int itemCopperBarID = 6663;
 
+	public static int getItemCopperBarID() {
+		return getInstance().itemCopperBarID;
+	}
+	public static int getItemSmallEngineID() {
+		return getInstance().itemSmallEngineID;
+	}
 	public static int getItemRedstoneCircuitryID() {
 		return getInstance().ItemRedstoneCircuitryID;
 	}
@@ -731,6 +739,9 @@ public class ConfigItems {
 	}
 
 	public static void addToLanguageRegistry() {
+		LanguageRegistry.addName(ISetupItems.itemMotorPoleAxis , "Magnetic poles");
+		LanguageRegistry.addName(ISetupItems.itemSmallEngine , "Small engine");
+		LanguageRegistry.addName(ISetupItems.itemGuide , "Industrial processing");
 		LanguageRegistry.addName(ISetupItems.itemRedstoneCircuitry , "Redstone circuitry");
 		LanguageRegistry.addName(ISetupItems.itemSolderAlloyIngot , "Solder alloy ingo");
 		LanguageRegistry.addName(ISetupItems.itemSolderAlloyWire , "Solder alloy wire");

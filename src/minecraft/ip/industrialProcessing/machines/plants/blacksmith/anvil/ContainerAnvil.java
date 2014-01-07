@@ -38,6 +38,7 @@ public class ContainerAnvil extends Container{
     	recipes.getInstance().addRecipe(new ItemStack(IndustrialProcessing.itemIronPlate,4),"xx ","xx ","  z",'x',new ItemStack(Item.ingotIron), 'z', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
     	recipes.getInstance().addRecipe(new ItemStack(IndustrialProcessing.itemCopperPlate,4),"xx ","xx ","  z",'x',new ItemStack(IndustrialProcessing.itemCopperIngot), 'z', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
     	recipes.getInstance().addRecipe(new ItemStack(IndustrialProcessing.itemIronBar,8),"  x"," x ","x z",'x',new ItemStack(Item.ingotIron), 'z', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
+    	recipes.getInstance().addRecipe(new ItemStack(IndustrialProcessing.itemCopperBar,8),"  x"," x ","x z",'x',new ItemStack(IndustrialProcessing.itemCopperIngot), 'z', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
     	recipes.getInstance().addRecipe(new ItemStack(IndustrialProcessing.itemIronBowl,3)," z ","x x"," x ",'x',new ItemStack(Item.ingotIron), 'z', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
     	recipes.getInstance().addRecipe(new ItemStack(ISetupItems.itemHammer), "   ", " y ", "x  ", 'x', new ItemStack(ISetupItems.itemThickStick), 'y', new ItemStack(Item.ingotIron));
     }

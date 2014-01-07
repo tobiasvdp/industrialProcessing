@@ -9,6 +9,7 @@ import ip.industrialProcessing.machines.PowerWorkerHelper;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.machines.SimplePowerStorage;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
+import ip.industrialProcessing.multiblock.recipes.RecipeMultiblockWorker;
 import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.power.IPoweredMachine;
@@ -31,7 +32,7 @@ public abstract class TileEntityMultiblockCoreTankWorkerPowered extends TileEnti
 
     @Override
     public void doWork() {
-    	Recipe recipe = ((RecipeWorker) getWorker()).getCurrentRecipe();
+    	Recipe recipe = ((RecipeMultiblockWorker) getWorker()).getCurrentRecipe();
 
     	if (recipe != null) {
     	    int amount = PowerWorkerHelper.getWork(this.storage, this.maxWorkSpeed);
