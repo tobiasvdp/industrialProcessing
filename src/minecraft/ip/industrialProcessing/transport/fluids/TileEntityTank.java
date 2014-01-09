@@ -62,7 +62,7 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
     @Override
     public void updateEntity() {
 	super.updateEntity();
-	if (unverified) {
+	if (unverified && !this.worldObj.isRemote) {
 	    System.out.println("Tank update at :" + xCoord + " " + yCoord + " " + zCoord);
 	    tanksAbove = getTanks(ForgeDirection.UP);
 	    tanksBelow = getTanks(ForgeDirection.DOWN);
@@ -140,6 +140,7 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
     private void setState(ForgeDirection direction, ConnectionState connectionState) {
 	if (connectionState != this.states[direction.ordinal()]) {
 	    this.states[direction.ordinal()] = connectionState;
+	    this.notifyBlockChange(); // mark nbt as changed
 	    this.worldObj.notifyBlockChange(xCoord, yCoord, zCoord, this.getBlockType().blockID);
 	}
     }
@@ -166,6 +167,11 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
 	super.writeToNBT(nbt);
 	this.tank.writeToNBT(nbt);
 	nbt.setInteger("Forward", this.forward == null ? ForgeDirection.NORTH.ordinal() : this.forward.ordinal());
+	int[] stateValues = new int[this.states.length];
+	for(int i = 0; i < this.states.length; i++){
+	    stateValues[i] = this.states[i].ordinal();
+	}
+	nbt.setIntArray("States", stateValues);
     }
 
     @Override
@@ -177,6 +183,14 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
 	    this.forward = ForgeDirection.getOrientation(nbt.getInteger("Forward"));
 	else
 	    this.forward = ForgeDirection.NORTH;
+	
+	if(nbt.hasKey("States"))
+	{
+	    int[] stateValues = nbt.getIntArray("States");
+	    for (int i = 0; i < states.length; i++) {
+		states[i] = ConnectionState.values()[stateValues[i]];
+	    }
+	}
     }
 
     @Override
@@ -275,14 +289,27 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
     }
 
     @Override
-    public void setForwardDirection(ForgeDirection forward) {
-	TileEntity entityBelow = this.worldObj.getBlockTileEntity(xCoord, yCoord - 1, zCoord);
-	if (entityBelow instanceof TileEntityTank) {
-	    ((TileEntityTank) entityBelow).setForwardDirection(forward);
-	} else {
+    public void setForwardDirection(ForgeDirection forward) { 
 	    this.forward = forward;
 	    this.notifyBlockChange();
-	}
+	    for (int i = 1; i <= tanksAbove; i++) {
+
+		TileEntity entityBelow = this.worldObj.getBlockTileEntity(xCoord, yCoord + i, zCoord);
+		if (entityBelow instanceof TileEntityTank) {
+		    TileEntityTank tank = ((TileEntityTank) entityBelow);
+		    tank.forward = forward;
+		    tank.notifyBlockChange();
+		}  
+	    }
+	    for (int i = 1; i <= tanksBelow; i++) {
+
+		TileEntity entityBelow = this.worldObj.getBlockTileEntity(xCoord, yCoord - i, zCoord);
+		if (entityBelow instanceof TileEntityTank) {
+		    TileEntityTank tank = ((TileEntityTank) entityBelow);
+		    tank.forward = forward;
+		    tank.notifyBlockChange();
+		}  
+	    } 
     }
 
     @Override
@@ -295,6 +322,8 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
 	    player.sendChatToPlayer(ChatMessageComponent.func_111066_d("TanksAbove:" + this.tanksAbove));
 	    player.sendChatToPlayer(ChatMessageComponent.func_111066_d("TanksBelow:" + this.tanksBelow));
 	    player.sendChatToPlayer(ChatMessageComponent.func_111066_d("TanksInStack:" + this.tanksInStack));
+	    player.sendChatToPlayer(ChatMessageComponent.func_111066_d("TankForward:" + this.forward));
+	    player.sendChatToPlayer(ChatMessageComponent.func_111066_d("Tank:" + this.xCoord+" "+this.yCoord+" "+this.zCoord));
 
 	    for (int i = 0; i < states.length; i++) {
 		player.sendChatToPlayer(ChatMessageComponent.func_111066_d(ForgeDirection.getOrientation(i) + "=" + this.states[i]));

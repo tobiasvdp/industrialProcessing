@@ -35,67 +35,66 @@ public class ModelTankBlock extends ModelBlock {
 
     public ModelTankBlock() {
 
-        Matrix4f rotation = Matrix4f.rotate((float) Math.PI / 2, new Vector3f(0, 1, 0), new Matrix4f(), null);
+	Matrix4f rotation = Matrix4f.rotate((float) Math.PI / 2, new Vector3f(0, 1, 0), new Matrix4f(), null);
 
-        connector[ForgeDirection.EAST.ordinal()] = new TankConnector();
+	connector[ForgeDirection.EAST.ordinal()] = new TankConnector();
 
-        connector[ForgeDirection.NORTH.ordinal()] = (TankConnector) connector[ForgeDirection.EAST.ordinal()].cloneTransformed(rotation);
-        connector[ForgeDirection.WEST.ordinal()] = (TankConnector) connector[ForgeDirection.NORTH.ordinal()].cloneTransformed(rotation);
-        connector[ForgeDirection.SOUTH.ordinal()] = (TankConnector) connector[ForgeDirection.WEST.ordinal()].cloneTransformed(rotation);
+	connector[ForgeDirection.NORTH.ordinal()] = (TankConnector) connector[ForgeDirection.EAST.ordinal()].cloneTransformed(rotation);
+	connector[ForgeDirection.WEST.ordinal()] = (TankConnector) connector[ForgeDirection.NORTH.ordinal()].cloneTransformed(rotation);
+	connector[ForgeDirection.SOUTH.ordinal()] = (TankConnector) connector[ForgeDirection.WEST.ordinal()].cloneTransformed(rotation);
 
-        connector[ForgeDirection.UP.ordinal()] = new TankConnectorUp();
-        connector[ForgeDirection.DOWN.ordinal()] = new TankConnectorDown();
+	connector[ForgeDirection.UP.ordinal()] = new TankConnectorUp();
+	connector[ForgeDirection.DOWN.ordinal()] = new TankConnectorDown();
     }
 
     @Override
     public void renderInventory(Block block, int metadata, int modelID, RenderBlocks renderer) {
 
-        Vector3f position = new Vector3f(0, 0, 0);
-        Icon icon = block.getIcon(0, 0);
-        single.getRotated(0).renderMesh(icon);
-        icon = block.getIcon(1, 0);
-        singleFeatures.getRotated(0).renderMesh(icon);
+	Vector3f position = new Vector3f(0, 0, 0);
+	Icon icon = block.getIcon(0, 0);
+	single.getRotated(0).renderMesh(icon);
+	icon = block.getIcon(1, 0);
+	singleFeatures.getRotated(0).renderMesh(icon);
     }
 
     @Override
     public boolean renderWorldBlock(WorldReference reference, int modelId, RenderBlocks renderer) {
-        TileEntity entity = reference.getBlockTileEntity();
-        Tessellator tessellator = Tessellator.instance;
-        tessellator.setColorOpaque(255, 255, 255);
-  
-        ForgeDirection forward = BlockMachine.getForwardFromEntity(entity);
-        int dir = 4 - BlockMachine.getMetadataFromForward(forward);
-        
-        
-        if (entity instanceof TileEntityTank) {
-            TileEntityTank tank = (TileEntityTank) entity;
-            ConnectionState up = tank.getConnection(ForgeDirection.UP);
-            ConnectionState down = tank.getConnection(ForgeDirection.DOWN);
+	TileEntity entity = reference.getBlockTileEntity();
+	Tessellator tessellator = Tessellator.instance;
+	tessellator.setColorOpaque(255, 255, 255);
 
-            Icon tankIcon = reference.getIcon(0);
-            Icon tankFeaturesIcon = reference.getIcon(1);
+	ForgeDirection forward = BlockMachine.getForwardFromEntity(entity);
+	int dir = 4 - BlockMachine.getMetadataFromForward(forward);
 
-            if (up == ConnectionState.CONNECTED && down == ConnectionState.CONNECTED) {
-                center.getRotated(dir).renderMesh(false, tankIcon, reference);
-                centerFeatures.getRotated(dir).renderMesh(false, tankFeaturesIcon, reference);
-            } else if (up != ConnectionState.CONNECTED && down != ConnectionState.CONNECTED) {
-                single.getRotated(dir).renderMesh(false, tankIcon, reference);
-                singleFeatures.getRotated(dir).renderMesh(false, tankFeaturesIcon, reference);
-            } else if (up != ConnectionState.CONNECTED && down == ConnectionState.CONNECTED) {
-                top.getRotated(dir).renderMesh(false, tankIcon, reference);
-                topFeatures.getRotated(dir).renderMesh(false, tankFeaturesIcon, reference);
-            } else if (up == ConnectionState.CONNECTED && down != ConnectionState.CONNECTED) {
-                bottom.getRotated(dir).renderMesh(false, tankIcon, reference);
-                bottomFeatures.getRotated(dir).renderMesh(false, tankFeaturesIcon, reference);
-            }
+	if (entity instanceof TileEntityTank) {
+	    TileEntityTank tank = (TileEntityTank) entity;
+	    ConnectionState up = tank.getConnection(ForgeDirection.UP);
+	    ConnectionState down = tank.getConnection(ForgeDirection.DOWN);
 
-            for (int i = 0; i < 6; i++) {
-                ConnectionState con = tank.getConnection(ForgeDirection.getOrientation(i));
-                if (con == ConnectionState.PLUGGED)
-                    connector[i].renderMesh(false, tankFeaturesIcon, reference);
-            }
-        }
-        return true;
+	    Icon tankIcon = reference.getIcon(0);
+	    Icon tankFeaturesIcon = reference.getIcon(1);
+	    System.out.println("ModelTankBlock.renderWorldBlock()+ " + reference.x + " " + reference.y + " " + reference.z+ " u:"+up+" d:"+down);
+	    if (up == ConnectionState.CONNECTED && down == ConnectionState.CONNECTED) {
+		center.getRotated(dir).renderMesh(false, tankIcon, reference);
+		centerFeatures.getRotated(dir).renderMesh(false, tankFeaturesIcon, reference);
+	    } else if (up != ConnectionState.CONNECTED && down != ConnectionState.CONNECTED) {
+		single.getRotated(dir).renderMesh(false, tankIcon, reference);
+		singleFeatures.getRotated(dir).renderMesh(false, tankFeaturesIcon, reference);
+	    } else if (up != ConnectionState.CONNECTED && down == ConnectionState.CONNECTED) {
+		top.getRotated(dir).renderMesh(false, tankIcon, reference);
+		topFeatures.getRotated(dir).renderMesh(false, tankFeaturesIcon, reference);
+	    } else if (up == ConnectionState.CONNECTED && down != ConnectionState.CONNECTED) {
+		bottom.getRotated(dir).renderMesh(false, tankIcon, reference);
+		bottomFeatures.getRotated(dir).renderMesh(false, tankFeaturesIcon, reference);
+	    }
+
+	    for (int i = 0; i < 6; i++) {
+		ConnectionState con = tank.getConnection(ForgeDirection.getOrientation(i));
+		if (con == ConnectionState.PLUGGED)
+		    connector[i].renderMesh(false, tankFeaturesIcon, reference);
+	    }
+	}
+	return true;
     }
 
 }
