@@ -40,7 +40,6 @@ public abstract class TileEntityTransportFluidsBase extends TileEntityTransport 
 	    ForgeDirection from = direction.getOpposite();
 	    if (entity instanceof TileEntityTransportFluidsBase) {
 		TileEntityTransportFluidsBase other = (TileEntityTransportFluidsBase) entity;
-		System.out.println(other.connectionGroup + " " + this.connectionGroup);
 		if ((other.connectionGroup == this.connectionGroup || other.connectionGroup == 1 || this.connectionGroup == 1) && other.canConnect(direction.getOpposite()))
 		    return TransportConnectionState.TRANSPORT;
 		return TransportConnectionState.NONE;
@@ -158,38 +157,37 @@ public abstract class TileEntityTransportFluidsBase extends TileEntityTransport 
 
 	    }
 	}
-	if (totalIncomingPressureDifference > 0 || totalOutgoingPressureDifference > 0)
-	    System.out.println(totalIncomingPressureDifference + "-><-" + totalOutgoingPressureDifference);
-	for (int i = 0; i < volumeDifferences.length; i++) {
+	if (totalIncomingPressureDifference > 0 || totalOutgoingPressureDifference > 0) {
+	    for (int i = 0; i < volumeDifferences.length; i++) {
 
-	    ForgeDirection direction = ForgeDirection.getOrientation(i);
-	    if (isConnected(direction)) {
-		float pressureFlow = pressureDifferences[i];
-		float flowRate = 0f;
+		ForgeDirection direction = ForgeDirection.getOrientation(i);
+		if (isConnected(direction)) {
+		    float pressureFlow = pressureDifferences[i];
+		    float flowRate = 0f;
 
-		float equalizeFlow = volumeDifferences[i] / 1000f;
+		    float equalizeFlow = volumeDifferences[i] / 1000f;
 
-		if (pressureFlow < 0)
-		    flowRate = -pressureFlow / totalIncomingPressureDifference;
-		else if (pressureFlow > 0)
-		    flowRate = pressureFlow / totalOutgoingPressureDifference;
+		    if (pressureFlow < 0)
+			flowRate = -pressureFlow / totalIncomingPressureDifference;
+		    else if (pressureFlow > 0)
+			flowRate = pressureFlow / totalOutgoingPressureDifference;
 
-		int volumeDifference = volumeDifferences[i];
+		    int volumeDifference = volumeDifferences[i];
 
-		float volumeFlowRate = Math.abs(volumeDifference) / 1000f;
-		if (volumeFlowRate > 1)
-		    volumeFlowRate = 1;
-		// TODO: balance this for equilibrium
+		    float volumeFlowRate = Math.abs(volumeDifference) / 1000f;
+		    if (volumeFlowRate > 1)
+			volumeFlowRate = 1;
+		    // TODO: balance this for equilibrium
 
-		this.transferPressure(direction, pressureFlow * flowRate * 0.75f);
- 
+		    this.transferPressure(direction, pressureFlow * flowRate * 0.75f);
 
-		if (pressureFlow > 0 && totalOutgoingCapacity > 0) {
-		    int outgoingVolume = outgoingCapacities[i] * outgoingCapacities[i] / totalOutgoingCapacity / 2;
-		    this.transfer(direction, outgoingVolume);
-		} else if(totalIncomingCapacity > 0){
-		    int incomingVolume = incomingCapacities[i] * incomingCapacities[i] / totalIncomingCapacity / 2;
-		    this.transfer(direction, -incomingVolume);
+		    if (pressureFlow > 0 && totalOutgoingCapacity > 0) {
+			int outgoingVolume = outgoingCapacities[i] * outgoingCapacities[i] / totalOutgoingCapacity / 2;
+			this.transfer(direction, outgoingVolume);
+		    } else if (totalIncomingCapacity > 0) {
+			int incomingVolume = incomingCapacities[i] * incomingCapacities[i] / totalIncomingCapacity / 2;
+			this.transfer(direction, -incomingVolume);
+		    }
 		}
 	    }
 	}
