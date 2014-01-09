@@ -72,7 +72,7 @@ public class TileEntityGenerator extends TileEntityPowerGenerator implements IAn
 
 	@Override
 	public float getVoltage() {
-		return this.animationHandler.getSpeed()*150;
+		return this.animationHandler.getSpeed()*30;
 	}
 
 	@Override
@@ -90,7 +90,7 @@ public class TileEntityGenerator extends TileEntityPowerGenerator implements IAn
 	    ForgeDirection direction = DirectionUtils.getWorldDirection(this.inputSide, this.getForwardDirection());
 		if (side == direction) {
 			this.animationHandler.setSpeed(speed);
-			return this.lastCharge/30;
+			return (float) Math.pow(this.lastCharge/10, 1.5) ;
 		}
 		return 0;
 	}

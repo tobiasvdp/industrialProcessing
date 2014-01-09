@@ -78,6 +78,7 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
 		setState(direction, verifyState(direction));
 	    }
 	    unverified = false;
+	    this.notifyBlockChange(); // mark nbt as changed
 	}
 	if (!this.states[ForgeDirection.UP.ordinal()].isConnected())
 	    this.pressureAbove = 0;

@@ -15,7 +15,7 @@ public class PowerHelper {
 		float ohms = -1 / (float) Math.log(filled) + 1;
 		if (Float.isNaN(ohms))
 			return Float.POSITIVE_INFINITY;
-		return ohms;
+		return ohms + 5;
 	}
 
 	public static float getEnergy(float charge, float voltage) {
