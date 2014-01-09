@@ -1,11 +1,11 @@
 package ip.industrialProcessing.machines;
 
-import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.IFluidInfo;
 import ip.industrialProcessing.machines.containers.IFluidMachineContainerEntity;
 import ip.industrialProcessing.subMod.logic.api.network.interfaces.InterfaceType;
 import ip.industrialProcessing.transport.fluids.IPressuredTank;
+import ip.industrialProcessing.utils.DirectionUtils;
 
 import java.util.ArrayList;
 

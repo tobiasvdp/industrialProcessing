@@ -5,13 +5,13 @@ import java.util.Iterator;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 import ic2.api.Direction;
-import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
 import ip.industrialProcessing.machines.animation.AnimationMode;
 import ip.industrialProcessing.power.TileEntityPowerGenerator;
 import ip.industrialProcessing.recipes.Recipe;
+import ip.industrialProcessing.utils.DirectionUtils;
 
 public class TileEntityManualGenerator extends TileEntityPowerGenerator implements IAnimationProgress {
     public TileEntityManualGenerator() {

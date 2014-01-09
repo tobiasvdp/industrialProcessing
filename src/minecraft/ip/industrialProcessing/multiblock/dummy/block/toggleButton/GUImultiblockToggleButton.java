@@ -8,8 +8,8 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.common.network.PacketDispatcher;
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.PacketHandler;
 import ip.industrialProcessing.multiblock.core.block.elevator.TEmultiblockElevator;
+import ip.industrialProcessing.utils.handler.packets.PacketHandler;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.Tessellator;

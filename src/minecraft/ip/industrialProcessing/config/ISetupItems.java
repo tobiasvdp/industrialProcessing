@@ -37,15 +37,15 @@ public interface ISetupItems {
     public final static ItemIP itemZincDust = new ItemIP(ConfigItems.ItemZincDustID(), "ItemZincDust",IndustrialProcessing.tabOres);
     public final static ItemIP itemTinPurified = new ItemIP(ConfigItems.ItemTinPurifiedID(), "ItemTinPurified",IndustrialProcessing.tabOres);
     public final static ItemIP itemSulfur = new ItemIP(ConfigItems.ItemSulfurID(), "ItemSulfur",IndustrialProcessing.tabOres);
-    public final static ItemIP itemSmallMachineCasing = new ItemIP(ConfigItems.ItemSmallMachineCasingID(), "itemSmallMachineCasing",IndustrialProcessing.tabOres);
-    public final static ItemIP itemInputPort = new ItemIP(ConfigItems.ItemInputPortID(), "itemInputPort",IndustrialProcessing.tabOres);
-    public final static ItemIP itemOutputPort = new ItemIP(ConfigItems.ItemOutputPortID(), "itemOutputPort",IndustrialProcessing.tabOres);
-    public final static ItemIP itemPowerPort = new ItemIP(ConfigItems.ItemPowerPortID(), "itemPowerPort",IndustrialProcessing.tabOres);
-    public final static ItemIP itemCrusingPlate = new ItemIP(ConfigItems.ItemCrusingPlateID(), "itemCrusingPlate",IndustrialProcessing.tabOres);
-    public final static ItemIP itemIronPlate = new ItemIP(ConfigItems.ItemIronPlateID(), "itemIronPlate",IndustrialProcessing.tabOres);
-    public final static ItemIP itemIronTips = new ItemIP(ConfigItems.ItemIronTipsID(), "itemIronTips",IndustrialProcessing.tabOres);
-    public final static ItemIP itemSmallMachineCasingCrusher = new ItemIP(ConfigItems.ItemSmallMachineCasingCrusherID(), "itemSmallMachineCasingCrusher",IndustrialProcessing.tabOres);
-    public final static ItemIP itemFiberGlass = new ItemIP(ConfigItems.ItemFiberGlassID(), "itemFiberGlass",IndustrialProcessing.tabOres);
+    public final static ItemIP itemSmallMachineCasing = new ItemIP(ConfigItems.ItemSmallMachineCasingID(), "itemSmallMachineCasing",IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemInputPort = new ItemIP(ConfigItems.ItemInputPortID(), "itemInputPort",IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemOutputPort = new ItemIP(ConfigItems.ItemOutputPortID(), "itemOutputPort",IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemPowerPort = new ItemIP(ConfigItems.ItemPowerPortID(), "itemPowerPort",IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemCrusingPlate = new ItemIP(ConfigItems.ItemCrusingPlateID(), "itemCrusingPlate",IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemIronPlate = new ItemIP(ConfigItems.ItemIronPlateID(), "itemIronPlate",IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemIronTips = new ItemIP(ConfigItems.ItemIronTipsID(), "itemIronTips",IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemSmallMachineCasingCrusher = new ItemIP(ConfigItems.ItemSmallMachineCasingCrusherID(), "itemSmallMachineCasingCrusher",IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemFiberGlass = new ItemIP(ConfigItems.ItemFiberGlassID(), "itemFiberGlass",IndustrialProcessing.tabMachineParts);
     
     public final static ItemIP itemGalenaCrushedChunks = new ItemIP(ConfigItems.itemGalenaCrushedChunksID(), "itemGalenaCrushedChunks",IndustrialProcessing.tabOres);
     public final static ItemIP itemGalenaSmallChunks = new ItemIP(ConfigItems.itemGalenaSmallChunksID(), "itemGalenaSmallChunks",IndustrialProcessing.tabOres);
@@ -91,10 +91,10 @@ public interface ISetupItems {
     public final static ItemIP itemHardenedSandDust = new ItemIP(ConfigItems.itemHardenedSandDustID(), "itemHardenedSandDust",IndustrialProcessing.tabOres);
     public final static ItemIP itemAluminumDust = new ItemIP(ConfigItems.itemAluminumDustID(), "itemAluminumDust",IndustrialProcessing.tabOres);
     
-    public final static ItemIP itemThickStick = new ItemIP(ConfigItems.ItemThickStick(), "ItemThickStick",IndustrialProcessing.tabOreProcessing);
-    public final static ItemDamage itemHammer = new ItemDamage(ConfigItems.ItemHammer(), "ItemHammer",IndustrialProcessing.tabOreProcessing);
-    public final static ItemDamage itemKnife = new ItemDamage(ConfigItems.ItemKnife(), "ItemKnife",IndustrialProcessing.tabOreProcessing);
-    public final static ItemDamage itemBlowingTorch = new ItemDamage(ConfigItems.ItemBlowingTorch(), "ItemBlowingTorch",IndustrialProcessing.tabOreProcessing);
+    public final static ItemIP itemThickStick = new ItemIP(ConfigItems.ItemThickStick(), "ItemThickStick",IndustrialProcessing.tabMachineParts);
+    public final static ItemDamage itemHammer = new ItemDamage(ConfigItems.ItemHammer(), "ItemHammer",IndustrialProcessing.tabMachineParts);
+    public final static ItemDamage itemKnife = new ItemDamage(ConfigItems.ItemKnife(), "ItemKnife",IndustrialProcessing.tabMachineParts);
+    public final static ItemDamage itemBlowingTorch = new ItemDamage(ConfigItems.ItemBlowingTorch(), "ItemBlowingTorch",IndustrialProcessing.tabMachineParts);
     
     //Iron blast furnace
     public final static ItemIP itemCalcareousSinterDust = new ItemIP(ConfigItems.ItemCalcareousSinterDustID(), "ItemCalcareousSinterDust",IndustrialProcessing.tabOres);
@@ -105,7 +105,7 @@ public interface ISetupItems {
     public final static ItemIP itemHexKey = new ItemIP(ConfigItems.itemHexKeyID(), "itemHexKey",IndustrialProcessing.tabPower);
     public final static ItemWrench itemWrench = new ItemWrench();
     
-    public final static ItemGuide itemGuide = new ItemGuide(ConfigItems.getItemGuideID(), "itemGuide", IndustrialProcessing.tabPower);
+    public final static ItemGuide itemGuide = new ItemGuide(ConfigItems.getItemGuideID(), "itemGuide", IndustrialProcessing.tabMachineParts);
     
     public final static ItemDamage itemGrownCulture = new ItemDamage(ConfigItems.itemGrownCultureID(), "itemGrownCulture", IndustrialProcessing.tabOres,20);
     public final static ItemDamage itemActiveCoal = new ItemDamage(ConfigItems.itemActiveCoalID(), "itemActiveCoalDust", IndustrialProcessing.tabOres,25);
@@ -132,34 +132,34 @@ public interface ISetupItems {
     public final static ItemIP itemTinIngot = new ItemIP(ConfigItems.itemTinIngotID(), "ItemTinIngot",IndustrialProcessing.tabOres);
     public final static ItemIP itemSilverIngot = new ItemIP(ConfigItems.itemSilverIngotID(), "ItemSilverIngot",IndustrialProcessing.tabOres);
     
-    public final static ItemIP itemCopperWire = new ItemIP(ConfigItems.getItemCopperWireID(), "ItemCopperWire",IndustrialProcessing.tabOres);
-    public final static ItemIP itemCopperWireInsulated = new ItemIP(ConfigItems.getItemCopperWireInsulatedID(), "ItemCopperWireInsulated",IndustrialProcessing.tabOres);
-    public final static ItemIP itemCopperCoil = new ItemIP(ConfigItems.getItemCopperCoilID(), "ItemCopperCoil",IndustrialProcessing.tabOres);
-    public final static ItemIP itemElectroMagnet = new ItemIP(ConfigItems.getItemElectroMagnetID(), "ItemElectroMagnet",IndustrialProcessing.tabOres);
-    public final static ItemIP itemMotorFrame = new ItemIP(ConfigItems.getItemMotorFrameID(), "ItemMotorFrame",IndustrialProcessing.tabOres);
-    public final static ItemIP itemMotorStator = new ItemIP(ConfigItems.getItemMotorStatorID(), "ItemMotorStator",IndustrialProcessing.tabOres);
-    public final static ItemIP itemMotorRotor = new ItemIP(ConfigItems.getItemMotorRotorID(), "ItemMotorRotor",IndustrialProcessing.tabOres);
-    public final static ItemIP itemMotorPoleAxis = new ItemIP(ConfigItems.getItemMotorPoleAxisID(), "ItemMotorPoleAxis",IndustrialProcessing.tabOres);
+    public final static ItemIP itemCopperWire = new ItemIP(ConfigItems.getItemCopperWireID(), "ItemCopperWire",IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemCopperWireInsulated = new ItemIP(ConfigItems.getItemCopperWireInsulatedID(), "ItemCopperWireInsulated",IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemCopperCoil = new ItemIP(ConfigItems.getItemCopperCoilID(), "ItemCopperCoil",IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemElectroMagnet = new ItemIP(ConfigItems.getItemElectroMagnetID(), "ItemElectroMagnet",IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemMotorFrame = new ItemIP(ConfigItems.getItemMotorFrameID(), "ItemMotorFrame",IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemMotorStator = new ItemIP(ConfigItems.getItemMotorStatorID(), "ItemMotorStator",IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemMotorRotor = new ItemIP(ConfigItems.getItemMotorRotorID(), "ItemMotorRotor",IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemMotorPoleAxis = new ItemIP(ConfigItems.getItemMotorPoleAxisID(), "ItemMotorPoleAxis",IndustrialProcessing.tabMachineParts);
     
-    public final static ItemIP itemCrankWheel = new ItemIP(ConfigItems.getItemCrankWheelID(), "ItemCrankWheel",IndustrialProcessing.tabOres);
-    public final static ItemIP itemIronBar = new ItemIP(ConfigItems.getItemIronBarID(), "ItemIronBar",IndustrialProcessing.tabOres);
-    public final static ItemIP itemIronRod = new ItemIP(ConfigItems.getItemIronRodID(), "ItemIronRod",IndustrialProcessing.tabOres);
-    public final static ItemIP itemIronT = new ItemIP(ConfigItems.getItemIronTID(), "ItemIronT",IndustrialProcessing.tabOres);
-    public final static ItemIP itemCarbonBrush = new ItemIP(ConfigItems.getItemCarbonBrushID(), "ItemCarbonBrush",IndustrialProcessing.tabOres);
-    public final static ItemIP itemSlipRing = new ItemIP(ConfigItems.getItemSlipRingID(), "ItemSlipRing",IndustrialProcessing.tabOres);
-    public final static ItemDamage itemIronBowl = new ItemDamage(ConfigItems.getItemIronBowlID(), "ItemIronBowl",IndustrialProcessing.tabOres,8);
-    public final static ItemIP itemIronBracket = new ItemIP(ConfigItems.getItemIronBracketID(), "ItemIronBracket",IndustrialProcessing.tabOres);
-    public final static ItemDamage itemDrawPlate = new ItemDamage(ConfigItems.getItemDrawPlateID(), "ItemDrawPlate",IndustrialProcessing.tabOres,8);
-    public final static ItemDamage itemPestle = new ItemDamage(ConfigItems.getItemPestleID(), "ItemPestle",IndustrialProcessing.tabOres,3);
+    public final static ItemIP itemCrankWheel = new ItemIP(ConfigItems.getItemCrankWheelID(), "ItemCrankWheel",IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemIronBar = new ItemIP(ConfigItems.getItemIronBarID(), "ItemIronBar",IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemIronRod = new ItemIP(ConfigItems.getItemIronRodID(), "ItemIronRod",IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemIronT = new ItemIP(ConfigItems.getItemIronTID(), "ItemIronT",IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemCarbonBrush = new ItemIP(ConfigItems.getItemCarbonBrushID(), "ItemCarbonBrush",IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemSlipRing = new ItemIP(ConfigItems.getItemSlipRingID(), "ItemSlipRing",IndustrialProcessing.tabMachineParts);
+    public final static ItemDamage itemIronBowl = new ItemDamage(ConfigItems.getItemIronBowlID(), "ItemIronBowl",IndustrialProcessing.tabMachineParts,8);
+    public final static ItemIP itemIronBracket = new ItemIP(ConfigItems.getItemIronBracketID(), "ItemIronBracket",IndustrialProcessing.tabMachineParts);
+    public final static ItemDamage itemDrawPlate = new ItemDamage(ConfigItems.getItemDrawPlateID(), "ItemDrawPlate",IndustrialProcessing.tabMachineParts,8);
+    public final static ItemDamage itemPestle = new ItemDamage(ConfigItems.getItemPestleID(), "ItemPestle",IndustrialProcessing.tabMachineParts,3);
     
-    public final static ItemIP itemScreen = new ItemIP(ConfigItems.getItemScreenID(), "ItemScreen",IndustrialProcessing.tabOres);
-    public final static ItemIP itemFrame = new ItemIP(ConfigItems.getItemFrameID(), "ItemFrame",IndustrialProcessing.tabOres);
-    public final static ItemIP itemWovenPatern = new ItemIP(ConfigItems.getItemWovenPaternID(), "ItemWovenPatern",IndustrialProcessing.tabOres);
-    public final static ItemIP itemMixingHook = new ItemIP(ConfigItems.getItemMixingHookID(), "ItemMixingHook",IndustrialProcessing.tabOres);
-    public final static ItemIP itemHeatingElement = new ItemIP(ConfigItems.getItemHeatingElementID(), "ItemHeatingElement",IndustrialProcessing.tabOres);
-    public final static ItemIP itemTumbler = new ItemIP(ConfigItems.getItemTumblerID(), "ItemTumbler",IndustrialProcessing.tabOres);
-    public final static ItemIP itemRakeArm = new ItemIP(ConfigItems.getItemRakeArmID(), "ItemRakeArm",IndustrialProcessing.tabOres);
-    public final static ItemIP itemDisk = new ItemIP(ConfigItems.getItemDiskID(), "ItemDisk",IndustrialProcessing.tabOres);
+    public final static ItemIP itemScreen = new ItemIP(ConfigItems.getItemScreenID(), "ItemScreen",IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemFrame = new ItemIP(ConfigItems.getItemFrameID(), "ItemFrame",IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemWovenPatern = new ItemIP(ConfigItems.getItemWovenPaternID(), "ItemWovenPatern",IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemMixingHook = new ItemIP(ConfigItems.getItemMixingHookID(), "ItemMixingHook",IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemHeatingElement = new ItemIP(ConfigItems.getItemHeatingElementID(), "ItemHeatingElement",IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemTumbler = new ItemIP(ConfigItems.getItemTumblerID(), "ItemTumbler",IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemRakeArm = new ItemIP(ConfigItems.getItemRakeArmID(), "ItemRakeArm",IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemDisk = new ItemIP(ConfigItems.getItemDiskID(), "ItemDisk",IndustrialProcessing.tabMachineParts);
     
     public final static ItemIP itemTaliaMixedFragments = new ItemIP(ConfigItems.getItemTaliaMixedFragmentsID(), "itemTaliaMixedFragments",IndustrialProcessing.tabOres);
     public final static ItemIP itemGoldMixedFragments = new ItemIP(ConfigItems.getItemGoldMixedFragmentsID(), "itemGoldMixedFragments",IndustrialProcessing.tabOres);
@@ -169,31 +169,33 @@ public interface ISetupItems {
     public final static ItemIP itemLimestoneDust = new ItemIP(ConfigItems.getItemLimestoneDustID(), "itemLimestoneDust",IndustrialProcessing.tabOres);
     public final static ItemIP itemIronSinter = new ItemIP(ConfigItems.getItemIronSinterID(), "ItemIronOxidePellets",IndustrialProcessing.tabOres);
     
-    public final static ItemSuspendedCart itemSupendedCart = new ItemSuspendedCart(ConfigItems.getItemSuspendedCartID(), "ItemSupendedCart",1,IndustrialProcessing.tabOres);
+    public final static ItemSuspendedCart itemSupendedCart = new ItemSuspendedCart(ConfigItems.getItemSuspendedCartID(), "ItemSupendedCart",1,IndustrialProcessing.tabMachineParts);
     
-    public final static ItemIP itemFlask = new ItemIP(ConfigItems.getItemFlaskID(), "itemFlask", IndustrialProcessing.tabOres);
-    public final static ItemIP itemCastingMulsh = new ItemIP(ConfigItems.getItemCastingMulshID(), "itemCastingMulsh", IndustrialProcessing.tabOres);
-    public final static ItemIP itemSandCast = new ItemIP(ConfigItems.getItemSandCastID(), "itemSandCast", IndustrialProcessing.tabOres);
-    public final static ItemDamage itemSandCastIngot = new ItemDamage(ConfigItems.getItemSandCastIngotID(), "itemSandCastIngot", IndustrialProcessing.tabOres,32);
+    public final static ItemIP itemFlask = new ItemIP(ConfigItems.getItemFlaskID(), "itemFlask", IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemCastingMulsh = new ItemIP(ConfigItems.getItemCastingMulshID(), "itemCastingMulsh", IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemSandCast = new ItemIP(ConfigItems.getItemSandCastID(), "itemSandCast", IndustrialProcessing.tabMachineParts);
+    public final static ItemDamage itemSandCastIngot = new ItemDamage(ConfigItems.getItemSandCastIngotID(), "itemSandCastIngot", IndustrialProcessing.tabMachineParts,32);
     
-    public final static ItemIP itemCopperPlate = new ItemIP(ConfigItems.getItemCopperPlateID(), "itemCopperPlate", IndustrialProcessing.tabOres);
+    public final static ItemIP itemCopperPlate = new ItemIP(ConfigItems.getItemCopperPlateID(), "itemCopperPlate", IndustrialProcessing.tabMachineParts);
     
-    public final static ItemIP itemCopperBoard = new ItemIP(ConfigItems.getItemCopperBoardID(), "ItemCopperBoard", IndustrialProcessing.tabOres);
-    public final static ItemIP itemElectricComponents = new ItemIP(ConfigItems.getItemElectricComponentsID(), "ItemElectricComponents", IndustrialProcessing.tabOres);
-    public final static ItemIP itemnhardenedIsolationBoard = new ItemIP(ConfigItems.getItemUnhardenedIsolationBoardID(), "itemnhardenedIsolationBoard", IndustrialProcessing.tabOres);
-    public final static ItemIP itemIsolationBoard = new ItemIP(ConfigItems.getItemIsolationBoardID(), "ItemIsolationBoard", IndustrialProcessing.tabOres);
-    public final static ItemIP itemPCBoard = new ItemIP(ConfigItems.getItemPCBoardID(), "ItemPCBoard", IndustrialProcessing.tabOres);
-    public final static ItemIP itemPCBoardWired = new ItemIP(ConfigItems.getItemPCBoardWiredID(), "ItemPCBoardWired", IndustrialProcessing.tabOres);
-    public final static ItemDamage itemSolder = new ItemDamage(ConfigItems.getItemSolderID(), "ItemSolder", IndustrialProcessing.tabOres,64);
-    public final static ItemIP itemSolderEmpty = new ItemIP(ConfigItems.getItemSolderEmptyID(), "ItemSolderEmpty", IndustrialProcessing.tabOres);
-    public final static ItemDamage itemSolderingIron = new ItemDamage(ConfigItems.getItemSolderingIronID(), "ItemSolderingIron", IndustrialProcessing.tabOres,320);
-    public final static ItemIP itemStripBoard = new ItemIP(ConfigItems.getItemStripBoardID(), "ItemStripBoard", IndustrialProcessing.tabOres);
-    public final static ItemIP itemStripBoardWired = new ItemIP(ConfigItems.getItemStripBoardWiredID(), "ItemStripBoardWired", IndustrialProcessing.tabOres);
-    public final static ItemIP itemSolderAlloyWire = new ItemIP(ConfigItems.getItemSolderAlloyWireID(), "ItemSolderAlloyWire", IndustrialProcessing.tabOres);
-    public final static ItemIP itemSolderAlloyIngot = new ItemIP(ConfigItems.getItemSolderAlloyIngotID(), "ItemSolderAlloyIngot", IndustrialProcessing.tabOres);
-    public final static ItemIP itemRedstoneCircuitry = new ItemIP(ConfigItems.getItemRedstoneCircuitryID(), "ItemRedstoneCircuitry", IndustrialProcessing.tabOres);
-    public final static ItemIP itemSmallEngine = new ItemIP(ConfigItems.getItemSmallEngineID(), "ItemSmallEngine", IndustrialProcessing.tabOres);
-    public final static ItemIP itemCopperBar = new ItemIP(ConfigItems.getItemCopperBarID(), "ItemCopperBar",IndustrialProcessing.tabOres);
+    public final static ItemIP itemCopperBoard = new ItemIP(ConfigItems.getItemCopperBoardID(), "ItemCopperBoard", IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemElectricComponents = new ItemIP(ConfigItems.getItemElectricComponentsID(), "ItemElectricComponents", IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemnhardenedIsolationBoard = new ItemIP(ConfigItems.getItemUnhardenedIsolationBoardID(), "itemnhardenedIsolationBoard", IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemIsolationBoard = new ItemIP(ConfigItems.getItemIsolationBoardID(), "ItemIsolationBoard", IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemPCBoard = new ItemIP(ConfigItems.getItemPCBoardID(), "ItemPCBoard", IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemPCBoardWired = new ItemIP(ConfigItems.getItemPCBoardWiredID(), "ItemPCBoardWired", IndustrialProcessing.tabMachineParts);
+    public final static ItemDamage itemSolder = new ItemDamage(ConfigItems.getItemSolderID(), "ItemSolder", IndustrialProcessing.tabMachineParts,64);
+    public final static ItemIP itemSolderEmpty = new ItemIP(ConfigItems.getItemSolderEmptyID(), "ItemSolderEmpty", IndustrialProcessing.tabMachineParts);
+    public final static ItemDamage itemSolderingIron = new ItemDamage(ConfigItems.getItemSolderingIronID(), "ItemSolderingIron", IndustrialProcessing.tabMachineParts,320);
+    public final static ItemIP itemStripBoard = new ItemIP(ConfigItems.getItemStripBoardID(), "ItemStripBoard", IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemStripBoardWired = new ItemIP(ConfigItems.getItemStripBoardWiredID(), "ItemStripBoardWired", IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemSolderAlloyWire = new ItemIP(ConfigItems.getItemSolderAlloyWireID(), "ItemSolderAlloyWire", IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemSolderAlloyIngot = new ItemIP(ConfigItems.getItemSolderAlloyIngotID(), "ItemSolderAlloyIngot", IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemRedstoneCircuitry = new ItemIP(ConfigItems.getItemRedstoneCircuitryID(), "ItemRedstoneCircuitry", IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemSmallEngine = new ItemIP(ConfigItems.getItemSmallEngineID(), "ItemSmallEngine", IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemCopperBar = new ItemIP(ConfigItems.getItemCopperBarID(), "ItemCopperBar",IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemFilterTray = new ItemIP(ConfigItems.getItemFilterTrayID(), "ItemFilterTray",IndustrialProcessing.tabMachineParts);
     
+    public final static ItemIP itemLeadIngot = new ItemIP(ConfigItems.getItemLeadIngotID(), "ItemLeadIngot",IndustrialProcessing.tabOres);
     
 }

@@ -25,6 +25,7 @@ public class ConfigBaseRecipes {
 		removeRecipes();
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(IndustrialProcessing.itemGuide), new ItemStack(Item.book), new ItemStack(Item.dyePowder,1,14));
+		GameRegistry.addShapelessRecipe(new ItemStack(IndustrialProcessing.blockTransportFluidsStone,1,3), new ItemStack(Block.stoneBrick), new ItemStack(IndustrialProcessing.blockTransportFluids));
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemWovenPatern), new ItemStack(Item.leather), new ItemStack(ISetupItems.itemKnife, 1, WILDCARD_VALUE));
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemThickStick), new ItemStack(Item.stick), new ItemStack(Item.stick));
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemScreen), new ItemStack(ISetupItems.itemWovenPatern), new ItemStack(ISetupItems.itemFrame));

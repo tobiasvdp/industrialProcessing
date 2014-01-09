@@ -15,7 +15,6 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.util.StatCollector;
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.PacketHandler;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import ip.industrialProcessing.multiblock.container.ContainerMultiblock;
 import ip.industrialProcessing.multiblock.container.ContainerMultiblockTankWorkerPowered;
@@ -25,6 +24,7 @@ import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTa
 import ip.industrialProcessing.multiblock.gui.CTmultiblock;
 import ip.industrialProcessing.multiblock.gui.GUImultiblock;
 import ip.industrialProcessing.utils.gui.IPButton;
+import ip.industrialProcessing.utils.handler.packets.PacketHandler;
 
 public class GuiContainerWeldingStation extends GUImultiblock {
 

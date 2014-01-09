@@ -1,7 +1,7 @@
 package ip.industrialProcessing.transport.items.conveyorBelt.util;
 
-import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
+import ip.industrialProcessing.utils.DirectionUtils;
 import net.minecraftforge.common.ForgeDirection;
 
 public class DataUtils {

@@ -4,14 +4,13 @@ import ip.industrialProcessing.subMod.logic.utils.UTBusType;
 import ip.industrialProcessing.subMod.logic.utils.UTLogicType;
 import ip.industrialProcessing.subMod.logic.utils.UTpacket;
 import ip.industrialProcessing.subMod.logic.utils.UTpacketType;
-import ip.industrialProcessing.utils.blockContainer.IBlockInBlock;
 
 import java.util.ArrayList;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
-public abstract class TElogicTransport extends TileEntity implements ICommunicationTransport, IBlockInBlock{
+public abstract class TElogicTransport extends TileEntity implements ICommunicationTransport{
 	
 	int internalSides = 0;
 	int sidesCount = 1;
@@ -145,11 +144,6 @@ public abstract class TElogicTransport extends TileEntity implements ICommunicat
 	@Override
 	public int getBlockSidesCount() {
 		return sidesCount;
-	}
-	
-	@Override
-	public void addBlockToContainer(ForgeDirection dir) {
-		System.out.println("adding to side is " + dir);
 	}
 	
     @Override

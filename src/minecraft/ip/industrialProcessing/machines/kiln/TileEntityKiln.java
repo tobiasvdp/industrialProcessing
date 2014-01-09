@@ -5,7 +5,7 @@ import ip.industrialProcessing.machines.SimplePowerStorage;
 import ip.industrialProcessing.machines.TileEntityPoweredWorkerMachine;
 import ip.industrialProcessing.power.plants.IHeatable;
 import ip.industrialProcessing.recipes.Recipe;
-import ip.industrialProcessing.utils.heat.IHeatStorage;
+import ip.industrialProcessing.utils.handler.heat.IHeatStorage;
 
 import java.util.Iterator;
 

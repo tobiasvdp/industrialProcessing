@@ -1,6 +1,5 @@
 package ip.industrialProcessing.multiblock.core.extend;
 
-import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.IPowerStorage;
 import ip.industrialProcessing.machines.PowerWorkerHelper;
@@ -14,6 +13,7 @@ import ip.industrialProcessing.power.IPoweredMachine;
 import ip.industrialProcessing.power.PowerHelper;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeWorker;
+import ip.industrialProcessing.utils.DirectionUtils;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 

@@ -5,7 +5,6 @@ import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
-import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.SimplePowerStorage;
 import ip.industrialProcessing.machines.TileEntityMachine;
@@ -16,6 +15,7 @@ import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
 import ip.industrialProcessing.power.IPowerAcceptor;
 import ip.industrialProcessing.power.PowerHelper;
 import ip.industrialProcessing.power.plants.IMechanicalMotion;
+import ip.industrialProcessing.utils.DirectionUtils;
 
 public class TileEntityElectroMotor extends TileEntityMachine implements IPowerAcceptor {
 
