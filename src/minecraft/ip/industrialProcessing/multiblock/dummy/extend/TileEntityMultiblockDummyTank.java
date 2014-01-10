@@ -5,12 +5,12 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
+import ip.industrialProcessing.api.tanks.ITank;
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTank;
 import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
 
-public class TileEntityMultiblockDummyTank extends TileEntityMultiblockDummy implements IFluidHandler {
-
+public class TileEntityMultiblockDummyTank extends TileEntityMultiblockDummy implements ITank{
 	public TileEntityMultiblockDummyTank() {
 		super();
 	}
@@ -63,6 +63,26 @@ public class TileEntityMultiblockDummyTank extends TileEntityMultiblockDummy imp
 	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
 		if (this.getCore() != null)
 			return this.getCore().getTankInfo(getGroup(), from);
+		return null;
+	}
+
+	@Override
+	public float getPressure(ForgeDirection from) {
+		if (this.getCore() != null)
+			return this.getCore().getPressure(getGroup(), from);
+		return 0;
+	}
+
+	@Override
+	public void addPressure(ForgeDirection from, float pressure) {
+		if (this.getCore() != null)
+			 this.getCore().addPressure(from, pressure);
+	}
+
+	@Override
+	public FluidTankInfo[] getTanks() {
+		if (this.getCore() != null)
+			return this.getCore().getTanks();
 		return null;
 	}
 
