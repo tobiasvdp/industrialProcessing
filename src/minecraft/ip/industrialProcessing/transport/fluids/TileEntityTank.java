@@ -4,18 +4,20 @@ import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.IConnectedTile;
 import ip.industrialProcessing.client.render.IFluidInfo;
 import ip.industrialProcessing.machines.IRotateableEntity;
-import ip.industrialProcessing.machines.TileEntitySynced;
+import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
 import ip.industrialProcessing.machines.animation.AnimationMode;
 import ip.industrialProcessing.machines.animation.tanks.ITankSyncable;
 import ip.industrialProcessing.machines.animation.tanks.TankHandler;
 import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
-import ip.industrialProcessing.transport.TransportConnectionState;
+import ip.industrialProcessing.machines.containers.IFluidMachineContainerEntity;
+import ip.industrialProcessing.machines.containers.IMachineContainerEntity;
 import ip.industrialProcessing.utils.FluidTransfers;
 
 import java.util.Arrays;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatMessageComponent;
@@ -28,7 +30,7 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.fluids.IFluidTank;
 
-public class TileEntityTank extends TileEntitySynced implements IFluidHandler, IConnectedTile, IFluidInfo, ITankSyncable, IPressuredTank, IRotateableEntity {
+public class TileEntityTank extends TileEntityMachine implements IMachineContainerEntity, IFluidMachineContainerEntity, IFluidHandler, IConnectedTile, IFluidInfo, ITankSyncable, IPressuredTank, IRotateableEntity {
 
     private static final int PRESSURE_CONSTANT = 220;
     private FluidTank tank = new FluidTank(10 * FluidContainerRegistry.BUCKET_VOLUME);
@@ -78,6 +80,7 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
 		setState(direction, verifyState(direction));
 	    }
 	    unverified = false;
+	    this.notifyBlockChange(); // mark nbt as changed
 	}
 	if (!this.states[ForgeDirection.UP.ordinal()].isConnected())
 	    this.pressureAbove = 0;
@@ -168,7 +171,7 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
 	this.tank.writeToNBT(nbt);
 	nbt.setInteger("Forward", this.forward == null ? ForgeDirection.NORTH.ordinal() : this.forward.ordinal());
 	int[] stateValues = new int[this.states.length];
-	for(int i = 0; i < this.states.length; i++){
+	for (int i = 0; i < this.states.length; i++) {
 	    stateValues[i] = this.states[i].ordinal();
 	}
 	nbt.setIntArray("States", stateValues);
@@ -183,9 +186,8 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
 	    this.forward = ForgeDirection.getOrientation(nbt.getInteger("Forward"));
 	else
 	    this.forward = ForgeDirection.NORTH;
-	
-	if(nbt.hasKey("States"))
-	{
+
+	if (nbt.hasKey("States")) {
 	    int[] stateValues = nbt.getIntArray("States");
 	    for (int i = 0; i < states.length; i++) {
 		states[i] = ConnectionState.values()[stateValues[i]];
@@ -289,27 +291,27 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
     }
 
     @Override
-    public void setForwardDirection(ForgeDirection forward) { 
-	    this.forward = forward;
-	    this.notifyBlockChange();
-	    for (int i = 1; i <= tanksAbove; i++) {
+    public void setForwardDirection(ForgeDirection forward) {
+	this.forward = forward;
+	this.notifyBlockChange();
+	for (int i = 1; i <= tanksAbove; i++) {
 
-		TileEntity entityBelow = this.worldObj.getBlockTileEntity(xCoord, yCoord + i, zCoord);
-		if (entityBelow instanceof TileEntityTank) {
-		    TileEntityTank tank = ((TileEntityTank) entityBelow);
-		    tank.forward = forward;
-		    tank.notifyBlockChange();
-		}  
+	    TileEntity entityBelow = this.worldObj.getBlockTileEntity(xCoord, yCoord + i, zCoord);
+	    if (entityBelow instanceof TileEntityTank) {
+		TileEntityTank tank = ((TileEntityTank) entityBelow);
+		tank.forward = forward;
+		tank.notifyBlockChange();
 	    }
-	    for (int i = 1; i <= tanksBelow; i++) {
+	}
+	for (int i = 1; i <= tanksBelow; i++) {
 
-		TileEntity entityBelow = this.worldObj.getBlockTileEntity(xCoord, yCoord - i, zCoord);
-		if (entityBelow instanceof TileEntityTank) {
-		    TileEntityTank tank = ((TileEntityTank) entityBelow);
-		    tank.forward = forward;
-		    tank.notifyBlockChange();
-		}  
-	    } 
+	    TileEntity entityBelow = this.worldObj.getBlockTileEntity(xCoord, yCoord - i, zCoord);
+	    if (entityBelow instanceof TileEntityTank) {
+		TileEntityTank tank = ((TileEntityTank) entityBelow);
+		tank.forward = forward;
+		tank.notifyBlockChange();
+	    }
+	}
     }
 
     @Override
@@ -323,11 +325,41 @@ public class TileEntityTank extends TileEntitySynced implements IFluidHandler, I
 	    player.sendChatToPlayer(ChatMessageComponent.func_111066_d("TanksBelow:" + this.tanksBelow));
 	    player.sendChatToPlayer(ChatMessageComponent.func_111066_d("TanksInStack:" + this.tanksInStack));
 	    player.sendChatToPlayer(ChatMessageComponent.func_111066_d("TankForward:" + this.forward));
-	    player.sendChatToPlayer(ChatMessageComponent.func_111066_d("Tank:" + this.xCoord+" "+this.yCoord+" "+this.zCoord));
+	    player.sendChatToPlayer(ChatMessageComponent.func_111066_d("Tank:" + this.xCoord + " " + this.yCoord + " " + this.zCoord));
 
 	    for (int i = 0; i < states.length; i++) {
 		player.sendChatToPlayer(ChatMessageComponent.func_111066_d(ForgeDirection.getOrientation(i) + "=" + this.states[i]));
 	    }
 	}
+    }
+
+    @Override
+    protected boolean isValidInput(int slot, int itemID) {
+	return slot == 0 && FluidContainerRegistry.isEmptyContainer(new ItemStack(itemID, 0, 1));
+    }
+
+    @Override
+    public FluidTankInfo getTankInfoForSlot(int slot) {
+	if (slot == 0) {
+	    int capacity = this.tanksInStack * this.tank.getCapacity();
+	    int amount = 0;
+	    int fluid = -1;
+	    for (int i = tanksBelow; i >= -tanksAbove; i--) {
+		TileEntity lower = this.worldObj.getBlockTileEntity(xCoord, yCoord - i, zCoord);
+		if (lower instanceof TileEntityTank) {
+		    TileEntityTank tank = (TileEntityTank) lower;
+		    if (tank.tank.getFluidAmount() > 0) {
+			amount += tank.tank.getFluidAmount();
+			fluid = tank.tank.getFluid().fluidID;
+		    } else
+			break;
+		}
+	    }
+	    if (fluid == -1)
+		return new FluidTankInfo(null, capacity);
+	    else
+		return new FluidTankInfo(new FluidStack(fluid, amount), capacity);
+	}
+	return tank.getInfo();
     }
 }

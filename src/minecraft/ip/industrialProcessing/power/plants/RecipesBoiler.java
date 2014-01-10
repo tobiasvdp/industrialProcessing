@@ -14,10 +14,10 @@ public class RecipesBoiler extends RecipesMachine {
 	{
 		Recipe steam = new Recipe();
 		steam.workRequired = 30;
-		steam.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.WATER.getID(), RecipeSlotType.TANK, 100)};
+		steam.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.WATER.getID(), RecipeSlotType.TANK, 1000)};
 		
 		int steamID = FluidRegistry.getFluid("steam").getID();
-		steam.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, steamID, RecipeSlotType.TANK, 50, 150, 0.5)};
+		steam.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, steamID, RecipeSlotType.TANK, 1000, 1000, 0.5)};
 		addRecipe(steam);
 	}
 }

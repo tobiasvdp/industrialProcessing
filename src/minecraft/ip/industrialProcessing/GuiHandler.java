@@ -173,6 +173,12 @@ import ip.industrialProcessing.power.plants.TileEntityBoiler;
 import ip.industrialProcessing.power.plants.TileEntityGenerator;
 import ip.industrialProcessing.power.plants.TileEntitySolidBurner;
 import ip.industrialProcessing.power.plants.TileEntityTurbine;
+import ip.industrialProcessing.power.storage.ContainerEnergyCell;
+import ip.industrialProcessing.power.storage.GuiContainerEnergyCell;
+import ip.industrialProcessing.power.storage.TileEntityEnergyCell;
+import ip.industrialProcessing.transport.fluids.ContainerTank;
+import ip.industrialProcessing.transport.fluids.GuiContainerTank;
+import ip.industrialProcessing.transport.fluids.TileEntityTank;
 import ip.industrialProcessing.transport.items.conveyorSorter.ContainerSorter;
 import ip.industrialProcessing.transport.items.conveyorSorter.GuiContainerSorter;
 import ip.industrialProcessing.transport.items.conveyorSorter.TileEntityConveyorSorter;
@@ -304,6 +310,10 @@ public class GuiHandler implements IGuiHandler {
 				return new ContainerBloomery(player.inventory, (TileEntityBloomery) entity);
 			if (entity instanceof TileEntityContainer)
 				return new ContainerContainer(player.inventory, (TileEntityContainer) entity);
+			if (entity instanceof TileEntityEnergyCell)
+				return new ContainerEnergyCell(player.inventory, (TileEntityEnergyCell) entity);
+			if (entity instanceof TileEntityTank)
+				return new ContainerTank(player.inventory, (TileEntityTank) entity);
 		} else if (ID == GUIDE_ID) {
 			return null;
 		} else if (ID == SOLDERINGIRON_ID) {
@@ -433,6 +443,10 @@ public class GuiHandler implements IGuiHandler {
 				return new GuiContainerBloomery(player.inventory, (TileEntityBloomery) entity);
 			if (entity instanceof TileEntityContainer)
 				return new GuiContainerContainer(player.inventory, (TileEntityContainer) entity);
+			if (entity instanceof TileEntityEnergyCell)
+				return new GuiContainerEnergyCell(player.inventory, (TileEntityEnergyCell) entity);
+			if (entity instanceof TileEntityTank)
+				return new GuiContainerTank(player.inventory, (TileEntityTank) entity);
 		} else if (ID == GUIDE_ID) {
 			return new GuiGuide(player);
 		} else if (ID == SOLDERINGIRON_ID) {

@@ -49,10 +49,6 @@ public class TileEntityBoiler extends TileEntityFluidWorkerMachine implements IH
             // the faster the heat dissipates to the environment:
             this.heat += COOLING_RATE * (ambientTemperature - this.heat);
 
-            IFluidHandler handler = getFluidHandler(xCoord, yCoord + 1, zCoord);
-            if (handler != null) {
-                FluidTransfers.transfer(100, this.getTankInSlot(1), handler, ForgeDirection.DOWN);
-            }
             if (this.tankHandler.readDataFromTanks())
                 TileTankSyncHandler.sendTankData(this, this.tankHandler);
         }

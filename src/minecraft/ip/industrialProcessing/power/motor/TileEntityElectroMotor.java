@@ -46,7 +46,7 @@ public class TileEntityElectroMotor extends TileEntityMachine implements IPowerA
         if (!this.worldObj.isRemote) {
 
             int drain = this.storage.drainPower(100, true);
-            addEnergy(drain);
+            addEnergy(drain*20); // a lil more efficient
 
             TileAnimationSyncHandler.sendAnimationData(this, this.animationHandler);
 

@@ -9,6 +9,8 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.machines.TileEntityFluidMachine;
 import ip.industrialProcessing.machines.containers.ContainerFluidMachine;
+import ip.industrialProcessing.machines.containers.IFluidMachineContainerEntity;
+import ip.industrialProcessing.machines.containers.IMachineContainerEntity;
 import ip.industrialProcessing.machines.containers.ProgressInfoTank;
 import ip.industrialProcessing.machines.containers.ProgressInfoWorker;
 import net.minecraft.block.Block;
@@ -23,12 +25,12 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 
-public class GuiContainerFluidMachine extends GuiContainerMachine {
+public class GuiContainerFluidMachine<T extends TileEntity & IMachineContainerEntity & IFluidMachineContainerEntity> extends GuiContainerMachine {
 
-    private TileEntityFluidMachine tileEntityFluidMachine;
-    private ContainerFluidMachine fluidContainer;
+    private T tileEntityFluidMachine;
+    private ContainerFluidMachine<T> fluidContainer;
 
-    public GuiContainerFluidMachine(InventoryPlayer inventoryPlayer, TileEntityFluidMachine tileEntity, ContainerFluidMachine container, String name, String textureLocation) {
+    public GuiContainerFluidMachine(InventoryPlayer inventoryPlayer, T tileEntity, ContainerFluidMachine<T> container, String name, String textureLocation) {
 	super(inventoryPlayer, tileEntity, container, name, textureLocation);
 	this.tileEntityFluidMachine = tileEntity;
 	this.fluidContainer = container;

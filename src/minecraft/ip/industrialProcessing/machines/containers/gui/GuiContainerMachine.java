@@ -3,6 +3,8 @@ package ip.industrialProcessing.machines.containers.gui;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.machines.containers.ContainerMachine;
+import ip.industrialProcessing.machines.containers.IFluidMachineContainerEntity;
+import ip.industrialProcessing.machines.containers.IMachineContainerEntity;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -13,7 +15,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Point;
 import org.lwjgl.util.Rectangle;
 
-public class GuiContainerMachine extends GuiContainer {
+public class GuiContainerMachine<T extends TileEntity & IMachineContainerEntity & IFluidMachineContainerEntity> extends GuiContainer {
 
     public TileEntity tileEntity;
     protected String name;
@@ -22,7 +24,7 @@ public class GuiContainerMachine extends GuiContainer {
     protected int mouseY;
     protected ToolTip toolTip;
 
-    public GuiContainerMachine(InventoryPlayer inventoryPlayer, TileEntity tileEntity, ContainerMachine container, String name, String textureLocation) {
+    public GuiContainerMachine(InventoryPlayer inventoryPlayer, T tileEntity, ContainerMachine<T> container, String name, String textureLocation) {
 	super(container);
 	this.tileEntity = tileEntity;
 	this.name = name;
