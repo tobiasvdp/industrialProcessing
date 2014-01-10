@@ -38,7 +38,7 @@ public class ModelBlastFurnaceTopBlock extends ModelBlock {
 
 	TileEntity entity = reference.getBlockTileEntity();
 	ForgeDirection forward = BlockMachine.getForwardFromEntity(entity);
-	int dir = 4 - BlockMachine.getMetadataFromForward(forward);
+	int dir = BlockMachine.getMetadataFromForward(forward);
 
 	Icon fillerIcon = reference.getIcon(0);
 	Icon hullIcon = reference.getIcon(1);
