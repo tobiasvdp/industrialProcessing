@@ -58,7 +58,7 @@ public class TEmultiblockBlastFurnace extends TileEntityMultiblockCoreTankWorker
 		
 		this.addTank(10000, 0, new ForgeDirection[] { ForgeDirection.UNKNOWN }, true, false);
 		this.addTank(10000, 0, new ForgeDirection[] { ForgeDirection.DOWN }, false, true);
-		this.addTank(10000, 0, new ForgeDirection[] { ForgeDirection.WEST }, false, true);
+		this.addTank(10000, 0, new ForgeDirection[] { ForgeDirection.NORTH }, false, true);
 		this.addTank(10000, 1, new ForgeDirection[] { ForgeDirection.UP }, false, true);
 
 	}

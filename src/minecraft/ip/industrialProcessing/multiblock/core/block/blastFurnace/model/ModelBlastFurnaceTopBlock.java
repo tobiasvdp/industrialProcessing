@@ -46,8 +46,10 @@ public class ModelBlastFurnaceTopBlock extends ModelBlock {
 	Icon tankFeaturesIcon = reference.getIcon(3); 
 
 	filler.renderMesh(false, fillerIcon, reference);
-	inputUp.renderMesh(false, featuresIcon, reference);
+	inputUp.renderMesh(false, tankFeaturesIcon, reference);
 	topHull.getRotated(dir).renderMesh(false, hullIcon, reference);  
+	itemConnector.getRotated(dir+1).renderMesh(false, featuresIcon, reference);
+	itemConnector.getRotated(dir+3).renderMesh(false, featuresIcon, reference);
 	return true;
     }
 

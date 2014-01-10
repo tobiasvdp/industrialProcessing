@@ -54,7 +54,8 @@ public class ModelDiskFilterBlock extends ModelBlock {
 	features.getRotated(dir).renderMesh(false, featuresIcon, reference);
 	connectorSide.getRotated(dir).renderMesh(false, powerIcon, reference);
 	connectorSide.getRotated(dir + 1).renderMesh(false, tankIcon, reference);
-	connectorSide.getRotated(dir + 2).renderMesh(false, featuresIcon, reference);
+	connectorSide.getRotated(dir + 2).renderMesh(false, featuresIcon, reference); 
+	connectorSide.getRotated(dir + 3).renderMesh(false, tankIcon, reference);
 	return true;
     }
 

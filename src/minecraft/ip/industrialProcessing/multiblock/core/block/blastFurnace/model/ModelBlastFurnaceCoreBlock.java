@@ -52,16 +52,16 @@ public class ModelBlastFurnaceCoreBlock extends ModelBlock {
 	Icon fillerIcon = reference.getIcon(0);
 	Icon hullIcon = reference.getIcon(1);
 	Icon featuresIcon = reference.getIcon(2);
+	Icon fluidIcon = reference.getIcon(3);
 	Icon grillIcon = reference.getIcon(4);
 	Icon powerIcon = reference.getIcon(5);
 
 	filler.renderMesh(false, fillerIcon, reference);
-	outputDown.renderMesh(false, featuresIcon, reference);
+	outputDown.renderMesh(false, fluidIcon, reference);
 	bottomHull.getRotated(dir).renderMesh(false, hullIcon, reference);
 	features.getRotated(dir).renderMesh(false, featuresIcon, reference);
 	grill.getRotated(dir).renderMesh(false, grillIcon, reference);
-	itemConnector.getRotated(dir).renderMesh(false, featuresIcon, reference);
-	itemConnector.getRotated(dir+2).renderMesh(false, featuresIcon, reference);
+	itemConnector.getRotated(dir+3).renderMesh(false, fluidIcon, reference); 
 	return true;
     }
 
