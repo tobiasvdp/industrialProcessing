@@ -1,5 +1,6 @@
 package ip.industrialProcessing;
 
+import ip.industrialProcessing.gui.GuiContainerView;
 import ip.industrialProcessing.items.guide.gui.GuiGuide;
 import ip.industrialProcessing.machines.classifier.ContainerClassifier;
 import ip.industrialProcessing.machines.classifier.GuiContainerClassifier;
@@ -321,7 +322,7 @@ public class GuiHandler implements IGuiHandler {
 			if (entity instanceof TileEntityFilter)
 				return new GuiContainerFilter(player.inventory, (TileEntityFilter) entity);
 			if (entity instanceof TileEntityCrusher)
-				return new GuiContainerCrusher(player.inventory, (TileEntityCrusher) entity);
+				return new GuiContainerView(player.inventory, (TileEntityCrusher) entity,new ContainerCrusher(player.inventory, (TileEntityCrusher)entity));
 			if (entity instanceof TileEntityMagneticSeparator)
 				return new GuiContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity);
 			if (entity instanceof TileEntityMixer)

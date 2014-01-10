@@ -3,13 +3,19 @@ package ip.industrialProcessing.gui.components;
 import java.awt.Rectangle;
 
 import net.minecraft.client.gui.Gui;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.SlotCrafting;
 import ip.industrialProcessing.gui.GuiLayout;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayout;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
 import ip.industrialProcessing.gui.container.slot.layout.components.SlotLayoutComponent;
 import ip.industrialProcessing.gui.container.slot.layout.components.SlotLayoutInput;
+import ip.industrialProcessing.gui.container.slot.layout.components.SlotLayoutInventory;
 import ip.industrialProcessing.gui.container.slot.layout.components.SlotLayoutOutput;
 import ip.industrialProcessing.gui.guiContainer.layout.GuiContainerLayout;
+import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerLayoutPower;
+import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerLayoutSlot;
+import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerLayoutWorker;
 
 public class GuiLayoutPanel {
 	Rectangle rect;
@@ -37,19 +43,29 @@ public class GuiLayoutPanel {
 		return rect.x;
 	}
 	
+	public void setX(int val) {
+		rect.x = val;
+	}
+	
 	public int getY(){
 		return rect.y;
 	}
 	
 	public void setSlotLayout(SlotLayoutType layout, int amount){
 		switch(getSlotComponent()){
+		case inventory:
+			this.slotLayout = new SlotLayoutInventory(rect);
+			break;
 		case input:
-			
-			this.slotLayout = new SlotLayoutInput(layout, amount, parent.getSlotIndex(), rect.x, rect.y);;
+			this.slotLayout = new SlotLayoutInput(layout, amount, parent.getSlotIndex(), rect);;
+			this.guiContainerLayout = new GuiContainerLayoutSlot();
+			((GuiContainerLayoutSlot) this.guiContainerLayout).addDrawRectaglesFromSlotLayout(this,this.slotLayout);
 			parent.setSlotIndex(parent.getSlotIndex()+amount);
 			break;
 		case output:
-			this.slotLayout = new SlotLayoutOutput(layout, amount, parent.getSlotIndex(), rect.x, rect.y);
+			this.slotLayout = new SlotLayoutOutput(layout, amount, parent.getSlotIndex(), rect);
+			this.guiContainerLayout = new GuiContainerLayoutSlot();
+			((GuiContainerLayoutSlot) this.guiContainerLayout).addDrawRectaglesFromSlotLayout(this,this.slotLayout);
 			parent.setSlotIndex(parent.getSlotIndex()+amount);
 			break;
 		case side:
@@ -59,8 +75,6 @@ public class GuiLayoutPanel {
 		default:
 			break;
 		}
-		guiContainerLayout = new GuiContainerLayout();
-		guiContainerLayout.addDrawRectaglesFromSlotLayout(this.slotLayout);
 		
 	}
 	
@@ -76,20 +90,34 @@ public class GuiLayoutPanel {
 			return SlotLayoutComponent.output;
 		case slotsSide:
 			return SlotLayoutComponent.side;
+		case slotsInventory:
+			return SlotLayoutComponent.inventory;
 		default:
 			return SlotLayoutComponent.input;
 		}
 		
 	}
 	
-	public GuiContainerLayout setGuiContainerLayout(){
-		guiContainerLayout = new GuiContainerLayout();
+	public GuiContainerLayout setGuiContainerLayout(GuiLayoutPanelType type){
+		switch(type){
+		case power:
+			guiContainerLayout = new GuiContainerLayoutPower();
+			break;
+		case tank:
+			break;
+		case worker:
+			guiContainerLayout = new GuiContainerLayoutWorker();
+			break;
+		default:
+			break;
+		
+		}
 		return guiContainerLayout;
 	}
 
-	public void draw(Gui gui, int offsetX, int offsetY) {
+	public void draw(Gui gui,Container container,int index, int offsetX, int offsetY, int mouseX, int mouseY) {
 		if(guiContainerLayout != null){
-			guiContainerLayout.draw(gui, offsetX, offsetY);
+			guiContainerLayout.draw(gui,container,index, offsetX + rect.x, offsetY+rect.y, mouseX,mouseY);
 		}
 	}
 }

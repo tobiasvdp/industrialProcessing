@@ -14,13 +14,21 @@ import ip.industrialProcessing.utils.containers.ContainerUtils;
 import ip.industrialProcessing.utils.registry.RecipeRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryCraftResult;
+import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.SlotCrafting;
+import net.minecraft.item.crafting.CraftingManager;
 
 public class ContainerCrusher extends ContainerPoweredWorkerMachine {
 
 	protected Slot[] slots;
 	protected TileEntityCrusher tileEntityCrusher;
 	protected GuiLayout layout;
+	
+	public InventoryCrafting craftMatrix = new InventoryCrafting(this, 2, 2);
+    public IInventory craftResult = new InventoryCraftResult();
 
 	@Override
 	public boolean canInteractWith(EntityPlayer entityplayer) {
@@ -34,29 +42,44 @@ public class ContainerCrusher extends ContainerPoweredWorkerMachine {
 		this.tileEntityCrusher = tileEntityCrusher;
 
 		if (this.layout != null) {
-			Iterator<Slot> slotIterator = layout.getSlots(tileEntityCrusher);
+			
+			Iterator<Slot> slotIterator = layout.getSlotsMachine(tileEntityCrusher);
 			while(slotIterator.hasNext()){
 					addSlotToContainer(slotIterator.next());
 			}
-			
-		} else {
-			slots = new Slot[2];
-			slots[0] = new SlotBase(tileEntityCrusher, 0, 44, 33);
-			slots[1] = new SlotOutput(tileEntityCrusher, 1, 104, 33);
+			layout.addComponentsToContainer(this,tileEntityCrusher);
 
-			addSlotToContainer(slots[0]);
-			addSlotToContainer(slots[1]);
-
+			bindPlayerInventory(layout,inventoryPlayer);
 		}
+	}
 
-		ContainerUtils.BindPlayerInventory(inventoryPlayer, this, 0);
+	private void bindPlayerInventory(GuiLayout layout, InventoryPlayer inventoryPlayer) {
+		Iterator<Slot> slotIterator = layout.getSlotsInventory(inventoryPlayer);
+		while(slotIterator.hasNext()){
+				addSlotToContainer(slotIterator.next());
+		}
+		
+		this.addSlotToContainer(new SlotCrafting(inventoryPlayer.player, this.craftMatrix, this.craftResult, 0, 204, 173));
+        int i;
+        int j;
 
-		addWorkerToContainer(tileEntityCrusher.getWorker());
-		addPowerToContainer(tileEntityCrusher.getMainPowerStorage());
+        for (i = 0; i < 2; ++i)
+        {
+            for (j = 0; j < 2; ++j)
+            {
+                this.addSlotToContainer(new Slot(this.craftMatrix, j + i * 2, 195 + j * 18, 119 + i * 18));
+            }
+        }
+
 	}
 
 	@Override
 	public int getSizeInventory() {
 		return slots.length;
 	}
+	
+    public void onCraftMatrixChanged(IInventory par1IInventory)
+    {
+        this.craftResult.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(this.craftMatrix, this.tileEntityCrusher.worldObj));
+    }
 }

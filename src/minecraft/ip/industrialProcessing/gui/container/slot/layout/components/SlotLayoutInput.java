@@ -1,16 +1,15 @@
 package ip.industrialProcessing.gui.container.slot.layout.components;
 
+import java.awt.Rectangle;
+
 import net.minecraft.inventory.IInventory;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayout;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
 import ip.industrialProcessing.slots.SlotBase;
 
 public class SlotLayoutInput extends SlotLayout{
-	public SlotLayoutInput(SlotLayoutType layout, int amount, int startIndex, int offsetX,int offsetY) {
-		this.sizeX = 54;
-		this.sizeY = 54;
-		this.offsetX = offsetX;
-		this.offsetY = offsetY;
+	public SlotLayoutInput(SlotLayoutType layout, int amount, int startIndex, Rectangle rect) {
+		this.rect = rect;
 		this.layout = layout;
 		slots = new SlotBase[amount];
 		amount = amount - 1;
@@ -78,9 +77,6 @@ public class SlotLayoutInput extends SlotLayout{
 				}
 			}
 			break;
-		}
-		for (int i = 0; i < amount + 1; i++) {
-			System.out.println("x:" + slots[i].xDisplayPosition + " y:" + slots[i].yDisplayPosition);
 		}
 	}
 }

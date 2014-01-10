@@ -1,5 +1,7 @@
 package ip.industrialProcessing.gui.container.slot.layout.components;
 
+import java.awt.Rectangle;
+
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayout;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
 import ip.industrialProcessing.slots.SlotBase;
@@ -8,12 +10,9 @@ import net.minecraft.inventory.IInventory;
 
 public class SlotLayoutOutput extends SlotLayout{
 
-	public SlotLayoutOutput(SlotLayoutType layout, int amount, int startIndex, int offsetX,int offsetY) {
-		this.offsetX = offsetX;
-		this.offsetY = offsetY;
+	public SlotLayoutOutput(SlotLayoutType layout, int amount, int startIndex, Rectangle rect) {
+		this.rect = rect;
 		this.layout = layout;
-		this.sizeX = 54;
-		this.sizeY = 54;
 		slots = new SlotOutput[amount];
 		amount = amount - 1;
 
