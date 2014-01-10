@@ -1,6 +1,5 @@
 package ip.industrialProcessing.transport.fluids;
 
-import ip.industrialProcessing.ConnectedTileUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.IConnectedTile;
@@ -10,6 +9,7 @@ import ip.industrialProcessing.machines.TileEntityFluidMachine;
 import ip.industrialProcessing.machines.animation.tanks.ITankSyncable;
 import ip.industrialProcessing.machines.animation.tanks.TankHandler;
 import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
+import ip.industrialProcessing.utils.ConnectedTileUtils;
 import ip.industrialProcessing.utils.FluidTransfers;
 
 import java.util.Arrays;

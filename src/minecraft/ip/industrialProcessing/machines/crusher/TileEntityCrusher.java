@@ -3,7 +3,6 @@ package ip.industrialProcessing.machines.crusher;
 import java.util.Iterator;
 
 import cpw.mods.fml.relauncher.Side;
-import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.RecipesMachine;
@@ -12,6 +11,7 @@ import ip.industrialProcessing.machines.TileEntityPoweredWorkerMachine;
 import ip.industrialProcessing.machines.TileEntityWorkerMachine;
 import ip.industrialProcessing.power.IPowerAcceptor;
 import ip.industrialProcessing.recipes.Recipe;
+import ip.industrialProcessing.utils.DirectionUtils;
 import ip.industrialProcessing.utils.registry.RecipeRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;

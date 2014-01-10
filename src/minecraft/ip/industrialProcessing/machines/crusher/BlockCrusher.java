@@ -8,11 +8,18 @@ import cpw.mods.fml.relauncher.SideOnly;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.gui.GuiLayout;
+import ip.industrialProcessing.gui.IGuiLayout;
+import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
+import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
+import ip.industrialProcessing.gui.container.slot.layout.components.SlotLayoutComponent;
+import ip.industrialProcessing.gui.container.slot.layout.components.SlotLayoutInput;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 import ip.industrialProcessing.transport.steve.railway.suspended.cart.EntityFloatingCart;
+import ip.industrialProcessing.utils.IDescriptionBlock;
 import ip.industrialProcessing.utils.Position;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -28,8 +35,17 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
-public class BlockCrusher extends BlockMachineRendered implements IRecipeBlock {
+public class BlockCrusher extends BlockMachineRendered implements IRecipeBlock, IDescriptionBlock,IGuiLayout {
 
+	public static GuiLayout guiLayout;
+	static{
+		guiLayout = new GuiLayout();
+		guiLayout.addLayoutPanel(GuiLayoutPanelType.worker);
+		guiLayout.addLayoutPanel(GuiLayoutPanelType.power);
+		guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 2);
+		guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsOutput).setSlotLayout(SlotLayoutType.horizontal, 1);
+	}
+	
     public BlockCrusher() {
         super(ConfigMachineBlocks.getCrusherBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Ore Crusher", IndustrialProcessing.tabOreProcessing);
     }
@@ -67,5 +83,15 @@ public class BlockCrusher extends BlockMachineRendered implements IRecipeBlock {
     public RecipesMachine getRecipes() { 
 	return TileEntityCrusher.recipes;
     }
+
+	@Override
+	public String getDescription() {
+		return "The crusher can grind ores into finer pieces.";
+	}
+
+	@Override
+	public GuiLayout getGuiLayout() {
+		return guiLayout;
+	}
 
 }

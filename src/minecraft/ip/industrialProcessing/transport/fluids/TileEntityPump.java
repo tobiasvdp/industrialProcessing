@@ -5,7 +5,6 @@ import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.IFluidTank;
-import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.machines.TileEntityMachine;
@@ -17,6 +16,7 @@ import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 import ip.industrialProcessing.power.IPowerAcceptor;
 import ip.industrialProcessing.power.PowerHelper;
 import ip.industrialProcessing.power.plants.IMechanicalMotion;
+import ip.industrialProcessing.utils.DirectionUtils;
 
 public class TileEntityPump extends TileEntityMachine implements IAnimationProgress, IAnimationSyncable, IMechanicalMotion {
 

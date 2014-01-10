@@ -19,16 +19,16 @@ import org.lwjgl.opengl.GL11;
 
 public abstract class GuidePanoramaPage extends GuidePage {
 
-    private Rectangle rectangle;
+	protected Rectangle rectangle;
     protected int offsetX;
     protected int offsetY;
-    private Point location;
+    protected Point location;
     protected ResourceLocation textureLocation;
-    private Random rnd = new Random(15665);
-    private boolean drag;
-    private int lastDragX;
-    private int lastDragY;
-    private boolean last;
+    protected Random rnd = new Random(15665);
+    protected boolean drag;
+    protected int lastDragX;
+    protected int lastDragY;
+    protected boolean last;
     protected boolean allowHorizontalDrag;
     protected boolean allowVerticalDrag;
 
@@ -117,47 +117,51 @@ public abstract class GuidePanoramaPage extends GuidePage {
 	drag = false;
     }
 
-    private void drawBackground(int x, int y) {
-	rnd = new Random(150);
-	Minecraft mc = Minecraft.getMinecraft();
-	mc.renderEngine.func_110577_a(TextureMap.field_110575_b);
-	Icon[] icons = new Icon[] { Block.dirt.getIcon(0, 0), Block.grass.getIcon(ForgeDirection.NORTH.ordinal(), 0), Block.stone.getIcon(0, 0), Block.oreCoal.getIcon(0, 0), Block.oreDiamond.getIcon(0, 0), Block.oreRedstone.getIcon(0, 0), Block.oreGold.getIcon(0, 0), Block.oreIron.getIcon(0, 0), Block.oreLapis.getIcon(0, 0) };
-	int block = 2;
-	int blockSize = 16;
-	int blocksWidth = rectangle.width / blockSize + 1;
-	int blocksHeight = rectangle.height / blockSize + 1;
-
-	int left = offsetX - mc.displayWidth;
-	int top = offsetY - mc.displayHeight;
-	int bottom = offsetY + rectangle.height + mc.displayHeight;
-	int right = offsetX + rectangle.width + mc.displayWidth;
-
-	int blockOffsetX = left / blockSize - 1;
-	int blockOffsetY = top / blockSize - 1;
-
-	int blockRight = right / blockSize + 1;
-	int blockBottom = bottom / blockSize + 1;
-	for (int blockX = blockOffsetX; blockX <= blockRight; blockX++) {
-	    for (int blockY = blockOffsetY; blockY < blockBottom; blockY++) {
-		Random rnd = new Random(blockX + 100 * blockY);
-
-		double gaussian = Math.abs(rnd.nextGaussian());
-		int iconId = 2;
-		if (blockY == 0) {
-		    iconId = 1;
-		} else if (gaussian + 1 > blockY / 2f) {
-		    iconId = 0;
-		} else if (gaussian > 2f) {
-		    iconId = 2 + rnd.nextInt(icons.length - 3);
-		}
-		Icon icon = icons[iconId];
-
-		drawTexturedModelRectFromIcon(blockX * blockSize - offsetX + x, blockY * blockSize - offsetY + y, icon, blockSize, blockSize);
-	    }
-	}
+    public void drawBackground(int x, int y) {
+    	drawMinecraftBackground(x,y);
     }
 
-    private int scaleWidth(int i, ScaledResolution res) {
+    private void drawMinecraftBackground(int x, int y) {
+    	rnd = new Random(150);
+    	Minecraft mc = Minecraft.getMinecraft();
+    	mc.renderEngine.func_110577_a(TextureMap.field_110575_b);
+    	Icon[] icons = new Icon[] { Block.dirt.getIcon(0, 0), Block.grass.getIcon(ForgeDirection.NORTH.ordinal(), 0), Block.stone.getIcon(0, 0), Block.oreCoal.getIcon(0, 0), Block.oreDiamond.getIcon(0, 0), Block.oreRedstone.getIcon(0, 0), Block.oreGold.getIcon(0, 0), Block.oreIron.getIcon(0, 0), Block.oreLapis.getIcon(0, 0) };
+    	int block = 2;
+    	int blockSize = 16;
+    	int blocksWidth = rectangle.width / blockSize + 1;
+    	int blocksHeight = rectangle.height / blockSize + 1;
+
+    	int left = offsetX - mc.displayWidth;
+    	int top = offsetY - mc.displayHeight;
+    	int bottom = offsetY + rectangle.height + mc.displayHeight;
+    	int right = offsetX + rectangle.width + mc.displayWidth;
+
+    	int blockOffsetX = left / blockSize - 1;
+    	int blockOffsetY = top / blockSize - 1;
+
+    	int blockRight = right / blockSize + 1;
+    	int blockBottom = bottom / blockSize + 1;
+    	for (int blockX = blockOffsetX; blockX <= blockRight; blockX++) {
+    	    for (int blockY = blockOffsetY; blockY < blockBottom; blockY++) {
+    		Random rnd = new Random(blockX + 100 * blockY);
+
+    		double gaussian = Math.abs(rnd.nextGaussian());
+    		int iconId = 2;
+    		if (blockY == 0) {
+    		    iconId = 1;
+    		} else if (gaussian + 1 > blockY / 2f) {
+    		    iconId = 0;
+    		} else if (gaussian > 2f) {
+    		    iconId = 2 + rnd.nextInt(icons.length - 3);
+    		}
+    		Icon icon = icons[iconId];
+
+    		drawTexturedModelRectFromIcon(blockX * blockSize - offsetX + x, blockY * blockSize - offsetY + y, icon, blockSize, blockSize);
+    	    }
+    	}
+	}
+
+	private int scaleWidth(int i, ScaledResolution res) {
 	Minecraft mc = Minecraft.getMinecraft();
 	return i * mc.displayWidth / res.getScaledWidth();
     }

@@ -1,6 +1,6 @@
 package ip.industrialProcessing.utils.registry;
 
-import ip.industrialProcessing.utils.heat.IHeatHandler;
+import ip.industrialProcessing.utils.handler.heat.IHeatHandler;
 
 import java.util.Iterator;
 import java.util.List;

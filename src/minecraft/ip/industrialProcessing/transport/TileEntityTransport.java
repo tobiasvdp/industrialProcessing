@@ -1,9 +1,9 @@
 package ip.industrialProcessing.transport;
 
-import ip.industrialProcessing.ConnectedTileUtils;
 import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.IConnectedTile;
 import ip.industrialProcessing.machines.TileEntitySynced;
+import ip.industrialProcessing.utils.ConnectedTileUtils;
 
 import java.util.Arrays;
 import java.util.List;

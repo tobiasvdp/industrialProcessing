@@ -1,9 +1,9 @@
 package ip.industrialProcessing.transport.items.conveyorBelt;
 
-import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.transport.TransportConnectionState;
 import ip.industrialProcessing.transport.items.conveyorBelt.util.ConveyorEnvironment;
+import ip.industrialProcessing.utils.DirectionUtils;
 import ip.industrialProcessing.utils.ItemTransfers;
 
 import java.util.ArrayList;

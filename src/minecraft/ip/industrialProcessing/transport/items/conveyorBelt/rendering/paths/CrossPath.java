@@ -1,10 +1,10 @@
 package ip.industrialProcessing.transport.items.conveyorBelt.rendering.paths;
 
-import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.transport.items.conveyorBelt.MovingItemStack;
+import ip.industrialProcessing.utils.DirectionUtils;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 

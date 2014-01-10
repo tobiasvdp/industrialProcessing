@@ -4,11 +4,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.PacketHandler;
 import ip.industrialProcessing.machines.plants.blacksmith.anvil.ContainerAnvil;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.multiblock.gui.GUImultiblock;
 import ip.industrialProcessing.utils.gui.IPButton;
+import ip.industrialProcessing.utils.handler.packets.PacketHandler;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;

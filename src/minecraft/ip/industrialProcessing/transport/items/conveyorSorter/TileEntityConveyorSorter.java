@@ -1,10 +1,10 @@
 package ip.industrialProcessing.transport.items.conveyorSorter;
 
-import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.containers.IMachineContainerEntity;
 import ip.industrialProcessing.transport.items.conveyorBelt.ConnectionMode;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorInventoryBase;
+import ip.industrialProcessing.utils.DirectionUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;

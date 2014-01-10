@@ -11,7 +11,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.PacketHandler;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.RecipesWeldingStation;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreInv;
@@ -27,8 +26,9 @@ import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.utils.IBreakable;
-import ip.industrialProcessing.utils.heat.HeatStorage;
-import ip.industrialProcessing.utils.heat.IHeatStorage;
+import ip.industrialProcessing.utils.handler.heat.HeatStorage;
+import ip.industrialProcessing.utils.handler.heat.IHeatStorage;
+import ip.industrialProcessing.utils.handler.packets.PacketHandler;
 import ip.industrialProcessing.utils.inventories.InventoryUtils;
 
 public class TileEntityBloomery extends TileEntityMultiblockCoreTankWorker implements IHeatStorage, IBreakable {

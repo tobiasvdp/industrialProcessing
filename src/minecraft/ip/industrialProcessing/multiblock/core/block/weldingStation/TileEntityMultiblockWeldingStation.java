@@ -30,8 +30,8 @@ import ip.industrialProcessing.multiblock.tier.Tiers;
 import ip.industrialProcessing.multiblock.utils.MultiblockActionType;
 import ip.industrialProcessing.multiblock.utils.blockSide;
 import ip.industrialProcessing.recipes.Recipe;
-import ip.industrialProcessing.utils.heat.HeatStorage;
-import ip.industrialProcessing.utils.heat.IHeatStorage;
+import ip.industrialProcessing.utils.handler.heat.HeatStorage;
+import ip.industrialProcessing.utils.handler.heat.IHeatStorage;
 
 public class TileEntityMultiblockWeldingStation extends TileEntityMultiblockCoreTankWorkerPowered implements IHeatStorage {
 	static StructureMultiblock structure;

@@ -163,7 +163,15 @@ public class ConfigItems {
 	private int ItemRedstoneCircuitryID = 6661;
 	private int itemSmallEngineID = 6662;
 	private int itemCopperBarID = 6663;
-
+	private int itemFilterTrayID = 6664;
+	private int itemLeadIngotID = 6665;
+	
+	public static int getItemLeadIngotID() {
+		return getInstance().itemLeadIngotID;
+	}
+	public static int getItemFilterTrayID() {
+		return getInstance().itemFilterTrayID;
+	}
 	public static int getItemCopperBarID() {
 		return getInstance().itemCopperBarID;
 	}
@@ -739,6 +747,8 @@ public class ConfigItems {
 	}
 
 	public static void addToLanguageRegistry() {
+		LanguageRegistry.addName(ISetupItems.itemLeadIngot , "Lead ingot");
+		LanguageRegistry.addName(ISetupItems.itemFilterTray , "Filter tray");
 		LanguageRegistry.addName(ISetupItems.itemMotorPoleAxis , "Magnetic poles");
 		LanguageRegistry.addName(ISetupItems.itemSmallEngine , "Small engine");
 		LanguageRegistry.addName(ISetupItems.itemGuide , "Industrial processing");

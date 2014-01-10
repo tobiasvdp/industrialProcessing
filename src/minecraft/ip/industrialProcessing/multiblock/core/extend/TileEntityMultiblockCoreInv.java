@@ -2,7 +2,6 @@ package ip.industrialProcessing.multiblock.core.extend;
 
 import java.util.ArrayList;
 
-import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.MachineItemStack;
 import ip.industrialProcessing.machines.RecipesMachine;
@@ -13,6 +12,7 @@ import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import ip.industrialProcessing.multiblock.utils.inventory.IMultiblockInventories;
 import ip.industrialProcessing.multiblock.utils.inventory.MultiblockItemStack;
+import ip.industrialProcessing.utils.DirectionUtils;
 import ip.industrialProcessing.utils.inventories.IInventories;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

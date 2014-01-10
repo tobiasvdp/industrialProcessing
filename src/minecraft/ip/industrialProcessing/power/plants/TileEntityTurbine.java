@@ -1,7 +1,6 @@
 package ip.industrialProcessing.power.plants;
 
 import ic2.api.Direction;
-import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.machines.TileEntityFluidMachine;
@@ -13,6 +12,7 @@ import ip.industrialProcessing.machines.animation.tanks.ITankSyncable;
 import ip.industrialProcessing.machines.animation.tanks.TankHandler;
 import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
 import ip.industrialProcessing.transport.fluids.IPressuredTank;
+import ip.industrialProcessing.utils.DirectionUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;

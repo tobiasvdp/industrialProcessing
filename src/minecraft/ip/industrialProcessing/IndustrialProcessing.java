@@ -21,10 +21,16 @@ import ip.industrialProcessing.config.ISetupTransportBlocks;
 import ip.industrialProcessing.decoration.trees.EventBonemealIndustrialTree;
 import ip.industrialProcessing.fluids.BucketHandler;
 import ip.industrialProcessing.fluids.ContainerHandler;
+import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
+import ip.industrialProcessing.gui.container.slot.layout.components.SlotLayoutInput;
 import ip.industrialProcessing.multiblock.dummy.block.frame.ENmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.ENmultiblockLiftDoor;
 import ip.industrialProcessing.utils.EventEntityRightClick;
-import ip.industrialProcessing.utils.heat.HeatHandler;
+import ip.industrialProcessing.utils.handler.crafting.CraftingHandler;
+import ip.industrialProcessing.utils.handler.fuel.FuelHandler;
+import ip.industrialProcessing.utils.handler.heat.HeatHandler;
+import ip.industrialProcessing.utils.handler.packets.PacketHandler;
+import ip.industrialProcessing.utils.registry.BlockType;
 import ip.industrialProcessing.utils.registry.HandlerRegistry;
 
 import java.util.logging.Level;
@@ -150,6 +156,9 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
 
 		// register basic crafting recipes
 		ConfigBaseRecipes.getInstance().addBaseRecipes();
+		
+		//register blockType names
+		BlockType.registerNames();
 
 		EntityRegistry.registerModEntity(ENmultiblockFrame.class, "Platform", 0, IndustrialProcessing.instance, 80, 1, true);
 		LanguageRegistry.instance().addStringLocalization("entity.Platform.name", "en_US", "Platform");
@@ -162,6 +171,7 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
 		// register worldgenerator
 		worldGen = new WorldGeneration();
 		GameRegistry.registerWorldGenerator(worldGen);
+	
 	}
 
 	@EventHandler

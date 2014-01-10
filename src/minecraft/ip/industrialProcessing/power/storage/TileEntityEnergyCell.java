@@ -1,6 +1,5 @@
 package ip.industrialProcessing.power.storage;
 
-import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
@@ -10,6 +9,7 @@ import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 import ip.industrialProcessing.power.IPowerAcceptor;
 import ip.industrialProcessing.power.PowerHelper;
 import ip.industrialProcessing.power.TileEntityPowerGenerator;
+import ip.industrialProcessing.utils.DirectionUtils;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 

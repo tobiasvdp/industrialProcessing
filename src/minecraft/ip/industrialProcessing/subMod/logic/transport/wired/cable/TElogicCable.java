@@ -1,12 +1,12 @@
 package ip.industrialProcessing.subMod.logic.transport.wired.cable;
 
-import ip.industrialProcessing.PacketHandler;
 import ip.industrialProcessing.machines.TileEntitySynced;
 import ip.industrialProcessing.subMod.logic.transport.ICommunicationNode;
 import ip.industrialProcessing.subMod.logic.transport.ICommunicationTransport;
 import ip.industrialProcessing.subMod.logic.transport.TElogicTransport;
 import ip.industrialProcessing.subMod.logic.utils.UTBusType;
 import ip.industrialProcessing.subMod.logic.utils.UTpacket;
+import ip.industrialProcessing.utils.handler.packets.PacketHandler;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;

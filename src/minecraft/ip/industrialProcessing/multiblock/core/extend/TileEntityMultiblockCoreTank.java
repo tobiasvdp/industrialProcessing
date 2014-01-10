@@ -1,6 +1,5 @@
 package ip.industrialProcessing.multiblock.core.extend;
 
-import ip.industrialProcessing.DirectionUtils;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.api.tanks.IPfluidTank;
 import ip.industrialProcessing.api.tanks.ITank;
@@ -12,6 +11,7 @@ import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.utils.tanks.IMultiblockFluidTank;
 import ip.industrialProcessing.multiblock.utils.tanks.IMultiblockTanks;
 import ip.industrialProcessing.multiblock.utils.tanks.MultiblockFluidTank;
+import ip.industrialProcessing.utils.DirectionUtils;
 
 import java.util.ArrayList;
 

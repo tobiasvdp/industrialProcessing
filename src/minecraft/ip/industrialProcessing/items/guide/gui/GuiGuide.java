@@ -4,6 +4,9 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.client.render.gui.GuiTools;
 import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.items.guide.gui.machines.GuideMachinePage;
+import ip.industrialProcessing.items.guide.gui.tools.GuideToolPage;
+import ip.industrialProcessing.items.guide.gui.tree.procces.GuideTreePage;
 
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -20,16 +23,16 @@ import org.lwjgl.opengl.GL12;
 
 public class GuiGuide extends GuiScreen {
 
-	protected static RenderItem itemRenderer = new RenderItem();
-	private static final int X_SIZE = 256;
-	private static final int Y_SIZE = 202;
-	private static final Rectangle SOURCE_ACTIVE_TAB = new Rectangle(24, 202, 24, 26);
-	private static final Rectangle SOURCE_INACTIVE_TAB = new Rectangle(0, 202, 24, 26);
-	private static final GuidePage[] pages = new GuidePage[] { new GuideMachinePage(), new GuideToolPage(), new GuideTreePage() };
-	private static final int TAB_OFFSET = 3;
-	private static final int TAB_WIDTH = 24;
-	private static final int MARGIN_LEFT = 10;
-	private static final int MARGIN_TOP = 10;
+	public static RenderItem itemRenderer = new RenderItem();
+	protected static final int X_SIZE = 256;
+	protected static final int Y_SIZE = 202;
+	protected static final Rectangle SOURCE_ACTIVE_TAB = new Rectangle(24, 202, 24, 26);
+	protected static final Rectangle SOURCE_INACTIVE_TAB = new Rectangle(0, 202, 24, 26);
+	protected static final GuidePage[] pages = new GuidePage[] { new GuideMachinePage(), new GuideToolPage(), new GuideTreePage() };
+	protected static final int TAB_OFFSET = 3;
+	protected static final int TAB_WIDTH = 24;
+	protected static final int MARGIN_LEFT = 10;
+	protected static final int MARGIN_TOP = 10;
 
 	private ResourceLocation textureLocation;
 	private EntityPlayer player;
