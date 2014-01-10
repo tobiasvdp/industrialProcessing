@@ -22,7 +22,7 @@ public class ContainerWorkerMachine<T extends TileEntity & IMachineContainerEnti
 
 	ArrayList<ProgressBarHandlerInfo> workerHandlers = new ArrayList<ProgressBarHandlerInfo>();	
 	
-	protected void addWorkerToContainer(IWorker worker) {
+	public void addWorkerToContainer(IWorker worker) {
 		IProgressBarHandler handler = new ProgressBarWorkerHandler(worker);
 		ProgressBarHandlerInfo info = addProgressBar(handler);
 		this.workerHandlers.add(info); 

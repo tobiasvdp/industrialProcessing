@@ -20,7 +20,7 @@ public class ContainerPoweredWorkerMachine<T extends TileEntity & IMachineContai
 
 	ArrayList<ProgressBarHandlerInfo> powerHandlers = new ArrayList<ProgressBarHandlerInfo>();	
 	
-	protected void addPowerToContainer(IPowerStorage storage) {
+	public void addPowerToContainer(IPowerStorage storage) {
 		IProgressBarHandler handler = new ProgressBarPowerHandler(storage);
 		ProgressBarHandlerInfo info = addProgressBar(handler);
 		this.powerHandlers.add(info); 
