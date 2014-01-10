@@ -19,6 +19,7 @@ public class GuiContainerEnergyCell extends GuiContainerMachine {
     private GuiContainerEnergyCell(InventoryPlayer inventoryPlayer, TileEntityEnergyCell tileEntity, ContainerEnergyCell container) {
 	super(inventoryPlayer, tileEntity, container, "Energy Cell", "textures/gui/EnergyCell.png");
 	this.container = container;
+	
     }
 
     @Override

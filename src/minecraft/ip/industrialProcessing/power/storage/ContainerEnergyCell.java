@@ -5,6 +5,7 @@ import net.minecraft.tileentity.TileEntity;
 import ip.industrialProcessing.machines.containers.ContainerMachine;
 import ip.industrialProcessing.machines.containers.IProgressBarHandler;
 import ip.industrialProcessing.machines.containers.ProgressBarHandlerInfo;
+import ip.industrialProcessing.utils.containers.ContainerUtils;
 
 public class ContainerEnergyCell extends ContainerMachine {
 
@@ -33,6 +34,8 @@ public class ContainerEnergyCell extends ContainerMachine {
 		return 0;
 	    }
 	});
+	
+	ContainerUtils.BindPlayerInventory(inventoryPlayer, this, 0);
     }
 
     public float getStoredJoules() {
