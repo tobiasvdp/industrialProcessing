@@ -2,6 +2,7 @@ package ip.industrialProcessing.gui;
 
 import ip.industrialProcessing.gui.components.GuiLayoutPanel;
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
+import ip.industrialProcessing.gui.container.ContainerIP;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayout;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
 import ip.industrialProcessing.gui.container.slot.layout.components.SlotLayoutComponent;
@@ -13,7 +14,6 @@ import ip.industrialProcessing.machines.containers.ContainerPoweredWorkerMachine
 import ip.industrialProcessing.machines.containers.ContainerWorkerMachine;
 import ip.industrialProcessing.machines.containers.gui.GuiContainerPoweredWorkerMachine;
 import ip.industrialProcessing.machines.containers.gui.GuiContainerWorkerMachine;
-import ip.industrialProcessing.machines.crusher.GuiContainerCrusher;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import ip.industrialProcessing.slots.SlotBase;
 
@@ -54,35 +54,53 @@ public class GuiLayout {
 		switch (type) {
 		case slotsInput:
 			x = 47 + offsetX;
-			y = 31;
+			y = 45;
 			panel = new GuiLayoutPanel(this, type, x, y, 52, 52);
+			// SlotLayout set by Block
+			// GuiContainerLayout set in above function
 			layoutPanels.add(panel);
 			break;
 		case slotsOutput:
 			x = 135 + offsetX;
-			y = 31;
+			y = 45;
 			panel = new GuiLayoutPanel(this, type, x, y, 52, 52);
+			// SlotLayout set by Block
+			// GuiContainerLayout set in above function
 			layoutPanels.add(panel);
 			break;
 		case slotsSide:
 			break;
+		case tankInput:
+		case tankOutput:
+			x = 0;
+			y = 45;
+			panel = new GuiLayoutPanel(this, type, x, y, 40, 52);
+			panel.setSlotLayout(SlotLayoutType.fixed, 2);
+			panel.setGuiContainerLayout(type);
+			layoutPanels.add(panel);
+			break;
 		case slotsInventory:
-			panel = new GuiLayoutPanel(this, type, 8, 116, 222, 76);
+			x = 8;
+			y = 116;
+			panel = new GuiLayoutPanel(this, type, x, y, 222, 76);
 			panel.setSlotLayout(SlotLayoutType.inventory, 0);
+			// no draw required
 			layoutPanels.add(panel);
 			break;
 		case worker:
 			x = 106;
-			y = 50 + offsetY;
+			y = 64 + offsetY;
 			panel = new GuiLayoutPanel(this, type, x, y, 24, 16);
-			panel.setGuiContainerLayout(type).addDrawRectagle(72, 240, 24, 16);
+			// No slotLayout
+			panel.setGuiContainerLayout(type);
 			layoutPanels.add(panel);
 			break;
 		case power:
-			x = 177;
-			y = 6 + offsetY;
-			panel = new GuiLayoutPanel(this, type, x, y, 54, 10);
-			panel.setGuiContainerLayout(type).addDrawRectagle(18, 246, 54, 10);
+			x = 150;
+			y = 9 + offsetY;
+			panel = new GuiLayoutPanel(this, type, x, y, 74, 18);
+			panel.setSlotLayout(SlotLayoutType.fixed, 1);
+			panel.setGuiContainerLayout(type);
 			layoutPanels.add(panel);
 			break;
 		default:
@@ -132,7 +150,7 @@ public class GuiLayout {
 	public void reDoLayout() {
 		int widthScreen = 236;
 		ArrayList<GuiLayoutPanel> panels = new ArrayList<GuiLayoutPanel>();
-		for (GuiLayoutPanelType type : new GuiLayoutPanelType[] { GuiLayoutPanelType.slotsInput, GuiLayoutPanelType.worker, GuiLayoutPanelType.slotsOutput }) {
+		for (GuiLayoutPanelType type : new GuiLayoutPanelType[] { GuiLayoutPanelType.tankInput, GuiLayoutPanelType.slotsInput, GuiLayoutPanelType.worker, GuiLayoutPanelType.slotsOutput, GuiLayoutPanelType.tankOutput }) {
 			Iterator<GuiLayoutPanel> it = layoutPanels.iterator();
 			while (it.hasNext()) {
 				GuiLayoutPanel panel = it.next();
@@ -163,47 +181,40 @@ public class GuiLayout {
 				type = panel.type;
 
 			if (type != panelType) {
-				typeIndex = 0;
-				type = panelType;
+				if ((type == GuiLayoutPanelType.tankInput && panelType == GuiLayoutPanelType.tankOutput) || (type == GuiLayoutPanelType.tankOutput && panelType == GuiLayoutPanelType.tankInput)) {
+
+				} else {
+					typeIndex = 0;
+					type = panelType;
+				}
 			}
 
-			panel.draw(gui, container, typeIndex, offsetX, offsetY,mouseX,mouseY);
+			panel.draw(gui, container, typeIndex, offsetX, offsetY, mouseX, mouseY);
 
 			typeIndex++;
 		}
 	}
 
-	public void addComponentsToContainer(Container container, TileEntity tileEntity) {
+	public void addSyncingHandlersToContainer(ContainerIP container, TileEntity tileEntity) {
 		int typeIndex = 0;
 		GuiLayoutPanelType type = null;
 		for (int i = 0; i < layoutPanels.size(); i++) {
 			GuiLayoutPanel panel = layoutPanels.get(i);
 			GuiLayoutPanelType panelType = panel.type;
+
 			if (type == null)
 				type = panel.type;
 
 			if (type != panelType) {
-				typeIndex = 0;
-				type = panelType;
+				if ((type == GuiLayoutPanelType.tankInput && panelType == GuiLayoutPanelType.tankOutput) || (type == GuiLayoutPanelType.tankOutput && panelType == GuiLayoutPanelType.tankInput)) {
+
+				} else {
+					typeIndex = 0;
+					type = panelType;
+				}
 			}
 
-			switch(panelType){
-			case power:
-				if(container instanceof ContainerPoweredWorkerMachine && tileEntity instanceof TileEntityPoweredWorkerMachine){
-					((ContainerPoweredWorkerMachine)container).addPowerToContainer(((TileEntityPoweredWorkerMachine)tileEntity).getMainPowerStorage());
-				}
-				break;
-			case tank:
-				break;
-			case worker:
-				if(container instanceof ContainerWorkerMachine && tileEntity instanceof TileEntityWorkerMachine){
-					((ContainerWorkerMachine)container).addWorkerToContainer(((TileEntityWorkerMachine)tileEntity).getWorker());
-				}
-				break;
-			default:
-				break;
-			
-			}
+			container.addHandlerToContainer(panelType, typeIndex);
 
 			typeIndex++;
 		}

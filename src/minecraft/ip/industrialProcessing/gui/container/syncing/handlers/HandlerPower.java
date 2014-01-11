@@ -1,6 +1,7 @@
-package ip.industrialProcessing.api.handlers;
+package ip.industrialProcessing.gui.container.syncing.handlers;
 
-import ip.industrialProcessing.api.info.InfoPower;
+import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
+import ip.industrialProcessing.gui.container.syncing.info.InfoPower;
 import ip.industrialProcessing.machines.IPowerStorage;
 import ip.industrialProcessing.utils.working.IWorker;
 
@@ -80,5 +81,10 @@ public class HandlerPower implements IHandlerPower{
 	@Override
 	public void resetPrevValue() {
 		prevInfo = new InfoPower();
+	}
+
+	@Override
+	public GuiLayoutPanelType getPanelType() {
+		return GuiLayoutPanelType.power;
 	}
 }

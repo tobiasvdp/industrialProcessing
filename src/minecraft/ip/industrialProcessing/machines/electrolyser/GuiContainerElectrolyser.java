@@ -6,7 +6,6 @@ import org.lwjgl.util.Point;
 import org.lwjgl.util.Rectangle;
 
 import ip.industrialProcessing.machines.containers.gui.GuiContainerPoweredFluidWorkerMachine;
-import ip.industrialProcessing.machines.mixer.ContainerMixer;
 import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 
 public class GuiContainerElectrolyser extends GuiContainerPoweredFluidWorkerMachine{

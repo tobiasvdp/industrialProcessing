@@ -1,7 +1,8 @@
-package ip.industrialProcessing.api.handlers;
+package ip.industrialProcessing.gui.container.syncing.handlers;
 
 import net.minecraftforge.fluids.FluidTankInfo;
-import ip.industrialProcessing.api.info.InfoWorker;
+import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
+import ip.industrialProcessing.gui.container.syncing.info.InfoWorker;
 import ip.industrialProcessing.machines.containers.ProgressBarHandlerInfo;
 import ip.industrialProcessing.machines.containers.ProgressInfoWorker;
 import ip.industrialProcessing.utils.working.IWorker;
@@ -81,5 +82,10 @@ public class HandlerWorker implements IHandlerWorker{
 	@Override
 	public void resetPrevValue() {
 		prevInfo = new InfoWorker();
+	}
+
+	@Override
+	public GuiLayoutPanelType getPanelType() {
+		return GuiLayoutPanelType.worker;
 	}
 }

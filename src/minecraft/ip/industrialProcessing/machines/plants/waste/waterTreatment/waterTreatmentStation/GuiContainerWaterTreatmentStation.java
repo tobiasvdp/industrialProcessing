@@ -1,7 +1,6 @@
 package ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatmentStation;
 
 import ip.industrialProcessing.machines.containers.gui.GuiContainerPoweredFluidWorkerMachine;
-import ip.industrialProcessing.machines.mixer.ContainerMixer;
 import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import net.minecraft.entity.player.InventoryPlayer;
 

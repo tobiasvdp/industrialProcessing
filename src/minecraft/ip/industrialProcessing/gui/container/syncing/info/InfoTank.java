@@ -1,9 +1,13 @@
-package ip.industrialProcessing.api.info;
+package ip.industrialProcessing.gui.container.syncing.info;
 
-public class InfoProgressBar implements IExpirable{
+public class InfoTank implements IExpirable{
+    public int amount = -1;
+    public int capacity  = -1;
+    public int fluidId  = -1;
+
     public int ttl;
 
-    public InfoProgressBar() {
+    public InfoTank() {
 	ttl = 20;
     }
 

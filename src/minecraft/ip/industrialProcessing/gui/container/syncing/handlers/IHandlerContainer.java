@@ -1,6 +1,8 @@
-package ip.industrialProcessing.api.handlers;
+package ip.industrialProcessing.gui.container.syncing.handlers;
 
-public interface IHandler {
+import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
+
+public interface IHandlerContainer {
 	int getValueCount();
 	
 	int getValue(int i);
@@ -13,6 +15,8 @@ public interface IHandler {
 	void setIndexOffset(int offset);
 	
 	void put(int index, int par2);
+	
+	GuiLayoutPanelType getPanelType();
 
 	
 }

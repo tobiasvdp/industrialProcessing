@@ -1,9 +1,10 @@
-package ip.industrialProcessing.api.handlers;
+package ip.industrialProcessing.gui.container.syncing.handlers;
 
-import ip.industrialProcessing.api.info.InfoTank;
 import ip.industrialProcessing.api.tanks.IIPfluidTank;
 import ip.industrialProcessing.api.tanks.IPfluidTank;
 import ip.industrialProcessing.api.tanks.ITank;
+import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
+import ip.industrialProcessing.gui.container.syncing.info.InfoTank;
 import ip.industrialProcessing.machines.TileEntityFluidMachine;
 import ip.industrialProcessing.machines.containers.ProgressBarHandlerInfo;
 import ip.industrialProcessing.machines.containers.ProgressInfoTank;
@@ -92,5 +93,10 @@ public class HandlerTank implements IHandlerTank {
 	@Override
 	public void resetPrevValue() {
 		prevInfo = new InfoTank();
+	}
+
+	@Override
+	public GuiLayoutPanelType getPanelType() {
+		return GuiLayoutPanelType.tankInput;
 	}
 }

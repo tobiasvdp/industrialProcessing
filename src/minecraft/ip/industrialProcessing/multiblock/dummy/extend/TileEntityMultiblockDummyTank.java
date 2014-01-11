@@ -5,6 +5,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
+import ip.industrialProcessing.api.tanks.IPfluidTank;
 import ip.industrialProcessing.api.tanks.ITank;
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTank;
@@ -83,6 +84,13 @@ public class TileEntityMultiblockDummyTank extends TileEntityMultiblockDummy imp
 	public FluidTankInfo[] getTanks() {
 		if (this.getCore() != null)
 			return this.getCore().getTanks();
+		return null;
+	}
+
+	@Override
+	public IPfluidTank getTank(int index) {
+		if (this.getCore() != null)
+			return this.getCore().getTank(index);
 		return null;
 	}
 

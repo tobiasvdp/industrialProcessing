@@ -1,4 +1,4 @@
-package ip.industrialProcessing.api.info;
+package ip.industrialProcessing.gui.container.syncing.info;
 
 import java.util.ArrayList;
 

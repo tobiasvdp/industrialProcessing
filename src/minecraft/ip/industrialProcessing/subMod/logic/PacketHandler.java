@@ -1,8 +1,8 @@
 package ip.industrialProcessing.subMod.logic;
 
-import ip.industrialProcessing.api.info.InfoMachine;
-import ip.industrialProcessing.api.info.InfoSlot;
-import ip.industrialProcessing.api.info.InfoTank;
+import ip.industrialProcessing.gui.container.syncing.info.InfoMachine;
+import ip.industrialProcessing.gui.container.syncing.info.InfoSlot;
+import ip.industrialProcessing.gui.container.syncing.info.InfoTank;
 import ip.industrialProcessing.subMod.logic.api.network.interfaces.InterfaceType;
 import ip.industrialProcessing.subMod.logic.network.TileEntityLogicNetworkNode;
 import ip.industrialProcessing.subMod.logic.network.display.GuiLogicDisplay;

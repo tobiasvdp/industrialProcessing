@@ -12,9 +12,13 @@ import ip.industrialProcessing.gui.container.slot.layout.components.SlotLayoutCo
 import ip.industrialProcessing.gui.container.slot.layout.components.SlotLayoutInput;
 import ip.industrialProcessing.gui.container.slot.layout.components.SlotLayoutInventory;
 import ip.industrialProcessing.gui.container.slot.layout.components.SlotLayoutOutput;
+import ip.industrialProcessing.gui.container.slot.layout.components.SlotLayoutPower;
+import ip.industrialProcessing.gui.container.slot.layout.components.SlotLayoutTank;
+import ip.industrialProcessing.gui.container.slot.layout.components.SlotType;
 import ip.industrialProcessing.gui.guiContainer.layout.GuiContainerLayout;
 import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerLayoutPower;
 import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerLayoutSlot;
+import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerLayoutTank;
 import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerLayoutWorker;
 
 public class GuiLayoutPanel {
@@ -57,20 +61,28 @@ public class GuiLayoutPanel {
 			this.slotLayout = new SlotLayoutInventory(rect);
 			break;
 		case input:
-			this.slotLayout = new SlotLayoutInput(layout, amount, parent.getSlotIndex(), rect);;
-			this.guiContainerLayout = new GuiContainerLayoutSlot();
-			((GuiContainerLayoutSlot) this.guiContainerLayout).addDrawRectaglesFromSlotLayout(this,this.slotLayout);
+			this.slotLayout = new SlotLayoutInput(layout, amount, parent.getSlotIndex(), rect);
+			setGuiContainerLayout(GuiLayoutPanelType.slotsInput);
 			parent.setSlotIndex(parent.getSlotIndex()+amount);
 			break;
 		case output:
 			this.slotLayout = new SlotLayoutOutput(layout, amount, parent.getSlotIndex(), rect);
-			this.guiContainerLayout = new GuiContainerLayoutSlot();
-			((GuiContainerLayoutSlot) this.guiContainerLayout).addDrawRectaglesFromSlotLayout(this,this.slotLayout);
+			setGuiContainerLayout(GuiLayoutPanelType.slotsOutput);
+			parent.setSlotIndex(parent.getSlotIndex()+amount);
+			break;
+		case power:
+			this.slotLayout = new SlotLayoutPower(parent.getSlotIndex(), rect);
 			parent.setSlotIndex(parent.getSlotIndex()+amount);
 			break;
 		case side:
 			break;
-		case tank:
+		case tankOutput:
+			this.slotLayout = new SlotLayoutTank(parent.getSlotIndex(), rect, true);
+			parent.setSlotIndex(parent.getSlotIndex()+amount);
+			break;
+		case tankInput:
+			this.slotLayout = new SlotLayoutTank(parent.getSlotIndex(), rect, false);
+			parent.setSlotIndex(parent.getSlotIndex()+amount);
 			break;
 		default:
 			break;
@@ -92,6 +104,12 @@ public class GuiLayoutPanel {
 			return SlotLayoutComponent.side;
 		case slotsInventory:
 			return SlotLayoutComponent.inventory;
+		case power:
+			return SlotLayoutComponent.power;
+		case tankInput:
+			return SlotLayoutComponent.tankInput;
+		case tankOutput:
+			return SlotLayoutComponent.tankOutput;
 		default:
 			return SlotLayoutComponent.input;
 		}
@@ -102,14 +120,32 @@ public class GuiLayoutPanel {
 		switch(type){
 		case power:
 			guiContainerLayout = new GuiContainerLayoutPower();
+			this.guiContainerLayout.addDrawRectaglesFromSlotLayout(this,this.slotLayout,SlotType.power);
+			guiContainerLayout.addDrawRectagle(20,4,18, 246, 54, 10);
 			break;
-		case tank:
+		case tankInput:
+		case tankOutput:
+			guiContainerLayout = new GuiContainerLayoutTank();
+			this.guiContainerLayout.addDrawRectaglesFromSlotLayout(this,this.slotLayout,SlotType.tank);
+			guiContainerLayout.addDrawRectagle(72, 204, 18, 52);
 			break;
 		case worker:
 			guiContainerLayout = new GuiContainerLayoutWorker();
+			//draws from different texture file, done in worker component
+			break;
+		case slotsInput:
+			this.guiContainerLayout = new GuiContainerLayoutSlot();
+			this.guiContainerLayout.addDrawRectaglesFromSlotLayout(this,this.slotLayout);
+			break;
+		case slotsOutput:
+			this.guiContainerLayout = new GuiContainerLayoutSlot();
+			this.guiContainerLayout.addDrawRectaglesFromSlotLayout(this,this.slotLayout);
+			break;
+		case slotsSide:
 			break;
 		default:
 			break;
+
 		
 		}
 		return guiContainerLayout;

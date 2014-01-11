@@ -1,12 +1,9 @@
-package ip.industrialProcessing.api.info;
+package ip.industrialProcessing.gui.container.syncing.info;
 
-public class InfoWorker implements IExpirable{
-    public int workDone = -1;
-    public int totalWork  = -1;
-
+public class InfoProgressBar implements IExpirable{
     public int ttl;
 
-    public InfoWorker() {
+    public InfoProgressBar() {
 	ttl = 20;
     }
 

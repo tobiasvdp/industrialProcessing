@@ -1,4 +1,4 @@
-package ip.industrialProcessing.api.info;
+package ip.industrialProcessing.gui.container.syncing.info;
 
 public class InfoPower implements IExpirable{
     public int storedPower = -1;

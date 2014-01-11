@@ -1,12 +1,12 @@
 package ip.industrialProcessing;
 
-import ip.industrialProcessing.gui.GuiContainerView;
+import ip.industrialProcessing.gui.IGuiLayout;
+import ip.industrialProcessing.gui.container.ContainerIP;
+import ip.industrialProcessing.gui.guiContainer.GuiContainerIP;
 import ip.industrialProcessing.items.guide.gui.GuiGuide;
 import ip.industrialProcessing.machines.classifier.ContainerClassifier;
 import ip.industrialProcessing.machines.classifier.GuiContainerClassifier;
 import ip.industrialProcessing.machines.classifier.TileEntityClassifier;
-import ip.industrialProcessing.machines.crusher.ContainerCrusher;
-import ip.industrialProcessing.machines.crusher.GuiContainerCrusher;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import ip.industrialProcessing.machines.diskFilter.ContainerDiskFilter;
 import ip.industrialProcessing.machines.diskFilter.GuiContainerDiskFilter;
@@ -17,8 +17,6 @@ import ip.industrialProcessing.machines.dryer.TileEntityDryer;
 import ip.industrialProcessing.machines.electrolyser.ContainerElectrolyser;
 import ip.industrialProcessing.machines.electrolyser.GuiContainerElectrolyser;
 import ip.industrialProcessing.machines.electrolyser.TileEntityElectrolyser;
-import ip.industrialProcessing.machines.filter.ContainerFilter;
-import ip.industrialProcessing.machines.filter.GuiContainerFilter;
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
 import ip.industrialProcessing.machines.flotationCell.ContainerFlotationCell;
 import ip.industrialProcessing.machines.flotationCell.GuiContainerFlotationCell;
@@ -32,8 +30,6 @@ import ip.industrialProcessing.machines.insulator.TileEntityInsulator;
 import ip.industrialProcessing.machines.kiln.ContainerKiln;
 import ip.industrialProcessing.machines.kiln.GuiContainerKiln;
 import ip.industrialProcessing.machines.kiln.TileEntityKiln;
-import ip.industrialProcessing.machines.mixer.ContainerMixer;
-import ip.industrialProcessing.machines.mixer.GuiContainerMixer;
 import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import ip.industrialProcessing.machines.oxygenFurnace.ContainerOxygenFurnace;
 import ip.industrialProcessing.machines.oxygenFurnace.GuiContainerOxygenFurnace;
@@ -198,14 +194,11 @@ public class GuiHandler implements IGuiHandler {
 
 		TileEntity entity = world.getBlockTileEntity(x, y, z);
 		if (ID == 0) {
-			if (entity instanceof TileEntityFilter)
-				return new ContainerFilter(player.inventory, (TileEntityFilter) entity);
-			if (entity instanceof TileEntityCrusher)
-				return new ContainerCrusher(player.inventory, (TileEntityCrusher) entity);
+			if (entity.getBlockType() != null && entity.getBlockType() instanceof IGuiLayout){
+				return new ContainerIP(player.inventory, entity);
+			}
 			if (entity instanceof TileEntityMagneticSeparator)
 				return new ContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity);
-			if (entity instanceof TileEntityMixer)
-				return new ContainerMixer(player.inventory, (TileEntityMixer) entity);
 			if (entity instanceof TileEntityDryer)
 				return new ContainerDryer(player.inventory, (TileEntityDryer) entity);
 			if (entity instanceof TileEntityClassifier)
@@ -329,14 +322,11 @@ public class GuiHandler implements IGuiHandler {
 
 		TileEntity entity = world.getBlockTileEntity(x, y, z);
 		if (ID == 0) {
-			if (entity instanceof TileEntityFilter)
-				return new GuiContainerFilter(player.inventory, (TileEntityFilter) entity);
-			if (entity instanceof TileEntityCrusher)
-				return new GuiContainerView(player.inventory, (TileEntityCrusher) entity,new ContainerCrusher(player.inventory, (TileEntityCrusher)entity));
+			if (entity.getBlockType() != null && entity.getBlockType() instanceof IGuiLayout){
+				return new GuiContainerIP(player.inventory, entity,new ContainerIP(player.inventory,entity));
+			}
 			if (entity instanceof TileEntityMagneticSeparator)
 				return new GuiContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity);
-			if (entity instanceof TileEntityMixer)
-				return new GuiContainerMixer(player.inventory, (TileEntityMixer) entity);
 			if (entity instanceof TileEntityDryer)
 				return new GuiContainerDryer(player.inventory, (TileEntityDryer) entity);
 			if (entity instanceof TileEntityClassifier)

@@ -22,7 +22,7 @@ public class SlotLayoutInventory extends SlotLayout {
 			}
 		}
 		for (int i = 0; i < 4; i++) {
-			slots[count] = new Slot(null, count++,165+1, 56-18*i+1);
+			slots[count] = new Slot(null, count++,165+1, 54-18*i+1);
 		}
 	}
 }

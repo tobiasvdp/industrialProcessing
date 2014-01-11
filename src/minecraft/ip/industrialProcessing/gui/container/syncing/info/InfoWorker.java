@@ -1,13 +1,12 @@
-package ip.industrialProcessing.api.info;
+package ip.industrialProcessing.gui.container.syncing.info;
 
-public class InfoTank implements IExpirable{
-    public int amount = -1;
-    public int capacity  = -1;
-    public int fluidId  = -1;
+public class InfoWorker implements IExpirable{
+    public int workDone = -1;
+    public int totalWork  = -1;
 
     public int ttl;
 
-    public InfoTank() {
+    public InfoWorker() {
 	ttl = 20;
     }
 

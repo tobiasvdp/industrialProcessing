@@ -1,7 +1,6 @@
 package ip.industrialProcessing.machines.sinter;
 
 import ip.industrialProcessing.machines.containers.gui.GuiContainerPoweredWorkerMachine;
-import ip.industrialProcessing.machines.crusher.ContainerCrusher;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import net.minecraft.entity.player.InventoryPlayer;
 

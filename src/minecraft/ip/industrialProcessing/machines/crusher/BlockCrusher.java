@@ -40,10 +40,10 @@ public class BlockCrusher extends BlockMachineRendered implements IRecipeBlock, 
 	public static GuiLayout guiLayout;
 	static{
 		guiLayout = new GuiLayout();
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.worker);
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.power);
 		guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 1);
 		guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsOutput).setSlotLayout(SlotLayoutType.horizontal, 1);
+		guiLayout.addLayoutPanel(GuiLayoutPanelType.worker);
+		guiLayout.addLayoutPanel(GuiLayoutPanelType.power);
 	}
 	
     public BlockCrusher() {

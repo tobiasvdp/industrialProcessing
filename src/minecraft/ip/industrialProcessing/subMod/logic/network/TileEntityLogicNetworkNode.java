@@ -1,6 +1,6 @@
 package ip.industrialProcessing.subMod.logic.network;
 
-import ip.industrialProcessing.api.info.InfoMachine;
+import ip.industrialProcessing.gui.container.syncing.info.InfoMachine;
 import ip.industrialProcessing.subMod.logic.api.network.interfaces.StatusType;
 import ip.industrialProcessing.subMod.logic.transport.ICommunicationNode;
 import ip.industrialProcessing.subMod.logic.transport.TElogicNode;
