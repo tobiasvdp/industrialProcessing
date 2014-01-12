@@ -11,13 +11,26 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.gui.GuiLayout;
+import ip.industrialProcessing.gui.IGuiLayout;
+import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.recipes.IRecipeBlock;
+import ip.industrialProcessing.utils.IDescriptionBlock;
 
-public class BlockFlotationCell extends BlockMachineRendered implements IRecipeBlock {
+public class BlockFlotationCell extends BlockMachineRendered  implements IRecipeBlock, IDescriptionBlock,IGuiLayout{
 
+	public static GuiLayout guiLayout;
+	static{
+		guiLayout = new GuiLayout();
+		guiLayout.addLayoutPanel(GuiLayoutPanelType.tankInput);
+		guiLayout.addLayoutPanel(GuiLayoutPanelType.tankOutput);
+		guiLayout.addLayoutPanel(GuiLayoutPanelType.tankOutput);
+		guiLayout.addLayoutPanel(GuiLayoutPanelType.worker);
+		guiLayout.addLayoutPanel(GuiLayoutPanelType.power);
+	}
     private Icon[] icons = new Icon[2];
 
     public BlockFlotationCell() {
@@ -53,5 +66,15 @@ public class BlockFlotationCell extends BlockMachineRendered implements IRecipeB
     public RecipesMachine getRecipes() { 
 	return TileEntityFlotationCell.recipes;
     }
+
+	@Override
+	public GuiLayout getGuiLayout() {
+		return guiLayout;
+	}
+
+	@Override
+	public String getDescription() {
+		return "You make me float.";
+	}
 
 }

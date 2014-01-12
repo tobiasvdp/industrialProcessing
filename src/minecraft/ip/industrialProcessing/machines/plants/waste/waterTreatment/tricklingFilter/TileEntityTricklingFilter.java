@@ -14,7 +14,7 @@ public class TileEntityTricklingFilter extends TileEntityPoweredFluidWorkerMachi
 	public static RecipesTricklingFilter recipes = new RecipesTricklingFilter();
 	public TileEntityTricklingFilter() {
 		super(LocalDirection.LEFT, 10000,100);
-		addStack(null, LocalDirection.RIGHT, true, false); // Mixing ingredient
+		addStack(null, LocalDirection.BACK, true, false); // Mixing ingredient
 
 		LocalDirection[] nodirections = new LocalDirection[0];
 		// buckets!

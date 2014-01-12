@@ -32,7 +32,7 @@ public abstract class TileEntityPoweredFluidWorkerMachine extends TileEntityFlui
     public void doWork() {
 	Recipe recipe = ((RecipeWorker) this.worker).getCurrentRecipe();
 
-	if (recipe != null) {
+	if (recipe != null && !worldObj.isRemote) {
 		status = StatusType.working;
 	    int amount = PowerWorkerHelper.getWork(this.storage, this.maxWorkSpeed);
 	    int maxWork = this.storage.drainPower(amount, false);
@@ -77,7 +77,7 @@ public abstract class TileEntityPoweredFluidWorkerMachine extends TileEntityFlui
 
     @Override
     public void applyPower(ForgeDirection side, float coulombs, float voltage) {
-	if (canAcceptPower(side)) {
+	if (canAcceptPower(side) && !worldObj.isRemote) {
 	    int joules = (int) PowerHelper.getEnergy(coulombs, voltage);
 	    this.storage.fillPower(joules, true);
 	}

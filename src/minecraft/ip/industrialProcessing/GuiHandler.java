@@ -4,25 +4,15 @@ import ip.industrialProcessing.gui.IGuiLayout;
 import ip.industrialProcessing.gui.container.ContainerIP;
 import ip.industrialProcessing.gui.guiContainer.GuiContainerIP;
 import ip.industrialProcessing.items.guide.gui.GuiGuide;
-import ip.industrialProcessing.machines.classifier.ContainerClassifier;
-import ip.industrialProcessing.machines.classifier.GuiContainerClassifier;
 import ip.industrialProcessing.machines.classifier.TileEntityClassifier;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
-import ip.industrialProcessing.machines.diskFilter.ContainerDiskFilter;
-import ip.industrialProcessing.machines.diskFilter.GuiContainerDiskFilter;
 import ip.industrialProcessing.machines.diskFilter.TileEntityDiskFilter;
-import ip.industrialProcessing.machines.dryer.ContainerDryer;
-import ip.industrialProcessing.machines.dryer.GuiContainerDryer;
 import ip.industrialProcessing.machines.dryer.TileEntityDryer;
 import ip.industrialProcessing.machines.electrolyser.ContainerElectrolyser;
 import ip.industrialProcessing.machines.electrolyser.GuiContainerElectrolyser;
 import ip.industrialProcessing.machines.electrolyser.TileEntityElectrolyser;
 import ip.industrialProcessing.machines.filter.TileEntityFilter;
-import ip.industrialProcessing.machines.flotationCell.ContainerFlotationCell;
-import ip.industrialProcessing.machines.flotationCell.GuiContainerFlotationCell;
 import ip.industrialProcessing.machines.flotationCell.TileEntityFlotationCell;
-import ip.industrialProcessing.machines.hydroCyclone.ContainerHydroCyclone;
-import ip.industrialProcessing.machines.hydroCyclone.GuiContainerHydroCyclone;
 import ip.industrialProcessing.machines.hydroCyclone.TileEntityHydroCyclone;
 import ip.industrialProcessing.machines.insulator.ContainerInsulator;
 import ip.industrialProcessing.machines.insulator.GuiContainerInsulator;
@@ -84,11 +74,7 @@ import ip.industrialProcessing.machines.plants.waste.exhaust.coolingUnit.TileEnt
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator.ContainerIncubator;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator.GuiContainerIncubator;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator.TileEntityIncubator;
-import ip.industrialProcessing.machines.plants.waste.waterTreatment.tricklingFilter.ContainerTricklingFilter;
-import ip.industrialProcessing.machines.plants.waste.waterTreatment.tricklingFilter.GuiContainerTricklingFilter;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.tricklingFilter.TileEntityTricklingFilter;
-import ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatmentStation.ContainerWaterTreatmentStation;
-import ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatmentStation.GuiContainerWaterTreatmentStation;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatmentStation.TileEntityWaterTreatmentStation;
 import ip.industrialProcessing.machines.sinter.ContainerSinter;
 import ip.industrialProcessing.machines.sinter.GuiContainerSinter;
@@ -96,8 +82,6 @@ import ip.industrialProcessing.machines.sinter.TileEntitySinter;
 import ip.industrialProcessing.machines.spoolWindingMachine.ContainerSpoolWindingMachine;
 import ip.industrialProcessing.machines.spoolWindingMachine.GuiContainerSpoolWindingMachine;
 import ip.industrialProcessing.machines.spoolWindingMachine.TileEntitySpoolWindingMachine;
-import ip.industrialProcessing.machines.thickener.ContainerThickener;
-import ip.industrialProcessing.machines.thickener.GuiContainerThickener;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
 import ip.industrialProcessing.machines.treetap.ContainerAutomaticTreeTap;
 import ip.industrialProcessing.machines.treetap.ContainerManualTreeTap;
@@ -199,18 +183,6 @@ public class GuiHandler implements IGuiHandler {
 			}
 			if (entity instanceof TileEntityMagneticSeparator)
 				return new ContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity);
-			if (entity instanceof TileEntityDryer)
-				return new ContainerDryer(player.inventory, (TileEntityDryer) entity);
-			if (entity instanceof TileEntityClassifier)
-				return new ContainerClassifier(player.inventory, (TileEntityClassifier) entity);
-			if (entity instanceof TileEntityThickener)
-				return new ContainerThickener(player.inventory, (TileEntityThickener) entity);
-			if (entity instanceof TileEntityFlotationCell)
-				return new ContainerFlotationCell(player.inventory, (TileEntityFlotationCell) entity);
-			if (entity instanceof TileEntityHydroCyclone)
-				return new ContainerHydroCyclone(player.inventory, (TileEntityHydroCyclone) entity);
-			if (entity instanceof TileEntityDiskFilter)
-				return new ContainerDiskFilter(player.inventory, (TileEntityDiskFilter) entity);
 			if (entity instanceof TileEntityPelletExtruder)
 				return new ContainerPelletExtruder(player.inventory, (TileEntityPelletExtruder) entity);
 			if (entity instanceof TileEntityExtruder)
@@ -231,10 +203,6 @@ public class GuiHandler implements IGuiHandler {
 				return new ContainerWeldingStation(player, (TileEntityMultiblockWeldingStation) entity);
 			if (entity instanceof TileEntityIncubator)
 				return new ContainerIncubator(player.inventory, (TileEntityIncubator) entity);
-			if (entity instanceof TileEntityWaterTreatmentStation)
-				return new ContainerWaterTreatmentStation(player.inventory, (TileEntityWaterTreatmentStation) entity);
-			if (entity instanceof TileEntityTricklingFilter)
-				return new ContainerTricklingFilter(player.inventory, (TileEntityTricklingFilter) entity);
 			if (entity instanceof TileEntityManualTreeTap)
 				return new ContainerManualTreeTap(player.inventory, (TileEntityManualTreeTap) entity);
 			if (entity instanceof TileEntityAutomaticTreeTap)
@@ -327,18 +295,6 @@ public class GuiHandler implements IGuiHandler {
 			}
 			if (entity instanceof TileEntityMagneticSeparator)
 				return new GuiContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity);
-			if (entity instanceof TileEntityDryer)
-				return new GuiContainerDryer(player.inventory, (TileEntityDryer) entity);
-			if (entity instanceof TileEntityClassifier)
-				return new GuiContainerClassifier(player.inventory, (TileEntityClassifier) entity);
-			if (entity instanceof TileEntityThickener)
-				return new GuiContainerThickener(player.inventory, (TileEntityThickener) entity);
-			if (entity instanceof TileEntityFlotationCell)
-				return new GuiContainerFlotationCell(player.inventory, (TileEntityFlotationCell) entity);
-			if (entity instanceof TileEntityHydroCyclone)
-				return new GuiContainerHydroCyclone(player.inventory, (TileEntityHydroCyclone) entity);
-			if (entity instanceof TileEntityDiskFilter)
-				return new GuiContainerDiskFilter(player.inventory, (TileEntityDiskFilter) entity);
 			if (entity instanceof TileEntityPelletExtruder)
 				return new GuiContainerPelletExtruder(player.inventory, (TileEntityPelletExtruder) entity);
 			if (entity instanceof TileEntityExtruder)
@@ -361,10 +317,6 @@ public class GuiHandler implements IGuiHandler {
 				return new GUImultiblockToggleButton((TEmultiblockToggleButton) entity, player);
 			if (entity instanceof TileEntityIncubator)
 				return new GuiContainerIncubator(player.inventory, (TileEntityIncubator) entity);
-			if (entity instanceof TileEntityWaterTreatmentStation)
-				return new GuiContainerWaterTreatmentStation(player.inventory, (TileEntityWaterTreatmentStation) entity);
-			if (entity instanceof TileEntityTricklingFilter)
-				return new GuiContainerTricklingFilter(player.inventory, (TileEntityTricklingFilter) entity);
 			if (entity instanceof TileEntityManualTreeTap)
 				return new GuiContainerManualTreeTap(player.inventory, (TileEntityManualTreeTap) entity);
 			if (entity instanceof TileEntityAutomaticTreeTap)
