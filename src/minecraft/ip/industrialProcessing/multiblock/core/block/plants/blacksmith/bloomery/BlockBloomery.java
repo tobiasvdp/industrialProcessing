@@ -6,12 +6,20 @@ import ic2.api.item.Items;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.gui.GuiLayout;
+import ip.industrialProcessing.gui.IGuiLayout;
+import ip.industrialProcessing.gui.IGuiLayoutMultiblock;
+import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
+import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.multiblock.core.BlockMultiblockCore;
+import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
 import ip.industrialProcessing.multiblock.recipes.IRecipeMultiblock;
 import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
+import ip.industrialProcessing.multiblock.tier.Tiers;
 import ip.industrialProcessing.recipes.IRecipeBlock;
+import ip.industrialProcessing.utils.IDescriptionBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -24,7 +32,23 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockBloomery extends BlockMultiblockCore implements IRecipeMultiblock {
+public class BlockBloomery extends BlockMultiblockCore implements IRecipeMultiblock ,IDescriptionBlock,IGuiLayoutMultiblock {
+
+	public static GuiLayout[] guiLayout = new GuiLayout[2];
+	static{
+		guiLayout[0] = new GuiLayout();
+		guiLayout[0].addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 1);
+		guiLayout[0].addLayoutPanel(GuiLayoutPanelType.slotsOutput).setSlotLayout(SlotLayoutType.horizontal, 1);
+		guiLayout[0].addLayoutPanel(GuiLayoutPanelType.heat);
+		guiLayout[0].addLayoutPanel(GuiLayoutPanelType.worker);
+		
+		guiLayout[1] = new GuiLayout();
+		guiLayout[1].addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 1);
+		guiLayout[1].addLayoutPanel(GuiLayoutPanelType.slotsOutput).setSlotLayout(SlotLayoutType.horizontal, 1);
+		guiLayout[1].addLayoutPanel(GuiLayoutPanelType.heat);
+		guiLayout[1].addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.vertical, 2);
+		guiLayout[1].addLayoutPanel(GuiLayoutPanelType.worker);
+	}
 
 	private Icon[] icons = new Icon[1];
 
@@ -122,6 +146,26 @@ public class BlockBloomery extends BlockMultiblockCore implements IRecipeMultibl
 			}
 		}
 		super.breakBlock(world, x, y, z, par5, par6);
+	}
+
+	@Override
+	public String getDescription() {
+		return "A crappy furnace that can smelt your iron.";
+	}
+
+	@Override
+	public GuiLayout getGuiLayout(Tiers tier) {
+		return guiLayout[tier.ordinal()];
+	}
+
+	@Override
+	public GuiLayout[] getGuiLayouts() {
+		return guiLayout;
+	}
+
+	@Override
+	public StructureMultiblock getMultiblockLayouts() {
+		return TileEntityBloomery.structure;
 	}
 
 }

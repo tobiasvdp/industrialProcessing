@@ -44,5 +44,7 @@ public interface IHeatStorage {
 	
 	//get the scaledBurnTime
 	public int getScaledBurnTime(int size);
+
+
 	
 }

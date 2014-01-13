@@ -1,4 +1,4 @@
-package ip.industrialProcessing.config;
+ package ip.industrialProcessing.config;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -251,7 +251,7 @@ public class ConfigMachineBlocks {
     	registerMachineBlock(ISetupMachineBlocks.blockQuenchTank, "IP.Machine.Quench", "QuenchTank", TileEntityQuenchTank.class);
     	registerMachineBlock(ISetupMachineBlocks.blockGrindingStone, "IP.Machine.GrStone", "Grinding stone", TileEntityGrindingStone.class,BlockType.Machine,BlockType.assemble);
     	registerMachineBlock(ISetupMachineBlocks.blockBellows, "IP.MBD.Bellow", "Bellows", TileEntityBellows.class,BlockType.Machine,BlockType.assemble);
-    	registerMachineBlock(ISetupMachineBlocks.blockBloomery, "IP.MBC.Bloom", "Bloomery", TileEntityBloomery.class,BlockType.Machine,BlockType.assemble);
+    	registerMachineBlock(ISetupMachineBlocks.blockBloomery, "IP.MBC.Bloom", "Bloomery", TileEntityBloomery.class,BlockType.Machine,BlockType.Smelting);
     	registerMachineBlock(ISetupMachineBlocks.blockIronBowl, "IP.MBD.IBowl", "Iron bowl", TileEntityIronBowl.class,BlockType.Machine,BlockType.assemble);
     	
 

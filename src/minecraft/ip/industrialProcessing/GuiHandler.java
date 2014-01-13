@@ -1,6 +1,7 @@
 package ip.industrialProcessing;
 
 import ip.industrialProcessing.gui.IGuiLayout;
+import ip.industrialProcessing.gui.IGuiLayoutMultiblock;
 import ip.industrialProcessing.gui.container.ContainerIP;
 import ip.industrialProcessing.gui.guiContainer.GuiContainerIP;
 import ip.industrialProcessing.items.guide.gui.GuiGuide;
@@ -178,7 +179,7 @@ public class GuiHandler implements IGuiHandler {
 
 		TileEntity entity = world.getBlockTileEntity(x, y, z);
 		if (ID == 0) {
-			if (entity.getBlockType() != null && entity.getBlockType() instanceof IGuiLayout){
+			if (entity.getBlockType() != null && (entity.getBlockType() instanceof IGuiLayout || entity.getBlockType() instanceof IGuiLayoutMultiblock)) {
 				return new ContainerIP(player.inventory, entity);
 			}
 			if (entity instanceof TileEntityMagneticSeparator)
@@ -278,7 +279,7 @@ public class GuiHandler implements IGuiHandler {
 		} else if (ID == GUIDE_ID) {
 			return null;
 		} else if (ID == SOLDERINGIRON_ID) {
-			return new ContainerSolderingIron(player, (TileEntityMultiblockWeldingStation)entity);
+			return new ContainerSolderingIron(player, (TileEntityMultiblockWeldingStation) entity);
 		} else if (ID == ANVIL_ID) {
 			return new ContainerAnvil(player.inventory, world, x, y, z);
 		}
@@ -290,8 +291,8 @@ public class GuiHandler implements IGuiHandler {
 
 		TileEntity entity = world.getBlockTileEntity(x, y, z);
 		if (ID == 0) {
-			if (entity.getBlockType() != null && entity.getBlockType() instanceof IGuiLayout){
-				return new GuiContainerIP(player.inventory, entity,new ContainerIP(player.inventory,entity));
+			if (entity.getBlockType() != null && (entity.getBlockType() instanceof IGuiLayout || entity.getBlockType() instanceof IGuiLayoutMultiblock)) {
+				return new GuiContainerIP(player.inventory, entity, new ContainerIP(player.inventory, entity));
 			}
 			if (entity instanceof TileEntityMagneticSeparator)
 				return new GuiContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity);
@@ -392,7 +393,7 @@ public class GuiHandler implements IGuiHandler {
 		} else if (ID == GUIDE_ID) {
 			return new GuiGuide(player);
 		} else if (ID == SOLDERINGIRON_ID) {
-			return new GuiContainerSolderingIron(player, (TileEntityMultiblockWeldingStation)entity);
+			return new GuiContainerSolderingIron(player, (TileEntityMultiblockWeldingStation) entity);
 		} else if (ID == ANVIL_ID) {
 			return new GuiContainerAnvil(player.inventory, world, x, y, z);
 		}

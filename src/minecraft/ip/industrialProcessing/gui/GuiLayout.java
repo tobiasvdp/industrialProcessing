@@ -15,11 +15,14 @@ import ip.industrialProcessing.machines.containers.ContainerWorkerMachine;
 import ip.industrialProcessing.machines.containers.gui.GuiContainerPoweredWorkerMachine;
 import ip.industrialProcessing.machines.containers.gui.GuiContainerWorkerMachine;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
+import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.slots.SlotBase;
 
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.inventory.Container;
@@ -103,6 +106,14 @@ public class GuiLayout {
 			panel.setGuiContainerLayout(type);
 			layoutPanels.add(panel);
 			break;
+		case heat:
+			x = 0;
+			y = 44 + offsetY;
+			panel = new GuiLayoutPanel(this, type, x, y, 35, 54,15,54);
+			panel.setSlotLayout(SlotLayoutType.fixed, 2);
+			panel.setGuiContainerLayout(type);
+			layoutPanels.add(panel);
+			break;
 		default:
 			break;
 
@@ -149,16 +160,7 @@ public class GuiLayout {
 
 	public void reDoLayout() {
 		int widthScreen = 236;
-		ArrayList<GuiLayoutPanel> panels = new ArrayList<GuiLayoutPanel>();
-		for (GuiLayoutPanelType type : new GuiLayoutPanelType[] { GuiLayoutPanelType.tankInput, GuiLayoutPanelType.slotsInput, GuiLayoutPanelType.worker, GuiLayoutPanelType.slotsOutput, GuiLayoutPanelType.tankOutput }) {
-			Iterator<GuiLayoutPanel> it = layoutPanels.iterator();
-			while (it.hasNext()) {
-				GuiLayoutPanel panel = it.next();
-				if (panel.type == type) {
-					panels.add(panel);
-				}
-			}
-		}
+		ArrayList<GuiLayoutPanel> panels = getOrganizedPanels();
 		int totalWidth = 0;
 		for (int i = 0; i < panels.size(); i++) {
 			totalWidth += panels.get(i).getWidth();
@@ -169,6 +171,20 @@ public class GuiLayout {
 			panels.get(i).setX(totalWidth + (i + 1) * margin);
 			totalWidth += panels.get(i).getWidth();
 		}
+	}
+
+	private ArrayList<GuiLayoutPanel> getOrganizedPanels() {
+		ArrayList<GuiLayoutPanel> panels = new ArrayList<GuiLayoutPanel>();
+		for (GuiLayoutPanelType type : new GuiLayoutPanelType[] { GuiLayoutPanelType.heat,GuiLayoutPanelType.tankInput, GuiLayoutPanelType.slotsInput, GuiLayoutPanelType.worker, GuiLayoutPanelType.slotsOutput, GuiLayoutPanelType.tankOutput }) {
+			Iterator<GuiLayoutPanel> it = layoutPanels.iterator();
+			while (it.hasNext()) {
+				GuiLayoutPanel panel = it.next();
+				if (panel.type == type) {
+					panels.add(panel);
+				}
+			}
+		}
+		return panels;
 	}
 
 	public void draw(Gui gui, Container container, int offsetX, int offsetY, int mouseX, int mouseY) {
@@ -216,6 +232,46 @@ public class GuiLayout {
 
 			container.addHandlerToContainer(panelType, typeIndex);
 
+			typeIndex++;
+		}
+	}
+
+	public void drawFilledPanels(Rectangle rectangle, Gui gui, int mouseX,int mouseY,Recipe recipe, Block craftingBlock) {
+		ArrayList<GuiLayoutPanel> panels = getOrganizedPanels();
+		
+		int typeIndex = 0;
+		GuiLayoutPanelType type = null;
+		int offset = 3;
+		int x = rectangle.x + offset;
+		int y = rectangle.y + offset;
+		int ymax = 0;
+		for (int i = 0; i < panels.size(); i++) {
+			
+			GuiLayoutPanel panel = panels.get(i);
+			GuiLayoutPanelType panelType = panel.type;
+
+			if (type == null)
+				type = panel.type;
+
+			if (type != panelType) {
+				if ((type == GuiLayoutPanelType.tankInput && panelType == GuiLayoutPanelType.tankOutput) || (type == GuiLayoutPanelType.tankOutput && panelType == GuiLayoutPanelType.tankInput)) {
+
+				} else {
+					typeIndex = 0;
+					type = panelType;
+				}
+			}
+			
+			if(panel.getHeight() > ymax)
+				ymax = panel.getHeight();
+			if(panel.getWidthReduced() + x > rectangle.x+rectangle.width){
+				x = rectangle.x + offset;
+				y= y+= ymax + offset;
+				ymax = 0;
+			}
+			panel.drawFilledPanel(gui,typeIndex,x,y,recipe,mouseX,mouseY,craftingBlock);
+			x +=  panel.getWidthReduced() + offset;
+			
 			typeIndex++;
 		}
 	}

@@ -99,7 +99,7 @@ public class TileEntityMultiblockWeldingStation extends TileEntityMultiblockCore
 
 	@Override
 	public void updateEntity() {
-		HeatStorage.onUpdateEntity(this, this, 14);
+		HeatStorage.onUpdateEntity(this, this, 11);
 		super.updateEntity();
 	}
 
@@ -116,15 +116,15 @@ public class TileEntityMultiblockWeldingStation extends TileEntityMultiblockCore
 
 	@Override
 	protected boolean isValidInput(int slot, int itemID) {
-		if (slot == 14) {
+		if (slot == 11) {
 			return HeatStorage.onIsValidInput(itemID);
 		}
-		return recipes.isValidInput(slot, itemID,getTier());
+		return recipes.isValidInput(slot, itemID, getTier());
 	}
 
 	@Override
 	public void ConsumeFuel(ItemStack stack) {
-		HeatStorage.ConsumeFuel(this.worldObj,this,this, this, stack,14);
+		HeatStorage.ConsumeFuel(this.worldObj, this, this, this, stack, 11);
 	}
 
 	@Override
@@ -134,12 +134,14 @@ public class TileEntityMultiblockWeldingStation extends TileEntityMultiblockCore
 
 	@Override
 	public void tickFuel() {
-		HeatStorage.tickFuel(this);
+		if (!this.worldObj.isRemote)
+			HeatStorage.tickFuel(this);
 	}
 
 	@Override
 	public void transferHeat() {
-		HeatStorage.transferHeat(this);
+		if (!this.worldObj.isRemote)
+			HeatStorage.transferHeat(this);
 	}
 
 	@Override

@@ -77,6 +77,7 @@ public class TileEntityBloomery extends TileEntityMultiblockCoreTankWorker imple
 		this.addStack(null, nodirections, true, false);
 		this.addStack(null, nodirections, true, false);
 		this.addStack(null, nodirections, true, false);
+		this.addStack(null, nodirections, true, false);
 
 		HeatStorage.construction(this);
 
@@ -90,7 +91,7 @@ public class TileEntityBloomery extends TileEntityMultiblockCoreTankWorker imple
 
 	@Override
 	public void updateEntity() {
-		HeatStorage.onUpdateEntity(this, this, 2);
+		HeatStorage.onUpdateEntity(this, this, 3);
 		if (getHeat() > requiredHeatLevel())
 			if (TickLiveTime())
 				destroyBlock();
@@ -111,7 +112,7 @@ public class TileEntityBloomery extends TileEntityMultiblockCoreTankWorker imple
 
 	@Override
 	protected boolean isValidInput(int slot, int itemID) {
-		if (slot == 2) {
+		if (slot == 3) {
 			return HeatStorage.onIsValidInput(itemID);
 		}
 		return recipes.isValidInput(slot, itemID,getTier());
@@ -120,7 +121,7 @@ public class TileEntityBloomery extends TileEntityMultiblockCoreTankWorker imple
 	//burner management
 	@Override
 	public void ConsumeFuel(ItemStack stack) {
-		HeatStorage.ConsumeFuel(this.worldObj,this,this, this, stack,2);
+		HeatStorage.ConsumeFuel(this.worldObj,this,this, this, stack,3);
 	}
 
 	@Override

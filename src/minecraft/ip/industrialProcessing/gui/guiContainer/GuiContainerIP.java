@@ -4,9 +4,11 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.gui.GuiLayout;
 import ip.industrialProcessing.gui.IGuiLayout;
+import ip.industrialProcessing.gui.IGuiLayoutMultiblock;
 import ip.industrialProcessing.gui.container.syncing.info.InfoTank;
 import ip.industrialProcessing.machines.containers.ContainerMachine;
 import ip.industrialProcessing.machines.containers.ProgressInfoTank;
+import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Point;
@@ -46,6 +48,10 @@ public class GuiContainerIP extends GuiContainer {
 		
 		if (tileEntity.getBlockType() instanceof IGuiLayout)
 			layout = ((IGuiLayout) tileEntity.getBlockType()).getGuiLayout();
+		
+		if (tileEntity.getBlockType() instanceof IGuiLayoutMultiblock){
+			layout = ((IGuiLayoutMultiblock) tileEntity.getBlockType()).getGuiLayout(((TileEntityMultiblockCore)tileEntity).getTier());
+		}
 	}
 	
 	public void setTextureWorker(){

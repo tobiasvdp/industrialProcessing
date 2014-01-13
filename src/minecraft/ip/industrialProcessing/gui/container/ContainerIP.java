@@ -3,10 +3,13 @@ package ip.industrialProcessing.gui.container;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import ip.industrialProcessing.api.rendering.connectedTile.TileConnection;
 import ip.industrialProcessing.api.tanks.ITank;
 import ip.industrialProcessing.gui.GuiLayout;
 import ip.industrialProcessing.gui.IGuiLayout;
+import ip.industrialProcessing.gui.IGuiLayoutMultiblock;
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
+import ip.industrialProcessing.gui.container.syncing.handlers.HandlerHeat;
 import ip.industrialProcessing.gui.container.syncing.handlers.HandlerPower;
 import ip.industrialProcessing.gui.container.syncing.handlers.HandlerTank;
 import ip.industrialProcessing.gui.container.syncing.handlers.HandlerWorker;
@@ -14,7 +17,9 @@ import ip.industrialProcessing.gui.container.syncing.handlers.IHandlerContainer;
 import ip.industrialProcessing.gui.container.syncing.handlers.IHandlerPower;
 import ip.industrialProcessing.machines.IPowerStorage;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
+import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.power.IPoweredMachine;
+import ip.industrialProcessing.utils.handler.heat.IHeatStorage;
 import ip.industrialProcessing.utils.working.IWorkHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -43,7 +48,11 @@ public class ContainerIP extends Container {
 		this.te = te;
 		if (te.getBlockType() instanceof IGuiLayout)
 			layout = ((IGuiLayout) te.getBlockType()).getGuiLayout();
-
+		
+		if (te.getBlockType() instanceof IGuiLayoutMultiblock){
+			layout = ((IGuiLayoutMultiblock) te.getBlockType()).getGuiLayout(((TileEntityMultiblockCore)te).getTier());
+		}
+		
 		if (this.layout != null) {
 
 			// bind te slots
@@ -281,6 +290,10 @@ public class ContainerIP extends Container {
 		case worker:
 			if (te instanceof IWorkHandler)
 				addHandler(new HandlerWorker(((IWorkHandler) te).getWorker()));
+			break;
+		case heat:
+			if (te instanceof IHeatStorage)
+				addHandler(new HandlerHeat(((IHeatStorage) te)));
 			break;
 		default:
 			break;

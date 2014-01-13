@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
@@ -13,6 +14,7 @@ import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayout;
 import ip.industrialProcessing.gui.container.slot.layout.components.SlotType;
 import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerDrawRectagle;
+import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.slots.SlotBase;
 
 public class GuiContainerLayout {
@@ -73,6 +75,14 @@ public class GuiContainerLayout {
 				return true;
 		}
 		return false;
+	}
+
+	public void drawFilled(Gui gui, SlotLayout slotLayout, Recipe recipe, int index, int x, int y, int mouseX, int mouseY, Block craftingBlock) {
+		Iterator<GuiContainerDrawRectagle> it = rect.iterator();
+		while (it.hasNext()) {
+			GuiContainerDrawRectagle rectangle = it.next();
+			gui.drawTexturedModalRect(rectangle.destination.x + x, rectangle.destination.y + y, rectangle.origin.x, rectangle.origin.y, rectangle.origin.width, rectangle.origin.height);
+		}
 	}
 
 }

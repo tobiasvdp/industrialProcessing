@@ -93,7 +93,7 @@ public class SlotLayoutOutput extends SlotLayout{
 			} else {
 				int spacing = (rect.height - 18 * yVer) / (yVer + 1);
 				for (int i = 0; i < yVer; i++) {
-					slots[count++] = new SlotOutput(null, startIndex++, 18,spacing * (i + 1) + i * 18);
+					slots[count++] = new SlotOutput(null, startIndex++, 0,spacing * (i + 1) + i * 18);
 				}
 			}
 			break;

@@ -26,7 +26,7 @@ public class ContainerAnvil extends Container{
     private int posX;
     private int posY;
     private int posZ;
-    private static CraftingManager recipes;
+    public static CraftingManager recipes;
     public static final int WILDCARD_VALUE = Short.MAX_VALUE;
     
     static{
