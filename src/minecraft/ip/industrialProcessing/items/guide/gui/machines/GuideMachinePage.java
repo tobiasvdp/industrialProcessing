@@ -174,7 +174,7 @@ public class GuideMachinePage extends GuidePanoramaPage {
 						// draw the active recipe
 						if (craftingPane == i) {
 							GuideMachineCraftingRecipeDetails details = new GuideMachineCraftingRecipeDetails(recipe);
-							details.renderTabContents(this, x, y + 80, mouseX, mouseY);
+							details.renderTabContents(this, x, y + 82, mouseX, mouseY);
 						}
 						i++;
 					}
@@ -193,7 +193,7 @@ public class GuideMachinePage extends GuidePanoramaPage {
 						// draw the active recipe
 						if (craftingPane == i) {
 							GuideMachineCraftingRecipeDetails details = new GuideMachineCraftingRecipeDetails(recipe);
-							details.renderTabContents(this, x, y + 80, mouseX, mouseY);
+							details.renderTabContents(this, x, y + 82, mouseX, mouseY);
 						}
 						i++;
 					}
@@ -211,7 +211,7 @@ public class GuideMachinePage extends GuidePanoramaPage {
 					// draw the active recipe
 					if (craftingPane == i) {
 						GuideMachineFurnaceRecipeDetails details = new GuideMachineFurnaceRecipeDetails(entry.getKey(),entry.getValue());
-						details.renderTabContents(this, x, y + 80, mouseX, mouseY);
+						details.renderTabContents(this, x, y + 82, mouseX, mouseY);
 					}
 					i++;
 				}
