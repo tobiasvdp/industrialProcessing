@@ -6,19 +6,26 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.lwjgl.opengl.GL11;
 
+import codechicken.nei.recipe.FurnaceRecipeHandler.SmeltingPair;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import ip.industrialProcessing.IndustrialProcessing;
@@ -31,6 +38,7 @@ import ip.industrialProcessing.gui.IGuiLayoutMultiblock;
 import ip.industrialProcessing.items.guide.gui.GuiGuide;
 import ip.industrialProcessing.items.guide.gui.GuidePanoramaPage;
 import ip.industrialProcessing.items.guide.gui.machines.components.GuideMachineCraftingRecipeDetails;
+import ip.industrialProcessing.items.guide.gui.machines.components.GuideMachineFurnaceRecipeDetails;
 import ip.industrialProcessing.items.guide.gui.machines.components.GuideMachinePageMode;
 import ip.industrialProcessing.items.guide.gui.machines.old.GuideMachineDetailsFrame;
 import ip.industrialProcessing.machines.plants.blacksmith.anvil.ContainerAnvil;
@@ -43,7 +51,7 @@ import ip.industrialProcessing.utils.registry.RecipeRegistry;
 
 public class GuideMachinePage extends GuidePanoramaPage {
 
-	private BlockType[][] type = new BlockType[][] { { BlockType.Ore_Processing, BlockType.Smelting, BlockType.Power, BlockType.Refinary }, { BlockType.Power, BlockType.Storage } };
+	private BlockType[][] type = new BlockType[][] { { BlockType.Ore_Processing, BlockType.Smelting, BlockType.Power,BlockType.fluid, BlockType.Refinary,BlockType.assemble }, { BlockType.Power, BlockType.Storage } };
 	private BlockType activeType;
 	private BlockType hoverType;
 	private GuideMachinePageMode mode;
@@ -58,6 +66,7 @@ public class GuideMachinePage extends GuidePanoramaPage {
 
 	public ResourceLocation textureLocationLayout = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/layout.png");
 	public ResourceLocation textureLocationWorker;
+	protected static RenderItem itemRenderer = new RenderItem();
 
 	public void setTextureWorker(Block block) {
 		this.textureLocationWorker = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/"+block.getLocalizedName()+".png");
@@ -188,6 +197,23 @@ public class GuideMachinePage extends GuidePanoramaPage {
 						}
 						i++;
 					}
+				}
+			}
+			//smelting managers
+			Map map = FurnaceRecipes.smelting().getSmeltingList();
+			Iterator it = map.entrySet().iterator();
+			while(it.hasNext()){
+				Map.Entry<Integer, ItemStack> entry = (Entry<Integer, ItemStack>) it.next();
+				if(entry.getValue() != null && entry.getValue().itemID == id){
+					if (i == 0 && craftingPane == -1)
+						craftingPane = 0;
+					drawMachineTab(mouseX, mouseY, Block.furnaceBurning, x + i * 18, y + 60, i, craftingPane);
+					// draw the active recipe
+					if (craftingPane == i) {
+						GuideMachineFurnaceRecipeDetails details = new GuideMachineFurnaceRecipeDetails(entry.getKey(),entry.getValue());
+						details.renderTabContents(this, x, y + 80, mouseX, mouseY);
+					}
+					i++;
 				}
 			}
 
@@ -329,11 +355,29 @@ public class GuideMachinePage extends GuidePanoramaPage {
 		RenderHelper.enableGUIStandardItemLighting();
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
-		GuiTools.drawItemStack(stack, x, y, null, GuiGuide.itemRenderer, mc.fontRenderer, mc.renderEngine);
+		if(stack.stackSize == 1)
+			drawItemStack(stack, x, y, "");
+		else
+			drawItemStack(stack, x, y, stack.stackSize + "");
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 		GL11.glDisable(GL11.GL_LIGHTING);
 		RenderHelper.disableStandardItemLighting();
 	}
+	
+
+    public void drawItemStack(ItemStack par1ItemStack, int par2, int par3, String par4Str)
+    {
+        GL11.glTranslatef(0.0F, 0.0F, 32.0F);
+        this.zLevel = 200.0F;
+		itemRenderer .zLevel = 200.0F;
+        FontRenderer font = null;
+        if (par1ItemStack != null) font = par1ItemStack.getItem().getFontRenderer(par1ItemStack);
+        if (font == null) font = fontRenderer;
+        itemRenderer.renderItemAndEffectIntoGUI(font, this.mc.func_110434_K(), par1ItemStack, par2, par3);
+        itemRenderer.renderItemOverlayIntoGUI(font, this.mc.func_110434_K(), par1ItemStack, par2, par3, par4Str);
+        this.zLevel = 0.0F;
+        itemRenderer.zLevel = 0.0F;
+    }
 
 	@Override
 	public Point getIconLocation() {

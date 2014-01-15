@@ -81,8 +81,8 @@ public class RecipesMixer extends RecipesMachine {
         Recipe recipe = new Recipe();
         recipe.workRequired = i;
         recipe.powerRequired = powerConsumption;
-        recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.WATER.getID(), RecipeSlotType.TANK, 1000), new RecipeInputSlot(0, IndustrialProcessing.itemIronSmallChunks.itemID, RecipeSlotType.INVENTORY, 1) };
-        recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidOreSludgeIron.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
+        recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.WATER.getID(), RecipeSlotType.TANK, 100), new RecipeInputSlot(0, IndustrialProcessing.itemIronSmallChunks.itemID, RecipeSlotType.INVENTORY, 1) };
+        recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidOreSludgeIron.getName()), RecipeSlotType.TANK, 100, 120, 0.5) };
         return recipe;
     }
 }

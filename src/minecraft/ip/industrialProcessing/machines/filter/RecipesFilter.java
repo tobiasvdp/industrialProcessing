@@ -24,7 +24,7 @@ public class RecipesFilter extends RecipesMachine {
 
         addRecipe(copperFineToDust(3000, 1));
         addRecipe(tinFineToDust(3000, 1));
-        addRecipe(ironFineToDust(3000, 1));
+        addRecipe(ironFineToDust(2000, 1));
         addRecipe(goldFineToDust(3000, 1));
         addRecipe(galenaFineToDust(3000, 1));
         addRecipe(chromiteFineToDust(3000, 1));
@@ -72,7 +72,7 @@ public class RecipesFilter extends RecipesMachine {
         recipe.workRequired = i;
         recipe.powerRequired = powerConsumption;
         recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemIronFineChunks.itemID, RecipeSlotType.INVENTORY, 1) };
-        recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemIronOxideDust.itemID, RecipeSlotType.INVENTORY, 0, 1, 0), new RecipeOutputSlot(2, IndustrialProcessing.itemIronMixedFragments.itemID, RecipeSlotType.INVENTORY, 1, 2, 0.75) };
+        recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemIronOxideDust.itemID, RecipeSlotType.INVENTORY, 0, 2, 0.5), new RecipeOutputSlot(2, IndustrialProcessing.itemIronMixedFragments.itemID, RecipeSlotType.INVENTORY, 0, 1, 0.6) };
         return recipe;
     }
 
@@ -135,8 +135,8 @@ public class RecipesFilter extends RecipesMachine {
         Recipe iron = new Recipe();
         iron.workRequired = i;
         iron.powerRequired = powerConsumption;
-        iron.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemIronCrushedChunks.itemID, RecipeSlotType.INVENTORY, 1) };
-        iron.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemIronLargeChunks.itemID, RecipeSlotType.INVENTORY, 0, 1, 0), new RecipeOutputSlot(2, IndustrialProcessing.itemIronSmallChunks.itemID, RecipeSlotType.INVENTORY, 1, 2, 0.75) };
+        iron.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemIronCrushedChunks.itemID, RecipeSlotType.INVENTORY, 2) };
+        iron.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IndustrialProcessing.itemIronLargeChunks.itemID, RecipeSlotType.INVENTORY, 0, 1, 0.35), new RecipeOutputSlot(2, IndustrialProcessing.itemIronSmallChunks.itemID, RecipeSlotType.INVENTORY, 1, 3, 0.45) };
         return iron;
     }
 

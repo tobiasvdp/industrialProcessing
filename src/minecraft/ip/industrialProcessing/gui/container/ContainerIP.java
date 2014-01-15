@@ -10,6 +10,7 @@ import ip.industrialProcessing.gui.IGuiLayout;
 import ip.industrialProcessing.gui.IGuiLayoutMultiblock;
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.syncing.handlers.HandlerHeat;
+import ip.industrialProcessing.gui.container.syncing.handlers.HandlerLifeSpan;
 import ip.industrialProcessing.gui.container.syncing.handlers.HandlerPower;
 import ip.industrialProcessing.gui.container.syncing.handlers.HandlerTank;
 import ip.industrialProcessing.gui.container.syncing.handlers.HandlerWorker;
@@ -19,8 +20,10 @@ import ip.industrialProcessing.machines.IPowerStorage;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.power.IPoweredMachine;
+import ip.industrialProcessing.utils.IBreakable;
 import ip.industrialProcessing.utils.handler.heat.IHeatStorage;
 import ip.industrialProcessing.utils.working.IWorkHandler;
+import cpw.mods.fml.common.network.Player;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
@@ -44,7 +47,8 @@ public class ContainerIP extends Container {
 	protected InventoryCrafting craftMatrix = new InventoryCrafting(this, 2, 2);
 	protected IInventory craftResult = new InventoryCraftResult();
 
-	public ContainerIP(InventoryPlayer inventoryPlayer, TileEntity te) {
+	public ContainerIP(EntityPlayer player, TileEntity te) {
+		InventoryPlayer inventoryPlayer = player.inventory;
 		this.te = te;
 		if (te.getBlockType() instanceof IGuiLayout)
 			layout = ((IGuiLayout) te.getBlockType()).getGuiLayout();
@@ -294,6 +298,10 @@ public class ContainerIP extends Container {
 		case heat:
 			if (te instanceof IHeatStorage)
 				addHandler(new HandlerHeat(((IHeatStorage) te)));
+			break;
+		case lifespan:
+			if (te instanceof IBreakable)
+				addHandler(new HandlerLifeSpan(((IBreakable) te)));
 			break;
 		default:
 			break;

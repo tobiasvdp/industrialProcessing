@@ -165,7 +165,15 @@ public class ConfigItems {
 	private int itemCopperBarID = 6663;
 	private int itemFilterTrayID = 6664;
 	private int itemLeadIngotID = 6665;
-	
+	private int itemIronBladeID = 6666;
+	private int itemTurbineBladesID = 6667;
+
+	public static int getItemTurbineBladesID() {
+		return getInstance().itemTurbineBladesID;
+	}
+	public static int getItemIronBladeID() {
+		return getInstance().itemIronBladeID;
+	}
 	public static int getItemLeadIngotID() {
 		return getInstance().itemLeadIngotID;
 	}
@@ -747,6 +755,8 @@ public class ConfigItems {
 	}
 
 	public static void addToLanguageRegistry() {
+		LanguageRegistry.addName(ISetupItems.itemTurbineBlades , "Turbine blades");
+		LanguageRegistry.addName(ISetupItems.itemIronBlade , "Iron blade");
 		LanguageRegistry.addName(ISetupItems.itemLeadIngot , "Lead ingot");
 		LanguageRegistry.addName(ISetupItems.itemFilterTray , "Filter tray");
 		LanguageRegistry.addName(ISetupItems.itemMotorPoleAxis , "Magnetic poles");

@@ -19,7 +19,7 @@ public class TileEntityManualGenerator extends TileEntityPowerGenerator implemen
     }
 
     // if the player hits, 100 mechanical energy is stored in this generator
-    private static final int PLAYER_FORCE_RATE = 100;
+    private static final int PLAYER_FORCE_RATE = 200;
     // how much mechanical energy can this generator store, prevents the player
     // from spamming this thing
 

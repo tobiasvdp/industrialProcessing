@@ -43,13 +43,16 @@ import ip.industrialProcessing.machines.flotationCell.model.ModelFlotationCellBl
 import ip.industrialProcessing.machines.mixer.ModelMixer;
 import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import ip.industrialProcessing.machines.plants.blacksmith.anvil.model.ModelAnvil;
+import ip.industrialProcessing.machines.plants.blacksmith.grindingStone.TileEntityGrindingStone;
 import ip.industrialProcessing.machines.plants.blacksmith.grindingStone.model.ModelGrindingStone;
+import ip.industrialProcessing.machines.plants.blacksmith.grindingStone.model.ModelGrindingStoneAnimated;
 import ip.industrialProcessing.machines.plants.nonFerroProcessing.magneticSeparator.ModelMagneticSeperator;
 import ip.industrialProcessing.machines.plants.nonFerroProcessing.magneticSeparator.TileEntityMagneticSeparator;
 import ip.industrialProcessing.machines.thickener.ModelThickener;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
 import ip.industrialProcessing.machines.treetap.model.ModelAutomaticTreeTapBlock;
 import ip.industrialProcessing.machines.treetap.model.ModelManualTreeTapBlock;
+import ip.industrialProcessing.multiblock.core.block.SolderingStation.model.ModelSolderingStation;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.model.ModelBlastFurnaceCoreBlock;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.model.ModelBlastFurnaceTopBlock;
 import ip.industrialProcessing.multiblock.core.block.plants.blacksmith.bloomery.model.ModelBloomery;
@@ -212,6 +215,7 @@ public class ClientProxy extends CommonProxy {
 
     private static final ModelAnvil modelAnvil = new ModelAnvil();
     private static final ModelGrindingStone modelGrindingStone = new ModelGrindingStone();
+    private static final ModelGrindingStoneAnimated modelGrindingStoneAnimated = new ModelGrindingStoneAnimated();
     private static final ModelPetrolLamp modelPetrolLamp = new ModelPetrolLamp();
     private static final ModelBellows modelBellows = new ModelBellows();
     private static final ModelBloomery modelBloomery = new ModelBloomery();
@@ -221,7 +225,8 @@ public class ClientProxy extends CommonProxy {
     private static final ModelContainer modelContainer = new ModelContainer();
     private static final ModelScreen modelScreen = new ModelScreen();
     private static final ModelWeldingStation modelWeldingStation = new ModelWeldingStation();
-    private static final ModelWeldingTable modelWeldingTable = new ModelWeldingTable(); 
+    private static final ModelWeldingTable modelWeldingTable = new ModelWeldingTable();
+    private static final ModelSolderingStation modelSolderingStation = new ModelSolderingStation(); 
 
     @Override
     public void registerRenderers() {
@@ -255,9 +260,6 @@ public class ClientProxy extends CommonProxy {
 
 	ConfigRenderers.setRendererAnvilId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererAnvilId(), modelAnvil));
-
-	ConfigRenderers.setRendererGrindingStoneId(RenderingRegistry.getNextAvailableRenderId());
-	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererGrindingStoneId(), modelGrindingStone));
 
 	ConfigRenderers.setRendererPetrolLampId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererPetrolLampId(), modelPetrolLamp));
@@ -294,8 +296,14 @@ public class ClientProxy extends CommonProxy {
 	
 	ConfigRenderers.setBLmultiblockWeldingTableExt(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLmultiblockWeldingTableExt(), modelWeldingTable));
-	
+
+	ConfigRenderers.setRendererSolderingStation(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererSolderingStation(), modelSolderingStation));
 	// block & tile entity
+	
+	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGrindingStone.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockGrindingStone, "ModelGrindingStoneAnimated", modelGrindingStoneAnimated));
+	ConfigRenderers.setRendererGrindingStoneId(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererGrindingStoneId(), modelGrindingStone));
  
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDiskFilter.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockDiskFilter, "ModelDiskFilter", diskFilter));
 	ConfigRenderers.setRendererDiskFilterIdId(RenderingRegistry.getNextAvailableRenderId());

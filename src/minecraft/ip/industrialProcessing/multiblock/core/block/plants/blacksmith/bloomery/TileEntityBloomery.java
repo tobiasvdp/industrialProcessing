@@ -81,7 +81,8 @@ public class TileEntityBloomery extends TileEntityMultiblockCoreTankWorker imple
 
 		HeatStorage.construction(this);
 
-		SetLiveTime(15000);
+		SetTotalLifeTime(15000);
+		SetLifeTime(15000);
 	}
 
 	@Override
@@ -198,12 +199,6 @@ public class TileEntityBloomery extends TileEntityMultiblockCoreTankWorker imple
 	public void setMaxBurnTime(int val) {
 		totalTime = val;
 	}
-	
-	@Override
-	public void SetLiveTime(int time) {
-		totalLiveTime = time;
-		liveTime = totalLiveTime;
-	}
 
 	@Override
 	public boolean TickLiveTime() {
@@ -241,5 +236,26 @@ public class TileEntityBloomery extends TileEntityMultiblockCoreTankWorker imple
 		super.readFromNBT(nbt);
 	}
 	//end of burner management
+
+	@Override
+	public int getTotalLifetime() {
+		return totalLiveTime;
+	}
+
+	@Override
+	public void SetTotalLifeTime(int time) {
+		totalLiveTime = time;
+		
+	}
+
+	@Override
+	public int getLifetime() {
+		return liveTime;
+	}
+
+	@Override
+	public void SetLifeTime(int time) {
+		liveTime = time;
+	}
 
 }

@@ -114,6 +114,14 @@ public class GuiLayout {
 			panel.setGuiContainerLayout(type);
 			layoutPanels.add(panel);
 			break;
+		case lifespan:
+			x = 8;
+			y = 16 + offsetY;
+			panel = new GuiLayoutPanel(this, type, x, y, 50, 8);
+			//no slotLayout
+			panel.setGuiContainerLayout(type);
+			layoutPanels.add(panel);
+			break;
 		default:
 			break;
 

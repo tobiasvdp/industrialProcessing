@@ -19,6 +19,7 @@ import ip.industrialProcessing.gui.container.slot.layout.components.SlotLayoutTa
 import ip.industrialProcessing.gui.container.slot.layout.components.SlotType;
 import ip.industrialProcessing.gui.guiContainer.layout.GuiContainerLayout;
 import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerLayoutHeat;
+import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerLayoutLifespan;
 import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerLayoutPower;
 import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerLayoutSlot;
 import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerLayoutTank;
@@ -172,6 +173,10 @@ public class GuiLayoutPanel {
 			this.guiContainerLayout.addDrawRectaglesFromSlotLayout(this,this.slotLayout,SlotType.inventory);
 			guiContainerLayout.addDrawRectagle(106, 202, 15, 54);
 			guiContainerLayout.addDrawRectagle(18,19,56, 206, 16, 16);
+			break;
+		case lifespan:
+			guiContainerLayout = new GuiContainerLayoutLifespan();
+			guiContainerLayout.addDrawRectagle(126, 248, 50, 8);
 			break;
 		default:
 			break;

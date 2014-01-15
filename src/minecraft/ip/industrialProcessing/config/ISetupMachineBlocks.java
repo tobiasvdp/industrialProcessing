@@ -40,6 +40,7 @@ import ip.industrialProcessing.machines.thickener.BlockThickener;
 import ip.industrialProcessing.machines.treetap.BlockAutomaticTreeTap;
 import ip.industrialProcessing.machines.treetap.BlockManualTreeTap;
 import ip.industrialProcessing.machines.wireMill.BlockWireMill;
+import ip.industrialProcessing.multiblock.core.block.SolderingStation.BlockSolderingStation;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.BLmultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.core.block.elevator.BLmultiblockElevator;
 import ip.industrialProcessing.multiblock.core.block.hotPress.BLmultiblockHotPress;
@@ -207,6 +208,7 @@ public interface ISetupMachineBlocks {
     public final static BlockVacuumDestilationTower blockVacuumDestilationTower = new BlockVacuumDestilationTower();
     public final static BlockContainer blockContainer = new BlockContainer();
     public final static BlockContainerWall blockContainerWall = new BlockContainerWall();
+    public final static BlockSolderingStation blockSolderingStation = new BlockSolderingStation();
     
     
     // transport
