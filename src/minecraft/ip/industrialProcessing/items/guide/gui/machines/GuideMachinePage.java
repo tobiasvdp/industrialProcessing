@@ -13,8 +13,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.lwjgl.opengl.GL11;
-
-import codechicken.nei.recipe.FurnaceRecipeHandler.SmeltingPair;
+ 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.block.Block;
