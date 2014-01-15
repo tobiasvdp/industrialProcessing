@@ -38,7 +38,7 @@ public class ModelBlastFurnaceTopBlock extends ModelBlock {
 
 	TileEntity entity = reference.getBlockTileEntity();
 	ForgeDirection forward = BlockMachine.getForwardFromEntity(entity);
-	int dir = 4 - BlockMachine.getMetadataFromForward(forward);
+	int dir = BlockMachine.getMetadataFromForward(forward);
 
 	Icon fillerIcon = reference.getIcon(0);
 	Icon hullIcon = reference.getIcon(1);
@@ -46,8 +46,10 @@ public class ModelBlastFurnaceTopBlock extends ModelBlock {
 	Icon tankFeaturesIcon = reference.getIcon(3); 
 
 	filler.renderMesh(false, fillerIcon, reference);
-	inputUp.renderMesh(false, featuresIcon, reference);
+	inputUp.renderMesh(false, tankFeaturesIcon, reference);
 	topHull.getRotated(dir).renderMesh(false, hullIcon, reference);  
+	itemConnector.getRotated(dir+1).renderMesh(false, featuresIcon, reference);
+	itemConnector.getRotated(dir+3).renderMesh(false, featuresIcon, reference);
 	return true;
     }
 
