@@ -1,9 +1,9 @@
 package ip.industrialProcessing.subMod.logic.network.display;
 
-import ip.industrialProcessing.api.info.InfoMachine;
-import ip.industrialProcessing.api.info.InfoSlot;
-import ip.industrialProcessing.api.info.InfoTank;
 import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.gui.container.syncing.info.InfoMachine;
+import ip.industrialProcessing.gui.container.syncing.info.InfoSlot;
+import ip.industrialProcessing.gui.container.syncing.info.InfoTank;
 import ip.industrialProcessing.machines.IPowerStorage;
 import ip.industrialProcessing.subMod.logic.PacketHandler;
 import ip.industrialProcessing.subMod.logic.api.network.interfaces.ILogicInterface;

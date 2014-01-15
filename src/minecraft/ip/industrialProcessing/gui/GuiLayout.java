@@ -2,6 +2,7 @@ package ip.industrialProcessing.gui;
 
 import ip.industrialProcessing.gui.components.GuiLayoutPanel;
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
+import ip.industrialProcessing.gui.container.ContainerIP;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayout;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
 import ip.industrialProcessing.gui.container.slot.layout.components.SlotLayoutComponent;
@@ -13,13 +14,15 @@ import ip.industrialProcessing.machines.containers.ContainerPoweredWorkerMachine
 import ip.industrialProcessing.machines.containers.ContainerWorkerMachine;
 import ip.industrialProcessing.machines.containers.gui.GuiContainerPoweredWorkerMachine;
 import ip.industrialProcessing.machines.containers.gui.GuiContainerWorkerMachine;
-import ip.industrialProcessing.machines.crusher.GuiContainerCrusher;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
+import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.slots.SlotBase;
 
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.inventory.Container;
@@ -54,35 +57,61 @@ public class GuiLayout {
 		switch (type) {
 		case slotsInput:
 			x = 47 + offsetX;
-			y = 31;
+			y = 45;
 			panel = new GuiLayoutPanel(this, type, x, y, 52, 52);
+			// SlotLayout set by Block
+			// GuiContainerLayout set in above function
 			layoutPanels.add(panel);
 			break;
 		case slotsOutput:
 			x = 135 + offsetX;
-			y = 31;
+			y = 45;
 			panel = new GuiLayoutPanel(this, type, x, y, 52, 52);
+			// SlotLayout set by Block
+			// GuiContainerLayout set in above function
 			layoutPanels.add(panel);
 			break;
 		case slotsSide:
 			break;
+		case tankInput:
+		case tankOutput:
+			x = 0;
+			y = 45;
+			panel = new GuiLayoutPanel(this, type, x, y, 40, 52);
+			panel.setSlotLayout(SlotLayoutType.fixed, 2);
+			panel.setGuiContainerLayout(type);
+			layoutPanels.add(panel);
+			break;
 		case slotsInventory:
-			panel = new GuiLayoutPanel(this, type, 8, 116, 222, 76);
+			x = 8;
+			y = 116;
+			panel = new GuiLayoutPanel(this, type, x, y, 222, 76);
 			panel.setSlotLayout(SlotLayoutType.inventory, 0);
+			// no draw required
 			layoutPanels.add(panel);
 			break;
 		case worker:
 			x = 106;
-			y = 50 + offsetY;
+			y = 64 + offsetY;
 			panel = new GuiLayoutPanel(this, type, x, y, 24, 16);
-			panel.setGuiContainerLayout(type).addDrawRectagle(72, 240, 24, 16);
+			// No slotLayout
+			panel.setGuiContainerLayout(type);
 			layoutPanels.add(panel);
 			break;
 		case power:
-			x = 177;
-			y = 6 + offsetY;
-			panel = new GuiLayoutPanel(this, type, x, y, 54, 10);
-			panel.setGuiContainerLayout(type).addDrawRectagle(18, 246, 54, 10);
+			x = 150;
+			y = 9 + offsetY;
+			panel = new GuiLayoutPanel(this, type, x, y, 74, 18);
+			panel.setSlotLayout(SlotLayoutType.fixed, 1);
+			panel.setGuiContainerLayout(type);
+			layoutPanels.add(panel);
+			break;
+		case heat:
+			x = 0;
+			y = 44 + offsetY;
+			panel = new GuiLayoutPanel(this, type, x, y, 35, 54,15,54);
+			panel.setSlotLayout(SlotLayoutType.fixed, 2);
+			panel.setGuiContainerLayout(type);
 			layoutPanels.add(panel);
 			break;
 		default:
@@ -131,16 +160,7 @@ public class GuiLayout {
 
 	public void reDoLayout() {
 		int widthScreen = 236;
-		ArrayList<GuiLayoutPanel> panels = new ArrayList<GuiLayoutPanel>();
-		for (GuiLayoutPanelType type : new GuiLayoutPanelType[] { GuiLayoutPanelType.slotsInput, GuiLayoutPanelType.worker, GuiLayoutPanelType.slotsOutput }) {
-			Iterator<GuiLayoutPanel> it = layoutPanels.iterator();
-			while (it.hasNext()) {
-				GuiLayoutPanel panel = it.next();
-				if (panel.type == type) {
-					panels.add(panel);
-				}
-			}
-		}
+		ArrayList<GuiLayoutPanel> panels = getOrganizedPanels();
 		int totalWidth = 0;
 		for (int i = 0; i < panels.size(); i++) {
 			totalWidth += panels.get(i).getWidth();
@@ -153,6 +173,20 @@ public class GuiLayout {
 		}
 	}
 
+	private ArrayList<GuiLayoutPanel> getOrganizedPanels() {
+		ArrayList<GuiLayoutPanel> panels = new ArrayList<GuiLayoutPanel>();
+		for (GuiLayoutPanelType type : new GuiLayoutPanelType[] { GuiLayoutPanelType.heat,GuiLayoutPanelType.tankInput, GuiLayoutPanelType.slotsInput, GuiLayoutPanelType.worker, GuiLayoutPanelType.slotsOutput, GuiLayoutPanelType.tankOutput }) {
+			Iterator<GuiLayoutPanel> it = layoutPanels.iterator();
+			while (it.hasNext()) {
+				GuiLayoutPanel panel = it.next();
+				if (panel.type == type) {
+					panels.add(panel);
+				}
+			}
+		}
+		return panels;
+	}
+
 	public void draw(Gui gui, Container container, int offsetX, int offsetY, int mouseX, int mouseY) {
 		int typeIndex = 0;
 		GuiLayoutPanelType type = null;
@@ -163,48 +197,81 @@ public class GuiLayout {
 				type = panel.type;
 
 			if (type != panelType) {
-				typeIndex = 0;
-				type = panelType;
+				if ((type == GuiLayoutPanelType.tankInput && panelType == GuiLayoutPanelType.tankOutput) || (type == GuiLayoutPanelType.tankOutput && panelType == GuiLayoutPanelType.tankInput)) {
+
+				} else {
+					typeIndex = 0;
+					type = panelType;
+				}
 			}
 
-			panel.draw(gui, container, typeIndex, offsetX, offsetY,mouseX,mouseY);
+			panel.draw(gui, container, typeIndex, offsetX, offsetY, mouseX, mouseY);
 
 			typeIndex++;
 		}
 	}
 
-	public void addComponentsToContainer(Container container, TileEntity tileEntity) {
+	public void addSyncingHandlersToContainer(ContainerIP container, TileEntity tileEntity) {
 		int typeIndex = 0;
 		GuiLayoutPanelType type = null;
 		for (int i = 0; i < layoutPanels.size(); i++) {
 			GuiLayoutPanel panel = layoutPanels.get(i);
 			GuiLayoutPanelType panelType = panel.type;
+
 			if (type == null)
 				type = panel.type;
 
 			if (type != panelType) {
-				typeIndex = 0;
-				type = panelType;
+				if ((type == GuiLayoutPanelType.tankInput && panelType == GuiLayoutPanelType.tankOutput) || (type == GuiLayoutPanelType.tankOutput && panelType == GuiLayoutPanelType.tankInput)) {
+
+				} else {
+					typeIndex = 0;
+					type = panelType;
+				}
 			}
 
-			switch(panelType){
-			case power:
-				if(container instanceof ContainerPoweredWorkerMachine && tileEntity instanceof TileEntityPoweredWorkerMachine){
-					((ContainerPoweredWorkerMachine)container).addPowerToContainer(((TileEntityPoweredWorkerMachine)tileEntity).getMainPowerStorage());
-				}
-				break;
-			case tank:
-				break;
-			case worker:
-				if(container instanceof ContainerWorkerMachine && tileEntity instanceof TileEntityWorkerMachine){
-					((ContainerWorkerMachine)container).addWorkerToContainer(((TileEntityWorkerMachine)tileEntity).getWorker());
-				}
-				break;
-			default:
-				break;
+			container.addHandlerToContainer(panelType, typeIndex);
+
+			typeIndex++;
+		}
+	}
+
+	public void drawFilledPanels(Rectangle rectangle, Gui gui, int mouseX,int mouseY,Recipe recipe, Block craftingBlock) {
+		ArrayList<GuiLayoutPanel> panels = getOrganizedPanels();
+		
+		int typeIndex = 0;
+		GuiLayoutPanelType type = null;
+		int offset = 3;
+		int x = rectangle.x + offset;
+		int y = rectangle.y + offset;
+		int ymax = 0;
+		for (int i = 0; i < panels.size(); i++) {
 			
-			}
+			GuiLayoutPanel panel = panels.get(i);
+			GuiLayoutPanelType panelType = panel.type;
 
+			if (type == null)
+				type = panel.type;
+
+			if (type != panelType) {
+				if ((type == GuiLayoutPanelType.tankInput && panelType == GuiLayoutPanelType.tankOutput) || (type == GuiLayoutPanelType.tankOutput && panelType == GuiLayoutPanelType.tankInput)) {
+
+				} else {
+					typeIndex = 0;
+					type = panelType;
+				}
+			}
+			
+			if(panel.getHeight() > ymax)
+				ymax = panel.getHeight();
+			if(panel.getWidthReduced() + x > rectangle.x+rectangle.width){
+				x = rectangle.x + offset;
+				y= y+= ymax + offset;
+				ymax = 0;
+			}
+			panel.drawFilledPanel(gui,typeIndex,x,y,recipe,mouseX,mouseY,craftingBlock);
+			x +=  panel.getWidthReduced() + offset;
+			
 			typeIndex++;
 		}
 	}

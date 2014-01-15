@@ -8,5 +8,7 @@ public enum BlockType {
 	public static void registerNames(){
 		LanguageRegistry.instance().addStringLocalization("IP.BlockType."+Ore_Processing.toString(),"en_US", "Ore processing");
 		LanguageRegistry.instance().addStringLocalization("IP.BlockType."+Smelting.toString(),"en_US", "Smelting");
+		LanguageRegistry.instance().addStringLocalization("IP.BlockType."+Power.toString(),"en_US", "Power");
+		LanguageRegistry.instance().addStringLocalization("IP.BlockType."+Refinary.toString(),"en_US", "Refinary");
 	}
 }

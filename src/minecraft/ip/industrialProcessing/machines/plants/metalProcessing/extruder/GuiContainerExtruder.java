@@ -6,7 +6,6 @@ import org.lwjgl.util.Rectangle;
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
 import ip.industrialProcessing.machines.containers.gui.GuiContainerFluidMachine;
 import ip.industrialProcessing.machines.containers.gui.GuiContainerPoweredFluidWorkerMachine;
-import ip.industrialProcessing.machines.dryer.ContainerDryer;
 import ip.industrialProcessing.machines.dryer.TileEntityDryer;
 import net.minecraft.entity.player.InventoryPlayer;
 

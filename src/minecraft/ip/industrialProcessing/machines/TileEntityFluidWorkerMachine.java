@@ -34,7 +34,7 @@ public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachin
     protected AnimationHandler animationHandler;
 
     public IWorker getWorker() {
-	return worker;
+    	return worker;
     }
 
     @Override
@@ -49,7 +49,11 @@ public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachin
     }
 
     protected int work(int amount) {
-	return this.getWorker().doWork(amount);
+		if (!this.worldObj.isRemote) {
+			int workDone = this.getWorker().doWork(amount);
+			return workDone;
+		}
+		return 0;
     }
 
     @Override

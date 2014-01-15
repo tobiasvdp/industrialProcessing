@@ -9,8 +9,8 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import ip.industrialProcessing.api.handlers.IHandler;
-import ip.industrialProcessing.api.info.InfoTank;
+import ip.industrialProcessing.gui.container.syncing.handlers.IHandlerContainer;
+import ip.industrialProcessing.gui.container.syncing.info.InfoTank;
 import ip.industrialProcessing.machines.containers.IProgressBarHandler;
 import ip.industrialProcessing.machines.containers.ProgressBarHandlerInfo;
 import ip.industrialProcessing.machines.containers.ProgressInfoTank;
@@ -25,7 +25,7 @@ public abstract class ContainerMultiblock extends VerifyingContainer {
 	public ContainerMultiblock(InventoryPlayer inventory, TileEntityMultiblockCore core) {
 		this.core = core;
 		for (int j = 0; j < handlers.size(); j++) {
-			IHandler handler = handlers.get(j);
+			IHandlerContainer handler = handlers.get(j);
 		}
 	}
 
@@ -34,11 +34,10 @@ public abstract class ContainerMultiblock extends VerifyingContainer {
 		return core.canInteractWith(entityplayer);
 	}
 
-	private ArrayList<IHandler> handlers = new ArrayList<IHandler>();
+	private ArrayList<IHandlerContainer> handlers = new ArrayList<IHandlerContainer>();
 
 	private int handlerOffset = 0;
-
-	protected void addHandler(IHandler handler) {
+	protected void addHandler(IHandlerContainer handler) {
 		handlers.add(handler);
 		handler.setIndexOffset(handlerOffset);
 		handlerOffset += handler.getValueCount();
@@ -51,7 +50,7 @@ public abstract class ContainerMultiblock extends VerifyingContainer {
 		for (int i = 0; i < this.crafters.size(); ++i) {
 			ICrafting icrafting = (ICrafting) this.crafters.get(i);
 			for (int j = 0; j < handlers.size(); j++) {
-				IHandler handler = handlers.get(j);
+				IHandlerContainer handler = handlers.get(j);
 				for (int k = 0; k < handler.getValueCount(); k++) {
 					if (handler.getValue(k) != handler.getPrevValue(k)) {
 						icrafting.sendProgressBarUpdate(this, k + handler.getIndexOffset(), handler.getValue(k));
@@ -68,7 +67,7 @@ public abstract class ContainerMultiblock extends VerifyingContainer {
 	public void updateProgressBar(int par1, int par2) {
 	    System.out.println("syncing " + par1 + " " + par2);
 		super.updateProgressBar(par1, par2);
-		IHandler handler = null;
+		IHandlerContainer handler = null;
 
 		int i = 0;
 		boolean found = false;

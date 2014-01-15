@@ -46,4 +46,6 @@ public interface IWorkHandler {
 	 * @return
 	 */
 	TileEntity getTileEntity();
+	
+	IWorker getWorker();
 }

@@ -2,6 +2,7 @@ package ip.industrialProcessing.items.guide.gui.machines.old;
 
 import ip.industrialProcessing.client.render.gui.GuiTools;
 import ip.industrialProcessing.items.guide.gui.GuiGuide;
+import ip.industrialProcessing.items.guide.gui.machines.components.GuideMachineCraftingRecipeDetails;
 import ip.industrialProcessing.multiblock.recipes.IRecipeMultiblock;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.utils.registry.RecipeRegistry;

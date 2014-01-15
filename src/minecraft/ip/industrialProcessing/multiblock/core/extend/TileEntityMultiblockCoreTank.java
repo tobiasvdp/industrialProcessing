@@ -368,4 +368,11 @@ public abstract class TileEntityMultiblockCoreTank extends TileEntityMultiblockC
 		}
 		return false;
 	}
+	
+	@Override
+	public IPfluidTank getTank(int index) {
+		if(fluidTanks.size() > index)
+			return fluidTanks.get(index);
+		return null;
+	}
 }

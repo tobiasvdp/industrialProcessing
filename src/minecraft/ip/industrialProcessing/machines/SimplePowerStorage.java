@@ -50,13 +50,12 @@ public class SimplePowerStorage implements IPowerStorage {
 
 	@Override
 	public void setStoredPower(int power) {
-	    // TODO Auto-generated method stub
-	    
+	    this.powerStorage = power;
 	}
 
 	@Override
 	public void setPowerCapacity(int powerCapacity) {
-	    // TODO Auto-generated method stub
+	   this.powerCapacity = powerCapacity;
 	    
 	}
 }
