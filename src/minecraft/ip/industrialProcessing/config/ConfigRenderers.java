@@ -98,6 +98,15 @@ public class ConfigRenderers {
     private int rendererMachineBlock;
     private int rendererContainerWall;
     private int rendererContainer;
+    private int rendererSolderingStation;
+
+	public static void setRendererSolderingStation(int var) {
+		getInstance().rendererSolderingStation = var;
+	}
+    
+	public static int getRendererSolderingStation() {
+		return getInstance().rendererSolderingStation;
+	}
     
 	public static void setRendererContainer(int var) {
 		getInstance().rendererContainer = var;

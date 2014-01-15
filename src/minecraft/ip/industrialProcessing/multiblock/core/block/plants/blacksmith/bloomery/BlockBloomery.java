@@ -41,6 +41,7 @@ public class BlockBloomery extends BlockMultiblockCore implements IRecipeMultibl
 		guiLayout[0].addLayoutPanel(GuiLayoutPanelType.slotsOutput).setSlotLayout(SlotLayoutType.horizontal, 1);
 		guiLayout[0].addLayoutPanel(GuiLayoutPanelType.heat);
 		guiLayout[0].addLayoutPanel(GuiLayoutPanelType.worker);
+		guiLayout[0].addLayoutPanel(GuiLayoutPanelType.lifespan);
 		
 		guiLayout[1] = new GuiLayout();
 		guiLayout[1].addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 1);
@@ -48,6 +49,7 @@ public class BlockBloomery extends BlockMultiblockCore implements IRecipeMultibl
 		guiLayout[1].addLayoutPanel(GuiLayoutPanelType.heat);
 		guiLayout[1].addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.vertical, 2);
 		guiLayout[1].addLayoutPanel(GuiLayoutPanelType.worker);
+		guiLayout[1].addLayoutPanel(GuiLayoutPanelType.lifespan);
 	}
 
 	private Icon[] icons = new Icon[1];

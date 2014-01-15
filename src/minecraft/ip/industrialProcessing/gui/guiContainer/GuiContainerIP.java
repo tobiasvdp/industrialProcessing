@@ -17,6 +17,7 @@ import org.lwjgl.util.Rectangle;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
@@ -35,9 +36,11 @@ public class GuiContainerIP extends GuiContainer {
 	private int mouseY;
 	public ToolTip toolTip;
 	private GuiLayout layout;
+	public int tabID = 0;
 
-	public GuiContainerIP(InventoryPlayer inventoryPlayer, TileEntity tileEntity, Container container) {
+	public GuiContainerIP(EntityPlayer player, TileEntity tileEntity, Container container) {
 		super(container);
+		InventoryPlayer inventoryPlayer = player.inventory;
 		this.tileEntity = tileEntity;
 		this.name = tileEntity.getBlockType().getLocalizedName();
 		this.textureLocationWorker = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/"+ this.name +".png");
@@ -97,6 +100,10 @@ public class GuiContainerIP extends GuiContainer {
 			layout.draw(this,this.inventorySlots,x,y,mouseX,mouseY);
 		}
 
+	}
+	
+	public void changeTab(int tabID){
+		
 	}
 	
     

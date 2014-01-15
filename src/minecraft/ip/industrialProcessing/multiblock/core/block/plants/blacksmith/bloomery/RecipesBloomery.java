@@ -41,12 +41,14 @@ public class RecipesBloomery extends RecipesMultiblock {
 
 	private void addDefaultRecipes() {
 		addRecipe(iron(750,0,Tiers.Tier0));
+		addRecipe(ironDust(150,0,Tiers.Tier0));
 		addRecipe(copper(500,0,Tiers.Tier0));
 		addRecipe(tin(450,0,Tiers.Tier0));
 		addRecipe(lead(450,0,Tiers.Tier0));
 	}
 	private void addTier1Recipes() {
 		addRecipe(iron3(1500,0,Tiers.Tier1));
+		addRecipe(ironDust3(300,0,Tiers.Tier1));
 		addRecipe(copper3(1000,0,Tiers.Tier1));
 		addRecipe(tin3(900,0,Tiers.Tier1));
 		addRecipe(pr4(500,0,Tiers.Tier1));
@@ -119,6 +121,17 @@ public class RecipesBloomery extends RecipesMultiblock {
         recipe.tier = tier;
         return recipe;
     }
+    
+    private RecipeMultiblock ironDust3(int workTime, int powerConsumption,Tiers tier) {
+    	RecipeMultiblock recipe = new RecipeMultiblock();
+        recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemIronOxideDust.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(4, IndustrialProcessing.itemIronOxideDust.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(5, IndustrialProcessing.itemIronOxideDust.itemID, RecipeSlotType.INVENTORY, 1) };
+
+        recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, Item.ingotIron.itemID, RecipeSlotType.INVENTORY, 3, 3, 0.25) };
+        recipe.workRequired = workTime;
+        recipe.powerRequired = powerConsumption;
+        recipe.tier = tier;
+        return recipe;
+    }
 
     private RecipeMultiblock lead(int workTime, int powerConsumption,Tiers tier) {
     	RecipeMultiblock recipe = new RecipeMultiblock();
@@ -156,6 +169,17 @@ public class RecipesBloomery extends RecipesMultiblock {
     private RecipeMultiblock iron(int workTime, int powerConsumption,Tiers tier) {
     	RecipeMultiblock recipe = new RecipeMultiblock();
         recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Block.oreIron.blockID, RecipeSlotType.INVENTORY, 1) };
+
+        recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, Item.ingotIron.itemID, RecipeSlotType.INVENTORY, 1, 1, 0.25) };
+        recipe.workRequired = workTime;
+        recipe.powerRequired = powerConsumption;
+        recipe.tier = tier;
+        return recipe;
+    }
+    
+    private RecipeMultiblock ironDust(int workTime, int powerConsumption,Tiers tier) {
+    	RecipeMultiblock recipe = new RecipeMultiblock();
+        recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemIronOxideDust.itemID, RecipeSlotType.INVENTORY, 1) };
 
         recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, Item.ingotIron.itemID, RecipeSlotType.INVENTORY, 1, 1, 0.25) };
         recipe.workRequired = workTime;

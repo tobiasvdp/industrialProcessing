@@ -186,7 +186,7 @@ public interface ISetupItems {
     public final static ItemIP itemPCBoardWired = new ItemIP(ConfigItems.getItemPCBoardWiredID(), "ItemPCBoardWired", IndustrialProcessing.tabMachineParts);
     public final static ItemDamage itemSolder = new ItemDamage(ConfigItems.getItemSolderID(), "ItemSolder", IndustrialProcessing.tabMachineParts,64);
     public final static ItemIP itemSolderEmpty = new ItemIP(ConfigItems.getItemSolderEmptyID(), "ItemSolderEmpty", IndustrialProcessing.tabMachineParts);
-    public final static ItemDamage itemSolderingIron = new ItemDamage(ConfigItems.getItemSolderingIronID(), "ItemSolderingIron", IndustrialProcessing.tabMachineParts,320);
+    public final static ItemIP itemSolderingIron = new ItemIP(ConfigItems.getItemSolderingIronID(), "ItemSolderingIron", IndustrialProcessing.tabMachineParts);
     public final static ItemIP itemStripBoard = new ItemIP(ConfigItems.getItemStripBoardID(), "ItemStripBoard", IndustrialProcessing.tabMachineParts);
     public final static ItemIP itemStripBoardWired = new ItemIP(ConfigItems.getItemStripBoardWiredID(), "ItemStripBoardWired", IndustrialProcessing.tabMachineParts);
     public final static ItemIP itemSolderAlloyWire = new ItemIP(ConfigItems.getItemSolderAlloyWireID(), "ItemSolderAlloyWire", IndustrialProcessing.tabMachineParts);
@@ -197,5 +197,7 @@ public interface ISetupItems {
     public final static ItemIP itemFilterTray = new ItemIP(ConfigItems.getItemFilterTrayID(), "ItemFilterTray",IndustrialProcessing.tabMachineParts);
     
     public final static ItemIP itemLeadIngot = new ItemIP(ConfigItems.getItemLeadIngotID(), "ItemLeadIngot",IndustrialProcessing.tabOres);
+    public final static ItemIP itemIronBlade = new ItemIP(ConfigItems.getItemIronBladeID(), "itemIronBlade",IndustrialProcessing.tabMachineParts);
+    public final static ItemIP itemTurbineBlades = new ItemIP(ConfigItems.getItemTurbineBladesID(), "itemTurbineBlades",IndustrialProcessing.tabMachineParts);
     
 }

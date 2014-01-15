@@ -3,7 +3,6 @@ package ip.industrialProcessing.items.guide.gui.machines.components;
 import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.items.guide.gui.machines.GuideMachinePage;
-import ip.industrialProcessing.items.guide.gui.machines.old.GuideMachineRecipeDetails;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.Tessellator;

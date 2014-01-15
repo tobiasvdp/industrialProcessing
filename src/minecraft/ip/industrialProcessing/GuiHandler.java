@@ -180,7 +180,7 @@ public class GuiHandler implements IGuiHandler {
 		TileEntity entity = world.getBlockTileEntity(x, y, z);
 		if (ID == 0) {
 			if (entity.getBlockType() != null && (entity.getBlockType() instanceof IGuiLayout || entity.getBlockType() instanceof IGuiLayoutMultiblock)) {
-				return new ContainerIP(player.inventory, entity);
+				return new ContainerIP(player, entity);
 			}
 			if (entity instanceof TileEntityMagneticSeparator)
 				return new ContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity);
@@ -292,7 +292,7 @@ public class GuiHandler implements IGuiHandler {
 		TileEntity entity = world.getBlockTileEntity(x, y, z);
 		if (ID == 0) {
 			if (entity.getBlockType() != null && (entity.getBlockType() instanceof IGuiLayout || entity.getBlockType() instanceof IGuiLayoutMultiblock)) {
-				return new GuiContainerIP(player.inventory, entity, new ContainerIP(player.inventory, entity));
+				return new GuiContainerIP(player, entity, new ContainerIP(player, entity));
 			}
 			if (entity instanceof TileEntityMagneticSeparator)
 				return new GuiContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity);

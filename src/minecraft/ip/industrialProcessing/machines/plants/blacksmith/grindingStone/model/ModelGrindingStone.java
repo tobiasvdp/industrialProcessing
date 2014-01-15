@@ -40,7 +40,6 @@ public class ModelGrindingStone extends ModelBlock {
         Icon iconHull = reference.getIcon(0);
 
         hull.getRotated(dir).renderMesh(false, iconHull, reference);
-        wheel.getRotated(dir).renderMesh(false, iconHull, reference);
         return true;
     }
 

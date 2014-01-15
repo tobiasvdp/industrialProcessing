@@ -49,12 +49,74 @@ public class RecipesWeldingStation extends RecipesMultiblock {
 		addRecipe(lamp(2000,0,Tiers.Tier0));
 		addRecipe(solder(4000,0,Tiers.Tier0));
 		addRecipe(smallEngine(3000,0,Tiers.Tier0));
-		
-		//soldering
-		addRecipe(something(3000,0,Tiers.Tier0));
+		addRecipe(tank(3000,0,Tiers.Tier0));
+		addRecipe(boiler(3000,0,Tiers.Tier0));
+		addRecipe(solidBurner(3000,0,Tiers.Tier0));
+		addRecipe(turbineBlades(3000,0,Tiers.Tier0));
+		addRecipe(turbine(3000,0,Tiers.Tier0));
 		
 	}
-
+	
+	private RecipeMultiblock turbineBlades(int workTime, int power, Tiers tier) {
+		RecipeMultiblock recipe = new RecipeMultiblock();
+		
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemIronBlade.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(1, IndustrialProcessing.itemIronBlade.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(2, IndustrialProcessing.itemIronBlade.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(3, IndustrialProcessing.itemIronBlade.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(5, IndustrialProcessing.itemIronBlade.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(6, IndustrialProcessing.itemIronBlade.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(7, IndustrialProcessing.itemIronBlade.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(8, IndustrialProcessing.itemIronBlade.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(4, IndustrialProcessing.itemIronBar.itemID, RecipeSlotType.INVENTORY, 1)};
+		
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(9, IndustrialProcessing.itemTurbineBlades.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
+		
+		recipe.workRequired = workTime;
+		recipe.powerRequired = power;
+		recipe.tier = tier;
+		return recipe;
+	}
+	private RecipeMultiblock turbine(int workTime, int power, Tiers tier) {
+		RecipeMultiblock recipe = new RecipeMultiblock();
+		
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(7, IndustrialProcessing.blockMachineBlock.blockID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(3, IndustrialProcessing.itemTurbineBlades.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(4, IndustrialProcessing.itemTurbineBlades.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(5, IndustrialProcessing.itemTurbineBlades.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(6, IndustrialProcessing.blockTransportFluids.blockID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(8, IndustrialProcessing.blockWire.blockID, RecipeSlotType.INVENTORY, 1) };
+		
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(9, IndustrialProcessing.blockTurbine.blockID, RecipeSlotType.INVENTORY, 1, 1, 0) };
+		
+		recipe.workRequired = workTime;
+		recipe.powerRequired = power;
+		recipe.tier = tier;
+		return recipe;
+	}
+	private RecipeMultiblock solidBurner(int workTime, int power, Tiers tier) {
+		RecipeMultiblock recipe = new RecipeMultiblock();
+		
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(7, Block.furnaceIdle.blockID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(4, IndustrialProcessing.blockMachineBlock.blockID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(0, IndustrialProcessing.itemHeatingElement.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(1, IndustrialProcessing.itemHeatingElement.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(2, IndustrialProcessing.itemHeatingElement.itemID, RecipeSlotType.INVENTORY, 1) };
+		
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(9, IndustrialProcessing.blockSolidBurner.blockID, RecipeSlotType.INVENTORY, 1, 1, 0) };
+		
+		recipe.workRequired = workTime;
+		recipe.powerRequired = power;
+		recipe.tier = tier;
+		return recipe;
+	}
+	private RecipeMultiblock boiler(int workTime, int power, Tiers tier) {
+		RecipeMultiblock recipe = new RecipeMultiblock();
+		
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(1, IndustrialProcessing.blockTransportFluids.blockID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(4, IndustrialProcessing.blockTank.blockID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(6, IndustrialProcessing.itemHeatingElement.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(7, IndustrialProcessing.itemHeatingElement.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(8, IndustrialProcessing.itemHeatingElement.itemID, RecipeSlotType.INVENTORY, 1) };
+		
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(9, IndustrialProcessing.blockBoiler.blockID, RecipeSlotType.INVENTORY, 1, 1, 0) };
+		
+		recipe.workRequired = workTime;
+		recipe.powerRequired = power;
+		recipe.tier = tier;
+		return recipe;
+	}
+	private RecipeMultiblock tank(int workTime, int power, Tiers tier) {
+		RecipeMultiblock recipe = new RecipeMultiblock();
+		
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(1, IndustrialProcessing.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(2, IndustrialProcessing.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(3, IndustrialProcessing.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(5, IndustrialProcessing.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(4, IndustrialProcessing.blockTransportFluids.blockID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(6, IndustrialProcessing.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(7, IndustrialProcessing.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(8, IndustrialProcessing.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1)};
+		
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(9, IndustrialProcessing.blockTank.blockID, RecipeSlotType.INVENTORY, 1, 1, 0) };
+		
+		recipe.workRequired = workTime;
+		recipe.powerRequired = power;
+		recipe.tier = tier;
+		return recipe;
+	}
 	private RecipeMultiblock rainTank(int workTime, int power, Tiers tier) {
 		RecipeMultiblock recipe = new RecipeMultiblock();
 		
@@ -125,19 +187,6 @@ public class RecipesWeldingStation extends RecipesMultiblock {
 		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(1, IndustrialProcessing.itemStripBoardWired.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(4, IndustrialProcessing.blockMachineBlock.blockID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(6, IndustrialProcessing.itemHeatingElement.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(7, IndustrialProcessing.itemHeatingElement.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(8, IndustrialProcessing.itemHeatingElement.itemID, RecipeSlotType.INVENTORY, 1) };
 		
 		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(9, IndustrialProcessing.blockDryer.blockID, RecipeSlotType.INVENTORY, 1, 1, 0) };
-		
-		recipe.workRequired = workTime;
-		recipe.powerRequired = power;
-		recipe.tier = tier;
-		return recipe;
-	}
-	
-	private RecipeMultiblock something(int workTime, int power, Tiers tier) {
-		RecipeMultiblock recipe = new RecipeMultiblock();
-		
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(15, IndustrialProcessing.itemStripBoard.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(16, IndustrialProcessing.itemRedstoneCircuitry.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(17, IndustrialProcessing.itemCopperWire.itemID, RecipeSlotType.INVENTORY, 1),new RecipeInputSlot(18, IndustrialProcessing.itemRedstoneCircuitry.itemID, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(19, IndustrialProcessing.itemSolder.itemID, RecipeSlotType.DAMAGEDITEM, 1),new RecipeInputSlot(20, IndustrialProcessing.itemSolderingIron.itemID, RecipeSlotType.DAMAGEDITEM, 1)};
-		
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(21, IndustrialProcessing.itemStripBoardWired.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
 		
 		recipe.workRequired = workTime;
 		recipe.powerRequired = power;
