@@ -104,6 +104,7 @@ public interface ISetupItems {
         
     public final static ItemIP itemHexKey = new ItemIP(ConfigItems.itemHexKeyID(), "itemHexKey",IndustrialProcessing.tabPower);
     public final static ItemWrench itemWrench = new ItemWrench();
+    public final static ItemIP itemAsh = new ItemIP(ConfigItems.itemAshID(), "itemAsh",IndustrialProcessing.tabPower);
     
     public final static ItemGuide itemGuide = new ItemGuide(ConfigItems.getItemGuideID(), "itemGuide", IndustrialProcessing.tabMachineParts);
     

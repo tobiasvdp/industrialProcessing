@@ -36,6 +36,7 @@ public class ContainerSolidBurner extends ContainerMachine {
 		});
 
 		addSlotToContainer(new SlotBase(tileEntity, 0, 80, 33));
+		addSlotToContainer(new SlotBase(tileEntity, 1, 90, 33));
 		
 		ContainerUtils.BindPlayerInventory(inventoryPlayer, this, 0);
 	}

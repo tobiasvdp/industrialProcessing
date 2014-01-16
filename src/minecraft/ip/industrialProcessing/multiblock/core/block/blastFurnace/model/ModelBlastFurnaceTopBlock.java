@@ -1,5 +1,6 @@
 package ip.industrialProcessing.multiblock.core.block.blastFurnace.model;
 
+import cpw.mods.fml.common.Mod.Item;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.tileentity.TileEntity;

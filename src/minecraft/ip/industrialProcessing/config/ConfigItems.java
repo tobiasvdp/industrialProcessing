@@ -166,6 +166,7 @@ public class ConfigItems {
 	private int itemLeadIngotID = 6665;
 	private int itemIronBladeID = 6666;
 	private int itemTurbineBladesID = 6667;
+	private int itemAshID = 6668;
 
 	public static int getItemTurbineBladesID() {
 		return getInstance().itemTurbineBladesID;
@@ -421,6 +422,9 @@ public class ConfigItems {
 		return getInstance().itemHexKeyID;
 	}
 
+	public static int itemAshID() {
+		return getInstance().itemAshID;
+	}
 	public static int itemLeadDustID() {
 		return getInstance().itemLeadDustID;
 	}
