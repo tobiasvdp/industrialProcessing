@@ -31,13 +31,13 @@ public class ModelEnergyCell extends ModelAnimatedMachine {
 	Icon batteryIcon = getIcon(0);
 	Icon progressIconA = getIcon(1);
 	Icon progressIconB = getIcon(2);
-	
+
 	int count = 9;
-	if (progressAr != null && progressAr.length > 0) {
-	    count = Math.round(progressAr[0]*9);
+	if (progressAr != null && progressAr.length > 1) {
+	    count = Math.round(progressAr[1] * 9);
 	}
-	
-	float size = 3 / 16f; 
+
+	float size = 3 / 16f;
 	for (int i = 0; i < count; i++) {
 	    int x = i / 3 - 1;
 	    int z = i % 3 - 1;
@@ -50,9 +50,9 @@ public class ModelEnergyCell extends ModelAnimatedMachine {
 
 	float progress = (float) Math.sin(System.nanoTime() / 100000f) / 2 + 0.5f;
 	if (progressAr != null && progressAr.length > 0) {
-	    progress = 1-progressAr[0];
+	    progress = 1 - progressAr[0];
 	}
-	GL11.glPushMatrix(); 
+	GL11.glPushMatrix();
 
 	GL11.glTranslatef(0, 1, 0);
 	GL11.glPushMatrix();
