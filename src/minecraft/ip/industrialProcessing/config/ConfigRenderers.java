@@ -18,6 +18,7 @@ public class ConfigRenderers {
     private int rendererThickenerID;
     private int rendererClassifierID;
     private int rendererFlotationCellID;
+    private int rendererHydroCycloneID;
     private int rendererDiskFilterID;
     private int rendererVoltMeterID;
     private int rendererAmpMeterID;
@@ -668,6 +669,13 @@ public class ConfigRenderers {
         getInstance().rendererFlotationCellID = value;
     }
 
+    public static int getRendererHydroCycloneId() {
+        return getInstance().rendererHydroCycloneID;
+    }
+
+    public static void setRendererHydroCycloneId(int value) {
+        getInstance().rendererHydroCycloneID = value;
+    }
     public static int getRendererDiskFilterId() {
         return getInstance().rendererDiskFilterID;
     }

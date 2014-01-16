@@ -18,42 +18,42 @@ import ip.industrialProcessing.machines.BlockMachineRendered;
 
 public class BlockManoMeter extends BlockMachineRendered {
 
-	public BlockManoMeter() {
-		super(ConfigTransportBlocks.getBlockTransportFluidManometerID(), Material.iron, 1F, Block.soundMetalFootstep, "Manometer", ISetupCreativeTabs.tabFluid);
+    public BlockManoMeter() {
+	super(ConfigTransportBlocks.getBlockTransportFluidManometerID(), Material.iron, 1F, Block.soundMetalFootstep, "Manometer", ISetupCreativeTabs.tabFluid);
+	setBlockBounds(0, 0, 0.25f, 1, 1, 0.75f);
+	func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "manometer");
+    }
+
+    @Override
+    public Icon getIcon(int par1, int par2) {
+	if (par1 == 1) {
+	    return ISetupMachineBlocks.blockTank.getIcon(0, 0);
+	}
+	return super.getIcon(par1, par2);
+    }
+
+    @Override
+    public void setBlockBoundsBasedOnState(IBlockAccess par1iBlockAccess, int par2, int par3, int par4) {
+	ForgeDirection direction = BlockMachine.getForwardFromEntity(par1iBlockAccess.getBlockTileEntity(par2, par3, par4));
+	if (direction != null) {
+	    if (direction.ordinal() < 2)
+		setBlockBounds(0, 0, 0, 1, 1, 1);
+	    else if (direction.ordinal() < 4)
 		setBlockBounds(0, 0, 0.25f, 1, 1, 0.75f);
-		func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "manometer");
+	    else
+		setBlockBounds(0.25f, 0, 0, 0.75f, 1, 1);
 	}
+	super.setBlockBoundsBasedOnState(par1iBlockAccess, par2, par3, par4);
+    }
 
-	@Override
-	public Icon getIcon(int par1, int par2) {
-		if (par1 == 1) {
-			return ISetupMachineBlocks.blockTank.getIcon(0, 0);
-		}
-		return super.getIcon(par1, par2);
-	}
+    @Override
+    public TileEntity createNewTileEntity(World world) {
+	return new TileEntityManoMeter();
+    }
 
-	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess par1iBlockAccess, int par2, int par3, int par4) {
-		ForgeDirection direction = BlockMachine.getForwardFromEntity(par1iBlockAccess.getBlockTileEntity(par2, par3, par4));
-		
-		if (direction.ordinal() < 2)
-			setBlockBounds(0, 0, 0, 1, 1, 1);
-		else if (direction.ordinal() < 4)
-			setBlockBounds(0, 0, 0.25f, 1, 1, 0.75f);
-		else
-			setBlockBounds(0.25f, 0, 0, 0.75f, 1, 1);
-
-		super.setBlockBoundsBasedOnState(par1iBlockAccess, par2, par3, par4);
-	}
-
-	@Override
-	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityManoMeter();
-	}
-
-	@Override
-	public int getRenderType() {
-		return ConfigRenderers.getRendererManometerId();
-	}
+    @Override
+    public int getRenderType() {
+	return ConfigRenderers.getRendererManometerId();
+    }
 
 }

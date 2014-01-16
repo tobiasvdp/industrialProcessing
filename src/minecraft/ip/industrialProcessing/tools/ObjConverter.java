@@ -17,8 +17,8 @@ public class ObjConverter {
 	public static void main(String[] args) {
 		ObjConverter cv = new ObjConverter();
 		try {
-			//cv.parseObjFile("C:\\Users\\Stijn\\Documents\\3dsMax\\export\\floorTile.obj");
-			cv.parseObjFile("C:\\Users\\Tobias\\Documents\\3dsMax\\export\\SolderingStation.obj");
+			cv.parseObjFile("C:\\Users\\Stijn\\Documents\\3dsMax\\export\\floorTile.obj");
+			//cv.parseObjFile("C:\\Users\\Tobias\\Documents\\3dsMax\\export\\SolderingStation.obj");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -339,7 +339,8 @@ public class ObjConverter {
 			try {
 				//Stijn Laptop: outFile = new FileWriter("C:\\MinecraftForge\\Minecraft\\forge\\mcp\\src\\minecraft\\ip\\industrialProcessing\\machines\\diskFilter\\model\\"+file.title + ".java");
 				//Stijn Desktop: outFile = new FileWriter("D:\\Minecraft\\forge\\mcp\\src\\minecraft\\ip\\industrialProcessing\\machines\\flotationCell\\model\\"+file.title + ".java");
-				outFile = new FileWriter("C:\\IndustrialProcessing\\forge\\mcp\\src\\minecraft\\ip\\industrialProcessing\\multiblock\\core\\block\\SolderingStation\\model\\"+file.title + ".java");
+				//outFile = new FileWriter("C:\\IndustrialProcessing\\forge\\mcp\\src\\minecraft\\ip\\industrialProcessing\\multiblock\\core\\block\\SolderingStation\\model\\"+file.title + ".java");
+			    	outFile = new FileWriter("C:\\MinecraftForge\\Minecraft\\forge\\mcp\\src\\minecraft\\ip\\industrialProcessing\\machines\\classifier\\model\\"+file.title + ".java");
 				PrintWriter out = new PrintWriter(outFile);
 				out.print(file.toString());
 				out.close();

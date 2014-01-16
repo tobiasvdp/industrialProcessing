@@ -19,61 +19,61 @@ import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 import ip.industrialProcessing.utils.IDescriptionBlock;
 
-public class BlockFlotationCell extends BlockMachineRendered  implements IRecipeBlock, IDescriptionBlock,IGuiLayout{
+public class BlockFlotationCell extends BlockMachineRendered implements IRecipeBlock, IDescriptionBlock, IGuiLayout {
 
-	public static GuiLayout guiLayout;
-	static{
-		guiLayout = new GuiLayout();
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.tankInput);
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.tankOutput);
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.tankOutput);
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.worker);
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.power);
-	}
+    public static GuiLayout guiLayout;
+    static {
+	guiLayout = new GuiLayout();
+	guiLayout.addLayoutPanel(GuiLayoutPanelType.tankInput);
+	guiLayout.addLayoutPanel(GuiLayoutPanelType.tankOutput);
+	guiLayout.addLayoutPanel(GuiLayoutPanelType.tankOutput);
+	guiLayout.addLayoutPanel(GuiLayoutPanelType.worker);
+	guiLayout.addLayoutPanel(GuiLayoutPanelType.power);
+    }
     private Icon[] icons = new Icon[2];
 
     public BlockFlotationCell() {
-        super(ConfigMachineBlocks.getFlotationCellBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Flotation Cell", ISetupCreativeTabs.tabOreProcessing);
+	super(ConfigMachineBlocks.getFlotationCellBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Flotation Cell", ISetupCreativeTabs.tabOreProcessing);
 
     }
 
     @Override
     public TileEntity createNewTileEntity(World world) {
-        TileEntityFlotationCell te = new TileEntityFlotationCell();
-        te.setName(getLocalizedName());
-        return te;
+	TileEntityFlotationCell te = new TileEntityFlotationCell();
+	te.setName(getLocalizedName());
+	return te;
     }
 
     @Override
     public int getRenderType() {
-        return ConfigRenderers.getRendererFlotationCellId();
+	return ConfigRenderers.getRendererFlotationCellId();
     }
 
     @Override
     public Icon getIcon(int par1, int par2) {
-        par1 %= icons.length;
-        return icons[par1];
-    }
-    
-    @Override
-    public void registerIcons(IconRegister par1IconRegister) { 
-        this.icons[1] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "tankSide");
-        this.icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "tankFeatures");
+	par1 %= icons.length;
+	return icons[par1];
     }
 
     @Override
-    public RecipesMachine getRecipes() { 
+    public void registerIcons(IconRegister par1IconRegister) {
+	this.icons[1] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "tankSide");
+	this.icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "tankFeatures");
+    }
+
+    @Override
+    public RecipesMachine getRecipes() {
 	return TileEntityFlotationCell.recipes;
     }
 
-	@Override
-	public GuiLayout getGuiLayout() {
-		return guiLayout;
-	}
+    @Override
+    public GuiLayout getGuiLayout() {
+	return guiLayout;
+    }
 
-	@Override
-	public String getDescription() {
-		return "You make me float.";
-	}
+    @Override
+    public String getDescription() {
+	return "You make me float.";
+    }
 
 }
