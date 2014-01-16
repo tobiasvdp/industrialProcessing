@@ -4,7 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
@@ -28,7 +27,7 @@ public class BlockScaffolding extends BlockDecoration {
 
 				Block placed = blocksList[stack.itemID];
 				if (placed instanceof BlockScaffolding) {
-					int dir = MathHelper.floor_double((double) ((par5EntityPlayer.rotationYaw * 4F) / 360F) + 0.5D) & 3;
+					int dir = MathHelper.floor_double((par5EntityPlayer.rotationYaw * 4F) / 360F + 0.5D) & 3;
 					ForgeDirection placeTarget = BlockMachine.getForwardFromMetadata(dir).getOpposite();
 
 					if (placeScaffolding(par1World, par2, par3, par4, stack, placeTarget, par5EntityPlayer, 0)) {

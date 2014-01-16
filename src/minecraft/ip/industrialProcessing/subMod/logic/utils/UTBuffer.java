@@ -1,10 +1,6 @@
 package ip.industrialProcessing.subMod.logic.utils;
 
-import ip.industrialProcessing.gui.container.syncing.info.InfoMachine;
-
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.ListIterator;
 
 public class UTBuffer {
 

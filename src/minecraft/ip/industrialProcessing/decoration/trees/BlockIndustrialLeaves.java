@@ -2,6 +2,7 @@ package ip.industrialProcessing.decoration.trees;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigBlocks;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ public class BlockIndustrialLeaves extends BlockLeaves {
 
     public BlockIndustrialLeaves() {
         super(ConfigBlocks.getLeavesID());
-        this.setCreativeTab(IndustrialProcessing.tabOres);
+        this.setCreativeTab(ISetupCreativeTabs.tabOres);
         this.setHardness(0.2F).setLightOpacity(1).setStepSound(soundGrassFootstep).setUnlocalizedName("leaves");
     }
 
@@ -81,7 +82,8 @@ public class BlockIndustrialLeaves extends BlockLeaves {
      * From the specified side and block metadata retrieves the blocks texture.
      * Args: side, metadata
      */
-    public Icon getIcon(int par1, int par2) {
+    @Override
+	public Icon getIcon(int par1, int par2) {
         par2 = par2 % IndustrialTrees.getTreeCount();
         if (this.graphicsLevel)
             return this.icons_opaque[par2];
@@ -99,7 +101,8 @@ public class BlockIndustrialLeaves extends BlockLeaves {
         return !this.graphicsLevel;
     }
 
-    public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
+    @Override
+	public int colorMultiplier(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         int meta = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
         int color = IndustrialTrees.getColor(meta);
         int i1 = ((color >> 16) & 255) * 6;
@@ -122,7 +125,8 @@ public class BlockIndustrialLeaves extends BlockLeaves {
      * Drops the block items with a specified chance of dropping the specified
      * items
      */
-    public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7) {
+    @Override
+	public void dropBlockAsItemWithChance(World par1World, int par2, int par3, int par4, int par5, float par6, int par7) {
         if (!par1World.isRemote) {
             int j1 = 20;
 
@@ -155,7 +159,8 @@ public class BlockIndustrialLeaves extends BlockLeaves {
         }
     }
 
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     /**
      * When this method is called, your block should register all the icons it needs with the given IconRegister. This
      * is the only chance you get to register icons.
@@ -173,7 +178,8 @@ public class BlockIndustrialLeaves extends BlockLeaves {
      * Determines the damage on the item the block drops. Used in cloth and
      * wood.
      */
-    public int damageDropped(int par1) {
+    @Override
+	public int damageDropped(int par1) {
         return par1;
     }
 

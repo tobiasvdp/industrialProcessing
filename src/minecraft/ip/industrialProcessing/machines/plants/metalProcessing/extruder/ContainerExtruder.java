@@ -2,11 +2,7 @@ package ip.industrialProcessing.machines.plants.metalProcessing.extruder;
 
 import ip.industrialProcessing.slots.SlotOutput;
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
-import ip.industrialProcessing.machines.containers.ContainerFluidMachine;
 import ip.industrialProcessing.machines.containers.ContainerPoweredFluidWorkerMachine;
-import ip.industrialProcessing.slots.SlotBase;
-import ip.industrialProcessing.slots.SlotLiquid;
-import ip.industrialProcessing.slots.SlotLiquidOutput;
 import ip.industrialProcessing.utils.containers.ContainerUtils;
 import net.minecraft.entity.player.InventoryPlayer;
 

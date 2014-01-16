@@ -1,25 +1,16 @@
 package ip.industrialProcessing.subMod.logic.network.interfaces.machine;
 
-import java.util.Iterator;
-
-import cpw.mods.fml.common.registry.LanguageRegistry;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidTankInfo;
 import ip.industrialProcessing.client.render.IFluidInfo;
-import ip.industrialProcessing.gui.container.syncing.info.IExpirable;
 import ip.industrialProcessing.machines.IMachineSlots;
-import ip.industrialProcessing.machines.TileEntityMachine;
-import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
-import ip.industrialProcessing.machines.TileEntityPoweredWorkerMachine;
 import ip.industrialProcessing.power.IPoweredMachine;
 import ip.industrialProcessing.subMod.logic.api.network.interfaces.ILogicInterface;
 import ip.industrialProcessing.subMod.logic.api.network.interfaces.IMachineInterface;
 import ip.industrialProcessing.subMod.logic.api.network.interfaces.InterfaceType;
 import ip.industrialProcessing.subMod.logic.network.TileEntityLogicNetworkNode;
 import ip.industrialProcessing.subMod.logic.transport.ICommunicationNode;
-import ip.industrialProcessing.subMod.logic.utils.UTBuffer;
 import ip.industrialProcessing.subMod.logic.utils.UTLogicType;
 import ip.industrialProcessing.subMod.logic.utils.UTVariable;
 import ip.industrialProcessing.subMod.logic.utils.UTVariableType;
@@ -30,6 +21,7 @@ public class TileEntityMachineInterface extends TileEntityLogicNetworkNode imple
 
 	IMachineInterface machine = null;
 
+	@Override
 	public IMachineInterface getMachine() {
 		if (machine == null || ((TileEntity) machine).isInvalid()) {
 			connectMachine();
@@ -37,6 +29,7 @@ public class TileEntityMachineInterface extends TileEntityLogicNetworkNode imple
 		return machine;
 	}
 
+	@Override
 	public boolean isMachineCapable(InterfaceType type) {
 		IMachineInterface machine = getMachine();
 		if (machine != null) {

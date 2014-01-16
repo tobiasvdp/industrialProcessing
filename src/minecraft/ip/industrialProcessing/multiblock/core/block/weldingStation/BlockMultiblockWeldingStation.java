@@ -7,15 +7,15 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.gui.GuiLayout;
 import ip.industrialProcessing.gui.IGuiLayout;
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
-import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.multiblock.core.BlockMultiblockCore;
 import ip.industrialProcessing.multiblock.recipes.IRecipeMultiblock;
 import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
-import ip.industrialProcessing.recipes.IRecipeBlock;
 import ip.industrialProcessing.utils.IDescriptionBlock;
 
 public class BlockMultiblockWeldingStation extends BlockMultiblockCore implements IRecipeMultiblock, IDescriptionBlock,IGuiLayout {
@@ -31,7 +31,7 @@ public class BlockMultiblockWeldingStation extends BlockMultiblockCore implement
 	private Icon[] icons = new Icon[4];
 
 	public BlockMultiblockWeldingStation() {
-		super(ConfigMachineBlocks.getBLmultiblockWeldingStation(), "BLmultiblockWeldingStation", IndustrialProcessing.tabMultiblocks);
+		super(ConfigMachineBlocks.getBLmultiblockWeldingStation(), "BLmultiblockWeldingStation", ISetupCreativeTabs.tabMultiblocks);
 	}
 
 	@Override
@@ -57,10 +57,10 @@ public class BlockMultiblockWeldingStation extends BlockMultiblockCore implement
 
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-        icons [0] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "Planks2");
-        icons [1] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "Stone");
-        icons [2] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "Planks2");
-        icons [3] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "crafting_table_front");
+        icons [0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Planks2");
+        icons [1] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Stone");
+        icons [2] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Planks2");
+        icons [3] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "crafting_table_front");
     }
 
 	@Override

@@ -7,6 +7,8 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.multiblock.dummy.BlockMultiblockDummy;
 
 public class BlockScreen extends BlockMultiblockDummy{
@@ -14,7 +16,7 @@ public class BlockScreen extends BlockMultiblockDummy{
 	private Icon[] icons = new Icon[1];
 
 	public BlockScreen() {
-		super(ConfigMachineBlocks.getBLmultiblockScreen(), "MultiblockScreen", IndustrialProcessing.tabMultiblocks);
+		super(ConfigMachineBlocks.getBLmultiblockScreen(), "MultiblockScreen", ISetupCreativeTabs.tabMultiblocks);
 	}
 
 	@Override
@@ -35,6 +37,6 @@ public class BlockScreen extends BlockMultiblockDummy{
 
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-        icons [0] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "iron_block");
+        icons [0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "iron_block");
     }
 }

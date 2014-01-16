@@ -1,7 +1,5 @@
 package ip.industrialProcessing.recipes;
 
-import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.fluids.ItemFluid;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 

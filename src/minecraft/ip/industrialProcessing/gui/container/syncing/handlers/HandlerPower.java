@@ -3,7 +3,6 @@ package ip.industrialProcessing.gui.container.syncing.handlers;
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.syncing.info.InfoPower;
 import ip.industrialProcessing.machines.IPowerStorage;
-import ip.industrialProcessing.utils.working.IWorker;
 
 public class HandlerPower implements IHandlerPower{
 	private IPowerStorage power;

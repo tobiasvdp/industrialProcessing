@@ -3,8 +3,9 @@ package ip.industrialProcessing.multiblock.dummy.block.ironBowl;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.multiblock.dummy.BlockMultiblockDummy;
-import ip.industrialProcessing.multiblock.dummy.block.bellows.TileEntityBellows;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
@@ -14,7 +15,7 @@ public class BlockIronBowl extends BlockMultiblockDummy{
 
     Icon[] icons = new Icon[3];
 	public BlockIronBowl() {
-		super(ConfigMachineBlocks.getBlockIronBowlID(), "BlockIronBowl", IndustrialProcessing.tabMultiblocks);
+		super(ConfigMachineBlocks.getBlockIronBowlID(), "BlockIronBowl", ISetupCreativeTabs.tabMultiblocks);
 		this.setBlockBounds(0.2f, 0.0f, 0.2f, 0.8f, 0.4f, 0.8f);
 	}
 
@@ -36,9 +37,9 @@ public class BlockIronBowl extends BlockMultiblockDummy{
 
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-        icons[0] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "Wood");
-        icons[1] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "Canvas");
-        icons[2] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "Iron");
+        icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Wood");
+        icons[1] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Canvas");
+        icons[2] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Iron");
     }
 
 }

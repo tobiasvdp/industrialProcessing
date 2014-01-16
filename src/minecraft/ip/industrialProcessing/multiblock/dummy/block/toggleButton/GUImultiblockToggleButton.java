@@ -8,15 +8,14 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.common.network.PacketDispatcher;
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.multiblock.core.block.elevator.TEmultiblockElevator;
 import ip.industrialProcessing.utils.handler.packets.PacketHandler;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 
 public class GUImultiblockToggleButton extends GuiScreen {
 	public TEmultiblockToggleButton tileEntity;
@@ -29,7 +28,7 @@ public class GUImultiblockToggleButton extends GuiScreen {
 	public GUImultiblockToggleButton(TEmultiblockToggleButton tileEntity, EntityPlayer player) {
 		this.tileEntity = tileEntity;
 		this.name = "Control panel";
-		this.textureLocation = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/ToggleButton.png");
+		this.textureLocation = new ResourceLocation(INamepace.TEXTURE_DOMAIN, "textures/gui/ToggleButton.png");
 		this.player = player;
 	}
 

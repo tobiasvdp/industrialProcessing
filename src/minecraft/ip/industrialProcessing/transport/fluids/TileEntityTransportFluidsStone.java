@@ -8,6 +8,7 @@ public class TileEntityTransportFluidsStone extends TileEntityTransportFluids {
         this.connectionGroup = 1;
     }
 
-    public void setConnectionGroup(int color) {
+    @Override
+	public void setConnectionGroup(int color) {
     }
 }

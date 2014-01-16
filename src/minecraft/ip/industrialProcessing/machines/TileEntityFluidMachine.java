@@ -3,10 +3,8 @@ package ip.industrialProcessing.machines;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.api.tanks.IPfluidTank;
 import ip.industrialProcessing.api.tanks.ITank;
-import ip.industrialProcessing.client.render.IFluidInfo;
 import ip.industrialProcessing.machines.containers.IFluidMachineContainerEntity;
 import ip.industrialProcessing.subMod.logic.api.network.interfaces.InterfaceType;
-import ip.industrialProcessing.transport.fluids.IPressuredTank;
 import ip.industrialProcessing.utils.DirectionUtils;
 
 import java.util.ArrayList;
@@ -21,7 +19,6 @@ import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidHandler;
 
 public abstract class TileEntityFluidMachine extends TileEntityMachine implements ITank, IMachineTanks, IFluidMachineContainerEntity {
 

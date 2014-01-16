@@ -3,9 +3,7 @@ package ip.industrialProcessing.gui.container.slot.layout.components;
 import java.awt.Rectangle;
 
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayout;
-import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
 import ip.industrialProcessing.slots.SlotBase;
-import net.minecraft.inventory.IInventory;
 
 public class SlotLayoutSide extends SlotLayout {
 	public SlotLayoutSide(int amount, int startIndex, Rectangle rect) {

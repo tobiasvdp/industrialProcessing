@@ -2,12 +2,9 @@ package ip.industrialProcessing.multiblock.core.extend;
 
 import java.util.Iterator;
 
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.fluids.FluidStack;
 import ip.industrialProcessing.client.render.IAnimationProgress;
-import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
 import ip.industrialProcessing.machines.animation.AnimationMode;
 import ip.industrialProcessing.machines.animation.IAnimationSyncable;
@@ -18,9 +15,6 @@ import ip.industrialProcessing.multiblock.recipes.RecipeMultiblock;
 import ip.industrialProcessing.multiblock.recipes.RecipeMultiblockFluidWorker;
 import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
-import ip.industrialProcessing.recipes.IRecipeFluidWorkHandler;
-import ip.industrialProcessing.recipes.Recipe;
-import ip.industrialProcessing.recipes.RecipeFluidWorker;
 import ip.industrialProcessing.utils.working.ClientWorker;
 import ip.industrialProcessing.utils.working.IWorker;
 import ip.industrialProcessing.utils.working.ServerWorker;
@@ -54,7 +48,8 @@ public abstract class TileEntityMultiblockCoreTankWorker extends TileEntityMulti
 	return recipe.iterator();
     }
 
-    public IWorker getWorker() {
+    @Override
+	public IWorker getWorker() {
 	if (this.worldObj.isRemote)
 	    return clientWorker;
 	else
@@ -119,7 +114,7 @@ public abstract class TileEntityMultiblockCoreTankWorker extends TileEntityMulti
 	IWorker worker = getWorker();
 	float maxWork = worker.getTotalWork();
 	// each frame, workDone/maxWork % will be added to the animation
-	this.animationHandler.setSpeed(workDone / maxWork / this.animationHandler.DT);
+	this.animationHandler.setSpeed(workDone / maxWork / AnimationHandler.DT);
     }
 
     @Override
@@ -132,7 +127,8 @@ public abstract class TileEntityMultiblockCoreTankWorker extends TileEntityMulti
 	return 1;
     }
 
-    public AnimationHandler getAnimationHandler() {
+    @Override
+	public AnimationHandler getAnimationHandler() {
 	return animationHandler;
     }
 

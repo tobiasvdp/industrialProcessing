@@ -1,6 +1,8 @@
 package ip.industrialProcessing.machines.plants.oilRefinary.asphaltBlower;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.ISetupBlocks;
+import ip.industrialProcessing.config.ISetupFluids;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeInputSlot;
@@ -20,8 +22,8 @@ public class RecipesAsphaltBlower  extends RecipesMachine{
 	Recipe recipe = new Recipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidAsphaltSludge.getName()), RecipeSlotType.TANK, 100), new RecipeInputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidAir.getName()), RecipeSlotType.TANK, 100) };
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(2, IndustrialProcessing.blockAsphalt.blockID, RecipeSlotType.INVENTORY, 1, 1, 0.5)};
+	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidAsphaltSludge.getName()), RecipeSlotType.TANK, 100), new RecipeInputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidAir.getName()), RecipeSlotType.TANK, 100) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(2, ISetupBlocks.blockAsphalt.blockID, RecipeSlotType.INVENTORY, 1, 1, 0.5)};
 	return recipe;
     }
 }

@@ -2,16 +2,10 @@ package ip.industrialProcessing.multiblock.core.block.elevator;
 
 import java.util.ArrayList;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.DimensionManager;
-import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.machines.crusher.RecipesCrusher;
+import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
-import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
 import ip.industrialProcessing.multiblock.dummy.block.frame.ENmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.TEmultiblockLiftDoor;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
@@ -21,8 +15,6 @@ import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
 import ip.industrialProcessing.multiblock.tier.Tier;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
-import ip.industrialProcessing.multiblock.utils.MultiblockActionType;
-import ip.industrialProcessing.multiblock.utils.MultiblockState;
 
 public class TEmultiblockElevator extends TileEntityMultiblockCore {
 	static StructureMultiblock structure;
@@ -39,22 +31,22 @@ public class TEmultiblockElevator extends TileEntityMultiblockCore {
 			if (j == 1)
 				model = 2;
 			for (int k = 0; k < 4; k++) {
-				layout.setBlockID(0, j, -k, i++, model, 0, IndustrialProcessing.BLmultiblockFrame.blockID);
-				layout.setBlockID(3, j, -k, i++, model, 0, IndustrialProcessing.BLmultiblockFrame.blockID);
+				layout.setBlockID(0, j, -k, i++, model, 0, ISetupMachineBlocks.BLmultiblockFrame.blockID);
+				layout.setBlockID(3, j, -k, i++, model, 0, ISetupMachineBlocks.BLmultiblockFrame.blockID);
 			}
-			layout.setBlockID(1, j, 0, i++, model, 0, IndustrialProcessing.BLmultiblockFrame.blockID);
-			layout.setBlockID(1, j, -3, i++, model, 0, IndustrialProcessing.BLmultiblockFrame.blockID);
-			layout.setBlockID(2, j, 0, i++, model, 0, IndustrialProcessing.BLmultiblockFrame.blockID);
-			layout.setBlockID(2, j, -3, i++, model, 0, IndustrialProcessing.BLmultiblockFrame.blockID);
+			layout.setBlockID(1, j, 0, i++, model, 0, ISetupMachineBlocks.BLmultiblockFrame.blockID);
+			layout.setBlockID(1, j, -3, i++, model, 0, ISetupMachineBlocks.BLmultiblockFrame.blockID);
+			layout.setBlockID(2, j, 0, i++, model, 0, ISetupMachineBlocks.BLmultiblockFrame.blockID);
+			layout.setBlockID(2, j, -3, i++, model, 0, ISetupMachineBlocks.BLmultiblockFrame.blockID);
 		}
-		layout.setBlockID(1, 1, 0, 3, 0, 0, IndustrialProcessing.BLmultiblockLiftDoor.blockID);
-		layout.setBlockID(1, 2, 0, 4, 0, 0, IndustrialProcessing.BLmultiblockLiftDoor.blockID);
-		layout.setBlockID(2, 1, 0, 5, 0, 1, IndustrialProcessing.BLmultiblockLiftDoor.blockID);
-		layout.setBlockID(2, 2, 0, 6, 0, 1, IndustrialProcessing.BLmultiblockLiftDoor.blockID);
+		layout.setBlockID(1, 1, 0, 3, 0, 0, ISetupMachineBlocks.BLmultiblockLiftDoor.blockID);
+		layout.setBlockID(1, 2, 0, 4, 0, 0, ISetupMachineBlocks.BLmultiblockLiftDoor.blockID);
+		layout.setBlockID(2, 1, 0, 5, 0, 1, ISetupMachineBlocks.BLmultiblockLiftDoor.blockID);
+		layout.setBlockID(2, 2, 0, 6, 0, 1, ISetupMachineBlocks.BLmultiblockLiftDoor.blockID);
 
-		layout.setCoreID(0, 0, 0, IndustrialProcessing.BLmultiblockElevator.blockID);
-		layout.setBlockID(0, 2, -1, 1, 0, 0, IndustrialProcessing.BLmultiblockToggleButton.blockID);
-		layout.setBlockID(0, 2, 0, 2, 0, 0, IndustrialProcessing.BLmultiblockToggleButton2.blockID);
+		layout.setCoreID(0, 0, 0, ISetupMachineBlocks.BLmultiblockElevator.blockID);
+		layout.setBlockID(0, 2, -1, 1, 0, 0, ISetupMachineBlocks.BLmultiblockToggleButton.blockID);
+		layout.setBlockID(0, 2, 0, 2, 0, 0, ISetupMachineBlocks.BLmultiblockToggleButton2.blockID);
 
 		structure.addLayout(layout, FacingDirection.North);
 		structure.addLayout(LayoutTransformer.transform(layout, FacingDirection.East), FacingDirection.East);

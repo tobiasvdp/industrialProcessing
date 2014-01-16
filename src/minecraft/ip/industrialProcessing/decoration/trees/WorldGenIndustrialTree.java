@@ -1,6 +1,5 @@
 package ip.industrialProcessing.decoration.trees;
 
-import ic2.api.Direction;
 import ip.industrialProcessing.config.ConfigBlocks;
 
 import java.util.Random;
@@ -8,7 +7,6 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraftforge.common.ForgeDirection;
 
 public class WorldGenIndustrialTree extends WorldGenerator {
 

@@ -1,18 +1,11 @@
 package ip.industrialProcessing.items.guide.gui.machines.old;
 
-import java.awt.Rectangle;
-
-import org.lwjgl.opengl.GL11;
-
-import ip.industrialProcessing.client.render.gui.GuiTools;
 import ip.industrialProcessing.items.guide.gui.machines.components.GuideMachineRecipeDetails;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeInputSlot;
 import ip.industrialProcessing.recipes.RecipeOutputSlot;
 import ip.industrialProcessing.recipes.RecipeSlotType;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
 
 public class GuideMachineIPRecipeDetails extends GuideMachineRecipeDetails {

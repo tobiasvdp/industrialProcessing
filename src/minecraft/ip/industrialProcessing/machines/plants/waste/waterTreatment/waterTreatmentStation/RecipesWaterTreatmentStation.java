@@ -1,8 +1,9 @@
 package ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatmentStation;
 
-import net.minecraft.item.Item;
 import net.minecraftforge.fluids.FluidRegistry;
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.ISetupFluids;
+import ip.industrialProcessing.config.ISetupItems;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeInputSlot;
@@ -22,7 +23,7 @@ public class RecipesWaterTreatmentStation extends RecipesMachine {
         Recipe recipe = new Recipe();
         recipe.workRequired = i;
         recipe.powerRequired = powerConsumption;
-        recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidMicrobialWater.getName()), RecipeSlotType.TANK, 1000), new RecipeInputSlot(0, IndustrialProcessing.itemActiveCoal.itemID, RecipeSlotType.DAMAGEDITEM, 1) };
+        recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidMicrobialWater.getName()), RecipeSlotType.TANK, 1000), new RecipeInputSlot(0, ISetupItems.itemActiveCoal.itemID, RecipeSlotType.DAMAGEDITEM, 1) };
         recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(FluidRegistry.WATER.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
         return recipe;
     }

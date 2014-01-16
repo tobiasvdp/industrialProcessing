@@ -1,6 +1,5 @@
 package ip.industrialProcessing.config;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ConfigItems {

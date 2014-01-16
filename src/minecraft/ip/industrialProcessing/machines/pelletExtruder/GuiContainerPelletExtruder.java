@@ -3,10 +3,7 @@ package ip.industrialProcessing.machines.pelletExtruder;
 import org.lwjgl.util.Point;
 import org.lwjgl.util.Rectangle;
 
-import ip.industrialProcessing.machines.containers.gui.GuiContainerMachine;
 import ip.industrialProcessing.machines.containers.gui.GuiContainerPoweredWorkerMachine;
-import ip.industrialProcessing.machines.kiln.ContainerKiln;
-import ip.industrialProcessing.machines.kiln.TileEntityKiln;
 import net.minecraft.entity.player.InventoryPlayer;
 
 public class GuiContainerPelletExtruder extends GuiContainerPoweredWorkerMachine {

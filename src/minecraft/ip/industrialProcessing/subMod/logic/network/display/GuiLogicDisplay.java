@@ -4,25 +4,17 @@ import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.gui.container.syncing.info.InfoMachine;
 import ip.industrialProcessing.gui.container.syncing.info.InfoSlot;
 import ip.industrialProcessing.gui.container.syncing.info.InfoTank;
-import ip.industrialProcessing.machines.IPowerStorage;
 import ip.industrialProcessing.subMod.logic.PacketHandler;
-import ip.industrialProcessing.subMod.logic.api.network.interfaces.ILogicInterface;
 import ip.industrialProcessing.subMod.logic.api.network.interfaces.InterfaceType;
 import ip.industrialProcessing.subMod.logic.api.network.interfaces.StatusType;
 import ip.industrialProcessing.subMod.logic.transport.ICommunicationNode;
 import ip.industrialProcessing.subMod.logic.utils.UTBuffer;
 import ip.industrialProcessing.subMod.logic.utils.UTBufferType;
-import ip.industrialProcessing.subMod.logic.utils.UTVariable;
 import ip.industrialProcessing.subMod.logic.utils.UTVariableType;
-import ip.industrialProcessing.utils.working.IWorker;
-
 import java.awt.Color;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
@@ -30,17 +22,10 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -125,7 +110,7 @@ public class GuiLogicDisplay extends GuiScreen {
 		Color color1 = new Color(227, 129, 63);
 		Color color2 = new Color(210, 92, 13);
 
-		this.drawColoredTexturedModalRect(x, y, 0, 78, this.X_SIZE, 178, 255, 255, 255);
+		this.drawColoredTexturedModalRect(x, y, 0, 78, GuiLogicDisplay.X_SIZE, 178, 255, 255, 255);
 		/*
 		 * this.drawColoredTexturedModalRect(x + 15, y + 15, 0, 0, 15, 15, 255,
 		 * 255, 255); this.drawColoredTexturedModalRect(x + 15, y + Y_SIZE - 30,
@@ -228,10 +213,10 @@ public class GuiLogicDisplay extends GuiScreen {
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawingQuads();
 		tessellator.setColorOpaque(r, g, b);
-		tessellator.addVertexWithUV((double) (par1 + 0), (double) (par2 + par6), (double) this.zLevel, (double) ((float) (par3 + 0) * f), (double) ((float) (par4 + par6) * f1));
-		tessellator.addVertexWithUV((double) (par1 + par5), (double) (par2 + par6), (double) this.zLevel, (double) ((float) (par3 + par5) * f), (double) ((float) (par4 + par6) * f1));
-		tessellator.addVertexWithUV((double) (par1 + par5), (double) (par2 + 0), (double) this.zLevel, (double) ((float) (par3 + par5) * f), (double) ((float) (par4 + 0) * f1));
-		tessellator.addVertexWithUV((double) (par1 + 0), (double) (par2 + 0), (double) this.zLevel, (double) ((float) (par3 + 0) * f), (double) ((float) (par4 + 0) * f1));
+		tessellator.addVertexWithUV(par1 + 0, par2 + par6, this.zLevel, (par3 + 0) * f, (par4 + par6) * f1);
+		tessellator.addVertexWithUV(par1 + par5, par2 + par6, this.zLevel, (par3 + par5) * f, (par4 + par6) * f1);
+		tessellator.addVertexWithUV(par1 + par5, par2 + 0, this.zLevel, (par3 + par5) * f, (par4 + 0) * f1);
+		tessellator.addVertexWithUV(par1 + 0, par2 + 0, this.zLevel, (par3 + 0) * f, (par4 + 0) * f1);
 		tessellator.draw();
 	}
 

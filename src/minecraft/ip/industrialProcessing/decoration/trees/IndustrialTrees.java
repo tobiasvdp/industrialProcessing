@@ -1,10 +1,8 @@
 package ip.industrialProcessing.decoration.trees;
 
-import javax.print.DocFlavor.STRING;
-
-import net.minecraft.util.Icon;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigBlocks;
+import ip.industrialProcessing.config.INamepace;
 
 public class IndustrialTrees {
 
@@ -27,17 +25,17 @@ public class IndustrialTrees {
 
     public static String getLogTopTexture(int index) {
         index %= textures.length;
-        return IndustrialProcessing.TEXTURE_NAME_PREFIX + textures[index] + "_log_top";
+        return INamepace.TEXTURE_NAME_PREFIX + textures[index] + "_log_top";
     }
 
     public static String getLogSideTexture(int index) {
         index %= textures.length;
-        return IndustrialProcessing.TEXTURE_NAME_PREFIX + textures[index] + "_log_side";
+        return INamepace.TEXTURE_NAME_PREFIX + textures[index] + "_log_side";
     }
 
     public static String getSpecialLogSideTexture(int index, String special) {
         index %= textures.length;
-        return IndustrialProcessing.TEXTURE_NAME_PREFIX + textures[index] + "_" + special + "_log_side";
+        return INamepace.TEXTURE_NAME_PREFIX + textures[index] + "_" + special + "_log_side";
     }
 
     public static int getLeavesID(int par1) {
@@ -50,12 +48,12 @@ public class IndustrialTrees {
 
     public static String getSaplingTexture(int index) {
         index %= textures.length;
-        return IndustrialProcessing.TEXTURE_NAME_PREFIX + textures[index] + "_sapling";
+        return INamepace.TEXTURE_NAME_PREFIX + textures[index] + "_sapling";
     }
 
     public static String getLeavesTexture(int index, boolean opaque) {
         index %= textures.length;
-        return IndustrialProcessing.TEXTURE_NAME_PREFIX + textures[index] + "_leaves" + (opaque ? "_opaque" : "");
+        return INamepace.TEXTURE_NAME_PREFIX + textures[index] + "_leaves" + (opaque ? "_opaque" : "");
     }
 
     public static float getSlope(int meta) {

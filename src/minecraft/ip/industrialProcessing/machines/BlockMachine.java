@@ -4,8 +4,7 @@ import cpw.mods.fml.common.Loader;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupItems;
-import ip.industrialProcessing.subMod.logic.IPLogic;
-import ip.industrialProcessing.transport.fluids.TileEntityTank;
+import ip.industrialProcessing.subMod.logic.config.ISetupLogic;
 import ip.industrialProcessing.utils.FluidTransfers;
 import ip.industrialProcessing.utils.inventories.InventoryUtils;
 import net.minecraft.block.Block;
@@ -59,7 +58,7 @@ public abstract class BlockMachine extends BlockContainer {
     }
 
     private boolean checkIfEquiped(EntityPlayer player) {
-	if(player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().itemID == IPLogic.BlockMachineInterface.blockID)
+	if(player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().itemID == ISetupLogic.BlockMachineInterface.blockID)
 	    return true;
 	return false;
     }

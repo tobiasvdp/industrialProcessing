@@ -8,15 +8,12 @@ import static net.minecraftforge.common.ForgeDirection.WEST;
 import java.util.Random;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.config.ConfigBlocks;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.machines.BlockMachine;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.IRotateableEntity;
-import ip.industrialProcessing.machines.MachineItemStack;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -35,7 +32,7 @@ public class BlockPetrolLamp extends BlockMachineRendered {
 	private Icon[] icons = new Icon[2];
 
 	public BlockPetrolLamp() {
-		super(ConfigMachineBlocks.getBlockPetrolLamp(), Material.glass, 1f, soundMetalFootstep, "Petrol Lamp", IndustrialProcessing.tabFluid);
+		super(ConfigMachineBlocks.getBlockPetrolLamp(), Material.glass, 1f, soundMetalFootstep, "Petrol Lamp", ISetupCreativeTabs.tabFluid);
 		// this.setBlockBounds(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.8f);
 		this.setTickRandomly(true);
 	}
@@ -63,8 +60,8 @@ public class BlockPetrolLamp extends BlockMachineRendered {
 
 	@Override
 	public void registerIcons(IconRegister par1IconRegister) {
-		icons[0] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "Stone");
-		icons[1] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "Iron");
+		icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Stone");
+		icons[1] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Iron");
 	}
 
 	@Override
@@ -72,6 +69,7 @@ public class BlockPetrolLamp extends BlockMachineRendered {
 		return ConfigRenderers.getRendererPetrolLampId();
 	}
 
+	@Override
 	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
 		super.updateTick(par1World, par2, par3, par4, par5Random);
 
@@ -83,6 +81,7 @@ public class BlockPetrolLamp extends BlockMachineRendered {
 	/**
 	 * Called whenever the block is added into the world. Args: world, x, y, z
 	 */
+	@Override
 	public void onBlockAdded(World par1World, int par2, int par3, int par4) {
 		if (par1World.getBlockMetadata(par2, par3, par4) == 0) {
 			if (par1World.isBlockSolidOnSide(par2 - 1, par3, par4, EAST, true)) {
@@ -97,10 +96,12 @@ public class BlockPetrolLamp extends BlockMachineRendered {
 		}
 	}
 
+	@Override
 	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
 		return par1World.isBlockSolidOnSide(par2 - 1, par3, par4, EAST, true) || par1World.isBlockSolidOnSide(par2 + 1, par3, par4, WEST, true) || par1World.isBlockSolidOnSide(par2, par3, par4 - 1, SOUTH, true) || par1World.isBlockSolidOnSide(par2, par3, par4 + 1, NORTH, true);
 	}
 
+	@Override
 	public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random) {
 		TileEntityPetrolLamp te = (TileEntityPetrolLamp) par1World.getBlockTileEntity(par2, par3, par4);
 
@@ -111,9 +112,9 @@ public class BlockPetrolLamp extends BlockMachineRendered {
 
 		if (te.getForwardDirection() != null) {
 			int l = te.getForwardDirection().ordinal();
-			double d0 = (double) ((float) par2 + 0.5F);
-			double d1 = (double) ((float) par3 + 0.18F);
-			double d2 = (double) ((float) par4 + 0.5F);
+			double d0 = par2 + 0.5F;
+			double d1 = par3 + 0.18F;
+			double d2 = par4 + 0.5F;
 			double d3 = 0.18D;
 			double d4 = 0.18D;
 

@@ -1,15 +1,11 @@
 package ip.industrialProcessing.machines.treetap;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.machines.BlockMachineRendered;
-import ip.industrialProcessing.machines.IRotateableEntity;
-import ip.industrialProcessing.transport.fluids.BlockTank;
-import net.minecraft.block.StepSound;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
@@ -21,8 +17,8 @@ public class BlockAutomaticTreeTap extends BlockManualTreeTap {
     private Icon tankIcon;
 
     public BlockAutomaticTreeTap() {
-        super(ConfigMachineBlocks.getAutomaticTreeTapBlockID(), Material.iron, 1.0f, soundMetalFootstep, "Automatic Tree Tap", IndustrialProcessing.tabOreProcessing);
-        func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "automaticTreeTap");
+        super(ConfigMachineBlocks.getAutomaticTreeTapBlockID(), Material.iron, 1.0f, soundMetalFootstep, "Automatic Tree Tap", ISetupCreativeTabs.tabOreProcessing);
+        func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "automaticTreeTap");
     }
 
     @Override
@@ -51,8 +47,8 @@ public class BlockAutomaticTreeTap extends BlockManualTreeTap {
 
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-        this.tankIcon = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "tankSide");
-        this.tapIcon = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "automaticTreeTap");
+        this.tankIcon = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "tankSide");
+        this.tapIcon = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "automaticTreeTap");
     }
 
 }

@@ -1,22 +1,9 @@
 package ip.industrialProcessing.multiblock.core.block.weldingStation;
 
-import java.util.Iterator;
-
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTankInfo;
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.machines.MachineItemStack;
-import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.machines.crusher.RecipesCrusher;
-import ip.industrialProcessing.machines.mixer.RecipesMixer;
-import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
-import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreInv;
+import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
@@ -25,11 +12,7 @@ import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
 import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.multiblock.tier.Tier;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
-import ip.industrialProcessing.multiblock.tier.TierRequirement;
 import ip.industrialProcessing.multiblock.tier.Tiers;
-import ip.industrialProcessing.multiblock.utils.MultiblockActionType;
-import ip.industrialProcessing.multiblock.utils.blockSide;
-import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.utils.handler.heat.HeatStorage;
 import ip.industrialProcessing.utils.handler.heat.IHeatStorage;
 
@@ -44,11 +27,11 @@ public class TileEntityMultiblockWeldingStation extends TileEntityMultiblockCore
 		LayoutMultiblock layout = new LayoutMultiblock(2, 0, 0, 0, 1, 0);
 
 		int i = 0;
-		layout.setCoreID(i++, 0, 1, IndustrialProcessing.BLmultiblockWeldingStation.blockID);
+		layout.setCoreID(i++, 0, 1, ISetupMachineBlocks.BLmultiblockWeldingStation.blockID);
 
-		layout.setBlockID(-1, 0, 0, i++, 0, 1, IndustrialProcessing.BLmultiblockWeldingTableExt.blockID);
-		layout.setBlockID(0, 1, 0, i++, 0, 0, IndustrialProcessing.BLmultiblockScreen.blockID);
-		layout.setBlockID(-1, 1, 0, i++, 0, 1, IndustrialProcessing.BLmultiblockScreen.blockID);
+		layout.setBlockID(-1, 0, 0, i++, 0, 1, ISetupMachineBlocks.BLmultiblockWeldingTableExt.blockID);
+		layout.setBlockID(0, 1, 0, i++, 0, 0, ISetupMachineBlocks.BLmultiblockScreen.blockID);
+		layout.setBlockID(-1, 1, 0, i++, 0, 1, ISetupMachineBlocks.BLmultiblockScreen.blockID);
 
 		structure.addLayout(layout, FacingDirection.North);
 		structure.addLayout(LayoutTransformer.transform(layout, FacingDirection.East), FacingDirection.East);

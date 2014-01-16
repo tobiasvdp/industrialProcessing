@@ -2,6 +2,7 @@ package ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.hydroCr
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
+import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
@@ -23,7 +24,7 @@ public class TileEntityHydroCracker extends TileEntityMultiblockCoreTankWorkerPo
 		LayoutMultiblock layout = new LayoutMultiblock(0, 0, 0, 0, 0, 0);
 
 		int i = 0;
-		layout.setCoreID(i++, 0, 1, IndustrialProcessing.blockHydroCracker.blockID);
+		layout.setCoreID(i++, 0, 1, ISetupMachineBlocks.blockHydroCracker.blockID);
 
 		structure.addLayout(layout, FacingDirection.North);
 		structure.addLayout(LayoutTransformer.transform(layout, FacingDirection.East), FacingDirection.East);

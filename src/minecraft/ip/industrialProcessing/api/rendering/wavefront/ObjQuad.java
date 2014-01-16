@@ -94,7 +94,7 @@ public class ObjQuad {
 	private Vector3f transform(Vector3f position12, Matrix4f transform) {
 		Vector4f vector = new Vector4f(position12.x, position12.y, position12.z, 1);
 
-		Vector4f dest = transform.transform(transform, vector, null);
+		Vector4f dest = Matrix4f.transform(transform, vector, null);
 		return new Vector3f(dest.x / dest.w, dest.y / dest.w, dest.z / dest.w);
 	}
 }

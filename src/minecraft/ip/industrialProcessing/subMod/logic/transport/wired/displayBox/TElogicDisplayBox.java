@@ -1,17 +1,10 @@
 package ip.industrialProcessing.subMod.logic.transport.wired.displayBox;
 
 import java.util.ArrayList;
-import java.util.UUID;
-
-import ip.industrialProcessing.subMod.logic.transport.ICommunication;
 import ip.industrialProcessing.subMod.logic.transport.ICommunicationNode;
 import ip.industrialProcessing.subMod.logic.transport.ICommunicationTransport;
 import ip.industrialProcessing.subMod.logic.transport.TElogicNode;
-import ip.industrialProcessing.subMod.logic.utils.UTBuffer;
-import ip.industrialProcessing.subMod.logic.utils.UTBusType;
-import ip.industrialProcessing.subMod.logic.utils.UTlogicNodeContainer;
 import ip.industrialProcessing.subMod.logic.utils.UTpacket;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
 public class TElogicDisplayBox extends TElogicNode implements ICommunicationNode, ICommunicationTransport {

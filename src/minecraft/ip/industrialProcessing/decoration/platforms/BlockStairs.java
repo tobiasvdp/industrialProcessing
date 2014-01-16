@@ -1,12 +1,11 @@
 package ip.industrialProcessing.decoration.platforms;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.rendering.connectedTile.ConnectionCompass;
 import ip.industrialProcessing.api.rendering.connectedTile.TileConnection;
 import ip.industrialProcessing.config.ConfigBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.decoration.BlockDecoration;
-
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import java.util.List;
 
 import net.minecraft.block.Block;
@@ -24,9 +23,9 @@ import net.minecraftforge.common.ForgeDirection;
 public class BlockStairs extends BlockScaffolding {
 
 	public BlockStairs() {
-		super(ConfigBlocks.getStairsBlockID(), Material.iron, 1f, Block.soundMetalFootstep, "Walkway stairs", IndustrialProcessing.tabPower);
+		super(ConfigBlocks.getStairsBlockID(), Material.iron, 1f, Block.soundMetalFootstep, "Walkway stairs", ISetupCreativeTabs.tabPower);
 		this.setBlockBounds(0, 0, 0, 1, 2, 1);
-		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "platformFloor");
+		func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "platformFloor");
 		setStepSound(soundMetalFootstep);
 	}
 
@@ -34,7 +33,7 @@ public class BlockStairs extends BlockScaffolding {
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
 		super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLivingBase, par6ItemStack);
 
-		int dir = MathHelper.floor_double((double) ((par5EntityLivingBase.rotationYaw * 4F) / 360F) + 0.5D) & 3;
+		int dir = MathHelper.floor_double((par5EntityLivingBase.rotationYaw * 4F) / 360F + 0.5D) & 3;
 		if (par5EntityLivingBase.isSneaking())
 			dir += 2;
 		if (dir % 2 == 0)
@@ -44,6 +43,7 @@ public class BlockStairs extends BlockScaffolding {
 		par1World.setBlockMetadataWithNotify(par2, par3, par4, dir, 2);
 	}
 
+	@Override
 	protected boolean placeScaffolding(World par1World, int x, int y, int z, ItemStack stack, ForgeDirection placeTarget, EntityPlayer par5EntityPlayer, int distance) {
 
 		if (distance > 5)

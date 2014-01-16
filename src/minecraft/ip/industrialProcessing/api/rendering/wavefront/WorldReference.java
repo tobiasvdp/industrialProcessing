@@ -5,8 +5,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.common.ForgeDirection;
-
 import org.lwjgl.util.vector.Vector3f;
 
 public class WorldReference {
@@ -86,7 +84,7 @@ public class WorldReference {
                 intermediate2[x] = brighnessLerp(intermediate[x][0], intermediate[x][1], intermediate[x][2], dy - 0.5f);
             }
 
-            return (int) brighnessLerp(intermediate2[0], intermediate2[1], intermediate2[2], dx);
+            return brighnessLerp(intermediate2[0], intermediate2[1], intermediate2[2], dx);
         } else {
             return neighborBrightness[1][1][1];
         }

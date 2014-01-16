@@ -1,20 +1,11 @@
 package ip.industrialProcessing.gui.guiContainer.layout.components;
 
-import java.awt.Point;
 import java.awt.Rectangle;
-import java.util.ArrayList;
-import java.util.Iterator;
-
-import buildcraft.core.gui.slots.SlotBase;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import ip.industrialProcessing.client.render.gui.ToolTip;
-import ip.industrialProcessing.gui.components.GuiLayoutPanel;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayout;
-import ip.industrialProcessing.gui.container.syncing.info.InfoHeat;
-import ip.industrialProcessing.gui.guiContainer.GuiContainerIP;
 import ip.industrialProcessing.gui.guiContainer.layout.GuiContainerLayout;
 import ip.industrialProcessing.items.guide.gui.machines.GuideMachinePage;
 import ip.industrialProcessing.recipes.Recipe;

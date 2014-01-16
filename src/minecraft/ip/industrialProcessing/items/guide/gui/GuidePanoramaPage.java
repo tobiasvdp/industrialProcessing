@@ -1,6 +1,5 @@
 package ip.industrialProcessing.items.guide.gui;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.INamepace;
 
 import java.awt.Point;

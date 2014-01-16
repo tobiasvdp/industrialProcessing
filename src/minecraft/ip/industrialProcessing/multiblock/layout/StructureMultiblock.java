@@ -2,7 +2,6 @@ package ip.industrialProcessing.multiblock.layout;
 
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
 
 public class StructureMultiblock {
 

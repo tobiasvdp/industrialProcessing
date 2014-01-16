@@ -7,7 +7,6 @@ import ip.industrialProcessing.config.ConfigTransportBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -53,7 +52,8 @@ public class BlockTransportFluidsWood extends BlockTransportFluids {
         return par1;
     }
 
-    public void getSubBlocks(int par1, net.minecraft.creativetab.CreativeTabs par2CreativeTabs, List par3List) { 
+    @Override
+	public void getSubBlocks(int par1, net.minecraft.creativetab.CreativeTabs par2CreativeTabs, List par3List) { 
         BlockModelUtils.getWoodSubBlocks(par1, par2CreativeTabs, par3List);
     };
 

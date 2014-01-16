@@ -3,14 +3,12 @@ package ip.industrialProcessing.power.plants;
 import java.util.Iterator;
 
 import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.machines.MachineFluidTank;
 import ip.industrialProcessing.machines.TileEntityFluidWorkerMachine;
 import ip.industrialProcessing.machines.animation.tanks.ITankSyncable;
 import ip.industrialProcessing.machines.animation.tanks.TankHandler;
 import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.transport.fluids.IPressuredTank;
-import ip.industrialProcessing.utils.FluidTransfers;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;

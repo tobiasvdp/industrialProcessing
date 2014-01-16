@@ -2,6 +2,7 @@ package ip.industrialProcessing.transport.steve.railway.suspension;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigTransportBlocks;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
@@ -13,7 +14,7 @@ public class BlockSuspension extends Block {
 		setHardness(1.0f);
 		setStepSound(Block.soundMetalFootstep);
 		setUnlocalizedName("BlockSuspension");
-		setCreativeTab(IndustrialProcessing.tabPower);
+		setCreativeTab(ISetupCreativeTabs.tabPower);
 	}
 
 	@Override

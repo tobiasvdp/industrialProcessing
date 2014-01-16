@@ -1,7 +1,6 @@
 package ip.industrialProcessing.transport.items.conveyorSorter;
 
 import net.minecraft.entity.player.InventoryPlayer;
-import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.machines.containers.ContainerMachine;
 import ip.industrialProcessing.machines.containers.gui.GuiContainerMachine;
 

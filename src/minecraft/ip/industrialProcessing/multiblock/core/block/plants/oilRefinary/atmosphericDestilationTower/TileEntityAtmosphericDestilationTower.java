@@ -4,9 +4,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
+import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
@@ -27,14 +26,14 @@ public class TileEntityAtmosphericDestilationTower extends TileEntityMultiblockC
 		structure = new StructureMultiblock();
 
 		LayoutMultiblock layout = new LayoutMultiblock(0, 0, 0, 0, 3, 0);
-		int tankPlating = IndustrialProcessing.blockTankPlating.blockID;
+		int tankPlating = ISetupMachineBlocks.blockTankPlating.blockID;
 
 		int i = 0;
-		layout.setCoreID(i++, 0, 1, IndustrialProcessing.blockAtmosphericDestilationTower.blockID);
+		layout.setCoreID(i++, 0, 1, ISetupMachineBlocks.blockAtmosphericDestilationTower.blockID);
 
-		layout.setBlockIDwithGroup(0, 1, 0, i++, 0, 0,2, IndustrialProcessing.blockDestilationTray.blockID);
-		layout.setBlockIDwithGroup(0, 2, 0, i++, 0, 0,3, IndustrialProcessing.blockDestilationTray.blockID);
-		layout.setBlockIDwithGroup(0, 3, 0, i++, 0, 0,4, IndustrialProcessing.blockDestilationTray.blockID);
+		layout.setBlockIDwithGroup(0, 1, 0, i++, 0, 0,2, ISetupMachineBlocks.blockDestilationTray.blockID);
+		layout.setBlockIDwithGroup(0, 2, 0, i++, 0, 0,3, ISetupMachineBlocks.blockDestilationTray.blockID);
+		layout.setBlockIDwithGroup(0, 3, 0, i++, 0, 0,4, ISetupMachineBlocks.blockDestilationTray.blockID);
 
 		structure.addLayout(layout, FacingDirection.North);
 		structure.addLayout(LayoutTransformer.transform(layout, FacingDirection.East), FacingDirection.East);

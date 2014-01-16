@@ -1,7 +1,5 @@
 package ip.industrialProcessing.multiblock.tier;
 
-import java.util.ArrayList;
-
 public class TierCollection {
 
 	private int size;

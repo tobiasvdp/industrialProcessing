@@ -1,6 +1,5 @@
 package ip.industrialProcessing.machines.containers;
 
-import ip.industrialProcessing.machines.TileEntityFluidWorkerMachine;
 import ip.industrialProcessing.utils.working.IWorker;
 
 import java.util.ArrayList;

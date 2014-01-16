@@ -1,8 +1,6 @@
 package ip.industrialProcessing.multiblock.recipes;
 
-import ip.industrialProcessing.multiblock.tier.Tier;
 import ip.industrialProcessing.multiblock.tier.Tiers;
-import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeInputSlot;
 import ip.industrialProcessing.recipes.RecipeSlotType;
 

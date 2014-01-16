@@ -2,10 +2,6 @@ package ip.industrialProcessing.machines.electrolyser;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import ip.industrialProcessing.machines.containers.ContainerPoweredFluidWorkerMachine;
-import ip.industrialProcessing.machines.mixer.TileEntityMixer;
-import ip.industrialProcessing.slots.SlotBase;
-import ip.industrialProcessing.slots.SlotLiquid;
-import ip.industrialProcessing.slots.SlotLiquidOutput;
 import ip.industrialProcessing.slots.SlotOutput;
 import ip.industrialProcessing.utils.containers.ContainerUtils;
 

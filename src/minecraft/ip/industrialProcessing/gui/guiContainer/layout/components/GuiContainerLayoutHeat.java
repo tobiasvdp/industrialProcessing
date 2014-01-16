@@ -2,8 +2,6 @@ package ip.industrialProcessing.gui.guiContainer.layout.components;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
-import java.util.Iterator;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.inventory.Container;
@@ -17,9 +15,7 @@ import ip.industrialProcessing.gui.container.syncing.handlers.IHandlerHeat;
 import ip.industrialProcessing.gui.container.syncing.info.InfoHeat;
 import ip.industrialProcessing.gui.guiContainer.GuiContainerIP;
 import ip.industrialProcessing.gui.guiContainer.layout.GuiContainerLayout;
-import ip.industrialProcessing.machines.containers.gui.PowerToolTip;
 import ip.industrialProcessing.recipes.Recipe;
-import ip.industrialProcessing.utils.handler.heat.IHeatStorage;
 
 public class GuiContainerLayoutHeat extends GuiContainerLayout {
 	private static Rectangle rectangleBar = new Rectangle(121, 203, 5, 35);

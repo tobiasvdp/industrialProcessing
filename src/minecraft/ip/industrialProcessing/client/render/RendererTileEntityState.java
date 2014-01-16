@@ -1,14 +1,10 @@
 package ip.industrialProcessing.client.render;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.rendering.RendererTileEntity;
+import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.machines.TileEntityMachine;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -39,7 +35,7 @@ public class RendererTileEntityState extends RendererTileEntity {
     		if (((TileEntityMachine)tl).isDummyBlock)
     			m = 1;
     	
-    	ResourceLocation tex = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN, "textures/render/" + name[m] + ".png");
+    	ResourceLocation tex = new ResourceLocation(INamepace.TEXTURE_DOMAIN, "textures/render/" + name[m] + ".png");
  		return tex;
      }
 

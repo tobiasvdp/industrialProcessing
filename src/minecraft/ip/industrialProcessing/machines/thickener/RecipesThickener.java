@@ -2,6 +2,7 @@ package ip.industrialProcessing.machines.thickener;
 
 import net.minecraftforge.fluids.FluidRegistry;
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.ISetupFluids;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeInputSlot;
@@ -51,8 +52,8 @@ public class RecipesThickener extends RecipesMachine {
 		Recipe recipe = new Recipe();
 		recipe.workRequired = i;
 		recipe.powerRequired = powerConsumption;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidMixedSludgeIron.getName()), RecipeSlotType.TANK, 1000) };
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidThickIronSludge.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidMixedSludgeIron.getName()), RecipeSlotType.TANK, 1000) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickIronSludge.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
 		return recipe;
 	}
 
@@ -60,8 +61,8 @@ public class RecipesThickener extends RecipesMachine {
 		Recipe recipe = new Recipe();
 		recipe.workRequired = i;
 		recipe.powerRequired = powerConsumption;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidMixedSludgeTin.getName()), RecipeSlotType.TANK, 1000) };
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidThickTinSludge.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidMixedSludgeTin.getName()), RecipeSlotType.TANK, 1000) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickTinSludge.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
 		return recipe;
 	}
 
@@ -69,8 +70,8 @@ public class RecipesThickener extends RecipesMachine {
 		Recipe recipe = new Recipe();
 		recipe.workRequired = i;
 		recipe.powerRequired = powerConsumption;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidMixedSludgeCopper.getName()), RecipeSlotType.TANK, 1000) };
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidThickCopperSludge.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidMixedSludgeCopper.getName()), RecipeSlotType.TANK, 1000) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickCopperSludge.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
 		return recipe;
 	}
 
@@ -78,8 +79,8 @@ public class RecipesThickener extends RecipesMachine {
 		Recipe recipe = new Recipe();
 		recipe.workRequired = i;
 		recipe.powerRequired = powerConsumption;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidMixedSludgeGold.getName()), RecipeSlotType.TANK, 1000) };
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidThickGoldSludge.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidMixedSludgeGold.getName()), RecipeSlotType.TANK, 1000) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickGoldSludge.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
 		return recipe;
 	}
 
@@ -87,8 +88,8 @@ public class RecipesThickener extends RecipesMachine {
 		Recipe recipe = new Recipe();
 		recipe.workRequired = i;
 		recipe.powerRequired = powerConsumption;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidMixedSludgeTalia.getName()), RecipeSlotType.TANK, 1000) };
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidThickTaliaSludge.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidMixedSludgeTalia.getName()), RecipeSlotType.TANK, 1000) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickTaliaSludge.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
 		return recipe;
 	}
 
@@ -96,8 +97,8 @@ public class RecipesThickener extends RecipesMachine {
 		Recipe recipe = new Recipe();
 		recipe.workRequired = i;
 		recipe.powerRequired = powerConsumption;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidMixedSludgeChromite.getName()), RecipeSlotType.TANK, 1000) };
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidThickChromiteSludge.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidMixedSludgeChromite.getName()), RecipeSlotType.TANK, 1000) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickChromiteSludge.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
 		return recipe;
 	}
 
@@ -105,8 +106,8 @@ public class RecipesThickener extends RecipesMachine {
 		Recipe recipe = new Recipe();
 		recipe.workRequired = i;
 		recipe.powerRequired = powerConsumption;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidMixedSludgeGalena.getName()), RecipeSlotType.TANK, 1000) };
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidThickGalenaSludge.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidMixedSludgeGalena.getName()), RecipeSlotType.TANK, 1000) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickGalenaSludge.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
 		return recipe;
 	}
 
@@ -114,8 +115,8 @@ public class RecipesThickener extends RecipesMachine {
 		Recipe recipe = new Recipe();
 		recipe.workRequired = i;
 		recipe.powerRequired = powerConsumption;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidConcentratedIronSludge.getName()), RecipeSlotType.TANK, 1000) };
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidThickIronSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidConcentratedIronSludge.getName()), RecipeSlotType.TANK, 1000) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickIronSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
 		return recipe;
 	}
 
@@ -123,8 +124,8 @@ public class RecipesThickener extends RecipesMachine {
 		Recipe recipe = new Recipe();
 		recipe.workRequired = i;
 		recipe.powerRequired = powerConsumption;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidConcentratedTinSludge.getName()), RecipeSlotType.TANK, 1000) };
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidThickTinSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidConcentratedTinSludge.getName()), RecipeSlotType.TANK, 1000) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickTinSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
 		return recipe;
 	}
 
@@ -132,8 +133,8 @@ public class RecipesThickener extends RecipesMachine {
 		Recipe recipe = new Recipe();
 		recipe.workRequired = i;
 		recipe.powerRequired = powerConsumption;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidConcentratedCopperSludge.getName()), RecipeSlotType.TANK, 1000) };
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidThickCopperSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidConcentratedCopperSludge.getName()), RecipeSlotType.TANK, 1000) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickCopperSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
 		return recipe;
 	}
 
@@ -141,8 +142,8 @@ public class RecipesThickener extends RecipesMachine {
 		Recipe recipe = new Recipe();
 		recipe.workRequired = i;
 		recipe.powerRequired = powerConsumption;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidConcentratedGoldSludge.getName()), RecipeSlotType.TANK, 1000) };
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidThickGoldSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidConcentratedGoldSludge.getName()), RecipeSlotType.TANK, 1000) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickGoldSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
 		return recipe;
 	}
 
@@ -150,8 +151,8 @@ public class RecipesThickener extends RecipesMachine {
 		Recipe recipe = new Recipe();
 		recipe.workRequired = i;
 		recipe.powerRequired = powerConsumption;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidConcentratedGalenaSludge.getName()), RecipeSlotType.TANK, 1000) };
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidThickGalenaSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidConcentratedGalenaSludge.getName()), RecipeSlotType.TANK, 1000) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickGalenaSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
 		return recipe;
 	}
 
@@ -159,8 +160,8 @@ public class RecipesThickener extends RecipesMachine {
 		Recipe recipe = new Recipe();
 		recipe.workRequired = i;
 		recipe.powerRequired = powerConsumption;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidConcentratedChromiteSludge.getName()), RecipeSlotType.TANK, 1000) };
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidThickChromiteSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidConcentratedChromiteSludge.getName()), RecipeSlotType.TANK, 1000) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickChromiteSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
 		return recipe;
 	}
 
@@ -168,8 +169,8 @@ public class RecipesThickener extends RecipesMachine {
 		Recipe recipe = new Recipe();
 		recipe.workRequired = i;
 		recipe.powerRequired = powerConsumption;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidConcentratedTaliaSludge.getName()), RecipeSlotType.TANK, 1000) };
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidThickTaliaSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidConcentratedTaliaSludge.getName()), RecipeSlotType.TANK, 1000) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickTaliaSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
 		return recipe;
 	}
 
@@ -177,8 +178,8 @@ public class RecipesThickener extends RecipesMachine {
 		Recipe recipe = new Recipe();
 		recipe.workRequired = i;
 		recipe.powerRequired = powerConsumption;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidCycloneIronSediment.getName()), RecipeSlotType.TANK, 1000) };
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidLightIronSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidCycloneIronSediment.getName()), RecipeSlotType.TANK, 1000) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidLightIronSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
 		return recipe;
 	}
 
@@ -186,8 +187,8 @@ public class RecipesThickener extends RecipesMachine {
 		Recipe recipe = new Recipe();
 		recipe.workRequired = i;
 		recipe.powerRequired = powerConsumption;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidCycloneTinSediment.getName()), RecipeSlotType.TANK, 1000) };
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidLightTinSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidCycloneTinSediment.getName()), RecipeSlotType.TANK, 1000) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidLightTinSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
 		return recipe;
 	}
 
@@ -195,8 +196,8 @@ public class RecipesThickener extends RecipesMachine {
 		Recipe recipe = new Recipe();
 		recipe.workRequired = i;
 		recipe.powerRequired = powerConsumption;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidCycloneCopperSediment.getName()), RecipeSlotType.TANK, 1000) };
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidLightCopperSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidCycloneCopperSediment.getName()), RecipeSlotType.TANK, 1000) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidLightCopperSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
 		return recipe;
 	}
 
@@ -204,8 +205,8 @@ public class RecipesThickener extends RecipesMachine {
 		Recipe recipe = new Recipe();
 		recipe.workRequired = i;
 		recipe.powerRequired = powerConsumption;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidCycloneGoldSediment.getName()), RecipeSlotType.TANK, 1000) };
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidLightGoldSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidCycloneGoldSediment.getName()), RecipeSlotType.TANK, 1000) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidLightGoldSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
 		return recipe;
 	}
 
@@ -213,8 +214,8 @@ public class RecipesThickener extends RecipesMachine {
 		Recipe recipe = new Recipe();
 		recipe.workRequired = i;
 		recipe.powerRequired = powerConsumption;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidCycloneGalenaSediment.getName()), RecipeSlotType.TANK, 1000) };
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidLightGalenaSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidCycloneGalenaSediment.getName()), RecipeSlotType.TANK, 1000) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidLightGalenaSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
 		return recipe;
 	}
 
@@ -222,8 +223,8 @@ public class RecipesThickener extends RecipesMachine {
 		Recipe recipe = new Recipe();
 		recipe.workRequired = i;
 		recipe.powerRequired = powerConsumption;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidCycloneChromiteSediment.getName()), RecipeSlotType.TANK, 1000) };
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidLightChromiteSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidCycloneChromiteSediment.getName()), RecipeSlotType.TANK, 1000) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidLightChromiteSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
 		return recipe;
 	}
 
@@ -231,8 +232,8 @@ public class RecipesThickener extends RecipesMachine {
 		Recipe recipe = new Recipe();
 		recipe.workRequired = i;
 		recipe.powerRequired = powerConsumption;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidCycloneTaliaSediment.getName()), RecipeSlotType.TANK, 1000) };
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidLightTaliaSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidCycloneTaliaSediment.getName()), RecipeSlotType.TANK, 1000) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidLightTaliaSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
 		return recipe;
 	}
 
@@ -240,8 +241,8 @@ public class RecipesThickener extends RecipesMachine {
 		Recipe recipe = new Recipe();
 		recipe.workRequired = i;
 		recipe.powerRequired = powerConsumption;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidFlotationIronSediment.getName()), RecipeSlotType.TANK, 1000) };
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidPasteIronSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidFlotationIronSediment.getName()), RecipeSlotType.TANK, 1000) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidPasteIronSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
 		return recipe;
 	}
 
@@ -249,8 +250,8 @@ public class RecipesThickener extends RecipesMachine {
 		Recipe recipe = new Recipe();
 		recipe.workRequired = i;
 		recipe.powerRequired = powerConsumption;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidFlotationTinSediment.getName()), RecipeSlotType.TANK, 1000) };
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidPasteTinSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidFlotationTinSediment.getName()), RecipeSlotType.TANK, 1000) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidPasteTinSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
 		return recipe;
 	}
 
@@ -258,8 +259,8 @@ public class RecipesThickener extends RecipesMachine {
 		Recipe recipe = new Recipe();
 		recipe.workRequired = i;
 		recipe.powerRequired = powerConsumption;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidFlotationCopperSediment.getName()), RecipeSlotType.TANK, 1000) };
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidPasteCopperSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidFlotationCopperSediment.getName()), RecipeSlotType.TANK, 1000) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidPasteCopperSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
 		return recipe;
 	}
 
@@ -267,8 +268,8 @@ public class RecipesThickener extends RecipesMachine {
 		Recipe recipe = new Recipe();
 		recipe.workRequired = i;
 		recipe.powerRequired = powerConsumption;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidFlotationGoldSediment.getName()), RecipeSlotType.TANK, 1000) };
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidPasteGoldSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidFlotationGoldSediment.getName()), RecipeSlotType.TANK, 1000) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidPasteGoldSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
 		return recipe;
 	}
 
@@ -276,8 +277,8 @@ public class RecipesThickener extends RecipesMachine {
 		Recipe recipe = new Recipe();
 		recipe.workRequired = i;
 		recipe.powerRequired = powerConsumption;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidFlotationGalenaSediment.getName()), RecipeSlotType.TANK, 1000) };
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidPasteGalenaSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidFlotationGalenaSediment.getName()), RecipeSlotType.TANK, 1000) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidPasteGalenaSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
 		return recipe;
 	}
 
@@ -285,8 +286,8 @@ public class RecipesThickener extends RecipesMachine {
 		Recipe recipe = new Recipe();
 		recipe.workRequired = i;
 		recipe.powerRequired = powerConsumption;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidFlotationChromiteSediment.getName()), RecipeSlotType.TANK, 1000) };
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidPasteChromiteSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidFlotationChromiteSediment.getName()), RecipeSlotType.TANK, 1000) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidPasteChromiteSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
 		return recipe;
 	}
 
@@ -294,8 +295,8 @@ public class RecipesThickener extends RecipesMachine {
 		Recipe recipe = new Recipe();
 		recipe.workRequired = i;
 		recipe.powerRequired = powerConsumption;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidFlotationTaliaSediment.getName()), RecipeSlotType.TANK, 1000) };
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidPasteTaliaSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidFlotationTaliaSediment.getName()), RecipeSlotType.TANK, 1000) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidPasteTaliaSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 500, 500, 0.5) };
 		return recipe;
 	}
 

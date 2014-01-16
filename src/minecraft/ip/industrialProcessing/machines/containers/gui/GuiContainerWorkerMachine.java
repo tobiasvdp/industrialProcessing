@@ -6,10 +6,7 @@ import org.lwjgl.util.Point;
 import ip.industrialProcessing.machines.TileEntityWorkerMachine;
 import ip.industrialProcessing.machines.containers.ContainerWorkerMachine;
 import ip.industrialProcessing.machines.containers.ProgressInfoWorker;
-import ip.industrialProcessing.utils.working.IWorker;
-import ip.industrialProcessing.utils.working.IWorkingEntity;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraftforge.common.ForgeDirection;
 
 public class GuiContainerWorkerMachine extends GuiContainerMachine {
 

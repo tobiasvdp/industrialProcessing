@@ -7,14 +7,14 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 
 public class BlockInsulator extends BlockMachineRendered implements IRecipeBlock {
     public BlockInsulator() {
-	super(ConfigMachineBlocks.getInsulatorBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Insulator", IndustrialProcessing.tabOreProcessing);
+	super(ConfigMachineBlocks.getInsulatorBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Insulator", ISetupCreativeTabs.tabOreProcessing);
     }
 
     @Override

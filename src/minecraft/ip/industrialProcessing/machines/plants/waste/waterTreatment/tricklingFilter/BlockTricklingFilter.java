@@ -4,16 +4,14 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
-import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.gui.GuiLayout;
 import ip.industrialProcessing.gui.IGuiLayout;
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 import ip.industrialProcessing.utils.IDescriptionBlock;
 
@@ -29,7 +27,7 @@ public class BlockTricklingFilter extends BlockMachineRendered  implements IReci
 		guiLayout.addLayoutPanel(GuiLayoutPanelType.power);
 	}
     public BlockTricklingFilter() {
-	super(ConfigMachineBlocks.getTricklingFilterID(), Material.iron, 1F, Block.soundMetalFootstep, "TricklingFilter", IndustrialProcessing.tabOreProcessing);
+	super(ConfigMachineBlocks.getTricklingFilterID(), Material.iron, 1F, Block.soundMetalFootstep, "TricklingFilter", ISetupCreativeTabs.tabOreProcessing);
     }
 
     @Override

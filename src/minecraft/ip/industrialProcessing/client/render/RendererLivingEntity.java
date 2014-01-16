@@ -1,17 +1,10 @@
 package ip.industrialProcessing.client.render;
 
-import java.lang.ProcessBuilder.Redirect;
-
-import org.lwjgl.opengl.GL11;
-
-import ip.industrialProcessing.IndustrialProcessing;
-import net.minecraft.client.Minecraft;
+import ip.industrialProcessing.config.INamepace;
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.renderer.entity.RenderEntity;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 
 public class RendererLivingEntity extends RenderLiving{
@@ -20,7 +13,7 @@ public class RendererLivingEntity extends RenderLiving{
 	private float par;
 	public RendererLivingEntity(ModelBase model, float par, String texture) {
 		super(model, par);
-		this.texture = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN, "textures/render/"+ texture +".png");
+		this.texture = new ResourceLocation(INamepace.TEXTURE_DOMAIN, "textures/render/"+ texture +".png");
 		this.model = (ModelingMultiblock) model;
 		this.par = par;
 	}

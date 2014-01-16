@@ -1,6 +1,7 @@
 package ip.industrialProcessing.subMod.logic.transport.wired.displayBox;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.subMod.logic.IPLogic;
 import ip.industrialProcessing.subMod.logic.config.ConfigLogic;
 import ip.industrialProcessing.subMod.logic.transport.ICommunicationNode;
@@ -22,7 +23,7 @@ public class BLlogicDisplayBox extends BlockContainer {
 		setStepSound(Block.soundMetalFootstep);
 		setUnlocalizedName("BLlogicDisplayBox");
 		setCreativeTab(IPLogic.tabLogic);
-		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "inputTop");
+		func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "inputTop");
 	}
 
 	@Override

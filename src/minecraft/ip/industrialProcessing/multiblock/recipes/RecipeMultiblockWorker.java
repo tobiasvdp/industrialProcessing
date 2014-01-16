@@ -3,12 +3,10 @@ package ip.industrialProcessing.multiblock.recipes;
 import java.util.Iterator;
 import java.util.Random;
 
-import ip.industrialProcessing.recipes.IRecipeWorkHandler;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeInputSlot;
 import ip.industrialProcessing.recipes.RecipeOutputSlot;
 import ip.industrialProcessing.recipes.RecipeSlotType;
-import ip.industrialProcessing.recipes.RecipeWorker;
 import ip.industrialProcessing.utils.working.ServerWorker;
 
 public class RecipeMultiblockWorker extends ServerWorker {

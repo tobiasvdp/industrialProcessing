@@ -10,12 +10,10 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import ip.industrialProcessing.gui.components.GuiLayoutPanel;
-import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayout;
 import ip.industrialProcessing.gui.container.slot.layout.components.SlotType;
 import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerDrawRectagle;
 import ip.industrialProcessing.recipes.Recipe;
-import ip.industrialProcessing.slots.SlotBase;
 
 public class GuiContainerLayout {
 	public static Rectangle[] slotLocations = new Rectangle[]{new Rectangle(0,238,18,18),new Rectangle(0,220,18,18),new Rectangle(0,202,18,18)};

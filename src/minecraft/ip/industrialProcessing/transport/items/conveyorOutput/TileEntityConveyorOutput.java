@@ -6,7 +6,6 @@ import ip.industrialProcessing.transport.items.conveyorBelt.ConnectionMode;
 import ip.industrialProcessing.transport.items.conveyorBelt.MovingItemStack;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorInventoryBase;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 

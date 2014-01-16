@@ -23,6 +23,7 @@ public class InfoMachine implements IExpirable {
 		ttl = 20;
 	}
 
+	@Override
 	public boolean tick() {
 		boolean tick = false;
 		if (ttl > 0) {
@@ -44,6 +45,7 @@ public class InfoMachine implements IExpirable {
 		return tick;
 	}
 
+	@Override
 	public boolean isExpired() {
 		if (this.ttl > 0)
 			return false;

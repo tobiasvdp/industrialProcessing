@@ -7,13 +7,13 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.power.BlockPowerGenerator;
-import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
 
 public class BlockBuildcraftGenerator extends BlockPowerGenerator {
 
     public BlockBuildcraftGenerator() {
-	super(ConfigMachineBlocks.getBuildcraftGeneratorBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Buildcraft Generator", IndustrialProcessing.tabPower);
+	super(ConfigMachineBlocks.getBuildcraftGeneratorBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Buildcraft Generator", ISetupCreativeTabs.tabPower);
     }
 
     @Override

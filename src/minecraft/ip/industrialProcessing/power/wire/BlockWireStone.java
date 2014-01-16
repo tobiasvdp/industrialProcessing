@@ -2,13 +2,11 @@ package ip.industrialProcessing.power.wire;
 
 import java.util.List;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.rendering.BlockModelUtils;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -20,7 +18,8 @@ public class BlockWireStone extends BlockWire {
     }
 
 
-    public void getSubBlocks(int par1, net.minecraft.creativetab.CreativeTabs par2CreativeTabs, List par3List) {
+    @Override
+	public void getSubBlocks(int par1, net.minecraft.creativetab.CreativeTabs par2CreativeTabs, List par3List) {
         BlockModelUtils.getStoneSubBlocks(par1, par2CreativeTabs, par3List);
     }
 

@@ -1,7 +1,6 @@
 package ip.industrialProcessing.machines.insulator;
 
 import ip.industrialProcessing.machines.containers.gui.GuiContainerPoweredFluidWorkerMachine;
-import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import net.minecraft.entity.player.InventoryPlayer;
 
 import org.lwjgl.util.Point;

@@ -1,12 +1,7 @@
 package ip.industrialProcessing.power.storage;
 
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.tileentity.TileEntity;
-import ip.industrialProcessing.machines.containers.ContainerMachine;
 import ip.industrialProcessing.machines.containers.gui.GuiContainerMachine;
-import ip.industrialProcessing.power.GeneratorProgress;
-import ip.industrialProcessing.power.plants.ContainerSolidBurner;
-import ip.industrialProcessing.power.plants.TileEntitySolidBurner;
 
 public class GuiContainerEnergyCell extends GuiContainerMachine {
 

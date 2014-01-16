@@ -2,14 +2,11 @@ package ip.industrialProcessing.machines.plants.metalProcessing.sandCaster;
 
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
-import ip.industrialProcessing.machines.plants.metalProcessing.turretLathe.RecipesTurretLathe;
 import ip.industrialProcessing.recipes.Recipe;
 
 import java.util.Iterator;
 
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidStack;
 
 public class TileEntitySandCaster extends TileEntityPoweredFluidWorkerMachine {
 

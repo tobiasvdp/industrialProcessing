@@ -1,14 +1,8 @@
 package ip.industrialProcessing.gui.container.syncing.handlers;
 
-import ip.industrialProcessing.api.tanks.IIPfluidTank;
 import ip.industrialProcessing.api.tanks.IPfluidTank;
-import ip.industrialProcessing.api.tanks.ITank;
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.syncing.info.InfoTank;
-import ip.industrialProcessing.machines.TileEntityFluidMachine;
-import ip.industrialProcessing.machines.containers.ProgressBarHandlerInfo;
-import ip.industrialProcessing.machines.containers.ProgressInfoTank;
-import net.minecraftforge.fluids.FluidTankInfo;
 
 public class HandlerTank implements IHandlerTank {
     private IPfluidTank tank;

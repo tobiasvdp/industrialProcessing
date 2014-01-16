@@ -7,7 +7,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
-import ip.industrialProcessing.machines.MachineItemStack;
 import ip.industrialProcessing.power.IPowerAcceptor;
 
 public class PowerDistributor {

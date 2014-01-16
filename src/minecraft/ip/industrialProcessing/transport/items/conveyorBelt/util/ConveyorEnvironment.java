@@ -1,7 +1,5 @@
 package ip.industrialProcessing.transport.items.conveyorBelt.util;
 
-import javax.swing.tree.DefaultTreeCellEditor.EditorContainer;
-
 import ip.industrialProcessing.transport.items.conveyorBelt.ConnectionMode;
 import ip.industrialProcessing.transport.items.conveyorBelt.SlopeState;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorConnectionsBase;

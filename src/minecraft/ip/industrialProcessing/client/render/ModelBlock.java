@@ -4,7 +4,6 @@ import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
 import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.world.IBlockAccess;
 
 public abstract class ModelBlock extends ModelBase {
 

@@ -9,8 +9,6 @@ import ip.industrialProcessing.gui.container.syncing.handlers.IHandlerPower;
 import ip.industrialProcessing.gui.container.syncing.info.InfoPower;
 import ip.industrialProcessing.gui.guiContainer.GuiContainerIP;
 import ip.industrialProcessing.gui.guiContainer.layout.GuiContainerLayout;
-import ip.industrialProcessing.machines.containers.ContainerPoweredWorkerMachine;
-import ip.industrialProcessing.machines.containers.ProgressInfoPower;
 import ip.industrialProcessing.machines.containers.gui.PowerToolTip;
 
 import java.awt.Rectangle;

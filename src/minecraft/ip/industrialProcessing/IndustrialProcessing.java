@@ -21,8 +21,6 @@ import ip.industrialProcessing.config.ISetupTransportBlocks;
 import ip.industrialProcessing.decoration.trees.EventBonemealIndustrialTree;
 import ip.industrialProcessing.fluids.BucketHandler;
 import ip.industrialProcessing.fluids.ContainerHandler;
-import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
-import ip.industrialProcessing.gui.container.slot.layout.components.SlotLayoutInput;
 import ip.industrialProcessing.multiblock.dummy.block.frame.ENmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.ENmultiblockLiftDoor;
 import ip.industrialProcessing.utils.EventEntityRightClick;

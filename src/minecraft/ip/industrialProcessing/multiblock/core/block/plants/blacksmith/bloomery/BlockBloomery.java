@@ -2,26 +2,23 @@ package ip.industrialProcessing.multiblock.core.block.plants.blacksmith.bloomery
 
 import java.util.Random;
 
-import ic2.api.item.Items;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
+import ip.industrialProcessing.config.ISetupItems;
 import ip.industrialProcessing.gui.GuiLayout;
-import ip.industrialProcessing.gui.IGuiLayout;
 import ip.industrialProcessing.gui.IGuiLayoutMultiblock;
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
-import ip.industrialProcessing.machines.BlockMachineRendered;
-import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.multiblock.core.BlockMultiblockCore;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
 import ip.industrialProcessing.multiblock.recipes.IRecipeMultiblock;
 import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.multiblock.tier.Tiers;
-import ip.industrialProcessing.recipes.IRecipeBlock;
 import ip.industrialProcessing.utils.IDescriptionBlock;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
@@ -55,7 +52,7 @@ public class BlockBloomery extends BlockMultiblockCore implements IRecipeMultibl
 	private Icon[] icons = new Icon[1];
 
 	public BlockBloomery() {
-		super(ConfigMachineBlocks.getBlockBloomeryID(), "BlockBloomery", IndustrialProcessing.tabMultiblocks);
+		super(ConfigMachineBlocks.getBlockBloomeryID(), "BlockBloomery", ISetupCreativeTabs.tabMultiblocks);
 		this.setTickRandomly(true);
 	}
 
@@ -78,17 +75,17 @@ public class BlockBloomery extends BlockMultiblockCore implements IRecipeMultibl
 
 	@Override
 	public void registerIcons(IconRegister par1IconRegister) {
-		icons[0] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "Bloomery");
+		icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Bloomery");
 	}
 
 	@Override
 	public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random) {
 		TileEntityBloomery te = (TileEntityBloomery) par1World.getBlockTileEntity(par2, par3, par4);
 		if (te.getHeat() > 1538) {
-			double d0 = (double) ((float) par2 + 0.5F);
-			double d1 = (double) ((float) par3 + 0.1F);
-			double b1 = (double) ((float) par3 + 0.8F);
-			double d2 = (double) ((float) par4 + 0.5F);
+			double d0 = par2 + 0.5F;
+			double d1 = par3 + 0.1F;
+			double b1 = par3 + 0.8F;
+			double d2 = par4 + 0.5F;
 			par1World.spawnParticle("smoke", d0, b1, d2, 0.0D, 0.0D, 0.0D);
 			par1World.spawnParticle("smoke", d0 - 0.1f, b1, d2, 0.0D, 0.0D, 0.0D);
 			par1World.spawnParticle("smoke", d0 + 0.1f, b1, d2, 0.0D, 0.0D, 0.0D);
@@ -125,7 +122,7 @@ public class BlockBloomery extends BlockMultiblockCore implements IRecipeMultibl
 	@Override
 	public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
 		Random rand = new Random();
-		ItemStack[] items = new ItemStack[] {new ItemStack(Item.brick,3),new ItemStack(Block.sand,2),new ItemStack(IndustrialProcessing.itemHardenedSandDust),new ItemStack(Block.cobblestone)};
+		ItemStack[] items = new ItemStack[] {new ItemStack(Item.brick,3),new ItemStack(Block.sand,2),new ItemStack(ISetupItems.itemHardenedSandDust),new ItemStack(Block.cobblestone)};
 		for (int i = 0; i < items.length; i++) {
 			ItemStack item = items[i];
 			if (item != null && item.stackSize > 0) {

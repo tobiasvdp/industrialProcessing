@@ -1,31 +1,20 @@
 package ip.industrialProcessing.transport.fluids;
 
-import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.Icon;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidTankInfo;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.ConfigTransportBlocks;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.transport.BlockTransport;
 
 public class BlockTransportFluids extends BlockTransport {
@@ -35,7 +24,7 @@ public class BlockTransportFluids extends BlockTransport {
     }
 
     protected BlockTransportFluids(int id, Material material, StepSound sound, String name) {
-        super(id, material, 1F, sound, name, IndustrialProcessing.tabFluid);
+        super(id, material, 1F, sound, name, ISetupCreativeTabs.tabFluid);
     }
 
     @Override
@@ -95,7 +84,7 @@ public class BlockTransportFluids extends BlockTransport {
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
         for (int i = 0; i < 16; i++) {
-            icon[i] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "pipe" + i);
+            icon[i] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "pipe" + i);
         }
     }
 

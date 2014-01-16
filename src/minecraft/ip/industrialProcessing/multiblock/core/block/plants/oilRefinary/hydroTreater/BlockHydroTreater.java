@@ -5,11 +5,12 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.multiblock.core.BlockMultiblockCore;
 
 public class BlockHydroTreater extends BlockMultiblockCore{
 public BlockHydroTreater(){
-	super(ConfigMachineBlocks.getBlockHydroTreaterID(), "BlockHydroTreater", IndustrialProcessing.tabMultiblocks);
+	super(ConfigMachineBlocks.getBlockHydroTreaterID(), "BlockHydroTreater", ISetupCreativeTabs.tabMultiblocks);
 }
 
 @Override

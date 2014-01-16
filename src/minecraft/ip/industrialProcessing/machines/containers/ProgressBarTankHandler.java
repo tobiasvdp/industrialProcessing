@@ -1,8 +1,6 @@
 package ip.industrialProcessing.machines.containers;
 
-import ip.industrialProcessing.machines.TileEntityFluidMachine;
 import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidContainerItem;
 
 public class ProgressBarTankHandler implements IProgressBarHandler {
 

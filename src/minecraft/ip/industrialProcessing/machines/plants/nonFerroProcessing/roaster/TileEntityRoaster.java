@@ -2,7 +2,6 @@ package ip.industrialProcessing.machines.plants.nonFerroProcessing.roaster;
 
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
-import ip.industrialProcessing.machines.plants.metalProcessing.extruder.RecipesExtruder;
 import ip.industrialProcessing.recipes.Recipe;
 
 import java.util.Iterator;

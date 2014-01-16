@@ -2,17 +2,13 @@ package ip.industrialProcessing.multiblock.gui;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.client.render.gui.ToolTip;
+import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.gui.container.syncing.info.InfoTank;
 import ip.industrialProcessing.gui.container.syncing.info.InfoWorker;
-import ip.industrialProcessing.machines.containers.ProgressInfoTank;
-import ip.industrialProcessing.machines.containers.ProgressInfoWorker;
 import ip.industrialProcessing.multiblock.container.ContainerMultiblock;
 import ip.industrialProcessing.multiblock.container.ContainerMultiblockTank;
 import ip.industrialProcessing.multiblock.container.ContainerMultiblockTankWorker;
-import ip.industrialProcessing.multiblock.container.ContainerMultiblockTankWorkerPowered;
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
-import ip.industrialProcessing.multiblock.core.block.plants.blacksmith.bloomery.ContainerBloomery;
-import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorker;
 import ip.industrialProcessing.multiblock.tier.Tiers;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -45,7 +41,7 @@ public class GUImultiblock extends GuiContainer {
 	this.container = cTmultiblock;
 	this.tileEntity = tileEntity;
 	this.name = name;
-	this.textureLocation = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN, textureLocation);
+	this.textureLocation = new ResourceLocation(INamepace.TEXTURE_DOMAIN, textureLocation);
 	xSize = 198;
 	ySize = 166;
     }
@@ -55,7 +51,7 @@ public class GUImultiblock extends GuiContainer {
     	this.container = cTmultiblock;
     	this.tileEntity = tileEntity;
     	this.name = name;
-    	this.textureLocation = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN, textureLocation+tier.ordinal()+".png");
+    	this.textureLocation = new ResourceLocation(INamepace.TEXTURE_DOMAIN, textureLocation+tier.ordinal()+".png");
     	xSize = 198;
     	ySize = 166;
 	}
@@ -108,7 +104,7 @@ public class GUImultiblock extends GuiContainer {
 	if (width > 0 && max > 0) {
 	    int x0 = (this.width - xSize) / 2;
 	    int y0 = (this.height - ySize) / 2;
-	    int scaled = Math.min(width, (int) (width * value / max));
+	    int scaled = Math.min(width, width * value / max);
 	    if (scaled > 0) {
 		if (invert) {
 		    this.drawTexturedModalRect(x + x0 + width - scaled, y + y0, sourceX + width - scaled, sourceY, scaled, height);
@@ -124,7 +120,7 @@ public class GUImultiblock extends GuiContainer {
 	if (width > 0 && max > 0) {
 	    int x0 = (this.width - xSize) / 2;
 	    int y0 = (this.height - ySize) / 2;
-	    int scaled = Math.min(height, (int) (height * value / max));
+	    int scaled = Math.min(height, height * value / max);
 	    if (scaled > 0) {
 		if (invert) {
 		    this.drawTexturedModalRect(x + x0, y + y0, sourceX, sourceY, width, scaled);

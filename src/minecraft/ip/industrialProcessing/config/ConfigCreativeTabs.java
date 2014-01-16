@@ -19,7 +19,7 @@ public class ConfigCreativeTabs {
 		LanguageRegistry.instance().addStringLocalization("IP.itemGroup.tabFluid", "en_US", "IP Fluids");
 		((CreativeTabsIP) ISetupCreativeTabs.tabFluid).setIcon(new ItemStack(ISetupMachineBlocks.blockManometer));
 		LanguageRegistry.instance().addStringLocalization("IP.itemGroup.tabMachineParts", "en_US", "IP machine parts");
-		((CreativeTabsIP) ISetupCreativeTabs.tabMachineParts).setIcon(new ItemStack(IndustrialProcessing.blockMachineBlock));
+		((CreativeTabsIP) ISetupCreativeTabs.tabMachineParts).setIcon(new ItemStack(ISetupBlocks.blockMachineBlock));
 	}
 	
 	public ConfigCreativeTabs() {

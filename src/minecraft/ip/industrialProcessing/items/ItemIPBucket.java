@@ -3,15 +3,11 @@ package ip.industrialProcessing.items;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.fluids.BlockFluid;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 import ip.industrialProcessing.fluids.BucketHandler;
-import ip.industrialProcessing.utils.FluidTransfers;
-import ip.industrialProcessing.utils.ItemTransfers;
 
 public class ItemIPBucket extends ItemBucket {
 

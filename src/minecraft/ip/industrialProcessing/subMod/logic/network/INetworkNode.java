@@ -1,6 +1,5 @@
 package ip.industrialProcessing.subMod.logic.network;
 
-import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.subMod.logic.transport.ICommunicationNode;
 import ip.industrialProcessing.subMod.logic.utils.UTVariable;
 

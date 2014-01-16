@@ -1,13 +1,8 @@
 package ip.industrialProcessing.multiblock.core.block.plants.storage.container;
 
 import ip.industrialProcessing.multiblock.container.ContainerMultiblockInv;
-import ip.industrialProcessing.multiblock.container.ContainerMultiblockTankWorker;
-import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreInv;
-import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorker;
-import ip.industrialProcessing.multiblock.tier.Tiers;
 import ip.industrialProcessing.slots.SlotBase;
-import ip.industrialProcessing.slots.SlotOutput;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 

@@ -8,13 +8,8 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.machines.BlockMachineRendered;
-import ip.industrialProcessing.subMod.logic.config.ConfigLogic;
-import ip.industrialProcessing.subMod.logic.utils.UTVariable;
-import ip.industrialProcessing.subMod.logic.utils.UTVariableType;
 import ip.industrialProcessing.utils.rotation.ISidedRotation;
 
 public abstract class blockLogic extends BlockMachineRendered{

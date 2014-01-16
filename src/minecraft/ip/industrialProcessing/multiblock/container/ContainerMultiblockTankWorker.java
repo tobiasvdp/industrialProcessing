@@ -6,11 +6,6 @@ import net.minecraft.entity.player.InventoryPlayer;
 import ip.industrialProcessing.gui.container.syncing.handlers.HandlerWorker;
 import ip.industrialProcessing.gui.container.syncing.handlers.IHandlerWorker;
 import ip.industrialProcessing.gui.container.syncing.info.InfoWorker;
-import ip.industrialProcessing.machines.containers.IProgressBarHandler;
-import ip.industrialProcessing.machines.containers.ProgressBarHandlerInfo;
-import ip.industrialProcessing.machines.containers.ProgressBarWorkerHandler;
-import ip.industrialProcessing.machines.containers.ProgressInfoWorker;
-import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTank;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorker;
 import ip.industrialProcessing.utils.working.IWorker;
 

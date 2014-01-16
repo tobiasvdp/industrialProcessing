@@ -1,19 +1,11 @@
 package ip.industrialProcessing.multiblock.core.block.plants.blacksmith.bloomery;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.util.Iterator;
 
-import cpw.mods.fml.common.network.PacketDispatcher;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.packet.Packet250CustomPayload;
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.multiblock.core.block.weldingStation.RecipesWeldingStation;
-import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreInv;
+import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorker;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
@@ -24,12 +16,9 @@ import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.multiblock.tier.Tier;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
-import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.utils.IBreakable;
 import ip.industrialProcessing.utils.handler.heat.HeatStorage;
 import ip.industrialProcessing.utils.handler.heat.IHeatStorage;
-import ip.industrialProcessing.utils.handler.packets.PacketHandler;
-import ip.industrialProcessing.utils.inventories.InventoryUtils;
 
 public class TileEntityBloomery extends TileEntityMultiblockCoreTankWorker implements IHeatStorage, IBreakable {
 	static StructureMultiblock structure;
@@ -42,10 +31,10 @@ public class TileEntityBloomery extends TileEntityMultiblockCoreTankWorker imple
 		LayoutMultiblock layout = new LayoutMultiblock(0, 1, 0, 0, 1, 0);
 
 		int i = 0;
-		layout.setCoreID(i++, 0, 1, IndustrialProcessing.blockBloomery.blockID);
+		layout.setCoreID(i++, 0, 1, ISetupMachineBlocks.blockBloomery.blockID);
 
-		layout.setBlockID(1, 0, 0, i++, 0, 0, IndustrialProcessing.blockBellows.blockID);
-		layout.setBlockID(0, 1, 0, i++, 0, 0, IndustrialProcessing.blockIronBowl.blockID, -1);
+		layout.setBlockID(1, 0, 0, i++, 0, 0, ISetupMachineBlocks.blockBellows.blockID);
+		layout.setBlockID(0, 1, 0, i++, 0, 0, ISetupMachineBlocks.blockIronBowl.blockID, -1);
 
 		structure.addLayout(layout, FacingDirection.North);
 		structure.addLayout(LayoutTransformer.transform(layout, FacingDirection.East), FacingDirection.East);
@@ -57,7 +46,7 @@ public class TileEntityBloomery extends TileEntityMultiblockCoreTankWorker imple
 		Tier tier = new Tier();
 		tierRequirments.addTier(tier, Tiers.Tier0);
 		tier = new Tier();
-		tier.setBlockIDPresent(2, IndustrialProcessing.blockIronBowl.blockID);
+		tier.setBlockIDPresent(2, ISetupMachineBlocks.blockIronBowl.blockID);
 		tierRequirments.addTier(tier, Tiers.Tier1);
 	}
 

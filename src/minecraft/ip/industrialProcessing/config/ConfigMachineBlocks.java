@@ -1,17 +1,10 @@
  package ip.industrialProcessing.config;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Iterator;
-
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.config.ConfigCategories;
 import ip.industrialProcessing.decoration.light.TileEntityElectricLamp;
 import ip.industrialProcessing.decoration.light.PetrolLamp.TileEntityPetrolLamp;
-import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.machines.classifier.TileEntityClassifier;
-import ip.industrialProcessing.machines.crusher.RecipesCrusher;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import ip.industrialProcessing.machines.diskFilter.TileEntityDiskFilter;
 import ip.industrialProcessing.machines.dryer.TileEntityDryer;
@@ -95,9 +88,6 @@ import ip.industrialProcessing.power.plants.TileEntityTurbine;
 import ip.industrialProcessing.power.storage.TileEntityEnergyCell;
 import ip.industrialProcessing.power.wire.TileEntityWire;
 import ip.industrialProcessing.recipes.IRecipeBlock;
-import ip.industrialProcessing.recipes.Recipe;
-import ip.industrialProcessing.recipes.RecipeInputSlot;
-import ip.industrialProcessing.recipes.RecipeOutputSlot;
 import ip.industrialProcessing.transport.fluids.TileEntityGrate;
 import ip.industrialProcessing.transport.fluids.TileEntityManoMeter;
 import ip.industrialProcessing.transport.fluids.TileEntityPump;
@@ -116,14 +106,10 @@ import ip.industrialProcessing.utils.registry.BlockRegistry;
 import ip.industrialProcessing.utils.registry.BlockType;
 import ip.industrialProcessing.utils.registry.RecipeRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemBlockWithMetadata;
-import net.minecraft.item.ItemStack;
 import net.minecraft.src.ModLoader;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fluids.FluidStack;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 

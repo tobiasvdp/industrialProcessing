@@ -2,7 +2,6 @@ package ip.industrialProcessing.gui.container.slot.layout.components;
 
 import java.awt.Rectangle;
 
-import net.minecraft.inventory.IInventory;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayout;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
 import ip.industrialProcessing.slots.SlotBase;

@@ -1,9 +1,5 @@
 package ip.industrialProcessing.machines.animation.tanks;
 
-import ip.industrialProcessing.machines.TileEntityFluidMachine;
-
-import java.util.ArrayList;
-
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
 

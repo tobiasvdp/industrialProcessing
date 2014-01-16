@@ -1,9 +1,7 @@
 package ip.industrialProcessing.machines.plants.waste.exhaust.coolingUnit;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
-import ip.industrialProcessing.machines.plants.metalProcessing.vacuumCaster.RecipesVacuumCaster;
 import ip.industrialProcessing.recipes.Recipe;
 
 import java.util.Iterator;

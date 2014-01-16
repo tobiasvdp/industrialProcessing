@@ -7,11 +7,12 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 
 public class BlockAmpMeter extends BlockMachineRendered {
     public BlockAmpMeter() {
-	super(ConfigMachineBlocks.getAmpMeterBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Amp Meter", IndustrialProcessing.tabPower);
+	super(ConfigMachineBlocks.getAmpMeterBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Amp Meter", ISetupCreativeTabs.tabPower);
     }
 
     @Override

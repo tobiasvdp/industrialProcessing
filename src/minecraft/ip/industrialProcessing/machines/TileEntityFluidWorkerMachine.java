@@ -33,7 +33,8 @@ public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachin
     protected ServerWorker worker;
     protected AnimationHandler animationHandler;
 
-    public IWorker getWorker() {
+    @Override
+	public IWorker getWorker() {
     	return worker;
     }
 

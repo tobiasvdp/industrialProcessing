@@ -5,12 +5,13 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.multiblock.dummy.BlockMultiblockDummy;
 
 public class BLmultiblockFrame extends BlockMultiblockDummy{
 
 	public BLmultiblockFrame() {
-		super(ConfigMachineBlocks.getBLmultiblockFrame(), "Multiblockframe", IndustrialProcessing.tabMultiblocks);
+		super(ConfigMachineBlocks.getBLmultiblockFrame(), "Multiblockframe", ISetupCreativeTabs.tabMultiblocks);
 	}
 	
 	@Override

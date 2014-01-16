@@ -10,7 +10,8 @@ public class ClientWorker implements IWorker {
     private int workDone = 0;
 	private float efficiency = 1; // don't start working when placed
 
-    public int doWork(int amount) {
+    @Override
+	public int doWork(int amount) {
 	int workDoneInStep = Math.min(amount, totalWork - workDone);
 	if (workDone >= 1) {
 	    workDone += workDoneInStep;

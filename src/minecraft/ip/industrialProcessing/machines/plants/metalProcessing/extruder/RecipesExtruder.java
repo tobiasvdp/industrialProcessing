@@ -1,8 +1,9 @@
 package ip.industrialProcessing.machines.plants.metalProcessing.extruder;
 
-import net.minecraft.item.Item;
 import net.minecraftforge.fluids.FluidRegistry;
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.ISetupFluids;
+import ip.industrialProcessing.config.ISetupItems;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeInputSlot;
@@ -24,8 +25,8 @@ public class RecipesExtruder extends RecipesMachine {
 		Recipe slag = new Recipe();
 		slag.workRequired = work;
 		slag.powerRequired = power;
-		slag.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidHotSlag.getName()), RecipeSlotType.TANK, 1000) };
-		slag.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, IndustrialProcessing.itemSlag.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
+		slag.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidHotSlag.getName()), RecipeSlotType.TANK, 1000) };
+		slag.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemSlag.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
 		return slag;
 	}
 
@@ -33,8 +34,8 @@ public class RecipesExtruder extends RecipesMachine {
 		Recipe recipe = new Recipe();
 		recipe.workRequired = work;
 		recipe.powerRequired = power;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidPigIron.getName()), RecipeSlotType.TANK, 200)};
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, IndustrialProcessing.itemIronBar.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidPigIron.getName()), RecipeSlotType.TANK, 200)};
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemIronBar.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
 		return recipe;
 	}
 }

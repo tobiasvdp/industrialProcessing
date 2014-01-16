@@ -4,6 +4,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupTransportBlocks;
 import ip.industrialProcessing.transport.steve.railway.suspended.cart.EntityFloatingCart;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,7 +23,7 @@ public class ItemSuspendedCart extends Item{
 	}
 	@Override
 	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10) {
-		if(par3World.getBlockId(par4, par5, par6) == IndustrialProcessing.blockSuspendedRail.blockID ){
+		if(par3World.getBlockId(par4, par5, par6) == ISetupTransportBlocks.blockSuspendedRail.blockID ){
 			
 			par3World.spawnEntityInWorld(new EntityFloatingCart(par3World, par4+0.5, par5-0.5, par6+0.5,RandomStringUtils.randomAscii(16)));
 		}

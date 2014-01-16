@@ -3,6 +3,7 @@ package ip.industrialProcessing.multiblock.dummy.block.toggleButton;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.multiblock.core.block.elevator.TEmultiblockElevator;
 import ip.industrialProcessing.multiblock.dummy.BlockMultiblockDummy;
 import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
@@ -14,7 +15,7 @@ import net.minecraft.world.World;
 public class BLmultiblockToggleButton2 extends BlockMultiblockDummy{
 
 	public BLmultiblockToggleButton2() {
-		super(ConfigMachineBlocks.getBLmultiblockToggleButton2(),"MultiblockToggleButton2",IndustrialProcessing.tabMultiblocks);
+		super(ConfigMachineBlocks.getBLmultiblockToggleButton2(),"MultiblockToggleButton2",ISetupCreativeTabs.tabMultiblocks);
 	}
 
 	@Override

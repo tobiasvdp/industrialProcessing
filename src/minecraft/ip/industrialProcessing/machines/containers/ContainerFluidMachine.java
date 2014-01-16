@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.fluids.FluidTankInfo;
 
 public class ContainerFluidMachine<T extends TileEntity & IMachineContainerEntity & IFluidMachineContainerEntity> extends ContainerMachine<T> {
 

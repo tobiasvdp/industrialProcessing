@@ -1,12 +1,7 @@
 package ip.industrialProcessing.power.plants;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
-import buildcraft.api.power.IPowerReceptor;
-import buildcraft.api.power.PowerHandler;
-import buildcraft.api.power.PowerHandler.PowerReceiver;
-import buildcraft.api.power.PowerHandler.Type;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
@@ -14,7 +9,6 @@ import ip.industrialProcessing.machines.animation.AnimationMode;
 import ip.industrialProcessing.machines.animation.IAnimationSyncable;
 import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 import ip.industrialProcessing.power.IGeneratorProgress;
-import ip.industrialProcessing.power.PowerHelper;
 import ip.industrialProcessing.power.TileEntityPowerGenerator;
 import ip.industrialProcessing.utils.DirectionUtils;
 
@@ -66,8 +60,9 @@ public class TileEntityGenerator extends TileEntityPowerGenerator implements IAn
 		return q;
 	}
 
+	@Override
 	public float getLastAmps() {
-		return this.lastCharge / this.animationHandler.DT;
+		return this.lastCharge / AnimationHandler.DT;
 	}
 
 	@Override

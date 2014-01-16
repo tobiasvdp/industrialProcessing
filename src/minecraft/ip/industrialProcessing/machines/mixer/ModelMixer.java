@@ -1,15 +1,11 @@
 package ip.industrialProcessing.machines.mixer;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Vector;
-
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
-import net.minecraft.util.Vec3;
-import ip.industrialProcessing.api.rendering.ModelMachine;
 import ip.industrialProcessing.client.render.ModelAnimatedFluidMachine;
 
 public class ModelMixer extends ModelAnimatedFluidMachine {
@@ -162,6 +158,7 @@ public class ModelMixer extends ModelAnimatedFluidMachine {
 		setRotation(Liquid, 0F, 0F, 0F);
 	}
 
+	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
@@ -257,10 +254,10 @@ public class ModelMixer extends ModelAnimatedFluidMachine {
 			tessellator.startDrawingQuads();
 			tessellator.setNormal(0, -1, 0);
             tessellator.setBrightness(lightLevel);
-			tessellator.addVertexWithUV((double) (par1 + 0) * f, (double) par3 * f, (double) (par2 + 0) * f, (double) icon.getMinU(), (double) icon.getMinV());
-			tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) par3 * f, (double) (par2 + 0) * f, (double) icon.getMaxU(), (double) icon.getMinV());
-			tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) par3 * f, (double) (par2 + par5) * f, (double) icon.getMaxU(), (double) icon.getMaxV());
-			tessellator.addVertexWithUV((double) (par1 + 0) * f, (double) par3 * f, (double) (par2 + par5) * f, (double) icon.getMinU(), (double) icon.getMaxV());
+			tessellator.addVertexWithUV((double) (par1 + 0) * f, (double) par3 * f, (double) (par2 + 0) * f, icon.getMinU(), icon.getMinV());
+			tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) par3 * f, (double) (par2 + 0) * f, icon.getMaxU(), icon.getMinV());
+			tessellator.addVertexWithUV((double) (par1 + par4) * f, (double) par3 * f, (double) (par2 + par5) * f, icon.getMaxU(), icon.getMaxV());
+			tessellator.addVertexWithUV((double) (par1 + 0) * f, (double) par3 * f, (double) (par2 + par5) * f, icon.getMinU(), icon.getMaxV());
 			tessellator.draw();
 		}
 	}

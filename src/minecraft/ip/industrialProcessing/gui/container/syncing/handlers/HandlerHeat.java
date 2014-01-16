@@ -2,8 +2,6 @@ package ip.industrialProcessing.gui.container.syncing.handlers;
 
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.syncing.info.InfoHeat;
-import ip.industrialProcessing.gui.container.syncing.info.InfoPower;
-import ip.industrialProcessing.machines.IPowerStorage;
 import ip.industrialProcessing.utils.handler.heat.IHeatStorage;
 
 public class HandlerHeat implements IHandlerHeat{

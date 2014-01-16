@@ -3,19 +3,18 @@ package ip.industrialProcessing.transport.items.conveyorBelt;
 import ip.industrialProcessing.transport.TransportConnectionState;
 import ip.industrialProcessing.utils.ItemTransfers;
 
-import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.ForgeDirection;
 
 public abstract class TileEntityConveyorInteractionBase extends TileEntityConveyorTransportBase {
 
+	@Override
 	public void setBounds() {
 		float xMin = -4 / 16f;
 		float yMin = -16 / 16f;

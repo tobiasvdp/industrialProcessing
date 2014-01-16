@@ -6,16 +6,16 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.machines.BlockMachine;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 
 public class BlockTurbine extends BlockMachineRendered {
 
 	public BlockTurbine() {
-		super(ConfigMachineBlocks.getSteamTurbineBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Steam Turbine", IndustrialProcessing.tabPower);
+		super(ConfigMachineBlocks.getSteamTurbineBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Steam Turbine", ISetupCreativeTabs.tabPower);
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class BlockTurbine extends BlockMachineRendered {
 
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-        icons[1] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "tankSide");
-        icons[0] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "tankFeatures");
+        icons[1] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "tankSide");
+        icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "tankFeatures");
     }
 }

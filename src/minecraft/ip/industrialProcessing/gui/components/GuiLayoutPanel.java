@@ -5,7 +5,6 @@ import java.awt.Rectangle;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.SlotCrafting;
 import ip.industrialProcessing.gui.GuiLayout;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayout;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;

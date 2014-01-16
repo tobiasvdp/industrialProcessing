@@ -1,7 +1,5 @@
 package ip.industrialProcessing.multiblock.core.block.blastFurnace.model;
 
-import org.lwjgl.util.vector.Vector3f;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.tileentity.TileEntity;

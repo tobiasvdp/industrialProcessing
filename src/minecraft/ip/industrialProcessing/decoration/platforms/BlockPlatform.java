@@ -1,12 +1,11 @@
 package ip.industrialProcessing.decoration.platforms;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.rendering.connectedTile.ConnectionCompass;
 import ip.industrialProcessing.api.rendering.connectedTile.TileConnection;
 import ip.industrialProcessing.config.ConfigBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.decoration.BlockDecoration;
-
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import java.util.List;
 
 import net.minecraft.block.Block;
@@ -22,16 +21,16 @@ import net.minecraftforge.common.ForgeDirection;
 public class BlockPlatform extends BlockScaffolding {
 
 	public BlockPlatform() {
-		super(ConfigBlocks.getPlatformBlockID(), Material.iron, 1f, Block.soundMetalFootstep, "Walkway", IndustrialProcessing.tabPower);
+		super(ConfigBlocks.getPlatformBlockID(), Material.iron, 1f, Block.soundMetalFootstep, "Walkway", ISetupCreativeTabs.tabPower);
 		this.setBlockBounds(0, 0, 0, 1, 1 / 16f, 1);
-		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "platformFloor");
+		func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "platformFloor");
 		setStepSound(soundMetalFootstep);
 	}
 
 	protected BlockPlatform(int id, String name) {
-		super(id, Material.iron, 1f, Block.soundMetalFootstep, name, IndustrialProcessing.tabPower);
+		super(id, Material.iron, 1f, Block.soundMetalFootstep, name, ISetupCreativeTabs.tabPower);
 		this.setBlockBounds(0, 0, 0, 1, 1 / 16f, 1);
-		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "platformFloor");
+		func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "platformFloor");
 	}
 
 	@Override

@@ -9,15 +9,11 @@ import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.ContainerIP;
 import ip.industrialProcessing.gui.container.syncing.handlers.HandlerLifeSpan;
-import ip.industrialProcessing.gui.container.syncing.handlers.HandlerPower;
 import ip.industrialProcessing.gui.container.syncing.handlers.IHandlerContainer;
 import ip.industrialProcessing.gui.container.syncing.handlers.IHandlerLifeSpan;
-import ip.industrialProcessing.gui.container.syncing.handlers.IHandlerPower;
 import ip.industrialProcessing.gui.container.syncing.info.InfoLifeSpan;
-import ip.industrialProcessing.gui.container.syncing.info.InfoPower;
 import ip.industrialProcessing.gui.guiContainer.GuiContainerIP;
 import ip.industrialProcessing.gui.guiContainer.layout.GuiContainerLayout;
-import ip.industrialProcessing.machines.containers.gui.PowerToolTip;
 
 public class GuiContainerLayoutLifespan extends GuiContainerLayout{
 	private static Rectangle rectangle = new Rectangle(126, 242, 48, 6);

@@ -3,6 +3,8 @@ package ip.industrialProcessing.power.plants;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.power.BlockPowerGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -14,7 +16,7 @@ import net.minecraft.world.World;
 public class BlockGenerator extends BlockPowerGenerator {
 
     public BlockGenerator() {
-        super(ConfigMachineBlocks.getGeneratorBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Generator", IndustrialProcessing.tabPower);
+        super(ConfigMachineBlocks.getGeneratorBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Generator", ISetupCreativeTabs.tabPower);
     }
 
     @Override
@@ -37,7 +39,7 @@ public class BlockGenerator extends BlockPowerGenerator {
 
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-        icons[1] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "tankSide");
-        icons[0] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "generatorFeatures");
+        icons[1] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "tankSide");
+        icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "generatorFeatures");
     }
 }

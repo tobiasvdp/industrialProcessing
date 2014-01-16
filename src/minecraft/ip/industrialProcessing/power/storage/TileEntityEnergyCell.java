@@ -64,7 +64,7 @@ public class TileEntityEnergyCell extends TileEntityPowerGenerator implements IP
     public void updateEntity() { 
 	super.updateEntity(); 
 	if (!this.worldObj.isRemote) {
-	    float targetProgress = (float) this.storedJoules / this.totalJouleCapacity;
+	    float targetProgress = this.storedJoules / this.totalJouleCapacity;
 	    float speed = (targetProgress - this.animation.getProgress());
 	    boolean incrementing = true;
 	    if (speed < 0) {

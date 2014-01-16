@@ -1,7 +1,5 @@
 package ip.industrialProcessing.multiblock.dummy;
 
-import java.util.Random;
-
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
@@ -62,7 +60,7 @@ public abstract class BlockMultiblockDummy extends BlockContainer {
 			return false;
 		TileEntityMultiblockDummy TEdummy = ((TileEntityMultiblockDummy) te);
 		if (TEdummy.getState() == MultiblockState.COMPLETED) {
-			TileEntityMultiblockCore TEcore = (TileEntityMultiblockCore) TEdummy.getCore();
+			TileEntityMultiblockCore TEcore = TEdummy.getCore();
 			if (TEcore.getState() == MultiblockState.COMPLETED) {
 				player.openGui(IndustrialProcessing.instance, 0, world, TEcore.xCoord, TEcore.yCoord, TEcore.zCoord);
 				return true;
@@ -85,7 +83,7 @@ public abstract class BlockMultiblockDummy extends BlockContainer {
 
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack itemStack) {
-		int dir = MathHelper.floor_double((double) ((entityLivingBase.rotationYaw * 4F) / 360F) + 0.5D) & 3;
+		int dir = MathHelper.floor_double((entityLivingBase.rotationYaw * 4F) / 360F + 0.5D) & 3;
 		world.setBlockMetadataWithNotify(x, y, z, dir, 0);
 		super.onBlockPlacedBy(world, x, y, z, entityLivingBase, itemStack);
 		if (((TileEntityMultiblockDummy) world.getBlockTileEntity(x, y, z)).searchForCore()) {

@@ -2,12 +2,8 @@ package ip.industrialProcessing.subMod.logic.utils;
 
 import ip.industrialProcessing.subMod.logic.transport.ICommunicationNode;
 
-import java.io.DataInput;
-import java.io.DataOutput;
-import java.io.IOException;
 import java.util.ArrayList;
 
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;

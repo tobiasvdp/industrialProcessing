@@ -6,7 +6,6 @@ import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
 import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.IConnectedTile;
 import ip.industrialProcessing.client.render.ModelBlock;
-import ip.industrialProcessing.power.wire.BlockWireWood;
 import ip.industrialProcessing.transport.fluids.BlockTransportFluidsStone;
 import ip.industrialProcessing.transport.fluids.BlockTransportFluidsWood;
 import net.minecraft.block.Block;

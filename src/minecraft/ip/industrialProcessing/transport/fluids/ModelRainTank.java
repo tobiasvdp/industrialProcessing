@@ -5,7 +5,6 @@ import org.lwjgl.opengl.GL11;
 import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.ModelConnectedOrientedFluid;
 import ip.industrialProcessing.machines.BlockMachine;
-import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
@@ -34,10 +33,10 @@ public class ModelRainTank extends ModelConnectedOrientedFluid {
             Tessellator tessellator = Tessellator.instance;
             tessellator.startDrawingQuads();
             tessellator.setNormal(0, -1, 0);
-            tessellator.addVertexWithUV((double) (x + 0) * f, (double) y * f, (double) (z + 0) * f, (double) icon.getMinU(), (double) icon.getMinV());
-            tessellator.addVertexWithUV((double) (x + w) * f, (double) y * f, (double) (z + 0) * f, (double) icon.getMaxU(), (double) icon.getMinV());
-            tessellator.addVertexWithUV((double) (x + w) * f, (double) y * f, (double) (z + h) * f, (double) icon.getMaxU(), (double) icon.getMaxV());
-            tessellator.addVertexWithUV((double) (x + 0) * f, (double) y * f, (double) (z + h) * f, (double) icon.getMinU(), (double) icon.getMaxV());
+            tessellator.addVertexWithUV((double) (x + 0) * f, (double) y * f, (double) (z + 0) * f, icon.getMinU(), icon.getMinV());
+            tessellator.addVertexWithUV((double) (x + w) * f, (double) y * f, (double) (z + 0) * f, icon.getMaxU(), icon.getMinV());
+            tessellator.addVertexWithUV((double) (x + w) * f, (double) y * f, (double) (z + h) * f, icon.getMaxU(), icon.getMaxV());
+            tessellator.addVertexWithUV((double) (x + 0) * f, (double) y * f, (double) (z + h) * f, icon.getMinU(), icon.getMaxV());
             tessellator.draw();
             GL11.glPopMatrix();
         }

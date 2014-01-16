@@ -1,6 +1,5 @@
 package ip.industrialProcessing.transport.fluids.models.raintank;
 
-import org.lwjgl.util.Point;
 import org.lwjgl.util.vector.Vector3f;
 
 import net.minecraft.block.Block;
@@ -15,7 +14,6 @@ import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.ModelBlock;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.transport.fluids.TileEntityRainTank;
-import ip.industrialProcessing.transport.fluids.TileEntityTank;
 
 public class ModelRainTankBlock extends ModelBlock {
 

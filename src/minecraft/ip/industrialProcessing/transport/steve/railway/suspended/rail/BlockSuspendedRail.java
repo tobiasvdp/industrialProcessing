@@ -4,6 +4,7 @@ import java.util.Random;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigTransportBlocks;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,7 +18,7 @@ public class BlockSuspendedRail extends Block {
 		setHardness(1.0f);
 		setStepSound(Block.soundMetalFootstep);
 		setUnlocalizedName("BlockSuspendedRail");
-		setCreativeTab(IndustrialProcessing.tabPower);
+		setCreativeTab(ISetupCreativeTabs.tabPower);
 	}
 
 	@Override

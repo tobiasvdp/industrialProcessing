@@ -10,21 +10,24 @@ import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.ConfigTransportBlocks;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
+import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 
 public class BlockManoMeter extends BlockMachineRendered {
 
 	public BlockManoMeter() {
-		super(ConfigTransportBlocks.getBlockTransportFluidManometerID(), Material.iron, 1F, Block.soundMetalFootstep, "Manometer", IndustrialProcessing.tabFluid);
+		super(ConfigTransportBlocks.getBlockTransportFluidManometerID(), Material.iron, 1F, Block.soundMetalFootstep, "Manometer", ISetupCreativeTabs.tabFluid);
 		setBlockBounds(0, 0, 0.25f, 1, 1, 0.75f);
-		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "manometer");
+		func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "manometer");
 	}
 
 	@Override
 	public Icon getIcon(int par1, int par2) {
 		if (par1 == 1) {
-			return IndustrialProcessing.blockTank.getIcon(0, 0);
+			return ISetupMachineBlocks.blockTank.getIcon(0, 0);
 		}
 		return super.getIcon(par1, par2);
 	}

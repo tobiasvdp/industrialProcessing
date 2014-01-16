@@ -1,9 +1,7 @@
 package ip.industrialProcessing.transport.fluids;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFluid;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.IFluidBlock;
 
 public class AirTree extends FluidTree {
 

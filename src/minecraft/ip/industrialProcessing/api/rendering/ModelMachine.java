@@ -3,7 +3,6 @@ package ip.industrialProcessing.api.rendering;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 
 public abstract class ModelMachine extends ModelBase {
 	public abstract void renderModel(TileEntity tileEntity, float f);

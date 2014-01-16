@@ -1,7 +1,5 @@
 package ip.industrialProcessing.utils;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.Random;
 
 import net.minecraft.entity.item.EntityItem;

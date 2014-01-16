@@ -2,8 +2,6 @@ package ip.industrialProcessing.machines.plants.blacksmith.grindingStone.model;
 
 import ip.industrialProcessing.client.render.ModelAnimatedMachine;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector3f;
 

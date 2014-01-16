@@ -2,14 +2,10 @@ package ip.industrialProcessing.machines.plants.metalProcessing.vacuumCaster;
 
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
 import ip.industrialProcessing.machines.containers.ContainerPoweredFluidWorkerMachine;
-import ip.industrialProcessing.machines.dryer.TileEntityDryer;
 import ip.industrialProcessing.slots.SlotBase;
-import ip.industrialProcessing.slots.SlotLiquid;
-import ip.industrialProcessing.slots.SlotLiquidOutput;
 import ip.industrialProcessing.slots.SlotOutput;
 import ip.industrialProcessing.utils.containers.ContainerUtils;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.tileentity.TileEntity;
 
 public class ContainerVacuumCaster extends ContainerPoweredFluidWorkerMachine {
 

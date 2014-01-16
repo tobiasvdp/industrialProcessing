@@ -2,11 +2,9 @@ package ip.industrialProcessing.power.plants;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
-import ic2.api.item.Items;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityMachine;
 
@@ -78,7 +76,7 @@ public class TileEntitySolidBurner extends TileEntityMachine {
 				airTime = 0;
 
 			if (airTime > 20) {
-				this.worldObj.playSoundEffect((double) xCoord + 0.5D, (double) yCoord + 1.5D, (double) zCoord + 0.5D, "fire.ignite", 1.0F, 1);
+				this.worldObj.playSoundEffect(xCoord + 0.5D, yCoord + 1.5D, zCoord + 0.5D, "fire.ignite", 1.0F, 1);
 				this.worldObj.setBlock(xCoord, yCoord + 1, zCoord, Block.fire.blockID);
 			}
 		}

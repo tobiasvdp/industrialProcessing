@@ -2,8 +2,6 @@ package ip.industrialProcessing.api.rendering;
 
 import java.util.List;
 
-import ip.industrialProcessing.transport.fluids.BlockTransportFluidsStone;
-import ip.industrialProcessing.transport.fluids.BlockTransportFluidsWood;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;

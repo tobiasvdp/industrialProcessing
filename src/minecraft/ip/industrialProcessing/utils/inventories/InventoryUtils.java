@@ -1,8 +1,5 @@
 package ip.industrialProcessing.utils.inventories;
 
-import ip.industrialProcessing.machines.MachineItemStack;
-import ip.industrialProcessing.machines.filter.TileEntityFilter;
-
 import java.util.Random;
 
 import net.minecraft.entity.item.EntityItem;

@@ -1,6 +1,5 @@
 package ip.industrialProcessing.client.render;
 
-import ip.industrialProcessing.machines.TileEntityFluidMachine;
 import ip.industrialProcessing.machines.animation.tanks.ITankSyncable;
 import ip.industrialProcessing.machines.animation.tanks.TankHandler;
 import net.minecraft.block.Block;
@@ -10,7 +9,6 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidTankInfo;
 
 public class RendererTileEntityFluidWorker extends RendererTileEntityAnimated {
 

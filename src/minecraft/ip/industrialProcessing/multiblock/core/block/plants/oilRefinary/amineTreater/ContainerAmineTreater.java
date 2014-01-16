@@ -2,8 +2,6 @@ package ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.amineTr
 
 import ip.industrialProcessing.multiblock.container.ContainerMultiblockTankWorkerPowered;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
-import ip.industrialProcessing.slots.SlotLiquid;
-import ip.industrialProcessing.slots.SlotLiquidOutput;
 import net.minecraft.entity.player.InventoryPlayer;
 
 public class ContainerAmineTreater  extends ContainerMultiblockTankWorkerPowered{

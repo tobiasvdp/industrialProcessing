@@ -3,6 +3,8 @@ package ip.industrialProcessing.transport.fluids;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.ConfigTransportBlocks;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -17,7 +19,7 @@ import net.minecraft.world.World;
 public class BlockRainTank extends BlockMachineRendered {
 
     public BlockRainTank() {
-        super(ConfigTransportBlocks.getBlockRainTankID(), Material.iron, 1F, Block.soundMetalFootstep, "Rain Collector", IndustrialProcessing.tabFluid);
+        super(ConfigTransportBlocks.getBlockRainTankID(), Material.iron, 1F, Block.soundMetalFootstep, "Rain Collector", ISetupCreativeTabs.tabFluid);
     }
 
     @Override
@@ -60,8 +62,8 @@ public class BlockRainTank extends BlockMachineRendered {
 
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-        icons[0] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "tankFeatures");
-        icons[1] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "tankSide");
-        icons[2] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "fullPipe");
+        icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "tankFeatures");
+        icons[1] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "tankSide");
+        icons[2] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "fullPipe");
     }
 }

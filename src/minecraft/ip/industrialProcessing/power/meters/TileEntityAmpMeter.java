@@ -1,8 +1,5 @@
 package ip.industrialProcessing.power.meters;
 
-import org.bouncycastle.asn1.x509.Targets;
-
-import ic2.api.Direction;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
@@ -14,7 +11,6 @@ import ip.industrialProcessing.power.TileEntityPowerGenerator;
 import ip.industrialProcessing.power.utils.PowerAcceptorConnection;
 import ip.industrialProcessing.power.utils.PowerDistributor;
 import ip.industrialProcessing.utils.DirectionUtils;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 

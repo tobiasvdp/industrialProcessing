@@ -6,16 +6,16 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.machines.BlockMachine;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 
 public class BlockElectroMotor extends BlockMachineRendered {
 
     public BlockElectroMotor() {
-        super(ConfigMachineBlocks.getElectroMotorBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Electric Motor", IndustrialProcessing.tabPower);
+        super(ConfigMachineBlocks.getElectroMotorBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Electric Motor", ISetupCreativeTabs.tabPower);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class BlockElectroMotor extends BlockMachineRendered {
 
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-        icons[1] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "tankSide");
-        icons[0] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "generatorFeatures");
+        icons[1] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "tankSide");
+        icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "generatorFeatures");
     }
 }

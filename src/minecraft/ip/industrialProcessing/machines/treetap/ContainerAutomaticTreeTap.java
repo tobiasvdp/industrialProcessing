@@ -5,7 +5,6 @@ import ip.industrialProcessing.machines.containers.ProgressBarHandlerInfo;
 import ip.industrialProcessing.utils.containers.ContainerUtils;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
-import net.minecraft.tileentity.TileEntity;
 
 public class ContainerAutomaticTreeTap extends ContainerFluidMachine<TileEntityAutomaticTreeTap> {
 

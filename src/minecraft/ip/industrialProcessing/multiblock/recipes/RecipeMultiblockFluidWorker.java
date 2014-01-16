@@ -1,8 +1,5 @@
 package ip.industrialProcessing.multiblock.recipes;
 
-import ip.industrialProcessing.recipes.IRecipeFluidWorkHandler;
-import ip.industrialProcessing.recipes.Recipe;
-import ip.industrialProcessing.recipes.RecipeFluidWorker;
 import ip.industrialProcessing.recipes.RecipeInputSlot;
 import ip.industrialProcessing.recipes.RecipeOutputSlot;
 import ip.industrialProcessing.recipes.RecipeSlotType;
@@ -16,6 +13,7 @@ public class RecipeMultiblockFluidWorker extends RecipeMultiblockWorker {
 		this.fluidHanlder = handler;
 	}
 	
+	@Override
 	protected boolean matchesInput(RecipeMultiblock currentRecipe) {
         if (currentRecipe == null)
             return false;

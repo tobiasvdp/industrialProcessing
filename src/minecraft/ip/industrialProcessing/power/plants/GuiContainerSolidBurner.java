@@ -4,8 +4,6 @@ import org.lwjgl.util.Point;
 import org.lwjgl.util.Rectangle;
 
 import net.minecraft.entity.player.InventoryPlayer;
-import ip.industrialProcessing.machines.TileEntityMachine;
-import ip.industrialProcessing.machines.containers.ContainerMachine;
 import ip.industrialProcessing.machines.containers.gui.GuiContainerMachine;
 
 public class GuiContainerSolidBurner extends GuiContainerMachine {

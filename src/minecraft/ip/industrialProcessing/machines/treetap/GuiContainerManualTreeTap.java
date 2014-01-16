@@ -3,8 +3,6 @@ package ip.industrialProcessing.machines.treetap;
 import org.lwjgl.util.Point;
 import org.lwjgl.util.Rectangle;
 
-import ip.industrialProcessing.machines.TileEntityWorkerMachine;
-import ip.industrialProcessing.machines.containers.ContainerWorkerMachine;
 import ip.industrialProcessing.machines.containers.gui.GuiContainerWorkerMachine;
 import net.minecraft.entity.player.InventoryPlayer;
 

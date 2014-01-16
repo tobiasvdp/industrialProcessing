@@ -2,19 +2,15 @@ package ip.industrialProcessing.transport.fluids;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.IFluidTank;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.machines.TileEntityMachine;
-import ip.industrialProcessing.machines.TileEntitySynced;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
 import ip.industrialProcessing.machines.animation.AnimationMode;
 import ip.industrialProcessing.machines.animation.IAnimationSyncable;
 import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
-import ip.industrialProcessing.power.IPowerAcceptor;
-import ip.industrialProcessing.power.PowerHelper;
 import ip.industrialProcessing.power.plants.IMechanicalMotion;
 import ip.industrialProcessing.utils.DirectionUtils;
 

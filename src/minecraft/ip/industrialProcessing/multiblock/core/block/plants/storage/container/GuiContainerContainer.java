@@ -1,14 +1,7 @@
 package ip.industrialProcessing.multiblock.core.block.plants.storage.container;
 
-import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
-import ip.industrialProcessing.multiblock.core.block.plants.blacksmith.bloomery.ContainerBloomery;
-import ip.industrialProcessing.multiblock.core.block.plants.blacksmith.bloomery.TileEntityBloomery;
-import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorker;
 import ip.industrialProcessing.multiblock.gui.GUImultiblock;
 import net.minecraft.entity.player.InventoryPlayer;
-
-import org.lwjgl.util.Point;
-import org.lwjgl.util.Rectangle;
 
 public class GuiContainerContainer extends GUImultiblock{
 	

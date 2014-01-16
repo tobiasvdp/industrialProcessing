@@ -2,10 +2,8 @@ package ip.industrialProcessing.transport.fluids;
 
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityFluidMachine;
-import net.minecraft.block.Block;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 

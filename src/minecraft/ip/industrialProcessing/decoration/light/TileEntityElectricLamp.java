@@ -1,7 +1,5 @@
 package ip.industrialProcessing.decoration.light;
 
-import ip.industrialProcessing.config.ConfigBlocks;
-import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
 import ip.industrialProcessing.machines.animation.AnimationMode;
 import ip.industrialProcessing.machines.animation.IAnimationSyncable;

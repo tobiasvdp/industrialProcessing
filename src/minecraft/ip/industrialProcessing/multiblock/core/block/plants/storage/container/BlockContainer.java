@@ -1,33 +1,20 @@
 package ip.industrialProcessing.multiblock.core.block.plants.storage.container;
 
-import java.util.Random;
-
-import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.INamepace;
-import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.multiblock.core.BlockMultiblockCore;
-import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
-import ip.industrialProcessing.multiblock.core.block.plants.blacksmith.bloomery.TileEntityBloomery;
-import ip.industrialProcessing.multiblock.utils.MultiblockState;
-import ip.industrialProcessing.recipes.IRecipeBlock;
 
 public class BlockContainer extends BlockMultiblockCore{
 	private Icon[] icons = new Icon[1];
 
 	public BlockContainer() {
-		super(ConfigMachineBlocks.getBlockContainerID(), "BlockContainer", IndustrialProcessing.tabMultiblocks);
+		super(ConfigMachineBlocks.getBlockContainerID(), "BlockContainer", ISetupCreativeTabs.tabMultiblocks);
 	}
 
 	@Override
@@ -49,6 +36,6 @@ public class BlockContainer extends BlockMultiblockCore{
 
 	@Override
 	public void registerIcons(IconRegister par1IconRegister) {
-		icons[0] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "red");
+		icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "red");
 	}
 }

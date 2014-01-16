@@ -3,16 +3,8 @@ package ip.industrialProcessing.machines.plants.nonFerroProcessing.magneticSepar
 import java.util.Iterator;
 
 import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
-import ip.industrialProcessing.machines.TileEntityPoweredWorkerMachine;
-import ip.industrialProcessing.machines.TileEntityWorkerMachine;
-import ip.industrialProcessing.machines.plants.metalProcessing.extruder.RecipesExtruder;
 import ip.industrialProcessing.recipes.Recipe;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.fluids.FluidContainerRegistry;
 
 public class TileEntityMagneticSeparator extends TileEntityPoweredFluidWorkerMachine {
 

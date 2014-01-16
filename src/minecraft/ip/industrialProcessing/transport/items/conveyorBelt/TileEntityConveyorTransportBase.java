@@ -1,6 +1,5 @@
 package ip.industrialProcessing.transport.items.conveyorBelt;
 
-import ic2.api.Direction;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.animation.conveyors.IConveyor;
 import ip.industrialProcessing.machines.animation.conveyors.IConveyorStack;

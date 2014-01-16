@@ -13,7 +13,6 @@ import ip.industrialProcessing.subMod.logic.transport.wired.displayBox.TElogicDi
 import ip.industrialProcessing.subMod.logic.transport.wired.switchbox.TElogicSwitchBox;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
-import net.minecraft.src.ModLoader;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -68,16 +67,16 @@ public class ConfigLogic {
 	
 	public void register(){
 		LanguageRegistry.instance().addStringLocalization("IP.itemGroup.tabLogic", "en_US", "IP Logic");
-		((CreativeTabsIP) IPLogic.tabLogic).setIcon(new ItemStack(IPLogic.BLlogicSwitchBox));
+		((CreativeTabsIP) IPLogic.tabLogic).setIcon(new ItemStack(ISetupLogic.BLlogicSwitchBox));
 		
-		register(IPLogic.BLlogicCable, "IP.Logic.Cable", "Cable", TElogicCable.class);
-		register(IPLogic.BLlogicSwitchBox, "IP.Logic.SwBox", "Switch box", TElogicSwitchBox.class);
-		register(IPLogic.BLlogicBundle, "IP.Logic.Bundle", "Bundled cables", TElogicBundle.class);
-		register(IPLogic.BLlogicDisplayBox, "IP.Logic.DsBox", "Display box", TElogicDisplayBox.class);
-		register(IPLogic.BLlogicAnd, "IP.Logic.And", "And gate", TElogicAnd.class);
-		register(IPLogic.BLlogicOr, "IP.Logic.Or", "Or gate", TElogicOr.class);
-		register(IPLogic.BlockMachineInterface, "IP.Logic.MInt", "Interface", TileEntityMachineInterface.class);
-		register(IPLogic.BlockLogicDisplay, "IP.Logic.Display", "Display", TileEntityLogicDisplay.class);
+		register(ISetupLogic.BLlogicCable, "IP.Logic.Cable", "Cable", TElogicCable.class);
+		register(ISetupLogic.BLlogicSwitchBox, "IP.Logic.SwBox", "Switch box", TElogicSwitchBox.class);
+		register(ISetupLogic.BLlogicBundle, "IP.Logic.Bundle", "Bundled cables", TElogicBundle.class);
+		register(ISetupLogic.BLlogicDisplayBox, "IP.Logic.DsBox", "Display box", TElogicDisplayBox.class);
+		register(ISetupLogic.BLlogicAnd, "IP.Logic.And", "And gate", TElogicAnd.class);
+		register(ISetupLogic.BLlogicOr, "IP.Logic.Or", "Or gate", TElogicOr.class);
+		register(ISetupLogic.BlockMachineInterface, "IP.Logic.MInt", "Interface", TileEntityMachineInterface.class);
+		register(ISetupLogic.BlockLogicDisplay, "IP.Logic.Display", "Display", TileEntityLogicDisplay.class);
 	}
 	
 	private void register(Block block, String uniqueId, String displayName, Class tileEntity) {

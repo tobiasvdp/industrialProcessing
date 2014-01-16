@@ -1,22 +1,18 @@
 package ip.industrialProcessing.power.storage;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material; 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.config.ConfigBlocks;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.machines.BlockMachine;
-import ip.industrialProcessing.machines.BlockMachineRendered;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.power.BlockPowerGenerator;
 
 public class BlockEnergyCell extends BlockPowerGenerator {
 
     public BlockEnergyCell() {
-	super(ConfigMachineBlocks.getEnergyCellBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Battery Box", IndustrialProcessing.tabPower);
+	super(ConfigMachineBlocks.getEnergyCellBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Battery Box", ISetupCreativeTabs.tabPower);
     }
 
     @Override

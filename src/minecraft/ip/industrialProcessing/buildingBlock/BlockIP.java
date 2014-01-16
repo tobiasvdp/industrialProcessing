@@ -2,10 +2,8 @@ package ip.industrialProcessing.buildingBlock;
 
 import java.util.Random;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.items.ItemIP;
 import net.minecraft.block.Block;
 import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;

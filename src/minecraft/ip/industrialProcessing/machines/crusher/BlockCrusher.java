@@ -1,39 +1,23 @@
 package ip.industrialProcessing.machines.crusher;
 
-import java.io.Console;
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.gui.GuiLayout;
 import ip.industrialProcessing.gui.IGuiLayout;
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
-import ip.industrialProcessing.gui.container.slot.layout.components.SlotLayoutComponent;
-import ip.industrialProcessing.gui.container.slot.layout.components.SlotLayoutInput;
-import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.recipes.IRecipeBlock;
-import ip.industrialProcessing.transport.steve.railway.suspended.cart.EntityFloatingCart;
 import ip.industrialProcessing.utils.IDescriptionBlock;
-import ip.industrialProcessing.utils.Position;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
 
 public class BlockCrusher extends BlockMachineRendered implements IRecipeBlock, IDescriptionBlock,IGuiLayout {
 
@@ -47,7 +31,7 @@ public class BlockCrusher extends BlockMachineRendered implements IRecipeBlock, 
 	}
 	
     public BlockCrusher() {
-        super(ConfigMachineBlocks.getCrusherBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Ore Crusher", IndustrialProcessing.tabOreProcessing);
+        super(ConfigMachineBlocks.getCrusherBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Ore Crusher", ISetupCreativeTabs.tabOreProcessing);
     }
 
     @Override

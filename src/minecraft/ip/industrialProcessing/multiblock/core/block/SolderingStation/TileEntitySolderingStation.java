@@ -2,9 +2,8 @@ package ip.industrialProcessing.multiblock.core.block.SolderingStation;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.multiblock.core.block.weldingStation.RecipesWeldingStation;
+import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreInvWorkerPowered;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
@@ -28,9 +27,9 @@ public class TileEntitySolderingStation extends TileEntityMultiblockCoreInvWorke
 		LayoutMultiblock layout = new LayoutMultiblock(1, 0, 0, 0, 0, 0);
 
 		int i = 0;
-		layout.setCoreID(i++, 0, 1, IndustrialProcessing.blockSolderingStation.blockID);
+		layout.setCoreID(i++, 0, 1, ISetupMachineBlocks.blockSolderingStation.blockID);
 
-		layout.setBlockID(-1, 0, 0, i++, 0, 1, IndustrialProcessing.BLmultiblockWeldingTableExt.blockID);
+		layout.setBlockID(-1, 0, 0, i++, 0, 1, ISetupMachineBlocks.BLmultiblockWeldingTableExt.blockID);
 
 		structure.addLayout(layout, FacingDirection.North);
 		structure.addLayout(LayoutTransformer.transform(layout, FacingDirection.East), FacingDirection.East);

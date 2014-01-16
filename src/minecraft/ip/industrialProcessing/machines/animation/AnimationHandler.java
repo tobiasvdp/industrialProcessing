@@ -1,7 +1,6 @@
 package ip.industrialProcessing.machines.animation;
 
 import net.minecraft.nbt.NBTTagCompound;
-import ip.industrialProcessing.client.render.IAnimationProgress;
 
 public class AnimationHandler {
     public static final float DT = 1 / 20f;

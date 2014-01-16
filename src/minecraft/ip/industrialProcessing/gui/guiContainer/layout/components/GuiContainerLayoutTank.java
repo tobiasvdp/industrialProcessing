@@ -3,8 +3,6 @@ package ip.industrialProcessing.gui.guiContainer.layout.components;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
-import org.lwjgl.util.Point;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.inventory.Container;
@@ -14,12 +12,9 @@ import net.minecraftforge.fluids.FluidRegistry;
 import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.ContainerIP;
-import ip.industrialProcessing.gui.container.syncing.handlers.HandlerPower;
 import ip.industrialProcessing.gui.container.syncing.handlers.HandlerTank;
 import ip.industrialProcessing.gui.container.syncing.handlers.IHandlerContainer;
-import ip.industrialProcessing.gui.container.syncing.handlers.IHandlerPower;
 import ip.industrialProcessing.gui.container.syncing.handlers.IHandlerTank;
-import ip.industrialProcessing.gui.container.syncing.info.InfoPower;
 import ip.industrialProcessing.gui.container.syncing.info.InfoTank;
 import ip.industrialProcessing.gui.guiContainer.GuiContainerIP;
 import ip.industrialProcessing.gui.guiContainer.layout.GuiContainerLayout;

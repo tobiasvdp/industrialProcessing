@@ -8,8 +8,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
+import ip.industrialProcessing.config.ISetupFluids;
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
-import ip.industrialProcessing.machines.plants.oilRefinary.sourWaterStripper.RecipesSourWaterStripper;
 import ip.industrialProcessing.recipes.Recipe;
 
 public class TileEntityAsphaltBlower extends TileEntityPoweredFluidWorkerMachine{
@@ -32,7 +32,7 @@ public class TileEntityAsphaltBlower extends TileEntityPoweredFluidWorkerMachine
 	public void updateEntity() {
 		addBucketToTank(0, 1, 0);
 		IFluidTank airTank = getTankInSlot(1);
-		airTank.fill(new FluidStack(IndustrialProcessing.itemFluidAir, 20), true);
+		airTank.fill(new FluidStack(ISetupFluids.itemFluidAir, 20), true);
 		super.updateEntity();
 	};
 	

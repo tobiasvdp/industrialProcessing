@@ -8,14 +8,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
 import ip.industrialProcessing.gui.container.syncing.handlers.IHandlerContainer;
-import ip.industrialProcessing.gui.container.syncing.info.InfoTank;
-import ip.industrialProcessing.machines.containers.IProgressBarHandler;
-import ip.industrialProcessing.machines.containers.ProgressBarHandlerInfo;
-import ip.industrialProcessing.machines.containers.ProgressInfoTank;
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
-import ip.industrialProcessing.multiblock.gui.CTmultiblock;
 import ip.industrialProcessing.utils.containers.VerifyingContainer;
 
 public abstract class ContainerMultiblock extends VerifyingContainer {

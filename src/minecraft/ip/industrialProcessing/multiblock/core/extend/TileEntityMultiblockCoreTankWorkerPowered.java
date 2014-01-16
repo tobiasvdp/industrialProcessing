@@ -5,7 +5,6 @@ import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.IPowerStorage;
 import ip.industrialProcessing.machines.PowerWorkerHelper;
-import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.machines.SimplePowerStorage;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
 import ip.industrialProcessing.multiblock.recipes.RecipeMultiblockWorker;
@@ -14,7 +13,6 @@ import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.power.IPoweredMachine;
 import ip.industrialProcessing.power.PowerHelper;
 import ip.industrialProcessing.recipes.Recipe;
-import ip.industrialProcessing.recipes.RecipeWorker;
 import ip.industrialProcessing.utils.DirectionUtils;
 
 public abstract class TileEntityMultiblockCoreTankWorkerPowered extends TileEntityMultiblockCoreTankWorker implements IPoweredMachine {

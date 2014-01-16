@@ -1,8 +1,6 @@
 package ip.industrialProcessing.power.plants;
 
-import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.machines.containers.ContainerMachine;
-import ip.industrialProcessing.machines.containers.IProgressBarHandler;
 import ip.industrialProcessing.machines.containers.ProgressBarHandlerInfo;
 import ip.industrialProcessing.power.GeneratorProgress;
 import ip.industrialProcessing.power.GeneratorProgressHandler;

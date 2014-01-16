@@ -1,30 +1,25 @@
 package ip.industrialProcessing.transport.fluids;
 
-import java.util.List;
-
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.ConfigTransportBlocks;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.machines.BlockMachine;
-import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.transport.BlockTransport;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockValve extends BlockTransport {
 
 	public BlockValve() {
-		super(ConfigTransportBlocks.getBlockValveID(), Material.glass, 1F, Block.soundGlassFootstep, "Fluid Pipe Valve", IndustrialProcessing.tabFluid);
-		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "valve");
+		super(ConfigTransportBlocks.getBlockValveID(), Material.glass, 1F, Block.soundGlassFootstep, "Fluid Pipe Valve", ISetupCreativeTabs.tabFluid);
+		func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "valve");
 	}
 
 	@Override

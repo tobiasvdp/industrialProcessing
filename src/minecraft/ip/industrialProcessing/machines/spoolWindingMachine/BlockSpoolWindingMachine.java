@@ -7,14 +7,14 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 
 public class BlockSpoolWindingMachine extends BlockMachineRendered implements IRecipeBlock {
     public BlockSpoolWindingMachine() {
-	super(ConfigMachineBlocks.getSpoolWindingMachineBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "SpoolWindingMachine", IndustrialProcessing.tabOreProcessing);
+	super(ConfigMachineBlocks.getSpoolWindingMachineBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "SpoolWindingMachine", ISetupCreativeTabs.tabOreProcessing);
     }
 
     @Override

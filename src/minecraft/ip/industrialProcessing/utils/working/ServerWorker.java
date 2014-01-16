@@ -1,7 +1,5 @@
 package ip.industrialProcessing.utils.working;
 
-import cpw.mods.fml.relauncher.Side;
-
 public class ServerWorker implements IWorker {
 
 	private IWorkHandler handler;
@@ -13,6 +11,7 @@ public class ServerWorker implements IWorker {
 		this.totalWork = totalWork;
 	}
 
+	@Override
 	public int doWork(int amount) {
 		int workToDo = 0;
 		if (amount > 0) {

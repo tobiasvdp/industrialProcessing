@@ -3,19 +3,17 @@ package ip.industrialProcessing.transport.items.conveyorSorter;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.machines.BlockMachine;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.transport.items.conveyorBelt.BlockConveyorBase;
 import net.minecraft.block.Block;
-import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class BlockConveyorSorter extends BlockConveyorBase {
     public BlockConveyorSorter() {
-	super(ConfigMachineBlocks.getBLtransportConveyorBeltSorter(), Material.iron, 5.0f, Block.soundMetalFootstep, "Conveyor Sorter", IndustrialProcessing.tabPower);
+	super(ConfigMachineBlocks.getBLtransportConveyorBeltSorter(), Material.iron, 5.0f, Block.soundMetalFootstep, "Conveyor Sorter", ISetupCreativeTabs.tabPower);
     }
 
     @Override

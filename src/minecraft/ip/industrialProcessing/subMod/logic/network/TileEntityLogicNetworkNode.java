@@ -6,14 +6,12 @@ import ip.industrialProcessing.subMod.logic.transport.ICommunicationNode;
 import ip.industrialProcessing.subMod.logic.transport.TElogicNode;
 import ip.industrialProcessing.subMod.logic.utils.UTBuffer;
 import ip.industrialProcessing.subMod.logic.utils.UTBufferType;
-import ip.industrialProcessing.subMod.logic.utils.UTBusType;
 import ip.industrialProcessing.subMod.logic.utils.UTLogicType;
 import ip.industrialProcessing.subMod.logic.utils.UTVariable;
 import ip.industrialProcessing.subMod.logic.utils.UTVariableType;
 import ip.industrialProcessing.subMod.logic.utils.UTlogicNodeContainer;
 import ip.industrialProcessing.subMod.logic.utils.UTpacket;
 import ip.industrialProcessing.subMod.logic.utils.UTpacketType;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 
 public abstract class TileEntityLogicNetworkNode extends TElogicNode implements INetworkNode {

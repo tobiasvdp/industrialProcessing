@@ -1,6 +1,7 @@
 package ip.industrialProcessing.api.rendering;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.IRotateableEntity;
 import ip.industrialProcessing.subMod.logic.transport.ICommunication;
@@ -16,7 +17,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 public class RendererTileEntity extends TileEntitySpecialRenderer {
 	private ModelMachine model;
@@ -28,7 +28,7 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 	public RendererTileEntity(Block block, String name, ModelMachine model) {
 		this.block = block;
 		this.name[0] = name;
-		texture = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN, "textures/render/" + name + ".png");
+		texture = new ResourceLocation(INamepace.TEXTURE_DOMAIN, "textures/render/" + name + ".png");
 		this.model = model;
 	}
 
@@ -70,7 +70,7 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 			int l1 = l % 65536;
 			int l2 = l / 65536;
 			tessellator.setColorOpaque_F(f, f, f);
-			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) l1, (float) l2);
+			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, l1, l2);
 
 
 			int dir = 0; //world.getBlockMetadata(i, j, k);

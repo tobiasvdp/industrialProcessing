@@ -1,8 +1,6 @@
 package ip.industrialProcessing.utils.working;
 
 import net.minecraft.tileentity.TileEntity;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public interface IWorkHandler {
 	/**

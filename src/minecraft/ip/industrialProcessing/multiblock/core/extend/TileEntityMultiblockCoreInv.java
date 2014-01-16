@@ -4,12 +4,10 @@ import java.util.ArrayList;
 
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.MachineItemStack;
-import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
 import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
-import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import ip.industrialProcessing.multiblock.utils.inventory.IMultiblockInventories;
 import ip.industrialProcessing.multiblock.utils.inventory.MultiblockItemStack;
 import ip.industrialProcessing.utils.DirectionUtils;
@@ -18,8 +16,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
 
 public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCore implements IInventories,IMultiblockInventories {
 
@@ -179,6 +175,7 @@ public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCo
 		return machineStack.stack;
 	}
 
+	@Override
 	public MachineItemStack getMachineStack(int i) {
 		if (i < 0 || i >= this.itemStacks.size())
 			return null;
@@ -355,11 +352,13 @@ public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCo
 		return side;
 	}
 	
+	@Override
 	public int[] getAccessibleSlotsFromSide(int multiblockID,int var1){
 		LocalDirection localFrom = DirectionUtils.getLocalDirection(var1, getForwardDirection());
 		return itemStackSideSlots[multiblockID][localFrom.ordinal()];
 	 }
-	 public boolean canInsertItem(int multiblockID,int i, ItemStack itemstack, int j){
+	 @Override
+	public boolean canInsertItem(int multiblockID,int i, ItemStack itemstack, int j){
 		 MultiblockItemStack machineStack = getMultiblockStack(i);
 			if (machineStack != null && machineStack.input && machineStack.getMultiblockID() == multiblockID) {
 				if (machineStack.stack == null) {
@@ -371,6 +370,7 @@ public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCo
 			return false;
 	 }
 
+	@Override
 	public boolean canExtractItem(int multiblockID,int i, ItemStack itemstack, int j){
 		MultiblockItemStack machineStack = getMultiblockStack(i);
 		if (machineStack != null && machineStack.output && machineStack.getMultiblockID() == multiblockID) {
@@ -379,6 +379,7 @@ public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCo
 		return false;
 	}
 
+	@Override
 	public MultiblockItemStack getMultiblockStack(int i) {
 		if (i < 0 || i >= this.itemStacks.size())
 			return null;

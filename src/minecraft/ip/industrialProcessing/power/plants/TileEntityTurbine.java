@@ -1,6 +1,5 @@
 package ip.industrialProcessing.power.plants;
 
-import ic2.api.Direction;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.machines.TileEntityFluidMachine;
@@ -66,7 +65,7 @@ public class TileEntityTurbine extends TileEntityFluidMachine implements IAnimat
 	    if (generator != null) {
 		float speed = this.animationHandler.getSpeed();
 		float resistance = generator.setSpeed(generatorDirection, speed);
-		speed -= speed * resistance * this.animationHandler.DT;
+		speed -= speed * resistance * AnimationHandler.DT;
 		this.animationHandler.setSpeed(speed);
 	    }
 	}
@@ -83,8 +82,8 @@ public class TileEntityTurbine extends TileEntityFluidMachine implements IAnimat
 
     private void addEnergy(int waterFill) {
 	float speed = this.animationHandler.getSpeed();
-	speed += waterFill * this.animationHandler.DT / 400;
-	speed -= speed * DRAG * this.animationHandler.DT;
+	speed += waterFill * AnimationHandler.DT / 400;
+	speed -= speed * DRAG * AnimationHandler.DT;
 	this.animationHandler.setSpeed(speed);
     }
 

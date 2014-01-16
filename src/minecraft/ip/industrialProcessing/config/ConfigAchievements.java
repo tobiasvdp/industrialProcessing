@@ -1,7 +1,6 @@
 package ip.industrialProcessing.config;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import ip.industrialProcessing.IndustrialProcessing;
 import net.minecraftforge.common.AchievementPage;
 
 public class ConfigAchievements {

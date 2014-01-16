@@ -1,6 +1,7 @@
 package ip.industrialProcessing.subMod.logic.transport.wired.bundle;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.subMod.logic.IPLogic;
 import ip.industrialProcessing.subMod.logic.config.ConfigLogic;
 import ip.industrialProcessing.subMod.logic.transport.ICommunicationTransport;
@@ -21,7 +22,7 @@ public class BLlogicBundle extends BlockContainer{
 		setStepSound(Block.soundPowderFootstep);
 		setUnlocalizedName("BLlogicBundle");
 		setCreativeTab(IPLogic.tabLogic);
-		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "inputTop");
+		func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "inputTop");
 	}
 
 	@Override

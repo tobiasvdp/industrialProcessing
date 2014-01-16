@@ -1,7 +1,5 @@
 package ip.industrialProcessing.transport.items.conveyorBelt.rendering;
 
-import ip.industrialProcessing.client.render.ConnectionState;
-import ip.industrialProcessing.transport.items.conveyorBelt.SlopeState;
 import ip.industrialProcessing.utils.IPMath;
 import net.minecraft.client.renderer.Tessellator;
 

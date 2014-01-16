@@ -14,7 +14,6 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.ForgeDirection;
 
 public abstract class TileEntityMachine extends TileEntitySynced implements ISidedInventory, IMachineSlots, IRotateableEntity, IMachineContainerEntity, IMachineInterface {
@@ -324,7 +323,8 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
 	return new InterfaceType[] { InterfaceType.single, InterfaceType.inventory };
     };
 
-    public String getName() {
+    @Override
+	public String getName() {
 	return this.name;
     }
 
@@ -333,7 +333,8 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
 	return name;
     }
 
-    public StatusType getStatus() {
+    @Override
+	public StatusType getStatus() {
 	if (enabled)
 	    return status;
 	return StatusType.disabled;

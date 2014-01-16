@@ -23,6 +23,7 @@ public class CreativeTabsIP extends CreativeTabs {
 		return icon;
 	}
 
+	@Override
 	public String getTranslatedTabLabel() {
 		return "IP.itemGroup." + name;
 	}

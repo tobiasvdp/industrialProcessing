@@ -3,6 +3,7 @@ package ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.hydroTr
 import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
+import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
@@ -24,7 +25,7 @@ public class TileEntityHydroTreater extends TileEntityMultiblockCoreTankWorkerPo
 		LayoutMultiblock layout = new LayoutMultiblock(0, 0, 0, 0, 0, 0);
 
 		int i = 0;
-		layout.setCoreID(i++, 0, 1, IndustrialProcessing.blockHydroTreater.blockID);
+		layout.setCoreID(i++, 0, 1, ISetupMachineBlocks.blockHydroTreater.blockID);
 
 		structure.addLayout(layout, FacingDirection.North);
 		structure.addLayout(LayoutTransformer.transform(layout, FacingDirection.East), FacingDirection.East);

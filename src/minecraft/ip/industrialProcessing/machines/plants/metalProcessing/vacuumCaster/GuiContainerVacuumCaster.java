@@ -2,7 +2,6 @@ package ip.industrialProcessing.machines.plants.metalProcessing.vacuumCaster;
 
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
 import ip.industrialProcessing.machines.containers.gui.GuiContainerPoweredFluidWorkerMachine;
-import ip.industrialProcessing.machines.plants.metalProcessing.turretLathe.ContainerTurretLathe;
 import net.minecraft.entity.player.InventoryPlayer;
 
 import org.lwjgl.util.Point;

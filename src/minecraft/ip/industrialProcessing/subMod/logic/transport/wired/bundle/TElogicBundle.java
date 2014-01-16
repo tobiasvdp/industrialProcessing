@@ -2,7 +2,6 @@ package ip.industrialProcessing.subMod.logic.transport.wired.bundle;
 
 import java.util.ArrayList;
 
-import ip.industrialProcessing.subMod.logic.transport.ICommunicationNode;
 import ip.industrialProcessing.subMod.logic.transport.ICommunicationTransport;
 import ip.industrialProcessing.subMod.logic.utils.UTBusType;
 import ip.industrialProcessing.subMod.logic.utils.UTLogicType;

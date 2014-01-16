@@ -1,17 +1,11 @@
 package ip.industrialProcessing.transport.fluids;
 
-import java.util.Arrays;
-
-import org.lwjgl.Sys;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidTank;
-import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.machines.IRotateableEntity;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
@@ -20,7 +14,6 @@ import ip.industrialProcessing.machines.animation.IAnimationSyncable;
 import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 import ip.industrialProcessing.machines.animation.tanks.TankHandler;
 import ip.industrialProcessing.transport.TransportConnectionState;
-import ip.industrialProcessing.utils.DirectionUtils;
 import ip.industrialProcessing.utils.FluidTransfers;
 
 public class TileEntityValve extends TileEntityTransportFluidsBase implements IAnimationProgress, IAnimationSyncable, IRotateableEntity {
@@ -75,9 +68,9 @@ public class TileEntityValve extends TileEntityTransportFluidsBase implements IA
                 }
             }
 
-            this.moveForce -= this.moveForce * this.animationHandler.DT * 2;
-            this.moveSpeed += this.moveForce * this.animationHandler.DT;
-            this.moveSpeed -= this.moveSpeed * this.animationHandler.DT * 5;
+            this.moveForce -= this.moveForce * AnimationHandler.DT * 2;
+            this.moveSpeed += this.moveForce * AnimationHandler.DT;
+            this.moveSpeed -= this.moveSpeed * AnimationHandler.DT * 5;
 
             this.animationHandler.setIncrementing(this.moveSpeed > 0);
             this.animationHandler.setSpeed(Math.abs(moveSpeed));
@@ -204,14 +197,16 @@ public class TileEntityValve extends TileEntityTransportFluidsBase implements IA
         }
     }
 
-    public void setForwardDirection(ForgeDirection forwardFromMetadata) {
+    @Override
+	public void setForwardDirection(ForgeDirection forwardFromMetadata) {
         this.frontDirection = forwardFromMetadata; // set forward
         this.notifyBlockChange(); // sync nbt
         if (this.worldObj != null) // notify neighbors
             this.worldObj.notifyBlockChange(xCoord, yCoord, zCoord, this.getBlockType().blockID);
     }
 
-    public ForgeDirection getForwardDirection() {
+    @Override
+	public ForgeDirection getForwardDirection() {
         return this.frontDirection;
     }
 

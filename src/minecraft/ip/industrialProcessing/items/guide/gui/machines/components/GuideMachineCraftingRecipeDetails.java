@@ -79,10 +79,10 @@ public class GuideMachineCraftingRecipeDetails extends GuideMachineRecipeDetails
 
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawingQuads();
-		tessellator.addVertexWithUV((double) (x + 0), (double) (y + h), (double) this.zLevel, 0, 1);
-		tessellator.addVertexWithUV((double) (x + w), (double) (y + h), (double) this.zLevel, 1, 1);
-		tessellator.addVertexWithUV((double) (x + w), (double) (y + 0), (double) this.zLevel, 1, 0);
-		tessellator.addVertexWithUV((double) (x + 0), (double) (y + 0), (double) this.zLevel, 0, 0);
+		tessellator.addVertexWithUV(x + 0, y + h, this.zLevel, 0, 1);
+		tessellator.addVertexWithUV(x + w, y + h, this.zLevel, 1, 1);
+		tessellator.addVertexWithUV(x + w, y + 0, this.zLevel, 1, 0);
+		tessellator.addVertexWithUV(x + 0, y + 0, this.zLevel, 0, 0);
 		tessellator.draw();
 	}
 

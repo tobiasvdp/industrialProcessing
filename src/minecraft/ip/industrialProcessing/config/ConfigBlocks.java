@@ -164,7 +164,7 @@ public class ConfigBlocks {
         registerBlock(ISetupBlocks.blockGrit, "IP.Block.Grit", "Grit");
         registerBlock(ISetupBlocks.blockAsphalt, "IP.Block.Asphalt", "Asphalt");
         registerBlock(ISetupBlocks.blockStairs, "IP.Block.Stairs", "Walkway Stairs");
-        registerBlock(IndustrialProcessing.blockAnvil, "IP.Block.Anvil", "Anvil");
+        registerBlock(ISetupMachineBlocks.blockAnvil, "IP.Block.Anvil", "Anvil");
 
         registerBlock(ISetupBlocks.blockCinnebar, "IP.World.Cinnebar", "Cinnebar Crystal");
         registerBlock(ISetupBlocks.blockRutile, "IP.World.Rutile", "Rutile Crystal");

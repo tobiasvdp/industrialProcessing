@@ -3,25 +3,17 @@ package ip.industrialProcessing.gui.guiContainer.layout.components;
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.ContainerIP;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayout;
-import ip.industrialProcessing.gui.container.syncing.handlers.HandlerPower;
 import ip.industrialProcessing.gui.container.syncing.handlers.HandlerWorker;
 import ip.industrialProcessing.gui.container.syncing.handlers.IHandlerContainer;
-import ip.industrialProcessing.gui.container.syncing.handlers.IHandlerPower;
 import ip.industrialProcessing.gui.container.syncing.handlers.IHandlerWorker;
-import ip.industrialProcessing.gui.container.syncing.info.InfoPower;
 import ip.industrialProcessing.gui.container.syncing.info.InfoWorker;
 import ip.industrialProcessing.gui.guiContainer.GuiContainerIP;
 import ip.industrialProcessing.gui.guiContainer.layout.GuiContainerLayout;
 import ip.industrialProcessing.items.guide.gui.machines.GuideMachinePage;
-import ip.industrialProcessing.machines.containers.ContainerWorkerMachine;
-import ip.industrialProcessing.machines.containers.ProgressInfoPower;
-import ip.industrialProcessing.machines.containers.ProgressInfoWorker;
 import ip.industrialProcessing.recipes.Recipe;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
-import java.util.Iterator;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.inventory.Container;

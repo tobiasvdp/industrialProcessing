@@ -1,23 +1,17 @@
 package ip.industrialProcessing.utils.registry;
 
 import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.machines.crusher.RecipesCrusher;
 import ip.industrialProcessing.multiblock.recipes.RecipeMultiblock;
 import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
-import ip.industrialProcessing.recipes.IRecipeWorkHandler;
 import ip.industrialProcessing.recipes.Recipe;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map.Entry;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-
-import com.google.common.collect.Lists;
 
 public class RecipeRegistry {
 	private static HashMap<Recipe, Block> recipes = new HashMap<Recipe, Block>();

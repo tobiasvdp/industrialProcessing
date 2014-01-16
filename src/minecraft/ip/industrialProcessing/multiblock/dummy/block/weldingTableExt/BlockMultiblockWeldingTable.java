@@ -7,6 +7,8 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.multiblock.dummy.BlockMultiblockDummy;
 
 public class BlockMultiblockWeldingTable extends BlockMultiblockDummy{
@@ -14,7 +16,7 @@ public class BlockMultiblockWeldingTable extends BlockMultiblockDummy{
 	private Icon[] icons = new Icon[4];
 
 	public BlockMultiblockWeldingTable() {
-		super(ConfigMachineBlocks.getBLmultiblockWeldingStationExt(), "MultiblockScreenExt", IndustrialProcessing.tabMultiblocks);
+		super(ConfigMachineBlocks.getBLmultiblockWeldingStationExt(), "MultiblockScreenExt", ISetupCreativeTabs.tabMultiblocks);
 	}
 
 	@Override
@@ -35,10 +37,10 @@ public class BlockMultiblockWeldingTable extends BlockMultiblockDummy{
 
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-        icons [0] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "Planks2");
-        icons [1] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "Stone");
-        icons [2] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "Iron");
-        icons [3] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "Chest");
+        icons [0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Planks2");
+        icons [1] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Stone");
+        icons [2] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Iron");
+        icons [3] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Chest");
     }
 
 }

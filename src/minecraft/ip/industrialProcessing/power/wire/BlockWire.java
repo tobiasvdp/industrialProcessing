@@ -1,19 +1,15 @@
 package ip.industrialProcessing.power.wire;
 
-import java.util.List;
-
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.transport.BlockTransport;
-import ip.industrialProcessing.transport.fluids.TileEntityTransportFluidsBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockWire extends BlockTransport {
@@ -23,8 +19,8 @@ public class BlockWire extends BlockTransport {
     }
 
     protected BlockWire(int id, Material material, StepSound soundfootstep, String name) {
-        super(id, material, 1F, soundfootstep, name, IndustrialProcessing.tabPower);
-        func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "wire");
+        super(id, material, 1F, soundfootstep, name, ISetupCreativeTabs.tabPower);
+        func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "wire");
     }
 
     @Override

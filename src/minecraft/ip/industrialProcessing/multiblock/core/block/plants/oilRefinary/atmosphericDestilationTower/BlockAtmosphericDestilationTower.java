@@ -7,13 +7,14 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.multiblock.core.BlockMultiblockCore;
-import ip.industrialProcessing.multiblock.core.block.weldingStation.TileEntityMultiblockWeldingStation;
 
 public class BlockAtmosphericDestilationTower extends BlockMultiblockCore{
     Icon[] icons = new Icon[3];
 	public BlockAtmosphericDestilationTower() {
-		super(ConfigMachineBlocks.getBlockAtmosphericDestilationTowerID(), "BlockAtmosphericDestilationTower", IndustrialProcessing.tabMultiblocks);
+		super(ConfigMachineBlocks.getBlockAtmosphericDestilationTowerID(), "BlockAtmosphericDestilationTower", ISetupCreativeTabs.tabMultiblocks);
 	}
 
 	@Override
@@ -34,8 +35,8 @@ public class BlockAtmosphericDestilationTower extends BlockMultiblockCore{
 
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-        icons[1] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "tankSide");
-        icons[0] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "tankFeatures");
-        icons[2] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "burnerGrill");
+        icons[1] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "tankSide");
+        icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "tankFeatures");
+        icons[2] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "burnerGrill");
     }
 }

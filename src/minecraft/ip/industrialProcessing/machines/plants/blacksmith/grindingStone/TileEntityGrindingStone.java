@@ -4,7 +4,6 @@ import java.util.Iterator;
 
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityWorkerMachine;
-import ip.industrialProcessing.machines.crusher.RecipesCrusher;
 import ip.industrialProcessing.recipes.Recipe;
 
 public class TileEntityGrindingStone extends TileEntityWorkerMachine{

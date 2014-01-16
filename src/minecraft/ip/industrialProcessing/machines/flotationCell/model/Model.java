@@ -3,8 +3,6 @@ import ip.industrialProcessing.api.rendering.wavefront.ObjMesh;
 import ip.industrialProcessing.api.rendering.wavefront.ObjQuad;
 
 import org.lwjgl.util.vector.Matrix4f;
-import org.lwjgl.util.vector.Vector2f;
-import org.lwjgl.util.vector.Vector3f;
 public class Model extends ObjMesh{
 	public Model(){
 		this.quads = new ObjQuad[0];

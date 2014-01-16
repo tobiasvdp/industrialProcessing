@@ -1,9 +1,7 @@
 package ip.industrialProcessing.machines.plants.oilRefinary.sourWaterStripper;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
-import ip.industrialProcessing.machines.electrolyser.RecipesElectrolyser;
 import ip.industrialProcessing.recipes.Recipe;
 
 import java.util.Iterator;
@@ -11,7 +9,6 @@ import java.util.Iterator;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidTank;
 
 public class TileEntitySourWaterStripper extends TileEntityPoweredFluidWorkerMachine{
 	public static RecipesSourWaterStripper recipes = new RecipesSourWaterStripper();

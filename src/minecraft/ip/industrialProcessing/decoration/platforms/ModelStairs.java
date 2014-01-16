@@ -1,7 +1,5 @@
 package ip.industrialProcessing.decoration.platforms;
 
-import javax.swing.RowFilter.ComparisonType;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
@@ -10,7 +8,6 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.Icon;
-import net.minecraft.world.IBlockAccess;
 import ip.industrialProcessing.api.rendering.connectedTile.ConnectionCompass;
 import ip.industrialProcessing.api.rendering.connectedTile.TileConnection;
 import ip.industrialProcessing.api.rendering.wavefront.WorldReference;

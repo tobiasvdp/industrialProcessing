@@ -7,11 +7,6 @@ import ip.industrialProcessing.gui.container.syncing.handlers.HandlerPower;
 import ip.industrialProcessing.gui.container.syncing.handlers.IHandlerPower;
 import ip.industrialProcessing.gui.container.syncing.info.InfoPower;
 import ip.industrialProcessing.machines.IPowerStorage;
-import ip.industrialProcessing.machines.containers.IProgressBarHandler;
-import ip.industrialProcessing.machines.containers.ProgressBarHandlerInfo;
-import ip.industrialProcessing.machines.containers.ProgressBarPowerHandler;
-import ip.industrialProcessing.machines.containers.ProgressInfoPower;
-import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorker;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
 
 public class ContainerMultiblockTankWorkerPowered extends ContainerMultiblockTankWorker {

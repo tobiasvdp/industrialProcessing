@@ -3,6 +3,8 @@ package ip.industrialProcessing.transport.items.conveyorChute;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.transport.items.conveyorBelt.BlockConveyorBase;
 
 import java.util.List;
@@ -22,7 +24,7 @@ public class BlockConveyorChute extends BlockConveyorBase {
 
     private Icon[] icons = new Icon[3];
     public BlockConveyorChute() {
-        super(ConfigMachineBlocks.getBLtransportConveyorShute(), Material.iron, 5.0f, Block.soundMetalFootstep, "Conveyor Shute", IndustrialProcessing.tabPower);
+        super(ConfigMachineBlocks.getBLtransportConveyorShute(), Material.iron, 5.0f, Block.soundMetalFootstep, "Conveyor Shute", ISetupCreativeTabs.tabPower);
     }
 
     @Override
@@ -55,9 +57,9 @@ public class BlockConveyorChute extends BlockConveyorBase {
     @Override
     public void registerIcons(IconRegister par1IconRegister) { 
         
-        icons[0] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "conveyor");
-        icons[1] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "conveyorHopperFeatures");
-        icons[2] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "chute");
+        icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "conveyor");
+        icons[1] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "conveyorHopperFeatures");
+        icons[2] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "chute");
     }
 
 }

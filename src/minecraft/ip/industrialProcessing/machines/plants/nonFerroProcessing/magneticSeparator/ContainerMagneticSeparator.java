@@ -1,8 +1,6 @@
 package ip.industrialProcessing.machines.plants.nonFerroProcessing.magneticSeparator;
 
-import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
-import ip.industrialProcessing.machines.containers.ContainerMachine;
 import ip.industrialProcessing.machines.containers.ContainerPoweredFluidWorkerMachine;
 import ip.industrialProcessing.slots.SlotBase;
 import ip.industrialProcessing.slots.SlotOutput;

@@ -3,7 +3,6 @@ package ip.industrialProcessing.client.render.gui;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.renderer.Tessellator;
 
 public class ToolTip {
 	private String[] lines;

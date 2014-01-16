@@ -1,29 +1,19 @@
 package ip.industrialProcessing.machines.containers.gui;
 
 import org.lwjgl.util.Point;
-import org.lwjgl.util.ReadablePoint;
 import org.lwjgl.util.Rectangle;
-import org.lwjgl.util.WritablePoint;
-
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import ip.industrialProcessing.client.render.gui.ToolTip;
-import ip.industrialProcessing.machines.TileEntityFluidMachine;
 import ip.industrialProcessing.machines.containers.ContainerFluidMachine;
 import ip.industrialProcessing.machines.containers.IFluidMachineContainerEntity;
 import ip.industrialProcessing.machines.containers.IMachineContainerEntity;
 import ip.industrialProcessing.machines.containers.ProgressInfoTank;
-import ip.industrialProcessing.machines.containers.ProgressInfoWorker;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTankInfo;
 
 public class GuiContainerFluidMachine<T extends TileEntity & IMachineContainerEntity & IFluidMachineContainerEntity> extends GuiContainerMachine {
 

@@ -5,18 +5,11 @@ import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.items.guide.gui.GuiGuide;
 import ip.industrialProcessing.items.guide.gui.GuidePanoramaPage;
-import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.utils.registry.BlockRegistry;
-import ip.industrialProcessing.utils.registry.RecipeRegistry;
-
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Iterator;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
@@ -33,7 +26,8 @@ public class GuideMachinePage extends GuidePanoramaPage {
     public GuideMachinePage() {
 	super(new Rectangle(0, 0, 72, 178), new Point(5, 18));
 	Arrays.sort(machines, new Comparator<Block>() {
-	    public int compare(Block o1, Block o2) {
+	    @Override
+		public int compare(Block o1, Block o2) {
 		return o1.getLocalizedName().compareTo(o2.getLocalizedName());
 	    }
 	});

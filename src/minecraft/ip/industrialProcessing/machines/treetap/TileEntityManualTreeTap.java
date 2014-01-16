@@ -2,18 +2,13 @@ package ip.industrialProcessing.machines.treetap;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
+import ip.industrialProcessing.config.ISetupBlocks;
 import ip.industrialProcessing.machines.TileEntityWorkerMachine;
 import ip.industrialProcessing.recipes.Recipe;
-import ip.industrialProcessing.recipes.RecipeWorker;
-import ip.industrialProcessing.utils.working.ServerWorker;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidStack;
 
 public class TileEntityManualTreeTap extends TileEntityWorkerMachine {
 
@@ -30,9 +25,9 @@ public class TileEntityManualTreeTap extends TileEntityWorkerMachine {
 		ForgeDirection direction = this.getForwardDirection();
 		int id = worldObj.getBlockId(xCoord - direction.offsetX, yCoord - direction.offsetY, zCoord - direction.offsetZ);
 
-		if (id == IndustrialProcessing.blockRubberLog.blockID)
+		if (id == ISetupBlocks.blockRubberLog.blockID)
 			return rubberRecipes.isValidInput(slot, itemID);
-		else if (id == IndustrialProcessing.blockPineLog.blockID)
+		else if (id == ISetupBlocks.blockPineLog.blockID)
 			return pineRecipes.isValidInput(slot, itemID);
 		return false;
 	}
@@ -43,9 +38,9 @@ public class TileEntityManualTreeTap extends TileEntityWorkerMachine {
 			ForgeDirection direction = this.getForwardDirection();
 			int id = worldObj.getBlockId(xCoord - direction.offsetX, yCoord - direction.offsetY, zCoord - direction.offsetZ);
 
-			if (id == IndustrialProcessing.blockRubberLog.blockID)
+			if (id == ISetupBlocks.blockRubberLog.blockID)
 				return rubberRecipes.iterator();
-			else if (id == IndustrialProcessing.blockPineLog.blockID)
+			else if (id == ISetupBlocks.blockPineLog.blockID)
 				return pineRecipes.iterator();
 		}
 		return new ArrayList<Recipe>().iterator();

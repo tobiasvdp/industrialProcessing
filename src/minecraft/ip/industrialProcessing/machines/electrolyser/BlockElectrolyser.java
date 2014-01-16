@@ -3,9 +3,9 @@ package ip.industrialProcessing.machines.electrolyser;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 public class BlockElectrolyser extends BlockMachineRendered implements IRecipeBlock {
 
 	public BlockElectrolyser() {
-		super(ConfigMachineBlocks.getElectrolyserBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Electrolyser", IndustrialProcessing.tabOreProcessing);
+		super(ConfigMachineBlocks.getElectrolyserBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Electrolyser", ISetupCreativeTabs.tabOreProcessing);
 	}
 
 	@Override

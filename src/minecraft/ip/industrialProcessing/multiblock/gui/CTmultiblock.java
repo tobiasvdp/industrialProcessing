@@ -1,11 +1,7 @@
 package ip.industrialProcessing.multiblock.gui;
 
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
-import ip.industrialProcessing.multiblock.core.block.weldingStation.TileEntityMultiblockWeldingStation;
-import ip.industrialProcessing.utils.containers.ContainerUtils;
-import ip.industrialProcessing.utils.containers.IContainerAdd;
 import ip.industrialProcessing.utils.containers.VerifyingContainer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.entity.player.EntityPlayer;

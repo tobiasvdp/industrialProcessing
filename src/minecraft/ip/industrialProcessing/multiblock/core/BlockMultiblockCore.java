@@ -1,9 +1,8 @@
 package ip.industrialProcessing.multiblock.core;
 
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
+import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
-import ip.industrialProcessing.recipes.IRecipeBlock;
 import ip.industrialProcessing.utils.inventories.InventoryUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -25,7 +24,7 @@ public abstract class BlockMultiblockCore extends BlockContainer{
 		setStepSound(Block.soundMetalFootstep);
 		setUnlocalizedName(name);
 		setCreativeTab(tab);
-		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "inputTop");
+		func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "inputTop");
 	}
 
 	@Override
@@ -81,7 +80,7 @@ public abstract class BlockMultiblockCore extends BlockContainer{
 
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack itemStack) {
-		int dir = MathHelper.floor_double((double) ((entityLivingBase.rotationYaw * 4F) / 360F) + 0.5D) & 3;
+		int dir = MathHelper.floor_double((entityLivingBase.rotationYaw * 4F) / 360F + 0.5D) & 3;
 		world.setBlockMetadataWithNotify(x, y, z, dir, 0);
 		super.onBlockPlacedBy(world, x, y, z, entityLivingBase, itemStack);
 		TileEntityMultiblockCore core = ((TileEntityMultiblockCore) world.getBlockTileEntity(x, y, z));

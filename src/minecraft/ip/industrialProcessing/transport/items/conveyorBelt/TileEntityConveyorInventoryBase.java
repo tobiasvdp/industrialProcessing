@@ -6,8 +6,6 @@ import ip.industrialProcessing.transport.items.conveyorBelt.util.ConveyorEnviron
 import ip.industrialProcessing.utils.DirectionUtils;
 import ip.industrialProcessing.utils.ItemTransfers;
 
-import java.util.ArrayList;
-
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;

@@ -4,6 +4,7 @@ import java.util.Random;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigBlocks;
+import ip.industrialProcessing.config.ISetupItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -30,7 +31,7 @@ public class BlockRubberLog extends Block {
 
         ItemStack playerStack = par5EntityPlayer.inventory.getCurrentItem();
         if (playerStack != null) { 
-            if (playerStack.itemID == IndustrialProcessing.itemKnife.itemID) {
+            if (playerStack.itemID == ISetupItems.itemKnife.itemID) {
                 if (par6 > 1) {
                     int meta = par1World.getBlockMetadata(par2, par3, par4);
 
@@ -90,11 +91,13 @@ public class BlockRubberLog extends Block {
     /**
      * Returns the ID of the items to drop on destruction.
      */
-    public int idDropped(int par1, Random par2Random, int par3) {
+    @Override
+	public int idDropped(int par1, Random par2Random, int par3) {
         return ConfigBlocks.getLogID();
     }
 
-    public int damageDropped(int par1) {
+    @Override
+	public int damageDropped(int par1) {
         return 0; // RUBBER TREE LOGS
     }
 
@@ -102,7 +105,8 @@ public class BlockRubberLog extends Block {
      * ejects contained items into the world, and notifies neighbours of an
      * update, as appropriate
      */
-    public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6) {
+    @Override
+	public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6) {
         byte b0 = 4;
         int j1 = b0 + 1;
 

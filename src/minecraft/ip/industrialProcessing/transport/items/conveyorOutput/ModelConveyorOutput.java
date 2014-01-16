@@ -5,10 +5,8 @@ import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorTransportBase;
 import ip.industrialProcessing.transport.items.conveyorBelt.rendering.ModelConveyorBeltTile;
-import ip.industrialProcessing.transport.items.conveyorBelt.rendering.paths.BendPath;
 import ip.industrialProcessing.transport.items.conveyorBelt.rendering.paths.CrossPath;
 import ip.industrialProcessing.transport.items.conveyorBelt.rendering.paths.ItemPath;
-import ip.industrialProcessing.transport.items.conveyorBelt.rendering.paths.SlopePath;
 
 public class ModelConveyorOutput extends ModelConveyorBeltTile {
 

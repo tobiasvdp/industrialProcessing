@@ -1,9 +1,5 @@
 package ip.industrialProcessing.items.guide.gui.machines.components;
 
-import ip.industrialProcessing.client.render.gui.GuiTools;
-import ip.industrialProcessing.client.render.gui.ToolTip;
-import ip.industrialProcessing.items.guide.gui.GuiGuide;
-
 import java.awt.Rectangle;
 
 import net.minecraft.block.Block;

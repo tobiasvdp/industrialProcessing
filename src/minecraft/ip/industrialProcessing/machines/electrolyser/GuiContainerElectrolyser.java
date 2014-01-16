@@ -6,7 +6,6 @@ import org.lwjgl.util.Point;
 import org.lwjgl.util.Rectangle;
 
 import ip.industrialProcessing.machines.containers.gui.GuiContainerPoweredFluidWorkerMachine;
-import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 
 public class GuiContainerElectrolyser extends GuiContainerPoweredFluidWorkerMachine{
 	private static final Rectangle PROGRESSBAR_SOURCE = new Rectangle(176, 0, 22, 18);

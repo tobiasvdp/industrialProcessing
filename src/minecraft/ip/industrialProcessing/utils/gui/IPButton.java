@@ -1,6 +1,5 @@
 package ip.industrialProcessing.utils.gui;
 
-import org.lwjgl.util.Point;
 import org.lwjgl.util.Rectangle;
 
 public class IPButton {

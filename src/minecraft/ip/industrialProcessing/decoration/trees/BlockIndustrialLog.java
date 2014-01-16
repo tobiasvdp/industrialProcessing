@@ -2,6 +2,7 @@ package ip.industrialProcessing.decoration.trees;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigBlocks;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 
 import java.util.List;
 import java.util.Random;
@@ -24,7 +25,7 @@ public class BlockIndustrialLog extends BlockLog {
 
     public BlockIndustrialLog() {
         super(ConfigBlocks.getLogID());
-        this.setCreativeTab(IndustrialProcessing.tabOres);
+        this.setCreativeTab(ISetupCreativeTabs.tabOres);
         this.setHardness(2.0F).setStepSound(soundWoodFootstep).setUnlocalizedName("log");
     }
 
@@ -83,7 +84,8 @@ public class BlockIndustrialLog extends BlockLog {
         return this.blockID;
     }
 
-    public int damageDropped(int par1) {
+    @Override
+	public int damageDropped(int par1) {
         return par1;
     }
 }

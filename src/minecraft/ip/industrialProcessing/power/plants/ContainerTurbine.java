@@ -1,7 +1,6 @@
 package ip.industrialProcessing.power.plants;
 
 import net.minecraft.entity.player.InventoryPlayer;
-import ip.industrialProcessing.machines.TileEntityFluidMachine;
 import ip.industrialProcessing.machines.containers.ContainerFluidMachine;
 import ip.industrialProcessing.machines.containers.IProgressBarHandler;
 import ip.industrialProcessing.machines.containers.ProgressBarHandlerInfo;

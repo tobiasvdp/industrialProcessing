@@ -3,6 +3,8 @@ package ip.industrialProcessing.machines.diskFilter;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.gui.GuiLayout;
 import ip.industrialProcessing.gui.IGuiLayout;
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
@@ -31,7 +33,7 @@ public class BlockDiskFilter extends BlockMachineRendered  implements IRecipeBlo
 
     Icon[] icons = new Icon[5];
 	public BlockDiskFilter() {
-		super(ConfigMachineBlocks.getDiskFilterBlockID(), Material.iron, 1f, Block.soundMetalFootstep, "Disk Filter", IndustrialProcessing.tabOreProcessing); 
+		super(ConfigMachineBlocks.getDiskFilterBlockID(), Material.iron, 1f, Block.soundMetalFootstep, "Disk Filter", ISetupCreativeTabs.tabOreProcessing); 
 	}
 
 	@Override
@@ -53,11 +55,11 @@ public class BlockDiskFilter extends BlockMachineRendered  implements IRecipeBlo
 
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-        icons[0] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "generatorFeatures");
-        icons[1] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "tankSide");
-        icons[2] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "conveyorHopperFeatures");
-        icons[3] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "tankFeatures");
-        icons[4] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "DiskFilterRings"); 
+        icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "generatorFeatures");
+        icons[1] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "tankSide");
+        icons[2] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "conveyorHopperFeatures");
+        icons[3] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "tankFeatures");
+        icons[4] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "DiskFilterRings"); 
     }
 
     @Override

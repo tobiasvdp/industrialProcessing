@@ -24,18 +24,18 @@ public class ConfigBaseRecipes {
 	public void addBaseRecipes() {
 		removeRecipes();
 		
-		GameRegistry.addShapelessRecipe(new ItemStack(IndustrialProcessing.itemGuide), new ItemStack(Item.book), new ItemStack(Item.dyePowder,1,14));
-		GameRegistry.addShapelessRecipe(new ItemStack(IndustrialProcessing.blockTransportFluidsStone,1,3), new ItemStack(Block.stoneBrick), new ItemStack(IndustrialProcessing.blockTransportFluids));
+		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemGuide), new ItemStack(Item.book), new ItemStack(Item.dyePowder,1,14));
+		GameRegistry.addShapelessRecipe(new ItemStack(ISetupMachineBlocks.blockTransportFluidsStone,1,3), new ItemStack(Block.stoneBrick), new ItemStack(ISetupMachineBlocks.blockTransportFluids));
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemWovenPatern), new ItemStack(Item.leather), new ItemStack(ISetupItems.itemKnife, 1, WILDCARD_VALUE));
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemThickStick), new ItemStack(Item.stick), new ItemStack(Item.stick));
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemScreen), new ItemStack(ISetupItems.itemWovenPatern), new ItemStack(ISetupItems.itemFrame));
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemStripBoard), new ItemStack(ISetupItems.itemCopperBoard), new ItemStack(ISetupItems.itemKnife, 1, WILDCARD_VALUE));
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemPestle), new ItemStack(ISetupItems.itemThickStick), new ItemStack(ISetupItems.itemKnife, 1, WILDCARD_VALUE));
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemCoalDust), new ItemStack(Item.coal), new ItemStack(ISetupItems.itemIronBowl, 1, WILDCARD_VALUE), new ItemStack(ISetupItems.itemPestle, 1, WILDCARD_VALUE));
-		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemHardenedSandDust), new ItemStack(IndustrialProcessing.blockHardSand), new ItemStack(ISetupItems.itemIronBowl, 1, WILDCARD_VALUE), new ItemStack(ISetupItems.itemPestle, 1, WILDCARD_VALUE));
-		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemAluminumDust), new ItemStack(IndustrialProcessing.blockBauxiteOre), new ItemStack(ISetupItems.itemIronBowl, 1, WILDCARD_VALUE), new ItemStack(ISetupItems.itemPestle, 1, WILDCARD_VALUE));
-		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemLeadDust), new ItemStack(IndustrialProcessing.blockGalenaOre), new ItemStack(ISetupItems.itemIronBowl, 1, WILDCARD_VALUE), new ItemStack(ISetupItems.itemPestle, 1, WILDCARD_VALUE));
-		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemLimestoneDust), new ItemStack(IndustrialProcessing.blockCobbleLimestone), new ItemStack(ISetupItems.itemIronBowl, 1, WILDCARD_VALUE), new ItemStack(ISetupItems.itemPestle, 1, WILDCARD_VALUE));
+		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemHardenedSandDust), new ItemStack(ISetupBlocks.blockHardSand), new ItemStack(ISetupItems.itemIronBowl, 1, WILDCARD_VALUE), new ItemStack(ISetupItems.itemPestle, 1, WILDCARD_VALUE));
+		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemAluminumDust), new ItemStack(ISetupBlocks.blockBauxiteOre), new ItemStack(ISetupItems.itemIronBowl, 1, WILDCARD_VALUE), new ItemStack(ISetupItems.itemPestle, 1, WILDCARD_VALUE));
+		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemLeadDust), new ItemStack(ISetupBlocks.blockGalenaOre), new ItemStack(ISetupItems.itemIronBowl, 1, WILDCARD_VALUE), new ItemStack(ISetupItems.itemPestle, 1, WILDCARD_VALUE));
+		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemLimestoneDust), new ItemStack(ISetupBlocks.blockCobbleLimestone), new ItemStack(ISetupItems.itemIronBowl, 1, WILDCARD_VALUE), new ItemStack(ISetupItems.itemPestle, 1, WILDCARD_VALUE));
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemElectroMagnet), new ItemStack(ISetupItems.itemIronBar), new ItemStack(ISetupItems.itemCopperCoil));
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemCopperCoil), new ItemStack(ISetupItems.itemThickStick), new ItemStack(ISetupItems.itemCopperWireInsulated));
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemCopperWireInsulated), new ItemStack(ISetupFluids.bucketFluidLatex, 1, WILDCARD_VALUE), new ItemStack(ISetupItems.itemCopperWire));
@@ -43,19 +43,19 @@ public class ConfigBaseRecipes {
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemSolderAlloyWire), new ItemStack(ISetupItems.itemSolderAlloyIngot), new ItemStack(ISetupItems.itemDrawPlate, 1, WILDCARD_VALUE));
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemActiveCoal), new ItemStack(ISetupItems.itemCoalDust), new ItemStack(ISetupItems.itemGrownCulture));
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemSandCast), new ItemStack(ISetupItems.itemCastingMulsh), new ItemStack(ISetupItems.itemFlask));
-		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemnhardenedIsolationBoard), new ItemStack(IndustrialProcessing.bucketResin), new ItemStack(ISetupItems.itemFiberGlass));
+		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemnhardenedIsolationBoard), new ItemStack(ISetupFluids.bucketResin), new ItemStack(ISetupItems.itemFiberGlass));
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemRedstoneCircuitry,2), new ItemStack(Item.redstone),new ItemStack(Item.redstone), new ItemStack(Item.ingotIron), new ItemStack(Item.leather));
 		GameRegistry.addRecipe(new ItemStack(ISetupItems.itemHammer), "   ", " y ", "x  ", 'x', new ItemStack(ISetupItems.itemThickStick), 'y', new ItemStack(Item.ingotIron));
 		GameRegistry.addRecipe(new ItemStack(ISetupItems.itemCastingMulsh, 4), "xyx", "yzy", "xyx", 'x', new ItemStack(Block.sand), 'y', new ItemStack(Item.clay), 'z', new ItemStack(Item.bucketWater));
 		GameRegistry.addRecipe(new ItemStack(ISetupItems.itemFlask), " x ", "x x", " x ", 'x', new ItemStack(Block.woodSingleSlab, 1, WILDCARD_VALUE));
-		GameRegistry.addRecipe(new ItemStack(IndustrialProcessing.blockIronBowl), "   ", "xyx","   ", 'x', new ItemStack(IndustrialProcessing.itemThickStick),'y', new ItemStack(IndustrialProcessing.itemIronBowl, 8));
-		GameRegistry.addRecipe(new ItemStack(IndustrialProcessing.itemSilicium,8), "xxx", "xyx","xxx", 'x', new ItemStack(IndustrialProcessing.itemHardenedSandDust),'y', new ItemStack(IndustrialProcessing.itemAluminumDust));
-		GameRegistry.addRecipe(new ItemStack(IndustrialProcessing.itemSolderEmpty,1), "xyx", " z ","xyx", 'x', new ItemStack(Item.leather),'y', new ItemStack(Block.planks,1,WILDCARD_VALUE),'z',new ItemStack(Item.stick));
-		GameRegistry.addRecipe(new ItemStack(IndustrialProcessing.blockWire,6), "xxx", "yyy","   ", 'x', new ItemStack(Block.cloth,1,WILDCARD_VALUE),'y', new ItemStack(IndustrialProcessing.itemCopperBar));
-		GameRegistry.addRecipe(new ItemStack(IndustrialProcessing.blockWire,6), "   ", "xxx", "yyy",'x', new ItemStack(Block.cloth,1,WILDCARD_VALUE),'y', new ItemStack(IndustrialProcessing.itemCopperBar));
-		GameRegistry.addRecipe(new ItemStack(IndustrialProcessing.blockWire,6), "yyy", "xxx","   ", 'x', new ItemStack(Block.cloth,1,WILDCARD_VALUE),'y', new ItemStack(IndustrialProcessing.itemCopperBar));
-		GameRegistry.addRecipe(new ItemStack(IndustrialProcessing.blockWire,6), "   ", "yyy", "xxx",'x', new ItemStack(Block.cloth,1,WILDCARD_VALUE),'y', new ItemStack(IndustrialProcessing.itemCopperBar));
-		GameRegistry.addShapelessRecipe(new ItemStack(IndustrialProcessing.blockWire,2),new ItemStack(Block.cloth,1,WILDCARD_VALUE), new ItemStack(IndustrialProcessing.itemCopperBar));
+		GameRegistry.addRecipe(new ItemStack(ISetupMachineBlocks.blockIronBowl), "   ", "xyx","   ", 'x', new ItemStack(ISetupItems.itemThickStick),'y', new ItemStack(ISetupItems.itemIronBowl, 8));
+		GameRegistry.addRecipe(new ItemStack(ISetupItems.itemSilicium,8), "xxx", "xyx","xxx", 'x', new ItemStack(ISetupItems.itemHardenedSandDust),'y', new ItemStack(ISetupItems.itemAluminumDust));
+		GameRegistry.addRecipe(new ItemStack(ISetupItems.itemSolderEmpty,1), "xyx", " z ","xyx", 'x', new ItemStack(Item.leather),'y', new ItemStack(Block.planks,1,WILDCARD_VALUE),'z',new ItemStack(Item.stick));
+		GameRegistry.addRecipe(new ItemStack(ISetupMachineBlocks.blockWire,6), "xxx", "yyy","   ", 'x', new ItemStack(Block.cloth,1,WILDCARD_VALUE),'y', new ItemStack(ISetupItems.itemCopperBar));
+		GameRegistry.addRecipe(new ItemStack(ISetupMachineBlocks.blockWire,6), "   ", "xxx", "yyy",'x', new ItemStack(Block.cloth,1,WILDCARD_VALUE),'y', new ItemStack(ISetupItems.itemCopperBar));
+		GameRegistry.addRecipe(new ItemStack(ISetupMachineBlocks.blockWire,6), "yyy", "xxx","   ", 'x', new ItemStack(Block.cloth,1,WILDCARD_VALUE),'y', new ItemStack(ISetupItems.itemCopperBar));
+		GameRegistry.addRecipe(new ItemStack(ISetupMachineBlocks.blockWire,6), "   ", "yyy", "xxx",'x', new ItemStack(Block.cloth,1,WILDCARD_VALUE),'y', new ItemStack(ISetupItems.itemCopperBar));
+		GameRegistry.addShapelessRecipe(new ItemStack(ISetupMachineBlocks.blockWire,2),new ItemStack(Block.cloth,1,WILDCARD_VALUE), new ItemStack(ISetupItems.itemCopperBar));
 
 		GameRegistry.addRecipe(new ItemStack(ISetupItems.itemCrankWheel), "  x", "xxx", "x  ", 'x', new ItemStack(ISetupItems.itemThickStick));
 		GameRegistry.addRecipe(new ItemStack(ISetupItems.itemCarbonBrush, 8), "xxx", "xyx", "xxx", 'x', new ItemStack(ISetupItems.itemCoalDust), 'y', new ItemStack(ISetupFluids.bucketResin, 1, WILDCARD_VALUE));
@@ -63,7 +63,7 @@ public class ConfigBaseRecipes {
 		// welding station
 		GameRegistry.addShapedRecipe(new ItemStack(ISetupMachineBlocks.BLmultiblockWeldingStation), "xxx", "yzy", "iji", 'x', new ItemStack(Block.stoneSingleSlab), 'y', new ItemStack(Block.planks, 1, WILDCARD_VALUE), 'z', new ItemStack(Block.workbench), 'i', new ItemStack(ISetupItems.itemThickStick), 'j', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
 		GameRegistry.addShapedRecipe(new ItemStack(ISetupMachineBlocks.BLmultiblockWeldingTableExt), "xxx", "yzy", "iji", 'x', new ItemStack(Block.stoneSingleSlab), 'y', new ItemStack(Block.planks, 1, WILDCARD_VALUE), 'z', new ItemStack(Block.chest), 'i', new ItemStack(ISetupItems.itemThickStick), 'j', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
-		GameRegistry.addShapedRecipe(new ItemStack(ISetupMachineBlocks.blockSolderingStation), "xxx", "yzy", "iji", 'x', new ItemStack(Block.stoneSingleSlab), 'y', new ItemStack(Block.planks, 1, WILDCARD_VALUE), 'z', new ItemStack(IndustrialProcessing.itemSolderingIron), 'i', new ItemStack(ISetupItems.itemThickStick), 'j', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
+		GameRegistry.addShapedRecipe(new ItemStack(ISetupMachineBlocks.blockSolderingStation), "xxx", "yzy", "iji", 'x', new ItemStack(Block.stoneSingleSlab), 'y', new ItemStack(Block.planks, 1, WILDCARD_VALUE), 'z', new ItemStack(ISetupItems.itemSolderingIron), 'i', new ItemStack(ISetupItems.itemThickStick), 'j', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
 
 		// Bloomery
 		GameRegistry.addShapedRecipe(new ItemStack(ISetupMachineBlocks.blockBloomery), "xyx", "y y", "xzx", 'x', new ItemStack(Item.brick), 'y', new ItemStack(Block.dirt), 'z', new ItemStack(Block.cobblestone));
@@ -72,7 +72,7 @@ public class ConfigBaseRecipes {
 		GameRegistry.addShapedRecipe(new ItemStack(ISetupMachineBlocks.blockBellows), "xxx", "yyy", "xxx", 'x', new ItemStack(Block.wood, 1, WILDCARD_VALUE), 'y', new ItemStack(Item.leather));
 
 		// grindingstone
-		GameRegistry.addShapedRecipe(new ItemStack(ISetupMachineBlocks.blockGrindingStone), "x x", "xyx", "x x", 'x', new ItemStack(IndustrialProcessing.itemThickStick), 'y', new ItemStack(Block.cobblestone));
+		GameRegistry.addShapedRecipe(new ItemStack(ISetupMachineBlocks.blockGrindingStone), "x x", "xyx", "x x", 'x', new ItemStack(ISetupItems.itemThickStick), 'y', new ItemStack(Block.cobblestone));
 
 		// anvil
 		GameRegistry.addShapedRecipe(new ItemStack(ISetupMachineBlocks.blockAnvil), "zzz", " x ", "zyz", 'x', new ItemStack(Block.blockIron), 'y', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE), 'z', new ItemStack(Item.ingotIron));
@@ -81,9 +81,9 @@ public class ConfigBaseRecipes {
 		GameRegistry.addSmelting(ISetupItems.itemCopperMineral.itemID, new ItemStack(ISetupItems.itemCopperIngot), 0);
 		GameRegistry.addSmelting(ISetupItems.itemTinOxideDust.itemID, new ItemStack(ISetupItems.itemTinIngot), 0);
 		GameRegistry.addSmelting(ISetupItems.itemSilverDust.itemID, new ItemStack(ISetupItems.itemSilverIngot), 0);
-		GameRegistry.addSmelting(Block.sand.blockID, new ItemStack(IndustrialProcessing.blockHardSand), 0);
-		GameRegistry.addSmelting(IndustrialProcessing.blockHardSand.blockID, new ItemStack(Block.glass), 0);
-		GameRegistry.addSmelting(IndustrialProcessing.itemnhardenedIsolationBoard.itemID, new ItemStack(IndustrialProcessing.itemIsolationBoard), 0);
+		GameRegistry.addSmelting(Block.sand.blockID, new ItemStack(ISetupBlocks.blockHardSand), 0);
+		GameRegistry.addSmelting(ISetupBlocks.blockHardSand.blockID, new ItemStack(Block.glass), 0);
+		GameRegistry.addSmelting(ISetupItems.itemnhardenedIsolationBoard.itemID, new ItemStack(ISetupItems.itemIsolationBoard), 0);
 
 	}
 

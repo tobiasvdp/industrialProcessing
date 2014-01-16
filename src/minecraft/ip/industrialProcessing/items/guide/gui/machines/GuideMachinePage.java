@@ -1,12 +1,10 @@
 package ip.industrialProcessing.items.guide.gui.machines;
 
-import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -14,11 +12,10 @@ import java.util.Map.Entry;
 
 import org.lwjgl.opengl.GL11;
  
-import cpw.mods.fml.common.registry.GameRegistry;
+
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -31,6 +28,7 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.client.render.gui.GuiTools;
 import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.gui.GuiLayout;
 import ip.industrialProcessing.gui.IGuiLayout;
 import ip.industrialProcessing.gui.IGuiLayoutMultiblock;
@@ -39,8 +37,6 @@ import ip.industrialProcessing.items.guide.gui.GuidePanoramaPage;
 import ip.industrialProcessing.items.guide.gui.machines.components.GuideMachineCraftingRecipeDetails;
 import ip.industrialProcessing.items.guide.gui.machines.components.GuideMachineFurnaceRecipeDetails;
 import ip.industrialProcessing.items.guide.gui.machines.components.GuideMachinePageMode;
-import ip.industrialProcessing.items.guide.gui.machines.old.GuideMachineDetailsFrame;
-import ip.industrialProcessing.machines.plants.blacksmith.anvil.ContainerAnvil;
 import ip.industrialProcessing.multiblock.recipes.RecipeMultiblock;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.utils.IDescriptionBlock;
@@ -68,7 +64,7 @@ public class GuideMachinePage extends GuidePanoramaPage {
 	protected static RenderItem itemRenderer = new RenderItem();
 
 	public void setTextureWorker(Block block) {
-		this.textureLocationWorker = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/"+block.getLocalizedName()+".png");
+		this.textureLocationWorker = new ResourceLocation(INamepace.TEXTURE_DOMAIN, "textures/gui/"+block.getLocalizedName()+".png");
 		mc.renderEngine.func_110577_a(this.textureLocationWorker);
 	}
 
@@ -179,7 +175,7 @@ public class GuideMachinePage extends GuidePanoramaPage {
 					}
 				}
 			}
-			list = ContainerAnvil.recipes.getInstance().getRecipeList();
+			list = ip.industrialProcessing.utils.inventories.CraftingManager.getInstance().getRecipeList();
 			for (int j = 0; j < list.size(); j++) {
 				Object listItem = list.get(j);
 				if (listItem instanceof IRecipe) {
@@ -188,7 +184,7 @@ public class GuideMachinePage extends GuidePanoramaPage {
 					if (output != null && output.itemID == id) {
 						if (i == 0 && craftingPane == -1)
 							craftingPane = 0;
-						drawMachineTab(mouseX, mouseY, IndustrialProcessing.blockAnvil, x + i * 18, y + 60, i, craftingPane);
+						drawMachineTab(mouseX, mouseY, ISetupMachineBlocks.blockAnvil, x + i * 18, y + 60, i, craftingPane);
 						// draw the active recipe
 						if (craftingPane == i) {
 							GuideMachineCraftingRecipeDetails details = new GuideMachineCraftingRecipeDetails(recipe);
@@ -275,6 +271,7 @@ public class GuideMachinePage extends GuidePanoramaPage {
 	private int drawMachines(BlockType type, int x, int y, int mouseX, int mouseY) {
 		Block[] blocks = BlockRegistry.getBlocksByTagArray(type);
 		Arrays.sort(blocks, new Comparator<Block>() {
+			@Override
 			public int compare(Block o1, Block o2) {
 				return o1.getLocalizedName().compareTo(o2.getLocalizedName());
 			}
@@ -391,7 +388,7 @@ public class GuideMachinePage extends GuidePanoramaPage {
 
 	@Override
 	public ItemStack getIconStack() {
-		return new ItemStack(IndustrialProcessing.blockCrusher);
+		return new ItemStack(ISetupMachineBlocks.blockCrusher);
 	}
 
 	@Override

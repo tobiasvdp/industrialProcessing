@@ -5,6 +5,8 @@ import java.util.List;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.transport.items.conveyorBelt.BlockConveyorBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -20,7 +22,7 @@ public class BlockConveyorOutput extends BlockConveyorBase {
 
     private Icon[] icons = new Icon[3];
 	public BlockConveyorOutput() {
-		super(ConfigMachineBlocks.getBLtransportConveyorBeltOutput(), Material.iron, 5.0f, Block.soundMetalFootstep, "Conveyor Output", IndustrialProcessing.tabPower);
+		super(ConfigMachineBlocks.getBLtransportConveyorBeltOutput(), Material.iron, 5.0f, Block.soundMetalFootstep, "Conveyor Output", ISetupCreativeTabs.tabPower);
 	}
 
 	@Override
@@ -53,8 +55,8 @@ public class BlockConveyorOutput extends BlockConveyorBase {
 	@Override
 	public void registerIcons(IconRegister par1IconRegister) { 
 	    
-	    icons[0] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "conveyor");
-	    icons[1] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "tankSide");
-	    icons[2] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "conveyorHopperFeatures");
+	    icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "conveyor");
+	    icons[1] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "tankSide");
+	    icons[2] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "conveyorHopperFeatures");
 	}
 }

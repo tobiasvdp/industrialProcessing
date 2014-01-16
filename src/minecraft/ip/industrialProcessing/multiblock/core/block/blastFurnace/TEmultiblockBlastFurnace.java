@@ -1,14 +1,10 @@
 package ip.industrialProcessing.multiblock.core.block.blastFurnace;
 
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidStack;
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
-import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreInv;
+import ip.industrialProcessing.config.ISetupFluids;
+import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
@@ -18,7 +14,6 @@ import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.multiblock.tier.Tier;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
-import ip.industrialProcessing.multiblock.utils.MultiblockActionType;
 
 public class TEmultiblockBlastFurnace extends TileEntityMultiblockCoreTankWorkerPowered {
 	static StructureMultiblock structure;
@@ -31,8 +26,8 @@ public class TEmultiblockBlastFurnace extends TileEntityMultiblockCoreTankWorker
 		LayoutMultiblock layout = new LayoutMultiblock(0, 0, 0, 0, 1, 0);
 
 		int i = 0;
-		layout.setCoreID(i++, 0, 0, IndustrialProcessing.BLmultiblockBlastFurnace.blockID);
-		layout.setBlockIDwithGroup(0, 1, 0, i++, 0, 0,1, IndustrialProcessing.BLmultiblockBlastFurnaceTower.blockID);
+		layout.setCoreID(i++, 0, 0, ISetupMachineBlocks.BLmultiblockBlastFurnace.blockID);
+		layout.setBlockIDwithGroup(0, 1, 0, i++, 0, 0,1, ISetupMachineBlocks.BLmultiblockBlastFurnaceTower.blockID);
 
 		structure.addLayout(layout, FacingDirection.North);
 		structure.addLayout(LayoutTransformer.transform(layout, FacingDirection.East), FacingDirection.East);
@@ -65,7 +60,7 @@ public class TEmultiblockBlastFurnace extends TileEntityMultiblockCoreTankWorker
 
 	@Override
 	public void updateEntity() {
-		this.fill(0, ForgeDirection.UNKNOWN, new FluidStack(IndustrialProcessing.itemFluidAir, 5), true);
+		this.fill(0, ForgeDirection.UNKNOWN, new FluidStack(ISetupFluids.itemFluidAir, 5), true);
 		super.updateEntity();
 	}
 

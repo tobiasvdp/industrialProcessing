@@ -1,7 +1,6 @@
 package ip.industrialProcessing.machines.plants.oilRefinary.asphaltBlower;
 
 import ip.industrialProcessing.machines.containers.ContainerPoweredFluidWorkerMachine;
-import ip.industrialProcessing.machines.plants.oilRefinary.sourWaterStripper.TileEntitySourWaterStripper;
 import ip.industrialProcessing.slots.SlotLiquid;
 import ip.industrialProcessing.slots.SlotLiquidOutput;
 import ip.industrialProcessing.slots.SlotOutput;

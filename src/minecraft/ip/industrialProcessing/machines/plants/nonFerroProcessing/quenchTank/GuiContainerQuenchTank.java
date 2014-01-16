@@ -2,7 +2,6 @@ package ip.industrialProcessing.machines.plants.nonFerroProcessing.quenchTank;
 
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
 import ip.industrialProcessing.machines.containers.gui.GuiContainerPoweredFluidWorkerMachine;
-import ip.industrialProcessing.machines.plants.metalProcessing.sandCaster.ContainerSandCaster;
 import net.minecraft.entity.player.InventoryPlayer;
 
 import org.lwjgl.util.Point;

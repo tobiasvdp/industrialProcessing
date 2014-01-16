@@ -67,6 +67,7 @@ public class MDmultiblockLiftDoor extends ModelingMultiblock {
 
 	}
 
+	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		setRotationAngles(f, f1, f2, f3, f4, f5);
@@ -105,6 +106,7 @@ public class MDmultiblockLiftDoor extends ModelingMultiblock {
 		frontpanel.render(f5);
 	}
 
+	@Override
 	public void renderModel(float f5, int connection) {
 		GL11.glPushMatrix();
 		if(connection == 1){

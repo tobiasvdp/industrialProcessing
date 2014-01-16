@@ -3,7 +3,6 @@ package ip.industrialProcessing.multiblock.dummy.block.displayPanel;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -12,13 +11,9 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
-import ip.industrialProcessing.multiblock.dummy.BlockMultiblockDummy;
-import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
-import ip.industrialProcessing.multiblock.utils.MultiblockState;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 
 public class BLmultiblockDisplayPanel extends BlockContainer{
 
@@ -27,7 +22,7 @@ public class BLmultiblockDisplayPanel extends BlockContainer{
 		setHardness(1F);
 		setStepSound(Block.soundMetalFootstep);
 		setUnlocalizedName("BLmultiblockDisplayPanel");
-		setCreativeTab(IndustrialProcessing.tabMultiblocks);
+		setCreativeTab(ISetupCreativeTabs.tabMultiblocks);
 	}
 
 	@Override
@@ -54,7 +49,7 @@ public class BLmultiblockDisplayPanel extends BlockContainer{
 
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack itemStack) {
-		int dir = MathHelper.floor_double((double) ((entityLivingBase.rotationYaw * 4F) / 360F) + 0.5D) & 3;
+		int dir = MathHelper.floor_double((entityLivingBase.rotationYaw * 4F) / 360F + 0.5D) & 3;
 		world.setBlockMetadataWithNotify(x, y, z, dir, 0);
 		super.onBlockPlacedBy(world, x, y, z, entityLivingBase, itemStack);
 		((TEmultiblockDisplayPanel) world.getBlockTileEntity(x, y, z)).searchForCore();

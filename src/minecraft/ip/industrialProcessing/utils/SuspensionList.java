@@ -1,7 +1,5 @@
 package ip.industrialProcessing.utils;
 
-import ip.industrialProcessing.IndustrialProcessing;
-
 import java.util.ArrayList;
 
 public class SuspensionList {

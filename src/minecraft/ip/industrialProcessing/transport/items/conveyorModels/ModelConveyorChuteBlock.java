@@ -9,16 +9,12 @@ import net.minecraftforge.common.ForgeDirection;
 
 import org.lwjgl.util.vector.Vector3f;
 
-import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.api.rendering.wavefront.ObjRotator;
 import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
 import ip.industrialProcessing.client.render.ConnectionState;
-import ip.industrialProcessing.client.render.IConnectedTile;
 import ip.industrialProcessing.client.render.ModelBlock;
 import ip.industrialProcessing.machines.BlockMachine;
-import ip.industrialProcessing.transport.items.conveyorBelt.SlopeState;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorConnectionsBase;
-import ip.industrialProcessing.utils.DirectionUtils;
 
 public class ModelConveyorChuteBlock extends ModelBlock {
 

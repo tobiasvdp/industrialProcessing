@@ -13,7 +13,7 @@ public class EntityFloatingCart extends Entity {
     private double speedZ = 0;
 
     public EntityPlayer getRider() {
-	return (EntityPlayer) this.worldObj.getPlayerEntityByName(dataWatcher.getWatchableObjectString(17));
+	return this.worldObj.getPlayerEntityByName(dataWatcher.getWatchableObjectString(17));
     }
 
     public void setRider(EntityPlayer player) {

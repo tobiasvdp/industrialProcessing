@@ -1,6 +1,5 @@
 package ip.industrialProcessing.items.guide.gui;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.client.render.gui.GuiTools;
 import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.config.INamepace;

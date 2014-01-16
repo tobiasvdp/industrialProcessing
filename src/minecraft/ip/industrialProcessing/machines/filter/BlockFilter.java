@@ -1,38 +1,21 @@
 package ip.industrialProcessing.machines.filter;
 
-import java.util.List;
-
-import javax.jws.Oneway;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.client.ClientProxy;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.gui.GuiLayout;
 import ip.industrialProcessing.gui.IGuiLayout;
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
-import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 import ip.industrialProcessing.utils.IDescriptionBlock;
-import ip.industrialProcessing.utils.inventories.InventoryUtils;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockFilter extends BlockMachineRendered implements IRecipeBlock, IDescriptionBlock,IGuiLayout {
@@ -49,7 +32,7 @@ public class BlockFilter extends BlockMachineRendered implements IRecipeBlock, I
 	}
 
     public BlockFilter() {
-	super(ConfigMachineBlocks.getFilterBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Ore Filter", IndustrialProcessing.tabOreProcessing);
+	super(ConfigMachineBlocks.getFilterBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Ore Filter", ISetupCreativeTabs.tabOreProcessing);
     }
 
     @Override

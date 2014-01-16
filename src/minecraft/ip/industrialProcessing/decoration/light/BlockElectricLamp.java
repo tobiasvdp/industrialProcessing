@@ -2,12 +2,10 @@ package ip.industrialProcessing.decoration.light;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.machines.BlockMachine;
 
-import java.util.Random;
-
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -15,7 +13,7 @@ import net.minecraft.world.World;
 public class BlockElectricLamp extends BlockMachine {
 
     public BlockElectricLamp() {
-	super(ConfigMachineBlocks.getBlockElectricLamp(), Material.glass, 1f, soundMetalFootstep, "Electric Lamp", IndustrialProcessing.tabPower);
+	super(ConfigMachineBlocks.getBlockElectricLamp(), Material.glass, 1f, soundMetalFootstep, "Electric Lamp", ISetupCreativeTabs.tabPower);
     }
 
     @Override

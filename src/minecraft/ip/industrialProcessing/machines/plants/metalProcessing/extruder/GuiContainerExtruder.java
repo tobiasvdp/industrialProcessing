@@ -4,9 +4,7 @@ import org.lwjgl.util.Point;
 import org.lwjgl.util.Rectangle;
 
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
-import ip.industrialProcessing.machines.containers.gui.GuiContainerFluidMachine;
 import ip.industrialProcessing.machines.containers.gui.GuiContainerPoweredFluidWorkerMachine;
-import ip.industrialProcessing.machines.dryer.TileEntityDryer;
 import net.minecraft.entity.player.InventoryPlayer;
 
 public class GuiContainerExtruder extends GuiContainerPoweredFluidWorkerMachine {

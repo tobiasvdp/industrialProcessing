@@ -14,7 +14,6 @@ import ip.industrialProcessing.transport.items.conveyorBelt.ConnectionMode;
 import ip.industrialProcessing.transport.items.conveyorBelt.MovingItemStack;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorInventoryBase;
 import ip.industrialProcessing.transport.items.conveyorBelt.util.ConveyorEnvironment;
-import ip.industrialProcessing.transport.items.conveyorOutput.TileEntityConveyorOutput;
 import ip.industrialProcessing.utils.DirectionUtils;
 import ip.industrialProcessing.utils.ItemTransfers;
 

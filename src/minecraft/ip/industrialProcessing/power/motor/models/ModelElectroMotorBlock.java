@@ -11,8 +11,6 @@ import ip.industrialProcessing.api.rendering.wavefront.ObjRotator;
 import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
 import ip.industrialProcessing.client.render.ModelBlock;
 import ip.industrialProcessing.machines.BlockMachine;
-import ip.industrialProcessing.power.plants.models.TurbineFeatures;
-import ip.industrialProcessing.power.plants.models.TurbineHull;
 
 public class ModelElectroMotorBlock extends ModelBlock {
 

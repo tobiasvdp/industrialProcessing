@@ -11,6 +11,7 @@ public class TEmultiblockLiftDoor extends TileEntityMultiblockDummy {
 
 	}
 
+	@Override
 	public void updateEntity() {
 		if (init) {
 			if (!worldObj.isRemote) {

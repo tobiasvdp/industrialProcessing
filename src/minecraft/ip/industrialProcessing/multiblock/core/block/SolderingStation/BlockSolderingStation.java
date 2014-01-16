@@ -1,15 +1,15 @@
 package ip.industrialProcessing.multiblock.core.block.SolderingStation;
 
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.gui.GuiLayout;
-import ip.industrialProcessing.gui.IGuiLayout;
 import ip.industrialProcessing.gui.IGuiLayoutMultiblock;
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
@@ -34,7 +34,7 @@ public class BlockSolderingStation extends BlockMultiblockCore implements IRecip
 	private Icon[] icons = new Icon[5];
 	
 	public BlockSolderingStation() {
-		super(ConfigMachineBlocks.getBlockSolderingStationID(), "BlockSolderingStation", IndustrialProcessing.tabMultiblocks);
+		super(ConfigMachineBlocks.getBlockSolderingStationID(), "BlockSolderingStation", ISetupCreativeTabs.tabMultiblocks);
 	}
 
 	@Override
@@ -55,11 +55,11 @@ public class BlockSolderingStation extends BlockMultiblockCore implements IRecip
 
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-        icons [0] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "Planks2");
-        icons [1] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "Stone");
-        icons [2] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "Iron");
-        icons [3] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "Canvas");
-        icons [4] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "blockLimestone");
+        icons [0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Planks2");
+        icons [1] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Stone");
+        icons [2] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Iron");
+        icons [3] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Canvas");
+        icons [4] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "blockLimestone");
     }
 
 	@Override

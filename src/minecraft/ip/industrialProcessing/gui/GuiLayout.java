@@ -3,28 +3,15 @@ package ip.industrialProcessing.gui;
 import ip.industrialProcessing.gui.components.GuiLayoutPanel;
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.ContainerIP;
-import ip.industrialProcessing.gui.container.slot.layout.SlotLayout;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
-import ip.industrialProcessing.gui.container.slot.layout.components.SlotLayoutComponent;
-import ip.industrialProcessing.gui.container.slot.layout.components.SlotLayoutInput;
 import ip.industrialProcessing.gui.container.slot.layout.components.SlotLayoutInventory;
-import ip.industrialProcessing.machines.TileEntityPoweredWorkerMachine;
-import ip.industrialProcessing.machines.TileEntityWorkerMachine;
-import ip.industrialProcessing.machines.containers.ContainerPoweredWorkerMachine;
-import ip.industrialProcessing.machines.containers.ContainerWorkerMachine;
-import ip.industrialProcessing.machines.containers.gui.GuiContainerPoweredWorkerMachine;
-import ip.industrialProcessing.machines.containers.gui.GuiContainerWorkerMachine;
-import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import ip.industrialProcessing.recipes.Recipe;
-import ip.industrialProcessing.slots.SlotBase;
-
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;

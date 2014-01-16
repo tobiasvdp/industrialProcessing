@@ -1,6 +1,5 @@
 package ip.industrialProcessing.decoration;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.INamepace;
 import net.minecraft.block.Block;
 import net.minecraft.block.StepSound;

@@ -3,6 +3,7 @@ package ip.industrialProcessing.machines.plants.nonFerroProcessing.roaster;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.machines.plants.nonFerroProcessing.quenchTank.TileEntityQuenchTank;
@@ -15,7 +16,7 @@ import net.minecraft.world.World;
 public class BlockRoaster extends BlockMachineRendered implements IRecipeBlock{
 
 	public BlockRoaster() {
-		super(ConfigMachineBlocks.getBlockRoasterID(), Material.iron, 1f, Block.soundMetalFootstep, "BlockRoaster", IndustrialProcessing.tabOreProcessing); 
+		super(ConfigMachineBlocks.getBlockRoasterID(), Material.iron, 1f, Block.soundMetalFootstep, "BlockRoaster", ISetupCreativeTabs.tabOreProcessing); 
 	}
 
 	@Override

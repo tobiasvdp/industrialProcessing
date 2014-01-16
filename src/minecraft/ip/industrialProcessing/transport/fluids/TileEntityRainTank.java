@@ -3,8 +3,6 @@ package ip.industrialProcessing.transport.fluids;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.IConnectedTile;
-import ip.industrialProcessing.config.ConfigBlocks;
-import ip.industrialProcessing.config.ConfigTransportBlocks;
 import ip.industrialProcessing.machines.TileEntityFluidMachine;
 import ip.industrialProcessing.machines.animation.tanks.ITankSyncable;
 import ip.industrialProcessing.machines.animation.tanks.TankHandler;

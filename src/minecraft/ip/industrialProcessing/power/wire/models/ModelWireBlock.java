@@ -8,8 +8,6 @@ import ip.industrialProcessing.client.render.IConnectedTile;
 import ip.industrialProcessing.client.render.ModelBlock;
 import ip.industrialProcessing.power.wire.BlockWireStone;
 import ip.industrialProcessing.power.wire.BlockWireWood;
-import ip.industrialProcessing.transport.fluids.BlockTransportFluidsStone;
-import ip.industrialProcessing.transport.fluids.BlockTransportFluidsWood;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;

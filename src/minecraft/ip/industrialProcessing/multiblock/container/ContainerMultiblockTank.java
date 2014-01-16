@@ -3,15 +3,9 @@ package ip.industrialProcessing.multiblock.container;
 import java.util.ArrayList;
 
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraftforge.fluids.FluidTankInfo;
-import ip.industrialProcessing.api.tanks.IPfluidTank;
 import ip.industrialProcessing.gui.container.syncing.handlers.HandlerTank;
 import ip.industrialProcessing.gui.container.syncing.handlers.IHandlerTank;
 import ip.industrialProcessing.gui.container.syncing.info.InfoTank;
-import ip.industrialProcessing.machines.containers.ProgressBarHandlerInfo;
-import ip.industrialProcessing.machines.containers.ProgressBarTankHandler;
-import ip.industrialProcessing.machines.containers.ProgressInfoTank;
-import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreInv;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTank;
 
 public class ContainerMultiblockTank extends ContainerMultiblockInv {

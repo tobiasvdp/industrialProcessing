@@ -7,13 +7,15 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.multiblock.dummy.BlockMultiblockDummy;
 
 public class BLmultiblockBlastFurnaceTower extends BlockMultiblockDummy {
     Icon[] icons = new Icon[5];
     
     public BLmultiblockBlastFurnaceTower() {
-	super(ConfigMachineBlocks.getBLmultiblockBlastFurnaceTower(), "BLmultiblockBlastFurnaceTower", IndustrialProcessing.tabMultiblocks);
+	super(ConfigMachineBlocks.getBLmultiblockBlastFurnaceTower(), "BLmultiblockBlastFurnaceTower", ISetupCreativeTabs.tabMultiblocks);
     }
 
     @Override
@@ -33,10 +35,10 @@ public class BLmultiblockBlastFurnaceTower extends BlockMultiblockDummy {
 
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-	icons[0] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "MachineConnectorFiller");
-	icons[1] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "tankSide");
-	icons[2] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "conveyorHopperFeatures");
-	icons[3] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "tankFeatures");
-	icons[4] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "grill");
+	icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "MachineConnectorFiller");
+	icons[1] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "tankSide");
+	icons[2] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "conveyorHopperFeatures");
+	icons[3] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "tankFeatures");
+	icons[4] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "grill");
     }
 }

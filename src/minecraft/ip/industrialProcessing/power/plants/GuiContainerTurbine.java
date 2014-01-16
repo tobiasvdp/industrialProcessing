@@ -5,10 +5,7 @@ import org.lwjgl.util.Rectangle;
 
 import net.minecraft.entity.player.InventoryPlayer;
 import ip.industrialProcessing.machines.TileEntityFluidMachine;
-import ip.industrialProcessing.machines.containers.ContainerFluidMachine;
 import ip.industrialProcessing.machines.containers.gui.GuiContainerFluidMachine;
-import ip.industrialProcessing.slots.SlotBase;
-import ip.industrialProcessing.utils.containers.ContainerUtils;
 
 public class GuiContainerTurbine extends GuiContainerFluidMachine {
 

@@ -3,9 +3,9 @@ package ip.industrialProcessing.machines.plants.nonFerroProcessing.quenchTank;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.machines.plants.metalProcessing.sandCaster.TileEntitySandCaster;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 public class BlockQuenchTank extends BlockMachineRendered implements IRecipeBlock {
 
     public BlockQuenchTank() {
-	super(ConfigMachineBlocks.getBlockQuenchTankID(), Material.iron, 1f, Block.soundMetalFootstep, "BlockQuenchTank", IndustrialProcessing.tabOreProcessing);
+	super(ConfigMachineBlocks.getBlockQuenchTankID(), Material.iron, 1f, Block.soundMetalFootstep, "BlockQuenchTank", ISetupCreativeTabs.tabOreProcessing);
     }
 
     @Override

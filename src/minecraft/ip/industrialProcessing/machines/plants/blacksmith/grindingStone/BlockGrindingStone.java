@@ -3,13 +3,14 @@ package ip.industrialProcessing.machines.plants.blacksmith.grindingStone;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.gui.GuiLayout;
 import ip.industrialProcessing.gui.IGuiLayout;
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 import ip.industrialProcessing.utils.IDescriptionBlock;
 import net.minecraft.block.Block;
@@ -32,7 +33,7 @@ public class BlockGrindingStone extends BlockMachineRendered implements IRecipeB
 	private Icon[] icons = new Icon[1];
 	
     public BlockGrindingStone() {
-        super(ConfigMachineBlocks.getBlockGrindingStoneID(), Material.iron, 1F, Block.soundMetalFootstep, "GrindingStone", IndustrialProcessing.tabOreProcessing);
+        super(ConfigMachineBlocks.getBlockGrindingStoneID(), Material.iron, 1F, Block.soundMetalFootstep, "GrindingStone", ISetupCreativeTabs.tabOreProcessing);
     }
 
     @Override
@@ -54,7 +55,7 @@ public class BlockGrindingStone extends BlockMachineRendered implements IRecipeB
 
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-        icons[0] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "GrindingStone");
+        icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "GrindingStone");
     }
 
     @Override

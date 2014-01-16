@@ -2,12 +2,8 @@ package ip.industrialProcessing.machines.containers;
 
 import java.util.ArrayList;
 
-import ip.industrialProcessing.machines.TileEntityWorkerMachine;
 import ip.industrialProcessing.utils.working.IWorker;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ICrafting;
 import net.minecraft.tileentity.TileEntity;
 
 public class ContainerWorkerMachine<T extends TileEntity & IMachineContainerEntity> extends ContainerMachine<T> {

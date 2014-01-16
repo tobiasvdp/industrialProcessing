@@ -9,14 +9,13 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.config.ConfigItems;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupItems;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 
@@ -25,7 +24,7 @@ public abstract class BlockConveyorBase extends BlockMachineRendered {
 
 	public BlockConveyorBase(int blockID, Material material, float hardness, StepSound stepSound, String name, CreativeTabs creativeTab) {
 		super(blockID, material, hardness, stepSound, name, creativeTab);
-		func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "conveyor");		
+		func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "conveyor");		
 	}
 
 	@Override
@@ -75,7 +74,7 @@ public abstract class BlockConveyorBase extends BlockMachineRendered {
 
 		ItemStack playerItem = player.inventory.getCurrentItem();
 
-		if (playerItem != null && (playerItem.itemID == IndustrialProcessing.itemHexKey.itemID)) {
+		if (playerItem != null && (playerItem.itemID == ISetupItems.itemHexKey.itemID)) {
 			TileEntityConveyorConnectionsBase conveyorBelt = (TileEntityConveyorConnectionsBase) world.getBlockTileEntity(x, y, z);
 			conveyorBelt.toggleSlope();
 			return false;

@@ -1,6 +1,5 @@
 package ip.industrialProcessing;
 
-import static net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable.EventType.IRON;
 import ip.industrialProcessing.config.ISetupBlocks;
 import ip.industrialProcessing.decoration.trees.IndustrialTrees;
 import ip.industrialProcessing.decoration.trees.WorldGenIndustrialTree;
@@ -13,8 +12,8 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenerator;
-import net.minecraftforge.event.terraingen.TerrainGen;
 import net.minecraftforge.event.terraingen.OreGenEvent.GenerateMinable;
+import net.minecraftforge.event.terraingen.TerrainGen;
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGeneration implements IWorldGenerator {

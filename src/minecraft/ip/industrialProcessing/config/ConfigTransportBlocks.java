@@ -71,8 +71,8 @@ public class ConfigTransportBlocks {
     }
 
     public void register() {
-    	registerBlock(IndustrialProcessing.blockSuspendedRail, "Ip.Trans.SusRail", "Suspended rail");
-    	registerSuspension(IndustrialProcessing.blockSuspension, "Ip.Trans.Sus", "Suspension");
+    	registerBlock(ISetupTransportBlocks.blockSuspendedRail, "Ip.Trans.SusRail", "Suspended rail");
+    	registerSuspension(ISetupTransportBlocks.blockSuspension, "Ip.Trans.Sus", "Suspension");
     }
 
     private static ConfigTransportBlocks instance = new ConfigTransportBlocks();

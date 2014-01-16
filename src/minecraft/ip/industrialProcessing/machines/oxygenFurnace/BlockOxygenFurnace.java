@@ -6,15 +6,15 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.machines.pelletExtruder.TileEntityPelletExtruder;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 
 public class BlockOxygenFurnace extends BlockMachine implements IRecipeBlock{
 
 	public BlockOxygenFurnace() {
-		super(ConfigMachineBlocks.getOxygenFurnaceID(), Material.iron, 1F, Block.soundMetalFootstep, "Oxygen Furnace", IndustrialProcessing.tabOreProcessing);
+		super(ConfigMachineBlocks.getOxygenFurnaceID(), Material.iron, 1F, Block.soundMetalFootstep, "Oxygen Furnace", ISetupCreativeTabs.tabOreProcessing);
 	}
 
 	@Override

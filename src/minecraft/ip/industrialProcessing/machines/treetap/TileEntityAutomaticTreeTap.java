@@ -2,11 +2,12 @@ package ip.industrialProcessing.machines.treetap;
 
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
+import ip.industrialProcessing.config.ISetupBlocks;
+import ip.industrialProcessing.config.ISetupFluids;
 import ip.industrialProcessing.machines.TileEntityFluidMachine;
 
 public class TileEntityAutomaticTreeTap extends TileEntityFluidMachine {
@@ -40,10 +41,10 @@ public class TileEntityAutomaticTreeTap extends TileEntityFluidMachine {
 	if (counter == MAX_COUNTER) {
 	    counter = 0;
 	    IFluidTank tank = this.getTankInSlot(0);
-	    if(id == IndustrialProcessing.blockRubberLog.blockID)
-		tank.fill(new FluidStack(IndustrialProcessing.itemFluidLatex, 1), true);
-	    else if(id == IndustrialProcessing.blockPineLog.blockID)
-		tank.fill(new FluidStack(IndustrialProcessing.itemFluidResin, 1), true);
+	    if(id == ISetupBlocks.blockRubberLog.blockID)
+		tank.fill(new FluidStack(ISetupFluids.itemFluidLatex, 1), true);
+	    else if(id == ISetupBlocks.blockPineLog.blockID)
+		tank.fill(new FluidStack(ISetupFluids.itemFluidResin, 1), true);
 	    totalProgress++;
 	    if (totalProgress >= FluidContainerRegistry.BUCKET_VOLUME) {
 		totalProgress = 0;

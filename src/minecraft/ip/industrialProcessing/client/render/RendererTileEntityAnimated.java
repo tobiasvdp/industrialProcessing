@@ -1,15 +1,9 @@
 package ip.industrialProcessing.client.render;
 
 import ip.industrialProcessing.api.rendering.RendererTileEntity;
-import ip.industrialProcessing.machines.TileEntityFluidMachine;
-import ip.industrialProcessing.utils.working.IWorker;
-import ip.industrialProcessing.utils.working.IWorkingEntity;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.FluidTankInfo;
 
 public class RendererTileEntityAnimated extends RendererTileEntity {
 

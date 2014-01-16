@@ -1,7 +1,5 @@
 package ip.industrialProcessing.multiblock.layout;
 
-import com.google.common.base.CaseFormat;
-
 public final class LayoutTransformer {
 
 	public static LayoutMultiblock transform(LayoutMultiblock layout, FacingDirection dir) {

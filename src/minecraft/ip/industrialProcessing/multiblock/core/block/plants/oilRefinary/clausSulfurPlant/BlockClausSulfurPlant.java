@@ -5,11 +5,12 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.multiblock.core.BlockMultiblockCore;
 
 public class BlockClausSulfurPlant extends BlockMultiblockCore{
 	public BlockClausSulfurPlant(){
-		super(ConfigMachineBlocks.getBlockClausSulfurPlantID(), "BlockClausSulfurPlant", IndustrialProcessing.tabMultiblocks);
+		super(ConfigMachineBlocks.getBlockClausSulfurPlantID(), "BlockClausSulfurPlant", ISetupCreativeTabs.tabMultiblocks);
 	}
 
 	@Override

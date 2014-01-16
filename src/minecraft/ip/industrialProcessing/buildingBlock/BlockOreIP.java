@@ -1,6 +1,5 @@
 package ip.industrialProcessing.buildingBlock;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ISetupBlocks;
 import ip.industrialProcessing.config.ISetupItems;
 import ip.industrialProcessing.utils.ItemTransfers;

@@ -1,6 +1,5 @@
 package ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.amineTreater;
 
-import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 
 public class RecipesAmineTreater  extends RecipesMultiblock{

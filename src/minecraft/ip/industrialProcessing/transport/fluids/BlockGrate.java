@@ -9,12 +9,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigTransportBlocks;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.machines.BlockMachine;
 
 public class BlockGrate extends BlockMachine {
     public BlockGrate() {
-        super(ConfigTransportBlocks.getBlockTransportFluidGrateID(), Material.iron, 1F, Block.soundMetalFootstep, "Grate", IndustrialProcessing.tabFluid);
-        func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "grate");
+        super(ConfigTransportBlocks.getBlockTransportFluidGrateID(), Material.iron, 1F, Block.soundMetalFootstep, "Grate", ISetupCreativeTabs.tabFluid);
+        func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "grate");
     }
 
     @Override
@@ -37,7 +39,7 @@ public class BlockGrate extends BlockMachine {
 
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-        icons[0] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "grate");
-        icons[1] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "grateTop");
+        icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "grate");
+        icons[1] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "grateTop");
     }
 }

@@ -1,18 +1,14 @@
 package ip.industrialProcessing.decoration.block.machineBlock;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.client.ClientProxy;
 import ip.industrialProcessing.config.ConfigBlocks;
-import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import net.minecraft.block.Block;
-import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
@@ -25,7 +21,7 @@ public class BlockMachineBlock extends Block{
 		setHardness(1F);
 		setStepSound(Block.soundMetalFootstep);
 		setUnlocalizedName("BlockMachineBlock");
-		setCreativeTab(IndustrialProcessing.tabOreProcessing);
+		setCreativeTab(ISetupCreativeTabs.tabOreProcessing);
 	}
 
 	@Override
@@ -41,8 +37,8 @@ public class BlockMachineBlock extends Block{
 
 	@Override
 	public void registerIcons(IconRegister par1IconRegister) {
-		icons[0] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "Orange");
-		icons[1] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "Iron");
+		icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Orange");
+		icons[1] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Iron");
 	}
 
 	@Override

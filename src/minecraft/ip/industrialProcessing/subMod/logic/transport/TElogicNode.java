@@ -1,7 +1,5 @@
 package ip.industrialProcessing.subMod.logic.transport;
 
-import ip.industrialProcessing.machines.TileEntitySynced;
-import ip.industrialProcessing.subMod.logic.network.display.TileEntityLogicDisplay;
 import ip.industrialProcessing.subMod.logic.utils.UTBuffer;
 import ip.industrialProcessing.subMod.logic.utils.UTBufferType;
 import ip.industrialProcessing.subMod.logic.utils.UTBusType;
@@ -11,14 +9,12 @@ import ip.industrialProcessing.subMod.logic.utils.UTlogicNodeContainer;
 import ip.industrialProcessing.subMod.logic.utils.UTpacket;
 import ip.industrialProcessing.subMod.logic.utils.UTpacketType;
 import ip.industrialProcessing.utils.rotation.ISidedRotation;
+import ip.industrialProcessing.utils.rotation.SidedRotationTransformer;
 
 import java.util.ArrayList;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
@@ -76,7 +72,7 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 
 	@Override
 	public void setOrientationSide(int metadata) {
-		orientationSide = SIDEDTRANSFORMER.transformMetaToForgeDirection(metadata);
+		orientationSide = SidedRotationTransformer.transformMetaToForgeDirection(metadata);
 	}
 
 	@Override
@@ -91,22 +87,22 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 
 	@Override
 	public float getGLrotationX() {
-		return SIDEDTRANSFORMER.getGLrotationX(getOrientationSide(), getOrientationRotation());
+		return SidedRotationTransformer.getGLrotationX(getOrientationSide(), getOrientationRotation());
 	}
 
 	@Override
 	public float getGLrotationY() {
-		return SIDEDTRANSFORMER.getGLrotationY(getOrientationSide(), getOrientationRotation());
+		return SidedRotationTransformer.getGLrotationY(getOrientationSide(), getOrientationRotation());
 	}
 
 	@Override
 	public float getGLrotationZ() {
-		return SIDEDTRANSFORMER.getGLrotationZ(getOrientationSide(), getOrientationRotation());
+		return SidedRotationTransformer.getGLrotationZ(getOrientationSide(), getOrientationRotation());
 	}
 
 	@Override
 	public void setOrientationRotation(float rotationYaw, float rotationPitch) {
-		orientationRotation = SIDEDTRANSFORMER.transformSideAndLookToForgeDirection(orientationSide, rotationYaw, rotationPitch);
+		orientationRotation = SidedRotationTransformer.transformSideAndLookToForgeDirection(orientationSide, rotationYaw, rotationPitch);
 	}
 
 	@Override
@@ -116,22 +112,22 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 
 	@Override
 	public ForgeDirection getExternalForgeDirection(ForgeDirection side) {
-		return SIDEDTRANSFORMER.InternalToExternalDirection(this, side);
+		return SidedRotationTransformer.InternalToExternalDirection(this, side);
 	}
 
 	@Override
 	public float getGLsideX() {
-		return SIDEDTRANSFORMER.getGLsideX(getOrientationSide());
+		return SidedRotationTransformer.getGLsideX(getOrientationSide());
 	}
 
 	@Override
 	public float getGLsideY() {
-		return SIDEDTRANSFORMER.getGLsideY(getOrientationSide());
+		return SidedRotationTransformer.getGLsideY(getOrientationSide());
 	}
 
 	@Override
 	public float getGLsideZ() {
-		return SIDEDTRANSFORMER.getGLsideZ(getOrientationSide());
+		return SidedRotationTransformer.getGLsideZ(getOrientationSide());
 	}
 
 	@Override
@@ -304,10 +300,10 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 
 	@Override
 	public void createDataPacket(ForgeDirection dir, UTVariable... data) {
-		packets.add(new UTpacket(UTpacketType.data, SIDEDTRANSFORMER.InternalToExternalDirection(this, dir), data));
+		packets.add(new UTpacket(UTpacketType.data, SidedRotationTransformer.InternalToExternalDirection(this, dir), data));
 		this.scheduleSend();
 		for (UTVariable item : data) {
-			buffer[SIDEDTRANSFORMER.InternalToExternalDirection(this, dir).ordinal()].put(item);
+			buffer[SidedRotationTransformer.InternalToExternalDirection(this, dir).ordinal()].put(item);
 		}
 	}
 

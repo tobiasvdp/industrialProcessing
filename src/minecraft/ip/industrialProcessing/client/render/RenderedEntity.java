@@ -1,10 +1,8 @@
 package ip.industrialProcessing.client.render;
 
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderMinecart;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class RenderedEntity extends Render{
 	    private static final ResourceLocation texture = new ResourceLocation("yourmod:textures/entity/yourtexture.png");  //refers to:assets/yourmod/textures/entity/yourtexture.png

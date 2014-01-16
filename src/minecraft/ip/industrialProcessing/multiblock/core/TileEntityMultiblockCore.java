@@ -2,7 +2,6 @@ package ip.industrialProcessing.multiblock.core;
 
 import java.util.ArrayList;
 
-import ip.industrialProcessing.machines.MachineItemStack;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
 import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
@@ -11,14 +10,12 @@ import ip.industrialProcessing.multiblock.tier.Tiers;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Facing;
 import net.minecraftforge.common.ForgeDirection;
 
 public class TileEntityMultiblockCore extends TileEntity implements ITileEntityMultiblockCore {
@@ -37,6 +34,7 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 	protected AnimationHandler[] animation;
 	protected boolean[] isAnimationEnabled;
 
+	@Override
 	public ForgeDirection getForwardDirection() {
 		return FacingDirectionToForge(side);
 	}

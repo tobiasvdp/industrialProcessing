@@ -1,21 +1,20 @@
 package ip.industrialProcessing.power.manualGenerator;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.power.BlockPowerGenerator;
 
 public class BlockManualGenerator extends BlockPowerGenerator {
 
     public BlockManualGenerator() {
-	super(ConfigMachineBlocks.getManualGeneratorBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Crank Generator", IndustrialProcessing.tabPower);
+	super(ConfigMachineBlocks.getManualGeneratorBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Crank Generator", ISetupCreativeTabs.tabPower);
     }
 
     @Override

@@ -2,7 +2,6 @@ package ip.industrialProcessing.transport.fluids.models.pipe;
 
 import org.lwjgl.opengl.GL11;
 
-import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.transport.fluids.ModelValve;
 import ip.industrialProcessing.transport.fluids.TileEntityValve;
 import net.minecraft.block.Block;

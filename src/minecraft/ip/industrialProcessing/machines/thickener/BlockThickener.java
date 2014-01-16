@@ -3,10 +3,10 @@ package ip.industrialProcessing.machines.thickener;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.gui.GuiLayout;
 import ip.industrialProcessing.gui.IGuiLayout;
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
-import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.recipes.IRecipeBlock;
@@ -28,7 +28,7 @@ public class BlockThickener extends BlockMachineRendered implements IRecipeBlock
 		guiLayout.addLayoutPanel(GuiLayoutPanelType.power);
 	}
 	public BlockThickener() {
-		super(ConfigMachineBlocks.getThickenerBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Thickener", IndustrialProcessing.tabOreProcessing);
+		super(ConfigMachineBlocks.getThickenerBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Thickener", ISetupCreativeTabs.tabOreProcessing);
 
 	}
 

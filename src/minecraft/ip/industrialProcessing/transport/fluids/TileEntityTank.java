@@ -261,7 +261,8 @@ public class TileEntityTank extends TileEntityMachine implements IMachineContain
 	return this.tankHandler;
     }
 
-    public IFluidTank getTankInSlot(int slot) {
+    @Override
+	public IFluidTank getTankInSlot(int slot) {
 	if (slot == 0)
 	    return this.tank;
 	return null;

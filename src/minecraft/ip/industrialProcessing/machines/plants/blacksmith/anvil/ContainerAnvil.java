@@ -1,11 +1,10 @@
 package ip.industrialProcessing.machines.plants.blacksmith.anvil;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.ISetupFluids;
 import ip.industrialProcessing.config.ISetupItems;
 import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.utils.inventories.CraftingManager;
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -30,17 +29,17 @@ public class ContainerAnvil extends Container{
     public static final int WILDCARD_VALUE = Short.MAX_VALUE;
     
     static{
-    	recipes.getInstance().addRecipe(new ItemStack(ISetupMachineBlocks.BLmultiblockScreen), "xxx", "x x", " y ", 'x', new ItemStack(Item.ingotIron), 'y', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
-    	recipes.getInstance().addRecipe(new ItemStack(ISetupItems.itemKnife), "   ", " y ", "x z", 'x', new ItemStack(ISetupItems.itemThickStick), 'y', new ItemStack(IndustrialProcessing.itemIronBlade), 'z', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
-    	recipes.getInstance().addRecipe(new ItemStack(ISetupItems.itemBlowingTorch), "   ", " y ", "x z", 'x', new ItemStack(Item.ingotIron), 'y', new ItemStack(Item.flintAndSteel), 'z', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
-    	recipes.getInstance().addRecipe(new ItemStack(ISetupItems.itemSolderingIron), "  y", " w ", "x z", 'x', new ItemStack(IndustrialProcessing.itemThickStick), 'y', new ItemStack(Item.ingotIron), 'z', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE),'w',new ItemStack(IndustrialProcessing.bucketFluidLatex));
-    	recipes.getInstance().addRecipe(new ItemStack(IndustrialProcessing.itemIronTips,12),"xzx"," x ","x x",'x',new ItemStack(Item.ingotIron), 'z', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
-    	recipes.getInstance().addRecipe(new ItemStack(IndustrialProcessing.itemIronPlate,4),"xx ","xx ","  z",'x',new ItemStack(Item.ingotIron), 'z', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
-    	recipes.getInstance().addRecipe(new ItemStack(IndustrialProcessing.itemCopperPlate,4),"xx ","xx ","  z",'x',new ItemStack(IndustrialProcessing.itemCopperIngot), 'z', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
-    	recipes.getInstance().addRecipe(new ItemStack(IndustrialProcessing.itemIronBar,8),"  x"," x ","x z",'x',new ItemStack(Item.ingotIron), 'z', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
-    	recipes.getInstance().addRecipe(new ItemStack(IndustrialProcessing.itemCopperBar,8),"  x"," x ","x z",'x',new ItemStack(IndustrialProcessing.itemCopperIngot), 'z', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
-    	recipes.getInstance().addRecipe(new ItemStack(IndustrialProcessing.itemIronBowl,3)," z ","x x"," x ",'x',new ItemStack(Item.ingotIron), 'z', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
-    	recipes.getInstance().addRecipe(new ItemStack(ISetupItems.itemHammer), "   ", " y ", "x  ", 'x', new ItemStack(ISetupItems.itemThickStick), 'y', new ItemStack(Item.ingotIron));
+    	CraftingManager.getInstance().addRecipe(new ItemStack(ISetupMachineBlocks.BLmultiblockScreen), "xxx", "x x", " y ", 'x', new ItemStack(Item.ingotIron), 'y', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
+    	CraftingManager.getInstance().addRecipe(new ItemStack(ISetupItems.itemKnife), "   ", " y ", "x z", 'x', new ItemStack(ISetupItems.itemThickStick), 'y', new ItemStack(ISetupItems.itemIronBlade), 'z', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
+    	CraftingManager.getInstance().addRecipe(new ItemStack(ISetupItems.itemBlowingTorch), "   ", " y ", "x z", 'x', new ItemStack(Item.ingotIron), 'y', new ItemStack(Item.flintAndSteel), 'z', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
+    	CraftingManager.getInstance().addRecipe(new ItemStack(ISetupItems.itemSolderingIron), "  y", " w ", "x z", 'x', new ItemStack(ISetupItems.itemThickStick), 'y', new ItemStack(Item.ingotIron), 'z', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE),'w',new ItemStack(ISetupFluids.bucketFluidLatex));
+    	CraftingManager.getInstance().addRecipe(new ItemStack(ISetupItems.itemIronTips,12),"xzx"," x ","x x",'x',new ItemStack(Item.ingotIron), 'z', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
+    	CraftingManager.getInstance().addRecipe(new ItemStack(ISetupItems.itemIronPlate,4),"xx ","xx ","  z",'x',new ItemStack(Item.ingotIron), 'z', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
+    	CraftingManager.getInstance().addRecipe(new ItemStack(ISetupItems.itemCopperPlate,4),"xx ","xx ","  z",'x',new ItemStack(ISetupItems.itemCopperIngot), 'z', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
+    	CraftingManager.getInstance().addRecipe(new ItemStack(ISetupItems.itemIronBar,8),"  x"," x ","x z",'x',new ItemStack(Item.ingotIron), 'z', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
+    	CraftingManager.getInstance().addRecipe(new ItemStack(ISetupItems.itemCopperBar,8),"  x"," x ","x z",'x',new ItemStack(ISetupItems.itemCopperIngot), 'z', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
+    	CraftingManager.getInstance().addRecipe(new ItemStack(ISetupItems.itemIronBowl,3)," z ","x x"," x ",'x',new ItemStack(Item.ingotIron), 'z', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
+    	CraftingManager.getInstance().addRecipe(new ItemStack(ISetupItems.itemHammer), "   ", " y ", "x  ", 'x', new ItemStack(ISetupItems.itemThickStick), 'y', new ItemStack(Item.ingotIron));
     }
 
     public ContainerAnvil(InventoryPlayer par1InventoryPlayer, World par2World, int par3, int par4, int par5)
@@ -80,15 +79,17 @@ public class ContainerAnvil extends Container{
     /**
      * Callback for when the crafting matrix is changed.
      */
-    public void onCraftMatrixChanged(IInventory par1IInventory)
+    @Override
+	public void onCraftMatrixChanged(IInventory par1IInventory)
     {
-        this.craftResult.setInventorySlotContents(0, recipes.getInstance().findMatchingRecipe(this.craftMatrix, this.worldObj));
+        this.craftResult.setInventorySlotContents(0, CraftingManager.getInstance().findMatchingRecipe(this.craftMatrix, this.worldObj));
     }
 
     /**
      * Called when the container is closed.
      */
-    public void onContainerClosed(EntityPlayer par1EntityPlayer)
+    @Override
+	public void onContainerClosed(EntityPlayer par1EntityPlayer)
     {
         super.onContainerClosed(par1EntityPlayer);
 
@@ -106,15 +107,17 @@ public class ContainerAnvil extends Container{
         }
     }
 
-    public boolean canInteractWith(EntityPlayer par1EntityPlayer)
+    @Override
+	public boolean canInteractWith(EntityPlayer par1EntityPlayer)
     {
-        return this.worldObj.getBlockId(this.posX, this.posY, this.posZ) != IndustrialProcessing.blockAnvil.blockID ? false : par1EntityPlayer.getDistanceSq((double)this.posX + 0.5D, (double)this.posY + 0.5D, (double)this.posZ + 0.5D) <= 64.0D;
+        return this.worldObj.getBlockId(this.posX, this.posY, this.posZ) != ISetupMachineBlocks.blockAnvil.blockID ? false : par1EntityPlayer.getDistanceSq(this.posX + 0.5D, this.posY + 0.5D, this.posZ + 0.5D) <= 64.0D;
     }
 
     /**
      * Called when a player shift-clicks on a slot. You must override this or you will crash when someone does that.
      */
-    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
+    @Override
+	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
     {
         ItemStack itemstack = null;
         Slot slot = (Slot)this.inventorySlots.get(par2);
@@ -172,7 +175,8 @@ public class ContainerAnvil extends Container{
         return itemstack;
     }
 
-    public boolean func_94530_a(ItemStack par1ItemStack, Slot par2Slot)
+    @Override
+	public boolean func_94530_a(ItemStack par1ItemStack, Slot par2Slot)
     {
         return par2Slot.inventory != this.craftResult && super.func_94530_a(par1ItemStack, par2Slot);
     }

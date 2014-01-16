@@ -6,8 +6,6 @@ import org.lwjgl.util.Point;
 import org.lwjgl.util.Rectangle;
 
 import ip.industrialProcessing.machines.containers.gui.GuiContainerPoweredWorkerMachine;
-import ip.industrialProcessing.machines.wireMill.ContainerWireMill;
-import ip.industrialProcessing.machines.wireMill.TileEntityWireMill;
 
 public class GuiContainerSpoolWindingMachine extends GuiContainerPoweredWorkerMachine{
 	private static final Rectangle PROGRESSBAR_SOURCE = new Rectangle(176, 0, 22, 16);

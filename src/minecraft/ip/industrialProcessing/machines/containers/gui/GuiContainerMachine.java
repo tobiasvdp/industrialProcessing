@@ -2,6 +2,7 @@ package ip.industrialProcessing.machines.containers.gui;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.client.render.gui.ToolTip;
+import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.machines.containers.ContainerMachine;
 import ip.industrialProcessing.machines.containers.IFluidMachineContainerEntity;
 import ip.industrialProcessing.machines.containers.IMachineContainerEntity;
@@ -28,7 +29,7 @@ public class GuiContainerMachine<T extends TileEntity & IMachineContainerEntity 
 	super(container);
 	this.tileEntity = tileEntity;
 	this.name = name;
-	this.textureLocation = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN, textureLocation);
+	this.textureLocation = new ResourceLocation(INamepace.TEXTURE_DOMAIN, textureLocation);
     }
 
     @Override
@@ -72,7 +73,7 @@ public class GuiContainerMachine<T extends TileEntity & IMachineContainerEntity 
 	if (width > 0 && max > 0) {
 	    int x0 = (this.width - xSize) / 2;
 	    int y0 = (this.height - ySize) / 2;
-	    int scaled = Math.min(width, (int) (width * value / max));
+	    int scaled = Math.min(width, width * value / max);
 	    if (scaled > 0) {
 		if (invert) {
 		    this.drawTexturedModalRect(x + x0 + width - scaled, y + y0, sourceX + width - scaled, sourceY, scaled, height);
@@ -88,7 +89,7 @@ public class GuiContainerMachine<T extends TileEntity & IMachineContainerEntity 
 	if (width > 0 && max > 0) {
 	    int x0 = (this.width - xSize) / 2;
 	    int y0 = (this.height - ySize) / 2;
-	    int scaled = Math.min(height, (int) (height * value / max));
+	    int scaled = Math.min(height, height * value / max);
 	    if (scaled > 0) {
 		if (invert) {
 		    this.drawTexturedModalRect(x + x0, y + y0, sourceX, sourceY, width, scaled);

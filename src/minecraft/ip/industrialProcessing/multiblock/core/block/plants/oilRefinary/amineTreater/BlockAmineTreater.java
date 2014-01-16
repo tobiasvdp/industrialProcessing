@@ -5,11 +5,12 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.multiblock.core.BlockMultiblockCore;
 
 public class BlockAmineTreater extends BlockMultiblockCore {
 	public BlockAmineTreater() {
-		super(ConfigMachineBlocks.getBlockAmineTreaterID(), "BlockAmineTreater", IndustrialProcessing.tabMultiblocks);
+		super(ConfigMachineBlocks.getBlockAmineTreaterID(), "BlockAmineTreater", ISetupCreativeTabs.tabMultiblocks);
 	}
 
 	@Override

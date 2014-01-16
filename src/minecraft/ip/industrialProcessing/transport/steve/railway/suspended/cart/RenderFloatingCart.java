@@ -1,8 +1,6 @@
 package ip.industrialProcessing.transport.steve.railway.suspended.cart;
 
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.config.INamepace;
-
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.renderer.entity.Render;

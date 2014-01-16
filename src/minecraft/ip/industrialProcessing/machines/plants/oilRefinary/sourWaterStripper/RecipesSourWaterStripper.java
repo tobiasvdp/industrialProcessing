@@ -2,6 +2,7 @@ package ip.industrialProcessing.machines.plants.oilRefinary.sourWaterStripper;
 
 import net.minecraftforge.fluids.FluidRegistry;
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.ISetupFluids;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeInputSlot;
@@ -20,8 +21,8 @@ public class RecipesSourWaterStripper extends RecipesMachine{
     	Recipe recipe = new Recipe();
     	recipe.workRequired = i;
     	recipe.powerRequired = powerConsumption;
-    	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidSourWater.getName()), RecipeSlotType.TANK, 100), new RecipeInputSlot(1, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidSteam.getName()), RecipeSlotType.TANK, 100) };
-    	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(3, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidH2S.getName()), RecipeSlotType.TANK, 40, 70, 0.5),new RecipeOutputSlot(2, FluidRegistry.getFluidID(IndustrialProcessing.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 80, 100, 0.5) };
+    	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidSourWater.getName()), RecipeSlotType.TANK, 100), new RecipeInputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidSteam.getName()), RecipeSlotType.TANK, 100) };
+    	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(3, FluidRegistry.getFluidID(ISetupFluids.itemFluidH2S.getName()), RecipeSlotType.TANK, 40, 70, 0.5),new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 80, 100, 0.5) };
     	return recipe;
     }
 }

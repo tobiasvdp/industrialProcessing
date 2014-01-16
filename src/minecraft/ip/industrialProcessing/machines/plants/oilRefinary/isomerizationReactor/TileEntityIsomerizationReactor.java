@@ -2,12 +2,9 @@ package ip.industrialProcessing.machines.plants.oilRefinary.isomerizationReactor
 
 import java.util.Iterator;
 
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidStack;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
-import ip.industrialProcessing.machines.plants.oilRefinary.sourWaterStripper.RecipesSourWaterStripper;
 import ip.industrialProcessing.recipes.Recipe;
 
 public class TileEntityIsomerizationReactor extends TileEntityPoweredFluidWorkerMachine{

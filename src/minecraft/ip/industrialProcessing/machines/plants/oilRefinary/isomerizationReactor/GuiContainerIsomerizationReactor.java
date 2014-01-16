@@ -1,8 +1,6 @@
 package ip.industrialProcessing.machines.plants.oilRefinary.isomerizationReactor;
 
 import ip.industrialProcessing.machines.containers.gui.GuiContainerPoweredFluidWorkerMachine;
-import ip.industrialProcessing.machines.plants.oilRefinary.sourWaterStripper.ContainerSourWaterStripper;
-import ip.industrialProcessing.machines.plants.oilRefinary.sourWaterStripper.TileEntitySourWaterStripper;
 import net.minecraft.entity.player.InventoryPlayer;
 
 import org.lwjgl.util.Point;

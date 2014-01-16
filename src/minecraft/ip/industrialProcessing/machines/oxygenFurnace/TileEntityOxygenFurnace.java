@@ -2,7 +2,6 @@ package ip.industrialProcessing.machines.oxygenFurnace;
 
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
-import ip.industrialProcessing.machines.crusher.RecipesCrusher;
 import ip.industrialProcessing.recipes.Recipe;
 
 import java.util.Iterator;

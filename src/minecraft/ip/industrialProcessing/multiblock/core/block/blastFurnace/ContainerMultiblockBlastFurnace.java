@@ -5,7 +5,6 @@ import net.minecraft.inventory.Slot;
 import ip.industrialProcessing.multiblock.container.ContainerMultiblockTankWorkerPowered;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.slots.SlotBase;
-import ip.industrialProcessing.slots.SlotOutput;
 
 public class ContainerMultiblockBlastFurnace extends ContainerMultiblockTankWorkerPowered {
 	public ContainerMultiblockBlastFurnace(InventoryPlayer inventory, TileEntityMultiblockCoreTankWorkerPowered core){

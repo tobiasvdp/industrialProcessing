@@ -2,7 +2,6 @@ package ip.industrialProcessing.config;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.config.ConfigCategories;
-import ip.industrialProcessing.fluids.ContainerFluid;
 import ip.industrialProcessing.items.ItemIPBucket;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;

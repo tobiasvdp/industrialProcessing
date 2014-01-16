@@ -2,15 +2,13 @@ package ip.industrialProcessing.machines.electrolyser;
 
 import java.util.Iterator;
 
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
+import ip.industrialProcessing.config.ISetupFluids;
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
-import ip.industrialProcessing.machines.animation.tanks.TankHandler;
-import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
 import ip.industrialProcessing.recipes.Recipe;
 
 public class TileEntityElectrolyser extends TileEntityPoweredFluidWorkerMachine{
@@ -33,7 +31,7 @@ public class TileEntityElectrolyser extends TileEntityPoweredFluidWorkerMachine{
 	@Override
 	public void updateEntity() {
 		IFluidTank airTank = getTankInSlot(1);
-		airTank.fill(new FluidStack(IndustrialProcessing.itemFluidAir, 20), true);
+		airTank.fill(new FluidStack(ISetupFluids.itemFluidAir, 20), true);
 		super.updateEntity();
 	};
 	

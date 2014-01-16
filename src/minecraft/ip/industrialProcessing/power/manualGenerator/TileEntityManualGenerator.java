@@ -1,16 +1,12 @@
 package ip.industrialProcessing.power.manualGenerator;
 
-import java.util.Iterator;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
-import ic2.api.Direction;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
 import ip.industrialProcessing.machines.animation.AnimationMode;
 import ip.industrialProcessing.power.TileEntityPowerGenerator;
-import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.utils.DirectionUtils;
 
 public class TileEntityManualGenerator extends TileEntityPowerGenerator implements IAnimationProgress {
@@ -40,11 +36,11 @@ public class TileEntityManualGenerator extends TileEntityPowerGenerator implemen
 
 	    float speed = this.animation.getSpeed();
 	if (this.storedPlayerForce > 0) {
-	    speed += this.storedPlayerForce * this.animation.DT / 20; 
-	    this.storedPlayerForce -= this.storedPlayerForce * this.animation.DT;
+	    speed += this.storedPlayerForce * AnimationHandler.DT / 20; 
+	    this.storedPlayerForce -= this.storedPlayerForce * AnimationHandler.DT;
 	}
 
-	speed -= DRAG * speed * this.animation.DT;
+	speed -= DRAG * speed * AnimationHandler.DT;
 
 	this.animation.setSpeed(speed); 
     }

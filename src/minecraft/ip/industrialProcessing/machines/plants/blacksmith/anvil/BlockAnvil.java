@@ -4,16 +4,14 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.client.ClientProxy;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.machines.BlockMachineRendered;
-import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
-import ip.industrialProcessing.machines.plants.blacksmith.grindingStone.TileEntityGrindingStone;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
@@ -27,7 +25,7 @@ public class BlockAnvil extends Block {
 		setHardness(1F);
 		setStepSound(Block.soundMetalFootstep);
 		setUnlocalizedName("Anvil");
-		setCreativeTab(IndustrialProcessing.tabOreProcessing);
+		setCreativeTab(ISetupCreativeTabs.tabOreProcessing);
 		this.setBlockBounds(0.0f, 0.0f, 0.0f, 1.0f, 0.8f, 1.0f);
 	}
 
@@ -44,7 +42,7 @@ public class BlockAnvil extends Block {
 
 	@Override
 	public void registerIcons(IconRegister par1IconRegister) {
-		icons[0] = par1IconRegister.registerIcon(IndustrialProcessing.TEXTURE_NAME_PREFIX + "Anvil");
+		icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Anvil");
 	}
 
 	@Override

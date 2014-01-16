@@ -1,12 +1,7 @@
 package ip.industrialProcessing.subMod.logic.network.display;
 
-import org.apache.commons.lang3.text.WordUtils;
-
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidHandler;
 import ip.industrialProcessing.gui.container.syncing.info.IExpirable;
 import ip.industrialProcessing.gui.container.syncing.info.InfoMachine;
 import ip.industrialProcessing.gui.container.syncing.info.InfoSlot;

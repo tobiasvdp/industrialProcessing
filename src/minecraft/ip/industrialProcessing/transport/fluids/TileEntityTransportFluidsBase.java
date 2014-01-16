@@ -420,7 +420,8 @@ public abstract class TileEntityTransportFluidsBase extends TileEntityTransport 
 	this.worldObj.notifyBlockChange(xCoord, yCoord, zCoord, getBlockType().blockID);
     }
 
-    public void setBounds() {
+    @Override
+	public void setBounds() {
 
 	float xMin = -3 / 16f;
 	float yMin = -3 / 16f;
@@ -451,7 +452,8 @@ public abstract class TileEntityTransportFluidsBase extends TileEntityTransport 
 	this.getBlockType().setBlockBounds(xMin + 0.5f, yMin + 0.5f, zMin + 0.5f, xMax + 0.5f, yMax + 0.5f, zMax + 0.5f);
     }
 
-    public void addCollisionBoxesToList(AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
+    @Override
+	public void addCollisionBoxesToList(AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
 
 	for (int i = 0; i < 6; i++) {
 	    ForgeDirection direction = ForgeDirection.getOrientation(i);

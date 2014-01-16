@@ -1,6 +1,7 @@
 package ip.industrialProcessing.multiblock.core.block.hotPress;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
@@ -17,10 +18,10 @@ public class TEmultiblockHotPress extends TileEntityMultiblockCore {
 		LayoutMultiblock layout = new LayoutMultiblock(0, 0, 2, 0, 0, 0);
 		
 		int i = 0;
-		layout.setCoreID(i++,0, 0, IndustrialProcessing.BLmultiblockHotPress.blockID);
+		layout.setCoreID(i++,0, 0, ISetupMachineBlocks.BLmultiblockHotPress.blockID);
 
-		layout.setBlockID(0, 0, 1,i++, 0, 0, IndustrialProcessing.BLmultiblockFrame.blockID);
-		layout.setBlockID(0, 0, 2,i++, 0, 0, IndustrialProcessing.BLmultiblockFrame.blockID);
+		layout.setBlockID(0, 0, 1,i++, 0, 0, ISetupMachineBlocks.BLmultiblockFrame.blockID);
+		layout.setBlockID(0, 0, 2,i++, 0, 0, ISetupMachineBlocks.BLmultiblockFrame.blockID);
 		// layout.setBlockID(-1, 0, 0, 0,0,
 		// IndustrialProcessing.BLmultiblockFrame.blockID);
 		// layout.setBlockID(1, 0, 0, 0,0,

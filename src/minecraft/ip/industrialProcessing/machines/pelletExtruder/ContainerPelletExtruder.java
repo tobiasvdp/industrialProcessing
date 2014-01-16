@@ -1,7 +1,6 @@
 package ip.industrialProcessing.machines.pelletExtruder;
 
 import ip.industrialProcessing.machines.containers.ContainerPoweredWorkerMachine;
-import ip.industrialProcessing.machines.kiln.TileEntityKiln;
 import ip.industrialProcessing.slots.SlotBase;
 import ip.industrialProcessing.slots.SlotOutput;
 import ip.industrialProcessing.utils.containers.ContainerUtils;

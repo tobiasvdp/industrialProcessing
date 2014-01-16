@@ -4,9 +4,7 @@ import org.lwjgl.util.Point;
 import org.lwjgl.util.Rectangle;
 
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
-import ip.industrialProcessing.machines.containers.gui.GuiContainerMachine;
 import ip.industrialProcessing.machines.containers.gui.GuiContainerPoweredFluidWorkerMachine;
-import ip.industrialProcessing.machines.plants.metalProcessing.sandCaster.ContainerSandCaster;
 import net.minecraft.entity.player.InventoryPlayer;
 
 public class GuiContainerMagneticSeparator extends GuiContainerPoweredFluidWorkerMachine {

@@ -2,16 +2,12 @@ package ip.industrialProcessing.power.motor;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidTank;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.SimplePowerStorage;
 import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
 import ip.industrialProcessing.machines.animation.AnimationMode;
 import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
-import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
 import ip.industrialProcessing.power.IPowerAcceptor;
 import ip.industrialProcessing.power.PowerHelper;
 import ip.industrialProcessing.power.plants.IMechanicalMotion;
@@ -35,8 +31,8 @@ public class TileEntityElectroMotor extends TileEntityMachine implements IPowerA
 
     private void addEnergy(int waterFill) {
         float speed = this.animationHandler.getSpeed();
-        speed += waterFill * this.animationHandler.DT / 500;
-        speed -= speed * DRAG * this.animationHandler.DT;
+        speed += waterFill * AnimationHandler.DT / 500;
+        speed -= speed * DRAG * AnimationHandler.DT;
         this.animationHandler.setSpeed(speed);
     }
 
@@ -55,7 +51,7 @@ public class TileEntityElectroMotor extends TileEntityMachine implements IPowerA
             if (generator != null) {
                 float speed = this.animationHandler.getSpeed();
                 float resistance = generator.setSpeed(generatorDirection, speed);
-                speed -= speed * resistance * this.animationHandler.DT;
+                speed -= speed * resistance * AnimationHandler.DT;
                 this.animationHandler.setSpeed(speed);
             }
         }

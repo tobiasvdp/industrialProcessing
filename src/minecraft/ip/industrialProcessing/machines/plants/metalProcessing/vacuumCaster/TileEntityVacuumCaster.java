@@ -2,14 +2,11 @@ package ip.industrialProcessing.machines.plants.metalProcessing.vacuumCaster;
 
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
-import ip.industrialProcessing.machines.dryer.RecipesDryer;
 import ip.industrialProcessing.recipes.Recipe;
 
 import java.util.Iterator;
 
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidStack;
 
 public class TileEntityVacuumCaster extends TileEntityPoweredFluidWorkerMachine {
 

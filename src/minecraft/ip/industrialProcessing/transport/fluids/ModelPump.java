@@ -1,7 +1,6 @@
 package ip.industrialProcessing.transport.fluids;
 
 import ip.industrialProcessing.client.render.ModelAnimatedMachine;
-import ip.industrialProcessing.power.plants.models.TurbineAxle;
 import ip.industrialProcessing.transport.fluids.models.pump.PumpAxle;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;

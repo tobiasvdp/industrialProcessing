@@ -2,13 +2,10 @@ package ip.industrialProcessing.machines.crusher;
 
 import org.lwjgl.opengl.GL11;
 
-import ip.industrialProcessing.api.rendering.ModelMachine;
 import ip.industrialProcessing.client.render.ModelAnimatedMachine;
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 
 public class ModelCrusher extends ModelAnimatedMachine {
     // fields
@@ -105,7 +102,8 @@ public class ModelCrusher extends ModelAnimatedMachine {
     }
 
     // is this even used anywhere?
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
+    @Override
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 	super.render(entity, f, f1, f2, f3, f4, f5);
 	super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 	SupportBeamRight.render(f5);

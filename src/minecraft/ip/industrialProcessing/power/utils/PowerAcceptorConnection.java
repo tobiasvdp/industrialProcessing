@@ -1,8 +1,6 @@
 package ip.industrialProcessing.power.utils;
 
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
-import ip.industrialProcessing.power.IPowerAcceptor;
 
 public class PowerAcceptorConnection {
     public PowerAcceptorConnection(int x, int y, int z, ForgeDirection direction) {

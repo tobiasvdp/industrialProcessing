@@ -5,12 +5,13 @@ import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.multiblock.dummy.BlockMultiblockDummy;
 
 public class BLmultiblockWheel extends BlockMultiblockDummy{
 
 	public BLmultiblockWheel() {
-		super(ConfigMachineBlocks.getBLmultiblockWheel(), "BLmultiblockWheel", IndustrialProcessing.tabMultiblocks);
+		super(ConfigMachineBlocks.getBLmultiblockWheel(), "BLmultiblockWheel", ISetupCreativeTabs.tabMultiblocks);
 	}
 
 	@Override

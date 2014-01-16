@@ -6,7 +6,6 @@ import ip.industrialProcessing.multiblock.core.block.elevator.TEmultiblockElevat
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class ENmultiblockLiftDoor extends EntityLiving {

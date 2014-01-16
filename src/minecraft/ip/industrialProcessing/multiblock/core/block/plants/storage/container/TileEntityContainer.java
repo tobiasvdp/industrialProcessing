@@ -1,8 +1,7 @@
 package ip.industrialProcessing.multiblock.core.block.plants.storage.container;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreInv;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
@@ -22,18 +21,18 @@ public class TileEntityContainer extends TileEntityMultiblockCoreInv {
 		LayoutMultiblock layout = new LayoutMultiblock(1, 1, 0, 5, 1, 1);
 
 		int i = 0;
-		layout.setCoreID(i++, 0, 1, IndustrialProcessing.blockContainer.blockID);
+		layout.setCoreID(i++, 0, 1, ISetupMachineBlocks.blockContainer.blockID);
 		for (int j = 0; j < 6; j++) {
-			layout.setBlockIDwithGroup(1, 0, -j, i++, 0, 0,0, IndustrialProcessing.blockContainerWall.blockID);
-			layout.setBlockIDwithGroup(-1, 0, -j, i++, 0, 0,0, IndustrialProcessing.blockContainerWall.blockID);
-			layout.setBlockIDwithGroup(0, +1, -j, i++, 0, 0,0, IndustrialProcessing.blockContainerWall.blockID);
-			layout.setBlockIDwithGroup(1, +1, -j, i++, 0, 0,0, IndustrialProcessing.blockContainerWall.blockID);
-			layout.setBlockIDwithGroup(-1, +1, -j, i++, 0, 0,0, IndustrialProcessing.blockContainerWall.blockID);
-			layout.setBlockIDwithGroup(0, -1, -j, i++, 0, 0,0, IndustrialProcessing.blockContainerWall.blockID);
-			layout.setBlockIDwithGroup(1, -1, -j, i++, 0, 0,0, IndustrialProcessing.blockContainerWall.blockID);
-			layout.setBlockIDwithGroup(-1, -1, -j, i++, 0, 0,0, IndustrialProcessing.blockContainerWall.blockID);
+			layout.setBlockIDwithGroup(1, 0, -j, i++, 0, 0,0, ISetupMachineBlocks.blockContainerWall.blockID);
+			layout.setBlockIDwithGroup(-1, 0, -j, i++, 0, 0,0, ISetupMachineBlocks.blockContainerWall.blockID);
+			layout.setBlockIDwithGroup(0, +1, -j, i++, 0, 0,0, ISetupMachineBlocks.blockContainerWall.blockID);
+			layout.setBlockIDwithGroup(1, +1, -j, i++, 0, 0,0, ISetupMachineBlocks.blockContainerWall.blockID);
+			layout.setBlockIDwithGroup(-1, +1, -j, i++, 0, 0,0, ISetupMachineBlocks.blockContainerWall.blockID);
+			layout.setBlockIDwithGroup(0, -1, -j, i++, 0, 0,0, ISetupMachineBlocks.blockContainerWall.blockID);
+			layout.setBlockIDwithGroup(1, -1, -j, i++, 0, 0,0, ISetupMachineBlocks.blockContainerWall.blockID);
+			layout.setBlockIDwithGroup(-1, -1, -j, i++, 0, 0,0, ISetupMachineBlocks.blockContainerWall.blockID);
 			if (j == 5)
-				layout.setBlockIDwithGroup(0, 0, -j, i++, 0, 0,0, IndustrialProcessing.blockContainerWall.blockID);
+				layout.setBlockIDwithGroup(0, 0, -j, i++, 0, 0,0, ISetupMachineBlocks.blockContainerWall.blockID);
 		}
 
 		structure.addLayout(layout, FacingDirection.North);

@@ -3,13 +3,9 @@ package ip.industrialProcessing.machines.diskFilter;
 import java.util.Iterator;
 
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.machines.TileEntityFluidMachine;
-import ip.industrialProcessing.machines.TileEntityFluidWorkerMachine;
-import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
 import ip.industrialProcessing.recipes.Recipe;
 

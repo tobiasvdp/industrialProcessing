@@ -6,6 +6,7 @@ import ip.industrialProcessing.api.rendering.RendererTileBlock;
 import ip.industrialProcessing.subMod.logic.CommonProxy;
 import ip.industrialProcessing.subMod.logic.IPLogic;
 import ip.industrialProcessing.subMod.logic.config.ConfigLogic;
+import ip.industrialProcessing.subMod.logic.config.ISetupLogic;
 import ip.industrialProcessing.subMod.logic.function.and.MDlogicAnd;
 import ip.industrialProcessing.subMod.logic.function.and.TElogicAnd;
 import ip.industrialProcessing.subMod.logic.function.or.MDlogicOr;
@@ -24,19 +25,19 @@ public class ClientProxy extends CommonProxy {
 	
 	@Override
 	public void registerRenderers() {
-	ClientRegistry.bindTileEntitySpecialRenderer(TElogicSwitchBox.class, new RendererLogic(IPLogic.BLlogicSwitchBox, "MDlogicSwitchBox", MDlogicSwitchBox));
+	ClientRegistry.bindTileEntitySpecialRenderer(TElogicSwitchBox.class, new RendererLogic(ISetupLogic.BLlogicSwitchBox, "MDlogicSwitchBox", MDlogicSwitchBox));
 	ConfigLogic.setRDlogicSwitchBox(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigLogic.getRDlogicSwitchBox(), new TElogicSwitchBox()));
 
-	ClientRegistry.bindTileEntitySpecialRenderer(TElogicCable.class, new RendererLogic(IPLogic.BLlogicCable, "MDlogicCable", MDlogicCable));
+	ClientRegistry.bindTileEntitySpecialRenderer(TElogicCable.class, new RendererLogic(ISetupLogic.BLlogicCable, "MDlogicCable", MDlogicCable));
 	ConfigLogic.setRDlogicCable(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigLogic.getRDlogicCable(), new TElogicCable()));
 
-	ClientRegistry.bindTileEntitySpecialRenderer(TElogicAnd.class, new RendererLogic(IPLogic.BLlogicAnd, "MDlogicAnd", MDlogicAnd));
+	ClientRegistry.bindTileEntitySpecialRenderer(TElogicAnd.class, new RendererLogic(ISetupLogic.BLlogicAnd, "MDlogicAnd", MDlogicAnd));
 	ConfigLogic.setRDlogicAnd(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigLogic.getRDlogicAnd(), new TElogicAnd()));
 
-	ClientRegistry.bindTileEntitySpecialRenderer(TElogicOr.class, new RendererLogic(IPLogic.BLlogicOr, "MDlogicAnd", MDlogicOr));
+	ClientRegistry.bindTileEntitySpecialRenderer(TElogicOr.class, new RendererLogic(ISetupLogic.BLlogicOr, "MDlogicAnd", MDlogicOr));
 	ConfigLogic.setRDlogicOr(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigLogic.getRDlogicOr(), new TElogicOr()));
 	}

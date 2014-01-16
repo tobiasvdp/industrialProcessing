@@ -39,7 +39,7 @@ public class SidedRotationTransformer {
 		switch (side) {
 		case UP:
 		case DOWN:
-			int dir = MathHelper.floor_double((double) ((rotationYaw * 4F) / 360F) + 0.5D) & 3;
+			int dir = MathHelper.floor_double((rotationYaw * 4F) / 360F + 0.5D) & 3;
 			return getFacingDirectionHorizontal(dir);
 		case NORTH:
 		case SOUTH:

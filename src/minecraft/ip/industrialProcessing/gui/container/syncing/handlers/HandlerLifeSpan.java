@@ -2,8 +2,6 @@ package ip.industrialProcessing.gui.container.syncing.handlers;
 
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.syncing.info.InfoLifeSpan;
-import ip.industrialProcessing.gui.container.syncing.info.InfoPower;
-import ip.industrialProcessing.machines.IPowerStorage;
 import ip.industrialProcessing.utils.IBreakable;
 
 public class HandlerLifeSpan implements IHandlerLifeSpan{

@@ -1,9 +1,11 @@
 package ip.industrialProcessing.machines.treetap;
 
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.config.ConfigBlocks;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupBlocks;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.decoration.trees.BlockRubberLog;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.BlockMachineRendered;
@@ -22,8 +24,8 @@ import net.minecraftforge.common.ForgeDirection;
 public class BlockManualTreeTap extends BlockMachineRendered {
 
     public BlockManualTreeTap() {
-        super(ConfigMachineBlocks.getManualTreeTapBlockID(), Material.iron, 1.0f, soundMetalFootstep, "Manual Tree Tap", IndustrialProcessing.tabOreProcessing);
-        func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "manualTreeTap");
+        super(ConfigMachineBlocks.getManualTreeTapBlockID(), Material.iron, 1.0f, soundMetalFootstep, "Manual Tree Tap", ISetupCreativeTabs.tabOreProcessing);
+        func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "manualTreeTap");
     }
 
     protected BlockManualTreeTap(int automaticTreeTapBlockID, Material iron, float f, StepSound soundmetalfootstep, String string, CreativeTabs taboreprocessing) {
@@ -35,7 +37,7 @@ public class BlockManualTreeTap extends BlockMachineRendered {
 
         ForgeDirection side = ForgeDirection.getOrientation(par5).getOpposite();
         int id = par1World.getBlockId(par2 + side.offsetX, par3 + side.offsetY, par4 + side.offsetZ);
-        if (id == IndustrialProcessing.blockPineLog.blockID || id == IndustrialProcessing.blockRubberLog.blockID) {
+        if (id == ISetupBlocks.blockPineLog.blockID || id == ISetupBlocks.blockRubberLog.blockID) {
             return BlockRubberLog.isCarved(par1World, par2 + side.offsetX, par3 + side.offsetY, par4 + side.offsetZ, par5);
         } else
             return false;
@@ -48,7 +50,7 @@ public class BlockManualTreeTap extends BlockMachineRendered {
         TileEntity entity = world.getBlockTileEntity(x, y, z);
         if (entity instanceof IRotateableEntity) {
 
-            int dir = MathHelper.floor_double((double) ((entityLivingBase.rotationYaw * 4F) / 360F) + 0.5D) & 3;
+            int dir = MathHelper.floor_double((entityLivingBase.rotationYaw * 4F) / 360F + 0.5D) & 3;
             for (int i = dir; i < dir + 4; i++) {
                 int d = i % 4;
                 ForgeDirection direction = BlockMachine.getForwardFromMetadata(d);
@@ -65,7 +67,7 @@ public class BlockManualTreeTap extends BlockMachineRendered {
 
     private static boolean canStayAt(World world, int x, int y, int z, ForgeDirection direction) {
         int id = world.getBlockId(x - direction.offsetX, y - direction.offsetY, z - direction.offsetZ);
-        if (id == IndustrialProcessing.blockRubberLog.blockID || id == IndustrialProcessing.blockPineLog.blockID) {
+        if (id == ISetupBlocks.blockRubberLog.blockID || id == ISetupBlocks.blockPineLog.blockID) {
             if (BlockRubberLog.isCarved(world, x - direction.offsetX, y - direction.offsetY, z - direction.offsetZ, direction.ordinal())) {
                 return true;
             }
