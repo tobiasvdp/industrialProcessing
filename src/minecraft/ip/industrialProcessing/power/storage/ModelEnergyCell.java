@@ -1,373 +1,231 @@
 package ip.industrialProcessing.power.storage;
 
-import org.lwjgl.opengl.GL11;
-
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.tileentity.TileEntity;
 import ip.industrialProcessing.client.render.ModelAnimatedMachine;
+import ip.industrialProcessing.power.storage.model.Battery;
+import ip.industrialProcessing.power.storage.model.BatteryBoxProgress;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
+
+import org.lwjgl.opengl.GL11;
 
 public class ModelEnergyCell extends ModelAnimatedMachine {
 
-	// fields
-	ModelRenderer Support1;
-	ModelRenderer Support3;
-	ModelRenderer Side4;
-	ModelRenderer Side1;
-	ModelRenderer ConnectorPower2;
-	ModelRenderer Support2;
-	ModelRenderer Support4;
-	ModelRenderer ConnectorPower1;
-	ModelRenderer Side3;
-	ModelRenderer Shape1;
-	ModelRenderer Side2;
-	ModelRenderer Bat2;
-	ModelRenderer Bat4;
-	ModelRenderer Bat3;
-	ModelRenderer Bat1;
-	ModelRenderer Bat12;
-	ModelRenderer Bat6;
-	ModelRenderer Bat5;
-	ModelRenderer Bat10;
-	ModelRenderer Bat9;
-	ModelRenderer Bat8;
-	ModelRenderer Bat11;
-	ModelRenderer Bat7;
-	ModelRenderer Con8;
-	ModelRenderer Con15;
-	ModelRenderer Con2;
-	ModelRenderer Con10;
-	ModelRenderer Con14;
-	ModelRenderer Con12;
-	ModelRenderer Con3;
-	ModelRenderer Con1;
-	ModelRenderer Con13;
-	ModelRenderer Con6;
-	ModelRenderer Con7;
-	ModelRenderer Con4;
-	ModelRenderer Con9;
-	ModelRenderer Con5;
-	ModelRenderer Con11;
-	ModelRenderer MeterIndicator1;
-	ModelRenderer MeterIndicator2;
-	ModelRenderer MeterBox1;
-	ModelRenderer MeterBox2;
+    // fields
 
-	public ModelEnergyCell() {
-		textureWidth = 64;
-		textureHeight = 32;
+    private Battery battery;
+    private BatteryBoxProgress progressA;
+    private BatteryBoxProgress progressB;
 
-		Support1 = new ModelRenderer(this, 0, 25);
-		Support1.addBox(0F, 0F, 0F, 16, 2, 2);
-		Support1.setRotationPoint(-8F, 22F, 6F);
-		Support1.setTextureSize(64, 32);
-		Support1.mirror = true;
-		setRotation(Support1, 0F, 0F, 0F);
-		Support3 = new ModelRenderer(this, 38, 25);
-		Support3.addBox(0F, 0F, 0F, 12, 1, 1);
-		Support3.setRotationPoint(6F, 23F, 6F);
-		Support3.setTextureSize(64, 32);
-		Support3.mirror = true;
-		setRotation(Support3, 0F, 1.570796F, 0F);
-		Side4 = new ModelRenderer(this, 32, 11);
-		Side4.addBox(0F, 0F, 0F, 12, 13, 1);
-		Side4.setRotationPoint(7F, 10F, 6F);
-		Side4.setTextureSize(64, 32);
-		Side4.mirror = true;
-		setRotation(Side4, 0F, 1.570796F, 0F);
-		Side1 = new ModelRenderer(this, 0, 11);
-		Side1.addBox(0F, 0F, 0F, 14, 12, 2);
-		Side1.setRotationPoint(-7F, 10F, 5F);
-		Side1.setTextureSize(64, 32);
-		Side1.mirror = true;
-		setRotation(Side1, 0F, 0F, 0F);
-		ConnectorPower2 = new ModelRenderer(this, 42, 0);
-		ConnectorPower2.addBox(0F, 0F, 0F, 6, 6, 1);
-		ConnectorPower2.setRotationPoint(-3F, 13F, -8F);
-		ConnectorPower2.setTextureSize(64, 32);
-		ConnectorPower2.mirror = true;
-		setRotation(ConnectorPower2, 0F, 0F, 0F);
-		Support2 = new ModelRenderer(this, 0, 25);
-		Support2.addBox(0F, 0F, 0F, 16, 2, 2);
-		Support2.setRotationPoint(-8F, 22F, -8F);
-		Support2.setTextureSize(64, 32);
-		Support2.mirror = true;
-		setRotation(Support2, 0F, 0F, 0F);
-		Support4 = new ModelRenderer(this, 38, 25);
-		Support4.addBox(0F, 0F, 0F, 12, 1, 1);
-		Support4.setRotationPoint(-7F, 23F, 6F);
-		Support4.setTextureSize(64, 32);
-		Support4.mirror = true;
-		setRotation(Support4, 0F, 1.570796F, 0F);
-		ConnectorPower1 = new ModelRenderer(this, 42, 0);
-		ConnectorPower1.addBox(0F, 0F, 0F, 6, 6, 1);
-		ConnectorPower1.setRotationPoint(-3F, 13F, 7F);
-		ConnectorPower1.setTextureSize(64, 32);
-		ConnectorPower1.mirror = true;
-		setRotation(ConnectorPower1, 0F, 0F, 0F);
-		Side3 = new ModelRenderer(this, 32, 11);
-		Side3.addBox(0F, 0F, 0F, 12, 13, 1);
-		Side3.setRotationPoint(-8F, 10F, 6F);
-		Side3.setTextureSize(64, 32);
-		Side3.mirror = true;
-		setRotation(Side3, 0F, 1.570796F, 0F);
-		Shape1 = new ModelRenderer(this, 12, 0);
-		Shape1.addBox(0F, 0F, 0F, 14, 10, 1);
-		Shape1.setRotationPoint(-7F, 22F, -5F);
-		Shape1.setTextureSize(64, 32);
-		Shape1.mirror = true;
-		setRotation(Shape1, 1.570796F, 0F, 0F);
-		Side2 = new ModelRenderer(this, 0, 11);
-		Side2.addBox(0F, 0F, 0F, 14, 12, 2);
-		Side2.setRotationPoint(-7F, 10F, -7F);
-		Side2.setTextureSize(64, 32);
-		Side2.mirror = true;
-		setRotation(Side2, 0F, 0F, 0F);
-		Bat2 = new ModelRenderer(this, 0, 0);
-		Bat2.addBox(0F, 0F, 0F, 4, 9, 2);
-		Bat2.setRotationPoint(-6.25F, 12F, -2.25F);
-		Bat2.setTextureSize(64, 32);
-		Bat2.mirror = true;
-		setRotation(Bat2, 0F, 0F, 0F);
-		Bat4 = new ModelRenderer(this, 0, 0);
-		Bat4.addBox(0F, 0F, 0F, 4, 9, 2);
-		Bat4.setRotationPoint(-6.25F, 12F, 2.75F);
-		Bat4.setTextureSize(64, 32);
-		Bat4.mirror = true;
-		setRotation(Bat4, 0F, 0F, 0F);
-		Bat3 = new ModelRenderer(this, 0, 0);
-		Bat3.addBox(0F, 0F, 0F, 4, 9, 2);
-		Bat3.setRotationPoint(-6.25F, 12F, 0.25F);
-		Bat3.setTextureSize(64, 32);
-		Bat3.mirror = true;
-		setRotation(Bat3, 0F, 0F, 0F);
-		Bat1 = new ModelRenderer(this, 0, 0);
-		Bat1.addBox(0F, 0F, 0F, 4, 7, 2);
-		Bat1.setRotationPoint(-6.25F, 12F, -4.75F);
-		Bat1.setTextureSize(64, 32);
-		Bat1.mirror = true;
-		setRotation(Bat1, 0F, 0F, 0F);
-		Bat12 = new ModelRenderer(this, 0, 0);
-		Bat12.addBox(0F, 0F, 0F, 4, 9, 2);
-		Bat12.setRotationPoint(2.75F, 12F, -4.75F);
-		Bat12.setTextureSize(64, 32);
-		Bat12.mirror = true;
-		setRotation(Bat12, 0F, 0F, 0F);
-		Bat6 = new ModelRenderer(this, 0, 0);
-		Bat6.addBox(0F, 0F, 0F, 4, 9, 2);
-		Bat6.setRotationPoint(-1.75F, 12F, 0.25F);
-		Bat6.setTextureSize(64, 32);
-		Bat6.mirror = true;
-		setRotation(Bat6, 0F, 0F, 0F);
-		Bat5 = new ModelRenderer(this, 0, 0);
-		Bat5.addBox(0F, 0F, 0F, 4, 9, 2);
-		Bat5.setRotationPoint(-1.75F, 12F, 2.75F);
-		Bat5.setTextureSize(64, 32);
-		Bat5.mirror = true;
-		setRotation(Bat5, 0F, 0F, 0F);
-		Bat10 = new ModelRenderer(this, 0, 0);
-		Bat10.addBox(0F, -2F, 0F, 4, 9, 2);
-		Bat10.setRotationPoint(2.75F, 14F, 0.25F);
-		Bat10.setTextureSize(64, 32);
-		Bat10.mirror = true;
-		setRotation(Bat10, 0F, 0F, 0F);
-		Bat9 = new ModelRenderer(this, 0, 0);
-		Bat9.addBox(0F, 0F, 0F, 4, 9, 2);
-		Bat9.setRotationPoint(2.75F, 12F, 2.75F);
-		Bat9.setTextureSize(64, 32);
-		Bat9.mirror = true;
-		setRotation(Bat9, 0F, 0F, 0F);
-		Bat8 = new ModelRenderer(this, 0, 0);
-		Bat8.addBox(0F, 0F, 0F, 4, 9, 2);
-		Bat8.setRotationPoint(-1.75F, 12F, -4.75F);
-		Bat8.setTextureSize(64, 32);
-		Bat8.mirror = true;
-		setRotation(Bat8, 0F, 0F, 0F);
-		Bat11 = new ModelRenderer(this, 0, 0);
-		Bat11.addBox(0F, 0F, 0F, 4, 9, 2);
-		Bat11.setRotationPoint(2.75F, 12F, -2.25F);
-		Bat11.setTextureSize(64, 32);
-		Bat11.mirror = true;
-		setRotation(Bat11, 0F, 0F, 0F);
-		Bat7 = new ModelRenderer(this, 0, 0);
-		Bat7.addBox(0F, 0F, 0F, 4, 9, 2);
-		Bat7.setRotationPoint(-1.75F, 12F, -2.25F);
-		Bat7.setTextureSize(64, 32);
-		Bat7.mirror = true;
-		setRotation(Bat7, 0F, 0F, 0F);
-		Con8 = new ModelRenderer(this, 42, 7);
-		Con8.addBox(0F, 0F, 0F, 3, 1, 1);
-		Con8.setRotationPoint(-1.5F, 11.5F, -3.5F);
-		Con8.setTextureSize(64, 32);
-		Con8.mirror = true;
-		setRotation(Con8, 0F, 1.570796F, 0F);
-		Con15 = new ModelRenderer(this, 42, 7);
-		Con15.addBox(0F, 0F, 0F, 3, 1, 1);
-		Con15.setRotationPoint(5.5F, 11.5F, -1F);
-		Con15.setTextureSize(64, 32);
-		Con15.mirror = true;
-		setRotation(Con15, 0F, 1.570796F, 0F);
-		Con2 = new ModelRenderer(this, 42, 7);
-		Con2.addBox(0F, 0F, 0F, 3, 1, 1);
-		Con2.setRotationPoint(-3.5F, 11.5F, -1F);
-		Con2.setTextureSize(64, 32);
-		Con2.mirror = true;
-		setRotation(Con2, 0F, 1.570796F, 0F);
-		Con10 = new ModelRenderer(this, 42, 7);
-		Con10.addBox(0F, 0F, 0F, 3, 1, 1);
-		Con10.setRotationPoint(1F, 11.5F, -1F);
-		Con10.setTextureSize(64, 32);
-		Con10.mirror = true;
-		setRotation(Con10, 0F, 1.570796F, 0F);
-		Con14 = new ModelRenderer(this, 42, 7);
-		Con14.addBox(0F, 0F, 0F, 3, 1, 1);
-		Con14.setRotationPoint(5.5F, 11.5F, 4F);
-		Con14.setTextureSize(64, 32);
-		Con14.mirror = true;
-		setRotation(Con14, 0F, 1.570796F, 0F);
-		Con12 = new ModelRenderer(this, 42, 7);
-		Con12.addBox(0F, 0F, 0F, 3, 1, 1);
-		Con12.setRotationPoint(3F, 11.5F, 1.5F);
-		Con12.setTextureSize(64, 32);
-		Con12.mirror = true;
-		setRotation(Con12, 0F, 1.570796F, 0F);
-		Con3 = new ModelRenderer(this, 42, 7);
-		Con3.addBox(0F, 0F, 0F, 3, 1, 1);
-		Con3.setRotationPoint(-6F, 11.5F, 1.5F);
-		Con3.setTextureSize(64, 32);
-		Con3.mirror = true;
-		setRotation(Con3, 0F, 1.570796F, 0F);
-		Con1 = new ModelRenderer(this, 42, 7);
-		Con1.addBox(0F, 0F, 0F, 3, 1, 1);
-		Con1.setRotationPoint(-6F, 11.5F, -3.5F);
-		Con1.setTextureSize(64, 32);
-		Con1.mirror = true;
-		setRotation(Con1, 0F, 1.570796F, 0F);
-		Con13 = new ModelRenderer(this, 42, 7);
-		Con13.addBox(0F, 0F, 0F, 3, 1, 1);
-		Con13.setRotationPoint(3F, 11.5F, -3.5F);
-		Con13.setTextureSize(64, 32);
-		Con13.mirror = true;
-		setRotation(Con13, 0F, 1.570796F, 0F);
-		Con6 = new ModelRenderer(this, 42, 7);
-		Con6.addBox(0F, 0F, 0F, 3, 1, 1);
-		Con6.setRotationPoint(-1.5F, 11.5F, 6.5F);
-		Con6.setTextureSize(64, 32);
-		Con6.mirror = true;
-		setRotation(Con6, 0F, 1.570796F, 0F);
-		Con7 = new ModelRenderer(this, 42, 7);
-		Con7.addBox(0F, 0F, 0F, 3, 1, 1);
-		Con7.setRotationPoint(-1.5F, 11.5F, 1.5F);
-		Con7.setTextureSize(64, 32);
-		Con7.mirror = true;
-		setRotation(Con7, 0F, 1.570796F, 0F);
-		Con4 = new ModelRenderer(this, 42, 7);
-		Con4.addBox(0F, 0F, 0F, 3, 1, 1);
-		Con4.setRotationPoint(-3.5F, 11.5F, 4F);
-		Con4.setTextureSize(64, 32);
-		Con4.mirror = true;
-		setRotation(Con4, 0F, 1.570796F, 0F);
-		Con9 = new ModelRenderer(this, 42, 7);
-		Con9.addBox(0F, 0F, 0F, 3, 1, 1);
-		Con9.setRotationPoint(1F, 11.5F, 4F);
-		Con9.setTextureSize(64, 32);
-		Con9.mirror = true;
-		setRotation(Con9, 0F, 1.570796F, 0F);
-		Con5 = new ModelRenderer(this, 42, 7);
-		Con5.addBox(0F, 0F, 0F, 3, 1, 1);
-		Con5.setRotationPoint(-6F, 11.5F, 6.5F);
-		Con5.setTextureSize(64, 32);
-		Con5.mirror = true;
-		setRotation(Con5, 0F, 1.570796F, 0F);
-		Con11 = new ModelRenderer(this, 42, 7);
-		Con11.addBox(0F, 0F, 0F, 3, 1, 1);
-		Con11.setRotationPoint(3F, 11.5F, 6.5F);
-		Con11.setTextureSize(64, 32);
-		Con11.mirror = true;
-		setRotation(Con11, 0F, 1.570796F, 0F);
-		MeterIndicator1 = new ModelRenderer(this, 58, 10);
-		MeterIndicator1.addBox(0F, 0F, 0F, 1, 6, 2);
-		MeterIndicator1.setRotationPoint(4F, 13F, 7.125F);
-		MeterIndicator1.setTextureSize(64, 32);
-		MeterIndicator1.mirror = true;
-		setRotation(MeterIndicator1, 0F, 1.570796F, 0F);
-		MeterIndicator2 = new ModelRenderer(this, 58, 10);
-		MeterIndicator2.addBox(0F, 0F, 0F, 1, 6, 2);
-		MeterIndicator2.setRotationPoint(-6F, 13F, -6.125F);
-		MeterIndicator2.setTextureSize(64, 32);
-		MeterIndicator2.mirror = true;
-		setRotation(MeterIndicator2, 0F, 1.570796F, 0F);
-		MeterBox1 = new ModelRenderer(this, 56, 0);
-		MeterBox1.addBox(0F, 0F, 0F, 1, 7, 3);
-		MeterBox1.setRotationPoint(3.5F, 12.5F, 7.25F);
-		MeterBox1.setTextureSize(64, 32);
-		MeterBox1.mirror = true;
-		setRotation(MeterBox1, 0F, 1.570796F, 0F);
-		MeterBox2 = new ModelRenderer(this, 56, 0);
-		MeterBox2.addBox(0F, 0F, 0F, 1, 7, 3);
-		MeterBox2.setRotationPoint(-6.5F, 12.5F, -6.25F);
-		MeterBox2.setTextureSize(64, 32);
-		MeterBox2.mirror = true;
-		setRotation(MeterBox2, 0F, 1.570796F, 0F);
+    public ModelEnergyCell() {
+	textureWidth = 64;
+	textureHeight = 32;
 
+	this.battery = new Battery();
+	this.progressA = new BatteryBoxProgress();
+	this.progressB = new BatteryBoxProgress();
+    }
+
+    @Override
+    public void renderModelAnimated(TileEntity tileEntity, float f5, float[] progressAr) {
+
+	Icon batteryIcon = getIcon(0);
+	Icon progressIconA = getIcon(1);
+	Icon progressIconB = getIcon(2);
+	
+	int count = 9;
+	if (progressAr != null && progressAr.length > 0) {
+	    count = Math.round(progressAr[0]*9);
+	}
+	
+	float size = 3 / 16f; 
+	for (int i = 0; i < count; i++) {
+	    int x = i / 3 - 1;
+	    int z = i % 3 - 1;
+	    GL11.glPushMatrix();
+	    GL11.glRotatef(180, 1, 0, 0);
+	    GL11.glTranslatef(x * size, -1, z * size);
+	    this.battery.renderMesh(batteryIcon);
+	    GL11.glPopMatrix();
 	}
 
-	@Override
-	public void renderModelAnimated(TileEntity tileEntity, float f5, float[] progress) {
-		Support1.render(f5);
-		Support3.render(f5);
-		Side4.render(f5);
-		Side1.render(f5);
-		ConnectorPower2.render(f5);
-		Support2.render(f5);
-		Support4.render(f5);
-		ConnectorPower1.render(f5);
-		Side3.render(f5);
-		Shape1.render(f5);
-		Side2.render(f5);
-		Bat2.render(f5);
-		Bat4.render(f5);
-		Bat3.render(f5);
-		Bat1.render(f5);
-		Bat12.render(f5);
-		Bat6.render(f5);
-		Bat5.render(f5);
-		Bat10.render(f5);
-		Bat9.render(f5);
-		Bat8.render(f5);
-		Bat11.render(f5);
-		Bat7.render(f5);
-		Con8.render(f5);
-		Con15.render(f5);
-		Con2.render(f5);
-		Con10.render(f5);
-		Con14.render(f5);
-		Con12.render(f5);
-		Con3.render(f5);
-		Con1.render(f5);
-		Con13.render(f5);
-		Con6.render(f5);
-		Con7.render(f5);
-		Con4.render(f5);
-		Con9.render(f5);
-		Con5.render(f5);
-		Con11.render(f5);
-		MeterBox1.render(f5);
-		MeterBox2.render(f5);
+	float progress = (float) Math.sin(System.nanoTime() / 100000f) / 2 + 0.5f;
+	if (progressAr != null && progressAr.length > 0) {
+	    progress = 1-progressAr[0];
+	}
+	GL11.glPushMatrix(); 
 
-		float translate = 1.2f;
-		GL11.glPushMatrix();
-		GL11.glTranslatef(0, translate, 0);
-		GL11.glScalef(1, progress[0], 1);
-		GL11.glTranslatef(0, -translate, 0);
-		MeterIndicator1.render(f5);
-		MeterIndicator2.render(f5);
-		GL11.glPopMatrix();
+	GL11.glTranslatef(0, 1, 0);
+	GL11.glPushMatrix();
+	GL11.glTranslatef(0, ((progress * 2 - 1) * 2 / 16f), 0);
+	GL11.glScalef(1, progress, 1);
+	this.progressB.renderMesh(progressIconA);
+	GL11.glPopMatrix();
+
+	GL11.glTranslatef(0, progress * (6 / 16f), 0);
+	GL11.glPushMatrix();
+	GL11.glTranslatef(0, (((1 - progress) * 2 - 1) * 2 / 16f), 0);
+	GL11.glScalef(1, 1 - progress, 1);
+	this.progressA.renderMesh(progressIconB);
+	GL11.glPopMatrix();
+
+	GL11.glPopMatrix();
+
+    }
+
+    private Icon getIcon(int i) {
+	switch (i) {
+	case 0:
+	    return new Icon() {
+
+		@Override
+		public int getOriginY() {
+		    return 0;
+		}
+
+		@Override
+		public int getOriginX() {
+		    return 0;
+		}
+
+		@Override
+		public float getMinV() {
+		    return 0;
+		}
+
+		@Override
+		public float getMinU() {
+		    return 0;
+		}
+
+		@Override
+		public float getMaxV() {
+		    return 1;
+		}
+
+		@Override
+		public float getMaxU() {
+		    return 0.5f;
+		}
+
+		@Override
+		public float getInterpolatedV(double d0) {
+		    return (float) d0;
+		}
+
+		@Override
+		public float getInterpolatedU(double d0) {
+		    return (float) d0 / 2;
+		}
+
+		@Override
+		public String getIconName() {
+		    return null;
+		}
+	    };
+	case 1:
+	    return new Icon() {
+
+		@Override
+		public int getOriginY() {
+		    return 0;
+		}
+
+		@Override
+		public int getOriginX() {
+		    return 0;
+		}
+
+		@Override
+		public float getMinV() {
+		    return 0;
+		}
+
+		@Override
+		public float getMinU() {
+		    return 0.5f;
+		}
+
+		@Override
+		public float getMaxV() {
+		    return 1;
+		}
+
+		@Override
+		public float getMaxU() {
+		    return 0.75f;
+		}
+
+		@Override
+		public float getInterpolatedV(double d0) {
+		    return (float) d0;
+		}
+
+		@Override
+		public float getInterpolatedU(double d0) {
+		    return (float) d0 / 4 + 0.5f;
+		}
+
+		@Override
+		public String getIconName() {
+		    return null;
+		}
+	    };
+	case 2:
+	default:
+	    return new Icon() {
+
+		@Override
+		public int getOriginY() {
+		    return 0;
+		}
+
+		@Override
+		public int getOriginX() {
+		    return 0;
+		}
+
+		@Override
+		public float getMinV() {
+		    return 0;
+		}
+
+		@Override
+		public float getMinU() {
+		    return 0.75f;
+		}
+
+		@Override
+		public float getMaxV() {
+		    return 1;
+		}
+
+		@Override
+		public float getMaxU() {
+		    return 1f;
+		}
+
+		@Override
+		public float getInterpolatedV(double d0) {
+		    return (float) d0;
+		}
+
+		@Override
+		public float getInterpolatedU(double d0) {
+		    return (float) d0 / 4 + 0.75f;
+		}
+
+		@Override
+		public String getIconName() {
+		    return null;
+		}
+	    };
 
 	}
+    }
 
-	@Override
-	public void renderModel(TileEntity tileEntity, float f) {
-		renderModelAnimated(null, f, new float[] { 1f });
-	}
+    @Override
+    public void renderModel(TileEntity tileEntity, float f) {
+	renderModelAnimated(null, f, new float[] { 1f });
+    }
 
 }

@@ -104,6 +104,7 @@ import ip.industrialProcessing.power.plants.models.boiler.ModelBoilerBlock;
 import ip.industrialProcessing.power.plants.models.solidBurner.ModelSolidBurnerBlock;
 import ip.industrialProcessing.power.storage.ModelEnergyCell;
 import ip.industrialProcessing.power.storage.TileEntityEnergyCell;
+import ip.industrialProcessing.power.storage.model.ModelEnergyCellBlock;
 import ip.industrialProcessing.power.wire.models.ModelWireBlock;
 import ip.industrialProcessing.transport.fluids.ModelManoMeter;
 import ip.industrialProcessing.transport.fluids.ModelPump;
@@ -209,6 +210,7 @@ public class ClientProxy extends CommonProxy {
     private static final ModelSolidBurnerBlock solidBurnerBlock = new ModelSolidBurnerBlock();
     private static final ModelBoilerBlock modelBoilerBlock = new ModelBoilerBlock();
     private static final ModelThickenerBlock modelThickenerBlock = new ModelThickenerBlock();
+    private static final ModelEnergyCellBlock modelEnergyCellBlock = new ModelEnergyCellBlock();
 
     private static final ModelDistillationElementBlock destillationElementBlock = new ModelDistillationElementBlock();
     private static final ModelAtmosphericDestillationTowerBlock destillationTowerBlock = new ModelAtmosphericDestillationTowerBlock();
@@ -228,7 +230,7 @@ public class ClientProxy extends CommonProxy {
     private static final ModelScreen modelScreen = new ModelScreen();
     private static final ModelWeldingStation modelWeldingStation = new ModelWeldingStation();
     private static final ModelWeldingTable modelWeldingTable = new ModelWeldingTable();
-    private static final ModelSolderingStation modelSolderingStation = new ModelSolderingStation(); 
+    private static final ModelSolderingStation modelSolderingStation = new ModelSolderingStation();
 
     @Override
     public void registerRenderers() {
@@ -277,32 +279,34 @@ public class ClientProxy extends CommonProxy {
 
 	ConfigRenderers.setRendererMultiblockBlastFurnaceTowerID(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getrendererMultiblockBlastFurnaceTowerID(), MDmultiblockBlastFurnaceTower));
-	
+
 	ConfigRenderers.setRendererIronBowlId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererIronBowlId(), modelIronBowl));
-	
+
 	ConfigRenderers.setRendererMachineBlockId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererMachineBlockId(), modelMachineBlock));
 
 	ConfigRenderers.setRendererContainerWall(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererContainerWall(), modelContainerWall));
-	
+
 	ConfigRenderers.setRendererContainer(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererContainer(), modelContainer));
-	
+
 	ConfigRenderers.setBLmultiblockScreen(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLmultiblockScreen(), modelScreen));
 
 	ConfigRenderers.setBLmultiblockWeldingStation(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLmultiblockWeldingStation(), modelWeldingStation));
-	
+
 	ConfigRenderers.setBLmultiblockWeldingTableExt(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getBLmultiblockWeldingTableExt(), modelWeldingTable));
 
 	ConfigRenderers.setRendererSolderingStation(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererSolderingStation(), modelSolderingStation));
 
-	//ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFlotationCell.class, new RendererTileEntity(ISetupMachineBlocks.blockFlotationCell, "ModelFlotationCell", flotationCell));
+	// ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFlotationCell.class,
+	// new RendererTileEntity(ISetupMachineBlocks.blockFlotationCell,
+	// "ModelFlotationCell", flotationCell));
 
 	ConfigRenderers.setRendererFlotationCellId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererFlotationCellId(), flotationCellBlock));
@@ -311,21 +315,18 @@ public class ClientProxy extends CommonProxy {
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererHydroCycloneId(), hydroCycloneBlock));
 
 	// block & tile entity
-	
+
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityClassifier.class, new RendererTileEntityFluidWorker(ISetupMachineBlocks.blockClassifier, "ModelClassifier", classifier));
 	ConfigRenderers.setRendererClassifierId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererClassifierId(), modelClassifierBlock));
 
-	
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGrindingStone.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockGrindingStone, "ModelGrindingStoneAnimated", modelGrindingStoneAnimated));
 	ConfigRenderers.setRendererGrindingStoneId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererGrindingStoneId(), modelGrindingStone));
- 
+
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDiskFilter.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockDiskFilter, "ModelDiskFilter", diskFilter));
 	ConfigRenderers.setRendererDiskFilterIdId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererDiskFilterId(), diskFilterBlock));
-
-	
 
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityConveyorSorter.class, new RendererTileEntityConnected(ISetupMachineBlocks.blockConveyorSorter, "ModelConveyorSorter", conveyorSorter));
 
@@ -394,6 +395,10 @@ public class ClientProxy extends CommonProxy {
 	ConfigRenderers.setRendererThickenerId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererThickenerId(), modelThickenerBlock));
 
+	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEnergyCell.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockEnergyCell, "battery", EnergyCell));
+	ConfigRenderers.setRendererEnergyCellId(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererEnergyCellId(), modelEnergyCellBlock));
+
 	// 100% tile entity
 
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFilter.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockFilter, "ModelFilter", filter));
@@ -415,7 +420,6 @@ public class ClientProxy extends CommonProxy {
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDryer.class, new RendererTileEntity(ISetupMachineBlocks.blockDryer, "ModelDryer", dryer));
 	ConfigRenderers.setRendererDryerId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererDryerId(), new TileEntityDryer()));
- 
 
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityVoltMeter.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockVoltMeter, "ModelVoltMeter", voltMeter));
 	ConfigRenderers.setRendererVoltMeterId(RenderingRegistry.getNextAvailableRenderId());
@@ -424,10 +428,6 @@ public class ClientProxy extends CommonProxy {
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAmpMeter.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockAmpMeter, "ModelAmpMeter", ampMeter));
 	ConfigRenderers.setRendererAmpMeterId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererAmpMeterId(), new TileEntityAmpMeter()));
-
-	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEnergyCell.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockEnergyCell, "ModelBatteryBox", EnergyCell));
-	ConfigRenderers.setRendererEnergyCellId(RenderingRegistry.getNextAvailableRenderId());
-	RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererEnergyCellId(), new TileEntityEnergyCell()));
 
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityManualGenerator.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockManualGenerator, "ModelCrankGenerator", crankGenerator));
 	ConfigRenderers.setRendererCrankGeneratorId(RenderingRegistry.getNextAvailableRenderId());
