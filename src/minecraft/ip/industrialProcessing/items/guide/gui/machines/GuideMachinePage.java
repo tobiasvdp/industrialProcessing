@@ -46,7 +46,7 @@ import ip.industrialProcessing.utils.registry.RecipeRegistry;
 
 public class GuideMachinePage extends GuidePanoramaPage {
 
-	private BlockType[][] type = new BlockType[][] { { BlockType.Ore_Processing, BlockType.Smelting, BlockType.Power,BlockType.fluid, BlockType.Refinary,BlockType.assemble }, { BlockType.Power, BlockType.Storage } };
+	private BlockType[][] type = new BlockType[][] { { BlockType.Ore_Processing, BlockType.Smelting, BlockType.Power,BlockType.fluid, BlockType.Refinary,BlockType.assemble,BlockType.structure, BlockType.Storage }, { BlockType.Power, BlockType.Storage } };
 	private BlockType activeType;
 	private BlockType hoverType;
 	private GuideMachinePageMode mode;

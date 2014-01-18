@@ -97,6 +97,7 @@ import ip.industrialProcessing.transport.fluids.TileEntityTransportFluids;
 import ip.industrialProcessing.transport.fluids.TileEntityTransportFluidsStone;
 import ip.industrialProcessing.transport.fluids.TileEntityTransportFluidsWood;
 import ip.industrialProcessing.transport.fluids.TileEntityValve;
+import ip.industrialProcessing.transport.items.ConveyorBeltPowerInput.TileEntityConveyorBeltPowerInput;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorBelt;
 import ip.industrialProcessing.transport.items.conveyorChute.TileEntityConveyorChute;
 import ip.industrialProcessing.transport.items.conveyorInput.TileEntityConveyorInput;
@@ -221,6 +222,7 @@ public class ConfigMachineBlocks {
     private int BLtransportConveyorBeltOutput = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "ConveyorBeltOutputID", 737).getInt();
     private int BLtransportConveyorBeltSorter = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "ConveyorBeltSorterID", 744).getInt();
     private int BLtransportConveyorShute = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "ConveyorShuteID", 745).getInt();
+    private int conveyorBeltPowerInputID = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "ConveyorBeltPowerInputID", 746).getInt();
 
     public void registerMachineBlocks() {
     	registerMachineBlock(ISetupMachineBlocks.blockAlkylationUnit, "IP.Machine.AlkUnit", "Alkylation unit", TileEntityAlkylationUnit.class, BlockType.Machine,BlockType.Refinary);
@@ -326,6 +328,7 @@ public class ConfigMachineBlocks {
         registerMachineBlock(ISetupMachineBlocks.blockGrate, "IP.Transport.Fluids.Grate", "Grate", TileEntityGrate.class,BlockType.fluid);
         registerMachineBlock(ISetupMachineBlocks.blockRainTank, "IP.Transport.Fluids.RainTank", "Rain Collector", TileEntityRainTank.class,BlockType.fluid);
         registerMachineBlock(ISetupMachineBlocks.blockValve, "IP.Transport.Fluids.Valve", "Valve", TileEntityValve.class,BlockType.fluid);
+        registerMachineBlock(ISetupMachineBlocks.blockConveyorBeltPowerInput, "IP.Transport.Power.CBPI", "Conveyor belt power connector", TileEntityConveyorBeltPowerInput.class,BlockType.Transport,BlockType.Power);
 
         // power
         registerMachineBlock(ISetupMachineBlocks.blockWire, "IP.Wire", "Wire", TileEntityWire.class,BlockType.Machine,BlockType.Power);
@@ -622,6 +625,9 @@ public class ConfigMachineBlocks {
 
     public static int getSinterBlockID() {
         return getInstance().sinterBlockID;
+    }
+    public static int getBlockConveyorBeltPowerInputID() {
+        return getInstance().conveyorBeltPowerInputID;
     }
     public static int getCrusherBlockID() {
         return getInstance().crusherBlockID;

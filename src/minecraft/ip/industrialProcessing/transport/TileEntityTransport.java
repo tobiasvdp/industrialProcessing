@@ -1,9 +1,13 @@
 package ip.industrialProcessing.transport;
 
+import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.IConnectedTile;
 import ip.industrialProcessing.machines.TileEntitySynced;
+import ip.industrialProcessing.transport.items.IConveyorLine;
+import ip.industrialProcessing.transport.items.conveyorBelt.CornerState;
 import ip.industrialProcessing.utils.ConnectedTileUtils;
+import ip.industrialProcessing.utils.registry.HandlerRegistry;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,13 +18,20 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.ForgeDirection;
 
-public abstract class TileEntityTransport extends TileEntitySynced implements IConnectedTile {
+public abstract class TileEntityTransport extends TileEntitySynced implements IConnectedTile, IConveyorLine {
 
 	protected TransportConnectionState[] states = new TransportConnectionState[6];
+	protected CornerState corner = CornerState.invalid;
 	private boolean unverified = false;
 
 	public TileEntityTransport() {
 		Arrays.fill(states, TransportConnectionState.NONE);
+	}
+
+	@Override
+	public int isValidLineConnection(LocalDirection localdir, boolean forward) {
+		// TODO Auto-generated method stub
+		return -1;
 	}
 
 	@Override
@@ -38,10 +49,8 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
 	protected abstract TransportConnectionState getState(TileEntity entity, ForgeDirection direction);
 
 	public void searchForConnections() {
-		 this.unverified = true;
-		// if (this.worldObj.isRemote)
-		//updateConnections(); // do an extra clientside check to reduce
-								// flicker.
+		this.unverified = true;
+		// detect bends
 	}
 
 	protected void updateConnections() {
@@ -61,7 +70,26 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
 		// if the network changed, update the map
 		if (modified)
 			updateNetwork();
+		updateCorners();
 		this.unverified = false;
+	}
+
+	public void updateCorners() {
+
+	}
+
+	protected CornerState getCornerState(TransportConnectionState[] states) {
+		// corners are based on rotation, needs to be on a higher level
+		return CornerState.invalid;
+	}
+
+	public CornerState getCornerState() {
+		return corner;
+	}
+
+	protected CornerState getCornerState(LocalDirection dir) {
+		// corners are based on rotation, needs to be on a higher level
+		return null;
 	}
 
 	private TransportConnectionState getSupportState(ForgeDirection direction) {
@@ -86,7 +114,7 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
 	 * Flags can be added together.
 	 */
 	protected void updateNetwork() {
-		notifyBlockChange();	
+		notifyBlockChange();
 	}
 
 	public TransportConnectionState getNeighborState(ForgeDirection direction) {
@@ -109,12 +137,14 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
 	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
 		super.writeToNBT(par1nbtTagCompound);
 		ConnectedTileUtils.writeToNBT(par1nbtTagCompound, this.states);
+		par1nbtTagCompound.setInteger("conveyorLine", conveyorLine);
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
 		super.readFromNBT(par1nbtTagCompound);
 		ConnectedTileUtils.readFromNBT(par1nbtTagCompound, this.states);
+		conveyorLine = par1nbtTagCompound.getInteger("conveyorLine");
 	}
 
 	public void setBounds() {
@@ -180,5 +210,15 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
 				}
 			}
 		}
+	}
+
+	protected int conveyorLine = -1;
+
+	public int getConveyorLineID() {
+		return conveyorLine;
+	}
+
+	public void setConveyorLineID(int ID) {
+		conveyorLine = ID;
 	}
 }

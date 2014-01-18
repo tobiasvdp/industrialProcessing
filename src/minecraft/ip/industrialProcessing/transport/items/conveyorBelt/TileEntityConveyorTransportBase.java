@@ -24,7 +24,7 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
 
     private Random rnd = new Random();
     protected ArrayList<MovingItemStack> itemStacks = new ArrayList<MovingItemStack>();
-    protected float speed = 1f;
+    protected float speed = 0.01f;
     private int clusterTicks = 0;
     private int maxClusterTicks = 10;
 
@@ -35,6 +35,14 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
 
         canReverse[LocalDirection.UP.ordinal()] = true;
         canReverse[LocalDirection.DOWN.ordinal()] = true;
+    }
+    
+    public float getSpeed(){
+    		return speed;
+    }
+    
+    public void setSpeed(float speed){
+    	this.speed = speed;
     }
 
     public Iterator<MovingItemStack> iterateStacks() {

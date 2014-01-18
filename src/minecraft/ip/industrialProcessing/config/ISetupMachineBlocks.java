@@ -97,6 +97,7 @@ import ip.industrialProcessing.transport.fluids.BlockTransportFluids;
 import ip.industrialProcessing.transport.fluids.BlockTransportFluidsStone;
 import ip.industrialProcessing.transport.fluids.BlockTransportFluidsWood;
 import ip.industrialProcessing.transport.fluids.BlockValve;
+import ip.industrialProcessing.transport.items.ConveyorBeltPowerInput.BlockConveyorBeltPowerInput;
 import ip.industrialProcessing.transport.items.conveyorBelt.BlockConveyorBelt;
 import ip.industrialProcessing.transport.items.conveyorChute.BlockConveyorChute;
 import ip.industrialProcessing.transport.items.conveyorInput.BlockConveyorInput;
@@ -217,7 +218,7 @@ public interface ISetupMachineBlocks {
     public final static BlockConveyorOutput blockConveyorOutput = new BlockConveyorOutput();
     public final static BlockConveyorSorter blockConveyorSorter = new BlockConveyorSorter();
     public final static BlockConveyorChute blockConveyorChute = new BlockConveyorChute();
-
+    public final static BlockConveyorBeltPowerInput blockConveyorBeltPowerInput = new BlockConveyorBeltPowerInput();
     public final static BlockManualTreeTap blockManualTreetap = new BlockManualTreeTap();
     public final static BlockAutomaticTreeTap blockAutomaticTreetap = new BlockAutomaticTreeTap();
 }

@@ -8,6 +8,7 @@ import ip.industrialProcessing.transport.items.conveyorBelt.util.ConveyorEnviron
 import ip.industrialProcessing.transport.items.conveyorBelt.util.DataUtils;
 import ip.industrialProcessing.transport.items.conveyorBelt.util.SlopeUtils;
 import ip.industrialProcessing.utils.DirectionUtils;
+import ip.industrialProcessing.utils.registry.HandlerRegistry;
 
 import java.util.Arrays;
 
@@ -17,233 +18,341 @@ import net.minecraftforge.common.ForgeDirection;
 
 public abstract class TileEntityConveyorConnectionsBase extends TileEntityTransport implements IRotateableEntity {
 
-    protected SlopeState[] slopes = new SlopeState[4];
-    protected int[] slopeMasks = new int[4];
-    protected ConnectionMode[] connections = new ConnectionMode[6];
-    protected Boolean[] canSlope = new Boolean[4];
+	protected SlopeState[] slopes = new SlopeState[4];
+	protected int[] slopeMasks = new int[4];
+	protected ConnectionMode[] connections = new ConnectionMode[6];
+	protected Boolean[] canSlope = new Boolean[4];
 
-    protected ForgeDirection forwardDirection = ForgeDirection.NORTH;
+	protected ForgeDirection forwardDirection = ForgeDirection.NORTH;
 
-    @Override
-    public ForgeDirection getForwardDirection() {
-        return this.forwardDirection;
-    }
+	@Override
+	public ForgeDirection getForwardDirection() {
+		return this.forwardDirection;
+	}
 
-    @Override
-    public void setForwardDirection(ForgeDirection forward) {
-        this.forwardDirection = forward;
-        searchForConnections();
-        notifyBlockChange();
-        if (this.worldObj != null)
-            this.worldObj.notifyBlockChange(xCoord, yCoord, zCoord, this.getBlockType().blockID);
-    }
+	@Override
+	public void setForwardDirection(ForgeDirection forward) {
+		this.forwardDirection = forward;
+		searchForConnections();
+		notifyBlockChange();
+		if (this.worldObj != null)
+			this.worldObj.notifyBlockChange(xCoord, yCoord, zCoord, this.getBlockType().blockID);
+	}
 
-    public TileEntityConveyorConnectionsBase() {
-        Arrays.fill(slopes, SlopeState.FLAT);
-        Arrays.fill(slopeMasks, SlopeState.FLAT.ordinal());
-        Arrays.fill(connections, ConnectionMode.INPUT);
-        Arrays.fill(canSlope, false);
-        setSlopeMode(LocalDirection.FRONT, true);
-        setSlopeMode(LocalDirection.BACK, true);
-        setConnectionMode(LocalDirection.BACK, ConnectionMode.OUTPUT);
-        setConnectionMode(LocalDirection.UP, ConnectionMode.NONE);
-        setConnectionMode(LocalDirection.DOWN, ConnectionMode.NONE);
-    }
+	public TileEntityConveyorConnectionsBase() {
+		Arrays.fill(slopes, SlopeState.FLAT);
+		Arrays.fill(slopeMasks, SlopeState.FLAT.ordinal());
+		Arrays.fill(connections, ConnectionMode.INPUT);
+		Arrays.fill(canSlope, false);
+		setSlopeMode(LocalDirection.FRONT, true);
+		setSlopeMode(LocalDirection.BACK, true);
+		setConnectionMode(LocalDirection.BACK, ConnectionMode.OUTPUT);
+		setConnectionMode(LocalDirection.UP, ConnectionMode.NONE);
+		setConnectionMode(LocalDirection.DOWN, ConnectionMode.NONE);
+	}
 
-    public void setSlopeMode(LocalDirection local, Boolean value) {
-        DataUtils.setItem(local, this.canSlope, value, 3);
-    }
+	@Override
+	public void updateCorners() {
+		CornerState corner = getCornerState(states);
+		this.corner = corner;
+		setConveyorLineID(HandlerRegistry.addToConveyorLine(this,false));
+	}
 
-    public void setConnectionMode(LocalDirection local, ConnectionMode mode) {
-        DataUtils.setItem(local, this.connections, mode, 5);
-    }
+	@Override
+	protected CornerState getCornerState(TransportConnectionState[] states) {
+		int count = 0;
+		for (int i = 0; i < states.length; i++)
+			if (isConnection(states[i]))
+				count++;
+		if (count == 3) {
+			return CornerState.multi;
+		}
+		if (count == 2) {
+			int back = getForwardDirection().getOpposite().ordinal();
+			if (isConnection(states[back])) {
+				int right = getForwardDirection().getRotation(ForgeDirection.UP).ordinal();
+				int left = getForwardDirection().getRotation(ForgeDirection.DOWN).ordinal();
+				if (isConnection(states[left])) {
+					return CornerState.right;
+				}
+				if (isConnection(states[right])) {
+					return CornerState.left;
+				}
+				return CornerState.straight;
+			}
+		}
+		if (count == 4) {
+			return CornerState.crossing;
+		}
+		return CornerState.invalid;
+	}
 
-    public ConnectionMode getConnectionMode(ForgeDirection direction) {
-        return DataUtils.getItem(direction, connections, ConnectionMode.NONE, this.forwardDirection, 5);
-    }
+	@Override
+	protected CornerState getCornerState(LocalDirection localdir) {
+		ForgeDirection dir = DirectionUtils.getWorldDirection(localdir, getForwardDirection());
+		TileEntity te = this.worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+		if (te != null && te instanceof TileEntityConveyorConnectionsBase) {
+			return ((TileEntityConveyorConnectionsBase) te).getCornerState();
+		}
+		return null;
+	}
 
-    public ConnectionMode getConnectionMode(LocalDirection local) {
-        return DataUtils.getItem(local, connections, ConnectionMode.NONE, 5);
-    }
+	public int isValidLineConnection(LocalDirection localdir, boolean forward) {
+		ForgeDirection dir = DirectionUtils.getWorldDirection(localdir, getForwardDirection());
+		int offsetSlope = getOffsetfromSlope(localdir);
+		TileEntity te = this.worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY + offsetSlope, zCoord + dir.offsetZ);
+		if (te != null && te instanceof TileEntityConveyorConnectionsBase) {
+			dir = dir.getOpposite();
+			LocalDirection localdir2 = DirectionUtils.getLocalDirection(dir, ((TileEntityConveyorConnectionsBase) te).getForwardDirection());
+			CornerState corner = ((TileEntityConveyorConnectionsBase) te).getCornerState();
+			if (forward)
+				return isLineInput(localdir2, corner, ((TileEntityConveyorConnectionsBase) te));
+			else if (localdir2 == LocalDirection.BACK)
+				return ((TileEntityConveyorConnectionsBase) te).getConveyorLineID();
+		}
+		return -1;
+	}
 
-    public SlopeState getSlope(ForgeDirection direction) {
-        return DataUtils.getItem(direction, slopes, SlopeState.NONE, this.forwardDirection, 3);
-    }
+	public int getOffsetfromSlope(LocalDirection localdir) {
+		switch (slopes[localdir.ordinal()]){
+		case DOWN:
+			return -1;
+		case FLAT:
+			return 0;
+		case NONE:
+			return 0;
+		case UP:
+			return 1;
+		default:
+			return 0;
+		}
+	}
 
-    public SlopeState getSlope(LocalDirection local) {
-        return DataUtils.getItem(local, slopes, SlopeState.NONE, 3);
-    }
+	private int isLineInput(LocalDirection localdir2, CornerState corner, TileEntityConveyorConnectionsBase te) {
+		switch (corner) {
+		case crossing:
+		case straight:
+		case multi:
+		case invalid:
+			if (localdir2 == LocalDirection.FRONT)
+				return te.getConveyorLineID();
+			break;
+		case left:
+			if (localdir2 == LocalDirection.RIGHT)
+				return te.getConveyorLineID();
+			break;
+		case right:
+			if (localdir2 == LocalDirection.LEFT)
+				return te.getConveyorLineID();
+			break;
+		default:
+			break;
+		}
+		return -1;
+	}
 
-    public boolean setSlope(SlopeState state, ForgeDirection direction) {
-        LocalDirection local = DirectionUtils.getLocalDirection(direction, this.forwardDirection);
-        return setSlope(state, local);
-    }
+	private boolean isConnection(TransportConnectionState state) {
+		return (state == TransportConnectionState.TRANSPORT || state == TransportConnectionState.INPUT || state == TransportConnectionState.OUTPUT);
+	}
 
-    public boolean setSlope(SlopeState state, LocalDirection local) {
-        int index = local.ordinal();
-        if (index > 3)
-            return false;
-        if (SlopeUtils.isInMask(state, slopeMasks[index])) {
-            slopes[index] = state;
-            return true;
-        }
-        return false;
-    }
+	public void setSlopeMode(LocalDirection local, Boolean value) {
+		DataUtils.setItem(local, this.canSlope, value, 3);
+	}
 
-    public void toggleSlope() {
+	public void setConnectionMode(LocalDirection local, ConnectionMode mode) {
+		DataUtils.setItem(local, this.connections, mode, 5);
+	}
 
-        SlopeState oldFront = getSlope(LocalDirection.FRONT);
-        SlopeState oldBack = getSlope(LocalDirection.BACK);
+	public ConnectionMode getConnectionMode(ForgeDirection direction) {
+		return DataUtils.getItem(direction, connections, ConnectionMode.NONE, this.forwardDirection, 5);
+	}
 
-        SlopeState[] values = SlopeState.values();
-        int totalOrdinal = oldFront.ordinal() + oldBack.ordinal() * 3;
-        boolean allOk = false;
-        do {
-            totalOrdinal++;
-            totalOrdinal %= 9;
-            int front = totalOrdinal % 3;
-            int back = totalOrdinal / 3;
+	public ConnectionMode getConnectionMode(LocalDirection local) {
+		return DataUtils.getItem(local, connections, ConnectionMode.NONE, 5);
+	}
 
-            allOk = (back != front || back == SlopeState.FLAT.ordinal()) && setSlope(values[front], LocalDirection.FRONT) && setSlope(values[back], LocalDirection.BACK);
-        } while (!allOk);
+	public SlopeState getSlope(ForgeDirection direction) {
+		return DataUtils.getItem(direction, slopes, SlopeState.NONE, this.forwardDirection, 3);
+	}
 
-        int blockId = this.worldObj.getBlockId(xCoord, yCoord + 1, zCoord);
-        this.worldObj.notifyBlockChange(xCoord, yCoord + 1, zCoord, blockId);
-        this.worldObj.notifyBlockChange(xCoord, yCoord, zCoord, this.getBlockType().blockID);
-        blockId = this.worldObj.getBlockId(xCoord, yCoord - 1, zCoord);
-        this.worldObj.notifyBlockChange(xCoord, yCoord - 1, zCoord, blockId);
+	public SlopeState getSlope(LocalDirection local) {
+		return DataUtils.getItem(local, slopes, SlopeState.NONE, 3);
+	}
 
-        this.notifyBlockChange();
-    }
+	public boolean setSlope(SlopeState state, ForgeDirection direction) {
+		LocalDirection local = DirectionUtils.getLocalDirection(direction, this.forwardDirection);
+		return setSlope(state, local);
+	}
 
-    @Override
-    protected void beginConnectionUpdate() {
-        boolean canGoDown = ConveyorEnvironment.isAir(this, ForgeDirection.DOWN);
-        LocalDirection[] directions = LocalDirection.values();
-        for (int i = 0; i < 4; i++) {
-            LocalDirection local = directions[i];
-            ForgeDirection direction = DirectionUtils.getWorldDirection(local, this.forwardDirection);
+	public boolean setSlope(SlopeState state, LocalDirection local) {
+		int index = local.ordinal();
+		if (index > 3)
+			return false;
+		if (SlopeUtils.isInMask(state, slopeMasks[index])) {
+			slopes[index] = state;
+			System.out.println(index + " :"+state);
+			return true;
+		}
+		return false;
+	}
 
-            this.slopeMasks[i] = 1 << SlopeState.FLAT.ordinal();
-            ConnectionMode mode = this.connections[i];
-            if (mode != null && mode != ConnectionMode.NONE && canSlope[i]) {
-                this.slopeMasks[i] += checkMask(direction, SlopeState.UP, mode);
-                this.slopeMasks[i] += checkMask(direction, SlopeState.DOWN, mode);
-            }
-        }
-    }
+	public void toggleSlope() {
 
-    private int checkMask(ForgeDirection direction, SlopeState slope, ConnectionMode mode) {
+		SlopeState oldFront = getSlope(LocalDirection.FRONT);
+		SlopeState oldBack = getSlope(LocalDirection.BACK);
 
-        TileEntityConveyorConnectionsBase belt = ConveyorEnvironment.getConveyor(this, direction, slope);
-        if (belt != null) {
-            if (ConveyorEnvironment.canConnect(this, belt, direction, slope, mode, false)) {
-                return 1 << slope.ordinal();
-            }
-        }
-        return 0;
-    }
+		SlopeState[] values = SlopeState.values();
+		int totalOrdinal = oldFront.ordinal() + oldBack.ordinal() * 3;
+		boolean allOk = false;
+		do {
+			totalOrdinal++;
+			totalOrdinal %= 9;
+			int front = totalOrdinal % 3;
+			int back = totalOrdinal / 3;
 
-    @Override
-    protected TileEntity getConnectionNeighbor(ForgeDirection direction) {
+			allOk = (back != front || back == SlopeState.FLAT.ordinal()) && setSlope(values[front], LocalDirection.FRONT) && setSlope(values[back], LocalDirection.BACK);
+		} while (!allOk);
 
-        LocalDirection local = DirectionUtils.getLocalDirection(direction, this.forwardDirection);
+		int blockId = this.worldObj.getBlockId(xCoord, yCoord + 1, zCoord);
+		this.worldObj.notifyBlockChange(xCoord, yCoord + 1, zCoord, blockId);
+		this.worldObj.notifyBlockChange(xCoord, yCoord, zCoord, this.getBlockType().blockID);
+		blockId = this.worldObj.getBlockId(xCoord, yCoord - 1, zCoord);
+		this.worldObj.notifyBlockChange(xCoord, yCoord - 1, zCoord, blockId);
 
-        ConnectionMode mode = getConnectionMode(local);
-        if (mode == ConnectionMode.NONE)
-            return null;
+		this.notifyBlockChange();
+	}
 
-        SlopeState slope = getSlope(local);
-        return ConveyorEnvironment.getNeighbor(this, direction, slope);
+	@Override
+	protected void beginConnectionUpdate() {
+		boolean canGoDown = ConveyorEnvironment.isAir(this, ForgeDirection.DOWN);
+		LocalDirection[] directions = LocalDirection.values();
+		for (int i = 0; i < 4; i++) {
+			LocalDirection local = directions[i];
+			ForgeDirection direction = DirectionUtils.getWorldDirection(local, this.forwardDirection);
 
-    }
+			this.slopeMasks[i] = 1 << SlopeState.FLAT.ordinal();
+			ConnectionMode mode = this.connections[i];
+			if (mode != null && mode != ConnectionMode.NONE && canSlope[i]) {
+				this.slopeMasks[i] += checkMask(direction, SlopeState.UP, mode);
+				this.slopeMasks[i] += checkMask(direction, SlopeState.DOWN, mode);
+			}
+		}
 
-    @Override
-    protected TransportConnectionState getState(TileEntity entity, ForgeDirection direction) {
+	}
 
-        if (entity instanceof TileEntityConveyorConnectionsBase) {
-            TileEntityConveyorConnectionsBase belt = (TileEntityConveyorConnectionsBase) entity;
+	private int checkMask(ForgeDirection direction, SlopeState slope, ConnectionMode mode) {
 
-            if (ConveyorEnvironment.canConnect(this, belt, direction, true))
-                return TransportConnectionState.TRANSPORT;
-        }
+		TileEntityConveyorConnectionsBase belt = ConveyorEnvironment.getConveyor(this, direction, slope);
+		if (belt != null) {
+			if (ConveyorEnvironment.canConnect(this, belt, direction, slope, mode, false)) {
+				return 1 << slope.ordinal();
+			}
+		}
+		return 0;
+	}
 
-        return handleInventoryState(entity, direction);
-    }
+	@Override
+	protected TileEntity getConnectionNeighbor(ForgeDirection direction) {
 
-    protected TransportConnectionState handleInventoryState(TileEntity entity, ForgeDirection direction) {
-        return TransportConnectionState.NONE;
-    }
+		LocalDirection local = DirectionUtils.getLocalDirection(direction, this.forwardDirection);
 
-    @Override
-    public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
-        super.writeToNBT(par1nbtTagCompound);
+		ConnectionMode mode = getConnectionMode(local);
+		if (mode == ConnectionMode.NONE)
+			return null;
 
-        par1nbtTagCompound.setInteger("Forward", this.forwardDirection.ordinal());
-        writeToNBT(slopes, par1nbtTagCompound, "Slopes");
-        writeToNBT(connections, par1nbtTagCompound, "ConnectionModes");
-        par1nbtTagCompound.setIntArray("SlopeMasks", slopeMasks);
-        writeToNBT(canSlope, par1nbtTagCompound, "CanSlopes");
-    }
+		SlopeState slope = getSlope(local);
+		return ConveyorEnvironment.getNeighbor(this, direction, slope);
 
-    @Override
-    public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
-        super.readFromNBT(par1nbtTagCompound);
+	}
 
-        this.forwardDirection = ForgeDirection.getOrientation(par1nbtTagCompound.getInteger("Forward"));
+	@Override
+	protected TransportConnectionState getState(TileEntity entity, ForgeDirection direction) {
 
-        SlopeState[] possibleSlopeStates = SlopeState.values();
-        int[] ordinals = par1nbtTagCompound.getIntArray("Slopes");
-        for (int i = 0; i < Math.min(slopes.length, ordinals.length); i++) {
-            slopes[i] = possibleSlopeStates[ordinals[i]];
-        }
+		if (entity instanceof TileEntityConveyorConnectionsBase) {
+			TileEntityConveyorConnectionsBase belt = (TileEntityConveyorConnectionsBase) entity;
 
-        ConnectionMode[] possibleConnectionModes = ConnectionMode.values();
-        ordinals = par1nbtTagCompound.getIntArray("ConnectionModes");
-        for (int i = 0; i < Math.min(connections.length, ordinals.length); i++) {
-            connections[i] = possibleConnectionModes[ordinals[i]];
-        }
+			if (ConveyorEnvironment.canConnect(this, belt, direction, true))
+				return TransportConnectionState.TRANSPORT;
+		}
 
-        slopeMasks = par1nbtTagCompound.getIntArray("SlopeMasks");
+		return handleInventoryState(entity, direction);
+	}
 
-        canSlope = readFromNBT(par1nbtTagCompound, "CanSlopes", canSlope);
-    }
+	protected TransportConnectionState handleInventoryState(TileEntity entity, ForgeDirection direction) {
+		return TransportConnectionState.NONE;
+	}
 
-    private Boolean[] readFromNBT(NBTTagCompound par1nbtTagCompound, String string, Boolean[] data) {
-        byte[] ordinals = par1nbtTagCompound.getByteArray(string);
-        for (int i = 0; i < ordinals.length; i++) {
-            data[i] = (ordinals[i] != 0);
-        }
-        return data;
-    }
+	@Override
+	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
+		super.writeToNBT(par1nbtTagCompound);
 
-    private <T extends Enum> T[] readFromNBT(NBTTagCompound par1nbtTagCompound, String string, T[] values) {
-        int[] ordinals = par1nbtTagCompound.getIntArray(string);
-        Enum[] data = new Enum[ordinals.length];
-        for (int i = 0; i < ordinals.length; i++) {
-            data[i] = values[ordinals[i]];
-        }
-        return (T[]) data;
-    }
+		par1nbtTagCompound.setInteger("Forward", this.forwardDirection.ordinal());
+		writeToNBT(slopes, par1nbtTagCompound, "Slopes");
+		writeToNBT(connections, par1nbtTagCompound, "ConnectionModes");
+		par1nbtTagCompound.setIntArray("SlopeMasks", slopeMasks);
+		writeToNBT(canSlope, par1nbtTagCompound, "CanSlopes");
+	}
 
-    private void writeToNBT(Boolean[] data, NBTTagCompound par1nbtTagCompound, String string) {
-        byte[] ordinals = new byte[data.length];
-        for (int i = 0; i < ordinals.length; i++) {
-            ordinals[i] = (byte) (data[i] ? 1 : 0);
-        }
-        par1nbtTagCompound.setByteArray(string, ordinals);
-    }
+	@Override
+	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
+		super.readFromNBT(par1nbtTagCompound);
 
-    private void writeToNBT(Enum[] data, NBTTagCompound par1nbtTagCompound, String string) {
-        int[] ordinals = new int[data.length];
-        for (int i = 0; i < ordinals.length; i++) {
-            ordinals[i] = data[i].ordinal();
-        }
-        par1nbtTagCompound.setIntArray(string, ordinals);
-    }
+		this.forwardDirection = ForgeDirection.getOrientation(par1nbtTagCompound.getInteger("Forward"));
 
-    @Override
-    public boolean canWrenchRotate() {
-        return true;
-    }
+		SlopeState[] possibleSlopeStates = SlopeState.values();
+		int[] ordinals = par1nbtTagCompound.getIntArray("Slopes");
+		for (int i = 0; i < Math.min(slopes.length, ordinals.length); i++) {
+			slopes[i] = possibleSlopeStates[ordinals[i]];
+		}
+
+		ConnectionMode[] possibleConnectionModes = ConnectionMode.values();
+		ordinals = par1nbtTagCompound.getIntArray("ConnectionModes");
+		for (int i = 0; i < Math.min(connections.length, ordinals.length); i++) {
+			connections[i] = possibleConnectionModes[ordinals[i]];
+		}
+
+		slopeMasks = par1nbtTagCompound.getIntArray("SlopeMasks");
+
+		canSlope = readFromNBT(par1nbtTagCompound, "CanSlopes", canSlope);
+		
+		HandlerRegistry.addToConveyorLine(this,true);
+	}
+
+	private Boolean[] readFromNBT(NBTTagCompound par1nbtTagCompound, String string, Boolean[] data) {
+		byte[] ordinals = par1nbtTagCompound.getByteArray(string);
+		for (int i = 0; i < ordinals.length; i++) {
+			data[i] = (ordinals[i] != 0);
+		}
+		return data;
+	}
+
+	private <T extends Enum> T[] readFromNBT(NBTTagCompound par1nbtTagCompound, String string, T[] values) {
+		int[] ordinals = par1nbtTagCompound.getIntArray(string);
+		Enum[] data = new Enum[ordinals.length];
+		for (int i = 0; i < ordinals.length; i++) {
+			data[i] = values[ordinals[i]];
+		}
+		return (T[]) data;
+	}
+
+	private void writeToNBT(Boolean[] data, NBTTagCompound par1nbtTagCompound, String string) {
+		byte[] ordinals = new byte[data.length];
+		for (int i = 0; i < ordinals.length; i++) {
+			ordinals[i] = (byte) (data[i] ? 1 : 0);
+		}
+		par1nbtTagCompound.setByteArray(string, ordinals);
+	}
+
+	private void writeToNBT(Enum[] data, NBTTagCompound par1nbtTagCompound, String string) {
+		int[] ordinals = new int[data.length];
+		for (int i = 0; i < ordinals.length; i++) {
+			ordinals[i] = data[i].ordinal();
+		}
+		par1nbtTagCompound.setIntArray(string, ordinals);
+	}
+
+	@Override
+	public boolean canWrenchRotate() {
+		return true;
+	}
 }

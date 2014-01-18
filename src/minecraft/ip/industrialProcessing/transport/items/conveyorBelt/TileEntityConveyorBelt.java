@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TileEntityConveyorBelt extends TileEntityConveyorInteractionBase {
+public class TileEntityConveyorBelt extends TileEntityConveyorPowerTranslation {
 
 	public TileEntityConveyorBelt()
 	{

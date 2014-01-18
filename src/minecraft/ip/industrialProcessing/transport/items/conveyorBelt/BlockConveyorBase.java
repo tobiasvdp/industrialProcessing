@@ -18,13 +18,13 @@ import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupItems;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.BlockMachineRendered;
+import ip.industrialProcessing.utils.registry.HandlerRegistry;
 
 public abstract class BlockConveyorBase extends BlockMachineRendered {
- 
 
 	public BlockConveyorBase(int blockID, Material material, float hardness, StepSound stepSound, String name, CreativeTabs creativeTab) {
 		super(blockID, material, hardness, stepSound, name, creativeTab);
-		func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "conveyor");		
+		func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "conveyor");
 	}
 
 	@Override
@@ -79,7 +79,10 @@ public abstract class BlockConveyorBase extends BlockMachineRendered {
 			conveyorBelt.toggleSlope();
 			return false;
 		}
-		
+		if (!world.isRemote) {
+			TileEntityConveyorConnectionsBase conveyorBelt = (TileEntityConveyorConnectionsBase) world.getBlockTileEntity(x, y, z);
+			System.out.println(conveyorBelt.getConveyorLineID());
+		}
 		return false;
 	}
 
@@ -89,7 +92,6 @@ public abstract class BlockConveyorBase extends BlockMachineRendered {
 		TileEntityConveyorConnectionsBase conveyorBelt = (TileEntityConveyorConnectionsBase) par1World.getBlockTileEntity(par2, par3, par4);
 		conveyorBelt.searchForConnections();
 	}
-	
 
 	@Override
 	public boolean canConnectRedstone(IBlockAccess world, int x, int y, int z, int side) {
@@ -102,6 +104,7 @@ public abstract class BlockConveyorBase extends BlockMachineRendered {
 		cb.breakBlock();
 		notifyDestroyed(world, x, y - 1, z);
 		notifyDestroyed(world, x, y + 1, z);
+		HandlerRegistry.removeFromConveyorLine(cb);
 		super.breakBlock(world, x, y, z, par5, par6);
 	}
 

@@ -33,7 +33,7 @@ public class TileConveyorSyncHandler extends TileSyncHandler {
 
 	private static Packet250CustomPayload getConveyorPayload(TileEntity entity, IConveyor handler) {
 
-		int ints = 4 + handler.getStackCount() * 4; // x + y + z + stackCount +
+		int ints = 5 + handler.getStackCount() * 4; // x + y + z + stackCount +
 													// stack * (type
 													// + amount + damage +
 													// source + destination +
@@ -44,11 +44,16 @@ public class TileConveyorSyncHandler extends TileSyncHandler {
 
 		try {
 			writeTileEntity(outputStream, entity);
+			writeSpeed(outputStream, handler);
 			writeConveyorHandler(outputStream, handler);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		return getCustomPacket(bos, PacketHandler.CONVEYOR_SYNC);
+	}
+
+	private static void writeSpeed(DataOutputStream outputStream, IConveyor entity) throws IOException {
+		outputStream.writeFloat(entity.getSpeed());
 	}
 
 	protected static void writeConveyorHandler(DataOutputStream outputStream, IConveyor handler) throws IOException {
@@ -94,6 +99,11 @@ public class TileConveyorSyncHandler extends TileSyncHandler {
 			handler.addStack(stack, destination, source, progress);
 		}
 	}
+	
+	protected static void readSpeed(DataInputStream inputStream, IConveyor handler) throws IOException {
+		float speed = inputStream.readFloat();
+		handler.setSpeed(speed);
+	}
 
 	public static void handleConveyorSync(INetworkManager manager, Packet250CustomPayload packet, Player player) {
 
@@ -106,6 +116,7 @@ public class TileConveyorSyncHandler extends TileSyncHandler {
 			tileEntity = readTileEntity(inputStream, playerEntity.worldObj);
 			if (tileEntity instanceof IConveyor) {
 				IConveyor syncable = (IConveyor) tileEntity;
+				readSpeed(inputStream, syncable);
 				readConveyorHandler(inputStream, syncable);
 			}
 		} catch (IOException e) {

@@ -24,6 +24,7 @@ import ip.industrialProcessing.fluids.ContainerHandler;
 import ip.industrialProcessing.multiblock.dummy.block.frame.ENmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.ENmultiblockLiftDoor;
 import ip.industrialProcessing.utils.EventEntityRightClick;
+import ip.industrialProcessing.utils.handler.conveyors.line.ConveyorLineHandler;
 import ip.industrialProcessing.utils.handler.crafting.CraftingHandler;
 import ip.industrialProcessing.utils.handler.fuel.FuelHandler;
 import ip.industrialProcessing.utils.handler.heat.HeatHandler;
@@ -43,6 +44,8 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartedEvent;
+import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
@@ -111,6 +114,9 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
 
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
+
+		//register new conveyor line handler
+		HandlerRegistry.registerConveyorLineHandler(new ConveyorLineHandler());
 		
 		//register new heat handler
 		HandlerRegistry.registerHeatHandler(new HeatHandler());
@@ -174,5 +180,15 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
+	}
+	
+	@EventHandler
+	public void serverStart(FMLServerStartedEvent event) {
+
+	}
+	
+	@EventHandler
+	public void serverStop(FMLServerStoppingEvent event) {
+		HandlerRegistry.resetConveyorLineHandler();
 	}
 }
