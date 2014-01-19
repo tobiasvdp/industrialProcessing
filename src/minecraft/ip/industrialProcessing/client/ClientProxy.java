@@ -63,6 +63,12 @@ import ip.industrialProcessing.multiblock.core.block.plants.storage.container.mo
 import ip.industrialProcessing.multiblock.core.block.weldingStation.model.ModelWeldingStation;
 import ip.industrialProcessing.multiblock.dummy.block.bellows.model.ModelBellows;
 import ip.industrialProcessing.multiblock.dummy.block.containerWall.model.ModelContainerWall;
+import ip.industrialProcessing.multiblock.dummy.block.controlBox.model.ModelControlBox;
+import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.entity.EntityGarageDoor;
+import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.entity.ModelEntityGarageDoor;
+import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.modelDoor.ModelGarageDoor;
+import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.modelFrame.ModelGarageDoorFrame;
+import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.entity.RenderGarageDoor;
 import ip.industrialProcessing.multiblock.dummy.block.destilationTray.model.ModelDistillationElementBlock;
 import ip.industrialProcessing.multiblock.dummy.block.displayPanel.MDmultiblockDisplayPanel;
 import ip.industrialProcessing.multiblock.dummy.block.displayPanel.TEmultiblockDisplayPanel;
@@ -231,6 +237,9 @@ public class ClientProxy extends CommonProxy {
     private static final ModelWeldingStation modelWeldingStation = new ModelWeldingStation();
     private static final ModelWeldingTable modelWeldingTable = new ModelWeldingTable();
     private static final ModelSolderingStation modelSolderingStation = new ModelSolderingStation();
+    private static final ModelGarageDoor modelGarageDoor = new ModelGarageDoor();
+    private static final ModelGarageDoorFrame modelGarageDoorFrame = new ModelGarageDoorFrame();
+    private static final ModelControlBox modelControlBox = new ModelControlBox();
 
     @Override
     public void registerRenderers() {
@@ -303,16 +312,21 @@ public class ClientProxy extends CommonProxy {
 
 	ConfigRenderers.setRendererSolderingStation(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererSolderingStation(), modelSolderingStation));
-
-	// ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFlotationCell.class,
-	// new RendererTileEntity(ISetupMachineBlocks.blockFlotationCell,
-	// "ModelFlotationCell", flotationCell));
+	
+	ConfigRenderers.setRendererGarageDoor(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererGarageDoor(), modelGarageDoor));
 
 	ConfigRenderers.setRendererFlotationCellId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererFlotationCellId(), flotationCellBlock));
 
 	ConfigRenderers.setRendererHydroCycloneId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererHydroCycloneId(), hydroCycloneBlock));
+	
+	ConfigRenderers.setRendererGarageDoorFrame(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererGarageDoorFrame(), modelGarageDoorFrame));
+	
+	ConfigRenderers.setRendererControlBox(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererControlBox(), modelControlBox));
 
 	// block & tile entity
 
@@ -464,6 +478,7 @@ public class ClientProxy extends CommonProxy {
 	RenderingRegistry.registerEntityRenderingHandler(ENmultiblockLiftDoor.class, new RendererLivingEntity(new MDmultiblockLiftDoor(), 1.0F, "ModelMultiblockLiftDoor"));
 
 	RenderingRegistry.registerEntityRenderingHandler(EntityFloatingCart.class, new RenderFloatingCart(new ModelFloatingCart(), 0.5F));
+	RenderingRegistry.registerEntityRenderingHandler(EntityGarageDoor.class, new RenderGarageDoor(new ModelEntityGarageDoor()));
 
     }
 }

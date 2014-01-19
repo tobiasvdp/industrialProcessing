@@ -44,7 +44,12 @@ public class ConfigBlocks {
 	private int blockCobbleLimestoneID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "blockCobbleLimestoneID", 2010).getInt();
 	private int blockLimestoneID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "blockLimestoneID", 2011).getInt();
 	private int blockHardSandID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "blockHardSandID", 2012).getInt();
+	private int blockHalfWavePlateID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "blockHalfWavePlateID", 2013).getInt();
 
+	public static int getBlockHalfWavePlateID() {
+		return getInstance().blockHalfWavePlateID;
+	}
+	
 	public static int getBlockHardSandID() {
 		return getInstance().blockHardSandID;
 	}
@@ -166,6 +171,7 @@ public class ConfigBlocks {
 		registerBlock(ISetupBlocks.blockAsphalt, "IP.Block.Asphalt", "Asphalt");
 		registerBlock(ISetupBlocks.blockStairs, "IP.Block.Stairs", "Walkway Stairs", BlockType.structure);
 		registerBlock(ISetupMachineBlocks.blockAnvil, "IP.Block.Anvil", "Anvil", BlockType.assemble);
+		registerBlock(ISetupBlocks.blockHalfWavePlate, "IP.Block.hwPlate", "Half wave plate", BlockType.structure);
 
 		registerBlock(ISetupBlocks.blockCinnebar, "IP.World.Cinnebar", "Cinnebar Crystal");
 		registerBlock(ISetupBlocks.blockRutile, "IP.World.Rutile", "Rutile Crystal");

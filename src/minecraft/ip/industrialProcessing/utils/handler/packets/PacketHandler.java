@@ -5,6 +5,9 @@ import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 import ip.industrialProcessing.machines.animation.conveyors.TileConveyorSyncHandler;
 import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
 import ip.industrialProcessing.multiblock.core.block.elevator.TEmultiblockElevator;
+import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.TileEntityGarageDoorDoor;
+import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.TileEntityGarageDoorFrame;
+import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.entity.EntityGarageDoor;
 import ip.industrialProcessing.multiblock.dummy.block.toggleButton.TEmultiblockToggleButton;
 import ip.industrialProcessing.subMod.logic.transport.ICommunicationTransport;
 import ip.industrialProcessing.transport.steve.railway.suspended.cart.EntityFloatingCart;
@@ -19,6 +22,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 
@@ -34,6 +38,8 @@ public class PacketHandler implements IPacketHandler {
 	public static final String IP_ELEVATOR_BUTTON = "IP.MB.EL.Button";
 	public static final String IP_LOGIC_SYNCSIDE = "IP.Lg.SyncSide";
 	public static final String IP_ENTITY_INTERACT = "IP.En.Int";
+	public static final String IP_ENTITY_SPAWNGARAGEDOOR = "IP.En.GDS";
+	public static final String IP_ENTITY_SPAWNGARAGEDOORBLOCK = "IP.En.GDB";
 
 	@Override
 	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {
@@ -62,6 +68,74 @@ public class PacketHandler implements IPacketHandler {
 						((EntityFloatingCart) ent).interact(playerMP);
 				}
 			}
+		}
+
+		if (packet.channel.equals(IP_ENTITY_SPAWNGARAGEDOOR)) {
+			DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
+			double x;
+			double y;
+			double z;
+			int yMax = 0;
+			boolean direction = false;
+			int teX = 0;
+			int teY = 0;
+			int teZ = 0;
+			try {
+				x = inputStream.readInt() / (double) 1000;
+				y = inputStream.readInt() / (double) 1000;
+				z = inputStream.readInt() / (double) 1000;
+				yMax = inputStream.readInt();
+				direction = inputStream.readBoolean();
+				teX = inputStream.readInt();
+				teY = inputStream.readInt();
+				teZ = inputStream.readInt();
+			} catch (IOException e) {
+				e.printStackTrace();
+				return;
+			}
+
+			EntityPlayer playerMP = (EntityPlayer) player;
+			if (playerMP.worldObj.isRemote) {
+				EntityGarageDoor en = new EntityGarageDoor(playerMP.worldObj, x, y, z, yMax, direction, ((TileEntityGarageDoorFrame) (playerMP.worldObj.getBlockTileEntity(teX, teY, teZ))));
+				playerMP.worldObj.spawnEntityInWorld(en);
+			}
+		}
+
+		if (packet.channel.equals(IP_ENTITY_SPAWNGARAGEDOORBLOCK)) {
+			DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
+			int x = 0;
+			int y = 0;
+			int z = 0;
+			int id = 0;
+			int teX = 0;
+			int teY = 0;
+			int teZ = 0;
+			int direction = 0;
+			try {
+				x = inputStream.readInt();
+				y = inputStream.readInt();
+				z = inputStream.readInt();
+				id = inputStream.readInt();
+				direction = inputStream.readInt();
+				teX = inputStream.readInt();
+				teY = inputStream.readInt();
+				teZ = inputStream.readInt();
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+				return;
+			}
+
+			EntityPlayer playerMP = (EntityPlayer) player;
+			if (!playerMP.worldObj.isRemote) {
+				if (playerMP.worldObj.getBlockId(x, y, z) == 0) {
+					playerMP.worldObj.setBlock(x, y, z, id);
+					((TileEntityGarageDoorDoor) playerMP.worldObj.getBlockTileEntity(x, y, z)).setForwardDirection(ForgeDirection.values()[direction]);
+					playerMP.worldObj.markBlockForUpdate(x, y, z);
+					((TileEntityGarageDoorFrame) playerMP.worldObj.getBlockTileEntity(teX, teY, teZ)).addToDoors(new int[] { x, y, z });
+				}
+			}
+
 		}
 
 		// TODO: move this away from here, please!

@@ -100,7 +100,31 @@ public class ConfigRenderers {
     private int rendererContainerWall;
     private int rendererContainer;
     private int rendererSolderingStation;
+    private int rendererGarageDoor;
+    private int rendererGarageDoorFrame;
+    private int rendererControlBox;
 
+	public static void setRendererControlBox(int var) {
+		getInstance().rendererControlBox = var;
+	}
+	public static int getRendererControlBox() {
+		return getInstance().rendererControlBox;
+	}
+	
+	public static void setRendererGarageDoorFrame(int var) {
+		getInstance().rendererGarageDoorFrame = var;
+	}
+	public static int getRendererGarageDoorFrame() {
+		return getInstance().rendererGarageDoorFrame;
+	}
+    
+	public static void setRendererGarageDoor(int var) {
+		getInstance().rendererGarageDoor = var;
+	}
+	public static int getRendererGarageDoor() {
+		return getInstance().rendererGarageDoor;
+	}
+	
 	public static void setRendererSolderingStation(int var) {
 		getInstance().rendererSolderingStation = var;
 	}

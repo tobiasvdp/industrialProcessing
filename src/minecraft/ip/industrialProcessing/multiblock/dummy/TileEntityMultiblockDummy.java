@@ -1,6 +1,7 @@
 package ip.industrialProcessing.multiblock.dummy;
 
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
+import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import net.minecraft.nbt.NBTTagCompound;
@@ -29,6 +30,7 @@ public class TileEntityMultiblockDummy extends TileEntity implements ITileEntity
 	private int modelConnection;
 	private int groupID;
 	protected int ID;
+	protected FacingDirection side = FacingDirection.North;
 
 	public TileEntityMultiblockDummy() {
 
@@ -73,6 +75,10 @@ public class TileEntityMultiblockDummy extends TileEntity implements ITileEntity
 		
 		nbtComp = new NBTTagCompound();
 		nbtComp.setInteger("groupID", groupID);
+		nbttaglist.appendTag(nbtComp);
+		
+		nbtComp = new NBTTagCompound();
+		nbtComp.setInteger("forward", side.ordinal());
 		nbttaglist.appendTag(nbtComp);
 
 		NBTTagList nbttaglistCore = new NBTTagList();
@@ -123,6 +129,9 @@ public class TileEntityMultiblockDummy extends TileEntity implements ITileEntity
 		
 		nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(5);
 		groupID = nbttagcompound1.getInteger("groupID");
+		
+		nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(6);
+		side = FacingDirection.values()[nbttagcompound1.getInteger("forward")];
 
 		nbttaglist = nbt.getTagList("Core");
 
@@ -196,6 +205,12 @@ public class TileEntityMultiblockDummy extends TileEntity implements ITileEntity
 
 		setBlockRotation();
 		state = MultiblockState.CONNECTED;
+		
+		onSetCore();
+	}
+
+	public void onSetCore() {
+		
 	}
 
 	public void setState(MultiblockState state) {
@@ -286,12 +301,29 @@ public class TileEntityMultiblockDummy extends TileEntity implements ITileEntity
 	public ForgeDirection getForwardDirection() {
 		if (getCore() != null)
 			return this.getCore().getForwardDirection();
-		return ForgeDirection.NORTH;
+		return FacingDirectionToForge(side);
+	}
+
+	private ForgeDirection FacingDirectionToForge(FacingDirection side2) {
+		switch (side2) {
+		case East:
+			return ForgeDirection.WEST;
+		case Invalid:
+			return ForgeDirection.UNKNOWN;
+		case North:
+			return ForgeDirection.NORTH;
+		case South:
+			return ForgeDirection.SOUTH;
+		case West:
+			return ForgeDirection.EAST;
+		default:
+			return ForgeDirection.UNKNOWN;
+
+		}
 	}
 
 	@Override
 	public void setForwardDirection(ForgeDirection forward) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -305,5 +337,33 @@ public class TileEntityMultiblockDummy extends TileEntity implements ITileEntity
 		if (getCore() != null)
 			return this.getCore().getTier();
 		return Tiers.Invalid;
+	}
+
+	public void onDestroy() {
+		
+	}
+	
+	public void setsideFromMetadata(int dir) {
+		switch (dir) {
+		case 1: {
+			side = FacingDirection.West;
+			break;
+		}
+		case 2: {
+			side = FacingDirection.North;
+			break;
+		}
+		case 3: {
+			side = FacingDirection.East;
+			break;
+		}
+		case 0: {
+			side = FacingDirection.South;
+			break;
+		}
+		default: {
+			side = FacingDirection.North;
+		}
+		}
 	}
 }

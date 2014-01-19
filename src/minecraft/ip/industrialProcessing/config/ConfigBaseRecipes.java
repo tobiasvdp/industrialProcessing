@@ -84,6 +84,9 @@ public class ConfigBaseRecipes {
 		GameRegistry.addSmelting(Block.sand.blockID, new ItemStack(ISetupBlocks.blockHardSand), 0);
 		GameRegistry.addSmelting(ISetupBlocks.blockHardSand.blockID, new ItemStack(Block.glass), 0);
 		GameRegistry.addSmelting(ISetupItems.itemnhardenedIsolationBoard.itemID, new ItemStack(ISetupItems.itemIsolationBoard), 0);
+		
+		Block.opaqueCubeLookup[ConfigBlocks.getBlockHalfWavePlateID()] = true;
+		Block.opaqueCubeLookup[Block.thinGlass.blockID] = true;
 
 	}
 

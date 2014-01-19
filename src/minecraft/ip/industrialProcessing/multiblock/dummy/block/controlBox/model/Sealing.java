@@ -1,0 +1,42 @@
+package ip.industrialProcessing.multiblock.dummy.block.controlBox.model;
+import ip.industrialProcessing.api.rendering.wavefront.ObjMesh;
+import ip.industrialProcessing.api.rendering.wavefront.ObjQuad;
+
+import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.util.vector.Vector3f;
+public class Sealing extends ObjMesh{
+	public Sealing(){
+		this.quads = new ObjQuad[24];
+		this.quads[0] = new ObjQuad(new Vector3f(0.07f, 1.12f, -0.65f),new Vector3f(-0.07f, 1.12f, -0.65f),new Vector3f(-0.07f, 1.12f, -0.62f),new Vector3f(0.07f, 1.12f, -0.62f),new Vector2f(0.3368f, 0.998f),new Vector2f(0.002f, 0.998f),new Vector2f(0.002f, 0.9263f),new Vector2f(0.3368f, 0.9263f),new Vector3f(0.0f, 4.0f, 0.0f));
+		this.quads[1] = new ObjQuad(new Vector3f(-0.07f, 1.12f, -0.65f),new Vector3f(-0.07f, 0.98f, -0.65f),new Vector3f(-0.07f, 0.98f, -0.62f),new Vector3f(-0.07f, 1.12f, -0.62f),new Vector2f(0.6794f, 0.735f),new Vector2f(0.3447f, 0.735f),new Vector2f(0.3447f, 0.6632f),new Vector2f(0.6794f, 0.6632f),new Vector3f(-4.0f, 0.0f, 0.0f));
+		this.quads[2] = new ObjQuad(new Vector3f(-0.07f, 0.98f, -0.65f),new Vector3f(0.07f, 0.98f, -0.65f),new Vector3f(0.07f, 0.98f, -0.62f),new Vector3f(-0.07f, 0.98f, -0.62f),new Vector2f(0.3368f, 0.9184f),new Vector2f(0.002f, 0.9184f),new Vector2f(0.002f, 0.8466f),new Vector2f(0.3368f, 0.8466f),new Vector3f(0.0f, -4.0f, 0.0f));
+		this.quads[3] = new ObjQuad(new Vector3f(0.07f, 0.98f, -0.65f),new Vector3f(0.07f, 1.12f, -0.65f),new Vector3f(0.07f, 1.12f, -0.62f),new Vector3f(0.07f, 0.98f, -0.62f),new Vector2f(0.6794f, 0.8146f),new Vector2f(0.3447f, 0.8146f),new Vector2f(0.3447f, 0.7429f),new Vector2f(0.6794f, 0.7429f),new Vector3f(4.0f, 0.0f, 0.0f));
+		this.quads[4] = new ObjQuad(new Vector3f(-0.07f, 0.73f, -0.65f),new Vector3f(0.07f, 0.73f, -0.65f),new Vector3f(0.07f, 0.73f, -0.62f),new Vector3f(-0.07f, 0.73f, -0.62f),new Vector2f(0.3368f, 0.8387f),new Vector2f(0.002f, 0.8387f),new Vector2f(0.002f, 0.767f),new Vector2f(0.3368f, 0.767f),new Vector3f(0.0f, -4.0f, 0.0f));
+		this.quads[5] = new ObjQuad(new Vector3f(0.07f, 0.73f, -0.65f),new Vector3f(0.07f, 0.87f, -0.65f),new Vector3f(0.07f, 0.87f, -0.62f),new Vector3f(0.07f, 0.73f, -0.62f),new Vector2f(0.6794f, 0.5757f),new Vector2f(0.3447f, 0.5757f),new Vector2f(0.3447f, 0.504f),new Vector2f(0.6794f, 0.504f),new Vector3f(4.0f, 0.0f, 0.0f));
+		this.quads[6] = new ObjQuad(new Vector3f(0.07f, 0.87f, -0.65f),new Vector3f(-0.07f, 0.87f, -0.65f),new Vector3f(-0.07f, 0.87f, -0.62f),new Vector3f(0.07f, 0.87f, -0.62f),new Vector2f(0.6794f, 0.6553f),new Vector2f(0.3447f, 0.6553f),new Vector2f(0.3447f, 0.5836f),new Vector2f(0.6794f, 0.5836f),new Vector3f(0.0f, 4.0f, 0.0f));
+		this.quads[7] = new ObjQuad(new Vector3f(-0.07f, 0.87f, -0.65f),new Vector3f(-0.07f, 0.73f, -0.65f),new Vector3f(-0.07f, 0.73f, -0.62f),new Vector3f(-0.07f, 0.87f, -0.62f),new Vector2f(0.6794f, 0.8942f),new Vector2f(0.3447f, 0.8942f),new Vector2f(0.3447f, 0.8225f),new Vector2f(0.6794f, 0.8225f),new Vector3f(-4.0f, 0.0f, 0.0f));
+		this.quads[8] = new ObjQuad(new Vector3f(-0.07f, 0.48f, -0.65f),new Vector3f(0.07f, 0.48f, -0.65f),new Vector3f(0.07f, 0.48f, -0.62f),new Vector3f(-0.07f, 0.48f, -0.62f),new Vector2f(0.6794f, 0.9739f),new Vector2f(0.3447f, 0.9739f),new Vector2f(0.3447f, 0.9021f),new Vector2f(0.6794f, 0.9021f),new Vector3f(0.0f, -4.0f, 0.0f));
+		this.quads[9] = new ObjQuad(new Vector3f(0.07f, 0.48f, -0.65f),new Vector3f(0.07f, 0.62f, -0.65f),new Vector3f(0.07f, 0.62f, -0.62f),new Vector3f(0.07f, 0.48f, -0.62f),new Vector2f(0.6794f, 0.4164f),new Vector2f(0.3447f, 0.4164f),new Vector2f(0.3447f, 0.3447f),new Vector2f(0.6794f, 0.3447f),new Vector3f(4.0f, 0.0f, 0.0f));
+		this.quads[10] = new ObjQuad(new Vector3f(0.07f, 0.62f, -0.65f),new Vector3f(-0.07f, 0.62f, -0.65f),new Vector3f(-0.07f, 0.62f, -0.62f),new Vector3f(0.07f, 0.62f, -0.62f),new Vector2f(0.3368f, 0.7591f),new Vector2f(0.002f, 0.7591f),new Vector2f(0.002f, 0.6873f),new Vector2f(0.3368f, 0.6873f),new Vector3f(0.0f, 4.0f, 0.0f));
+		this.quads[11] = new ObjQuad(new Vector3f(-0.07f, 0.62f, -0.65f),new Vector3f(-0.07f, 0.48f, -0.65f),new Vector3f(-0.07f, 0.48f, -0.62f),new Vector3f(-0.07f, 0.62f, -0.62f),new Vector2f(0.6794f, 0.496f),new Vector2f(0.3447f, 0.496f),new Vector2f(0.3447f, 0.4243f),new Vector2f(0.6794f, 0.4243f),new Vector3f(-4.0f, 0.0f, 0.0f));
+		this.quads[12] = new ObjQuad(new Vector3f(0.07f, 1.12f, -0.62f),new Vector3f(-0.07f, 1.12f, -0.62f),new Vector3f(-0.05f, 1.1f, -0.62f),new Vector3f(0.05f, 1.1f, -0.62f),new Vector2f(0.3368f, 0.3368f),new Vector2f(0.002f, 0.3368f),new Vector2f(0.0498f, 0.2889f),new Vector2f(0.2889f, 0.2889f),new Vector3f(0.0f, 0.0f, 4.0f));
+		this.quads[13] = new ObjQuad(new Vector3f(-0.07f, 1.12f, -0.62f),new Vector3f(-0.07f, 0.98f, -0.62f),new Vector3f(-0.05f, 1.0f, -0.62f),new Vector3f(-0.05f, 1.1f, -0.62f),new Vector2f(0.002f, 0.3368f),new Vector2f(0.002f, 0.002f),new Vector2f(0.0498f, 0.0498f),new Vector2f(0.0498f, 0.2889f),new Vector3f(0.0f, 0.0f, 4.0f));
+		this.quads[14] = new ObjQuad(new Vector3f(-0.07f, 0.98f, -0.62f),new Vector3f(0.07f, 0.98f, -0.62f),new Vector3f(0.05f, 1.0f, -0.62f),new Vector3f(-0.05f, 1.0f, -0.62f),new Vector2f(0.002f, 0.002f),new Vector2f(0.3368f, 0.002f),new Vector2f(0.2889f, 0.0498f),new Vector2f(0.0498f, 0.0498f),new Vector3f(0.0f, 0.0f, 4.0f));
+		this.quads[15] = new ObjQuad(new Vector3f(0.07f, 0.98f, -0.62f),new Vector3f(0.07f, 1.12f, -0.62f),new Vector3f(0.05f, 1.1f, -0.62f),new Vector3f(0.05f, 1.0f, -0.62f),new Vector2f(0.3368f, 0.002f),new Vector2f(0.3368f, 0.3368f),new Vector2f(0.2889f, 0.2889f),new Vector2f(0.2889f, 0.0498f),new Vector3f(0.0f, 0.0f, 4.0f));
+		this.quads[16] = new ObjQuad(new Vector3f(-0.07f, 0.73f, -0.62f),new Vector3f(0.07f, 0.73f, -0.62f),new Vector3f(0.05f, 0.75f, -0.62f),new Vector3f(-0.05f, 0.75f, -0.62f),new Vector2f(0.002f, 0.3447f),new Vector2f(0.3368f, 0.3447f),new Vector2f(0.2889f, 0.3925f),new Vector2f(0.0498f, 0.3925f),new Vector3f(0.0f, 0.0f, 4.0f));
+		this.quads[17] = new ObjQuad(new Vector3f(0.07f, 0.73f, -0.62f),new Vector3f(0.07f, 0.87f, -0.62f),new Vector3f(0.05f, 0.85f, -0.62f),new Vector3f(0.05f, 0.75f, -0.62f),new Vector2f(0.3368f, 0.3447f),new Vector2f(0.3368f, 0.6794f),new Vector2f(0.2889f, 0.6316f),new Vector2f(0.2889f, 0.3925f),new Vector3f(0.0f, 0.0f, 4.0f));
+		this.quads[18] = new ObjQuad(new Vector3f(0.07f, 0.87f, -0.62f),new Vector3f(-0.07f, 0.87f, -0.62f),new Vector3f(-0.05f, 0.85f, -0.62f),new Vector3f(0.05f, 0.85f, -0.62f),new Vector2f(0.3368f, 0.6794f),new Vector2f(0.002f, 0.6794f),new Vector2f(0.0498f, 0.6316f),new Vector2f(0.2889f, 0.6316f),new Vector3f(0.0f, 0.0f, 4.0f));
+		this.quads[19] = new ObjQuad(new Vector3f(-0.07f, 0.87f, -0.62f),new Vector3f(-0.07f, 0.73f, -0.62f),new Vector3f(-0.05f, 0.75f, -0.62f),new Vector3f(-0.05f, 0.85f, -0.62f),new Vector2f(0.002f, 0.6794f),new Vector2f(0.002f, 0.3447f),new Vector2f(0.0498f, 0.3925f),new Vector2f(0.0498f, 0.6316f),new Vector3f(0.0f, 0.0f, 4.0f));
+		this.quads[20] = new ObjQuad(new Vector3f(-0.07f, 0.48f, -0.62f),new Vector3f(0.07f, 0.48f, -0.62f),new Vector3f(0.05f, 0.5f, -0.62f),new Vector3f(-0.05f, 0.5f, -0.62f),new Vector2f(0.3447f, 0.002f),new Vector2f(0.6794f, 0.002f),new Vector2f(0.6316f, 0.0498f),new Vector2f(0.3925f, 0.0498f),new Vector3f(0.0f, 0.0f, 4.0f));
+		this.quads[21] = new ObjQuad(new Vector3f(0.07f, 0.48f, -0.62f),new Vector3f(0.07f, 0.62f, -0.62f),new Vector3f(0.05f, 0.6f, -0.62f),new Vector3f(0.05f, 0.5f, -0.62f),new Vector2f(0.6794f, 0.002f),new Vector2f(0.6794f, 0.3368f),new Vector2f(0.6316f, 0.2889f),new Vector2f(0.6316f, 0.0498f),new Vector3f(0.0f, 0.0f, 4.0f));
+		this.quads[22] = new ObjQuad(new Vector3f(0.07f, 0.62f, -0.62f),new Vector3f(-0.07f, 0.62f, -0.62f),new Vector3f(-0.05f, 0.6f, -0.62f),new Vector3f(0.05f, 0.6f, -0.62f),new Vector2f(0.6794f, 0.3368f),new Vector2f(0.3447f, 0.3368f),new Vector2f(0.3925f, 0.2889f),new Vector2f(0.6316f, 0.2889f),new Vector3f(0.0f, 0.0f, 4.0f));
+		this.quads[23] = new ObjQuad(new Vector3f(-0.07f, 0.62f, -0.62f),new Vector3f(-0.07f, 0.48f, -0.62f),new Vector3f(-0.05f, 0.5f, -0.62f),new Vector3f(-0.05f, 0.6f, -0.62f),new Vector2f(0.3447f, 0.3368f),new Vector2f(0.3447f, 0.002f),new Vector2f(0.3925f, 0.0498f),new Vector2f(0.3925f, 0.2889f),new Vector3f(0.0f, 0.0f, 4.0f));
+	}
+	@Override
+	public ObjMesh cloneTransformed(Matrix4f transform) {
+		Sealing other = new Sealing();
+		other.quads = cloneQuads(this.quads, transform);
+		return other;
+	}
+}

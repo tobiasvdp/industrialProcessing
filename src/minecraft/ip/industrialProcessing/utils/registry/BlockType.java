@@ -3,7 +3,7 @@ package ip.industrialProcessing.utils.registry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public enum BlockType {
-	Block, Machine, Tier0,Tier1,Power,Refinary,Smelting,Ore_Processing, assemble, Dummy,Transport,Storage,fluid,structure;
+	Block, Machine, Tier0,Tier1,Power,Refinary,Smelting,Ore_Processing, assemble, Dummy,Transport,Storage,fluid,structure,decoration;
 	
 	public static void registerNames(){
 		LanguageRegistry.instance().addStringLocalization("IP.BlockType."+Ore_Processing.toString(),"en_US", "Ore processing");
@@ -13,5 +13,6 @@ public enum BlockType {
 		LanguageRegistry.instance().addStringLocalization("IP.BlockType."+assemble.toString(),"en_US", "Assemble");
 		LanguageRegistry.instance().addStringLocalization("IP.BlockType."+fluid.toString(),"en_US", "Fluids");
 		LanguageRegistry.instance().addStringLocalization("IP.BlockType."+structure.toString(),"en_US", "Structure");
+		LanguageRegistry.instance().addStringLocalization("IP.BlockType."+decoration.toString(),"en_US", "Decoration");
 	}
 }

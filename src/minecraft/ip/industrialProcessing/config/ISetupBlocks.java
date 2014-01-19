@@ -3,6 +3,7 @@ package ip.industrialProcessing.config;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.buildingBlock.BlockIP;
 import ip.industrialProcessing.buildingBlock.BlockOreIP;
+import ip.industrialProcessing.buildingBlock.BlockPane;
 import ip.industrialProcessing.decoration.block.machineBlock.BlockMachineBlock;
 import ip.industrialProcessing.decoration.crystals.BlockCinnebar;
 import ip.industrialProcessing.decoration.crystals.BlockRutile;
@@ -45,4 +46,6 @@ public interface ISetupBlocks {
     public final static BlockRubberLog blockRubberLog = new BlockRubberLog();
     public final static BlockPineLog blockPineLog = new BlockPineLog();
     public final static BlockIndustrialSapling blockSapling = new BlockIndustrialSapling();
+    
+    public final static Block blockHalfWavePlate = (new BlockPane(ConfigBlocks.getInstance().getBlockHalfWavePlateID(), "blockHalfWavePlate", "blockHalfWavePlate", Material.iron, false)).setHardness(0.9F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("halfWavePlate");
 }

@@ -42,6 +42,7 @@ import ip.industrialProcessing.machines.treetap.BlockManualTreeTap;
 import ip.industrialProcessing.machines.wireMill.BlockWireMill;
 import ip.industrialProcessing.multiblock.core.block.SolderingStation.BlockSolderingStation;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.BLmultiblockBlastFurnace;
+import ip.industrialProcessing.multiblock.core.block.decoration.garageDoor.BlockGarageDoor;
 import ip.industrialProcessing.multiblock.core.block.elevator.BLmultiblockElevator;
 import ip.industrialProcessing.multiblock.core.block.hotPress.BLmultiblockHotPress;
 import ip.industrialProcessing.multiblock.core.block.plants.blacksmith.bloomery.BlockBloomery;
@@ -61,6 +62,9 @@ import ip.industrialProcessing.multiblock.core.block.weldingStation.BlockMultibl
 import ip.industrialProcessing.multiblock.dummy.block.bellows.BlockBellows;
 import ip.industrialProcessing.multiblock.dummy.block.blastFurnaceTower.BLmultiblockBlastFurnaceTower;
 import ip.industrialProcessing.multiblock.dummy.block.containerWall.BlockContainerWall;
+import ip.industrialProcessing.multiblock.dummy.block.controlBox.BlockControlBox;
+import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.BlockGarageDoorDoor;
+import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.BlockGarageDoorFrame;
 import ip.industrialProcessing.multiblock.dummy.block.destilationTray.BlockDestilationTray;
 import ip.industrialProcessing.multiblock.dummy.block.displayPanel.BLmultiblockDisplayPanel;
 import ip.industrialProcessing.multiblock.dummy.block.frame.BLmultiblockFrame;
@@ -146,6 +150,10 @@ public interface ISetupMachineBlocks {
     public final static BlockBellows blockBellows = new BlockBellows();
     public final static BlockBloomery blockBloomery = new BlockBloomery();
     public final static BlockIronBowl blockIronBowl = new BlockIronBowl();
+    public final static BlockGarageDoor blockGarageDoor = new BlockGarageDoor();
+    public final static BlockGarageDoorFrame blockGarageDoorFrame = new BlockGarageDoorFrame();
+    public final static BlockGarageDoorDoor blockGarageDoorDoor = new BlockGarageDoorDoor();
+    public final static BlockControlBox blockControlBox = new BlockControlBox();
 
     // create generators
     public final static BlockManualGenerator blockManualGenerator = new BlockManualGenerator();

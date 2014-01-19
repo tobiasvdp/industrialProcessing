@@ -43,6 +43,7 @@ import ip.industrialProcessing.machines.treetap.TileEntityManualTreeTap;
 import ip.industrialProcessing.machines.wireMill.TileEntityWireMill;
 import ip.industrialProcessing.multiblock.core.block.SolderingStation.TileEntitySolderingStation;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.TEmultiblockBlastFurnace;
+import ip.industrialProcessing.multiblock.core.block.decoration.garageDoor.TileEntityGarageDoor;
 import ip.industrialProcessing.multiblock.core.block.elevator.TEmultiblockElevator;
 import ip.industrialProcessing.multiblock.core.block.hotPress.TEmultiblockHotPress;
 import ip.industrialProcessing.multiblock.core.block.plants.blacksmith.bloomery.TileEntityBloomery;
@@ -62,6 +63,9 @@ import ip.industrialProcessing.multiblock.core.block.weldingStation.TileEntityMu
 import ip.industrialProcessing.multiblock.dummy.block.bellows.TileEntityBellows;
 import ip.industrialProcessing.multiblock.dummy.block.blastFurnaceTower.TEmultiblockBlastFurnaceTower;
 import ip.industrialProcessing.multiblock.dummy.block.containerWall.TileEntityContainerWall;
+import ip.industrialProcessing.multiblock.dummy.block.controlBox.TileEntityControlBox;
+import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.TileEntityGarageDoorDoor;
+import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.TileEntityGarageDoorFrame;
 import ip.industrialProcessing.multiblock.dummy.block.destilationTray.TileEntityDestilationTray;
 import ip.industrialProcessing.multiblock.dummy.block.displayPanel.TEmultiblockDisplayPanel;
 import ip.industrialProcessing.multiblock.dummy.block.frame.TEmultiblockFrame;
@@ -216,14 +220,18 @@ public class ConfigMachineBlocks {
     private int containerBlockID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "containerBlockID", 764).getInt();
     private int containerWallBlockID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "containerWallBlockID", 765).getInt();
     private int blockSolderingStationID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "blockSolderingStationID", 766).getInt();
-
+    private int blockGarageDoorID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "blockGarageDoorID", 767).getInt();
+    private int blockGarageDoorFrameID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "blockGarageDoorFrameID", 768).getInt();
+    private int blockGarageDoorDoorID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "blockGarageDoorDoorID", 769).getInt();
+    private int blockControlBoxID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "blockControlBoxID", 770).getInt();
+    
     private int BLtransportConveyorBelt = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "ConveyorBeltID", 735).getInt();
     private int BLtransportConveyorBeltInput = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "ConveyorBeltInputID", 736).getInt();
     private int BLtransportConveyorBeltOutput = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "ConveyorBeltOutputID", 737).getInt();
     private int BLtransportConveyorBeltSorter = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "ConveyorBeltSorterID", 744).getInt();
     private int BLtransportConveyorShute = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "ConveyorShuteID", 745).getInt();
     private int conveyorBeltPowerInputID = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "ConveyorBeltPowerInputID", 746).getInt();
-
+    
     public void registerMachineBlocks() {
     	registerMachineBlock(ISetupMachineBlocks.blockAlkylationUnit, "IP.Machine.AlkUnit", "Alkylation unit", TileEntityAlkylationUnit.class, BlockType.Machine,BlockType.Refinary);
     	registerMachineBlock(ISetupMachineBlocks.blockGasProcessor, "IP.Machine.GasProc", "Gas processor", TileEntityGasProcessor.class, BlockType.Machine,BlockType.Refinary);
@@ -285,6 +293,10 @@ public class ConfigMachineBlocks {
         registerMachineBlock(ISetupMachineBlocks.BLmultiblockWheel, "IP.MBD.Wheel", "Rolling wheel", TEmultiblockWheel.class);
         registerMachineBlock(ISetupMachineBlocks.BLmultiblockRollingPress, "IP.MBC.RollingPress", "Rolling press", TEmultiblockRollingPress.class);
         registerMachineBlock(ISetupMachineBlocks.blockSolderingStation, "IP.MBC.Solder", "Soldering station", TileEntitySolderingStation.class,BlockType.assemble);
+        registerMachineBlock(ISetupMachineBlocks.blockGarageDoor, "IP.MBC.Garage", "Garage door gearbox", TileEntityGarageDoor.class,BlockType.decoration);
+        registerMachineBlock(ISetupMachineBlocks.blockGarageDoorFrame, "IP.MBD.GarageF", "Garage door frame", TileEntityGarageDoorFrame.class,BlockType.decoration);
+        registerMachineBlock(ISetupMachineBlocks.blockGarageDoorDoor, "IP.MBD.GarageD", "Garage door", TileEntityGarageDoorDoor.class,BlockType.decoration);
+        registerMachineBlock(ISetupMachineBlocks.blockControlBox, "IP.MBD.CtrlB", "Control box", TileEntityControlBox.class,BlockType.decoration);
 
         // register entitys associated with multiblocks
 
@@ -399,6 +411,23 @@ public class ConfigMachineBlocks {
 
     public static ConfigMachineBlocks getInstance() {
         return instance;
+    }
+
+    
+    public static int getBlockControlBoxID() {
+        return getInstance().blockControlBoxID;
+    }
+    
+    public static int getBlockGarageDoorDoorID() {
+        return getInstance().blockGarageDoorDoorID;
+    }
+    
+    public static int getBlockGarageDoorFrameID() {
+        return getInstance().blockGarageDoorFrameID;
+    }
+    
+    public static int getBlockGarageDoorID() {
+        return getInstance().blockGarageDoorID;
     }
 
     public static int getBlockSolderingStationID() {
