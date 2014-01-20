@@ -22,6 +22,8 @@ public class GuiLayout {
 	ArrayList<GuiLayoutPanel> layoutPanels;
 	int slotIndex = 0;
 
+	public boolean useMargin = true;
+
 	public GuiLayout() {
 		layoutPanels = new ArrayList<GuiLayoutPanel>();
 		addLayoutPanel(GuiLayoutPanelType.slotsInventory);
@@ -96,7 +98,7 @@ public class GuiLayout {
 		case heat:
 			x = 0;
 			y = 39 + offsetY;
-			panel = new GuiLayoutPanel(this, type, x, y, 35, 54,15,54);
+			panel = new GuiLayoutPanel(this, type, x, y, 35, 54, 15, 54);
 			panel.setSlotLayout(SlotLayoutType.fixed, 2);
 			panel.setGuiContainerLayout(type);
 			layoutPanels.add(panel);
@@ -105,7 +107,7 @@ public class GuiLayout {
 			x = 8;
 			y = 16 + offsetY;
 			panel = new GuiLayoutPanel(this, type, x, y, 50, 8);
-			//no slotLayout
+			// no slotLayout
 			panel.setGuiContainerLayout(type);
 			layoutPanels.add(panel);
 			break;
@@ -161,16 +163,24 @@ public class GuiLayout {
 			totalWidth += panels.get(i).getWidth();
 		}
 		int margin = (widthScreen - totalWidth) / (panels.size() + 1);
-		totalWidth = 0;
-		for (int i = 0; i < panels.size(); i++) {
-			panels.get(i).setX(totalWidth + (i + 1) * margin);
-			totalWidth += panels.get(i).getWidth();
+		if (useMargin) {
+			totalWidth = 0;
+			for (int i = 0; i < panels.size(); i++) {
+				panels.get(i).setX(totalWidth + (i + 1) * margin);
+				totalWidth += panels.get(i).getWidth();
+			}
+		} else {
+			totalWidth = (widthScreen-totalWidth)/2;
+			for (int i = 0; i < panels.size(); i++) {
+				panels.get(i).setX(totalWidth);
+				totalWidth += panels.get(i).getWidth()+2;
+			}
 		}
 	}
 
 	private ArrayList<GuiLayoutPanel> getOrganizedPanels() {
 		ArrayList<GuiLayoutPanel> panels = new ArrayList<GuiLayoutPanel>();
-		for (GuiLayoutPanelType type : new GuiLayoutPanelType[] { GuiLayoutPanelType.heat,GuiLayoutPanelType.tankInput, GuiLayoutPanelType.slotsInput, GuiLayoutPanelType.worker, GuiLayoutPanelType.slotsOutput, GuiLayoutPanelType.tankOutput }) {
+		for (GuiLayoutPanelType type : new GuiLayoutPanelType[] { GuiLayoutPanelType.heat, GuiLayoutPanelType.tankInput, GuiLayoutPanelType.slotsInput, GuiLayoutPanelType.worker, GuiLayoutPanelType.slotsOutput, GuiLayoutPanelType.tankOutput }) {
 			Iterator<GuiLayoutPanel> it = layoutPanels.iterator();
 			while (it.hasNext()) {
 				GuiLayoutPanel panel = it.next();
@@ -231,9 +241,9 @@ public class GuiLayout {
 		}
 	}
 
-	public void drawFilledPanels(Rectangle rectangle, Gui gui, int mouseX,int mouseY,Recipe recipe, Block craftingBlock) {
+	public void drawFilledPanels(Rectangle rectangle, Gui gui, int mouseX, int mouseY, Recipe recipe, Block craftingBlock) {
 		ArrayList<GuiLayoutPanel> panels = getOrganizedPanels();
-		
+
 		int typeIndex = 0;
 		GuiLayoutPanelType type = null;
 		int offset = 3;
@@ -241,7 +251,7 @@ public class GuiLayout {
 		int y = rectangle.y + offset;
 		int ymax = 0;
 		for (int i = 0; i < panels.size(); i++) {
-			
+
 			GuiLayoutPanel panel = panels.get(i);
 			GuiLayoutPanelType panelType = panel.type;
 
@@ -256,17 +266,17 @@ public class GuiLayout {
 					type = panelType;
 				}
 			}
-			
-			if(panel.getHeight() > ymax)
+
+			if (panel.getHeight() > ymax)
 				ymax = panel.getHeight();
-			if(panel.getWidthReduced() + x > rectangle.x+rectangle.width){
+			if (panel.getWidthReduced() + x > rectangle.x + rectangle.width) {
 				x = rectangle.x + offset;
-				y= y+= ymax + offset;
+				y = y += ymax + offset;
 				ymax = 0;
 			}
-			panel.drawFilledPanel(gui,typeIndex,x,y,recipe,mouseX,mouseY,craftingBlock);
-			x +=  panel.getWidthReduced() + offset;
-			
+			panel.drawFilledPanel(gui, typeIndex, x, y, recipe, mouseX, mouseY, craftingBlock);
+			x += panel.getWidthReduced() + offset;
+
 			typeIndex++;
 		}
 	}
