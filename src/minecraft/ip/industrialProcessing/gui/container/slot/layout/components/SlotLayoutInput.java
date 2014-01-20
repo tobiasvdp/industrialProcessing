@@ -86,7 +86,7 @@ public class SlotLayoutInput extends SlotLayout{
 						slots[count++] = new SlotBase(null, startIndex++, rect.width/2 - xVer * 9 + i * 18, 18 * j);
 				}
 				for (int i = 0; i < yVer; i++) {
-					slots[count++] = new SlotBase(null, startIndex++, rect.width/2 - xVer * 9 + (xVer - 1) * 18, rect.height/2 - yVer * 9 + i * 18);
+					slots[count++] = new SlotBase(null, startIndex++, rect.width/2 - xVer * 9 + (xVer - 1) * 18, rect.height/2+1 - yVer * 9 + i * 18);
 				}
 			} else {
 				int spacing = (rect.height - 18 * yVer) / (yVer + 1);

@@ -26,8 +26,7 @@ public class BlockStorageBox extends BlockMachineRendered implements IDescriptio
 	public static GuiLayout guiLayout;
 	static {
 		guiLayout = new GuiLayout();
-		guiLayout.useMargin = false;
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 9);
+		guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.vertical, 9);
 	}
 	private Icon[] icons = new Icon[1];
 
