@@ -94,6 +94,7 @@ public abstract class BlockMultiblockCore extends BlockContainer{
     @Override
     public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
 		InventoryUtils.DropInventoryContents(world, x, y, z);
+		((TileEntityMultiblockCore) world.getBlockTileEntity(x, y, z)).onDestroy();
 		((TileEntityMultiblockCore) world.getBlockTileEntity(x, y, z)).destroyMultiblock();
     	super.breakBlock(world, x, y, z, par5, par6);
     }

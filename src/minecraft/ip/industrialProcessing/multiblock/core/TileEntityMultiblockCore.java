@@ -516,4 +516,8 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 		return tier;
 	}
 
+	public void onDestroy() {
+		
+	}
+
 }

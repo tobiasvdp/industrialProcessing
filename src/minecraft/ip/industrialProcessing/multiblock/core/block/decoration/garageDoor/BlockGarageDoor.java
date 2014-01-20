@@ -31,7 +31,7 @@ public class BlockGarageDoor extends BlockMultiblockCore implements IDescription
 
 	@Override
 	public int getRenderType() {
-		return ConfigRenderers.getBLmultiblockWeldingStation();
+		return ConfigRenderers.getRendererGarageDoorFrame();
 	}
 	
     @Override
@@ -42,10 +42,7 @@ public class BlockGarageDoor extends BlockMultiblockCore implements IDescription
 
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-        icons [0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Planks2");
-        icons [1] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Stone");
-        icons [2] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Planks2");
-        icons [3] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "crafting_table_front");
+        icons [0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "blockGarageFrame");
     }
 
 	@Override

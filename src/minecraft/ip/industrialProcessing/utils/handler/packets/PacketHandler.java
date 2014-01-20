@@ -4,6 +4,7 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 import ip.industrialProcessing.machines.animation.conveyors.TileConveyorSyncHandler;
 import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
+import ip.industrialProcessing.multiblock.core.block.decoration.garageDoor.TileEntityGarageDoor;
 import ip.industrialProcessing.multiblock.core.block.elevator.TEmultiblockElevator;
 import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.TileEntityGarageDoorDoor;
 import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.TileEntityGarageDoorFrame;
@@ -95,8 +96,12 @@ public class PacketHandler implements IPacketHandler {
 			}
 
 			EntityPlayer playerMP = (EntityPlayer) player;
-			if (playerMP.worldObj.isRemote) {
+			if (playerMP.worldObj.isRemote && (playerMP.worldObj.getBlockTileEntity(teX, teY, teZ)) instanceof TileEntityGarageDoorFrame) {
 				EntityGarageDoor en = new EntityGarageDoor(playerMP.worldObj, x, y, z, yMax, direction, ((TileEntityGarageDoorFrame) (playerMP.worldObj.getBlockTileEntity(teX, teY, teZ))));
+				playerMP.worldObj.spawnEntityInWorld(en);
+			}
+			if (playerMP.worldObj.isRemote && (playerMP.worldObj.getBlockTileEntity(teX, teY, teZ)) instanceof TileEntityGarageDoor) {
+				EntityGarageDoor en = new EntityGarageDoor(playerMP.worldObj, x, y, z, yMax, direction, ((TileEntityGarageDoor) (playerMP.worldObj.getBlockTileEntity(teX, teY, teZ))));
 				playerMP.worldObj.spawnEntityInWorld(en);
 			}
 		}
@@ -120,7 +125,7 @@ public class PacketHandler implements IPacketHandler {
 				teX = inputStream.readInt();
 				teY = inputStream.readInt();
 				teZ = inputStream.readInt();
-				
+
 			} catch (IOException e) {
 				e.printStackTrace();
 				return;
@@ -128,11 +133,14 @@ public class PacketHandler implements IPacketHandler {
 
 			EntityPlayer playerMP = (EntityPlayer) player;
 			if (!playerMP.worldObj.isRemote) {
-				if (playerMP.worldObj.getBlockId(x, y, z) == 0) {
-					playerMP.worldObj.setBlock(x, y, z, id);
+				if (playerMP.worldObj.getBlockId(x, y, z) == IndustrialProcessing.blockGarageDoorDoor.blockID) {
+					((TileEntityGarageDoorDoor) playerMP.worldObj.getBlockTileEntity(x, y, z)).hide = false;
 					((TileEntityGarageDoorDoor) playerMP.worldObj.getBlockTileEntity(x, y, z)).setForwardDirection(ForgeDirection.values()[direction]);
 					playerMP.worldObj.markBlockForUpdate(x, y, z);
-					((TileEntityGarageDoorFrame) playerMP.worldObj.getBlockTileEntity(teX, teY, teZ)).addToDoors(new int[] { x, y, z });
+					if ((playerMP.worldObj.getBlockTileEntity(teX, teY, teZ)) instanceof TileEntityGarageDoorFrame)
+						((TileEntityGarageDoorFrame) playerMP.worldObj.getBlockTileEntity(teX, teY, teZ)).addToDoors(new int[] { x, y, z });
+					if ((playerMP.worldObj.getBlockTileEntity(teX, teY, teZ)) instanceof TileEntityGarageDoor)
+						((TileEntityGarageDoor) playerMP.worldObj.getBlockTileEntity(teX, teY, teZ)).addToDoors(new int[] { x, y, z });
 				}
 			}
 

@@ -1,5 +1,7 @@
 package ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor;
 
+import java.util.List;
+
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.INamepace;
@@ -10,7 +12,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
@@ -71,19 +75,27 @@ public class BlockGarageDoorDoor extends BlockContainer {
 	}
 
 	public MovingObjectPosition collisionRayTrace(World par1World, int par2, int par3, int par4, Vec3 par5Vec3, Vec3 par6Vec3) {
-		if (((IRotateableEntity) par1World.getBlockTileEntity(par2, par3, par4)).getForwardDirection() != null) {
-			int l = ((IRotateableEntity) par1World.getBlockTileEntity(par2, par3, par4)).getForwardDirection().ordinal();
-			if (l == 2) {
-				this.setBlockBounds(0F, 0.0F, 0.45F, 1F, 1F, 0.55F);
-			} else if (l == 3) {
-				this.setBlockBounds(0F, 0.0F, 0.45F, 1F, 1F, 0.55F);
-			} else if (l == 4) {
-				this.setBlockBounds(0.45F, 0.0F, 0.0F, 0.55F, 1F, 1F);
-			} else if (l == 5) {
-				this.setBlockBounds(0.45F, 0.0F, 0.0F, 0.55F, 1F, 1F);
+		if (!((TileEntityGarageDoorDoor) par1World.getBlockTileEntity(par2, par3, par4)).hide) {
+			if (((IRotateableEntity) par1World.getBlockTileEntity(par2, par3, par4)).getForwardDirection() != null) {
+				int l = ((IRotateableEntity) par1World.getBlockTileEntity(par2, par3, par4)).getForwardDirection().ordinal();
+				if (l == 2) {
+					this.setBlockBounds(0F, 0.0F, 0.45F, 1F, 1F, 0.55F);
+				} else if (l == 3) {
+					this.setBlockBounds(0F, 0.0F, 0.45F, 1F, 1F, 0.55F);
+				} else if (l == 4) {
+					this.setBlockBounds(0.45F, 0.0F, 0.0F, 0.55F, 1F, 1F);
+				} else if (l == 5) {
+					this.setBlockBounds(0.45F, 0.0F, 0.0F, 0.55F, 1F, 1F);
+				}
 			}
+			return super.collisionRayTrace(par1World, par2, par3, par4, par5Vec3, par6Vec3);
 		}
-		return super.collisionRayTrace(par1World, par2, par3, par4, par5Vec3, par6Vec3);
+		return null;
 	}
 
+	@Override
+	public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
+		if (!((TileEntityGarageDoorDoor) par1World.getBlockTileEntity(par2, par3, par4)).hide)
+			super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
+	}
 }
