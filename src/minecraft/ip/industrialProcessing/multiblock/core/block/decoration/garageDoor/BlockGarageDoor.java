@@ -5,6 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.INamepace;
@@ -54,10 +55,8 @@ public class BlockGarageDoor extends BlockMultiblockCore implements IDescription
 	
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
-		if(!player.isSneaking()){
-			TileEntityGarageDoor me = (TileEntityGarageDoor) world.getBlockTileEntity(x, y, z);
-			me.openOrClose();
-		}
+    	if(player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().itemID == IndustrialProcessing.itemRemote.itemID)
+    		return false;
 		return super.onBlockActivated(world, x, y, z, player, metadata, what, these, are);
 	}
 }

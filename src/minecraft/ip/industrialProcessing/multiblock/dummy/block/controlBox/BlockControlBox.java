@@ -1,5 +1,6 @@
 package ip.industrialProcessing.multiblock.dummy.block.controlBox;
 
+import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.INamepace;
@@ -9,10 +10,14 @@ import ip.industrialProcessing.multiblock.dummy.BlockMultiblockDummy;
 import ip.industrialProcessing.multiblock.dummy.block.bellows.TileEntityBellows;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
@@ -39,14 +44,52 @@ public class BlockControlBox extends BlockMultiblockDummy{
         par1 %= icons.length;        
         return icons[par1];
     }
+    
+    @Override
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
+    {
+        return null;
+    }
 
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-        icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Wood");
-        icons[1] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Canvas");
-        icons[2] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Canvas");
-        icons[3] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Canvas");
-        icons[4] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Canvas");
+        icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Iron");
+        icons[1] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Orange");
+        icons[2] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "up");
+        icons[3] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "stop");
+        icons[4] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "down");
+    }
+    
+    public MovingObjectPosition collisionRayTrace(World par1World, int par2, int par3, int par4, Vec3 par5Vec3, Vec3 par6Vec3)
+    {
+        int l = ((IRotateableEntity)par1World.getBlockTileEntity(par2, par3, par4)).getForwardDirection().ordinal();
+        if (l == 2){
+            this.setBlockBounds(0.4F, 0.25F, 0.0F, 0.6F, 0.75F, 0.1F );
+        }else  if (l == 3){
+            this.setBlockBounds(0.4F, 0.25F, 0.9F, 0.6F, 0.75F, 1.0F );
+        }else if (l == 4){
+            this.setBlockBounds(0.9F, 0.25F, 0.4F, 1.0F, 0.75F, 0.60F );
+        }else  if (l == 5){
+            this.setBlockBounds(0.0F, 0.25F, 0.4F, 0.10F, 0.75F, 0.6F );
+        }
+
+        return super.collisionRayTrace(par1World, par2, par3, par4, par5Vec3, par6Vec3);
+    }
+    
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
+    	TileEntityControlBox te = (TileEntityControlBox) world.getBlockTileEntity(x, y, z);
+    	if(these < 0.7f && these > 0.6f){
+    		te.triggerButton(0);
+    	}else if(these < 0.53f && these > 0.43f){
+    		te.triggerButton(1);
+    	}else if(these < 0.37f && these > 0.26f){
+    		te.triggerButton(2);
+    	}
+    	super.onBlockActivated(world, x, y, z, player, metadata, what, these, are);
+    	if(player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().itemID == IndustrialProcessing.itemRemote.itemID)
+    		return false;
+    	return true;
     }
 
 }

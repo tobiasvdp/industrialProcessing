@@ -43,7 +43,30 @@ public class EntityGarageDoor extends Entity implements IRotateableEntity {
 		this.maxY = yCoord;
 		this.direction = direction;
 		this.noClip = true;
+		
 		this.setSize(1.0F, 1.0F);
+		switch (getForwardDirection()) {
+		case EAST:
+		case WEST:
+			this.boundingBox.minX = 0.0f;
+	        this.boundingBox.maxX = 1.0f;
+			this.boundingBox.minZ = 0.45f;
+	        this.boundingBox.maxZ = 0.55f;
+			break;
+		case NORTH:
+		case SOUTH:
+			this.boundingBox.minX = 0.45f;
+	        this.boundingBox.maxX = 0.55f;
+			this.boundingBox.minZ = 0.0f;
+	        this.boundingBox.maxZ = 1.0f;
+			break;
+		default:
+			break;
+		}
+        
+		this.boundingBox.minY = 0.0f;
+        this.boundingBox.maxY = 1.0f;
+        
 		this.setPosition(x, y, z);
 		this.motionX = 0.0D;
 		this.motionY = 0.0D;

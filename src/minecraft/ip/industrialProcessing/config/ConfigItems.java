@@ -167,7 +167,11 @@ public class ConfigItems {
 	private int itemIronBladeID = 6666;
 	private int itemTurbineBladesID = 6667;
 	private int itemAshID = 6668;
+	private int itemRemoteID = 6669;
 
+	public static int getItemRemoteID() {
+		return getInstance().itemRemoteID;
+	}
 	public static int getItemTurbineBladesID() {
 		return getInstance().itemTurbineBladesID;
 	}
@@ -758,6 +762,7 @@ public class ConfigItems {
 	}
 
 	public static void addToLanguageRegistry() {
+		LanguageRegistry.addName(ISetupItems.itemRemote , "Remote");
 		LanguageRegistry.addName(ISetupItems.itemTurbineBlades , "Turbine blades");
 		LanguageRegistry.addName(ISetupItems.itemIronBlade , "Iron blade");
 		LanguageRegistry.addName(ISetupItems.itemLeadIngot , "Lead ingot");

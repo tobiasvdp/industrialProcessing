@@ -19,11 +19,12 @@ public class TileEntityControlBox extends TileEntityMultiblockDummy implements I
 	public boolean receiveTileEntity(IRemote remote,ItemStack itemStack) {
 		teCoord=remote.getTileEntity(this, itemStack);
 		te = null;
+		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		return true;
 	}
 	
 	public TileEntity getTileEntity(){
-		if(te == null && teCoord != null){
+		if(te == null && teCoord != null && teCoord.length == 3){
 			te=worldObj.getBlockTileEntity(teCoord[0], teCoord[1], teCoord[2]);
 		}
 		return te;
@@ -38,8 +39,14 @@ public class TileEntityControlBox extends TileEntityMultiblockDummy implements I
 	
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
-		nbt.setIntArray("", teCoord);
+		nbt.setIntArray("storedTE", teCoord);
 		super.writeToNBT(nbt);
+	}
+
+	public void triggerButton(int i) {
+		if(getTileEntity() != null  && getTileEntity() instanceof IControlBoxReceiver){
+			((IControlBoxReceiver)getTileEntity()).buttonPressed(i);
+		}
 	}
 
 }

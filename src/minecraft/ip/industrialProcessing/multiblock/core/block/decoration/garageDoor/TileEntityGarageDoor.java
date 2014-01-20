@@ -11,6 +11,7 @@ import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.RecipesWeldingStation;
 import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
+import ip.industrialProcessing.multiblock.dummy.block.controlBox.IControlBoxReceiver;
 import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.TileEntityGarageDoorFrame;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
@@ -23,19 +24,19 @@ import ip.industrialProcessing.multiblock.tier.Tiers;
 import ip.industrialProcessing.utils.IRemote;
 import ip.industrialProcessing.utils.ISender;
 
-public class TileEntityGarageDoor extends TileEntityMultiblockCore implements ISender {
+public class TileEntityGarageDoor extends TileEntityMultiblockCore implements ISender,IControlBoxReceiver {
 	static StructureMultiblock structure;
 	static TierCollection tierRequirments;
 	static {
 		// set layout
 		structure = new StructureMultiblock();
 
-		LayoutMultiblock layout = new LayoutMultiblock(0, 5,0, 0, 0, 0);
+		LayoutMultiblock layout = new LayoutMultiblock(0, 10,0, 0, 0, 0);
 
 		int i = 0;
 		layout.setCoreID(i++, 0, 1, ISetupMachineBlocks.blockGarageDoor.blockID);
 
-		for (int j = 1; j <= 5; j++)
+		for (int j = 1; j <= 10; j++)
 			layout.setBlockID(j, 0, 0, i++, 0, 1, ISetupMachineBlocks.blockGarageDoorFrame.blockID, -1);
 
 		structure.addLayout(layout, FacingDirection.North);
@@ -90,20 +91,6 @@ public class TileEntityGarageDoor extends TileEntityMultiblockCore implements IS
 	private boolean open = false;
 	private boolean isWorking = false;
 
-	public void openOrClose() {
-		if (!isWorking) {
-			if (open) {
-				open = false;
-				isWorking = true;
-				orderDummiesToFall();
-			} else {
-				open = true;
-				isWorking = true;
-				orderDummiesToRise();
-			}
-		}
-	}
-
 	private void orderDummiesToRise() {
 		ArrayList<TileEntityMultiblockDummy> dummies = getDummies();
 		for (int i = 0; i < dummies.size(); i++) {
@@ -147,6 +134,36 @@ public class TileEntityGarageDoor extends TileEntityMultiblockCore implements IS
 	public boolean sendTileEntity(IRemote remote,ItemStack itemStack) {
 		remote.setTileEntity(this, itemStack, this.xCoord, this.yCoord, this.zCoord);
 		return true;
+	}
+
+	@Override
+	public void buttonPressed(int i) {
+		if(i == 0){
+			open();
+		}
+		if(i == 2){
+			Close();
+		}
+	}
+
+	private void Close() {
+		if (!isWorking) {
+			if (open) {
+				open = false;
+				isWorking = true;
+				orderDummiesToFall();
+			}
+		}
+	}
+
+	private void open() {
+		if (!isWorking) {
+			if (!open) {
+				open = true;
+				isWorking = true;
+				orderDummiesToRise();
+			}
+		}
 	}
 
 }
