@@ -70,9 +70,9 @@ import ip.industrialProcessing.multiblock.dummy.block.containerWall.model.ModelC
 import ip.industrialProcessing.multiblock.dummy.block.controlBox.model.ModelControlBox;
 import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.entity.EntityGarageDoor;
 import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.entity.ModelEntityGarageDoor;
+import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.entity.RenderGarageDoor;
 import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.modelDoor.ModelGarageDoor;
 import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.modelFrame.ModelGarageDoorFrame;
-import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.entity.RenderGarageDoor;
 import ip.industrialProcessing.multiblock.dummy.block.destilationTray.model.ModelDistillationElementBlock;
 import ip.industrialProcessing.multiblock.dummy.block.displayPanel.MDmultiblockDisplayPanel;
 import ip.industrialProcessing.multiblock.dummy.block.displayPanel.TEmultiblockDisplayPanel;
@@ -142,6 +142,7 @@ import ip.industrialProcessing.transport.items.conveyorModels.ModelConveyorChute
 import ip.industrialProcessing.transport.items.conveyorModels.ModelConveyorOutputBlock;
 import ip.industrialProcessing.transport.items.conveyorOutput.ModelConveyorOutput;
 import ip.industrialProcessing.transport.items.conveyorOutput.TileEntityConveyorOutput;
+import ip.industrialProcessing.transport.items.conveyorPacker.model.ModelConveyorPackerBlock;
 import ip.industrialProcessing.transport.items.conveyorSorter.ModelConveyorSorter;
 import ip.industrialProcessing.transport.items.conveyorSorter.ModelConveyorSorterBlock;
 import ip.industrialProcessing.transport.items.conveyorSorter.TileEntityConveyorSorter;
@@ -247,6 +248,7 @@ public class ClientProxy extends CommonProxy {
     private static final ModelStorageRack modelStorageRack = new ModelStorageRack();
     private static final ModelStorageRackAnimated modelStorageRackAnimated = new ModelStorageRackAnimated();
     private static final ModelStorageBox modelStorageBox = new ModelStorageBox();
+    private static final ModelBlock modelConveyorPacker = new ModelConveyorPackerBlock();
     
     @Override
     public void registerRenderers() {
@@ -341,6 +343,10 @@ public class ClientProxy extends CommonProxy {
 
 	ConfigRenderers.setRendererStorageBox(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererStorageBox(), modelStorageBox));
+	 
+	ConfigRenderers.setRendererConveyorPackerID(RenderingRegistry.getNextAvailableRenderId()); 
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererConveyorPackerID(), modelConveyorPacker ));
+
 	// block & tile entity
 
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityClassifier.class, new RendererTileEntityFluidWorker(ISetupMachineBlocks.blockClassifier, "ModelClassifier", classifier));

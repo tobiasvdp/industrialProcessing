@@ -1,4 +1,4 @@
- package ip.industrialProcessing.config;
+package ip.industrialProcessing.config;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.config.ConfigCategories;
@@ -108,6 +108,7 @@ import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorBe
 import ip.industrialProcessing.transport.items.conveyorChute.TileEntityConveyorChute;
 import ip.industrialProcessing.transport.items.conveyorInput.TileEntityConveyorInput;
 import ip.industrialProcessing.transport.items.conveyorOutput.TileEntityConveyorOutput;
+import ip.industrialProcessing.transport.items.conveyorPacker.TileEntityConveyorPacker;
 import ip.industrialProcessing.transport.items.conveyorSorter.TileEntityConveyorSorter;
 import ip.industrialProcessing.utils.registry.BlockRegistry;
 import ip.industrialProcessing.utils.registry.BlockType;
@@ -142,18 +143,18 @@ public class ConfigMachineBlocks {
     private int vacuumCasterBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "vacuumCasterBlockID", 512).getInt();
     private int turretLatheBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "turretLatheBlockID", 513).getInt();
     private int sandCasterBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "sandCasterBlockID", 514).getInt();
-    private int coolingUnitBlockID= IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "coolingUnitBlockID", 515).getInt();
-    private int roasterBlockID= IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "roasterBlockID", 516).getInt();
-    private int smelterBlockID= IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "smelterBlockID", 517).getInt();
-    private int quenchTankBlockID= IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "quenchTankBlockID", 518).getInt();
-    private int grindingStoneBlockID= IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "grindingStoneBlockID", 519).getInt();
-    private int anvilBlockID= IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "anvilBlockID", 520).getInt();
-    private int bellowsBlockID= IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "bellowsBlockID", 521).getInt();
-    private int bloomeryBlockID= IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "bloomeryBlockID", 522).getInt();
-    private int ironBowlBlockID= IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "ironBowlBlockID", 523).getInt();
-    private int storageRackID= IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "storageRackID", 524).getInt();
-    private int storageBoxID= IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "storageBoxID", 525).getInt();
-    
+    private int coolingUnitBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "coolingUnitBlockID", 515).getInt();
+    private int roasterBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "roasterBlockID", 516).getInt();
+    private int smelterBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "smelterBlockID", 517).getInt();
+    private int quenchTankBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "quenchTankBlockID", 518).getInt();
+    private int grindingStoneBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "grindingStoneBlockID", 519).getInt();
+    private int anvilBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "anvilBlockID", 520).getInt();
+    private int bellowsBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "bellowsBlockID", 521).getInt();
+    private int bloomeryBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "bloomeryBlockID", 522).getInt();
+    private int ironBowlBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "ironBowlBlockID", 523).getInt();
+    private int storageRackID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "storageRackID", 524).getInt();
+    private int storageBoxID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "storageBoxID", 525).getInt();
+
     private int blastFurnaceID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "BlastFurnaceID", 550).getInt();
     private int extruderID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "ExtruderID", 551).getInt();
     private int oxygenFurnaceID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "OxygenFurnaceID", 552).getInt();
@@ -228,575 +229,604 @@ public class ConfigMachineBlocks {
     private int blockGarageDoorFrameID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "blockGarageDoorFrameID", 768).getInt();
     private int blockGarageDoorDoorID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "blockGarageDoorDoorID", 769).getInt();
     private int blockControlBoxID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "blockControlBoxID", 770).getInt();
-    
+
     private int BLtransportConveyorBelt = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "ConveyorBeltID", 735).getInt();
     private int BLtransportConveyorBeltInput = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "ConveyorBeltInputID", 736).getInt();
     private int BLtransportConveyorBeltOutput = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "ConveyorBeltOutputID", 737).getInt();
     private int BLtransportConveyorBeltSorter = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "ConveyorBeltSorterID", 744).getInt();
     private int BLtransportConveyorShute = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "ConveyorShuteID", 745).getInt();
     private int conveyorBeltPowerInputID = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "ConveyorBeltPowerInputID", 746).getInt();
-    
+    private int BLtransportConveyorBeltPacker = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "packerID", 747).getInt();
+
     public void registerMachineBlocks() {
-    	registerMachineBlock(ISetupMachineBlocks.blockAlkylationUnit, "IP.Machine.AlkUnit", "Alkylation unit", TileEntityAlkylationUnit.class, BlockType.Machine,BlockType.Refinary);
-    	registerMachineBlock(ISetupMachineBlocks.blockGasProcessor, "IP.Machine.GasProc", "Gas processor", TileEntityGasProcessor.class, BlockType.Machine,BlockType.Refinary);
-    	registerMachineBlock(ISetupMachineBlocks.blockAsphaltBlower, "IP.Machine.AspBlow", "Asphalt blower", TileEntityAsphaltBlower.class, BlockType.Machine,BlockType.Refinary);
-    	registerMachineBlock(ISetupMachineBlocks.blockIsomerizationReactor, "IP.Machine.IsoReac", "Isomerization reactor", TileEntityIsomerizationReactor.class, BlockType.Machine,BlockType.Refinary);
-    	registerMachineBlock(ISetupMachineBlocks.blockSourWaterStripper, "IP.Machine.SRstrip", "Sour water Stripper", TileEntitySourWaterStripper.class, BlockType.Machine,BlockType.Refinary);
-    	registerMachineBlock(ISetupMachineBlocks.blockElectrolyser, "IP.Machine.Ellyser", "Electrolyser", TileEntityElectrolyser.class, BlockType.Machine,BlockType.Refinary);
-    	
-    	registerMachineBlock(ISetupMachineBlocks.blockVacuumCaster, "IP.Machine.VacCast", "Vacuum caster", TileEntityVacuumCaster.class);
-    	registerMachineBlock(ISetupMachineBlocks.blockSandCaster, "IP.Machine.SandCast", "Sand caster", TileEntitySandCaster.class);
-    	registerMachineBlock(ISetupMachineBlocks.blockTurretLathe, "IP.Machine.TurrLat", "Turret lathe", TileEntityTurretLathe.class);
-    	registerMachineBlock(ISetupMachineBlocks.blockCoolingUnit, "IP.Machine.CoolUn", "Cooling unit", TileEntityCoolingUnit.class);
-    	registerMachineBlock(ISetupMachineBlocks.blockSmelter, "IP.Machine.Smelt", "Smelter", TileEntitySmelter.class);
-    	registerMachineBlock(ISetupMachineBlocks.blockRoaster, "IP.Machine.Roast", "Roaster", TileEntityRoaster.class);
-    	registerMachineBlock(ISetupMachineBlocks.blockQuenchTank, "IP.Machine.Quench", "QuenchTank", TileEntityQuenchTank.class);
-    	registerMachineBlock(ISetupMachineBlocks.blockGrindingStone, "IP.Machine.GrStone", "Grinding stone", TileEntityGrindingStone.class,BlockType.Machine,BlockType.assemble);
-    	registerMachineBlock(ISetupMachineBlocks.blockBellows, "IP.MBD.Bellow", "Bellows", TileEntityBellows.class,BlockType.Machine,BlockType.assemble);
-    	registerMachineBlock(ISetupMachineBlocks.blockBloomery, "IP.MBC.Bloom", "Bloomery", TileEntityBloomery.class,BlockType.Machine,BlockType.Smelting);
-    	registerMachineBlock(ISetupMachineBlocks.blockIronBowl, "IP.MBD.IBowl", "Iron bowl", TileEntityIronBowl.class,BlockType.Machine,BlockType.assemble);
-    	registerMachineBlock(ISetupMachineBlocks.blockStorageRack, "IP.Machine.StorRack", "Storage rack", TileEntityStorageRack.class,BlockType.Storage);
-    	registerMachineBlock(ISetupMachineBlocks.blockStorageBox, "IP.Machine.StorBox", "Storage box", TileEntityStorageBox.class,BlockType.Storage);
-    	
+	registerMachineBlock(ISetupMachineBlocks.blockAlkylationUnit, "IP.Machine.AlkUnit", "Alkylation unit", TileEntityAlkylationUnit.class, BlockType.Machine, BlockType.Refinary);
+	registerMachineBlock(ISetupMachineBlocks.blockGasProcessor, "IP.Machine.GasProc", "Gas processor", TileEntityGasProcessor.class, BlockType.Machine, BlockType.Refinary);
+	registerMachineBlock(ISetupMachineBlocks.blockAsphaltBlower, "IP.Machine.AspBlow", "Asphalt blower", TileEntityAsphaltBlower.class, BlockType.Machine, BlockType.Refinary);
+	registerMachineBlock(ISetupMachineBlocks.blockIsomerizationReactor, "IP.Machine.IsoReac", "Isomerization reactor", TileEntityIsomerizationReactor.class, BlockType.Machine, BlockType.Refinary);
+	registerMachineBlock(ISetupMachineBlocks.blockSourWaterStripper, "IP.Machine.SRstrip", "Sour water Stripper", TileEntitySourWaterStripper.class, BlockType.Machine, BlockType.Refinary);
+	registerMachineBlock(ISetupMachineBlocks.blockElectrolyser, "IP.Machine.Ellyser", "Electrolyser", TileEntityElectrolyser.class, BlockType.Machine, BlockType.Refinary);
 
-        registerMachineBlock(ISetupMachineBlocks.blockConveyorBelt, "IP.Trans.CBelt", "Conveyor belt", TileEntityConveyorBelt.class,BlockType.Machine,BlockType.Transport);
-        registerMachineBlock(ISetupMachineBlocks.blockConveyorBeltInput, "IP.Trans.CBInput", "Conveyor belt import", TileEntityConveyorInput.class,BlockType.Machine,BlockType.Transport);
-        registerMachineBlock(ISetupMachineBlocks.blockConveyorOutput, "IP.Trans.CBOutput", "Conveyor belt export", TileEntityConveyorOutput.class,BlockType.Machine,BlockType.Transport);
-        registerMachineBlock(ISetupMachineBlocks.blockConveyorSorter, "IP.Trans.CBSorter", "Conveyor belt sorter", TileEntityConveyorSorter.class,BlockType.Machine,BlockType.Transport);
-        registerMachineBlock(ISetupMachineBlocks.blockConveyorChute, "IP.Trans.CBShute", "Conveyor shute", TileEntityConveyorChute.class,BlockType.Machine,BlockType.Transport);
-        
-        // multiblocks
-        registerMachineBlock(ISetupMachineBlocks.blockContainerWall, "IP.MBD.Cont", "Container wall", TileEntityContainerWall.class, BlockType.Machine,BlockType.Storage,BlockType.Dummy);
-        registerMachineBlock(ISetupMachineBlocks.blockContainer, "IP.MBC.Cont", "Container", TileEntityContainer.class, BlockType.Machine,BlockType.Storage);
-        registerMachineBlock(ISetupMachineBlocks.blockAmineTreater, "IP.MBC.AmTr", "Amine treater", TileEntityAmineTreater.class, BlockType.Machine,BlockType.Refinary);
-        registerMachineBlock(ISetupMachineBlocks.blockCatalyticReformer, "IP.MBC.CatRef", "Catalytic reformer", TileEntityCatalyticReformer.class, BlockType.Machine,BlockType.Refinary);
-        registerMachineBlock(ISetupMachineBlocks.blockClausSulfurPlant, "IP.MBC.ClSulf", "Claus sulfur plant", TileEntityClausSulfurPlant.class, BlockType.Machine,BlockType.Refinary);
-        registerMachineBlock(ISetupMachineBlocks.blockDelayedCoker, "IP.MBC.DelCoke", "Delayed coker", TileEntityDelayedCoker.class, BlockType.Machine,BlockType.Refinary);
-        registerMachineBlock(ISetupMachineBlocks.blockFluidCatalyticCracker, "IP.MBc.CatCrack", "Fluid catalytic cracker", TileEntityFluidCatalyticCracker.class, BlockType.Machine,BlockType.Refinary);
-        registerMachineBlock(ISetupMachineBlocks.blockHydroCracker, "IP.MBC.HydrCrack", "Hydro cracker", TileEntityHydroCracker.class, BlockType.Machine,BlockType.Refinary);
-        registerMachineBlock(ISetupMachineBlocks.blockHydroTreater, "IP.MBC.HydrTr", "Hydro treater", TileEntityHydroTreater.class, BlockType.Machine,BlockType.Refinary);
-        registerMachineBlock(ISetupMachineBlocks.blockMeroxTreater, "IP.MBC.MerTr", "Merox Treater", TileEntityMeroxTreater.class, BlockType.Machine,BlockType.Refinary);
-        registerMachineBlock(ISetupMachineBlocks.blockVacuumDestilationTower, "IP.MBC.VacDest", "Vacuum Destilation base", TileEntityVacuumDestilationTower.class, BlockType.Machine,BlockType.Refinary);
-        
-        registerMachineBlock(ISetupMachineBlocks.blockTankPlating, "IP.MBD.TPlat", "Tank plating", TileEntityTankPlating.class, BlockType.Machine,BlockType.Refinary, BlockType.Dummy);
-        registerMachineBlock(ISetupMachineBlocks.blockDestilationTray, "IP.MBD.DestTray", "Destilation Tray", TileEntityDestilationTray.class, BlockType.Machine,BlockType.Refinary);
-        registerMachineBlock(ISetupMachineBlocks.blockAtmosphericDestilationTower, "IP.MBC.AtmDest", "Atmospheric Destilation base", TileEntityAtmosphericDestilationTower.class, BlockType.Machine,BlockType.Refinary);
-        registerMachineBlock(ISetupMachineBlocks.BLmultiblockBlastFurnaceTower, "IP.MBD.BlastTow", "Blast furnace tower", TEmultiblockBlastFurnaceTower.class, BlockType.Machine,BlockType.Smelting);
-        registerMachineBlock(ISetupMachineBlocks.BLmultiblockBlastFurnace, "IP.MBC.BlastFur", "Blast furnace", TEmultiblockBlastFurnace.class, BlockType.Machine,BlockType.Smelting);
-        registerMachineBlock(ISetupMachineBlocks.BLmultiblockDisplayPanel, "IP.MBD.Display", "Display panel", TEmultiblockDisplayPanel.class);
-        registerMachineBlock(ISetupMachineBlocks.BLmultiblockWheelConnector, "IP.MBD.WheelCon", "Wheel connector", TEmultiblockWheelConnector.class);
-        registerMachineBlock(ISetupMachineBlocks.BLmultiblockLiftDoor, "IP.MBD.LiftDoor", "Lift door", TEmultiblockLiftDoor.class);
-        registerMachineBlock(ISetupMachineBlocks.BLmultiblockElevator, "IP.MBC.Elevator", "Elevator", TEmultiblockElevator.class);
-        registerMachineBlock(ISetupMachineBlocks.BLmultiblockToggleButton, "IP.MBD.Toggle", "Control panel", TEmultiblockToggleButton.class);
-        registerMachineBlock(ISetupMachineBlocks.BLmultiblockToggleButton2, "IP.MBD.Toggle2", "Lift call button", TEmultiblockToggleButton.class);
-        registerMachineBlock(ISetupMachineBlocks.BLmultiblockInvInput, "IP.MBD.InvInput", "Item input", TEmultiblockInvInput.class);
-        registerMachineBlock(ISetupMachineBlocks.BLmultiblockInvOutput, "IP.MBD.InvOutput", "Item output", TEmultiblockInvOutput.class);
-        registerMachineBlock(ISetupMachineBlocks.BLmultiblockScreen, "IP.MBD.Screen", "Screen", TileEntityScreen.class);
-        registerMachineBlock(ISetupMachineBlocks.BLmultiblockFrame, "IP.MBD.Frame", "Frame", TEmultiblockFrame.class);
-        registerMachineBlock(ISetupMachineBlocks.BLmultiblockHotPress, "IP.MBC.HotPress", "Hot press", TEmultiblockHotPress.class);
-        registerMachineBlock(ISetupMachineBlocks.BLmultiblockWeldingStation, "IP.MBC.WeldingStation", "Welding station", TileEntityMultiblockWeldingStation.class);
-        registerMachineBlock(ISetupMachineBlocks.BLmultiblockWeldingTableExt, "IP.MBD.WeldingTableExt", "Welding table", TileEntityMultiblockWeldingTable.class);
-        registerMachineBlock(ISetupMachineBlocks.BLmultiblockWheel, "IP.MBD.Wheel", "Rolling wheel", TEmultiblockWheel.class);
-        registerMachineBlock(ISetupMachineBlocks.BLmultiblockRollingPress, "IP.MBC.RollingPress", "Rolling press", TEmultiblockRollingPress.class);
-        registerMachineBlock(ISetupMachineBlocks.blockSolderingStation, "IP.MBC.Solder", "Soldering station", TileEntitySolderingStation.class,BlockType.assemble);
-        registerMachineBlock(ISetupMachineBlocks.blockGarageDoor, "IP.MBC.Garage", "Garage door gearbox", TileEntityGarageDoor.class,BlockType.decoration);
-        registerMachineBlock(ISetupMachineBlocks.blockGarageDoorFrame, "IP.MBD.GarageF", "Garage door frame", TileEntityGarageDoorFrame.class,BlockType.decoration);
-        registerMachineBlock(ISetupMachineBlocks.blockGarageDoorDoor, "IP.MBD.GarageD", "Garage door", TileEntityGarageDoorDoor.class,BlockType.decoration);
-        registerMachineBlock(ISetupMachineBlocks.blockControlBox, "IP.MBD.CtrlB", "Control box", TileEntityControlBox.class,BlockType.decoration);
+	registerMachineBlock(ISetupMachineBlocks.blockVacuumCaster, "IP.Machine.VacCast", "Vacuum caster", TileEntityVacuumCaster.class);
+	registerMachineBlock(ISetupMachineBlocks.blockSandCaster, "IP.Machine.SandCast", "Sand caster", TileEntitySandCaster.class);
+	registerMachineBlock(ISetupMachineBlocks.blockTurretLathe, "IP.Machine.TurrLat", "Turret lathe", TileEntityTurretLathe.class);
+	registerMachineBlock(ISetupMachineBlocks.blockCoolingUnit, "IP.Machine.CoolUn", "Cooling unit", TileEntityCoolingUnit.class);
+	registerMachineBlock(ISetupMachineBlocks.blockSmelter, "IP.Machine.Smelt", "Smelter", TileEntitySmelter.class);
+	registerMachineBlock(ISetupMachineBlocks.blockRoaster, "IP.Machine.Roast", "Roaster", TileEntityRoaster.class);
+	registerMachineBlock(ISetupMachineBlocks.blockQuenchTank, "IP.Machine.Quench", "QuenchTank", TileEntityQuenchTank.class);
+	registerMachineBlock(ISetupMachineBlocks.blockGrindingStone, "IP.Machine.GrStone", "Grinding stone", TileEntityGrindingStone.class, BlockType.Machine, BlockType.assemble);
+	registerMachineBlock(ISetupMachineBlocks.blockBellows, "IP.MBD.Bellow", "Bellows", TileEntityBellows.class, BlockType.Machine, BlockType.assemble);
+	registerMachineBlock(ISetupMachineBlocks.blockBloomery, "IP.MBC.Bloom", "Bloomery", TileEntityBloomery.class, BlockType.Machine, BlockType.Smelting);
+	registerMachineBlock(ISetupMachineBlocks.blockIronBowl, "IP.MBD.IBowl", "Iron bowl", TileEntityIronBowl.class, BlockType.Machine, BlockType.assemble);
+	registerMachineBlock(ISetupMachineBlocks.blockStorageRack, "IP.Machine.StorRack", "Storage rack", TileEntityStorageRack.class, BlockType.Storage);
+	registerMachineBlock(ISetupMachineBlocks.blockStorageBox, "IP.Machine.StorBox", "Storage box", TileEntityStorageBox.class, BlockType.Storage);
 
-        // register entitys associated with multiblocks
+	registerMachineBlock(ISetupMachineBlocks.blockConveyorBelt, "IP.Trans.CBelt", "Conveyor belt", TileEntityConveyorBelt.class, BlockType.Machine, BlockType.Transport);
+	registerMachineBlock(ISetupMachineBlocks.blockConveyorBeltInput, "IP.Trans.CBInput", "Conveyor belt import", TileEntityConveyorInput.class, BlockType.Machine, BlockType.Transport);
+	registerMachineBlock(ISetupMachineBlocks.blockConveyorOutput, "IP.Trans.CBOutput", "Conveyor belt export", TileEntityConveyorOutput.class, BlockType.Machine, BlockType.Transport);
+	registerMachineBlock(ISetupMachineBlocks.blockConveyorSorter, "IP.Trans.CBSorter", "Conveyor belt sorter", TileEntityConveyorSorter.class, BlockType.Machine, BlockType.Transport);
+	registerMachineBlock(ISetupMachineBlocks.blockConveyorChute, "IP.Trans.CBShute", "Conveyor shute", TileEntityConveyorChute.class, BlockType.Machine, BlockType.Transport);
 
-        // machines
-        registerMachineBlock(ISetupMachineBlocks.blockIncubator, "IP.Machine.Incubator", "Incubator", TileEntityIncubator.class);
-        registerMachineBlock(ISetupMachineBlocks.blockTricklingFilter, "IP.Machine.Trickler", "Trickling Filter", TileEntityTricklingFilter.class);
-        registerMachineBlock(ISetupMachineBlocks.blockWaterTreatmentStation, "IP.Machine.Treatment", "Water treatment station", TileEntityWaterTreatmentStation.class);
-        registerMachineBlock(ISetupMachineBlocks.blockWireMill, "IP.Machine.WireMill", "Wire mill", TileEntityWireMill.class,BlockType.Machine,BlockType.assemble);
+	// multiblocks
+	registerMachineBlock(ISetupMachineBlocks.blockContainerWall, "IP.MBD.Cont", "Container wall", TileEntityContainerWall.class, BlockType.Machine, BlockType.Storage, BlockType.Dummy);
+	registerMachineBlock(ISetupMachineBlocks.blockContainer, "IP.MBC.Cont", "Container", TileEntityContainer.class, BlockType.Machine, BlockType.Storage);
+	registerMachineBlock(ISetupMachineBlocks.blockAmineTreater, "IP.MBC.AmTr", "Amine treater", TileEntityAmineTreater.class, BlockType.Machine, BlockType.Refinary);
+	registerMachineBlock(ISetupMachineBlocks.blockCatalyticReformer, "IP.MBC.CatRef", "Catalytic reformer", TileEntityCatalyticReformer.class, BlockType.Machine, BlockType.Refinary);
+	registerMachineBlock(ISetupMachineBlocks.blockClausSulfurPlant, "IP.MBC.ClSulf", "Claus sulfur plant", TileEntityClausSulfurPlant.class, BlockType.Machine, BlockType.Refinary);
+	registerMachineBlock(ISetupMachineBlocks.blockDelayedCoker, "IP.MBC.DelCoke", "Delayed coker", TileEntityDelayedCoker.class, BlockType.Machine, BlockType.Refinary);
+	registerMachineBlock(ISetupMachineBlocks.blockFluidCatalyticCracker, "IP.MBc.CatCrack", "Fluid catalytic cracker", TileEntityFluidCatalyticCracker.class, BlockType.Machine, BlockType.Refinary);
+	registerMachineBlock(ISetupMachineBlocks.blockHydroCracker, "IP.MBC.HydrCrack", "Hydro cracker", TileEntityHydroCracker.class, BlockType.Machine, BlockType.Refinary);
+	registerMachineBlock(ISetupMachineBlocks.blockHydroTreater, "IP.MBC.HydrTr", "Hydro treater", TileEntityHydroTreater.class, BlockType.Machine, BlockType.Refinary);
+	registerMachineBlock(ISetupMachineBlocks.blockMeroxTreater, "IP.MBC.MerTr", "Merox Treater", TileEntityMeroxTreater.class, BlockType.Machine, BlockType.Refinary);
+	registerMachineBlock(ISetupMachineBlocks.blockVacuumDestilationTower, "IP.MBC.VacDest", "Vacuum Destilation base", TileEntityVacuumDestilationTower.class, BlockType.Machine, BlockType.Refinary);
 
-        registerMachineBlock(ISetupMachineBlocks.blockCrusher, "IP.Machine.Crusher", "Ore Crusher", TileEntityCrusher.class, BlockType.Machine,BlockType.Ore_Processing);
-        registerMachineBlock(ISetupMachineBlocks.blockFilter, "IP.Machine.Filter", "Ore Filter", TileEntityFilter.class, BlockType.Machine,BlockType.Ore_Processing);
-        registerMachineBlock(ISetupMachineBlocks.blockMageneticSeparator, "IP.Machine.Separator", "Magnetic Separator", TileEntityMagneticSeparator.class);
-        registerMachineBlock(ISetupMachineBlocks.blockMixer, "IP.Machine.Mixer", "Mixer", TileEntityMixer.class, BlockType.Machine,BlockType.Ore_Processing);
-        registerMachineBlock(ISetupMachineBlocks.blockDryer, "IP.Machine.Dryer", "Dryer", TileEntityDryer.class, BlockType.Machine,BlockType.Ore_Processing);
-        registerMachineBlock(ISetupMachineBlocks.blockClassifier, "IP.Machine.Classifier", "Classifier", TileEntityClassifier.class, BlockType.Machine,BlockType.Ore_Processing);
-        registerMachineBlock(ISetupMachineBlocks.blockThickener, "IP.Machine.Thickener", "Thickener", TileEntityThickener.class, BlockType.Machine,BlockType.Ore_Processing);
-        registerMachineBlock(ISetupMachineBlocks.blockFlotationCell, "IP.Machine.FlotationCell", "Flotation Cell", TileEntityFlotationCell.class, BlockType.Machine,BlockType.Ore_Processing);
-        registerMachineBlock(ISetupMachineBlocks.blockHydroCyclone, "IP.Machine.HydroCyclone", "Hydro Cyclone Separator", TileEntityHydroCyclone.class, BlockType.Machine,BlockType.Ore_Processing);
-        registerMachineBlock(ISetupMachineBlocks.blockDiskFilter, "IP.Machine.DiskFilter", "Disk Filter", TileEntityDiskFilter.class, BlockType.Machine,BlockType.Ore_Processing);
-        registerMachineBlock(ISetupMachineBlocks.blockExtruder, "IP.Machine.Extruder", "Extruder", TileEntityExtruder.class, BlockType.Machine,BlockType.Smelting);
-        registerMachineBlock(ISetupMachineBlocks.blockOxygenFurnace, "IP.Machine.OxygenFurnace", "Oxygen Furnace", TileEntityOxygenFurnace.class, BlockType.Machine,BlockType.Smelting);
-        registerMachineBlock(ISetupMachineBlocks.blockPelletExtruder, "IP.Machine.PelletExtruder", "Pellet Extruder", TileEntityPelletExtruder.class, BlockType.Machine,BlockType.Smelting);
-        registerMachineBlock(ISetupMachineBlocks.blockInsulator, "IP.Machine.Insulator", "Insulator", TileEntityInsulator.class);
-        registerMachineBlock(ISetupMachineBlocks.blockSpoolWindingMachine, "IP.Machine.SpoolWinding", "Spool winding machine", TileEntitySpoolWindingMachine.class);
+	registerMachineBlock(ISetupMachineBlocks.blockTankPlating, "IP.MBD.TPlat", "Tank plating", TileEntityTankPlating.class, BlockType.Machine, BlockType.Refinary, BlockType.Dummy);
+	registerMachineBlock(ISetupMachineBlocks.blockDestilationTray, "IP.MBD.DestTray", "Destilation Tray", TileEntityDestilationTray.class, BlockType.Machine, BlockType.Refinary);
+	registerMachineBlock(ISetupMachineBlocks.blockAtmosphericDestilationTower, "IP.MBC.AtmDest", "Atmospheric Destilation base", TileEntityAtmosphericDestilationTower.class, BlockType.Machine, BlockType.Refinary);
+	registerMachineBlock(ISetupMachineBlocks.BLmultiblockBlastFurnaceTower, "IP.MBD.BlastTow", "Blast furnace tower", TEmultiblockBlastFurnaceTower.class, BlockType.Machine, BlockType.Smelting);
+	registerMachineBlock(ISetupMachineBlocks.BLmultiblockBlastFurnace, "IP.MBC.BlastFur", "Blast furnace", TEmultiblockBlastFurnace.class, BlockType.Machine, BlockType.Smelting);
+	registerMachineBlock(ISetupMachineBlocks.BLmultiblockDisplayPanel, "IP.MBD.Display", "Display panel", TEmultiblockDisplayPanel.class);
+	registerMachineBlock(ISetupMachineBlocks.BLmultiblockWheelConnector, "IP.MBD.WheelCon", "Wheel connector", TEmultiblockWheelConnector.class);
+	registerMachineBlock(ISetupMachineBlocks.BLmultiblockLiftDoor, "IP.MBD.LiftDoor", "Lift door", TEmultiblockLiftDoor.class);
+	registerMachineBlock(ISetupMachineBlocks.BLmultiblockElevator, "IP.MBC.Elevator", "Elevator", TEmultiblockElevator.class);
+	registerMachineBlock(ISetupMachineBlocks.BLmultiblockToggleButton, "IP.MBD.Toggle", "Control panel", TEmultiblockToggleButton.class);
+	registerMachineBlock(ISetupMachineBlocks.BLmultiblockToggleButton2, "IP.MBD.Toggle2", "Lift call button", TEmultiblockToggleButton.class);
+	registerMachineBlock(ISetupMachineBlocks.BLmultiblockInvInput, "IP.MBD.InvInput", "Item input", TEmultiblockInvInput.class);
+	registerMachineBlock(ISetupMachineBlocks.BLmultiblockInvOutput, "IP.MBD.InvOutput", "Item output", TEmultiblockInvOutput.class);
+	registerMachineBlock(ISetupMachineBlocks.BLmultiblockScreen, "IP.MBD.Screen", "Screen", TileEntityScreen.class);
+	registerMachineBlock(ISetupMachineBlocks.BLmultiblockFrame, "IP.MBD.Frame", "Frame", TEmultiblockFrame.class);
+	registerMachineBlock(ISetupMachineBlocks.BLmultiblockHotPress, "IP.MBC.HotPress", "Hot press", TEmultiblockHotPress.class);
+	registerMachineBlock(ISetupMachineBlocks.BLmultiblockWeldingStation, "IP.MBC.WeldingStation", "Welding station", TileEntityMultiblockWeldingStation.class);
+	registerMachineBlock(ISetupMachineBlocks.BLmultiblockWeldingTableExt, "IP.MBD.WeldingTableExt", "Welding table", TileEntityMultiblockWeldingTable.class);
+	registerMachineBlock(ISetupMachineBlocks.BLmultiblockWheel, "IP.MBD.Wheel", "Rolling wheel", TEmultiblockWheel.class);
+	registerMachineBlock(ISetupMachineBlocks.BLmultiblockRollingPress, "IP.MBC.RollingPress", "Rolling press", TEmultiblockRollingPress.class);
+	registerMachineBlock(ISetupMachineBlocks.blockSolderingStation, "IP.MBC.Solder", "Soldering station", TileEntitySolderingStation.class, BlockType.assemble);
+	registerMachineBlock(ISetupMachineBlocks.blockGarageDoor, "IP.MBC.Garage", "Garage door gearbox", TileEntityGarageDoor.class, BlockType.decoration);
+	registerMachineBlock(ISetupMachineBlocks.blockGarageDoorFrame, "IP.MBD.GarageF", "Garage door frame", TileEntityGarageDoorFrame.class, BlockType.decoration);
+	registerMachineBlock(ISetupMachineBlocks.blockGarageDoorDoor, "IP.MBD.GarageD", "Garage door", TileEntityGarageDoorDoor.class, BlockType.decoration);
+	registerMachineBlock(ISetupMachineBlocks.blockControlBox, "IP.MBD.CtrlB", "Control box", TileEntityControlBox.class, BlockType.decoration);
 
-        registerMachineBlock(ISetupMachineBlocks.blockManualGenerator, "IP.Generator.Manual", "Crank Generator", TileEntityManualGenerator.class,BlockType.Power);
-        registerMachineBlock(ISetupMachineBlocks.blockBuildcraftGenerator, "IP.Generator.Buildcraft", "Buildcraft Generator", TileEntityBuildcraftGenerator.class,BlockType.Power);
-        registerMachineBlock(ISetupMachineBlocks.blockGenerator, "IP.Generator", "Generator", TileEntityGenerator.class,BlockType.Power);
-        registerMachineBlock(ISetupMachineBlocks.blockPetrolLamp, "IP.Lamp.Petrol", "Hanging Lamp", TileEntityPetrolLamp.class);
-        registerMachineBlock(ISetupMachineBlocks.blockElectricLamp, "IP.Lamp.Electric", "Electric Lamp", TileEntityElectricLamp.class);
-        registerMachineBlock(ISetupMachineBlocks.blockSinter, "IP.Machine.Sinter", "Sinter", TileEntitySinter.class);
-        registerMachineBlock(ISetupMachineBlocks.blockKiln, "IP.Machine.kiln", "Kiln", TileEntityKiln.class);
+	// register entitys associated with multiblocks
 
-        // transport
-        registerMachineBlock(ISetupMachineBlocks.blockTransportFluids, "IP.Transport.Fluids", "Fluid Pipe", TileEntityTransportFluids.class,BlockType.fluid);
-        registerMachineBlock(ISetupMachineBlocks.blockTransportFluidsWood, ItemBlockWithMetadata.class, "IP.Transport.Fluids.Wood", "Wood-embedded Fluid Pipe", TileEntityTransportFluidsWood.class,BlockType.fluid);
-        registerMachineBlock(ISetupMachineBlocks.blockTransportFluidsStone, ItemBlockWithMetadata.class, "IP.Transport.Fluids.Stone", "Stone-embedded Fluid Pipe", TileEntityTransportFluidsStone.class,BlockType.fluid);
-        registerMachineBlock(ISetupMachineBlocks.blockPump, "IP.Transport.Fluids.Pump", "Fluid pump", TileEntityPump.class,BlockType.fluid);
-        registerMachineBlock(ISetupMachineBlocks.blockTank, "IP.Transport.Fluids.Tank", "Fluid Tank", TileEntityTank.class,BlockType.fluid);
-        registerMachineBlock(ISetupMachineBlocks.blockManometer, "IP.Transport.Fluids.Manometer", "Manometer", TileEntityManoMeter.class,BlockType.fluid);
-        registerMachineBlock(ISetupMachineBlocks.blockGrate, "IP.Transport.Fluids.Grate", "Grate", TileEntityGrate.class,BlockType.fluid);
-        registerMachineBlock(ISetupMachineBlocks.blockRainTank, "IP.Transport.Fluids.RainTank", "Rain Collector", TileEntityRainTank.class,BlockType.fluid);
-        registerMachineBlock(ISetupMachineBlocks.blockValve, "IP.Transport.Fluids.Valve", "Valve", TileEntityValve.class,BlockType.fluid);
-        registerMachineBlock(ISetupMachineBlocks.blockConveyorBeltPowerInput, "IP.Transport.Power.CBPI", "Conveyor belt power connector", TileEntityConveyorBeltPowerInput.class,BlockType.Transport,BlockType.Power);
+	// machines
+	registerMachineBlock(ISetupMachineBlocks.blockIncubator, "IP.Machine.Incubator", "Incubator", TileEntityIncubator.class);
+	registerMachineBlock(ISetupMachineBlocks.blockTricklingFilter, "IP.Machine.Trickler", "Trickling Filter", TileEntityTricklingFilter.class);
+	registerMachineBlock(ISetupMachineBlocks.blockWaterTreatmentStation, "IP.Machine.Treatment", "Water treatment station", TileEntityWaterTreatmentStation.class);
+	registerMachineBlock(ISetupMachineBlocks.blockWireMill, "IP.Machine.WireMill", "Wire mill", TileEntityWireMill.class, BlockType.Machine, BlockType.assemble);
 
-        // power
-        registerMachineBlock(ISetupMachineBlocks.blockWire, "IP.Wire", "Wire", TileEntityWire.class,BlockType.Machine,BlockType.Power);
-        registerMachineBlock(ISetupMachineBlocks.blockWireWood, ItemBlockWithMetadata.class, "IP.Wire.Wood", "Wood-embedded Wire", TileEntityWire.class,BlockType.Machine,BlockType.Power);
-        registerMachineBlock(ISetupMachineBlocks.blockWireStone, ItemBlockWithMetadata.class, "IP.Wire.Stone", "Stone-embedded Wire", TileEntityWire.class,BlockType.Machine,BlockType.Power);
-        registerMachineBlock(ISetupMachineBlocks.blockVoltMeter, "IP.Meter.Volt", "Volt Meter", TileEntityVoltMeter.class,BlockType.Machine,BlockType.Power);
-        registerMachineBlock(ISetupMachineBlocks.blockAmpMeter, "IP.Meter.Amp", "Amp Meter", TileEntityAmpMeter.class,BlockType.Machine,BlockType.Power);
-        registerMachineBlock(ISetupMachineBlocks.blockEnergyCell, "IP.EnergyCell", "Battery Box", TileEntityEnergyCell.class,BlockType.Machine,BlockType.Power);
-        registerMachineBlock(ISetupMachineBlocks.blockSolidBurner, "IP.SolidBurner", "Solid Burner", TileEntitySolidBurner.class,BlockType.Machine,BlockType.Power);
-        registerMachineBlock(ISetupMachineBlocks.blockBoiler, "IP.Boiler", "Boiler", TileEntityBoiler.class,BlockType.Machine,BlockType.Power,BlockType.fluid);
-        registerMachineBlock(ISetupMachineBlocks.blockTurbine, "IP.Turbine", "Turbine", TileEntityTurbine.class,BlockType.Machine,BlockType.Power,BlockType.fluid);
-        registerMachineBlock(ISetupMachineBlocks.blockElectroMotor, "IP.Motor.Electric", "Electro Motor", TileEntityElectroMotor.class,BlockType.Machine,BlockType.Power);
+	registerMachineBlock(ISetupMachineBlocks.blockCrusher, "IP.Machine.Crusher", "Ore Crusher", TileEntityCrusher.class, BlockType.Machine, BlockType.Ore_Processing);
+	registerMachineBlock(ISetupMachineBlocks.blockFilter, "IP.Machine.Filter", "Ore Filter", TileEntityFilter.class, BlockType.Machine, BlockType.Ore_Processing);
+	registerMachineBlock(ISetupMachineBlocks.blockMageneticSeparator, "IP.Machine.Separator", "Magnetic Separator", TileEntityMagneticSeparator.class);
+	registerMachineBlock(ISetupMachineBlocks.blockMixer, "IP.Machine.Mixer", "Mixer", TileEntityMixer.class, BlockType.Machine, BlockType.Ore_Processing);
+	registerMachineBlock(ISetupMachineBlocks.blockDryer, "IP.Machine.Dryer", "Dryer", TileEntityDryer.class, BlockType.Machine, BlockType.Ore_Processing);
+	registerMachineBlock(ISetupMachineBlocks.blockClassifier, "IP.Machine.Classifier", "Classifier", TileEntityClassifier.class, BlockType.Machine, BlockType.Ore_Processing);
+	registerMachineBlock(ISetupMachineBlocks.blockThickener, "IP.Machine.Thickener", "Thickener", TileEntityThickener.class, BlockType.Machine, BlockType.Ore_Processing);
+	registerMachineBlock(ISetupMachineBlocks.blockFlotationCell, "IP.Machine.FlotationCell", "Flotation Cell", TileEntityFlotationCell.class, BlockType.Machine, BlockType.Ore_Processing);
+	registerMachineBlock(ISetupMachineBlocks.blockHydroCyclone, "IP.Machine.HydroCyclone", "Hydro Cyclone Separator", TileEntityHydroCyclone.class, BlockType.Machine, BlockType.Ore_Processing);
+	registerMachineBlock(ISetupMachineBlocks.blockDiskFilter, "IP.Machine.DiskFilter", "Disk Filter", TileEntityDiskFilter.class, BlockType.Machine, BlockType.Ore_Processing);
+	registerMachineBlock(ISetupMachineBlocks.blockExtruder, "IP.Machine.Extruder", "Extruder", TileEntityExtruder.class, BlockType.Machine, BlockType.Smelting);
+	registerMachineBlock(ISetupMachineBlocks.blockOxygenFurnace, "IP.Machine.OxygenFurnace", "Oxygen Furnace", TileEntityOxygenFurnace.class, BlockType.Machine, BlockType.Smelting);
+	registerMachineBlock(ISetupMachineBlocks.blockPelletExtruder, "IP.Machine.PelletExtruder", "Pellet Extruder", TileEntityPelletExtruder.class, BlockType.Machine, BlockType.Smelting);
+	registerMachineBlock(ISetupMachineBlocks.blockInsulator, "IP.Machine.Insulator", "Insulator", TileEntityInsulator.class);
+	registerMachineBlock(ISetupMachineBlocks.blockSpoolWindingMachine, "IP.Machine.SpoolWinding", "Spool winding machine", TileEntitySpoolWindingMachine.class);
 
-        registerMachineBlock(ISetupMachineBlocks.blockManualTreetap, "IP.TreeTap.Manual", "Manual Treetap", TileEntityManualTreeTap.class,BlockType.Machine,BlockType.assemble);
-        registerMachineBlock(ISetupMachineBlocks.blockAutomaticTreetap, "IP.TreeTap.Automatic", "Automatic Treetap", TileEntityAutomaticTreeTap.class,BlockType.Machine,BlockType.assemble);
+	registerMachineBlock(ISetupMachineBlocks.blockManualGenerator, "IP.Generator.Manual", "Crank Generator", TileEntityManualGenerator.class, BlockType.Power);
+	registerMachineBlock(ISetupMachineBlocks.blockBuildcraftGenerator, "IP.Generator.Buildcraft", "Buildcraft Generator", TileEntityBuildcraftGenerator.class, BlockType.Power);
+	registerMachineBlock(ISetupMachineBlocks.blockGenerator, "IP.Generator", "Generator", TileEntityGenerator.class, BlockType.Power);
+	registerMachineBlock(ISetupMachineBlocks.blockPetrolLamp, "IP.Lamp.Petrol", "Hanging Lamp", TileEntityPetrolLamp.class);
+	registerMachineBlock(ISetupMachineBlocks.blockElectricLamp, "IP.Lamp.Electric", "Electric Lamp", TileEntityElectricLamp.class);
+	registerMachineBlock(ISetupMachineBlocks.blockSinter, "IP.Machine.Sinter", "Sinter", TileEntitySinter.class);
+	registerMachineBlock(ISetupMachineBlocks.blockKiln, "IP.Machine.kiln", "Kiln", TileEntityKiln.class);
+
+	// transport
+	registerMachineBlock(ISetupMachineBlocks.blockTransportFluids, "IP.Transport.Fluids", "Fluid Pipe", TileEntityTransportFluids.class, BlockType.fluid);
+	registerMachineBlock(ISetupMachineBlocks.blockTransportFluidsWood, ItemBlockWithMetadata.class, "IP.Transport.Fluids.Wood", "Wood-embedded Fluid Pipe", TileEntityTransportFluidsWood.class, BlockType.fluid);
+	registerMachineBlock(ISetupMachineBlocks.blockTransportFluidsStone, ItemBlockWithMetadata.class, "IP.Transport.Fluids.Stone", "Stone-embedded Fluid Pipe", TileEntityTransportFluidsStone.class, BlockType.fluid);
+	registerMachineBlock(ISetupMachineBlocks.blockPump, "IP.Transport.Fluids.Pump", "Fluid pump", TileEntityPump.class, BlockType.fluid);
+	registerMachineBlock(ISetupMachineBlocks.blockTank, "IP.Transport.Fluids.Tank", "Fluid Tank", TileEntityTank.class, BlockType.fluid);
+	registerMachineBlock(ISetupMachineBlocks.blockManometer, "IP.Transport.Fluids.Manometer", "Manometer", TileEntityManoMeter.class, BlockType.fluid);
+	registerMachineBlock(ISetupMachineBlocks.blockGrate, "IP.Transport.Fluids.Grate", "Grate", TileEntityGrate.class, BlockType.fluid);
+	registerMachineBlock(ISetupMachineBlocks.blockRainTank, "IP.Transport.Fluids.RainTank", "Rain Collector", TileEntityRainTank.class, BlockType.fluid);
+	registerMachineBlock(ISetupMachineBlocks.blockValve, "IP.Transport.Fluids.Valve", "Valve", TileEntityValve.class, BlockType.fluid);
+	registerMachineBlock(ISetupMachineBlocks.blockConveyorBeltPowerInput, "IP.Transport.Power.CBPI", "Conveyor belt power connector", TileEntityConveyorBeltPowerInput.class, BlockType.Transport, BlockType.Power);
+
+	registerMachineBlock(ISetupMachineBlocks.blockConveyorPacker, "IP.Transport.Packer", "Conveyor packing machine", TileEntityConveyorPacker.class, BlockType.Transport);
+
+	// power
+	registerMachineBlock(ISetupMachineBlocks.blockWire, "IP.Wire", "Wire", TileEntityWire.class, BlockType.Machine, BlockType.Power);
+	registerMachineBlock(ISetupMachineBlocks.blockWireWood, ItemBlockWithMetadata.class, "IP.Wire.Wood", "Wood-embedded Wire", TileEntityWire.class, BlockType.Machine, BlockType.Power);
+	registerMachineBlock(ISetupMachineBlocks.blockWireStone, ItemBlockWithMetadata.class, "IP.Wire.Stone", "Stone-embedded Wire", TileEntityWire.class, BlockType.Machine, BlockType.Power);
+	registerMachineBlock(ISetupMachineBlocks.blockVoltMeter, "IP.Meter.Volt", "Volt Meter", TileEntityVoltMeter.class, BlockType.Machine, BlockType.Power);
+	registerMachineBlock(ISetupMachineBlocks.blockAmpMeter, "IP.Meter.Amp", "Amp Meter", TileEntityAmpMeter.class, BlockType.Machine, BlockType.Power);
+	registerMachineBlock(ISetupMachineBlocks.blockEnergyCell, "IP.EnergyCell", "Battery Box", TileEntityEnergyCell.class, BlockType.Machine, BlockType.Power);
+	registerMachineBlock(ISetupMachineBlocks.blockSolidBurner, "IP.SolidBurner", "Solid Burner", TileEntitySolidBurner.class, BlockType.Machine, BlockType.Power);
+	registerMachineBlock(ISetupMachineBlocks.blockBoiler, "IP.Boiler", "Boiler", TileEntityBoiler.class, BlockType.Machine, BlockType.Power, BlockType.fluid);
+	registerMachineBlock(ISetupMachineBlocks.blockTurbine, "IP.Turbine", "Turbine", TileEntityTurbine.class, BlockType.Machine, BlockType.Power, BlockType.fluid);
+	registerMachineBlock(ISetupMachineBlocks.blockElectroMotor, "IP.Motor.Electric", "Electro Motor", TileEntityElectroMotor.class, BlockType.Machine, BlockType.Power);
+
+	registerMachineBlock(ISetupMachineBlocks.blockManualTreetap, "IP.TreeTap.Manual", "Manual Treetap", TileEntityManualTreeTap.class, BlockType.Machine, BlockType.assemble);
+	registerMachineBlock(ISetupMachineBlocks.blockAutomaticTreetap, "IP.TreeTap.Automatic", "Automatic Treetap", TileEntityAutomaticTreeTap.class, BlockType.Machine, BlockType.assemble);
     }
 
     @Deprecated
     private void registerMachineBlock(Block block, String uniqueId, String displayName, Class tileEntity) {
-        GameRegistry.registerBlock(block, uniqueId);
-        MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
-        LanguageRegistry.addName(block, displayName);
-        ModLoader.registerTileEntity(tileEntity, uniqueId);
-        BlockRegistry.RegisterBlock(block, new BlockType[]{BlockType.Machine});
-        if(block instanceof IRecipeBlock)
-        	RecipeRegistry.registerMachinesRecipes(((IRecipeBlock)block).getRecipes(),block);
-        if(block instanceof IRecipeMultiblock)
-        	RecipeRegistry.registerMachinesRecipes(((IRecipeMultiblock)block).getRecipes(),block);
+	GameRegistry.registerBlock(block, uniqueId);
+	MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
+	LanguageRegistry.addName(block, displayName);
+	ModLoader.registerTileEntity(tileEntity, uniqueId);
+	BlockRegistry.RegisterBlock(block, new BlockType[] { BlockType.Machine });
+	if (block instanceof IRecipeBlock)
+	    RecipeRegistry.registerMachinesRecipes(((IRecipeBlock) block).getRecipes(), block);
+	if (block instanceof IRecipeMultiblock)
+	    RecipeRegistry.registerMachinesRecipes(((IRecipeMultiblock) block).getRecipes(), block);
     }
-    
+
     private void registerMachineBlock(Block block, String uniqueId, String displayName, Class tileEntity, BlockType... type) {
-        GameRegistry.registerBlock(block, uniqueId);
-        MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
-        LanguageRegistry.addName(block, displayName);
-        ModLoader.registerTileEntity(tileEntity, uniqueId);
-        BlockRegistry.RegisterBlock(block, type);
-        if(block instanceof IRecipeBlock)
-        	RecipeRegistry.registerMachinesRecipes(((IRecipeBlock)block).getRecipes(),block);
-        if(block instanceof IRecipeMultiblock)
-        	RecipeRegistry.registerMachinesRecipes(((IRecipeMultiblock)block).getRecipes(),block);
+	GameRegistry.registerBlock(block, uniqueId);
+	MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
+	LanguageRegistry.addName(block, displayName);
+	ModLoader.registerTileEntity(tileEntity, uniqueId);
+	BlockRegistry.RegisterBlock(block, type);
+	if (block instanceof IRecipeBlock)
+	    RecipeRegistry.registerMachinesRecipes(((IRecipeBlock) block).getRecipes(), block);
+	if (block instanceof IRecipeMultiblock)
+	    RecipeRegistry.registerMachinesRecipes(((IRecipeMultiblock) block).getRecipes(), block);
     }
 
     @Deprecated
     private void registerMachineBlock(Block block, Class<? extends ItemBlock> itemBlock, String uniqueId, String displayName, Class tileEntity) {
-        GameRegistry.registerBlock(block, itemBlock, uniqueId);
-        MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
-        LanguageRegistry.addName(block, displayName);
-        ModLoader.registerTileEntity(tileEntity, uniqueId);
-        BlockRegistry.RegisterBlock(block, new BlockType[]{BlockType.Machine});
-        if(block instanceof IRecipeBlock)
-        	RecipeRegistry.registerMachinesRecipes(((IRecipeBlock)block).getRecipes(),block);
-        if(block instanceof IRecipeMultiblock)
-        	RecipeRegistry.registerMachinesRecipes(((IRecipeMultiblock)block).getRecipes(),block);
-		
+	GameRegistry.registerBlock(block, itemBlock, uniqueId);
+	MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
+	LanguageRegistry.addName(block, displayName);
+	ModLoader.registerTileEntity(tileEntity, uniqueId);
+	BlockRegistry.RegisterBlock(block, new BlockType[] { BlockType.Machine });
+	if (block instanceof IRecipeBlock)
+	    RecipeRegistry.registerMachinesRecipes(((IRecipeBlock) block).getRecipes(), block);
+	if (block instanceof IRecipeMultiblock)
+	    RecipeRegistry.registerMachinesRecipes(((IRecipeMultiblock) block).getRecipes(), block);
+
     }
-    
+
     private void registerMachineBlock(Block block, Class<? extends ItemBlock> itemBlock, String uniqueId, String displayName, Class tileEntity, BlockType... type) {
-        GameRegistry.registerBlock(block, itemBlock, uniqueId);
-        MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
-        LanguageRegistry.addName(block, displayName);
-        ModLoader.registerTileEntity(tileEntity, uniqueId);
-        BlockRegistry.RegisterBlock(block, type);
-        if(block instanceof IRecipeBlock)
-        	RecipeRegistry.registerMachinesRecipes(((IRecipeBlock)block).getRecipes(),block);
-        if(block instanceof IRecipeMultiblock)
-        	RecipeRegistry.registerMachinesRecipes(((IRecipeMultiblock)block).getRecipes(),block);
+	GameRegistry.registerBlock(block, itemBlock, uniqueId);
+	MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
+	LanguageRegistry.addName(block, displayName);
+	ModLoader.registerTileEntity(tileEntity, uniqueId);
+	BlockRegistry.RegisterBlock(block, type);
+	if (block instanceof IRecipeBlock)
+	    RecipeRegistry.registerMachinesRecipes(((IRecipeBlock) block).getRecipes(), block);
+	if (block instanceof IRecipeMultiblock)
+	    RecipeRegistry.registerMachinesRecipes(((IRecipeMultiblock) block).getRecipes(), block);
     }
 
     public static ConfigMachineBlocks getInstance() {
-        return instance;
+	return instance;
     }
+
     public static int getBlockStorageBoxID() {
-        return getInstance().storageBoxID;
-    } 
+	return getInstance().storageBoxID;
+    }
+
     public static int getBlockStorageRackID() {
-        return getInstance().storageRackID;
-    }    
+	return getInstance().storageRackID;
+    }
+
     public static int getBlockControlBoxID() {
-        return getInstance().blockControlBoxID;
+	return getInstance().blockControlBoxID;
     }
-    
+
     public static int getBlockGarageDoorDoorID() {
-        return getInstance().blockGarageDoorDoorID;
+	return getInstance().blockGarageDoorDoorID;
     }
-    
+
     public static int getBlockGarageDoorFrameID() {
-        return getInstance().blockGarageDoorFrameID;
+	return getInstance().blockGarageDoorFrameID;
     }
-    
+
     public static int getBlockGarageDoorID() {
-        return getInstance().blockGarageDoorID;
+	return getInstance().blockGarageDoorID;
     }
 
     public static int getBlockSolderingStationID() {
-        return getInstance().blockSolderingStationID;
+	return getInstance().blockSolderingStationID;
     }
+
     public static int getBlockIronBowlID() {
-        return getInstance().ironBowlBlockID;
+	return getInstance().ironBowlBlockID;
     }
+
     public static int getBlockBloomeryID() {
-        return getInstance().bloomeryBlockID;
+	return getInstance().bloomeryBlockID;
     }
+
     public static int getBlockContainerWallID() {
-        return getInstance().containerWallBlockID;
+	return getInstance().containerWallBlockID;
     }
+
     public static int getBlockBellowsID() {
-        return getInstance().bellowsBlockID;
+	return getInstance().bellowsBlockID;
     }
+
     public static int getBlockGrindingStoneID() {
-        return getInstance().grindingStoneBlockID;
+	return getInstance().grindingStoneBlockID;
     }
+
     public static int getBlockAnvilID() {
-        return getInstance().anvilBlockID;
+	return getInstance().anvilBlockID;
     }
+
     public static int getBlockSmelterID() {
-        return getInstance().smelterBlockID;
+	return getInstance().smelterBlockID;
     }
+
     public static int getBlockRoasterID() {
-        return getInstance().roasterBlockID;
+	return getInstance().roasterBlockID;
     }
+
     public static int getBlockQuenchTankID() {
-        return getInstance().quenchTankBlockID;
+	return getInstance().quenchTankBlockID;
     }
+
     public static int getBlockCoolingUnitID() {
-        return getInstance().coolingUnitBlockID;
+	return getInstance().coolingUnitBlockID;
     }
+
     public static int getBlockVacuumCasterID() {
-        return getInstance().vacuumCasterBlockID;
+	return getInstance().vacuumCasterBlockID;
     }
-    
+
     public static int getBlockTurretLatheID() {
-        return getInstance().turretLatheBlockID;
+	return getInstance().turretLatheBlockID;
     }
-    
+
     public static int getBlockSandCasterID() {
-        return getInstance().sandCasterBlockID;
+	return getInstance().sandCasterBlockID;
     }
-    
+
     public static int getBlockAmineTreaterID() {
-        return getInstance().blockAmineTreaterID;
+	return getInstance().blockAmineTreaterID;
     }
-    
+
     public static int getBlockCatalyticReformerID() {
-        return getInstance().blockCatalyticReformerID;
+	return getInstance().blockCatalyticReformerID;
     }
-    
+
     public static int getBlockClausSulfurPlantID() {
-        return getInstance().blockClausSulfurPlantID;
+	return getInstance().blockClausSulfurPlantID;
     }
-    
+
     public static int getBlockDelayedCokerID() {
-        return getInstance().blockDelayedCokerID;
+	return getInstance().blockDelayedCokerID;
     }
-    
+
     public static int getBlockFluidCatalyticCrackerID() {
-        return getInstance().blockFluidCatalyticCrackerID;
+	return getInstance().blockFluidCatalyticCrackerID;
     }
-    
+
     public static int getBlockHydroCrackerID() {
-        return getInstance().blockHydroCrackerID;
+	return getInstance().blockHydroCrackerID;
     }
-    
+
     public static int getBlockHydroTreaterID() {
-        return getInstance().blockHydroTreaterID;
+	return getInstance().blockHydroTreaterID;
     }
-    
+
     public static int getBlockMeroxTreaterID() {
-        return getInstance().blockMeroxTreaterID;
+	return getInstance().blockMeroxTreaterID;
     }
-    
+
     public static int getBlockVacuumDestilationTowerID() {
-        return getInstance().blockVacuumDestilationTowerID;
+	return getInstance().blockVacuumDestilationTowerID;
     }
 
     public static int getBlockTankPlatingID() {
-        return getInstance().blockTankPlatingID;
+	return getInstance().blockTankPlatingID;
     }
+
     public static int getBlockDestilationTrayID() {
-        return getInstance().blockDestilationTrayID;
+	return getInstance().blockDestilationTrayID;
     }
+
     public static int getBlockAtmosphericDestilationTowerID() {
-        return getInstance().blockAtmosphericDestilationTowerID;
+	return getInstance().blockAtmosphericDestilationTowerID;
     }
+
     public static int getAlkylationUnitBlockID() {
-        return getInstance().alkylationUnitID;
+	return getInstance().alkylationUnitID;
     }
+
     public static int getAsphaltBlowerBlockID() {
-        return getInstance().asphaltBlowerID;
+	return getInstance().asphaltBlowerID;
     }
+
     public static int getGasProcessorBlockID() {
-        return getInstance().gasProcessorID;
+	return getInstance().gasProcessorID;
     }
+
     public static int getIsomerizationReactorBlockID() {
-        return getInstance().isomerizationReactorID;
+	return getInstance().isomerizationReactorID;
     }
-    
+
     public static int getSourWaterStripperBlockID() {
-        return getInstance().sourWaterStripperID;
+	return getInstance().sourWaterStripperID;
     }
-    
+
     public static int getElectrolyserBlockID() {
-        return getInstance().electrolyserBlockID;
+	return getInstance().electrolyserBlockID;
     }
+
     public static int getInsulatorBlockID() {
-        return getInstance().insulatorBlockID;
+	return getInstance().insulatorBlockID;
     }
-    
+
     public static int getSpoolWindingMachineBlockID() {
-        return getInstance().spoolWindingMachineBlockID;
+	return getInstance().spoolWindingMachineBlockID;
     }
 
     public static int getIncubatorID() {
-        return getInstance().incubatorID;
+	return getInstance().incubatorID;
     }
 
     public static int getTricklingFilterID() {
-        return getInstance().tricklingFilterID;
+	return getInstance().tricklingFilterID;
     }
 
     public static int getWaterTreatmentStationID() {
-        return getInstance().waterTreatmentStationID;
+	return getInstance().waterTreatmentStationID;
     }
 
     public static int getBLmultiblockBlastFurnaceTower() {
-        return getInstance().BLmultiblockBlastFurnaceTower;
+	return getInstance().BLmultiblockBlastFurnaceTower;
     }
 
     public static int getBLmultiblockBlastFurnace() {
-        return getInstance().BLmultiblockBlastFurnace;
+	return getInstance().BLmultiblockBlastFurnace;
     }
 
     public static int getBLtransportConveyorBeltInput() {
-        return getInstance().BLtransportConveyorBeltInput;
+	return getInstance().BLtransportConveyorBeltInput;
     }
 
     public static int getBLtransportConveyorBeltOutput() {
-        return getInstance().BLtransportConveyorBeltOutput;
+	return getInstance().BLtransportConveyorBeltOutput;
     }
 
     public static int getBLtransportConveyorBeltSorter() {
-        return getInstance().BLtransportConveyorBeltSorter;
+	return getInstance().BLtransportConveyorBeltSorter;
     }
-    
+    public static int getBLtransportConveyorBeltPacker() {
+	return getInstance().BLtransportConveyorBeltPacker;
+    }
+
     public static int getBLtransportConveyorShute() {
-        return getInstance().BLtransportConveyorShute;
+	return getInstance().BLtransportConveyorShute;
     }
 
     public static int getBlockTransportConveyorBelt() {
-        return getInstance().BLtransportConveyorBelt;
+	return getInstance().BLtransportConveyorBelt;
     }
 
     public static int getBLmultiblockDisplayPanel() {
-        return getInstance().BLmultiblockDisplayPanel;
+	return getInstance().BLmultiblockDisplayPanel;
     }
 
     public static int getBLmultiblockWheelConnector() {
-        return getInstance().BLmultiblockWheelConnector;
+	return getInstance().BLmultiblockWheelConnector;
     }
 
     public static int getBLmultiblockRollingPress() {
-        return getInstance().BLmultiblockRollingPress;
+	return getInstance().BLmultiblockRollingPress;
     }
 
     public static int getBLmultiblockWheel() {
-        return getInstance().BLmultiblockWheel;
+	return getInstance().BLmultiblockWheel;
     }
 
     public static int getBLmultiblockLiftDoor() {
-        return getInstance().BLmultiblockLiftDoor;
+	return getInstance().BLmultiblockLiftDoor;
     }
 
     public static int getBLmultiblockElevator() {
-        return getInstance().BLmultiblockElevator;
+	return getInstance().BLmultiblockElevator;
     }
 
     public static int getBLmultiblockToggleButton2() {
-        return getInstance().BLmultiblockToggleButton2;
+	return getInstance().BLmultiblockToggleButton2;
     }
 
     public static int getBLmultiblockToggleButton() {
-        return getInstance().BLmultiblockToggleButton;
+	return getInstance().BLmultiblockToggleButton;
     }
 
     public static int getBLmultiblockInvInput() {
-        return getInstance().BLmultiblockInvInput;
+	return getInstance().BLmultiblockInvInput;
     }
 
     public static int getBLmultiblockInvOutput() {
-        return getInstance().BLmultiblockInvOutput;
+	return getInstance().BLmultiblockInvOutput;
     }
 
     public static int getBLmultiblockWeldingStationExt() {
-        return getInstance().BLmultiblockWeldingStationExt;
+	return getInstance().BLmultiblockWeldingStationExt;
     }
 
     public static int getBLmultiblockScreen() {
-        return getInstance().BLmultiblockScreen;
+	return getInstance().BLmultiblockScreen;
     }
 
     public static int getBLmultiblockWeldingStation() {
-        return getInstance().BLmultiblockWeldingStation;
+	return getInstance().BLmultiblockWeldingStation;
     }
 
     public static int getBLmultiblockHotPress() {
-        return getInstance().BLmultiblockHotPress;
+	return getInstance().BLmultiblockHotPress;
     }
 
     public static int getBLmultiblockFrame() {
-        return getInstance().BLmultiblockFrame;
+	return getInstance().BLmultiblockFrame;
     }
 
     public static int getFilterBlockID() {
-        return getInstance().filterBlockId;
+	return getInstance().filterBlockId;
     }
 
     public static int getSinterBlockID() {
-        return getInstance().sinterBlockID;
+	return getInstance().sinterBlockID;
     }
+
     public static int getBlockConveyorBeltPowerInputID() {
-        return getInstance().conveyorBeltPowerInputID;
+	return getInstance().conveyorBeltPowerInputID;
     }
+
     public static int getCrusherBlockID() {
-        return getInstance().crusherBlockID;
+	return getInstance().crusherBlockID;
     }
 
     public static int getMagneticSeparatorBlockID() {
 
-        return getInstance().magneticSeparatorBlockID;
+	return getInstance().magneticSeparatorBlockID;
     }
 
     public static int getMixerBlockID() {
-        return getInstance().mixerBlockID;
+	return getInstance().mixerBlockID;
     }
 
     public static int getDryerBlockID() {
-        return getInstance().dryerBlockID;
+	return getInstance().dryerBlockID;
     }
 
     public static int getClassifierBlockID() {
-        return getInstance().classifierBlockID;
+	return getInstance().classifierBlockID;
     }
 
     public static int getThickenerBlockID() {
-        return getInstance().thickenerBlockID;
+	return getInstance().thickenerBlockID;
     }
 
     public static int getFlotationCellBlockID() {
-        return getInstance().flotationCellBlockID;
+	return getInstance().flotationCellBlockID;
     }
 
     public static int getHydroCycloneBlockID() {
-        return getInstance().hydroCycloneBlockID;
+	return getInstance().hydroCycloneBlockID;
     }
 
     public static int getDiskFilterBlockID() {
-        return getInstance().diskFilterBlockID;
+	return getInstance().diskFilterBlockID;
     }
 
     public static int getManualGeneratorBlockID() {
-        return getInstance().manualGeneratorBlockID;
+	return getInstance().manualGeneratorBlockID;
     }
 
     public static int getBuildcraftGeneratorBlockID() {
-        return getInstance().buildcraftGeneratorBlockID;
+	return getInstance().buildcraftGeneratorBlockID;
     }
 
     public static int getWireBlockID() {
-        return getInstance().wireBlockID;
+	return getInstance().wireBlockID;
     }
 
     public static int getElectroMotorBlockID() {
-        return getInstance().electroMotorBlockID;
+	return getInstance().electroMotorBlockID;
     }
 
     public static int getWireStoneBlockID() {
-        return getInstance().wireStoneBlockID;
+	return getInstance().wireStoneBlockID;
     }
 
     public static int getWireWoodBlockID() {
-        return getInstance().wireWoodBlockID;
+	return getInstance().wireWoodBlockID;
     }
 
     public static int getVoltMeterBlockID() {
-        return getInstance().voltMeterBlockID;
+	return getInstance().voltMeterBlockID;
     }
 
     public static int getAmpMeterBlockID() {
-        return getInstance().ampMeterBlockID;
+	return getInstance().ampMeterBlockID;
     }
 
     public static int getAutomaticTreeTapBlockID() {
-        return getInstance().automaticTreeTapID;
+	return getInstance().automaticTreeTapID;
     }
 
     public static int getManualTreeTapBlockID() {
-        return getInstance().manualTreeTapID;
+	return getInstance().manualTreeTapID;
     }
 
     public static int getEnergyCellBlockID() {
-        return getInstance().EnergyCellBlockID;
+	return getInstance().EnergyCellBlockID;
     }
 
     public static int getPelletExtruderID() {
-        return getInstance().pelletExtruderID;
+	return getInstance().pelletExtruderID;
     }
 
     public static int getExtruderID() {
-        return getInstance().extruderID;
+	return getInstance().extruderID;
     }
 
     public static int getBlastFurnaceID() {
-        return getInstance().blastFurnaceID;
+	return getInstance().blastFurnaceID;
     }
 
     public static int getOxygenFurnaceID() {
-        return getInstance().oxygenFurnaceID;
+	return getInstance().oxygenFurnaceID;
     }
 
     public static int getSolidBurnerBlockID() {
-        return getInstance().solidBurnerBlockID;
+	return getInstance().solidBurnerBlockID;
     }
 
     public static int getBoilerBlockID() {
-        return getInstance().boilerBlockID;
+	return getInstance().boilerBlockID;
     }
 
     public static int getSteamTurbineBlockID() {
-        return getInstance().steamTurbineBlockID;
+	return getInstance().steamTurbineBlockID;
     }
 
     public static int getGeneratorBlockID() {
-        return getInstance().generatorBlockID;
+	return getInstance().generatorBlockID;
     }
 
     public static int getBlockPetrolLamp() {
-        return getInstance().petrolLampBlockID;
+	return getInstance().petrolLampBlockID;
     }
 
     public static int getBlockElectricLamp() {
-        return getInstance().electricLampBlockID;
+	return getInstance().electricLampBlockID;
     }
 
     public static int getWireMillBlockID() {
-        return getInstance().wireMillBlockID;
-    }
-    public static int getKilnBlockID() {
-        return getInstance().kilnBlockID;
+	return getInstance().wireMillBlockID;
     }
 
-	public static int getBlockContainerID() {
-		return getInstance().containerBlockID;
-	}
+    public static int getKilnBlockID() {
+	return getInstance().kilnBlockID;
+    }
+
+    public static int getBlockContainerID() {
+	return getInstance().containerBlockID;
+    }
 }

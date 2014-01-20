@@ -1,19 +1,18 @@
 package ip.industrialProcessing.machines.flotationCell;
 
+import ip.industrialProcessing.LocalDirection;
+import ip.industrialProcessing.machines.TileEntityFluidWorkerMachine;
+import ip.industrialProcessing.recipes.Recipe;
+
 import java.util.Iterator;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
-import ip.industrialProcessing.recipes.Recipe;
 
-public class TileEntityFlotationCell extends TileEntityPoweredFluidWorkerMachine {
+public class TileEntityFlotationCell extends TileEntityFluidWorkerMachine {
 
-	public TileEntityFlotationCell() {
-		super(LocalDirection.LEFT, 10000,100);
-		
+	public TileEntityFlotationCell() { 
 		LocalDirection[] nodirections = new LocalDirection[0];
 		// buckets!
 		// 0: Liquid Input Full Input

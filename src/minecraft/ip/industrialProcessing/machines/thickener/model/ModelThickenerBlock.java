@@ -44,8 +44,8 @@ public class ModelThickenerBlock  extends ModelBlock {
         Icon iconPower = reference.getIcon(2);
 
         features.getRotated(dir).renderMesh(false, iconFeatures, reference);
-        connector.getRotated(dir).renderMesh(false, iconFeatures, reference);
-        connector.getRotated(dir+2).renderMesh(false, iconPower, reference);
+        connector.getRotated(dir+2).renderMesh(false, iconFeatures, reference);
+        connector.getRotated(dir).renderMesh(false, iconPower, reference);
         hull.getRotated(dir).renderMesh(false, iconHull, reference); 
 
         return true;

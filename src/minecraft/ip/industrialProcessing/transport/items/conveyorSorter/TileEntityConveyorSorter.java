@@ -106,7 +106,7 @@ public class TileEntityConveyorSorter extends TileEntityConveyorInventoryBase im
     public void setInventorySlotContents(int slotIndex, ItemStack stack) {
         if (slotIndex > getSizeInventory())
             return;
-        if (stack != null && stack.stackSize > getInventoryStackLimit()) {
+        if (stack != null && stack.stackSize > getInventoryStackLimit()) { // only ghosts!
             stack.stackSize = getInventoryStackLimit();
         }
         slots[slotIndex] = stack;
@@ -148,7 +148,7 @@ public class TileEntityConveyorSorter extends TileEntityConveyorInventoryBase im
 
     @Override
     public boolean canInsertItem(int index, ItemStack stack, int size) {
-        return true;
+        return false;
     }
 
     @Override

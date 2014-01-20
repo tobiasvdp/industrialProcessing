@@ -108,6 +108,7 @@ import ip.industrialProcessing.transport.items.conveyorBelt.BlockConveyorBelt;
 import ip.industrialProcessing.transport.items.conveyorChute.BlockConveyorChute;
 import ip.industrialProcessing.transport.items.conveyorInput.BlockConveyorInput;
 import ip.industrialProcessing.transport.items.conveyorOutput.BlockConveyorOutput;
+import ip.industrialProcessing.transport.items.conveyorPacker.BlockConveyorPacker;
 import ip.industrialProcessing.transport.items.conveyorSorter.BlockConveyorSorter;
 
 public interface ISetupMachineBlocks {
@@ -221,8 +222,7 @@ public interface ISetupMachineBlocks {
     public final static BlockVacuumDestilationTower blockVacuumDestilationTower = new BlockVacuumDestilationTower();
     public final static BlockContainer blockContainer = new BlockContainer();
     public final static BlockContainerWall blockContainerWall = new BlockContainerWall();
-    public final static BlockSolderingStation blockSolderingStation = new BlockSolderingStation();
-    
+    public final static BlockSolderingStation blockSolderingStation = new BlockSolderingStation(); 
     
     // transport
     public final static BlockConveyorBelt blockConveyorBelt = new BlockConveyorBelt();
@@ -231,6 +231,8 @@ public interface ISetupMachineBlocks {
     public final static BlockConveyorSorter blockConveyorSorter = new BlockConveyorSorter();
     public final static BlockConveyorChute blockConveyorChute = new BlockConveyorChute();
     public final static BlockConveyorBeltPowerInput blockConveyorBeltPowerInput = new BlockConveyorBeltPowerInput();
+    public final static BlockConveyorPacker blockConveyorPacker = new BlockConveyorPacker();
+    
     public final static BlockManualTreeTap blockManualTreetap = new BlockManualTreeTap();
     public final static BlockAutomaticTreeTap blockAutomaticTreetap = new BlockAutomaticTreeTap();
 }
