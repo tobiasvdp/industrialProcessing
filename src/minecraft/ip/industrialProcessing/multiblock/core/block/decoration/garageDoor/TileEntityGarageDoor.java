@@ -2,6 +2,7 @@ package ip.industrialProcessing.multiblock.core.block.decoration.garageDoor;
 
 import java.util.ArrayList;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 import org.bouncycastle.util.Arrays;
@@ -19,8 +20,10 @@ import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.multiblock.tier.Tier;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
+import ip.industrialProcessing.utils.IRemote;
+import ip.industrialProcessing.utils.ISender;
 
-public class TileEntityGarageDoor extends TileEntityMultiblockCore {
+public class TileEntityGarageDoor extends TileEntityMultiblockCore implements ISender {
 	static StructureMultiblock structure;
 	static TierCollection tierRequirments;
 	static {
@@ -138,6 +141,12 @@ public class TileEntityGarageDoor extends TileEntityMultiblockCore {
 	
 	public boolean isOpen(){
 		return open;
+	}
+
+	@Override
+	public boolean sendTileEntity(IRemote remote,ItemStack itemStack) {
+		remote.setTileEntity(this, itemStack, this.xCoord, this.yCoord, this.zCoord);
+		return true;
 	}
 
 }
