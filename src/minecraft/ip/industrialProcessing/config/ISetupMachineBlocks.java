@@ -30,6 +30,8 @@ import ip.industrialProcessing.machines.plants.oilRefinary.asphaltBlower.BlockAs
 import ip.industrialProcessing.machines.plants.oilRefinary.gasProcessor.BlockGasProcessor;
 import ip.industrialProcessing.machines.plants.oilRefinary.isomerizationReactor.BlockIsomerizationReactor;
 import ip.industrialProcessing.machines.plants.oilRefinary.sourWaterStripper.BlockSourWaterStripper;
+import ip.industrialProcessing.machines.plants.storage.storageBox.BlockStorageBox;
+import ip.industrialProcessing.machines.plants.storage.storageRack.BlockStorageRack;
 import ip.industrialProcessing.machines.plants.waste.exhaust.coolingUnit.BlockCoolingUnit;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator.BlockIncubator;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.tricklingFilter.BlockTricklingFilter;
@@ -154,6 +156,8 @@ public interface ISetupMachineBlocks {
     public final static BlockGarageDoorFrame blockGarageDoorFrame = new BlockGarageDoorFrame();
     public final static BlockGarageDoorDoor blockGarageDoorDoor = new BlockGarageDoorDoor();
     public final static BlockControlBox blockControlBox = new BlockControlBox();
+    public final static BlockStorageRack blockStorageRack = new BlockStorageRack();
+    public final static BlockStorageBox blockStorageBox = new BlockStorageBox();
 
     // create generators
     public final static BlockManualGenerator blockManualGenerator = new BlockManualGenerator();

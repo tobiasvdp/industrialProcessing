@@ -31,6 +31,8 @@ import ip.industrialProcessing.machines.plants.oilRefinary.asphaltBlower.TileEnt
 import ip.industrialProcessing.machines.plants.oilRefinary.gasProcessor.TileEntityGasProcessor;
 import ip.industrialProcessing.machines.plants.oilRefinary.isomerizationReactor.TileEntityIsomerizationReactor;
 import ip.industrialProcessing.machines.plants.oilRefinary.sourWaterStripper.TileEntitySourWaterStripper;
+import ip.industrialProcessing.machines.plants.storage.storageBox.TileEntityStorageBox;
+import ip.industrialProcessing.machines.plants.storage.storageRack.TileEntityStorageRack;
 import ip.industrialProcessing.machines.plants.waste.exhaust.coolingUnit.TileEntityCoolingUnit;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator.TileEntityIncubator;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.tricklingFilter.TileEntityTricklingFilter;
@@ -149,6 +151,8 @@ public class ConfigMachineBlocks {
     private int bellowsBlockID= IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "bellowsBlockID", 521).getInt();
     private int bloomeryBlockID= IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "bloomeryBlockID", 522).getInt();
     private int ironBowlBlockID= IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "ironBowlBlockID", 523).getInt();
+    private int storageRackID= IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "storageRackID", 524).getInt();
+    private int storageBoxID= IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "storageBoxID", 525).getInt();
     
     private int blastFurnaceID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "BlastFurnaceID", 550).getInt();
     private int extruderID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "ExtruderID", 551).getInt();
@@ -251,6 +255,8 @@ public class ConfigMachineBlocks {
     	registerMachineBlock(ISetupMachineBlocks.blockBellows, "IP.MBD.Bellow", "Bellows", TileEntityBellows.class,BlockType.Machine,BlockType.assemble);
     	registerMachineBlock(ISetupMachineBlocks.blockBloomery, "IP.MBC.Bloom", "Bloomery", TileEntityBloomery.class,BlockType.Machine,BlockType.Smelting);
     	registerMachineBlock(ISetupMachineBlocks.blockIronBowl, "IP.MBD.IBowl", "Iron bowl", TileEntityIronBowl.class,BlockType.Machine,BlockType.assemble);
+    	registerMachineBlock(ISetupMachineBlocks.blockStorageRack, "IP.Machine.StorRack", "Storage rack", TileEntityStorageRack.class,BlockType.Storage);
+    	registerMachineBlock(ISetupMachineBlocks.blockStorageBox, "IP.Machine.StorBox", "Storage box", TileEntityStorageBox.class,BlockType.Storage);
     	
 
         registerMachineBlock(ISetupMachineBlocks.blockConveyorBelt, "IP.Trans.CBelt", "Conveyor belt", TileEntityConveyorBelt.class,BlockType.Machine,BlockType.Transport);
@@ -412,8 +418,12 @@ public class ConfigMachineBlocks {
     public static ConfigMachineBlocks getInstance() {
         return instance;
     }
-
-    
+    public static int getBlockStorageBoxID() {
+        return getInstance().storageBoxID;
+    } 
+    public static int getBlockStorageRackID() {
+        return getInstance().storageRackID;
+    }    
     public static int getBlockControlBoxID() {
         return getInstance().blockControlBoxID;
     }

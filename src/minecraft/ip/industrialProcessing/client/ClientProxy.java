@@ -49,6 +49,10 @@ import ip.industrialProcessing.machines.plants.blacksmith.grindingStone.model.Mo
 import ip.industrialProcessing.machines.plants.blacksmith.grindingStone.model.ModelGrindingStoneAnimated;
 import ip.industrialProcessing.machines.plants.nonFerroProcessing.magneticSeparator.ModelMagneticSeperator;
 import ip.industrialProcessing.machines.plants.nonFerroProcessing.magneticSeparator.TileEntityMagneticSeparator;
+import ip.industrialProcessing.machines.plants.storage.storageBox.model.ModelStorageBox;
+import ip.industrialProcessing.machines.plants.storage.storageRack.TileEntityStorageRack;
+import ip.industrialProcessing.machines.plants.storage.storageRack.model.ModelStorageRack;
+import ip.industrialProcessing.machines.plants.storage.storageRack.model.ModelStorageRackAnimated;
 import ip.industrialProcessing.machines.thickener.ModelThickener;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
 import ip.industrialProcessing.machines.thickener.model.ModelThickenerBlock;
@@ -240,7 +244,10 @@ public class ClientProxy extends CommonProxy {
     private static final ModelGarageDoor modelGarageDoor = new ModelGarageDoor();
     private static final ModelGarageDoorFrame modelGarageDoorFrame = new ModelGarageDoorFrame();
     private static final ModelControlBox modelControlBox = new ModelControlBox();
-
+    private static final ModelStorageRack modelStorageRack = new ModelStorageRack();
+    private static final ModelStorageRackAnimated modelStorageRackAnimated = new ModelStorageRackAnimated();
+    private static final ModelStorageBox modelStorageBox = new ModelStorageBox();
+    
     @Override
     public void registerRenderers() {
 	// 100% block
@@ -327,7 +334,13 @@ public class ClientProxy extends CommonProxy {
 	
 	ConfigRenderers.setRendererControlBox(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererControlBox(), modelControlBox));
+	
+	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityStorageRack.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockStorageRack, "ModelStorageRack", modelStorageRackAnimated));
+	ConfigRenderers.setRendererStorageRack(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererStorageRack(), modelStorageRack));
 
+	ConfigRenderers.setRendererStorageBox(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererStorageBox(), modelStorageBox));
 	// block & tile entity
 
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityClassifier.class, new RendererTileEntityFluidWorker(ISetupMachineBlocks.blockClassifier, "ModelClassifier", classifier));

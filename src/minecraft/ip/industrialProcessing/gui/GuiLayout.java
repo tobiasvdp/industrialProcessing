@@ -44,7 +44,7 @@ public class GuiLayout {
 		switch (type) {
 		case slotsInput:
 			x = 47 + offsetX;
-			y = 45;
+			y = 40;
 			panel = new GuiLayoutPanel(this, type, x, y, 52, 52);
 			// SlotLayout set by Block
 			// GuiContainerLayout set in above function
@@ -52,7 +52,7 @@ public class GuiLayout {
 			break;
 		case slotsOutput:
 			x = 135 + offsetX;
-			y = 45;
+			y = 40;
 			panel = new GuiLayoutPanel(this, type, x, y, 52, 52);
 			// SlotLayout set by Block
 			// GuiContainerLayout set in above function
@@ -63,7 +63,7 @@ public class GuiLayout {
 		case tankInput:
 		case tankOutput:
 			x = 0;
-			y = 45;
+			y = 40;
 			panel = new GuiLayoutPanel(this, type, x, y, 40, 52);
 			panel.setSlotLayout(SlotLayoutType.fixed, 2);
 			panel.setGuiContainerLayout(type);
@@ -79,7 +79,7 @@ public class GuiLayout {
 			break;
 		case worker:
 			x = 106;
-			y = 64 + offsetY;
+			y = 59 + offsetY;
 			panel = new GuiLayoutPanel(this, type, x, y, 24, 16);
 			// No slotLayout
 			panel.setGuiContainerLayout(type);
@@ -95,7 +95,7 @@ public class GuiLayout {
 			break;
 		case heat:
 			x = 0;
-			y = 44 + offsetY;
+			y = 39 + offsetY;
 			panel = new GuiLayoutPanel(this, type, x, y, 35, 54,15,54);
 			panel.setSlotLayout(SlotLayoutType.fixed, 2);
 			panel.setGuiContainerLayout(type);

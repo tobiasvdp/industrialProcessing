@@ -109,7 +109,7 @@ public class GuiLayoutPanel {
 		default:
 			break;
 		}
-		
+		parent.reDoLayout();
 	}
 	
 	public SlotLayout getSlotLayout(){

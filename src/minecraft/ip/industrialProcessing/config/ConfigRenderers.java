@@ -103,7 +103,23 @@ public class ConfigRenderers {
     private int rendererGarageDoor;
     private int rendererGarageDoorFrame;
     private int rendererControlBox;
+    private int rendererStorageRack;
+    private int rendererStorageBox;
 
+    public static void setRendererStorageBox(int var) {
+		getInstance().rendererStorageBox = var;
+	}
+	public static int getRendererStorageBox() {
+		return getInstance().rendererStorageBox;
+	}
+	
+    public static void setRendererStorageRack(int var) {
+		getInstance().rendererStorageRack = var;
+	}
+	public static int getRendererStorageRack() {
+		return getInstance().rendererStorageRack;
+	}
+    
 	public static void setRendererControlBox(int var) {
 		getInstance().rendererControlBox = var;
 	}
