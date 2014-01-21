@@ -15,6 +15,7 @@ import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.machines.hydroCyclone.TileEntityHydroCyclone;
+import ip.industrialProcessing.machines.plants.storage.storageBox.BlockStorageBox;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 import ip.industrialProcessing.utils.IDescriptionBlock;
 import net.minecraft.block.Block;
@@ -36,19 +37,103 @@ public class TileEntityStorageRack extends TileEntityMachine {
 		addStack(null, noDirection, true, false);
 		addStack(null, noDirection, true, false);
 		addStack(null, noDirection, true, false);
+
+		// box1
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+
+		// box2
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+
+		// box3
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+
+		// box4
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+
+		// box5
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+
+		// box6
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
 	}
 
 	@Override
 	protected boolean isValidInput(int slot, int itemID) {
-		return itemID == IndustrialProcessing.blockStorageBox.blockID;
+		if (slot < 6)
+			return itemID == IndustrialProcessing.blockStorageBox.blockID;
+		return itemID != IndustrialProcessing.blockStorageBox.blockID;
 	}
 
 	public ItemStack popBox() {
 		for (int i = 0; i < 6; i++) {
 			ItemStack stack = decrStackSize(i, 1);
-			if (stack != null) {
+		}
+		return null;
+	}
 
+	@Override
+	public ItemStack decrStackSize(int i, int j) {
+		if (i > 6) {
+			return super.decrStackSize(i, j);
+		}
+		ItemStack stack = getStackInSlot(i).copy();
+		if (stack != null) {
+			for (int k = 0; k < 9; k++) {
+				ItemStack stackInSlot = getStackInSlot(6 + i * 9 + k);
+				if (stackInSlot != null) {
+					BlockStorageBox.putStackInBox(stackInSlot.copy(), stack, k);
+					setInventorySlotContents(6 + i * 9 + k, null);
+				}
 			}
+			setInventorySlotContents(i, null);
 			onInventoryChanged();
 			return stack;
 		}
@@ -72,6 +157,19 @@ public class TileEntityStorageRack extends TileEntityMachine {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public void setInventorySlotContents(int slotIndex, ItemStack stack) {
+		super.setInventorySlotContents(slotIndex, stack);
+		if (slotIndex < 6 && stack != null) {
+			for (int i = 0; i < 9; i++) {
+				ItemStack stackFromBox = BlockStorageBox.getStackFromBox(stack, i, 64);
+				if (stackFromBox != null) {
+					this.setInventorySlotContents(6 + 9 * slotIndex + i, stackFromBox);
+				}
+			}
+		}
 	}
 
 }
