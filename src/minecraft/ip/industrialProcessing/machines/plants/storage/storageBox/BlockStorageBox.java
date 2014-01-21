@@ -140,8 +140,8 @@ public class BlockStorageBox extends BlockMachineRendered implements IDescriptio
 	return super.collisionRayTrace(par1World, par2, par3, par4, par5Vec3, par6Vec3);
     }
 
-    public ItemStack putStackInBox(ItemStack stack, ItemStack box, int slot) {
-	if (box.itemID == this.blockID && slot >= 0 && slot < STORAGE_SIZE && stack != null && stack.itemID != this.blockID) {
+    public static ItemStack putStackInBox(ItemStack stack, ItemStack box, int slot) {
+	if (box.itemID == ConfigMachineBlocks.getBlockStorageBoxID() && slot >= 0 && slot < STORAGE_SIZE && stack != null && stack.itemID != ConfigMachineBlocks.getBlockStorageBoxID()) {
 	    if (box.stackTagCompound == null)
 		box.setTagCompound(new NBTTagCompound());
 	    ItemStack slotStack = getStackInSlot(box, slot);
@@ -175,8 +175,8 @@ public class BlockStorageBox extends BlockMachineRendered implements IDescriptio
 	return stack;
     }
 
-    public ItemStack getStackFromBox(ItemStack box, int slot, int amount) {
-	if (box != null && box.itemID == this.blockID && box.stackTagCompound != null && slot >= 0 && slot < STORAGE_SIZE) {
+    public static ItemStack getStackFromBox(ItemStack box, int slot, int amount) {
+	if (box != null && box.itemID == ConfigMachineBlocks.getBlockStorageBoxID() && box.stackTagCompound != null && slot >= 0 && slot < STORAGE_SIZE) {
 	    ItemStack stack = getStackInSlot(box, slot);
 	    if (stack != null) {
 		amount = Math.min(amount, stack.stackSize);
@@ -190,8 +190,8 @@ public class BlockStorageBox extends BlockMachineRendered implements IDescriptio
 	return null;
     }
 
-    public ItemStack peekStackFromBox(ItemStack box, int slot) {
-	if (box != null && box.itemID == this.blockID && box.stackTagCompound != null && slot >= 0 && slot < STORAGE_SIZE) {
+    public static ItemStack peekStackFromBox(ItemStack box, int slot) {
+	if (box != null && box.itemID == ConfigMachineBlocks.getBlockStorageBoxID() && box.stackTagCompound != null && slot >= 0 && slot < STORAGE_SIZE) {
 	    ItemStack stack = getStackInSlot(box, slot);
 	    if (stack != null)
 		return stack.copy();
@@ -200,7 +200,7 @@ public class BlockStorageBox extends BlockMachineRendered implements IDescriptio
 	return null;
     }
 
-    private boolean setStackInSlot(ItemStack box, int slot, ItemStack stack) {
+    private static boolean setStackInSlot(ItemStack box, int slot, ItemStack stack) {
 	NBTTagList list;
 	if (!box.stackTagCompound.hasKey("Slots")) {
 	    list = createEmptyNBTStackList(STORAGE_SIZE);
@@ -221,7 +221,7 @@ public class BlockStorageBox extends BlockMachineRendered implements IDescriptio
 	return false;
     }
 
-    private NBTTagList createEmptyNBTStackList(int i) {
+    private static NBTTagList createEmptyNBTStackList(int i) {
 	NBTTagList list = new NBTTagList();
 	for (int j = 0; j < i; j++) {
 	    NBTTagCompound compound = new NBTTagCompound();
@@ -232,7 +232,7 @@ public class BlockStorageBox extends BlockMachineRendered implements IDescriptio
 	return list;
     }
 
-    private ItemStack getStackInSlot(ItemStack box, int slot) {
+    private static ItemStack getStackInSlot(ItemStack box, int slot) {
 	if (box.stackTagCompound.hasKey("Slots")) {
 	    NBTTagList list = box.stackTagCompound.getTagList("Slots");
 	    if (slot < list.tagCount()) {
