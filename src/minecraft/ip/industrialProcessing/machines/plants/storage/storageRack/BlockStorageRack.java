@@ -23,10 +23,19 @@ public class BlockStorageRack extends BlockMachineRendered implements IDescripti
 	public static GuiLayout guiLayout;
 	static{
 		guiLayout = new GuiLayout();
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.vertical, 6);
+		guiLayout.multipleLines = 2;
+		guiLayout.drawTitel = false;
+		guiLayout.drawInventoryTitel = false;
+		guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.vertical, 3);
+		guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setLine(2).setSlotLayout(SlotLayoutType.vertical, 3);
+		
 		guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 9);
 		guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 9);
 		guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 9);
+		
+		guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setLine(2).setSlotLayout(SlotLayoutType.horizontal, 9);
+		guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setLine(2).setSlotLayout(SlotLayoutType.horizontal, 9);
+		guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setLine(2).setSlotLayout(SlotLayoutType.horizontal, 9);
 	}
     private Icon[] icons = new Icon[4];
 

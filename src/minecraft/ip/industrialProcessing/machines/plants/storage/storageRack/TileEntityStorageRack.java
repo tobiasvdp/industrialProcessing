@@ -27,47 +27,51 @@ import net.minecraft.world.World;
 
 public class TileEntityStorageRack extends TileEntityMachine {
 
-    public TileEntityStorageRack() {
-	// conveyors/pipes can't pick up boxes from here!
-	LocalDirection[] noDirection = new LocalDirection[0];
-	addStack(null, noDirection, false, false);
-	addStack(null, noDirection, false, false);
-	addStack(null, noDirection, false, false);
-	addStack(null, noDirection, false, false);
-	addStack(null, noDirection, false, false);
-	addStack(null, noDirection, false, false);
-    }
-
-    @Override
-    protected boolean isValidInput(int slot, int itemID) {
-	return itemID == IndustrialProcessing.blockStorageBox.blockID;
-    }
-
-    public ItemStack popBox() {
-	for (int i = 0; i < 6; i++) {
-	    ItemStack stack = decrStackSize(i, 1);
-	    if (stack != null)
-		return stack;
+	public TileEntityStorageRack() {
+		// conveyors/pipes can't pick up boxes from here!
+		LocalDirection[] noDirection = new LocalDirection[0];
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);
 	}
-	return null;
-    }
 
-    public boolean pushBox(ItemStack itemStack) {
+	@Override
+	protected boolean isValidInput(int slot, int itemID) {
+		return itemID == IndustrialProcessing.blockStorageBox.blockID;
+	}
 
-	if (itemStack == null)
-	    return false; 
-	if (itemStack.stackSize != 1)
-	    return false;
-	for (int i = 0; i < 6; i++) {
-	    if (isValidInput(i, itemStack.itemID)) {
-		ItemStack slot = getStackInSlot(i);
-		if (slot == null) {
-		    this.setInventorySlotContents(i, itemStack);
-		    return true;
+	public ItemStack popBox() {
+		for (int i = 0; i < 6; i++) {
+			ItemStack stack = decrStackSize(i, 1);
+			if (stack != null) {
+
+			}
+			onInventoryChanged();
+			return stack;
 		}
-	    }
+		return null;
 	}
-	return false;
-    }
+
+	public boolean pushBox(ItemStack itemStack) {
+
+		if (itemStack == null)
+			return false;
+		if (itemStack.stackSize != 1)
+			return false;
+		for (int i = 0; i < 6; i++) {
+			if (isValidInput(i, itemStack.itemID)) {
+				ItemStack slot = getStackInSlot(i);
+				if (slot == null) {
+					this.setInventorySlotContents(i, itemStack);
+					onInventoryChanged();
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
 }
