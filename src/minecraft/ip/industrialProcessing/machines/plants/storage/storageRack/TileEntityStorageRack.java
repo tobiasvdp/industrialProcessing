@@ -109,7 +109,7 @@ public class TileEntityStorageRack extends TileEntityMachine {
 	protected boolean isValidInput(int slot, int itemID) {
 		if (slot < 6)
 			return itemID == IndustrialProcessing.blockStorageBox.blockID;
-		return itemID != IndustrialProcessing.blockStorageBox.blockID;
+		return ((itemID != IndustrialProcessing.blockStorageBox.blockID)&&(getStackInSlot((slot - 6)/9) != null));
 	}
 
 	public ItemStack popBox() {
@@ -164,8 +164,8 @@ public class TileEntityStorageRack extends TileEntityMachine {
 
 	@Override
 	public void setInventorySlotContents(int slotIndex, ItemStack stack) {
-		if(slotIndex > 6 && stack != null && getStackInSlot((slotIndex - 6)/9) != null)
-		super.setInventorySlotContents(slotIndex, stack);
+		if(slotIndex < 6 || stack != null || (slotIndex >= 6 && getStackInSlot((slotIndex - 6)/9) != null))
+			super.setInventorySlotContents(slotIndex, stack);
 		if (slotIndex < 6 && stack != null) {
 			for (int i = 0; i < 9; i++) {
 				ItemStack stackFromBox = BlockStorageBox.getStackFromBox(stack, i, 64);
