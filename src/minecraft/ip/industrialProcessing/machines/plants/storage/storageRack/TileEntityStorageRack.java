@@ -4,6 +4,7 @@ import java.io.ObjectOutputStream.PutField;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
+import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.INamepace;
@@ -14,6 +15,10 @@ import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.machines.TileEntityMachine;
+import ip.industrialProcessing.machines.animation.AnimationHandler;
+import ip.industrialProcessing.machines.animation.AnimationMode;
+import ip.industrialProcessing.machines.animation.IAnimationSyncable;
+import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 import ip.industrialProcessing.machines.hydroCyclone.TileEntityHydroCyclone;
 import ip.industrialProcessing.machines.plants.storage.storageBox.BlockStorageBox;
 import ip.industrialProcessing.recipes.IRecipeBlock;
@@ -26,10 +31,15 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
-public class TileEntityStorageRack extends TileEntityMachine {
+public class TileEntityStorageRack extends TileEntityMachine implements IAnimationProgress, IAnimationSyncable{
+
+	private AnimationHandler animation;
 
 	public TileEntityStorageRack() {
-		// conveyors/pipes can't pick up boxes from here!
+		this.animation = new AnimationHandler(AnimationMode.CLAMP, 1f, true);
+		this.animation.setSpeed(0);
+		this.animation.setIncrementing(false);
+		
 		LocalDirection[] noDirection = new LocalDirection[0];
 		addStack(null, noDirection, true, false);
 		addStack(null, noDirection, true, false);
@@ -106,6 +116,26 @@ public class TileEntityStorageRack extends TileEntityMachine {
 	}
 
 	@Override
+	public void updateEntity() {
+		if(!worldObj.isRemote){
+			int count = 0;
+			for(int i =0;i<6;i++){
+				if (getStackInSlot(i) != null)
+					count++;
+			}
+			this.animation.setSpeed(this.animation.getSpeed()+0.01f);
+			this.animation.setAnimationProgress(count, 1);
+			TileAnimationSyncHandler.sendAnimationData(this, this.animation);
+			this.animation.update();
+			if((this.animation.getSpeed())>0.05f)
+				this.animation.setSpeed(0);
+		}else{
+			this.animation.update(); 
+		}
+		super.updateEntity();
+	}
+	
+	@Override
 	protected boolean isValidInput(int slot, int itemID) {
 		if (slot < 6)
 			return itemID == IndustrialProcessing.blockStorageBox.blockID;
@@ -178,6 +208,21 @@ public class TileEntityStorageRack extends TileEntityMachine {
 			}
 		}
 		onInventoryChanged();
+	}
+
+	@Override
+	public AnimationHandler getAnimationHandler() {
+		return this.animation;
+	}
+
+	@Override
+	public int getAnimationCount() {
+		return 1;
+	}
+
+	@Override
+	public float getAnimationProgress(float scale, int animationIndex) {
+		return this.animation.getAnimationProgress(scale);
 	}
 
 }

@@ -31,7 +31,6 @@ public class ModelStorageRackAnimated extends ModelAnimatedMachine {
 		Vector3f position = new Vector3f(0, 0, 0);
 		GL11.glPushMatrix();
 		GL11.glTranslatef(0, 1, 0);
-		GL11.glRotatef(progress * 360, 1, 0, 0);
 		Icon icon = new Icon() {
 
 			@Override
@@ -80,12 +79,8 @@ public class ModelStorageRackAnimated extends ModelAnimatedMachine {
 			}
 		};
 
-		IInventory te = (IInventory) tileEntity;
-		int count = 0;
-		for(int i =0;i<6;i++){
-			if (te.getStackInSlot(i) != null)
-				count++;
-		}
+		int count = Math.round(progressAr[0]);
+		
 
 		switch (count){
 		case 6:
