@@ -7,12 +7,14 @@ import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
+import ip.industrialProcessing.config.ISetupItems;
 import ip.industrialProcessing.gui.GuiLayout;
 import ip.industrialProcessing.gui.IGuiLayout;
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
 import ip.industrialProcessing.machines.plants.storage.storageBox.BlockStorageBox;
 import ip.industrialProcessing.transport.items.conveyorBelt.BlockConveyorBase;
+import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorConnectionsBase;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorInteractionBase;
 import ip.industrialProcessing.utils.IDescriptionBlock;
 import net.minecraft.block.Block;
@@ -20,6 +22,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
@@ -33,18 +36,15 @@ public class BlockConveyorPacker extends BlockConveyorBase implements IDescripti
     static {
 	guiLayout = new GuiLayout();
 	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 1);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, BlockStorageBox.STORAGE_SIZE); 
+	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, BlockStorageBox.STORAGE_SIZE);
     }
-    
-    
-    
+
     public BlockConveyorPacker() {
 	super(ConfigMachineBlocks.getBLtransportConveyorBeltPacker(), Material.iron, 5.0f, Block.soundMetalFootstep, "Packer", ISetupCreativeTabs.tabPower);
 	func_111022_d(null);
 	setBlockBounds(0, 0, 0, 1, 1, 1);
     }
- 
-    
+
     @Override
     public TileEntity createNewTileEntity(World world) {
 	return new TileEntityConveyorPacker();
@@ -57,7 +57,15 @@ public class BlockConveyorPacker extends BlockConveyorBase implements IDescripti
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
-	player.openGui(IndustrialProcessing.instance, 0, world, x, y, z);
+
+	ItemStack playerItem = player.inventory.getCurrentItem();
+
+	if (playerItem != null && (playerItem.itemID == ISetupItems.itemHexKey.itemID)) {
+	    TileEntityConveyorConnectionsBase conveyorBelt = (TileEntityConveyorConnectionsBase) world.getBlockTileEntity(x, y, z);
+	    conveyorBelt.toggleSlope();
+	    return false;
+	} else
+	    player.openGui(IndustrialProcessing.instance, 0, world, x, y, z);
 	return true;
     }
 
@@ -89,12 +97,12 @@ public class BlockConveyorPacker extends BlockConveyorBase implements IDescripti
     }
 
     @Override
-    public GuiLayout getGuiLayout() { 
+    public GuiLayout getGuiLayout() {
 	return guiLayout;
     }
 
     @Override
-    public String getDescription() { 
+    public String getDescription() {
 	return "Packs or Unpacks items to/from supplied Storage Boxes";
     }
 }
