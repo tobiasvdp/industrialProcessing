@@ -91,10 +91,11 @@ public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation
 	    ticks = 0;
 	    if (operationMode == PackerOperationMode.UNPACK) {
 		extractFromBox();
-	    } else if (operationMode == PackerOperationMode.PASS_THROUGH) {
-		ejectBox();
-	    } else
+	    } else {
 		checkBox();
+		if (operationMode == PackerOperationMode.PASS_THROUGH)
+		    ejectBox();
+	    }
 	}
     }
 
@@ -151,7 +152,10 @@ public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation
 		    if (configStack == null || configStack.isItemEqual(stack)) {
 			// only fetch configged items!
 			stack = IndustrialProcessing.blockStorageBox.getStackFromBox(box, i, 8);
-			this.addItemStack(stack, null);
+			MovingItemStack movingStack = this.addItemStack(stack, null);
+			// this stack can not be used anymore, don't allow it to
+			// get routed back into the slot.
+			movingStack.routed = true;
 			hasExtracted = true;
 			onInventoryChanged();
 			break;
@@ -194,7 +198,10 @@ public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation
 		}
 	    }
 	    if (boxAllowedOnConveyor) {
-		this.addItemStack(slots[0], null);
+		MovingItemStack stack = this.addItemStack(slots[0], null);
+		// this stack can not be used anymore, don't allow it to get
+		// routed back into the slot.
+		stack.routed = true;
 		slots[0] = null;
 		onInventoryChanged();
 		return;
@@ -204,51 +211,52 @@ public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation
 
     @Override
     protected void rerouteStack(MovingItemStack stack) {
-	if (operationMode == PackerOperationMode.PACK_ANY || operationMode == operationMode.PACK_FULL || operationMode == PackerOperationMode.PASS_THROUGH) {
-	    if (boxAllowedOnConveyor && stack.stack != null && stack.stack.itemID == IndustrialProcessing.blockStorageBox.blockID) {
-		if (slots[0] == null) {
-		    ItemStack oneBox = stack.stack.splitStack(1);
-		    slots[0] = oneBox;
-		    if (stack.stack == null || stack.stack.stackSize == 0)
-			this.itemStacks.remove(stack);
-		    onInventoryChanged();
-		    syncConveyor();
-		}
-	    } else if (operationMode == PackerOperationMode.PACK_ANY || operationMode == operationMode.PACK_FULL) {
-		ItemStack box = slots[0];
-		if (box != null && box.itemID == IndustrialProcessing.blockStorageBox.blockID && stack.stack != null) {
-		    boolean packed = false;
-		    boolean accepted = false;
-		    for (int cI = 1; cI < slots.length; cI++) {
-			int bI = cI - 1;
-			ItemStack configSlot = slots[cI];
-			if (configSlot == null || configSlot.isItemEqual(stack.stack)) {
-			    accepted = true;
-			    ItemStack rest = putItemInBox(stack.stack, box, bI);
-			    if (rest == null || rest.stackSize <= 0) {
-				packed = true;
-				if (this.itemStacks.remove(stack)) {
-				    this.syncConveyor();
-				    break;
-				}
-			    } else {
-				if (rest.stackSize != stack.stack.stackSize) {
-				    packed = true;
-				    stack.stack = rest;
-				    this.syncConveyor();
-				}
+	if (boxAllowedOnConveyor && stack.stack != null && stack.stack.itemID == IndustrialProcessing.blockStorageBox.blockID) {
+	    if (slots[0] == null) {
+		ItemStack oneBox = stack.stack.splitStack(1);
+		slots[0] = oneBox;
+		if (stack.stack == null || stack.stack.stackSize == 0)
+		    this.itemStacks.remove(stack);
+		onInventoryChanged();
+		syncConveyor();
+		stack.routed = true;
+		return;
+	    }
+	}
+	if (operationMode == PackerOperationMode.PACK_ANY || operationMode == operationMode.PACK_FULL) {
+	    ItemStack box = slots[0];
+	    if (box != null && box.itemID == IndustrialProcessing.blockStorageBox.blockID && stack.stack != null) {
+		boolean packed = false;
+		boolean accepted = false;
+		for (int cI = 1; cI < slots.length; cI++) {
+		    int bI = cI - 1;
+		    ItemStack configSlot = slots[cI];
+		    if (configSlot == null || configSlot.isItemEqual(stack.stack)) {
+			accepted = true;
+			ItemStack rest = putItemInBox(stack.stack, box, bI);
+			if (rest == null || rest.stackSize <= 0) {
+			    packed = true;
+			    if (this.itemStacks.remove(stack)) {
+				this.syncConveyor();
+				break;
 			    }
-			    onInventoryChanged();
+			} else {
+			    if (rest.stackSize != stack.stack.stackSize) {
+				packed = true;
+				stack.stack = rest;
+				this.syncConveyor();
+			    }
 			}
+			onInventoryChanged();
 		    }
-		    if (accepted && !packed) {
-			// box might be full?!
-			if (operationMode == PackerOperationMode.PACK_ANY)
+		}
+		if (accepted && !packed) {
+		    // box might be full?!
+		    if (operationMode == PackerOperationMode.PACK_ANY)
+			ejectBox();
+		    else if (operationMode == PackerOperationMode.PACK_FULL)
+			if (isBoxFull())
 			    ejectBox();
-			else if (operationMode == PackerOperationMode.PACK_FULL)
-			    if (isBoxFull())
-				ejectBox();
-		    }
 		}
 	    }
 	}

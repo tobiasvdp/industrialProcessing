@@ -190,7 +190,7 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
 	ItemTransfers.launch(stack.stack, this.worldObj, this.xCoord + 0.5f + dx * 0.5f, this.yCoord + dy * 0.5f, this.zCoord + 0.5f + dz * 0.5f, (dx + rx) / 10, (dy + ry) / 10, (dz + rz) / 10);
     }
 
-    public void addItemStack(ItemStack stack, ForgeDirection source) {
+    public MovingItemStack addItemStack(ItemStack stack, ForgeDirection source) {
 	MovingItemStack movingStack = new MovingItemStack();
 	movingStack.stack = stack;
 	if (source == null) {
@@ -206,7 +206,7 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
 	int index = this.itemStacks.size();
 	this.itemStacks.add(movingStack);
 	syncConveyor();
-
+	return movingStack;
     }
 
     private boolean outputToConveyor(MovingItemStack stack, TileEntityConveyorTransportBase neighbor, ForgeDirection inputSide) {
