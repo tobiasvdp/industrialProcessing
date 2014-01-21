@@ -18,6 +18,8 @@ public class ModelGarageDoor extends ModelBlock {
 	ObjRotator box = new ObjRotator(new Box001(), 0);
 	ObjRotator front = new ObjRotator(new Object001(), 0);
 	ObjRotator back = new ObjRotator(new Object002(), 0);
+	ObjRotator left = new ObjRotator(new LeftBar(), 0);
+	ObjRotator right = new ObjRotator(new RightBar(), 0);
 
 	@Override
 	public void renderInventory(Block block, int metadata, int modelID, RenderBlocks renderer) {
@@ -37,7 +39,19 @@ public class ModelGarageDoor extends ModelBlock {
 		int dir = BlockMachine.getMetadataFromForward(forward);
 
 		Icon iconGarage = reference.getIcon(0);
+		Icon iconIron = reference.getIcon(1);
+		
+		if (forward != null) {
+			ForgeDirection dirLeft = forward.getRotation(ForgeDirection.DOWN);
+			if (reference.world.getBlockId(reference.x + dirLeft.offsetX, reference.y + dirLeft.offsetY, reference.z + dirLeft.offsetZ) == 0 || reference.world.isBlockSolidOnSide(reference.x + dirLeft.offsetX, reference.y + dirLeft.offsetY, reference.z + dirLeft.offsetZ, dirLeft.getOpposite(), true)) {
+				left.getRotated(dir).renderMesh(false, iconIron, reference);
+			}
 
+			ForgeDirection dirRight = forward.getRotation(ForgeDirection.UP);
+			if (reference.world.getBlockId(reference.x + dirRight.offsetX, reference.y + dirRight.offsetY, reference.z + dirRight.offsetZ) == 0 || reference.world.isBlockSolidOnSide(reference.x + dirRight.offsetX, reference.y + dirRight.offsetY, reference.z + dirRight.offsetZ, dirRight.getOpposite(), true)) {
+				right.getRotated(dir).renderMesh(false, iconIron, reference);
+			}
+		}
 		if (!((TileEntityGarageDoorDoor) entity).hide) {
 			box.getRotated(dir).renderMesh(false, iconGarage, reference);
 			front.getRotated(dir).renderMesh(false, iconGarage, reference);
