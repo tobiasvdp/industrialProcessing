@@ -19,7 +19,7 @@ public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation
     private static int tickOffset;
     ItemStack[] slots = new ItemStack[10];
     private PackerOperationMode operationMode = PackerOperationMode.PACK_FULL;
-    private int updateCycle = 50;
+    private int updateCycle = 20;
     private int ticks = 0;
     private LocalDirection boxInput = LocalDirection.LEFT;
     private LocalDirection boxOutput = LocalDirection.RIGHT;
@@ -74,14 +74,16 @@ public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation
     }
 
     private void fetchBox() {
-	if (slots[0] == null) { 
+	if (slots[0] == null) {
 	    ForgeDirection left = DirectionUtils.getWorldDirection(boxInput, this.forwardDirection);
 	    TileEntity te = this.worldObj.getBlockTileEntity(xCoord + left.offsetX, yCoord + left.offsetY, zCoord + left.offsetZ);
 	    if (te instanceof TileEntityStorageRack) {
 		TileEntityStorageRack rack = (TileEntityStorageRack) te;
 		ItemStack box = rack.popBox();
-		slots[0] = box;
-		notifyBlockChange();
+		if (box != null) {
+		    slots[0] = box;
+		    onInventoryChanged();
+		}
 	    }
 	}
     }
@@ -94,8 +96,9 @@ public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation
 		TileEntityStorageRack rack = (TileEntityStorageRack) te;
 		if (rack.pushBox(slots[0])) {
 		    slots[0] = null;
+		    onInventoryChanged();
 		}
-		notifyBlockChange();
+
 	    }
 	}
     }
@@ -244,7 +247,7 @@ public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation
 
     @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-	return (i == 0) ^ (itemstack != null && itemstack.itemID == IndustrialProcessing.blockStorageBox.blockID);
+	return !((i == 0) ^ (itemstack != null && itemstack.itemID == IndustrialProcessing.blockStorageBox.blockID));
     }
 
     @Override

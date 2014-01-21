@@ -30,6 +30,7 @@ public class TileEntityConveyorChute extends TileEntityConveyorInventoryBase {
         Arrays.fill(canReverse, false);
         Arrays.fill(canSlope, false);
         canReverse[LocalDirection.DOWN.ordinal()] = true; 
+        this.speed = 1;
     }
 
     @Override

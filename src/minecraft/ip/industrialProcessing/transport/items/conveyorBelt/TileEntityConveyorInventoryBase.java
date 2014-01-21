@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
-public abstract class TileEntityConveyorInventoryBase extends TileEntityConveyorPowerTranslation {
+public abstract class TileEntityConveyorInventoryBase extends TileEntityConveyorInteractionBase {
 
     private int updateCycle = 10;
     private int ticks = 0;

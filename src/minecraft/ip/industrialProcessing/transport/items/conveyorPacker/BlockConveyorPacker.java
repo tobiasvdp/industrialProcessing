@@ -31,8 +31,8 @@ public class BlockConveyorPacker extends BlockConveyorBase implements IDescripti
     public static GuiLayout guiLayout;
     static {
 	guiLayout = new GuiLayout();
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInventory).setSlotLayout(SlotLayoutType.horizontal, 1);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInventory).setSlotLayout(SlotLayoutType.horizontal, 9); 
+	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 1);
+	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 9); 
     }
     
     
