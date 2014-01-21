@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 
 public class BlockIronPole  extends BlockMultiblockDummy{
 
-    Icon[] icons = new Icon[2];
+    Icon[] icons = new Icon[3];
 	public BlockIronPole() {
 		super(ConfigMachineBlocks.getBlockIronPoleID(), "BlockIronPole", ISetupCreativeTabs.tabMultiblocks);
 		this.setBlockBounds(0.25f, 0.0f, 0.25f, 0.75f, 1.0f, 0.75f);
@@ -39,6 +39,7 @@ public class BlockIronPole  extends BlockMultiblockDummy{
     public void registerIcons(IconRegister par1IconRegister) {
         icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Iron");
         icons[1] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "iron_block");
+        icons[2] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "powerOutlet");
     }
 
 }

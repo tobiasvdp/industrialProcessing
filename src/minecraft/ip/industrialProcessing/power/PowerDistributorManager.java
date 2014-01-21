@@ -16,12 +16,12 @@ public class PowerDistributorManager {
     private PowerDistributor distributor = new PowerDistributor();
     private IPowerOutput supplier;
 
-    public PowerDistributorManager(TileEntityMachine entity, IPowerOutput supplier) {
+    public PowerDistributorManager(TileEntity entity, IPowerOutput supplier) {
 	this.entity = entity;
 	this.supplier = supplier;
     }
 
-    protected TileEntityMachine entity;
+    protected TileEntity entity;
 
     public void searchPowerAcceptors() {
 	ArrayList<PowerAcceptorConnection> connections = new ArrayList<PowerAcceptorConnection>();

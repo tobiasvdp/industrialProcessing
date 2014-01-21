@@ -5,6 +5,7 @@ import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.subMod.power.IPPower;
 import ip.industrialProcessing.subMod.power.plant.creative.TileEntityCreativeGenerator;
+import ip.industrialProcessing.subMod.power.plant.solar.standingSolarPanel.TileEntityStandingSolarPanel;
 import ip.industrialProcessing.utils.registry.BlockType;
 
 public class ConfigPower {
@@ -12,8 +13,12 @@ public class ConfigPower {
 	
 	private int creativeEngineID = IPPower.config.get(ConfigCategories.power.toString(), "creativeEngineID", 840).getInt();
 	
+	private int standingSolarPanelID = IPPower.config.get(ConfigCategories.power.toString(), "standingSolarPanelID", 841).getInt();
+	private int rendererStandingSolarPanel;
+	
 	public void register(){
-		ConfigMachineBlocks.getInstance().registerMachineBlock(IPPower.blockCreativeGenerator, "IP.Power.Creat", "Creative engine", TileEntityCreativeGenerator.class, BlockType.Machine, BlockType.Power);
+		ConfigMachineBlocks.getInstance().registerMachineBlock(IPPower.blockCreativeGenerator, "IP.Power.Creat", "Creative engine", TileEntityCreativeGenerator.class, BlockType.Power);
+		ConfigMachineBlocks.getInstance().registerMachineBlock(IPPower.blockStandingSolarPanel, "IP.Power.StSolar", "Standing solar panels", TileEntityStandingSolarPanel.class, BlockType.Power);
 	}
 	
 	public static ConfigPower getInstance() {
@@ -22,5 +27,17 @@ public class ConfigPower {
 	
 	public static int getCreativeEngineID(){
 		return getInstance().creativeEngineID;
+	}
+	
+	public static int getStandingSolarPanelID(){
+		return getInstance().standingSolarPanelID;
+	}
+	
+	public static int getRendererStandingSolarPanel(){
+		return getInstance().rendererStandingSolarPanel;
+	}
+	
+	public static void setRendererStandingSolarPanel(int id){
+		getInstance().rendererStandingSolarPanel = id;
 	}
 }
