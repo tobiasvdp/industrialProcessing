@@ -106,7 +106,15 @@ public class ConfigRenderers {
     private int rendererStorageRack;
     private int rendererStorageBox;
     private int rendererConveyorPackerId;
+    private int rendererIronPoleId;
 
+    public static void setRendererIronPole(int var) {
+	getInstance().rendererIronPoleId = var;
+    }
+
+    public static int getRendererIronPole() {
+	return getInstance().rendererIronPoleId;
+    }
     public static void setRendererStorageBox(int var) {
 	getInstance().rendererStorageBox = var;
     }

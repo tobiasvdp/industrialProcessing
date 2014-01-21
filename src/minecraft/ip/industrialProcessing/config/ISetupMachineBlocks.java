@@ -73,6 +73,7 @@ import ip.industrialProcessing.multiblock.dummy.block.frame.BLmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.inventory.input.BLmultiblockInvInput;
 import ip.industrialProcessing.multiblock.dummy.block.inventory.output.BLmultiblockInvOutput;
 import ip.industrialProcessing.multiblock.dummy.block.ironBowl.BlockIronBowl;
+import ip.industrialProcessing.multiblock.dummy.block.ironPole.BlockIronPole;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.BLmultiblockLiftDoor;
 import ip.industrialProcessing.multiblock.dummy.block.screen.BlockScreen;
 import ip.industrialProcessing.multiblock.dummy.block.tankPlating.BlockTankPlating;
@@ -159,6 +160,7 @@ public interface ISetupMachineBlocks {
     public final static BlockControlBox blockControlBox = new BlockControlBox();
     public final static BlockStorageRack blockStorageRack = new BlockStorageRack();
     public final static BlockStorageBox blockStorageBox = new BlockStorageBox();
+    public final static BlockIronPole blockIronPole = new BlockIronPole();
 
     // create generators
     public final static BlockManualGenerator blockManualGenerator = new BlockManualGenerator();

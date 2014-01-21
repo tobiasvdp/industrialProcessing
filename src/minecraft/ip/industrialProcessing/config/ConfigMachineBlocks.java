@@ -75,6 +75,7 @@ import ip.industrialProcessing.multiblock.dummy.block.frame.TEmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.inventory.input.TEmultiblockInvInput;
 import ip.industrialProcessing.multiblock.dummy.block.inventory.output.TEmultiblockInvOutput;
 import ip.industrialProcessing.multiblock.dummy.block.ironBowl.TileEntityIronBowl;
+import ip.industrialProcessing.multiblock.dummy.block.ironPole.TileEntityIronPole;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.TEmultiblockLiftDoor;
 import ip.industrialProcessing.multiblock.dummy.block.screen.TileEntityScreen;
 import ip.industrialProcessing.multiblock.dummy.block.tankPlating.TileEntityTankPlating;
@@ -230,6 +231,7 @@ public class ConfigMachineBlocks {
     private int blockGarageDoorFrameID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "blockGarageDoorFrameID", 768).getInt();
     private int blockGarageDoorDoorID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "blockGarageDoorDoorID", 769).getInt();
     private int blockControlBoxID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "blockControlBoxID", 770).getInt();
+    private int blockIronPoleID = IndustrialProcessing.config.get(ConfigCategories.multiblocks.toString(), "blockIronPoleID", 771).getInt();
 
     private int BLtransportConveyorBelt = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "ConveyorBeltID", 735).getInt();
     private int BLtransportConveyorBeltInput = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "ConveyorBeltInputID", 736).getInt();
@@ -305,6 +307,7 @@ public class ConfigMachineBlocks {
 	registerMachineBlock(ISetupMachineBlocks.blockGarageDoorFrame, "IP.MBD.GarageF", "Garage door frame", TileEntityGarageDoorFrame.class, BlockType.decoration);
 	registerMachineBlock(ISetupMachineBlocks.blockGarageDoorDoor, "IP.MBD.GarageD", "Garage door", TileEntityGarageDoorDoor.class, BlockType.decoration);
 	registerMachineBlock(ISetupMachineBlocks.blockControlBox, "IP.MBD.CtrlB", "Control box", TileEntityControlBox.class, BlockType.decoration);
+	registerMachineBlock(ISetupMachineBlocks.blockIronPole, "IP.MBD.IronP", "Iron pole", TileEntityIronPole.class, BlockType.decoration);
 
 	// register entitys associated with multiblocks
 
@@ -423,6 +426,9 @@ public class ConfigMachineBlocks {
 	return instance;
     }
 
+    public static int getBlockIronPoleID() {
+    	return getInstance().blockIronPoleID;
+        }
     public static int getBlockStorageBoxID() {
 	return getInstance().storageBoxID;
     }
