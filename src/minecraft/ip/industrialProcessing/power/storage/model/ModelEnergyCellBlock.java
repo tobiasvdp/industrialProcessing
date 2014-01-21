@@ -50,8 +50,8 @@ public class ModelEnergyCellBlock extends ModelBlock {
 
 	hull.getRotated(dir).renderMesh(false, hullIcon, reference);
 	features.getRotated(dir).renderMesh(false, powerIcon, reference);
-	connectorSide.getRotated(dir).renderMesh(false, powerIcon, reference);
-	connectorSide.getRotated(dir + 2).renderMesh(false, powerOutIcon, reference);
+	connectorSide.getRotated(dir + 2).renderMesh(false, powerIcon, reference);
+	connectorSide.getRotated(dir).renderMesh(false, powerOutIcon, reference);
 	rails.getRotated(dir).renderMesh(false, batteryIcon, reference);
 	return true;
     }

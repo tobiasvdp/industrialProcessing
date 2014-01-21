@@ -14,9 +14,9 @@ import ip.industrialProcessing.power.BlockPowerGenerator;
 
 public class BlockEnergyCell extends BlockPowerGenerator {
 
-    Icon[] icons = new Icon[3];
+    Icon[] icons = new Icon[4];
     public BlockEnergyCell() {
-	super(ConfigMachineBlocks.getEnergyCellBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Battery Box", ISetupCreativeTabs.tabPower);
+	super(ConfigMachineBlocks.getEnergyCellBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Energy Cell", ISetupCreativeTabs.tabPower);
 	this.setBlockBounds(0, 0, 0, 1, 13/16f, 1);
     }
 
@@ -40,5 +40,6 @@ public class BlockEnergyCell extends BlockPowerGenerator {
         icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "generatorFeatures");
         icons[1] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "tankSide");
         icons[2] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "battery"); 
+        icons[3] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "powerFeatures"); 
     }
 }
