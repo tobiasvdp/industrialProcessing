@@ -47,7 +47,8 @@ public class TileEntityGarageDoor extends TileEntityMultiblockCore implements IS
 		int i = 0;
 		layout.setCoreID(i++, 0, 1, ISetupMachineBlocks.blockGarageDoor.blockID);
 
-		for (int j = 1; j <= 10; j++)
+		layout.setBlockID(1, 0, 0, i++, 0, 1, ISetupMachineBlocks.blockGarageDoorFrame.blockID);
+		for (int j = 2; j <= 10; j++)
 			layout.setBlockID(j, 0, 0, i++, 0, 1, ISetupMachineBlocks.blockGarageDoorFrame.blockID, -1);
 
 		structure.addLayout(layout, FacingDirection.North);

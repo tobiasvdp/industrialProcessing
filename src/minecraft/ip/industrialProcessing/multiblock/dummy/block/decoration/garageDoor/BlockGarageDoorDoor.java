@@ -20,10 +20,11 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeDirection;
 
 public class BlockGarageDoorDoor extends BlockContainer {
 
-	Icon[] icons = new Icon[1];
+	Icon[] icons = new Icon[2];
 
 	public BlockGarageDoorDoor() {
 		super(ConfigMachineBlocks.getBlockGarageDoorDoorID(), Material.iron);
@@ -31,6 +32,11 @@ public class BlockGarageDoorDoor extends BlockContainer {
 		setStepSound(Block.soundMetalFootstep);
 		setUnlocalizedName("BlockGarageDoorDoor");
 		setCreativeTab(ISetupCreativeTabs.tabMultiblocks);
+	}
+	
+	@Override
+	public boolean isBlockSolidOnSide(World world, int x, int y, int z, ForgeDirection side) {
+		return false;
 	}
 
 	@Override
@@ -72,6 +78,7 @@ public class BlockGarageDoorDoor extends BlockContainer {
 	@Override
 	public void registerIcons(IconRegister par1IconRegister) {
 		icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "blockGarage");
+		icons[1] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "iron_block");
 	}
 
 	public MovingObjectPosition collisionRayTrace(World par1World, int par2, int par3, int par4, Vec3 par5Vec3, Vec3 par6Vec3) {
@@ -97,5 +104,11 @@ public class BlockGarageDoorDoor extends BlockContainer {
 	public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
 		if (!((TileEntityGarageDoorDoor) par1World.getBlockTileEntity(par2, par3, par4)).hide)
 			super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
+	}
+	
+	@Override
+	public float getBlockBrightness(IBlockAccess par1iBlockAccess, int par2, int par3, int par4) {
+		// TODO Auto-generated method stub
+		return 14;
 	}
 }

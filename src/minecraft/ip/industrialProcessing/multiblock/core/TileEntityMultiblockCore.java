@@ -39,7 +39,7 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 		return FacingDirectionToForge(side);
 	}
 
-	private ForgeDirection FacingDirectionToForge(FacingDirection side2) {
+	public static ForgeDirection FacingDirectionToForge(FacingDirection side2) {
 		switch (side2) {
 		case East:
 			return ForgeDirection.WEST;
@@ -53,6 +53,42 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 			return ForgeDirection.EAST;
 		default:
 			return ForgeDirection.UNKNOWN;
+
+		}
+	}
+	
+	public static ForgeDirection ForgeToFacingDirectionForge(ForgeDirection side2) {
+		switch (side2) {
+		case EAST:
+			return ForgeDirection.WEST;
+		case UNKNOWN:
+			return ForgeDirection.UNKNOWN;
+		case NORTH:
+			return ForgeDirection.NORTH;
+		case SOUTH:
+			return ForgeDirection.SOUTH;
+		case WEST:
+			return ForgeDirection.EAST;
+		default:
+			return ForgeDirection.UNKNOWN;
+
+		}
+	}
+	
+	public static FacingDirection ForgeToFacingDirection(ForgeDirection side2) {
+		switch (side2) {
+		case EAST:
+			return FacingDirection.West;
+		case UNKNOWN:
+			return FacingDirection.Invalid;
+		case NORTH:
+			return FacingDirection.North;
+		case SOUTH:
+			return FacingDirection.South;
+		case WEST:
+			return FacingDirection.East;
+		default:
+			return FacingDirection.Invalid;
 
 		}
 	}
