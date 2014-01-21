@@ -137,7 +137,7 @@ import ip.industrialProcessing.transport.fluids.models.pump.ModelPumpBlock;
 import ip.industrialProcessing.transport.fluids.models.raintank.ModelRainTankBlock;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorBelt;
 import ip.industrialProcessing.transport.items.conveyorBelt.rendering.ModelConveyorBeltTile;
-import ip.industrialProcessing.transport.items.conveyorInput.ModelConveyorInput;
+import ip.industrialProcessing.transport.items.conveyorInput.model.ModelConveyorInputBlock;
 import ip.industrialProcessing.transport.items.conveyorModels.ModelConveyorBeltBlock;
 import ip.industrialProcessing.transport.items.conveyorModels.ModelConveyorChuteBlock;
 import ip.industrialProcessing.transport.items.conveyorModels.ModelConveyorOutputBlock;
@@ -201,8 +201,7 @@ public class ClientProxy extends CommonProxy {
     private static final ModelBlock conveyorBeltBlock = new ModelConveyorBeltBlock();
     private static final ModelBlock conveyorOutputBlock = new ModelConveyorOutputBlock();
     private static final ModelBlock conveyorSorterBlock = new ModelConveyorSorterBlock();
-    private static final ModelBlock conveyorChuteBlock = new ModelConveyorChuteBlock();
-    private static final ModelConnected conveyorInput = new ModelConveyorInput();
+    private static final ModelBlock conveyorChuteBlock = new ModelConveyorChuteBlock(); 
     private static final ModelConnected conveyorOutput = new ModelConveyorOutput();
     private static final ModelConnected conveyorSorter = new ModelConveyorSorter();
     private static final ModelBlock platform = new ModelPlatform();
@@ -250,6 +249,7 @@ public class ClientProxy extends CommonProxy {
     private static final ModelStorageRackAnimated modelStorageRackAnimated = new ModelStorageRackAnimated();
     private static final ModelStorageBox modelStorageBox = new ModelStorageBox();
     private static final ModelBlock modelConveyorPacker = new ModelConveyorPackerBlock();
+    private static final ModelBlock modelConveyorInput = new ModelConveyorInputBlock();
     private static final ModelIronPole modelIronPole = new ModelIronPole();
     
     @Override
@@ -348,6 +348,9 @@ public class ClientProxy extends CommonProxy {
 	 
 	ConfigRenderers.setRendererConveyorPackerID(RenderingRegistry.getNextAvailableRenderId()); 
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererConveyorPackerID(), modelConveyorPacker ));
+
+	ConfigRenderers.setRendererConveyorInputID(RenderingRegistry.getNextAvailableRenderId()); 
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererConveyorInputID(), modelConveyorInput ));
 	
 	ConfigRenderers.setRendererIronPole(RenderingRegistry.getNextAvailableRenderId()); 
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererIronPole(), modelIronPole ));
