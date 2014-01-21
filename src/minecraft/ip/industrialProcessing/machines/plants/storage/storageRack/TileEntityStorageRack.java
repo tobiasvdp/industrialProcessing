@@ -127,8 +127,9 @@ public class TileEntityStorageRack extends TileEntityMachine {
 		if (i > 6) {
 			return super.decrStackSize(i, j);
 		}
-		ItemStack stack = getStackInSlot(i).copy();
-		if (stack != null) {
+		
+		if (getStackInSlot(i) != null) {
+			ItemStack stack = getStackInSlot(i).copy();
 			for (int k = 0; k < 9; k++) {
 				ItemStack stackInSlot = getStackInSlot(6 + i * 9 + k);
 				if (stackInSlot != null) {
