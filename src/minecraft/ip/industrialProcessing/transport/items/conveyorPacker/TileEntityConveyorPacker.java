@@ -7,13 +7,14 @@ import ip.industrialProcessing.machines.plants.storage.storageRack.TileEntitySto
 import ip.industrialProcessing.transport.items.conveyorBelt.ConnectionMode;
 import ip.industrialProcessing.transport.items.conveyorBelt.MovingItemStack;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorInteractionBase;
+import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorPowerTranslation;
 import ip.industrialProcessing.utils.DirectionUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TileEntityConveyorPacker extends TileEntityConveyorInteractionBase implements IMachineContainerEntity {
+public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation implements IMachineContainerEntity {
 
     private static int tickOffset;
     ItemStack[] slots = new ItemStack[10];
