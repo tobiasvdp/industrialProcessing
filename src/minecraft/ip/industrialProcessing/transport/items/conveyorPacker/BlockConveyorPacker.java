@@ -11,6 +11,7 @@ import ip.industrialProcessing.gui.GuiLayout;
 import ip.industrialProcessing.gui.IGuiLayout;
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
+import ip.industrialProcessing.machines.plants.storage.storageBox.BlockStorageBox;
 import ip.industrialProcessing.transport.items.conveyorBelt.BlockConveyorBase;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorInteractionBase;
 import ip.industrialProcessing.utils.IDescriptionBlock;
@@ -32,8 +33,9 @@ public class BlockConveyorPacker extends BlockConveyorBase implements IDescripti
     static {
 	guiLayout = new GuiLayout();
 	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 1);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 9); 
+	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, BlockStorageBox.STORAGE_SIZE); 
     }
+    
     
     
     public BlockConveyorPacker() {
@@ -41,7 +43,8 @@ public class BlockConveyorPacker extends BlockConveyorBase implements IDescripti
 	func_111022_d(null);
 	setBlockBounds(0, 0, 0, 1, 1, 1);
     }
-
+ 
+    
     @Override
     public TileEntity createNewTileEntity(World world) {
 	return new TileEntityConveyorPacker();

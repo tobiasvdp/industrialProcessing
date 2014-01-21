@@ -37,12 +37,13 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class BlockStorageBox extends BlockMachineRendered implements IDescriptionBlock, IGuiLayout {
     public static GuiLayout guiLayout;
-    private static final int STORAGE_SIZE = 9;
+    public static final int STORAGE_SIZE = 9;
     static {
 	guiLayout = new GuiLayout();
 	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.vertical, STORAGE_SIZE);
     }
     private Icon[] icons = new Icon[1];
+
     public BlockStorageBox() {
 	super(ConfigMachineBlocks.getBlockStorageBoxID(), Material.iron, 1F, Block.soundMetalFootstep, "BlockStorageBox", ISetupCreativeTabs.tabOreProcessing);
     }
@@ -141,17 +142,15 @@ public class BlockStorageBox extends BlockMachineRendered implements IDescriptio
 
     public ItemStack putStackInBox(ItemStack stack, ItemStack box, int slot) {
 	if (box.itemID == this.blockID && slot >= 0 && slot < STORAGE_SIZE && stack != null && stack.itemID != this.blockID) {
+	    if (box.stackTagCompound == null)
+		box.setTagCompound(new NBTTagCompound());
 	    ItemStack slotStack = getStackInSlot(box, slot);
 	    if (slotStack == null) {
-		slotStack = new ItemStack(stack.itemID, 0, 0);
-		int transferCount = Math.min(64, stack.stackSize);
-		ItemStack originalStack = stack.copy();
-		ItemStack split = stack.splitStack(transferCount);
-		slotStack.stackSize += split.stackSize;
-		if (transferCount > 0) {
+		slotStack = stack;
+		if (stack.stackSize > 0) {
 		    if (!setStackInSlot(box, slot, slotStack)) {
 			// adding failed for some weird nbt reason
-			return originalStack;
+			return stack;
 		    }
 		}
 		if (stack.stackSize <= 0)
@@ -178,11 +177,13 @@ public class BlockStorageBox extends BlockMachineRendered implements IDescriptio
     }
 
     public ItemStack getStackFromBox(ItemStack box, int slot, int amount) {
-	if (box.itemID == this.blockID && slot >= 0 && slot < STORAGE_SIZE) {
+	if (box != null && box.itemID == this.blockID && box.stackTagCompound != null && slot >= 0 && slot < STORAGE_SIZE) {
 	    ItemStack stack = getStackInSlot(box, slot);
 	    if (stack != null) {
 		amount = Math.min(amount, stack.stackSize);
 		ItemStack result = stack.splitStack(amount);
+		if (stack != null && stack.stackSize <= 0)
+		    stack = null;
 		if (setStackInSlot(box, slot, stack))
 		    return result;
 	    }
@@ -191,7 +192,7 @@ public class BlockStorageBox extends BlockMachineRendered implements IDescriptio
     }
 
     public ItemStack peekStackFromBox(ItemStack box, int slot) {
-	if (box.itemID == this.blockID && slot >= 0 && slot < STORAGE_SIZE) {
+	if (box != null && box.itemID == this.blockID && box.stackTagCompound != null && slot >= 0 && slot < STORAGE_SIZE) {
 	    ItemStack stack = getStackInSlot(box, slot);
 	    if (stack != null)
 		return stack.copy();
@@ -210,7 +211,12 @@ public class BlockStorageBox extends BlockMachineRendered implements IDescriptio
 	}
 	if (slot < list.tagCount()) {
 	    NBTTagCompound compound = (NBTTagCompound) list.tagAt(slot);
-	    stack.writeToNBT(compound);
+	    if (stack == null)
+		compound.setBoolean("NullStack", true);
+	    else {
+		compound.setBoolean("NullStack", false);
+		stack.writeToNBT(compound);
+	    }
 	    return true;
 	}
 	return false;
@@ -232,6 +238,10 @@ public class BlockStorageBox extends BlockMachineRendered implements IDescriptio
 	    NBTTagList list = box.stackTagCompound.getTagList("Slots");
 	    if (slot < list.tagCount()) {
 		NBTTagCompound tag = (NBTTagCompound) list.tagAt(slot);
+
+		boolean isNullTag = tag.hasKey("NullStack") && tag.getBoolean("NullStack");
+		if (isNullTag)
+		    return null;
 		return ItemStack.loadItemStackFromNBT(tag);
 	    }
 	}

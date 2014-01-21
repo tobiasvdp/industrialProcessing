@@ -3,6 +3,7 @@ package ip.industrialProcessing.transport.items.conveyorPacker;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.containers.IMachineContainerEntity;
+import ip.industrialProcessing.machines.plants.storage.storageBox.BlockStorageBox;
 import ip.industrialProcessing.machines.plants.storage.storageRack.TileEntityStorageRack;
 import ip.industrialProcessing.transport.items.conveyorBelt.ConnectionMode;
 import ip.industrialProcessing.transport.items.conveyorBelt.MovingItemStack;
@@ -11,13 +12,15 @@ import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorPo
 import ip.industrialProcessing.utils.DirectionUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
 public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation implements IMachineContainerEntity {
 
     private static int tickOffset;
-    ItemStack[] slots = new ItemStack[10];
+    ItemStack[] slots = new ItemStack[1 + BlockStorageBox.STORAGE_SIZE];
     private PackerOperationMode operationMode = PackerOperationMode.PACK_FULL;
     private int updateCycle = 20;
     private int ticks = 0;
@@ -36,6 +39,18 @@ public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation
     }
 
     @Override
+    public void toggleSlope() {
+	int index = operationMode.ordinal();
+	index++;
+	index %= 3;
+	operationMode = PackerOperationMode.values()[index];
+    }
+ 
+    public PackerOperationMode getOperationMode() {
+	return operationMode;
+    }
+    
+    @Override
     public void updateEntity() {
 	super.updateEntity();
 	if (ticks++ > updateCycle) {
@@ -44,6 +59,39 @@ public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation
 		extractFromBox();
 	    } else
 		checkBox();
+	}
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound nbt) {
+	super.writeToNBT(nbt);
+	if (operationMode != null)
+	    nbt.setInteger("Mode", operationMode.ordinal());
+	NBTTagList list = new NBTTagList();
+	nbt.setTag("Slots", list);
+	for (int i = 0; i < slots.length; i++) {
+	    if (slots[i] != null) {
+		NBTTagCompound compound = new NBTTagCompound();
+		compound.setInteger("Slot", i);
+		slots[i].writeToNBT(compound);
+	    }
+	}
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound nbt) {
+	super.readFromNBT(nbt);
+	if (nbt.hasKey("Mode"))
+	    operationMode = PackerOperationMode.values()[nbt.getInteger("Mode")];
+	if (nbt.hasKey("Slots")) {
+	    NBTTagList list = nbt.getTagList("Slots");
+	    for (int i = 0; i < list.tagCount(); i++) {
+		NBTTagCompound compound = (NBTTagCompound) list.tagAt(i);
+		int index = compound.getInteger("Slot");
+		ItemStack stack = ItemStack.loadItemStackFromNBT(compound);
+		if (index >= 0 && index < slots.length)
+		    slots[index] = stack;
+	    }
 	}
     }
 
