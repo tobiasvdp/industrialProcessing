@@ -153,8 +153,7 @@ public class BlockStorageBox extends BlockMachineRendered implements IDescriptio
 			return stack;
 		    }
 		}
-		if (stack.stackSize <= 0)
-		    stack = null;
+		stack = null;
 	    } else if (slotStack.isItemEqual(stack)) {
 		if (slotStack.stackSize < slotStack.getMaxStackSize()) {
 		    int transferCount = slotStack.getMaxStackSize() - slotStack.stackSize;
