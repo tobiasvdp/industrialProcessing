@@ -31,6 +31,7 @@ import ip.industrialProcessing.machines.plants.oilRefinary.asphaltBlower.TileEnt
 import ip.industrialProcessing.machines.plants.oilRefinary.gasProcessor.TileEntityGasProcessor;
 import ip.industrialProcessing.machines.plants.oilRefinary.isomerizationReactor.TileEntityIsomerizationReactor;
 import ip.industrialProcessing.machines.plants.oilRefinary.sourWaterStripper.TileEntitySourWaterStripper;
+import ip.industrialProcessing.machines.plants.storage.storageBox.ItemStorageBox;
 import ip.industrialProcessing.machines.plants.storage.storageBox.TileEntityStorageBox;
 import ip.industrialProcessing.machines.plants.storage.storageRack.TileEntityStorageRack;
 import ip.industrialProcessing.machines.plants.waste.exhaust.coolingUnit.TileEntityCoolingUnit;
@@ -260,7 +261,7 @@ public class ConfigMachineBlocks {
 	registerMachineBlock(ISetupMachineBlocks.blockBloomery, "IP.MBC.Bloom", "Bloomery", TileEntityBloomery.class, BlockType.Machine, BlockType.Smelting);
 	registerMachineBlock(ISetupMachineBlocks.blockIronBowl, "IP.MBD.IBowl", "Iron bowl", TileEntityIronBowl.class, BlockType.Machine, BlockType.assemble);
 	registerMachineBlock(ISetupMachineBlocks.blockStorageRack, "IP.Machine.StorRack", "Storage rack", TileEntityStorageRack.class, BlockType.Storage);
-	registerMachineBlock(ISetupMachineBlocks.blockStorageBox, "IP.Machine.StorBox", "Storage box", TileEntityStorageBox.class, BlockType.Storage);
+	registerMachineBlock(ISetupMachineBlocks.blockStorageBox, ItemStorageBox.class, "IP.Machine.StorBox", "Storage box", TileEntityStorageBox.class, BlockType.Storage);
 
 	registerMachineBlock(ISetupMachineBlocks.blockConveyorBelt, "IP.Trans.CBelt", "Conveyor belt", TileEntityConveyorBelt.class, BlockType.Machine, BlockType.Transport);
 	registerMachineBlock(ISetupMachineBlocks.blockConveyorBeltInput, "IP.Trans.CBInput", "Conveyor belt import", TileEntityConveyorInput.class, BlockType.Machine, BlockType.Transport);

@@ -3,7 +3,9 @@ package ip.industrialProcessing.transport.items.conveyorSorter;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.containers.IMachineContainerEntity;
 import ip.industrialProcessing.transport.items.conveyorBelt.ConnectionMode;
+import ip.industrialProcessing.transport.items.conveyorBelt.MovingItemStack;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorInventoryBase;
+import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorPowerTranslation;
 import ip.industrialProcessing.utils.DirectionUtils;
 
 import java.util.ArrayList;
@@ -14,9 +16,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TileEntityConveyorSorter extends TileEntityConveyorInventoryBase implements IMachineContainerEntity {
+public class TileEntityConveyorSorter extends TileEntityConveyorPowerTranslation implements IMachineContainerEntity {
 
     static Random rnd = new Random();
     ItemStack[] slots = new ItemStack[3 * 3 * 2];
@@ -188,6 +191,11 @@ public class TileEntityConveyorSorter extends TileEntityConveyorInventoryBase im
                 slots[b0] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
             }
         }
+    }
+
+    @Override
+    protected ItemStack outputToTileEntity(MovingItemStack stack, TileEntity neighbor, ForgeDirection direction) { 
+	return stack.stack;
     }
 
 }
