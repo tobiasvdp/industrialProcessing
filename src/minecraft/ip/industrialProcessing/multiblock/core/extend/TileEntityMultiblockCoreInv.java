@@ -289,69 +289,6 @@ public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCo
 		return getMachineStack(slot).stack.getItemDamage()>=getMachineStack(slot).stack.getMaxDamage();
 	}
 	
-	
-	public int transformSideToLayoutSide(int side) {
-		switch (this.side) {
-
-		case North:
-			break;
-		case East:
-			switch (side) {
-			case 2:
-				side = 4;
-				break;
-			case 3:
-				side = 5;
-				break;
-			case 4:
-				side =3;
-				break;
-			case 5:
-				side =2;
-				break;
-			}
-			break;
-		case South:
-			switch (side) {
-			case 2:
-				side = 3;
-				break;
-			case 3:
-				side = 2;
-				break;
-			case 4:
-				side =5;
-				break;
-			case 5:
-				side =4;
-				break;
-			}
-			break;
-		case West:
-			switch (side) {
-			case 2:
-				side = 5;
-				break;
-			case 3:
-				side = 4;
-				break;
-			case 4:
-				side =2;
-				break;
-			case 5:
-				side =3;
-				break;
-			}
-			break;
-		case Invalid:
-			break;
-		default:
-			break;
-
-		}
-		return side;
-	}
-	
 	@Override
 	public int[] getAccessibleSlotsFromSide(int multiblockID,int var1){
 		LocalDirection localFrom = DirectionUtils.getLocalDirection(var1, getForwardDirection());

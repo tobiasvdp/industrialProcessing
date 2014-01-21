@@ -56,7 +56,7 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 
 		}
 	}
-	
+
 	public static ForgeDirection ForgeToFacingDirectionForge(ForgeDirection side2) {
 		switch (side2) {
 		case EAST:
@@ -74,7 +74,7 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 
 		}
 	}
-	
+
 	public static FacingDirection ForgeToFacingDirection(ForgeDirection side2) {
 		switch (side2) {
 		case EAST:
@@ -553,7 +553,69 @@ public class TileEntityMultiblockCore extends TileEntity implements ITileEntityM
 	}
 
 	public void onDestroy() {
-		
+
+	}
+
+	public int transformSideToLayoutSide(int side) {
+		switch (this.side) {
+
+		case North:
+			break;
+		case East:
+			switch (side) {
+			case 2:
+				side = 4;
+				break;
+			case 3:
+				side = 5;
+				break;
+			case 4:
+				side = 3;
+				break;
+			case 5:
+				side = 2;
+				break;
+			}
+			break;
+		case South:
+			switch (side) {
+			case 2:
+				side = 3;
+				break;
+			case 3:
+				side = 2;
+				break;
+			case 4:
+				side = 5;
+				break;
+			case 5:
+				side = 4;
+				break;
+			}
+			break;
+		case West:
+			switch (side) {
+			case 2:
+				side = 5;
+				break;
+			case 3:
+				side = 4;
+				break;
+			case 4:
+				side = 2;
+				break;
+			case 5:
+				side = 3;
+				break;
+			}
+			break;
+		case Invalid:
+			break;
+		default:
+			break;
+
+		}
+		return side;
 	}
 
 }
