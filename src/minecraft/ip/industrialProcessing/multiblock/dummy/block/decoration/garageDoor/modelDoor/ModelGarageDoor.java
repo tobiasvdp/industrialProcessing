@@ -4,6 +4,7 @@ import ip.industrialProcessing.api.rendering.wavefront.ObjRotator;
 import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
 import ip.industrialProcessing.client.render.ModelBlock;
 import ip.industrialProcessing.machines.BlockMachine;
+import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.TileEntityGarageDoorDoor;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -37,19 +38,20 @@ public class ModelGarageDoor extends ModelBlock {
 		TileEntity entity = reference.getBlockTileEntity();
 		ForgeDirection forward = BlockMachine.getForwardFromEntity(entity);
 		int dir = BlockMachine.getMetadataFromForward(forward);
+		forward = TileEntityMultiblockCore.ForgeToFacingDirectionForge(forward);
 
 		Icon iconGarage = reference.getIcon(0);
 		Icon iconIron = reference.getIcon(1);
 		
 		if (forward != null) {
-			ForgeDirection dirLeft = forward.getRotation(ForgeDirection.DOWN);
+			ForgeDirection dirLeft = forward.getRotation(ForgeDirection.UP);
 			if (reference.world.getBlockId(reference.x + dirLeft.offsetX, reference.y + dirLeft.offsetY, reference.z + dirLeft.offsetZ) == 0 || reference.world.isBlockSolidOnSide(reference.x + dirLeft.offsetX, reference.y + dirLeft.offsetY, reference.z + dirLeft.offsetZ, dirLeft.getOpposite(), true)) {
-				left.getRotated(dir).renderMesh(false, iconIron, reference);
+				right.getRotated(dir).renderMesh(false, iconIron, reference);
 			}
 
-			ForgeDirection dirRight = forward.getRotation(ForgeDirection.UP);
+			ForgeDirection dirRight = forward.getRotation(ForgeDirection.DOWN);
 			if (reference.world.getBlockId(reference.x + dirRight.offsetX, reference.y + dirRight.offsetY, reference.z + dirRight.offsetZ) == 0 || reference.world.isBlockSolidOnSide(reference.x + dirRight.offsetX, reference.y + dirRight.offsetY, reference.z + dirRight.offsetZ, dirRight.getOpposite(), true)) {
-				right.getRotated(dir).renderMesh(false, iconIron, reference);
+				left.getRotated(dir).renderMesh(false, iconIron, reference);
 			}
 		}
 		if (!((TileEntityGarageDoorDoor) entity).hide) {
