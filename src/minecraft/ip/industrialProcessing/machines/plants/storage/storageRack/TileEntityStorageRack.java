@@ -116,6 +116,7 @@ public class TileEntityStorageRack extends TileEntityMachine {
 		for (int i = 0; i < 6; i++) {
 			ItemStack stack = decrStackSize(i, 1);
 			if(stack != null){
+				onInventoryChanged();
 				return stack;
 			}
 		}
