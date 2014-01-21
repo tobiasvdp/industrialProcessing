@@ -6,6 +6,9 @@ public class BendPath extends ItemPath {
 
 	private boolean left;
 
+	public boolean isLeft() {
+	    return left;
+	}
 	public BendPath(boolean left) {
 		this.left = left;
 
