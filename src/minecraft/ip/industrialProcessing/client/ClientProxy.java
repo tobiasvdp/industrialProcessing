@@ -81,6 +81,7 @@ import ip.industrialProcessing.multiblock.dummy.block.frame.MDmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.frame.MDmultiblockFramePanel;
 import ip.industrialProcessing.multiblock.dummy.block.frame.TEmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.ironBowl.model.ModelIronBowl;
+import ip.industrialProcessing.multiblock.dummy.block.ironPole.model.ModelIronPole;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.ENmultiblockLiftDoor;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.MDmultiblockLiftDoor;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.TEmultiblockLiftDoor;
@@ -249,6 +250,7 @@ public class ClientProxy extends CommonProxy {
     private static final ModelStorageRackAnimated modelStorageRackAnimated = new ModelStorageRackAnimated();
     private static final ModelStorageBox modelStorageBox = new ModelStorageBox();
     private static final ModelBlock modelConveyorPacker = new ModelConveyorPackerBlock();
+    private static final ModelIronPole modelIronPole = new ModelIronPole();
     
     @Override
     public void registerRenderers() {
@@ -346,6 +348,9 @@ public class ClientProxy extends CommonProxy {
 	 
 	ConfigRenderers.setRendererConveyorPackerID(RenderingRegistry.getNextAvailableRenderId()); 
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererConveyorPackerID(), modelConveyorPacker ));
+	
+	ConfigRenderers.setRendererIronPole(RenderingRegistry.getNextAvailableRenderId()); 
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererIronPole(), modelIronPole ));
 
 	// block & tile entity
 
