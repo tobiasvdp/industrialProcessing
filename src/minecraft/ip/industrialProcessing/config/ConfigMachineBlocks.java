@@ -368,7 +368,7 @@ public class ConfigMachineBlocks {
     }
 
     @Deprecated
-    private void registerMachineBlock(Block block, String uniqueId, String displayName, Class tileEntity) {
+    public void registerMachineBlock(Block block, String uniqueId, String displayName, Class tileEntity) {
 	GameRegistry.registerBlock(block, uniqueId);
 	MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
 	LanguageRegistry.addName(block, displayName);
@@ -380,7 +380,7 @@ public class ConfigMachineBlocks {
 	    RecipeRegistry.registerMachinesRecipes(((IRecipeMultiblock) block).getRecipes(), block);
     }
 
-    private void registerMachineBlock(Block block, String uniqueId, String displayName, Class tileEntity, BlockType... type) {
+    public void registerMachineBlock(Block block, String uniqueId, String displayName, Class tileEntity, BlockType... type) {
 	GameRegistry.registerBlock(block, uniqueId);
 	MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
 	LanguageRegistry.addName(block, displayName);
@@ -393,7 +393,7 @@ public class ConfigMachineBlocks {
     }
 
     @Deprecated
-    private void registerMachineBlock(Block block, Class<? extends ItemBlock> itemBlock, String uniqueId, String displayName, Class tileEntity) {
+    public void registerMachineBlock(Block block, Class<? extends ItemBlock> itemBlock, String uniqueId, String displayName, Class tileEntity) {
 	GameRegistry.registerBlock(block, itemBlock, uniqueId);
 	MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
 	LanguageRegistry.addName(block, displayName);
@@ -406,7 +406,7 @@ public class ConfigMachineBlocks {
 
     }
 
-    private void registerMachineBlock(Block block, Class<? extends ItemBlock> itemBlock, String uniqueId, String displayName, Class tileEntity, BlockType... type) {
+    public void registerMachineBlock(Block block, Class<? extends ItemBlock> itemBlock, String uniqueId, String displayName, Class tileEntity, BlockType... type) {
 	GameRegistry.registerBlock(block, itemBlock, uniqueId);
 	MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
 	LanguageRegistry.addName(block, displayName);

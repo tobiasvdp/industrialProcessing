@@ -1,6 +1,7 @@
 package ip.industrialProcessing.subMod.power;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import ip.industrialProcessing.api.utils.CreativeTabsIP;
@@ -15,10 +16,11 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = "IPPower", name = "Industrial Processing Power", version = "0.0.1", dependencies = "required-after:IndustrialProcessing")
 @NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = { PacketHandler.channel }, packetHandler = PacketHandler.class)
-public class IPPower  implements ISetupPower{
+public class IPPower implements ISetupPower {
 	@Instance("IPPower")
 	public static IPPower instance;
 	public static Configuration config;
@@ -27,7 +29,7 @@ public class IPPower  implements ISetupPower{
 
 	@SidedProxy(clientSide = "ip.industrialProcessing.subMod.power.client.ClientProxy", serverSide = "ip.industrialProcessing.subMod.power.CommonProxy")
 	public static CommonProxy proxy;
-	
+
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		config = new Configuration(event.getSuggestedConfigurationFile());
@@ -37,10 +39,17 @@ public class IPPower  implements ISetupPower{
 
 		MinecraftForge.EVENT_BUS.register(this);
 	}
-	
+
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
+
+		// register tab
+		LanguageRegistry.instance().addStringLocalization("IP.itemGroup.tabPower2", "en_US", "IP Power");
+		((CreativeTabsIP) tabPower).setIcon(new ItemStack(blockCreativeGenerator));
+
+		// register machines
 		ConfigPower.getInstance().register();
+
 		proxy.registerRenderers();
 		config.save();
 
