@@ -62,7 +62,7 @@ public class BlockConveyorPacker extends BlockConveyorBase implements IDescripti
 
 	if (playerItem != null && (playerItem.itemID == ISetupItems.itemHexKey.itemID)) {
 	    TileEntityConveyorConnectionsBase conveyorBelt = (TileEntityConveyorConnectionsBase) world.getBlockTileEntity(x, y, z);
-	    conveyorBelt.toggleSlope();
+	    conveyorBelt.toggleSlope(player);
 	    return false;
 	} else
 	    player.openGui(IndustrialProcessing.instance, 0, world, x, y, z);

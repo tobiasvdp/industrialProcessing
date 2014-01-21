@@ -23,11 +23,11 @@ public class TileEntityVoltMeter extends TileEntityMachine implements IPowerAcce
 	public void updateEntity() {
 
 		if (!this.worldObj.isRemote) {
-			float averageVoltage = inputs == 0 ? 0 : this.voltage / inputs;
+			float totalVoltage = inputs == 0 ? 0 : this.voltage;
 			this.voltage = 0;
 			this.inputs = 0;
 
-			float targetAngle = Math.min(1, averageVoltage / 48f);
+			float targetAngle = Math.min(1, totalVoltage / 48f);
 			// 0.25 sec to go from current angle to target angle?
 			
 			this.animationHandler.moveToProgress(targetAngle, 0.25f); 

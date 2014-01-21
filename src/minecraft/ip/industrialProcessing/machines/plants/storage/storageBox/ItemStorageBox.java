@@ -17,6 +17,11 @@ public class ItemStorageBox extends ItemBlock {
     }
 
     @Override
+    public int getItemStackLimit() { 
+        return 1;
+    }
+    
+    @Override
     public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
 	super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4);
 	if (par1ItemStack != null && par1ItemStack.stackTagCompound != null) {

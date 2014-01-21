@@ -12,6 +12,7 @@ import ip.industrialProcessing.utils.registry.HandlerRegistry;
 
 import java.util.Arrays;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
@@ -196,7 +197,7 @@ public abstract class TileEntityConveyorConnectionsBase extends TileEntityTransp
 		return false;
 	}
 
-	public void toggleSlope() {
+	public void toggleSlope(EntityPlayer player) {
 
 		SlopeState oldFront = getSlope(LocalDirection.FRONT);
 		SlopeState oldBack = getSlope(LocalDirection.BACK);
