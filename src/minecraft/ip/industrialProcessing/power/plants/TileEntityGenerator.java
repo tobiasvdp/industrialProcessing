@@ -20,7 +20,7 @@ public class TileEntityGenerator extends TileEntityPowerGenerator implements IAn
     LocalDirection inputSide = LocalDirection.FRONT;
 
 	public TileEntityGenerator() {
-		super(100);
+		 
 		this.animationHandler = new AnimationHandler(AnimationMode.WRAP, 1f, true);
 	}
 

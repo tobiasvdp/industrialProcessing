@@ -23,7 +23,7 @@ public class TileEntityBuildcraftGenerator extends TileEntityPowerGenerator impl
     private float lastCharge;
 
     public TileEntityBuildcraftGenerator() {
-	super(100);
+	 
 	this.powerHandler = new PowerHandler(this, Type.MACHINE);
 	this.powerHandler.configure(1, 50, 0, 500);
 	this.powerHandler.configurePowerPerdition(2, 1);

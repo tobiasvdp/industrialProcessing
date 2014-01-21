@@ -71,7 +71,8 @@ public class TileEntityConveyorPacker extends TileEntityConveyorInteractionBase 
     }
 
     private void fetchBox() {
-	if (slots[0] == null) {
+	if (slots[0] == null && false) { 
+	    System.out.println("fetching box");
 	    ForgeDirection left = DirectionUtils.getWorldDirection(boxInput, this.forwardDirection);
 	    TileEntity te = this.worldObj.getBlockTileEntity(xCoord + left.offsetX, yCoord + left.offsetY, zCoord + left.offsetZ);
 	    if (te instanceof TileEntityStorageRack) {

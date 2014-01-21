@@ -11,7 +11,7 @@ import ip.industrialProcessing.utils.DirectionUtils;
 
 public class TileEntityManualGenerator extends TileEntityPowerGenerator implements IAnimationProgress {
     public TileEntityManualGenerator() {
-	super(100);
+	 
     }
 
     // if the player hits, 100 mechanical energy is stored in this generator

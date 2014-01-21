@@ -28,7 +28,7 @@ public class TileEntityAmpMeter extends TileEntityPowerGenerator implements IPow
 	private AnimationHandler animationHandler;
 
 	public TileEntityAmpMeter() {
-		super(1000);
+		 
 		unVerified = true;
 		this.distributor = new PowerDistributor();
 		this.animationHandler = new AnimationHandler(AnimationMode.CLAMP, 1, true);

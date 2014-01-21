@@ -7,11 +7,9 @@ import net.minecraft.nbt.NBTTagCompound;
 public abstract class TileEntityPowerGenerator extends TileEntityMachine implements IPowerProducer, IPowerOutput {
 
     private PowerDistributorManager powerManager;
-    private boolean searched = false;
-    private int maxOutput = 100;
+    private boolean searched = false; 
 
-    public TileEntityPowerGenerator(int maxOutput) {
-        this.maxOutput = maxOutput;
+    public TileEntityPowerGenerator() { 
 
         this.powerManager = new PowerDistributorManager(this, this);
     }

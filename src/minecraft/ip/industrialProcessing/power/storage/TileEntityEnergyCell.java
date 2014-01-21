@@ -17,7 +17,7 @@ import net.minecraftforge.common.ForgeDirection;
 public class TileEntityEnergyCell extends TileEntityPowerGenerator implements IPowerAcceptor, IAnimationProgress, IAnimationSyncable {
 
     public TileEntityEnergyCell() {
-	super(100);
+	 
 	this.animation = new AnimationHandler(AnimationMode.CLAMP, 1f, true);
     }
 
