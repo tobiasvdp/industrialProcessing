@@ -44,12 +44,13 @@ public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation
 	index++;
 	index %= 3;
 	operationMode = PackerOperationMode.values()[index];
+	System.out.println(operationMode);
     }
- 
+
     public PackerOperationMode getOperationMode() {
 	return operationMode;
     }
-    
+
     @Override
     public void updateEntity() {
 	super.updateEntity();
@@ -68,14 +69,15 @@ public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation
 	if (operationMode != null)
 	    nbt.setInteger("Mode", operationMode.ordinal());
 	NBTTagList list = new NBTTagList();
-	nbt.setTag("Slots", list);
 	for (int i = 0; i < slots.length; i++) {
 	    if (slots[i] != null) {
 		NBTTagCompound compound = new NBTTagCompound();
 		compound.setInteger("Slot", i);
 		slots[i].writeToNBT(compound);
+		list.appendTag(compound);
 	    }
 	}
+	nbt.setTag("Slots", list);
     }
 
     @Override
@@ -104,13 +106,17 @@ public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation
 	ItemStack box = slots[0];
 	if (box != null && box.itemID == IndustrialProcessing.blockStorageBox.blockID) {
 	    boolean hasExtracted = false;
-	    for (int i = 0; i < 9; i++) {
+	    for (int i = 0; i < BlockStorageBox.STORAGE_SIZE; i++) {
 		ItemStack stack = IndustrialProcessing.blockStorageBox.peekStackFromBox(box, i);
 		if (stack != null) {
-		    stack = IndustrialProcessing.blockStorageBox.getStackFromBox(box, i, 64);
-		    this.addItemStack(stack, null);
-		    hasExtracted = true;
-		    break;
+		    ItemStack configStack = slots[i + 1];
+		    if (configStack == null || configStack.isItemEqual(stack)) { // only fetch configged items!
+			stack = IndustrialProcessing.blockStorageBox.getStackFromBox(box, i, 8);
+			this.addItemStack(stack, null);
+			hasExtracted = true;
+			onInventoryChanged();
+			break;
+		    }
 		}
 	    }
 	    if (!hasExtracted) {
@@ -146,7 +152,6 @@ public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation
 		    slots[0] = null;
 		    onInventoryChanged();
 		}
-
 	    }
 	}
     }
@@ -177,6 +182,7 @@ public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation
 				this.syncConveyor();
 			    }
 			}
+			onInventoryChanged();
 		    }
 		}
 		if (accepted && !packed) {
