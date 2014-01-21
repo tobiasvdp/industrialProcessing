@@ -77,7 +77,7 @@ public class GuiLayoutPanel {
 		switch(getSlotComponent()){
 		case inventory:
 			this.slotLayout = new SlotLayoutInventory(rect);
-			break;
+			break; 
 		case input:
 			this.slotLayout = new SlotLayoutInput(layout, amount, parent.getSlotIndex(), rect);
 			setGuiContainerLayout(GuiLayoutPanelType.slotsInput);

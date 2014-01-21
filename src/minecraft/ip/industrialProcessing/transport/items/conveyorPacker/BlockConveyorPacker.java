@@ -7,8 +7,13 @@ import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
+import ip.industrialProcessing.gui.GuiLayout;
+import ip.industrialProcessing.gui.IGuiLayout;
+import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
+import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
 import ip.industrialProcessing.transport.items.conveyorBelt.BlockConveyorBase;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorInteractionBase;
+import ip.industrialProcessing.utils.IDescriptionBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -20,9 +25,17 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockConveyorPacker extends BlockConveyorBase {
+public class BlockConveyorPacker extends BlockConveyorBase implements IDescriptionBlock, IGuiLayout {
     Icon[] icons = new Icon[3];
 
+    public static GuiLayout guiLayout;
+    static {
+	guiLayout = new GuiLayout();
+	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInventory).setSlotLayout(SlotLayoutType.horizontal, 1);
+	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInventory).setSlotLayout(SlotLayoutType.horizontal, 9); 
+    }
+    
+    
     public BlockConveyorPacker() {
 	super(ConfigMachineBlocks.getBLtransportConveyorBeltPacker(), Material.iron, 5.0f, Block.soundMetalFootstep, "Packer", ISetupCreativeTabs.tabPower);
 	func_111022_d(null);
@@ -70,5 +83,15 @@ public class BlockConveyorPacker extends BlockConveyorBase {
 	if (axisalignedbb1 != null && par5AxisAlignedBB.intersectsWith(axisalignedbb1)) {
 	    par6List.add(axisalignedbb1);
 	}
+    }
+
+    @Override
+    public GuiLayout getGuiLayout() { 
+	return guiLayout;
+    }
+
+    @Override
+    public String getDescription() { 
+	return "Packs or Unpacks items to/from supplied Storage Boxes";
     }
 }
