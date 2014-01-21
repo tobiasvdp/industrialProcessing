@@ -34,29 +34,29 @@ public class GuiContainerIP extends GuiContainer {
 		InventoryPlayer inventoryPlayer = player.inventory;
 		this.tileEntity = tileEntity;
 		this.name = tileEntity.getBlockType().getLocalizedName();
-		this.textureLocationWorker = new ResourceLocation(INamepace.TEXTURE_DOMAIN, "textures/gui/"+ this.name +".png");
+		this.textureLocationWorker = new ResourceLocation(INamepace.TEXTURE_DOMAIN, "textures/gui/" + this.name + ".png");
 		this.textureLocation = new ResourceLocation(INamepace.TEXTURE_DOMAIN, "textures/gui/layout.png");
-		
+
 		this.xSize = 236;
 		this.ySize = 200;
-		
+
 		if (tileEntity.getBlockType() instanceof IGuiLayout)
 			layout = ((IGuiLayout) tileEntity.getBlockType()).getGuiLayout();
-		
-		if (tileEntity.getBlockType() instanceof IGuiLayoutMultiblock){
-			layout = ((IGuiLayoutMultiblock) tileEntity.getBlockType()).getGuiLayout(((TileEntityMultiblockCore)tileEntity).getTier());
+
+		if (tileEntity.getBlockType() instanceof IGuiLayoutMultiblock) {
+			layout = ((IGuiLayoutMultiblock) tileEntity.getBlockType()).getGuiLayout(((TileEntityMultiblockCore) tileEntity).getTier());
 		}
 	}
-	
-	public void setTextureWorker(){
+
+	public void setTextureWorker() {
 		mc.renderEngine.func_110577_a(this.textureLocationWorker);
 	}
-	
-	public void setTextureLayout(){
+
+	public void setTextureLayout() {
 		mc.renderEngine.func_110577_a(this.textureLocation);
 	}
-	
-	public void setTextureBlocks(){
+
+	public void setTextureBlocks() {
 		mc.renderEngine.func_110577_a(TextureMap.field_110575_b);
 	}
 
@@ -75,8 +75,12 @@ public class GuiContainerIP extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
-		fontRenderer.drawString(name, 8, 6, 4210752);
-		fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
+		if (this.layout != null) {
+			if (this.layout.drawTitel)
+				fontRenderer.drawString(name, 8, 6, 4210752);
+			if (this.layout.drawInventoryTitel)
+				fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
+		}
 	}
 
 	@Override
@@ -86,16 +90,15 @@ public class GuiContainerIP extends GuiContainer {
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
 		this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
-		
+
 		if (this.layout != null) {
-			layout.draw(this,this.inventorySlots,x,y,mouseX,mouseY);
+			layout.draw(this, this.inventorySlots, x, y, mouseX, mouseY);
 		}
 
 	}
-	
-	public void changeTab(int tabID){
-		
+
+	public void changeTab(int tabID) {
+
 	}
-	
-    
+
 }

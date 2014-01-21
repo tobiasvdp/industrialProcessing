@@ -22,7 +22,10 @@ public class GuiLayout {
 	ArrayList<GuiLayoutPanel> layoutPanels;
 	int slotIndex = 0;
 
+	public int multipleLines = 1;
 	public boolean useMargin = true;
+	public boolean drawTitel = true;
+	public boolean drawInventoryTitel = true;
 
 	public GuiLayout() {
 		layoutPanels = new ArrayList<GuiLayoutPanel>();
@@ -157,34 +160,42 @@ public class GuiLayout {
 
 	public void reDoLayout() {
 		int widthScreen = 236;
-		ArrayList<GuiLayoutPanel> panels = getOrganizedPanels();
-		int totalWidth = 0;
-		for (int i = 0; i < panels.size(); i++) {
-			totalWidth += panels.get(i).getWidth();
-		}
-		int margin = (widthScreen - totalWidth) / (panels.size() + 1);
-		if (useMargin) {
-			totalWidth = 0;
+		for (int j = 0; j < multipleLines; j++) {
+			ArrayList<GuiLayoutPanel> panels = getOrganizedPanels(j+1);
+			int totalWidth = 0;
 			for (int i = 0; i < panels.size(); i++) {
-				panels.get(i).setX(totalWidth + (i + 1) * margin);
 				totalWidth += panels.get(i).getWidth();
 			}
-		} else {
-			totalWidth = (widthScreen-totalWidth)/2;
-			for (int i = 0; i < panels.size(); i++) {
-				panels.get(i).setX(totalWidth);
-				totalWidth += panels.get(i).getWidth()+2;
+			int margin = (widthScreen - totalWidth) / (panels.size() + 1);
+			if (useMargin) {
+				totalWidth = 0;
+				for (int i = 0; i < panels.size(); i++) {
+					panels.get(i).setX(totalWidth + (i + 1) * margin);
+					totalWidth += panels.get(i).getWidth();
+					if(multipleLines > 1){
+						panels.get(i).setY(j*56+5);
+					}
+				}
+			} else {
+				totalWidth = (widthScreen - totalWidth) / 2;
+				for (int i = 0; i < panels.size(); i++) {
+					panels.get(i).setX(totalWidth);
+					totalWidth += panels.get(i).getWidth() + 2;
+					if(multipleLines > 1){
+						panels.get(i).setY(j*56+5);
+					}
+				}
 			}
 		}
 	}
 
-	private ArrayList<GuiLayoutPanel> getOrganizedPanels() {
+	private ArrayList<GuiLayoutPanel> getOrganizedPanels(int line) {
 		ArrayList<GuiLayoutPanel> panels = new ArrayList<GuiLayoutPanel>();
 		for (GuiLayoutPanelType type : new GuiLayoutPanelType[] { GuiLayoutPanelType.heat, GuiLayoutPanelType.tankInput, GuiLayoutPanelType.slotsInput, GuiLayoutPanelType.worker, GuiLayoutPanelType.slotsOutput, GuiLayoutPanelType.tankOutput }) {
 			Iterator<GuiLayoutPanel> it = layoutPanels.iterator();
 			while (it.hasNext()) {
 				GuiLayoutPanel panel = it.next();
-				if (panel.type == type) {
+				if (panel.type == type && panel.line == line) {
 					panels.add(panel);
 				}
 			}
@@ -242,7 +253,7 @@ public class GuiLayout {
 	}
 
 	public void drawFilledPanels(Rectangle rectangle, Gui gui, int mouseX, int mouseY, Recipe recipe, Block craftingBlock) {
-		ArrayList<GuiLayoutPanel> panels = getOrganizedPanels();
+		ArrayList<GuiLayoutPanel> panels = getOrganizedPanels(1);
 
 		int typeIndex = 0;
 		GuiLayoutPanelType type = null;

@@ -31,6 +31,8 @@ public class GuiLayoutPanel {
 	public GuiLayoutPanelType type;
 	GuiLayout parent;
 	
+	public int line = 1;
+	
 	SlotLayout slotLayout;
 	GuiContainerLayout guiContainerLayout;
 	
@@ -45,6 +47,11 @@ public class GuiLayoutPanel {
 		rectReduced = new Rectangle(x, y, width2, height2);
 		this.type = type;
 		parent = layout;
+	}
+	
+	public GuiLayoutPanel setLine(int line){
+		this.line = line;
+		return this;
 	}
 	
 	public int getHeight(){
@@ -67,6 +74,10 @@ public class GuiLayoutPanel {
 	
 	public void setX(int val) {
 		rect.x = val;
+	}
+	
+	public void setY( int y){
+		this.rect.y = y;
 	}
 	
 	public int getY(){
