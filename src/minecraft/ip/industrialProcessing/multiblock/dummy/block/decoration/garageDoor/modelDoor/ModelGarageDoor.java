@@ -38,12 +38,13 @@ public class ModelGarageDoor extends ModelBlock {
 		TileEntity entity = reference.getBlockTileEntity();
 		ForgeDirection forward = BlockMachine.getForwardFromEntity(entity);
 		int dir = BlockMachine.getMetadataFromForward(forward);
-		forward = TileEntityMultiblockCore.ForgeToFacingDirectionForge(forward);
 
 		Icon iconGarage = reference.getIcon(0);
 		Icon iconIron = reference.getIcon(1);
 		
 		if (forward != null) {
+			forward = TileEntityMultiblockCore.ForgeToFacingDirectionForge(forward);
+			
 			ForgeDirection dirLeft = forward.getRotation(ForgeDirection.UP);
 			if (reference.world.getBlockId(reference.x + dirLeft.offsetX, reference.y + dirLeft.offsetY, reference.z + dirLeft.offsetZ) == 0 || reference.world.isBlockSolidOnSide(reference.x + dirLeft.offsetX, reference.y + dirLeft.offsetY, reference.z + dirLeft.offsetZ, dirLeft.getOpposite(), true)) {
 				right.getRotated(dir).renderMesh(false, iconIron, reference);
