@@ -18,6 +18,7 @@ public abstract class TileEntityConveyorPowerTranslation extends TileEntityConve
 
 	public TileEntityConveyorPowerTranslation() {
 		super();
+		this.speed = 0.01f;
 	}
 
 	@Override

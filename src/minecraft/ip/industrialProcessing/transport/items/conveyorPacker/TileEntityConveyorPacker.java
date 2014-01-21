@@ -15,9 +15,10 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class TileEntityConveyorPacker extends TileEntityConveyorInteractionBase implements IMachineContainerEntity {
 
+    private static int tickOffset;
     ItemStack[] slots = new ItemStack[10];
     private PackerOperationMode operationMode = PackerOperationMode.PACK_FULL;
-    private int updateCycle = 10;
+    private int updateCycle = 50;
     private int ticks = 0;
     private LocalDirection boxInput = LocalDirection.LEFT;
     private LocalDirection boxOutput = LocalDirection.RIGHT;
@@ -30,6 +31,7 @@ public class TileEntityConveyorPacker extends TileEntityConveyorInteractionBase 
 	this.setConnectionMode(LocalDirection.RIGHT, ConnectionMode.NONE);
 	this.setConnectionMode(LocalDirection.UP, ConnectionMode.NONE);
 	this.setConnectionMode(LocalDirection.DOWN, ConnectionMode.NONE);
+	this.ticks = (tickOffset++ % updateCycle);
     }
 
     @Override
@@ -71,8 +73,7 @@ public class TileEntityConveyorPacker extends TileEntityConveyorInteractionBase 
     }
 
     private void fetchBox() {
-	if (slots[0] == null && false) { 
-	    System.out.println("fetching box");
+	if (slots[0] == null) { 
 	    ForgeDirection left = DirectionUtils.getWorldDirection(boxInput, this.forwardDirection);
 	    TileEntity te = this.worldObj.getBlockTileEntity(xCoord + left.offsetX, yCoord + left.offsetY, zCoord + left.offsetZ);
 	    if (te instanceof TileEntityStorageRack) {

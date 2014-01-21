@@ -1,5 +1,6 @@
 package ip.industrialProcessing.subMod.power.plant.creative;
 
+import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.gui.GuiLayout;
 import ip.industrialProcessing.gui.IGuiLayout;
@@ -19,41 +20,30 @@ import net.minecraft.world.World;
 
 public class BlockCreativeGenerator extends BlockPowerGenerator implements IDescriptionBlock, IGuiLayout {
 
-	public static GuiLayout guiLayout;
-	static {
-		guiLayout = new GuiLayout();
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.power);
-	}
+    public static GuiLayout guiLayout;
+    static {
+	guiLayout = new GuiLayout();
+	guiLayout.addLayoutPanel(GuiLayoutPanelType.power);
+    }
 
-	Icon[] icons = new Icon[1];
+    public BlockCreativeGenerator() {
+	super(ConfigPower.getCreativeEngineID(), Material.iron, 1f, Block.soundMetalFootstep, "BlockCreativeGenerator", IPPower.tabPower);
+	func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "creativeGenerator");
+    }
 
-	public BlockCreativeGenerator() {
-		super(ConfigPower.getCreativeEngineID(), Material.iron, 1f, Block.soundMetalFootstep, "BlockCreativeGenerator", IPPower.tabPower);
-	}
+    @Override
+    public GuiLayout getGuiLayout() {
+	return guiLayout;
+    }
 
-	@Override
-	public Icon getIcon(int par1, int par2) {
-		return icons[par1 % icons.length];
-	}
+    @Override
+    public String getDescription() {
+	return "a cheaty creative engine";
+    }
 
-	@Override
-	public void registerIcons(IconRegister par1IconRegister) {
-		icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "generatorFeatures");
-	}
-
-	@Override
-	public GuiLayout getGuiLayout() {
-		return guiLayout;
-	}
-
-	@Override
-	public String getDescription() {
-		return "a cheaty creative engine";
-	}
-
-	@Override
-	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityCreativeGenerator();
-	}
+    @Override
+    public TileEntity createNewTileEntity(World world) {
+	return new TileEntityCreativeGenerator();
+    }
 
 }

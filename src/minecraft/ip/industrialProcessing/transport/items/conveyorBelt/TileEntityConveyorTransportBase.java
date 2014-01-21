@@ -24,7 +24,7 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
 
     private Random rnd = new Random();
     protected ArrayList<MovingItemStack> itemStacks = new ArrayList<MovingItemStack>();
-    protected float speed = 0.01f;
+    protected float speed = 1f; // default speed 1
     private int clusterTicks = 0;
     private int maxClusterTicks = 10;
 

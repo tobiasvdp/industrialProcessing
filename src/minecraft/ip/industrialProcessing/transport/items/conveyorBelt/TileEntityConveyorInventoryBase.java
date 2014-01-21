@@ -5,14 +5,13 @@ import ip.industrialProcessing.transport.TransportConnectionState;
 import ip.industrialProcessing.transport.items.conveyorBelt.util.ConveyorEnvironment;
 import ip.industrialProcessing.utils.DirectionUtils;
 import ip.industrialProcessing.utils.ItemTransfers;
-
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
-public abstract class TileEntityConveyorInventoryBase extends TileEntityConveyorInteractionBase {
+public abstract class TileEntityConveyorInventoryBase extends TileEntityConveyorPowerTranslation {
 
     private int updateCycle = 10;
     private int ticks = 0;
