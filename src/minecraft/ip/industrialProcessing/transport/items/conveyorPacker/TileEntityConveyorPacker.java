@@ -206,7 +206,7 @@ public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation
 
 	for (int i = 0; i < 9; i++) {
 	    ItemStack peek = IndustrialProcessing.blockStorageBox.peekStackFromBox(box, i);
-	    if (peek.stackSize < peek.getMaxStackSize())
+	    if (peek == null || peek.stackSize < peek.getMaxStackSize())
 		// stack can still grow, GO FOR IT
 		return false;
 	}
