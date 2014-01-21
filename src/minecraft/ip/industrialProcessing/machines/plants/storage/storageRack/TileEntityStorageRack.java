@@ -115,6 +115,9 @@ public class TileEntityStorageRack extends TileEntityMachine {
 	public ItemStack popBox() {
 		for (int i = 0; i < 6; i++) {
 			ItemStack stack = decrStackSize(i, 1);
+			if(stack != null){
+				return stack;
+			}
 		}
 		return null;
 	}
@@ -161,6 +164,7 @@ public class TileEntityStorageRack extends TileEntityMachine {
 
 	@Override
 	public void setInventorySlotContents(int slotIndex, ItemStack stack) {
+		if(slotIndex > 6 && stack != null && getStackInSlot((slotIndex - 6)/9) != null)
 		super.setInventorySlotContents(slotIndex, stack);
 		if (slotIndex < 6 && stack != null) {
 			for (int i = 0; i < 9; i++) {
