@@ -30,6 +30,7 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
 
     protected boolean[] canReverse = new boolean[6];
     private float dummyProgress;
+    protected float syncedSpeed;
 
     public TileEntityConveyorTransportBase() {
 	Arrays.fill(canReverse, false);
@@ -138,6 +139,7 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
     }
 
     protected void syncConveyor() {
+	this.syncedSpeed = this.speed;
 	TileConveyorSyncHandler.sendConveyorData(this, this);
     }
 
@@ -275,6 +277,7 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
 	    }
 	}
 	nbt.setTag("Stacks", nbttaglist);
+	nbt.setFloat("Speed", this.speed);
     }
 
     @Override
@@ -282,6 +285,8 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
 	super.readFromNBT(nbt);
 	SlopeState[] states = SlopeState.values();
 	this.itemStacks.clear();
+	if(nbt.hasKey("Speed"))
+	    this.speed = nbt.getFloat("Speed");
 	LocalDirection[] directions = LocalDirection.values();
 	NBTTagList nbttaglist = nbt.getTagList("Stacks");
 	int stackCount = nbt.getInteger("StackCount");
