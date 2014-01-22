@@ -1,8 +1,5 @@
 package ip.industrialProcessing.gui.container;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
 import ip.industrialProcessing.api.tanks.ITank;
 import ip.industrialProcessing.gui.GuiLayout;
 import ip.industrialProcessing.gui.IGuiLayout;
@@ -11,6 +8,7 @@ import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.syncing.handlers.HandlerHeat;
 import ip.industrialProcessing.gui.container.syncing.handlers.HandlerLifeSpan;
 import ip.industrialProcessing.gui.container.syncing.handlers.HandlerPower;
+import ip.industrialProcessing.gui.container.syncing.handlers.HandlerSimpleHeat;
 import ip.industrialProcessing.gui.container.syncing.handlers.HandlerTank;
 import ip.industrialProcessing.gui.container.syncing.handlers.HandlerWorker;
 import ip.industrialProcessing.gui.container.syncing.handlers.IHandlerContainer;
@@ -18,10 +16,12 @@ import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.power.IPoweredMachine;
 import ip.industrialProcessing.utils.IBreakable;
 import ip.industrialProcessing.utils.handler.heat.IHeatStorage;
-import ip.industrialProcessing.utils.working.IWorkHandler;
+import ip.industrialProcessing.utils.handler.heat.IHeated;
 import ip.industrialProcessing.utils.working.IWorkingEntity;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -35,6 +35,8 @@ import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.tileentity.TileEntity;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ContainerIP extends Container {
 
@@ -288,12 +290,16 @@ public class ContainerIP extends Container {
 				addHandler(new HandlerTank(((ITank) te).getTank(index)));
 			break;
 		case worker:
-			if (te instanceof IWorkHandler)
+			if (te instanceof IWorkingEntity)
 				addHandler(new HandlerWorker(((IWorkingEntity) te).getWorker()));
 			break;
 		case heat:
 			if (te instanceof IHeatStorage)
 				addHandler(new HandlerHeat(((IHeatStorage) te)));
+			break;
+		case simpleHeat:
+			if (te instanceof IHeated)
+				addHandler(new HandlerSimpleHeat(((IHeated) te)));
 			break;
 		case lifespan:
 			if (te instanceof IBreakable)

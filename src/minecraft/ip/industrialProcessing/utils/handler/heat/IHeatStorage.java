@@ -2,7 +2,7 @@ package ip.industrialProcessing.utils.handler.heat;
 
 import net.minecraft.item.ItemStack;
 
-public interface IHeatStorage {
+public interface IHeatStorage extends IHeated{
 	//in update transfer heat from fuel to environement
 	public void transferHeat();
 	
@@ -16,12 +16,8 @@ public interface IHeatStorage {
 	public float getHeatFuel();
 	public void setHeatFuel(float val);
 	
-	//get heat
-	public float getHeat();
 	public void setHeat(float val);
-	
-	//set the maximum heat temp
-	public float getMaxHeat();
+
 	
 	//burnTime
 	public int getBurnTime();

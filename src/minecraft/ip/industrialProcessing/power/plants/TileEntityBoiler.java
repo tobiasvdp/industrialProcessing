@@ -1,7 +1,5 @@
 package ip.industrialProcessing.power.plants;
 
-import java.util.Iterator;
-
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityFluidWorkerMachine;
 import ip.industrialProcessing.machines.animation.tanks.ITankSyncable;
@@ -9,6 +7,10 @@ import ip.industrialProcessing.machines.animation.tanks.TankHandler;
 import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.transport.fluids.IPressuredTank;
+import ip.industrialProcessing.utils.handler.heat.IHeated;
+
+import java.util.Iterator;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -19,7 +21,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
-public class TileEntityBoiler extends TileEntityFluidWorkerMachine implements IHeatable, IPressuredTank, ITankSyncable {
+public class TileEntityBoiler extends TileEntityFluidWorkerMachine implements IHeatable, IHeated, IPressuredTank, ITankSyncable {
 
     private static RecipesBoiler recipes = new RecipesBoiler();
     private float heat = 0;
@@ -130,6 +132,16 @@ public class TileEntityBoiler extends TileEntityFluidWorkerMachine implements IH
 
     @Override
     public void addPressure(ForgeDirection from, float pressure) {
+    }
+
+    @Override
+    public float getHeat() { 
+	return this.heat;
+    }
+
+    @Override
+    public float getMaxHeat() { 
+	return 1000;
     }
 
 }

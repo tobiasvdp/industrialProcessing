@@ -106,6 +106,14 @@ public class GuiLayout {
 			panel.setGuiContainerLayout(type);
 			layoutPanels.add(panel);
 			break;
+		case simpleHeat:
+			x = 8;
+			y = 39 + offsetY;
+			panel = new GuiLayoutPanel(this, type, x, y, 15, 54); 
+			// no slotLayout
+			panel.setGuiContainerLayout(type);
+			layoutPanels.add(panel);
+			break;
 		case lifespan:
 			x = 8;
 			y = 16 + offsetY;
