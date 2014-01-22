@@ -1,5 +1,7 @@
 package ip.industrialProcessing.gui.container.syncing.handlers;
 
-public interface IHandlerSimpleHeat extends IHandlerContainer {
+import ip.industrialProcessing.gui.container.syncing.info.InfoSimpleHeat;
 
+public interface IHandlerSimpleHeat extends IHandlerContainer {
+    InfoSimpleHeat getInfo();
 }

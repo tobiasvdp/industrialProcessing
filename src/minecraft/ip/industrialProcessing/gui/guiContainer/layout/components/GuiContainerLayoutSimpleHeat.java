@@ -52,7 +52,7 @@ public class GuiContainerLayoutSimpleHeat extends GuiContainerLayout {
 		if (info.maxHeat != 0) {
 		    int x = offsetX + 5;
 		    int y0 = 1 + offsetY;
-		    int height = info.heat * rectangleBar.height / info.maxHeat;
+		    int height = Math.min(info.heat, info.maxHeat) * rectangleBar.height / info.maxHeat;
 		    int y = y0 + rectangleBar.height - height;
 		    gui.drawTexturedModalRect(x, y, rectangleBar.x, rectangleBar.y + rectangleBar.height - height, rectangleBar.width, height);
 		    if (gui instanceof GuiContainerIP) {
