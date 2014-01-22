@@ -105,4 +105,11 @@ public class TileEntityConveyorBeltPowerInput extends TileEntityMachine implemen
 	public float getSpeed() {
 		return animationHandler.getSpeed();
 	}
+
+	public void conveyorLineSet(int iD) {
+		if(iD != conveyorLine){
+			unregister();
+			register();
+		}
+	}
 }

@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import net.minecraft.inventory.Slot;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayout;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
+import ip.industrialProcessing.slots.SlotArmor;
 
 public class SlotLayoutInventory extends SlotLayout {
 	public SlotLayoutInventory(Rectangle rect) {
@@ -20,8 +21,9 @@ public class SlotLayoutInventory extends SlotLayout {
 				slots[count] = new Slot(null, count++,	j * 18+1, i * 18+1);
 			}
 		}
+		int j = 3;
 		for (int i = 0; i < 4; i++) {
-			slots[count] = new Slot(null, count++,165+1, 54-18*i+1);
+			slots[count] = new SlotArmor(null, null,count++,165+1, 54-18*i+1,j--);
 		}
 	}
 }

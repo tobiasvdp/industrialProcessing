@@ -5,6 +5,7 @@ import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.IConnectedTile;
 import ip.industrialProcessing.machines.TileEntitySynced;
 import ip.industrialProcessing.transport.items.IConveyorLine;
+import ip.industrialProcessing.transport.items.ConveyorBeltPowerInput.TileEntityConveyorBeltPowerInput;
 import ip.industrialProcessing.transport.items.conveyorBelt.CornerState;
 import ip.industrialProcessing.utils.ConnectedTileUtils;
 import ip.industrialProcessing.utils.registry.HandlerRegistry;
@@ -220,5 +221,11 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
 
 	public void setConveyorLineID(int ID) {
 		conveyorLine = ID;
+		if(this.worldObj != null && worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord) != null){
+			TileEntity te = worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord);
+			if (te instanceof TileEntityConveyorBeltPowerInput){
+				((TileEntityConveyorBeltPowerInput)(te)).conveyorLineSet(ID);
+			}
+		}
 	}
 }

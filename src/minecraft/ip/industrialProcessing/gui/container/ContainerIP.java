@@ -22,6 +22,7 @@ import ip.industrialProcessing.utils.working.IWorkingEntity;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -67,12 +68,12 @@ public class ContainerIP extends Container {
 			// bind all handlers
 			layout.addSyncingHandlersToContainer(this, te);
 			// bind player's inventory
-			bindPlayerInventory(layout, inventoryPlayer);
+			bindPlayerInventory(layout, inventoryPlayer,player);
 		}
 	}
 
-	private void bindPlayerInventory(GuiLayout layout, InventoryPlayer inventoryPlayer) {
-		Iterator<Slot> slotIterator = layout.getSlotsInventory(inventoryPlayer);
+	private void bindPlayerInventory(GuiLayout layout, InventoryPlayer inventoryPlayer,Entity player) {
+		Iterator<Slot> slotIterator = layout.getSlotsInventory(inventoryPlayer,player);
 		while (slotIterator.hasNext()) {
 			addSlotToContainer(slotIterator.next());
 		}

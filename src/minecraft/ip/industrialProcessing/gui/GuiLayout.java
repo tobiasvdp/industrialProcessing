@@ -14,6 +14,7 @@ import java.util.Iterator;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.entity.Entity;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
@@ -28,11 +29,18 @@ public class GuiLayout {
 	public boolean useMargin = true;
 	public boolean drawTitel = true;
 	public boolean drawInventoryTitel = true;
+	private boolean autoSortByID = false;
+	private int[] sortOrder;
 	GuiLayoutPanelType[] sortingOrder = new GuiLayoutPanelType[] { GuiLayoutPanelType.heat, GuiLayoutPanelType.simpleHeat, GuiLayoutPanelType.simpleTankInput, GuiLayoutPanelType.tankInput, GuiLayoutPanelType.slotsInput, GuiLayoutPanelType.worker, GuiLayoutPanelType.slotsOutput, GuiLayoutPanelType.tankOutput, GuiLayoutPanelType.simpleTankOutput };
 
 	public GuiLayout() {
+        this(true);
+	}
+	
+	public GuiLayout(boolean drawPlayerInventory) {
 		layoutPanels = new ArrayList<GuiLayoutPanel>();
-		addLayoutPanel(GuiLayoutPanelType.slotsInventory);
+		if(drawPlayerInventory)
+		     addLayoutPanel(GuiLayoutPanelType.slotsInventory);
 		slotIndex = 0;
 	}
 
@@ -218,13 +226,13 @@ public class GuiLayout {
 		return slots.iterator();
 	}
 
-	public Iterator<Slot> getSlotsInventory(IInventory iinventory) {
+	public Iterator<Slot> getSlotsInventory(IInventory iinventory,Entity player) {
 		ArrayList<Slot> slots = new ArrayList<Slot>();
 		Iterator<GuiLayoutPanel> it = layoutPanels.iterator();
 		while (it.hasNext()) {
 			GuiLayoutPanel container = it.next();
 			if (container.getSlotLayout() != null && (container.getSlotLayout() instanceof SlotLayoutInventory)) {
-				Slot[] containerSlots = container.getSlotLayout().getGuiContainerSlots(iinventory);
+				Slot[] containerSlots = container.getSlotLayout().getGuiContainerSlots(iinventory,player);
 				for (int i = 0; i < containerSlots.length; i++)
 					slots.add(containerSlots[i]);
 			}
@@ -269,9 +277,28 @@ public class GuiLayout {
 			sortingOrder[i] = types[i];
 		}
 	}
+	
+	/*
+	 * Sets the autolayout to draw the panels in an order by their id (added pannel number)
+	 * the ID starts from 1 if the players inventory is bound!!!
+	 */
+	public void setSortingOrderByPanelID(int... ids){
+		autoSortByID = true;
+		sortOrder = ids;
+	}
 
 	private ArrayList<GuiLayoutPanel> getOrganizedPanels(int line) {
 		ArrayList<GuiLayoutPanel> panels = new ArrayList<GuiLayoutPanel>();
+		if(autoSortByID){
+			for(int i = 0;i<sortOrder.length;i++){
+				if(sortOrder[i]<this.layoutPanels.size()){
+				GuiLayoutPanel panel = layoutPanels.get(sortOrder[i]);
+				if (panel.line == line  && !panel.isFixed()){
+					panels.add(panel);
+				}
+				}
+			}
+		}else{
 		for (GuiLayoutPanelType type : sortingOrder) {
 			Iterator<GuiLayoutPanel> it = layoutPanels.iterator();
 			while (it.hasNext()) {
@@ -281,6 +308,7 @@ public class GuiLayout {
 				}
 			}
 		}
+	    }
 		return panels;
 	}
 
