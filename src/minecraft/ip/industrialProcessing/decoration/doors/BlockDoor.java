@@ -80,6 +80,16 @@ public class BlockDoor extends Block {
 			return true;
 		return false;
 	}
+	
+	public static boolean hasSideDoor(IBlockAccess world, int x, int y, int z, int blockID,int dir) {
+		ForgeDirection right = getForwardFromMetadata(dir%4).getRotation(ForgeDirection.DOWN);
+		if (world.getBlockId(x + right.offsetX, y + right.offsetY, z + right.offsetZ) == blockID) {
+			if (world.getBlockMetadata(x + right.offsetX, y + right.offsetY, z + right.offsetZ)%4 == dir%4) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	public static boolean checkIfSideDoor(IBlockAccess world, int x, int y, int z, int blockID, int dir) {
 		ForgeDirection left = getForwardFromMetadata(dir).getRotation(ForgeDirection.UP);
@@ -142,19 +152,56 @@ public class BlockDoor extends Block {
 			par1World.setBlockMetadataWithNotify(par2, par3, par4, meta, 3);
 			if (isTopDoor(par1World, par2, par3, par4, this.blockID)) {
 				par1World.setBlockMetadataWithNotify(par2, par3 - 1, par4, meta, 3);
+				if(isSideDoor(par1World, par2, par3, par4, this.blockID)){
+					ForgeDirection left = getForwardFromMetadata(meta%4).getRotation(ForgeDirection.UP);
+					par1World.setBlockMetadataWithNotify(par2 + left.offsetX, par3+ left.offsetY, par4+ left.offsetZ, par1World.getBlockMetadata(par2 + left.offsetX, par3+ left.offsetY, par4+ left.offsetZ) -4, 3);
+					par1World.setBlockMetadataWithNotify(par2 + left.offsetX, par3+ left.offsetY-1, par4+ left.offsetZ, par1World.getBlockMetadata(par2 + left.offsetX, par3+ left.offsetY-1, par4+ left.offsetZ) -4, 3);
+				}
+				if(hasSideDoor(par1World, par2, par3, par4, this.blockID,meta)){
+					ForgeDirection right = getForwardFromMetadata(meta%4).getRotation(ForgeDirection.DOWN);
+					par1World.setBlockMetadataWithNotify(par2 + right.offsetX, par3+ right.offsetY, par4+ right.offsetZ, par1World.getBlockMetadata(par2 + right.offsetX, par3+ right.offsetY, par4+ right.offsetZ) -4, 3);
+					par1World.setBlockMetadataWithNotify(par2 + right.offsetX, par3+ right.offsetY-1, par4+ right.offsetZ, par1World.getBlockMetadata(par2 + right.offsetX, par3+ right.offsetY-1, par4+ right.offsetZ) -4, 3);
+				}
 			} else {
 				par1World.setBlockMetadataWithNotify(par2, par3 + 1, par4, meta, 3);
-			}
-			if(isSideDoor(par1World, par2, par3, par4, this.blockID)){
-				
+				if(isSideDoor(par1World, par2, par3, par4, this.blockID)){
+					ForgeDirection left = getForwardFromMetadata(meta%4).getRotation(ForgeDirection.UP);
+					par1World.setBlockMetadataWithNotify(par2 + left.offsetX, par3+ left.offsetY, par4+ left.offsetZ, par1World.getBlockMetadata(par2 + left.offsetX, par3+ left.offsetY, par4+ left.offsetZ) -4, 3);
+					par1World.setBlockMetadataWithNotify(par2 + left.offsetX, par3+ left.offsetY+1, par4+ left.offsetZ, par1World.getBlockMetadata(par2 + left.offsetX, par3+ left.offsetY+1, par4+ left.offsetZ) -4, 3);
+				}
+				if(hasSideDoor(par1World, par2, par3, par4, this.blockID,meta)){
+					ForgeDirection right = getForwardFromMetadata(meta%4).getRotation(ForgeDirection.DOWN);
+					par1World.setBlockMetadataWithNotify(par2 + right.offsetX, par3+ right.offsetY, par4+ right.offsetZ, par1World.getBlockMetadata(par2 + right.offsetX, par3+ right.offsetY, par4+ right.offsetZ) -4, 3);
+					par1World.setBlockMetadataWithNotify(par2 + right.offsetX, par3+ right.offsetY+1, par4+ right.offsetZ, par1World.getBlockMetadata(par2 + right.offsetX, par3+ right.offsetY+1, par4+ right.offsetZ) -4, 3);
+				}
 			}
 		} else {
 			meta = meta + 4;
 			par1World.setBlockMetadataWithNotify(par2, par3, par4, meta, 3);
 			if (isTopDoor(par1World, par2, par3, par4, this.blockID)) {
 				par1World.setBlockMetadataWithNotify(par2, par3 - 1, par4, meta, 3);
+				if(isSideDoor(par1World, par2, par3, par4, this.blockID)){
+					ForgeDirection left = getForwardFromMetadata(meta%4).getRotation(ForgeDirection.UP);
+					par1World.setBlockMetadataWithNotify(par2 + left.offsetX, par3+ left.offsetY, par4+ left.offsetZ, par1World.getBlockMetadata(par2 + left.offsetX, par3+ left.offsetY, par4+ left.offsetZ) +4, 3);
+					par1World.setBlockMetadataWithNotify(par2 + left.offsetX, par3+ left.offsetY-1, par4+ left.offsetZ, par1World.getBlockMetadata(par2 + left.offsetX, par3+ left.offsetY-1, par4+ left.offsetZ) +4, 3);
+				}
+				if(hasSideDoor(par1World, par2, par3, par4, this.blockID,meta)){
+					ForgeDirection right = getForwardFromMetadata(meta%4).getRotation(ForgeDirection.DOWN);
+					par1World.setBlockMetadataWithNotify(par2 + right.offsetX, par3+ right.offsetY, par4+ right.offsetZ, par1World.getBlockMetadata(par2 + right.offsetX, par3+ right.offsetY, par4+ right.offsetZ) +4, 3);
+					par1World.setBlockMetadataWithNotify(par2 + right.offsetX, par3+ right.offsetY-1, par4+ right.offsetZ, par1World.getBlockMetadata(par2 + right.offsetX, par3+ right.offsetY-1, par4+ right.offsetZ) +4, 3);
+				}
 			} else {
 				par1World.setBlockMetadataWithNotify(par2, par3 + 1, par4, meta, 3);
+				if(isSideDoor(par1World, par2, par3, par4, this.blockID)){
+					ForgeDirection left = getForwardFromMetadata(meta%4).getRotation(ForgeDirection.UP);
+					par1World.setBlockMetadataWithNotify(par2 + left.offsetX, par3+ left.offsetY, par4+ left.offsetZ, par1World.getBlockMetadata(par2 + left.offsetX, par3+ left.offsetY, par4+ left.offsetZ) +4, 3);
+					par1World.setBlockMetadataWithNotify(par2 + left.offsetX, par3+ left.offsetY+1, par4+ left.offsetZ, par1World.getBlockMetadata(par2 + left.offsetX, par3+ left.offsetY+1, par4+ left.offsetZ) +4, 3);
+				}
+				if(hasSideDoor(par1World, par2, par3, par4, this.blockID,meta)){
+					ForgeDirection right = getForwardFromMetadata(meta%4).getRotation(ForgeDirection.DOWN);
+					par1World.setBlockMetadataWithNotify(par2 + right.offsetX, par3+ right.offsetY, par4+ right.offsetZ, par1World.getBlockMetadata(par2 + right.offsetX, par3+ right.offsetY, par4+ right.offsetZ) +4, 3);
+					par1World.setBlockMetadataWithNotify(par2 + right.offsetX, par3+ right.offsetY+1, par4+ right.offsetZ, par1World.getBlockMetadata(par2 + right.offsetX, par3+ right.offsetY+1, par4+ right.offsetZ) +4, 3);
+				}
 			}
 		}
 
