@@ -141,9 +141,6 @@ import ip.industrialProcessing.power.storage.TileEntityEnergyCell;
 import ip.industrialProcessing.transport.fluids.ContainerTank;
 import ip.industrialProcessing.transport.fluids.GuiContainerTank;
 import ip.industrialProcessing.transport.fluids.TileEntityTank;
-import ip.industrialProcessing.transport.items.conveyorSorter.ContainerSorter;
-import ip.industrialProcessing.transport.items.conveyorSorter.GuiContainerSorter;
-import ip.industrialProcessing.transport.items.conveyorSorter.TileEntityConveyorSorter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -187,8 +184,6 @@ public class GuiHandler implements IGuiHandler {
 				return new ContainerManualTreeTap(player.inventory, (TileEntityManualTreeTap) entity);
 			if (entity instanceof TileEntityAutomaticTreeTap)
 				return new ContainerAutomaticTreeTap(player.inventory, (TileEntityAutomaticTreeTap) entity);
-			if (entity instanceof TileEntityConveyorSorter)
-				return new ContainerSorter(player.inventory, (TileEntityConveyorSorter) entity);
 			if (entity instanceof TileEntityWireMill)
 				return new ContainerWireMill(player.inventory, (TileEntityWireMill) entity);
 			if (entity instanceof TileEntityInsulator)
@@ -295,8 +290,7 @@ public class GuiHandler implements IGuiHandler {
 				return new GuiContainerManualTreeTap(player.inventory, (TileEntityManualTreeTap) entity);
 			if (entity instanceof TileEntityAutomaticTreeTap)
 				return new GuiContainerAutomaticTreeTap(player.inventory, (TileEntityAutomaticTreeTap) entity);
-			if (entity instanceof TileEntityConveyorSorter)
-				return new GuiContainerSorter(player.inventory, (TileEntityConveyorSorter) entity);
+
 			if (entity instanceof TileEntityWireMill)
 				return new GuiContainerWireMill(player.inventory, (TileEntityWireMill) entity);
 			if (entity instanceof TileEntityInsulator)

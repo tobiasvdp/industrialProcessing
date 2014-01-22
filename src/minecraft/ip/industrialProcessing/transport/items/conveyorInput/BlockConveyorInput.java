@@ -4,7 +4,12 @@ import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
+import ip.industrialProcessing.gui.GuiLayout;
+import ip.industrialProcessing.gui.IGuiLayout;
+import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
+import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
 import ip.industrialProcessing.transport.items.conveyorBelt.BlockConveyorBase;
+import ip.industrialProcessing.utils.IDescriptionBlock;
 
 import java.util.List;
 
@@ -18,9 +23,14 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockConveyorInput extends BlockConveyorBase {
+public class BlockConveyorInput extends BlockConveyorBase  implements IDescriptionBlock, IGuiLayout{
 
     Icon[] icons = new Icon[3];
+    public static GuiLayout guiLayout;
+    static {
+	guiLayout = new GuiLayout();
+	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 9);
+    }
 
     public BlockConveyorInput() {
 	super(ConfigMachineBlocks.getBLtransportConveyorBeltInput(), Material.iron, 5.0f, Block.soundMetalFootstep, "Conveyor Input", ISetupCreativeTabs.tabPower);
@@ -61,5 +71,15 @@ public class BlockConveyorInput extends BlockConveyorBase {
 	if (axisalignedbb1 != null && par5AxisAlignedBB.intersectsWith(axisalignedbb1)) {
 	    par6List.add(axisalignedbb1);
 	}
+    }
+
+    @Override
+    public GuiLayout getGuiLayout() { 
+	return guiLayout;
+    }
+
+    @Override
+    public String getDescription() { 
+	return "A machine that can take items from a nearby inventory and output it on the conveyor belt";
     }
 }

@@ -10,6 +10,7 @@ import ip.industrialProcessing.transport.items.conveyorBelt.MovingItemStack;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorInteractionBase;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorPowerTranslation;
 import ip.industrialProcessing.utils.DirectionUtils;
+import ip.industrialProcessing.utils.nbt.NbtHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -104,16 +105,7 @@ public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation
 	super.writeToNBT(nbt);
 	if (operationMode != null)
 	    nbt.setInteger("Mode", operationMode.ordinal());
-	NBTTagList list = new NBTTagList();
-	for (int i = 0; i < slots.length; i++) {
-	    if (slots[i] != null) {
-		NBTTagCompound compound = new NBTTagCompound();
-		compound.setInteger("Slot", i);
-		slots[i].writeToNBT(compound);
-		list.appendTag(compound);
-	    }
-	}
-	nbt.setTag("Slots", list);
+	NbtHelper.writeInventory(this.slots, nbt);
 	nbt.setBoolean("ConveyorBox", boxAllowedOnConveyor);
     }
 
@@ -122,16 +114,7 @@ public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation
 	super.readFromNBT(nbt);
 	if (nbt.hasKey("Mode"))
 	    operationMode = PackerOperationMode.values()[nbt.getInteger("Mode")];
-	if (nbt.hasKey("Slots")) {
-	    NBTTagList list = nbt.getTagList("Slots");
-	    for (int i = 0; i < list.tagCount(); i++) {
-		NBTTagCompound compound = (NBTTagCompound) list.tagAt(i);
-		int index = compound.getInteger("Slot");
-		ItemStack stack = ItemStack.loadItemStackFromNBT(compound);
-		if (index >= 0 && index < slots.length)
-		    slots[index] = stack;
-	    }
-	}
+	NbtHelper.readInventory(this.slots, nbt);
 	if (nbt.hasKey("ConveyorBox"))
 	    boxAllowedOnConveyor = nbt.getBoolean("ConveyorBox");
     }
