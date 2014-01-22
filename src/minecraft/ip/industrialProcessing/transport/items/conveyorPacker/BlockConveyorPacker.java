@@ -1,35 +1,30 @@
 package ip.industrialProcessing.transport.items.conveyorPacker;
 
-import java.util.List;
-
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.config.ISetupItems;
 import ip.industrialProcessing.gui.GuiLayout;
 import ip.industrialProcessing.gui.IGuiLayout;
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
 import ip.industrialProcessing.machines.plants.storage.storageBox.BlockStorageBox;
-import ip.industrialProcessing.transport.items.conveyorBelt.BlockConveyorBase;
-import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorConnectionsBase;
-import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorInteractionBase;
+import ip.industrialProcessing.transport.items.conveyorBelt.BlockConveyorMachineBase;
 import ip.industrialProcessing.utils.IDescriptionBlock;
+
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockConveyorPacker extends BlockConveyorBase implements IDescriptionBlock, IGuiLayout {
+public class BlockConveyorPacker extends BlockConveyorMachineBase implements IDescriptionBlock, IGuiLayout {
     Icon[] icons = new Icon[3];
 
     public static GuiLayout guiLayout;
@@ -54,20 +49,7 @@ public class BlockConveyorPacker extends BlockConveyorBase implements IDescripti
     public int getRenderType() {
 	return ConfigRenderers.getRendererConveyorPackerID();
     }
-
-    @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
-
-	ItemStack playerItem = player.inventory.getCurrentItem();
-
-	if (playerItem != null && (playerItem.itemID == ISetupItems.itemHexKey.itemID)) {
-	    TileEntityConveyorConnectionsBase conveyorBelt = (TileEntityConveyorConnectionsBase) world.getBlockTileEntity(x, y, z);
-	    conveyorBelt.toggleSlope(player);
-	    return false;
-	} else
-	    player.openGui(IndustrialProcessing.instance, 0, world, x, y, z);
-	return true;
-    }
+ 
 
     @Override
     public Icon getIcon(int par1, int par2) {
@@ -80,21 +62,7 @@ public class BlockConveyorPacker extends BlockConveyorBase implements IDescripti
 	this.icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "tankSide");
 	this.icons[1] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "conveyorHopperFeatures");
 	this.icons[2] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "packer");
-    }
-
-    @Override
-    public void setBlockBoundsBasedOnState(IBlockAccess par1iBlockAccess, int par2, int par3, int par4) {
-    }
-
-    @Override
-    public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
-
-	AxisAlignedBB axisalignedbb1 = this.getCollisionBoundingBoxFromPool(par1World, par2, par3, par4);
-
-	if (axisalignedbb1 != null && par5AxisAlignedBB.intersectsWith(axisalignedbb1)) {
-	    par6List.add(axisalignedbb1);
-	}
-    }
+    } 
 
     @Override
     public GuiLayout getGuiLayout() {

@@ -8,7 +8,7 @@ import ip.industrialProcessing.gui.GuiLayout;
 import ip.industrialProcessing.gui.IGuiLayout;
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
-import ip.industrialProcessing.transport.items.conveyorBelt.BlockConveyorBase;
+import ip.industrialProcessing.transport.items.conveyorBelt.BlockConveyorMachineBase;
 import ip.industrialProcessing.utils.IDescriptionBlock;
 
 import java.util.List;
@@ -23,7 +23,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockConveyorInput extends BlockConveyorBase  implements IDescriptionBlock, IGuiLayout{
+public class BlockConveyorInput extends BlockConveyorMachineBase implements IDescriptionBlock, IGuiLayout {
 
     Icon[] icons = new Icon[3];
     public static GuiLayout guiLayout;
@@ -60,26 +60,12 @@ public class BlockConveyorInput extends BlockConveyorBase  implements IDescripti
     }
 
     @Override
-    public void setBlockBoundsBasedOnState(IBlockAccess par1iBlockAccess, int par2, int par3, int par4) {
-    }
-
-    @Override
-    public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
-
-	AxisAlignedBB axisalignedbb1 = this.getCollisionBoundingBoxFromPool(par1World, par2, par3, par4);
-
-	if (axisalignedbb1 != null && par5AxisAlignedBB.intersectsWith(axisalignedbb1)) {
-	    par6List.add(axisalignedbb1);
-	}
-    }
-
-    @Override
-    public GuiLayout getGuiLayout() { 
+    public GuiLayout getGuiLayout() {
 	return guiLayout;
     }
 
     @Override
-    public String getDescription() { 
+    public String getDescription() {
 	return "A machine that can take items from a nearby inventory and output it on the conveyor belt";
     }
 }

@@ -12,6 +12,7 @@ import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorPo
 import ip.industrialProcessing.utils.DirectionUtils;
 import ip.industrialProcessing.utils.nbt.NbtHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -19,7 +20,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatMessageComponent;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation implements IMachineContainerEntity {
+public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation implements IMachineContainerEntity, ISidedInventory {
 
     private static int tickOffset;
     ItemStack[] slots = new ItemStack[1 + BlockStorageBox.STORAGE_SIZE];
@@ -361,5 +362,15 @@ public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation
     @Override
     protected ItemStack outputToTileEntity(MovingItemStack stack, TileEntity neighbor, ForgeDirection direction) {
 	return stack.stack;
+    }
+
+    @Override
+    public int[] getAccessibleSlotsFromSide(int var1) { 
+	return new int[0];
+    }
+
+    @Override
+    public boolean canExtractItem(int i, ItemStack itemstack, int j) { 
+	return false;
     }
 }

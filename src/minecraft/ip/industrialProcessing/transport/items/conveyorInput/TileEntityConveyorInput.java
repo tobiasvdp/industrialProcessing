@@ -2,14 +2,20 @@ package ip.industrialProcessing.transport.items.conveyorInput;
 
 import java.util.Arrays;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatMessageComponent;
 import net.minecraftforge.common.ForgeDirection;
+import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
+import ip.industrialProcessing.machines.containers.IMachineContainerEntity;
 import ip.industrialProcessing.transport.TransportConnectionState;
 import ip.industrialProcessing.transport.items.conveyorBelt.ConnectionMode;
+import ip.industrialProcessing.transport.items.conveyorBelt.MovingItemStack;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorInventoryBase;
 import ip.industrialProcessing.transport.items.conveyorBelt.util.ConveyorEnvironment;
 import ip.industrialProcessing.transport.items.conveyorPacker.PackerOperationMode;
@@ -18,7 +24,7 @@ import ip.industrialProcessing.utils.IExtractFilter;
 import ip.industrialProcessing.utils.ItemTransfers;
 import ip.industrialProcessing.utils.nbt.NbtHelper;
 
-public class TileEntityConveyorInput extends TileEntityConveyorInventoryBase {
+public class TileEntityConveyorInput extends TileEntityConveyorInventoryBase implements IMachineContainerEntity, ISidedInventory {
 
     private IExtractFilter filter;
     private ExtractOrder operationMode = ExtractOrder.RANDOM;
@@ -30,6 +36,34 @@ public class TileEntityConveyorInput extends TileEntityConveyorInventoryBase {
 	Arrays.fill(this.connections, ConnectionMode.INVENTORYINPUT);
 	setConnectionMode(LocalDirection.BACK, ConnectionMode.OUTPUT);
 	this.filter = new ConveyorImportFilter(this.slots);
+    }
+
+    @Override
+    public void toggleSlope(EntityPlayer player) {
+	int index = operationMode.ordinal();
+	index++;
+	while (index >= 3) {
+	    index -= 3;
+	}
+	operationMode = ExtractOrder.values()[index];
+
+	String mode;
+	switch (operationMode) {
+	case ASCENDING:
+	    mode = "First slot first";
+	    break;
+	case DESCENDING:
+	    mode = "Last slot first";
+	    break;
+	case RANDOM:
+	default:
+	    mode = "Random slot";
+	    break;
+	}
+
+	int i2 = 1 + index;
+	if (!worldObj.isRemote)
+	    player.sendChatToPlayer(ChatMessageComponent.func_111066_d(i2 + "/3: " + mode + "."));
     }
 
     @Override
@@ -62,5 +96,107 @@ public class TileEntityConveyorInput extends TileEntityConveyorInventoryBase {
 	    return ItemTransfers.extract(opposite, inventory, operationMode, filter);
 	}
 	return null;
+    }
+
+    @Override
+    public int getSizeInventory() {
+	return slots.length;
+    }
+
+    @Override
+    public ItemStack getStackInSlot(int i) {
+	if (i >= slots.length)
+	    return null;
+	return slots[i];
+    }
+
+    @Override
+    public ItemStack decrStackSize(int i, int j) {
+
+	if (i >= slots.length)
+	    return null;
+
+	ItemStack stack = slots[i];
+	if (stack == null)
+	    return null;
+
+	if (stack.stackSize > j) {
+	    stack = stack.splitStack(j);
+	    onInventoryChanged();
+	    return stack;
+	}
+	slots[i] = null;
+	onInventoryChanged();
+	return stack;
+    }
+
+    @Override
+    public ItemStack getStackInSlotOnClosing(int i) {
+	return getStackInSlot(i);
+    }
+
+    @Override
+    public void setInventorySlotContents(int slotIndex, ItemStack stack) {
+	if (slotIndex > getSizeInventory())
+	    return;
+	if (slotIndex > 0) {
+	    if (stack != null && stack.stackSize > getInventoryStackLimit()) {
+		stack.stackSize = getInventoryStackLimit();
+	    }
+	} else {
+	    if (stack != null && stack.stackSize > getInventoryStackLimit()) {
+		stack.stackSize = getInventoryStackLimit();
+	    }
+	}
+	slots[slotIndex] = stack;
+	onInventoryChanged();
+    }
+
+    @Override
+    public String getInvName() {
+	return "packer";
+    }
+
+    @Override
+    public boolean isInvNameLocalized() {
+	return false;
+    }
+
+    @Override
+    public int getInventoryStackLimit() {
+	return 1;
+    }
+
+    @Override
+    public boolean isUseableByPlayer(EntityPlayer entityplayer) {
+	return true;
+    }
+
+    @Override
+    public void openChest() {
+    }
+
+    @Override
+    public void closeChest() {
+    }
+
+    @Override
+    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+	return !((i == 0) ^ (itemstack != null && itemstack.itemID == IndustrialProcessing.blockStorageBox.blockID));
+    }
+
+    @Override
+    public boolean canInsertItem(int index, ItemStack stack, int size) {
+	return false;
+    }
+
+    @Override
+    public int[] getAccessibleSlotsFromSide(int var1) { 
+	return new int[0];
+    }
+
+    @Override
+    public boolean canExtractItem(int i, ItemStack itemstack, int j) { 
+	return false;
     }
 }

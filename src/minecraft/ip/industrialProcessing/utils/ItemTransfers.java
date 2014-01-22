@@ -185,8 +185,13 @@ public class ItemTransfers {
 	    break;
 	}
 	for (int i = 0; i < slots.length; i++) {
+	    if (filter != null) {
+		ItemStack peek = inventory.getStackInSlot(slots[i]);
+		if (!filter.canAcceptStack(peek))
+		    continue;
+	    }
 	    ItemStack stack = inventory.decrStackSize(slots[i], 1);
-	    if (stack != null && stack.stackSize > 0 && (filter == null || filter.canAcceptStack(stack)))
+	    if (stack != null && stack.stackSize > 0)
 		return stack;
 	}
 	return null;
