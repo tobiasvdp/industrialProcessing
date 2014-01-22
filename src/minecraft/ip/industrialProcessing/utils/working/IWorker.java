@@ -15,7 +15,6 @@ public interface IWorker {
 	int getScaledProgress(int progressBarWidth);
 
 	boolean isWorking();
-
-	int doWork(int amount, int power);
+ 
 
 }

@@ -50,10 +50,6 @@ public class ClientWorker implements IWorker {
     public boolean isWorking() {
 	return workDone > 1 && workDone <= totalWork;
     }
-
-	@Override
-	public int doWork(int amount, int power) {
-		return 0;
-	}
+ 
 
 }

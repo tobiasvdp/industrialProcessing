@@ -147,13 +147,10 @@ public class RecipeWorker extends ServerWorker {
         if (size == 0)
             return minAmount;
         
-        distributionCenter = minAmount + distributionCenter*size;
-        System.out.println("center:"+distributionCenter);
-        System.out.println("div:"+randomValue/3 * size);
+        distributionCenter = minAmount + distributionCenter*size; 
         double value = distributionCenter + randomValue/3 * size;
         value = Math.max(minAmount, value);
-        value = Math.min(maxAmount, value);
-        System.out.println("calc:"+value);
+        value = Math.min(maxAmount, value); 
         return (int) Math.round(value);
     }
 }

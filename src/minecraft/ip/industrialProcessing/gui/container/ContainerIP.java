@@ -19,6 +19,7 @@ import ip.industrialProcessing.power.IPoweredMachine;
 import ip.industrialProcessing.utils.IBreakable;
 import ip.industrialProcessing.utils.handler.heat.IHeatStorage;
 import ip.industrialProcessing.utils.working.IWorkHandler;
+import ip.industrialProcessing.utils.working.IWorkingEntity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
@@ -288,7 +289,7 @@ public class ContainerIP extends Container {
 			break;
 		case worker:
 			if (te instanceof IWorkHandler)
-				addHandler(new HandlerWorker(((IWorkHandler) te).getWorker()));
+				addHandler(new HandlerWorker(((IWorkingEntity) te).getWorker()));
 			break;
 		case heat:
 			if (te instanceof IHeatStorage)
