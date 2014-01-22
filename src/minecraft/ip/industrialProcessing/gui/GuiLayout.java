@@ -310,7 +310,7 @@ public class GuiLayout {
 
 	private boolean isSameTypeClass(GuiLayoutPanelType type, GuiLayoutPanelType panelType) {
 		GuiLayoutPanelTypeClass typeClass1 = getTypeClass(type);
-		GuiLayoutPanelTypeClass typeClass2 = getTypeClass(type);
+		GuiLayoutPanelTypeClass typeClass2 = getTypeClass(panelType);
 		return typeClass1 == typeClass2;
 	}
 
@@ -359,13 +359,14 @@ public class GuiLayout {
 
 			if (type != panelType) {
 
-				if ((type.isTankInput() && panelType.isTankOutput()) || (type.isTankOutput() && panelType.isTankInput())) {
+				if (isSameTypeClass(type,panelType)) {
+					
 				} else {
 					typeIndex = 0;
 					type = panelType;
 				}
 			}
-
+			System.out.println(typeIndex);
 			container.addHandlerToContainer(panelType, typeIndex);
 
 			typeIndex++;
