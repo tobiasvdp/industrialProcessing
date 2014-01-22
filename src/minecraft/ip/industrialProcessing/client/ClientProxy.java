@@ -23,6 +23,7 @@ import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.decoration.block.machineBlock.model.ModelMachineBlock;
 import ip.industrialProcessing.decoration.crystals.ModelCrystal;
+import ip.industrialProcessing.decoration.doors.emergency.model.ModelDoorEmergency;
 import ip.industrialProcessing.decoration.light.PetrolLamp.model.ModelPetrolLamp;
 import ip.industrialProcessing.decoration.platforms.ModelPlatform;
 import ip.industrialProcessing.decoration.platforms.ModelStairs;
@@ -251,6 +252,7 @@ public class ClientProxy extends CommonProxy {
     private static final ModelBlock modelConveyorPacker = new ModelConveyorPackerBlock();
     private static final ModelBlock modelConveyorInput = new ModelConveyorInputBlock();
     private static final ModelIronPole modelIronPole = new ModelIronPole();
+    private static final ModelDoorEmergency modelDoorEmergency = new ModelDoorEmergency();
     
     @Override
     public void registerRenderers() {
@@ -354,6 +356,9 @@ public class ClientProxy extends CommonProxy {
 	
 	ConfigRenderers.setRendererIronPole(RenderingRegistry.getNextAvailableRenderId()); 
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererIronPole(), modelIronPole ));
+	
+	ConfigRenderers.setRendererDoorEmergency(RenderingRegistry.getNextAvailableRenderId()); 
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererDoorEmergency(), modelDoorEmergency ));
 
 	// block & tile entity
 

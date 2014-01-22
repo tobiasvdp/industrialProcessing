@@ -74,12 +74,15 @@ public class TileEntityGarageDoorFrame extends TileEntityMultiblockDummy {
 
 	public void generateGarageDoor() {
 		if (!isDestroying && getCore() != null && !getCore().isOpen()) {
-			clearOldGarageDoor();
+			doors.clear();
 			int height = getHeight();
 			if (height > 0) {
 				for (int i = 1; i <= height; i++) {
-					this.worldObj.setBlock(xCoord, yCoord - i, zCoord, IndustrialProcessing.blockGarageDoorDoor.blockID);
-					((TileEntityGarageDoorDoor) this.worldObj.getBlockTileEntity(xCoord, yCoord - i, zCoord)).setForwardDirection(getForwardDirection());
+					if (this.worldObj.getBlockId(xCoord, yCoord - i, zCoord) != IndustrialProcessing.blockGarageDoorDoor.blockID) {
+						this.worldObj.setBlock(xCoord, yCoord - i, zCoord, IndustrialProcessing.blockGarageDoorDoor.blockID);
+						((TileEntityGarageDoorDoor) this.worldObj.getBlockTileEntity(xCoord, yCoord - i, zCoord)).setForwardDirection(getForwardDirection());
+						
+					}
 					doors.add(new int[] { xCoord, yCoord - i, zCoord });
 				}
 			}
@@ -100,7 +103,6 @@ public class TileEntityGarageDoorFrame extends TileEntityMultiblockDummy {
 		doors.clear();
 	}
 
-	@Override
 	public void onDestroy() {
 		isDestroying = true;
 		clearOldGarageDoor();

@@ -7,6 +7,7 @@ import ip.industrialProcessing.buildingBlock.BlockPane;
 import ip.industrialProcessing.decoration.block.machineBlock.BlockMachineBlock;
 import ip.industrialProcessing.decoration.crystals.BlockCinnebar;
 import ip.industrialProcessing.decoration.crystals.BlockRutile;
+import ip.industrialProcessing.decoration.doors.emergency.BlockDoorEmergency;
 import ip.industrialProcessing.decoration.platforms.BlockPlatform;
 import ip.industrialProcessing.decoration.platforms.BlockStairs;
 import ip.industrialProcessing.decoration.trees.BlockIndustrialLeaves;
@@ -48,4 +49,5 @@ public interface ISetupBlocks {
     public final static BlockIndustrialSapling blockSapling = new BlockIndustrialSapling();
     
     public final static Block blockHalfWavePlate = (new BlockPane(ConfigBlocks.getInstance().getBlockHalfWavePlateID(), "blockHalfWavePlate", "blockHalfWavePlate", Material.iron, false)).setHardness(0.9F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("halfWavePlate");
+    public final static BlockDoorEmergency blockDoorEmergency = new BlockDoorEmergency();
 }

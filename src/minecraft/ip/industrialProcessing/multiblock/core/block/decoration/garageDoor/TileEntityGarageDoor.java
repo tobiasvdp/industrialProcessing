@@ -33,16 +33,16 @@ import ip.industrialProcessing.utils.IRemote;
 import ip.industrialProcessing.utils.ISender;
 import ip.industrialProcessing.utils.handler.packets.PacketHandler;
 
-public class TileEntityGarageDoor extends TileEntityMultiblockCore implements ISender,IControlBoxReceiver {
+public class TileEntityGarageDoor extends TileEntityMultiblockCore implements ISender, IControlBoxReceiver {
 	static StructureMultiblock structure;
 	static TierCollection tierRequirments;
 	boolean isCreated = true;
-	
+
 	static {
 		// set layout
 		structure = new StructureMultiblock();
 
-		LayoutMultiblock layout = new LayoutMultiblock(0, 10,0, 0, 0, 0);
+		LayoutMultiblock layout = new LayoutMultiblock(0, 10, 0, 0, 0, 0);
 
 		int i = 0;
 		layout.setCoreID(i++, 0, 1, ISetupMachineBlocks.blockGarageDoor.blockID);
@@ -122,8 +122,8 @@ public class TileEntityGarageDoor extends TileEntityMultiblockCore implements IS
 		}
 		this.fall();
 	}
-	
-	public void doneWorking(){
+
+	public void doneWorking() {
 		isWorking = false;
 		System.out.println("Done");
 	}
@@ -139,23 +139,23 @@ public class TileEntityGarageDoor extends TileEntityMultiblockCore implements IS
 		nbt.setBoolean("open", open);
 		super.writeToNBT(nbt);
 	}
-	
-	public boolean isOpen(){
+
+	public boolean isOpen() {
 		return open;
 	}
 
 	@Override
-	public boolean sendTileEntity(IRemote remote,ItemStack itemStack) {
+	public boolean sendTileEntity(IRemote remote, ItemStack itemStack) {
 		remote.setTileEntity(this, itemStack, this.xCoord, this.yCoord, this.zCoord);
 		return true;
 	}
 
 	@Override
 	public void buttonPressed(int i) {
-		if(i == 0){
+		if (i == 0) {
 			open();
 		}
-		if(i == 2){
+		if (i == 2) {
 			Close();
 		}
 	}
@@ -179,13 +179,13 @@ public class TileEntityGarageDoor extends TileEntityMultiblockCore implements IS
 			}
 		}
 	}
-	
-	//dummy
-	
+
+	// dummy
+
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
-		if(isCreated){
+		if (isCreated) {
 			giveHeightToCore();
 			generateGarageDoor();
 			isCreated = false;
@@ -202,7 +202,7 @@ public class TileEntityGarageDoor extends TileEntityMultiblockCore implements IS
 				cont = false;
 			}
 		}
-			setHeight(height, 0, true);
+		setHeight(height, 0, true);
 	}
 
 	private ArrayList<int[]> doors = new ArrayList<int[]>();
@@ -210,12 +210,14 @@ public class TileEntityGarageDoor extends TileEntityMultiblockCore implements IS
 
 	public void generateGarageDoor() {
 		if (!isDestroying && !isOpen()) {
-			clearOldGarageDoor();
+			doors.clear();
 			int height = getHeight();
 			if (height > 0) {
 				for (int i = 1; i <= height; i++) {
-					this.worldObj.setBlock(xCoord, yCoord - i, zCoord, IndustrialProcessing.blockGarageDoorDoor.blockID);
-					((TileEntityGarageDoorDoor)this.worldObj.getBlockTileEntity(xCoord, yCoord - i, zCoord)).setForwardDirection(getForwardDirection());
+					if (this.worldObj.getBlockId(xCoord, yCoord - i, zCoord) != IndustrialProcessing.blockGarageDoorDoor.blockID) {
+						this.worldObj.setBlock(xCoord, yCoord - i, zCoord, IndustrialProcessing.blockGarageDoorDoor.blockID);
+						((TileEntityGarageDoorDoor) this.worldObj.getBlockTileEntity(xCoord, yCoord - i, zCoord)).setForwardDirection(getForwardDirection());
+					}
 					doors.add(new int[] { xCoord, yCoord - i, zCoord });
 				}
 			}
@@ -240,7 +242,7 @@ public class TileEntityGarageDoor extends TileEntityMultiblockCore implements IS
 	public void onDestroy() {
 		isDestroying = true;
 		clearOldGarageDoor();
-			setHeight(-1, 0, true);
+		setHeight(-1, 0, true);
 		super.onDestroy();
 	}
 
@@ -255,54 +257,54 @@ public class TileEntityGarageDoor extends TileEntityMultiblockCore implements IS
 		hideGarageDoor(doors);
 		this.doors.clear();
 		for (int i = 0; i < doors.size(); i++) {
-			EntityGarageDoor en = new EntityGarageDoor(worldObj, (doors.get(i)[0] + 0.5), (doors.get(i)[1]), (doors.get(i)[2] + 0.5),this.yCoord,true,this);
+			EntityGarageDoor en = new EntityGarageDoor(worldObj, (doors.get(i)[0] + 0.5), (doors.get(i)[1]), (doors.get(i)[2] + 0.5), this.yCoord, true, this);
 			if (!worldObj.isRemote) {
-				sendSpawnPackets((doors.get(i)[0] + 0.5), (doors.get(i)[1]), (doors.get(i)[2] + 0.5),this.yCoord,true,this);
+				sendSpawnPackets((doors.get(i)[0] + 0.5), (doors.get(i)[1]), (doors.get(i)[2] + 0.5), this.yCoord, true, this);
 			}
 		}
 	}
-	
+
 	public void fall() {
 		int height = getHeight();
 		for (int i = height; i >= 1; i--) {
 			if (!worldObj.isRemote) {
-				sendSpawnPackets((xCoord + 0.5), (yCoord-i+height), (zCoord + 0.5),this.yCoord-i,false,this);
+				sendSpawnPackets((xCoord + 0.5), (yCoord - i + height), (zCoord + 0.5), this.yCoord - i, false, this);
 			}
 		}
 	}
-	
+
 	private void sendSpawnPackets(double d, int i, double e, int j, boolean b, TileEntity tileEntityGarageDoorFrame) {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream(8);
 		DataOutputStream outputStream = new DataOutputStream(bos);
 		try {
-		        outputStream.writeInt((int)(d*1000));
-		        outputStream.writeInt((int)(i*1000));
-		        outputStream.writeInt((int)(e*1000));
-		        outputStream.writeInt(j);
-		        outputStream.writeBoolean(b);
-		        outputStream.writeInt(tileEntityGarageDoorFrame.xCoord);
-		        outputStream.writeInt(tileEntityGarageDoorFrame.yCoord);
-		        outputStream.writeInt(tileEntityGarageDoorFrame.zCoord);
+			outputStream.writeInt((int) (d * 1000));
+			outputStream.writeInt((int) (i * 1000));
+			outputStream.writeInt((int) (e * 1000));
+			outputStream.writeInt(j);
+			outputStream.writeBoolean(b);
+			outputStream.writeInt(tileEntityGarageDoorFrame.xCoord);
+			outputStream.writeInt(tileEntityGarageDoorFrame.yCoord);
+			outputStream.writeInt(tileEntityGarageDoorFrame.zCoord);
 		} catch (Exception ex) {
-		        ex.printStackTrace();
+			ex.printStackTrace();
 		}
 
 		Packet250CustomPayload packet = new Packet250CustomPayload();
 		packet.channel = PacketHandler.IP_ENTITY_SPAWNGARAGEDOOR;
 		packet.data = bos.toByteArray();
 		packet.length = bos.size();
-		
-		PacketDispatcher.sendPacketToAllAround(this.xCoord, this.yCoord,this.zCoord, 30, this.worldObj.provider.dimensionId, packet);
+
+		PacketDispatcher.sendPacketToAllAround(this.xCoord, this.yCoord, this.zCoord, 30, this.worldObj.provider.dimensionId, packet);
 	}
 
-	public void addToDoors(int... ints){
+	public void addToDoors(int... ints) {
 		int height = getHeight();
 		doors.add(ints);
-		if(doors.size() == height){
+		if (doors.size() == height) {
 			doneWorking();
 		}
 	}
-	
+
 	private void hideGarageDoor(ArrayList<int[]> doors2) {
 		for (int i = 0; i < doors2.size(); i++) {
 			if (worldObj.getBlockTileEntity(doors2.get(i)[0], doors2.get(i)[1], doors2.get(i)[2]) != null) {

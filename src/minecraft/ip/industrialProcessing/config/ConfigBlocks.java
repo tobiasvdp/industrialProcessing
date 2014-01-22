@@ -45,9 +45,14 @@ public class ConfigBlocks {
 	private int blockLimestoneID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "blockLimestoneID", 2011).getInt();
 	private int blockHardSandID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "blockHardSandID", 2012).getInt();
 	private int blockHalfWavePlateID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "blockHalfWavePlateID", 2013).getInt();
+	private int blockDoorEmergencyID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "blockDoorEmergencyID", 2014).getInt();
 
 	public static int getBlockHalfWavePlateID() {
 		return getInstance().blockHalfWavePlateID;
+	}
+
+	public static int getBlockDoorEmergencyID() {
+		return getInstance().blockDoorEmergencyID;
 	}
 	
 	public static int getBlockHardSandID() {
@@ -183,6 +188,7 @@ public class ConfigBlocks {
 		registerBlock(ISetupBlocks.blockSapling, ItemBlockWithMetadata.class, "IP.World.Tree.Sapling", "Sapling");
 
 		registerBlock(ISetupBlocks.blockMachineBlock, "IP.Block.MachineB", "Machine block", BlockType.Machine, BlockType.assemble);
+		registerBlock(ISetupBlocks.blockDoorEmergency, "IP.Block.DoorEm", "Emergency door", BlockType.decoration);
 	}
 
 	@Deprecated

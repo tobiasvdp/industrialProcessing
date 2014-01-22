@@ -107,7 +107,17 @@ public class ConfigRenderers {
     private int rendererStorageBox;
     private int rendererConveyorPackerId;
     private int rendererIronPoleId;
+    private int rendererDoorEmergencyId;
 
+    public static void setRendererDoorEmergency(int var) {
+	getInstance().rendererDoorEmergencyId = var;
+    }
+
+    public static int getRendererDoorEmergency() {
+	return getInstance().rendererDoorEmergencyId;
+    }
+    
+    
     public static void setRendererIronPole(int var) {
 	getInstance().rendererIronPoleId = var;
     }

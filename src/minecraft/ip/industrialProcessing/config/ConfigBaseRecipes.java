@@ -89,6 +89,7 @@ public class ConfigBaseRecipes {
 		Block.opaqueCubeLookup[Block.thinGlass.blockID] = true;
 		Block.opaqueCubeLookup[ConfigMachineBlocks.getBlockGarageDoorID()] = true;
 		Block.opaqueCubeLookup[Block.fenceIron.blockID] = true;
+		Block.opaqueCubeLookup[IndustrialProcessing.blockDoorEmergency.blockID] = true;
 
 	}
 
