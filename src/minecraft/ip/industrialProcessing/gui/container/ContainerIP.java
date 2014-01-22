@@ -286,6 +286,8 @@ public class ContainerIP extends Container {
 			break;
 		case tankOutput:
 		case tankInput:
+		case simpleTankInput:
+		case simpleTankOutput:
 			if (te instanceof ITank)
 				addHandler(new HandlerTank(((ITank) te).getTank(index)));
 			break;

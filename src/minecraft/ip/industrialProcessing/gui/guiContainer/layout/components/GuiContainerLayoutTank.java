@@ -28,7 +28,7 @@ public class GuiContainerLayoutTank extends GuiContainerLayout {
 		super.draw(gui, container, index, offsetX, offsetY, mouseX, mouseY);
 		if (container instanceof ContainerIP && gui instanceof GuiContainerIP) {
 			ContainerIP handlerContainer = (ContainerIP) container;
-			ArrayList<IHandlerContainer> handlers = handlerContainer.getHandlers(GuiLayoutPanelType.tankInput, GuiLayoutPanelType.tankOutput);
+			ArrayList<IHandlerContainer> handlers = handlerContainer.getHandlers(GuiLayoutPanelType.tankInput, GuiLayoutPanelType.tankOutput, GuiLayoutPanelType.simpleTankInput,GuiLayoutPanelType.simpleTankOutput);
 			if (handlers.size() > index) {
 				InfoTank info = HandlerTank.getInfo(((IHandlerTank) handlers.get(index)));
 				if (info.capacity != 0) {
