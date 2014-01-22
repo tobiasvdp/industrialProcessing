@@ -7,8 +7,14 @@ import ip.industrialProcessing.utils.handler.heat.IHeated;
 public class HandlerSimpleHeat implements IHandlerSimpleHeat {
 
     private IHeated heat;
+    // serverside used to check if update needs to be send,
+    // clientside used to provide it to the gui
     private InfoSimpleHeat prevInfo;
     private int offset;
+
+    public InfoSimpleHeat getInfo() {
+	return prevInfo;
+    }
 
     public HandlerSimpleHeat(IHeated heat) {
 	this.heat = heat;
@@ -32,10 +38,7 @@ public class HandlerSimpleHeat implements IHandlerSimpleHeat {
     }
 
     public static InfoSimpleHeat getInfo(IHandlerSimpleHeat handler) {
-	InfoSimpleHeat heatInfo = new InfoSimpleHeat();
-	heatInfo.heat = handler.getValue(0);
-	heatInfo.maxHeat = handler.getValue(1);
-	return heatInfo;
+	return handler.getInfo();
     }
 
     @Override
@@ -49,7 +52,16 @@ public class HandlerSimpleHeat implements IHandlerSimpleHeat {
     }
 
     @Override
-    public void put(int index, int par2) {
+    public void put(int index, int par2) { // store values clientside
+
+	switch (index) {
+	case 0:
+	    prevInfo.heat = par2;
+	    break;
+	case 1:
+	    prevInfo.maxHeat = par2;
+	    break;
+	}
     }
 
     @Override
@@ -74,7 +86,7 @@ public class HandlerSimpleHeat implements IHandlerSimpleHeat {
     public void resetPrevValue() {
 	prevInfo = new InfoSimpleHeat();
     }
-    
+
     @Override
     public GuiLayoutPanelType getPanelType() {
 	return GuiLayoutPanelType.simpleHeat;
