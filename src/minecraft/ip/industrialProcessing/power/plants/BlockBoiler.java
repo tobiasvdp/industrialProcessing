@@ -24,7 +24,7 @@ public class BlockBoiler extends BlockMachineRendered implements IGuiLayout, IDe
     static {
 	guiLayout = new GuiLayout();
 	guiLayout.addLayoutPanel(GuiLayoutPanelType.tankInput);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.tankOutput);
+	guiLayout.addLayoutPanel(GuiLayoutPanelType.simpleTankOutput);
 	guiLayout.addLayoutPanel(GuiLayoutPanelType.simpleHeat);
     }
 

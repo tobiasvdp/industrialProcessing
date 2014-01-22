@@ -160,6 +160,11 @@ public class GuiLayoutPanel {
 	    this.guiContainerLayout.addDrawRectaglesFromSlotLayout(this, this.slotLayout, SlotType.power);
 	    guiContainerLayout.addDrawRectagle(20, 4, 18, 246, 54, 10);
 	    break;
+	case simpleTankInput:
+	case simpleTankOutput: 
+	    guiContainerLayout = new GuiContainerLayoutTank(); 
+	    guiContainerLayout.addDrawRectagle(72, 204, 18, 52);
+	    break;
 	case tankInput:
 	case tankOutput:
 	    guiContainerLayout = new GuiContainerLayoutTank();

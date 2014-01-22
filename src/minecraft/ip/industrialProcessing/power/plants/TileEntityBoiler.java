@@ -141,7 +141,7 @@ public class TileEntityBoiler extends TileEntityFluidWorkerMachine implements IH
 
     @Override
     public float getMaxHeat() { 
-	return 1000;
+	return 10000;
     }
 
 }

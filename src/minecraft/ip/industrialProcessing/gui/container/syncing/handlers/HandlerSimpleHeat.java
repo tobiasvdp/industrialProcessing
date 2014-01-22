@@ -74,9 +74,9 @@ public class HandlerSimpleHeat implements IHandlerSimpleHeat {
     public void resetPrevValue() {
 	prevInfo = new InfoSimpleHeat();
     }
-
+    
     @Override
     public GuiLayoutPanelType getPanelType() {
-	return GuiLayoutPanelType.heat;
+	return GuiLayoutPanelType.simpleHeat;
     }
 }
