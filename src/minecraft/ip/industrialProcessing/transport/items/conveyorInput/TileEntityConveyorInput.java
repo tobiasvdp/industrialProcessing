@@ -182,7 +182,7 @@ public class TileEntityConveyorInput extends TileEntityConveyorInventoryBase imp
 
     @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-	return !((i == 0) ^ (itemstack != null && itemstack.itemID == IndustrialProcessing.blockStorageBox.blockID));
+	return true;
     }
 
     @Override
