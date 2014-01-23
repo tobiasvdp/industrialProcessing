@@ -20,7 +20,7 @@ public class ConveyorLineHandler implements IConveyorLineHandler {
 	}
 	
 	public boolean registerPowercontainer(int id, TileEntityConveyorBeltPowerInput te){
-		if(id < lines.length){
+		if(id < lines.length  && id!=-1){
 			ConveyorLine line = lines[id];
 			if(line != null){
 				line.registerPowercontainer(te);
@@ -30,7 +30,7 @@ public class ConveyorLineHandler implements IConveyorLineHandler {
 		return false;
 	}
 	public void unregisterPowercontainer(int id, TileEntityConveyorBeltPowerInput te){
-		if(id < lines.length){
+		if(id < lines.length && id!=-1){
 			ConveyorLine line = lines[id];
 			if(line != null){
 				line.unregisterPowercontainer(te);

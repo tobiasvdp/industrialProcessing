@@ -35,6 +35,9 @@ public class BlockConveyorBeltPowerInput extends BlockMachine implements IDescri
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float clickX, float clickY, float clickZ) {
+		
+		TileEntityConveyorBeltPowerInput te = (TileEntityConveyorBeltPowerInput) world.getBlockTileEntity(x, y, z);
+		System.out.println(te.conveyorLine);
 		return super.onBlockActivated(world, x, y, z, player, metadata, clickX, clickY, clickZ);
 	}
 
