@@ -13,7 +13,7 @@ import net.minecraftforge.fluids.FluidStack;
 public class TileEntityThickener extends TileEntityPoweredFluidWorkerMachine {
 
 	public TileEntityThickener() {
-		super(LocalDirection.LEFT, 10000);
+		super(LocalDirection.LEFT, 10000, true);
 		LocalDirection[] nodirections = new LocalDirection[0];
 		// buckets!
 		// 0: Liquid Input Full Input

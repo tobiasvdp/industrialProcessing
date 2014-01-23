@@ -16,7 +16,7 @@ public class TileEntityAsphaltBlower extends TileEntityPoweredFluidWorkerMachine
 	public static RecipesAsphaltBlower  recipes = new RecipesAsphaltBlower();
 	
 	public TileEntityAsphaltBlower(){
-		super(LocalDirection.LEFT, 10000,100);
+		super(LocalDirection.LEFT, 10000,100,false);
 		LocalDirection[] nodirections = new LocalDirection[0];
 		
 		addStack(null, nodirections, true, false);

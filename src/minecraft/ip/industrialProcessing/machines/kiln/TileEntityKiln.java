@@ -12,7 +12,7 @@ public class TileEntityKiln extends TileEntityPoweredWorkerMachine implements IH
 	public static RecipesKiln recipes = new RecipesKiln();
 
 	public TileEntityKiln() {
-		super(LocalDirection.UNKNOWN, 100000, 100); // does 100 work per tick, lasts
+		super(LocalDirection.UNKNOWN, 100000, 100, false); // does 100 work per tick, lasts
 												// 100 ticks
 		this.addStack(null, LocalDirection.UP, true, false);
 		this.addStack(null, LocalDirection.RIGHT, false, true);

@@ -11,7 +11,7 @@ public class TileEntityWireMill extends TileEntityPoweredWorkerMachine {
     public static RecipesWireMill recipes = new RecipesWireMill(); 
     
     public TileEntityWireMill() {
-	super(LocalDirection.LEFT, 10000, 100); // does 100 work per tick, lasts
+	super(LocalDirection.LEFT, 10000, 100, false); // does 100 work per tick, lasts
 	// 100 ticks
 	this.addStack(null, LocalDirection.UP, true, false);
 	this.addStack(null, LocalDirection.DOWN, false, true);

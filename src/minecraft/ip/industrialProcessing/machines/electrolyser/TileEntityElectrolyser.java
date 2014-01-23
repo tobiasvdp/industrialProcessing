@@ -14,7 +14,7 @@ import ip.industrialProcessing.recipes.Recipe;
 public class TileEntityElectrolyser extends TileEntityPoweredFluidWorkerMachine{
 	public static RecipesElectrolyser recipes = new RecipesElectrolyser();
 	public TileEntityElectrolyser(){
-		super(LocalDirection.LEFT, 10000,100);
+		super(LocalDirection.LEFT, 10000,100, false);
 		LocalDirection[] nodirections = new LocalDirection[0];
 		
 		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.UP, true, false);

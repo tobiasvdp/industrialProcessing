@@ -16,6 +16,7 @@ public class TileEntityManualTreeTap extends TileEntityWorkerMachine {
 	public static RecipesManualTreeTap pineRecipes = new RecipesManualTreeTap().addResin();
 
 	public TileEntityManualTreeTap() {
+	    super(false);
 		addStack(null, (LocalDirection) null, true, false);
 		addStack(null, (LocalDirection) null, false, true);
 	}

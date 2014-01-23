@@ -13,7 +13,7 @@ public class TileEntitySmelter extends TileEntityPoweredFluidWorkerMachine {
 	public static RecipesSmelter recipes = new RecipesSmelter();
 
 	public TileEntitySmelter() {
-		super(LocalDirection.LEFT, 10000);
+		super(LocalDirection.LEFT, 10000, false);
 		LocalDirection[] nodirections = new LocalDirection[0];
 
 		addStack(null, LocalDirection.UP, true, false);

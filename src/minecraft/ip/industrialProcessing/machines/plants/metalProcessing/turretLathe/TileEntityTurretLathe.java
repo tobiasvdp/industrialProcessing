@@ -11,7 +11,7 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 public class TileEntityTurretLathe  extends TileEntityPoweredFluidWorkerMachine {
 
 	public TileEntityTurretLathe() {
-		super(LocalDirection.LEFT, 10000);
+		super(LocalDirection.LEFT, 10000, false);
 		LocalDirection[] nodirections = new LocalDirection[0];
 		
 		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.UP, true, false);

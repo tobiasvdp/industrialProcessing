@@ -38,7 +38,7 @@ public class BLmultiblockBlastFurnaceTower extends BlockMultiblockDummy {
 	icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "MachineConnectorFiller");
 	icons[1] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "tankSide");
 	icons[2] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "conveyorHopperFeatures");
-	icons[3] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "tankFeatures");
+	icons[3] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "fluidFeatures");
 	icons[4] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "grill");
     }
 }

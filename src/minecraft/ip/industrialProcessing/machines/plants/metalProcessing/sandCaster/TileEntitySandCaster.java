@@ -2,22 +2,23 @@ package ip.industrialProcessing.machines.plants.metalProcessing.sandCaster;
 
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
+import ip.industrialProcessing.machines.animation.IAnimationSyncable;
 import ip.industrialProcessing.recipes.Recipe;
 
 import java.util.Iterator;
 
 import net.minecraftforge.fluids.FluidContainerRegistry;
 
-public class TileEntitySandCaster extends TileEntityPoweredFluidWorkerMachine {
+public class TileEntitySandCaster extends TileEntityPoweredFluidWorkerMachine implements IAnimationSyncable {
 
 	public TileEntitySandCaster() {
-		super(LocalDirection.LEFT, 10000);
+		super(LocalDirection.LEFT, 10000, true);
 		LocalDirection[] nodirections = new LocalDirection[0];
 		
 		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.UP, true, false);
 		addStack(null, LocalDirection.BACK, true, false);
 		
-		addStack(null, LocalDirection.DOWN, false, true);
+		addStack(null, LocalDirection.DOWN, false, true); 
 	}
 
 	@Override

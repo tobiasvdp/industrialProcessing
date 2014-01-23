@@ -11,7 +11,7 @@ public class TileEntityAlkylationUnit extends TileEntityPoweredFluidWorkerMachin
 	public static RecipesAlkylationUnit recipes = new RecipesAlkylationUnit();
 	
 	public TileEntityAlkylationUnit(){
-		super(LocalDirection.LEFT, 10000,100);
+		super(LocalDirection.LEFT, 10000,100,false);
 		LocalDirection[] nodirections = new LocalDirection[0];
 		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.UP, true, false);
 		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.BACK, true, false);

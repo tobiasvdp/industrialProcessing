@@ -13,7 +13,7 @@ public class TileEntityExtruder extends TileEntityPoweredFluidWorkerMachine {
 	public static RecipesExtruder recipes = new RecipesExtruder();
 
 	public TileEntityExtruder() {
-		super(LocalDirection.LEFT, 10000);
+		super(LocalDirection.LEFT, 10000, false);
 		LocalDirection[] nodirections = new LocalDirection[0];
 		
 		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.UP, true, false);

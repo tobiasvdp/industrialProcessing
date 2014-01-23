@@ -18,7 +18,7 @@ public class TileEntityClassifier extends TileEntityPoweredFluidWorkerMachine im
 	private TankHandler tankHandler;
 
 	public TileEntityClassifier() {
-		super(LocalDirection.LEFT, 10000);
+		super(LocalDirection.LEFT, 10000, true);
 		addStack(null, LocalDirection.UP, true, false); // Input Solid
 		// ingredient
 		addStack(null, new LocalDirection[] { LocalDirection.FRONT, LocalDirection.BACK }, false, true); // Output

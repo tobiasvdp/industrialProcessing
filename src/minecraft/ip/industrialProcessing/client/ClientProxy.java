@@ -48,12 +48,16 @@ import ip.industrialProcessing.machines.plants.blacksmith.anvil.model.ModelAnvil
 import ip.industrialProcessing.machines.plants.blacksmith.grindingStone.TileEntityGrindingStone;
 import ip.industrialProcessing.machines.plants.blacksmith.grindingStone.model.ModelGrindingStone;
 import ip.industrialProcessing.machines.plants.blacksmith.grindingStone.model.ModelGrindingStoneAnimated;
+import ip.industrialProcessing.machines.plants.metalProcessing.sandCaster.TileEntitySandCaster;
+import ip.industrialProcessing.machines.plants.metalProcessing.sandCaster.model.ModelSandCaster;
+import ip.industrialProcessing.machines.plants.metalProcessing.sandCaster.model.ModelSandCasterBlock;
 import ip.industrialProcessing.machines.plants.nonFerroProcessing.magneticSeparator.ModelMagneticSeperator;
 import ip.industrialProcessing.machines.plants.nonFerroProcessing.magneticSeparator.TileEntityMagneticSeparator;
 import ip.industrialProcessing.machines.plants.storage.storageBox.model.ModelStorageBox;
 import ip.industrialProcessing.machines.plants.storage.storageRack.TileEntityStorageRack;
 import ip.industrialProcessing.machines.plants.storage.storageRack.model.ModelStorageRack;
 import ip.industrialProcessing.machines.plants.storage.storageRack.model.ModelStorageRackAnimated;
+import ip.industrialProcessing.machines.sinter.model.ModelSinterBlock;
 import ip.industrialProcessing.machines.thickener.ModelThickener;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
 import ip.industrialProcessing.machines.thickener.model.ModelThickenerBlock;
@@ -202,7 +206,7 @@ public class ClientProxy extends CommonProxy {
     private static final ModelBlock conveyorBeltBlock = new ModelConveyorBeltBlock();
     private static final ModelBlock conveyorOutputBlock = new ModelConveyorOutputBlock();
     private static final ModelBlock conveyorSorterBlock = new ModelConveyorSorterBlock();
-    private static final ModelBlock conveyorChuteBlock = new ModelConveyorChuteBlock(); 
+    private static final ModelBlock conveyorChuteBlock = new ModelConveyorChuteBlock();
     private static final ModelConnected conveyorOutput = new ModelConveyorOutput();
     private static final ModelConnected conveyorSorter = new ModelConveyorSorter();
     private static final ModelBlock platform = new ModelPlatform();
@@ -253,13 +257,20 @@ public class ClientProxy extends CommonProxy {
     private static final ModelBlock modelConveyorInput = new ModelConveyorInputBlock();
     private static final ModelIronPole modelIronPole = new ModelIronPole();
     private static final ModelDoorEmergency modelDoorEmergency = new ModelDoorEmergency();
-    
+    private static final ModelSinterBlock modelSinter = new ModelSinterBlock();
+    private static final ModelSandCasterBlock modelSandCasterBlock = new ModelSandCasterBlock();
+    private static final ModelSandCaster modelSandCaster = new ModelSandCaster();
+
     @Override
     public void registerRenderers() {
 	// 100% block
 	ConfigRenderers.setRendererCrystalId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererCrystalId(), crystal));
 
+	ConfigRenderers.setRendererSinterId(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererSinterId(), modelSinter));
+
+	
 	ConfigRenderers.setRendererPlatformId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererPlatformId(), platform));
 
@@ -325,7 +336,7 @@ public class ClientProxy extends CommonProxy {
 
 	ConfigRenderers.setRendererSolderingStation(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererSolderingStation(), modelSolderingStation));
-	
+
 	ConfigRenderers.setRendererGarageDoor(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererGarageDoor(), modelGarageDoor));
 
@@ -334,33 +345,36 @@ public class ClientProxy extends CommonProxy {
 
 	ConfigRenderers.setRendererHydroCycloneId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererHydroCycloneId(), hydroCycloneBlock));
-	
+
 	ConfigRenderers.setRendererGarageDoorFrame(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererGarageDoorFrame(), modelGarageDoorFrame));
-	
+
 	ConfigRenderers.setRendererControlBox(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererControlBox(), modelControlBox));
-	
+
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityStorageRack.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockStorageRack, "ModelStorageRack", modelStorageRackAnimated));
 	ConfigRenderers.setRendererStorageRack(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererStorageRack(), modelStorageRack));
 
 	ConfigRenderers.setRendererStorageBox(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererStorageBox(), modelStorageBox));
-	 
-	ConfigRenderers.setRendererConveyorPackerID(RenderingRegistry.getNextAvailableRenderId()); 
-	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererConveyorPackerID(), modelConveyorPacker ));
 
-	ConfigRenderers.setRendererConveyorInputID(RenderingRegistry.getNextAvailableRenderId()); 
-	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererConveyorInputID(), modelConveyorInput ));
-	
-	ConfigRenderers.setRendererIronPole(RenderingRegistry.getNextAvailableRenderId()); 
-	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererIronPole(), modelIronPole ));
-	
-	ConfigRenderers.setRendererDoorEmergency(RenderingRegistry.getNextAvailableRenderId()); 
-	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererDoorEmergency(), modelDoorEmergency ));
+	ConfigRenderers.setRendererConveyorPackerID(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererConveyorPackerID(), modelConveyorPacker));
+
+	ConfigRenderers.setRendererConveyorInputID(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererConveyorInputID(), modelConveyorInput));
+
+	ConfigRenderers.setRendererIronPole(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererIronPole(), modelIronPole));
+
+	ConfigRenderers.setRendererDoorEmergency(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererDoorEmergency(), modelDoorEmergency));
 
 	// block & tile entity
+	ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySandCaster.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockSandCaster, "ModelSandCaster", modelSandCaster));
+	ConfigRenderers.setRendererSandCasterId(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererSandCasterId(), modelSandCasterBlock));
 
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityClassifier.class, new RendererTileEntityFluidWorker(ISetupMachineBlocks.blockClassifier, "ModelClassifier", classifier));
 	ConfigRenderers.setRendererClassifierId(RenderingRegistry.getNextAvailableRenderId());

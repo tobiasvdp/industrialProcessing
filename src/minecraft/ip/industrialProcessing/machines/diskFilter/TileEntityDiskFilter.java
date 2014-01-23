@@ -12,7 +12,7 @@ import ip.industrialProcessing.recipes.Recipe;
 public class TileEntityDiskFilter extends TileEntityPoweredFluidWorkerMachine {
 
     public TileEntityDiskFilter() {
-	super(LocalDirection.LEFT, 10000);
+	super(LocalDirection.LEFT, 10000, true);
 	addStack(null, LocalDirection.RIGHT, false, true); // Mixing ingredient
 
 	LocalDirection[] nodirections = new LocalDirection[0];

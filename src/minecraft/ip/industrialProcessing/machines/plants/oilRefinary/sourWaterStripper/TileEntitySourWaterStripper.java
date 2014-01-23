@@ -10,63 +10,64 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-public class TileEntitySourWaterStripper extends TileEntityPoweredFluidWorkerMachine{
-	public static RecipesSourWaterStripper recipes = new RecipesSourWaterStripper();
-	public TileEntitySourWaterStripper(){
-		super(LocalDirection.LEFT, 10000,100);
-		LocalDirection[] nodirections = new LocalDirection[0];
-		
-		addStack(null, nodirections, true, false);
-		addStack(null, nodirections, false, true);
-		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.UP, true, false);
+public class TileEntitySourWaterStripper extends TileEntityPoweredFluidWorkerMachine {
+    public static RecipesSourWaterStripper recipes = new RecipesSourWaterStripper();
 
-		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.BACK, true, false);
+    public TileEntitySourWaterStripper() {
+	super(LocalDirection.LEFT, 10000, 100, false);
+	LocalDirection[] nodirections = new LocalDirection[0];
 
-		addStack(null, nodirections, true, false);
-		addStack(null, nodirections, false, true);
-		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.DOWN, false, true);
-		
-		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.RIGHT, false, true);
-	}
-	
-	@Override
-	public void updateEntity() {
-		addBucketToTank(0, 1, 0);
-		getBucketFromTank(2, 3, 2);
-		super.updateEntity();
-	};
-	
-	@Override
-	public boolean hasWork() {
-		return true;
-	}
+	addStack(null, nodirections, true, false);
+	addStack(null, nodirections, false, true);
+	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.UP, true, false);
 
-	@Override
-	public boolean canWork() {
-		return true;
-	}
+	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.BACK, true, false);
 
-	@Override
-	public Iterator<Recipe> iterateRecipes() {
-		return recipes.iterator();
-	}
+	addStack(null, nodirections, true, false);
+	addStack(null, nodirections, false, true);
+	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.DOWN, false, true);
 
-	@Override
-	protected boolean isValidInput(int slot, int itemID) {
-		if (slot == 2)
-			return FluidContainerRegistry.isEmptyContainer(new ItemStack(itemID, 1, 0));
-		if (slot == 0) {
-			FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(new ItemStack(itemID, 1, 0));
-			if (fluid == null)
-				return false;
-			return recipes.isValidFluidInput(0, fluid.fluidID);
-		}
+	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.RIGHT, false, true);
+    }
+
+    @Override
+    public void updateEntity() {
+	addBucketToTank(0, 1, 0);
+	getBucketFromTank(2, 3, 2);
+	super.updateEntity();
+    };
+
+    @Override
+    public boolean hasWork() {
+	return true;
+    }
+
+    @Override
+    public boolean canWork() {
+	return true;
+    }
+
+    @Override
+    public Iterator<Recipe> iterateRecipes() {
+	return recipes.iterator();
+    }
+
+    @Override
+    protected boolean isValidInput(int slot, int itemID) {
+	if (slot == 2)
+	    return FluidContainerRegistry.isEmptyContainer(new ItemStack(itemID, 1, 0));
+	if (slot == 0) {
+	    FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(new ItemStack(itemID, 1, 0));
+	    if (fluid == null)
 		return false;
+	    return recipes.isValidFluidInput(0, fluid.fluidID);
 	}
+	return false;
+    }
 
-	@Override
-	protected boolean isTankValidForFluid(int slot, int fluidId) {
-		return recipes.isValidFluidInput(slot, fluidId);
-	}
+    @Override
+    protected boolean isTankValidForFluid(int slot, int fluidId) {
+	return recipes.isValidFluidInput(slot, fluidId);
+    }
 
 }

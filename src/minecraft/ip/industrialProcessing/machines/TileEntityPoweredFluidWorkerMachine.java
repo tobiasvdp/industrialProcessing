@@ -18,14 +18,15 @@ public abstract class TileEntityPoweredFluidWorkerMachine extends TileEntityFlui
 
     private SimplePowerStorage storage;
 
-    public TileEntityPoweredFluidWorkerMachine(LocalDirection powerInput, int powerCapacity, int maxWorkSpeed) {
+    public TileEntityPoweredFluidWorkerMachine(LocalDirection powerInput, int powerCapacity, int maxWorkSpeed, boolean hasAnimatedTileEntityRenderer) {
+	super(hasAnimatedTileEntityRenderer);
 	this.powerInputSide = powerInput;
 	this.maxWorkSpeed = maxWorkSpeed;
 	this.storage = new SimplePowerStorage(powerCapacity);
     }
 
-    public TileEntityPoweredFluidWorkerMachine(LocalDirection powerInput, int powerCapacity) {
-	this(powerInput, powerCapacity, PowerWorkerHelper.DEFAULT_WORK_SPEED);
+    public TileEntityPoweredFluidWorkerMachine(LocalDirection powerInput, int powerCapacity, boolean hasAnimatedTileEntityRenderer) {
+	this(powerInput, powerCapacity, PowerWorkerHelper.DEFAULT_WORK_SPEED, hasAnimatedTileEntityRenderer);
     }
 
     @Override
@@ -33,26 +34,25 @@ public abstract class TileEntityPoweredFluidWorkerMachine extends TileEntityFlui
 	Recipe recipe = ((RecipeWorker) this.worker).getCurrentRecipe();
 
 	if (recipe != null && !worldObj.isRemote) {
-		status = StatusType.working;
+	    status = StatusType.working;
 	    int amount = PowerWorkerHelper.getWork(this.storage, this.maxWorkSpeed);
 	    int maxWork = this.storage.drainPower(amount, false);
-	    
-	    if (recipe.powerRequired > 0){
+
+	    if (recipe.powerRequired > 0) {
 		maxWork /= recipe.powerRequired;
-		if(maxWork == 0)
-			status = StatusType.lowPower;
-	    }
-	    else
-		maxWork =  this.maxWorkSpeed;
+		if (maxWork == 0)
+		    status = StatusType.lowPower;
+	    } else
+		maxWork = this.maxWorkSpeed;
 
 	    int maxPower = work(maxWork);
-	    
+
 	    if (recipe.powerRequired > 0) {
 		maxPower *= recipe.powerRequired;
 		this.storage.drainPower(maxPower, true);
 	    }
-	}else
-		status = StatusType.idle;
+	} else
+	    status = StatusType.idle;
     }
 
     @Override
@@ -92,8 +92,9 @@ public abstract class TileEntityPoweredFluidWorkerMachine extends TileEntityFlui
     public IPowerStorage getMainPowerStorage() {
 	return this.storage;
     }
+
     @Override
-    public InterfaceType[] getConnectionTypes(){
-    	return new InterfaceType[]{InterfaceType.single,InterfaceType.inventory,InterfaceType.tank,InterfaceType.worker,InterfaceType.power};
+    public InterfaceType[] getConnectionTypes() {
+	return new InterfaceType[] { InterfaceType.single, InterfaceType.inventory, InterfaceType.tank, InterfaceType.worker, InterfaceType.power };
     };
 }

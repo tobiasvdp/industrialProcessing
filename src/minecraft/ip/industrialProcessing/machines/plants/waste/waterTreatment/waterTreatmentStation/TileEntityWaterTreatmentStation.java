@@ -13,7 +13,7 @@ public class TileEntityWaterTreatmentStation extends TileEntityPoweredFluidWorke
 	public static RecipesWaterTreatmentStation recipes = new RecipesWaterTreatmentStation();
 
 	public TileEntityWaterTreatmentStation() {
-		super(LocalDirection.LEFT, 10000, 100);
+		super(LocalDirection.LEFT, 10000, 100, false);
 		addStack(null, LocalDirection.RIGHT, true, false); // Mixing ingredient
 
 		LocalDirection[] nodirections = new LocalDirection[0];

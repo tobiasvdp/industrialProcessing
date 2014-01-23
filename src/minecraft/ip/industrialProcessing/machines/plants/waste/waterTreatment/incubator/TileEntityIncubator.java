@@ -10,7 +10,7 @@ public class TileEntityIncubator extends TileEntityPoweredWorkerMachine {
     public static RecipesIncubator recipes = new RecipesIncubator();
 
     public TileEntityIncubator() {
-	super(LocalDirection.LEFT, 10000, 100);
+	super(LocalDirection.LEFT, 10000, 100, false);
 
 	this.addStack(null, LocalDirection.UP, true, false);
 	this.addStack(null, LocalDirection.DOWN, false, true);

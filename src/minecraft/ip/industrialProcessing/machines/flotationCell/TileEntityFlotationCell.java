@@ -13,6 +13,7 @@ import net.minecraftforge.fluids.FluidStack;
 public class TileEntityFlotationCell extends TileEntityFluidWorkerMachine {
 
 	public TileEntityFlotationCell() { 
+	    super(false);
 		LocalDirection[] nodirections = new LocalDirection[0];
 		// buckets!
 		// 0: Liquid Input Full Input

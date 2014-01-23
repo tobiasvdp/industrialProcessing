@@ -12,7 +12,7 @@ import ip.industrialProcessing.recipes.Recipe;
 public class TileEntityHydroCyclone extends TileEntityPoweredFluidWorkerMachine {
 
     public TileEntityHydroCyclone() {
-	super(LocalDirection.LEFT, 10000,100);
+	super(LocalDirection.LEFT, 10000,100,false);
 	LocalDirection[] nodirections = new LocalDirection[0];
 	// buckets!
 	// 0: Liquid Input Full Input

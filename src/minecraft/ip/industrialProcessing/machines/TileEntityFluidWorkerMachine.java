@@ -17,9 +17,10 @@ import net.minecraftforge.common.ForgeDirection;
 
 public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachine implements IRecipeFluidWorkHandler, IAnimationProgress, IAnimationSyncable {
 
-    public TileEntityFluidWorkerMachine() {
+    public TileEntityFluidWorkerMachine(boolean hasAnimatedTileEntityRenderer) {
 	this.worker = createServerSideWorker();
 	this.animationHandler = creatAnimationHandler();
+	this.animated = hasAnimatedTileEntityRenderer;
     }
 
     protected AnimationHandler creatAnimationHandler() {
@@ -32,17 +33,20 @@ public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachin
 
     protected ServerWorker worker;
     protected AnimationHandler animationHandler;
+    private boolean animated;
 
     @Override
-	public IWorker getWorker() {
-    	return worker;
+    public IWorker getWorker() {
+	return worker;
     }
 
     @Override
     public void updateEntity() {
 	doWork();
-	this.animationHandler.update();
-	TileAnimationSyncHandler.sendAnimationData(this, this.animationHandler);
+	if (animated) { // only send if the renderer can use it..
+	    this.animationHandler.update();
+	    TileAnimationSyncHandler.sendAnimationData(this, this.animationHandler);
+	}
     }
 
     protected void doWork() {
@@ -50,11 +54,11 @@ public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachin
     }
 
     protected int work(int amount) {
-		if (!this.worldObj.isRemote) {
-			int workDone = this.getWorker().doWork(amount);
-			return workDone;
-		}
-		return 0;
+	if (!this.worldObj.isRemote) {
+	    int workDone = this.getWorker().doWork(amount);
+	    return workDone;
+	}
+	return 0;
     }
 
     @Override
@@ -100,7 +104,7 @@ public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachin
     }
 
     @Override
-	public AnimationHandler getAnimationHandler() {
+    public AnimationHandler getAnimationHandler() {
 	return animationHandler;
     }
 
@@ -144,11 +148,11 @@ public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachin
     }
 
     @Override
-    public void addPressure(ForgeDirection from, float pressure) { 
+    public void addPressure(ForgeDirection from, float pressure) {
     }
-    
+
     @Override
-    public InterfaceType[] getConnectionTypes(){
-    	return new InterfaceType[]{InterfaceType.single,InterfaceType.inventory,InterfaceType.tank,InterfaceType.worker};
+    public InterfaceType[] getConnectionTypes() {
+	return new InterfaceType[] { InterfaceType.single, InterfaceType.inventory, InterfaceType.tank, InterfaceType.worker };
     };
 }

@@ -116,8 +116,7 @@ public class ConfigRenderers {
     public static int getRendererDoorEmergency() {
 	return getInstance().rendererDoorEmergencyId;
     }
-    
-    
+
     public static void setRendererIronPole(int var) {
 	getInstance().rendererIronPoleId = var;
     }
@@ -125,6 +124,7 @@ public class ConfigRenderers {
     public static int getRendererIronPole() {
 	return getInstance().rendererIronPoleId;
     }
+
     public static void setRendererStorageBox(int var) {
 	getInstance().rendererStorageBox = var;
     }
@@ -255,6 +255,10 @@ public class ConfigRenderers {
 
     public static int getRendererQuenchTankId() {
 	return getInstance().rendererQuechTank;
+    }
+
+    public static void setRendererSandCasterId(int value) {
+	getInstance().rendererSandCaster = value;
     }
 
     public static int getRendererSandCasterId() {

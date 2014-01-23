@@ -18,82 +18,84 @@ public abstract class TileEntityPoweredWorkerMachine extends TileEntityWorkerMac
 
     private SimplePowerStorage storage;
 
-    public TileEntityPoweredWorkerMachine(LocalDirection powerInput, int powerCapacity, int maxWorkSpeed) {
-        this.powerInputSide = powerInput;
-        this.maxWorkSpeed = maxWorkSpeed;
-        this.storage = new SimplePowerStorage(powerCapacity);
+    public TileEntityPoweredWorkerMachine(LocalDirection powerInput, int powerCapacity, int maxWorkSpeed, boolean hasAnimatedTileEntityRenderer) {
+	super(hasAnimatedTileEntityRenderer);
+	this.powerInputSide = powerInput;
+	this.maxWorkSpeed = maxWorkSpeed;
+	this.storage = new SimplePowerStorage(powerCapacity);
     }
 
-    public TileEntityPoweredWorkerMachine(LocalDirection powerInput, int powerCapacity) {
-        this(powerInput, powerCapacity, PowerWorkerHelper.DEFAULT_WORK_SPEED);
+    public TileEntityPoweredWorkerMachine(LocalDirection powerInput, int powerCapacity, boolean hasAnimatedTileEntityRenderer) {
+	this(powerInput, powerCapacity, PowerWorkerHelper.DEFAULT_WORK_SPEED, hasAnimatedTileEntityRenderer);
     }
 
     @Override
     public void doWork() {
-        Recipe recipe = ((RecipeWorker) this.worker).getCurrentRecipe();
+	Recipe recipe = ((RecipeWorker) this.worker).getCurrentRecipe();
 
-        if (recipe != null && !worldObj.isRemote) {
-        	status = StatusType.working;
-            int amount = PowerWorkerHelper.getWork(this.storage, this.maxWorkSpeed);
-            int maxWork = this.storage.drainPower(amount, false);
+	if (recipe != null && !worldObj.isRemote) {
+	    status = StatusType.working;
+	    int amount = PowerWorkerHelper.getWork(this.storage, this.maxWorkSpeed);
+	    int maxWork = this.storage.drainPower(amount, false);
 
-            if (recipe.powerRequired > 0){
-                maxWork /= recipe.powerRequired;
-        		if(maxWork == 0)
-        			status = StatusType.lowPower;
-            }else
-                maxWork = this.maxWorkSpeed;
+	    if (recipe.powerRequired > 0) {
+		maxWork /= recipe.powerRequired;
+		if (maxWork == 0)
+		    status = StatusType.lowPower;
+	    } else
+		maxWork = this.maxWorkSpeed;
 
-            int maxPower = work(maxWork);
+	    int maxPower = work(maxWork);
 
-            if (recipe.powerRequired > 0) {
-                maxPower *= recipe.powerRequired;
-                this.storage.drainPower(maxPower, true);
-            }
-            
-        }else
-        	status = StatusType.idle;
+	    if (recipe.powerRequired > 0) {
+		maxPower *= recipe.powerRequired;
+		this.storage.drainPower(maxPower, true);
+	    }
+
+	} else
+	    status = StatusType.idle;
     }
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
-        super.readFromNBT(nbt);
-        this.storage.readFromNBT(nbt);
+	super.readFromNBT(nbt);
+	this.storage.readFromNBT(nbt);
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
-        super.writeToNBT(nbt);
-        this.storage.writeToNBT(nbt);
+	super.writeToNBT(nbt);
+	this.storage.writeToNBT(nbt);
     }
 
     @Override
     public float getResistance(ForgeDirection side, float voltage) {
-        if (canAcceptPower(side)) {
-            return PowerHelper.getResistanceForStorage(this.storage);
-        }
-        return Float.POSITIVE_INFINITY;
+	if (canAcceptPower(side)) {
+	    return PowerHelper.getResistanceForStorage(this.storage);
+	}
+	return Float.POSITIVE_INFINITY;
     }
 
     @Override
     public void applyPower(ForgeDirection side, float coulombs, float voltage) {
-        if (canAcceptPower(side) && !worldObj.isRemote) {
-            int joules = (int) PowerHelper.getEnergy(coulombs, voltage);
-            this.storage.fillPower(joules, true);
-        }
+	if (canAcceptPower(side) && !worldObj.isRemote) {
+	    int joules = (int) PowerHelper.getEnergy(coulombs, voltage);
+	    this.storage.fillPower(joules, true);
+	}
     }
 
     @Override
     public boolean canAcceptPower(ForgeDirection side) {
-        return this.powerInputSide == DirectionUtils.getLocalDirection(side, getForwardDirection());
+	return this.powerInputSide == DirectionUtils.getLocalDirection(side, getForwardDirection());
     }
 
     @Override
     public IPowerStorage getMainPowerStorage() {
-        return this.storage;
+	return this.storage;
     }
+
     @Override
-    public InterfaceType[] getConnectionTypes(){
-    	return new InterfaceType[]{InterfaceType.single,InterfaceType.inventory,InterfaceType.worker,InterfaceType.power};
+    public InterfaceType[] getConnectionTypes() {
+	return new InterfaceType[] { InterfaceType.single, InterfaceType.inventory, InterfaceType.worker, InterfaceType.power };
     };
 }

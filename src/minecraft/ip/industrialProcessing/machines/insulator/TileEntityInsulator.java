@@ -13,7 +13,7 @@ public class TileEntityInsulator extends TileEntityPoweredFluidWorkerMachine{
 	public static RecipesInsulator recipes = new RecipesInsulator();
 
 	public TileEntityInsulator(){
-		super(LocalDirection.LEFT, 10000,100);
+		super(LocalDirection.LEFT, 10000,100, false);
 		
 		addStack(null, LocalDirection.UP, true, false);
 		addStack(null, LocalDirection.DOWN, false, true);

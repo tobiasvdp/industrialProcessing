@@ -10,7 +10,7 @@ public class TileEntitySpoolWindingMachine extends TileEntityPoweredWorkerMachin
 	public static RecipesSpoolWindingMachine recipes = new RecipesSpoolWindingMachine();
 
 	public TileEntitySpoolWindingMachine() {
-		super(LocalDirection.LEFT, 10000, 100);
+		super(LocalDirection.LEFT, 10000, 100, false);
 		this.addStack(null, LocalDirection.UP, true, false);
 		this.addStack(null, LocalDirection.UP, true, false);
 		this.addStack(null, LocalDirection.DOWN, false, true);

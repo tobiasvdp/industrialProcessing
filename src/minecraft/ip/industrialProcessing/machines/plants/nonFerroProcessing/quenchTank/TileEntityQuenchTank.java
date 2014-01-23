@@ -13,7 +13,7 @@ public class TileEntityQuenchTank extends TileEntityPoweredFluidWorkerMachine {
 	public static RecipesQuenchTank recipes = new RecipesQuenchTank();
 
 	public TileEntityQuenchTank() {
-		super(LocalDirection.LEFT, 10000);
+		super(LocalDirection.LEFT, 10000, false);
 		LocalDirection[] nodirections = new LocalDirection[0];
 		
 		addStack(null, LocalDirection.UP, true, false);

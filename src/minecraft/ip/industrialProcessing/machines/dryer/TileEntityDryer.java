@@ -12,7 +12,7 @@ import ip.industrialProcessing.recipes.Recipe;
 public class TileEntityDryer extends TileEntityPoweredFluidWorkerMachine {
 
 	public TileEntityDryer() {
-		super(LocalDirection.LEFT, 10000);
+		super(LocalDirection.LEFT, 10000, false);
 		addStack(null, new LocalDirection[] { LocalDirection.FRONT, LocalDirection.BACK }, false, true); // Mixing
 																											// ingredient
 

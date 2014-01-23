@@ -28,6 +28,7 @@ public class TileEntityBoiler extends TileEntityFluidWorkerMachine implements IH
     private TankHandler tankHandler;
 
     public TileEntityBoiler() {
+	super(false);
         addTank(10 * FluidContainerRegistry.BUCKET_VOLUME, new LocalDirection[] { LocalDirection.RIGHT, LocalDirection.LEFT }, true, false);
         addTank(10 * FluidContainerRegistry.BUCKET_VOLUME, LocalDirection.UP, false, true);
 

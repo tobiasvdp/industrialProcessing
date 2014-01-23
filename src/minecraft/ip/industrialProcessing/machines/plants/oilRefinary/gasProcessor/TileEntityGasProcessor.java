@@ -11,7 +11,7 @@ public class TileEntityGasProcessor extends TileEntityPoweredFluidWorkerMachine{
 	public static RecipesGasProcessor recipes = new RecipesGasProcessor();
 	
 	public TileEntityGasProcessor(){
-		super(LocalDirection.LEFT, 10000,100);
+		super(LocalDirection.LEFT, 10000,100, false);
 		LocalDirection[] nodirections = new LocalDirection[0];
 		
 		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.UP, true, false);

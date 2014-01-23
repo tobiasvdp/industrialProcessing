@@ -11,7 +11,7 @@ public class TileEntityMagneticSeparator extends TileEntityPoweredFluidWorkerMac
 	public static RecipesMagneticSeparator recipes = new RecipesMagneticSeparator();
 
 	public TileEntityMagneticSeparator() {
-		super(LocalDirection.LEFT, 10000);
+		super(LocalDirection.LEFT, 10000, false);
 		LocalDirection[] nodirections = new LocalDirection[0];
 		
 		addStack(null, LocalDirection.UP, true, false);

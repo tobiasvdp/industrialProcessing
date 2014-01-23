@@ -11,7 +11,7 @@ public class TileEntityFilter extends TileEntityPoweredWorkerMachine {
     public static RecipesFilter recipes = new RecipesFilter();
 
     public TileEntityFilter() {
-	super(LocalDirection.LEFT, 10000);
+	super(LocalDirection.LEFT, 10000, true);
 	this.addStack(null, LocalDirection.UP, true, false);
 	this.addStack(null, LocalDirection.RIGHT, false, true);
 	this.addStack(null, LocalDirection.DOWN, false, true);

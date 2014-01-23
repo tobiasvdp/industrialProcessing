@@ -20,7 +20,7 @@ public class TileEntityMixer extends TileEntityPoweredFluidWorkerMachine impleme
 	private TankHandler tankHandler;
 
 	public TileEntityMixer() {
-		super(LocalDirection.LEFT, 10000);
+		super(LocalDirection.LEFT, 10000, true);
 		addStack(null, LocalDirection.UP, true, false); // Mixing ingredient
 
 		LocalDirection[] nodirections = new LocalDirection[0];
