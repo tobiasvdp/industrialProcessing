@@ -7,20 +7,19 @@ import ip.industrialProcessing.machines.plants.storage.storageBox.BlockStorageBo
 import ip.industrialProcessing.machines.plants.storage.storageRack.TileEntityStorageRack;
 import ip.industrialProcessing.transport.items.conveyorBelt.ConnectionMode;
 import ip.industrialProcessing.transport.items.conveyorBelt.MovingItemStack;
-import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorInteractionBase;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorPowerTranslation;
 import ip.industrialProcessing.utils.DirectionUtils;
+import ip.industrialProcessing.utils.handler.numbers.IStateConfig;
 import ip.industrialProcessing.utils.nbt.NbtHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatMessageComponent;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation implements IMachineContainerEntity, ISidedInventory {
+public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation implements IStateConfig, IMachineContainerEntity, ISidedInventory {
 
     private static int tickOffset;
     ItemStack[] slots = new ItemStack[1 + BlockStorageBox.STORAGE_SIZE];
@@ -365,12 +364,56 @@ public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation
     }
 
     @Override
-    public int[] getAccessibleSlotsFromSide(int var1) { 
+    public int[] getAccessibleSlotsFromSide(int var1) {
 	return new int[0];
     }
 
     @Override
-    public boolean canExtractItem(int i, ItemStack itemstack, int j) { 
+    public boolean canExtractItem(int i, ItemStack itemstack, int j) {
 	return false;
+    }
+
+    @Override
+    public int getStateValue(int index) {
+	switch (index) {
+	case 0:
+	    return this.operationMode.ordinal();
+	case 1:
+	    return this.boxAllowedOnConveyor ? 1 : 0;
+	default:
+	    return 0;
+	}
+    }
+
+    @Override
+    public void setStateValue(int index, int value) {
+	value = Math.min(Math.max(getMinStateValue(index), value), getMaxStateValue(1));
+	switch(index)
+	{
+	case 0:
+	    this.operationMode = PackerOperationMode.values()[value];
+	    break;
+	case 1:
+	    this.boxAllowedOnConveyor = value > 0;
+	    break;
+	    default: break;
+	}
+    }
+
+    @Override
+    public int getMaxStateValue(int index) {
+	switch(index)
+	{
+	case 0:
+	    return 3; // 4 modes: 0,1,2,3
+	case 1:
+	    return 1;
+	    default: return 0;
+	}
+    }
+
+    @Override
+    public int getMinStateValue(int index) {
+	return 0;
     }
 }
