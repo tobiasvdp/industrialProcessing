@@ -134,7 +134,7 @@ public abstract class TileEntityConveyorInventoryBase extends TileEntityConveyor
 	if (neighbor instanceof IInventory) {
 	    IInventory inventory = (IInventory) neighbor;
 	    ForgeDirection opposite = direction.getOpposite();
-	    return ItemTransfers.extract(opposite, inventory, ExtractOrder.RANDOM, null);
+	    return ItemTransfers.extract(opposite, inventory, ExtractOrder.RANDOM, null, 1);
 	}
 	return null;
     }

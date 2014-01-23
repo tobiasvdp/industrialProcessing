@@ -22,14 +22,16 @@ import ip.industrialProcessing.transport.items.conveyorPacker.PackerOperationMod
 import ip.industrialProcessing.utils.ExtractOrder;
 import ip.industrialProcessing.utils.IExtractFilter;
 import ip.industrialProcessing.utils.ItemTransfers;
+import ip.industrialProcessing.utils.handler.numbers.IStateConfig;
 import ip.industrialProcessing.utils.nbt.NbtHelper;
 
-public class TileEntityConveyorInput extends TileEntityConveyorInventoryBase implements IMachineContainerEntity, ISidedInventory {
+public class TileEntityConveyorInput extends TileEntityConveyorInventoryBase implements IStateConfig, IMachineContainerEntity, ISidedInventory {
 
     private IExtractFilter filter;
     private ExtractOrder operationMode = ExtractOrder.RANDOM;
 
     ItemStack[] slots = new ItemStack[9];
+    private int extractStackSize = 1;
 
     public TileEntityConveyorInput() {
 	super();
@@ -71,6 +73,7 @@ public class TileEntityConveyorInput extends TileEntityConveyorInventoryBase imp
 	super.writeToNBT(nbt);
 	if (operationMode != null)
 	    nbt.setInteger("Mode", operationMode.ordinal());
+	nbt.setInteger("maxSize", this.extractStackSize);
 	NbtHelper.writeInventory(this.slots, nbt);
     }
 
@@ -79,6 +82,8 @@ public class TileEntityConveyorInput extends TileEntityConveyorInventoryBase imp
 	super.readFromNBT(nbt);
 	if (nbt.hasKey("Mode"))
 	    operationMode = ExtractOrder.values()[nbt.getInteger("Mode")];
+	if(nbt.hasKey("maxSize"))
+	    this.extractStackSize = nbt.getInteger("maxSize");
 	NbtHelper.readInventory(this.slots, nbt);
     }
 
@@ -93,7 +98,7 @@ public class TileEntityConveyorInput extends TileEntityConveyorInventoryBase imp
 	if (neighbor instanceof IInventory) {
 	    IInventory inventory = (IInventory) neighbor;
 	    ForgeDirection opposite = direction.getOpposite();
-	    return ItemTransfers.extract(opposite, inventory, operationMode, filter);
+	    return ItemTransfers.extract(opposite, inventory, operationMode, filter, this.extractStackSize);
 	}
 	return null;
     }
@@ -191,12 +196,40 @@ public class TileEntityConveyorInput extends TileEntityConveyorInventoryBase imp
     }
 
     @Override
-    public int[] getAccessibleSlotsFromSide(int var1) { 
+    public int[] getAccessibleSlotsFromSide(int var1) {
 	return new int[0];
     }
 
     @Override
-    public boolean canExtractItem(int i, ItemStack itemstack, int j) { 
+    public boolean canExtractItem(int i, ItemStack itemstack, int j) {
 	return false;
+    }
+
+    @Override
+    public int getStateValue(int index) {
+	if (index == 0)
+	    return this.extractStackSize;
+	return 0;
+    }
+
+    @Override
+    public void setStateValue(int index, int value) {
+	if (index == 0)
+	    this.extractStackSize = Math.max(getMinStateValue(index), Math.min(getMaxStateValue(index), value));
+
+    }
+
+    @Override
+    public int getMaxStateValue(int index) {
+	if (index == 0)
+	    return 64;
+	return 0;
+    }
+
+    @Override
+    public int getMinStateValue(int index) {
+	if (index == 0)
+	    return 1;
+	return 0;
     }
 }

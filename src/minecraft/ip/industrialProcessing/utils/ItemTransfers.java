@@ -152,12 +152,12 @@ public class ItemTransfers {
 	}
     }
 
-    public static ItemStack extract(ForgeDirection opposite, IInventory inventory, ExtractOrder order, IExtractFilter filter) {
+    public static ItemStack extract(ForgeDirection opposite, IInventory inventory, ExtractOrder order, IExtractFilter filter, int amount) {
 	if (inventory instanceof ISidedInventory) {
-	    return extract(opposite, (ISidedInventory) inventory, order, filter);
+	    return extract(opposite, (ISidedInventory) inventory, order, filter, amount);
 	}
 	int[] slots = getSlots(inventory.getSizeInventory());
-	return extract(slots, inventory, order, filter);
+	return extract(slots, inventory, order, filter, amount);
     }
 
     private static int[] getSlots(int sizeInventory) {
@@ -168,12 +168,12 @@ public class ItemTransfers {
 	return slots;
     }
 
-    public static ItemStack extract(ForgeDirection direction, ISidedInventory inventory, ExtractOrder order, IExtractFilter filter) {
+    public static ItemStack extract(ForgeDirection direction, ISidedInventory inventory, ExtractOrder order, IExtractFilter filter, int amount) {
 	int[] slots = inventory.getAccessibleSlotsFromSide(direction.ordinal());
-	return extract(slots, inventory, order, filter);
+	return extract(slots, inventory, order, filter, amount);
     }
 
-    public static ItemStack extract(int[] slots, IInventory inventory, ExtractOrder order, IExtractFilter filter) {
+    public static ItemStack extract(int[] slots, IInventory inventory, ExtractOrder order, IExtractFilter filter, int amount) {
 	switch (order) {
 	case RANDOM:
 	    shuffle(slots);
@@ -185,12 +185,16 @@ public class ItemTransfers {
 	    break;
 	}
 	for (int i = 0; i < slots.length; i++) {
+	    ItemStack peek = inventory.getStackInSlot(slots[i]);
+	    if (peek == null)
+		continue;
 	    if (filter != null) {
-		ItemStack peek = inventory.getStackInSlot(slots[i]);
 		if (!filter.canAcceptStack(peek))
 		    continue;
 	    }
-	    ItemStack stack = inventory.decrStackSize(slots[i], 1);
+
+	    amount = Math.min(amount, peek.stackSize);
+	    ItemStack stack = inventory.decrStackSize(slots[i], amount);
 	    if (stack != null && stack.stackSize > 0)
 		return stack;
 	}
