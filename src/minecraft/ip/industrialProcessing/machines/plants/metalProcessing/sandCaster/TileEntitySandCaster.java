@@ -11,47 +11,57 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 
 public class TileEntitySandCaster extends TileEntityPoweredFluidWorkerMachine implements IAnimationSyncable {
 
-	public TileEntitySandCaster() {
-		super(LocalDirection.LEFT, 10000, true);
-		LocalDirection[] nodirections = new LocalDirection[0];
-		
-		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.UP, true, false);
-		addStack(null, LocalDirection.BACK, true, false);
-		
-		addStack(null, LocalDirection.DOWN, false, true); 
-	}
+    public TileEntitySandCaster() {
+	super(LocalDirection.LEFT, 10000, true);
+	LocalDirection[] nodirections = new LocalDirection[0];
 
-	@Override
-	public void updateEntity() {
-		super.updateEntity();
-	};
+	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.UP, true, false);
+	addStack(null, LocalDirection.BACK, true, false);
 
-	public static RecipesSandCaster recipes = new RecipesSandCaster();
+	addStack(null, LocalDirection.DOWN, false, true);
 
-	@Override
-	public boolean hasWork() {
-		return true;
-	}
+	addStack(null, nodirections, true, false);
 
-	@Override
-	public boolean canWork() {
-		return true;
-	}
-	
-	@Override
-	public Iterator<Recipe> iterateRecipes() {
-		return recipes.iterator();
-	}
+	addStack(null, nodirections, false, true);
+    }
 
-	@Override
-	protected boolean isValidInput(int slot, int itemID) {
-		if (slot == 0)
-			return recipes.isValidInput(slot, itemID);
-		return false;
-	}
+    @Override
+    public void updateEntity() {
+	super.updateEntity();
+	addBucketToTank(1, 2, 0);
 
-	@Override
-	protected boolean isTankValidForFluid(int slot, int fluidId) {
-		return recipes.isValidFluidInput(slot, fluidId);
-	}
+	if (this.animationHandler.getProgress() < 0 && getStackInSlot(0) != null)
+	    this.animationHandler.setProgress(0);
+	if (this.animationHandler.getProgress() >= 0 && getStackInSlot(0) == null)
+	    this.animationHandler.setProgress(-1);
+    };
+
+    public static RecipesSandCaster recipes = new RecipesSandCaster();
+
+    @Override
+    public boolean hasWork() {
+	return true;
+    }
+
+    @Override
+    public boolean canWork() {
+	return true;
+    }
+
+    @Override
+    public Iterator<Recipe> iterateRecipes() {
+	return recipes.iterator();
+    }
+
+    @Override
+    protected boolean isValidInput(int slot, int itemID) {
+	if (slot == 0)
+	    return recipes.isValidInput(slot, itemID);
+	return false;
+    }
+
+    @Override
+    protected boolean isTankValidForFluid(int slot, int fluidId) {
+	return recipes.isValidFluidInput(slot, fluidId);
+    }
 }

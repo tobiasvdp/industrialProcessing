@@ -25,9 +25,6 @@ import ip.industrialProcessing.machines.plants.blacksmith.anvil.GuiContainerAnvi
 import ip.industrialProcessing.machines.plants.metalProcessing.extruder.ContainerExtruder;
 import ip.industrialProcessing.machines.plants.metalProcessing.extruder.GuiContainerExtruder;
 import ip.industrialProcessing.machines.plants.metalProcessing.extruder.TileEntityExtruder;
-import ip.industrialProcessing.machines.plants.metalProcessing.sandCaster.ContainerSandCaster;
-import ip.industrialProcessing.machines.plants.metalProcessing.sandCaster.GuiContainerSandCaster;
-import ip.industrialProcessing.machines.plants.metalProcessing.sandCaster.TileEntitySandCaster;
 import ip.industrialProcessing.machines.plants.metalProcessing.turretLathe.ContainerTurretLathe;
 import ip.industrialProcessing.machines.plants.metalProcessing.turretLathe.GuiContainerTurretLathe;
 import ip.industrialProcessing.machines.plants.metalProcessing.turretLathe.TileEntityTurretLathe;
@@ -142,210 +139,207 @@ import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler {
 
-	public static final int GUIDE_ID = 1;
-	public static final int ANVIL_ID = 2;
-	public static final int SOLDERINGIRON_ID = 3;
+    public static final int GUIDE_ID = 1;
+    public static final int ANVIL_ID = 2;
+    public static final int SOLDERINGIRON_ID = 3;
 
-	@Override
-	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+    @Override
+    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 
-		TileEntity entity = world.getBlockTileEntity(x, y, z);
-		if (ID == 0) {
-			if (entity.getBlockType() != null && (entity.getBlockType() instanceof IGuiLayout || entity.getBlockType() instanceof IGuiLayoutMultiblock)) {
-				return new ContainerIP(player, entity);
-			}
-			if (entity instanceof TileEntityMagneticSeparator)
-				return new ContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity);
-			if (entity instanceof TileEntityPelletExtruder)
-				return new ContainerPelletExtruder(player.inventory, (TileEntityPelletExtruder) entity);
-			if (entity instanceof TileEntityExtruder)
-				return new ContainerExtruder(player.inventory, (TileEntityExtruder) entity);
-			if (entity instanceof TileEntityOxygenFurnace)
-				return new ContainerOxygenFurnace(player.inventory, (TileEntityOxygenFurnace) entity);
-			if (entity instanceof TileEntityBuildcraftGenerator)
-				return new ContainerBuildcraftGenerator(player.inventory, (TileEntityBuildcraftGenerator) entity);
-			if (entity instanceof TileEntityGenerator)
-				return new ContainerGenerator(player.inventory, (TileEntityGenerator) entity); 
-			if (entity instanceof TileEntityTurbine)
-				return new ContainerTurbine(player.inventory, (TileEntityTurbine) entity);
-			if (entity instanceof TileEntityIncubator)
-				return new ContainerIncubator(player.inventory, (TileEntityIncubator) entity);
-			if (entity instanceof TileEntityManualTreeTap)
-				return new ContainerManualTreeTap(player.inventory, (TileEntityManualTreeTap) entity);
-			if (entity instanceof TileEntityAutomaticTreeTap)
-				return new ContainerAutomaticTreeTap(player.inventory, (TileEntityAutomaticTreeTap) entity);
-			if (entity instanceof TileEntityWireMill)
-				return new ContainerWireMill(player.inventory, (TileEntityWireMill) entity);
-			if (entity instanceof TileEntityInsulator)
-				return new ContainerInsulator(player.inventory, (TileEntityInsulator) entity);
-			if (entity instanceof TileEntitySpoolWindingMachine)
-				return new ContainerSpoolWindingMachine(player.inventory, (TileEntitySpoolWindingMachine) entity);
-			if (entity instanceof TileEntityElectrolyser)
-				return new ContainerElectrolyser(player.inventory, (TileEntityElectrolyser) entity);
-			if (entity instanceof TileEntitySourWaterStripper)
-				return new ContainerSourWaterStripper(player.inventory, (TileEntitySourWaterStripper) entity);
-			if (entity instanceof TileEntityAlkylationUnit)
-				return new ContainerAlkylationUnit(player.inventory, (TileEntityAlkylationUnit) entity);
-			if (entity instanceof TileEntityAsphaltBlower)
-				return new ContainerAsphaltBlower(player.inventory, (TileEntityAsphaltBlower) entity);
-			if (entity instanceof TileEntityGasProcessor)
-				return new ContainerGasProcessor(player.inventory, (TileEntityGasProcessor) entity);
-			if (entity instanceof TileEntityIsomerizationReactor)
-				return new ContainerIsomerizationReactor(player.inventory, (TileEntityIsomerizationReactor) entity);
-			if (entity instanceof TileEntityAtmosphericDestilationTower)
-				return new ContainerAtmosphericDestilationTower(player.inventory, (TileEntityAtmosphericDestilationTower) entity);
-			if (entity instanceof TileEntityAmineTreater)
-				return new ContainerAmineTreater(player.inventory, (TileEntityAmineTreater) entity);
-			if (entity instanceof TileEntityCatalyticReformer)
-				return new ContainerCatalyticReformer(player.inventory, (TileEntityCatalyticReformer) entity);
-			if (entity instanceof TileEntityClausSulfurPlant)
-				return new ContainerClausSulfurPlant(player.inventory, (TileEntityClausSulfurPlant) entity);
-			if (entity instanceof TileEntityDelayedCoker)
-				return new ContainerDelayedCoker(player.inventory, (TileEntityDelayedCoker) entity);
-			if (entity instanceof TileEntityFluidCatalyticCracker)
-				return new ContainerFluidCatalyticCracker(player.inventory, (TileEntityFluidCatalyticCracker) entity);
-			if (entity instanceof TileEntityHydroCracker)
-				return new ContainerHydroCracker(player.inventory, (TileEntityHydroCracker) entity);
-			if (entity instanceof TileEntityHydroTreater)
-				return new ContainerHydroTreater(player.inventory, (TileEntityHydroTreater) entity);
-			if (entity instanceof TileEntityMeroxTreater)
-				return new ContainerMeroxTreater(player.inventory, (TileEntityMeroxTreater) entity);
-			if (entity instanceof TileEntityVacuumDestilationTower)
-				return new ContainerVacuumDestilationTower(player.inventory, (TileEntityVacuumDestilationTower) entity);
-			if (entity instanceof TileEntitySinter)
-				return new ContainerSinter(player.inventory, (TileEntitySinter) entity);
-			if (entity instanceof TileEntityKiln)
-				return new ContainerKiln(player.inventory, (TileEntityKiln) entity);
-			if (entity instanceof TEmultiblockBlastFurnace)
-				return new ContainerMultiblockBlastFurnace(player.inventory, (TEmultiblockBlastFurnace) entity);
-			if (entity instanceof TileEntitySandCaster)
-				return new ContainerSandCaster(player.inventory, (TileEntitySandCaster) entity);
-			if (entity instanceof TileEntityVacuumCaster)
-				return new ContainerVacuumCaster(player.inventory, (TileEntityVacuumCaster) entity);
-			if (entity instanceof TileEntityTurretLathe)
-				return new ContainerTurretLathe(player.inventory, (TileEntityTurretLathe) entity);
-			if (entity instanceof TileEntityCoolingUnit)
-				return new ContainerCoolingUnit(player.inventory, (TileEntityCoolingUnit) entity);
-			if (entity instanceof TileEntityRoaster)
-				return new ContainerRoaster(player.inventory, (TileEntityRoaster) entity);
-			if (entity instanceof TileEntitySmelter)
-				return new ContainerSmelter(player.inventory, (TileEntitySmelter) entity);
-			if (entity instanceof TileEntityQuenchTank)
-				return new ContainerQuenchTank(player.inventory, (TileEntityQuenchTank) entity);
-			if (entity instanceof TileEntityContainer)
-				return new ContainerContainer(player.inventory, (TileEntityContainer) entity);
-			if (entity instanceof TileEntityEnergyCell)
-				return new ContainerEnergyCell(player.inventory, (TileEntityEnergyCell) entity);
-			if (entity instanceof TileEntityTank)
-				return new ContainerTank(player.inventory, (TileEntityTank) entity);
-		} else if (ID == GUIDE_ID) {
-			return null;
-		} else if (ID == ANVIL_ID) {
-			return new ContainerAnvil(player.inventory, world, x, y, z);
-		}
-		return null;
+	TileEntity entity = world.getBlockTileEntity(x, y, z);
+	if (ID == 0) {
+	    if (entity.getBlockType() != null && (entity.getBlockType() instanceof IGuiLayout || entity.getBlockType() instanceof IGuiLayoutMultiblock)) {
+		return new ContainerIP(player, entity);
+	    }
+	    if (entity instanceof TileEntityMagneticSeparator)
+		return new ContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity);
+	    if (entity instanceof TileEntityPelletExtruder)
+		return new ContainerPelletExtruder(player.inventory, (TileEntityPelletExtruder) entity);
+	    if (entity instanceof TileEntityExtruder)
+		return new ContainerExtruder(player.inventory, (TileEntityExtruder) entity);
+	    if (entity instanceof TileEntityOxygenFurnace)
+		return new ContainerOxygenFurnace(player.inventory, (TileEntityOxygenFurnace) entity);
+	    if (entity instanceof TileEntityBuildcraftGenerator)
+		return new ContainerBuildcraftGenerator(player.inventory, (TileEntityBuildcraftGenerator) entity);
+	    if (entity instanceof TileEntityGenerator)
+		return new ContainerGenerator(player.inventory, (TileEntityGenerator) entity);
+	    if (entity instanceof TileEntityTurbine)
+		return new ContainerTurbine(player.inventory, (TileEntityTurbine) entity);
+	    if (entity instanceof TileEntityIncubator)
+		return new ContainerIncubator(player.inventory, (TileEntityIncubator) entity);
+	    if (entity instanceof TileEntityManualTreeTap)
+		return new ContainerManualTreeTap(player.inventory, (TileEntityManualTreeTap) entity);
+	    if (entity instanceof TileEntityAutomaticTreeTap)
+		return new ContainerAutomaticTreeTap(player.inventory, (TileEntityAutomaticTreeTap) entity);
+	    if (entity instanceof TileEntityWireMill)
+		return new ContainerWireMill(player.inventory, (TileEntityWireMill) entity);
+	    if (entity instanceof TileEntityInsulator)
+		return new ContainerInsulator(player.inventory, (TileEntityInsulator) entity);
+	    if (entity instanceof TileEntitySpoolWindingMachine)
+		return new ContainerSpoolWindingMachine(player.inventory, (TileEntitySpoolWindingMachine) entity);
+	    if (entity instanceof TileEntityElectrolyser)
+		return new ContainerElectrolyser(player.inventory, (TileEntityElectrolyser) entity);
+	    if (entity instanceof TileEntitySourWaterStripper)
+		return new ContainerSourWaterStripper(player.inventory, (TileEntitySourWaterStripper) entity);
+	    if (entity instanceof TileEntityAlkylationUnit)
+		return new ContainerAlkylationUnit(player.inventory, (TileEntityAlkylationUnit) entity);
+	    if (entity instanceof TileEntityAsphaltBlower)
+		return new ContainerAsphaltBlower(player.inventory, (TileEntityAsphaltBlower) entity);
+	    if (entity instanceof TileEntityGasProcessor)
+		return new ContainerGasProcessor(player.inventory, (TileEntityGasProcessor) entity);
+	    if (entity instanceof TileEntityIsomerizationReactor)
+		return new ContainerIsomerizationReactor(player.inventory, (TileEntityIsomerizationReactor) entity);
+	    if (entity instanceof TileEntityAtmosphericDestilationTower)
+		return new ContainerAtmosphericDestilationTower(player.inventory, (TileEntityAtmosphericDestilationTower) entity);
+	    if (entity instanceof TileEntityAmineTreater)
+		return new ContainerAmineTreater(player.inventory, (TileEntityAmineTreater) entity);
+	    if (entity instanceof TileEntityCatalyticReformer)
+		return new ContainerCatalyticReformer(player.inventory, (TileEntityCatalyticReformer) entity);
+	    if (entity instanceof TileEntityClausSulfurPlant)
+		return new ContainerClausSulfurPlant(player.inventory, (TileEntityClausSulfurPlant) entity);
+	    if (entity instanceof TileEntityDelayedCoker)
+		return new ContainerDelayedCoker(player.inventory, (TileEntityDelayedCoker) entity);
+	    if (entity instanceof TileEntityFluidCatalyticCracker)
+		return new ContainerFluidCatalyticCracker(player.inventory, (TileEntityFluidCatalyticCracker) entity);
+	    if (entity instanceof TileEntityHydroCracker)
+		return new ContainerHydroCracker(player.inventory, (TileEntityHydroCracker) entity);
+	    if (entity instanceof TileEntityHydroTreater)
+		return new ContainerHydroTreater(player.inventory, (TileEntityHydroTreater) entity);
+	    if (entity instanceof TileEntityMeroxTreater)
+		return new ContainerMeroxTreater(player.inventory, (TileEntityMeroxTreater) entity);
+	    if (entity instanceof TileEntityVacuumDestilationTower)
+		return new ContainerVacuumDestilationTower(player.inventory, (TileEntityVacuumDestilationTower) entity);
+	    if (entity instanceof TileEntitySinter)
+		return new ContainerSinter(player.inventory, (TileEntitySinter) entity);
+	    if (entity instanceof TileEntityKiln)
+		return new ContainerKiln(player.inventory, (TileEntityKiln) entity);
+	    if (entity instanceof TEmultiblockBlastFurnace)
+		return new ContainerMultiblockBlastFurnace(player.inventory, (TEmultiblockBlastFurnace) entity);
+
+	    if (entity instanceof TileEntityVacuumCaster)
+		return new ContainerVacuumCaster(player.inventory, (TileEntityVacuumCaster) entity);
+	    if (entity instanceof TileEntityTurretLathe)
+		return new ContainerTurretLathe(player.inventory, (TileEntityTurretLathe) entity);
+	    if (entity instanceof TileEntityCoolingUnit)
+		return new ContainerCoolingUnit(player.inventory, (TileEntityCoolingUnit) entity);
+	    if (entity instanceof TileEntityRoaster)
+		return new ContainerRoaster(player.inventory, (TileEntityRoaster) entity);
+	    if (entity instanceof TileEntitySmelter)
+		return new ContainerSmelter(player.inventory, (TileEntitySmelter) entity);
+	    if (entity instanceof TileEntityQuenchTank)
+		return new ContainerQuenchTank(player.inventory, (TileEntityQuenchTank) entity);
+	    if (entity instanceof TileEntityContainer)
+		return new ContainerContainer(player.inventory, (TileEntityContainer) entity);
+	    if (entity instanceof TileEntityEnergyCell)
+		return new ContainerEnergyCell(player.inventory, (TileEntityEnergyCell) entity);
+	    if (entity instanceof TileEntityTank)
+		return new ContainerTank(player.inventory, (TileEntityTank) entity);
+	} else if (ID == GUIDE_ID) {
+	    return null;
+	} else if (ID == ANVIL_ID) {
+	    return new ContainerAnvil(player.inventory, world, x, y, z);
 	}
+	return null;
+    }
 
-	@Override
-	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+    @Override
+    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 
-		TileEntity entity = world.getBlockTileEntity(x, y, z);
-		if (ID == 0) {
-			if (entity.getBlockType() != null && (entity.getBlockType() instanceof IGuiLayout || entity.getBlockType() instanceof IGuiLayoutMultiblock)) {
-				return new GuiContainerIP(player, entity, new ContainerIP(player, entity));
-			}
-			if (entity instanceof TileEntityMagneticSeparator)
-				return new GuiContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity);
-			if (entity instanceof TileEntityPelletExtruder)
-				return new GuiContainerPelletExtruder(player.inventory, (TileEntityPelletExtruder) entity);
-			if (entity instanceof TileEntityExtruder)
-				return new GuiContainerExtruder(player.inventory, (TileEntityExtruder) entity);
-			if (entity instanceof TileEntityOxygenFurnace)
-				return new GuiContainerOxygenFurnace(player.inventory, (TileEntityOxygenFurnace) entity);
-			if (entity instanceof TileEntityBuildcraftGenerator)
-				return new GuiContainerBuildcraftGenerator(player.inventory, (TileEntityBuildcraftGenerator) entity);
-			if (entity instanceof TileEntityGenerator)
-				return new GuiContainerGenerator(player.inventory, (TileEntityGenerator) entity); 
-			if (entity instanceof TileEntityTurbine)
-				return new GuiContainerTurbine(player.inventory, (TileEntityTurbine) entity);
-			if (entity instanceof TEmultiblockToggleButton)
-				return new GUImultiblockToggleButton((TEmultiblockToggleButton) entity, player);
-			if (entity instanceof TileEntityIncubator)
-				return new GuiContainerIncubator(player.inventory, (TileEntityIncubator) entity);
-			if (entity instanceof TileEntityManualTreeTap)
-				return new GuiContainerManualTreeTap(player.inventory, (TileEntityManualTreeTap) entity);
-			if (entity instanceof TileEntityAutomaticTreeTap)
-				return new GuiContainerAutomaticTreeTap(player.inventory, (TileEntityAutomaticTreeTap) entity);
+	TileEntity entity = world.getBlockTileEntity(x, y, z);
+	if (ID == 0) {
+	    if (entity.getBlockType() != null && (entity.getBlockType() instanceof IGuiLayout || entity.getBlockType() instanceof IGuiLayoutMultiblock)) {
+		return new GuiContainerIP(player, entity, new ContainerIP(player, entity));
+	    }
+	    if (entity instanceof TileEntityMagneticSeparator)
+		return new GuiContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity);
+	    if (entity instanceof TileEntityPelletExtruder)
+		return new GuiContainerPelletExtruder(player.inventory, (TileEntityPelletExtruder) entity);
+	    if (entity instanceof TileEntityExtruder)
+		return new GuiContainerExtruder(player.inventory, (TileEntityExtruder) entity);
+	    if (entity instanceof TileEntityOxygenFurnace)
+		return new GuiContainerOxygenFurnace(player.inventory, (TileEntityOxygenFurnace) entity);
+	    if (entity instanceof TileEntityBuildcraftGenerator)
+		return new GuiContainerBuildcraftGenerator(player.inventory, (TileEntityBuildcraftGenerator) entity);
+	    if (entity instanceof TileEntityGenerator)
+		return new GuiContainerGenerator(player.inventory, (TileEntityGenerator) entity);
+	    if (entity instanceof TileEntityTurbine)
+		return new GuiContainerTurbine(player.inventory, (TileEntityTurbine) entity);
+	    if (entity instanceof TEmultiblockToggleButton)
+		return new GUImultiblockToggleButton((TEmultiblockToggleButton) entity, player);
+	    if (entity instanceof TileEntityIncubator)
+		return new GuiContainerIncubator(player.inventory, (TileEntityIncubator) entity);
+	    if (entity instanceof TileEntityManualTreeTap)
+		return new GuiContainerManualTreeTap(player.inventory, (TileEntityManualTreeTap) entity);
+	    if (entity instanceof TileEntityAutomaticTreeTap)
+		return new GuiContainerAutomaticTreeTap(player.inventory, (TileEntityAutomaticTreeTap) entity);
 
-			if (entity instanceof TileEntityWireMill)
-				return new GuiContainerWireMill(player.inventory, (TileEntityWireMill) entity);
-			if (entity instanceof TileEntityInsulator)
-				return new GuiContainerInsulator(player.inventory, (TileEntityInsulator) entity);
-			if (entity instanceof TileEntitySpoolWindingMachine)
-				return new GuiContainerSpoolWindingMachine(player.inventory, (TileEntitySpoolWindingMachine) entity);
-			if (entity instanceof TileEntityElectrolyser)
-				return new GuiContainerElectrolyser(player.inventory, (TileEntityElectrolyser) entity);
-			if (entity instanceof TileEntitySourWaterStripper)
-				return new GuiContainerSourWaterStripper(player.inventory, (TileEntitySourWaterStripper) entity);
-			if (entity instanceof TileEntityAlkylationUnit)
-				return new GuiContainerAlkylationUnit(player.inventory, (TileEntityAlkylationUnit) entity);
-			if (entity instanceof TileEntityAsphaltBlower)
-				return new GuiContainerAsphaltBlower(player.inventory, (TileEntityAsphaltBlower) entity);
-			if (entity instanceof TileEntityGasProcessor)
-				return new GuiContainerGasProcessor(player.inventory, (TileEntityGasProcessor) entity);
-			if (entity instanceof TileEntityIsomerizationReactor)
-				return new GuiContainerIsomerizationReactor(player.inventory, (TileEntityIsomerizationReactor) entity);
-			if (entity instanceof TileEntityAtmosphericDestilationTower)
-				return new GuiContainerAtmosphericDestilationTower(player.inventory, (TileEntityAtmosphericDestilationTower) entity);
-			if (entity instanceof TileEntityAmineTreater)
-				return new GuiContainerAmineTreater(player.inventory, (TileEntityAmineTreater) entity);
-			if (entity instanceof TileEntityCatalyticReformer)
-				return new GuiContainerCatalyticReformer(player.inventory, (TileEntityCatalyticReformer) entity);
-			if (entity instanceof TileEntityClausSulfurPlant)
-				return new GuiContainerClausSulfurPlant(player.inventory, (TileEntityClausSulfurPlant) entity);
-			if (entity instanceof TileEntityDelayedCoker)
-				return new GuiContainerDelayedCoker(player.inventory, (TileEntityDelayedCoker) entity);
-			if (entity instanceof TileEntityFluidCatalyticCracker)
-				return new GuiContainerFluidCatalyticCracker(player.inventory, (TileEntityFluidCatalyticCracker) entity);
-			if (entity instanceof TileEntityHydroCracker)
-				return new GuiContainerHydroCracker(player.inventory, (TileEntityHydroCracker) entity);
-			if (entity instanceof TileEntityHydroTreater)
-				return new GuiContainerHydroTreater(player.inventory, (TileEntityHydroTreater) entity);
-			if (entity instanceof TileEntityMeroxTreater)
-				return new GuiContainerMeroxTreater(player.inventory, (TileEntityMeroxTreater) entity);
-			if (entity instanceof TileEntityVacuumDestilationTower)
-				return new GuiContainerVacuumDestilationTower(player.inventory, (TileEntityVacuumDestilationTower) entity);
-			if (entity instanceof TileEntitySinter)
-				return new GuiContainerSinter(player.inventory, (TileEntitySinter) entity);
-			if (entity instanceof TileEntityKiln)
-				return new GuiContainerKiln(player.inventory, (TileEntityKiln) entity);
-			if (entity instanceof TEmultiblockBlastFurnace)
-				return new GuiContainerMultiblockBlastFurnace(player.inventory, (TEmultiblockBlastFurnace) entity);
-			if (entity instanceof TileEntitySandCaster)
-				return new GuiContainerSandCaster(player.inventory, (TileEntitySandCaster) entity);
-			if (entity instanceof TileEntityVacuumCaster)
-				return new GuiContainerVacuumCaster(player.inventory, (TileEntityVacuumCaster) entity);
-			if (entity instanceof TileEntityTurretLathe)
-				return new GuiContainerTurretLathe(player.inventory, (TileEntityTurretLathe) entity);
-			if (entity instanceof TileEntityCoolingUnit)
-				return new GuiContainerCoolingUnit(player.inventory, (TileEntityCoolingUnit) entity);
-			if (entity instanceof TileEntityRoaster)
-				return new GuiContainerRoaster(player.inventory, (TileEntityRoaster) entity);
-			if (entity instanceof TileEntitySmelter)
-				return new GuiContainerSmelter(player.inventory, (TileEntitySmelter) entity);
-			if (entity instanceof TileEntityQuenchTank)
-				return new GuiContainerQuenchTank(player.inventory, (TileEntityQuenchTank) entity);
-			if (entity instanceof TileEntityContainer)
-				return new GuiContainerContainer(player.inventory, (TileEntityContainer) entity);
-			if (entity instanceof TileEntityEnergyCell)
-				return new GuiContainerEnergyCell(player.inventory, (TileEntityEnergyCell) entity);
-			if (entity instanceof TileEntityTank)
-				return new GuiContainerTank(player.inventory, (TileEntityTank) entity);
-		} else if (ID == GUIDE_ID) {
-			return new GuiGuide(player);
-		} else if (ID == ANVIL_ID) {
-			return new GuiContainerAnvil(player.inventory, world, x, y, z);
-		}
-		return null;
+	    if (entity instanceof TileEntityWireMill)
+		return new GuiContainerWireMill(player.inventory, (TileEntityWireMill) entity);
+	    if (entity instanceof TileEntityInsulator)
+		return new GuiContainerInsulator(player.inventory, (TileEntityInsulator) entity);
+	    if (entity instanceof TileEntitySpoolWindingMachine)
+		return new GuiContainerSpoolWindingMachine(player.inventory, (TileEntitySpoolWindingMachine) entity);
+	    if (entity instanceof TileEntityElectrolyser)
+		return new GuiContainerElectrolyser(player.inventory, (TileEntityElectrolyser) entity);
+	    if (entity instanceof TileEntitySourWaterStripper)
+		return new GuiContainerSourWaterStripper(player.inventory, (TileEntitySourWaterStripper) entity);
+	    if (entity instanceof TileEntityAlkylationUnit)
+		return new GuiContainerAlkylationUnit(player.inventory, (TileEntityAlkylationUnit) entity);
+	    if (entity instanceof TileEntityAsphaltBlower)
+		return new GuiContainerAsphaltBlower(player.inventory, (TileEntityAsphaltBlower) entity);
+	    if (entity instanceof TileEntityGasProcessor)
+		return new GuiContainerGasProcessor(player.inventory, (TileEntityGasProcessor) entity);
+	    if (entity instanceof TileEntityIsomerizationReactor)
+		return new GuiContainerIsomerizationReactor(player.inventory, (TileEntityIsomerizationReactor) entity);
+	    if (entity instanceof TileEntityAtmosphericDestilationTower)
+		return new GuiContainerAtmosphericDestilationTower(player.inventory, (TileEntityAtmosphericDestilationTower) entity);
+	    if (entity instanceof TileEntityAmineTreater)
+		return new GuiContainerAmineTreater(player.inventory, (TileEntityAmineTreater) entity);
+	    if (entity instanceof TileEntityCatalyticReformer)
+		return new GuiContainerCatalyticReformer(player.inventory, (TileEntityCatalyticReformer) entity);
+	    if (entity instanceof TileEntityClausSulfurPlant)
+		return new GuiContainerClausSulfurPlant(player.inventory, (TileEntityClausSulfurPlant) entity);
+	    if (entity instanceof TileEntityDelayedCoker)
+		return new GuiContainerDelayedCoker(player.inventory, (TileEntityDelayedCoker) entity);
+	    if (entity instanceof TileEntityFluidCatalyticCracker)
+		return new GuiContainerFluidCatalyticCracker(player.inventory, (TileEntityFluidCatalyticCracker) entity);
+	    if (entity instanceof TileEntityHydroCracker)
+		return new GuiContainerHydroCracker(player.inventory, (TileEntityHydroCracker) entity);
+	    if (entity instanceof TileEntityHydroTreater)
+		return new GuiContainerHydroTreater(player.inventory, (TileEntityHydroTreater) entity);
+	    if (entity instanceof TileEntityMeroxTreater)
+		return new GuiContainerMeroxTreater(player.inventory, (TileEntityMeroxTreater) entity);
+	    if (entity instanceof TileEntityVacuumDestilationTower)
+		return new GuiContainerVacuumDestilationTower(player.inventory, (TileEntityVacuumDestilationTower) entity);
+	    if (entity instanceof TileEntitySinter)
+		return new GuiContainerSinter(player.inventory, (TileEntitySinter) entity);
+	    if (entity instanceof TileEntityKiln)
+		return new GuiContainerKiln(player.inventory, (TileEntityKiln) entity);
+	    if (entity instanceof TEmultiblockBlastFurnace)
+		return new GuiContainerMultiblockBlastFurnace(player.inventory, (TEmultiblockBlastFurnace) entity);
+	    if (entity instanceof TileEntityVacuumCaster)
+		return new GuiContainerVacuumCaster(player.inventory, (TileEntityVacuumCaster) entity);
+	    if (entity instanceof TileEntityTurretLathe)
+		return new GuiContainerTurretLathe(player.inventory, (TileEntityTurretLathe) entity);
+	    if (entity instanceof TileEntityCoolingUnit)
+		return new GuiContainerCoolingUnit(player.inventory, (TileEntityCoolingUnit) entity);
+	    if (entity instanceof TileEntityRoaster)
+		return new GuiContainerRoaster(player.inventory, (TileEntityRoaster) entity);
+	    if (entity instanceof TileEntitySmelter)
+		return new GuiContainerSmelter(player.inventory, (TileEntitySmelter) entity);
+	    if (entity instanceof TileEntityQuenchTank)
+		return new GuiContainerQuenchTank(player.inventory, (TileEntityQuenchTank) entity);
+	    if (entity instanceof TileEntityContainer)
+		return new GuiContainerContainer(player.inventory, (TileEntityContainer) entity);
+	    if (entity instanceof TileEntityEnergyCell)
+		return new GuiContainerEnergyCell(player.inventory, (TileEntityEnergyCell) entity);
+	    if (entity instanceof TileEntityTank)
+		return new GuiContainerTank(player.inventory, (TileEntityTank) entity);
+	} else if (ID == GUIDE_ID) {
+	    return new GuiGuide(player);
+	} else if (ID == ANVIL_ID) {
+	    return new GuiContainerAnvil(player.inventory, world, x, y, z);
 	}
+	return null;
+    }
 }

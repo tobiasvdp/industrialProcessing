@@ -86,6 +86,9 @@ public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachin
 	updateAnimation(amount);
     }
 
+
+    
+    
     protected void updateAnimation(int workDone) {
 	IWorker worker = getWorker();
 	float maxWork = worker.getTotalWork();

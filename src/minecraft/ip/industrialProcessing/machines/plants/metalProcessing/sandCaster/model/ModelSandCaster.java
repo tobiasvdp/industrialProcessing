@@ -1,5 +1,7 @@
 package ip.industrialProcessing.machines.plants.metalProcessing.sandCaster.model;
 
+import org.lwjgl.opengl.GL11;
+
 import ip.industrialProcessing.client.render.ModelAnimatedMachine;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
@@ -62,12 +64,23 @@ public class ModelSandCaster extends ModelAnimatedMachine {
 
     @Override
     public void renderModel(TileEntity tileEntity, float f5) {
-	sand.renderMesh(icon);
+	renderModelAnimated(tileEntity, f5, new float[] { 0 });
     }
 
     @Override
-    public void renderModelAnimated(TileEntity tileEntity, float f, float[] progress) {
-	sand.renderMesh(icon);
+    public void renderModelAnimated(TileEntity tileEntity, float f, float[] progressAr) {
+
+	float progress = 0;
+	if (progressAr != null && progressAr.length > 0)
+	    progress = progressAr[0];
+
+	if (progress >= 0) {
+	    GL11.glPushMatrix();
+	    GL11.glRotatef(180, 1, 0, 0);
+	    GL11.glTranslatef(0, -1, 0);
+	    sand.renderMesh(icon);
+	    GL11.glPopMatrix();
+	}
     }
 
 }
