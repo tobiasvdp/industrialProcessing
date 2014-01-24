@@ -27,6 +27,7 @@ public class GuiLayout {
 
 	public int multipleLines = 1;
 	public boolean useMargin = true;
+	public int minMargin = 25;
 	public boolean drawTitel = true;
 	public boolean drawInventoryTitel = true;
 	private boolean autoSortByID = false;
@@ -34,13 +35,13 @@ public class GuiLayout {
 	GuiLayoutPanelType[] sortingOrder = new GuiLayoutPanelType[] { GuiLayoutPanelType.heat, GuiLayoutPanelType.simpleHeat, GuiLayoutPanelType.simpleTankInput, GuiLayoutPanelType.tankInput, GuiLayoutPanelType.slotsInput, GuiLayoutPanelType.worker, GuiLayoutPanelType.slotsOutput, GuiLayoutPanelType.tankOutput, GuiLayoutPanelType.simpleTankOutput };
 
 	public GuiLayout() {
-        this(true);
+		this(true);
 	}
-	
+
 	public GuiLayout(boolean drawPlayerInventory) {
 		layoutPanels = new ArrayList<GuiLayoutPanel>();
-		if(drawPlayerInventory)
-		     addLayoutPanel(GuiLayoutPanelType.slotsInventory);
+		if (drawPlayerInventory)
+			addLayoutPanel(GuiLayoutPanelType.slotsInventory);
 		slotIndex = 0;
 	}
 
@@ -65,7 +66,7 @@ public class GuiLayout {
 		case slotsInput:
 			if (location.length == 2) {
 				x = location[0];
-				y = location[2];
+				y = location[1];
 			} else {
 				x = 47 + offsetX;
 				y = 40;
@@ -78,10 +79,10 @@ public class GuiLayout {
 		case slotsOutput:
 			if (location.length == 2) {
 				x = location[0];
-				y = location[2];
+				y = location[1];
 			} else {
-			x = 135 + offsetX;
-			y = 40;
+				x = 135 + offsetX;
+				y = 40;
 			}
 			panel = new GuiLayoutPanel(this, type, x, y, 52, 52, fixed);
 			// SlotLayout set by Block
@@ -94,10 +95,10 @@ public class GuiLayout {
 		case tankOutput:
 			if (location.length == 2) {
 				x = location[0];
-				y = location[2];
+				y = location[1];
 			} else {
-			x = 0;
-			y = 40;
+				x = 0;
+				y = 40;
 			}
 			panel = new GuiLayoutPanel(this, type, x, y, 40, 52, fixed);
 			panel.setSlotLayout(SlotLayoutType.fixed, 2);
@@ -108,10 +109,10 @@ public class GuiLayout {
 		case simpleTankOutput:
 			if (location.length == 2) {
 				x = location[0];
-				y = location[2];
+				y = location[1];
 			} else {
-			x = 0;
-			y = 40;
+				x = 0;
+				y = 40;
 			}
 			panel = new GuiLayoutPanel(this, type, x, y, 18, 52, fixed);
 			panel.setGuiContainerLayout(type);
@@ -121,10 +122,10 @@ public class GuiLayout {
 		case slotsInventory:
 			if (location.length == 2) {
 				x = location[0];
-				y = location[2];
+				y = location[1];
 			} else {
-			x = 8;
-			y = 116;
+				x = 8;
+				y = 116;
 			}
 			panel = new GuiLayoutPanel(this, type, x, y, 222, 76, fixed);
 			panel.setSlotLayout(SlotLayoutType.inventory, 0);
@@ -134,10 +135,10 @@ public class GuiLayout {
 		case worker:
 			if (location.length == 2) {
 				x = location[0];
-				y = location[2];
+				y = location[1];
 			} else {
-			x = 106;
-			y = 59 + offsetY;
+				x = 106;
+				y = 59 + offsetY;
 			}
 			panel = new GuiLayoutPanel(this, type, x, y, 24, 16, fixed);
 			// No slotLayout
@@ -147,10 +148,10 @@ public class GuiLayout {
 		case power:
 			if (location.length == 2) {
 				x = location[0];
-				y = location[2];
+				y = location[1];
 			} else {
-			x = 150;
-			y = 9 + offsetY;
+				x = 150;
+				y = 9 + offsetY;
 			}
 			panel = new GuiLayoutPanel(this, type, x, y, 74, 18, fixed);
 			panel.setSlotLayout(SlotLayoutType.fixed, 1);
@@ -160,12 +161,12 @@ public class GuiLayout {
 		case heat:
 			if (location.length == 2) {
 				x = location[0];
-				y = location[2];
+				y = location[1];
 			} else {
-			x = 0;
-			y = 39 + offsetY;
+				x = 0;
+				y = 39 + offsetY;
 			}
-			panel = new GuiLayoutPanel(this, type, x, y, 35, 54,fixed, 15, 54);
+			panel = new GuiLayoutPanel(this, type, x, y, 35, 54, fixed, 15, 54);
 			panel.setSlotLayout(SlotLayoutType.fixed, 2);
 			panel.setGuiContainerLayout(type);
 			layoutPanels.add(panel);
@@ -173,10 +174,10 @@ public class GuiLayout {
 		case simpleHeat:
 			if (location.length == 2) {
 				x = location[0];
-				y = location[2];
+				y = location[1];
 			} else {
-			x = 8;
-			y = 39 + offsetY;
+				x = 8;
+				y = 39 + offsetY;
 			}
 			panel = new GuiLayoutPanel(this, type, x, y, 15, 54, fixed);
 			// no slotLayout
@@ -186,10 +187,10 @@ public class GuiLayout {
 		case lifespan:
 			if (location.length == 2) {
 				x = location[0];
-				y = location[2];
+				y = location[1];
 			} else {
-			x = 8;
-			y = 16 + offsetY;
+				x = 8;
+				y = 16 + offsetY;
 			}
 			panel = new GuiLayoutPanel(this, type, x, y, 50, 8, fixed);
 			// no slotLayout
@@ -226,13 +227,13 @@ public class GuiLayout {
 		return slots.iterator();
 	}
 
-	public Iterator<Slot> getSlotsInventory(IInventory iinventory,Entity player) {
+	public Iterator<Slot> getSlotsInventory(IInventory iinventory, Entity player) {
 		ArrayList<Slot> slots = new ArrayList<Slot>();
 		Iterator<GuiLayoutPanel> it = layoutPanels.iterator();
 		while (it.hasNext()) {
 			GuiLayoutPanel container = it.next();
 			if (container.getSlotLayout() != null && (container.getSlotLayout() instanceof SlotLayoutInventory)) {
-				Slot[] containerSlots = container.getSlotLayout().getGuiContainerSlots(iinventory,player);
+				Slot[] containerSlots = container.getSlotLayout().getGuiContainerSlots(iinventory, player);
 				for (int i = 0; i < containerSlots.length; i++)
 					slots.add(containerSlots[i]);
 			}
@@ -246,37 +247,48 @@ public class GuiLayout {
 		for (int j = 0; j < multipleLines; j++) {
 			ArrayList<GuiLayoutPanel> panels = getOrganizedPanels(j + 1);
 			int widthPanels = 0;
-			int previousIntersect =0;
+			int previousIntersect = 0;
+			int previousIntersectLocation = 0;
 			for (int i = 0; i < panels.size(); i++) {
 				widthPanels += panels.get(i).getWidth();
 			}
 			int margin = (widthScreen - widthPanels) / (panels.size() + 1);
 			int totalWidth = 0;
 			if (useMargin) {
-				totalWidth = 0;
+				totalWidth = margin;
 				for (int i = 0; i < panels.size(); i++) {
-					panels.get(i).setX(totalWidth + (i + 1) * margin);
-					totalWidth += panels.get(i).getWidth();
+					panels.get(i).setX(totalWidth);
+					totalWidth += panels.get(i).getWidth() + margin;
 					if (multipleLines > 1) {
 						panels.get(i).setY(j * 56 + 5);
 					}
 					Rectangle intersect = panelOverlapsFixedPanel(fixedPanelAreas, panels.get(i).getRect());
-					if(intersect != null){
+					if (intersect != null) {
+						int newI = 0;
 						ArrayList<GuiLayoutPanel> subSetPanels = new ArrayList<GuiLayoutPanel>();
-						for(int z = previousIntersect;z< i;z++){
-							subSetPanels.add(panels.get(i));
+						int newWidth = 0;
+						for (int z = previousIntersect; margin > minMargin && z < panels.size(); z++) {
+							margin = (int) (intersect.getX() - newWidth) / (z + 2);
+							if (margin > minMargin) {
+								subSetPanels.add(panels.get(z));
+								newWidth += panels.get(z).getWidth();
+								i = z;
+							}
+							
+							
 						}
-						redoPartialLayout(subSetPanels,panels.get(previousIntersect).getX()-margin,(int)intersect.getX());
-						
-						subSetPanels = new ArrayList<GuiLayoutPanel>();
-						int newWidth=0;
-						for(int z = i;z< panels.size();z++){
-							newWidth += panels.get(i).getWidth();
+						redoPartialLayout(subSetPanels, previousIntersectLocation, (int) intersect.getX());
+						previousIntersectLocation = (int) (intersect.getX() + intersect.getWidth());
+						newWidth = 0;
+						for (int z = i+1; z < panels.size(); z++) {
+							newWidth += panels.get(z).getWidth();
 						}
-						margin = (int) ((widthScreen-intersect.getX()-intersect.getWidth() - newWidth) / (panels.size()-i + 1));
-						
+						margin = (int) (widthScreen - previousIntersectLocation - newWidth) / (panels.size() - i);
+						if(i == 0)
+							margin = (int) (widthScreen - previousIntersectLocation - newWidth) / (panels.size() + 2);
+						totalWidth = (int) (intersect.getX() + intersect.getWidth() + margin);
 						previousIntersect = i;
-						i--;
+						if(i==0)i--;
 					}
 				}
 			} else {
@@ -288,27 +300,27 @@ public class GuiLayout {
 						panels.get(i).setY(j * 56 + 5);
 					}
 				}
-				
+
 			}
 		}
 	}
-	
+
 	private void redoPartialLayout(ArrayList<GuiLayoutPanel> subSetPanels, int x0, int x1) {
-		int widthPanels =0;
-		int widthScreen = x1-x0;
+		int widthPanels = 0;
+		int widthScreen = x1 - x0;
 		for (int i = 0; i < subSetPanels.size(); i++) {
 			widthPanels += subSetPanels.get(i).getWidth();
 		}
 		int margin = (widthScreen - widthPanels) / (subSetPanels.size() + 1);
 		int totalWidth = 0;
 		if (useMargin) {
-			totalWidth = x0;
+			totalWidth = x0 + margin;
 			for (int i = 0; i < subSetPanels.size(); i++) {
-				subSetPanels.get(i).setX(totalWidth + (i + 1) * margin);
-				totalWidth += subSetPanels.get(i).getWidth();
+				subSetPanels.get(i).setX(totalWidth);
+				totalWidth += subSetPanels.get(i).getWidth() + margin;
 			}
-		}else{
-			totalWidth = x0+ (widthScreen - totalWidth) / 2;
+		} else {
+			totalWidth = x0 + (widthScreen - totalWidth) / 2;
 			for (int i = 0; i < subSetPanels.size(); i++) {
 				subSetPanels.get(i).setX(totalWidth);
 				totalWidth += subSetPanels.get(i).getWidth() + 2;
@@ -318,9 +330,9 @@ public class GuiLayout {
 
 	private Rectangle panelOverlapsFixedPanel(ArrayList<Rectangle> fixedPanelAreas, Rectangle rect) {
 		Iterator<Rectangle> it = fixedPanelAreas.iterator();
-		while(it.hasNext()){
+		while (it.hasNext()) {
 			Rectangle fixedPanel = it.next();
-			if(fixedPanel.intersects(rect))
+			if (fixedPanel.intersects(rect))
 				return fixedPanel;
 		}
 		return null;
@@ -329,53 +341,53 @@ public class GuiLayout {
 	private ArrayList<Rectangle> getFixedPanelAreas() {
 		ArrayList<Rectangle> rect = new ArrayList<Rectangle>();
 		Iterator<GuiLayoutPanel> it = layoutPanels.iterator();
-		while(it.hasNext()){
+		while (it.hasNext()) {
 			GuiLayoutPanel panel = it.next();
-			if(panel.isFixed()){
+			if (panel.isFixed()) {
 				rect.add(panel.getRect());
 			}
 		}
-		return null;
+		return rect;
 	}
 
-	public void setSortingOrder(GuiLayoutPanelType... types){
+	public void setSortingOrder(GuiLayoutPanelType... types) {
 		sortingOrder = new GuiLayoutPanelType[types.length];
-		for(int i = 0;i<types.length;i++){
+		for (int i = 0; i < types.length; i++) {
 			sortingOrder[i] = types[i];
 		}
 	}
-	
+
 	/*
-	 * Sets the autolayout to draw the panels in an order by their id (added pannel number)
-	 * the ID starts from 1 if the players inventory is bound!!!
+	 * Sets the autolayout to draw the panels in an order by their id (added
+	 * pannel number) the ID starts from 1 if the players inventory is bound!!!
 	 */
-	public void setSortingOrderByPanelID(int... ids){
+	public void setSortingOrderByPanelID(int... ids) {
 		autoSortByID = true;
 		sortOrder = ids;
 	}
 
 	private ArrayList<GuiLayoutPanel> getOrganizedPanels(int line) {
 		ArrayList<GuiLayoutPanel> panels = new ArrayList<GuiLayoutPanel>();
-		if(autoSortByID){
-			for(int i = 0;i<sortOrder.length;i++){
-				if(sortOrder[i]<this.layoutPanels.size()){
-				GuiLayoutPanel panel = layoutPanels.get(sortOrder[i]);
-				if (panel.line == line  && !panel.isFixed()){
-					panels.add(panel);
-				}
+		if (autoSortByID) {
+			for (int i = 0; i < sortOrder.length; i++) {
+				if (sortOrder[i] < this.layoutPanels.size()) {
+					GuiLayoutPanel panel = layoutPanels.get(sortOrder[i]);
+					if (panel.line == line && !panel.isFixed()) {
+						panels.add(panel);
+					}
 				}
 			}
-		}else{
-		for (GuiLayoutPanelType type : sortingOrder) {
-			Iterator<GuiLayoutPanel> it = layoutPanels.iterator();
-			while (it.hasNext()) {
-				GuiLayoutPanel panel = it.next();
-				if (panel.type == type && panel.line == line && !panel.isFixed()) {
-					panels.add(panel);
+		} else {
+			for (GuiLayoutPanelType type : sortingOrder) {
+				Iterator<GuiLayoutPanel> it = layoutPanels.iterator();
+				while (it.hasNext()) {
+					GuiLayoutPanel panel = it.next();
+					if (panel.type == type && panel.line == line && !panel.isFixed()) {
+						panels.add(panel);
+					}
 				}
 			}
 		}
-	    }
 		return panels;
 	}
 
@@ -389,7 +401,7 @@ public class GuiLayout {
 				type = panel.type;
 
 			if (type != panelType) {
-				if (isSameTypeClass(type,panelType)) {
+				if (isSameTypeClass(type, panelType)) {
 
 				} else {
 					typeIndex = 0;
@@ -410,7 +422,7 @@ public class GuiLayout {
 	}
 
 	private GuiLayoutPanelTypeClass getTypeClass(GuiLayoutPanelType type) {
-		switch (type){
+		switch (type) {
 		case heat:
 			return GuiLayoutPanelTypeClass.heat;
 		case lifespan:
@@ -454,8 +466,8 @@ public class GuiLayout {
 
 			if (type != panelType) {
 
-				if (isSameTypeClass(type,panelType)) {
-					
+				if (isSameTypeClass(type, panelType)) {
+
 				} else {
 					typeIndex = 0;
 					type = panelType;
