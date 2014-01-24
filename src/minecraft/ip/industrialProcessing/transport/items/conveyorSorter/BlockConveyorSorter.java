@@ -1,5 +1,7 @@
 package ip.industrialProcessing.transport.items.conveyorSorter;
 
+import java.awt.Rectangle;
+
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
@@ -22,8 +24,10 @@ public class BlockConveyorSorter extends BlockConveyorBase implements IDescripti
     public static GuiLayout guiLayout;
     static {
 	guiLayout = new GuiLayout();
+	guiLayout.setSortingOrderByPanelID(1,3,2);
 	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 9);
 	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 9);
+	guiLayout.addLayoutPanel(GuiLayoutPanelType.image).setImageLocation(new Rectangle(0,0,36,54));
     }
 
     public BlockConveyorSorter() {

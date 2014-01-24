@@ -27,7 +27,7 @@ public class GuiContainerLayoutWorker extends GuiContainerLayout {
 	public void draw(Gui gui, Container container, int index, int offsetX, int offsetY, int mouseX, int mouseY) {
 		super.draw(gui, container, index, offsetX, offsetY, mouseX, mouseY);
 		if (container instanceof ContainerIP) {
-			((GuiContainerIP) gui).setTextureWorker();
+			((GuiContainerIP) gui).setTextureSpecific();
 			gui.drawTexturedModalRect(offsetX, offsetY, rectangleBare.x, rectangleBare.y, rectangleBare.width, rectangleBare.height);
 			ContainerIP handlerContainer = (ContainerIP) container;
 			ArrayList<IHandlerContainer> handlers = handlerContainer.getHandlers(GuiLayoutPanelType.worker);

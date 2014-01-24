@@ -22,7 +22,7 @@ public class GuiContainerIP extends GuiContainer {
 	private TileEntity tileEntity;
 	private String name;
 	public ResourceLocation textureLocation;
-	public ResourceLocation textureLocationWorker;
+	public ResourceLocation textureLocationSpecific;
 	private int mouseX;
 	private int mouseY;
 	public ToolTip toolTip;
@@ -34,7 +34,7 @@ public class GuiContainerIP extends GuiContainer {
 		InventoryPlayer inventoryPlayer = player.inventory;
 		this.tileEntity = tileEntity;
 		this.name = tileEntity.getBlockType().getLocalizedName();
-		this.textureLocationWorker = new ResourceLocation(INamepace.TEXTURE_DOMAIN, "textures/gui/" + this.name + ".png");
+		this.textureLocationSpecific = new ResourceLocation(INamepace.TEXTURE_DOMAIN, "textures/gui/" + this.name + ".png");
 		this.textureLocation = new ResourceLocation(INamepace.TEXTURE_DOMAIN, "textures/gui/layout.png");
 
 		this.xSize = 236;
@@ -48,8 +48,8 @@ public class GuiContainerIP extends GuiContainer {
 		}
 	}
 
-	public void setTextureWorker() {
-		mc.renderEngine.func_110577_a(this.textureLocationWorker);
+	public void setTextureSpecific() {
+		mc.renderEngine.func_110577_a(this.textureLocationSpecific);
 	}
 
 	public void setTextureLayout() {

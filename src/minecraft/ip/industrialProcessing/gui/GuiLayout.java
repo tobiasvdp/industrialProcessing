@@ -32,7 +32,7 @@ public class GuiLayout {
 	public boolean drawInventoryTitel = true;
 	private boolean autoSortByID = false;
 	private int[] sortOrder;
-	GuiLayoutPanelType[] sortingOrder = new GuiLayoutPanelType[] { GuiLayoutPanelType.heat, GuiLayoutPanelType.simpleHeat, GuiLayoutPanelType.simpleTankInput, GuiLayoutPanelType.tankInput, GuiLayoutPanelType.slotsInput, GuiLayoutPanelType.worker, GuiLayoutPanelType.slotsOutput, GuiLayoutPanelType.tankOutput, GuiLayoutPanelType.simpleTankOutput };
+	GuiLayoutPanelType[] sortingOrder = new GuiLayoutPanelType[] { GuiLayoutPanelType.heat, GuiLayoutPanelType.simpleHeat, GuiLayoutPanelType.simpleTankInput, GuiLayoutPanelType.tankInput, GuiLayoutPanelType.slotsInput, GuiLayoutPanelType.image ,GuiLayoutPanelType.worker, GuiLayoutPanelType.slotsOutput, GuiLayoutPanelType.tankOutput, GuiLayoutPanelType.simpleTankOutput };
 
 	public GuiLayout() {
 		this(true);
@@ -193,6 +193,19 @@ public class GuiLayout {
 				y = 16 + offsetY;
 			}
 			panel = new GuiLayoutPanel(this, type, x, y, 50, 8, fixed);
+			// no slotLayout
+			panel.setGuiContainerLayout(type);
+			layoutPanels.add(panel);
+			break;
+		case image:
+			if (location.length == 2) {
+				x = location[0];
+				y = location[1];
+			} else {
+				x = 8 + offsetX;
+				y = 40;
+			}
+			panel = new GuiLayoutPanel(this, type, x, y, 1, 1, fixed);
 			// no slotLayout
 			panel.setGuiContainerLayout(type);
 			layoutPanels.add(panel);

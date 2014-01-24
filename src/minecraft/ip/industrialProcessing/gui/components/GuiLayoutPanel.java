@@ -13,6 +13,7 @@ import ip.industrialProcessing.gui.container.slot.layout.components.SlotLayoutTa
 import ip.industrialProcessing.gui.container.slot.layout.components.SlotType;
 import ip.industrialProcessing.gui.guiContainer.layout.GuiContainerLayout;
 import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerLayoutHeat;
+import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerLayoutImage;
 import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerLayoutLifespan;
 import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerLayoutPower;
 import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerLayoutSimpleHeat;
@@ -135,6 +136,15 @@ public class GuiLayoutPanel {
 		}
 		parent.reDoLayout();
 	}
+	
+	public GuiLayoutPanel setImageLocation(Rectangle rect){
+		if(type == GuiLayoutPanelType.image){
+			this.rect.setSize(rect.width, rect.height);
+			((GuiContainerLayoutImage)this.guiContainerLayout).setOrigin(rect);
+			parent.reDoLayout();
+		}
+		return this;
+	}
 
 	public SlotLayout getSlotLayout() {
 		return slotLayout;
@@ -209,6 +219,10 @@ public class GuiLayoutPanel {
 		case lifespan:
 			guiContainerLayout = new GuiContainerLayoutLifespan();
 			guiContainerLayout.addDrawRectagle(126, 248, 50, 8);
+			break;
+		case image:
+			guiContainerLayout = new GuiContainerLayoutImage();
+			// draws from different texture file, done in image component
 			break;
 		default:
 			break;

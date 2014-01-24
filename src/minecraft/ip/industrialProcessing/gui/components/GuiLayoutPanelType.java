@@ -1,7 +1,7 @@
 package ip.industrialProcessing.gui.components;
 
 public enum GuiLayoutPanelType {
-    slotsInput, slotsOutput, slotsSide, slotsInventory, worker, power, tankInput, simpleTankInput, tankOutput, simpleTankOutput, heat, lifespan, simpleHeat;
+    slotsInput, slotsOutput, slotsSide, slotsInventory, worker, power, tankInput, simpleTankInput, tankOutput, simpleTankOutput, heat, lifespan, simpleHeat, image;
 
     public boolean isTankOutput() {
 	return this == tankOutput || this == simpleTankOutput;
