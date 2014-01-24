@@ -57,6 +57,10 @@ public class GuiLayoutPanel {
 	public boolean isFixed(){
 		return fixed;
 	}
+	
+	public Rectangle getRect(){
+		return rect;
+	}
 
 	public GuiLayoutPanel setLine(int line) {
 		this.line = line;

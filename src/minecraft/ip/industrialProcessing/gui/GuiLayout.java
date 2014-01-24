@@ -242,13 +242,16 @@ public class GuiLayout {
 
 	public void reDoLayout() {
 		int widthScreen = 236;
+		ArrayList<Rectangle> fixedPanelAreas = getFixedPanelAreas();
 		for (int j = 0; j < multipleLines; j++) {
 			ArrayList<GuiLayoutPanel> panels = getOrganizedPanels(j + 1);
-			int totalWidth = 0;
+			int widthPanels = 0;
+			int previousIntersect =0;
 			for (int i = 0; i < panels.size(); i++) {
-				totalWidth += panels.get(i).getWidth();
+				widthPanels += panels.get(i).getWidth();
 			}
-			int margin = (widthScreen - totalWidth) / (panels.size() + 1);
+			int margin = (widthScreen - widthPanels) / (panels.size() + 1);
+			int totalWidth = 0;
 			if (useMargin) {
 				totalWidth = 0;
 				for (int i = 0; i < panels.size(); i++) {
@@ -256,6 +259,24 @@ public class GuiLayout {
 					totalWidth += panels.get(i).getWidth();
 					if (multipleLines > 1) {
 						panels.get(i).setY(j * 56 + 5);
+					}
+					Rectangle intersect = panelOverlapsFixedPanel(fixedPanelAreas, panels.get(i).getRect());
+					if(intersect != null){
+						ArrayList<GuiLayoutPanel> subSetPanels = new ArrayList<GuiLayoutPanel>();
+						for(int z = previousIntersect;z< i;z++){
+							subSetPanels.add(panels.get(i));
+						}
+						redoPartialLayout(subSetPanels,panels.get(previousIntersect).getX()-margin,(int)intersect.getX());
+						
+						subSetPanels = new ArrayList<GuiLayoutPanel>();
+						int newWidth=0;
+						for(int z = i;z< panels.size();z++){
+							newWidth += panels.get(i).getWidth();
+						}
+						margin = (int) ((widthScreen-intersect.getX()-intersect.getWidth() - newWidth) / (panels.size()-i + 1));
+						
+						previousIntersect = i;
+						i--;
 					}
 				}
 			} else {
@@ -267,10 +288,56 @@ public class GuiLayout {
 						panels.get(i).setY(j * 56 + 5);
 					}
 				}
+				
 			}
 		}
 	}
 	
+	private void redoPartialLayout(ArrayList<GuiLayoutPanel> subSetPanels, int x0, int x1) {
+		int widthPanels =0;
+		int widthScreen = x1-x0;
+		for (int i = 0; i < subSetPanels.size(); i++) {
+			widthPanels += subSetPanels.get(i).getWidth();
+		}
+		int margin = (widthScreen - widthPanels) / (subSetPanels.size() + 1);
+		int totalWidth = 0;
+		if (useMargin) {
+			totalWidth = x0;
+			for (int i = 0; i < subSetPanels.size(); i++) {
+				subSetPanels.get(i).setX(totalWidth + (i + 1) * margin);
+				totalWidth += subSetPanels.get(i).getWidth();
+			}
+		}else{
+			totalWidth = x0+ (widthScreen - totalWidth) / 2;
+			for (int i = 0; i < subSetPanels.size(); i++) {
+				subSetPanels.get(i).setX(totalWidth);
+				totalWidth += subSetPanels.get(i).getWidth() + 2;
+			}
+		}
+	}
+
+	private Rectangle panelOverlapsFixedPanel(ArrayList<Rectangle> fixedPanelAreas, Rectangle rect) {
+		Iterator<Rectangle> it = fixedPanelAreas.iterator();
+		while(it.hasNext()){
+			Rectangle fixedPanel = it.next();
+			if(fixedPanel.intersects(rect))
+				return fixedPanel;
+		}
+		return null;
+	}
+
+	private ArrayList<Rectangle> getFixedPanelAreas() {
+		ArrayList<Rectangle> rect = new ArrayList<Rectangle>();
+		Iterator<GuiLayoutPanel> it = layoutPanels.iterator();
+		while(it.hasNext()){
+			GuiLayoutPanel panel = it.next();
+			if(panel.isFixed()){
+				rect.add(panel.getRect());
+			}
+		}
+		return null;
+	}
+
 	public void setSortingOrder(GuiLayoutPanelType... types){
 		sortingOrder = new GuiLayoutPanelType[types.length];
 		for(int i = 0;i<types.length;i++){
