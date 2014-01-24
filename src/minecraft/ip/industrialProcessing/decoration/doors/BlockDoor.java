@@ -210,12 +210,13 @@ public class BlockDoor extends Block {
 
 	@Override
 	public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6) {
-		super.breakBlock(par1World, par2, par3, par4, par5, par6);
 		if (BlockDoor.isTopDoor(par1World, par2, par3, par4, this.blockID)) {
 			par1World.destroyBlock(par2, par3 - 1, par4, false);
 		} else {
-			par1World.destroyBlock(par2, par3 + 1, par4, false);
+			if (par1World.getBlockId(par2, par3 + 1, par4) == this.blockID)
+				par1World.destroyBlock(par2, par3 + 1, par4, false);
 		}
+		super.breakBlock(par1World, par2, par3, par4, par5, par6);
 	}
 
 	@Override
@@ -273,7 +274,7 @@ public class BlockDoor extends Block {
 	@Override
 	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
 		if (!canBlockStay(par1World, par2, par3, par4)) {
-			breakBlock(par1World, par2, par3, par4, par5, 0);
+			par1World.destroyBlock(par2, par3, par4, true);
 		}
 		super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
 	}
@@ -281,7 +282,7 @@ public class BlockDoor extends Block {
 	@Override
 	public boolean canBlockStay(World par1World, int par2, int par3, int par4) {
 		if (!BlockDoor.isTopDoor(par1World, par2, par3, par4, this.blockID)) {
-			return par1World.isBlockSolidOnSide(par2, par3-1, par4, ForgeDirection.UP);
+			return par1World.isBlockSolidOnSide(par2, par3 - 1, par4, ForgeDirection.UP);
 		}
 		return super.canBlockStay(par1World, par2, par3, par4);
 	}

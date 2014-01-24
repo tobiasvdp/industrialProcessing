@@ -99,6 +99,12 @@ public class TileEntityGarageDoor extends TileEntityMultiblockCore implements IS
 			}
 		}
 	}
+	
+	@Override
+	public void onSideChange() {
+		super.onSideChange();
+		isCreated = true;
+	}
 
 	private boolean open = false;
 	private boolean isWorking = false;
@@ -216,8 +222,8 @@ public class TileEntityGarageDoor extends TileEntityMultiblockCore implements IS
 				for (int i = 1; i <= height; i++) {
 					if (this.worldObj.getBlockId(xCoord, yCoord - i, zCoord) != IndustrialProcessing.blockGarageDoorDoor.blockID) {
 						this.worldObj.setBlock(xCoord, yCoord - i, zCoord, IndustrialProcessing.blockGarageDoorDoor.blockID);
-						((TileEntityGarageDoorDoor) this.worldObj.getBlockTileEntity(xCoord, yCoord - i, zCoord)).setForwardDirection(getForwardDirection());
 					}
+					((TileEntityGarageDoorDoor) this.worldObj.getBlockTileEntity(xCoord, yCoord - i, zCoord)).setForwardDirection(getForwardDirection());
 					doors.add(new int[] { xCoord, yCoord - i, zCoord });
 				}
 			}

@@ -79,10 +79,9 @@ public class TileEntityGarageDoorFrame extends TileEntityMultiblockDummy {
 			if (height > 0) {
 				for (int i = 1; i <= height; i++) {
 					if (this.worldObj.getBlockId(xCoord, yCoord - i, zCoord) != IndustrialProcessing.blockGarageDoorDoor.blockID) {
-						this.worldObj.setBlock(xCoord, yCoord - i, zCoord, IndustrialProcessing.blockGarageDoorDoor.blockID);
-						((TileEntityGarageDoorDoor) this.worldObj.getBlockTileEntity(xCoord, yCoord - i, zCoord)).setForwardDirection(getForwardDirection());
-						
+						this.worldObj.setBlock(xCoord, yCoord - i, zCoord, IndustrialProcessing.blockGarageDoorDoor.blockID);	
 					}
+					((TileEntityGarageDoorDoor) this.worldObj.getBlockTileEntity(xCoord, yCoord - i, zCoord)).setForwardDirection(getForwardDirection());
 					doors.add(new int[] { xCoord, yCoord - i, zCoord });
 				}
 			}
