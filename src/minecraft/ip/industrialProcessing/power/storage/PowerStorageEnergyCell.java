@@ -24,7 +24,6 @@ public class PowerStorageEnergyCell implements IPowerStorage {
         this.storedJoules = nbt.getFloat("Charge");
         this.totalJouleCapacity = nbt.getFloat("Capacity");
     }
-    
 
     public void writeToNBT(NBTTagCompound nbt) {
         nbt.setFloat("Charge", this.storedJoules);
@@ -61,13 +60,13 @@ public class PowerStorageEnergyCell implements IPowerStorage {
         // TODO: slowly rebalance, not instant?
         float leftover = totalJoules;
         int[] caps = new int[slotCount];
-        int totalCap = (int)this.totalJouleCapacity;
+        int totalCap = (int) this.totalJouleCapacity;
         for (int i = 0; i < slotCount; i++) {
             totalCap += caps[i] = PowerTransfers.getBatteryMaxCharge(cell.getStackInSlot(i + startSlot));
         }
         for (int i = 0; i < slotCount; i++) {
             int amount = (int) totalJoules * caps[i] / totalCap;
-            if(amount > 0)
+            if (amount > 0)
                 leftover -= amount - PowerTransfers.setBatteryCharge(cell.getStackInSlot(i + startSlot), amount);
         }
         this.storedJoules = leftover;
@@ -96,5 +95,24 @@ public class PowerStorageEnergyCell implements IPowerStorage {
 
     @Override
     public void setPowerCapacity(int powerCapacity) {
+    }
+
+    @Override
+    public int fillPower(int amount, boolean doFill) {
+        int stored = (int) Math.ceil(this.getStoredJoules());
+        int cap = (int) Math.floor(this.getTotalJouleCapacity());
+        amount = Math.min(cap - stored, amount);
+        if (doFill)
+            addTotalJoules(amount);
+        return amount;
+    }
+
+    @Override
+    public int drainPower(int amount, boolean doDrain) {
+        int stored = (int) Math.ceil(this.getStoredJoules());
+        amount = Math.min(stored, amount);
+        if (doDrain)
+            addTotalJoules(-amount);
+        return amount;
     }
 }
