@@ -1,22 +1,32 @@
 package ip.industrialProcessing.gui.guiContainer;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.gui.GuiLayout;
 import ip.industrialProcessing.gui.IGuiLayout;
 import ip.industrialProcessing.gui.IGuiLayoutMultiblock;
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
+import ip.industrialProcessing.utils.handler.packets.PacketHandler;
 
-import org.lwjgl.opengl.GL11;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.util.ArrayList;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
+
+import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class GuiContainerIP extends GuiContainer {
 	private TileEntity tileEntity;
@@ -28,7 +38,7 @@ public class GuiContainerIP extends GuiContainer {
 	public ToolTip toolTip;
 	private GuiLayout layout;
 	public int tabID = 0;
-
+	
 	public GuiContainerIP(EntityPlayer player, TileEntity tileEntity, Container container) {
 		super(container);
 		InventoryPlayer inventoryPlayer = player.inventory;
@@ -65,12 +75,21 @@ public class GuiContainerIP extends GuiContainer {
 		this.mouseX = par1;
 		this.mouseY = par2;
 		super.drawScreen(par1, par2, par3);
+		
+		int x = (width - xSize) / 2;
+		int y = (height - ySize) / 2;
+		
+		setTextureLayout();
+		
+		if (this.layout != null) {
+			layout.draw(this, this.inventorySlots, x, y, mouseX, mouseY);
+		}
+		
 		if (toolTip != null) {
-			int x = (width - xSize) / 2;
-			int y = (height - ySize) / 2;
 			ToolTip.renderToolTip(this.toolTip, mouseX + 16, mouseY, this.zLevel, fontRenderer);
 			this.toolTip = null;
 		}
+		
 	}
 
 	@Override
@@ -90,15 +109,60 @@ public class GuiContainerIP extends GuiContainer {
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
 		this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
-
-		if (this.layout != null) {
-			layout.draw(this, this.inventorySlots, x, y, mouseX, mouseY);
-		}
-
 	}
 
 	public void changeTab(int tabID) {
 
+	}
+
+	protected void actionPerformed(GuiButton par1GuiButton) {
+		sendButtonIDtoServerTileEntity(par1GuiButton.id);
+	}
+
+	private void sendButtonIDtoServerTileEntity(int id) {
+		ByteArrayOutputStream bos = new ByteArrayOutputStream(8);
+		DataOutputStream outputStream = new DataOutputStream(bos);
+		try {
+		        outputStream.writeInt(tileEntity.xCoord);
+		        outputStream.writeInt(tileEntity.yCoord);
+		        outputStream.writeInt(tileEntity.zCoord);
+		        outputStream.writeInt(id);
+		} catch (Exception ex) {
+		        ex.printStackTrace();
+		}
+
+		Packet250CustomPayload packet = new Packet250CustomPayload();
+		packet.channel = PacketHandler.BUTTON_PRESSED;
+		packet.data = bos.toByteArray();
+		packet.length = bos.size();
+		
+		PacketDispatcher.sendPacketToServer(packet);
+
+	}
+	
+	@Override
+	public void initGui() {
+		super.initGui();
+		if (this.layout != null) {
+			int x = (width - xSize) / 2;
+			int y = (height - ySize) / 2;
+			ArrayList<GuiButton> guiButtons = layout.getGuiButtons(x,y);
+			for(int i = 0;i<guiButtons.size();i++){
+				this.buttonList.add(guiButtons.get(i));
+			}
+		}
+	}
+
+	public void refresh() {
+		this.setWorldAndResolution(mc, this.width, this.height);
+	}
+	
+	public void setZLevel(float ZLevel){
+		this.zLevel = ZLevel;
+	}
+	
+	public float getZLevel(){
+		return zLevel;
 	}
 
 }

@@ -12,6 +12,7 @@ import ip.industrialProcessing.machines.plants.storage.storageBox.BlockStorageBo
 import ip.industrialProcessing.transport.items.conveyorBelt.BlockConveyorMachineBase;
 import ip.industrialProcessing.utils.IDescriptionBlock;
 
+import java.awt.Rectangle;
 import java.util.List;
 
 import net.minecraft.block.Block;
@@ -32,6 +33,8 @@ public class BlockConveyorPacker extends BlockConveyorMachineBase implements IDe
 	guiLayout = new GuiLayout();
 	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 1);
 	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, BlockStorageBox.STORAGE_SIZE);
+	guiLayout.addLayoutPanel(GuiLayoutPanelType.singlebutton,10,40).setButtonSize(20,20).setButtonStateNames("Pack all items","Pack untill box completly full","Pass through","Unpack boxes").setButtonIcons(new Rectangle(0,0,16,16),new Rectangle(16,0,16,16),new Rectangle(32,0,16,16),new Rectangle(48,0,16,16)).setButtonIconsCentered();
+	guiLayout.addLayoutPanel(GuiLayoutPanelType.singlebutton,10,70).setButtonSize(20,20).setButtonStateNames("Disallow box on conveyor","allow box on conveyor");
     }
 
     public BlockConveyorPacker() {

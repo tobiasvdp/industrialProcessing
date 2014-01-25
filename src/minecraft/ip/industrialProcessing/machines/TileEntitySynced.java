@@ -1,35 +1,72 @@
 package ip.industrialProcessing.machines;
 
+import ip.industrialProcessing.gui.IGuiLayoutTriggerAcceptor;
+import ip.industrialProcessing.utils.handler.numbers.IStateConfig;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntitySynced extends TileEntity {
-    @Override
-    public Packet getDescriptionPacket() {
-	NBTTagCompound nbtTag = new NBTTagCompound();
-	this.writeToNBT(nbtTag);
-	return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
-    }
+public class TileEntitySynced extends TileEntity implements IGuiLayoutTriggerAcceptor {
+	int[] buttonState = new int[1];
 
-    @Override
-    public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
-	readFromNBT(packet.customParam1);
-	this.worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-    }
-
-    protected void notifyBlockChange() {
-	if (!this.worldObj.isRemote) {
-	    this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-
-	    StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[2];// maybe this number needs to be
-						// corrected
-	    String methodName = e.getMethodName();
-	    String className = e.getClassName();
+	@Override
+	public Packet getDescriptionPacket() {
+		NBTTagCompound nbtTag = new NBTTagCompound();
+		this.writeToNBT(nbtTag);
+		return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
 	}
 
-    }
+	@Override
+	public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
+		readFromNBT(packet.customParam1);
+		this.worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+	}
+
+	protected void notifyBlockChange() {
+		if (!this.worldObj.isRemote) {
+			this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+
+			StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
+			StackTraceElement e = stacktrace[2];// maybe this number needs to be
+			// corrected
+			String methodName = e.getMethodName();
+			String className = e.getClassName();
+		}
+
+	}
+
+	@Override
+	public void triggerButton(int id) {
+
+		if (this instanceof IStateConfig) {
+			int stateValue = ((IStateConfig) this).getStateValue(id) + 1;
+			if (stateValue > ((IStateConfig) this).getMaxStateValue(id))
+				stateValue = 0;
+			((IStateConfig) this).setStateValue(id, stateValue);
+			setButtonState(id, stateValue);
+			System.out.println("Button " + id + " on " + stateValue);
+		}
+	}
+
+	@Override
+	public int getButtonState(int id) {
+		if (buttonState.length > id)
+			return buttonState[id];
+		return 0;
+	}
+
+	@Override
+	public int setButtonState(int id, int par2) {
+		while (buttonState.length <= id) {
+			int[] temp = new int[buttonState.length*2];
+			for(int i =0;i<buttonState.length;i++){
+				temp[i] = buttonState[i];
+			}
+			buttonState = temp;
+		}
+		buttonState[id] = par2;
+		return par2;
+	}
 }

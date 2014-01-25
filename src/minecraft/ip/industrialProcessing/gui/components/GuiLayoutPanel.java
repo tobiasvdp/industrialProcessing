@@ -12,6 +12,8 @@ import ip.industrialProcessing.gui.container.slot.layout.components.SlotLayoutPo
 import ip.industrialProcessing.gui.container.slot.layout.components.SlotLayoutTank;
 import ip.industrialProcessing.gui.container.slot.layout.components.SlotType;
 import ip.industrialProcessing.gui.guiContainer.layout.GuiContainerLayout;
+import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerDrawRectagle;
+import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerLayoutButton;
 import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerLayoutHeat;
 import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerLayoutImage;
 import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerLayoutLifespan;
@@ -22,10 +24,14 @@ import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerLa
 import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerLayoutWorker;
 import ip.industrialProcessing.recipes.Recipe;
 
+import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.inventory.Container;
 
 public class GuiLayoutPanel {
@@ -98,38 +104,44 @@ public class GuiLayoutPanel {
 		return rect.y;
 	}
 
-	public void setSlotLayout(SlotLayoutType layout, int amount) {
+	public void setSlotLayout(SlotLayoutType layout, int amount, int... startIndex) {
+		int slotindex = 0;
+		if(startIndex.length == 1){
+			
+		}else{
+			slotindex = parent.getSlotIndex();
+		}
 		switch (getSlotComponent()) {
 		case inventory:
 			this.slotLayout = new SlotLayoutInventory(rect);
 			break;
 		case input:
-			this.slotLayout = new SlotLayoutInput(layout, amount, parent.getSlotIndex(), rect);
+			this.slotLayout = new SlotLayoutInput(layout, amount, slotindex, rect);
 			setGuiContainerLayout(GuiLayoutPanelType.slotsInput);
-			parent.setSlotIndex(parent.getSlotIndex() + amount);
+			parent.setSlotIndex(slotindex + amount);
 			break;
 		case output:
-			this.slotLayout = new SlotLayoutOutput(layout, amount, parent.getSlotIndex(), rect);
+			this.slotLayout = new SlotLayoutOutput(layout, amount, slotindex, rect);
 			setGuiContainerLayout(GuiLayoutPanelType.slotsOutput);
-			parent.setSlotIndex(parent.getSlotIndex() + amount);
+			parent.setSlotIndex(slotindex + amount);
 			break;
 		case power:
-			this.slotLayout = new SlotLayoutPower(parent.getSlotIndex(), rect);
-			parent.setSlotIndex(parent.getSlotIndex() + amount);
+			this.slotLayout = new SlotLayoutPower(slotindex, rect);
+			parent.setSlotIndex(slotindex + amount);
 			break;
 		case side:
 			break;
 		case tankOutput:
-			this.slotLayout = new SlotLayoutTank(parent.getSlotIndex(), rect, true);
-			parent.setSlotIndex(parent.getSlotIndex() + amount);
+			this.slotLayout = new SlotLayoutTank(slotindex, rect, true);
+			parent.setSlotIndex(slotindex + amount);
 			break;
 		case tankInput:
-			this.slotLayout = new SlotLayoutTank(parent.getSlotIndex(), rect, false);
-			parent.setSlotIndex(parent.getSlotIndex() + amount);
+			this.slotLayout = new SlotLayoutTank(slotindex, rect, false);
+			parent.setSlotIndex(slotindex + amount);
 			break;
 		case heat:
-			this.slotLayout = new SlotLayoutHeat(parent.getSlotIndex(), rect);
-			parent.setSlotIndex(parent.getSlotIndex() + amount);
+			this.slotLayout = new SlotLayoutHeat(slotindex, rect);
+			parent.setSlotIndex(slotindex + amount);
 			break;
 		default:
 			break;
@@ -144,6 +156,53 @@ public class GuiLayoutPanel {
 			parent.reDoLayout();
 		}
 		return this;
+	}
+	
+	public GuiLayoutPanel setButtonSize(int width,int height){
+		if(type == GuiLayoutPanelType.singlebutton){
+			this.rect.setSize(width, height);
+			((GuiContainerLayoutButton)this.guiContainerLayout).setButton(new Rectangle(0,0,width,height));
+			parent.reDoLayout();
+		}
+		return this;
+	}
+	public GuiLayoutPanel setButtonsSize(Rectangle... rect){
+		//wrong
+		if(type == GuiLayoutPanelType.singlebutton){
+			((GuiContainerLayoutButton)this.guiContainerLayout).setButton(rect);
+			parent.reDoLayout();
+		}
+		return this;
+	}
+	public GuiLayoutPanel setButtonStateNames(String... states){
+		if(type == GuiLayoutPanelType.singlebutton){
+			((GuiContainerLayoutButton)this.guiContainerLayout).setButtonValues(states);
+		}
+		return this;
+	}
+	
+	public GuiLayoutPanel setButtonIcons(Rectangle... rectangle){
+		if(type == GuiLayoutPanelType.singlebutton){
+			GuiContainerDrawRectagle[] icons = new GuiContainerDrawRectagle[rectangle.length];
+			for(int i =0;i<rectangle.length;i++){
+				icons[i] = new GuiContainerDrawRectagle();
+				icons[i].destination = new Point(0,0);
+				icons[i].origin = new Rectangle(rectangle[i].x,rectangle[i].y,rectangle[i].width,rectangle[i].height);
+			}
+			((GuiContainerLayoutButton)this.guiContainerLayout).setButtonIcons(icons);
+		}
+		return this;
+	}
+	
+	public GuiLayoutPanel setButtonIconsCentered() {
+		if(type == GuiLayoutPanelType.singlebutton){
+			((GuiContainerLayoutButton)this.guiContainerLayout).setButtonIconsCentered();
+		}
+		return this;
+	}
+	
+	public ArrayList<GuiButton> getGuiButtons(int offsetX, int offsetY){ 
+		return ((GuiContainerLayoutButton)this.guiContainerLayout).getButtons(offsetX+ rect.x,offsetY+ rect.y);
 	}
 
 	public SlotLayout getSlotLayout() {
@@ -223,6 +282,9 @@ public class GuiLayoutPanel {
 		case image:
 			guiContainerLayout = new GuiContainerLayoutImage();
 			// draws from different texture file, done in image component
+			break;
+		case singlebutton:
+			guiContainerLayout = new GuiContainerLayoutButton();
 			break;
 		default:
 			break;

@@ -4,7 +4,9 @@ import ip.industrialProcessing.api.tanks.ITank;
 import ip.industrialProcessing.gui.GuiLayout;
 import ip.industrialProcessing.gui.IGuiLayout;
 import ip.industrialProcessing.gui.IGuiLayoutMultiblock;
+import ip.industrialProcessing.gui.IGuiLayoutTriggerAcceptor;
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
+import ip.industrialProcessing.gui.container.syncing.handlers.HandlerButton;
 import ip.industrialProcessing.gui.container.syncing.handlers.HandlerHeat;
 import ip.industrialProcessing.gui.container.syncing.handlers.HandlerLifeSpan;
 import ip.industrialProcessing.gui.container.syncing.handlers.HandlerPower;
@@ -307,6 +309,10 @@ public class ContainerIP extends Container {
 		case lifespan:
 			if (te instanceof IBreakable)
 				addHandler(new HandlerLifeSpan(((IBreakable) te)));
+			break;
+		case singlebutton:
+			if (te instanceof IGuiLayoutTriggerAcceptor)
+				addHandler(new HandlerButton((IGuiLayoutTriggerAcceptor) te, index));
 			break;
 		default:
 			break;

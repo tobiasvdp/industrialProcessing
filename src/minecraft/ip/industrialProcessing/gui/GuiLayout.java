@@ -14,6 +14,7 @@ import java.util.Iterator;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.Entity;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
@@ -32,7 +33,7 @@ public class GuiLayout {
 	public boolean drawInventoryTitel = true;
 	private boolean autoSortByID = false;
 	private int[] sortOrder;
-	GuiLayoutPanelType[] sortingOrder = new GuiLayoutPanelType[] { GuiLayoutPanelType.heat, GuiLayoutPanelType.simpleHeat, GuiLayoutPanelType.simpleTankInput, GuiLayoutPanelType.tankInput, GuiLayoutPanelType.slotsInput, GuiLayoutPanelType.image ,GuiLayoutPanelType.worker, GuiLayoutPanelType.slotsOutput, GuiLayoutPanelType.tankOutput, GuiLayoutPanelType.simpleTankOutput };
+	GuiLayoutPanelType[] sortingOrder = new GuiLayoutPanelType[] { GuiLayoutPanelType.singlebutton ,GuiLayoutPanelType.heat, GuiLayoutPanelType.simpleHeat, GuiLayoutPanelType.simpleTankInput, GuiLayoutPanelType.tankInput, GuiLayoutPanelType.slotsInput, GuiLayoutPanelType.image, GuiLayoutPanelType.worker, GuiLayoutPanelType.slotsOutput, GuiLayoutPanelType.tankOutput, GuiLayoutPanelType.simpleTankOutput };
 
 	public GuiLayout() {
 		this(true);
@@ -210,6 +211,19 @@ public class GuiLayout {
 			panel.setGuiContainerLayout(type);
 			layoutPanels.add(panel);
 			break;
+		case singlebutton:
+			if (location.length == 2) {
+				x = location[0];
+				y = location[1];
+			} else {
+				x = 8 + offsetX;
+				y = 40;
+			}
+			panel = new GuiLayoutPanel(this, type, x, y, 1, 1, fixed);
+			// no slotLayout
+			panel.setGuiContainerLayout(type);
+			layoutPanels.add(panel);
+			break;
 		default:
 			break;
 
@@ -287,21 +301,21 @@ public class GuiLayout {
 								newWidth += panels.get(z).getWidth();
 								i = z;
 							}
-							
-							
+
 						}
 						redoPartialLayout(subSetPanels, previousIntersectLocation, (int) intersect.getX());
 						previousIntersectLocation = (int) (intersect.getX() + intersect.getWidth());
 						newWidth = 0;
-						for (int z = i+1; z < panels.size(); z++) {
+						for (int z = i + 1; z < panels.size(); z++) {
 							newWidth += panels.get(z).getWidth();
 						}
 						margin = (int) (widthScreen - previousIntersectLocation - newWidth) / (panels.size() - i);
-						if(i == 0)
+						if (i == 0)
 							margin = (int) (widthScreen - previousIntersectLocation - newWidth) / (panels.size() + 2);
 						totalWidth = (int) (intersect.getX() + intersect.getWidth() + margin);
 						previousIntersect = i;
-						if(i==0)i--;
+						if (i == 0)
+							i--;
 					}
 				}
 			} else {
@@ -462,6 +476,10 @@ public class GuiLayout {
 			return GuiLayoutPanelTypeClass.tank;
 		case worker:
 			return GuiLayoutPanelTypeClass.worker;
+		case image:
+			return GuiLayoutPanelTypeClass.image;
+		case singlebutton:
+			return GuiLayoutPanelTypeClass.button;
 		default:
 			return GuiLayoutPanelTypeClass.other;
 		}
@@ -486,7 +504,6 @@ public class GuiLayout {
 					type = panelType;
 				}
 			}
-			System.out.println(typeIndex);
 			container.addHandlerToContainer(panelType, typeIndex);
 
 			typeIndex++;
@@ -531,5 +548,23 @@ public class GuiLayout {
 
 			typeIndex++;
 		}
+	}
+
+	public void guiButtonTriggered(int id) {
+		
+	}
+
+	public ArrayList<GuiButton> getGuiButtons(int offsetX,int offsetY) {
+		ArrayList<GuiButton> buttons = new ArrayList<GuiButton>();
+		for (int i = 0; i < layoutPanels.size(); i++) {
+			GuiLayoutPanel panel = layoutPanels.get(i);
+			if(getTypeClass(panel.type) == GuiLayoutPanelTypeClass.button){
+				buttons.addAll(panel.getGuiButtons(offsetX,offsetY));
+			}
+		}
+		for(int i = 0;i<buttons.size();i++){
+			buttons.get(i).id = i;
+		}
+		return buttons;
 	}
 }

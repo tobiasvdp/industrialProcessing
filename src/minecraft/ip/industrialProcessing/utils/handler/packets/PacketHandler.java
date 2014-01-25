@@ -1,6 +1,7 @@
 package ip.industrialProcessing.utils.handler.packets;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.gui.IGuiLayoutTriggerAcceptor;
 import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 import ip.industrialProcessing.machines.animation.conveyors.TileConveyorSyncHandler;
 import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
@@ -49,6 +50,30 @@ public class PacketHandler implements IPacketHandler {
 		} else if (packet.channel.equals(TANK_SYNC)) {
 			TileTankSyncHandler.handleTankSync(manager, packet, player);
 		} else if (packet.channel.equals(BUTTON_PRESSED)) {
+			DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
+			int teX = 0;
+			int teY = 0;
+			int teZ = 0;
+			int id = 0;
+			try {
+				teX = inputStream.readInt();
+				teY = inputStream.readInt();
+				teZ = inputStream.readInt();
+				id = inputStream.readInt();
+
+			} catch (IOException e) {
+				e.printStackTrace();
+				return;
+			}
+
+			EntityPlayer playerMP = (EntityPlayer) player;
+			if (!playerMP.worldObj.isRemote) {
+				TileEntity te = playerMP.worldObj.getBlockTileEntity(teX, teY, teZ);
+				if(te instanceof IGuiLayoutTriggerAcceptor){
+					((IGuiLayoutTriggerAcceptor)te).triggerButton(id);
+				}
+			}
+		
 		} else if (packet.channel.equals(CONVEYOR_SYNC)) {
 			TileConveyorSyncHandler.handleConveyorSync(manager, packet, player);
 		} else if (packet.channel.equals(IP_ENTITY_INTERACT)) {

@@ -48,6 +48,7 @@ public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation
 	this.setConnectionMode(LocalDirection.UP, ConnectionMode.NONE);
 	this.setConnectionMode(LocalDirection.DOWN, ConnectionMode.NONE);
 	this.ticks = (tickOffset++ % updateCycle);
+	this.setButtonState(1, 1);
     }
 
     @Override
@@ -387,7 +388,6 @@ public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation
 
     @Override
     public void setStateValue(int index, int value) {
-	value = Math.min(Math.max(getMinStateValue(index), value), getMaxStateValue(1));
 	switch(index)
 	{
 	case 0:
