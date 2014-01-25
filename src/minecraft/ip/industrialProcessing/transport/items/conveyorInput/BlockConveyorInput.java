@@ -11,6 +11,7 @@ import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
 import ip.industrialProcessing.transport.items.conveyorBelt.BlockConveyorMachineBase;
 import ip.industrialProcessing.utils.IDescriptionBlock;
 
+import java.awt.Rectangle;
 import java.util.List;
 
 import net.minecraft.block.Block;
@@ -30,6 +31,8 @@ public class BlockConveyorInput extends BlockConveyorMachineBase implements IDes
     static {
 	guiLayout = new GuiLayout();
 	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 9);
+	
+	guiLayout.addLayoutPanel(GuiLayoutPanelType.singlebutton, 10, 40).setButtonSize(20, 20).setButtonStateNames("Random Slot", "First slot first", "Last slot first").setButtonIcons(new Rectangle(0, 0, 16, 16), new Rectangle(16, 0, 16, 16), new Rectangle(32, 0, 16, 16)).setButtonIconsCentered();
     }
 
     public BlockConveyorInput() {

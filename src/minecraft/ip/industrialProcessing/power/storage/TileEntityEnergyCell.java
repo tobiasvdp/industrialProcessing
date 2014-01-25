@@ -67,6 +67,8 @@ public class TileEntityEnergyCell extends TileEntityPowerGenerator implements IP
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
 	super.writeToNBT(nbt);
+	this.animation.writeToNBT(nbt);
+	this.animationBatteries.writeToNBT(nbt);
 	this.storage.writeToNBT(nbt);
     }
 
@@ -74,6 +76,8 @@ public class TileEntityEnergyCell extends TileEntityPowerGenerator implements IP
     public void readFromNBT(NBTTagCompound nbt) {
 	super.readFromNBT(nbt);
 	this.storage.readFromNBT(nbt);
+	this.animation.readFromNBT(nbt);
+	this.animationBatteries.readFromNBT(nbt);
     }
 
     public float getTotalJouleCapacity() {

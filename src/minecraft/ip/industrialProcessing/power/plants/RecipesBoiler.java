@@ -12,7 +12,7 @@ public class RecipesBoiler extends RecipesMachine {
 	public RecipesBoiler()
 	{
 		Recipe steam = new Recipe();
-		steam.workRequired = 30;
+		steam.workRequired = 3000;
 		steam.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.WATER.getID(), RecipeSlotType.TANK, 1000)};
 		
 		int steamID = FluidRegistry.getFluid("steam").getID();
