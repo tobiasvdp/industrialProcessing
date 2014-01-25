@@ -15,14 +15,14 @@ public class RecipesFlotationCell extends RecipesMachine {
     }
 
     private void addDefaultRecipes() {
-	addRecipe(dirtyToUnclean(3000, 0));
-	addRecipe(ThickSludgeToFlotationSedimentIron(3000, 0));
-	addRecipe(ThickSludgeToFlotationSedimentTin(3000, 0));
-	addRecipe(ThickSludgeToFlotationSedimentCopper(3000, 0));
-	addRecipe(ThickSludgeToFlotationSedimentGold(3000, 0));
-	addRecipe(ThickSludgeToFlotationSedimentTalia(3000, 0));
-	addRecipe(ThickSludgeToFlotationSedimentGalena(3000, 0));
-	addRecipe(ThickSludgeToFlotationSedimentChromite(3000, 0));
+	addRecipe(dirtyToUnclean(300, 0));
+	addRecipe(ThickSludgeToFlotationSedimentIron(300, 0));
+	addRecipe(ThickSludgeToFlotationSedimentTin(300, 0));
+	addRecipe(ThickSludgeToFlotationSedimentCopper(300, 0));
+	addRecipe(ThickSludgeToFlotationSedimentGold(300, 0));
+	addRecipe(ThickSludgeToFlotationSedimentTalia(300, 0));
+	addRecipe(ThickSludgeToFlotationSedimentGalena(300, 0));
+	addRecipe(ThickSludgeToFlotationSedimentChromite(300, 0));
     }
 
     private Recipe dirtyToUnclean(int i, int power) {
