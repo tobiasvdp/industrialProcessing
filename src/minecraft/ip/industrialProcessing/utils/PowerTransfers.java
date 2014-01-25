@@ -1,13 +1,13 @@
 package ip.industrialProcessing.utils;
 
 import ip.industrialProcessing.items.ItemBattery;
-import ip.industrialProcessing.machines.SimplePowerStorage;
+import ip.industrialProcessing.machines.IPowerStorage;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class PowerTransfers {
 
-    public static int transfer(ItemStack stack, int maxAmount, SimplePowerStorage storage) {
+    public static int transfer(ItemStack stack, int maxAmount, IPowerStorage storage) {
         if (isBattery(stack)) {
 
             int charge = stack.getMaxDamage() - stack.getItemDamage();
@@ -20,7 +20,7 @@ public class PowerTransfers {
         return 0;
     }
 
-    public static int transfer(SimplePowerStorage storage, int maxAmount, ItemStack stack) {
+    public static int transfer(IPowerStorage storage, int maxAmount, ItemStack stack) {
         if (isBattery(stack)) {
             maxAmount = Math.min(stack.getItemDamage(), maxAmount);
             int drain = storage.drainPower(maxAmount, false);

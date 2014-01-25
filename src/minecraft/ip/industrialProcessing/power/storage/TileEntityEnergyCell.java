@@ -13,7 +13,9 @@ import ip.industrialProcessing.power.IPoweredMachine;
 import ip.industrialProcessing.power.PowerHelper;
 import ip.industrialProcessing.power.TileEntityPowerGenerator;
 import ip.industrialProcessing.utils.DirectionUtils;
+import ip.industrialProcessing.utils.PowerTransfers;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 
@@ -22,6 +24,7 @@ public class TileEntityEnergyCell extends TileEntityPowerGenerator implements IP
 
     private int BATTERY_SLOTS = 9;
     private PowerStorageEnergyCell storage;
+    private int dischargeSlot;
 
     public TileEntityEnergyCell() {
 
@@ -30,8 +33,8 @@ public class TileEntityEnergyCell extends TileEntityPowerGenerator implements IP
         for (int i = 0; i < BATTERY_SLOTS; i++) {
             addStack(null, batteryInterfaceSide, true, true);
         }
-        addStack(null, batteryInterfaceSide, true, true); // battery charge
-                                                          // slot.
+        this.dischargeSlot = addStack(null, batteryInterfaceSide, true, true); 
+        // battery discharge slot.
 
         this.storage = new PowerStorageEnergyCell(this, 0, BATTERY_SLOTS);
     }
@@ -87,6 +90,11 @@ public class TileEntityEnergyCell extends TileEntityPowerGenerator implements IP
             this.animation.setIncrementing(incrementing);
             this.animation.update();
             TileAnimationSyncHandler.sendAnimationData(this, this.animation);
+            ItemStack distchargeSlot = getStackInSlot(this.dischargeSlot);
+            if(PowerTransfers.isBattery(distchargeSlot))
+            {
+                PowerTransfers.transfer(distchargeSlot, 10, this.storage);
+            }
         } else
             this.animation.update();
     }
