@@ -129,7 +129,7 @@ public abstract class TileEntityMultiblockCoreInvWorker extends TileEntityMultib
     }
 
     @Override
-	public AnimationHandler getAnimationHandler() {
+	public AnimationHandler getAnimationHandler(int index) {
 	return animationHandler;
     }
 

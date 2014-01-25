@@ -84,7 +84,6 @@ import ip.industrialProcessing.multiblock.dummy.block.wheel.BLmultiblockWheel;
 import ip.industrialProcessing.multiblock.dummy.block.wheelConnector.BLmultiblockWheelConnector;
 import ip.industrialProcessing.power.buildcraftGenerator.BlockBuildcraftGenerator;
 import ip.industrialProcessing.power.manualGenerator.BlockManualGenerator;
-import ip.industrialProcessing.power.meters.BlockAmpMeter;
 import ip.industrialProcessing.power.meters.BlockVoltMeter;
 import ip.industrialProcessing.power.motor.BlockElectroMotor;
 import ip.industrialProcessing.power.plants.BlockBoiler;
@@ -174,8 +173,7 @@ public interface ISetupMachineBlocks {
     public final static BlockWire blockWire = new BlockWire();
     public final static BlockWireWood blockWireWood = new BlockWireWood();
     public final static BlockWireStone blockWireStone = new BlockWireStone();
-    public final static BlockVoltMeter blockVoltMeter = new BlockVoltMeter();
-    public final static BlockAmpMeter blockAmpMeter = new BlockAmpMeter();
+    public final static BlockVoltMeter blockVoltMeter = new BlockVoltMeter(); 
     public final static BlockEnergyCell blockEnergyCell = new BlockEnergyCell();
     public final static BlockSolidBurner blockSolidBurner = new BlockSolidBurner();
     public final static BlockBoiler blockBoiler = new BlockBoiler();

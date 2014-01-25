@@ -63,7 +63,7 @@ public class TileEntityManoMeter extends TileEntityMachine implements IAnimation
 	}
 
 	@Override
-	public AnimationHandler getAnimationHandler() {
+	public AnimationHandler getAnimationHandler(int index) {
 		return this.animationHandler;
 	}
 

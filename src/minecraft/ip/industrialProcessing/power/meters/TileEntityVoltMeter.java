@@ -71,7 +71,7 @@ public class TileEntityVoltMeter extends TileEntityMachine implements IPowerAcce
 	}
 
 	@Override
-	public AnimationHandler getAnimationHandler() {
+	public AnimationHandler getAnimationHandler(int index) {
 		return this.animationHandler;
 	}
 }

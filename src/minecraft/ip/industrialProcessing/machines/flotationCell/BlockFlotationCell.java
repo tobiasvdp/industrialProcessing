@@ -27,8 +27,7 @@ public class BlockFlotationCell extends BlockMachineRendered implements IRecipeB
 	guiLayout.addLayoutPanel(GuiLayoutPanelType.tankInput);
 	guiLayout.addLayoutPanel(GuiLayoutPanelType.tankOutput);
 	guiLayout.addLayoutPanel(GuiLayoutPanelType.tankOutput);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.worker);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.power);
+	guiLayout.addLayoutPanel(GuiLayoutPanelType.worker); 
     }
     private Icon[] icons = new Icon[2];
 

@@ -18,25 +18,30 @@ import ip.industrialProcessing.utils.packetHandlers.TileSyncHandler;
 public class TileAnimationSyncHandler extends TileSyncHandler {
 
     public static void sendAnimationData(TileEntity entity, AnimationHandler handler) {
-	if (handler.isChanged()) { 
+	sendAnimationData(entity, handler, 0);
+    }
+
+    public static void sendAnimationData(TileEntity entity, AnimationHandler handler, int index) {
+	if (handler.isChanged()) {
 	    double x = entity.xCoord;
 	    double y = entity.yCoord;
 	    double z = entity.zCoord;
 	    int dimensionId = entity.worldObj.getWorldInfo().getVanillaDimension();
 	    double range = 32;
 
-	    Packet250CustomPayload packet = getAnimationPayload(entity, handler);
+	    Packet250CustomPayload packet = getAnimationPayload(entity, handler, index);
 	    PacketDispatcher.sendPacketToAllAround(x, y, z, range, dimensionId, packet);
 	}
     }
 
-    private static Packet250CustomPayload getAnimationPayload(TileEntity entity, AnimationHandler handler) {
+    private static Packet250CustomPayload getAnimationPayload(TileEntity entity, AnimationHandler handler, int index) {
 
-	ByteArrayOutputStream bos = new ByteArrayOutputStream(4 * 5);
+	ByteArrayOutputStream bos = new ByteArrayOutputStream(4 * 5 + 1);
 	DataOutputStream outputStream = new DataOutputStream(bos);
 
 	try {
 	    writeTileEntity(outputStream, entity); // 3 * 4 bytes
+	    outputStream.writeInt(index);
 	    writeAnimationHandler(outputStream, handler); // 2 * 4 bytes
 	} catch (Exception ex) {
 	    ex.printStackTrace();
@@ -78,7 +83,8 @@ public class TileAnimationSyncHandler extends TileSyncHandler {
 	    tileEntity = readTileEntity(inputStream, playerEntity.worldObj);
 	    if (tileEntity instanceof IAnimationSyncable) {
 		IAnimationSyncable syncable = (IAnimationSyncable) tileEntity;
-		readAnimationHandler(inputStream, syncable.getAnimationHandler());
+		int index = inputStream.readInt();
+		readAnimationHandler(inputStream, syncable.getAnimationHandler(index));
 	    }
 	} catch (IOException e) {
 	    e.printStackTrace();

@@ -107,7 +107,7 @@ public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachin
     }
 
     @Override
-    public AnimationHandler getAnimationHandler() {
+    public AnimationHandler getAnimationHandler(int index) {
 	return animationHandler;
     }
 

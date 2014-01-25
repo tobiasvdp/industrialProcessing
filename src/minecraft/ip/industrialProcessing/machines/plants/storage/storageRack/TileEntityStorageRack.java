@@ -211,7 +211,7 @@ public class TileEntityStorageRack extends TileEntityMachine implements IAnimati
 	}
 
 	@Override
-	public AnimationHandler getAnimationHandler() {
+	public AnimationHandler getAnimationHandler(int index) {
 		return this.animation;
 	}
 

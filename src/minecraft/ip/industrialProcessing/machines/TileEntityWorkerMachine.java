@@ -105,7 +105,7 @@ public abstract class TileEntityWorkerMachine extends TileEntityMachine implemen
     }
 
     @Override
-    public AnimationHandler getAnimationHandler() {
+    public AnimationHandler getAnimationHandler(int index) {
 	return animationHandler;
     }
 

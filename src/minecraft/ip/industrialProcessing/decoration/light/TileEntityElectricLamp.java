@@ -87,7 +87,7 @@ public class TileEntityElectricLamp extends TileEntity implements IPowerAcceptor
     }
 
     @Override
-    public AnimationHandler getAnimationHandler() {
+    public AnimationHandler getAnimationHandler(int index) {
         return this.handler;
     }
 

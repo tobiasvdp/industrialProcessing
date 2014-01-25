@@ -101,8 +101,7 @@ import ip.industrialProcessing.multiblock.dummy.block.wheelConnector.TEmultibloc
 import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
 import ip.industrialProcessing.power.manualGenerator.ModelCrankGenerator;
 import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
-import ip.industrialProcessing.power.meters.ModelVoltMeter;
-import ip.industrialProcessing.power.meters.TileEntityAmpMeter;
+import ip.industrialProcessing.power.meters.ModelVoltMeter; 
 import ip.industrialProcessing.power.meters.TileEntityVoltMeter;
 import ip.industrialProcessing.power.motor.TileEntityElectroMotor;
 import ip.industrialProcessing.power.motor.models.ModelElectroMotorBlock;
@@ -484,10 +483,7 @@ public class ClientProxy extends CommonProxy {
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityVoltMeter.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockVoltMeter, "ModelVoltMeter", voltMeter));
 	ConfigRenderers.setRendererVoltMeterId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererVoltMeterId(), new TileEntityVoltMeter()));
-
-	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAmpMeter.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockAmpMeter, "ModelAmpMeter", ampMeter));
-	ConfigRenderers.setRendererAmpMeterId(RenderingRegistry.getNextAvailableRenderId());
-	RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererAmpMeterId(), new TileEntityAmpMeter()));
+ 
 
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityManualGenerator.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockManualGenerator, "ModelCrankGenerator", crankGenerator));
 	ConfigRenderers.setRendererCrankGeneratorId(RenderingRegistry.getNextAvailableRenderId());

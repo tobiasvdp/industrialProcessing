@@ -27,6 +27,7 @@ public class BlockDiskFilter extends BlockMachineRendered  implements IRecipeBlo
 		guiLayout.addLayoutPanel(GuiLayoutPanelType.tankInput);
 		guiLayout.addLayoutPanel(GuiLayoutPanelType.tankInput);
 		guiLayout.addLayoutPanel(GuiLayoutPanelType.tankOutput);
+		guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsOutput);
 		guiLayout.addLayoutPanel(GuiLayoutPanelType.worker);
 		guiLayout.addLayoutPanel(GuiLayoutPanelType.power);
 	}

@@ -86,7 +86,6 @@ import ip.industrialProcessing.multiblock.dummy.block.wheelConnector.TEmultibloc
 import ip.industrialProcessing.multiblock.recipes.IRecipeMultiblock;
 import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
 import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
-import ip.industrialProcessing.power.meters.TileEntityAmpMeter;
 import ip.industrialProcessing.power.meters.TileEntityVoltMeter;
 import ip.industrialProcessing.power.motor.TileEntityElectroMotor;
 import ip.industrialProcessing.power.plants.TileEntityBoiler;
@@ -360,7 +359,6 @@ public class ConfigMachineBlocks {
 	registerMachineBlock(ISetupMachineBlocks.blockWireWood, ItemBlockWithMetadata.class, "IP.Wire.Wood", "Wood-embedded Wire", TileEntityWire.class, BlockType.Machine, BlockType.Power);
 	registerMachineBlock(ISetupMachineBlocks.blockWireStone, ItemBlockWithMetadata.class, "IP.Wire.Stone", "Stone-embedded Wire", TileEntityWire.class, BlockType.Machine, BlockType.Power);
 	registerMachineBlock(ISetupMachineBlocks.blockVoltMeter, "IP.Meter.Volt", "Volt Meter", TileEntityVoltMeter.class, BlockType.Machine, BlockType.Power);
-	registerMachineBlock(ISetupMachineBlocks.blockAmpMeter, "IP.Meter.Amp", "Amp Meter", TileEntityAmpMeter.class, BlockType.Machine, BlockType.Power);
 	registerMachineBlock(ISetupMachineBlocks.blockEnergyCell, "IP.EnergyCell", "Battery Box", TileEntityEnergyCell.class, BlockType.Machine, BlockType.Power);
 	registerMachineBlock(ISetupMachineBlocks.blockSolidBurner, "IP.SolidBurner", "Solid Burner", TileEntitySolidBurner.class, BlockType.Machine, BlockType.Power);
 	registerMachineBlock(ISetupMachineBlocks.blockBoiler, "IP.Boiler", "Boiler", TileEntityBoiler.class, BlockType.Machine, BlockType.Power, BlockType.fluid);

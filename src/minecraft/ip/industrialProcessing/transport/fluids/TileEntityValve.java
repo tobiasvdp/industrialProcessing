@@ -180,7 +180,7 @@ public class TileEntityValve extends TileEntityTransportFluidsBase implements IA
     }
 
     @Override
-    public AnimationHandler getAnimationHandler() {
+    public AnimationHandler getAnimationHandler(int index) {
         return this.animationHandler;
     }
 

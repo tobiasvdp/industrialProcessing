@@ -91,7 +91,7 @@ public class TileEntityGenerator extends TileEntityPowerGenerator implements IAn
 	}
 
 	@Override
-	public AnimationHandler getAnimationHandler() {
+	public AnimationHandler getAnimationHandler(int index) {
 		return this.animationHandler;
 	}
 }

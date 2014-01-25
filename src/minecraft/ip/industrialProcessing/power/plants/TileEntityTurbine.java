@@ -102,7 +102,7 @@ public class TileEntityTurbine extends TileEntityFluidMachine implements IAnimat
     }
 
     @Override
-    public AnimationHandler getAnimationHandler() {
+    public AnimationHandler getAnimationHandler(int index) {
 	return this.animationHandler;
     }
 

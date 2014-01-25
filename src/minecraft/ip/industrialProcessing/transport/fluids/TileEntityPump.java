@@ -108,7 +108,7 @@ public class TileEntityPump extends TileEntityMachine implements IAnimationProgr
     }
 
     @Override
-    public AnimationHandler getAnimationHandler() {
+    public AnimationHandler getAnimationHandler(int index) {
         return this.animationHandler;
     }
 

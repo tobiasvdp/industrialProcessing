@@ -36,6 +36,7 @@ public class TileEntityConveyorInput extends TileEntityConveyorInventoryBase imp
     public TileEntityConveyorInput() {
 	super();
 	Arrays.fill(this.connections, ConnectionMode.INVENTORYINPUT);
+	setConnectionMode(LocalDirection.UP, ConnectionMode.ANYINPUT);
 	setConnectionMode(LocalDirection.BACK, ConnectionMode.OUTPUT);
 	this.filter = new ConveyorImportFilter(this.slots);
     }
