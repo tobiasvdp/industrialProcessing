@@ -1,8 +1,8 @@
 [
 {
-  "modid": "IPPower",
-  "name": "Industrial Processing Power",
-  "description": "Industrial Processing Power",
+  "modid": "IPMine",
+  "name": "Industrial Processing Mining",
+  "description": "Industrial Processing Mining",
   "version": "0.0.1",
   "mcversion": "1.6.2",
   "url": "http://none.com/",
