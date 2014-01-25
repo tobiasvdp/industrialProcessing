@@ -66,6 +66,10 @@ public class GuiContainerLayout {
 			gui.drawTexturedModalRect(rectangle.destination.x + offsetX, rectangle.destination.y + offsetY, rectangle.origin.x, rectangle.origin.y, rectangle.origin.width, rectangle.origin.height);
 		}
 	}
+	
+	public void drawForeGround(Gui gui, Container container, int index, int offsetX, int offsetY, int mouseX, int mouseY) {
+
+	}
 
 	protected boolean isMouseInside(int mouseX, int mouseY, int i, int j, int width, int height) {
 		if (mouseX > i && mouseY > j) {

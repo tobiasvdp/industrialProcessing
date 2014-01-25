@@ -74,16 +74,16 @@ public class GuiContainerIP extends GuiContainer {
 	public void drawScreen(int par1, int par2, float par3) {
 		this.mouseX = par1;
 		this.mouseY = par2;
-		super.drawScreen(par1, par2, par3);
 		
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
 		
-		setTextureLayout();
+		super.drawScreen(par1, par2, par3);
 		
 		if (this.layout != null) {
-			layout.draw(this, this.inventorySlots, x, y, mouseX, mouseY);
+			layout.drawForeGround(this, this.inventorySlots, x, y, mouseX, mouseY);
 		}
+		
 		
 		if (toolTip != null) {
 			ToolTip.renderToolTip(this.toolTip, mouseX + 16, mouseY, this.zLevel, fontRenderer);
@@ -109,6 +109,9 @@ public class GuiContainerIP extends GuiContainer {
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
 		this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
+		if (this.layout != null) {
+			layout.draw(this, this.inventorySlots, x, y, mouseX, mouseY);
+		}
 	}
 
 	public void changeTab(int tabID) {

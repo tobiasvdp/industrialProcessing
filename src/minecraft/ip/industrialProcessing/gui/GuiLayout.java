@@ -441,6 +441,30 @@ public class GuiLayout {
 			typeIndex++;
 		}
 	}
+	
+	public void drawForeGround(Gui gui, Container container, int offsetX, int offsetY, int mouseX, int mouseY) {
+		int typeIndex = 0;
+		GuiLayoutPanelType type = null;
+		for (int i = 0; i < layoutPanels.size(); i++) {
+			GuiLayoutPanel panel = layoutPanels.get(i);
+			GuiLayoutPanelType panelType = panel.type;
+			if (type == null)
+				type = panel.type;
+
+			if (type != panelType) {
+				if (isSameTypeClass(type, panelType)) {
+
+				} else {
+					typeIndex = 0;
+					type = panelType;
+				}
+			}
+
+			panel.drawForeGround(gui, container, typeIndex, offsetX, offsetY, mouseX, mouseY);
+
+			typeIndex++;
+		}
+	}
 
 	private boolean isSameTypeClass(GuiLayoutPanelType type, GuiLayoutPanelType panelType) {
 		GuiLayoutPanelTypeClass typeClass1 = getTypeClass(type);

@@ -107,7 +107,7 @@ public class GuiLayoutPanel {
 	public void setSlotLayout(SlotLayoutType layout, int amount, int... startIndex) {
 		int slotindex = 0;
 		if(startIndex.length == 1){
-			
+			System.out.println("check");
 		}else{
 			slotindex = parent.getSlotIndex();
 		}
@@ -302,6 +302,12 @@ public class GuiLayoutPanel {
 	public void drawFilledPanel(Gui gui, int index, int x, int y, Recipe recipe, int mouseX, int mouseY, Block craftingBlock) {
 		if (guiContainerLayout != null) {
 			guiContainerLayout.drawFilled(gui, slotLayout, recipe, index, x, y, mouseX, mouseY, craftingBlock);
+		}
+	}
+
+	public void drawForeGround(Gui gui, Container container, int index, int offsetX, int offsetY, int mouseX, int mouseY) {
+		if (guiContainerLayout != null) {
+			guiContainerLayout.drawForeGround(gui, container, index, offsetX + rect.x, offsetY + rect.y, mouseX, mouseY);
 		}
 	}
 }

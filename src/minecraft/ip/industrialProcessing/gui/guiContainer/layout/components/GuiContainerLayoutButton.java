@@ -30,7 +30,7 @@ public class GuiContainerLayoutButton extends GuiContainerLayout {
 	private boolean drawIcons;
 
 	@Override
-	public void draw(Gui gui, Container container, int index, int offsetX, int offsetY, int mouseX, int mouseY) {
+	public void drawForeGround(Gui gui, Container container, int index, int offsetX, int offsetY, int mouseX, int mouseY) {
 		super.draw(gui, container, index, offsetX, offsetY, mouseX, mouseY);
 		if (container instanceof ContainerIP && gui instanceof GuiContainerIP) {
 			ContainerIP handlerContainer = (ContainerIP) container;
@@ -51,6 +51,11 @@ public class GuiContainerLayoutButton extends GuiContainerLayout {
 				}
 			}
 		}
+	}
+	
+	@Override
+	public void draw(Gui gui, Container container, int index, int offsetX, int offsetY, int mouseX, int mouseY) {
+
 	}
 
 	@Override
