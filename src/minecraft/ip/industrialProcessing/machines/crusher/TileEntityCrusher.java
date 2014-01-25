@@ -16,6 +16,7 @@ public class TileEntityCrusher extends TileEntityPoweredWorkerMachine {
 												// 100 ticks
 		this.addStack(null, LocalDirection.UP, true, false);
 		this.addStack(null, LocalDirection.DOWN, false, true);
+		setupPowerSlot();
 	}
 
 	@Override

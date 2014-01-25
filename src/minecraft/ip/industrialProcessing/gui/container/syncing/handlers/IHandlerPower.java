@@ -1,5 +1,7 @@
 package ip.industrialProcessing.gui.container.syncing.handlers;
 
-public interface IHandlerPower extends IHandlerContainer {
+import ip.industrialProcessing.gui.container.syncing.info.InfoPower;
 
+public interface IHandlerPower extends IHandlerContainer {
+    InfoPower getInfo();
 }

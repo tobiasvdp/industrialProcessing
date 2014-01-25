@@ -1,6 +1,7 @@
 package ip.industrialProcessing.config;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.items.ItemBattery;
 import ip.industrialProcessing.items.ItemDamage;
 import ip.industrialProcessing.items.ItemIP;
 import ip.industrialProcessing.items.ItemPaintBrush;
@@ -105,6 +106,7 @@ public interface ISetupItems {
         
     public final static ItemIP itemHexKey = new ItemIP(ConfigItems.itemHexKeyID(), "itemHexKey",IndustrialProcessing.tabPower);
     public final static ItemWrench itemWrench = new ItemWrench();
+    public final static ItemBattery itemBattery = new ItemBattery();
     public final static ItemIP itemAsh = new ItemIP(ConfigItems.itemAshID(), "itemAsh",IndustrialProcessing.tabPower);
     
     public final static ItemGuide itemGuide = new ItemGuide(ConfigItems.getItemGuideID(), "itemGuide", IndustrialProcessing.tabMachineParts);

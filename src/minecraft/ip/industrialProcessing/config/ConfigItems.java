@@ -168,6 +168,7 @@ public class ConfigItems {
 	private int itemTurbineBladesID = 6667;
 	private int itemAshID = 6668;
 	private int itemRemoteID = 6669;
+	private int itemBatteryID = 7000;
 
 	public static int getItemRemoteID() {
 		return getInstance().itemRemoteID;
@@ -760,6 +761,10 @@ public class ConfigItems {
 	public static int getItemSlipRingID() {
 		return getInstance().itemSlipRingID;
 	}
+	
+    public static int getItemBatteryID() {
+        return getInstance().itemBatteryID;
+    }
 
 	public static void addToLanguageRegistry() {
 		LanguageRegistry.addName(ISetupItems.itemRemote , "Remote");
@@ -830,6 +835,7 @@ public class ConfigItems {
 		LanguageRegistry.addName(ISetupItems.itemCoalDust, "Coal dust");
 		LanguageRegistry.addName(ISetupItems.itemGrownCulture, "Grown culture");
 		LanguageRegistry.addName(ISetupItems.itemWrench, "Wrench");
+        LanguageRegistry.addName(ISetupItems.itemBattery, "Battery");
 		LanguageRegistry.addName(ISetupItems.itemHexKey, "Hex Key");
 		LanguageRegistry.addName(ISetupItems.itemSmallMachineCasing, "Small machine casing");
 		LanguageRegistry.addName(ISetupItems.itemInputPort, "Input port");

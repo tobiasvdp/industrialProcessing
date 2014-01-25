@@ -12,28 +12,28 @@ import net.minecraft.world.World;
 public class ItemWrench extends ItemIP {
 
     public ItemWrench() {
-	super(ConfigItems.itemWrenchID(), "itemWrench", ISetupCreativeTabs.tabPower);
+        super(ConfigItems.itemWrenchID(), "itemWrench", ISetupCreativeTabs.tabPower);
     }
 
     @Override
     public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-	TileEntity entity = world.getBlockTileEntity(x, y, z);
-	if (side >= 2 && entity instanceof IRotateableEntity) {
-	    return false;
-	}
-	return super.onItemUseFirst(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
+        TileEntity entity = world.getBlockTileEntity(x, y, z);
+        if (side >= 2 && entity instanceof IRotateableEntity) {
+            return false;
+        }
+        return super.onItemUseFirst(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
     }
 
     @Override
     public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World world, int x, int y, int z, int side, float par8, float par9, float par10) {
-	TileEntity entity = world.getBlockTileEntity(x, y, z);
-	if (entity instanceof IRotateableEntity) {
-	    IRotateableEntity item = (IRotateableEntity) entity;
-	    if (item.canWrenchRotate()) {
-		BlockMachine.setRotation(item, par2EntityPlayer);
-		return true;
-	    }
-	}
-	return super.onItemUse(par1ItemStack, par2EntityPlayer, world, x, y, z, side, par8, par9, par10);
+        TileEntity entity = world.getBlockTileEntity(x, y, z);
+        if (entity instanceof IRotateableEntity) {
+            IRotateableEntity item = (IRotateableEntity) entity;
+            if (item.canWrenchRotate()) {
+                BlockMachine.setRotation(item, par2EntityPlayer);
+                return true;
+            }
+        }
+        return super.onItemUse(par1ItemStack, par2EntityPlayer, world, x, y, z, side, par8, par9, par10);
     }
 }
