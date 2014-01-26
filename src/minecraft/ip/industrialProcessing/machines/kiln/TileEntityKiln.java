@@ -2,43 +2,78 @@ package ip.industrialProcessing.machines.kiln;
 
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.SimplePowerStorage;
-import ip.industrialProcessing.machines.TileEntityPoweredWorkerMachine;
+import ip.industrialProcessing.machines.TileEntityWorkerMachine;
 import ip.industrialProcessing.power.plants.IHeatable;
 import ip.industrialProcessing.recipes.Recipe;
+import ip.industrialProcessing.utils.handler.heat.IHeated;
+import ip.industrialProcessing.utils.working.HeatManager;
+
 import java.util.Iterator;
 
-public class TileEntityKiln extends TileEntityPoweredWorkerMachine implements IHeatable{
+import net.minecraft.nbt.NBTTagCompound;
 
-	public static RecipesKiln recipes = new RecipesKiln();
+public class TileEntityKiln extends TileEntityWorkerMachine implements IHeatable, IHeated {
 
-	public TileEntityKiln() {
-		super(LocalDirection.UNKNOWN, 100000, 100, false); // does 100 work per tick, lasts
-												// 100 ticks
-		this.addStack(null, LocalDirection.UP, true, false);
-		this.addStack(null, LocalDirection.RIGHT, false, true);
-	}
+    public static RecipesKiln recipes = new RecipesKiln(); 
+    private HeatManager heatManager;
 
-	@Override
-	protected boolean isValidInput(int slot, int itemID) {
-		return recipes.isValidInput(slot, itemID);
-	}
+    public TileEntityKiln() {
+	super(false); // 100 ticks
+	this.addStack(null, LocalDirection.UP, true, false);
+	this.addStack(null, LocalDirection.RIGHT, false, true);
+	this.heatManager = new HeatManager(0.00005f, 8000f, 0.01f, this.getWorker());
+    }
+    
+    @Override
+    public void writeToNBT(NBTTagCompound nbt) { 
+        super.writeToNBT(nbt);
+        this.heatManager.writeToNBT(nbt);
+    }
+    
+    @Override
+    public void readFromNBT(NBTTagCompound nbt) { 
+        super.readFromNBT(nbt);
+        this.heatManager.readFromNBT(nbt);
+    }
 
-	@Override
-	public Iterator<Recipe> iterateRecipes() {
-		return recipes.iterator();
-	}
+    @Override
+    protected boolean isValidInput(int slot, int itemID) {
+	return recipes.isValidInput(slot, itemID);
+    }
 
-	@Override
-	public void addHeat(int heat) {
-		((SimplePowerStorage)getMainPowerStorage()).fillPower(heat*16, true);
+    @Override
+    public Iterator<Recipe> iterateRecipes() {
+	return recipes.iterator();
+    }
+
+    @Override
+    public void addHeat(int heat) {
+	this.heatManager.addHeat(heat);
+    }
+
+    @Override
+    public void updateEntity() {
+	if (!this.worldObj.isRemote) {
+	    float ambientTemperature = (this.worldObj.getBiomeGenForCoords(this.xCoord, this.zCoord).getFloatTemperature() * 20);
+	    this.heatManager.update(ambientTemperature);
 	}
-	
-	@Override
-	public void updateEntity() {
-		((SimplePowerStorage)getMainPowerStorage()).drainPower(1, true);
-		if(getMainPowerStorage().getStoredPower() > 8000)
-		    super.updateEntity();
-		
-	}
+	super.updateEntity();
+    }
+
+    @Override
+    protected void doWork() {
+	if (!this.worldObj.isRemote)
+	    this.heatManager.doWork();
+    }
+
+    @Override
+    public float getHeat() {
+	return this.heatManager.getTemperature();
+    }
+
+    @Override
+    public float getMaxHeat() {
+	return 10000;
+    }
 
 }

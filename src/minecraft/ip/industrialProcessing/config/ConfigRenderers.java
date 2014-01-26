@@ -80,12 +80,9 @@ public class ConfigRenderers {
     private int rendererHydroTreater;
     private int rendererMeroxTreater;
     private int rendererVacuumDestilationTower;
-    private int rendererSinter;
-    private int rendererKiln;
-    private int rendererExtruder;
+    private int rendererSinter; 
     private int rendererVacuumCaster;
-    private int rendererTurretLathe;
-    private int rendererSandCaster;
+    private int rendererTurretLathe; 
     private int rendererCoolingUnit;
     private int rendererSmelter;
     private int rendererRoaster;
@@ -108,7 +105,17 @@ public class ConfigRenderers {
     private int rendererConveyorPackerId;
     private int rendererIronPoleId;
     private int rendererDoorEmergencyId;
+    private int rendererInterfaceId;
 
+
+    public static void setRendererInterface(int var) {
+	getInstance().rendererInterfaceId = var;
+    }
+
+    public static int getRendererInterface() {
+	return getInstance().rendererInterfaceId;
+    }
+    
     public static void setRendererDoorEmergency(int var) {
 	getInstance().rendererDoorEmergencyId = var;
     }
@@ -255,15 +262,7 @@ public class ConfigRenderers {
 
     public static int getRendererQuenchTankId() {
 	return getInstance().rendererQuechTank;
-    }
-
-    public static void setRendererSandCasterId(int value) {
-	getInstance().rendererSandCaster = value;
-    }
-
-    public static int getRendererSandCasterId() {
-	return getInstance().rendererSandCaster;
-    }
+    } 
 
     public static int getRendererTurretLatheId() {
 	return getInstance().rendererTurretLathe;
@@ -275,19 +274,7 @@ public class ConfigRenderers {
 
     public static int getRendererVacuumCasterId() {
 	return getInstance().rendererVacuumCaster;
-    }
-
-    public static int getRendererExtruderId() {
-	return getInstance().rendererExtruder;
-    }
-
-    public static int getRendererKilnId() {
-	return getInstance().rendererKiln;
-    }
-
-    public static void setRendererKilnId(int value) {
-	getInstance().rendererKiln = value;
-    }
+    } 
 
     public static int getRendererSinterId() {
 	return getInstance().rendererSinter;

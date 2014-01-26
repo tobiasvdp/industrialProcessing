@@ -4,6 +4,7 @@ import net.minecraft.client.renderer.entity.RenderEntity;
 import ip.industrialProcessing.CommonProxy;
 import ip.industrialProcessing.api.rendering.ModelMachine;
 import ip.industrialProcessing.api.rendering.RendererBlock;
+import ip.industrialProcessing.api.rendering.RendererInterfaceBlock;
 import ip.industrialProcessing.api.rendering.RendererTileBlock;
 import ip.industrialProcessing.api.rendering.RendererTileEntity;
 import ip.industrialProcessing.client.render.ModelAnimatedFluidMachine;
@@ -103,7 +104,7 @@ import ip.industrialProcessing.multiblock.dummy.block.wheelConnector.TEmultibloc
 import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
 import ip.industrialProcessing.power.manualGenerator.ModelCrankGenerator;
 import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
-import ip.industrialProcessing.power.meters.ModelVoltMeter; 
+import ip.industrialProcessing.power.meters.ModelVoltMeter;
 import ip.industrialProcessing.power.meters.TileEntityVoltMeter;
 import ip.industrialProcessing.power.motor.TileEntityElectroMotor;
 import ip.industrialProcessing.power.motor.models.ModelElectroMotorBlock;
@@ -266,6 +267,14 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerRenderers() {
+	// smart rendering interface
+	ConfigRenderers.setRendererInterface(RenderingRegistry.getNextAvailableRenderId());
+	RenderingRegistry.registerBlockHandler(new RendererInterfaceBlock(ConfigRenderers.getRendererInterface()));
+
+	// smart rendering tile entities
+	ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySandCaster.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockSandCaster, "ModelSandCaster", modelSandCaster));
+	
+	
 	// 100% block
 	ConfigRenderers.setRendererCrystalId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererCrystalId(), crystal));
@@ -273,7 +282,6 @@ public class ClientProxy extends CommonProxy {
 	ConfigRenderers.setRendererSinterId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererSinterId(), modelSinter));
 
-	
 	ConfigRenderers.setRendererPlatformId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererPlatformId(), platform));
 
@@ -375,10 +383,7 @@ public class ClientProxy extends CommonProxy {
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererDoorEmergency(), modelDoorEmergency));
 
 	// block & tile entity
-	ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySandCaster.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockSandCaster, "ModelSandCaster", modelSandCaster));
-	ConfigRenderers.setRendererSandCasterId(RenderingRegistry.getNextAvailableRenderId());
-	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererSandCasterId(), modelSandCasterBlock));
-
+	
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityClassifier.class, new RendererTileEntityFluidWorker(ISetupMachineBlocks.blockClassifier, "ModelClassifier", classifier));
 	ConfigRenderers.setRendererClassifierId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererClassifierId(), modelClassifierBlock));
@@ -487,7 +492,6 @@ public class ClientProxy extends CommonProxy {
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityVoltMeter.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockVoltMeter, "ModelVoltMeter", voltMeter));
 	ConfigRenderers.setRendererVoltMeterId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getRendererVoltMeterId(), new TileEntityVoltMeter()));
- 
 
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityManualGenerator.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockManualGenerator, "ModelCrankGenerator", crankGenerator));
 	ConfigRenderers.setRendererCrankGeneratorId(RenderingRegistry.getNextAvailableRenderId());
