@@ -209,28 +209,42 @@ public class TileEntityConveyorInput extends TileEntityConveyorInventoryBase imp
     @Override
     public int getStateValue(int index) {
 	if (index == 0)
-	    return this.extractStackSize;
+	    return this.getButtonState(0);
+	if (index == 1)
+	    return this.getButtonState(1);
 	return 0;
     }
 
     @Override
     public void setStateValue(int index, int value) {
-	if (index == 0)
-	    this.extractStackSize = Math.max(getMinStateValue(index), Math.min(getMaxStateValue(index), value));
+	if (index == 0 )
+	    if (extractStackSize == 64)
+	    	setButtonState(0, 1);
+	    else
+	    	setButtonState(0, 0);
+	if (index == 1 )
+	    if (extractStackSize == 1)
+	    	setButtonState(0, 1);
+	    else
+	    	setButtonState(0, 0);
 
     }
 
     @Override
     public int getMaxStateValue(int index) {
 	if (index == 0)
-	    return 64;
+	    return 1;
+	if (index == 1)
+	    return 1;
 	return 0;
     }
 
     @Override
     public int getMinStateValue(int index) {
 	if (index == 0)
-	    return 1;
+	    return 0;
+	if (index == 1)
+	    return 0;
 	return 0;
     }
 }
