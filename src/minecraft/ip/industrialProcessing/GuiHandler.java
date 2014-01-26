@@ -17,9 +17,6 @@ import ip.industrialProcessing.machines.kiln.TileEntityKiln;
 import ip.industrialProcessing.machines.oxygenFurnace.ContainerOxygenFurnace;
 import ip.industrialProcessing.machines.oxygenFurnace.GuiContainerOxygenFurnace;
 import ip.industrialProcessing.machines.oxygenFurnace.TileEntityOxygenFurnace;
-import ip.industrialProcessing.machines.pelletExtruder.ContainerPelletExtruder;
-import ip.industrialProcessing.machines.pelletExtruder.GuiContainerPelletExtruder;
-import ip.industrialProcessing.machines.pelletExtruder.TileEntityPelletExtruder;
 import ip.industrialProcessing.machines.plants.blacksmith.anvil.ContainerAnvil;
 import ip.industrialProcessing.machines.plants.blacksmith.anvil.GuiContainerAnvil;
 import ip.industrialProcessing.machines.plants.metalProcessing.extruder.ContainerExtruder;
@@ -70,12 +67,6 @@ import ip.industrialProcessing.machines.sinter.TileEntitySinter;
 import ip.industrialProcessing.machines.spoolWindingMachine.ContainerSpoolWindingMachine;
 import ip.industrialProcessing.machines.spoolWindingMachine.GuiContainerSpoolWindingMachine;
 import ip.industrialProcessing.machines.spoolWindingMachine.TileEntitySpoolWindingMachine;
-import ip.industrialProcessing.machines.treetap.ContainerAutomaticTreeTap;
-import ip.industrialProcessing.machines.treetap.ContainerManualTreeTap;
-import ip.industrialProcessing.machines.treetap.GuiContainerAutomaticTreeTap;
-import ip.industrialProcessing.machines.treetap.GuiContainerManualTreeTap;
-import ip.industrialProcessing.machines.treetap.TileEntityAutomaticTreeTap;
-import ip.industrialProcessing.machines.treetap.TileEntityManualTreeTap;
 import ip.industrialProcessing.machines.wireMill.ContainerWireMill;
 import ip.industrialProcessing.machines.wireMill.GuiContainerWireMill;
 import ip.industrialProcessing.machines.wireMill.TileEntityWireMill;
@@ -152,9 +143,7 @@ public class GuiHandler implements IGuiHandler {
 		return new ContainerIP(player, entity);
 	    }
 	    if (entity instanceof TileEntityMagneticSeparator)
-		return new ContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity);
-	    if (entity instanceof TileEntityPelletExtruder)
-		return new ContainerPelletExtruder(player.inventory, (TileEntityPelletExtruder) entity);
+		return new ContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity); 
 	    if (entity instanceof TileEntityExtruder)
 		return new ContainerExtruder(player.inventory, (TileEntityExtruder) entity);
 	    if (entity instanceof TileEntityOxygenFurnace)
@@ -167,10 +156,6 @@ public class GuiHandler implements IGuiHandler {
 		return new ContainerTurbine(player.inventory, (TileEntityTurbine) entity);
 	    if (entity instanceof TileEntityIncubator)
 		return new ContainerIncubator(player.inventory, (TileEntityIncubator) entity);
-	    if (entity instanceof TileEntityManualTreeTap)
-		return new ContainerManualTreeTap(player.inventory, (TileEntityManualTreeTap) entity);
-	    if (entity instanceof TileEntityAutomaticTreeTap)
-		return new ContainerAutomaticTreeTap(player.inventory, (TileEntityAutomaticTreeTap) entity);
 	    if (entity instanceof TileEntityWireMill)
 		return new ContainerWireMill(player.inventory, (TileEntityWireMill) entity);
 	    if (entity instanceof TileEntityInsulator)
@@ -251,9 +236,7 @@ public class GuiHandler implements IGuiHandler {
 		return new GuiContainerIP(player, entity, new ContainerIP(player, entity));
 	    }
 	    if (entity instanceof TileEntityMagneticSeparator)
-		return new GuiContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity);
-	    if (entity instanceof TileEntityPelletExtruder)
-		return new GuiContainerPelletExtruder(player.inventory, (TileEntityPelletExtruder) entity);
+		return new GuiContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity); 
 	    if (entity instanceof TileEntityExtruder)
 		return new GuiContainerExtruder(player.inventory, (TileEntityExtruder) entity);
 	    if (entity instanceof TileEntityOxygenFurnace)
@@ -268,11 +251,6 @@ public class GuiHandler implements IGuiHandler {
 		return new GUImultiblockToggleButton((TEmultiblockToggleButton) entity, player);
 	    if (entity instanceof TileEntityIncubator)
 		return new GuiContainerIncubator(player.inventory, (TileEntityIncubator) entity);
-	    if (entity instanceof TileEntityManualTreeTap)
-		return new GuiContainerManualTreeTap(player.inventory, (TileEntityManualTreeTap) entity);
-	    if (entity instanceof TileEntityAutomaticTreeTap)
-		return new GuiContainerAutomaticTreeTap(player.inventory, (TileEntityAutomaticTreeTap) entity);
-
 	    if (entity instanceof TileEntityWireMill)
 		return new GuiContainerWireMill(player.inventory, (TileEntityWireMill) entity);
 	    if (entity instanceof TileEntityInsulator)

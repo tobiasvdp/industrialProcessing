@@ -18,8 +18,8 @@ public class TileEntityMagneticSeparator extends TileEntityPoweredFluidWorkerMac
 		
 		addStack(null, LocalDirection.DOWN, false, true);
 		addStack(null, LocalDirection.RIGHT, false, true);
-		addStack(null, LocalDirection.BACK, false, true);
-		addStack(null, LocalDirection.FRONT, false, true);
+		addStack(null, LocalDirection.RIGHT, false, true);
+		addStack(null, LocalDirection.RIGHT, false, true);
 	}
 
 	@Override

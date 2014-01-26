@@ -15,7 +15,7 @@ public class RendererBlock implements ISimpleBlockRenderingHandler {
 
 	public RendererBlock(int renderID, ModelBlock model) {
 		this.renderID = renderID;
-		this.model = model;
+		this.model = model; 
 	}
 
 	@Override

@@ -7,9 +7,14 @@ import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupBlocks;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.decoration.trees.BlockRubberLog;
+import ip.industrialProcessing.gui.GuiLayout;
+import ip.industrialProcessing.gui.IGuiLayout;
+import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
+import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.IRotateableEntity;
+import ip.industrialProcessing.utils.IDescriptionBlock;
 import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -21,8 +26,14 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
-public class BlockManualTreeTap extends BlockMachineRendered {
-
+public class BlockManualTreeTap extends BlockMachineRendered implements IDescriptionBlock, IGuiLayout {
+    private static GuiLayout guiLayout;
+    static {
+	guiLayout = new GuiLayout();
+	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 1);
+	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsOutput).setSlotLayout(SlotLayoutType.horizontal, 1);
+	guiLayout.addLayoutPanel(GuiLayoutPanelType.worker);
+    }
     public BlockManualTreeTap() {
         super(ConfigMachineBlocks.getManualTreeTapBlockID(), Material.iron, 1.0f, soundMetalFootstep, "Manual Tree Tap", ISetupCreativeTabs.tabOreProcessing);
         func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "manualTreeTap");
@@ -132,5 +143,15 @@ public class BlockManualTreeTap extends BlockMachineRendered {
     @Override
     public int getRenderType() {
         return ConfigRenderers.getRendererManualTreeTapID();
+    }
+
+    @Override
+    public GuiLayout getGuiLayout() {
+	return guiLayout;
+    }
+
+    @Override
+    public String getDescription() {
+	return "Collects secretion fluids from trees in buckets";
     }
 }

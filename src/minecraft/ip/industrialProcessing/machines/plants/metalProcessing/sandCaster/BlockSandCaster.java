@@ -1,5 +1,7 @@
 package ip.industrialProcessing.machines.plants.metalProcessing.sandCaster;
 
+import ip.industrialProcessing.api.rendering.IModelBlock;
+import ip.industrialProcessing.client.render.ModelBlock;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.INamepace;
@@ -10,6 +12,7 @@ import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.machines.plants.metalProcessing.sandCaster.model.ModelSandCasterBlock;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 import ip.industrialProcessing.utils.IDescriptionBlock;
 import net.minecraft.block.Block;
@@ -18,8 +21,10 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockSandCaster extends BlockMachineRendered implements IRecipeBlock, IGuiLayout, IDescriptionBlock {
+public class BlockSandCaster extends BlockMachineRendered implements IRecipeBlock, IGuiLayout, IDescriptionBlock, IModelBlock {
 
     Icon[] icons = new Icon[4];
     private static GuiLayout guiLayout;
@@ -43,7 +48,7 @@ public class BlockSandCaster extends BlockMachineRendered implements IRecipeBloc
 
     @Override
     public int getRenderType() {
-	return ConfigRenderers.getRendererSandCasterId();
+	return ConfigRenderers.getRendererInterface();
     }
 
     @Override
@@ -73,5 +78,14 @@ public class BlockSandCaster extends BlockMachineRendered implements IRecipeBloc
     @Override
     public GuiLayout getGuiLayout() { 
 	return guiLayout;
+    }
+
+    @SideOnly(Side.CLIENT)
+    private static ModelSandCasterBlock model = new ModelSandCasterBlock();
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public ModelBlock getModel() {
+	return model;
     }
 }
