@@ -5,6 +5,7 @@ import java.util.List;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.fluids.BucketHandler;
+import ip.industrialProcessing.subMod.mine.machines.mining.bobcatMiner.EntityBobcatMiner;
 import ip.industrialProcessing.utils.IReceiver;
 import ip.industrialProcessing.utils.IRemote;
 import ip.industrialProcessing.utils.ISender;
@@ -51,6 +52,9 @@ public class ItemRemote extends Item implements IRemote {
 				if (receiver.receiveTileEntity(this, par1ItemStack) && par3World.isRemote)
 					par2EntityPlayer.sendChatToPlayer(new ChatMessageComponent().func_111059_a(EnumChatFormatting.YELLOW).func_111079_a("Pairing data for TileEntity send."));
 			}
+		}
+		if(!par3World.isRemote){
+			par3World.spawnEntityInWorld(new EntityBobcatMiner(par3World, par4, par5, par6));
 		}
 		return true;
 	}

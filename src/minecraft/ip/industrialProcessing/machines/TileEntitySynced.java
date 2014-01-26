@@ -10,6 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntitySynced extends TileEntity implements IGuiLayoutTriggerAcceptor {
 	int[] buttonState = new int[1];
+	int[] dataState = new int[1];
 
 	@Override
 	public Packet getDescriptionPacket() {
@@ -43,7 +44,7 @@ public class TileEntitySynced extends TileEntity implements IGuiLayoutTriggerAcc
 		if (this instanceof IStateConfig) {
 			int stateValue = ((IStateConfig) this).getStateValue(id) + 1;
 			if (stateValue > ((IStateConfig) this).getMaxStateValue(id))
-				stateValue = 0;
+				stateValue = ((IStateConfig) this).getMinStateValue(id);
 			((IStateConfig) this).setStateValue(id, stateValue);
 			setButtonState(id, stateValue);
 			System.out.println("Button " + id + " on " + stateValue);
@@ -67,6 +68,26 @@ public class TileEntitySynced extends TileEntity implements IGuiLayoutTriggerAcc
 			buttonState = temp;
 		}
 		buttonState[id] = par2;
+		return par2;
+	}
+
+	@Override
+	public int getDataViewState(int id) {
+		if (dataState.length > id)
+			return dataState[id];
+		return 0;
+	}
+
+	@Override
+	public int setDataViewState(int id, int par2) {
+		while (dataState.length <= id) {
+			int[] temp = new int[dataState.length*2];
+			for(int i =0;i<dataState.length;i++){
+				temp[i] = dataState[i];
+			}
+			dataState = temp;
+		}
+		dataState[id] = par2;
 		return par2;
 	}
 }

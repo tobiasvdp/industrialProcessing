@@ -29,6 +29,7 @@ import ip.industrialProcessing.utils.handler.conveyors.line.ConveyorLineHandler;
 import ip.industrialProcessing.utils.handler.crafting.CraftingHandler;
 import ip.industrialProcessing.utils.handler.fuel.FuelHandler;
 import ip.industrialProcessing.utils.handler.heat.HeatHandler;
+import ip.industrialProcessing.utils.handler.key.KeyPressHandler;
 import ip.industrialProcessing.utils.handler.packets.PacketHandler;
 import ip.industrialProcessing.utils.registry.BlockType;
 import ip.industrialProcessing.utils.registry.HandlerRegistry;
@@ -38,6 +39,7 @@ import java.util.logging.Logger;
 
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -118,6 +120,9 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
 
 		//register new conveyor line handler
 		HandlerRegistry.registerConveyorLineHandler(new ConveyorLineHandler());
+		
+		//register keyhandler
+		KeyBindingRegistry.registerKeyBinding(new KeyPressHandler());
 		
 		//register new heat handler
 		HandlerRegistry.registerHeatHandler(new HeatHandler());

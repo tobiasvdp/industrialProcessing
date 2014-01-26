@@ -236,15 +236,30 @@ public class GuiLayout {
 				y = 40;
 			}
 	
-			panel = new GuiLayoutPanel(this, type, x, y, 18, 38, true);
+			panel = new GuiLayoutPanel(this, type, x, y, 18, 58, true);
 			
 			//button1
-			this.addLayoutPanel(GuiLayoutPanelType.singlebutton,x,y).setButtonSize(18, 10).setButtonStateNames("Count up", "").setButtonIcons(new Rectangle(36,224,11,7),new Rectangle(36,224,11,7)).setButtonIconsCentered().setButtonLayoutTexture();
+			this.addLayoutPanel(GuiLayoutPanelType.singlebutton,x,y).setButtonSize(18, 20).setButtonStateNames("Count up").setButtonIcons(new Rectangle(36,224,11,7)).setButtonIconsCentered().setButtonLayoutTexture();
 			//button2
-			this.addLayoutPanel(GuiLayoutPanelType.singlebutton,x,y+28).setButtonSize(18, 10).setButtonStateNames("Count down", "").setButtonIcons(new Rectangle(36,231,11,7),new Rectangle(36,231,11,7)).setButtonIconsCentered().setButtonLayoutTexture();
+			this.addLayoutPanel(GuiLayoutPanelType.singlebutton,x,y+38).setButtonSize(18, 20).setButtonStateNames("Count down").setButtonIcons(new Rectangle(36,231,11,7)).setButtonIconsCentered().setButtonLayoutTexture();
 			//dataview
+			this.addLayoutPanel(GuiLayoutPanelType.dataview,x,y+20);
 			
 			layoutPanels.add(panel);
+			break;
+		case dataview:
+			if (location.length == 2) {
+				x = location[0];
+				y = location[1];
+			} else {
+				x = 8 + offsetX;
+				y = 40;
+			}
+			panel = new GuiLayoutPanel(this, type, x, y, 18, 18, fixed);
+			// no slotLayout
+			panel.setGuiContainerLayout(type);
+			layoutPanels.add(panel);
+			break;
 		default:
 			break;
 

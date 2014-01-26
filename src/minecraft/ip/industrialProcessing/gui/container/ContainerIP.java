@@ -7,6 +7,7 @@ import ip.industrialProcessing.gui.IGuiLayoutMultiblock;
 import ip.industrialProcessing.gui.IGuiLayoutTriggerAcceptor;
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.syncing.handlers.HandlerButton;
+import ip.industrialProcessing.gui.container.syncing.handlers.HandlerDataView;
 import ip.industrialProcessing.gui.container.syncing.handlers.HandlerHeat;
 import ip.industrialProcessing.gui.container.syncing.handlers.HandlerLifeSpan;
 import ip.industrialProcessing.gui.container.syncing.handlers.HandlerPower;
@@ -313,6 +314,10 @@ public class ContainerIP extends Container {
 		case singlebutton:
 			if (te instanceof IGuiLayoutTriggerAcceptor)
 				addHandler(new HandlerButton((IGuiLayoutTriggerAcceptor) te, index));
+			break;
+		case dataview:
+			if (te instanceof IGuiLayoutTriggerAcceptor)
+				addHandler(new HandlerDataView((IGuiLayoutTriggerAcceptor) te, index));
 			break;
 		default:
 			break;

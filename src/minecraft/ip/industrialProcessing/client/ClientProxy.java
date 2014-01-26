@@ -1,5 +1,6 @@
 package ip.industrialProcessing.client;
 
+import net.minecraft.client.renderer.entity.RenderEntity;
 import ip.industrialProcessing.CommonProxy;
 import ip.industrialProcessing.api.rendering.ModelMachine;
 import ip.industrialProcessing.api.rendering.RendererBlock;
@@ -12,6 +13,7 @@ import ip.industrialProcessing.client.render.ModelConnected;
 import ip.industrialProcessing.client.render.ModelConnectedFluid;
 import ip.industrialProcessing.client.render.ModelConnectedFluidAnimated;
 import ip.industrialProcessing.client.render.ModelingMultiblock;
+import ip.industrialProcessing.client.render.RendererEntity;
 import ip.industrialProcessing.client.render.RendererLivingEntity;
 import ip.industrialProcessing.client.render.RendererTileEntityAnimated;
 import ip.industrialProcessing.client.render.RendererTileEntityConnected;
@@ -121,6 +123,8 @@ import ip.industrialProcessing.power.storage.ModelEnergyCell;
 import ip.industrialProcessing.power.storage.TileEntityEnergyCell;
 import ip.industrialProcessing.power.storage.model.ModelEnergyCellBlock;
 import ip.industrialProcessing.power.wire.models.ModelWireBlock;
+import ip.industrialProcessing.subMod.mine.machines.mining.bobcatMiner.EntityBobcatMiner;
+import ip.industrialProcessing.subMod.mine.machines.mining.bobcatMiner.model.ModelBobcatMiner;
 import ip.industrialProcessing.transport.fluids.ModelManoMeter;
 import ip.industrialProcessing.transport.fluids.ModelPump;
 import ip.industrialProcessing.transport.fluids.ModelRainTank;
@@ -516,11 +520,15 @@ public class ClientProxy extends CommonProxy {
 	ConfigRenderers.setBLmultiblockDisplayPanel(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigRenderers.getBLmultiblockDisplayPanel(), new TEmultiblockDisplayPanel()));
 
+	
+	//register entities
 	RenderingRegistry.registerEntityRenderingHandler(ENmultiblockFrame.class, new RendererLivingEntity(new MDmultiblockFramePanel(), 1.0F, "MDmultiblockFramePanel"));
 	RenderingRegistry.registerEntityRenderingHandler(ENmultiblockLiftDoor.class, new RendererLivingEntity(new MDmultiblockLiftDoor(), 1.0F, "ModelMultiblockLiftDoor"));
 
 	RenderingRegistry.registerEntityRenderingHandler(EntityFloatingCart.class, new RenderFloatingCart(new ModelFloatingCart(), 0.5F));
 	RenderingRegistry.registerEntityRenderingHandler(EntityGarageDoor.class, new RenderGarageDoor(new ModelEntityGarageDoor()));
+	
+	RenderingRegistry.registerEntityRenderingHandler(EntityBobcatMiner.class, new RendererEntity(new ModelBobcatMiner(), "ModelWheel"));
 
     }
 }

@@ -13,6 +13,7 @@ import java.io.DataOutputStream;
 import java.util.ArrayList;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -68,6 +69,10 @@ public class GuiContainerIP extends GuiContainer {
 
 	public void setTextureBlocks() {
 		mc.renderEngine.func_110577_a(TextureMap.field_110575_b);
+	}
+	
+	public FontRenderer getFontRenderer(){
+		return mc.fontRenderer;
 	}
 
 	@Override

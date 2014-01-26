@@ -14,6 +14,7 @@ import ip.industrialProcessing.gui.container.slot.layout.components.SlotType;
 import ip.industrialProcessing.gui.guiContainer.layout.GuiContainerLayout;
 import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerDrawRectagle;
 import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerLayoutButton;
+import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerLayoutDataView;
 import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerLayoutHeat;
 import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerLayoutImage;
 import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerLayoutLifespan;
@@ -292,6 +293,10 @@ public class GuiLayoutPanel {
 			break;
 		case singlebutton:
 			guiContainerLayout = new GuiContainerLayoutButton();
+			break;
+		case dataview:
+			guiContainerLayout = new GuiContainerLayoutDataView();
+			guiContainerLayout.addDrawRectagle(18, 220, 18, 18);
 			break;
 		default:
 			break;

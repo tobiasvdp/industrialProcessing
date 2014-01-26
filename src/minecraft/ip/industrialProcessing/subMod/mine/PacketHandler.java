@@ -1,18 +1,43 @@
 package ip.industrialProcessing.subMod.mine;
 
+import ip.industrialProcessing.utils.BlockBreaker;
+
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import net.minecraft.entity.Entity;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 
-public class PacketHandler  implements IPacketHandler{
-	
+public class PacketHandler implements IPacketHandler {
+
 	public static final String channel = "ip.mine";
+	public static final String destroyBlock = "ip.mine.destr";
 
 	@Override
 	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {
-		// TODO Auto-generated method stub
-		
+		if (packet.channel.equals(destroyBlock)) {
+			DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
+
+			ArrayList<int[]> blocks = new ArrayList<int[]>();
+
+			try {
+				int size = inputStream.readInt();
+				for (int i = 0; i < size; i++) {
+					blocks.add(new int[] { inputStream.readInt(), inputStream.readInt(), inputStream.readInt() });
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+				return;
+			}
+			System.out.println("broken blocks");
+			BlockBreaker.breakBlocks(((Entity) player).worldObj, blocks);
+
+		}
 	}
 
 }

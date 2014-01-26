@@ -31,8 +31,7 @@ public class BlockConveyorInput extends BlockConveyorMachineBase implements IDes
     static {
 	guiLayout = new GuiLayout();
 	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 9);
-	
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.spinnerButton, 10, 40);
+	guiLayout.addLayoutPanel(GuiLayoutPanelType.spinnerButton, 25, 37);
     }
 
     public BlockConveyorInput() {

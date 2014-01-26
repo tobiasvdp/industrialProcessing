@@ -40,8 +40,10 @@ public class GuiContainerLayoutButton extends GuiContainerLayout {
 				InfoButton info = HandlerButton.getInfo(((IHandlerButton) handlers.get(index)));
 				if (info.state != -1) {
 					if (drawIcons) {
-						if(specificTexture)
-						((GuiContainerIP) gui).setTextureSpecific();
+						if (specificTexture)
+							((GuiContainerIP) gui).setTextureSpecific();
+						else
+							((GuiContainerIP) gui).setTextureLayout();
 						gui.drawTexturedModalRect(icons[info.state].destination.x + offsetX, icons[info.state].destination.y + offsetY, icons[info.state].origin.x, icons[info.state].origin.y, icons[info.state].origin.width, icons[info.state].origin.height);
 						((GuiContainerIP) gui).setTextureLayout();
 						if (new Rectangle(offsetX, offsetY, rectangle.width, rectangle.height).contains(mouseX, mouseY))
@@ -54,7 +56,7 @@ public class GuiContainerLayoutButton extends GuiContainerLayout {
 			}
 		}
 	}
-	
+
 	@Override
 	public void draw(Gui gui, Container container, int index, int offsetX, int offsetY, int mouseX, int mouseY) {
 
@@ -93,7 +95,7 @@ public class GuiContainerLayoutButton extends GuiContainerLayout {
 	}
 
 	public void setButtonIconsLayoutBound() {
-specificTexture = false;
-		
+		specificTexture = false;
+
 	}
 }
