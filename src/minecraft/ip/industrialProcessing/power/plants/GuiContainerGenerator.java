@@ -1,57 +1,99 @@
 package ip.industrialProcessing.power.plants;
 
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.gui3.framework.Alignment;
+import ip.industrialProcessing.gui3.framework.Size;
+import ip.industrialProcessing.gui3.framework.UIRoot;
+import ip.industrialProcessing.gui3.framework.controls.Decorator;
+import ip.industrialProcessing.gui3.framework.controls.SlotControl;
+import ip.industrialProcessing.gui3.framework.controls.TextBlock;
+import ip.industrialProcessing.gui3.framework.panels.MouseButton;
+import ip.industrialProcessing.gui3.framework.panels.Orientation;
+import ip.industrialProcessing.gui3.framework.panels.StackPanel;
+import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
 import ip.industrialProcessing.machines.containers.gui.GuiContainerMachine;
-import ip.industrialProcessing.power.GeneratorProgress;
 import net.minecraft.entity.player.InventoryPlayer;
+
+import org.lwjgl.opengl.GL11;
 
 public class GuiContainerGenerator extends GuiContainerMachine {
 
-	private TileEntityGenerator generator;
-	private ContainerGenerator container;
+    private TileEntityGenerator generator;
+    private ContainerGenerator container;
+    private UIRoot layout;
 
-	public GuiContainerGenerator(InventoryPlayer inventory, TileEntityGenerator entity) {
-		this(inventory, entity, new ContainerGenerator(inventory, entity));
+    public GuiContainerGenerator(InventoryPlayer inventory, TileEntityGenerator entity) {
+	this(inventory, entity, new ContainerGenerator(inventory, entity));
+    }
+
+    private GuiContainerGenerator(InventoryPlayer inventory, TileEntityGenerator entity, ContainerGenerator container) {
+	super(inventory, entity, container, "Buildcraft Generator", "textures/gui/Generator.png");
+	this.container = container;
+	this.generator = entity;
+
+	TextureReference texture = new TextureReference(new Size(256, 256), INamepace.TEXTURE_DOMAIN, "textures/gui/Generator.png");
+
+	StackPanel stack = new StackPanel();
+
+	stack.orientation = Orientation.VERTICAL;
+
+	Decorator machinePanel = new Decorator(texture, 7);
+	StackPanel child = new StackPanel();
+	child.orientation = Orientation.HORIZONTAL;
+	for (int i = 0; i < 9; i++) {
+	    SlotControl childPanel = new SlotControl();
+	    child.addChild(childPanel);
 	}
+	machinePanel.setChild(child);
+	stack.addChild(machinePanel);
+	Decorator inventoryPanel = new Decorator(texture, 7);
+	stack.addChild(inventoryPanel);
+	TextBlock label = new TextBlock("Hello World", Float.NaN, Float.NaN, 0xFFFFFF);
+	inventoryPanel.setChild(label);
+	Decorator hotbarPanel = new Decorator(texture, 4);
+	stack.addChild(hotbarPanel);
 
-	private GuiContainerGenerator(InventoryPlayer inventory, TileEntityGenerator entity, ContainerGenerator container) {
-		super(inventory, entity, container, "Buildcraft Generator", "textures/gui/Generator.png");
-		this.container = container;
-		this.generator = entity;
+	stack.verticalAlign = Alignment.MAX;
+	stack.horizontalAlign = Alignment.STRETCH;
+	this.layout = new UIRoot(stack);
+    }
+
+    @Override
+    protected void mouseMovedOrUp(int par1, int par2, int par3) {
+	super.mouseMovedOrUp(par1, par2, par3);
+	if (par3 >= 0) {
+	    MouseButton button = MouseButton.getButton(par3);
+	    if (button != null) {
+		this.layout.mouseUp(par1, par2, button);
+	    }
+	} else
+	    this.layout.mouseMoved(par1, par2);
+    }
+
+    @Override
+    protected void mouseClicked(int par1, int par2, int par3) {
+
+	super.mouseClicked(par1, par2, par3);
+	MouseButton button = MouseButton.getButton(par3);
+	if (button != null) {
+	    this.layout.mouseDown(par1, par2, button);
 	}
+    }
 
-	@Override
-	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
-		super.drawGuiContainerBackgroundLayer(par1, par2, par3);
+    @Override
+    protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
+	// super.drawGuiContainerBackgroundLayer(par1, par2, par3);
+	GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-		GeneratorProgress progress = this.container.getProgress();
+	int x = (width - xSize) / 2;
+	int y = (height - ySize) / 2;
 
-		int volt = (int) progress.voltage;
-		int amps = (int) progress.amps;
-		int power = volt * amps;
+	this.layout.render(xSize, ySize, x, y, par2, par3);
+    }
 
-		int maxAmps = 50;
-		int maxVolt = 150;
-		int maxPower = maxVolt * maxAmps;
-
-		drawHorizontalProgressBar(62, 29, 176, 0, 52, 7, amps, maxAmps, false);
-		drawHorizontalProgressBar(62, 41, 176, 0, 52, 7, volt, maxVolt, false);
-		drawHorizontalProgressBar(62, 53, 176, 0, 52, 7, power, maxPower, false);
-	}
-
-	@Override
-	protected void drawGuiContainerForegroundLayer(int param1, int param2) {
-		super.drawGuiContainerForegroundLayer(param1, param2);
-		fontRenderer.drawString("      Amps:", 8, 28, 4210752);
-		fontRenderer.drawString("   Voltage:", 8, 40, 4210752);
-		fontRenderer.drawString("     Power:", 8, 52, 4210752);
-
-		GeneratorProgress progress = this.container.getProgress();
-
-		float volt = Math.round(progress.voltage * 10f) / 10f;
-		float amps = Math.round(progress.amps * 10f) / 10f;
-		float power = Math.round(progress.voltage * progress.amps * 10) / 10f;
-		fontRenderer.drawString(amps + "A", 120, 28, 4210752);
-		fontRenderer.drawString(volt + "V", 120, 40, 4210752);
-		fontRenderer.drawString(power + "W", 120, 52, 4210752);
-	}
+    @Override
+    protected void drawGuiContainerForegroundLayer(int param1, int param2) {
+	super.drawGuiContainerForegroundLayer(param1, param2);
+	this.layout.renderForeground(param1, param2);
+    }
 }
