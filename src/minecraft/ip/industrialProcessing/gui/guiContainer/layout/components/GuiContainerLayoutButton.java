@@ -28,6 +28,7 @@ public class GuiContainerLayoutButton extends GuiContainerLayout {
 	private String[] displayString;
 	private GuiContainerDrawRectagle[] icons;
 	private boolean drawIcons;
+	private boolean specificTexture = true;
 
 	@Override
 	public void drawForeGround(Gui gui, Container container, int index, int offsetX, int offsetY, int mouseX, int mouseY) {
@@ -39,6 +40,7 @@ public class GuiContainerLayoutButton extends GuiContainerLayout {
 				InfoButton info = HandlerButton.getInfo(((IHandlerButton) handlers.get(index)));
 				if (info.state != -1) {
 					if (drawIcons) {
+						if(specificTexture)
 						((GuiContainerIP) gui).setTextureSpecific();
 						gui.drawTexturedModalRect(icons[info.state].destination.x + offsetX, icons[info.state].destination.y + offsetY, icons[info.state].origin.x, icons[info.state].origin.y, icons[info.state].origin.width, icons[info.state].origin.height);
 						((GuiContainerIP) gui).setTextureLayout();
@@ -88,5 +90,10 @@ public class GuiContainerLayoutButton extends GuiContainerLayout {
 			int y = rectangle.height / 2 - icon.origin.height / 2;
 			icon.destination = new Point(x, y);
 		}
+	}
+
+	public void setButtonIconsLayoutBound() {
+specificTexture = false;
+		
 	}
 }

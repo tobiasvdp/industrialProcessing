@@ -195,8 +195,15 @@ public class GuiLayoutPanel {
 	}
 	
 	public GuiLayoutPanel setButtonIconsCentered() {
-		if(type == GuiLayoutPanelType.singlebutton){
+		if(type == GuiLayoutPanelType.singlebutton ){
 			((GuiContainerLayoutButton)this.guiContainerLayout).setButtonIconsCentered();
+		}
+		return this;
+	}
+	
+	public GuiLayoutPanel setButtonLayoutTexture() {
+		if(type == GuiLayoutPanelType.singlebutton ){
+			((GuiContainerLayoutButton)this.guiContainerLayout).setButtonIconsLayoutBound();
 		}
 		return this;
 	}
@@ -310,4 +317,6 @@ public class GuiLayoutPanel {
 			guiContainerLayout.drawForeGround(gui, container, index, offsetX + rect.x, offsetY + rect.y, mouseX, mouseY);
 		}
 	}
+
+
 }

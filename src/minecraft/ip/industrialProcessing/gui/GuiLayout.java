@@ -12,6 +12,9 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import org.w3c.dom.css.CSSPrimitiveValue;
+import org.w3c.dom.css.Rect;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
@@ -224,6 +227,24 @@ public class GuiLayout {
 			panel.setGuiContainerLayout(type);
 			layoutPanels.add(panel);
 			break;
+		case spinnerButton:
+			if (location.length == 2) {
+				x = location[0];
+				y = location[1];
+			} else {
+				x = 8 + offsetX;
+				y = 40;
+			}
+	
+			panel = new GuiLayoutPanel(this, type, x, y, 18, 38, true);
+			
+			//button1
+			this.addLayoutPanel(GuiLayoutPanelType.singlebutton,x,y).setButtonSize(18, 10).setButtonStateNames("Count up", "").setButtonIcons(new Rectangle(36,224,11,7),new Rectangle(36,224,11,7)).setButtonIconsCentered().setButtonLayoutTexture();
+			//button2
+			this.addLayoutPanel(GuiLayoutPanelType.singlebutton,x,y+28).setButtonSize(18, 10).setButtonStateNames("Count down", "").setButtonIcons(new Rectangle(36,231,11,7),new Rectangle(36,231,11,7)).setButtonIconsCentered().setButtonLayoutTexture();
+			//dataview
+			
+			layoutPanels.add(panel);
 		default:
 			break;
 

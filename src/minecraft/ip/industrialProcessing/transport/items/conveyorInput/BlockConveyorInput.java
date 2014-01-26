@@ -32,7 +32,7 @@ public class BlockConveyorInput extends BlockConveyorMachineBase implements IDes
 	guiLayout = new GuiLayout();
 	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 9);
 	
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.singlebutton, 10, 40).setButtonSize(20, 20).setButtonStateNames("Random Slot", "First slot first", "Last slot first").setButtonIcons(new Rectangle(0, 0, 16, 16), new Rectangle(16, 0, 16, 16), new Rectangle(32, 0, 16, 16)).setButtonIconsCentered();
+	guiLayout.addLayoutPanel(GuiLayoutPanelType.spinnerButton, 10, 40);
     }
 
     public BlockConveyorInput() {
