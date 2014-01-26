@@ -11,9 +11,6 @@ import ip.industrialProcessing.machines.electrolyser.TileEntityElectrolyser;
 import ip.industrialProcessing.machines.insulator.ContainerInsulator;
 import ip.industrialProcessing.machines.insulator.GuiContainerInsulator;
 import ip.industrialProcessing.machines.insulator.TileEntityInsulator;
-import ip.industrialProcessing.machines.kiln.ContainerKiln;
-import ip.industrialProcessing.machines.kiln.GuiContainerKiln;
-import ip.industrialProcessing.machines.kiln.TileEntityKiln;
 import ip.industrialProcessing.machines.oxygenFurnace.ContainerOxygenFurnace;
 import ip.industrialProcessing.machines.oxygenFurnace.GuiContainerOxygenFurnace;
 import ip.industrialProcessing.machines.oxygenFurnace.TileEntityOxygenFurnace;
@@ -195,9 +192,7 @@ public class GuiHandler implements IGuiHandler {
 	    if (entity instanceof TileEntityVacuumDestilationTower)
 		return new ContainerVacuumDestilationTower(player.inventory, (TileEntityVacuumDestilationTower) entity);
 	    if (entity instanceof TileEntitySinter)
-		return new ContainerSinter(player.inventory, (TileEntitySinter) entity);
-	    if (entity instanceof TileEntityKiln)
-		return new ContainerKiln(player.inventory, (TileEntityKiln) entity);
+		return new ContainerSinter(player.inventory, (TileEntitySinter) entity); 
 	    if (entity instanceof TEmultiblockBlastFurnace)
 		return new ContainerMultiblockBlastFurnace(player.inventory, (TEmultiblockBlastFurnace) entity);
 
@@ -290,9 +285,7 @@ public class GuiHandler implements IGuiHandler {
 	    if (entity instanceof TileEntityVacuumDestilationTower)
 		return new GuiContainerVacuumDestilationTower(player.inventory, (TileEntityVacuumDestilationTower) entity);
 	    if (entity instanceof TileEntitySinter)
-		return new GuiContainerSinter(player.inventory, (TileEntitySinter) entity);
-	    if (entity instanceof TileEntityKiln)
-		return new GuiContainerKiln(player.inventory, (TileEntityKiln) entity);
+		return new GuiContainerSinter(player.inventory, (TileEntitySinter) entity); 
 	    if (entity instanceof TEmultiblockBlastFurnace)
 		return new GuiContainerMultiblockBlastFurnace(player.inventory, (TEmultiblockBlastFurnace) entity);
 	    if (entity instanceof TileEntityVacuumCaster)

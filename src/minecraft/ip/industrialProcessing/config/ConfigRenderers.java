@@ -80,8 +80,7 @@ public class ConfigRenderers {
     private int rendererHydroTreater;
     private int rendererMeroxTreater;
     private int rendererVacuumDestilationTower;
-    private int rendererSinter;
-    private int rendererKiln; 
+    private int rendererSinter; 
     private int rendererVacuumCaster;
     private int rendererTurretLathe; 
     private int rendererCoolingUnit;
@@ -275,16 +274,7 @@ public class ConfigRenderers {
 
     public static int getRendererVacuumCasterId() {
 	return getInstance().rendererVacuumCaster;
-    }
- 
-
-    public static int getRendererKilnId() {
-	return getInstance().rendererKiln;
-    }
-
-    public static void setRendererKilnId(int value) {
-	getInstance().rendererKiln = value;
-    }
+    } 
 
     public static int getRendererSinterId() {
 	return getInstance().rendererSinter;
