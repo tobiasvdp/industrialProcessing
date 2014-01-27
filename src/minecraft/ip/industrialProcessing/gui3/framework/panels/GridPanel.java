@@ -92,8 +92,8 @@ public class GridPanel extends UIElement {
 	return new Size(rowWidths[widestRow], columnHeights[highestColumn]);
     }
 
-    private float[] getAbsolute(ArrayList<GridSize> references) { 
-	float[] sizes = new float[references.size()]; 
+    private float[] getAbsolute(ArrayList<GridSize> references) {
+	float[] sizes = new float[references.size()];
 	for (int i = 0; i < sizes.length; i++) {
 	    GridSize size = references.get(i);
 	    switch (size.mode) {
@@ -202,19 +202,21 @@ public class GridPanel extends UIElement {
     public void mouseUp(float x, float y, MouseButton button) {
 	for (GridCell child : children) {
 	    if (child.content != null)
-		if (child.content.hitTest()) {
+		if (child.content.hitTest(x, y)) {
 		    child.content.mouseUp(x - child.content.getX(), y - child.content.getY(), button);
 		}
 	}
     }
 
     @Override
-    public void mouseMouseMove(float x, float y) {
+    public void mouseMove(float x, float y) {
 	for (GridCell child : children) {
 	    if (child.content != null)
-		if (child.content.hitTest()) {
-		    child.content.mouseMouseMove(x - child.content.getX(), y - child.content.getY());
-		}
+		if (child.content.hitTest(x, y)) {
+		    child.content.mouseMove(x - child.content.getX(), y - child.content.getY());
+		    child.content.setMouseInside(true, x - child.content.getX(), y - child.content.getY());
+		} else
+		    child.content.setMouseInside(false, x - child.content.getX(), y - child.content.getY());
 	}
     }
 
@@ -222,7 +224,7 @@ public class GridPanel extends UIElement {
     public void mouseEntered(float x, float y) {
 	for (GridCell child : children) {
 	    if (child.content != null)
-		if (child.content.hitTest()) {
+		if (child.content.hitTest(x, y)) {
 		    child.content.setMouseInside(true, x, y);
 		} else
 		    child.content.setMouseInside(false, x, y);

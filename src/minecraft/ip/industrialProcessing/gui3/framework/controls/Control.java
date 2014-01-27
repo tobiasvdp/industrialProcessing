@@ -26,7 +26,7 @@ public abstract class Control extends UIElement {
     }
 
     @Override
-    public void mouseMouseMove(float x, float y) {
+    public void mouseMove(float x, float y) {
     }
 
     @Override

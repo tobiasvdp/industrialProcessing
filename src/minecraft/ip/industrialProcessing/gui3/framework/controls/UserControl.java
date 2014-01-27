@@ -3,6 +3,7 @@ package ip.industrialProcessing.gui3.framework.controls;
 import ip.industrialProcessing.gui3.framework.Rect;
 import ip.industrialProcessing.gui3.framework.Size;
 import ip.industrialProcessing.gui3.framework.UIElement;
+import ip.industrialProcessing.gui3.framework.panels.MouseButton;
 import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
 
 public class UserControl extends Control {
@@ -39,4 +40,38 @@ public class UserControl extends Control {
 	    child.render(renderer);
     }
 
+    @Override
+    public void mouseEntered(float x, float y) { 
+	if (child != null)
+	    if (child.hitTest(x, y))
+		child.mouseEntered(x, y);
+    }
+
+    @Override
+    public void mouseLeft(float x, float y) { 
+	if (child != null)
+	    if (child.hitTest(x, y))
+		child.mouseLeft(x, y);
+    }
+
+    @Override
+    public void mouseMove(float x, float y) { 
+	if (child != null)
+	    if (child.hitTest(x, y))
+		child.mouseMove(x, y);
+    }
+
+    @Override
+    public void mouseUp(float x, float y, MouseButton button) { 
+	if (child != null)
+	    if (child.hitTest(x, y))
+		child.mouseUp(x, y, button);
+    }
+
+    @Override
+    public void mouseDown(float x, float y, MouseButton button) { 
+	if (child != null)
+	    if (child.hitTest(x, y))
+		child.mouseDown(x, y, button); 
+    }
 }

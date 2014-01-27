@@ -1,5 +1,7 @@
 package ip.industrialProcessing.gui3.framework;
 
+import java.util.Random;
+
 import org.lwjgl.opengl.GL11;
 
 import ip.industrialProcessing.gui3.framework.panels.MouseButton;
@@ -78,6 +80,7 @@ public abstract class UIElement {
 	    a = max;
 	return a;
     }
+
     protected int clamp(int a, int min, int max) {
 	if (a < min)
 	    a = min;
@@ -88,7 +91,13 @@ public abstract class UIElement {
 
     protected abstract Size measureOverride(Size maxSize);
 
-    public void arrange(Rect rect) { 
+    public void arrange(Rect rect) {
+	if (this.margin != null) {
+	    rect.x += this.margin.left;
+	    rect.y += this.margin.top;
+	    rect.width -= this.margin.left + this.margin.right;
+	    rect.height -= this.margin.top + this.margin.bottom;
+	}
 	Size size = arrangeOverride(rect.getSize());
 
 	float width = Math.min(size.width, rect.width);
@@ -133,16 +142,25 @@ public abstract class UIElement {
 
     protected abstract Size arrangeOverride(Size maxSize);
 
+    private int color = hashCode() + 0xFF000000;
+    private float mouseY;
+    private float mouseX;
+
     public void render(GuiRenderer renderer) {
 	GL11.glPushMatrix();
 	GL11.glTranslatef(x, y, 1);
 	Rect bounds = new Rect(0, 0, this.actualSize);
 	renderOverride(bounds, renderer);
+	renderer.drawRectangle(new Rect(0, 0, 1, this.actualSize.height), color);
+	renderer.drawRectangle(new Rect(this.actualSize.width - 1, 0, 1, this.actualSize.height), color);
+	renderer.drawRectangle(new Rect(0, 0, this.actualSize.width, 1), color);
+	renderer.drawRectangle(new Rect(0, this.actualSize.height - 1, this.actualSize.width, 1), color);
+	renderer.drawRectangle(new Rect(mouseX, mouseY, 2, 20), color);
 	GL11.glPopMatrix();
     }
 
     protected abstract void renderOverride(Rect size, GuiRenderer renderer);
-     
+
     public void setMouseInside(boolean isInside, float x, float y) {
 	if (isHittestVisible) {
 	    if (isMouseInside != isInside) {
@@ -159,13 +177,16 @@ public abstract class UIElement {
 
     public abstract void mouseLeft(float x, float y);
 
-    public abstract void mouseMouseMove(float x, float y);
+    public void mouseMove(float x, float y) {
+	this.mouseX = x;
+	this.mouseY = y;
+    }
 
     public abstract void mouseUp(float x, float y, MouseButton button);
 
     public abstract void mouseDown(float x, float y, MouseButton button);
 
-    public boolean hitTest() {
+    public boolean hitTest(float x, float y) {
 	if (this.isHittestVisible) {
 	    Rect rect = new Rect(this.x, this.y, this.actualSize);
 	    if (rect.contains(x, y))

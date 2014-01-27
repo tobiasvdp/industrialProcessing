@@ -92,9 +92,12 @@ public class GuiRenderer {
 
     public void drawString(Rect rect, String text, int color, boolean ellipsis, boolean wrap) {
 	String ellipsisChars = "...";
-	int lastMargin = ellipsis ? mc.fontRenderer.getStringWidth(ellipsisChars) : 0;
+	int elipsisWidth = mc.fontRenderer.getStringWidth(ellipsisChars);
+	int lastMargin = ellipsis ? elipsisWidth : 0;
 	int width = (int) rect.width;
 	int height = (int) rect.height;
+	if (width < elipsisWidth)
+	    return;
 	if (lastMargin >= width) {
 	    lastMargin = 0;
 	    ellipsis = false;
@@ -121,6 +124,7 @@ public class GuiRenderer {
 	    }
 	    mc.fontRenderer.drawString(text, (int) rect.x, (int) rect.y, color);
 	}
+	GL11.glColor4f(1, 1, 1, 1);
     }
 
     public void drawRectangle(Rect where, int i) {

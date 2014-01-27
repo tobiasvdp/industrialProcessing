@@ -1,6 +1,7 @@
 package ip.industrialProcessing.gui3.framework.controls;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.gui3.binding.IProgressBinding;
 import ip.industrialProcessing.gui3.framework.Alignment;
 import ip.industrialProcessing.gui3.framework.Rect;
 import ip.industrialProcessing.gui3.framework.Size;
@@ -13,7 +14,7 @@ import java.util.Random;
 
 import net.minecraftforge.fluids.FluidTankInfo;
 
-public class ProgressBar extends Control {
+public class ProgressBar extends Control implements IProgressBinding {
 
     private static final TextureReference DEFAULT_VERTICAL_GENERIC_TEXTURE = new TextureReference(new Size(36, 52), IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/ProgressBarVertical.png");
     private static final Rect DEFAULT_VERTICAL_GENERIC_RECT_BACKGROUND = new Rect(0, 0, 0.25f, 1);
@@ -165,6 +166,26 @@ public class ProgressBar extends Control {
 	}
 
 	renderer.drawTexture(rectXY, rectUV, texture);
+    }
+
+    @Override
+    public void setValue(float value) {
+	this.value = this.maxValue;
+    }
+
+    @Override
+    public float getValue() {
+	return this.value;
+    }
+
+    @Override
+    public void setMaxValue(float value) {
+	this.maxValue = value;
+    }
+
+    @Override
+    public float getMaxValue() {
+	return maxValue;
     }
 
 }

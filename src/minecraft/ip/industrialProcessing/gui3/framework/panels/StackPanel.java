@@ -1,8 +1,12 @@
 package ip.industrialProcessing.gui3.framework.panels;
 
+import java.util.Random;
+
+import ip.industrialProcessing.gui3.framework.Alignment;
 import ip.industrialProcessing.gui3.framework.Rect;
 import ip.industrialProcessing.gui3.framework.Size;
 import ip.industrialProcessing.gui3.framework.UIElement;
+import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
 
 public class StackPanel extends Panel {
 
@@ -23,8 +27,8 @@ public class StackPanel extends Panel {
 		    maxHeight = size.height;
 		availableWidth -= size.width;
 		desiredWidth += size.width;
-	    } 
-	    return new Size(Math.min(maxSize.width, desiredWidth) , Math.min(maxSize.height, maxHeight));
+	    }
+	    return new Size(Math.min(maxSize.width, desiredWidth), Math.min(maxSize.height, maxHeight));
 	case VERTICAL:
 	    float maxWidth = 0;
 	    float availableHeight = maxSize.height;
@@ -36,8 +40,8 @@ public class StackPanel extends Panel {
 		availableHeight -= size.height;
 		desiredHeight += size.height;
 	    }
-	    
-	    return new Size(Math.min(maxSize.width, maxWidth) , Math.min(maxSize.height, desiredHeight));
+
+	    return new Size(Math.min(maxSize.width, maxWidth), Math.min(maxSize.height, desiredHeight));
 	}
     }
 
@@ -46,24 +50,32 @@ public class StackPanel extends Panel {
 	switch (orientation) {
 	default:
 	case HORIZONTAL:
+	    float maxHeight = (this.horizontalAlign == Alignment.STRETCH) ? this.getDesiredSize().height : maxSize.height;
 	    float left = 0;
 	    for (UIElement child : getChildren()) {
 		Size size = child.getDesiredSize();
-		float height = Math.max(maxSize.height, size.height);
+		float height = Math.max(maxHeight, size.height);
 		child.arrange(new Rect(left, 0, size.width, height));
 		left += size.width;
 	    }
-	    return new Size(left, maxSize.height);
+	    return new Size(left, maxHeight);
 	case VERTICAL:
+	    float maxWidth = (this.verticalAlign == Alignment.STRETCH) ? this.getDesiredSize().width : maxSize.width;
 	    float top = 0;
 	    for (UIElement child : getChildren()) {
 		Size size = child.getDesiredSize();
-		// desired size can't be bigger then maxSize, measure should have fixed that correctly.
-		float width = Math.max(maxSize.width, size.width);
+		// desired size can't be bigger then maxSize, measure should
+		// have fixed that correctly.
+		float width = Math.max(maxWidth, size.width);
 		child.arrange(new Rect(0, top, width, size.height));
 		top += size.height;
 	    }
-	    return new Size(maxSize.width, top);
+	    return new Size(maxWidth, top);
 	}
+    }
+
+    @Override
+    protected void renderOverride(Rect size, GuiRenderer renderer) {
+	super.renderOverride(size, renderer);
     }
 }

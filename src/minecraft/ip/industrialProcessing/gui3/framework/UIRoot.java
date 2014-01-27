@@ -21,7 +21,7 @@ public class UIRoot {
     public void mouseUp(int mouseX, int mouseY, MouseButton button) {
 
 	if (this.element != null) {
-	    if (this.element.hitTest()) {
+	    if (this.element.hitTest(mouseX, mouseY)) {
 		this.element.mouseUp(mouseX, mouseY, button);
 	    }
 	}
@@ -30,7 +30,7 @@ public class UIRoot {
     public void mouseDown(int mouseX, int mouseY, MouseButton button) {
 
 	if (this.element != null) {
-	    if (this.element.hitTest()) {
+	    if (this.element.hitTest(mouseX, mouseY)) {
 		this.element.mouseDown(mouseX, mouseY, button);
 	    }
 	}
@@ -55,11 +55,13 @@ public class UIRoot {
 	if (mouseX != this.mouseX || mouseY != this.mouseY) {
 	    this.mouseX = mouseX;
 	    this.mouseY = mouseY;
-	    if (this.element.hitTest()) {
-		this.element.setMouseInside(true, mouseX, mouseY);
-		this.element.mouseMouseMove(mouseX, mouseY);
+	    float x = mouseX;
+	    float y = mouseY;
+	    if (this.element.hitTest(x, y)) {
+		this.element.setMouseInside(true, x, y);
+		this.element.mouseMove(x, y);
 	    } else
-		this.element.setMouseInside(false, mouseX, mouseY);
+		this.element.setMouseInside(false, x, y);
 	}
     }
 }

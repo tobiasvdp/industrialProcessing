@@ -3,13 +3,16 @@ package ip.industrialProcessing.power.plants;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.gui3.framework.Alignment;
 import ip.industrialProcessing.gui3.framework.Size;
+import ip.industrialProcessing.gui3.framework.Thickness;
 import ip.industrialProcessing.gui3.framework.UIRoot;
+import ip.industrialProcessing.gui3.framework.controls.Button;
 import ip.industrialProcessing.gui3.framework.controls.Decorator;
 import ip.industrialProcessing.gui3.framework.controls.ProgressBar;
 import ip.industrialProcessing.gui3.framework.controls.SlotControl;
 import ip.industrialProcessing.gui3.framework.controls.TankControl;
 import ip.industrialProcessing.gui3.framework.controls.TextBlock;
 import ip.industrialProcessing.gui3.framework.custom.CraftingGrid;
+import ip.industrialProcessing.gui3.framework.custom.LabeledProgressBar;
 import ip.industrialProcessing.gui3.framework.custom.PowerControl;
 import ip.industrialProcessing.gui3.framework.custom.TankWithSlotsControl;
 import ip.industrialProcessing.gui3.framework.panels.MouseButton;
@@ -64,13 +67,15 @@ public class GuiContainerGenerator extends GuiContainerMachine {
 	stack.addChild(machinePanel);
 	Decorator inventoryPanel = new Decorator(texture, 7);
 	stack.addChild(inventoryPanel);
-	TextBlock label = new TextBlock("Hello World", Float.NaN, Float.NaN, 0xFFFFFF);
+	TextBlock label = new TextBlock("Hello World", 0xFFFFFF);
 	StackPanel iStac = new StackPanel();
 	iStac.orientation = Orientation.VERTICAL;
 
 	iStac.addChild(label);
 	iStac.addChild(PowerControl.createPowerWithSlots());
 	iStac.addChild(CraftingGrid.createBigHorizontal());
+	iStac.addChild(CraftingGrid.createSmallVertical());
+	iStac.addChild(LabeledProgressBar.createProgressBar("Progress:", 0xFF686868));
 	inventoryPanel.setChild(iStac);
 	Decorator hotbarPanel = new Decorator(texture, 4);
 	stack.addChild(hotbarPanel);
@@ -83,6 +88,10 @@ public class GuiContainerGenerator extends GuiContainerMachine {
 	child.addChild(SlotControl.createBucketSlot());
 	child.addChild(SlotControl.createFuelSlot());
 	child.addChild(SlotControl.createPowerSlot());
+
+	TextBlock tb = new TextBlock("Button", 0xFFFFFFFF);
+	tb.margin = new Thickness(5, 5, 5, 5);
+	child.addChild(new Button(tb));
 	hotbarPanel.setChild(child);
 	stack.verticalAlign = Alignment.MIN;
 	stack.horizontalAlign = Alignment.STRETCH;
@@ -112,14 +121,14 @@ public class GuiContainerGenerator extends GuiContainerMachine {
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) { 
+    protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
 	GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
 	int xSize = width - 5;
 	int ySize = height - 5;
-	
+
 	int x = (width - xSize) / 2;
-	int y = (height - ySize) / 2; 
+	int y = (height - ySize) / 2;
 	this.layout.render(xSize, ySize, x, y, par2, par3);
     }
 

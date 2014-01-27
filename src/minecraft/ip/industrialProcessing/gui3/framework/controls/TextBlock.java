@@ -8,19 +8,21 @@ import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
 
 public class TextBlock extends Control {
 
-    private String text;
-    private int color;
+    public String text;
+    public int color;
 
-    public TextBlock(String text, float width, float height, int color) {
+    public TextBlock(String text, int color) {
 	this.text = text;
-	this.width = width;
-	this.height = height;
+	this.width = Float.NaN;
+	this.height = Float.NaN;
 	this.color = color;
     }
 
     @Override
     protected Size measureOverride(Size maxSize) {
 	FontRenderer renderer = Minecraft.getMinecraft().fontRenderer;
+	if (maxSize.width < renderer.getStringWidth("..."))
+	    return new Size(0, 0);
 	float width = renderer.getStringWidth(text);
 	if (width > maxSize.width) {
 	    return new Size(width, renderer.splitStringWidth(text, (int) width));
@@ -30,7 +32,7 @@ public class TextBlock extends Control {
     }
 
     @Override
-    protected void renderOverride(Rect size, GuiRenderer renderer) {
+    protected void renderOverride(Rect size, GuiRenderer renderer) { 
 	renderer.drawString(size, this.text, this.color, true, true);
     }
 

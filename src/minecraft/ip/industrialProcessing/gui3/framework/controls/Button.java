@@ -14,35 +14,36 @@ import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
 
 public class Button extends UIElement {
 
-    private static TextureReference buttonTexture = new TextureReference(new Size(128, 96), IndustrialProcessing.TEXTURE_DOMAIN, "gui/button");
+    private static TextureReference buttonTexture = new TextureReference(new Size(128, 96), IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/Buttons.png");
 
     private TextureReference texture;
 
-    public Button() {
-	this(buttonTexture);
+    public Button(UIElement child) {
+	this(buttonTexture, child);
     }
 
     // texture size: 128x32 for each state: 128x96
-    public Button(TextureReference texture) {
+    public Button(TextureReference texture, UIElement child) {
 	this.isHittestVisible = true;
 	this.texture = texture;
+	this.child = child;
     }
 
-    UIElement child;
+    public UIElement child;
 
     boolean hover = false;
     boolean mouseDown = false;
 
     @Override
     protected void renderOverride(Rect size, GuiRenderer renderer) {
-	if (hover) {
+	if (hover || mouseDown) {
 	    if (mouseDown) {
-		drawButton(size, 2, renderer);
-	    } else {
 		drawButton(size, 1, renderer);
+	    } else {
+		drawButton(size, 2, renderer);
 	    }
-	}
-	drawButton(size, 0, renderer);
+	} else
+	    drawButton(size, 0, renderer);
 	if (this.child != null)
 	    this.child.render(renderer);
     }
@@ -54,7 +55,6 @@ public class Button extends UIElement {
 	float vSize = 1 / 3f;
 
 	float cornerSize = Math.min(rect.width / 4, Math.min(rect.height / 4, 4));
-	// TODO: support for tilable NineGrid?
 	renderer.drawNineGrid(rect, new Thickness(cornerSize, cornerSize, cornerSize, cornerSize), new Rect(uMin, vMin, uSize, vSize), this.texture);
     }
 
@@ -87,13 +87,12 @@ public class Button extends UIElement {
     }
 
     @Override
-    public void mouseMouseMove(float x, float y) {
+    public void mouseMove(float x, float y) {
     }
 
     @Override
     public void mouseUp(float x, float y, MouseButton button) {
 	this.mouseDown = false;
-	// TODO: handle click
     }
 
     @Override

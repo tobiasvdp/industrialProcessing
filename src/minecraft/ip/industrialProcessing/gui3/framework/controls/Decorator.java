@@ -59,32 +59,47 @@ public class Decorator extends UIElement {
 
     @Override
     public void mouseEntered(float x, float y) {
+	x += borderWidth;
+	y += borderWidth;
 	if (child != null)
-	    child.mouseEntered(x, y);
+	    if (child.hitTest(x, y))
+		child.mouseEntered(x, y);
     }
 
     @Override
     public void mouseLeft(float x, float y) {
+	x += borderWidth;
+	y += borderWidth;
 	if (child != null)
-	    child.mouseLeft(x, y);
+	    if (child.hitTest(x, y))
+		child.mouseLeft(x, y);
     }
 
     @Override
-    public void mouseMouseMove(float x, float y) {
+    public void mouseMove(float x, float y) {
+	x += borderWidth;
+	y += borderWidth;
 	if (child != null)
-	    child.mouseLeft(x, y);
+	    if (child.hitTest(x, y))
+		child.mouseMove(x, y);
     }
 
     @Override
     public void mouseUp(float x, float y, MouseButton button) {
+	x += borderWidth;
+	y += borderWidth;
 	if (child != null)
-	    child.mouseUp(x, y, button);
+	    if (child.hitTest(x, y))
+		child.mouseUp(x, y, button);
     }
 
     @Override
     public void mouseDown(float x, float y, MouseButton button) {
+	x += borderWidth;
+	y += borderWidth;
 	if (child != null)
-	    child.mouseDown(x, y, button);
+	    if (child.hitTest(x, y))
+		child.mouseDown(x, y, button);
 
     }
 

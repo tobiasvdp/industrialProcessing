@@ -39,9 +39,10 @@ public class CraftingGrid extends UserControl {
 	}
 	StackPanel stack = new StackPanel();
 	stack.addChild(grid);
+	stack.orientation = orientation;
 	Image image;
 	switch (orientation) {
-	case HORIZONTAL:
+	case HORIZONTAL: 
 	    stack.addChild(image = Image.createImage(DEFAULT_CRAFT_TEXTURE_HORIZONTAL, DEFAULT_CRAFT_SECTION_HORIZONTAL));
 	    break;
 	default:
@@ -51,7 +52,8 @@ public class CraftingGrid extends UserControl {
 	}
 	image.horizontalAlign = image.verticalAlign = Alignment.CENTER;
 	SlotControl slot = SlotControl.createSlot();
-	slot.horizontalAlign = slot.verticalAlign = Alignment.CENTER;
+	slot.horizontalAlign = slot.verticalAlign = Alignment.CENTER; 
+	grid.horizontalAlign = grid.verticalAlign = Alignment.CENTER;
 	stack.addChild(slot);
 	this.child = stack;
     }
