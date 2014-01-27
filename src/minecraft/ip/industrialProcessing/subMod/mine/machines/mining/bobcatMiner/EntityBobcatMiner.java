@@ -2,6 +2,7 @@ package ip.industrialProcessing.subMod.mine.machines.mining.bobcatMiner;
 
 import ip.industrialProcessing.subMod.mine.PacketHandler;
 import ip.industrialProcessing.utils.BlockBreaker;
+import ip.industrialProcessing.utils.packets.PacketIP001EntityLocationAndRotation;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -98,7 +99,17 @@ public class EntityBobcatMiner extends Entity {
 			if(cooldowntime <0){
 				cooldowntime = 10;
 			}
+			PacketDispatcher.sendPacketToServer(new PacketIP001EntityLocationAndRotation(this));
 		}
+	}
+	
+	@Override
+	public boolean isEntityInvulnerable() {
+		return true;
+	}
+	
+	@Override
+	public void setPositionAndRotation2(double par1, double par3, double par5, float par7, float par8, int par9) {
 	}
 	
 	public void sendDestroyPacketToServer(ArrayList<int[]> blocks){

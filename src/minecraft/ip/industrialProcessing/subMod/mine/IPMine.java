@@ -17,7 +17,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = "IPMine", name = "Industrial Processing Mine", version = "0.0.1", dependencies = "required-after:IndustrialProcessing")
-@NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = { PacketHandler.channel,PacketHandler.destroyBlock }, packetHandler = PacketHandler.class)
+@NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = { PacketHandler.channel,PacketHandler.destroyBlock, PacketHandler.move }, packetHandler = PacketHandler.class)
 public class IPMine implements ISetupMine {
 	@Instance("IPMine")
 	public static IPMine instance;

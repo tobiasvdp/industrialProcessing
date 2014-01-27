@@ -1,6 +1,8 @@
 package ip.industrialProcessing.subMod.mine;
 
 import ip.industrialProcessing.utils.BlockBreaker;
+import ip.industrialProcessing.utils.packets.PacketDataHandler;
+import ip.industrialProcessing.utils.packets.PacketIP001EntityLocationAndRotation;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
@@ -17,6 +19,7 @@ public class PacketHandler implements IPacketHandler {
 
 	public static final String channel = "ip.mine";
 	public static final String destroyBlock = "ip.mine.destr";
+	public static final String move = "ip.mine.mov";
 
 	@Override
 	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {
@@ -37,6 +40,9 @@ public class PacketHandler implements IPacketHandler {
 			System.out.println("broken blocks");
 			BlockBreaker.breakBlocks(((Entity) player).worldObj, blocks);
 
+		}
+		if(packet.channel.equals(move)){
+			PacketDataHandler.handle001EntityLocationAndRotation(player, (PacketIP001EntityLocationAndRotation) packet);
 		}
 	}
 
