@@ -31,83 +31,90 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 	protected ArrayList<UTpacket> packets = new ArrayList<UTpacket>();
 
 	public TElogicNode() {
-		conectableInputSides = setConnectableInputSides();
-		conectableOutputSides = setConnectableOutputSides();
+		this.conectableInputSides = this.setConnectableInputSides();
+		this.conectableOutputSides = this.setConnectableOutputSides();
 		for (int i = 0; i < 6; i++) {
-			nodeCollection[i] = new UTlogicNodeContainer(this);
-			buffer[i] = new UTBuffer(UTBufferType.Bit);
+			this.nodeCollection[i] = new UTlogicNodeContainer(this);
+			this.buffer[i] = new UTBuffer(UTBufferType.Bit);
 		}
 	}
 
-	private int transformToForgeDirection(int blockMetadata) {
-		switch (blockMetadata) {
-		case 0:
-			return 0;
-		case 1:
-			return 1;
-		case 2:
-			return 3;
-		case 3:
-			return 2;
-		case 4:
-			return 5;
-		case 5:
-			return 4;
+	@Override
+	public void createDataPacket(ForgeDirection dir, UTVariable... data) {
+		this.packets.add(new UTpacket(UTpacketType.data, SidedRotationTransformer.InternalToExternalDirection(this, dir), data));
+		this.scheduleSend();
+		for (UTVariable item : data) {
+			this.buffer[SidedRotationTransformer.InternalToExternalDirection(this, dir).ordinal()].put(item);
 		}
-		return 0;
+	}
+
+	@Override
+	public void createDataPacket(UTVariable... data) {
+		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+			this.createDataPacket(dir, data);
+		}
+	}
+
+	@Override
+	public void createDestructionPacket() {
+		for (ForgeDirection sendingSide : ForgeDirection.VALID_DIRECTIONS) {
+			this.packets.add(new UTpacket(UTpacketType.destroy, sendingSide, new ArrayList<ICommunicationTransport>(), this, sendingSide));
+		}
+		this.Send();
+	}
+
+	@Override
+	public void createDiscoveryPacket() {
+		for (ForgeDirection sendingSide : ForgeDirection.VALID_DIRECTIONS) {
+			this.packets.add(new UTpacket(UTpacketType.discovery, sendingSide, new ArrayList<ICommunicationTransport>(), this, sendingSide));
+		}
+		this.scheduleSend();
+	}
+
+	@Override
+	public void createDiscoveryPacket(ForgeDirection dir) {
+		this.packets.add(new UTpacket(UTpacketType.discovery, dir, new ArrayList<ICommunicationTransport>(), this, dir));
+		this.scheduleSend();
+	}
+
+	@Override
+	public void ExtendedReceive(UTpacket packet) {
+	}
+
+	@Override
+	public void ExtendedSend(UTpacket packet) {
+	}
+
+	@Override
+	public UTBuffer getBuffer(ForgeDirection dir) {
+		return this.buffer[this.getExternalForgeDirection(dir).ordinal()];
+	}
+
+	@Override
+	public UTBusType getBusType() {
+		return UTBusType.bus;
+	}
+
+	@Override
+	public UTBusType getBusType(ForgeDirection side) {
+		TileEntity te = this.worldObj.getBlockTileEntity(this.xCoord + side.offsetX, this.yCoord + side.offsetY, this.zCoord + side.offsetZ);
+		if (te instanceof ICommunication) {
+			return ((ICommunication) te).getBusType();
+		}
+		return UTBusType.invalid;
 	}
 
 	public ForgeDirection[] getConnectableInputSides() {
-		return conectableInputSides;
+		return this.conectableInputSides;
 	}
 
 	public ForgeDirection[] getConnectableOutputSides() {
-		return conectableOutputSides;
+		return this.conectableOutputSides;
 	}
 
 	@Override
-	public void setOrientationSide(ForgeDirection side) {
-		orientationSide = side;
-	}
-
-	@Override
-	public void setOrientationSide(int metadata) {
-		orientationSide = SidedRotationTransformer.transformMetaToForgeDirection(metadata);
-	}
-
-	@Override
-	public ForgeDirection getOrientationSide() {
-		return orientationSide;
-	}
-
-	@Override
-	public ForgeDirection getOrientationRotation() {
-		return orientationRotation;
-	}
-
-	@Override
-	public float getGLrotationX() {
-		return SidedRotationTransformer.getGLrotationX(getOrientationSide(), getOrientationRotation());
-	}
-
-	@Override
-	public float getGLrotationY() {
-		return SidedRotationTransformer.getGLrotationY(getOrientationSide(), getOrientationRotation());
-	}
-
-	@Override
-	public float getGLrotationZ() {
-		return SidedRotationTransformer.getGLrotationZ(getOrientationSide(), getOrientationRotation());
-	}
-
-	@Override
-	public void setOrientationRotation(float rotationYaw, float rotationPitch) {
-		orientationRotation = SidedRotationTransformer.transformSideAndLookToForgeDirection(orientationSide, rotationYaw, rotationPitch);
-	}
-
-	@Override
-	public void setOrientationRotation(ForgeDirection dir) {
-		orientationRotation = dir;
+	public UTlogicNodeContainer getConnectionsOnSide(ForgeDirection side) {
+		return this.nodeCollection[side.ordinal()];
 	}
 
 	@Override
@@ -116,105 +123,78 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 	}
 
 	@Override
-	public float getGLsideX() {
-		return SidedRotationTransformer.getGLsideX(getOrientationSide());
+	public float getGLrotationAngle() {
+		return SIDEDTRANSFORMER.getGLrotationAngle(this.getOrientationSide(), this.getOrientationRotation());
 	}
 
 	@Override
-	public float getGLsideY() {
-		return SidedRotationTransformer.getGLsideY(getOrientationSide());
+	public float getGLrotationX() {
+		return SidedRotationTransformer.getGLrotationX(this.getOrientationSide(), this.getOrientationRotation());
 	}
 
 	@Override
-	public float getGLsideZ() {
-		return SidedRotationTransformer.getGLsideZ(getOrientationSide());
+	public float getGLrotationY() {
+		return SidedRotationTransformer.getGLrotationY(this.getOrientationSide(), this.getOrientationRotation());
+	}
+
+	@Override
+	public float getGLrotationZ() {
+		return SidedRotationTransformer.getGLrotationZ(this.getOrientationSide(), this.getOrientationRotation());
 	}
 
 	@Override
 	public float getGLsideAngle() {
-		return SIDEDTRANSFORMER.getGLsideAngle(getOrientationSide());
+		return SIDEDTRANSFORMER.getGLsideAngle(this.getOrientationSide());
 	}
 
 	@Override
-	public float getGLrotationAngle() {
-		return SIDEDTRANSFORMER.getGLrotationAngle(getOrientationSide(), getOrientationRotation());
+	public float getGLsideX() {
+		return SidedRotationTransformer.getGLsideX(this.getOrientationSide());
 	}
 
 	@Override
-	public void Receive(UTpacket packet) {
-		if (packet.getType() == UTpacketType.discovery) {
-			this.registerNode(((ForgeDirection) packet.getData(0)), (ICommunicationNode) packet.getData(2), ((ForgeDirection) packet.getData(3)));
-			((ICommunicationNode) packet.getData(2)).registerNode(((ForgeDirection) packet.getData(3)), this, (ForgeDirection) (packet.getData(0)));
-		}
-		if (packet.getType() == UTpacketType.recheck) {
-			nodeCollection[((ForgeDirection) packet.getData(0)).ordinal()].clear();
-			createDiscoveryPacket();
-		}
-		if (packet.getType() == UTpacketType.destroy) {
-			this.removeNode((ICommunicationNode) packet.getData(2));
-		}
-		if (packet.getType() == UTpacketType.data) {
-			if (isValidInput((ForgeDirection) packet.getData(0))) {
-				ForgeDirection receivingSide = (ForgeDirection) packet.getData(0);
-				UTVariable[] array = (UTVariable[]) packet.getData(1);
-				for (UTVariable item : array) {
-					buffer[receivingSide.ordinal()].put(item);
-				}
-				transition();
-			}
-		}
-		ExtendedReceive(packet);
+	public float getGLsideY() {
+		return SidedRotationTransformer.getGLsideY(this.getOrientationSide());
 	}
 
 	@Override
-	public void ExtendedReceive(UTpacket packet) {
+	public float getGLsideZ() {
+		return SidedRotationTransformer.getGLsideZ(this.getOrientationSide());
+	}
+
+	/*
+	 * @Override public Packet getDescriptionPacket() { NBTTagCompound nbtTag =
+	 * new NBTTagCompound(); this.writeToNBT(nbtTag); return new
+	 * Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1,
+	 * nbtTag); }
+	 * 
+	 * @Override public void onDataPacket(INetworkManager net,
+	 * Packet132TileEntityData packet) { readFromNBT(packet.customParam1);
+	 * this.worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord); }
+	 * 
+	 * public void notifyBlockChange() { if (!this.worldObj.isRemote) {
+	 * this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+	 * 
+	 * StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
+	 * StackTraceElement e = stacktrace[2];// maybe this number needs to be //
+	 * corrected String methodName = e.getMethodName(); String className =
+	 * e.getClassName(); }
+	 * 
+	 * }
+	 */
+	@Override
+	public UTLogicType getLogicType() {
+		return UTLogicType.node;
 	}
 
 	@Override
-	public void scheduleSend() {
-		this.worldObj.scheduleBlockUpdateWithPriority(xCoord, yCoord, zCoord, worldObj.getBlockId(xCoord, yCoord, zCoord), 1, -1);
+	public ForgeDirection getOrientationRotation() {
+		return this.orientationRotation;
 	}
 
 	@Override
-	public void Send() {
-		for (UTpacket packet : packets) {
-			if (packet.getType() == UTpacketType.data) {
-				if (isValidOutput((ForgeDirection) packet.getData(0))) {
-					ForgeDirection sendingSide = (ForgeDirection) packet.getData(0);
-					for (int i = 0; i < nodeCollection[sendingSide.ordinal()].getSize(); i++) {
-						ICommunicationNode com = nodeCollection[sendingSide.ordinal()].getNode(i);
-						packet.setData(0, nodeCollection[sendingSide.ordinal()].getSide(i));
-						com.Receive(packet);
-					}
-				}
-			}
-			if (packet.getType() == UTpacketType.destroy) {
-				ForgeDirection sendingSide = (ForgeDirection) packet.getData(0);
-				for (int i = 0; i < nodeCollection[sendingSide.ordinal()].getSize(); i++) {
-					ICommunicationNode com = nodeCollection[sendingSide.ordinal()].getNode(i);
-					packet.setData(0, nodeCollection[sendingSide.ordinal()].getSide(i));
-					com.Receive(packet);
-				}
-			}
-			if (packet.getType() == UTpacketType.discovery) {
-				ForgeDirection sendingSide = (ForgeDirection) packet.getData(0);
-				nodeCollection[sendingSide.ordinal()].clear();
-				TileEntity te = worldObj.getBlockTileEntity(xCoord + sendingSide.offsetX, yCoord + sendingSide.offsetY, zCoord + sendingSide.offsetZ);
-				if (te instanceof ICommunication) {
-					ICommunication com = (ICommunication) te;
-					//initiateBuffer(buffer[sendingSide.ordinal()], getBusType(sendingSide));
-					packet.setData(0, sendingSide.getOpposite());
-					com.Receive(packet);
-
-				}
-			}
-			ExtendedSend(packet);
-		}
-		packets.clear();
-	}
-
-	@Override
-	public void ExtendedSend(UTpacket packet) {
+	public ForgeDirection getOrientationSide() {
+		return this.orientationSide;
 	}
 
 	public void initiateBuffer(UTBuffer utBuffer, UTBusType busType) {
@@ -226,23 +206,70 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 		}
 	}
 
-	@Override
-	public UTBusType getBusType() {
-		return UTBusType.bus;
+	public boolean isInvNameLocalized() {
+		return false;
 	}
 
 	@Override
-	public UTBusType getBusType(ForgeDirection side) {
-		TileEntity te = worldObj.getBlockTileEntity(xCoord + side.offsetX, yCoord + side.offsetY, zCoord + side.offsetZ);
-		if (te instanceof ICommunication) {
-			return ((ICommunication) te).getBusType();
+	public boolean isValidInput(ForgeDirection dir) {
+		for (ForgeDirection d : this.conectableInputSides) {
+			if (this.getExternalForgeDirection(d) == dir) {
+				return true;
+			}
 		}
-		return UTBusType.invalid;
+		return false;
 	}
 
 	@Override
-	public UTlogicNodeContainer getConnectionsOnSide(ForgeDirection side) {
-		return this.nodeCollection[side.ordinal()];
+	public boolean isValidOutput(ForgeDirection dir) {
+		for (ForgeDirection d : this.conectableOutputSides) {
+			if (this.getExternalForgeDirection(d) == dir) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
+		super.readFromNBT(par1nbtTagCompound);
+		this.orientationSide = ForgeDirection.getOrientation(par1nbtTagCompound.getInteger("orientationSide"));
+		this.orientationRotation = ForgeDirection.getOrientation(par1nbtTagCompound.getInteger("orientationRotation"));
+
+		int i = 0;
+		for (UTlogicNodeContainer container : this.nodeCollection) {
+			NBTTagList list = par1nbtTagCompound.getTagList("nodes" + i);
+			if (list.tagCount() != 0) {
+				container.readFromNBT(list);
+			}
+			i++;
+		}
+	}
+
+	@Override
+	public void Receive(UTpacket packet) {
+		if (packet.getType() == UTpacketType.discovery) {
+			this.registerNode((ForgeDirection) packet.getData(0), (ICommunicationNode) packet.getData(2), (ForgeDirection) packet.getData(3));
+			((ICommunicationNode) packet.getData(2)).registerNode((ForgeDirection) packet.getData(3), this, (ForgeDirection) packet.getData(0));
+		}
+		if (packet.getType() == UTpacketType.recheck) {
+			this.nodeCollection[((ForgeDirection) packet.getData(0)).ordinal()].clear();
+			this.createDiscoveryPacket();
+		}
+		if (packet.getType() == UTpacketType.destroy) {
+			this.removeNode((ICommunicationNode) packet.getData(2));
+		}
+		if (packet.getType() == UTpacketType.data) {
+			if (this.isValidInput((ForgeDirection) packet.getData(0))) {
+				ForgeDirection receivingSide = (ForgeDirection) packet.getData(0);
+				UTVariable[] array = (UTVariable[]) packet.getData(1);
+				for (UTVariable item : array) {
+					this.buffer[receivingSide.ordinal()].put(item);
+				}
+				this.transition();
+			}
+		}
+		this.ExtendedReceive(packet);
 	}
 
 	@Override
@@ -250,7 +277,7 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 		if (!this.nodeCollection[side.ordinal()].contains(node)) {
 			this.nodeCollection[side.ordinal()].add(node);
 			this.nodeCollection[side.ordinal()].addSide(originSide);
-			initiateBuffer(this.buffer[side.ordinal()], getBusType(side));
+			this.initiateBuffer(this.buffer[side.ordinal()], this.getBusType(side));
 		}
 	}
 
@@ -263,132 +290,86 @@ public abstract class TElogicNode extends TileEntity implements ICommunicationNo
 
 	@Override
 	public void removeNode(ICommunicationNode node, ForgeDirection dir) {
-		nodeCollection[dir.ordinal()].remove(node);
+		this.nodeCollection[dir.ordinal()].remove(node);
 	}
 
 	@Override
-	public UTBuffer getBuffer(ForgeDirection dir) {
-		return buffer[getExternalForgeDirection(dir).ordinal()];
+	public void scheduleSend() {
+		this.worldObj.scheduleBlockUpdateWithPriority(this.xCoord, this.yCoord, this.zCoord, this.worldObj.getBlockId(this.xCoord, this.yCoord, this.zCoord), 1, -1);
 	}
 
 	@Override
-	public void createDiscoveryPacket() {
-		for (ForgeDirection sendingSide : ForgeDirection.VALID_DIRECTIONS)
-			packets.add(new UTpacket(UTpacketType.discovery, sendingSide, new ArrayList<ICommunicationTransport>(), this, sendingSide));
-		this.scheduleSend();
-	}
+	public void Send() {
+		for (UTpacket packet : this.packets) {
+			if (packet.getType() == UTpacketType.data) {
+				if (this.isValidOutput((ForgeDirection) packet.getData(0))) {
+					ForgeDirection sendingSide = (ForgeDirection) packet.getData(0);
+					for (int i = 0; i < this.nodeCollection[sendingSide.ordinal()].getSize(); i++) {
+						ICommunicationNode com = this.nodeCollection[sendingSide.ordinal()].getNode(i);
+						packet.setData(0, this.nodeCollection[sendingSide.ordinal()].getSide(i));
+						com.Receive(packet);
+					}
+				}
+			}
+			if (packet.getType() == UTpacketType.destroy) {
+				ForgeDirection sendingSide = (ForgeDirection) packet.getData(0);
+				for (int i = 0; i < this.nodeCollection[sendingSide.ordinal()].getSize(); i++) {
+					ICommunicationNode com = this.nodeCollection[sendingSide.ordinal()].getNode(i);
+					packet.setData(0, this.nodeCollection[sendingSide.ordinal()].getSide(i));
+					com.Receive(packet);
+				}
+			}
+			if (packet.getType() == UTpacketType.discovery) {
+				ForgeDirection sendingSide = (ForgeDirection) packet.getData(0);
+				this.nodeCollection[sendingSide.ordinal()].clear();
+				TileEntity te = this.worldObj.getBlockTileEntity(this.xCoord + sendingSide.offsetX, this.yCoord + sendingSide.offsetY, this.zCoord + sendingSide.offsetZ);
+				if (te instanceof ICommunication) {
+					ICommunication com = (ICommunication) te;
+					// initiateBuffer(buffer[sendingSide.ordinal()],
+					// getBusType(sendingSide));
+					packet.setData(0, sendingSide.getOpposite());
+					com.Receive(packet);
 
-	@Override
-	public void createDiscoveryPacket(ForgeDirection dir) {
-		packets.add(new UTpacket(UTpacketType.discovery, dir, new ArrayList<ICommunicationTransport>(), this, dir));
-		this.scheduleSend();
-	}
-
-	@Override
-	public void createDestructionPacket() {
-		for (ForgeDirection sendingSide : ForgeDirection.VALID_DIRECTIONS)
-			packets.add(new UTpacket(UTpacketType.destroy, sendingSide, new ArrayList<ICommunicationTransport>(), this, sendingSide));
-		this.Send();
-	}
-
-	@Override
-	public void createDataPacket(UTVariable... data) {
-		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-			createDataPacket(dir, data);
+				}
+			}
+			this.ExtendedSend(packet);
 		}
+		this.packets.clear();
 	}
 
 	@Override
-	public void createDataPacket(ForgeDirection dir, UTVariable... data) {
-		packets.add(new UTpacket(UTpacketType.data, SidedRotationTransformer.InternalToExternalDirection(this, dir), data));
-		this.scheduleSend();
-		for (UTVariable item : data) {
-			buffer[SidedRotationTransformer.InternalToExternalDirection(this, dir).ordinal()].put(item);
-		}
+	public void setOrientationRotation(float rotationYaw, float rotationPitch) {
+		this.orientationRotation = SidedRotationTransformer.transformSideAndLookToForgeDirection(this.orientationSide, rotationYaw, rotationPitch);
+	}
+
+	@Override
+	public void setOrientationRotation(ForgeDirection dir) {
+		this.orientationRotation = dir;
+	}
+
+	@Override
+	public void setOrientationSide(ForgeDirection side) {
+		this.orientationSide = side;
+	}
+
+	@Override
+	public void setOrientationSide(int metadata) {
+		this.orientationSide = SidedRotationTransformer.transformMetaToForgeDirection(metadata);
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
 		super.writeToNBT(par1nbtTagCompound);
-		par1nbtTagCompound.setInteger("orientationSide", orientationSide.ordinal());
-		par1nbtTagCompound.setInteger("orientationRotation", orientationRotation.ordinal());
+		par1nbtTagCompound.setInteger("orientationSide", this.orientationSide.ordinal());
+		par1nbtTagCompound.setInteger("orientationRotation", this.orientationRotation.ordinal());
 
 		int i = 0;
-		for (UTlogicNodeContainer container : nodeCollection) {
+		for (UTlogicNodeContainer container : this.nodeCollection) {
 			NBTTagList list = container.writeToNBT();
-			if (list != null)
+			if (list != null) {
 				par1nbtTagCompound.setTag("nodes" + i, list);
+			}
 			i++;
 		}
 	}
-
-	@Override
-	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
-		super.readFromNBT(par1nbtTagCompound);
-		orientationSide = ForgeDirection.getOrientation(par1nbtTagCompound.getInteger("orientationSide"));
-		orientationRotation = ForgeDirection.getOrientation(par1nbtTagCompound.getInteger("orientationRotation"));
-
-		int i = 0;
-		for (UTlogicNodeContainer container : nodeCollection) {
-			NBTTagList list = par1nbtTagCompound.getTagList("nodes" + i);
-			if(list.tagCount() != 0)
-				container.readFromNBT(list);
-			i++;
-		}
-	}
-
-	public boolean isInvNameLocalized() {
-		return false;
-	}
-
-	@Override
-	public boolean isValidInput(ForgeDirection dir) {
-		for (ForgeDirection d : conectableInputSides) {
-			if (getExternalForgeDirection(d) == dir) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public boolean isValidOutput(ForgeDirection dir) {
-		for (ForgeDirection d : conectableOutputSides) {
-			if (getExternalForgeDirection(d) == dir) {
-				return true;
-			}
-		}
-		return false;
-	}
-	/*
-    @Override
-    public Packet getDescriptionPacket() {
-	NBTTagCompound nbtTag = new NBTTagCompound();
-	this.writeToNBT(nbtTag);
-	return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
-    }
-
-    @Override
-    public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
-	readFromNBT(packet.customParam1);
-	this.worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
-    }
-	 
-    public void notifyBlockChange() {
-	if (!this.worldObj.isRemote) {
-	    this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-
-	    StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-	    StackTraceElement e = stacktrace[2];// maybe this number needs to be
-						// corrected
-	    String methodName = e.getMethodName();
-	    String className = e.getClassName();
-	}
-
-    }
-    */
-    @Override
-    public UTLogicType getLogicType(){
-    	return UTLogicType.node;
-    }
 }

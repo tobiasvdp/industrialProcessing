@@ -29,16 +29,6 @@ public class IPLogic implements ISetupLogic {
 	public static CommonProxy proxy;
 
 	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
-		config = new Configuration(event.getSuggestedConfigurationFile());
-		config.load();
-
-		boolean useConfig = config.get(Configuration.CATEGORY_GENERAL, "useConfig", true).getBoolean(true);
-
-		MinecraftForge.EVENT_BUS.register(this);
-	}
-
-	@EventHandler
 	public void load(FMLInitializationEvent event) {
 		ConfigLogic.getInstance().register();
 		proxy.registerRenderers();
@@ -51,6 +41,16 @@ public class IPLogic implements ISetupLogic {
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 
+	}
+
+	@EventHandler
+	public void preInit(FMLPreInitializationEvent event) {
+		config = new Configuration(event.getSuggestedConfigurationFile());
+		config.load();
+
+		config.get(Configuration.CATEGORY_GENERAL, "useConfig", true).getBoolean(true);
+
+		MinecraftForge.EVENT_BUS.register(this);
 	}
 
 }

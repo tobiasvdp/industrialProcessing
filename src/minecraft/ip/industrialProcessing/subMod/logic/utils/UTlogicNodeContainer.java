@@ -21,116 +21,125 @@ public class UTlogicNodeContainer {
 	public UTlogicNodeContainer(TileEntity te) {
 		this.te = te;
 	}
-	
-	public int getIndex(ICommunicationNode node){
-		if (isListLoaded == false)
-			loadList();
-		return nodes.indexOf(node);
-	}
 
 	public void add(ICommunicationNode te) {
-		nodes.add(te);
+		this.nodes.add(te);
 	}
 
-	public void remove(ICommunicationNode te) {
-		for (int i = 0; i < nodes.size(); i++) {
-			if (nodes.get(i) == te) {
-				nodes.remove(i);
-				sides.remove(i);
-			}
-		}
+	public void addSide(ForgeDirection originSide) {
+		this.sides.add(originSide);
 	}
 
 	public void clear() {
-		nodes.clear();
-		sides.clear();
-	}
-
-	public NBTTagList writeToNBT() {
-		if (nodes.size() == 0)
-			return null;
-		NBTTagList list = new NBTTagList();
-		for (int i =0;i< nodes.size();i++) {
-			TileEntity te = ((TileEntity) nodes.get(i));
-			NBTTagCompound compound = new NBTTagCompound();
-			compound.setIntArray("loc" + i, new int[] { te.xCoord, te.yCoord, te.zCoord });
-			ForgeDirection dir = sides.get(i);
-			compound.setInteger("side"+i, dir.ordinal());
-			list.appendTag(compound);
-			
-		}
-		return list;
-	}
-
-	public void readFromNBT(NBTTagList nbtTagList) {
-		listLocation = new int[nbtTagList.tagCount()][3];
-		listSides = new int[nbtTagList.tagCount()];
-		for (int i = 0; i < nbtTagList.tagCount(); i++) {
-			NBTTagCompound compound = (NBTTagCompound) nbtTagList.tagAt(i);
-			listLocation[i] = compound.getIntArray("loc" + i);
-			listSides[i] = compound.getInteger("side"+i);
-		}
-		isListLoaded = false;
+		this.nodes.clear();
+		this.sides.clear();
 	}
 
 	public boolean contains(ICommunicationNode node) {
-		if (isListLoaded == false)
-			loadList();
-		return nodes.contains(node);
+		if (this.isListLoaded == false) {
+			this.loadList();
+		}
+		return this.nodes.contains(node);
+	}
+
+	public int getIndex(ICommunicationNode node) {
+		if (this.isListLoaded == false) {
+			this.loadList();
+		}
+		return this.nodes.indexOf(node);
+	}
+
+	public ICommunicationNode getNode(int i) {
+		if (this.isListLoaded == false) {
+			this.loadList();
+		}
+		return this.nodes.get(i);
+	}
+
+	public ForgeDirection getSide(int i) {
+		if (this.isListLoaded == false) {
+			this.loadList();
+		}
+		return this.sides.get(i);
+	}
+
+	public int getSize() {
+		if (this.isListLoaded == false) {
+			this.loadList();
+		}
+		return this.nodes.size();
+	}
+
+	public ArrayList<ICommunicationNode> iterate() {
+		if (this.isListLoaded == false) {
+			this.loadList();
+		}
+		return this.nodes;
+	}
+
+	private void loadList() {
+		if (this.listLocation != null) {
+			this.nodes = new ArrayList<ICommunicationNode>();
+			this.sides = new ArrayList<ForgeDirection>();
+			World world = this.te.worldObj;
+			for (int i = 0; i < this.listLocation.length; i++) {
+				TileEntity te = world.getBlockTileEntity(this.listLocation[i][0], this.listLocation[i][1], this.listLocation[i][2]);
+				if (te instanceof ICommunicationNode) {
+					this.add((ICommunicationNode) te);
+				}
+				ForgeDirection dir = ForgeDirection.values()[this.listSides[i]];
+				this.addSide(dir);
+			}
+			this.listLocation = null;
+			this.listSides = null;
+			this.isListLoaded = true;
+		}
 	}
 
 	public void notifyOfRemoval(ICommunicationNode removeNode) {
-		if (isListLoaded == false)
-			loadList();
-		for (ICommunicationNode node : nodes) {
+		if (this.isListLoaded == false) {
+			this.loadList();
+		}
+		for (ICommunicationNode node : this.nodes) {
 			node.removeNode(removeNode);
 		}
 	}
 
-	public ArrayList<ICommunicationNode> iterate() {
-		if (isListLoaded == false)
-			loadList();
-		return nodes;
+	public void readFromNBT(NBTTagList nbtTagList) {
+		this.listLocation = new int[nbtTagList.tagCount()][3];
+		this.listSides = new int[nbtTagList.tagCount()];
+		for (int i = 0; i < nbtTagList.tagCount(); i++) {
+			NBTTagCompound compound = (NBTTagCompound) nbtTagList.tagAt(i);
+			this.listLocation[i] = compound.getIntArray("loc" + i);
+			this.listSides[i] = compound.getInteger("side" + i);
+		}
+		this.isListLoaded = false;
 	}
 
-	public void addSide(ForgeDirection originSide) {
-		sides.add(originSide);
-	}
-
-	public int getSize() {
-		if (isListLoaded == false)
-			loadList();
-		return nodes.size();
-	}
-
-	public ICommunicationNode getNode(int i) {
-		if (isListLoaded == false)
-			loadList();
-		return nodes.get(i);
-	}
-
-	private void loadList() {
-		if (listLocation != null) {
-			this.nodes = new ArrayList<ICommunicationNode>();
-			this.sides = new ArrayList<ForgeDirection>();
-			World world = te.worldObj;
-			for (int i =0;i<listLocation.length;i++) {
-				TileEntity te = world.getBlockTileEntity(listLocation[i][0], listLocation[i][1], listLocation[i][2]);
-				if (te instanceof ICommunicationNode)
-					this.add((ICommunicationNode) te);
-				ForgeDirection dir = ForgeDirection.values()[listSides[i]];
-				addSide(dir);
+	public void remove(ICommunicationNode te) {
+		for (int i = 0; i < this.nodes.size(); i++) {
+			if (this.nodes.get(i) == te) {
+				this.nodes.remove(i);
+				this.sides.remove(i);
 			}
-			listLocation = null;
-			listSides = null;
-			isListLoaded = true;
 		}
 	}
 
-	public ForgeDirection getSide(int i) {
-		if (isListLoaded == false)
-			loadList();
-		return sides.get(i);
+	public NBTTagList writeToNBT() {
+		if (this.nodes.size() == 0) {
+			return null;
+		}
+		NBTTagList list = new NBTTagList();
+		for (int i = 0; i < this.nodes.size(); i++) {
+			TileEntity te = (TileEntity) this.nodes.get(i);
+			NBTTagCompound compound = new NBTTagCompound();
+			compound.setIntArray("loc" + i, new int[] { te.xCoord, te.yCoord, te.zCoord });
+			ForgeDirection dir = this.sides.get(i);
+			compound.setInteger("side" + i, dir.ordinal());
+			list.appendTag(compound);
+
+		}
+		return list;
 	}
 
 }

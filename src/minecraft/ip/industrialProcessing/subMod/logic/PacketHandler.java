@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
@@ -77,13 +76,12 @@ public class PacketHandler implements IPacketHandler {
 					ex.printStackTrace();
 				}
 			} else {
-				EntityClientPlayerMP client = (EntityClientPlayerMP) player;
 				GuiScreen screen = Minecraft.getMinecraft().currentScreen;
 				if (screen instanceof GuiLogicDisplay) {
 					GuiLogicDisplay guiLogicDisplay = (GuiLogicDisplay) screen;
 
 					try {
-						for (int i = 0; inputStream.available() >= 0; i++) {
+						for (; inputStream.available() >= 0;) {
 							int x = inputStream.readInt();
 							int y = inputStream.readInt();
 							int z = inputStream.readInt();
@@ -161,7 +159,7 @@ public class PacketHandler implements IPacketHandler {
 							break;
 						case tank:
 							boolean expired = false;
-							InfoMachine machine = ((InfoMachine) buffer.get(node).value);
+							InfoMachine machine = (InfoMachine) buffer.get(node).value;
 							for (int i = 0; i < machine.tanks.size(); i++) {
 								InfoTank tank = machine.getOrSetTank(i);
 								outputStream.writeInt(tank.amount);
@@ -179,20 +177,22 @@ public class PacketHandler implements IPacketHandler {
 							break;
 						case slot:
 							boolean expired2 = false;
-							InfoMachine machine2 = ((InfoMachine) buffer.get(node).value);
+							InfoMachine machine2 = (InfoMachine) buffer.get(node).value;
 							for (int i = 0; i < machine2.slots.size(); i++) {
 								InfoSlot slot = machine2.getOrSetSlot(i);
 								outputStream.writeInt(slot.amount);
 								outputStream.writeInt(slot.damage);
 								outputStream.writeInt(slot.id);
-								if (slot.input)
+								if (slot.input) {
 									outputStream.writeInt(1);
-								else
+								} else {
 									outputStream.writeInt(0);
-								if (slot.output)
+								}
+								if (slot.output) {
 									outputStream.writeInt(1);
-								else
+								} else {
 									outputStream.writeInt(0);
+								}
 								if (slot.isExpired()) {
 									expired2 = true;
 								}
@@ -204,11 +204,12 @@ public class PacketHandler implements IPacketHandler {
 							}
 							break;
 						case name:
-							InfoMachine machine3 = ((InfoMachine) buffer.get(node).value);
+							InfoMachine machine3 = (InfoMachine) buffer.get(node).value;
 							String name = machine3.name;
 							if (name != null) {
-								for (int i = 0; i < name.length(); i++)
+								for (int i = 0; i < name.length(); i++) {
 									outputStream.writeInt(name.charAt(i));
+								}
 							}
 							TileEntityLogicNetworkNode tile2 = (TileEntityLogicNetworkNode) playerMP.worldObj.getBlockTileEntity(x, y, z);
 							ICommunicationNode nodeCom2 = te.getConnectionsOnSide(te.getExternalForgeDirection(ForgeDirection.NORTH)).getNode(node);
@@ -223,7 +224,7 @@ public class PacketHandler implements IPacketHandler {
 							tile.createRequestPacket(nodeCom, tile, new UTVariable(UTVariableType.coord));
 							break;
 						case interfaceTypes:
-							InfoMachine machine4 = ((InfoMachine) buffer.get(node).value);
+							InfoMachine machine4 = (InfoMachine) buffer.get(node).value;
 							if (machine4.interfaceTypes != null) {
 								for (InterfaceType interfaceType : machine4.interfaceTypes) {
 									outputStream.writeInt(interfaceType.ordinal());
@@ -250,7 +251,6 @@ public class PacketHandler implements IPacketHandler {
 				} catch (Exception ex) {
 				}
 			} else {
-				EntityClientPlayerMP client = (EntityClientPlayerMP) player;
 				GuiScreen screen = Minecraft.getMinecraft().currentScreen;
 				if (screen instanceof GuiLogicDisplay) {
 					GuiLogicDisplay guiLogicDisplay = (GuiLogicDisplay) screen;

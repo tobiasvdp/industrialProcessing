@@ -10,6 +10,22 @@ import net.minecraftforge.common.ForgeDirection;
 public class TElogicAnd extends TElogicNode {
 
 	@Override
+	public void ExtendedReceive(UTpacket packet) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public UTLogicType getLogicType() {
+		return UTLogicType.gate;
+	}
+
+	@Override
+	public String getName() {
+		return "And gate";
+	}
+
+	@Override
 	public ForgeDirection[] setConnectableInputSides() {
 		return new ForgeDirection[] { ForgeDirection.EAST, ForgeDirection.WEST };
 	}
@@ -21,38 +37,22 @@ public class TElogicAnd extends TElogicNode {
 
 	@Override
 	public void transition() {
-		if (getBuffer(ForgeDirection.EAST).get().ID == UTVariableType.bit && getBuffer(ForgeDirection.WEST).get().ID == UTVariableType.bit) {
-			System.out.println((getBuffer(ForgeDirection.EAST).get().value) + " " + (getBuffer(ForgeDirection.WEST).get().value));
-			if (((Boolean) getBuffer(ForgeDirection.EAST).get().value) == true && ((Boolean) getBuffer(ForgeDirection.WEST).get().value) == true) {
+		if (this.getBuffer(ForgeDirection.EAST).get().ID == UTVariableType.bit && this.getBuffer(ForgeDirection.WEST).get().ID == UTVariableType.bit) {
+			System.out.println(this.getBuffer(ForgeDirection.EAST).get().value + " " + this.getBuffer(ForgeDirection.WEST).get().value);
+			if ((Boolean) this.getBuffer(ForgeDirection.EAST).get().value == true && (Boolean) this.getBuffer(ForgeDirection.WEST).get().value == true) {
 				System.out.println("Valid");
-				if (getBuffer(ForgeDirection.NORTH).get().ID == UTVariableType.bit && ((Boolean) getBuffer(ForgeDirection.NORTH).get().value) == true) {
+				if (this.getBuffer(ForgeDirection.NORTH).get().ID == UTVariableType.bit && (Boolean) this.getBuffer(ForgeDirection.NORTH).get().value == true) {
 				} else {
-					createDataPacket(ForgeDirection.NORTH, new UTVariable(0, UTVariableType.bit, true));
+					this.createDataPacket(ForgeDirection.NORTH, new UTVariable(0, UTVariableType.bit, true));
 				}
 			} else {
 				System.out.println("Not valid");
-				if (getBuffer(ForgeDirection.NORTH).get().ID == UTVariableType.bit && ((Boolean) getBuffer(ForgeDirection.NORTH).get().value) == false) {
+				if (this.getBuffer(ForgeDirection.NORTH).get().ID == UTVariableType.bit && (Boolean) this.getBuffer(ForgeDirection.NORTH).get().value == false) {
 				} else {
-					createDataPacket(ForgeDirection.NORTH, new UTVariable(0, UTVariableType.bit, false));
+					this.createDataPacket(ForgeDirection.NORTH, new UTVariable(0, UTVariableType.bit, false));
 				}
 			}
 		}
 	}
-
-	@Override
-	public void ExtendedReceive(UTpacket packet) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public String getName() {
-		return "And gate";
-	}
-	
-    @Override
-    public UTLogicType getLogicType(){
-    	return UTLogicType.gate;
-    }
 
 }

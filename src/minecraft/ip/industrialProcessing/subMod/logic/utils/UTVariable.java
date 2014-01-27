@@ -14,6 +14,13 @@ public class UTVariable {
 		this.ttl = 20;
 	}
 
+	public UTVariable(UTVariable item) {
+		this.ID = item.ID;
+		this.value = item.value;
+		this.index = item.index;
+		this.ttl = item.ttl;
+	}
+
 	public UTVariable(UTVariableType ID) {
 		this.index = 0;
 		this.ID = ID;
@@ -21,25 +28,19 @@ public class UTVariable {
 		this.ttl = 20;
 	}
 
+	public boolean isExpired() {
+		if (this.ttl > 0) {
+			return false;
+		}
+		return true;
+	}
+
 	public boolean tick() {
-		if (ttl > 0){
+		if (this.ttl > 0) {
 			this.ttl--;
 			return true;
 		}
 		return false;
-	}
-
-	public boolean isExpired() {
-		if (this.ttl > 0)
-			return false;
-		return true;
-	}
-
-	public UTVariable(UTVariable item) {
-		ID = item.ID;
-		value = item.value;
-		index = item.index;
-		ttl = item.ttl;
 	}
 
 }

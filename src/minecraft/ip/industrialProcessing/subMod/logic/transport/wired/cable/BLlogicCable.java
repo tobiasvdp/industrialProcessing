@@ -29,8 +29,53 @@ public class BLlogicCable extends BlockMachineRendered {
 	}
 
 	@Override
+	public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
+
+	}
+
+	@Override
+	public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5, ItemStack par6ItemStack) {
+		TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
+		if (te == null) {
+			return true;
+		}
+		if (te instanceof ICommunicationTransport) {
+			ICommunicationTransport com = (ICommunicationTransport) te;
+			if (!com.hasBlockSide(par5)) {
+				com.addToBlockside(par5);
+			}
+		}
+		return false;
+	}
+
+	private boolean canSideStay(ForgeDirection dir, World par1World, int par2, int par3, int par4) {
+		if (par1World.getBlockId(par2 + dir.offsetX, par3 + dir.offsetY, par4 + dir.offsetZ) == 0) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
 	public TileEntity createNewTileEntity(World world) {
 		return new TElogicCable();
+	}
+
+	@Override
+	public int getRenderType() {
+		return ConfigLogic.getRDlogicCable();
+	}
+
+	@Override
+	public boolean isBlockReplaceable(World world, int x, int y, int z) {
+		if (world.getClosestPlayer(x, y, z, 10).getCurrentEquippedItem().getItem().itemID == ConfigLogic.getBLlogicCable()) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
+		return false;
 	}
 
 	@Override
@@ -47,15 +92,72 @@ public class BLlogicCable extends BlockMachineRendered {
 	}
 
 	@Override
+	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
+		TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
+		if (te != null) {
+			ICommunicationTransport com = (ICommunicationTransport) te;
+			boolean destroy = false;
+			int count = 0;
+			par1World.getBlockId(par2, par3, par4);
+			for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+				int side = dir.ordinal();
+				if (side == 0) {
+					side = 1;
+				} else if (side == 1) {
+					side = 0;
+				}
+				if (com.hasBlockSide(side)) {
+					if (!this.canSideStay(dir, par1World, par2, par3, par4)) {
+						destroy = true;
+						com.removeFromBlockside(side);
+						count++;
+					}
+				}
+			}
+			if (destroy) {
+				for (int i = 0; i < count; i++) {
+					this.dropBlockAsItem(par1World, par2, par3, par4, 0, 1);
+				}
+				System.out.println(com.getBlockSidesCount());
+				if (com.getBlockSidesCount() == 0) {
+					par1World.destroyBlock(par2, par3, par4, false);
+				}
+			}
+
+		}
+		super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
+
+	}
+
+	@Override
 	public boolean removeBlockByPlayer(World world, EntityPlayer player, int x, int y, int z) {
 		ICommunicationTransport com = (ICommunicationTransport) world.getBlockTileEntity(x, y, z);
 		com.isEnabled(false);
 		com.createRecheckPacket();
-		for(int i=0;i<com.getBlockSidesCount();i++){
+		for (int i = 0; i < com.getBlockSidesCount(); i++) {
 			this.dropBlockAsItem_do(world, x, y, z, new ItemStack(this));
 		}
 		super.removeBlockByPlayer(world, player, x, y, z);
 		return true;
+	}
+
+	@Override
+	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
+		TileEntity te = par1IBlockAccess.getBlockTileEntity(par2, par3, par4);
+		if (te == null) {
+			int meta = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
+			this.setBoundsByMetadata(meta, 0.0f, 0.0f, 0.0f, 1f, 0.0f, 1f);
+		} else {
+			if (te instanceof ICommunicationTransport) {
+				ICommunicationTransport com = (ICommunicationTransport) te;
+				if (com.hasMultipleBlockSides()) {
+					this.setBlockBounds(0, 0, 0, 1.0f, 0.0f, 1.0f);
+				} else {
+					int meta = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
+					this.setBoundsByMetadata(meta, 0.0f, 0.0f, 0.0f, 1f, 0.0f, 1f);
+				}
+			}
+		}
 	}
 
 	private void setBoundsByMetadata(int metadata, float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
@@ -83,105 +185,6 @@ public class BLlogicCable extends BlockMachineRendered {
 		}
 	}
 
-	@Override
-	public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
-
-	}
-
-	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
-		TileEntity te = par1IBlockAccess.getBlockTileEntity(par2, par3, par4);
-		if (te == null) {
-			int meta = (par1IBlockAccess.getBlockMetadata(par2, par3, par4));
-			setBoundsByMetadata(meta, 0.0f, 0.0f, 0.0f, 1f, 0.0f, 1f);
-		} else {
-			if (te instanceof ICommunicationTransport) {
-				ICommunicationTransport com = (ICommunicationTransport) te;
-				if (com.hasMultipleBlockSides()) {
-					setBlockBounds(0, 0, 0, 1.0f, 0.0f, 1.0f);
-				} else {
-					int meta = (par1IBlockAccess.getBlockMetadata(par2, par3, par4));
-					setBoundsByMetadata(meta, 0.0f, 0.0f, 0.0f, 1f, 0.0f, 1f);
-				}
-			}
-		}
-	}
-
-	@Override
-	public int getRenderType() {
-		return ConfigLogic.getRDlogicCable();
-	}
-
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
-		return false;
-	}
-
-	@Override
-	public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5, ItemStack par6ItemStack) {
-		TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
-		if (te == null)
-			return true;
-		if (te instanceof ICommunicationTransport) {
-			ICommunicationTransport com = (ICommunicationTransport) te;
-			if (!com.hasBlockSide(par5)) {
-				com.addToBlockside(par5);
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public boolean isBlockReplaceable(World world, int x, int y, int z) {
-		if(world.getClosestPlayer(x, y, z, 10).getCurrentEquippedItem().getItem().itemID == ConfigLogic.getBLlogicCable())
-			return true;
-		return false;
-	}
-	
-
-	@Override
-	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
-		TileEntity te = par1World.getBlockTileEntity(par2, par3, par4);
-		if (te != null) {
-			ICommunicationTransport com = (ICommunicationTransport) te;
-			boolean destroy = false;
-			int count = 0;
-			int id = par1World.getBlockId(par2, par3, par4);
-			for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-				int side = dir.ordinal();
-				if (side == 0)
-					side = 1;
-				else if (side == 1)
-					side = 0;
-				if (com.hasBlockSide(side)) {
-					if (!canSideStay(dir, par1World, par2, par3, par4)) {
-						destroy = true;
-						com.removeFromBlockside(side);
-						count++;
-					}
-				}
-			}
-			if (destroy) {
-				for (int i = 0; i < count; i++) {
-					this.dropBlockAsItem(par1World, par2, par3, par4, 0, 1);
-				}
-				System.out.println(com.getBlockSidesCount());
-				if (com.getBlockSidesCount() == 0) {
-					par1World.destroyBlock(par2, par3, par4, false);
-				}
-			}
-
-		}
-		super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
-
-	}
-
-	private boolean canSideStay(ForgeDirection dir, World par1World, int par2, int par3, int par4) {
-		if (par1World.getBlockId(par2 + dir.offsetX, par3 + dir.offsetY, par4 + dir.offsetZ) == 0)
-			return false;
-		return true;
-	}
-	
 	@Override
 	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
 		ICommunication te = (ICommunication) par1World.getBlockTileEntity(par2, par3, par4);

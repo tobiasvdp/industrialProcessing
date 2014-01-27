@@ -5,8 +5,20 @@ import ip.industrialProcessing.subMod.logic.utils.UTpacket;
 import net.minecraftforge.common.ForgeDirection;
 
 public class TElogicSwitchBox extends TElogicNode {
-	public TElogicSwitchBox(){
+	public TElogicSwitchBox() {
 		super();
+	}
+
+	@Override
+	public void ExtendedReceive(UTpacket packet) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
@@ -24,18 +36,6 @@ public class TElogicSwitchBox extends TElogicNode {
 	@Override
 	public void transition() {
 		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void ExtendedReceive(UTpacket packet) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

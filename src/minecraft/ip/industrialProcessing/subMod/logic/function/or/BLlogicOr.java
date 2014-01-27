@@ -18,6 +18,7 @@ public class BLlogicOr extends blockLogic {
 	public TileEntity createNewTileEntity(World world) {
 		return new TElogicOr();
 	}
+
 	@Override
 	public int getRenderType() {
 		return ConfigLogic.getRDlogicOr();

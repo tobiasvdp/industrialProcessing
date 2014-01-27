@@ -3,7 +3,6 @@ package ip.industrialProcessing.subMod.logic.transport.wired.switchbox;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.subMod.logic.IPLogic;
 import ip.industrialProcessing.subMod.logic.config.ConfigLogic;
-import ip.industrialProcessing.subMod.logic.transport.ICommunicationNode;
 
 import java.util.List;
 import java.util.Random;
@@ -27,13 +26,53 @@ public class BLlogicSwitchBox extends BlockMachineRendered {
 	}
 
 	@Override
+	public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
+		this.setBlockBoundsBasedOnState(par1World, par2, par3, par4);
+		super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
+	}
+
+	@Override
 	public TileEntity createNewTileEntity(World world) {
 		return new TElogicSwitchBox();
 	}
 
 	@Override
+	public int getRenderType() {
+		return ConfigLogic.getRDlogicSwitchBox();
+	}
+
+	@Override
+	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
+		par1World.getBlockTileEntity(par2, par3, par4);
+
+		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+
+		}
+		return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer, par6, par7, par8, par9);
+	}
+
+	@Override
+	public int onBlockPlaced(World par1World, int par2, int par3, int par4, int par5, float par6, float par7, float par8, int par9) {
+		super.onBlockPlaced(par1World, par2, par3, par4, par5, par6, par7, par8, par9);
+		return par5;
+	}
+
+	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
-		ICommunicationNode com = (ICommunicationNode) par1World.getBlockTileEntity(par2, par3, par4);
+		par1World.getBlockTileEntity(par2, par3, par4);
+	}
+
+	@Override
+	public boolean removeBlockByPlayer(World world, EntityPlayer player, int x, int y, int z) {
+		world.getBlockTileEntity(x, y, z);
+		super.removeBlockByPlayer(world, player, x, y, z);
+		return true;
+	}
+
+	@Override
+	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
+		int meta = par1IBlockAccess.getBlockMetadata(par2, par3, par4);
+		this.setBoundsByMetadata(meta, 0.2f, 0.0f, 0.2f, 0.8f, 0.4f, 0.8f);
 	}
 
 	private void setBoundsByMetadata(int metadata, float minX, float minY, float minZ, float maxX, float maxY, float maxZ) {
@@ -45,13 +84,13 @@ public class BLlogicSwitchBox extends BlockMachineRendered {
 			this.setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
 			break;
 		case 2:
-			this.setBlockBounds(minX, minZ,1.0f-maxY , maxX, maxZ,1.0f-minY );
+			this.setBlockBounds(minX, minZ, 1.0f - maxY, maxX, maxZ, 1.0f - minY);
 			break;
 		case 3:
-			this.setBlockBounds(minX, minZ,minY , maxX, maxZ,maxY );
+			this.setBlockBounds(minX, minZ, minY, maxX, maxZ, maxY);
 			break;
 		case 4:
-			this.setBlockBounds(1.0f-maxY, minX, minZ, 1.0f-minY, maxX, maxZ);
+			this.setBlockBounds(1.0f - maxY, minX, minZ, 1.0f - minY, maxX, maxZ);
 			break;
 		case 5:
 			this.setBlockBounds(minY, minX, minZ, maxY, maxX, maxZ);
@@ -62,55 +101,9 @@ public class BLlogicSwitchBox extends BlockMachineRendered {
 	}
 
 	@Override
-	public int onBlockPlaced(World par1World, int par2, int par3, int par4, int par5, float par6, float par7, float par8, int par9) {
-		super.onBlockPlaced(par1World, par2, par3, par4, par5, par6, par7, par8, par9);
-		return par5;
-	}
-	
-	@Override
-    public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity)
-    {
-        this.setBlockBoundsBasedOnState(par1World, par2, par3, par4);
-        super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
-    }
-	
-	@Override
-    public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
-    {
-            int meta = (par1IBlockAccess.getBlockMetadata(par2, par3, par4));
-            setBoundsByMetadata(meta, 0.2f, 0.0f, 0.2f, 0.8f, 0.4f, 0.8f);
-    }
-
-	@Override
-	public boolean removeBlockByPlayer(World world, EntityPlayer player, int x, int y, int z) {
-		ICommunicationNode com = (ICommunicationNode) world.getBlockTileEntity(x, y, z);
-		super.removeBlockByPlayer(world, player, x, y, z);
-		return true;
-	}
-
-	@Override
-	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
-		ICommunicationNode com = (ICommunicationNode) par1World.getBlockTileEntity(par2, par3, par4);
-		
-		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-
-		}
-		return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer, par6, par7, par8, par9);
-	}
-
-	@Override
-	public int getRenderType() {
-		return ConfigLogic.getRDlogicSwitchBox();
-	}
-	
-	@Override
 	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
-		System.out.println("ticked " +par1World +  " " + par1World.getTotalWorldTime());
+		System.out.println("ticked " + par1World + " " + par1World.getTotalWorldTime());
 		super.updateTick(par1World, par2, par3, par4, par5Random);
 	}
-	
-	
-
-
 
 }

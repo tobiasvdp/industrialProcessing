@@ -1,7 +1,5 @@
 package ip.industrialProcessing.subMod.logic.network.display;
 
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.fluids.FluidTankInfo;
 import ip.industrialProcessing.gui.container.syncing.info.IExpirable;
 import ip.industrialProcessing.gui.container.syncing.info.InfoMachine;
 import ip.industrialProcessing.gui.container.syncing.info.InfoSlot;
@@ -17,10 +15,22 @@ import ip.industrialProcessing.subMod.logic.utils.UTVariable;
 import ip.industrialProcessing.subMod.logic.utils.UTVariableType;
 import ip.industrialProcessing.subMod.logic.utils.UTlogicNodeContainer;
 import ip.industrialProcessing.utils.working.IWorker;
+import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.fluids.FluidTankInfo;
 
 public class TileEntityLogicDisplay extends TileEntityLogicNetworkNode {
 	boolean tick = true;
 	int suspendCount = 0;
+
+	@Override
+	public UTVariable[] getData(UTVariableType type) {
+		return null;
+	}
+
+	@Override
+	public String getName() {
+		return "Display";
+	}
 
 	@Override
 	public ForgeDirection[] setConnectableInputSides() {
@@ -33,17 +43,12 @@ public class TileEntityLogicDisplay extends TileEntityLogicNetworkNode {
 	}
 
 	@Override
-	public void transition() {
-
-	}
-
-	@Override
 	public void setData(UTVariable[] data, ICommunicationNode node) {
-		for (ForgeDirection dir : getConnectableInputSides()) {
-			UTlogicNodeContainer container = getConnectionsOnSide(getExternalForgeDirection(dir));
+		for (ForgeDirection dir : this.getConnectableInputSides()) {
+			UTlogicNodeContainer container = this.getConnectionsOnSide(this.getExternalForgeDirection(dir));
 			int index = container.getIndex(node);
 			if (index != -1) {
-				UTBuffer buffer = getBuffer(dir);
+				UTBuffer buffer = this.getBuffer(dir);
 				for (UTVariable var : data) {
 					System.out.println("got data " + var.ID);
 					if (var.ID == UTVariableType.power) {
@@ -112,10 +117,12 @@ public class TileEntityLogicDisplay extends TileEntityLogicNetworkNode {
 									slot.amount = info.stack.stackSize;
 									slot.damage = info.stack.getItemDamage();
 									slot.id = info.stack.itemID;
-									if (info.input)
+									if (info.input) {
 										slot.input = true;
-									if (info.output)
+									}
+									if (info.output) {
 										slot.output = true;
+									}
 
 								} else {
 									slot.amount = 0;
@@ -135,27 +142,34 @@ public class TileEntityLogicDisplay extends TileEntityLogicNetworkNode {
 	}
 
 	@Override
+	public void transition() {
+
+	}
+
+	@Override
 	public void updateEntity() {
 		super.updateEntity();
-		if (!worldObj.isRemote) {
+		if (!this.worldObj.isRemote) {
 			if (this.tick) {
 				boolean tick = false;
 				for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-					UTBuffer buffer = getBuffer(dir);
+					UTBuffer buffer = this.getBuffer(dir);
 					for (int i = 0; i < buffer.size(); i++) {
 						UTVariable var = buffer.get(i);
-						if (var.tick())
+						if (var.tick()) {
 							tick = true;
+						}
 						if (var.value != null && var.value instanceof IExpirable) {
-							if (((IExpirable) var.value).tick())
+							if (((IExpirable) var.value).tick()) {
 								tick = true;
+							}
 						}
 					}
 				}
 				if (!tick) {
-					suspendCount++;
-					if (suspendCount == 100) {
-						suspendCount = 0;
+					this.suspendCount++;
+					if (this.suspendCount == 100) {
+						this.suspendCount = 0;
 						this.tick = false;
 						System.out.println("suspended");
 					}
@@ -164,15 +178,5 @@ public class TileEntityLogicDisplay extends TileEntityLogicNetworkNode {
 				System.out.println("Ticked");
 			}
 		}
-	}
-
-	@Override
-	public UTVariable[] getData(UTVariableType type) {
-		return null;
-	}
-
-	@Override
-	public String getName() {
-		return "Display";
 	}
 }

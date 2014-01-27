@@ -9,44 +9,31 @@ public class UTBuffer {
 
 	public UTBuffer(UTBufferType type) {
 		this.type = type;
-		buffer = new ArrayList<UTVariable>();
+		this.buffer = new ArrayList<UTVariable>();
+	}
+
+	public void add(int i, UTVariableType type, Object object) {
+		this.buffer.add(new UTVariable(i, type, object));
 	}
 
 	public void add(UTVariableType ID) {
-			buffer.add(new UTVariable(ID));
+		this.buffer.add(new UTVariable(ID));
 	}
 
-	public void setType(UTBufferType type) {
-		this.type = type;
-		buffer.clear();
-	}
-
-	public void put(int index,int index1, UTVariableType ID, Object value) {
-		if (isValidType(value)) {
-			buffer.get(index).index = index1;
-			buffer.get(index).value = value;
-			buffer.get(index).ID = ID;
-		}
+	public void clear() {
+		this.buffer.clear();
 	}
 
 	public UTVariable get() {
-		return buffer.get(0);
+		return this.buffer.get(0);
 	}
 
 	public UTVariable get(int i) {
-		return buffer.get(i);
-	}
-
-	public int size() {
-		return buffer.size();
-	}
-
-	public void put(UTVariable item) {
-		buffer.set(0,new UTVariable(item));
+		return this.buffer.get(i);
 	}
 
 	public boolean isValidType(Object data) {
-		switch (type) {
+		switch (this.type) {
 		case Bit:
 			if (data instanceof Boolean) {
 				return true;
@@ -65,11 +52,24 @@ public class UTBuffer {
 		return false;
 	}
 
-	public void add(int i, UTVariableType type, Object object) {
-		buffer.add(new UTVariable(i,type,object));
+	public void put(int index, int index1, UTVariableType ID, Object value) {
+		if (this.isValidType(value)) {
+			this.buffer.get(index).index = index1;
+			this.buffer.get(index).value = value;
+			this.buffer.get(index).ID = ID;
+		}
 	}
 
-	public void clear() {
-		buffer.clear();
+	public void put(UTVariable item) {
+		this.buffer.set(0, new UTVariable(item));
+	}
+
+	public void setType(UTBufferType type) {
+		this.type = type;
+		this.buffer.clear();
+	}
+
+	public int size() {
+		return this.buffer.size();
 	}
 }

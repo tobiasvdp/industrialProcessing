@@ -1,5 +1,5 @@
 package ip.industrialProcessing.subMod.logic.utils;
 
-public enum UTBufferType{
+public enum UTBufferType {
 	Bit, Byte, Integer, collection;
 }

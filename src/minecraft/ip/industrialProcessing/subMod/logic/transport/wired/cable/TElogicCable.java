@@ -7,13 +7,13 @@ import ip.industrialProcessing.subMod.logic.utils.UTpacket;
 public class TElogicCable extends TElogicTransport {
 
 	@Override
-	public UTBusType getBusType() {
-		return UTBusType.cable;
+	public void ExtendedReceive(UTpacket packet) {
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
-	public void ExtendedReceive(UTpacket packet) {
-		// TODO Auto-generated method stub
-		
+	public UTBusType getBusType() {
+		return UTBusType.cable;
 	}
 }

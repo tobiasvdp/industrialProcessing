@@ -8,7 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class BLlogicAnd  extends blockLogic {
+public class BLlogicAnd extends blockLogic {
 
 	public BLlogicAnd() {
 		super(ConfigLogic.getBLlogicAnd(), Material.iron, 5.0f, Block.soundMetalFootstep, "BLlogicAnd", IPLogic.tabLogic);
@@ -18,9 +18,10 @@ public class BLlogicAnd  extends blockLogic {
 	public TileEntity createNewTileEntity(World world) {
 		return new TElogicAnd();
 	}
+
 	@Override
 	public int getRenderType() {
 		return ConfigLogic.getRDlogicAnd();
 	}
-	
+
 }
