@@ -14,8 +14,8 @@ public class SlotLayoutTank extends SlotLayout{
 		this.rect = rect;
 		this.layout = SlotLayoutType.horizontal;
 		slots = new SlotBase[2];
-		slots[0] = new SlotBase(null, startIndex++, 22+1, 0+1);
-		slots[1] = new SlotBase(null, startIndex++, 22+1, 34+1);
+		slots[0] = new SlotBase(null, startIndex++, 19+1, 0+1);
+		slots[1] = new SlotBase(null, startIndex++, 19+1, 34+1);
 		inputOrOuput = bool;
 	}
 }
