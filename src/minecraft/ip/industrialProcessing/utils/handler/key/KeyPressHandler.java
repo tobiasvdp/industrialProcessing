@@ -21,7 +21,7 @@ public class KeyPressHandler extends KeyHandler {
     static {
 	keyBindings = new KeyBinding[1];
 	keyBindingsRepeat = new boolean[1];
-	keyBindings[0] = new KeyBinding("Up (in vehicle)", Keyboard.KEY_O);
+	keyBindings[0] = new KeyBinding("Toggle tool on/off (IP)", Keyboard.KEY_O);
 	keyBindingsRepeat[0] = false;
     }
 
@@ -44,7 +44,7 @@ public class KeyPressHandler extends KeyHandler {
     @Override
     public void keyUp(EnumSet<TickType> types, KeyBinding kb, boolean tickEnd) {
 	if (keyHasBeenPressed) {
-	    if (Minecraft.getMinecraft().thePlayer.isRiding()) {
+	    if (Minecraft.getMinecraft() != null && Minecraft.getMinecraft().thePlayer != null && Minecraft.getMinecraft().thePlayer.isRiding()) {
 		if (Minecraft.getMinecraft().thePlayer.ridingEntity instanceof EntityBobcatMiner) {
 		    ((EntityBobcatMiner) Minecraft.getMinecraft().thePlayer.ridingEntity).toggleMining(Minecraft.getMinecraft().thePlayer);
 		}

@@ -31,7 +31,7 @@ public class RendererEntity extends Render{
             texturemanager.func_110577_a(texture);
         }
 		GL11.glTranslatef((float)( d0), (float)( d1+0.5), (float) (d2));
-		GL11.glRotatef((-entity.rotationYaw%360), 0, 1, 0);
+		GL11.glRotatef((-entity.rotationYaw), 0, 1, 0);
 		model.renderWorld(entity, d0, d1, d2, f, f1);
 		GL11.glPopMatrix();
 	}

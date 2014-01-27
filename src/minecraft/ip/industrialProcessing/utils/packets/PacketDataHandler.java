@@ -13,7 +13,7 @@ public class PacketDataHandler {
 	World world = ((Entity) player).worldObj;
 	if (world != null && !world.isRemote && packet != null) {
 	    Entity entity = world.getEntityByID(packet.entityId);
-	    entity.setPositionAndRotation(packet.posX, packet.posY, packet.posZ, packet.rotationPitch, packet.rotationYaw);
+	    entity.setPositionAndRotation(packet.posX, packet.posY, packet.posZ, packet.rotationYaw,packet.rotationPitch);
 	}
     }
 }
