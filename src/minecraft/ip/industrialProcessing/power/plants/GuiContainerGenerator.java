@@ -7,6 +7,7 @@ import ip.industrialProcessing.gui3.framework.UIRoot;
 import ip.industrialProcessing.gui3.framework.controls.Decorator;
 import ip.industrialProcessing.gui3.framework.controls.ProgressBar;
 import ip.industrialProcessing.gui3.framework.controls.SlotControl;
+import ip.industrialProcessing.gui3.framework.controls.TankControl;
 import ip.industrialProcessing.gui3.framework.controls.TextBlock;
 import ip.industrialProcessing.gui3.framework.custom.TankWithSlotsControl;
 import ip.industrialProcessing.gui3.framework.panels.MouseButton;
@@ -34,17 +35,16 @@ public class GuiContainerGenerator extends GuiContainerMachine {
 	this.generator = entity;
 
 	TextureReference texture = new TextureReference(new Size(256, 256), INamepace.TEXTURE_DOMAIN, "textures/gui/Generator.png");
+	TextureReference worker = new TextureReference(new Size(256, 256), INamepace.TEXTURE_DOMAIN, "textures/gui/Worker.png");
 
 	StackPanel stack = new StackPanel();
 
 	stack.orientation = Orientation.VERTICAL;
 
 	Decorator machinePanel = new Decorator(texture, 7);
-	StackPanel stuff = new StackPanel();
-	TankWithSlotsControl tank = new TankWithSlotsControl();
-	tank.width = 36;
-	tank.height = 52;
-	stuff.addChild(tank); 
+	StackPanel stuff = new StackPanel(); 
+	stuff.addChild(TankWithSlotsControl.createTankWithSlots()); 
+	stuff.addChild(TankControl.createTank());
 	stuff.addChild(ProgressBar.createTemperature());
 	stuff.addChild(ProgressBar.createVertical1());
 	stuff.addChild(ProgressBar.createVertical2());
@@ -55,10 +55,11 @@ public class GuiContainerGenerator extends GuiContainerMachine {
 	hor.addChild(ProgressBar.createHorizontal1());
 	hor.addChild(ProgressBar.createHorizontal2());
 	hor.addChild(ProgressBar.createHorizontal3());
+	hor.addChild(ProgressBar.createWorker(worker));
 	stuff.addChild(hor);
 	
 	machinePanel.setChild(stuff);
-	stack.addChild(machinePanel);
+	stack.addChild(machinePanel); 
 	Decorator inventoryPanel = new Decorator(texture, 7);
 	stack.addChild(inventoryPanel);
 	TextBlock label = new TextBlock("Hello World", Float.NaN, Float.NaN, 0xFFFFFF);
@@ -68,11 +69,10 @@ public class GuiContainerGenerator extends GuiContainerMachine {
 	StackPanel child = new StackPanel();
 	child.orientation = Orientation.HORIZONTAL;
 	for (int i = 0; i < 9; i++) {
-	    SlotControl childPanel = new SlotControl();
+	    SlotControl childPanel = SlotControl.createSlot();
 	    child.addChild(childPanel);
 	}
-	hotbarPanel.setChild(child);
-
+	hotbarPanel.setChild(child); 
 	stack.verticalAlign = Alignment.MIN;
 	stack.horizontalAlign = Alignment.STRETCH;
 	this.layout = new UIRoot(stack);

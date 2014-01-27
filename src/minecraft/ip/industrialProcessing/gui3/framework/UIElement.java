@@ -92,7 +92,7 @@ public abstract class UIElement {
 	Size size = arrangeOverride(rect.getSize());
 
 	float width = Math.min(size.width, rect.width);
-	float height = Math.min(size.height, rect.width);
+	float height = Math.min(size.height, rect.height);
 	this.y = rect.y;
 
 	switch (this.horizontalAlign) {

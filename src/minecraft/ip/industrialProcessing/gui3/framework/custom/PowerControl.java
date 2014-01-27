@@ -1,5 +1,6 @@
 package ip.industrialProcessing.gui3.framework.custom;
 
+import ip.industrialProcessing.gui3.framework.controls.ProgressBar;
 import ip.industrialProcessing.gui3.framework.controls.SlotControl;
 import ip.industrialProcessing.gui3.framework.controls.TankControl;
 import ip.industrialProcessing.gui3.framework.controls.UserControl;
@@ -10,33 +11,24 @@ import ip.industrialProcessing.gui3.framework.panels.Orientation;
 import ip.industrialProcessing.gui3.framework.panels.SizeMode;
 import ip.industrialProcessing.gui3.framework.panels.StackPanel;
 
-public class TankWithSlotsControl extends UserControl {
+public class PowerControl extends UserControl {
 
-    public static TankWithSlotsControl createTankWithSlots(){
-	return new TankWithSlotsControl();
+    public static PowerControl createPowerWithSlots(){
+	return new PowerControl();
     }
     
-    public TankWithSlotsControl() {
+    public PowerControl() {
 	width = Float.NaN;
 	height = Float.NaN;
 	StackPanel stack = new StackPanel();
 	stack.orientation = Orientation.HORIZONTAL;
 
-	TankControl tank = TankControl.createTank();
+	SlotControl tank = SlotControl.createSlot();
 	stack.addChild(tank); 
+	 
+	ProgressBar progress = ProgressBar.createHorizontal2();
+	stack.addChild(progress);
 	
-	GridPanel grid = new GridPanel();
-	grid.columns.add(new GridSize(18, SizeMode.ABSOLUTE));
-	grid.rows.add(new GridSize(18, SizeMode.ABSOLUTE));
-	grid.rows.add(new GridSize(1, SizeMode.RELATIVE));
-	grid.rows.add(new GridSize(18, SizeMode.ABSOLUTE));
-
-	SlotControl slotInput = SlotControl.createSlot();
-	SlotControl slotOutput = SlotControl.createSlot();
-	grid.children.add(new GridCell(0, 0, slotInput));
-	grid.children.add(new GridCell(2, 0, slotOutput));
-	
-	stack.addChild(grid); 
 	this.child = stack;
     }
 }

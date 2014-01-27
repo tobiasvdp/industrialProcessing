@@ -1,6 +1,7 @@
 package ip.industrialProcessing.gui3.framework.controls;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.gui3.framework.Alignment;
 import ip.industrialProcessing.gui3.framework.Rect;
 import ip.industrialProcessing.gui3.framework.Size;
 import ip.industrialProcessing.gui3.framework.Thickness;
@@ -85,10 +86,10 @@ public class ProgressBar extends Control {
 	return bar;
     }
 
-    public static ProgressBar createWork(TextureReference texture) {
-	ProgressBar bar = new ProgressBar(texture, DEFAULT_WORKER_VERTICAL_BACKGROUND, DEFAULT_WORKER_VERTICAL_FOREGROUND, Orientation.VERTICAL, DEFAULT_WORKER_THICKNESS);
-	bar.width = 15;
-	bar.height = 54;
+    public static ProgressBar createWorker(TextureReference texture) {
+	ProgressBar bar = new ProgressBar(texture, DEFAULT_WORKER_VERTICAL_BACKGROUND, DEFAULT_WORKER_VERTICAL_FOREGROUND, Orientation.HORIZONTAL, DEFAULT_WORKER_THICKNESS);
+	bar.width = 24;
+	bar.height = 15;
 	bar.tooltip = "%.2f/%.2f";
 	return bar;
     }
@@ -99,7 +100,7 @@ public class ProgressBar extends Control {
     private Rect overlayRegion;
     private Orientation orientation = Orientation.HORIZONTAL;
     private Thickness backgroundThickness;
-    public float value = 0;
+    public float value = 0.5f;
     public float maxValue = 1;
     public String tooltip = "%.2f/%.2f";
 
@@ -109,6 +110,8 @@ public class ProgressBar extends Control {
 	this.texture = texture;
 	this.orientation = orientation;
 	this.backgroundThickness = backgroundThickness;
+	this.horizontalAlign = Alignment.CENTER;
+	this.verticalAlign = Alignment.CENTER;
     }
 
     @Override
