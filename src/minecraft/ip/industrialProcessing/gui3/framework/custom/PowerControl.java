@@ -23,10 +23,10 @@ public class PowerControl extends UserControl {
 	StackPanel stack = new StackPanel();
 	stack.orientation = Orientation.HORIZONTAL;
 
-	SlotControl tank = SlotControl.createSlot();
+	SlotControl tank = SlotControl.createPowerSlot();
 	stack.addChild(tank); 
 	 
-	ProgressBar progress = ProgressBar.createHorizontal2();
+	ProgressBar progress = ProgressBar.createHorizontal1();
 	stack.addChild(progress);
 	
 	this.child = stack;

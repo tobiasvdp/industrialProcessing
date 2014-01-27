@@ -31,8 +31,8 @@ public class TankWithSlotsControl extends UserControl {
 	grid.rows.add(new GridSize(1, SizeMode.RELATIVE));
 	grid.rows.add(new GridSize(18, SizeMode.ABSOLUTE));
 
-	SlotControl slotInput = SlotControl.createSlot();
-	SlotControl slotOutput = SlotControl.createSlot();
+	SlotControl slotInput = SlotControl.createBucketSlot();
+	SlotControl slotOutput = SlotControl.createBucketSlot();
 	grid.children.add(new GridCell(0, 0, slotInput));
 	grid.children.add(new GridCell(2, 0, slotOutput));
 	

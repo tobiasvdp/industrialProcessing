@@ -1,6 +1,7 @@
 package ip.industrialProcessing.gui3.framework.controls;
 
 import ip.industrialProcessing.gui3.framework.Rect;
+import ip.industrialProcessing.gui3.framework.UIElement;
 import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
 import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
 
@@ -34,6 +35,6 @@ public class ImageTile extends Control {
 	float v = 1f / columns;
 
 	renderer.drawTexture(size, new Rect(u * column, v * row, u, v), this.texture);
-    }
+    } 
 
 }
