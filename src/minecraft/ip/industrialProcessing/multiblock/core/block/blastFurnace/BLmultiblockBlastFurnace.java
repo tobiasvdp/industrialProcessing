@@ -8,12 +8,27 @@ import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
+import ip.industrialProcessing.gui.GuiLayout;
+import ip.industrialProcessing.gui.IGuiLayout;
+import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
+import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
 import ip.industrialProcessing.multiblock.core.BlockMultiblockCore;
 import ip.industrialProcessing.multiblock.recipes.IRecipeMultiblock;
 import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 
-public class BLmultiblockBlastFurnace extends BlockMultiblockCore implements IRecipeMultiblock{
+public class BLmultiblockBlastFurnace extends BlockMultiblockCore implements IRecipeMultiblock, IGuiLayout{
     Icon[] icons = new Icon[6];
+    
+    private static GuiLayout layout;
+    static{
+    	layout = new GuiLayout();
+    	layout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.vertical, 2);
+    	layout.addLayoutPanel(GuiLayoutPanelType.tankInput);
+    	layout.addLayoutPanel(GuiLayoutPanelType.tankOutput);
+    	layout.addLayoutPanel(GuiLayoutPanelType.tankOutput);
+    	layout.addLayoutPanel(GuiLayoutPanelType.tankOutput);
+    	layout.addLayoutPanel(GuiLayoutPanelType.worker);
+    }
 
     public BLmultiblockBlastFurnace() {
 	super(ConfigMachineBlocks.getBLmultiblockBlastFurnace(), "BLmultiblockBlastFurnace", ISetupCreativeTabs.tabMultiblocks);
@@ -47,5 +62,10 @@ public class BLmultiblockBlastFurnace extends BlockMultiblockCore implements IRe
 	@Override
 	public RecipesMultiblock getRecipes() {
 		return TEmultiblockBlastFurnace.recipes;
+	}
+
+	@Override
+	public GuiLayout getGuiLayout() {
+		return layout;
 	}
 }
