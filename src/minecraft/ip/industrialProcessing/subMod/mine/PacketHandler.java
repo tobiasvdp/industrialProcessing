@@ -2,6 +2,7 @@ package ip.industrialProcessing.subMod.mine;
 
 import ip.industrialProcessing.utils.BlockBreaker;
 import ip.industrialProcessing.utils.packets.PacketDataHandler;
+import ip.industrialProcessing.utils.packets.PacketIP000;
 import ip.industrialProcessing.utils.packets.PacketIP001EntityLocationAndRotation;
 
 import java.io.ByteArrayInputStream;
@@ -42,7 +43,7 @@ public class PacketHandler implements IPacketHandler {
 
 		}
 		if(packet.channel.equals(move)){
-			PacketDataHandler.handle001EntityLocationAndRotation(player, (PacketIP001EntityLocationAndRotation) packet);
+			PacketDataHandler.handle001EntityLocationAndRotation(player, PacketIP001EntityLocationAndRotation.getPacketFromCustom250packet(packet));
 		}
 	}
 
