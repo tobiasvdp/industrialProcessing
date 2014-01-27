@@ -6,6 +6,7 @@ import net.minecraft.util.ResourceLocation;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.gui3.framework.Rect;
 import ip.industrialProcessing.gui3.framework.Size;
+import ip.industrialProcessing.gui3.framework.Thickness;
 import ip.industrialProcessing.gui3.framework.UIElement;
 import ip.industrialProcessing.gui3.framework.panels.MouseButton;
 import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
@@ -54,7 +55,7 @@ public class Button extends UIElement {
 
 	float cornerSize = Math.min(rect.width / 4, Math.min(rect.height / 4, 4));
 	// TODO: support for tilable NineGrid?
-	renderer.drawNineGrid(rect, new Size(cornerSize, cornerSize), new Rect(uMin, vMin, uSize, vSize), this.texture);
+	renderer.drawNineGrid(rect, new Thickness(cornerSize, cornerSize, cornerSize, cornerSize), new Rect(uMin, vMin, uSize, vSize), this.texture);
     }
 
     @Override

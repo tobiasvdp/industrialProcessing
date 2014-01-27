@@ -3,262 +3,237 @@ package ip.industrialProcessing.gui3.framework.panels;
 import ip.industrialProcessing.gui3.framework.Rect;
 import ip.industrialProcessing.gui3.framework.Size;
 import ip.industrialProcessing.gui3.framework.UIElement;
+import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
-public class GridPanel extends Panel {
-    public ArrayList<GridSize> sizes = new ArrayList<GridSize>();
-    public Orientation orientation = Orientation.HORIZONTAL;
-    public StackMode mode = StackMode.STRETCH;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
+
+import cpw.mods.fml.common.asm.transformers.MarkerTransformer;
+
+public class GridPanel extends UIElement {
+    public ArrayList<GridSize> rows = new ArrayList<GridSize>();
+    public ArrayList<GridSize> columns = new ArrayList<GridSize>();
+
+    public ArrayList<GridCell> children = new ArrayList<GridCell>();
 
     @Override
     protected Size measureOverride(Size maxSize) {
-	if (getChildren().isEmpty())
-	    return new Size(0, 0);
-	switch (orientation) {
-	case HORIZONTAL:
-	default:
-	    return measureHorizontal(maxSize);
-	case VERTICAL:
-	    return measureVertical(maxSize);
+	float[] columnHeights = new float[columns.size()];
+	float[] rowWidths = new float[rows.size()];
+	int widestRow = 0;
+	int highestColumn = 0;
+	float[] rowMaxSizes = makeAbsolute(maxSize.height, rows);
+	float[] columnMaxSizes = makeAbsolute(maxSize.width, columns);
+	float[] rowMinSizes = getAbsolute(rows);
+	float[] columnMinSizes = getAbsolute(columns);
+
+	boolean[][] usedCells = new boolean[rows.size()][columns.size()];
+	for (GridCell child : children) {
+	    if (child.content != null) {
+		int row = clamp(child.row, 0, rows.size() - 1);
+		int maxRow = clamp(child.row + child.rowSpan - 1, 0, rows.size() - 1);
+		int column = clamp(child.column, 0, columns.size() - 1);
+		int maxColumn = clamp(child.column + child.columnSpan - 1, 0, columns.size() - 1);
+
+		float minWidth = 0;
+		float minHeight = 0;
+		float maxWidth = 0;
+		float maxHeight = 0;
+		for (int i = row; i <= maxRow; i++) {
+		    maxHeight += rowMaxSizes[i];
+		    minHeight += rowMinSizes[i];
+		}
+		for (int i = column; i <= maxColumn; i++) {
+		    maxWidth += columnMaxSizes[i];
+		    minWidth += columnMinSizes[i];
+		}
+
+		for (int i = row; i <= maxRow; i++) {
+		    for (int j = column; j <= maxColumn; j++) {
+			usedCells[i][j] = true;
+		    }
+		}
+		Size size = new Size(maxWidth, maxHeight);
+		size = child.content.measure(size);
+		for (int i = row; i <= maxRow; i++) {
+		    float width = (rowWidths[i] += Math.max(minWidth, size.width));
+		    if (width > rowWidths[widestRow])
+			widestRow = i;
+		}
+		for (int i = column; i <= maxColumn; i++) {
+		    float height = columnHeights[i] += Math.max(minHeight, size.height);
+		    if (height > columnHeights[highestColumn])
+			highestColumn = i;
+		}
+	    }
 	}
+
+	for (int i = 0; i < rows.size(); i++) {
+	    for (int j = 0; j < columns.size(); j++) {
+		float cellWidth = columnMinSizes[j];
+		float cellHeight = rowMinSizes[i];
+		if (!usedCells[i][j]) {
+		    if (cellWidth > 0) {
+			float width = (rowWidths[i] += cellWidth);
+			if (width > rowWidths[widestRow])
+			    widestRow = i;
+		    }
+		    if (cellHeight > 0) {
+			float height = columnHeights[i] += cellHeight;
+			if (height > columnHeights[highestColumn])
+			    highestColumn = i;
+		    }
+		}
+	    }
+	}
+
+	return new Size(rowWidths[widestRow], columnHeights[highestColumn]);
+    }
+
+    private float[] getAbsolute(ArrayList<GridSize> references) { 
+	float[] sizes = new float[references.size()]; 
+	for (int i = 0; i < sizes.length; i++) {
+	    GridSize size = references.get(i);
+	    switch (size.mode) {
+	    case ABSOLUTE:
+		sizes[i] = size.value;
+		break;
+	    default:
+	    case RELATIVE:
+		// sizes[i] = 0;
+		break;
+	    }
+	}
+	return sizes;
     }
 
     @Override
     protected Size arrangeOverride(Size maxSize) {
-	if (getChildren().isEmpty())
-	    return new Size(0, 0);
-
-	switch (orientation) {
-	case HORIZONTAL:
-	default:
-	    return arrangeHorizontal(maxSize);
-	case VERTICAL:
-	    return arrangeVertical(maxSize);
+	float[] rowMaxSizes = makeAbsolute(maxSize.height, rows);
+	float[] columnMaxSizes = makeAbsolute(maxSize.width, columns);
+	float[] lefts = getSums(columnMaxSizes);
+	float[] tops = getSums(rowMaxSizes);
+	for (GridCell child : children) {
+	    if (child.content != null) {
+		int row = clamp(child.row, 0, rows.size() - 1);
+		int maxRow = clamp(child.row + child.rowSpan - 1, 0, rows.size() - 1);
+		int column = clamp(child.column, 0, columns.size() - 1);
+		int maxColumn = clamp(child.column + child.columnSpan - 1, 0, columns.size() - 1);
+		float maxWidth = 0;
+		float maxHeight = 0;
+		for (int i = row; i <= maxRow; i++) {
+		    maxHeight += rowMaxSizes[i];
+		}
+		for (int i = column; i <= maxColumn; i++) {
+		    maxWidth += columnMaxSizes[i];
+		}
+		float left = lefts[column];
+		float top = tops[row];
+		Rect rect = new Rect(left, top, maxWidth, maxHeight);
+		child.content.arrange(rect);
+	    }
 	}
+
+	return maxSize;
     }
 
-    private Size measureVertical(Size maxSize) {
-	float[] rowSizes = getSizes(maxSize.height);
-	int row = 0;
+    private float[] getSums(float[] sizes) {
+	float[] sum = new float[sizes.length];
+	sum[0] = 0;
+	for (int i = 1; i < sum.length; i++) {
+	    sum[i] = sum[i - 1] + sizes[i - 1];
+	}
+	return sum;
+    }
+
+    private float[] makeAbsolute(float maxSize, ArrayList<GridSize> references) {
+	float[] sizes = new float[references.size()];
+
+	float totalRelative = 0;
+	float totalAbslute = 0;
+	for (int i = 0; i < sizes.length; i++) {
+	    GridSize size = references.get(i);
+	    switch (size.mode) {
+	    case ABSOLUTE:
+		totalAbslute += size.value;
+		break;
+	    default:
+	    case RELATIVE:
+		totalRelative += size.value;
+		break;
+	    }
+	}
+	float maxAbsoluteRemaining = Math.max(0, maxSize - totalAbslute);
 	float left = 0;
-	float columnWidth = 0;
-	float availableWidth = maxSize.width - left;
-	float maxHeight = 0;
-	float columnHeight = 0;
-	for (UIElement child : getChildren()) {
-	    float height = rowSizes[row++];
-	    Size size = child.measure(new Size(availableWidth, height));
-	    if (size.width > columnWidth)
-		columnWidth = size.width;
-	    if (size.height > columnHeight)
-		columnHeight = size.height;
-	    if (row >= rowSizes.length) {
-		row = 0;
-		left += columnWidth;
-		columnWidth = 0;
-		if (columnHeight > height)
-		    height = columnHeight;
-		columnHeight = 0;
+	for (int i = 0; i < sizes.length; i++) {
+	    GridSize size = references.get(i);
+	    switch (size.mode) {
+	    case ABSOLUTE:
+		left += sizes[i] = clamp(maxSize - left, 0, size.value);
+		break;
+	    default:
+	    case RELATIVE:
+		left += sizes[i] = size.value / totalRelative * maxAbsoluteRemaining;
+		break;
 	    }
 	}
-	return new Size(left + columnWidth, maxHeight);
+	return sizes;
     }
 
-    private Size measureHorizontal(Size maxSize) {
-	float[] columnSizes = getSizes(maxSize.width);
-	int column = 0;
-	float top = 0;
-	float rowHeight = 0;
-	float availableHeight = maxSize.height - top;
-	float maxWidth = 0;
-	float rowWidth = 0;
-	for (UIElement child : getChildren()) {
-	    float width = columnSizes[column++];
-	    Size size = child.measure(new Size(width, availableHeight));
-	    if (size.height > rowHeight)
-		rowHeight = size.height;
-	    if (size.width > rowWidth)
-		rowWidth = size.width;
-	    if (column >= columnSizes.length) {
-		column = 0;
-		top += rowHeight;
-		rowHeight = 0;
-		if (rowWidth > width)
-		    width = rowWidth;
-		rowWidth = 0;
-	    }
+    @Override
+    protected void renderOverride(Rect size, GuiRenderer renderer) {
+	for (GridCell child : children) {
+	    if (child.content != null)
+		child.content.render(renderer);
 	}
-	return new Size(maxWidth, top + rowHeight);
     }
 
-    private Size arrangeVertical(Size maxSize) {
-	float[] rowSizes = getSizes(maxSize.height);
-
-	List<UIElement> children = getChildren();
-
-	int columns = (children.size() - 1) / rowSizes.length + 1;
-
-	float[] columnSizes = new float[columns];
-
-	float requiredWidth = 0;
-	float requiredHeight = 0;
-	for (int i = 0; i < rowSizes.length; i++) {
-	    requiredHeight += rowSizes[i];
+    @Override
+    public void mouseDown(float x, float y, MouseButton button) {
+	for (GridCell child : children) {
+	    if (child.content != null)
+		child.content.mouseDown(x - child.content.getX(), y - child.content.getY(), button);
 	}
-	for (int i = 0; i < children.size(); i++) {
-	    int column = i / rowSizes.length;
-	    Size size = children.get(i).getDesiredSize();
-	    if (size.width > columnSizes[column]) {
-		requiredWidth += size.width - columnSizes[column];
-		columnSizes[column] = size.width;
-	    }
-	}
-
-	if (mode == StackMode.STRETCH) {
-	    if (requiredWidth > 0) {
-		float scale = maxSize.width / requiredWidth;
-		for (int i = 0; i < columnSizes.length; i++) {
-		    columnSizes[i] *= scale;
-		}
-	    } else {
-		for (int i = 0; i < columnSizes.length; i++) {
-		    columnSizes[i] = maxSize.width;
-		}
-	    }
-	    requiredWidth = maxSize.width;
-	}
-
-	float left = 0;
-	float top = 0;
-	int row = 0;
-	int column = 0;
-	for (int i = 0; i < children.size(); i++) {
-	    float height = rowSizes[row++];
-	    float width = columnSizes[column];
-	    Rect rect = new Rect(left, top, width, height);
-	    children.get(i).arrange(rect);
-	    top += height;
-	    if (row >= rowSizes.length) {
-		row = 0;
-		top = 0;
-		left += width;
-		column++;
-	    }
-	}
-	return new Size(requiredWidth, maxSize.height);
     }
 
-    private Size arrangeHorizontal(Size maxSize) {
-	float[] columnSizes = getSizes(maxSize.width);
-
-	List<UIElement> children = getChildren();
-
-	int rows = (children.size() - 1) / columnSizes.length + 1;
-
-	float[] rowSizes = new float[rows];
-
-	float requiredHeight = 0;
-	float requiredWidth = 0;
-	for (int i = 0; i < columnSizes.length; i++) {
-	    requiredWidth += columnSizes[i];
+    @Override
+    public void mouseUp(float x, float y, MouseButton button) {
+	for (GridCell child : children) {
+	    if (child.content != null)
+		if (child.content.hitTest()) {
+		    child.content.mouseUp(x - child.content.getX(), y - child.content.getY(), button);
+		}
 	}
-	for (int i = 0; i < children.size(); i++) {
-	    int row = i / columnSizes.length;
-	    Size size = children.get(i).getDesiredSize();
-	    if (size.height > rowSizes[row]) {
-		requiredHeight += size.height - rowSizes[row];
-		rowSizes[row] = size.height;
-	    }
-	}
-
-	if (mode == StackMode.STRETCH) {
-	    float scale = maxSize.height / requiredHeight;
-	    for (int i = 0; i < rowSizes.length; i++) {
-		rowSizes[i] *= scale;
-	    }
-	    requiredHeight = maxSize.height;
-	}
-
-	float top = 0;
-	float left = 0;
-	int column = 0;
-	int row = 0;
-	for (int i = 0; i < children.size(); i++) {
-	    float width = columnSizes[column++];
-	    float height = rowSizes[row];
-	    Rect rect = new Rect(left, top, width, height);
-	    children.get(i).arrange(rect);
-	    left += width;
-	    if (column >= columnSizes.length) {
-		column = 0;
-		left = 0;
-		top += height;
-		row++;
-	    }
-	}
-	return new Size(maxSize.width, requiredHeight);
     }
 
-    private float[] getSizes(float maxSize) {
-	if (sizes == null || sizes.isEmpty())
-	    return new float[] { maxSize };
-
-	if (Float.isInfinite(maxSize)) {
-	    float[] result = new float[sizes.size()];
-	    int i = 0;
-	    for (GridSize size : sizes) {
-		switch (size.mode) {
-		case ABSOLUTE:
-		    result[i++] = size.value;
-		    break;
-		case RELATIVE:
-		default:
-		    result[i++] = Float.POSITIVE_INFINITY;
-		    break;
+    @Override
+    public void mouseMouseMove(float x, float y) {
+	for (GridCell child : children) {
+	    if (child.content != null)
+		if (child.content.hitTest()) {
+		    child.content.mouseMouseMove(x - child.content.getX(), y - child.content.getY());
 		}
-	    }
-	    return result;
-	} else {
-	    float totalAbsolute = 0;
-	    float totalRelative = 0;
-	    for (GridSize size : sizes) {
-		switch (size.mode) {
-		case ABSOLUTE:
-		    totalAbsolute += size.value;
-		    break;
+	}
+    }
 
-		case RELATIVE:
-		default:
-		    totalRelative += size.value;
-		    break;
-		}
-	    }
-	    float relativeWidthAvailable = Math.max(maxSize - totalAbsolute, 0);
+    @Override
+    public void mouseEntered(float x, float y) {
+	for (GridCell child : children) {
+	    if (child.content != null)
+		if (child.content.hitTest()) {
+		    child.content.setMouseInside(true, x, y);
+		} else
+		    child.content.setMouseInside(false, x, y);
+	}
+    }
 
-	    float[] result = new float[sizes.size()];
-	    int i = 0;
-	    float left = 0;
-	    for (GridSize size : sizes) {
-		switch (size.mode) {
-		case ABSOLUTE:
-		    float available = maxSize - left; // can't go past right
-						      // boundary
-		    float width = Math.min(available, size.value);
-		    result[i++] = width;
-		    left += width;
-		    break;
-
-		case RELATIVE:
-		default:
-		    float value = relativeWidthAvailable * size.value / totalRelative;
-		    result[i++] = value;
-		    left += value;
-		    break;
-		}
-	    }
-	    return result;
+    @Override
+    public void mouseLeft(float x, float y) {
+	for (GridCell child : children) {
+	    if (child.content != null)
+		child.content.setMouseInside(false, x, y);
 	}
     }
 }

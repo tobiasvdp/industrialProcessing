@@ -5,8 +5,10 @@ import ip.industrialProcessing.gui3.framework.Alignment;
 import ip.industrialProcessing.gui3.framework.Size;
 import ip.industrialProcessing.gui3.framework.UIRoot;
 import ip.industrialProcessing.gui3.framework.controls.Decorator;
+import ip.industrialProcessing.gui3.framework.controls.ProgressBar;
 import ip.industrialProcessing.gui3.framework.controls.SlotControl;
 import ip.industrialProcessing.gui3.framework.controls.TextBlock;
+import ip.industrialProcessing.gui3.framework.custom.TankWithSlotsControl;
 import ip.industrialProcessing.gui3.framework.panels.MouseButton;
 import ip.industrialProcessing.gui3.framework.panels.Orientation;
 import ip.industrialProcessing.gui3.framework.panels.StackPanel;
@@ -38,13 +40,24 @@ public class GuiContainerGenerator extends GuiContainerMachine {
 	stack.orientation = Orientation.VERTICAL;
 
 	Decorator machinePanel = new Decorator(texture, 7);
-	StackPanel child = new StackPanel();
-	child.orientation = Orientation.HORIZONTAL;
-	for (int i = 0; i < 9; i++) {
-	    SlotControl childPanel = new SlotControl();
-	    child.addChild(childPanel);
-	}
-	machinePanel.setChild(child);
+	StackPanel stuff = new StackPanel();
+	TankWithSlotsControl tank = new TankWithSlotsControl();
+	tank.width = 36;
+	tank.height = 52;
+	stuff.addChild(tank); 
+	stuff.addChild(ProgressBar.createTemperature());
+	stuff.addChild(ProgressBar.createVertical1());
+	stuff.addChild(ProgressBar.createVertical2());
+	stuff.addChild(ProgressBar.createVertical3());
+	
+	StackPanel hor = new StackPanel();
+	hor.orientation = Orientation.VERTICAL;
+	hor.addChild(ProgressBar.createHorizontal1());
+	hor.addChild(ProgressBar.createHorizontal2());
+	hor.addChild(ProgressBar.createHorizontal3());
+	stuff.addChild(hor);
+	
+	machinePanel.setChild(stuff);
 	stack.addChild(machinePanel);
 	Decorator inventoryPanel = new Decorator(texture, 7);
 	stack.addChild(inventoryPanel);
@@ -52,8 +65,15 @@ public class GuiContainerGenerator extends GuiContainerMachine {
 	inventoryPanel.setChild(label);
 	Decorator hotbarPanel = new Decorator(texture, 4);
 	stack.addChild(hotbarPanel);
+	StackPanel child = new StackPanel();
+	child.orientation = Orientation.HORIZONTAL;
+	for (int i = 0; i < 9; i++) {
+	    SlotControl childPanel = new SlotControl();
+	    child.addChild(childPanel);
+	}
+	hotbarPanel.setChild(child);
 
-	stack.verticalAlign = Alignment.MAX;
+	stack.verticalAlign = Alignment.MIN;
 	stack.horizontalAlign = Alignment.STRETCH;
 	this.layout = new UIRoot(stack);
     }

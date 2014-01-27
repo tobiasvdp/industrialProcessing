@@ -1,7 +1,7 @@
 package ip.industrialProcessing.gui3.framework;
 
 public class Thickness {
-    public Thickness(int top, int right, int bottom, int left) {
+    public Thickness(float top, float right, float bottom, float left) {
 	this.top = top;
 	this.left = left;
 	this.bottom = bottom;

@@ -2,6 +2,7 @@ package ip.industrialProcessing.gui3.framework.rendering;
 
 import ip.industrialProcessing.gui3.framework.Rect;
 import ip.industrialProcessing.gui3.framework.Size;
+import ip.industrialProcessing.gui3.framework.Thickness;
 
 import java.util.List;
 
@@ -20,13 +21,15 @@ public class GuiRenderer {
 	this.tessellator = Tessellator.instance;
     }
 
-    public void drawNineGrid(Rect where, Size cornerXYSize, Rect section, TextureReference texture) {
+    public void drawNineGrid(Rect where, Thickness thickness, Rect section, TextureReference texture) {
 
-	float pixelWidth = 1 / texture.size.width * section.width;
-	float pixelHeight = 1 / texture.size.height * section.height;
+	float pixelWidth = 1 / texture.size.width;
+	float pixelHeight = 1 / texture.size.height;
 
-	float cornerU = pixelWidth * cornerXYSize.width;
-	float cornerV = pixelHeight * cornerXYSize.height;
+	float cornerUmin = pixelWidth * thickness.left;
+	float cornerUmax = pixelWidth * thickness.right;
+	float cornerVmin = pixelHeight * thickness.top;
+	float cornerVmax = pixelHeight * thickness.bottom;
 
 	float[] u = new float[4];
 	float[] v = new float[4];
@@ -34,23 +37,23 @@ public class GuiRenderer {
 	float[] y = new float[4];
 
 	u[0] = section.x;
-	u[1] = section.x + cornerU;
-	u[2] = section.x + section.width - cornerU;
+	u[1] = section.x + cornerUmin;
+	u[2] = section.x + section.width - cornerUmax;
 	u[3] = section.x + section.width;
 
 	v[0] = section.y;
-	v[1] = section.y + cornerV;
-	v[2] = section.y + section.height - cornerV;
+	v[1] = section.y + cornerVmin;
+	v[2] = section.y + section.height - cornerVmax;
 	v[3] = section.y + section.height;
 
 	x[0] = where.x;
-	x[1] = where.x + cornerXYSize.width;
-	x[2] = where.x + where.width - cornerXYSize.width;
+	x[1] = where.x + thickness.left;
+	x[2] = where.x + where.width - thickness.right;
 	x[3] = where.x + where.width;
 
 	y[0] = where.y;
-	y[1] = where.y + cornerXYSize.height;
-	y[2] = where.y + where.height - cornerXYSize.height;
+	y[1] = where.y + thickness.top;
+	y[2] = where.y + where.height - thickness.bottom;
 	y[3] = where.y + where.height;
 
 	mc.renderEngine.func_110577_a(texture.resource);

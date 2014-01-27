@@ -71,7 +71,14 @@ public abstract class UIElement {
 	return this.desiredSize = new Size(width, height);
     }
 
-    private float clamp(float a, float min, float max) {
+    protected float clamp(float a, float min, float max) {
+	if (a < min)
+	    a = min;
+	if (a > max)
+	    a = max;
+	return a;
+    }
+    protected int clamp(int a, int min, int max) {
 	if (a < min)
 	    a = min;
 	if (a > max)
@@ -81,17 +88,11 @@ public abstract class UIElement {
 
     protected abstract Size measureOverride(Size maxSize);
 
-    public void arrange(Rect rect) {
-	if (margin != null && false) {
-	    rect.width -= margin.left + margin.right;
-	    rect.height -= margin.top + margin.bottom;
-	    rect.x += margin.left;
-	    rect.y += margin.top;
-	}
+    public void arrange(Rect rect) { 
 	Size size = arrangeOverride(rect.getSize());
 
-	float width = size.width;
-	float height = size.height;
+	float width = Math.min(size.width, rect.width);
+	float height = Math.min(size.height, rect.width);
 	this.y = rect.y;
 
 	switch (this.horizontalAlign) {
@@ -141,7 +142,7 @@ public abstract class UIElement {
     }
 
     protected abstract void renderOverride(Rect size, GuiRenderer renderer);
-
+     
     public void setMouseInside(boolean isInside, float x, float y) {
 	if (isHittestVisible) {
 	    if (isMouseInside != isInside) {

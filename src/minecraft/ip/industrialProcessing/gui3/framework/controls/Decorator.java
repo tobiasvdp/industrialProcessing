@@ -2,6 +2,7 @@ package ip.industrialProcessing.gui3.framework.controls;
 
 import ip.industrialProcessing.gui3.framework.Rect;
 import ip.industrialProcessing.gui3.framework.Size;
+import ip.industrialProcessing.gui3.framework.Thickness;
 import ip.industrialProcessing.gui3.framework.UIElement;
 import ip.industrialProcessing.gui3.framework.panels.MouseButton;
 import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
@@ -40,7 +41,7 @@ public class Decorator extends UIElement {
     protected Size arrangeOverride(Size maxSize) {
 	if (child != null) {
 	    Size size = child.getDesiredSize();
-	    child.arrange(new Rect(borderWidth, borderWidth, new Size(maxSize.width + borderWidth * 2, maxSize.height + borderWidth * 2)));
+	    child.arrange(new Rect(borderWidth, borderWidth, new Size(maxSize.width - borderWidth * 2, maxSize.height - borderWidth * 2)));
 	    return size;
 	}
 	return new Size(borderWidth * 2, borderWidth * 2);
@@ -51,7 +52,7 @@ public class Decorator extends UIElement {
 	if (child != null)
 	    child.render(renderer);
 	if (borderWidth > 0)
-	    renderer.drawNineGrid(size, new Size(borderWidth, borderWidth), new Rect(0, 0, 1, 1), texture);
+	    renderer.drawNineGrid(size, new Thickness(borderWidth, borderWidth, borderWidth, borderWidth), new Rect(0, 0, 1, 1), texture);
 	else
 	    renderer.drawTexture(size, new Rect(0, 0, 1, 1), texture);
     }
