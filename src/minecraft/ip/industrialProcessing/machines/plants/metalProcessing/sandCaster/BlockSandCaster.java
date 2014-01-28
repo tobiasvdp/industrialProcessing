@@ -12,6 +12,7 @@ import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.machines.kiln.model.ModelKilnBlock;
 import ip.industrialProcessing.machines.plants.metalProcessing.sandCaster.model.ModelSandCasterBlock;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 import ip.industrialProcessing.utils.IDescriptionBlock;
@@ -81,11 +82,12 @@ public class BlockSandCaster extends BlockMachineRendered implements IRecipeBloc
     }
 
     @SideOnly(Side.CLIENT)
-    private static ModelSandCasterBlock model = new ModelSandCasterBlock();
+    private static ModelSandCasterBlock model;
 
     @SideOnly(Side.CLIENT)
     @Override
     public ModelBlock getModel() {
+	if(model == null) model = new ModelSandCasterBlock();
 	return model;
     }
 }

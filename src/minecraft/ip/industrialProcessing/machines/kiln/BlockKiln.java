@@ -81,11 +81,12 @@ public class BlockKiln extends BlockMachineRendered implements IRecipeBlock, IDe
     }
 
     @SideOnly(Side.CLIENT)
-    private static ModelKilnBlock model = new ModelKilnBlock();
+    private static ModelKilnBlock model;
 
     @SideOnly(Side.CLIENT)
     @Override
     public ModelBlock getModel() {
+	if(model == null) model = new ModelKilnBlock();
 	return model;
     }
 }
