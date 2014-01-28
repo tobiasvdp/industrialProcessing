@@ -114,16 +114,16 @@ public class ConfigLogic {
 
 	public void register() {
 		LanguageRegistry.instance().addStringLocalization("IP.itemGroup.tabLogic", "en_US", "IP Logic");
-		((CreativeTabsIP) IPLogic.tabLogic).setIcon(new ItemStack(ISetupLogic.BLlogicSwitchBox));
+		//((CreativeTabsIP) IPLogic.tabLogic).setIcon(new ItemStack(ISetupLogic.BLlogicSwitchBox));
 
-		this.register(ISetupLogic.BLlogicCable, "IP.Logic.Cable", "Cable", TElogicCable.class);
-		this.register(ISetupLogic.BLlogicSwitchBox, "IP.Logic.SwBox", "Switch box", TElogicSwitchBox.class);
+		this.register(ISetupLogic.blockLogicTransport, "IP.Logic.Cable", "Cable", TElogicCable.class);
+	/*	this.register(ISetupLogic.BLlogicSwitchBox, "IP.Logic.SwBox", "Switch box", TElogicSwitchBox.class);
 		this.register(ISetupLogic.BLlogicBundle, "IP.Logic.Bundle", "Bundled cables", TElogicBundle.class);
 		this.register(ISetupLogic.BLlogicDisplayBox, "IP.Logic.DsBox", "Display box", TElogicDisplayBox.class);
 		this.register(ISetupLogic.BLlogicAnd, "IP.Logic.And", "And gate", TElogicAnd.class);
 		this.register(ISetupLogic.BLlogicOr, "IP.Logic.Or", "Or gate", TElogicOr.class);
 		this.register(ISetupLogic.BlockMachineInterface, "IP.Logic.MInt", "Interface", TileEntityMachineInterface.class);
-		this.register(ISetupLogic.BlockLogicDisplay, "IP.Logic.Display", "Display", TileEntityLogicDisplay.class);
+		this.register(ISetupLogic.BlockLogicDisplay, "IP.Logic.Display", "Display", TileEntityLogicDisplay.class);*/
 	}
 
 	private void register(Block block, String uniqueId, String displayName, Class tileEntity) {

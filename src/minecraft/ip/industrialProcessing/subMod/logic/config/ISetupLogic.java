@@ -1,5 +1,6 @@
 package ip.industrialProcessing.subMod.logic.config;
 
+import ip.industrialProcessing.subMod.logic.network.BlockLogicTransport;
 import ip.industrialProcessing.subMod.logic.old.function.and.BLlogicAnd;
 import ip.industrialProcessing.subMod.logic.old.function.or.BLlogicOr;
 import ip.industrialProcessing.subMod.logic.old.network.display.BlockLogicDisplay;
@@ -11,7 +12,7 @@ import ip.industrialProcessing.subMod.logic.old.transport.wired.switchbox.BLlogi
 
 public interface ISetupLogic {
 	// logic
-	public final static BLlogicCable BLlogicCable = new BLlogicCable();
+	/*public final static BLlogicCable BLlogicCable = new BLlogicCable();
 	public final static BLlogicSwitchBox BLlogicSwitchBox = new BLlogicSwitchBox();
 	public final static BLlogicBundle BLlogicBundle = new BLlogicBundle();
 	public final static BLlogicDisplayBox BLlogicDisplayBox = new BLlogicDisplayBox();
@@ -19,4 +20,6 @@ public interface ISetupLogic {
 	public final static BLlogicOr BLlogicOr = new BLlogicOr();
 	public final static BlockMachineInterface BlockMachineInterface = new BlockMachineInterface();
 	public final static BlockLogicDisplay BlockLogicDisplay = new BlockLogicDisplay();
+	*/
+	public final static BlockLogicTransport blockLogicTransport = new BlockLogicTransport();
 }

@@ -58,8 +58,8 @@ public abstract class BlockMachine extends BlockContainer {
     }
 
     private boolean checkIfEquiped(EntityPlayer player) {
-	if(player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().itemID == ISetupLogic.BlockMachineInterface.blockID)
-	    return true;
+	//if(player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().itemID == ISetupLogic.BlockMachineInterface.blockID)
+	  //  return true;
 	return false;
     }
 

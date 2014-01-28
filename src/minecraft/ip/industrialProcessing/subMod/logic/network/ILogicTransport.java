@@ -1,5 +1,7 @@
 package ip.industrialProcessing.subMod.logic.network;
 
-public interface ILogicTransport {
+import net.minecraftforge.common.ForgeDirection;
 
+public interface ILogicTransport {
+	
 }

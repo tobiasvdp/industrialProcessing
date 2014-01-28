@@ -24,6 +24,7 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void registerRenderers() {
+		/*
 		ClientRegistry.bindTileEntitySpecialRenderer(TElogicSwitchBox.class, new RendererLogic(ISetupLogic.BLlogicSwitchBox, "MDlogicSwitchBox", MDlogicSwitchBox));
 		ConfigLogic.setRDlogicSwitchBox(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigLogic.getRDlogicSwitchBox(), new TElogicSwitchBox()));
@@ -38,6 +39,6 @@ public class ClientProxy extends CommonProxy {
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TElogicOr.class, new RendererLogic(ISetupLogic.BLlogicOr, "MDlogicAnd", MDlogicOr));
 		ConfigLogic.setRDlogicOr(RenderingRegistry.getNextAvailableRenderId());
-		RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigLogic.getRDlogicOr(), new TElogicOr()));
+		RenderingRegistry.registerBlockHandler(new RendererTileBlock(ConfigLogic.getRDlogicOr(), new TElogicOr()));*/
 	}
 }
