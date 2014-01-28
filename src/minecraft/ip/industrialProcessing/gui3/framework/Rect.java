@@ -28,6 +28,6 @@ public class Rect {
 	x2 -= x;
 	y2 -= y;
 
-	return x2 >= 0 && x2 <= width && y2 >= 0 && y2 <= height;
+	return x2 >= 0 && x2 < width && y2 >= 0 && y2 < height;
     }
 }

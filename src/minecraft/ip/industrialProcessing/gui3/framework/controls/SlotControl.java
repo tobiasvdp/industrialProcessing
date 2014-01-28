@@ -1,5 +1,6 @@
 package ip.industrialProcessing.gui3.framework.controls;
 
+import net.minecraft.inventory.Slot;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.gui3.framework.Alignment;
@@ -18,35 +19,45 @@ public class SlotControl extends Control {
     private static final Rect DEFAULT_SLOT_SECTION_FUEL = new Rect(0.75f, 0, 0.25f, 1);
     private TextureReference texture;
     private Rect section;
+    private Slot slot;
 
-    public SlotControl(TextureReference texture, Rect rect) {
+    public SlotControl(TextureReference texture, Rect rect, Slot slot) {
 	this.width = 18;
 	this.height = 18;
 	this.texture = texture;
 	this.section = rect;
 	this.horizontalAlign = Alignment.MIN;
 	this.verticalAlign = Alignment.MIN;
+	this.slot = slot;
     }
 
     @Override
     protected void renderOverride(Rect size, GuiRenderer renderer) {
+	Rect absolute = getAbsoluteBounds(size);
+
+	slot.xDisplayPosition = (int) absolute.x + 1;
+	slot.yDisplayPosition = (int) absolute.y + 1;
+
 	renderer.drawRectangle(size, 0xFFFFFF00);
 	renderer.drawRectangle(new Rect(1, 1, size.width - 2, size.height - 2), 0xFFFF0000);
 
 	renderer.drawTexture(size, section, texture);
     }
 
-    public static SlotControl createSlot() {
-	return new SlotControl(DEFAULT_SLOT_TEXTURE, DEFAULT_SLOT_SECTION);
+    public static SlotControl createSlot(Slot slot) {
+	return new SlotControl(DEFAULT_SLOT_TEXTURE, DEFAULT_SLOT_SECTION, slot);
     }
-    public static SlotControl createPowerSlot() {
-	return new SlotControl(DEFAULT_SLOT_TEXTURE, DEFAULT_SLOT_SECTION_POWER);
+
+    public static SlotControl createPowerSlot(Slot slot) {
+	return new SlotControl(DEFAULT_SLOT_TEXTURE, DEFAULT_SLOT_SECTION_POWER, slot);
     }
-    public static SlotControl createBucketSlot() {
-	return new SlotControl(DEFAULT_SLOT_TEXTURE, DEFAULT_SLOT_SECTION_BUCKET);
+
+    public static SlotControl createBucketSlot(Slot slot) {
+	return new SlotControl(DEFAULT_SLOT_TEXTURE, DEFAULT_SLOT_SECTION_BUCKET, slot);
     }
-    public static SlotControl createFuelSlot() {
-	return new SlotControl(DEFAULT_SLOT_TEXTURE, DEFAULT_SLOT_SECTION_FUEL);
+
+    public static SlotControl createFuelSlot(Slot slot) {
+	return new SlotControl(DEFAULT_SLOT_TEXTURE, DEFAULT_SLOT_SECTION_FUEL, slot);
     }
 
 }

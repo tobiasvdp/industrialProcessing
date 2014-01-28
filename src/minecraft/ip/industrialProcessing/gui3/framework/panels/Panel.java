@@ -35,49 +35,42 @@ public abstract class Panel extends UIElement {
     }
 
     @Override
-    public void mouseDown(float x, float y, MouseButton button) {
+    protected void mouseDownOverride(float mouseX, float mouseY, MouseButton button) {
 	for (UIElement child : children) {
-	    if (child.hitTest(x, y)) {
-		child.mouseDown(x - child.getX(), y - child.getY(), button);
-	    }
+	    if (child != null)
+		child.mouseDown(mouseX, mouseY, button);
 	}
     }
 
     @Override
-    public void mouseUp(float x, float y, MouseButton button) {
+    protected void mouseUpOverride(float mouseX, float mouseY, MouseButton button) {
 	for (UIElement child : children) {
-	    if (child.hitTest(x, y)) {
-		child.mouseUp(x - child.getX(), y - child.getY(), button);
-	    }
+	    if (child != null)
+		child.mouseUp(mouseX, mouseY, button);
 	}
     }
 
     @Override
-    public void mouseMove(float x, float y) {
+    protected void mouseMovedOverride(float mouseX, float mouseY) {
 	for (UIElement child : children) {
-	    if (child.hitTest(x, y)) {
-		child.mouseMove(x - child.getX(), y - child.getY());
-		child.setMouseInside(true, x - child.getX(), y - child.getY());
-	    } else
-		child.setMouseInside(false, x - child.getX(), y - child.getY());
-	}
-	super.mouseMove(x, y);
-    }
-
-    @Override
-    public void mouseEntered(float x, float y) {
-	for (UIElement child : children) {
-	    if (child.hitTest(x, y)) {
-		child.setMouseInside(true, x, y);
-	    } else
-		child.setMouseInside(false, x, y);
+	    if (child != null)
+		child.mouseMoved(mouseX, mouseY);
 	}
     }
 
     @Override
-    public void mouseLeft(float x, float y) {
+    protected void mouseLeftOverride(float mouseX, float mouseY) {
 	for (UIElement child : children) {
-	    child.setMouseInside(false, x, y);
+	    if (child != null)
+		child.mouseLeft(mouseX, mouseY);
+	}
+    }
+
+    @Override
+    protected void mouseEnteredOverride(float mouseX, float mouseY) {
+	for (UIElement child : children) {
+	    if (child != null)
+		child.mouseEntered(mouseX, mouseY);
 	}
     }
 }

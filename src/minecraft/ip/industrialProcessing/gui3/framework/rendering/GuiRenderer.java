@@ -58,8 +58,12 @@ public class GuiRenderer {
 
 	mc.renderEngine.func_110577_a(texture.resource);
 	tessellator.startDrawingQuads();
-	for (int i = 0; i < 3; i++) {
-	    for (int j = 0; j < 3; j++) {
+	int minI = thickness.left == 0 ? 1 : 0;
+	int maxI = thickness.right == 0 ? 2 : 3;
+	int minJ = thickness.top == 0 ? 1 : 0;
+	int maxJ = thickness.bottom == 0 ? 2 : 3;
+	for (int i = minI; i < maxI; i++) {
+	    for (int j = minJ; j < maxJ; j++) {
 		tessellator.addVertexWithUV(x[i], y[j + 1], 0, u[i], v[j + 1]);
 		tessellator.addVertexWithUV(x[i + 1], y[j + 1], 0, u[i + 1], v[j + 1]);
 		tessellator.addVertexWithUV(x[i + 1], y[j], 0, u[i + 1], v[j]);
@@ -90,7 +94,7 @@ public class GuiRenderer {
 	tessellator.draw();
     }
 
-    public void drawString(Rect rect, String text, int color, boolean ellipsis, boolean wrap) {
+    public void drawString(Rect rect, String text, int color, boolean ellipsis, boolean wrap, boolean hasShadow) {
 	String ellipsisChars = "...";
 	int elipsisWidth = mc.fontRenderer.getStringWidth(ellipsisChars);
 	int lastMargin = ellipsis ? elipsisWidth : 0;
@@ -113,16 +117,16 @@ public class GuiRenderer {
 		    if (i == maxStrings - 1 && ellipsis) {
 			line = mc.fontRenderer.trimStringToWidth(line, width - lastMargin) + ellipsisChars;
 		    }
-		    mc.fontRenderer.drawString(text, (int) rect.x + mc.fontRenderer.FONT_HEIGHT * i, (int) rect.y, color);
+		    mc.fontRenderer.drawString(text, (int) rect.x + mc.fontRenderer.FONT_HEIGHT * i, (int) rect.y, color, hasShadow); 
 		}
 
 	    } else
-		mc.fontRenderer.drawString(text, (int) rect.x, (int) rect.y, color);
+		mc.fontRenderer.drawString(text, (int) rect.x, (int) rect.y, color, hasShadow);
 	} else {
 	    if (mc.fontRenderer.getStringWidth(text) > rect.width) {
 		text = mc.fontRenderer.trimStringToWidth(text, (int) rect.width - lastMargin) + ellipsisChars;
 	    }
-	    mc.fontRenderer.drawString(text, (int) rect.x, (int) rect.y, color);
+	    mc.fontRenderer.drawString(text, (int) rect.x, (int) rect.y, color, hasShadow);
 	}
 	GL11.glColor4f(1, 1, 1, 1);
     }

@@ -1,5 +1,6 @@
 package ip.industrialProcessing.gui3.framework.custom;
 
+import net.minecraft.inventory.Slot;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.gui3.framework.Alignment;
 import ip.industrialProcessing.gui3.framework.Rect;
@@ -21,28 +22,21 @@ public class CraftingGrid extends UserControl {
     private static final TextureReference DEFAULT_CRAFT_TEXTURE_HORIZONTAL = new TextureReference(new Size(24, 32), IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/Worker.png");
     private static final TextureReference DEFAULT_CRAFT_TEXTURE_VERTICAL = new TextureReference(new Size(32, 24), IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/WorkerVertical.png");
 
-    public CraftingGrid(int size, Orientation orientation) {
+    public CraftingGrid(int size, Orientation orientation, Slot[] inputSlots, Slot outputSlot) {
 	width = Float.NaN;
 	height = Float.NaN;
-	GridPanel grid = new GridPanel();
-	for (int x = 0; x < size; x++) {
-	    grid.columns.add(new GridSize(18, SizeMode.ABSOLUTE));
+	if (orientation == Orientation.VERTICAL) {
+	    width = size * 18;
+	} else if (orientation == Orientation.HORIZONTAL) {
+	    height = size * 18;
 	}
-	for (int y = 0; y < size; y++) {
-	    grid.rows.add(new GridSize(18, SizeMode.ABSOLUTE));
-	}
-	for (int x = 0; x < size; x++) {
-	    for (int y = 0; y < size; y++) {
-		SlotControl slot = SlotControl.createSlot();
-		grid.children.add(new GridCell(x, y, slot));
-	    }
-	}
+
 	StackPanel stack = new StackPanel();
-	stack.addChild(grid);
+	stack.addChild(new SlotGrid(inputSlots, size, Orientation.VERTICAL));
 	stack.orientation = orientation;
 	Image image;
 	switch (orientation) {
-	case HORIZONTAL: 
+	case HORIZONTAL:
 	    stack.addChild(image = Image.createImage(DEFAULT_CRAFT_TEXTURE_HORIZONTAL, DEFAULT_CRAFT_SECTION_HORIZONTAL));
 	    break;
 	default:
@@ -51,26 +45,25 @@ public class CraftingGrid extends UserControl {
 	    break;
 	}
 	image.horizontalAlign = image.verticalAlign = Alignment.CENTER;
-	SlotControl slot = SlotControl.createSlot();
-	slot.horizontalAlign = slot.verticalAlign = Alignment.CENTER; 
-	grid.horizontalAlign = grid.verticalAlign = Alignment.CENTER;
+	SlotControl slot = SlotControl.createSlot(outputSlot);
+	slot.horizontalAlign = slot.verticalAlign = Alignment.CENTER;
 	stack.addChild(slot);
 	this.child = stack;
     }
 
-    public static CraftingGrid createSmallHorizontal() {
-	return new CraftingGrid(2, Orientation.HORIZONTAL);
+    public static CraftingGrid createSmallHorizontal(Slot[] inputSlots, Slot output) {
+	return new CraftingGrid(2, Orientation.HORIZONTAL, inputSlots, output);
     }
 
-    public static CraftingGrid createSmallVertical() {
-	return new CraftingGrid(2, Orientation.VERTICAL);
+    public static CraftingGrid createSmallVertical(Slot[] inputSlots, Slot output) {
+	return new CraftingGrid(2, Orientation.VERTICAL, inputSlots, output);
     }
 
-    public static CraftingGrid createBigHorizontal() {
-	return new CraftingGrid(3, Orientation.HORIZONTAL);
+    public static CraftingGrid createBigHorizontal(Slot[] inputSlots, Slot output) {
+	return new CraftingGrid(3, Orientation.HORIZONTAL, inputSlots, output);
     }
 
-    public static CraftingGrid createBigVertical() {
-	return new CraftingGrid(3, Orientation.VERTICAL);
+    public static CraftingGrid createBigVertical(Slot[] inputSlots, Slot output) {
+	return new CraftingGrid(3, Orientation.VERTICAL, inputSlots, output);
     }
 }

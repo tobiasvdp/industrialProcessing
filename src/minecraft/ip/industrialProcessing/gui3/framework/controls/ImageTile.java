@@ -26,15 +26,17 @@ public class ImageTile extends Control {
     }
 
     @Override
-    protected void renderOverride(Rect size, GuiRenderer renderer) {
+    protected void renderOverride(Rect size, GuiRenderer renderer) { 
+	index %= rows * columns;
 
-	int row = index / rows;
-	int column = index % rows;
+	int row = index / columns;
+	int column = index % columns;
 
-	float u = 1f / rows;
-	float v = 1f / columns;
-
-	renderer.drawTexture(size, new Rect(u * column, v * row, u, v), this.texture);
-    } 
+	float u = 1f / columns;
+	float v = 1f / rows;
+ 
+	Rect rect = new Rect(u * column, v * row, u, v);
+	renderer.drawTexture(size, rect, this.texture);
+    }
 
 }

@@ -41,37 +41,32 @@ public class UserControl extends Control {
     }
 
     @Override
-    public void mouseEntered(float x, float y) { 
-	if (child != null)
-	    if (child.hitTest(x, y))
-		child.mouseEntered(x, y);
+    protected void mouseUpOverride(float mouseX, float mouseY, MouseButton button) {
+	if(child != null)
+	    child.mouseUp(mouseX, mouseY, button);
     }
 
     @Override
-    public void mouseLeft(float x, float y) { 
-	if (child != null)
-	    if (child.hitTest(x, y))
-		child.mouseLeft(x, y);
+    protected void mouseDownOverride(float mouseX, float mouseY, MouseButton button) {
+	if(child!= null)
+	    child.mouseDown(mouseX, mouseY, button);
     }
 
     @Override
-    public void mouseMove(float x, float y) { 
-	if (child != null)
-	    if (child.hitTest(x, y))
-		child.mouseMove(x, y);
+    protected void mouseLeftOverride(float mouseX, float mouseY) {
+	if(child != null)
+	    child.mouseLeft(mouseX, mouseY);
     }
 
     @Override
-    public void mouseUp(float x, float y, MouseButton button) { 
-	if (child != null)
-	    if (child.hitTest(x, y))
-		child.mouseUp(x, y, button);
+    protected void mouseEnteredOverride(float mouseX, float mouseY) {
+	if(child != null)
+	    child.mouseEntered(mouseX, mouseY);
     }
 
     @Override
-    public void mouseDown(float x, float y, MouseButton button) { 
-	if (child != null)
-	    if (child.hitTest(x, y))
-		child.mouseDown(x, y, button); 
+    protected void mouseMovedOverride(float mouseX, float mouseY) {
+	if(child != null)
+	    child.mouseMoved(mouseX, mouseY);
     }
 }

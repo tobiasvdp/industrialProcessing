@@ -1,5 +1,6 @@
 package ip.industrialProcessing.gui3.framework.custom;
 
+import net.minecraft.inventory.Slot;
 import ip.industrialProcessing.gui3.framework.controls.SlotControl;
 import ip.industrialProcessing.gui3.framework.controls.TankControl;
 import ip.industrialProcessing.gui3.framework.controls.UserControl;
@@ -12,11 +13,11 @@ import ip.industrialProcessing.gui3.framework.panels.StackPanel;
 
 public class TankWithSlotsControl extends UserControl {
 
-    public static TankWithSlotsControl createTankWithSlots(){
-	return new TankWithSlotsControl();
+    public static TankWithSlotsControl createTankWithSlots(Slot inputSlot, Slot outputSlot){
+	return new TankWithSlotsControl(inputSlot, outputSlot);
     }
     
-    public TankWithSlotsControl() {
+    public TankWithSlotsControl(Slot inputSlot, Slot outputSlot) {
 	width = Float.NaN;
 	height = Float.NaN;
 	StackPanel stack = new StackPanel();
@@ -31,8 +32,8 @@ public class TankWithSlotsControl extends UserControl {
 	grid.rows.add(new GridSize(1, SizeMode.RELATIVE));
 	grid.rows.add(new GridSize(18, SizeMode.ABSOLUTE));
 
-	SlotControl slotInput = SlotControl.createBucketSlot();
-	SlotControl slotOutput = SlotControl.createBucketSlot();
+	SlotControl slotInput = SlotControl.createBucketSlot(inputSlot);
+	SlotControl slotOutput = SlotControl.createBucketSlot(outputSlot);
 	grid.children.add(new GridCell(0, 0, slotInput));
 	grid.children.add(new GridCell(2, 0, slotOutput));
 	

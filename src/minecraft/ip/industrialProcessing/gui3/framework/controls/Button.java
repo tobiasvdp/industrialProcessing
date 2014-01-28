@@ -1,5 +1,9 @@
 package ip.industrialProcessing.gui3.framework.controls;
 
+import java.util.ArrayList;
+
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.resources.Resource;
 import net.minecraft.util.ResourceLocation;
@@ -14,7 +18,17 @@ import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
 
 public class Button extends UIElement {
 
-    private static TextureReference buttonTexture = new TextureReference(new Size(128, 96), IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/Buttons.png");
+    private ArrayList<IButtonClickListener> clickEventHandlers = new ArrayList<IButtonClickListener>();
+
+    public void subscribeClick(IButtonClickListener listener) {
+	this.clickEventHandlers.add(listener);
+    }
+
+    public void unssubscribeClick(IButtonClickListener listener) {
+	this.clickEventHandlers.remove(listener);
+    }
+
+    private static TextureReference buttonTexture = new TextureReference(new Size(200, 60), IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/Buttons.png");
 
     private TextureReference texture;
 
@@ -42,10 +56,15 @@ public class Button extends UIElement {
 	    } else {
 		drawButton(size, 2, renderer);
 	    }
-	} else
+	} else {
 	    drawButton(size, 0, renderer);
+	}
+	GL11.glPushMatrix();
+	if (mouseDown)
+	    GL11.glTranslatef(0.5f, 0.5f, 0);
 	if (this.child != null)
 	    this.child.render(renderer);
+	GL11.glPopMatrix();
     }
 
     private void drawButton(Rect rect, int i, GuiRenderer renderer) {
@@ -54,7 +73,7 @@ public class Button extends UIElement {
 	float uSize = 1;
 	float vSize = 1 / 3f;
 
-	float cornerSize = Math.min(rect.width / 4, Math.min(rect.height / 4, 4));
+	float cornerSize = 4;
 	renderer.drawNineGrid(rect, new Thickness(cornerSize, cornerSize, cornerSize, cornerSize), new Rect(uMin, vMin, uSize, vSize), this.texture);
     }
 
@@ -76,28 +95,31 @@ public class Button extends UIElement {
     }
 
     @Override
-    public void mouseEntered(float x, float y) {
-	this.hover = true;
+    protected void mouseUpOverride(float mouseX, float mouseY, MouseButton button) {
+	this.mouseDown = false;
+	for (IButtonClickListener listener : this.clickEventHandlers) {
+	    listener.buttonClicked(this, mouseX, mouseY, button);
+	}
     }
 
     @Override
-    public void mouseLeft(float x, float y) {
+    protected void mouseDownOverride(float mouseX, float mouseY, MouseButton button) {
+	this.mouseDown = true;
+    }
+
+    @Override
+    protected void mouseLeftOverride(float mouseX, float mouseY) {
 	this.hover = false;
 	this.mouseDown = false;
     }
 
     @Override
-    public void mouseMove(float x, float y) {
+    protected void mouseEnteredOverride(float mouseX, float mouseY) {
+	this.hover = true;
     }
 
     @Override
-    public void mouseUp(float x, float y, MouseButton button) {
-	this.mouseDown = false;
-    }
-
-    @Override
-    public void mouseDown(float x, float y, MouseButton button) {
-	this.mouseDown = true;
+    protected void mouseMovedOverride(float mouseX, float mouseY) {
     }
 
 }

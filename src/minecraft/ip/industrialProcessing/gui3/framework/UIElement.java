@@ -12,6 +12,8 @@ public abstract class UIElement {
     private float x;
     private float y;
     private Size desiredSize;
+    private static float absoluteX = 0;
+    private static float absoluteY = 0;
 
     public float getX() {
 	return x;
@@ -98,11 +100,17 @@ public abstract class UIElement {
 	    rect.width -= this.margin.left + this.margin.right;
 	    rect.height -= this.margin.top + this.margin.bottom;
 	}
-	Size size = arrangeOverride(rect.getSize());
 
-	float width = Math.min(size.width, rect.width);
-	float height = Math.min(size.height, rect.height);
-	this.y = rect.y;
+	float width = this.horizontalAlign == Alignment.STRETCH ? Float.POSITIVE_INFINITY : this.desiredSize.width;
+	float height = this.verticalAlign == Alignment.STRETCH ? Float.POSITIVE_INFINITY : this.desiredSize.height;
+
+	width = Math.min(width, rect.width);
+	height = Math.min(height, rect.height);
+
+	Size size = arrangeOverride(new Size(width, height));
+
+	width = Math.min(size.width, rect.width);
+	height = Math.min(size.height, rect.height);
 
 	switch (this.horizontalAlign) {
 	case MIN:
@@ -147,44 +155,93 @@ public abstract class UIElement {
     private float mouseX;
 
     public void render(GuiRenderer renderer) {
+	boolean debug = false;
 	GL11.glPushMatrix();
 	GL11.glTranslatef(x, y, 1);
+	absoluteX += x;
+	absoluteY += y;
 	Rect bounds = new Rect(0, 0, this.actualSize);
+	if (debug)
+	    renderer.drawRectangle(bounds, 0xffffffff);
 	renderOverride(bounds, renderer);
-	renderer.drawRectangle(new Rect(0, 0, 1, this.actualSize.height), color);
-	renderer.drawRectangle(new Rect(this.actualSize.width - 1, 0, 1, this.actualSize.height), color);
-	renderer.drawRectangle(new Rect(0, 0, this.actualSize.width, 1), color);
-	renderer.drawRectangle(new Rect(0, this.actualSize.height - 1, this.actualSize.width, 1), color);
-	renderer.drawRectangle(new Rect(mouseX, mouseY, 2, 20), color);
+	absoluteX -= x;
+	absoluteY -= y;
+	if (debug) {
+	    color = 0xffff0000;
+	    float lineThickness = 0.25f;
+	    renderer.drawRectangle(new Rect(0, 0, lineThickness, this.actualSize.height), color);
+	    renderer.drawRectangle(new Rect(this.actualSize.width - lineThickness, 0, lineThickness, this.actualSize.height), color);
+	    renderer.drawRectangle(new Rect(0, 0, this.actualSize.width, lineThickness), color);
+	    renderer.drawRectangle(new Rect(0, this.actualSize.height - lineThickness, this.actualSize.width, lineThickness), color);
+	}
 	GL11.glPopMatrix();
+    }
+
+    protected Rect getAbsoluteBounds(Rect relativeBounds) {
+	return new Rect(absoluteX + relativeBounds.x, absoluteY + relativeBounds.y, relativeBounds.x, relativeBounds.y);
     }
 
     protected abstract void renderOverride(Rect size, GuiRenderer renderer);
 
-    public void setMouseInside(boolean isInside, float x, float y) {
-	if (isHittestVisible) {
-	    if (isMouseInside != isInside) {
-		this.isMouseInside = isInside;
-		if (isInside)
-		    mouseEntered(x, y);
-		else
-		    mouseLeft(x, y);
-	    }
+    public void mouseDown(float mouseX, float mouseY, MouseButton button) {
+	float relativeX = mouseX - this.x;
+	float relativeY = mouseY - this.y;
+	if (this.hitTest(mouseX, mouseY)) {
+	    mouseDownOverride(relativeX, relativeY, button);
 	}
     }
 
-    public abstract void mouseEntered(float x, float y);
-
-    public abstract void mouseLeft(float x, float y);
-
-    public void mouseMove(float x, float y) {
-	this.mouseX = x;
-	this.mouseY = y;
+    public void mouseUp(float mouseX, float mouseY, MouseButton button) {
+	float relativeX = mouseX - this.x;
+	float relativeY = mouseY - this.y;
+	if (this.hitTest(mouseX, mouseY)) {
+	    mouseUpOverride(relativeX, relativeY, button);
+	}
     }
 
-    public abstract void mouseUp(float x, float y, MouseButton button);
+    public void mouseMoved(float mouseX, float mouseY) {
+	float relativeX = mouseX - this.x;
+	float relativeY = mouseY - this.y;
+	boolean hit;
+	if (hit = this.hitTest(mouseX, mouseY)) {
+	    mouseMovedOverride(relativeX, relativeY);
+	}
+	setMouseInside(hit, relativeX, relativeY);
+    }
 
-    public abstract void mouseDown(float x, float y, MouseButton button);
+    private void setMouseInside(boolean hit, float mouseX, float mouseY) {
+	if (this.isMouseInside != hit) {
+	    this.isMouseInside = hit;
+	    if (hit)
+		mouseEnteredOverride(mouseX, mouseY);
+	    else
+		mouseLeftOverride(mouseX, mouseY);
+	}
+    }
+
+    public void mouseEntered(float mouseX, float mouseY) {
+	float relativeX = mouseX - this.x;
+	float relativeY = mouseY - this.y;
+	boolean hit = this.hitTest(mouseX, mouseY);
+	setMouseInside(hit, relativeX, relativeY);
+    }
+
+    public void mouseLeft(float mouseX, float mouseY) {
+	float relativeX = mouseX - this.x;
+	float relativeY = mouseY - this.y;
+	boolean hit = this.hitTest(mouseX, mouseY);
+	setMouseInside(hit, relativeX, relativeY);
+    }
+
+    protected abstract void mouseUpOverride(float mouseX, float mouseY, MouseButton button);
+
+    protected abstract void mouseDownOverride(float mouseX, float mouseY, MouseButton button);
+
+    protected abstract void mouseLeftOverride(float mouseX, float mouseY);
+
+    protected abstract void mouseEnteredOverride(float mouseX, float mouseY);
+
+    protected abstract void mouseMovedOverride(float mouseX, float mouseY);
 
     public boolean hitTest(float x, float y) {
 	if (this.isHittestVisible) {

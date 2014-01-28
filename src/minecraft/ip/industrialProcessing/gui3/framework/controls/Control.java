@@ -26,22 +26,22 @@ public abstract class Control extends UIElement {
     }
 
     @Override
-    public void mouseMove(float x, float y) {
+    protected void mouseUpOverride(float mouseX, float mouseY, MouseButton button) {
     }
 
     @Override
-    public void mouseUp(float x, float y, MouseButton button) {
+    protected void mouseDownOverride(float mouseX, float mouseY, MouseButton button) {
     }
 
     @Override
-    public void mouseDown(float x, float y, MouseButton button) {
+    protected void mouseLeftOverride(float mouseX, float mouseY) {
     }
 
     @Override
-    public void mouseEntered(float x, float y) {
+    protected void mouseEnteredOverride(float mouseX, float mouseY) {
     }
 
     @Override
-    public void mouseLeft(float x, float y) {
+    protected void mouseMovedOverride(float mouseX, float mouseY) {
     }
 }

@@ -18,6 +18,10 @@ public class GridPanel extends UIElement {
 
     public ArrayList<GridCell> children = new ArrayList<GridCell>();
 
+    public GridPanel() {
+	this.isHittestVisible = true;
+    }
+
     @Override
     protected Size measureOverride(Size maxSize) {
 	float[] columnHeights = new float[columns.size()];
@@ -81,9 +85,9 @@ public class GridPanel extends UIElement {
 			    widestRow = i;
 		    }
 		    if (cellHeight > 0) {
-			float height = columnHeights[i] += cellHeight;
+			float height = columnHeights[j] += cellHeight;
 			if (height > columnHeights[highestColumn])
-			    highestColumn = i;
+			    highestColumn = j;
 		    }
 		}
 	    }
@@ -188,54 +192,46 @@ public class GridPanel extends UIElement {
 	    if (child.content != null)
 		child.content.render(renderer);
 	}
+	renderer.drawRectangle(size, 0xFF00FF00);
     }
 
     @Override
-    public void mouseDown(float x, float y, MouseButton button) {
+    protected void mouseDownOverride(float mouseX, float mouseY, MouseButton button) {
 	for (GridCell child : children) {
 	    if (child.content != null)
-		child.content.mouseDown(x - child.content.getX(), y - child.content.getY(), button);
+		child.content.mouseDown(mouseX, mouseY, button);
 	}
     }
 
     @Override
-    public void mouseUp(float x, float y, MouseButton button) {
+    protected void mouseUpOverride(float mouseX, float mouseY, MouseButton button) {
 	for (GridCell child : children) {
 	    if (child.content != null)
-		if (child.content.hitTest(x, y)) {
-		    child.content.mouseUp(x - child.content.getX(), y - child.content.getY(), button);
-		}
+		child.content.mouseUp(mouseX, mouseY, button);
 	}
     }
 
     @Override
-    public void mouseMove(float x, float y) {
+    protected void mouseMovedOverride(float mouseX, float mouseY) {
 	for (GridCell child : children) {
 	    if (child.content != null)
-		if (child.content.hitTest(x, y)) {
-		    child.content.mouseMove(x - child.content.getX(), y - child.content.getY());
-		    child.content.setMouseInside(true, x - child.content.getX(), y - child.content.getY());
-		} else
-		    child.content.setMouseInside(false, x - child.content.getX(), y - child.content.getY());
+		child.content.mouseMoved(mouseX, mouseY);
 	}
     }
 
     @Override
-    public void mouseEntered(float x, float y) {
+    protected void mouseLeftOverride(float mouseX, float mouseY) {
 	for (GridCell child : children) {
 	    if (child.content != null)
-		if (child.content.hitTest(x, y)) {
-		    child.content.setMouseInside(true, x, y);
-		} else
-		    child.content.setMouseInside(false, x, y);
+		child.content.mouseLeft(mouseX, mouseY);
 	}
     }
 
     @Override
-    public void mouseLeft(float x, float y) {
+    protected void mouseEnteredOverride(float mouseX, float mouseY) {
 	for (GridCell child : children) {
 	    if (child.content != null)
-		child.content.setMouseInside(false, x, y);
+		child.content.mouseEntered(mouseX, mouseY);
 	}
     }
 }

@@ -41,8 +41,8 @@ public class Decorator extends UIElement {
     protected Size arrangeOverride(Size maxSize) {
 	if (child != null) {
 	    Size size = child.getDesiredSize();
-	    child.arrange(new Rect(borderWidth, borderWidth, new Size(maxSize.width - borderWidth * 2, maxSize.height - borderWidth * 2)));
-	    return size;
+	    child.arrange(new Rect(borderWidth, borderWidth, new Size(size.width - borderWidth * 2, size.height - borderWidth * 2)));
+	    return new Size(size.width + borderWidth * 2, size.height + borderWidth * 2);
 	}
 	return new Size(borderWidth * 2, borderWidth * 2);
     }
@@ -58,49 +58,33 @@ public class Decorator extends UIElement {
     }
 
     @Override
-    public void mouseEntered(float x, float y) {
-	x += borderWidth;
-	y += borderWidth;
+    protected void mouseUpOverride(float mouseX, float mouseY, MouseButton button) {
 	if (child != null)
-	    if (child.hitTest(x, y))
-		child.mouseEntered(x, y);
+	    child.mouseUp(mouseX, mouseY, button);
     }
 
     @Override
-    public void mouseLeft(float x, float y) {
-	x += borderWidth;
-	y += borderWidth;
+    protected void mouseDownOverride(float mouseX, float mouseY, MouseButton button) {
 	if (child != null)
-	    if (child.hitTest(x, y))
-		child.mouseLeft(x, y);
+	    child.mouseDown(mouseX, mouseY, button);
     }
 
     @Override
-    public void mouseMove(float x, float y) {
-	x += borderWidth;
-	y += borderWidth;
+    protected void mouseLeftOverride(float mouseX, float mouseY) {
 	if (child != null)
-	    if (child.hitTest(x, y))
-		child.mouseMove(x, y);
+	    child.mouseLeft(mouseX, mouseY);
     }
 
     @Override
-    public void mouseUp(float x, float y, MouseButton button) {
-	x += borderWidth;
-	y += borderWidth;
+    protected void mouseEnteredOverride(float mouseX, float mouseY) {
 	if (child != null)
-	    if (child.hitTest(x, y))
-		child.mouseUp(x, y, button);
+	    child.mouseEntered(mouseX, mouseY);
     }
 
     @Override
-    public void mouseDown(float x, float y, MouseButton button) {
-	x += borderWidth;
-	y += borderWidth;
+    protected void mouseMovedOverride(float mouseX, float mouseY) {
 	if (child != null)
-	    if (child.hitTest(x, y))
-		child.mouseDown(x, y, button);
-
+	    child.mouseMoved(mouseX, mouseY);
     }
 
 }

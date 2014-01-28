@@ -10,6 +10,10 @@ public class TextBlock extends Control {
 
     public String text;
     public int color;
+    public boolean allowEllipsis = true;
+    public boolean allowWrap = true;
+    public boolean hasShadow = false;
+    private Size textSize;
 
     public TextBlock(String text, int color) {
 	this.text = text;
@@ -20,20 +24,34 @@ public class TextBlock extends Control {
 
     @Override
     protected Size measureOverride(Size maxSize) {
+	Size size = new Size(0, 0);
 	FontRenderer renderer = Minecraft.getMinecraft().fontRenderer;
-	if (maxSize.width < renderer.getStringWidth("..."))
-	    return new Size(0, 0);
-	float width = renderer.getStringWidth(text);
-	if (width > maxSize.width) {
-	    return new Size(width, renderer.splitStringWidth(text, (int) width));
+	if (maxSize.width < renderer.getStringWidth("...")) {
+	    size = new Size(0, 0);
 	} else {
-	    return new Size(width, renderer.FONT_HEIGHT);
+	    float width = renderer.getStringWidth(text);
+	    if (width > maxSize.width) {
+		size = new Size(width, renderer.splitStringWidth(text, (int) width));
+	    } else {
+		size = new Size(width, renderer.FONT_HEIGHT);
+	    }
 	}
+	Size minSize = super.measureOverride(maxSize);
+
+	return this.textSize = new Size(Math.max(minSize.width, size.width), Math.max(minSize.height, size.height));
+    }
+    
+    @Override
+    protected Size arrangeOverride(Size maxSize) { 
+        return super.arrangeOverride(this.textSize);
     }
 
     @Override
-    protected void renderOverride(Rect size, GuiRenderer renderer) { 
-	renderer.drawString(size, this.text, this.color, true, true);
+    protected void renderOverride(Rect size, GuiRenderer renderer) {
+	renderer.drawString(size, this.text, this.color, allowEllipsis, allowWrap, hasShadow);
     }
 
+    public static TextBlock createTextBlock() {
+	return new TextBlock("", 0xFFFFFFFF);
+    }
 }

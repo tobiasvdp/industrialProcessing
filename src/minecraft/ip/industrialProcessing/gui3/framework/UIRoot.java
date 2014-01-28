@@ -1,5 +1,7 @@
 package ip.industrialProcessing.gui3.framework;
 
+import org.lwjgl.opengl.GL11;
+
 import ip.industrialProcessing.gui3.framework.panels.MouseButton;
 import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
 
@@ -37,13 +39,17 @@ public class UIRoot {
     }
 
     public void render(int width, int height, int x, int y, int mouseX, int mouseY) {
+
 	if (this.element != null) {
 	    Size size = new Size(width, height);
-	    Rect rect = new Rect(x, y, size);
+	    Rect rect = new Rect(0, 0, size);
 	    this.element.measure(size);
 	    this.element.arrange(rect);
-	    mouseMoved(mouseX, mouseY);
+	    mouseMoved(mouseX - x, mouseY - y);
+	    GL11.glPushMatrix();
+	    GL11.glTranslatef(x, y, 0);
 	    this.element.render(this.guiRenderer);
+	    GL11.glPopMatrix();
 	}
     }
 
@@ -57,11 +63,7 @@ public class UIRoot {
 	    this.mouseY = mouseY;
 	    float x = mouseX;
 	    float y = mouseY;
-	    if (this.element.hitTest(x, y)) {
-		this.element.setMouseInside(true, x, y);
-		this.element.mouseMove(x, y);
-	    } else
-		this.element.setMouseInside(false, x, y);
+	    this.element.mouseMoved(x, y);
 	}
     }
 }

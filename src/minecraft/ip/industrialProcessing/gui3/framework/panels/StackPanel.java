@@ -76,6 +76,6 @@ public class StackPanel extends Panel {
 
     @Override
     protected void renderOverride(Rect size, GuiRenderer renderer) {
-	super.renderOverride(size, renderer);
+	super.renderOverride(size, renderer); 
     }
 }
