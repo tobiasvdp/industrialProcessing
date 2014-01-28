@@ -105,8 +105,16 @@ public class ConfigRenderers {
     private int rendererConveyorPackerId;
     private int rendererIronPoleId;
     private int rendererDoorEmergencyId;
+    private int rendererWireId;
     private int rendererInterfaceId;
 
+    public static void setRendererWire(int var) {
+	getInstance().rendererWireId = var;
+    }
+
+    public static int getRendererWire() {
+	return getInstance().rendererWireId;
+    }
 
     public static void setRendererInterface(int var) {
 	getInstance().rendererInterfaceId = var;

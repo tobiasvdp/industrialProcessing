@@ -13,6 +13,10 @@ import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.enti
 import ip.industrialProcessing.multiblock.dummy.block.toggleButton.TEmultiblockToggleButton;
 import ip.industrialProcessing.subMod.logic.old.transport.ICommunicationTransport;
 import ip.industrialProcessing.transport.steve.railway.suspended.cart.EntityFloatingCart;
+import ip.industrialProcessing.utils.packets.PacketDataHandler;
+import ip.industrialProcessing.utils.packets.PacketIP002SendMicroBlockDestructionChange;
+import ip.industrialProcessing.utils.packets.PacketIP003ScheduleBlockUpdateToServer;
+import ip.industrialProcessing.utils.packets.PacketIP005DestroyBlock;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
@@ -42,6 +46,9 @@ public class PacketHandler implements IPacketHandler {
 	public static final String IP_ENTITY_INTERACT = "IP.En.Int";
 	public static final String IP_ENTITY_SPAWNGARAGEDOOR = "IP.En.GDS";
 	public static final String IP_ENTITY_SPAWNGARAGEDOORBLOCK = "IP.En.GDB";
+	public static final String IP_MICROBLOCKS_DESTROYING = "IP.BMB.Des";
+	public static final String IP_SCHEDULE_TICK = "IP.tick";
+	public static final String IP_DESTROY_BLOCK = "IP.Des";
 
 	@Override
 	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {
@@ -49,6 +56,12 @@ public class PacketHandler implements IPacketHandler {
 			TileAnimationSyncHandler.handleAnimationSync(manager, packet, player);
 		} else if (packet.channel.equals(TANK_SYNC)) {
 			TileTankSyncHandler.handleTankSync(manager, packet, player);
+		} else if (packet.channel.equals(IP_MICROBLOCKS_DESTROYING)) {
+			PacketDataHandler.handlePacketIP002SendMicroBlockDestructionChange(player, PacketIP002SendMicroBlockDestructionChange.getPacketFromCustom250packet(packet));
+		} else if (packet.channel.equals(IP_SCHEDULE_TICK)) {
+			PacketDataHandler.handlePacketIP003ScheduleBlockUpdateToServer(player, PacketIP003ScheduleBlockUpdateToServer.getPacketFromCustom250packet(packet));
+		} else if (packet.channel.equals(IP_DESTROY_BLOCK)) {
+			PacketDataHandler.handlePacketIP005DestroyBlock(player, PacketIP005DestroyBlock.getPacketFromCustom250packet(packet));
 		} else if (packet.channel.equals(BUTTON_PRESSED)) {
 			DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
 			int teX = 0;

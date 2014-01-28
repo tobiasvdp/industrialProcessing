@@ -56,7 +56,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = "IndustrialProcessing", name = "Industrial Processing", version = "0.0.1", dependencies = "after:NotEnoughItems")
-@NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = { PacketHandler.ANIMATION_SYNC, PacketHandler.TANK_SYNC, PacketHandler.CONVEYOR_SYNC, PacketHandler.BUTTON_PRESSED, PacketHandler.SYNC_CLIENT, PacketHandler.SEND_INFO, PacketHandler.SCREEN_PRESSED, PacketHandler.IP_ELEVATOR_BUTTON, PacketHandler.IP_LOGIC_SYNCSIDE, PacketHandler.IP_ENTITY_INTERACT, PacketHandler.IP_ENTITY_SPAWNGARAGEDOOR, PacketHandler.IP_ENTITY_SPAWNGARAGEDOORBLOCK}, packetHandler = PacketHandler.class)
+@NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = { PacketHandler.ANIMATION_SYNC, PacketHandler.TANK_SYNC, PacketHandler.CONVEYOR_SYNC, PacketHandler.BUTTON_PRESSED, PacketHandler.SYNC_CLIENT, PacketHandler.SEND_INFO, PacketHandler.SCREEN_PRESSED, PacketHandler.IP_ELEVATOR_BUTTON, PacketHandler.IP_LOGIC_SYNCSIDE, PacketHandler.IP_ENTITY_INTERACT, PacketHandler.IP_ENTITY_SPAWNGARAGEDOOR, PacketHandler.IP_ENTITY_SPAWNGARAGEDOORBLOCK, PacketHandler.IP_MICROBLOCKS_DESTROYING, PacketHandler.IP_SCHEDULE_TICK,PacketHandler.IP_DESTROY_BLOCK }, packetHandler = PacketHandler.class)
 public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISetupMachineBlocks, ISetupItems, ISetupBlocks, ISetupFluids, ISetupAchievements, ISetupDamageSource, ISetupTransportBlocks {
 	// The instance of your mod that Forge uses.
 	@Instance("IndustrialProcessing")
@@ -118,13 +118,15 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
 
-		//register new conveyor line handler
+		// register new conveyor line handler
 		HandlerRegistry.registerConveyorLineHandler(new ConveyorLineHandler());
-		
-		//register keyhandler
-		KeyBindingRegistry.registerKeyBinding(new KeyPressHandler());
-		
-		//register new heat handler
+
+		// register keyhandler
+		if (event.getSide().isClient()) {
+			KeyBindingRegistry.registerKeyBinding(new KeyPressHandler());
+		}
+
+		// register new heat handler
 		HandlerRegistry.registerHeatHandler(new HeatHandler());
 
 		// register new crafting handler
@@ -166,8 +168,8 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
 
 		// register basic crafting recipes
 		ConfigBaseRecipes.getInstance().addBaseRecipes();
-		
-		//register blockType names
+
+		// register blockType names
 		BlockType.registerNames();
 
 		EntityRegistry.registerModEntity(ENmultiblockFrame.class, "Platform", 0, IndustrialProcessing.instance, 80, 1, true);
@@ -175,7 +177,7 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
 
 		EntityRegistry.registerModEntity(ENmultiblockLiftDoor.class, "LiftDoor", 1, IndustrialProcessing.instance, 80, 1, true);
 		LanguageRegistry.instance().addStringLocalization("entity.LiftDoor.name", "en_US", "Lift door");
-		
+
 		EntityRegistry.registerModEntity(EntityGarageDoor.class, "Garage door", 2, IndustrialProcessing.instance, 80, 1, true);
 		LanguageRegistry.instance().addStringLocalization("entity.GarageDoor.name", "en_US", "Garage door");
 
@@ -184,18 +186,18 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
 		// register worldgenerator
 		worldGen = new WorldGeneration();
 		GameRegistry.registerWorldGenerator(worldGen);
-	
+
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 	}
-	
+
 	@EventHandler
 	public void serverStart(FMLServerStartedEvent event) {
 
 	}
-	
+
 	@EventHandler
 	public void serverStop(FMLServerStoppingEvent event) {
 		HandlerRegistry.resetConveyorLineHandler();
