@@ -11,7 +11,7 @@ import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.Tile
 import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.TileEntityGarageDoorFrame;
 import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.entity.EntityGarageDoor;
 import ip.industrialProcessing.multiblock.dummy.block.toggleButton.TEmultiblockToggleButton;
-import ip.industrialProcessing.subMod.logic.transport.ICommunicationTransport;
+import ip.industrialProcessing.subMod.logic.old.transport.ICommunicationTransport;
 import ip.industrialProcessing.transport.steve.railway.suspended.cart.EntityFloatingCart;
 
 import java.io.ByteArrayInputStream;

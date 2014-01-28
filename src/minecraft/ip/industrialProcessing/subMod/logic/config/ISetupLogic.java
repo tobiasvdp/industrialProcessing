@@ -1,13 +1,13 @@
 package ip.industrialProcessing.subMod.logic.config;
 
-import ip.industrialProcessing.subMod.logic.function.and.BLlogicAnd;
-import ip.industrialProcessing.subMod.logic.function.or.BLlogicOr;
-import ip.industrialProcessing.subMod.logic.network.display.BlockLogicDisplay;
-import ip.industrialProcessing.subMod.logic.network.interfaces.machine.BlockMachineInterface;
-import ip.industrialProcessing.subMod.logic.transport.wired.bundle.BLlogicBundle;
-import ip.industrialProcessing.subMod.logic.transport.wired.cable.BLlogicCable;
-import ip.industrialProcessing.subMod.logic.transport.wired.displayBox.BLlogicDisplayBox;
-import ip.industrialProcessing.subMod.logic.transport.wired.switchbox.BLlogicSwitchBox;
+import ip.industrialProcessing.subMod.logic.old.function.and.BLlogicAnd;
+import ip.industrialProcessing.subMod.logic.old.function.or.BLlogicOr;
+import ip.industrialProcessing.subMod.logic.old.network.display.BlockLogicDisplay;
+import ip.industrialProcessing.subMod.logic.old.network.interfaces.machine.BlockMachineInterface;
+import ip.industrialProcessing.subMod.logic.old.transport.wired.bundle.BLlogicBundle;
+import ip.industrialProcessing.subMod.logic.old.transport.wired.cable.BLlogicCable;
+import ip.industrialProcessing.subMod.logic.old.transport.wired.displayBox.BLlogicDisplayBox;
+import ip.industrialProcessing.subMod.logic.old.transport.wired.switchbox.BLlogicSwitchBox;
 
 public interface ISetupLogic {
 	// logic

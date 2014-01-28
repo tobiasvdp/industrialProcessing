@@ -1,7 +1,7 @@
 package ip.industrialProcessing.subMod.logic.client;
 
 import ip.industrialProcessing.api.rendering.ModelMachine;
-import ip.industrialProcessing.subMod.logic.utils.UTBuffer;
+import ip.industrialProcessing.subMod.logic.old.utils.UTBuffer;
 
 public abstract class ModelLogic extends ModelMachine {
 

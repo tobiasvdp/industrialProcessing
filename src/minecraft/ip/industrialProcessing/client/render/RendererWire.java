@@ -1,7 +1,7 @@
 package ip.industrialProcessing.client.render;
 
 import ip.industrialProcessing.api.rendering.RendererTileEntity;
-import ip.industrialProcessing.subMod.logic.transport.ICommunicationTransport;
+import ip.industrialProcessing.subMod.logic.old.transport.ICommunicationTransport;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;

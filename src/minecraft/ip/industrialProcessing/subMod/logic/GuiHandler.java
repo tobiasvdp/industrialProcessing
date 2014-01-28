@@ -1,7 +1,7 @@
 package ip.industrialProcessing.subMod.logic;
 
-import ip.industrialProcessing.subMod.logic.network.display.GuiLogicDisplay;
-import ip.industrialProcessing.subMod.logic.network.display.TileEntityLogicDisplay;
+import ip.industrialProcessing.subMod.logic.old.network.display.GuiLogicDisplay;
+import ip.industrialProcessing.subMod.logic.old.network.display.TileEntityLogicDisplay;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
