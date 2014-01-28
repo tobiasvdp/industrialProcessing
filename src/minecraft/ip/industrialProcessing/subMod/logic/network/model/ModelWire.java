@@ -14,6 +14,7 @@ import ip.industrialProcessing.client.render.ModelBlock;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.microBlock.IMicroBlock;
 import ip.industrialProcessing.microBlock.connectingSides.IMicroBlockInterconnection;
+import ip.industrialProcessing.microBlock.connections.IMicroBlockConnection;
 
 public class ModelWire extends ModelBlock {
 
@@ -33,7 +34,7 @@ public class ModelWire extends ModelBlock {
 	@Override
 	public boolean renderWorldBlock(WorldReference reference, int modelId, RenderBlocks renderer) {
 
-		IMicroBlockInterconnection te = (IMicroBlockInterconnection) reference.world.getBlockTileEntity(reference.x, reference.y, reference.z);
+		IMicroBlockConnection te = (IMicroBlockConnection) reference.world.getBlockTileEntity(reference.x, reference.y, reference.z);
 		int[] sides = te.getSides();
 		
 		Icon iconWire = reference.getIcon(0);
@@ -41,9 +42,10 @@ public class ModelWire extends ModelBlock {
 		for (int i = 0; i < sides.length; i++) {
 			if (sides[i] != -1){
 				boolean[] innercon = te.getInterConnections(i);
+				boolean[] externCon = te.getExternalConnections(i);
 				models[i].renderMesh(false, iconWire, reference);
 				for(int j = 0;j<innercon.length;j++){
-					if(innercon[j])
+					if(innercon[j] || externCon[j])
 						innerconnections[i][j].renderMesh(false, iconWire, reference);
 				}
 			}

@@ -7,10 +7,11 @@ import ip.industrialProcessing.microBlock.BlockMicroBlock;
 import ip.industrialProcessing.microBlock.IMicroBlock;
 import ip.industrialProcessing.microBlock.TileEntityMicroBlock;
 import ip.industrialProcessing.microBlock.connectingSides.TileEntityMicroBlockConnectingSides;
+import ip.industrialProcessing.microBlock.connections.TileEntityMicroBlockConnection;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TileEntityLogicTransport extends TileEntityMicroBlockConnectingSides implements ILogicTransport{
+public class TileEntityLogicTransport extends TileEntityMicroBlockConnection implements ILogicTransport{
 
 }
