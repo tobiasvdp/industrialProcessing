@@ -81,11 +81,12 @@ public class BlockExtruder extends BlockMachineRendered implements IRecipeBlock,
     }
     
     @SideOnly(Side.CLIENT)
-    private static ModelExtruderBlock model = new ModelExtruderBlock();
+    private static ModelExtruderBlock model;
 
     @SideOnly(Side.CLIENT)
     @Override
     public ModelBlock getModel() {
+	if(model == null) model = new ModelExtruderBlock();
 	return model;
     }
 }

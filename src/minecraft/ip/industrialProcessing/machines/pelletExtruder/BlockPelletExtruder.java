@@ -80,11 +80,12 @@ public class BlockPelletExtruder extends BlockMachineRendered implements IRecipe
     }
 
     @SideOnly(Side.CLIENT)
-    private static ModelPelletExtruderBlock model = new ModelPelletExtruderBlock();
+    private static ModelPelletExtruderBlock model;
 
     @SideOnly(Side.CLIENT)
     @Override
     public ModelBlock getModel() {
+	if(model == null) model = new ModelPelletExtruderBlock();
 	return model;
     }
 }
