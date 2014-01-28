@@ -4,6 +4,8 @@ import ip.industrialProcessing.gui.IGuiLayout;
 import ip.industrialProcessing.gui.IGuiLayoutMultiblock;
 import ip.industrialProcessing.gui.container.ContainerIP;
 import ip.industrialProcessing.gui.guiContainer.GuiContainerIP;
+import ip.industrialProcessing.gui3.generating.IGuiBlock;
+import ip.industrialProcessing.gui3.generating.LayoutGuiBuilder;
 import ip.industrialProcessing.items.guide.gui.GuiGuide;
 import ip.industrialProcessing.machines.electrolyser.ContainerElectrolyser;
 import ip.industrialProcessing.machines.electrolyser.GuiContainerElectrolyser;
@@ -139,8 +141,13 @@ public class GuiHandler implements IGuiHandler {
 	    if (entity.getBlockType() != null && (entity.getBlockType() instanceof IGuiLayout || entity.getBlockType() instanceof IGuiLayoutMultiblock)) {
 		return new ContainerIP(player, entity);
 	    }
+
+	    if (entity.getBlockType() != null && entity.getBlockType() instanceof IGuiBlock) {
+		return LayoutGuiBuilder.createContainer(player.inventory, entity);
+	    }
+
 	    if (entity instanceof TileEntityMagneticSeparator)
-		return new ContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity); 
+		return new ContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity);
 	    if (entity instanceof TileEntityExtruder)
 		return new ContainerExtruder(player.inventory, (TileEntityExtruder) entity);
 	    if (entity instanceof TileEntityOxygenFurnace)
@@ -192,7 +199,7 @@ public class GuiHandler implements IGuiHandler {
 	    if (entity instanceof TileEntityVacuumDestilationTower)
 		return new ContainerVacuumDestilationTower(player.inventory, (TileEntityVacuumDestilationTower) entity);
 	    if (entity instanceof TileEntitySinter)
-		return new ContainerSinter(player.inventory, (TileEntitySinter) entity); 
+		return new ContainerSinter(player.inventory, (TileEntitySinter) entity);
 	    if (entity instanceof TEmultiblockBlastFurnace)
 		return new ContainerMultiblockBlastFurnace(player.inventory, (TEmultiblockBlastFurnace) entity);
 
@@ -230,8 +237,11 @@ public class GuiHandler implements IGuiHandler {
 	    if (entity.getBlockType() != null && (entity.getBlockType() instanceof IGuiLayout || entity.getBlockType() instanceof IGuiLayoutMultiblock)) {
 		return new GuiContainerIP(player, entity, new ContainerIP(player, entity));
 	    }
+	    if (entity.getBlockType() != null && entity.getBlockType() instanceof IGuiBlock) {
+		return LayoutGuiBuilder.createGuiContainer(player.inventory, entity);
+	    }
 	    if (entity instanceof TileEntityMagneticSeparator)
-		return new GuiContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity); 
+		return new GuiContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity);
 	    if (entity instanceof TileEntityExtruder)
 		return new GuiContainerExtruder(player.inventory, (TileEntityExtruder) entity);
 	    if (entity instanceof TileEntityOxygenFurnace)
@@ -285,7 +295,7 @@ public class GuiHandler implements IGuiHandler {
 	    if (entity instanceof TileEntityVacuumDestilationTower)
 		return new GuiContainerVacuumDestilationTower(player.inventory, (TileEntityVacuumDestilationTower) entity);
 	    if (entity instanceof TileEntitySinter)
-		return new GuiContainerSinter(player.inventory, (TileEntitySinter) entity); 
+		return new GuiContainerSinter(player.inventory, (TileEntitySinter) entity);
 	    if (entity instanceof TEmultiblockBlastFurnace)
 		return new GuiContainerMultiblockBlastFurnace(player.inventory, (TEmultiblockBlastFurnace) entity);
 	    if (entity instanceof TileEntityVacuumCaster)

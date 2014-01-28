@@ -1,5 +1,6 @@
 package ip.industrialProcessing.gui3.framework.controls;
 
+import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.gui3.framework.Rect;
 import ip.industrialProcessing.gui3.framework.Size;
 import ip.industrialProcessing.gui3.framework.Thickness;
@@ -10,6 +11,8 @@ import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
 
 public class Decorator extends UIElement {
 
+    private static final TextureReference DEFAULT_TEXTURE = new TextureReference(new Size(256, 256), IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/Background.png");
+    private static final int DEFAULT_BORDER_SIZE = 7;
     private UIElement child;
     public int borderWidth;
     private TextureReference texture;
@@ -30,9 +33,10 @@ public class Decorator extends UIElement {
     @Override
     protected Size measureOverride(Size maxSize) {
 	Size size;
-	if (child != null)
-	    size = child.measure(new Size(maxSize.width - borderWidth * 2, maxSize.height - borderWidth * 2));
-	else
+	if (child != null){
+	    size = new Size(maxSize.width - borderWidth * 2, maxSize.height - borderWidth * 2);
+	    size = child.measure(size);
+	}else
 	    size = new Size(0, 0);
 	return new Size(size.width + borderWidth * 2, size.height + borderWidth * 2);
     }
@@ -41,7 +45,7 @@ public class Decorator extends UIElement {
     protected Size arrangeOverride(Size maxSize) {
 	if (child != null) {
 	    Size size = child.getDesiredSize();
-	    child.arrange(new Rect(borderWidth, borderWidth, new Size(size.width - borderWidth * 2, size.height - borderWidth * 2)));
+	    child.arrange(new Rect(borderWidth, borderWidth, maxSize));
 	    return new Size(size.width + borderWidth * 2, size.height + borderWidth * 2);
 	}
 	return new Size(borderWidth * 2, borderWidth * 2);
@@ -85,6 +89,10 @@ public class Decorator extends UIElement {
     protected void mouseMovedOverride(float mouseX, float mouseY) {
 	if (child != null)
 	    child.mouseMoved(mouseX, mouseY);
+    }
+
+    public static Decorator createDecorator() {
+	return new Decorator(DEFAULT_TEXTURE, DEFAULT_BORDER_SIZE);
     }
 
 }

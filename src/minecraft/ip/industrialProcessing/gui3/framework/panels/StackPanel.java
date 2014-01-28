@@ -55,7 +55,7 @@ public class StackPanel extends Panel {
 	    for (UIElement child : getChildren()) {
 		Size size = child.getDesiredSize();
 		float height = Math.max(maxHeight, size.height);
-		child.arrange(new Rect(left, 0, size.width, height));
+		child.arrange(new Rect(left, 0, maxSize.width, height));
 		left += size.width;
 	    }
 	    return new Size(left, maxHeight);
@@ -75,7 +75,7 @@ public class StackPanel extends Panel {
     }
 
     @Override
-    protected void renderOverride(Rect size, GuiRenderer renderer) {
+    protected void renderOverride(Rect size, GuiRenderer renderer) { 
 	super.renderOverride(size, renderer); 
     }
 }

@@ -107,6 +107,8 @@ public abstract class UIElement {
 	width = Math.min(width, rect.width);
 	height = Math.min(height, rect.height);
 
+	width = Math.round(width);
+	height = Math.round(height);
 	Size size = arrangeOverride(new Size(width, height));
 
 	width = Math.min(size.width, rect.width);
@@ -145,6 +147,10 @@ public abstract class UIElement {
 	    height = rect.height;
 	    break;
 	}
+	this.x = Math.round(this.x);
+	this.y = Math.round(this.y);
+	width = Math.round(width);
+	height = Math.round(height);
 	this.actualSize = new Size(width, height);
     }
 
@@ -157,17 +163,19 @@ public abstract class UIElement {
     public void render(GuiRenderer renderer) {
 	boolean debug = false;
 	GL11.glPushMatrix();
-	GL11.glTranslatef(x, y, 1);
+	GL11.glTranslatef(x, y, 0.1f);
 	absoluteX += x;
 	absoluteY += y;
 	Rect bounds = new Rect(0, 0, this.actualSize);
-	if (debug)
-	    renderer.drawRectangle(bounds, 0xffffffff);
+	if (debug) {
+	    //renderer.drawRectangle(bounds, 0xFFffffff);
+	}
 	renderOverride(bounds, renderer);
 	absoluteX -= x;
 	absoluteY -= y;
 	if (debug) {
-	    color = 0xffff0000;
+	    GL11.glTranslatef(0, 0, 1);
+	    color = this.isMouseInside ? 0xffffff00 : 0xffff0000;
 	    float lineThickness = 0.25f;
 	    renderer.drawRectangle(new Rect(0, 0, lineThickness, this.actualSize.height), color);
 	    renderer.drawRectangle(new Rect(this.actualSize.width - lineThickness, 0, lineThickness, this.actualSize.height), color);

@@ -11,6 +11,10 @@ import net.minecraft.inventory.Slot;
 
 public class SlotGrid extends UserControl {
 
+    public static SlotGrid createSlotGrid(Slot[] slots, int size, Orientation orientation) {
+	return new SlotGrid(slots, size, orientation);
+    }
+
     public SlotGrid(Slot[] slots, int size, Orientation orientation) {
 	int rows = 0;
 	int columns = 0;

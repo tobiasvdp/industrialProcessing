@@ -86,8 +86,15 @@ public class NumericSpinner extends UserControl implements IButtonClickListener,
 	this.width = Float.NaN;
     }
 
-    public static NumericSpinner createSpinner(int textWidth) {
+    public static NumericSpinner createSpinner(float textWidth) {
 	NumericSpinner spinner = new NumericSpinner("%.0f", 1f);
+	spinner.textFieldBackground.minWidth = textWidth;
+	spinner.textFieldBackground.maxWidth = textWidth;
+	return spinner;
+    }
+
+    public static NumericSpinner createSpinner(String format, float scale, float textWidth) {
+	NumericSpinner spinner = new NumericSpinner(format, scale);
 	spinner.textFieldBackground.minWidth = textWidth;
 	spinner.textFieldBackground.maxWidth = textWidth;
 	return spinner;

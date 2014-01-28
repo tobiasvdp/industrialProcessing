@@ -191,8 +191,7 @@ public class GridPanel extends UIElement {
 	for (GridCell child : children) {
 	    if (child.content != null)
 		child.content.render(renderer);
-	}
-	renderer.drawRectangle(size, 0xFF00FF00);
+	} 
     }
 
     @Override

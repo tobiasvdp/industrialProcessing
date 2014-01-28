@@ -47,7 +47,7 @@ public class TextBlock extends Control {
     }
 
     @Override
-    protected void renderOverride(Rect size, GuiRenderer renderer) {
+    protected void renderOverride(Rect size, GuiRenderer renderer) { 
 	renderer.drawString(size, this.text, this.color, allowEllipsis, allowWrap, hasShadow);
     }
 

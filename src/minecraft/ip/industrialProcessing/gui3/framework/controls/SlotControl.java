@@ -35,8 +35,10 @@ public class SlotControl extends Control {
     protected void renderOverride(Rect size, GuiRenderer renderer) {
 	Rect absolute = getAbsoluteBounds(size);
 
-	slot.xDisplayPosition = (int) absolute.x + 1;
-	slot.yDisplayPosition = (int) absolute.y + 1;
+	if (slot != null) {
+	    slot.xDisplayPosition = (int) absolute.x + 1;
+	    slot.yDisplayPosition = (int) absolute.y + 1;
+	}
 
 	renderer.drawRectangle(size, 0xFFFFFF00);
 	renderer.drawRectangle(new Rect(1, 1, size.width - 2, size.height - 2), 0xFFFF0000);

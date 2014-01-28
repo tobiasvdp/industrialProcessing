@@ -8,11 +8,13 @@ import ip.industrialProcessing.gui3.framework.Thickness;
 import ip.industrialProcessing.gui3.framework.UIRoot;
 import ip.industrialProcessing.gui3.framework.controls.Button;
 import ip.industrialProcessing.gui3.framework.controls.Decorator;
+import ip.industrialProcessing.gui3.framework.controls.GaugeControl;
 import ip.industrialProcessing.gui3.framework.controls.ProgressBar;
 import ip.industrialProcessing.gui3.framework.controls.SlotControl;
 import ip.industrialProcessing.gui3.framework.controls.TankControl;
 import ip.industrialProcessing.gui3.framework.controls.TextBlock;
 import ip.industrialProcessing.gui3.framework.custom.CraftingGrid;
+import ip.industrialProcessing.gui3.framework.custom.LabeledGauge;
 import ip.industrialProcessing.gui3.framework.custom.LabeledProgressBar;
 import ip.industrialProcessing.gui3.framework.custom.NumericSpinner;
 import ip.industrialProcessing.gui3.framework.custom.PlayerInventory;
@@ -42,99 +44,37 @@ public class GuiContainerGenerator extends GuiContainerMachine {
     private GuiContainerGenerator(InventoryPlayer inventory, TileEntityGenerator entity, ContainerGenerator container) {
 	super(inventory, entity, container, "Buildcraft Generator", "textures/gui/Generator.png");
 	this.container = container;
-	this.generator = entity;
-/*
+	this.generator = entity; 
+	this.ySize = 300;
 	TextureReference texture = new TextureReference(new Size(256, 256), INamepace.TEXTURE_DOMAIN, "textures/gui/Generator.png");
-	TextureReference worker = new TextureReference(new Size(24, 32), INamepace.TEXTURE_DOMAIN, "textures/gui/Worker.png");
 
-	StackPanel stack = new StackPanel();
-
-	stack.orientation = Orientation.VERTICAL;
-
-	int si = 0;
-
-	Decorator machinePanel = new Decorator(texture, 7);
-	StackPanel stuff = new StackPanel();
-	stuff.addChild(TankWithSlotsControl.createTankWithSlots(this.container.getSlot(si++), this.container.getSlot(si++)));
-	stuff.addChild(TankControl.createTank());
-	stuff.addChild(ProgressBar.createTemperature());
-	stuff.addChild(ProgressBar.createVertical1());
-	stuff.addChild(ProgressBar.createVertical2());
-	stuff.addChild(ProgressBar.createVertical3());
-
-	StackPanel hor = new StackPanel();
-	hor.orientation = Orientation.VERTICAL;
-	hor.addChild(ProgressBar.createHorizontal1());
-	hor.addChild(ProgressBar.createHorizontal2());
-	hor.addChild(ProgressBar.createHorizontal3());
-	hor.addChild(ProgressBar.createWorker(worker));
-	stuff.addChild(hor);
-
-	machinePanel.setChild(stuff);
-	stack.addChild(machinePanel);
-	Decorator inventoryPanel = new Decorator(texture, 7);
-	stack.addChild(inventoryPanel);
-	TextBlock label = new TextBlock("Hello World", 0xFFFFFF);
-	StackPanel iStac = new StackPanel();
-	iStac.orientation = Orientation.VERTICAL;
-
-	iStac.addChild(label);
-	iStac.addChild(PowerControl.createPowerWithSlots(this.container.getSlot(si++)));
-
-	Slot[] slots = new Slot[3 * 3];
-	for (int i = 0; i < slots.length; i++) {
-	    slots[i] = this.container.getSlot(si++);
-	}
-	iStac.addChild(CraftingGrid.createBigHorizontal(slots, this.container.getSlot(si++)));
-	slots = new Slot[2 * 2];
-	for (int i = 0; i < slots.length; i++) {
-	    slots[i] = this.container.getSlot(si++);
-	}
-	iStac.addChild(CraftingGrid.createSmallVertical(slots, this.container.getSlot(si++)));
-	iStac.addChild(LabeledProgressBar.createProgressBar("Progress:", 0xFF686868));
-	inventoryPanel.setChild(iStac);
-	Decorator hotbarPanel = new Decorator(texture, 4);
-	stack.addChild(hotbarPanel);
-	StackPanel child = new StackPanel();
-	child.orientation = Orientation.HORIZONTAL;
-	for (int i = 0; i < 6; i++) {
-	    SlotControl childPanel = SlotControl.createSlot(this.container.getSlot(si++));
-	    child.addChild(childPanel);
-	}
-	child.addChild(SlotControl.createBucketSlot(this.container.getSlot(si++)));
-	child.addChild(SlotControl.createFuelSlot(this.container.getSlot(si++)));
-	child.addChild(SlotControl.createPowerSlot(this.container.getSlot(si++)));
-
-	TextBlock tb = new TextBlock("Button", 0xFFFFFFFF);
-	tb.hasShadow = true;
-	tb.margin = new Thickness(5, 5, 4, 5);
-	child.addChild(new Button(tb));
-
-	child.addChild(NumericSpinner.createSpinner(64));
-
-	texture = new TextureReference(new Size(64, 16), IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/Conveyor packing machine.png");
-
-	child.addChild(new StateButton(texture, 1, 4));
-	hotbarPanel.setChild(child);
-	stack.verticalAlign = Alignment.MIN;
-	stack.horizontalAlign = Alignment.STRETCH;
-	*/
-	TextureReference texture = new TextureReference(new Size(256, 256), INamepace.TEXTURE_DOMAIN, "textures/gui/Generator.png");
-	
 	Decorator panel = new Decorator(texture, 7);
-	
-	for (int i = 0; i < 27+9; i++) {
+
+	for (int i = 0; i < 27 + 9; i++) {
 	    container.getSlot(i).xDisplayPosition = -18;
-	    container.getSlot(i).yDisplayPosition = -18; 
+	    container.getSlot(i).yDisplayPosition = -18;
 	}
-	
+
+	StackPanel generatorPanel = new StackPanel();
+	generatorPanel.orientation = Orientation.HORIZONTAL;
+
+	generatorPanel.addChild(LabeledGauge.createLabeledGauge("Voltage", "%2.2fV", 1f, 4210752));
+	generatorPanel.addChild(LabeledGauge.createLabeledGauge("Current", "%2.2fA", 1f, 4210752));
+	generatorPanel.addChild(LabeledGauge.createLabeledGauge("Power", "%2.2fW", 1f, 4210752));
+
+	generatorPanel.margin = new Thickness(7, 0, 7, 0);
 	StackPanel stack = new StackPanel();
-	
-	panel.verticalAlign = Alignment.MAX;
-	
+	stack.orientation = Orientation.VERTICAL;
+	stack.horizontalAlign = Alignment.MIN;
+	stack.verticalAlign = Alignment.MIN;
+	TextBlock title = new TextBlock(this.name, 4210752);
+	stack.addChild(title);
+	stack.addChild(generatorPanel);
+
 	stack.addChild(PlayerInventory.createInventory(container, 0));
 	panel.setChild(stack);
-	this.layout = new UIRoot(panel); 
+	panel.verticalAlign = Alignment.CENTER;
+	this.layout = new UIRoot(panel);
     }
 
     @Override
@@ -163,7 +103,7 @@ public class GuiContainerGenerator extends GuiContainerMachine {
     protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
 	GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
  
-
+	
 	int x = (width - xSize) / 2;
 	int y = (height - ySize) / 2;
 	this.layout.render(xSize, ySize, x, y, par2, par3);
