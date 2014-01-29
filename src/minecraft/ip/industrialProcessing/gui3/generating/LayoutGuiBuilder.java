@@ -2,13 +2,14 @@ package ip.industrialProcessing.gui3.generating;
 
 import ip.industrialProcessing.gui3.containers.LayoutContainer;
 import net.minecraft.block.Block;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
 
 public class LayoutGuiBuilder {
 
-    public static Object createContainer(InventoryPlayer player, TileEntity entity) {
-
+    public static Container createContainer(InventoryPlayer player, TileEntity entity) { 
 	Block block = entity.getBlockType();
 	if (block instanceof IGuiBlock) {
 	    IGuiBlock guiBlock = (IGuiBlock) block;
@@ -16,13 +17,11 @@ public class LayoutGuiBuilder {
 	    if (builder != null) {
 		return builder.getContainer(player, entity);
 	    }
-	}
-
+	} 
 	return null;
     }
 
-    public static Object createGuiContainer(InventoryPlayer player, TileEntity entity) {
-
+    public static GuiContainer createGuiContainer(InventoryPlayer player, TileEntity entity) { 
 	Block block = entity.getBlockType();
 	if (block instanceof IGuiBlock) {
 	    IGuiBlock guiBlock = (IGuiBlock) block;

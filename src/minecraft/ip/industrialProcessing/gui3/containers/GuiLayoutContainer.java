@@ -1,6 +1,7 @@
 package ip.industrialProcessing.gui3.containers;
 
 import ip.industrialProcessing.gui3.binding.Binder;
+import ip.industrialProcessing.gui3.framework.UIElement;
 import ip.industrialProcessing.gui3.framework.UIRoot;
 import ip.industrialProcessing.gui3.framework.controls.Decorator;
 import ip.industrialProcessing.gui3.framework.panels.MouseButton;
@@ -20,7 +21,7 @@ public class GuiLayoutContainer extends GuiContainer {
 	binders.add(binding);
     }
 
-    public GuiLayoutContainer(LayoutContainer container, Decorator root) {
+    public GuiLayoutContainer(LayoutContainer container, UIElement root) {
 	super(container);
 	this.layout = new UIRoot(root);
 	this.ySize = 300;

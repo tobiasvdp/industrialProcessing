@@ -10,10 +10,16 @@ import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
+import ip.industrialProcessing.gui3.generating.GuiBuilderDefault;
+import ip.industrialProcessing.gui3.generating.IGuiBlock;
+import ip.industrialProcessing.gui3.generating.IGuiBuilder;
 import ip.industrialProcessing.machines.BlockMachineRendered;
+import ip.industrialProcessing.utils.IDescriptionBlock;
 
-public class BlockElectroMotor extends BlockMachineRendered {
+public class BlockElectroMotor extends BlockMachineRendered implements IDescriptionBlock, IGuiBlock {
 
+    private static IGuiBuilder guiBuilder = new GuiBuilderDefault("Motor").addLabeledGauge("Voltage", "%.2fV", 0).addLabeledGauge("Speed", "%.0fRPM", 1);
+    
     public BlockElectroMotor() {
         super(ConfigMachineBlocks.getElectroMotorBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Electric Motor", ISetupCreativeTabs.tabPower);
     }
@@ -40,5 +46,15 @@ public class BlockElectroMotor extends BlockMachineRendered {
     public void registerIcons(IconRegister par1IconRegister) {
         icons[1] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "tankSide");
         icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "powerFeatures");
+    }
+
+    @Override
+    public IGuiBuilder getGui() { 
+	return guiBuilder;
+    }
+
+    @Override
+    public String getDescription() { 
+	return "Converts electricity into mechanical motion";
     }
 }

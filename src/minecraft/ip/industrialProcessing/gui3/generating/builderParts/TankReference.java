@@ -1,6 +1,9 @@
-package ip.industrialProcessing.gui3.generating;
+package ip.industrialProcessing.gui3.generating.builderParts;
 
-class TankReference {
+import ip.industrialProcessing.gui3.containers.handlers.TankHandler;
+import net.minecraft.inventory.Slot;
+
+public class TankReference {
     public TankReference(int slot) {
 	this(slot, -1, -1);
     }
@@ -14,7 +17,7 @@ class TankReference {
     public int tankSlot;
     public int inputSlot;
     public int outputSlot;
-    int outputContainerSlot;
-    int inputContainerSlot;
-    int handlerIndex;
+    Slot outputContainerSlot;
+    Slot inputContainerSlot;
+    TankHandler handler;
 }

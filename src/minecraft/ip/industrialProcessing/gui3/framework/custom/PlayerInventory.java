@@ -53,8 +53,14 @@ public class PlayerInventory extends UserControl {
 	this.verticalAlign = Alignment.MAX;
     }
 
-    public static PlayerInventory createInventory(Container container, int startSlot) {
-	return createInventory(container, startSlot, true, false);
+    /*
+     * public static PlayerInventory createInventory(Container container, int
+     * startSlot) { return createInventory(container, startSlot, false, false);
+     * }
+     */
+
+    public static PlayerInventory createInventory(Slot[] hotbar, Slot[] inventory, Slot[] armor, Slot[] crafting, Slot craftingOut) {
+	return new PlayerInventory(inventory, hotbar, armor, crafting, craftingOut);
     }
 
     public static PlayerInventory createInventory(Container container, int startSlot, boolean showArmor, boolean showCraftGrid) {

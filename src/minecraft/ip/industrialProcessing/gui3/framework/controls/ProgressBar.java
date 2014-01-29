@@ -93,7 +93,8 @@ public class ProgressBar extends Control implements IProgressBinding {
 	ProgressBar bar = new ProgressBar(texture, DEFAULT_WORKER_VERTICAL_BACKGROUND, DEFAULT_WORKER_VERTICAL_FOREGROUND, Orientation.HORIZONTAL, DEFAULT_WORKER_THICKNESS);
 	bar.width = 24;
 	bar.height = 15;
-	bar.tooltip = "%.2f/%.2f";
+	bar.name = "IP.Gui.Work";
+	bar.tooltip = "%.0f/%.0f";
 	return bar;
     }
 
@@ -195,11 +196,10 @@ public class ProgressBar extends Control implements IProgressBinding {
     @Override
     protected ToolTip getTooltipOverride(float mouseX, float mouseY) {
 	ArrayList<String> lines = new ArrayList<String>();
-	lines.add(mouseX+","+mouseY);
 	if (name != null)
 	    lines.add(name);
 	if (this.tooltip != null)
-	    lines.add(String.format(this.tooltip, this.value, this.maxValue));
+	    lines.add(String.format("§7" + this.tooltip, this.value, this.maxValue));
 	if (!lines.isEmpty()) {
 	    String[] linesAr = new String[lines.size()];
 	    return new ToolTip(lines.toArray(linesAr));

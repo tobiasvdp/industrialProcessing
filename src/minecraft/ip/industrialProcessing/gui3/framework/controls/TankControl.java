@@ -125,7 +125,7 @@ public class TankControl extends Control implements ITankBinding {
 	if (this.fluidID >= 0) {
 	    Fluid fluid = FluidRegistry.getFluid(this.fluidID);
 	    if (fluid != null) {
-		return new ToolTip(fluid.getName(), String.format("%s/%smB", this.fluidAmount, this.capacity));
+		return new ToolTip(fluid.getLocalizedName(), String.format("§7%s/%smB", this.fluidAmount, this.capacity));
 	    } else
 		return new ToolTip("NullPointerException: fluid");
 	} else {

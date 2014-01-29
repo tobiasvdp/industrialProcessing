@@ -1,21 +1,22 @@
-package ip.industrialProcessing.gui3.generating;
+package ip.industrialProcessing.gui3.generating.builderParts;
 
+import ip.industrialProcessing.gui3.containers.handlers.StateHandler;
 import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
 
 public class StateButtonReference {
 
-    public StateButtonReference(int slot, TextureReference texture, int rows, int columns, String[] names) {
-	this.slot = slot;
+    public StateButtonReference(int index, TextureReference texture, int rows, int columns, String[] names) {
+	this.index = index;
 	this.texture = texture;
 	this.rows = rows;
 	this.columns = columns;
 	this.names = names;
     }
 
-    public int slot;
+    public int index;
     public TextureReference texture;
     public int rows;
     public int columns;
     public String[] names;
-    int handlerIndex;
+    StateHandler handler; 
 }

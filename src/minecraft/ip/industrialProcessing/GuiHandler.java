@@ -110,11 +110,7 @@ import ip.industrialProcessing.multiblock.dummy.block.toggleButton.TEmultiblockT
 import ip.industrialProcessing.power.buildcraftGenerator.ContainerBuildcraftGenerator;
 import ip.industrialProcessing.power.buildcraftGenerator.GuiContainerBuildcraftGenerator;
 import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
-import ip.industrialProcessing.power.plants.ContainerGenerator;
-import ip.industrialProcessing.power.plants.ContainerTurbine;
-import ip.industrialProcessing.power.plants.GuiContainerGenerator;
 import ip.industrialProcessing.power.plants.GuiContainerTurbine;
-import ip.industrialProcessing.power.plants.TileEntityGenerator;
 import ip.industrialProcessing.power.plants.TileEntityTurbine;
 import ip.industrialProcessing.power.storage.ContainerEnergyCell;
 import ip.industrialProcessing.power.storage.GuiContainerEnergyCell;
@@ -153,11 +149,7 @@ public class GuiHandler implements IGuiHandler {
 	    if (entity instanceof TileEntityOxygenFurnace)
 		return new ContainerOxygenFurnace(player.inventory, (TileEntityOxygenFurnace) entity);
 	    if (entity instanceof TileEntityBuildcraftGenerator)
-		return new ContainerBuildcraftGenerator(player.inventory, (TileEntityBuildcraftGenerator) entity);
-	    if (entity instanceof TileEntityGenerator)
-		return new ContainerGenerator(player.inventory, (TileEntityGenerator) entity);
-	    if (entity instanceof TileEntityTurbine)
-		return new ContainerTurbine(player.inventory, (TileEntityTurbine) entity);
+		return new ContainerBuildcraftGenerator(player.inventory, (TileEntityBuildcraftGenerator) entity);  
 	    if (entity instanceof TileEntityIncubator)
 		return new ContainerIncubator(player.inventory, (TileEntityIncubator) entity);
 	    if (entity instanceof TileEntityWireMill)
@@ -247,9 +239,7 @@ public class GuiHandler implements IGuiHandler {
 	    if (entity instanceof TileEntityOxygenFurnace)
 		return new GuiContainerOxygenFurnace(player.inventory, (TileEntityOxygenFurnace) entity);
 	    if (entity instanceof TileEntityBuildcraftGenerator)
-		return new GuiContainerBuildcraftGenerator(player.inventory, (TileEntityBuildcraftGenerator) entity);
-	    if (entity instanceof TileEntityGenerator)
-		return new GuiContainerGenerator(player.inventory, (TileEntityGenerator) entity);
+		return new GuiContainerBuildcraftGenerator(player.inventory, (TileEntityBuildcraftGenerator) entity); 
 	    if (entity instanceof TileEntityTurbine)
 		return new GuiContainerTurbine(player.inventory, (TileEntityTurbine) entity);
 	    if (entity instanceof TEmultiblockToggleButton)

@@ -25,6 +25,8 @@ public class GridPanel extends UIElement {
 
     @Override
     protected Size measureOverride(Size maxSize) {
+	if (rows.isEmpty() || columns.isEmpty())
+	    return new Size(0, 0);
 	float[] columnHeights = new float[columns.size()];
 	float[] rowWidths = new float[rows.size()];
 	int widestRow = 0;
@@ -116,6 +118,8 @@ public class GridPanel extends UIElement {
 
     @Override
     protected Size arrangeOverride(Size maxSize) {
+	if (rows.isEmpty() || columns.isEmpty())
+	    return new Size(0, 0);
 	float[] rowMaxSizes = makeAbsolute(maxSize.height, rows);
 	float[] columnMaxSizes = makeAbsolute(maxSize.width, columns);
 	float[] lefts = getSums(columnMaxSizes);

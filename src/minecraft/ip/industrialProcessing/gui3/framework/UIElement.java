@@ -163,21 +163,21 @@ public abstract class UIElement {
     private boolean hasToolTip;
 
     public void render(GuiRenderer renderer) {
-	boolean debug = hasToolTip;
+	boolean debug = false;
 	GL11.glPushMatrix();
 	GL11.glTranslatef(x, y, 0.1f);
 	absoluteX += x;
 	absoluteY += y;
 	Rect bounds = new Rect(0, 0, this.actualSize);
 	if (debug) {
-	    // renderer.drawRectangle(bounds, 0xFFffffff);
+	     renderer.drawRectangle(bounds, 0xFFffffff);
 	}
 	renderOverride(bounds, renderer);
 	absoluteX -= x;
 	absoluteY -= y;
 	if (debug) {
 	    GL11.glTranslatef(0, 0, 1);
-	    // color = this.isMouseInside ? 0xffffff00 : 0xffff0000;
+	    color = this.isMouseInside ? 0xffffff00 : 0xffff0000;
 	    float lineThickness = 0.25f;
 	    renderer.drawRectangle(new Rect(0, 0, lineThickness, this.actualSize.height), color);
 	    renderer.drawRectangle(new Rect(this.actualSize.width - lineThickness, 0, lineThickness, this.actualSize.height), color);
@@ -265,9 +265,9 @@ public abstract class UIElement {
     public ToolTip getTooltip(float mouseX, float mouseY) {
 	this.hasToolTip = false;
 	Rect rect = new Rect(this.x, this.y, this.actualSize);
-	if (rect.contains(mouseX, mouseY)) {
-	    ToolTip tooltip = getTooltipOverride(mouseX, mouseY);
-	    if (tooltip != null){
+	if (rect.contains(mouseX, mouseY)) { 
+	    ToolTip tooltip = getTooltipOverride(mouseX - this.x, mouseY - this.y);
+	    if (tooltip != null) { 
 		this.hasToolTip = true;
 		return tooltip;
 	    }

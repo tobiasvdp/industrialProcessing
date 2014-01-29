@@ -1,6 +1,7 @@
-package ip.industrialProcessing.gui3.generating;
+package ip.industrialProcessing.gui3.generating.builderParts;
 
 import ip.industrialProcessing.gui3.framework.panels.Orientation;
+import net.minecraft.inventory.Slot;
 
 public class SlotClusterReference {
 
@@ -8,7 +9,7 @@ public class SlotClusterReference {
     public int slotCount;
     public int size;
     public Orientation orientation;
-    public int containerStartSlot = -1;
+    Slot[] slots;
 
     public SlotClusterReference(int startSlot, int slotCount, int size, Orientation orientation) {
 	this.startSlot = startSlot;

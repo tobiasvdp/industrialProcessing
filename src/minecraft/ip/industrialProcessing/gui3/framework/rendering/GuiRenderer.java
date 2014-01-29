@@ -161,7 +161,7 @@ public class GuiRenderer {
     }
 
     public void drawToolTip(ToolTip tooltip, int x, int y) {
-	ToolTip.renderToolTip(tooltip, x, y, 1000, this.mc.fontRenderer);
+	ToolTip.renderToolTip(tooltip, x, y, 0, this.mc.fontRenderer);
     }
 
 }

@@ -55,6 +55,9 @@ public class LabeledGauge extends UserControl implements IProgressBinding {
 	return this.gauge.getMaxValue();
     }
 
+    public static LabeledGauge createLabeledGauge(String label, String format) {
+	return new LabeledGauge(label, 4210752, format);
+    }
     public static LabeledGauge createLabeledGauge(String label, String format, int color) {
 	return new LabeledGauge(label, color, format);
     }
