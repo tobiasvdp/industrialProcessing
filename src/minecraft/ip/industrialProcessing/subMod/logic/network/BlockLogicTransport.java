@@ -30,7 +30,7 @@ public class BlockLogicTransport extends BlockMicroBlock {
 	private Icon[] icons = new Icon[1];
 
 	public BlockLogicTransport() {
-		super(ConfigLogic.getBLlogicCable(), Material.cloth, 500.0f, Block.soundClothFootstep, "BlockLogicTransport", IPLogic.tabLogic);
+		super(ConfigLogic.getBLlogicCable(), Material.cloth, 10.0f, Block.soundClothFootstep, "BlockLogicTransport", IPLogic.tabLogic);
 	}
 
 	@Override

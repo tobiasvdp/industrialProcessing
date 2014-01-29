@@ -3,6 +3,7 @@ package ip.industrialProcessing.utils.packets;
 import ip.industrialProcessing.microBlock.BlockMicroBlock;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.Player;
 
@@ -24,6 +25,12 @@ public class PacketDataHandler {
 		World world = ((Entity) player).worldObj;
 		if (world != null && !world.isRemote && packet != null) {
 			world.scheduleBlockUpdate(packet.x, packet.y, packet.z, packet.blockID, packet.delay);
+		}
+	}
+	public static void handlePacketIP004RayTraceToServer(Player player, PacketIP004RayTraceToServer packet) {
+		World world = ((Entity) player).worldObj;
+		if (world != null && !world.isRemote && packet != null) {
+			BlockMicroBlock.handleSideBlock(world, (EntityPlayer) player, packet.hit, packet.hitType);
 		}
 	}
 	public static void handlePacketIP005DestroyBlock(Player player, PacketIP005DestroyBlock packet) {

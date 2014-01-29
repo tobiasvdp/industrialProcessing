@@ -3,6 +3,7 @@ package ip.industrialProcessing.subMod.logic.config;
 import ip.industrialProcessing.api.config.ConfigCategories;
 import ip.industrialProcessing.api.utils.CreativeTabsIP;
 import ip.industrialProcessing.subMod.logic.IPLogic;
+import ip.industrialProcessing.subMod.logic.network.TileEntityLogicTransport;
 import ip.industrialProcessing.subMod.logic.old.function.and.TElogicAnd;
 import ip.industrialProcessing.subMod.logic.old.function.or.TElogicOr;
 import ip.industrialProcessing.subMod.logic.old.network.display.TileEntityLogicDisplay;
@@ -116,7 +117,7 @@ public class ConfigLogic {
 		LanguageRegistry.instance().addStringLocalization("IP.itemGroup.tabLogic", "en_US", "IP Logic");
 		//((CreativeTabsIP) IPLogic.tabLogic).setIcon(new ItemStack(ISetupLogic.BLlogicSwitchBox));
 
-		this.register(ISetupLogic.blockLogicTransport, "IP.Logic.Cable", "Cable", TElogicCable.class);
+		this.register(ISetupLogic.blockLogicTransport, "IP.Logic.Cable", "Cable", TileEntityLogicTransport.class);
 	/*	this.register(ISetupLogic.BLlogicSwitchBox, "IP.Logic.SwBox", "Switch box", TElogicSwitchBox.class);
 		this.register(ISetupLogic.BLlogicBundle, "IP.Logic.Bundle", "Bundled cables", TElogicBundle.class);
 		this.register(ISetupLogic.BLlogicDisplayBox, "IP.Logic.DsBox", "Display box", TElogicDisplayBox.class);

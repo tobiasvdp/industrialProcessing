@@ -16,6 +16,7 @@ import ip.industrialProcessing.transport.steve.railway.suspended.cart.EntityFloa
 import ip.industrialProcessing.utils.packets.PacketDataHandler;
 import ip.industrialProcessing.utils.packets.PacketIP002SendMicroBlockDestructionChange;
 import ip.industrialProcessing.utils.packets.PacketIP003ScheduleBlockUpdateToServer;
+import ip.industrialProcessing.utils.packets.PacketIP004RayTraceToServer;
 import ip.industrialProcessing.utils.packets.PacketIP005DestroyBlock;
 
 import java.io.ByteArrayInputStream;
@@ -49,6 +50,7 @@ public class PacketHandler implements IPacketHandler {
 	public static final String IP_MICROBLOCKS_DESTROYING = "IP.BMB.Des";
 	public static final String IP_SCHEDULE_TICK = "IP.tick";
 	public static final String IP_DESTROY_BLOCK = "IP.Des";
+	public static final String IP_RAY_TRACE = "IP.Ray.Trace";
 
 	@Override
 	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {
@@ -60,6 +62,8 @@ public class PacketHandler implements IPacketHandler {
 			PacketDataHandler.handlePacketIP002SendMicroBlockDestructionChange(player, PacketIP002SendMicroBlockDestructionChange.getPacketFromCustom250packet(packet));
 		} else if (packet.channel.equals(IP_SCHEDULE_TICK)) {
 			PacketDataHandler.handlePacketIP003ScheduleBlockUpdateToServer(player, PacketIP003ScheduleBlockUpdateToServer.getPacketFromCustom250packet(packet));
+		} else if (packet.channel.equals(IP_RAY_TRACE)) {
+			PacketDataHandler.handlePacketIP004RayTraceToServer(player, PacketIP004RayTraceToServer.getPacketFromCustom250packet(packet));
 		} else if (packet.channel.equals(IP_DESTROY_BLOCK)) {
 			PacketDataHandler.handlePacketIP005DestroyBlock(player, PacketIP005DestroyBlock.getPacketFromCustom250packet(packet));
 		} else if (packet.channel.equals(BUTTON_PRESSED)) {

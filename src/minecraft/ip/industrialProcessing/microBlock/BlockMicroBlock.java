@@ -1,11 +1,13 @@
 package ip.industrialProcessing.microBlock;
 
+import java.util.List;
 import java.util.Random;
 
 import cpw.mods.fml.common.network.PacketDispatcher;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.utils.packets.PacketIP002SendMicroBlockDestructionChange;
 import ip.industrialProcessing.utils.packets.PacketIP003ScheduleBlockUpdateToServer;
+import ip.industrialProcessing.utils.packets.PacketIP004RayTraceToServer;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.StepSound;
@@ -18,6 +20,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
@@ -26,7 +29,7 @@ import net.minecraftforge.common.ForgeDirection;
 
 public abstract class BlockMicroBlock extends BlockMachineRendered {
 
-	public boolean isDestroying = false;
+	public static boolean isDestroying = false;
 
 	protected BlockMicroBlock(int par1, Material par2Material, float hardness, StepSound stepSound, String name, CreativeTabs tab) {
 		super(par1, par2Material, hardness, stepSound, name, tab);
@@ -37,7 +40,9 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
 		if (par1World.isRemote) {
 			MovingObjectPosition hit = rayTroughBlock(par1World, par2, par3, par4, par5EntityPlayer);
-			handleSideBlock(par1World, par5EntityPlayer, hit, 1);
+			if (hit != null) {
+				PacketDispatcher.sendPacketToServer(new PacketIP004RayTraceToServer(hit, 1).getCustom250Packet());
+			}
 		}
 		return true;
 	}
@@ -46,10 +51,11 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 	public int onBlockPlaced(World par1World, int par2, int par3, int par4, int par5, float par6, float par7, float par8, int par9) {
 		return invertSide(par5);
 	}
-	
+
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack itemStack) {
-		handleHit(x, y, z, world.getBlockMetadata(x, y, z), (EntityPlayer) entityLivingBase, null, 1);
+		if (!world.isRemote)
+			handleHit(x, y, z, world.getBlockMetadata(x, y, z), (EntityPlayer) entityLivingBase, null, 1);
 		super.onBlockPlacedBy(world, x, y, z, entityLivingBase, itemStack);
 	}
 
@@ -57,11 +63,13 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 	public void onBlockClicked(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer) {
 		if (par1World.isRemote) {
 			MovingObjectPosition hit = rayTroughBlock(par1World, par2, par3, par4, par5EntityPlayer);
-			handleSideBlock(par1World, par5EntityPlayer, hit, 0);
+			if (hit != null) {
+				PacketDispatcher.sendPacketToServer(new PacketIP004RayTraceToServer(hit, 0).getCustom250Packet());
+			}
 		}
 	}
 
-	private boolean handleSideBlock(World world, EntityPlayer player, MovingObjectPosition hit, int hitType) {
+	public static boolean handleSideBlock(World world, EntityPlayer player, MovingObjectPosition hit, int hitType) {
 		if (hit != null) {
 			ForgeDirection offset = sideToForge(hit.sideHit);
 			int x = hit.blockX + offset.offsetX;
@@ -78,19 +86,19 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 		return false;
 	}
 
-	private void handleMiss(int blockX, int blockY, int blockZ, int sideHit, EntityPlayer player, Vec3 hitVec, int x, int y, int z, int hitType) {
+	private static void handleMiss(int blockX, int blockY, int blockZ, int sideHit, EntityPlayer player, Vec3 hitVec, int x, int y, int z, int hitType) {
 		if (hitType == 1)
 			Minecraft.getMinecraft().playerController.onPlayerRightClick(player, player.worldObj, player.getCurrentEquippedItem(), blockX, blockY, blockZ, sideHit, hitVec);
 		if (hitType == 0) {
 			Minecraft.getMinecraft().playerController.clickBlock(blockX, blockY, blockZ, sideHit);
 			isDestroying = true;
-			PacketDispatcher.sendPacketToServer(new PacketIP003ScheduleBlockUpdateToServer(x, y, z, this.blockID, 50).getCustom250Packet());
+			player.worldObj.scheduleBlockUpdate(x, y, z, player.worldObj.getBlockId(x, y, z), 50);
 		}
 		if (hitType == 2)
 			Minecraft.getMinecraft().playerController.onPlayerDestroyBlock(blockX, blockY, blockZ, 0);
 	}
 
-	private void handleHit(int x, int y, int z, int sideHit, EntityPlayer player, MovingObjectPosition hit, int hitType) {
+	private static void handleHit(int x, int y, int z, int sideHit, EntityPlayer player, MovingObjectPosition hit, int hitType) {
 		if (hitType == 1) {
 			ItemStack itemstack = player.getCurrentEquippedItem();
 			if (itemstack != null && itemstack.getItem() instanceof ItemBlock && Block.blocksList[itemstack.getItem().itemID] instanceof BlockMicroBlock) {
@@ -112,7 +120,7 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 				if (microblock.isSideFree(dir)) {
 					handleMiss(hit.blockX, hit.blockY, hit.blockZ, hit.sideHit, player, hit.hitVec, x, y, z, 2);
 				} else {
-					microblock.unsetSide(dir,player);
+					microblock.unsetSide(dir, player);
 				}
 			}
 		}
@@ -124,13 +132,13 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 				if (microblock.isSideFree(dir)) {
 					handleMiss(hit.blockX, hit.blockY, hit.blockZ, hit.sideHit, player, hit.hitVec, x, y, z, 0);
 				} else {
-					microblock.unsetSide(dir,player);
+					microblock.unsetSide(dir, player);
 				}
 			}
 		}
 	}
 
-	private int invertSide(int sideHit) {
+	public static final int invertSide(int sideHit) {
 		switch (sideHit) {
 		case 0:
 			return 1;
@@ -148,7 +156,7 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 		return 0;
 	}
 
-	private ForgeDirection sideToForge(int sideHit) {
+	public static final ForgeDirection sideToForge(int sideHit) {
 		switch (sideHit) {
 		case 0:
 			return ForgeDirection.DOWN;
@@ -166,18 +174,18 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 		return ForgeDirection.UNKNOWN;
 	}
 
-	private MovingObjectPosition rayTroughBlock(World world, int par2, int par3, int par4, Entity entity) {
-		this.setBlockBounds(0, 0, 0, 0, 0, 0);
+	public static MovingObjectPosition rayTroughBlock(World world, int par2, int par3, int par4, Entity entity) {
+		Block.blocksList[world.getBlockId(par2, par3, par4)].setBlockBounds(0, 0, 0, 0, 0, 0);
 		float reach = 5.0f;
 		Vec3 vec3 = getPositionEntity(1.0f, entity);
 		Vec3 vec31 = getLookEntity(1.0f, entity);
 		Vec3 vec32 = vec3.addVector(vec31.xCoord * reach, vec31.yCoord * reach, vec31.zCoord * reach);
 		MovingObjectPosition hit = world.clip(vec3, vec32);
-		this.setBlockBounds(0, 0, 0, 1, 1, 1);
+		Block.blocksList[world.getBlockId(par2, par3, par4)].setBlockBounds(0, 0, 0, 1, 1, 1);
 		return hit;
 	}
 
-	public Vec3 getPositionEntity(float par1, Entity entity) {
+	private static Vec3 getPositionEntity(float par1, Entity entity) {
 		if (par1 == 1.0F) {
 			return entity.worldObj.getWorldVec3Pool().getVecFromPool(entity.posX, entity.posY, entity.posZ);
 		} else {
@@ -188,7 +196,7 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 		}
 	}
 
-	public Vec3 getLookEntity(float par1, Entity entity) {
+	private static Vec3 getLookEntity(float par1, Entity entity) {
 		float f1;
 		float f2;
 		float f3;
@@ -216,7 +224,9 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 		boolean destroy = false;
 		if (world.isRemote) {
 			MovingObjectPosition hit = rayTroughBlock(world, x, y, z, player);
-			destroy = handleSideBlock(world, player, hit, 2);
+			if (hit != null) {
+				PacketDispatcher.sendPacketToServer(new PacketIP004RayTraceToServer(hit, 2).getCustom250Packet());
+			}
 		}
 		return destroy;
 	}
@@ -246,6 +256,10 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 			PacketDispatcher.sendPacketToAllPlayers(new PacketIP002SendMicroBlockDestructionChange(this.blockID, isDestroying).getCustom250Packet());
 		}
 		super.updateTick(par1World, par2, par3, par4, par5Random);
+	}
+
+	@Override
+	public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
 	}
 
 }

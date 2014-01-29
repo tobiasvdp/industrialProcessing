@@ -63,4 +63,10 @@ public class TileEntityMicroBlocksExternalConnection extends TileEntityMicroBloc
 	public boolean[] getExternalConnections(int side) {
 		return externalConnections[side];
 	}
+
+	@Override
+	public void updateConnections(int i) {
+		// TODO Auto-generated method stub
+		
+	}
 }

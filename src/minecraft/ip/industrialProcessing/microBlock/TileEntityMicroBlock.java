@@ -8,6 +8,9 @@ import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.INetworkManager;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.network.packet.Packet55BlockDestroy;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
@@ -18,17 +21,31 @@ public class TileEntityMicroBlock extends TileEntity implements IMicroBlock {
 	public TileEntityMicroBlock() {
 		Arrays.fill(sides, -1);
 	}
+	
+	@Override
+	public Packet getDescriptionPacket() {
+		NBTTagCompound nbtTag = new NBTTagCompound();
+		this.writeToNBT(nbtTag);
+		return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
+	}
+
+	@Override
+	public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
+		readFromNBT(packet.customParam1);
+		this.worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
-		sides = par1nbtTagCompound.getIntArray("sidesMicro");
 		super.readFromNBT(par1nbtTagCompound);
+		sides = par1nbtTagCompound.getIntArray("sidesMicro");
+		
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
-		par1nbtTagCompound.setIntArray("sidesMicro", sides);
 		super.writeToNBT(par1nbtTagCompound);
+		par1nbtTagCompound.setIntArray("sidesMicro", sides);	
 	}
 	
 	@Override
@@ -49,18 +66,17 @@ public class TileEntityMicroBlock extends TileEntity implements IMicroBlock {
 	@Override
 	public void setSide(ForgeDirection dir, int itemID) {
 		sides[dir.ordinal()] = itemID;
-		System.out.println(dir + " is now set to " + itemID + "(" + ((BlockMicroBlock) Block.blocksList[itemID]).getMicroBlockType() + ").");
-		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+		System.out.println(dir + " is now set to " + itemID + "(" + ((BlockMicroBlock) Block.blocksList[itemID]).getMicroBlockType() + ")."+this.worldObj);
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override
 	public void unsetSide(ForgeDirection dir,EntityPlayer player) {
 		sides[dir.ordinal()] = -1;
 		System.out.println(dir + " is now unset.");
-		worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		if(countSetSides() == 0){
 			System.out.println("remove block");
-			PacketDispatcher.sendPacketToServer(new PacketIP005DestroyBlock(xCoord, yCoord, zCoord, false).getCustom250Packet());
 			worldObj.destroyBlock(xCoord, yCoord, zCoord, false);
 		}
 		
