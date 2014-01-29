@@ -14,13 +14,16 @@ import ip.industrialProcessing.client.render.ModelBlock;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.microBlock.IMicroBlock;
 import ip.industrialProcessing.microBlock.connectingSides.IMicroBlockInterconnection;
+import ip.industrialProcessing.microBlock.connectionCorners.IMicroBlockConnectionCorner;
 import ip.industrialProcessing.microBlock.connections.IMicroBlockConnection;
 
 public class ModelWire extends ModelBlock {
 
 	ObjMesh[] models = new ObjMesh[] { new Down(), new Up(), new North(), new South(), new West(), new East() };
 	ObjMesh[][] innerconnections = new ObjMesh[][] { { new DownLeft(), new DownRight(), new DownTop(), new DownBottom() }, { new UpLeft(), new UpRight(), new UpTop(), new UpBottom() }, { new NorthLeft(), new NorthRight(), new NorthTop(), new NorthBottom() }, { new SouthLeft(), new SouthRight(), new SouthTop(), new SouthBottom() }, { new WestLeft(), new WestRight(), new WestTop(), new WestBottom() }, { new EastLeft(), new EastRight(), new EastTop(), new EastBottom() } };
-
+	ObjMesh[][] cornerConnections = new ObjMesh[][]{{null,null,null,null},{null,null,null,null},{null,new NorthRightCorner(),null,null},{null,new SouthRightCorner(),null,null},{null,new WestRightCorner(),null,null},{null,new EastRightCorner(),null,null}};
+	
+	
 	public void renderInventory(Block block, int metadata, int modelID, RenderBlocks renderer) {
 
 		int dir = 0;
@@ -34,7 +37,7 @@ public class ModelWire extends ModelBlock {
 	@Override
 	public boolean renderWorldBlock(WorldReference reference, int modelId, RenderBlocks renderer) {
 
-		IMicroBlockConnection te = (IMicroBlockConnection) reference.world.getBlockTileEntity(reference.x, reference.y, reference.z);
+		IMicroBlockConnectionCorner te = (IMicroBlockConnectionCorner) reference.world.getBlockTileEntity(reference.x, reference.y, reference.z);
 		int[] sides = te.getSides();
 		
 		Icon iconWire = reference.getIcon(0);
@@ -43,10 +46,15 @@ public class ModelWire extends ModelBlock {
 			if (sides[i] != -1){
 				boolean[] innercon = te.getInterConnections(i);
 				boolean[] externCon = te.getExternalConnections(i);
+				boolean[] externConCor = te.getExternalConnectionCorners(i);
 				models[i].renderMesh(false, iconWire, reference);
 				for(int j = 0;j<innercon.length;j++){
 					if(innercon[j] || externCon[j])
 						innerconnections[i][j].renderMesh(false, iconWire, reference);
+					if(externConCor[j]){
+						if(cornerConnections[i][j] != null);
+						cornerConnections[i][j].renderMesh(false, iconWire, reference);
+					}
 				}
 			}
 		}

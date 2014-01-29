@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.Vec3;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.event.ForgeSubscribe;
@@ -41,8 +42,7 @@ public class EventBlockHilight {
 						int invertedSide = BlockMicroBlock.invertSide(hit.sideHit);
 						handleHit(x, y, z, invertedSide, hit, event);
 					} else {
-						// handleMiss(hit.blockX, hit.blockY, hit.blockZ,
-						// hit.sideHit, player, hit.hitVec, x, y, z, hitType);
+						handleMiss(event, hit);
 					}
 
 				}
@@ -53,45 +53,70 @@ public class EventBlockHilight {
 	}
 
 	private void handleHit(int x, int y, int z, int side, MovingObjectPosition hit, DrawBlockHighlightEvent event) {
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GL11.glColor4f(1.0F, 0.8F, 0.0F, 0.4F);
-		GL11.glLineWidth(2.0F);
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		GL11.glDepthMask(false);
-		float f1 = 0.002F;
-		double d0 = event.player.lastTickPosX + (event.player.posX - event.player.lastTickPosX) * (double) event.partialTicks;
-		double d1 = event.player.lastTickPosY + (event.player.posY - event.player.lastTickPosY) * (double) event.partialTicks;
-		double d2 = event.player.lastTickPosZ + (event.player.posZ - event.player.lastTickPosZ) * (double) event.partialTicks;
 
 		IMicroBlock te = (IMicroBlock) event.player.worldObj.getBlockTileEntity(x, y, z);
 		AxisAlignedBB box = null;
 		if (!te.isSideFree(side)) {
+			GL11.glEnable(GL11.GL_BLEND);
+			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+			GL11.glColor4f(1.0F, 0.8F, 0.0F, 0.4F);
+			GL11.glLineWidth(2.0F);
+			GL11.glDisable(GL11.GL_TEXTURE_2D);
+			GL11.glDepthMask(false);
+			float f1 = 0.002F;
+			double d0 = event.player.lastTickPosX + (event.player.posX - event.player.lastTickPosX) * (double) event.partialTicks;
+			double d1 = event.player.lastTickPosY + (event.player.posY - event.player.lastTickPosY) * (double) event.partialTicks;
+			double d2 = event.player.lastTickPosZ + (event.player.posZ - event.player.lastTickPosZ) * (double) event.partialTicks;
+
 			switch (side) {
 			case 0:
-				box = AxisAlignedBB.getBoundingBox(x, y, z, x+1, y+0.15, z+1);
+				box = AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 0.15, z + 1);
 				break;
 			case 1:
-				box = AxisAlignedBB.getBoundingBox(x, y+0.85, z, x+1, y+1, z+1);
+				box = AxisAlignedBB.getBoundingBox(x, y + 0.85, z, x + 1, y + 1, z + 1);
 				break;
 			case 2:
-				box = AxisAlignedBB.getBoundingBox(x, y, z, x+1, y+1, z+0.15);
+				box = AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 0.15);
 				break;
 			case 3:
-				box = AxisAlignedBB.getBoundingBox(x, y, z+0.85, x+1, y+1, z+1);
+				box = AxisAlignedBB.getBoundingBox(x, y, z + 0.85, x + 1, y + 1, z + 1);
 				break;
 			case 4:
-				box = AxisAlignedBB.getBoundingBox(x, y, z, x+0.15, y+1, z+1);
+				box = AxisAlignedBB.getBoundingBox(x, y, z, x + 0.15, y + 1, z + 1);
 				break;
 			case 5:
-				box = AxisAlignedBB.getBoundingBox(x+0.85, y, z, x+1, y+1, z+1);
+				box = AxisAlignedBB.getBoundingBox(x + 0.85, y, z, x + 1, y + 1, z + 1);
 				break;
 			default:
-				box = AxisAlignedBB.getBoundingBox(x, y, z, x+1, y+1, z+1);
+				box = AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1);
 			}
 			this.drawOutlinedBoundingBox(box.expand((double) f1, (double) f1, (double) f1).getOffsetBoundingBox(-d0, -d1, -d2));
-		} else {
 
+			GL11.glDepthMask(true);
+			GL11.glEnable(GL11.GL_TEXTURE_2D);
+			GL11.glDisable(GL11.GL_BLEND);
+
+		} else {
+			handleMiss(event,hit);
+		}
+	}
+
+	private void handleMiss(DrawBlockHighlightEvent event, MovingObjectPosition hit) {
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GL11.glColor4f(0.0F, 0.0F, 0.0F, 0.4F);
+		GL11.glLineWidth(2.0F);
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		GL11.glDepthMask(false);
+		float f1 = 0.002F;
+		int j = event.player.worldObj.getBlockId(hit.blockX, hit.blockY, hit.blockZ);
+
+		if (j > 0) {
+			Block.blocksList[j].setBlockBoundsBasedOnState(event.player.worldObj, hit.blockX, hit.blockY, hit.blockZ);
+			double d0 = event.player.lastTickPosX + (event.player.posX - event.player.lastTickPosX) * (double) event.partialTicks;
+			double d1 = event.player.lastTickPosY + (event.player.posY - event.player.lastTickPosY) * (double) event.partialTicks;
+			double d2 = event.player.lastTickPosZ + (event.player.posZ - event.player.lastTickPosZ) * (double) event.partialTicks;
+			this.drawOutlinedBoundingBox(Block.blocksList[j].getSelectedBoundingBoxFromPool(event.player.worldObj, hit.blockX, hit.blockY, hit.blockZ).expand((double) f1, (double) f1, (double) f1).getOffsetBoundingBox(-d0, -d1, -d2));
 		}
 
 		GL11.glDepthMask(true);

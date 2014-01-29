@@ -11,8 +11,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
 public class TileEntityMicroBlockConnection extends TileEntityMicroBlock implements IMicroBlockConnection {
-	boolean[][] externalConnections = new boolean[6][4];
-	boolean[][] interConnections = new boolean[6][4];
+	protected boolean[][] externalConnections = new boolean[6][4];
+	protected boolean[][] interConnections = new boolean[6][4];
 
 	public TileEntityMicroBlockConnection() {
 		super();
@@ -42,7 +42,7 @@ public class TileEntityMicroBlockConnection extends TileEntityMicroBlock impleme
 		updateExtConnections();
 	}
 
-	private void updateExtConnections() {
+	protected void updateExtConnections() {
 		for (int i = 0; i < 6; i++) {
 			ForgeDirection dir = ForgeDirection.values()[i];
 			int id = worldObj.getBlockId(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
@@ -59,35 +59,46 @@ public class TileEntityMicroBlockConnection extends TileEntityMicroBlock impleme
 		}
 	}
 
-	private static final int[][] externalDirections = new int[][] { { -1, -1, 2, 3, 0,1 }, { -1, -1, 3, 2, 0, 1 }, { 3, 2,-1,-1,0, 1 }, { 3, 2,-1,-1, 1, 0 }, { 3, 2, 1,0 ,-1, -1 }, { 3, 2,0,1, -1, -1 } };
+	protected static final int[][] externalDirections = new int[][] { { -1, -1, 2, 3, 0,1 }, { -1, -1, 3, 2, 0, 1 }, { 3, 2,-1,-1,0, 1 }, { 3, 2,-1,-1, 1, 0 }, { 3, 2, 1,0 ,-1, -1 }, { 3, 2,0,1, -1, -1 } };
 
-	private void setExternalConnectionForSide(int i, IMicroBlock te, boolean repeat) {
+	protected void setExternalConnectionForSide(int i, IMicroBlock te, boolean repeat) {
 		if (te != null) {
 			int[] sides = rotation[i];
 			for (int j = 0; j < sides.length; j++) {
-				if (!te.isSideFree(sides[j]))
+				if (!te.isSideFree(sides[j])) {
 					externalConnections[sides[j]][externalDirections[sides[j]][i]] = true;
-				else
-					externalConnections[sides[j]][externalDirections[sides[j]][i]] = false;
+				} else {
+					if (hasDiagonalConnection(sides[j],i, te, repeat))
+						externalConnections[sides[j]][externalDirections[sides[j]][i]] = true;
+					else
+						externalConnections[sides[j]][externalDirections[sides[j]][i]] = false;
+				}
 			}
-			if(repeat && te instanceof IMicroBlockExternalConnection){
-				((IMicroBlockExternalConnection)te).updateConnections(BlockMicroBlock.invertSide(i));
+			if (repeat && te instanceof IMicroBlockExternalConnection) {
+				((IMicroBlockExternalConnection) te).updateConnections(BlockMicroBlock.invertSide(i));
 			}
 		} else {
 			int[] sides = rotation[i];
 			for (int j = 0; j < sides.length; j++) {
-				externalConnections[sides[j]][externalDirections[sides[j]][i]] = false;
+				if (hasDiagonalConnection(sides[j],i, te, repeat))
+					externalConnections[sides[j]][externalDirections[sides[j]][i]] = true;
+				else
+					externalConnections[sides[j]][externalDirections[sides[j]][i]] = false;
 			}
 		}
 	}
 
-	private static final int[][] rotation = new int[][] { { 4, 5, 2, 3 }, { 4, 5, 3, 2 }, { 4, 5, 1, 0 }, { 5, 4, 1, 0 }, { 3, 2, 1, 0 }, { 2, 3, 1, 0 } };
+	protected boolean hasDiagonalConnection(int face, int side, IMicroBlock te, boolean repeat) {
+		return false;
+	}
 
-	private int getRotated(int i, int j) {
+	protected static final int[][] rotation = new int[][] { { 4, 5, 2, 3 }, { 4, 5, 3, 2 }, { 4, 5, 1, 0 }, { 5, 4, 1, 0 }, { 3, 2, 1, 0 }, { 2, 3, 1, 0 } };
+
+	protected int getRotated(int i, int j) {
 		return rotation[i][j];
 	}
 
-	private void updateSideConnections() {
+	protected void updateSideConnections() {
 		for (int i = 0; i < sides.length; i++) {
 			if (sides[i] != -1) {
 				for (int j = 0; j < interConnections[i].length; j++) {

@@ -13,6 +13,7 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -34,6 +35,11 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 	protected BlockMicroBlock(int par1, Material par2Material, float hardness, StepSound stepSound, String name, CreativeTabs tab) {
 		super(par1, par2Material, hardness, stepSound, name, tab);
 		this.setBlockBounds(0, 0, 0, 1f, 1f, 1f);
+	}
+
+	@Override
+	public boolean addBlockDestroyEffects(World world, int x, int y, int z, int meta, EffectRenderer effectRenderer) {
+		return true;
 	}
 
 	@Override
@@ -87,15 +93,23 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 	}
 
 	private static void handleMiss(int blockX, int blockY, int blockZ, int sideHit, EntityPlayer player, Vec3 hitVec, int x, int y, int z, int hitType) {
-		if (hitType == 1)
+		if (hitType == 1) {
 			Minecraft.getMinecraft().playerController.onPlayerRightClick(player, player.worldObj, player.getCurrentEquippedItem(), blockX, blockY, blockZ, sideHit, hitVec);
+			ForgeDirection dir = sideToForge(sideHit);
+			player.worldObj.markBlockForUpdate(blockX + dir.offsetX, blockY + dir.offsetY, blockZ + dir.offsetZ);
+		}
 		if (hitType == 0) {
 			Minecraft.getMinecraft().playerController.clickBlock(blockX, blockY, blockZ, sideHit);
 			isDestroying = true;
 			player.worldObj.scheduleBlockUpdate(x, y, z, player.worldObj.getBlockId(x, y, z), 50);
 		}
-		if (hitType == 2)
+		if (hitType == 2) {
 			Minecraft.getMinecraft().playerController.onPlayerDestroyBlock(blockX, blockY, blockZ, 0);
+			if (player.capabilities.isCreativeMode)
+				player.worldObj.destroyBlock(blockX, blockY, blockZ, false);
+			else
+				player.worldObj.destroyBlock(blockX, blockY, blockZ, true);
+		}
 	}
 
 	private static void handleHit(int x, int y, int z, int sideHit, EntityPlayer player, MovingObjectPosition hit, int hitType) {

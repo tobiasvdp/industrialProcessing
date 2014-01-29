@@ -1,4 +1,4 @@
-package ip.industrialProcessing.utils;
+package ip.industrialProcessing.utils.handler.events;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
