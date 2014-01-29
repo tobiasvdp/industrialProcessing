@@ -1,16 +1,24 @@
 package ip.industrialProcessing.gui3.containers;
 
-import org.lwjgl.opengl.GL11;
-
+import ip.industrialProcessing.gui3.binding.Binder;
 import ip.industrialProcessing.gui3.framework.UIRoot;
 import ip.industrialProcessing.gui3.framework.controls.Decorator;
 import ip.industrialProcessing.gui3.framework.panels.MouseButton;
+
+import java.util.ArrayList;
+
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.inventory.Container;
+
+import org.lwjgl.opengl.GL11;
 
 public class GuiLayoutContainer extends GuiContainer {
 
     private UIRoot layout;
+    private ArrayList<Binder> binders = new ArrayList<Binder>();
+
+    public void addBinding(Binder binding) {
+	binders.add(binding);
+    }
 
     public GuiLayoutContainer(LayoutContainer container, Decorator root) {
 	super(container);
@@ -40,17 +48,22 @@ public class GuiLayoutContainer extends GuiContainer {
 	    this.layout.mouseDown(par1, par2, button);
 	}
     }
-    
+
     @Override
-    protected void drawGuiContainerBackgroundLayer(float par1, int mouseX, int mouseY) { 
-	GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F); 
+    protected void drawGuiContainerBackgroundLayer(float par1, int mouseX, int mouseY) {
+	GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 	int x = (width - xSize) / 2;
 	int y = (height - ySize) / 2;
+	for (Binder binder : this.binders) {
+	    binder.updateBinding();
+	}
 	this.layout.render(xSize, ySize, x, y, mouseX, mouseY);
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(int par1, int par2) { 
-	// TODO: tooltips
+    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+	int x = (width - xSize) / 2;
+	int y = (height - ySize) / 2;
+	this.layout.renderForeground(x, y, mouseX, mouseY);
     }
 }

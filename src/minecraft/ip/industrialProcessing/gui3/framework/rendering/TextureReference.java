@@ -11,4 +11,10 @@ public class TextureReference {
 	this.size = size;
 	this.resource = new ResourceLocation(domain, resource);
     }
+    
+    public TextureReference(Size size, ResourceLocation resource)
+    {
+	this.size = size;
+	this.resource = resource;
+    }
 }

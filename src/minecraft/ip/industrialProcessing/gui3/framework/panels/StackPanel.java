@@ -2,6 +2,7 @@ package ip.industrialProcessing.gui3.framework.panels;
 
 import java.util.Random;
 
+import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.gui3.framework.Alignment;
 import ip.industrialProcessing.gui3.framework.Rect;
 import ip.industrialProcessing.gui3.framework.Size;
@@ -50,17 +51,17 @@ public class StackPanel extends Panel {
 	switch (orientation) {
 	default:
 	case HORIZONTAL:
-	    float maxHeight = (this.horizontalAlign == Alignment.STRETCH) ? this.getDesiredSize().height : maxSize.height;
+	    float maxHeight = (this.verticalAlign != Alignment.STRETCH) ? this.getDesiredSize().height : maxSize.height;
 	    float left = 0;
 	    for (UIElement child : getChildren()) {
 		Size size = child.getDesiredSize();
 		float height = Math.max(maxHeight, size.height);
-		child.arrange(new Rect(left, 0, maxSize.width, height));
+		child.arrange(new Rect(left, 0, size.width, height));
 		left += size.width;
 	    }
 	    return new Size(left, maxHeight);
 	case VERTICAL:
-	    float maxWidth = (this.verticalAlign == Alignment.STRETCH) ? this.getDesiredSize().width : maxSize.width;
+	    float maxWidth = (this.horizontalAlign != Alignment.STRETCH) ? this.getDesiredSize().width : maxSize.width;
 	    float top = 0;
 	    for (UIElement child : getChildren()) {
 		Size size = child.getDesiredSize();
@@ -76,6 +77,6 @@ public class StackPanel extends Panel {
 
     @Override
     protected void renderOverride(Rect size, GuiRenderer renderer) { 
-	super.renderOverride(size, renderer); 
-    }
+	super.renderOverride(size, renderer);   
+    } 
 }

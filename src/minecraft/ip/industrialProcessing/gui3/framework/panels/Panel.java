@@ -1,5 +1,6 @@
 package ip.industrialProcessing.gui3.framework.panels;
 
+import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.gui3.framework.Rect;
 import ip.industrialProcessing.gui3.framework.UIElement;
 import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
@@ -72,5 +73,15 @@ public abstract class Panel extends UIElement {
 	    if (child != null)
 		child.mouseEntered(mouseX, mouseY);
 	}
+    }
+
+    @Override
+    protected ToolTip getTooltipOverride(float mouseX, float mouseY) {
+	for (UIElement child : getChildren()) {
+	    ToolTip tooltip = child.getTooltip(mouseX, mouseY);
+	    if (tooltip != null)
+		return tooltip;
+	}
+	return null;
     }
 }

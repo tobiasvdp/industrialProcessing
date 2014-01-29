@@ -9,8 +9,7 @@ public class ToolTip {
 
 	public ToolTip(String... lines) {
 		this.lines = lines;
-	}
-
+	} 
 	public static void renderToolTip(ToolTip tip, int x, int y, float z, FontRenderer fontRenderer) {
 
 		int lineHeight = 8;

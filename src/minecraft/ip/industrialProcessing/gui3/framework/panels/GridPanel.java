@@ -1,5 +1,6 @@
 package ip.industrialProcessing.gui3.framework.panels;
 
+import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.gui3.framework.Rect;
 import ip.industrialProcessing.gui3.framework.Size;
 import ip.industrialProcessing.gui3.framework.UIElement;
@@ -191,7 +192,7 @@ public class GridPanel extends UIElement {
 	for (GridCell child : children) {
 	    if (child.content != null)
 		child.content.render(renderer);
-	} 
+	}
     }
 
     @Override
@@ -232,5 +233,17 @@ public class GridPanel extends UIElement {
 	    if (child.content != null)
 		child.content.mouseEntered(mouseX, mouseY);
 	}
+    }
+
+    @Override
+    protected ToolTip getTooltipOverride(float mouseX, float mouseY) {
+	for (GridCell child : children) {
+	    if (child.content != null) {
+		ToolTip toolTip = child.content.getTooltip(mouseX, mouseY);
+		if (toolTip != null)
+		    return toolTip;
+	    }
+	}
+	return null;
     }
 }

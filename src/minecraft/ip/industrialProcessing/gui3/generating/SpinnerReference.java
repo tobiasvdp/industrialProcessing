@@ -16,4 +16,5 @@ public class SpinnerReference {
     public String format;
     public float scale;
     public float width;
+    int handlerIndex;
 }

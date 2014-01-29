@@ -1,6 +1,7 @@
 package ip.industrialProcessing.gui3.framework.custom;
 
 import net.minecraft.inventory.Slot;
+import ip.industrialProcessing.gui3.binding.ITankBinding;
 import ip.industrialProcessing.gui3.framework.controls.SlotControl;
 import ip.industrialProcessing.gui3.framework.controls.TankControl;
 import ip.industrialProcessing.gui3.framework.controls.UserControl;
@@ -11,11 +12,13 @@ import ip.industrialProcessing.gui3.framework.panels.Orientation;
 import ip.industrialProcessing.gui3.framework.panels.SizeMode;
 import ip.industrialProcessing.gui3.framework.panels.StackPanel;
 
-public class TankWithSlotsControl extends UserControl {
+public class TankWithSlotsControl extends UserControl implements ITankBinding {
 
     public static TankWithSlotsControl createTankWithSlots(Slot inputSlot, Slot outputSlot){
 	return new TankWithSlotsControl(inputSlot, outputSlot);
     }
+
+    private TankControl tank;
     
     public TankWithSlotsControl(Slot inputSlot, Slot outputSlot) {
 	width = Float.NaN;
@@ -23,7 +26,7 @@ public class TankWithSlotsControl extends UserControl {
 	StackPanel stack = new StackPanel();
 	stack.orientation = Orientation.HORIZONTAL;
 
-	TankControl tank = TankControl.createTank();
+	  tank = TankControl.createTank();
 	stack.addChild(tank); 
 	
 	GridPanel grid = new GridPanel();
@@ -39,5 +42,35 @@ public class TankWithSlotsControl extends UserControl {
 	
 	stack.addChild(grid); 
 	this.child = stack;
+    }
+
+    @Override
+    public void setCapacity(int capacity) {
+	this.tank.setCapacity(capacity);
+    }
+
+    @Override
+    public int getCapacity() { 
+	return this.tank.getCapacity();
+    }
+
+    @Override
+    public int getFluidAmount() { 
+	return this.tank.getFluidAmount();
+    }
+
+    @Override
+    public void setFluidAmount(int amount) {
+	this.tank.setFluidAmount(amount);
+    }
+
+    @Override
+    public int getFluidID() { 
+	return this.tank.getFluidID();
+    }
+
+    @Override
+    public void setFluidID(int fluidId) {
+	this.tank.setFluidID(fluidId);
     }
 }

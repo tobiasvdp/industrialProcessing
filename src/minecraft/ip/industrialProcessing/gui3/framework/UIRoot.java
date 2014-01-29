@@ -1,9 +1,10 @@
 package ip.industrialProcessing.gui3.framework;
 
-import org.lwjgl.opengl.GL11;
-
+import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.gui3.framework.panels.MouseButton;
 import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
+
+import org.lwjgl.opengl.GL11;
 
 public class UIRoot {
     private UIElement element;
@@ -53,17 +54,25 @@ public class UIRoot {
 	}
     }
 
-    public void renderForeground(int mouseX, int mouseY) {
-	mouseMoved(mouseX, mouseY);
+    public void renderForeground(int x, int y, int mouseX, int mouseY) {
+	if (this.element != null) {
+	    mouseMoved(mouseX - x, mouseY - y);
+	    ToolTip tooltip = this.element.getTooltip(mouseX - x, mouseY - y);
+	    if (tooltip != null) {
+		this.guiRenderer.drawToolTip(tooltip, mouseX, mouseY);
+	    }
+	}
     }
 
     public void mouseMoved(int mouseX, int mouseY) {
-	if (mouseX != this.mouseX || mouseY != this.mouseY) {
-	    this.mouseX = mouseX;
-	    this.mouseY = mouseY;
-	    float x = mouseX;
-	    float y = mouseY;
-	    this.element.mouseMoved(x, y);
+	if (this.element != null) {
+	    if (mouseX != this.mouseX || mouseY != this.mouseY) {
+		this.mouseX = mouseX;
+		this.mouseY = mouseY;
+		float x = mouseX;
+		float y = mouseY;
+		this.element.mouseMoved(x, y);
+	    }
 	}
     }
 }

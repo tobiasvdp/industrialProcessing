@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.resources.Resource;
 import net.minecraft.util.ResourceLocation;
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.gui3.framework.Rect;
 import ip.industrialProcessing.gui3.framework.Size;
 import ip.industrialProcessing.gui3.framework.Thickness;
@@ -120,6 +121,13 @@ public class Button extends UIElement {
 
     @Override
     protected void mouseMovedOverride(float mouseX, float mouseY) {
+    }
+
+    @Override
+    protected ToolTip getTooltipOverride(float mouseX, float mouseY) {
+	if (child != null)
+	    return child.getTooltip(mouseX, mouseY);
+	return null;
     }
 
 }

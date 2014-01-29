@@ -1,7 +1,15 @@
 package ip.industrialProcessing.gui3.generating;
 
+import ip.industrialProcessing.gui3.binding.Binder;
+import ip.industrialProcessing.gui3.binding.IProgressBinding;
+import ip.industrialProcessing.gui3.binding.ITankBinding;
 import ip.industrialProcessing.gui3.containers.GuiLayoutContainer;
 import ip.industrialProcessing.gui3.containers.LayoutContainer;
+import ip.industrialProcessing.gui3.containers.handlers.HeatedHandler;
+import ip.industrialProcessing.gui3.containers.handlers.PowerHandler;
+import ip.industrialProcessing.gui3.containers.handlers.StateHandler;
+import ip.industrialProcessing.gui3.containers.handlers.TankHandler;
+import ip.industrialProcessing.gui3.containers.handlers.WorkHandler;
 import ip.industrialProcessing.gui3.framework.Alignment;
 import ip.industrialProcessing.gui3.framework.Thickness;
 import ip.industrialProcessing.gui3.framework.controls.Control;
@@ -24,11 +32,16 @@ import ip.industrialProcessing.gui3.framework.panels.Orientation;
 import ip.industrialProcessing.gui3.framework.panels.SizeMode;
 import ip.industrialProcessing.gui3.framework.panels.StackPanel;
 import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
+import ip.industrialProcessing.machines.containers.IFluidMachineContainerEntity;
+import ip.industrialProcessing.power.IPoweredMachine;
 import ip.industrialProcessing.slots.SlotBase;
 import ip.industrialProcessing.slots.SlotLiquid;
 import ip.industrialProcessing.slots.SlotLiquidOutput;
 import ip.industrialProcessing.slots.SlotOutput;
 import ip.industrialProcessing.utils.containers.ContainerUtils;
+import ip.industrialProcessing.utils.handler.heat.IHeated;
+import ip.industrialProcessing.utils.handler.numbers.IStateConfig;
+import ip.industrialProcessing.utils.working.IWorkingEntity;
 
 import java.util.ArrayList;
 
@@ -57,6 +70,9 @@ public class DefaultGuiBuilder implements IGuiBuilder {
     private boolean hasDurability = false;
     private int powerContainerSlot;
     private int inventoryStartSlot;
+    private int powerHandlerSlot;
+    private int heatHandlerSlot;
+    private int workerHandler;
 
     public DefaultGuiBuilder enableWorker(TextureReference texture) {
 	this.hasWorker = true;
@@ -75,7 +91,11 @@ public class DefaultGuiBuilder implements IGuiBuilder {
     }
 
     public DefaultGuiBuilder addStateButton(int slot, TextureReference texture, int rows, int columns) {
-	this.stateButtons.add(new StateButtonReference(slot, texture, rows, columns));
+	this.stateButtons.add(new StateButtonReference(slot, texture, rows, columns, null));
+	return this;
+    }
+    public DefaultGuiBuilder addStateButton(int slot, TextureReference texture, int rows, int columns, String[] names) {
+	this.stateButtons.add(new StateButtonReference(slot, texture, rows, columns, names));
 	return this;
     }
 
@@ -156,45 +176,71 @@ public class DefaultGuiBuilder implements IGuiBuilder {
 
     @Override
     public GuiLayoutContainer getGuiContainer(LayoutContainer container) {
+	Decorator root = Decorator.createDecorator();
+	GuiLayoutContainer guiContainer = new GuiLayoutContainer(container, root);
+
 	StackPanel verticalStack = new StackPanel();
-	if (hasPower || hasDurability) {
-	    LayerPanel topPanel = new LayerPanel();
-	    if (hasPower) {
-		Control powerControl;
-		if (powerSlot >= 0) {
-		    powerControl = PowerControl.createPowerWithSlots(container.getSlot(powerContainerSlot));
-		} else {
-		    powerControl = ProgressBar.createHorizontal1();
-		}
-		powerControl.horizontalAlign = Alignment.MAX;
-		topPanel.addChild(powerControl);
+	verticalStack.orientation = Orientation.VERTICAL;
+	LayerPanel topPanel = new LayerPanel();
+	if (hasPower) {
+	    Control control;
+	    Binder binder;
+	    PowerHandler powerHandler = (PowerHandler)container.getHandler(this.powerHandlerSlot);
+	    if (powerSlot >= 0) {
+		PowerControl powerControl = PowerControl.createPowerWithSlots(container.getSlot(powerContainerSlot));
+		control = powerControl;
+		binder = new Binder<IProgressBinding>(powerHandler, powerControl);
+	    } else {
+		ProgressBar powerControl = ProgressBar.createHorizontal1();
+		control = powerControl;
+		binder = new Binder<IProgressBinding>(powerHandler, powerControl);
 	    }
-	    if (hasDurability) {
-		ProgressBar durabilityProgress = ProgressBar.createHorizontal1();
-		durabilityProgress.horizontalAlign = Alignment.MIN;
-		topPanel.addChild(durabilityProgress);
-	    }
+	    guiContainer.addBinding(binder);
+	    control.horizontalAlign = Alignment.MAX;
+	    control.verticalAlign = Alignment.MIN;
+	    topPanel.addChild(control);
 	}
+
+	TextBlock title = new TextBlock("Some machine", 4210752);
+	if (hasDurability) {
+	    StackPanel titleDurabilityStack = new StackPanel();
+	    titleDurabilityStack.orientation = Orientation.VERTICAL;
+	    titleDurabilityStack.addChild(title);
+	    ProgressBar durabilityProgress = ProgressBar.createHorizontal1();
+	    durabilityProgress.horizontalAlign = Alignment.MIN;
+	    titleDurabilityStack.addChild(durabilityProgress);
+	    topPanel.addChild(titleDurabilityStack);
+	    titleDurabilityStack.margin = new Thickness(0, 0, 7, 0);
+	} else {
+	    topPanel.addChild(title);
+	}
+	verticalStack.addChild(topPanel);
 
 	GridPanel grid = new GridPanel();
 	grid.rows.add(new GridSize(54, SizeMode.ABSOLUTE));
 	grid.horizontalAlign = Alignment.STRETCH;
-	if (hasHeat) {
+	if (hasHeat) { 
+	    HeatedHandler heatHandler = (HeatedHandler)container.getHandler(this.heatHandlerSlot);
 	    ProgressBar thermometer = ProgressBar.createTemperature();
+	    Binder binder = new Binder<IProgressBinding>(heatHandler, thermometer);
+	    guiContainer.addBinding(binder);
 	    thermometer.horizontalAlign = Alignment.MIN;
 	    grid.children.add(new GridCell(0, grid.columns.size(), thermometer));
 	    grid.columns.add(new GridSize(1, SizeMode.RELATIVE));
 	}
-	setupTanks(this.inputTanks, container, grid, Alignment.MIN);
+	setupTanks(this.inputTanks, guiContainer, container, grid, Alignment.MIN);
 	setupSlots(this.inputSlots, container, grid, Alignment.MIN);
 	if (hasWorker) {
 	    ProgressBar workBar = ProgressBar.createWorker(this.workerTexture);
+	    WorkHandler workHandler = (WorkHandler) container.getHandler(this.workerHandler);
+	    Binder binder = new Binder<IProgressBinding>(workHandler, workBar);
+	    guiContainer.addBinding(binder);
 	    workBar.horizontalAlign = Alignment.CENTER;
 	    grid.children.add(new GridCell(0, grid.columns.size(), workBar));
 	    grid.columns.add(new GridSize(1, SizeMode.RELATIVE));
 	}
 	setupSlots(this.outputSlots, container, grid, Alignment.MAX);
-	setupTanks(this.outputTanks, container, grid, Alignment.MAX);
+	setupTanks(this.outputTanks, guiContainer, container, grid, Alignment.MAX);
 	if (grid.columns.size() > 0)
 	    verticalStack.addChild(grid);
 
@@ -206,39 +252,43 @@ public class DefaultGuiBuilder implements IGuiBuilder {
 		stateStack.addChild(spinner);
 	    }
 	    for (StateButtonReference stateRef : this.stateButtons) {
-		StateButton button = new StateButton(stateRef.texture, stateRef.rows, stateRef.columns);
+		StateButton button = new StateButton(stateRef.texture, stateRef.rows, stateRef.columns, stateRef.names);
 		stateStack.addChild(button);
 	    }
 	    verticalStack.addChild(stateStack);
 	}
-	Decorator root = Decorator.createDecorator();
 	StackPanel rootStack = new StackPanel();
 	rootStack.orientation = Orientation.VERTICAL;
 
-	TextBlock title = new TextBlock("Some machine", 4210752);
-	rootStack.addChild(title);
 	rootStack.addChild(verticalStack);
-	verticalStack.margin = new Thickness(7, 0, 7, 0);
+	verticalStack.margin = new Thickness(0, 0, 7, 0);
 	if (hasPlayerInventory) {
 	    rootStack.addChild(PlayerInventory.createInventory(container, inventoryStartSlot));
 	}
 	root.setChild(rootStack);
 	root.verticalAlign = Alignment.CENTER;
 	root.horizontalAlign = Alignment.CENTER;
-	return new GuiLayoutContainer(container, root);
+	return guiContainer;
     }
 
-    private void setupTanks(ArrayList<TankReference> tankRefs, LayoutContainer container, GridPanel grid, Alignment max) {
+    private void setupTanks(ArrayList<TankReference> tankRefs, GuiLayoutContainer guiContainer, LayoutContainer container, GridPanel grid, Alignment max) {
 	for (TankReference tank : tankRefs) {
+	    TankHandler handler = (TankHandler) container.getHandler(tank.handlerIndex);
+	    Binder binder;
 	    Control control;
 	    int size;
 	    if (tank.inputSlot >= 0 && tank.outputSlot >= 0) {
-		control = TankWithSlotsControl.createTankWithSlots(container.getSlot(tank.inputContainerSlot), container.getSlot(tank.outputContainerSlot));
+		TankWithSlotsControl tankControl = TankWithSlotsControl.createTankWithSlots(container.getSlot(tank.inputContainerSlot), container.getSlot(tank.outputContainerSlot));
+		control = tankControl;
+		binder = new Binder<ITankBinding>(handler, tankControl);
 		size = 2;
 	    } else {
-		control = TankControl.createTank();
+		TankControl tankControl = TankControl.createTank();
+		control = tankControl;
+		binder = new Binder<ITankBinding>(handler, tankControl);
 		size = 1;
 	    }
+	    guiContainer.addBinding(binder);
 	    control.horizontalAlign = max;
 	    grid.children.add(new GridCell(0, grid.columns.size(), control));
 	    grid.columns.add(new GridSize(size, SizeMode.RELATIVE));
@@ -271,19 +321,45 @@ public class DefaultGuiBuilder implements IGuiBuilder {
     @Override
     public LayoutContainer getContainer(InventoryPlayer player, TileEntity tileEntity) {
 	IInventory inventory = null;
+	IFluidMachineContainerEntity tankEntity = null;
 	if (tileEntity instanceof IInventory)
 	    inventory = (IInventory) tileEntity;
+	if (tileEntity instanceof IFluidMachineContainerEntity)
+	    tankEntity = (IFluidMachineContainerEntity) tileEntity;
 	LayoutContainer container = new LayoutContainer();
-	setupContainerTanks(this.inputTanks, container, inventory);
-	setupContainerTanks(this.outputTanks, container, inventory);
+	setupContainerTanks(this.inputTanks, container, tankEntity, inventory);
+	setupContainerTanks(this.outputTanks, container, tankEntity, inventory);
 	setupSlots(this.inputSlots, container, inventory, true);
 	setupSlots(this.outputSlots, container, inventory, false);
-	if (hasPower)
-	    setupPower(container, inventory);
-	// TODO: workHandler
-	// TODO: heatHandler
-	// TODO: stateHandlers
-	// TODO: progressHandlers
+	if (hasPower) {
+	    IPoweredMachine machine = null;
+	    if (tileEntity instanceof IPoweredMachine)
+		machine = (IPoweredMachine) tileEntity;
+	    setupPower(container, inventory, machine);
+	}
+	if (hasHeat) {
+	    IHeated heated = null;
+	    if (tileEntity instanceof IHeated)
+		heated = (IHeated) tileEntity;
+	    if (heated == null)
+		throw new NullPointerException("Heat without IHeated?!");
+	    this.heatHandlerSlot = container.addHandler(new HeatedHandler(heated));
+	}
+
+	if (hasWorker) {
+	    IWorkingEntity workingEntity = null;
+	    if (tileEntity instanceof IWorkingEntity)
+		workingEntity = (IWorkingEntity) tileEntity;
+	    if (workingEntity == null)
+		throw new NullPointerException("Work without IWorkingEntity?!");
+	    this.workerHandler = container.addHandler(new WorkHandler(workingEntity));
+	}
+	if (!this.stateButtons.isEmpty() || !this.spinners.isEmpty()) {
+	    IStateConfig stateEntity = null;
+	    if (tileEntity instanceof IStateConfig)
+		stateEntity = (IStateConfig) tileEntity;
+	    setupIStateConfigs(this.stateButtons, this.spinners, container, stateEntity);
+	}
 	this.inventoryStartSlot = container.inventorySlots.size();
 	if (hasPlayerInventory) {
 	    ContainerUtils.BindPlayerInventory(player, container, 0);
@@ -292,12 +368,25 @@ public class DefaultGuiBuilder implements IGuiBuilder {
 	return container;
     }
 
-    private void setupPower(LayoutContainer container, IInventory inventory) {
+    private void setupIStateConfigs(ArrayList<StateButtonReference> stateButtonsRefs, ArrayList<SpinnerReference> spinnerRefs, LayoutContainer container, IStateConfig stateEntity) {
+	for (SpinnerReference spinnerReference : spinnerRefs) {
+	    spinnerReference.handlerIndex = container.addHandler(new StateHandler(spinnerReference.slot, stateEntity));
+	}
+	for (StateButtonReference stateButtonReference : stateButtonsRefs) {
+	    stateButtonReference.handlerIndex = container.addHandler(new StateHandler(stateButtonReference.slot, stateEntity));
+	}
+    }
+
+    private void setupPower(LayoutContainer container, IInventory inventory, IPoweredMachine machine) {
+	if (machine == null)
+	    throw new NullPointerException("Power without IPoweredMachine?!");
 	if (powerSlot >= 0) {
+	    if (inventory == null)
+		throw new NullPointerException("Slots without IInventory?!");
 	    this.powerContainerSlot = container.inventorySlots.size();
 	    container.containerAddSlot(new SlotBase(inventory, powerSlot, 0, 0));
 	}
-	// TODO: powerHandler
+	this.powerHandlerSlot = container.addHandler(new PowerHandler(machine));
     }
 
     private void setupSlots(ArrayList<SlotClusterReference> slots, LayoutContainer container, IInventory inventory, boolean input) {
@@ -313,9 +402,11 @@ public class DefaultGuiBuilder implements IGuiBuilder {
 	}
     }
 
-    private void setupContainerTanks(ArrayList<TankReference> tanks, LayoutContainer container, IInventory inventory) {
+    private void setupContainerTanks(ArrayList<TankReference> tanks, LayoutContainer container, IFluidMachineContainerEntity entity, IInventory inventory) {
+	if (entity == null)
+	    throw new NullPointerException("Slots without IInventory?!");
 	for (TankReference tank : tanks) {
-	    // TODO: tankHandlers
+	    tank.handlerIndex = container.addHandler(new TankHandler(tank.tankSlot, entity));
 	    if (tank.inputSlot >= 0 && tank.outputSlot >= 0) {
 		if (inventory == null)
 		    throw new NullPointerException("Slots without IInventory?!");

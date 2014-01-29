@@ -44,7 +44,7 @@ public class GuiContainerGenerator extends GuiContainerMachine {
     private GuiContainerGenerator(InventoryPlayer inventory, TileEntityGenerator entity, ContainerGenerator container) {
 	super(inventory, entity, container, "Buildcraft Generator", "textures/gui/Generator.png");
 	this.container = container;
-	this.generator = entity; 
+	this.generator = entity;
 	this.ySize = 300;
 	TextureReference texture = new TextureReference(new Size(256, 256), INamepace.TEXTURE_DOMAIN, "textures/gui/Generator.png");
 
@@ -58,9 +58,9 @@ public class GuiContainerGenerator extends GuiContainerMachine {
 	StackPanel generatorPanel = new StackPanel();
 	generatorPanel.orientation = Orientation.HORIZONTAL;
 
-	generatorPanel.addChild(LabeledGauge.createLabeledGauge("Voltage", "%2.2fV", 1f, 4210752));
-	generatorPanel.addChild(LabeledGauge.createLabeledGauge("Current", "%2.2fA", 1f, 4210752));
-	generatorPanel.addChild(LabeledGauge.createLabeledGauge("Power", "%2.2fW", 1f, 4210752));
+	generatorPanel.addChild(LabeledGauge.createLabeledGauge("Voltage", "%2.2fV", 4210752));
+	generatorPanel.addChild(LabeledGauge.createLabeledGauge("Current", "%2.2fA", 4210752));
+	generatorPanel.addChild(LabeledGauge.createLabeledGauge("Power", "%2.2fW", 4210752));
 
 	generatorPanel.margin = new Thickness(7, 0, 7, 0);
 	StackPanel stack = new StackPanel();
@@ -102,8 +102,7 @@ public class GuiContainerGenerator extends GuiContainerMachine {
     @Override
     protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
 	GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
- 
-	
+
 	int x = (width - xSize) / 2;
 	int y = (height - ySize) / 2;
 	this.layout.render(xSize, ySize, x, y, par2, par3);
@@ -112,6 +111,8 @@ public class GuiContainerGenerator extends GuiContainerMachine {
     @Override
     protected void drawGuiContainerForegroundLayer(int param1, int param2) {
 	super.drawGuiContainerForegroundLayer(param1, param2);
-	this.layout.renderForeground(param1, param2);
+	int x = (width - xSize) / 2;
+	int y = (height - ySize) / 2;
+	this.layout.renderForeground(x, y, param1, param2);
     }
 }

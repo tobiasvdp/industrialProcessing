@@ -1,5 +1,6 @@
 package ip.industrialProcessing.gui3.framework.controls;
 
+import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.gui3.framework.Alignment;
 import ip.industrialProcessing.gui3.framework.Rect;
 import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
@@ -21,7 +22,7 @@ public class Image extends Control {
 
     @Override
     protected void renderOverride(Rect size, GuiRenderer renderer) { 
-	renderer.drawTexture(size, this.section, this.texture);
+	renderer.drawTexture(size, this.section, this.texture.resource);
     }
 
     public static Image createImage(TextureReference texture, Rect rect) {
@@ -30,5 +31,10 @@ public class Image extends Control {
 
     public static Image createImage(TextureReference reference) {
 	return new Image(reference, new Rect(0, 0, 1, 1));
+    }
+    
+    @Override
+    protected ToolTip getTooltipOverride(float mouseX, float mouseY) { 
+        return null;
     }
 }

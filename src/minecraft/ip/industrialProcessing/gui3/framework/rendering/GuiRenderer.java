@@ -1,5 +1,6 @@
 package ip.industrialProcessing.gui3.framework.rendering;
 
+import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.gui3.framework.Rect;
 import ip.industrialProcessing.gui3.framework.Size;
 import ip.industrialProcessing.gui3.framework.Thickness;
@@ -10,6 +11,7 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.ResourceLocation;
 
 public class GuiRenderer {
 
@@ -73,7 +75,7 @@ public class GuiRenderer {
 	tessellator.draw();
     }
 
-    public void drawTexture(Rect where, Rect segment, TextureReference texture) {
+    public void drawTexture(Rect where, Rect segment, ResourceLocation texture) {
 
 	float u0 = segment.x;
 	float u1 = segment.x + segment.width;
@@ -85,7 +87,7 @@ public class GuiRenderer {
 	float y0 = where.y;
 	float y1 = where.y + where.height;
 
-	mc.renderEngine.func_110577_a(texture.resource);
+	mc.renderEngine.func_110577_a(texture);
 	tessellator.startDrawingQuads();
 	tessellator.addVertexWithUV(x0, y1, 0, u0, v1);
 	tessellator.addVertexWithUV(x1, y1, 0, u1, v1);
@@ -117,7 +119,7 @@ public class GuiRenderer {
 		    if (i == maxStrings - 1 && ellipsis) {
 			line = mc.fontRenderer.trimStringToWidth(line, width - lastMargin) + ellipsisChars;
 		    }
-		    mc.fontRenderer.drawString(text, (int) rect.x + mc.fontRenderer.FONT_HEIGHT * i, (int) rect.y, color, hasShadow); 
+		    mc.fontRenderer.drawString(text, (int) rect.x + mc.fontRenderer.FONT_HEIGHT * i, (int) rect.y, color, hasShadow);
 		}
 
 	    } else
@@ -156,6 +158,10 @@ public class GuiRenderer {
 	GL11.glEnable(GL11.GL_TEXTURE_2D);
 	GL11.glDisable(GL11.GL_BLEND);
 	GL11.glColor4f(1, 1, 1, 1);
+    }
+
+    public void drawToolTip(ToolTip tooltip, int x, int y) {
+	ToolTip.renderToolTip(tooltip, x, y, 1000, this.mc.fontRenderer);
     }
 
 }

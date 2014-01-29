@@ -16,4 +16,5 @@ class TankReference {
     public int outputSlot;
     int outputContainerSlot;
     int inputContainerSlot;
+    int handlerIndex;
 }

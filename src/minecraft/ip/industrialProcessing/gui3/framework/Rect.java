@@ -1,5 +1,7 @@
 package ip.industrialProcessing.gui3.framework;
 
+import net.minecraft.util.Icon;
+
 public class Rect {
     public float x;
     public float y;
@@ -22,6 +24,10 @@ public class Rect {
 	this.y = y;
 	this.width = size.width;
 	this.height = size.height;
+    }
+
+    public Rect(Icon icon) {
+	this(icon.getMinU(), icon.getMinV(), icon.getMaxU() - icon.getMinU(), icon.getMaxV() - icon.getMinV());
     }
 
     public boolean contains(float x2, float y2) {

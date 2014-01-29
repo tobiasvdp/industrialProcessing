@@ -1,6 +1,6 @@
 package ip.industrialProcessing.gui3.binding;
 
-public interface IValueBinding {
+public interface IValueBinding extends IBinding {
     void subscribe(IValueBindingChangedListener listener);
     void unsubscribe(IValueBindingChangedListener listener);
     void setValue(int value);

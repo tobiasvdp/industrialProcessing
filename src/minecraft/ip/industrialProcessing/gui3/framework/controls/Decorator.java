@@ -1,6 +1,7 @@
 package ip.industrialProcessing.gui3.framework.controls;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.gui3.framework.Rect;
 import ip.industrialProcessing.gui3.framework.Size;
 import ip.industrialProcessing.gui3.framework.Thickness;
@@ -17,6 +18,10 @@ public class Decorator extends UIElement {
     public int borderWidth;
     private TextureReference texture;
 
+    public static Decorator createDecorator() {
+	return new Decorator(DEFAULT_TEXTURE, DEFAULT_BORDER_SIZE);
+    }
+    
     public void setChild(UIElement child) {
 	this.child = child;
 	if (this.child == null)
@@ -45,7 +50,7 @@ public class Decorator extends UIElement {
     protected Size arrangeOverride(Size maxSize) {
 	if (child != null) {
 	    Size size = child.getDesiredSize();
-	    child.arrange(new Rect(borderWidth, borderWidth, maxSize));
+	    child.arrange(new Rect(borderWidth, borderWidth, new Size(maxSize.width - borderWidth * 2, maxSize.height - borderWidth * 2)));
 	    return new Size(size.width + borderWidth * 2, size.height + borderWidth * 2);
 	}
 	return new Size(borderWidth * 2, borderWidth * 2);
@@ -58,7 +63,7 @@ public class Decorator extends UIElement {
 	if (borderWidth > 0)
 	    renderer.drawNineGrid(size, new Thickness(borderWidth, borderWidth, borderWidth, borderWidth), new Rect(0, 0, 1, 1), texture);
 	else
-	    renderer.drawTexture(size, new Rect(0, 0, 1, 1), texture);
+	    renderer.drawTexture(size, new Rect(0, 0, 1, 1), texture.resource);
     }
 
     @Override
@@ -91,8 +96,11 @@ public class Decorator extends UIElement {
 	    child.mouseMoved(mouseX, mouseY);
     }
 
-    public static Decorator createDecorator() {
-	return new Decorator(DEFAULT_TEXTURE, DEFAULT_BORDER_SIZE);
-    }
 
+    @Override
+    protected ToolTip getTooltipOverride(float mouseX, float mouseY) {
+	if (child != null)
+	    return child.getTooltip(mouseX, mouseY);
+	return null;
+    }
 }

@@ -1,6 +1,7 @@
 package ip.industrialProcessing.gui3.framework.controls;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.gui3.binding.IProgressBinding;
 import ip.industrialProcessing.gui3.framework.Alignment;
 import ip.industrialProcessing.gui3.framework.Rect;
@@ -10,6 +11,7 @@ import ip.industrialProcessing.gui3.framework.panels.Orientation;
 import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
 import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import net.minecraftforge.fluids.FluidTankInfo;
@@ -103,6 +105,7 @@ public class ProgressBar extends Control implements IProgressBinding {
     private Thickness backgroundThickness;
     public float value = 0.5f;
     public float maxValue = 1;
+    public String name = null;
     public String tooltip = "%.2f/%.2f";
 
     public ProgressBar(TextureReference texture, Rect backgroundRegion, Rect overlayRegion, Orientation orientation, Thickness backgroundThickness) {
@@ -148,6 +151,7 @@ public class ProgressBar extends Control implements IProgressBinding {
 	    rectUV = new Rect(leftU + this.overlayRegion.x, this.overlayRegion.y, uWidth, this.overlayRegion.height);
 
 	    break;
+	case VERTICAL:
 	default:
 	    float fullHeight = (size.height - backgroundThickness.top - backgroundThickness.bottom);
 	    float progressHeight = fullHeight * progress;
@@ -165,12 +169,12 @@ public class ProgressBar extends Control implements IProgressBinding {
 	    break;
 	}
 
-	renderer.drawTexture(rectXY, rectUV, texture);
+	renderer.drawNineGrid(rectXY, this.backgroundThickness, rectUV, texture);
     }
 
     @Override
     public void setValue(float value) {
-	this.value = this.maxValue;
+	this.value = value;
     }
 
     @Override
@@ -188,4 +192,18 @@ public class ProgressBar extends Control implements IProgressBinding {
 	return maxValue;
     }
 
+    @Override
+    protected ToolTip getTooltipOverride(float mouseX, float mouseY) {
+	ArrayList<String> lines = new ArrayList<String>();
+	lines.add(mouseX+","+mouseY);
+	if (name != null)
+	    lines.add(name);
+	if (this.tooltip != null)
+	    lines.add(String.format(this.tooltip, this.value, this.maxValue));
+	if (!lines.isEmpty()) {
+	    String[] linesAr = new String[lines.size()];
+	    return new ToolTip(lines.toArray(linesAr));
+	}
+	return null;
+    }
 }

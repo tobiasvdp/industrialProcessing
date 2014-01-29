@@ -15,10 +15,10 @@ public class LabeledGauge extends UserControl implements IProgressBinding {
     private GaugeControl gauge;
     private TextBlock label;
 
-    public LabeledGauge(String text, int color) {
+    public LabeledGauge(String text, int color, String format) {
 	StackPanel stack = new StackPanel();
 	stack.orientation = Orientation.VERTICAL;
-	gauge = GaugeControl.createGauge();
+	gauge = GaugeControl.createGauge(text, format);
 	stack.addChild(gauge);
 	label = new TextBlock(text, color);
 	label.horizontalAlign = Alignment.CENTER; 
@@ -55,7 +55,7 @@ public class LabeledGauge extends UserControl implements IProgressBinding {
 	return this.gauge.getMaxValue();
     }
 
-    public static LabeledGauge createLabeledGauge(String label, String format, float scale, int color) {
-	return new LabeledGauge(label, color);
+    public static LabeledGauge createLabeledGauge(String label, String format, int color) {
+	return new LabeledGauge(label, color, format);
     }
 }

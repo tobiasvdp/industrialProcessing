@@ -21,11 +21,11 @@ public class StateButton extends UserControl implements IButtonClickListener, IV
     private int value;
     private ArrayList<IValueBindingChangedListener> valueChangedListeners = new ArrayList<IValueBindingChangedListener>();
 
-    public StateButton(TextureReference texture, int rows, int columns) {
+    public StateButton(TextureReference texture, int rows, int columns, String[] names) {
 	this.width = Float.NaN;
 	this.height = Float.NaN;
 	this.isHittestVisible = true;
-	tile = new ImageTile(texture, rows, columns);
+	tile = new ImageTile(texture, rows, columns, names);
 	tile.margin = new Thickness(1, 1, 1, 1);
 	button = new Button(tile);
 	button.subscribeClick(this);

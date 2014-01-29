@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 public class BlockElectrolyser extends BlockMachineRendered implements IRecipeBlock, IGuiBlock {
 
     private static final TextureReference WORKER_TEXTURE = new TextureReference(new Size(24, 32), IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/Worker.png");
-    private static IGuiBuilder guiBuilder = new DefaultGuiBuilder().addInputTank(0).addInputTank(1).enableWorker(WORKER_TEXTURE).addOutputTank(2).addOutputTank(2).addOutputSlot(0);
+    private static IGuiBuilder guiBuilder = new DefaultGuiBuilder().enablePower(0).addInputTank(0).addInputTank(1).enableWorker(WORKER_TEXTURE).addOutputTank(2).addOutputTank(3).addOutputSlot(0);
 
     public BlockElectrolyser() {
 	super(ConfigMachineBlocks.getElectrolyserBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Electrolyser", ISetupCreativeTabs.tabOreProcessing);

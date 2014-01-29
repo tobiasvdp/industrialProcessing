@@ -1,5 +1,6 @@
 package ip.industrialProcessing.gui3.framework.controls;
 
+import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.gui3.framework.Rect;
 import ip.industrialProcessing.gui3.framework.Size;
 import ip.industrialProcessing.gui3.framework.UIElement;
@@ -42,31 +43,38 @@ public class UserControl extends Control {
 
     @Override
     protected void mouseUpOverride(float mouseX, float mouseY, MouseButton button) {
-	if(child != null)
+	if (child != null)
 	    child.mouseUp(mouseX, mouseY, button);
     }
 
     @Override
     protected void mouseDownOverride(float mouseX, float mouseY, MouseButton button) {
-	if(child!= null)
+	if (child != null)
 	    child.mouseDown(mouseX, mouseY, button);
     }
 
     @Override
     protected void mouseLeftOverride(float mouseX, float mouseY) {
-	if(child != null)
+	if (child != null)
 	    child.mouseLeft(mouseX, mouseY);
     }
 
     @Override
     protected void mouseEnteredOverride(float mouseX, float mouseY) {
-	if(child != null)
+	if (child != null)
 	    child.mouseEntered(mouseX, mouseY);
     }
 
     @Override
     protected void mouseMovedOverride(float mouseX, float mouseY) {
-	if(child != null)
+	if (child != null)
 	    child.mouseMoved(mouseX, mouseY);
+    }
+
+    @Override
+    protected ToolTip getTooltipOverride(float mouseX, float mouseY) {
+	if (child != null)
+	    return child.getTooltip(mouseX, mouseY);
+	return null;
     }
 }

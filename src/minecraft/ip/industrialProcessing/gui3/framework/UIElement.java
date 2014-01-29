@@ -4,6 +4,7 @@ import java.util.Random;
 
 import org.lwjgl.opengl.GL11;
 
+import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.gui3.framework.panels.MouseButton;
 import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
 
@@ -159,23 +160,24 @@ public abstract class UIElement {
     private int color = hashCode() + 0xFF000000;
     private float mouseY;
     private float mouseX;
+    private boolean hasToolTip;
 
     public void render(GuiRenderer renderer) {
-	boolean debug = false;
+	boolean debug = hasToolTip;
 	GL11.glPushMatrix();
 	GL11.glTranslatef(x, y, 0.1f);
 	absoluteX += x;
 	absoluteY += y;
 	Rect bounds = new Rect(0, 0, this.actualSize);
 	if (debug) {
-	    //renderer.drawRectangle(bounds, 0xFFffffff);
+	    // renderer.drawRectangle(bounds, 0xFFffffff);
 	}
 	renderOverride(bounds, renderer);
 	absoluteX -= x;
 	absoluteY -= y;
 	if (debug) {
 	    GL11.glTranslatef(0, 0, 1);
-	    color = this.isMouseInside ? 0xffffff00 : 0xffff0000;
+	    // color = this.isMouseInside ? 0xffffff00 : 0xffff0000;
 	    float lineThickness = 0.25f;
 	    renderer.drawRectangle(new Rect(0, 0, lineThickness, this.actualSize.height), color);
 	    renderer.drawRectangle(new Rect(this.actualSize.width - lineThickness, 0, lineThickness, this.actualSize.height), color);
@@ -259,4 +261,19 @@ public abstract class UIElement {
 	}
 	return false;
     }
+
+    public ToolTip getTooltip(float mouseX, float mouseY) {
+	this.hasToolTip = false;
+	Rect rect = new Rect(this.x, this.y, this.actualSize);
+	if (rect.contains(mouseX, mouseY)) {
+	    ToolTip tooltip = getTooltipOverride(mouseX, mouseY);
+	    if (tooltip != null){
+		this.hasToolTip = true;
+		return tooltip;
+	    }
+	}
+	return null;
+    }
+
+    protected abstract ToolTip getTooltipOverride(float mouseX, float mouseY);
 }

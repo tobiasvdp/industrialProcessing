@@ -2,6 +2,7 @@ package ip.industrialProcessing.gui3.framework.controls;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.gui3.framework.Rect;
 import ip.industrialProcessing.gui3.framework.Size;
 import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
@@ -53,5 +54,9 @@ public class TextBlock extends Control {
 
     public static TextBlock createTextBlock() {
 	return new TextBlock("", 0xFFFFFFFF);
+    }
+    @Override
+    protected ToolTip getTooltipOverride(float mouseX, float mouseY) { 
+        return null;
     }
 }

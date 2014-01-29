@@ -14,7 +14,7 @@ public class LayoutGuiBuilder {
 	    IGuiBlock guiBlock = (IGuiBlock) block;
 	    IGuiBuilder builder = guiBlock.getGui();
 	    if (builder != null) {
-		builder.getContainer(player, entity);
+		return builder.getContainer(player, entity);
 	    }
 	}
 

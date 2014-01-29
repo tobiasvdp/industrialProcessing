@@ -2,6 +2,7 @@ package ip.industrialProcessing.gui3.framework.controls;
 
 import net.minecraft.inventory.Slot;
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.gui3.framework.Alignment;
 import ip.industrialProcessing.gui3.framework.Rect;
@@ -43,7 +44,7 @@ public class SlotControl extends Control {
 	renderer.drawRectangle(size, 0xFFFFFF00);
 	renderer.drawRectangle(new Rect(1, 1, size.width - 2, size.height - 2), 0xFFFF0000);
 
-	renderer.drawTexture(size, section, texture);
+	renderer.drawTexture(size, section, texture.resource);
     }
 
     public static SlotControl createSlot(Slot slot) {
@@ -62,4 +63,8 @@ public class SlotControl extends Control {
 	return new SlotControl(DEFAULT_SLOT_TEXTURE, DEFAULT_SLOT_SECTION_FUEL, slot);
     }
 
+    @Override
+    protected ToolTip getTooltipOverride(float mouseX, float mouseY) {
+	return null;
+    }
 }
