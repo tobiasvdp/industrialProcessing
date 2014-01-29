@@ -158,4 +158,41 @@ public class TileEntityMicroBlockConnection extends TileEntityMicroBlock impleme
 			setExternalConnectionForSide(i, null,false);
 		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
+
+	@Override
+	public void updateConnections(int x, int y, int z) {
+int dx=x-xCoord;
+int dy=y-yCoord;
+int dz=z-zCoord;
+ForgeDirection dir = getForgeDirection(dx,dy,dz);
+System.out.println(dir);
+updateConnections(dir.ordinal());
+	}
+
+	private ForgeDirection getForgeDirection(int dx, int dy, int dz) {
+if(dx < 0){
+	return ForgeDirection.WEST;
+}
+if(dx > 0){
+	return ForgeDirection.EAST;
+}
+if(dx == 0){
+	if(dy < 0){
+		return ForgeDirection.DOWN;
+	}
+	if(dy > 0){
+		return ForgeDirection.UP;
+	}
+	if(dy == 0){
+		if(dz < 0){
+			return ForgeDirection.NORTH;
+		}
+		if(dz > 0){
+			return ForgeDirection.SOUTH;
+		}
+	}
+}
+
+return ForgeDirection.UNKNOWN;
+	}
 }

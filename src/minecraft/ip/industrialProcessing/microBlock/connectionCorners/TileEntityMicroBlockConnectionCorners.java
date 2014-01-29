@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.microBlock.BlockMicroBlock;
 import ip.industrialProcessing.microBlock.IMicroBlock;
@@ -64,10 +65,15 @@ public class TileEntityMicroBlockConnectionCorners extends TileEntityMicroBlockC
 			Block blockFace = Block.blocksList[worldObj.getBlockId(xCoord + dir.offsetX + dirface.offsetX, yCoord + dir.offsetY + dirface.offsetY, zCoord + dir.offsetZ + dirface.offsetZ)];
 			if (blockFace != null && blockFace instanceof BlockMicroBlock) {
 				if (!isSideFree(face)) {
-					IMicroBlock diagonalSide = (IMicroBlock) worldObj.getBlockTileEntity(xCoord + dir.offsetX + dirface.offsetX, yCoord + dir.offsetY + dirface.offsetY, zCoord + dir.offsetZ + dirface.offsetZ);
-					if (!diagonalSide.isSideFree(dir.getOpposite())) {
+					TileEntity diagonalSide = worldObj.getBlockTileEntity(xCoord + dir.offsetX + dirface.offsetX, yCoord + dir.offsetY + dirface.offsetY, zCoord + dir.offsetZ + dirface.offsetZ);
+					if(diagonalSide instanceof IMicroBlockConnectionCorner){
+						IMicroBlockConnectionCorner diagSide = (IMicroBlockConnectionCorner) diagonalSide;
+					if (!diagSide.isSideFree(dir.getOpposite())) {
 						externalConnectionExtentions[side][externalDirections[face][side]] = true;
+						if(repeat)
+						diagSide.updateConnections(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
 						return true;
+					}
 					}
 				}
 			}
