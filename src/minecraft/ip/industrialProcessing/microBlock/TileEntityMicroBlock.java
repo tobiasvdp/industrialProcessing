@@ -38,7 +38,12 @@ public class TileEntityMicroBlock extends TileEntity implements IMicroBlock {
 
 	@Override
 	public boolean isSideFree(ForgeDirection dir) {
-		return sides[dir.ordinal()] == -1;
+		return isSideFree(dir.ordinal());
+	}
+	
+	@Override
+	public boolean isSideFree(int dir) {
+		return sides[dir] == -1;
 	}
 
 	@Override

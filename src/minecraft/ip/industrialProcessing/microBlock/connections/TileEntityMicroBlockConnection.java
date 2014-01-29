@@ -1,6 +1,7 @@
 package ip.industrialProcessing.microBlock.connections;
 
 import ip.industrialProcessing.microBlock.BlockMicroBlock;
+import ip.industrialProcessing.microBlock.IMicroBlock;
 import ip.industrialProcessing.microBlock.TileEntityMicroBlock;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -43,22 +44,29 @@ public class TileEntityMicroBlockConnection extends TileEntityMicroBlock impleme
 		for(int i = 0;i<6;i++){
 			ForgeDirection dir = ForgeDirection.values()[i];
 			int id =worldObj.getBlockId(xCoord+dir.offsetX, yCoord+dir.offsetY, zCoord+dir.offsetZ);
-			if(Block.blocksList[id] instanceof BlockMicroBlock){
-				if(((BlockMicroBlock)Block.blocksList[id]).getMicroBlockType() == ((BlockMicroBlock)this.getBlockType()).getMicroBlockType())
-					setExternalConnectionForSide(i,true);
+			if (id != 0){
+				if(Block.blocksList[id] instanceof BlockMicroBlock){
+					if(((BlockMicroBlock)Block.blocksList[id]).getMicroBlockType() == ((BlockMicroBlock)this.getBlockType()).getMicroBlockType())
+						setExternalConnectionForSide(i,(IMicroBlock) this.worldObj.getBlockTileEntity(xCoord+dir.offsetX, yCoord+dir.offsetY, zCoord+dir.offsetZ));
+				}else{
+					setExternalConnectionForSide(i,null);
+				}
 			}else{
-				setExternalConnectionForSide(i,false);
+				setExternalConnectionForSide(i,null);
 			}
 		}
 	}
 	
 	private static final int[][] externalDirections = new int[][]{{3,3,3,3},{2,2,2,2},{1,0,3,2},{1,0,2,3},{1,0,0,0},{1,0,1,1}};
 	
-	private void setExternalConnectionForSide(int i, boolean canConnect) {
-		if(canConnect){
+	private void setExternalConnectionForSide(int i, IMicroBlock te) {
+		if(te != null){
 			int[] sides = rotation[i];
 			for(int j = 0;j<sides.length;j++){
-				externalConnections[sides[j]][externalDirections[sides[j]][j]] = true;
+				if(!te.isSideFree(sides[j]))
+					externalConnections[sides[j]][externalDirections[sides[j]][j]] = true;
+				else
+					externalConnections[sides[j]][externalDirections[sides[j]][j]] = false;
 			}	
 		}else{
 			int[] sides = rotation[i];
