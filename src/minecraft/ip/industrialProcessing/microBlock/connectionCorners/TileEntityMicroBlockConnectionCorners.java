@@ -13,13 +13,13 @@ import ip.industrialProcessing.microBlock.connectingSides.TileEntityMicroBlockCo
 import ip.industrialProcessing.microBlock.connections.TileEntityMicroBlockConnection;
 import ip.industrialProcessing.microBlock.externalConnections.IMicroBlockExternalConnection;
 
-public class TileEntityMicroBlockConnectionCorners extends TileEntityMicroBlockConnection implements IMicroBlockConnectionCorner{
+public class TileEntityMicroBlockConnectionCorners extends TileEntityMicroBlockConnection implements IMicroBlockConnectionCorner {
 
 	protected boolean[][] externalConnectionExtentions = new boolean[6][4];
 
 	public TileEntityMicroBlockConnectionCorners() {
-		for(int i =0;i<6;i++){
-			for(int j =0;j<4;j++){
+		for (int i = 0; i < 6; i++) {
+			for (int j = 0; j < 4; j++) {
 				externalConnectionExtentions[i][j] = false;
 			}
 		}
@@ -28,9 +28,9 @@ public class TileEntityMicroBlockConnectionCorners extends TileEntityMicroBlockC
 	@Override
 	protected void setExternalConnectionForSide(int i, IMicroBlock te, boolean repeat) {
 		int[] sides = rotation[i];
-		for(int j = 0;j<3;j++){
+		/*for (int j = 0; j < 3; j++) {
 			externalConnectionExtentions[i][j] = false;
-		}
+		}*/
 		if (te != null) {
 			for (int j = 0; j < sides.length; j++) {
 				if (!te.isSideFree(sides[j])) {
@@ -66,21 +66,30 @@ public class TileEntityMicroBlockConnectionCorners extends TileEntityMicroBlockC
 			if (blockFace != null && blockFace instanceof BlockMicroBlock) {
 				if (!isSideFree(face)) {
 					TileEntity diagonalSide = worldObj.getBlockTileEntity(xCoord + dir.offsetX + dirface.offsetX, yCoord + dir.offsetY + dirface.offsetY, zCoord + dir.offsetZ + dirface.offsetZ);
-					if(diagonalSide instanceof IMicroBlockConnectionCorner){
+					if (diagonalSide instanceof IMicroBlockConnectionCorner) {
 						IMicroBlockConnectionCorner diagSide = (IMicroBlockConnectionCorner) diagonalSide;
-					if (!diagSide.isSideFree(dir.getOpposite())) {
-						externalConnectionExtentions[side][externalDirections[face][side]] = true;
-						if(repeat)
-						diagSide.updateConnections(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
-						return true;
+						if (!diagSide.isSideFree(dir.getOpposite())) {
+							externalConnectionExtentions[face][externalDirections[face][side]] = true;
+							if (repeat)
+								diagSide.updateConnections(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+							return true;
+						}
 					}
+				}
+				else{
+					TileEntity diagonalSide = worldObj.getBlockTileEntity(xCoord + dir.offsetX + dirface.offsetX, yCoord + dir.offsetY + dirface.offsetY, zCoord + dir.offsetZ + dirface.offsetZ);
+					if (diagonalSide instanceof IMicroBlockConnectionCorner) {
+						IMicroBlockConnectionCorner diagSide = (IMicroBlockConnectionCorner) diagonalSide;
+					if (repeat)
+						diagSide.updateConnections(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
 					}
 				}
 			}
 		}
+		externalConnectionExtentions[face][externalDirections[face][side]] = false;
 		return false;
 	}
-	
+
 	@Override
 	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
 		for (int i = 0; i < externalConnectionExtentions.length; i++) {
@@ -90,12 +99,12 @@ public class TileEntityMicroBlockConnectionCorners extends TileEntityMicroBlockC
 		}
 		super.writeToNBT(par1nbtTagCompound);
 	}
-	
+
 	@Override
 	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
 		for (int i = 0; i < externalConnectionExtentions.length; i++) {
 			for (int j = 0; j < externalConnectionExtentions[0].length; j++) {
-				par1nbtTagCompound.setBoolean("externCornCon" + i * 10 + j, externalConnectionExtentions[i][j]);
+				externalConnectionExtentions[i][j] = par1nbtTagCompound.getBoolean("externCornCon" + i * 10 + j);
 			}
 		}
 		super.readFromNBT(par1nbtTagCompound);

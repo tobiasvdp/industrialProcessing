@@ -8,5 +8,6 @@ public interface IMicroBlock {
 	boolean isSideFree(int dir);
 	void setSide(ForgeDirection dir, int itemID);
 	void unsetSide(ForgeDirection dir, EntityPlayer player);
+	void refresh();
 	int[] getSides();
 }

@@ -21,7 +21,7 @@ public class ModelWire extends ModelBlock {
 
 	ObjMesh[] models = new ObjMesh[] { new Down(), new Up(), new North(), new South(), new West(), new East() };
 	ObjMesh[][] innerconnections = new ObjMesh[][] { { new DownLeft(), new DownRight(), new DownTop(), new DownBottom() }, { new UpLeft(), new UpRight(), new UpTop(), new UpBottom() }, { new NorthLeft(), new NorthRight(), new NorthTop(), new NorthBottom() }, { new SouthLeft(), new SouthRight(), new SouthTop(), new SouthBottom() }, { new WestLeft(), new WestRight(), new WestTop(), new WestBottom() }, { new EastLeft(), new EastRight(), new EastTop(), new EastBottom() } };
-	ObjMesh[][] cornerConnections = new ObjMesh[][]{{null,null,null,null},{null,null,null,null},{null,new NorthRightCorner(),null,null},{null,new SouthRightCorner(),null,null},{null,new WestRightCorner(),null,null},{null,new EastRightCorner(),null,null}};
+	ObjMesh[][] cornerConnections = new ObjMesh[][]{{new DownLeftCorner(),new DownRightCorner(),new DownTopCorner(),new DownBottomCorner()},{new UpLeftCorner(),new UpRightCorner(),new UpTopCorner(),new UpBottomCorner()},{null,new NorthRightCorner(),null,null},{null,new SouthRightCorner(),null,null},{null,new WestRightCorner(),null,null},{null,new EastRightCorner(),null,null}};
 	
 	
 	public void renderInventory(Block block, int metadata, int modelID, RenderBlocks renderer) {
@@ -52,9 +52,10 @@ public class ModelWire extends ModelBlock {
 					if(innercon[j] || externCon[j])
 						innerconnections[i][j].renderMesh(false, iconWire, reference);
 					if(externConCor[j]){
-						if(cornerConnections[i][j] != null);
-						cornerConnections[i][j].renderMesh(false, iconWire, reference);
+						if(cornerConnections[i][j] != null)
+							cornerConnections[i][j].renderMesh(false, iconWire, reference);
 					}
+					System.out.println(i + " " + j +" "+externConCor[j]);
 				}
 			}
 		}

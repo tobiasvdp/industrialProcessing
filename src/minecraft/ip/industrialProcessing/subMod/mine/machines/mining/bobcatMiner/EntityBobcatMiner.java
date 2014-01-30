@@ -178,6 +178,14 @@ public class EntityBobcatMiner extends Entity {
 		int x = (int) ((this.posX)-0.5);
 		int y = (int) (this.posY) + offsetY;
 		int z = (int) ((this.posZ)-0.5);
+		
+		if(forward == ForgeDirection.NORTH || ForgeDirection.SOUTH == forward){
+			x = (int) Math.round(((this.posX)-0.5));
+		}
+		
+		if(forward == ForgeDirection.EAST || ForgeDirection.WEST == forward){
+			z = (int) Math.round(((this.posZ)-0.5));
+		}
 
 		for (int i = 0; i < upC; i++) {
 			// front

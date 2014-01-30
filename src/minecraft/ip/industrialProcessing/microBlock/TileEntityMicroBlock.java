@@ -66,6 +66,9 @@ public class TileEntityMicroBlock extends TileEntity implements IMicroBlock {
 	@Override
 	public void setSide(ForgeDirection dir, int itemID) {
 		sides[dir.ordinal()] = itemID;
+		if(!isValidSide(dir)){
+			unsetSide(dir, null);
+		}
 		System.out.println(dir + " is now set to " + itemID + "(" + ((BlockMicroBlock) Block.blocksList[itemID]).getMicroBlockType() + ")."+this.worldObj);
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
@@ -95,5 +98,26 @@ public class TileEntityMicroBlock extends TileEntity implements IMicroBlock {
 	@Override
 	public int[] getSides() {
 		return sides;
+	}
+
+	@Override
+	public void refresh() {
+		for(int i = 0;i<sides.length;i++){
+			ForgeDirection dir = ForgeDirection.values()[i];
+			if(!isValidSide(dir)){
+				unsetSide(dir, null);
+			}
+		}
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+	}
+
+	private boolean isValidSide(ForgeDirection dir) {
+		if(!isSideFree(dir)){
+			if(worldObj.isBlockSolidOnSide(xCoord+dir.offsetX, yCoord+dir.offsetY, zCoord+dir.offsetZ, dir.getOpposite())){
+				return true;
+			}
+			return false;
+		}
+		return true;
 	}
 }

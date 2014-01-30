@@ -260,6 +260,7 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 		if (isDestroying) {
 			isDestroying = false;
 		}
+		((IMicroBlock)par1World.getBlockTileEntity(par2, par3, par4)).refresh();
 		super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
 	}
 

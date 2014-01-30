@@ -71,4 +71,11 @@ public class TileEntityMicroBlockConnectingSides extends TileEntityMicroBlock im
 	public boolean[] getInterConnections(int side) {
 		return interConnections[side];
 	}
+	
+	@Override
+	public void refresh() {
+		super.refresh();
+		updateSideConnections();
+		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+	}
 }

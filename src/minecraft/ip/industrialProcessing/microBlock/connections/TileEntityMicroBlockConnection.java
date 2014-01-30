@@ -33,6 +33,7 @@ public class TileEntityMicroBlockConnection extends TileEntityMicroBlock impleme
 		super.setSide(dir, itemID);
 		updateSideConnections();
 		updateExtConnections();
+		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override
@@ -40,6 +41,7 @@ public class TileEntityMicroBlockConnection extends TileEntityMicroBlock impleme
 		super.unsetSide(dir, player);
 		updateSideConnections();
 		updateExtConnections();
+		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	protected void updateExtConnections() {
@@ -49,17 +51,17 @@ public class TileEntityMicroBlockConnection extends TileEntityMicroBlock impleme
 			if (id != 0) {
 				if (Block.blocksList[id] instanceof BlockMicroBlock) {
 					if (this.getBlockType() != null && ((BlockMicroBlock) Block.blocksList[id]).getMicroBlockType() == ((BlockMicroBlock) this.getBlockType()).getMicroBlockType())
-						setExternalConnectionForSide(i, (IMicroBlock) this.worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ),true);
+						setExternalConnectionForSide(i, (IMicroBlock) this.worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ), true);
 				} else {
-					setExternalConnectionForSide(i, null,true);
+					setExternalConnectionForSide(i, null, true);
 				}
 			} else {
-				setExternalConnectionForSide(i, null,true);
+				setExternalConnectionForSide(i, null, true);
 			}
 		}
 	}
 
-	protected static final int[][] externalDirections = new int[][] { { -1, -1, 2, 3, 0,1 }, { -1, -1, 3, 2, 0, 1 }, { 3, 2,-1,-1,0, 1 }, { 3, 2,-1,-1, 1, 0 }, { 3, 2, 1,0 ,-1, -1 }, { 3, 2,0,1, -1, -1 } };
+	protected static final int[][] externalDirections = new int[][] { { -1, -1, 2, 3, 0, 1 }, { -1, -1, 3, 2, 0, 1 }, { 3, 2, -1, -1, 0, 1 }, { 3, 2, -1, -1, 1, 0 }, { 3, 2, 1, 0, -1, -1 }, { 3, 2, 0, 1, -1, -1 } };
 
 	protected void setExternalConnectionForSide(int i, IMicroBlock te, boolean repeat) {
 		if (te != null) {
@@ -68,7 +70,7 @@ public class TileEntityMicroBlockConnection extends TileEntityMicroBlock impleme
 				if (!te.isSideFree(sides[j])) {
 					externalConnections[sides[j]][externalDirections[sides[j]][i]] = true;
 				} else {
-					if (hasDiagonalConnection(sides[j],i, te, repeat))
+					if (hasDiagonalConnection(sides[j], i, te, repeat))
 						externalConnections[sides[j]][externalDirections[sides[j]][i]] = true;
 					else
 						externalConnections[sides[j]][externalDirections[sides[j]][i]] = false;
@@ -80,7 +82,7 @@ public class TileEntityMicroBlockConnection extends TileEntityMicroBlock impleme
 		} else {
 			int[] sides = rotation[i];
 			for (int j = 0; j < sides.length; j++) {
-				if (hasDiagonalConnection(sides[j],i, te, repeat))
+				if (hasDiagonalConnection(sides[j], i, te, repeat))
 					externalConnections[sides[j]][externalDirections[sides[j]][i]] = true;
 				else
 					externalConnections[sides[j]][externalDirections[sides[j]][i]] = false;
@@ -151,48 +153,56 @@ public class TileEntityMicroBlockConnection extends TileEntityMicroBlock impleme
 	@Override
 	public void updateConnections(int i) {
 		ForgeDirection dir = ForgeDirection.values()[i];
-		TileEntity te = worldObj.getBlockTileEntity(xCoord+dir.offsetX, yCoord+dir.offsetY, zCoord+dir.offsetZ);
+		TileEntity te = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
 		if (te != null && te instanceof IMicroBlock)
 			setExternalConnectionForSide(i, (IMicroBlock) te, false);
 		else
-			setExternalConnectionForSide(i, null,false);
+			setExternalConnectionForSide(i, null, false);
 		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	@Override
 	public void updateConnections(int x, int y, int z) {
-int dx=x-xCoord;
-int dy=y-yCoord;
-int dz=z-zCoord;
-ForgeDirection dir = getForgeDirection(dx,dy,dz);
-System.out.println(dir);
-updateConnections(dir.ordinal());
+		int dx = x - xCoord;
+		int dy = y - yCoord;
+		int dz = z - zCoord;
+		ForgeDirection dir = getForgeDirection(dx, dy, dz);
+		updateConnections(dir.ordinal());
 	}
 
 	private ForgeDirection getForgeDirection(int dx, int dy, int dz) {
-if(dx < 0){
-	return ForgeDirection.WEST;
-}
-if(dx > 0){
-	return ForgeDirection.EAST;
-}
-if(dx == 0){
-	if(dy < 0){
-		return ForgeDirection.DOWN;
-	}
-	if(dy > 0){
-		return ForgeDirection.UP;
-	}
-	if(dy == 0){
-		if(dz < 0){
-			return ForgeDirection.NORTH;
+		if (dx < 0) {
+			return ForgeDirection.WEST;
 		}
-		if(dz > 0){
-			return ForgeDirection.SOUTH;
+		if (dx > 0) {
+			return ForgeDirection.EAST;
 		}
+		if (dx == 0) {
+			if (dy < 0) {
+				return ForgeDirection.DOWN;
+			}
+			if (dy > 0) {
+				return ForgeDirection.UP;
+			}
+			if (dy == 0) {
+				if (dz < 0) {
+					return ForgeDirection.NORTH;
+				}
+				if (dz > 0) {
+					return ForgeDirection.SOUTH;
+				}
+			}
+		}
+
+		return ForgeDirection.UNKNOWN;
+	}
+	
+	@Override
+	public void refresh() {
+		super.refresh();
+		updateSideConnections();
+		updateExtConnections();
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 }
 
-return ForgeDirection.UNKNOWN;
-	}
-}
