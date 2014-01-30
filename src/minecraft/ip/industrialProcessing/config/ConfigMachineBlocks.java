@@ -44,6 +44,7 @@ import ip.industrialProcessing.machines.thickener.TileEntityThickener;
 import ip.industrialProcessing.machines.treetap.TileEntityAutomaticTreeTap;
 import ip.industrialProcessing.machines.treetap.TileEntityManualTreeTap;
 import ip.industrialProcessing.machines.wireMill.TileEntityWireMill;
+import ip.industrialProcessing.microBlock.BlockMicroBlock;
 import ip.industrialProcessing.multiblock.core.block.SolderingStation.TileEntitySolderingStation;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.TEmultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.core.block.decoration.garageDoor.TileEntityGarageDoor;
@@ -113,6 +114,7 @@ import ip.industrialProcessing.transport.items.conveyorPacker.TileEntityConveyor
 import ip.industrialProcessing.transport.items.conveyorSorter.TileEntityConveyorSorter;
 import ip.industrialProcessing.utils.registry.BlockRegistry;
 import ip.industrialProcessing.utils.registry.BlockType;
+import ip.industrialProcessing.utils.registry.MicroBlockRegistry;
 import ip.industrialProcessing.utils.registry.RecipeRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
@@ -382,7 +384,7 @@ public class ConfigMachineBlocks {
 	    RecipeRegistry.registerMachinesRecipes(((IRecipeMultiblock) block).getRecipes(), block);
     }
 
-    public void registerMachineBlock(Block block, String uniqueId, String displayName, Class tileEntity, BlockType... type) {
+    public static void registerMachineBlock(Block block, String uniqueId, String displayName, Class tileEntity, BlockType... type) {
 	GameRegistry.registerBlock(block, uniqueId);
 	MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
 	LanguageRegistry.addName(block, displayName);
@@ -392,6 +394,8 @@ public class ConfigMachineBlocks {
 	    RecipeRegistry.registerMachinesRecipes(((IRecipeBlock) block).getRecipes(), block);
 	if (block instanceof IRecipeMultiblock)
 	    RecipeRegistry.registerMachinesRecipes(((IRecipeMultiblock) block).getRecipes(), block);
+	if (block instanceof BlockMicroBlock)
+	    MicroBlockRegistry.RegisterMicroBlock((BlockMicroBlock) block);
     }
 
     @Deprecated
@@ -408,7 +412,7 @@ public class ConfigMachineBlocks {
 
     }
 
-    public void registerMachineBlock(Block block, Class<? extends ItemBlock> itemBlock, String uniqueId, String displayName, Class tileEntity, BlockType... type) {
+    public static void registerMachineBlock(Block block, Class<? extends ItemBlock> itemBlock, String uniqueId, String displayName, Class tileEntity, BlockType... type) {
 	GameRegistry.registerBlock(block, itemBlock, uniqueId);
 	MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
 	LanguageRegistry.addName(block, displayName);
@@ -418,6 +422,8 @@ public class ConfigMachineBlocks {
 	    RecipeRegistry.registerMachinesRecipes(((IRecipeBlock) block).getRecipes(), block);
 	if (block instanceof IRecipeMultiblock)
 	    RecipeRegistry.registerMachinesRecipes(((IRecipeMultiblock) block).getRecipes(), block);
+	if (block instanceof BlockMicroBlock)
+	    MicroBlockRegistry.RegisterMicroBlock((BlockMicroBlock) block);
     }
 
     public static ConfigMachineBlocks getInstance() {

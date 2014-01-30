@@ -107,12 +107,21 @@ public class ConfigRenderers {
     private int rendererDoorEmergencyId;
     private int rendererWireId;
     private int rendererInterfaceId;
+    private int rendererDisplayPanelId;
 
-    public static void setRendererWire(int var) {
+    public static void setRendererDisplayPanel(int var) {
+	getInstance().rendererDisplayPanelId = var;
+    }
+
+    public static int getRendererDisplayPanel() {
+	return getInstance().rendererDisplayPanelId;
+    }
+    
+    public static void setRendererDataBus(int var) {
 	getInstance().rendererWireId = var;
     }
 
-    public static int getRendererWire() {
+    public static int getRendererDataBus() {
 	return getInstance().rendererWireId;
     }
 

@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Random;
 
 import cpw.mods.fml.common.network.PacketDispatcher;
+import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.utils.packets.PacketIP002SendMicroBlockDestructionChange;
 import ip.industrialProcessing.utils.packets.PacketIP003ScheduleBlockUpdateToServer;
 import ip.industrialProcessing.utils.packets.PacketIP004RayTraceToServer;
+import ip.industrialProcessing.utils.registry.MicroBlockRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.StepSound;
@@ -44,6 +46,9 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 
 	@Override
 	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
+		if(par5EntityPlayer.isSneaking()){
+		    return false;
+		}
 		if (par1World.isRemote) {
 			MovingObjectPosition hit = rayTroughBlock(par1World, par2, par3, par4, par5EntityPlayer);
 			if (hit != null) {
@@ -121,7 +126,16 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 					IMicroBlock microblock = (IMicroBlock) te;
 					ForgeDirection dir = sideToForge(sideHit);
 					if (microblock.isSideFree(dir)) {
-						microblock.setSide(dir, itemstack.getItem().itemID,player);
+						microblock.setSide(dir, itemstack.getItem().itemID, player);
+					}
+				}
+			}else{
+				TileEntity te = player.worldObj.getBlockTileEntity(x, y, z);
+				if (te instanceof IMicroBlock) {
+					IMicroBlock microblock = (IMicroBlock) te;
+					ForgeDirection dir = sideToForge(sideHit);
+					if (!microblock.isSideFree(dir)) {
+						player.openGui(IndustrialProcessing.instance, 0, player.worldObj, x, y, z);
 					}
 				}
 			}
@@ -189,14 +203,18 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 	}
 
 	public static MovingObjectPosition rayTroughBlock(World world, int par2, int par3, int par4, Entity entity) {
-		Block.blocksList[world.getBlockId(par2, par3, par4)].setBlockBounds(0, 0, 0, 0, 0, 0);
-		float reach = 5.0f;
-		Vec3 vec3 = getPositionEntity(1.0f, entity);
-		Vec3 vec31 = getLookEntity(1.0f, entity);
-		Vec3 vec32 = vec3.addVector(vec31.xCoord * reach, vec31.yCoord * reach, vec31.zCoord * reach);
-		MovingObjectPosition hit = world.clip(vec3, vec32);
-		Block.blocksList[world.getBlockId(par2, par3, par4)].setBlockBounds(0, 0, 0, 1, 1, 1);
-		return hit;
+
+			MicroBlockRegistry.setBounds(false);
+		
+			float reach = 5.0f;
+			Vec3 vec3 = getPositionEntity(1.0f, entity);
+			Vec3 vec31 = getLookEntity(1.0f, entity);
+			Vec3 vec32 = vec3.addVector(vec31.xCoord * reach, vec31.yCoord * reach, vec31.zCoord * reach);
+			MovingObjectPosition hit = world.clip(vec3, vec32);
+
+			MicroBlockRegistry.setBounds(true);
+			
+			return hit;
 	}
 
 	private static Vec3 getPositionEntity(float par1, Entity entity) {
@@ -260,7 +278,7 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 		if (isDestroying) {
 			isDestroying = false;
 		}
-		((IMicroBlock)par1World.getBlockTileEntity(par2, par3, par4)).refresh();
+		((IMicroBlock) par1World.getBlockTileEntity(par2, par3, par4)).refresh();
 		super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
 	}
 

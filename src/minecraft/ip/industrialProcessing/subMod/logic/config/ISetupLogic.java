@@ -1,6 +1,8 @@
 package ip.industrialProcessing.subMod.logic.config;
 
 import ip.industrialProcessing.subMod.logic.network.BlockLogicTransport;
+import ip.industrialProcessing.subMod.logic.network.devices.readout.displayPanel.BlockDisplayPanel;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.BlockDataBus;
 import ip.industrialProcessing.subMod.logic.old.function.and.BLlogicAnd;
 import ip.industrialProcessing.subMod.logic.old.function.or.BLlogicOr;
 import ip.industrialProcessing.subMod.logic.old.network.display.BlockLogicDisplay;
@@ -11,15 +13,7 @@ import ip.industrialProcessing.subMod.logic.old.transport.wired.displayBox.BLlog
 import ip.industrialProcessing.subMod.logic.old.transport.wired.switchbox.BLlogicSwitchBox;
 
 public interface ISetupLogic {
-	// logic
-	/*public final static BLlogicCable BLlogicCable = new BLlogicCable();
-	public final static BLlogicSwitchBox BLlogicSwitchBox = new BLlogicSwitchBox();
-	public final static BLlogicBundle BLlogicBundle = new BLlogicBundle();
-	public final static BLlogicDisplayBox BLlogicDisplayBox = new BLlogicDisplayBox();
-	public final static BLlogicAnd BLlogicAnd = new BLlogicAnd();
-	public final static BLlogicOr BLlogicOr = new BLlogicOr();
-	public final static BlockMachineInterface BlockMachineInterface = new BlockMachineInterface();
-	public final static BlockLogicDisplay BlockLogicDisplay = new BlockLogicDisplay();
-	*/
-	public final static BlockLogicTransport blockLogicTransport = new BlockLogicTransport();
+
+	public final static BlockDataBus blockDataBus = new BlockDataBus();
+	public final static BlockDisplayPanel blockDisplayPanel = new BlockDisplayPanel();
 }

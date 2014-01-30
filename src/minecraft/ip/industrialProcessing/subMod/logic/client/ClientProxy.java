@@ -6,7 +6,8 @@ import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.subMod.logic.CommonProxy;
 import ip.industrialProcessing.subMod.logic.config.ConfigLogic;
 import ip.industrialProcessing.subMod.logic.config.ISetupLogic;
-import ip.industrialProcessing.subMod.logic.network.model.ModelWire;
+import ip.industrialProcessing.subMod.logic.network.devices.readout.displayPanel.model.ModelDisplayPanel;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.ModelWire;
 import ip.industrialProcessing.subMod.logic.old.function.and.MDlogicAnd;
 import ip.industrialProcessing.subMod.logic.old.function.and.TElogicAnd;
 import ip.industrialProcessing.subMod.logic.old.function.or.MDlogicOr;
@@ -24,13 +25,18 @@ public class ClientProxy extends CommonProxy {
 	private static final MDlogicCable MDlogicCable = new MDlogicCable();
 	private static final MDlogicAnd MDlogicAnd = new MDlogicAnd();
 	private static final MDlogicOr MDlogicOr = new MDlogicOr();
+	
 	private static final ModelWire modelWire = new ModelWire();
+	private static final ModelDisplayPanel modelDisplayPanel = new ModelDisplayPanel();
 
 	@Override
 	public void registerRenderers() {
 		
-		ConfigRenderers.setRendererWire(RenderingRegistry.getNextAvailableRenderId());
-		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererWire(), modelWire));
+		ConfigRenderers.setRendererDisplayPanel(RenderingRegistry.getNextAvailableRenderId());
+		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererDisplayPanel(), modelDisplayPanel));
+		
+		ConfigRenderers.setRendererDataBus(RenderingRegistry.getNextAvailableRenderId());
+		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererDataBus(), modelWire));
 		/*
 		ClientRegistry.bindTileEntitySpecialRenderer(TElogicSwitchBox.class, new RendererLogic(ISetupLogic.BLlogicSwitchBox, "MDlogicSwitchBox", MDlogicSwitchBox));
 		ConfigLogic.setRDlogicSwitchBox(RenderingRegistry.getNextAvailableRenderId());

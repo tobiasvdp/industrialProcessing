@@ -24,7 +24,7 @@ import net.minecraftforge.common.ForgeDirection;
 public class BLlogicCable extends BlockMachineRendered {
 
 	public BLlogicCable() {
-		super(ConfigLogic.getBLlogicCable(), Material.circuits, 5.0f, Block.soundPowderFootstep, "BLlogicCable", IPLogic.tabLogic);
+		super(ConfigLogic.getBlockDataBusID(), Material.circuits, 5.0f, Block.soundPowderFootstep, "BLlogicCable", IPLogic.tabLogic);
 		this.setBlockBounds(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 	}
 
@@ -67,7 +67,7 @@ public class BLlogicCable extends BlockMachineRendered {
 
 	@Override
 	public boolean isBlockReplaceable(World world, int x, int y, int z) {
-		if (world.getClosestPlayer(x, y, z, 10).getCurrentEquippedItem().getItem().itemID == ConfigLogic.getBLlogicCable()) {
+		if (world.getClosestPlayer(x, y, z, 10).getCurrentEquippedItem().getItem().itemID == ConfigLogic.getBlockDataBusID()) {
 			return true;
 		}
 		return false;

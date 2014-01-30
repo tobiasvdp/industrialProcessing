@@ -20,7 +20,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TileEntityMicroBlock extends TileEntity implements IMicroBlock, IPosition {
+public abstract class TileEntityMicroBlock extends TileEntity implements IMicroBlock, IPosition {
 	protected int[] sides = new int[6];
 
 	public TileEntityMicroBlock() {
@@ -70,31 +70,39 @@ public class TileEntityMicroBlock extends TileEntity implements IMicroBlock, IPo
 
 	@Override
 	public void setSide(ForgeDirection dir, int itemID, EntityPlayer player) {
-		if (player != null) {
-			if (player.getCurrentEquippedItem() != null && !player.capabilities.isCreativeMode) {
-				if (player.getCurrentEquippedItem().itemID == itemID) {
-					if (countSetSides() != 0)
-						player.getCurrentEquippedItem().splitStack(1);
+		if (isValidID(itemID) && isValidPlacingSide(dir)) {
+			if (player != null) {
+				if (player.getCurrentEquippedItem() != null && !player.capabilities.isCreativeMode) {
+					if (player.getCurrentEquippedItem().itemID == itemID) {
+						if (countSetSides() != 0)
+							player.getCurrentEquippedItem().splitStack(1);
+					}
 				}
 			}
+			sides[dir.ordinal()] = itemID;
+			if (!isValidSide(dir)) {
+				unsetSide(dir, null);
+			}
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		} else {
+			if (countSetSides() == 0) {
+				if (player == null || !player.capabilities.isCreativeMode)
+					doDispense(this.worldObj, new ItemStack(itemID, 1, 0), 1, EnumFacing.values()[dir.getOpposite().ordinal()], this);
+			}
 		}
-		sides[dir.ordinal()] = itemID;
-		if (!isValidSide(dir)) {
-			unsetSide(dir, null);
-		}
-		System.out.println(dir + " is now set to " + itemID + "(" + ((BlockMicroBlock) Block.blocksList[itemID]).getMicroBlockType() + ")." + this.worldObj);
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
+
+	public abstract boolean isValidPlacingSide(ForgeDirection dir);
+
+	public abstract boolean isValidID(int itemID);
 
 	@Override
 	public void unsetSide(ForgeDirection dir, EntityPlayer player) {
 		if (player == null || !player.capabilities.isCreativeMode)
 			doDispense(this.worldObj, new ItemStack(sides[dir.ordinal()], 1, 0), 1, EnumFacing.values()[dir.getOpposite().ordinal()], this);
 		sides[dir.ordinal()] = -1;
-		System.out.println(dir + " is now unset.");
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		if (countSetSides() == 0) {
-			System.out.println("remove block");
 			worldObj.destroyBlock(xCoord, yCoord, zCoord, false);
 		}
 	}

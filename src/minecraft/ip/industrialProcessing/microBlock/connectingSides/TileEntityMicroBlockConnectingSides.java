@@ -8,7 +8,7 @@ import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.microBlock.IMicroBlock;
 import ip.industrialProcessing.microBlock.TileEntityMicroBlock;
 
-public class TileEntityMicroBlockConnectingSides extends TileEntityMicroBlock implements IMicroBlockInterconnection{
+public abstract class TileEntityMicroBlockConnectingSides extends TileEntityMicroBlock implements IMicroBlockInterconnection{
 	boolean[][] interConnections = new boolean[6][4];
 
 	public TileEntityMicroBlockConnectingSides() {

@@ -13,7 +13,7 @@ import ip.industrialProcessing.microBlock.connectingSides.TileEntityMicroBlockCo
 import ip.industrialProcessing.microBlock.connections.TileEntityMicroBlockConnection;
 import ip.industrialProcessing.microBlock.externalConnections.IMicroBlockExternalConnection;
 
-public class TileEntityMicroBlockConnectionCorners extends TileEntityMicroBlockConnection implements IMicroBlockConnectionCorner {
+public abstract class TileEntityMicroBlockConnectionCorners extends TileEntityMicroBlockConnection implements IMicroBlockConnectionCorner {
 
 	protected boolean[][] externalConnectionExtentions = new boolean[6][4];
 

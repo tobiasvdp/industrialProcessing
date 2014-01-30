@@ -13,6 +13,6 @@ import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TileEntityLogicTransport extends TileEntityMicroBlockConnectionCorners implements ILogicTransport{
+public abstract class TileEntityLogicTransport extends TileEntityMicroBlockConnectionCorners implements ILogicTransport{
 
 }

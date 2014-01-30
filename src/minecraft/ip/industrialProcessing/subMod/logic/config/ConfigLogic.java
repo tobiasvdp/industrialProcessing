@@ -2,8 +2,11 @@ package ip.industrialProcessing.subMod.logic.config;
 
 import ip.industrialProcessing.api.config.ConfigCategories;
 import ip.industrialProcessing.api.utils.CreativeTabsIP;
+import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.subMod.logic.IPLogic;
 import ip.industrialProcessing.subMod.logic.network.TileEntityLogicTransport;
+import ip.industrialProcessing.subMod.logic.network.devices.readout.displayPanel.TileEntityDisplayPanel;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.TileEntityDataBus;
 import ip.industrialProcessing.subMod.logic.old.function.and.TElogicAnd;
 import ip.industrialProcessing.subMod.logic.old.function.or.TElogicOr;
 import ip.industrialProcessing.subMod.logic.old.network.display.TileEntityLogicDisplay;
@@ -12,6 +15,7 @@ import ip.industrialProcessing.subMod.logic.old.transport.wired.bundle.TElogicBu
 import ip.industrialProcessing.subMod.logic.old.transport.wired.cable.TElogicCable;
 import ip.industrialProcessing.subMod.logic.old.transport.wired.displayBox.TElogicDisplayBox;
 import ip.industrialProcessing.subMod.logic.old.transport.wired.switchbox.TElogicSwitchBox;
+import ip.industrialProcessing.utils.registry.BlockType;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -26,11 +30,14 @@ public class ConfigLogic {
 	}
 
 	public static int getBLlogicBundle() {
-		return getInstance().BLlogicBundle;
+		return getInstance().blockDisplayPanelID;
 	}
 
-	public static int getBLlogicCable() {
-		return getInstance().BLlogicCable;
+	public static int getBlockDataBusID() {
+		return getInstance().blockDataBusID;
+	}
+	public static int getBlockDisplayPanelID() {
+		return getInstance().blockDisplayPanelID;
 	}
 
 	public static int getBLlogicDisplayBox() {
@@ -91,9 +98,9 @@ public class ConfigLogic {
 
 	private int BLlogicSwitchBox = IPLogic.config.get(ConfigCategories.logic.toString(), "SwitchBoxID", 738).getInt();
 
-	private int BLlogicCable = IPLogic.config.get(ConfigCategories.logic.toString(), "CableID", 739).getInt();
+	private int blockDataBusID = IPLogic.config.get(ConfigCategories.logic.toString(), "blockDataBusID", 739).getInt();
 
-	private int BLlogicBundle = IPLogic.config.get(ConfigCategories.logic.toString(), "BundleID", 740).getInt();
+	private int blockDisplayPanelID = IPLogic.config.get(ConfigCategories.logic.toString(), "blockDisplayPanelID", 740).getInt();
 
 	private int BLlogicDisplayBox = IPLogic.config.get(ConfigCategories.logic.toString(), "DisplayBoxID", 741).getInt();
 
@@ -116,21 +123,8 @@ public class ConfigLogic {
 	public void register() {
 		LanguageRegistry.instance().addStringLocalization("IP.itemGroup.tabLogic", "en_US", "IP Logic");
 		//((CreativeTabsIP) IPLogic.tabLogic).setIcon(new ItemStack(ISetupLogic.BLlogicSwitchBox));
-
-		this.register(ISetupLogic.blockLogicTransport, "IP.Logic.Cable", "Cable", TileEntityLogicTransport.class);
-	/*	this.register(ISetupLogic.BLlogicSwitchBox, "IP.Logic.SwBox", "Switch box", TElogicSwitchBox.class);
-		this.register(ISetupLogic.BLlogicBundle, "IP.Logic.Bundle", "Bundled cables", TElogicBundle.class);
-		this.register(ISetupLogic.BLlogicDisplayBox, "IP.Logic.DsBox", "Display box", TElogicDisplayBox.class);
-		this.register(ISetupLogic.BLlogicAnd, "IP.Logic.And", "And gate", TElogicAnd.class);
-		this.register(ISetupLogic.BLlogicOr, "IP.Logic.Or", "Or gate", TElogicOr.class);
-		this.register(ISetupLogic.BlockMachineInterface, "IP.Logic.MInt", "Interface", TileEntityMachineInterface.class);
-		this.register(ISetupLogic.BlockLogicDisplay, "IP.Logic.Display", "Display", TileEntityLogicDisplay.class);*/
-	}
-
-	private void register(Block block, String uniqueId, String displayName, Class tileEntity) {
-		GameRegistry.registerBlock(block, uniqueId);
-		MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
-		LanguageRegistry.addName(block, displayName);
-		GameRegistry.registerTileEntity(tileEntity, uniqueId);
+		
+		ConfigMachineBlocks.registerMachineBlock(ISetupLogic.blockDataBus, "IP.Logic.dataBus", "Data bus", TileEntityDataBus.class, BlockType.logic);
+		ConfigMachineBlocks.registerMachineBlock(ISetupLogic.blockDisplayPanel, "IP.Logic.display", "Display panel", TileEntityDisplayPanel.class, BlockType.logic);
 	}
 }

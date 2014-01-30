@@ -2,6 +2,7 @@ package ip.industrialProcessing.microBlock.connections;
 
 import ip.industrialProcessing.microBlock.BlockMicroBlock;
 import ip.industrialProcessing.microBlock.IMicroBlock;
+import ip.industrialProcessing.microBlock.MicroBlockType;
 import ip.industrialProcessing.microBlock.TileEntityMicroBlock;
 import ip.industrialProcessing.microBlock.externalConnections.IMicroBlockExternalConnection;
 import net.minecraft.block.Block;
@@ -10,7 +11,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TileEntityMicroBlockConnection extends TileEntityMicroBlock implements IMicroBlockConnection {
+public abstract class TileEntityMicroBlockConnection extends TileEntityMicroBlock implements IMicroBlockConnection {
 	protected boolean[][] externalConnections = new boolean[6][4];
 	protected boolean[][] interConnections = new boolean[6][4];
 
@@ -50,7 +51,7 @@ public class TileEntityMicroBlockConnection extends TileEntityMicroBlock impleme
 			int id = worldObj.getBlockId(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
 			if (id != 0) {
 				if (Block.blocksList[id] instanceof BlockMicroBlock) {
-					if (this.getBlockType() != null && ((BlockMicroBlock) Block.blocksList[id]).getMicroBlockType() == ((BlockMicroBlock) this.getBlockType()).getMicroBlockType())
+					if (this.getBlockType() != null && isValidMicroBlockType(((BlockMicroBlock) Block.blocksList[id]).getMicroBlockType(),((BlockMicroBlock) this.getBlockType()).getMicroBlockType()))
 						setExternalConnectionForSide(i, (IMicroBlock) this.worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ), true);
 				} else {
 					setExternalConnectionForSide(i, null, true);
@@ -60,6 +61,8 @@ public class TileEntityMicroBlockConnection extends TileEntityMicroBlock impleme
 			}
 		}
 	}
+
+	public abstract boolean isValidMicroBlockType(MicroBlockType other, MicroBlockType me);
 
 	protected static final int[][] externalDirections = new int[][] { { -1, -1, 2, 3, 0, 1 }, { -1, -1, 3, 2, 0, 1 }, { 3, 2, -1, -1, 0, 1 }, { 3, 2, -1, -1, 1, 0 }, { 3, 2, 1, 0, -1, -1 }, { 3, 2, 0, 1, -1, -1 } };
 

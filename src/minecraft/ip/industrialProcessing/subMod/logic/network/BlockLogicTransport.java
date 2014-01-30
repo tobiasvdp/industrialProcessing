@@ -9,10 +9,12 @@ import ip.industrialProcessing.subMod.logic.IPLogic;
 import ip.industrialProcessing.subMod.logic.config.ConfigLogic;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
+import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.PlayerControllerMP;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
@@ -25,38 +27,11 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
-public class BlockLogicTransport extends BlockMicroBlock {
+public abstract class BlockLogicTransport extends BlockMicroBlock {
 
-	private Icon[] icons = new Icon[1];
-
-	public BlockLogicTransport() {
-		super(ConfigLogic.getBLlogicCable(), Material.cloth, 10.0f, Block.soundClothFootstep, "BlockLogicTransport", IPLogic.tabLogic);
-	}
-
-	@Override
-	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityLogicTransport();
-	}
-
-	@Override
-	public MicroBlockType getMicroBlockType() {
-		return MicroBlockType.wire;
-	}
-
-	@Override
-	public int getRenderType() {
-		return ConfigRenderers.getRendererWire();
-	}
-
-	@Override
-	public Icon getIcon(int par1, int par2) {
-		par1 %= icons.length;
-		return icons [par1];
-	}
-
-	@Override
-	public void registerIcons(IconRegister par1IconRegister) {
-		this.icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "blockWire");
+	protected BlockLogicTransport(int par1, Material par2Material, float hardness, StepSound stepSound, String name, CreativeTabs tab) {
+		super(par1, par2Material, hardness, stepSound, name, tab);
+		// TODO Auto-generated constructor stub
 	}
 
 }
