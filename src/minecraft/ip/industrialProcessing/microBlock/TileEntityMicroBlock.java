@@ -21,11 +21,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 public abstract class TileEntityMicroBlock extends TileEntity implements IMicroBlock, IPosition {
-	protected int[] sides = new int[6];
+	protected int[] sidesMicroblock = new int[6];
 	protected boolean hasCore = false;
 
 	public TileEntityMicroBlock() {
-		Arrays.fill(sides, -1);
+		Arrays.fill(sidesMicroblock, -1);
 	}
 
 	@Override
@@ -44,14 +44,18 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 	@Override
 	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
 		super.readFromNBT(par1nbtTagCompound);
-		sides = par1nbtTagCompound.getIntArray("sidesMicro");
+		sidesMicroblock = par1nbtTagCompound.getIntArray("sidesMicro");
+		if(sidesMicroblock.length == 0){
+			sidesMicroblock = new int[6];
+			Arrays.fill(sidesMicroblock, -1);
+		}
 
 	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
 		super.writeToNBT(par1nbtTagCompound);
-		par1nbtTagCompound.setIntArray("sidesMicro", sides);
+		par1nbtTagCompound.setIntArray("sidesMicro", sidesMicroblock);
 	}
 
 	@Override
@@ -61,7 +65,7 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 
 	@Override
 	public boolean isSideFree(int dir) {
-		return sides[dir] == -1;
+		return sidesMicroblock[dir] == -1;
 	}
 
 	@Override
@@ -75,7 +79,8 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 					}
 				}
 			}
-			sides[dir.ordinal()] = itemID;
+			sidesMicroblock[dir.ordinal()] = itemID;
+			System.out.println("set " + dir + " to "+itemID);
 			if (!isValidSide(dir)) {
 				unsetSide(dir, null);
 			}
@@ -97,8 +102,9 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 	@Override
 	public void unsetSide(ForgeDirection dir, EntityPlayer player) {
 		if (player == null || !player.capabilities.isCreativeMode)
-			doDispense(this.worldObj, new ItemStack(sides[dir.ordinal()], 1, 0), 1, EnumFacing.values()[dir.getOpposite().ordinal()], this);
-		sides[dir.ordinal()] = -1;
+			doDispense(this.worldObj, new ItemStack(sidesMicroblock[dir.ordinal()], 1, 0), 1, EnumFacing.values()[dir.getOpposite().ordinal()], this);
+		sidesMicroblock[dir.ordinal()] = -1;
+		System.out.println("unset " + dir);
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		if (!hasCore && countSetSides() == 0) {
 			worldObj.destroyBlock(xCoord, yCoord, zCoord, false);
@@ -122,8 +128,8 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 
 	public int countSetSides() {
 		int count = 0;
-		for (int i = 0; i < sides.length; i++) {
-			if (sides[i] != -1) {
+		for (int i = 0; i < sidesMicroblock.length; i++) {
+			if (sidesMicroblock[i] != -1) {
 				count++;
 			}
 		}
@@ -132,12 +138,12 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 
 	@Override
 	public int[] getSides() {
-		return sides;
+		return sidesMicroblock;
 	}
 
 	@Override
 	public void refresh() {
-		for (int i = 0; i < sides.length; i++) {
+		for (int i = 0; i < sidesMicroblock.length; i++) {
 			ForgeDirection dir = ForgeDirection.values()[i];
 			if (!isValidSide(dir)) {
 				unsetSide(dir, null);
@@ -169,5 +175,18 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 	@Override
 	public double getZ() {
 		return zCoord + 0.5;
+	}
+	
+	protected void notifyBlockChange() {
+		if (!this.worldObj.isRemote) {
+			this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+
+			StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
+			StackTraceElement e = stacktrace[2];// maybe this number needs to be
+			// corrected
+			String methodName = e.getMethodName();
+			String className = e.getClassName();
+		}
+
 	}
 }

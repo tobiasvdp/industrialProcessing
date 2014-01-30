@@ -33,10 +33,10 @@ public abstract class TileEntityMicroBlockConnectingSides extends TileEntityMicr
 	}
 
 	private void updateSideConnections() {
-		for (int i = 0; i < sides.length; i++) {
-			if (sides[i] != -1) {
+		for (int i = 0; i < sidesMicroblock.length; i++) {
+			if (sidesMicroblock[i] != -1) {
 				for(int j = 0;j<interConnections[i].length;j++){
-					interConnections[i][j] = sides[getRotated(i, j)] != -1;
+					interConnections[i][j] = sidesMicroblock[getRotated(i, j)] != -1;
 				}
 			}
 		}

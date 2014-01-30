@@ -105,7 +105,6 @@ public class ModelDisplayPost  extends ModelBlock {
 						if(cornerConnections[i][j] != null)
 							cornerConnections[i][j].renderMesh(false, iconWire, reference);
 					}
-					System.out.println(i + " " + j +" "+externConCor[j]);
 				}
 			}
 		}
