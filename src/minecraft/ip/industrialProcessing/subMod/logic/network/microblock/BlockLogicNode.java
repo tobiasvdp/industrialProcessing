@@ -1,4 +1,4 @@
-package ip.industrialProcessing.subMod.logic.network;
+package ip.industrialProcessing.subMod.logic.network.microblock;
 
 import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;

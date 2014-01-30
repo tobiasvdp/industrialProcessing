@@ -1,6 +1,7 @@
 package ip.industrialProcessing.utils.packets;
 
 import ip.industrialProcessing.microBlock.BlockMicroBlock;
+import ip.industrialProcessing.subMod.logic.IPLogic;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,7 +31,8 @@ public class PacketDataHandler {
 	public static void handlePacketIP004RayTraceToServer(Player player, PacketIP004RayTraceToServer packet) {
 		World world = ((Entity) player).worldObj;
 		if (world != null && !world.isRemote && packet != null) {
-			BlockMicroBlock.handleSideBlock(world, (EntityPlayer) player, packet.hit, packet.hitType);
+			Block block = Block.blocksList[world.getBlockId(packet.hit.blockX, packet.hit.blockY, packet.hit.blockZ)];
+			IPLogic.blockDisplayPost.handleSideBlock(world, (EntityPlayer) player, packet.hit, packet.hitType);
 		}
 	}
 	public static void handlePacketIP005DestroyBlock(Player player, PacketIP005DestroyBlock packet) {

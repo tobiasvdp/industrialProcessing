@@ -1,4 +1,4 @@
-package ip.industrialProcessing.subMod.logic.network;
+package ip.industrialProcessing.subMod.logic.network.microblock;
 
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.INamepace;

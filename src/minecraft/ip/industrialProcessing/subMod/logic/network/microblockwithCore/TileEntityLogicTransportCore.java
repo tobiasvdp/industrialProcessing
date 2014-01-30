@@ -1,0 +1,9 @@
+package ip.industrialProcessing.subMod.logic.network.microblockwithCore;
+
+import ip.industrialProcessing.microBlock.centerBlock.TileEntityMicroBlockwithCenter;
+import ip.industrialProcessing.microBlock.connectionCorners.TileEntityMicroBlockConnectionCorners;
+import ip.industrialProcessing.subMod.logic.network.ILogicTransport;
+
+public abstract class TileEntityLogicTransportCore extends TileEntityMicroBlockwithCenter implements ILogicTransport{
+
+}

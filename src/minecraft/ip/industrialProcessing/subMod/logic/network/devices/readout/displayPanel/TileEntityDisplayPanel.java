@@ -3,7 +3,7 @@ package ip.industrialProcessing.subMod.logic.network.devices.readout.displayPane
 import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.microBlock.MicroBlockType;
 import ip.industrialProcessing.subMod.logic.IPLogic;
-import ip.industrialProcessing.subMod.logic.network.TileEntityLogicNode;
+import ip.industrialProcessing.subMod.logic.network.microblock.TileEntityLogicNode;
 
 public class TileEntityDisplayPanel extends TileEntityLogicNode{
 

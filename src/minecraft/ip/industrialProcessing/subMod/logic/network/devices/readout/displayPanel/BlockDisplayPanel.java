@@ -7,7 +7,7 @@ import ip.industrialProcessing.gui.IGuiLayout;
 import ip.industrialProcessing.microBlock.MicroBlockType;
 import ip.industrialProcessing.subMod.logic.IPLogic;
 import ip.industrialProcessing.subMod.logic.config.ConfigLogic;
-import ip.industrialProcessing.subMod.logic.network.BlockLogicNode;
+import ip.industrialProcessing.subMod.logic.network.microblock.BlockLogicNode;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.TileEntityDataBus;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

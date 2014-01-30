@@ -1,4 +1,4 @@
-package ip.industrialProcessing.subMod.logic.network;
+package ip.industrialProcessing.subMod.logic.network.microblock;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
@@ -9,6 +9,7 @@ import ip.industrialProcessing.microBlock.TileEntityMicroBlock;
 import ip.industrialProcessing.microBlock.connectingSides.TileEntityMicroBlockConnectingSides;
 import ip.industrialProcessing.microBlock.connectionCorners.TileEntityMicroBlockConnectionCorners;
 import ip.industrialProcessing.microBlock.connections.TileEntityMicroBlockConnection;
+import ip.industrialProcessing.subMod.logic.network.ILogicTransport;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;

@@ -108,7 +108,16 @@ public class ConfigRenderers {
     private int rendererWireId;
     private int rendererInterfaceId;
     private int rendererDisplayPanelId;
+    private int rendererDisplayPostId;
 
+    public static void setRendererDisplayPost(int var) {
+	getInstance().rendererDisplayPostId = var;
+    }
+
+    public static int getRendererDisplayPost() {
+	return getInstance().rendererDisplayPostId;
+    }
+    
     public static void setRendererDisplayPanel(int var) {
 	getInstance().rendererDisplayPanelId = var;
     }

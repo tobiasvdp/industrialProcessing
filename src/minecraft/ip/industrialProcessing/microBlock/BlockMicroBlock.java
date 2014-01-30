@@ -80,7 +80,7 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 		}
 	}
 
-	public static boolean handleSideBlock(World world, EntityPlayer player, MovingObjectPosition hit, int hitType) {
+	public boolean handleSideBlock(World world, EntityPlayer player, MovingObjectPosition hit, int hitType) {
 		if (hit != null) {
 			ForgeDirection offset = sideToForge(hit.sideHit);
 			int x = hit.blockX + offset.offsetX;
@@ -97,7 +97,7 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 		return false;
 	}
 
-	private static void handleMiss(int blockX, int blockY, int blockZ, int sideHit, EntityPlayer player, Vec3 hitVec, int x, int y, int z, int hitType) {
+	protected void handleMiss(int blockX, int blockY, int blockZ, int sideHit, EntityPlayer player, Vec3 hitVec, int x, int y, int z, int hitType) {
 		if (hitType == 1) {
 			Minecraft.getMinecraft().playerController.onPlayerRightClick(player, player.worldObj, player.getCurrentEquippedItem(), blockX, blockY, blockZ, sideHit, hitVec);
 			ForgeDirection dir = sideToForge(sideHit);
@@ -117,7 +117,7 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 		}
 	}
 
-	private static void handleHit(int x, int y, int z, int sideHit, EntityPlayer player, MovingObjectPosition hit, int hitType) {
+	protected void handleHit(int x, int y, int z, int sideHit, EntityPlayer player, MovingObjectPosition hit, int hitType) {
 		if (hitType == 1) {
 			ItemStack itemstack = player.getCurrentEquippedItem();
 			if (itemstack != null && itemstack.getItem() instanceof ItemBlock && Block.blocksList[itemstack.getItem().itemID] instanceof BlockMicroBlock) {
@@ -202,7 +202,7 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 		return ForgeDirection.UNKNOWN;
 	}
 
-	public static MovingObjectPosition rayTroughBlock(World world, int par2, int par3, int par4, Entity entity) {
+	public MovingObjectPosition rayTroughBlock(World world, int par2, int par3, int par4, Entity entity) {
 
 			MicroBlockRegistry.setBounds(false);
 		
@@ -217,7 +217,7 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 			return hit;
 	}
 
-	private static Vec3 getPositionEntity(float par1, Entity entity) {
+	protected Vec3 getPositionEntity(float par1, Entity entity) {
 		if (par1 == 1.0F) {
 			return entity.worldObj.getWorldVec3Pool().getVecFromPool(entity.posX, entity.posY, entity.posZ);
 		} else {
@@ -228,7 +228,7 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 		}
 	}
 
-	private static Vec3 getLookEntity(float par1, Entity entity) {
+	protected Vec3 getLookEntity(float par1, Entity entity) {
 		float f1;
 		float f2;
 		float f3;
@@ -293,6 +293,7 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 
 	@Override
 	public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
+
 	}
 
 }

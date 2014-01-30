@@ -8,6 +8,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ip.industrialProcessing.microBlock.BlockMicroBlock;
 import ip.industrialProcessing.microBlock.IMicroBlock;
+import ip.industrialProcessing.microBlock.centerBlock.BlockMicroBlockwithCenter;
+import ip.industrialProcessing.microBlock.centerBlock.IMicroBlockCore;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderGlobal;
@@ -31,7 +33,7 @@ public class EventBlockHilight {
 			}
 			Block block = Block.blocksList[event.player.worldObj.getBlockId(event.target.blockX, event.target.blockY, event.target.blockZ)];
 			if (block instanceof BlockMicroBlock) {
-				MovingObjectPosition hit = BlockMicroBlock.rayTroughBlock(event.player.worldObj, event.target.blockX, event.target.blockY, event.target.blockZ, event.player);
+				MovingObjectPosition hit = ((BlockMicroBlock) block).rayTroughBlock(event.player.worldObj, event.target.blockX, event.target.blockY, event.target.blockZ, event.player);
 				if (hit != null) {
 					ForgeDirection offset = BlockMicroBlock.sideToForge(hit.sideHit);
 					int x = hit.blockX + offset.offsetX;
@@ -46,7 +48,8 @@ public class EventBlockHilight {
 					}
 
 				}
-				event.setCanceled(true);
+				if (block instanceof BlockMicroBlock && !(block instanceof BlockMicroBlockwithCenter))
+					event.setCanceled(true);
 			}
 		}
 
@@ -97,7 +100,7 @@ public class EventBlockHilight {
 			GL11.glDisable(GL11.GL_BLEND);
 
 		} else {
-			handleMiss(event,hit);
+			handleMiss(event, hit);
 		}
 	}
 

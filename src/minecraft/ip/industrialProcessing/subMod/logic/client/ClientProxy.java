@@ -7,6 +7,7 @@ import ip.industrialProcessing.subMod.logic.CommonProxy;
 import ip.industrialProcessing.subMod.logic.config.ConfigLogic;
 import ip.industrialProcessing.subMod.logic.config.ISetupLogic;
 import ip.industrialProcessing.subMod.logic.network.devices.readout.displayPanel.model.ModelDisplayPanel;
+import ip.industrialProcessing.subMod.logic.network.devices.readout.displayPost.model.ModelDisplayPost;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.ModelWire;
 import ip.industrialProcessing.subMod.logic.old.function.and.MDlogicAnd;
 import ip.industrialProcessing.subMod.logic.old.function.and.TElogicAnd;
@@ -28,9 +29,13 @@ public class ClientProxy extends CommonProxy {
 	
 	private static final ModelWire modelWire = new ModelWire();
 	private static final ModelDisplayPanel modelDisplayPanel = new ModelDisplayPanel();
+	private static final ModelDisplayPost modelDisplayPost = new ModelDisplayPost();
 
 	@Override
 	public void registerRenderers() {
+
+		ConfigRenderers.setRendererDisplayPost(RenderingRegistry.getNextAvailableRenderId());
+		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererDisplayPost(), modelDisplayPost));
 		
 		ConfigRenderers.setRendererDisplayPanel(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererDisplayPanel(), modelDisplayPanel));

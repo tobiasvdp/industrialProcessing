@@ -4,8 +4,9 @@ import ip.industrialProcessing.api.config.ConfigCategories;
 import ip.industrialProcessing.api.utils.CreativeTabsIP;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.subMod.logic.IPLogic;
-import ip.industrialProcessing.subMod.logic.network.TileEntityLogicTransport;
 import ip.industrialProcessing.subMod.logic.network.devices.readout.displayPanel.TileEntityDisplayPanel;
+import ip.industrialProcessing.subMod.logic.network.devices.readout.displayPost.TileEntityDisplayPost;
+import ip.industrialProcessing.subMod.logic.network.microblock.TileEntityLogicTransport;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.TileEntityDataBus;
 import ip.industrialProcessing.subMod.logic.old.function.and.TElogicAnd;
 import ip.industrialProcessing.subMod.logic.old.function.or.TElogicOr;
@@ -39,6 +40,9 @@ public class ConfigLogic {
 	public static int getBlockDisplayPanelID() {
 		return getInstance().blockDisplayPanelID;
 	}
+	public static int getBlockDisplayPostID() {
+		return getInstance().blockDisplayPostID;
+	}
 
 	public static int getBLlogicDisplayBox() {
 		return getInstance().BLlogicDisplayBox;
@@ -49,7 +53,7 @@ public class ConfigLogic {
 	}
 
 	public static int getBLlogicSwitchBox() {
-		return getInstance().BLlogicSwitchBox;
+		return getInstance().blockDisplayPostID;
 	}
 
 	public static int getBlockLogicDisplay() {
@@ -96,7 +100,7 @@ public class ConfigLogic {
 		getInstance().RDlogicSwitchBox = value;
 	}
 
-	private int BLlogicSwitchBox = IPLogic.config.get(ConfigCategories.logic.toString(), "SwitchBoxID", 738).getInt();
+	private int blockDisplayPostID = IPLogic.config.get(ConfigCategories.logic.toString(), "blockDisplayPostID", 738).getInt();
 
 	private int blockDataBusID = IPLogic.config.get(ConfigCategories.logic.toString(), "blockDataBusID", 739).getInt();
 
@@ -126,5 +130,6 @@ public class ConfigLogic {
 		
 		ConfigMachineBlocks.registerMachineBlock(ISetupLogic.blockDataBus, "IP.Logic.dataBus", "Data bus", TileEntityDataBus.class, BlockType.logic);
 		ConfigMachineBlocks.registerMachineBlock(ISetupLogic.blockDisplayPanel, "IP.Logic.display", "Display panel", TileEntityDisplayPanel.class, BlockType.logic);
+		ConfigMachineBlocks.registerMachineBlock(ISetupLogic.blockDisplayPost, "IP.Logic.displPost", "Display post", TileEntityDisplayPost.class, BlockType.logic);
 	}
 }

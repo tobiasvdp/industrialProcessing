@@ -3,7 +3,7 @@ package ip.industrialProcessing.subMod.logic.network.transport.wired.bus;
 import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.microBlock.MicroBlockType;
 import ip.industrialProcessing.subMod.logic.IPLogic;
-import ip.industrialProcessing.subMod.logic.network.TileEntityLogicTransport;
+import ip.industrialProcessing.subMod.logic.network.microblock.TileEntityLogicTransport;
 
 public class TileEntityDataBus extends TileEntityLogicTransport {
 

@@ -22,6 +22,7 @@ import net.minecraftforge.common.ForgeDirection;
 
 public abstract class TileEntityMicroBlock extends TileEntity implements IMicroBlock, IPosition {
 	protected int[] sides = new int[6];
+	protected boolean hasCore = false;
 
 	public TileEntityMicroBlock() {
 		Arrays.fill(sides, -1);
@@ -54,11 +55,6 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 	}
 
 	@Override
-	public boolean canUpdate() {
-		return false;
-	}
-
-	@Override
 	public boolean isSideFree(ForgeDirection dir) {
 		return isSideFree(dir.ordinal());
 	}
@@ -86,8 +82,10 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		} else {
 			if (countSetSides() == 0) {
-				if (player == null || !player.capabilities.isCreativeMode)
+				if (player == null || !player.capabilities.isCreativeMode){
 					doDispense(this.worldObj, new ItemStack(itemID, 1, 0), 1, EnumFacing.values()[dir.getOpposite().ordinal()], this);
+					worldObj.destroyBlock(xCoord, yCoord, zCoord, false);
+				}
 			}
 		}
 	}
@@ -102,7 +100,7 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 			doDispense(this.worldObj, new ItemStack(sides[dir.ordinal()], 1, 0), 1, EnumFacing.values()[dir.getOpposite().ordinal()], this);
 		sides[dir.ordinal()] = -1;
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-		if (countSetSides() == 0) {
+		if (!hasCore && countSetSides() == 0) {
 			worldObj.destroyBlock(xCoord, yCoord, zCoord, false);
 		}
 	}
@@ -122,7 +120,7 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 		par0World.spawnEntityInWorld(entityitem);
 	}
 
-	private int countSetSides() {
+	public int countSetSides() {
 		int count = 0;
 		for (int i = 0; i < sides.length; i++) {
 			if (sides[i] != -1) {
