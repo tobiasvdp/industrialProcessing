@@ -121,7 +121,7 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 					IMicroBlock microblock = (IMicroBlock) te;
 					ForgeDirection dir = sideToForge(sideHit);
 					if (microblock.isSideFree(dir)) {
-						microblock.setSide(dir, itemstack.getItem().itemID);
+						microblock.setSide(dir, itemstack.getItem().itemID,player);
 					}
 				}
 			}

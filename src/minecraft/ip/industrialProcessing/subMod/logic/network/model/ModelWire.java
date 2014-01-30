@@ -32,6 +32,8 @@ public class ModelWire extends ModelBlock {
 		Icon iconWire = block.getIcon(0, 0);
 
 		models[0].renderMesh(iconWire);
+		innerconnections[0][2].renderMesh(iconWire);
+		innerconnections[0][3].renderMesh(iconWire);
 	}
 
 	@Override

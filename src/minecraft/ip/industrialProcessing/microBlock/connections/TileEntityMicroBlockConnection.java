@@ -29,8 +29,8 @@ public class TileEntityMicroBlockConnection extends TileEntityMicroBlock impleme
 	}
 
 	@Override
-	public void setSide(ForgeDirection dir, int itemID) {
-		super.setSide(dir, itemID);
+	public void setSide(ForgeDirection dir, int itemID,EntityPlayer player) {
+		super.setSide(dir, itemID,player);
 		updateSideConnections();
 		updateExtConnections();
 		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
