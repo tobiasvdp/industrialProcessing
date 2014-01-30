@@ -5,6 +5,7 @@ import ip.industrialProcessing.gui3.containers.LayoutContainer;
 import ip.industrialProcessing.gui3.framework.Alignment;
 import ip.industrialProcessing.gui3.framework.Thickness;
 import ip.industrialProcessing.gui3.framework.controls.Decorator;
+import ip.industrialProcessing.gui3.framework.controls.ProgressBar;
 import ip.industrialProcessing.gui3.framework.controls.TextBlock;
 import ip.industrialProcessing.gui3.framework.panels.GridPanel;
 import ip.industrialProcessing.gui3.framework.panels.GridSize;
@@ -19,7 +20,7 @@ import ip.industrialProcessing.gui3.generating.builderParts.DefaultHeat;
 import ip.industrialProcessing.gui3.generating.builderParts.DefaultInventory;
 import ip.industrialProcessing.gui3.generating.builderParts.DefaultPower;
 import ip.industrialProcessing.gui3.generating.builderParts.DefaultSlots;
-import ip.industrialProcessing.gui3.generating.builderParts.DefaultSpinners;
+import ip.industrialProcessing.gui3.generating.builderParts.DefaultStateConfigs;
 import ip.industrialProcessing.gui3.generating.builderParts.DefaultTanks;
 import ip.industrialProcessing.gui3.generating.builderParts.DefaultWorker;
 import ip.industrialProcessing.gui3.generating.builderParts.DurabilityReference;
@@ -32,6 +33,8 @@ import ip.industrialProcessing.gui3.generating.builderParts.SpinnerReference;
 import ip.industrialProcessing.gui3.generating.builderParts.StateButtonReference;
 import ip.industrialProcessing.gui3.generating.builderParts.TankReference;
 import ip.industrialProcessing.gui3.generating.builderParts.WorkerReference;
+import ip.industrialProcessing.gui3.guide.pages.RecipeFrame;
+import ip.industrialProcessing.recipes.Recipe;
 
 import java.util.ArrayList;
 
@@ -101,7 +104,7 @@ public class GuiBuilderDefault implements IGuiBuilder {
 	return this;
     }
 
-    public GuiBuilderDefault addStateButton(int slot, TextureReference texture, int rows, int columns, String[] names) {
+    public GuiBuilderDefault addStateButton(int slot, TextureReference texture, int rows, int columns, String... names) {
 	this.stateButtons.add(new StateButtonReference(slot, texture, rows, columns, names));
 	return this;
     }
@@ -170,9 +173,9 @@ public class GuiBuilderDefault implements IGuiBuilder {
 	inputSlots.add(new SlotClusterReference(slot));
 	return this;
     }
- 
+
     @Override
-    public GuiLayoutContainer getGuiContainer(LayoutContainer container) {
+    public GuiLayoutContainer getGuiContainer(LayoutContainer container, TileEntity tileEntity) {
 	Decorator root = Decorator.createDecorator();
 	GuiLayoutContainer guiContainer = new GuiLayoutContainer(container, root);
 
@@ -205,11 +208,11 @@ public class GuiBuilderDefault implements IGuiBuilder {
 	if (grid.columns.size() > 0)
 	    verticalStack.addChild(grid);
 
-	if (!spinners.isEmpty() || stateButtons.isEmpty()) {
+	if (!spinners.isEmpty() || !stateButtons.isEmpty()) {
 	    StackPanel stateStack = new StackPanel();
 	    stateStack.orientation = Orientation.HORIZONTAL;
-	    DefaultSpinners.setupSpinners(this.spinners, guiContainer, stateStack);
-	    DefaultSpinners.setupButtons(this.stateButtons, guiContainer, stateStack);
+	    DefaultStateConfigs.setupSpinners(this.spinners, guiContainer, stateStack, tileEntity);
+	    DefaultStateConfigs.setupButtons(this.stateButtons, guiContainer, stateStack, tileEntity);
 	    verticalStack.addChild(stateStack);
 	}
 	StackPanel rootStack = new StackPanel();
@@ -238,11 +241,28 @@ public class GuiBuilderDefault implements IGuiBuilder {
 	DefaultHeat.setup(this.heatRef, container, tileEntity);
 	DefaultWorker.setup(this.workerRef, container, tileEntity);
 
-	DefaultSpinners.setupSpinners(this.spinners, container, tileEntity);
-	DefaultSpinners.setupButtons(this.stateButtons, container, tileEntity);
+	DefaultStateConfigs.setupSpinners(this.spinners, container, tileEntity);
+	DefaultStateConfigs.setupButtons(this.stateButtons, container, tileEntity);
 
 	DefaultInventory.setup(this.inventoryRef, player, container);
 	return container;
+    }
+
+    @Override
+    public RecipeFrame getRecipePage(Recipe recipe) {
+	StackPanel stackPanel = new StackPanel();
+	stackPanel.orientation = Orientation.VERTICAL;
+	DefaultPower.setup(powerRef, recipe, stackPanel);
+
+	GridPanel grid = new GridPanel();
+	grid.rows.add(new GridSize(54, SizeMode.ABSOLUTE));
+	DefaultHeat.setup(this.heatRef, recipe, grid, Alignment.MIN);
+	DefaultSlots.setup(this.inputSlots, recipe.inputs, grid, Alignment.MIN);
+	DefaultTanks.setup(this.inputTanks, recipe.inputs, grid, Alignment.MIN);
+	DefaultWorker.setup(this.workerRef, recipe, grid, Alignment.CENTER);
+	DefaultTanks.setup(this.outputTanks, recipe.outputs, grid, Alignment.MAX);
+	DefaultSlots.setup(this.outputSlots, recipe.outputs, grid, Alignment.MAX);
+	return new RecipeFrame(stackPanel, this.title);
     }
 
 }

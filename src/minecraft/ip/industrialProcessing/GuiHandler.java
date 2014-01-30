@@ -6,6 +6,7 @@ import ip.industrialProcessing.gui.container.ContainerIP;
 import ip.industrialProcessing.gui.guiContainer.GuiContainerIP;
 import ip.industrialProcessing.gui3.generating.IGuiBlock;
 import ip.industrialProcessing.gui3.generating.LayoutGuiBuilder;
+import ip.industrialProcessing.gui3.guide.GuideScreen;
 import ip.industrialProcessing.items.guide.gui.GuiGuide;
 import ip.industrialProcessing.machines.electrolyser.ContainerElectrolyser;
 import ip.industrialProcessing.machines.electrolyser.GuiContainerElectrolyser;
@@ -307,7 +308,8 @@ public class GuiHandler implements IGuiHandler {
 	    if (entity instanceof TileEntityTank)
 		return new GuiContainerTank(player.inventory, (TileEntityTank) entity);
 	} else if (ID == GUIDE_ID) {
-	    return new GuiGuide(player);
+	    return new GuideScreen(player);
+	    //return new GuiGuide(player);
 	} else if (ID == ANVIL_ID) {
 	    return new GuiContainerAnvil(player.inventory, world, x, y, z);
 	}

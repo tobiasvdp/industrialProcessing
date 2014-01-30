@@ -1,6 +1,7 @@
 package ip.industrialProcessing.client.render.gui;
 
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.texture.TextureManager;
@@ -40,7 +41,7 @@ public class GuiTools {
     }
 
     public static void drawItemStack(ItemStack par1ItemStack, int par2, int par3, String par4Str, RenderItem itemRenderer, FontRenderer fontRenderer, TextureManager textureManager) {
-
+ 
 	FontRenderer font = null;
 	if (par1ItemStack != null) {
 	    Item it = par1ItemStack.getItem();
@@ -53,6 +54,5 @@ public class GuiTools {
 	itemRenderer.renderItemAndEffectIntoGUI(font, textureManager, par1ItemStack, par2, par3);
 	if (par4Str != null)
 	    itemRenderer.renderItemOverlayIntoGUI(font, textureManager, par1ItemStack, par2, par3, par4Str);
-
     }
 }

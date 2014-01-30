@@ -32,7 +32,7 @@ public class CraftingGrid extends UserControl {
 	}
 
 	StackPanel stack = new StackPanel();
-	stack.addChild(new SlotGrid(inputSlots, size, Orientation.VERTICAL));
+	stack.addChild(ElementGrid.createSlotGrid(inputSlots, size, Orientation.VERTICAL));
 	stack.orientation = orientation;
 	Image image;
 	switch (orientation) {

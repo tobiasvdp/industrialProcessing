@@ -11,6 +11,8 @@ import ip.industrialProcessing.gui3.framework.panels.GridCell;
 import ip.industrialProcessing.gui3.framework.panels.GridPanel;
 import ip.industrialProcessing.gui3.framework.panels.GridSize;
 import ip.industrialProcessing.gui3.framework.panels.SizeMode;
+import ip.industrialProcessing.recipes.IHeatRecipe;
+import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.utils.handler.heat.IHeated;
 import net.minecraft.tileentity.TileEntity;
 
@@ -41,5 +43,25 @@ public class DefaultHeat {
 	if (heated == null)
 	    throw new NullPointerException("Heat without IHeated?!");
 	return heated;
+    }
+
+    public static void setup(HeatedReference heatRef, Recipe recipe, GridPanel grid, Alignment min) {
+	if (heatRef != null) {
+	    IHeatRecipe heatRecipe = getHeatRecipe(recipe);
+	    int minTemperature = 0;
+	    if (heatRecipe != null)
+		minTemperature = heatRecipe.heatRequired;
+	    ProgressBar thermometer = ProgressBar.createTemperature();
+	    thermometer.horizontalAlign = min;
+	    grid.children.add(new GridCell(0, grid.columns.size(), thermometer));
+	    grid.columns.add(new GridSize(1, SizeMode.RELATIVE));
+	}
+    }
+
+    private static IHeatRecipe getHeatRecipe(Recipe recipe) {
+	IHeatRecipe heatRecipe = null;
+	if (recipe instanceof IHeatRecipe)
+	    heatRecipe = (IHeatRecipe) recipe;
+	return heatRecipe;
     }
 }

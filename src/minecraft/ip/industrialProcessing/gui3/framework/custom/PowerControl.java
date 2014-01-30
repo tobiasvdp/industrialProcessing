@@ -27,7 +27,8 @@ public class PowerControl extends UserControl implements IProgressBinding {
 	stack.addChild(slot);
 
 	progress = ProgressBar.createHorizontal1();
-	progress.margin = new Thickness(0, 0, 0, 0); 
+	progress.tooltip = "%.0fJoules";
+	progress.margin = new Thickness(0, 0, 0, 0);
 	slot.margin = new Thickness(0, 0, 0, 0);
 	stack.addChild(progress);
 

@@ -1,6 +1,7 @@
 package ip.industrialProcessing.gui3.containers;
 
 import ip.industrialProcessing.gui3.binding.Binder;
+import ip.industrialProcessing.gui3.binding.reply.IReplyBinding;
 import ip.industrialProcessing.gui3.framework.UIElement;
 import ip.industrialProcessing.gui3.framework.UIRoot;
 import ip.industrialProcessing.gui3.framework.controls.Decorator;
@@ -31,13 +32,15 @@ public class GuiLayoutContainer extends GuiContainer {
     @Override
     protected void mouseMovedOrUp(int par1, int par2, int par3) {
 	super.mouseMovedOrUp(par1, par2, par3);
+	int x = (width - xSize) / 2;
+	int y = (height - ySize) / 2;
 	if (par3 >= 0) {
 	    MouseButton button = MouseButton.getButton(par3);
 	    if (button != null) {
-		this.layout.mouseUp(par1, par2, button);
+		this.layout.mouseUp(x, y, par1, par2, button);
 	    }
 	} else
-	    this.layout.mouseMoved(par1, par2);
+	    this.layout.mouseMoved(x, y, par1, par2);
     }
 
     @Override
@@ -46,7 +49,9 @@ public class GuiLayoutContainer extends GuiContainer {
 	super.mouseClicked(par1, par2, par3);
 	MouseButton button = MouseButton.getButton(par3);
 	if (button != null) {
-	    this.layout.mouseDown(par1, par2, button);
+	    int x = (width - xSize) / 2;
+	    int y = (height - ySize) / 2;
+	    this.layout.mouseDown(x, y, par1, par2, button);
 	}
     }
 

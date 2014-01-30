@@ -1,6 +1,8 @@
 package ip.industrialProcessing.gui3.framework.custom;
 
+import ip.industrialProcessing.gui3.framework.UIElement;
 import ip.industrialProcessing.gui3.framework.controls.SlotControl;
+import ip.industrialProcessing.gui3.framework.controls.SlotItemControl;
 import ip.industrialProcessing.gui3.framework.controls.UserControl;
 import ip.industrialProcessing.gui3.framework.panels.GridCell;
 import ip.industrialProcessing.gui3.framework.panels.GridPanel;
@@ -8,14 +10,27 @@ import ip.industrialProcessing.gui3.framework.panels.GridSize;
 import ip.industrialProcessing.gui3.framework.panels.Orientation;
 import ip.industrialProcessing.gui3.framework.panels.SizeMode;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
-public class SlotGrid extends UserControl {
+public class ElementGrid extends UserControl {
 
-    public static SlotGrid createSlotGrid(Slot[] slots, int size, Orientation orientation) {
-	return new SlotGrid(slots, size, orientation);
+    public static ElementGrid createSlotGrid(Slot[] slots, int size, Orientation orientation) {
+	UIElement[] slotElements = new UIElement[slots.length];
+	for (int i = 0; i < slotElements.length; i++) {
+	    slotElements[i] = SlotControl.createSlot(slots[i]);
+	}
+	return new ElementGrid(slotElements, size, orientation);
     }
 
-    public SlotGrid(Slot[] slots, int size, Orientation orientation) {
+    public static ElementGrid createSlotItemGrid(ItemStack[] slots, int size, Orientation orientation) {
+	UIElement[] slotElements = new UIElement[slots.length];
+	for (int i = 0; i < slotElements.length; i++) {
+	    slotElements[i] = SlotItemControl.createSlot(slots[i]);
+	}
+	return new ElementGrid(slotElements, size, orientation);
+    }
+
+    public ElementGrid(UIElement[] slots, int size, Orientation orientation) {
 	int rows = 0;
 	int columns = 0;
 	switch (orientation) {
@@ -39,7 +54,7 @@ public class SlotGrid extends UserControl {
 	int i = 0;
 	for (int y = 0; y < rows; y++) {
 	    for (int x = 0; x < columns; x++) {
-		grid.children.add(new GridCell(y, x, SlotControl.createSlot(slots[i++])));
+		grid.children.add(new GridCell(y, x, slots[i++]));
 		if (i >= slots.length)
 		    break;
 	    }

@@ -14,6 +14,10 @@ import ip.industrialProcessing.gui3.framework.panels.GridPanel;
 import ip.industrialProcessing.gui3.framework.panels.GridSize;
 import ip.industrialProcessing.gui3.framework.panels.SizeMode;
 import ip.industrialProcessing.machines.containers.IFluidMachineContainerEntity;
+import ip.industrialProcessing.recipes.RecipeInputSlot;
+import ip.industrialProcessing.recipes.RecipeOutputSlot;
+import ip.industrialProcessing.recipes.RecipeSlot;
+import ip.industrialProcessing.recipes.RecipeSlotType;
 import ip.industrialProcessing.slots.SlotLiquid;
 import ip.industrialProcessing.slots.SlotLiquidOutput;
 
@@ -21,6 +25,8 @@ import java.util.ArrayList;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 
 public class DefaultTanks {
     public static void setup(ArrayList<TankReference> tankRefs, GuiLayoutContainer guiContainer, LayoutContainer container, GridPanel grid, Alignment max) {
@@ -76,5 +82,38 @@ public class DefaultTanks {
 	if (inventory == null)
 	    throw new NullPointerException("Slots without IInventory?!");
 	return inventory;
+    }
+
+    public static void setup(ArrayList<TankReference> tankRefs, RecipeSlot[] slots, GridPanel grid, Alignment min) {
+	for (TankReference tank : tankRefs) {
+	    TankControl tankControl = TankControl.createTank();
+	    // TODO: get min and max for output
+	    FluidStack stack = getStack(slots, tank.tankSlot);
+	    tankControl.horizontalAlign = min;
+	    grid.children.add(new GridCell(0, grid.columns.size(), tankControl));
+	    grid.columns.add(new GridSize(1, SizeMode.RELATIVE));
+	}
+    }
+
+    private static FluidStack getStack(RecipeSlot[] slots, int tankSlot) {
+	for (int i = 0; i < slots.length; i++) {
+	    RecipeSlot slot = slots[i];
+	    if (slot.index == tankSlot && slot.type == RecipeSlotType.TANK) {
+		int amount = getAmount(slot);
+		return new FluidStack(FluidRegistry.getFluid(slot.itemId), amount);
+	    }
+	}
+	return null;
+    }
+
+    private static int getAmount(RecipeSlot slot) {
+	if (slot instanceof RecipeInputSlot) {
+	    RecipeInputSlot inputSlot = (RecipeInputSlot) slot;
+	    return inputSlot.amount;
+	} else if (slot instanceof RecipeOutputSlot) {
+	    RecipeOutputSlot inputSlot = (RecipeOutputSlot) slot;
+	    return inputSlot.maxAmount;
+	}
+	return 0;
     }
 }

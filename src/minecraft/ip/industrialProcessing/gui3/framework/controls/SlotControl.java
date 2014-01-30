@@ -41,8 +41,8 @@ public class SlotControl extends Control {
 	    slot.yDisplayPosition = (int) absolute.y + 1;
 	}
 
-	renderer.drawRectangle(size, 0xFFFFFF00);
-	renderer.drawRectangle(new Rect(1, 1, size.width - 2, size.height - 2), 0xFFFF0000);
+	//renderer.drawRectangle(size, 0xFFFFFF00);
+	//renderer.drawRectangle(new Rect(1, 1, size.width - 2, size.height - 2), 0xFFFF0000);
 
 	renderer.drawTexture(size, section, texture.resource);
     }

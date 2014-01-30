@@ -21,32 +21,34 @@ public class UIRoot {
 	this.guiRenderer = guiRenderer;
     }
 
-    public void mouseUp(int mouseX, int mouseY, MouseButton button) {
+    public void mouseUp(int x, int y, int mouseX, int mouseY, MouseButton button) {
 
 	if (this.element != null) {
-	    if (this.element.hitTest(mouseX, mouseY)) {
-		this.element.mouseUp(mouseX, mouseY, button);
-	    }
+	    mouseX -= x;
+	    mouseY -= y;
+	    this.element.mouseUp(mouseX, mouseY, button);
 	}
     }
 
-    public void mouseDown(int mouseX, int mouseY, MouseButton button) {
+    public void mouseDown(int x, int y, int mouseX, int mouseY, MouseButton button) {
 
 	if (this.element != null) {
-	    if (this.element.hitTest(mouseX, mouseY)) {
-		this.element.mouseDown(mouseX, mouseY, button);
-	    }
+	    mouseX -= x;
+	    mouseY -= y;
+	    this.element.mouseDown(mouseX, mouseY, button);
 	}
     }
 
     public void render(int width, int height, int x, int y, int mouseX, int mouseY) {
 
 	if (this.element != null) {
+	    this.guiRenderer.offsetX = x;
+	    this.guiRenderer.offsetY = y;
 	    Size size = new Size(width, height);
 	    Rect rect = new Rect(0, 0, size);
 	    this.element.measure(size);
 	    this.element.arrange(rect);
-	    mouseMoved(mouseX - x, mouseY - y);
+	    mouseMoved(x, y, mouseX, mouseY);
 	    GL11.glPushMatrix();
 	    GL11.glTranslatef(x, y, 0);
 	    this.element.render(this.guiRenderer);
@@ -56,22 +58,22 @@ public class UIRoot {
 
     public void renderForeground(int x, int y, int mouseX, int mouseY) {
 	if (this.element != null) {
-	    mouseMoved(mouseX - x, mouseY - y);
+	    mouseMoved(x, y, mouseX, mouseY);
 	    ToolTip tooltip = this.element.getTooltip(mouseX - x, mouseY - y);
 	    if (tooltip != null) {
-		this.guiRenderer.drawToolTip(tooltip, mouseX, mouseY);
+		this.guiRenderer.drawToolTip(tooltip, mouseX - x + 10, mouseY - y + 10);
 	    }
 	}
     }
 
-    public void mouseMoved(int mouseX, int mouseY) {
+    public void mouseMoved(int x, int y, int mouseX, int mouseY) {
 	if (this.element != null) {
+	    mouseX -= x;
+	    mouseY -= y;
 	    if (mouseX != this.mouseX || mouseY != this.mouseY) {
 		this.mouseX = mouseX;
 		this.mouseY = mouseY;
-		float x = mouseX;
-		float y = mouseY;
-		this.element.mouseMoved(x, y);
+		this.element.mouseMoved(mouseX, mouseY);
 	    }
 	}
     }

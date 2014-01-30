@@ -97,15 +97,19 @@ public class Button extends UIElement {
 
     @Override
     protected void mouseUpOverride(float mouseX, float mouseY, MouseButton button) {
-	this.mouseDown = false;
-	for (IButtonClickListener listener : this.clickEventHandlers) {
-	    listener.buttonClicked(this, mouseX, mouseY, button);
+	if (this.mouseDown) {
+	    this.mouseDown = false;
+	    for (IButtonClickListener listener : this.clickEventHandlers) {
+		listener.buttonClicked(this, mouseX, mouseY, button);
+	    }
 	}
     }
 
     @Override
     protected void mouseDownOverride(float mouseX, float mouseY, MouseButton button) {
-	this.mouseDown = true;
+	if (this.hover) {
+	    this.mouseDown = true;
+	}
     }
 
     @Override

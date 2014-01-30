@@ -10,7 +10,9 @@ import ip.industrialProcessing.gui3.framework.controls.Control;
 import ip.industrialProcessing.gui3.framework.controls.ProgressBar;
 import ip.industrialProcessing.gui3.framework.custom.PowerControl;
 import ip.industrialProcessing.gui3.framework.panels.LayerPanel;
+import ip.industrialProcessing.gui3.framework.panels.StackPanel;
 import ip.industrialProcessing.power.IPoweredMachine;
+import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.slots.SlotBase;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
@@ -57,6 +59,7 @@ public class DefaultPower {
 		binder = new Binder<IProgressBinding>(powerRef.powerHandler, powerControl);
 	    } else {
 		ProgressBar powerControl = ProgressBar.createHorizontal1();
+		powerControl.tooltip = "%.0fJoules";
 		control = powerControl;
 		binder = new Binder<IProgressBinding>(powerRef.powerHandler, powerControl);
 	    }
@@ -64,6 +67,16 @@ public class DefaultPower {
 	    control.horizontalAlign = max;
 	    control.verticalAlign = Alignment.MIN;
 	    topPanel.addChild(control);
+	}
+    }
+
+    public static void setup(PowerReference powerRef, Recipe recipe, StackPanel stackPanel) {
+	if (powerRef != null && recipe.powerRequired > 0) {
+	    ProgressBar powerControl = ProgressBar.createHorizontal1();
+	    powerControl.tooltip = "%.0fJoules";
+	    powerControl.value = recipe.powerRequired;
+	    powerControl.maxValue = recipe.powerRequired;
+	    stackPanel.addChild(powerControl);
 	}
     }
 }

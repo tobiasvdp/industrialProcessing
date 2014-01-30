@@ -61,7 +61,10 @@ public class TextBlock extends Control {
         return null;
     }
 
-    public static UIElement createText(String text) {  
+    public static TextBlock createText(String text) {  
 	return new TextBlock(text, 4210752);
+    }
+    public static TextBlock createText(String text, int color) {  
+	return new TextBlock(text, color);
     }
 }

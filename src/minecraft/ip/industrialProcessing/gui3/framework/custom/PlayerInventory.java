@@ -17,10 +17,10 @@ public class PlayerInventory extends UserControl {
 	StackPanel stack = new StackPanel();
 	stack.orientation = Orientation.VERTICAL;
 
-	SlotGrid inventory = new SlotGrid(inventorySlots, 3, Orientation.HORIZONTAL);
+	ElementGrid inventory = ElementGrid.createSlotGrid(inventorySlots, 3, Orientation.HORIZONTAL);
 	inventory.width = 9 * 18;
 	inventory.height = 3 * 18;
-	SlotGrid hotbar = new SlotGrid(hotbarSlots, 1, Orientation.HORIZONTAL);
+	ElementGrid hotbar = ElementGrid.createSlotGrid(hotbarSlots, 1, Orientation.HORIZONTAL);
 	hotbar.margin = new Thickness(7, 0, 0, 0);
 	hotbar.width = 9 * 18;
 	hotbar.height = 1 * 18;
@@ -35,7 +35,7 @@ public class PlayerInventory extends UserControl {
 	horizontal.orientation = Orientation.HORIZONTAL;
 	horizontal.addChild(vertical);
 	if (armorSlots != null) {
-	    SlotGrid armor = new SlotGrid(armorSlots, 1, Orientation.VERTICAL);
+	    ElementGrid armor = ElementGrid.createSlotGrid(armorSlots, 1, Orientation.VERTICAL);
 	    armor.width = 18;
 	    armor.height = 4 * 18;
 	    armor.margin = new Thickness(0, 0, 0, 7);

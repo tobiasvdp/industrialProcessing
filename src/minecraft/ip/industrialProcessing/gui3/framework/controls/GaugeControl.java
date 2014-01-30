@@ -91,7 +91,7 @@ public class GaugeControl extends Control implements IProgressBinding {
 	if (name != null)
 	    lines.add(name);
 	if (this.format != null)
-	    lines.add(String.format(this.format, this.value, this.maxValue));
+	    lines.add(String.format("§7"+this.format, this.value, this.maxValue));
 	if (!lines.isEmpty()) {
 	    String[] linesAr = new String[lines.size()];
 	    return new ToolTip(lines.toArray(linesAr));

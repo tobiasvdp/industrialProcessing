@@ -1,26 +1,65 @@
 package ip.industrialProcessing.gui3.framework.rendering;
 
+import ip.industrialProcessing.client.render.gui.GuiTools;
 import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.gui3.framework.Rect;
 import ip.industrialProcessing.gui3.framework.Size;
 import ip.industrialProcessing.gui3.framework.Thickness;
+import ip.industrialProcessing.items.guide.gui.GuiGuide;
 
 import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiRenderer {
 
     private Minecraft mc;
     private Tessellator tessellator;
+    public int offsetX;
+    public int offsetY;
+    private static RenderItem itemRenderer = new RenderItem();
 
     public GuiRenderer() {
 	this.mc = Minecraft.getMinecraft();
 	this.tessellator = Tessellator.instance;
+    }
+
+    public void drawItemStack(Rect where, ItemStack stack) {
+	int x = (int) (where.x + (where.width - 16) / 2);
+	int y = (int) (where.y + (where.height - 16) / 2);
+
+	TextureManager textureManager = mc.func_110434_K();
+
+	FontRenderer font = null;
+	if (stack != null) {
+	    Item it = stack.getItem();
+	    if (it != null) {
+		font = it.getFontRenderer(stack);
+	    }
+	}
+
+	// GL11.glDisable(32826 /* GL_RESCALE_NORMAL_EXT */);
+	// GL11.glDisable(2903 /* GL_COLOR_MATERIAL */);
+	GL11.glEnable(GL11.GL_NORMALIZE);
+	RenderHelper.enableGUIStandardItemLighting();
+	if (font == null)
+	    font = mc.fontRenderer;
+	itemRenderer.renderItemAndEffectIntoGUI(font, textureManager, stack, x, y);
+	if (stack.stackSize != 1)
+	    itemRenderer.renderItemOverlayIntoGUI(font, textureManager, stack, x, y, stack.stackSize + "");
+	RenderHelper.disableStandardItemLighting();
+
     }
 
     public void drawNineGrid(Rect where, Thickness thickness, Rect section, TextureReference texture) {
@@ -162,6 +201,31 @@ public class GuiRenderer {
 
     public void drawToolTip(ToolTip tooltip, int x, int y) {
 	ToolTip.renderToolTip(tooltip, x, y, 0, this.mc.fontRenderer);
+    }
+
+    public void enableScissor(Rect absoluteBounds) {
+	ScaledResolution res = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
+
+	float sSW = absoluteBounds.width;
+	float sSH = absoluteBounds.height;
+	float sSL = absoluteBounds.x + offsetX;
+	float sST = absoluteBounds.y + offsetY;
+
+	float sL = sSL * mc.displayWidth / res.getScaledWidth();
+	float sT = mc.displayHeight - sST * mc.displayHeight / res.getScaledHeight();
+	float sW = sSW * mc.displayWidth / res.getScaledWidth();
+	float sH = sSH * mc.displayHeight / res.getScaledHeight();
+	int x = (int) Math.floor(sL);
+	int y = (int) Math.floor(sT);
+	int w = (int) Math.ceil(sW);
+	int h = (int) Math.ceil(sH);
+
+	GL11.glScissor(x, y-h, w, h);
+	GL11.glEnable(GL11.GL_SCISSOR_TEST);
+    }
+
+    public void disableScissor() {
+	GL11.glDisable(GL11.GL_SCISSOR_TEST);
     }
 
 }

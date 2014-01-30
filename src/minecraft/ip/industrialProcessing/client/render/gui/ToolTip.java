@@ -43,9 +43,7 @@ public class ToolTip {
 			for (int i = 0; i < tip.lines.length; i++) {
 				String line = tip.lines[i];
 				fontRenderer.drawStringWithShadow(line, x, y + i * (lineHeight + padding), 16777215);
-			}
-			GL11.glEnable(GL11.GL_LIGHTING);
-			GL11.glEnable(GL11.GL_DEPTH_TEST);
+			} 
 		}
 	}
 }

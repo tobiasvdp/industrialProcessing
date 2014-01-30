@@ -35,25 +35,29 @@ public class StateButton extends UserControl implements IButtonClickListener, IV
     @Override
     public void buttonClicked(Button button, float mouseX, float mouseY, MouseButton mouseButton) {
 	if (button == this.button) {
+	    int oldValue = getValue();
 	    if (mouseButton == MouseButton.LEFT) {
-		setValue(getValue() + 1);
+		setValue(oldValue + 1);
 	    } else if (mouseButton == MouseButton.RIGHT)
-		setValue(getValue() - 1);
+		setValue(oldValue - 1);
+	    int newValue = getValue();
+	    this.onValueChanged(oldValue, newValue);
 	}
     }
 
     public void setValue(int i) {
-	int range = (maxValue - minValue) + 1;
-	i -= minValue;
+	if (this.value != i) {
+	    int range = (maxValue - minValue) + 1;
+	    i -= minValue;
 
-	while (i < 0)
-	    i += range;
-	i %= range;
+	    while (i < 0)
+		i += range;
+	    i %= range;
 
-	int oldValue = this.value;
-	this.value = i + minValue;
-	this.tile.index = value;
-	this.onValueChanged(oldValue);
+	    int oldValue = this.value;
+	    this.value = i + minValue;
+	    this.tile.index = value;
+	}
     }
 
     @Override
@@ -61,9 +65,11 @@ public class StateButton extends UserControl implements IButtonClickListener, IV
 	return this.value;
     }
 
-    private void onValueChanged(int oldValue) {
-	for (IValueBindingChangedListener listener : this.valueChangedListeners) {
-	    listener.onValueChanged(this, oldValue, this.value);
+    private void onValueChanged(int oldValue, int newValue) {
+	if (this.value != oldValue) {
+	    for (IValueBindingChangedListener listener : this.valueChangedListeners) {
+		listener.onValueChanged(this, oldValue, newValue);
+	    }
 	}
     }
 

@@ -77,6 +77,7 @@ public abstract class UIElement {
     }
 
     protected float clamp(float a, float min, float max) {
+	max = Math.max(min, max);
 	if (a < min)
 	    a = min;
 	if (a > max)
@@ -163,32 +164,34 @@ public abstract class UIElement {
     private boolean hasToolTip;
 
     public void render(GuiRenderer renderer) {
-	boolean debug = false;
-	GL11.glPushMatrix();
-	GL11.glTranslatef(x, y, 0.1f);
-	absoluteX += x;
-	absoluteY += y;
-	Rect bounds = new Rect(0, 0, this.actualSize);
-	if (debug) {
-	     renderer.drawRectangle(bounds, 0xFFffffff);
+	if (this.actualSize != null && this.actualSize.width > 0 && this.actualSize.height > 0) {
+	    boolean debug = false;
+	    GL11.glPushMatrix();
+	    GL11.glTranslatef(x, y, 0.1f);
+	    absoluteX += x;
+	    absoluteY += y;
+	    Rect bounds = new Rect(0, 0, this.actualSize);
+	    if (debug) {
+		renderer.drawRectangle(bounds, 0xFFffffff);
+	    }
+	    renderOverride(bounds, renderer);
+	    absoluteX -= x;
+	    absoluteY -= y;
+	    if (debug) {
+		GL11.glTranslatef(0, 0, 1);
+		color = this.isMouseInside ? 0xffffff00 : 0xffff0000;
+		float lineThickness = 0.25f;
+		renderer.drawRectangle(new Rect(0, 0, lineThickness, this.actualSize.height), color);
+		renderer.drawRectangle(new Rect(this.actualSize.width - lineThickness, 0, lineThickness, this.actualSize.height), color);
+		renderer.drawRectangle(new Rect(0, 0, this.actualSize.width, lineThickness), color);
+		renderer.drawRectangle(new Rect(0, this.actualSize.height - lineThickness, this.actualSize.width, lineThickness), color);
+	    }
+	    GL11.glPopMatrix();
 	}
-	renderOverride(bounds, renderer);
-	absoluteX -= x;
-	absoluteY -= y;
-	if (debug) {
-	    GL11.glTranslatef(0, 0, 1);
-	    color = this.isMouseInside ? 0xffffff00 : 0xffff0000;
-	    float lineThickness = 0.25f;
-	    renderer.drawRectangle(new Rect(0, 0, lineThickness, this.actualSize.height), color);
-	    renderer.drawRectangle(new Rect(this.actualSize.width - lineThickness, 0, lineThickness, this.actualSize.height), color);
-	    renderer.drawRectangle(new Rect(0, 0, this.actualSize.width, lineThickness), color);
-	    renderer.drawRectangle(new Rect(0, this.actualSize.height - lineThickness, this.actualSize.width, lineThickness), color);
-	}
-	GL11.glPopMatrix();
     }
 
     protected Rect getAbsoluteBounds(Rect relativeBounds) {
-	return new Rect(absoluteX + relativeBounds.x, absoluteY + relativeBounds.y, relativeBounds.x, relativeBounds.y);
+	return new Rect(absoluteX + relativeBounds.x, absoluteY + relativeBounds.y, relativeBounds.width, relativeBounds.height);
     }
 
     protected abstract void renderOverride(Rect size, GuiRenderer renderer);
@@ -212,11 +215,8 @@ public abstract class UIElement {
     public void mouseMoved(float mouseX, float mouseY) {
 	float relativeX = mouseX - this.x;
 	float relativeY = mouseY - this.y;
-	boolean hit;
-	if (hit = this.hitTest(mouseX, mouseY)) {
-	    mouseMovedOverride(relativeX, relativeY);
-	}
-	setMouseInside(hit, relativeX, relativeY);
+	mouseMovedOverride(relativeX, relativeY);
+	setMouseInside(this.hitTest(mouseX, mouseY), relativeX, relativeY);
     }
 
     private void setMouseInside(boolean hit, float mouseX, float mouseY) {
@@ -253,8 +253,17 @@ public abstract class UIElement {
 
     protected abstract void mouseMovedOverride(float mouseX, float mouseY);
 
-    public boolean hitTest(float x, float y) {
-	if (this.isHittestVisible) {
+    private boolean hitTest(float x, float y) {
+	if (this.isHittestVisible && this.actualSize != null) {
+	    Rect rect = new Rect(this.x, this.y, this.actualSize);
+	    if (rect.contains(x, y))
+		return true;
+	}
+	return false;
+    }
+
+    public boolean contains(float x, float y) {
+	if (this.actualSize != null) {
 	    Rect rect = new Rect(this.x, this.y, this.actualSize);
 	    if (rect.contains(x, y))
 		return true;
@@ -264,12 +273,14 @@ public abstract class UIElement {
 
     public ToolTip getTooltip(float mouseX, float mouseY) {
 	this.hasToolTip = false;
-	Rect rect = new Rect(this.x, this.y, this.actualSize);
-	if (rect.contains(mouseX, mouseY)) { 
-	    ToolTip tooltip = getTooltipOverride(mouseX - this.x, mouseY - this.y);
-	    if (tooltip != null) { 
-		this.hasToolTip = true;
-		return tooltip;
+	if (this.actualSize != null) {
+	    Rect rect = new Rect(this.x, this.y, this.actualSize);
+	    if (rect.contains(mouseX, mouseY)) {
+		ToolTip tooltip = getTooltipOverride(mouseX - this.x, mouseY - this.y);
+		if (tooltip != null) {
+		    this.hasToolTip = true;
+		    return tooltip;
+		}
 	    }
 	}
 	return null;

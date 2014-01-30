@@ -28,6 +28,7 @@ public class NumericSpinner extends UserControl implements IButtonClickListener,
 
     private static final Rect ARROW_DOWN_SECTION = new Rect(0, 0.5f, 1, 0.5f);
     private static final Rect ARROW_UP_SECTION = new Rect(0, 0, 1, 0.5f);
+    private static final Rect BACKGROUND_SECTION = new Rect(0, 0, 1, 1);
     private static final TextureReference ARROW_TEXTURE = new TextureReference(new Size(11, 14), IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/Spinner.png");
     private static final TextureReference BACKGROUND_TEXTURE = new TextureReference(new Size(32, 18), IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/TextField.png");
     private static final int BACKGROUND_BORDER_WIDTH = 1;
@@ -52,7 +53,7 @@ public class NumericSpinner extends UserControl implements IButtonClickListener,
 	StackPanel stack = new StackPanel();
 	stack.orientation = Orientation.HORIZONTAL;
 
-	textFieldBackground = new Decorator(BACKGROUND_TEXTURE, BACKGROUND_BORDER_WIDTH);
+	textFieldBackground = new Decorator(BACKGROUND_TEXTURE, BACKGROUND_BORDER_WIDTH, BACKGROUND_SECTION);
 
 	textBlock = new TextBlock("00000", 0xFFFFFFFF);
 	textBlock.hasShadow = false;

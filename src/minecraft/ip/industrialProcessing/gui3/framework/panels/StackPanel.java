@@ -54,9 +54,8 @@ public class StackPanel extends Panel {
 	    float maxHeight = (this.verticalAlign != Alignment.STRETCH) ? this.getDesiredSize().height : maxSize.height;
 	    float left = 0;
 	    for (UIElement child : getChildren()) {
-		Size size = child.getDesiredSize();
-		float height = Math.max(maxHeight, size.height);
-		child.arrange(new Rect(left, 0, size.width, height));
+		Size size = child.getDesiredSize(); 
+		child.arrange(new Rect(left, 0, size.width, maxHeight));
 		left += size.width;
 	    }
 	    return new Size(left, maxHeight);
@@ -66,9 +65,8 @@ public class StackPanel extends Panel {
 	    for (UIElement child : getChildren()) {
 		Size size = child.getDesiredSize();
 		// desired size can't be bigger then maxSize, measure should
-		// have fixed that correctly.
-		float width = Math.max(maxWidth, size.width);
-		child.arrange(new Rect(0, top, width, size.height));
+		// have fixed that correctly. 
+		child.arrange(new Rect(0, top, maxWidth, size.height));
 		top += size.height;
 	    }
 	    return new Size(maxWidth, top);
