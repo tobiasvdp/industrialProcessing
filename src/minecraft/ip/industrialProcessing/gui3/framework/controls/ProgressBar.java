@@ -123,6 +123,7 @@ public class ProgressBar extends Control implements IProgressBinding {
     public float maxValue = 1;
     public String name = null;
     public String tooltip = "%.2f/%.2f";
+    public boolean invert = false;
 
     public ProgressBar(TextureReference texture, Rect backgroundRegion, Rect overlayRegion, Orientation orientation, Thickness backgroundThickness) {
 	this.backgroundRegion = backgroundRegion;
@@ -152,6 +153,8 @@ public class ProgressBar extends Control implements IProgressBinding {
 	float progress = this.value / this.maxValue;
 	// TODO: something wrong with the thickness here.
 	progress = Math.max(0, Math.min(progress, 1));
+	if (invert)
+	    progress = 1 - progress;
 	float uPixel = 1 / texture.size.width;
 	float vPixel = 1 / texture.size.height;
 	Rect rectXY;

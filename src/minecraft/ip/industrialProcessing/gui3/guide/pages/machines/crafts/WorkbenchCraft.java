@@ -68,7 +68,9 @@ public class WorkbenchCraft implements ICraftBase {
 	} else if (recipe instanceof ShapedRecipes) {
 	    ShapedRecipes shaped = (ShapedRecipes) recipe;
 	    for (int i = 0; i < slots.length; i++) {
-		ItemStack stack = shaped.recipeItems[i];
+		ItemStack stack = null;
+		if (shaped.recipeItems.length > i)
+		    stack = shaped.recipeItems[i];
 		if (stack == null)
 		    slots[i] = SlotItemControl.createSlot(null);
 		else

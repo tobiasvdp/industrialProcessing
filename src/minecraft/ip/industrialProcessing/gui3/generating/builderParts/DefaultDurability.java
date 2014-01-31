@@ -14,10 +14,12 @@ import net.minecraft.tileentity.TileEntity;
 public class DefaultDurability {
     public static void setup(DurabilityReference durabilityRef, GuiLayoutContainer guiContainer, StackPanel stack) {
 	if (durabilityRef != null) {
-	    ProgressBar durabilityProgress = ProgressBar.createHorizontal1();
+	    ProgressBar durabilityProgress = ProgressBar.createHorizontal3();
 	    durabilityProgress.horizontalAlign = Alignment.MIN;
+	    durabilityProgress.invert = true;
 	    stack.addChild(durabilityProgress);
 	    Binder binder = new Binder(durabilityRef.handler, durabilityProgress);
+	    guiContainer.addBinding(binder);
 	}
     }
 

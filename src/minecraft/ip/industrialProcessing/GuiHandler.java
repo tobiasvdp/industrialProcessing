@@ -5,6 +5,7 @@ import ip.industrialProcessing.gui.IGuiLayoutMultiblock;
 import ip.industrialProcessing.gui.container.ContainerIP;
 import ip.industrialProcessing.gui.guiContainer.GuiContainerIP;
 import ip.industrialProcessing.gui3.generating.IGuiBlock;
+import ip.industrialProcessing.gui3.generating.IGuiMultiblock;
 import ip.industrialProcessing.gui3.generating.LayoutGuiBuilder;
 import ip.industrialProcessing.gui3.guide.GuideScreen;
 import ip.industrialProcessing.machines.oxygenFurnace.ContainerOxygenFurnace;
@@ -132,7 +133,7 @@ public class GuiHandler implements IGuiHandler {
 		return new ContainerIP(player, entity);
 	    }
 
-	    if (entity.getBlockType() != null && entity.getBlockType() instanceof IGuiBlock) {
+	    if (entity.getBlockType() != null && (entity.getBlockType() instanceof IGuiBlock || entity.getBlockType() instanceof IGuiMultiblock)) {
 		return LayoutGuiBuilder.createContainer(player.inventory, entity);
 	    }
 
@@ -219,9 +220,9 @@ public class GuiHandler implements IGuiHandler {
 	    if (entity.getBlockType() != null && (entity.getBlockType() instanceof IGuiLayout || entity.getBlockType() instanceof IGuiLayoutMultiblock)) {
 		return new GuiContainerIP(player, entity, new ContainerIP(player, entity));
 	    }
-	    if (entity.getBlockType() != null && entity.getBlockType() instanceof IGuiBlock) {
+	    if (entity.getBlockType() != null &&  (entity.getBlockType() instanceof IGuiBlock || entity.getBlockType() instanceof IGuiMultiblock)) {
 		return LayoutGuiBuilder.createGuiContainer(player.inventory, entity);
-	    }
+	    } 
 	    if (entity instanceof TileEntityMagneticSeparator)
 		return new GuiContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity);
 	    if (entity instanceof TileEntityExtruder)

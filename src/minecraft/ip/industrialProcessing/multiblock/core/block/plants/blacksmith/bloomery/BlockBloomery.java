@@ -5,12 +5,11 @@ import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.config.ISetupItems;
-import ip.industrialProcessing.gui.GuiLayout;
-import ip.industrialProcessing.gui.IGuiLayoutMultiblock;
-import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
-import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
+import ip.industrialProcessing.gui3.framework.panels.Orientation;
+import ip.industrialProcessing.gui3.generating.GuiBuilderDefault;
+import ip.industrialProcessing.gui3.generating.IGuiBuilder;
+import ip.industrialProcessing.gui3.generating.IGuiMultiblock;
 import ip.industrialProcessing.multiblock.core.BlockMultiblockCore;
-import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
 import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.multiblock.tier.Tiers;
 import ip.industrialProcessing.recipes.IRecipeBlock;
@@ -29,24 +28,12 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockBloomery extends BlockMultiblockCore implements IRecipeBlock, IDescriptionBlock, IGuiLayoutMultiblock {
+public class BlockBloomery extends BlockMultiblockCore implements IRecipeBlock, IDescriptionBlock, IGuiMultiblock {
 
-    public static GuiLayout[] guiLayout = new GuiLayout[2];
+    public static IGuiBuilder[] guiBuilders = new IGuiBuilder[2];
     static {
-	guiLayout[0] = new GuiLayout();
-	guiLayout[0].addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 1);
-	guiLayout[0].addLayoutPanel(GuiLayoutPanelType.slotsOutput).setSlotLayout(SlotLayoutType.horizontal, 1);
-	guiLayout[0].addLayoutPanel(GuiLayoutPanelType.heat);
-	guiLayout[0].addLayoutPanel(GuiLayoutPanelType.worker);
-	guiLayout[0].addLayoutPanel(GuiLayoutPanelType.lifespan);
-
-	guiLayout[1] = new GuiLayout();
-	guiLayout[1].addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 1);
-	guiLayout[1].addLayoutPanel(GuiLayoutPanelType.slotsOutput).setSlotLayout(SlotLayoutType.horizontal, 1);
-	guiLayout[1].addLayoutPanel(GuiLayoutPanelType.heat);
-	guiLayout[1].addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.vertical, 2);
-	guiLayout[1].addLayoutPanel(GuiLayoutPanelType.worker);
-	guiLayout[1].addLayoutPanel(GuiLayoutPanelType.lifespan);
+	guiBuilders[0] = new GuiBuilderDefault("Bloomery").addInputSlot(0).addOutputSlot(1).enableBurner(-1, 3, -1).enableThermometer().enableDurability().enableWorker();
+	guiBuilders[1] = new GuiBuilderDefault("Bloomery").addInputSlot(0).addOutputSlot(1).enableBurner(-1, 3, -1).addInputSlotCluster(4, 2, 2, Orientation.VERTICAL).enableThermometer().enableDurability().enableWorker();
     }
 
     private Icon[] icons = new Icon[1];
@@ -153,18 +140,7 @@ public class BlockBloomery extends BlockMultiblockCore implements IRecipeBlock, 
     }
 
     @Override
-    public GuiLayout getGuiLayout(Tiers tier) {
-	return guiLayout[tier.ordinal()];
+    public IGuiBuilder getGui(Tiers tier) {
+	return guiBuilders[tier.ordinal()];
     }
-
-    @Override
-    public GuiLayout[] getGuiLayouts() {
-	return guiLayout;
-    }
-
-    @Override
-    public StructureMultiblock getMultiblockLayouts() {
-	return TileEntityBloomery.structure;
-    }
-
 }

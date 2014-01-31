@@ -5,7 +5,7 @@ import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeInputSlot;
 import ip.industrialProcessing.recipes.RecipeOutputSlot;
 
-public class RecipeMultiblock extends Recipe {
+public class RecipeMultiblock extends Recipe implements ITierRecipe {
     public RecipeMultiblock() {
 	super();
     }
@@ -15,4 +15,10 @@ public class RecipeMultiblock extends Recipe {
     }
 
     public Tiers tier;
+
+    @Override
+    public Tiers getTier() {
+	return tier;
+    }
+
 }
