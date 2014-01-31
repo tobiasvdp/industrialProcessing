@@ -8,6 +8,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidContainerItem;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
+import ip.industrialProcessing.utils.registry.ItemRegistry;
+import ip.industrialProcessing.utils.registry.ItemType;
 
 public class ContainerFluid extends ItemBucket implements IFluidContainerItem {
 	private int capacity;
@@ -20,6 +22,7 @@ public class ContainerFluid extends ItemBucket implements IFluidContainerItem {
 		setCreativeTab(ISetupCreativeTabs.tabFluid);
 		this.capacity = capacity;
 		ContainerHandler.containers.put(block, this);
+		ItemRegistry.RegisterItem(this, ItemType.fluid);
 		func_111206_d(INamepace.TEXTURE_NAME_PREFIX + texture);
 	}
 

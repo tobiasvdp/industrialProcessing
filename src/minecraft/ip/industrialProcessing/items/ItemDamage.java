@@ -1,6 +1,8 @@
 package ip.industrialProcessing.items;
 
 import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.utils.registry.ItemRegistry;
+import ip.industrialProcessing.utils.registry.ItemType;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -15,6 +17,7 @@ public class ItemDamage extends Item {
 		setUnlocalizedName(name);
 		setNoRepair();
 		func_111206_d(INamepace.TEXTURE_NAME_PREFIX + name);
+		ItemRegistry.RegisterItem(this, ItemType.damage);
 
 	}
 	public ItemDamage(int ID, String name, CreativeTabs tab, int maxDamage) {

@@ -6,11 +6,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
+import ip.industrialProcessing.utils.registry.ItemRegistry;
+import ip.industrialProcessing.utils.registry.ItemType;
 
 public class ItemPaintBrush extends ItemDamage {
 	public int color;
 	public ItemPaintBrush(int ID, int color) {
 		super(ID, 16, "paintBrush" + color, ISetupCreativeTabs.tabOres);
+		ItemRegistry.RegisterItem(this, ItemType.paintbrush);
 		this.color = color;
 	}
 

@@ -4,6 +4,8 @@ import ip.industrialProcessing.config.ConfigItems;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.IRotateableEntity;
+import ip.industrialProcessing.utils.registry.ItemRegistry;
+import ip.industrialProcessing.utils.registry.ItemType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -13,6 +15,7 @@ public class ItemWrench extends ItemIP {
 
     public ItemWrench() {
         super(ConfigItems.itemWrenchID(), "itemWrench", ISetupCreativeTabs.tabPower);
+        ItemRegistry.RegisterItem(this, ItemType.tool);
     }
 
     @Override

@@ -8,6 +8,8 @@ import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import ip.industrialProcessing.fluids.BucketHandler;
+import ip.industrialProcessing.utils.registry.ItemRegistry;
+import ip.industrialProcessing.utils.registry.ItemType;
 
 public class ItemIPBucket extends ItemBucket {
 
@@ -16,6 +18,7 @@ public class ItemIPBucket extends ItemBucket {
 	setUnlocalizedName("Container" + fluid.getName());
 	setMaxStackSize(1);
 	setCreativeTab(ISetupCreativeTabs.tabFluid);
+	ItemRegistry.RegisterItem(this, ItemType.fluid);
 	BucketHandler.INSTANCE.put(block, this);
 	func_111206_d(INamepace.TEXTURE_NAME_PREFIX + texture);
     } 

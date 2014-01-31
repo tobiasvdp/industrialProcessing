@@ -1,6 +1,8 @@
 package ip.industrialProcessing.items;
 
 import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.utils.registry.ItemRegistry;
+import ip.industrialProcessing.utils.registry.ItemType;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
@@ -12,6 +14,7 @@ public class ItemIP extends Item {
 		setCreativeTab(tab);
 		setUnlocalizedName(name);
 		func_111206_d(INamepace.TEXTURE_NAME_PREFIX + name);
+		ItemRegistry.RegisterItem(this, ItemType.item);
 	}
 
 }

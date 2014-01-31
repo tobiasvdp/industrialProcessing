@@ -1,5 +1,7 @@
 package ip.industrialProcessing.config;
 
+import net.minecraft.item.ItemStack;
+import ip.industrialProcessing.utils.registry.ItemRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ConfigItems {
@@ -768,6 +770,8 @@ public class ConfigItems {
 
 	public static void addToLanguageRegistry() {
 		LanguageRegistry.addName(ISetupItems.itemIronBracket , "Iron bracket");
+		LanguageRegistry.instance().addStringLocalization(ISetupItems.itemIronBracket.getUnlocalizedName()+".desc" , "This is an iron bracket");
+		
 		LanguageRegistry.addName(ISetupItems.itemIronBowl , "Iron bowl");
 		LanguageRegistry.addName(ISetupItems.itemRemote , "Remote");
 		LanguageRegistry.addName(ISetupItems.itemTurbineBlades , "Turbine blades");

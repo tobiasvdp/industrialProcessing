@@ -18,14 +18,11 @@ import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
-public class ItemRemote extends Item implements IRemote {
+public class ItemRemote extends ItemIP implements IRemote {
 
 	public ItemRemote(int par1) {
-		super(par1);
-		setUnlocalizedName("RemoteIP");
+		super(par1, "RemoteIP", ISetupCreativeTabs.tabMultiblocks);
 		setMaxStackSize(1);
-		setCreativeTab(ISetupCreativeTabs.tabMultiblocks);
-		func_111206_d(INamepace.TEXTURE_NAME_PREFIX + "itemRemote");
 	}
 
 	@Override
