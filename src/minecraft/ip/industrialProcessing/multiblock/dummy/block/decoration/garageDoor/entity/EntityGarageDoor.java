@@ -107,6 +107,11 @@ public class EntityGarageDoor extends Entity implements IRotateableEntity {
 					if(worldObj.getBlockId(x, y, z) == IndustrialProcessing.blockGarageDoorDoor.blockID){
 						TileEntityGarageDoorDoor te = (TileEntityGarageDoorDoor) worldObj.getBlockTileEntity(x, y, z);
 						te.unhide();
+					}else{
+						worldObj.setBlock(x, y, z, IndustrialProcessing.blockGarageDoorDoor.blockID);
+						TileEntityGarageDoorDoor te = (TileEntityGarageDoorDoor) worldObj.getBlockTileEntity(x, y, z);
+						te.setForwardDirection(getForwardDirection());
+						te.unhide();
 					}
 					((TileEntityGarageDoorDoor) worldObj.getBlockTileEntity(x, y, z)).setForwardDirection(getForwardDirection());
 					if(te instanceof TileEntityGarageDoorFrame)

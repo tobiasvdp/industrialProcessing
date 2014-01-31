@@ -28,39 +28,59 @@ import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class EntityBobcatMiner extends EntityMiner {
 
+	public int rotationAngle = 0;
+	public int rotationRod = 0;
+	boolean up = true;
+	
 	public EntityBobcatMiner(World par1World) {
 		super(par1World);
+		ignoreFrustumCheck = true;
 	}
 
+	public EntityBobcatMiner(World par1World, float x, float y, float z) {
+		super(par1World, x, y, z);
+		ignoreFrustumCheck = true;
+	}
+	
+	
 	@Override
-	public void onCollideWithPlayer(EntityPlayer par1EntityPlayer) {
-		double distance = par1EntityPlayer.getDistance(this.posX, this.posY, this.posZ);
-		if (distance < 1.7) {
-			if (riddenByEntity == null) {
-				this.riddenByEntity = par1EntityPlayer;
-				par1EntityPlayer.mountEntity(this);
+	public void otherUpdates() {
+		super.otherUpdates();
+		if (worldObj.isRemote) {
+			if (riddenByEntity != null && riddenByEntity == mc.thePlayer && this.canWork) {
+				rotationAngle += 4;
+				if(rotationAngle > 359){
+					rotationAngle = 0;
+				}
+				if(up){
+					rotationRod += 2;
+				}else{
+					rotationRod -=2;
+				}
+				if(rotationRod > 10)
+					up = false;
+				if(rotationRod < -10)
+					up = true;
 			}
-			if (distance > 2.2 && worldObj.isRemote && riddenByEntity != null && riddenByEntity == mc.thePlayer) {
-				this.riddenByEntity = null;
-			}
-		}
 
-		super.onCollideWithPlayer(par1EntityPlayer);
+		} else {
+
+		}
 	}
 
 	@Override
 	public int mineLeft() {
-		return 1;
+		return 0;
 	}
 
 	@Override
 	public int mineRight() {
-		return 1;
+		return 0;
 	}
 
 	@Override
 	public int mineUp() {
-		return 3;
+		return 2;
 	}
 
 	@Override
@@ -70,7 +90,7 @@ public class EntityBobcatMiner extends EntityMiner {
 
 	@Override
 	public int getMaxCooldownTime() {
-		return 15;
+		return 10;
 	}
 
 	@Override
@@ -80,19 +100,25 @@ public class EntityBobcatMiner extends EntityMiner {
 
 	@Override
 	public float[] getSize() {
-		return new float[]{2.5f, 2.375f};
+		return new float[] { 0.9f, 1.8f };
 	}
 
 	@Override
 	public float getStepHeightRiding() {
-		return 1;
+		return 1f;
 	}
 
 	@Override
 	public float getStepHeightAction() {
-		return 0.5f;
+		return 0.3f;
+	}
+	
+	@Override
+	public double getMountedYOffset() {
+		{
+			float height = this.height;
+			return height - 1.5;
+		}
 	}
 
-	
-	
 }

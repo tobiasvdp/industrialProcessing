@@ -767,6 +767,8 @@ public class ConfigItems {
     }
 
 	public static void addToLanguageRegistry() {
+		LanguageRegistry.addName(ISetupItems.itemIronBracket , "Iron bracket");
+		LanguageRegistry.addName(ISetupItems.itemIronBowl , "Iron bowl");
 		LanguageRegistry.addName(ISetupItems.itemRemote , "Remote");
 		LanguageRegistry.addName(ISetupItems.itemTurbineBlades , "Turbine blades");
 		LanguageRegistry.addName(ISetupItems.itemIronBlade , "Iron blade");

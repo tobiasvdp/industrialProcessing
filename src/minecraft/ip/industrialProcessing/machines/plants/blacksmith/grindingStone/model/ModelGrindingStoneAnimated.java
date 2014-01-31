@@ -2,6 +2,8 @@ package ip.industrialProcessing.machines.plants.blacksmith.grindingStone.model;
 
 import ip.industrialProcessing.client.render.ModelAnimatedMachine;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector3f;
 
@@ -12,6 +14,54 @@ public class ModelGrindingStoneAnimated extends ModelAnimatedMachine {
 
     public ModelGrindingStoneAnimated() {
     }
+    
+    Icon icon = new Icon() {
+
+		@Override
+		public int getOriginY() {
+			return 0;
+		}
+
+		@Override
+		public int getOriginX() {
+			return 0;
+		}
+
+		@Override
+		public float getMinV() {
+			return 0.0f;
+		}
+
+		@Override
+		public float getMinU() {
+			return 0.0f;
+		}
+
+		@Override
+		public float getMaxV() {
+			return 1f;
+		}
+
+		@Override
+		public float getMaxU() {
+			return 1f;
+		}
+
+		@Override
+		public float getInterpolatedV(double d0) {
+			return (float) d0;
+		}
+
+		@Override
+		public float getInterpolatedU(double d0) {
+			return (float) d0;
+		}
+
+		@Override
+		public String getIconName() {
+			return "Booh";
+		}
+	};
 
     @Override
     public void renderModelAnimated(TileEntity tileEntity, float f5, float[] progressAr) {
@@ -23,9 +73,7 @@ public class ModelGrindingStoneAnimated extends ModelAnimatedMachine {
 	GL11.glPushMatrix();
 	GL11.glTranslatef(0, 1, 0);
 	GL11.glRotatef(progress * 360, 1, 0, 0);
-	if(tileEntity.getBlockType() != null){
-		cillinder.renderMesh(tileEntity.getBlockType().getIcon(0, 0)); 
-	}
+		cillinder.renderMesh(icon); 
 	GL11.glPopMatrix();
     }
 

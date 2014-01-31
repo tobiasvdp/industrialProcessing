@@ -1,6 +1,8 @@
 package ip.industrialProcessing.client;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderEntity;
+import net.minecraft.client.renderer.entity.RenderManager;
 import ip.industrialProcessing.CommonProxy;
 import ip.industrialProcessing.api.rendering.ModelMachine;
 import ip.industrialProcessing.api.rendering.RendererBlock;
@@ -388,7 +390,7 @@ public class ClientProxy extends CommonProxy {
 	ConfigRenderers.setRendererClassifierId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererClassifierId(), modelClassifierBlock));
 
-	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGrindingStone.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockGrindingStone, "ModelGrindingStoneAnimated", modelGrindingStoneAnimated));
+	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGrindingStone.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockGrindingStone, "GrindingStone", modelGrindingStoneAnimated));
 	ConfigRenderers.setRendererGrindingStoneId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererGrindingStoneId(), modelGrindingStone));
 
@@ -532,7 +534,7 @@ public class ClientProxy extends CommonProxy {
 	RenderingRegistry.registerEntityRenderingHandler(EntityFloatingCart.class, new RenderFloatingCart(new ModelFloatingCart(), 0.5F));
 	RenderingRegistry.registerEntityRenderingHandler(EntityGarageDoor.class, new RenderGarageDoor(new ModelEntityGarageDoor()));
 	
-	RenderingRegistry.registerEntityRenderingHandler(EntityBobcatMiner.class, new RendererEntity(new ModelBobcatMiner(), "ModelWheel"));
+	RenderingRegistry.registerEntityRenderingHandler(EntityBobcatMiner.class, new RendererEntity(new ModelBobcatMiner(), "ModelBobcatMinerHull"));
 
     }
 }

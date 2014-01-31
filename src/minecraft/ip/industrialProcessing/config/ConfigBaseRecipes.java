@@ -100,8 +100,9 @@ public class ConfigBaseRecipes {
 			IRecipe recipe = (IRecipe) recipes.next();
 			if (recipe.getRecipeOutput() != null && recipe.getRecipeOutput().itemID == Item.ingotIron.itemID) {
 				removal.add(recipe);
+			} else if (recipe.getRecipeOutput() != null && recipe.getRecipeOutput().itemID == Block.torchWood.blockID) {
+				removal.add(recipe);
 			} else {
-
 			}
 		}
 		for (IRecipe recipe : removal) {

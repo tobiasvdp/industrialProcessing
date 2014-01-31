@@ -20,17 +20,16 @@ import ip.industrialProcessing.subMod.mine.machines.EntityWorker;
 import ip.industrialProcessing.utils.BlockBreaker;
 import ip.industrialProcessing.utils.packets.PacketIP001EntityLocationAndRotation;
 
-public abstract class EntityMiner extends EntityWorker{
-	
+public abstract class EntityMiner extends EntityWorker {
+
 	public EntityMiner(World par1World) {
 		super(par1World);
 	}
 
-
 	public EntityMiner(World par1World, float x, float y, float z) {
-		super(par1World,x,y,z);
+		super(par1World, x, y, z);
 	}
-	
+
 	public void sendDestroyPacketToServer(ArrayList<int[]> blocks) {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream(8);
 		DataOutputStream outputStream = new DataOutputStream(bos);
@@ -63,40 +62,40 @@ public abstract class EntityMiner extends EntityWorker{
 		ForgeDirection left = forward.getRotation(ForgeDirection.UP);
 		ForgeDirection right = forward.getRotation(ForgeDirection.DOWN);
 
-		int x = (int) ((this.posX)-0.5);
+		int x = (int) ((this.posX) - 0.5);
 		int y = (int) (this.posY) + offsetY;
-		int z = (int) ((this.posZ)-0.5);
-		
-		if(forward == ForgeDirection.NORTH || ForgeDirection.SOUTH == forward){
-			x = (int) Math.round(((this.posX)-0.5));
+		int z = (int) ((this.posZ) - 0.5);
+
+		if (forward == ForgeDirection.NORTH || ForgeDirection.SOUTH == forward) {
+			x = (int) Math.round(((this.posX) - 0.5));
 		}
-		
-		if(forward == ForgeDirection.EAST || ForgeDirection.WEST == forward){
-			z = (int) Math.round(((this.posZ)-0.5));
+
+		if (forward == ForgeDirection.EAST || ForgeDirection.WEST == forward) {
+			z = (int) Math.round(((this.posZ) - 0.5));
 		}
 
 		for (int i = 0; i < upC; i++) {
 			// front
 			blocks.add(new int[] { x + forward.offsetX, y + forward.offsetY + i, z + forward.offsetZ });
-			blocks.add(new int[] { x + forward.offsetX + forward.offsetX, y + forward.offsetY + forward.offsetY + i, z + forward.offsetZ + forward.offsetZ });
+			blocks.add(new int[] { x, y + i, z });
 
 			// left
 			for (int j = 1; j <= leftC; j++) {
+				blocks.add(new int[] { x + j * left.offsetX, y + j * left.offsetY + i, z + j * left.offsetZ });
 				blocks.add(new int[] { x + forward.offsetX + j * left.offsetX, y + forward.offsetY + j * left.offsetY + i, z + forward.offsetZ + j * left.offsetZ });
-				blocks.add(new int[] { x + forward.offsetX + forward.offsetX + j * left.offsetX, y + forward.offsetY + i + forward.offsetY + j * left.offsetY, z + forward.offsetZ + forward.offsetZ + j * left.offsetZ });
 			}
 			// right
 			for (int j = 1; j <= rightc; j++) {
+				blocks.add(new int[] { x + j * right.offsetX, y + j * right.offsetY + i, z + j * right.offsetZ });
 				blocks.add(new int[] { x + forward.offsetX + j * right.offsetX, y + forward.offsetY + j * right.offsetY + i, z + forward.offsetZ + j * right.offsetZ });
-				blocks.add(new int[] { x + forward.offsetX + forward.offsetX + j * right.offsetX, y + forward.offsetY + i + forward.offsetY + j * right.offsetY, z + forward.offsetZ + forward.offsetZ + j * right.offsetZ });
 			}
 		}
 		return blocks;
 	}
 
 	@Override
-	public void onUpdate() {
-		super.onUpdate();
+	public void otherUpdates() {
+		super.otherUpdates();
 		if (worldObj.isRemote) {
 			if (riddenByEntity != null && riddenByEntity == mc.thePlayer) {
 				if (canWork()) {
@@ -112,10 +111,13 @@ public abstract class EntityMiner extends EntityWorker{
 
 		}
 	}
-	
+
 	public abstract int mineLeft();
+
 	public abstract int mineRight();
+
 	public abstract int mineUp();
+
 	public abstract int mineYOffset();
 
 }

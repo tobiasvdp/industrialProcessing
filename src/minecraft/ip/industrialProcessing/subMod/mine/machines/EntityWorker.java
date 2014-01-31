@@ -11,12 +11,17 @@ import net.minecraft.world.World;
 
 public abstract class EntityWorker extends EntityVehicle {
 	
-	boolean canWork = false;
+	protected boolean canWork = false;
 	int cooldowntime;
 	
 	public EntityWorker(World par1World) {
 		super(par1World);
 		cooldowntime = getMaxCooldownTime();
+	}
+	
+	@Override
+	public float getCollisionBorderSize() {
+		return 0.5f;
 	}
 
 
@@ -26,11 +31,11 @@ public abstract class EntityWorker extends EntityVehicle {
 	}
 	
 	@Override
-	public void onUpdate() {
-		super.onUpdate();
+	public void otherUpdates() {
+		super.otherUpdates();
 		cycleCooldown();
 		if(canWork){
-		this.stepHeight = getStepHeightAction();
+			this.stepHeight = getStepHeightAction();
 		}else{
 			this.stepHeight = getStepHeightRiding();
 		}
