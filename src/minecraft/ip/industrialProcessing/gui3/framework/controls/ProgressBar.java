@@ -102,7 +102,7 @@ public class ProgressBar extends Control implements IProgressBinding {
     public FluidTankInfo tank = new FluidTankInfo(null, 10000);
     private Rect backgroundRegion;
     private Rect overlayRegion;
-    private Orientation orientation = Orientation.HORIZONTAL;
+    public Orientation orientation = Orientation.HORIZONTAL;
     private Thickness backgroundThickness;
     public float value = 0.5f;
     public float maxValue = 1;

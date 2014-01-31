@@ -15,10 +15,17 @@ import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
 public class SlotItemControl extends Control {
 
     private static final TextureReference DEFAULT_SLOT_TEXTURE = new TextureReference(new Size(72, 18), IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/Slots.png");;
+    private static final TextureReference DEFAULT_BUTTON_SLOT_TEXTURE = new TextureReference(new Size(18, 54), IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/ButtonSlots.png");;
     private static final Rect DEFAULT_SLOT_SECTION = new Rect(0, 0, 0.25f, 1);
     private ItemStack item;
     private Rect section;
     private TextureReference texture;
+
+    public static Button createButtonSlot(ItemStack source, IButtonClickListener<ItemStack> slotClickListener) {
+	Button button = new Button<ItemStack>(DEFAULT_BUTTON_SLOT_TEXTURE, createItemstack(source), source);
+	button.subscribeClick(slotClickListener);
+	return button;
+    }
 
     public static SlotItemControl createSlot(ItemStack stack) {
 	return new SlotItemControl(stack, DEFAULT_SLOT_TEXTURE, DEFAULT_SLOT_SECTION);
@@ -62,4 +69,5 @@ public class SlotItemControl extends Control {
 	}
 	return null;
     }
+
 }

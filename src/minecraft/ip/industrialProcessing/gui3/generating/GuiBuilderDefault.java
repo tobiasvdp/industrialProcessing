@@ -5,7 +5,7 @@ import ip.industrialProcessing.gui3.containers.LayoutContainer;
 import ip.industrialProcessing.gui3.framework.Alignment;
 import ip.industrialProcessing.gui3.framework.Thickness;
 import ip.industrialProcessing.gui3.framework.controls.Decorator;
-import ip.industrialProcessing.gui3.framework.controls.ProgressBar;
+import ip.industrialProcessing.gui3.framework.controls.IButtonClickListener;
 import ip.industrialProcessing.gui3.framework.controls.TextBlock;
 import ip.industrialProcessing.gui3.framework.panels.GridPanel;
 import ip.industrialProcessing.gui3.framework.panels.GridSize;
@@ -39,6 +39,7 @@ import ip.industrialProcessing.recipes.Recipe;
 import java.util.ArrayList;
 
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
 public class GuiBuilderDefault implements IGuiBuilder {
@@ -249,7 +250,7 @@ public class GuiBuilderDefault implements IGuiBuilder {
     }
 
     @Override
-    public RecipeFrame getRecipePage(Recipe recipe) {
+    public RecipeFrame getRecipePage(Recipe recipe, IButtonClickListener<ItemStack> stackClickListener) {
 	StackPanel stackPanel = new StackPanel();
 	stackPanel.orientation = Orientation.VERTICAL;
 	DefaultPower.setup(powerRef, recipe, stackPanel);
@@ -260,13 +261,18 @@ public class GuiBuilderDefault implements IGuiBuilder {
 
 	int maxTankAmount = Math.max(DefaultTanks.getMaxAmount(recipe.inputs), DefaultTanks.getMaxAmount(recipe.outputs));
 
-	DefaultSlots.setup(this.inputSlots, recipe.inputs, grid, Alignment.MIN);
+	DefaultSlots.setup(this.inputSlots, recipe.inputs, grid, Alignment.MIN, stackClickListener);
 	DefaultTanks.setup(this.inputTanks, recipe.inputs, maxTankAmount, grid, Alignment.MIN);
 	DefaultWorker.setup(this.workerRef, recipe, grid, Alignment.CENTER);
 	DefaultTanks.setup(this.outputTanks, recipe.outputs, maxTankAmount, grid, Alignment.MAX);
-	DefaultSlots.setup(this.outputSlots, recipe.outputs, grid, Alignment.MAX);
+	DefaultSlots.setup(this.outputSlots, recipe.outputs, grid, Alignment.MAX, stackClickListener);
 	stackPanel.addChild(grid);
 	return new RecipeFrame(stackPanel, this.title);
+    }
+
+    @Override
+    public RecipeFrame getRecipePage(Recipe recipe) {
+	return getRecipePage(recipe, null);
     }
 
 }

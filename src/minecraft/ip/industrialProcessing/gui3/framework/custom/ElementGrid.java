@@ -1,6 +1,7 @@
 package ip.industrialProcessing.gui3.framework.custom;
 
 import ip.industrialProcessing.gui3.framework.UIElement;
+import ip.industrialProcessing.gui3.framework.controls.IButtonClickListener;
 import ip.industrialProcessing.gui3.framework.controls.SlotControl;
 import ip.industrialProcessing.gui3.framework.controls.SlotItemControl;
 import ip.industrialProcessing.gui3.framework.controls.UserControl;
@@ -23,9 +24,13 @@ public class ElementGrid extends UserControl {
     }
 
     public static ElementGrid createSlotItemGrid(ItemStack[] slots, int size, Orientation orientation) {
+	return createButtonSlotItemGrid(slots, size, orientation, null);
+    }
+
+    public static ElementGrid createButtonSlotItemGrid(ItemStack[] slots, int size, Orientation orientation, IButtonClickListener<ItemStack> stackClickListener) {
 	UIElement[] slotElements = new UIElement[slots.length];
 	for (int i = 0; i < slotElements.length; i++) {
-	    slotElements[i] = SlotItemControl.createSlot(slots[i]);
+	    slotElements[i] = stackClickListener == null || slots[i] == null ? SlotItemControl.createSlot(slots[i]) : SlotItemControl.createButtonSlot(slots[i], stackClickListener);
 	}
 	return new ElementGrid(slotElements, size, orientation);
     }

@@ -1,17 +1,14 @@
 package ip.industrialProcessing.gui3.framework.rendering;
 
-import ip.industrialProcessing.api.rendering.RendererBlock;
 import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.gui3.framework.Rect;
 import ip.industrialProcessing.gui3.framework.Thickness;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -228,9 +225,8 @@ public class GuiRenderer {
 	GL11.glDisable(GL11.GL_SCISSOR_TEST);
     }
 
-    public void drawModel(Rect size, Block model) {
-
-	ItemStack stack = new ItemStack(model);
+    public void drawModel(Rect size, ItemStack stack) {
+ 
 	float scaleW = size.width / 16;
 	float scaleH = size.height / 16;
 	float scale = Math.min(scaleW, scaleH);

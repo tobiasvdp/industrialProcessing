@@ -13,14 +13,12 @@ import ip.industrialProcessing.gui3.framework.panels.Orientation;
 import ip.industrialProcessing.gui3.framework.panels.StackPanel;
 import ip.industrialProcessing.gui3.framework.panels.tabs.TabPanel;
 import ip.industrialProcessing.gui3.generating.IGuiBlock;
-import ip.industrialProcessing.gui3.generating.IGuiBuilder;
-import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.recipes.IRecipeBlock;
-import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.utils.IDescriptionBlock;
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 
-public class MachineDetails extends UserControl implements IButtonClickListener<Block> {
+public class MachineDetails extends UserControl implements IButtonClickListener<ItemStack> {
 
     private TextBlock title;
     private TextBlock description;
@@ -53,7 +51,7 @@ public class MachineDetails extends UserControl implements IButtonClickListener<
 
 	recipeTabs = new TabPanel();
 	recipeTabs.margin = new Thickness(7, 0, 0, 0);
-	this.craftTab = new MachineCraftTab();
+	this.craftTab = new MachineCraftTab(this);
 	this.recipeTab = new MachineRecipesTab();
 	recipeTabs.addTab(craftTab);
 	recipeTabs.addTab(recipeTab);
@@ -64,25 +62,32 @@ public class MachineDetails extends UserControl implements IButtonClickListener<
     }
 
     @Override
-    public void buttonClicked(Button<Block> button, Block tag, float mouseX, float mouseY, MouseButton mouseButton) {
-	this.setBlock(tag);
+    public void buttonClicked(Button<ItemStack> button, ItemStack tag, float mouseX, float mouseY, MouseButton mouseButton) {
+	this.setItemStack(tag);
     }
 
-    public void setBlock(Block tag) {
+    public void setItemStack(ItemStack tag) {
 	recipeTabs.clear();
-	title.text = tag.getLocalizedName();
+	title.text = tag.getDisplayName();
 	render.model = tag;
-	if (tag instanceof IDescriptionBlock) {
-	    description.text = ((IDescriptionBlock) tag).getDescription();
-	    description.visibility = Visibility.VISIBLE;
+
+	recipeTabs.addTab(craftTab);
+	this.craftTab.setStack(tag);
+
+	if (tag.itemID < Block.blocksList.length) {
+	    Block block = Block.blocksList[tag.itemID];
+	    if (block instanceof IDescriptionBlock) {
+		description.text = ((IDescriptionBlock) block).getDescription();
+		description.visibility = Visibility.VISIBLE;
+	    } else
+		description.visibility = Visibility.COLLAPSED;
+	    if (block instanceof IRecipeBlock) {
+		this.recipeTabs.addTab(recipeTab);
+		this.recipeTab.setBlock(block);
+	    }
 	} else
 	    description.visibility = Visibility.COLLAPSED;
 
-	recipeTabs.addTab(craftTab);
-	this.craftTab.setBlock(tag);
-	if (tag instanceof IRecipeBlock)
-	    this.recipeTabs.addTab(recipeTab);
-	this.recipeTab.setBlock(tag);
     }
 
 }

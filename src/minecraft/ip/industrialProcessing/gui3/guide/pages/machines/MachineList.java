@@ -24,7 +24,7 @@ import net.minecraft.item.ItemStack;
 
 public class MachineList extends UserControl {
 
-    public MachineList(IButtonClickListener<Block> clickListener) {
+    public MachineList(IButtonClickListener<ItemStack> clickListener) {
 	this.width = Float.NaN;
 	this.height = Float.NaN;
 	this.isHittestVisible = true;
@@ -43,7 +43,7 @@ public class MachineList extends UserControl {
 		expander.content = machines;
 		for (Block block : blocks) {
 		    UIElement blockButton = createButton(block);
-		    Button button = new Button<Block>(blockButton, block);
+		    Button button = new Button<ItemStack>(blockButton, new ItemStack(block));
 		    button.subscribeClick(clickListener);
 		    machines.addChild(button);
 		}

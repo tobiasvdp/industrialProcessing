@@ -2,6 +2,8 @@ package ip.industrialProcessing.gui3.generating.builderParts;
 
 import ip.industrialProcessing.gui3.containers.LayoutContainer;
 import ip.industrialProcessing.gui3.framework.Alignment;
+import ip.industrialProcessing.gui3.framework.UIElement;
+import ip.industrialProcessing.gui3.framework.controls.IButtonClickListener;
 import ip.industrialProcessing.gui3.framework.controls.SlotControl;
 import ip.industrialProcessing.gui3.framework.controls.SlotItemControl;
 import ip.industrialProcessing.gui3.framework.custom.ElementGrid;
@@ -64,11 +66,11 @@ public class DefaultSlots {
 	return inventory;
     }
 
-    public static void setup(ArrayList<SlotClusterReference> slotRefs, RecipeSlot[] slots, GridPanel grid, Alignment min) {
+    public static void setup(ArrayList<SlotClusterReference> slotRefs, RecipeSlot[] slots, GridPanel grid, Alignment min, IButtonClickListener<ItemStack> stackClickListener) {
 	for (SlotClusterReference slot : slotRefs) {
 	    if (slot.slotCount == 1) {
 		ItemStack stack = getStack(slots, slot.startSlot);
-		SlotItemControl slotControl = SlotItemControl.createSlot(stack);
+		UIElement slotControl = (stackClickListener == null || stack == null) ? SlotItemControl.createSlot(stack) : SlotItemControl.createButtonSlot(stack, stackClickListener);
 		slotControl.horizontalAlign = min;
 		slotControl.verticalAlign = Alignment.CENTER;
 		grid.children.add(new GridCell(0, grid.columns.size(), slotControl));
@@ -78,7 +80,7 @@ public class DefaultSlots {
 		for (int i = 0; i < stacks.length; i++) {
 		    stacks[i] = getStack(slots, slot.startSlot + i);
 		}
-		ElementGrid slotGrid = ElementGrid.createSlotItemGrid(stacks, slot.size, slot.orientation);
+		ElementGrid slotGrid = stackClickListener == null ? ElementGrid.createSlotItemGrid(stacks, slot.size, slot.orientation) :ElementGrid.createButtonSlotItemGrid(stacks, slot.size, slot.orientation, stackClickListener);
 		slotGrid.horizontalAlign = min;
 		slotGrid.verticalAlign = Alignment.CENTER;
 		grid.children.add(new GridCell(0, grid.columns.size(), slotGrid));

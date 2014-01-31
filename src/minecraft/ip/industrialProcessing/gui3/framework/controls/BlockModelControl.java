@@ -3,12 +3,12 @@ package ip.industrialProcessing.gui3.framework.controls;
 import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.gui3.framework.Rect;
 import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
-import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 
 public class BlockModelControl extends Control {
-    public Block model;
+    public ItemStack model;
 
-    public BlockModelControl(Block model) {
+    public BlockModelControl(ItemStack model) {
 	this.model = model;
     }
 
