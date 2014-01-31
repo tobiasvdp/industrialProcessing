@@ -46,7 +46,7 @@ public class TileEntityMagneticSeparator extends TileEntityPoweredFluidWorkerMac
 
 	@Override
 	public Iterator<Recipe> iterateRecipes() {
-		return recipes.iterator();
+		return recipes.getRecipes();
 	}
 
 	@Override

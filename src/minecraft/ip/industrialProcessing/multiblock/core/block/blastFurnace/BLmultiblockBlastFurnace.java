@@ -1,18 +1,18 @@
 package ip.industrialProcessing.multiblock.core.block.blastFurnace;
 
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import net.minecraft.world.World;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.multiblock.core.BlockMultiblockCore;
-import ip.industrialProcessing.multiblock.recipes.IRecipeMultiblock;
 import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
+import ip.industrialProcessing.recipes.IRecipeBlock;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
+import net.minecraft.world.World;
 
-public class BLmultiblockBlastFurnace extends BlockMultiblockCore implements IRecipeMultiblock{
+public class BLmultiblockBlastFurnace extends BlockMultiblockCore implements IRecipeBlock{
     Icon[] icons = new Icon[6];
 
     public BLmultiblockBlastFurnace() {

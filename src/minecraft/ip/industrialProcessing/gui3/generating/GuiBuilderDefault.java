@@ -14,6 +14,8 @@ import ip.industrialProcessing.gui3.framework.panels.Orientation;
 import ip.industrialProcessing.gui3.framework.panels.SizeMode;
 import ip.industrialProcessing.gui3.framework.panels.StackPanel;
 import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
+import ip.industrialProcessing.gui3.generating.builderParts.BurnerReference;
+import ip.industrialProcessing.gui3.generating.builderParts.DefaultBurner;
 import ip.industrialProcessing.gui3.generating.builderParts.DefaultDurability;
 import ip.industrialProcessing.gui3.generating.builderParts.DefaultGauges;
 import ip.industrialProcessing.gui3.generating.builderParts.DefaultHeat;
@@ -34,7 +36,7 @@ import ip.industrialProcessing.gui3.generating.builderParts.StateButtonReference
 import ip.industrialProcessing.gui3.generating.builderParts.TankReference;
 import ip.industrialProcessing.gui3.generating.builderParts.WorkerReference;
 import ip.industrialProcessing.gui3.guide.pages.RecipeFrame;
-import ip.industrialProcessing.recipes.Recipe;
+import ip.industrialProcessing.recipes.IMachineRecipe;
 
 import java.util.ArrayList;
 
@@ -45,9 +47,20 @@ import net.minecraft.tileentity.TileEntity;
 public class GuiBuilderDefault implements IGuiBuilder {
 
     private String title;
+    private final TextureReference WORKER_TEXTURE;
+
+    public GuiBuilderDefault(Class blockClass) {
+	this(blockClass, blockClass.getSimpleName());
+    }
+
+    public GuiBuilderDefault(Class blockClass, String title) {
+	this.WORKER_TEXTURE = TextureReference.createDefault(blockClass.getSimpleName() + ".png", 24, 32);
+	this.title = title;
+    }
 
     public GuiBuilderDefault(String title) {
 	this.title = title;
+	WORKER_TEXTURE = TextureReference.createDefault("Worker.png", 24, 32);
     }
 
     private ArrayList<SlotClusterReference> inputSlots = new ArrayList<SlotClusterReference>();
@@ -63,6 +76,7 @@ public class GuiBuilderDefault implements IGuiBuilder {
     private PowerReference powerRef;
     private DurabilityReference durabilityRef;
     private InventoryReference inventoryRef = new InventoryReference(true);
+    private BurnerReference burnerRef;
 
     public GuiBuilderDefault disableInventory() {
 	this.inventoryRef = null;
@@ -77,6 +91,11 @@ public class GuiBuilderDefault implements IGuiBuilder {
 
     public GuiBuilderDefault enableWorker(TextureReference texture) {
 	this.workerRef = new WorkerReference(texture);
+	return this;
+    }
+
+    public GuiBuilderDefault enableWorker() {
+	this.workerRef = new WorkerReference(WORKER_TEXTURE);
 	return this;
     }
 
@@ -197,6 +216,7 @@ public class GuiBuilderDefault implements IGuiBuilder {
 	grid.rows.add(new GridSize(54, SizeMode.ABSOLUTE));
 	grid.horizontalAlign = Alignment.STRETCH;
 
+	DefaultBurner.setup(this.burnerRef, guiContainer, tileEntity, grid, Alignment.MIN);
 	DefaultDurability.setup(durabilityRef, guiContainer, titleDurabilityStack);
 	DefaultHeat.setup(heatRef, guiContainer, grid, Alignment.MIN);
 	DefaultGauges.setup(this.gauges, guiContainer, container, grid, Alignment.CENTER);
@@ -233,6 +253,7 @@ public class GuiBuilderDefault implements IGuiBuilder {
 
 	LayoutContainer container = new LayoutContainer();
 	DefaultDurability.setup(this.durabilityRef, container, tileEntity);
+	DefaultBurner.setup(this.burnerRef, container, tileEntity);
 	DefaultTanks.setup(this.inputTanks, container, tileEntity);
 	DefaultTanks.setup(this.outputTanks, container, tileEntity);
 	DefaultSlots.setup(this.inputSlots, container, tileEntity, true);
@@ -250,7 +271,7 @@ public class GuiBuilderDefault implements IGuiBuilder {
     }
 
     @Override
-    public RecipeFrame getRecipePage(Recipe recipe, IButtonClickListener<ItemStack> stackClickListener) {
+    public RecipeFrame getRecipePage(IMachineRecipe recipe, IButtonClickListener<ItemStack> stackClickListener) {
 	StackPanel stackPanel = new StackPanel();
 	stackPanel.orientation = Orientation.VERTICAL;
 	DefaultPower.setup(powerRef, recipe, stackPanel);
@@ -259,20 +280,25 @@ public class GuiBuilderDefault implements IGuiBuilder {
 	grid.rows.add(new GridSize(54, SizeMode.ABSOLUTE));
 	DefaultHeat.setup(this.heatRef, recipe, grid, Alignment.MIN);
 
-	int maxTankAmount = Math.max(DefaultTanks.getMaxAmount(recipe.inputs), DefaultTanks.getMaxAmount(recipe.outputs));
+	int maxTankAmount = Math.max(DefaultTanks.getMaxAmount(recipe.getInputs()), DefaultTanks.getMaxAmount(recipe.getOutputs()));
 
-	DefaultSlots.setup(this.inputSlots, recipe.inputs, grid, Alignment.MIN, stackClickListener);
-	DefaultTanks.setup(this.inputTanks, recipe.inputs, maxTankAmount, grid, Alignment.MIN);
+	DefaultSlots.setup(this.inputSlots, recipe.getInputs(), grid, Alignment.MIN, stackClickListener);
+	DefaultTanks.setup(this.inputTanks, recipe.getInputs(), maxTankAmount, grid, Alignment.MIN);
 	DefaultWorker.setup(this.workerRef, recipe, grid, Alignment.CENTER);
-	DefaultTanks.setup(this.outputTanks, recipe.outputs, maxTankAmount, grid, Alignment.MAX);
-	DefaultSlots.setup(this.outputSlots, recipe.outputs, grid, Alignment.MAX, stackClickListener);
+	DefaultTanks.setup(this.outputTanks, recipe.getOutputs(), maxTankAmount, grid, Alignment.MAX);
+	DefaultSlots.setup(this.outputSlots, recipe.getOutputs(), grid, Alignment.MAX, stackClickListener);
 	stackPanel.addChild(grid);
 	return new RecipeFrame(stackPanel, this.title);
     }
 
     @Override
-    public RecipeFrame getRecipePage(Recipe recipe) {
+    public RecipeFrame getRecipePage(IMachineRecipe recipe) {
 	return getRecipePage(recipe, null);
+    }
+
+    public GuiBuilderDefault enableBurner(int lighterSlot, int fuelSlot, int ashSlot) {
+	this.burnerRef = new BurnerReference(lighterSlot, fuelSlot, ashSlot);
+	return this;
     }
 
 }

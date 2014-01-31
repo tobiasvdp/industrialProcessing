@@ -38,7 +38,7 @@ public class TileEntityAlkylationUnit extends TileEntityPoweredFluidWorkerMachin
 
 	@Override
 	public Iterator<Recipe> iterateRecipes() {
-		return recipes.iterator();
+		return recipes.getRecipes();
 	}
 
 	@Override

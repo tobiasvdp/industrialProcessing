@@ -11,7 +11,7 @@ import ip.industrialProcessing.gui3.framework.panels.GridCell;
 import ip.industrialProcessing.gui3.framework.panels.GridPanel;
 import ip.industrialProcessing.gui3.framework.panels.GridSize;
 import ip.industrialProcessing.gui3.framework.panels.SizeMode;
-import ip.industrialProcessing.recipes.Recipe;
+import ip.industrialProcessing.recipes.IMachineRecipe;
 import ip.industrialProcessing.utils.working.IWorkingEntity;
 import net.minecraft.tileentity.TileEntity;
 
@@ -43,11 +43,11 @@ public class DefaultWorker {
 	}
     }
 
-    public static void setup(WorkerReference workerRef, Recipe recipe, GridPanel grid, Alignment center) {
+    public static void setup(WorkerReference workerRef, IMachineRecipe recipe, GridPanel grid, Alignment center) {
 	if (workerRef != null) {
 	    ProgressBar workBar = ProgressBar.createWorker(workerRef.workerTexture);
-	    workBar.value = recipe.workRequired;
-	    workBar.maxValue = recipe.workRequired;
+	    workBar.value = recipe.getWorkRequired();
+	    workBar.maxValue = recipe.getWorkRequired();
 	    workBar.horizontalAlign = center;
 	    grid.children.add(new GridCell(0, grid.columns.size(), workBar));
 	    grid.columns.add(new GridSize(1, SizeMode.RELATIVE));

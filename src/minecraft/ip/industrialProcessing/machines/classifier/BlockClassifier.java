@@ -12,6 +12,7 @@ import ip.industrialProcessing.gui3.generating.IGuiBlock;
 import ip.industrialProcessing.gui3.generating.IGuiBuilder;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.recipes.IMachineRecipes;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 import ip.industrialProcessing.utils.IDescriptionBlock;
 import net.minecraft.block.Block;
@@ -55,7 +56,7 @@ public class BlockClassifier extends BlockMachineRendered implements IRecipeBloc
     }
 
     @Override
-    public RecipesMachine getRecipes() {
+    public IMachineRecipes getRecipes() {
 	return TileEntityClassifier.recipes;
     }
 

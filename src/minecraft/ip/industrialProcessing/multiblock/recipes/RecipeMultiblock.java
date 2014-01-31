@@ -6,11 +6,13 @@ import ip.industrialProcessing.recipes.RecipeInputSlot;
 import ip.industrialProcessing.recipes.RecipeOutputSlot;
 
 public class RecipeMultiblock extends Recipe {
-public RecipeMultiblock() {
+    public RecipeMultiblock() {
 	super();
-}
-public RecipeMultiblock(RecipeInputSlot[] input, RecipeOutputSlot[] output,int work, int power,Tiers tier) {
-	super(input, output, work, power);
-}
-public Tiers tier;
+    }
+
+    public RecipeMultiblock(RecipeInputSlot[] input, RecipeOutputSlot[] output, int work, Tiers tier) {
+	super(input, output, work);
+    }
+
+    public Tiers tier;
 }

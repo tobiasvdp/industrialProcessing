@@ -1,7 +1,6 @@
 package ip.industrialProcessing.gui3.guide.pages.machines;
 
 import ip.industrialProcessing.gui3.framework.Thickness;
-import ip.industrialProcessing.gui3.framework.Visibility;
 import ip.industrialProcessing.gui3.framework.controls.Button;
 import ip.industrialProcessing.gui3.framework.controls.IButtonClickListener;
 import ip.industrialProcessing.gui3.framework.controls.SlotItemControl;
@@ -10,22 +9,23 @@ import ip.industrialProcessing.gui3.framework.controls.UserControl;
 import ip.industrialProcessing.gui3.framework.panels.MouseButton;
 import ip.industrialProcessing.gui3.framework.panels.Orientation;
 import ip.industrialProcessing.gui3.framework.panels.ScrollPanel;
-import ip.industrialProcessing.gui3.framework.panels.ScrollPanel;
 import ip.industrialProcessing.gui3.framework.panels.StackPanel;
 import ip.industrialProcessing.gui3.framework.panels.WrapPanel;
 import ip.industrialProcessing.gui3.framework.panels.tabs.TabPage;
 import ip.industrialProcessing.gui3.generating.IGuiBlock;
 import ip.industrialProcessing.gui3.generating.IGuiBuilder;
-import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.recipes.IMachineRecipe;
+import ip.industrialProcessing.recipes.IMachineRecipes;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 import ip.industrialProcessing.recipes.Recipe;
+import ip.industrialProcessing.recipes.RecipeInputSlot;
 import ip.industrialProcessing.recipes.RecipeOutputSlot;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
-public class MachineRecipesTab extends TabPage implements IButtonClickListener<Recipe> {
+public class MachineRecipesTab extends TabPage implements IButtonClickListener<IMachineRecipe> {
 
     private WrapPanel wrapPanel;
     private Block block;
@@ -41,7 +41,7 @@ public class MachineRecipesTab extends TabPage implements IButtonClickListener<R
 	scroll.allowHorizontalScroll = false;
 	scroll.allowVerticalScroll = true;
 	scroll.maxHeight = 18 * 2 + 2;
-	scroll.minHeight = 18 * 2 + 2; 
+	scroll.minHeight = 18 * 2 + 2;
 	scroll.content = wrapPanel;
 	stack.addChild(scroll);
 	this.recipeDock = new UserControl();
@@ -56,20 +56,22 @@ public class MachineRecipesTab extends TabPage implements IButtonClickListener<R
 	this.wrapPanel.clear();
 	this.recipeDock.child = null;
 	if (tag instanceof IRecipeBlock) {
-	    RecipesMachine recipes = ((IRecipeBlock) tag).getRecipes();
+	    IMachineRecipes recipes = ((IRecipeBlock) tag).getRecipes();
 
 	    for (int i = 0; i < recipes.size(); i++) {
-		Recipe recipe = recipes.get(i);
-		if (recipe.outputs != null && recipe.outputs.length > 0) {
+		IMachineRecipe recipe = recipes.get(i);
+
+		RecipeOutputSlot[] outputs = recipe.getOutputs();
+		if (outputs != null && outputs.length > 0) {
 
 		    StackPanel outputStack = new StackPanel();
 		    outputStack.orientation = Orientation.HORIZONTAL;
-		    for (int j = 0; j < recipe.outputs.length; j++) {
-			ItemStack stack = getStack(recipe.outputs[j]);
+		    for (int j = 0; j < outputs.length; j++) {
+			ItemStack stack = getStack(outputs[j]);
 			outputStack.addChild(SlotItemControl.createItemstack(stack));
 		    }
 
-		    Button button = new Button<Recipe>(outputStack, recipe);
+		    Button button = new Button<IMachineRecipe>(outputStack, recipe);
 		    button.subscribeClick(this);
 		    wrapPanel.addChild(button);
 		}
@@ -91,7 +93,7 @@ public class MachineRecipesTab extends TabPage implements IButtonClickListener<R
     }
 
     @Override
-    public void buttonClicked(Button<Recipe> button, Recipe tag, float mouseX, float mouseY, MouseButton mouseButton) {
+    public void buttonClicked(Button<IMachineRecipe> button, IMachineRecipe tag, float mouseX, float mouseY, MouseButton mouseButton) {
 	if (block instanceof IGuiBlock && tag != null) {
 	    IGuiBuilder builder = ((IGuiBlock) this.block).getGui();
 	    this.recipeDock.child = builder.getRecipePage(tag);

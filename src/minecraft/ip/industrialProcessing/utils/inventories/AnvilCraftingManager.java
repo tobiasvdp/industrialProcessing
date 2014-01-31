@@ -13,9 +13,9 @@ import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.world.World;
 
-public class CraftingManager {
+public class AnvilCraftingManager {
 	    /** The static instance of this class */
-	    private static final CraftingManager instance = new CraftingManager();
+	    private static final AnvilCraftingManager instance = new AnvilCraftingManager();
 
 	    /** A list of all the recipes added */
 	    private List recipes = new ArrayList();
@@ -23,12 +23,12 @@ public class CraftingManager {
 	    /**
 	     * Returns the static instance of this class
 	     */
-	    public static final CraftingManager getInstance()
+	    public static final AnvilCraftingManager getInstance()
 	    {
 	        return instance;
 	    }
 
-	    private CraftingManager()
+	    private AnvilCraftingManager()
 	    {
 	        
 	    }

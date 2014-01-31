@@ -45,7 +45,7 @@ public abstract class TileEntityMultiblockCoreTankWorker extends TileEntityMulti
 
     @Override
     public Iterator<RecipeMultiblock> iterateRecipes() {
-	return recipe.iterator();
+	return recipe.getRecipes();
     }
 
     @Override

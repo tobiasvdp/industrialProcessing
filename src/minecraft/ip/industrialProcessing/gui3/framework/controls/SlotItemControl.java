@@ -1,10 +1,5 @@
 package ip.industrialProcessing.gui3.framework.controls;
 
-import java.util.List;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.item.ItemStack;
-import ic2.api.item.Items;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.gui3.framework.Rect;
@@ -12,11 +7,15 @@ import ip.industrialProcessing.gui3.framework.Size;
 import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
 import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
 
+import java.util.List;
+
+import net.minecraft.item.ItemStack;
+
 public class SlotItemControl extends Control {
 
     private static final TextureReference DEFAULT_SLOT_TEXTURE = new TextureReference(new Size(72, 18), IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/Slots.png");;
     private static final TextureReference DEFAULT_BUTTON_SLOT_TEXTURE = new TextureReference(new Size(18, 54), IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/ButtonSlots.png");;
-    private static final Rect DEFAULT_SLOT_SECTION = new Rect(0, 0, 0.25f, 1);
+    private static final Rect DEFAULT_SLOT_SECTION = SlotControl.DEFAULT_SLOT_SECTION;
     private ItemStack item;
     private Rect section;
     private TextureReference texture;

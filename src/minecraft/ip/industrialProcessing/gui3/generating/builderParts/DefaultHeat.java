@@ -12,6 +12,7 @@ import ip.industrialProcessing.gui3.framework.panels.GridPanel;
 import ip.industrialProcessing.gui3.framework.panels.GridSize;
 import ip.industrialProcessing.gui3.framework.panels.SizeMode;
 import ip.industrialProcessing.recipes.IHeatRecipe;
+import ip.industrialProcessing.recipes.IMachineRecipe;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.utils.handler.heat.IHeated;
 import net.minecraft.tileentity.TileEntity;
@@ -45,7 +46,7 @@ public class DefaultHeat {
 	return heated;
     }
 
-    public static void setup(HeatedReference heatRef, Recipe recipe, GridPanel grid, Alignment min) {
+    public static void setup(HeatedReference heatRef, IMachineRecipe recipe, GridPanel grid, Alignment min) {
 	if (heatRef != null) {
 	    IHeatRecipe heatRecipe = getHeatRecipe(recipe);
 	    int minTemperature = 0;
@@ -58,7 +59,7 @@ public class DefaultHeat {
 	}
     }
 
-    private static IHeatRecipe getHeatRecipe(Recipe recipe) {
+    private static IHeatRecipe getHeatRecipe(IMachineRecipe recipe) {
 	IHeatRecipe heatRecipe = null;
 	if (recipe instanceof IHeatRecipe)
 	    heatRecipe = (IHeatRecipe) recipe;

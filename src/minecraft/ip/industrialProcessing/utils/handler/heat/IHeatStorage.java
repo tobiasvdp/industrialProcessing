@@ -1,8 +1,9 @@
 package ip.industrialProcessing.utils.handler.heat;
 
+import ip.industrialProcessing.utils.handler.fuel.IBurner;
 import net.minecraft.item.ItemStack;
 
-public interface IHeatStorage extends IHeated{
+public interface IHeatStorage extends IHeated, IBurner{
 	//in update transfer heat from fuel to environement
 	public void transferHeat();
 	
@@ -20,12 +21,10 @@ public interface IHeatStorage extends IHeated{
 
 	
 	//burnTime
-	public int getBurnTime();
 	public void setBurnTime(int val);
 	
 	
 	//max burntime
-	public int getMaxBurnTime();
 	public void setMaxBurnTime(int val);
 	
 	//set the required Heat Level

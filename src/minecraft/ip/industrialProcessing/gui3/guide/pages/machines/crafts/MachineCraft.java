@@ -1,20 +1,21 @@
 package ip.industrialProcessing.gui3.guide.pages.machines.crafts;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
 import ip.industrialProcessing.gui3.framework.UIElement;
 import ip.industrialProcessing.gui3.framework.controls.IButtonClickListener;
 import ip.industrialProcessing.gui3.framework.controls.TextBlock;
 import ip.industrialProcessing.gui3.generating.IGuiBlock;
 import ip.industrialProcessing.gui3.generating.IGuiBuilder;
+import ip.industrialProcessing.recipes.IMachineRecipe;
 import ip.industrialProcessing.recipes.Recipe;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 
 public class MachineCraft implements ICraftBase {
 
     private Block block;
-    private Recipe recipe;
+    private IMachineRecipe recipe;
 
-    public MachineCraft(Block craftingBlock, Recipe recipe) {
+    public MachineCraft(Block craftingBlock, IMachineRecipe recipe) {
 	this.block = craftingBlock;
 	this.recipe = recipe;
     }

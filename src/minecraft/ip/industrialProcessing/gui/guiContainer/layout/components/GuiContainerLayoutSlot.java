@@ -1,14 +1,15 @@
 package ip.industrialProcessing.gui.guiContainer.layout.components;
 
+import ip.industrialProcessing.gui.container.slot.layout.SlotLayout;
+import ip.industrialProcessing.gui.guiContainer.layout.GuiContainerLayout;
+import ip.industrialProcessing.recipes.Recipe;
+
 import java.awt.Rectangle;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import ip.industrialProcessing.gui.container.slot.layout.SlotLayout;
-import ip.industrialProcessing.gui.guiContainer.layout.GuiContainerLayout;
-import ip.industrialProcessing.items.guide.gui.machines.GuideMachinePage;
-import ip.industrialProcessing.recipes.Recipe;
 
 public class GuiContainerLayoutSlot extends GuiContainerLayout {
 
@@ -18,25 +19,7 @@ public class GuiContainerLayoutSlot extends GuiContainerLayout {
 		for (int i = 0; i < rect.size(); i++) {
 			GuiContainerDrawRectagle rectangle = rect.get(i);
 			gui.drawTexturedModalRect(rectangle.destination.x + x, rectangle.destination.y + y, rectangle.origin.x, rectangle.origin.y, rectangle.origin.width, rectangle.origin.height);
-		}
-		if (gui instanceof GuideMachinePage) {
-			Slot[] slots = slotLayout.getGuiContainerLayout();
-			int i = 0;
-			for (Slot slot:slots){
-				ItemStack stack = hasIndex(slot.getSlotIndex(),recipe);
-				if(stack != null){
-					GuiContainerDrawRectagle rectangle = rect.get(i);
-					((GuideMachinePage) gui).drawItemstack(stack, rectangle.destination.x + x +1, rectangle.destination.y + y + 1);
-					Rectangle target = new Rectangle(rectangle.destination.x + x +1, rectangle.destination.y + y + 1, 16, 16);
-					if (target.contains(mouseX, mouseY)) {
-						((GuideMachinePage) gui).hoverToolTipStack = stack;
-					}
-				}
-				i++;
-			}
-					
-			((GuideMachinePage) gui).setTextureLayout();
-		}
+		} 
 	}
 	
 	public ItemStack hasIndex(int index, Recipe recipe){

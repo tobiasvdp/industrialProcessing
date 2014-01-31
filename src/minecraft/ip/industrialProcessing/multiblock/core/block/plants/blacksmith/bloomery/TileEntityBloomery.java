@@ -76,7 +76,7 @@ public class TileEntityBloomery extends TileEntityMultiblockCoreTankWorker imple
 
 	@Override
 	public Iterator<RecipeMultiblock> iterateRecipes() {
-		return recipes.iterator();
+		return recipes.getRecipes();
 	}
 
 	@Override

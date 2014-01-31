@@ -4,6 +4,7 @@ import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.items.ItemBattery;
 import ip.industrialProcessing.power.IPoweredMachine;
 import ip.industrialProcessing.power.PowerHelper;
+import ip.industrialProcessing.recipes.IPowerRecipe;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeWorker;
 import ip.industrialProcessing.subMod.logic.api.network.interfaces.InterfaceType;
@@ -69,20 +70,22 @@ public abstract class TileEntityPoweredWorkerMachine extends TileEntityWorkerMac
             status = StatusType.working;
             int amount = PowerWorkerHelper.getWork(this.storage, this.maxWorkSpeed);
             int maxWork = this.storage.drainPower(amount, false);
+            
+            if (recipe instanceof IPowerRecipe) {
+		IPowerRecipe powerRecipe = (IPowerRecipe) recipe;
+		if (powerRecipe.getPowerRequired() > 0)
+		    maxWork /= powerRecipe.getPowerRequired();
+		else
+		    maxWork = this.maxWorkSpeed;
+	    } else
+		maxWork = this.maxWorkSpeed;
 
-            if (recipe.powerRequired > 0) {
-                maxWork /= recipe.powerRequired;
-                if (maxWork == 0)
-                    status = StatusType.lowPower;
-            } else
-                maxWork = this.maxWorkSpeed;
-
-            int maxPower = work(maxWork);
-
-            if (recipe.powerRequired > 0) {
-                maxPower *= recipe.powerRequired;
-                this.storage.drainPower(maxPower, true);
-            }
+	    int maxPower = work(maxWork);
+	    if (recipe instanceof IPowerRecipe) {
+		IPowerRecipe powerRecipe = (IPowerRecipe) recipe;
+		maxPower *= powerRecipe.getPowerRequired();
+		this.storage.drainPower(maxPower, true);
+	    }
 
         } else
             status = StatusType.idle;

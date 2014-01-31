@@ -12,7 +12,8 @@ import ip.industrialProcessing.gui3.framework.custom.PowerControl;
 import ip.industrialProcessing.gui3.framework.panels.LayerPanel;
 import ip.industrialProcessing.gui3.framework.panels.StackPanel;
 import ip.industrialProcessing.power.IPoweredMachine;
-import ip.industrialProcessing.recipes.Recipe;
+import ip.industrialProcessing.recipes.IMachineRecipe;
+import ip.industrialProcessing.recipes.IPowerRecipe;
 import ip.industrialProcessing.slots.SlotBase;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
@@ -70,14 +71,24 @@ public class DefaultPower {
 	}
     }
 
-    public static void setup(PowerReference powerRef, Recipe recipe, StackPanel stackPanel) {
-	if (powerRef != null && recipe.powerRequired > 0) {
+    public static void setup(PowerReference powerRef, IMachineRecipe recipe, StackPanel stackPanel) {
+	int powerRequired = getPowerRequired(recipe);
+
+	if (powerRef != null && powerRequired > 0) {
 	    ProgressBar powerControl = ProgressBar.createHorizontal1();
 	    powerControl.tooltip = "%.0fJoules";
 	    powerControl.horizontalAlign = Alignment.MAX;
-	    powerControl.value = recipe.powerRequired*recipe.workRequired;
-	    powerControl.maxValue = recipe.powerRequired*recipe.workRequired;
+	    powerControl.value = powerRequired * recipe.getWorkRequired();
+	    powerControl.maxValue = powerRequired * recipe.getWorkRequired();
 	    stackPanel.addChild(powerControl);
 	}
+    }
+
+    private static int getPowerRequired(IMachineRecipe recipe) {
+	if (recipe instanceof IPowerRecipe) {
+	    IPowerRecipe powerRecipe = (IPowerRecipe) recipe;
+	    return powerRecipe.getPowerRequired();
+	}
+	return 0;
     }
 }

@@ -24,6 +24,6 @@ public class TileEntityWireMill extends TileEntityPoweredWorkerMachine {
 
     @Override
     public Iterator<Recipe> iterateRecipes() {
-	return recipes.iterator();
+	return recipes.getRecipes();
     }
 }

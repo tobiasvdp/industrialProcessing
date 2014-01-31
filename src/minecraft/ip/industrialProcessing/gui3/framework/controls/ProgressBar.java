@@ -33,11 +33,18 @@ public class ProgressBar extends Control implements IProgressBinding {
     private static final TextureReference DEFAULT_THERMOMETER_TEXTURE = new TextureReference(new Size(30, 54), IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/Thermometer.png");
     private static final Rect DEFAULT_THERMOMETER_BACKGROUND = new Rect(0, 0, 0.5f, 1);
     private static final Rect DEFAULT_THERMOMETER_FOREGROUND = new Rect(0.5f, 0, 0.5f, 1);
-    private static final Thickness DEFAULT_THICKNESS = new Thickness(1, 1, 1, 1);
     private static final Thickness DEFAULT_THERMOMETER_THICKNESS = new Thickness(1, 5, 18, 5);
+
+    private static final TextureReference DEFAULT_BURNER_TEXTURE = new TextureReference(new Size(14, 30), IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/Burner.png");
+    private static final Rect DEFAULT_BURNER_BACKGROUND = new Rect(0, 0, 1, 0.5f);
+    private static final Rect DEFAULT_BURNER_FOREGROUND = new Rect(0, 0.5f, 1, 0.5f);
+    private static final Thickness DEFAULT_BURNER_THICKNESS = new Thickness(0, 0, 0, 0);
+
     private static final Rect DEFAULT_WORKER_VERTICAL_BACKGROUND = new Rect(0, 0, 1f, 0.5f);
     private static final Rect DEFAULT_WORKER_VERTICAL_FOREGROUND = new Rect(0, 0.5f, 1f, 0.5f);
     private static final Thickness DEFAULT_WORKER_THICKNESS = new Thickness(0, 0, 0, 0);
+
+    private static final Thickness DEFAULT_THICKNESS = new Thickness(1, 1, 1, 1);
 
     public static ProgressBar createVertical1() {
 	ProgressBar bar = new ProgressBar(DEFAULT_VERTICAL_GENERIC_TEXTURE, DEFAULT_VERTICAL_GENERIC_RECT_BACKGROUND, DEFAULT_VERTICAL_GENERIC_RECT_FOREGROUND_1, Orientation.VERTICAL, DEFAULT_THICKNESS);
@@ -85,14 +92,22 @@ public class ProgressBar extends Control implements IProgressBinding {
 	ProgressBar bar = new ProgressBar(DEFAULT_THERMOMETER_TEXTURE, DEFAULT_THERMOMETER_BACKGROUND, DEFAULT_THERMOMETER_FOREGROUND, Orientation.VERTICAL, DEFAULT_THERMOMETER_THICKNESS);
 	bar.width = 15;
 	bar.height = 54;
-	bar.tooltip = "%.2f/%.2f°C";
+	bar.tooltip = "%.0f/%.0f°C";
+	return bar;
+    }
+
+    public static ProgressBar createBurner() {
+	ProgressBar bar = new ProgressBar(DEFAULT_BURNER_TEXTURE, DEFAULT_BURNER_BACKGROUND, DEFAULT_BURNER_FOREGROUND, Orientation.VERTICAL, DEFAULT_BURNER_THICKNESS);
+	bar.width = 14;
+	bar.height = 15;
+	bar.tooltip = "%.0f/%.0f";
 	return bar;
     }
 
     public static ProgressBar createWorker(TextureReference texture) {
 	ProgressBar bar = new ProgressBar(texture, DEFAULT_WORKER_VERTICAL_BACKGROUND, DEFAULT_WORKER_VERTICAL_FOREGROUND, Orientation.HORIZONTAL, DEFAULT_WORKER_THICKNESS);
 	bar.width = texture.size.width * DEFAULT_WORKER_VERTICAL_BACKGROUND.width;
-	bar.height =  texture.size.height * DEFAULT_WORKER_VERTICAL_BACKGROUND.height;
+	bar.height = texture.size.height * DEFAULT_WORKER_VERTICAL_BACKGROUND.height;
 	bar.name = "IP.Gui.Work";
 	bar.tooltip = "%.0f/%.0f";
 	return bar;
@@ -135,7 +150,7 @@ public class ProgressBar extends Control implements IProgressBinding {
     protected void renderOverride(Rect size, GuiRenderer renderer) {
 	renderer.drawNineGrid(size, this.backgroundThickness, backgroundRegion, texture);
 	float progress = this.value / this.maxValue;
-
+	// TODO: something wrong with the thickness here.
 	progress = Math.max(0, Math.min(progress, 1));
 	float uPixel = 1 / texture.size.width;
 	float vPixel = 1 / texture.size.height;

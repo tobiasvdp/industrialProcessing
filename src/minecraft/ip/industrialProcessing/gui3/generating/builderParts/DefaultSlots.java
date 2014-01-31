@@ -80,11 +80,11 @@ public class DefaultSlots {
 		for (int i = 0; i < stacks.length; i++) {
 		    stacks[i] = getStack(slots, slot.startSlot + i);
 		}
-		ElementGrid slotGrid = stackClickListener == null ? ElementGrid.createSlotItemGrid(stacks, slot.size, slot.orientation) :ElementGrid.createButtonSlotItemGrid(stacks, slot.size, slot.orientation, stackClickListener);
+		ElementGrid slotGrid = stackClickListener == null ? ElementGrid.createSlotItemGrid(stacks, slot.size, slot.orientation) : ElementGrid.createButtonSlotItemGrid(stacks, slot.size, slot.orientation, stackClickListener);
 		slotGrid.horizontalAlign = min;
 		slotGrid.verticalAlign = Alignment.CENTER;
 		grid.children.add(new GridCell(0, grid.columns.size(), slotGrid));
-		grid.columns.add(new GridSize((slot.slots.length - 1) / slot.size + 1, SizeMode.RELATIVE));
+		grid.columns.add(new GridSize(slotGrid.width / 18, SizeMode.RELATIVE));
 	    }
 	}
     }

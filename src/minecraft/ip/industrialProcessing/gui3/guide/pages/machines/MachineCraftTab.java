@@ -18,7 +18,9 @@ import ip.industrialProcessing.gui3.guide.pages.machines.crafts.FurnaceCraft;
 import ip.industrialProcessing.gui3.guide.pages.machines.crafts.ICraftBase;
 import ip.industrialProcessing.gui3.guide.pages.machines.crafts.MachineCraft;
 import ip.industrialProcessing.gui3.guide.pages.machines.crafts.WorkbenchCraft;
-import ip.industrialProcessing.recipes.Recipe;
+import ip.industrialProcessing.machines.plants.blacksmith.anvil.ContainerAnvil;
+import ip.industrialProcessing.recipes.IMachineRecipe;
+import ip.industrialProcessing.utils.inventories.AnvilCraftingManager;
 import ip.industrialProcessing.utils.registry.RecipeRegistry;
 
 import java.util.ArrayList;
@@ -69,21 +71,21 @@ public class MachineCraftTab extends TabPage implements IButtonClickListener<ICr
 	    ICraftBase lastWorkbench = addWorkbenchRecipes(tag);
 	    ICraftBase lastAnvil = addAnvilRecipes(tag);
 	    ICraftBase lastMachine = addMachineRecipes(tag);
-	    if(lastFurnace != null)
+	    if (lastFurnace != null)
 		this.recipeDock.child = lastFurnace.getGui(stackClickListener);
-	    if(lastWorkbench != null)
+	    if (lastWorkbench != null)
 		this.recipeDock.child = lastWorkbench.getGui(stackClickListener);
-	    if(lastAnvil != null)
+	    if (lastAnvil != null)
 		this.recipeDock.child = lastAnvil.getGui(stackClickListener);
-	    if(lastMachine != null)
+	    if (lastMachine != null)
 		this.recipeDock.child = lastMachine.getGui(stackClickListener);
 	}
     }
 
     private ICraftBase addMachineRecipes(ItemStack tag) {
 	ICraftBase lastCraft = null;
-	ArrayList<Recipe> recipes = RecipeRegistry.FindRecipeForOutput(tag);
-	for (Recipe recipe : recipes) {
+	ArrayList<IMachineRecipe> recipes = RecipeRegistry.FindRecipeForOutput(tag);
+	for (IMachineRecipe recipe : recipes) {
 	    Block craftingBlock = RecipeRegistry.getBlockForRecipe(recipe);
 	    SlotItemControl slot = SlotItemControl.createItemstack(new ItemStack(craftingBlock));
 	    Button button = new Button<ICraftBase>(slot, lastCraft = new MachineCraft(craftingBlock, recipe));
@@ -95,13 +97,14 @@ public class MachineCraftTab extends TabPage implements IButtonClickListener<ICr
 
     private ICraftBase addAnvilRecipes(ItemStack tag) {
 	ICraftBase lastCraft = null;
-	List list = ip.industrialProcessing.utils.inventories.CraftingManager.getInstance().getRecipeList();
+
+	List list = ContainerAnvil.getCraftingManager().getRecipeList();
 	for (int j = 0; j < list.size(); j++) {
 	    Object listItem = list.get(j);
 	    if (listItem instanceof IRecipe) {
 		IRecipe recipe = (IRecipe) listItem;
 		ItemStack output = recipe.getRecipeOutput();
-		if (output != null && output.isItemEqual(tag)) {
+		if (output != null && output.itemID == tag.itemID) {
 		    SlotItemControl slot = SlotItemControl.createItemstack(new ItemStack(IndustrialProcessing.blockAnvil));
 		    Button button = new Button<ICraftBase>(slot, lastCraft = new AnvilCraft(recipe));
 		    button.subscribeClick(this);
@@ -120,7 +123,7 @@ public class MachineCraftTab extends TabPage implements IButtonClickListener<ICr
 	    if (listItem instanceof IRecipe) {
 		IRecipe recipe = (IRecipe) listItem;
 		ItemStack output = recipe.getRecipeOutput();
-		if (output != null && output.isItemEqual(tag)) {
+		if (output != null && output.itemID == tag.itemID) {
 		    SlotItemControl slot = SlotItemControl.createItemstack(new ItemStack(Block.workbench));
 		    Button button = new Button<ICraftBase>(slot, lastCraft = new WorkbenchCraft(recipe));
 		    button.subscribeClick(this);
@@ -140,7 +143,7 @@ public class MachineCraftTab extends TabPage implements IButtonClickListener<ICr
 	while (it.hasNext()) {
 	    Map.Entry<Integer, ItemStack> entry = (Entry<Integer, ItemStack>) it.next();
 	    ItemStack stack = entry.getValue();
-	    if (stack != null && stack.isItemEqual(tag)) {
+	    if (stack != null && stack.itemID == tag.itemID) {
 		SlotItemControl slot = SlotItemControl.createItemstack(new ItemStack(Block.furnaceIdle));
 		Button button = new Button<ICraftBase>(slot, lastCraft = new FurnaceCraft(entry.getKey(), entry.getValue()));
 		button.subscribeClick(this);

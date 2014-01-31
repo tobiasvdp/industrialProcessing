@@ -46,7 +46,7 @@ public abstract class TileEntityMultiblockCoreInvWorker extends TileEntityMultib
 
     @Override
     public Iterator<RecipeMultiblock> iterateRecipes() {
-    	return recipe.iterator();
+    	return recipe.getRecipes();
     }
 
     @Override

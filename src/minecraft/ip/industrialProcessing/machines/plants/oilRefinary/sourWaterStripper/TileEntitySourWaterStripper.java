@@ -49,7 +49,7 @@ public class TileEntitySourWaterStripper extends TileEntityPoweredFluidWorkerMac
 
     @Override
     public Iterator<Recipe> iterateRecipes() {
-	return recipes.iterator();
+	return recipes.getRecipes();
     }
 
     @Override

@@ -67,6 +67,8 @@ public class MachineDetails extends UserControl implements IButtonClickListener<
     }
 
     public void setItemStack(ItemStack tag) {
+	tag = tag.copy();
+	tag.stackSize = 1;
 	recipeTabs.clear();
 	title.text = tag.getDisplayName();
 	render.model = tag;

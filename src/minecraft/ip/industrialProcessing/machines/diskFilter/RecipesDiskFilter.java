@@ -1,14 +1,14 @@
 package ip.industrialProcessing.machines.diskFilter;
 
-import net.minecraftforge.fluids.FluidRegistry;
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ISetupFluids;
 import ip.industrialProcessing.config.ISetupItems;
 import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.recipes.PoweredRecipe;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeInputSlot;
 import ip.industrialProcessing.recipes.RecipeOutputSlot;
 import ip.industrialProcessing.recipes.RecipeSlotType;
+import net.minecraftforge.fluids.FluidRegistry;
 
 public class RecipesDiskFilter extends RecipesMachine {
 
@@ -27,7 +27,7 @@ public class RecipesDiskFilter extends RecipesMachine {
     }
 
     private Recipe IronSedimentToDust(int i, int powerConsumption) {
-	Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickIronSediment.getName()), RecipeSlotType.TANK, 1000), new RecipeInputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidLightIronSediment.getName()), RecipeSlotType.TANK, 1000) };
@@ -36,7 +36,7 @@ public class RecipesDiskFilter extends RecipesMachine {
     }
 
     private Recipe GoldSedimentToDust(int i, int powerConsumption) {
-	Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickGoldSediment.getName()), RecipeSlotType.TANK, 1000), new RecipeInputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidLightGoldSediment.getName()), RecipeSlotType.TANK, 1000) };
@@ -45,7 +45,7 @@ public class RecipesDiskFilter extends RecipesMachine {
     }
 
     private Recipe TinSedimentToDust(int i, int powerConsumption) {
-	Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickTinSediment.getName()), RecipeSlotType.TANK, 1000), new RecipeInputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidLightTinSediment.getName()), RecipeSlotType.TANK, 1000) };
@@ -54,7 +54,7 @@ public class RecipesDiskFilter extends RecipesMachine {
     }
 
     private Recipe CopperSedimentToDust(int i, int powerConsumption) {
-	Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickCopperSediment.getName()), RecipeSlotType.TANK, 1000), new RecipeInputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidLightCopperSediment.getName()), RecipeSlotType.TANK, 1000) };
@@ -63,7 +63,7 @@ public class RecipesDiskFilter extends RecipesMachine {
     }
 
     private Recipe ChromiteSedimentToDust(int i, int powerConsumption) {
-	Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickChromiteSediment.getName()), RecipeSlotType.TANK, 1000), new RecipeInputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidLightChromiteSediment.getName()), RecipeSlotType.TANK, 1000) };
@@ -72,7 +72,7 @@ public class RecipesDiskFilter extends RecipesMachine {
     }
 
     private Recipe GalenaSedimentToDust(int i, int powerConsumption) {
-	Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickGalenaSediment.getName()), RecipeSlotType.TANK, 1000), new RecipeInputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidLightGalenaSediment.getName()), RecipeSlotType.TANK, 1000) };
@@ -81,7 +81,7 @@ public class RecipesDiskFilter extends RecipesMachine {
     }
 
     private Recipe TaliaSedimentToDust(int i, int powerConsumption) {
-	Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickTaliaSediment.getName()), RecipeSlotType.TANK, 1000), new RecipeInputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidLightTaliaSediment.getName()), RecipeSlotType.TANK, 1000) };

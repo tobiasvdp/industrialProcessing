@@ -40,7 +40,7 @@ public class TileEntityGasProcessor extends TileEntityPoweredFluidWorkerMachine{
 
 	@Override
 	public Iterator<Recipe> iterateRecipes() {
-		return recipes.iterator();
+		return recipes.getRecipes();
 	}
 
 	@Override

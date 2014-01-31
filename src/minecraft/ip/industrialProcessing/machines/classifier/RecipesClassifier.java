@@ -1,9 +1,9 @@
 package ip.industrialProcessing.machines.classifier;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ISetupFluids;
 import ip.industrialProcessing.config.ISetupItems;
 import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.recipes.PoweredRecipe;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeInputSlot;
 import ip.industrialProcessing.recipes.RecipeOutputSlot;
@@ -26,7 +26,7 @@ public class RecipesClassifier extends RecipesMachine {
 	}
 	
     private Recipe mixedFragmentsToSludgeIron(int i, int powerConsumption) {
-        Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
         recipe.workRequired = i;
         recipe.powerRequired = powerConsumption;
         recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.WATER.getID(), RecipeSlotType.TANK, 1000), new RecipeInputSlot(0, ISetupItems.itemIronMixedFragments.itemID, RecipeSlotType.INVENTORY, 1) };
@@ -35,7 +35,7 @@ public class RecipesClassifier extends RecipesMachine {
     }
     
     private Recipe mixedFragmentsToSludgeTin(int i, int powerConsumption) {
-        Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
         recipe.workRequired = i;
         recipe.powerRequired = powerConsumption;
         recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.WATER.getID(), RecipeSlotType.TANK, 1000), new RecipeInputSlot(0, ISetupItems.itemTinMixedFragments.itemID, RecipeSlotType.INVENTORY, 1) };
@@ -44,7 +44,7 @@ public class RecipesClassifier extends RecipesMachine {
     }
     
     private Recipe mixedFragmentsToSludgeCopper(int i, int powerConsumption) {
-        Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
         recipe.workRequired = i;
         recipe.powerRequired = powerConsumption;
         recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.WATER.getID(), RecipeSlotType.TANK, 1000), new RecipeInputSlot(0, ISetupItems.itemCopperMixedFragments.itemID, RecipeSlotType.INVENTORY, 1) };
@@ -53,7 +53,7 @@ public class RecipesClassifier extends RecipesMachine {
     }
     
     private Recipe mixedFragmentsToSludgeTalia(int i, int powerConsumption) {
-        Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
         recipe.workRequired = i;
         recipe.powerRequired = powerConsumption;
         recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.WATER.getID(), RecipeSlotType.TANK, 1000), new RecipeInputSlot(0, ISetupItems.itemTaliaMixedFragments.itemID, RecipeSlotType.INVENTORY, 1) };
@@ -62,7 +62,7 @@ public class RecipesClassifier extends RecipesMachine {
     }
     
     private Recipe mixedFragmentsToSludgeGold(int i, int powerConsumption) {
-        Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
         recipe.workRequired = i;
         recipe.powerRequired = powerConsumption;
         recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.WATER.getID(), RecipeSlotType.TANK, 1000), new RecipeInputSlot(0, ISetupItems.itemGoldMixedFragments.itemID, RecipeSlotType.INVENTORY, 1) };
@@ -71,7 +71,7 @@ public class RecipesClassifier extends RecipesMachine {
     }
     
     private Recipe mixedFragmentsToSludgeGalena(int i, int powerConsumption) {
-        Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
         recipe.workRequired = i;
         recipe.powerRequired = powerConsumption;
         recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.WATER.getID(), RecipeSlotType.TANK, 1000), new RecipeInputSlot(0, ISetupItems.itemGalenaMixedFragments.itemID, RecipeSlotType.INVENTORY, 1) };
@@ -80,7 +80,7 @@ public class RecipesClassifier extends RecipesMachine {
     }
     
     private Recipe mixedFragmentsToSludgeChromite(int i, int powerConsumption) {
-        Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
         recipe.workRequired = i;
         recipe.powerRequired = powerConsumption;
         recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.WATER.getID(), RecipeSlotType.TANK, 1000), new RecipeInputSlot(0, ISetupItems.itemChromiteMixedFragments.itemID, RecipeSlotType.INVENTORY, 1) };

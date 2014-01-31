@@ -1,8 +1,8 @@
 package ip.industrialProcessing.machines.filter;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ISetupItems;
 import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.recipes.PoweredRecipe;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeInputSlot;
 import ip.industrialProcessing.recipes.RecipeOutputSlot;
@@ -29,7 +29,7 @@ public class RecipesFilter extends RecipesMachine {
     }
 
     private Recipe taliaFineToDust(int i, int powerConsumption) {
-        Recipe recipe = new Recipe();
+        PoweredRecipe recipe = new PoweredRecipe();
         recipe.workRequired = i;
         recipe.powerRequired = powerConsumption;
         recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, ISetupItems.itemTaliaFineChunks.itemID, RecipeSlotType.INVENTORY, 1) };
@@ -38,7 +38,7 @@ public class RecipesFilter extends RecipesMachine {
     }
 
     private Recipe chromiteFineToDust(int i, int powerConsumption) {
-        Recipe recipe = new Recipe();
+        PoweredRecipe recipe = new PoweredRecipe();
         recipe.workRequired = i;
         recipe.powerRequired = powerConsumption;
         recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, ISetupItems.itemChromiteFineChunks.itemID, RecipeSlotType.INVENTORY, 1) };
@@ -47,7 +47,7 @@ public class RecipesFilter extends RecipesMachine {
     }
 
     private Recipe galenaFineToDust(int i, int powerConsumption) {
-        Recipe recipe = new Recipe();
+        PoweredRecipe recipe = new PoweredRecipe();
         recipe.workRequired = i;
         recipe.powerRequired = powerConsumption;
         recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, ISetupItems.itemGalenaFineChunks.itemID, RecipeSlotType.INVENTORY, 1) };
@@ -56,7 +56,7 @@ public class RecipesFilter extends RecipesMachine {
     }
 
     private Recipe goldFineToDust(int i, int powerConsumption) {
-        Recipe recipe = new Recipe();
+        PoweredRecipe recipe = new PoweredRecipe();
         recipe.workRequired = i;
         recipe.powerRequired = powerConsumption;
         recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, ISetupItems.itemGoldFineChunks.itemID, RecipeSlotType.INVENTORY, 1) };
@@ -65,7 +65,7 @@ public class RecipesFilter extends RecipesMachine {
     }
 
     private Recipe ironFineToDust(int i, int powerConsumption) {
-        Recipe recipe = new Recipe();
+        PoweredRecipe recipe = new PoweredRecipe();
         recipe.workRequired = i;
         recipe.powerRequired = powerConsumption;
         recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, ISetupItems.itemIronFineChunks.itemID, RecipeSlotType.INVENTORY, 1) };
@@ -74,7 +74,7 @@ public class RecipesFilter extends RecipesMachine {
     }
 
     private Recipe tinFineToDust(int i, int powerConsumption) {
-        Recipe recipe = new Recipe();
+        PoweredRecipe recipe = new PoweredRecipe();
         recipe.workRequired = i;
         recipe.powerRequired = powerConsumption;
         recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, ISetupItems.itemTinFineChunks.itemID, RecipeSlotType.INVENTORY, 1) };
@@ -83,7 +83,7 @@ public class RecipesFilter extends RecipesMachine {
     }
 
     private Recipe copperFineToDust(int i, int powerConsumption) {
-        Recipe recipe = new Recipe();
+        PoweredRecipe recipe = new PoweredRecipe();
         recipe.workRequired = i;
         recipe.powerRequired = powerConsumption;
         recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, ISetupItems.itemCopperFineChunks.itemID, RecipeSlotType.INVENTORY, 1) };
@@ -92,7 +92,7 @@ public class RecipesFilter extends RecipesMachine {
     }
 
     private Recipe taliaCrushedToLarge(int i, int powerConsumption) {
-        Recipe recipe = new Recipe();
+        PoweredRecipe recipe = new PoweredRecipe();
         recipe.workRequired = i;
         recipe.powerRequired = powerConsumption;
         recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, ISetupItems.itemTaliaCrushedChunks.itemID, RecipeSlotType.INVENTORY, 1) };
@@ -101,7 +101,7 @@ public class RecipesFilter extends RecipesMachine {
     }
 
     private Recipe chromiteCrushedToLarge(int i, int powerConsumption) {
-        Recipe recipe = new Recipe();
+        PoweredRecipe recipe = new PoweredRecipe();
         recipe.workRequired = i;
         recipe.powerRequired = powerConsumption;
         recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, ISetupItems.itemChromiteCrushedChunks.itemID, RecipeSlotType.INVENTORY, 1) };
@@ -110,7 +110,7 @@ public class RecipesFilter extends RecipesMachine {
     }
 
     private Recipe galenaCrushedToLarge(int i, int powerConsumption) {
-        Recipe recipe = new Recipe();
+        PoweredRecipe recipe = new PoweredRecipe();
         recipe.workRequired = i;
         recipe.powerRequired = powerConsumption;
         recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, ISetupItems.itemGalenaCrushedChunks.itemID, RecipeSlotType.INVENTORY, 1) };
@@ -119,7 +119,7 @@ public class RecipesFilter extends RecipesMachine {
     }
 
     private Recipe goldCrushedToLarge(int i, int powerConsumption) {
-        Recipe recipe = new Recipe();
+        PoweredRecipe recipe = new PoweredRecipe();
         recipe.workRequired = i;
         recipe.powerRequired = powerConsumption;
         recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, ISetupItems.itemGoldCrushedChunks.itemID, RecipeSlotType.INVENTORY, 1) };
@@ -129,7 +129,7 @@ public class RecipesFilter extends RecipesMachine {
 
     private Recipe ironCrushedToLarge(int i, int powerConsumption) {
         // crushed iron to large and small ore chunks
-        Recipe iron = new Recipe();
+	PoweredRecipe iron = new PoweredRecipe();
         iron.workRequired = i;
         iron.powerRequired = powerConsumption;
         iron.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, ISetupItems.itemIronCrushedChunks.itemID, RecipeSlotType.INVENTORY, 2) };
@@ -139,7 +139,7 @@ public class RecipesFilter extends RecipesMachine {
 
     private Recipe tinCrushedToLarge(int i, int powerConsumption) {
         // crushed tin to large and small ore chunks
-        Recipe tin = new Recipe();
+	PoweredRecipe tin = new PoweredRecipe();
         tin.workRequired = i;
         tin.powerRequired = powerConsumption;
         tin.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, ISetupItems.itemTinCrushedChunks.itemID, RecipeSlotType.INVENTORY, 1) };
@@ -149,7 +149,7 @@ public class RecipesFilter extends RecipesMachine {
 
     private Recipe copperCrushedToLarge(int i, int powerConsumption) {
         // crushed copper to large and small ore chunks
-        Recipe copper = new Recipe();
+	PoweredRecipe copper = new PoweredRecipe();
         copper.workRequired = i;
         copper.powerRequired = powerConsumption;
         copper.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, ISetupItems.itemCopperCrushedChunks.itemID, RecipeSlotType.INVENTORY, 1) };
