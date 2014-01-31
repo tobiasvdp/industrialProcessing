@@ -28,6 +28,8 @@ public abstract class UIElement {
     public Alignment horizontalAlign = Alignment.STRETCH;
     public Alignment verticalAlign = Alignment.STRETCH;
 
+    public Visibility visibility = Visibility.VISIBLE;
+
     public float maxWidth = Float.POSITIVE_INFINITY;
     public float maxHeight = Float.POSITIVE_INFINITY;
     public float minHeight = 0;
@@ -44,7 +46,8 @@ public abstract class UIElement {
     }
 
     public Size measure(Size rect) {
-
+	if (visibility == Visibility.COLLAPSED)
+	    return new Size(0, 0);
 	float width = rect.width;
 	float height = rect.height;
 
@@ -96,6 +99,8 @@ public abstract class UIElement {
     protected abstract Size measureOverride(Size maxSize);
 
     public void arrange(Rect rect) {
+	if (visibility == Visibility.COLLAPSED)
+	    return;
 	if (this.margin != null) {
 	    rect.x += this.margin.left;
 	    rect.y += this.margin.top;
@@ -111,7 +116,8 @@ public abstract class UIElement {
 
 	width = Math.round(width);
 	height = Math.round(height);
-	Size size = arrangeOverride(new Size(width, height));
+	Size clamp = new Size(width, height);
+	Size size = arrangeOverride(clamp);
 
 	width = Math.min(size.width, rect.width);
 	height = Math.min(size.height, rect.height);
@@ -164,29 +170,31 @@ public abstract class UIElement {
     private boolean hasToolTip;
 
     public void render(GuiRenderer renderer) {
-	if (this.actualSize != null && this.actualSize.width > 0 && this.actualSize.height > 0) {
-	    boolean debug = false;
-	    GL11.glPushMatrix();
-	    GL11.glTranslatef(x, y, 0.1f);
-	    absoluteX += x;
-	    absoluteY += y;
-	    Rect bounds = new Rect(0, 0, this.actualSize);
-	    if (debug) {
-		renderer.drawRectangle(bounds, 0xFFffffff);
+	if (visibility == Visibility.VISIBLE) {
+	    if (this.actualSize != null && this.actualSize.width > 0 && this.actualSize.height > 0) {
+		boolean debug = false;
+		GL11.glPushMatrix();
+		GL11.glTranslatef(x, y, 0.1f);
+		absoluteX += x;
+		absoluteY += y;
+		Rect bounds = new Rect(0, 0, this.actualSize);
+		if (debug) {
+		    renderer.drawRectangle(bounds, 0xFFffffff);
+		}
+		renderOverride(bounds, renderer);
+		absoluteX -= x;
+		absoluteY -= y;
+		if (debug) {
+		    GL11.glTranslatef(0, 0, 1);
+		    color = this.isMouseInside ? 0xffffff00 : 0xffff0000;
+		    float lineThickness = 0.25f;
+		    renderer.drawRectangle(new Rect(0, 0, lineThickness, this.actualSize.height), color);
+		    renderer.drawRectangle(new Rect(this.actualSize.width - lineThickness, 0, lineThickness, this.actualSize.height), color);
+		    renderer.drawRectangle(new Rect(0, 0, this.actualSize.width, lineThickness), color);
+		    renderer.drawRectangle(new Rect(0, this.actualSize.height - lineThickness, this.actualSize.width, lineThickness), color);
+		}
+		GL11.glPopMatrix();
 	    }
-	    renderOverride(bounds, renderer);
-	    absoluteX -= x;
-	    absoluteY -= y;
-	    if (debug) {
-		GL11.glTranslatef(0, 0, 1);
-		color = this.isMouseInside ? 0xffffff00 : 0xffff0000;
-		float lineThickness = 0.25f;
-		renderer.drawRectangle(new Rect(0, 0, lineThickness, this.actualSize.height), color);
-		renderer.drawRectangle(new Rect(this.actualSize.width - lineThickness, 0, lineThickness, this.actualSize.height), color);
-		renderer.drawRectangle(new Rect(0, 0, this.actualSize.width, lineThickness), color);
-		renderer.drawRectangle(new Rect(0, this.actualSize.height - lineThickness, this.actualSize.width, lineThickness), color);
-	    }
-	    GL11.glPopMatrix();
 	}
     }
 
@@ -199,7 +207,7 @@ public abstract class UIElement {
     public void mouseDown(float mouseX, float mouseY, MouseButton button) {
 	float relativeX = mouseX - this.x;
 	float relativeY = mouseY - this.y;
-	if (this.hitTest(mouseX, mouseY)) {
+	if (this.hitTest(mouseX, mouseY) || true) {
 	    mouseDownOverride(relativeX, relativeY, button);
 	}
     }
@@ -207,7 +215,7 @@ public abstract class UIElement {
     public void mouseUp(float mouseX, float mouseY, MouseButton button) {
 	float relativeX = mouseX - this.x;
 	float relativeY = mouseY - this.y;
-	if (this.hitTest(mouseX, mouseY)) {
+	if (this.hitTest(mouseX, mouseY) || true) {
 	    mouseUpOverride(relativeX, relativeY, button);
 	}
     }

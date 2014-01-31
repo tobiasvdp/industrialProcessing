@@ -33,7 +33,7 @@ public class TextBlock extends Control {
 	} else {
 	    float width = renderer.getStringWidth(text);
 	    if (width > maxSize.width) {
-		size = new Size(width, renderer.splitStringWidth(text, (int) width));
+		size = new Size(maxSize.width, renderer.splitStringWidth(text, (int) maxSize.width));
 	    } else {
 		size = new Size(width, renderer.FONT_HEIGHT);
 	    }
@@ -45,12 +45,15 @@ public class TextBlock extends Control {
     
     @Override
     protected Size arrangeOverride(Size maxSize) { 
-        return super.arrangeOverride(this.textSize);
+	
+	Size size = measureOverride(maxSize);
+	return size;
+        //return super.arrangeOverride(this.textSize);
     }
 
     @Override
     protected void renderOverride(Rect size, GuiRenderer renderer) { 
-	renderer.drawString(size, this.text, this.color, allowEllipsis, allowWrap, hasShadow);
+	renderer.drawString(size, this.text, this.color, allowEllipsis, true, hasShadow); 
     }
 
     public static TextBlock createTextBlock() {

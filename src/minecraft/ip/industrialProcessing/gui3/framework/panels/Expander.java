@@ -85,10 +85,12 @@ public class Expander extends UIElement {
 	case HORIZONTAL:
 	    maxWidth = size.width;
 	    maxHeight = this.verticalAlign == horizontalAlign.STRETCH ? maxSize.height : size.height;
+	    break;
 	case VERTICAL:
 	default:
 	    maxWidth = this.horizontalAlign == horizontalAlign.STRETCH ? maxSize.width : size.width;
 	    maxHeight = size.height;
+	    break;
 	}
 	header.arrange(new Rect(0, 0, maxWidth, maxHeight));
 	return new Size(maxWidth, maxHeight);

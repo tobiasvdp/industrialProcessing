@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
+import ic2.api.item.Items;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.gui3.framework.Rect;
@@ -39,19 +40,24 @@ public class SlotItemControl extends Control {
     protected void renderOverride(Rect size, GuiRenderer renderer) {
 	if (section != null && texture != null)
 	    renderer.drawTexture(size, section, texture.resource);
-	renderer.drawItemStack(size, this.item);
+	if (this.item != null)
+	    renderer.drawItemStack(size, this.item);
     }
 
     @Override
     protected ToolTip getTooltipOverride(float mouseX, float mouseY) {
 	if (item != null) {
-	    List lines = item.getTooltip(null, false);
-	    if (lines != null) {
-		String[] data = new String[lines.size()];
-		for (int i = 0; i < lines.size(); i++) {
-		    data[i] = (String) lines.get(i);
+	    if (item.getItem() != null) {
+		List lines = item.getTooltip(null, false);
+		if (lines != null) {
+		    String[] data = new String[lines.size()];
+		    for (int i = 0; i < lines.size(); i++) {
+			data[i] = (String) lines.get(i);
+		    }
+		    return new ToolTip(data);
 		}
-		return new ToolTip(data);
+	    } else {
+		return new ToolTip("Item " + item.itemID + " is null", "perhaps not registered?");
 	    }
 	}
 	return null;

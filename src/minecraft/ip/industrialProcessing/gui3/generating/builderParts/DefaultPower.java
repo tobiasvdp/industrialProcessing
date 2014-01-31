@@ -74,8 +74,9 @@ public class DefaultPower {
 	if (powerRef != null && recipe.powerRequired > 0) {
 	    ProgressBar powerControl = ProgressBar.createHorizontal1();
 	    powerControl.tooltip = "%.0fJoules";
-	    powerControl.value = recipe.powerRequired;
-	    powerControl.maxValue = recipe.powerRequired;
+	    powerControl.horizontalAlign = Alignment.MAX;
+	    powerControl.value = recipe.powerRequired*recipe.workRequired;
+	    powerControl.maxValue = recipe.powerRequired*recipe.workRequired;
 	    stackPanel.addChild(powerControl);
 	}
     }

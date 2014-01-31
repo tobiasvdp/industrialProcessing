@@ -1,12 +1,5 @@
 package ip.industrialProcessing.gui3.framework.controls;
 
-import java.util.ArrayList;
-
-import org.lwjgl.opengl.GL11;
-
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.resources.Resource;
-import net.minecraft.util.ResourceLocation;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.gui3.framework.Rect;
@@ -16,32 +9,40 @@ import ip.industrialProcessing.gui3.framework.UIElement;
 import ip.industrialProcessing.gui3.framework.panels.MouseButton;
 import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
 import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
+import ip.industrialProcessing.gui3.guide.pages.machines.MachineRecipesTab;
 
-public class Button extends UIElement {
+import java.util.ArrayList;
 
-    private ArrayList<IButtonClickListener> clickEventHandlers = new ArrayList<IButtonClickListener>();
+import org.lwjgl.opengl.GL11;
 
-    public void subscribeClick(IButtonClickListener listener) {
+public class Button<T> extends UIElement {
+
+    private ArrayList<IButtonClickListener<T>> clickEventHandlers = new ArrayList<IButtonClickListener<T>>();
+
+    public void subscribeClick(IButtonClickListener<T> listener) {
 	this.clickEventHandlers.add(listener);
     }
 
-    public void unssubscribeClick(IButtonClickListener listener) {
+    public void unssubscribeClick(IButtonClickListener<T> listener) {
 	this.clickEventHandlers.remove(listener);
     }
 
-    private static TextureReference buttonTexture = new TextureReference(new Size(200, 60), IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/Buttons.png");
+    private static TextureReference DEFAULT_BUTTON_TEXTURE = new TextureReference(new Size(200, 60), IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/Buttons.png");
 
     private TextureReference texture;
-
+    public T tag;
     public Button(UIElement child) {
-	this(buttonTexture, child);
-    }
-
+	this(DEFAULT_BUTTON_TEXTURE, child, null);
+    } 
+    public Button(UIElement child, T tag) {
+	this(DEFAULT_BUTTON_TEXTURE, child, tag);
+    } 
     // texture size: 128x32 for each state: 128x96
-    public Button(TextureReference texture, UIElement child) {
+    public Button(TextureReference texture, UIElement child, T tag) {
 	this.isHittestVisible = true;
 	this.texture = texture;
 	this.child = child;
+	this.tag = tag;
     }
 
     public UIElement child;
@@ -100,7 +101,7 @@ public class Button extends UIElement {
 	if (this.mouseDown) {
 	    this.mouseDown = false;
 	    for (IButtonClickListener listener : this.clickEventHandlers) {
-		listener.buttonClicked(this, mouseX, mouseY, button);
+		listener.buttonClicked(this, tag, mouseX, mouseY, button);
 	    }
 	}
     }
@@ -132,6 +133,5 @@ public class Button extends UIElement {
 	if (child != null)
 	    return child.getTooltip(mouseX, mouseY);
 	return null;
-    }
-
+    }  
 }

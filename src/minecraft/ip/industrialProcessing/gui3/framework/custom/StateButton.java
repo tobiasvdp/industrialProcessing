@@ -33,7 +33,7 @@ public class StateButton extends UserControl implements IButtonClickListener, IV
     }
 
     @Override
-    public void buttonClicked(Button button, float mouseX, float mouseY, MouseButton mouseButton) {
+    public void buttonClicked(Button button, Object tag, float mouseX, float mouseY, MouseButton mouseButton) {
 	if (button == this.button) {
 	    int oldValue = getValue();
 	    if (mouseButton == MouseButton.LEFT) {

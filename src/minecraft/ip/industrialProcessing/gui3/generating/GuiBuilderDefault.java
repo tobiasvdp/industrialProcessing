@@ -257,11 +257,15 @@ public class GuiBuilderDefault implements IGuiBuilder {
 	GridPanel grid = new GridPanel();
 	grid.rows.add(new GridSize(54, SizeMode.ABSOLUTE));
 	DefaultHeat.setup(this.heatRef, recipe, grid, Alignment.MIN);
+
+	int maxTankAmount = Math.max(DefaultTanks.getMaxAmount(recipe.inputs), DefaultTanks.getMaxAmount(recipe.outputs));
+
 	DefaultSlots.setup(this.inputSlots, recipe.inputs, grid, Alignment.MIN);
-	DefaultTanks.setup(this.inputTanks, recipe.inputs, grid, Alignment.MIN);
+	DefaultTanks.setup(this.inputTanks, recipe.inputs, maxTankAmount, grid, Alignment.MIN);
 	DefaultWorker.setup(this.workerRef, recipe, grid, Alignment.CENTER);
-	DefaultTanks.setup(this.outputTanks, recipe.outputs, grid, Alignment.MAX);
+	DefaultTanks.setup(this.outputTanks, recipe.outputs, maxTankAmount, grid, Alignment.MAX);
 	DefaultSlots.setup(this.outputSlots, recipe.outputs, grid, Alignment.MAX);
+	stackPanel.addChild(grid);
 	return new RecipeFrame(stackPanel, this.title);
     }
 

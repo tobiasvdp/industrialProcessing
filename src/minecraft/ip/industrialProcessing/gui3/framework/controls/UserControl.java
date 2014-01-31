@@ -36,7 +36,7 @@ public class UserControl extends Control {
     }
 
     @Override
-    protected void renderOverride(Rect size, GuiRenderer renderer) {
+    protected void renderOverride(Rect size, GuiRenderer renderer) { 
 	if (child != null)
 	    child.render(renderer);
     }

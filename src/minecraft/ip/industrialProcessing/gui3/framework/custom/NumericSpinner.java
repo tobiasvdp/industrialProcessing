@@ -24,7 +24,7 @@ import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
 
 import java.util.ArrayList;
 
-public class NumericSpinner extends UserControl implements IButtonClickListener, IValueBinding {
+public class NumericSpinner extends UserControl implements IButtonClickListener<Object>, IValueBinding {
 
     private static final Rect ARROW_DOWN_SECTION = new Rect(0, 0.5f, 1, 0.5f);
     private static final Rect ARROW_UP_SECTION = new Rect(0, 0, 1, 0.5f);
@@ -102,7 +102,7 @@ public class NumericSpinner extends UserControl implements IButtonClickListener,
     }
 
     @Override
-    public void buttonClicked(Button button, float mouseX, float mouseY, MouseButton mouseButton) {
+    public void buttonClicked(Button<Object> button, Object tags, float mouseX, float mouseY, MouseButton mouseButton) {
 	if (button == spinUp) {
 	    setValue(getValue() + 1);
 	} else if (button == spinDown) {

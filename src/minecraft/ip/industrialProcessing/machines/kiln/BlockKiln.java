@@ -10,6 +10,10 @@ import ip.industrialProcessing.gui.GuiLayout;
 import ip.industrialProcessing.gui.IGuiLayout;
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
+import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
+import ip.industrialProcessing.gui3.generating.GuiBuilderDefault;
+import ip.industrialProcessing.gui3.generating.IGuiBlock;
+import ip.industrialProcessing.gui3.generating.IGuiBuilder;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.machines.kiln.model.ModelKilnBlock;
@@ -24,17 +28,11 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockKiln extends BlockMachineRendered implements IRecipeBlock, IDescriptionBlock, IGuiLayout, IModelBlock {
+public class BlockKiln extends BlockMachineRendered implements IRecipeBlock, IDescriptionBlock, IGuiBlock, IModelBlock {
 
+    private static final TextureReference WORKER_TEXTURE = TextureReference.createDefault("Kiln.png", 24, 32);
     private Icon[] icons = new Icon[3];
-    private static GuiLayout guiLayout;
-    static {
-	guiLayout = new GuiLayout();
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 1);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsOutput).setSlotLayout(SlotLayoutType.horizontal, 1);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.worker);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.simpleHeat);
-    }
+    private static IGuiBuilder guiBuilder = new GuiBuilderDefault("Kiln").addInputSlot(0).addOutputSlot(1).enableThermometer().enableWorker(WORKER_TEXTURE);
 
     public BlockKiln() {
 	super(ConfigMachineBlocks.getKilnBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Kiln", ISetupCreativeTabs.tabOreProcessing);
@@ -76,8 +74,8 @@ public class BlockKiln extends BlockMachineRendered implements IRecipeBlock, IDe
     }
 
     @Override
-    public GuiLayout getGuiLayout() {
-	return guiLayout;
+    public IGuiBuilder getGui() {
+	return guiBuilder;
     }
 
     @SideOnly(Side.CLIENT)

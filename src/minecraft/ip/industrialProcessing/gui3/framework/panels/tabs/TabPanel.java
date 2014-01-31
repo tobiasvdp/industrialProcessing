@@ -184,4 +184,8 @@ public class TabPanel extends UIElement {
 	}
 	return null;
     }
+
+    public void clear() {
+	this.tabs.clear();
+    }
 }

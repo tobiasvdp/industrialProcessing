@@ -24,6 +24,10 @@ public abstract class Panel extends UIElement {
 	children.add(child);
     }
 
+    public void clear() {
+	this.children.clear();
+    }
+
     public boolean removeChild(UIElement child) {
 	return children.remove(child);
     }

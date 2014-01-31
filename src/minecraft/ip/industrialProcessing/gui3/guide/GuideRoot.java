@@ -16,7 +16,7 @@ public class GuideRoot extends UserControl {
 	tabs.addTab(new MachineTab());
 	tabs.addTab(new ToolsTab());
 	this.width = 300;
-	this.height = 200;
+	this.height = 230;
 	this.horizontalAlign = Alignment.CENTER;
 	this.verticalAlign = Alignment.CENTER;
 	this.child = tabs;

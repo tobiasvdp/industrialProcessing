@@ -13,6 +13,10 @@ public class DockPanel extends UIElement {
     public UIElement docked;
     public UIElement content;
 
+    public DockPanel() {
+	this.isHittestVisible = true;
+    }
+
     private Size measureElement(UIElement element, Size maxSize) {
 	if (element == null)
 	    return new Size(0, 0);
@@ -68,10 +72,12 @@ public class DockPanel extends UIElement {
 	case HORIZONTAL:
 	    maxWidth = size.width;
 	    maxHeight = this.verticalAlign == horizontalAlign.STRETCH ? maxSize.height : size.height;
+	    break;
 	case VERTICAL:
 	default:
 	    maxWidth = this.horizontalAlign == horizontalAlign.STRETCH ? maxSize.width : size.width;
 	    maxHeight = size.height;
+	    break;
 	}
 	header.arrange(new Rect(0, 0, maxWidth, maxHeight));
 	return new Size(maxWidth, maxHeight);
@@ -79,8 +85,7 @@ public class DockPanel extends UIElement {
 
     @Override
     protected void renderOverride(Rect size, GuiRenderer renderer) {
-	if (this.docked != null) {
-	    renderer.drawRectangle(new Rect(this.docked.getX(), this.docked.getY(), this.docked.getActualSize()), 0xffff0000);
+	if (this.docked != null) { 
 	    this.docked.render(renderer);
 	}
 	if (this.content != null)

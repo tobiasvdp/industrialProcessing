@@ -1,64 +1,55 @@
 package ip.industrialProcessing.machines.mixer;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.gui.GuiLayout;
-import ip.industrialProcessing.gui.IGuiLayout;
-import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
-import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
+import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
+import ip.industrialProcessing.gui3.generating.GuiBuilderDefault;
+import ip.industrialProcessing.gui3.generating.IGuiBlock;
+import ip.industrialProcessing.gui3.generating.IGuiBuilder;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 import ip.industrialProcessing.utils.IDescriptionBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
-public class BlockMixer extends BlockMachineRendered implements IRecipeBlock, IDescriptionBlock,IGuiLayout {
+public class BlockMixer extends BlockMachineRendered implements IRecipeBlock, IDescriptionBlock, IGuiBlock {
 
-	public static GuiLayout guiLayout;
-	static{
-		guiLayout = new GuiLayout();
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 1);
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.tankInput);
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.tankOutput);
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.worker);
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.power);
-	}
-	
-	public BlockMixer() {
-		super(ConfigMachineBlocks.getMixerBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Mixer", ISetupCreativeTabs.tabOreProcessing);
-	}
+    private static final TextureReference WORKER_TEXTURE = TextureReference.createDefault("Mixer.png", 16, 36);
+    public static IGuiBuilder guiBuilder = new GuiBuilderDefault("Mixer").addInputSlot(0).addInputTank(0, 1, 2).addOutputTank(1, 3, 4).enablePower(5).enableWorker(WORKER_TEXTURE);
 
-	@Override
-	public TileEntity createNewTileEntity(World world) {
-		TileEntityMixer te = new TileEntityMixer();
-		te.setName(getLocalizedName());
-		return te;
-	}
-	
-    @Override
-    public int getRenderType()
-    {
-        return ConfigRenderers.getRendererMixerId();
+    public BlockMixer() {
+	super(ConfigMachineBlocks.getMixerBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Mixer", ISetupCreativeTabs.tabOreProcessing);
     }
 
     @Override
-    public RecipesMachine getRecipes() { 
+    public TileEntity createNewTileEntity(World world) {
+	TileEntityMixer te = new TileEntityMixer();
+	te.setName(getLocalizedName());
+	return te;
+    }
+
+    @Override
+    public int getRenderType() {
+	return ConfigRenderers.getRendererMixerId();
+    }
+
+    @Override
+    public RecipesMachine getRecipes() {
 	return TileEntityMixer.recipes;
     }
 
-	@Override
-	public GuiLayout getGuiLayout() {
-		return guiLayout;
-	}
+    @Override
+    public IGuiBuilder getGui() {
+	return guiBuilder;
+    }
 
-	@Override
-	public String getDescription() {
-		return "Cleanse ores to remove impurities.";
-	}
+    @Override
+    public String getDescription() {
+	return "Mixes liquids and solids together to form a slurry.";
+    }
 
 }

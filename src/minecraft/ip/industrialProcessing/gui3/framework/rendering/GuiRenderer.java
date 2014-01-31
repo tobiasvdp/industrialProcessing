@@ -1,19 +1,17 @@
 package ip.industrialProcessing.gui3.framework.rendering;
 
-import ip.industrialProcessing.client.render.gui.GuiTools;
+import ip.industrialProcessing.api.rendering.RendererBlock;
 import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.gui3.framework.Rect;
-import ip.industrialProcessing.gui3.framework.Size;
 import ip.industrialProcessing.gui3.framework.Thickness;
-import ip.industrialProcessing.items.guide.gui.GuiGuide;
 
 import java.util.List;
 
-import org.lwjgl.opengl.GL11;
-
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -21,6 +19,8 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
 
 public class GuiRenderer {
 
@@ -153,12 +153,12 @@ public class GuiRenderer {
 
 		int maxStrings = height / mc.fontRenderer.FONT_HEIGHT;
 
-		for (int i = 0; i < maxStrings; i++) {
+		for (int i = 0; i < Math.min(parts.size(), maxStrings); i++) {
 		    String line = (String) parts.get(i);
-		    if (i == maxStrings - 1 && ellipsis) {
+		    if (i == maxStrings - 1 && ellipsis && mc.fontRenderer.getStringWidth(line) > width) {
 			line = mc.fontRenderer.trimStringToWidth(line, width - lastMargin) + ellipsisChars;
 		    }
-		    mc.fontRenderer.drawString(text, (int) rect.x + mc.fontRenderer.FONT_HEIGHT * i, (int) rect.y, color, hasShadow);
+		    mc.fontRenderer.drawString(line, (int) rect.x, (int) rect.y + mc.fontRenderer.FONT_HEIGHT * i, color, hasShadow);
 		}
 
 	    } else
@@ -220,12 +220,24 @@ public class GuiRenderer {
 	int w = (int) Math.ceil(sW);
 	int h = (int) Math.ceil(sH);
 
-	GL11.glScissor(x, y-h, w, h);
+	GL11.glScissor(x, y - h, w, h);
 	GL11.glEnable(GL11.GL_SCISSOR_TEST);
     }
 
     public void disableScissor() {
 	GL11.glDisable(GL11.GL_SCISSOR_TEST);
+    }
+
+    public void drawModel(Rect size, Block model) {
+
+	ItemStack stack = new ItemStack(model);
+	float scaleW = size.width / 16;
+	float scaleH = size.height / 16;
+	float scale = Math.min(scaleW, scaleH);
+	GL11.glPushMatrix();
+	GL11.glScalef(scale, scale, 1);
+	drawItemStack(new Rect(size.x / scale, size.y / scale, 16, 16), stack);
+	GL11.glPopMatrix();
     }
 
 }

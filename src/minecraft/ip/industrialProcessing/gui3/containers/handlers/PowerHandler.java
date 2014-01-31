@@ -17,7 +17,7 @@ public class PowerHandler extends ProgressHandlerBase {
 	IPowerStorage storage =  machine.getMainPowerStorage();
 	
 	int value = storage.getStoredPower();
-	int max = storage.getStoredPower();
+	int max = storage.getPowerCapacity();
 	
 	this.setValues(value, max);
     } 

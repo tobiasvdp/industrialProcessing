@@ -7,13 +7,6 @@ import ip.industrialProcessing.gui.guiContainer.GuiContainerIP;
 import ip.industrialProcessing.gui3.generating.IGuiBlock;
 import ip.industrialProcessing.gui3.generating.LayoutGuiBuilder;
 import ip.industrialProcessing.gui3.guide.GuideScreen;
-import ip.industrialProcessing.items.guide.gui.GuiGuide;
-import ip.industrialProcessing.machines.electrolyser.ContainerElectrolyser;
-import ip.industrialProcessing.machines.electrolyser.GuiContainerElectrolyser;
-import ip.industrialProcessing.machines.electrolyser.TileEntityElectrolyser;
-import ip.industrialProcessing.machines.insulator.ContainerInsulator;
-import ip.industrialProcessing.machines.insulator.GuiContainerInsulator;
-import ip.industrialProcessing.machines.insulator.TileEntityInsulator;
 import ip.industrialProcessing.machines.oxygenFurnace.ContainerOxygenFurnace;
 import ip.industrialProcessing.machines.oxygenFurnace.GuiContainerOxygenFurnace;
 import ip.industrialProcessing.machines.oxygenFurnace.TileEntityOxygenFurnace;
@@ -150,17 +143,13 @@ public class GuiHandler implements IGuiHandler {
 	    if (entity instanceof TileEntityOxygenFurnace)
 		return new ContainerOxygenFurnace(player.inventory, (TileEntityOxygenFurnace) entity);
 	    if (entity instanceof TileEntityBuildcraftGenerator)
-		return new ContainerBuildcraftGenerator(player.inventory, (TileEntityBuildcraftGenerator) entity);  
+		return new ContainerBuildcraftGenerator(player.inventory, (TileEntityBuildcraftGenerator) entity);
 	    if (entity instanceof TileEntityIncubator)
 		return new ContainerIncubator(player.inventory, (TileEntityIncubator) entity);
 	    if (entity instanceof TileEntityWireMill)
 		return new ContainerWireMill(player.inventory, (TileEntityWireMill) entity);
-	    if (entity instanceof TileEntityInsulator)
-		return new ContainerInsulator(player.inventory, (TileEntityInsulator) entity);
 	    if (entity instanceof TileEntitySpoolWindingMachine)
 		return new ContainerSpoolWindingMachine(player.inventory, (TileEntitySpoolWindingMachine) entity);
-	    if (entity instanceof TileEntityElectrolyser)
-		return new ContainerElectrolyser(player.inventory, (TileEntityElectrolyser) entity);
 	    if (entity instanceof TileEntitySourWaterStripper)
 		return new ContainerSourWaterStripper(player.inventory, (TileEntitySourWaterStripper) entity);
 	    if (entity instanceof TileEntityAlkylationUnit)
@@ -240,7 +229,7 @@ public class GuiHandler implements IGuiHandler {
 	    if (entity instanceof TileEntityOxygenFurnace)
 		return new GuiContainerOxygenFurnace(player.inventory, (TileEntityOxygenFurnace) entity);
 	    if (entity instanceof TileEntityBuildcraftGenerator)
-		return new GuiContainerBuildcraftGenerator(player.inventory, (TileEntityBuildcraftGenerator) entity); 
+		return new GuiContainerBuildcraftGenerator(player.inventory, (TileEntityBuildcraftGenerator) entity);
 	    if (entity instanceof TileEntityTurbine)
 		return new GuiContainerTurbine(player.inventory, (TileEntityTurbine) entity);
 	    if (entity instanceof TEmultiblockToggleButton)
@@ -249,12 +238,8 @@ public class GuiHandler implements IGuiHandler {
 		return new GuiContainerIncubator(player.inventory, (TileEntityIncubator) entity);
 	    if (entity instanceof TileEntityWireMill)
 		return new GuiContainerWireMill(player.inventory, (TileEntityWireMill) entity);
-	    if (entity instanceof TileEntityInsulator)
-		return new GuiContainerInsulator(player.inventory, (TileEntityInsulator) entity);
 	    if (entity instanceof TileEntitySpoolWindingMachine)
 		return new GuiContainerSpoolWindingMachine(player.inventory, (TileEntitySpoolWindingMachine) entity);
-	    if (entity instanceof TileEntityElectrolyser)
-		return new GuiContainerElectrolyser(player.inventory, (TileEntityElectrolyser) entity);
 	    if (entity instanceof TileEntitySourWaterStripper)
 		return new GuiContainerSourWaterStripper(player.inventory, (TileEntitySourWaterStripper) entity);
 	    if (entity instanceof TileEntityAlkylationUnit)
@@ -309,7 +294,7 @@ public class GuiHandler implements IGuiHandler {
 		return new GuiContainerTank(player.inventory, (TileEntityTank) entity);
 	} else if (ID == GUIDE_ID) {
 	    return new GuideScreen(player);
-	    //return new GuiGuide(player);
+	    // return new GuiGuide(player);
 	} else if (ID == ANVIL_ID) {
 	    return new GuiContainerAnvil(player.inventory, world, x, y, z);
 	}

@@ -48,8 +48,8 @@ public class DefaultSlots {
 	    for (SlotClusterReference slotRef : slots) {
 		int index = container.inventorySlots.size();
 		slotRef.slots = new Slot[slotRef.slotCount];
-		for (int i = slotRef.startSlot; i < slotRef.slotCount; i++) {
-		    container.containerAddSlot(slotRef.slots[i] = input ? new SlotBase(inventory, i, 0, 0) : new SlotOutput(inventory, i, 0, 0));
+		for (int i = 0; i < slotRef.slotCount; i++) {
+		    container.containerAddSlot(slotRef.slots[i] = input ? new SlotBase(inventory, slotRef.startSlot + i, 0, 0) : new SlotOutput(inventory, slotRef.startSlot + i, 0, 0));
 		}
 	    }
 	}
@@ -97,12 +97,13 @@ public class DefaultSlots {
 	}
 	return 0;
     }
+
     private static ItemStack getStack(RecipeSlot[] slots, int startSlot) {
 	for (int i = 0; i < slots.length; i++) {
 	    RecipeSlot slot = slots[i];
 	    if (slot.index == startSlot && slot.type != RecipeSlotType.TANK) {
 		int amount = getAmount(slot);
-		return new ItemStack(slot.itemId, slot.index, amount);
+		return new ItemStack(slot.itemId, amount, slot.metadata);
 	    }
 	}
 	return null;

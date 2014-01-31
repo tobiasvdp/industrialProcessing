@@ -1,13 +1,12 @@
 package ip.industrialProcessing.machines.filter;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.gui.GuiLayout;
-import ip.industrialProcessing.gui.IGuiLayout;
-import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
-import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
+import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
+import ip.industrialProcessing.gui3.generating.GuiBuilderDefault;
+import ip.industrialProcessing.gui3.generating.IGuiBlock;
+import ip.industrialProcessing.gui3.generating.IGuiBuilder;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.recipes.IRecipeBlock;
@@ -18,18 +17,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
-public class BlockFilter extends BlockMachineRendered implements IRecipeBlock, IDescriptionBlock,IGuiLayout {
+public class BlockFilter extends BlockMachineRendered implements IRecipeBlock, IDescriptionBlock, IGuiBlock {
+
+    private static final TextureReference WORKER_TEXTURE = TextureReference.createDefault("Filter.png", 24, 34);
 
     private Icon[] textures;
-    
-	public static GuiLayout guiLayout;
-	static{
-		guiLayout = new GuiLayout();
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 1);
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsOutput).setSlotLayout(SlotLayoutType.vertical, 2);
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.worker);
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.power);
-	}
+
+    public static IGuiBuilder guiBuilder = new GuiBuilderDefault("Ore Filter").addInputSlot(0).addOutputSlot(1).addOutputSlot(2).enableWorker(WORKER_TEXTURE).enablePower(3);
 
     public BlockFilter() {
 	super(ConfigMachineBlocks.getFilterBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Ore Filter", ISetupCreativeTabs.tabOreProcessing);
@@ -48,17 +42,17 @@ public class BlockFilter extends BlockMachineRendered implements IRecipeBlock, I
     }
 
     @Override
-    public RecipesMachine getRecipes() { 
+    public RecipesMachine getRecipes() {
 	return TileEntityFilter.recipes;
     }
 
-	@Override
-	public GuiLayout getGuiLayout() {
-		return guiLayout;
-	}
+    @Override
+    public IGuiBuilder getGui() {
+	return guiBuilder;
+    }
 
-	@Override
-	public String getDescription() {
-		return "This machine seperates small and larger chunks from materials.";
-	}
+    @Override
+    public String getDescription() {
+	return "This machine seperates small and larger chunks from materials.";
+    }
 }

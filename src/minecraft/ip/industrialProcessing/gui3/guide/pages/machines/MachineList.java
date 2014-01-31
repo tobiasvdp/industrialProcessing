@@ -4,6 +4,7 @@ import ip.industrialProcessing.gui3.framework.Thickness;
 import ip.industrialProcessing.gui3.framework.UIElement;
 import ip.industrialProcessing.gui3.framework.controls.Button;
 import ip.industrialProcessing.gui3.framework.controls.Decorator;
+import ip.industrialProcessing.gui3.framework.controls.IButtonClickListener;
 import ip.industrialProcessing.gui3.framework.controls.SlotItemControl;
 import ip.industrialProcessing.gui3.framework.controls.TextBlock;
 import ip.industrialProcessing.gui3.framework.controls.UserControl;
@@ -23,7 +24,7 @@ import net.minecraft.item.ItemStack;
 
 public class MachineList extends UserControl {
 
-    public MachineList() {
+    public MachineList(IButtonClickListener<Block> clickListener) {
 	this.width = Float.NaN;
 	this.height = Float.NaN;
 	this.isHittestVisible = true;
@@ -42,7 +43,9 @@ public class MachineList extends UserControl {
 		expander.content = machines;
 		for (Block block : blocks) {
 		    UIElement blockButton = createButton(block);
-		    machines.addChild(new Button(blockButton));
+		    Button button = new Button<Block>(blockButton, block);
+		    button.subscribeClick(clickListener);
+		    machines.addChild(button);
 		}
 		stack.addChild(expander);
 	    }

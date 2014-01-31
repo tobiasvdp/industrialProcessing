@@ -102,8 +102,8 @@ public class ScrollPanel extends UIElement {
 	    content.arrange(new Rect(left - scrollOffsetX, top - scrollOffsetY, maxWidth, maxHeight));
 
 	    Rect clip = getInnerBounds();
-	    this.scrollOffsetX = clamp(scrollOffsetX, 0, (maxHeight - clip.width));
-	    this.scrollOffsetY = clamp(scrollOffsetY, 0, (maxHeight - clip.height));
+	    this.scrollOffsetX = clamp(scrollOffsetX, 0, (maxWidth + padHorizontal - clip.width));
+	    this.scrollOffsetY = clamp(scrollOffsetY, 0, (maxHeight + padVertical - clip.height));
 	    return new Size(maxWidth + padHorizontal, maxHeight + padVertical);
 	}
 	return new Size(0, 0);
@@ -168,14 +168,14 @@ public class ScrollPanel extends UIElement {
     }
 
     protected Rect getVerticalScrollBlock(Rect clipBounds, Rect scrollBar) {
-	float childHeight = content.getActualSize().height;
+	float childHeight = content.getActualSize().height + padding.top + padding.bottom;
 	float height = (clipBounds.height) / childHeight * scrollBar.height;
 	float y = (scrollOffsetY) / (childHeight - scrollBar.height) * (scrollBar.height - height);
 	return new Rect(scrollBar.x, y, scrollBar.width, height);
     }
 
     protected Rect getHorizontalScrollBlock(Rect clipBounds, Rect scrollBar) {
-	float childWidth = content.getActualSize().width - scrollbarWidth;
+	float childWidth = content.getActualSize().width + padding.left + padding.right;
 	float width = (clipBounds.width) / childWidth * scrollBar.width;
 	float x = (scrollOffsetX) / (childWidth - scrollBar.width) * (scrollBar.width - width);
 	return new Rect(x + padding.left, scrollBar.y, width, scrollBar.height);
@@ -270,6 +270,8 @@ public class ScrollPanel extends UIElement {
 	    }
 
 	    Size contentSize = content.getActualSize();
+
+	    contentSize = new Size(contentSize.width + padding.left + padding.right, contentSize.height + padding.top + padding.bottom);
 	    if (verticalDrag) {
 		Rect scrollBar = getVerticalScrollbar(clip);
 		Rect block = getVerticalScrollBlock(clip, scrollBar);

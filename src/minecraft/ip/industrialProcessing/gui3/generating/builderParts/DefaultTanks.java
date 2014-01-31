@@ -84,12 +84,21 @@ public class DefaultTanks {
 	return inventory;
     }
 
-    public static void setup(ArrayList<TankReference> tankRefs, RecipeSlot[] slots, GridPanel grid, Alignment min) {
+    public static void setup(ArrayList<TankReference> tankRefs, RecipeSlot[] slots, int maxAmount, GridPanel grid, Alignment min) {
 	for (TankReference tank : tankRefs) {
 	    TankControl tankControl = TankControl.createTank();
 	    // TODO: get min and max for output
 	    FluidStack stack = getStack(slots, tank.tankSlot);
 	    tankControl.horizontalAlign = min;
+	    if (stack != null) {
+		tankControl.setCapacity(maxAmount);
+		tankControl.setFluidAmount(stack.amount);
+		tankControl.setFluidID(stack.fluidID);
+	    } else {
+		tankControl.setCapacity(0);
+		tankControl.setFluidAmount(0);
+		tankControl.setFluidID(-1);
+	    }
 	    grid.children.add(new GridCell(0, grid.columns.size(), tankControl));
 	    grid.columns.add(new GridSize(1, SizeMode.RELATIVE));
 	}
@@ -115,5 +124,15 @@ public class DefaultTanks {
 	    return inputSlot.maxAmount;
 	}
 	return 0;
+    }
+
+    public static int getMaxAmount(RecipeSlot[] outputs) {
+	int max = 0;
+	for (int i = 0; i < outputs.length; i++) {
+	    int amount = getAmount(outputs[i]);
+	    if (amount > max)
+		max = amount;
+	}
+	return max;
     }
 }

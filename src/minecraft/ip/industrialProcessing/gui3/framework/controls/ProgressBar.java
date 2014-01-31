@@ -91,8 +91,8 @@ public class ProgressBar extends Control implements IProgressBinding {
 
     public static ProgressBar createWorker(TextureReference texture) {
 	ProgressBar bar = new ProgressBar(texture, DEFAULT_WORKER_VERTICAL_BACKGROUND, DEFAULT_WORKER_VERTICAL_FOREGROUND, Orientation.HORIZONTAL, DEFAULT_WORKER_THICKNESS);
-	bar.width = 24;
-	bar.height = 15;
+	bar.width = texture.size.width * DEFAULT_WORKER_VERTICAL_BACKGROUND.width;
+	bar.height =  texture.size.height * DEFAULT_WORKER_VERTICAL_BACKGROUND.height;
 	bar.name = "IP.Gui.Work";
 	bar.tooltip = "%.0f/%.0f";
 	return bar;
