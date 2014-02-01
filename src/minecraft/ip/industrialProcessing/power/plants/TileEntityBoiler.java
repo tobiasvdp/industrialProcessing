@@ -106,7 +106,7 @@ public class TileEntityBoiler extends TileEntityFluidWorkerMachine implements IH
 
     @Override
     public Iterator<Recipe> iterateRecipes() {
-	return recipes.iterator();
+	return recipes.getRecipes();
     }
 
     public int getTemperature() {

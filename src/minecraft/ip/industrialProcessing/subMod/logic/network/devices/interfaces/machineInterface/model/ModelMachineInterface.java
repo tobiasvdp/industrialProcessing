@@ -95,10 +95,10 @@ public class ModelMachineInterface extends ModelBlock {
 				boolean[] innercon = te.getInterConnections(i);
 				boolean[] externCon = te.getExternalConnections(i);
 				boolean[] externConCor = te.getExternalConnectionCorners(i);
-				models[i].renderMesh(false, iconOrange, reference);
-				models2[i].renderMesh(false, iconOrange, reference);
-				models3[i].renderMesh(false, iconScreen, reference);
-				models4[i].renderMesh(false, iconOrange, reference);
+				//models[i].renderMesh(false, iconOrange, reference);
+				//models2[i].renderMesh(false, iconOrange, reference);
+				//models3[i].renderMesh(false, iconScreen, reference);
+				//models4[i].renderMesh(false, iconOrange, reference);
 				for(int j = 0;j<innercon.length;j++){
 					if(innercon[j] || externCon[j])
 						innerconnections[i][j].renderMesh(false, iconWire, reference);

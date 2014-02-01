@@ -10,6 +10,10 @@ import ip.industrialProcessing.gui.GuiLayout;
 import ip.industrialProcessing.gui.IGuiLayout;
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
+import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
+import ip.industrialProcessing.gui3.generating.GuiBuilderDefault;
+import ip.industrialProcessing.gui3.generating.IGuiBlock;
+import ip.industrialProcessing.gui3.generating.IGuiBuilder;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.recipes.IRecipeBlock;
@@ -19,16 +23,10 @@ import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class BlockCrusher extends BlockMachineRendered implements IRecipeBlock, IDescriptionBlock, IGuiLayout {
+public class BlockCrusher extends BlockMachineRendered implements IRecipeBlock, IDescriptionBlock, IGuiBlock {
 
-    public static GuiLayout guiLayout;
-    static {
-	guiLayout = new GuiLayout();
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 1);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsOutput).setSlotLayout(SlotLayoutType.horizontal, 1);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.worker);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.power);
-    }
+    private static final TextureReference WORKER_TEXTURE = TextureReference.createDefault("Ore Crusher", 24, 32);
+    public static IGuiBuilder guiBuilder = new GuiBuilderDefault("Ore Crusher").addInputSlot(0).addOutputSlot(1).enablePower(2).enableWorker(WORKER_TEXTURE);
 
     public BlockCrusher() {
 	super(ConfigMachineBlocks.getCrusherBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Ore Crusher", ISetupCreativeTabs.tabOreProcessing);
@@ -74,8 +72,8 @@ public class BlockCrusher extends BlockMachineRendered implements IRecipeBlock, 
     }
 
     @Override
-    public GuiLayout getGuiLayout() {
-	return guiLayout;
+    public IGuiBuilder getGui() {
+	return guiBuilder;
     }
 
 }

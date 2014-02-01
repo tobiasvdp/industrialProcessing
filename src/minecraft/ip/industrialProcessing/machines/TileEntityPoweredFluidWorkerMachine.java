@@ -3,6 +3,7 @@ package ip.industrialProcessing.machines;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.power.IPoweredMachine;
 import ip.industrialProcessing.power.PowerHelper;
+import ip.industrialProcessing.recipes.IPowerRecipe;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeWorker;
 import ip.industrialProcessing.subMod.logic.old.api.network.interfaces.InterfaceType;
@@ -38,17 +39,19 @@ public abstract class TileEntityPoweredFluidWorkerMachine extends TileEntityFlui
 	    int amount = PowerWorkerHelper.getWork(this.storage, this.maxWorkSpeed);
 	    int maxWork = this.storage.drainPower(amount, false);
 
-	    if (recipe.powerRequired > 0) {
-		maxWork /= recipe.powerRequired;
-		if (maxWork == 0)
-		    status = StatusType.lowPower;
+	    if (recipe instanceof IPowerRecipe) {
+		IPowerRecipe powerRecipe = (IPowerRecipe) recipe;
+		if (powerRecipe.getPowerRequired() > 0)
+		    maxWork /= powerRecipe.getPowerRequired();
+		else
+		    maxWork = this.maxWorkSpeed;
 	    } else
 		maxWork = this.maxWorkSpeed;
 
 	    int maxPower = work(maxWork);
-
-	    if (recipe.powerRequired > 0) {
-		maxPower *= recipe.powerRequired;
+	    if (recipe instanceof IPowerRecipe) {
+		IPowerRecipe powerRecipe = (IPowerRecipe) recipe;
+		maxPower *= powerRecipe.getPowerRequired();
 		this.storage.drainPower(maxPower, true);
 	    }
 	} else

@@ -33,7 +33,7 @@ public class TileEntityWaterTreatmentStation extends TileEntityPoweredFluidWorke
 
 	@Override
 	public Iterator<Recipe> iterateRecipes() {
-		return recipes.iterator();
+		return recipes.getRecipes();
 	}
 
 	@Override

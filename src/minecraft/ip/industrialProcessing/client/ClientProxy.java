@@ -275,7 +275,8 @@ public class ClientProxy extends CommonProxy {
 
 	// smart rendering tile entities
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySandCaster.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockSandCaster, "ModelSandCaster", modelSandCaster));
-	
+	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGenerator.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockGenerator, "ModelGenerator", generator));
+	 
 	
 	// 100% block
 	ConfigRenderers.setRendererCrystalId(RenderingRegistry.getNextAvailableRenderId());
@@ -445,9 +446,6 @@ public class ClientProxy extends CommonProxy {
 	ConfigRenderers.setRendererTurbineId(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererTurbineId(), modelTurbineBlock));
 
-	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGenerator.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockGenerator, "ModelGenerator", generator));
-	ConfigRenderers.setRendererGeneratorId(RenderingRegistry.getNextAvailableRenderId());
-	RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererGeneratorId(), modelGeneratorBlock));
 
 	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityElectroMotor.class, new RendererTileEntityAnimated(ISetupMachineBlocks.blockElectroMotor, "ModelGenerator", modelElectroMotorTile));
 	ConfigRenderers.setRendererElectroMotorId(RenderingRegistry.getNextAvailableRenderId());

@@ -61,7 +61,7 @@ public class TileEntityMixer extends TileEntityPoweredFluidWorkerMachine impleme
 
 	@Override
 	public Iterator<Recipe> iterateRecipes() {
-		return recipes.iterator();
+		return recipes.getRecipes();
 	}
 
 	@Override

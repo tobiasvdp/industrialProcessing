@@ -1,34 +1,28 @@
 package ip.industrialProcessing.machines.flotationCell;
 
+import ip.industrialProcessing.config.ConfigMachineBlocks;
+import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
+import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
+import ip.industrialProcessing.gui3.generating.GuiBuilderDefault;
+import ip.industrialProcessing.gui3.generating.IGuiBlock;
+import ip.industrialProcessing.gui3.generating.IGuiBuilder;
+import ip.industrialProcessing.machines.BlockMachineRendered;
+import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.recipes.IRecipeBlock;
+import ip.industrialProcessing.utils.IDescriptionBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
-import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.config.ConfigMachineBlocks;
-import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.config.INamepace;
-import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.gui.GuiLayout;
-import ip.industrialProcessing.gui.IGuiLayout;
-import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
-import ip.industrialProcessing.machines.BlockMachineRendered;
-import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.recipes.IRecipeBlock;
-import ip.industrialProcessing.utils.IDescriptionBlock;
 
-public class BlockFlotationCell extends BlockMachineRendered implements IRecipeBlock, IDescriptionBlock, IGuiLayout {
+public class BlockFlotationCell extends BlockMachineRendered implements IRecipeBlock, IDescriptionBlock, IGuiBlock {
 
-    public static GuiLayout guiLayout;
-    static {
-	guiLayout = new GuiLayout();
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.tankInput);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.tankOutput);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.tankOutput);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.worker); 
-    }
+    private static final TextureReference WORKER_TEXTURE = TextureReference.createDefault("Flotation Cell.png", 22, 32);
+    public static IGuiBuilder guiBuilder = new GuiBuilderDefault("Flotation Cell").enableWorker(WORKER_TEXTURE).addInputTank(0, 0, 1).addOutputTank(1, 2, 3).addOutputTank(2, 4, 5);
     private Icon[] icons = new Icon[2];
 
     public BlockFlotationCell() {
@@ -66,13 +60,13 @@ public class BlockFlotationCell extends BlockMachineRendered implements IRecipeB
     }
 
     @Override
-    public GuiLayout getGuiLayout() {
-	return guiLayout;
+    public IGuiBuilder getGui() {
+	return guiBuilder;
     }
 
     @Override
     public String getDescription() {
-	return "You make me float.";
+	return "Froth flotation is a process for selectively separating hydrophobic materials from hydrophilic.";
     }
 
 }

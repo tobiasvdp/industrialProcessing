@@ -4,13 +4,10 @@ import ip.industrialProcessing.gui.IGuiLayout;
 import ip.industrialProcessing.gui.IGuiLayoutMultiblock;
 import ip.industrialProcessing.gui.container.ContainerIP;
 import ip.industrialProcessing.gui.guiContainer.GuiContainerIP;
-import ip.industrialProcessing.items.guide.gui.GuiGuide;
-import ip.industrialProcessing.machines.electrolyser.ContainerElectrolyser;
-import ip.industrialProcessing.machines.electrolyser.GuiContainerElectrolyser;
-import ip.industrialProcessing.machines.electrolyser.TileEntityElectrolyser;
-import ip.industrialProcessing.machines.insulator.ContainerInsulator;
-import ip.industrialProcessing.machines.insulator.GuiContainerInsulator;
-import ip.industrialProcessing.machines.insulator.TileEntityInsulator;
+import ip.industrialProcessing.gui3.generating.IGuiBlock;
+import ip.industrialProcessing.gui3.generating.IGuiMultiblock;
+import ip.industrialProcessing.gui3.generating.LayoutGuiBuilder;
+import ip.industrialProcessing.gui3.guide.GuideScreen;
 import ip.industrialProcessing.machines.oxygenFurnace.ContainerOxygenFurnace;
 import ip.industrialProcessing.machines.oxygenFurnace.GuiContainerOxygenFurnace;
 import ip.industrialProcessing.machines.oxygenFurnace.TileEntityOxygenFurnace;
@@ -108,11 +105,7 @@ import ip.industrialProcessing.multiblock.dummy.block.toggleButton.TEmultiblockT
 import ip.industrialProcessing.power.buildcraftGenerator.ContainerBuildcraftGenerator;
 import ip.industrialProcessing.power.buildcraftGenerator.GuiContainerBuildcraftGenerator;
 import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
-import ip.industrialProcessing.power.plants.ContainerGenerator;
-import ip.industrialProcessing.power.plants.ContainerTurbine;
-import ip.industrialProcessing.power.plants.GuiContainerGenerator;
 import ip.industrialProcessing.power.plants.GuiContainerTurbine;
-import ip.industrialProcessing.power.plants.TileEntityGenerator;
 import ip.industrialProcessing.power.plants.TileEntityTurbine;
 import ip.industrialProcessing.power.storage.ContainerEnergyCell;
 import ip.industrialProcessing.power.storage.GuiContainerEnergyCell;
@@ -139,28 +132,25 @@ public class GuiHandler implements IGuiHandler {
 	    if (entity.getBlockType() != null && (entity.getBlockType() instanceof IGuiLayout || entity.getBlockType() instanceof IGuiLayoutMultiblock)) {
 		return new ContainerIP(player, entity);
 	    }
+
+	    if (entity.getBlockType() != null && (entity.getBlockType() instanceof IGuiBlock || entity.getBlockType() instanceof IGuiMultiblock)) {
+		return LayoutGuiBuilder.createContainer(player.inventory, entity);
+	    }
+
 	    if (entity instanceof TileEntityMagneticSeparator)
-		return new ContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity); 
+		return new ContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity);
 	    if (entity instanceof TileEntityExtruder)
 		return new ContainerExtruder(player.inventory, (TileEntityExtruder) entity);
 	    if (entity instanceof TileEntityOxygenFurnace)
 		return new ContainerOxygenFurnace(player.inventory, (TileEntityOxygenFurnace) entity);
 	    if (entity instanceof TileEntityBuildcraftGenerator)
 		return new ContainerBuildcraftGenerator(player.inventory, (TileEntityBuildcraftGenerator) entity);
-	    if (entity instanceof TileEntityGenerator)
-		return new ContainerGenerator(player.inventory, (TileEntityGenerator) entity);
-	    if (entity instanceof TileEntityTurbine)
-		return new ContainerTurbine(player.inventory, (TileEntityTurbine) entity);
 	    if (entity instanceof TileEntityIncubator)
 		return new ContainerIncubator(player.inventory, (TileEntityIncubator) entity);
 	    if (entity instanceof TileEntityWireMill)
 		return new ContainerWireMill(player.inventory, (TileEntityWireMill) entity);
-	    if (entity instanceof TileEntityInsulator)
-		return new ContainerInsulator(player.inventory, (TileEntityInsulator) entity);
 	    if (entity instanceof TileEntitySpoolWindingMachine)
 		return new ContainerSpoolWindingMachine(player.inventory, (TileEntitySpoolWindingMachine) entity);
-	    if (entity instanceof TileEntityElectrolyser)
-		return new ContainerElectrolyser(player.inventory, (TileEntityElectrolyser) entity);
 	    if (entity instanceof TileEntitySourWaterStripper)
 		return new ContainerSourWaterStripper(player.inventory, (TileEntitySourWaterStripper) entity);
 	    if (entity instanceof TileEntityAlkylationUnit)
@@ -192,7 +182,7 @@ public class GuiHandler implements IGuiHandler {
 	    if (entity instanceof TileEntityVacuumDestilationTower)
 		return new ContainerVacuumDestilationTower(player.inventory, (TileEntityVacuumDestilationTower) entity);
 	    if (entity instanceof TileEntitySinter)
-		return new ContainerSinter(player.inventory, (TileEntitySinter) entity); 
+		return new ContainerSinter(player.inventory, (TileEntitySinter) entity);
 	    if (entity instanceof TEmultiblockBlastFurnace)
 		return new ContainerMultiblockBlastFurnace(player.inventory, (TEmultiblockBlastFurnace) entity);
 
@@ -230,16 +220,17 @@ public class GuiHandler implements IGuiHandler {
 	    if (entity.getBlockType() != null && (entity.getBlockType() instanceof IGuiLayout || entity.getBlockType() instanceof IGuiLayoutMultiblock)) {
 		return new GuiContainerIP(player, entity, new ContainerIP(player, entity));
 	    }
+	    if (entity.getBlockType() != null &&  (entity.getBlockType() instanceof IGuiBlock || entity.getBlockType() instanceof IGuiMultiblock)) {
+		return LayoutGuiBuilder.createGuiContainer(player.inventory, entity);
+	    } 
 	    if (entity instanceof TileEntityMagneticSeparator)
-		return new GuiContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity); 
+		return new GuiContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity);
 	    if (entity instanceof TileEntityExtruder)
 		return new GuiContainerExtruder(player.inventory, (TileEntityExtruder) entity);
 	    if (entity instanceof TileEntityOxygenFurnace)
 		return new GuiContainerOxygenFurnace(player.inventory, (TileEntityOxygenFurnace) entity);
 	    if (entity instanceof TileEntityBuildcraftGenerator)
 		return new GuiContainerBuildcraftGenerator(player.inventory, (TileEntityBuildcraftGenerator) entity);
-	    if (entity instanceof TileEntityGenerator)
-		return new GuiContainerGenerator(player.inventory, (TileEntityGenerator) entity);
 	    if (entity instanceof TileEntityTurbine)
 		return new GuiContainerTurbine(player.inventory, (TileEntityTurbine) entity);
 	    if (entity instanceof TEmultiblockToggleButton)
@@ -248,12 +239,8 @@ public class GuiHandler implements IGuiHandler {
 		return new GuiContainerIncubator(player.inventory, (TileEntityIncubator) entity);
 	    if (entity instanceof TileEntityWireMill)
 		return new GuiContainerWireMill(player.inventory, (TileEntityWireMill) entity);
-	    if (entity instanceof TileEntityInsulator)
-		return new GuiContainerInsulator(player.inventory, (TileEntityInsulator) entity);
 	    if (entity instanceof TileEntitySpoolWindingMachine)
 		return new GuiContainerSpoolWindingMachine(player.inventory, (TileEntitySpoolWindingMachine) entity);
-	    if (entity instanceof TileEntityElectrolyser)
-		return new GuiContainerElectrolyser(player.inventory, (TileEntityElectrolyser) entity);
 	    if (entity instanceof TileEntitySourWaterStripper)
 		return new GuiContainerSourWaterStripper(player.inventory, (TileEntitySourWaterStripper) entity);
 	    if (entity instanceof TileEntityAlkylationUnit)
@@ -285,7 +272,7 @@ public class GuiHandler implements IGuiHandler {
 	    if (entity instanceof TileEntityVacuumDestilationTower)
 		return new GuiContainerVacuumDestilationTower(player.inventory, (TileEntityVacuumDestilationTower) entity);
 	    if (entity instanceof TileEntitySinter)
-		return new GuiContainerSinter(player.inventory, (TileEntitySinter) entity); 
+		return new GuiContainerSinter(player.inventory, (TileEntitySinter) entity);
 	    if (entity instanceof TEmultiblockBlastFurnace)
 		return new GuiContainerMultiblockBlastFurnace(player.inventory, (TEmultiblockBlastFurnace) entity);
 	    if (entity instanceof TileEntityVacuumCaster)
@@ -307,7 +294,8 @@ public class GuiHandler implements IGuiHandler {
 	    if (entity instanceof TileEntityTank)
 		return new GuiContainerTank(player.inventory, (TileEntityTank) entity);
 	} else if (ID == GUIDE_ID) {
-	    return new GuiGuide(player);
+	    return new GuideScreen(player);
+	    // return new GuiGuide(player);
 	} else if (ID == ANVIL_ID) {
 	    return new GuiContainerAnvil(player.inventory, world, x, y, z);
 	}

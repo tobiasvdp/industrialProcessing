@@ -1,13 +1,13 @@
 package ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator;
 
-import net.minecraft.item.Item;
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ISetupItems;
 import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.recipes.PoweredRecipe;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeInputSlot;
 import ip.industrialProcessing.recipes.RecipeOutputSlot;
 import ip.industrialProcessing.recipes.RecipeSlotType;
+import net.minecraft.item.Item;
 
 public class RecipesIncubator extends RecipesMachine {
     public RecipesIncubator() {
@@ -21,7 +21,7 @@ public class RecipesIncubator extends RecipesMachine {
     }
 
     private Recipe rottenFleshToCulture(int workTime, int powerConsumption) {
-	Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.rottenFlesh.itemID, RecipeSlotType.INVENTORY, 3) };
 
 	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, ISetupItems.itemGrownCulture.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
@@ -31,7 +31,7 @@ public class RecipesIncubator extends RecipesMachine {
     }
 
     private Recipe meatToRottenFlesh(int workTime, int powerConsumption) {
-	Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.beefRaw.itemID, RecipeSlotType.INVENTORY, 3) };
 
 	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, Item.rottenFlesh.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
@@ -41,7 +41,7 @@ public class RecipesIncubator extends RecipesMachine {
     }
 
     private Recipe porkToRottenFlesh(int workTime, int powerConsumption) {
-	Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.porkRaw.itemID, RecipeSlotType.INVENTORY, 3) };
 
 	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, Item.rottenFlesh.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };

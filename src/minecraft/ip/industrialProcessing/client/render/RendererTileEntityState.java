@@ -1,6 +1,5 @@
 package ip.industrialProcessing.client.render;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.rendering.RendererTileEntity;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.machines.TileEntityMachine;

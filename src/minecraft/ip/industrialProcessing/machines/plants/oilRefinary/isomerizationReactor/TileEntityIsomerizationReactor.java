@@ -37,7 +37,7 @@ public class TileEntityIsomerizationReactor extends TileEntityPoweredFluidWorker
 
     @Override
     public Iterator<Recipe> iterateRecipes() {
-	return recipes.iterator();
+	return recipes.getRecipes();
     }
 
     @Override

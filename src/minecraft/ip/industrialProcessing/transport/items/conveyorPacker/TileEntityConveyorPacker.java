@@ -89,14 +89,16 @@ public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation
     @Override
     public void updateEntity() {
 	super.updateEntity();
-	if (ticks++ > updateCycle) {
-	    ticks = 0;
-	    if (operationMode == PackerOperationMode.UNPACK) {
-		extractFromBox();
-	    } else {
-		checkBox();
-		if (operationMode == PackerOperationMode.PASS_THROUGH)
-		    ejectBox();
+	if (!this.worldObj.isRemote) {
+	    if (ticks++ > updateCycle) {
+		ticks = 0;
+		if (operationMode == PackerOperationMode.UNPACK) {
+		    extractFromBox();
+		} else {
+		    checkBox();
+		    if (operationMode == PackerOperationMode.PASS_THROUGH)
+			ejectBox();
+		}
 	    }
 	}
     }
@@ -388,27 +390,29 @@ public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation
 
     @Override
     public void setStateValue(int index, int value) {
-	switch(index)
-	{
+	switch (index) {
 	case 0:
 	    this.operationMode = PackerOperationMode.values()[value];
+	    System.out.println("OPMODE:" + this.operationMode);
 	    break;
 	case 1:
 	    this.boxAllowedOnConveyor = value > 0;
+	    System.out.println("boxes:" + this.boxAllowedOnConveyor);
 	    break;
-	    default: break;
+	default:
+	    break;
 	}
     }
 
     @Override
     public int getMaxStateValue(int index) {
-	switch(index)
-	{
+	switch (index) {
 	case 0:
 	    return 3; // 4 modes: 0,1,2,3
 	case 1:
 	    return 1;
-	    default: return 0;
+	default:
+	    return 0;
 	}
     }
 

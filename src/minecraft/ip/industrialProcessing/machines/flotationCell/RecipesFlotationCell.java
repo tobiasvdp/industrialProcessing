@@ -1,13 +1,13 @@
 package ip.industrialProcessing.machines.flotationCell;
 
-import net.minecraftforge.fluids.FluidRegistry;
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ISetupFluids;
 import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.recipes.PoweredRecipe;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeInputSlot;
 import ip.industrialProcessing.recipes.RecipeOutputSlot;
 import ip.industrialProcessing.recipes.RecipeSlotType;
+import net.minecraftforge.fluids.FluidRegistry;
 
 public class RecipesFlotationCell extends RecipesMachine {
     public RecipesFlotationCell() {
@@ -26,7 +26,7 @@ public class RecipesFlotationCell extends RecipesMachine {
     }
 
     private Recipe dirtyToUnclean(int i, int power) {
-	Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = power;
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 1000) };
@@ -35,7 +35,7 @@ public class RecipesFlotationCell extends RecipesMachine {
     }
 
     private Recipe ThickSludgeToFlotationSedimentIron(int i, int powerConsumption) {
-	Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickIronSludge.getName()), RecipeSlotType.TANK, 1000) };
@@ -44,7 +44,7 @@ public class RecipesFlotationCell extends RecipesMachine {
     }
 
     private Recipe ThickSludgeToFlotationSedimentTin(int i, int powerConsumption) {
-	Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickTinSludge.getName()), RecipeSlotType.TANK, 1000) };
@@ -53,7 +53,7 @@ public class RecipesFlotationCell extends RecipesMachine {
     }
 
     private Recipe ThickSludgeToFlotationSedimentCopper(int i, int powerConsumption) {
-	Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickCopperSludge.getName()), RecipeSlotType.TANK, 1000) };
@@ -62,7 +62,7 @@ public class RecipesFlotationCell extends RecipesMachine {
     }
 
     private Recipe ThickSludgeToFlotationSedimentGold(int i, int powerConsumption) {
-	Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickGoldSludge.getName()), RecipeSlotType.TANK, 1000) };
@@ -71,7 +71,7 @@ public class RecipesFlotationCell extends RecipesMachine {
     }
 
     private Recipe ThickSludgeToFlotationSedimentGalena(int i, int powerConsumption) {
-	Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickGalenaSludge.getName()), RecipeSlotType.TANK, 1000) };
@@ -80,7 +80,7 @@ public class RecipesFlotationCell extends RecipesMachine {
     }
 
     private Recipe ThickSludgeToFlotationSedimentChromite(int i, int powerConsumption) {
-	Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickChromiteSludge.getName()), RecipeSlotType.TANK, 1000) };
@@ -89,7 +89,7 @@ public class RecipesFlotationCell extends RecipesMachine {
     }
 
     private Recipe ThickSludgeToFlotationSedimentTalia(int i, int powerConsumption) {
-	Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickTaliaSludge.getName()), RecipeSlotType.TANK, 1000) };

@@ -12,7 +12,7 @@ public class SlotBase extends Slot {
 
 	@Override
 	public boolean isItemValid(ItemStack par1ItemStack) {
-		return inventory.isItemValidForSlot(this.slotNumber, par1ItemStack);
+		return inventory.isItemValidForSlot(this.getSlotIndex(), par1ItemStack);
 	}
 
 }

@@ -36,6 +36,7 @@ public class TileEntityClassifier extends TileEntityPoweredFluidWorkerMachine im
 		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.DOWN, false, true);
 
 		this.tankHandler = new TankHandler(this, new int[] { 0 }); 
+		
 	}
 	
 	@Override
@@ -51,7 +52,7 @@ public class TileEntityClassifier extends TileEntityPoweredFluidWorkerMachine im
 
 	@Override
 	public Iterator<Recipe> iterateRecipes() {
-		return recipes.iterator();
+		return recipes.getRecipes();
 	}
 
 	@Override

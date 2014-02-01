@@ -40,9 +40,9 @@ public class TileEntityManualTreeTap extends TileEntityWorkerMachine {
 			int id = worldObj.getBlockId(xCoord - direction.offsetX, yCoord - direction.offsetY, zCoord - direction.offsetZ);
 
 			if (id == ISetupBlocks.blockRubberLog.blockID)
-				return rubberRecipes.iterator();
+				return rubberRecipes.getRecipes();
 			else if (id == ISetupBlocks.blockPineLog.blockID)
-				return pineRecipes.iterator();
+				return pineRecipes.getRecipes();
 		}
 		return new ArrayList<Recipe>().iterator();
 	}

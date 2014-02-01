@@ -22,6 +22,6 @@ public class TileEntitySpoolWindingMachine extends TileEntityPoweredWorkerMachin
 
 	@Override
 	public Iterator<Recipe> iterateRecipes() {
-		return recipes.iterator();
+		return recipes.getRecipes();
 	}
 }

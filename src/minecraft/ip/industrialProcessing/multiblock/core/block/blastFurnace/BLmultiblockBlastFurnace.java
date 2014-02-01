@@ -1,34 +1,19 @@
 package ip.industrialProcessing.multiblock.core.block.blastFurnace;
 
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import net.minecraft.world.World;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.gui.GuiLayout;
-import ip.industrialProcessing.gui.IGuiLayout;
-import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
-import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
 import ip.industrialProcessing.multiblock.core.BlockMultiblockCore;
-import ip.industrialProcessing.multiblock.recipes.IRecipeMultiblock;
 import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
+import ip.industrialProcessing.recipes.IRecipeBlock;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
+import net.minecraft.world.World;
 
-public class BLmultiblockBlastFurnace extends BlockMultiblockCore implements IRecipeMultiblock, IGuiLayout{
+public class BLmultiblockBlastFurnace extends BlockMultiblockCore implements IRecipeBlock{
     Icon[] icons = new Icon[6];
-    
-    private static GuiLayout layout;
-    static{
-    	layout = new GuiLayout();
-    	layout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.vertical, 2);
-    	layout.addLayoutPanel(GuiLayoutPanelType.tankInput);
-    	layout.addLayoutPanel(GuiLayoutPanelType.tankOutput);
-    	layout.addLayoutPanel(GuiLayoutPanelType.tankOutput);
-    	layout.addLayoutPanel(GuiLayoutPanelType.tankOutput);
-    	layout.addLayoutPanel(GuiLayoutPanelType.worker);
-    }
 
     public BLmultiblockBlastFurnace() {
 	super(ConfigMachineBlocks.getBLmultiblockBlastFurnace(), "BLmultiblockBlastFurnace", ISetupCreativeTabs.tabMultiblocks);
@@ -62,10 +47,5 @@ public class BLmultiblockBlastFurnace extends BlockMultiblockCore implements IRe
 	@Override
 	public RecipesMultiblock getRecipes() {
 		return TEmultiblockBlastFurnace.recipes;
-	}
-
-	@Override
-	public GuiLayout getGuiLayout() {
-		return layout;
 	}
 }

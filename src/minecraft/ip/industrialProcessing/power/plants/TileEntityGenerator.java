@@ -11,87 +11,114 @@ import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 import ip.industrialProcessing.power.IGeneratorProgress;
 import ip.industrialProcessing.power.TileEntityPowerGenerator;
 import ip.industrialProcessing.utils.DirectionUtils;
+import ip.industrialProcessing.utils.handler.numbers.IProgressable;
 
-public class TileEntityGenerator extends TileEntityPowerGenerator implements IAnimationProgress, IMechanicalMotion, IGeneratorProgress, IAnimationSyncable {
+public class TileEntityGenerator extends TileEntityPowerGenerator implements IAnimationProgress, IMechanicalMotion, IGeneratorProgress, IAnimationSyncable, IProgressable {
 
-	private AnimationHandler animationHandler;
-	private float lastCharge;
-	LocalDirection outputSide = LocalDirection.BACK;
+    private AnimationHandler animationHandler;
+    private float lastCharge;
+    LocalDirection outputSide = LocalDirection.BACK;
     LocalDirection inputSide = LocalDirection.FRONT;
 
-	public TileEntityGenerator() {
-		 
-		this.animationHandler = new AnimationHandler(AnimationMode.WRAP, 1f, true);
-	}
+    public TileEntityGenerator() {
 
-	@Override
-	public void updateEntity() {
-		if (!this.worldObj.isRemote) {
-			this.animationHandler.update();
-			TileAnimationSyncHandler.sendAnimationData(this, this.animationHandler);
-		}
-		super.updateEntity();
-	}
+	this.animationHandler = new AnimationHandler(AnimationMode.WRAP, 1f, true);
+    }
 
-	@Override
-	protected boolean isValidInput(int slot, int itemID) {
-		return false;
+    @Override
+    public void updateEntity() {
+	if (!this.worldObj.isRemote) {
+	    this.animationHandler.update();
+	    TileAnimationSyncHandler.sendAnimationData(this, this.animationHandler);
 	}
+	super.updateEntity();
+    }
 
-	@Override
-	public boolean canOutputPower(ForgeDirection opposite) {
-		LocalDirection power = DirectionUtils.getLocalDirection(opposite, getForwardDirection());
-		return power == outputSide;
-	}
+    @Override
+    protected boolean isValidInput(int slot, int itemID) {
+	return false;
+    }
 
-	@Override
-	public void writeToNBT(NBTTagCompound nbt) {
-		super.writeToNBT(nbt);
-	}
+    @Override
+    public boolean canOutputPower(ForgeDirection opposite) {
+	LocalDirection power = DirectionUtils.getLocalDirection(opposite, getForwardDirection());
+	return power == outputSide;
+    }
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
-		super.readFromNBT(nbt);
-	}
+    @Override
+    public void writeToNBT(NBTTagCompound nbt) {
+	super.writeToNBT(nbt);
+    }
 
-	@Override
-	public float getCharge(float q) {
-		this.lastCharge = q;
-		return q;
-	}
+    @Override
+    public void readFromNBT(NBTTagCompound nbt) {
+	super.readFromNBT(nbt);
+    }
 
-	@Override
-	public float getLastAmps() {
-		return this.lastCharge / AnimationHandler.DT;
-	}
+    @Override
+    public float getCharge(float q) {
+	this.lastCharge = q;
+	return q;
+    }
 
-	@Override
-	public float getVoltage() {
-		return this.animationHandler.getSpeed()*30;
-	}
+    @Override
+    public float getLastAmps() {
+	return this.lastCharge / AnimationHandler.DT;
+    }
 
-	@Override
-	public float getAnimationProgress(float scale, int index) {
-		return this.animationHandler.getAnimationProgress(scale);
-	}
+    @Override
+    public float getVoltage() {
+	return this.animationHandler.getSpeed() * 30;
+    }
 
-	@Override
-	public int getAnimationCount() {
-		return 1;
-	}
+    @Override
+    public float getAnimationProgress(float scale, int index) {
+	return this.animationHandler.getAnimationProgress(scale);
+    }
 
-	@Override
-	public float setSpeed(ForgeDirection side, float speed) {
-	    ForgeDirection direction = DirectionUtils.getWorldDirection(this.inputSide, this.getForwardDirection());
-		if (side == direction) {
-			this.animationHandler.setSpeed(speed);
-			return (float) Math.pow(this.lastCharge/10, 1.5) ;
-		}
-		return 0;
-	}
+    @Override
+    public int getAnimationCount() {
+	return 1;
+    }
 
-	@Override
-	public AnimationHandler getAnimationHandler(int index) {
-		return this.animationHandler;
+    @Override
+    public float setSpeed(ForgeDirection side, float speed) {
+	ForgeDirection direction = DirectionUtils.getWorldDirection(this.inputSide, this.getForwardDirection());
+	if (side == direction) {
+	    this.animationHandler.setSpeed(speed);
+	    return (float) Math.pow(this.lastCharge / 10, 1.5);
 	}
+	return 0;
+    }
+
+    @Override
+    public AnimationHandler getAnimationHandler(int index) {
+	return this.animationHandler;
+    }
+
+    @Override
+    public float getProgress(int index) {
+	switch (index) {
+	case 0:
+	    return getVoltage();
+	case 1:
+	    return getLastAmps();
+	case 2:
+	    return getLastAmps() * getVoltage();
+	}
+	return 0;
+    }
+
+    @Override
+    public float getMaxProgress(int index) {
+	switch (index) {
+	case 0:
+	    return 250;
+	case 1:
+	    return 200;
+	case 2:
+	    return 10000;
+	}
+	return 0;
+    }
 }

@@ -34,7 +34,7 @@ public class TileEntityTricklingFilter extends TileEntityPoweredFluidWorkerMachi
 
     @Override
     public Iterator<Recipe> iterateRecipes() {
-	return recipes.iterator();
+	return recipes.getRecipes();
     }
 
     @Override

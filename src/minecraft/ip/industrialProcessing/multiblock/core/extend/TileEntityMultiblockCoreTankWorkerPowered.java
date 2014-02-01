@@ -12,6 +12,7 @@ import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.power.IPoweredMachine;
 import ip.industrialProcessing.power.PowerHelper;
+import ip.industrialProcessing.recipes.IPowerRecipe;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.utils.DirectionUtils;
 
@@ -30,24 +31,28 @@ public abstract class TileEntityMultiblockCoreTankWorkerPowered extends TileEnti
 
     @Override
     public void doWork() {
-    	Recipe recipe = ((RecipeMultiblockWorker) getWorker()).getCurrentRecipe();
+	Recipe recipe = ((RecipeMultiblockWorker) getWorker()).getCurrentRecipe();
 
-    	if (recipe != null) {
-    	    int amount = PowerWorkerHelper.getWork(this.storage, this.maxWorkSpeed);
-    	    int maxWork = this.storage.drainPower(amount, false);
-    	    
-    	    if (recipe.powerRequired > 0)
-    		maxWork /= recipe.powerRequired;
-    	    else
-    		maxWork =  this.maxWorkSpeed;
+	if (recipe != null) {
+	    int amount = PowerWorkerHelper.getWork(this.storage, this.maxWorkSpeed);
+	    int maxWork = this.storage.drainPower(amount, false);
 
-    	    int maxPower = work(maxWork);
-    	    
-    	    if (recipe.powerRequired > 0) {
-    		maxPower *= recipe.powerRequired;
-    		this.storage.drainPower(maxPower, true);
-    	    }
-    	}
+	    if (recipe instanceof IPowerRecipe) {
+		IPowerRecipe powerRecipe = (IPowerRecipe) recipe;
+		if (powerRecipe.getPowerRequired() > 0)
+		    maxWork /= powerRecipe.getPowerRequired();
+		else
+		    maxWork = this.maxWorkSpeed;
+	    } else
+		maxWork = this.maxWorkSpeed;
+
+	    int maxPower = work(maxWork);
+	    if (recipe instanceof IPowerRecipe) {
+		IPowerRecipe powerRecipe = (IPowerRecipe) recipe;
+		maxPower *= powerRecipe.getPowerRequired();
+		this.storage.drainPower(maxPower, true);
+	    }
+	}
     }
 
     @Override

@@ -24,7 +24,7 @@ public class TileEntityPelletExtruder extends TileEntityPoweredWorkerMachine {
 
     @Override
     public Iterator<Recipe> iterateRecipes() {
-	return recipes.iterator();
+	return recipes.getRecipes();
     }
 
 }

@@ -2,6 +2,7 @@ package ip.industrialProcessing.utils.handler.packets;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.gui.IGuiLayoutTriggerAcceptor;
+import ip.industrialProcessing.gui3.binding.reply.StateConfigSetter;
 import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 import ip.industrialProcessing.machines.animation.conveyors.TileConveyorSyncHandler;
 import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
@@ -47,6 +48,7 @@ public class PacketHandler implements IPacketHandler {
 	public static final String IP_ENTITY_INTERACT = "IP.En.Int";
 	public static final String IP_ENTITY_SPAWNGARAGEDOOR = "IP.En.GDS";
 	public static final String IP_ENTITY_SPAWNGARAGEDOORBLOCK = "IP.En.GDB";
+	public static final String GUI_STATECONF = "IP.Gui.sConf";
 	public static final String IP_MICROBLOCKS_DESTROYING = "IP.BMB.Des";
 	public static final String IP_SCHEDULE_TICK = "IP.tick";
 	public static final String IP_DESTROY_BLOCK = "IP.Des";
@@ -54,7 +56,9 @@ public class PacketHandler implements IPacketHandler {
 
 	@Override
 	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {
-		if (packet.channel.equals(ANIMATION_SYNC)) {
+		if (packet.channel.equals(GUI_STATECONF)) {
+			StateConfigSetter.handleIncomingPacket(manager, packet, player);
+		} else if (packet.channel.equals(ANIMATION_SYNC)) {
 			TileAnimationSyncHandler.handleAnimationSync(manager, packet, player);
 		} else if (packet.channel.equals(TANK_SYNC)) {
 			TileTankSyncHandler.handleTankSync(manager, packet, player);
@@ -86,11 +90,11 @@ public class PacketHandler implements IPacketHandler {
 			EntityPlayer playerMP = (EntityPlayer) player;
 			if (!playerMP.worldObj.isRemote) {
 				TileEntity te = playerMP.worldObj.getBlockTileEntity(teX, teY, teZ);
-				if(te instanceof IGuiLayoutTriggerAcceptor){
-					((IGuiLayoutTriggerAcceptor)te).triggerButton(id);
+				if (te instanceof IGuiLayoutTriggerAcceptor) {
+					((IGuiLayoutTriggerAcceptor) te).triggerButton(id);
 				}
 			}
-		
+
 		} else if (packet.channel.equals(CONVEYOR_SYNC)) {
 			TileConveyorSyncHandler.handleConveyorSync(manager, packet, player);
 		} else if (packet.channel.equals(IP_ENTITY_INTERACT)) {

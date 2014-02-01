@@ -9,10 +9,8 @@ public class ToolTip {
 
 	public ToolTip(String... lines) {
 		this.lines = lines;
-	}
-
-	public static void renderToolTip(ToolTip tip, int x, int y, float z, FontRenderer fontRenderer) {
-
+	} 
+	public static void renderToolTip(ToolTip tip, int x, int y, float z, FontRenderer fontRenderer) { 
 		int lineHeight = 8;
 		int padding = 4;
 		int length = 0;
@@ -45,9 +43,7 @@ public class ToolTip {
 			for (int i = 0; i < tip.lines.length; i++) {
 				String line = tip.lines[i];
 				fontRenderer.drawStringWithShadow(line, x, y + i * (lineHeight + padding), 16777215);
-			}
-			GL11.glEnable(GL11.GL_LIGHTING);
-			GL11.glEnable(GL11.GL_DEPTH_TEST);
+			} 
 		}
 	}
 }

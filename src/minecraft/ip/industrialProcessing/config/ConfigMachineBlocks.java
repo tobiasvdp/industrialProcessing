@@ -84,7 +84,6 @@ import ip.industrialProcessing.multiblock.dummy.block.toggleButton.TEmultiblockT
 import ip.industrialProcessing.multiblock.dummy.block.weldingTableExt.TileEntityMultiblockWeldingTable;
 import ip.industrialProcessing.multiblock.dummy.block.wheel.TEmultiblockWheel;
 import ip.industrialProcessing.multiblock.dummy.block.wheelConnector.TEmultiblockWheelConnector;
-import ip.industrialProcessing.multiblock.recipes.IRecipeMultiblock;
 import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
 import ip.industrialProcessing.power.manualGenerator.TileEntityManualGenerator;
 import ip.industrialProcessing.power.meters.TileEntityVoltMeter;
@@ -380,8 +379,6 @@ public class ConfigMachineBlocks {
 	BlockRegistry.RegisterBlock(block, new BlockType[] { BlockType.Machine });
 	if (block instanceof IRecipeBlock)
 	    RecipeRegistry.registerMachinesRecipes(((IRecipeBlock) block).getRecipes(), block);
-	if (block instanceof IRecipeMultiblock)
-	    RecipeRegistry.registerMachinesRecipes(((IRecipeMultiblock) block).getRecipes(), block);
     }
 
     public static void registerMachineBlock(Block block, String uniqueId, String displayName, Class tileEntity, BlockType... type) {
@@ -392,8 +389,6 @@ public class ConfigMachineBlocks {
 	BlockRegistry.RegisterBlock(block, type);
 	if (block instanceof IRecipeBlock)
 	    RecipeRegistry.registerMachinesRecipes(((IRecipeBlock) block).getRecipes(), block);
-	if (block instanceof IRecipeMultiblock)
-	    RecipeRegistry.registerMachinesRecipes(((IRecipeMultiblock) block).getRecipes(), block);
 	if (block instanceof BlockMicroBlock)
 	    MicroBlockRegistry.RegisterMicroBlock((BlockMicroBlock) block);
     }
@@ -407,8 +402,6 @@ public class ConfigMachineBlocks {
 	BlockRegistry.RegisterBlock(block, new BlockType[] { BlockType.Machine });
 	if (block instanceof IRecipeBlock)
 	    RecipeRegistry.registerMachinesRecipes(((IRecipeBlock) block).getRecipes(), block);
-	if (block instanceof IRecipeMultiblock)
-	    RecipeRegistry.registerMachinesRecipes(((IRecipeMultiblock) block).getRecipes(), block);
 
     }
 
@@ -420,8 +413,6 @@ public class ConfigMachineBlocks {
 	BlockRegistry.RegisterBlock(block, type);
 	if (block instanceof IRecipeBlock)
 	    RecipeRegistry.registerMachinesRecipes(((IRecipeBlock) block).getRecipes(), block);
-	if (block instanceof IRecipeMultiblock)
-	    RecipeRegistry.registerMachinesRecipes(((IRecipeMultiblock) block).getRecipes(), block);
 	if (block instanceof BlockMicroBlock)
 	    MicroBlockRegistry.RegisterMicroBlock((BlockMicroBlock) block);
     }
@@ -431,8 +422,9 @@ public class ConfigMachineBlocks {
     }
 
     public static int getBlockIronPoleID() {
-    	return getInstance().blockIronPoleID;
-        }
+	return getInstance().blockIronPoleID;
+    }
+
     public static int getBlockStorageBoxID() {
 	return getInstance().storageBoxID;
     }
@@ -624,6 +616,7 @@ public class ConfigMachineBlocks {
     public static int getBLtransportConveyorBeltSorter() {
 	return getInstance().BLtransportConveyorBeltSorter;
     }
+
     public static int getBLtransportConveyorBeltPacker() {
 	return getInstance().BLtransportConveyorBeltPacker;
     }

@@ -1,13 +1,13 @@
 package ip.industrialProcessing.machines.hydroCyclone;
 
-import net.minecraftforge.fluids.FluidRegistry;
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ISetupFluids;
 import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.recipes.PoweredRecipe;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeInputSlot;
 import ip.industrialProcessing.recipes.RecipeOutputSlot;
 import ip.industrialProcessing.recipes.RecipeSlotType;
+import net.minecraftforge.fluids.FluidRegistry;
 
 public class RecipesHydroCyclone extends RecipesMachine {
     public RecipesHydroCyclone() {
@@ -26,7 +26,7 @@ public class RecipesHydroCyclone extends RecipesMachine {
     }
 
     private Recipe filtyToDirty(int i) {
-	Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidfiltyWater.getName()), RecipeSlotType.TANK, 1000) };
 	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidGritSludge.getName()), RecipeSlotType.TANK, 100, 200, 0.5) };
@@ -34,7 +34,7 @@ public class RecipesHydroCyclone extends RecipesMachine {
     }
 
     private Recipe MixedIronSludgeToCycloneSedement(int i, int powerConsumption) {
-	Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidMixedSludgeIron.getName()), RecipeSlotType.TANK, 1000) };
@@ -43,7 +43,7 @@ public class RecipesHydroCyclone extends RecipesMachine {
     }
 
     private Recipe MixedGoldSludgeToCycloneSedement(int i, int powerConsumption) {
-	Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidMixedSludgeGold.getName()), RecipeSlotType.TANK, 1000) };
@@ -52,7 +52,7 @@ public class RecipesHydroCyclone extends RecipesMachine {
     }
 
     private Recipe MixedTinSludgeToCycloneSedement(int i, int powerConsumption) {
-	Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidMixedSludgeTin.getName()), RecipeSlotType.TANK, 1000) };
@@ -61,7 +61,7 @@ public class RecipesHydroCyclone extends RecipesMachine {
     }
 
     private Recipe MixedCopperSludgeToCycloneSedement(int i, int powerConsumption) {
-	Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidMixedSludgeCopper.getName()), RecipeSlotType.TANK, 1000) };
@@ -70,7 +70,7 @@ public class RecipesHydroCyclone extends RecipesMachine {
     }
 
     private Recipe MixedChromiteSludgeToCycloneSedement(int i, int powerConsumption) {
-	Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidMixedSludgeChromite.getName()), RecipeSlotType.TANK, 1000) };
@@ -79,7 +79,7 @@ public class RecipesHydroCyclone extends RecipesMachine {
     }
 
     private Recipe MixedTaliaSludgeToCycloneSedement(int i, int powerConsumption) {
-	Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidMixedSludgeTalia.getName()), RecipeSlotType.TANK, 1000) };
@@ -88,7 +88,7 @@ public class RecipesHydroCyclone extends RecipesMachine {
     }
 
     private Recipe MixedGalenaSludgeToCycloneSedement(int i, int powerConsumption) {
-	Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidMixedSludgeGalena.getName()), RecipeSlotType.TANK, 1000) };

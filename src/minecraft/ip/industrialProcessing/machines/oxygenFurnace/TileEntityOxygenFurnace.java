@@ -64,7 +64,7 @@ public class TileEntityOxygenFurnace extends TileEntityPoweredFluidWorkerMachine
 
 	@Override
 	public Iterator<Recipe> iterateRecipes() {
-		return recipes.iterator();
+		return recipes.getRecipes();
 	}
 
 	@Override

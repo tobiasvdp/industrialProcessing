@@ -1,8 +1,8 @@
 package ip.industrialProcessing.machines.pelletExtruder;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ISetupItems;
 import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.recipes.PoweredRecipe;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeInputSlot;
 import ip.industrialProcessing.recipes.RecipeOutputSlot;
@@ -19,7 +19,7 @@ public class RecipesPelletExtruder extends RecipesMachine {
     }
 
     private Recipe cokeToPellet(int workTime, int powerConsumption) {
-	Recipe recipe = new Recipe();
+	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, ISetupItems.itemCokes.itemID, RecipeSlotType.INVENTORY, 1) };
 
 	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, ISetupItems.itemCokePellet.itemID, RecipeSlotType.INVENTORY, 2, 3, 0.5f) };
