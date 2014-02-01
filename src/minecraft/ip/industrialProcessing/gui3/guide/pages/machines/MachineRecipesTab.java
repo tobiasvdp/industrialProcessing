@@ -14,11 +14,11 @@ import ip.industrialProcessing.gui3.framework.panels.WrapPanel;
 import ip.industrialProcessing.gui3.framework.panels.tabs.TabPage;
 import ip.industrialProcessing.gui3.generating.IGuiBlock;
 import ip.industrialProcessing.gui3.generating.IGuiBuilder;
+import ip.industrialProcessing.gui3.generating.IGuiMultiblock;
+import ip.industrialProcessing.multiblock.recipes.ITierRecipe;
 import ip.industrialProcessing.recipes.IMachineRecipe;
 import ip.industrialProcessing.recipes.IMachineRecipes;
 import ip.industrialProcessing.recipes.IRecipeBlock;
-import ip.industrialProcessing.recipes.Recipe;
-import ip.industrialProcessing.recipes.RecipeInputSlot;
 import ip.industrialProcessing.recipes.RecipeOutputSlot;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -30,8 +30,9 @@ public class MachineRecipesTab extends TabPage implements IButtonClickListener<I
     private WrapPanel wrapPanel;
     private Block block;
     private UserControl recipeDock;
+    private IButtonClickListener<ItemStack> stackClickListener;
 
-    public MachineRecipesTab() {
+    public MachineRecipesTab(IButtonClickListener<ItemStack> stackClickListener) {
 	this.header = TextBlock.createText("Recipes");
 	this.activeHeader = TextBlock.createText("Recipes", 0xffffffff);
 	StackPanel stack = new StackPanel();
@@ -49,6 +50,7 @@ public class MachineRecipesTab extends TabPage implements IButtonClickListener<I
 	this.recipeDock.margin = new Thickness(7, 0, 0, 0);
 	stack.addChild(recipeDock);
 	this.content = stack;
+	this.stackClickListener = stackClickListener;
     }
 
     public void setBlock(Block tag) {
@@ -96,8 +98,11 @@ public class MachineRecipesTab extends TabPage implements IButtonClickListener<I
     public void buttonClicked(Button<IMachineRecipe> button, IMachineRecipe tag, float mouseX, float mouseY, MouseButton mouseButton) {
 	if (block instanceof IGuiBlock && tag != null) {
 	    IGuiBuilder builder = ((IGuiBlock) this.block).getGui();
-	    this.recipeDock.child = builder.getRecipePage(tag);
+	    this.recipeDock.child = builder.getRecipePage(tag, this.stackClickListener);
+	} else if (block instanceof IGuiMultiblock && tag != null && tag instanceof ITierRecipe) {
+	    IGuiBuilder builder = ((IGuiMultiblock) this.block).getGui(((ITierRecipe) tag).getTier());
+	    this.recipeDock.child = builder.getRecipePage(tag, this.stackClickListener);
 	} else
-	    this.recipeDock.child = null;
+	    this.recipeDock.child = TextBlock.createText(block.getLocalizedName() + " doesn't implement " + IGuiBlock.class + " or " + IGuiMultiblock.class);
     }
 }

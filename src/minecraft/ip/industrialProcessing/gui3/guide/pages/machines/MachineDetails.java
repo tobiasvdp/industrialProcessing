@@ -52,7 +52,7 @@ public class MachineDetails extends UserControl implements IButtonClickListener<
 	recipeTabs = new TabPanel();
 	recipeTabs.margin = new Thickness(7, 0, 0, 0);
 	this.craftTab = new MachineCraftTab(this);
-	this.recipeTab = new MachineRecipesTab();
+	this.recipeTab = new MachineRecipesTab(this);
 	recipeTabs.addTab(craftTab);
 	recipeTabs.addTab(recipeTab);
 

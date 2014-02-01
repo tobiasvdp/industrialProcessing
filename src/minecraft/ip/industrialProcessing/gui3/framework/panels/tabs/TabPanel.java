@@ -187,5 +187,6 @@ public class TabPanel extends UIElement {
 
     public void clear() {
 	this.tabs.clear();
+	this.activeTab = null;
     }
 }
