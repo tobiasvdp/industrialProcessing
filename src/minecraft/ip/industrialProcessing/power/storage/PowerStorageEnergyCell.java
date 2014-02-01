@@ -12,7 +12,7 @@ public class PowerStorageEnergyCell implements IPowerStorage {
 
     // two batteries internal capacity
     private float storedJoules = 0;
-    private float totalJouleCapacity = 20000;
+    private float totalJouleCapacity = 200000;
 
     public PowerStorageEnergyCell(TileEntityEnergyCell tileEntityEnergyCell, int i, int bATTERY_SLOTS) {
 	this.cell = tileEntityEnergyCell;

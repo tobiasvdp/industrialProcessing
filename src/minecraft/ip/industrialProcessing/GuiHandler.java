@@ -28,8 +28,6 @@ import ip.industrialProcessing.machines.plants.oilRefinary.sourWaterStripper.Til
 import ip.industrialProcessing.machines.plants.waste.exhaust.coolingUnit.ContainerCoolingUnit;
 import ip.industrialProcessing.machines.plants.waste.exhaust.coolingUnit.GuiContainerCoolingUnit;
 import ip.industrialProcessing.machines.plants.waste.exhaust.coolingUnit.TileEntityCoolingUnit;
-import ip.industrialProcessing.machines.wireMill.ContainerWireMill;
-import ip.industrialProcessing.machines.wireMill.GuiContainerWireMill;
 import ip.industrialProcessing.machines.wireMill.TileEntityWireMill;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.ContainerMultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.GuiContainerMultiblockBlastFurnace;
@@ -100,9 +98,7 @@ public class GuiHandler implements IGuiHandler {
 	    if (entity.getBlockType() != null && (entity.getBlockType() instanceof IGuiBlock || entity.getBlockType() instanceof IGuiMultiblock)) {
 		return LayoutGuiBuilder.createContainer(player.inventory, entity);
 	    }
- 
-	    if (entity instanceof TileEntityWireMill)
-		return new ContainerWireMill(player.inventory, (TileEntityWireMill) entity);
+  
 	    if (entity instanceof TileEntitySourWaterStripper)
 		return new ContainerSourWaterStripper(player.inventory, (TileEntitySourWaterStripper) entity);
 	    if (entity instanceof TileEntityAlkylationUnit)
@@ -167,9 +163,7 @@ public class GuiHandler implements IGuiHandler {
  	    if (entity instanceof TileEntityTurbine)
 		return new GuiContainerTurbine(player.inventory, (TileEntityTurbine) entity);
 	    if (entity instanceof TEmultiblockToggleButton)
-		return new GUImultiblockToggleButton((TEmultiblockToggleButton) entity, player);
-	    if (entity instanceof TileEntityWireMill)
-		return new GuiContainerWireMill(player.inventory, (TileEntityWireMill) entity);
+		return new GUImultiblockToggleButton((TEmultiblockToggleButton) entity, player); 
 	    if (entity instanceof TileEntitySourWaterStripper)
 		return new GuiContainerSourWaterStripper(player.inventory, (TileEntitySourWaterStripper) entity);
 	    if (entity instanceof TileEntityAlkylationUnit)

@@ -2,7 +2,7 @@ package ip.industrialProcessing.machines.plants.metalProcessing.turretLathe;
 
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
-import ip.industrialProcessing.recipes.Recipe;
+import ip.industrialProcessing.recipes.IMachineRecipe;
 
 import java.util.Iterator;
 
@@ -39,7 +39,7 @@ public class TileEntityTurretLathe extends TileEntityPoweredFluidWorkerMachine {
     }
 
     @Override
-    public Iterator<Recipe> iterateRecipes() {
+    public Iterator<IMachineRecipe> iterateRecipes() {
 	return recipes.getRecipes();
     }
 

@@ -1,15 +1,15 @@
 package ip.industrialProcessing.machines.electrolyser;
 
+import ip.industrialProcessing.LocalDirection;
+import ip.industrialProcessing.config.ISetupFluids;
+import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
+import ip.industrialProcessing.recipes.IMachineRecipe;
+
 import java.util.Iterator;
 
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
-import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.config.ISetupFluids;
-import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
-import ip.industrialProcessing.recipes.Recipe;
 
 public class TileEntityElectrolyser extends TileEntityPoweredFluidWorkerMachine{
 	public static RecipesElectrolyser recipes = new RecipesElectrolyser();
@@ -46,7 +46,7 @@ public class TileEntityElectrolyser extends TileEntityPoweredFluidWorkerMachine{
 	}
 
 	@Override
-	public Iterator<Recipe> iterateRecipes() {
+	public Iterator<IMachineRecipe> iterateRecipes() {
 		return recipes.getRecipes();
 	}
 

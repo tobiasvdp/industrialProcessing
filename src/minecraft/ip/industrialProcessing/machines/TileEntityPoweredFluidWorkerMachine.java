@@ -3,8 +3,8 @@ package ip.industrialProcessing.machines;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.power.IPoweredMachine;
 import ip.industrialProcessing.power.PowerHelper;
+import ip.industrialProcessing.recipes.IMachineRecipe;
 import ip.industrialProcessing.recipes.IPowerRecipe;
-import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeWorker;
 import ip.industrialProcessing.subMod.logic.old.api.network.interfaces.InterfaceType;
 import ip.industrialProcessing.subMod.logic.old.api.network.interfaces.StatusType;
@@ -63,7 +63,7 @@ public abstract class TileEntityPoweredFluidWorkerMachine extends TileEntityFlui
 
     @Override
     public void doWork() {
-	Recipe recipe = ((RecipeWorker) this.worker).getCurrentRecipe();
+	IMachineRecipe recipe = ((RecipeWorker) this.worker).getCurrentRecipe();
 
 	if (recipe != null && !worldObj.isRemote) {
 	    status = StatusType.working;

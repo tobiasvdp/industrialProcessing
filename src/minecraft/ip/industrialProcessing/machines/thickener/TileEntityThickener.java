@@ -2,6 +2,7 @@ package ip.industrialProcessing.machines.thickener;
 
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
+import ip.industrialProcessing.recipes.IMachineRecipe;
 import ip.industrialProcessing.recipes.Recipe;
 
 import java.util.Iterator;
@@ -49,7 +50,7 @@ public class TileEntityThickener extends TileEntityPoweredFluidWorkerMachine {
     public final static RecipesThickener recipes = new RecipesThickener();
 
     @Override
-    public Iterator<Recipe> iterateRecipes() {
+    public Iterator<IMachineRecipe> iterateRecipes() {
 	return recipes.getRecipes();
     }
 

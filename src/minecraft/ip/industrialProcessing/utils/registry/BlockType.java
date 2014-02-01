@@ -1,5 +1,6 @@
 package ip.industrialProcessing.utils.registry;
 
+import ip.industrialProcessing.utils.Language;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public enum BlockType {
@@ -17,6 +18,11 @@ public enum BlockType {
     }
 
     public String getDisplayName() {
-	return LanguageRegistry.instance().getStringLocalization("IP.BlockType." + this.toString(),"en_US");
+	String unlocalized = "IP.BlockType." + this.toString();
+	String localized = Language.getLocalizedString(unlocalized);
+
+	if (localized == unlocalized)
+	    return "§4§m"+this.toString().toUpperCase()+"§r";
+	return localized;
     }
 }

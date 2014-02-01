@@ -1,5 +1,7 @@
 package ip.industrialProcessing.gui3.guide.pages.machines;
 
+import com.google.common.collect.Sets;
+
 import ip.industrialProcessing.gui3.framework.Thickness;
 import ip.industrialProcessing.gui3.framework.controls.Button;
 import ip.industrialProcessing.gui3.framework.controls.IButtonClickListener;
@@ -59,26 +61,41 @@ public class MachineRecipesTab extends TabPage implements IButtonClickListener<I
 	this.recipeDock.child = null;
 	if (tag instanceof IRecipeBlock) {
 	    IMachineRecipes recipes = ((IRecipeBlock) tag).getRecipes();
+	    IMachineRecipe firstRecipe = null;
+	    if (!recipes.isEmpty()) {
+		firstRecipe = recipes.get(0);
+		for (int i = 0; i < recipes.size(); i++) {
+		    IMachineRecipe recipe = recipes.get(i);
+		    RecipeOutputSlot[] outputs = recipe.getOutputs();
+		    if (outputs != null && outputs.length > 0) {
 
-	    for (int i = 0; i < recipes.size(); i++) {
-		IMachineRecipe recipe = recipes.get(i);
+			StackPanel outputStack = new StackPanel();
+			outputStack.orientation = Orientation.HORIZONTAL;
+			for (int j = 0; j < outputs.length; j++) {
+			    ItemStack stack = getStack(outputs[j]);
+			    outputStack.addChild(SlotItemControl.createItemstack(stack));
+			}
 
-		RecipeOutputSlot[] outputs = recipe.getOutputs();
-		if (outputs != null && outputs.length > 0) {
-
-		    StackPanel outputStack = new StackPanel();
-		    outputStack.orientation = Orientation.HORIZONTAL;
-		    for (int j = 0; j < outputs.length; j++) {
-			ItemStack stack = getStack(outputs[j]);
-			outputStack.addChild(SlotItemControl.createItemstack(stack));
+			Button button = new Button<IMachineRecipe>(outputStack, recipe);
+			button.subscribeClick(this);
+			wrapPanel.addChild(button);
 		    }
-
-		    Button button = new Button<IMachineRecipe>(outputStack, recipe);
-		    button.subscribeClick(this);
-		    wrapPanel.addChild(button);
 		}
+		setRecipe(firstRecipe);
 	    }
 	}
+    }
+
+    private void setRecipe(IMachineRecipe tag) {
+	if (block instanceof IGuiBlock && tag != null) {
+	    IGuiBuilder builder = ((IGuiBlock) this.block).getGui();
+	    this.recipeDock.child = builder.getRecipePage(tag, this.stackClickListener);
+	} else if (block instanceof IGuiMultiblock && tag != null && tag instanceof ITierRecipe) {
+	    IGuiBuilder builder = ((IGuiMultiblock) this.block).getGui(((ITierRecipe) tag).getTier());
+	    this.recipeDock.child = builder.getRecipePage(tag, this.stackClickListener);
+	} else
+	    this.recipeDock.child = TextBlock.createText(block.getLocalizedName() + " doesn't implement " + IGuiBlock.class + " or " + IGuiMultiblock.class);
+    
     }
 
     private ItemStack getStack(RecipeOutputSlot mainProduct) {
@@ -96,13 +113,6 @@ public class MachineRecipesTab extends TabPage implements IButtonClickListener<I
 
     @Override
     public void buttonClicked(Button<IMachineRecipe> button, IMachineRecipe tag, float mouseX, float mouseY, MouseButton mouseButton) {
-	if (block instanceof IGuiBlock && tag != null) {
-	    IGuiBuilder builder = ((IGuiBlock) this.block).getGui();
-	    this.recipeDock.child = builder.getRecipePage(tag, this.stackClickListener);
-	} else if (block instanceof IGuiMultiblock && tag != null && tag instanceof ITierRecipe) {
-	    IGuiBuilder builder = ((IGuiMultiblock) this.block).getGui(((ITierRecipe) tag).getTier());
-	    this.recipeDock.child = builder.getRecipePage(tag, this.stackClickListener);
-	} else
-	    this.recipeDock.child = TextBlock.createText(block.getLocalizedName() + " doesn't implement " + IGuiBlock.class + " or " + IGuiMultiblock.class);
+		setRecipe(tag);
     }
 }

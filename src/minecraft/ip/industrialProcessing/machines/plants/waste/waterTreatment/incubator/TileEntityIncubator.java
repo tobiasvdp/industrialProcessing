@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityPoweredWorkerMachine;
+import ip.industrialProcessing.recipes.IMachineRecipe;
 import ip.industrialProcessing.recipes.Recipe;
 
 public class TileEntityIncubator extends TileEntityPoweredWorkerMachine {
@@ -18,7 +19,7 @@ public class TileEntityIncubator extends TileEntityPoweredWorkerMachine {
     }
 
     @Override
-    public Iterator<Recipe> iterateRecipes() {
+    public Iterator<IMachineRecipe> iterateRecipes() {
 	return recipes.getRecipes();
     }
 

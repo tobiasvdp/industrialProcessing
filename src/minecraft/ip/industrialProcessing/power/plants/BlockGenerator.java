@@ -21,12 +21,12 @@ import net.minecraft.world.World;
 
 public class BlockGenerator extends BlockPowerGenerator implements IGuiBlock, IDescriptionBlock, IModelBlock {
 
-    Icon[] icons = new Icon[2];
-    private static IGuiBuilder guiBuilder = new GuiBuilderDefault("Generator").addLabeledGauge("Voltage", "%.2fV", 0).addLabeledGauge("Current", "%.2fA", 1).addLabeledGauge("Power", "%.2fW", 2);
+    Icon[] icons = new Icon[2];public static final String UNLOCALIZED_NAME = "IP.Machine.Generator"; 
+    private static IGuiBuilder guiBuilder = new GuiBuilderDefault(UNLOCALIZED_NAME).addLabeledGauge("Voltage", "%.2fV", 0).addLabeledGauge("Current", "%.2fA", 1).addLabeledGauge("Power", "%.2fW", 2);
     private static ModelGeneratorBlock model;
 
     public BlockGenerator() {
-	super(ConfigMachineBlocks.getGeneratorBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Generator", ISetupCreativeTabs.tabPower);
+	super(ConfigMachineBlocks.getGeneratorBlockID(), Material.iron, 1F, Block.soundMetalFootstep, UNLOCALIZED_NAME, ISetupCreativeTabs.tabPower);
     }
 
     @Override

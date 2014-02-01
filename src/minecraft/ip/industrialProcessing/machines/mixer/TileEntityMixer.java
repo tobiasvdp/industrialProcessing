@@ -5,6 +5,7 @@ import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
 import ip.industrialProcessing.machines.animation.tanks.ITankSyncable;
 import ip.industrialProcessing.machines.animation.tanks.TankHandler;
 import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
+import ip.industrialProcessing.recipes.IMachineRecipe;
 import ip.industrialProcessing.recipes.Recipe;
 
 import java.util.Iterator;
@@ -60,7 +61,7 @@ public class TileEntityMixer extends TileEntityPoweredFluidWorkerMachine impleme
 	}
 
 	@Override
-	public Iterator<Recipe> iterateRecipes() {
+	public Iterator<IMachineRecipe> iterateRecipes() {
 		return recipes.getRecipes();
 	}
 

@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 public class ItemBattery extends ItemDamage {
 
     private final static float DEFAULT_VOLTAGE = 12f;
-    private final static int DEFAULT_MAX_CHARGE = 10000; // IN j
+    private final static int DEFAULT_MAX_CHARGE = 100000; // IN j
 
     private float voltage;
 

@@ -2,6 +2,7 @@ package ip.industrialProcessing.machines.oxygenFurnace;
 
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
+import ip.industrialProcessing.recipes.IMachineRecipe;
 import ip.industrialProcessing.recipes.Recipe;
 
 import java.util.Iterator;
@@ -65,7 +66,7 @@ public class TileEntityOxygenFurnace extends TileEntityPoweredFluidWorkerMachine
 	}
 
 	@Override
-	public Iterator<Recipe> iterateRecipes() {
+	public Iterator<IMachineRecipe> iterateRecipes() {
 		return recipes.getRecipes();
 	}
 

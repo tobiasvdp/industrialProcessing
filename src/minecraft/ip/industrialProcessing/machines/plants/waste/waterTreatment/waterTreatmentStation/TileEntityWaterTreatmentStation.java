@@ -1,13 +1,14 @@
 package ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatmentStation;
 
+import ip.industrialProcessing.LocalDirection;
+import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
+import ip.industrialProcessing.recipes.IMachineRecipe;
+
 import java.util.Iterator;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
-import ip.industrialProcessing.recipes.Recipe;
 
 public class TileEntityWaterTreatmentStation extends TileEntityPoweredFluidWorkerMachine {
     public static RecipesWaterTreatmentStation recipes = new RecipesWaterTreatmentStation();
@@ -33,7 +34,7 @@ public class TileEntityWaterTreatmentStation extends TileEntityPoweredFluidWorke
     }
 
     @Override
-    public Iterator<Recipe> iterateRecipes() {
+    public Iterator<IMachineRecipe> iterateRecipes() {
 	return recipes.getRecipes();
     }
 

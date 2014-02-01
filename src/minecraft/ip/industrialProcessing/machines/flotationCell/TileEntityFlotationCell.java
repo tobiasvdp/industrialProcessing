@@ -2,6 +2,7 @@ package ip.industrialProcessing.machines.flotationCell;
 
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityFluidWorkerMachine;
+import ip.industrialProcessing.recipes.IMachineRecipe;
 import ip.industrialProcessing.recipes.Recipe;
 
 import java.util.Iterator;
@@ -50,7 +51,7 @@ public class TileEntityFlotationCell extends TileEntityFluidWorkerMachine {
 	public static RecipesFlotationCell recipes = new RecipesFlotationCell();
 
 	@Override
-	public Iterator<Recipe> iterateRecipes() {
+	public Iterator<IMachineRecipe> iterateRecipes() {
 		return recipes.getRecipes();
 	}
 

@@ -1,13 +1,14 @@
 package ip.industrialProcessing.machines.plants.waste.waterTreatment.tricklingFilter;
 
+import ip.industrialProcessing.LocalDirection;
+import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
+import ip.industrialProcessing.recipes.IMachineRecipe;
+
 import java.util.Iterator;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
-import ip.industrialProcessing.recipes.Recipe;
 
 public class TileEntityTricklingFilter extends TileEntityPoweredFluidWorkerMachine {
     public static RecipesTricklingFilter recipes = new RecipesTricklingFilter();
@@ -33,7 +34,7 @@ public class TileEntityTricklingFilter extends TileEntityPoweredFluidWorkerMachi
     }
 
     @Override
-    public Iterator<Recipe> iterateRecipes() {
+    public Iterator<IMachineRecipe> iterateRecipes() {
 	return recipes.getRecipes();
     }
 

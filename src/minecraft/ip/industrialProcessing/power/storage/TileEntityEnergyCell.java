@@ -101,7 +101,7 @@ public class TileEntityEnergyCell extends TileEntityPowerGenerator implements IP
 		    speed = -speed;
 		    incrementing = false;
 		}
-		this.animation.setSpeed(speed);
+		this.animation.setSpeed(speed * 10);
 		this.animation.setIncrementing(incrementing);
 		this.animation.update();
 		TileAnimationSyncHandler.sendAnimationData(this, this.animation);

@@ -3,6 +3,7 @@ package ip.industrialProcessing.machines.plants.nonFerroProcessing.roaster;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityFluidWorkerMachine;
 import ip.industrialProcessing.power.plants.IHeatable;
+import ip.industrialProcessing.recipes.IMachineRecipe;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.utils.handler.heat.IHeated;
 
@@ -47,7 +48,7 @@ public class TileEntityRoaster extends TileEntityFluidWorkerMachine implements I
     }
 
     @Override
-    public Iterator<Recipe> iterateRecipes() {
+    public Iterator<IMachineRecipe> iterateRecipes() {
 	return recipes.getRecipes();
     }
 

@@ -5,6 +5,7 @@ import java.util.Iterator;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
+import ip.industrialProcessing.recipes.IMachineRecipe;
 import ip.industrialProcessing.recipes.Recipe;
 
 public class TileEntityIsomerizationReactor extends TileEntityPoweredFluidWorkerMachine {
@@ -36,7 +37,7 @@ public class TileEntityIsomerizationReactor extends TileEntityPoweredFluidWorker
     }
 
     @Override
-    public Iterator<Recipe> iterateRecipes() {
+    public Iterator<IMachineRecipe> iterateRecipes() {
 	return recipes.getRecipes();
     }
 

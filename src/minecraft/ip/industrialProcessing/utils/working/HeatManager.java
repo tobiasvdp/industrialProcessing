@@ -1,5 +1,8 @@
 package ip.industrialProcessing.utils.working;
 
+import ip.industrialProcessing.recipes.IHeatRecipe;
+import ip.industrialProcessing.recipes.IMachineRecipe;
+import ip.industrialProcessing.recipes.RecipeWorker;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
@@ -37,7 +40,13 @@ public class HeatManager {
 
     public void doWork() {
 	if (heat > 0) {
-	    int done = worker.doWork((int) ((heat - operatingTemperature) * workRate));
+	    float minHeat = operatingTemperature;
+	    if (worker instanceof RecipeWorker) {
+		IMachineRecipe recipe = ((RecipeWorker) worker).getCurrentRecipe();
+		if (recipe instanceof IHeatRecipe)
+		    minHeat = ((IHeatRecipe) recipe).getHeatRequired();
+	    }
+	    int done = worker.doWork((int) ((heat - minHeat) * workRate));
 	    this.heat -= done * workRate;
 	}
     }

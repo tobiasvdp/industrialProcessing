@@ -3,6 +3,7 @@ package ip.industrialProcessing.power.plants;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityMachine;
+import ip.industrialProcessing.utils.handler.fuel.IBurner;
 import ip.industrialProcessing.utils.working.BurningWorker;
 import ip.industrialProcessing.utils.working.IBurnWorkHandler;
 import ip.industrialProcessing.utils.working.IWorker;
@@ -13,7 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 
-public class TileEntitySolidBurner extends TileEntityMachine implements IWorkingEntity, IBurnWorkHandler {
+public class TileEntitySolidBurner extends TileEntityMachine implements IWorkingEntity, IBurnWorkHandler, IBurner {
 
     private BurningWorker worker;
     private int airTime;
@@ -61,7 +62,7 @@ public class TileEntitySolidBurner extends TileEntityMachine implements IWorking
 	    else
 		airTime = 0;
 
-	    if (airTime > 5*20) {
+	    if (airTime > 5 * 20) {
 		this.worldObj.playSoundEffect(xCoord + 0.5D, yCoord + 1.5D, zCoord + 0.5D, "fire.ignite", 1.0F, 1);
 		this.worldObj.setBlock(xCoord, yCoord + 1, zCoord, Block.fire.blockID);
 	    }
@@ -153,6 +154,16 @@ public class TileEntitySolidBurner extends TileEntityMachine implements IWorking
 	    ashStack.stackSize++;
 	    this.setInventorySlotContents(ash, ashStack);
 	}
+    }
+
+    @Override
+    public int getBurnTime() {
+	return this.worker.getTotalWork() - this.worker.getWorkDone();
+    }
+
+    @Override
+    public int getMaxBurnTime() {
+	return this.worker.getTotalWork();
     }
 
 }

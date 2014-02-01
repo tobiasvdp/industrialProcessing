@@ -1,35 +1,31 @@
 package ip.industrialProcessing.power.plants;
 
+import ip.industrialProcessing.config.ConfigMachineBlocks;
+import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
+import ip.industrialProcessing.gui3.generating.GuiBuilderDefault;
+import ip.industrialProcessing.gui3.generating.IGuiBlock;
+import ip.industrialProcessing.gui3.generating.IGuiBuilder;
+import ip.industrialProcessing.machines.BlockMachineRendered;
+import ip.industrialProcessing.recipes.IMachineRecipes;
+import ip.industrialProcessing.recipes.IRecipeBlock;
+import ip.industrialProcessing.utils.IDescriptionBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
-import ip.industrialProcessing.config.ConfigMachineBlocks;
-import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.config.INamepace;
-import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.gui.GuiLayout;
-import ip.industrialProcessing.gui.IGuiLayout;
-import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
-import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
-import ip.industrialProcessing.machines.BlockMachineRendered;
-import ip.industrialProcessing.utils.IDescriptionBlock;
 
-public class BlockBoiler extends BlockMachineRendered implements IGuiLayout, IDescriptionBlock {
+public class BlockBoiler extends BlockMachineRendered implements IGuiBlock, IRecipeBlock, IDescriptionBlock {
 
+    public static final String UNLOCALIZED_NAME = "IP.Machine.Boiler";
+    private static IGuiBuilder guiBuilder = new GuiBuilderDefault(UNLOCALIZED_NAME).addInputTank(0, 0, 1).addOutputTank(1).enableThermometer();
     private Icon[] icons = new Icon[3];
-    private static GuiLayout guiLayout;
-    static {
-	guiLayout = new GuiLayout();
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.tankInput);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.simpleTankOutput);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.simpleHeat);
-    }
 
     public BlockBoiler() {
-	super(ConfigMachineBlocks.getBoilerBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Steam Boiler", ISetupCreativeTabs.tabPower);
+	super(ConfigMachineBlocks.getBoilerBlockID(), Material.iron, 1F, Block.soundMetalFootstep, UNLOCALIZED_NAME, ISetupCreativeTabs.tabPower);
     }
 
     @Override
@@ -57,11 +53,16 @@ public class BlockBoiler extends BlockMachineRendered implements IGuiLayout, IDe
 
     @Override
     public String getDescription() {
-	return "Boils water to steam.";
+	return "Boils liquids.";
     }
 
     @Override
-    public GuiLayout getGuiLayout() {
-	return guiLayout;
+    public IGuiBuilder getGui() {
+	return guiBuilder;
+    }
+
+    @Override
+    public IMachineRecipes getRecipes() { 
+	return TileEntityBoiler.recipes;
     }
 }

@@ -3,6 +3,7 @@ package ip.industrialProcessing.machines.plants.metalProcessing.sandCaster;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
 import ip.industrialProcessing.machines.animation.IAnimationSyncable;
+import ip.industrialProcessing.recipes.IMachineRecipe;
 import ip.industrialProcessing.recipes.Recipe;
 
 import java.util.Iterator;
@@ -50,7 +51,7 @@ public class TileEntitySandCaster extends TileEntityPoweredFluidWorkerMachine im
     }
 
     @Override
-    public Iterator<Recipe> iterateRecipes() {
+    public Iterator<IMachineRecipe> iterateRecipes() {
 	return recipes.getRecipes();
     }
 

@@ -9,7 +9,7 @@ public class RecipeWorker extends ServerWorker {
 
     private Random random;
     protected IRecipeWorkHandler handler;
-    protected Recipe recipe;
+    protected IMachineRecipe recipe;
 
     public RecipeWorker(IRecipeWorkHandler handler) {
         super(handler, 100);
@@ -39,18 +39,18 @@ public class RecipeWorker extends ServerWorker {
     protected void onPrepareWork() {
         this.recipe = this.getCurrentRecipe();
         if (recipe != null)
-            this.totalWork = this.recipe.workRequired;
+            this.totalWork = this.recipe.getWorkRequired();
         else
             this.totalWork = 0;
         super.onPrepareWork();
     }
 
-    public Recipe getCurrentRecipe() {
-        Iterator<Recipe> iterator = this.handler.iterateRecipes();
+    public IMachineRecipe getCurrentRecipe() {
+        Iterator<IMachineRecipe> iterator = this.handler.iterateRecipes();
         if (iterator == null)
             return null;
         for (; iterator.hasNext();) {
-            Recipe currentRecipe = iterator.next();
+            IMachineRecipe currentRecipe = iterator.next();
             if (matchesInput(currentRecipe)) {
                 return currentRecipe;
             }
@@ -58,13 +58,14 @@ public class RecipeWorker extends ServerWorker {
         return null;
     }
 
-    protected boolean matchesInput(Recipe currentRecipe) {
+    protected boolean matchesInput(IMachineRecipe currentRecipe) {
         if (currentRecipe == null)
             return false;
-        if (currentRecipe.inputs == null)
+	RecipeInputSlot[] inputSlots = currentRecipe.getInputs();
+        if (inputSlots == null)
             return false;
-        for (int i = 0; i < currentRecipe.inputs.length; i++) {
-            RecipeInputSlot slot = currentRecipe.inputs[i];
+        for (int i = 0; i < inputSlots.length; i++) {
+            RecipeInputSlot slot = inputSlots[i];
             if (!hasInputIngredients(slot))
                 return false;
         }
@@ -81,11 +82,12 @@ public class RecipeWorker extends ServerWorker {
         return false;
     }
 
-    private boolean outputAvailable(Recipe currentRecipe) {
-        if (currentRecipe == null || currentRecipe.outputs == null)
+    private boolean outputAvailable(IMachineRecipe currentRecipe) {
+	RecipeOutputSlot[] outputSlots = recipe.getOutputs();
+        if (currentRecipe == null || outputSlots == null)
             return false;
-        for (int i = 0; i < currentRecipe.outputs.length; i++) {
-            RecipeOutputSlot slot = currentRecipe.outputs[i];
+        for (int i = 0; i < outputSlots.length; i++) {
+            RecipeOutputSlot slot = outputSlots[i];
             if (!hasOutputSpace(slot))
                 return false;
         }
@@ -99,11 +101,12 @@ public class RecipeWorker extends ServerWorker {
         return false;
     }
 
-    private void removeInput(Recipe currentRecipe) {
-        if (currentRecipe == null || currentRecipe.inputs == null)
+    private void removeInput(IMachineRecipe currentRecipe) {
+	RecipeInputSlot[] inputSlots = currentRecipe.getInputs();
+        if (currentRecipe == null || inputSlots == null)
             return;
-        for (int i = 0; i < currentRecipe.inputs.length; i++) {
-            RecipeInputSlot slot = currentRecipe.inputs[i];
+        for (int i = 0; i < inputSlots.length; i++) {
+            RecipeInputSlot slot = inputSlots[i];
 
             removeFromInput(slot);
         }
@@ -119,12 +122,12 @@ public class RecipeWorker extends ServerWorker {
         }
     }
 
-    protected void produceOutput(Recipe recipe) {
-
-        if (recipe == null || recipe.outputs == null)
+    protected void produceOutput(IMachineRecipe recipe) {
+	RecipeOutputSlot[] outputSlots = recipe.getOutputs();
+        if (recipe == null || outputSlots == null)
             return;
-        for (int i = 0; i < recipe.outputs.length; i++) {
-            RecipeOutputSlot slot = recipe.outputs[i];
+        for (int i = 0; i < outputSlots.length; i++) {
+            RecipeOutputSlot slot = outputSlots[i];
 
             double randomValue = random.nextGaussian();
 

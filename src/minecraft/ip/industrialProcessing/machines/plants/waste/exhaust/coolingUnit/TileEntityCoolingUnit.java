@@ -2,7 +2,7 @@ package ip.industrialProcessing.machines.plants.waste.exhaust.coolingUnit;
 
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
-import ip.industrialProcessing.recipes.Recipe;
+import ip.industrialProcessing.recipes.IMachineRecipe;
 
 import java.util.Iterator;
 
@@ -45,7 +45,7 @@ public class TileEntityCoolingUnit extends TileEntityPoweredFluidWorkerMachine {
     }
 
     @Override
-    public Iterator<Recipe> iterateRecipes() {
+    public Iterator<IMachineRecipe> iterateRecipes() {
 	return recipes.getRecipes();
     }
 

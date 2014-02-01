@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
+import ip.industrialProcessing.recipes.IMachineRecipe;
 import ip.industrialProcessing.recipes.Recipe;
 
 public class TileEntityMagneticSeparator extends TileEntityPoweredFluidWorkerMachine {
@@ -46,7 +47,7 @@ public class TileEntityMagneticSeparator extends TileEntityPoweredFluidWorkerMac
 	}
 
 	@Override
-	public Iterator<Recipe> iterateRecipes() {
+	public Iterator<IMachineRecipe> iterateRecipes() {
 		return recipes.getRecipes();
 	}
 

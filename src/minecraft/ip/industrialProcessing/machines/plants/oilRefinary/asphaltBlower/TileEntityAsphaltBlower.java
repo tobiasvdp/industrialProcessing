@@ -1,16 +1,16 @@
 package ip.industrialProcessing.machines.plants.oilRefinary.asphaltBlower;
 
+import ip.industrialProcessing.LocalDirection;
+import ip.industrialProcessing.config.ISetupFluids;
+import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
+import ip.industrialProcessing.recipes.IMachineRecipe;
+
 import java.util.Iterator;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
-import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.config.ISetupFluids;
-import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
-import ip.industrialProcessing.recipes.Recipe;
 
 public class TileEntityAsphaltBlower extends TileEntityPoweredFluidWorkerMachine{
 	public static RecipesAsphaltBlower  recipes = new RecipesAsphaltBlower();
@@ -47,7 +47,7 @@ public class TileEntityAsphaltBlower extends TileEntityPoweredFluidWorkerMachine
 	}
 
 	@Override
-	public Iterator<Recipe> iterateRecipes() {
+	public Iterator<IMachineRecipe> iterateRecipes() {
 		return recipes.getRecipes();
 	}
 

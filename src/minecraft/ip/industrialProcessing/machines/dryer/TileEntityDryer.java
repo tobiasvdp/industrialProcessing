@@ -1,13 +1,14 @@
 package ip.industrialProcessing.machines.dryer;
 
+import ip.industrialProcessing.LocalDirection;
+import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
+import ip.industrialProcessing.recipes.IMachineRecipe;
+
 import java.util.Iterator;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
-import ip.industrialProcessing.recipes.Recipe;
 
 public class TileEntityDryer extends TileEntityPoweredFluidWorkerMachine {
 
@@ -47,7 +48,7 @@ public class TileEntityDryer extends TileEntityPoweredFluidWorkerMachine {
 	}
 	
 	@Override
-	public Iterator<Recipe> iterateRecipes() {
+	public Iterator<IMachineRecipe> iterateRecipes() {
 		return recipes.getRecipes();
 	}
 

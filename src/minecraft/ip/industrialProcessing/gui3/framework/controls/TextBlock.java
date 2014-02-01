@@ -8,6 +8,8 @@ import ip.industrialProcessing.gui3.framework.Rect;
 import ip.industrialProcessing.gui3.framework.Size;
 import ip.industrialProcessing.gui3.framework.UIElement;
 import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
+import ip.industrialProcessing.utils.Language;
+import ip.industrialProcessing.utils.registry.BlockType;
 
 public class TextBlock extends Control {
 
@@ -19,14 +21,10 @@ public class TextBlock extends Control {
     private Size textSize;
 
     public TextBlock(String text, int color) {
-	String local = LanguageRegistry.instance().getStringLocalization(text);
-	if (local != null && local.length() > 0)
-	    this.text = local;
-	else
-	    this.text = text;
+	this.text = Language.getLocalizedString(text);
 	this.width = Float.NaN;
 	this.height = Float.NaN;
-	this.color = color;
+	this.color = color; 
     }
 
     @Override

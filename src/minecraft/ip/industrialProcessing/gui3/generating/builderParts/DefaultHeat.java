@@ -13,7 +13,6 @@ import ip.industrialProcessing.gui3.framework.panels.GridSize;
 import ip.industrialProcessing.gui3.framework.panels.SizeMode;
 import ip.industrialProcessing.recipes.IHeatRecipe;
 import ip.industrialProcessing.recipes.IMachineRecipe;
-import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.utils.handler.heat.IHeated;
 import net.minecraft.tileentity.TileEntity;
 
@@ -49,10 +48,12 @@ public class DefaultHeat {
     public static void setup(HeatedReference heatRef, IMachineRecipe recipe, GridPanel grid, Alignment min) {
 	if (heatRef != null) {
 	    IHeatRecipe heatRecipe = getHeatRecipe(recipe);
-	    int minTemperature = 0;
+	    float minTemperature = 0;
 	    if (heatRecipe != null)
-		minTemperature = heatRecipe.heatRequired;
+		minTemperature = heatRecipe.getHeatRequired();
 	    ProgressBar thermometer = ProgressBar.createTemperature();
+	    thermometer.maxValue = thermometer.value = (int) Math.ceil(minTemperature);
+
 	    thermometer.horizontalAlign = min;
 	    grid.children.add(new GridCell(0, grid.columns.size(), thermometer));
 	    grid.columns.add(new GridSize(1, SizeMode.RELATIVE));

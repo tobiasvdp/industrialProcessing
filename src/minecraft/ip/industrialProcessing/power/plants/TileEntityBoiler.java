@@ -5,7 +5,7 @@ import ip.industrialProcessing.machines.TileEntityFluidWorkerMachine;
 import ip.industrialProcessing.machines.animation.tanks.ITankSyncable;
 import ip.industrialProcessing.machines.animation.tanks.TankHandler;
 import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
-import ip.industrialProcessing.recipes.Recipe;
+import ip.industrialProcessing.recipes.IMachineRecipe;
 import ip.industrialProcessing.transport.fluids.IPressuredTank;
 import ip.industrialProcessing.utils.handler.heat.IHeated;
 import ip.industrialProcessing.utils.working.HeatManager;
@@ -24,7 +24,7 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 public class TileEntityBoiler extends TileEntityFluidWorkerMachine implements IHeatable, IHeated, IPressuredTank, ITankSyncable {
 
-    private static RecipesBoiler recipes = new RecipesBoiler();
+    public static RecipesBoiler recipes = new RecipesBoiler();
     private HeatManager heatManager;
     private TankHandler tankHandler;
 
@@ -105,7 +105,7 @@ public class TileEntityBoiler extends TileEntityFluidWorkerMachine implements IH
     }
 
     @Override
-    public Iterator<Recipe> iterateRecipes() {
+    public Iterator<IMachineRecipe> iterateRecipes() {
 	return recipes.getRecipes();
     }
 
