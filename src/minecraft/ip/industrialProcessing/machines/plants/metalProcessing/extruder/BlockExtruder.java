@@ -6,10 +6,9 @@ import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.gui.GuiLayout;
-import ip.industrialProcessing.gui.IGuiLayout;
-import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
-import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
+import ip.industrialProcessing.gui3.generating.GuiBuilderDefault;
+import ip.industrialProcessing.gui3.generating.IGuiBlock;
+import ip.industrialProcessing.gui3.generating.IGuiBuilder;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.machines.plants.metalProcessing.extruder.model.ModelExtruderBlock;
@@ -24,19 +23,14 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockExtruder extends BlockMachineRendered implements IRecipeBlock, IModelBlock, IDescriptionBlock, IGuiLayout {
-    private static GuiLayout guiLayout;
+public class BlockExtruder extends BlockMachineRendered implements IRecipeBlock, IModelBlock, IDescriptionBlock, IGuiBlock {
+    public static String UNLOCALIZED_NAME = "IP.Machine.Extruder";
+    private static IGuiBuilder guiBuilder = new GuiBuilderDefault(UNLOCALIZED_NAME).addInputTank(0, 1, 2).addOutputSlot(0).enableWorker().enablePower(3);
+
     private Icon[] icons = new Icon[4];
-    static {
-	guiLayout = new GuiLayout();
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsOutput).setSlotLayout(SlotLayoutType.horizontal, 1);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.tankInput);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.worker);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.power);
-    }
-    
+
     public BlockExtruder() {
-	super(ConfigMachineBlocks.getExtruderID(), Material.iron, 1f, Block.soundMetalFootstep, "Extruder", ISetupCreativeTabs.tabOreProcessing);
+	super(ConfigMachineBlocks.getExtruderID(), Material.iron, 1f, Block.soundMetalFootstep, UNLOCALIZED_NAME, ISetupCreativeTabs.tabOreProcessing);
     }
 
     @Override
@@ -76,17 +70,18 @@ public class BlockExtruder extends BlockMachineRendered implements IRecipeBlock,
     }
 
     @Override
-    public GuiLayout getGuiLayout() {
-	return guiLayout;
+    public IGuiBuilder getGui() {
+	return guiBuilder;
     }
-    
+
     @SideOnly(Side.CLIENT)
     private static ModelExtruderBlock model;
 
     @SideOnly(Side.CLIENT)
     @Override
     public ModelBlock getModel() {
-	if(model == null) model = new ModelExtruderBlock();
+	if (model == null)
+	    model = new ModelExtruderBlock();
 	return model;
     }
 }

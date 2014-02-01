@@ -14,6 +14,7 @@ public class TileEntitySpoolWindingMachine extends TileEntityPoweredWorkerMachin
 		this.addStack(null, LocalDirection.UP, true, false);
 		this.addStack(null, LocalDirection.UP, true, false);
 		this.addStack(null, LocalDirection.DOWN, false, true);
+		setupPowerSlot();
 	}
 	@Override
 	protected boolean isValidInput(int slot, int itemID) {

@@ -22,15 +22,17 @@ public class TileEntityOxygenFurnace extends TileEntityPoweredFluidWorkerMachine
 		addStack(null, nodirections, true, false);
 		addStack(null, nodirections, false, true);
 		addStack(null, nodirections, true, false);
-		addStack(null, nodirections, false, true);
+		addStack(null, nodirections, false, true); 
+		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.UP, true, false);
 		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.UP, true, false);
 		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.DOWN, false, true);
+		setupPowerSlot();
 	}
 
 	@Override
 	public void updateEntity() {
-		addBucketToTank(0, 1, 0);
-		getBucketFromTank(2, 3, 1);
+		addBucketToTank(0, 1, 0); 
+		getBucketFromTank(2, 3, 2);
 		super.updateEntity();
 	};
 

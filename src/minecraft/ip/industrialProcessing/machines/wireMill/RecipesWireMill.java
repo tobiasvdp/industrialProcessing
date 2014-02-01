@@ -13,6 +13,8 @@ public class RecipesWireMill extends RecipesMachine {
 	addRecipe(copperToWire(3000, 0));
     }
 
+    // TODO: use rods to pull wires, not ingots
+    @Deprecated
     private Recipe copperToWire(int workTime, int powerConsumption) {
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, ISetupItems.itemCopperIngot.itemID, RecipeSlotType.INVENTORY, 3) };
@@ -21,5 +23,5 @@ public class RecipesWireMill extends RecipesMachine {
 	recipe.workRequired = workTime;
 	recipe.powerRequired = powerConsumption;
 	return recipe;
-    }
+    } 
 }

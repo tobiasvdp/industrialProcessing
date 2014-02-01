@@ -4,9 +4,9 @@ import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.gui.GuiLayout;
-import ip.industrialProcessing.gui.IGuiLayout;
-import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
+import ip.industrialProcessing.gui3.generating.GuiBuilderDefault;
+import ip.industrialProcessing.gui3.generating.IGuiBlock;
+import ip.industrialProcessing.gui3.generating.IGuiBuilder;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.recipes.IRecipeBlock;
@@ -18,20 +18,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
-public class BlockThickener extends BlockMachineRendered implements IRecipeBlock, IDescriptionBlock, IGuiLayout {
+public class BlockThickener extends BlockMachineRendered implements IRecipeBlock, IDescriptionBlock, IGuiBlock {
     private Icon[] icons = new Icon[3];
-    public static GuiLayout guiLayout;
-    static {
-	guiLayout = new GuiLayout();
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.tankInput);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.tankOutput);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.tankOutput);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.worker);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.power);
-    }
+    public static String UNLOCALIZED_NAME = "IP.Machine.Thickener";
+    public static IGuiBuilder guiBuilder = new GuiBuilderDefault(UNLOCALIZED_NAME).addInputTank(0, 0, 1).addOutputTank(1, 2, 3).addOutputTank(2, 4, 5).enableWorker().enablePower(6);
 
     public BlockThickener() {
-	super(ConfigMachineBlocks.getThickenerBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Thickener", ISetupCreativeTabs.tabOreProcessing);
+	super(ConfigMachineBlocks.getThickenerBlockID(), Material.iron, 1F, Block.soundMetalFootstep, UNLOCALIZED_NAME, ISetupCreativeTabs.tabOreProcessing);
 
     }
 
@@ -66,8 +59,8 @@ public class BlockThickener extends BlockMachineRendered implements IRecipeBlock
     }
 
     @Override
-    public GuiLayout getGuiLayout() {
-	return guiLayout;
+    public IGuiBuilder getGui() {
+	return guiBuilder;
     }
 
     @Override

@@ -6,10 +6,9 @@ import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.gui.GuiLayout;
-import ip.industrialProcessing.gui.IGuiLayout;
-import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
-import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
+import ip.industrialProcessing.gui3.generating.GuiBuilderDefault;
+import ip.industrialProcessing.gui3.generating.IGuiBlock;
+import ip.industrialProcessing.gui3.generating.IGuiBuilder;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.machines.kiln.model.ModelKilnBlock;
@@ -25,21 +24,14 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockSandCaster extends BlockMachineRendered implements IRecipeBlock, IGuiLayout, IDescriptionBlock, IModelBlock {
+public class BlockSandCaster extends BlockMachineRendered implements IRecipeBlock, IGuiBlock, IDescriptionBlock, IModelBlock {
+    public static String UNLOCALIZED_NAME = "IP.Machine.SandCaster";
+    private static IGuiBuilder guiBuilder = new GuiBuilderDefault(UNLOCALIZED_NAME).addInputSlot(0).addInputTank(0, 2, 3).addOutputSlot(1).enableWorker().enablePower(4);
 
     Icon[] icons = new Icon[4];
-    private static GuiLayout guiLayout;
-    static {
-	guiLayout = new GuiLayout();
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 1);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsOutput).setSlotLayout(SlotLayoutType.horizontal, 1);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.tankInput);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.worker);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.power);
-    }
 
     public BlockSandCaster() {
-	super(ConfigMachineBlocks.getBlockSandCasterID(), Material.iron, 1f, Block.soundMetalFootstep, "SandCaster", ISetupCreativeTabs.tabOreProcessing);
+	super(ConfigMachineBlocks.getBlockSandCasterID(), Material.iron, 1f, Block.soundMetalFootstep, UNLOCALIZED_NAME, ISetupCreativeTabs.tabOreProcessing);
     }
 
     @Override
@@ -72,13 +64,13 @@ public class BlockSandCaster extends BlockMachineRendered implements IRecipeBloc
     }
 
     @Override
-    public String getDescription() { 
+    public String getDescription() {
 	return "Cast metal objects in pre-formed sand casts.";
     }
 
     @Override
-    public GuiLayout getGuiLayout() { 
-	return guiLayout;
+    public IGuiBuilder getGui() {
+	return guiBuilder;
     }
 
     @SideOnly(Side.CLIENT)
@@ -87,7 +79,8 @@ public class BlockSandCaster extends BlockMachineRendered implements IRecipeBloc
     @SideOnly(Side.CLIENT)
     @Override
     public ModelBlock getModel() {
-	if(model == null) model = new ModelSandCasterBlock();
+	if (model == null)
+	    model = new ModelSandCasterBlock();
 	return model;
     }
 }

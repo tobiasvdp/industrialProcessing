@@ -1,16 +1,14 @@
 package ip.industrialProcessing.machines.treetap;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupBlocks;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.decoration.trees.BlockRubberLog;
-import ip.industrialProcessing.gui.GuiLayout;
-import ip.industrialProcessing.gui.IGuiLayout;
-import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
-import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
+import ip.industrialProcessing.gui3.generating.GuiBuilderDefault;
+import ip.industrialProcessing.gui3.generating.IGuiBlock;
+import ip.industrialProcessing.gui3.generating.IGuiBuilder;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.IRotateableEntity;
@@ -26,78 +24,74 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
-public class BlockManualTreeTap extends BlockMachineRendered implements IDescriptionBlock, IGuiLayout {
-    private static GuiLayout guiLayout;
-    static {
-	guiLayout = new GuiLayout();
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 1);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsOutput).setSlotLayout(SlotLayoutType.horizontal, 1);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.worker);
-    }
+public class BlockManualTreeTap extends BlockMachineRendered implements IDescriptionBlock, IGuiBlock {
+    public static final String UNLOCALIZED_NAME = "IP.Machine.ManualTreetap";
+    private static IGuiBuilder guiBuilder = new GuiBuilderDefault(UNLOCALIZED_NAME).addInputSlot(0).addOutputSlot(1).enableWorker();
+
     public BlockManualTreeTap() {
-        super(ConfigMachineBlocks.getManualTreeTapBlockID(), Material.iron, 1.0f, soundMetalFootstep, "Manual Tree Tap", ISetupCreativeTabs.tabOreProcessing);
-        func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "manualTreeTap");
+	super(ConfigMachineBlocks.getManualTreeTapBlockID(), Material.iron, 1.0f, soundMetalFootstep, UNLOCALIZED_NAME, ISetupCreativeTabs.tabOreProcessing);
+	func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "manualTreeTap");
     }
 
     protected BlockManualTreeTap(int automaticTreeTapBlockID, Material iron, float f, StepSound soundmetalfootstep, String string, CreativeTabs taboreprocessing) {
-        super(automaticTreeTapBlockID, iron, f, soundmetalfootstep, string, taboreprocessing);
+	super(automaticTreeTapBlockID, iron, f, soundmetalfootstep, string, taboreprocessing);
     }
 
     @Override
     public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5) {
 
-        ForgeDirection side = ForgeDirection.getOrientation(par5).getOpposite();
-        int id = par1World.getBlockId(par2 + side.offsetX, par3 + side.offsetY, par4 + side.offsetZ);
-        if (id == ISetupBlocks.blockPineLog.blockID || id == ISetupBlocks.blockRubberLog.blockID) {
-            return BlockRubberLog.isCarved(par1World, par2 + side.offsetX, par3 + side.offsetY, par4 + side.offsetZ, par5);
-        } else
-            return false;
+	ForgeDirection side = ForgeDirection.getOrientation(par5).getOpposite();
+	int id = par1World.getBlockId(par2 + side.offsetX, par3 + side.offsetY, par4 + side.offsetZ);
+	if (id == ISetupBlocks.blockPineLog.blockID || id == ISetupBlocks.blockRubberLog.blockID) {
+	    return BlockRubberLog.isCarved(par1World, par2 + side.offsetX, par3 + side.offsetY, par4 + side.offsetZ, par5);
+	} else
+	    return false;
     }
 
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack itemStack) {
-        // super.onBlockPlacedBy(world, x, y, z, entityLivingBase, itemStack);
+	// super.onBlockPlacedBy(world, x, y, z, entityLivingBase, itemStack);
 
-        TileEntity entity = world.getBlockTileEntity(x, y, z);
-        if (entity instanceof IRotateableEntity) {
+	TileEntity entity = world.getBlockTileEntity(x, y, z);
+	if (entity instanceof IRotateableEntity) {
 
-            int dir = MathHelper.floor_double((entityLivingBase.rotationYaw * 4F) / 360F + 0.5D) & 3;
-            for (int i = dir; i < dir + 4; i++) {
-                int d = i % 4;
-                ForgeDirection direction = BlockMachine.getForwardFromMetadata(d);
+	    int dir = MathHelper.floor_double((entityLivingBase.rotationYaw * 4F) / 360F + 0.5D) & 3;
+	    for (int i = dir; i < dir + 4; i++) {
+		int d = i % 4;
+		ForgeDirection direction = BlockMachine.getForwardFromMetadata(d);
 
-                boolean isConnected = canStayAt(world, x, y, z, direction);
-                if (isConnected) {
-                    ((IRotateableEntity) entity).setForwardDirection(direction);
-                    break;
-                }
-            }
+		boolean isConnected = canStayAt(world, x, y, z, direction);
+		if (isConnected) {
+		    ((IRotateableEntity) entity).setForwardDirection(direction);
+		    break;
+		}
+	    }
 
-        }
+	}
     }
 
     private static boolean canStayAt(World world, int x, int y, int z, ForgeDirection direction) {
-        int id = world.getBlockId(x - direction.offsetX, y - direction.offsetY, z - direction.offsetZ);
-        if (id == ISetupBlocks.blockRubberLog.blockID || id == ISetupBlocks.blockPineLog.blockID) {
-            if (BlockRubberLog.isCarved(world, x - direction.offsetX, y - direction.offsetY, z - direction.offsetZ, direction.ordinal())) {
-                return true;
-            }
-        }
-        return false;
+	int id = world.getBlockId(x - direction.offsetX, y - direction.offsetY, z - direction.offsetZ);
+	if (id == ISetupBlocks.blockRubberLog.blockID || id == ISetupBlocks.blockPineLog.blockID) {
+	    if (BlockRubberLog.isCarved(world, x - direction.offsetX, y - direction.offsetY, z - direction.offsetZ, direction.ordinal())) {
+		return true;
+	    }
+	}
+	return false;
     }
 
     @Override
     public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
-        super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
-        if (!canBlockStay(par1World, par2, par3, par4))
-            par1World.destroyBlock(par2, par3, par4, true);
+	super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
+	if (!canBlockStay(par1World, par2, par3, par4))
+	    par1World.destroyBlock(par2, par3, par4, true);
     }
 
     @Override
     public boolean canBlockStay(World par1World, int par2, int par3, int par4) {
-        TileEntity entity = par1World.getBlockTileEntity(par2, par3, par4);
-        ForgeDirection dir = BlockMachine.getForwardFromEntity(entity);
-        return canStayAt(par1World, par2, par3, par4, dir);
+	TileEntity entity = par1World.getBlockTileEntity(par2, par3, par4);
+	ForgeDirection dir = BlockMachine.getForwardFromEntity(entity);
+	return canStayAt(par1World, par2, par3, par4, dir);
     }
 
     /**
@@ -107,47 +101,47 @@ public class BlockManualTreeTap extends BlockMachineRendered implements IDescrip
     @Override
     public int onBlockPlaced(World par1World, int par2, int par3, int par4, int par5, float par6, float par7, float par8, int par9) {
 
-        return super.onBlockPlaced(par1World, par2, par3, par4, par5, par6, par7, par8, par9);
+	return super.onBlockPlaced(par1World, par2, par3, par4, par5, par6, par7, par8, par9);
     }
 
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1iBlockAccess, int par2, int par3, int par4) {
-        ForgeDirection direction = BlockMachine.getForwardFromEntity(par1iBlockAccess.getBlockTileEntity(par2, par3, par4));
-        switch (direction) {
-        case NORTH:
-            setBlockBounds(2 / 16f, 2 / 16f, 12 / 16f, 8 / 16f, 6 / 16f, 1f);
-            break;
-        case EAST:
-            setBlockBounds(0, 2 / 16f, 2 / 16f, 4 / 16f, 6 / 16f, 8 / 16f);
-            break;
-        case SOUTH:
-            setBlockBounds(8 / 16f, 2 / 16f, 0, 14 / 16f, 6 / 16f, 4 / 16f);
-            break;
-        case WEST:
-            setBlockBounds(12 / 16f, 2 / 16f, 8 / 16f, 1f, 6 / 16f, 14 / 16f);
-            break;
-        default:
-            break;
-        }
+	ForgeDirection direction = BlockMachine.getForwardFromEntity(par1iBlockAccess.getBlockTileEntity(par2, par3, par4));
+	switch (direction) {
+	case NORTH:
+	    setBlockBounds(2 / 16f, 2 / 16f, 12 / 16f, 8 / 16f, 6 / 16f, 1f);
+	    break;
+	case EAST:
+	    setBlockBounds(0, 2 / 16f, 2 / 16f, 4 / 16f, 6 / 16f, 8 / 16f);
+	    break;
+	case SOUTH:
+	    setBlockBounds(8 / 16f, 2 / 16f, 0, 14 / 16f, 6 / 16f, 4 / 16f);
+	    break;
+	case WEST:
+	    setBlockBounds(12 / 16f, 2 / 16f, 8 / 16f, 1f, 6 / 16f, 14 / 16f);
+	    break;
+	default:
+	    break;
+	}
 
-        super.setBlockBoundsBasedOnState(par1iBlockAccess, par2, par3, par4);
+	super.setBlockBoundsBasedOnState(par1iBlockAccess, par2, par3, par4);
     }
 
     @Override
     public TileEntity createNewTileEntity(World world) {
-    	TileEntityManualTreeTap te = new TileEntityManualTreeTap();
-    	te.setName(getLocalizedName());
-        return te;
+	TileEntityManualTreeTap te = new TileEntityManualTreeTap();
+	te.setName(getLocalizedName());
+	return te;
     }
 
     @Override
     public int getRenderType() {
-        return ConfigRenderers.getRendererManualTreeTapID();
+	return ConfigRenderers.getRendererManualTreeTapID();
     }
 
     @Override
-    public GuiLayout getGuiLayout() {
-	return guiLayout;
+    public IGuiBuilder getGui() {
+	return guiBuilder;
     }
 
     @Override

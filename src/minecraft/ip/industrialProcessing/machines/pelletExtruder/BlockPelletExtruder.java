@@ -1,17 +1,14 @@
 package ip.industrialProcessing.machines.pelletExtruder;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import ip.industrialProcessing.api.rendering.IModelBlock;
 import ip.industrialProcessing.client.render.ModelBlock;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.gui.GuiLayout;
-import ip.industrialProcessing.gui.IGuiLayout;
-import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
-import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
+import ip.industrialProcessing.gui3.generating.GuiBuilderDefault;
+import ip.industrialProcessing.gui3.generating.IGuiBlock;
+import ip.industrialProcessing.gui3.generating.IGuiBuilder;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.machines.pelletExtruder.model.ModelPelletExtruderBlock;
@@ -23,20 +20,16 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockPelletExtruder extends BlockMachineRendered implements IRecipeBlock, IGuiLayout, IDescriptionBlock, IModelBlock {
+public class BlockPelletExtruder extends BlockMachineRendered implements IRecipeBlock, IGuiBlock, IDescriptionBlock, IModelBlock {
     Icon[] icons = new Icon[3];
-    private static GuiLayout guiLayout;
-    static {
-	guiLayout = new GuiLayout();
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 1);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsOutput).setSlotLayout(SlotLayoutType.horizontal, 1);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.worker);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.power);
-    }
+    public static final String UNLOCALIZED_NAME = "IP.Machine.PelletExtruder";
+    private static IGuiBuilder guiBuilder = new GuiBuilderDefault(UNLOCALIZED_NAME).addInputSlot(0).addOutputSlot(1).enableWorker().enablePower(2);
 
     public BlockPelletExtruder() {
-	super(ConfigMachineBlocks.getPelletExtruderID(), Material.iron, 1F, Block.soundMetalFootstep, "Pellet Extruder", ISetupCreativeTabs.tabOreProcessing);
+	super(ConfigMachineBlocks.getPelletExtruderID(), Material.iron, 1F, Block.soundMetalFootstep, UNLOCALIZED_NAME, ISetupCreativeTabs.tabOreProcessing);
     }
 
     @Override
@@ -70,8 +63,8 @@ public class BlockPelletExtruder extends BlockMachineRendered implements IRecipe
     }
 
     @Override
-    public GuiLayout getGuiLayout() {
-	return guiLayout;
+    public IGuiBuilder getGui() {
+	return guiBuilder;
     }
 
     @Override
@@ -85,7 +78,8 @@ public class BlockPelletExtruder extends BlockMachineRendered implements IRecipe
     @SideOnly(Side.CLIENT)
     @Override
     public ModelBlock getModel() {
-	if(model == null) model = new ModelPelletExtruderBlock();
+	if (model == null)
+	    model = new ModelPelletExtruderBlock();
 	return model;
     }
 }

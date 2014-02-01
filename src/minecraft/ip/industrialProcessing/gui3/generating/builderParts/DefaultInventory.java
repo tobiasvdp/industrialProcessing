@@ -6,8 +6,10 @@ import ip.industrialProcessing.gui3.framework.custom.PlayerInventory;
 import ip.industrialProcessing.gui3.framework.panels.StackPanel;
 import ip.industrialProcessing.slots.SlotArmor;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.inventory.SlotCrafting;
+import net.minecraft.tileentity.TileEntity;
 
 public class DefaultInventory {
     public static void setup(InventoryReference inventoryRef, InventoryPlayer inventoryPlayer, LayoutContainer container) {
@@ -32,7 +34,7 @@ public class DefaultInventory {
 	    // TODO: crafting grid;
 	}
     }
-
+ 
     public static void setup(InventoryReference inventoryRef, GuiLayoutContainer guiContainer, StackPanel rootStack) {
 	if (inventoryRef != null) {
 	    // TODO: crafting grid;

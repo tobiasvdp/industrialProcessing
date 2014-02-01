@@ -9,6 +9,8 @@ import ip.industrialProcessing.recipes.RecipeWorker;
 import ip.industrialProcessing.subMod.logic.old.api.network.interfaces.InterfaceType;
 import ip.industrialProcessing.subMod.logic.old.api.network.interfaces.StatusType;
 import ip.industrialProcessing.utils.DirectionUtils;
+import ip.industrialProcessing.utils.PowerTransfers;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 
@@ -18,12 +20,41 @@ public abstract class TileEntityPoweredFluidWorkerMachine extends TileEntityFlui
     private int maxWorkSpeed;
 
     private SimplePowerStorage storage;
+    private int batterySlot;
 
     public TileEntityPoweredFluidWorkerMachine(LocalDirection powerInput, int powerCapacity, int maxWorkSpeed, boolean hasAnimatedTileEntityRenderer) {
 	super(hasAnimatedTileEntityRenderer);
 	this.powerInputSide = powerInput;
 	this.maxWorkSpeed = maxWorkSpeed;
 	this.storage = new SimplePowerStorage(powerCapacity);
+    }
+
+
+    @Override
+    public void updateEntity() {
+        super.updateEntity();
+        if (!this.worldObj.isRemote)
+            drainBattery();
+    }
+    
+    public boolean drainBattery() {
+        ItemStack stack = getStackInSlot(batterySlot);
+        if (stack != null) {
+            return PowerTransfers.transfer(stack, 100, this.storage) > 0;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+        if (i == batterySlot) {
+            return PowerTransfers.isBattery(itemstack);
+        }
+        return super.isItemValidForSlot(i, itemstack);
+    }
+    
+    protected void setupPowerSlot() {
+        this.batterySlot = addStack(null, new LocalDirection[0], true, true);
     }
 
     public TileEntityPoweredFluidWorkerMachine(LocalDirection powerInput, int powerCapacity, boolean hasAnimatedTileEntityRenderer) {

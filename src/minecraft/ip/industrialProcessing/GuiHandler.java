@@ -8,32 +8,8 @@ import ip.industrialProcessing.gui3.generating.IGuiBlock;
 import ip.industrialProcessing.gui3.generating.IGuiMultiblock;
 import ip.industrialProcessing.gui3.generating.LayoutGuiBuilder;
 import ip.industrialProcessing.gui3.guide.GuideScreen;
-import ip.industrialProcessing.machines.oxygenFurnace.ContainerOxygenFurnace;
-import ip.industrialProcessing.machines.oxygenFurnace.GuiContainerOxygenFurnace;
-import ip.industrialProcessing.machines.oxygenFurnace.TileEntityOxygenFurnace;
 import ip.industrialProcessing.machines.plants.blacksmith.anvil.ContainerAnvil;
 import ip.industrialProcessing.machines.plants.blacksmith.anvil.GuiContainerAnvil;
-import ip.industrialProcessing.machines.plants.metalProcessing.extruder.ContainerExtruder;
-import ip.industrialProcessing.machines.plants.metalProcessing.extruder.GuiContainerExtruder;
-import ip.industrialProcessing.machines.plants.metalProcessing.extruder.TileEntityExtruder;
-import ip.industrialProcessing.machines.plants.metalProcessing.turretLathe.ContainerTurretLathe;
-import ip.industrialProcessing.machines.plants.metalProcessing.turretLathe.GuiContainerTurretLathe;
-import ip.industrialProcessing.machines.plants.metalProcessing.turretLathe.TileEntityTurretLathe;
-import ip.industrialProcessing.machines.plants.metalProcessing.vacuumCaster.ContainerVacuumCaster;
-import ip.industrialProcessing.machines.plants.metalProcessing.vacuumCaster.GuiContainerVacuumCaster;
-import ip.industrialProcessing.machines.plants.metalProcessing.vacuumCaster.TileEntityVacuumCaster;
-import ip.industrialProcessing.machines.plants.nonFerroProcessing.magneticSeparator.ContainerMagneticSeparator;
-import ip.industrialProcessing.machines.plants.nonFerroProcessing.magneticSeparator.GuiContainerMagneticSeparator;
-import ip.industrialProcessing.machines.plants.nonFerroProcessing.magneticSeparator.TileEntityMagneticSeparator;
-import ip.industrialProcessing.machines.plants.nonFerroProcessing.quenchTank.ContainerQuenchTank;
-import ip.industrialProcessing.machines.plants.nonFerroProcessing.quenchTank.GuiContainerQuenchTank;
-import ip.industrialProcessing.machines.plants.nonFerroProcessing.quenchTank.TileEntityQuenchTank;
-import ip.industrialProcessing.machines.plants.nonFerroProcessing.roaster.ContainerRoaster;
-import ip.industrialProcessing.machines.plants.nonFerroProcessing.roaster.GuiContainerRoaster;
-import ip.industrialProcessing.machines.plants.nonFerroProcessing.roaster.TileEntityRoaster;
-import ip.industrialProcessing.machines.plants.nonFerroProcessing.smelter.ContainerSmelter;
-import ip.industrialProcessing.machines.plants.nonFerroProcessing.smelter.GuiContainerSmelter;
-import ip.industrialProcessing.machines.plants.nonFerroProcessing.smelter.TileEntitySmelter;
 import ip.industrialProcessing.machines.plants.oilRefinary.AlkylationUnit.ContainerAlkylationUnit;
 import ip.industrialProcessing.machines.plants.oilRefinary.AlkylationUnit.GuiContainerAlkylationUnit;
 import ip.industrialProcessing.machines.plants.oilRefinary.AlkylationUnit.TileEntityAlkylationUnit;
@@ -52,15 +28,6 @@ import ip.industrialProcessing.machines.plants.oilRefinary.sourWaterStripper.Til
 import ip.industrialProcessing.machines.plants.waste.exhaust.coolingUnit.ContainerCoolingUnit;
 import ip.industrialProcessing.machines.plants.waste.exhaust.coolingUnit.GuiContainerCoolingUnit;
 import ip.industrialProcessing.machines.plants.waste.exhaust.coolingUnit.TileEntityCoolingUnit;
-import ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator.ContainerIncubator;
-import ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator.GuiContainerIncubator;
-import ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator.TileEntityIncubator;
-import ip.industrialProcessing.machines.sinter.ContainerSinter;
-import ip.industrialProcessing.machines.sinter.GuiContainerSinter;
-import ip.industrialProcessing.machines.sinter.TileEntitySinter;
-import ip.industrialProcessing.machines.spoolWindingMachine.ContainerSpoolWindingMachine;
-import ip.industrialProcessing.machines.spoolWindingMachine.GuiContainerSpoolWindingMachine;
-import ip.industrialProcessing.machines.spoolWindingMachine.TileEntitySpoolWindingMachine;
 import ip.industrialProcessing.machines.wireMill.ContainerWireMill;
 import ip.industrialProcessing.machines.wireMill.GuiContainerWireMill;
 import ip.industrialProcessing.machines.wireMill.TileEntityWireMill;
@@ -102,9 +69,6 @@ import ip.industrialProcessing.multiblock.core.block.plants.storage.container.Gu
 import ip.industrialProcessing.multiblock.core.block.plants.storage.container.TileEntityContainer;
 import ip.industrialProcessing.multiblock.dummy.block.toggleButton.GUImultiblockToggleButton;
 import ip.industrialProcessing.multiblock.dummy.block.toggleButton.TEmultiblockToggleButton;
-import ip.industrialProcessing.power.buildcraftGenerator.ContainerBuildcraftGenerator;
-import ip.industrialProcessing.power.buildcraftGenerator.GuiContainerBuildcraftGenerator;
-import ip.industrialProcessing.power.buildcraftGenerator.TileEntityBuildcraftGenerator;
 import ip.industrialProcessing.power.plants.GuiContainerTurbine;
 import ip.industrialProcessing.power.plants.TileEntityTurbine;
 import ip.industrialProcessing.power.storage.ContainerEnergyCell;
@@ -136,21 +100,9 @@ public class GuiHandler implements IGuiHandler {
 	    if (entity.getBlockType() != null && (entity.getBlockType() instanceof IGuiBlock || entity.getBlockType() instanceof IGuiMultiblock)) {
 		return LayoutGuiBuilder.createContainer(player.inventory, entity);
 	    }
-
-	    if (entity instanceof TileEntityMagneticSeparator)
-		return new ContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity);
-	    if (entity instanceof TileEntityExtruder)
-		return new ContainerExtruder(player.inventory, (TileEntityExtruder) entity);
-	    if (entity instanceof TileEntityOxygenFurnace)
-		return new ContainerOxygenFurnace(player.inventory, (TileEntityOxygenFurnace) entity);
-	    if (entity instanceof TileEntityBuildcraftGenerator)
-		return new ContainerBuildcraftGenerator(player.inventory, (TileEntityBuildcraftGenerator) entity);
-	    if (entity instanceof TileEntityIncubator)
-		return new ContainerIncubator(player.inventory, (TileEntityIncubator) entity);
+ 
 	    if (entity instanceof TileEntityWireMill)
 		return new ContainerWireMill(player.inventory, (TileEntityWireMill) entity);
-	    if (entity instanceof TileEntitySpoolWindingMachine)
-		return new ContainerSpoolWindingMachine(player.inventory, (TileEntitySpoolWindingMachine) entity);
 	    if (entity instanceof TileEntitySourWaterStripper)
 		return new ContainerSourWaterStripper(player.inventory, (TileEntitySourWaterStripper) entity);
 	    if (entity instanceof TileEntityAlkylationUnit)
@@ -181,23 +133,12 @@ public class GuiHandler implements IGuiHandler {
 		return new ContainerMeroxTreater(player.inventory, (TileEntityMeroxTreater) entity);
 	    if (entity instanceof TileEntityVacuumDestilationTower)
 		return new ContainerVacuumDestilationTower(player.inventory, (TileEntityVacuumDestilationTower) entity);
-	    if (entity instanceof TileEntitySinter)
-		return new ContainerSinter(player.inventory, (TileEntitySinter) entity);
+
 	    if (entity instanceof TEmultiblockBlastFurnace)
 		return new ContainerMultiblockBlastFurnace(player.inventory, (TEmultiblockBlastFurnace) entity);
 
-	    if (entity instanceof TileEntityVacuumCaster)
-		return new ContainerVacuumCaster(player.inventory, (TileEntityVacuumCaster) entity);
-	    if (entity instanceof TileEntityTurretLathe)
-		return new ContainerTurretLathe(player.inventory, (TileEntityTurretLathe) entity);
 	    if (entity instanceof TileEntityCoolingUnit)
 		return new ContainerCoolingUnit(player.inventory, (TileEntityCoolingUnit) entity);
-	    if (entity instanceof TileEntityRoaster)
-		return new ContainerRoaster(player.inventory, (TileEntityRoaster) entity);
-	    if (entity instanceof TileEntitySmelter)
-		return new ContainerSmelter(player.inventory, (TileEntitySmelter) entity);
-	    if (entity instanceof TileEntityQuenchTank)
-		return new ContainerQuenchTank(player.inventory, (TileEntityQuenchTank) entity);
 	    if (entity instanceof TileEntityContainer)
 		return new ContainerContainer(player.inventory, (TileEntityContainer) entity);
 	    if (entity instanceof TileEntityEnergyCell)
@@ -220,27 +161,15 @@ public class GuiHandler implements IGuiHandler {
 	    if (entity.getBlockType() != null && (entity.getBlockType() instanceof IGuiLayout || entity.getBlockType() instanceof IGuiLayoutMultiblock)) {
 		return new GuiContainerIP(player, entity, new ContainerIP(player, entity));
 	    }
-	    if (entity.getBlockType() != null &&  (entity.getBlockType() instanceof IGuiBlock || entity.getBlockType() instanceof IGuiMultiblock)) {
+	    if (entity.getBlockType() != null && (entity.getBlockType() instanceof IGuiBlock || entity.getBlockType() instanceof IGuiMultiblock)) {
 		return LayoutGuiBuilder.createGuiContainer(player.inventory, entity);
-	    } 
-	    if (entity instanceof TileEntityMagneticSeparator)
-		return new GuiContainerMagneticSeparator(player.inventory, (TileEntityMagneticSeparator) entity);
-	    if (entity instanceof TileEntityExtruder)
-		return new GuiContainerExtruder(player.inventory, (TileEntityExtruder) entity);
-	    if (entity instanceof TileEntityOxygenFurnace)
-		return new GuiContainerOxygenFurnace(player.inventory, (TileEntityOxygenFurnace) entity);
-	    if (entity instanceof TileEntityBuildcraftGenerator)
-		return new GuiContainerBuildcraftGenerator(player.inventory, (TileEntityBuildcraftGenerator) entity);
-	    if (entity instanceof TileEntityTurbine)
+	    }
+ 	    if (entity instanceof TileEntityTurbine)
 		return new GuiContainerTurbine(player.inventory, (TileEntityTurbine) entity);
 	    if (entity instanceof TEmultiblockToggleButton)
 		return new GUImultiblockToggleButton((TEmultiblockToggleButton) entity, player);
-	    if (entity instanceof TileEntityIncubator)
-		return new GuiContainerIncubator(player.inventory, (TileEntityIncubator) entity);
 	    if (entity instanceof TileEntityWireMill)
 		return new GuiContainerWireMill(player.inventory, (TileEntityWireMill) entity);
-	    if (entity instanceof TileEntitySpoolWindingMachine)
-		return new GuiContainerSpoolWindingMachine(player.inventory, (TileEntitySpoolWindingMachine) entity);
 	    if (entity instanceof TileEntitySourWaterStripper)
 		return new GuiContainerSourWaterStripper(player.inventory, (TileEntitySourWaterStripper) entity);
 	    if (entity instanceof TileEntityAlkylationUnit)
@@ -271,22 +200,11 @@ public class GuiHandler implements IGuiHandler {
 		return new GuiContainerMeroxTreater(player.inventory, (TileEntityMeroxTreater) entity);
 	    if (entity instanceof TileEntityVacuumDestilationTower)
 		return new GuiContainerVacuumDestilationTower(player.inventory, (TileEntityVacuumDestilationTower) entity);
-	    if (entity instanceof TileEntitySinter)
-		return new GuiContainerSinter(player.inventory, (TileEntitySinter) entity);
+
 	    if (entity instanceof TEmultiblockBlastFurnace)
 		return new GuiContainerMultiblockBlastFurnace(player.inventory, (TEmultiblockBlastFurnace) entity);
-	    if (entity instanceof TileEntityVacuumCaster)
-		return new GuiContainerVacuumCaster(player.inventory, (TileEntityVacuumCaster) entity);
-	    if (entity instanceof TileEntityTurretLathe)
-		return new GuiContainerTurretLathe(player.inventory, (TileEntityTurretLathe) entity);
 	    if (entity instanceof TileEntityCoolingUnit)
 		return new GuiContainerCoolingUnit(player.inventory, (TileEntityCoolingUnit) entity);
-	    if (entity instanceof TileEntityRoaster)
-		return new GuiContainerRoaster(player.inventory, (TileEntityRoaster) entity);
-	    if (entity instanceof TileEntitySmelter)
-		return new GuiContainerSmelter(player.inventory, (TileEntitySmelter) entity);
-	    if (entity instanceof TileEntityQuenchTank)
-		return new GuiContainerQuenchTank(player.inventory, (TileEntityQuenchTank) entity);
 	    if (entity instanceof TileEntityContainer)
 		return new GuiContainerContainer(player.inventory, (TileEntityContainer) entity);
 	    if (entity instanceof TileEntityEnergyCell)

@@ -20,6 +20,7 @@ public class TileEntityMagneticSeparator extends TileEntityPoweredFluidWorkerMac
 		addStack(null, LocalDirection.RIGHT, false, true);
 		addStack(null, LocalDirection.RIGHT, false, true);
 		addStack(null, LocalDirection.RIGHT, false, true);
+		setupPowerSlot();
 	}
 
 	@Override
