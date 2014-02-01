@@ -29,7 +29,7 @@ public class TileEntityTricklingFilter extends TileEntityPoweredFluidWorkerMachi
 
 	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.UP, true, false);
 	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.DOWN, false, true);
-
+	setupPowerSlot();
     }
 
     @Override

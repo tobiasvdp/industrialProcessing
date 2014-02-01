@@ -4,9 +4,9 @@ import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.gui.GuiLayout;
-import ip.industrialProcessing.gui.IGuiLayout;
-import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
+import ip.industrialProcessing.gui3.generating.GuiBuilderDefault;
+import ip.industrialProcessing.gui3.generating.IGuiBlock;
+import ip.industrialProcessing.gui3.generating.IGuiBuilder;
 import ip.industrialProcessing.utils.IDescriptionBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -15,19 +15,15 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockAutomaticTreeTap extends BlockManualTreeTap implements IDescriptionBlock, IGuiLayout {
+public class BlockAutomaticTreeTap extends BlockManualTreeTap implements IDescriptionBlock, IGuiBlock {
 
-    private static GuiLayout guiLayout;
-    static {
-	guiLayout = new GuiLayout();
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.simpleTankOutput); 
-    }
+    public static final String UNLOCALIZED_NAME = "IP.Machine.AutomaticTreetap";
+    private static IGuiBuilder guiLayout = new GuiBuilderDefault(UNLOCALIZED_NAME).addOutputTank(0, 0, 1);
     private Icon tapIcon;
     private Icon tankIcon;
 
     public BlockAutomaticTreeTap() {
-	super(ConfigMachineBlocks.getAutomaticTreeTapBlockID(), Material.iron, 1.0f, soundMetalFootstep, "Automatic Tree Tap", ISetupCreativeTabs.tabOreProcessing);
-	func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "automaticTreeTap");
+	super(ConfigMachineBlocks.getAutomaticTreeTapBlockID(), Material.iron, 1.0f, soundMetalFootstep, UNLOCALIZED_NAME, ISetupCreativeTabs.tabOreProcessing);
     }
 
     @Override
@@ -61,7 +57,7 @@ public class BlockAutomaticTreeTap extends BlockManualTreeTap implements IDescri
     }
 
     @Override
-    public GuiLayout getGuiLayout() {
+    public IGuiBuilder getGui() {
 	return guiLayout;
     }
 

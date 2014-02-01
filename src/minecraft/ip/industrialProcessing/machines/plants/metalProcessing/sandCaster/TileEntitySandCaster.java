@@ -23,12 +23,13 @@ public class TileEntitySandCaster extends TileEntityPoweredFluidWorkerMachine im
 	addStack(null, nodirections, true, false);
 
 	addStack(null, nodirections, false, true);
+	setupPowerSlot();
     }
 
     @Override
     public void updateEntity() {
 	super.updateEntity();
-	addBucketToTank(1, 2, 0);
+	addBucketToTank(2, 3, 0);
 
 	if (this.animationHandler.getProgress() < 0 && getStackInSlot(0) != null)
 	    this.animationHandler.setProgress(0);

@@ -1,22 +1,19 @@
 package ip.industrialProcessing.power.plants;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
 import ip.industrialProcessing.machines.animation.AnimationMode;
 import ip.industrialProcessing.machines.animation.IAnimationSyncable;
 import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
-import ip.industrialProcessing.power.IGeneratorProgress;
 import ip.industrialProcessing.power.TileEntityPowerGenerator;
 import ip.industrialProcessing.utils.DirectionUtils;
-import ip.industrialProcessing.utils.handler.numbers.IProgressable;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.ForgeDirection;
 
-public class TileEntityGenerator extends TileEntityPowerGenerator implements IAnimationProgress, IMechanicalMotion, IGeneratorProgress, IAnimationSyncable, IProgressable {
+public class TileEntityGenerator extends TileEntityPowerGenerator implements IAnimationProgress, IMechanicalMotion, IAnimationSyncable {
 
     private AnimationHandler animationHandler;
-    private float lastCharge;
     LocalDirection outputSide = LocalDirection.BACK;
     LocalDirection inputSide = LocalDirection.FRONT;
 
@@ -56,17 +53,6 @@ public class TileEntityGenerator extends TileEntityPowerGenerator implements IAn
     }
 
     @Override
-    public float getCharge(float q) {
-	this.lastCharge = q;
-	return q;
-    }
-
-    @Override
-    public float getLastAmps() {
-	return this.lastCharge / AnimationHandler.DT;
-    }
-
-    @Override
     public float getVoltage() {
 	return this.animationHandler.getSpeed() * 30;
     }
@@ -96,29 +82,4 @@ public class TileEntityGenerator extends TileEntityPowerGenerator implements IAn
 	return this.animationHandler;
     }
 
-    @Override
-    public float getProgress(int index) {
-	switch (index) {
-	case 0:
-	    return getVoltage();
-	case 1:
-	    return getLastAmps();
-	case 2:
-	    return getLastAmps() * getVoltage();
-	}
-	return 0;
-    }
-
-    @Override
-    public float getMaxProgress(int index) {
-	switch (index) {
-	case 0:
-	    return 250;
-	case 1:
-	    return 200;
-	case 2:
-	    return 10000;
-	}
-	return 0;
-    }
 }

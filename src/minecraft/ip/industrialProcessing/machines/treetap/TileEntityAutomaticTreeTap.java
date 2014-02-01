@@ -18,6 +18,9 @@ public class TileEntityAutomaticTreeTap extends TileEntityFluidMachine {
 
     public TileEntityAutomaticTreeTap() {
 	addTank(10 * FluidContainerRegistry.BUCKET_VOLUME, LocalDirection.DOWN, false, true);
+	LocalDirection[] nodirections = new LocalDirection[0];
+	addStack(null, nodirections, true, false);
+	addStack(null, nodirections, false, true);
     }
 
     @Override
@@ -50,6 +53,7 @@ public class TileEntityAutomaticTreeTap extends TileEntityFluidMachine {
 		totalProgress = 0;
 	    }
 	}
+	getBucketFromTank(2, 3, 2);
     }
 
     public int getProgress() {

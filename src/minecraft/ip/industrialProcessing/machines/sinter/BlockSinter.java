@@ -1,40 +1,30 @@
 package ip.industrialProcessing.machines.sinter;
 
+import ip.industrialProcessing.config.ConfigMachineBlocks;
+import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
+import ip.industrialProcessing.gui3.generating.GuiBuilderDefault;
+import ip.industrialProcessing.gui3.generating.IGuiBlock;
+import ip.industrialProcessing.gui3.generating.IGuiBuilder;
+import ip.industrialProcessing.machines.BlockMachineRendered;
+import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.recipes.IRecipeBlock;
+import ip.industrialProcessing.utils.IDescriptionBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
-import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.config.ConfigMachineBlocks;
-import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.config.INamepace;
-import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.gui.GuiLayout;
-import ip.industrialProcessing.gui.IGuiLayout;
-import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
-import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
-import ip.industrialProcessing.machines.BlockMachineRendered;
-import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.recipes.IRecipeBlock;
-import ip.industrialProcessing.utils.IDescriptionBlock;
 
-public class BlockSinter extends BlockMachineRendered implements IRecipeBlock, IDescriptionBlock, IGuiLayout {
+public class BlockSinter extends BlockMachineRendered implements IRecipeBlock, IDescriptionBlock, IGuiBlock {
     private Icon[] icons = new Icon[4];
+    public static String UNLOCALIZED_NAME = "IP.Machine.Sinter";
+    private static IGuiBuilder guiBuilder = new GuiBuilderDefault(UNLOCALIZED_NAME).addInputSlot(0).addOutputSlot(1).enableWorker().enablePower(2);
 
-    private static GuiLayout guiLayout;
-    static 
-    {
-	guiLayout = new GuiLayout();
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 2);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsOutput).setSlotLayout(SlotLayoutType.horizontal, 1);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.worker);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.power);
-    }
-    
     public BlockSinter() {
-	super(ConfigMachineBlocks.getSinterBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Sinter", ISetupCreativeTabs.tabOreProcessing);
+	super(ConfigMachineBlocks.getSinterBlockID(), Material.iron, 1F, Block.soundMetalFootstep, UNLOCALIZED_NAME, ISetupCreativeTabs.tabOreProcessing);
     }
 
     @Override
@@ -67,12 +57,12 @@ public class BlockSinter extends BlockMachineRendered implements IRecipeBlock, I
     }
 
     @Override
-    public GuiLayout getGuiLayout() { 
-	return guiLayout;
+    public IGuiBuilder getGui() {
+	return guiBuilder;
     }
 
     @Override
-    public String getDescription() { 
+    public String getDescription() {
 	return "Agglomerates iron dust with fine calcious materials at high temperature, to create a product that can be used in a blast furnace.";
     }
 }

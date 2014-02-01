@@ -1,59 +1,77 @@
 package ip.industrialProcessing.machines.plants.nonFerroProcessing.roaster;
 
 import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
+import ip.industrialProcessing.machines.TileEntityFluidWorkerMachine;
+import ip.industrialProcessing.power.plants.IHeatable;
 import ip.industrialProcessing.recipes.Recipe;
+import ip.industrialProcessing.utils.handler.heat.IHeated;
 
 import java.util.Iterator;
 
 import net.minecraftforge.fluids.FluidContainerRegistry;
 
-public class TileEntityRoaster extends TileEntityPoweredFluidWorkerMachine {
+public class TileEntityRoaster extends TileEntityFluidWorkerMachine implements IHeated, IHeatable {
 
-	public static RecipesRoaster recipes = new RecipesRoaster();
+    public static RecipesRoaster recipes = new RecipesRoaster();
 
-	public TileEntityRoaster() {
-		super(LocalDirection.LEFT, 10000, false);
-		LocalDirection[] nodirections = new LocalDirection[0];
-		
-		addStack(null, LocalDirection.UP, true, false);
-		
-		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.BACK, false, true);
-		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.RIGHT, false, true);
-		addStack(null, LocalDirection.DOWN, false, true);
-	}
+    public TileEntityRoaster() {
+	super(false);
+	LocalDirection[] nodirections = new LocalDirection[0];
 
-	@Override
-	public void updateEntity() {
-		super.updateEntity();
-	};
+	addStack(null, LocalDirection.UP, true, false);
+	addStack(null, LocalDirection.BACK, false, true);
+	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.LEFT, true, false);
+	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.RIGHT, false, true);
+    }
 
-	@Override
-	public boolean hasWork() {
-		return true;
-	}
+    @Override
+    public void updateEntity() {
+	super.updateEntity();
+    };
 
-	@Override
-	public boolean canWork() {
-		return true;
-	}
+    @Override
+    public boolean hasWork() {
+	return true;
+    }
 
-	@Override
-	protected boolean isValidInput(int slot, int itemID) {
-		if (slot == 0)
-			return recipes.isValidInput(slot, itemID);
-		return false;
-	}
+    @Override
+    public boolean canWork() {
+	return true;
+    }
 
-	@Override
-	public Iterator<Recipe> iterateRecipes() {
-		return recipes.getRecipes();
-	}
+    @Override
+    protected boolean isValidInput(int slot, int itemID) {
+	if (slot == 0)
+	    return recipes.isValidInput(slot, itemID);
+	return false;
+    }
 
-	@Override
-	protected boolean isTankValidForFluid(int slot, int fluidId) {
-	    return recipes.isValidFluidInput(0, fluidId);
-	}
+    @Override
+    public Iterator<Recipe> iterateRecipes() {
+	return recipes.getRecipes();
+    }
 
+    @Override
+    protected boolean isTankValidForFluid(int slot, int fluidId) {
+	return recipes.isValidFluidInput(0, fluidId);
+    }
+
+    @Override
+    public float getHeat() {
+	// TODO Auto-generated method stub
+	return 0;
+    }
+
+    @Override
+    public float getMaxHeat() {
+	// TODO Auto-generated method stub
+	return 0;
+    }
+
+    @Override
+    public void addHeat(int heat) {
+	// TODO Auto-generated method stub
+
+    }
 
 }

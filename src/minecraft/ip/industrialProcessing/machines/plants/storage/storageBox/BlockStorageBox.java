@@ -1,51 +1,45 @@
 package ip.industrialProcessing.machines.plants.storage.storageBox;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.config.ISetupItems;
-import ip.industrialProcessing.gui.GuiLayout;
-import ip.industrialProcessing.gui.IGuiLayout;
-import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
-import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
+import ip.industrialProcessing.gui3.framework.panels.Orientation;
+import ip.industrialProcessing.gui3.generating.GuiBuilderDefault;
+import ip.industrialProcessing.gui3.generating.IGuiBlock;
+import ip.industrialProcessing.gui3.generating.IGuiBuilder;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.IRotateableEntity;
-import ip.industrialProcessing.machines.plants.storage.storageRack.TileEntityStorageRack;
 import ip.industrialProcessing.utils.IDescriptionBlock;
 import ip.industrialProcessing.utils.ItemTransfers;
+
+import java.util.ArrayList;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
-public class BlockStorageBox extends BlockMachineRendered implements IDescriptionBlock, IGuiLayout {
-    public static GuiLayout guiLayout;
+public class BlockStorageBox extends BlockMachineRendered implements IDescriptionBlock, IGuiBlock {
+    public static String UNLOCALIZED_NAME = "IP.Machine.StorageBox";
+    private static IGuiBuilder guiBuilder = new GuiBuilderDefault(UNLOCALIZED_NAME).addInputSlotCluster(0, 9, 3, Orientation.HORIZONTAL);
     public static final int STORAGE_SIZE = 9;
-    static {
-	guiLayout = new GuiLayout();
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.vertical, STORAGE_SIZE);
-    }
+
     private Icon[] icons = new Icon[1];
 
     public BlockStorageBox() {
-	super(ConfigMachineBlocks.getBlockStorageBoxID(), Material.iron, 1F, Block.soundMetalFootstep, "BlockStorageBox", ISetupCreativeTabs.tabOreProcessing);
+	super(ConfigMachineBlocks.getBlockStorageBoxID(), Material.iron, 1F, Block.soundMetalFootstep, UNLOCALIZED_NAME, ISetupCreativeTabs.tabOreProcessing);
     }
 
     @Override
@@ -120,8 +114,8 @@ public class BlockStorageBox extends BlockMachineRendered implements IDescriptio
     }
 
     @Override
-    public GuiLayout getGuiLayout() {
-	return guiLayout;
+    public IGuiBuilder getGui() {
+	return guiBuilder;
     }
 
     @Override

@@ -23,7 +23,7 @@ public class TileEntityBuildcraftGenerator extends TileEntityPowerGenerator impl
     private float lastCharge;
 
     public TileEntityBuildcraftGenerator() {
-	 
+
 	this.powerHandler = new PowerHandler(this, Type.MACHINE);
 	this.powerHandler.configure(1, 50, 0, 500);
 	this.powerHandler.configurePowerPerdition(2, 1);
@@ -39,7 +39,7 @@ public class TileEntityBuildcraftGenerator extends TileEntityPowerGenerator impl
 
 	float spread = 50f; // 50 frames
 
-	float force = this.powerHandler.useEnergy(this.powerHandler.getEnergyStored() / spread, this.powerHandler.getEnergyStored() / spread, true);
+	float force = 2 * this.powerHandler.useEnergy(this.powerHandler.getEnergyStored() / spread, this.powerHandler.getEnergyStored() / spread, true);
 
 	this.speed += force * dt * 5;
 
@@ -48,7 +48,7 @@ public class TileEntityBuildcraftGenerator extends TileEntityPowerGenerator impl
 								 // defines max
 								 // speed
 
-	this.rotation += this.speed * dt /11;
+	this.rotation += this.speed * dt / 11;
 
 	while (rotation > 1)
 	    rotation -= 1;
@@ -117,12 +117,12 @@ public class TileEntityBuildcraftGenerator extends TileEntityPowerGenerator impl
     }
 
     @Override
-    public float getAnimationProgress(float scale ,int index) {
+    public float getAnimationProgress(float scale, int index) {
 	return this.rotation * scale;
     }
 
     @Override
     public int getAnimationCount() {
-    	return 1;
+	return 1;
     }
 }

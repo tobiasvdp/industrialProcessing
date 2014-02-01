@@ -8,50 +8,51 @@ import java.util.Iterator;
 
 import net.minecraftforge.fluids.FluidContainerRegistry;
 
-public class TileEntityTurretLathe  extends TileEntityPoweredFluidWorkerMachine {
+public class TileEntityTurretLathe extends TileEntityPoweredFluidWorkerMachine {
 
-	public TileEntityTurretLathe() {
-		super(LocalDirection.LEFT, 10000, false);
-		LocalDirection[] nodirections = new LocalDirection[0];
-		
-		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.UP, true, false);
-		addStack(null, LocalDirection.BACK, true, false);
-		
-		addStack(null, LocalDirection.DOWN, false, true);
-	}
+    public TileEntityTurretLathe() {
+	super(LocalDirection.LEFT, 10000, false);
+	LocalDirection[] nodirections = new LocalDirection[0];
 
-	@Override
-	public void updateEntity() {
-		super.updateEntity();
-	};
+	addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.UP, true, false);
+	addStack(null, LocalDirection.BACK, true, false);
 
-	public static RecipesTurretLathe recipes = new RecipesTurretLathe();
+	addStack(null, LocalDirection.DOWN, false, true);
+	setupPowerSlot();
+    }
 
-	@Override
-	public boolean hasWork() {
-		return true;
-	}
+    @Override
+    public void updateEntity() {
+	super.updateEntity();
+    };
 
-	@Override
-	public boolean canWork() {
-		return true;
-	}
-	
-	@Override
-	public Iterator<Recipe> iterateRecipes() {
-		return recipes.getRecipes();
-	}
+    public static RecipesTurretLathe recipes = new RecipesTurretLathe();
 
-	@Override
-	protected boolean isValidInput(int slot, int itemID) {
-		if (slot == 0)
-			return recipes.isValidInput(slot, itemID);
-		return false;
-	}
+    @Override
+    public boolean hasWork() {
+	return true;
+    }
 
-	@Override
-	protected boolean isTankValidForFluid(int slot, int fluidId) {
-		return recipes.isValidFluidInput(slot, fluidId);
-	}
+    @Override
+    public boolean canWork() {
+	return true;
+    }
+
+    @Override
+    public Iterator<Recipe> iterateRecipes() {
+	return recipes.getRecipes();
+    }
+
+    @Override
+    protected boolean isValidInput(int slot, int itemID) {
+	if (slot == 0)
+	    return recipes.isValidInput(slot, itemID);
+	return false;
+    }
+
+    @Override
+    protected boolean isTankValidForFluid(int slot, int fluidId) {
+	return recipes.isValidFluidInput(slot, fluidId);
+    }
 
 }

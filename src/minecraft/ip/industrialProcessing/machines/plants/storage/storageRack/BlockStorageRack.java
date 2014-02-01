@@ -5,12 +5,13 @@ import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.gui.GuiLayout;
-import ip.industrialProcessing.gui.IGuiLayout;
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
+import ip.industrialProcessing.gui3.framework.panels.Orientation;
+import ip.industrialProcessing.gui3.generating.GuiBuilderInventory;
+import ip.industrialProcessing.gui3.generating.IGuiBlock;
+import ip.industrialProcessing.gui3.generating.IGuiBuilder;
 import ip.industrialProcessing.machines.BlockMachineRendered;
-import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.machines.hydroCyclone.TileEntityHydroCyclone;
 import ip.industrialProcessing.utils.IDescriptionBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -19,28 +20,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
-public class BlockStorageRack extends BlockMachineRendered implements IDescriptionBlock,IGuiLayout {
-	public static GuiLayout guiLayout;
-	static{
-		guiLayout = new GuiLayout();
-		guiLayout.multipleLines = 2;
-		guiLayout.drawTitel = false;
-		guiLayout.drawInventoryTitel = false;
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.vertical, 3);
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setLine(2).setSlotLayout(SlotLayoutType.vertical, 3);
-		
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 9);
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 9);
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 9);
-		
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setLine(2).setSlotLayout(SlotLayoutType.horizontal, 9);
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setLine(2).setSlotLayout(SlotLayoutType.horizontal, 9);
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setLine(2).setSlotLayout(SlotLayoutType.horizontal, 9);
-	}
+public class BlockStorageRack extends BlockMachineRendered implements IDescriptionBlock, IGuiBlock {
+    public static String UNLOCALIZED_NAME = "IP.Machine.StorageRack";
+    private static IGuiBuilder guiBuilder = new GuiBuilderInventory(UNLOCALIZED_NAME).setMode(Orientation.HORIZONTAL).addInventoryHeaderRow(0, 6, 9, 9).addInventoryHeaderRow(1, 6 + 9, 9, 9).addInventoryHeaderRow(2, 6 + 18, 9, 9).addInventoryHeaderRow(3, 6 + 27, 9, 9).addInventoryHeaderRow(4, 6 + 36, 9, 9).addInventoryHeaderRow(5, 6 + 45, 9, 9);
+
     private Icon[] icons = new Icon[4];
 
     public BlockStorageRack() {
-	super(ConfigMachineBlocks.getBlockStorageRackID(), Material.iron, 1F, Block.soundMetalFootstep, "BlockStorageRack", ISetupCreativeTabs.tabOreProcessing);
+	super(ConfigMachineBlocks.getBlockStorageRackID(), Material.iron, 1F, Block.soundMetalFootstep, UNLOCALIZED_NAME, ISetupCreativeTabs.tabOreProcessing);
 
     }
 
@@ -75,8 +62,8 @@ public class BlockStorageRack extends BlockMachineRendered implements IDescripti
 	return "Storage racks can store a few items.";
     }
 
-	@Override
-	public GuiLayout getGuiLayout() {
-		return guiLayout;
-	}
+    @Override
+    public IGuiBuilder getGui() {
+	return guiBuilder;
+    }
 }

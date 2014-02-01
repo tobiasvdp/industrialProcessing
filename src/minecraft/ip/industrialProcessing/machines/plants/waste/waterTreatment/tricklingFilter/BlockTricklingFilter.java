@@ -1,33 +1,26 @@
 package ip.industrialProcessing.machines.plants.waste.waterTreatment.tricklingFilter;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.gui.GuiLayout;
-import ip.industrialProcessing.gui.IGuiLayout;
-import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
-import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
+import ip.industrialProcessing.gui3.generating.GuiBuilderDefault;
+import ip.industrialProcessing.gui3.generating.IGuiBlock;
+import ip.industrialProcessing.gui3.generating.IGuiBuilder;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 import ip.industrialProcessing.utils.IDescriptionBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
-public class BlockTricklingFilter extends BlockMachineRendered  implements IRecipeBlock, IDescriptionBlock,IGuiLayout{
+public class BlockTricklingFilter extends BlockMachineRendered implements IRecipeBlock, IDescriptionBlock, IGuiBlock {
 
-	public static GuiLayout guiLayout;
-	static{
-		guiLayout = new GuiLayout();
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 1);
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.tankInput);
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.tankOutput);
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.worker);
-		guiLayout.addLayoutPanel(GuiLayoutPanelType.power);
-	}
+    public static String UNLOCALIZED_NAME = "IP.Machine.TricklingFilter";
+    private static IGuiBuilder guiBuilder = new GuiBuilderDefault(UNLOCALIZED_NAME).addInputSlot(0).addInputTank(0, 1, 2).addOutputTank(0, 3, 4).enableWorker().enablePower(5);
+
     public BlockTricklingFilter() {
-	super(ConfigMachineBlocks.getTricklingFilterID(), Material.iron, 1F, Block.soundMetalFootstep, "TricklingFilter", ISetupCreativeTabs.tabOreProcessing);
+	super(ConfigMachineBlocks.getTricklingFilterID(), Material.iron, 1F, Block.soundMetalFootstep, UNLOCALIZED_NAME, ISetupCreativeTabs.tabOreProcessing);
     }
 
     @Override
@@ -47,13 +40,13 @@ public class BlockTricklingFilter extends BlockMachineRendered  implements IReci
 	return TileEntityTricklingFilter.recipes;
     }
 
-	@Override
-	public GuiLayout getGuiLayout() {
-		return guiLayout;
-	}
+    @Override
+    public IGuiBuilder getGui() {
+	return guiBuilder;
+    }
 
-	@Override
-	public String getDescription() {
-		return "Drip drip drip";
-	}
+    @Override
+    public String getDescription() {
+	return "A water pollution treatment system";
+    }
 }

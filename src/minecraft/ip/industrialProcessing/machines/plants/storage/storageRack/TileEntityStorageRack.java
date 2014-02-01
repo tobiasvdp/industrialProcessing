@@ -41,15 +41,15 @@ public class TileEntityStorageRack extends TileEntityMachine implements IAnimati
 		this.animation.setIncrementing(false);
 		
 		LocalDirection[] noDirection = new LocalDirection[0];
-		addStack(null, noDirection, true, false);
-		addStack(null, noDirection, true, false);
-		addStack(null, noDirection, true, false);
-		addStack(null, noDirection, true, false);
-		addStack(null, noDirection, true, false);
-		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);//0
+		addStack(null, noDirection, true, false);//1
+		addStack(null, noDirection, true, false);//2
+		addStack(null, noDirection, true, false);//3
+		addStack(null, noDirection, true, false);//4
+		addStack(null, noDirection, true, false);//5
 
 		// box1
-		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);//6
 		addStack(null, noDirection, true, false);
 		addStack(null, noDirection, true, false);
 		addStack(null, noDirection, true, false);
@@ -60,7 +60,7 @@ public class TileEntityStorageRack extends TileEntityMachine implements IAnimati
 		addStack(null, noDirection, true, false);
 
 		// box2
-		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);//15
 		addStack(null, noDirection, true, false);
 		addStack(null, noDirection, true, false);
 		addStack(null, noDirection, true, false);
@@ -71,7 +71,7 @@ public class TileEntityStorageRack extends TileEntityMachine implements IAnimati
 		addStack(null, noDirection, true, false);
 
 		// box3
-		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);//24
 		addStack(null, noDirection, true, false);
 		addStack(null, noDirection, true, false);
 		addStack(null, noDirection, true, false);
@@ -82,7 +82,7 @@ public class TileEntityStorageRack extends TileEntityMachine implements IAnimati
 		addStack(null, noDirection, true, false);
 
 		// box4
-		addStack(null, noDirection, true, false);
+		addStack(null, noDirection, true, false);//
 		addStack(null, noDirection, true, false);
 		addStack(null, noDirection, true, false);
 		addStack(null, noDirection, true, false);

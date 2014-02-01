@@ -1,14 +1,12 @@
 package ip.industrialProcessing.machines.plants.nonFerroProcessing.magneticSeparator;
 
-import org.apache.commons.io.filefilter.MagicNumberFileFilter;
-
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.gui.GuiLayout;
-import ip.industrialProcessing.gui.IGuiLayout;
-import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
-import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
+import ip.industrialProcessing.gui3.framework.panels.Orientation;
+import ip.industrialProcessing.gui3.generating.GuiBuilderDefault;
+import ip.industrialProcessing.gui3.generating.IGuiBlock;
+import ip.industrialProcessing.gui3.generating.IGuiBuilder;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.recipes.IRecipeBlock;
@@ -18,19 +16,12 @@ import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class BlockMagneticSeparator extends BlockMachineRendered implements IRecipeBlock, IDescriptionBlock, IGuiLayout {
+public class BlockMagneticSeparator extends BlockMachineRendered implements IRecipeBlock, IDescriptionBlock, IGuiBlock {
+    public static String UNLOCALIZED_NAME = "IP.Machine.MagneticSeparator";
+    private static IGuiBuilder guiBuilder = new GuiBuilderDefault(UNLOCALIZED_NAME).addInputSlot(0).addOutputSlotCluster(1, 4, 4, Orientation.HORIZONTAL).enableWorker().enablePower(5);
 
-    private static GuiLayout guiLayout;
-
-    static {
-	guiLayout = new GuiLayout();
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 1); 
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsOutput).setSlotLayout(SlotLayoutType.vertical, 4); 
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.worker);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.power);
-    }
     public BlockMagneticSeparator() {
-	super(ConfigMachineBlocks.getMagneticSeparatorBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Magnetic Ore Separator", ISetupCreativeTabs.tabOreProcessing);
+	super(ConfigMachineBlocks.getMagneticSeparatorBlockID(), Material.iron, 1F, Block.soundMetalFootstep, UNLOCALIZED_NAME, ISetupCreativeTabs.tabOreProcessing);
     }
 
     @Override
@@ -51,12 +42,12 @@ public class BlockMagneticSeparator extends BlockMachineRendered implements IRec
     }
 
     @Override
-    public GuiLayout getGuiLayout() { 
-	return guiLayout;
+    public IGuiBuilder getGui() {
+	return guiBuilder;
     }
 
     @Override
-    public String getDescription() { 
-	return "Seperates components from dusts";
+    public String getDescription() {
+	return "Susceptible materials are extracted from a mixture using a magnetic force.";
     }
 }
