@@ -17,6 +17,6 @@ public enum BlockType {
     }
 
     public String getDisplayName() {
-	return LanguageRegistry.instance().getStringLocalization("IP.BlockType." + this.toString());
+	return LanguageRegistry.instance().getStringLocalization("IP.BlockType." + this.toString(),"en_US");
     }
 }
