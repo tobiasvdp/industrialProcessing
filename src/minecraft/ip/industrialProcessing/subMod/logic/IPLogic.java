@@ -3,6 +3,8 @@ package ip.industrialProcessing.subMod.logic;
 import ip.industrialProcessing.api.utils.CreativeTabsIP;
 import ip.industrialProcessing.subMod.logic.config.ConfigLogic;
 import ip.industrialProcessing.subMod.logic.config.ISetupLogic;
+import ip.industrialProcessing.subMod.logic.utils.handler.logicLine.LogicPathHandler;
+import ip.industrialProcessing.utils.registry.HandlerRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
@@ -36,6 +38,9 @@ public class IPLogic implements ISetupLogic {
 
 		// register the gui handler
 		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
+		
+		//register new logic line handler
+		HandlerRegistry.registerLogicLineHandler(new LogicPathHandler());
 	}
 
 	@EventHandler

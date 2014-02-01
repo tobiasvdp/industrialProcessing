@@ -4,11 +4,11 @@ import net.minecraft.tileentity.TileEntity;
 
 public interface ILine {
 
-	int registerTransport(TileEntity te);
-	boolean unregisterTransport(TileEntity te);
+	int registerTransport(ILineTransport te);
+	boolean unregisterTransport(ILineTransport te);
 	
-	int registerDevice(TileEntity te);
-	boolean unregisterDevice(TileEntity te);
+	int registerDevice(ILineDevice te);
+	boolean unregisterDevice(ILineDevice te);
 	
 	void registerLine(ILine line);
 	void unregisterLine(ILine line);

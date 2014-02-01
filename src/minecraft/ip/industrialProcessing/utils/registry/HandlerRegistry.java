@@ -9,11 +9,16 @@ import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorTr
 import ip.industrialProcessing.utils.handler.conveyors.line.ConveyorLineHandler;
 import ip.industrialProcessing.utils.handler.conveyors.line.IConveyorLineHandler;
 import ip.industrialProcessing.utils.handler.heat.IHeatHandler;
+import ip.industrialProcessing.utils.handler.lines.ILineDevice;
+import ip.industrialProcessing.utils.handler.lines.ILineHandler;
+import ip.industrialProcessing.utils.handler.lines.ILinePart;
+import ip.industrialProcessing.utils.handler.lines.ILineTransport;
 
 import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 
 import com.google.common.collect.Lists;
 
@@ -21,6 +26,7 @@ public class HandlerRegistry {
 
 	private static List<IHeatHandler> heatHandlers = Lists.newArrayList();
 	private static List<IConveyorLineHandler> conveyorLineHandler = Lists.newArrayList();
+	private static List<ILineHandler> logicLineHandler = Lists.newArrayList();
 
 	public static void registerHeatHandler(IHeatHandler handler) {
 		heatHandlers.add(handler);
@@ -28,6 +34,10 @@ public class HandlerRegistry {
 
 	public static void registerConveyorLineHandler(IConveyorLineHandler handler) {
 		conveyorLineHandler.add(handler);
+	}
+
+	public static void registerLogicLineHandler(ILineHandler handler) {
+		logicLineHandler.add(handler);
 	}
 
 	public static void resetConveyorLineHandler() {
@@ -77,6 +87,54 @@ public class HandlerRegistry {
 		}
 	}
 
+	public static int addToLogicLine(ILinePart te, boolean isNBT) {
+		if ((((TileEntity) te).worldObj != null && !((TileEntity) te).worldObj.isRemote) || ((TileEntity) te).worldObj == null) {
+			Iterator<ILineHandler> it = logicLineHandler.iterator();
+			int ID = -1;
+			while (it.hasNext()) {
+				ILineHandler handler = it.next();
+				if (te instanceof ILineTransport) {
+					if (isNBT) {
+						handler.registerTransportFromNBT((ILineTransport) te);
+						return 0;
+					} else {
+						ID = handler.registerTransport((ILineTransport) te);
+					}
+				} else if (te instanceof ILineDevice) {
+					for(int i = 0;i<6;i++){
+						int id = ((ILineDevice)te).getLineID(i);
+						if(id != -1){
+							handler.registerDevice(id, (ILineDevice) te);
+						}
+					}
+					return -1;
+				}
+			}
+			return ID;
+		}
+		return -1;
+	}
+
+	public static void removeFromLogicLine(ILinePart te) {
+		if (((TileEntity) te).worldObj != null && !((TileEntity) te).worldObj.isRemote) {
+			Iterator<ILineHandler> it = logicLineHandler.iterator();
+			int ID = -1;
+			while (it.hasNext()) {
+				ILineHandler handler = it.next();
+				if(te instanceof ILineDevice){
+					for(int i = 0;i<6;i++){
+						int id = ((ILineDevice)te).getLineID(i);
+						if(id != -1){
+							handler.unregisterDevice(id, (ILineDevice) te);
+						}
+					}
+				}
+				if(te instanceof ILineTransport)
+					handler.unregisterTransport((ILineTransport) te);
+			}
+		}
+	}
+
 	public static boolean addToConveyorLine(int line, TileEntityConveyorBeltPowerInput te) {
 		if ((te.worldObj != null && !te.worldObj.isRemote) || te.worldObj == null) {
 			Iterator<IConveyorLineHandler> it = conveyorLineHandler.iterator();
@@ -103,15 +161,16 @@ public class HandlerRegistry {
 	}
 
 	public static float getResistanceForConveyorLine(int line) {
-			float resistance = 0;
-			Iterator<IConveyorLineHandler> it = conveyorLineHandler.iterator();
-			int ID = -1;
-			while (it.hasNext()) {
-				IConveyorLineHandler handler = it.next();
-				resistance = Math.max(resistance, handler.getResistanceForConveyorLine(line));
-			}
-			return resistance;
+		float resistance = 0;
+		Iterator<IConveyorLineHandler> it = conveyorLineHandler.iterator();
+		int ID = -1;
+		while (it.hasNext()) {
+			IConveyorLineHandler handler = it.next();
+			resistance = Math.max(resistance, handler.getResistanceForConveyorLine(line));
+		}
+		return resistance;
 	}
+
 	public static float getSpeedForConveyorLine(int line) {
 		float speed = 0;
 		Iterator<IConveyorLineHandler> it = conveyorLineHandler.iterator();
@@ -121,6 +180,6 @@ public class HandlerRegistry {
 			speed = Math.max(speed, handler.getSpeedForConveyorLine(line));
 		}
 		return speed;
-}
+	}
 
 }

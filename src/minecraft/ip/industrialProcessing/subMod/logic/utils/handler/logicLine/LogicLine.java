@@ -1,9 +1,11 @@
-package ip.industrialProcessing.subMod.logic.utils.handlers.logicLine;
+package ip.industrialProcessing.subMod.logic.utils.handler.logicLine;
 
 import ip.industrialProcessing.subMod.logic.network.ILogicNode;
 import ip.industrialProcessing.subMod.logic.network.ILogicTransport;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorConnectionsBase;
 import ip.industrialProcessing.utils.handler.lines.ILine;
+import ip.industrialProcessing.utils.handler.lines.ILineDevice;
+import ip.industrialProcessing.utils.handler.lines.ILineTransport;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -21,7 +23,7 @@ public class LogicLine implements ILine{
 	}
 	
 	@Override
-	public int registerTransport(TileEntity te) {
+	public int registerTransport(ILineTransport te) {
 		if(te instanceof ILogicTransport && !transport.contains(te)){
 		transport.add((ILogicTransport) te);
 		return ID;
@@ -29,7 +31,7 @@ public class LogicLine implements ILine{
 		return -1;
 	}
 	@Override
-	public boolean unregisterTransport(TileEntity te) {
+	public boolean unregisterTransport(ILineTransport te) {
 		transport.remove(te);
 		if (transport.size() == 0 && nodes.size() == 0) {
 			return true;
@@ -37,7 +39,7 @@ public class LogicLine implements ILine{
 		return false;
 	}
 	@Override
-	public int registerDevice(TileEntity te) {
+	public int registerDevice(ILineDevice te) {
 		if (te instanceof ILogicNode && !nodes.contains(te)){
 			nodes.add((ILogicNode) te);
 			return ID;
@@ -45,7 +47,7 @@ public class LogicLine implements ILine{
 			return -1;
 	}
 	@Override
-	public boolean unregisterDevice(TileEntity te) {
+	public boolean unregisterDevice(ILineDevice te) {
 		transport.remove(te);
 		if (transport.size() == 0 && nodes.size() == 0) {
 			return true;

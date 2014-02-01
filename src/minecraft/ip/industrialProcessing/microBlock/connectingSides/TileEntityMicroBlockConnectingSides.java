@@ -43,7 +43,7 @@ public abstract class TileEntityMicroBlockConnectingSides extends TileEntityMicr
 	}
 
 	private int[][] rotation = new int[][]{{4,5,2,3},{4,5,3,2},{4,5,1,0},{5,4,1,0},{3,2,1,0},{2,3,1,0}};
-	private int getRotated(int i, int j) {
+	public int getRotated(int i, int j) {
 		return rotation[i][j];
 	}
 

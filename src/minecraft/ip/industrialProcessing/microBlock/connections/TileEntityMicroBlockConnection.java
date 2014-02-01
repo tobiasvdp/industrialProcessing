@@ -34,7 +34,12 @@ public abstract class TileEntityMicroBlockConnection extends TileEntityMicroBloc
 		super.setSide(dir, itemID,player);
 		updateSideConnections();
 		updateExtConnections();
+		onPostSideSet(dir,itemID);
 		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+	}
+
+	public void onPostSideSet(ForgeDirection dir, int itemID) {
+
 	}
 
 	@Override
@@ -42,7 +47,12 @@ public abstract class TileEntityMicroBlockConnection extends TileEntityMicroBloc
 		super.unsetSide(dir, player);
 		updateSideConnections();
 		updateExtConnections();
+		onPostSideUnset(dir);
 		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+	}
+
+	public void onPostSideUnset(ForgeDirection dir) {
+
 	}
 
 	protected void updateExtConnections() {
@@ -99,7 +109,7 @@ public abstract class TileEntityMicroBlockConnection extends TileEntityMicroBloc
 
 	protected static final int[][] rotation = new int[][] { { 4, 5, 2, 3 }, { 4, 5, 3, 2 }, { 4, 5, 1, 0 }, { 5, 4, 1, 0 }, { 3, 2, 1, 0 }, { 2, 3, 1, 0 } };
 
-	protected int getRotated(int i, int j) {
+	public int getRotated(int i, int j) {
 		return rotation[i][j];
 	}
 

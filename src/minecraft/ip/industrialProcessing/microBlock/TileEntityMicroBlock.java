@@ -84,6 +84,9 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 			if (!isValidSide(dir)) {
 				unsetSide(dir, null);
 			}
+			if(sidesMicroblock[dir.ordinal()] == itemID){
+				onSetSide(dir, itemID);
+			}
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		} else {
 			if (countSetSides() == 0) {
@@ -93,6 +96,10 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 				}
 			}
 		}
+	}
+
+	public void onSetSide(ForgeDirection dir, int itemID) {
+		
 	}
 
 	public abstract boolean isValidPlacingSide(ForgeDirection dir);
@@ -105,10 +112,17 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 			doDispense(this.worldObj, new ItemStack(sidesMicroblock[dir.ordinal()], 1, 0), 1, EnumFacing.values()[dir.getOpposite().ordinal()], this);
 		sidesMicroblock[dir.ordinal()] = -1;
 		System.out.println("unset " + dir);
+		if(sidesMicroblock[dir.ordinal()] == -1){
+			onUnsetSide(dir);
+		}
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		if (!hasCore && countSetSides() == 0) {
 			worldObj.destroyBlock(xCoord, yCoord, zCoord, false);
 		}
+	}
+	
+	public void onUnsetSide(ForgeDirection dir) {
+		
 	}
 
 	public static void doDispense(World par0World, ItemStack par1ItemStack, int par2, EnumFacing par3EnumFacing, IPosition par4IPosition) {
