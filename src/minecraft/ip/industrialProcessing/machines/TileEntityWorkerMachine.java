@@ -7,7 +7,7 @@ import ip.industrialProcessing.machines.animation.IAnimationSyncable;
 import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 import ip.industrialProcessing.recipes.IRecipeWorkHandler;
 import ip.industrialProcessing.recipes.RecipeWorker;
-import ip.industrialProcessing.subMod.logic.api.network.interfaces.InterfaceType;
+import ip.industrialProcessing.subMod.logic.old.api.network.interfaces.InterfaceType;
 import ip.industrialProcessing.utils.working.IWorkHandler;
 import ip.industrialProcessing.utils.working.IWorker;
 import ip.industrialProcessing.utils.working.IWorkingEntity;

@@ -4,7 +4,7 @@ import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.api.tanks.IPfluidTank;
 import ip.industrialProcessing.api.tanks.ITank;
 import ip.industrialProcessing.machines.containers.IFluidMachineContainerEntity;
-import ip.industrialProcessing.subMod.logic.api.network.interfaces.InterfaceType;
+import ip.industrialProcessing.subMod.logic.old.api.network.interfaces.InterfaceType;
 import ip.industrialProcessing.utils.DirectionUtils;
 
 import java.util.ArrayList;

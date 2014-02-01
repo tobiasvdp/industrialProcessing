@@ -2,9 +2,9 @@ package ip.industrialProcessing.machines;
 
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.containers.IMachineContainerEntity;
-import ip.industrialProcessing.subMod.logic.api.network.interfaces.IMachineInterface;
-import ip.industrialProcessing.subMod.logic.api.network.interfaces.InterfaceType;
-import ip.industrialProcessing.subMod.logic.api.network.interfaces.StatusType;
+import ip.industrialProcessing.subMod.logic.old.api.network.interfaces.IMachineInterface;
+import ip.industrialProcessing.subMod.logic.old.api.network.interfaces.InterfaceType;
+import ip.industrialProcessing.subMod.logic.old.api.network.interfaces.StatusType;
 import ip.industrialProcessing.utils.DirectionUtils;
 
 import java.util.ArrayList;

@@ -3,7 +3,7 @@ package ip.industrialProcessing.subMod.logic;
 import ip.industrialProcessing.gui.container.syncing.info.InfoMachine;
 import ip.industrialProcessing.gui.container.syncing.info.InfoSlot;
 import ip.industrialProcessing.gui.container.syncing.info.InfoTank;
-import ip.industrialProcessing.subMod.logic.api.network.interfaces.InterfaceType;
+import ip.industrialProcessing.subMod.logic.old.api.network.interfaces.InterfaceType;
 import ip.industrialProcessing.subMod.logic.old.network.TileEntityLogicNetworkNode;
 import ip.industrialProcessing.subMod.logic.old.network.display.GuiLogicDisplay;
 import ip.industrialProcessing.subMod.logic.old.transport.ICommunicationNode;

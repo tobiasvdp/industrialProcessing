@@ -1,4 +1,4 @@
-package ip.industrialProcessing.subMod.logic.api.network.interfaces;
+package ip.industrialProcessing.subMod.logic.old.api.network.interfaces;
 
 public interface IMachineInterface {
 	public InterfaceType[] getConnectionTypes();
