@@ -12,7 +12,7 @@ public class TileEntityDisplayPost extends TileEntityLogicNodeCore{
 	}
 
 	@Override
-	public boolean isValidPlacingSide(ForgeDirection dir) {
+	public boolean isValidPlacingSide(ForgeDirection dir, int itemID) {
 		if(dir == ForgeDirection.DOWN)
 			return false;
 		return true;

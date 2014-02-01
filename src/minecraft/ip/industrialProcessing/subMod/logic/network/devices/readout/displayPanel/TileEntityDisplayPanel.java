@@ -22,7 +22,7 @@ public class TileEntityDisplayPanel extends TileEntityLogicNode{
 	}
 
 	@Override
-	public boolean isValidPlacingSide(ForgeDirection dir) {
+	public boolean isValidPlacingSide(ForgeDirection dir, int itemID) {
 		if(dir == ForgeDirection.NORTH || dir ==ForgeDirection.SOUTH || dir ==ForgeDirection.WEST || dir == ForgeDirection.EAST)
 			return true;
 		return false;

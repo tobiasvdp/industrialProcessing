@@ -1,5 +1,7 @@
 package ip.industrialProcessing.utils.handler.lines;
 
+import java.util.Iterator;
+
 import net.minecraft.tileentity.TileEntity;
 
 public interface ILine {
@@ -14,5 +16,10 @@ public interface ILine {
 	void unregisterLine(ILine line);
 	
 	void sendToDevices(Object obj);
+	
+	Iterator<ILineDevice> getDevices();
+	Iterator<ILineTransport> getTransport();
+	
+	int getID();
 	
 }

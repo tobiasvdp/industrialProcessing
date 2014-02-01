@@ -6,6 +6,7 @@ import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.subMod.logic.CommonProxy;
 import ip.industrialProcessing.subMod.logic.config.ConfigLogic;
 import ip.industrialProcessing.subMod.logic.config.ISetupLogic;
+import ip.industrialProcessing.subMod.logic.network.devices.interfaces.machineInterface.model.ModelMachineInterface;
 import ip.industrialProcessing.subMod.logic.network.devices.readout.displayPanel.model.ModelDisplayPanel;
 import ip.industrialProcessing.subMod.logic.network.devices.readout.displayPost.model.ModelDisplayPost;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.ModelWire;
@@ -30,6 +31,7 @@ public class ClientProxy extends CommonProxy {
 	private static final ModelWire modelWire = new ModelWire();
 	private static final ModelDisplayPanel modelDisplayPanel = new ModelDisplayPanel();
 	private static final ModelDisplayPost modelDisplayPost = new ModelDisplayPost();
+	private static final ModelMachineInterface modelMachineInterface = new ModelMachineInterface();
 
 	@Override
 	public void registerRenderers() {
@@ -42,6 +44,9 @@ public class ClientProxy extends CommonProxy {
 		
 		ConfigRenderers.setRendererDataBus(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererDataBus(), modelWire));
+		
+		ConfigRenderers.setRendererMachineInterface(RenderingRegistry.getNextAvailableRenderId());
+		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererMachineInterface(), modelMachineInterface));
 		/*
 		ClientRegistry.bindTileEntitySpecialRenderer(TElogicSwitchBox.class, new RendererLogic(ISetupLogic.BLlogicSwitchBox, "MDlogicSwitchBox", MDlogicSwitchBox));
 		ConfigLogic.setRDlogicSwitchBox(RenderingRegistry.getNextAvailableRenderId());

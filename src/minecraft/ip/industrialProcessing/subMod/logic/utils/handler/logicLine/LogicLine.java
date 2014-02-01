@@ -14,8 +14,8 @@ import net.minecraft.tileentity.TileEntity;
 
 public class LogicLine implements ILine{
 	
-	ArrayList<ILogicNode> nodes = new ArrayList<ILogicNode>();
-	ArrayList<ILogicTransport> transport = new ArrayList<ILogicTransport>();
+	ArrayList<ILineDevice> nodes = new ArrayList<ILineDevice>();
+	ArrayList<ILineTransport> transport = new ArrayList<ILineTransport>();
 	int ID = -1;
 	
 	public LogicLine(int id) {
@@ -64,12 +64,22 @@ public class LogicLine implements ILine{
 			transport.addAll(((LogicLine)line).transport);
 			nodes.addAll(((LogicLine)line).nodes);
 			 
-			//TODO interface for line setting
-			/*Iterator<TileEntityConveyorConnectionsBase> it = blocks.iterator();
-			while (it.hasNext()) {
-				it.next().setConveyorLineID(ID);
+			Iterator<ILineDevice> it = line.getDevices();
+			while(it.hasNext()){
+				ILineDevice dev = it.next();
+				for(int i =0;i<6;i++){
+					if(line.getID() == dev.getLineID(i))
+					dev.setLineID(i, this.getID());
+				}
 			}
-			*/
+			Iterator<ILineTransport> it2 = line.getTransport();
+			while(it2.hasNext()){
+				ILineTransport dev = it2.next();
+				for(int i =0;i<6;i++){
+					if(line.getID() == dev.getLineID(i))
+					dev.setLineID(i, this.getID());
+				}
+			}
 		}
 	}
 	@Override
@@ -77,6 +87,21 @@ public class LogicLine implements ILine{
 		 
 		//TODO interface for line setting
 		
+	}
+
+	@Override
+	public Iterator<ILineDevice> getDevices() {
+		return nodes.iterator();
+	}
+
+	@Override
+	public Iterator<ILineTransport> getTransport() {
+		return transport.iterator();
+	}
+
+	@Override
+	public int getID() {
+		return ID;
 	}
 	
 	

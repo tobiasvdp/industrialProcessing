@@ -109,6 +109,7 @@ public class ConfigRenderers {
     private int rendererInterfaceId;
     private int rendererDisplayPanelId;
     private int rendererDisplayPostId;
+    private int rendererMachineInterfaceId;
 
     public static void setRendererDisplayPost(int var) {
 	getInstance().rendererDisplayPostId = var;
@@ -124,6 +125,14 @@ public class ConfigRenderers {
 
     public static int getRendererDisplayPanel() {
 	return getInstance().rendererDisplayPanelId;
+    }
+    
+    public static int getRendererMachineInterface() {
+	return getInstance().rendererMachineInterfaceId;
+    }
+    
+    public static void setRendererMachineInterface(int var) {
+	getInstance().rendererMachineInterfaceId = var;
     }
     
     public static void setRendererDataBus(int var) {

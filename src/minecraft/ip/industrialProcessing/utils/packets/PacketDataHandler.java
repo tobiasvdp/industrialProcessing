@@ -32,7 +32,7 @@ public class PacketDataHandler {
 		World world = ((Entity) player).worldObj;
 		if (world != null && !world.isRemote && packet != null) {
 			Block block = Block.blocksList[world.getBlockId(packet.hit.blockX, packet.hit.blockY, packet.hit.blockZ)];
-			IPLogic.blockDisplayPost.handleSideBlock(world, (EntityPlayer) player, packet.hit, packet.hitType);
+			IPLogic.blockDisplayPanel.handleSideBlock(world, (EntityPlayer) player, packet.hit, packet.hitType);
 		}
 	}
 	public static void handlePacketIP005DestroyBlock(Player player, PacketIP005DestroyBlock packet) {

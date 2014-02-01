@@ -25,7 +25,7 @@ public class TileEntityDataBus extends TileEntityLogicTransport {
 	}
 
 	@Override
-	public boolean isValidPlacingSide(ForgeDirection dir) {
+	public boolean isValidPlacingSide(ForgeDirection dir, int itemID) {
 		return true;
 	}
 

@@ -49,6 +49,9 @@ public abstract class TileEntityLogicTransport extends TileEntityMicroBlockConne
 	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
 		super.readFromNBT(par1nbtTagCompound);
 		lineID = par1nbtTagCompound.getIntArray("lineID");
+		if(worldObj == null){
+			HandlerRegistry.addToLogicLine(this, true);
+		}
 	}
 
 	@Override

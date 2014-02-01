@@ -23,6 +23,7 @@ import net.minecraftforge.common.ForgeDirection;
 public abstract class TileEntityMicroBlock extends TileEntity implements IMicroBlock, IPosition {
 	protected int[] sidesMicroblock = new int[6];
 	protected boolean hasCore = false;
+	protected boolean overrideSolidSide;
 
 	public TileEntityMicroBlock() {
 		Arrays.fill(sidesMicroblock, -1);
@@ -70,7 +71,7 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 
 	@Override
 	public void setSide(ForgeDirection dir, int itemID, EntityPlayer player) {
-		if (isValidID(itemID) && isValidPlacingSide(dir)) {
+		if (isValidID(itemID) && isValidPlacingSide(dir,itemID)) {
 			if (player != null) {
 				if (player.getCurrentEquippedItem() != null && !player.capabilities.isCreativeMode) {
 					if (player.getCurrentEquippedItem().itemID == itemID) {
@@ -102,7 +103,7 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 		
 	}
 
-	public abstract boolean isValidPlacingSide(ForgeDirection dir);
+	public abstract boolean isValidPlacingSide(ForgeDirection dir, int itemID);
 
 	public abstract boolean isValidID(int itemID);
 
@@ -168,7 +169,7 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 
 	private boolean isValidSide(ForgeDirection dir) {
 		if (!isSideFree(dir)) {
-			if (worldObj.isBlockSolidOnSide(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ, dir.getOpposite())) {
+			if (worldObj.isBlockSolidOnSide(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ, dir.getOpposite()) || overrideSolidSide) {
 				return true;
 			}
 			return false;

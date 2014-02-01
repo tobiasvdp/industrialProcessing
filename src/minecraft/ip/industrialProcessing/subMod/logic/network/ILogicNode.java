@@ -1,5 +1,7 @@
 package ip.industrialProcessing.subMod.logic.network;
 
-public interface ILogicNode {
+import ip.industrialProcessing.utils.handler.lines.ILineDevice;
+
+public interface ILogicNode extends ILineDevice{
 
 }

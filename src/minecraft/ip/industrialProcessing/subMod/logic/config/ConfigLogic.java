@@ -4,6 +4,7 @@ import ip.industrialProcessing.api.config.ConfigCategories;
 import ip.industrialProcessing.api.utils.CreativeTabsIP;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.subMod.logic.IPLogic;
+import ip.industrialProcessing.subMod.logic.network.devices.interfaces.machineInterface.TileEntityMachineInterface;
 import ip.industrialProcessing.subMod.logic.network.devices.readout.displayPanel.TileEntityDisplayPanel;
 import ip.industrialProcessing.subMod.logic.network.devices.readout.displayPost.TileEntityDisplayPost;
 import ip.industrialProcessing.subMod.logic.network.microblock.TileEntityLogicTransport;
@@ -11,7 +12,6 @@ import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.TileEnti
 import ip.industrialProcessing.subMod.logic.old.function.and.TElogicAnd;
 import ip.industrialProcessing.subMod.logic.old.function.or.TElogicOr;
 import ip.industrialProcessing.subMod.logic.old.network.display.TileEntityLogicDisplay;
-import ip.industrialProcessing.subMod.logic.old.network.interfaces.machine.TileEntityMachineInterface;
 import ip.industrialProcessing.subMod.logic.old.transport.wired.bundle.TElogicBundle;
 import ip.industrialProcessing.subMod.logic.old.transport.wired.cable.TElogicCable;
 import ip.industrialProcessing.subMod.logic.old.transport.wired.displayBox.TElogicDisplayBox;
@@ -40,6 +40,11 @@ public class ConfigLogic {
 	public static int getBlockDisplayPanelID() {
 		return getInstance().blockDisplayPanelID;
 	}
+	
+	public static int getBlockMachineInterfaceID() {
+		return getInstance().blockMachineInterfaceID;
+	}
+	
 	public static int getBlockDisplayPostID() {
 		return getInstance().blockDisplayPostID;
 	}
@@ -49,7 +54,7 @@ public class ConfigLogic {
 	}
 
 	public static int getBLlogicOr() {
-		return getInstance().BLlogicOr;
+		return getInstance().blockMachineInterfaceID;
 	}
 
 	public static int getBLlogicSwitchBox() {
@@ -110,7 +115,7 @@ public class ConfigLogic {
 
 	private int BLlogicAnd = IPLogic.config.get(ConfigCategories.logic.toString(), "AndGateID", 742).getInt();
 
-	private int BLlogicOr = IPLogic.config.get(ConfigCategories.logic.toString(), "OrGateID", 743).getInt();
+	private int blockMachineInterfaceID = IPLogic.config.get(ConfigCategories.logic.toString(), "OrGateID", 743).getInt();
 
 	private int BlockMachineInterface = IPLogic.config.get(ConfigCategories.logic.toString(), "BlockMachineInterface", 844).getInt();
 
@@ -131,5 +136,6 @@ public class ConfigLogic {
 		ConfigMachineBlocks.registerMachineBlock(ISetupLogic.blockDataBus, "IP.Logic.dataBus", "Data bus", TileEntityDataBus.class, BlockType.logic);
 		ConfigMachineBlocks.registerMachineBlock(ISetupLogic.blockDisplayPanel, "IP.Logic.display", "Display panel", TileEntityDisplayPanel.class, BlockType.logic);
 		ConfigMachineBlocks.registerMachineBlock(ISetupLogic.blockDisplayPost, "IP.Logic.displPost", "Display post", TileEntityDisplayPost.class, BlockType.logic);
+		ConfigMachineBlocks.registerMachineBlock(ISetupLogic.blockMachineInterface, "IP.Logic.IntMach", "Machine interface", TileEntityMachineInterface.class, BlockType.logic);
 	}
 }

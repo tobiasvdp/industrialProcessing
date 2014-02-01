@@ -47,10 +47,17 @@ public class LogicPathHandler implements ILineHandler {
 	}
 
 	public void unregisterTransport(ILineTransport te) {
-		unregisterTransportToLine(te.getLineID(), te);
-		ILine line = lines[te.getLineID()];
-		if (line != null) {
-			splitLine(te.getLineID(), te);
+		ILogicTransport logic = (ILogicTransport) te;
+		if (te instanceof TileEntityLogicTransport) {
+			for (int i = 0; i < 6; i++) {
+				if (te.getLineID(i) != -1 && logic.isSideFree(i)) {
+					ILine line = lines[te.getLineID(i)];
+					if (line != null) {
+						splitLine(te.getLineID(i), te);
+					}
+				}
+			}
+			unregisterTransportToLine(0, te);
 		}
 	}
 
@@ -58,8 +65,8 @@ public class LogicPathHandler implements ILineHandler {
 		if (te instanceof TileEntityLogicTransport) {
 			ILogicTransport logic = (ILogicTransport) te;
 			for (int i = 0; i < 6; i++) {
-				int lineID = -1;
-				if (!logic.isSideFree(i) && logic.getLineID(i) == -1) {
+				int lineID = logic.getLineID(i);
+				if (!logic.isSideFree(i) && lineID == -1) {
 					boolean[] internal = logic.getInterConnections(i);
 					boolean[] external = logic.getExternalConnections(i);
 					boolean[] externalCorner = logic.getExternalConnectionCorners(i);
@@ -117,8 +124,8 @@ public class LogicPathHandler implements ILineHandler {
 						}
 					}
 
-					// no use, there is nothing to connect to, better create a
-					// line
+					// it's no use, there is nothing to connect to, better
+					// create a line
 					if (lineID == -1) {
 						int newLine = createNewLine();
 						registerTransportToLine(newLine, te);
@@ -128,7 +135,7 @@ public class LogicPathHandler implements ILineHandler {
 
 				}
 				if (lineID != -1)
-					te.setLineID(i,lineID);
+					te.setLineID(i, lineID);
 			}
 			return -1;
 		}
@@ -152,26 +159,113 @@ public class LogicPathHandler implements ILineHandler {
 	}
 
 	public void registerTransportToLine(int id, ILineTransport te) {
-		ILine line = lines[id];
-		line.registerTransport(te);
-	}
-
-	public void unregisterTransportToLine(int id, ILineTransport te) {
 		if (id != -1) {
 			ILine line = lines[id];
-			if (line != null)
-				if (line.unregisterTransport(te))
-					lines[id] = null;
+			line.registerTransport(te);
 		}
 	}
 
+	public void unregisterTransportToLine(int id, ILineTransport te) {
+		if (te instanceof TileEntityLogicTransport) {
+			ILogicTransport logic = (ILogicTransport) te;
+			for (int i = 0; i < 6; i++) {
+				id = te.getLineID(i);
+				if (logic.isSideFree(i) && id != -1)
+					te.setLineID(i, -1);
+				if (id != -1) {
+					ILine line = lines[id];
+					if (line != null)
+						if (countTimesLineInBlock(id, te) == 0)
+							if (line.unregisterTransport(te))
+								lines[id] = null;
+				}
+			}
+		}
+	}
+
+	private int countTimesLineInBlock(int id, ILineTransport te) {
+		int count = 0;
+		for (int i = 0; i < 6; i++) {
+			if (te.getLineID(i) == id)
+				count++;
+		}
+		return count;
+	}
+
 	public void splitLine(int id1, ILineTransport te) {
+		ILogicTransport logic = (ILogicTransport) te;
+		for (int i = 0; i < 6; i++) {
+			if (te.getLineID(i) == id1) {
+				ILine line = lines[te.getLineID(i)];
+				if (line != null) {
+					translateOverLine(id1, -1, logic, i, true);
+				}
+			}
+		}
+		System.out.println("split line " + id1);
+	}
+
+	private void translateOverLine(int id1, int newLine, ILogicTransport logic, int i, boolean createNewLine) {
+		boolean[] internal = logic.getInterConnections(i);
+		boolean[] external = logic.getExternalConnections(i);
+		boolean[] externalCorner = logic.getExternalConnectionCorners(i);
+		unregisterTransportToLine(id1, logic);
+		registerTransportToLine(newLine, logic);
+		logic.setLineID(i, newLine);
+		for (int j = 0; j < 4; j++) {
+			if (createNewLine && (internal[j]||external[j])) {
+				newLine = createNewLine();
+			}
+			if (internal[j]) {
+				int side = logic.getRotated(i, j);
+				if (logic.getLineID(side) == id1) {
+					translateOverLine(id1, newLine, logic, side, false);
+				}
+			}
+			if (external[j] && !externalCorner[j]) {
+				int side = logic.getRotated(i, j);
+				ForgeDirection dir = ForgeDirection.values()[side];
+				TileEntity te = ((TileEntity) logic).worldObj.getBlockTileEntity(((TileEntity) logic).xCoord + dir.offsetX, ((TileEntity) logic).yCoord + dir.offsetY, ((TileEntity) logic).zCoord + dir.offsetZ);
+				if (te instanceof ILogicTransport) {
+					ILogicTransport logic2 = (ILogicTransport) te;
+					if (logic2.getLineID(i) == id1) {
+						translateOverLine(id1, newLine, logic2, i, false);
+					}
+				}
+			}
+			if (external[j] && externalCorner[j]) {
+				int side = logic.getRotated(i, j);
+				ForgeDirection dir = ForgeDirection.values()[side];
+				ForgeDirection dir2 = ForgeDirection.values()[i];
+				TileEntity te = ((TileEntity) logic).worldObj.getBlockTileEntity(((TileEntity) logic).xCoord + dir.offsetX + dir2.offsetX, ((TileEntity) logic).yCoord + dir.offsetY + dir2.offsetY, ((TileEntity) logic).zCoord + dir.offsetZ + dir2.offsetZ);
+				if (te instanceof ILogicTransport) {
+					ILogicTransport logic2 = (ILogicTransport) te;
+					if (logic2.getLineID(dir.getOpposite().ordinal()) == id1) {
+						translateOverLine(id1, newLine, logic2, dir.getOpposite().ordinal(), false);
+					}
+				}
+			}
+		}
+		if (createNewLine){
+			lines[id1] = null;
+		}
 
 	}
 
 	public int mergeLine(int id1, int id2, ILineTransport te) {
-		System.out.println("merge lines " + id1 + " " + id2);
-		return id2;
+		if (id1 != id2) {
+			int newid = Math.min(id1, id2);
+			if (newid == id1) {
+				lines[id1].registerLine(lines[id2]);
+				lines[id2] = null;
+			} else {
+				lines[id2].registerLine(lines[id1]);
+				lines[id1] = null;
+			}
+			System.out.println("merge lines " + id1 + " " + id2 + " to " + newid);
+			return id2;
+		} else
+			return id1;
 	}
 
 	public int createNewLine() {
