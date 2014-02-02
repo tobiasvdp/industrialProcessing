@@ -1,4 +1,4 @@
-package ip.industrialProcessing.microBlock.centerBlock;
+package ip.industrialProcessing.microBlock.extend.centerBlock;
 
 import java.util.List;
 
@@ -15,14 +15,14 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import ip.industrialProcessing.microBlock.BlockMicroBlock;
+import ip.industrialProcessing.microBlock.core.BlockMicroBlock;
 import ip.industrialProcessing.utils.packets.PacketIP004RayTraceToServer;
 import ip.industrialProcessing.utils.registry.MicroBlockRegistry;
 
 public abstract class BlockMicroBlockwithCenter extends BlockMicroBlock {
 
 	protected BlockMicroBlockwithCenter(int par1, Material par2Material, float hardness, StepSound stepSound, String name, CreativeTabs tab) {
-		super(par1, par2Material, hardness, stepSound, name, tab);
+		super(par1, par2Material, hardness, stepSound, name);
 	}
 
 	@Override

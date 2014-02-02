@@ -15,6 +15,7 @@ import ip.industrialProcessing.gui3.framework.panels.tabs.TabPanel;
 import ip.industrialProcessing.gui3.generating.IGuiBlock;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 import ip.industrialProcessing.utils.IDescriptionBlock;
+import ip.industrialProcessing.utils.registry.RecipeRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
@@ -39,7 +40,7 @@ public class MachineDetails extends UserControl implements IButtonClickListener<
 	stack.addChild(title);
 
 	DockPanel dock = new DockPanel();
-	description = TextBlock.createText("Bladibladibla");
+	description = TextBlock.createText("Select a machine");
 	description.margin = new Thickness(0, 0, 0, 7);
 	dock.content = description;
 	render = new BlockModelControl(null);
@@ -83,7 +84,7 @@ public class MachineDetails extends UserControl implements IButtonClickListener<
 		description.visibility = Visibility.VISIBLE;
 	    } else
 		description.visibility = Visibility.COLLAPSED;
-	    if (block instanceof IRecipeBlock) {
+	    if (block instanceof IRecipeBlock || !RecipeRegistry.getRecipesForMachine(block).isEmpty()) {
 		this.recipeTabs.addTab(recipeTab);
 		this.recipeTab.setBlock(block);
 	    }

@@ -1,4 +1,4 @@
-package ip.industrialProcessing.microBlock.externalConnections;
+package ip.industrialProcessing.microBlock.extend.externalConnections;
 
 import ip.industrialProcessing.microBlock.IMicroBlock;
 

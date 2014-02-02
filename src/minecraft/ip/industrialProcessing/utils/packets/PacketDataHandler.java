@@ -5,7 +5,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import ip.industrialProcessing.microBlock.BlockMicroBlock;
+import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.microBlock.core.BlockMicroBlock;
 import ip.industrialProcessing.subMod.logic.IPLogic;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -39,7 +40,7 @@ public class PacketDataHandler {
 		World world = ((Entity) player).worldObj;
 		if (world != null && !world.isRemote && packet != null) {
 			Block block = Block.blocksList[world.getBlockId(packet.hit.blockX, packet.hit.blockY, packet.hit.blockZ)];
-			IPLogic.blockDisplayPanel.handleSideBlock(world, (EntityPlayer) player, packet.hit, packet.hitType);
+			IndustrialProcessing.microBlock.handleSideBlock(world, (EntityPlayer) player, packet.hit, packet.hitType);
 		}
 	}
 	public static void handlePacketIP005DestroyBlock(Player player, PacketIP005DestroyBlock packet) {

@@ -2,6 +2,7 @@ package ip.industrialProcessing.config;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.config.ConfigCategories;
+import ip.industrialProcessing.microBlock.MicroBlockTileEntity;
 import ip.industrialProcessing.utils.registry.BlockRegistry;
 import ip.industrialProcessing.utils.registry.BlockType;
 import net.minecraft.block.Block;
@@ -46,7 +47,11 @@ public class ConfigBlocks {
 	private int blockHardSandID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "blockHardSandID", 2012).getInt();
 	private int blockHalfWavePlateID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "blockHalfWavePlateID", 2013).getInt();
 	private int blockDoorEmergencyID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "blockDoorEmergencyID", 2014).getInt();
+	private int blockMicroBlockID = IndustrialProcessing.config.get(ConfigCategories.blocks.toString(), "blockMicroBlockID", 2015).getInt();
 
+	public static int getBlockMicroBlockID() {
+		return getInstance().blockMicroBlockID;
+	}
 	public static int getBlockHalfWavePlateID() {
 		return getInstance().blockHalfWavePlateID;
 	}
@@ -189,6 +194,8 @@ public class ConfigBlocks {
 
 		registerBlock(ISetupBlocks.blockMachineBlock, "IP.Block.MachineB", "Machine block", BlockType.Machine, BlockType.assemble);
 		registerBlock(ISetupBlocks.blockDoorEmergency, "IP.Block.DoorEm", "Emergency door", BlockType.decoration);
+		
+		ConfigMachineBlocks.registerMachineBlock(ISetupBlocks.microBlock, "IP.MicroBlock", "Microblock", MicroBlockTileEntity.class,BlockType.Block);
 	}
 
 	@Deprecated

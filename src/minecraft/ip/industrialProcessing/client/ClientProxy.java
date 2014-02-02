@@ -9,6 +9,7 @@ import ip.industrialProcessing.api.rendering.RendererBlock;
 import ip.industrialProcessing.api.rendering.RendererInterfaceBlock;
 import ip.industrialProcessing.api.rendering.RendererTileBlock;
 import ip.industrialProcessing.api.rendering.RendererTileEntity;
+import ip.industrialProcessing.api.rendering.wavefront.ObjMesh;
 import ip.industrialProcessing.client.render.ModelAnimatedFluidMachine;
 import ip.industrialProcessing.client.render.ModelAnimatedMachine;
 import ip.industrialProcessing.client.render.ModelBlock;
@@ -68,6 +69,7 @@ import ip.industrialProcessing.machines.thickener.TileEntityThickener;
 import ip.industrialProcessing.machines.thickener.model.ModelThickenerBlock;
 import ip.industrialProcessing.machines.treetap.model.ModelAutomaticTreeTapBlock;
 import ip.industrialProcessing.machines.treetap.model.ModelManualTreeTapBlock;
+import ip.industrialProcessing.microBlock.rendering.ModelMicroBlock;
 import ip.industrialProcessing.multiblock.core.block.SolderingStation.model.ModelSolderingStation;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.model.ModelBlastFurnaceCoreBlock;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.model.ModelBlastFurnaceTopBlock;
@@ -126,6 +128,48 @@ import ip.industrialProcessing.power.storage.ModelEnergyCell;
 import ip.industrialProcessing.power.storage.TileEntityEnergyCell;
 import ip.industrialProcessing.power.storage.model.ModelEnergyCellBlock;
 import ip.industrialProcessing.power.wire.models.ModelWireBlock;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.Down;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.DownBottom;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.DownBottomCorner;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.DownLeft;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.DownLeftCorner;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.DownRight;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.DownRightCorner;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.DownTop;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.DownTopCorner;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.East;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.EastBottom;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.EastLeft;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.EastRight;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.EastRightCorner;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.EastTop;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.North;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.NorthBottom;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.NorthLeft;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.NorthRight;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.NorthRightCorner;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.NorthTop;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.South;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.SouthBottom;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.SouthLeft;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.SouthRight;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.SouthRightCorner;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.SouthTop;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.Up;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.UpBottom;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.UpBottomCorner;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.UpLeft;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.UpLeftCorner;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.UpRight;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.UpRightCorner;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.UpTop;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.UpTopCorner;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.West;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.WestBottom;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.WestLeft;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.WestRight;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.WestRightCorner;
+import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.WestTop;
 import ip.industrialProcessing.subMod.mine.machines.mining.bobcatMiner.EntityBobcatMiner;
 import ip.industrialProcessing.subMod.mine.machines.mining.bobcatMiner.model.ModelBobcatMiner;
 import ip.industrialProcessing.transport.fluids.ModelManoMeter;
@@ -161,6 +205,7 @@ import ip.industrialProcessing.transport.items.conveyorSorter.TileEntityConveyor
 import ip.industrialProcessing.transport.steve.railway.suspended.cart.EntityFloatingCart;
 import ip.industrialProcessing.transport.steve.railway.suspended.cart.ModelFloatingCart;
 import ip.industrialProcessing.transport.steve.railway.suspended.cart.RenderFloatingCart;
+import ip.industrialProcessing.utils.registry.MicroBlockModelRegistry;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
@@ -266,9 +311,15 @@ public class ClientProxy extends CommonProxy {
     private static final ModelSinterBlock modelSinter = new ModelSinterBlock();
     private static final ModelSandCasterBlock modelSandCasterBlock = new ModelSandCasterBlock();
     private static final ModelSandCaster modelSandCaster = new ModelSandCaster();
+  
+    private static final ModelMicroBlock modelMicroBlock = new ModelMicroBlock();
 
     @Override
     public void registerRenderers() {
+    	
+    //microblocks
+	registerMicroblocks();
+    	
 	// smart rendering interface
 	ConfigRenderers.setRendererInterface(RenderingRegistry.getNextAvailableRenderId());
 	RenderingRegistry.registerBlockHandler(new RendererInterfaceBlock(ConfigRenderers.getRendererInterface()));
@@ -535,4 +586,9 @@ public class ClientProxy extends CommonProxy {
 	RenderingRegistry.registerEntityRenderingHandler(EntityBobcatMiner.class, new RendererEntity(new ModelBobcatMiner(), "ModelBobcatMinerHull"));
 
     }
+
+	private void registerMicroblocks() {
+		ConfigRenderers.setRendererMicroBlock(RenderingRegistry.getNextAvailableRenderId());
+		RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererMicroBlock(), modelMicroBlock));
+	}
 }

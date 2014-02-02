@@ -1,4 +1,4 @@
-package ip.industrialProcessing.microBlock.connectingSides;
+package ip.industrialProcessing.microBlock.extend.connectingSides;
 
 import ip.industrialProcessing.microBlock.IMicroBlock;
 

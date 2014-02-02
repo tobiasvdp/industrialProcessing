@@ -1,26 +1,9 @@
 package ip.industrialProcessing.subMod.logic.config;
 
+import net.minecraft.src.ModLoader;
 import ip.industrialProcessing.api.config.ConfigCategories;
-import ip.industrialProcessing.api.utils.CreativeTabsIP;
-import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.subMod.logic.IPLogic;
-import ip.industrialProcessing.subMod.logic.network.devices.interfaces.machineInterface.TileEntityMachineInterface;
-import ip.industrialProcessing.subMod.logic.network.devices.readout.displayPanel.TileEntityDisplayPanel;
-import ip.industrialProcessing.subMod.logic.network.devices.readout.displayPost.TileEntityDisplayPost;
-import ip.industrialProcessing.subMod.logic.network.microblock.TileEntityLogicTransport;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.TileEntityDataBus;
-import ip.industrialProcessing.subMod.logic.old.function.and.TElogicAnd;
-import ip.industrialProcessing.subMod.logic.old.function.or.TElogicOr;
-import ip.industrialProcessing.subMod.logic.old.network.display.TileEntityLogicDisplay;
-import ip.industrialProcessing.subMod.logic.old.transport.wired.bundle.TElogicBundle;
-import ip.industrialProcessing.subMod.logic.old.transport.wired.cable.TElogicCable;
-import ip.industrialProcessing.subMod.logic.old.transport.wired.displayBox.TElogicDisplayBox;
-import ip.industrialProcessing.subMod.logic.old.transport.wired.switchbox.TElogicSwitchBox;
-import ip.industrialProcessing.utils.registry.BlockType;
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.MinecraftForge;
-import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ConfigLogic {
@@ -128,14 +111,54 @@ public class ConfigLogic {
 	private int RDlogicAnd;
 
 	private int RDlogicOr;
+	
+	//blocks
+	
+	//items	
+	private int itemMicroblockDatabusID = 8000;
+	private int itemMicroblockMachineInterfaceID = 8001;
+
+	public static int getItemMicroblockDatabusID() {
+		return getInstance().itemMicroblockDatabusID;
+	}
+
+	public static int getItemMicroblockMachineInterfaceID() {
+		return getInstance().itemMicroblockMachineInterfaceID;
+	}
+	
+	//renderers
+	private int rendererMicroblockDataBus;
+	private int rendererMicroblockMachineInterface;
+	
+	public static int setRendererMicroblockDataBus(int var) {
+		getInstance().rendererMicroblockDataBus = var;
+		return var;
+	}
+
+	public static int getRendererMicroblockDataBus() {
+		return getInstance().rendererMicroblockDataBus;
+	}
+	
+	public static int setRendererMicroblockMachineInterface(int var) {
+		getInstance().rendererMicroblockMachineInterface = var;
+		return var;
+	}
+
+	public static int getRendererMicroblockMachineInterface() {
+		return getInstance().rendererMicroblockMachineInterface;
+	}
+	
+	
 
 	public void register() {
 		LanguageRegistry.instance().addStringLocalization("IP.itemGroup.tabLogic", "en_US", "IP Logic");
 		//((CreativeTabsIP) IPLogic.tabLogic).setIcon(new ItemStack(ISetupLogic.BLlogicSwitchBox));
 		
-		ConfigMachineBlocks.registerMachineBlock(ISetupLogic.blockDataBus, "IP.Logic.dataBus", "Data bus", TileEntityDataBus.class, BlockType.logic);
-		ConfigMachineBlocks.registerMachineBlock(ISetupLogic.blockDisplayPanel, "IP.Logic.display", "Display panel", TileEntityDisplayPanel.class, BlockType.logic);
-		ConfigMachineBlocks.registerMachineBlock(ISetupLogic.blockDisplayPost, "IP.Logic.displPost", "Display post", TileEntityDisplayPost.class, BlockType.logic);
-		ConfigMachineBlocks.registerMachineBlock(ISetupLogic.blockMachineInterface, "IP.Logic.IntMach", "Machine interface", TileEntityMachineInterface.class, BlockType.logic);
+		LanguageRegistry.addName(ISetupLogic.itemMicroblockWire , "Data bus");
+		LanguageRegistry.addName(ISetupLogic.itemMicroblockMachineInterface , "Machine interface");
+		
+		//register multiblock multiple tileEntities
+		ModLoader.registerTileEntity(TileEntityDataBus.class, ISetupLogic.itemMicroblockWire.tileEntity);
+		ModLoader.registerTileEntity(TileEntityDataBus.class, ISetupLogic.itemMicroblockMachineInterface.tileEntity);
 	}
 }

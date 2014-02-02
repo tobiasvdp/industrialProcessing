@@ -1,8 +1,0 @@
-package ip.industrialProcessing.microBlock.connections;
-
-import ip.industrialProcessing.microBlock.connectingSides.IMicroBlockInterconnection;
-import ip.industrialProcessing.microBlock.externalConnections.IMicroBlockExternalConnection;
-
-public interface IMicroBlockConnection extends IMicroBlockExternalConnection,IMicroBlockInterconnection{
-
-}

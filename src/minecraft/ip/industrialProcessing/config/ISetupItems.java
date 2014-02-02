@@ -4,6 +4,7 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.items.ItemBattery;
 import ip.industrialProcessing.items.ItemDamage;
 import ip.industrialProcessing.items.ItemIP;
+import ip.industrialProcessing.items.ItemMicroBlock;
 import ip.industrialProcessing.items.ItemPaintBrush;
 import ip.industrialProcessing.items.ItemRemote;
 import ip.industrialProcessing.items.ItemSuspendedCart;
@@ -204,5 +205,4 @@ public interface ISetupItems {
     public final static ItemIP itemIronBlade = new ItemIP(ConfigItems.getItemIronBladeID(), "itemIronBlade",IndustrialProcessing.tabMachineParts);
     public final static ItemIP itemTurbineBlades = new ItemIP(ConfigItems.getItemTurbineBladesID(), "itemTurbineBlades",IndustrialProcessing.tabMachineParts);
     public final static ItemRemote itemRemote = new ItemRemote(ConfigItems.getItemRemoteID());
-    
 }

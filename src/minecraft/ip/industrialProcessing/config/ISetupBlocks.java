@@ -15,6 +15,7 @@ import ip.industrialProcessing.decoration.trees.BlockIndustrialLog;
 import ip.industrialProcessing.decoration.trees.BlockIndustrialSapling;
 import ip.industrialProcessing.decoration.trees.BlockPineLog;
 import ip.industrialProcessing.decoration.trees.BlockRubberLog;
+import ip.industrialProcessing.microBlock.MicroBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockOre;
 import net.minecraft.block.material.Material;
@@ -50,4 +51,6 @@ public interface ISetupBlocks {
     
     public final static Block blockHalfWavePlate = (new BlockPane(ConfigBlocks.getInstance().getBlockHalfWavePlateID(), "blockHalfWavePlate", "blockHalfWavePlate", Material.iron, false)).setHardness(0.9F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("halfWavePlate");
     public final static BlockDoorEmergency blockDoorEmergency = new BlockDoorEmergency();
+    
+    public final static MicroBlock microBlock = new MicroBlock();
 }

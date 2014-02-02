@@ -1,5 +1,8 @@
-package ip.industrialProcessing.microBlock;
+package ip.industrialProcessing.microBlock.core;
 
+import ip.industrialProcessing.items.ItemMicroBlock;
+import ip.industrialProcessing.microBlock.IMicroBlock;
+import ip.industrialProcessing.microBlock.MicroBlockType;
 import ip.industrialProcessing.utils.packets.PacketIP005DestroyBlock;
 
 import java.util.Arrays;
@@ -9,6 +12,7 @@ import net.minecraft.block.Block;
 import net.minecraft.dispenser.IPosition;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
@@ -22,11 +26,15 @@ import net.minecraftforge.common.ForgeDirection;
 
 public abstract class TileEntityMicroBlock extends TileEntity implements IMicroBlock, IPosition {
 	protected int[] sidesMicroblock = new int[6];
+	protected int[] sidesMicroblockItemID = new int[6];
+	protected MicroBlockType type = MicroBlockType.wire;
 	protected boolean hasCore = false;
 	protected boolean overrideSolidSide;
+	protected int tileEntityLevel = -1;
 
 	public TileEntityMicroBlock() {
 		Arrays.fill(sidesMicroblock, -1);
+		Arrays.fill(sidesMicroblockItemID, -1);
 	}
 
 	@Override
@@ -46,7 +54,10 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
 		super.readFromNBT(par1nbtTagCompound);
 		sidesMicroblock = par1nbtTagCompound.getIntArray("sidesMicro");
-		if(sidesMicroblock.length == 0){
+		sidesMicroblockItemID = par1nbtTagCompound.getIntArray("sidesMicroID");
+		type = MicroBlockType.values()[par1nbtTagCompound.getInteger("MicroBlockType")];
+		tileEntityLevel = par1nbtTagCompound.getInteger("tileEntityLevel");
+		if (sidesMicroblock.length == 0) {
 			sidesMicroblock = new int[6];
 			Arrays.fill(sidesMicroblock, -1);
 		}
@@ -57,6 +68,9 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
 		super.writeToNBT(par1nbtTagCompound);
 		par1nbtTagCompound.setIntArray("sidesMicro", sidesMicroblock);
+		par1nbtTagCompound.setIntArray("sidesMicroID", sidesMicroblockItemID);
+		par1nbtTagCompound.setInteger("MicroBlockType", type.ordinal());
+		par1nbtTagCompound.setInteger("tileEntityLevel",tileEntityLevel);
 	}
 
 	@Override
@@ -70,60 +84,112 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 	}
 
 	@Override
-	public void setSide(ForgeDirection dir, int itemID, EntityPlayer player) {
-		if (isValidID(itemID) && isValidPlacingSide(dir,itemID)) {
+	public void setSide(ForgeDirection dir, ItemMicroBlock itemMicroBlock, EntityPlayer player) {
+		if (itemMicroBlock.isValidID(itemMicroBlock.itemID) && itemMicroBlock.isValidPlacingSide(dir, worldObj, xCoord, yCoord, zCoord, itemMicroBlock) && isValidSide(dir) && !(itemMicroBlock.type == MicroBlockType.device && type == MicroBlockType.device)) {
 			if (player != null) {
 				if (player.getCurrentEquippedItem() != null && !player.capabilities.isCreativeMode) {
-					if (player.getCurrentEquippedItem().itemID == itemID) {
-						if (countSetSides() != 0)
-							player.getCurrentEquippedItem().splitStack(1);
+					if (player.getCurrentEquippedItem().itemID == itemMicroBlock.itemID) {
+						player.getCurrentEquippedItem().splitStack(1);
 					}
 				}
 			}
-			sidesMicroblock[dir.ordinal()] = itemID;
-			System.out.println("set " + dir + " to "+itemID);
-			if (!isValidSide(dir)) {
-				unsetSide(dir, null);
+			boolean firstSide = countSetSides() == 0;
+			sidesMicroblock[dir.ordinal()] = itemMicroBlock.microblock;
+			sidesMicroblockItemID[dir.ordinal()] = itemMicroBlock.itemID;
+			if (itemMicroBlock.type == MicroBlockType.device){
+				type = MicroBlockType.device;
+				switchTileEntities();
+			}else{
+				if(firstSide){
+					switchTileEntities();
+				}
 			}
-			if(sidesMicroblock[dir.ordinal()] == itemID){
-				onSetSide(dir, itemID);
-			}
+			System.out.println("set " + dir + " to " + itemMicroBlock.microblock);
+			onSetSide(dir, itemMicroBlock.microblock);
 			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		} else {
 			if (countSetSides() == 0) {
-				if (player == null || !player.capabilities.isCreativeMode){
-					doDispense(this.worldObj, new ItemStack(itemID, 1, 0), 1, EnumFacing.values()[dir.getOpposite().ordinal()], this);
-					worldObj.destroyBlock(xCoord, yCoord, zCoord, false);
-				}
+				worldObj.destroyBlock(xCoord, yCoord, zCoord, false);
 			}
 		}
 	}
 
-	public void onSetSide(ForgeDirection dir, int itemID) {
-		
+	private void switchTileEntities() {
+		int level = -1;
+		for(int i = 0;i<6;i++){
+			if(sidesMicroblockItemID[i] != -1){
+				Item item = Item.itemsList[sidesMicroblockItemID[i]];
+				if(item instanceof ItemMicroBlock){
+					level = Math.max(level, ((ItemMicroBlock)item).level);
+				}
+			}
+		}
+		if(level > this.tileEntityLevel){
+			TileEntity te = null;
+			int i = 0;
+			while(te == null){
+				if(sidesMicroblockItemID[i] != -1){
+					Item item = Item.itemsList[sidesMicroblockItemID[i]];
+					if(item instanceof ItemMicroBlock){
+						if(((ItemMicroBlock)item).level == level){
+							NBTTagCompound nbtTag = new NBTTagCompound();
+							this.writeToNBT(nbtTag);
+							nbtTag.setString("id", ((ItemMicroBlock)item).getTileEntityName());
+							te = TileEntity.createAndLoadEntity(nbtTag);
+							worldObj.setBlockTileEntity(xCoord, yCoord, zCoord, te);
+							((TileEntityMicroBlock)te).notifyOnCreation();
+						}
+					}
+				}
+				i++;
+			}
+		}
 	}
 
-	public abstract boolean isValidPlacingSide(ForgeDirection dir, int itemID);
+	protected void notifyOnCreation() {
+	
+	}
 
-	public abstract boolean isValidID(int itemID);
+	public void onSetSide(ForgeDirection dir, int itemID) {
+
+	}
 
 	@Override
 	public void unsetSide(ForgeDirection dir, EntityPlayer player) {
 		if (player == null || !player.capabilities.isCreativeMode)
-			doDispense(this.worldObj, new ItemStack(sidesMicroblock[dir.ordinal()], 1, 0), 1, EnumFacing.values()[dir.getOpposite().ordinal()], this);
+			doDispense(this.worldObj, new ItemStack(sidesMicroblockItemID[dir.ordinal()], 1, 0), 1, EnumFacing.values()[dir.getOpposite().ordinal()], this);
 		sidesMicroblock[dir.ordinal()] = -1;
+		sidesMicroblockItemID[dir.ordinal()] = -1;
 		System.out.println("unset " + dir);
-		if(sidesMicroblock[dir.ordinal()] == -1){
+		if (sidesMicroblock[dir.ordinal()] == -1) {
 			onUnsetSide(dir);
+		}
+		if(countDevices() ==0){
+			type = MicroBlockType.wire;
+			switchTileEntities();
 		}
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		if (!hasCore && countSetSides() == 0) {
 			worldObj.destroyBlock(xCoord, yCoord, zCoord, false);
 		}
 	}
-	
+
 	public void onUnsetSide(ForgeDirection dir) {
-		
+
+	}
+
+	private int countDevices() {
+		int count = 0;
+		for (int i = 0; i < 6; i++) {
+			int id = sidesMicroblockItemID[i];
+			if (id != -1) {
+				if (Item.itemsList[id] != null && Item.itemsList[id] instanceof ItemMicroBlock) {
+					if (((ItemMicroBlock) Item.itemsList[id]).type == MicroBlockType.device)
+						count++;
+				}
+			}
+		}
+		return count;
 	}
 
 	public static void doDispense(World par0World, ItemStack par1ItemStack, int par2, EnumFacing par3EnumFacing, IPosition par4IPosition) {
@@ -191,7 +257,7 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 	public double getZ() {
 		return zCoord + 0.5;
 	}
-	
+
 	protected void notifyBlockChange() {
 		if (!this.worldObj.isRemote) {
 			this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);

@@ -3,7 +3,7 @@ package ip.industrialProcessing.subMod.logic.network.microblockwithCore;
 import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
-import ip.industrialProcessing.microBlock.centerBlock.BlockMicroBlockwithCenter;
+import ip.industrialProcessing.microBlock.extend.centerBlock.BlockMicroBlockwithCenter;
 
 public abstract class BlockLogicTransportCore  extends BlockMicroBlockwithCenter{
 

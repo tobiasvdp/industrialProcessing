@@ -1,11 +1,14 @@
-package ip.industrialProcessing.microBlock;
+package ip.industrialProcessing.microBlock.core;
 
 import java.util.List;
 import java.util.Random;
 
 import cpw.mods.fml.common.network.PacketDispatcher;
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.items.ItemMicroBlock;
 import ip.industrialProcessing.machines.BlockMachineRendered;
+import ip.industrialProcessing.microBlock.IMicroBlock;
+import ip.industrialProcessing.microBlock.MicroBlockType;
 import ip.industrialProcessing.utils.packets.PacketIP002SendMicroBlockDestructionChange;
 import ip.industrialProcessing.utils.packets.PacketIP003ScheduleBlockUpdateToServer;
 import ip.industrialProcessing.utils.packets.PacketIP004RayTraceToServer;
@@ -34,8 +37,8 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 
 	public static boolean isDestroying = false;
 
-	protected BlockMicroBlock(int par1, Material par2Material, float hardness, StepSound stepSound, String name, CreativeTabs tab) {
-		super(par1, par2Material, hardness, stepSound, name, tab);
+	protected BlockMicroBlock(int par1, Material par2Material, float hardness, StepSound stepSound, String name) {
+		super(par1, par2Material, hardness, stepSound, name, null);
 		this.setBlockBounds(0, 0, 0, 1f, 1f, 1f);
 	}
 
@@ -120,13 +123,13 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 	protected void handleHit(int x, int y, int z, int sideHit, EntityPlayer player, MovingObjectPosition hit, int hitType) {
 		if (hitType == 1) {
 			ItemStack itemstack = player.getCurrentEquippedItem();
-			if (itemstack != null && itemstack.getItem() instanceof ItemBlock && Block.blocksList[itemstack.getItem().itemID] instanceof BlockMicroBlock) {
+			if (itemstack != null && itemstack.getItem() instanceof ItemMicroBlock) {
 				TileEntity te = player.worldObj.getBlockTileEntity(x, y, z);
 				if (te instanceof IMicroBlock) {
 					IMicroBlock microblock = (IMicroBlock) te;
 					ForgeDirection dir = sideToForge(sideHit);
 					if (microblock.isSideFree(dir)) {
-						microblock.setSide(dir, itemstack.getItem().itemID, player);
+						microblock.setSide(dir, ((ItemMicroBlock)itemstack.getItem()), player);
 					}
 				}
 			}else{

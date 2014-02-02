@@ -6,10 +6,10 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import ip.industrialProcessing.microBlock.BlockMicroBlock;
 import ip.industrialProcessing.microBlock.IMicroBlock;
-import ip.industrialProcessing.microBlock.centerBlock.BlockMicroBlockwithCenter;
-import ip.industrialProcessing.microBlock.centerBlock.IMicroBlockCore;
+import ip.industrialProcessing.microBlock.core.BlockMicroBlock;
+import ip.industrialProcessing.microBlock.extend.centerBlock.BlockMicroBlockwithCenter;
+import ip.industrialProcessing.microBlock.extend.centerBlock.IMicroBlockCore;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderGlobal;

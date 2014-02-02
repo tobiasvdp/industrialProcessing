@@ -2,9 +2,9 @@ package ip.industrialProcessing.subMod.logic.network.microblock;
 
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.INamepace;
-import ip.industrialProcessing.microBlock.BlockMicroBlock;
 import ip.industrialProcessing.microBlock.IMicroBlock;
 import ip.industrialProcessing.microBlock.MicroBlockType;
+import ip.industrialProcessing.microBlock.core.BlockMicroBlock;
 import ip.industrialProcessing.subMod.logic.IPLogic;
 import ip.industrialProcessing.subMod.logic.config.ConfigLogic;
 import net.minecraft.block.Block;
@@ -30,7 +30,7 @@ import net.minecraftforge.common.ForgeDirection;
 public abstract class BlockLogicTransport extends BlockMicroBlock {
 
 	protected BlockLogicTransport(int par1, Material par2Material, float hardness, StepSound stepSound, String name, CreativeTabs tab) {
-		super(par1, par2Material, hardness, stepSound, name, tab);
+		super(par1, par2Material, hardness, stepSound, name);
 	}
 	
 	@Override

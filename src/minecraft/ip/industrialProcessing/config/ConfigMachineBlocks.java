@@ -44,7 +44,7 @@ import ip.industrialProcessing.machines.thickener.TileEntityThickener;
 import ip.industrialProcessing.machines.treetap.TileEntityAutomaticTreeTap;
 import ip.industrialProcessing.machines.treetap.TileEntityManualTreeTap;
 import ip.industrialProcessing.machines.wireMill.TileEntityWireMill;
-import ip.industrialProcessing.microBlock.BlockMicroBlock;
+import ip.industrialProcessing.microBlock.core.BlockMicroBlock;
 import ip.industrialProcessing.multiblock.core.block.SolderingStation.TileEntitySolderingStation;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.TEmultiblockBlastFurnace;
 import ip.industrialProcessing.multiblock.core.block.decoration.garageDoor.TileEntityGarageDoor;

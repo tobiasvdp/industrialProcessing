@@ -1,4 +1,4 @@
-package ip.industrialProcessing.microBlock.connectionCorners;
+package ip.industrialProcessing.microBlock.extend.connectionCorners;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -7,11 +7,11 @@ import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
-import ip.industrialProcessing.microBlock.BlockMicroBlock;
 import ip.industrialProcessing.microBlock.IMicroBlock;
-import ip.industrialProcessing.microBlock.connectingSides.TileEntityMicroBlockConnectingSides;
-import ip.industrialProcessing.microBlock.connections.TileEntityMicroBlockConnection;
-import ip.industrialProcessing.microBlock.externalConnections.IMicroBlockExternalConnection;
+import ip.industrialProcessing.microBlock.core.BlockMicroBlock;
+import ip.industrialProcessing.microBlock.extend.connectingSides.TileEntityMicroBlockConnectingSides;
+import ip.industrialProcessing.microBlock.extend.connections.TileEntityMicroBlockConnection;
+import ip.industrialProcessing.microBlock.extend.externalConnections.IMicroBlockExternalConnection;
 
 public abstract class TileEntityMicroBlockConnectionCorners extends TileEntityMicroBlockConnection implements IMicroBlockConnectionCorner {
 

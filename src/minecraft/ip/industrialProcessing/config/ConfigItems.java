@@ -171,7 +171,7 @@ public class ConfigItems {
 	private int itemAshID = 6668;
 	private int itemRemoteID = 6669;
 	private int itemBatteryID = 7000;
-
+	
 	public static int getItemRemoteID() {
 		return getInstance().itemRemoteID;
 	}

@@ -1,12 +1,13 @@
-package ip.industrialProcessing.microBlock.connectingSides;
+package ip.industrialProcessing.microBlock.extend.connectingSides;
 
 import java.util.Arrays;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
+import ip.industrialProcessing.items.ItemMicroBlock;
 import ip.industrialProcessing.microBlock.IMicroBlock;
-import ip.industrialProcessing.microBlock.TileEntityMicroBlock;
+import ip.industrialProcessing.microBlock.core.TileEntityMicroBlock;
 
 public abstract class TileEntityMicroBlockConnectingSides extends TileEntityMicroBlock implements IMicroBlockInterconnection{
 	boolean[][] interConnections = new boolean[6][4];
@@ -21,8 +22,8 @@ public abstract class TileEntityMicroBlockConnectingSides extends TileEntityMicr
 	}
 
 	@Override
-	public void setSide(ForgeDirection dir, int itemID,EntityPlayer player) {
-		super.setSide(dir, itemID,player);
+	public void setSide(ForgeDirection dir, ItemMicroBlock itemMicroBlock,EntityPlayer player) {
+		super.setSide(dir, itemMicroBlock,player);
 		updateSideConnections();
 	}
 

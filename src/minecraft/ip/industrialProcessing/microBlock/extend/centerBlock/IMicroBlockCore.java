@@ -1,7 +1,7 @@
-package ip.industrialProcessing.microBlock.centerBlock;
+package ip.industrialProcessing.microBlock.extend.centerBlock;
 
 import net.minecraft.entity.player.EntityPlayer;
-import ip.industrialProcessing.microBlock.connectionCorners.IMicroBlockConnectionCorner;
+import ip.industrialProcessing.microBlock.extend.connectionCorners.IMicroBlockConnectionCorner;
 
 public interface IMicroBlockCore extends IMicroBlockConnectionCorner{
 

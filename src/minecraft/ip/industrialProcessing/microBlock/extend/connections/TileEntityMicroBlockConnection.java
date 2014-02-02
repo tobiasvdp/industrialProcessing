@@ -1,10 +1,11 @@
-package ip.industrialProcessing.microBlock.connections;
+package ip.industrialProcessing.microBlock.extend.connections;
 
-import ip.industrialProcessing.microBlock.BlockMicroBlock;
+import ip.industrialProcessing.items.ItemMicroBlock;
 import ip.industrialProcessing.microBlock.IMicroBlock;
 import ip.industrialProcessing.microBlock.MicroBlockType;
-import ip.industrialProcessing.microBlock.TileEntityMicroBlock;
-import ip.industrialProcessing.microBlock.externalConnections.IMicroBlockExternalConnection;
+import ip.industrialProcessing.microBlock.core.BlockMicroBlock;
+import ip.industrialProcessing.microBlock.core.TileEntityMicroBlock;
+import ip.industrialProcessing.microBlock.extend.externalConnections.IMicroBlockExternalConnection;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -30,15 +31,15 @@ public abstract class TileEntityMicroBlockConnection extends TileEntityMicroBloc
 	}
 
 	@Override
-	public void setSide(ForgeDirection dir, int itemID,EntityPlayer player) {
-		super.setSide(dir, itemID,player);
+	public void setSide(ForgeDirection dir, ItemMicroBlock itemMicroBlock,EntityPlayer player) {
+		super.setSide(dir, itemMicroBlock,player);
 		updateSideConnections();
 		updateExtConnections();
-		onPostSideSet(dir,itemID);
+		onPostSideSet(dir,itemMicroBlock);
 		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
-	public void onPostSideSet(ForgeDirection dir, int itemID) {
+	public void onPostSideSet(ForgeDirection dir, ItemMicroBlock itemMicroBlock) {
 
 	}
 
@@ -72,7 +73,9 @@ public abstract class TileEntityMicroBlockConnection extends TileEntityMicroBloc
 		}
 	}
 
-	public abstract boolean isValidMicroBlockType(MicroBlockType other, MicroBlockType me);
+	public boolean isValidMicroBlockType(MicroBlockType other, MicroBlockType me){
+		return true;
+	}
 
 	protected static final int[][] externalDirections = new int[][] { { -1, -1, 2, 3, 0, 1 }, { -1, -1, 3, 2, 0, 1 }, { 3, 2, -1, -1, 0, 1 }, { 3, 2, -1, -1, 1, 0 }, { 3, 2, 1, 0, -1, -1 }, { 3, 2, 0, 1, -1, -1 } };
 

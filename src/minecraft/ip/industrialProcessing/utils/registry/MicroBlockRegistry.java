@@ -1,6 +1,6 @@
 package ip.industrialProcessing.utils.registry;
 
-import ip.industrialProcessing.microBlock.BlockMicroBlock;
+import ip.industrialProcessing.microBlock.core.BlockMicroBlock;
 
 import java.util.ArrayList;
 

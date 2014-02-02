@@ -1,7 +1,6 @@
 package ip.industrialProcessing.config;
 
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.recipes.IMachineRecipe;
 import ip.industrialProcessing.recipes.VanillaRecipeBridge;
 import ip.industrialProcessing.utils.registry.BlockRegistry;
 import ip.industrialProcessing.utils.registry.BlockType;
@@ -17,7 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.ShapelessRecipes;
+import net.minecraft.util.Icon;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ConfigBaseRecipes {
@@ -37,12 +36,9 @@ public class ConfigBaseRecipes {
 
 		setPaneConnectors();
 
-		RecipeRegistry.addVanillaRecipes(VanillaRecipeBridge.addVanillaRecipes());
 		BlockRegistry.RegisterBlock(Block.workbench, BlockType.Machine);
-
-		ArrayList<IMachineRecipe> it = RecipeRegistry.getRecipesForMachine(Block.workbench);
-		for (int i = 0; i < it.size(); i++)
-			System.out.println(new ItemStack(it.get(i).getOutputs()[0].itemId, 1, 0));
+		RecipeRegistry.addVanillaRecipes(VanillaRecipeBridge.addVanillaRecipes());
+		
 	}
 
 	private void addShapelessRecipes() {

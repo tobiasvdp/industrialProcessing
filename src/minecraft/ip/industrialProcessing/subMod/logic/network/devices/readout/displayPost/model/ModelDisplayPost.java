@@ -3,7 +3,7 @@ package ip.industrialProcessing.subMod.logic.network.devices.readout.displayPost
 import ip.industrialProcessing.api.rendering.wavefront.ObjMesh;
 import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
 import ip.industrialProcessing.client.render.ModelBlock;
-import ip.industrialProcessing.microBlock.centerBlock.IMicroBlockCore;
+import ip.industrialProcessing.microBlock.extend.centerBlock.IMicroBlockCore;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.Down;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.DownBottom;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.DownBottomCorner;

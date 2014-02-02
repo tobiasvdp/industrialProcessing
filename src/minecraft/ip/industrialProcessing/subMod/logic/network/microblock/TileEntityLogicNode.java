@@ -4,7 +4,8 @@ import java.util.Arrays;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
-import ip.industrialProcessing.microBlock.connectionCorners.TileEntityMicroBlockConnectionCorners;
+import ip.industrialProcessing.items.ItemMicroBlock;
+import ip.industrialProcessing.microBlock.extend.connectionCorners.TileEntityMicroBlockConnectionCorners;
 import ip.industrialProcessing.subMod.logic.network.ILogicNode;
 import ip.industrialProcessing.utils.registry.HandlerRegistry;
 
@@ -51,8 +52,8 @@ public abstract class TileEntityLogicNode extends TileEntityMicroBlockConnection
 	}
 		
 	@Override
-	public void onPostSideSet(ForgeDirection dir, int itemID) {
-		super.onPostSideSet(dir, itemID);
+	public void onPostSideSet(ForgeDirection dir, ItemMicroBlock itemMicroBlock) {
+		super.onPostSideSet(dir, itemMicroBlock);
 		HandlerRegistry.addToLogicLine(this, false);
 		for(int i = 0;i<6;i++)
 			System.out.println(i+" "+lineID[i]);
