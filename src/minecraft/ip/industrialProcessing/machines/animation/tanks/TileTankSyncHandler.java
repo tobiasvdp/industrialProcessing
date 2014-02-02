@@ -1,5 +1,8 @@
 package ip.industrialProcessing.machines.animation.tanks;
 
+import ip.industrialProcessing.utils.handler.packets.PacketHandler;
+import ip.industrialProcessing.utils.packets.PacketDataHandler;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
@@ -12,10 +15,8 @@ import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
-import ip.industrialProcessing.utils.handler.packets.PacketHandler;
-import ip.industrialProcessing.utils.packetHandlers.TileSyncHandler;
 
-public class TileTankSyncHandler extends TileSyncHandler { 
+public class TileTankSyncHandler { 
 	public static void sendTankData(TileEntity entity, TankHandler handler) {
 		double x = entity.xCoord;
 		double y = entity.yCoord;
@@ -35,12 +36,12 @@ public class TileTankSyncHandler extends TileSyncHandler {
 		DataOutputStream outputStream = new DataOutputStream(bos);
 
 		try {
-			writeTileEntity(outputStream, entity);  
+			PacketDataHandler.writeTileEntity(outputStream, entity);  
 			writeTankHandler(outputStream, handler); 
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		return getCustomPacket(bos, PacketHandler.TANK_SYNC);
+		return PacketDataHandler.getCustomPacket(bos, PacketHandler.TANK_SYNC);
 	}
 
 	protected static void writeTankHandler(DataOutputStream outputStream, TankHandler handler) throws IOException {
@@ -72,7 +73,7 @@ public class TileTankSyncHandler extends TileSyncHandler {
 
 		DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
 		try {
-			tileEntity = readTileEntity(inputStream, playerEntity.worldObj);
+			tileEntity = PacketDataHandler.readTileEntity(inputStream, playerEntity.worldObj);
 			if (tileEntity instanceof ITankSyncable) {
 				ITankSyncable syncable = (ITankSyncable) tileEntity;
 				readTankHandler(inputStream, syncable.getTankHandler());

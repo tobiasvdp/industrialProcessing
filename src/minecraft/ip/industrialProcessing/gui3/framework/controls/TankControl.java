@@ -1,6 +1,5 @@
 package ip.industrialProcessing.gui3.framework.controls;
 
-import buildcraft.core.fluids.Tank;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.gui3.binding.ITankBinding;
@@ -9,7 +8,6 @@ import ip.industrialProcessing.gui3.framework.Size;
 import ip.industrialProcessing.gui3.framework.Thickness;
 import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
 import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
-import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.Icon;
 import net.minecraftforge.fluids.Fluid;

@@ -2,7 +2,7 @@ package ip.industrialProcessing.machines.animation.conveyors;
 
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.utils.handler.packets.PacketHandler;
-import ip.industrialProcessing.utils.packetHandlers.TileSyncHandler;
+import ip.industrialProcessing.utils.packets.PacketDataHandler;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -18,7 +18,7 @@ import net.minecraft.tileentity.TileEntity;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
 
-public class TileConveyorSyncHandler extends TileSyncHandler {
+public class TileConveyorSyncHandler {
 
     public static void sendConveyorData(TileEntity entity, IConveyor handler) {
 	double x = entity.xCoord;
@@ -41,13 +41,13 @@ public class TileConveyorSyncHandler extends TileSyncHandler {
 	DataOutputStream outputStream = new DataOutputStream(bos);
 
 	try {
-	    writeTileEntity(outputStream, entity);
+		PacketDataHandler.writeTileEntity(outputStream, entity);
 	    writeSpeed(outputStream, handler);
 	    writeConveyorHandler(outputStream, handler);
 	} catch (Exception ex) {
 	    ex.printStackTrace();
 	}
-	return getCustomPacket(bos, PacketHandler.CONVEYOR_SYNC);
+	return PacketDataHandler.getCustomPacket(bos, PacketHandler.CONVEYOR_SYNC);
     }
 
     private static void writeSpeed(DataOutputStream outputStream, IConveyor entity) throws IOException {
@@ -111,7 +111,7 @@ public class TileConveyorSyncHandler extends TileSyncHandler {
 
 	DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
 	try {
-	    tileEntity = readTileEntity(inputStream, playerEntity.worldObj);
+	    tileEntity = PacketDataHandler.readTileEntity(inputStream, playerEntity.worldObj);
 	    if (tileEntity instanceof IConveyor) {
 		IConveyor syncable = (IConveyor) tileEntity;
 		readSpeed(inputStream, syncable);

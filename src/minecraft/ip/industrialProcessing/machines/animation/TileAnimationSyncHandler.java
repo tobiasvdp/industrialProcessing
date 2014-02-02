@@ -13,9 +13,9 @@ import net.minecraft.tileentity.TileEntity;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
 import ip.industrialProcessing.utils.handler.packets.PacketHandler;
-import ip.industrialProcessing.utils.packetHandlers.TileSyncHandler;
+import ip.industrialProcessing.utils.packets.PacketDataHandler;
 
-public class TileAnimationSyncHandler extends TileSyncHandler {
+public class TileAnimationSyncHandler {
 
     public static void sendAnimationData(TileEntity entity, AnimationHandler handler) {
 	sendAnimationData(entity, handler, 0);
@@ -40,13 +40,13 @@ public class TileAnimationSyncHandler extends TileSyncHandler {
 	DataOutputStream outputStream = new DataOutputStream(bos);
 
 	try {
-	    writeTileEntity(outputStream, entity); // 3 * 4 bytes
+		PacketDataHandler.writeTileEntity(outputStream, entity); // 3 * 4 bytes
 	    outputStream.writeInt(index);
 	    writeAnimationHandler(outputStream, handler); // 2 * 4 bytes
 	} catch (Exception ex) {
 	    ex.printStackTrace();
 	}
-	return getCustomPacket(bos, PacketHandler.ANIMATION_SYNC);
+	return PacketDataHandler.getCustomPacket(bos, PacketHandler.ANIMATION_SYNC);
     }
 
     protected static void writeAnimationHandler(DataOutputStream outputStream, AnimationHandler handler) throws IOException {
@@ -80,7 +80,7 @@ public class TileAnimationSyncHandler extends TileSyncHandler {
 
 	DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
 	try {
-	    tileEntity = readTileEntity(inputStream, playerEntity.worldObj);
+	    tileEntity = PacketDataHandler.readTileEntity(inputStream, playerEntity.worldObj);
 	    if (tileEntity instanceof IAnimationSyncable) {
 		IAnimationSyncable syncable = (IAnimationSyncable) tileEntity;
 		int index = inputStream.readInt();
