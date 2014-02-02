@@ -7,7 +7,7 @@ public class Language {
 	LanguageRegistry registry = LanguageRegistry.instance();
 	String localized = registry.getStringLocalization(unlocalized);
 	if (localized == null || localized.isEmpty()) {
-	    localized = registry.getStringLocalization(unlocalized, "en_us");
+	    localized = registry.getStringLocalization(unlocalized, "en_US");
 
 	    if (localized == null || localized.isEmpty())
 		return unlocalized;

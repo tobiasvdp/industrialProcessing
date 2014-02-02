@@ -13,6 +13,10 @@ public class BlockRegistry {
 	public static void RegisterBlock(Block block, BlockType[] type) {
 		array.put(block, type);
 	}
+	
+	public static void RegisterBlock(Block block, BlockType type) {
+		RegisterBlock(block,new BlockType[]{type});
+	}
 
 	public static Iterator<Block> getBlocks() {
 		return array.keySet().iterator();

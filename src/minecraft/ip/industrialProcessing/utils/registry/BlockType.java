@@ -21,8 +21,8 @@ public enum BlockType {
 	String unlocalized = "IP.BlockType." + this.toString();
 	String localized = Language.getLocalizedString(unlocalized);
 
-	if (localized == unlocalized)
-	    return "§4§m"+this.toString().toUpperCase()+"§r";
+	if (localized.equals(unlocalized))
+		return "§4§m"+this.toString().toUpperCase()+"§r";
 	return localized;
     }
 }
