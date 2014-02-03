@@ -2,8 +2,9 @@ package ip.industrialProcessing.config;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.config.ConfigCategories;
-import ip.industrialProcessing.decoration.light.TileEntityElectricLamp;
-import ip.industrialProcessing.decoration.light.PetrolLamp.TileEntityPetrolLamp;
+import ip.industrialProcessing.decoration.light.electricLamp.TileEntityElectricLamp;
+import ip.industrialProcessing.decoration.light.hangingLamp.TileEntityPetrolLamp;
+import ip.industrialProcessing.decoration.light.torch.TileEntityTorch;
 import ip.industrialProcessing.machines.classifier.TileEntityClassifier;
 import ip.industrialProcessing.machines.crusher.TileEntityCrusher;
 import ip.industrialProcessing.machines.diskFilter.TileEntityDiskFilter;
@@ -156,6 +157,7 @@ public class ConfigMachineBlocks {
     private int ironBowlBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "ironBowlBlockID", 523).getInt();
     private int storageRackID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "storageRackID", 524).getInt();
     private int storageBoxID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "storageBoxID", 525).getInt();
+    private int blockTorchID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "blockTorchID", 526).getInt();
 
     private int blastFurnaceID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "BlastFurnaceID", 550).getInt();
     private int extruderID = IndustrialProcessing.config.get(ConfigCategories.machineSmelting.toString(), "ExtruderID", 551).getInt();
@@ -242,6 +244,7 @@ public class ConfigMachineBlocks {
     private int BLtransportConveyorBeltPacker = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "packerID", 747).getInt();
 
     public void registerMachineBlocks() {
+	registerMachineBlock(ISetupMachineBlocks.blockTorch, "IP.Machine.Torch", "Torch", TileEntityTorch.class, BlockType.decoration);
 	registerMachineBlock(ISetupMachineBlocks.blockAlkylationUnit, "IP.Machine.AlkUnit", "Alkylation unit", TileEntityAlkylationUnit.class, BlockType.Machine, BlockType.Refinary);
 	registerMachineBlock(ISetupMachineBlocks.blockGasProcessor, "IP.Machine.GasProc", "Gas processor", TileEntityGasProcessor.class, BlockType.Machine, BlockType.Refinary);
 	registerMachineBlock(ISetupMachineBlocks.blockAsphaltBlower, "IP.Machine.AspBlow", "Asphalt blower", TileEntityAsphaltBlower.class, BlockType.Machine, BlockType.Refinary);
@@ -421,6 +424,10 @@ public class ConfigMachineBlocks {
 	return instance;
     }
 
+    public static int getBlockTorchID() {
+	return getInstance().blockTorchID;
+    }
+    
     public static int getBlockIronPoleID() {
 	return getInstance().blockIronPoleID;
     }

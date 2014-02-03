@@ -30,7 +30,7 @@ import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.decoration.block.machineBlock.model.ModelMachineBlock;
 import ip.industrialProcessing.decoration.crystals.ModelCrystal;
 import ip.industrialProcessing.decoration.doors.emergency.model.ModelDoorEmergency;
-import ip.industrialProcessing.decoration.light.PetrolLamp.model.ModelPetrolLamp;
+import ip.industrialProcessing.decoration.light.hangingLamp.model.ModelPetrolLamp;
 import ip.industrialProcessing.decoration.platforms.ModelPlatform;
 import ip.industrialProcessing.decoration.platforms.ModelStairs;
 import ip.industrialProcessing.machines.classifier.ModelClassifier;

@@ -4,4 +4,11 @@ import ip.industrialProcessing.subMod.logic.network.microblock.TileEntityLogicTr
 
 public class TileEntityDataBus extends TileEntityLogicTransport {
 
+    @Override
+    public void updateEntity() {
+	for (int i = 0; i < 6; i++)
+	    System.out.println(this.lineID[i]);
+	super.updateEntity();
+    }
+
 }
