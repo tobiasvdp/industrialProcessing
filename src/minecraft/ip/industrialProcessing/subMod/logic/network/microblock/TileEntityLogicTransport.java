@@ -12,7 +12,7 @@ import net.minecraftforge.common.ForgeDirection;
 
 public abstract class TileEntityLogicTransport extends TileEntityMicroBlockConnectionCorners implements ILogicTransport {
 
-	int[] lineID = new int[6];
+	protected int[] lineID = new int[6];
 
 	public TileEntityLogicTransport() {
 		Arrays.fill(lineID, -1);

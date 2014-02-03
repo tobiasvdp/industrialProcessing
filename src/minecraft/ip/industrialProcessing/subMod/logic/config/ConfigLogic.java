@@ -4,6 +4,7 @@ import net.minecraft.src.ModLoader;
 import ip.industrialProcessing.api.config.ConfigCategories;
 import ip.industrialProcessing.subMod.logic.IPLogic;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.TileEntityDataBus;
+import ip.industrialProcessing.subMod.logic.old.network.interfaces.machine.TileEntityMachineInterface;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ConfigLogic {
@@ -159,6 +160,6 @@ public class ConfigLogic {
 		
 		//register multiblock multiple tileEntities
 		ModLoader.registerTileEntity(TileEntityDataBus.class, ISetupLogic.itemMicroblockWire.tileEntity);
-		ModLoader.registerTileEntity(TileEntityDataBus.class, ISetupLogic.itemMicroblockMachineInterface.tileEntity);
+		ModLoader.registerTileEntity(TileEntityMachineInterface.class, ISetupLogic.itemMicroblockMachineInterface.tileEntity);
 	}
 }

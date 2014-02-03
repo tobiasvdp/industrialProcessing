@@ -1,7 +1,8 @@
 package ip.industrialProcessing.config;
 
-import ip.industrialProcessing.decoration.light.BlockElectricLamp;
-import ip.industrialProcessing.decoration.light.PetrolLamp.BlockPetrolLamp;
+import ip.industrialProcessing.decoration.light.electricLamp.BlockElectricLamp;
+import ip.industrialProcessing.decoration.light.hangingLamp.BlockPetrolLamp;
+import ip.industrialProcessing.decoration.light.torch.BlockTorch;
 import ip.industrialProcessing.machines.classifier.BlockClassifier;
 import ip.industrialProcessing.machines.crusher.BlockCrusher;
 import ip.industrialProcessing.machines.diskFilter.BlockDiskFilter;
@@ -160,6 +161,7 @@ public interface ISetupMachineBlocks {
     public final static BlockStorageRack blockStorageRack = new BlockStorageRack();
     public final static BlockStorageBox blockStorageBox = new BlockStorageBox();
     public final static BlockIronPole blockIronPole = new BlockIronPole();
+    public final static BlockTorch blockTorch = new BlockTorch();
 
     // create generators
     public final static BlockManualGenerator blockManualGenerator = new BlockManualGenerator();

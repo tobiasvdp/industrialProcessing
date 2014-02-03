@@ -31,6 +31,8 @@ public class ConfigBaseRecipes {
 
 		addShapelessRecipes();
 		addShapedRecipes();
+		GameRegistry.addRecipe(new ItemStack(IndustrialProcessing.blockTorch, 4), new Object[] {"X", "#", 'X', Item.coal, '#', Item.stick});
+		GameRegistry.addRecipe(new ItemStack(IndustrialProcessing.blockTorch, 4), new Object[] {"X", "#", 'X', new ItemStack(Item.coal, 1, 1), '#', Item.stick});
 
 		addSmeltingRecipes();
 

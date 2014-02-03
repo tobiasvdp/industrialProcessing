@@ -147,7 +147,7 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 	}
 
 	protected void notifyOnCreation() {
-	
+		refresh();
 	}
 
 	public void onSetSide(ForgeDirection dir, int itemID) {
