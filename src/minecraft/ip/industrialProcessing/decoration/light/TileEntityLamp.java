@@ -7,19 +7,19 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-public abstract class TileEntityLamp  extends TileEntityMachine {
+public abstract class TileEntityLamp extends TileEntityMachine {
 
 	protected int burnTime;
 	public boolean lightChanged = true;
 	public boolean count = true;
-	
+
 	public int getBurnTime() {
 		return burnTime;
 	}
-	
-	public void increaseBurnTime(int val){
+
+	public void increaseBurnTime(int val) {
 		burnTime += val;
-		if(!worldObj.isRemote){
+		if (!worldObj.isRemote) {
 			this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		}
 	}
@@ -28,25 +28,26 @@ public abstract class TileEntityLamp  extends TileEntityMachine {
 	public void updateEntity() {
 		if (burnTime > 0 && count)
 			burnTime--;
-		if(burnTime == 0){
-		    OnFuelUsed();
+		if (burnTime == 0) {
+			OnFuelUsed();
 		}
 		super.updateEntity();
 	}
-	
+
 	protected void OnFuelUsed() {
 
 	}
 
-	public int getLightLevel(){
-		if(burnTime > 100){
-			if(burnTime == 5500)
+	public int getLightLevel() {
+		if (burnTime > 100) {
+			if (burnTime == 5500)
 				lightChanged = true;
-			if(burnTime < 6000)
+			if (burnTime < 6000) {
 				return 8;
+			}
 			return 15;
 		}
-		if(burnTime == 50)
+		if (burnTime == 50)
 			lightChanged = true;
 		return 0;
 	}
@@ -55,7 +56,7 @@ public abstract class TileEntityLamp  extends TileEntityMachine {
 	protected boolean isValidInput(int slot, int itemID) {
 		return false;
 	}
-	
+
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		burnTime = nbt.getInteger("burnTime");
@@ -63,7 +64,7 @@ public abstract class TileEntityLamp  extends TileEntityMachine {
 		lightChanged = true;
 		super.readFromNBT(nbt);
 	}
-	
+
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
 		nbt.setInteger("burnTime", burnTime);
@@ -80,21 +81,21 @@ public abstract class TileEntityLamp  extends TileEntityMachine {
 	public abstract float xzOffset();
 
 	public void addTo(EntityPlayer player) {
-	    ItemStack item = player.getCurrentEquippedItem();
-	    if (item != null) {
-		int val = GameRegistry.getFuelValue(item);
-		if (val > 0) {
-		    this.increaseBurnTime(val * 10);
-		    if (item.itemID == Item.bucketLava.itemID)
-			this.count = false;
-		    item.stackSize--;
-		    if (item == null || item.stackSize == 0) {
-			item = null;
-		    }
-		    player.inventory.onInventoryChanged();
-		    System.out.println("Torch will burn for " + val * 10 + " ticks.");
+		ItemStack item = player.getCurrentEquippedItem();
+		if (item != null) {
+			int val = GameRegistry.getFuelValue(item);
+			if (val > 0) {
+				this.increaseBurnTime(val * 10);
+				if (item.itemID == Item.bucketLava.itemID)
+					this.count = false;
+				item.stackSize--;
+				if (item == null || item.stackSize == 0) {
+					item = null;
+				}
+				player.inventory.onInventoryChanged();
+				System.out.println("Torch will burn for " + val * 10 + " ticks.");
+			}
 		}
-	    }
 	}
 
 }
