@@ -374,7 +374,7 @@ public class ConfigMachineBlocks {
     }
 
     @Deprecated
-    public void registerMachineBlock(Block block, String uniqueId, String displayName, Class tileEntity) {
+    public static void registerMachineBlock(Block block, String uniqueId, String displayName, Class tileEntity) {
 	GameRegistry.registerBlock(block, uniqueId);
 	MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
 	LanguageRegistry.addName(block, displayName);
@@ -397,7 +397,7 @@ public class ConfigMachineBlocks {
     }
 
     @Deprecated
-    public void registerMachineBlock(Block block, Class<? extends ItemBlock> itemBlock, String uniqueId, String displayName, Class tileEntity) {
+    public static void registerMachineBlock(Block block, Class<? extends ItemBlock> itemBlock, String uniqueId, String displayName, Class tileEntity) {
 	GameRegistry.registerBlock(block, itemBlock, uniqueId);
 	MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
 	LanguageRegistry.addName(block, displayName);
