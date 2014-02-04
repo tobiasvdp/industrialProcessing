@@ -19,37 +19,36 @@ import net.minecraft.world.World;
 public class BlockWireMill extends BlockMachineRendered implements IRecipeBlock, IDescriptionBlock, IGuiBlock {
 
     public static final String UNLOCALIZED_NAME = "IP.Machine.WireMill";
-    private static final TextureReference WORKER_TEXTURE = TextureReference.createDefault(UNLOCALIZED_NAME, 24, 32);
-    public static IGuiBuilder guiBuilder = new GuiBuilderDefault(UNLOCALIZED_NAME).addInputSlot(0).addOutputSlot(1).enablePower(2).enableWorker(WORKER_TEXTURE);
+    public static IGuiBuilder guiBuilder = new GuiBuilderDefault(UNLOCALIZED_NAME).addInputSlot(0).addOutputSlot(1).enablePower(2).enableWorker();
 
     public BlockWireMill() {
-	super(ConfigMachineBlocks.getWireMillBlockID(), Material.iron, 1F, Block.soundMetalFootstep, UNLOCALIZED_NAME, ISetupCreativeTabs.tabOreProcessing);
+        super(ConfigMachineBlocks.getWireMillBlockID(), Material.iron, 1F, Block.soundMetalFootstep, UNLOCALIZED_NAME, ISetupCreativeTabs.tabOreProcessing);
     }
 
     @Override
     public TileEntity createNewTileEntity(World world) {
-	TileEntityWireMill te = new TileEntityWireMill();
-	te.setName(getLocalizedName());
-	return te;
+        TileEntityWireMill te = new TileEntityWireMill();
+        te.setName(getLocalizedName());
+        return te;
     }
 
     @Override
     public int getRenderType() {
-	return ConfigRenderers.getRendererWireMillId();
+        return ConfigRenderers.getRendererWireMillId();
     }
 
     @Override
     public RecipesMachine getRecipes() {
-	return TileEntityWireMill.recipes;
+        return TileEntityWireMill.recipes;
     }
 
     @Override
     public IGuiBuilder getGui() {
-	return guiBuilder;
+        return guiBuilder;
     }
 
     @Override
     public String getDescription() {
-	return "Automates the process of drawing wires";
+        return "Automates the process of drawing wires";
     }
 }
