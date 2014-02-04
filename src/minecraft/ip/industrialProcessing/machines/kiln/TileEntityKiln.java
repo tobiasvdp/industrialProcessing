@@ -15,66 +15,66 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityKiln extends TileEntityWorkerMachine implements IHeatable, IHeated {
 
-    public static RecipesKiln recipes = new RecipesKiln(); 
+    public static RecipesKiln recipes = new RecipesKiln();
     private HeatManager heatManager;
 
     public TileEntityKiln() {
-	super(false); // 100 ticks
-	this.addStack(null, LocalDirection.UP, true, false);
-	this.addStack(null, LocalDirection.RIGHT, false, true);
-	this.heatManager = new HeatManager(0.00005f, 8000f, 0.01f, this.getWorker());
+        super(false); // 100 ticks
+        this.addStack(null, LocalDirection.UP, true, false);
+        this.addStack(null, LocalDirection.RIGHT, false, true);
+        this.heatManager = new HeatManager(0.00005f, 8000f, 0.01f, this.getWorker());
     }
-    
+
     @Override
-    public void writeToNBT(NBTTagCompound nbt) { 
+    public void writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
         this.heatManager.writeToNBT(nbt);
     }
-    
+
     @Override
-    public void readFromNBT(NBTTagCompound nbt) { 
+    public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
         this.heatManager.readFromNBT(nbt);
     }
 
     @Override
     protected boolean isValidInput(int slot, int itemID) {
-	return recipes.isValidInput(slot, itemID);
+        return recipes.isValidInput(slot, itemID);
     }
 
     @Override
     public Iterator<IMachineRecipe> iterateRecipes() {
-	return recipes.getRecipes();
+        return recipes.getRecipes();
     }
 
     @Override
-    public void addHeat(int heat) {
-	this.heatManager.addHeat(heat);
+    public void addHeat(float heat) {
+        this.heatManager.addHeat(heat);
     }
 
     @Override
     public void updateEntity() {
-	if (!this.worldObj.isRemote) {
-	    float ambientTemperature = (this.worldObj.getBiomeGenForCoords(this.xCoord, this.zCoord).getFloatTemperature() * 20);
-	    this.heatManager.update(ambientTemperature);
-	}
-	super.updateEntity();
+        if (!this.worldObj.isRemote) {
+            float ambientTemperature = (this.worldObj.getBiomeGenForCoords(this.xCoord, this.zCoord).getFloatTemperature() * 20);
+            this.heatManager.update(ambientTemperature);
+        }
+        super.updateEntity();
     }
 
     @Override
     protected void doWork() {
-	if (!this.worldObj.isRemote)
-	    this.heatManager.doWork();
+        if (!this.worldObj.isRemote)
+            this.heatManager.doWork();
     }
 
     @Override
     public float getHeat() {
-	return this.heatManager.getTemperature();
+        return this.heatManager.getTemperature();
     }
 
     @Override
     public float getMaxHeat() {
-	return 10000;
+        return 10000;
     }
 
 }

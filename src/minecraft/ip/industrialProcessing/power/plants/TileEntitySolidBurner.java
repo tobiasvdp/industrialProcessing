@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraftforge.common.ForgeDirection;
 
 public class TileEntitySolidBurner extends TileEntityMachine implements IWorkingEntity, IBurnWorkHandler, IBurner {
 
@@ -50,30 +51,6 @@ public class TileEntitySolidBurner extends TileEntityMachine implements IWorking
     public void updateEntity() {
         super.updateEntity();
         this.worker.doWork(1);
-    }
-
-    private void increaseHeat(int heat) {
-        IHeatable boiler = getBoiler();
-        if (boiler != null) {
-            boiler.addHeat(heat);
-        } else {
-            if (this.worldObj.isAirBlock(xCoord, yCoord + 1, zCoord))
-                airTime += heat;
-            else
-                airTime = 0;
-
-            if (airTime > 5 * 20) {
-                this.worldObj.playSoundEffect(xCoord + 0.5D, yCoord + 1.5D, zCoord + 0.5D, "fire.ignite", 1.0F, 1);
-                this.worldObj.setBlock(xCoord, yCoord + 1, zCoord, Block.fire.blockID);
-            }
-        }
-    }
-
-    private IHeatable getBoiler() {
-        TileEntity tile = this.worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord);
-        if (tile instanceof IHeatable)
-            return (IHeatable) tile;
-        return null;
     }
 
     @Override
@@ -122,7 +99,14 @@ public class TileEntitySolidBurner extends TileEntityMachine implements IWorking
 
     @Override
     public void workProgressed(int amount) {
-        increaseHeat(amount);
+        if (HeaterUtils.increaseHeat(amount, this, ForgeDirection.UP)) {
+            airTime++;
+            if (airTime >= 5 * 20) {
+                HeaterUtils.ignite(this, ForgeDirection.UP);
+                airTime = 0;
+            }
+        } else
+            airTime = 0;
     }
 
     @Override

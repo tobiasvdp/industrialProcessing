@@ -12,22 +12,50 @@ import ip.industrialProcessing.utils.PowerTransfers;
 import ip.industrialProcessing.utils.handler.fuel.IBurner;
 import ip.industrialProcessing.utils.working.IWorkHandler;
 import ip.industrialProcessing.utils.working.IWorker;
+import ip.industrialProcessing.utils.working.IWorkingEntity;
 import ip.industrialProcessing.utils.working.ServerWorker;
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TileEntityElectricHeater extends TileEntityMachine implements IPoweredMachine, IPowerAcceptor, IWorkHandler, IBurner {
+public class TileEntityElectricHeater extends TileEntityMachine implements IPoweredMachine, IPowerAcceptor, IWorkingEntity, IWorkHandler, IBurner {
 
     private static final LocalDirection POWER_INPUT_SIDE = LocalDirection.LEFT;
     private static final int STORAGE_CAPACITY = 10000;
     private SimplePowerStorage powerStorage;
     private ServerWorker worker;
+    private int airTime;
 
     public TileEntityElectricHeater() {
         addStack(null, (LocalDirection) null, true, false);
         this.powerStorage = new SimplePowerStorage(STORAGE_CAPACITY);
         this.worker = new ServerWorker(this, 100);
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound nbt) {
+        this.worker.readFromNBT(nbt);
+        this.powerStorage.readFromNBT(nbt);
+        super.readFromNBT(nbt);
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound nbt) {
+        this.powerStorage.writeToNBT(nbt);
+        this.worker.writeToNBT(nbt);
+        super.writeToNBT(nbt);
+    }
+
+    @Override
+    public void updateEntity() {
+        super.updateEntity();
+        int drain = 100;
+        float maxSpeed = 5;
+        float speed = this.powerStorage.getStoredPower() / this.powerStorage.getPowerCapacity() * maxSpeed;
+        int amount = (int) (this.powerStorage.drainPower(speed * drain, false));
+        this.worker.doWork((int) (this.powerStorage.drainPower(amount, true) / drain));
     }
 
     @Override
@@ -99,12 +127,19 @@ public class TileEntityElectricHeater extends TileEntityMachine implements IPowe
 
     @Override
     public void workProgressed(int amount) {
+        if (HeaterUtils.increaseHeat(amount / 2.5f, this, ForgeDirection.UP)) {
+            airTime++;
+            if (airTime >= 5 * 20) {
+                HeaterUtils.ignite(this, ForgeDirection.UP);
+                airTime = 0;
+            }
+        } else
+            airTime = 0;
     }
 
     @Override
     public void beginWork() {
-        int amount = (int) this.powerStorage.drainPower(100, false);
-        this.worker.setTotalWork((int) this.powerStorage.drainPower(amount, true));
+
     }
 
     @Override
