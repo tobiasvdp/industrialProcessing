@@ -18,8 +18,8 @@ import ip.industrialProcessing.gui3.guide.pages.machines.crafts.FurnaceCraft;
 import ip.industrialProcessing.gui3.guide.pages.machines.crafts.ICraftBase;
 import ip.industrialProcessing.gui3.guide.pages.machines.crafts.MachineCraft;
 import ip.industrialProcessing.gui3.guide.pages.machines.crafts.WorkbenchCraft;
-import ip.industrialProcessing.machines.plants.blacksmith.anvil.ContainerAnvil;
 import ip.industrialProcessing.recipes.IMachineRecipe;
+import ip.industrialProcessing.subMod.blackSmith.plant.anvil.ContainerAnvil;
 import ip.industrialProcessing.utils.inventories.AnvilCraftingManager;
 import ip.industrialProcessing.utils.registry.RecipeRegistry;
 

@@ -1,8 +1,8 @@
 package ip.industrialProcessing.multiblock.gui;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.client.render.gui.ToolTip;
-import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.gui.container.syncing.info.InfoTank;
 import ip.industrialProcessing.gui.container.syncing.info.InfoWorker;
 import ip.industrialProcessing.multiblock.container.ContainerMultiblock;

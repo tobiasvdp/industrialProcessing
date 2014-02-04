@@ -2,7 +2,7 @@ package ip.industrialProcessing.client.render;
 
 import org.lwjgl.opengl.GL11;
 
-import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.subMod.mine.machines.mining.bobcatMiner.model.ModelBobcatMiner;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.Render;

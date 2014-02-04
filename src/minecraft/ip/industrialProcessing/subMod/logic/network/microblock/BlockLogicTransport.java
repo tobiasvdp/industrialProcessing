@@ -1,7 +1,7 @@
 package ip.industrialProcessing.subMod.logic.network.microblock;
 
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.microBlock.IMicroBlock;
 import ip.industrialProcessing.microBlock.MicroBlockType;
 import ip.industrialProcessing.microBlock.core.BlockMicroBlock;

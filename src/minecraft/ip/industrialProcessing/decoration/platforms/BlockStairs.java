@@ -1,11 +1,12 @@
 package ip.industrialProcessing.decoration.platforms;
 
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.api.rendering.connectedTile.ConnectionCompass;
 import ip.industrialProcessing.api.rendering.connectedTile.TileConnection;
 import ip.industrialProcessing.config.ConfigBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
+
 import java.util.List;
 
 import net.minecraft.block.Block;

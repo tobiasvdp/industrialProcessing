@@ -3,7 +3,7 @@ package ip.industrialProcessing.items;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.config.ISetupTransportBlocks;
 import ip.industrialProcessing.transport.steve.railway.suspended.cart.EntityFloatingCart;
 import net.minecraft.creativetab.CreativeTabs;

@@ -1,7 +1,7 @@
 package ip.industrialProcessing.api.rendering;
 
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.IRotateableEntity;
 import ip.industrialProcessing.subMod.logic.old.transport.ICommunication;

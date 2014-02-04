@@ -8,9 +8,9 @@ import static net.minecraftforge.common.ForgeDirection.WEST;
 import java.util.Random;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.decoration.light.BlockLamp;
 import ip.industrialProcessing.machines.BlockMachineRendered;

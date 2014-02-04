@@ -1,6 +1,6 @@
 package ip.industrialProcessing.items;
 
-import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.utils.registry.ItemRegistry;
 import ip.industrialProcessing.utils.registry.ItemType;
 import net.minecraft.creativetab.CreativeTabs;

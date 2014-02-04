@@ -89,7 +89,6 @@ public class ConfigRenderers {
 	private int rendererGrindingStone;
 	private int rendererPetrolLamp;
 	private int rendererBellows;
-	private int rendererBloomery;
 	private int rendererIronBowl;
 	private int rendererMachineBlock;
 	private int rendererContainerWall;
@@ -246,30 +245,6 @@ public class ConfigRenderers {
 
 	public static void setRendererMachineBlockId(int id) {
 		getInstance().rendererMachineBlock = id;
-	}
-
-	public static int getRendererIronBowlId() {
-		return getInstance().rendererIronBowl;
-	}
-
-	public static void setRendererIronBowlId(int id) {
-		getInstance().rendererIronBowl = id;
-	}
-
-	public static int getRendererBloomeryId() {
-		return getInstance().rendererBloomery;
-	}
-
-	public static void setRendererBloomeryId(int id) {
-		getInstance().rendererBloomery = id;
-	}
-
-	public static int getRendererBellowsId() {
-		return getInstance().rendererBellows;
-	}
-
-	public static void setRendererBellowsId(int id) {
-		getInstance().rendererBellows = id;
 	}
 
 	public static int getRendererPetrolLampId() {

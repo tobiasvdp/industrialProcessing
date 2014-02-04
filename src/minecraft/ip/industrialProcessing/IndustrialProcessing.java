@@ -1,5 +1,6 @@
 package ip.industrialProcessing;
 
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.config.ConfigAchievements;
 import ip.industrialProcessing.config.ConfigBaseRecipes;
 import ip.industrialProcessing.config.ConfigBlocks;
@@ -9,7 +10,6 @@ import ip.industrialProcessing.config.ConfigFluids;
 import ip.industrialProcessing.config.ConfigItems;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigTransportBlocks;
-import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupAchievements;
 import ip.industrialProcessing.config.ISetupBlocks;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
