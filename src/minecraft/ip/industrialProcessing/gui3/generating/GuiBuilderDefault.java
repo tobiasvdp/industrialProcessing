@@ -265,8 +265,8 @@ public class GuiBuilderDefault implements IGuiBuilder {
 
         DefaultStateConfigs.setupSpinners(this.spinners, container, tileEntity);
         DefaultStateConfigs.setupButtons(this.stateButtons, container, tileEntity);
-
         DefaultInventory.setup(this.inventoryRef, player, container);
+
         return container;
     }
 
