@@ -195,7 +195,7 @@ public class ConfigBlocks {
 		registerBlock(ISetupBlocks.blockMachineBlock, "IP.Block.MachineB", "Machine block", BlockType.Machine, BlockType.assemble);
 		registerBlock(ISetupBlocks.blockDoorEmergency, "IP.Block.DoorEm", "Emergency door", BlockType.decoration);
 		
-		ConfigMachineBlocks.registerMachineBlock(ISetupBlocks.microBlock, "IP.MicroBlock", "Microblock", MicroBlockTileEntity.class,BlockType.Block);
+		ConfigMachineBlocks.registerMachineBlock(ISetupBlocks.microBlock, "IP.MicroBlock", "Microblock", MicroBlockTileEntity.class);
 	}
 
 	@Deprecated

@@ -52,10 +52,20 @@ public class VanillaRecipeBridge {
 			return null;
 		} else if (recipe instanceof ShapelessRecipes) {
 			ShapelessRecipes recipeVanilla = (ShapelessRecipes) recipe;
-			ipRecipe.inputs = new RecipeInputSlot[recipeVanilla.recipeItems.size()];
-			for (int i = 0; i < recipeVanilla.recipeItems.size(); i++) {
-				ItemStack itemStack = (ItemStack) recipeVanilla.recipeItems.get(i);
-				ipRecipe.inputs[i] = new RecipeInputSlot(i, itemStack.itemID, itemStack.getItemDamage(), RecipeSlotType.INVENTORY, itemStack.stackSize);
+			if (recipeVanilla.getRecipeSize() > 4) {
+				ipRecipe.inputs = new RecipeInputSlot[recipeVanilla.recipeItems.size()];
+				for (int i = 0; i < recipeVanilla.recipeItems.size(); i++) {
+					ItemStack itemStack = (ItemStack) recipeVanilla.recipeItems.get(i);
+					ipRecipe.inputs[i] = new RecipeInputSlot(i, itemStack.itemID, itemStack.getItemDamage(), RecipeSlotType.INVENTORY, itemStack.stackSize);
+				}
+			} else {
+				ipRecipe.inputs = new RecipeInputSlot[recipeVanilla.recipeItems.size()+1];
+				for (int i = 0; i < recipeVanilla.recipeItems.size(); i++) {
+					ItemStack itemStack = (ItemStack) recipeVanilla.recipeItems.get(i);
+					if(i==3)
+						i++;
+					ipRecipe.inputs[i] = new RecipeInputSlot(i, itemStack.itemID, itemStack.getItemDamage(), RecipeSlotType.INVENTORY, itemStack.stackSize);
+				}
 			}
 		}
 
