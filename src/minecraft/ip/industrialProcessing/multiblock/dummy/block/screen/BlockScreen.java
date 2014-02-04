@@ -17,6 +17,7 @@ public class BlockScreen extends BlockMultiblockDummy{
 
 	public BlockScreen() {
 		super(ConfigMachineBlocks.getBLmultiblockScreen(), "MultiblockScreen", ISetupCreativeTabs.tabMultiblocks);
+		this.setBlockBounds(0.0f, 0.0f, 0.0f, 1.0f, 0.6f, 1.0f);
 	}
 
 	@Override

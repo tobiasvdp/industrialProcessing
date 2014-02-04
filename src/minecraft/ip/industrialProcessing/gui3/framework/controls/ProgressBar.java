@@ -10,6 +10,7 @@ import ip.industrialProcessing.gui3.framework.Thickness;
 import ip.industrialProcessing.gui3.framework.panels.Orientation;
 import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
 import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
+import ip.industrialProcessing.utils.Language;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -108,7 +109,7 @@ public class ProgressBar extends Control implements IProgressBinding {
         ProgressBar bar = new ProgressBar(texture, DEFAULT_WORKER_VERTICAL_BACKGROUND, DEFAULT_WORKER_VERTICAL_FOREGROUND, Orientation.HORIZONTAL, DEFAULT_WORKER_THICKNESS);
         bar.width = texture.size.width * DEFAULT_WORKER_VERTICAL_BACKGROUND.width;
         bar.height = texture.size.height * DEFAULT_WORKER_VERTICAL_BACKGROUND.height;
-        bar.name = "IP.Gui.Work";
+        bar.name = Language.getLocalizedString("IP.Gui.Work");
         bar.tooltip = "%.0f/%.0f";
         return bar;
     }
