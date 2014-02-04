@@ -772,6 +772,7 @@ public class ConfigItems {
 		LanguageRegistry.addName(ISetupItems.itemIronBracket , "Iron bracket");
 		LanguageRegistry.instance().addStringLocalization(ISetupItems.itemIronBracket.getUnlocalizedName()+".desc" , "This is an iron bracket");
 		
+		LanguageRegistry.addName(ISetupItems.paintBrush , "Paintbrush");
 		LanguageRegistry.addName(ISetupItems.itemCopperBar , "Copper bar");
 		LanguageRegistry.addName(ISetupItems.itemIronBowl , "Iron bowl");
 		LanguageRegistry.addName(ISetupItems.itemRemote , "Remote");

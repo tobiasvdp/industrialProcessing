@@ -10,6 +10,7 @@ import ip.industrialProcessing.items.ItemRemote;
 import ip.industrialProcessing.items.ItemSuspendedCart;
 import ip.industrialProcessing.items.ItemWrench;
 import ip.industrialProcessing.items.guide.ItemGuide;
+import ip.industrialProcessing.utils.registry.ItemType;
 
 public interface ISetupItems {
 	
@@ -95,9 +96,9 @@ public interface ISetupItems {
     public final static ItemIP itemAluminumDust = new ItemIP(ConfigItems.itemAluminumDustID(), "itemAluminumDust",IndustrialProcessing.tabOres);
     
     public final static ItemIP itemThickStick = new ItemIP(ConfigItems.ItemThickStick(), "ItemThickStick",IndustrialProcessing.tabMachineParts);
-    public final static ItemDamage itemHammer = new ItemDamage(ConfigItems.ItemHammer(), "ItemHammer",IndustrialProcessing.tabMachineParts);
-    public final static ItemDamage itemKnife = new ItemDamage(ConfigItems.ItemKnife(), "ItemKnife",IndustrialProcessing.tabMachineParts);
-    public final static ItemDamage itemBlowingTorch = new ItemDamage(ConfigItems.ItemBlowingTorch(), "ItemBlowingTorch",IndustrialProcessing.tabMachineParts);
+    public final static ItemDamage itemHammer = new ItemDamage(ConfigItems.ItemHammer(), "ItemHammer",IndustrialProcessing.tabMachineParts, ItemType.tool);
+    public final static ItemDamage itemKnife = new ItemDamage(ConfigItems.ItemKnife(), "ItemKnife",IndustrialProcessing.tabMachineParts, ItemType.tool);
+    public final static ItemDamage itemBlowingTorch = new ItemDamage(ConfigItems.ItemBlowingTorch(), "ItemBlowingTorch",IndustrialProcessing.tabMachineParts, ItemType.tool);
     
     //Iron blast furnace
     public final static ItemIP itemCalcareousSinterDust = new ItemIP(ConfigItems.ItemCalcareousSinterDustID(), "ItemCalcareousSinterDust",IndustrialProcessing.tabOres);
@@ -105,7 +106,7 @@ public interface ISetupItems {
     public final static ItemIP itemCokePellet = new ItemIP(ConfigItems.getItemCokePelletID(), "ItemCokePellet",IndustrialProcessing.tabOres);
     public final static ItemIP itemSlag = new ItemIP(ConfigItems.ItemSlagID(), "ItemSlag",IndustrialProcessing.tabOres);
         
-    public final static ItemIP itemHexKey = new ItemIP(ConfigItems.itemHexKeyID(), "itemHexKey",IndustrialProcessing.tabPower);
+    public final static ItemIP itemHexKey = new ItemIP(ConfigItems.itemHexKeyID(), "itemHexKey",IndustrialProcessing.tabPower, ItemType.tool);
     public final static ItemWrench itemWrench = new ItemWrench();
     public final static ItemBattery itemBattery = new ItemBattery();
     public final static ItemIP itemAsh = new ItemIP(ConfigItems.itemAshID(), "itemAsh",IndustrialProcessing.tabPower);
@@ -131,7 +132,7 @@ public interface ISetupItems {
     public final static ItemPaintBrush paintBrushGreen = new ItemPaintBrush(ConfigItems.itemPaintBrushID() + 13, 13);
     public final static ItemPaintBrush paintBrushRed = new ItemPaintBrush(ConfigItems.itemPaintBrushID() + 14, 14);
     public final static ItemPaintBrush paintBrushBlack = new ItemPaintBrush(ConfigItems.itemPaintBrushID() + 15, 15);
-    public final static ItemIP paintBrush = new ItemIP(ConfigItems.itemPaintBrushID() + 16, "pantBrush16", IndustrialProcessing.tabOres);
+    public final static ItemIP paintBrush = new ItemIP(ConfigItems.itemPaintBrushID() + 16, "paintBrush16", IndustrialProcessing.tabOres, ItemType.tool);
     
     public final static ItemIP itemCopperIngot = new ItemIP(ConfigItems.itemCopperIngotID(), "ItemCopperIngot",IndustrialProcessing.tabOres);
     public final static ItemIP itemTinIngot = new ItemIP(ConfigItems.itemTinIngotID(), "ItemTinIngot",IndustrialProcessing.tabOres);
@@ -155,7 +156,7 @@ public interface ISetupItems {
     public final static ItemDamage itemIronBowl = new ItemDamage(ConfigItems.getItemIronBowlID(), "ItemIronBowl",IndustrialProcessing.tabMachineParts,8);
     public final static ItemIP itemIronBracket = new ItemIP(ConfigItems.getItemIronBracketID(), "ItemIronBracket",IndustrialProcessing.tabMachineParts);
     public final static ItemDamage itemDrawPlate = new ItemDamage(ConfigItems.getItemDrawPlateID(), "ItemDrawPlate",IndustrialProcessing.tabMachineParts,8);
-    public final static ItemDamage itemPestle = new ItemDamage(ConfigItems.getItemPestleID(), "ItemPestle",IndustrialProcessing.tabMachineParts,3);
+    public final static ItemDamage itemPestle = new ItemDamage(ConfigItems.getItemPestleID(), "ItemPestle",IndustrialProcessing.tabMachineParts,3, ItemType.tool);
     
     public final static ItemIP itemScreen = new ItemIP(ConfigItems.getItemScreenID(), "ItemScreen",IndustrialProcessing.tabMachineParts);
     public final static ItemIP itemFrame = new ItemIP(ConfigItems.getItemFrameID(), "ItemFrame",IndustrialProcessing.tabMachineParts);

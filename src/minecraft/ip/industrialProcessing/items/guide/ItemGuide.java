@@ -3,6 +3,8 @@ package ip.industrialProcessing.items.guide;
 import ip.industrialProcessing.GuiHandler;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.items.ItemIP;
+import ip.industrialProcessing.utils.registry.ItemRegistry;
+import ip.industrialProcessing.utils.registry.ItemType;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -12,6 +14,7 @@ public class ItemGuide extends ItemIP {
 
     public ItemGuide(int ID, String name, CreativeTabs tab) {
 	super(ID, name, tab); 
+	ItemRegistry.RegisterItem(this, ItemType.tool);
     }
     
     @Override

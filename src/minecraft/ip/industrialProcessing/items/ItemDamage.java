@@ -20,6 +20,18 @@ public class ItemDamage extends Item {
 		ItemRegistry.RegisterItem(this, ItemType.damage);
 
 	}
+	
+	public ItemDamage(int ID, String name, CreativeTabs tab, ItemType... type) {
+		super(ID);
+		setMaxStackSize(1);
+		setMaxDamage(15);
+		setCreativeTab(tab);
+		setUnlocalizedName(name);
+		setNoRepair();
+		setTextureName(INamepace.TEXTURE_NAME_PREFIX + name);
+		ItemRegistry.RegisterItem(this, type);
+
+	}
 	public ItemDamage(int ID, String name, CreativeTabs tab, int maxDamage) {
 		super(ID);
 		setMaxStackSize(1);
@@ -28,7 +40,18 @@ public class ItemDamage extends Item {
 		setUnlocalizedName(name);
 		setNoRepair();
 		setTextureName(INamepace.TEXTURE_NAME_PREFIX + name);
+		ItemRegistry.RegisterItem(this, ItemType.damage);
 
+	}
+	public ItemDamage(int ID, String name, CreativeTabs tab, int maxDamage, ItemType... type) {
+		super(ID);
+		setMaxStackSize(1);
+		setMaxDamage(maxDamage);
+		setCreativeTab(tab);
+		setUnlocalizedName(name);
+		setNoRepair();
+		setTextureName(INamepace.TEXTURE_NAME_PREFIX + name);
+		ItemRegistry.RegisterItem(this, type);
 	}
 	public ItemDamage(int ID,int maxDamage, String name, CreativeTabs tab) {
 		super(ID);
