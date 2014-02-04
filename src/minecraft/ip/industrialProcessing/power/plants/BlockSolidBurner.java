@@ -9,7 +9,7 @@ import ip.industrialProcessing.gui3.generating.IGuiBuilder;
 public class BlockSolidBurner extends BlockBurner {
 
     public static final String UNLOCALIZED_NAME = "IP.Machine.SolidBurner";
-    private static IGuiBuilder guiBuilder = new GuiBuilderDefault(UNLOCALIZED_NAME).enableBurner(-1, 0, 1);
+    private static IGuiBuilder guiBuilder = new GuiBuilderDefault(UNLOCALIZED_NAME).enableBurner(-1, 0, 1).enableWorker();
 
     public BlockSolidBurner() {
         super(ConfigMachineBlocks.getSolidBurnerBlockID(), UNLOCALIZED_NAME);

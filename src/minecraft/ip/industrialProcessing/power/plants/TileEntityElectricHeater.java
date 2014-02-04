@@ -20,7 +20,7 @@ import net.minecraftforge.common.ForgeDirection;
 public class TileEntityElectricHeater extends TileEntityMachine implements IPoweredMachine, IPowerAcceptor, IWorkHandler, IBurner {
 
     private static final LocalDirection POWER_INPUT_SIDE = LocalDirection.LEFT;
-    private static final int STORAGE_CAPACITY = 0;
+    private static final int STORAGE_CAPACITY = 10000;
     private SimplePowerStorage powerStorage;
     private ServerWorker worker;
 
@@ -64,22 +64,22 @@ public class TileEntityElectricHeater extends TileEntityMachine implements IPowe
 
     @Override
     public int getBurnTime() {
-        return 0;
+        return this.worker.getTotalWork() - this.worker.getWorkDone();
     }
 
     @Override
     public int getMaxBurnTime() {
-        return 0;
+        return this.worker.getTotalWork();
     }
 
     @Override
     public boolean hasWork() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean canWork() {
-        return false;
+        return this.worker.getWorkDone() > 0 || this.powerStorage.getStoredPower() > 0;
     }
 
     @Override
@@ -89,38 +89,32 @@ public class TileEntityElectricHeater extends TileEntityMachine implements IPowe
 
     @Override
     public void prepareWork() {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void workCancelled() {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void workProgressed(int amount) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void beginWork() {
-        // TODO Auto-generated method stub
-
+        int amount = (int) this.powerStorage.drainPower(100, false);
+        this.worker.setTotalWork((int) this.powerStorage.drainPower(amount, true));
     }
 
     @Override
     public TileEntity getTileEntity() {
-        // TODO Auto-generated method stub
-        return null;
+        return this;
     }
 
     @Override
     public IWorker getWorker() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.worker;
     }
 
 }
