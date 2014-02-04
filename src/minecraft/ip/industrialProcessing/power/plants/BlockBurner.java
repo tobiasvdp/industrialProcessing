@@ -50,7 +50,7 @@ public abstract class BlockBurner extends BlockMachineRendered implements IDescr
      */
     public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         IBurner burner = (IBurner) par1World.getBlockTileEntity(par2, par3, par4);
-        if (burner.getBurnTime() > 0) {
+        if (burner.getBurnTime() > 0 && burner.getBurnTime() < burner.getMaxBurnTime()) {
             float f = par2 + 0.5F;
             float f1 = par3 + 0.0F + par5Random.nextFloat() * 6.0F / 16.0F;
             float f2 = par4 + 0.5F;

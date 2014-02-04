@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 public class BlockFuelBurner extends BlockBurner {
 
     public static final String UNLOCALIZED_NAME = "IP.Machine.FuelBurner";
-    private static IGuiBuilder guiBuilder = new GuiBuilderDefault(UNLOCALIZED_NAME).addInputTank(0, 0, 1);
+    private static IGuiBuilder guiBuilder = new GuiBuilderDefault(UNLOCALIZED_NAME).addInputTank(0, 0, 1).enableWorker();
 
     public BlockFuelBurner() {
         super(ConfigMachineBlocks.getFuelBurnerBlockID(), UNLOCALIZED_NAME);

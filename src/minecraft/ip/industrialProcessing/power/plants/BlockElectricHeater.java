@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 public class BlockElectricHeater extends BlockBurner {
 
     public static final String UNLOCALIZED_NAME = "IP.Machine.ElectricHeater";
-    private static IGuiBuilder guiBuilder = new GuiBuilderDefault(UNLOCALIZED_NAME).enablePower(0);
+    private static IGuiBuilder guiBuilder = new GuiBuilderDefault(UNLOCALIZED_NAME).enablePower(0).enableWorker();
 
     public BlockElectricHeater() {
         super(ConfigMachineBlocks.getElectricHeaterBlockID(), UNLOCALIZED_NAME);
