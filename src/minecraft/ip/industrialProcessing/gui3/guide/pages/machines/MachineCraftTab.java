@@ -71,14 +71,14 @@ public class MachineCraftTab extends TabPage implements IButtonClickListener<ICr
             ICraftBase lastWorkbench = addWorkbenchRecipes(tag);
             ICraftBase lastAnvil = addAnvilRecipes(tag);
             ICraftBase lastMachine = addMachineRecipes(tag);
-            if (lastFurnace != null)
-                this.recipeDock.child = lastFurnace.getGui(stackClickListener);
-            if (lastWorkbench != null)
-                this.recipeDock.child = lastWorkbench.getGui(stackClickListener);
-            if (lastAnvil != null)
-                this.recipeDock.child = lastAnvil.getGui(stackClickListener);
             if (lastMachine != null)
                 this.recipeDock.child = lastMachine.getGui(stackClickListener);
+            if (lastAnvil != null)
+                this.recipeDock.child = lastAnvil.getGui(stackClickListener);
+            if (lastWorkbench != null)
+                this.recipeDock.child = lastWorkbench.getGui(stackClickListener);
+            if (lastFurnace != null)
+                this.recipeDock.child = lastFurnace.getGui(stackClickListener);
         }
     }
 

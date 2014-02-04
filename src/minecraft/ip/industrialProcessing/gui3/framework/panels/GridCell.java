@@ -5,15 +5,15 @@ import ip.industrialProcessing.gui3.framework.controls.SlotControl;
 
 public class GridCell {
     public GridCell(int row, int column, int rowSpan, int columnSpan, UIElement content) {
-	this.row = row;
-	this.column = column;
-	this.rowSpan = rowSpan;
-	this.columnSpan = columnSpan;
-	this.content = content;
+        this.row = row;
+        this.column = column;
+        this.rowSpan = rowSpan;
+        this.columnSpan = columnSpan;
+        this.content = content;
     }
 
     public GridCell(int row, int column, UIElement content) {
-	this(row, column, 1, 1, content);
+        this(row, column, 1, 1, content);
     }
 
     public int row;

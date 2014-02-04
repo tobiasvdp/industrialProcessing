@@ -41,6 +41,7 @@ public class MachineRecipesTab extends TabPage implements IButtonClickListener<I
 	public MachineRecipesTab(IButtonClickListener<ItemStack> stackClickListener) {
 		this.header = TextBlock.createText("Recipes");
 		this.activeHeader = TextBlock.createText("Recipes", 0xffffffff);
+        this.header.margin = this.activeHeader.margin = new Thickness(0, 5, 0, 0);
 		StackPanel stack = new StackPanel();
 		stack.orientation = Orientation.VERTICAL;
 		this.wrapPanel = new WrapPanel();
