@@ -1,11 +1,11 @@
 package ip.industrialProcessing.multiblock.dummy.block.ironPole;
 
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.multiblock.dummy.BlockMultiblockDummy;
-import ip.industrialProcessing.multiblock.dummy.block.bellows.TileEntityBellows;
+import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.dummy.bellows.TileEntityBellows;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;

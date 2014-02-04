@@ -1,8 +1,8 @@
 package ip.industrialProcessing.machines.containers.gui;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.client.render.gui.ToolTip;
-import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.machines.containers.ContainerMachine;
 import ip.industrialProcessing.machines.containers.IFluidMachineContainerEntity;
 import ip.industrialProcessing.machines.containers.IMachineContainerEntity;

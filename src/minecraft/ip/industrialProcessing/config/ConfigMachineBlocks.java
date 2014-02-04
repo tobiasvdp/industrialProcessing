@@ -18,7 +18,6 @@ import ip.industrialProcessing.machines.kiln.TileEntityKiln;
 import ip.industrialProcessing.machines.mixer.TileEntityMixer;
 import ip.industrialProcessing.machines.oxygenFurnace.TileEntityOxygenFurnace;
 import ip.industrialProcessing.machines.pelletExtruder.TileEntityPelletExtruder;
-import ip.industrialProcessing.machines.plants.blacksmith.grindingStone.TileEntityGrindingStone;
 import ip.industrialProcessing.machines.plants.metalProcessing.extruder.TileEntityExtruder;
 import ip.industrialProcessing.machines.plants.metalProcessing.sandCaster.TileEntitySandCaster;
 import ip.industrialProcessing.machines.plants.metalProcessing.turretLathe.TileEntityTurretLathe;
@@ -51,7 +50,6 @@ import ip.industrialProcessing.multiblock.core.block.blastFurnace.TEmultiblockBl
 import ip.industrialProcessing.multiblock.core.block.decoration.garageDoor.TileEntityGarageDoor;
 import ip.industrialProcessing.multiblock.core.block.elevator.TEmultiblockElevator;
 import ip.industrialProcessing.multiblock.core.block.hotPress.TEmultiblockHotPress;
-import ip.industrialProcessing.multiblock.core.block.plants.blacksmith.bloomery.TileEntityBloomery;
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.CatalyticReformer.TileEntityCatalyticReformer;
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.amineTreater.TileEntityAmineTreater;
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.atmosphericDestilationTower.TileEntityAtmosphericDestilationTower;
@@ -65,7 +63,6 @@ import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.vacuumDe
 import ip.industrialProcessing.multiblock.core.block.plants.storage.container.TileEntityContainer;
 import ip.industrialProcessing.multiblock.core.block.rollingPress.TEmultiblockRollingPress;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.TileEntityMultiblockWeldingStation;
-import ip.industrialProcessing.multiblock.dummy.block.bellows.TileEntityBellows;
 import ip.industrialProcessing.multiblock.dummy.block.blastFurnaceTower.TEmultiblockBlastFurnaceTower;
 import ip.industrialProcessing.multiblock.dummy.block.containerWall.TileEntityContainerWall;
 import ip.industrialProcessing.multiblock.dummy.block.controlBox.TileEntityControlBox;
@@ -76,7 +73,6 @@ import ip.industrialProcessing.multiblock.dummy.block.displayPanel.TEmultiblockD
 import ip.industrialProcessing.multiblock.dummy.block.frame.TEmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.inventory.input.TEmultiblockInvInput;
 import ip.industrialProcessing.multiblock.dummy.block.inventory.output.TEmultiblockInvOutput;
-import ip.industrialProcessing.multiblock.dummy.block.ironBowl.TileEntityIronBowl;
 import ip.industrialProcessing.multiblock.dummy.block.ironPole.TileEntityIronPole;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.TEmultiblockLiftDoor;
 import ip.industrialProcessing.multiblock.dummy.block.screen.TileEntityScreen;
@@ -98,6 +94,10 @@ import ip.industrialProcessing.power.plants.TileEntityTurbine;
 import ip.industrialProcessing.power.storage.TileEntityEnergyCell;
 import ip.industrialProcessing.power.wire.TileEntityWire;
 import ip.industrialProcessing.recipes.IRecipeBlock;
+import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.TileEntityBloomery;
+import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.dummy.bellows.TileEntityBellows;
+import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.dummy.ironBowl.TileEntityIronBowl;
+import ip.industrialProcessing.subMod.blackSmith.plant.grindingStone.TileEntityGrindingStone;
 import ip.industrialProcessing.transport.fluids.TileEntityGrate;
 import ip.industrialProcessing.transport.fluids.TileEntityManoMeter;
 import ip.industrialProcessing.transport.fluids.TileEntityPump;
@@ -154,9 +154,6 @@ public class ConfigMachineBlocks {
     private int quenchTankBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "quenchTankBlockID", 518).getInt();
     private int grindingStoneBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "grindingStoneBlockID", 519).getInt();
     private int anvilBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "anvilBlockID", 520).getInt();
-    private int bellowsBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "bellowsBlockID", 521).getInt();
-    private int bloomeryBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "bloomeryBlockID", 522).getInt();
-    private int ironBowlBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "ironBowlBlockID", 523).getInt();
     private int storageRackID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "storageRackID", 524).getInt();
     private int storageBoxID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "storageBoxID", 525).getInt();
     private int blockTorchID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "blockTorchID", 526).getInt();
@@ -264,9 +261,6 @@ public class ConfigMachineBlocks {
         registerMachineBlock(ISetupMachineBlocks.blockRoaster, "IP.Machine.Roast", "Roaster", TileEntityRoaster.class);
         registerMachineBlock(ISetupMachineBlocks.blockQuenchTank, "IP.Machine.Quench", "QuenchTank", TileEntityQuenchTank.class);
         registerMachineBlock(ISetupMachineBlocks.blockGrindingStone, "IP.Machine.GrStone", "Grinding stone", TileEntityGrindingStone.class, BlockType.Machine, BlockType.assemble);
-        registerMachineBlock(ISetupMachineBlocks.blockBellows, "IP.MBD.Bellow", "Bellows", TileEntityBellows.class, BlockType.Machine, BlockType.assemble);
-        registerMachineBlock(ISetupMachineBlocks.blockBloomery, "IP.MBC.Bloom", "Bloomery", TileEntityBloomery.class, BlockType.Machine, BlockType.Smelting);
-        registerMachineBlock(ISetupMachineBlocks.blockIronBowl, "IP.MBD.IBowl", "Iron bowl", TileEntityIronBowl.class, BlockType.Machine, BlockType.assemble);
         registerMachineBlock(ISetupMachineBlocks.blockStorageRack, "IP.Machine.StorRack", "Storage rack", TileEntityStorageRack.class, BlockType.Storage);
         registerMachineBlock(ISetupMachineBlocks.blockStorageBox, ItemStorageBox.class, "IP.Machine.StorBox", "Storage box", TileEntityStorageBox.class, BlockType.Storage);
 
@@ -466,20 +460,8 @@ public class ConfigMachineBlocks {
         return getInstance().blockSolderingStationID;
     }
 
-    public static int getBlockIronBowlID() {
-        return getInstance().ironBowlBlockID;
-    }
-
-    public static int getBlockBloomeryID() {
-        return getInstance().bloomeryBlockID;
-    }
-
     public static int getBlockContainerWallID() {
         return getInstance().containerWallBlockID;
-    }
-
-    public static int getBlockBellowsID() {
-        return getInstance().bellowsBlockID;
     }
 
     public static int getBlockGrindingStoneID() {

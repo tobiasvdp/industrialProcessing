@@ -1,6 +1,6 @@
 package ip.industrialProcessing.subMod.logic.old.transport.wired.bundle;
 
-import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.subMod.logic.IPLogic;
 import ip.industrialProcessing.subMod.logic.config.ConfigLogic;
 import ip.industrialProcessing.subMod.logic.old.transport.ICommunicationTransport;

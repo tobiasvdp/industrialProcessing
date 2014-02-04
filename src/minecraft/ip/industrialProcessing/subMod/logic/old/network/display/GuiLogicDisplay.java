@@ -1,6 +1,6 @@
 package ip.industrialProcessing.subMod.logic.old.network.display;
 
-import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.gui.container.syncing.info.InfoMachine;
 import ip.industrialProcessing.gui.container.syncing.info.InfoSlot;
 import ip.industrialProcessing.gui.container.syncing.info.InfoTank;

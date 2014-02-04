@@ -8,8 +8,8 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.config.ConfigTransportBlocks;
-import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.machines.BlockMachine;
 

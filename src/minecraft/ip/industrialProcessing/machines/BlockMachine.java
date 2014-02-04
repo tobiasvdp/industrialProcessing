@@ -2,7 +2,7 @@ package ip.industrialProcessing.machines;
 
 import cpw.mods.fml.common.Loader;
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.config.ISetupItems;
 import ip.industrialProcessing.subMod.logic.config.ISetupLogic;
 import ip.industrialProcessing.utils.FluidTransfers;

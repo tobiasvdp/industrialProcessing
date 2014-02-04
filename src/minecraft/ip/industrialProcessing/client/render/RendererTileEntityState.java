@@ -1,7 +1,7 @@
 package ip.industrialProcessing.client.render;
 
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.api.rendering.RendererTileEntity;
-import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.machines.TileEntityMachine;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;

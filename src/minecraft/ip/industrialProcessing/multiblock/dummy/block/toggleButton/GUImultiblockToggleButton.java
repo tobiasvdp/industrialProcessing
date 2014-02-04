@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.common.network.PacketDispatcher;
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.multiblock.core.block.elevator.TEmultiblockElevator;
 import ip.industrialProcessing.utils.handler.packets.PacketHandler;
 import net.minecraft.client.gui.GuiButton;

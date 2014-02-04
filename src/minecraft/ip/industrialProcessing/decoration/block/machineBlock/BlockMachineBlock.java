@@ -1,9 +1,9 @@
 package ip.industrialProcessing.decoration.block.machineBlock;
 
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.client.ClientProxy;
 import ip.industrialProcessing.config.ConfigBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

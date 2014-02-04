@@ -43,6 +43,10 @@ public class RecipeRegistry {
 				addRecipe(vanillaRecipes.get(i), Block.workbench);
 		}
 	}
+	
+	public static void appendVanillaRecipe(Recipe vanillaRecipe) {
+		addRecipe(vanillaRecipe, Block.workbench);
+	}
 
 	public static ArrayList<IMachineRecipe> FindRecipeForOutput(ItemStack stack) {
 		ArrayList<IMachineRecipe> list = new ArrayList<IMachineRecipe>();

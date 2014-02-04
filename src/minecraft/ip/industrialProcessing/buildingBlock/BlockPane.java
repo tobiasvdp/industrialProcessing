@@ -2,7 +2,7 @@ package ip.industrialProcessing.buildingBlock;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.transport.fluids.TileEntityTransportFluidsBase;
 import net.minecraft.block.Block;

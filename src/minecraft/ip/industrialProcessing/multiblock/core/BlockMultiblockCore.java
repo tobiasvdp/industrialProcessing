@@ -1,7 +1,7 @@
 package ip.industrialProcessing.multiblock.core;
 
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import ip.industrialProcessing.utils.inventories.InventoryUtils;
 import net.minecraft.block.Block;

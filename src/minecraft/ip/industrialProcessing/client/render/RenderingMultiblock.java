@@ -1,7 +1,7 @@
 package ip.industrialProcessing.client.render;
 
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.api.rendering.RendererTileEntity;
-import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
 import ip.industrialProcessing.multiblock.dummy.block.displayPanel.TEmultiblockDisplayPanel;

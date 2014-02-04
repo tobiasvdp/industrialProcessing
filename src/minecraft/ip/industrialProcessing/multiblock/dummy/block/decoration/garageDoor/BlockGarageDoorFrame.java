@@ -1,8 +1,8 @@
 package ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor;
 
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.multiblock.dummy.BlockMultiblockDummy;
 import ip.industrialProcessing.multiblock.dummy.block.containerWall.TileEntityContainerWall;

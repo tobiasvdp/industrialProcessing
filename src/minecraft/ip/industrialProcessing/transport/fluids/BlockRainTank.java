@@ -1,9 +1,9 @@
 package ip.industrialProcessing.transport.fluids;
 
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.ConfigTransportBlocks;
-import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import net.minecraft.block.Block;

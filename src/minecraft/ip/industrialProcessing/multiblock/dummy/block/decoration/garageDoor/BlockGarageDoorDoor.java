@@ -2,9 +2,9 @@ package ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor;
 
 import java.util.List;
 
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.machines.IRotateableEntity;
 import ip.industrialProcessing.multiblock.dummy.BlockMultiblockDummy;

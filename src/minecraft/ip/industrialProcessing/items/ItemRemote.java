@@ -2,7 +2,7 @@ package ip.industrialProcessing.items;
 
 import java.util.List;
 
-import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.fluids.BucketHandler;
 import ip.industrialProcessing.subMod.mine.machines.mining.bobcatMiner.EntityBobcatMiner;

@@ -50,10 +50,6 @@ import ip.industrialProcessing.machines.flotationCell.model.ModelFlotationCellBl
 import ip.industrialProcessing.machines.hydroCyclone.model.ModelHydroCycloneBlock;
 import ip.industrialProcessing.machines.mixer.ModelMixer;
 import ip.industrialProcessing.machines.mixer.TileEntityMixer;
-import ip.industrialProcessing.machines.plants.blacksmith.anvil.model.ModelAnvil;
-import ip.industrialProcessing.machines.plants.blacksmith.grindingStone.TileEntityGrindingStone;
-import ip.industrialProcessing.machines.plants.blacksmith.grindingStone.model.ModelGrindingStone;
-import ip.industrialProcessing.machines.plants.blacksmith.grindingStone.model.ModelGrindingStoneAnimated;
 import ip.industrialProcessing.machines.plants.metalProcessing.sandCaster.TileEntitySandCaster;
 import ip.industrialProcessing.machines.plants.metalProcessing.sandCaster.model.ModelSandCaster;
 import ip.industrialProcessing.machines.plants.metalProcessing.sandCaster.model.ModelSandCasterBlock;
@@ -73,11 +69,9 @@ import ip.industrialProcessing.microBlock.rendering.ModelMicroBlock;
 import ip.industrialProcessing.multiblock.core.block.SolderingStation.model.ModelSolderingStation;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.model.ModelBlastFurnaceCoreBlock;
 import ip.industrialProcessing.multiblock.core.block.blastFurnace.model.ModelBlastFurnaceTopBlock;
-import ip.industrialProcessing.multiblock.core.block.plants.blacksmith.bloomery.model.ModelBloomery;
 import ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.atmosphericDestilationTower.model.ModelAtmosphericDestillationTowerBlock;
 import ip.industrialProcessing.multiblock.core.block.plants.storage.container.model.ModelContainer;
 import ip.industrialProcessing.multiblock.core.block.weldingStation.model.ModelWeldingStation;
-import ip.industrialProcessing.multiblock.dummy.block.bellows.model.ModelBellows;
 import ip.industrialProcessing.multiblock.dummy.block.containerWall.model.ModelContainerWall;
 import ip.industrialProcessing.multiblock.dummy.block.controlBox.model.ModelControlBox;
 import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.entity.EntityGarageDoor;
@@ -92,7 +86,6 @@ import ip.industrialProcessing.multiblock.dummy.block.frame.ENmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.frame.MDmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.frame.MDmultiblockFramePanel;
 import ip.industrialProcessing.multiblock.dummy.block.frame.TEmultiblockFrame;
-import ip.industrialProcessing.multiblock.dummy.block.ironBowl.model.ModelIronBowl;
 import ip.industrialProcessing.multiblock.dummy.block.ironPole.model.ModelIronPole;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.ENmultiblockLiftDoor;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.MDmultiblockLiftDoor;
@@ -128,6 +121,13 @@ import ip.industrialProcessing.power.storage.ModelEnergyCell;
 import ip.industrialProcessing.power.storage.TileEntityEnergyCell;
 import ip.industrialProcessing.power.storage.model.ModelEnergyCellBlock;
 import ip.industrialProcessing.power.wire.models.ModelWireBlock;
+import ip.industrialProcessing.subMod.blackSmith.plant.anvil.model.ModelAnvil;
+import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.dummy.bellows.model.ModelBellows;
+import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.dummy.ironBowl.model.ModelIronBowl;
+import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.model.ModelBloomery;
+import ip.industrialProcessing.subMod.blackSmith.plant.grindingStone.TileEntityGrindingStone;
+import ip.industrialProcessing.subMod.blackSmith.plant.grindingStone.model.ModelGrindingStone;
+import ip.industrialProcessing.subMod.blackSmith.plant.grindingStone.model.ModelGrindingStoneAnimated;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.Down;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.DownBottom;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.DownBottomCorner;
@@ -288,9 +288,6 @@ public class ClientProxy extends CommonProxy {
     private static final ModelGrindingStone modelGrindingStone = new ModelGrindingStone();
     private static final ModelGrindingStoneAnimated modelGrindingStoneAnimated = new ModelGrindingStoneAnimated();
     private static final ModelPetrolLamp modelPetrolLamp = new ModelPetrolLamp();
-    private static final ModelBellows modelBellows = new ModelBellows();
-    private static final ModelBloomery modelBloomery = new ModelBloomery();
-    private static final ModelIronBowl modelIronBowl = new ModelIronBowl();
     private static final ModelMachineBlock modelMachineBlock = new ModelMachineBlock();
     private static final ModelContainerWall modelContainerWall = new ModelContainerWall();
     private static final ModelContainer modelContainer = new ModelContainer();
@@ -362,20 +359,11 @@ public class ClientProxy extends CommonProxy {
         ConfigRenderers.setRendererPetrolLampId(RenderingRegistry.getNextAvailableRenderId());
         RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererPetrolLampId(), modelPetrolLamp));
 
-        ConfigRenderers.setRendererBellowsId(RenderingRegistry.getNextAvailableRenderId());
-        RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererBellowsId(), modelBellows));
-
-        ConfigRenderers.setRendererBloomeryId(RenderingRegistry.getNextAvailableRenderId());
-        RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererBloomeryId(), modelBloomery));
-
         ConfigRenderers.setRendererMultiblockBlastFurnaceID(RenderingRegistry.getNextAvailableRenderId());
         RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getrendererMultiblockBlastFurnaceID(), MDmultiblockBlastFurnace));
 
         ConfigRenderers.setRendererMultiblockBlastFurnaceTowerID(RenderingRegistry.getNextAvailableRenderId());
         RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getrendererMultiblockBlastFurnaceTowerID(), MDmultiblockBlastFurnaceTower));
-
-        ConfigRenderers.setRendererIronBowlId(RenderingRegistry.getNextAvailableRenderId());
-        RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererIronBowlId(), modelIronBowl));
 
         ConfigRenderers.setRendererMachineBlockId(RenderingRegistry.getNextAvailableRenderId());
         RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigRenderers.getRendererMachineBlockId(), modelMachineBlock));

@@ -23,14 +23,14 @@ public class VanillaRecipeBridge {
 		Iterator recipes = CraftingManager.getInstance().getRecipeList().iterator();
 		while (recipes.hasNext()) {
 			IRecipe recipe = (IRecipe) recipes.next();
-			Recipe ipRecipe = getRecipeFromVanilla(recipe, ItemType.vanilla);
+			Recipe ipRecipe = getRecipeFromVanilla(recipe);
 			if (ipRecipe != null)
 				ipRecipes.add(ipRecipe);
 		}
 		return ipRecipes;
 	}
 
-	public static Recipe getRecipeFromVanilla(IRecipe recipe, ItemType type) {
+	public static Recipe getRecipeFromVanilla(IRecipe recipe) {
 		Recipe ipRecipe = new Recipe();
 
 		if (recipe instanceof RecipeFireworks) {

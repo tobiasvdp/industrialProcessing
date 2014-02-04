@@ -1,7 +1,7 @@
 package ip.industrialProcessing.gui.guiContainer;
 
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.client.render.gui.ToolTip;
-import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.gui.GuiLayout;
 import ip.industrialProcessing.gui.IGuiLayout;
 import ip.industrialProcessing.gui.IGuiLayoutMultiblock;

@@ -1,7 +1,7 @@
 package ip.industrialProcessing.utils.registry;
 
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.api.rendering.wavefront.ObjMesh;
-import ip.industrialProcessing.config.INamepace;
 
 import java.util.Collection;
 import java.util.HashMap;

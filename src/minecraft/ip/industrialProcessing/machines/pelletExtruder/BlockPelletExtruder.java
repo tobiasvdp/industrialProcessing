@@ -1,10 +1,10 @@
 package ip.industrialProcessing.machines.pelletExtruder;
 
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.api.rendering.IModelBlock;
 import ip.industrialProcessing.client.render.ModelBlock;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.gui3.generating.GuiBuilderDefault;
 import ip.industrialProcessing.gui3.generating.IGuiBlock;

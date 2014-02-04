@@ -2,7 +2,7 @@ package ip.industrialProcessing.fluids;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import ip.industrialProcessing.config.INamepace;
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.config.ISetupDamageSource;
 import net.minecraft.block.material.Material;
