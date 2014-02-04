@@ -1,23 +1,23 @@
 package ip.industrialProcessing.power.plants;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.gui3.generating.GuiBuilderDefault;
 import ip.industrialProcessing.gui3.generating.IGuiBuilder;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
-public class BlockSolidBurner extends BlockBurner {
+public class BlockElectricHeater extends BlockBurner {
 
-    public static final String UNLOCALIZED_NAME = "IP.Machine.SolidBurner";
-    private static IGuiBuilder guiBuilder = new GuiBuilderDefault(UNLOCALIZED_NAME).enableBurner(-1, 0, 1);
+    public static final String UNLOCALIZED_NAME = "IP.Machine.ElectricHeater";
+    private static IGuiBuilder guiBuilder = new GuiBuilderDefault(UNLOCALIZED_NAME).enablePower(0);
 
-    public BlockSolidBurner() {
+    public BlockElectricHeater() {
         super(ConfigMachineBlocks.getSolidBurnerBlockID(), UNLOCALIZED_NAME);
     }
 
     @Override
     public String getDescription() {
-        return "Burn solid fuels to heat up the machine above";
+        return "Uses electricity to heat up the machine above";
     }
 
     @Override
@@ -27,6 +27,6 @@ public class BlockSolidBurner extends BlockBurner {
 
     @Override
     public TileEntity createNewTileEntity(World world) {
-        return new TileEntitySolidBurner();
+        return new TileEntityElectricHeater();
     }
 }

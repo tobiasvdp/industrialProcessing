@@ -1,10 +1,15 @@
 package ip.industrialProcessing.machines;
 
 public interface IPowerStorage {
-	int getStoredPower();
-	int getPowerCapacity();
-	void setStoredPower(int power);
-	void setPowerCapacity(int powerCapacity);
-	int fillPower(int amount, boolean doFill);
-	int drainPower(int amount, boolean doDrain);
+    float getStoredPower();
+
+    float getPowerCapacity();
+
+    void setStoredPower(float power);
+
+    void setPowerCapacity(float powerCapacity);
+
+    float fillPower(float amount, boolean doFill);
+
+    float drainPower(float amount, boolean doDrain);
 }

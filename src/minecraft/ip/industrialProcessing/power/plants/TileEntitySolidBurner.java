@@ -20,92 +20,92 @@ public class TileEntitySolidBurner extends TileEntityMachine implements IWorking
     private int airTime;
 
     public TileEntitySolidBurner() {
-	addStack(null, new LocalDirection[] { LocalDirection.LEFT, LocalDirection.RIGHT }, true, false);
-	addStack(null, LocalDirection.DOWN, false, true);
-	this.worker = new BurningWorker(this);
+        addStack(null, new LocalDirection[] { LocalDirection.LEFT, LocalDirection.RIGHT }, true, false);
+        addStack(null, LocalDirection.DOWN, false, true);
+        this.worker = new BurningWorker(this);
     }
 
     public boolean isBurning() {
-	return worker.isWorking();
+        return worker.isWorking();
     }
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
-	super.readFromNBT(nbt);
-	worker.readFromNBT(nbt);
+        super.readFromNBT(nbt);
+        worker.readFromNBT(nbt);
     }
 
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
-	super.writeToNBT(nbt);
-	worker.writeToNBT(nbt);
+        super.writeToNBT(nbt);
+        worker.writeToNBT(nbt);
     }
 
     @Override
     public boolean canUpdate() {
-	return true;
+        return true;
     }
 
     @Override
     public void updateEntity() {
-	super.updateEntity();
-	this.worker.doWork(1);
+        super.updateEntity();
+        this.worker.doWork(1);
     }
 
     private void increaseHeat(int heat) {
-	IHeatable boiler = getBoiler();
-	if (boiler != null) {
-	    boiler.addHeat(heat);
-	} else {
-	    if (this.worldObj.isAirBlock(xCoord, yCoord + 1, zCoord))
-		airTime += heat;
-	    else
-		airTime = 0;
+        IHeatable boiler = getBoiler();
+        if (boiler != null) {
+            boiler.addHeat(heat);
+        } else {
+            if (this.worldObj.isAirBlock(xCoord, yCoord + 1, zCoord))
+                airTime += heat;
+            else
+                airTime = 0;
 
-	    if (airTime > 5 * 20) {
-		this.worldObj.playSoundEffect(xCoord + 0.5D, yCoord + 1.5D, zCoord + 0.5D, "fire.ignite", 1.0F, 1);
-		this.worldObj.setBlock(xCoord, yCoord + 1, zCoord, Block.fire.blockID);
-	    }
-	}
+            if (airTime > 5 * 20) {
+                this.worldObj.playSoundEffect(xCoord + 0.5D, yCoord + 1.5D, zCoord + 0.5D, "fire.ignite", 1.0F, 1);
+                this.worldObj.setBlock(xCoord, yCoord + 1, zCoord, Block.fire.blockID);
+            }
+        }
     }
 
     private IHeatable getBoiler() {
-	TileEntity tile = this.worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord);
-	if (tile instanceof IHeatable)
-	    return (IHeatable) tile;
-	return null;
+        TileEntity tile = this.worldObj.getBlockTileEntity(xCoord, yCoord + 1, zCoord);
+        if (tile instanceof IHeatable)
+            return (IHeatable) tile;
+        return null;
     }
 
     @Override
     protected boolean isValidInput(int slot, int itemID) {
-	if (slot == 0) {
-	    int burnTime = TileEntityFurnace.getItemBurnTime(new ItemStack(itemID, 1, 0));
-	    return burnTime > 0;
-	}
-	return false;
+        if (slot == 0) {
+            int burnTime = TileEntityFurnace.getItemBurnTime(new ItemStack(itemID, 1, 0));
+            return burnTime > 0;
+        }
+        return false;
     }
 
     public int getRemainingBurnTime() {
-	return this.worker.getTotalWork() - this.worker.getWorkDone();
+        return this.worker.getTotalWork() - this.worker.getWorkDone();
     }
 
     public int getTotalBurnTime() {
-	return this.worker.getTotalWork();
+        return this.worker.getTotalWork();
     }
 
     @Override
     public IWorker getWorker() {
-	return this.worker;
+        return this.worker;
     }
 
     @Override
     public boolean hasWork() {
-	return true;
+        return true;
     }
 
     @Override
     public boolean canWork() {
-	return true;
+        return true;
     }
 
     @Override
@@ -122,7 +122,7 @@ public class TileEntitySolidBurner extends TileEntityMachine implements IWorking
 
     @Override
     public void workProgressed(int amount) {
-	increaseHeat(amount);
+        increaseHeat(amount);
     }
 
     @Override
@@ -131,39 +131,39 @@ public class TileEntitySolidBurner extends TileEntityMachine implements IWorking
 
     @Override
     public TileEntity getTileEntity() {
-	return this;
+        return this;
     }
 
     @Override
     public int getFuelSlot() {
-	return 0;
+        return 0;
     }
 
     @Override
     public int getAshSlot() {
-	return 1;
+        return 1;
     }
 
     @Override
     public void addToSlot(int ash, int itemID, int amount) {
-	ItemStack ashStack = getStackInSlot(ash);
-	if (ashStack == null)
-	    this.setInventorySlotContents(ash, new ItemStack(IndustrialProcessing.itemAsh, amount));
-	else if (ashStack.itemID == IndustrialProcessing.itemAsh.itemID && ashStack.stackSize <= ashStack.getMaxStackSize() - amount && ashStack.stackSize <= this.getInventoryStackLimit() - amount) {
-	    ashStack = ashStack.copy();
-	    ashStack.stackSize++;
-	    this.setInventorySlotContents(ash, ashStack);
-	}
+        ItemStack ashStack = getStackInSlot(ash);
+        if (ashStack == null)
+            this.setInventorySlotContents(ash, new ItemStack(IndustrialProcessing.itemAsh, amount));
+        else if (ashStack.itemID == IndustrialProcessing.itemAsh.itemID && ashStack.stackSize <= ashStack.getMaxStackSize() - amount && ashStack.stackSize <= this.getInventoryStackLimit() - amount) {
+            ashStack = ashStack.copy();
+            ashStack.stackSize++;
+            this.setInventorySlotContents(ash, ashStack);
+        }
     }
 
     @Override
     public int getBurnTime() {
-	return this.worker.getTotalWork() - this.worker.getWorkDone();
+        return this.worker.getTotalWork() - this.worker.getWorkDone();
     }
 
     @Override
     public int getMaxBurnTime() {
-	return this.worker.getTotalWork();
+        return this.worker.getTotalWork();
     }
 
 }
