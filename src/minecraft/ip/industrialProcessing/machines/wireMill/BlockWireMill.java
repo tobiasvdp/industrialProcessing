@@ -3,6 +3,7 @@ package ip.industrialProcessing.machines.wireMill;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
+import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
 import ip.industrialProcessing.gui3.generating.GuiBuilderDefault;
 import ip.industrialProcessing.gui3.generating.IGuiBlock;
 import ip.industrialProcessing.gui3.generating.IGuiBuilder;
@@ -18,7 +19,8 @@ import net.minecraft.world.World;
 public class BlockWireMill extends BlockMachineRendered implements IRecipeBlock, IDescriptionBlock, IGuiBlock {
 
     public static final String UNLOCALIZED_NAME = "IP.Machine.WireMill";
-    private static IGuiBuilder guiBuilder = new GuiBuilderDefault(UNLOCALIZED_NAME).addOutputTank(0, 0, 1);
+    private static final TextureReference WORKER_TEXTURE = TextureReference.createDefault(UNLOCALIZED_NAME, 24, 32);
+    public static IGuiBuilder guiBuilder = new GuiBuilderDefault(UNLOCALIZED_NAME).addInputSlot(0).addOutputSlot(1).enablePower(2).enableWorker(WORKER_TEXTURE);
 
     public BlockWireMill() {
 	super(ConfigMachineBlocks.getWireMillBlockID(), Material.iron, 1F, Block.soundMetalFootstep, UNLOCALIZED_NAME, ISetupCreativeTabs.tabOreProcessing);

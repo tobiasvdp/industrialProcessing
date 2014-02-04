@@ -161,6 +161,7 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
 
 		// register the gui handler
 		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
+		LanguageRegistry.instance().addStringLocalization("IP.Gui.Work", "en_US", "Progress");
 
 		// register creative tabs
 		ConfigCreativeTabs.getInstance().addToLanguageRegistry();

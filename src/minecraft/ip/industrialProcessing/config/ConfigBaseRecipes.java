@@ -59,8 +59,8 @@ public class ConfigBaseRecipes {
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemElectroMagnet), new ItemStack(ISetupItems.itemIronBar), new ItemStack(ISetupItems.itemCopperCoil));
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemCopperCoil), new ItemStack(ISetupItems.itemThickStick), new ItemStack(ISetupItems.itemCopperWireInsulated));
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemCopperWireInsulated), new ItemStack(ISetupFluids.bucketFluidLatex, 1, WILDCARD_VALUE), new ItemStack(ISetupItems.itemCopperWire));
-		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemCopperWire), new ItemStack(ISetupItems.itemCopperIngot), new ItemStack(ISetupItems.itemDrawPlate, 1, WILDCARD_VALUE));
-		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemSolderAlloyWire), new ItemStack(ISetupItems.itemSolderAlloyIngot), new ItemStack(ISetupItems.itemDrawPlate, 1, WILDCARD_VALUE));
+		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemCopperWire,2), new ItemStack(ISetupItems.itemCopperIngot), new ItemStack(ISetupItems.itemDrawPlate, 1, WILDCARD_VALUE));
+		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemSolderAlloyWire,2), new ItemStack(ISetupItems.itemSolderAlloyIngot), new ItemStack(ISetupItems.itemDrawPlate, 1, WILDCARD_VALUE));
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemActiveCoal), new ItemStack(ISetupItems.itemCoalDust), new ItemStack(ISetupItems.itemGrownCulture));
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemSandCast), new ItemStack(ISetupItems.itemCastingMulsh), new ItemStack(ISetupItems.itemFlask));
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemnhardenedIsolationBoard), new ItemStack(ISetupFluids.bucketResin), new ItemStack(ISetupItems.itemFiberGlass));
