@@ -4,6 +4,7 @@ import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.syncing.info.InfoPower;
 import ip.industrialProcessing.machines.IPowerStorage;
 
+@Deprecated
 public class HandlerPower implements IHandlerPower {
     private IPowerStorage power;
     private InfoPower prevInfo;
@@ -23,9 +24,9 @@ public class HandlerPower implements IHandlerPower {
     public int getValue(int i) {
         switch (i) {
         case 0:
-            return this.power.getStoredPower();
+            return (int) this.power.getStoredPower();
         case 1:
-            return this.power.getPowerCapacity();
+            return (int) this.power.getPowerCapacity();
         }
         return 0;
     }
@@ -69,8 +70,8 @@ public class HandlerPower implements IHandlerPower {
 
     @Override
     public void newToOldValues() {
-        prevInfo.powerCapacity = power.getPowerCapacity();
-        prevInfo.storedPower = power.getStoredPower();
+        prevInfo.powerCapacity = (int) power.getPowerCapacity();
+        prevInfo.storedPower = (int) power.getStoredPower();
     }
 
     @Override
@@ -84,7 +85,7 @@ public class HandlerPower implements IHandlerPower {
     }
 
     @Override
-    public InfoPower getInfo() { 
+    public InfoPower getInfo() {
         return prevInfo;
     }
 }

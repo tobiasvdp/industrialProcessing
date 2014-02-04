@@ -88,6 +88,8 @@ import ip.industrialProcessing.power.manualGenerator.BlockManualGenerator;
 import ip.industrialProcessing.power.meters.BlockVoltMeter;
 import ip.industrialProcessing.power.motor.BlockElectroMotor;
 import ip.industrialProcessing.power.plants.BlockBoiler;
+import ip.industrialProcessing.power.plants.BlockElectricHeater;
+import ip.industrialProcessing.power.plants.BlockFuelBurner;
 import ip.industrialProcessing.power.plants.BlockGenerator;
 import ip.industrialProcessing.power.plants.BlockSolidBurner;
 import ip.industrialProcessing.power.plants.BlockTurbine;
@@ -170,14 +172,16 @@ public interface ISetupMachineBlocks {
     public final static BlockPetrolLamp blockPetrolLamp = new BlockPetrolLamp();
     public final static BlockElectricLamp blockElectricLamp = new BlockElectricLamp();
     public final static BlockElectroMotor blockElectroMotor = new BlockElectroMotor();
-    
+
     // create wires
     public final static BlockWire blockWire = new BlockWire();
     public final static BlockWireWood blockWireWood = new BlockWireWood();
     public final static BlockWireStone blockWireStone = new BlockWireStone();
-    public final static BlockVoltMeter blockVoltMeter = new BlockVoltMeter(); 
+    public final static BlockVoltMeter blockVoltMeter = new BlockVoltMeter();
     public final static BlockEnergyCell blockEnergyCell = new BlockEnergyCell();
     public final static BlockSolidBurner blockSolidBurner = new BlockSolidBurner();
+    public final static BlockFuelBurner blockFuelBurner = new BlockFuelBurner();
+    public final static BlockElectricHeater blockElectricHeater = new BlockElectricHeater();
     public final static BlockBoiler blockBoiler = new BlockBoiler();
     public final static BlockTurbine blockTurbine = new BlockTurbine();
 
@@ -217,15 +221,15 @@ public interface ISetupMachineBlocks {
     public final static BlockCatalyticReformer blockCatalyticReformer = new BlockCatalyticReformer();
     public final static BlockClausSulfurPlant blockClausSulfurPlant = new BlockClausSulfurPlant();
     public final static BlockDelayedCoker blockDelayedCoker = new BlockDelayedCoker();
-    public final static BlockFluidCatalyticCracker blockFluidCatalyticCracker = new  BlockFluidCatalyticCracker();
+    public final static BlockFluidCatalyticCracker blockFluidCatalyticCracker = new BlockFluidCatalyticCracker();
     public final static BlockHydroCracker blockHydroCracker = new BlockHydroCracker();
     public final static BlockHydroTreater blockHydroTreater = new BlockHydroTreater();
     public final static BlockMeroxTreater blockMeroxTreater = new BlockMeroxTreater();
     public final static BlockVacuumDestilationTower blockVacuumDestilationTower = new BlockVacuumDestilationTower();
     public final static BlockContainer blockContainer = new BlockContainer();
     public final static BlockContainerWall blockContainerWall = new BlockContainerWall();
-    public final static BlockSolderingStation blockSolderingStation = new BlockSolderingStation(); 
-    
+    public final static BlockSolderingStation blockSolderingStation = new BlockSolderingStation();
+
     // transport
     public final static BlockConveyorBelt blockConveyorBelt = new BlockConveyorBelt();
     public final static BlockConveyorInput blockConveyorBeltInput = new BlockConveyorInput();
@@ -234,7 +238,7 @@ public interface ISetupMachineBlocks {
     public final static BlockConveyorChute blockConveyorChute = new BlockConveyorChute();
     public final static BlockConveyorBeltPowerInput blockConveyorBeltPowerInput = new BlockConveyorBeltPowerInput();
     public final static BlockConveyorPacker blockConveyorPacker = new BlockConveyorPacker();
-    
+
     public final static BlockManualTreeTap blockManualTreetap = new BlockManualTreeTap();
     public final static BlockAutomaticTreeTap blockAutomaticTreetap = new BlockAutomaticTreeTap();
 }

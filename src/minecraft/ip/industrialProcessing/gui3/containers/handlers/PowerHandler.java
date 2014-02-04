@@ -7,18 +7,18 @@ public class PowerHandler extends ProgressHandlerBase {
 
     private IPoweredMachine machine;
 
-    public PowerHandler(IPoweredMachine machine) { 
-	super(1);
-	this.machine = machine;
+    public PowerHandler(IPoweredMachine machine) {
+        super(100f);
+        this.machine = machine;
     }
 
     @Override
     public void readFromEntity() {
-	IPowerStorage storage =  machine.getMainPowerStorage();
-	
-	int value = storage.getStoredPower();
-	int max = storage.getPowerCapacity();
-	
-	this.setValues(value, max);
-    } 
+        IPowerStorage storage = machine.getMainPowerStorage();
+
+        int value = (int) storage.getStoredPower();
+        int max = (int) storage.getPowerCapacity();
+
+        this.setValues(value, max);
+    }
 }

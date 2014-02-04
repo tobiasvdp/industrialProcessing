@@ -26,86 +26,86 @@ public class TileEntityElectroMotor extends TileEntityMachine implements IPowerA
 
     private IMechanicalMotion getGenerator(ForgeDirection dir) {
 
-	TileEntity entity = this.worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
-	if (entity instanceof IMechanicalMotion)
-	    return (IMechanicalMotion) entity;
-	return null;
+        TileEntity entity = this.worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+        if (entity instanceof IMechanicalMotion)
+            return (IMechanicalMotion) entity;
+        return null;
     }
 
-    private void addEnergy(int waterFill) {
-	float speed = this.animationHandler.getSpeed();
-	speed += waterFill * AnimationHandler.DT / 500;
-	speed -= speed * DRAG * AnimationHandler.DT;
-	this.animationHandler.setSpeed(speed);
+    private void addEnergy(float waterFill) {
+        float speed = this.animationHandler.getSpeed();
+        speed += waterFill * AnimationHandler.DT / 500;
+        speed -= speed * DRAG * AnimationHandler.DT;
+        this.animationHandler.setSpeed(speed);
     }
 
     @Override
     public void updateEntity() {
 
-	if (!this.worldObj.isRemote) {
-	    this.lastVoltage = this.voltage;
-	    this.voltage = 0f;
-	    int drain = this.storage.drainPower(100, true);
-	    addEnergy(drain * 20); // a lil more efficient
+        if (!this.worldObj.isRemote) {
+            this.lastVoltage = this.voltage;
+            this.voltage = 0f;
+            float drain = this.storage.drainPower(100, true);
+            addEnergy(drain * 20); // a lil more efficient
 
-	    TileAnimationSyncHandler.sendAnimationData(this, this.animationHandler);
+            TileAnimationSyncHandler.sendAnimationData(this, this.animationHandler);
 
-	    ForgeDirection generatorDirection = DirectionUtils.getWorldDirection(motionOutputDirection, this.getForwardDirection());
-	    IMechanicalMotion generator = getGenerator(generatorDirection.getOpposite());
-	    if (generator != null) {
-		float speed = this.animationHandler.getSpeed();
-		float resistance = generator.setSpeed(generatorDirection, speed);
-		speed -= speed * resistance * AnimationHandler.DT;
-		this.animationHandler.setSpeed(speed);
-	    }
-	}
-	this.animationHandler.update();
+            ForgeDirection generatorDirection = DirectionUtils.getWorldDirection(motionOutputDirection, this.getForwardDirection());
+            IMechanicalMotion generator = getGenerator(generatorDirection.getOpposite());
+            if (generator != null) {
+                float speed = this.animationHandler.getSpeed();
+                float resistance = generator.setSpeed(generatorDirection, speed);
+                speed -= speed * resistance * AnimationHandler.DT;
+                this.animationHandler.setSpeed(speed);
+            }
+        }
+        this.animationHandler.update();
     }
 
     @Override
     protected boolean isValidInput(int slot, int itemID) {
-	return false;
+        return false;
     }
 
     @Override
     public float getResistance(ForgeDirection side, float voltage) {
-	return PowerHelper.getResistanceForStorage(storage);
+        return PowerHelper.getResistanceForStorage(storage);
     }
 
     @Override
     public void applyPower(ForgeDirection side, float coulombs, float voltage) {
-	if (canAcceptPower(side)) {
-	    int joules = (int) PowerHelper.getEnergy(coulombs, voltage);
-	    this.storage.fillPower(joules, true);
-	    this.voltage += voltage;
-	}
+        if (canAcceptPower(side)) {
+            int joules = (int) PowerHelper.getEnergy(coulombs, voltage);
+            this.storage.fillPower(joules, true);
+            this.voltage += voltage;
+        }
     }
 
     @Override
     public boolean canAcceptPower(ForgeDirection side) {
-	return this.powerInputSide == DirectionUtils.getLocalDirection(side, getForwardDirection());
+        return this.powerInputSide == DirectionUtils.getLocalDirection(side, getForwardDirection());
     }
 
     @Override
     public float getProgress(int index) {
-	switch (index) {
-	case 0:
-	    return this.lastVoltage;
-	case 1:
-	    return this.animationHandler.getSpeed();
-	}
-	return 0;
+        switch (index) {
+        case 0:
+            return this.lastVoltage;
+        case 1:
+            return this.animationHandler.getSpeed();
+        }
+        return 0;
     }
 
     @Override
     public float getMaxProgress(int index) {
-	switch (index) {
-	case 0:
-	    return 250;
-	case 1:
-	    return this.animationHandler.getScale();
-	}
-	return 0;
+        switch (index) {
+        case 0:
+            return 250;
+        case 1:
+            return this.animationHandler.getScale();
+        }
+        return 0;
     }
 
 }

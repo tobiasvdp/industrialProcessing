@@ -1,9 +1,7 @@
 package ip.industrialProcessing.gui3.containers;
 
 import ip.industrialProcessing.gui3.containers.handlers.IContainerHandler;
-import ip.industrialProcessing.gui3.containers.handlers.TankHandler;
 import ip.industrialProcessing.utils.containers.IContainerAdd;
-import ip.industrialProcessing.utils.containers.VerifyingContainer;
 
 import java.util.ArrayList;
 
@@ -15,7 +13,7 @@ import net.minecraft.item.ItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class LayoutContainer extends VerifyingContainer implements IContainerAdd {
+public class LayoutContainer extends ShiftContainer implements IContainerAdd {
 
     private ArrayList<IContainerHandler> handlers = new ArrayList<IContainerHandler>();
     private ArrayList<Integer> handlerLookup = new ArrayList<Integer>();
