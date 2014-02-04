@@ -12,7 +12,7 @@ public class BlockFuelBurner extends BlockBurner {
     private static IGuiBuilder guiBuilder = new GuiBuilderDefault(UNLOCALIZED_NAME).addInputTank(0, 0, 1);
 
     public BlockFuelBurner() {
-        super(ConfigMachineBlocks.getSolidBurnerBlockID(), UNLOCALIZED_NAME);
+        super(ConfigMachineBlocks.getFuelBurnerBlockID(), UNLOCALIZED_NAME);
     }
 
     @Override

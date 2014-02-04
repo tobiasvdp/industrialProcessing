@@ -12,6 +12,7 @@ import ip.industrialProcessing.gui3.generating.IGuiBuilder;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.power.plants.models.solidBurner.ModelSolidBurnerBlock;
 import ip.industrialProcessing.utils.IDescriptionBlock;
+import ip.industrialProcessing.utils.handler.fuel.IBurner;
 
 import java.util.Random;
 
@@ -29,7 +30,7 @@ public abstract class BlockBurner extends BlockMachineRendered implements IDescr
     private Icon[] icons = new Icon[3];
 
     protected BlockBurner(int id, String name) {
-        super(ConfigMachineBlocks.getSolidBurnerBlockID(), Material.iron, 1F, Block.soundMetalFootstep, name, ISetupCreativeTabs.tabPower);
+        super(id, Material.iron, 1F, Block.soundMetalFootstep, name, ISetupCreativeTabs.tabPower);
     }
 
     @Override
@@ -48,8 +49,8 @@ public abstract class BlockBurner extends BlockMachineRendered implements IDescr
      * A randomly called display update to be able to add particles or other items for display
      */
     public void randomDisplayTick(World par1World, int par2, int par3, int par4, Random par5Random) {
-        TileEntitySolidBurner burner = (TileEntitySolidBurner) par1World.getBlockTileEntity(par2, par3, par4);
-        if (burner.isBurning()) {
+        IBurner burner = (IBurner) par1World.getBlockTileEntity(par2, par3, par4);
+        if (burner.getBurnTime() > 0) {
             float f = par2 + 0.5F;
             float f1 = par3 + 0.0F + par5Random.nextFloat() * 6.0F / 16.0F;
             float f2 = par4 + 0.5F;

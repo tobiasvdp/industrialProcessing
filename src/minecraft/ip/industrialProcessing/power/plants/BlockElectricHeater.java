@@ -12,7 +12,7 @@ public class BlockElectricHeater extends BlockBurner {
     private static IGuiBuilder guiBuilder = new GuiBuilderDefault(UNLOCALIZED_NAME).enablePower(0);
 
     public BlockElectricHeater() {
-        super(ConfigMachineBlocks.getSolidBurnerBlockID(), UNLOCALIZED_NAME);
+        super(ConfigMachineBlocks.getElectricHeaterBlockID(), UNLOCALIZED_NAME);
     }
 
     @Override
