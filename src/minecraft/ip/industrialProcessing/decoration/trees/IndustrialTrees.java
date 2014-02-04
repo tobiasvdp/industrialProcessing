@@ -10,7 +10,7 @@ public class IndustrialTrees {
     private static String[] textures = new String[] { "rubber", "pine" };
     private static int[] colors = new int[] { 0xffffff, 0x4e6904 };
     private static float[] slopes = new float[] { 1.5f, 2.5f };
-    private static int[] minHeight = new int[] { 3, 5 };
+    private static int[] minHeight = new int[] { 4, 6 };
     private static int[] maxHeight = new int[] { 8, 15 };
 
     public static String getName(int index) {

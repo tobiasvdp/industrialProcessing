@@ -4,10 +4,10 @@ import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.gui.GuiLayout;
-import ip.industrialProcessing.gui.IGuiLayout;
-import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
-import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
+import ip.industrialProcessing.gui3.framework.panels.Orientation;
+import ip.industrialProcessing.gui3.generating.GuiBuilderDefault;
+import ip.industrialProcessing.gui3.generating.IGuiBlock;
+import ip.industrialProcessing.gui3.generating.IGuiBuilder;
 import ip.industrialProcessing.power.BlockPowerGenerator;
 import ip.industrialProcessing.utils.IDescriptionBlock;
 import net.minecraft.block.Block;
@@ -17,18 +17,15 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
-public class BlockEnergyCell extends BlockPowerGenerator implements IDescriptionBlock, IGuiLayout {
+public class BlockEnergyCell extends BlockPowerGenerator implements IDescriptionBlock, IGuiBlock {
 
-    private static GuiLayout guiLayout;
-    static {
-        guiLayout = new GuiLayout();
-        guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 9);
-        guiLayout.addLayoutPanel(GuiLayoutPanelType.power);
-    }
+    public static final String UNLOCALIZED_NAME = "IP.Machine.EnergyCel";
+    private static IGuiBuilder guiLayout = new GuiBuilderDefault(UNLOCALIZED_NAME).enablePower(9).addInputSlotCluster(0, 9, 3, Orientation.HORIZONTAL);
+
     Icon[] icons = new Icon[4];
 
     public BlockEnergyCell() {
-        super(ConfigMachineBlocks.getEnergyCellBlockID(), Material.iron, 1F, Block.soundMetalFootstep, "Energy Cell", ISetupCreativeTabs.tabPower);
+        super(ConfigMachineBlocks.getEnergyCellBlockID(), Material.iron, 1F, Block.soundMetalFootstep, UNLOCALIZED_NAME, ISetupCreativeTabs.tabPower);
         this.setBlockBounds(0, 0, 0, 1, 13 / 16f, 1);
     }
 
@@ -56,7 +53,7 @@ public class BlockEnergyCell extends BlockPowerGenerator implements IDescription
     }
 
     @Override
-    public GuiLayout getGuiLayout() {
+    public IGuiBuilder getGui() {
         return guiLayout;
     }
 

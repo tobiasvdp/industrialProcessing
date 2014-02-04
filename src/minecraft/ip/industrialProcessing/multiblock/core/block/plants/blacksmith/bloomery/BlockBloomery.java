@@ -33,7 +33,7 @@ public class BlockBloomery extends BlockMultiblockCore implements IRecipeBlock, 
     public static IGuiBuilder[] guiBuilders = new IGuiBuilder[2];
     static {
 	guiBuilders[0] = new GuiBuilderDefault("Bloomery").addInputSlot(0).addOutputSlot(1).enableBurner(-1, 3, -1).enableThermometer().enableDurability().enableWorker();
-	guiBuilders[1] = new GuiBuilderDefault("Bloomery").addInputSlot(0).addOutputSlot(1).enableBurner(-1, 3, -1).addInputSlotCluster(4, 2, 2, Orientation.VERTICAL).enableThermometer().enableDurability().enableWorker();
+	guiBuilders[1] = new GuiBuilderDefault("Bloomery").addInputSlot(0).addOutputSlot(1).enableBurner(-1, 3, -1).addInputSlotCluster(4, 2, 1, Orientation.VERTICAL).enableThermometer().enableDurability().enableWorker();
     }
 
     private Icon[] icons = new Icon[1];
