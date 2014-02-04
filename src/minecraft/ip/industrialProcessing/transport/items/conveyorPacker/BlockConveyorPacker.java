@@ -31,7 +31,7 @@ public class BlockConveyorPacker extends BlockConveyorMachineBase implements IDe
 
     public BlockConveyorPacker() {
 	super(ConfigMachineBlocks.getBLtransportConveyorBeltPacker(), Material.iron, 5.0f, Block.soundMetalFootstep, "Packer", ISetupCreativeTabs.tabPower);
-	func_111022_d(null);
+	setTextureName(null);
 	setBlockBounds(0, 0, 0, 1, 1, 1);
     }
 

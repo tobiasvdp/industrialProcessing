@@ -322,14 +322,14 @@ public class TileEntityTank extends TileEntityMachine implements IMachineContain
 
     public void showDebug(EntityPlayer player) {
 	if (!this.worldObj.isRemote) {
-	    player.sendChatToPlayer(ChatMessageComponent.func_111066_d("TanksAbove:" + this.tanksAbove));
-	    player.sendChatToPlayer(ChatMessageComponent.func_111066_d("TanksBelow:" + this.tanksBelow));
-	    player.sendChatToPlayer(ChatMessageComponent.func_111066_d("TanksInStack:" + this.tanksInStack));
-	    player.sendChatToPlayer(ChatMessageComponent.func_111066_d("TankForward:" + this.forward));
-	    player.sendChatToPlayer(ChatMessageComponent.func_111066_d("Tank:" + this.xCoord + " " + this.yCoord + " " + this.zCoord));
+	    player.sendChatToPlayer(ChatMessageComponent.createFromText("TanksAbove:" + this.tanksAbove));
+	    player.sendChatToPlayer(ChatMessageComponent.createFromText("TanksBelow:" + this.tanksBelow));
+	    player.sendChatToPlayer(ChatMessageComponent.createFromText("TanksInStack:" + this.tanksInStack));
+	    player.sendChatToPlayer(ChatMessageComponent.createFromText("TankForward:" + this.forward));
+	    player.sendChatToPlayer(ChatMessageComponent.createFromText("Tank:" + this.xCoord + " " + this.yCoord + " " + this.zCoord));
 
 	    for (int i = 0; i < states.length; i++) {
-		player.sendChatToPlayer(ChatMessageComponent.func_111066_d(ForgeDirection.getOrientation(i) + "=" + this.states[i]));
+		player.sendChatToPlayer(ChatMessageComponent.createFromText(ForgeDirection.getOrientation(i) + "=" + this.states[i]));
 	    }
 	}
     }

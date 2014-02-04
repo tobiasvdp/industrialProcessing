@@ -46,16 +46,6 @@ public class ModelClassifier extends ModelAnimatedFluidMachine {
 	Icon icon = new Icon() {
 
 	    @Override
-	    public int getOriginY() {
-		return 0;
-	    }
-
-	    @Override
-	    public int getOriginX() {
-		return 0;
-	    }
-
-	    @Override
 	    public float getMinV() {
 		return 0;
 	    }
@@ -89,6 +79,18 @@ public class ModelClassifier extends ModelAnimatedFluidMachine {
 	    public String getIconName() {
 		return "Booh";
 	    }
+
+		@Override
+		public int getIconWidth() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public int getIconHeight() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
 	};
 	float progress = 0;
 	if (progressAr != null && progressAr.length > 0)

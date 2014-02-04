@@ -13,7 +13,7 @@ public class ItemIP extends Item {
 		setMaxStackSize(64);
 		setCreativeTab(tab);
 		setUnlocalizedName(name);
-		func_111206_d(INamepace.TEXTURE_NAME_PREFIX + name);
+		setTextureName(INamepace.TEXTURE_NAME_PREFIX + name);
 		ItemRegistry.RegisterItem(this, ItemType.item);
 	}
 	
@@ -22,7 +22,7 @@ public class ItemIP extends Item {
 		setMaxStackSize(64);
 		setCreativeTab(tab);
 		setUnlocalizedName(name);
-		func_111206_d(INamepace.TEXTURE_NAME_PREFIX + name);
+		setTextureName(INamepace.TEXTURE_NAME_PREFIX + name);
 		ItemRegistry.RegisterItem(this, type);
 	}
 

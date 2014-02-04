@@ -21,7 +21,7 @@ public class TileEntitySynced extends TileEntity implements IGuiLayoutTriggerAcc
 
 	@Override
 	public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
-		readFromNBT(packet.customParam1);
+		readFromNBT(packet.data);
 		this.worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 	}
 

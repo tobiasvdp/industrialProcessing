@@ -14,7 +14,7 @@ public abstract class BlockDecoration extends Block {
 		setStepSound(stepSound);
 		setUnlocalizedName(name);
 		setCreativeTab(tab);
-		func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "inputTop");
+		setTextureName(INamepace.TEXTURE_NAME_PREFIX + "inputTop");
 	}
 
 	@Override

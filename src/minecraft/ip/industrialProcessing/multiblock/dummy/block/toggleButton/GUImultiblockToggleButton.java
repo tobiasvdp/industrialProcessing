@@ -54,7 +54,7 @@ public class GUImultiblockToggleButton extends GuiScreen {
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
 
-		mc.renderEngine.func_110577_a(this.textureLocation);
+		mc.renderEngine.bindTexture(this.textureLocation);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 		

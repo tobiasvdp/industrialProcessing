@@ -148,8 +148,8 @@ public class GuiLogicDisplay extends GuiScreen {
 		if (font == null) {
 			font = this.fontRenderer;
 		}
-		itemRenderer.renderItemAndEffectIntoGUI(font, this.mc.func_110434_K(), par1ItemStack, par2, par3);
-		itemRenderer.renderItemOverlayIntoGUI(font, this.mc.func_110434_K(), par1ItemStack, par2, par3 - (this.draggedStack == null ? 0 : 8), par4Str);
+		itemRenderer.renderItemAndEffectIntoGUI(font, this.mc.getTextureManager(), par1ItemStack, par2, par3);
+		itemRenderer.renderItemOverlayIntoGUI(font, this.mc.getTextureManager(), par1ItemStack, par2, par3 - (this.draggedStack == null ? 0 : 8), par4Str);
 		this.zLevel = 0.0F;
 		itemRenderer.zLevel = 0.0F;
 		RenderHelper.disableStandardItemLighting();
@@ -187,7 +187,7 @@ public class GuiLogicDisplay extends GuiScreen {
 					switch (type) {
 					case inventory:
 						this.requestData(this.activeNode, UTVariableType.slot);
-						this.mc.renderEngine.func_110577_a(this.textureLocation);
+						this.mc.renderEngine.bindTexture(this.textureLocation);
 						for (int i = 0; i < machine.slots.size(); i++) {
 							InfoSlot slot = machine.slots.get(i);
 							if (slot.input) {
@@ -208,7 +208,7 @@ public class GuiLogicDisplay extends GuiScreen {
 						// drawGradientRect(x + 172, y + 40, x + 188, y + 110,
 						// color5.getRGB(), color6.getRGB());
 						int size = machine.power.storedPower * 70 / machine.power.powerCapacity;
-						this.mc.renderEngine.func_110577_a(this.textureLocation);
+						this.mc.renderEngine.bindTexture(this.textureLocation);
 						this.drawColoredTexturedModalRect(x + 172, y + 110 - size, 15, 70 - size, 15, size, 255, 255, 255);
 						this.fontRenderer.drawString("Power: ", x + 20, y + 45, 4210752);
 						this.fontRenderer.drawString(machine.power.storedPower + "", x + 60, y + 45, 4210752);
@@ -225,7 +225,7 @@ public class GuiLogicDisplay extends GuiScreen {
 						this.fontRenderer.drawString("Work: ", x + 20, y + 55, 4210752);
 						this.fontRenderer.drawString(machine.worker.workDone + "", x + 60, y + 55, 4210752);
 						this.fontRenderer.drawString("/" + machine.worker.totalWork, x + 90, y + 55, 4210752);
-						this.mc.renderEngine.func_110577_a(this.textureLocation);
+						this.mc.renderEngine.bindTexture(this.textureLocation);
 						Tessellator.instance.setColorOpaque(255, 0, 0);
 						this.drawColoredTexturedModalRect(this.width / 2 - 22, y + 140, 30, 0, 44, 25, 255, 255, 255);
 						this.drawColoredTexturedModalRect(this.width / 2 - 22, y + 140, 30, 25, 44 * machine.worker.workDone / machine.worker.totalWork, 25, 255, 255, 255);
@@ -309,7 +309,7 @@ public class GuiLogicDisplay extends GuiScreen {
 			this.delaySyncData = 0;
 		}
 		this.drawDefaultBackground();
-		this.mc.renderEngine.func_110577_a(this.textureLocation);
+		this.mc.renderEngine.bindTexture(this.textureLocation);
 		RenderHelper.disableStandardItemLighting();
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		GL11.glPushMatrix();

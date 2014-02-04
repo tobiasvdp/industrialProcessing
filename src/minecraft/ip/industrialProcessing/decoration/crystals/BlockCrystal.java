@@ -13,7 +13,7 @@ public class BlockCrystal extends BlockDecoration {
 	public BlockCrystal(int id, String name, CreativeTabs tab, String texture) {
 		super(id, Material.glass, 1f, Block.soundGlassFootstep, name, ISetupCreativeTabs.tabOreProcessing);
 		this.setBlockBounds(0, 0, 0, 1, 1, 1);
-		func_111022_d(INamepace.TEXTURE_NAME_PREFIX + texture);
+		setTextureName(INamepace.TEXTURE_NAME_PREFIX + texture);
 		setBlockBounds(0.25f, 0, 0.25f, 0.75f, 0.5f, 0.75f);
 	}
 

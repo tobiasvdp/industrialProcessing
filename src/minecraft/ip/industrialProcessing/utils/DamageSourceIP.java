@@ -17,7 +17,7 @@ public class DamageSourceIP extends DamageSource{
 		EntityLivingBase entitylivingbase1 = par1EntityLivingBase.func_94060_bK();
         String s = "death.attack." + this.damageType;
         String s1 = s + ".player";
-        return entitylivingbase1 != null && StatCollector.func_94522_b(s1) ? ChatMessageComponent.func_111082_b(s1, new Object[] {par1EntityLivingBase.getTranslatedEntityName(), entitylivingbase1.getTranslatedEntityName()}): ChatMessageComponent.func_111082_b(s, new Object[] {par1EntityLivingBase.getTranslatedEntityName()});
+        return entitylivingbase1 != null && StatCollector.func_94522_b(s1) ? ChatMessageComponent.createFromTranslationWithSubstitutions(s1, new Object[] {par1EntityLivingBase.getTranslatedEntityName(), entitylivingbase1.getTranslatedEntityName()}): ChatMessageComponent.createFromTranslationWithSubstitutions(s, new Object[] {par1EntityLivingBase.getTranslatedEntityName()});
     }
 	
 	public static EntityDamageSourceIndirect causeDamage(Entity par0Entity, Entity par1Entity)

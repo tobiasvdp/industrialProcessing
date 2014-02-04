@@ -17,15 +17,15 @@ public class RendererLivingEntity extends RenderLiving{
 		this.model = (ModelingMultiblock) model;
 		this.par = par;
 	}
-
-	@Override
-	protected ResourceLocation func_110775_a(Entity entity) {
-		return texture;
-	}
 	
 	@Override
     public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
     {
         this.doRenderLiving((EntityLiving)par1Entity, par2, par4, par6, par8, par9);
     }
+
+	@Override
+	protected ResourceLocation getEntityTexture(Entity entity) {
+		return texture;
+	}
 }

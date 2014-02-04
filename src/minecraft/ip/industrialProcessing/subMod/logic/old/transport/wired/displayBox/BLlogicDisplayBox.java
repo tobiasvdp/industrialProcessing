@@ -21,7 +21,7 @@ public class BLlogicDisplayBox extends BlockContainer {
 		this.setStepSound(Block.soundMetalFootstep);
 		this.setUnlocalizedName("BLlogicDisplayBox");
 		this.setCreativeTab(IPLogic.tabLogic);
-		this.func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "inputTop");
+		this.setTextureName(INamepace.TEXTURE_NAME_PREFIX + "inputTop");
 	}
 
 	@Override

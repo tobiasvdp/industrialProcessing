@@ -36,7 +36,7 @@ public class GuiRenderer {
 	int x = (int) (where.x + (where.width - 16) / 2);
 	int y = (int) (where.y + (where.height - 16) / 2);
 
-	TextureManager textureManager = mc.func_110434_K();
+	TextureManager textureManager = mc.getTextureManager();
 
 	FontRenderer font = null;
 	if (stack != null) {
@@ -94,7 +94,7 @@ public class GuiRenderer {
 	y[2] = where.y + where.height - thickness.bottom;
 	y[3] = where.y + where.height;
 
-	mc.renderEngine.func_110577_a(texture.resource);
+	mc.renderEngine.bindTexture(texture.resource);
 	tessellator.startDrawingQuads();
 	int minI = thickness.left == 0 ? 1 : 0;
 	int maxI = thickness.right == 0 ? 2 : 3;
@@ -123,7 +123,7 @@ public class GuiRenderer {
 	float y0 = where.y;
 	float y1 = where.y + where.height;
 
-	mc.renderEngine.func_110577_a(texture);
+	mc.renderEngine.bindTexture(texture);
 	tessellator.startDrawingQuads();
 	tessellator.addVertexWithUV(x0, y1, 0, u0, v1);
 	tessellator.addVertexWithUV(x1, y1, 0, u1, v1);

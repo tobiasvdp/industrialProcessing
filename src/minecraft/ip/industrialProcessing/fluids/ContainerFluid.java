@@ -23,7 +23,7 @@ public class ContainerFluid extends ItemBucket implements IFluidContainerItem {
 		this.capacity = capacity;
 		ContainerHandler.containers.put(block, this);
 		ItemRegistry.RegisterItem(this, ItemType.fluid);
-		func_111206_d(INamepace.TEXTURE_NAME_PREFIX + texture);
+		setTextureName(INamepace.TEXTURE_NAME_PREFIX + texture);
 	}
 
 	@Override

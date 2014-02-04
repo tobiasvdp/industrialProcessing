@@ -20,7 +20,7 @@ public class ItemIPBucket extends ItemBucket {
 	setCreativeTab(ISetupCreativeTabs.tabFluid);
 	ItemRegistry.RegisterItem(this, ItemType.fluid);
 	BucketHandler.INSTANCE.put(block, this);
-	func_111206_d(INamepace.TEXTURE_NAME_PREFIX + texture);
+	setTextureName(INamepace.TEXTURE_NAME_PREFIX + texture);
     } 
  
     @Override

@@ -42,12 +42,12 @@ public class ItemRemote extends ItemIP implements IRemote {
 			if (tileEntity instanceof ISender) {
 				ISender sender = (ISender) tileEntity;
 				if (sender.sendTileEntity(this, par1ItemStack) && par3World.isRemote)
-					par2EntityPlayer.sendChatToPlayer(new ChatMessageComponent().func_111059_a(EnumChatFormatting.YELLOW).func_111079_a("Pairing data for TileEntity received."));
+					par2EntityPlayer.sendChatToPlayer(new ChatMessageComponent().setColor(EnumChatFormatting.YELLOW).addText("Pairing data for TileEntity received."));
 			}
 			if (tileEntity instanceof IReceiver) {
 				IReceiver receiver = (IReceiver) tileEntity;
 				if (receiver.receiveTileEntity(this, par1ItemStack) && par3World.isRemote)
-					par2EntityPlayer.sendChatToPlayer(new ChatMessageComponent().func_111059_a(EnumChatFormatting.YELLOW).func_111079_a("Pairing data for TileEntity send."));
+					par2EntityPlayer.sendChatToPlayer(new ChatMessageComponent().setColor(EnumChatFormatting.YELLOW).addText("Pairing data for TileEntity send."));
 			}
 		}
 		if(!par3World.isRemote){

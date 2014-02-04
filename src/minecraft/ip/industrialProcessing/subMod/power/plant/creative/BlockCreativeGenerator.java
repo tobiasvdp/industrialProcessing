@@ -23,7 +23,7 @@ public class BlockCreativeGenerator extends BlockPowerGenerator implements IDesc
 
     public BlockCreativeGenerator() {
 	super(ConfigPower.getCreativeEngineID(), Material.iron, 1f, Block.soundMetalFootstep, "BlockCreativeGenerator", IPPower.tabPower);
-	func_111022_d(IndustrialProcessing.TEXTURE_NAME_PREFIX + "creativeGenerator");
+	setTextureName(IndustrialProcessing.TEXTURE_NAME_PREFIX + "creativeGenerator");
     }
 
     @Override

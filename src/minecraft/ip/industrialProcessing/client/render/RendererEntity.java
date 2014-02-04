@@ -28,7 +28,7 @@ public class RendererEntity extends Render{
 
         if (texturemanager != null)
         {
-            texturemanager.func_110577_a(texture);
+            texturemanager.bindTexture(texture);
         }
 		GL11.glTranslatef((float)( d0), (float)( d1+0.5), (float) (d2));
 		GL11.glRotatef((-entity.rotationYaw), 0, 1, 0);
@@ -37,7 +37,7 @@ public class RendererEntity extends Render{
 	}
 
 	@Override
-	protected ResourceLocation func_110775_a(Entity entity) {
+	protected ResourceLocation getEntityTexture(Entity entity) {
 		return texture;
 	}
 

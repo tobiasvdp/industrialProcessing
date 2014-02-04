@@ -55,10 +55,10 @@ public abstract class EntityWorker extends EntityVehicle {
 	public void toggleMining(EntityClientPlayerMP thePlayer) {
 		if (canWork) {
 			canWork = false;
-			thePlayer.sendChatToPlayer(new ChatMessageComponent().func_111059_a(EnumChatFormatting.YELLOW).func_111072_b(getActivity() + " disabled."));
+			thePlayer.sendChatToPlayer(new ChatMessageComponent().setColor(EnumChatFormatting.YELLOW).addText(getActivity() + " disabled."));
 		} else {
 			canWork = true;
-			thePlayer.sendChatToPlayer(new ChatMessageComponent().func_111059_a(EnumChatFormatting.YELLOW).func_111072_b(getActivity() + " enabled."));
+			thePlayer.sendChatToPlayer(new ChatMessageComponent().setColor(EnumChatFormatting.YELLOW).addText(getActivity() + " enabled."));
 		}
 	}
 	

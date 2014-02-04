@@ -44,16 +44,24 @@ public class BlockIndustrialLog extends BlockLog {
             this.tree_top[i] = par1IconRegister.registerIcon(IndustrialTrees.getLogTopTexture(i));
         }
     }
-
+    
     @SideOnly(Side.CLIENT)
-    @Override
-    protected Icon func_111048_c(int par1) {
+
+    /**
+     * The icon for the side of the block.
+     */
+    protected Icon getSideIcon(int par1)
+    {
         return this.tree_side[par1];
     }
 
     @SideOnly(Side.CLIENT)
-    @Override
-    protected Icon func_111049_d(int par1) {
+
+    /**
+     * The icon for the tops and bottoms of the block.
+     */
+    protected Icon getEndIcon(int par1)
+    {
         return this.tree_top[par1];
     }
 

@@ -109,7 +109,7 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 				
 			}
 
-			func_110628_a(getTexture(tl, world, i, j, k, block, 0.0625f));
+			bindTexture(getTexture(tl, world, i, j, k, block, 0.0625f));
 
 		} else {
 		    /*
@@ -120,7 +120,7 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 			GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 			GL11.glScalef(1.5f, 1.5f, 1.5f);
 			*/
-			this.func_110628_a(texture);
+			this.bindTexture(texture);
 		}
 
 		renderBlock(tl, world, i, j, k, block, 0.0625f);

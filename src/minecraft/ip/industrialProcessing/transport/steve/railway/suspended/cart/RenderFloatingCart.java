@@ -17,18 +17,18 @@ public class RenderFloatingCart extends Render{
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float)d0, (float)d1+1f, (float)d2);
 		GL11.glScalef(-1.0F, -1.0F, 1.0F);
-		func_110776_a(texture);
+		bindTexture(texture);
 		model.render(entity, 0, 0, 0, 0, 0, 0.0625F);
 		GL11.glPopMatrix();
-	}
-
-	@Override
-	protected ResourceLocation func_110775_a(Entity entity) {
-		return texture;
 	}
 	
 	public RenderFloatingCart(ModelFloatingCart model, float shadow){
 		this.model = model;
+	}
+
+	@Override
+	protected ResourceLocation getEntityTexture(Entity entity) {
+		return texture;
 	}
 
 }

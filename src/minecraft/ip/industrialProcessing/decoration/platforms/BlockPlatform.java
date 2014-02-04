@@ -23,14 +23,14 @@ public class BlockPlatform extends BlockScaffolding {
 	public BlockPlatform() {
 		super(ConfigBlocks.getPlatformBlockID(), Material.iron, 1f, Block.soundMetalFootstep, "Walkway", ISetupCreativeTabs.tabPower);
 		this.setBlockBounds(0, 0, 0, 1, 1 / 16f, 1);
-		func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "platformFloor");
+		setTextureName(INamepace.TEXTURE_NAME_PREFIX + "platformFloor");
 		setStepSound(soundMetalFootstep);
 	}
 
 	protected BlockPlatform(int id, String name) {
 		super(id, Material.iron, 1f, Block.soundMetalFootstep, name, ISetupCreativeTabs.tabPower);
 		this.setBlockBounds(0, 0, 0, 1, 1 / 16f, 1);
-		func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "platformFloor");
+		setTextureName(INamepace.TEXTURE_NAME_PREFIX + "platformFloor");
 	}
 
 	@Override

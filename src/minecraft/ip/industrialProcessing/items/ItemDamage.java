@@ -16,7 +16,7 @@ public class ItemDamage extends Item {
 		setCreativeTab(tab);
 		setUnlocalizedName(name);
 		setNoRepair();
-		func_111206_d(INamepace.TEXTURE_NAME_PREFIX + name);
+		setTextureName(INamepace.TEXTURE_NAME_PREFIX + name);
 		ItemRegistry.RegisterItem(this, ItemType.damage);
 
 	}
@@ -27,7 +27,7 @@ public class ItemDamage extends Item {
 		setCreativeTab(tab);
 		setUnlocalizedName(name);
 		setNoRepair();
-		func_111206_d(INamepace.TEXTURE_NAME_PREFIX + name);
+		setTextureName(INamepace.TEXTURE_NAME_PREFIX + name);
 
 	}
 	public ItemDamage(int ID,int maxDamage, String name, CreativeTabs tab) {
@@ -37,7 +37,7 @@ public class ItemDamage extends Item {
 		setCreativeTab(tab);
 		setUnlocalizedName(name);
 		setNoRepair();
-		func_111206_d(INamepace.TEXTURE_NAME_PREFIX + name);
+		setTextureName(INamepace.TEXTURE_NAME_PREFIX + name);
 
 	}
 

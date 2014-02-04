@@ -22,7 +22,7 @@ public class BlockIP extends Block {
 		setStepSound(stepSound);
 		setUnlocalizedName(name);
 		setCreativeTab(ISetupCreativeTabs.tabPower);
-		func_111022_d(INamepace.TEXTURE_NAME_PREFIX + name);
+		setTextureName(INamepace.TEXTURE_NAME_PREFIX + name);
 	}
 
 	public BlockIP(int blockID, String name, float hardness, Material blockMaterial, StepSound stepSound, int dropitem) {
@@ -31,7 +31,7 @@ public class BlockIP extends Block {
 		setStepSound(stepSound);
 		setUnlocalizedName(name);
 		setCreativeTab(ISetupCreativeTabs.tabOres);
-		func_111022_d(INamepace.TEXTURE_NAME_PREFIX + name);
+		setTextureName(INamepace.TEXTURE_NAME_PREFIX + name);
 		this.dropItems = true;
 		this.dropItem = dropitem;
 	}

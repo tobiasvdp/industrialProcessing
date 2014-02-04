@@ -79,7 +79,7 @@ public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation
 
 	int i2 = 1 + index + (boxAllowedOnConveyor ? 4 : 0);
 	if (!worldObj.isRemote)
-	    player.sendChatToPlayer(ChatMessageComponent.func_111066_d(i2 + "/8: " + mode + ", " + (boxAllowedOnConveyor ? "boxes allowed on conveyor" : "boxes not allowed on conveyor") + "."));
+	    player.sendChatToPlayer(ChatMessageComponent.createFromText(i2 + "/8: " + mode + ", " + (boxAllowedOnConveyor ? "boxes allowed on conveyor" : "boxes not allowed on conveyor") + "."));
     }
 
     public PackerOperationMode getOperationMode() {

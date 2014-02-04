@@ -16,16 +16,6 @@ public class ModelSandCaster extends ModelAnimatedMachine {
 	this.icon = new Icon() {
 
 	    @Override
-	    public int getOriginY() {
-		return 0;
-	    }
-
-	    @Override
-	    public int getOriginX() {
-		return 0;
-	    }
-
-	    @Override
 	    public float getMinV() {
 		return 0;
 	    }
@@ -59,6 +49,18 @@ public class ModelSandCaster extends ModelAnimatedMachine {
 	    public String getIconName() {
 		return "";
 	    }
+
+		@Override
+		public int getIconWidth() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public int getIconHeight() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
 	};
     }
 

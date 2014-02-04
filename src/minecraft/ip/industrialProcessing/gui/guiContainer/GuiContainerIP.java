@@ -60,15 +60,15 @@ public class GuiContainerIP extends GuiContainer {
 	}
 
 	public void setTextureSpecific() {
-		mc.renderEngine.func_110577_a(this.textureLocationSpecific);
+		mc.renderEngine.bindTexture(this.textureLocationSpecific);
 	}
 
 	public void setTextureLayout() {
-		mc.renderEngine.func_110577_a(this.textureLocation);
+		mc.renderEngine.bindTexture(this.textureLocation);
 	}
 
 	public void setTextureBlocks() {
-		mc.renderEngine.func_110577_a(TextureMap.field_110575_b);
+		mc.renderEngine.bindTexture(TextureMap.locationBlocksTexture);
 	}
 	
 	public FontRenderer getFontRenderer(){
@@ -109,7 +109,7 @@ public class GuiContainerIP extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
-		mc.renderEngine.func_110577_a(this.textureLocation);
+		mc.renderEngine.bindTexture(this.textureLocation);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;

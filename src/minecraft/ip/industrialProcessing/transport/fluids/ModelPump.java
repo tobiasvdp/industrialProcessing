@@ -31,16 +31,6 @@ public class ModelPump extends ModelAnimatedMachine {
         return new Icon() {
 
             @Override
-            public int getOriginY() {
-                return 0;
-            }
-
-            @Override
-            public int getOriginX() {
-                return 0;
-            }
-
-            @Override
             public float getMinV() {
                 return 0;
             }
@@ -74,6 +64,18 @@ public class ModelPump extends ModelAnimatedMachine {
             public String getIconName() {
                 return "icon";
             }
+
+			@Override
+			public int getIconWidth() {
+				// TODO Auto-generated method stub
+				return 0;
+			}
+
+			@Override
+			public int getIconHeight() {
+				// TODO Auto-generated method stub
+				return 0;
+			}
         };
     }
 

@@ -67,7 +67,7 @@ public class TileEntityConveyorInput extends TileEntityConveyorInventoryBase imp
 
 		int i2 = 1 + index;
 		if (!worldObj.isRemote)
-			player.sendChatToPlayer(ChatMessageComponent.func_111066_d(i2 + "/3: " + mode + "."));
+			player.sendChatToPlayer(ChatMessageComponent.createFromText(i2 + "/3: " + mode + "."));
 	}
 
 	@Override

@@ -16,7 +16,7 @@ import ip.industrialProcessing.machines.BlockMachine;
 public class BlockGrate extends BlockMachine {
     public BlockGrate() {
         super(ConfigTransportBlocks.getBlockTransportFluidGrateID(), Material.iron, 1F, Block.soundMetalFootstep, "Grate", ISetupCreativeTabs.tabFluid);
-        func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "grate");
+        setTextureName(INamepace.TEXTURE_NAME_PREFIX + "grate");
     }
 
     @Override

@@ -24,7 +24,7 @@ public abstract class BlockMultiblockCore extends BlockContainer{
 		setStepSound(Block.soundMetalFootstep);
 		setUnlocalizedName(name);
 		setCreativeTab(tab);
-		func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "inputTop");
+		setTextureName(INamepace.TEXTURE_NAME_PREFIX + "inputTop");
 	}
 
 	@Override

@@ -30,7 +30,7 @@ public class BlockManualTreeTap extends BlockMachineRendered implements IDescrip
 
     public BlockManualTreeTap() {
 	super(ConfigMachineBlocks.getManualTreeTapBlockID(), Material.iron, 1.0f, soundMetalFootstep, UNLOCALIZED_NAME, ISetupCreativeTabs.tabOreProcessing);
-	func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "manualTreeTap");
+	setTextureName(INamepace.TEXTURE_NAME_PREFIX + "manualTreeTap");
     }
 
     protected BlockManualTreeTap(int automaticTreeTapBlockID, Material iron, float f, StepSound soundmetalfootstep, String string, CreativeTabs taboreprocessing) {

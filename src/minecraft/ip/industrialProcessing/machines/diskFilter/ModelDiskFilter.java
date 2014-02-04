@@ -28,17 +28,7 @@ public class ModelDiskFilter extends ModelAnimatedMachine {
 	GL11.glTranslatef(0, 1, 0);
 	GL11.glRotatef(progress * 360, 1, 0, 0);
 	Icon icon = new Icon() {
-	    
-	    @Override
-	    public int getOriginY() { 
-		return 0;
-	    }
-	    
-	    @Override
-	    public int getOriginX() { 
-		return 0;
-	    }
-	    
+	    	    
 	    @Override
 	    public float getMinV() { 
 		return 0;
@@ -73,6 +63,16 @@ public class ModelDiskFilter extends ModelAnimatedMachine {
 	    public String getIconName() { 
 		return "Booh";
 	    }
+
+		@Override
+		public int getIconWidth() {
+			return 0;
+		}
+
+		@Override
+		public int getIconHeight() {
+			return 0;
+		}
 	};
 	cillinder.renderMesh(icon); 
 	GL11.glPopMatrix();

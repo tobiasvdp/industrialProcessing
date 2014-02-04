@@ -38,7 +38,7 @@ public class GuiContainerFluidMachine<T extends TileEntity & IMachineContainerEn
 		int x0 = (this.width - this.xSize) / 2;
 		int y0 = (this.height - this.ySize) / 2;
 
-		mc.renderEngine.func_110577_a(TextureMap.field_110575_b);
+		mc.renderEngine.bindTexture(TextureMap.locationBlocksTexture);
 
 		int size = tank.amount * source.getHeight() / tank.capacity;
 
@@ -48,7 +48,7 @@ public class GuiContainerFluidMachine<T extends TileEntity & IMachineContainerEn
 		// TODO: use tesselator to make this texture tile instead of
 		// stretch.
 		drawTexturedModelRectFromIcon(targetX, targetY, icon, source.getWidth(), size);
-		mc.renderEngine.func_110577_a(this.textureLocation);
+		mc.renderEngine.bindTexture(this.textureLocation);
 		drawTexturedModalRect(targetX, targetY0, source.getX(), source.getY(), source.getWidth(), source.getHeight());
 
 		Rectangle target = new Rectangle(targetX, targetY0, source.getWidth(), source.getHeight());

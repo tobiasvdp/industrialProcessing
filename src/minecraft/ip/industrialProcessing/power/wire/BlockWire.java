@@ -20,7 +20,7 @@ public class BlockWire extends BlockTransport {
 
     protected BlockWire(int id, Material material, StepSound soundfootstep, String name) {
         super(id, material, 1F, soundfootstep, name, ISetupCreativeTabs.tabPower);
-        func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "wire");
+        setTextureName(INamepace.TEXTURE_NAME_PREFIX + "wire");
     }
 
     @Override

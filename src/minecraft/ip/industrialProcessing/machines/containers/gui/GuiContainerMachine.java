@@ -53,7 +53,7 @@ public class GuiContainerMachine<T extends TileEntity & IMachineContainerEntity 
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
-	mc.renderEngine.func_110577_a(this.textureLocation);
+	mc.renderEngine.bindTexture(this.textureLocation);
 	GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 	int x = (width - xSize) / 2;
 	int y = (height - ySize) / 2;

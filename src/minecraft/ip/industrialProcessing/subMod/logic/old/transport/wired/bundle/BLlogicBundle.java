@@ -21,7 +21,7 @@ public class BLlogicBundle extends BlockContainer {
 		this.setStepSound(Block.soundPowderFootstep);
 		this.setUnlocalizedName("BLlogicBundle");
 		this.setCreativeTab(IPLogic.tabLogic);
-		this.func_111022_d(INamepace.TEXTURE_NAME_PREFIX + "inputTop");
+		this.setTextureName(INamepace.TEXTURE_NAME_PREFIX + "inputTop");
 	}
 
 	@Override

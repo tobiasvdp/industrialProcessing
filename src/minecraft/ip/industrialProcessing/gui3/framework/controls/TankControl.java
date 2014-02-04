@@ -76,11 +76,11 @@ public class TankControl extends Control implements ITankBinding {
 			float height = rectXY.height - y;
 			Rect tile = new Rect(rectXY.x, rectXY.y + y, rectXY.width, height);
 			float stretch = height / rectXY.width;
-			renderer.drawTexture(tile, new Rect(fluidRegion.x, fluidRegion.y, fluidRegion.width, fluidRegion.height * stretch), TextureMap.field_110575_b);
+			renderer.drawTexture(tile, new Rect(fluidRegion.x, fluidRegion.y, fluidRegion.width, fluidRegion.height * stretch), TextureMap.locationBlocksTexture);
 
 		    } else {
 			Rect tile = new Rect(rectXY.x, rectXY.y + y, rectXY.width, rectXY.width);
-			renderer.drawTexture(tile, fluidRegion, TextureMap.field_110575_b);
+			renderer.drawTexture(tile, fluidRegion, TextureMap.locationBlocksTexture);
 		    }
 		}
 	    }

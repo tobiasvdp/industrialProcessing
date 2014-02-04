@@ -78,16 +78,6 @@ public class ModelEnergyCell extends ModelAnimatedMachine {
 	    return new Icon() {
 
 		@Override
-		public int getOriginY() {
-		    return 0;
-		}
-
-		@Override
-		public int getOriginX() {
-		    return 0;
-		}
-
-		@Override
 		public float getMinV() {
 		    return 0;
 		}
@@ -121,19 +111,21 @@ public class ModelEnergyCell extends ModelAnimatedMachine {
 		public String getIconName() {
 		    return null;
 		}
+
+		@Override
+		public int getIconWidth() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public int getIconHeight() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
 	    };
 	case 1:
 	    return new Icon() {
-
-		@Override
-		public int getOriginY() {
-		    return 0;
-		}
-
-		@Override
-		public int getOriginX() {
-		    return 0;
-		}
 
 		@Override
 		public float getMinV() {
@@ -169,20 +161,22 @@ public class ModelEnergyCell extends ModelAnimatedMachine {
 		public String getIconName() {
 		    return null;
 		}
+
+		@Override
+		public int getIconWidth() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public int getIconHeight() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
 	    };
 	case 2:
 	default:
 	    return new Icon() {
-
-		@Override
-		public int getOriginY() {
-		    return 0;
-		}
-
-		@Override
-		public int getOriginX() {
-		    return 0;
-		}
 
 		@Override
 		public float getMinV() {
@@ -217,6 +211,18 @@ public class ModelEnergyCell extends ModelAnimatedMachine {
 		@Override
 		public String getIconName() {
 		    return null;
+		}
+
+		@Override
+		public int getIconWidth() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public int getIconHeight() {
+			// TODO Auto-generated method stub
+			return 0;
 		}
 	    };
 

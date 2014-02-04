@@ -11,16 +11,6 @@ public class ScrollIcon implements Icon {
     }
 
     @Override
-    public int getOriginX() { 
-	return 0;
-    }
-
-    @Override
-    public int getOriginY() { 
-	return 0;
-    }
-
-    @Override
     public float getMinU() { 
 	return 0.0f;
     }
@@ -54,5 +44,17 @@ public class ScrollIcon implements Icon {
     public String getIconName() {
 	return "scroll" + this.progress;
     }
+
+	@Override
+	public int getIconWidth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getIconHeight() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }

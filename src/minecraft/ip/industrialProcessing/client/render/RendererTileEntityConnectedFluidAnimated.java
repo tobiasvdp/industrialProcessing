@@ -64,7 +64,7 @@ public class RendererTileEntityConnectedFluidAnimated extends RendererTileEntity
 
 			TankHandler handler = tankSync.getTankHandler();
 
-			this.func_110628_a(TextureMap.field_110575_b);
+			this.bindTexture(TextureMap.locationBlocksTexture);
 			int tankCount = handler.getTankCount();
 			for (int l = 0; l < tankCount; l++) {
 

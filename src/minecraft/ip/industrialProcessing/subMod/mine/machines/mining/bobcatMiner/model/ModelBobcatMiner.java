@@ -24,16 +24,6 @@ public class ModelBobcatMiner extends ModelEntity {
 	Icon blackIcon = new Icon() {
 
 		@Override
-		public int getOriginY() {
-			return 0;
-		}
-
-		@Override
-		public int getOriginX() {
-			return 0;
-		}
-
-		@Override
 		public float getMinV() {
 			return 0.75f;
 		}
@@ -67,17 +57,20 @@ public class ModelBobcatMiner extends ModelEntity {
 		public String getIconName() {
 			return "Booh";
 		}
-	};
-	Icon glassIcon = new Icon() {
+
 		@Override
-		public int getOriginY() {
+		public int getIconWidth() {
+			// TODO Auto-generated method stub
 			return 0;
 		}
 
 		@Override
-		public int getOriginX() {
+		public int getIconHeight() {
+			// TODO Auto-generated method stub
 			return 0;
 		}
+	};
+	Icon glassIcon = new Icon() {
 
 		@Override
 		public float getMinV() {
@@ -112,20 +105,23 @@ public class ModelBobcatMiner extends ModelEntity {
 		@Override
 		public String getIconName() {
 			return "Booh";
+		}
+
+		@Override
+		public int getIconWidth() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public int getIconHeight() {
+			// TODO Auto-generated method stub
+			return 0;
 		}
 		
 	};
 	
 	Icon orangeIcon = new Icon() {
-		@Override
-		public int getOriginY() {
-			return 0;
-		}
-
-		@Override
-		public int getOriginX() {
-			return 0;
-		}
 
 		@Override
 		public float getMinV() {
@@ -161,20 +157,22 @@ public class ModelBobcatMiner extends ModelEntity {
 		public String getIconName() {
 			return "Booh";
 		}
+
+		@Override
+		public int getIconWidth() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public int getIconHeight() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
 	};
 	
 	
 	Icon ironIcon = new Icon() {
-		@Override
-		public int getOriginY() {
-			return 0;
-		}
-
-		@Override
-		public int getOriginX() {
-			return 0;
-		}
-
 		@Override
 		public float getMinV() {
 			return 0.75f;
@@ -208,6 +206,18 @@ public class ModelBobcatMiner extends ModelEntity {
 		@Override
 		public String getIconName() {
 			return "Booh";
+		}
+
+		@Override
+		public int getIconWidth() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public int getIconHeight() {
+			// TODO Auto-generated method stub
+			return 0;
 		}
 	};
 	

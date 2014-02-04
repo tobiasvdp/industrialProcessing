@@ -77,7 +77,7 @@ public class GUImultiblock extends GuiContainer {
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
-	mc.renderEngine.func_110577_a(this.textureLocation);
+	mc.renderEngine.bindTexture(this.textureLocation);
 	GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 	int x = (width - xSize) / 2;
 	int y = (height - ySize) / 2;
@@ -142,7 +142,7 @@ public class GUImultiblock extends GuiContainer {
     		int x0 = (this.width - this.xSize) / 2;
     		int y0 = (this.height - this.ySize) / 2;
 
-    		mc.renderEngine.func_110577_a(TextureMap.field_110575_b);
+    		mc.renderEngine.getTexture(TextureMap.locationBlocksTexture);
 
     		int size = tank.amount * source.getHeight() / tank.capacity;
 
@@ -152,7 +152,7 @@ public class GUImultiblock extends GuiContainer {
     		// TODO: use tesselator to make this texture tile instead of
     		// stretch.
     		drawTexturedModelRectFromIcon(targetX, targetY, icon, source.getWidth(), size);
-    		mc.renderEngine.func_110577_a(this.textureLocation);
+    		mc.renderEngine.getTexture(this.textureLocation);
     		drawTexturedModalRect(targetX, targetY0, source.getX(), source.getY(), source.getWidth(), source.getHeight());
 
     		Rectangle target = new Rectangle(targetX, targetY0, source.getWidth(), source.getHeight());
