@@ -28,6 +28,7 @@ public class MachineDetails extends UserControl implements IButtonClickListener<
     private MachineCraftTab craftTab;
     private MachineRecipesTab recipeTab;
     private TabPanel recipeTabs;
+    private MachineTechChainTab techTreeTab;
 
     public MachineDetails() {
         this.isHittestVisible = true;
@@ -54,8 +55,7 @@ public class MachineDetails extends UserControl implements IButtonClickListener<
         recipeTabs.margin = new Thickness(7, 0, 0, 0);
         this.craftTab = new MachineCraftTab(this);
         this.recipeTab = new MachineRecipesTab(this);
-        recipeTabs.addTab(craftTab);
-        recipeTabs.addTab(recipeTab);
+        this.techTreeTab = new MachineTechChainTab(this);
 
         stack.addChild(recipeTabs);
         stack.margin = new Thickness(0, 0, 0, 7);
@@ -88,6 +88,8 @@ public class MachineDetails extends UserControl implements IButtonClickListener<
                 this.recipeTabs.addTab(recipeTab);
                 this.recipeTab.setBlock(block);
             }
+            this.recipeTabs.addTab(techTreeTab);
+            this.techTreeTab.setBlock(block); 
         } else
             description.visibility = Visibility.COLLAPSED;
 
