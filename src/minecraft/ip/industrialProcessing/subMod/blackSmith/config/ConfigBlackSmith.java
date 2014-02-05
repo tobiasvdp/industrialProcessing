@@ -10,6 +10,10 @@ import ip.industrialProcessing.subMod.blackSmith.IPBlackSmith;
 import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.TileEntityBloomery;
 import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.dummy.bellows.TileEntityBellows;
 import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.dummy.ironBowl.TileEntityIronBowl;
+import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.TileEntityTripHammer;
+import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.dummy.woodenBar.TileEntityWoodenBar;
+import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.dummy.woodenHammer.TileEntityWoodenHammer;
+import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.dummy.woodenWheel.TileEntityWoodenWheel;
 import ip.industrialProcessing.subMod.blackSmith.plant.waterBasin.TileEntityWaterBasinCore;
 import ip.industrialProcessing.subMod.blackSmith.plant.waterBasin.TileEntityWaterBasinDummy;
 import ip.industrialProcessing.utils.registry.BlockType;
@@ -43,6 +47,18 @@ public class ConfigBlackSmith {
 
 	private int waterBasinBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "waterBasinBlockID", 953).getInt();
 	private int rendererWaterBasin;
+	
+	private int tripHammerBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "tripHammerBlockID", 954).getInt();
+	private int rendererTripHammer;
+	
+	private int woodenBarBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "woodenBarBlockID", 955).getInt();
+	private int rendererWoodenBar;
+	
+	private int woodenWheelBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "woodenWheelBlockID", 956).getInt();
+	private int rendererWoodenWheel;
+	
+	private int woodenHammerBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "woodenHammerBlockID", 957).getInt();
+	private int rendererWoodenHammer;
 
 	public void register() {
 
@@ -56,11 +72,16 @@ public class ConfigBlackSmith {
 		ConfigMachineBlocks.registerMachineBlock(ISetupBlackSmith.blockIronBowl, "IP.MBD.IBowl", "Iron bowl", TileEntityIronBowl.class, BlockType.Machine, BlockType.blackSmith);
 		ConfigMachineBlocks.registerMachineBlock(ISetupBlackSmith.blockWaterBasin, "IP.MBD.WaterB", "Water basin", TileEntityWaterBasinDummy.class, BlockType.Machine, BlockType.blackSmith);
 		GameRegistry.registerTileEntity(TileEntityWaterBasinCore.class, "IP.MBC.WaterB");
+		ConfigMachineBlocks.registerMachineBlock(ISetupBlackSmith.blockTripHammer, "IP.MBC.Trip", "Trip hammer base", TileEntityTripHammer.class, BlockType.Machine, BlockType.blackSmith);
+		ConfigMachineBlocks.registerMachineBlock(ISetupBlackSmith.blockWoodenBar, "IP.MBD.WBar", "Wooden bar", TileEntityWoodenBar.class, BlockType.Dummy, BlockType.blackSmith);
+		ConfigMachineBlocks.registerMachineBlock(ISetupBlackSmith.blockWoodenHammer, "IP.MBD.WHam", "Wooden hammer", TileEntityWoodenHammer.class, BlockType.Dummy, BlockType.blackSmith);
+		ConfigMachineBlocks.registerMachineBlock(ISetupBlackSmith.blockWoodenWheel, "IP.MBD.WWheel", "Wooden wheel", TileEntityWoodenWheel.class, BlockType.Dummy, BlockType.blackSmith);
 
 		// vanilla recipes
 		RecipeRegistry.appendVanillaRecipe(VanillaRecipeBridge.getRecipeFromVanilla(GameRegistry.addShapedRecipe(new ItemStack(ISetupBlackSmith.blockBloomery), "xyx", "y y", "xzx", 'x', new ItemStack(Item.brick), 'y', new ItemStack(Block.dirt), 'z', new ItemStack(Block.cobblestone))));
 		RecipeRegistry.appendVanillaRecipe(VanillaRecipeBridge.getRecipeFromVanilla(GameRegistry.addShapedRecipe(new ItemStack(ISetupBlackSmith.blockBellows), "xxx", "yyy", "xxx", 'x', new ItemStack(Block.wood, 1, WILDCARD_VALUE), 'y', new ItemStack(Item.leather))));
 		RecipeRegistry.appendVanillaRecipe(VanillaRecipeBridge.getRecipeFromVanilla(GameRegistry.addShapedRecipe(new ItemStack(ISetupBlackSmith.blockIronBowl), "   ", "xyx", "   ", 'x', new ItemStack(ISetupItems.itemThickStick), 'y', new ItemStack(ISetupItems.itemIronBowl, 8))));
+		RecipeRegistry.appendVanillaRecipe(VanillaRecipeBridge.getRecipeFromVanilla(GameRegistry.addShapedRecipe(new ItemStack(ISetupBlackSmith.blockWaterBasin), "   ", "x x", "xxx", 'x', new ItemStack(Block.cobblestone))));
 	}
 
 	public static int getItemWroughtIronID() {
@@ -113,6 +134,54 @@ public class ConfigBlackSmith {
 
 	public static void setRendererWaterBasinId(int id) {
 		getInstance().rendererWaterBasin = id;
+	}
+	
+	public static int getBlockTripHammerID() {
+		return getInstance().tripHammerBlockID;
+	}
+
+	public static int getRendererTripHammerId() {
+		return getInstance().rendererTripHammer;
+	}
+
+	public static void setRendererTripHammerId(int id) {
+		getInstance().rendererTripHammer = id;
+	}
+	
+	public static int getBlockWoodenBarID() {
+		return getInstance().woodenBarBlockID;
+	}
+
+	public static int getRendererWoodenBarId() {
+		return getInstance().rendererWoodenBar;
+	}
+
+	public static void setRendererWoodenBarId(int id) {
+		getInstance().rendererWoodenBar = id;
+	}
+	
+	public static int getBlockWoodenHammerID() {
+		return getInstance().woodenHammerBlockID;
+	}
+
+	public static int getRendererWoodenHammerId() {
+		return getInstance().rendererWoodenHammer;
+	}
+
+	public static void setRendererWoodenHammerId(int id) {
+		getInstance().rendererWoodenHammer = id;
+	}
+	
+	public static int getBlockWoodenWheelID() {
+		return getInstance().woodenWheelBlockID;
+	}
+
+	public static int getRendererWoodenWheelId() {
+		return getInstance().rendererWoodenWheel;
+	}
+
+	public static void setRendererWoodenWheelId(int id) {
+		getInstance().rendererWoodenWheel = id;
 	}
 
 }
