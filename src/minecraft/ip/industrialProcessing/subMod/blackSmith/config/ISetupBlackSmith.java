@@ -5,6 +5,7 @@ import ip.industrialProcessing.subMod.blackSmith.IPBlackSmith;
 import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.BlockBloomery;
 import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.dummy.bellows.BlockBellows;
 import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.dummy.ironBowl.BlockIronBowl;
+import ip.industrialProcessing.subMod.blackSmith.plant.waterBasin.BlockWaterBasin;
 
 public interface ISetupBlackSmith {
 	//items
@@ -14,4 +15,5 @@ public interface ISetupBlackSmith {
     public final static BlockBloomery blockBloomery = new BlockBloomery();
     public final static BlockBellows blockBellows = new BlockBellows();
     public final static BlockIronBowl blockIronBowl = new BlockIronBowl();
+    public final static BlockWaterBasin blockWaterBasin = new BlockWaterBasin();
 }

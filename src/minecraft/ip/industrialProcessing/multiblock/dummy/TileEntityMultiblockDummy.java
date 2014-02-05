@@ -31,7 +31,7 @@ public class TileEntityMultiblockDummy extends TileEntity implements ITileEntity
 	private int groupID;
 	protected int ID;
 	protected FacingDirection side = FacingDirection.North;
-
+	
 	public TileEntityMultiblockDummy() {
 
 	}

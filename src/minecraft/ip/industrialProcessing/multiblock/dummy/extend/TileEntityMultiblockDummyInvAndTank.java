@@ -64,4 +64,10 @@ public class TileEntityMultiblockDummyInvAndTank extends TileEntityMultiblockDum
 		return null;
 	}
 
+	public boolean tankHasRoomFor(int i, FluidStack fluid) {
+		if (this.getCore() != null)
+			return this.getCore().tankHasRoomFor(i,fluid);
+		return false;
+	}
+
 }
