@@ -34,6 +34,8 @@ public class ConfigBlackSmith {
 
 	// items
 	private static int ItemWroughtIronID = 6000;
+	private static int itemWoodenBucketID = 6001;
+	private static int itemWoodenBucketWaterID = 6002;
 
 	// blocks
 	private int bloomeryBlockID = IPBlackSmith.config.get(ConfigCategories.machineOreProcessing.toString(), "bloomeryBlockID", 950).getInt();
@@ -65,7 +67,9 @@ public class ConfigBlackSmith {
 		// items
 		LanguageRegistry.addName(ISetupBlackSmith.itemWroughtIron, "Wrought iron");
 		LanguageRegistry.instance().addStringLocalization(ISetupBlackSmith.itemWroughtIron.getUnlocalizedName() + ".desc", "A porous mass of iron. It can be heated again to shape it into an object.");
-
+		LanguageRegistry.addName(ISetupBlackSmith.itemWoodenBucket, "Wooden bucket");
+		LanguageRegistry.addName(ISetupBlackSmith.itemWoodenBucketWater, "Wooden bucket of water");
+		
 		// machines
 		ConfigMachineBlocks.registerMachineBlock(ISetupBlackSmith.blockBloomery, "IP.MBC.Bloom", "Bloomery", TileEntityBloomery.class, BlockType.Machine, BlockType.blackSmith);
 		ConfigMachineBlocks.registerMachineBlock(ISetupBlackSmith.blockBellows, "IP.MBD.Bellow", "Bellows", TileEntityBellows.class, BlockType.Machine, BlockType.blackSmith);
@@ -87,6 +91,15 @@ public class ConfigBlackSmith {
 	public static int getItemWroughtIronID() {
 		return getInstance().ItemWroughtIronID;
 	}
+
+	public static int getItemWoodenBucketID() {
+		return getInstance().itemWoodenBucketID;
+	}
+	
+	public static int getItemWoodenBucketWaterID() {
+		return getInstance().itemWoodenBucketWaterID;
+	}
+
 
 	public static int getBlockBloomeryID() {
 		return getInstance().bloomeryBlockID;

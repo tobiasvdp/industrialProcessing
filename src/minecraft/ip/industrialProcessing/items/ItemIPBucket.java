@@ -3,6 +3,7 @@ package ip.industrialProcessing.items;
 import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.fluids.BlockFluid;
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
@@ -13,7 +14,7 @@ import ip.industrialProcessing.utils.registry.ItemType;
 
 public class ItemIPBucket extends ItemBucket {
 
-    public ItemIPBucket(int itemId, Fluid fluid, BlockFluid block, String texture) {
+    public ItemIPBucket(int itemId, Fluid fluid, Block block, String texture) {
 	super(itemId, block.blockID);
 	setUnlocalizedName("Container" + fluid.getName());
 	setMaxStackSize(1);
