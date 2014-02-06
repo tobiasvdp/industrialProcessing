@@ -3,8 +3,10 @@ package ip.industrialProcessing.subMod.blackSmith.config;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBucket;
 import net.minecraftforge.fluids.FluidRegistry;
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.items.ItemIP;
 import ip.industrialProcessing.subMod.blackSmith.IPBlackSmith;
+import ip.industrialProcessing.subMod.blackSmith.item.ItemWoodenBucket;
 import ip.industrialProcessing.subMod.blackSmith.item.ItemWoodenBucketFilled;
 import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.BlockBloomery;
 import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.dummy.bellows.BlockBellows;
@@ -18,7 +20,7 @@ import ip.industrialProcessing.subMod.blackSmith.plant.waterBasin.BlockWaterBasi
 public interface ISetupBlackSmith {
 	//items
 	public final static ItemIP itemWroughtIron = new ItemIP(ConfigBlackSmith.getItemWroughtIronID(), "ItemWroughtIron",IPBlackSmith.tabBlackSmith);
-	public final static ItemBucket itemWoodenBucket = (ItemBucket) new ItemBucket(ConfigBlackSmith.getItemWoodenBucketID(),0).setTextureName("ItemWoodenBucket").setCreativeTab(IPBlackSmith.tabBlackSmith);
+	public final static ItemWoodenBucket itemWoodenBucket = (ItemWoodenBucket) new ItemWoodenBucket(ConfigBlackSmith.getItemWoodenBucketID(),0).setTextureName(INamepace.TEXTURE_NAME_PREFIX +"ItemWoodenBucket").setCreativeTab(IPBlackSmith.tabBlackSmith);
 	public final static ItemWoodenBucketFilled itemWoodenBucketWater = new ItemWoodenBucketFilled(ConfigBlackSmith.getItemWoodenBucketWaterID(), FluidRegistry.WATER, Block.waterStill, "ItemWoodenBucketWater");
 	
 	

@@ -7,6 +7,8 @@ import ip.industrialProcessing.config.ISetupItems;
 import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.recipes.VanillaRecipeBridge;
 import ip.industrialProcessing.subMod.blackSmith.IPBlackSmith;
+import ip.industrialProcessing.subMod.blackSmith.item.ItemWoodenBucket;
+import ip.industrialProcessing.subMod.blackSmith.item.ItemWoodenBucketFilled;
 import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.TileEntityBloomery;
 import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.dummy.bellows.TileEntityBellows;
 import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.dummy.ironBowl.TileEntityIronBowl;
@@ -17,10 +19,14 @@ import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.dummy.woodenWh
 import ip.industrialProcessing.subMod.blackSmith.plant.waterBasin.TileEntityWaterBasinCore;
 import ip.industrialProcessing.subMod.blackSmith.plant.waterBasin.TileEntityWaterBasinDummy;
 import ip.industrialProcessing.utils.registry.BlockType;
+import ip.industrialProcessing.utils.registry.BucketRegistery;
 import ip.industrialProcessing.utils.registry.RecipeRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -69,6 +75,8 @@ public class ConfigBlackSmith {
 		LanguageRegistry.instance().addStringLocalization(ISetupBlackSmith.itemWroughtIron.getUnlocalizedName() + ".desc", "A porous mass of iron. It can be heated again to shape it into an object.");
 		LanguageRegistry.addName(ISetupBlackSmith.itemWoodenBucket, "Wooden bucket");
 		LanguageRegistry.addName(ISetupBlackSmith.itemWoodenBucketWater, "Wooden bucket of water");
+		BucketRegistery.put(ItemWoodenBucket.class, ItemWoodenBucketFilled.class);
+		FluidContainerRegistry.registerFluidContainer(new FluidContainerData(FluidRegistry.getFluidStack(FluidRegistry.WATER.getName(), FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(ISetupBlackSmith.itemWoodenBucketWater), new ItemStack(ISetupBlackSmith.itemWoodenBucket)));
 		
 		// machines
 		ConfigMachineBlocks.registerMachineBlock(ISetupBlackSmith.blockBloomery, "IP.MBC.Bloom", "Bloomery", TileEntityBloomery.class, BlockType.Machine, BlockType.blackSmith);
@@ -86,6 +94,7 @@ public class ConfigBlackSmith {
 		RecipeRegistry.appendVanillaRecipe(VanillaRecipeBridge.getRecipeFromVanilla(GameRegistry.addShapedRecipe(new ItemStack(ISetupBlackSmith.blockBellows), "xxx", "yyy", "xxx", 'x', new ItemStack(Block.wood, 1, WILDCARD_VALUE), 'y', new ItemStack(Item.leather))));
 		RecipeRegistry.appendVanillaRecipe(VanillaRecipeBridge.getRecipeFromVanilla(GameRegistry.addShapedRecipe(new ItemStack(ISetupBlackSmith.blockIronBowl), "   ", "xyx", "   ", 'x', new ItemStack(ISetupItems.itemThickStick), 'y', new ItemStack(ISetupItems.itemIronBowl, 8))));
 		RecipeRegistry.appendVanillaRecipe(VanillaRecipeBridge.getRecipeFromVanilla(GameRegistry.addShapedRecipe(new ItemStack(ISetupBlackSmith.blockWaterBasin), "   ", "x x", "xxx", 'x', new ItemStack(Block.cobblestone))));
+		RecipeRegistry.appendVanillaRecipe(VanillaRecipeBridge.getRecipeFromVanilla(GameRegistry.addShapedRecipe(new ItemStack(ISetupBlackSmith.itemWoodenBucket), " y ", "x x", " x ", 'x', new ItemStack(Block.planks,1,WILDCARD_VALUE),'y',new ItemStack(Item.silk))));
 	}
 
 	public static int getItemWroughtIronID() {

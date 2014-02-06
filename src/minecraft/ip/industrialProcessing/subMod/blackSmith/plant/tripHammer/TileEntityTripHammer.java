@@ -30,24 +30,24 @@ public class TileEntityTripHammer extends TileEntityMultiblockCoreInvWorker{
 		layout.setBlockID(-1, 0, 0, i++, 0, 0, ISetupBlackSmith.blockWoodenWheel.blockID);
 		layout.setBlockID(1, 1, 0, i++, 0, 0, ISetupBlackSmith.blockWoodenWheel.blockID);
 		layout.setBlockID(-1, 1, 0, i++, 0, 0, ISetupBlackSmith.blockWoodenWheel.blockID);
-		layout.setBlockID(1, 0, 1, i++, 0, 0, ISetupBlackSmith.blockWoodenWheel.blockID);
-		layout.setBlockID(-1, 0, 1, i++, 0, 0, ISetupBlackSmith.blockWoodenWheel.blockID);
-		layout.setBlockID(1, 1, 1, i++, 0, 0, ISetupBlackSmith.blockWoodenWheel.blockID);
-		layout.setBlockID(-1, 1, 1, i++, 0, 0, ISetupBlackSmith.blockWoodenWheel.blockID);
+		layout.setBlockID(1, 0, -1, i++, 0, 0, ISetupBlackSmith.blockWoodenWheel.blockID);
+		layout.setBlockID(-1, 0, -1, i++, 0, 0, ISetupBlackSmith.blockWoodenWheel.blockID);
+		layout.setBlockID(1, 1, -1, i++, 0, 0, ISetupBlackSmith.blockWoodenWheel.blockID);
+		layout.setBlockID(-1, 1, -1, i++, 0, 0, ISetupBlackSmith.blockWoodenWheel.blockID);
 		
 		layout.setBlockID(0, 1, 0, i++, 0, 0, ISetupBlackSmith.blockWoodenBar.blockID);
-		layout.setBlockID(0, 1, -1, i++, 0, 0, ISetupBlackSmith.blockWoodenBar.blockID);
-		layout.setBlockID(0, 1, -2, i++, 0, 0, ISetupBlackSmith.blockWoodenBar.blockID);
-		layout.setBlockID(0, 1, -3, i++, 0, 0, ISetupBlackSmith.blockWoodenHammer.blockID);
-		layout.setBlockID(0, 0, -3, i++, 0, 0, Block.wood.blockID);
-		layout.setBlockID(1, -1, -2, i++, 0, 0, Block.waterStill.blockID);
-		layout.setBlockID(-1, -1, -2, i++, 0, 0, Block.waterStill.blockID);
-		layout.setBlockID(1, -1, -1, i++, 0, 0, Block.waterMoving.blockID);
-		layout.setBlockID(-1, -1, -1, i++, 0, 0, Block.waterMoving.blockID);
-		layout.setBlockID(1, -1, 0, i++, 0, 0, Block.waterMoving.blockID);
-		layout.setBlockID(-1, -1, 0, i++, 0, 0, Block.waterMoving.blockID);
+		layout.setBlockID(0, 1, 1, i++, 0, 0, ISetupBlackSmith.blockWoodenBar.blockID);
+		layout.setBlockID(0, 1, 2, i++, 0, 0, ISetupBlackSmith.blockWoodenBar.blockID);
+		layout.setBlockID(0, 1, 3, i++, 0, 0, ISetupBlackSmith.blockWoodenHammer.blockID);
+		layout.setBlockID(0, 0, 3, i++, 0, 0, Block.wood.blockID);
+		layout.setBlockID(1, -1, 2, i++, 0, 0, Block.waterStill.blockID);
+		layout.setBlockID(-1, -1, 2, i++, 0, 0, Block.waterStill.blockID);
 		layout.setBlockID(1, -1, 1, i++, 0, 0, Block.waterMoving.blockID);
 		layout.setBlockID(-1, -1, 1, i++, 0, 0, Block.waterMoving.blockID);
+		layout.setBlockID(1, -1, 0, i++, 0, 0, Block.waterMoving.blockID);
+		layout.setBlockID(-1, -1, 0, i++, 0, 0, Block.waterMoving.blockID);
+		layout.setBlockID(1, -1, -1, i++, 0, 0, Block.waterMoving.blockID);
+		layout.setBlockID(-1, -1, -1, i++, 0, 0, Block.waterMoving.blockID);
 		
 
 		structure.addLayout(layout, FacingDirection.North);
