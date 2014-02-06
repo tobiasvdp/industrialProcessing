@@ -27,13 +27,13 @@ public class TileEntityTripHammer extends TileEntityMultiblockCoreInvWorker{
 		layout.setCoreID(i++, 0, 1, ISetupBlackSmith.blockTripHammer.blockID);
 
 		layout.setBlockID(1, 0, 0, i++, 0, 0, ISetupBlackSmith.blockWoodenWheel.blockID);
-		layout.setBlockID(-1, 0, 0, i++, 0, 0, ISetupBlackSmith.blockWoodenWheel.blockID);
-		layout.setBlockID(1, 1, 0, i++, 0, 0, ISetupBlackSmith.blockWoodenWheel.blockID);
-		layout.setBlockID(-1, 1, 0, i++, 0, 0, ISetupBlackSmith.blockWoodenWheel.blockID);
-		layout.setBlockID(1, 0, -1, i++, 0, 0, ISetupBlackSmith.blockWoodenWheel.blockID);
-		layout.setBlockID(-1, 0, -1, i++, 0, 0, ISetupBlackSmith.blockWoodenWheel.blockID);
-		layout.setBlockID(1, 1, -1, i++, 0, 0, ISetupBlackSmith.blockWoodenWheel.blockID);
-		layout.setBlockID(-1, 1, -1, i++, 0, 0, ISetupBlackSmith.blockWoodenWheel.blockID);
+		layout.setBlockID(-1, 0, 0, i++, 0, 4, ISetupBlackSmith.blockWoodenWheel.blockID);
+		layout.setBlockID(1, 1, 0, i++, 0, 1, ISetupBlackSmith.blockWoodenWheel.blockID);
+		layout.setBlockID(-1, 1, 0, i++, 0, 5, ISetupBlackSmith.blockWoodenWheel.blockID);
+		layout.setBlockID(1, 0, -1, i++, 0, 2, ISetupBlackSmith.blockWoodenWheel.blockID);
+		layout.setBlockID(-1, 0, -1, i++, 0, 6, ISetupBlackSmith.blockWoodenWheel.blockID);
+		layout.setBlockID(1, 1, -1, i++, 0, 3, ISetupBlackSmith.blockWoodenWheel.blockID);
+		layout.setBlockID(-1, 1, -1, i++, 0, 7, ISetupBlackSmith.blockWoodenWheel.blockID);
 		
 		layout.setBlockID(0, 1, 0, i++, 0, 0, ISetupBlackSmith.blockWoodenBar.blockID);
 		layout.setBlockID(0, 1, 1, i++, 0, 0, ISetupBlackSmith.blockWoodenBar.blockID);

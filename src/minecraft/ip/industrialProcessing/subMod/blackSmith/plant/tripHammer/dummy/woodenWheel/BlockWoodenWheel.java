@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 
 public class BlockWoodenWheel  extends BlockMultiblockDummy{
 
-    Icon[] icons = new Icon[3];
+    Icon[] icons = new Icon[1];
 	public BlockWoodenWheel() {
 		super(ConfigBlackSmith.getBlockWoodenWheelID(), "BlockWoodenWheel", IPBlackSmith.tabBlackSmith);
 		this.setBlockBounds(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);
@@ -36,8 +36,7 @@ public class BlockWoodenWheel  extends BlockMultiblockDummy{
 
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-        icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Wood");
-        icons[1] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Canvas");
+        icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "Planks2");
     }
 
 }

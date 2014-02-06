@@ -9,6 +9,10 @@ import ip.industrialProcessing.subMod.blackSmith.config.ISetupBlackSmith;
 import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.dummy.bellows.model.ModelBellows;
 import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.dummy.ironBowl.model.ModelIronBowl;
 import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.model.ModelBloomery;
+import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.dummy.woodenBar.model.ModelWoodenBar;
+import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.dummy.woodenHammer.model.ModelWoodenHammer;
+import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.dummy.woodenWheel.model.ModelWoodenWheel;
+import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.model.ModelTripHamer;
 import ip.industrialProcessing.subMod.blackSmith.plant.waterBasin.TileEntityWaterBasinCore;
 import ip.industrialProcessing.subMod.blackSmith.plant.waterBasin.TileEntityWaterBasinDummy;
 import ip.industrialProcessing.subMod.blackSmith.plant.waterBasin.model.ModelWaterBasin;
@@ -23,7 +27,11 @@ public class ClientProxy extends CommonProxy{
     private static final ModelIronBowl modelIronBowl = new ModelIronBowl();
     private static final ModelWaterBasin modelWaterBasin = new ModelWaterBasin();
     private static final ModelAnimatedFluidMachine modelWaterBasinAnimated =  new ModelWaterBasinAnimated();
-	
+    private static final ModelWoodenBar modelWoodenBar = new ModelWoodenBar();
+    private static final ModelWoodenHammer modelWoodenHammer = new ModelWoodenHammer();
+    private static final ModelWoodenWheel modelWoodenWheel = new ModelWoodenWheel();
+    private static final ModelTripHamer modelTripHamer = new ModelTripHamer();
+    
 	@Override
 	public void registerRenderers() {
 		ConfigBlackSmith.setRendererBloomeryId(RenderingRegistry.getNextAvailableRenderId());
@@ -39,5 +47,17 @@ public class ClientProxy extends CommonProxy{
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWaterBasinDummy.class, new RendererTileEntityFluidWorker(ISetupBlackSmith.blockWaterBasin, "", modelWaterBasinAnimated));
         ConfigBlackSmith.setRendererWaterBasinId(RenderingRegistry.getNextAvailableRenderId());
         RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigBlackSmith.getRendererWaterBasinId(), modelWaterBasin));
+        
+        ConfigBlackSmith.setRendererWoodenBarId(RenderingRegistry.getNextAvailableRenderId());
+        RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigBlackSmith.getRendererWoodenBarId(), modelWoodenBar));
+        
+        ConfigBlackSmith.setRendererWoodenHammerId(RenderingRegistry.getNextAvailableRenderId());
+        RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigBlackSmith.getRendererWoodenHammerId(), modelWoodenHammer));
+        
+        ConfigBlackSmith.setRendererWoodenWheelId(RenderingRegistry.getNextAvailableRenderId());
+        RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigBlackSmith.getRendererWoodenWheelId(), modelWoodenWheel));
+        
+        ConfigBlackSmith.setRendererTripHammerId(RenderingRegistry.getNextAvailableRenderId());
+        RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigBlackSmith.getRendererTripHammerId(), modelTripHamer));
 	}
 }
