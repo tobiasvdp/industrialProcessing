@@ -18,7 +18,7 @@ public class ObjConverter {
 		ObjConverter cv = new ObjConverter();
 		try {
 			// cv.parseObjFile("C:\\Users\\Stijn\\Documents\\3dsMax\\export\\floorTile.obj");
-			cv.parseObjFile("C:\\Users\\Tobias\\Documents\\3dsMax\\export\\Forge.obj");
+			cv.parseObjFile("C:\\Users\\Tobias\\Documents\\3dsMax\\export\\CoalFire.obj");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -344,9 +344,9 @@ public class ObjConverter {
 				// FileWriter("D:\\Minecraft\\forge\\mcp\\src\\minecraft\\ip\\industrialProcessing\\machines\\flotationCell\\model\\"+file.title
 				// + ".java");
 				
-				//outFile = new FileWriter("C:\\IndustrialProcessing\\forge1.6.4\\mcp\\src\\minecraft\\ip\\industrialProcessing\\subMod\\blackSmith\\plant\\tripHammer\\model\\" + file.title + ".java");
+				outFile = new FileWriter("C:\\IndustrialProcessing\\forge1.6.4\\mcp\\src\\minecraft\\ip\\industrialProcessing\\subMod\\blackSmith\\plant\\forge\\model\\" + file.title + ".java");
 
-				outFile = new FileWriter("C:\\indproc\\forge-1.6.4-9.11.1.965-src\\forge\\mcp\\src\\minecraft\\ip\\industrialProcessing\\subMod\\blackSmith\\plant\\forge\\model\\" + file.title + ".java");
+				//outFile = new FileWriter("C:\\indproc\\forge-1.6.4-9.11.1.965-src\\forge\\mcp\\src\\minecraft\\ip\\industrialProcessing\\subMod\\blackSmith\\plant\\forge\\model\\" + file.title + ".java");
 				// outFile = new
 				// FileWriter("C:\\MinecraftForge\\Minecraft\\forge\\mcp\\src\\minecraft\\ip\\industrialProcessing\\machines\\plants\\metalProcessing\\sandCaster\\model\\"+file.title
 				// + ".java");

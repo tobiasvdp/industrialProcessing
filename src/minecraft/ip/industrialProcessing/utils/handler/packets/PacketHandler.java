@@ -19,6 +19,7 @@ import ip.industrialProcessing.utils.packets.PacketIP002SendMicroBlockDestructio
 import ip.industrialProcessing.utils.packets.PacketIP003ScheduleBlockUpdateToServer;
 import ip.industrialProcessing.utils.packets.PacketIP004RayTraceToServer;
 import ip.industrialProcessing.utils.packets.PacketIP005DestroyBlock;
+import ip.industrialProcessing.utils.packets.PacketIP006SyncValues;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
@@ -53,6 +54,7 @@ public class PacketHandler implements IPacketHandler {
     public static final String IP_SCHEDULE_TICK = "IP.tick";
     public static final String IP_DESTROY_BLOCK = "IP.Des";
     public static final String IP_RAY_TRACE = "IP.Ray.Trace";
+    public static final String IP_SYN_VAL = "IP.Syn.Val";
 
     @Override
     public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {
@@ -60,6 +62,8 @@ public class PacketHandler implements IPacketHandler {
             StateConfigSetter.handleIncomingPacket(manager, packet, player);
         } else if (packet.channel.equals(ANIMATION_SYNC)) {
             TileAnimationSyncHandler.handleAnimationSync(manager, packet, player);
+        } else if (packet.channel.equals(IP_SYN_VAL)) {
+        	PacketDataHandler.handlePacketIP006SyncValues(player, PacketIP006SyncValues.getPacketFromCustom250packet(packet));
         } else if (packet.channel.equals(TANK_SYNC)) {
             TileTankSyncHandler.handleTankSync(manager, packet, player);
         } else if (packet.channel.equals(IP_MICROBLOCKS_DESTROYING)) {

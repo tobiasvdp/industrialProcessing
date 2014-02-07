@@ -5,6 +5,7 @@ import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
 import ip.industrialProcessing.client.render.ModelBlock;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
+import ip.industrialProcessing.multiblock.coreAndDummy.ITileEntityMultiblockSwitcher;
 import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.model.Foot;
 import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.model.Rot;
 import net.minecraft.block.Block;
@@ -90,12 +91,45 @@ public class ModelForge extends ModelBlock {
         TileEntity entity = reference.getBlockTileEntity();
         ForgeDirection forward = BlockMachine.getForwardFromEntity(entity);
         int dir = BlockMachine.getMetadataFromForward(forward);
-        int renderConnection = ((TileEntityMultiblockCore) entity).getModelConnection();
+        int renderConnection = ((ITileEntityMultiblockSwitcher) entity).getModelConnection();
         
         Icon iconWood = reference.getIcon(0);
-
-        //foot.getRotated(dir).renderMesh(false, iconWood, reference);
-
+        
+        switch(renderConnection){
+        case 0:
+        	obj11.getRotated(dir).renderMesh(false, iconWood, reference);
+        	break;
+        case 1:
+        	obj2.getRotated(dir).renderMesh(false, iconWood, reference);
+        	break;
+        case 2:
+        	obj1.getRotated(dir).renderMesh(false, iconWood, reference);
+        	break;
+        case 3:
+        	obj3.getRotated(dir).renderMesh(false, iconWood, reference);
+        	break;
+        case 4:
+        	obj5.getRotated(dir).renderMesh(false, iconWood, reference);
+        	break;
+        case 5:
+        	obj6.getRotated(dir).renderMesh(false, iconWood, reference);
+        	break;
+        case 6:
+        	obj9.getRotated(dir).renderMesh(false, iconWood, reference);
+        	break;
+        case 7:
+        	obj4.getRotated(dir).renderMesh(false, iconWood, reference);
+        	break;
+        case 8:
+        	obj10.getRotated(dir).renderMesh(false, iconWood, reference);
+        	break;
+        case 9:
+        	obj8.getRotated(dir).renderMesh(false, iconWood, reference);
+        	break;
+        case 10:
+        	obj7.getRotated(dir).renderMesh(false, iconWood, reference);
+        	break;
+        }
         return true;
     }
 }

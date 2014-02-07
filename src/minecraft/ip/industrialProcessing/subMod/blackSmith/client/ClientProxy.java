@@ -2,6 +2,7 @@ package ip.industrialProcessing.subMod.blackSmith.client;
 
 import ip.industrialProcessing.api.rendering.RendererBlock;
 import ip.industrialProcessing.client.render.ModelAnimatedFluidMachine;
+import ip.industrialProcessing.client.render.RendererTileEntityAnimated;
 import ip.industrialProcessing.client.render.RendererTileEntityFluidWorker;
 import ip.industrialProcessing.subMod.blackSmith.CommonProxy;
 import ip.industrialProcessing.subMod.blackSmith.config.ConfigBlackSmith;
@@ -9,7 +10,9 @@ import ip.industrialProcessing.subMod.blackSmith.config.ISetupBlackSmith;
 import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.dummy.bellows.model.ModelBellows;
 import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.dummy.ironBowl.model.ModelIronBowl;
 import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.model.ModelBloomery;
+import ip.industrialProcessing.subMod.blackSmith.plant.forge.TileEntityForgeCore;
 import ip.industrialProcessing.subMod.blackSmith.plant.forge.model.ModelForge;
+import ip.industrialProcessing.subMod.blackSmith.plant.forge.model.ModelForgeAnimated;
 import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.dummy.woodenBar.model.ModelWoodenBar;
 import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.dummy.woodenHammer.model.ModelWoodenHammer;
 import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.dummy.woodenWheel.model.ModelWoodenWheel;
@@ -33,6 +36,7 @@ public class ClientProxy extends CommonProxy{
     private static final ModelWoodenWheel modelWoodenWheel = new ModelWoodenWheel();
     private static final ModelTripHamer modelTripHamer = new ModelTripHamer();
     private static final ModelForge modelForge = new ModelForge();
+    private static final ModelForgeAnimated modelForgeAnimated = new ModelForgeAnimated();
     
 	@Override
 	public void registerRenderers() {
@@ -62,6 +66,7 @@ public class ClientProxy extends CommonProxy{
         ConfigBlackSmith.setRendererTripHammerId(RenderingRegistry.getNextAvailableRenderId());
         RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigBlackSmith.getRendererTripHammerId(), modelTripHamer));
         
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityForgeCore.class, new RendererTileEntityAnimated(ISetupBlackSmith.blockForge, "coal_block", modelForgeAnimated));
         ConfigBlackSmith.setRendererForgeId(RenderingRegistry.getNextAvailableRenderId());
         RenderingRegistry.registerBlockHandler(new RendererBlock(ConfigBlackSmith.getRendererForgeId(), modelForge));
 	}

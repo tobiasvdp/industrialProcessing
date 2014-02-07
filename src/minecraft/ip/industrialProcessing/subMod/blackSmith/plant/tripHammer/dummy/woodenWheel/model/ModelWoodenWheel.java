@@ -25,8 +25,7 @@ public class ModelWoodenWheel extends ModelBlock {
 	ObjRotator wheel4 = new ObjRotator(new WheelPart4(), 0);
 
 	@Override
-	public void renderInventory(Block block, int metadata, int modelID,
-			RenderBlocks renderer) {
+	public void renderInventory(Block block, int metadata, int modelID, RenderBlocks renderer) {
 		Vector3f position = new Vector3f(0, 0, 0);
 
 		Icon iconWood = block.getIcon(0, 0);
@@ -46,31 +45,31 @@ public class ModelWoodenWheel extends ModelBlock {
 	}
 
 	@Override
-	public boolean renderWorldBlock(WorldReference reference, int modelId,
-			RenderBlocks renderer) {
+	public boolean renderWorldBlock(WorldReference reference, int modelId, RenderBlocks renderer) {
 
 		TileEntity entity = reference.getBlockTileEntity();
 		ForgeDirection forward = BlockMachine.getForwardFromEntity(entity);
 		int dir = BlockMachine.getMetadataFromForward(forward);
-		int renderConnection = ((TileEntityMultiblockDummy) entity)
-				.getModelConnection();
+		int renderConnection = ((TileEntityMultiblockDummy) entity).getModelConnection();
+		if(renderConnection > 3)
+			dir = BlockMachine.getMetadataFromForward(forward.getOpposite());
 
 		Icon iconWood = reference.getIcon(0);
 
 		switch (renderConnection) {
-		case 4:
+		case 6:
 		case 0:
+			wheel2.getRotated(dir).renderMesh(false, iconWood, reference);
+			break;
+		case 7:
+		case 1:
+			wheel3.getRotated(dir).renderMesh(false, iconWood, reference);
+			break;
+		case 4:
+		case 2:
 			wheel1.getRotated(dir).renderMesh(false, iconWood, reference);
 			break;
 		case 5:
-		case 1:
-			wheel2.getRotated(dir).renderMesh(false, iconWood, reference);
-			break;
-		case 6:
-		case 2:
-			wheel3.getRotated(dir).renderMesh(false, iconWood, reference);
-			break;
-		case 7:
 		case 3:
 			wheel4.getRotated(dir).renderMesh(false, iconWood, reference);
 			break;

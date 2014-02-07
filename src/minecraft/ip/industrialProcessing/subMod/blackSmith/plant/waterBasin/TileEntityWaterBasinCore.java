@@ -33,6 +33,7 @@ import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import ip.industrialProcessing.subMod.blackSmith.config.ISetupBlackSmith;
+import ip.industrialProcessing.utils.DropBlock;
 
 public class TileEntityWaterBasinCore extends TileEntityMultiblockSwitcherCore implements ITankSyncable {
 	static StructureMultiblock structure;
@@ -113,7 +114,7 @@ public class TileEntityWaterBasinCore extends TileEntityMultiblockSwitcherCore i
 				if (recipe.inputs[0].itemId == player.getCurrentEquippedItem().itemID) {
 					player.getCurrentEquippedItem().splitStack(1);
 					if (!player.inventory.addItemStackToInventory(new ItemStack(recipe.outputs[0].itemId, 1, 0))) {
-						doDispense(worldObj, new ItemStack(recipe.outputs[0].itemId, 1, 0), 1, EnumFacing.UP, xCoord, yCoord, zCoord);
+						DropBlock.doDispense(worldObj, new ItemStack(recipe.outputs[0].itemId, 1, 0), 1, ForgeDirection.UP, xCoord, yCoord, zCoord);
 					}
 					player.inventory.onInventoryChanged();
 					drain(ForgeDirection.UNKNOWN, new FluidStack(FluidRegistry.WATER, 1000), true);
@@ -149,7 +150,7 @@ public class TileEntityWaterBasinCore extends TileEntityMultiblockSwitcherCore i
 						player.getCurrentEquippedItem().splitStack(1);
 						this.getTankInSlot(0).fill(fluid, true);
 						if (!player.inventory.addItemStackToInventory(emptyContainer)) {
-							doDispense(worldObj, emptyContainer, 1, EnumFacing.UP, xCoord, yCoord, zCoord);
+							DropBlock.doDispense(worldObj, emptyContainer, 1, ForgeDirection.UP, xCoord, yCoord, zCoord);
 						}
 						player.inventory.onInventoryChanged();
 						return true;
@@ -170,20 +171,4 @@ public class TileEntityWaterBasinCore extends TileEntityMultiblockSwitcherCore i
 		return null;
 	}
 
-	public static void doDispense(World par0World, ItemStack par1ItemStack, int par2, EnumFacing par3EnumFacing, int x, int y, int z) {
-		if (!par0World.isRemote) {
-			double d0 = x;
-			double d1 = y + 1;
-			double d2 = z;
-			EntityItem entityitem = new EntityItem(par0World, d0, d1 - 0.3D, d2, par1ItemStack);
-			double d3 = par0World.rand.nextDouble() * 0.1D + 0.2D;
-			entityitem.motionX = (double) par3EnumFacing.getFrontOffsetX() * d3;
-			entityitem.motionY = 0.20000000298023224D;
-			entityitem.motionZ = (double) par3EnumFacing.getFrontOffsetZ() * d3;
-			entityitem.motionX += par0World.rand.nextGaussian() * 0.007499999832361937D * (double) par2;
-			entityitem.motionY += par0World.rand.nextGaussian() * 0.007499999832361937D * (double) par2;
-			entityitem.motionZ += par0World.rand.nextGaussian() * 0.007499999832361937D * (double) par2;
-			par0World.spawnEntityInWorld(entityitem);
-		}
-	}
 }
