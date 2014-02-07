@@ -7,10 +7,13 @@ import ip.industrialProcessing.multiblock.coreAndDummy.BlockMultiblockSwitcher;
 import ip.industrialProcessing.multiblock.coreAndDummy.ITileEntityMultiblockSwitcher;
 import ip.industrialProcessing.subMod.blackSmith.IPBlackSmith;
 import ip.industrialProcessing.subMod.blackSmith.config.ConfigBlackSmith;
+import ip.industrialProcessing.subMod.blackSmith.plant.waterBasin.TileEntityWaterBasinCore;
 import ip.industrialProcessing.subMod.blackSmith.plant.waterBasin.TileEntityWaterBasinDummy;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockForge  extends BlockMultiblockSwitcher {
@@ -58,6 +61,28 @@ public class BlockForge  extends BlockMultiblockSwitcher {
 			((TileEntityForgeCore) switcher).canBurnBlock();
 		}
 		super.onNeighborBlockChange(world, x, y, z, par5);
+	}
+	
+	@Override
+	public int getLightValue(IBlockAccess world, int x, int y, int z) {
+		return 10;
+	}
+	
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
+		ITileEntityMultiblockSwitcher switcher = (ITileEntityMultiblockSwitcher) world.getBlockTileEntity(x, y, z);
+		if (switcher.isCore()) {
+			TileEntityForgeCore te = (TileEntityForgeCore) world.getBlockTileEntity(x, y, z);
+			if (player.getCurrentEquippedItem() != null) {
+				te.handleRightClick(player);
+			}
+		} else {
+			TileEntityForgeDummy te = (TileEntityForgeDummy) world.getBlockTileEntity(x, y, z);
+			if (player.getCurrentEquippedItem() != null) {
+				te.handleRightClick(player);
+			}
+		}
+		return super.onBlockActivated(world, x, y, z, player, metadata, what, these, are);
 	}
 	
 }

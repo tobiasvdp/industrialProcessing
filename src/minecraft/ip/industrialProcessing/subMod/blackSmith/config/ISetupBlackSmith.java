@@ -23,6 +23,8 @@ public interface ISetupBlackSmith {
 	public final static ItemIP itemWroughtIron = new ItemIP(ConfigBlackSmith.getItemWroughtIronID(), "ItemWroughtIron",IPBlackSmith.tabBlackSmith);
 	public final static ItemWoodenBucket itemWoodenBucket = (ItemWoodenBucket) new ItemWoodenBucket(ConfigBlackSmith.getItemWoodenBucketID(),0).setTextureName(INamepace.TEXTURE_NAME_PREFIX +"ItemWoodenBucket").setCreativeTab(IPBlackSmith.tabBlackSmith);
 	public final static ItemWoodenBucketFilled itemWoodenBucketWater = new ItemWoodenBucketFilled(ConfigBlackSmith.getItemWoodenBucketWaterID(), FluidRegistry.WATER, Block.waterStill, "ItemWoodenBucketWater");
+	public final static ItemIP itemBloomIron = new ItemIP(ConfigBlackSmith.getItemBloomIronID(), "ItemBloomIron",IPBlackSmith.tabBlackSmith);
+	public final static ItemIP itemHeatedIron = new ItemIP(ConfigBlackSmith.getItemHeatedIronID(), "ItemHeatedIron",IPBlackSmith.tabBlackSmith);
 	
 	
 	//blocks

@@ -5,7 +5,9 @@ import java.util.Random;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import ip.industrialProcessing.LocalDirection;
@@ -76,6 +78,9 @@ public class TileEntityForgeCore extends TileEntityMultiblockSwitcherCore implem
 
 	public TileEntityForgeCore() {
 		super(structure, tierRequirments, recipes, LocalDirection.UNKNOWN, 10000, 100);
+		setInventoryGroupArray(1);
+		addStack(null, 0, LocalDirection.LEFT, true, false);
+		addStack(null, 0, LocalDirection.RIGHT, false, true);
 	}
 
 	@Override
@@ -85,7 +90,7 @@ public class TileEntityForgeCore extends TileEntityMultiblockSwitcherCore implem
 
 	@Override
 	protected boolean isValidInput(int slot, int itemID) {
-		return false;
+		return recipes.isValidInput(slot, itemID, getTier());
 	}
 
 	public void burn() {
@@ -172,5 +177,26 @@ public class TileEntityForgeCore extends TileEntityMultiblockSwitcherCore implem
 	@Override
 	public int offsetForSync() {
 		return 5;
+	}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+		burnTime = nbt.getInteger("burnTimeCoal");
+		super.readFromNBT(nbt);
+	}
+	
+	@Override
+	public void writeToNBT(NBTTagCompound nbt) {
+		nbt.setInteger("burnTimeCoal",burnTime);
+		super.writeToNBT(nbt);
+	}
+
+	public void handleRightClick(EntityPlayer player) {
+		if(isValidInput(0, player.getCurrentEquippedItem().itemID)){
+			if(addToSlot(0, player.getCurrentEquippedItem().itemID, 1, 0)){
+				player.getCurrentEquippedItem().splitStack(1);
+				player.inventory.onInventoryChanged();
+			}
+		}
 	}
 }

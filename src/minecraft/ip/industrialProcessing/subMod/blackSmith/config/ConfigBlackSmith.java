@@ -44,6 +44,8 @@ public class ConfigBlackSmith {
 	private static int ItemWroughtIronID = 6000;
 	private static int itemWoodenBucketID = 6001;
 	private static int itemWoodenBucketWaterID = 6002;
+	private static int ItemBloomIronID = 6003;
+	private static int ItemHeatedIronID = 6004;
 
 	// blocks
 	private int bloomeryBlockID = IPBlackSmith.config.get(ConfigCategories.machineOreProcessing.toString(), "bloomeryBlockID", 950).getInt();
@@ -82,6 +84,11 @@ public class ConfigBlackSmith {
 		LanguageRegistry.addName(ISetupBlackSmith.itemWoodenBucketWater, "Wooden bucket of water");
 		BucketRegistery.put(ItemWoodenBucket.class, ItemWoodenBucketFilled.class);
 		FluidContainerRegistry.registerFluidContainer(new FluidContainerData(FluidRegistry.getFluidStack(FluidRegistry.WATER.getName(), FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(ISetupBlackSmith.itemWoodenBucketWater), new ItemStack(ISetupBlackSmith.itemWoodenBucket)));
+		LanguageRegistry.addName(ISetupBlackSmith.itemBloomIron, "Bloom (iron)");
+		LanguageRegistry.instance().addStringLocalization(ISetupBlackSmith.itemBloomIron.getUnlocalizedName() + ".desc", "Wrought iron heated to a high temperature, still containing some slag.");
+		LanguageRegistry.addName(ISetupBlackSmith.itemHeatedIron, "Heated iron");
+		LanguageRegistry.instance().addStringLocalization(ISetupBlackSmith.itemHeatedIron.getUnlocalizedName() + ".desc", "Bloom that has been consolidated using the trip hammer");
+		
 		
 		// machines
 		ConfigMachineBlocks.registerMachineBlock(ISetupBlackSmith.blockBloomery, "IP.MBC.Bloom", "Bloomery", TileEntityBloomery.class, BlockType.Machine, BlockType.blackSmith);
@@ -114,6 +121,14 @@ public class ConfigBlackSmith {
 	
 	public static int getItemWoodenBucketWaterID() {
 		return getInstance().itemWoodenBucketWaterID;
+	}
+	
+	public static int getItemBloomIronID() {
+		return getInstance().ItemBloomIronID;
+	}
+	
+	public static int getItemHeatedIronID() {
+		return getInstance().ItemHeatedIronID;
 	}
 
 
