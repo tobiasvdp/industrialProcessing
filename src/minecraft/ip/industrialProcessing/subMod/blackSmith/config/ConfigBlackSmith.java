@@ -12,6 +12,8 @@ import ip.industrialProcessing.subMod.blackSmith.item.ItemWoodenBucketFilled;
 import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.TileEntityBloomery;
 import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.dummy.bellows.TileEntityBellows;
 import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.dummy.ironBowl.TileEntityIronBowl;
+import ip.industrialProcessing.subMod.blackSmith.plant.forge.TileEntityForgeCore;
+import ip.industrialProcessing.subMod.blackSmith.plant.forge.TileEntityForgeDummy;
 import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.TileEntityTripHammer;
 import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.dummy.woodenBar.TileEntityWoodenBar;
 import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.dummy.woodenHammer.TileEntityWoodenHammer;
@@ -67,6 +69,9 @@ public class ConfigBlackSmith {
 	
 	private int woodenHammerBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "woodenHammerBlockID", 957).getInt();
 	private int rendererWoodenHammer;
+	
+	private int forgeBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "forgeBlockID", 958).getInt();
+	private int rendererForge;
 
 	public void register() {
 
@@ -88,7 +93,9 @@ public class ConfigBlackSmith {
 		ConfigMachineBlocks.registerMachineBlock(ISetupBlackSmith.blockWoodenBar, "IP.MBD.WBar", "Wooden bar", TileEntityWoodenBar.class, BlockType.Dummy, BlockType.blackSmith);
 		ConfigMachineBlocks.registerMachineBlock(ISetupBlackSmith.blockWoodenHammer, "IP.MBD.WHam", "Wooden hammer", TileEntityWoodenHammer.class, BlockType.Dummy, BlockType.blackSmith);
 		ConfigMachineBlocks.registerMachineBlock(ISetupBlackSmith.blockWoodenWheel, "IP.MBD.WWheel", "Wooden wheel", TileEntityWoodenWheel.class, BlockType.Dummy, BlockType.blackSmith);
-
+		ConfigMachineBlocks.registerMachineBlock(ISetupBlackSmith.blockForge, "IP.MBD.Forge", "Forge", TileEntityForgeDummy.class, BlockType.Machine, BlockType.blackSmith);
+		GameRegistry.registerTileEntity(TileEntityForgeCore.class, "IP.MBC.Forge");
+		
 		// vanilla recipes
 		RecipeRegistry.appendVanillaRecipe(VanillaRecipeBridge.getRecipeFromVanilla(GameRegistry.addShapedRecipe(new ItemStack(ISetupBlackSmith.blockBloomery), "xyx", "y y", "xzx", 'x', new ItemStack(Item.brick), 'y', new ItemStack(Block.dirt), 'z', new ItemStack(Block.cobblestone))));
 		RecipeRegistry.appendVanillaRecipe(VanillaRecipeBridge.getRecipeFromVanilla(GameRegistry.addShapedRecipe(new ItemStack(ISetupBlackSmith.blockBellows), "xxx", "yyy", "xxx", 'x', new ItemStack(Block.wood, 1, WILDCARD_VALUE), 'y', new ItemStack(Item.leather))));
@@ -204,6 +211,18 @@ public class ConfigBlackSmith {
 
 	public static void setRendererWoodenWheelId(int id) {
 		getInstance().rendererWoodenWheel = id;
+	}
+	
+	public static int getBlockForgeID() {
+		return getInstance().forgeBlockID;
+	}
+
+	public static int getRendererForgeId() {
+		return getInstance().rendererForge;
+	}
+
+	public static void setRendererForgeId(int id) {
+		getInstance().rendererForge = id;
 	}
 
 }

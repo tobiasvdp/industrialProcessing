@@ -11,6 +11,7 @@ import ip.industrialProcessing.subMod.blackSmith.item.ItemWoodenBucketFilled;
 import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.BlockBloomery;
 import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.dummy.bellows.BlockBellows;
 import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.dummy.ironBowl.BlockIronBowl;
+import ip.industrialProcessing.subMod.blackSmith.plant.forge.BlockForge;
 import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.BlockTripHammer;
 import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.dummy.woodenBar.BlockWoodenBar;
 import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.dummy.woodenHammer.BlockWoodenHammer;
@@ -33,4 +34,5 @@ public interface ISetupBlackSmith {
     public final static BlockWoodenBar blockWoodenBar = new BlockWoodenBar();
     public final static BlockWoodenHammer blockWoodenHammer = new BlockWoodenHammer();
     public final static BlockWoodenWheel blockWoodenWheel = new BlockWoodenWheel();
+    public final static BlockForge blockForge = new BlockForge();
 }
