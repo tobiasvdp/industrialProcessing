@@ -41,11 +41,14 @@ public class ConfigBlackSmith {
 	}
 
 	// items
-	private static int ItemWroughtIronID = 6000;
+	private static int itemWroughtIronID = 6000;
 	private static int itemWoodenBucketID = 6001;
 	private static int itemWoodenBucketWaterID = 6002;
-	private static int ItemBloomIronID = 6003;
-	private static int ItemHeatedIronID = 6004;
+	//private static int itemBloomIronID = 6003;
+	//private static int itemHeatedIronID = 6004;
+	private static int itemPliersID = 6005;
+	private static int itemPliersBloomIronID = 6006;
+	private static int itemPliersHeatedironID = 6007;
 
 	// blocks
 	private int bloomeryBlockID = IPBlackSmith.config.get(ConfigCategories.machineOreProcessing.toString(), "bloomeryBlockID", 950).getInt();
@@ -84,11 +87,12 @@ public class ConfigBlackSmith {
 		LanguageRegistry.addName(ISetupBlackSmith.itemWoodenBucketWater, "Wooden bucket of water");
 		BucketRegistery.put(ItemWoodenBucket.class, ItemWoodenBucketFilled.class);
 		FluidContainerRegistry.registerFluidContainer(new FluidContainerData(FluidRegistry.getFluidStack(FluidRegistry.WATER.getName(), FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(ISetupBlackSmith.itemWoodenBucketWater), new ItemStack(ISetupBlackSmith.itemWoodenBucket)));
-		LanguageRegistry.addName(ISetupBlackSmith.itemBloomIron, "Bloom (iron)");
-		LanguageRegistry.instance().addStringLocalization(ISetupBlackSmith.itemBloomIron.getUnlocalizedName() + ".desc", "Wrought iron heated to a high temperature, still containing some slag.");
-		LanguageRegistry.addName(ISetupBlackSmith.itemHeatedIron, "Heated iron");
-		LanguageRegistry.instance().addStringLocalization(ISetupBlackSmith.itemHeatedIron.getUnlocalizedName() + ".desc", "Bloom that has been consolidated using the trip hammer");
-		
+		LanguageRegistry.addName(ISetupBlackSmith.itemPliersBloomIron, "Bloom (iron)");
+		LanguageRegistry.instance().addStringLocalization(ISetupBlackSmith.itemPliersBloomIron.getUnlocalizedName() + ".desc", "Wrought iron heated to a high temperature, still containing some slag.");
+		LanguageRegistry.addName(ISetupBlackSmith.itemPliersHeatedIron, "Heated iron");
+		LanguageRegistry.instance().addStringLocalization(ISetupBlackSmith.itemPliersHeatedIron.getUnlocalizedName() + ".desc", "Bloom that has been consolidated using the trip hammer");
+		LanguageRegistry.addName(ISetupBlackSmith.itemPliers, "Pliers");
+		LanguageRegistry.instance().addStringLocalization(ISetupBlackSmith.itemPliers.getUnlocalizedName() + ".desc", "Pliers are used to move really hot items arround.");		
 		
 		// machines
 		ConfigMachineBlocks.registerMachineBlock(ISetupBlackSmith.blockBloomery, "IP.MBC.Bloom", "Bloomery", TileEntityBloomery.class, BlockType.Machine, BlockType.blackSmith);
@@ -109,10 +113,11 @@ public class ConfigBlackSmith {
 		RecipeRegistry.appendVanillaRecipe(VanillaRecipeBridge.getRecipeFromVanilla(GameRegistry.addShapedRecipe(new ItemStack(ISetupBlackSmith.blockIronBowl), "   ", "xyx", "   ", 'x', new ItemStack(ISetupItems.itemThickStick), 'y', new ItemStack(ISetupItems.itemIronBowl, 8))));
 		RecipeRegistry.appendVanillaRecipe(VanillaRecipeBridge.getRecipeFromVanilla(GameRegistry.addShapedRecipe(new ItemStack(ISetupBlackSmith.blockWaterBasin), "   ", "x x", "xxx", 'x', new ItemStack(Block.cobblestone))));
 		RecipeRegistry.appendVanillaRecipe(VanillaRecipeBridge.getRecipeFromVanilla(GameRegistry.addShapedRecipe(new ItemStack(ISetupBlackSmith.itemWoodenBucket), " y ", "x x", " x ", 'x', new ItemStack(Block.planks,1,WILDCARD_VALUE),'y',new ItemStack(Item.silk))));
+		RecipeRegistry.appendVanillaRecipe(VanillaRecipeBridge.getRecipeFromVanilla(GameRegistry.addShapedRecipe(new ItemStack(ISetupBlackSmith.itemPliers), "x x", " x ", " x ", 'x', new ItemStack(Block.cobblestone))));
 	}
 
 	public static int getItemWroughtIronID() {
-		return getInstance().ItemWroughtIronID;
+		return getInstance().itemWroughtIronID;
 	}
 
 	public static int getItemWoodenBucketID() {
@@ -123,14 +128,17 @@ public class ConfigBlackSmith {
 		return getInstance().itemWoodenBucketWaterID;
 	}
 	
-	public static int getItemBloomIronID() {
-		return getInstance().ItemBloomIronID;
+	public static int getItemPliersHeatedironID() {
+		return getInstance().itemPliersHeatedironID;
 	}
 	
-	public static int getItemHeatedIronID() {
-		return getInstance().ItemHeatedIronID;
+	public static int getItemPliersID() {
+		return getInstance().itemPliersID;
 	}
-
+	
+	public static int getItemPliersBloomIronID() {
+		return getInstance().itemPliersBloomIronID;
+	}
 
 	public static int getBlockBloomeryID() {
 		return getInstance().bloomeryBlockID;

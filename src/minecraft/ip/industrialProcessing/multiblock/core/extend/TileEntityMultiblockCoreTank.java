@@ -369,4 +369,8 @@ public abstract class TileEntityMultiblockCoreTank extends TileEntityMultiblockC
 			return fluidTanks.get(index);
 		return null;
 	}
+
+	public int countDummies() {
+		return getDummies().size();
+	}
 }

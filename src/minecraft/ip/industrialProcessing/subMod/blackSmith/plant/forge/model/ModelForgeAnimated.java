@@ -82,40 +82,39 @@ public class ModelForgeAnimated extends ModelAnimatedMachine {
 					return 0;
 				}
 			};
-			coal.renderMesh(icon);
-			ItemStack stack = core.getStackInSlot(0);
-			if(stack != null){
-				if(entity == null){
-					entity = new EntityItem(tileEntity.worldObj,tileEntity.xCoord,tileEntity.yCoord,tileEntity.zCoord);
-				}
-				entity.age = 0;
-				entity.setEntityItemStack(stack);
-				RenderItem itemrenderer = (RenderItem) RenderManager.instance.getEntityClassRenderObject(EntityItem.class);
-				float scale = 1.5f;
-				float oneOverScale = 1f / scale;
-				GL11.glPushMatrix();
-				GL11.glScalef(oneOverScale, oneOverScale, oneOverScale);
-				GL11.glRotatef(180, 1, 0, 0);
-				itemrenderer.doRenderItem(entity, 0, 0f, 0, 0, f);
-				GL11.glPopMatrix();
-			}
-			
-			stack = core.getStackInSlot(1);
+			coal.renderMesh(icon);		
+			ItemStack stack = core.getStackInSlot(1);
 			if(stack != null){
 				if(entityOutput == null){
 					entityOutput = new EntityItem(tileEntity.worldObj,tileEntity.xCoord,tileEntity.yCoord,tileEntity.zCoord);
 				}
-				entityOutput.setEntityItemStack(stack);
-				entityOutput.age = 0;
+				entityOutput.setEntityItemStack(new ItemStack(stack.itemID,1,0));
+				entityOutput.age++;
 				RenderItem itemrenderer = (RenderItem) RenderManager.instance.getEntityClassRenderObject(EntityItem.class);
 				float scale = 1f;
-				float oneOverScale = 1f / scale;
+				float oneOverScale = 1.5f / scale;
 				GL11.glPushMatrix();
 				GL11.glScalef(oneOverScale, oneOverScale, oneOverScale);
 				GL11.glRotatef(180, 1, 0, 0);
-				GL11.glTranslatef(0f, -0.5f, 0.0f);
+				GL11.glTranslatef(0f, -0.3f, 0.0f);
 				itemrenderer.doRenderItem(entityOutput, 0, 0f, 0, 0, f);
 				GL11.glPopMatrix();
+			}else{
+				stack = core.getStackInSlot(0);
+				if(stack != null){
+					if(entity == null){
+						entity = new EntityItem(tileEntity.worldObj,tileEntity.xCoord,tileEntity.yCoord,tileEntity.zCoord);
+					}
+					entity.age = 0;
+					entity.setEntityItemStack(stack);
+					RenderItem itemrenderer = (RenderItem) RenderManager.instance.getEntityClassRenderObject(EntityItem.class);
+					float scale = 1.5f;
+					float oneOverScale = 1f / scale;
+					GL11.glPushMatrix();
+					GL11.glScalef(oneOverScale, oneOverScale, oneOverScale);
+					itemrenderer.doRenderItem(entity, 0, 0f, 0, 0, f);
+					GL11.glPopMatrix();
+				}
 			}
 			GL11.glPopMatrix();
 		}

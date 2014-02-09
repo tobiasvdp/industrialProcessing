@@ -22,7 +22,7 @@ public class RecipesForge extends RecipesMultiblock {
 		recipe.tier = Tiers.Tier0;
 		recipe.workRequired = work;
 		recipe.inputs =  new RecipeInputSlot[]{new RecipeInputSlot(0, new ItemStack(ISetupBlackSmith.itemWroughtIron))};
-		recipe.outputs =  new RecipeOutputSlot[]{new RecipeOutputSlot(1, new ItemStack(ISetupBlackSmith.itemWroughtIron))};
+		recipe.outputs =  new RecipeOutputSlot[]{new RecipeOutputSlot(1, new ItemStack(ISetupBlackSmith.itemPliersBloomIron))};
 		return recipe;
 	}
 }

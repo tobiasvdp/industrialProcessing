@@ -28,12 +28,6 @@ public abstract class BlockMultiblockSwitcher extends BlockContainer {
 	}
 
 	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, int par5) {
-		super.onNeighborBlockChange(world, x, y, z, par5);
-
-	}
-
-	@Override
 	public boolean isOpaqueCube() {
 		return false;
 	}
@@ -97,12 +91,8 @@ public abstract class BlockMultiblockSwitcher extends BlockContainer {
 		TileEntity entity = world.getBlockTileEntity(x, y, z);
 		world.setBlockMetadataWithNotify(x, y, z, dir, 0);
 		super.onBlockPlacedBy(world, x, y, z, entityLivingBase, itemStack);
-		if (((TileEntityMultiblockSwitcherDummy) entity).searchForCore()) {
-			((TileEntityMultiblockSwitcherDummy) entity).getCore().onLayoutChange();
-		} else {
-			((TileEntityMultiblockSwitcherDummy) entity).switchToCore();
-		}
 		((TileEntityMultiblockDummy) entity).setsideFromMetadata(dir);
+		((TileEntityMultiblockSwitcherDummy) entity).resolveSwitcher();
 	}
 
 	@Override

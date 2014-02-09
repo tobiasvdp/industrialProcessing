@@ -23,6 +23,7 @@ import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.multiblock.tier.Tier;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
+import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import ip.industrialProcessing.subMod.blackSmith.config.ISetupBlackSmith;
 import ip.industrialProcessing.subMod.blackSmith.plant.waterBasin.RecipesWaterBasin;
 import ip.industrialProcessing.utils.DropBlock;
@@ -118,17 +119,19 @@ public class TileEntityForgeCore extends TileEntityMultiblockSwitcherCore implem
 	}
 
 	public void canBurnBlock() {
-		int id = worldObj.getBlockId(xCoord, yCoord + 1, zCoord);
-		if (id != 0) {
-			Block block = Block.blocksList[id];
-			int value = GameRegistry.getFuelValue(new ItemStack(block));
-			if (value == 0 || burnTime > 40000) {
-				DropBlock.doDispense(worldObj, new ItemStack(block), 1, getForwardDirection().getOpposite(), xCoord, yCoord + 1, zCoord);
-			} else {
-				burnTime += value;
-				PrevburnTime = burnTime;
+		if (getState() == MultiblockState.COMPLETED) {
+			int id = worldObj.getBlockId(xCoord, yCoord + 1, zCoord);
+			if (id != 0) {
+				Block block = Block.blocksList[id];
+				int value = GameRegistry.getFuelValue(new ItemStack(block));
+				if (value == 0 || burnTime > 40000) {
+					DropBlock.doDispense(worldObj, new ItemStack(block), 1, getForwardDirection().getOpposite(), xCoord, yCoord + 1, zCoord);
+				} else {
+					burnTime += value;
+					PrevburnTime = burnTime;
+				}
+				worldObj.destroyBlock(xCoord, yCoord + 1, zCoord, false);
 			}
-			worldObj.destroyBlock(xCoord, yCoord + 1, zCoord, false);
 		}
 	}
 
@@ -146,11 +149,29 @@ public class TileEntityForgeCore extends TileEntityMultiblockSwitcherCore implem
 	@Override
 	public void setValues(int[] val) {
 		burnTime = val[0];
+		if (val[1] != 0) {
+			getStackInSlot(0).itemID = val[1];
+			getStackInSlot(0).stackSize = val[2];
+			getStackInSlot(1).itemID = val[3];
+			getStackInSlot(1).stackSize = val[4];
+		}
 	}
 
 	@Override
 	public int[] getValues() {
-		return new int[] { burnTime };
+		int[] val = new int[5];
+		val[0] = burnTime;
+
+		if (getStackInSlot(0) != null) {
+			val[1] = getStackInSlot(0).itemID;
+			val[2] = getStackInSlot(0).stackSize;
+		}
+
+		if (getStackInSlot(1) != null) {
+			val[3] = getStackInSlot(1).itemID;
+			val[4] = getStackInSlot(1).stackSize;
+		}
+		return val;
 	}
 
 	@Override
@@ -162,40 +183,63 @@ public class TileEntityForgeCore extends TileEntityMultiblockSwitcherCore implem
 			}
 		}
 		if (requireUpdate) {
-			for (int i = 0; i < val.length; i++) {
-				prev[i] = val[i];
-			}
-			PacketDispatcher.sendPacketToAllAround(xCoord, yCoord, zCoord, 50, this.worldObj.provider.dimensionId, new PacketIP006SyncValues(xCoord, yCoord, zCoord,val).getCustom250Packet());
+			PrevburnTime = burnTime;
+			PacketDispatcher.sendPacketToAllAround(xCoord, yCoord, zCoord, 50, this.worldObj.provider.dimensionId, new PacketIP006SyncValues(xCoord, yCoord, zCoord, val).getCustom250Packet());
 		}
 	}
 
 	@Override
 	public int[] getPrevValues() {
-		return new int[] { PrevburnTime };
+		int[] val = new int[5];
+		val[0] = PrevburnTime;
+
+		if (getStackInSlot(0) != null) {
+			val[1] = getStackInSlot(0).itemID;
+			val[2] = getStackInSlot(0).stackSize;
+		}
+
+		if (getStackInSlot(1) != null) {
+			val[3] = getStackInSlot(1).itemID;
+			val[4] = getStackInSlot(1).stackSize;
+		}
+		return val;
 	}
 
 	@Override
 	public int offsetForSync() {
 		return 5;
 	}
-	
+
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		burnTime = nbt.getInteger("burnTimeCoal");
 		super.readFromNBT(nbt);
 	}
-	
+
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
-		nbt.setInteger("burnTimeCoal",burnTime);
+		nbt.setInteger("burnTimeCoal", burnTime);
 		super.writeToNBT(nbt);
 	}
 
 	public void handleRightClick(EntityPlayer player) {
-		if(isValidInput(0, player.getCurrentEquippedItem().itemID)){
-			if(addToSlot(0, player.getCurrentEquippedItem().itemID, 1, 0)){
-				player.getCurrentEquippedItem().splitStack(1);
-				player.inventory.onInventoryChanged();
+		if (getState() == MultiblockState.COMPLETED) {
+			if (isValidInput(0, player.getCurrentEquippedItem().itemID)) {
+				if (addToSlot(0, player.getCurrentEquippedItem().itemID, 1, 0)) {
+					player.getCurrentEquippedItem().splitStack(1);
+					player.inventory.onInventoryChanged();
+				}
+			}
+			if (player.getCurrentEquippedItem().itemID == ISetupBlackSmith.itemPliers.itemID) {
+				if (getStackInSlot(1) != null && getStackInSlot(1).stackSize > 0) {
+					player.getCurrentEquippedItem().splitStack(1);
+					ItemStack givenStack = decrStackSize(1, 1);
+					if (player.inventory.addItemStackToInventory(givenStack)) {
+						DropBlock.doDispense(worldObj, givenStack, 1, getForwardDirection().getOpposite(), xCoord, yCoord + 1, zCoord);
+					}
+					player.inventory.onInventoryChanged();
+					onInventoryChanged();
+				}
 			}
 		}
 	}
