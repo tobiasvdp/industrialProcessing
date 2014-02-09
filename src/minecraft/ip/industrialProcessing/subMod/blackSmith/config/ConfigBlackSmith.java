@@ -20,6 +20,7 @@ import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.dummy.woodenHa
 import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.dummy.woodenWheel.TileEntityWoodenWheel;
 import ip.industrialProcessing.subMod.blackSmith.plant.waterBasin.TileEntityWaterBasinCore;
 import ip.industrialProcessing.subMod.blackSmith.plant.waterBasin.TileEntityWaterBasinDummy;
+import ip.industrialProcessing.subMod.blackSmith.plant.waterWheel.TileEntityWaterWheel;
 import ip.industrialProcessing.utils.registry.BlockType;
 import ip.industrialProcessing.utils.registry.BucketRegistery;
 import ip.industrialProcessing.utils.registry.RecipeRegistry;
@@ -77,6 +78,9 @@ public class ConfigBlackSmith {
 	
 	private int forgeBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "forgeBlockID", 958).getInt();
 	private int rendererForge;
+	
+	private int waterWheelBlockID = IndustrialProcessing.config.get(ConfigCategories.machineOreProcessing.toString(), "WaterWheelBlockID", 959).getInt();
+	private int rendererWaterWheel;
 
 	public void register() {
 
@@ -106,6 +110,7 @@ public class ConfigBlackSmith {
 		ConfigMachineBlocks.registerMachineBlock(ISetupBlackSmith.blockWoodenWheel, "IP.MBD.WWheel", "Wooden wheel", TileEntityWoodenWheel.class, BlockType.Dummy, BlockType.blackSmith);
 		ConfigMachineBlocks.registerMachineBlock(ISetupBlackSmith.blockForge, "IP.MBD.Forge", "Forge", TileEntityForgeDummy.class, BlockType.Machine, BlockType.blackSmith);
 		GameRegistry.registerTileEntity(TileEntityForgeCore.class, "IP.MBC.Forge");
+		ConfigMachineBlocks.registerMachineBlock(ISetupBlackSmith.blockWaterWheel, "IP.MBD.WaterWh", "Water wheel", TileEntityWaterWheel.class, BlockType.Machine, BlockType.blackSmith);
 		
 		// vanilla recipes
 		RecipeRegistry.appendVanillaRecipe(VanillaRecipeBridge.getRecipeFromVanilla(GameRegistry.addShapedRecipe(new ItemStack(ISetupBlackSmith.blockBloomery), "xyx", "y y", "xzx", 'x', new ItemStack(Item.brick), 'y', new ItemStack(Block.dirt), 'z', new ItemStack(Block.cobblestone))));
@@ -248,4 +253,15 @@ public class ConfigBlackSmith {
 		getInstance().rendererForge = id;
 	}
 
+	public static int getBlockWaterWheelID() {
+		return getInstance().waterWheelBlockID;
+	}
+
+	public static int getRendererWaterWheelId() {
+		return getInstance().rendererWaterWheel;
+	}
+
+	public static void setRendererWaterWheelId(int id) {
+		getInstance().rendererWaterWheel = id;
+	}
 }

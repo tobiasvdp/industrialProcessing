@@ -17,6 +17,7 @@ import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.dummy.woodenBa
 import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.dummy.woodenHammer.BlockWoodenHammer;
 import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.dummy.woodenWheel.BlockWoodenWheel;
 import ip.industrialProcessing.subMod.blackSmith.plant.waterBasin.BlockWaterBasin;
+import ip.industrialProcessing.subMod.blackSmith.plant.waterWheel.BlockWaterWheel;
 
 public interface ISetupBlackSmith {
 	//items
@@ -38,4 +39,5 @@ public interface ISetupBlackSmith {
     public final static BlockWoodenHammer blockWoodenHammer = new BlockWoodenHammer();
     public final static BlockWoodenWheel blockWoodenWheel = new BlockWoodenWheel();
     public final static BlockForge blockForge = new BlockForge();
+    public final static BlockWaterWheel blockWaterWheel = new BlockWaterWheel();
 }
