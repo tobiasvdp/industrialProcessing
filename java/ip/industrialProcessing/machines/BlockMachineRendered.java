@@ -7,8 +7,8 @@ import net.minecraft.world.World;
 
 public abstract class BlockMachineRendered extends BlockMachine {
 
-	public BlockMachineRendered(int par1, Material par2Material, float hardness, StepSound stepSound, String name, CreativeTabs tab) {
-		super(par1, par2Material, hardness, stepSound, name, tab);
+	public BlockMachineRendered(Material par2Material, float hardness, SoundType stepSound, CreativeTabs tab) {
+		super(par2Material, hardness, stepSound, tab);
 	}
 
 	@Override

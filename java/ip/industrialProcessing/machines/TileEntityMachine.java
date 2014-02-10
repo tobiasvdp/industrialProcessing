@@ -73,9 +73,9 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
     private void readInventory(NBTTagCompound nbt) {
         if (!nbt.hasKey("Items"))
             return;
-        NBTTagList nbttaglist = nbt.getTagList("Items");
+        NBTTagList nbttaglist = nbt.getTagList("Items",0);
         for (int i = 0; i < nbttaglist.tagCount(); ++i) {
-            NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(i);
+            NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.getCompoundTagAt(i);
             byte b0 = nbttagcompound1.getByte("Slot");
 
             if (b0 >= 0 && b0 < itemStacks.size()) {
@@ -251,15 +251,7 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
 
     @Override
     public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-        return worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) == this && entityplayer.getDistanceSq(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5) < 64;
-    }
-
-    @Override
-    public void openChest() {
-    }
-
-    @Override
-    public void closeChest() {
+        return worldObj.getTileEntity(xCoord, yCoord, zCoord) == this && entityplayer.getDistanceSq(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5) < 64;
     }
 
     @Override
@@ -310,7 +302,7 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
     public void setForwardDirection(ForgeDirection forwardFromMetadata) {
         this.forwardDirection = forwardFromMetadata;
         if (this.worldObj != null)
-            this.worldObj.notifyBlockChange(xCoord, yCoord, zCoord, this.getBlockType().blockID);
+            this.worldObj.notifyBlockChange(xCoord, yCoord, zCoord, this.getBlockType());
     }
 
     @Override
@@ -339,5 +331,25 @@ public abstract class TileEntityMachine extends TileEntitySynced implements ISid
             return status;
         return StatusType.disabled;
     }
+    
+	@Override
+	public void closeInventory() {
+		
+	}
+
+	@Override
+	public String getInventoryName() {
+		return null;
+	}
+
+	@Override
+	public boolean hasCustomInventoryName() {
+		return false;
+	}
+
+	@Override
+	public void openInventory() {
+
+	}
 
 }

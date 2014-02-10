@@ -13,8 +13,8 @@ import net.minecraftforge.fluids.Fluid;
 
 public class ItemIPBucket extends ItemBucket {
 
-    public ItemIPBucket(int itemId, Fluid fluid, Block block, String texture) {
-	super(itemId, block.blockID);
+    public ItemIPBucket(Fluid fluid, Block block, String texture) {
+	super(block);
 	setUnlocalizedName("Container" + fluid.getName());
 	setMaxStackSize(1);
 	setCreativeTab(ISetupCreativeTabs.tabFluid);
@@ -30,12 +30,12 @@ public class ItemIPBucket extends ItemBucket {
     
     @Override
     public Item getContainerItem() { 
-        return Item.bucketEmpty;
+        return (Item) Item.itemRegistry.getObject("empty_bucket");
     }
     
     
     @Override
-    public ItemStack getContainerItemStack(ItemStack itemStack) { 
+    public ItemStack getContainerItem(ItemStack itemStack) { 
         return new ItemStack(getContainerItem(),1);
     }
 }

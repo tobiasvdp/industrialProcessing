@@ -8,8 +8,8 @@ import net.minecraft.item.Item;
 
 public class ItemIP extends Item {
 
-	public ItemIP(int ID,String name,CreativeTabs tab) {
-		super(ID);
+	public ItemIP(String name,CreativeTabs tab) {
+		super();
 		setMaxStackSize(64);
 		setCreativeTab(tab);
 		setUnlocalizedName(name);
@@ -17,8 +17,8 @@ public class ItemIP extends Item {
 		ItemRegistry.RegisterItem(this, ItemType.item);
 	}
 	
-	public ItemIP(int ID,String name,CreativeTabs tab,ItemType... type) {
-		super(ID);
+	public ItemIP(String name,CreativeTabs tab,ItemType... type) {
+		super();
 		setMaxStackSize(64);
 		setCreativeTab(tab);
 		setUnlocalizedName(name);

@@ -13,8 +13,8 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 public class ItemSuspendedCart extends Item{
 
-	public ItemSuspendedCart(int ID,String name,int stackSize,CreativeTabs tab) {
-		super(ID);
+	public ItemSuspendedCart(String name,int stackSize,CreativeTabs tab) {
+		super();
 		this.maxStackSize = stackSize;
 		setCreativeTab(tab);
 		setUnlocalizedName(name);
@@ -22,7 +22,7 @@ public class ItemSuspendedCart extends Item{
 	}
 	@Override
 	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10) {
-		if(par3World.getBlockId(par4, par5, par6) == ISetupTransportBlocks.blockSuspendedRail.blockID ){
+		if(par3World.getBlock(par4, par5, par6) == ISetupTransportBlocks.blockSuspendedRail ){
 			
 			par3World.spawnEntityInWorld(new EntityFloatingCart(par3World, par4+0.5, par5-0.5, par6+0.5,RandomStringUtils.randomAscii(16)));
 		}

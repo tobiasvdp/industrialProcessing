@@ -16,8 +16,8 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
-@Mod(modid = "IPLogic", name = "Industrial Processing Logic", version = "0.0.1", dependencies = "required-after:IndustrialProcessing")
-@NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = { PacketHandler.channel, PacketHandler.DISPLAY_GET_NODES, PacketHandler.DISPLAY_GET_DATA }, packetHandler = PacketHandler.class)
+//TODO@Mod(modid = "IPLogic", name = "Industrial Processing Logic", version = "0.0.1", dependencies = "required-after:IndustrialProcessing")
+//TODO@NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = { PacketHandler.channel, PacketHandler.DISPLAY_GET_NODES, PacketHandler.DISPLAY_GET_DATA }, packetHandler = PacketHandler.class)
 public class IPLogic implements ISetupLogic {
 	@Instance("IPLogic")
 	public static IPLogic instance;

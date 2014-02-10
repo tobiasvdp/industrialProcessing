@@ -1,4 +1,4 @@
-package ip.industrialProcessing.api.config;
+package mod.industrialProcessing.utils;
 
 public interface INamepace {
     public static final String RESOURCE_PATH = "/assets/industrialprocessing/";

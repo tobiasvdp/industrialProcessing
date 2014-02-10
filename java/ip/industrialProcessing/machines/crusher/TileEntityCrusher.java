@@ -28,5 +28,4 @@ public class TileEntityCrusher extends TileEntityPoweredWorkerMachine {
 	public Iterator<IMachineRecipe> iterateRecipes() {
 		return recipes.getRecipes();
 	}
-
 }

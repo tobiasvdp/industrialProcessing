@@ -12,13 +12,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 public class ItemRemote extends ItemIP implements IRemote {
 
-	public ItemRemote(int par1) {
-		super(par1, "RemoteIP", ISetupCreativeTabs.tabMultiblocks);
+	public ItemRemote() {
+		super("RemoteIP", ISetupCreativeTabs.tabMultiblocks);
 		setMaxStackSize(1);
 	}
 
@@ -34,17 +35,17 @@ public class ItemRemote extends ItemIP implements IRemote {
 		if (par1ItemStack.stackTagCompound == null) {
 			par1ItemStack.stackTagCompound = new NBTTagCompound();
 		}
-		TileEntity tileEntity = par3World.getBlockTileEntity(par4, par5, par6);
+		TileEntity tileEntity = par3World.getTileEntity(par4, par5, par6);
 		if (tileEntity != null) {
 			if (tileEntity instanceof ISender) {
 				ISender sender = (ISender) tileEntity;
 				if (sender.sendTileEntity(this, par1ItemStack) && par3World.isRemote)
-					par2EntityPlayer.sendChatToPlayer(new ChatMessageComponent().setColor(EnumChatFormatting.YELLOW).addText("Pairing data for TileEntity received."));
+					par2EntityPlayer.addChatMessage(new ChatComponentText("Pairing data for TileEntity received."));
 			}
 			if (tileEntity instanceof IReceiver) {
 				IReceiver receiver = (IReceiver) tileEntity;
 				if (receiver.receiveTileEntity(this, par1ItemStack) && par3World.isRemote)
-					par2EntityPlayer.sendChatToPlayer(new ChatMessageComponent().setColor(EnumChatFormatting.YELLOW).addText("Pairing data for TileEntity send."));
+					par2EntityPlayer.addChatMessage(new ChatComponentText("Pairing data for TileEntity send."));
 			}
 		}
 		if(!par3World.isRemote){

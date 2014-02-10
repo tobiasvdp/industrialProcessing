@@ -1,25 +1,20 @@
-package ip.industrialProcessing.buildingBlock;
+package mod.industrialProcessing.blocks;
 
-import ip.industrialProcessing.api.config.INamepace;
-import ip.industrialProcessing.config.ISetupCreativeTabs;
-
-import javax.swing.Icon;
-
+import mod.industrialProcessing.utils.INamepace;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockPane extends net.minecraft.block.BlockPane{
+public class BlockIPPane extends net.minecraft.block.BlockPane{
 	
     String name;
     
-	public BlockPane(int par1, String par2Str, String par3Str, Material par4Material, boolean par5) {
-		super(par1, INamepace.TEXTURE_NAME_PREFIX + par2Str + "1", INamepace.TEXTURE_NAME_PREFIX + par3Str + "1", par4Material, par5);
+	public BlockIPPane(String par2Str, String par3Str, Material par4Material, boolean par5) {
+		super(INamepace.TEXTURE_NAME_PREFIX + par2Str + "1", INamepace.TEXTURE_NAME_PREFIX + par3Str + "1", par4Material, par5);
 		name = par2Str;
-		this.setCreativeTab(ISetupCreativeTabs.tabMachineParts);
 	}
 
 	@Override
@@ -41,26 +36,19 @@ public class BlockPane extends net.minecraft.block.BlockPane{
     }
     
 
-    Icon[] icon = new Icon[16];
-
+    IIcon[] icon = new IIcon[16];
+    
     @Override
-    public void registerIcons(IconRegister par1IconRegister) {
+    public void registerBlockIcons(IIconRegister p_149651_1_) {
         for (int i = 0; i < 16; i++) {
-			icon[i] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + name + i);
+			icon[i] = p_149651_1_.registerIcon(INamepace.TEXTURE_NAME_PREFIX + name + i);
         }
     }
 
     @Override
-    public Icon getIcon(int par1, int par2) {
+    public IIcon getIcon(int par1, int par2) {
         return icon[par2];
-    }
-    
-	@SideOnly(Side.CLIENT)
-	@Override
-	public Icon getSideTextureIndex() {
-		return icon[0];
-	}
-    
+    }    
 	
 	@Override
 	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {

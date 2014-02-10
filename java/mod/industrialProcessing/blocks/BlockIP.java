@@ -1,37 +1,34 @@
-package ip.industrialProcessing.buildingBlock;
-
-import ip.industrialProcessing.api.config.INamepace;
-import ip.industrialProcessing.config.ISetupCreativeTabs;
+package mod.industrialProcessing.blocks;
 
 import java.util.Random;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+import mod.industrialProcessing.utils.INamepace;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class BlockIP extends Block {
 	boolean dropItems = false;
-	int dropItem;
+	Item dropItem;
 
-	public BlockIP(int blockID, String name, float hardness, Material blockMaterial, StepSound stepSound) {
-		super(blockID, blockMaterial);
+	public BlockIP(String name, float hardness, Material blockMaterial, SoundType stepSound) {
+		super(blockMaterial);
 		setHardness(hardness);
 		setStepSound(stepSound);
-		setUnlocalizedName(name);
-		setCreativeTab(ISetupCreativeTabs.tabPower);
-		setTextureName(INamepace.TEXTURE_NAME_PREFIX + name);
+		setBlockTextureName(INamepace.TEXTURE_NAME_PREFIX + name);
+		GameRegistry.registerBlock(this, name);
 	}
 
-	public BlockIP(int blockID, String name, float hardness, Material blockMaterial, StepSound stepSound, int dropitem) {
-		super(blockID, blockMaterial);
+	public BlockIP(String name, float hardness, Material blockMaterial, SoundType stepSound, Item dropitem) {
+		super(blockMaterial);
 		setHardness(hardness);
 		setStepSound(stepSound);
-		setUnlocalizedName(name);
-		setCreativeTab(ISetupCreativeTabs.tabOres);
-		setTextureName(INamepace.TEXTURE_NAME_PREFIX + name);
+		setBlockTextureName(INamepace.TEXTURE_NAME_PREFIX + name);
 		this.dropItems = true;
 		this.dropItem = dropitem;
 	}
@@ -44,11 +41,11 @@ public class BlockIP extends Block {
 	}
 
 	@Override
-	public int idDropped(int par1, Random par2Random, int par3) {
+	public Item getItemDropped(int par1, Random par2Random, int par3) {
 		if (this.dropItems) {
 			return this.dropItem;
 		}
-		return super.idDropped(par1, par2Random, par3);
+		return super.getItemDropped(par1, par2Random, par3);
 	}
 
 }

@@ -20,34 +20,28 @@ import net.minecraftforge.fluids.IFluidHandler;
 import cpw.mods.fml.common.Loader;
 
 public abstract class BlockMachine extends BlockContainer {
-	public BlockMachine(int par1, Material par2Material, float hardness, StepSound stepSound, String name, CreativeTabs tab) {
-		super(par1, par2Material);
+	public BlockMachine(Material par2Material, float hardness, SoundType stepSound,CreativeTabs tab) {
+		super(par2Material);
 		setHardness(hardness);
 		setStepSound(stepSound);
-		setUnlocalizedName(name);
 		if (tab != null)
 			setCreativeTab(tab);
-		setTextureName(INamepace.TEXTURE_NAME_PREFIX + "inputTop");
+		setBlockTextureName(INamepace.TEXTURE_NAME_PREFIX + "inputTop");
 	}
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float clickX, float clickY, float clickZ) {
-		TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+		TileEntity tileEntity = world.getTileEntity(x, y, z);
 		if (tileEntity == null || player.isSneaking()) {
 			return false;
 		}
-		if (Loader.isModLoaded("IPLogic")) {
-			if (checkIfEquiped(player)) {
-				return false;
-			}
-		}
 		ItemStack stack = player.inventory.getCurrentItem();
 		if (stack != null) {
-			if (stack.itemID == ISetupItems.itemWrench.itemID)
+			if (stack.getItem() == ISetupItems.itemWrench)
 				return false;
 		}
 
-		TileEntity te = world.getBlockTileEntity(x, y, z);
+		TileEntity te = world.getTileEntity(x, y, z);
 		if (te instanceof IFluidHandler) {
 			if (FluidTransfers.handleRightClick(player, (IFluidHandler) te, clickX, clickY, clickZ))
 				return true;
@@ -56,16 +50,8 @@ public abstract class BlockMachine extends BlockContainer {
 		return true;
 	}
 
-	private boolean checkIfEquiped(EntityPlayer player) {
-		// if(player.getCurrentEquippedItem() != null &&
-		// player.getCurrentEquippedItem().itemID ==
-		// ISetupLogic.BlockMachineInterface.blockID)
-		// return true;
-		return false;
-	}
-
 	@Override
-	public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
+	public void breakBlock(World world, int x, int y, int z, Block par5, int par6) {
 		InventoryUtils.DropInventoryContents(world, x, y, z);
 		super.breakBlock(world, x, y, z, par5, par6);
 	}
@@ -73,10 +59,9 @@ public abstract class BlockMachine extends BlockContainer {
 	@Override
 	public boolean canPlaceBlockAt(World par1World, int x, int y, int z) {
 		boolean canPlace = true;
-		int l = par1World.getBlockId(x, y, z);
-		Block block = Block.blocksList[l];
+		Block block = par1World.getBlock(x, y, z);
 		if (block != null) {
-			if (!block.isBlockReplaceable(par1World, x, y, z))
+			if (!block.isReplaceable(par1World, x, y, z))
 				canPlace = false;
 		}
 		return canPlace;
@@ -89,7 +74,7 @@ public abstract class BlockMachine extends BlockContainer {
 	}
 
 	public static void setRotation(World world, int x, int y, int z, EntityLivingBase entityLivingBase) {
-		TileEntity entity = world.getBlockTileEntity(x, y, z);
+		TileEntity entity = world.getTileEntity(x, y, z);
 		if (entity instanceof IRotateableEntity) {
 			setRotation((IRotateableEntity) entity, entityLivingBase);
 		}

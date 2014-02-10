@@ -15,8 +15,8 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = "IPPower", name = "Industrial Processing Power", version = "0.0.1", dependencies = "required-after:IndustrialProcessing")
-@NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = { PacketHandler.channel }, packetHandler = PacketHandler.class)
+//TODO@Mod(modid = "IPPower", name = "Industrial Processing Power", version = "0.0.1", dependencies = "required-after:IndustrialProcessing")
+//TODO@NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = { PacketHandler.channel }, packetHandler = PacketHandler.class)
 public class IPPower implements ISetupPower {
 	@Instance("IPPower")
 	public static IPPower instance;

@@ -12,8 +12,8 @@ import net.minecraft.world.World;
 
 public class ItemGuide extends ItemIP {
 
-    public ItemGuide(int ID, String name, CreativeTabs tab) {
-	super(ID, name, tab); 
+    public ItemGuide(String name, CreativeTabs tab) {
+	super(name, tab); 
 	ItemRegistry.RegisterItem(this, ItemType.tool);
     }
     

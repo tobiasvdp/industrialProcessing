@@ -1,0 +1,43 @@
+package mod.industrialProcessing.blocks;
+
+import mod.industrialProcessing.IndustrialProcessing;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockOre;
+
+public interface ISetupBlocks {
+    public static final Block blockCopperOre = new BlockOre().setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeStone);
+    public static final Block blockTinOre = new BlockOre().setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeStone);
+    public static final Block blockGalenaOre = new BlockOre().setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeStone);
+    public static final Block blockRutileOre = new BlockIPOre().setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeStone);
+    public static final Block blockChromiteOre = new BlockOre().setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeStone);
+    public static final Block blockCinnebarOre = new BlockIPOre().setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeStone);
+    public static final Block blockTaliaOre = new BlockOre().setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeStone);
+    public static final Block blockBauxiteOre = new BlockOre().setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeStone);
+
+    /*
+    public final static BlockIP blockIronFlat = new BlockIP(ConfigBlocks.getInstance().blockIronFlat(), "ip.block.ironflat", 5.0f, Material.iron, Block.soundMetalFootstep);
+    public final static BlockIP blockGrit = (BlockIP) new BlockIP(ConfigBlocks.getInstance().blockGrit(), "Grit", 1.0f, Material.ground, Block.soundGravelFootstep).setCreativeTab(IndustrialProcessing.tabOres);
+    public final static BlockIP blockAsphalt = (BlockIP) new BlockIP(ConfigBlocks.getInstance().blockAsphalt(), "Asphalt", 1.0f, Material.clay, Block.soundStoneFootstep).setCreativeTab(IndustrialProcessing.tabOres);
+    //TODO public final static BlockMachineBlock blockMachineBlock = new BlockMachineBlock();
+    public final static BlockIP blockCobbleLimestone = (BlockIP) new BlockIP(ConfigBlocks.getInstance().getBlockCobbleLimestoneID(), "blockCobbleLimestone", 1.0f, Material.ground, Block.soundStoneFootstep).setCreativeTab(IndustrialProcessing.tabOres);
+    public final static BlockIP blockLimestone = (BlockIP) new BlockIP(ConfigBlocks.getInstance().getBlockLimestoneID(), "blockLimestone", 1.0f, Material.ground, Block.soundStoneFootstep,IndustrialProcessing.blockCobbleLimestone.blockID).setCreativeTab(IndustrialProcessing.tabOres);
+    public final static BlockIP blockHardSand = (BlockIP) new BlockIP(ConfigBlocks.getInstance().getBlockHardSandID(), "blockHardSand", 1.0f, Material.ground, Block.soundSandFootstep).setCreativeTab(IndustrialProcessing.tabOres);
+    
+    
+    public final static BlockPlatform blockPlatform = new BlockPlatform();
+    public final static BlockStairs blockStairs = new BlockStairs();
+    public final static BlockCinnebar blockCinnebar = new BlockCinnebar();
+    public final static BlockRutile blockRutile = new BlockRutile();
+
+    public final static BlockIndustrialLeaves blockLeaves = new BlockIndustrialLeaves();
+    public final static BlockIndustrialLog blockLog = new BlockIndustrialLog();
+    public final static BlockRubberLog blockRubberLog = new BlockRubberLog();
+    public final static BlockPineLog blockPineLog = new BlockPineLog();
+    public final static BlockIndustrialSapling blockSapling = new BlockIndustrialSapling();
+    
+    public final static Block blockHalfWavePlate = (new BlockPane(ConfigBlocks.getInstance().getBlockHalfWavePlateID(), "blockHalfWavePlate", "blockHalfWavePlate", Material.iron, false)).setHardness(0.9F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName("halfWavePlate");
+    public final static BlockDoorEmergency blockDoorEmergency = new BlockDoorEmergency();
+    
+    public final static MicroBlock microBlock = new MicroBlock();
+    */
+}

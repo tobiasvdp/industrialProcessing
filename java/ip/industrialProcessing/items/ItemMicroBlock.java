@@ -17,8 +17,8 @@ public class ItemMicroBlock extends ItemIP {
 	public int level;
 	public String tileEntity;
 
-	public ItemMicroBlock(int ID, String name, CreativeTabs tab, int microblock, MicroBlockType type, String tileEntity,int level) {
-		super(ID, name, tab);
+	public ItemMicroBlock(String name, CreativeTabs tab, int microblock, MicroBlockType type, String tileEntity,int level) {
+		super(name, tab);
 		this.microblock = microblock;
 		this.type = type;
 		this.level = level;
@@ -30,19 +30,18 @@ public class ItemMicroBlock extends ItemIP {
 
 		ForgeDirection dir = BlockMicroBlock.sideToForge(par7);
 		if (canPlaceBlockAt(par3World, par4 + dir.offsetX, par5 + dir.offsetY, par6 + dir.offsetZ)) {
-			par3World.setBlock(par4 + dir.offsetX, par5 + dir.offsetY, par6 + dir.offsetZ, ISetupBlocks.microBlock.blockID);
+			par3World.setBlock(par4 + dir.offsetX, par5 + dir.offsetY, par6 + dir.offsetZ, ISetupBlocks.microBlock);
 			par3World.setBlockMetadataWithNotify(par4 + dir.offsetX, par5 + dir.offsetY, par6 + dir.offsetZ, BlockMicroBlock.invertSide(par7), 0);
-			Block.blocksList[ISetupBlocks.microBlock.blockID].onBlockPlacedBy(par3World, par4 + dir.offsetX, par5 + dir.offsetY, par6 + dir.offsetZ, par2EntityPlayer, par1ItemStack);
+			ISetupBlocks.microBlock.onBlockPlacedBy(par3World, par4 + dir.offsetX, par5 + dir.offsetY, par6 + dir.offsetZ, par2EntityPlayer, par1ItemStack);
 		}
 		return super.onItemUse(par1ItemStack, par2EntityPlayer, par3World, par4, par5, par6, par7, par8, par9, par10);
 	}
 
 	public boolean canPlaceBlockAt(World par1World, int x, int y, int z) {
 		boolean canPlace = true;
-		int l = par1World.getBlockId(x, y, z);
-		Block block = Block.blocksList[l];
+		Block block = par1World.getBlock(x, y, z);
 		if (block != null) {
-			if (!block.isBlockReplaceable(par1World, x, y, z))
+			if (!block.isReplaceable(par1World, x, y, z))
 				canPlace = false;
 		}
 		return canPlace;
@@ -50,10 +49,6 @@ public class ItemMicroBlock extends ItemIP {
 
 	public boolean isValidPlacingSide(ForgeDirection dir, World worldObj, int xCoord, int yCoord, int zCoord, ItemMicroBlock itemMicroBlock) {
 		return true;
-	}
-
-	public boolean isValidID(int itemID) {
-		return itemID == this.itemID;
 	}
 
 	public String getTileEntityName() {

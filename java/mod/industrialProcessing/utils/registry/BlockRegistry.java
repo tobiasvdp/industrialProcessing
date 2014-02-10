@@ -1,20 +1,34 @@
-package ip.industrialProcessing.utils.registry;
+package mod.industrialProcessing.utils.registry;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
+import mod.industrialProcessing.IndustrialProcessing;
 import net.minecraft.block.Block;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class BlockRegistry {
 	private static HashMap<Block, BlockType[]> array = new HashMap<Block, BlockType[]>();
 
-	public static void RegisterBlock(Block block, BlockType[] type) {
+	public static void registerOre(Block block, String uniqueId, String oreDictionaryKey, int level, BlockType... type) {
+		GameRegistry.registerBlock(block, uniqueId);
+		block.setBlockTextureName(IndustrialProcessing.TEXTURE_NAME_PREFIX + uniqueId);
+		block.setCreativeTab(IndustrialProcessing.tabOres);
+		MinecraftForge.setBlockHarvestLevel(block, "pickaxe", level);
+		OreDictionary.registerOre(oreDictionaryKey, block);
+		RegisterBlock(block, type);
+	}
+	
+	private static void RegisterBlock(Block block, BlockType[] type) {
 		array.put(block, type);
 	}
 	
-	public static void RegisterBlock(Block block, BlockType type) {
+	private static void RegisterBlock(Block block, BlockType type) {
 		RegisterBlock(block,new BlockType[]{type});
 	}
 
