@@ -1,14 +1,13 @@
 package ip.industrialProcessing.machines.treetap;
 
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidTank;
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.config.ISetupBlocks;
 import ip.industrialProcessing.config.ISetupFluids;
 import ip.industrialProcessing.machines.TileEntityFluidMachine;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidTank;
 
 public class TileEntityAutomaticTreeTap extends TileEntityFluidMachine {
 

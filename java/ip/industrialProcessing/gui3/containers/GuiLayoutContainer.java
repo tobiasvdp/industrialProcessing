@@ -1,10 +1,8 @@
 package ip.industrialProcessing.gui3.containers;
 
 import ip.industrialProcessing.gui3.binding.Binder;
-import ip.industrialProcessing.gui3.binding.reply.IReplyBinding;
 import ip.industrialProcessing.gui3.framework.UIElement;
 import ip.industrialProcessing.gui3.framework.UIRoot;
-import ip.industrialProcessing.gui3.framework.controls.Decorator;
 import ip.industrialProcessing.gui3.framework.panels.MouseButton;
 
 import java.util.ArrayList;

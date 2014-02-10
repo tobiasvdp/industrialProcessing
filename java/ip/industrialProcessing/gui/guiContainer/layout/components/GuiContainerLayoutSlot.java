@@ -3,12 +3,8 @@ package ip.industrialProcessing.gui.guiContainer.layout.components;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayout;
 import ip.industrialProcessing.gui.guiContainer.layout.GuiContainerLayout;
 import ip.industrialProcessing.recipes.Recipe;
-
-import java.awt.Rectangle;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class GuiContainerLayoutSlot extends GuiContainerLayout {

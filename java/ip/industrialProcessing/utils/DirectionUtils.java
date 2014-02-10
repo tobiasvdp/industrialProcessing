@@ -4,7 +4,7 @@ import ip.industrialProcessing.LocalDirection;
 
 import java.util.Arrays;
 
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class DirectionUtils {
 

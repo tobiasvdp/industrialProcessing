@@ -1,29 +1,24 @@
 package ip.industrialProcessing.microBlock.core;
 
-import java.util.List;
-import java.util.Random;
-
-import cpw.mods.fml.common.network.PacketDispatcher;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.items.ItemMicroBlock;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.microBlock.IMicroBlock;
 import ip.industrialProcessing.microBlock.MicroBlockType;
 import ip.industrialProcessing.utils.packets.PacketIP002SendMicroBlockDestructionChange;
-import ip.industrialProcessing.utils.packets.PacketIP003ScheduleBlockUpdateToServer;
 import ip.industrialProcessing.utils.packets.PacketIP004RayTraceToServer;
 import ip.industrialProcessing.utils.registry.MicroBlockRegistry;
+
+import java.util.List;
+import java.util.Random;
+
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
-import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EffectRenderer;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -31,7 +26,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class BlockMicroBlock extends BlockMachineRendered {
 
@@ -224,9 +219,9 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 		if (par1 == 1.0F) {
 			return entity.worldObj.getWorldVec3Pool().getVecFromPool(entity.posX, entity.posY, entity.posZ);
 		} else {
-			double d0 = entity.prevPosX + (entity.posX - entity.prevPosX) * (double) par1;
-			double d1 = entity.prevPosY + (entity.posY - entity.prevPosY) * (double) par1;
-			double d2 = entity.prevPosZ + (entity.posZ - entity.prevPosZ) * (double) par1;
+			double d0 = entity.prevPosX + (entity.posX - entity.prevPosX) * par1;
+			double d1 = entity.prevPosY + (entity.posY - entity.prevPosY) * par1;
+			double d2 = entity.prevPosZ + (entity.posZ - entity.prevPosZ) * par1;
 			return entity.worldObj.getWorldVec3Pool().getVecFromPool(d0, d1, d2);
 		}
 	}
@@ -242,7 +237,7 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 			f2 = MathHelper.sin(-entity.rotationYaw * 0.017453292F - (float) Math.PI);
 			f3 = -MathHelper.cos(-entity.rotationPitch * 0.017453292F);
 			f4 = MathHelper.sin(-entity.rotationPitch * 0.017453292F);
-			return entity.worldObj.getWorldVec3Pool().getVecFromPool((double) (f2 * f3), (double) f4, (double) (f1 * f3));
+			return entity.worldObj.getWorldVec3Pool().getVecFromPool(f2 * f3, f4, f1 * f3);
 		} else {
 			f1 = entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * par1;
 			f2 = entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * par1;
@@ -250,7 +245,7 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 			f4 = MathHelper.sin(-f2 * 0.017453292F - (float) Math.PI);
 			float f5 = -MathHelper.cos(-f1 * 0.017453292F);
 			float f6 = MathHelper.sin(-f1 * 0.017453292F);
-			return entity.worldObj.getWorldVec3Pool().getVecFromPool((double) (f4 * f5), (double) f6, (double) (f3 * f5));
+			return entity.worldObj.getWorldVec3Pool().getVecFromPool(f4 * f5, f6, f3 * f5);
 		}
 	}
 

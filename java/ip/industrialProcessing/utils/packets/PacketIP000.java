@@ -8,8 +8,6 @@ import java.io.DataOutput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import net.minecraft.network.packet.Packet250CustomPayload;
-
 public abstract class PacketIP000 {
     private String channel;
 

@@ -1,12 +1,12 @@
 package ip.industrialProcessing.machines.plants.oilRefinary.isomerizationReactor;
 
-import java.util.Iterator;
-
-import net.minecraftforge.fluids.FluidContainerRegistry;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
 import ip.industrialProcessing.recipes.IMachineRecipe;
-import ip.industrialProcessing.recipes.Recipe;
+
+import java.util.Iterator;
+
+import net.minecraftforge.fluids.FluidContainerRegistry;
 
 public class TileEntityIsomerizationReactor extends TileEntityPoweredFluidWorkerMachine {
     public static RecipesIsomerizationReactor recipes = new RecipesIsomerizationReactor();

@@ -1,10 +1,5 @@
 package ip.industrialProcessing.decoration.crystals;
 
-import java.util.Random;
-
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Vector3f;
-
 import ip.industrialProcessing.api.rendering.wavefront.ObjMesh;
 import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
 import ip.industrialProcessing.client.render.ModelBlock;
@@ -17,10 +12,17 @@ import ip.industrialProcessing.decoration.crystals.meshes.Crystal6;
 import ip.industrialProcessing.decoration.crystals.meshes.Crystal7;
 import ip.industrialProcessing.decoration.crystals.meshes.Crystal8;
 import ip.industrialProcessing.decoration.crystals.meshes.Crystal9;
+
+import java.util.Random;
+
+import javax.swing.Icon;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.Icon;
+
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Vector3f;
 
 public class ModelCrystal extends ModelBlock {
 

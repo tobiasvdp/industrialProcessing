@@ -3,9 +3,6 @@ package ip.industrialProcessing.machines;
 import ip.industrialProcessing.gui.IGuiLayoutTriggerAcceptor;
 import ip.industrialProcessing.utils.handler.numbers.IStateConfig;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntitySynced extends TileEntity implements IGuiLayoutTriggerAcceptor {

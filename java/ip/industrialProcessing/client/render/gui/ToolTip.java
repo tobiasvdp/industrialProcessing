@@ -1,8 +1,8 @@
 package ip.industrialProcessing.client.render.gui;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.gui.FontRenderer;
+
+import org.lwjgl.opengl.GL11;
 
 public class ToolTip {
 	private String[] lines;

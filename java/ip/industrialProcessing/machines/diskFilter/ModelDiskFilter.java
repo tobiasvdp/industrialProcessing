@@ -1,12 +1,14 @@
 package ip.industrialProcessing.machines.diskFilter;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Vector3f;
-
 import ip.industrialProcessing.client.render.ModelAnimatedMachine;
 import ip.industrialProcessing.machines.diskFilter.model.Cylinder;
+
+import javax.swing.Icon;
+
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Vector3f;
 
 public class ModelDiskFilter extends ModelAnimatedMachine {
     // fields

@@ -1,16 +1,17 @@
 package ip.industrialProcessing.transport.fluids;
 
-import java.util.List;
-
 import ip.industrialProcessing.api.rendering.BlockModelUtils;
 import ip.industrialProcessing.config.ConfigTransportBlocks;
+
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockTransportFluidsStone extends BlockTransportFluids {
 

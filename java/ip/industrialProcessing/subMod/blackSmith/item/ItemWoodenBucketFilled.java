@@ -1,20 +1,17 @@
 package ip.industrialProcessing.subMod.blackSmith.item;
 
+import ip.industrialProcessing.items.ItemIPBucket;
+import ip.industrialProcessing.subMod.blackSmith.config.ISetupBlackSmith;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumMovingObjectType;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.Event;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.fluids.Fluid;
-import ip.industrialProcessing.fluids.BlockFluid;
-import ip.industrialProcessing.items.ItemIPBucket;
-import ip.industrialProcessing.subMod.blackSmith.config.ISetupBlackSmith;
 
 public class ItemWoodenBucketFilled extends ItemIPBucket {
 
@@ -30,6 +27,7 @@ public class ItemWoodenBucketFilled extends ItemIPBucket {
 		return ISetupBlackSmith.itemWoodenBucket;
 	}
 
+	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
 		boolean flag = this.isFull == 0;
 		MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(par2World, par3EntityPlayer, flag);
@@ -150,6 +148,7 @@ public class ItemWoodenBucketFilled extends ItemIPBucket {
 		}
 	}
 
+	@Override
 	public boolean tryPlaceContainedLiquid(World par1World, int par2, int par3, int par4) {
 		if (this.isFull <= 0) {
 			return false;
@@ -161,10 +160,10 @@ public class ItemWoodenBucketFilled extends ItemIPBucket {
 				return false;
 			} else {
 				if (par1World.provider.isHellWorld && this.isFull == Block.waterMoving.blockID) {
-					par1World.playSoundEffect((double) ((float) par2 + 0.5F), (double) ((float) par3 + 0.5F), (double) ((float) par4 + 0.5F), "random.fizz", 0.5F, 2.6F + (par1World.rand.nextFloat() - par1World.rand.nextFloat()) * 0.8F);
+					par1World.playSoundEffect(par2 + 0.5F, par3 + 0.5F, par4 + 0.5F, "random.fizz", 0.5F, 2.6F + (par1World.rand.nextFloat() - par1World.rand.nextFloat()) * 0.8F);
 
 					for (int l = 0; l < 8; ++l) {
-						par1World.spawnParticle("largesmoke", (double) par2 + Math.random(), (double) par3 + Math.random(), (double) par4 + Math.random(), 0.0D, 0.0D, 0.0D);
+						par1World.spawnParticle("largesmoke", par2 + Math.random(), par3 + Math.random(), par4 + Math.random(), 0.0D, 0.0D, 0.0D);
 					}
 				} else {
 					if (!par1World.isRemote && flag && !material.isLiquid()) {

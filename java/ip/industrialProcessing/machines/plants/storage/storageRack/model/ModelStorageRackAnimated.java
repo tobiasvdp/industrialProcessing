@@ -1,10 +1,10 @@
 package ip.industrialProcessing.machines.plants.storage.storageRack.model;
 
 import ip.industrialProcessing.client.render.ModelAnimatedMachine;
-import ip.industrialProcessing.machines.diskFilter.model.Cylinder;
-import net.minecraft.inventory.IInventory;
+
+import javax.swing.Icon;
+
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector3f;

@@ -5,13 +5,13 @@ import ip.industrialProcessing.client.ClientProxy;
 import ip.industrialProcessing.config.ConfigBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
+
+import javax.swing.Icon;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 

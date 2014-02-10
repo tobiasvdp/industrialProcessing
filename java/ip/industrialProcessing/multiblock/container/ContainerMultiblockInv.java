@@ -1,12 +1,12 @@
 package ip.industrialProcessing.multiblock.container;
 
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreInv;
+import ip.industrialProcessing.utils.containers.IContainerAdd;
+import ip.industrialProcessing.utils.containers.IContainerTransfer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreInv;
-import ip.industrialProcessing.utils.containers.IContainerAdd;
-import ip.industrialProcessing.utils.containers.IContainerTransfer;
 
 public class ContainerMultiblockInv extends ContainerMultiblock implements IContainerAdd, IContainerTransfer{
 

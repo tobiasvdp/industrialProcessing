@@ -3,8 +3,10 @@ package ip.industrialProcessing.power.plants;
 import ip.industrialProcessing.client.render.ModelAnimatedMachine;
 import ip.industrialProcessing.power.plants.models.GeneratorAxle;
 import ip.industrialProcessing.power.plants.models.GeneratorAxleRing;
+
+import javax.swing.Icon;
+
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector3f;

@@ -1,11 +1,11 @@
 package ip.industrialProcessing.power.plants;
 
-import org.lwjgl.util.Point;
-import org.lwjgl.util.Rectangle;
-
-import net.minecraft.entity.player.InventoryPlayer;
 import ip.industrialProcessing.machines.TileEntityFluidMachine;
 import ip.industrialProcessing.machines.containers.gui.GuiContainerFluidMachine;
+import net.minecraft.entity.player.InventoryPlayer;
+
+import org.lwjgl.util.Point;
+import org.lwjgl.util.Rectangle;
 
 public class GuiContainerTurbine extends GuiContainerFluidMachine {
 

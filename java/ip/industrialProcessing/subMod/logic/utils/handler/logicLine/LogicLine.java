@@ -2,15 +2,12 @@ package ip.industrialProcessing.subMod.logic.utils.handler.logicLine;
 
 import ip.industrialProcessing.subMod.logic.network.ILogicNode;
 import ip.industrialProcessing.subMod.logic.network.ILogicTransport;
-import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorConnectionsBase;
 import ip.industrialProcessing.utils.handler.lines.ILine;
 import ip.industrialProcessing.utils.handler.lines.ILineDevice;
 import ip.industrialProcessing.utils.handler.lines.ILineTransport;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-
-import net.minecraft.tileentity.TileEntity;
 
 public class LogicLine implements ILine{
 	
@@ -25,7 +22,7 @@ public class LogicLine implements ILine{
 	@Override
 	public int registerTransport(ILineTransport te) {
 		if(te instanceof ILogicTransport && !transport.contains(te)){
-		transport.add((ILogicTransport) te);
+		transport.add(te);
 		return ID;
 		}
 		return -1;
@@ -41,7 +38,7 @@ public class LogicLine implements ILine{
 	@Override
 	public int registerDevice(ILineDevice te) {
 		if (te instanceof ILogicNode && !nodes.contains(te)){
-			nodes.add((ILogicNode) te);
+			nodes.add(te);
 			return ID;
 			}
 			return -1;

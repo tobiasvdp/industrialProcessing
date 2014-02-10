@@ -1,6 +1,5 @@
 package ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.amineTreater;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;

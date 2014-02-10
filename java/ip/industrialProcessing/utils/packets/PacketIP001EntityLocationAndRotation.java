@@ -2,18 +2,11 @@ package ip.industrialProcessing.utils.packets;
 
 import ip.industrialProcessing.subMod.mine.PacketHandler;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.DataInput;
-import java.io.DataInputStream;
 import java.io.DataOutput;
-import java.io.DataOutputStream;
 import java.io.IOException;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.network.packet.NetHandler;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet250CustomPayload;
 
 public class PacketIP001EntityLocationAndRotation extends PacketIP000{
 
@@ -38,7 +31,8 @@ public class PacketIP001EntityLocationAndRotation extends PacketIP000{
 	rotationYaw = entity.rotationYaw;
     }
 
-    public void readPacketData(DataInput datainput) throws IOException {
+    @Override
+	public void readPacketData(DataInput datainput) throws IOException {
 	entityId = datainput.readInt();
 	posX = datainput.readDouble();
 	posY = datainput.readDouble();
@@ -47,7 +41,8 @@ public class PacketIP001EntityLocationAndRotation extends PacketIP000{
 	rotationYaw = datainput.readFloat();
     }
 
-    public void writePacketData(DataOutput dataoutput) throws IOException {
+    @Override
+	public void writePacketData(DataOutput dataoutput) throws IOException {
 	dataoutput.writeInt(entityId);
 	dataoutput.writeDouble(posX);
 	dataoutput.writeDouble(posY);

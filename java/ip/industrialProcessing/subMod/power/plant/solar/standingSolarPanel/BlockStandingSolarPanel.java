@@ -1,15 +1,15 @@
 package ip.industrialProcessing.subMod.power.plant.solar.standingSolarPanel;
 
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import net.minecraft.world.World;
 import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.multiblock.core.BlockMultiblockCore;
-import ip.industrialProcessing.multiblock.core.block.weldingStation.TileEntityMultiblockWeldingStation;
 import ip.industrialProcessing.subMod.power.IPPower;
 import ip.industrialProcessing.subMod.power.config.ConfigPower;
 import ip.industrialProcessing.utils.IDescriptionBlock;
+
+import javax.swing.Icon;
+
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 public class BlockStandingSolarPanel extends BlockMultiblockCore implements IDescriptionBlock{
 	

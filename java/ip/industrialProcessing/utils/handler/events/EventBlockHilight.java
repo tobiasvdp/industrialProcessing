@@ -1,25 +1,17 @@
 package ip.industrialProcessing.utils.handler.events;
 
-import java.util.ArrayList;
-
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import ip.industrialProcessing.microBlock.IMicroBlock;
 import ip.industrialProcessing.microBlock.core.BlockMicroBlock;
 import ip.industrialProcessing.microBlock.extend.centerBlock.BlockMicroBlockwithCenter;
-import ip.industrialProcessing.microBlock.extend.centerBlock.IMicroBlockCore;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import org.lwjgl.opengl.GL11;
 
 public class EventBlockHilight {
 
@@ -67,9 +59,9 @@ public class EventBlockHilight {
 			GL11.glDisable(GL11.GL_TEXTURE_2D);
 			GL11.glDepthMask(false);
 			float f1 = 0.002F;
-			double d0 = event.player.lastTickPosX + (event.player.posX - event.player.lastTickPosX) * (double) event.partialTicks;
-			double d1 = event.player.lastTickPosY + (event.player.posY - event.player.lastTickPosY) * (double) event.partialTicks;
-			double d2 = event.player.lastTickPosZ + (event.player.posZ - event.player.lastTickPosZ) * (double) event.partialTicks;
+			double d0 = event.player.lastTickPosX + (event.player.posX - event.player.lastTickPosX) * event.partialTicks;
+			double d1 = event.player.lastTickPosY + (event.player.posY - event.player.lastTickPosY) * event.partialTicks;
+			double d2 = event.player.lastTickPosZ + (event.player.posZ - event.player.lastTickPosZ) * event.partialTicks;
 
 			switch (side) {
 			case 0:
@@ -93,7 +85,7 @@ public class EventBlockHilight {
 			default:
 				box = AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1);
 			}
-			this.drawOutlinedBoundingBox(box.expand((double) f1, (double) f1, (double) f1).getOffsetBoundingBox(-d0, -d1, -d2));
+			this.drawOutlinedBoundingBox(box.expand(f1, f1, f1).getOffsetBoundingBox(-d0, -d1, -d2));
 
 			GL11.glDepthMask(true);
 			GL11.glEnable(GL11.GL_TEXTURE_2D);
@@ -116,9 +108,9 @@ public class EventBlockHilight {
 
 		if (j > 0) {
 			Block.blocksList[j].setBlockBoundsBasedOnState(event.player.worldObj, hit.blockX, hit.blockY, hit.blockZ);
-			double d0 = event.player.lastTickPosX + (event.player.posX - event.player.lastTickPosX) * (double) event.partialTicks;
-			double d1 = event.player.lastTickPosY + (event.player.posY - event.player.lastTickPosY) * (double) event.partialTicks;
-			double d2 = event.player.lastTickPosZ + (event.player.posZ - event.player.lastTickPosZ) * (double) event.partialTicks;
+			double d0 = event.player.lastTickPosX + (event.player.posX - event.player.lastTickPosX) * event.partialTicks;
+			double d1 = event.player.lastTickPosY + (event.player.posY - event.player.lastTickPosY) * event.partialTicks;
+			double d2 = event.player.lastTickPosZ + (event.player.posZ - event.player.lastTickPosZ) * event.partialTicks;
 			this.drawOutlinedBoundingBox(Block.blocksList[j].getSelectedBoundingBoxFromPool(event.player.worldObj, hit.blockX, hit.blockY, hit.blockZ).expand((double) f1, (double) f1, (double) f1).getOffsetBoundingBox(-d0, -d1, -d2));
 		}
 

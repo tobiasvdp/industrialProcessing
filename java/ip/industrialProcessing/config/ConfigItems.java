@@ -1,7 +1,5 @@
 package ip.industrialProcessing.config;
 
-import net.minecraft.item.ItemStack;
-import ip.industrialProcessing.utils.registry.ItemRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ConfigItems {

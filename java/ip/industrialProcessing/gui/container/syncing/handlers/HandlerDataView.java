@@ -2,7 +2,6 @@ package ip.industrialProcessing.gui.container.syncing.handlers;
 
 import ip.industrialProcessing.gui.IGuiLayoutTriggerAcceptor;
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
-import ip.industrialProcessing.gui.container.syncing.info.InfoButton;
 import ip.industrialProcessing.gui.container.syncing.info.InfoDataView;
 
 public class HandlerDataView implements IHandlerDataView{

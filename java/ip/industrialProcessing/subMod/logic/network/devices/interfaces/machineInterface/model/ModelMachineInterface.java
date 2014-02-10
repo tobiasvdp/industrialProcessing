@@ -5,8 +5,6 @@ import ip.industrialProcessing.api.rendering.wavefront.ObjRotator;
 import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
 import ip.industrialProcessing.client.render.ModelBlock;
 import ip.industrialProcessing.microBlock.extend.connectionCorners.IMicroBlockConnectionCorner;
-import ip.industrialProcessing.subMod.logic.network.devices.readout.displayPanel.model.Hull;
-import ip.industrialProcessing.subMod.logic.network.devices.readout.displayPanel.model.Panel;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.DownBottom;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.DownBottomCorner;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.DownLeft;
@@ -43,9 +41,11 @@ import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.We
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.WestRight;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.WestRightCorner;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.WestTop;
+
+import javax.swing.Icon;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.util.Icon;
 
 import org.lwjgl.util.vector.Vector3f;
 
@@ -64,6 +64,7 @@ public class ModelMachineInterface extends ModelBlock {
 	ObjMesh[][] cornerConnections = new ObjMesh[][]{{new DownLeftCorner(),new DownRightCorner(),new DownTopCorner(),new DownBottomCorner()},{new UpLeftCorner(),new UpRightCorner(),new UpTopCorner(),new UpBottomCorner()},{null,new NorthRightCorner(),null,null},{null,new SouthRightCorner(),null,null},{null,new WestRightCorner(),null,null},{null,new EastRightCorner(),null,null}};
 	
 	
+	@Override
 	public void renderInventory(Block block, int metadata, int modelID, RenderBlocks renderer) {
 
 		int dir = 0;

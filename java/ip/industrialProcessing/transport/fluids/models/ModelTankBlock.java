@@ -6,12 +6,14 @@ import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.ModelBlock;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.transport.fluids.TileEntityTank;
+
+import javax.swing.Icon;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;

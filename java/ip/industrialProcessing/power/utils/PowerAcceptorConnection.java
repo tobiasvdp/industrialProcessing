@@ -1,6 +1,6 @@
 package ip.industrialProcessing.power.utils;
 
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class PowerAcceptorConnection {
     public PowerAcceptorConnection(int x, int y, int z, ForgeDirection direction) {

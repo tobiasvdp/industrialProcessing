@@ -3,19 +3,14 @@ package ip.industrialProcessing.subMod.blackSmith.plant.waterBasin;
 import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.multiblock.coreAndDummy.BlockMultiblockSwitcher;
 import ip.industrialProcessing.multiblock.coreAndDummy.ITileEntityMultiblockSwitcher;
-import ip.industrialProcessing.multiblock.dummy.extend.TileEntityMultiblockDummyInvAndTank;
 import ip.industrialProcessing.subMod.blackSmith.IPBlackSmith;
 import ip.industrialProcessing.subMod.blackSmith.config.ConfigBlackSmith;
-import net.minecraft.client.renderer.texture.IconRegister;
+
+import javax.swing.Icon;
+
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 
 public class BlockWaterBasin extends BlockMultiblockSwitcher {
 	Icon[] icons = new Icon[1];

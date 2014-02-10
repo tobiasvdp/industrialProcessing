@@ -2,7 +2,7 @@ package ip.industrialProcessing.microBlock;
 
 import ip.industrialProcessing.items.ItemMicroBlock;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public interface IMicroBlock {
 	boolean isSideFree(ForgeDirection dir);

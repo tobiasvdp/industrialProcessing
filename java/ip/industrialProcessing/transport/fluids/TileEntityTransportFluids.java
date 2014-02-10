@@ -1,11 +1,11 @@
 package ip.industrialProcessing.transport.fluids;
 
+import ip.industrialProcessing.machines.animation.tanks.TankHandler;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidTank;
-import ip.industrialProcessing.machines.animation.tanks.TankHandler;
 
 public class TileEntityTransportFluids extends TileEntityTransportFluidsBase {
 

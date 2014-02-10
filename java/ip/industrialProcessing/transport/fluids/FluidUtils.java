@@ -1,7 +1,7 @@
 package ip.industrialProcessing.transport.fluids;
 
+import ip.industrialProcessing.fluids.BlockFluid;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFluid;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;

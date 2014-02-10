@@ -1,6 +1,5 @@
 package ip.industrialProcessing.decoration.trees;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.config.ConfigBlocks;
 

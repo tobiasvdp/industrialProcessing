@@ -1,9 +1,11 @@
 package ip.industrialProcessing.machines.thickener;
 
 import ip.industrialProcessing.client.render.ModelAnimatedFluidMachine;
+
+import javax.swing.Icon;
+
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 
 import org.lwjgl.opengl.GL11;
 

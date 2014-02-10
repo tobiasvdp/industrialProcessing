@@ -2,7 +2,6 @@ package ip.industrialProcessing.machines;
 
 import ip.industrialProcessing.recipes.IMachineRecipe;
 import ip.industrialProcessing.recipes.IMachineRecipes;
-import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeInputSlot;
 import ip.industrialProcessing.recipes.RecipeSlotType;
 
@@ -26,15 +25,18 @@ public class RecipesMachine implements IMachineRecipes<IMachineRecipe> {
 	this.recipes.add(recipe);
     }
 
-    public boolean isEmpty() {
+    @Override
+	public boolean isEmpty() {
 	return this.recipes.isEmpty();
     }
 
-    public int size() {
+    @Override
+	public int size() {
 	return this.recipes.size();
     }
 
-    public IMachineRecipe get(int index) {
+    @Override
+	public IMachineRecipe get(int index) {
 	return this.recipes.get(index);
     }
 

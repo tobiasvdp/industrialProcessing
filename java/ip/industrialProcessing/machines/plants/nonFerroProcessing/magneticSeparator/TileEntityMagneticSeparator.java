@@ -1,11 +1,10 @@
 package ip.industrialProcessing.machines.plants.nonFerroProcessing.magneticSeparator;
 
-import java.util.Iterator;
-
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
 import ip.industrialProcessing.recipes.IMachineRecipe;
-import ip.industrialProcessing.recipes.Recipe;
+
+import java.util.Iterator;
 
 public class TileEntityMagneticSeparator extends TileEntityPoweredFluidWorkerMachine {
 

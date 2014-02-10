@@ -26,14 +26,16 @@ public class SimplePowerStorage implements IPowerStorage {
         return powerCapacity;
     }
 
-    public float drainPower(float work, boolean doDrain) {
+    @Override
+	public float drainPower(float work, boolean doDrain) {
         float maxDrain = Math.min(work, this.powerStorage);
         if (doDrain)
             this.powerStorage -= maxDrain;
         return maxDrain;
     }
 
-    public float fillPower(float power, boolean doFill) {
+    @Override
+	public float fillPower(float power, boolean doFill) {
         float maxFill = Math.min(power, this.powerCapacity - this.powerStorage);
         if (doFill)
             this.powerStorage += maxFill;

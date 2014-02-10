@@ -1,8 +1,8 @@
 package ip.industrialProcessing.gui3.framework.rendering;
 
-import net.minecraft.util.ResourceLocation;
-import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.gui3.framework.Size;
+import net.minecraft.util.ResourceLocation;
 
 public class TextureReference {
     public Size size;
@@ -19,6 +19,6 @@ public class TextureReference {
     }
 
     public static TextureReference createDefault(String filename, int width, int height) {
-	return new TextureReference(new Size(width, height), IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/" + filename);
+	return new TextureReference(new Size(width, height), INamepace.TEXTURE_DOMAIN, "textures/gui/" + filename);
     }
 }

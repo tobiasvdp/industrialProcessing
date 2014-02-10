@@ -1,6 +1,5 @@
 package ip.industrialProcessing.subMod.blackSmith.plant.anvil;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ISetupFluids;
 import ip.industrialProcessing.config.ISetupItems;
 import ip.industrialProcessing.config.ISetupMachineBlocks;

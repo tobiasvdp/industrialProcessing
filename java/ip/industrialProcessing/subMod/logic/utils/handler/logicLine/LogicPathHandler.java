@@ -2,18 +2,12 @@ package ip.industrialProcessing.subMod.logic.utils.handler.logicLine;
 
 import ip.industrialProcessing.subMod.logic.network.ILogicTransport;
 import ip.industrialProcessing.subMod.logic.network.microblock.TileEntityLogicTransport;
-import ip.industrialProcessing.transport.items.ConveyorLine;
-import ip.industrialProcessing.transport.items.ConveyorBeltPowerInput.TileEntityConveyorBeltPowerInput;
-import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorConnectionsBase;
 import ip.industrialProcessing.utils.handler.lines.ILine;
 import ip.industrialProcessing.utils.handler.lines.ILineDevice;
 import ip.industrialProcessing.utils.handler.lines.ILineHandler;
 import ip.industrialProcessing.utils.handler.lines.ILineTransport;
-
-import java.util.ArrayList;
-
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class LogicPathHandler implements ILineHandler {
 	private static ILine[] lines;
@@ -22,10 +16,12 @@ public class LogicPathHandler implements ILineHandler {
 		lines = new LogicLine[1];
 	}
 
+	@Override
 	public ILine getLine(int id) {
 		return lines[id];
 	}
 
+	@Override
 	public boolean registerDevice(int id, ILineDevice te) {
 		if (id < lines.length && id != -1) {
 			ILine line = lines[id];
@@ -37,6 +33,7 @@ public class LogicPathHandler implements ILineHandler {
 		return false;
 	}
 
+	@Override
 	public void unregisterDevice(int id, ILineDevice te) {
 		if (id < lines.length && id != -1) {
 			ILine line = lines[id];
@@ -46,6 +43,7 @@ public class LogicPathHandler implements ILineHandler {
 		}
 	}
 
+	@Override
 	public void unregisterTransport(ILineTransport te) {
 		ILogicTransport logic = (ILogicTransport) te;
 		if (te instanceof TileEntityLogicTransport) {
@@ -61,6 +59,7 @@ public class LogicPathHandler implements ILineHandler {
 		}
 	}
 
+	@Override
 	public int registerTransport(ILineTransport te) {
 		if (te instanceof TileEntityLogicTransport) {
 			ILogicTransport logic = (ILogicTransport) te;
@@ -142,15 +141,16 @@ public class LogicPathHandler implements ILineHandler {
 		return -1;
 	}
 
+	@Override
 	public void registerTransportFromNBT(ILineTransport te) {
 		int id = te.getLineID();
 		if (id != -1) {
 			while (id >= lines.length) {
-				ILine[] lines = new LogicLine[this.lines.length * 2];
-				for (int i = 0; i < this.lines.length; i++) {
-					lines[i] = this.lines[i];
+				ILine[] lines = new LogicLine[LogicPathHandler.lines.length * 2];
+				for (int i = 0; i < LogicPathHandler.lines.length; i++) {
+					lines[i] = LogicPathHandler.lines[i];
 				}
-				this.lines = lines;
+				LogicPathHandler.lines = lines;
 			}
 			if (lines[id] == null)
 				lines[id] = new LogicLine(id);
@@ -158,6 +158,7 @@ public class LogicPathHandler implements ILineHandler {
 		}
 	}
 
+	@Override
 	public void registerTransportToLine(int id, ILineTransport te) {
 		if (id != -1) {
 			ILine line = lines[id];
@@ -165,6 +166,7 @@ public class LogicPathHandler implements ILineHandler {
 		}
 	}
 
+	@Override
 	public void unregisterTransportToLine(int id, ILineTransport te) {
 		if (te instanceof TileEntityLogicTransport) {
 			ILogicTransport logic = (ILogicTransport) te;
@@ -192,6 +194,7 @@ public class LogicPathHandler implements ILineHandler {
 		return count;
 	}
 
+	@Override
 	public void splitLine(int id1, ILineTransport te) {
 		ILogicTransport logic = (ILogicTransport) te;
 		for (int i = 0; i < 6; i++) {
@@ -252,6 +255,7 @@ public class LogicPathHandler implements ILineHandler {
 
 	}
 
+	@Override
 	public int mergeLine(int id1, int id2, ILineTransport te) {
 		if (id1 != id2) {
 			int newid = Math.min(id1, id2);
@@ -268,15 +272,16 @@ public class LogicPathHandler implements ILineHandler {
 			return id1;
 	}
 
+	@Override
 	public int createNewLine() {
 		int id = 0;
 		while (true) {
 			if (id == lines.length) {
-				ILine[] lines = new ILine[this.lines.length * 2];
-				for (int i = 0; i < this.lines.length; i++) {
-					lines[i] = this.lines[i];
+				ILine[] lines = new ILine[LogicPathHandler.lines.length * 2];
+				for (int i = 0; i < LogicPathHandler.lines.length; i++) {
+					lines[i] = LogicPathHandler.lines[i];
 				}
-				this.lines = lines;
+				LogicPathHandler.lines = lines;
 			}
 			if (lines[id] == null) {
 				lines[id] = new LogicLine(id);

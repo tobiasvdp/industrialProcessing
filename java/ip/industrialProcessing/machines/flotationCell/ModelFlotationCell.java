@@ -1,7 +1,7 @@
 package ip.industrialProcessing.machines.flotationCell;
 
-import net.minecraft.tileentity.TileEntity;
 import ip.industrialProcessing.api.rendering.ModelMachine;
+import net.minecraft.tileentity.TileEntity;
 
 public class ModelFlotationCell extends ModelMachine {
 

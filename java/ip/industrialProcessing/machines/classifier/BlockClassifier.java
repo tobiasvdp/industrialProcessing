@@ -1,25 +1,23 @@
 package ip.industrialProcessing.machines.classifier;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.gui3.framework.Size;
 import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
 import ip.industrialProcessing.gui3.generating.GuiBuilderDefault;
 import ip.industrialProcessing.gui3.generating.IGuiBlock;
 import ip.industrialProcessing.gui3.generating.IGuiBuilder;
 import ip.industrialProcessing.machines.BlockMachineRendered;
-import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.recipes.IMachineRecipes;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 import ip.industrialProcessing.utils.IDescriptionBlock;
+
+import javax.swing.Icon;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 public class BlockClassifier extends BlockMachineRendered implements IRecipeBlock, IDescriptionBlock, IGuiBlock {

@@ -4,7 +4,6 @@ import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
 import ip.industrialProcessing.machines.animation.IAnimationSyncable;
 import ip.industrialProcessing.recipes.IMachineRecipe;
-import ip.industrialProcessing.recipes.Recipe;
 
 import java.util.Iterator;
 

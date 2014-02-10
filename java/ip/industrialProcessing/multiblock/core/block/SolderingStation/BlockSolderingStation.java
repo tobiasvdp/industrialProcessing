@@ -14,9 +14,10 @@ import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.multiblock.tier.Tiers;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 import ip.industrialProcessing.utils.IDescriptionBlock;
-import net.minecraft.client.renderer.texture.IconRegister;
+
+import javax.swing.Icon;
+
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 public class BlockSolderingStation extends BlockMultiblockCore implements IRecipeBlock, IDescriptionBlock, IGuiLayoutMultiblock {

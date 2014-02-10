@@ -8,7 +8,7 @@ import ip.industrialProcessing.transport.TileEntityTransport;
 import ip.industrialProcessing.transport.TransportConnectionState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityWire extends TileEntityTransport implements IPowerAcceptor {
 

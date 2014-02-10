@@ -5,7 +5,7 @@ import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.transport.items.conveyorBelt.MovingItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class CrossPath extends ItemPath {
 

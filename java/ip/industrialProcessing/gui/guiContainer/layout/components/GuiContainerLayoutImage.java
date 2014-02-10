@@ -1,14 +1,15 @@
 package ip.industrialProcessing.gui.guiContainer.layout.components;
 
+import ip.industrialProcessing.gui.container.slot.layout.SlotLayout;
+import ip.industrialProcessing.gui.guiContainer.GuiContainerIP;
+import ip.industrialProcessing.gui.guiContainer.layout.GuiContainerLayout;
+import ip.industrialProcessing.recipes.Recipe;
+
 import java.awt.Rectangle;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.inventory.Container;
-import ip.industrialProcessing.gui.container.slot.layout.SlotLayout;
-import ip.industrialProcessing.gui.guiContainer.GuiContainerIP;
-import ip.industrialProcessing.gui.guiContainer.layout.GuiContainerLayout;
-import ip.industrialProcessing.recipes.Recipe;
 
 public class GuiContainerLayoutImage extends GuiContainerLayout {
 	private Rectangle rectangle;

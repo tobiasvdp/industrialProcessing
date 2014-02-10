@@ -11,15 +11,15 @@ import ip.industrialProcessing.gui3.generating.IGuiBlock;
 import ip.industrialProcessing.gui3.generating.IGuiBuilder;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.machines.kiln.model.ModelKilnBlock;
 import ip.industrialProcessing.machines.plants.metalProcessing.sandCaster.model.ModelSandCasterBlock;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 import ip.industrialProcessing.utils.IDescriptionBlock;
+
+import javax.swing.Icon;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

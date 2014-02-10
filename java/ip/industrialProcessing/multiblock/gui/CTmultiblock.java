@@ -2,10 +2,10 @@ package ip.industrialProcessing.multiblock.gui;
 
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.utils.containers.VerifyingContainer;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
 public class CTmultiblock extends VerifyingContainer {
 

@@ -1,8 +1,9 @@
 package ip.industrialProcessing.machines.containers;
 
+import ip.industrialProcessing.utils.working.IWorker;
+
 import java.util.ArrayList;
 
-import ip.industrialProcessing.utils.working.IWorker;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.tileentity.TileEntity;
 

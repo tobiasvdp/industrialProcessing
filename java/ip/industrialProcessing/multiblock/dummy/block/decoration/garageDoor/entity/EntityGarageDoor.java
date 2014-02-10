@@ -1,26 +1,22 @@
 package ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.entity;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-
-import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.machines.IRotateableEntity;
 import ip.industrialProcessing.multiblock.core.block.decoration.garageDoor.TileEntityGarageDoor;
 import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.TileEntityGarageDoorDoor;
 import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.TileEntityGarageDoorFrame;
 import ip.industrialProcessing.utils.handler.packets.PacketHandler;
 
-import org.apache.commons.lang3.text.WordUtils;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 
-import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class EntityGarageDoor extends Entity implements IRotateableEntity {
 
@@ -103,12 +99,12 @@ public class EntityGarageDoor extends Entity implements IRotateableEntity {
 					int x = (int) Math.round(posX - 0.5);
 					int y = (int) Math.round(posY);
 					int z = (int) Math.round(posZ - 0.5);
-					sendSpawnPacket(x,y,z,IndustrialProcessing.blockGarageDoorDoor.blockID,getForwardDirection(),te);
-					if(worldObj.getBlockId(x, y, z) == IndustrialProcessing.blockGarageDoorDoor.blockID){
+					sendSpawnPacket(x,y,z,ISetupMachineBlocks.blockGarageDoorDoor.blockID,getForwardDirection(),te);
+					if(worldObj.getBlockId(x, y, z) == ISetupMachineBlocks.blockGarageDoorDoor.blockID){
 						TileEntityGarageDoorDoor te = (TileEntityGarageDoorDoor) worldObj.getBlockTileEntity(x, y, z);
 						te.unhide();
 					}else{
-						worldObj.setBlock(x, y, z, IndustrialProcessing.blockGarageDoorDoor.blockID);
+						worldObj.setBlock(x, y, z, ISetupMachineBlocks.blockGarageDoorDoor.blockID);
 						TileEntityGarageDoorDoor te = (TileEntityGarageDoorDoor) worldObj.getBlockTileEntity(x, y, z);
 						te.setForwardDirection(getForwardDirection());
 						te.unhide();
@@ -157,6 +153,7 @@ public class EntityGarageDoor extends Entity implements IRotateableEntity {
 		PacketDispatcher.sendPacketToServer(packet);
 	}
 
+	@Override
 	public boolean canBeCollidedWith() {
 		return !this.isDead;
 	}	
@@ -170,7 +167,7 @@ public class EntityGarageDoor extends Entity implements IRotateableEntity {
 			double d2 = MathHelper.abs_max(d0, d1);
 
 			if (d2 >= 0.009999999776482582D) {
-				d2 = (double) MathHelper.sqrt_double(d2);
+				d2 = MathHelper.sqrt_double(d2);
 				d0 /= d2;
 				d1 /= d2;
 				double d3 = 1.0D / d2;
@@ -183,8 +180,8 @@ public class EntityGarageDoor extends Entity implements IRotateableEntity {
 				d1 *= d3;
 				d0 *= 0.05000000074505806D;
 				d1 *= 0.05000000074505806D;
-				d0 *= (double) (1.0F - this.entityCollisionReduction);
-				d1 *= (double) (1.0F - this.entityCollisionReduction);
+				d0 *= 1.0F - this.entityCollisionReduction;
+				d1 *= 1.0F - this.entityCollisionReduction;
 				par1Entity.addVelocity(d0, 0.0D, d1);
 			}
 		}

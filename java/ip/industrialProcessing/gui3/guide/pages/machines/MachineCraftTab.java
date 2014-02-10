@@ -1,6 +1,6 @@
 package ip.industrialProcessing.gui3.guide.pages.machines;
 
-import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.gui3.framework.Thickness;
 import ip.industrialProcessing.gui3.framework.controls.Button;
 import ip.industrialProcessing.gui3.framework.controls.IButtonClickListener;
@@ -20,7 +20,6 @@ import ip.industrialProcessing.gui3.guide.pages.machines.crafts.MachineCraft;
 import ip.industrialProcessing.gui3.guide.pages.machines.crafts.WorkbenchCraft;
 import ip.industrialProcessing.recipes.IMachineRecipe;
 import ip.industrialProcessing.subMod.blackSmith.plant.anvil.ContainerAnvil;
-import ip.industrialProcessing.utils.inventories.AnvilCraftingManager;
 import ip.industrialProcessing.utils.registry.RecipeRegistry;
 
 import java.util.ArrayList;
@@ -105,7 +104,7 @@ public class MachineCraftTab extends TabPage implements IButtonClickListener<ICr
                 IRecipe recipe = (IRecipe) listItem;
                 ItemStack output = recipe.getRecipeOutput();
                 if (output != null && output.itemID == tag.itemID) {
-                    SlotItemControl slot = SlotItemControl.createItemstack(new ItemStack(IndustrialProcessing.blockAnvil));
+                    SlotItemControl slot = SlotItemControl.createItemstack(new ItemStack(ISetupMachineBlocks.blockAnvil));
                     Button button = new Button<ICraftBase>(slot, lastCraft = new AnvilCraft(recipe));
                     button.subscribeClick(this);
                     this.wrapPanel.addChild(button);

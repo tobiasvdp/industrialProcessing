@@ -1,12 +1,14 @@
 package ip.industrialProcessing.machines.classifier;
 
-import org.lwjgl.opengl.GL11;
-
 import ip.industrialProcessing.client.render.ModelAnimatedFluidMachine;
 import ip.industrialProcessing.machines.classifier.model.ClassifierSpiral;
+
+import javax.swing.Icon;
+
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+
+import org.lwjgl.opengl.GL11;
 
 public class ModelClassifier extends ModelAnimatedFluidMachine {
 

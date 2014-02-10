@@ -15,7 +15,7 @@ import java.util.Arrays;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class TileEntityConveyorConnectionsBase extends TileEntityTransport implements IRotateableEntity {
 
@@ -98,7 +98,8 @@ public abstract class TileEntityConveyorConnectionsBase extends TileEntityTransp
 	return null;
     }
 
-    public int isValidLineConnection(LocalDirection localdir, boolean forward) {
+    @Override
+	public int isValidLineConnection(LocalDirection localdir, boolean forward) {
 	ForgeDirection dir = DirectionUtils.getWorldDirection(localdir, getForwardDirection());
 	int offsetSlope = getOffsetfromSlope(localdir);
 	TileEntity te = this.worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY + offsetSlope, zCoord + dir.offsetZ);

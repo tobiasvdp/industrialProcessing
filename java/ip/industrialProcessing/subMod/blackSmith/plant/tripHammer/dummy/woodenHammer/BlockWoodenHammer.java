@@ -4,10 +4,10 @@ import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.multiblock.dummy.BlockMultiblockDummy;
 import ip.industrialProcessing.subMod.blackSmith.IPBlackSmith;
 import ip.industrialProcessing.subMod.blackSmith.config.ConfigBlackSmith;
-import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.dummy.bellows.TileEntityBellows;
-import net.minecraft.client.renderer.texture.IconRegister;
+
+import javax.swing.Icon;
+
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 public class BlockWoodenHammer  extends BlockMultiblockDummy{

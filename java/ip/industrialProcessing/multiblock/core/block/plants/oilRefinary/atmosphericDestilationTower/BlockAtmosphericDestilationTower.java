@@ -1,15 +1,15 @@
 package ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.atmosphericDestilationTower;
 
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import net.minecraft.world.World;
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.multiblock.core.BlockMultiblockCore;
+
+import javax.swing.Icon;
+
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 public class BlockAtmosphericDestilationTower extends BlockMultiblockCore{
     Icon[] icons = new Icon[3];

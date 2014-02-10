@@ -1,7 +1,5 @@
 package ip.industrialProcessing.transport.fluids;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.machines.TileEntityMachine;
@@ -9,6 +7,8 @@ import ip.industrialProcessing.machines.animation.AnimationHandler;
 import ip.industrialProcessing.machines.animation.AnimationMode;
 import ip.industrialProcessing.machines.animation.IAnimationSyncable;
 import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityManoMeter extends TileEntityMachine implements IAnimationSyncable, IAnimationProgress {
 

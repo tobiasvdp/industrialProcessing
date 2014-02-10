@@ -1,7 +1,5 @@
 package ip.industrialProcessing.fluids;
 
-import ip.industrialProcessing.utils.registry.ItemRegistry;
-import ip.industrialProcessing.utils.registry.ItemType;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 

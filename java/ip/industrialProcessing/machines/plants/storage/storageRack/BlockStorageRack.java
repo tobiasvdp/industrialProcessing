@@ -4,20 +4,18 @@ import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.gui.GuiLayout;
-import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
-import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
 import ip.industrialProcessing.gui3.framework.panels.Orientation;
 import ip.industrialProcessing.gui3.generating.GuiBuilderInventory;
 import ip.industrialProcessing.gui3.generating.IGuiBlock;
 import ip.industrialProcessing.gui3.generating.IGuiBuilder;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.utils.IDescriptionBlock;
+
+import javax.swing.Icon;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 public class BlockStorageRack extends BlockMachineRendered implements IDescriptionBlock, IGuiBlock {

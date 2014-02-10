@@ -8,7 +8,7 @@ import ip.industrialProcessing.utils.registry.HandlerRegistry;
 import java.util.Arrays;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class TileEntityLogicTransport extends TileEntityMicroBlockConnectionCorners implements ILogicTransport {
 

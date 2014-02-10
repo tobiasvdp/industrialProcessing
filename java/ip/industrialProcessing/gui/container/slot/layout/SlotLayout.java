@@ -1,9 +1,10 @@
 package ip.industrialProcessing.gui.container.slot.layout;
 
-import java.awt.Rectangle;
-
 import ip.industrialProcessing.slots.SlotArmor;
 import ip.industrialProcessing.slots.SlotBase;
+
+import java.awt.Rectangle;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;

@@ -2,7 +2,6 @@ package ip.industrialProcessing.decoration;
 
 import ip.industrialProcessing.api.config.INamepace;
 import net.minecraft.block.Block;
-import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.world.IBlockAccess;

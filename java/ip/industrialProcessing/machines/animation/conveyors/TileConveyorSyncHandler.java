@@ -1,5 +1,6 @@
 package ip.industrialProcessing.machines.animation.conveyors;
 
+import ibxm.Player;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.utils.handler.packets.PacketHandler;
 import ip.industrialProcessing.utils.packets.PacketDataHandler;
@@ -12,11 +13,7 @@ import java.io.IOException;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
-import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.common.network.Player;
 
 public class TileConveyorSyncHandler {
 

@@ -1,11 +1,10 @@
 package ip.industrialProcessing.microBlock.extend.centerBlock;
 
+import ip.industrialProcessing.items.ItemMicroBlock;
+import ip.industrialProcessing.microBlock.extend.connectionCorners.TileEntityMicroBlockConnectionCorners;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.ForgeDirection;
-import ip.industrialProcessing.items.ItemMicroBlock;
-import ip.industrialProcessing.microBlock.MicroBlockType;
-import ip.industrialProcessing.microBlock.extend.connectionCorners.TileEntityMicroBlockConnectionCorners;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class TileEntityMicroBlockwithCenter extends TileEntityMicroBlockConnectionCorners implements IMicroBlockCore {
 

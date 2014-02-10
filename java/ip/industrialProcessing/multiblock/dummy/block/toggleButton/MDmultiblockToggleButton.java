@@ -1,7 +1,7 @@
 package ip.industrialProcessing.multiblock.dummy.block.toggleButton;
 
-import net.minecraft.tileentity.TileEntity;
 import ip.industrialProcessing.client.render.ModelingMultiblock;
+import net.minecraft.tileentity.TileEntity;
 
 public class MDmultiblockToggleButton extends  ModelingMultiblock{
 

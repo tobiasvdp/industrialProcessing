@@ -1,6 +1,5 @@
 package ip.industrialProcessing.transport.items.conveyorSorter;
 
-import ip.industrialProcessing.api.rendering.wavefront.ObjMesh;
 import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.transport.items.conveyorBelt.rendering.ModelConveyorBeltTile;
 import ip.industrialProcessing.transport.items.conveyorModels.tileEntity.ConveyorSorterLeftTileEntity;

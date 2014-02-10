@@ -114,7 +114,8 @@ public class NumericSpinner extends UserControl implements IButtonClickListener<
         this.onValueChanged(oldValue);
     }
 
-    public void setValue(int i) {
+    @Override
+	public void setValue(int i) {
         if (i != this.value) {
             int range = (maxValue - minValue) + 1;
             i -= minValue;
@@ -129,7 +130,8 @@ public class NumericSpinner extends UserControl implements IButtonClickListener<
         }
     }
 
-    public int getValue() {
+    @Override
+	public int getValue() {
         return this.value;
     }
 

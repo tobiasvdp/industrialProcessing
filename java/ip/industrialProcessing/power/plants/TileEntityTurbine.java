@@ -1,14 +1,8 @@
 package ip.industrialProcessing.power.plants;
 
-import java.util.Iterator;
-
 import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.machines.TileEntityFluidWorkerMachine;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
-import ip.industrialProcessing.machines.animation.AnimationMode;
-import ip.industrialProcessing.machines.animation.IAnimationSyncable;
-import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 import ip.industrialProcessing.machines.animation.tanks.ITankSyncable;
 import ip.industrialProcessing.machines.animation.tanks.TankHandler;
 import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
@@ -16,12 +10,13 @@ import ip.industrialProcessing.recipes.IMachineRecipe;
 import ip.industrialProcessing.transport.fluids.IPressuredTank;
 import ip.industrialProcessing.utils.DirectionUtils;
 import ip.industrialProcessing.utils.handler.numbers.IProgressable;
+
+import java.util.Iterator;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidTank;
 

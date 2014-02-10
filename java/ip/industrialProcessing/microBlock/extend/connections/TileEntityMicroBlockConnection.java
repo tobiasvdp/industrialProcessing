@@ -10,7 +10,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class TileEntityMicroBlockConnection extends TileEntityMicroBlock implements IMicroBlockConnection {
 	protected boolean[][] externalConnections = new boolean[6][4];
@@ -113,6 +113,7 @@ public abstract class TileEntityMicroBlockConnection extends TileEntityMicroBloc
 
 	protected static final int[][] rotation = new int[][] { { 4, 5, 2, 3 }, { 4, 5, 3, 2 }, { 4, 5, 1, 0 }, { 5, 4, 1, 0 }, { 3, 2, 1, 0 }, { 2, 3, 1, 0 } };
 
+	@Override
 	public int getRotated(int i, int j) {
 		return rotation[i][j];
 	}

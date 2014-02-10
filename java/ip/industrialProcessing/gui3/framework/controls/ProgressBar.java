@@ -13,7 +13,6 @@ import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
 import ip.industrialProcessing.utils.Language;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import net.minecraftforge.fluids.FluidTankInfo;
 

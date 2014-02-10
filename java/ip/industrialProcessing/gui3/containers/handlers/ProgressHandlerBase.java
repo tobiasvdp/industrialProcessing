@@ -26,7 +26,8 @@ public abstract class ProgressHandlerBase extends BindingHandlerBase<IProgressBi
 	return getValue(INDEX_MAX);
     }
     
-    public void updateBinding(IProgressBinding binding) {
+    @Override
+	public void updateBinding(IProgressBinding binding) {
 	binding.setValue(getValue() / scale);
 	binding.setMaxValue(getMaxValue() / scale);
     }

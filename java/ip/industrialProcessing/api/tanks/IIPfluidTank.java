@@ -1,6 +1,6 @@
 package ip.industrialProcessing.api.tanks;
 
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public interface IIPfluidTank {
     void setTankCapacity(int capacity);

@@ -1,13 +1,15 @@
 package ip.industrialProcessing.subMod.mine.machines.mining.bobcatMiner.model;
 
-import org.lwjgl.opengl.GL11;
-
-import net.minecraft.entity.Entity;
-import net.minecraft.util.Icon;
 import ip.industrialProcessing.api.rendering.wavefront.ObjMesh;
 import ip.industrialProcessing.api.rendering.wavefront.ObjRotatedTranslator;
 import ip.industrialProcessing.client.render.ModelEntity;
 import ip.industrialProcessing.subMod.mine.machines.mining.bobcatMiner.EntityBobcatMiner;
+
+import javax.swing.Icon;
+
+import net.minecraft.entity.Entity;
+
+import org.lwjgl.opengl.GL11;
 
 public class ModelBobcatMiner extends ModelEntity {
 	

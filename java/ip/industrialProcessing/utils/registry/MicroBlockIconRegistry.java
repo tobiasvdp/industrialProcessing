@@ -1,15 +1,12 @@
 package ip.industrialProcessing.utils.registry;
 
 import ip.industrialProcessing.api.config.INamepace;
-import ip.industrialProcessing.api.rendering.wavefront.ObjMesh;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.util.Icon;
+import javax.swing.Icon;
 
 public class MicroBlockIconRegistry {
 	private static HashMap<String, Icon> icons = new HashMap<String, Icon>();

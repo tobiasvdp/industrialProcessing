@@ -2,6 +2,7 @@ package ip.industrialProcessing.decoration.crystals.meshes;
 
 import ip.industrialProcessing.api.rendering.wavefront.ObjMesh;
 import ip.industrialProcessing.api.rendering.wavefront.ObjQuad;
+
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;

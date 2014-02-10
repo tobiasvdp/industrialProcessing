@@ -13,7 +13,7 @@ import ip.industrialProcessing.utils.working.ServerWorker;
 import ip.industrialProcessing.utils.working.WorkUtils;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class TileEntityFluidWorkerMachine extends TileEntityFluidMachine implements IRecipeFluidWorkHandler, IAnimationProgress, IAnimationSyncable {
 

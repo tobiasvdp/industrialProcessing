@@ -1,10 +1,10 @@
 package ip.industrialProcessing.multiblock.core.block.blastFurnace;
 
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Slot;
 import ip.industrialProcessing.multiblock.container.ContainerMultiblockTankWorkerPowered;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.slots.SlotBase;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Slot;
 
 public class ContainerMultiblockBlastFurnace extends ContainerMultiblockTankWorkerPowered {
 	public ContainerMultiblockBlastFurnace(InventoryPlayer inventory, TileEntityMultiblockCoreTankWorkerPowered core){

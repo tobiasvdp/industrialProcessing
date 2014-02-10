@@ -1,7 +1,6 @@
 package ip.industrialProcessing.gui3.framework.panels;
 
 import ip.industrialProcessing.gui3.framework.UIElement;
-import ip.industrialProcessing.gui3.framework.controls.SlotControl;
 
 public class GridCell {
     public GridCell(int row, int column, int rowSpan, int columnSpan, UIElement content) {

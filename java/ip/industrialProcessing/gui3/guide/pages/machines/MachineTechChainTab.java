@@ -2,20 +2,10 @@ package ip.industrialProcessing.gui3.guide.pages.machines;
 
 import ip.industrialProcessing.gui3.framework.Thickness;
 import ip.industrialProcessing.gui3.framework.controls.IButtonClickListener;
-import ip.industrialProcessing.gui3.framework.controls.SlotItemControl;
 import ip.industrialProcessing.gui3.framework.controls.TextBlock;
-import ip.industrialProcessing.gui3.framework.panels.ScrollPanel;
-import ip.industrialProcessing.gui3.framework.panels.canvas.CanvasChild;
-import ip.industrialProcessing.gui3.framework.panels.canvas.CanvasPanel;
 import ip.industrialProcessing.gui3.framework.panels.tabs.TabPage;
 import ip.industrialProcessing.gui3.guide.pages.techtree.TechChain;
 import ip.industrialProcessing.gui3.guide.pages.techtree.TechChainControl;
-import ip.industrialProcessing.gui3.guide.pages.techtree.TreeNode;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 

@@ -1,30 +1,7 @@
 package ip.industrialProcessing.subMod.mine.machines.mining.bobcatMiner;
 
-import ip.industrialProcessing.subMod.mine.PacketHandler;
-import ip.industrialProcessing.subMod.mine.machines.EntityVehicle;
 import ip.industrialProcessing.subMod.mine.machines.mining.EntityMiner;
-import ip.industrialProcessing.utils.BlockBreaker;
-import ip.industrialProcessing.utils.packets.PacketIP001EntityLocationAndRotation;
-
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.util.ArrayList;
-import java.util.Iterator;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.entity.DataWatcher;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.packet.Packet250CustomPayload;
-import net.minecraft.network.packet.Packet32EntityLook;
-import net.minecraft.util.ChatMessageComponent;
-import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
-import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class EntityBobcatMiner extends EntityMiner {
 

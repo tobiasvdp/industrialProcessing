@@ -1,12 +1,12 @@
 package ip.industrialProcessing.utils.handler.heat;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import ip.industrialProcessing.machines.IMachineSlots;
 import ip.industrialProcessing.utils.registry.HandlerRegistry;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class HeatStorage {
 

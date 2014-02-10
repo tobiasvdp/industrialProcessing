@@ -3,12 +3,10 @@ package ip.industrialProcessing.recipes;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import ip.industrialProcessing.utils.registry.ItemType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.RecipeFireworks;
-import net.minecraft.item.crafting.RecipesArmor;
 import net.minecraft.item.crafting.RecipesArmorDyes;
 import net.minecraft.item.crafting.RecipesMapCloning;
 import net.minecraft.item.crafting.ShapedRecipes;

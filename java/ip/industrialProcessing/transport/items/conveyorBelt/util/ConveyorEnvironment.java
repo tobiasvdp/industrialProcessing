@@ -4,7 +4,7 @@ import ip.industrialProcessing.transport.items.conveyorBelt.ConnectionMode;
 import ip.industrialProcessing.transport.items.conveyorBelt.SlopeState;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorConnectionsBase;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class ConveyorEnvironment {
     public static TileEntity getNeighbor(TileEntity ent, ForgeDirection direction, SlopeState slope) {

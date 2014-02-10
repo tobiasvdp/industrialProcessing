@@ -1,20 +1,16 @@
 package ip.industrialProcessing.buildingBlock;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.transport.fluids.TileEntityTransportFluidsBase;
-import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
+
+import javax.swing.Icon;
+
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockPane extends net.minecraft.block.BlockPane{
 	

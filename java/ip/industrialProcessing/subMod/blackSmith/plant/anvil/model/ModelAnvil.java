@@ -3,9 +3,12 @@ package ip.industrialProcessing.subMod.blackSmith.plant.anvil.model;
 import ip.industrialProcessing.api.rendering.wavefront.ObjRotator;
 import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
 import ip.industrialProcessing.client.render.ModelBlock;
+
+import javax.swing.Icon;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.util.Icon;
+
 import org.lwjgl.util.vector.Vector3f;
 
 public class ModelAnvil extends ModelBlock {

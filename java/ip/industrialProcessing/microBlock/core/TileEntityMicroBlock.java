@@ -3,26 +3,19 @@ package ip.industrialProcessing.microBlock.core;
 import ip.industrialProcessing.items.ItemMicroBlock;
 import ip.industrialProcessing.microBlock.IMicroBlock;
 import ip.industrialProcessing.microBlock.MicroBlockType;
-import ip.industrialProcessing.utils.packets.PacketIP005DestroyBlock;
 
 import java.util.Arrays;
 
-import cpw.mods.fml.common.network.PacketDispatcher;
-import net.minecraft.block.Block;
 import net.minecraft.dispenser.IPosition;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet132TileEntityData;
-import net.minecraft.network.packet.Packet55BlockDestroy;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class TileEntityMicroBlock extends TileEntity implements IMicroBlock, IPosition {
 	protected int[] sidesMicroblock = new int[6];
@@ -198,15 +191,16 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 		double d2 = par4IPosition.getZ();
 		EntityItem entityitem = new EntityItem(par0World, d0, d1 - 0.3D, d2, par1ItemStack);
 		double d3 = par0World.rand.nextDouble() * 0.1D + 0.2D;
-		entityitem.motionX = (double) par3EnumFacing.getFrontOffsetX() * d3;
+		entityitem.motionX = par3EnumFacing.getFrontOffsetX() * d3;
 		entityitem.motionY = 0.20000000298023224D;
-		entityitem.motionZ = (double) par3EnumFacing.getFrontOffsetZ() * d3;
-		entityitem.motionX += par0World.rand.nextGaussian() * 0.007499999832361937D * (double) par2;
-		entityitem.motionY += par0World.rand.nextGaussian() * 0.007499999832361937D * (double) par2;
-		entityitem.motionZ += par0World.rand.nextGaussian() * 0.007499999832361937D * (double) par2;
+		entityitem.motionZ = par3EnumFacing.getFrontOffsetZ() * d3;
+		entityitem.motionX += par0World.rand.nextGaussian() * 0.007499999832361937D * par2;
+		entityitem.motionY += par0World.rand.nextGaussian() * 0.007499999832361937D * par2;
+		entityitem.motionZ += par0World.rand.nextGaussian() * 0.007499999832361937D * par2;
 		par0World.spawnEntityInWorld(entityitem);
 	}
 
+	@Override
 	public int countSetSides() {
 		int count = 0;
 		for (int i = 0; i < sidesMicroblock.length; i++) {

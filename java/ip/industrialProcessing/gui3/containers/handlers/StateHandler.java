@@ -28,7 +28,8 @@ public class StateHandler extends BindingHandlerBase<IValueBinding> {
 	this.setValue(INDEX_VAL, value);
     }
 
-    public void updateBinding(IValueBinding binding) {
+    @Override
+	public void updateBinding(IValueBinding binding) {
 	binding.setMaxValue(this.getValue(INDEX_MAX));
 	binding.setMinValue(this.getValue(INDEX_MIN));
 	binding.setValue(this.getValue(INDEX_VAL));

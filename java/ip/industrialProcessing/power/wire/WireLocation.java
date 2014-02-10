@@ -1,6 +1,6 @@
 package ip.industrialProcessing.power.wire;
 
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class WireLocation {
     public WireLocation(int x, int y, int z) {

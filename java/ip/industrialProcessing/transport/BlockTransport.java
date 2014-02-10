@@ -1,10 +1,10 @@
 package ip.industrialProcessing.transport;
 
+import ip.industrialProcessing.client.ClientProxy;
+
 import java.util.List;
 
-import ip.industrialProcessing.client.ClientProxy;
 import net.minecraft.block.BlockContainer;
-import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;

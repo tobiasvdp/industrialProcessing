@@ -1,10 +1,6 @@
 package ip.industrialProcessing.utils.working;
 
-import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.recipes.Recipe;
-import ip.industrialProcessing.recipes.RecipeInputSlot;
-import ip.industrialProcessing.recipes.RecipeOutputSlot;
-import ip.industrialProcessing.recipes.RecipeSlotType;
+import ip.industrialProcessing.config.ISetupItems;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityFurnace;
@@ -71,7 +67,7 @@ public class BurningWorker extends ServerWorker {
 	int ash = this.handler.getAshSlot();
 	ItemStack ashStack = this.handler.getStackInSlot(ash);
 
-	this.handler.addToSlot(ash, IndustrialProcessing.itemAsh.itemID, 1);
+	this.handler.addToSlot(ash, ISetupItems.itemAsh.itemID, 1);
     }
 
     @Override
@@ -90,7 +86,7 @@ public class BurningWorker extends ServerWorker {
 	ItemStack ashStack = this.handler.getStackInSlot(ash);
 	if (ashStack == null)
 	    return true;
-	if (ashStack.itemID != IndustrialProcessing.itemAsh.itemID)
+	if (ashStack.itemID != ISetupItems.itemAsh.itemID)
 	    return false;
 	if (ashStack.stackSize < ashStack.getMaxStackSize() && ashStack.stackSize < this.handler.getInventoryStackLimit())
 	    return true;

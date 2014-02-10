@@ -1,5 +1,8 @@
 package ip.industrialProcessing.multiblock.dummy.block.displayPanel;
 
+import ip.industrialProcessing.config.ConfigMachineBlocks;
+import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -11,9 +14,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import ip.industrialProcessing.config.ConfigMachineBlocks;
-import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.config.ISetupCreativeTabs;
 
 public class BLmultiblockDisplayPanel extends BlockContainer{
 

@@ -1,6 +1,5 @@
 package ip.industrialProcessing.machines.plants.oilRefinary.AlkylationUnit;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.ISetupCreativeTabs;

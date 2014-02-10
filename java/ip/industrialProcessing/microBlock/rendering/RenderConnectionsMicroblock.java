@@ -1,13 +1,12 @@
 package ip.industrialProcessing.microBlock.rendering;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import ip.industrialProcessing.api.rendering.wavefront.ObjMesh;
 import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
 import ip.industrialProcessing.microBlock.extend.connectionCorners.IMicroBlockConnectionCorner;
 import ip.industrialProcessing.utils.registry.MicroBlockIconRegistry;
 import ip.industrialProcessing.utils.registry.MicroBlockModel;
 import ip.industrialProcessing.utils.registry.MicroBlockModelRegistry;
+
+import javax.swing.Icon;
 
 public class RenderConnectionsMicroblock {
 

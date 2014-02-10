@@ -1,7 +1,5 @@
 package ip.industrialProcessing.power.motor;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.SimplePowerStorage;
 import ip.industrialProcessing.machines.TileEntityMachine;
@@ -13,6 +11,8 @@ import ip.industrialProcessing.power.PowerHelper;
 import ip.industrialProcessing.power.plants.IMechanicalMotion;
 import ip.industrialProcessing.utils.DirectionUtils;
 import ip.industrialProcessing.utils.handler.numbers.IProgressable;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityElectroMotor extends TileEntityMachine implements IPowerAcceptor, IProgressable {
 

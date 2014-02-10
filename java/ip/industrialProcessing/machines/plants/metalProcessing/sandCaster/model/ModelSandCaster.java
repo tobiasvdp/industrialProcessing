@@ -1,10 +1,12 @@
 package ip.industrialProcessing.machines.plants.metalProcessing.sandCaster.model;
 
-import org.lwjgl.opengl.GL11;
-
 import ip.industrialProcessing.client.render.ModelAnimatedMachine;
+
+import javax.swing.Icon;
+
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+
+import org.lwjgl.opengl.GL11;
 
 public class ModelSandCaster extends ModelAnimatedMachine {
     // fields

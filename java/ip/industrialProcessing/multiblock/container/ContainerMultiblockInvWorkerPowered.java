@@ -1,13 +1,14 @@
 package ip.industrialProcessing.multiblock.container;
 
-import java.util.ArrayList;
-
-import net.minecraft.entity.player.InventoryPlayer;
 import ip.industrialProcessing.gui.container.syncing.handlers.HandlerPower;
 import ip.industrialProcessing.gui.container.syncing.handlers.IHandlerPower;
 import ip.industrialProcessing.gui.container.syncing.info.InfoPower;
 import ip.industrialProcessing.machines.IPowerStorage;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreInv;
+
+import java.util.ArrayList;
+
+import net.minecraft.entity.player.InventoryPlayer;
 
 public class ContainerMultiblockInvWorkerPowered extends ContainerMultiblockInvWorker {
 

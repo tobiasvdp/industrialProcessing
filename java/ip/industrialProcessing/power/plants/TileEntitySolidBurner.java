@@ -1,19 +1,18 @@
 package ip.industrialProcessing.power.plants;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
+import ip.industrialProcessing.config.ISetupItems;
 import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.utils.handler.fuel.IBurner;
 import ip.industrialProcessing.utils.working.BurningWorker;
 import ip.industrialProcessing.utils.working.IBurnWorkHandler;
 import ip.industrialProcessing.utils.working.IWorker;
 import ip.industrialProcessing.utils.working.IWorkingEntity;
-import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntitySolidBurner extends TileEntityMachine implements IWorkingEntity, IBurnWorkHandler, IBurner {
 
@@ -132,8 +131,8 @@ public class TileEntitySolidBurner extends TileEntityMachine implements IWorking
     public void addToSlot(int ash, int itemID, int amount) {
         ItemStack ashStack = getStackInSlot(ash);
         if (ashStack == null)
-            this.setInventorySlotContents(ash, new ItemStack(IndustrialProcessing.itemAsh, amount));
-        else if (ashStack.itemID == IndustrialProcessing.itemAsh.itemID && ashStack.stackSize <= ashStack.getMaxStackSize() - amount && ashStack.stackSize <= this.getInventoryStackLimit() - amount) {
+            this.setInventorySlotContents(ash, new ItemStack(ISetupItems.itemAsh, amount));
+        else if (ashStack.itemID == ISetupItems.itemAsh.itemID && ashStack.stackSize <= ashStack.getMaxStackSize() - amount && ashStack.stackSize <= this.getInventoryStackLimit() - amount) {
             ashStack = ashStack.copy();
             ashStack.stackSize++;
             this.setInventorySlotContents(ash, ashStack);

@@ -1,8 +1,5 @@
 package ip.industrialProcessing.gui3.framework.panels;
 
-import java.util.Random;
-
-import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.gui3.framework.Alignment;
 import ip.industrialProcessing.gui3.framework.Rect;
 import ip.industrialProcessing.gui3.framework.Size;

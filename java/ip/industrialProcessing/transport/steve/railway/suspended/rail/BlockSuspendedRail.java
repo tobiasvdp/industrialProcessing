@@ -1,15 +1,15 @@
 package ip.industrialProcessing.transport.steve.railway.suspended.rail;
 
-import java.util.Random;
-
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigTransportBlocks;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
+
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockSuspendedRail extends Block {
 

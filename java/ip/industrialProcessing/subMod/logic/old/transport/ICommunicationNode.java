@@ -3,7 +3,7 @@ package ip.industrialProcessing.subMod.logic.old.transport;
 import ip.industrialProcessing.subMod.logic.old.utils.UTBuffer;
 import ip.industrialProcessing.subMod.logic.old.utils.UTVariable;
 import ip.industrialProcessing.subMod.logic.old.utils.UTlogicNodeContainer;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public interface ICommunicationNode extends ICommunication {
 

@@ -1,10 +1,8 @@
 package ip.industrialProcessing.subMod.logic.network.microblockwithCore;
 
-import net.minecraft.block.StepSound;
+import ip.industrialProcessing.microBlock.extend.centerBlock.BlockMicroBlockwithCenter;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
-import ip.industrialProcessing.microBlock.core.BlockMicroBlock;
-import ip.industrialProcessing.microBlock.extend.centerBlock.BlockMicroBlockwithCenter;
 
 public abstract class BlockLogicNodeCore extends BlockMicroBlockwithCenter{
 

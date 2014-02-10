@@ -18,7 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class TileEntityConveyorTransportBase extends TileEntityConveyorConnectionsBase implements IConveyor {
 
@@ -39,11 +39,13 @@ public abstract class TileEntityConveyorTransportBase extends TileEntityConveyor
 	canReverse[LocalDirection.DOWN.ordinal()] = true;
     }
 
-    public float getSpeed() {
+    @Override
+	public float getSpeed() {
 	return speed;
     }
 
-    public void setSpeed(float speed) {
+    @Override
+	public void setSpeed(float speed) {
 	this.speed = speed;
     }
 

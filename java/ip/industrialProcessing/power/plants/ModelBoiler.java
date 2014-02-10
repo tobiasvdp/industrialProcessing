@@ -1,10 +1,12 @@
 package ip.industrialProcessing.power.plants;
 
 import ip.industrialProcessing.client.render.ModelAnimatedFluidMachine;
+
+import javax.swing.Icon;
+
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 
 public class ModelBoiler extends ModelAnimatedFluidMachine {
 

@@ -1,13 +1,14 @@
 package ip.industrialProcessing.power.utils;
 
+import ip.industrialProcessing.power.IPowerAcceptor;
+
 import java.util.Arrays;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
-import ip.industrialProcessing.power.IPowerAcceptor;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class PowerDistributor {
 

@@ -1,10 +1,10 @@
 package ip.industrialProcessing.decoration.light.torch;
 
+import ip.industrialProcessing.decoration.light.TileEntityLamp;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.GameRegistry;
-import ip.industrialProcessing.decoration.light.TileEntityLamp;
 
 public class TileEntityTorch extends TileEntityLamp {
 

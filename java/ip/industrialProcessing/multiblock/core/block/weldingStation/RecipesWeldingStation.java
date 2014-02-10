@@ -1,6 +1,5 @@
 package ip.industrialProcessing.multiblock.core.block.weldingStation;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ISetupBlocks;
 import ip.industrialProcessing.config.ISetupItems;
 import ip.industrialProcessing.config.ISetupMachineBlocks;
@@ -64,7 +63,7 @@ public class RecipesWeldingStation extends RecipesMultiblock {
 
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, ISetupItems.itemIronBar.itemID, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(2, ISetupItems.itemIronBar.itemID, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(3, ISetupItems.itemIronBar.itemID, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(5, ISetupItems.itemIronBar.itemID, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(6, ISetupItems.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(7, ISetupItems.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(8, ISetupItems.itemIronPlate.itemID, RecipeSlotType.INVENTORY, 1) };
 
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(9, IndustrialProcessing.blockPlatform.blockID, RecipeSlotType.INVENTORY, 6, 6, 0) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(9, ISetupBlocks.blockPlatform.blockID, RecipeSlotType.INVENTORY, 6, 6, 0) };
 
 	recipe.workRequired = workTime;
 	recipe.powerRequired = power;
@@ -75,9 +74,9 @@ public class RecipesWeldingStation extends RecipesMultiblock {
     private RecipeMultiblock platformStairs(int workTime, int power, Tiers tier) {
 	PoweredRecipeMultiblock recipe = new PoweredRecipeMultiblock();
 
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(2, IndustrialProcessing.blockPlatform.blockID, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(4, IndustrialProcessing.blockPlatform.blockID, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(5, IndustrialProcessing.blockPlatform.blockID, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(6, IndustrialProcessing.blockPlatform.blockID, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(7, IndustrialProcessing.blockPlatform.blockID, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(8, IndustrialProcessing.blockPlatform.blockID, RecipeSlotType.INVENTORY, 1) };
+	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(2, ISetupBlocks.blockPlatform.blockID, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(4, ISetupBlocks.blockPlatform.blockID, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(5, ISetupBlocks.blockPlatform.blockID, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(6, ISetupBlocks.blockPlatform.blockID, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(7, ISetupBlocks.blockPlatform.blockID, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(8, ISetupBlocks.blockPlatform.blockID, RecipeSlotType.INVENTORY, 1) };
 
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(9, IndustrialProcessing.blockStairs.blockID, RecipeSlotType.INVENTORY, 1, 1, 0) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(9, ISetupBlocks.blockStairs.blockID, RecipeSlotType.INVENTORY, 1, 1, 0) };
 
 	recipe.workRequired = workTime;
 	recipe.powerRequired = power;

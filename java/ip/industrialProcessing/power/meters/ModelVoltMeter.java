@@ -1,10 +1,10 @@
 package ip.industrialProcessing.power.meters;
 
-import org.lwjgl.opengl.GL11;
-
+import ip.industrialProcessing.client.render.ModelAnimatedMachine;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.tileentity.TileEntity;
-import ip.industrialProcessing.client.render.ModelAnimatedMachine;
+
+import org.lwjgl.opengl.GL11;
 
 public class ModelVoltMeter extends ModelAnimatedMachine {
 

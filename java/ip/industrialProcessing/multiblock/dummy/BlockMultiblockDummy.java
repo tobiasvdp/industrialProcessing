@@ -1,9 +1,7 @@
 package ip.industrialProcessing.multiblock.dummy;
 
 import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.machines.IRotateableEntity;
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
-import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import ip.industrialProcessing.utils.inventories.InventoryUtils;
 import net.minecraft.block.Block;
@@ -18,8 +16,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.obj.Face;
-import net.minecraftforge.common.ForgeDirection;
 
 public abstract class BlockMultiblockDummy extends BlockContainer {
 

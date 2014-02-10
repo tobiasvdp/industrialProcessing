@@ -1,9 +1,11 @@
 package ip.industrialProcessing.client.render;
 
 import ip.industrialProcessing.machines.IRotateableEntity;
+
+import javax.swing.Icon;
+
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class ModelConnectedOrientedFluidAnimated extends ModelConnectedFluidAnimated {
 

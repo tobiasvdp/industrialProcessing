@@ -8,7 +8,6 @@ import ip.industrialProcessing.transport.items.IConveyorLine;
 import ip.industrialProcessing.transport.items.ConveyorBeltPowerInput.TileEntityConveyorBeltPowerInput;
 import ip.industrialProcessing.transport.items.conveyorBelt.CornerState;
 import ip.industrialProcessing.utils.ConnectedTileUtils;
-import ip.industrialProcessing.utils.registry.HandlerRegistry;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +16,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class TileEntityTransport extends TileEntitySynced implements IConnectedTile, IConveyorLine {
 
@@ -215,10 +214,12 @@ public abstract class TileEntityTransport extends TileEntitySynced implements IC
 
 	protected int conveyorLine = -1;
 
+	@Override
 	public int getConveyorLineID() {
 		return conveyorLine;
 	}
 
+	@Override
 	public void setConveyorLineID(int ID) {
 		conveyorLine = ID;
 		if(this.worldObj != null && worldObj.getBlockTileEntity(xCoord, yCoord-1, zCoord) != null){

@@ -1,13 +1,12 @@
 package ip.industrialProcessing.config;
 
-import net.minecraft.block.Block;
-import net.minecraft.src.ModLoader;
-import net.minecraftforge.common.MinecraftForge;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.config.ConfigCategories;
 import ip.industrialProcessing.utils.SuspensionList;
+import net.minecraft.block.Block;
+import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ConfigTransportBlocks {
     private int blockTransportFluidsID = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "FluidPipeID", 3500).getInt();

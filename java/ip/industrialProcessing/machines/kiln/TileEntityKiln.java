@@ -1,11 +1,9 @@
 package ip.industrialProcessing.machines.kiln;
 
 import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.machines.SimplePowerStorage;
 import ip.industrialProcessing.machines.TileEntityWorkerMachine;
 import ip.industrialProcessing.power.plants.IHeatable;
 import ip.industrialProcessing.recipes.IMachineRecipe;
-import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.utils.handler.heat.IHeated;
 import ip.industrialProcessing.utils.working.HeatManager;
 

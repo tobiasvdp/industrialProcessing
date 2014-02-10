@@ -12,7 +12,7 @@ import ip.industrialProcessing.subMod.logic.old.utils.UTVariableType;
 import ip.industrialProcessing.subMod.logic.old.utils.UTlogicNodeContainer;
 import ip.industrialProcessing.subMod.logic.old.utils.UTpacket;
 import ip.industrialProcessing.subMod.logic.old.utils.UTpacketType;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class TileEntityLogicNetworkNode extends TElogicNode implements INetworkNode {
 

@@ -1,12 +1,12 @@
 package ip.industrialProcessing.machines.containers.gui;
 
-import org.lwjgl.util.Rectangle;
-import org.lwjgl.util.Point;
-
 import ip.industrialProcessing.machines.TileEntityWorkerMachine;
 import ip.industrialProcessing.machines.containers.ContainerWorkerMachine;
 import ip.industrialProcessing.machines.containers.ProgressInfoWorker;
 import net.minecraft.entity.player.InventoryPlayer;
+
+import org.lwjgl.util.Point;
+import org.lwjgl.util.Rectangle;
 
 public class GuiContainerWorkerMachine extends GuiContainerMachine {
 

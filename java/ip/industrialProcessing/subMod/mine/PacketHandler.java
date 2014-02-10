@@ -1,8 +1,8 @@
 package ip.industrialProcessing.subMod.mine;
 
+import ibxm.Player;
 import ip.industrialProcessing.utils.BlockBreaker;
 import ip.industrialProcessing.utils.packets.PacketDataHandler;
-import ip.industrialProcessing.utils.packets.PacketIP000;
 import ip.industrialProcessing.utils.packets.PacketIP001EntityLocationAndRotation;
 
 import java.io.ByteArrayInputStream;
@@ -11,10 +11,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet250CustomPayload;
-import cpw.mods.fml.common.network.IPacketHandler;
-import cpw.mods.fml.common.network.Player;
 
 public class PacketHandler implements IPacketHandler {
 

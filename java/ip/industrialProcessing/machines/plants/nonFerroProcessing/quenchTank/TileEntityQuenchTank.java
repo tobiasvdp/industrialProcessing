@@ -3,7 +3,6 @@ package ip.industrialProcessing.machines.plants.nonFerroProcessing.quenchTank;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityFluidWorkerMachine;
 import ip.industrialProcessing.recipes.IMachineRecipe;
-import ip.industrialProcessing.recipes.Recipe;
 
 import java.util.Iterator;
 

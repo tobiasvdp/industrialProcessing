@@ -1,14 +1,13 @@
 package ip.industrialProcessing.power.meters;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.machines.BlockMachineRendered;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 public class BlockVoltMeter extends BlockMachineRendered {
 

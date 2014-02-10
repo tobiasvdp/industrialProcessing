@@ -1,6 +1,5 @@
 package ip.industrialProcessing.subMod.blackSmith.plant.tripHammer;
 
-import net.minecraft.block.Block;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreInvWorker;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
@@ -11,7 +10,7 @@ import ip.industrialProcessing.multiblock.tier.Tier;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
 import ip.industrialProcessing.subMod.blackSmith.config.ISetupBlackSmith;
-import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.RecipesBloomery;
+import net.minecraft.block.Block;
 
 public class TileEntityTripHammer extends TileEntityMultiblockCoreInvWorker{
 	static StructureMultiblock structure;

@@ -2,7 +2,7 @@ package ip.industrialProcessing.client.render;
 
 import ip.industrialProcessing.machines.IRotateableEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class ModelConnectedOriented extends ModelConnected {
 

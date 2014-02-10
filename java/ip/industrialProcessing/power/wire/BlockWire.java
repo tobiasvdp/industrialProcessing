@@ -1,13 +1,11 @@
 package ip.industrialProcessing.power.wire;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.transport.BlockTransport;
 import net.minecraft.block.Block;
-import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;

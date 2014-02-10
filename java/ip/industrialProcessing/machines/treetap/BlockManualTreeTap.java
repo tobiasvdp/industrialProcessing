@@ -13,7 +13,6 @@ import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.IRotateableEntity;
 import ip.industrialProcessing.utils.IDescriptionBlock;
-import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -22,7 +21,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockManualTreeTap extends BlockMachineRendered implements IDescriptionBlock, IGuiBlock {
     public static final String UNLOCALIZED_NAME = "IP.Machine.ManualTreetap";

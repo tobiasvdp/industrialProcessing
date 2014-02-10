@@ -1,6 +1,5 @@
 package ip.industrialProcessing.gui3.containers.handlers;
 
-import ip.industrialProcessing.gui3.binding.IProgressBinding;
 import ip.industrialProcessing.utils.handler.numbers.IProgressable;
 
 public class ProgressHandler extends ProgressHandlerBase {

@@ -1,14 +1,11 @@
 package ip.industrialProcessing.utils.handler.events;
 
+import ip.industrialProcessing.transport.steve.railway.suspended.cart.EntityFloatingCart;
+import ip.industrialProcessing.utils.handler.packets.PacketHandler;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 
-import cpw.mods.fml.common.network.PacketDispatcher;
-import ip.industrialProcessing.subMod.mine.machines.EntityVehicle;
-import ip.industrialProcessing.transport.steve.railway.suspended.cart.EntityFloatingCart;
-import ip.industrialProcessing.utils.handler.packets.PacketHandler;
-import net.minecraft.network.packet.Packet250CustomPayload;
-import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.EntityInteractEvent;
 
 public class EventEntityRightClick {

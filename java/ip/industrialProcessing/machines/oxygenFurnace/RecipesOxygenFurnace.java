@@ -1,13 +1,12 @@
 package ip.industrialProcessing.machines.oxygenFurnace;
 
-import net.minecraftforge.fluids.FluidRegistry;
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ISetupFluids;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.recipes.RecipeInputSlot;
 import ip.industrialProcessing.recipes.RecipeOutputSlot;
 import ip.industrialProcessing.recipes.RecipeSlotType;
+import net.minecraftforge.fluids.FluidRegistry;
 
 public class RecipesOxygenFurnace extends RecipesMachine {
 

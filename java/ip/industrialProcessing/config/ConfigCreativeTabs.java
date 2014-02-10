@@ -1,9 +1,8 @@
 package ip.industrialProcessing.config;
 
-import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.api.utils.CreativeTabsIP;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import ip.industrialProcessing.api.utils.CreativeTabsIP;
 
 public class ConfigCreativeTabs {
 

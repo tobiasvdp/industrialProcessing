@@ -1,12 +1,5 @@
 package ip.industrialProcessing.transport.fluids;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.fluids.FluidTank;
-import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidTank;
-import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.machines.IRotateableEntity;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
@@ -16,6 +9,12 @@ import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 import ip.industrialProcessing.machines.animation.tanks.TankHandler;
 import ip.industrialProcessing.transport.TransportConnectionState;
 import ip.industrialProcessing.utils.FluidTransfers;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fluids.FluidTankInfo;
+import net.minecraftforge.fluids.IFluidTank;
 
 public class TileEntityValve extends TileEntityTransportFluidsBase implements IAnimationProgress, IAnimationSyncable, IRotateableEntity {
     private AnimationHandler animationHandler = new AnimationHandler(AnimationMode.CLAMP, 1f, true);

@@ -1,14 +1,14 @@
 package ip.industrialProcessing.multiblock.dummy.block.toggleButton;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.multiblock.dummy.BlockMultiblockDummy;
 import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 public class BLmultiblockToggleButton extends BlockMultiblockDummy{
 

@@ -17,7 +17,7 @@ import ip.industrialProcessing.utils.PowerTransfers;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 // This isn't an actual battery, as it has input and outputs, so the resistance defined here is the resistance the input network sees this "battery" as
 public class TileEntityEnergyCell extends TileEntityPowerGenerator implements IPowerAcceptor, IAnimationProgress, IAnimationSyncable, IPoweredMachine {

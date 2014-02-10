@@ -1,6 +1,5 @@
 package ip.industrialProcessing.gui3.generating.builderParts.specialized;
 
-import ip.industrialProcessing.gui3.framework.panels.Orientation;
 import net.minecraft.inventory.Slot;
 
 public class InventoryHeaderRowReference {

@@ -14,7 +14,7 @@ import ip.industrialProcessing.subMod.logic.old.utils.UTVariableType;
 import ip.industrialProcessing.utils.working.IWorker;
 import ip.industrialProcessing.utils.working.IWorkingEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidTankInfo;
 
 public class TileEntityMachineInterface extends TileEntityLogicNetworkNode implements ILogicInterface {

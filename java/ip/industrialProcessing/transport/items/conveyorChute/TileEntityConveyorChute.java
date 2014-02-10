@@ -1,13 +1,5 @@
 package ip.industrialProcessing.transport.items.conveyorChute;
 
-import java.util.Arrays;
-import java.util.List;
-
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.transport.TransportConnectionState;
 import ip.industrialProcessing.transport.items.conveyorBelt.ConnectionMode;
@@ -16,6 +8,15 @@ import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorIn
 import ip.industrialProcessing.transport.items.conveyorBelt.util.ConveyorEnvironment;
 import ip.industrialProcessing.utils.DirectionUtils;
 import ip.industrialProcessing.utils.ItemTransfers;
+
+import java.util.Arrays;
+import java.util.List;
+
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityConveyorChute extends TileEntityConveyorInventoryBase {
 

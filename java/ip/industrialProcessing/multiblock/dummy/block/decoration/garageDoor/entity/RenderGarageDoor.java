@@ -2,11 +2,10 @@ package ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.ent
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.machines.BlockMachine;
-import ip.industrialProcessing.transport.steve.railway.suspended.cart.ModelFloatingCart;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 

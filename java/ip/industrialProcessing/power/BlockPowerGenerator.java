@@ -1,7 +1,6 @@
 package ip.industrialProcessing.power;
 
 import ip.industrialProcessing.machines.BlockMachineRendered;
-import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.world.World;

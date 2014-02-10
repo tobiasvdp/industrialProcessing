@@ -1,6 +1,5 @@
 package ip.industrialProcessing.config;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.recipes.VanillaRecipeBridge;
 import ip.industrialProcessing.utils.registry.BlockRegistry;
 import ip.industrialProcessing.utils.registry.BlockType;
@@ -16,7 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.util.Icon;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ConfigBaseRecipes {
@@ -31,8 +29,8 @@ public class ConfigBaseRecipes {
 
 		addShapelessRecipes();
 		addShapedRecipes();
-		GameRegistry.addRecipe(new ItemStack(IndustrialProcessing.blockTorch, 4), new Object[] {"X", "#", 'X', Item.coal, '#', Item.stick});
-		GameRegistry.addRecipe(new ItemStack(IndustrialProcessing.blockTorch, 4), new Object[] {"X", "#", 'X', new ItemStack(Item.coal, 1, 1), '#', Item.stick});
+		GameRegistry.addRecipe(new ItemStack(ISetupMachineBlocks.blockTorch, 4), new Object[] {"X", "#", 'X', Item.coal, '#', Item.stick});
+		GameRegistry.addRecipe(new ItemStack(ISetupMachineBlocks.blockTorch, 4), new Object[] {"X", "#", 'X', new ItemStack(Item.coal, 1, 1), '#', Item.stick});
 
 		addSmeltingRecipes();
 
@@ -92,7 +90,7 @@ public class ConfigBaseRecipes {
 		Block.opaqueCubeLookup[Block.thinGlass.blockID] = true;
 		Block.opaqueCubeLookup[ConfigMachineBlocks.getBlockGarageDoorID()] = true;
 		Block.opaqueCubeLookup[Block.fenceIron.blockID] = true;
-		Block.opaqueCubeLookup[IndustrialProcessing.blockDoorEmergency.blockID] = true;
+		Block.opaqueCubeLookup[ISetupBlocks.blockDoorEmergency.blockID] = true;
 	}
 
 	private void addSmeltingRecipes() {

@@ -1,18 +1,17 @@
 package ip.industrialProcessing.subMod.blackSmith.plant.forge;
 
-import java.util.Random;
-
 import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.multiblock.coreAndDummy.BlockMultiblockSwitcher;
 import ip.industrialProcessing.multiblock.coreAndDummy.ITileEntityMultiblockSwitcher;
 import ip.industrialProcessing.subMod.blackSmith.IPBlackSmith;
 import ip.industrialProcessing.subMod.blackSmith.config.ConfigBlackSmith;
-import ip.industrialProcessing.subMod.blackSmith.plant.waterBasin.TileEntityWaterBasinCore;
-import ip.industrialProcessing.subMod.blackSmith.plant.waterBasin.TileEntityWaterBasinDummy;
-import net.minecraft.client.renderer.texture.IconRegister;
+
+import java.util.Random;
+
+import javax.swing.Icon;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 

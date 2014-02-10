@@ -1,17 +1,19 @@
 package ip.industrialProcessing.decoration.platforms;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Matrix4f;
-import org.lwjgl.util.vector.Vector3f;
-
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.Icon;
 import ip.industrialProcessing.api.rendering.connectedTile.ConnectionCompass;
 import ip.industrialProcessing.api.rendering.connectedTile.TileConnection;
 import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
 import ip.industrialProcessing.client.render.ModelBlock;
+
+import javax.swing.Icon;
+
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.Tessellator;
+
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Matrix4f;
+import org.lwjgl.util.vector.Vector3f;
 
 public class ModelStairs extends ModelBlock {
 

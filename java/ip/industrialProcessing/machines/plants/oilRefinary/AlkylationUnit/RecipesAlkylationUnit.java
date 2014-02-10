@@ -1,6 +1,5 @@
 package ip.industrialProcessing.machines.plants.oilRefinary.AlkylationUnit;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ISetupFluids;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.recipes.PoweredRecipe;

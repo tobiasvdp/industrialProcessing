@@ -1,14 +1,16 @@
 package ip.industrialProcessing.transport.fluids;
 
-import org.lwjgl.opengl.GL11;
-
 import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.ModelConnectedOrientedFluid;
 import ip.industrialProcessing.machines.BlockMachine;
+
+import javax.swing.Icon;
+
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import org.lwjgl.opengl.GL11;
 
 public class ModelRainTank extends ModelConnectedOrientedFluid {
 

@@ -1,8 +1,6 @@
 package ip.industrialProcessing.subMod.power.plant.creative;
 
-import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.gui.GuiLayout;
-import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.gui3.generating.GuiBuilderDefault;
 import ip.industrialProcessing.gui3.generating.IGuiBlock;
 import ip.industrialProcessing.gui3.generating.IGuiBuilder;
@@ -22,7 +20,7 @@ public class BlockCreativeGenerator extends BlockPowerGenerator implements IDesc
 
     public BlockCreativeGenerator() {
         super(ConfigPower.getCreativeEngineID(), Material.iron, 1f, Block.soundMetalFootstep, UNLOCALIZED_NAME, IPPower.tabPower);
-        setTextureName(IndustrialProcessing.TEXTURE_NAME_PREFIX + "creativeGenerator");
+        setTextureName(INamepace.TEXTURE_NAME_PREFIX + "creativeGenerator");
     }
 
     @Override

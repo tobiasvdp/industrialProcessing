@@ -4,15 +4,10 @@ import ip.industrialProcessing.gui3.binding.IProgressBinding;
 import ip.industrialProcessing.gui3.framework.Alignment;
 import ip.industrialProcessing.gui3.framework.Rect;
 import ip.industrialProcessing.gui3.framework.Thickness;
-import ip.industrialProcessing.gui3.framework.UIElement;
 import ip.industrialProcessing.gui3.framework.controls.ProgressBar;
 import ip.industrialProcessing.gui3.framework.controls.TextBlock;
 import ip.industrialProcessing.gui3.framework.controls.UserControl;
-import ip.industrialProcessing.gui3.framework.panels.GridCell;
-import ip.industrialProcessing.gui3.framework.panels.GridPanel;
-import ip.industrialProcessing.gui3.framework.panels.GridSize;
 import ip.industrialProcessing.gui3.framework.panels.Orientation;
-import ip.industrialProcessing.gui3.framework.panels.SizeMode;
 import ip.industrialProcessing.gui3.framework.panels.StackPanel;
 import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
 

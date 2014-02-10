@@ -1,20 +1,16 @@
 package ip.industrialProcessing.power.storage.model;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.api.rendering.wavefront.ObjRotator;
 import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
 import ip.industrialProcessing.client.render.ModelBlock;
 import ip.industrialProcessing.machines.BlockMachine;
-import ip.industrialProcessing.machines.diskFilter.model.ConnectorBottom;
-import ip.industrialProcessing.machines.diskFilter.model.ConnectorSide;
-import ip.industrialProcessing.machines.diskFilter.model.ConnectorTop;
-import ip.industrialProcessing.machines.diskFilter.model.Cylinder;
-import ip.industrialProcessing.machines.diskFilter.model.Features;
-import ip.industrialProcessing.machines.diskFilter.model.Hull;
+
+import javax.swing.Icon;
+
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class ModelEnergyCellBlock extends ModelBlock {
 

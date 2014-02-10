@@ -1,10 +1,8 @@
 package ip.industrialProcessing.decoration.light.electricLamp;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.machines.BlockMachine;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;

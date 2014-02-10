@@ -4,7 +4,6 @@ import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.containers.IMachineContainerEntity;
 import ip.industrialProcessing.transport.items.conveyorBelt.ConnectionMode;
 import ip.industrialProcessing.transport.items.conveyorBelt.MovingItemStack;
-import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorInventoryBase;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorPowerTranslation;
 import ip.industrialProcessing.utils.DirectionUtils;
 
@@ -17,7 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityConveyorSorter extends TileEntityConveyorPowerTranslation implements IMachineContainerEntity {
 

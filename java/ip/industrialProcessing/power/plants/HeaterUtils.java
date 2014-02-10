@@ -2,7 +2,7 @@ package ip.industrialProcessing.power.plants;
 
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class HeaterUtils {
 

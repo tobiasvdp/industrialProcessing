@@ -1,9 +1,5 @@
 package ip.industrialProcessing.multiblock.core.extend;
 
-import java.util.Iterator;
-
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
 import ip.industrialProcessing.machines.animation.AnimationMode;
@@ -19,6 +15,11 @@ import ip.industrialProcessing.utils.working.ClientWorker;
 import ip.industrialProcessing.utils.working.IWorker;
 import ip.industrialProcessing.utils.working.ServerWorker;
 import ip.industrialProcessing.utils.working.WorkUtils;
+
+import java.util.Iterator;
+
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 
 public abstract class TileEntityMultiblockCoreTankWorker extends TileEntityMultiblockCoreTank implements IRecipeMultiblockFluidWorkHandler, IAnimationProgress, IAnimationSyncable {
 

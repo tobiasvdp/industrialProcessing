@@ -5,15 +5,12 @@ import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorConnectionsBase;
 import ip.industrialProcessing.utils.IDescriptionBlock;
-import ip.industrialProcessing.utils.registry.HandlerRegistry;
 
 import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 

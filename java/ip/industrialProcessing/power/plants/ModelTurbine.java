@@ -2,9 +2,11 @@ package ip.industrialProcessing.power.plants;
 
 import ip.industrialProcessing.client.render.ModelAnimatedFluidMachine;
 import ip.industrialProcessing.power.plants.models.TurbineAxle;
+
+import javax.swing.Icon;
+
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector3f;

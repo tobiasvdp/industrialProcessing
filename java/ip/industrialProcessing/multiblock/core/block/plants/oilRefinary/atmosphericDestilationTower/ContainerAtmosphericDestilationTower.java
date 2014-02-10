@@ -1,10 +1,10 @@
 package ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.atmosphericDestilationTower;
 
-import net.minecraft.entity.player.InventoryPlayer;
 import ip.industrialProcessing.multiblock.container.ContainerMultiblockTankWorkerPowered;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.slots.SlotLiquid;
 import ip.industrialProcessing.slots.SlotLiquidOutput;
+import net.minecraft.entity.player.InventoryPlayer;
 
 public class ContainerAtmosphericDestilationTower  extends ContainerMultiblockTankWorkerPowered{
 	private SlotLiquid inputWaterFullInput;

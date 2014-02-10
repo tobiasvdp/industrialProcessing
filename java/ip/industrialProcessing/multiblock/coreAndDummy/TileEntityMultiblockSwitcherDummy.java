@@ -1,14 +1,15 @@
 package ip.industrialProcessing.multiblock.coreAndDummy;
 
-import java.util.ArrayList;
-
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTank;
 import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
 import ip.industrialProcessing.multiblock.dummy.extend.TileEntityMultiblockDummyInvAndTank;
+
+import java.util.ArrayList;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class TileEntityMultiblockSwitcherDummy extends TileEntityMultiblockDummyInvAndTank implements ITileEntityMultiblockSwitcher {
 
@@ -17,7 +18,7 @@ public abstract class TileEntityMultiblockSwitcherDummy extends TileEntityMultib
 	@Override
 	public TileEntityMultiblockCoreTank getCore() {
 		if (super.getCore() instanceof TileEntityMultiblockSwitcherCore)
-			return (TileEntityMultiblockSwitcherCore) super.getCore();
+			return super.getCore();
 		return null;
 	}
 

@@ -1,12 +1,13 @@
 package ip.industrialProcessing.multiblock.container;
 
-import java.util.ArrayList;
-
-import net.minecraft.entity.player.InventoryPlayer;
 import ip.industrialProcessing.gui.container.syncing.handlers.HandlerTank;
 import ip.industrialProcessing.gui.container.syncing.handlers.IHandlerTank;
 import ip.industrialProcessing.gui.container.syncing.info.InfoTank;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTank;
+
+import java.util.ArrayList;
+
+import net.minecraft.entity.player.InventoryPlayer;
 
 public class ContainerMultiblockTank extends ContainerMultiblockInv {
 

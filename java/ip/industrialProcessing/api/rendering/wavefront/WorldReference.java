@@ -1,10 +1,12 @@
 package ip.industrialProcessing.api.rendering.wavefront;
 
+import javax.swing.Icon;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
+
 import org.lwjgl.util.vector.Vector3f;
 
 public class WorldReference {

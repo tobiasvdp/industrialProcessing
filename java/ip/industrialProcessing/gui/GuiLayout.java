@@ -12,9 +12,6 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import org.w3c.dom.css.CSSPrimitiveValue;
-import org.w3c.dom.css.Rect;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
@@ -345,9 +342,9 @@ public class GuiLayout {
 						for (int z = i + 1; z < panels.size(); z++) {
 							newWidth += panels.get(z).getWidth();
 						}
-						margin = (int) (widthScreen - previousIntersectLocation - newWidth) / (panels.size() - i);
+						margin = (widthScreen - previousIntersectLocation - newWidth) / (panels.size() - i);
 						if (i == 0)
-							margin = (int) (widthScreen - previousIntersectLocation - newWidth) / (panels.size() + 2);
+							margin = (widthScreen - previousIntersectLocation - newWidth) / (panels.size() + 2);
 						totalWidth = (int) (intersect.getX() + intersect.getWidth() + margin);
 						previousIntersect = i;
 						if (i == 0)

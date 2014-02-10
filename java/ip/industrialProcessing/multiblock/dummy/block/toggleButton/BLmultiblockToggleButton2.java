@@ -1,6 +1,5 @@
 package ip.industrialProcessing.multiblock.dummy.block.toggleButton;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.ISetupCreativeTabs;

@@ -4,8 +4,6 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.config.ConfigCategories;
 import ip.industrialProcessing.fluids.ContainerFluid;
 import ip.industrialProcessing.items.ItemIPBucket;
-import ip.industrialProcessing.subMod.blackSmith.item.ItemWoodenBucket;
-import ip.industrialProcessing.subMod.blackSmith.item.ItemWoodenBucketFilled;
 import ip.industrialProcessing.utils.registry.BucketRegistery;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;

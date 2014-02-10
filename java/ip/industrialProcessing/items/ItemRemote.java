@@ -1,20 +1,17 @@
 package ip.industrialProcessing.items;
 
-import java.util.List;
-
-import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.subMod.mine.machines.mining.bobcatMiner.EntityBobcatMiner;
 import ip.industrialProcessing.utils.IReceiver;
 import ip.industrialProcessing.utils.IRemote;
 import ip.industrialProcessing.utils.ISender;
-import ip.industrialProcessing.utils.handler.fluids.BucketHandler;
+
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
@@ -79,6 +76,7 @@ public class ItemRemote extends ItemIP implements IRemote {
 		return itemStack.stackTagCompound.getIntArray("te");
 	}
 
+	@Override
 	public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean par4) {
 		super.addInformation(itemStack, player, list, par4);
 		if (itemStack.stackTagCompound != null) {

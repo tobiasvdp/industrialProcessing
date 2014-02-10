@@ -1,6 +1,6 @@
 package ip.industrialProcessing.power;
 
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public interface IPowerAcceptor extends IPowerEntity {
     float getResistance(ForgeDirection side, float voltage); // sense voltage

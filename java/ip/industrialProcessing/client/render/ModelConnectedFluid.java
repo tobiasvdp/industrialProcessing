@@ -1,7 +1,8 @@
 package ip.industrialProcessing.client.render;
 
+import javax.swing.Icon;
+
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 
 public abstract class ModelConnectedFluid extends ModelConnected {
 

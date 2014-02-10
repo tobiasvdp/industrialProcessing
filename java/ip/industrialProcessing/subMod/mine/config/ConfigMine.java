@@ -1,13 +1,9 @@
 package ip.industrialProcessing.subMod.mine.config;
 
-import cpw.mods.fml.common.registry.EntityRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
-import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.config.ConfigMachineBlocks;
-import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.entity.EntityGarageDoor;
 import ip.industrialProcessing.subMod.mine.IPMine;
 import ip.industrialProcessing.subMod.mine.machines.mining.bobcatMiner.EntityBobcatMiner;
-import ip.industrialProcessing.utils.registry.BlockType;
+import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 
 public class ConfigMine {

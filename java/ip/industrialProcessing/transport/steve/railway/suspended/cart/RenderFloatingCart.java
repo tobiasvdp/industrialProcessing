@@ -1,11 +1,11 @@
 package ip.industrialProcessing.transport.steve.railway.suspended.cart;
 
 import ip.industrialProcessing.IndustrialProcessing;
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
 
 public class RenderFloatingCart extends Render{
 

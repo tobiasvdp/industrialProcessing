@@ -1,12 +1,15 @@
 package ip.industrialProcessing.machines.mixer;
 
-import org.lwjgl.opengl.GL11;
+import ip.industrialProcessing.client.render.ModelAnimatedFluidMachine;
+
+import javax.swing.Icon;
+
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import ip.industrialProcessing.client.render.ModelAnimatedFluidMachine;
+
+import org.lwjgl.opengl.GL11;
 
 public class ModelMixer extends ModelAnimatedFluidMachine {
 	// fields

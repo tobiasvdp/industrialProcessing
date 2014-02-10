@@ -1,10 +1,5 @@
 package ip.industrialProcessing.gui3.guide.pages.machines;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
-import com.google.common.collect.Sets;
-
 import ip.industrialProcessing.gui3.framework.Thickness;
 import ip.industrialProcessing.gui3.framework.controls.Button;
 import ip.industrialProcessing.gui3.framework.controls.IButtonClickListener;
@@ -22,10 +17,12 @@ import ip.industrialProcessing.gui3.generating.IGuiBuilder;
 import ip.industrialProcessing.gui3.generating.IGuiMultiblock;
 import ip.industrialProcessing.multiblock.recipes.ITierRecipe;
 import ip.industrialProcessing.recipes.IMachineRecipe;
-import ip.industrialProcessing.recipes.IMachineRecipes;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 import ip.industrialProcessing.recipes.RecipeOutputSlot;
 import ip.industrialProcessing.utils.registry.RecipeRegistry;
+
+import java.util.Iterator;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;

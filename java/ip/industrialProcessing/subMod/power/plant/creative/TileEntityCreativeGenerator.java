@@ -1,11 +1,9 @@
 package ip.industrialProcessing.subMod.power.plant.creative;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.ForgeDirection;
-import ip.industrialProcessing.power.PowerHelper;
 import ip.industrialProcessing.power.TileEntityPowerGenerator;
-import ip.industrialProcessing.power.plants.TileEntityGenerator;
 import ip.industrialProcessing.utils.handler.numbers.IStateConfig;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityCreativeGenerator extends TileEntityPowerGenerator implements IStateConfig {
 

@@ -1,12 +1,11 @@
 package ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.clausSulfurPlant;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.multiblock.core.BlockMultiblockCore;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 public class BlockClausSulfurPlant extends BlockMultiblockCore{
 	public BlockClausSulfurPlant(){

@@ -5,7 +5,7 @@ import ip.industrialProcessing.subMod.logic.old.utils.UTLogicType;
 import ip.industrialProcessing.subMod.logic.old.utils.UTVariable;
 import ip.industrialProcessing.subMod.logic.old.utils.UTVariableType;
 import ip.industrialProcessing.subMod.logic.old.utils.UTpacket;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TElogicOr extends TElogicNode {
 

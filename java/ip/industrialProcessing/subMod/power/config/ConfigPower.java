@@ -2,7 +2,6 @@ package ip.industrialProcessing.subMod.power.config;
 
 import ip.industrialProcessing.api.config.ConfigCategories;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
-import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.subMod.power.IPPower;
 import ip.industrialProcessing.subMod.power.plant.creative.TileEntityCreativeGenerator;
 import ip.industrialProcessing.subMod.power.plant.solar.standingSolarPanel.TileEntityStandingSolarPanel;
@@ -17,8 +16,10 @@ public class ConfigPower {
 	private int rendererStandingSolarPanel;
 	
 	public void register(){
-		ConfigMachineBlocks.getInstance().registerMachineBlock(IPPower.blockCreativeGenerator, "IP.Power.Creat", "Creative engine", TileEntityCreativeGenerator.class, BlockType.Power);
-		ConfigMachineBlocks.getInstance().registerMachineBlock(IPPower.blockStandingSolarPanel, "IP.Power.StSolar", "Standing solar panels", TileEntityStandingSolarPanel.class, BlockType.Power);
+		ConfigMachineBlocks.getInstance();
+		ConfigMachineBlocks.registerMachineBlock(ISetupPower.blockCreativeGenerator, "IP.Power.Creat", "Creative engine", TileEntityCreativeGenerator.class, BlockType.Power);
+		ConfigMachineBlocks.getInstance();
+		ConfigMachineBlocks.registerMachineBlock(ISetupPower.blockStandingSolarPanel, "IP.Power.StSolar", "Standing solar panels", TileEntityStandingSolarPanel.class, BlockType.Power);
 	}
 	
 	public static ConfigPower getInstance() {

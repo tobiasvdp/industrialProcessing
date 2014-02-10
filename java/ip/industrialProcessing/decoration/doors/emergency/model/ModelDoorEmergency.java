@@ -1,21 +1,16 @@
 package ip.industrialProcessing.decoration.doors.emergency.model;
 
 import ip.industrialProcessing.api.rendering.wavefront.ObjRotatedTranslator;
-import ip.industrialProcessing.api.rendering.wavefront.ObjRotator;
 import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
 import ip.industrialProcessing.client.render.ModelBlock;
 import ip.industrialProcessing.decoration.doors.BlockDoor;
-import ip.industrialProcessing.decoration.platforms.ModelPlatform;
-import ip.industrialProcessing.machines.BlockMachine;
+
+import javax.swing.Icon;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 
 public class ModelDoorEmergency extends ModelBlock {

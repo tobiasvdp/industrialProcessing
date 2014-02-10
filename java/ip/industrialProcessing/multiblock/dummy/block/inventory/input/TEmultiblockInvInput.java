@@ -1,11 +1,11 @@
 package ip.industrialProcessing.multiblock.dummy.block.inventory.input;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.ItemStack;
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreInv;
 import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.ItemStack;
 
 public class TEmultiblockInvInput extends TileEntityMultiblockDummy implements ISidedInventory {
 

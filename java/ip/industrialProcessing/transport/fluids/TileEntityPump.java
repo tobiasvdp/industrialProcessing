@@ -1,9 +1,5 @@
 package ip.industrialProcessing.transport.fluids;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.fluids.FluidTank;
-import net.minecraftforge.fluids.IFluidTank;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.machines.TileEntityMachine;
@@ -13,6 +9,10 @@ import ip.industrialProcessing.machines.animation.IAnimationSyncable;
 import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 import ip.industrialProcessing.power.plants.IMechanicalMotion;
 import ip.industrialProcessing.utils.DirectionUtils;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fluids.IFluidTank;
 
 public class TileEntityPump extends TileEntityMachine implements IAnimationProgress, IAnimationSyncable, IMechanicalMotion {
 

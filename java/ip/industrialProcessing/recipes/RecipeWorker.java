@@ -1,9 +1,9 @@
 package ip.industrialProcessing.recipes;
 
+import ip.industrialProcessing.utils.working.ServerWorker;
+
 import java.util.Iterator;
 import java.util.Random;
-
-import ip.industrialProcessing.utils.working.ServerWorker;
 
 public class RecipeWorker extends ServerWorker {
 

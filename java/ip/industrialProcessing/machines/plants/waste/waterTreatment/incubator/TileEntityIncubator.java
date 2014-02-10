@@ -1,11 +1,10 @@
 package ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator;
 
-import java.util.Iterator;
-
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityPoweredWorkerMachine;
 import ip.industrialProcessing.recipes.IMachineRecipe;
-import ip.industrialProcessing.recipes.Recipe;
+
+import java.util.Iterator;
 
 public class TileEntityIncubator extends TileEntityPoweredWorkerMachine {
     public static RecipesIncubator recipes = new RecipesIncubator();

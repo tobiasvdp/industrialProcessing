@@ -1,12 +1,11 @@
 package ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.atmosphericDestilationTower;
 
+import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
+import ip.industrialProcessing.multiblock.gui.GUImultiblock;
 import net.minecraft.entity.player.InventoryPlayer;
 
 import org.lwjgl.util.Point;
 import org.lwjgl.util.Rectangle;
-
-import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
-import ip.industrialProcessing.multiblock.gui.GUImultiblock;
 
 public class GuiContainerAtmosphericDestilationTower extends GUImultiblock {
 	

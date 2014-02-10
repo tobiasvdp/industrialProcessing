@@ -1,27 +1,10 @@
 package ip.industrialProcessing.subMod.blackSmith.plant.waterBasin;
 
-import java.util.Iterator;
-
-import net.minecraft.dispenser.IPosition;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidTank;
-import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.animation.tanks.ITankSyncable;
 import ip.industrialProcessing.machines.animation.tanks.TankHandler;
 import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
-import ip.industrialProcessing.multiblock.core.block.weldingStation.RecipesWeldingStation;
 import ip.industrialProcessing.multiblock.coreAndDummy.TileEntityMultiblockSwitcherCore;
-import ip.industrialProcessing.multiblock.coreAndDummy.TileEntityMultiblockSwitcherDummy;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
 import ip.industrialProcessing.multiblock.layout.LayoutTransformer;
@@ -34,6 +17,16 @@ import ip.industrialProcessing.multiblock.tier.Tiers;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
 import ip.industrialProcessing.subMod.blackSmith.config.ISetupBlackSmith;
 import ip.industrialProcessing.utils.DropBlock;
+
+import java.util.Iterator;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 
 public class TileEntityWaterBasinCore extends TileEntityMultiblockSwitcherCore implements ITankSyncable {
 	static StructureMultiblock structure;

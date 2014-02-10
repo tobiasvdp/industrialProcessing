@@ -16,24 +16,25 @@ import ip.industrialProcessing.transport.items.conveyorBelt.rendering.paths.Slop
 import ip.industrialProcessing.transport.items.conveyorModels.tileEntity.ConveyorCenterTileEntity;
 import ip.industrialProcessing.transport.items.conveyorModels.tileEntity.ConveyorCornerLeftTileEntity;
 import ip.industrialProcessing.transport.items.conveyorModels.tileEntity.ConveyorCornerRightTileEntity;
-import ip.industrialProcessing.transport.items.conveyorModels.tileEntity.ConveyorSlopeFlatToUpTileEntity;
 import ip.industrialProcessing.transport.items.conveyorModels.tileEntity.ConveyorInputTileEntity;
 import ip.industrialProcessing.transport.items.conveyorModels.tileEntity.ConveyorOutputTileEntity;
 import ip.industrialProcessing.transport.items.conveyorModels.tileEntity.ConveyorSlopeDownToFlatTileEntity;
 import ip.industrialProcessing.transport.items.conveyorModels.tileEntity.ConveyorSlopeFlatToDownTileEntity;
+import ip.industrialProcessing.transport.items.conveyorModels.tileEntity.ConveyorSlopeFlatToUpTileEntity;
 import ip.industrialProcessing.transport.items.conveyorModels.tileEntity.ConveyorSlopeStraightDownTileEntity;
 import ip.industrialProcessing.transport.items.conveyorModels.tileEntity.ConveyorSlopeStraightUpTileEntity;
-import ip.industrialProcessing.transport.items.conveyorModels.tileEntity.ConveyorStraightTileEntity;
 import ip.industrialProcessing.transport.items.conveyorModels.tileEntity.ConveyorSlopeUpToFlatTileEntity;
+import ip.industrialProcessing.transport.items.conveyorModels.tileEntity.ConveyorStraightTileEntity;
 
 import java.util.Iterator;
+
+import javax.swing.Icon;
 
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 

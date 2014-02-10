@@ -1,14 +1,11 @@
 package ip.industrialProcessing.power.buildcraftGenerator;
 
+import ip.industrialProcessing.client.render.IAnimationProgress;
+import ip.industrialProcessing.gui3.containers.handlers.PowerHandler;
+import ip.industrialProcessing.power.TileEntityPowerGenerator;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
-import buildcraft.api.power.IPowerReceptor;
-import buildcraft.api.power.PowerHandler;
-import buildcraft.api.power.PowerHandler.PowerReceiver;
-import buildcraft.api.power.PowerHandler.Type;
-import ip.industrialProcessing.client.render.IAnimationProgress;
-import ip.industrialProcessing.power.TileEntityPowerGenerator;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityBuildcraftGenerator extends TileEntityPowerGenerator implements IPowerReceptor, IAnimationProgress {
 

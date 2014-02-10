@@ -2,10 +2,12 @@ package ip.industrialProcessing.client.render;
 
 import ip.industrialProcessing.machines.animation.tanks.ITankSyncable;
 import ip.industrialProcessing.machines.animation.tanks.TankHandler;
+
+import javax.swing.Icon;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;

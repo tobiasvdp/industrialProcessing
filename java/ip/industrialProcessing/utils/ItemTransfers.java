@@ -9,7 +9,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class ItemTransfers {
     public static ItemStack transfer(ItemStack stack, IInventory inventory, int slot) {
@@ -142,7 +142,7 @@ public class ItemTransfers {
     public static ItemStack consumeContainer(ItemStack stack) {
         if (stack.stackSize == 1) {
             if (stack.getItem().hasContainerItem()) {
-                return stack.getItem().getContainerItemStack(stack);
+                return stack.getItem().getContainerItem(stack);
             } else {
                 return null;
             }

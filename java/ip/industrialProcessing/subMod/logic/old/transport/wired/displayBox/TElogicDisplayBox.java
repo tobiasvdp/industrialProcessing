@@ -7,7 +7,7 @@ import ip.industrialProcessing.subMod.logic.old.utils.UTpacket;
 
 import java.util.ArrayList;
 
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TElogicDisplayBox extends TElogicNode implements ICommunicationNode, ICommunicationTransport {
 

@@ -1,10 +1,10 @@
 package ip.industrialProcessing.power.plants;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.gui3.generating.GuiBuilderDefault;
 import ip.industrialProcessing.gui3.generating.IGuiBuilder;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 public class BlockSolidBurner extends BlockBurner {
 

@@ -1,10 +1,7 @@
 package ip.industrialProcessing.utils.registry;
 
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map.Entry;
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class BucketRegistery {

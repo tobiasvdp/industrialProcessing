@@ -1,7 +1,5 @@
 package ip.industrialProcessing.multiblock.core.block.SolderingStation;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreInvWorkerPowered;
@@ -15,6 +13,8 @@ import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
 import ip.industrialProcessing.utils.handler.heat.HeatStorage;
 import ip.industrialProcessing.utils.handler.heat.IHeatStorage;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntitySolderingStation extends TileEntityMultiblockCoreInvWorkerPowered  implements IHeatStorage {
 	static StructureMultiblock structure;

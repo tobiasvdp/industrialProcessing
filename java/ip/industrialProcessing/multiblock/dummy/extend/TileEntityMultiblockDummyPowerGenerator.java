@@ -1,15 +1,12 @@
 package ip.industrialProcessing.multiblock.dummy.extend;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.ForgeDirection;
-import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCorePowerGenerator;
 import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
-import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
-import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.power.IPowerOutput;
 import ip.industrialProcessing.power.IPowerProducer;
 import ip.industrialProcessing.power.PowerDistributorManager;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityMultiblockDummyPowerGenerator extends TileEntityMultiblockDummy implements IPowerProducer, IPowerOutput {
 

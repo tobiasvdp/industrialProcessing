@@ -1,26 +1,13 @@
 package ip.industrialProcessing.gui3.guide.pages;
 
-import ip.industrialProcessing.gui3.framework.Alignment;
-import ip.industrialProcessing.gui3.framework.Thickness;
-import ip.industrialProcessing.gui3.framework.controls.Button;
 import ip.industrialProcessing.gui3.framework.controls.Decorator;
-import ip.industrialProcessing.gui3.framework.controls.SlotItemControl;
 import ip.industrialProcessing.gui3.framework.controls.TextBlock;
 import ip.industrialProcessing.gui3.framework.panels.DockPanel;
 import ip.industrialProcessing.gui3.framework.panels.Orientation;
 import ip.industrialProcessing.gui3.framework.panels.ScrollPanel;
-import ip.industrialProcessing.gui3.framework.panels.StackPanel;
 import ip.industrialProcessing.gui3.framework.panels.tabs.TabPage;
 import ip.industrialProcessing.gui3.guide.pages.machines.MachineDetails;
-import ip.industrialProcessing.gui3.guide.pages.machines.MachineList;
 import ip.industrialProcessing.gui3.guide.pages.tools.ToolsList;
-import ip.industrialProcessing.utils.registry.ItemRegistry;
-import ip.industrialProcessing.utils.registry.ItemType;
-
-import java.util.Iterator;
-
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
 public class ToolsTab extends TabPage {
     public ToolsTab() {

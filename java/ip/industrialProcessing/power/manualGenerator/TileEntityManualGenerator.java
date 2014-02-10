@@ -1,13 +1,13 @@
 package ip.industrialProcessing.power.manualGenerator;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
 import ip.industrialProcessing.machines.animation.AnimationMode;
 import ip.industrialProcessing.power.TileEntityPowerGenerator;
 import ip.industrialProcessing.utils.DirectionUtils;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityManualGenerator extends TileEntityPowerGenerator implements IAnimationProgress {
     public TileEntityManualGenerator() {

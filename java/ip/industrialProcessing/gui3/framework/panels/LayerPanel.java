@@ -1,12 +1,9 @@
 package ip.industrialProcessing.gui3.framework.panels;
 
-import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.gui3.framework.Rect;
 import ip.industrialProcessing.gui3.framework.Size;
 import ip.industrialProcessing.gui3.framework.UIElement;
 import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
-
-import java.util.ArrayList;
 
 public class LayerPanel extends Panel {
 

@@ -9,7 +9,7 @@ import ip.industrialProcessing.multiblock.tier.Tiers;
 import ip.industrialProcessing.recipes.RecipeInputSlot;
 import ip.industrialProcessing.recipes.RecipeOutputSlot;
 import ip.industrialProcessing.recipes.RecipeSlotType;
-import ip.industrialProcessing.subMod.blackSmith.IPBlackSmith;
+import ip.industrialProcessing.subMod.blackSmith.config.ISetupBlackSmith;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
@@ -104,7 +104,7 @@ public class RecipesBloomery extends RecipesMultiblock {
 	PoweredRecipeMultiblock recipe = new PoweredRecipeMultiblock();
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Block.oreIron.blockID, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(4, Block.oreIron.blockID, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(5, Block.oreIron.blockID, RecipeSlotType.INVENTORY, 1) };
 
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IPBlackSmith.itemWroughtIron.itemID, RecipeSlotType.INVENTORY, 3, 3, 0.25) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, ISetupBlackSmith.itemWroughtIron.itemID, RecipeSlotType.INVENTORY, 3, 3, 0.25) };
 	recipe.workRequired = workTime;
 	recipe.powerRequired = powerConsumption;
 	recipe.tier = tier;
@@ -159,7 +159,7 @@ public class RecipesBloomery extends RecipesMultiblock {
 	PoweredRecipeMultiblock recipe = new PoweredRecipeMultiblock();
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Block.oreIron.blockID, RecipeSlotType.INVENTORY, 1) };
 
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, IPBlackSmith.itemWroughtIron.itemID, RecipeSlotType.INVENTORY, 1, 1, 0.25) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, ISetupBlackSmith.itemWroughtIron.itemID, RecipeSlotType.INVENTORY, 1, 1, 0.25) };
 	recipe.workRequired = workTime;
 	recipe.powerRequired = powerConsumption;
 	recipe.tier = tier;

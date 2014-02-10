@@ -1,6 +1,5 @@
 package ip.industrialProcessing.machines.plants.nonFerroProcessing.magneticSeparator;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ISetupItems;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.recipes.Recipe;

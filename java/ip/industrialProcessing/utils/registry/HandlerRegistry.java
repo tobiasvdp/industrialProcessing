@@ -1,8 +1,5 @@
 package ip.industrialProcessing.utils.registry;
 
-import ip.industrialProcessing.power.IPoweredMachine;
-import ip.industrialProcessing.power.plants.IMechanicalMotion;
-import ip.industrialProcessing.transport.items.ConveyorLine;
 import ip.industrialProcessing.transport.items.ConveyorBeltPowerInput.TileEntityConveyorBeltPowerInput;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorConnectionsBase;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorTransportBase;
@@ -59,7 +56,7 @@ public class HandlerRegistry {
 	}
 
 	public static int addToConveyorLine(TileEntityConveyorConnectionsBase conveyorBelt, boolean isNBT) {
-		if ((conveyorBelt.worldObj != null && !conveyorBelt.worldObj.isRemote) || conveyorBelt.worldObj == null) {
+		if ((conveyorBelt.getWorldObj() != null && !conveyorBelt.getWorldObj().isRemote) || conveyorBelt.getWorldObj() == null) {
 			Iterator<IConveyorLineHandler> it = conveyorLineHandler.iterator();
 			int ID = -1;
 			while (it.hasNext()) {
@@ -77,7 +74,7 @@ public class HandlerRegistry {
 	}
 
 	public static void removeFromConveyorLine(TileEntityConveyorTransportBase cb) {
-		if (cb.worldObj != null && !cb.worldObj.isRemote) {
+		if (cb.getWorldObj() != null && !cb.getWorldObj().isRemote) {
 			Iterator<IConveyorLineHandler> it = conveyorLineHandler.iterator();
 			int ID = -1;
 			while (it.hasNext()) {
@@ -88,7 +85,7 @@ public class HandlerRegistry {
 	}
 
 	public static int addToLogicLine(ILinePart te, boolean isNBT) {
-		if ((((TileEntity) te).worldObj != null && !((TileEntity) te).worldObj.isRemote) || ((TileEntity) te).worldObj == null) {
+		if ((((TileEntity) te).getWorldObj() != null && !((TileEntity) te).getWorldObj().isRemote) || ((TileEntity) te).getWorldObj() == null) {
 			Iterator<ILineHandler> it = logicLineHandler.iterator();
 			int ID = -1;
 			while (it.hasNext()) {
@@ -116,7 +113,7 @@ public class HandlerRegistry {
 	}
 
 	public static void removeFromLogicLine(ILinePart te) {
-		if (((TileEntity) te).worldObj != null && !((TileEntity) te).worldObj.isRemote) {
+		if (((TileEntity) te).getWorldObj() != null && !((TileEntity) te).getWorldObj().isRemote) {
 			Iterator<ILineHandler> it = logicLineHandler.iterator();
 			int ID = -1;
 			while (it.hasNext()) {
@@ -136,7 +133,7 @@ public class HandlerRegistry {
 	}
 
 	public static boolean addToConveyorLine(int line, TileEntityConveyorBeltPowerInput te) {
-		if ((te.worldObj != null && !te.worldObj.isRemote) || te.worldObj == null) {
+		if ((te.getWorldObj() != null && !te.getWorldObj().isRemote) || te.getWorldObj() == null) {
 			Iterator<IConveyorLineHandler> it = conveyorLineHandler.iterator();
 			boolean valid = true;
 			while (it.hasNext()) {
@@ -150,7 +147,7 @@ public class HandlerRegistry {
 	}
 
 	public static void removeFromConveyorLine(int line, TileEntityConveyorBeltPowerInput te) {
-		if ((te.worldObj != null && !te.worldObj.isRemote) || te.worldObj == null) {
+		if ((te.getWorldObj() != null && !te.getWorldObj().isRemote) || te.getWorldObj() == null) {
 			Iterator<IConveyorLineHandler> it = conveyorLineHandler.iterator();
 			int ID = -1;
 			while (it.hasNext()) {

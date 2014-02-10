@@ -1,9 +1,9 @@
 package ip.industrialProcessing.transport.items.conveyorBelt.rendering;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.ModelConnectedOriented;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class ModelOrientedConveyorBase extends ModelConnectedOriented {
 

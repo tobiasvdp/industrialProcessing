@@ -1,15 +1,12 @@
 package ip.industrialProcessing.machines;
 
-import cpw.mods.fml.common.Loader;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.config.ISetupItems;
-import ip.industrialProcessing.subMod.logic.config.ISetupLogic;
 import ip.industrialProcessing.utils.FluidTransfers;
 import ip.industrialProcessing.utils.inventories.InventoryUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
-import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -18,8 +15,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.IFluidHandler;
+import cpw.mods.fml.common.Loader;
 
 public abstract class BlockMachine extends BlockContainer {
 	public BlockMachine(int par1, Material par2Material, float hardness, StepSound stepSound, String name, CreativeTabs tab) {

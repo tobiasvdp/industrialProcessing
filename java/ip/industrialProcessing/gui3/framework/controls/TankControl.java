@@ -1,6 +1,6 @@
 package ip.industrialProcessing.gui3.framework.controls;
 
-import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.gui3.binding.ITankBinding;
 import ip.industrialProcessing.gui3.framework.Rect;
@@ -8,8 +8,10 @@ import ip.industrialProcessing.gui3.framework.Size;
 import ip.industrialProcessing.gui3.framework.Thickness;
 import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
 import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
+
+import javax.swing.Icon;
+
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.util.Icon;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
@@ -24,7 +26,7 @@ public class TankControl extends Control implements ITankBinding {
     private Thickness backgroundMargins;
 
     public static TankControl createTank() {
-	return new TankControl(new TextureReference(new Size(36, 52), IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/Tank.png"), new Rect(0, 0, 0.5f, 1), new Rect(0.5f, 0, 0.5f, 1), new Thickness(1, 1, 1, 1));
+	return new TankControl(new TextureReference(new Size(36, 52), INamepace.TEXTURE_DOMAIN, "textures/gui/Tank.png"), new Rect(0, 0, 0.5f, 1), new Rect(0.5f, 0, 0.5f, 1), new Thickness(1, 1, 1, 1));
     }
 
     public TankControl(TextureReference texture, Rect backgroundRegion, Rect overlayRegion, Thickness backgroundMargins) {

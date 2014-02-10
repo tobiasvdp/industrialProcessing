@@ -1,6 +1,6 @@
 package ip.industrialProcessing.gui3.framework;
 
-import net.minecraft.util.Icon;
+import javax.swing.Icon;
 
 public class Rect {
     public float x;

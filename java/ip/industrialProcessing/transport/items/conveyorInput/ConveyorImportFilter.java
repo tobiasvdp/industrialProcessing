@@ -1,7 +1,7 @@
 package ip.industrialProcessing.transport.items.conveyorInput;
 
-import net.minecraft.item.ItemStack;
 import ip.industrialProcessing.utils.IExtractFilter;
+import net.minecraft.item.ItemStack;
 
 public class ConveyorImportFilter implements IExtractFilter {
 

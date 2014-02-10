@@ -1,8 +1,13 @@
 package ip.industrialProcessing.transport.items.conveyorBelt;
 
+import ip.industrialProcessing.api.config.INamepace;
+import ip.industrialProcessing.config.ISetupItems;
+import ip.industrialProcessing.machines.BlockMachine;
+import ip.industrialProcessing.machines.BlockMachineRendered;
+import ip.industrialProcessing.utils.registry.HandlerRegistry;
+
 import java.util.List;
 
-import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -14,11 +19,6 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import ip.industrialProcessing.api.config.INamepace;
-import ip.industrialProcessing.config.ISetupItems;
-import ip.industrialProcessing.machines.BlockMachine;
-import ip.industrialProcessing.machines.BlockMachineRendered;
-import ip.industrialProcessing.utils.registry.HandlerRegistry;
 
 public abstract class BlockConveyorBase extends BlockMachineRendered {
 

@@ -1,9 +1,9 @@
 package ip.industrialProcessing.gui.container.syncing.info;
 
-import java.util.ArrayList;
-
 import ip.industrialProcessing.subMod.logic.old.api.network.interfaces.InterfaceType;
 import ip.industrialProcessing.subMod.logic.old.api.network.interfaces.StatusType;
+
+import java.util.ArrayList;
 
 public class InfoMachine implements IExpirable {
 	public InfoPower power = new InfoPower();

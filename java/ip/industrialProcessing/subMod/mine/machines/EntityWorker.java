@@ -1,11 +1,6 @@
 package ip.industrialProcessing.subMod.mine.machines;
 
-import ip.industrialProcessing.utils.BlockBreaker;
-
-import java.util.ArrayList;
-
 import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 

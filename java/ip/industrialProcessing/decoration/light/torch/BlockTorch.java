@@ -1,43 +1,34 @@
 package ip.industrialProcessing.decoration.light.torch;
 
-import static net.minecraftforge.common.ForgeDirection.EAST;
-import static net.minecraftforge.common.ForgeDirection.NORTH;
-import static net.minecraftforge.common.ForgeDirection.SOUTH;
-import static net.minecraftforge.common.ForgeDirection.WEST;
+import ip.industrialProcessing.api.config.INamepace;
+import ip.industrialProcessing.config.ConfigMachineBlocks;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
+import ip.industrialProcessing.decoration.light.BlockLamp;
+import ip.industrialProcessing.decoration.light.TileEntityLamp;
 
 import java.util.List;
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import javax.swing.Icon;
+
 import net.minecraft.block.Block;
-import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
-import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.api.config.INamepace;
-import ip.industrialProcessing.config.ConfigMachineBlocks;
-import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.decoration.light.BlockLamp;
-import ip.industrialProcessing.decoration.light.TileEntityLamp;
-import ip.industrialProcessing.machines.IRotateableEntity;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockTorch extends BlockLamp {
 
 	private Icon[] icons = new Icon[2];
 
 	public BlockTorch() {
-		super(ConfigMachineBlocks.getBlockTorchID(), Material.wood, 0.5f, Block.soundWoodFootstep, "BlockTorch", IndustrialProcessing.tabOreProcessing);
+		super(ConfigMachineBlocks.getBlockTorchID(), Material.wood, 0.5f, Block.soundWoodFootstep, "BlockTorch", ISetupCreativeTabs.tabOreProcessing);
 	}
 
 	@Override
@@ -71,6 +62,7 @@ public class BlockTorch extends BlockLamp {
 
 	}
 
+	@Override
 	public int onBlockPlaced(World par1World, int par2, int par3, int par4, int par5, float par6, float par7, float par8, int par9) {
 		int j1 = par9;
 
@@ -156,6 +148,7 @@ public class BlockTorch extends BlockLamp {
 		}
 	}
 
+	@Override
 	public void onBlockAdded(World par1World, int par2, int par3, int par4) {
 		if (par1World.getBlockMetadata(par2, par3, par4) == 0) {
 			if (par1World.isBlockSolidOnSide(par2 - 1, par3, par4, EAST, true)) {
@@ -174,6 +167,7 @@ public class BlockTorch extends BlockLamp {
 		this.dropTorchIfCantStay(par1World, par2, par3, par4);
 	}
 	
+	@Override
 	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
 		super.updateTick(par1World, par2, par3, par4, par5Random);
 
@@ -182,6 +176,7 @@ public class BlockTorch extends BlockLamp {
 		}
 	}
 
+	@Override
 	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
 		return par1World.isBlockSolidOnSide(par2 - 1, par3, par4, EAST, true) || par1World.isBlockSolidOnSide(par2 + 1, par3, par4, WEST, true) || par1World.isBlockSolidOnSide(par2, par3, par4 - 1, SOUTH, true) || par1World.isBlockSolidOnSide(par2, par3, par4 + 1, NORTH, true) || canPlaceTorchOn(par1World, par2, par3 - 1, par4);
 	}
@@ -195,6 +190,7 @@ public class BlockTorch extends BlockLamp {
 		}
 	}
 
+	@Override
 	public MovingObjectPosition collisionRayTrace(World par1World, int par2, int par3, int par4, Vec3 par5Vec3, Vec3 par6Vec3) {
 		int l = par1World.getBlockMetadata(par2, par3, par4)%6 & 7;
 		float f = 0.15F;
@@ -215,6 +211,7 @@ public class BlockTorch extends BlockLamp {
 		return super.collisionRayTrace(par1World, par2, par3, par4, par5Vec3, par6Vec3);
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	/**
 	 * A randomly called display update to be able to add particles or other items for display
@@ -229,9 +226,9 @@ public class BlockTorch extends BlockLamp {
 		}
 
 		int l = par1World.getBlockMetadata(par2, par3, par4)%6;
-		double d0 = (double) ((float) par2 + 0.5F);
-		double d1 = (double) ((float) par3 + 0.7F);
-		double d2 = (double) ((float) par4 + 0.5F);
+		double d0 = par2 + 0.5F;
+		double d1 = par3 + 0.7F;
+		double d2 = par4 + 0.5F;
 		double d3 = 0.2199999988079071D;
 		double d4 = 0.27000001072883606D;
 

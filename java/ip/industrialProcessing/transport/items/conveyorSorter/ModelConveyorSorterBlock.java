@@ -1,13 +1,5 @@
 package ip.industrialProcessing.transport.items.conveyorSorter;
 
-import org.lwjgl.util.vector.Vector3f;
-
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.api.rendering.wavefront.ObjRotator;
 import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
@@ -18,6 +10,16 @@ import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorCo
 import ip.industrialProcessing.transport.items.conveyorModels.FilterLeft001;
 import ip.industrialProcessing.transport.items.conveyorModels.FilterRight001;
 import ip.industrialProcessing.transport.items.conveyorModels.ModelConveyorBeltBlock;
+
+import javax.swing.Icon;
+
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import org.lwjgl.util.vector.Vector3f;
 
 public class ModelConveyorSorterBlock extends ModelConveyorBeltBlock {
     ObjRotator leftOut = new ObjRotator(new FilterLeft001(), 1);

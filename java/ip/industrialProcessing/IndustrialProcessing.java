@@ -24,23 +24,19 @@ import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.enti
 import ip.industrialProcessing.multiblock.dummy.block.frame.ENmultiblockFrame;
 import ip.industrialProcessing.multiblock.dummy.block.liftDoor.ENmultiblockLiftDoor;
 import ip.industrialProcessing.utils.handler.conveyors.line.ConveyorLineHandler;
-import ip.industrialProcessing.utils.handler.crafting.CraftingHandler;
 import ip.industrialProcessing.utils.handler.events.EventBlockHilight;
 import ip.industrialProcessing.utils.handler.events.EventEntityRightClick;
 import ip.industrialProcessing.utils.handler.fluids.BucketHandler;
 import ip.industrialProcessing.utils.handler.fuel.FuelHandler;
 import ip.industrialProcessing.utils.handler.heat.HeatHandler;
-import ip.industrialProcessing.utils.handler.key.KeyPressHandler;
-import ip.industrialProcessing.utils.handler.packets.PacketHandler;
 import ip.industrialProcessing.utils.registry.BlockType;
 import ip.industrialProcessing.utils.registry.HandlerRegistry;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
-import cpw.mods.fml.client.registry.KeyBindingRegistry;
+import net.minecraftforge.common.config.Configuration;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -50,14 +46,12 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
-import cpw.mods.fml.common.network.NetworkMod;
-import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid = "IndustrialProcessing", name = "Industrial Processing", version = "0.0.1", dependencies = "after:NotEnoughItems")
-@NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = { PacketHandler.ANIMATION_SYNC, PacketHandler.TANK_SYNC, PacketHandler.CONVEYOR_SYNC, PacketHandler.BUTTON_PRESSED, PacketHandler.SYNC_CLIENT, PacketHandler.SEND_INFO, PacketHandler.SCREEN_PRESSED, PacketHandler.IP_ELEVATOR_BUTTON, PacketHandler.IP_LOGIC_SYNCSIDE, PacketHandler.IP_ENTITY_INTERACT, PacketHandler.IP_ENTITY_SPAWNGARAGEDOOR, PacketHandler.IP_ENTITY_SPAWNGARAGEDOORBLOCK, PacketHandler.IP_MICROBLOCKS_DESTROYING, PacketHandler.IP_SCHEDULE_TICK,PacketHandler.IP_DESTROY_BLOCK,PacketHandler.IP_RAY_TRACE,PacketHandler.GUI_STATECONF, PacketHandler.TANK_SYNC,PacketHandler.IP_SYN_VAL}, packetHandler = PacketHandler.class)
+//TODO @NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = { PacketHandler.ANIMATION_SYNC, PacketHandler.TANK_SYNC, PacketHandler.CONVEYOR_SYNC, PacketHandler.BUTTON_PRESSED, PacketHandler.SYNC_CLIENT, PacketHandler.SEND_INFO, PacketHandler.SCREEN_PRESSED, PacketHandler.IP_ELEVATOR_BUTTON, PacketHandler.IP_LOGIC_SYNCSIDE, PacketHandler.IP_ENTITY_INTERACT, PacketHandler.IP_ENTITY_SPAWNGARAGEDOOR, PacketHandler.IP_ENTITY_SPAWNGARAGEDOORBLOCK, PacketHandler.IP_MICROBLOCKS_DESTROYING, PacketHandler.IP_SCHEDULE_TICK,PacketHandler.IP_DESTROY_BLOCK,PacketHandler.IP_RAY_TRACE,PacketHandler.GUI_STATECONF, PacketHandler.TANK_SYNC,PacketHandler.IP_SYN_VAL}, packetHandler = PacketHandler.class)
 public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISetupMachineBlocks, ISetupItems, ISetupBlocks, ISetupFluids, ISetupAchievements, ISetupDamageSource, ISetupTransportBlocks {
 	// The instance of your mod that Forge uses.
 	@Instance("IndustrialProcessing")
@@ -107,8 +101,6 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
 		MinecraftForge.EVENT_BUS.register(new EventBlockHilight());
 		MinecraftForge.EVENT_BUS.register(new EventBonemealIndustrialTree());
 
-		log = event.getModLog();
-
 		// load config file
 		config = new Configuration(event.getSuggestedConfigurationFile());
 		config.load();
@@ -125,14 +117,14 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
 
 		// register keyhandler
 		if (event.getSide().isClient()) {
-			KeyBindingRegistry.registerKeyBinding(new KeyPressHandler());
+			//TODO KeyBindingRegistry.registerKeyBinding(new KeyPressHandler());
 		}
 
 		// register new heat handler
 		HandlerRegistry.registerHeatHandler(new HeatHandler());
 
 		// register new crafting handler
-		GameRegistry.registerCraftingHandler(new CraftingHandler());
+		//TODO GameRegistry.registerCraftingHandler(new CraftingHandler());
 
 		// register new fuel handler
 		GameRegistry.registerFuelHandler(new FuelHandler());
@@ -160,7 +152,7 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
 		ConfigFluids.getInstance().registerFluids();
 
 		// register the gui handler
-		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
+		//TODO NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
 		LanguageRegistry.instance().addStringLocalization("IP.Gui.Work", "en_US", "Progress");
 
 		// register creative tabs
@@ -188,7 +180,7 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
 
 		// register worldgenerator
 		worldGen = new WorldGeneration();
-		GameRegistry.registerWorldGenerator(worldGen);
+		//TODO GameRegistry.registerWorldGenerator(worldGen);
 
 	}
 

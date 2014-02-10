@@ -1,7 +1,7 @@
 package ip.industrialProcessing.config;
 
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraftforge.common.AchievementPage;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ConfigAchievements {
 	private int placedFilter = 2001;

@@ -1,6 +1,5 @@
 package ip.industrialProcessing.gui3.containers.handlers;
 
-import ip.industrialProcessing.gui3.binding.IProgressBinding;
 import ip.industrialProcessing.utils.handler.heat.IHeated;
 
 public class HeatedHandler extends ProgressHandlerBase {

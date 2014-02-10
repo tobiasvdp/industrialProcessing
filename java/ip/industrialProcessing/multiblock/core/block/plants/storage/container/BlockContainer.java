@@ -1,14 +1,15 @@
 package ip.industrialProcessing.multiblock.core.block.plants.storage.container;
 
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import net.minecraft.world.World;
 import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.multiblock.core.BlockMultiblockCore;
+
+import javax.swing.Icon;
+
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 public class BlockContainer extends BlockMultiblockCore{
 	private Icon[] icons = new Icon[1];

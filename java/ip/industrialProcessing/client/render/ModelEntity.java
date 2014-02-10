@@ -1,8 +1,6 @@
 package ip.industrialProcessing.client.render;
 
-import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
 import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.entity.Entity;
 
 public abstract class ModelEntity extends ModelBase{

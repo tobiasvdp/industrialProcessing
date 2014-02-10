@@ -1,16 +1,15 @@
 package ip.industrialProcessing.decoration.platforms;
 
+import ip.industrialProcessing.decoration.BlockDecoration;
+import ip.industrialProcessing.machines.BlockMachine;
 import net.minecraft.block.Block;
-import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
-import ip.industrialProcessing.decoration.BlockDecoration;
-import ip.industrialProcessing.machines.BlockMachine;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockScaffolding extends BlockDecoration {
 

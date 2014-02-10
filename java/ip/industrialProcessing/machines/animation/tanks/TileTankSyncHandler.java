@@ -1,5 +1,6 @@
 package ip.industrialProcessing.machines.animation.tanks;
 
+import ibxm.Player;
 import ip.industrialProcessing.utils.handler.packets.PacketHandler;
 import ip.industrialProcessing.utils.packets.PacketDataHandler;
 
@@ -10,11 +11,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
-import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.common.network.Player;
 
 public class TileTankSyncHandler { 
 	public static void sendTankData(TileEntity entity, TankHandler handler) {

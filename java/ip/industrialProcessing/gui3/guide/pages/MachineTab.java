@@ -5,7 +5,6 @@ import ip.industrialProcessing.gui3.framework.controls.TextBlock;
 import ip.industrialProcessing.gui3.framework.panels.DockPanel;
 import ip.industrialProcessing.gui3.framework.panels.Orientation;
 import ip.industrialProcessing.gui3.framework.panels.ScrollPanel;
-import ip.industrialProcessing.gui3.framework.panels.StackPanel;
 import ip.industrialProcessing.gui3.framework.panels.tabs.TabPage;
 import ip.industrialProcessing.gui3.guide.pages.machines.MachineDetails;
 import ip.industrialProcessing.gui3.guide.pages.machines.MachineList;

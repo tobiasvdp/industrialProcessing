@@ -1,7 +1,5 @@
 package ip.industrialProcessing.multiblock.core.block.blastFurnace;
 
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.fluids.FluidStack;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.config.ISetupFluids;
 import ip.industrialProcessing.config.ISetupMachineBlocks;
@@ -14,6 +12,8 @@ import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.multiblock.tier.Tier;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.FluidStack;
 
 public class TEmultiblockBlastFurnace extends TileEntityMultiblockCoreTankWorkerPowered {
     static StructureMultiblock structure;

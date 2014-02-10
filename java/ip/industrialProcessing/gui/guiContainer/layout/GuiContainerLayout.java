@@ -1,5 +1,11 @@
 package ip.industrialProcessing.gui.guiContainer.layout;
 
+import ip.industrialProcessing.gui.components.GuiLayoutPanel;
+import ip.industrialProcessing.gui.container.slot.layout.SlotLayout;
+import ip.industrialProcessing.gui.container.slot.layout.components.SlotType;
+import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerDrawRectagle;
+import ip.industrialProcessing.recipes.Recipe;
+
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -9,11 +15,6 @@ import net.minecraft.block.Block;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
-import ip.industrialProcessing.gui.components.GuiLayoutPanel;
-import ip.industrialProcessing.gui.container.slot.layout.SlotLayout;
-import ip.industrialProcessing.gui.container.slot.layout.components.SlotType;
-import ip.industrialProcessing.gui.guiContainer.layout.components.GuiContainerDrawRectagle;
-import ip.industrialProcessing.recipes.Recipe;
 
 public class GuiContainerLayout {
 	public static Rectangle[] slotLocations = new Rectangle[]{new Rectangle(0,238,18,18),new Rectangle(0,220,18,18),new Rectangle(0,202,18,18)};

@@ -1,12 +1,13 @@
 package ip.industrialProcessing.transport.items.conveyorBelt.rendering.paths;
 
-import org.lwjgl.util.vector.Vector2f;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.transport.items.conveyorBelt.MovingItemStack;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorConnectionsBase;
 import ip.industrialProcessing.utils.IPMath;
 import net.minecraft.tileentity.TileEntity;
+
+import org.lwjgl.util.vector.Vector2f;
 
 public class SlopePath extends ItemPath {
 

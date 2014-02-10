@@ -1,12 +1,11 @@
 package ip.industrialProcessing.multiblock.dummy.block.wheel;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.multiblock.dummy.BlockMultiblockDummy;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 public class BLmultiblockWheel extends BlockMultiblockDummy{
 

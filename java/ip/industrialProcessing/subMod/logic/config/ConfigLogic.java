@@ -1,6 +1,5 @@
 package ip.industrialProcessing.subMod.logic.config;
 
-import net.minecraft.src.ModLoader;
 import ip.industrialProcessing.api.config.ConfigCategories;
 import ip.industrialProcessing.subMod.logic.IPLogic;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.TileEntityDataBus;

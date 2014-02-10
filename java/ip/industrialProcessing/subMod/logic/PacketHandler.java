@@ -1,5 +1,6 @@
 package ip.industrialProcessing.subMod.logic;
 
+import ibxm.Player;
 import ip.industrialProcessing.gui.container.syncing.info.InfoMachine;
 import ip.industrialProcessing.gui.container.syncing.info.InfoSlot;
 import ip.industrialProcessing.gui.container.syncing.info.InfoTank;
@@ -22,13 +23,8 @@ import java.util.ArrayList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
-import cpw.mods.fml.common.network.IPacketHandler;
-import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.common.network.Player;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class PacketHandler implements IPacketHandler {
 

@@ -1,11 +1,11 @@
 package ip.industrialProcessing.decoration.light;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import ip.industrialProcessing.machines.TileEntityMachine;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public abstract class TileEntityLamp extends TileEntityMachine {
 

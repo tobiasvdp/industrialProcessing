@@ -1,16 +1,14 @@
 package ip.industrialProcessing.items;
 
-import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.ISetupBlocks;
 import ip.industrialProcessing.microBlock.MicroBlockType;
 import ip.industrialProcessing.microBlock.core.BlockMicroBlock;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class ItemMicroBlock extends ItemIP {
 
@@ -32,9 +30,9 @@ public class ItemMicroBlock extends ItemIP {
 
 		ForgeDirection dir = BlockMicroBlock.sideToForge(par7);
 		if (canPlaceBlockAt(par3World, par4 + dir.offsetX, par5 + dir.offsetY, par6 + dir.offsetZ)) {
-			par3World.setBlock(par4 + dir.offsetX, par5 + dir.offsetY, par6 + dir.offsetZ, IndustrialProcessing.microBlock.blockID);
+			par3World.setBlock(par4 + dir.offsetX, par5 + dir.offsetY, par6 + dir.offsetZ, ISetupBlocks.microBlock.blockID);
 			par3World.setBlockMetadataWithNotify(par4 + dir.offsetX, par5 + dir.offsetY, par6 + dir.offsetZ, BlockMicroBlock.invertSide(par7), 0);
-			Block.blocksList[IndustrialProcessing.microBlock.blockID].onBlockPlacedBy(par3World, par4 + dir.offsetX, par5 + dir.offsetY, par6 + dir.offsetZ, par2EntityPlayer, par1ItemStack);
+			Block.blocksList[ISetupBlocks.microBlock.blockID].onBlockPlacedBy(par3World, par4 + dir.offsetX, par5 + dir.offsetY, par6 + dir.offsetZ, par2EntityPlayer, par1ItemStack);
 		}
 		return super.onItemUse(par1ItemStack, par2EntityPlayer, par3World, par4, par5, par6, par7, par8, par9, par10);
 	}

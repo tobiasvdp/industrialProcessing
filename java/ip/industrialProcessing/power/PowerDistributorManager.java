@@ -1,6 +1,5 @@
 package ip.industrialProcessing.power;
 
-import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.power.utils.PowerAcceptorConnection;
 import ip.industrialProcessing.power.utils.PowerDistributor;
 
@@ -9,7 +8,7 @@ import java.util.ArrayList;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class PowerDistributorManager {
 

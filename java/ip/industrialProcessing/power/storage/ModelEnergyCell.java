@@ -3,8 +3,10 @@ package ip.industrialProcessing.power.storage;
 import ip.industrialProcessing.client.render.ModelAnimatedMachine;
 import ip.industrialProcessing.power.storage.model.Battery;
 import ip.industrialProcessing.power.storage.model.BatteryBoxProgress;
+
+import javax.swing.Icon;
+
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 
 import org.lwjgl.opengl.GL11;
 

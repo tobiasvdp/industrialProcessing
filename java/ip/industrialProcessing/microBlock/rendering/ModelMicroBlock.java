@@ -4,10 +4,10 @@ import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
 import ip.industrialProcessing.client.render.ModelBlock;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.util.Icon;
 
 public class ModelMicroBlock extends ModelBlock {
 
+	@Override
 	public void renderInventory(Block block, int metadata, int modelID, RenderBlocks renderer) {
 
 	}

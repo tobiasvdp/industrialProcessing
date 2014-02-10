@@ -3,7 +3,7 @@ package ip.industrialProcessing.transport.items.conveyorBelt;
 import ip.industrialProcessing.LocalDirection;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityConveyorBelt extends TileEntityConveyorPowerTranslation {
 

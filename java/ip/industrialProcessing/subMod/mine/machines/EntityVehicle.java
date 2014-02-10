@@ -1,19 +1,14 @@
 package ip.industrialProcessing.subMod.mine.machines;
 
-import ip.industrialProcessing.utils.BlockBreaker;
 import ip.industrialProcessing.utils.packets.PacketIP001EntityLocationAndRotation;
-
-import java.util.ArrayList;
-
-import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class EntityVehicle extends Entity {
 
@@ -84,12 +79,14 @@ public abstract class EntityVehicle extends Entity {
 		return null;
 	}
 	
-    public AxisAlignedBB getCollisionBox(Entity par1Entity)
+    @Override
+	public AxisAlignedBB getCollisionBox(Entity par1Entity)
     {
         return this.boundingBox;
     }
     
-    public AxisAlignedBB getBoundingBox()
+    @Override
+	public AxisAlignedBB getBoundingBox()
     {
         return this.boundingBox;
     }
@@ -113,7 +110,8 @@ public abstract class EntityVehicle extends Entity {
         }
     }
     
-    public boolean canBeCollidedWith()
+    @Override
+	public boolean canBeCollidedWith()
     {
         return !this.isDead;
     }
@@ -128,7 +126,7 @@ public abstract class EntityVehicle extends Entity {
 			}
 			if (riddenByEntity != null && riddenByEntity == mc.thePlayer) {
 				System.out.println("x:" + posX + " y:" + posY + " z:" + posZ);
-				if (mc.gameSettings.isKeyDown(mc.gameSettings.keyBindForward)) {
+				if (GameSettings.isKeyDown(mc.gameSettings.keyBindForward)) {
 					float a = rotationYaw % 360 - this.riddenByEntity.rotationYaw % 360;
 					a += (a > 180) ? -360 : (a < -180) ? 360 : 0;
 					a = Math.min(Math.max(a, -20), 20);
@@ -137,7 +135,7 @@ public abstract class EntityVehicle extends Entity {
 					// this.riddenByEntity.rotationYaw + a/10;
 					this.moveEntity(-(Math.sin(rotationYaw % 360 * Math.PI / 180)) / 7, 0, (Math.cos(rotationYaw % 360 * Math.PI / 180)) / 7);
 				}
-				if (mc.gameSettings.isKeyDown(mc.gameSettings.keyBindBack)) {
+				if (GameSettings.isKeyDown(mc.gameSettings.keyBindBack)) {
 					float a = rotationYaw % 360 - this.riddenByEntity.rotationYaw % 360;
 					a += (a > 180) ? -360 : (a < -180) ? 360 : 0;
 					a = Math.min(Math.max(a, -20), 20);
@@ -146,10 +144,10 @@ public abstract class EntityVehicle extends Entity {
 					// this.riddenByEntity.rotationYaw + a/10;
 					this.moveEntity((Math.sin(rotationYaw % 360 * Math.PI / 180)) / 15, 0, -(Math.cos(rotationYaw % 360 * Math.PI / 180)) / 15);
 				}
-				if (mc.gameSettings.isKeyDown(mc.gameSettings.keyBindLeft)) {
+				if (GameSettings.isKeyDown(mc.gameSettings.keyBindLeft)) {
 					this.setRotation((this.rotationYaw - 4) % 360, this.rotationPitch);
 				}
-				if (mc.gameSettings.isKeyDown(mc.gameSettings.keyBindRight)) {
+				if (GameSettings.isKeyDown(mc.gameSettings.keyBindRight)) {
 					this.setRotation((this.rotationYaw + 4) % 360, this.rotationPitch);
 				}
 			}

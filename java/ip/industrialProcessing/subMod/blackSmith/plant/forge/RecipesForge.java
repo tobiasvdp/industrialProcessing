@@ -1,12 +1,12 @@
 package ip.industrialProcessing.subMod.blackSmith.plant.forge;
 
-import net.minecraft.item.ItemStack;
 import ip.industrialProcessing.multiblock.recipes.RecipeMultiblock;
 import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.multiblock.tier.Tiers;
 import ip.industrialProcessing.recipes.RecipeInputSlot;
 import ip.industrialProcessing.recipes.RecipeOutputSlot;
 import ip.industrialProcessing.subMod.blackSmith.config.ISetupBlackSmith;
+import net.minecraft.item.ItemStack;
 
 public class RecipesForge extends RecipesMultiblock {
 	public RecipesForge() {

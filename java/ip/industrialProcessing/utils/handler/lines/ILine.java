@@ -2,8 +2,6 @@ package ip.industrialProcessing.utils.handler.lines;
 
 import java.util.Iterator;
 
-import net.minecraft.tileentity.TileEntity;
-
 public interface ILine {
 
 	int registerTransport(ILineTransport te);

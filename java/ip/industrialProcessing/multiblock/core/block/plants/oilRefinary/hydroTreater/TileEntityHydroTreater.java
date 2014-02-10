@@ -1,7 +1,5 @@
 package ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.hydroTreater;
 
-import net.minecraftforge.common.ForgeDirection;
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
@@ -13,6 +11,7 @@ import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.multiblock.tier.Tier;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityHydroTreater extends TileEntityMultiblockCoreTankWorkerPowered  {
 	private static StructureMultiblock structure;

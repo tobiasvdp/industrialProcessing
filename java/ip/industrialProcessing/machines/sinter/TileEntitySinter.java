@@ -3,7 +3,6 @@ package ip.industrialProcessing.machines.sinter;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityPoweredWorkerMachine;
 import ip.industrialProcessing.recipes.IMachineRecipe;
-import ip.industrialProcessing.recipes.Recipe;
 
 import java.util.Iterator;
 

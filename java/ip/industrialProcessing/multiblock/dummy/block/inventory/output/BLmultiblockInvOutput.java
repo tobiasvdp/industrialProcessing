@@ -1,10 +1,10 @@
 package ip.industrialProcessing.multiblock.dummy.block.inventory.output;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.multiblock.dummy.BlockMultiblockDummy;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 public class BLmultiblockInvOutput extends BlockMultiblockDummy{
 

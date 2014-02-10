@@ -1,9 +1,9 @@
 package ip.industrialProcessing.multiblock.layout;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 public class LayoutMultiblock {
 

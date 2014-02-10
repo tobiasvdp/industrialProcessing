@@ -4,7 +4,6 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.config.ConfigCategories;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ISetupItems;
-import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.recipes.VanillaRecipeBridge;
 import ip.industrialProcessing.subMod.blackSmith.IPBlackSmith;
 import ip.industrialProcessing.subMod.blackSmith.item.ItemWoodenBucket;
@@ -20,7 +19,6 @@ import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.dummy.woodenHa
 import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.dummy.woodenWheel.TileEntityWoodenWheel;
 import ip.industrialProcessing.subMod.blackSmith.plant.waterBasin.TileEntityWaterBasinCore;
 import ip.industrialProcessing.subMod.blackSmith.plant.waterBasin.TileEntityWaterBasinDummy;
-import ip.industrialProcessing.subMod.blackSmith.plant.waterWheel.TileEntityWaterWheel;
 import ip.industrialProcessing.utils.registry.BlockType;
 import ip.industrialProcessing.utils.registry.BucketRegistery;
 import ip.industrialProcessing.utils.registry.RecipeRegistry;
@@ -28,8 +26,8 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
+import net.minecraftforge.fluids.FluidRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -122,27 +120,33 @@ public class ConfigBlackSmith {
 	}
 
 	public static int getItemWroughtIronID() {
-		return getInstance().itemWroughtIronID;
+		getInstance();
+		return ConfigBlackSmith.itemWroughtIronID;
 	}
 
 	public static int getItemWoodenBucketID() {
-		return getInstance().itemWoodenBucketID;
+		getInstance();
+		return ConfigBlackSmith.itemWoodenBucketID;
 	}
 	
 	public static int getItemWoodenBucketWaterID() {
-		return getInstance().itemWoodenBucketWaterID;
+		getInstance();
+		return ConfigBlackSmith.itemWoodenBucketWaterID;
 	}
 	
 	public static int getItemPliersHeatedironID() {
-		return getInstance().itemPliersHeatedironID;
+		getInstance();
+		return ConfigBlackSmith.itemPliersHeatedironID;
 	}
 	
 	public static int getItemPliersID() {
-		return getInstance().itemPliersID;
+		getInstance();
+		return ConfigBlackSmith.itemPliersID;
 	}
 	
 	public static int getItemPliersBloomIronID() {
-		return getInstance().itemPliersBloomIronID;
+		getInstance();
+		return ConfigBlackSmith.itemPliersBloomIronID;
 	}
 
 	public static int getBlockBloomeryID() {

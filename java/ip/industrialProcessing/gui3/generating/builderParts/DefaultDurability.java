@@ -8,7 +8,6 @@ import ip.industrialProcessing.gui3.framework.Alignment;
 import ip.industrialProcessing.gui3.framework.Thickness;
 import ip.industrialProcessing.gui3.framework.controls.ProgressBar;
 import ip.industrialProcessing.gui3.framework.panels.StackPanel;
-import ip.industrialProcessing.power.IPoweredMachine;
 import ip.industrialProcessing.utils.IDurability;
 import net.minecraft.tileentity.TileEntity;
 

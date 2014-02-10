@@ -1,9 +1,5 @@
 package ip.industrialProcessing.multiblock.core.block.elevator;
 
-import java.util.ArrayList;
-
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.dummy.block.frame.ENmultiblockFrame;
@@ -15,6 +11,11 @@ import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
 import ip.industrialProcessing.multiblock.tier.Tier;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
+
+import java.util.ArrayList;
+
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 
 public class TEmultiblockElevator extends TileEntityMultiblockCore {
 	static StructureMultiblock structure;

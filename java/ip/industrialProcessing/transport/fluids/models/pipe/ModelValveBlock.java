@@ -1,12 +1,11 @@
 package ip.industrialProcessing.transport.fluids.models.pipe;
 
-import org.lwjgl.opengl.GL11;
-
 import ip.industrialProcessing.transport.fluids.ModelValve;
 import ip.industrialProcessing.transport.fluids.TileEntityValve;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
+
+import org.lwjgl.opengl.GL11;
 
 public class ModelValveBlock extends ModelPipeBlock {
 

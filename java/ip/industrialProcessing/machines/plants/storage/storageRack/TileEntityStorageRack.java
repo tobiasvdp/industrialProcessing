@@ -1,35 +1,15 @@
 package ip.industrialProcessing.machines.plants.storage.storageRack;
 
-import java.io.ObjectOutputStream.PutField;
-
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.client.render.IAnimationProgress;
-import ip.industrialProcessing.config.ConfigMachineBlocks;
-import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.gui.GuiLayout;
-import ip.industrialProcessing.gui.IGuiLayout;
-import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
-import ip.industrialProcessing.machines.BlockMachineRendered;
-import ip.industrialProcessing.machines.RecipesMachine;
+import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.machines.TileEntityMachine;
 import ip.industrialProcessing.machines.animation.AnimationHandler;
 import ip.industrialProcessing.machines.animation.AnimationMode;
 import ip.industrialProcessing.machines.animation.IAnimationSyncable;
 import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
-import ip.industrialProcessing.machines.hydroCyclone.TileEntityHydroCyclone;
 import ip.industrialProcessing.machines.plants.storage.storageBox.BlockStorageBox;
-import ip.industrialProcessing.recipes.IRecipeBlock;
-import ip.industrialProcessing.utils.IDescriptionBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import net.minecraft.world.World;
 
 public class TileEntityStorageRack extends TileEntityMachine implements IAnimationProgress, IAnimationSyncable{
 
@@ -138,8 +118,8 @@ public class TileEntityStorageRack extends TileEntityMachine implements IAnimati
 	@Override
 	protected boolean isValidInput(int slot, int itemID) {
 		if (slot < 6)
-			return itemID == IndustrialProcessing.blockStorageBox.blockID;
-		return ((itemID != IndustrialProcessing.blockStorageBox.blockID)&&(getStackInSlot((slot - 6)/9) != null));
+			return itemID == ISetupMachineBlocks.blockStorageBox.blockID;
+		return ((itemID != ISetupMachineBlocks.blockStorageBox.blockID)&&(getStackInSlot((slot - 6)/9) != null));
 	}
 
 	public ItemStack popBox() {

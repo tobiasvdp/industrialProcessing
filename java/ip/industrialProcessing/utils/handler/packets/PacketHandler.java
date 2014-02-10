@@ -1,6 +1,8 @@
 package ip.industrialProcessing.utils.handler.packets;
 
+import ibxm.Player;
 import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.gui.IGuiLayoutTriggerAcceptor;
 import ip.industrialProcessing.gui3.binding.reply.StateConfigSetter;
 import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
@@ -28,12 +30,8 @@ import java.io.IOException;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
-import cpw.mods.fml.common.network.IPacketHandler;
-import cpw.mods.fml.common.network.Player;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class PacketHandler implements IPacketHandler {
 
@@ -183,7 +181,7 @@ public class PacketHandler implements IPacketHandler {
 
             EntityPlayer playerMP = (EntityPlayer) player;
             if (!playerMP.worldObj.isRemote) {
-                if (playerMP.worldObj.getBlockId(x, y, z) == IndustrialProcessing.blockGarageDoorDoor.blockID) {
+                if (playerMP.worldObj.getBlockId(x, y, z) == ISetupMachineBlocks.blockGarageDoorDoor.blockID) {
                     ((TileEntityGarageDoorDoor) playerMP.worldObj.getBlockTileEntity(x, y, z)).hide = false;
                     ((TileEntityGarageDoorDoor) playerMP.worldObj.getBlockTileEntity(x, y, z)).setForwardDirection(ForgeDirection.values()[direction]);
                     playerMP.worldObj.markBlockForUpdate(x, y, z);

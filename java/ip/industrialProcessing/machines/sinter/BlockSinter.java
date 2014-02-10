@@ -11,11 +11,12 @@ import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 import ip.industrialProcessing.utils.IDescriptionBlock;
+
+import javax.swing.Icon;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 public class BlockSinter extends BlockMachineRendered implements IRecipeBlock, IDescriptionBlock, IGuiBlock {

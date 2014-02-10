@@ -1,11 +1,9 @@
 package ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor;
 
+import ip.industrialProcessing.machines.IRotateableEntity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
-import ip.industrialProcessing.machines.IRotateableEntity;
-import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
-import ip.industrialProcessing.multiblock.dummy.extend.TileEntityMultiblockDummyInv;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityGarageDoorDoor extends TileEntity implements IRotateableEntity {
 	ForgeDirection forward;

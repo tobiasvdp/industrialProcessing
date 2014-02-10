@@ -1,12 +1,11 @@
 package ip.industrialProcessing.multiblock.coreAndDummy;
 
-import net.minecraft.nbt.NBTTagCompound;
 import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
 import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
+import net.minecraft.nbt.NBTTagCompound;
 
 public abstract class  TileEntityMultiblockSwitcherCore extends TileEntityMultiblockCoreTankWorkerPowered implements ITileEntityMultiblockSwitcher {
 

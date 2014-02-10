@@ -1,7 +1,7 @@
 package ip.industrialProcessing.utils.rotation;
 
 import net.minecraft.util.MathHelper;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class SidedRotationTransformer {
 	private static final int[][] ROTATION_MATRIX_Side = { { 1, 0, 3, 2, 5, 4, 6 }, { 0, 1, 2, 3, 4, 5, 6 }, { 2, 3, 1, 0, 4, 5, 6 }, { 3, 2, 0, 1, 5, 4, 6 }, { 5, 4, 1, 0, 3, 2, 6 }, { 4, 5, 0, 1, 2, 3, 6 }, { 0, 1, 2, 3, 4, 5, 6 } };

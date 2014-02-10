@@ -1,16 +1,17 @@
 package ip.industrialProcessing.multiblock.container;
 
+import ip.industrialProcessing.gui.container.syncing.handlers.IHandlerContainer;
+import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
+import ip.industrialProcessing.utils.containers.VerifyingContainer;
+
 import java.util.ArrayList;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
-import ip.industrialProcessing.gui.container.syncing.handlers.IHandlerContainer;
-import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
-import ip.industrialProcessing.utils.containers.VerifyingContainer;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class ContainerMultiblock extends VerifyingContainer {
 

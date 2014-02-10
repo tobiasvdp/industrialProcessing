@@ -1,7 +1,7 @@
 package ip.industrialProcessing.client.render;
 
-import net.minecraft.tileentity.TileEntity;
 import ip.industrialProcessing.api.rendering.ModelMachine;
+import net.minecraft.tileentity.TileEntity;
 
 public class ModelMultiblock extends ModelMachine{
 

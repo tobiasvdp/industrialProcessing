@@ -1,9 +1,10 @@
 package ip.industrialProcessing.power.wire;
 
-import java.util.List;
-
 import ip.industrialProcessing.api.rendering.BlockModelUtils;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
+
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;

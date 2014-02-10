@@ -2,7 +2,7 @@ package ip.industrialProcessing.subMod.logic.old.transport.wired.switchbox;
 
 import ip.industrialProcessing.subMod.logic.old.transport.TElogicNode;
 import ip.industrialProcessing.subMod.logic.old.utils.UTpacket;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TElogicSwitchBox extends TElogicNode {
 	public TElogicSwitchBox() {

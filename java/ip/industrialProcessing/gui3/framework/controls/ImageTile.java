@@ -2,7 +2,6 @@ package ip.industrialProcessing.gui3.framework.controls;
 
 import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.gui3.framework.Rect;
-import ip.industrialProcessing.gui3.framework.UIElement;
 import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
 import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
 

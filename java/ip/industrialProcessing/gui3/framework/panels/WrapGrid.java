@@ -1,9 +1,9 @@
 package ip.industrialProcessing.gui3.framework.panels;
 
-import java.util.List;
-
 import ip.industrialProcessing.gui3.framework.Size;
 import ip.industrialProcessing.gui3.framework.UIElement;
+
+import java.util.List;
 
 public class WrapGrid extends Panel {
 

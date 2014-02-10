@@ -1,11 +1,11 @@
 package ip.industrialProcessing.machines.filter;
 
-import org.lwjgl.opengl.GL11;
-
 import ip.industrialProcessing.client.render.ModelAnimatedMachine;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
+
+import org.lwjgl.opengl.GL11;
 
 public class ModelFilter extends ModelAnimatedMachine {
     // fields

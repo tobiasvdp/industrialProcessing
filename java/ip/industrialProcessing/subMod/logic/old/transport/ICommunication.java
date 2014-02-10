@@ -3,7 +3,7 @@ package ip.industrialProcessing.subMod.logic.old.transport;
 import ip.industrialProcessing.subMod.logic.old.utils.UTBusType;
 import ip.industrialProcessing.subMod.logic.old.utils.UTLogicType;
 import ip.industrialProcessing.subMod.logic.old.utils.UTpacket;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public interface ICommunication {
 

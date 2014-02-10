@@ -1,11 +1,8 @@
 package ip.industrialProcessing.subMod.power.plant.solar.standingSolarPanel;
 
-import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.config.ISetupMachineBlocks;
-import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCorePowerGenerator;
-import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
 import ip.industrialProcessing.multiblock.layout.LayoutTransformer;
@@ -13,9 +10,9 @@ import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
 import ip.industrialProcessing.multiblock.tier.Tier;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
-import ip.industrialProcessing.subMod.power.IPPower;
-import ip.industrialProcessing.utils.ISolar;
+import ip.industrialProcessing.subMod.power.config.ISetupPower;
 import ip.industrialProcessing.utils.Sun;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityStandingSolarPanel extends TileEntityMultiblockCorePowerGenerator {
 	static StructureMultiblock structure;
@@ -29,7 +26,7 @@ public class TileEntityStandingSolarPanel extends TileEntityMultiblockCorePowerG
 		LayoutMultiblock layout = new LayoutMultiblock(0, 0, 0, 0, 0, 4);
 
 		int i = 0;
-		layout.setCoreID(i++, 0, 1, IPPower.blockStandingSolarPanel.blockID);
+		layout.setCoreID(i++, 0, 1, ISetupPower.blockStandingSolarPanel.blockID);
 
 		for (int j = 1; j <= 3; j++)
 			layout.setBlockID(0, -j, 0, i++, 0, 1, ISetupMachineBlocks.blockIronPole.blockID);

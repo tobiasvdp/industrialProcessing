@@ -1,15 +1,8 @@
 package ip.industrialProcessing.machines.crusher;
 
-import java.util.Random;
-
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.gui.GuiLayout;
-import ip.industrialProcessing.gui.IGuiLayout;
-import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
-import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
 import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
 import ip.industrialProcessing.gui3.generating.GuiBuilderDefault;
 import ip.industrialProcessing.gui3.generating.IGuiBlock;
@@ -18,6 +11,9 @@ import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 import ip.industrialProcessing.utils.IDescriptionBlock;
+
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;

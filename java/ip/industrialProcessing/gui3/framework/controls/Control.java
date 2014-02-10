@@ -1,10 +1,8 @@
 package ip.industrialProcessing.gui3.framework.controls;
 
-import ip.industrialProcessing.gui3.framework.Rect;
 import ip.industrialProcessing.gui3.framework.Size;
 import ip.industrialProcessing.gui3.framework.UIElement;
 import ip.industrialProcessing.gui3.framework.panels.MouseButton;
-import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
 
 public abstract class Control extends UIElement {
 

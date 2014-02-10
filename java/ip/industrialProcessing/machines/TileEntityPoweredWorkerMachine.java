@@ -12,7 +12,7 @@ import ip.industrialProcessing.utils.DirectionUtils;
 import ip.industrialProcessing.utils.PowerTransfers;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class TileEntityPoweredWorkerMachine extends TileEntityWorkerMachine implements IPoweredMachine {
 

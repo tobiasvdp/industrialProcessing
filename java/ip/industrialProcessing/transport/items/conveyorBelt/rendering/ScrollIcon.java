@@ -1,6 +1,6 @@
 package ip.industrialProcessing.transport.items.conveyorBelt.rendering;
 
-import net.minecraft.util.Icon;
+import javax.swing.Icon;
 
 public class ScrollIcon implements Icon {
 

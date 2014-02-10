@@ -1,12 +1,10 @@
 package ip.industrialProcessing.gui3.framework;
 
-import java.util.Random;
-
-import org.lwjgl.opengl.GL11;
-
 import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.gui3.framework.panels.MouseButton;
 import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
+
+import org.lwjgl.opengl.GL11;
 
 public abstract class UIElement {
     private Size actualSize;

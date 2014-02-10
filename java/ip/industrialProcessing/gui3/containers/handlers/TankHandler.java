@@ -32,7 +32,8 @@ public class TankHandler extends BindingHandlerBase<ITankBinding> {
 	this.setValue(INDEX_FLUIDID, fluidID);
     }
 
-    public void updateBinding(ITankBinding binding) {
+    @Override
+	public void updateBinding(ITankBinding binding) {
 	binding.setCapacity(this.getValue(INDEX_CAPACITY));
 	binding.setFluidAmount(this.getValue(INDEX_AMOUNT));
 	binding.setFluidID(this.getValue(INDEX_FLUIDID));

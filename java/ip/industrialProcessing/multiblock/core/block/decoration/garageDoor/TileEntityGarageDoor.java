@@ -1,21 +1,7 @@
 package ip.industrialProcessing.multiblock.core.block.decoration.garageDoor;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.util.ArrayList;
-
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.packet.Packet250CustomPayload;
-import net.minecraft.tileentity.TileEntity;
-
-import org.bouncycastle.util.Arrays;
-
-import cpw.mods.fml.common.network.PacketDispatcher;
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
-import ip.industrialProcessing.multiblock.core.block.weldingStation.RecipesWeldingStation;
 import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
 import ip.industrialProcessing.multiblock.dummy.block.controlBox.IControlBoxReceiver;
 import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.TileEntityGarageDoorDoor;
@@ -25,13 +11,21 @@ import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
 import ip.industrialProcessing.multiblock.layout.LayoutTransformer;
 import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
-import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.multiblock.tier.Tier;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
 import ip.industrialProcessing.utils.IRemote;
 import ip.industrialProcessing.utils.ISender;
 import ip.industrialProcessing.utils.handler.packets.PacketHandler;
+
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityGarageDoor extends TileEntityMultiblockCore implements ISender, IControlBoxReceiver {
 	static StructureMultiblock structure;
@@ -203,7 +197,7 @@ public class TileEntityGarageDoor extends TileEntityMultiblockCore implements IS
 		boolean cont = true;
 		while (cont) {
 			height++;
-			if (this.worldObj.getBlockId(xCoord, yCoord - height, zCoord) != 0 && this.worldObj.getBlockId(xCoord, yCoord - height, zCoord) != IndustrialProcessing.blockGarageDoorDoor.blockID) {
+			if (this.worldObj.getBlockId(xCoord, yCoord - height, zCoord) != 0 && this.worldObj.getBlockId(xCoord, yCoord - height, zCoord) != ISetupMachineBlocks.blockGarageDoorDoor.blockID) {
 				height--;
 				cont = false;
 			}
@@ -220,8 +214,8 @@ public class TileEntityGarageDoor extends TileEntityMultiblockCore implements IS
 			int height = getHeight();
 			if (height > 0) {
 				for (int i = 1; i <= height; i++) {
-					if (this.worldObj.getBlockId(xCoord, yCoord - i, zCoord) != IndustrialProcessing.blockGarageDoorDoor.blockID) {
-						this.worldObj.setBlock(xCoord, yCoord - i, zCoord, IndustrialProcessing.blockGarageDoorDoor.blockID);
+					if (this.worldObj.getBlockId(xCoord, yCoord - i, zCoord) != ISetupMachineBlocks.blockGarageDoorDoor.blockID) {
+						this.worldObj.setBlock(xCoord, yCoord - i, zCoord, ISetupMachineBlocks.blockGarageDoorDoor.blockID);
 					}
 					((TileEntityGarageDoorDoor) this.worldObj.getBlockTileEntity(xCoord, yCoord - i, zCoord)).setForwardDirection(getForwardDirection());
 					doors.add(new int[] { xCoord, yCoord - i, zCoord });
@@ -237,7 +231,7 @@ public class TileEntityGarageDoor extends TileEntityMultiblockCore implements IS
 			int y = xyz[1];
 			int z = xyz[2];
 			int id = this.worldObj.getBlockId(x, y, z);
-			if (id == IndustrialProcessing.blockGarageDoorDoor.blockID) {
+			if (id == ISetupMachineBlocks.blockGarageDoorDoor.blockID) {
 				this.worldObj.setBlockToAir(x, y, z);
 			}
 		}
@@ -284,7 +278,7 @@ public class TileEntityGarageDoor extends TileEntityMultiblockCore implements IS
 		DataOutputStream outputStream = new DataOutputStream(bos);
 		try {
 			outputStream.writeInt((int) (d * 1000));
-			outputStream.writeInt((int) (i * 1000));
+			outputStream.writeInt(i * 1000);
 			outputStream.writeInt((int) (e * 1000));
 			outputStream.writeInt(j);
 			outputStream.writeBoolean(b);

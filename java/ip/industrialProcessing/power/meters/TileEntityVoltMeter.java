@@ -9,7 +9,7 @@ import ip.industrialProcessing.machines.animation.IAnimationSyncable;
 import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 import ip.industrialProcessing.power.IPowerAcceptor;
 import ip.industrialProcessing.utils.DirectionUtils;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityVoltMeter extends TileEntityMachine implements IPowerAcceptor, IAnimationProgress, IAnimationSyncable {
 

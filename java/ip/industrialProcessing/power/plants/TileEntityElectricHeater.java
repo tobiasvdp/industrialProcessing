@@ -14,11 +14,10 @@ import ip.industrialProcessing.utils.working.IWorkHandler;
 import ip.industrialProcessing.utils.working.IWorker;
 import ip.industrialProcessing.utils.working.IWorkingEntity;
 import ip.industrialProcessing.utils.working.ServerWorker;
-import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityElectricHeater extends TileEntityMachine implements IPoweredMachine, IPowerAcceptor, IWorkingEntity, IWorkHandler, IBurner {
 

@@ -1,9 +1,9 @@
 package ip.industrialProcessing.gui.container.slot.layout.components;
 
-import java.awt.Rectangle;
-
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayout;
 import ip.industrialProcessing.slots.SlotBase;
+
+import java.awt.Rectangle;
 
 public class SlotLayoutSide extends SlotLayout {
 	public SlotLayoutSide(int amount, int startIndex, Rectangle rect) {

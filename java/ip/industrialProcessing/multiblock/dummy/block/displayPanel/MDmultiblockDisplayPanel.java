@@ -1,11 +1,11 @@
 package ip.industrialProcessing.multiblock.dummy.block.displayPanel;
 
-import org.lwjgl.opengl.GL11;
-
+import ip.industrialProcessing.client.render.ModelingMultiblock;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
-import ip.industrialProcessing.client.render.ModelingMultiblock;
+
+import org.lwjgl.opengl.GL11;
 
 public class MDmultiblockDisplayPanel extends ModelingMultiblock {
 	// fields

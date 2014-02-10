@@ -1,8 +1,6 @@
 package ip.industrialProcessing.decoration.light.hangingLamp;
 
-import net.minecraft.nbt.NBTTagCompound;
 import ip.industrialProcessing.decoration.light.TileEntityLamp;
-import ip.industrialProcessing.machines.TileEntityMachine;
 
 public class TileEntityPetrolLamp extends TileEntityLamp{
 

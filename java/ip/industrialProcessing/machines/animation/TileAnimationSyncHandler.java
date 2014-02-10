@@ -1,5 +1,9 @@
 package ip.industrialProcessing.machines.animation;
 
+import ibxm.Player;
+import ip.industrialProcessing.utils.handler.packets.PacketHandler;
+import ip.industrialProcessing.utils.packets.PacketDataHandler;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
@@ -7,13 +11,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
-import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.common.network.Player;
-import ip.industrialProcessing.utils.handler.packets.PacketHandler;
-import ip.industrialProcessing.utils.packets.PacketDataHandler;
 
 public class TileAnimationSyncHandler {
 

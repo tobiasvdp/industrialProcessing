@@ -1,13 +1,10 @@
 package ip.industrialProcessing.microBlock.extend.connectingSides;
 
-import java.util.Arrays;
-
+import ip.industrialProcessing.items.ItemMicroBlock;
+import ip.industrialProcessing.microBlock.core.TileEntityMicroBlock;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.ForgeDirection;
-import ip.industrialProcessing.items.ItemMicroBlock;
-import ip.industrialProcessing.microBlock.IMicroBlock;
-import ip.industrialProcessing.microBlock.core.TileEntityMicroBlock;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class TileEntityMicroBlockConnectingSides extends TileEntityMicroBlock implements IMicroBlockInterconnection{
 	boolean[][] interConnections = new boolean[6][4];
@@ -44,6 +41,7 @@ public abstract class TileEntityMicroBlockConnectingSides extends TileEntityMicr
 	}
 
 	private int[][] rotation = new int[][]{{4,5,2,3},{4,5,3,2},{4,5,1,0},{5,4,1,0},{3,2,1,0},{2,3,1,0}};
+	@Override
 	public int getRotated(int i, int j) {
 		return rotation[i][j];
 	}

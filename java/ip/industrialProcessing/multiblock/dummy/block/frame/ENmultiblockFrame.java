@@ -1,12 +1,12 @@
 package ip.industrialProcessing.multiblock.dummy.block.frame;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import ip.industrialProcessing.multiblock.core.block.elevator.TEmultiblockElevator;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ENmultiblockFrame extends EntityLiving {
 

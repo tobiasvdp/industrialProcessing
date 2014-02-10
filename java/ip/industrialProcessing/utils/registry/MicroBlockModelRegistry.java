@@ -1,10 +1,8 @@
 package ip.industrialProcessing.utils.registry;
 
 import ip.industrialProcessing.api.rendering.wavefront.ObjMesh;
-import ip.industrialProcessing.client.render.ModelBlock;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class MicroBlockModelRegistry {
 	private static HashMap<Integer, MicroBlockModel> models = new HashMap<Integer, MicroBlockModel>();

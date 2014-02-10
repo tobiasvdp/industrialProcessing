@@ -1,7 +1,5 @@
 package ip.industrialProcessing.gui3.framework.custom;
 
-import java.util.ArrayList;
-
 import ip.industrialProcessing.gui3.binding.IValueBinding;
 import ip.industrialProcessing.gui3.binding.IValueBindingChangedListener;
 import ip.industrialProcessing.gui3.framework.Thickness;
@@ -11,6 +9,8 @@ import ip.industrialProcessing.gui3.framework.controls.ImageTile;
 import ip.industrialProcessing.gui3.framework.controls.UserControl;
 import ip.industrialProcessing.gui3.framework.panels.MouseButton;
 import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
+
+import java.util.ArrayList;
 
 public class StateButton extends UserControl implements IButtonClickListener, IValueBinding {
 
@@ -45,7 +45,8 @@ public class StateButton extends UserControl implements IButtonClickListener, IV
 	}
     }
 
-    public void setValue(int i) {
+    @Override
+	public void setValue(int i) {
 	if (this.value != i) {
 	    int range = (maxValue - minValue) + 1;
 	    i -= minValue;

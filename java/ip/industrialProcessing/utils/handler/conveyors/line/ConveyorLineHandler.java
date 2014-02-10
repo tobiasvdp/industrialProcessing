@@ -1,13 +1,12 @@
 package ip.industrialProcessing.utils.handler.conveyors.line;
 
 import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.power.plants.IMechanicalMotion;
 import ip.industrialProcessing.transport.items.ConveyorLine;
 import ip.industrialProcessing.transport.items.ConveyorBeltPowerInput.TileEntityConveyorBeltPowerInput;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorConnectionsBase;
 import ip.industrialProcessing.utils.DirectionUtils;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class ConveyorLineHandler implements IConveyorLineHandler {
 	ConveyorLine[] lines;
@@ -19,6 +18,7 @@ public class ConveyorLineHandler implements IConveyorLineHandler {
 		lines = new ConveyorLine[1];
 	}
 	
+	@Override
 	public boolean registerPowercontainer(int id, TileEntityConveyorBeltPowerInput te){
 		if(id < lines.length  && id!=-1){
 			ConveyorLine line = lines[id];
@@ -29,6 +29,7 @@ public class ConveyorLineHandler implements IConveyorLineHandler {
 		}
 		return false;
 	}
+	@Override
 	public void unregisterPowercontainer(int id, TileEntityConveyorBeltPowerInput te){
 		if(id < lines.length && id!=-1){
 			ConveyorLine line = lines[id];
@@ -42,6 +43,7 @@ public class ConveyorLineHandler implements IConveyorLineHandler {
 		return lines[id];
 	}
 
+	@Override
 	public void unregisterConveyor(TileEntityConveyorConnectionsBase te) {
 		unregisterConveyorToLine(te.getConveyorLineID(), te);
 		ConveyorLine line = lines[te.getConveyorLineID()];
@@ -50,6 +52,7 @@ public class ConveyorLineHandler implements IConveyorLineHandler {
 		}
 	}
 
+	@Override
 	public int registerConveyor(TileEntityConveyorConnectionsBase te) {
 		int id1 = te.isValidLineConnection(LocalDirection.BACK, true);
 		int id2 = -1;

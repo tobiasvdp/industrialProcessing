@@ -1,13 +1,13 @@
 package ip.industrialProcessing.items;
 
+import ip.industrialProcessing.config.ISetupCreativeTabs;
+import ip.industrialProcessing.utils.registry.ItemRegistry;
+import ip.industrialProcessing.utils.registry.ItemType;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
-import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.utils.registry.ItemRegistry;
-import ip.industrialProcessing.utils.registry.ItemType;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class ItemPaintBrush extends ItemDamage {
 	public int color;

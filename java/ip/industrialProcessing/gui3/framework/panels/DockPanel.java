@@ -1,6 +1,7 @@
 package ip.industrialProcessing.gui3.framework.panels;
 
 import ip.industrialProcessing.client.render.gui.ToolTip;
+import ip.industrialProcessing.gui3.framework.Alignment;
 import ip.industrialProcessing.gui3.framework.Rect;
 import ip.industrialProcessing.gui3.framework.Size;
 import ip.industrialProcessing.gui3.framework.UIElement;
@@ -48,14 +49,14 @@ public class DockPanel extends UIElement {
 	Size size = element.getDesiredSize();
 	switch (orientation) {
 	case HORIZONTAL:
-	    maxWidth = this.verticalAlign == horizontalAlign.STRETCH ? maxSize.width - previous.width : size.width;
-	    maxHeight = this.verticalAlign == horizontalAlign.STRETCH ? maxSize.height : size.height;
+	    maxWidth = this.verticalAlign == Alignment.STRETCH ? maxSize.width - previous.width : size.width;
+	    maxHeight = this.verticalAlign == Alignment.STRETCH ? maxSize.height : size.height;
 	    left = previous.width;
 	    break;
 	case VERTICAL:
 	default:
-	    maxWidth = this.horizontalAlign == horizontalAlign.STRETCH ? maxSize.width : size.width;
-	    maxHeight = this.verticalAlign == horizontalAlign.STRETCH ? maxSize.height - previous.height : size.height;
+	    maxWidth = this.horizontalAlign == Alignment.STRETCH ? maxSize.width : size.width;
+	    maxHeight = this.verticalAlign == Alignment.STRETCH ? maxSize.height - previous.height : size.height;
 	    top = previous.height;
 	    break;
 	}
@@ -71,11 +72,11 @@ public class DockPanel extends UIElement {
 	switch (orientation) {
 	case HORIZONTAL:
 	    maxWidth = size.width;
-	    maxHeight = this.verticalAlign == horizontalAlign.STRETCH ? maxSize.height : size.height;
+	    maxHeight = this.verticalAlign == Alignment.STRETCH ? maxSize.height : size.height;
 	    break;
 	case VERTICAL:
 	default:
-	    maxWidth = this.horizontalAlign == horizontalAlign.STRETCH ? maxSize.width : size.width;
+	    maxWidth = this.horizontalAlign == Alignment.STRETCH ? maxSize.width : size.width;
 	    maxHeight = size.height;
 	    break;
 	}

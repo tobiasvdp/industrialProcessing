@@ -1,5 +1,6 @@
 package ip.industrialProcessing.gui3.binding.reply;
 
+import ibxm.Player;
 import ip.industrialProcessing.gui3.binding.IValueBinding;
 import ip.industrialProcessing.gui3.binding.IValueBindingChangedListener;
 import ip.industrialProcessing.utils.handler.numbers.IStateConfig;
@@ -13,11 +14,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
-import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.common.network.Player;
 
 public class StateConfigSetter implements IValueBindingChangedListener, IReplyBinding {
     private int index;

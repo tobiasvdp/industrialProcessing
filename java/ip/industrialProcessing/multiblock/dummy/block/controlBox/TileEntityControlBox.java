@@ -1,11 +1,11 @@
 package ip.industrialProcessing.multiblock.dummy.block.controlBox;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
 import ip.industrialProcessing.utils.IReceiver;
 import ip.industrialProcessing.utils.IRemote;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityControlBox extends TileEntityMultiblockDummy implements IReceiver {
 	public TileEntityControlBox() {

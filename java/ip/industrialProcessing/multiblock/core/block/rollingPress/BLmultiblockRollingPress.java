@@ -1,10 +1,10 @@
 package ip.industrialProcessing.multiblock.core.block.rollingPress;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.multiblock.core.BlockMultiblockCore;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 public class BLmultiblockRollingPress extends BlockMultiblockCore{
 

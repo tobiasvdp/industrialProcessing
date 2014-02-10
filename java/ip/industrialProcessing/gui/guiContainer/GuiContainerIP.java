@@ -12,7 +12,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.util.ArrayList;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -20,14 +19,11 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class GuiContainerIP extends GuiContainer {
 	private TileEntity tileEntity;
@@ -123,6 +119,7 @@ public class GuiContainerIP extends GuiContainer {
 
 	}
 
+	@Override
 	protected void actionPerformed(GuiButton par1GuiButton) {
 		sendButtonIDtoServerTileEntity(par1GuiButton.id);
 	}

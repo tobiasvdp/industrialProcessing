@@ -1,12 +1,14 @@
 package ip.industrialProcessing.transport.fluids;
 
-import org.lwjgl.opengl.GL11;
+import ip.industrialProcessing.client.render.ConnectionState;
+import ip.industrialProcessing.client.render.ModelConnectedFluid;
+
+import javax.swing.Icon;
 
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import ip.industrialProcessing.client.render.ConnectionState;
-import ip.industrialProcessing.client.render.ModelConnectedFluid;
+
+import org.lwjgl.opengl.GL11;
 
 public class ModelTank extends ModelConnectedFluid {
 

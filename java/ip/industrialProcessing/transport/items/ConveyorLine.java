@@ -1,13 +1,11 @@
 package ip.industrialProcessing.transport.items;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
-import net.minecraft.tileentity.TileEntity;
-import ip.industrialProcessing.power.IPoweredMachine;
 import ip.industrialProcessing.power.plants.IMechanicalMotion;
 import ip.industrialProcessing.transport.items.ConveyorBeltPowerInput.TileEntityConveyorBeltPowerInput;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorConnectionsBase;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class ConveyorLine {
 	public int ID = -1;

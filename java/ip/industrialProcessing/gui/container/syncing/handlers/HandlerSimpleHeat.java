@@ -12,7 +12,8 @@ public class HandlerSimpleHeat implements IHandlerSimpleHeat {
     private InfoSimpleHeat prevInfo;
     private int offset;
 
-    public InfoSimpleHeat getInfo() {
+    @Override
+	public InfoSimpleHeat getInfo() {
 	return prevInfo;
     }
 

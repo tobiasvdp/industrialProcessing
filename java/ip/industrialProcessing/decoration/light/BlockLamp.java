@@ -1,34 +1,18 @@
 package ip.industrialProcessing.decoration.light;
 
-import static net.minecraftforge.common.ForgeDirection.EAST;
-import static net.minecraftforge.common.ForgeDirection.NORTH;
-import static net.minecraftforge.common.ForgeDirection.SOUTH;
-import static net.minecraftforge.common.ForgeDirection.WEST;
-import ip.industrialProcessing.api.config.INamepace;
-import ip.industrialProcessing.config.ConfigMachineBlocks;
-import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.decoration.light.hangingLamp.TileEntityPetrolLamp;
 import ip.industrialProcessing.machines.BlockMachineRendered;
 import ip.industrialProcessing.machines.IRotateableEntity;
 
 import java.util.Random;
 
-import net.minecraft.block.StepSound;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
-import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class BlockLamp extends BlockMachineRendered {
 

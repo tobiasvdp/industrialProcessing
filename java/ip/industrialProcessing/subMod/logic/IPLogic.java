@@ -6,7 +6,6 @@ import ip.industrialProcessing.subMod.logic.config.ISetupLogic;
 import ip.industrialProcessing.subMod.logic.utils.handler.logicLine.LogicPathHandler;
 import ip.industrialProcessing.utils.registry.HandlerRegistry;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -15,7 +14,6 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
 @Mod(modid = "IPLogic", name = "Industrial Processing Logic", version = "0.0.1", dependencies = "required-after:IndustrialProcessing")

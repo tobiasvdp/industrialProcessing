@@ -1,25 +1,21 @@
 package ip.industrialProcessing.multiblock.dummy.block.controlBox;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
+import ip.industrialProcessing.config.ISetupItems;
 import ip.industrialProcessing.machines.IRotateableEntity;
 import ip.industrialProcessing.multiblock.dummy.BlockMultiblockDummy;
-import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.dummy.bellows.TileEntityBellows;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.EntityLivingBase;
+
+import javax.swing.Icon;
+
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Icon;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
 
 public class BlockControlBox extends BlockMultiblockDummy{
 
@@ -60,7 +56,8 @@ public class BlockControlBox extends BlockMultiblockDummy{
         icons[4] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "down");
     }
     
-    public MovingObjectPosition collisionRayTrace(World par1World, int par2, int par3, int par4, Vec3 par5Vec3, Vec3 par6Vec3)
+    @Override
+	public MovingObjectPosition collisionRayTrace(World par1World, int par2, int par3, int par4, Vec3 par5Vec3, Vec3 par6Vec3)
     {
         int l = ((IRotateableEntity)par1World.getBlockTileEntity(par2, par3, par4)).getForwardDirection().ordinal();
         if (l == 2){
@@ -87,7 +84,7 @@ public class BlockControlBox extends BlockMultiblockDummy{
     		te.triggerButton(2);
     	}
     	super.onBlockActivated(world, x, y, z, player, metadata, what, these, are);
-    	if(player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().itemID == IndustrialProcessing.itemRemote.itemID)
+    	if(player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().itemID == ISetupItems.itemRemote.itemID)
     		return false;
     	return true;
     }

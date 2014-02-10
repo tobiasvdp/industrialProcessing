@@ -1,19 +1,19 @@
 package ip.industrialProcessing.decoration.trees;
 
-import java.util.Random;
-
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigBlocks;
 import ip.industrialProcessing.config.ISetupItems;
+
+import java.util.Random;
+
+import javax.swing.Icon;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockRubberLog extends Block {
 

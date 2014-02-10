@@ -8,12 +8,14 @@ import ip.industrialProcessing.client.render.IConnectedTile;
 import ip.industrialProcessing.client.render.ModelBlock;
 import ip.industrialProcessing.transport.fluids.BlockTransportFluidsStone;
 import ip.industrialProcessing.transport.fluids.BlockTransportFluidsWood;
+
+import javax.swing.Icon;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector3f;

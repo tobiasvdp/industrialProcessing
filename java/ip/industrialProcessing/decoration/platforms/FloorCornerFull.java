@@ -1,11 +1,11 @@
 package ip.industrialProcessing.decoration.platforms;
 
+import ip.industrialProcessing.api.rendering.wavefront.ObjMesh;
+import ip.industrialProcessing.api.rendering.wavefront.ObjQuad;
+
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
-
-import ip.industrialProcessing.api.rendering.wavefront.ObjMesh;
-import ip.industrialProcessing.api.rendering.wavefront.ObjQuad;
 
 public class FloorCornerFull extends ObjMesh {
 	public FloorCornerFull() {

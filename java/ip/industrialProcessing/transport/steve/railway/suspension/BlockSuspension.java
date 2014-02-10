@@ -1,6 +1,5 @@
 package ip.industrialProcessing.transport.steve.railway.suspension;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigTransportBlocks;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import net.minecraft.block.Block;

@@ -1,7 +1,5 @@
 package ip.industrialProcessing.multiblock.core.extend;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.IPowerStorage;
 import ip.industrialProcessing.machines.PowerWorkerHelper;
@@ -15,6 +13,8 @@ import ip.industrialProcessing.power.PowerHelper;
 import ip.industrialProcessing.recipes.IPowerRecipe;
 import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.utils.DirectionUtils;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class TileEntityMultiblockCoreTankWorkerPowered extends TileEntityMultiblockCoreTankWorker implements IPoweredMachine {
 

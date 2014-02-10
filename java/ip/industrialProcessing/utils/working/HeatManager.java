@@ -4,7 +4,6 @@ import ip.industrialProcessing.recipes.IHeatRecipe;
 import ip.industrialProcessing.recipes.IMachineRecipe;
 import ip.industrialProcessing.recipes.RecipeWorker;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 
 public class HeatManager {
 

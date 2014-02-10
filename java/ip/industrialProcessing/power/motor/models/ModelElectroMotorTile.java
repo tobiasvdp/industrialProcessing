@@ -1,11 +1,13 @@
 package ip.industrialProcessing.power.motor.models;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Vector3f;
+import ip.industrialProcessing.client.render.ModelAnimatedMachine;
+
+import javax.swing.Icon;
 
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import ip.industrialProcessing.client.render.ModelAnimatedMachine;
+
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Vector3f;
 
 public class ModelElectroMotorTile extends ModelAnimatedMachine {
 

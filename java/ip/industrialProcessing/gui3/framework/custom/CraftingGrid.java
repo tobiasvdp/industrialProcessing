@@ -1,6 +1,5 @@
 package ip.industrialProcessing.gui3.framework.custom;
 
-import net.minecraft.inventory.Slot;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.gui3.framework.Alignment;
 import ip.industrialProcessing.gui3.framework.Rect;
@@ -8,13 +7,10 @@ import ip.industrialProcessing.gui3.framework.Size;
 import ip.industrialProcessing.gui3.framework.controls.Image;
 import ip.industrialProcessing.gui3.framework.controls.SlotControl;
 import ip.industrialProcessing.gui3.framework.controls.UserControl;
-import ip.industrialProcessing.gui3.framework.panels.GridCell;
-import ip.industrialProcessing.gui3.framework.panels.GridPanel;
-import ip.industrialProcessing.gui3.framework.panels.GridSize;
 import ip.industrialProcessing.gui3.framework.panels.Orientation;
-import ip.industrialProcessing.gui3.framework.panels.SizeMode;
 import ip.industrialProcessing.gui3.framework.panels.StackPanel;
 import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
+import net.minecraft.inventory.Slot;
 
 public class CraftingGrid extends UserControl {
     private static final Rect DEFAULT_CRAFT_SECTION_HORIZONTAL = new Rect(0, 0, 1, 0.5f);

@@ -1,20 +1,20 @@
 package ip.industrialProcessing.subMod.blackSmith.plant.forge.model;
 
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.vector.Vector3f;
+import ip.industrialProcessing.api.rendering.wavefront.ObjMesh;
+import ip.industrialProcessing.client.render.ModelAnimatedMachine;
+import ip.industrialProcessing.multiblock.utils.MultiblockState;
+import ip.industrialProcessing.subMod.blackSmith.plant.forge.TileEntityForgeCore;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemRenderer;
+import javax.swing.Icon;
+
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import ip.industrialProcessing.api.rendering.wavefront.ObjMesh;
-import ip.industrialProcessing.client.render.ModelAnimatedMachine;
-import ip.industrialProcessing.multiblock.utils.MultiblockState;
-import ip.industrialProcessing.subMod.blackSmith.plant.forge.TileEntityForgeCore;
+
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Vector3f;
 
 public class ModelForgeAnimated extends ModelAnimatedMachine {
 

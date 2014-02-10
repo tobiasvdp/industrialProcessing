@@ -29,15 +29,15 @@ public class WorldGeneration implements IWorldGenerator {
 
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
-		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 20, 25, 30, 60, 2, 4, ISetupBlocks.blockTinOre.blockID);
-		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 22, 27, 25, 60, 2, 4, ISetupBlocks.blockCopperOre.blockID);
-		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 12, 14, 5, 40, 1, 3, ISetupBlocks.blockGalenaOre.blockID);
-		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 7, 10, 10, 60, 1, 3, ISetupBlocks.blockCinnebarOre.blockID);
-		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 6, 8, 1, 8, 2, 3, ISetupBlocks.blockRutileOre.blockID);
-		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 7, 10, 1, 40, 1, 3, ISetupBlocks.blockChromiteOre.blockID);
-		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 1, 1, 1, 20, 1, 1, ISetupBlocks.blockTaliaOre.blockID);
-		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 20, 30, 30, 85, 6, 10, ISetupBlocks.blockLimestone.blockID);
-		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 15, 25, 0, 85, 6, 10, ISetupBlocks.blockBauxiteOre.blockID);
+		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 20, 25, 30, 60, 2, 4, (ISetupBlocks.blockTinOre));
+		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 22, 27, 25, 60, 2, 4,  (ISetupBlocks.blockCopperOre));
+		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 12, 14, 5, 40, 1, 3,  (ISetupBlocks.blockGalenaOre));
+		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 7, 10, 10, 60, 1, 3,  (ISetupBlocks.blockCinnebarOre));
+		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 6, 8, 1, 8, 2, 3,  (ISetupBlocks.blockRutileOre));
+		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 7, 10, 1, 40, 1, 3,  (ISetupBlocks.blockChromiteOre));
+		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 1, 1, 1, 20, 1, 1,  (ISetupBlocks.blockTaliaOre));
+		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 20, 30, 30, 85, 6, 10,  (ISetupBlocks.blockLimestone));
+		generateOre(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider, 15, 25, 0, 85, 6, 10, (ISetupBlocks.blockBauxiteOre));
 
 		generateTree(random, chunkX, chunkZ, world, chunkGenerator, chunkProvider);
 	}
@@ -73,8 +73,8 @@ public class WorldGeneration implements IWorldGenerator {
 				if (!TerrainGen.saplingGrowTree(world, random, sX, sY, sZ))
 					return;
 
-				int block = world.getBlockId(sX, sY - 1, sZ);
-				if (block != Block.grass.blockID)
+				Block block = world.getBlock(sX, sY - 1, sZ);
+				if (block != Block.getBlockFromName("grass"))
 					return;
 				this.treeGenerators[meta].generate(world, random, sX, sY, sZ);
 			}
@@ -82,11 +82,11 @@ public class WorldGeneration implements IWorldGenerator {
 	}
 
 
-	private boolean generateOre(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider, int minSpawn, int maxSpawn, int minLayer, int maxLayer, int minAmount, int maxAmount, int oreID) {
+	private boolean generateOre(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider, int minSpawn, int maxSpawn, int minLayer, int maxLayer, int minAmount, int maxAmount, Block ore) {
 		chunkX = chunkX*16;
 		chunkZ = chunkZ*16;
 		int spawnAmount = maxSpawn - random.nextInt(maxSpawn - minSpawn+1);
-		WorldGenMinable gen = new WorldGenMinable(oreID, maxAmount);
+		WorldGenMinable gen = new WorldGenMinable(ore, maxAmount);
 		if (TerrainGen.generateOre(world, random, gen, chunkX, chunkZ, GenerateMinable.EventType.CUSTOM))
 			this.genStandardOre(spawnAmount, gen, minLayer, maxLayer, world, chunkX, chunkZ, random);
 		return true;

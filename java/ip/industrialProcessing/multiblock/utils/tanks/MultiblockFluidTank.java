@@ -1,7 +1,7 @@
 package ip.industrialProcessing.multiblock.utils.tanks;
 
-import net.minecraft.tileentity.TileEntity;
 import ip.industrialProcessing.api.tanks.IPfluidTank;
+import net.minecraft.tileentity.TileEntity;
 
 public class MultiblockFluidTank extends IPfluidTank implements IMultiblockFluidTank{
     int multiblockID;

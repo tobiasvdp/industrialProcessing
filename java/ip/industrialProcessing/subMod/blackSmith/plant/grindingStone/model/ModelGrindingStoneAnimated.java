@@ -1,8 +1,10 @@
 package ip.industrialProcessing.subMod.blackSmith.plant.grindingStone.model;
 
 import ip.industrialProcessing.client.render.ModelAnimatedMachine;
+
+import javax.swing.Icon;
+
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector3f;

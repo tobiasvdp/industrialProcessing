@@ -1,9 +1,5 @@
 package ip.industrialProcessing.multiblock.core.block.plants.oilRefinary.atmosphericDestilationTower;
 
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidStack;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
@@ -15,6 +11,10 @@ import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
 import ip.industrialProcessing.multiblock.tier.Tier;
 import ip.industrialProcessing.multiblock.tier.TierCollection;
 import ip.industrialProcessing.multiblock.tier.Tiers;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidStack;
 
 public class TileEntityAtmosphericDestilationTower extends TileEntityMultiblockCoreTankWorkerPowered {
 	private static StructureMultiblock structure;

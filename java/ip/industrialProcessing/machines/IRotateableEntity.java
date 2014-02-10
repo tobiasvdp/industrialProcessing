@@ -1,6 +1,6 @@
 package ip.industrialProcessing.machines;
 
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public interface IRotateableEntity {
 	ForgeDirection getForwardDirection();

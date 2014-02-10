@@ -1,10 +1,10 @@
 package ip.industrialProcessing.subMod.power.client;
 
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import ip.industrialProcessing.api.rendering.RendererBlock;
 import ip.industrialProcessing.subMod.power.CommonProxy;
 import ip.industrialProcessing.subMod.power.config.ConfigPower;
 import ip.industrialProcessing.subMod.power.plant.solar.standingSolarPanel.model.ModelStandingSolarPanel;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy  extends CommonProxy{
 	 private static final ModelStandingSolarPanel modelStandingSolarPanel = new ModelStandingSolarPanel();

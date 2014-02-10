@@ -1,9 +1,9 @@
 package ip.industrialProcessing.multiblock.dummy.block.blastFurnaceTower;
 
+import ip.industrialProcessing.client.render.ModelingMultiblock;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
-import ip.industrialProcessing.client.render.ModelingMultiblock;
 @Deprecated
 public class MDmultiblockBlastFurnaceTower extends ModelingMultiblock{
     // fields

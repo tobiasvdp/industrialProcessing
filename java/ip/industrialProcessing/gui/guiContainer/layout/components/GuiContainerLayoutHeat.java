@@ -1,10 +1,5 @@
 package ip.industrialProcessing.gui.guiContainer.layout.components;
 
-import java.awt.Rectangle;
-import java.util.ArrayList;
-import net.minecraft.block.Block;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.inventory.Container;
 import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.ContainerIP;
@@ -16,6 +11,13 @@ import ip.industrialProcessing.gui.container.syncing.info.InfoHeat;
 import ip.industrialProcessing.gui.guiContainer.GuiContainerIP;
 import ip.industrialProcessing.gui.guiContainer.layout.GuiContainerLayout;
 import ip.industrialProcessing.recipes.Recipe;
+
+import java.awt.Rectangle;
+import java.util.ArrayList;
+
+import net.minecraft.block.Block;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.inventory.Container;
 
 public class GuiContainerLayoutHeat extends GuiContainerLayout {
 	private static Rectangle rectangleBar = new Rectangle(121, 203, 5, 35);

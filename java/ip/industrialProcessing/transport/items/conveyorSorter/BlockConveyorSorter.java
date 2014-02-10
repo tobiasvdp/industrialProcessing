@@ -1,7 +1,5 @@
 package ip.industrialProcessing.transport.items.conveyorSorter;
 
-import java.awt.Rectangle;
-
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
@@ -10,9 +8,11 @@ import ip.industrialProcessing.gui.GuiLayout;
 import ip.industrialProcessing.gui.IGuiLayout;
 import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
 import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
-import ip.industrialProcessing.machines.plants.storage.storageBox.BlockStorageBox;
 import ip.industrialProcessing.transport.items.conveyorBelt.BlockConveyorBase;
 import ip.industrialProcessing.utils.IDescriptionBlock;
+
+import java.awt.Rectangle;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;

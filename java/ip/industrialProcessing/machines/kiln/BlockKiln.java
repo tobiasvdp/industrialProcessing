@@ -6,10 +6,6 @@ import ip.industrialProcessing.client.render.ModelBlock;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.gui.GuiLayout;
-import ip.industrialProcessing.gui.IGuiLayout;
-import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
-import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
 import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
 import ip.industrialProcessing.gui3.generating.GuiBuilderDefault;
 import ip.industrialProcessing.gui3.generating.IGuiBlock;
@@ -19,11 +15,12 @@ import ip.industrialProcessing.machines.RecipesMachine;
 import ip.industrialProcessing.machines.kiln.model.ModelKilnBlock;
 import ip.industrialProcessing.recipes.IRecipeBlock;
 import ip.industrialProcessing.utils.IDescriptionBlock;
+
+import javax.swing.Icon;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

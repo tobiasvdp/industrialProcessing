@@ -1,8 +1,9 @@
 package ip.industrialProcessing.api.rendering.wavefront;
 
+import javax.swing.Icon;
+
 import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.Icon;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;

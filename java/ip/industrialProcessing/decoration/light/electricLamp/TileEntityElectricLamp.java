@@ -7,7 +7,7 @@ import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 import ip.industrialProcessing.power.IPowerAcceptor;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityElectricLamp extends TileEntity implements IPowerAcceptor, IAnimationSyncable {
 

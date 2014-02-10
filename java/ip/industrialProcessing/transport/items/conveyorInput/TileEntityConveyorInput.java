@@ -1,5 +1,17 @@
 package ip.industrialProcessing.transport.items.conveyorInput;
 
+import ip.industrialProcessing.LocalDirection;
+import ip.industrialProcessing.machines.containers.IMachineContainerEntity;
+import ip.industrialProcessing.transport.TransportConnectionState;
+import ip.industrialProcessing.transport.items.conveyorBelt.ConnectionMode;
+import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorInventoryBase;
+import ip.industrialProcessing.transport.items.conveyorBelt.util.ConveyorEnvironment;
+import ip.industrialProcessing.utils.ExtractOrder;
+import ip.industrialProcessing.utils.IExtractFilter;
+import ip.industrialProcessing.utils.ItemTransfers;
+import ip.industrialProcessing.utils.handler.numbers.IStateConfig;
+import ip.industrialProcessing.utils.nbt.NbtHelper;
+
 import java.util.Arrays;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,22 +20,7 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatMessageComponent;
-import net.minecraftforge.common.ForgeDirection;
-import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.machines.containers.IMachineContainerEntity;
-import ip.industrialProcessing.transport.TransportConnectionState;
-import ip.industrialProcessing.transport.items.conveyorBelt.ConnectionMode;
-import ip.industrialProcessing.transport.items.conveyorBelt.MovingItemStack;
-import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorInventoryBase;
-import ip.industrialProcessing.transport.items.conveyorBelt.util.ConveyorEnvironment;
-import ip.industrialProcessing.transport.items.conveyorPacker.PackerOperationMode;
-import ip.industrialProcessing.utils.ExtractOrder;
-import ip.industrialProcessing.utils.IExtractFilter;
-import ip.industrialProcessing.utils.ItemTransfers;
-import ip.industrialProcessing.utils.handler.numbers.IStateConfig;
-import ip.industrialProcessing.utils.nbt.NbtHelper;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityConveyorInput extends TileEntityConveyorInventoryBase implements IStateConfig, IMachineContainerEntity, ISidedInventory {
 

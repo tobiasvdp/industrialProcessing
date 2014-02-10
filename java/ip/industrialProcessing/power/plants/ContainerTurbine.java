@@ -1,11 +1,11 @@
 package ip.industrialProcessing.power.plants;
 
-import net.minecraft.entity.player.InventoryPlayer;
 import ip.industrialProcessing.machines.containers.ContainerFluidMachine;
 import ip.industrialProcessing.machines.containers.IProgressBarHandler;
 import ip.industrialProcessing.machines.containers.ProgressBarHandlerInfo;
 import ip.industrialProcessing.slots.SlotBase;
 import ip.industrialProcessing.utils.containers.ContainerUtils;
+import net.minecraft.entity.player.InventoryPlayer;
 
 public class ContainerTurbine extends ContainerFluidMachine {
 

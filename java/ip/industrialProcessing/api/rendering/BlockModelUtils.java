@@ -2,9 +2,10 @@ package ip.industrialProcessing.api.rendering;
 
 import java.util.List;
 
+import javax.swing.Icon;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
 
 public class BlockModelUtils {
 

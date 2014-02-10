@@ -1,19 +1,21 @@
 package ip.industrialProcessing.transport.fluids.models.raintank;
 
-import org.lwjgl.util.vector.Vector3f;
-
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.api.rendering.wavefront.ObjRotator;
 import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
 import ip.industrialProcessing.client.render.ConnectionState;
 import ip.industrialProcessing.client.render.ModelBlock;
 import ip.industrialProcessing.machines.BlockMachine;
 import ip.industrialProcessing.transport.fluids.TileEntityRainTank;
+
+import javax.swing.Icon;
+
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import org.lwjgl.util.vector.Vector3f;
 
 public class ModelRainTankBlock extends ModelBlock {
 

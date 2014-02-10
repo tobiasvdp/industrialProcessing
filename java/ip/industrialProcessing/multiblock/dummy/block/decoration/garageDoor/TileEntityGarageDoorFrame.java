@@ -1,6 +1,6 @@
 package ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor;
 
-import ip.industrialProcessing.IndustrialProcessing;
+import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.core.block.decoration.garageDoor.TileEntityGarageDoor;
 import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
@@ -10,9 +10,6 @@ import ip.industrialProcessing.utils.handler.packets.PacketHandler;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.util.ArrayList;
-
-import cpw.mods.fml.common.network.PacketDispatcher;
-import net.minecraft.network.packet.Packet250CustomPayload;
 
 public class TileEntityGarageDoorFrame extends TileEntityMultiblockDummy {
 
@@ -52,7 +49,7 @@ public class TileEntityGarageDoorFrame extends TileEntityMultiblockDummy {
 		boolean cont = true;
 		while (cont) {
 			height++;
-			if (this.worldObj.getBlockId(xCoord, yCoord - height, zCoord) != 0 && this.worldObj.getBlockId(xCoord, yCoord - height, zCoord) != IndustrialProcessing.blockGarageDoorDoor.blockID) {
+			if (this.worldObj.getBlockId(xCoord, yCoord - height, zCoord) != 0 && this.worldObj.getBlockId(xCoord, yCoord - height, zCoord) != ISetupMachineBlocks.blockGarageDoorDoor.blockID) {
 				height--;
 				cont = false;
 			}
@@ -78,8 +75,8 @@ public class TileEntityGarageDoorFrame extends TileEntityMultiblockDummy {
 			int height = getHeight();
 			if (height > 0) {
 				for (int i = 1; i <= height; i++) {
-					if (this.worldObj.getBlockId(xCoord, yCoord - i, zCoord) != IndustrialProcessing.blockGarageDoorDoor.blockID) {
-						this.worldObj.setBlock(xCoord, yCoord - i, zCoord, IndustrialProcessing.blockGarageDoorDoor.blockID);	
+					if (this.worldObj.getBlockId(xCoord, yCoord - i, zCoord) != ISetupMachineBlocks.blockGarageDoorDoor.blockID) {
+						this.worldObj.setBlock(xCoord, yCoord - i, zCoord, ISetupMachineBlocks.blockGarageDoorDoor.blockID);	
 					}
 					((TileEntityGarageDoorDoor) this.worldObj.getBlockTileEntity(xCoord, yCoord - i, zCoord)).setForwardDirection(getForwardDirection());
 					doors.add(new int[] { xCoord, yCoord - i, zCoord });
@@ -95,13 +92,14 @@ public class TileEntityGarageDoorFrame extends TileEntityMultiblockDummy {
 			int y = xyz[1];
 			int z = xyz[2];
 			int id = this.worldObj.getBlockId(x, y, z);
-			if (id == IndustrialProcessing.blockGarageDoorDoor.blockID) {
+			if (id == ISetupMachineBlocks.blockGarageDoorDoor.blockID) {
 				this.worldObj.setBlockToAir(x, y, z);
 			}
 		}
 		doors.clear();
 	}
 
+	@Override
 	public void onDestroy() {
 		isDestroying = true;
 		clearOldGarageDoor();
@@ -152,7 +150,7 @@ public class TileEntityGarageDoorFrame extends TileEntityMultiblockDummy {
 		DataOutputStream outputStream = new DataOutputStream(bos);
 		try {
 			outputStream.writeInt((int) (d * 1000));
-			outputStream.writeInt((int) (i * 1000));
+			outputStream.writeInt(i * 1000);
 			outputStream.writeInt((int) (e * 1000));
 			outputStream.writeInt(j);
 			outputStream.writeBoolean(b);

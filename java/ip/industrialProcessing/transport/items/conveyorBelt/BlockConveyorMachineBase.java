@@ -1,10 +1,10 @@
 package ip.industrialProcessing.transport.items.conveyorBelt;
 
-import java.util.List;
-
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ISetupItems;
-import net.minecraft.block.StepSound;
+
+import java.util.List;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;

@@ -1,8 +1,5 @@
 package ip.industrialProcessing.transport.items.ConveyorBeltPowerInput;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.client.render.IAnimationProgress;
 import ip.industrialProcessing.machines.TileEntityMachine;
@@ -10,10 +7,12 @@ import ip.industrialProcessing.machines.animation.AnimationHandler;
 import ip.industrialProcessing.machines.animation.AnimationMode;
 import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
 import ip.industrialProcessing.power.plants.IMechanicalMotion;
-import ip.industrialProcessing.transport.items.ConveyorLine;
 import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorConnectionsBase;
 import ip.industrialProcessing.utils.DirectionUtils;
 import ip.industrialProcessing.utils.registry.HandlerRegistry;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityConveyorBeltPowerInput extends TileEntityMachine implements IAnimationProgress, IMechanicalMotion {
 

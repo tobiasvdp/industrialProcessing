@@ -1,6 +1,5 @@
 package ip.industrialProcessing.gui3.framework.custom;
 
-import net.minecraft.inventory.Slot;
 import ip.industrialProcessing.gui3.binding.ITankBinding;
 import ip.industrialProcessing.gui3.framework.controls.SlotControl;
 import ip.industrialProcessing.gui3.framework.controls.TankControl;
@@ -11,6 +10,7 @@ import ip.industrialProcessing.gui3.framework.panels.GridSize;
 import ip.industrialProcessing.gui3.framework.panels.Orientation;
 import ip.industrialProcessing.gui3.framework.panels.SizeMode;
 import ip.industrialProcessing.gui3.framework.panels.StackPanel;
+import net.minecraft.inventory.Slot;
 
 public class TankWithSlotsControl extends UserControl implements ITankBinding {
 

@@ -82,7 +82,7 @@ public class GuiHandler implements IGuiHandler {
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 
-        TileEntity entity = world.getBlockTileEntity(x, y, z);
+        TileEntity entity = world.getTileEntity(x, y, z);
         if (ID == 0) {
             if (entity.getBlockType() != null && (entity.getBlockType() instanceof IGuiLayout || entity.getBlockType() instanceof IGuiLayoutMultiblock)) {
                 return new ContainerIP(player, entity);
@@ -141,7 +141,7 @@ public class GuiHandler implements IGuiHandler {
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 
-        TileEntity entity = world.getBlockTileEntity(x, y, z);
+        TileEntity entity = world.getTileEntity(x, y, z);
         if (ID == 0) {
             if (entity.getBlockType() != null && (entity.getBlockType() instanceof IGuiLayout || entity.getBlockType() instanceof IGuiLayoutMultiblock)) {
                 return new GuiContainerIP(player, entity, new ContainerIP(player, entity));

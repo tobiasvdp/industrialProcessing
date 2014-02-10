@@ -1,6 +1,5 @@
 package ip.industrialProcessing.decoration.crystals;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ConfigBlocks;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 

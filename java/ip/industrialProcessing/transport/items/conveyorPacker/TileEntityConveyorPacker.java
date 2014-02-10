@@ -1,7 +1,7 @@
 package ip.industrialProcessing.transport.items.conveyorPacker;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
+import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.machines.containers.IMachineContainerEntity;
 import ip.industrialProcessing.machines.plants.storage.storageBox.BlockStorageBox;
 import ip.industrialProcessing.machines.plants.storage.storageRack.TileEntityStorageRack;
@@ -16,8 +16,7 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatMessageComponent;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation implements IStateConfig, IMachineContainerEntity, ISidedInventory {
 
@@ -129,15 +128,15 @@ public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation
 
     private void extractFromBox() {
 	ItemStack box = slots[0];
-	if (box != null && box.itemID == IndustrialProcessing.blockStorageBox.blockID) {
+	if (box != null && box.itemID == ISetupMachineBlocks.blockStorageBox.blockID) {
 	    boolean hasExtracted = false;
 	    for (int i = 0; i < BlockStorageBox.STORAGE_SIZE; i++) {
-		ItemStack stack = IndustrialProcessing.blockStorageBox.peekStackFromBox(box, i);
+		ItemStack stack = BlockStorageBox.peekStackFromBox(box, i);
 		if (stack != null) {
 		    ItemStack configStack = slots[i + 1];
 		    if (configStack == null || configStack.isItemEqual(stack)) {
 			// only fetch configged items!
-			stack = IndustrialProcessing.blockStorageBox.getStackFromBox(box, i, 8);
+			stack = BlockStorageBox.getStackFromBox(box, i, 8);
 			MovingItemStack movingStack = this.addItemStack(stack, null);
 			// this stack can not be used anymore, don't allow it to
 			// get routed back into the slot.
@@ -197,7 +196,7 @@ public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation
 
     @Override
     protected void rerouteStack(MovingItemStack stack) {
-	if (boxAllowedOnConveyor && stack.stack != null && stack.stack.itemID == IndustrialProcessing.blockStorageBox.blockID) {
+	if (boxAllowedOnConveyor && stack.stack != null && stack.stack.itemID == ISetupMachineBlocks.blockStorageBox.blockID) {
 	    if (slots[0] == null) {
 		ItemStack oneBox = stack.stack.splitStack(1);
 		slots[0] = oneBox;
@@ -209,9 +208,9 @@ public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation
 		return;
 	    }
 	}
-	if (operationMode == PackerOperationMode.PACK_ANY || operationMode == operationMode.PACK_FULL) {
+	if (operationMode == PackerOperationMode.PACK_ANY || operationMode == PackerOperationMode.PACK_FULL) {
 	    ItemStack box = slots[0];
-	    if (box != null && box.itemID == IndustrialProcessing.blockStorageBox.blockID && stack.stack != null) {
+	    if (box != null && box.itemID == ISetupMachineBlocks.blockStorageBox.blockID && stack.stack != null) {
 		boolean packed = false;
 		boolean accepted = false;
 		for (int cI = 1; cI < slots.length; cI++) {
@@ -256,7 +255,7 @@ public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation
 	}
 
 	for (int i = 0; i < 9; i++) {
-	    ItemStack peek = IndustrialProcessing.blockStorageBox.peekStackFromBox(box, i);
+	    ItemStack peek = BlockStorageBox.peekStackFromBox(box, i);
 	    if (peek == null || peek.stackSize < peek.getMaxStackSize())
 		// stack can still grow, GO FOR IT
 		return false;
@@ -265,7 +264,7 @@ public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation
     }
 
     private ItemStack putItemInBox(ItemStack stack, ItemStack box, int slot) {
-	return IndustrialProcessing.blockStorageBox.putStackInBox(stack, box, slot);
+	return BlockStorageBox.putStackInBox(stack, box, slot);
     }
 
     @Override
@@ -352,7 +351,7 @@ public class TileEntityConveyorPacker extends TileEntityConveyorPowerTranslation
 
     @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-	return !((i == 0) ^ (itemstack != null && itemstack.itemID == IndustrialProcessing.blockStorageBox.blockID));
+	return !((i == 0) ^ (itemstack != null && itemstack.itemID == ISetupMachineBlocks.blockStorageBox.blockID));
     }
 
     @Override

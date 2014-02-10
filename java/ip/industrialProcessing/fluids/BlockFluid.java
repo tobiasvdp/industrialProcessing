@@ -1,20 +1,21 @@
 package ip.industrialProcessing.fluids;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
 import ip.industrialProcessing.config.ISetupDamageSource;
+
+import javax.swing.Icon;
+
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockFluid extends BlockFluidClassic {
 

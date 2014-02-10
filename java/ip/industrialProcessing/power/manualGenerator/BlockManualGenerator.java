@@ -1,15 +1,14 @@
 package ip.industrialProcessing.power.manualGenerator;
 
+import ip.industrialProcessing.config.ConfigMachineBlocks;
+import ip.industrialProcessing.config.ConfigRenderers;
+import ip.industrialProcessing.config.ISetupCreativeTabs;
+import ip.industrialProcessing.power.BlockPowerGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.config.ConfigMachineBlocks;
-import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.power.BlockPowerGenerator;
 
 public class BlockManualGenerator extends BlockPowerGenerator {
 

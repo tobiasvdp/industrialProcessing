@@ -1,6 +1,5 @@
 package ip.industrialProcessing.multiblock.gui;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.gui.container.syncing.info.InfoTank;
@@ -10,11 +9,13 @@ import ip.industrialProcessing.multiblock.container.ContainerMultiblockTank;
 import ip.industrialProcessing.multiblock.container.ContainerMultiblockTankWorker;
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.tier.Tiers;
+
+import javax.swing.Icon;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.fluids.Fluid;

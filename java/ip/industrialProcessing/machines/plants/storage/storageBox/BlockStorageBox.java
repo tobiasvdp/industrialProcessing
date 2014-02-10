@@ -16,20 +16,20 @@ import ip.industrialProcessing.utils.ItemTransfers;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.Icon;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockStorageBox extends BlockMachineRendered implements IDescriptionBlock, IGuiBlock {
     public static String UNLOCALIZED_NAME = "IP.Machine.StorageBox";

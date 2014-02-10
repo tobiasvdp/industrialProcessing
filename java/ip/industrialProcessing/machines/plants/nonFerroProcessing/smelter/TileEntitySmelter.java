@@ -4,7 +4,6 @@ import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.machines.TileEntityFluidWorkerMachine;
 import ip.industrialProcessing.power.plants.IHeatable;
 import ip.industrialProcessing.recipes.IMachineRecipe;
-import ip.industrialProcessing.recipes.Recipe;
 import ip.industrialProcessing.utils.handler.heat.IHeated;
 
 import java.util.Iterator;

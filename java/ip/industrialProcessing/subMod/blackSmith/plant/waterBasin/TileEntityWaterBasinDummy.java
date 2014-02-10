@@ -1,20 +1,11 @@
 package ip.industrialProcessing.subMod.blackSmith.plant.waterBasin;
 
-import javax.naming.ldap.HasControls;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidTank;
-import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 import ip.industrialProcessing.machines.animation.tanks.ITankSyncable;
 import ip.industrialProcessing.machines.animation.tanks.TankHandler;
 import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
 import ip.industrialProcessing.multiblock.coreAndDummy.TileEntityMultiblockSwitcherDummy;
-import ip.industrialProcessing.multiblock.utils.MultiblockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraftforge.fluids.IFluidTank;
 
 public class TileEntityWaterBasinDummy extends TileEntityMultiblockSwitcherDummy implements ITankSyncable {
 	private TankHandler tankHandler;

@@ -1,10 +1,8 @@
 package ip.industrialProcessing.subMod.blackSmith.plant.forge;
 
-import javax.naming.ldap.HasControls;
-
-import net.minecraft.entity.player.EntityPlayer;
 import ip.industrialProcessing.multiblock.core.ITileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.coreAndDummy.TileEntityMultiblockSwitcherDummy;
+import net.minecraft.entity.player.EntityPlayer;
 
 public class TileEntityForgeDummy extends TileEntityMultiblockSwitcherDummy{
 

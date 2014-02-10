@@ -1,11 +1,6 @@
 package ip.industrialProcessing.subMod.blackSmith.plant.bloomery;
 
-import java.util.Iterator;
-
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorker;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;
 import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
@@ -20,6 +15,11 @@ import ip.industrialProcessing.subMod.blackSmith.config.ISetupBlackSmith;
 import ip.industrialProcessing.utils.IBreakable;
 import ip.industrialProcessing.utils.handler.heat.HeatStorage;
 import ip.industrialProcessing.utils.handler.heat.IHeatStorage;
+
+import java.util.Iterator;
+
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityBloomery extends TileEntityMultiblockCoreTankWorker implements IHeatStorage, IBreakable {
 	static StructureMultiblock structure;

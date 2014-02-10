@@ -1,15 +1,15 @@
 package ip.industrialProcessing.subMod.blackSmith.plant.waterBasin.model;
 
-import org.lwjgl.opengl.GL11;
-
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import net.minecraftforge.common.ForgeDirection;
 import ip.industrialProcessing.client.render.ModelAnimatedFluidMachine;
 import ip.industrialProcessing.machines.IRotateableEntity;
 import ip.industrialProcessing.multiblock.coreAndDummy.ITileEntityMultiblockSwitcher;
 import ip.industrialProcessing.multiblock.utils.MultiblockState;
+
+import javax.swing.Icon;
+
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class ModelWaterBasinAnimated extends ModelAnimatedFluidMachine {
 

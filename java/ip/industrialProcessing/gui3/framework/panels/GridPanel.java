@@ -7,11 +7,6 @@ import ip.industrialProcessing.gui3.framework.UIElement;
 import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
-
-import cpw.mods.fml.common.asm.transformers.MarkerTransformer;
 
 public class GridPanel extends UIElement {
     public ArrayList<GridSize> rows = new ArrayList<GridSize>();

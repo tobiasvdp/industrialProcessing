@@ -1,6 +1,5 @@
 package ip.industrialProcessing.multiblock.core.block.hotPress;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.layout.FacingDirection;

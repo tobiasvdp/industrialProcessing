@@ -1,19 +1,16 @@
 package ip.industrialProcessing.microBlock;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.StepSound;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import net.minecraft.world.World;
-import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.config.ConfigBlocks;
 import ip.industrialProcessing.config.ConfigRenderers;
 import ip.industrialProcessing.microBlock.core.BlockMicroBlock;
 import ip.industrialProcessing.utils.registry.MicroBlockIconRegistry;
+
+import javax.swing.Icon;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 public class MicroBlock extends BlockMicroBlock{
 	private Icon[] icons = new Icon[1];

@@ -1,16 +1,14 @@
 package ip.industrialProcessing.machines.treetap;
 
-import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.LocalDirection;
 import ip.industrialProcessing.config.ISetupBlocks;
 import ip.industrialProcessing.machines.TileEntityWorkerMachine;
 import ip.industrialProcessing.recipes.IMachineRecipe;
-import ip.industrialProcessing.recipes.Recipe;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityManualTreeTap extends TileEntityWorkerMachine {
 

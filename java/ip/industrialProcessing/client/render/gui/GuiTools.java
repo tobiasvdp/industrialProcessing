@@ -1,7 +1,6 @@
 package ip.industrialProcessing.client.render.gui;
 
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.texture.TextureManager;

@@ -5,7 +5,6 @@ import ip.industrialProcessing.api.rendering.wavefront.ObjRotator;
 import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
 import ip.industrialProcessing.client.render.ModelBlock;
 import ip.industrialProcessing.microBlock.extend.connectionCorners.IMicroBlockConnectionCorner;
-import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.Down;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.DownBottom;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.DownBottomCorner;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.DownLeft;
@@ -14,25 +13,21 @@ import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.Do
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.DownRightCorner;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.DownTop;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.DownTopCorner;
-import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.East;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.EastBottom;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.EastLeft;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.EastRight;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.EastRightCorner;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.EastTop;
-import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.North;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.NorthBottom;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.NorthLeft;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.NorthRight;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.NorthRightCorner;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.NorthTop;
-import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.South;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.SouthBottom;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.SouthLeft;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.SouthRight;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.SouthRightCorner;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.SouthTop;
-import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.Up;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.UpBottom;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.UpBottomCorner;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.UpLeft;
@@ -41,15 +36,16 @@ import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.Up
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.UpRightCorner;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.UpTop;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.UpTopCorner;
-import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.West;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.WestBottom;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.WestLeft;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.WestRight;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.WestRightCorner;
 import ip.industrialProcessing.subMod.logic.network.transport.wired.bus.model.WestTop;
+
+import javax.swing.Icon;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.util.Icon;
 
 import org.lwjgl.util.vector.Vector3f;
 
@@ -64,6 +60,7 @@ public class ModelDisplayPanel  extends ModelBlock {
 	ObjMesh[][] cornerConnections = new ObjMesh[][]{{new DownLeftCorner(),new DownRightCorner(),new DownTopCorner(),new DownBottomCorner()},{new UpLeftCorner(),new UpRightCorner(),new UpTopCorner(),new UpBottomCorner()},{null,new NorthRightCorner(),null,null},{null,new SouthRightCorner(),null,null},{null,new WestRightCorner(),null,null},{null,new EastRightCorner(),null,null}};
 	
 	
+	@Override
 	public void renderInventory(Block block, int metadata, int modelID, RenderBlocks renderer) {
 
 		int dir = 0;

@@ -11,17 +11,11 @@ import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
 import ip.industrialProcessing.transport.items.conveyorBelt.BlockConveyorMachineBase;
 import ip.industrialProcessing.utils.IDescriptionBlock;
 
-import java.awt.Rectangle;
-import java.util.List;
+import javax.swing.Icon;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Icon;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockConveyorInput extends BlockConveyorMachineBase implements IDescriptionBlock, IGuiLayout {

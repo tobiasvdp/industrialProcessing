@@ -1,14 +1,12 @@
 package ip.industrialProcessing.client.render;
 
-import org.lwjgl.opengl.GL11;
-
 import ip.industrialProcessing.api.config.INamepace;
-import ip.industrialProcessing.subMod.mine.machines.mining.bobcatMiner.model.ModelBobcatMiner;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
 
 public class RendererEntity extends Render{
 	
@@ -18,7 +16,7 @@ public class RendererEntity extends Render{
 	public RendererEntity(ModelEntity model, String texture) {
 		super();
 		this.texture = new ResourceLocation(INamepace.TEXTURE_DOMAIN, "textures/render/"+ texture +".png");
-		this.model = (ModelEntity) model;
+		this.model = model;
 	}
 
 	@Override

@@ -1,14 +1,14 @@
 package ip.industrialProcessing.multiblock.dummy.extend;
 
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTankInfo;
 import ip.industrialProcessing.api.tanks.IPfluidTank;
 import ip.industrialProcessing.api.tanks.ITank;
 import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
 import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTank;
 import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTankInfo;
 
 public class TileEntityMultiblockDummyTank extends TileEntityMultiblockDummy implements ITank{
 	public TileEntityMultiblockDummyTank() {

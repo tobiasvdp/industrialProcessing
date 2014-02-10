@@ -4,11 +4,10 @@ import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.multiblock.core.BlockMultiblockCore;
 import ip.industrialProcessing.subMod.blackSmith.IPBlackSmith;
 import ip.industrialProcessing.subMod.blackSmith.config.ConfigBlackSmith;
-import ip.industrialProcessing.subMod.blackSmith.plant.bloomery.TileEntityBloomery;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.creativetab.CreativeTabs;
+
+import javax.swing.Icon;
+
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 
 public class BlockTripHammer extends BlockMultiblockCore {
