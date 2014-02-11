@@ -5,6 +5,7 @@ import java.util.Random;
 import cpw.mods.fml.common.registry.GameRegistry;
 import mod.industrialProcessing.utils.INamepace;
 import net.minecraft.block.Block;
+import net.minecraft.block.Block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
@@ -16,21 +17,30 @@ public class BlockIP extends Block {
 	boolean dropItems = false;
 	Item dropItem;
 
-	public BlockIP(String name, float hardness, Material blockMaterial, SoundType stepSound) {
-		super(blockMaterial);
+	public BlockIP(float hardness, float resistance, Material material, SoundType soundtype) {
+		super(material);
 		setHardness(hardness);
-		setStepSound(stepSound);
-		setBlockTextureName(INamepace.TEXTURE_NAME_PREFIX + name);
-		GameRegistry.registerBlock(this, name);
+		setResistance(resistance);
+		setStepSound(soundtype);
 	}
+	
 
-	public BlockIP(String name, float hardness, Material blockMaterial, SoundType stepSound, Item dropitem) {
-		super(blockMaterial);
+	public BlockIP(float hardness, float resistance, Material material, SoundType soundtype,Item dropitem) {
+		super(material);
 		setHardness(hardness);
-		setStepSound(stepSound);
-		setBlockTextureName(INamepace.TEXTURE_NAME_PREFIX + name);
+		setResistance(resistance);
+		setStepSound(soundtype);
 		this.dropItems = true;
 		this.dropItem = dropitem;
+	}
+	
+	public BlockIP(float hardness, float resistance, Material material, SoundType soundtype,Block dropitem) {
+		super(material);
+		setHardness(hardness);
+		setResistance(resistance);
+		setStepSound(soundtype);
+		this.dropItems = true;
+		this.dropItem = Item.getItemFromBlock(dropitem);
 	}
 
 	@Override

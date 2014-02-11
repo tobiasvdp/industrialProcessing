@@ -5,12 +5,32 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+import mod.industrialProcessing.creativeTab.ISetupCreativeTabs;
+import mod.industrialProcessing.utils.INamepace;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
 public class ItemRegistry {
 	private static HashMap<Item, ItemType[]> array = new HashMap<Item, ItemType[]>();
 	
-	public static void RegisterItem(Item item, ItemType... type) {
+	public static void registerItem(Item item, String unlocalizedName){
+		item.setUnlocalizedName(unlocalizedName);
+		item.setTextureName(INamepace.TEXTURE_NAME_PREFIX + unlocalizedName);
+		item.setCreativeTab(ISetupCreativeTabs.tabItems);
+		GameRegistry.registerItem(item, unlocalizedName);
+		registerItem(item, ItemType.item);
+	}
+	
+	public static void registerItem(Item item, String unlocalizedName, CreativeTabs tab){
+		item.setUnlocalizedName(unlocalizedName);
+		item.setTextureName(INamepace.TEXTURE_NAME_PREFIX + unlocalizedName);
+		item.setCreativeTab(tab);
+		GameRegistry.registerItem(item, unlocalizedName);
+		registerItem(item, ItemType.item);
+	}
+	
+	private static void registerItem(Item item, ItemType... type) {
 		array.put(item, type);
 	}
 

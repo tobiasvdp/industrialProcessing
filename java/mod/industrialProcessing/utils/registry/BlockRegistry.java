@@ -17,14 +17,23 @@ import net.minecraftforge.oredict.OreDictionary;
 public class BlockRegistry {
 	private static HashMap<Block, BlockType[]> array = new HashMap<Block, BlockType[]>();
 
-	public static void registerOre(Block block, String uniqueId, String oreDictionaryKey, int level, BlockType... type) {
+	public static void registerOre(Block block, String uniqueId, String oreDictionaryKey, int level) {
 		GameRegistry.registerBlock(block, uniqueId);
 		block.setBlockName(uniqueId);
 		block.setBlockTextureName(IndustrialProcessing.TEXTURE_NAME_PREFIX + uniqueId);
 		block.setCreativeTab(IndustrialProcessing.tabOres);
 		block.setHarvestLevel("pickaxe", level);
 		OreDictionary.registerOre(oreDictionaryKey, block);
-		RegisterBlock(block, type);
+		RegisterBlock(block, BlockType.Ore);
+	}
+	
+	public static void registerBlock(Block block, String uniqueId, String harvest, int level) {
+		GameRegistry.registerBlock(block, uniqueId);
+		block.setBlockName(uniqueId);
+		block.setBlockTextureName(IndustrialProcessing.TEXTURE_NAME_PREFIX + uniqueId);
+		block.setCreativeTab(IndustrialProcessing.tabBlocks);
+		block.setHarvestLevel(harvest, level);
+		RegisterBlock(block, BlockType.Block);
 	}
 	
 	private static void RegisterBlock(Block block, BlockType[] type) {

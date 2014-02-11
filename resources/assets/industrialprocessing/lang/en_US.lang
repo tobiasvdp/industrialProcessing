@@ -1,6 +1,137 @@
-IP.itemGroup.ores=ores
-IP.itemGroup.machines=machines
+IP.itemGroup.ores=Ores
+IP.itemGroup.blocks=Blocks
+IP.itemGroup.machines=Machines
+IP.itemGroup.items=Items
 
 IP.blockType.ore=ore
 
 IP.itemType.item=item
+
+tile.IP.ore.bauxiteOre.name=Bauxite ore
+tile.IP.ore.copperOre.name=Copper ore
+tile.IP.ore.tinOre.name=Tin ore
+tile.IP.ore.galenaOre.name=Galena ore
+tile.IP.ore.rutileOre.name=Rutile ore
+tile.IP.ore.chromiteOre.name=Chromite ore
+tile.IP.ore.cinnebarOre.name=Cinnebar ore
+tile.IP.ore.taliaOre.name=Talia ore
+
+tile.IP.block.girt.name=Girt
+tile.IP.block.asphalt.name=Asphalt
+tile.IP.block.cobbleLimestone.name=Cobble limestone
+tile.IP.block.limestone.name=Limestone
+tile.IP.block.hardSand.name=Hard sand
+tile.IP.block.log.name=Log
+
+IP.item.ironBracket=Iron bracket	
+IP.item.paintBrush=Paintbrush
+IP.item.copperBar=Copper bar
+IP.item.ironBowl=Iron bowl
+IP.item.remote=Remote
+IP.item.turbineBlades=Turbine blades
+IP.item.ironBlade=Iron blade
+IP.item.leadIngot=Lead ingot
+IP.item.filterTray=Filter tray
+IP.item.magneticPoles=Magnetic poles
+IP.item.smallEngine=Small engine
+IP.item.guide=Industrial processing
+IP.item.redstoneCircuitry=Redstone circuitry
+IP.item.solderAlloyIngot=Solder alloy ingot
+IP.item.solderAlloyWire=Solder alloy wire
+IP.item.unhardenedIsolationBoard=Unhardened isolation board
+IP.item.fiberGlass=Fiber glass
+IP.item.aluminumDust=Aluminum dust
+IP.item.hardenedSandDust=Hardened sand dust
+IP.item.copperBoard=Copper board
+IP.item.electronicComponents=Electronic components
+IP.item.isolationBoard=Isolation board
+IP.item.pcb=PCB
+IP.item.pcbCircuit=PCB circuit
+IP.item.solder=Solder
+IP.item.emptySolderRing=Empty solder ring
+Soldering iron
+Stripboard
+Stripboard circuit
+Copper plate
+Casting mulsh
+Sand cast
+Sand cast: Ingot
+Flask
+Coke pellet
+Limestone dust
+Screen
+Frame
+Woven pattern
+Mixing hook
+Heating element
+Tumbler
+Rake arm
+Disk
+Pestle
+Draw plate
+Slip ring
+Carbon brush
+Iron T-shape
+Iron rod
+Iron bar
+Motor stator
+Motor rotor
+Motor frame
+Electromagnet
+Insulated copper wire
+Copper coil
+Copper wire
+Crank wheel
+Copper ingot
+Tin ingot
+Silver ingot
+Small crushed cinnebar crystals
+Large crushed cinnebar crystals
+Activated coal
+Coal dust
+Grown culture
+Wrench
+Battery
+Hex Key
+Small machine casing
+Input port
+Output port
+Power port
+Crushing plate
+Iron plate
+Iron tips
+Crusher machine case
+Large iron Chunks
+Large copper Chunks
+Large tin Chunks
+Small iron Chunks
+Small copper Chunks
+Small tin Chunks
+Crushed iron Chunks
+Crushed copper Chunks
+Crushed tin Chunks
+Washed iron Chunks
+Washed copper Chunks
+Washed tin Chunks
+Fine iron Chunks
+Fine copper Chunks
+Fine tin Chunks
+Iron oxide Dust
+Copper mineral
+Tin oxide Dust
+Iron mixed fragments
+Copper mixed fragments
+Tin mixed fragments
+Silicium
+zinc Dust
+Purified copper
+Purified tin
+Sulfur
+Thick stick
+Hammer
+Knife
+Blow torch
+Iron sinter
+Calcareous sinter dust
+Cokes
+Slag

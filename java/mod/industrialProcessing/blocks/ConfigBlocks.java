@@ -22,19 +22,15 @@ public class ConfigBlocks {
 		BlockRegistry.registerOre(ISetupBlocks.blockCinnebarOre, "IP.ore.cinnebarOre", "cinnebar", 1);
 		BlockRegistry.registerOre(ISetupBlocks.blockTaliaOre, "IP.ore.taliaOre", "talia", 3);
 	}
-
-	private void registerBlock(Block block, String uniqueId, String displayName, BlockType... type) {
-		GameRegistry.registerBlock(block, uniqueId);
-		MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
-		LanguageRegistry.addName(block, displayName);
-		BlockRegistry.RegisterBlock(block, type);
-	}
-
-	private void registerBlock(Block block, Class<? extends ItemBlock> itemBlock, String uniqueId, String displayName, BlockType... type) {
-		GameRegistry.registerBlock(block, itemBlock, uniqueId);
-		MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
-		LanguageRegistry.addName(block, displayName);
-		BlockRegistry.RegisterBlock(block, type);
+	
+	public void registerBlocks(){
+		BlockRegistry.registerBlock(ISetupBlocks.blockGrit, "IP.block.girt","shovel",0);
+		BlockRegistry.registerBlock(ISetupBlocks.blockAsphalt, "IP.block.asphalt","pickaxe",2);
+		BlockRegistry.registerBlock(ISetupBlocks.blockCobbleLimestone, "IP.block.cobbleLimestone","pickaxe",0);
+		BlockRegistry.registerBlock(ISetupBlocks.blockLimestone, "IP.block.limestone","pickaxe",0);
+		BlockRegistry.registerBlock(ISetupBlocks.blockHardSand, "IP.block.hardSand","shovel",0);
+		
+		BlockRegistry.registerBlock(ISetupBlocks.blockLog, "IP.block.log","axe",0);
 	}
 
 	private static ConfigBlocks instance = new ConfigBlocks();

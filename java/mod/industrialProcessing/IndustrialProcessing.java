@@ -13,6 +13,8 @@ import mod.industrialProcessing.blocks.BlockIP;
 import mod.industrialProcessing.blocks.ConfigBlocks;
 import mod.industrialProcessing.blocks.ISetupBlocks;
 import mod.industrialProcessing.creativeTab.ISetupCreativeTabs;
+import mod.industrialProcessing.items.ConfigItems;
+import mod.industrialProcessing.items.ISetupItems;
 import mod.industrialProcessing.utils.INamepace;
 import cpw.mods.fml.common.InjectedModContainer;
 import cpw.mods.fml.common.Loader;
@@ -27,8 +29,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid = IndustrialProcessing.MODID, version = IndustrialProcessing.VERSION)
-public class IndustrialProcessing implements INamepace, ISetupCreativeTabs,
-		ISetupBlocks {
+public class IndustrialProcessing implements INamepace, ISetupCreativeTabs, ISetupItems, ISetupBlocks {
 	public static final String MODID = "IndustrialProcessing";
 	public static final String VERSION = "0.0.3";
 	private static ModContainer container;
@@ -38,8 +39,14 @@ public class IndustrialProcessing implements INamepace, ISetupCreativeTabs,
 		container = Loader.instance().activeModContainer();
 		LanguageRegistry.instance().loadLanguagesFor(container, Side.SERVER);
 
+		//register items
+		ConfigItems.getInstance().registerItems();
+		
 		// register ores
 		ConfigBlocks.getInstance().registerOres();
+		
+		// register blocks
+		ConfigBlocks.getInstance().registerBlocks();
 
 	}
 
