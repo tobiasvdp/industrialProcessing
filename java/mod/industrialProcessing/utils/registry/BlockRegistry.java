@@ -9,6 +9,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import mod.industrialProcessing.IndustrialProcessing;
 import net.minecraft.block.Block;
+import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -17,9 +19,10 @@ public class BlockRegistry {
 
 	public static void registerOre(Block block, String uniqueId, String oreDictionaryKey, int level, BlockType... type) {
 		GameRegistry.registerBlock(block, uniqueId);
+		block.setBlockName(uniqueId);
 		block.setBlockTextureName(IndustrialProcessing.TEXTURE_NAME_PREFIX + uniqueId);
 		block.setCreativeTab(IndustrialProcessing.tabOres);
-		MinecraftForge.setBlockHarvestLevel(block, "pickaxe", level);
+		block.setHarvestLevel("pickaxe", level);
 		OreDictionary.registerOre(oreDictionaryKey, block);
 		RegisterBlock(block, type);
 	}
