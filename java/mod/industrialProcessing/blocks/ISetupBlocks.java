@@ -1,6 +1,7 @@
 package mod.industrialProcessing.blocks;
 
 import mod.industrialProcessing.IndustrialProcessing;
+import mod.industrialProcessing.blocks.crystals.BlockCrystal;
 import mod.industrialProcessing.blocks.ore.BlockIPOre;
 import mod.industrialProcessing.blocks.tree.BlockIndustrialLeaves;
 import mod.industrialProcessing.blocks.tree.BlockIndustrialLog;
@@ -30,10 +31,9 @@ public interface ISetupBlocks {
 	/*
 	 * public final static BlockPlatform blockPlatform = new BlockPlatform();
 	 * public final static BlockStairs blockStairs = new BlockStairs(); public
-	 * 
-	 * public final static BlockCinnebar blockCinnebar = new BlockCinnebar();
-	 * public public final static BlockRutile blockRutile = new BlockRutile();
 	 */
+	public final static BlockCrystal blockCinnebar = new BlockCrystal();
+	public final static BlockCrystal blockRutile = new BlockCrystal();
 
 	public final static BlockIndustrialLeaves blockLeaves = new BlockIndustrialLeaves();
 	public final static BlockIndustrialLog blockLog = new BlockIndustrialLog();

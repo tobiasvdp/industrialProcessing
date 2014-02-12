@@ -21,7 +21,10 @@ tile.IP.block.asphalt.name=Asphalt
 tile.IP.block.cobbleLimestone.name=Cobble limestone
 tile.IP.block.limestone.name=Limestone
 tile.IP.block.hardSand.name=Hard sand
-tile.IP.block.log.name=Log
+tile.IP.block.tree.log.rubber.name=Rubber log
+tile.IP.block.tree.log.pine.name=Pine log
+tile.IP.block.rutile.name=Rutile crystal
+tile.IP.block.cinnebar.name=Cinnebar crystal
 
 item.IP.item.ironBracket.name=Iron bracket	
 item.IP.item.paintBrush.name=Paintbrush

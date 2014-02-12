@@ -30,6 +30,8 @@ public class ConfigBlocks {
 		BlockRegistry.registerBlock(ISetupBlocks.blockCobbleLimestone, "IP.block.cobbleLimestone","pickaxe",0);
 		BlockRegistry.registerBlock(ISetupBlocks.blockLimestone, "IP.block.limestone","pickaxe",0);
 		BlockRegistry.registerBlock(ISetupBlocks.blockHardSand, "IP.block.hardSand","shovel",0);
+		BlockRegistry.registerBlock(ISetupBlocks.blockRutile, "IP.block.rutile", "pickaxe", 2);
+		BlockRegistry.registerBlock(ISetupBlocks.blockCinnebar, "IP.block.cinnebar", "pickaxe", 1);
 				
 		BlockRegistry.registerMetadataBlock(ISetupBlocks.blockLeaves,"IP.block.tree.leaves", "axe",0);
 		BlockRegistry.registerMetadataBlock(ISetupBlocks.blockLog, "IP.block.tree.log", "axe",0);

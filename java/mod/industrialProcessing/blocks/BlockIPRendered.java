@@ -5,6 +5,8 @@ import net.minecraft.world.IBlockAccess;
 
 public class BlockIPRendered extends BlockIP {
 
+	int renderID;
+
 	public BlockIPRendered(float hardness, float resistance, Material material, SoundType soundtype) {
 		super(hardness, resistance, material, soundtype);
 	}
@@ -22,5 +24,14 @@ public class BlockIPRendered extends BlockIP {
 	@Override
 	public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l) {
 		return false;
+	}
+
+	public void setRenderID(int id) {
+		renderID = id;
+	}
+
+	@Override
+	public int getRenderType() {
+		return renderID;
 	}
 }
