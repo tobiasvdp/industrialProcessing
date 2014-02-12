@@ -1,15 +1,15 @@
-package ip.industrialProcessing.decoration.platforms;
-
-import ip.industrialProcessing.api.rendering.connectedTile.ConnectionCompass;
-import ip.industrialProcessing.api.rendering.connectedTile.TileConnection;
-import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
-import ip.industrialProcessing.client.render.ModelBlock;
+package mod.industrialProcessing.blocks.platforms;
 
 import javax.swing.Icon;
 
+import mod.industrialProcessing.client.rendering.ModelBlock;
+import mod.industrialProcessing.client.rendering.obj.connectedTile.ConnectionCompass;
+import mod.industrialProcessing.client.rendering.obj.connectedTile.TileConnection;
+import mod.industrialProcessing.client.rendering.obj.wavefront.WorldReference;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.IIcon;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
@@ -52,7 +52,7 @@ public class ModelStairs extends ModelBlock {
 	@Override
 	public void renderInventory(Block block, int metadata, int modelID, RenderBlocks renderer) {
 
-		Icon icon = block.getIcon(0, 0);
+		IIcon icon = block.getIcon(0, 0);
 		Vector3f position = new Vector3f(0, 0, 0);
 		GL11.glPushMatrix();
 		// GL11.glTranslatef(0, -0.5f, 0);
@@ -70,10 +70,10 @@ public class ModelStairs extends ModelBlock {
 
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.setColorOpaque(255, 255, 255);
-		Icon icon = reference.getIcon(0);
+		IIcon icon = reference.getIcon(0);
 		int rotation = reference.getBlockMetadata();
 		rotation %= 4;
- 
+
 
 		ConnectionCompass compass = new ConnectionCompass();
 

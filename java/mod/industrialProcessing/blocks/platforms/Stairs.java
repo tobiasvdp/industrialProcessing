@@ -1,7 +1,7 @@
-package ip.industrialProcessing.decoration.platforms;
+package mod.industrialProcessing.blocks.platforms;
 
-import ip.industrialProcessing.api.rendering.wavefront.ObjMesh;
-import ip.industrialProcessing.api.rendering.wavefront.ObjQuad;
+import mod.industrialProcessing.client.rendering.obj.wavefront.ObjMesh;
+import mod.industrialProcessing.client.rendering.obj.wavefront.ObjQuad;
 
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector2f;

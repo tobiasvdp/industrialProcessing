@@ -1,14 +1,11 @@
-package ip.industrialProcessing.decoration.platforms;
-
-import ip.industrialProcessing.api.config.INamepace;
-import ip.industrialProcessing.api.rendering.connectedTile.ConnectionCompass;
-import ip.industrialProcessing.api.rendering.connectedTile.TileConnection;
-import ip.industrialProcessing.config.ConfigBlocks;
-import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.config.ISetupCreativeTabs;
+package mod.industrialProcessing.blocks.platforms;
 
 import java.util.List;
 
+import mod.industrialProcessing.blocks.ConfigBlocks;
+import mod.industrialProcessing.blocks.ISetupBlocks;
+import mod.industrialProcessing.client.rendering.obj.connectedTile.ConnectionCompass;
+import mod.industrialProcessing.client.rendering.obj.connectedTile.TileConnection;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -24,10 +21,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class BlockStairs extends BlockScaffolding {
 
 	public BlockStairs() {
-		super(ConfigBlocks.getStairsBlockID(), Material.iron, 1f, Block.soundMetalFootstep, "Walkway stairs", ISetupCreativeTabs.tabPower);
+		super(1.0f,1.0f, Material.iron, Block.soundTypeMetal);
 		this.setBlockBounds(0, 0, 0, 1, 2, 1);
-		setTextureName(INamepace.TEXTURE_NAME_PREFIX + "platformFloor");
-		setStepSound(soundMetalFootstep);
 	}
 
 	@Override
@@ -57,8 +52,7 @@ public class BlockStairs extends BlockScaffolding {
 			ty++;
 		}
 
-		int blockID = par1World.getBlockId(tx, ty, tz);
-		Block block = blocksList[blockID];
+		Block block = par1World.getBlock(tx, ty, tz);
 		if (block instanceof BlockScaffolding) {
 			BlockScaffolding scaffold = (BlockScaffolding) block;
 			return scaffold.placeScaffolding(par1World, tx, ty, tz, stack, placeTarget, par5EntityPlayer, distance++);
@@ -109,14 +103,14 @@ public class BlockStairs extends BlockScaffolding {
 		int x2 = x + dx;
 		int y2 = y + dy;
 		int z2 = z + dz;
-		int id = world.getBlockId(x2, y2, z2);
+		Block block = world.getBlock(x2, y2, z2);
 		if (isSolid(world, x2, y2, z2))
 			return TileConnection.WALL;
-		if (id == ConfigBlocks.getStairsBlockID()) {
+		if (block == ISetupBlocks.blockStairs) {
 			int meta2 = world.getBlockMetadata(x2, y2, z2);
 			if (meta == meta2)
 				return TileConnection.CONNECTED;
-		} else if (id == ConfigBlocks.getPlatformBlockID()) {
+		} else if (block == ISetupBlocks.blockPlatform) {
 			return TileConnection.GROUND;
 		}
 		if (isSolid(world, x2, y2 - 1, z2))
@@ -125,9 +119,9 @@ public class BlockStairs extends BlockScaffolding {
 	}
 
 	protected boolean isSolid(IBlockAccess world, int x, int y, int z) {
-		if (world.isBlockOpaqueCube(x, y, z))
+		if (world.getBlock(x, y, z).isOpaqueCube())
 			return true;
-		if (world.isBlockNormalCube(x, y, z))
+		if (world.getBlock(x, y, z).isBlockNormalCube())
 			return true;
 		return false;
 	}
@@ -256,10 +250,5 @@ public class BlockStairs extends BlockScaffolding {
 			break;
 		}
 		this.setBlockBounds(0, 0, 0, 1, 1, 1);
-	}
-
-	@Override
-	public int getRenderType() {
-		return ConfigRenderers.getRendererStairsId();
 	}
 }

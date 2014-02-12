@@ -1,7 +1,7 @@
-package ip.industrialProcessing.decoration.platforms;
+package mod.industrialProcessing.blocks.platforms;
 
-import ip.industrialProcessing.api.rendering.wavefront.ObjMesh;
-import ip.industrialProcessing.api.rendering.wavefront.ObjQuad;
+import mod.industrialProcessing.client.rendering.obj.wavefront.ObjMesh;
+import mod.industrialProcessing.client.rendering.obj.wavefront.ObjQuad;
 
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector2f;
@@ -21,7 +21,7 @@ public class StairsCap2 extends ObjMesh {
 		this.quads[7] = new ObjQuad(new Vector3f(-0.6f, 0.8f, 0.8f),new Vector3f(-0.6f, 0.9f, 0.8f),new Vector3f(-0.7f, 0.9f, 0.8f),new Vector3f(-0.7f, 0.8f, 0.8f),new Vector2f(0.0625f, 0.9375f),new Vector2f(0.0625f, 1.0f),new Vector2f(0.0f, 1.0f),new Vector2f(0.0f, 0.9375f),new Vector3f(0.0f, 0.0f, 4.0f));
 		this.quads[8] = new ObjQuad(new Vector3f(-0.7f, 0.9f, 0.8f),new Vector3f(-0.7f, 0.9f, -0.0f),new Vector3f(-0.7f, 0.8f, -0.0f),new Vector3f(-0.7f, 0.8f, 0.8f),new Vector2f(1.0f, 1.0f),new Vector2f(0.5f, 1.0f),new Vector2f(0.5f, 0.9375f),new Vector2f(1.0f, 0.9375f),new Vector3f(-4.0f, 0.0f, 0.0f));
 		this.quads[9] = new ObjQuad(new Vector3f(-0.7f, 0.8f, -0.0f),new Vector3f(-0.7f, 0.9f, -0.0f),new Vector3f(-0.6f, 0.9f, -0.0f),new Vector3f(-0.6f, 0.8f, -0.0f),new Vector2f(1.0f, 0.75f),new Vector2f(1.0f, 0.8125f),new Vector2f(0.9375f, 0.8125f),new Vector2f(0.9375f, 0.75f),new Vector3f(0.0f, 0.0f, -4.0f));
-}
+	}
 
 	@Override
 	public ObjMesh cloneTransformed(Matrix4f transform) {

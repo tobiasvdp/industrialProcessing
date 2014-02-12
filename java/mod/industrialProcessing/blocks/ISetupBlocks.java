@@ -3,6 +3,8 @@ package mod.industrialProcessing.blocks;
 import mod.industrialProcessing.IndustrialProcessing;
 import mod.industrialProcessing.blocks.crystals.BlockCrystal;
 import mod.industrialProcessing.blocks.ore.BlockIPOre;
+import mod.industrialProcessing.blocks.platforms.BlockPlatform;
+import mod.industrialProcessing.blocks.platforms.BlockStairs;
 import mod.industrialProcessing.blocks.tree.BlockIndustrialLeaves;
 import mod.industrialProcessing.blocks.tree.BlockIndustrialLog;
 import mod.industrialProcessing.blocks.tree.BlockIndustrialSapling;
@@ -28,10 +30,8 @@ public interface ISetupBlocks {
 	public final static BlockIP blockLimestone = (BlockIP) new BlockIP(2.0f, 5.0f, Material.ground, Block.soundTypeStone, IndustrialProcessing.blockCobbleLimestone).setCreativeTab(IndustrialProcessing.tabOres);
 	public final static BlockIP blockHardSand = (BlockIP) new BlockIP(2.0f, 5.0f, Material.ground, Block.soundTypeSand);
 
-	/*
-	 * public final static BlockPlatform blockPlatform = new BlockPlatform();
-	 * public final static BlockStairs blockStairs = new BlockStairs(); public
-	 */
+	public final static BlockPlatform blockPlatform = new BlockPlatform();
+	public final static BlockStairs blockStairs = new BlockStairs();
 	public final static BlockCrystal blockCinnebar = new BlockCrystal();
 	public final static BlockCrystal blockRutile = new BlockCrystal();
 

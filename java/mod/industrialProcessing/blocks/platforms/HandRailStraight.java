@@ -1,7 +1,7 @@
-package ip.industrialProcessing.decoration.platforms;
+package mod.industrialProcessing.blocks.platforms;
 
-import ip.industrialProcessing.api.rendering.wavefront.ObjMesh;
-import ip.industrialProcessing.api.rendering.wavefront.ObjQuad;
+import mod.industrialProcessing.client.rendering.obj.wavefront.ObjMesh;
+import mod.industrialProcessing.client.rendering.obj.wavefront.ObjQuad;
 
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector2f;
@@ -30,7 +30,7 @@ public class HandRailStraight extends ObjMesh {
 		this.quads[17] = new ObjQuad(new Vector3f(0.6f, 1.3f, 0.7f),new Vector3f(0.6f, 1.3f, 0.8f),new Vector3f(-0.6f, 1.3f, 0.8f),new Vector3f(-0.6f, 1.3f, 0.7f),new Vector2f(0.125f, 0.0625f),new Vector2f(0.125f, -0.0f),new Vector2f(0.875f, 0.0f),new Vector2f(0.875f, 0.0625f),new Vector3f(0.0f, -4.0f, 0.0f));
 		this.quads[18] = new ObjQuad(new Vector3f(-0.6f, 0.9f, 0.7f),new Vector3f(-0.6f, 0.9f, 0.8f),new Vector3f(0.6f, 0.9f, 0.8f),new Vector3f(0.6f, 0.9f, 0.7f),new Vector2f(0.125f, 0.0625f),new Vector2f(0.125f, 0.0f),new Vector2f(0.875f, -0.0f),new Vector2f(0.875f, 0.0625f),new Vector3f(0.0f, 4.0f, 0.0f));
 		this.quads[19] = new ObjQuad(new Vector3f(-0.6f, 1.4f, 0.7f),new Vector3f(-0.6f, 1.4f, 0.8f),new Vector3f(0.6f, 1.4f, 0.8f),new Vector3f(0.6f, 1.4f, 0.7f),new Vector2f(0.125f, 0.0625f),new Vector2f(0.125f, 0.0f),new Vector2f(0.875f, -0.0f),new Vector2f(0.875f, 0.0625f),new Vector3f(0.0f, 4.0f, 0.0f));
-}
+	}
 
 	@Override
 	public ObjMesh cloneTransformed(Matrix4f transform) {

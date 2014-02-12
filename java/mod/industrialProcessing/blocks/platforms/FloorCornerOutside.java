@@ -1,7 +1,7 @@
-package ip.industrialProcessing.decoration.platforms;
+package mod.industrialProcessing.blocks.platforms;
 
-import ip.industrialProcessing.api.rendering.wavefront.ObjMesh;
-import ip.industrialProcessing.api.rendering.wavefront.ObjQuad;
+import mod.industrialProcessing.client.rendering.obj.wavefront.ObjMesh;
+import mod.industrialProcessing.client.rendering.obj.wavefront.ObjQuad;
 
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector2f;
@@ -15,7 +15,7 @@ public class FloorCornerOutside extends ObjMesh {
 		this.quads[2] = new ObjQuad(new Vector3f(0.7f, 0.0f, 0.7f),new Vector3f(0.6f, 0.0f, 0.7f),new Vector3f(0.6f, 0.0f, 0.6f),new Vector3f(0.7f, 0.0f, 0.6f),new Vector2f(1.0f, 1.0f),new Vector2f(0.9375f, 1.0f),new Vector2f(0.9375f, 0.9375f),new Vector2f(1.0f, 0.9375f),new Vector3f(0.0f, -4.0f, 0.0f));
 		this.quads[3] = new ObjQuad(new Vector3f(0.7f, 0.1f, 0.7f),new Vector3f(0.7f, 0.0f, 0.7f),new Vector3f(0.7f, 0.0f, 0.6f),new Vector3f(0.7f, 0.1f, 0.6f),new Vector2f(1.0f, 1.0f),new Vector2f(0.9375f, 1.0f),new Vector2f(0.9375f, 0.9375f),new Vector2f(1.0f, 0.9375f),new Vector3f(4.0f, 0.0f, 0.0f));
 	}
-	
+
 	@Override
 	public ObjMesh cloneTransformed(Matrix4f transform) {
 		FloorCornerOutside other = new FloorCornerOutside();

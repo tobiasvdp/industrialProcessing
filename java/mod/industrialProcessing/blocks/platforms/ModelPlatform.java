@@ -1,16 +1,16 @@
-package ip.industrialProcessing.decoration.platforms;
-
-import ip.industrialProcessing.api.rendering.connectedTile.ConnectionCompass;
-import ip.industrialProcessing.api.rendering.connectedTile.TileConnection;
-import ip.industrialProcessing.api.rendering.wavefront.ObjMesh;
-import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
-import ip.industrialProcessing.client.render.ModelBlock;
+package mod.industrialProcessing.blocks.platforms;
 
 import javax.swing.Icon;
 
+import mod.industrialProcessing.client.rendering.ModelBlock;
+import mod.industrialProcessing.client.rendering.obj.connectedTile.ConnectionCompass;
+import mod.industrialProcessing.client.rendering.obj.connectedTile.TileConnection;
+import mod.industrialProcessing.client.rendering.obj.wavefront.ObjMesh;
+import mod.industrialProcessing.client.rendering.obj.wavefront.WorldReference;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.IIcon;
 
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
@@ -149,7 +149,7 @@ public class ModelPlatform extends ModelBlock {
 
 		Tessellator tessellator = Tessellator.instance;
 		// tessellator.setColorOpaque(255, 255, 255);
-		Icon icon = block.getIcon(0, 0);
+		IIcon icon = block.getIcon(0, 0);
 		Vector3f position = new Vector3f(0, 0, 0);
 		meshCenter.renderMesh(icon);
 		meshUnconnectedSouth.renderMesh(icon);
@@ -182,7 +182,7 @@ public class ModelPlatform extends ModelBlock {
 
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.setColorOpaque(255, 255, 255);
-		Icon icon = reference.getIcon(0); 
+		IIcon icon = reference.getIcon(0); 
 		meshCenter.renderMesh(false, icon, reference);
 
 		renderConnection(icon, reference, compass.connectionS, meshConnectedSouth, meshUnconnectedSouth, meshHandRailStraightSouth);
@@ -201,7 +201,7 @@ public class ModelPlatform extends ModelBlock {
 		return true;
 	}
 
-	private void renderCorner(Icon icon, WorldReference position, TileConnection connectionE, TileConnection connectionSE, TileConnection connectionS, ObjMesh meshCornerOutside, ObjMesh meshCornerFull, ObjMesh meshCornerInside, ObjMesh straight1, ObjMesh straight2, ObjMesh meshHandRailOutside, ObjMesh meshHandRailStraight1, ObjMesh meshHandRailStraight2, ObjMesh meshHandRailCap1, ObjMesh meshHandRailCap2, ObjMesh meshHandRailCornerInside) {
+	private void renderCorner(IIcon icon, WorldReference position, TileConnection connectionE, TileConnection connectionSE, TileConnection connectionS, ObjMesh meshCornerOutside, ObjMesh meshCornerFull, ObjMesh meshCornerInside, ObjMesh straight1, ObjMesh straight2, ObjMesh meshHandRailOutside, ObjMesh meshHandRailStraight1, ObjMesh meshHandRailStraight2, ObjMesh meshHandRailCap1, ObjMesh meshHandRailCap2, ObjMesh meshHandRailCornerInside) {
 
 		boolean airStateE = connectionE == TileConnection.AIR || connectionE == TileConnection.STAIRSTOP || connectionE == TileConnection.STAIRSSIDE;
 		boolean airStateSE = connectionSE == TileConnection.AIR || connectionSE == TileConnection.STAIRSTOP || connectionSE == TileConnection.STAIRSSIDE;
@@ -308,7 +308,7 @@ public class ModelPlatform extends ModelBlock {
 
 	}
 
-	private void renderConnection(Icon icon, WorldReference position, TileConnection connection, ObjMesh meshConnected, ObjMesh meshUnconnected, ObjMesh handrail) {
+	private void renderConnection(IIcon icon, WorldReference position, TileConnection connection, ObjMesh meshConnected, ObjMesh meshUnconnected, ObjMesh handrail) {
 
 		if (connection == TileConnection.AIR || connection == TileConnection.GROUND || connection == TileConnection.MACHINE || connection == TileConnection.STAIRSTOP || connection == TileConnection.STAIRS || connection == TileConnection.STAIRSSIDE) {
 			meshUnconnected.renderMesh(false, icon, position);

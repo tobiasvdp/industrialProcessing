@@ -3,6 +3,8 @@ package mod.industrialProcessing.client;
 import mod.industrialProcessing.CommonProxy;
 import mod.industrialProcessing.blocks.ISetupBlocks;
 import mod.industrialProcessing.blocks.crystals.ModelCrystal;
+import mod.industrialProcessing.blocks.platforms.ModelPlatform;
+import mod.industrialProcessing.blocks.platforms.ModelStairs;
 import mod.industrialProcessing.client.rendering.ModelBlock;
 import mod.industrialProcessing.utils.registry.RenderRegistry;
 
@@ -139,12 +141,16 @@ public class ClientProxy extends CommonProxy {
 	 */
 
 	private static final ModelBlock crystal = new ModelCrystal();
+	private static final ModelBlock platform = new ModelPlatform();
+	private static final ModelBlock stairs = new ModelStairs();
 
 	@Override
 	public void registerRenderers() {
 
 		RenderRegistry.registerRendering(ISetupBlocks.blockCinnebar, crystal);
 		RenderRegistry.registerRendering(ISetupBlocks.blockRutile, crystal);
+		RenderRegistry.registerRendering(ISetupBlocks.blockPlatform, platform);
+		RenderRegistry.registerRendering(ISetupBlocks.blockStairs, stairs);
 
 		/*
 		 * // microblocks registerMicroblocks();
