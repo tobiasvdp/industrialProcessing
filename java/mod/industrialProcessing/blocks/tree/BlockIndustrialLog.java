@@ -59,6 +59,12 @@ public class BlockIndustrialLog extends BlockLog {
 	protected IIcon getEndIcon(int par1) {
 		return this.tree_top[par1];
 	}
+	
+    @SideOnly(Side.CLIENT)
+    protected IIcon getTopIcon(int p_150161_1_)
+    {
+        return this.tree_top[p_150161_1_];
+    }
 
 	@Override
 	public void getSubBlocks(Item p_149666_1_, CreativeTabs p_149666_2_, List p_149666_3_) {

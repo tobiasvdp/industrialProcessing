@@ -16,6 +16,7 @@ import mod.industrialProcessing.creativeTab.ISetupCreativeTabs;
 import mod.industrialProcessing.items.ConfigItems;
 import mod.industrialProcessing.items.ISetupItems;
 import mod.industrialProcessing.utils.INamepace;
+import mod.industrialProcessing.utils.handlers.worldGeneration.WorldGeneration;
 import cpw.mods.fml.common.InjectedModContainer;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -47,6 +48,9 @@ public class IndustrialProcessing implements INamepace, ISetupCreativeTabs, ISet
 		
 		// register blocks
 		ConfigBlocks.getInstance().registerBlocks();
+		
+		//register worldGeneration
+		GameRegistry.registerWorldGenerator(new WorldGeneration(), 100);
 
 	}
 

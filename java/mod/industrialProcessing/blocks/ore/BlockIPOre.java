@@ -3,6 +3,7 @@ package mod.industrialProcessing.blocks.ore;
 import java.util.Random;
 
 import mod.industrialProcessing.blocks.ISetupBlocks;
+import mod.industrialProcessing.items.ISetupItems;
 import mod.industrialProcessing.utils.inventory.ItemTransfers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockOre;

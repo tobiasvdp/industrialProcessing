@@ -5,6 +5,7 @@ import mod.industrialProcessing.utils.registry.BlockRegistry;
 import mod.industrialProcessing.utils.registry.BlockType;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemBlockWithMetadata;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -29,8 +30,13 @@ public class ConfigBlocks {
 		BlockRegistry.registerBlock(ISetupBlocks.blockCobbleLimestone, "IP.block.cobbleLimestone","pickaxe",0);
 		BlockRegistry.registerBlock(ISetupBlocks.blockLimestone, "IP.block.limestone","pickaxe",0);
 		BlockRegistry.registerBlock(ISetupBlocks.blockHardSand, "IP.block.hardSand","shovel",0);
-		
-		BlockRegistry.registerBlock(ISetupBlocks.blockLog, "IP.block.log","axe",0);
+				
+		BlockRegistry.registerMetadataBlock(ISetupBlocks.blockLeaves,"IP.block.tree.leaves", "axe",0);
+		BlockRegistry.registerMetadataBlock(ISetupBlocks.blockLog, "IP.block.tree.log", "axe",0);
+		BlockRegistry.registerBlock(ISetupBlocks.blockRubberLog, "IP.block.tree.log.rubber", "axe",0);
+		BlockRegistry.registerBlock(ISetupBlocks.blockPineLog, "IP.block.tree.log.pine", "axe",0);
+		BlockRegistry.registerMetadataBlock(ISetupBlocks.blockSapling,"IP.block.tree.sapling", "axe",0);
+
 	}
 
 	private static ConfigBlocks instance = new ConfigBlocks();

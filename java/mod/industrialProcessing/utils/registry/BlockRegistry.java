@@ -8,7 +8,10 @@ import java.util.Map.Entry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import mod.industrialProcessing.IndustrialProcessing;
+import mod.industrialProcessing.utils.forgeFixes.ItemBlockWithMeta;
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemBlockWithMetadata;
+import net.minecraft.item.ItemLeaves;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
@@ -18,23 +21,32 @@ public class BlockRegistry {
 	private static HashMap<Block, BlockType[]> array = new HashMap<Block, BlockType[]>();
 
 	public static void registerOre(Block block, String uniqueId, String oreDictionaryKey, int level) {
-		GameRegistry.registerBlock(block, uniqueId);
 		block.setBlockName(uniqueId);
 		block.setBlockTextureName(IndustrialProcessing.TEXTURE_NAME_PREFIX + uniqueId);
 		block.setCreativeTab(IndustrialProcessing.tabOres);
 		block.setHarvestLevel("pickaxe", level);
+		GameRegistry.registerBlock(block, uniqueId);
 		OreDictionary.registerOre(oreDictionaryKey, block);
 		RegisterBlock(block, BlockType.Ore);
 	}
 	
 	public static void registerBlock(Block block, String uniqueId, String harvest, int level) {
-		GameRegistry.registerBlock(block, uniqueId);
 		block.setBlockName(uniqueId);
 		block.setBlockTextureName(IndustrialProcessing.TEXTURE_NAME_PREFIX + uniqueId);
 		block.setCreativeTab(IndustrialProcessing.tabBlocks);
 		block.setHarvestLevel(harvest, level);
+		GameRegistry.registerBlock(block, uniqueId);
 		RegisterBlock(block, BlockType.Block);
 	}
+	
+	public static void registerMetadataBlock(Block block, String uniqueId, String harvest, int level) {
+		block.setBlockName(uniqueId);
+		block.setBlockTextureName(IndustrialProcessing.TEXTURE_NAME_PREFIX + uniqueId);
+		block.setHarvestLevel(harvest, level);		
+		GameRegistry.registerBlock(block, ItemBlockWithMeta.class, uniqueId);
+		RegisterBlock(block, BlockType.Block);
+	}
+
 	
 	private static void RegisterBlock(Block block, BlockType[] type) {
 		array.put(block, type);

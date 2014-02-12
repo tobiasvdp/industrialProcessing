@@ -23,115 +23,115 @@ tile.IP.block.limestone.name=Limestone
 tile.IP.block.hardSand.name=Hard sand
 tile.IP.block.log.name=Log
 
-IP.item.ironBracket=Iron bracket	
-IP.item.paintBrush=Paintbrush
-IP.item.copperBar=Copper bar
-IP.item.ironBowl=Iron bowl
-IP.item.remote=Remote
-IP.item.turbineBlades=Turbine blades
-IP.item.ironBlade=Iron blade
-IP.item.leadIngot=Lead ingot
-IP.item.filterTray=Filter tray
-IP.item.magneticPoles=Magnetic poles
-IP.item.smallEngine=Small engine
-IP.item.guide=Industrial processing
-IP.item.redstoneCircuitry=Redstone circuitry
-IP.item.solderAlloyIngot=Solder alloy ingot
-IP.item.solderAlloyWire=Solder alloy wire
-IP.item.unhardenedIsolationBoard=Unhardened isolation board
-IP.item.fiberGlass=Fiber glass
-IP.item.aluminumDust=Aluminum dust
-IP.item.hardenedSandDust=Hardened sand dust
-IP.item.copperBoard=Copper board
-IP.item.electronicComponents=Electronic components
-IP.item.isolationBoard=Isolation board
-IP.item.pcb=PCB
-IP.item.pcbCircuit=PCB circuit
-IP.item.solder=Solder
-IP.item.emptySolderRing=Empty solder ring
-Soldering iron
-Stripboard
-Stripboard circuit
-Copper plate
-Casting mulsh
-Sand cast
-Sand cast: Ingot
-Flask
-Coke pellet
-Limestone dust
-Screen
-Frame
-Woven pattern
-Mixing hook
-Heating element
-Tumbler
-Rake arm
-Disk
-Pestle
-Draw plate
-Slip ring
-Carbon brush
-Iron T-shape
-Iron rod
-Iron bar
-Motor stator
-Motor rotor
-Motor frame
-Electromagnet
-Insulated copper wire
-Copper coil
-Copper wire
-Crank wheel
-Copper ingot
-Tin ingot
-Silver ingot
-Small crushed cinnebar crystals
-Large crushed cinnebar crystals
-Activated coal
-Coal dust
-Grown culture
-Wrench
-Battery
-Hex Key
-Small machine casing
-Input port
-Output port
-Power port
-Crushing plate
-Iron plate
-Iron tips
-Crusher machine case
-Large iron Chunks
-Large copper Chunks
-Large tin Chunks
-Small iron Chunks
-Small copper Chunks
-Small tin Chunks
-Crushed iron Chunks
-Crushed copper Chunks
-Crushed tin Chunks
-Washed iron Chunks
-Washed copper Chunks
-Washed tin Chunks
-Fine iron Chunks
-Fine copper Chunks
-Fine tin Chunks
-Iron oxide Dust
-Copper mineral
-Tin oxide Dust
-Iron mixed fragments
-Copper mixed fragments
-Tin mixed fragments
-Silicium
-zinc Dust
-Purified copper
-Purified tin
-Sulfur
-Thick stick
-Hammer
-Knife
-Blow torch
-Iron sinter
-Calcareous sinter dust
-Cokes
-Slag
+item.IP.item.ironBracket.name=Iron bracket	
+item.IP.item.paintBrush.name=Paintbrush
+item.IP.item.copperBar.name=Copper bar
+item.IP.item.ironBowl.name=Iron bowl
+item.IP.item.remote.name=Remote
+item.IP.item.turbineBlades.name=Turbine blades
+item.IP.item.ironBlade.name=Iron blade
+item.IP.item.leadIngot.name=Lead ingot
+item.IP.item.filterTray.name=Filter tray
+item.IP.item.magneticPoles.name=Magnetic poles
+item.IP.item.smallEngine.name=Small engine
+item.IP.item.guide.name=Industrial processing
+item.IP.item.redstoneCircuitry.name=Redstone circuitry
+item.IP.item.solderAlloyIngot.name=Solder alloy ingot
+item.IP.item.solderAlloyWire.name=Solder alloy wire
+item.IP.item.unhardenedIsolationBoard.name=Unhardened isolation board
+item.IP.item.fiberGlass.name=Fiber glass
+item.IP.item.aluminumDust.name=Aluminum dust
+item.IP.item.hardenedSandDust.name=Hardened sand dust
+item.IP.item.copperBoard.name=Copper board
+item.IP.item.electronicComponents.name=Electronic components
+item.IP.item.isolationBoard.name=Isolation board
+item.IP.item.pcb.name=PCB
+item.IP.item.pcbCircuit.name=PCB circuit
+item.IP.item.solder.name=Solder
+item.IP.item.emptySolderRing.name=Empty solder ring
+item.IP.item.solderingIron.name=Soldering iron
+item.IP.item.stripBoard.name=Stripboard
+item.IP.item.stripboardCircuit.name=Stripboard circuit
+item.IP.item.copperPlate.name=Copper plate
+item.IP.item.castingMulsh.name=Casting mulsh
+item.IP.item.sandCast.name=Sand cast
+item.IP.item.sandCastIngot.name=Sand cast: Ingot
+item.IP.item.flask.name=Flask
+item.IP.item.cokePellet.name=Coke pellet
+item.IP.item.limestoneDust.name=Limestone dust
+item.IP.item.screen.name=Screen
+item.IP.item.frame.name=Frame
+item.IP.item.wovenPattern.name=Woven pattern
+item.IP.item.mixingHook.name=Mixing hook
+item.IP.item.heatingElement.name=Heating element
+item.IP.item.tumbler.name=Tumbler
+item.IP.item.rakeArm.name=Rake arm
+item.IP.item.disk.name=Disk
+item.IP.item.pestle.name=Pestle
+item.IP.item.drawPlate.name=Draw plate
+item.IP.item.slipRing.name=Slip ring
+item.IP.item.carbonBrush.name=Carbon brush
+item.IP.item.ironTShape.name=Iron T-shape
+item.IP.item.ironRod.name=Iron rod
+item.IP.item.ironBar.name=Iron bar
+item.IP.item.motorStator.name=Motor stator
+item.IP.item.motorRotor.name=Motor rotor
+item.IP.item.motorFrame.name=Motor frame
+item.IP.item.electroMagnet.name=Electromagnet
+item.IP.item.insulatedCopperWire.name=Insulated copper wire
+item.IP.item.copperCoil.name=Copper coil
+item.IP.item.copperWire.name=Copper wire
+item.IP.item.crankWheel.name=Crank wheel
+item.IP.item.copperIngot.name=Copper ingot
+item.IP.item.tinIngot.name=Tin ingot
+item.IP.item.silverIngot.name=Silver ingot
+item.IP.item.smallCrushedCinnebarCrystals.name=Small crushed cinnebar crystals
+item.IP.item.largeCrushedCinnebarCrystals.name=Large crushed cinnebar crystals
+item.IP.item.activatedCoal.name=Activated coal
+item.IP.item.coalDust.name=Coal dust
+item.IP.item.grownCulture.name=Grown culture
+item.IP.item.wrench.name=Wrench
+item.IP.item.battery.name=Battery
+item.IP.item.hexKey.name=Hex Key
+item.IP.item.smallMachineCasing.name=Small machine casing
+item.IP.item.inputPort.name=Input port
+item.IP.item.outputPort.name=Output port
+item.IP.item.powerPort.name=Power port
+item.IP.item.crushingPlate.name=Crushing plate
+item.IP.item.ironPlate.name=Iron plate
+item.IP.item.ironTips.name=Iron tips
+item.IP.item.crusherMachineCase.name=Crusher machine case
+item.IP.item.largeIronChunks.name=Large iron Chunks
+item.IP.item.largeCopperChunks.name=Large copper Chunks
+item.IP.item.largeTinChunks.name=Large tin Chunks
+item.IP.item.smallIronChunks.name=Small iron Chunks
+item.IP.item.smallCopperChunks.name=Small copper Chunks
+item.IP.item.smallTinChunks.name=Small tin Chunks
+item.IP.item.crushedIronChunks.name=Crushed iron Chunks
+item.IP.item.crushedCopperChunks.name=Crushed copper Chunks
+item.IP.item.crushedTinChunks.name=Crushed tin Chunks
+item.IP.item.washedIronChunks.name=Washed iron Chunks
+item.IP.item.washedCopperChunks.name=Washed copper Chunks
+item.IP.item.washedTinChunks.name=Washed tin Chunks
+item.IP.item.fineIronChunks.name=Fine iron Chunks
+item.IP.item.fineCopperChunks.name=Fine copper Chunks
+item.IP.item.fineTinChunks.name=Fine tin Chunks
+item.IP.item.ironOxideDust.name=Iron oxide Dust
+item.IP.item.CopperMineral.name=Copper mineral
+item.IP.item.tinOxideDust.name=Tin oxide Dust
+item.IP.item.ironMixedFragments.name=Iron mixed fragments
+item.IP.item.copperMixedFragments.name=Copper mixed fragments
+item.IP.item.tinMixedFragments.name=Tin mixed fragments
+item.IP.item.silicium.name=Silicium
+item.IP.item.zincDust.name=Zinc Dust
+item.IP.item.purifiedCopperPurified copper
+item.IP.item.purifiedTin.name=Purified tin
+item.IP.item.sulfur.name=Sulfur
+item.IP.item.thickStick.name=Thick stick
+item.IP.item.hammer.name=Hammer
+item.IP.item.knife.name=Knife
+item.IP.item.blowTorch.name=Blow torch
+item.IP.item.ironSinter.name=Iron sinter
+item.IP.item.calcareousSinterDust.name=Calcareous sinter dust
+item.IP.item.cokes.name=Cokes
+item.IP.item.slag.name=Slag

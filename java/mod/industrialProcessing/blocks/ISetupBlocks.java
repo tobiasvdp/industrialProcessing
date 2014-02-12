@@ -30,8 +30,9 @@ public interface ISetupBlocks {
 	/*
 	 * public final static BlockPlatform blockPlatform = new BlockPlatform();
 	 * public final static BlockStairs blockStairs = new BlockStairs(); public
-	 * final static BlockCinnebar blockCinnebar = new BlockCinnebar(); public
-	 * final static BlockRutile blockRutile = new BlockRutile();
+	 * 
+	 * public final static BlockCinnebar blockCinnebar = new BlockCinnebar();
+	 * public public final static BlockRutile blockRutile = new BlockRutile();
 	 */
 
 	public final static BlockIndustrialLeaves blockLeaves = new BlockIndustrialLeaves();

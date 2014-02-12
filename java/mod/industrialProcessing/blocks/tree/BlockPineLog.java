@@ -5,6 +5,7 @@ import java.util.Random;
 import mod.industrialProcessing.blocks.BlockIP;
 import mod.industrialProcessing.blocks.ConfigBlocks;
 import mod.industrialProcessing.blocks.ISetupBlocks;
+import mod.industrialProcessing.items.ISetupItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -31,7 +32,7 @@ public class BlockPineLog extends BlockIP {
 
 		ItemStack playerStack = par5EntityPlayer.inventory.getCurrentItem();
 		if (playerStack != null) {
-			if (playerStack == ISetupItems.itemKnife) {
+			if (playerStack.getItem() == ISetupItems.itemKnife) {
 				if (par6 > 1) {
 					int meta = par1World.getBlockMetadata(par2, par3, par4);
 
