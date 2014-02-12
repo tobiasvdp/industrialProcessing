@@ -1,4 +1,4 @@
-package ip.industrialProcessing.tools;
+package mod.industrialProcessing.utils.modelInportTool;
 
 import java.io.BufferedReader;
 import java.io.File;

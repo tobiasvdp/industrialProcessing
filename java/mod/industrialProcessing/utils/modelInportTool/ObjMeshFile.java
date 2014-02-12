@@ -1,4 +1,4 @@
-package ip.industrialProcessing.tools;
+package mod.industrialProcessing.utils.modelInportTool;
 
 public class ObjMeshFile {
 	public String title= "ObjMeshItem";
