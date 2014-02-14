@@ -2,6 +2,7 @@ package mod.industrialProcessing.blocks;
 
 import mod.industrialProcessing.IndustrialProcessing;
 import mod.industrialProcessing.blocks.crystals.BlockCrystal;
+import mod.industrialProcessing.blocks.doors.BlockDoor;
 import mod.industrialProcessing.blocks.ore.BlockIPOre;
 import mod.industrialProcessing.blocks.platforms.BlockPlatform;
 import mod.industrialProcessing.blocks.platforms.BlockStairs;
@@ -41,14 +42,15 @@ public interface ISetupBlocks {
 	public final static BlockPineLog blockPineLog = new BlockPineLog();
 	public final static BlockIndustrialSapling blockSapling = new BlockIndustrialSapling();
 
+	public final static BlockDoor blockDoorEmergency = new BlockDoor(1.0f,1.0f,Material.iron,Block.soundTypeMetal,"Orange","Iron","iron_block","glass");
+
 	/*
 	 * public final static Block blockHalfWavePlate = (new
 	 * BlockPane(ConfigBlocks.getInstance().getBlockHalfWavePlateID(),
 	 * "blockHalfWavePlate", "blockHalfWavePlate", Material.iron,
 	 * false)).setHardness
 	 * (0.9F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName
-	 * ("halfWavePlate"); public final static BlockDoorEmergency
-	 * blockDoorEmergency = new BlockDoorEmergency();
+	 * ("halfWavePlate");
 	 * 
 	 * public final static MicroBlock microBlock = new MicroBlock();
 	 */

@@ -3,6 +3,7 @@ package mod.industrialProcessing.client;
 import mod.industrialProcessing.CommonProxy;
 import mod.industrialProcessing.blocks.ISetupBlocks;
 import mod.industrialProcessing.blocks.crystals.ModelCrystal;
+import mod.industrialProcessing.blocks.doors.emergency.model.ModelDoorEmergency;
 import mod.industrialProcessing.blocks.platforms.ModelPlatform;
 import mod.industrialProcessing.blocks.platforms.ModelStairs;
 import mod.industrialProcessing.client.rendering.ModelBlock;
@@ -143,6 +144,7 @@ public class ClientProxy extends CommonProxy {
 	private static final ModelBlock crystal = new ModelCrystal();
 	private static final ModelBlock platform = new ModelPlatform();
 	private static final ModelBlock stairs = new ModelStairs();
+	private static final ModelBlock doorEmergency = new ModelDoorEmergency();
 
 	@Override
 	public void registerRenderers() {
@@ -151,6 +153,7 @@ public class ClientProxy extends CommonProxy {
 		RenderRegistry.registerRendering(ISetupBlocks.blockRutile, crystal);
 		RenderRegistry.registerRendering(ISetupBlocks.blockPlatform, platform);
 		RenderRegistry.registerRendering(ISetupBlocks.blockStairs, stairs);
+		RenderRegistry.registerRendering(ISetupBlocks.blockDoorEmergency, doorEmergency);
 
 		/*
 		 * // microblocks registerMicroblocks();

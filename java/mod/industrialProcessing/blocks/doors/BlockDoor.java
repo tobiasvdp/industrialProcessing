@@ -1,15 +1,14 @@
-package ip.industrialProcessing.decoration.doors;
-
-import ip.industrialProcessing.client.ClientProxy;
+package mod.industrialProcessing.blocks.doors;
 
 import java.util.List;
 
+import mod.industrialProcessing.blocks.BlockIPRendered;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
@@ -19,68 +18,39 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockDoor extends Block {
+public class BlockDoor extends BlockIPRendered {
 
-	public BlockDoor(int par1, Material par2Material, float hardness, StepSound stepSound, String name, CreativeTabs tab) {
-		super(par1, par2Material);
-		setHardness(hardness);
-		setStepSound(stepSound);
-		setUnlocalizedName(name);
-		setCreativeTab(tab);
-	}
-
-	@Override
-	public boolean isOpaqueCube() {
-		return false;
-	}
-
-	@Override
-	public boolean renderAsNormalBlock() {
-		return false;
-	}
-
-	@Override
-	public int getRenderBlockPass() {
-		return 1;
-	}
-
-	@Override
-	public boolean canRenderInPass(int pass) {
-		// this looks weird??????
-		// Set the static var in the client proxy
-		ClientProxy.renderPass = pass;
-		// the block can render in both passes, so return true always
-		return true;
+	public BlockDoor(float hardness, float resistance, Material material, SoundType soundType, String... icons) {
+		super(hardness, resistance, material, soundType,icons);
 	}
 
 	@Override
 	public boolean canPlaceTorchOnTop(World world, int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return false;// super.canPlaceTorchOnTop(world, x, y, z);
+		return false;
 	}
 
-	public static boolean isTopDoor(IBlockAccess world, int x, int y, int z, int blockID) {
-		if (world.getBlockId(x, y - 1, z) == blockID) {
+	public static boolean isTopDoor(IBlockAccess world, int x, int y, int z, Block block) {
+		if (world.getBlock(x, y - 1, z) == block) {
 			return true;
 		}
 		return false;
 	}
 
-	public static boolean isDoorOpen(IBlockAccess world, int x, int y, int z, int blockID) {
+	public static boolean isDoorOpen(IBlockAccess world, int x, int y, int z, Block block) {
 		if (world.getBlockMetadata(x, y, z) / 4 == 1 || world.getBlockMetadata(x, y, z) / 4 == 3)
 			return true;
 		return false;
 	}
 
-	public static boolean isSideDoor(IBlockAccess world, int x, int y, int z, int blockID) {
+	public static boolean isSideDoor(IBlockAccess world, int x, int y, int z, Block block) {
 		if (world.getBlockMetadata(x, y, z) / 8 == 1)
 			return true;
 		return false;
 	}
 
-	public static boolean hasSideDoor(IBlockAccess world, int x, int y, int z, int blockID, int dir) {
+	public static boolean hasSideDoor(IBlockAccess world, int x, int y, int z, Block block, int dir) {
 		ForgeDirection right = getForwardFromMetadata(dir % 4).getRotation(ForgeDirection.DOWN);
-		if (world.getBlockId(x + right.offsetX, y + right.offsetY, z + right.offsetZ) == blockID) {
+		if (world.getBlock(x + right.offsetX, y + right.offsetY, z + right.offsetZ) == block) {
 			if (world.getBlockMetadata(x + right.offsetX, y + right.offsetY, z + right.offsetZ) % 4 == dir % 4) {
 				return true;
 			}
@@ -88,13 +58,13 @@ public class BlockDoor extends Block {
 		return false;
 	}
 
-	public static boolean checkIfSideDoor(IBlockAccess world, int x, int y, int z, int blockID, int dir) {
+	public static boolean checkIfSideDoor(IBlockAccess world, int x, int y, int z, Block block, int dir) {
 		ForgeDirection left = getForwardFromMetadata(dir).getRotation(ForgeDirection.UP);
-		if (world.getBlockId(x + left.offsetX, y + left.offsetY, z + left.offsetZ) == blockID) {
+		if (world.getBlock(x + left.offsetX, y + left.offsetY, z + left.offsetZ) == block) {
 			if (world.getBlockMetadata(x + left.offsetX, y + left.offsetY, z + left.offsetZ) == dir) {
-				if (BlockDoor.isTopDoor(world, x, y, z, blockID) && BlockDoor.isTopDoor(world, x + left.offsetX, y + left.offsetY, z + left.offsetZ, blockID))
+				if (BlockDoor.isTopDoor(world, x, y, z, block) && BlockDoor.isTopDoor(world, x + left.offsetX, y + left.offsetY, z + left.offsetZ, block))
 					return true;
-				if (!BlockDoor.isTopDoor(world, x, y, z, blockID) && !BlockDoor.isTopDoor(world, x + left.offsetX, y + left.offsetY, z + left.offsetZ, blockID))
+				if (!BlockDoor.isTopDoor(world, x, y, z, block) && !BlockDoor.isTopDoor(world, x + left.offsetX, y + left.offsetY, z + left.offsetZ, block))
 					return true;
 			}
 		}
@@ -117,13 +87,13 @@ public class BlockDoor extends Block {
 
 	@Override
 	public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4) {
-		if ((par1World.getBlockId(par2, par3 - 1, par4) == this.blockID && BlockDoor.isTopDoor(par1World, par2, par3 - 1, par4, this.blockID)))
+		if ((par1World.getBlock(par2, par3 - 1, par4) == this && BlockDoor.isTopDoor(par1World, par2, par3 - 1, par4, this)))
 			return false;
-		if ((par1World.getBlockId(par2, par3 - 1, par4) != this.blockID) && !par1World.isBlockSolidOnSide(par2, par3 - 1, par4, ForgeDirection.UP))
+		if ((par1World.getBlock(par2, par3 - 1, par4) != this) && !(par1World.getBlock(par2, par3 - 1, par4).isSideSolid(par1World,par2, par3 - 1, par4, ForgeDirection.UP)))
 			return false;
-		if (BlockDoor.isTopDoor(par1World, par2, par3, par4, this.blockID))
+		if (BlockDoor.isTopDoor(par1World, par2, par3, par4, this))
 			return true;
-		if (par1World.getBlockId(par2, par3 + 1, par4) != 0)
+		if (par1World.getBlock(par2, par3 + 1, par4) != Blocks.air)
 			return false;
 		return super.canPlaceBlockAt(par1World, par2, par3, par4);
 	}
@@ -131,42 +101,42 @@ public class BlockDoor extends Block {
 	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLivingBase, ItemStack par6ItemStack) {
 		int dir = MathHelper.floor_double((par5EntityLivingBase.rotationYaw * 4F) / 360F + 0.5D) & 3;
-
-		if (checkIfSideDoor(par1World, par2, par3, par4, this.blockID, dir))
+		super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLivingBase, par6ItemStack);
+		if (checkIfSideDoor(par1World, par2, par3, par4, this, dir))
 			dir += 8;
 
 		par1World.setBlockMetadataWithNotify(par2, par3, par4, dir, 2);
-		par1World.setBlock(par2, par3 + 1, par4, this.blockID);
+		par1World.setBlock(par2, par3 + 1, par4, this);
 		par1World.setBlockMetadataWithNotify(par2, par3 + 1, par4, par1World.getBlockMetadata(par2, par3, par4), 3);
-		super.onBlockPlacedBy(par1World, par2, par3, par4, par5EntityLivingBase, par6ItemStack);
+		
 	}
 
 	@Override
 	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
 		int meta = par1World.getBlockMetadata(par2, par3, par4);
-		if (isDoorOpen(par1World, par2, par3, par4, this.blockID)) {
+		if (isDoorOpen(par1World, par2, par3, par4, this)) {
 			meta = meta - 4;
 			par1World.setBlockMetadataWithNotify(par2, par3, par4, meta, 3);
-			if (isTopDoor(par1World, par2, par3, par4, this.blockID)) {
+			if (isTopDoor(par1World, par2, par3, par4, this)) {
 				par1World.setBlockMetadataWithNotify(par2, par3 - 1, par4, meta, 3);
-				if (isSideDoor(par1World, par2, par3, par4, this.blockID)) {
+				if (isSideDoor(par1World, par2, par3, par4, this)) {
 					ForgeDirection left = getForwardFromMetadata(meta % 4).getRotation(ForgeDirection.UP);
 					par1World.setBlockMetadataWithNotify(par2 + left.offsetX, par3 + left.offsetY, par4 + left.offsetZ, par1World.getBlockMetadata(par2 + left.offsetX, par3 + left.offsetY, par4 + left.offsetZ) - 4, 3);
 					par1World.setBlockMetadataWithNotify(par2 + left.offsetX, par3 + left.offsetY - 1, par4 + left.offsetZ, par1World.getBlockMetadata(par2 + left.offsetX, par3 + left.offsetY - 1, par4 + left.offsetZ) - 4, 3);
 				}
-				if (hasSideDoor(par1World, par2, par3, par4, this.blockID, meta)) {
+				if (hasSideDoor(par1World, par2, par3, par4, this, meta)) {
 					ForgeDirection right = getForwardFromMetadata(meta % 4).getRotation(ForgeDirection.DOWN);
 					par1World.setBlockMetadataWithNotify(par2 + right.offsetX, par3 + right.offsetY, par4 + right.offsetZ, par1World.getBlockMetadata(par2 + right.offsetX, par3 + right.offsetY, par4 + right.offsetZ) - 4, 3);
 					par1World.setBlockMetadataWithNotify(par2 + right.offsetX, par3 + right.offsetY - 1, par4 + right.offsetZ, par1World.getBlockMetadata(par2 + right.offsetX, par3 + right.offsetY - 1, par4 + right.offsetZ) - 4, 3);
 				}
 			} else {
 				par1World.setBlockMetadataWithNotify(par2, par3 + 1, par4, meta, 3);
-				if (isSideDoor(par1World, par2, par3, par4, this.blockID)) {
+				if (isSideDoor(par1World, par2, par3, par4, this)) {
 					ForgeDirection left = getForwardFromMetadata(meta % 4).getRotation(ForgeDirection.UP);
 					par1World.setBlockMetadataWithNotify(par2 + left.offsetX, par3 + left.offsetY, par4 + left.offsetZ, par1World.getBlockMetadata(par2 + left.offsetX, par3 + left.offsetY, par4 + left.offsetZ) - 4, 3);
 					par1World.setBlockMetadataWithNotify(par2 + left.offsetX, par3 + left.offsetY + 1, par4 + left.offsetZ, par1World.getBlockMetadata(par2 + left.offsetX, par3 + left.offsetY + 1, par4 + left.offsetZ) - 4, 3);
 				}
-				if (hasSideDoor(par1World, par2, par3, par4, this.blockID, meta)) {
+				if (hasSideDoor(par1World, par2, par3, par4, this, meta)) {
 					ForgeDirection right = getForwardFromMetadata(meta % 4).getRotation(ForgeDirection.DOWN);
 					par1World.setBlockMetadataWithNotify(par2 + right.offsetX, par3 + right.offsetY, par4 + right.offsetZ, par1World.getBlockMetadata(par2 + right.offsetX, par3 + right.offsetY, par4 + right.offsetZ) - 4, 3);
 					par1World.setBlockMetadataWithNotify(par2 + right.offsetX, par3 + right.offsetY + 1, par4 + right.offsetZ, par1World.getBlockMetadata(par2 + right.offsetX, par3 + right.offsetY + 1, par4 + right.offsetZ) - 4, 3);
@@ -175,26 +145,26 @@ public class BlockDoor extends Block {
 		} else {
 			meta = meta + 4;
 			par1World.setBlockMetadataWithNotify(par2, par3, par4, meta, 3);
-			if (isTopDoor(par1World, par2, par3, par4, this.blockID)) {
+			if (isTopDoor(par1World, par2, par3, par4, this)) {
 				par1World.setBlockMetadataWithNotify(par2, par3 - 1, par4, meta, 3);
-				if (isSideDoor(par1World, par2, par3, par4, this.blockID)) {
+				if (isSideDoor(par1World, par2, par3, par4, this)) {
 					ForgeDirection left = getForwardFromMetadata(meta % 4).getRotation(ForgeDirection.UP);
 					par1World.setBlockMetadataWithNotify(par2 + left.offsetX, par3 + left.offsetY, par4 + left.offsetZ, par1World.getBlockMetadata(par2 + left.offsetX, par3 + left.offsetY, par4 + left.offsetZ) + 4, 3);
 					par1World.setBlockMetadataWithNotify(par2 + left.offsetX, par3 + left.offsetY - 1, par4 + left.offsetZ, par1World.getBlockMetadata(par2 + left.offsetX, par3 + left.offsetY - 1, par4 + left.offsetZ) + 4, 3);
 				}
-				if (hasSideDoor(par1World, par2, par3, par4, this.blockID, meta)) {
+				if (hasSideDoor(par1World, par2, par3, par4, this, meta)) {
 					ForgeDirection right = getForwardFromMetadata(meta % 4).getRotation(ForgeDirection.DOWN);
 					par1World.setBlockMetadataWithNotify(par2 + right.offsetX, par3 + right.offsetY, par4 + right.offsetZ, par1World.getBlockMetadata(par2 + right.offsetX, par3 + right.offsetY, par4 + right.offsetZ) + 4, 3);
 					par1World.setBlockMetadataWithNotify(par2 + right.offsetX, par3 + right.offsetY - 1, par4 + right.offsetZ, par1World.getBlockMetadata(par2 + right.offsetX, par3 + right.offsetY - 1, par4 + right.offsetZ) + 4, 3);
 				}
 			} else {
 				par1World.setBlockMetadataWithNotify(par2, par3 + 1, par4, meta, 3);
-				if (isSideDoor(par1World, par2, par3, par4, this.blockID)) {
+				if (isSideDoor(par1World, par2, par3, par4, this)) {
 					ForgeDirection left = getForwardFromMetadata(meta % 4).getRotation(ForgeDirection.UP);
 					par1World.setBlockMetadataWithNotify(par2 + left.offsetX, par3 + left.offsetY, par4 + left.offsetZ, par1World.getBlockMetadata(par2 + left.offsetX, par3 + left.offsetY, par4 + left.offsetZ) + 4, 3);
 					par1World.setBlockMetadataWithNotify(par2 + left.offsetX, par3 + left.offsetY + 1, par4 + left.offsetZ, par1World.getBlockMetadata(par2 + left.offsetX, par3 + left.offsetY + 1, par4 + left.offsetZ) + 4, 3);
 				}
-				if (hasSideDoor(par1World, par2, par3, par4, this.blockID, meta)) {
+				if (hasSideDoor(par1World, par2, par3, par4, this, meta)) {
 					ForgeDirection right = getForwardFromMetadata(meta % 4).getRotation(ForgeDirection.DOWN);
 					par1World.setBlockMetadataWithNotify(par2 + right.offsetX, par3 + right.offsetY, par4 + right.offsetZ, par1World.getBlockMetadata(par2 + right.offsetX, par3 + right.offsetY, par4 + right.offsetZ) + 4, 3);
 					par1World.setBlockMetadataWithNotify(par2 + right.offsetX, par3 + right.offsetY + 1, par4 + right.offsetZ, par1World.getBlockMetadata(par2 + right.offsetX, par3 + right.offsetY + 1, par4 + right.offsetZ) + 4, 3);
@@ -204,21 +174,22 @@ public class BlockDoor extends Block {
 
 		return true;
 	}
-
+	
 	@Override
-	public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6) {
-		if (BlockDoor.isTopDoor(par1World, par2, par3, par4, this.blockID)) {
-			par1World.destroyBlock(par2, par3 - 1, par4, false);
+	public void breakBlock(World par1World, int par2, int par3, int par4, Block p_149749_5_, int p_149749_6_) {
+		if (BlockDoor.isTopDoor(par1World, par2, par3, par4, this)) {
+			par1World.setBlockToAir(par2, par3 - 1, par4);
 		} else {
-			if (par1World.getBlockId(par2, par3 + 1, par4) == this.blockID)
-				par1World.destroyBlock(par2, par3 + 1, par4, false);
+			if (par1World.getBlock(par2, par3 + 1, par4) == this)
+				par1World.setBlockToAir(par2, par3 + 1, par4);
 		}
-		super.breakBlock(par1World, par2, par3, par4, par5, par6);
+		super.breakBlock(par1World, par2, par3, par4, p_149749_5_, p_149749_6_);
 	}
+
 
 	@Override
 	public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
-		if (!isDoorOpen(par1World, par2, par3, par4, this.blockID)) {
+		if (!isDoorOpen(par1World, par2, par3, par4, this)) {
 			super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
 		}
 
@@ -267,19 +238,19 @@ public class BlockDoor extends Block {
 		}
 		return super.collisionRayTrace(par1World, par2, par3, par4, par5Vec3, par6Vec3);
 	}
-
+	
 	@Override
-	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
-		if (!canBlockStay(par1World, par2, par3, par4)) {
-			par1World.destroyBlock(par2, par3, par4, true);
+	public void onNeighborBlockChange(World p_149695_1_, int p_149695_2_, int p_149695_3_, int p_149695_4_, Block p_149695_5_) {
+		if (!canBlockStay(p_149695_1_, p_149695_2_, p_149695_3_, p_149695_4_)) {
+			p_149695_1_.setBlockToAir(p_149695_2_, p_149695_3_, p_149695_4_);
 		}
-		super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
+		super.onNeighborBlockChange(p_149695_1_, p_149695_2_, p_149695_3_, p_149695_4_, p_149695_5_);
 	}
 
 	@Override
 	public boolean canBlockStay(World par1World, int par2, int par3, int par4) {
-		if (!BlockDoor.isTopDoor(par1World, par2, par3, par4, this.blockID)) {
-			return par1World.isBlockSolidOnSide(par2, par3 - 1, par4, ForgeDirection.UP);
+		if (!BlockDoor.isTopDoor(par1World, par2, par3, par4, this)) {
+			return par1World.getBlock(par2, par3 - 1, par4).isSideSolid(par1World,par2, par3 - 1, par4, ForgeDirection.UP);
 		}
 		return super.canBlockStay(par1World, par2, par3, par4);
 	}

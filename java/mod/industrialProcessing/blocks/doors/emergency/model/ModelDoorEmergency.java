@@ -1,14 +1,14 @@
-package ip.industrialProcessing.decoration.doors.emergency.model;
-
-import ip.industrialProcessing.api.rendering.wavefront.ObjRotatedTranslator;
-import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
-import ip.industrialProcessing.client.render.ModelBlock;
-import ip.industrialProcessing.decoration.doors.BlockDoor;
+package mod.industrialProcessing.blocks.doors.emergency.model;
 
 import javax.swing.Icon;
 
+import mod.industrialProcessing.blocks.doors.BlockDoor;
+import mod.industrialProcessing.client.rendering.ModelBlock;
+import mod.industrialProcessing.client.rendering.obj.wavefront.ObjRotatedTranslator;
+import mod.industrialProcessing.client.rendering.obj.wavefront.WorldReference;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.util.IIcon;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector3f;
@@ -45,10 +45,10 @@ public class ModelDoorEmergency extends ModelBlock {
 	@Override
 	public void renderInventory(Block block, int metadata, int modelID, RenderBlocks renderer) {
 		Vector3f position = new Vector3f(0, 0, 0);
-		Icon iconDoor = block.getIcon(0, 0);
-		Icon iconIron = block.getIcon(1, 0);
-		Icon iconLight = block.getIcon(2, 0);
-		Icon iconGlass = block.getIcon(3, 0);
+		IIcon iconDoor = block.getIcon(0, 0);
+		IIcon iconIron = block.getIcon(1, 0);
+		IIcon iconLight = block.getIcon(2, 0);
+		IIcon iconGlass = block.getIcon(3, 0);
 
 		GL11.glPushMatrix();
 		GL11.glScalef(0.7f, 0.7f, 0.7f);
@@ -70,20 +70,20 @@ public class ModelDoorEmergency extends ModelBlock {
 		int dir = getRenderDir(reference.getBlockMetadata() % 4);
 		int flipSide = 1;
 
-		Icon iconDoor = reference.getIcon(0);
-		Icon iconIron = reference.getIcon(1);
-		Icon iconLight = reference.getIcon(2);
-		Icon iconGlass = reference.getIcon(3);
+		IIcon iconDoor = reference.getIcon(0);
+		IIcon iconIron = reference.getIcon(1);
+		IIcon iconLight = reference.getIcon(2);
+		IIcon iconGlass = reference.getIcon(3);
 		
 		GL11.glPushMatrix();
 		
 
-		if (BlockDoor.isDoorOpen(reference.world, reference.x, reference.y, reference.z, reference.block.blockID)) {
-			if(BlockDoor.isSideDoor(reference.world, reference.x, reference.y, reference.z, reference.block.blockID)){
+		if (BlockDoor.isDoorOpen(reference.world, reference.x, reference.y, reference.z, reference.block)) {
+			if(BlockDoor.isSideDoor(reference.world, reference.x, reference.y, reference.z, reference.block)){
 				flipSide = 2;
 			}
 			dir = getLeftSide(dir);
-			if (BlockDoor.isTopDoor(reference.world, reference.x, reference.y, reference.z, reference.block.blockID)) {
+			if (BlockDoor.isTopDoor(reference.world, reference.x, reference.y, reference.z, reference.block)) {
 				doorTop.getRotated(flipSide,dir).renderMesh(false, iconDoor, reference);
 				glass.getRotated(flipSide,dir).renderMesh(false, iconGlass, reference);
 				rectracter.getRotated(flipSide,dir).renderMesh(false, iconIron, reference);
@@ -94,10 +94,10 @@ public class ModelDoorEmergency extends ModelBlock {
 				pushBar.getRotated(flipSide,dir).renderMesh(false, iconIron, reference);
 			}
 		}else{
-			if(BlockDoor.isSideDoor(reference.world, reference.x, reference.y, reference.z, reference.block.blockID)){
+			if(BlockDoor.isSideDoor(reference.world, reference.x, reference.y, reference.z, reference.block)){
 				dir = flipDirection(dir);
 			}
-			if (BlockDoor.isTopDoor(reference.world, reference.x, reference.y, reference.z, reference.block.blockID)) {
+			if (BlockDoor.isTopDoor(reference.world, reference.x, reference.y, reference.z, reference.block)) {
 				doorTop.getRotated(dir).renderMesh(false, iconDoor, reference);
 				glass.getRotated(dir).renderMesh(false, iconGlass, reference);
 				rectracter.getRotated(dir).renderMesh(false, iconIron, reference);

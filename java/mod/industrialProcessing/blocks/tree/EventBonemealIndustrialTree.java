@@ -1,7 +1,5 @@
 package mod.industrialProcessing.blocks.tree;
 
-import ip.industrialProcessing.config.ConfigBlocks;
-import ip.industrialProcessing.config.ISetupBlocks;
 import net.minecraftforge.event.entity.player.BonemealEvent;
 
 public class EventBonemealIndustrialTree {

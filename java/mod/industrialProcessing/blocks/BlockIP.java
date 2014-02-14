@@ -3,7 +3,9 @@ package mod.industrialProcessing.blocks;
 import java.util.Random;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import mod.industrialProcessing.utils.INamepace;
+import mod.industrialProcessing.utils.block.IDescriptionBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Block.SoundType;
 import net.minecraft.block.material.Material;
@@ -13,7 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class BlockIP extends Block {
+public class BlockIP extends Block implements IDescriptionBlock{
 	boolean dropItems = false;
 	Item dropItem;
 
@@ -56,6 +58,12 @@ public class BlockIP extends Block {
 			return this.dropItem;
 		}
 		return super.getItemDropped(par1, par2Random, par3);
+	}
+
+
+	@Override
+	public String getDescription() {
+		return LanguageRegistry.instance().getStringLocalization(getUnlocalizedName()+".desc");
 	}
 
 }

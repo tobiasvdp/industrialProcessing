@@ -27,6 +27,8 @@ tile.IP.block.rutile.name=Rutile crystal
 tile.IP.block.cinnebar.name=Cinnebar crystal
 tile.IP.block.platform.name=Platform
 tile.IP.block.stairs.name=Stairs
+tile.IP.block.doorEmergency.name=Emergency door
+tile.IP.block.doorEmergency.desc=A door that can be used to enter and exit a building
 
 item.IP.item.ironBracket.name=Iron bracket	
 item.IP.item.paintBrush.name=Paintbrush
