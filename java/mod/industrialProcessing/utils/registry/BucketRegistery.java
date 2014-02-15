@@ -1,4 +1,4 @@
-package ip.industrialProcessing.utils.registry;
+package mod.industrialProcessing.utils.registry;
 
 import java.util.HashMap;
 

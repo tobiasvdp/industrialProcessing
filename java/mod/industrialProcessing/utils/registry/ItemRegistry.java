@@ -10,13 +10,14 @@ import mod.industrialProcessing.creativeTab.ISetupCreativeTabs;
 import mod.industrialProcessing.utils.INamepace;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBucket;
 
 public class ItemRegistry {
 	private static HashMap<Item, ItemType[]> array = new HashMap<Item, ItemType[]>();
 	
 	public static void registerItem(Item item, String unlocalizedName){
 		item.setUnlocalizedName(unlocalizedName);
-		item.setTextureName(INamepace.TEXTURE_NAME_PREFIX + unlocalizedName);
+		item.setTextureName(INamepace.TEXTURE_NAME_PREFIX + item.getUnlocalizedName());
 		item.setCreativeTab(ISetupCreativeTabs.tabItems);
 		GameRegistry.registerItem(item, unlocalizedName);
 		registerItem(item, ItemType.item);
@@ -24,10 +25,18 @@ public class ItemRegistry {
 	
 	public static void registerItem(Item item, String unlocalizedName, CreativeTabs tab){
 		item.setUnlocalizedName(unlocalizedName);
-		item.setTextureName(INamepace.TEXTURE_NAME_PREFIX + unlocalizedName);
+		item.setTextureName(INamepace.TEXTURE_NAME_PREFIX +  item.getUnlocalizedName());
 		item.setCreativeTab(tab);
 		GameRegistry.registerItem(item, unlocalizedName);
 		registerItem(item, ItemType.item);
+	}
+	
+	public static void registerBucket(ItemBucket item, String unlocalizedName){
+		item.setUnlocalizedName(unlocalizedName);
+		item.setTextureName(INamepace.TEXTURE_NAME_PREFIX +  item.getUnlocalizedName());
+		item.setCreativeTab(ISetupCreativeTabs.tabFluids);
+		GameRegistry.registerItem(item, unlocalizedName);
+		registerItem(item, ItemType.fluid);
 	}
 	
 	private static void registerItem(Item item, ItemType... type) {

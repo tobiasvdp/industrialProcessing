@@ -2,6 +2,7 @@ IP.itemGroup.ores=Ores
 IP.itemGroup.blocks=Blocks
 IP.itemGroup.machines=Machines
 IP.itemGroup.items=Items
+IP.itemGroup.fluids=Fluids
 
 IP.blockType.ore=ore
 
@@ -142,3 +143,16 @@ item.IP.item.ironSinter.name=Iron sinter
 item.IP.item.calcareousSinterDust.name=Calcareous sinter dust
 item.IP.item.cokes.name=Cokes
 item.IP.item.slag.name=Slag
+
+tile.IP.fluid.lightnaphtha.block.name=Light naphtha
+item.IP.fluid.lightnaphtha.bucket.name=Bucket of light naphtha
+tile.IP.fluid.dirtywater.block.name=Dirty water
+item.IP.fluid.dirtywater.bucket.name=Bucket of dirty water
+tile.IP.fluid.filtywater.block.name=Filty water
+item.IP.fluid.filtywater.bucket.name=Bucket of filty water
+tile.IP.fluid.uncleanwater.block.name=Unclean water
+item.IP.fluid.uncleanwater.bucket.name=Bucket of unclean water
+
+death.attack.DirtyWater=%1$s was poisoned to death by swiming in dirty water.
+death.attack.DirtyWater.player=%1$s was killed in dirty water by %2$s.
+death.attack.DirtyWater.item=%1$s was killed in dirty water by %2$s

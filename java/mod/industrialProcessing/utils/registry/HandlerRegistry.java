@@ -1,15 +1,4 @@
-package ip.industrialProcessing.utils.registry;
-
-import ip.industrialProcessing.transport.items.ConveyorBeltPowerInput.TileEntityConveyorBeltPowerInput;
-import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorConnectionsBase;
-import ip.industrialProcessing.transport.items.conveyorBelt.TileEntityConveyorTransportBase;
-import ip.industrialProcessing.utils.handler.conveyors.line.ConveyorLineHandler;
-import ip.industrialProcessing.utils.handler.conveyors.line.IConveyorLineHandler;
-import ip.industrialProcessing.utils.handler.heat.IHeatHandler;
-import ip.industrialProcessing.utils.handler.lines.ILineDevice;
-import ip.industrialProcessing.utils.handler.lines.ILineHandler;
-import ip.industrialProcessing.utils.handler.lines.ILinePart;
-import ip.industrialProcessing.utils.handler.lines.ILineTransport;
+package mod.industrialProcessing.utils.registry;
 
 import java.util.Iterator;
 import java.util.List;

@@ -22,7 +22,7 @@ public class BlockRegistry {
 
 	public static void registerOre(Block block, String uniqueId, String oreDictionaryKey, int level) {
 		block.setBlockName(uniqueId);
-		block.setBlockTextureName(IndustrialProcessing.TEXTURE_NAME_PREFIX + uniqueId);
+		block.setBlockTextureName(IndustrialProcessing.TEXTURE_NAME_PREFIX + block.getUnlocalizedName());
 		block.setCreativeTab(IndustrialProcessing.tabOres);
 		block.setHarvestLevel("pickaxe", level);
 		GameRegistry.registerBlock(block, uniqueId);
@@ -32,7 +32,7 @@ public class BlockRegistry {
 	
 	public static void registerBlock(Block block, String uniqueId, String harvest, int level) {
 		block.setBlockName(uniqueId);
-		block.setBlockTextureName(IndustrialProcessing.TEXTURE_NAME_PREFIX + uniqueId);
+		block.setBlockTextureName(IndustrialProcessing.TEXTURE_NAME_PREFIX + block.getUnlocalizedName());
 		block.setCreativeTab(IndustrialProcessing.tabBlocks);
 		block.setHarvestLevel(harvest, level);
 		GameRegistry.registerBlock(block, uniqueId);
@@ -41,10 +41,17 @@ public class BlockRegistry {
 	
 	public static void registerMetadataBlock(Block block, String uniqueId, String harvest, int level) {
 		block.setBlockName(uniqueId);
-		block.setBlockTextureName(IndustrialProcessing.TEXTURE_NAME_PREFIX + uniqueId);
+		block.setBlockTextureName(IndustrialProcessing.TEXTURE_NAME_PREFIX + block.getUnlocalizedName());
 		block.setHarvestLevel(harvest, level);		
 		GameRegistry.registerBlock(block, ItemBlockWithMeta.class, uniqueId);
 		RegisterBlock(block, BlockType.Block);
+	}
+	
+	public static void registerFluid(Block block, String uniqueId) {
+		block.setBlockName(uniqueId);
+		block.setCreativeTab(IndustrialProcessing.tabFluids);
+		GameRegistry.registerBlock(block, uniqueId);
+		RegisterBlock(block, BlockType.fluid);
 	}
 
 	

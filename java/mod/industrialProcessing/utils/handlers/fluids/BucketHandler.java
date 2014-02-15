@@ -1,10 +1,9 @@
-package ip.industrialProcessing.utils.handler.fluids;
-
-import ip.industrialProcessing.utils.registry.BucketRegistery;
+package mod.industrialProcessing.utils.handlers.fluids;
 
 import java.util.Collection;
 import java.util.Iterator;
 
+import mod.industrialProcessing.utils.registry.BucketRegistery;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -14,6 +13,9 @@ import net.minecraftforge.event.entity.player.FillBucketEvent;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
+
+import cpw.mods.fml.common.eventhandler.Event.Result;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class BucketHandler {
 
@@ -27,7 +29,7 @@ public class BucketHandler {
 		this.buckets.put(block, item);
 	}
 
-	@ForgeSubscribe
+	@SubscribeEvent
 	public void onBucketFill(FillBucketEvent event) {
 
 		ItemStack result = fillCustomBucket(event);
@@ -42,10 +44,10 @@ public class BucketHandler {
 	private ItemStack fillCustomBucket(FillBucketEvent event) {
 		World world = event.world;
 		MovingObjectPosition pos = event.target;
-		int blockID = world.getBlockId(pos.blockX, pos.blockY, pos.blockZ);
+		Block block = world.getBlock(pos.blockX, pos.blockY, pos.blockZ);
 		Item bucket = null;
 		
-		Collection<Item> bucketCollection = buckets.get(Block.blocksList[blockID]);	
+		Collection<Item> bucketCollection = buckets.get(block);	
 		Iterator<Item> it = bucketCollection.iterator();
 		while (it.hasNext()) {
 			Item tempBucket = it.next();
@@ -55,7 +57,7 @@ public class BucketHandler {
 		}
 		
 		if (bucket != null && world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0) {
-			world.setBlock(pos.blockX, pos.blockY, pos.blockZ, 0);
+			world.setBlockToAir(pos.blockX, pos.blockY, pos.blockZ);
 			return new ItemStack(bucket);
 		}
 		return null;

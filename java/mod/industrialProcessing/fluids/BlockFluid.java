@@ -1,13 +1,14 @@
-package ip.industrialProcessing.fluids;
-
-import ip.industrialProcessing.api.config.INamepace;
-import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.config.ISetupDamageSource;
+package mod.industrialProcessing.fluids;
 
 import javax.swing.Icon;
 
+import mod.industrialProcessing.creativeTab.ISetupCreativeTabs;
+import mod.industrialProcessing.utils.INamepace;
+import mod.industrialProcessing.utils.damage.ISetupDamageSource;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidClassic;
@@ -20,14 +21,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockFluid extends BlockFluidClassic {
 
     @SideOnly(Side.CLIENT)
-    protected Icon[] theIcon;
+    protected IIcon[] theIcon;
     protected boolean doDamage;
 
-    public BlockFluid(int id, Fluid fluid, Material material, boolean doDamage) {
-        super(id, fluid, material);
-        setUnlocalizedName("Block" + fluid.getUnlocalizedName());
-        setCreativeTab(ISetupCreativeTabs.tabFluid);
-        this.disableStats();
+    public BlockFluid(Fluid fluid, Material material, boolean doDamage) {
+        super(fluid, material);
         this.doDamage = doDamage;
     }
 
@@ -46,15 +44,15 @@ public class BlockFluid extends BlockFluidClassic {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public Icon getIcon(int par1, int par2) {
-        return par1 != 0 && par1 != 1 ? this.theIcon[1] : this.theIcon[0];
+    public IIcon getIcon(int par1, int par2) {
+        return par1 != 1 ? this.theIcon[1] : this.theIcon[0];
     }
 
     @Override
 	@SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister) {
-        this.theIcon = new Icon[] { par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + this.getFluid().getName() + "_still"), par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + this.getFluid().getName() + "_flow") };
-        this.getFluid().setIcons(theIcon[0], theIcon[1]);
+    public void registerBlockIcons(IIconRegister par1IconRegister) {
+        this.theIcon = new IIcon[] { par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX +  this.getUnlocalizedName() + "_still"), par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + this.getUnlocalizedName() + "_flow") };
+        this.stack.getFluid().setIcons(theIcon[0], theIcon[1]);
     }
 
     @Override
@@ -74,14 +72,14 @@ public class BlockFluid extends BlockFluidClassic {
 
     @Override
     public boolean canDisplace(IBlockAccess world, int x, int y, int z) {
-        if (world.getBlockMaterial(x, y, z).isLiquid())
+        if (world.getBlock(x, y, z).getMaterial().isLiquid())
             return false;
         return super.canDisplace(world, x, y, z);
     }
 
     @Override
     public boolean displaceIfPossible(World world, int x, int y, int z) {
-        if (world.getBlockMaterial(x, y, z).isLiquid())
+        if (world.getBlock(x, y, z).getMaterial().isLiquid())
             return false;
         return super.displaceIfPossible(world, x, y, z);
     }

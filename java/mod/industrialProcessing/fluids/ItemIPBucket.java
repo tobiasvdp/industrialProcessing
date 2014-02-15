@@ -1,7 +1,8 @@
-package mod.industrialProcessing.items;
+package mod.industrialProcessing.fluids;
 
 import mod.industrialProcessing.creativeTab.ISetupCreativeTabs;
 import mod.industrialProcessing.utils.INamepace;
+import mod.industrialProcessing.utils.handlers.fluids.BucketHandler;
 import mod.industrialProcessing.utils.registry.ItemRegistry;
 import mod.industrialProcessing.utils.registry.ItemType;
 import net.minecraft.block.Block;
@@ -12,14 +13,8 @@ import net.minecraftforge.fluids.Fluid;
 
 public class ItemIPBucket extends ItemBucket {
 
-    public ItemIPBucket(Fluid fluid, Block block, String texture) {
+    public ItemIPBucket(Block block) {
 	super(block);
-	setUnlocalizedName("Container" + fluid.getName());
-	setMaxStackSize(1);
-	setCreativeTab(ISetupCreativeTabs.tabItems);
-	ItemRegistry.RegisterItem(this, ItemType.fluid);
-	BucketHandler.INSTANCE.put(block, this);
-	setTextureName(INamepace.TEXTURE_NAME_PREFIX + texture);
     } 
  
     @Override

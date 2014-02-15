@@ -1,4 +1,4 @@
-package ip.industrialProcessing.fluids;
+package mod.industrialProcessing.fluids;
 
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
