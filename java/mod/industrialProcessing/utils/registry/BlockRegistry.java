@@ -39,6 +39,14 @@ public class BlockRegistry {
 		RegisterBlock(block, BlockType.Block);
 	}
 	
+	public static void registerMCBlock(Block block, String uniqueId, String harvest, int level) {
+		block.setBlockName(uniqueId);
+		block.setCreativeTab(IndustrialProcessing.tabBlocks);
+		block.setHarvestLevel(harvest, level);
+		GameRegistry.registerBlock(block, uniqueId);
+		RegisterBlock(block, BlockType.Block);
+	}
+	
 	public static void registerMetadataBlock(Block block, String uniqueId, String harvest, int level) {
 		block.setBlockName(uniqueId);
 		block.setBlockTextureName(IndustrialProcessing.TEXTURE_NAME_PREFIX + block.getUnlocalizedName());

@@ -4,6 +4,7 @@ import mod.industrialProcessing.IndustrialProcessing;
 import mod.industrialProcessing.blocks.crystals.BlockCrystal;
 import mod.industrialProcessing.blocks.doors.BlockDoor;
 import mod.industrialProcessing.blocks.ore.BlockIPOre;
+import mod.industrialProcessing.blocks.pane.BlockIPPane;
 import mod.industrialProcessing.blocks.platforms.BlockPlatform;
 import mod.industrialProcessing.blocks.platforms.BlockStairs;
 import mod.industrialProcessing.blocks.tree.BlockIndustrialLeaves;
@@ -13,6 +14,7 @@ import mod.industrialProcessing.blocks.tree.BlockPineLog;
 import mod.industrialProcessing.blocks.tree.BlockRubberLog;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockOre;
+import net.minecraft.block.BlockPane;
 import net.minecraft.block.material.Material;
 
 public interface ISetupBlocks {
@@ -42,16 +44,10 @@ public interface ISetupBlocks {
 	public final static BlockPineLog blockPineLog = new BlockPineLog();
 	public final static BlockIndustrialSapling blockSapling = new BlockIndustrialSapling();
 
-	public final static BlockDoor blockDoorEmergency = new BlockDoor(1.0f,1.0f,Material.iron,Block.soundTypeMetal,"Orange","Iron","iron_block","glass");
+	public final static BlockDoor blockDoorEmergency = new BlockDoor(1.0f, 1.0f, Material.iron, Block.soundTypeMetal, "Orange", "Iron", "iron_block", "glass");
 
+	public final static Block blockHalfWavePlate = (new BlockIPPane("blockHalfWavePlate", "blockHalfWavePlate", Material.iron, false)).setHardness(0.9F).setStepSound(Block.soundTypeMetal);
 	/*
-	 * public final static Block blockHalfWavePlate = (new
-	 * BlockPane(ConfigBlocks.getInstance().getBlockHalfWavePlateID(),
-	 * "blockHalfWavePlate", "blockHalfWavePlate", Material.iron,
-	 * false)).setHardness
-	 * (0.9F).setStepSound(Block.soundMetalFootstep).setUnlocalizedName
-	 * ("halfWavePlate");
-	 * 
 	 * public final static MicroBlock microBlock = new MicroBlock();
 	 */
 	// TODO public final static BlockMachineBlock blockMachineBlock = new

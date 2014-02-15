@@ -35,6 +35,7 @@ public class ConfigBlocks {
 		BlockRegistry.registerBlock(ISetupBlocks.blockStairs, "IP.block.stairs", "pickaxe", 1);
 		BlockRegistry.registerBlock(ISetupBlocks.blockPlatform, "IP.block.platform", "pickaxe", 1);
 		BlockRegistry.registerBlock(ISetupBlocks.blockDoorEmergency, "IP.block.doorEmergency", "pickaxe", 1);
+		BlockRegistry.registerMCBlock(ISetupBlocks.blockHalfWavePlate, "IP.block.halfWavePlate", "pickaxe", 1);
 				
 		BlockRegistry.registerMetadataBlock(ISetupBlocks.blockLeaves,"IP.block.tree.leaves", "axe",0);
 		BlockRegistry.registerMetadataBlock(ISetupBlocks.blockLog, "IP.block.tree.log", "axe",0);
