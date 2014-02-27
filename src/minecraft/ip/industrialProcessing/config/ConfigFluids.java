@@ -2,9 +2,14 @@ package ip.industrialProcessing.config;
 
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.config.ConfigCategories;
+import ip.industrialProcessing.fluids.ContainerFluid;
 import ip.industrialProcessing.items.ItemIPBucket;
+import ip.industrialProcessing.subMod.blackSmith.item.ItemWoodenBucket;
+import ip.industrialProcessing.subMod.blackSmith.item.ItemWoodenBucketFilled;
+import ip.industrialProcessing.utils.registry.BucketRegistery;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
@@ -1122,6 +1127,9 @@ public class ConfigFluids {
 	}
 
 	public void registerFluids() {
+		
+		BucketRegistery.put(ItemBucket.class, ContainerFluid.class);
+		
 		registerFluid(ISetupFluids.blockFluidIsoButane, ISetupFluids.itemFluidIsoButane, null, "Isobutane");
 		registerFluid(ISetupFluids.blockFluidButane, ISetupFluids.itemFluidButane, null, "Butane");
 		registerFluid(ISetupFluids.blockFluidAlkylate, ISetupFluids.itemFluidAlkylate, null, "Alkylate");

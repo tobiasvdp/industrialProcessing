@@ -4,11 +4,11 @@ import java.util.List;
 
 import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.fluids.BucketHandler;
 import ip.industrialProcessing.subMod.mine.machines.mining.bobcatMiner.EntityBobcatMiner;
 import ip.industrialProcessing.utils.IReceiver;
 import ip.industrialProcessing.utils.IRemote;
 import ip.industrialProcessing.utils.ISender;
+import ip.industrialProcessing.utils.handler.fluids.BucketHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

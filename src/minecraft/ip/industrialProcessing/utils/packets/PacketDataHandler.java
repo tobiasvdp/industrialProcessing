@@ -8,6 +8,7 @@ import java.io.IOException;
 import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.microBlock.core.BlockMicroBlock;
 import ip.industrialProcessing.subMod.logic.IPLogic;
+import ip.industrialProcessing.utils.IProgressSync;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -47,6 +48,15 @@ public class PacketDataHandler {
 		World world = ((Entity) player).worldObj;
 		if (world != null && !world.isRemote && packet != null) {
 			world.destroyBlock(packet.x, packet.y, packet.z, packet.dropItems);
+		}
+	}
+	public static void handlePacketIP006SyncValues(Player player, PacketIP006SyncValues packet) {
+		World world = ((Entity) player).worldObj;
+		if (world != null && world.isRemote && packet != null) {
+			TileEntity te = world.getBlockTileEntity(packet.x, packet.y, packet.z);
+			if(te != null && te instanceof IProgressSync){
+				((IProgressSync)te).setValues(packet.val);
+			}
 		}
 	}
 	

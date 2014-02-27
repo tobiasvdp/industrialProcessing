@@ -28,17 +28,19 @@ public class RendererTileEntityFluidWorker extends RendererTileEntityAnimated {
 			TankHandler handler = tankSync.getTankHandler();
 
 			this.bindTexture(TextureMap.locationBlocksTexture);
-			int tankCount = handler.getTankCount();
-			for (int l = 0; l < tankCount; l++) {
+			if (handler != null) {
+				int tankCount = handler.getTankCount();
+				for (int l = 0; l < tankCount; l++) {
 
-				int amount = handler.getAmount(l);
-				int fluidId = handler.getFluidID(l);
-				int capacity = handler.getCapacity(l);
-				if (fluidId > 0) {
-					Fluid fluid = FluidRegistry.getFluid(fluidId);
-					if (fluid != null) {
-						Icon icon = fluid.getStillIcon();
-						this.model.renderLiquid(tl, 0.0625f, l, amount / (float) capacity, icon);
+					int amount = handler.getAmount(l);
+					int fluidId = handler.getFluidID(l);
+					int capacity = handler.getCapacity(l);
+					if (fluidId > 0) {
+						Fluid fluid = FluidRegistry.getFluid(fluidId);
+						if (fluid != null) {
+							Icon icon = fluid.getStillIcon();
+							this.model.renderLiquid(tl, 0.0625f, l, amount / (float) capacity, icon);
+						}
 					}
 				}
 			}

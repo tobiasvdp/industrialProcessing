@@ -68,15 +68,15 @@ public class TileEntityMultiblockDummy extends TileEntity implements ITileEntity
 		nbtComp = new NBTTagCompound();
 		nbtComp.setInteger("state", state.ordinal());
 		nbttaglist.appendTag(nbtComp);
-		
+
 		nbtComp = new NBTTagCompound();
 		nbtComp.setBoolean("needRenderUpdate", needRenderUpdate);
 		nbttaglist.appendTag(nbtComp);
-		
+
 		nbtComp = new NBTTagCompound();
 		nbtComp.setInteger("groupID", groupID);
 		nbttaglist.appendTag(nbtComp);
-		
+
 		nbtComp = new NBTTagCompound();
 		nbtComp.setInteger("forward", side.ordinal());
 		nbttaglist.appendTag(nbtComp);
@@ -113,7 +113,6 @@ public class TileEntityMultiblockDummy extends TileEntity implements ITileEntity
 
 		NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(0);
 		modelConnection = nbttagcompound1.getInteger("modelConnection");
-		
 
 		nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(1);
 		modelID = nbttagcompound1.getInteger("modelID");
@@ -123,13 +122,13 @@ public class TileEntityMultiblockDummy extends TileEntity implements ITileEntity
 
 		nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(3);
 		state = MultiblockState.values()[nbttagcompound1.getInteger("state")];
-		
+
 		nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(4);
 		needRenderUpdate = nbttagcompound1.getBoolean("needRenderUpdate");
-		
+
 		nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(5);
 		groupID = nbttagcompound1.getInteger("groupID");
-		
+
 		nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(6);
 		side = FacingDirection.values()[nbttagcompound1.getInteger("forward")];
 
@@ -153,39 +152,41 @@ public class TileEntityMultiblockDummy extends TileEntity implements ITileEntity
 	}
 
 	public boolean searchForCore() {
-		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-			TileEntity neighbour = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
-			if (neighbour instanceof TileEntityMultiblockDummy) {
-				TileEntityMultiblockDummy te = (TileEntityMultiblockDummy) neighbour;
-				if (te.getCore() != null) {
-					TileEntityMultiblockCore teCore = te.getCore();
-					if (teCore.getState() != MultiblockState.COMPLETED && teCore.isDummyValidForStructure(this)) {
-						setCore(teCore);
+		if (getCore() == null) {
+			for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+				TileEntity neighbour = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+				if (neighbour instanceof TileEntityMultiblockDummy) {
+					TileEntityMultiblockDummy te = (TileEntityMultiblockDummy) neighbour;
+					if (te.getCore() != null) {
+						TileEntityMultiblockCore teCore = te.getCore();
+						if (teCore.getState() != MultiblockState.COMPLETED && teCore.isDummyValidForStructure(this)) {
+							setCore(teCore);
+							notifyNeighboursOfCoreSet();
+							return true;
+						} else if (teCore.getState() == MultiblockState.COMPLETED && teCore.isDummyValidForStructure(this, true)) {
+							setCore(teCore);
+							notifyNeighboursOfCoreSet();
+							return true;
+						}
+					}
+				} else if (neighbour instanceof TileEntityMultiblockCore) {
+					TileEntityMultiblockCore te = (TileEntityMultiblockCore) neighbour;
+					if (te.getState() != MultiblockState.COMPLETED && te.isDummyValidForStructure(this)) {
+						setCore(te);
 						notifyNeighboursOfCoreSet();
 						return true;
-					} else if (teCore.getState() == MultiblockState.COMPLETED && teCore.isDummyValidForStructure(this, true)) {
-						setCore(teCore);
+					} else if (te.getState() == MultiblockState.COMPLETED && te.isDummyValidForStructure(this, true)) {
+						setCore(te);
 						notifyNeighboursOfCoreSet();
 						return true;
 					}
-				}
-			} else if (neighbour instanceof TileEntityMultiblockCore) {
-				TileEntityMultiblockCore te = (TileEntityMultiblockCore) neighbour;
-				if (te.getState() != MultiblockState.COMPLETED && te.isDummyValidForStructure(this)) {
-					setCore(te);
-					notifyNeighboursOfCoreSet();
-					return true;
-				} else if (te.getState() == MultiblockState.COMPLETED && te.isDummyValidForStructure(this, true)) {
-					setCore(te);
-					notifyNeighboursOfCoreSet();
-					return true;
 				}
 			}
 		}
 		return false;
 	}
 
-	private void notifyNeighboursOfCoreSet() {
+	protected void notifyNeighboursOfCoreSet() {
 		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
 			TileEntity neighbour = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
 			if (neighbour instanceof TileEntityMultiblockDummy) {
@@ -205,12 +206,12 @@ public class TileEntityMultiblockDummy extends TileEntity implements ITileEntity
 
 		setBlockRotation();
 		state = MultiblockState.CONNECTED;
-		
+
 		onSetCore();
 	}
 
 	public void onSetCore() {
-		
+
 	}
 
 	public void setState(MultiblockState state) {
@@ -218,11 +219,11 @@ public class TileEntityMultiblockDummy extends TileEntity implements ITileEntity
 		needRenderUpdate = true;
 		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
-	
+
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
-		if(needRenderUpdate){
+		if (needRenderUpdate) {
 			this.worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
 			needRenderUpdate = false;
 		}
@@ -233,6 +234,11 @@ public class TileEntityMultiblockDummy extends TileEntity implements ITileEntity
 		if (getCore() != null) {
 			getCore().unregisterDummy(this);
 			core = null;
+			state = MultiblockState.DISCONNECTED;
+			modelID = 0;
+			modelConnection = 0;
+			ID = 0;
+		} else {
 			state = MultiblockState.DISCONNECTED;
 			modelID = 0;
 			modelConnection = 0;
@@ -340,9 +346,9 @@ public class TileEntityMultiblockDummy extends TileEntity implements ITileEntity
 	}
 
 	public void onDestroy() {
-		
+
 	}
-	
+
 	public void setsideFromMetadata(int dir) {
 		switch (dir) {
 		case 1: {

@@ -16,7 +16,10 @@ public class TileEntityMultiblockDummyInvAndTank extends TileEntityMultiblockDum
 	@Override
 	public TileEntityMultiblockCoreTank getCore() {
 		if (loadedFromNBT) {
-			core = (TileEntityMultiblockCore) worldObj.getBlockTileEntity(coreDataFromNBT[0], coreDataFromNBT[1], coreDataFromNBT[2]);
+			if (worldObj.getBlockTileEntity(coreDataFromNBT[0], coreDataFromNBT[1], coreDataFromNBT[2]) instanceof TileEntityMultiblockCore)
+				core = (TileEntityMultiblockCore) worldObj.getBlockTileEntity(coreDataFromNBT[0], coreDataFromNBT[1], coreDataFromNBT[2]);
+			else
+				return null;
 			loadedFromNBT = false;
 		}
 		return (TileEntityMultiblockCoreTank) core;
@@ -62,6 +65,12 @@ public class TileEntityMultiblockDummyInvAndTank extends TileEntityMultiblockDum
 		if (this.getCore() != null)
 			return this.getCore().getTankInfo(getGroup(), from);
 		return null;
+	}
+
+	public boolean tankHasRoomFor(int i, FluidStack fluid) {
+		if (this.getCore() != null)
+			return this.getCore().tankHasRoomFor(i, fluid);
+		return false;
 	}
 
 }
