@@ -30,6 +30,7 @@ public class TechChainControl extends UserControl {
     private boolean followParents = true;
     private boolean followChildren = false;
     private IButtonClickListener<ItemStack> stackClickListener;
+    private ArrayList<Integer> rowSizes = new ArrayList<Integer>();
 
     public TechChainControl(IButtonClickListener<ItemStack> stackClickListener) {
         this.verticalAlign = Alignment.STRETCH;
@@ -42,21 +43,37 @@ public class TechChainControl extends UserControl {
     }
 
     public void setChain(TechChain techChain) {
-  
+
         this.map.clear();
         this.connections.clear();
-
+        this.children.clear();
+        this.rowSizes.clear();
         TreeNode<Block> root = techChain.getRoot();
 
-        CanvasChild child = map.get(root);
-        if (child == null) {
-            child = createChild(root.getItem(), 0, 0);
-            map.put(root, child);
-        }
-        children.add(child);
+        addNode(root, null, 0); 
+    }
 
-        addConnections(root);
-        this.canvas.children = children;
+    private void addNode(TreeNode<Block> root, CanvasChild connectedNode, int row) {
+        for (int i = rowSizes.size(); i <= row; i++)
+            rowSizes.add(0);
+        CanvasChild canvasChild = map.get(root);
+        if (canvasChild == null) {
+            int rowSize = rowSizes.get(row);
+            rowSizes.set(row, rowSize + 1);
+            canvasChild = createChild(root.getItem(), 18 * rowSize * 1.5f, 18 * row * 1.5f);
+            map.put(root, canvasChild);
+            children.add(canvasChild);
+        }
+        if (connectedNode != null) {
+            this.connections.add(new TreeConnection(connectedNode, canvasChild));
+        }
+        int i = 0;
+        Iterator<TreeNode<Block>> parents = followParents ? root.listParents() : root.listChildren();
+        row++;
+        while (parents.hasNext()) {
+            TreeNode<Block> block = parents.next();
+            addNode(block, canvasChild, row);
+        }
     }
 
     @Override
@@ -66,38 +83,6 @@ public class TechChainControl extends UserControl {
             CanvasChild a = treeConnection.a;
             CanvasChild b = treeConnection.b;
             renderer.drawLine(new Size(a.left + 9, a.top + 9), new Size(b.left + 9, b.top + 9), 10f, 0xff000000);
-        }
-    }
-
-    private void addConnections(TreeNode<Block> root) {
-        int i = 0;
-        if (followParents) {
-            Iterator<TreeNode<Block>> parents = root.listParents();
-            while (parents.hasNext()) {
-                TreeNode<Block> block = parents.next();
-                addConnection(block, root, i++, 1);
-            }
-        }
-        if (followChildren) {
-            Iterator<TreeNode<Block>> children = root.listChildren();
-            while (children.hasNext()) {
-                TreeNode<Block> block = children.next();
-                addConnection(block, root, i++, -1);
-            }
-        }
-    }
-
-    private void addConnection(TreeNode<Block> parent, TreeNode<Block> root, int li, int dl) {
-        if (parent != root) {
-            CanvasChild canvasChild = map.get(parent);
-            CanvasChild rootCanvasChild = map.get(root);
-            if (canvasChild == null) {
-                canvasChild = createChild(parent.getItem(), rootCanvasChild.left + 18 * li * 1.5f, rootCanvasChild.top + 18 * dl * 1.5f);
-                map.put(parent, canvasChild);
-                addConnections(parent);
-            }
-            children.add(canvasChild);
-            this.connections.add(new TreeConnection(rootCanvasChild, canvasChild));
         }
     }
 
