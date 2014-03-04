@@ -38,6 +38,7 @@ import ip.industrialProcessing.machines.plants.waste.exhaust.coolingUnit.TileEnt
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator.TileEntityIncubator;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.tricklingFilter.TileEntityTricklingFilter;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatmentStation.TileEntityWaterTreatmentStation;
+import ip.industrialProcessing.machines.redstoneInterface.TileEntityRedstoneInterface;
 import ip.industrialProcessing.machines.sinter.TileEntitySinter;
 import ip.industrialProcessing.machines.spoolWindingMachine.TileEntitySpoolWindingMachine;
 import ip.industrialProcessing.machines.thickener.TileEntityThickener;
@@ -244,6 +245,8 @@ public class ConfigMachineBlocks {
     private int conveyorBeltPowerInputID = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "ConveyorBeltPowerInputID", 746).getInt();
     private int BLtransportConveyorBeltPacker = IndustrialProcessing.config.get(ConfigCategories.transport.toString(), "packerID", 747).getInt();
 
+    private int redstoneInterfaceID = IndustrialProcessing.config.get(ConfigCategories.logic.toString(), "redstoneInterfaceID", 478).getInt();
+
     public void registerMachineBlocks() {
         registerMachineBlock(ISetupMachineBlocks.blockTorch, "IP.Machine.Torch", "Torch", TileEntityTorch.class, BlockType.decoration);
         registerMachineBlock(ISetupMachineBlocks.blockAlkylationUnit, "IP.Machine.AlkUnit", "Alkylation unit", TileEntityAlkylationUnit.class, BlockType.Machine, BlockType.Refinary);
@@ -371,6 +374,7 @@ public class ConfigMachineBlocks {
 
         registerMachineBlock(ISetupMachineBlocks.blockManualTreetap, "IP.TreeTap.Manual", "Manual Treetap", TileEntityManualTreeTap.class, BlockType.Machine, BlockType.assemble);
         registerMachineBlock(ISetupMachineBlocks.blockAutomaticTreetap, "IP.TreeTap.Automatic", "Automatic Treetap", TileEntityAutomaticTreeTap.class, BlockType.Machine, BlockType.assemble);
+        registerMachineBlock(ISetupMachineBlocks.blockRedstoneInterface, "IP.RedstoneInterface", "Redstone Interface", TileEntityRedstoneInterface.class, BlockType.Machine, BlockType.logic);
     }
 
     @Deprecated
@@ -579,6 +583,12 @@ public class ConfigMachineBlocks {
     public static int getSpoolWindingMachineBlockID() {
         return getInstance().spoolWindingMachineBlockID;
     }
+    
+    public static int getRedstoneInterfaceID()
+    {
+        return getInstance().redstoneInterfaceID;
+    }
+    
 
     public static int getIncubatorID() {
         return getInstance().incubatorID;

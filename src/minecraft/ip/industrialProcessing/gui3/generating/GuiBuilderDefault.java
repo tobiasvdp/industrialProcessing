@@ -4,15 +4,22 @@ import ip.industrialProcessing.gui3.containers.GuiLayoutContainer;
 import ip.industrialProcessing.gui3.containers.LayoutContainer;
 import ip.industrialProcessing.gui3.framework.Alignment;
 import ip.industrialProcessing.gui3.framework.Thickness;
+import ip.industrialProcessing.gui3.framework.UIElement;
 import ip.industrialProcessing.gui3.framework.controls.Decorator;
 import ip.industrialProcessing.gui3.framework.controls.IButtonClickListener;
+import ip.industrialProcessing.gui3.framework.controls.SlotItemControl;
 import ip.industrialProcessing.gui3.framework.controls.TextBlock;
+import ip.industrialProcessing.gui3.framework.custom.StateButton;
+import ip.industrialProcessing.gui3.framework.panels.DockPanel;
+import ip.industrialProcessing.gui3.framework.panels.GridCell;
 import ip.industrialProcessing.gui3.framework.panels.GridPanel;
 import ip.industrialProcessing.gui3.framework.panels.GridSize;
 import ip.industrialProcessing.gui3.framework.panels.LayerPanel;
 import ip.industrialProcessing.gui3.framework.panels.Orientation;
 import ip.industrialProcessing.gui3.framework.panels.SizeMode;
 import ip.industrialProcessing.gui3.framework.panels.StackPanel;
+import ip.industrialProcessing.gui3.framework.panels.tabs.TabPage;
+import ip.industrialProcessing.gui3.framework.panels.tabs.TabPanel;
 import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
 import ip.industrialProcessing.gui3.generating.builderParts.BurnerReference;
 import ip.industrialProcessing.gui3.generating.builderParts.DefaultBurner;
@@ -40,7 +47,9 @@ import ip.industrialProcessing.recipes.IMachineRecipe;
 
 import java.util.ArrayList;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
@@ -90,12 +99,12 @@ public class GuiBuilderDefault implements IGuiBuilder {
     }
 
     public GuiBuilderDefault enableWorker(TextureReference texture) {
-        this.workerRef = new WorkerReference(texture);
+        this.workerRef = new WorkerReference(texture); 
         return this;
     }
 
     public GuiBuilderDefault enableWorker() {
-        this.workerRef = new WorkerReference(WORKER_TEXTURE);
+        this.workerRef = new WorkerReference(WORKER_TEXTURE); 
         return this;
     }
 
@@ -197,7 +206,10 @@ public class GuiBuilderDefault implements IGuiBuilder {
     @Override
     public GuiLayoutContainer getGuiContainer(LayoutContainer container, TileEntity tileEntity) {
         Decorator root = Decorator.createDecorator();
-        GuiLayoutContainer guiContainer = new GuiLayoutContainer(container, root);
+        GuiLayoutContainer guiContainer;
+            guiContainer = new GuiLayoutContainer(container, root);
+            root.verticalAlign = Alignment.CENTER;
+            root.horizontalAlign = Alignment.CENTER;
 
         StackPanel verticalStack = new StackPanel();
         verticalStack.orientation = Orientation.VERTICAL;
@@ -243,10 +255,9 @@ public class GuiBuilderDefault implements IGuiBuilder {
         verticalStack.margin = new Thickness(0, 0, 7, 0);
         DefaultInventory.setup(inventoryRef, guiContainer, rootStack);
         root.setChild(rootStack);
-        root.verticalAlign = Alignment.CENTER;
-        root.horizontalAlign = Alignment.CENTER;
         return guiContainer;
     }
+
 
     @Override
     public LayoutContainer getContainer(InventoryPlayer player, TileEntity tileEntity) {

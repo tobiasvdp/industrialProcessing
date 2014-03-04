@@ -35,6 +35,7 @@ import ip.industrialProcessing.machines.plants.waste.exhaust.coolingUnit.BlockCo
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.incubator.BlockIncubator;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.tricklingFilter.BlockTricklingFilter;
 import ip.industrialProcessing.machines.plants.waste.waterTreatment.waterTreatmentStation.BlockWaterTreatmentStation;
+import ip.industrialProcessing.machines.redstoneInterface.BlockRedstoneInterface;
 import ip.industrialProcessing.machines.sinter.BlockSinter;
 import ip.industrialProcessing.machines.spoolWindingMachine.BlockSpoolWindingMachine;
 import ip.industrialProcessing.machines.thickener.BlockThickener;
@@ -238,4 +239,6 @@ public interface ISetupMachineBlocks {
 
     public final static BlockManualTreeTap blockManualTreetap = new BlockManualTreeTap();
     public final static BlockAutomaticTreeTap blockAutomaticTreetap = new BlockAutomaticTreeTap();
+
+    public final static BlockRedstoneInterface blockRedstoneInterface = new BlockRedstoneInterface();
 }

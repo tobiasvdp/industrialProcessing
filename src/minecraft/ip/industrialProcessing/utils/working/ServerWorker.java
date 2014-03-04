@@ -7,6 +7,7 @@ public class ServerWorker implements IWorker {
     private IWorkHandler handler;
     protected int totalWork;
     protected int workDone;
+    private boolean isEnabled = true;
 
     public ServerWorker(IWorkHandler handler, int totalWork) {
         this.handler = handler;
@@ -16,6 +17,7 @@ public class ServerWorker implements IWorker {
     public void writeToNBT(NBTTagCompound nbt) {
         nbt.setInteger("totalWork", totalWork);
         nbt.setInteger("workDone", workDone);
+        nbt.setBoolean("workEnabled", isEnabled);
     }
 
     public void readFromNBT(NBTTagCompound nbt) {
@@ -23,32 +25,37 @@ public class ServerWorker implements IWorker {
             this.totalWork = nbt.getInteger("totalWork");
         if (nbt.hasKey("workDone"))
             this.workDone = nbt.getInteger("workDone");
+        if(nbt.hasKey("workEnabled"))
+            this.isEnabled = nbt.getBoolean("workEnabled");
     }
 
     @Override
     public int doWork(int amount) {
-        int workToDo = 0;
-        if (amount > 0) {
-            if (this.workDone == 0) {
-                onPrepareWork();
-            }
-            if (hasWork()) { // if it has no work, cancel and reset.
-                if (canWork()) { // if can't work, pause
-                    if (workDone == 1)
-                        onBeginWork();
-                    workToDo = Math.min(amount, totalWork - workDone + 1);
-                    onWorkProgressed(workToDo);
-                    if (this.workDone > this.totalWork) {
-                        onEndWork();
-                    }
+        if (isEnabled) {
+            int workToDo = 0;
+            if (amount > 0) {
+                if (this.workDone == 0) {
+                    onPrepareWork();
                 }
-            } else if (workDone > 1) {
-                this.onWorkCancelled();
-            } else
-                this.workDone = 0; // prepare again next tick
+                if (hasWork()) { // if it has no work, cancel and reset.
+                    if (canWork()) { // if can't work, pause
+                        if (workDone == 1)
+                            onBeginWork();
+                        workToDo = Math.min(amount, totalWork - workDone + 1);
+                        onWorkProgressed(workToDo);
+                        if (this.workDone > this.totalWork) {
+                            onEndWork();
+                        }
+                    }
+                } else if (workDone > 1) {
+                    this.onWorkCancelled();
+                } else
+                    this.workDone = 0; // prepare again next tick
 
+            }
+            return workToDo;
         }
-        return workToDo;
+        return 0;
     }
 
     protected void onBeginWork() {
@@ -111,6 +118,16 @@ public class ServerWorker implements IWorker {
     @Override
     public boolean isWorking() {
         return workDone > 1 && workDone <= totalWork;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
+    @Override
+    public void setEnabled(boolean isEnabled) {
+        this.isEnabled = isEnabled;
     }
 
 }

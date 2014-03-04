@@ -4,7 +4,6 @@ import ip.industrialProcessing.IndustrialProcessing;
 import ip.industrialProcessing.api.config.ConfigCategories;
 import ip.industrialProcessing.config.ConfigMachineBlocks;
 import ip.industrialProcessing.config.ISetupItems;
-import ip.industrialProcessing.config.ISetupMachineBlocks;
 import ip.industrialProcessing.recipes.VanillaRecipeBridge;
 import ip.industrialProcessing.subMod.blackSmith.IPBlackSmith;
 import ip.industrialProcessing.subMod.blackSmith.item.ItemWoodenBucket;
@@ -20,7 +19,6 @@ import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.dummy.woodenHa
 import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.dummy.woodenWheel.TileEntityWoodenWheel;
 import ip.industrialProcessing.subMod.blackSmith.plant.waterBasin.TileEntityWaterBasinCore;
 import ip.industrialProcessing.subMod.blackSmith.plant.waterBasin.TileEntityWaterBasinDummy;
-import ip.industrialProcessing.subMod.blackSmith.plant.waterWheel.TileEntityWaterWheel;
 import ip.industrialProcessing.utils.registry.BlockType;
 import ip.industrialProcessing.utils.registry.BucketRegistery;
 import ip.industrialProcessing.utils.registry.RecipeRegistry;
@@ -28,8 +26,8 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
+import net.minecraftforge.fluids.FluidRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -110,10 +108,8 @@ public class ConfigBlackSmith {
 		ConfigMachineBlocks.registerMachineBlock(ISetupBlackSmith.blockWoodenWheel, "IP.MBD.WWheel", "Wooden wheel", TileEntityWoodenWheel.class, BlockType.Dummy, BlockType.blackSmith);
 		ConfigMachineBlocks.registerMachineBlock(ISetupBlackSmith.blockForge, "IP.MBD.Forge", "Forge", TileEntityForgeDummy.class, BlockType.Machine, BlockType.blackSmith);
 		GameRegistry.registerTileEntity(TileEntityForgeCore.class, "IP.MBC.Forge");
-		ConfigMachineBlocks.registerMachineBlock(ISetupBlackSmith.blockWaterWheel, "IP.MBD.WaterWh", "Water wheel", TileEntityWaterWheel.class, BlockType.Machine, BlockType.blackSmith);
 		
 		// vanilla recipes
-		RecipeRegistry.appendVanillaRecipe(VanillaRecipeBridge.getRecipeFromVanilla(GameRegistry.addShapedRecipe(new ItemStack(ISetupBlackSmith.blockBloomery), "xyx", "y y", "xzx", 'x', new ItemStack(Item.brick), 'y', new ItemStack(Block.dirt), 'z', new ItemStack(Block.cobblestone))));
 		RecipeRegistry.appendVanillaRecipe(VanillaRecipeBridge.getRecipeFromVanilla(GameRegistry.addShapedRecipe(new ItemStack(ISetupBlackSmith.blockBellows), "xxx", "yyy", "xxx", 'x', new ItemStack(Block.wood, 1, WILDCARD_VALUE), 'y', new ItemStack(Item.leather))));
 		RecipeRegistry.appendVanillaRecipe(VanillaRecipeBridge.getRecipeFromVanilla(GameRegistry.addShapedRecipe(new ItemStack(ISetupBlackSmith.blockIronBowl), "   ", "xyx", "   ", 'x', new ItemStack(ISetupItems.itemThickStick), 'y', new ItemStack(ISetupItems.itemIronBowl, 8))));
 		RecipeRegistry.appendVanillaRecipe(VanillaRecipeBridge.getRecipeFromVanilla(GameRegistry.addShapedRecipe(new ItemStack(ISetupBlackSmith.blockWaterBasin), "   ", "x x", "xxx", 'x', new ItemStack(Block.cobblestone))));

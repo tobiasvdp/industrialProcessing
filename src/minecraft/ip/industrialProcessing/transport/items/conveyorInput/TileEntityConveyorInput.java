@@ -259,4 +259,9 @@ public class TileEntityConveyorInput extends TileEntityConveyorInventoryBase imp
 			return 0;
 		return 0;
 	}
+
+    @Override
+    public int getStateCount() { 
+        return 2;
+    }
 }

@@ -16,5 +16,6 @@ public interface IWorker {
 
 	boolean isWorking();
  
-
+	boolean isEnabled();
+	void setEnabled(boolean isEnabled);
 }

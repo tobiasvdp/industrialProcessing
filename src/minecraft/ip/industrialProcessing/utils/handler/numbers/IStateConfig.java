@@ -5,4 +5,5 @@ public interface IStateConfig {
     void setStateValue(int index, int value);
     int getMaxStateValue(int index);
     int getMinStateValue(int index);
+    int getStateCount();
 }

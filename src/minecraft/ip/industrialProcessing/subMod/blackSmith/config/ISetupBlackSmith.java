@@ -1,8 +1,5 @@
 package ip.industrialProcessing.subMod.blackSmith.config;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemBucket;
-import net.minecraftforge.fluids.FluidRegistry;
 import ip.industrialProcessing.api.config.INamepace;
 import ip.industrialProcessing.items.ItemIP;
 import ip.industrialProcessing.subMod.blackSmith.IPBlackSmith;
@@ -17,7 +14,8 @@ import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.dummy.woodenBa
 import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.dummy.woodenHammer.BlockWoodenHammer;
 import ip.industrialProcessing.subMod.blackSmith.plant.tripHammer.dummy.woodenWheel.BlockWoodenWheel;
 import ip.industrialProcessing.subMod.blackSmith.plant.waterBasin.BlockWaterBasin;
-import ip.industrialProcessing.subMod.blackSmith.plant.waterWheel.BlockWaterWheel;
+import net.minecraft.block.Block;
+import net.minecraftforge.fluids.FluidRegistry;
 
 public interface ISetupBlackSmith {
 	//items
@@ -38,6 +36,5 @@ public interface ISetupBlackSmith {
     public final static BlockWoodenBar blockWoodenBar = new BlockWoodenBar();
     public final static BlockWoodenHammer blockWoodenHammer = new BlockWoodenHammer();
     public final static BlockWoodenWheel blockWoodenWheel = new BlockWoodenWheel();
-    public final static BlockForge blockForge = new BlockForge();
-    public final static BlockWaterWheel blockWaterWheel = new BlockWaterWheel();
+    public final static BlockForge blockForge = new BlockForge(); 
 }

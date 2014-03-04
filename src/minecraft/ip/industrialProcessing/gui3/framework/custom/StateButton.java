@@ -22,74 +22,74 @@ public class StateButton extends UserControl implements IButtonClickListener, IV
     private ArrayList<IValueBindingChangedListener> valueChangedListeners = new ArrayList<IValueBindingChangedListener>();
 
     public StateButton(TextureReference texture, int rows, int columns, String[] names) {
-	this.width = Float.NaN;
-	this.height = Float.NaN;
-	this.isHittestVisible = true;
-	tile = new ImageTile(texture, rows, columns, names);
-	tile.margin = new Thickness(1, 1, 1, 1);
-	button = new Button(tile);
-	button.subscribeClick(this);
-	this.child = button;
+        this.width = Float.NaN;
+        this.height = Float.NaN;
+        this.isHittestVisible = true;
+        tile = new ImageTile(texture, rows, columns, names);
+        tile.margin = new Thickness(1, 1, 1, 1);
+        button = new Button(tile);
+        button.subscribeClick(this);
+        this.child = button;
     }
 
     @Override
     public void buttonClicked(Button button, Object tag, float mouseX, float mouseY, MouseButton mouseButton) {
-	if (button == this.button) {
-	    int oldValue = getValue();
-	    if (mouseButton == MouseButton.LEFT) {
-		setValue(oldValue + 1);
-	    } else if (mouseButton == MouseButton.RIGHT)
-		setValue(oldValue - 1);
-	    int newValue = getValue();
-	    this.onValueChanged(oldValue, newValue);
-	}
+        if (button == this.button) {
+            int oldValue = getValue();
+            if (mouseButton == MouseButton.LEFT) {
+                setValue(oldValue + 1);
+            } else if (mouseButton == MouseButton.RIGHT)
+                setValue(oldValue - 1);
+            int newValue = getValue();
+            this.onValueChanged(oldValue, newValue);
+        }
     }
 
     public void setValue(int i) {
-	if (this.value != i) {
-	    int range = (maxValue - minValue) + 1;
-	    i -= minValue;
+        if (this.value != i) {
+            int range = (maxValue - minValue) + 1;
+            i -= minValue;
 
-	    while (i < 0)
-		i += range;
-	    i %= range;
+            while (i < 0)
+                i += range;
+            i %= range;
 
-	    int oldValue = this.value;
-	    this.value = i + minValue;
-	    this.tile.index = value;
-	}
+            int oldValue = this.value;
+            this.value = i + minValue;
+            this.tile.index = value;
+        }
     }
 
     @Override
     public int getValue() {
-	return this.value;
+        return this.value;
     }
 
     private void onValueChanged(int oldValue, int newValue) {
-	if (this.value != oldValue) {
-	    for (IValueBindingChangedListener listener : this.valueChangedListeners) {
-		listener.onValueChanged(this, oldValue, newValue);
-	    }
-	}
+        if (this.value != oldValue) {
+            for (IValueBindingChangedListener listener : this.valueChangedListeners) {
+                listener.onValueChanged(this, oldValue, newValue);
+            }
+        }
     }
 
     @Override
     public void subscribe(IValueBindingChangedListener listener) {
-	this.valueChangedListeners.add(listener);
+        this.valueChangedListeners.add(listener);
     }
 
     @Override
     public void unsubscribe(IValueBindingChangedListener listener) {
-	this.valueChangedListeners.remove(listener);
+        this.valueChangedListeners.remove(listener);
     }
 
     @Override
     public void setMaxValue(int maxValue) {
-	this.maxValue = maxValue;
+        this.maxValue = maxValue;
     }
 
     @Override
     public void setMinValue(int minValue) {
-	this.minValue = minValue;
+        this.minValue = minValue;
     }
 }

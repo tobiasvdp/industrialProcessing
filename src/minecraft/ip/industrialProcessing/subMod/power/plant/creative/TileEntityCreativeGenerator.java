@@ -70,4 +70,9 @@ public class TileEntityCreativeGenerator extends TileEntityPowerGenerator implem
         return 0;
     }
 
+    @Override
+    public int getStateCount() { 
+        return 1;
+    }
+
 }
