@@ -2,9 +2,9 @@ package mod.industrialProcessing.utils.handlers.worldGeneration;
 
 import java.util.Random;
 
-import mod.industrialProcessing.blocks.ISetupBlocks;
-import mod.industrialProcessing.blocks.tree.IndustrialTrees;
-import mod.industrialProcessing.blocks.tree.WorldGenIndustrialTree;
+import mod.industrialProcessing.block.ISetupBlocks;
+import mod.industrialProcessing.block.tree.IndustrialTrees;
+import mod.industrialProcessing.block.tree.WorldGenIndustrialTree;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;

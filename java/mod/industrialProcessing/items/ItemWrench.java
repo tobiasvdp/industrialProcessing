@@ -29,7 +29,7 @@ public class ItemWrench extends ItemIP {
         if (entity instanceof IRotateableEntity) {
             IRotateableEntity item = (IRotateableEntity) entity;
             if (item.canWrenchRotate()) {
-                BlockMachine.setRotation(item, par2EntityPlayer);
+                BlockContainerIP.setRotation(item, par2EntityPlayer);
                 return true;
             }
         }

@@ -1,6 +1,6 @@
 package mod.industrialProcessing.items;
 
-import mod.industrialProcessing.blocks.ISetupBlocks;
+import mod.industrialProcessing.block.ISetupBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;

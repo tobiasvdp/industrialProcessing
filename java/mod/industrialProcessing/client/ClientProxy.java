@@ -1,11 +1,11 @@
 package mod.industrialProcessing.client;
 
 import mod.industrialProcessing.CommonProxy;
-import mod.industrialProcessing.blocks.ISetupBlocks;
-import mod.industrialProcessing.blocks.crystals.ModelCrystal;
-import mod.industrialProcessing.blocks.doors.emergency.model.ModelDoorEmergency;
-import mod.industrialProcessing.blocks.platforms.ModelPlatform;
-import mod.industrialProcessing.blocks.platforms.ModelStairs;
+import mod.industrialProcessing.block.ISetupBlocks;
+import mod.industrialProcessing.block.crystals.ModelCrystal;
+import mod.industrialProcessing.block.doors.emergency.model.ModelDoorEmergency;
+import mod.industrialProcessing.block.platforms.ModelPlatform;
+import mod.industrialProcessing.block.platforms.ModelStairs;
 import mod.industrialProcessing.client.rendering.ModelBlock;
 import mod.industrialProcessing.utils.registry.RenderRegistry;
 

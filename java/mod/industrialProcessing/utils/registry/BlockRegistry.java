@@ -5,17 +5,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import mod.industrialProcessing.IndustrialProcessing;
+import mod.industrialProcessing.utils.block.IRecipeBlock;
 import mod.industrialProcessing.utils.forgeFixes.ItemBlockWithMeta;
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlockWithMetadata;
-import net.minecraft.item.ItemLeaves;
-import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class BlockRegistry {
 	private static HashMap<Block, BlockType[]> array = new HashMap<Block, BlockType[]>();
@@ -29,7 +24,7 @@ public class BlockRegistry {
 		OreDictionary.registerOre(oreDictionaryKey, block);
 		RegisterBlock(block, BlockType.Ore);
 	}
-	
+
 	public static void registerBlock(Block block, String uniqueId, String harvest, int level) {
 		block.setBlockName(uniqueId);
 		block.setBlockTextureName(IndustrialProcessing.TEXTURE_NAME_PREFIX + block.getUnlocalizedName());
@@ -38,7 +33,7 @@ public class BlockRegistry {
 		GameRegistry.registerBlock(block, uniqueId);
 		RegisterBlock(block, BlockType.Block);
 	}
-	
+
 	public static void registerMCBlock(Block block, String uniqueId, String harvest, int level) {
 		block.setBlockName(uniqueId);
 		block.setCreativeTab(IndustrialProcessing.tabBlocks);
@@ -46,15 +41,15 @@ public class BlockRegistry {
 		GameRegistry.registerBlock(block, uniqueId);
 		RegisterBlock(block, BlockType.Block);
 	}
-	
+
 	public static void registerMetadataBlock(Block block, String uniqueId, String harvest, int level) {
 		block.setBlockName(uniqueId);
 		block.setBlockTextureName(IndustrialProcessing.TEXTURE_NAME_PREFIX + block.getUnlocalizedName());
-		block.setHarvestLevel(harvest, level);		
+		block.setHarvestLevel(harvest, level);
 		GameRegistry.registerBlock(block, ItemBlockWithMeta.class, uniqueId);
 		RegisterBlock(block, BlockType.Block);
 	}
-	
+
 	public static void registerFluid(Block block, String uniqueId) {
 		block.setBlockName(uniqueId);
 		block.setCreativeTab(IndustrialProcessing.tabFluids);
@@ -62,13 +57,30 @@ public class BlockRegistry {
 		RegisterBlock(block, BlockType.fluid);
 	}
 
-	
+	public static void registerMachine(Block block, Class tileEntity, String uniqueId) {
+		block.setBlockName(uniqueId);
+		block.setBlockTextureName(IndustrialProcessing.TEXTURE_NAME_PREFIX + block.getUnlocalizedName());
+		block.setCreativeTab(IndustrialProcessing.tabMachines);
+		block.setHarvestLevel("pickaxe", 1);
+		
+		GameRegistry.registerBlock(block, uniqueId);
+		RegisterBlock(block, BlockType.Machine);
+		
+		TileEntityRegistry.registerTileEntity(block, tileEntity, uniqueId);
+
+		
+		// TODO if (block instanceof IRecipeBlock)
+		// TODO	RecipeRegistry.registerMachinesRecipes(((IRecipeBlock) block).getRecipes(), block);
+		// TODO if (block instanceof BlockMicroBlock)
+		// TODO MicroBlockRegistry.RegisterMicroBlock((BlockMicroBlock) block);
+	}
+
 	private static void RegisterBlock(Block block, BlockType[] type) {
 		array.put(block, type);
 	}
-	
+
 	private static void RegisterBlock(Block block, BlockType type) {
-		RegisterBlock(block,new BlockType[]{type});
+		RegisterBlock(block, new BlockType[] { type });
 	}
 
 	public static Iterator<Block> getBlocks() {

@@ -1,8 +1,10 @@
 package mod.industrialProcessing;
 
 import net.minecraftforge.common.MinecraftForge;
-import mod.industrialProcessing.blocks.ConfigBlocks;
-import mod.industrialProcessing.blocks.ISetupBlocks;
+import mod.industrialProcessing.block.ConfigBlocks;
+import mod.industrialProcessing.block.ISetupBlocks;
+import mod.industrialProcessing.blockContainer.ConfigBlockContainers;
+import mod.industrialProcessing.blockContainer.ISetupBlockContainers;
 import mod.industrialProcessing.client.ClientProxy;
 import mod.industrialProcessing.creativeTab.ISetupCreativeTabs;
 import mod.industrialProcessing.fluids.ConfigFluids;
@@ -26,7 +28,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid = IndustrialProcessing.MODID, version = IndustrialProcessing.VERSION)
-public class IndustrialProcessing implements INamepace, ISetupCreativeTabs, ISetupItems, ISetupBlocks, ISetupFluids, ISetupDamageSource {
+public class IndustrialProcessing implements INamepace, ISetupCreativeTabs, ISetupItems, ISetupBlocks, ISetupFluids, ISetupDamageSource, ISetupBlockContainers {
 	public static final String MODID = "IndustrialProcessing";
 	public static final String VERSION = "0.0.3";
 	private static ModContainer container;
@@ -53,6 +55,7 @@ public class IndustrialProcessing implements INamepace, ISetupCreativeTabs, ISet
 		
 		// register blocks
 		ConfigBlocks.getInstance().registerBlocks();
+		ConfigBlockContainers.getInstance().registerBlocks();
 		
 		//register fluids
 		ConfigFluids.getInstance().registerFluids();

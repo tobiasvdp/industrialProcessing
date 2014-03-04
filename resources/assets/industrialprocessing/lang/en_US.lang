@@ -1,8 +1,9 @@
 IP.itemGroup.ores=Ores
 IP.itemGroup.blocks=Blocks
-IP.itemGroup.machines=Machines
+IP.itemGroup.machineParts=Machine parts
 IP.itemGroup.items=Items
 IP.itemGroup.fluids=Fluids
+IP.itemGroup.machines=Machines
 
 IP.blockType.ore=ore
 
