@@ -6,4 +6,7 @@ public interface IRotateableEntity {
 	ForgeDirection getForwardDirection();
 	void setForwardDirection(ForgeDirection forward); 
 	boolean canWrenchRotate();
+	LocalDirection getLocalDirection(ForgeDirection dir);
+	LocalDirection getLocalDirection(int dir);
+	ForgeDirection getExternalDirection(LocalDirection dir);
 }

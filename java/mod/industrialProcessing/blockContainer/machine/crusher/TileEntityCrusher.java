@@ -1,4 +1,4 @@
-package ip.industrialProcessing.machines.crusher;
+package mod.industrialProcessing.blockContainer.machine.crusher;
 
 import java.util.Iterator;
 

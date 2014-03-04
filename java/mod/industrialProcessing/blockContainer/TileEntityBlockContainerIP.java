@@ -1,6 +1,7 @@
 package mod.industrialProcessing.blockContainer;
 
 import mod.industrialProcessing.utils.rotation.IRotateableEntity;
+import mod.industrialProcessing.utils.rotation.LocalDirection;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
@@ -70,4 +71,21 @@ public class TileEntityBlockContainerIP extends TileEntity implements IRotateabl
 	public boolean canWrenchRotate() {
 		return true;
 	}
+	
+	protected int[][] rotationMatrix = new int[][]{{2,3,1,0,4,5},{2,3,0,1,5,4},{0,1,3,2,5,4},{0,1,2,3,4,5},{0,1,5,4,2,3},{0,1,4,5,3,2}}; 
+
+	@Override
+	public LocalDirection getLocalDirection(ForgeDirection dir) {
+		return LocalDirection.VALID_DIRECTIONS[rotationMatrix[getForwardDirection().ordinal()][dir.ordinal()]];
+	}
+	@Override
+	public LocalDirection getLocalDirection(int dir) {
+		return getLocalDirection(ForgeDirection.VALID_DIRECTIONS[dir]);
+	}
+	@Override
+	public ForgeDirection getExternalDirection(LocalDirection dir) {
+		return ForgeDirection.VALID_DIRECTIONS[rotationMatrix[getForwardDirection().ordinal()][dir.ordinal()]];
+	}
+
+
 }
