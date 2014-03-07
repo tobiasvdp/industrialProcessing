@@ -1,6 +1,6 @@
 package mod.industrialProcessing.gui.containers.handlers;
 
-import ip.industrialProcessing.gui3.binding.IProgressBinding;
+import mod.industrialProcessing.gui.binding.IProgressBinding;
 
 public abstract class ProgressHandlerBase extends BindingHandlerBase<IProgressBinding> {
 

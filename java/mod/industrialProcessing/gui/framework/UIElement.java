@@ -1,5 +1,6 @@
 package mod.industrialProcessing.gui.framework;
 
+import mod.industrialProcessing.gui.framework.controls.ToolTip;
 import mod.industrialProcessing.gui.framework.panels.MouseButton;
 import mod.industrialProcessing.gui.framework.rendering.GuiRenderer;
 

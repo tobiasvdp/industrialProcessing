@@ -5,6 +5,7 @@ import java.util.List;
 import mod.industrialProcessing.gui.framework.Rect;
 import mod.industrialProcessing.gui.framework.Size;
 import mod.industrialProcessing.gui.framework.Thickness;
+import mod.industrialProcessing.gui.framework.controls.ToolTip;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;

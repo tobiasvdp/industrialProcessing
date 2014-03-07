@@ -1,12 +1,12 @@
 package mod.industrialProcessing.gui.framework.panels;
 
-import ip.industrialProcessing.client.render.gui.ToolTip;
-import ip.industrialProcessing.gui3.framework.Rect;
-import ip.industrialProcessing.gui3.framework.UIElement;
-import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import mod.industrialProcessing.gui.framework.Rect;
+import mod.industrialProcessing.gui.framework.UIElement;
+import mod.industrialProcessing.gui.framework.controls.ToolTip;
+import mod.industrialProcessing.gui.framework.rendering.GuiRenderer;
 
 public abstract class Panel extends UIElement {
 

@@ -1,17 +1,17 @@
 package mod.industrialProcessing.gui.framework.custom;
 
-import ip.industrialProcessing.gui3.framework.Rect;
-import ip.industrialProcessing.gui3.framework.UIElement;
-import ip.industrialProcessing.gui3.framework.controls.IButtonClickListener;
-import ip.industrialProcessing.gui3.framework.controls.SlotControl;
-import ip.industrialProcessing.gui3.framework.controls.SlotItemControl;
-import ip.industrialProcessing.gui3.framework.controls.UserControl;
-import ip.industrialProcessing.gui3.framework.panels.GridCell;
-import ip.industrialProcessing.gui3.framework.panels.GridPanel;
-import ip.industrialProcessing.gui3.framework.panels.GridSize;
-import ip.industrialProcessing.gui3.framework.panels.Orientation;
-import ip.industrialProcessing.gui3.framework.panels.SizeMode;
-import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
+import mod.industrialProcessing.gui.framework.Rect;
+import mod.industrialProcessing.gui.framework.UIElement;
+import mod.industrialProcessing.gui.framework.controls.IButtonClickListener;
+import mod.industrialProcessing.gui.framework.controls.SlotControl;
+import mod.industrialProcessing.gui.framework.controls.SlotItemControl;
+import mod.industrialProcessing.gui.framework.controls.UserControl;
+import mod.industrialProcessing.gui.framework.panels.GridCell;
+import mod.industrialProcessing.gui.framework.panels.GridPanel;
+import mod.industrialProcessing.gui.framework.panels.GridSize;
+import mod.industrialProcessing.gui.framework.panels.Orientation;
+import mod.industrialProcessing.gui.framework.panels.SizeMode;
+import mod.industrialProcessing.gui.framework.rendering.GuiRenderer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 

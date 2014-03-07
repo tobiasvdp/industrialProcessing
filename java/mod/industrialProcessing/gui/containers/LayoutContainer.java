@@ -3,6 +3,7 @@ package mod.industrialProcessing.gui.containers;
 import java.util.ArrayList;
 
 import mod.industrialProcessing.gui.containers.handlers.IContainerHandler;
+import mod.industrialProcessing.utils.containers.IContainerAdd;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.IInventory;

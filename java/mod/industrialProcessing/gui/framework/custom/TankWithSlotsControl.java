@@ -1,15 +1,15 @@
 package mod.industrialProcessing.gui.framework.custom;
 
-import ip.industrialProcessing.gui3.binding.ITankBinding;
-import ip.industrialProcessing.gui3.framework.controls.SlotControl;
-import ip.industrialProcessing.gui3.framework.controls.TankControl;
-import ip.industrialProcessing.gui3.framework.controls.UserControl;
-import ip.industrialProcessing.gui3.framework.panels.GridCell;
-import ip.industrialProcessing.gui3.framework.panels.GridPanel;
-import ip.industrialProcessing.gui3.framework.panels.GridSize;
-import ip.industrialProcessing.gui3.framework.panels.Orientation;
-import ip.industrialProcessing.gui3.framework.panels.SizeMode;
-import ip.industrialProcessing.gui3.framework.panels.StackPanel;
+import mod.industrialProcessing.gui.binding.ITankBinding;
+import mod.industrialProcessing.gui.framework.controls.SlotControl;
+import mod.industrialProcessing.gui.framework.controls.TankControl;
+import mod.industrialProcessing.gui.framework.controls.UserControl;
+import mod.industrialProcessing.gui.framework.panels.GridCell;
+import mod.industrialProcessing.gui.framework.panels.GridPanel;
+import mod.industrialProcessing.gui.framework.panels.GridSize;
+import mod.industrialProcessing.gui.framework.panels.Orientation;
+import mod.industrialProcessing.gui.framework.panels.SizeMode;
+import mod.industrialProcessing.gui.framework.panels.StackPanel;
 import net.minecraft.inventory.Slot;
 
 public class TankWithSlotsControl extends UserControl implements ITankBinding {

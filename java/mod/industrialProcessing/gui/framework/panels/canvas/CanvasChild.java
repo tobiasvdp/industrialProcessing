@@ -1,6 +1,6 @@
 package mod.industrialProcessing.gui.framework.panels.canvas;
 
-import ip.industrialProcessing.gui3.framework.UIElement;
+import mod.industrialProcessing.gui.framework.UIElement;
 
 public class CanvasChild {
     public float left = 0;

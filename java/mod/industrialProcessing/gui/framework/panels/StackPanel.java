@@ -1,10 +1,10 @@
 package mod.industrialProcessing.gui.framework.panels;
 
-import ip.industrialProcessing.gui3.framework.Alignment;
-import ip.industrialProcessing.gui3.framework.Rect;
-import ip.industrialProcessing.gui3.framework.Size;
-import ip.industrialProcessing.gui3.framework.UIElement;
-import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
+import mod.industrialProcessing.gui.framework.Alignment;
+import mod.industrialProcessing.gui.framework.Rect;
+import mod.industrialProcessing.gui.framework.Size;
+import mod.industrialProcessing.gui.framework.UIElement;
+import mod.industrialProcessing.gui.framework.rendering.GuiRenderer;
 
 public class StackPanel extends Panel {
 

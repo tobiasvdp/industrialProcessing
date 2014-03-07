@@ -1,11 +1,14 @@
 package mod.industrialProcessing.gui.generating.builderParts;
 
+import mod.industrialProcessing.gui.binding.Binder;
 import mod.industrialProcessing.gui.containers.GuiLayoutContainer;
 import mod.industrialProcessing.gui.containers.LayoutContainer;
 import mod.industrialProcessing.gui.containers.handlers.DurabilityHandler;
+import mod.industrialProcessing.gui.framework.Alignment;
 import mod.industrialProcessing.gui.framework.Thickness;
 import mod.industrialProcessing.gui.framework.controls.ProgressBar;
 import mod.industrialProcessing.gui.framework.panels.StackPanel;
+import mod.industrialProcessing.utils.block.IDurability;
 import net.minecraft.tileentity.TileEntity;
 
 public class DefaultDurability {

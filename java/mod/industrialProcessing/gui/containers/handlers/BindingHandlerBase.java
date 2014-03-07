@@ -1,7 +1,7 @@
 package mod.industrialProcessing.gui.containers.handlers;
 
-import ip.industrialProcessing.gui3.binding.IBinding;
-import ip.industrialProcessing.gui3.binding.IBindingSource;
+import mod.industrialProcessing.gui.binding.IBinding;
+import mod.industrialProcessing.gui.binding.IBindingSource;
 
 public abstract class BindingHandlerBase<T extends IBinding> extends HandlerBase implements IBindingSource<T> {
 

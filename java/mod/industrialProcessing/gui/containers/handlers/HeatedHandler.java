@@ -1,6 +1,6 @@
 package mod.industrialProcessing.gui.containers.handlers;
 
-import ip.industrialProcessing.utils.handler.heat.IHeated;
+import mod.industrialProcessing.utils.handlers.heat.IHeated;
 
 public class HeatedHandler extends ProgressHandlerBase {
     private IHeated heatedEntity;

@@ -1,7 +1,6 @@
 package mod.industrialProcessing.gui.containers.handlers;
 
-import ip.industrialProcessing.gui3.binding.ITankBinding;
-import ip.industrialProcessing.machines.containers.IFluidMachineContainerEntity;
+import mod.industrialProcessing.gui.binding.ITankBinding;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 

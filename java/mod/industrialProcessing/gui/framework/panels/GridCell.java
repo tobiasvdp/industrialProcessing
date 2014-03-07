@@ -1,6 +1,6 @@
 package mod.industrialProcessing.gui.framework.panels;
 
-import ip.industrialProcessing.gui3.framework.UIElement;
+import mod.industrialProcessing.gui.framework.UIElement;
 
 public class GridCell {
     public GridCell(int row, int column, int rowSpan, int columnSpan, UIElement content) {

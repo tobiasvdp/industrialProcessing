@@ -1,6 +1,6 @@
 package mod.industrialProcessing.gui.containers.handlers;
 
-import ip.industrialProcessing.utils.IDurability;
+import mod.industrialProcessing.utils.block.IDurability;
 
 public class DurabilityHandler extends ProgressHandlerBase {
 

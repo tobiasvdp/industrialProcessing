@@ -1,7 +1,5 @@
 package mod.industrialProcessing.gui.containers.handlers;
 
-import ip.industrialProcessing.utils.working.IWorker;
-import ip.industrialProcessing.utils.working.IWorkingEntity;
 
 public class WorkHandler extends ProgressHandlerBase {
 

@@ -1,14 +1,14 @@
 package mod.industrialProcessing.gui.framework.panels;
 
-import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.client.render.gui.ToolTip;
-import ip.industrialProcessing.gui3.framework.Alignment;
-import ip.industrialProcessing.gui3.framework.Rect;
-import ip.industrialProcessing.gui3.framework.Size;
-import ip.industrialProcessing.gui3.framework.Thickness;
-import ip.industrialProcessing.gui3.framework.UIElement;
-import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
-import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
+import mod.industrialProcessing.IndustrialProcessing;
+import mod.industrialProcessing.gui.framework.Alignment;
+import mod.industrialProcessing.gui.framework.Rect;
+import mod.industrialProcessing.gui.framework.Size;
+import mod.industrialProcessing.gui.framework.Thickness;
+import mod.industrialProcessing.gui.framework.UIElement;
+import mod.industrialProcessing.gui.framework.controls.ToolTip;
+import mod.industrialProcessing.gui.framework.rendering.GuiRenderer;
+import mod.industrialProcessing.gui.framework.rendering.TextureReference;
 
 public class ScrollPanel extends UIElement {
     private static final TextureReference DEFAULT_SCROLLBAR_VERTICAL_TEXTURE = new TextureReference(new Size(14, 129f), IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/Scrollbar.png");

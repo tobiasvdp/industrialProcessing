@@ -1,12 +1,12 @@
 package mod.industrialProcessing.gui.framework.panels;
 
-import ip.industrialProcessing.client.render.gui.ToolTip;
-import ip.industrialProcessing.gui3.framework.Rect;
-import ip.industrialProcessing.gui3.framework.Size;
-import ip.industrialProcessing.gui3.framework.UIElement;
-import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
-
 import java.util.ArrayList;
+
+import mod.industrialProcessing.gui.framework.Rect;
+import mod.industrialProcessing.gui.framework.Size;
+import mod.industrialProcessing.gui.framework.UIElement;
+import mod.industrialProcessing.gui.framework.controls.ToolTip;
+import mod.industrialProcessing.gui.framework.rendering.GuiRenderer;
 
 public class GridPanel extends UIElement {
     public ArrayList<GridSize> rows = new ArrayList<GridSize>();

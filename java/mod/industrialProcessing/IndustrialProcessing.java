@@ -14,6 +14,7 @@ import mod.industrialProcessing.items.ISetupItems;
 import mod.industrialProcessing.utils.INamepace;
 import mod.industrialProcessing.utils.damage.ISetupDamageSource;
 import mod.industrialProcessing.utils.handlers.fluids.BucketHandler;
+import mod.industrialProcessing.utils.handlers.gui.GuiHandler;
 import mod.industrialProcessing.utils.handlers.worldGeneration.WorldGeneration;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -23,6 +24,7 @@ import cpw.mods.fml.common.ModContainer;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -62,6 +64,9 @@ public class IndustrialProcessing implements INamepace, ISetupCreativeTabs, ISet
 		
 		//register worldGeneration
 		GameRegistry.registerWorldGenerator(new WorldGeneration(), 100);
+		
+		//register guihandler
+		NetworkRegistry.INSTANCE.registerGuiHandler(this.instance,new GuiHandler());
 
 	}
 

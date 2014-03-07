@@ -1,7 +1,7 @@
 package mod.industrialProcessing.gui.framework.rendering;
 
-import ip.industrialProcessing.api.config.INamepace;
-import ip.industrialProcessing.gui3.framework.Size;
+import mod.industrialProcessing.gui.framework.Size;
+import mod.industrialProcessing.utils.INamepace;
 import net.minecraft.util.ResourceLocation;
 
 public class TextureReference {

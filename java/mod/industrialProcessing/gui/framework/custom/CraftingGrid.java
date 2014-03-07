@@ -1,15 +1,15 @@
 package mod.industrialProcessing.gui.framework.custom;
 
-import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.gui3.framework.Alignment;
-import ip.industrialProcessing.gui3.framework.Rect;
-import ip.industrialProcessing.gui3.framework.Size;
-import ip.industrialProcessing.gui3.framework.controls.Image;
-import ip.industrialProcessing.gui3.framework.controls.SlotControl;
-import ip.industrialProcessing.gui3.framework.controls.UserControl;
-import ip.industrialProcessing.gui3.framework.panels.Orientation;
-import ip.industrialProcessing.gui3.framework.panels.StackPanel;
-import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
+import mod.industrialProcessing.IndustrialProcessing;
+import mod.industrialProcessing.gui.framework.Alignment;
+import mod.industrialProcessing.gui.framework.Rect;
+import mod.industrialProcessing.gui.framework.Size;
+import mod.industrialProcessing.gui.framework.controls.Image;
+import mod.industrialProcessing.gui.framework.controls.SlotControl;
+import mod.industrialProcessing.gui.framework.controls.UserControl;
+import mod.industrialProcessing.gui.framework.panels.Orientation;
+import mod.industrialProcessing.gui.framework.panels.StackPanel;
+import mod.industrialProcessing.gui.framework.rendering.TextureReference;
 import net.minecraft.inventory.Slot;
 
 public class CraftingGrid extends UserControl {

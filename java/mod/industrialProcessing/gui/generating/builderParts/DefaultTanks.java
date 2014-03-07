@@ -2,19 +2,27 @@ package mod.industrialProcessing.gui.generating.builderParts;
 
 import java.util.ArrayList;
 
+import mod.industrialProcessing.gui.binding.Binder;
 import mod.industrialProcessing.gui.binding.ITankBinding;
 import mod.industrialProcessing.gui.containers.GuiLayoutContainer;
 import mod.industrialProcessing.gui.containers.LayoutContainer;
 import mod.industrialProcessing.gui.containers.handlers.TankHandler;
+import mod.industrialProcessing.gui.framework.Alignment;
+import mod.industrialProcessing.gui.framework.controls.Control;
 import mod.industrialProcessing.gui.framework.controls.TankControl;
 import mod.industrialProcessing.gui.framework.custom.TankWithSlotsControl;
 import mod.industrialProcessing.gui.framework.panels.GridCell;
 import mod.industrialProcessing.gui.framework.panels.GridPanel;
 import mod.industrialProcessing.gui.framework.panels.GridSize;
 import mod.industrialProcessing.gui.framework.panels.SizeMode;
+import mod.industrialProcessing.gui.framework.slots.SlotLiquid;
+import mod.industrialProcessing.gui.framework.slots.SlotLiquidOutput;
+import mod.industrialProcessing.recipe.RecipeInputSlot;
+import mod.industrialProcessing.recipe.RecipeOutputSlot;
+import mod.industrialProcessing.recipe.RecipeSlot;
+import mod.industrialProcessing.recipe.RecipeSlotType;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 public class DefaultTanks {
@@ -98,7 +106,7 @@ public class DefaultTanks {
 			RecipeSlot slot = slots[i];
 			if (slot.index == tankSlot && slot.type == RecipeSlotType.TANK) {
 				int amount = getAmount(slot);
-				return new FluidStack(FluidRegistry.getFluid(slot.itemId), amount);
+				return new FluidStack(slot.fluid, amount);
 			}
 		}
 		return null;

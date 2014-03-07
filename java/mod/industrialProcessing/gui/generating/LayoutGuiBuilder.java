@@ -1,5 +1,7 @@
 package mod.industrialProcessing.gui.generating;
 
+import mod.industrialProcessing.blockContainer.multiblock.IMultiblock;
+import mod.industrialProcessing.blockContainer.multiblock.tier.Tiers;
 import mod.industrialProcessing.gui.containers.LayoutContainer;
 import mod.industrialProcessing.utils.block.IGuiBlock;
 import mod.industrialProcessing.utils.block.IGuiMultiblock;
@@ -20,9 +22,9 @@ public class LayoutGuiBuilder {
 		return builder.getContainer(player, entity);
 	    }
 	}
-	if (block instanceof IGuiMultiblock && entity instanceof ITEmultiblock) {
+	if (block instanceof IGuiMultiblock && entity instanceof IMultiblock) {
 	    IGuiMultiblock guiMultiBlock = (IGuiMultiblock) block;
-	    ITEmultiblock guiTileEntity = (ITEmultiblock) entity;
+	    IMultiblock guiTileEntity = (IMultiblock) entity;
 	    Tiers tier = guiTileEntity.getTier();
 	    IGuiBuilder multiBuilder = guiMultiBlock.getGui(tier);
 	    if (multiBuilder != null) {
@@ -42,9 +44,9 @@ public class LayoutGuiBuilder {
 		return builder.getGuiContainer(container, entity);
 	    }
 	}
-	if (block instanceof IGuiMultiblock && entity instanceof ITEmultiblock) {
+	if (block instanceof IGuiMultiblock && entity instanceof IMultiblock) {
 	    IGuiMultiblock guiMultiBlock = (IGuiMultiblock) block;
-	    ITEmultiblock guiTileEntity = (ITEmultiblock) entity;
+	    IMultiblock guiTileEntity = (IMultiblock) entity;
 	    Tiers tier = guiTileEntity.getTier();
 	    IGuiBuilder multiBuilder = guiMultiBlock.getGui(tier);
 	    if (multiBuilder != null) {

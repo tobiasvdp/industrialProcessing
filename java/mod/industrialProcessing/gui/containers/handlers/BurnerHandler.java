@@ -1,6 +1,6 @@
 package mod.industrialProcessing.gui.containers.handlers;
 
-import ip.industrialProcessing.utils.handler.fuel.IBurner;
+import mod.industrialProcessing.utils.handlers.fuel.IBurner;
 
 public class BurnerHandler extends ProgressHandlerBase {
     private IBurner burner;
