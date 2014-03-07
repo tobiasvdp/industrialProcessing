@@ -10,7 +10,7 @@ import net.minecraft.block.Block;
 public class BlockRegistry {
 	private static HashMap<Block, BlockType[]> array = new HashMap<Block, BlockType[]>();
 
-	public static void RegisterBlock(Block block, BlockType[] type) {
+	public static void RegisterBlock(Block block, BlockType... type) {
 		array.put(block, type);
 	}
 	

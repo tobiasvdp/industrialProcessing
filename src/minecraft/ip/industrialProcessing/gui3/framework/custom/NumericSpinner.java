@@ -125,7 +125,7 @@ public class NumericSpinner extends UserControl implements IButtonClickListener<
 
             int oldValue = this.value;
             this.value = i + minValue;
-            this.textBlock.text = String.format(this.format, value * this.scale);
+            this.textBlock.setText(String.format(this.format, value * this.scale));
         }
     }
 

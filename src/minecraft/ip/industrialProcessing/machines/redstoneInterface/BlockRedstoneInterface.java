@@ -47,8 +47,7 @@ public class BlockRedstoneInterface extends BlockMachineRendered implements IDes
     }
 
     @Override
-    public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5) {
-
+    public boolean canPlaceBlockOnSide(World par1World, int par2, int par3, int par4, int par5) { 
         ForgeDirection side = ForgeDirection.getOrientation(par5).getOpposite();
         return canStayAt(par1World, par2, par3, par4, side);
     }

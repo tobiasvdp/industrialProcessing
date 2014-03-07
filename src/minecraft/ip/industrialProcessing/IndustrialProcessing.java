@@ -34,11 +34,13 @@ import ip.industrialProcessing.utils.handler.key.KeyPressHandler;
 import ip.industrialProcessing.utils.handler.packets.PacketHandler;
 import ip.industrialProcessing.utils.registry.BlockType;
 import ip.industrialProcessing.utils.registry.HandlerRegistry;
+import ip.industrialProcessing.worldGen.OreGenHandler;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.Mod;
@@ -189,7 +191,7 @@ public class IndustrialProcessing implements ISetupCreativeTabs, INamepace, ISet
 		// register worldgenerator
 		worldGen = new WorldGeneration();
 		GameRegistry.registerWorldGenerator(worldGen);
-
+		 MinecraftForge.ORE_GEN_BUS.register(new OreGenHandler());
 	}
 
 	@EventHandler

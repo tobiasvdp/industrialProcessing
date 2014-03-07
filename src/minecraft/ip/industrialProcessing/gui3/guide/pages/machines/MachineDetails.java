@@ -71,7 +71,7 @@ public class MachineDetails extends UserControl implements IButtonClickListener<
         tag = tag.copy();
         tag.stackSize = 1;
         recipeTabs.clear();
-        title.text = tag.getDisplayName();
+        title.setText(tag.getDisplayName());
         render.model = tag;
 
         recipeTabs.addTab(craftTab);
@@ -80,7 +80,7 @@ public class MachineDetails extends UserControl implements IButtonClickListener<
         if (tag.itemID < Block.blocksList.length) {
             Block block = Block.blocksList[tag.itemID];
             if (block instanceof IDescriptionBlock) {
-                description.text = ((IDescriptionBlock) block).getDescription();
+                description.setText(((IDescriptionBlock) block).getDescription());
                 description.visibility = Visibility.VISIBLE;
             } else
                 description.visibility = Visibility.COLLAPSED;
@@ -89,7 +89,7 @@ public class MachineDetails extends UserControl implements IButtonClickListener<
                 this.recipeTab.setBlock(block);
             }
             this.recipeTabs.addTab(techTreeTab);
-            this.techTreeTab.setBlock(block); 
+            this.techTreeTab.setBlock(block);
         } else
             description.visibility = Visibility.COLLAPSED;
 

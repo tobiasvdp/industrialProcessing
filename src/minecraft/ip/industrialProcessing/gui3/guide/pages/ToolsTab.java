@@ -26,11 +26,11 @@ public class ToolsTab extends TabPage {
     public ToolsTab() {
 
         Decorator headerDecorator = Decorator.createTabDecorator(false);
-        headerDecorator.setChild(TextBlock.createText("Tools"));
+        headerDecorator.setChild(TextBlock.createText("IP.Guide.Tools"));
         this.header = headerDecorator;
 
         Decorator activeHeaderDecorator = Decorator.createTabDecorator(true);
-        activeHeaderDecorator.setChild(TextBlock.createText("Tools"));
+        activeHeaderDecorator.setChild(TextBlock.createText("IP.Guide.Tools"));
         this.activeHeader = activeHeaderDecorator;
 
         Decorator decorator = Decorator.createDecorator();

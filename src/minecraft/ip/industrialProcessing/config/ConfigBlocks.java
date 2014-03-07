@@ -167,7 +167,7 @@ public class ConfigBlocks {
 		registerOre(ISetupBlocks.blockGalenaOre, "IP.World.GalenaOre", "Galena Ore", "silver", 2);
 		OreDictionary.registerOre("galena", ISetupBlocks.blockGalenaOre);
 		OreDictionary.registerOre("lead", ISetupBlocks.blockGalenaOre);
-		registerOre(ISetupBlocks.blockRutileOre, "IP.World.RutileOre", "Rutile Ore", "rutile", 2);
+		registerOre(ISetupBlocks.blockRutileOre, "IP.World.RutileOre", "Rutile Ore", "rutile", 2); 
 		registerOre(ISetupBlocks.blockChromiteOre, "IP.World.ChromiteOre", "Chromite Ore", "chromite", 2);
 		registerOre(ISetupBlocks.blockCinnebarOre, "IP.World.CinnebarOre", "Cinnebar Ore", "cinnebar", 1);
 		registerOre(ISetupBlocks.blockTaliaOre, "IP.World.TaliaOre", "Thallium Ore", "talia", 3);
@@ -196,6 +196,16 @@ public class ConfigBlocks {
 		registerBlock(ISetupBlocks.blockDoorEmergency, "IP.Block.DoorEm", "Emergency door", BlockType.decoration);
 		
 		ConfigMachineBlocks.registerMachineBlock(ISetupBlocks.microBlock, "IP.MicroBlock", "Microblock", MicroBlockTileEntity.class);
+		
+// register vanilla ores
+        BlockRegistry.RegisterBlock(Block.oreIron, BlockType.Resource, BlockType.Vanilla);
+        BlockRegistry.RegisterBlock(Block.oreGold, BlockType.Resource, BlockType.Vanilla);
+        BlockRegistry.RegisterBlock(Block.oreCoal, BlockType.Resource, BlockType.Vanilla);
+        BlockRegistry.RegisterBlock(Block.oreDiamond, BlockType.Resource, BlockType.Vanilla);
+        BlockRegistry.RegisterBlock(Block.oreNetherQuartz, BlockType.Resource, BlockType.Vanilla);
+        BlockRegistry.RegisterBlock(Block.oreLapis, BlockType.Resource, BlockType.Vanilla);
+        BlockRegistry.RegisterBlock(Block.oreRedstone, BlockType.Resource, BlockType.Vanilla);
+        BlockRegistry.RegisterBlock(Block.oreEmerald, BlockType.Resource, BlockType.Vanilla);
 	}
 
 	@Deprecated
@@ -204,6 +214,7 @@ public class ConfigBlocks {
 		MinecraftForge.setBlockHarvestLevel(block, "pickaxe", level);
 		LanguageRegistry.addName(block, displayName);
 		OreDictionary.registerOre(oreDictionaryKey, block);
+        BlockRegistry.RegisterBlock(block, BlockType.Resource);
 	}
 
 	@Deprecated
@@ -240,6 +251,7 @@ public class ConfigBlocks {
 		MinecraftForge.setBlockHarvestLevel(block, "pickaxe", 1);
 		LanguageRegistry.addName(block, displayName);
 		BlockRegistry.RegisterBlock(block, type);
+        BlockRegistry.RegisterBlock(block, BlockType.Resource);
 	}
 
 	private static ConfigBlocks instance = new ConfigBlocks();

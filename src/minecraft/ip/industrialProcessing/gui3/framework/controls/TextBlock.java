@@ -1,24 +1,29 @@
 package ip.industrialProcessing.gui3.framework.controls;
 
-import cpw.mods.fml.common.registry.LanguageRegistry;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import ip.industrialProcessing.client.render.gui.ToolTip;
 import ip.industrialProcessing.gui3.framework.Rect;
 import ip.industrialProcessing.gui3.framework.Size;
-import ip.industrialProcessing.gui3.framework.UIElement;
 import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
 import ip.industrialProcessing.utils.Language;
-import ip.industrialProcessing.utils.registry.BlockType;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 
 public class TextBlock extends Control {
 
-    public String text;
+    private String text;
     public int color;
     public boolean allowEllipsis = true;
     public boolean allowWrap = true;
     public boolean hasShadow = false;
     private Size textSize;
+
+    public void setUnlocalizedText(String text) {
+        this.text = Language.getLocalizedString(text);
+    }
+
+    public String getLocalizedText() {
+        return text;
+    }
 
     public TextBlock(String text, int color) {
         this.text = Language.getLocalizedString(text);
@@ -74,5 +79,9 @@ public class TextBlock extends Control {
 
     public static TextBlock createText(String text, int color) {
         return new TextBlock(text, color);
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }

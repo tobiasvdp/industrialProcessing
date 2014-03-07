@@ -4,7 +4,7 @@ import ip.industrialProcessing.utils.Language;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public enum BlockType {
-    Block, Machine, Tier0, Tier1, Power, Refinary, Smelting, Ore_Processing, assemble, Dummy, Transport, Storage, fluid, structure, decoration, logic, blackSmith;
+    Resource, Block, Machine, Tier0, Tier1, Power, Refinary, Smelting, Ore_Processing, assemble, Dummy, Transport, Storage, fluid, structure, decoration, logic, blackSmith, Vanilla;
 
     public static void registerNames() {
         LanguageRegistry.instance().addStringLocalization("IP.BlockType." + Ore_Processing.toString(), "en_US", "Ore processing");

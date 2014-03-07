@@ -9,7 +9,7 @@ import ip.industrialProcessing.gui3.framework.panels.canvas.CanvasChild;
 import ip.industrialProcessing.gui3.framework.panels.canvas.CanvasPanel;
 import ip.industrialProcessing.gui3.framework.panels.tabs.TabPage;
 import ip.industrialProcessing.gui3.guide.pages.techtree.TechChain;
-import ip.industrialProcessing.gui3.guide.pages.techtree.TechChainControl;
+import ip.industrialProcessing.gui3.guide.pages.techtree.TreeControl;
 import ip.industrialProcessing.gui3.guide.pages.techtree.TreeNode;
 
 import java.util.ArrayList;
@@ -21,10 +21,10 @@ import net.minecraft.item.ItemStack;
 
 public class MachineTechChainTab extends TabPage {
 
-    private TechChainControl techTree;
+    private TreeControl techTree;
 
     public MachineTechChainTab(IButtonClickListener<ItemStack> stackClickListener) {
-        this.techTree = new TechChainControl(stackClickListener);
+        this.techTree = new TreeControl(stackClickListener);
         this.content = techTree;
         this.header = TextBlock.createText("Chain");
         this.activeHeader = TextBlock.createText("Chain", 0xffffffff);
@@ -33,7 +33,8 @@ public class MachineTechChainTab extends TabPage {
     }
 
     public void setBlock(Block block) {
-        this.techTree.setChain(new TechChain(block));
+        TechChain chain = new TechChain(new ItemStack(block));
+        this.techTree.setChain(chain.getRoot());
     }
 
 }

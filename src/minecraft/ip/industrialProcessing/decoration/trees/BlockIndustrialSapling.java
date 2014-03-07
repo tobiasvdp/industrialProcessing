@@ -89,7 +89,7 @@ public class BlockIndustrialSapling extends BlockSapling {
             return;
 
         int meta = par1World.getBlockMetadata(par2, par3, par4); 
-        WorldGenIndustrialTree tree =  WorldGenIndustrialTree.Create(meta);
+        WorldGenIndustrialTree tree =  WorldGenIndustrialTree.Create(meta, true);
         tree.generate(par1World, par5Random, par2, par3, par4);
     }
 

@@ -19,8 +19,9 @@ public class WorldGenIndustrialTree extends WorldGenerator {
     private float slope;
     private int logMeta;
     private int branchMeta;
+    private int flags;
 
-    public static WorldGenIndustrialTree Create(int meta) {
+    public static WorldGenIndustrialTree Create(int meta, boolean withUpdate) {
         int blockLeaves = ConfigBlocks.getLeavesID();
         int block = ConfigBlocks.getLogID();
         int blockBranch = block;
@@ -40,10 +41,11 @@ public class WorldGenIndustrialTree extends WorldGenerator {
         float slope = IndustrialTrees.getSlope(meta);
         int minHeight = IndustrialTrees.getMinHeight(meta);
         int maxHeight = IndustrialTrees.getMaxHeight(meta);
-        return new WorldGenIndustrialTree(block, blockBranch, blockLeaves, meta, logMeta, meta, slope, minHeight, maxHeight);
+        int flags = withUpdate ? 3 : 4; // 011 vs 100, update and send vs don't render
+        return new WorldGenIndustrialTree(block, blockBranch, blockLeaves, meta, logMeta, meta, slope, minHeight, maxHeight, flags);
     }
 
-    public WorldGenIndustrialTree(int blockLog, int blockBranch, int blockLeaves, int leavesMeta, int logMeta, int branchMeta, float slope, int minHeight, int maxHeight) {
+    public WorldGenIndustrialTree(int blockLog, int blockBranch, int blockLeaves, int leavesMeta, int logMeta, int branchMeta, float slope, int minHeight, int maxHeight, int placeFlags) {
         this.blockLog = blockLog;
         this.blockLeaves = blockLeaves;
         this.leavesMeta = leavesMeta;
@@ -53,6 +55,7 @@ public class WorldGenIndustrialTree extends WorldGenerator {
         this.minHeight = minHeight;
         this.maxHeight = maxHeight;
         this.branchMeta = branchMeta;
+        this.flags = placeFlags;
     }
 
     @Override
@@ -88,12 +91,10 @@ public class WorldGenIndustrialTree extends WorldGenerator {
                     Block block = Block.blocksList[existingBlockId];
                     if (block == null || block.isBlockReplaceable(world, x + tx, y + i, z + tz)) {
                         if (dist < width) {
-                            world.setBlock(x + tx, y + i, z + tz, this.blockLeaves);
-                            world.setBlockMetadataWithNotify(x + tx, y + i, z + tz, leavesMeta, 3);
+                            world.setBlock(x + tx, y + i, z + tz, this.blockLeaves, leavesMeta, flags); 
                         } else if (dist < width + 0.5) {
                             if (random.nextGaussian() < 0.25) {
-                                world.setBlock(x + tx, y + i, z + tz, this.blockLeaves);
-                                world.setBlockMetadataWithNotify(x + tx, y + i, z + tz, leavesMeta, 3);
+                                world.setBlock(x + tx, y + i, z + tz, this.blockLeaves, leavesMeta, flags); 
                             }
                         }
                     }

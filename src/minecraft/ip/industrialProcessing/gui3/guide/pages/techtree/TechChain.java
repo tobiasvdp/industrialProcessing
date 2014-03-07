@@ -10,28 +10,28 @@ import net.minecraft.item.ItemStack;
 
 public class TechChain {
 
-    private Tree<Block> tree = new Tree<Block>();
-    private TreeNode<Block> root;
+    private Tree<ItemStack> tree = new Tree<ItemStack>();
+    private TreeNode<ItemStack> root;
 
-    public TreeNode<Block> getRoot() {
+    public TreeNode<ItemStack> getRoot() {
         return root;
     }
 
-    public TechChain(Block root) {
+    public TechChain(ItemStack root) {
         if (root != null)
             getParentMachine(this.root = tree.getNode(root));
         else
             this.root = null;
     }
 
-    private void getParentMachine(TreeNode<Block> root) {
+    private void getParentMachine(TreeNode<ItemStack> root) {
 
-        ArrayList<IMachineRecipe> recipes = RecipeRegistry.FindRecipeForOutput(new ItemStack(root.getItem()));
+        ArrayList<IMachineRecipe> recipes = RecipeRegistry.FindRecipeForOutput(root.getItem());
 
         for (IMachineRecipe recipe : recipes) {
             Block block = RecipeRegistry.getBlockForRecipe(recipe);
             if (block != null) {
-                TreeNode<Block> node = root.addParent(block);
+                TreeNode<ItemStack> node = root.addParent(new ItemStack(block));
                 getParentMachine(node);
             } else
                 System.out.println("TechChain.getParentMachine() found a recipe without associated block?");

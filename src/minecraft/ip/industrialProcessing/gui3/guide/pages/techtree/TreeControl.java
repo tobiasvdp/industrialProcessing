@@ -20,19 +20,18 @@ import java.util.Iterator;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
-public class TechChainControl extends UserControl {
+public class TreeControl extends UserControl {
     private ScrollPanel scrollPanel;
     private CanvasPanel canvas;
 
     private ArrayList<TreeConnection> connections = new ArrayList<TreeConnection>();
     private ArrayList<CanvasChild> children = new ArrayList<CanvasChild>();
-    private HashMap<TreeNode<Block>, CanvasChild> map = new HashMap<TreeNode<Block>, CanvasChild>();
-    private boolean followParents = true;
-    private boolean followChildren = false;
+    private HashMap<TreeNode<ItemStack>, CanvasChild> map = new HashMap<TreeNode<ItemStack>, CanvasChild>();
+    public boolean followParents = true;
     private IButtonClickListener<ItemStack> stackClickListener;
     private ArrayList<Integer> rowSizes = new ArrayList<Integer>();
 
-    public TechChainControl(IButtonClickListener<ItemStack> stackClickListener) {
+    public TreeControl(IButtonClickListener<ItemStack> stackClickListener) {
         this.verticalAlign = Alignment.STRETCH;
         this.horizontalAlign = Alignment.STRETCH;
         this.canvas = new CanvasPanel();
@@ -42,18 +41,19 @@ public class TechChainControl extends UserControl {
         this.stackClickListener = stackClickListener;
     }
 
-    public void setChain(TechChain techChain) {
+    public void setChain(TreeNode<ItemStack> treeRoot) {
 
         this.map.clear();
         this.connections.clear();
         this.children.clear();
-        this.rowSizes.clear();
-        TreeNode<Block> root = techChain.getRoot();
+        this.rowSizes.clear(); 
 
-        addNode(root, null, 0); 
+        addNode(treeRoot, null, 0); 
+        this.canvas.children = children;
+        
     }
 
-    private void addNode(TreeNode<Block> root, CanvasChild connectedNode, int row) {
+    private void addNode(TreeNode<ItemStack> root, CanvasChild connectedNode, int row) {
         for (int i = rowSizes.size(); i <= row; i++)
             rowSizes.add(0);
         CanvasChild canvasChild = map.get(root);
@@ -68,10 +68,10 @@ public class TechChainControl extends UserControl {
             this.connections.add(new TreeConnection(connectedNode, canvasChild));
         }
         int i = 0;
-        Iterator<TreeNode<Block>> parents = followParents ? root.listParents() : root.listChildren();
+        Iterator<TreeNode<ItemStack>> parents = followParents ? root.listParents() : root.listChildren();
         row++;
         while (parents.hasNext()) {
-            TreeNode<Block> block = parents.next();
+            TreeNode<ItemStack> block = parents.next();
             addNode(block, canvasChild, row);
         }
     }
@@ -82,13 +82,13 @@ public class TechChainControl extends UserControl {
         for (TreeConnection treeConnection : connections) {
             CanvasChild a = treeConnection.a;
             CanvasChild b = treeConnection.b;
-            renderer.drawLine(new Size(a.left + 9, a.top + 9), new Size(b.left + 9, b.top + 9), 10f, 0xff000000);
+            renderer.drawLine(new Size(a.left + 9, a.top + 18), new Size(b.left + 9, b.top ), 10f, 0xff000000);
         }
     }
 
-    private CanvasChild createChild(Block item, float x, float y) {
+    private CanvasChild createChild(ItemStack item, float x, float y) {
         CanvasChild child = new CanvasChild();
-        UIElement control = SlotItemControl.createButtonSlot(new ItemStack(item, 1), stackClickListener);
+        UIElement control = SlotItemControl.createButtonSlot(item, stackClickListener);
         child.content = control;
         child.left = x;
         child.top = y;
