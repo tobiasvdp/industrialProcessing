@@ -2,8 +2,8 @@ package mod.industrialProcessing.blockContainer.machine;
 
 import java.util.ArrayList;
 
-import mod.industrialProcessing.utils.fluids.tank.IPfluidTank;
-import mod.industrialProcessing.utils.fluids.tank.ITank;
+import mod.industrialProcessing.fluids.tank.IPfluidTank;
+import mod.industrialProcessing.fluids.tank.ITank;
 import mod.industrialProcessing.utils.rotation.LocalDirection;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -246,8 +246,12 @@ public abstract class TileEntityMachineTank extends TileEntityMachineInv impleme
 
 	@Override
 	public IPfluidTank getTank(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.fluidTanks.get(index);
+	}
+	
+	@Override
+	public FluidTankInfo getTankInfoForSlot(int slot){
+		return this.fluidTanks.get(slot).getInfo();
 	}
 
 }

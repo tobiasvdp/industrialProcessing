@@ -1,7 +1,7 @@
 package mod.industrialProcessing.fluids;
 
-import mod.industrialProcessing.creativeTab.ISetupCreativeTabs;
 import mod.industrialProcessing.utils.INamepace;
+import mod.industrialProcessing.utils.creativeTab.ISetupCreativeTabs;
 import mod.industrialProcessing.utils.handlers.fluids.BucketHandler;
 import mod.industrialProcessing.utils.registry.ItemRegistry;
 import mod.industrialProcessing.utils.registry.ItemType;

@@ -72,7 +72,7 @@ public class TileEntityBlockContainerIP extends TileEntity implements IRotateabl
 		return true;
 	}
 	
-	protected int[][] rotationMatrix = new int[][]{{2,3,1,0,4,5},{2,3,0,1,5,4},{0,1,3,2,5,4},{0,1,2,3,4,5},{0,1,5,4,2,3},{0,1,4,5,3,2}}; 
+	protected int[][] rotationMatrix = new int[][]{{0},{0},{0,1,3,2,5,4},{0,1,2,3,4,5},{0,1,4,5,3,2},{0,1,5,4,2,3}}; 
 
 	@Override
 	public LocalDirection getLocalDirection(ForgeDirection dir) {

@@ -2,6 +2,7 @@ package mod.industrialProcessing.gui.generating.builderParts;
 
 import java.util.ArrayList;
 
+import mod.industrialProcessing.fluids.IFluidInfo;
 import mod.industrialProcessing.gui.binding.Binder;
 import mod.industrialProcessing.gui.binding.ITankBinding;
 import mod.industrialProcessing.gui.containers.GuiLayoutContainer;
@@ -17,10 +18,10 @@ import mod.industrialProcessing.gui.framework.panels.GridSize;
 import mod.industrialProcessing.gui.framework.panels.SizeMode;
 import mod.industrialProcessing.gui.framework.slots.SlotLiquid;
 import mod.industrialProcessing.gui.framework.slots.SlotLiquidOutput;
-import mod.industrialProcessing.recipe.RecipeInputSlot;
-import mod.industrialProcessing.recipe.RecipeOutputSlot;
-import mod.industrialProcessing.recipe.RecipeSlot;
-import mod.industrialProcessing.recipe.RecipeSlotType;
+import mod.industrialProcessing.work.recipe.RecipeInputSlot;
+import mod.industrialProcessing.work.recipe.RecipeOutputSlot;
+import mod.industrialProcessing.work.recipe.RecipeSlot;
+import mod.industrialProcessing.work.recipe.RecipeSlotType;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fluids.FluidStack;
@@ -51,7 +52,7 @@ public class DefaultTanks {
 
 	public static void setup(ArrayList<TankReference> tanks, LayoutContainer container, TileEntity entity) {
 		if (!tanks.isEmpty()) {
-			IFluidMachineContainerEntity machine = getFluidMachine(entity);
+			IFluidInfo machine = getFluidMachine(entity);
 			for (TankReference tank : tanks) {
 				container.addHandler(tank.handler = new TankHandler(tank.tankSlot, machine));
 				if (tank.inputSlot >= 0 && tank.outputSlot >= 0) {
@@ -63,10 +64,10 @@ public class DefaultTanks {
 		}
 	}
 
-	private static IFluidMachineContainerEntity getFluidMachine(TileEntity tileEntity) {
-		IFluidMachineContainerEntity inventory = null;
-		if (tileEntity instanceof IFluidMachineContainerEntity)
-			inventory = (IFluidMachineContainerEntity) tileEntity;
+	private static IFluidInfo getFluidMachine(TileEntity tileEntity) {
+		IFluidInfo inventory = null;
+		if (tileEntity instanceof IFluidInfo)
+			inventory = (IFluidInfo) tileEntity;
 		if (inventory == null)
 			throw new NullPointerException("Tanks without IFluidMachineContainerEntity?!");
 		return inventory;

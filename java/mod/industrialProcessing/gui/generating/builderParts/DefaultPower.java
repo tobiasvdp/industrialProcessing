@@ -1,13 +1,20 @@
 package mod.industrialProcessing.gui.generating.builderParts;
 
+import mod.industrialProcessing.gui.binding.Binder;
 import mod.industrialProcessing.gui.binding.IProgressBinding;
 import mod.industrialProcessing.gui.containers.GuiLayoutContainer;
 import mod.industrialProcessing.gui.containers.LayoutContainer;
 import mod.industrialProcessing.gui.containers.handlers.PowerHandler;
+import mod.industrialProcessing.gui.framework.Alignment;
+import mod.industrialProcessing.gui.framework.controls.Control;
 import mod.industrialProcessing.gui.framework.controls.ProgressBar;
 import mod.industrialProcessing.gui.framework.custom.PowerControl;
 import mod.industrialProcessing.gui.framework.panels.LayerPanel;
 import mod.industrialProcessing.gui.framework.panels.StackPanel;
+import mod.industrialProcessing.gui.framework.slots.SlotBase;
+import mod.industrialProcessing.power.IPoweredMachine;
+import mod.industrialProcessing.work.recipe.IMachineRecipe;
+import mod.industrialProcessing.work.recipe.IPowerRecipe;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
 

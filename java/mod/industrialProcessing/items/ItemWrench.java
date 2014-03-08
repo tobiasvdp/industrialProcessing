@@ -1,8 +1,7 @@
 package mod.industrialProcessing.items;
 
-import mod.industrialProcessing.creativeTab.ISetupCreativeTabs;
-import mod.industrialProcessing.utils.registry.ItemRegistry;
-import mod.industrialProcessing.utils.registry.ItemType;
+import mod.industrialProcessing.blockContainer.BlockContainerIP;
+import mod.industrialProcessing.utils.rotation.IRotateableEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;

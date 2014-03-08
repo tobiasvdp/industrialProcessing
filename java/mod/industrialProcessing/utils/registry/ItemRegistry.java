@@ -6,8 +6,8 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import mod.industrialProcessing.creativeTab.ISetupCreativeTabs;
 import mod.industrialProcessing.utils.INamepace;
+import mod.industrialProcessing.utils.creativeTab.ISetupCreativeTabs;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBucket;

@@ -1,7 +1,7 @@
 package mod.industrialProcessing.gui.containers.handlers;
 
-import ip.industrialProcessing.machines.IPowerStorage;
-import ip.industrialProcessing.power.IPoweredMachine;
+import mod.industrialProcessing.power.IPowerStorage;
+import mod.industrialProcessing.power.IPoweredMachine;
 
 public class PowerHandler extends ProgressHandlerBase {
 

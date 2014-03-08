@@ -3,6 +3,7 @@ package mod.industrialProcessing.blockContainer.machine;
 import java.util.ArrayList;
 
 import mod.industrialProcessing.blockContainer.TileEntityBlockContainerIP;
+import mod.industrialProcessing.utils.inventory.IInventorySlots;
 import mod.industrialProcessing.utils.inventory.itemstack.MachineItemStack;
 import mod.industrialProcessing.utils.rotation.LocalDirection;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,7 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
-public abstract class TileEntityMachineInv extends TileEntityBlockContainerIP implements ISidedInventory {
+public class TileEntityMachineInv extends TileEntityBlockContainerIP implements IInventorySlots {
 
 	private ArrayList<MachineItemStack> itemStacks = new ArrayList<MachineItemStack>();
 	private int[][] itemStackSideSlots = new int[6][0];
@@ -46,7 +47,7 @@ public abstract class TileEntityMachineInv extends TileEntityBlockContainerIP im
 	private void readInventory(NBTTagCompound nbt) {
 		if (!nbt.hasKey("Items"))
 			return;
-		NBTTagList nbttaglist = nbt.getTagList("Items", 0);
+		NBTTagList nbttaglist = nbt.getTagList("Items", 10);
 		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
 			NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.getCompoundTagAt(i);
 			byte b0 = nbttagcompound1.getByte("Slot");
@@ -189,7 +190,9 @@ public abstract class TileEntityMachineInv extends TileEntityBlockContainerIP im
 		return stack.input && isValidInput(slot, itemstack.getItem());
 	}
 
-	protected abstract boolean isValidInput(int slot, Item item);
+	protected boolean isValidInput(int slot, Item item){
+		return true;
+	}
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int var1) {
@@ -218,5 +221,66 @@ public abstract class TileEntityMachineInv extends TileEntityBlockContainerIP im
 		}
 		return false;
 	}
+
+	 @Override
+	    public boolean slotContains(int slot, Item item, int amount) {
+	        MachineItemStack machineStack = itemStacks.get(slot);
+	        return machineStack != null && machineStack.stack != null && machineStack.stack.getItem().equals(item) && machineStack.stack.stackSize >= amount;
+	    }
+
+	    @Override
+	    public boolean slotContains(int slot, Item item, int metadata, int amount) {
+	        MachineItemStack machineStack = itemStacks.get(slot);
+	        return machineStack != null && machineStack.stack != null && machineStack.stack.getItem().equals(item) && machineStack.stack.stackSize >= amount;
+	    }
+
+	    @Override
+	    public boolean slotHasRoomFor(int slot, ItemStack stack) {
+	        if (stack == null || stack.stackSize == 0)
+	            return true;
+	        MachineItemStack machineStack = itemStacks.get(slot);
+	        return machineStack != null && (machineStack.stack == null || (machineStack.stack.getItem().equals(stack.getItem()) && (machineStack.stack.stackSize + stack.stackSize < stack.getMaxStackSize())));
+	    }
+
+	    @Override
+	    public boolean slotHasRoomFor(int slot, Item item, int amount, int damage) {
+	        if (amount == 0)
+	            return true;
+	        MachineItemStack machineStack = itemStacks.get(slot);
+	        return machineStack != null && (machineStack.stack == null || (machineStack.stack.getItem().equals(item) && machineStack.stack.getItemDamage() == damage && (machineStack.stack.stackSize + amount < machineStack.stack.getMaxStackSize())));
+	    }
+
+	    @Override
+	    public boolean addToSlot(int slot, Item item, int amount, int damage) {
+	        if (slotHasRoomFor(slot, item, amount, damage)) {
+	            MachineItemStack machineStack = itemStacks.get(slot);
+	            if (machineStack.stack == null)
+	                machineStack.stack = new ItemStack(item, amount, damage);
+	            else
+	                machineStack.stack.stackSize += amount;
+	            onInventoryChanged();
+	            return true;
+	        }
+	        return false;
+	    }
+
+	    @Override
+	    public boolean removeFromSlot(int slot, Item item, int amount) {
+	        if (slotContains(slot, item, amount)) {
+	            MachineItemStack machineStack = itemStacks.get(slot);
+	            machineStack.stack.stackSize -= amount;
+	            if (machineStack.stack.stackSize == 0)
+	                machineStack.stack = null;
+	            onInventoryChanged();
+	            return true;
+	        }
+	        return false;
+	    }
+
+	    @Override
+	    public boolean damageItem(int slot, Item item) {
+	        itemStacks.get(slot).stack.setItemDamage(itemStacks.get(slot).stack.getItemDamage() + 1);
+	        return itemStacks.get(slot).stack.getItemDamage() >= itemStacks.get(slot).stack.getMaxDamage();
+	    }
 
 }

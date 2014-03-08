@@ -38,7 +38,7 @@ import mod.industrialProcessing.gui.generating.builderParts.StateButtonReference
 import mod.industrialProcessing.gui.generating.builderParts.TankReference;
 import mod.industrialProcessing.gui.generating.builderParts.WorkerReference;
 import mod.industrialProcessing.gui.guide.pages.RecipeFrame;
-import mod.industrialProcessing.recipe.IMachineRecipe;
+import mod.industrialProcessing.work.recipe.IMachineRecipe;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;

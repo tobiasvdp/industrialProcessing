@@ -4,6 +4,7 @@ import mod.industrialProcessing.gui.containers.GuiLayoutContainer;
 import mod.industrialProcessing.gui.containers.LayoutContainer;
 import mod.industrialProcessing.gui.framework.custom.PlayerInventory;
 import mod.industrialProcessing.gui.framework.panels.StackPanel;
+import mod.industrialProcessing.gui.framework.slots.SlotArmor;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 

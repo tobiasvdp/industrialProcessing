@@ -1,6 +1,6 @@
 package mod.industrialProcessing.utils.block;
 
-import mod.industrialProcessing.recipe.IMachineRecipes;
+import mod.industrialProcessing.work.recipe.IMachineRecipes;
 
 
 public interface IRecipeBlock {

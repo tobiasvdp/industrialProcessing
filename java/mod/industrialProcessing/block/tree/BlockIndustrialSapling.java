@@ -6,7 +6,7 @@ import java.util.Random;
 import javax.swing.Icon;
 
 import mod.industrialProcessing.block.ConfigBlocks;
-import mod.industrialProcessing.creativeTab.ISetupCreativeTabs;
+import mod.industrialProcessing.utils.creativeTab.ISetupCreativeTabs;
 import net.minecraft.block.BlockSapling;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;

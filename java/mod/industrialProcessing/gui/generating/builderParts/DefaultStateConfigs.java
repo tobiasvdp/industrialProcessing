@@ -2,6 +2,7 @@ package mod.industrialProcessing.gui.generating.builderParts;
 
 import java.util.ArrayList;
 
+import mod.industrialProcessing.gui.binding.Binder;
 import mod.industrialProcessing.gui.binding.IValueBinding;
 import mod.industrialProcessing.gui.binding.reply.StateConfigSetter;
 import mod.industrialProcessing.gui.containers.GuiLayoutContainer;
@@ -10,6 +11,7 @@ import mod.industrialProcessing.gui.containers.handlers.StateHandler;
 import mod.industrialProcessing.gui.framework.custom.NumericSpinner;
 import mod.industrialProcessing.gui.framework.custom.StateButton;
 import mod.industrialProcessing.gui.framework.panels.StackPanel;
+import mod.industrialProcessing.utils.handlers.numbers.IStateConfig;
 import net.minecraft.tileentity.TileEntity;
 
 public class DefaultStateConfigs {

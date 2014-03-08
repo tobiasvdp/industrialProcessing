@@ -2,8 +2,8 @@ package mod.industrialProcessing.fluids;
 
 import javax.swing.Icon;
 
-import mod.industrialProcessing.creativeTab.ISetupCreativeTabs;
 import mod.industrialProcessing.utils.INamepace;
+import mod.industrialProcessing.utils.creativeTab.ISetupCreativeTabs;
 import mod.industrialProcessing.utils.damage.ISetupDamageSource;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;

@@ -1,5 +1,6 @@
 package mod.industrialProcessing.gui.containers.handlers;
 
+import mod.industrialProcessing.fluids.IFluidInfo;
 import mod.industrialProcessing.gui.binding.ITankBinding;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
@@ -9,10 +10,10 @@ public class TankHandler extends BindingHandlerBase<ITankBinding> {
     private static final int INDEX_CAPACITY = 0;
     private static final int INDEX_AMOUNT = 1;
     private static final int INDEX_FLUIDID = 2;
-    private IFluidMachineContainerEntity entity;
+    private IFluidInfo entity;
     private int tankSlot;
 
-    public TankHandler(int tankSlot, IFluidMachineContainerEntity entity) {
+    public TankHandler(int tankSlot, IFluidInfo entity) {
 	super(3);
 	this.entity = entity;
 	this.tankSlot = tankSlot;

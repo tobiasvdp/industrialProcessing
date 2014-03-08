@@ -1,5 +1,5 @@
 package mod.industrialProcessing.blockContainer.machine;
 
-public class TileEntityMachineInvWorkPower extends TileEntityMachineInvWork{
+public class TileEntityMachineInvWorkPower{
 
 }

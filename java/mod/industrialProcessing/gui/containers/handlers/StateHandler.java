@@ -1,6 +1,7 @@
 package mod.industrialProcessing.gui.containers.handlers;
 
 import mod.industrialProcessing.gui.binding.IValueBinding;
+import mod.industrialProcessing.utils.handlers.numbers.IStateConfig;
 
 public class StateHandler extends BindingHandlerBase<IValueBinding> {
 

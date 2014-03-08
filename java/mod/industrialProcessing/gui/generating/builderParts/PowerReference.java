@@ -1,6 +1,7 @@
 package mod.industrialProcessing.gui.generating.builderParts;
 
 import mod.industrialProcessing.gui.containers.handlers.PowerHandler;
+import mod.industrialProcessing.gui.framework.slots.SlotBase;
 
 public class PowerReference {
 

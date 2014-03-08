@@ -1,6 +1,6 @@
 package mod.industrialProcessing.items;
 
-import mod.industrialProcessing.creativeTab.ISetupCreativeTabs;
+import mod.industrialProcessing.utils.creativeTab.ISetupCreativeTabs;
 import mod.industrialProcessing.utils.registry.ItemRegistry;
 import mod.industrialProcessing.utils.registry.ItemType;
 import net.minecraft.block.Block;

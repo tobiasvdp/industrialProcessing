@@ -2,7 +2,7 @@ package mod.industrialProcessing.items;
 
 import java.util.List;
 
-import mod.industrialProcessing.creativeTab.ISetupCreativeTabs;
+import mod.industrialProcessing.utils.creativeTab.ISetupCreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 

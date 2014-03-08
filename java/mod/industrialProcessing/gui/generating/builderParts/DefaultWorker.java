@@ -1,14 +1,18 @@
 package mod.industrialProcessing.gui.generating.builderParts;
 
+import mod.industrialProcessing.gui.binding.Binder;
 import mod.industrialProcessing.gui.binding.IProgressBinding;
 import mod.industrialProcessing.gui.containers.GuiLayoutContainer;
 import mod.industrialProcessing.gui.containers.LayoutContainer;
 import mod.industrialProcessing.gui.containers.handlers.WorkHandler;
+import mod.industrialProcessing.gui.framework.Alignment;
 import mod.industrialProcessing.gui.framework.controls.ProgressBar;
 import mod.industrialProcessing.gui.framework.panels.GridCell;
 import mod.industrialProcessing.gui.framework.panels.GridPanel;
 import mod.industrialProcessing.gui.framework.panels.GridSize;
 import mod.industrialProcessing.gui.framework.panels.SizeMode;
+import mod.industrialProcessing.work.recipe.IMachineRecipe;
+import mod.industrialProcessing.work.worker.IWorkingEntity;
 import net.minecraft.tileentity.TileEntity;
 
 public class DefaultWorker {

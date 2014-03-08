@@ -4,7 +4,7 @@ import mod.industrialProcessing.gui.containers.GuiLayoutContainer;
 import mod.industrialProcessing.gui.containers.LayoutContainer;
 import mod.industrialProcessing.gui.framework.controls.IButtonClickListener;
 import mod.industrialProcessing.gui.guide.pages.RecipeFrame;
-import mod.industrialProcessing.recipe.IMachineRecipe;
+import mod.industrialProcessing.work.recipe.IMachineRecipe;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;

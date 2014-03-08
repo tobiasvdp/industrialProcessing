@@ -2,7 +2,7 @@ package mod.industrialProcessing.items;
 
 import java.util.List;
 
-import mod.industrialProcessing.creativeTab.ISetupCreativeTabs;
+import mod.industrialProcessing.utils.creativeTab.ISetupCreativeTabs;
 import mod.industrialProcessing.utils.handlers.wireless.IReceiver;
 import mod.industrialProcessing.utils.handlers.wireless.IRemote;
 import mod.industrialProcessing.utils.handlers.wireless.ISender;

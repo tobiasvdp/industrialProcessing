@@ -3,6 +3,7 @@ package mod.industrialProcessing.gui.generating.builderParts;
 import java.util.ArrayList;
 
 import mod.industrialProcessing.gui.containers.LayoutContainer;
+import mod.industrialProcessing.gui.framework.Alignment;
 import mod.industrialProcessing.gui.framework.UIElement;
 import mod.industrialProcessing.gui.framework.controls.IButtonClickListener;
 import mod.industrialProcessing.gui.framework.controls.SlotControl;
@@ -12,6 +13,12 @@ import mod.industrialProcessing.gui.framework.panels.GridCell;
 import mod.industrialProcessing.gui.framework.panels.GridPanel;
 import mod.industrialProcessing.gui.framework.panels.GridSize;
 import mod.industrialProcessing.gui.framework.panels.SizeMode;
+import mod.industrialProcessing.gui.framework.slots.SlotBase;
+import mod.industrialProcessing.gui.framework.slots.SlotOutput;
+import mod.industrialProcessing.work.recipe.RecipeInputSlot;
+import mod.industrialProcessing.work.recipe.RecipeOutputSlot;
+import mod.industrialProcessing.work.recipe.RecipeSlot;
+import mod.industrialProcessing.work.recipe.RecipeSlotType;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -97,7 +104,7 @@ public class DefaultSlots {
 			RecipeSlot slot = slots[i];
 			if (slot.index == startSlot && slot.type != RecipeSlotType.TANK) {
 				int amount = getAmount(slot);
-				return new ItemStack(slot.itemId, amount, slot.metadata);
+				return new ItemStack(slot.item, amount, slot.metadata);
 			}
 		}
 		return null;
