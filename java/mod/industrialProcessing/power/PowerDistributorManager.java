@@ -1,10 +1,9 @@
-package ip.industrialProcessing.power;
-
-import ip.industrialProcessing.power.utils.PowerAcceptorConnection;
-import ip.industrialProcessing.power.utils.PowerDistributor;
+package mod.industrialProcessing.power;
 
 import java.util.ArrayList;
 
+import mod.industrialProcessing.power.utils.PowerAcceptorConnection;
+import mod.industrialProcessing.power.utils.PowerDistributor;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -35,7 +34,7 @@ public class PowerDistributorManager {
     }
 
     protected void notifyUpdate() {
-        entity.worldObj.markBlockForUpdate(entity.xCoord, entity.yCoord, entity.zCoord);
+        entity.getWorldObj().markBlockForUpdate(entity.xCoord, entity.yCoord, entity.zCoord);
     }
 
     protected void searchPowerAcceptor(ForgeDirection direction, ArrayList<PowerAcceptorConnection> connections) {
@@ -49,8 +48,8 @@ public class PowerDistributorManager {
     }
 
     protected IPowerAcceptor getAcceptor(ForgeDirection direction) {
-        if (this.entity.worldObj != null) {
-            TileEntity neighbor = this.entity.worldObj.getBlockTileEntity(this.entity.xCoord + direction.offsetX, this.entity.yCoord + direction.offsetY, this.entity.zCoord + direction.offsetZ);
+        if (this.entity.getWorldObj() != null) {
+            TileEntity neighbor = this.entity.getWorldObj().getTileEntity(this.entity.xCoord + direction.offsetX, this.entity.yCoord + direction.offsetY, this.entity.zCoord + direction.offsetZ);
             if (neighbor instanceof IPowerAcceptor) {
                 return (IPowerAcceptor) neighbor;
             }

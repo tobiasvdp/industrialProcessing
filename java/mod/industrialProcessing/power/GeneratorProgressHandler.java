@@ -1,7 +1,5 @@
-package ip.industrialProcessing.power;
+package mod.industrialProcessing.power;
 
-import ip.industrialProcessing.machines.containers.IProgressBarHandler;
-import ip.industrialProcessing.machines.containers.ProgressBarHandlerInfo;
 @Deprecated
 public class GeneratorProgressHandler implements IProgressBarHandler {
 

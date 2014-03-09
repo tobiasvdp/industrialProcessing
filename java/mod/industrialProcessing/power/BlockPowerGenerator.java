@@ -1,6 +1,5 @@
-package ip.industrialProcessing.power;
+package mod.industrialProcessing.power;
 
-import ip.industrialProcessing.machines.BlockMachineRendered;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.world.World;

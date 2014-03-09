@@ -1,7 +1,6 @@
-package ip.industrialProcessing.utils;
+package mod.industrialProcessing.power;
 
-import ip.industrialProcessing.items.ItemBattery;
-import ip.industrialProcessing.machines.IPowerStorage;
+import mod.industrialProcessing.items.ItemBattery;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 

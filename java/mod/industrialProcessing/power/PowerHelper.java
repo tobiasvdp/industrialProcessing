@@ -1,6 +1,5 @@
-package ip.industrialProcessing.power;
+package mod.industrialProcessing.power;
 
-import ip.industrialProcessing.machines.IPowerStorage;
 
 public class PowerHelper {
 

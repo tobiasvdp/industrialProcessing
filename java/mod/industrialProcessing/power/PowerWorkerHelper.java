@@ -1,4 +1,4 @@
-package ip.industrialProcessing.machines;
+package mod.industrialProcessing.power;
 
 public class PowerWorkerHelper {
 

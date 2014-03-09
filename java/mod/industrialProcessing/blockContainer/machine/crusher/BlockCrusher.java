@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 public class BlockCrusher extends BlockContainerIPRendered implements IRecipeBlock, IDescriptionBlock, IGuiBlock {
 
 	private static final TextureReference WORKER_TEXTURE = TextureReference.createDefault("Ore Crusher", 24, 32);
-	public static IGuiBuilder guiBuilder = new GuiBuilderDefault("Ore Crusher").addInputSlot(0).addOutputSlot(1).enableWorker();
+	public static IGuiBuilder guiBuilder = new GuiBuilderDefault("Ore Crusher").addInputSlot(0).addOutputSlot(1).enableWorker().enablePower();
 
 	public BlockCrusher() {
 		super(1F, 1F,Material.iron, Block.soundTypeMetal);
