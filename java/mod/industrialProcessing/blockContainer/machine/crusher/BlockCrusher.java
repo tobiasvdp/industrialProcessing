@@ -9,6 +9,7 @@ import mod.industrialProcessing.gui.generating.IGuiBuilder;
 import mod.industrialProcessing.utils.block.IDescriptionBlock;
 import mod.industrialProcessing.utils.block.IGuiBlock;
 import mod.industrialProcessing.utils.block.IRecipeBlock;
+import mod.industrialProcessing.work.recipe.RecipesMachine;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
@@ -16,7 +17,7 @@ import net.minecraft.world.World;
 public class BlockCrusher extends BlockContainerIPRendered implements IRecipeBlock, IDescriptionBlock, IGuiBlock {
 
 	private static final TextureReference WORKER_TEXTURE = TextureReference.createDefault("Ore Crusher", 24, 32);
-	public static IGuiBuilder guiBuilder = new GuiBuilderDefault("Ore Crusher").addInputSlot(0).addOutputSlot(1);
+	public static IGuiBuilder guiBuilder = new GuiBuilderDefault("Ore Crusher").addInputSlot(0).addOutputSlot(1).enableWorker();
 
 	public BlockCrusher() {
 		super(1F, 1F,Material.iron, Block.soundTypeMetal);

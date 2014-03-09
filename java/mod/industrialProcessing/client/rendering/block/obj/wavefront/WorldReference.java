@@ -1,4 +1,4 @@
-package mod.industrialProcessing.client.rendering.obj.wavefront;
+package mod.industrialProcessing.client.rendering.block.obj.wavefront;
 
 import javax.swing.Icon;
 

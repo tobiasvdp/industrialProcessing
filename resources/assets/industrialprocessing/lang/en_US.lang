@@ -30,7 +30,10 @@ tile.IP.block.cinnebar.name=Cinnebar crystal
 tile.IP.block.platform.name=Platform
 tile.IP.block.stairs.name=Stairs
 tile.IP.block.doorEmergency.name=Emergency door
-tile.IP.block.doorEmergency.desc=A door that can be used to enter and exit a building
+tile.IP.block.doorEmergency.desc=A door that can be used to enter and exit a building.
+
+tile.IP.machine.crusher.name=Crusher
+tile.IP.machine.crusher.desc=The crusher grinds objects into small pieces.
 
 item.IP.item.ironBracket.name=Iron bracket	
 item.IP.item.paintBrush.name=Paintbrush

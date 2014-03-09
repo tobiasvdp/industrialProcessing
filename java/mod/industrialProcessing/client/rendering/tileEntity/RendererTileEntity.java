@@ -1,6 +1,7 @@
-package mod.industrialProcessing.client.rendering.obj;
+package mod.industrialProcessing.client.rendering.tileEntity;
 
 import mod.industrialProcessing.IndustrialProcessing;
+import mod.industrialProcessing.blockContainer.BlockContainerIP;
 import mod.industrialProcessing.utils.INamepace;
 import mod.industrialProcessing.utils.rotation.IRotateableEntity;
 import mod.industrialProcessing.utils.rotation.ISidedRotation;
@@ -17,18 +18,20 @@ import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
 public class RendererTileEntity extends TileEntitySpecialRenderer {
-	private ModelMachine model;
+	private ModelTileEntity model;
 	protected ResourceLocation texture = new ResourceLocation(IndustrialProcessing.TEXTURE_DOMAIN, "textures/render/");
 	private Block block;
 	protected String[] name = new String[2];
 	protected boolean rotateModel = true;
 
-	public RendererTileEntity(Block block, String name, ModelMachine model) {
+
+	public RendererTileEntity(Block block, String name, ModelTileEntity model) {
 		this.block = block;
 		this.name[0] = name;
 		texture = new ResourceLocation(INamepace.TEXTURE_DOMAIN, "textures/render/" + name + ".png");
 		this.model = model;
 	}
+
 
 	@Override
 	public void renderTileEntityAt(TileEntity tileEntity, double d0, double d1, double d2, float f) {
@@ -44,7 +47,9 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 		renderBlockYour(tileEntity, tileEntity.getWorldObj(), tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord, block);
 		GL11.glPopMatrix();
 
+
 	}
+
 
 	public void renderBlockYour(TileEntity tl, World world, int i, int j, int k, Block block) {
 		Tessellator tessellator = Tessellator.instance;
@@ -63,7 +68,8 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 		GL11.glPushMatrix();
 		if (world != null) {
 
-			float f = block.getLightValue(world, i, j, k);
+
+			float f = block.getMixedBrightnessForBlock(world, i, j, k);
 			int l = world.getLightBrightnessForSkyBlocks(i, j, k, 0);
 			int l1 = l % 65536;
 			int l2 = l / 65536;
@@ -71,7 +77,10 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, l1, l2);
 
 
+
+
 			int dir = 0; //world.getBlockMetadata(i, j, k);
+
 
 			if (tl instanceof IRotateableEntity) {
 				IRotateableEntity machine = (IRotateableEntity) tl;
@@ -82,6 +91,7 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 				dir = 2;
 			} 
 
+
 			GL11.glTranslatef(0.5F, 1.5F, 0.5F);
 			// This line actually rotates the renderer.
 			// if (rotateModel)
@@ -89,22 +99,30 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 			GL11.glRotatef((-180F), 0F, 0F, 1F);
 			GL11.glScalef(1f, 1f, 1f);
 
+
 			if (tl instanceof ISidedRotation) {
 				ISidedRotation sidedRotation = (ISidedRotation) tl;
 
+
 				GL11.glTranslatef(0.0f, 1.0f, 0.0f);
-				
+
+
 				//rotate according to side
 				GL11.glRotatef(sidedRotation.getGLsideAngle(), sidedRotation.getGLsideX(), sidedRotation.getGLsideY(), sidedRotation.getGLsideZ());
 
+
 				//rotate according to rotation
 				GL11.glRotatef(sidedRotation.getGLrotationAngle(), sidedRotation.getGLrotationX(),sidedRotation.getGLrotationY(),sidedRotation.getGLrotationZ());
-				
+
+
 				GL11.glTranslatef(0.0f, -1.0f, 0.0f);
-				
+
+
 			}
 
+
 			bindTexture(getTexture(tl, world, i, j, k, block, 0.0625f));
+
 
 		} else {
 		    /*
@@ -118,18 +136,23 @@ public class RendererTileEntity extends TileEntitySpecialRenderer {
 			this.bindTexture(texture);
 		}
 
+
 		renderBlock(tl, world, i, j, k, block, 0.0625f);
+
 
 		GL11.glPopMatrix();
 		mc.mcProfiler.endSection();
         mc.mcProfiler.endSection();
 	}
 
+
 	protected void renderBlock(TileEntity tl, World world, int i, int j, int k, Block block2, float f) {
 		this.model.renderModel(null, f);
 	}
+
 
 	protected ResourceLocation getTexture(TileEntity tl, World world, int i, int j, int k, Block block2, float f) {
 		return texture;
 	}
 }
+

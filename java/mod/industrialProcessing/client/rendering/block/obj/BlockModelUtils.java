@@ -1,4 +1,4 @@
-package mod.industrialProcessing.client.rendering.obj;
+package mod.industrialProcessing.client.rendering.block.obj;
 
 import java.util.List;
 

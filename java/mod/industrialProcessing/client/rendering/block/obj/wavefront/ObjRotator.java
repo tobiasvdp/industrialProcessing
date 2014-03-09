@@ -1,4 +1,4 @@
-package mod.industrialProcessing.client.rendering.obj.wavefront;
+package mod.industrialProcessing.client.rendering.block.obj.wavefront;
 
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;

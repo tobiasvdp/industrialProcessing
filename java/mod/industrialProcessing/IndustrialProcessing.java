@@ -45,9 +45,6 @@ public class IndustrialProcessing implements INamepace, ISetupCreativeTabs, ISet
 		
 		//register event handlers
 		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
-
-		//register renders
-		proxy.registerRenderers();
 		
 		//register items
 		ConfigItems.getInstance().registerItems();
@@ -66,7 +63,10 @@ public class IndustrialProcessing implements INamepace, ISetupCreativeTabs, ISet
 		GameRegistry.registerWorldGenerator(new WorldGeneration(), 100);
 		
 		//register guihandler
-		NetworkRegistry.INSTANCE.registerGuiHandler(this.instance,new GuiHandler());
+		NetworkRegistry.INSTANCE.registerGuiHandler(this.instance,new GuiHandler());		
+		
+		//register renders
+		proxy.registerRenderers();
 
 	}
 

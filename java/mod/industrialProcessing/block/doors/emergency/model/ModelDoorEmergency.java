@@ -3,9 +3,9 @@ package mod.industrialProcessing.block.doors.emergency.model;
 import javax.swing.Icon;
 
 import mod.industrialProcessing.block.doors.BlockDoor;
-import mod.industrialProcessing.client.rendering.ModelBlock;
-import mod.industrialProcessing.client.rendering.obj.wavefront.ObjRotatedTranslator;
-import mod.industrialProcessing.client.rendering.obj.wavefront.WorldReference;
+import mod.industrialProcessing.client.rendering.block.ModelBlock;
+import mod.industrialProcessing.client.rendering.block.obj.wavefront.ObjRotatedTranslator;
+import mod.industrialProcessing.client.rendering.block.obj.wavefront.WorldReference;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.util.IIcon;

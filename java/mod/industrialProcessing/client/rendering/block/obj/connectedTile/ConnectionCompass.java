@@ -1,4 +1,4 @@
-package mod.industrialProcessing.client.rendering.obj.connectedTile;
+package mod.industrialProcessing.client.rendering.block.obj.connectedTile;
 
 public class ConnectionCompass {
 	public TileConnection connectionN;

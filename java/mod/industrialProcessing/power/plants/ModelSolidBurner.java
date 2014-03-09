@@ -4,7 +4,7 @@ import ip.industrialProcessing.api.rendering.ModelMachine;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.tileentity.TileEntity;
 
-public class ModelSolidBurner extends ModelMachine {
+public class ModelSolidBurner extends ModelTileEntity {
 
 	// fields
 	ModelRenderer Support2;

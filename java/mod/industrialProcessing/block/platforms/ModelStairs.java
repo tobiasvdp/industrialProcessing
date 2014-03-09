@@ -2,10 +2,10 @@ package mod.industrialProcessing.block.platforms;
 
 import javax.swing.Icon;
 
-import mod.industrialProcessing.client.rendering.ModelBlock;
-import mod.industrialProcessing.client.rendering.obj.connectedTile.ConnectionCompass;
-import mod.industrialProcessing.client.rendering.obj.connectedTile.TileConnection;
-import mod.industrialProcessing.client.rendering.obj.wavefront.WorldReference;
+import mod.industrialProcessing.client.rendering.block.ModelBlock;
+import mod.industrialProcessing.client.rendering.block.obj.connectedTile.ConnectionCompass;
+import mod.industrialProcessing.client.rendering.block.obj.connectedTile.TileConnection;
+import mod.industrialProcessing.client.rendering.block.obj.wavefront.WorldReference;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;

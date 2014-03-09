@@ -1,4 +1,4 @@
-package ip.industrialProcessing.client.render;
+package mod.industrialProcessing.client.rendering.tileEntity;
 
 public interface IAnimationProgress {
 	int getAnimationCount();

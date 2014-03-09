@@ -3,8 +3,8 @@ package mod.industrialProcessing.block.platforms;
 import java.util.List;
 
 import mod.industrialProcessing.block.ISetupBlocks;
-import mod.industrialProcessing.client.rendering.obj.connectedTile.ConnectionCompass;
-import mod.industrialProcessing.client.rendering.obj.connectedTile.TileConnection;
+import mod.industrialProcessing.client.rendering.block.obj.connectedTile.ConnectionCompass;
+import mod.industrialProcessing.client.rendering.block.obj.connectedTile.TileConnection;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;

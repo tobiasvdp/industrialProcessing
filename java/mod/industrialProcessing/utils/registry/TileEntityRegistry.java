@@ -28,4 +28,8 @@ public class TileEntityRegistry {
 			}
 		return null;
 	}
+	
+	public static Class getTileEntityClassForBlock(Block block){
+		return array.get(block);
+	}
 }

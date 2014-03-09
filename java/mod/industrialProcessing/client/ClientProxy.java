@@ -6,7 +6,10 @@ import mod.industrialProcessing.block.crystals.ModelCrystal;
 import mod.industrialProcessing.block.doors.emergency.model.ModelDoorEmergency;
 import mod.industrialProcessing.block.platforms.ModelPlatform;
 import mod.industrialProcessing.block.platforms.ModelStairs;
-import mod.industrialProcessing.client.rendering.ModelBlock;
+import mod.industrialProcessing.blockContainer.ISetupBlockContainers;
+import mod.industrialProcessing.blockContainer.machine.crusher.ModelCrusher;
+import mod.industrialProcessing.client.rendering.block.ModelBlock;
+import mod.industrialProcessing.client.rendering.tileEntity.ModelTileEntity;
 import mod.industrialProcessing.utils.registry.RenderRegistry;
 
 public class ClientProxy extends CommonProxy {
@@ -145,6 +148,7 @@ public class ClientProxy extends CommonProxy {
 	private static final ModelBlock platform = new ModelPlatform();
 	private static final ModelBlock stairs = new ModelStairs();
 	private static final ModelBlock doorEmergency = new ModelDoorEmergency();
+	private static final ModelTileEntity crusher = new ModelCrusher();
 
 	@Override
 	public void registerRenderers() {
@@ -154,6 +158,10 @@ public class ClientProxy extends CommonProxy {
 		RenderRegistry.registerRendering(ISetupBlocks.blockPlatform, platform);
 		RenderRegistry.registerRendering(ISetupBlocks.blockStairs, stairs);
 		RenderRegistry.registerRendering(ISetupBlocks.blockDoorEmergency, doorEmergency);
+		
+		RenderRegistry.registerRendering(ISetupBlockContainers.blockCrusher, crusher);
+		
+
 
 		/*
 		 * // microblocks registerMicroblocks();
@@ -565,14 +573,7 @@ public class ClientProxy extends CommonProxy {
 		 * RendererTileBlock(ConfigRenderers.getRendererMixerId(), new
 		 * TileEntityMixer()));
 		 * 
-		 * ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrusher.class,
-		 * new RendererTileEntityAnimated(ISetupMachineBlocks.blockCrusher,
-		 * "ModelCrusher", crusher));
-		 * ConfigRenderers.setRendererCrusherId(RenderingRegistry
-		 * .getNextAvailableRenderId());
-		 * RenderingRegistry.registerBlockHandler(new
-		 * RendererTileBlock(ConfigRenderers.getRendererCrusherId(), new
-		 * TileEntityCrusher()));
+		 * 
 		 * 
 		 * ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDryer.class,
 		 * new RendererTileEntity(ISetupMachineBlocks.blockDryer, "ModelDryer",

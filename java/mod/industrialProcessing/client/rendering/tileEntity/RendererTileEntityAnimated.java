@@ -1,6 +1,5 @@
-package ip.industrialProcessing.client.render;
+package mod.industrialProcessing.client.rendering.tileEntity;
 
-import ip.industrialProcessing.api.rendering.RendererTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -25,9 +24,6 @@ public class RendererTileEntityAnimated extends RendererTileEntity {
 				animation[l] = machine.getAnimationProgress(1f, l);
 			}
 		}
-		/*
-		 * Place your rendering code here.
-		 */
 		this.model.renderModelAnimated(tl, 0.0625F, animation);
 	}
 }

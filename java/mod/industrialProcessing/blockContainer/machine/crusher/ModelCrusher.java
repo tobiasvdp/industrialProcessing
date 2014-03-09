@@ -1,6 +1,6 @@
-package ip.industrialProcessing.machines.crusher;
+package mod.industrialProcessing.blockContainer.machine.crusher;
 
-import ip.industrialProcessing.client.render.ModelAnimatedMachine;
+import mod.industrialProcessing.client.rendering.tileEntity.ModelAnimatedMachine;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
@@ -123,7 +123,8 @@ public class ModelCrusher extends ModelAnimatedMachine {
 
     @Override
     public void renderModelAnimated(TileEntity tileEntity, float scale, float[] progress) {
-	float angle = (float) Math.cos(progress[0] * Math.PI * 6) * 1;
+    	float angle = 0;
+	//float angle = (float) Math.cos(progress[0] * Math.PI * 6) * 1;
 	SupportBeamRight.render(scale);
 	SupportBeamLeft.render(scale);
 

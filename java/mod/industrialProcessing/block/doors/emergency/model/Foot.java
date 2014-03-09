@@ -1,6 +1,6 @@
 package mod.industrialProcessing.block.doors.emergency.model;
-import mod.industrialProcessing.client.rendering.obj.wavefront.ObjMesh;
-import mod.industrialProcessing.client.rendering.obj.wavefront.ObjQuad;
+import mod.industrialProcessing.client.rendering.block.obj.wavefront.ObjMesh;
+import mod.industrialProcessing.client.rendering.block.obj.wavefront.ObjQuad;
 
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector2f;
