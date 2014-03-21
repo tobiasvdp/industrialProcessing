@@ -94,12 +94,6 @@ public abstract class BlockContainerIP extends BlockContainer {
 		machine.setForwardDirection(forward);
 	}
 
-	@Deprecated
-	public ForgeDirection getForwardFromMetadata(World world, int x, int y, int z) {
-		int metadata = world.getBlockMetadata(x, y, z);
-		return getForwardFromMetadata(metadata);
-	}
-
 	public static ForgeDirection getForwardFromMetadata(int metadata) {
 		switch (metadata) {
 		case 0:

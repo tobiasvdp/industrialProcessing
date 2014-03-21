@@ -1,4 +1,4 @@
-package ip.industrialProcessing.power.utils;
+package mod.industrialProcessing.power.utils;
 
 import net.minecraftforge.common.util.ForgeDirection;
 

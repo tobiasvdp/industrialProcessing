@@ -6,11 +6,21 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 import mod.industrialProcessing.IndustrialProcessing;
-import mod.industrialProcessing.utils.block.IRecipeBlock;
+import mod.industrialProcessing.block.doors.BlockDoor;
+import mod.industrialProcessing.block.doors.emergency.model.ModelDoorEmergency;
+import mod.industrialProcessing.client.rendering.block.ModelBlock;
+import mod.industrialProcessing.client.rendering.tileEntity.ModelTileEntity;
+import mod.industrialProcessing.plants.power.motor.electroMotor.BlockElectroMotor;
+import mod.industrialProcessing.plants.power.motor.electroMotor.TileEntityElectroMotor;
+import mod.industrialProcessing.plants.power.motor.electroMotor.models.ModelElectroMotorBlock;
+import mod.industrialProcessing.plants.power.motor.electroMotor.models.ModelElectroMotorTile;
 import mod.industrialProcessing.utils.forgeFixes.ItemBlockWithMeta;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockRegistry {
 	private static HashMap<Block, BlockType[]> array = new HashMap<Block, BlockType[]>();
@@ -23,6 +33,12 @@ public class BlockRegistry {
 		GameRegistry.registerBlock(block, uniqueId);
 		OreDictionary.registerOre(oreDictionaryKey, block);
 		RegisterBlock(block, BlockType.Ore);
+	}
+	
+	public static void registerBlock(Block block, String uniqueId, String harvest, int level, ModelBlock model) {
+		registerBlock(block, uniqueId, harvest, level);
+		if (Minecraft.getMinecraft() != null)
+			RenderRegistry.registerRendering(block, model);
 	}
 
 	public static void registerBlock(Block block, String uniqueId, String harvest, int level) {
@@ -57,20 +73,35 @@ public class BlockRegistry {
 		RegisterBlock(block, BlockType.fluid);
 	}
 
+	public static void registerMachine(Block block, Class tileEntity, String uniqueId, ModelTileEntity model) {
+		registerMachine(block, tileEntity, uniqueId);
+		if (Minecraft.getMinecraft() != null)
+			RenderRegistry.registerRendering(block, model);
+	}
+	
+	public static void registerMachine(Block block, Class tileEntity, String uniqueId, ModelBlock modelBL,ModelTileEntity modelTE) {
+		registerMachine(block, tileEntity, uniqueId);
+		if (Minecraft.getMinecraft() != null){
+			RenderRegistry.registerRendering(block, modelBL);
+			RenderRegistry.registerRendering(block, modelTE);
+		}
+		
+	}
+
 	public static void registerMachine(Block block, Class tileEntity, String uniqueId) {
 		block.setBlockName(uniqueId);
 		block.setBlockTextureName(IndustrialProcessing.TEXTURE_NAME_PREFIX + block.getUnlocalizedName());
 		block.setCreativeTab(IndustrialProcessing.tabMachines);
 		block.setHarvestLevel("pickaxe", 1);
-		
+
 		GameRegistry.registerBlock(block, uniqueId);
 		RegisterBlock(block, BlockType.Machine);
-		
+
 		TileEntityRegistry.registerTileEntity(block, tileEntity, uniqueId);
 
-		
 		// TODO if (block instanceof IRecipeBlock)
-		// TODO	RecipeRegistry.registerMachinesRecipes(((IRecipeBlock) block).getRecipes(), block);
+		// TODO RecipeRegistry.registerMachinesRecipes(((IRecipeBlock)
+		// block).getRecipes(), block);
 		// TODO if (block instanceof BlockMicroBlock)
 		// TODO MicroBlockRegistry.RegisterMicroBlock((BlockMicroBlock) block);
 	}
@@ -184,4 +215,5 @@ public class BlockRegistry {
 		}
 		return list.iterator();
 	}
+
 }

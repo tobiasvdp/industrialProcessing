@@ -1,7 +1,13 @@
 package mod.industrialProcessing.blockContainer;
 
 import mod.industrialProcessing.IndustrialProcessing;
+import mod.industrialProcessing.blockContainer.machine.crusher.ModelCrusher;
 import mod.industrialProcessing.blockContainer.machine.crusher.TileEntityCrusher;
+import mod.industrialProcessing.plants.power.generator.crankGenerator.ModelCrankGenerator;
+import mod.industrialProcessing.plants.power.generator.crankGenerator.TileEntityManualGenerator;
+import mod.industrialProcessing.plants.power.motor.electroMotor.TileEntityElectroMotor;
+import mod.industrialProcessing.plants.power.motor.electroMotor.models.ModelElectroMotorBlock;
+import mod.industrialProcessing.plants.power.motor.electroMotor.models.ModelElectroMotorTile;
 import mod.industrialProcessing.utils.registry.BlockRegistry;
 
 public class ConfigBlockContainers {
@@ -14,7 +20,9 @@ public class ConfigBlockContainers {
    
     public void registerBlocks() {
     	
-    	BlockRegistry.registerMachine(IndustrialProcessing.blockCrusher, TileEntityCrusher.class, "IP.machine.crusher");
+    	BlockRegistry.registerMachine(IndustrialProcessing.blockCrusher, TileEntityCrusher.class, "IP.machine.crusher",new ModelCrusher());
+    	BlockRegistry.registerMachine(IndustrialProcessing.blockManualGenerator, TileEntityManualGenerator.class, "IP.generator.manual",new ModelCrankGenerator(true));
+    	BlockRegistry.registerMachine(IndustrialProcessing.blockElectroMotor, TileEntityElectroMotor.class, "IP.motor.electro",new ModelElectroMotorBlock(),new ModelElectroMotorTile());
     	/*
         registerMachineBlock(ISetupMachineBlocks.blockTorch, "IP.Machine.Torch", "Torch", TileEntityTorch.class, BlockType.decoration);
         registerMachineBlock(ISetupMachineBlocks.blockAlkylationUnit, "IP.Machine.AlkUnit", "Alkylation unit", TileEntityAlkylationUnit.class, BlockType.Machine, BlockType.Refinary);

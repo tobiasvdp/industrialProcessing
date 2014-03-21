@@ -1,11 +1,11 @@
 package mod.industrialProcessing.blockContainer.machine;
 
-import mod.industrialProcessing.power.IPowerStorage;
-import mod.industrialProcessing.power.IPoweredMachine;
-import mod.industrialProcessing.power.PowerHelper;
-import mod.industrialProcessing.power.PowerTransfers;
-import mod.industrialProcessing.power.PowerWorkerHelper;
-import mod.industrialProcessing.power.SimplePowerStorage;
+import mod.industrialProcessing.power.network.IPowerStorage;
+import mod.industrialProcessing.power.network.IPoweredMachine;
+import mod.industrialProcessing.power.network.PowerHelper;
+import mod.industrialProcessing.power.network.PowerTransfers;
+import mod.industrialProcessing.power.network.PowerWorkerHelper;
+import mod.industrialProcessing.power.network.SimplePowerStorage;
 import mod.industrialProcessing.utils.rotation.LocalDirection;
 import mod.industrialProcessing.work.recipe.IMachineRecipe;
 import mod.industrialProcessing.work.recipe.IPowerRecipe;

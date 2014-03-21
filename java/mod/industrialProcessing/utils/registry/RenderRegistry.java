@@ -17,27 +17,39 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class RenderRegistry {
 	private static HashMap<Block, ModelBlock> array = new HashMap<Block, ModelBlock>();
+	private static HashMap<Block, ModelTileEntity> arrayTE = new HashMap<Block, ModelTileEntity>();
 
-	public static void registerRendering(BlockIPRendered block, ModelBlock model) {
-		block.setRenderID(RenderingRegistry.getNextAvailableRenderId());
-		RenderingRegistry.registerBlockHandler(new RendererBlock(block.getRenderType(), model));
+	public static void registerRendering(Block block, ModelBlock model) {
+		if (block instanceof BlockIPRendered){
+			((BlockIPRendered) block).setRenderID(RenderingRegistry.getNextAvailableRenderId());
+			if (((BlockIPRendered) block).getRenderType() == 0)
+			RenderingRegistry.registerBlockHandler(new RendererBlock(block.getRenderType(), model));
+		}
+		else{
+			((BlockContainerIPRendered) block).setRenderID(RenderingRegistry.getNextAvailableRenderId());
+			if (((BlockContainerIPRendered) block).getRenderType() == 0)
+			RenderingRegistry.registerBlockHandler(new RendererBlock(block.getRenderType(), model));
+		}			
 		array.put(block, model);
 	}
 
 	public static void registerRendering(BlockContainerIPRendered block, ModelBlock model) {
 		block.setRenderID(RenderingRegistry.getNextAvailableRenderId());
-		RenderingRegistry.registerBlockHandler(new RendererBlock(block.getRenderType(), model));
+		if (((BlockContainerIPRendered) block).getRenderType() == 0)
+			RenderingRegistry.registerBlockHandler(new RendererBlock(block.getRenderType(), model));
 		array.put(block, model);
 	}
 
-	public static void registerRendering(BlockContainerIPRendered block, ModelTileEntity model) {
+	public static void registerRendering(Block block, ModelTileEntity model) {
 		Class teClass = TileEntityRegistry.getTileEntityClassForBlock(block);
 		if (model instanceof ModelAnimatedMachine) {
 			ClientRegistry.bindTileEntitySpecialRenderer(teClass, new RendererTileEntityAnimated(block, block.getUnlocalizedName(), (ModelAnimatedMachine) model));
 		} else {
 			ClientRegistry.bindTileEntitySpecialRenderer(teClass, new RendererTileEntity(block, block.getUnlocalizedName(), model));
 		}
-		block.setRenderID(RenderingRegistry.getNextAvailableRenderId());
+		if (((BlockContainerIPRendered) block).getRenderType() == 0)
+			((BlockContainerIPRendered) block).setRenderID(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererTileBlock(block.getRenderType(), TileEntityRegistry.createNewTileEntity(block)));
+		arrayTE.put(block, model);
 	}
 }

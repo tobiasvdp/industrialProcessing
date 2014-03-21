@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 
 public abstract class BlockContainerIPRendered extends BlockContainerIP {
 
-	int renderID;
+	int renderID = 0;
 	 IIcon[] icons;
 	 String[] iconNames;
 	 boolean multipleIcons = false;

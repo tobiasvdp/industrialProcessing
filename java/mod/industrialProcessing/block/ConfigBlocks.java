@@ -1,6 +1,10 @@
 package mod.industrialProcessing.block;
 
 import mod.industrialProcessing.IndustrialProcessing;
+import mod.industrialProcessing.block.crystals.ModelCrystal;
+import mod.industrialProcessing.block.doors.emergency.model.ModelDoorEmergency;
+import mod.industrialProcessing.block.platforms.ModelPlatform;
+import mod.industrialProcessing.block.platforms.ModelStairs;
 import mod.industrialProcessing.utils.registry.BlockRegistry;
 import mod.industrialProcessing.utils.registry.BlockType;
 import net.minecraft.block.Block;
@@ -30,11 +34,11 @@ public class ConfigBlocks {
 		BlockRegistry.registerBlock(ISetupBlocks.blockCobbleLimestone, "IP.block.cobbleLimestone","pickaxe",0);
 		BlockRegistry.registerBlock(ISetupBlocks.blockLimestone, "IP.block.limestone","pickaxe",0);
 		BlockRegistry.registerBlock(ISetupBlocks.blockHardSand, "IP.block.hardSand","shovel",0);
-		BlockRegistry.registerBlock(ISetupBlocks.blockRutile, "IP.block.rutile", "pickaxe", 2);
-		BlockRegistry.registerBlock(ISetupBlocks.blockCinnebar, "IP.block.cinnebar", "pickaxe", 1);
-		BlockRegistry.registerBlock(ISetupBlocks.blockStairs, "IP.block.stairs", "pickaxe", 1);
-		BlockRegistry.registerBlock(ISetupBlocks.blockPlatform, "IP.block.platform", "pickaxe", 1);
-		BlockRegistry.registerBlock(ISetupBlocks.blockDoorEmergency, "IP.block.doorEmergency", "pickaxe", 1);
+		BlockRegistry.registerBlock(ISetupBlocks.blockRutile, "IP.block.rutile", "pickaxe", 2,new ModelCrystal());
+		BlockRegistry.registerBlock(ISetupBlocks.blockCinnebar, "IP.block.cinnebar", "pickaxe", 1,new ModelCrystal());
+		BlockRegistry.registerBlock(ISetupBlocks.blockStairs, "IP.block.stairs", "pickaxe", 1,new ModelStairs());
+		BlockRegistry.registerBlock(ISetupBlocks.blockPlatform, "IP.block.platform", "pickaxe", 1,new ModelPlatform());
+		BlockRegistry.registerBlock(ISetupBlocks.blockDoorEmergency, "IP.block.doorEmergency", "pickaxe", 1,new ModelDoorEmergency());
 		BlockRegistry.registerMCBlock(ISetupBlocks.blockHalfWavePlate, "IP.block.halfWavePlate", "pickaxe", 1);
 				
 		BlockRegistry.registerMetadataBlock(ISetupBlocks.blockLeaves,"IP.block.tree.leaves", "axe",0);

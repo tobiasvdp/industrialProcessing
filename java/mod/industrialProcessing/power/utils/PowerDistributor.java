@@ -1,9 +1,8 @@
-package ip.industrialProcessing.power.utils;
-
-import ip.industrialProcessing.power.IPowerAcceptor;
+package mod.industrialProcessing.power.utils;
 
 import java.util.Arrays;
 
+import mod.industrialProcessing.power.network.IPowerAcceptor;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
@@ -63,7 +62,7 @@ public class PowerDistributor {
     }
 
     private IPowerAcceptor getAcceptor(PowerAcceptorConnection connection, World world) {
-	TileEntity entity = world.getBlockTileEntity(connection.x, connection.y, connection.z);
+	TileEntity entity = world.getTileEntity(connection.x, connection.y, connection.z);
 	if (entity instanceof IPowerAcceptor)
 	    return (IPowerAcceptor) entity;
 	return null;
@@ -90,10 +89,10 @@ public class PowerDistributor {
 
     public void readFromNBT(NBTTagCompound par1Compound) {
 	int connectionCount = par1Compound.getInteger("ConnectionCount");
-	NBTTagList nbttaglist = par1Compound.getTagList("Connections");
+	NBTTagList nbttaglist = par1Compound.getTagList("Connections",10);
 	PowerAcceptorConnection[] connections = new PowerAcceptorConnection[connectionCount];
 	for (int i = 0; i < connections.length; i++) {
-	    NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(i);
+	    NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.getCompoundTagAt(i);
 	    int x = nbttagcompound1.getInteger("X");
 	    int y = nbttagcompound1.getInteger("Y");
 	    int z = nbttagcompound1.getInteger("Z");

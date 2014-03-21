@@ -12,7 +12,7 @@ import mod.industrialProcessing.gui.framework.custom.PowerControl;
 import mod.industrialProcessing.gui.framework.panels.LayerPanel;
 import mod.industrialProcessing.gui.framework.panels.StackPanel;
 import mod.industrialProcessing.gui.framework.slots.SlotBase;
-import mod.industrialProcessing.power.IPoweredMachine;
+import mod.industrialProcessing.power.network.IPoweredMachine;
 import mod.industrialProcessing.work.recipe.IMachineRecipe;
 import mod.industrialProcessing.work.recipe.IPowerRecipe;
 import net.minecraft.inventory.IInventory;

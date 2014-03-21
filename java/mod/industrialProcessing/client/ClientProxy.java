@@ -144,23 +144,8 @@ public class ClientProxy extends CommonProxy {
 	 * ModelMicroBlock();
 	 */
 
-	private static final ModelBlock crystal = new ModelCrystal();
-	private static final ModelBlock platform = new ModelPlatform();
-	private static final ModelBlock stairs = new ModelStairs();
-	private static final ModelBlock doorEmergency = new ModelDoorEmergency();
-	private static final ModelTileEntity crusher = new ModelCrusher();
-
 	@Override
 	public void registerRenderers() {
-
-		RenderRegistry.registerRendering(ISetupBlocks.blockCinnebar, crystal);
-		RenderRegistry.registerRendering(ISetupBlocks.blockRutile, crystal);
-		RenderRegistry.registerRendering(ISetupBlocks.blockPlatform, platform);
-		RenderRegistry.registerRendering(ISetupBlocks.blockStairs, stairs);
-		RenderRegistry.registerRendering(ISetupBlocks.blockDoorEmergency, doorEmergency);
-		
-		RenderRegistry.registerRendering(ISetupBlockContainers.blockCrusher, crusher);
-		
 
 
 		/*

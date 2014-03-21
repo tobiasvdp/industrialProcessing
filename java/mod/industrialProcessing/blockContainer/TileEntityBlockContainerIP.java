@@ -11,33 +11,33 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityBlockContainerIP extends TileEntity implements IRotateableEntity {
 
-	 private ForgeDirection forwardDirection;
-	
+	private ForgeDirection forwardDirection;
+
 	@Override
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
 		this.writeToNBT(nbtTag);
 		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
 	}
-	
-	@Override
-    public boolean canUpdate() {
-        return true;
-    }
 
-    @Override
-    public void writeToNBT(NBTTagCompound nbt) {
-        super.writeToNBT(nbt);
-        if (this.forwardDirection != null)
-            nbt.setByte("ForwardDirection", (byte) this.forwardDirection.ordinal());
-    }
-    
-    @Override
-    public void readFromNBT(NBTTagCompound nbt) {
-        super.readFromNBT(nbt);
-        if (nbt.hasKey("ForwardDirection"))
-            this.forwardDirection = ForgeDirection.VALID_DIRECTIONS[nbt.getByte("ForwardDirection")];
-    };
+	@Override
+	public boolean canUpdate() {
+		return true;
+	}
+
+	@Override
+	public void writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
+		if (this.forwardDirection != null)
+			nbt.setByte("ForwardDirection", (byte) this.forwardDirection.ordinal());
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
+		if (nbt.hasKey("ForwardDirection"))
+			this.forwardDirection = ForgeDirection.VALID_DIRECTIONS[nbt.getByte("ForwardDirection")];
+	};
 
 	@Override
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
@@ -56,11 +56,11 @@ public class TileEntityBlockContainerIP extends TileEntity implements IRotateabl
 		}
 
 	}
-	
-    @Override
-    public ForgeDirection getForwardDirection() {
-        return forwardDirection;
-    }
+
+	@Override
+	public ForgeDirection getForwardDirection() {
+		return forwardDirection;
+	}
 
 	@Override
 	public void setForwardDirection(ForgeDirection forward) {
@@ -71,21 +71,24 @@ public class TileEntityBlockContainerIP extends TileEntity implements IRotateabl
 	public boolean canWrenchRotate() {
 		return true;
 	}
-	
-	protected int[][] rotationMatrix = new int[][]{{0},{0},{0,1,3,2,5,4},{0,1,2,3,4,5},{0,1,4,5,3,2},{0,1,5,4,2,3}}; 
+
+	protected int[][] rotationMatrix = new int[][] { { 0 }, { 0 }, { 0, 1, 3, 2, 5, 4 }, { 0, 1, 2, 3, 4, 5 }, { 0, 1, 4, 5, 3, 2 }, { 0, 1, 5, 4, 2, 3 } };
 
 	@Override
 	public LocalDirection getLocalDirection(ForgeDirection dir) {
-		return LocalDirection.VALID_DIRECTIONS[rotationMatrix[getForwardDirection().ordinal()][dir.ordinal()]];
+		if (getForwardDirection() != null)
+			return LocalDirection.VALID_DIRECTIONS[rotationMatrix[getForwardDirection().ordinal()][dir.ordinal()]];
+		return LocalDirection.FRONT;
 	}
+
 	@Override
 	public LocalDirection getLocalDirection(int dir) {
 		return getLocalDirection(ForgeDirection.VALID_DIRECTIONS[dir]);
 	}
+
 	@Override
 	public ForgeDirection getExternalDirection(LocalDirection dir) {
 		return ForgeDirection.VALID_DIRECTIONS[rotationMatrix[getForwardDirection().ordinal()][dir.ordinal()]];
 	}
-
 
 }

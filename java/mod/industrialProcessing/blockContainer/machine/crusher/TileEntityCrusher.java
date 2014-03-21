@@ -11,7 +11,7 @@ public class TileEntityCrusher extends TileEntityMachineInvWorkPower {
 	public static RecipesMachine recipes =  new RecipesCrusher();
 	
 	public TileEntityCrusher() {
-		super(recipes,LocalDirection.LEFT, 10000, 100);										
+		super(recipes,LocalDirection.RIGHT, 10000, 100);										
 		
 		this.addStack(null, LocalDirection.BACK, true, false);
 		this.addStack(null, LocalDirection.DOWN, false, true);
