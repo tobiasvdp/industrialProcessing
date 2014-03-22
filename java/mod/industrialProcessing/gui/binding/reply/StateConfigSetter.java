@@ -10,6 +10,7 @@ import java.io.IOException;
 
 import mod.industrialProcessing.gui.binding.IValueBinding;
 import mod.industrialProcessing.gui.binding.IValueBindingChangedListener;
+import mod.industrialProcessing.utils.handlers.numbers.IStateConfig;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 

@@ -5,6 +5,8 @@ import mod.industrialProcessing.blockContainer.machine.crusher.ModelCrusher;
 import mod.industrialProcessing.blockContainer.machine.crusher.TileEntityCrusher;
 import mod.industrialProcessing.plants.power.generator.crankGenerator.ModelCrankGenerator;
 import mod.industrialProcessing.plants.power.generator.crankGenerator.TileEntityManualGenerator;
+import mod.industrialProcessing.plants.power.meter.ModelVoltMeter;
+import mod.industrialProcessing.plants.power.meter.TileEntityVoltMeter;
 import mod.industrialProcessing.plants.power.motor.electroMotor.TileEntityElectroMotor;
 import mod.industrialProcessing.plants.power.motor.electroMotor.models.ModelElectroMotorBlock;
 import mod.industrialProcessing.plants.power.motor.electroMotor.models.ModelElectroMotorTile;
@@ -23,6 +25,7 @@ public class ConfigBlockContainers {
     	BlockRegistry.registerMachine(IndustrialProcessing.blockCrusher, TileEntityCrusher.class, "IP.machine.crusher",new ModelCrusher());
     	BlockRegistry.registerMachine(IndustrialProcessing.blockManualGenerator, TileEntityManualGenerator.class, "IP.generator.manual",new ModelCrankGenerator(true));
     	BlockRegistry.registerMachine(IndustrialProcessing.blockElectroMotor, TileEntityElectroMotor.class, "IP.motor.electro",new ModelElectroMotorBlock(),new ModelElectroMotorTile());
+    	BlockRegistry.registerMachine(IndustrialProcessing.blockVoltMeter, TileEntityVoltMeter.class, "IP.meter.volt",new ModelVoltMeter(false));
     	/*
         registerMachineBlock(ISetupMachineBlocks.blockTorch, "IP.Machine.Torch", "Torch", TileEntityTorch.class, BlockType.decoration);
         registerMachineBlock(ISetupMachineBlocks.blockAlkylationUnit, "IP.Machine.AlkUnit", "Alkylation unit", TileEntityAlkylationUnit.class, BlockType.Machine, BlockType.Refinary);

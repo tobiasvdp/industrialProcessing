@@ -1,14 +1,13 @@
 package mod.industrialProcessing.gui.guide.pages.machines.crafts;
 
-import ip.industrialProcessing.gui3.framework.UIElement;
-import ip.industrialProcessing.gui3.framework.controls.IButtonClickListener;
-import ip.industrialProcessing.gui3.framework.controls.TextBlock;
-import ip.industrialProcessing.gui3.generating.IGuiBlock;
-import ip.industrialProcessing.gui3.generating.IGuiBuilder;
-import ip.industrialProcessing.gui3.generating.IGuiMultiblock;
-import ip.industrialProcessing.multiblock.recipes.ITierRecipe;
-import ip.industrialProcessing.multiblock.tier.Tiers;
-import ip.industrialProcessing.recipes.IMachineRecipe;
+import mod.industrialProcessing.blockContainer.multiblock.tier.Tiers;
+import mod.industrialProcessing.gui.framework.UIElement;
+import mod.industrialProcessing.gui.framework.controls.IButtonClickListener;
+import mod.industrialProcessing.gui.framework.controls.TextBlock;
+import mod.industrialProcessing.gui.generating.IGuiBuilder;
+import mod.industrialProcessing.utils.block.IGuiBlock;
+import mod.industrialProcessing.utils.block.IGuiMultiblock;
+import mod.industrialProcessing.work.recipe.IMachineRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 

@@ -47,7 +47,7 @@ public class TileEntityElectroMotor extends TileEntityBlockContainerIP implement
             float drain = this.storage.drainPower(100, true);
             addEnergy(drain * 20); // a lil more efficient
 
-            TileAnimationSyncHandler.sendAnimationData(this, this.animationHandler);
+            //TODO TileAnimationSyncHandler.sendAnimationData(this, this.animationHandler);
 
             ForgeDirection generatorDirection = getExternalDirection(motionOutputDirection);
             IMechanicalMotion generator = getGenerator(generatorDirection.getOpposite());

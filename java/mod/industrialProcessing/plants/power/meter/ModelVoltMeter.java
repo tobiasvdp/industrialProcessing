@@ -1,6 +1,6 @@
-package ip.industrialProcessing.power.meters;
+package mod.industrialProcessing.plants.power.meter;
 
-import ip.industrialProcessing.client.render.ModelAnimatedMachine;
+import mod.industrialProcessing.client.rendering.tileEntity.ModelAnimatedMachine;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.tileentity.TileEntity;
 

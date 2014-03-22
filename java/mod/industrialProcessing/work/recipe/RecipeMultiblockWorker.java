@@ -1,13 +1,9 @@
-package ip.industrialProcessing.multiblock.recipes;
-
-import ip.industrialProcessing.recipes.Recipe;
-import ip.industrialProcessing.recipes.RecipeInputSlot;
-import ip.industrialProcessing.recipes.RecipeOutputSlot;
-import ip.industrialProcessing.recipes.RecipeSlotType;
-import ip.industrialProcessing.utils.working.ServerWorker;
+package mod.industrialProcessing.work.recipe;
 
 import java.util.Iterator;
 import java.util.Random;
+
+import mod.industrialProcessing.work.worker.ServerWorker;
 
 public class RecipeMultiblockWorker extends ServerWorker {
 
@@ -80,9 +76,9 @@ public class RecipeMultiblockWorker extends ServerWorker {
 	    protected boolean hasInputIngredients(RecipeInputSlot slot) {
 	        if (slot.type == RecipeSlotType.INVENTORY || slot.type == RecipeSlotType.DAMAGEDITEM) {
 	            if (slot.hasMetadata)
-	                return this.handler.slotContains(slot.index, slot.itemId, slot.metadata, slot.amount);
+	                return this.handler.slotContains(slot.index, slot.item, slot.metadata, slot.amount);
 	            else
-	                return this.handler.slotContains(slot.index, slot.itemId, slot.amount);
+	                return this.handler.slotContains(slot.index, slot.item, slot.amount);
 	        }
 	        return false;
 	    }
@@ -100,7 +96,7 @@ public class RecipeMultiblockWorker extends ServerWorker {
 
 	    protected boolean hasOutputSpace(RecipeOutputSlot slot) {
 	        if (slot.type == RecipeSlotType.INVENTORY) {
-	            return this.handler.slotHasRoomFor(slot.index, slot.itemId, slot.maxAmount, slot.damage);
+	            return this.handler.slotHasRoomFor(slot.index, slot.item, slot.maxAmount, slot.damage);
 	        }
 	        return false;
 	    }
@@ -117,10 +113,10 @@ public class RecipeMultiblockWorker extends ServerWorker {
 
 	    protected void removeFromInput(RecipeInputSlot slot) {
 	        if (slot.type == RecipeSlotType.INVENTORY) {
-	            if (!this.handler.removeFromSlot(slot.index, slot.itemId, slot.amount))
+	            if (!this.handler.removeFromSlot(slot.index, slot.item, slot.amount))
 	                System.err.println("Failed to remove recipe input?!");
 	        } else if (slot.type == RecipeSlotType.DAMAGEDITEM) {
-	            if (!this.handler.damageItem(slot.index, slot.itemId))
+	            if (!this.handler.damageItem(slot.index, slot.item))
 	                System.err.println("Failed to damage recipe input?!");
 	        }
 	    }
@@ -143,7 +139,7 @@ public class RecipeMultiblockWorker extends ServerWorker {
 
 	    protected void addToOutput(int amount, RecipeOutputSlot slot) {
 	        if (slot.type == RecipeSlotType.INVENTORY) {
-	            if (!this.handler.addToSlot(slot.index, slot.itemId, amount, slot.damage))
+	            if (!this.handler.addToSlot(slot.index, slot.item, amount, slot.damage))
 	                System.err.println("Failed to create recipe output?!");
 	        }
 	    }

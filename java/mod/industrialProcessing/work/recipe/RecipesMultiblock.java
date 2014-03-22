@@ -1,12 +1,10 @@
 package ip.industrialProcessing.multiblock.recipes;
 
-import ip.industrialProcessing.multiblock.tier.Tiers;
-import ip.industrialProcessing.recipes.IMachineRecipes;
-import ip.industrialProcessing.recipes.RecipeInputSlot;
-import ip.industrialProcessing.recipes.RecipeSlotType;
-
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import net.minecraft.item.Item;
+import mod.industrialProcessing.blockContainer.multiblock.tier.Tiers;
 
 public class RecipesMultiblock implements IMachineRecipes<RecipeMultiblock> {
     private ArrayList<RecipeMultiblock> recipes = new ArrayList<RecipeMultiblock>();
@@ -44,13 +42,13 @@ public class RecipesMultiblock implements IMachineRecipes<RecipeMultiblock> {
 	return false;
     }
 
-    public boolean isValidInput(int slot, int itemID, Tiers tier) {
+    public boolean isValidInput(int slot, Item item, Tiers tier) {
 	for (Iterator<RecipeMultiblock> i = getRecipes(); i.hasNext();) {
 	    RecipeMultiblock recipe = i.next();
 	    for (RecipeInputSlot input : recipe.inputs) {
 		if (input.type != RecipeSlotType.INVENTORY && input.type != RecipeSlotType.DAMAGEDITEM)
 		    continue;
-		if (input.index == slot && input.itemId == itemID)
+		if (input.index == slot && input.item.equals(item))
 		    if (recipe.tier == tier)
 			return true;
 	    }

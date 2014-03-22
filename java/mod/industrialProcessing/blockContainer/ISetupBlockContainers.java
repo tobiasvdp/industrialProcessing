@@ -2,6 +2,7 @@ package mod.industrialProcessing.blockContainer;
 
 import mod.industrialProcessing.blockContainer.machine.crusher.BlockCrusher;
 import mod.industrialProcessing.plants.power.generator.crankGenerator.BlockManualGenerator;
+import mod.industrialProcessing.plants.power.meter.BlockVoltMeter;
 import mod.industrialProcessing.plants.power.motor.electroMotor.BlockElectroMotor;
 
 public interface ISetupBlockContainers {
@@ -11,6 +12,7 @@ public interface ISetupBlockContainers {
     
     public final static BlockManualGenerator blockManualGenerator = new BlockManualGenerator();
     public final static BlockElectroMotor blockElectroMotor = new BlockElectroMotor();
+    public final static BlockVoltMeter blockVoltMeter = new BlockVoltMeter();
     /* machines
     public final static BlockFilter blockFilter = new BlockFilter();
     public final static BlockMagneticSeparator blockMageneticSeparator = new BlockMagneticSeparator();

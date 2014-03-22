@@ -1,28 +1,27 @@
 package mod.industrialProcessing.gui.guide.pages.machines;
 
-import ip.industrialProcessing.gui3.framework.Thickness;
-import ip.industrialProcessing.gui3.framework.controls.Button;
-import ip.industrialProcessing.gui3.framework.controls.IButtonClickListener;
-import ip.industrialProcessing.gui3.framework.controls.SlotItemControl;
-import ip.industrialProcessing.gui3.framework.controls.TextBlock;
-import ip.industrialProcessing.gui3.framework.controls.UserControl;
-import ip.industrialProcessing.gui3.framework.panels.MouseButton;
-import ip.industrialProcessing.gui3.framework.panels.Orientation;
-import ip.industrialProcessing.gui3.framework.panels.ScrollPanel;
-import ip.industrialProcessing.gui3.framework.panels.StackPanel;
-import ip.industrialProcessing.gui3.framework.panels.WrapPanel;
-import ip.industrialProcessing.gui3.framework.panels.tabs.TabPage;
-import ip.industrialProcessing.gui3.generating.IGuiBlock;
-import ip.industrialProcessing.gui3.generating.IGuiBuilder;
-import ip.industrialProcessing.gui3.generating.IGuiMultiblock;
-import ip.industrialProcessing.multiblock.recipes.ITierRecipe;
-import ip.industrialProcessing.recipes.IMachineRecipe;
-import ip.industrialProcessing.recipes.IRecipeBlock;
-import ip.industrialProcessing.recipes.RecipeOutputSlot;
-import ip.industrialProcessing.utils.registry.RecipeRegistry;
-
 import java.util.Iterator;
 
+import mod.industrialProcessing.gui.framework.Thickness;
+import mod.industrialProcessing.gui.framework.controls.Button;
+import mod.industrialProcessing.gui.framework.controls.IButtonClickListener;
+import mod.industrialProcessing.gui.framework.controls.SlotItemControl;
+import mod.industrialProcessing.gui.framework.controls.TextBlock;
+import mod.industrialProcessing.gui.framework.controls.UserControl;
+import mod.industrialProcessing.gui.framework.panels.MouseButton;
+import mod.industrialProcessing.gui.framework.panels.Orientation;
+import mod.industrialProcessing.gui.framework.panels.ScrollPanel;
+import mod.industrialProcessing.gui.framework.panels.StackPanel;
+import mod.industrialProcessing.gui.framework.panels.WrapPanel;
+import mod.industrialProcessing.gui.framework.panels.tabs.TabPage;
+import mod.industrialProcessing.gui.generating.IGuiBuilder;
+import mod.industrialProcessing.utils.block.IGuiBlock;
+import mod.industrialProcessing.utils.block.IGuiMultiblock;
+import mod.industrialProcessing.utils.block.IRecipeBlock;
+import mod.industrialProcessing.utils.registry.RecipeRegistry;
+import mod.industrialProcessing.work.recipe.IMachineRecipe;
+import mod.industrialProcessing.work.recipe.ITierRecipe;
+import mod.industrialProcessing.work.recipe.RecipeOutputSlot;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
@@ -110,10 +109,10 @@ public class MachineRecipesTab extends TabPage implements IButtonClickListener<I
 		switch (mainProduct.type) {
 		case INVENTORY:
 		case DAMAGEDITEM:
-			return new ItemStack(mainProduct.itemId, 1, mainProduct.damage);
+			return new ItemStack(mainProduct.item, 1, mainProduct.damage);
 		case TANK:
-			Fluid fluid = FluidRegistry.getFluid(mainProduct.itemId);
-			return new ItemStack(fluid.getBlockID(), 1, 0);
+			Fluid fluid = (mainProduct.fluid);
+			return new ItemStack(fluid.getBlock(), 1, 0);
 		default:
 			return null;
 		}

@@ -1,6 +1,6 @@
 package mod.industrialProcessing.gui.guide.pages.machines;
 
-import ip.industrialProcessing.gui3.framework.panels.canvas.CanvasChild;
+import mod.industrialProcessing.gui.framework.panels.canvas.CanvasChild;
 
 public class TreeConnection {
 

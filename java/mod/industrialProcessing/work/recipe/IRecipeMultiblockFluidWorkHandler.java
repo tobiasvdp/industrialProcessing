@@ -1,7 +1,6 @@
 package ip.industrialProcessing.multiblock.recipes;
 
-import ip.industrialProcessing.machines.IMachineTanks;
-import ip.industrialProcessing.utils.working.IWorkingEntity;
+import mod.industrialProcessing.work.worker.IWorkingEntity;
 
 public interface IRecipeMultiblockFluidWorkHandler extends IRecipeMultiblockWorkHandler, IMachineTanks, IWorkingEntity{
 

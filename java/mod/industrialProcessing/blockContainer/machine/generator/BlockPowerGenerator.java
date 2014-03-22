@@ -1,5 +1,7 @@
 package mod.industrialProcessing.blockContainer.machine.generator;
 
+import java.util.Random;
+
 import mod.industrialProcessing.blockContainer.BlockContainerIPRendered;
 import net.minecraft.block.Block;
 import net.minecraft.block.Block.SoundType;
@@ -15,8 +17,14 @@ public abstract class BlockPowerGenerator extends BlockContainerIPRendered {
 	
 	@Override
 	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, Block par5) {
+		par1World.scheduleBlockUpdate(par2, par3, par4, this, 1);
+		super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
+	}
+	
+	@Override
+	public void updateTick(World par1World, int par2, int par3, int par4, Random p_149674_5_) {
 		TileEntityPowerGenerator generator = (TileEntityPowerGenerator) par1World.getTileEntity(par2, par3, par4);
 		generator.searchForPowerAcceptors();
-		super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
+		super.updateTick(par1World, par2, par3, par4, p_149674_5_);
 	}
 }

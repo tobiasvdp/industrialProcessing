@@ -1,19 +1,19 @@
-package ip.industrialProcessing.utils.registry;
-
-import ip.industrialProcessing.multiblock.recipes.RecipeMultiblock;
-import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
-import ip.industrialProcessing.recipes.IMachineRecipe;
-import ip.industrialProcessing.recipes.IMachineRecipes;
-import ip.industrialProcessing.recipes.Recipe;
-import ip.industrialProcessing.recipes.RecipeInputSlot;
-import ip.industrialProcessing.recipes.RecipeOutputSlot;
+package mod.industrialProcessing.utils.registry;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import mod.industrialProcessing.work.recipe.IMachineRecipe;
+import mod.industrialProcessing.work.recipe.IMachineRecipes;
+import mod.industrialProcessing.work.recipe.Recipe;
+import mod.industrialProcessing.work.recipe.RecipeInputSlot;
+import mod.industrialProcessing.work.recipe.RecipeMultiblock;
+import mod.industrialProcessing.work.recipe.RecipeOutputSlot;
+import mod.industrialProcessing.work.recipe.RecipesMultiblock;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
 public class RecipeRegistry {
@@ -40,12 +40,12 @@ public class RecipeRegistry {
 	public static void addVanillaRecipes(ArrayList<Recipe> vanillaRecipes) {
 		for (int i = 0; i < vanillaRecipes.size(); i++) {
 			if (vanillaRecipes.get(i) != null)
-				addRecipe(vanillaRecipes.get(i), Block.workbench);
+				addRecipe(vanillaRecipes.get(i), Blocks.crafting_table);
 		}
 	}
 	
 	public static void appendVanillaRecipe(Recipe vanillaRecipe) {
-		addRecipe(vanillaRecipe, Block.workbench);
+		addRecipe(vanillaRecipe, Blocks.crafting_table);
 	}
 
 	public static ArrayList<IMachineRecipe> FindRecipeForOutput(ItemStack stack) {
@@ -56,7 +56,7 @@ public class RecipeRegistry {
 				IMachineRecipe recipe = iterator.next().getKey();
 				RecipeOutputSlot[] outputs = recipe.getOutputs();
 				for (int i = 0; i < outputs.length; i++) {
-					if (outputs[i].itemId == stack.itemID) {
+					if (outputs[i].item.equals(stack.getItem())) {
 						list.add(recipe);
 					}
 				}
@@ -73,7 +73,7 @@ public class RecipeRegistry {
 				IMachineRecipe recipe = iterator.next().getKey();
 				RecipeOutputSlot[] outputs = recipe.getOutputs();
 				for (int i = 0; i < outputs.length; i++) {
-					if (outputs[i].itemId == stack.itemID && outputs[i].damage == damage) {
+					if (outputs[i].item.equals(stack.getItem()) && outputs[i].damage == damage) {
 						list.add(recipe);
 					}
 				}
@@ -90,7 +90,7 @@ public class RecipeRegistry {
 				IMachineRecipe recipe = iterator.next().getKey();
 				RecipeInputSlot[] inputs = recipe.getInputs();
 				for (int i = 0; i < inputs.length; i++) {
-					if (inputs[i].itemId == stack.itemID) {
+					if (inputs[i].item.equals(stack.getItem())) {
 						list.add(recipe);
 					}
 				}
@@ -108,7 +108,7 @@ public class RecipeRegistry {
 				RecipeInputSlot[] inputs = recipe.getInputs();
 				RecipeOutputSlot[] outputs = recipe.getOutputs();
 				for (int i = 0; i < recipe.getInputs().length; i++) {
-					if (inputs[i].itemId == stack.itemID && outputs[i].damage == damage) {
+					if (inputs[i].item.equals(stack.getItem()) && outputs[i].damage == damage) {
 						list.add(recipe);
 					}
 				}

@@ -1,7 +1,7 @@
 package mod.industrialProcessing.gui.guide.pages.machines.crafts;
 
-import ip.industrialProcessing.gui3.framework.UIElement;
-import ip.industrialProcessing.gui3.framework.controls.IButtonClickListener;
+import mod.industrialProcessing.gui.framework.UIElement;
+import mod.industrialProcessing.gui.framework.controls.IButtonClickListener;
 import net.minecraft.item.ItemStack;
 
 public interface ICraftBase {

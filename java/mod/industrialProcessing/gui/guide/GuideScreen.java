@@ -1,7 +1,7 @@
 package mod.industrialProcessing.gui.guide;
 
-import ip.industrialProcessing.gui3.framework.UIRoot;
-import ip.industrialProcessing.gui3.framework.panels.MouseButton;
+import mod.industrialProcessing.gui.framework.UIRoot;
+import mod.industrialProcessing.gui.framework.panels.MouseButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 

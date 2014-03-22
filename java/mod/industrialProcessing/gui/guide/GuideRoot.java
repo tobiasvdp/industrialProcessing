@@ -1,10 +1,10 @@
 package mod.industrialProcessing.gui.guide;
 
-import ip.industrialProcessing.gui3.framework.Alignment;
-import ip.industrialProcessing.gui3.framework.controls.UserControl;
-import ip.industrialProcessing.gui3.framework.panels.tabs.TabPanel;
-import ip.industrialProcessing.gui3.guide.pages.MachineTab;
-import ip.industrialProcessing.gui3.guide.pages.ToolsTab;
+import mod.industrialProcessing.gui.framework.Alignment;
+import mod.industrialProcessing.gui.framework.controls.UserControl;
+import mod.industrialProcessing.gui.framework.panels.tabs.TabPanel;
+import mod.industrialProcessing.gui.guide.pages.MachineTab;
+import mod.industrialProcessing.gui.guide.pages.ToolsTab;
 
 public class GuideRoot extends UserControl {
     private TabPanel tabs;

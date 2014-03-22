@@ -2,8 +2,7 @@ package mod.industrialProcessing.items.guide;
 
 import mod.industrialProcessing.IndustrialProcessing;
 import mod.industrialProcessing.items.ItemIP;
-import mod.industrialProcessing.utils.registry.ItemRegistry;
-import mod.industrialProcessing.utils.registry.ItemType;
+import mod.industrialProcessing.utils.handlers.gui.GuiHandler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

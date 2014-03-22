@@ -1,17 +1,16 @@
-package ip.industrialProcessing.power.meters;
+package mod.industrialProcessing.plants.power.meter;
 
-import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.client.render.IAnimationProgress;
-import ip.industrialProcessing.machines.TileEntityMachine;
-import ip.industrialProcessing.machines.animation.AnimationHandler;
-import ip.industrialProcessing.machines.animation.AnimationMode;
-import ip.industrialProcessing.machines.animation.IAnimationSyncable;
-import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
-import ip.industrialProcessing.power.IPowerAcceptor;
-import ip.industrialProcessing.utils.DirectionUtils;
+import mod.industrialProcessing.blockContainer.TileEntityBlockContainerIP;
+import mod.industrialProcessing.client.rendering.tileEntity.IAnimationProgress;
+import mod.industrialProcessing.client.rendering.tileEntity.animation.AnimationHandler;
+import mod.industrialProcessing.client.rendering.tileEntity.animation.AnimationMode;
+import mod.industrialProcessing.client.rendering.tileEntity.animation.IAnimationSyncable;
+import mod.industrialProcessing.client.rendering.tileEntity.animation.TileAnimationSyncHandler;
+import mod.industrialProcessing.power.network.IPowerAcceptor;
+import mod.industrialProcessing.utils.rotation.LocalDirection;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityVoltMeter extends TileEntityMachine implements IPowerAcceptor, IAnimationProgress, IAnimationSyncable {
+public class TileEntityVoltMeter extends TileEntityBlockContainerIP implements IPowerAcceptor, IAnimationProgress, IAnimationSyncable {
 
 	private LocalDirection inputSide = LocalDirection.BACK;
 	private int producers;
@@ -55,19 +54,14 @@ public class TileEntityVoltMeter extends TileEntityMachine implements IPowerAcce
 		// DO nothing with the power, as it should be equal or close to 0
 		// Coulomb.
 		this.voltage += voltage;
+		System.out.println(voltage);
 		this.inputs++;
 	}
 
 	@Override
 	public boolean canAcceptPower(ForgeDirection side) {
-		ForgeDirection forward = getForwardDirection();
-		LocalDirection local = DirectionUtils.getLocalDirection(side, forward);
+		LocalDirection local = getLocalDirection(side);
 		return local == inputSide;
-	}
-
-	@Override
-	protected boolean isValidInput(int slot, int itemID) { 
-		return false;
 	}
 
 	@Override

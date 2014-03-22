@@ -1,22 +1,21 @@
 package mod.industrialProcessing.gui.guide.pages.techtree;
 
-import ip.industrialProcessing.gui3.framework.Alignment;
-import ip.industrialProcessing.gui3.framework.Rect;
-import ip.industrialProcessing.gui3.framework.Size;
-import ip.industrialProcessing.gui3.framework.UIElement;
-import ip.industrialProcessing.gui3.framework.controls.IButtonClickListener;
-import ip.industrialProcessing.gui3.framework.controls.SlotItemControl;
-import ip.industrialProcessing.gui3.framework.controls.UserControl;
-import ip.industrialProcessing.gui3.framework.panels.ScrollPanel;
-import ip.industrialProcessing.gui3.framework.panels.canvas.CanvasChild;
-import ip.industrialProcessing.gui3.framework.panels.canvas.CanvasPanel;
-import ip.industrialProcessing.gui3.framework.rendering.GuiRenderer;
-import ip.industrialProcessing.gui3.guide.pages.machines.TreeConnection;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import mod.industrialProcessing.gui.framework.Alignment;
+import mod.industrialProcessing.gui.framework.Rect;
+import mod.industrialProcessing.gui.framework.Size;
+import mod.industrialProcessing.gui.framework.UIElement;
+import mod.industrialProcessing.gui.framework.controls.IButtonClickListener;
+import mod.industrialProcessing.gui.framework.controls.SlotItemControl;
+import mod.industrialProcessing.gui.framework.controls.UserControl;
+import mod.industrialProcessing.gui.framework.panels.ScrollPanel;
+import mod.industrialProcessing.gui.framework.panels.canvas.CanvasChild;
+import mod.industrialProcessing.gui.framework.panels.canvas.CanvasPanel;
+import mod.industrialProcessing.gui.framework.rendering.GuiRenderer;
+import mod.industrialProcessing.gui.guide.pages.machines.TreeConnection;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 

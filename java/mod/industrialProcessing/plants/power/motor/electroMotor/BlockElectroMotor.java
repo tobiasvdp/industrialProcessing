@@ -19,7 +19,7 @@ public class BlockElectroMotor extends BlockContainerIPRendered implements IDesc
     private static IGuiBuilder guiBuilder = new GuiBuilderDefault("Motor").addLabeledGauge("Voltage", "%.2fV", 0).addLabeledGauge("Speed", "%.0fRPM", 1);
     
     public BlockElectroMotor() {
-        super(1f,1f,Material.iron, Block.soundTypeMetal);
+        super(1f,1f,Material.iron, Block.soundTypeMetal,"powerFeatures","tankSide");
     }
 
     @Override

@@ -12,8 +12,7 @@ public class RecipeFluidWorker extends RecipeWorker {
 	@Override
 	protected boolean hasOutputSpace(RecipeOutputSlot slot) {
 		if (slot.type == RecipeSlotType.TANK) {
-			return this.fluidHanlder.tankHasRoomFor(slot.index, slot.itemId,
-					slot.maxAmount);
+			return this.fluidHanlder.tankHasRoomFor(slot.index, slot.itemId, slot.maxAmount);
 		} else {
 			return super.hasOutputSpace(slot);
 		}
@@ -22,8 +21,7 @@ public class RecipeFluidWorker extends RecipeWorker {
 	@Override
 	protected boolean hasInputIngredients(RecipeInputSlot slot) {
 		if (slot.type == RecipeSlotType.TANK) {
-			return this.fluidHanlder.tankContains(slot.index, slot.itemId,
-					slot.amount);
+			return this.fluidHanlder.tankContains(slot.index, slot.itemId, slot.amount);
 		} else {
 			return super.hasInputIngredients(slot);
 		}
@@ -32,8 +30,7 @@ public class RecipeFluidWorker extends RecipeWorker {
 	@Override
 	protected void removeFromInput(RecipeInputSlot slot) {
 		if (slot.type == RecipeSlotType.TANK) {
-			if (!this.fluidHanlder.removeFromTank(slot.index, slot.itemId,
-					slot.amount))
+			if (!this.fluidHanlder.removeFromTank(slot.index, slot.itemId, slot.amount))
 				System.out.println("Failed to remove recipe inpt?!");
 		} else {
 			super.removeFromInput(slot);

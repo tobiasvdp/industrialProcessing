@@ -1,13 +1,13 @@
 package mod.industrialProcessing.gui.guide.pages;
 
-import ip.industrialProcessing.gui3.framework.controls.Decorator;
-import ip.industrialProcessing.gui3.framework.controls.TextBlock;
-import ip.industrialProcessing.gui3.framework.panels.DockPanel;
-import ip.industrialProcessing.gui3.framework.panels.Orientation;
-import ip.industrialProcessing.gui3.framework.panels.ScrollPanel;
-import ip.industrialProcessing.gui3.framework.panels.tabs.TabPage;
-import ip.industrialProcessing.gui3.guide.pages.machines.MachineDetails;
-import ip.industrialProcessing.gui3.guide.pages.machines.MachineList;
+import mod.industrialProcessing.gui.framework.controls.Decorator;
+import mod.industrialProcessing.gui.framework.controls.TextBlock;
+import mod.industrialProcessing.gui.framework.panels.DockPanel;
+import mod.industrialProcessing.gui.framework.panels.Orientation;
+import mod.industrialProcessing.gui.framework.panels.ScrollPanel;
+import mod.industrialProcessing.gui.framework.panels.tabs.TabPage;
+import mod.industrialProcessing.gui.guide.pages.machines.MachineDetails;
+import mod.industrialProcessing.gui.guide.pages.machines.MachineList;
 
 public class MachineTab extends TabPage {
 

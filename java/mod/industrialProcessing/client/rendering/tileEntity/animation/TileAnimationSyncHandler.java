@@ -1,91 +1,27 @@
 package mod.industrialProcessing.client.rendering.tileEntity.animation;
 
-import ibxm.Player;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-
-import net.minecraft.entity.Entity;
+import io.netty.buffer.Unpooled;
+import mod.industrialProcessing.utils.handlers.packet.PacketHandler;
+import mod.industrialProcessing.utils.handlers.packet.packets.SyncAnimationPacket;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.play.client.C17PacketCustomPayload;
 import net.minecraft.tileentity.TileEntity;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.network.FMLNetworkEvent;
+import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
+import cpw.mods.fml.common.network.internal.FMLProxyPacket;
+import cpw.mods.fml.relauncher.Side;
 
 public class TileAnimationSyncHandler {
 
-    public static void sendAnimationData(TileEntity entity, AnimationHandler handler) {
-	sendAnimationData(entity, handler, 0);
-    }
-
-    public static void sendAnimationData(TileEntity entity, AnimationHandler handler, int index) {
-	if (handler.isChanged()) {
-	    double x = entity.xCoord;
-	    double y = entity.yCoord;
-	    double z = entity.zCoord;
-	    int dimensionId = entity.worldObj.getWorldInfo().getVanillaDimension();
-	    double range = 32;
-
-	    Packet250CustomPayload packet = getAnimationPayload(entity, handler, index);
-	    PacketDispatcher.sendPacketToAllAround(x, y, z, range, dimensionId, packet);
+	public static void sendAnimationData(TileEntity entity, AnimationHandler handler) {
+		sendAnimationData(entity, handler, 0);
 	}
-    }
 
-    private static Packet250CustomPayload getAnimationPayload(TileEntity entity, AnimationHandler handler, int index) {
-
-	ByteArrayOutputStream bos = new ByteArrayOutputStream(4 * 5 + 1);
-	DataOutputStream outputStream = new DataOutputStream(bos);
-
-	try {
-		PacketDataHandler.writeTileEntity(outputStream, entity); // 3 * 4 bytes
-	    outputStream.writeInt(index);
-	    writeAnimationHandler(outputStream, handler); // 2 * 4 bytes
-	} catch (Exception ex) {
-	    ex.printStackTrace();
+	public static void sendAnimationData(TileEntity entity, AnimationHandler handler, int index) {
+		if (handler.isChanged()) {
+			SyncAnimationPacket packet = new SyncAnimationPacket(entity, index, handler.getProgress(), handler.getSpeed());
+			PacketHandler.getInstance().sendToAllAround(packet, new TargetPoint(entity.getWorldObj().provider.dimensionId, entity.xCoord, entity.yCoord, entity.zCoord, 32));
+		}
 	}
-	return PacketDataHandler.getCustomPacket(bos, PacketHandler.ANIMATION_SYNC);
-    }
-
-    protected static void writeAnimationHandler(DataOutputStream outputStream, AnimationHandler handler) throws IOException {
-	float progress = handler.getProgress();
-	float speed = handler.getSpeed();
-	if (!handler.isIncrementing())
-	    speed = -speed;
-	outputStream.writeFloat(progress);
-	outputStream.writeFloat(speed);
-    }
-
-    protected static void readAnimationHandler(DataInputStream inputStream, AnimationHandler handler) throws IOException {
-	float progress = inputStream.readFloat();
-	float speed = inputStream.readFloat();
-	boolean incrementing = true;
-	if (speed < 0) {
-	    incrementing = false;
-	    speed = -speed;
-	}
-	// TRANSACTIONAL: all 3 reads need to succeed
-	handler.setProgress(progress);
-	handler.setSpeed(speed);
-	handler.setIncrementing(incrementing);
-    }
-
-    public static void handleAnimationSync(INetworkManager manager, Packet250CustomPayload packet, Player player) {
-
-	Entity playerEntity = (Entity) player;
-	TileEntity tileEntity;
-	boolean isAnimated;
-
-	DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
-	try {
-	    tileEntity = PacketDataHandler.readTileEntity(inputStream, playerEntity.worldObj);
-	    if (tileEntity instanceof IAnimationSyncable) {
-		IAnimationSyncable syncable = (IAnimationSyncable) tileEntity;
-		int index = inputStream.readInt();
-		readAnimationHandler(inputStream, syncable.getAnimationHandler(index));
-	    }
-	} catch (IOException e) {
-	    e.printStackTrace();
-	    return;
-	}
-    }
-
 }

@@ -1,9 +1,6 @@
-package ip.industrialProcessing.multiblock.recipes;
+package mod.industrialProcessing.work.recipe;
 
-import ip.industrialProcessing.multiblock.tier.Tiers;
-import ip.industrialProcessing.recipes.Recipe;
-import ip.industrialProcessing.recipes.RecipeInputSlot;
-import ip.industrialProcessing.recipes.RecipeOutputSlot;
+import mod.industrialProcessing.blockContainer.multiblock.tier.Tiers;
 
 public class RecipeMultiblock extends Recipe implements ITierRecipe {
     public RecipeMultiblock() {

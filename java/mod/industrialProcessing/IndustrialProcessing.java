@@ -1,11 +1,9 @@
 package mod.industrialProcessing;
 
-import net.minecraftforge.common.MinecraftForge;
 import mod.industrialProcessing.block.ConfigBlocks;
 import mod.industrialProcessing.block.ISetupBlocks;
 import mod.industrialProcessing.blockContainer.ConfigBlockContainers;
 import mod.industrialProcessing.blockContainer.ISetupBlockContainers;
-import mod.industrialProcessing.client.ClientProxy;
 import mod.industrialProcessing.fluids.ConfigFluids;
 import mod.industrialProcessing.fluids.ISetupFluids;
 import mod.industrialProcessing.items.ConfigItems;
@@ -15,7 +13,10 @@ import mod.industrialProcessing.utils.creativeTab.ISetupCreativeTabs;
 import mod.industrialProcessing.utils.damage.ISetupDamageSource;
 import mod.industrialProcessing.utils.handlers.fluids.BucketHandler;
 import mod.industrialProcessing.utils.handlers.gui.GuiHandler;
+import mod.industrialProcessing.utils.handlers.packet.PacketHandler;
+import mod.industrialProcessing.utils.handlers.packet.packets.SyncAnimationPacket;
 import mod.industrialProcessing.utils.handlers.worldGeneration.WorldGeneration;
+import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -23,6 +24,7 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.ModContainer;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -42,6 +44,9 @@ public class IndustrialProcessing implements INamepace, ISetupCreativeTabs, ISet
 	public void PreInit(FMLPreInitializationEvent event) {
 		container = Loader.instance().activeModContainer();
 		LanguageRegistry.instance().loadLanguagesFor(container, Side.SERVER);
+		
+		//register event handler
+		mod.industrialProcessing.utils.handlers.event.EventHandler.getInstance().register();
 		
 		//register event handlers
 		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
@@ -72,8 +77,18 @@ public class IndustrialProcessing implements INamepace, ISetupCreativeTabs, ISet
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-
+		//register packet handler
+		PacketHandler.getInstance().initialise();
+		PacketHandler.getInstance().registerPacket(SyncAnimationPacket.class);
+		//PacketHandler.getInstance().register();
 	}
+
+	@EventHandler
+	public void init(FMLPostInitializationEvent event) {
+		//register packet handler
+		PacketHandler.getInstance().postInitialise();
+	}
+	
 
 	@Instance("IndustrialProcessing")
 	public static IndustrialProcessing instance;

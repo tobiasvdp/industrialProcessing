@@ -1,10 +1,9 @@
 package mod.industrialProcessing.gui.guide.pages.techtree;
 
-import ip.industrialProcessing.recipes.IMachineRecipe;
-import ip.industrialProcessing.utils.registry.RecipeRegistry;
-
 import java.util.ArrayList;
 
+import mod.industrialProcessing.utils.registry.RecipeRegistry;
+import mod.industrialProcessing.work.recipe.IMachineRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 

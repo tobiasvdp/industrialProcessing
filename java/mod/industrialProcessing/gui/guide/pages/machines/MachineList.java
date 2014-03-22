@@ -1,24 +1,23 @@
 package mod.industrialProcessing.gui.guide.pages.machines;
 
-import ip.industrialProcessing.gui3.framework.Thickness;
-import ip.industrialProcessing.gui3.framework.UIElement;
-import ip.industrialProcessing.gui3.framework.controls.Button;
-import ip.industrialProcessing.gui3.framework.controls.Decorator;
-import ip.industrialProcessing.gui3.framework.controls.IButtonClickListener;
-import ip.industrialProcessing.gui3.framework.controls.SlotItemControl;
-import ip.industrialProcessing.gui3.framework.controls.TextBlock;
-import ip.industrialProcessing.gui3.framework.controls.UserControl;
-import ip.industrialProcessing.gui3.framework.panels.Expander;
-import ip.industrialProcessing.gui3.framework.panels.Orientation;
-import ip.industrialProcessing.gui3.framework.panels.Panel;
-import ip.industrialProcessing.gui3.framework.panels.StackPanel;
-import ip.industrialProcessing.gui3.framework.panels.WrapPanel;
-import ip.industrialProcessing.utils.registry.BlockRegistry;
-import ip.industrialProcessing.utils.registry.BlockType;
-
 import java.util.Arrays;
 import java.util.Comparator;
 
+import mod.industrialProcessing.gui.framework.Thickness;
+import mod.industrialProcessing.gui.framework.UIElement;
+import mod.industrialProcessing.gui.framework.controls.Button;
+import mod.industrialProcessing.gui.framework.controls.Decorator;
+import mod.industrialProcessing.gui.framework.controls.IButtonClickListener;
+import mod.industrialProcessing.gui.framework.controls.SlotItemControl;
+import mod.industrialProcessing.gui.framework.controls.TextBlock;
+import mod.industrialProcessing.gui.framework.controls.UserControl;
+import mod.industrialProcessing.gui.framework.panels.Expander;
+import mod.industrialProcessing.gui.framework.panels.Orientation;
+import mod.industrialProcessing.gui.framework.panels.Panel;
+import mod.industrialProcessing.gui.framework.panels.StackPanel;
+import mod.industrialProcessing.gui.framework.panels.WrapPanel;
+import mod.industrialProcessing.utils.registry.BlockRegistry;
+import mod.industrialProcessing.utils.registry.BlockType;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
@@ -54,7 +53,7 @@ public class MachineList extends UserControl {
     }
 
     private UIElement createHeader(BlockType type, boolean b) {
-        TextBlock tb = TextBlock.createText(type.getDisplayName());
+        TextBlock tb = TextBlock.createText(type.toString());
         tb.margin = new Thickness(0, 1, 0, 1);
         Decorator decorator = Decorator.createExpanderDecorator(b);
 

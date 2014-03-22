@@ -10,6 +10,7 @@ import mod.industrialProcessing.gui.framework.custom.ElementGrid;
 import mod.industrialProcessing.gui.framework.panels.DockPanel;
 import mod.industrialProcessing.gui.framework.panels.Orientation;
 import mod.industrialProcessing.gui.framework.panels.StackPanel;
+import mod.industrialProcessing.gui.framework.slots.SlotBase;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.tileentity.TileEntity;

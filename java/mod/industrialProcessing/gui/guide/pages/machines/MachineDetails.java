@@ -1,21 +1,21 @@
 package mod.industrialProcessing.gui.guide.pages.machines;
 
-import ip.industrialProcessing.gui3.framework.Thickness;
-import ip.industrialProcessing.gui3.framework.Visibility;
-import ip.industrialProcessing.gui3.framework.controls.BlockModelControl;
-import ip.industrialProcessing.gui3.framework.controls.Button;
-import ip.industrialProcessing.gui3.framework.controls.IButtonClickListener;
-import ip.industrialProcessing.gui3.framework.controls.TextBlock;
-import ip.industrialProcessing.gui3.framework.controls.UserControl;
-import ip.industrialProcessing.gui3.framework.panels.DockPanel;
-import ip.industrialProcessing.gui3.framework.panels.MouseButton;
-import ip.industrialProcessing.gui3.framework.panels.Orientation;
-import ip.industrialProcessing.gui3.framework.panels.StackPanel;
-import ip.industrialProcessing.gui3.framework.panels.tabs.TabPanel;
-import ip.industrialProcessing.gui3.generating.IGuiBlock;
-import ip.industrialProcessing.recipes.IRecipeBlock;
-import ip.industrialProcessing.utils.IDescriptionBlock;
-import ip.industrialProcessing.utils.registry.RecipeRegistry;
+import mod.industrialProcessing.gui.framework.Thickness;
+import mod.industrialProcessing.gui.framework.Visibility;
+import mod.industrialProcessing.gui.framework.controls.BlockModelControl;
+import mod.industrialProcessing.gui.framework.controls.Button;
+import mod.industrialProcessing.gui.framework.controls.IButtonClickListener;
+import mod.industrialProcessing.gui.framework.controls.TextBlock;
+import mod.industrialProcessing.gui.framework.controls.UserControl;
+import mod.industrialProcessing.gui.framework.panels.DockPanel;
+import mod.industrialProcessing.gui.framework.panels.MouseButton;
+import mod.industrialProcessing.gui.framework.panels.Orientation;
+import mod.industrialProcessing.gui.framework.panels.StackPanel;
+import mod.industrialProcessing.gui.framework.panels.tabs.TabPanel;
+import mod.industrialProcessing.utils.block.IDescriptionBlock;
+import mod.industrialProcessing.utils.block.IGuiBlock;
+import mod.industrialProcessing.utils.block.IRecipeBlock;
+import mod.industrialProcessing.utils.registry.RecipeRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
