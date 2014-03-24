@@ -12,6 +12,7 @@ import mod.industrialProcessing.block.tree.BlockIndustrialLog;
 import mod.industrialProcessing.block.tree.BlockIndustrialSapling;
 import mod.industrialProcessing.block.tree.BlockPineLog;
 import mod.industrialProcessing.block.tree.BlockRubberLog;
+import mod.industrialProcessing.plants.decoration.machineBlock.BlockMachineBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockOre;
 import net.minecraft.block.BlockPane;
@@ -47,6 +48,8 @@ public interface ISetupBlocks {
 	public final static BlockDoor blockDoorEmergency = new BlockDoor(1.0f, 1.0f, Material.iron, Block.soundTypeMetal, "Orange", "Iron", "iron_block", "glass");
 
 	public final static Block blockHalfWavePlate = (new BlockIPPane("blockHalfWavePlate", "blockHalfWavePlate", Material.iron, false)).setHardness(0.9F).setStepSound(Block.soundTypeMetal);
+	
+	public final static BlockMachineBlock blockMachineBlock = new BlockMachineBlock();
 	/*
 	 * public final static MicroBlock microBlock = new MicroBlock();
 	 */

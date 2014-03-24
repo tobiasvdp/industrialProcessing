@@ -1,10 +1,7 @@
 package ip.industrialProcessing.power.wire;
 
-import ip.industrialProcessing.api.config.INamepace;
-import ip.industrialProcessing.config.ConfigMachineBlocks;
-import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.transport.BlockTransport;
+import mod.industrialProcessing.utils.INamepace;
+import mod.industrialProcessing.utils.creativeTab.ISetupCreativeTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;

@@ -1,6 +1,6 @@
 package mod.industrialProcessing.plants.power.generator.crankGenerator;
 
-import mod.industrialProcessing.blockContainer.machine.generator.TileEntityPowerGenerator;
+import mod.industrialProcessing.blockContainer.machine.power.generator.TileEntityPowerGenerator;
 import mod.industrialProcessing.client.rendering.tileEntity.IAnimationProgress;
 import mod.industrialProcessing.client.rendering.tileEntity.animation.AnimationHandler;
 import mod.industrialProcessing.client.rendering.tileEntity.animation.AnimationMode;

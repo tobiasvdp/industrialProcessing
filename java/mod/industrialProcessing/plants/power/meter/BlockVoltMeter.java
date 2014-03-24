@@ -1,7 +1,7 @@
 package mod.industrialProcessing.plants.power.meter;
 
 import mod.industrialProcessing.blockContainer.BlockContainerIPRendered;
-import mod.industrialProcessing.blockContainer.machine.generator.TileEntityPowerGenerator;
+import mod.industrialProcessing.blockContainer.machine.power.generator.TileEntityPowerGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;

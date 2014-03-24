@@ -1,6 +1,6 @@
 package mod.industrialProcessing.plants.power.generator.crankGenerator;
 
-import mod.industrialProcessing.blockContainer.machine.generator.BlockPowerGenerator;
+import mod.industrialProcessing.blockContainer.machine.power.generator.BlockPowerGenerator;
 import mod.industrialProcessing.utils.creativeTab.ISetupCreativeTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

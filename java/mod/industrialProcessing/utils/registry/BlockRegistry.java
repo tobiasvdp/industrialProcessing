@@ -79,6 +79,12 @@ public class BlockRegistry {
 			RenderRegistry.registerRendering(block, model);
 	}
 	
+	public static void registerMachine(Block block, Class tileEntity, String uniqueId, ModelBlock model) {
+		registerMachine(block, tileEntity, uniqueId);
+		if (Minecraft.getMinecraft() != null)
+			RenderRegistry.registerRendering(block, model);
+	}
+	
 	public static void registerMachine(Block block, Class tileEntity, String uniqueId, ModelBlock modelBL,ModelTileEntity modelTE) {
 		registerMachine(block, tileEntity, uniqueId);
 		if (Minecraft.getMinecraft() != null){

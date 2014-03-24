@@ -1,6 +1,6 @@
 package mod.industrialProcessing.plants.power.generator.buildCraftGenerator;
 
-import mod.industrialProcessing.blockContainer.machine.generator.TileEntityPowerGenerator;
+import mod.industrialProcessing.blockContainer.machine.power.generator.TileEntityPowerGenerator;
 
 public class TileEntityBuildcraftGenerator extends TileEntityPowerGenerator implements IPowerReceptor, IAnimationProgress {
 

@@ -124,7 +124,7 @@ public class TileEntityMachineInv extends TileEntityBlockContainerIP implements 
 		return stack;
 	}
 
-	private void onInventoryChanged() {
+	public void onInventoryChanged() {
 		markDirty();
 	}
 

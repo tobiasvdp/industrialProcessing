@@ -3,6 +3,9 @@ package mod.industrialProcessing.blockContainer;
 import mod.industrialProcessing.IndustrialProcessing;
 import mod.industrialProcessing.blockContainer.machine.crusher.ModelCrusher;
 import mod.industrialProcessing.blockContainer.machine.crusher.TileEntityCrusher;
+import mod.industrialProcessing.plants.decoration.light.hangingLamp.TileEntityPetrolLamp;
+import mod.industrialProcessing.plants.decoration.light.hangingLamp.model.ModelPetrolLamp;
+import mod.industrialProcessing.plants.decoration.light.torch.TileEntityTorch;
 import mod.industrialProcessing.plants.power.generator.crankGenerator.ModelCrankGenerator;
 import mod.industrialProcessing.plants.power.generator.crankGenerator.TileEntityManualGenerator;
 import mod.industrialProcessing.plants.power.meter.ModelVoltMeter;
@@ -10,6 +13,9 @@ import mod.industrialProcessing.plants.power.meter.TileEntityVoltMeter;
 import mod.industrialProcessing.plants.power.motor.electroMotor.TileEntityElectroMotor;
 import mod.industrialProcessing.plants.power.motor.electroMotor.models.ModelElectroMotorBlock;
 import mod.industrialProcessing.plants.power.motor.electroMotor.models.ModelElectroMotorTile;
+import mod.industrialProcessing.plants.power.storage.TileEntityEnergyCell;
+import mod.industrialProcessing.plants.power.storage.model.ModelEnergyCellBlock;
+import mod.industrialProcessing.plants.power.storage.model.ModelEnergyCellTile;
 import mod.industrialProcessing.utils.registry.BlockRegistry;
 
 public class ConfigBlockContainers {
@@ -26,6 +32,9 @@ public class ConfigBlockContainers {
     	BlockRegistry.registerMachine(IndustrialProcessing.blockManualGenerator, TileEntityManualGenerator.class, "IP.generator.manual",new ModelCrankGenerator(true));
     	BlockRegistry.registerMachine(IndustrialProcessing.blockElectroMotor, TileEntityElectroMotor.class, "IP.motor.electro",new ModelElectroMotorBlock(),new ModelElectroMotorTile());
     	BlockRegistry.registerMachine(IndustrialProcessing.blockVoltMeter, TileEntityVoltMeter.class, "IP.meter.volt",new ModelVoltMeter(false));
+    	BlockRegistry.registerMachine(IndustrialProcessing.blockEnergyCell, TileEntityEnergyCell.class, "IP.storage.energy",new ModelEnergyCellBlock(), new ModelEnergyCellTile());
+    	BlockRegistry.registerMachine(IndustrialProcessing.blockPetrolLamp, TileEntityPetrolLamp.class, "IP.light.hanging",new ModelPetrolLamp());
+    	BlockRegistry.registerMachine(IndustrialProcessing.blockTorch, TileEntityTorch.class, "IP.light.torch");
     	/*
         registerMachineBlock(ISetupMachineBlocks.blockTorch, "IP.Machine.Torch", "Torch", TileEntityTorch.class, BlockType.decoration);
         registerMachineBlock(ISetupMachineBlocks.blockAlkylationUnit, "IP.Machine.AlkUnit", "Alkylation unit", TileEntityAlkylationUnit.class, BlockType.Machine, BlockType.Refinary);

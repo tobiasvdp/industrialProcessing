@@ -5,6 +5,7 @@ import mod.industrialProcessing.block.crystals.ModelCrystal;
 import mod.industrialProcessing.block.doors.emergency.model.ModelDoorEmergency;
 import mod.industrialProcessing.block.platforms.ModelPlatform;
 import mod.industrialProcessing.block.platforms.ModelStairs;
+import mod.industrialProcessing.plants.decoration.machineBlock.model.ModelMachineBlock;
 import mod.industrialProcessing.utils.registry.BlockRegistry;
 import mod.industrialProcessing.utils.registry.BlockType;
 import net.minecraft.block.Block;
@@ -40,6 +41,7 @@ public class ConfigBlocks {
 		BlockRegistry.registerBlock(ISetupBlocks.blockPlatform, "IP.block.platform", "pickaxe", 1,new ModelPlatform());
 		BlockRegistry.registerBlock(ISetupBlocks.blockDoorEmergency, "IP.block.doorEmergency", "pickaxe", 1,new ModelDoorEmergency());
 		BlockRegistry.registerMCBlock(ISetupBlocks.blockHalfWavePlate, "IP.block.halfWavePlate", "pickaxe", 1);
+		BlockRegistry.registerBlock(ISetupBlocks.blockMachineBlock, "IP.block.machine", "pickaxe", 1,new ModelMachineBlock());
 				
 		BlockRegistry.registerMetadataBlock(ISetupBlocks.blockLeaves,"IP.block.tree.leaves", "axe",0);
 		BlockRegistry.registerMetadataBlock(ISetupBlocks.blockLog, "IP.block.tree.log", "axe",0);
