@@ -1,9 +1,9 @@
 package mod.industrialProcessing.blockContainer;
 
 import mod.industrialProcessing.IndustrialProcessing;
-import mod.industrialProcessing.blockContainer.machine.crusher.TileEntityCrusher;
 import mod.industrialProcessing.fluids.FluidTransfers;
 import mod.industrialProcessing.items.ISetupItems;
+import mod.industrialProcessing.plants.machine.crusher.TileEntityCrusher;
 import mod.industrialProcessing.utils.inventory.InventoryUtils;
 import mod.industrialProcessing.utils.registry.TileEntityRegistry;
 import mod.industrialProcessing.utils.rotation.IRotateableEntity;

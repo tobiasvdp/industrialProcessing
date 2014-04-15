@@ -2,6 +2,11 @@ package mod.industrialProcessing.blockContainer.machine;
 
 import java.util.Iterator;
 
+import mod.industrialProcessing.client.rendering.tileEntity.IAnimationProgress;
+import mod.industrialProcessing.client.rendering.tileEntity.animation.AnimationHandler;
+import mod.industrialProcessing.client.rendering.tileEntity.animation.AnimationMode;
+import mod.industrialProcessing.client.rendering.tileEntity.animation.IAnimationSyncable;
+import mod.industrialProcessing.client.rendering.tileEntity.animation.TileAnimationSyncHandler;
 import mod.industrialProcessing.work.recipe.IMachineRecipe;
 import mod.industrialProcessing.work.recipe.IRecipeWorkHandler;
 import mod.industrialProcessing.work.recipe.RecipeWorker;
@@ -15,10 +20,12 @@ import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityMachineInvWork extends TileEntityMachineInv implements IWorkHandler, IRecipeWorkHandler, IWorkingEntity {
+public class TileEntityMachineInvWork extends TileEntityMachineInv implements IWorkHandler, IRecipeWorkHandler, IWorkingEntity, IAnimationSyncable, IAnimationProgress {
 
 	protected ServerWorker worker;
-	protected RecipesMachine recipes;
+	protected RecipesMachine recipes; 
+	protected AnimationHandler animation = new AnimationHandler(AnimationMode.WRAP, 1f, true);
+	protected boolean animated = false;
 
 	public TileEntityMachineInvWork(RecipesMachine recipes) {
 		this.worker = createServerSideWorker();
@@ -32,6 +39,10 @@ public class TileEntityMachineInvWork extends TileEntityMachineInv implements IW
 	@Override
 	public void updateEntity() {
 		doWork();
+		if(animated ){
+		    this.animation.update();
+		    TileAnimationSyncHandler.sendAnimationData(this, this.animation);
+		}
 	}
 
 	protected void doWork() {
@@ -119,6 +130,21 @@ public class TileEntityMachineInvWork extends TileEntityMachineInv implements IW
 	@Override
 	protected boolean isValidInput(int slot, Item item){
 		return recipes.isValidInput(slot, item);
+	}
+	
+	@Override
+	public int getAnimationCount() {
+		return 1;
+	}
+
+	@Override
+	public float getAnimationProgress(float scale, int animationIndex) {
+		return animation.getAnimationProgress(scale);
+	}
+
+	@Override
+	public AnimationHandler getAnimationHandler(int index) {
+		return animation;
 	}
 
 }

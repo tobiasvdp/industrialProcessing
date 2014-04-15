@@ -1,10 +1,10 @@
-package ip.industrialProcessing.power.wire;
-
-import ip.industrialProcessing.power.IPowerAcceptor;
-import ip.industrialProcessing.transport.TransportConnectionState;
+package mod.industrialProcessing.power.wire;
 
 import java.util.HashSet;
 
+import mod.industrialProcessing.blockContainer.transport.TransportConnectionState;
+import mod.industrialProcessing.plants.power.wire.TileEntityWire;
+import mod.industrialProcessing.power.network.IPowerAcceptor;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -14,14 +14,14 @@ public class WireNetworkMap {
     // HashMap<WireLocation, WireNetworkMapEntry>();
 
     private static TileEntityWire getWireAt(WireLocation location, World world) {
-	TileEntity ent = world.getBlockTileEntity(location.x, location.y, location.z);
+	TileEntity ent = world.getTileEntity(location.x, location.y, location.z);
 	if (ent instanceof TileEntityWire)
 	    return (TileEntityWire) ent;
 	return null;
     }
 
     private static IPowerAcceptor getAcceptorAt(World world, WireLocation location) {
-	TileEntity ent = world.getBlockTileEntity(location.x, location.y, location.z);
+	TileEntity ent = world.getTileEntity(location.x, location.y, location.z);
 	if (ent instanceof IPowerAcceptor)
 	    return (IPowerAcceptor) ent;
 	return null;
