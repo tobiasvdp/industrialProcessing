@@ -15,6 +15,7 @@ import mod.industrialProcessing.utils.handlers.fluids.BucketHandler;
 import mod.industrialProcessing.utils.handlers.gui.GuiHandler;
 import mod.industrialProcessing.utils.handlers.packet.PacketHandler;
 import mod.industrialProcessing.utils.handlers.packet.packets.SyncAnimationPacket;
+import mod.industrialProcessing.utils.handlers.packet.packets.TankAnimationPacket;
 import mod.industrialProcessing.utils.handlers.worldGeneration.WorldGeneration;
 import mod.industrialProcessing.utils.registry.BucketRegistery;
 import net.minecraft.init.Items;
@@ -83,9 +84,6 @@ public class IndustrialProcessing implements INamepace, ISetupCreativeTabs, ISet
 		
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(FluidRegistry.WATER, FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(Items.water_bucket),new ItemStack(Items.bucket));
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(FluidRegistry.LAVA, FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(Items.lava_bucket),new ItemStack(Items.bucket));
-		
-		FluidStack stack = FluidContainerRegistry.getFluidForFilledItem( new ItemStack(Items.water_bucket));
-		System.out.println("test");
 
 	}
 
@@ -94,6 +92,7 @@ public class IndustrialProcessing implements INamepace, ISetupCreativeTabs, ISet
 		//register packet handler
 		PacketHandler.getInstance().initialise();
 		PacketHandler.getInstance().registerPacket(SyncAnimationPacket.class);
+		PacketHandler.getInstance().registerPacket(TankAnimationPacket.class);
 		//PacketHandler.getInstance().register();
 	}
 

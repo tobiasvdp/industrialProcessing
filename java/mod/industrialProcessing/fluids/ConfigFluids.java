@@ -6,15 +6,12 @@ import mod.industrialProcessing.utils.registry.BucketRegistery;
 import mod.industrialProcessing.utils.registry.ItemRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 import net.minecraftforge.fluids.FluidRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ConfigFluids {
 
@@ -60,6 +57,14 @@ public class ConfigFluids {
 		registerFluid(ISetupFluids.fluidDirtyWater);
 		registerFluid(ISetupFluids.fluidFiltyWater);
 		registerFluid(ISetupFluids.fluidUncleanWater);
+		
+		registerFluid(ISetupFluids.fluidOreSludgeIron);
+		registerFluid(ISetupFluids.fluidOreSludgeTin);
+		registerFluid(ISetupFluids.fluidOreSludgeCopper);
+		registerFluid(ISetupFluids.fluidOreSludgeGold);
+		registerFluid(ISetupFluids.fluidOreSludgeGalena);
+		registerFluid(ISetupFluids.fluidOreSludgeChromite);
+		registerFluid(ISetupFluids.fluidOreSludgeTalia);
 		
 		/*registerFluid(ISetupFluids.blockFluidIsoButane, ISetupFluids.itemFluidIsoButane, null, "Isobutane");
 		registerFluid(ISetupFluids.blockFluidButane, ISetupFluids.itemFluidButane, null, "Butane");

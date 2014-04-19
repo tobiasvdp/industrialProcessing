@@ -135,8 +135,10 @@ public class TileEntityMachineTankWork extends TileEntityMachineTank implements 
 	
 	@Override
 	protected boolean isValidInput(int slot, Item item){
-		super.isValidInput(slot, item);
-		return recipes.isValidInput(slot, item);
+		if(super.isValidInput(slot, item))
+			return true;
+		else
+			return recipes.isValidInput(slot, item);
 	}
 	
 	@Override

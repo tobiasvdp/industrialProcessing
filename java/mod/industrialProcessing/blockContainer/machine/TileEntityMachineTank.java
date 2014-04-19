@@ -91,7 +91,7 @@ public class TileEntityMachineTank extends TileEntityMachineInv implements ITank
 			    	return true;
 			    }
 			}
-			if (tank.output && tank.outputSlot == slot) {
+			if (tank.output && tank.inputSlot == slot) {
 				if(FluidContainerRegistry.isEmptyContainer(new ItemStack(item, 1, 0))){
 					return true;
 				}
@@ -124,7 +124,7 @@ public class TileEntityMachineTank extends TileEntityMachineInv implements ITank
 		for (int i = 0; i < fluidTanks.size(); i++) {
 			fluidTanks.get(i).setFluid(null);
 		}
-		NBTTagList nbttaglist = nbt.getTagList("Tanks", 0);
+		NBTTagList nbttaglist = nbt.getTagList("Tanks", 10);
 		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
 			NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.getCompoundTagAt(i);
 			byte b0 = nbttagcompound1.getByte("Slot");

@@ -12,6 +12,7 @@ public class FluidIP {
 	public FluidIP(String name, int density, int viscosity, Material material, boolean doDamage, boolean hasBucket) {
 		item = new ItemFluid(name, density, viscosity);
 		block = new BlockFluid(item, material, doDamage);
+		item.setFluidBlock(block);
 		if (hasBucket)
 			bucket = new ItemIPBucket(block);
 	}
