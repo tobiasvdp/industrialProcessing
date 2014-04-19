@@ -1,4 +1,4 @@
-package ip.industrialProcessing.machines.animation.tanks;
+package mod.industrialProcessing.client.rendering.tileEntity.animation.tanks;
 
 import net.minecraftforge.fluids.IFluidTank;
 

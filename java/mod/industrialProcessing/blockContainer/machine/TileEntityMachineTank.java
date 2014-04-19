@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import mod.industrialProcessing.fluids.tank.IPfluidTank;
 import mod.industrialProcessing.fluids.tank.ITank;
 import mod.industrialProcessing.utils.rotation.LocalDirection;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -16,7 +17,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 
-public abstract class TileEntityMachineTank extends TileEntityMachineInv implements ITank {
+public class TileEntityMachineTank extends TileEntityMachineInv implements ITank {
 
 	private int[][] fluidTankSideslots = new int[6][0];
 	private ArrayList<IPfluidTank> fluidTanks = new ArrayList<IPfluidTank>();
@@ -26,6 +27,78 @@ public abstract class TileEntityMachineTank extends TileEntityMachineInv impleme
 		super.writeToNBT(nbt);
 		writeTanks(nbt);
 	};
+
+	protected void getBucketFromTank(int inputSlot, int outputSlot, int tankSlot) {
+		if (!this.worldObj.isRemote) {
+			ItemStack bucketOutputStack = getStackInSlot(outputSlot);
+			if (bucketOutputStack == null) {
+				ItemStack inputStack = getStackInSlot(inputSlot);
+				if (inputStack != null) {
+					FluidTank tank = getTankInSlot(tankSlot);
+					if (tank != null) {
+						ItemStack singleItem = inputStack.copy();
+						singleItem.stackSize = 1;
+
+						FluidStack fluid = tank.getFluid();
+						ItemStack filled = FluidContainerRegistry.fillFluidContainer(fluid, singleItem);
+
+						if (filled != null) {
+							FluidStack removeFluid = FluidContainerRegistry.getFluidForFilledItem(filled);
+							tank.drain(removeFluid.amount, true);
+							this.decrStackSize(inputSlot, 1);
+							setInventorySlotContents(outputSlot, filled);
+							onTanksChanged();
+						}
+					}
+				}
+			}
+		}
+	}
+
+	protected void addBucketToTank(int inputSlot, int outputSlot, int tankSlot) {
+		if (!this.worldObj.isRemote) {
+			ItemStack bucketOutputStack = getStackInSlot(outputSlot);
+			if (bucketOutputStack == null) // output available
+			{
+				ItemStack inputStack = getStackInSlot(inputSlot);
+				FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(inputStack);
+				if (fluid != null) {
+					if (isTankValidForFluid(tankSlot, fluid.getFluid())) {
+
+						ItemStack emptyContainer = getEmptyContainerFromContainer(inputStack);
+						if (emptyContainer != null) {
+							if (this.tankHasRoomFor(tankSlot, fluid)) {
+								emptyContainer.stackSize = 1;
+								this.decrStackSize(inputSlot, 1);
+								getTankInSlot(tankSlot).fill(fluid, true);
+								this.setInventorySlotContents(outputSlot, emptyContainer);
+								onTanksChanged();
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@Override
+	protected boolean isValidInput(int slot, Item item) {
+		for (int i = 0; i < fluidTanks.size(); i++) {
+			IPfluidTank tank = fluidTanks.get(i);
+			if (tank.input && slot == tank.inputSlot) {
+			    FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(new ItemStack(item, 1, 0));
+			    if (fluid != null && isTankValidForFluid(tank.slot, fluid.getFluid())){
+			    	return true;
+			    }
+			}
+			if (tank.output && tank.outputSlot == slot) {
+				if(FluidContainerRegistry.isEmptyContainer(new ItemStack(item, 1, 0))){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
 	private void writeTanks(NBTTagCompound nbt) {
 		NBTTagList nbttaglist = new NBTTagList();
@@ -141,10 +214,18 @@ public abstract class TileEntityMachineTank extends TileEntityMachineInv impleme
 	}
 
 	protected void addTank(int capacity, LocalDirection side, boolean input, boolean output) {
-		addTank(capacity, new LocalDirection[] { side }, input, output);
+		addTank(capacity, new LocalDirection[] { side }, input, output, -1, -1);
+	}
+
+	protected void addTank(int capacity, LocalDirection side, boolean input, boolean output, int in, int out) {
+		addTank(capacity, new LocalDirection[] { side }, input, output, in, out);
 	}
 
 	protected void addTank(int capacity, LocalDirection[] sides, boolean input, boolean output) {
+		addTank(capacity, sides, input, output, -1, -1);
+	}
+
+	protected void addTank(int capacity, LocalDirection[] sides, boolean input, boolean output, int in, int out) {
 		int index = fluidTanks.size();
 
 		int[] sideIndices = new int[sides.length];
@@ -152,7 +233,7 @@ public abstract class TileEntityMachineTank extends TileEntityMachineInv impleme
 			sideIndices[i] = sides[i].ordinal();
 		}
 
-		fluidTanks.add(new IPfluidTank(this, capacity, index, sideIndices, input, output));
+		fluidTanks.add(new IPfluidTank(this, capacity, index, sideIndices, input, output, in, out));
 
 		for (int i = 0; i < sideIndices.length; i++) {
 			int sideIndex = sideIndices[i];
@@ -190,7 +271,9 @@ public abstract class TileEntityMachineTank extends TileEntityMachineInv impleme
 		return null;
 	}
 
-	protected abstract boolean isTankValidForFluid(int slot, Fluid fluid);
+	protected boolean isTankValidForFluid(int slot, Fluid fluid) {
+		return true;
+	}
 
 	@Override
 	public boolean canDrain(ForgeDirection from, Fluid fluid) {
@@ -248,10 +331,82 @@ public abstract class TileEntityMachineTank extends TileEntityMachineInv impleme
 	public IPfluidTank getTank(int index) {
 		return this.fluidTanks.get(index);
 	}
-	
+
 	@Override
-	public FluidTankInfo getTankInfoForSlot(int slot){
+	public FluidTankInfo getTankInfoForSlot(int slot) {
 		return this.fluidTanks.get(slot).getInfo();
+	}
+
+	@Override
+	public boolean tankContains(int slot, Fluid fluid, int amount) {
+		IPfluidTank tank = getTankInSlot(slot);
+		if (tank == null)
+			return false;
+		FluidStack stack = tank.getFluid();
+		if (stack == null)
+			return false;
+		return stack.fluidID == fluid.getID() && stack.amount >= amount;
+	}
+
+	@Override
+	public boolean tankHasRoomFor(int slot, FluidStack addStack) {
+		IPfluidTank tank = getTankInSlot(slot);
+		if (tank == null)
+			return false;
+		FluidStack stack = tank.getFluid();
+		if (stack == null)
+			return true;
+		return stack.isFluidEqual(addStack) && stack.amount + addStack.amount <= tank.getCapacity();
+	}
+
+	@Override
+	public boolean tankHasRoomFor(int slot, Fluid fluid, int amount) {
+		IPfluidTank tank = getTankInSlot(slot);
+		if (tank == null)
+			return false;
+		FluidStack stack = tank.getFluid();
+		if (stack == null)
+			return true;
+		return stack.fluidID == fluid.getID() && stack.amount + amount <= tank.getCapacity();
+	}
+
+	@Override
+	public boolean addToTank(int index, Fluid fluid, int amount) {
+		IPfluidTank tank = getTankInSlot(index);
+		if (tank == null)
+			return false;
+		FluidStack stack = tank.getFluid();
+		FluidStack newStack = new FluidStack(fluid.getID(), amount);
+		if (stack == null) {
+			tank.setFluid(newStack);
+			onTanksChanged();
+			return true;
+		} else if (stack.fluidID == fluid.getID() && stack.amount + amount <= tank.getCapacity()) {
+			tank.fill(newStack, true);
+			onTanksChanged();
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean removeFromTank(int index, Fluid fluid, int amount) {
+		IPfluidTank tank = getTankInSlot(index);
+		if (tank == null)
+			return false;
+		FluidStack stack = tank.getFluid();
+		if (stack == null)
+			return false;
+		if (stack.fluidID == fluid.getID() && stack.amount >= amount) {
+			tank.drain(amount, true);
+			onTanksChanged();
+			return true;
+		}
+		return false;
+	}
+
+	public int getTankCount() {
+		return fluidTanks.size();
 	}
 
 }

@@ -16,7 +16,14 @@ import mod.industrialProcessing.utils.handlers.gui.GuiHandler;
 import mod.industrialProcessing.utils.handlers.packet.PacketHandler;
 import mod.industrialProcessing.utils.handlers.packet.packets.SyncAnimationPacket;
 import mod.industrialProcessing.utils.handlers.worldGeneration.WorldGeneration;
+import mod.industrialProcessing.utils.registry.BucketRegistery;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -50,7 +57,7 @@ public class IndustrialProcessing implements INamepace, ISetupCreativeTabs, ISet
 		
 		//register event handlers
 		MinecraftForge.EVENT_BUS.register(BucketHandler.INSTANCE);
-		
+			
 		//register items
 		ConfigItems.getInstance().registerItems();
 		
@@ -72,6 +79,13 @@ public class IndustrialProcessing implements INamepace, ISetupCreativeTabs, ISet
 		
 		//register renders
 		proxy.registerRenderers();
+		
+		
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(FluidRegistry.WATER, FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(Items.water_bucket),new ItemStack(Items.bucket));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(FluidRegistry.LAVA, FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(Items.lava_bucket),new ItemStack(Items.bucket));
+		
+		FluidStack stack = FluidContainerRegistry.getFluidForFilledItem( new ItemStack(Items.water_bucket));
+		System.out.println("test");
 
 	}
 

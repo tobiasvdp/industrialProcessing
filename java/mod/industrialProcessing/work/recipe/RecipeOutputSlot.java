@@ -2,6 +2,7 @@ package mod.industrialProcessing.work.recipe;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
 public class RecipeOutputSlot extends RecipeSlot {
@@ -65,6 +66,16 @@ public class RecipeOutputSlot extends RecipeSlot {
 		super();
 		this.index = index;
 		this.fluid = stack.getFluid();
+		this.type = RecipeSlotType.TANK;
+		this.maxAmount = min;
+		this.minAmount = max;
+		this.distributionCenter = 0.5;
+	}
+	
+	public RecipeOutputSlot(int index,Fluid stack,int min,int max){
+		super();
+		this.index = index;
+		this.fluid = stack;
 		this.type = RecipeSlotType.TANK;
 		this.maxAmount = min;
 		this.minAmount = max;

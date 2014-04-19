@@ -4,6 +4,7 @@ import mod.industrialProcessing.plants.decoration.light.hangingLamp.BlockPetrolL
 import mod.industrialProcessing.plants.decoration.light.torch.BlockTorch;
 import mod.industrialProcessing.plants.machine.crusher.BlockCrusher;
 import mod.industrialProcessing.plants.machine.filter.BlockFilter;
+import mod.industrialProcessing.plants.machine.mixer.BlockMixer;
 import mod.industrialProcessing.plants.power.generator.crankGenerator.BlockManualGenerator;
 import mod.industrialProcessing.plants.power.meter.BlockVoltMeter;
 import mod.industrialProcessing.plants.power.motor.electroMotor.BlockElectroMotor;
@@ -15,6 +16,7 @@ public interface ISetupBlockContainers {
     
     public final static BlockCrusher blockCrusher = new BlockCrusher();
     public final static BlockFilter blockFilter = new BlockFilter();
+    public final static BlockMixer blockMixer = new BlockMixer();
     
     public final static BlockManualGenerator blockManualGenerator = new BlockManualGenerator();
     public final static BlockWire blockWire = new BlockWire();

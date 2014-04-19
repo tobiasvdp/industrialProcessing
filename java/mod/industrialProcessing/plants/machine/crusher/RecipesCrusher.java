@@ -24,7 +24,7 @@ public class RecipesCrusher extends RecipesMachine {
 	// pass 1
 	addRecipe(copperOreToCrushedChunks(3000, 1));
 	addRecipe(tinOreToCrushedChunks(3000, 1));
-	addRecipe(ironOreToCrushedChunks(30, 1));
+	addRecipe(ironOreToCrushedChunks(3000, 1));
 	addRecipe(goldOreToCrushedChunks(3000, 1));
 	addRecipe(galenaOreToCrushedChunks(3000, 1));
 	addRecipe(chromiteOreToCrushedChunks(3000, 1));

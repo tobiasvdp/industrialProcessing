@@ -5,7 +5,8 @@ import java.util.Iterator;
 import net.minecraft.inventory.IInventory;
 import mod.industrialProcessing.utils.inventory.IInventorySlots;
 import mod.industrialProcessing.work.worker.IWorkHandler;
+import mod.industrialProcessing.work.worker.IWorkingEntity;
 
-public interface IRecipeWorkHandler extends IWorkHandler, IInventorySlots{ 
+public interface IRecipeWorkHandler extends IWorkHandler, IInventorySlots,IWorkingEntity{ 
 	Iterator<IMachineRecipe> iterateRecipes();
 }

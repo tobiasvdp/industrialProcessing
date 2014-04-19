@@ -1,13 +1,13 @@
-package ip.industrialProcessing.machines.mixer;
-
-import ip.industrialProcessing.client.render.ModelAnimatedFluidMachine;
+package mod.industrialProcessing.plants.machine.mixer;
 
 import javax.swing.Icon;
 
+import mod.industrialProcessing.client.rendering.tileEntity.ModelAnimatedFluidMachine;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 
 import org.lwjgl.opengl.GL11;
 
@@ -243,7 +243,7 @@ public class ModelMixer extends ModelAnimatedFluidMachine {
 	}
 
 	@Override
-	public void renderLiquid(TileEntity tl, float f, int tankSlot, float percentageFilled, Icon icon) {
+	public void renderLiquid(TileEntity tl, float f, int tankSlot, float percentageFilled, IIcon icon) {
 		// Vec3 p1 = new Vec3(-6.5F, -0.4666667F, -6.5F);//, 13, 0, 13 
 
 		if (tankSlot == 0) {
@@ -252,7 +252,7 @@ public class ModelMixer extends ModelAnimatedFluidMachine {
 			float par3 = 10f + 10f * (1 - percentageFilled);
 			int par4 = 13;
 			int par5 = 13;
-            int lightLevel = tl.blockType.getMixedBrightnessForBlock(tl.worldObj, tl.xCoord, tl.yCoord, tl.zCoord);
+            int lightLevel = tl.blockType.getMixedBrightnessForBlock(tl.getWorldObj(), tl.xCoord, tl.yCoord, tl.zCoord);
 			Tessellator tessellator = Tessellator.instance;
 			tessellator.startDrawingQuads();
 			tessellator.setNormal(0, -1, 0);

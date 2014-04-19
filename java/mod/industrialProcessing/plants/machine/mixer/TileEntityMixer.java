@@ -1,26 +1,24 @@
-package ip.industrialProcessing.machines.mixer;
-
-import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.machines.TileEntityPoweredFluidWorkerMachine;
-import ip.industrialProcessing.machines.animation.tanks.ITankSyncable;
-import ip.industrialProcessing.machines.animation.tanks.TankHandler;
-import ip.industrialProcessing.machines.animation.tanks.TileTankSyncHandler;
-import ip.industrialProcessing.recipes.IMachineRecipe;
+package mod.industrialProcessing.plants.machine.mixer;
 
 import java.util.Iterator;
 
+import mod.industrialProcessing.blockContainer.machine.TileEntityMachineTankWorkPower;
+import mod.industrialProcessing.client.rendering.tileEntity.animation.tanks.ITankSyncable;
+import mod.industrialProcessing.client.rendering.tileEntity.animation.tanks.TankHandler;
+import mod.industrialProcessing.client.rendering.tileEntity.animation.tanks.TileTankSyncHandler;
+import mod.industrialProcessing.utils.rotation.LocalDirection;
+import mod.industrialProcessing.work.recipe.IMachineRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-public class TileEntityMixer extends TileEntityPoweredFluidWorkerMachine implements ITankSyncable {
+public class TileEntityMixer extends TileEntityMachineTankWorkPower implements ITankSyncable {
 
 	public static RecipesMixer recipes = new RecipesMixer();
-
 	private TankHandler tankHandler;
 
 	public TileEntityMixer() {
-		super(LocalDirection.LEFT, 10000, true);
+		super(recipes,LocalDirection.RIGHT, 10000, 100);
 		addStack(null, LocalDirection.UP, true, false); // Mixing ingredient
 
 		LocalDirection[] nodirections = new LocalDirection[0];
@@ -34,8 +32,8 @@ public class TileEntityMixer extends TileEntityPoweredFluidWorkerMachine impleme
 		addStack(null, nodirections, false, true); // Liquid Output Full
 		// Output
 
-		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.RIGHT, true, false);
-		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.DOWN, false, true);
+		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.RIGHT, true, false,1,2);
+		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.DOWN, false, true,3,4);
 
 		this.tankHandler = new TankHandler(this, new int[] { 0 });
 	}
@@ -50,48 +48,7 @@ public class TileEntityMixer extends TileEntityPoweredFluidWorkerMachine impleme
 	};
 
 	@Override
-	public boolean hasWork() {
-		return true;
-	}
-
-	@Override
-	public boolean canWork() {
-		return true;
-	}
-
-	@Override
-	public Iterator<IMachineRecipe> iterateRecipes() {
-		return recipes.getRecipes();
-	}
-
-	@Override
-	protected boolean isValidInput(int slot, int itemID) {
-		if (slot == 0) // 0 is the recipe slot, others are buckets for liquid
-			// containers
-			return recipes.isValidInput(slot, itemID);
-
-		if (slot == 3) // fluid output container input slot, only empty
-			// container
-			return FluidContainerRegistry.isEmptyContainer(new ItemStack(itemID, 1, 0));
-
-		if (slot == 1) { // fluid input container input slot, only filled
-			// containers with correct fluid
-			FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(new ItemStack(itemID, 1, 0));
-			if (fluid == null)
-				return false;
-			return recipes.isValidFluidInput(0, fluid.fluidID);
-		}
-		return false;
-	}
-
-	@Override
-	protected boolean isTankValidForFluid(int slot, int fluidId) {
-		return recipes.isValidFluidInput(slot, fluidId);
-	}
-
-	@Override
 	public TankHandler getTankHandler() {
 		return this.tankHandler;
 	}
-
 }

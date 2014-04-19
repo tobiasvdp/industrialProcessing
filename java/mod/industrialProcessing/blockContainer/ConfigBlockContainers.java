@@ -8,6 +8,8 @@ import mod.industrialProcessing.plants.machine.crusher.ModelCrusher;
 import mod.industrialProcessing.plants.machine.crusher.TileEntityCrusher;
 import mod.industrialProcessing.plants.machine.filter.ModelFilter;
 import mod.industrialProcessing.plants.machine.filter.TileEntityFilter;
+import mod.industrialProcessing.plants.machine.mixer.ModelMixer;
+import mod.industrialProcessing.plants.machine.mixer.TileEntityMixer;
 import mod.industrialProcessing.plants.power.generator.crankGenerator.ModelCrankGenerator;
 import mod.industrialProcessing.plants.power.generator.crankGenerator.TileEntityManualGenerator;
 import mod.industrialProcessing.plants.power.meter.ModelVoltMeter;
@@ -34,6 +36,7 @@ public class ConfigBlockContainers {
     	
     	BlockRegistry.registerMachine(IndustrialProcessing.blockCrusher, TileEntityCrusher.class, "IP.machine.crusher",new ModelCrusher());
     	BlockRegistry.registerMachine(IndustrialProcessing.blockFilter, TileEntityFilter.class, "IP.machine.filter",new ModelFilter());
+    	BlockRegistry.registerMachine(IndustrialProcessing.blockMixer, TileEntityMixer.class, "IP.machine.mixer",new ModelMixer());
     	BlockRegistry.registerMachine(IndustrialProcessing.blockManualGenerator, TileEntityManualGenerator.class, "IP.generator.manual",new ModelCrankGenerator(true));
     	BlockRegistry.registerMachine(IndustrialProcessing.blockElectroMotor, TileEntityElectroMotor.class, "IP.motor.electro",new ModelElectroMotorBlock(),new ModelElectroMotorTile());
     	BlockRegistry.registerMachine(IndustrialProcessing.blockWire, TileEntityWire.class, "IP.power.wire",new ModelWireBlock());

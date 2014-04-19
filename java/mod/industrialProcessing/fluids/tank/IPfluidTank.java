@@ -7,19 +7,28 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
 public class IPfluidTank extends FluidTank implements IIPfluidTank {
+	
     public IPfluidTank(TileEntity tile, int capacity, int slot, int[] sides, boolean input, boolean output) {
+    	this(tile, capacity, slot, sides, input, output, -1, -1);
+    }
+	
+    public IPfluidTank(TileEntity tile, int capacity, int slot, int[] sides, boolean input, boolean output, int in,int out) {
 	super(capacity);
 	this.slot = slot;
 	this.tile = tile;
 	this.sides = sides;
 	this.input = input;
 	this.output = output;
+	this.inputSlot = in;
+	this.outputSlot = out;
     }
 
     public int[] sides;
     public boolean input;
     public boolean output;
     public int slot;
+    public int inputSlot = -1;
+    public int outputSlot = -1;
 
     @Override
     public FluidTank readFromNBT(NBTTagCompound nbt) {

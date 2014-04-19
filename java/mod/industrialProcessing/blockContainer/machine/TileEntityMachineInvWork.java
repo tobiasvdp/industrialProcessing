@@ -20,7 +20,7 @@ import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityMachineInvWork extends TileEntityMachineInv implements IWorkHandler, IRecipeWorkHandler, IWorkingEntity, IAnimationSyncable, IAnimationProgress {
+public class TileEntityMachineInvWork extends TileEntityMachineInv implements IWorkHandler, IRecipeWorkHandler, IAnimationSyncable, IAnimationProgress {
 
 	protected ServerWorker worker;
 	protected RecipesMachine recipes; 

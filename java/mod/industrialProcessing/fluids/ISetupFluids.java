@@ -61,35 +61,17 @@ public interface ISetupFluids {
 	public final static BlockFluid blockFluidLatex = new BlockFluid(itemFluidLatex, Material.water, true);
 	public final static ItemIPBucket bucketFluidLatex = new ItemIPBucket(ConfigFluids.getLatexFluidBucketID(), itemFluidLatex, blockFluidLatex, "ContainerLatex");
 
+*/
+	
+	public final static FluidIP fluidOreSludgeIron = new FluidIP("oreSludgeIron", 1000, 1000, Material.water, false, true);
+	public final static FluidIP fluidOreSludgeChromite = new FluidIP("oreSludgeChromite", 1000, 1000, Material.water, false, true);
+	public final static FluidIP fluidOreSludgeGalena = new FluidIP("oreSludgeGalena", 1000, 1000, Material.water, false, true);
+	public final static FluidIP fluidOreSludgeGold = new FluidIP("oreSludgeGold", 1000, 1000, Material.water, false, true);
+	public final static FluidIP fluidOreSludgeTalia = new FluidIP("oreSludgeTalia", 1000, 1000, Material.water, false, true);
+	public final static FluidIP fluidOreSludgeCopper = new FluidIP("oreSludgeCopper", 1000, 1000, Material.water, false, true);
+	public final static FluidIP fluidOreSludgeTin = new FluidIP("oreSludgeTin", 1000, 1000, Material.water, false, true);
 
-	public final static ItemFluid itemFluidOreSludgeIron = new ItemFluid("OreSludgeIron", 1000, 1000);
-	public final static BlockFluid blockFluidOreSludgeIron = new BlockFluid(itemFluidOreSludgeIron, Material.water, false);
-	public final static ItemIPBucket bucketOreSludgeIron = new ItemIPBucket(ConfigFluids.BucketOreSludgeIronID(), itemFluidOreSludgeIron, blockFluidOreSludgeIron, "ContainerOreSludgeIron");
-
-	public final static ItemFluid itemFluidOreSludgeChromite = new ItemFluid("OreSludgeChromite", 1000, 1000);
-	public final static BlockFluid blockFluidOreSludgeChromite = new BlockFluid(itemFluidOreSludgeChromite, Material.water, false);
-	public final static ItemIPBucket bucketOreSludgeChromite = new ItemIPBucket(ConfigFluids.bucketOreSludgeChromiteID(), itemFluidOreSludgeChromite, blockFluidOreSludgeChromite, "ContainerOreSludgeChromite");
-
-	public final static ItemFluid itemFluidOreSludgeGalena = new ItemFluid("OreSludgeGalena", 1000, 1000);
-	public final static BlockFluid blockFluidOreSludgeGalena = new BlockFluid(itemFluidOreSludgeGalena, Material.water, false);
-	public final static ItemIPBucket bucketOreSludgeGalena = new ItemIPBucket(ConfigFluids.bucketOreSludgeGalenaID(), itemFluidOreSludgeGalena, blockFluidOreSludgeGalena, "ContainerOreSludgeGalena");
-
-	public final static ItemFluid itemFluidOreSludgeGold = new ItemFluid("OreSludgeGold", 1000, 1000);
-	public final static BlockFluid blockFluidOreSludgeGold = new BlockFluid(itemFluidOreSludgeGold, Material.water, false);
-	public final static ItemIPBucket bucketOreSludgeGold = new ItemIPBucket(ConfigFluids.bucketOreSludgeGoldID(), itemFluidOreSludgeGold, blockFluidOreSludgeGold, "ContainerOreSludgeGold");
-
-	public final static ItemFluid itemFluidOreSludgeTalia = new ItemFluid("OreSludgeTalia", 1000, 1000);
-	public final static BlockFluid blockFluidOreSludgeTalia = new BlockFluid(itemFluidOreSludgeTalia, Material.water, false);
-	public final static ItemIPBucket bucketOreSludgeTalia = new ItemIPBucket(ConfigFluids.bucketOreSludgeTaliaID(), itemFluidOreSludgeTalia, blockFluidOreSludgeTalia, "ContainerOreSludgeTalia");
-
-	public final static ItemFluid itemFluidOreSludgeCopper = new ItemFluid("OreSludgeCopper", 1000, 1000);
-	public final static BlockFluid blockFluidOreSludgeCopper = new BlockFluid(itemFluidOreSludgeCopper, Material.water, false);
-	public final static ItemIPBucket bucketOreSludgeCopper = new ItemIPBucket(ConfigFluids.BucketOreSludgeCopperID(), itemFluidOreSludgeCopper, blockFluidOreSludgeCopper, "ContainerOreSludgeCopper");
-
-	public final static ItemFluid itemFluidOreSludgeTin = new ItemFluid("OreSludgeTin", 1000, 1000);
-	public final static BlockFluid blockFluidOreSludgeTin = new BlockFluid(itemFluidOreSludgeTin, Material.water, false);
-	public final static ItemIPBucket bucketOreSludgeTin = new ItemIPBucket(ConfigFluids.BucketOreSludgeTinID(), itemFluidOreSludgeTin, blockFluidOreSludgeTin, "ContainerOreSludgeTin");
-
+	/*
 	public final static ItemFluid itemFluidHotSlag = new ItemFluid("IP.fluid.hotSlag", 3000, 3000);
 	public final static BlockFluid blockFluidHotSlag = new BlockFluid(itemFluidHotSlag, Material.fire, false);
 	public final static ItemIPBucket bucketHotSlag = new ItemIPBucket(ConfigFluids.BucketHotSlagID(), itemFluidHotSlag, blockFluidHotSlag, "ContainerHotSlag");
