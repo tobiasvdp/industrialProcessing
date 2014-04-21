@@ -2,6 +2,9 @@ package mod.industrialProcessing.blockContainer.machine;
 
 import java.util.ArrayList;
 
+import mod.industrialProcessing.client.rendering.tileEntity.animation.tanks.ITankSyncable;
+import mod.industrialProcessing.client.rendering.tileEntity.animation.tanks.TankHandler;
+import mod.industrialProcessing.client.rendering.tileEntity.animation.tanks.TileTankSyncHandler;
 import mod.industrialProcessing.fluids.tank.IPfluidTank;
 import mod.industrialProcessing.fluids.tank.ITank;
 import mod.industrialProcessing.utils.rotation.LocalDirection;
@@ -17,10 +20,40 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 
-public class TileEntityMachineTank extends TileEntityMachineInv implements ITank {
+public class TileEntityMachineTank extends TileEntityMachineInv implements ITank, ITankSyncable {
 
 	private int[][] fluidTankSideslots = new int[6][0];
 	private ArrayList<IPfluidTank> fluidTanks = new ArrayList<IPfluidTank>();
+	protected boolean syncTanks = false;
+	private TankHandler tankHandler;
+	
+	public TileEntityMachineTank() {
+		super();
+	}
+	
+	public void setupTankSync(int... tankIndex ){
+		syncTanks = true;
+		this.tankHandler = new TankHandler(this, tankIndex);
+	}
+	
+	@Override
+	public void updateEntity() {
+		super.updateEntity();
+		for(int i = 0;i<fluidTanks.size();i++){
+			IPfluidTank tank = fluidTanks.get(i);
+			if(tank.input)
+				addBucketToTank(tank.inputSlot, tank.outputSlot, i);
+			if(tank.output)
+				getBucketFromTank(tank.inputSlot, tank.outputSlot, i);
+		}
+		if (syncTanks && this.tankHandler.readDataFromTanks())
+			TileTankSyncHandler.sendTankData(this, this.tankHandler);
+	}
+	
+	@Override
+	public TankHandler getTankHandler() {
+		return this.tankHandler;
+	}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {

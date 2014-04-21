@@ -12,10 +12,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-public class TileEntityMixer extends TileEntityMachineTankWorkPower implements ITankSyncable {
+public class TileEntityMixer extends TileEntityMachineTankWorkPower{
 
 	public static RecipesMixer recipes = new RecipesMixer();
-	private TankHandler tankHandler;
 
 	public TileEntityMixer() {
 		super(recipes,LocalDirection.RIGHT, 10000, 100);
@@ -34,21 +33,7 @@ public class TileEntityMixer extends TileEntityMachineTankWorkPower implements I
 
 		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.RIGHT, true, false,1,2);
 		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.DOWN, false, true,3,4);
-
-		this.tankHandler = new TankHandler(this, new int[] { 0 });
-	}
-
-	@Override
-	public void updateEntity() {
-		addBucketToTank(1, 2, 0);
-		getBucketFromTank(3, 4, 1);
-		if (this.tankHandler.readDataFromTanks())
-			TileTankSyncHandler.sendTankData(this, this.tankHandler);
-		super.updateEntity();
-	};
-
-	@Override
-	public TankHandler getTankHandler() {
-		return this.tankHandler;
+		
+		setupTankSync(0);
 	}
 }

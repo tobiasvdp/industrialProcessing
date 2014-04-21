@@ -44,6 +44,7 @@ public class TileEntityMachineTankWork extends TileEntityMachineTank implements 
 
 	@Override
 	public void updateEntity() {
+		super.updateEntity();
 		doWork();
 		if(animated ){
 		    this.animation.update();
