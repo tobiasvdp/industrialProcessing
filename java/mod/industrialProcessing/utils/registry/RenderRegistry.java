@@ -11,6 +11,8 @@ import mod.industrialProcessing.client.rendering.tileEntity.ModelTileEntity;
 import mod.industrialProcessing.client.rendering.tileEntity.RendererTileBlock;
 import mod.industrialProcessing.client.rendering.tileEntity.RendererTileEntity;
 import mod.industrialProcessing.client.rendering.tileEntity.RendererTileEntityAnimated;
+import mod.industrialProcessing.client.rendering.tileEntity.connected.ModelConnected;
+import mod.industrialProcessing.client.rendering.tileEntity.connected.RendererTileEntityConnected;
 import net.minecraft.block.Block;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -38,13 +40,14 @@ public class RenderRegistry {
 			block.setRenderID(RenderingRegistry.getNextAvailableRenderId());
 		RenderingRegistry.registerBlockHandler(new RendererBlock(block.getRenderType(), model));
 		array.put(block, model);
-	}
-
+	} 
 	public static void registerRendering(Block block, ModelTileEntity model) {
 		Class teClass = TileEntityRegistry.getTileEntityClassForBlock(block);
 		if (model instanceof ModelAnimatedMachine) {
 			ClientRegistry.bindTileEntitySpecialRenderer(teClass, new RendererTileEntityAnimated(block, block.getUnlocalizedName(), (ModelAnimatedMachine) model));
-		} else {
+		}else if(model instanceof ModelConnected){ 
+			ClientRegistry.bindTileEntitySpecialRenderer(teClass, new RendererTileEntityConnected(block, block.getUnlocalizedName(), (ModelConnected) model));
+		}else {
 			ClientRegistry.bindTileEntitySpecialRenderer(teClass, new RendererTileEntity(block, block.getUnlocalizedName(), model));
 		}
 		if (((BlockContainerIPRendered) block).getRenderType() == 0) {

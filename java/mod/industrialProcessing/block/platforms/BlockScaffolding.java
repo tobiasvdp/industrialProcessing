@@ -1,6 +1,7 @@
 package mod.industrialProcessing.block.platforms;
 
 import mod.industrialProcessing.block.BlockIPRendered;
+import mod.industrialProcessing.blockContainer.BlockContainerIP;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,7 +13,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class BlockScaffolding extends BlockIPRendered {
 
 	public BlockScaffolding(float hardness, float resistance, Material par2Material, SoundType stepSound) {
-		super(hardness,resistance, par2Material, stepSound);
+		super(hardness, resistance, par2Material, stepSound);
 	}
 
 	@Override
@@ -27,7 +28,7 @@ public class BlockScaffolding extends BlockIPRendered {
 					ForgeDirection placeTarget = BlockContainerIP.getForwardFromMetadata(dir).getOpposite();
 
 					if (placeScaffolding(par1World, par2, par3, par4, stack, placeTarget, par5EntityPlayer, 0)) {
-						if(!par5EntityPlayer.capabilities.isCreativeMode){
+						if (!par5EntityPlayer.capabilities.isCreativeMode) {
 							stack.stackSize--;
 							if (stack.stackSize <= 0)
 								par5EntityPlayer.inventory.setInventorySlotContents(par5EntityPlayer.inventory.currentItem, null);

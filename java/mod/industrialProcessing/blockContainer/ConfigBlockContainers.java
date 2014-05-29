@@ -12,6 +12,7 @@ import mod.industrialProcessing.plants.machine.mixer.ModelMixer;
 import mod.industrialProcessing.plants.machine.mixer.TileEntityMixer;
 import mod.industrialProcessing.plants.power.generator.crankGenerator.ModelCrankGenerator;
 import mod.industrialProcessing.plants.power.generator.crankGenerator.TileEntityManualGenerator;
+import mod.industrialProcessing.plants.power.generator.creative.TileEntityCreativeGenerator;
 import mod.industrialProcessing.plants.power.meter.ModelVoltMeter;
 import mod.industrialProcessing.plants.power.meter.TileEntityVoltMeter;
 import mod.industrialProcessing.plants.power.motor.electroMotor.TileEntityElectroMotor;
@@ -22,6 +23,18 @@ import mod.industrialProcessing.plants.power.storage.model.ModelEnergyCellBlock;
 import mod.industrialProcessing.plants.power.storage.model.ModelEnergyCellTile;
 import mod.industrialProcessing.plants.power.wire.TileEntityWire;
 import mod.industrialProcessing.plants.power.wire.models.ModelWireBlock;
+import mod.industrialProcessing.plants.transport.ConveyorBeltPowerInput.TileEntityConveyorBeltPowerInput;
+import mod.industrialProcessing.plants.transport.conveyorBelt.TileEntityConveyorBelt;
+import mod.industrialProcessing.plants.transport.conveyorChute.TileEntityConveyorChute;
+import mod.industrialProcessing.plants.transport.conveyorChute.model.ModelConveyorChuteBlock;
+import mod.industrialProcessing.plants.transport.conveyorInput.ModelConveyorInput;
+import mod.industrialProcessing.plants.transport.conveyorInput.TileEntityConveyorInput;
+import mod.industrialProcessing.plants.transport.conveyorInput.model.ModelConveyorInputBlock;
+import mod.industrialProcessing.plants.transport.conveyorOutput.ModelConveyorOutput;
+import mod.industrialProcessing.plants.transport.conveyorOutput.TileEntityConveyorOutput;
+import mod.industrialProcessing.transport.items.conveyorBelt.rendering.ModelConveyorBeltTile;
+import mod.industrialProcessing.transport.items.conveyorBelt.rendering.comonModels.ModelConveyorBeltBlock;
+import mod.industrialProcessing.transport.items.conveyorBelt.rendering.comonModels.ModelConveyorOutputBlock;
 import mod.industrialProcessing.utils.registry.BlockRegistry;
 
 public class ConfigBlockContainers {
@@ -44,6 +57,12 @@ public class ConfigBlockContainers {
     	BlockRegistry.registerMachine(IndustrialProcessing.blockEnergyCell, TileEntityEnergyCell.class, "IP.storage.energy",new ModelEnergyCellBlock(), new ModelEnergyCellTile());
     	BlockRegistry.registerMachine(IndustrialProcessing.blockPetrolLamp, TileEntityPetrolLamp.class, "IP.light.hanging",new ModelPetrolLamp());
     	BlockRegistry.registerMachine(IndustrialProcessing.blockTorch, TileEntityTorch.class, "IP.light.torch");
+    	BlockRegistry.registerMachine(IndustrialProcessing.blockConveyorBelt, TileEntityConveyorBelt.class, "IP.trans.belt", new ModelConveyorBeltBlock(), new ModelConveyorBeltTile());
+    	BlockRegistry.registerMachine(IndustrialProcessing.blockConveyorBeltPowerInput, TileEntityConveyorBeltPowerInput.class, "IP.trans.power");
+    	BlockRegistry.registerMachine(IndustrialProcessing.blockConveyorChute, TileEntityConveyorChute.class, "IP.trans.chute",new ModelConveyorChuteBlock());
+    	BlockRegistry.registerMachine(IndustrialProcessing.blockConveyorInput, TileEntityConveyorInput.class, "IP.trans.in",new ModelConveyorInputBlock(), new ModelConveyorInput());
+    	BlockRegistry.registerMachine(IndustrialProcessing.blockConveyorOutput, TileEntityConveyorOutput.class, "IP.trans.out",new ModelConveyorOutputBlock(),new ModelConveyorOutput());
+    	BlockRegistry.registerMachine(IndustrialProcessing.blockCreativeGenerator, TileEntityCreativeGenerator.class, "IP.generator.creative");
     	/*
         registerMachineBlock(ISetupMachineBlocks.blockTorch, "IP.Machine.Torch", "Torch", TileEntityTorch.class, BlockType.decoration);
         registerMachineBlock(ISetupMachineBlocks.blockAlkylationUnit, "IP.Machine.AlkUnit", "Alkylation unit", TileEntityAlkylationUnit.class, BlockType.Machine, BlockType.Refinary);

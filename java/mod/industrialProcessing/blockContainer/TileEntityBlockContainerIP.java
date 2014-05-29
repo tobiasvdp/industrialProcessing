@@ -73,6 +73,7 @@ public class TileEntityBlockContainerIP extends TileEntity implements IRotateabl
 	}
 
 	protected int[][] rotationMatrix = new int[][] { { 0 }, { 0 }, { 0, 1, 3, 2, 5, 4 }, { 0, 1, 2, 3, 4, 5 }, { 0, 1, 4, 5, 3, 2 }, { 0, 1, 5, 4, 2, 3 } };
+	protected int[][] rotationMatrixExternal = new int[][] { { 0 }, { 0 }, { 0, 1, 3, 2, 5, 4 }, { 0, 1, 2, 3, 4, 5 }, { 0, 1, 5, 4, 2, 3 }, { 0, 1, 4, 5, 3, 2 } };
 
 	@Override
 	public LocalDirection getLocalDirection(ForgeDirection dir) {
@@ -88,7 +89,7 @@ public class TileEntityBlockContainerIP extends TileEntity implements IRotateabl
 
 	@Override
 	public ForgeDirection getExternalDirection(LocalDirection dir) {
-		return ForgeDirection.VALID_DIRECTIONS[rotationMatrix[getForwardDirection().ordinal()][dir.ordinal()]];
+		return ForgeDirection.VALID_DIRECTIONS[rotationMatrixExternal[getForwardDirection().ordinal()][dir.ordinal()]];
 	}
 
 }

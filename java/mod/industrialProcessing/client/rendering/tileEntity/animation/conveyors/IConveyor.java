@@ -1,6 +1,6 @@
-package ip.industrialProcessing.machines.animation.conveyors;
+package mod.industrialProcessing.client.rendering.tileEntity.animation.conveyors;
 
-import ip.industrialProcessing.LocalDirection;
+import mod.industrialProcessing.utils.rotation.LocalDirection;
 import net.minecraft.item.ItemStack;
 
 public interface IConveyor {

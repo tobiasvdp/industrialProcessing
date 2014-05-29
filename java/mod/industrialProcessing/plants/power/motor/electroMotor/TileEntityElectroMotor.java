@@ -18,7 +18,7 @@ public class TileEntityElectroMotor extends TileEntityBlockContainerIP implement
     private static final float DRAG = 0.1f;
     private SimplePowerStorage storage = new SimplePowerStorage(10000);
     private AnimationHandler animationHandler = new AnimationHandler(AnimationMode.CLAMP, 1000, true);
-    private LocalDirection motionOutputDirection = LocalDirection.FRONT;
+    private LocalDirection motionOutputDirection = LocalDirection.BACK;
     private LocalDirection powerInputSide = LocalDirection.FRONT;
     private float voltage;
     private float lastVoltage;
@@ -50,10 +50,10 @@ public class TileEntityElectroMotor extends TileEntityBlockContainerIP implement
             //TODO TileAnimationSyncHandler.sendAnimationData(this, this.animationHandler);
 
             ForgeDirection generatorDirection = getExternalDirection(motionOutputDirection);
-            IMechanicalMotion generator = getGenerator(generatorDirection.getOpposite());
+            IMechanicalMotion generator = getGenerator(generatorDirection);
             if (generator != null) {
                 float speed = this.animationHandler.getSpeed();
-                float resistance = generator.setSpeed(generatorDirection, speed);
+                float resistance = generator.setSpeed(generatorDirection.getOpposite(), speed);
                 speed -= speed * resistance * AnimationHandler.DT;
                 this.animationHandler.setSpeed(speed);
             }

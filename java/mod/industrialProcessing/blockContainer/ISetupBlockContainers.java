@@ -6,10 +6,16 @@ import mod.industrialProcessing.plants.machine.crusher.BlockCrusher;
 import mod.industrialProcessing.plants.machine.filter.BlockFilter;
 import mod.industrialProcessing.plants.machine.mixer.BlockMixer;
 import mod.industrialProcessing.plants.power.generator.crankGenerator.BlockManualGenerator;
+import mod.industrialProcessing.plants.power.generator.creative.BlockCreativeGenerator;
 import mod.industrialProcessing.plants.power.meter.BlockVoltMeter;
 import mod.industrialProcessing.plants.power.motor.electroMotor.BlockElectroMotor;
 import mod.industrialProcessing.plants.power.storage.BlockEnergyCell;
 import mod.industrialProcessing.plants.power.wire.BlockWire;
+import mod.industrialProcessing.plants.transport.ConveyorBeltPowerInput.BlockConveyorBeltPowerInput;
+import mod.industrialProcessing.plants.transport.conveyorBelt.BlockConveyorBelt;
+import mod.industrialProcessing.plants.transport.conveyorChute.BlockConveyorChute;
+import mod.industrialProcessing.plants.transport.conveyorInput.BlockConveyorInput;
+import mod.industrialProcessing.plants.transport.conveyorOutput.BlockConveyorOutput;
 
 public interface ISetupBlockContainers {
 
@@ -25,6 +31,14 @@ public interface ISetupBlockContainers {
     public final static BlockEnergyCell blockEnergyCell = new BlockEnergyCell();
     public final static BlockTorch blockTorch = new BlockTorch();
     public final static BlockPetrolLamp blockPetrolLamp = new BlockPetrolLamp();
+    
+    public final static BlockConveyorBelt  blockConveyorBelt = new BlockConveyorBelt();
+    public final static BlockConveyorBeltPowerInput  blockConveyorBeltPowerInput = new BlockConveyorBeltPowerInput();
+    public final static BlockConveyorChute  blockConveyorChute = new BlockConveyorChute();
+    public final static BlockConveyorInput  blockConveyorInput = new BlockConveyorInput();
+    public final static BlockConveyorOutput  blockConveyorOutput = new BlockConveyorOutput();
+    
+    public final static BlockCreativeGenerator  blockCreativeGenerator = new BlockCreativeGenerator();
     /* machines
     public final static BlockFilter blockFilter = new BlockFilter();
     public final static BlockMagneticSeparator blockMageneticSeparator = new BlockMagneticSeparator();

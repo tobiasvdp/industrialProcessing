@@ -13,15 +13,17 @@ import mod.industrialProcessing.utils.creativeTab.ISetupCreativeTabs;
 import mod.industrialProcessing.utils.damage.ISetupDamageSource;
 import mod.industrialProcessing.utils.handlers.fluids.BucketHandler;
 import mod.industrialProcessing.utils.handlers.gui.GuiHandler;
+import mod.industrialProcessing.utils.handlers.line.LineHandler;
 import mod.industrialProcessing.utils.handlers.packet.PacketHandler;
+import mod.industrialProcessing.utils.handlers.packet.packets.ConveyorPacket;
+import mod.industrialProcessing.utils.handlers.packet.packets.StateConfigPacket;
 import mod.industrialProcessing.utils.handlers.packet.packets.SyncAnimationPacket;
 import mod.industrialProcessing.utils.handlers.packet.packets.TankAnimationPacket;
 import mod.industrialProcessing.utils.handlers.worldGeneration.WorldGeneration;
-import mod.industrialProcessing.utils.registry.BucketRegistery;
+import mod.industrialProcessing.utils.registry.HandlerRegistry;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -34,6 +36,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -75,6 +78,9 @@ public class IndustrialProcessing implements INamepace, ISetupCreativeTabs, ISet
 		//register worldGeneration
 		GameRegistry.registerWorldGenerator(new WorldGeneration(), 100);
 		
+		//register handlers
+		HandlerRegistry.registerConveyorLineHandler(new LineHandler());
+		
 		//register guihandler
 		NetworkRegistry.INSTANCE.registerGuiHandler(this.instance,new GuiHandler());		
 		
@@ -93,6 +99,8 @@ public class IndustrialProcessing implements INamepace, ISetupCreativeTabs, ISet
 		PacketHandler.getInstance().initialise();
 		PacketHandler.getInstance().registerPacket(SyncAnimationPacket.class);
 		PacketHandler.getInstance().registerPacket(TankAnimationPacket.class);
+		PacketHandler.getInstance().registerPacket(ConveyorPacket.class);
+		PacketHandler.getInstance().registerPacket(StateConfigPacket.class);
 		//PacketHandler.getInstance().register();
 	}
 
@@ -108,5 +116,10 @@ public class IndustrialProcessing implements INamepace, ISetupCreativeTabs, ISet
 
 	public static IndustrialProcessing instance() {
 		return instance;
+	}
+	
+	@EventHandler
+	public void serverStop(FMLServerStoppingEvent event) {
+		HandlerRegistry.resetConveyorLineHandler();
 	}
 }

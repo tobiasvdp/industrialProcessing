@@ -1,6 +1,7 @@
 package mod.industrialProcessing.utils.containers;
 
 import mod.industrialProcessing.gui.containers.LayoutContainer;
+import mod.industrialProcessing.gui.framework.slots.SlotArmor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
