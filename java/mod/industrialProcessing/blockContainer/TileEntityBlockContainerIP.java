@@ -1,5 +1,7 @@
 package mod.industrialProcessing.blockContainer;
 
+import org.apache.commons.io.filefilter.CanReadFileFilter;
+
 import mod.industrialProcessing.utils.rotation.IRotateableEntity;
 import mod.industrialProcessing.utils.rotation.LocalDirection;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,7 +13,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityBlockContainerIP extends TileEntity implements IRotateableEntity {
 
-	private ForgeDirection forwardDirection;
+	private ForgeDirection forwardDirection = ForgeDirection.NORTH;
+	protected boolean canRotate = true;
 
 	@Override
 	public Packet getDescriptionPacket() {
@@ -64,7 +67,10 @@ public class TileEntityBlockContainerIP extends TileEntity implements IRotateabl
 
 	@Override
 	public void setForwardDirection(ForgeDirection forward) {
-		forwardDirection = forward;
+		if (canRotate)
+			forwardDirection = forward;
+		else
+			forwardDirection = ForgeDirection.NORTH;
 	}
 
 	@Override

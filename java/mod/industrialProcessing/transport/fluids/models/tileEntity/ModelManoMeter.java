@@ -1,6 +1,6 @@
 package mod.industrialProcessing.transport.fluids.models.tileEntity;
 
-import ip.industrialProcessing.client.render.ModelAnimatedMachine;
+import mod.industrialProcessing.client.rendering.tileEntity.ModelAnimatedMachine;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.tileentity.TileEntity;
 

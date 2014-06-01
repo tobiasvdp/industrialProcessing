@@ -12,7 +12,12 @@ import mod.industrialProcessing.client.rendering.tileEntity.RendererTileBlock;
 import mod.industrialProcessing.client.rendering.tileEntity.RendererTileEntity;
 import mod.industrialProcessing.client.rendering.tileEntity.RendererTileEntityAnimated;
 import mod.industrialProcessing.client.rendering.tileEntity.connected.ModelConnected;
+import mod.industrialProcessing.client.rendering.tileEntity.connected.ModelConnectedFluid;
+import mod.industrialProcessing.client.rendering.tileEntity.connected.ModelConnectedFluidAnimated;
+import mod.industrialProcessing.client.rendering.tileEntity.connected.ModelConnectedOrientedFluid;
 import mod.industrialProcessing.client.rendering.tileEntity.connected.RendererTileEntityConnected;
+import mod.industrialProcessing.client.rendering.tileEntity.connected.RendererTileEntityConnectedFluid;
+import mod.industrialProcessing.client.rendering.tileEntity.connected.RendererTileEntityConnectedFluidAnimated;
 import net.minecraft.block.Block;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -43,7 +48,11 @@ public class RenderRegistry {
 	} 
 	public static void registerRendering(Block block, ModelTileEntity model) {
 		Class teClass = TileEntityRegistry.getTileEntityClassForBlock(block);
-		if (model instanceof ModelAnimatedMachine) {
+		if(model instanceof ModelConnectedFluidAnimated){
+	        ClientRegistry.bindTileEntitySpecialRenderer(teClass, new RendererTileEntityConnectedFluidAnimated(block, block.getUnlocalizedName(), (ModelConnectedFluidAnimated) model));
+		}else if (model instanceof ModelConnectedOrientedFluid ||model instanceof ModelConnectedFluid ) {
+			ClientRegistry.bindTileEntitySpecialRenderer(teClass, new RendererTileEntityConnectedFluid(block, block.getUnlocalizedName(), (ModelConnectedFluid) model));
+		}else if (model instanceof ModelAnimatedMachine) {
 			ClientRegistry.bindTileEntitySpecialRenderer(teClass, new RendererTileEntityAnimated(block, block.getUnlocalizedName(), (ModelAnimatedMachine) model));
 		}else if(model instanceof ModelConnected){ 
 			ClientRegistry.bindTileEntitySpecialRenderer(teClass, new RendererTileEntityConnected(block, block.getUnlocalizedName(), (ModelConnected) model));

@@ -1,13 +1,11 @@
 package mod.industrialProcessing.transport.fluids.models.tileEntity;
 
-import ip.industrialProcessing.client.render.ConnectionState;
-import ip.industrialProcessing.client.render.ModelConnectedOrientedFluid;
-import ip.industrialProcessing.machines.BlockMachine;
-
-import javax.swing.Icon;
-
+import mod.industrialProcessing.blockContainer.BlockContainerIP;
+import mod.industrialProcessing.blockContainer.transport.ConnectionState;
+import mod.industrialProcessing.client.rendering.tileEntity.connected.ModelConnectedOrientedFluid;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
@@ -18,10 +16,10 @@ public class ModelRainTank extends ModelConnectedOrientedFluid {
     }
 
     @Override
-    public void renderModelConnectedOrientedFluid(TileEntity tl, float f, ForgeDirection forward, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, Icon icon) {
+    public void renderModelConnectedOrientedFluid(TileEntity tl, float f, ForgeDirection forward, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, IIcon icon) {
         if (tankSlot == 0) {
 
-            int dir = BlockMachine.getMetadataFromForward(BlockMachine.getForwardFromEntity(tl));
+            int dir = BlockContainerIP.getMetadataFromForward(BlockContainerIP.getForwardFromEntity(tl));
 
             GL11.glPushMatrix();
             GL11.glRotatef(90 * dir, 0, -1, 0);
@@ -46,7 +44,6 @@ public class ModelRainTank extends ModelConnectedOrientedFluid {
 
     @Override
     public void renderModelConnectedOriented(TileEntity tl, float f5, ForgeDirection forward, ConnectionState south, ConnectionState west, ConnectionState north, ConnectionState east, ConnectionState up, ConnectionState down) {
-
     }
 
 }

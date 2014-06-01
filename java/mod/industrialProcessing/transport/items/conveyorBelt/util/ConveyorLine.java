@@ -3,7 +3,7 @@ package mod.industrialProcessing.transport.items.conveyorBelt.util;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import mod.industrialProcessing.plants.transport.ConveyorBeltPowerInput.TileEntityConveyorBeltPowerInput;
+import mod.industrialProcessing.plants.transport.items.ConveyorBeltPowerInput.TileEntityConveyorBeltPowerInput;
 import mod.industrialProcessing.power.plants.IMechanicalMotion;
 import mod.industrialProcessing.transport.items.conveyorBelt.tileEntity.TileEntityConveyorConnectionsBase;
 

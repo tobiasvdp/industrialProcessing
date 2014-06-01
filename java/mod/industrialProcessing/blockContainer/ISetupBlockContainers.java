@@ -11,11 +11,20 @@ import mod.industrialProcessing.plants.power.meter.BlockVoltMeter;
 import mod.industrialProcessing.plants.power.motor.electroMotor.BlockElectroMotor;
 import mod.industrialProcessing.plants.power.storage.BlockEnergyCell;
 import mod.industrialProcessing.plants.power.wire.BlockWire;
-import mod.industrialProcessing.plants.transport.ConveyorBeltPowerInput.BlockConveyorBeltPowerInput;
-import mod.industrialProcessing.plants.transport.conveyorBelt.BlockConveyorBelt;
-import mod.industrialProcessing.plants.transport.conveyorChute.BlockConveyorChute;
-import mod.industrialProcessing.plants.transport.conveyorInput.BlockConveyorInput;
-import mod.industrialProcessing.plants.transport.conveyorOutput.BlockConveyorOutput;
+import mod.industrialProcessing.plants.transport.fluids.grate.BlockGrate;
+import mod.industrialProcessing.plants.transport.fluids.manoMeter.BlockManoMeter;
+import mod.industrialProcessing.plants.transport.fluids.pump.BlockPump;
+import mod.industrialProcessing.plants.transport.fluids.rainTank.BlockRainTank;
+import mod.industrialProcessing.plants.transport.fluids.tank.BlockTank;
+import mod.industrialProcessing.plants.transport.fluids.valve.BlockValve;
+import mod.industrialProcessing.plants.transport.items.ConveyorBeltPowerInput.BlockConveyorBeltPowerInput;
+import mod.industrialProcessing.plants.transport.items.conveyorBelt.BlockConveyorBelt;
+import mod.industrialProcessing.plants.transport.items.conveyorChute.BlockConveyorChute;
+import mod.industrialProcessing.plants.transport.items.conveyorInput.BlockConveyorInput;
+import mod.industrialProcessing.plants.transport.items.conveyorOutput.BlockConveyorOutput;
+import mod.industrialProcessing.transport.fluids.block.BlockTransportFluids;
+import mod.industrialProcessing.transport.fluids.block.BlockTransportFluidsStone;
+import mod.industrialProcessing.transport.fluids.block.BlockTransportFluidsWood;
 
 public interface ISetupBlockContainers {
 
@@ -39,6 +48,17 @@ public interface ISetupBlockContainers {
     public final static BlockConveyorOutput  blockConveyorOutput = new BlockConveyorOutput();
     
     public final static BlockCreativeGenerator  blockCreativeGenerator = new BlockCreativeGenerator();
+    
+    public final static BlockGrate  blockGrate = new BlockGrate();
+    public final static BlockManoMeter  blockManoMeter = new BlockManoMeter();
+    public final static BlockPump  blockPump = new BlockPump();
+    public final static BlockRainTank  blockRainTank = new BlockRainTank();
+    public final static BlockTank  blockTank = new BlockTank();
+    public final static BlockTransportFluids  blockTransportFluids = new BlockTransportFluids();
+    public final static BlockTransportFluidsStone  blockTransportFluidsStone = new BlockTransportFluidsStone();
+    public final static BlockTransportFluidsWood  blockTransportFluidsWood = new BlockTransportFluidsWood();
+    public final static BlockValve  blockValve = new BlockValve();
+    
     /* machines
     public final static BlockFilter blockFilter = new BlockFilter();
     public final static BlockMagneticSeparator blockMageneticSeparator = new BlockMagneticSeparator();

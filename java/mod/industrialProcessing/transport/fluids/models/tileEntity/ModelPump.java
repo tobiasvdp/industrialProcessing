@@ -1,11 +1,11 @@
 package mod.industrialProcessing.transport.fluids.models.tileEntity;
 
-import ip.industrialProcessing.client.render.ModelAnimatedMachine;
-import ip.industrialProcessing.transport.fluids.models.pump.PumpAxle;
-
 import javax.swing.Icon;
 
+import mod.industrialProcessing.client.rendering.tileEntity.ModelAnimatedMachine;
+import mod.industrialProcessing.transport.fluids.models.block.pump.PumpAxle;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector3f;
@@ -23,14 +23,14 @@ public class ModelPump extends ModelAnimatedMachine {
         GL11.glRotatef(-90, 0, 1, 0);
         GL11.glTranslatef(0, 1, 0);
         GL11.glRotatef(angle * 360, 1, 0, 0);
-        Icon icon = getIcon();
+        IIcon icon = getIcon();
         axle.renderMesh(icon);
         GL11.glPopMatrix();
     }
 
-    private Icon getIcon() {
+    private IIcon getIcon() {
 
-        return new Icon() {
+        return new IIcon() {
 
             @Override
             public float getMinV() {

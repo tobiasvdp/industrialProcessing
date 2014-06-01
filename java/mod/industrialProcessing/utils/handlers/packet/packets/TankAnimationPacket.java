@@ -32,7 +32,6 @@ public class TankAnimationPacket extends PacketIP {
 		buffer.writeInt(x);
 		buffer.writeInt(y);
 		buffer.writeInt(z);
-		buffer.writeInt(handler.getTankCount());
 		writeTankHandler(buffer,handler);
 	}
 

@@ -5,12 +5,13 @@ import javax.swing.Icon;
 import mod.industrialProcessing.blockContainer.transport.ConnectionState;
 import mod.industrialProcessing.utils.rotation.IRotateableEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class ModelConnectedOrientedFluid extends ModelConnectedFluid {
 
 	@Override
-	public void renderModelConnectedFluid(TileEntity tl, float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, Icon icon) {
+	public void renderModelConnectedFluid(TileEntity tl, float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, IIcon icon) {
 		ForgeDirection forward = ForgeDirection.UNKNOWN;
 		if (tl instanceof IRotateableEntity) {
 			IRotateableEntity rotate = (IRotateableEntity) tl;
@@ -63,5 +64,5 @@ public abstract class ModelConnectedOrientedFluid extends ModelConnectedFluid {
 
 	protected abstract void renderModelConnectedOriented(TileEntity tl, float f, ForgeDirection forward, ConnectionState front, ConnectionState right, ConnectionState back, ConnectionState left, ConnectionState up, ConnectionState down);
 
-	protected abstract void renderModelConnectedOrientedFluid(TileEntity tl, float f, ForgeDirection forward, ConnectionState front, ConnectionState right, ConnectionState back, ConnectionState left, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, Icon icon);
+	protected abstract void renderModelConnectedOrientedFluid(TileEntity tl, float f, ForgeDirection forward, ConnectionState front, ConnectionState right, ConnectionState back, ConnectionState left, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, IIcon icon);
 }

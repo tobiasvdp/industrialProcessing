@@ -5,7 +5,7 @@ import mod.industrialProcessing.blockContainer.transport.ConnectionState;
 import mod.industrialProcessing.client.rendering.block.ModelBlock;
 import mod.industrialProcessing.client.rendering.block.obj.wavefront.ObjRotator;
 import mod.industrialProcessing.client.rendering.block.obj.wavefront.WorldReference;
-import mod.industrialProcessing.transport.fluids.TileEntityTank;
+import mod.industrialProcessing.plants.transport.fluids.tank.TileEntityTank;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;

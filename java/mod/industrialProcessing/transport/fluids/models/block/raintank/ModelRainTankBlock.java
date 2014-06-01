@@ -1,12 +1,11 @@
 package mod.industrialProcessing.transport.fluids.models.block.raintank;
 
-import javax.swing.Icon;
-
+import mod.industrialProcessing.blockContainer.BlockContainerIP;
 import mod.industrialProcessing.blockContainer.transport.ConnectionState;
 import mod.industrialProcessing.client.rendering.block.ModelBlock;
 import mod.industrialProcessing.client.rendering.block.obj.wavefront.ObjRotator;
 import mod.industrialProcessing.client.rendering.block.obj.wavefront.WorldReference;
-import mod.industrialProcessing.transport.fluids.TileEntityRainTank;
+import mod.industrialProcessing.plants.transport.fluids.rainTank.TileEntityRainTank;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -49,7 +48,7 @@ public class ModelRainTankBlock extends ModelBlock {
         Tessellator tessellator = Tessellator.instance;
         tessellator.setColorOpaque(255, 255, 255);
 
-        int id = reference.block.blockID;
+        Block id = reference.block;
         IIcon icon = reference.getIcon(0);
         IIcon icon1 = reference.getIcon(1);
         IIcon icon2 = reference.getIcon(2);
@@ -67,7 +66,7 @@ public class ModelRainTankBlock extends ModelBlock {
             for (int i = 2; i < 6; i++) {
                 ForgeDirection direction = ForgeDirection.getOrientation(i);
                 ConnectionState side = tank.getConnection(direction);
-                int dir = 6 - BlockMachine.getMetadataFromForward(direction);
+                int dir = 6 - BlockContainerIP.getMetadataFromForward(direction);
                 states[dir % 4] = side;
                 if (side == ConnectionState.PLUGGED) {
                     pipeSide.getRotated(dir).renderMesh(false, icon2, reference);
@@ -100,10 +99,10 @@ public class ModelRainTankBlock extends ModelBlock {
 
     final int[][] diagonals = new int[][] { { 1, 1 }, { 1, -1 }, { -1, -1 }, { -1, 1 } };
 
-    private boolean checkDiagonal(int i, WorldReference reference, int blockId) {
+    private boolean checkDiagonal(int i, WorldReference reference, Block blockId) {
 
         int[] diagonal = diagonals[i % 4];
-        int other = reference.world.getBlockId(reference.x + diagonal[0], reference.y, reference.z + diagonal[1]);
+        Block other = reference.world.getBlock(reference.x + diagonal[0], reference.y, reference.z + diagonal[1]);
         return other != blockId;
     }
 

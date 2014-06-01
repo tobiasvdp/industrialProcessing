@@ -1,15 +1,13 @@
 package mod.industrialProcessing.transport.fluids.models.block.pipe;
 
-import javax.swing.Icon;
-
 import mod.industrialProcessing.blockContainer.transport.ConnectionState;
 import mod.industrialProcessing.blockContainer.transport.IConnectedTile;
 import mod.industrialProcessing.client.rendering.block.ModelBlock;
 import mod.industrialProcessing.client.rendering.block.obj.BlockModelUtils;
 import mod.industrialProcessing.client.rendering.block.obj.wavefront.ObjRotator;
 import mod.industrialProcessing.client.rendering.block.obj.wavefront.WorldReference;
-import mod.industrialProcessing.transport.fluids.BlockTransportFluidsStone;
-import mod.industrialProcessing.transport.fluids.BlockTransportFluidsWood;
+import mod.industrialProcessing.transport.fluids.block.BlockTransportFluidsStone;
+import mod.industrialProcessing.transport.fluids.block.BlockTransportFluidsWood;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;

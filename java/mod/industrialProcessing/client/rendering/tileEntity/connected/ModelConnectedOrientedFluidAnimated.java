@@ -1,16 +1,15 @@
 package mod.industrialProcessing.client.rendering.tileEntity.connected;
 
-import javax.swing.Icon;
-
 import mod.industrialProcessing.blockContainer.transport.ConnectionState;
 import mod.industrialProcessing.utils.rotation.IRotateableEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class ModelConnectedOrientedFluidAnimated extends ModelConnectedFluidAnimated {
 
 	@Override
-	public void renderModelConnectedFluidAnimated(TileEntity tl, float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, Icon icon, float[] animation) {
+	public void renderModelConnectedFluidAnimated(TileEntity tl, float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, IIcon icon, float[] animation) {
 		ForgeDirection forward = ForgeDirection.UNKNOWN;
 		if (tl instanceof IRotateableEntity) {
 			IRotateableEntity rotate = (IRotateableEntity) tl;
@@ -63,5 +62,5 @@ public abstract class ModelConnectedOrientedFluidAnimated extends ModelConnected
 
 	protected abstract void renderModelConnectedOrientedAnimated(TileEntity tl, float f, ForgeDirection forward, ConnectionState front, ConnectionState right, ConnectionState back, ConnectionState left, ConnectionState up, ConnectionState down, float[] animation);
 
-	protected abstract void renderModelConnectedOrientedFluidAnimated(TileEntity tl, float f, ForgeDirection forward, ConnectionState front, ConnectionState right, ConnectionState back, ConnectionState left, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, Icon icon, float[] animation);
+	protected abstract void renderModelConnectedOrientedFluidAnimated(TileEntity tl, float f, ForgeDirection forward, ConnectionState front, ConnectionState right, ConnectionState back, ConnectionState left, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, IIcon icon, float[] animation);
 }

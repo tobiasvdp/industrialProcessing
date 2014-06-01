@@ -2,16 +2,15 @@ package mod.industrialProcessing.client.rendering.block.obj;
 
 import java.util.List;
 
-import javax.swing.Icon;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
 public class BlockModelUtils {
 
-    public static void getStoneSubBlocks(Block par1, net.minecraft.creativetab.CreativeTabs par2CreativeTabs, List par3List) {
+    public static void getStoneSubBlocks(Item par1, net.minecraft.creativetab.CreativeTabs par2CreativeTabs, List par3List) {
         par3List.add(new ItemStack(par1, 1, 0)); // smoothstone
         par3List.add(new ItemStack(par1, 1, 1)); // cobblestone
         par3List.add(new ItemStack(par1, 1, 2)); // mossy cobblestone
@@ -25,7 +24,7 @@ public class BlockModelUtils {
         par3List.add(new ItemStack(par1, 1, 10)); // chiseled quartz
     };
 
-    public static void getWoodSubBlocks(Block par1, net.minecraft.creativetab.CreativeTabs par2CreativeTabs, List par3List) {
+    public static void getWoodSubBlocks(Item par1, net.minecraft.creativetab.CreativeTabs par2CreativeTabs, List par3List) {
         par3List.add(new ItemStack(par1, 1, 0)); // spruce
         par3List.add(new ItemStack(par1, 1, 1)); // oak
         par3List.add(new ItemStack(par1, 1, 2)); // birch

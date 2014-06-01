@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import mod.industrialProcessing.blockContainer.TileEntityBlockContainerIP;
-import mod.industrialProcessing.plants.transport.ConveyorBeltPowerInput.TileEntityConveyorBeltPowerInput;
+import mod.industrialProcessing.plants.transport.items.ConveyorBeltPowerInput.TileEntityConveyorBeltPowerInput;
 import mod.industrialProcessing.utils.connections.ConnectedTileUtils;
 import mod.industrialProcessing.utils.rotation.LocalDirection;
 import net.minecraft.entity.Entity;

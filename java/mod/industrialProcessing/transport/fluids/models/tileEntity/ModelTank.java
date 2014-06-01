@@ -1,12 +1,10 @@
 package mod.industrialProcessing.transport.fluids.models.tileEntity;
 
-import ip.industrialProcessing.client.render.ConnectionState;
-import ip.industrialProcessing.client.render.ModelConnectedFluid;
-
-import javax.swing.Icon;
-
+import mod.industrialProcessing.blockContainer.transport.ConnectionState;
+import mod.industrialProcessing.client.rendering.tileEntity.connected.ModelConnectedFluid;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 
 import org.lwjgl.opengl.GL11;
 
@@ -22,12 +20,12 @@ public class ModelTank extends ModelConnectedFluid {
     }
 
     @Override
-    public void renderModelConnectedFluid(TileEntity tl, float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, Icon icon) {
+    public void renderModelConnectedFluid(TileEntity tl, float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, IIcon icon) {
         if (tankSlot == 0) {
             int bottom = down == ConnectionState.CONNECTED ? 0 : 1;
             int top = up == ConnectionState.CONNECTED ? 0 : 1;
 
-            int lightLevel = tl.blockType.getMixedBrightnessForBlock(tl.worldObj, tl.xCoord, tl.yCoord, tl.zCoord);
+            int lightLevel = tl.blockType.getMixedBrightnessForBlock(tl.getWorldObj(), tl.xCoord, tl.yCoord, tl.zCoord);
             float x = -6f;
             float z = -6f;
             float depth = (16 - bottom - top) * (1 - fluidPercentage);

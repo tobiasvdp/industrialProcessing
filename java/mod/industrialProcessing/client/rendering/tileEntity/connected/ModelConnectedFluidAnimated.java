@@ -1,12 +1,11 @@
 package mod.industrialProcessing.client.rendering.tileEntity.connected;
 
-import javax.swing.Icon;
-
 import mod.industrialProcessing.blockContainer.transport.ConnectionState;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 
 public abstract class ModelConnectedFluidAnimated extends ModelConnectedFluid {
-	public abstract void renderModelConnectedFluidAnimated(TileEntity tl, float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, Icon icon, float[] animation);
+	public abstract void renderModelConnectedFluidAnimated(TileEntity tl, float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, IIcon icon, float[] animation);
 
 	public abstract void renderModelConnectedAnimated(TileEntity tl, float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down, float[] animation);
 
@@ -16,7 +15,7 @@ public abstract class ModelConnectedFluidAnimated extends ModelConnectedFluid {
 	}
 
 	@Override
-	public void renderModelConnectedFluid(TileEntity tl, float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, Icon icon) {
+	public void renderModelConnectedFluid(TileEntity tl, float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, IIcon icon) {
 		renderModelConnectedFluidAnimated(null, f, north, east, south, west, up, down, tankSlot, fluidPercentage, icon, null);
 	}
 }

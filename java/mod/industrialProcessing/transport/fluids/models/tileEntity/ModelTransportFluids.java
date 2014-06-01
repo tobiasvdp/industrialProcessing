@@ -1,12 +1,12 @@
 package mod.industrialProcessing.transport.fluids.models.tileEntity;
 
-import ip.industrialProcessing.client.render.ConnectionState;
-import ip.industrialProcessing.client.render.ModelConnectedFluid;
-
 import javax.swing.Icon;
 
+import mod.industrialProcessing.blockContainer.transport.ConnectionState;
+import mod.industrialProcessing.client.rendering.tileEntity.connected.ModelConnectedFluid;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 
 import org.lwjgl.opengl.GL11;
 
@@ -18,11 +18,11 @@ public class ModelTransportFluids extends ModelConnectedFluid {
 	}
 
 	@Override
-	public void renderModelConnectedFluid(TileEntity tl, float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, Icon icon) {
+	public void renderModelConnectedFluid(TileEntity tl, float f, ConnectionState north, ConnectionState east, ConnectionState south, ConnectionState west, ConnectionState up, ConnectionState down, int tankSlot, float fluidPercentage, IIcon icon) {
 		fluidPercentage *= 0.9f; 
 		Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
-        int lightLevel = tl.blockType.getMixedBrightnessForBlock(tl.worldObj, tl.xCoord, tl.yCoord, tl.zCoord);
+        int lightLevel = tl.blockType.getMixedBrightnessForBlock(tl.getWorldObj(), tl.xCoord, tl.yCoord, tl.zCoord);
         tessellator.setBrightness(lightLevel); 
         tessellator.setColorOpaque(255, 255, 255);  
         GL11.glEnable(GL11.GL_BLEND); 
@@ -61,7 +61,7 @@ public class ModelTransportFluids extends ModelConnectedFluid {
 		GL11.glDisable(GL11.GL_BLEND);
 	}
 
-	private void renderUp(float f, Icon icon, float s) {
+	private void renderUp(float f, IIcon icon, float s) {
 		drawXPlane(f, -2f * s, 8, -2f * s, 4 * s, 8 - 3f * s, icon);
 		drawXPlane(f, 2f * s, 8, 2f * s, -4 * s, 8 - 3f * s, icon);
 		drawZPlane(f, 2f * s, 8, -2f * s, -4 * s, 8 - 3f * s, icon);
@@ -71,7 +71,7 @@ public class ModelTransportFluids extends ModelConnectedFluid {
 		drawYPlane(f, 2f * s, 16f - 3f * s, -2f * s, -4f * s, 4f * s, icon);
 	}
 
-	private void renderDown(float f, Icon icon, float s) {
+	private void renderDown(float f, IIcon icon, float s) {
 		drawXPlane(f, -2f * s, 16f + 3f * s, -2f * s, 4 * s, 8 - 3f * s, icon);
 		drawXPlane(f, 2f * s, 16f + 3f * s, 2f * s, -4 * s, 8 - 3f * s, icon);
 		drawZPlane(f, 2f * s, 16f + 3f * s, -2f * s, -4 * s, 8 - 3f * s, icon);
@@ -81,7 +81,7 @@ public class ModelTransportFluids extends ModelConnectedFluid {
 		drawYPlane(f, 2f * s, 24f, -2f * s, -4f * s, 4f * s, icon);
 	}
 
-	private void renderNorth(float f, Icon icon, float s) {
+	private void renderNorth(float f, IIcon icon, float s) {
 		drawXPlane(f, -2f * s, 16f - 2f * s, -8f, 8 - 3f * s, 4f * s, icon);
 		drawXPlane(f, 2f * s, 16f + 2f * s, -8f, 8 - 3f * s, -4f * s, icon);
 		drawYPlane(f, 2f * s, 16f - 2f * s, -3f * s, -4f * s, -8 + 3f * s, icon);
@@ -91,7 +91,7 @@ public class ModelTransportFluids extends ModelConnectedFluid {
 		drawZPlane(f, 2f * s, 16f + 2f * s, -3f * s, -4f * s, -4f * s, icon);
 	}
 
-	private void renderSouth(float f, Icon icon, float s) {
+	private void renderSouth(float f, IIcon icon, float s) {
 		drawXPlane(f, -2f * s, 16f - 2f * s, 3f * s, 8 - 3f * s, 4f * s, icon);
 		drawXPlane(f, 2f * s, 16f + 2f * s, 3f * s, 8 - 3f * s, -4f * s, icon);
 		drawYPlane(f, 2f * s, 16f - 2f * s, 8f, -4f * s, -8 + 3f * s, icon);
@@ -101,7 +101,7 @@ public class ModelTransportFluids extends ModelConnectedFluid {
 		drawZPlane(f, 2f * s, 16f + 2f * s, 8f, -4f * s, -4f * s, icon);
 	}
 
-	private void renderEast(float f, Icon icon, float s) {
+	private void renderEast(float f, IIcon icon, float s) {
 		drawYPlane(f, -8, 16f - 2f * s, -2f * s, 8 - 3f * s, 4 * s, icon);
 		drawYPlane(f, -8, 16f + 2f * s, 2f * s, 8 - 3f * s, -4 * s, icon);
 		drawZPlane(f, -8f, 16f - 2f * s, 2f * s, 8 - 3f * s, 4 * s, icon);
@@ -111,7 +111,7 @@ public class ModelTransportFluids extends ModelConnectedFluid {
 		drawXPlane(f, -3f * s, 16f + 2f * s, -2f * s, 4f * s, -4f * s, icon);
 	}
 
-	private void renderWest(float f, Icon icon, float s) {
+	private void renderWest(float f, IIcon icon, float s) {
 		drawYPlane(f, 3f * s, 16f - 2f * s, -2f * s, 8 - 3f * s, 4 * s, icon);
 		drawYPlane(f, 3f * s, 16f + 2f * s, 2f * s, 8 - 3f * s, -4 * s, icon);
 		drawZPlane(f, 3f * s, 16f - 2f * s, 2f * s, 8 - 3f * s, 4 * s, icon);
@@ -121,7 +121,7 @@ public class ModelTransportFluids extends ModelConnectedFluid {
 		drawXPlane(f, 8f, 16f + 2f * s, -2f * s, 4f * s, -4f * s, icon);
 	}
 
-	private void renderCap(float f, Icon icon, float s) {
+	private void renderCap(float f, IIcon icon, float s) {
 		drawXPlane(f, -3f * s, 16f - 3f * s, -3f * s, 6f * s, 6f * s, icon);
 		drawXPlane(f, 3f * s, 16f - 3f * s, 3f * s, -6f * s, 6f * s, icon);
 		drawZPlane(f, 3f * s, 16f - 3f * s, -3f * s, -6f * s, 6f * s, icon);
@@ -131,7 +131,7 @@ public class ModelTransportFluids extends ModelConnectedFluid {
 		drawYPlane(f, 3f * s, 16f + 3f * s, -3f * s, -6f * s, 6f * s, icon);
 	}
 
-	private void renderStraightY(float f, Icon icon, float s) {
+	private void renderStraightY(float f, IIcon icon, float s) {
 		drawXPlane(f, -2f * s, 8f, -2f * s, 4 * s, 16, icon);
 		drawXPlane(f, 2f * s, 8f, 2f * s, -4 * s, 16, icon);
 		drawZPlane(f, 2f * s, 8f, -2f * s, -4 * s, 16, icon);
@@ -141,7 +141,7 @@ public class ModelTransportFluids extends ModelConnectedFluid {
 		drawYPlane(f, 2f * s, 24, -2f * s, -4f * s, 4f * s, icon);
 	}
 
-	private void renderStraightZ(float f, Icon icon, float s) {
+	private void renderStraightZ(float f, IIcon icon, float s) {
 		drawXPlane(f, -2f * s, 16f - 2f * s, -8f, 16, 4f * s, icon);
 		drawXPlane(f, 2f * s, 16f + 2f * s, -8f, 16, -4f * s, icon);
 		drawYPlane(f, 2 * s, 16f - 2f * s, 8, -4f * s, -16, icon);
@@ -151,7 +151,7 @@ public class ModelTransportFluids extends ModelConnectedFluid {
 		drawZPlane(f, 2f * s, 16f + 2f * s, 8f, -4f * s, -4f * s, icon);
 	}
 
-	private void renderStraightX(float f, Icon icon, float s) {
+	private void renderStraightX(float f, IIcon icon, float s) {
 		drawYPlane(f, -8, 16f - 2f * s, -2f * s, 16, 4 * s, icon);
 		drawYPlane(f, -8, 16f + 2f * s, 2f * s, 16, -4 * s, icon);
 		drawZPlane(f, -8f, 16f - 2f * s, 2f * s, 16, 4 * s, icon);
@@ -161,7 +161,7 @@ public class ModelTransportFluids extends ModelConnectedFluid {
 		drawXPlane(f, 8f, 16f + 2f * s, -2f * s, 4f * s, -4f * s, icon);
 	}
 
-	private void drawYPlane(float f, float x, float y, float z, float width, float height, Icon icon) {
+	private void drawYPlane(float f, float x, float y, float z, float width, float height, IIcon icon) {
 		Tessellator tessellator = Tessellator.instance;
 
 		float uSize = (icon.getMaxU() - icon.getMinU());
@@ -182,7 +182,7 @@ public class ModelTransportFluids extends ModelConnectedFluid {
 		
 	}
 
-	private void drawZPlane(float f, float x, float y, float z, float width, float height, Icon icon) {
+	private void drawZPlane(float f, float x, float y, float z, float width, float height, IIcon icon) {
 		Tessellator tessellator = Tessellator.instance;
 
 		float uSize = (icon.getMaxU() - icon.getMinU());
@@ -203,7 +203,7 @@ public class ModelTransportFluids extends ModelConnectedFluid {
 		
 	}
 
-	private void drawXPlane(float f, float x, float y, float z, float width, float height, Icon icon) {
+	private void drawXPlane(float f, float x, float y, float z, float width, float height, IIcon icon) {
 		Tessellator tessellator = Tessellator.instance;
 
 		float uSize = (icon.getMaxU() - icon.getMinU());

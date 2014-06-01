@@ -16,8 +16,8 @@ import net.minecraft.world.World;
 
 public abstract class BlockTransport extends BlockContainerIPRendered {
 
-	public BlockTransport(float hardness, float resistance, Material material, SoundType soundtype) {
-		super(hardness, resistance, material, soundtype);
+	public BlockTransport(float hardness, float resistance, Material material, SoundType soundtype, String... iconNames) {
+		super(hardness, resistance, material, soundtype, iconNames);
 	}
 
 
