@@ -1,6 +1,6 @@
-package ip.industrialProcessing.multiblock.dummy.block.containerWall;
+package mod.industrialProcessing.blockContainer.multiblock.dummy.block.containerWall;
 
-import ip.industrialProcessing.multiblock.dummy.extend.TileEntityMultiblockDummyInv;
+import mod.industrialProcessing.blockContainer.multiblock.dummy.extend.TileEntityMultiblockDummyInv;
 
 public class TileEntityContainerWall extends TileEntityMultiblockDummyInv {
 	public TileEntityContainerWall() {

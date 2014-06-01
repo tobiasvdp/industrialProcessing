@@ -1,4 +1,4 @@
-package ip.industrialProcessing.multiblock.layout;
+package mod.industrialProcessing.blockContainer.multiblock.layout;
 
 public final class LayoutTransformer {
 

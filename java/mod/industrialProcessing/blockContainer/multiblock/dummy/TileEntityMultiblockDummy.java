@@ -1,15 +1,17 @@
-package ip.industrialProcessing.multiblock.dummy;
+package mod.industrialProcessing.blockContainer.multiblock.dummy;
 
-import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
-import ip.industrialProcessing.multiblock.layout.FacingDirection;
-import ip.industrialProcessing.multiblock.tier.Tiers;
-import ip.industrialProcessing.multiblock.utils.MultiblockState;
+import mod.industrialProcessing.blockContainer.TileEntityBlockContainerIP;
+import mod.industrialProcessing.blockContainer.multiblock.core.TileEntityMultiblockCore;
+import mod.industrialProcessing.blockContainer.multiblock.layout.FacingDirection;
+import mod.industrialProcessing.blockContainer.multiblock.tier.Tiers;
+import mod.industrialProcessing.blockContainer.multiblock.utils.MultiblockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.Packet;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityMultiblockDummy extends TileEntity implements ITileEntityMultiblockDummy {
+public class TileEntityMultiblockDummy extends TileEntityBlockContainerIP implements ITileEntityMultiblockDummy {
 	public void setModelID(int modelID) {
 		this.modelID = modelID;
 	}
@@ -30,12 +32,12 @@ public class TileEntityMultiblockDummy extends TileEntity implements ITileEntity
 	protected FacingDirection side = FacingDirection.North;
 
 	public TileEntityMultiblockDummy() {
-
+		canRotate = false;
 	}
 
 	public TileEntityMultiblockCore getCore() {
 		if (loadedFromNBT) {
-			core = (TileEntityMultiblockCore) worldObj.getBlockTileEntity(coreDataFromNBT[0], coreDataFromNBT[1], coreDataFromNBT[2]);
+			core = (TileEntityMultiblockCore) worldObj.getTileEntity(coreDataFromNBT[0], coreDataFromNBT[1], coreDataFromNBT[2]);
 			loadedFromNBT = false;
 		}
 		return core;
@@ -106,39 +108,39 @@ public class TileEntityMultiblockDummy extends TileEntity implements ITileEntity
 	};
 
 	private void readCore(NBTTagCompound nbt) {
-		NBTTagList nbttaglist = nbt.getTagList("Data");
+		NBTTagList nbttaglist = nbt.getTagList("Data",10);
 
-		NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(0);
+		NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.getCompoundTagAt(0);
 		modelConnection = nbttagcompound1.getInteger("modelConnection");
 
-		nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(1);
+		nbttagcompound1 = (NBTTagCompound) nbttaglist.getCompoundTagAt(1);
 		modelID = nbttagcompound1.getInteger("modelID");
 
-		nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(2);
+		nbttagcompound1 = (NBTTagCompound) nbttaglist.getCompoundTagAt(2);
 		ID = nbttagcompound1.getInteger("ID");
 
-		nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(3);
+		nbttagcompound1 = (NBTTagCompound) nbttaglist.getCompoundTagAt(3);
 		state = MultiblockState.values()[nbttagcompound1.getInteger("state")];
 
-		nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(4);
+		nbttagcompound1 = (NBTTagCompound) nbttaglist.getCompoundTagAt(4);
 		needRenderUpdate = nbttagcompound1.getBoolean("needRenderUpdate");
 
-		nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(5);
+		nbttagcompound1 = (NBTTagCompound) nbttaglist.getCompoundTagAt(5);
 		groupID = nbttagcompound1.getInteger("groupID");
 
-		nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(6);
+		nbttagcompound1 = (NBTTagCompound) nbttaglist.getCompoundTagAt(6);
 		side = FacingDirection.values()[nbttagcompound1.getInteger("forward")];
 
-		nbttaglist = nbt.getTagList("Core");
+		nbttaglist = nbt.getTagList("Core",10);
 
 		if (nbttaglist.tagCount() != 0) {
-			nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(0);
+			nbttagcompound1 = (NBTTagCompound) nbttaglist.getCompoundTagAt(0);
 			int x = nbttagcompound1.getInteger("x");
 
-			nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(1);
+			nbttagcompound1 = (NBTTagCompound) nbttaglist.getCompoundTagAt(1);
 			int y = nbttagcompound1.getInteger("y");
 
-			nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(2);
+			nbttagcompound1 = (NBTTagCompound) nbttaglist.getCompoundTagAt(2);
 			int z = nbttagcompound1.getInteger("z");
 
 			loadedFromNBT = true;
@@ -151,7 +153,7 @@ public class TileEntityMultiblockDummy extends TileEntity implements ITileEntity
 	public boolean searchForCore() {
 		if (getCore() == null) {
 			for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-				TileEntity neighbour = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+				TileEntity neighbour = worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
 				if (neighbour instanceof TileEntityMultiblockDummy) {
 					TileEntityMultiblockDummy te = (TileEntityMultiblockDummy) neighbour;
 					if (te.getCore() != null) {
@@ -185,7 +187,7 @@ public class TileEntityMultiblockDummy extends TileEntity implements ITileEntity
 
 	protected void notifyNeighboursOfCoreSet() {
 		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-			TileEntity neighbour = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+			TileEntity neighbour = worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
 			if (neighbour instanceof TileEntityMultiblockDummy) {
 				TileEntityMultiblockDummy te = (TileEntityMultiblockDummy) neighbour;
 				if (te.getCore() == null)
@@ -221,7 +223,7 @@ public class TileEntityMultiblockDummy extends TileEntity implements ITileEntity
 	public void updateEntity() {
 		super.updateEntity();
 		if (needRenderUpdate) {
-			this.worldObj.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+			this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 			needRenderUpdate = false;
 		}
 		super.updateEntity();
@@ -266,18 +268,6 @@ public class TileEntityMultiblockDummy extends TileEntity implements ITileEntity
 
 	public int getID() {
 		return ID;
-	}
-
-	@Override
-	public Packet getDescriptionPacket() {
-		NBTTagCompound nbtTag = new NBTTagCompound();
-		this.writeToNBT(nbtTag);
-		return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 1, nbtTag);
-	}
-
-	@Override
-	public void onDataPacket(INetworkManager net, Packet132TileEntityData packet) {
-		readFromNBT(packet.data);
 	}
 
 	@Override

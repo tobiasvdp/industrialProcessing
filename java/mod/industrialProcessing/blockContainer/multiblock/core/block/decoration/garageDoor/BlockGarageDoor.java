@@ -1,46 +1,22 @@
-package ip.industrialProcessing.multiblock.core.block.decoration.garageDoor;
-
-import ip.industrialProcessing.api.config.INamepace;
-import ip.industrialProcessing.config.ConfigMachineBlocks;
-import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.config.ISetupItems;
-import ip.industrialProcessing.multiblock.core.BlockMultiblockCore;
-import ip.industrialProcessing.utils.IDescriptionBlock;
+package mod.industrialProcessing.blockContainer.multiblock.core.block.decoration.garageDoor;
 
 import javax.swing.Icon;
 
+import mod.industrialProcessing.blockContainer.multiblock.core.BlockMultiblockCore;
+import mod.industrialProcessing.items.ISetupItems;
+import mod.industrialProcessing.utils.INamepace;
+import mod.industrialProcessing.utils.block.IDescriptionBlock;
+import mod.industrialProcessing.utils.creativeTab.ISetupCreativeTabs;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class BlockGarageDoor extends BlockMultiblockCore implements IDescriptionBlock{
-	private Icon[] icons = new Icon[4];
 
 	public BlockGarageDoor() {
-		super(ConfigMachineBlocks.getBlockGarageDoorID(), "BlockGarageDoor", ISetupCreativeTabs.tabMultiblocks);
+		super(1.0f,1.0f,Material.iron,soundTypeMetal, "blockGarageFrame");
 	}
-
-	@Override
-	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityGarageDoor();
-	}
-
-	@Override
-	public int getRenderType() {
-		return ConfigRenderers.getRendererGarageDoorFrame();
-	}
-	
-    @Override
-    public Icon getIcon(int par1, int par2) {
-        par1 %= icons.length;        
-        return icons[par1];
-    }
-
-    @Override
-    public void registerIcons(IconRegister par1IconRegister) {
-        icons [0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "blockGarageFrame");
-    }
 
 	@Override
 	public String getDescription() {
@@ -49,7 +25,7 @@ public class BlockGarageDoor extends BlockMultiblockCore implements IDescription
 	
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
-    	if(player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().itemID == ISetupItems.itemRemote.itemID)
+    	if(player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().equals(ISetupItems.itemRemote))
     		return false;
 		return super.onBlockActivated(world, x, y, z, player, metadata, what, these, are);
 	}

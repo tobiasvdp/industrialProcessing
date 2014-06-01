@@ -1,6 +1,6 @@
-package ip.industrialProcessing.multiblock.utils.inventory;
+package mod.industrialProcessing.blockContainer.multiblock.utils.inventory;
 
-import ip.industrialProcessing.machines.MachineItemStack;
+import mod.industrialProcessing.utils.inventory.itemstack.MachineItemStack;
 import net.minecraft.item.ItemStack;
 
 public class MultiblockItemStack extends MachineItemStack implements IMultiblockItemStack{

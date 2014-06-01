@@ -1,28 +1,28 @@
-package ip.industrialProcessing.multiblock.core.block.decoration.garageDoor;
-
-import ip.industrialProcessing.config.ISetupMachineBlocks;
-import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
-import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
-import ip.industrialProcessing.multiblock.dummy.block.controlBox.IControlBoxReceiver;
-import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.TileEntityGarageDoorDoor;
-import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.TileEntityGarageDoorFrame;
-import ip.industrialProcessing.multiblock.dummy.block.decoration.garageDoor.entity.EntityGarageDoor;
-import ip.industrialProcessing.multiblock.layout.FacingDirection;
-import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
-import ip.industrialProcessing.multiblock.layout.LayoutTransformer;
-import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
-import ip.industrialProcessing.multiblock.tier.Tier;
-import ip.industrialProcessing.multiblock.tier.TierCollection;
-import ip.industrialProcessing.multiblock.tier.Tiers;
-import ip.industrialProcessing.utils.IRemote;
-import ip.industrialProcessing.utils.ISender;
-import ip.industrialProcessing.utils.handler.packets.PacketHandler;
+package mod.industrialProcessing.blockContainer.multiblock.core.block.decoration.garageDoor;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import sun.org.mozilla.javascript.internal.ast.Block;
+import mod.industrialProcessing.IndustrialProcessing;
+import mod.industrialProcessing.blockContainer.multiblock.core.TileEntityMultiblockCore;
+import mod.industrialProcessing.blockContainer.multiblock.dummy.TileEntityMultiblockDummy;
+import mod.industrialProcessing.blockContainer.multiblock.dummy.block.controlBox.IControlBoxReceiver;
+import mod.industrialProcessing.blockContainer.multiblock.dummy.block.decoration.garageDoor.TileEntityGarageDoorDoor;
+import mod.industrialProcessing.blockContainer.multiblock.dummy.block.decoration.garageDoor.TileEntityGarageDoorFrame;
+import mod.industrialProcessing.blockContainer.multiblock.dummy.block.decoration.garageDoor.entity.EntityGarageDoor;
+import mod.industrialProcessing.blockContainer.multiblock.layout.FacingDirection;
+import mod.industrialProcessing.blockContainer.multiblock.layout.LayoutMultiblock;
+import mod.industrialProcessing.blockContainer.multiblock.layout.LayoutTransformer;
+import mod.industrialProcessing.blockContainer.multiblock.layout.StructureMultiblock;
+import mod.industrialProcessing.blockContainer.multiblock.tier.Tier;
+import mod.industrialProcessing.blockContainer.multiblock.tier.TierCollection;
+import mod.industrialProcessing.blockContainer.multiblock.tier.Tiers;
+import mod.industrialProcessing.utils.handlers.packet.PacketHandler;
+import mod.industrialProcessing.utils.handlers.wireless.IRemote;
+import mod.industrialProcessing.utils.handlers.wireless.ISender;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -39,11 +39,11 @@ public class TileEntityGarageDoor extends TileEntityMultiblockCore implements IS
 		LayoutMultiblock layout = new LayoutMultiblock(0, 10, 0, 0, 0, 0);
 
 		int i = 0;
-		layout.setCoreID(i++, 0, 1, ISetupMachineBlocks.blockGarageDoor.blockID);
+		layout.setCoreID(i++, 0, 1, IndustrialProcessing.blockGarageDoor);
 
-		layout.setBlockID(1, 0, 0, i++, 0, 1, ISetupMachineBlocks.blockGarageDoorFrame.blockID);
+		layout.setBlockID(1, 0, 0, i++, 0, 1, IndustrialProcessing.blockGarageDoorFrame);
 		for (int j = 2; j <= 10; j++)
-			layout.setBlockID(j, 0, 0, i++, 0, 1, ISetupMachineBlocks.blockGarageDoorFrame.blockID, -1);
+			layout.setBlockID(j, 0, 0, i++, 0, 1, IndustrialProcessing.blockGarageDoorFrame, -1);
 
 		structure.addLayout(layout, FacingDirection.North);
 		structure.addLayout(LayoutTransformer.transform(layout, FacingDirection.East), FacingDirection.East);
@@ -197,7 +197,7 @@ public class TileEntityGarageDoor extends TileEntityMultiblockCore implements IS
 		boolean cont = true;
 		while (cont) {
 			height++;
-			if (this.worldObj.getBlockId(xCoord, yCoord - height, zCoord) != 0 && this.worldObj.getBlockId(xCoord, yCoord - height, zCoord) != ISetupMachineBlocks.blockGarageDoorDoor.blockID) {
+			if (this.worldObj.getBlock(xCoord, yCoord - height, zCoord) != 0 && this.worldObj.getBlock(xCoord, yCoord - height, zCoord) != ISetupMachineBlocks.blockGarageDoorDoor.blockID) {
 				height--;
 				cont = false;
 			}
@@ -214,10 +214,10 @@ public class TileEntityGarageDoor extends TileEntityMultiblockCore implements IS
 			int height = getHeight();
 			if (height > 0) {
 				for (int i = 1; i <= height; i++) {
-					if (this.worldObj.getBlockId(xCoord, yCoord - i, zCoord) != ISetupMachineBlocks.blockGarageDoorDoor.blockID) {
-						this.worldObj.setBlock(xCoord, yCoord - i, zCoord, ISetupMachineBlocks.blockGarageDoorDoor.blockID);
+					if (this.worldObj.getBlock(xCoord, yCoord - i, zCoord) != IndustrialProcessing.blockGarageDoorDoor) {
+						this.worldObj.setBlock(xCoord, yCoord - i, zCoord, IndustrialProcessing.blockGarageDoorDoor);
 					}
-					((TileEntityGarageDoorDoor) this.worldObj.getBlockTileEntity(xCoord, yCoord - i, zCoord)).setForwardDirection(getForwardDirection());
+					((TileEntityGarageDoorDoor) this.worldObj.getTileEntity(xCoord, yCoord - i, zCoord)).setForwardDirection(getForwardDirection());
 					doors.add(new int[] { xCoord, yCoord - i, zCoord });
 				}
 			}
@@ -230,8 +230,8 @@ public class TileEntityGarageDoor extends TileEntityMultiblockCore implements IS
 			int x = xyz[0];
 			int y = xyz[1];
 			int z = xyz[2];
-			int id = this.worldObj.getBlockId(x, y, z);
-			if (id == ISetupMachineBlocks.blockGarageDoorDoor.blockID) {
+			Block id = this.worldObj.getBlock(x, y, z);
+			if (id.equals(ISetupMachineBlocks.blockGarageDoorDoor)) {
 				this.worldObj.setBlockToAir(x, y, z);
 			}
 		}
@@ -307,8 +307,8 @@ public class TileEntityGarageDoor extends TileEntityMultiblockCore implements IS
 
 	private void hideGarageDoor(ArrayList<int[]> doors2) {
 		for (int i = 0; i < doors2.size(); i++) {
-			if (worldObj.getBlockTileEntity(doors2.get(i)[0], doors2.get(i)[1], doors2.get(i)[2]) != null) {
-				TileEntityGarageDoorDoor te = (TileEntityGarageDoorDoor) worldObj.getBlockTileEntity(doors2.get(i)[0], doors2.get(i)[1], doors2.get(i)[2]);
+			if (worldObj.getTileEntity(doors2.get(i)[0], doors2.get(i)[1], doors2.get(i)[2]) != null) {
+				TileEntityGarageDoorDoor te = (TileEntityGarageDoorDoor) worldObj.getTileEntity(doors2.get(i)[0], doors2.get(i)[1], doors2.get(i)[2]);
 				te.hide();
 			}
 		}

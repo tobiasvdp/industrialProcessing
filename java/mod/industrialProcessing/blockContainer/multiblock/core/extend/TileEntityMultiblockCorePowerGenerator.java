@@ -1,11 +1,11 @@
-package ip.industrialProcessing.multiblock.core.extend;
+package mod.industrialProcessing.blockContainer.multiblock.core.extend;
 
-import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
-import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
-import ip.industrialProcessing.multiblock.tier.TierCollection;
-import ip.industrialProcessing.power.IPowerOutput;
-import ip.industrialProcessing.power.IPowerProducer;
-import ip.industrialProcessing.power.PowerDistributorManager;
+import mod.industrialProcessing.blockContainer.multiblock.core.TileEntityMultiblockCore;
+import mod.industrialProcessing.blockContainer.multiblock.layout.StructureMultiblock;
+import mod.industrialProcessing.blockContainer.multiblock.tier.TierCollection;
+import mod.industrialProcessing.power.network.IPowerOutput;
+import mod.industrialProcessing.power.network.IPowerProducer;
+import mod.industrialProcessing.power.network.PowerDistributorManager;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 

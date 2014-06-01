@@ -1,6 +1,6 @@
-package ip.industrialProcessing.multiblock.core.block.plants.storage.container.model;
-import ip.industrialProcessing.api.rendering.wavefront.ObjMesh;
-import ip.industrialProcessing.api.rendering.wavefront.ObjQuad;
+package mod.industrialProcessing.blockContainer.multiblock.core.block.plants.storage.container.model;
+import mod.industrialProcessing.client.rendering.block.obj.wavefront.ObjMesh;
+import mod.industrialProcessing.client.rendering.block.obj.wavefront.ObjQuad;
 
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector2f;

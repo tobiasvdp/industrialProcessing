@@ -1,7 +1,8 @@
-package ip.industrialProcessing.multiblock.layout;
+package mod.industrialProcessing.blockContainer.multiblock.layout;
 
-import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
-import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
+import mod.industrialProcessing.blockContainer.multiblock.core.TileEntityMultiblockCore;
+import mod.industrialProcessing.blockContainer.multiblock.dummy.TileEntityMultiblockDummy;
+import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -31,15 +32,15 @@ public class LayoutMultiblock {
 		sizeFront = blocksFront;
 	}
 
-	public void setCoreID(int ID, int modelID, int renderConnection, int blockID) {
+	public void setCoreID(int ID, int modelID, int renderConnection, Block blockID) {
 		layout[xCore][yCore][zCore] = new LayoutBlockDescription(ID, modelID, renderConnection,0, blockID);
 	}
 
-	public void setBlockID(int i, int j, int k,int ID, int renderID, int renderConnection, int... blockIDs) {
+	public void setBlockID(int i, int j, int k,int ID, int renderID, int renderConnection, Block... blockIDs) {
 		layout[i + xCore][j + yCore][-k + zCore] = new LayoutBlockDescription(ID, renderID, renderConnection,0, blockIDs);
 	}
 	
-	public void setBlockIDwithGroup(int i, int j, int k,int ID, int renderID, int renderConnection,int groupID, int... blockIDs) {
+	public void setBlockIDwithGroup(int i, int j, int k,int ID, int renderID, int renderConnection,int groupID, Block... blockIDs) {
 		layout[i + xCore][j + yCore][-k + zCore] = new LayoutBlockDescription(ID, renderID, renderConnection,groupID, blockIDs);
 	}
 
@@ -64,7 +65,7 @@ public class LayoutMultiblock {
 	}
 
 	// i,j,k = coord - coord core
-	public boolean isBlockValid(int i, int j, int k, int blockID) {
+	public boolean isBlockValid(int i, int j, int k, Block blockID) {
 		int x = i + xCore;
 		int y = j + yCore;
 		int z = -k + zCore;
@@ -85,15 +86,15 @@ public class LayoutMultiblock {
 					int yBlock = yCore - this.yCore + j;
 					int zBlock = zCore + this.zCore - k;
 					if (layout[i][j][k] != null) {
-						if (!layout[i][j][k].isValidID(world.getBlockId(xBlock, yBlock, zBlock))) {
+						if (!layout[i][j][k].isValidID(world.getBlock(xBlock, yBlock, zBlock))) {
 							return false;
 						}
-						TileEntity te = world.getBlockTileEntity(xBlock, yBlock, zBlock);
+						TileEntity te = world.getTileEntity(xBlock, yBlock, zBlock);
 						if (te instanceof TileEntityMultiblockDummy) {
 							TileEntityMultiblockCore teCore = ((TileEntityMultiblockDummy) te).getCore();
 							if (teCore == null)
 								return false;
-							if (teCore != world.getBlockTileEntity(xCore, yCore, zCore))
+							if (teCore != world.getTileEntity(xCore, yCore, zCore))
 								return false;
 						}
 					}

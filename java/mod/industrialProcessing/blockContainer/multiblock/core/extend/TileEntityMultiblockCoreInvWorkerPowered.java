@@ -1,18 +1,18 @@
-package ip.industrialProcessing.multiblock.core.extend;
+package mod.industrialProcessing.blockContainer.multiblock.core.extend;
 
-import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.machines.IPowerStorage;
-import ip.industrialProcessing.machines.PowerWorkerHelper;
-import ip.industrialProcessing.machines.SimplePowerStorage;
-import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
-import ip.industrialProcessing.multiblock.recipes.RecipeMultiblockWorker;
-import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
-import ip.industrialProcessing.multiblock.tier.TierCollection;
-import ip.industrialProcessing.power.IPoweredMachine;
-import ip.industrialProcessing.power.PowerHelper;
-import ip.industrialProcessing.recipes.IPowerRecipe;
-import ip.industrialProcessing.recipes.Recipe;
-import ip.industrialProcessing.utils.DirectionUtils;
+import mod.industrialProcessing.blockContainer.multiblock.layout.StructureMultiblock;
+import mod.industrialProcessing.blockContainer.multiblock.tier.TierCollection;
+import mod.industrialProcessing.power.network.IPowerStorage;
+import mod.industrialProcessing.power.network.IPoweredMachine;
+import mod.industrialProcessing.power.network.PowerHelper;
+import mod.industrialProcessing.power.network.PowerWorkerHelper;
+import mod.industrialProcessing.power.network.SimplePowerStorage;
+import mod.industrialProcessing.utils.rotation.DirectionUtils;
+import mod.industrialProcessing.utils.rotation.LocalDirection;
+import mod.industrialProcessing.work.recipe.IPowerRecipe;
+import mod.industrialProcessing.work.recipe.Recipe;
+import mod.industrialProcessing.work.recipe.RecipeMultiblockWorker;
+import mod.industrialProcessing.work.recipe.RecipesMultiblock;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 

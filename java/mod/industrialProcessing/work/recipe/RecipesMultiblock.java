@@ -1,9 +1,10 @@
-package ip.industrialProcessing.multiblock.recipes;
+package mod.industrialProcessing.work.recipe;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import net.minecraft.item.Item;
+import net.minecraftforge.fluids.Fluid;
 import mod.industrialProcessing.blockContainer.multiblock.tier.Tiers;
 
 public class RecipesMultiblock implements IMachineRecipes<RecipeMultiblock> {
@@ -28,13 +29,13 @@ public class RecipesMultiblock implements IMachineRecipes<RecipeMultiblock> {
 	return recipes.iterator();
     }
 
-    public boolean isValidFluidInput(int slot, int fluidId, Tiers tier) {
+    public boolean isValidFluidInput(int slot, Fluid fluidId, Tiers tier) {
 	for (Iterator<RecipeMultiblock> i = getRecipes(); i.hasNext();) {
 	    RecipeMultiblock recipe = i.next();
 	    for (RecipeInputSlot input : recipe.inputs) {
 		if (input.type != RecipeSlotType.TANK)
 		    continue;
-		if (input.index == slot && input.itemId == fluidId)
+		if (input.index == slot && input.fluid.equals(fluidId))
 		    if (recipe.tier == tier)
 			return true;
 	    }

@@ -2,7 +2,11 @@ package mod.industrialProcessing.blockContainer.multiblock.tier;
 
 import java.util.ArrayList;
 
+import mod.industrialProcessing.IndustrialProcessing;
+import mod.industrialProcessing.blockContainer.multiblock.core.TileEntityMultiblockCore;
+import mod.industrialProcessing.blockContainer.multiblock.dummy.TileEntityMultiblockDummy;
 import mod.industrialProcessing.blockContainer.multiblock.utils.MultiblockActionType;
+import net.minecraft.block.Block;
 
 public class Tier {
 
@@ -19,7 +23,7 @@ public class Tier {
 		blockpresent.add(new TierRequirement(ID));
 	}
 
-	public void setBlockIDPresent(int ID, int... blockid) {
+	public void setBlockIDPresent(int ID, Block... blockid) {
 		blockidpresent.add(new TierRequirement(ID, blockid));
 	}
 
@@ -50,14 +54,14 @@ public class Tier {
 		for (TierRequirement req : blockidpresent) {
 			boolean isValid = false;
 			TileEntityMultiblockDummy dummy = te.getDummyByID(req.getID());
-			int blockID = 0;
+			Block blockID = null;
 			if(dummy != null){
-				blockID = dummy.getBlockType().blockID;
+				blockID = dummy.getBlockType();
 			}
-			for (int id : req.getBlockIDs()) {
-				if (id == blockID)
+			for (Block id : req.getBlockIDs()) {
+				if (id.equals(blockID))
 					isValid = true;
-				if(id == -1)
+				if(id.equals(IndustrialProcessing.blocktransparent))
 					isValid = true;
 			}
 			

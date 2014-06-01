@@ -1,8 +1,8 @@
-package ip.industrialProcessing.multiblock.dummy;
+package mod.industrialProcessing.blockContainer.multiblock.dummy;
 
-import ip.industrialProcessing.machines.IRotateableEntity;
-import ip.industrialProcessing.multiblock.ITEmultiblock;
+import mod.industrialProcessing.blockContainer.multiblock.IMultiblock;
+import mod.industrialProcessing.utils.rotation.IRotateableEntity;
 
-public interface ITileEntityMultiblockDummy extends ITEmultiblock, IRotateableEntity {
+public interface ITileEntityMultiblockDummy extends IMultiblock, IRotateableEntity {
 
 }

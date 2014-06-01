@@ -1,17 +1,15 @@
-package ip.industrialProcessing.multiblock.core.block.plants.storage.container.model;
+package mod.industrialProcessing.blockContainer.multiblock.core.block.plants.storage.container.model;
 
-import ip.industrialProcessing.api.rendering.wavefront.ObjRotator;
-import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
-import ip.industrialProcessing.client.render.ModelBlock;
-import ip.industrialProcessing.machines.BlockMachine;
-import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
-import ip.industrialProcessing.multiblock.utils.MultiblockState;
-
-import javax.swing.Icon;
-
+import mod.industrialProcessing.blockContainer.BlockContainerIP;
+import mod.industrialProcessing.blockContainer.multiblock.core.TileEntityMultiblockCore;
+import mod.industrialProcessing.blockContainer.multiblock.utils.MultiblockState;
+import mod.industrialProcessing.client.rendering.block.ModelBlock;
+import mod.industrialProcessing.client.rendering.block.obj.wavefront.ObjRotator;
+import mod.industrialProcessing.client.rendering.block.obj.wavefront.WorldReference;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.util.vector.Vector3f;
@@ -26,7 +24,7 @@ public class ModelContainer extends ModelBlock {
         int dir = 0;
 
         Vector3f position = new Vector3f(0, 0, 0);
-        Icon iconHull = block.getIcon(0, 0);
+        IIcon iconHull = block.getIcon(0, 0);
         
         hull.getRotated(dir).renderMesh(iconHull);
     }
@@ -35,11 +33,11 @@ public class ModelContainer extends ModelBlock {
     public boolean renderWorldBlock(WorldReference reference, int modelId, RenderBlocks renderer) {
 
     	TileEntity entity = reference.getBlockTileEntity();
-        ForgeDirection forward = BlockMachine.getForwardFromEntity(entity);
-        int dir = BlockMachine.getMetadataFromForward(forward);
+        ForgeDirection forward = BlockContainerIP.getForwardFromEntity(entity);
+        int dir = BlockContainerIP.getMetadataFromForward(forward);
         TileEntityMultiblockCore core = (TileEntityMultiblockCore) entity;
         
-        Icon iconHull = reference.getIcon(0);
+        IIcon iconHull = reference.getIcon(0);
         
         if(core.getState() ==MultiblockState.COMPLETED){
         	container.getRotated(dir).renderMesh(false, iconHull, reference);

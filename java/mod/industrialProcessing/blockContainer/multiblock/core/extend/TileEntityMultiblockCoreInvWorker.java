@@ -1,23 +1,22 @@
-package ip.industrialProcessing.multiblock.core.extend;
-
-import ip.industrialProcessing.client.render.IAnimationProgress;
-import ip.industrialProcessing.machines.animation.AnimationHandler;
-import ip.industrialProcessing.machines.animation.AnimationMode;
-import ip.industrialProcessing.machines.animation.IAnimationSyncable;
-import ip.industrialProcessing.machines.animation.TileAnimationSyncHandler;
-import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
-import ip.industrialProcessing.multiblock.recipes.IRecipeMultiblockWorkHandler;
-import ip.industrialProcessing.multiblock.recipes.RecipeMultiblock;
-import ip.industrialProcessing.multiblock.recipes.RecipeMultiblockWorker;
-import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
-import ip.industrialProcessing.multiblock.tier.TierCollection;
-import ip.industrialProcessing.utils.working.ClientWorker;
-import ip.industrialProcessing.utils.working.IWorker;
-import ip.industrialProcessing.utils.working.ServerWorker;
-import ip.industrialProcessing.utils.working.WorkUtils;
+package mod.industrialProcessing.blockContainer.multiblock.core.extend;
 
 import java.util.Iterator;
 
+import mod.industrialProcessing.blockContainer.multiblock.layout.StructureMultiblock;
+import mod.industrialProcessing.blockContainer.multiblock.tier.TierCollection;
+import mod.industrialProcessing.client.rendering.tileEntity.IAnimationProgress;
+import mod.industrialProcessing.client.rendering.tileEntity.animation.AnimationHandler;
+import mod.industrialProcessing.client.rendering.tileEntity.animation.AnimationMode;
+import mod.industrialProcessing.client.rendering.tileEntity.animation.IAnimationSyncable;
+import mod.industrialProcessing.client.rendering.tileEntity.animation.TileAnimationSyncHandler;
+import mod.industrialProcessing.work.recipe.IRecipeMultiblockWorkHandler;
+import mod.industrialProcessing.work.recipe.RecipeMultiblock;
+import mod.industrialProcessing.work.recipe.RecipeMultiblockWorker;
+import mod.industrialProcessing.work.recipe.RecipesMultiblock;
+import mod.industrialProcessing.work.worker.ClientWorker;
+import mod.industrialProcessing.work.worker.IWorker;
+import mod.industrialProcessing.work.worker.ServerWorker;
+import mod.industrialProcessing.work.worker.WorkUtils;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 

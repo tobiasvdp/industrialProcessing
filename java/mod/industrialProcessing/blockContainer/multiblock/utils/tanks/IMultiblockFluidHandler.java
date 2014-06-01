@@ -1,4 +1,4 @@
-package ip.industrialProcessing.multiblock.utils.tanks;
+package mod.industrialProcessing.blockContainer.multiblock.utils.tanks;
 
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;

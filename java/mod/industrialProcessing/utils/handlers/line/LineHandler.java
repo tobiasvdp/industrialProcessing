@@ -113,8 +113,11 @@ public class LineHandler implements ILineHandler {
 	}
 
 	public void registerConveyorToLine(int id, TileEntityConveyorConnectionsBase te) {
-		ConveyorLine line = lines[id];
-		line.registerConveyor(te);
+		if (id != -1) {
+			ConveyorLine line = lines[id];
+			if (line != null)
+				line.registerConveyor(te);
+		}
 	}
 
 	public void unregisterConveyorToLine(int id, TileEntityConveyorConnectionsBase te) {

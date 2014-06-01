@@ -1,24 +1,25 @@
-package ip.industrialProcessing.multiblock.core.extend;
-
-import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.machines.MachineItemStack;
-import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
-import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
-import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
-import ip.industrialProcessing.multiblock.tier.TierCollection;
-import ip.industrialProcessing.multiblock.utils.inventory.IMultiblockInventories;
-import ip.industrialProcessing.multiblock.utils.inventory.MultiblockItemStack;
-import ip.industrialProcessing.utils.DirectionUtils;
-import ip.industrialProcessing.utils.inventories.IInventories;
+package mod.industrialProcessing.blockContainer.multiblock.core.extend;
 
 import java.util.ArrayList;
 
+import mod.industrialProcessing.blockContainer.multiblock.core.TileEntityMultiblockCore;
+import mod.industrialProcessing.blockContainer.multiblock.layout.StructureMultiblock;
+import mod.industrialProcessing.blockContainer.multiblock.tier.TierCollection;
+import mod.industrialProcessing.blockContainer.multiblock.utils.inventory.IMultiblockInventories;
+import mod.industrialProcessing.blockContainer.multiblock.utils.inventory.MultiblockItemStack;
+import mod.industrialProcessing.utils.inventory.IInventorySlots;
+import mod.industrialProcessing.utils.inventory.itemstack.MachineItemStack;
+import mod.industrialProcessing.utils.rotation.DirectionUtils;
+import mod.industrialProcessing.utils.rotation.LocalDirection;
+import mod.industrialProcessing.work.recipe.RecipesMultiblock;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
-public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCore implements IInventories,IMultiblockInventories {
+public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCore implements ISidedInventory, IInventorySlots,IMultiblockInventories {
 
 	protected RecipesMultiblock recipes;
 	protected ArrayList<MultiblockItemStack> itemStacks = new ArrayList<MultiblockItemStack>();
@@ -63,9 +64,9 @@ public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCo
 	};
 
 	public void readInventory(NBTTagCompound nbt) {
-		NBTTagList nbttaglist = nbt.getTagList("Items");
+		NBTTagList nbttaglist = nbt.getTagList("Items",10);
 		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
-			NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(i);
+			NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.getCompoundTagAt(i);
 			byte b0 = nbttagcompound1.getByte("Slot");
 
 			if (b0 >= 0 && b0 < itemStacks.size()) {
@@ -76,7 +77,7 @@ public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCo
 	}
 
 	@Override
-	public boolean removeFromSlot(int slot, int itemId, int amount) {
+	public boolean removeFromSlot(int slot, Item itemId, int amount) {
 		if (slotContains(slot, itemId, amount)) {
 			MachineItemStack machineStack = getMachineStack(slot);
 			machineStack.stack.stackSize -= amount;
@@ -88,8 +89,12 @@ public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCo
 		return false;
 	}
 
+	protected void onInventoryChanged() {
+		this.markDirty();
+	}
+
 	@Override
-	public boolean addToSlot(int slot, int itemId, int amount, int damage) {
+	public boolean addToSlot(int slot, Item itemId, int amount, int damage) {
 		if (slotHasRoomFor(slot, itemId, amount, damage)) {
 			MachineItemStack machineStack = getMachineStack(slot);
 			if (machineStack.stack == null)
@@ -103,15 +108,15 @@ public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCo
 	}
 
 	@Override
-	public boolean slotContains(int slot, int itemId, int amount) {
+	public boolean slotContains(int slot, Item itemId, int amount) {
 		MachineItemStack machineStack = getMachineStack(slot);
-		return machineStack != null && machineStack.stack != null && machineStack.stack.itemID == itemId && machineStack.stack.stackSize >= amount;
+		return machineStack != null && machineStack.stack != null && machineStack.stack.getItem().equals(itemId) && machineStack.stack.stackSize >= amount;
 	}
 
 	@Override
-	public boolean slotContains(int slot, int itemId, int metadata, int amount) {
+	public boolean slotContains(int slot, Item itemId, int metadata, int amount) {
 		MachineItemStack machineStack = getMachineStack(slot);
-		return machineStack != null && machineStack.stack != null && machineStack.stack.itemID == itemId && machineStack.stack.stackSize >= amount && machineStack.stack.getItemDamage() == metadata;
+		return machineStack != null && machineStack.stack != null && machineStack.stack.getItem().equals(itemId)  && machineStack.stack.stackSize >= amount && machineStack.stack.getItemDamage() == metadata;
 	}
 
 	@Override
@@ -119,15 +124,15 @@ public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCo
 		if (stack == null || stack.stackSize == 0)
 			return true;
 		MachineItemStack machineStack = getMachineStack(slot);
-		return machineStack != null && (machineStack.stack == null || (machineStack.stack.itemID == stack.itemID && (machineStack.stack.stackSize + stack.stackSize < stack.getMaxStackSize())));
+		return machineStack != null && (machineStack.stack == null || (machineStack.stack.getItem().equals(stack.getItem()) && (machineStack.stack.stackSize + stack.stackSize < stack.getMaxStackSize())));
 	}
 
 	@Override
-	public boolean slotHasRoomFor(int slot, int itemId, int amount, int damage) {
+	public boolean slotHasRoomFor(int slot, Item itemId, int amount, int damage) {
 		if (amount == 0)
 			return true;
 		MachineItemStack machineStack = getMachineStack(slot);
-		return machineStack != null && (machineStack.stack == null || (machineStack.stack.itemID == itemId && machineStack.stack.getItemDamage() == damage && (machineStack.stack.stackSize + amount < machineStack.stack.getMaxStackSize())));
+		return machineStack != null && (machineStack.stack == null || (machineStack.stack.getItem().equals(itemId) && machineStack.stack.getItemDamage() == damage && (machineStack.stack.stackSize + amount < machineStack.stack.getMaxStackSize())));
 	}
 
 	protected void addStack(ItemStack stack, LocalDirection side, boolean input, boolean output) {
@@ -227,15 +232,6 @@ public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCo
 		}
 	}
 
-	@Override
-	public String getInvName() {
-		return "Filter";
-	}
-
-	@Override
-	public boolean isInvNameLocalized() {
-		return false;
-	}
 
 	@Override
 	public int getInventoryStackLimit() {
@@ -251,23 +247,16 @@ public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCo
 		return true;
 	}
 
-	@Override
-	public void openChest() {
-	}
-
-	@Override
-	public void closeChest() {
-	}
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 		MachineItemStack stack = getMachineStack(i);
 		if (stack == null || itemstack == null)
 			return false;
-		return stack.input && isValidInput(i, itemstack.itemID);
+		return stack.input && isValidInput(i, itemstack.getItem());
 	}
 
-	protected abstract boolean isValidInput(int slot, int itemID);
+	protected abstract boolean isValidInput(int slot, Item itemID);
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int var1) {
@@ -285,7 +274,7 @@ public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCo
 	}
 
 	@Override
-	public boolean damageItem(int slot, int itemId) {
+	public boolean damageItem(int slot, Item itemId) {
 		getMachineStack(slot).stack.setItemDamage(getMachineStack(slot).stack.getItemDamage()+1);
 		return getMachineStack(slot).stack.getItemDamage()>=getMachineStack(slot).stack.getMaxDamage();
 	}
@@ -322,6 +311,25 @@ public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCo
 		if (i < 0 || i >= this.itemStacks.size())
 			return null;
 		return this.itemStacks.get(i);
+	}
+
+	@Override
+	public String getInventoryName() {
+		return "";
+	}
+
+	@Override
+	public boolean hasCustomInventoryName() {
+		return false;
+	}
+
+	@Override
+	public void openInventory() {
+
+	}
+
+	@Override
+	public void closeInventory() {
 	}
 
 

@@ -1,5 +1,7 @@
 package mod.industrialProcessing.blockContainer;
 
+import mod.industrialProcessing.blockContainer.multiblock.core.block.plants.storage.container.BlockContainer;
+import mod.industrialProcessing.blockContainer.multiblock.dummy.block.containerWall.BlockContainerWall;
 import mod.industrialProcessing.plants.decoration.light.hangingLamp.BlockPetrolLamp;
 import mod.industrialProcessing.plants.decoration.light.torch.BlockTorch;
 import mod.industrialProcessing.plants.machine.crusher.BlockCrusher;
@@ -58,6 +60,9 @@ public interface ISetupBlockContainers {
     public final static BlockTransportFluidsStone  blockTransportFluidsStone = new BlockTransportFluidsStone();
     public final static BlockTransportFluidsWood  blockTransportFluidsWood = new BlockTransportFluidsWood();
     public final static BlockValve  blockValve = new BlockValve();
+    
+    public final static BlockContainer  blockContainer = new BlockContainer();
+    public final static BlockContainerWall  blockContainerWall = new BlockContainerWall();
     
     /* machines
     public final static BlockFilter blockFilter = new BlockFilter();

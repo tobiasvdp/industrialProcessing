@@ -1,42 +1,30 @@
-package ip.industrialProcessing.multiblock.core.block.plants.storage.container;
+package mod.industrialProcessing.blockContainer.multiblock.core.block.plants.storage.container;
 
-import ip.industrialProcessing.api.config.INamepace;
-import ip.industrialProcessing.config.ConfigMachineBlocks;
-import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.multiblock.core.BlockMultiblockCore;
+import mod.industrialProcessing.blockContainer.multiblock.core.BlockMultiblockCore;
+import mod.industrialProcessing.gui.framework.panels.Orientation;
+import mod.industrialProcessing.gui.generating.GuiBuilderDefault;
+import mod.industrialProcessing.gui.generating.GuiBuilderInventory;
+import mod.industrialProcessing.gui.generating.IGuiBuilder;
+import mod.industrialProcessing.utils.block.IDescriptionBlock;
+import mod.industrialProcessing.utils.block.IGuiBlock;
+import net.minecraft.block.material.Material;
 
-import javax.swing.Icon;
-
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-
-public class BlockContainer extends BlockMultiblockCore{
-	private Icon[] icons = new Icon[1];
-
+public class BlockContainer extends BlockMultiblockCore implements IDescriptionBlock, IGuiBlock{
+	
+	public static IGuiBuilder guiBuilder = new GuiBuilderInventory("Container").setMode(Orientation.VERTICAL).addInventoryHeaderRow(-1, 0, 98, 7);
+	
 	public BlockContainer() {
-		super(ConfigMachineBlocks.getBlockContainerID(), "BlockContainer", ISetupCreativeTabs.tabMultiblocks);
+		super(1.0f,1.0f,Material.iron,soundTypeMetal,"red");
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world) {
-		TileEntityContainer te = new TileEntityContainer();
-		return te;
+	public IGuiBuilder getGui() {
+		return guiBuilder;
 	}
 
 	@Override
-	public int getRenderType() {
-		return ConfigRenderers.getRendererContainer();
+	public String getDescription() {
+		return "A big ass chest";
 	}
 	
-	@Override
-	public Icon getIcon(int par1, int par2) {
-		par1 %= icons.length;
-		return icons[par1];
-	}
-
-	@Override
-	public void registerIcons(IconRegister par1IconRegister) {
-		icons[0] = par1IconRegister.registerIcon(INamepace.TEXTURE_NAME_PREFIX + "red");
-	}
 }

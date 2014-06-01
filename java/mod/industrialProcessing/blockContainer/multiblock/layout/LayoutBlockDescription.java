@@ -1,20 +1,23 @@
-package ip.industrialProcessing.multiblock.layout;
+package mod.industrialProcessing.blockContainer.multiblock.layout;
+
+import mod.industrialProcessing.IndustrialProcessing;
+import net.minecraft.block.Block;
 
 public class LayoutBlockDescription {
-	private int[] blockIDs;
+	private Block[] blockIDs;
 	private int modelID;
 	private int modelConnection;
 	private int groupID;
 	private int ID;
 
-	public LayoutBlockDescription(int ID, int renderID,int modelConnection, int groupID, int... blockIDs) {
+	public LayoutBlockDescription(int ID, int renderID, int modelConnection, int groupID, Block... blockIDs) {
 		this.modelID = renderID;
 		this.modelConnection = modelConnection;
 		this.groupID = groupID;
 		this.blockIDs = blockIDs;
 		this.ID = ID;
 	}
-	
+
 	public int getGroupID() {
 		return groupID;
 	}
@@ -22,22 +25,24 @@ public class LayoutBlockDescription {
 	public int getModelConnection() {
 		return modelConnection;
 	}
+
 	public int getModelID() {
 		return modelID;
 	}
-	public int getID(){
+
+	public int getID() {
 		return ID;
 	}
-	
-	public int[] getBlockID(){
+
+	public Block[] getBlockID() {
 		return blockIDs;
 	}
 
-	public boolean isValidID(int blockID) {
+	public boolean isValidID(Block blockID) {
 		for (int i = 0; i < this.blockIDs.length; i++) {
-			if (this.blockIDs[i] == blockID)
+			if (this.blockIDs[i].equals(blockID))
 				return true;
-			if (this.blockIDs[i] == -1)
+			if (this.blockIDs[i].equals(IndustrialProcessing.blocktransparent))
 				return true;
 		}
 		return false;

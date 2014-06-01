@@ -92,7 +92,7 @@ public class TileEntityValve extends TileEntityTransportFluidsBase implements IA
     }
 
     @Override
-    protected float getPressure(ForgeDirection direction) {
+	public float getPressure(ForgeDirection direction) {
         float averaged = 0;
         float connections = 0;
 

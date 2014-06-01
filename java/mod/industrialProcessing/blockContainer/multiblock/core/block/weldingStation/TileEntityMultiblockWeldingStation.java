@@ -1,18 +1,17 @@
 package ip.industrialProcessing.multiblock.core.block.weldingStation;
 
-import ip.industrialProcessing.LocalDirection;
-import ip.industrialProcessing.config.ISetupMachineBlocks;
-import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
-import ip.industrialProcessing.multiblock.layout.FacingDirection;
-import ip.industrialProcessing.multiblock.layout.LayoutMultiblock;
-import ip.industrialProcessing.multiblock.layout.LayoutTransformer;
-import ip.industrialProcessing.multiblock.layout.StructureMultiblock;
-import ip.industrialProcessing.multiblock.recipes.RecipesMultiblock;
-import ip.industrialProcessing.multiblock.tier.Tier;
-import ip.industrialProcessing.multiblock.tier.TierCollection;
-import ip.industrialProcessing.multiblock.tier.Tiers;
-import ip.industrialProcessing.utils.handler.heat.HeatStorage;
-import ip.industrialProcessing.utils.handler.heat.IHeatStorage;
+import mod.industrialProcessing.blockContainer.multiblock.core.extend.TileEntityMultiblockCoreTankWorkerPowered;
+import mod.industrialProcessing.blockContainer.multiblock.layout.FacingDirection;
+import mod.industrialProcessing.blockContainer.multiblock.layout.LayoutMultiblock;
+import mod.industrialProcessing.blockContainer.multiblock.layout.LayoutTransformer;
+import mod.industrialProcessing.blockContainer.multiblock.layout.StructureMultiblock;
+import mod.industrialProcessing.blockContainer.multiblock.tier.Tier;
+import mod.industrialProcessing.blockContainer.multiblock.tier.TierCollection;
+import mod.industrialProcessing.blockContainer.multiblock.tier.Tiers;
+import mod.industrialProcessing.utils.handlers.heat.HeatStorage;
+import mod.industrialProcessing.utils.handlers.heat.IHeatStorage;
+import mod.industrialProcessing.utils.rotation.LocalDirection;
+import mod.industrialProcessing.work.recipe.RecipesMultiblock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 

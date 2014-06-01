@@ -1,8 +1,8 @@
-package ip.industrialProcessing.multiblock.dummy.extend;
+package mod.industrialProcessing.blockContainer.multiblock.dummy.extend;
 
-import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
-import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreInv;
-import ip.industrialProcessing.multiblock.dummy.TileEntityMultiblockDummy;
+import mod.industrialProcessing.blockContainer.multiblock.core.TileEntityMultiblockCore;
+import mod.industrialProcessing.blockContainer.multiblock.core.extend.TileEntityMultiblockCoreInv;
+import mod.industrialProcessing.blockContainer.multiblock.dummy.TileEntityMultiblockDummy;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -12,7 +12,7 @@ public class TileEntityMultiblockDummyInv extends TileEntityMultiblockDummy impl
 	@Override
 	public TileEntityMultiblockCoreInv getCore() {
 		if (loadedFromNBT) {
-			core = (TileEntityMultiblockCore) worldObj.getBlockTileEntity(coreDataFromNBT[0], coreDataFromNBT[1], coreDataFromNBT[2]);
+			core = (TileEntityMultiblockCore) worldObj.getTileEntity(coreDataFromNBT[0], coreDataFromNBT[1], coreDataFromNBT[2]);
 			loadedFromNBT = false;
 		}
 		return (TileEntityMultiblockCoreInv) core;
@@ -52,15 +52,6 @@ public class TileEntityMultiblockDummyInv extends TileEntityMultiblockDummy impl
 			getCore().setInventorySlotContents(i, itemstack);
 	}
 
-	@Override
-	public String getInvName() {
-		return "Dummy";
-	}
-
-	@Override
-	public boolean isInvNameLocalized() {
-		return false;
-	}
 
 	@Override
 	public int getInventoryStackLimit() {
@@ -72,15 +63,6 @@ public class TileEntityMultiblockDummyInv extends TileEntityMultiblockDummy impl
 		return true;
 	}
 
-	@Override
-	public void openChest() {
-
-	}
-
-	@Override
-	public void closeChest() {
-
-	}
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
@@ -108,6 +90,26 @@ public class TileEntityMultiblockDummyInv extends TileEntityMultiblockDummy impl
 		if (this.getCore() != null)
 			return getCore().canInsertItem(getGroup(), i, itemstack, j);
 		return false;
+	}
+
+	@Override
+	public String getInventoryName() {
+		return "";
+	}
+
+	@Override
+	public boolean hasCustomInventoryName() {
+		return false;
+	}
+
+	@Override
+	public void openInventory() {
+
+	}
+
+	@Override
+	public void closeInventory() {
+
 	}
 
 }

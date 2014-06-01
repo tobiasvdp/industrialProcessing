@@ -1,7 +1,7 @@
-package ip.industrialProcessing.multiblock.dummy.extend;
+package mod.industrialProcessing.blockContainer.multiblock.dummy.extend;
 
-import ip.industrialProcessing.multiblock.core.TileEntityMultiblockCore;
-import ip.industrialProcessing.multiblock.core.extend.TileEntityMultiblockCoreTank;
+import mod.industrialProcessing.blockContainer.multiblock.core.TileEntityMultiblockCore;
+import mod.industrialProcessing.blockContainer.multiblock.core.extend.TileEntityMultiblockCoreTank;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -16,8 +16,8 @@ public class TileEntityMultiblockDummyInvAndTank extends TileEntityMultiblockDum
 	@Override
 	public TileEntityMultiblockCoreTank getCore() {
 		if (loadedFromNBT) {
-			if (worldObj.getBlockTileEntity(coreDataFromNBT[0], coreDataFromNBT[1], coreDataFromNBT[2]) instanceof TileEntityMultiblockCore)
-				core = (TileEntityMultiblockCore) worldObj.getBlockTileEntity(coreDataFromNBT[0], coreDataFromNBT[1], coreDataFromNBT[2]);
+			if (worldObj.getTileEntity(coreDataFromNBT[0], coreDataFromNBT[1], coreDataFromNBT[2]) instanceof TileEntityMultiblockCore)
+				core = (TileEntityMultiblockCore) worldObj.getTileEntity(coreDataFromNBT[0], coreDataFromNBT[1], coreDataFromNBT[2]);
 			else
 				return null;
 			loadedFromNBT = false;

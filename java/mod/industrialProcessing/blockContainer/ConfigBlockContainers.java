@@ -1,6 +1,10 @@
 package mod.industrialProcessing.blockContainer;
 
 import mod.industrialProcessing.IndustrialProcessing;
+import mod.industrialProcessing.blockContainer.multiblock.core.block.plants.storage.container.TileEntityContainer;
+import mod.industrialProcessing.blockContainer.multiblock.core.block.plants.storage.container.model.ModelContainer;
+import mod.industrialProcessing.blockContainer.multiblock.dummy.block.containerWall.TileEntityContainerWall;
+import mod.industrialProcessing.blockContainer.multiblock.dummy.block.containerWall.model.ModelContainerWall;
 import mod.industrialProcessing.plants.decoration.light.hangingLamp.TileEntityPetrolLamp;
 import mod.industrialProcessing.plants.decoration.light.hangingLamp.model.ModelPetrolLamp;
 import mod.industrialProcessing.plants.decoration.light.torch.TileEntityTorch;
@@ -94,6 +98,9 @@ public class ConfigBlockContainers {
     	BlockRegistry.registerMachine(IndustrialProcessing.blockTransportFluidsStone, TileEntityTransportFluidsStone.class, "IP.trans.pipeStone", new ModelPipeBlock(), new ModelTransportFluids());
     	BlockRegistry.registerMachine(IndustrialProcessing.blockTransportFluidsWood, TileEntityTransportFluidsWood.class, "IP.trans.pipeWood", new ModelPipeBlock(), new ModelTransportFluids());
     	BlockRegistry.registerMachine(IndustrialProcessing.blockValve, TileEntityValve.class, "IP.trans.valve", new ModelValveBlock(),new ModelValve());
+    	
+    	BlockRegistry.registerMachine(IndustrialProcessing.blockContainer, TileEntityContainer.class, "IP.storage.container", new ModelContainer());
+    	BlockRegistry.registerMachine(IndustrialProcessing.blockContainerWall, TileEntityContainerWall.class, "IP.storage.containerWall", new ModelContainerWall());
     	/*
         registerMachineBlock(ISetupMachineBlocks.blockTorch, "IP.Machine.Torch", "Torch", TileEntityTorch.class, BlockType.decoration);
         registerMachineBlock(ISetupMachineBlocks.blockAlkylationUnit, "IP.Machine.AlkUnit", "Alkylation unit", TileEntityAlkylationUnit.class, BlockType.Machine, BlockType.Refinary);

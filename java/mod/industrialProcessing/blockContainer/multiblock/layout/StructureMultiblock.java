@@ -1,6 +1,7 @@
-package ip.industrialProcessing.multiblock.layout;
+package mod.industrialProcessing.blockContainer.multiblock.layout;
 
-import ip.industrialProcessing.multiblock.utils.MultiblockState;
+import mod.industrialProcessing.blockContainer.multiblock.utils.MultiblockState;
+import net.minecraft.block.Block;
 import net.minecraft.world.World;
 
 public class StructureMultiblock {
@@ -47,7 +48,7 @@ public class StructureMultiblock {
 	}
 
 	// i,j,k = coord - coord core
-	public FacingDirection isBlockValid(int i, int j, int k, int blockID, FacingDirection dir, boolean isSideLocked) {
+	public FacingDirection isBlockValid(int i, int j, int k, Block blockID, FacingDirection dir, boolean isSideLocked) {
 		if (dir != FacingDirection.Invalid) {
 			if (layouts[dir.ordinal()].isBlockValid(i, j, k, blockID)) {
 				return dir;

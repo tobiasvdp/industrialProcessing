@@ -1,4 +1,4 @@
-package ip.industrialProcessing.multiblock.utils.inventory;
+package mod.industrialProcessing.blockContainer.multiblock.utils.inventory;
 
 import net.minecraft.item.ItemStack;
 
