@@ -2,6 +2,8 @@ package mod.industrialProcessing.utils.handlers.gui;
 
 import mod.industrialProcessing.gui.generating.LayoutGuiBuilder;
 import mod.industrialProcessing.gui.guide.GuideScreen;
+import mod.industrialProcessing.plants.blackSmith.anvil.ContainerAnvil;
+import mod.industrialProcessing.plants.blackSmith.anvil.GuiContainerAnvil;
 import mod.industrialProcessing.utils.block.IGuiBlock;
 import mod.industrialProcessing.utils.block.IGuiMultiblock;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,7 +28,7 @@ public class GuiHandler implements IGuiHandler {
         } else if (ID == GUIDE_ID) {
             return null;
         } else if (ID == ANVIL_ID) {
-        	 //TODO return new ContainerAnvil(player.inventory, world, x, y, z);
+        	return new ContainerAnvil(player.inventory, world, x, y, z);
         }
         return null;
     }
@@ -43,7 +45,7 @@ public class GuiHandler implements IGuiHandler {
             return new GuideScreen(player);
             // return new GuiGuide(player);
         } else if (ID == ANVIL_ID) {
-            //TODO return new GuiContainerAnvil(player.inventory, world, x, y, z);
+            return new GuiContainerAnvil(player.inventory, world, x, y, z);
         }
         return null;
     }

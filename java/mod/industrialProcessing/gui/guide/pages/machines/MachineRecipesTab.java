@@ -109,7 +109,7 @@ public class MachineRecipesTab extends TabPage implements IButtonClickListener<I
 		switch (mainProduct.type) {
 		case INVENTORY:
 		case DAMAGEDITEM:
-			return new ItemStack(mainProduct.item, 1, mainProduct.damage);
+			return new ItemStack(mainProduct.getItem(), 1, mainProduct.damage);
 		case TANK:
 			Fluid fluid = (mainProduct.fluid);
 			return new ItemStack(fluid.getBlock(), 1, 0);

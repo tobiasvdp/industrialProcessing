@@ -1,7 +1,8 @@
 package mod.industrialProcessing.blockContainer;
 
-import mod.industrialProcessing.blockContainer.multiblock.core.block.plants.storage.container.BlockContainer;
-import mod.industrialProcessing.blockContainer.multiblock.dummy.block.containerWall.BlockContainerWall;
+import mod.industrialProcessing.plants.blackSmith.bloomery.BlockBloomery;
+import mod.industrialProcessing.plants.blackSmith.bloomery.dummy.bellows.BlockBellows;
+import mod.industrialProcessing.plants.blackSmith.bloomery.dummy.ironBowl.BlockIronBowl;
 import mod.industrialProcessing.plants.decoration.light.hangingLamp.BlockPetrolLamp;
 import mod.industrialProcessing.plants.decoration.light.torch.BlockTorch;
 import mod.industrialProcessing.plants.machine.crusher.BlockCrusher;
@@ -9,10 +10,14 @@ import mod.industrialProcessing.plants.machine.filter.BlockFilter;
 import mod.industrialProcessing.plants.machine.mixer.BlockMixer;
 import mod.industrialProcessing.plants.power.generator.crankGenerator.BlockManualGenerator;
 import mod.industrialProcessing.plants.power.generator.creative.BlockCreativeGenerator;
+import mod.industrialProcessing.plants.power.generator.solar.standingSolarPanel.BlockStandingSolarPanel;
 import mod.industrialProcessing.plants.power.meter.BlockVoltMeter;
 import mod.industrialProcessing.plants.power.motor.electroMotor.BlockElectroMotor;
 import mod.industrialProcessing.plants.power.storage.BlockEnergyCell;
 import mod.industrialProcessing.plants.power.wire.BlockWire;
+import mod.industrialProcessing.plants.todo.core.plants.storage.container.BlockContainer;
+import mod.industrialProcessing.plants.todo.dummy.containerWall.BlockContainerWall;
+import mod.industrialProcessing.plants.todo.dummy.ironPole.BlockIronPole;
 import mod.industrialProcessing.plants.transport.fluids.grate.BlockGrate;
 import mod.industrialProcessing.plants.transport.fluids.manoMeter.BlockManoMeter;
 import mod.industrialProcessing.plants.transport.fluids.pump.BlockPump;
@@ -63,6 +68,13 @@ public interface ISetupBlockContainers {
     
     public final static BlockContainer  blockContainer = new BlockContainer();
     public final static BlockContainerWall  blockContainerWall = new BlockContainerWall();
+    
+    public final static BlockIronPole  blockIronPole = new BlockIronPole();
+    public final static BlockStandingSolarPanel  blockStandingSolarPanel = new BlockStandingSolarPanel();
+    
+    public final static BlockBloomery blockBloomery = new BlockBloomery();
+    public final static BlockBellows blockBellows = new BlockBellows();
+    public final static BlockIronBowl blockIronBowl = new BlockIronBowl();
     
     /* machines
     public final static BlockFilter blockFilter = new BlockFilter();

@@ -8,6 +8,7 @@ import mod.industrialProcessing.gui.generating.IGuiBuilder;
 import mod.industrialProcessing.utils.block.IGuiBlock;
 import mod.industrialProcessing.utils.block.IGuiMultiblock;
 import mod.industrialProcessing.work.recipe.IMachineRecipe;
+import mod.industrialProcessing.work.recipe.ITierRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 

@@ -1,20 +1,12 @@
 package mod.industrialProcessing.block;
 
-import mod.industrialProcessing.IndustrialProcessing;
 import mod.industrialProcessing.block.crystals.ModelCrystal;
 import mod.industrialProcessing.block.doors.emergency.model.ModelDoorEmergency;
 import mod.industrialProcessing.block.platforms.ModelPlatform;
 import mod.industrialProcessing.block.platforms.ModelStairs;
+import mod.industrialProcessing.plants.blackSmith.anvil.model.ModelAnvil;
 import mod.industrialProcessing.plants.decoration.machineBlock.model.ModelMachineBlock;
 import mod.industrialProcessing.utils.registry.BlockRegistry;
-import mod.industrialProcessing.utils.registry.BlockType;
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemBlockWithMetadata;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.oredict.OreDictionary;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ConfigBlocks {
 
@@ -43,6 +35,7 @@ public class ConfigBlocks {
 		BlockRegistry.registerMCBlock(ISetupBlocks.blockHalfWavePlate, "IP.block.halfWavePlate", "pickaxe", 1);
 		BlockRegistry.registerBlock(ISetupBlocks.blockMachineBlock, "IP.block.machine", "pickaxe", 1,new ModelMachineBlock());
 		BlockRegistry.registerBlock(ISetupBlocks.blocktransparent, "IP.block.dummy","pickaxe",3);
+		BlockRegistry.registerBlock(ISetupBlocks.blockAnvil, "IP.block.anvil","pickaxe",0, new ModelAnvil());
 				
 		BlockRegistry.registerMetadataBlock(ISetupBlocks.blockLeaves,"IP.block.tree.leaves", "axe",0);
 		BlockRegistry.registerMetadataBlock(ISetupBlocks.blockLog, "IP.block.tree.log", "axe",0);

@@ -7,7 +7,7 @@ import mod.industrialProcessing.client.rendering.tileEntity.animation.TileAnimat
 import mod.industrialProcessing.power.network.IPowerAcceptor;
 import mod.industrialProcessing.power.network.PowerHelper;
 import mod.industrialProcessing.power.network.SimplePowerStorage;
-import mod.industrialProcessing.power.plants.IMechanicalMotion;
+import mod.industrialProcessing.power.utils.IMechanicalMotion;
 import mod.industrialProcessing.utils.handlers.numbers.IProgressable;
 import mod.industrialProcessing.utils.rotation.LocalDirection;
 import net.minecraft.tileentity.TileEntity;

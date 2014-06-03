@@ -30,7 +30,7 @@ public class RecipeOutputSlot extends RecipeSlot {
 	public RecipeOutputSlot(int index,ItemStack stack){
 		super();
 		this.index = index;
-		this.item = stack.getItem();
+		this.setItem(stack.getItem());
 		if(stack.isItemStackDamageable() && stack.getItemDamage()!= WILDCARD_VALUE){
 			this.hasMetadata = true;
 			this.metadata = stack.getItemDamage();
@@ -52,7 +52,7 @@ public class RecipeOutputSlot extends RecipeSlot {
 	public RecipeOutputSlot(int index,ItemStack stack,int min,int max){
 		super();
 		this.index = index;
-		this.item = stack.getItem();
+		this.setItem(stack.getItem());
 		if(stack.isItemStackDamageable() && stack.getItemDamage()!= WILDCARD_VALUE){
 			this.hasMetadata = true;
 			this.metadata = stack.getItemDamage();

@@ -116,7 +116,7 @@ public class BlockRegistry {
 		array.put(block, type);
 	}
 
-	private static void RegisterBlock(Block block, BlockType type) {
+	public static void RegisterBlock(Block block, BlockType type) {
 		RegisterBlock(block, new BlockType[] { type });
 	}
 

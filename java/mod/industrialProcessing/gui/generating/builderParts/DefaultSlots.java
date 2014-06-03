@@ -104,7 +104,7 @@ public class DefaultSlots {
 			RecipeSlot slot = slots[i];
 			if (slot.index == startSlot && slot.type != RecipeSlotType.TANK) {
 				int amount = getAmount(slot);
-				return new ItemStack(slot.item, amount, slot.metadata);
+				return new ItemStack(slot.getItem(), amount, slot.metadata);
 			}
 		}
 		return null;

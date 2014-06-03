@@ -2,7 +2,6 @@ package mod.industrialProcessing.items;
 
 import mod.industrialProcessing.IndustrialProcessing;
 import mod.industrialProcessing.items.guide.ItemGuide;
-import mod.industrialProcessing.utils.registry.ItemType;
 
 public interface ISetupItems {
 
@@ -196,4 +195,9 @@ public interface ISetupItems {
 	public final static ItemIP itemIronBlade = new ItemIP();
 	public final static ItemIP itemTurbineBlades = new ItemIP();
 	public final static ItemRemote itemRemote = new ItemRemote();
+	
+	public final static ItemIP itemWroughtIron = new ItemIP();
+	public final static ItemIP itemPliers = new ItemIP();
+	public final static ItemIP itemPliersHeatedIron = new ItemIP();
+	public final static ItemIP itemPliersBloomIron = new ItemIP();
 }

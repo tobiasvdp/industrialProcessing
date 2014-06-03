@@ -19,6 +19,7 @@ import mod.industrialProcessing.work.worker.ServerWorker;
 import mod.industrialProcessing.work.worker.WorkUtils;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fluids.Fluid;
 
 public abstract class TileEntityMultiblockCoreTankWorker extends TileEntityMultiblockCoreTank implements IRecipeMultiblockFluidWorkHandler, IAnimationProgress, IAnimationSyncable {
 
@@ -46,6 +47,11 @@ public abstract class TileEntityMultiblockCoreTankWorker extends TileEntityMulti
 	@Override
 	public Iterator<RecipeMultiblock> iterateRecipes() {
 		return recipe.getRecipes();
+	}
+	
+	@Override
+	protected boolean isTankValidForFluid(int groupid, int slot, Fluid fluidId) {
+		return recipe.isValidFluidInput(slot, fluidId, getTier());
 	}
 
 	@Override

@@ -49,7 +49,7 @@ public class RecipesMultiblock implements IMachineRecipes<RecipeMultiblock> {
 	    for (RecipeInputSlot input : recipe.inputs) {
 		if (input.type != RecipeSlotType.INVENTORY && input.type != RecipeSlotType.DAMAGEDITEM)
 		    continue;
-		if (input.index == slot && input.item.equals(item))
+		if (input.index == slot && input.getItem().equals(item))
 		    if (recipe.tier == tier)
 			return true;
 	    }

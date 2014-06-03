@@ -56,7 +56,7 @@ public class RecipeRegistry {
 				IMachineRecipe recipe = iterator.next().getKey();
 				RecipeOutputSlot[] outputs = recipe.getOutputs();
 				for (int i = 0; i < outputs.length; i++) {
-					if (outputs[i].item.equals(stack.getItem())) {
+					if (outputs[i].getItem().equals(stack.getItem())) {
 						list.add(recipe);
 					}
 				}
@@ -73,7 +73,7 @@ public class RecipeRegistry {
 				IMachineRecipe recipe = iterator.next().getKey();
 				RecipeOutputSlot[] outputs = recipe.getOutputs();
 				for (int i = 0; i < outputs.length; i++) {
-					if (outputs[i].item.equals(stack.getItem()) && outputs[i].damage == damage) {
+					if (outputs[i].getItem().equals(stack.getItem()) && outputs[i].damage == damage) {
 						list.add(recipe);
 					}
 				}
@@ -90,7 +90,7 @@ public class RecipeRegistry {
 				IMachineRecipe recipe = iterator.next().getKey();
 				RecipeInputSlot[] inputs = recipe.getInputs();
 				for (int i = 0; i < inputs.length; i++) {
-					if (inputs[i].item.equals(stack.getItem())) {
+					if (inputs[i].getItem().equals(stack.getItem())) {
 						list.add(recipe);
 					}
 				}
@@ -108,7 +108,7 @@ public class RecipeRegistry {
 				RecipeInputSlot[] inputs = recipe.getInputs();
 				RecipeOutputSlot[] outputs = recipe.getOutputs();
 				for (int i = 0; i < recipe.getInputs().length; i++) {
-					if (inputs[i].item.equals(stack.getItem()) && outputs[i].damage == damage) {
+					if (inputs[i].getItem().equals(stack.getItem()) && outputs[i].damage == damage) {
 						list.add(recipe);
 					}
 				}

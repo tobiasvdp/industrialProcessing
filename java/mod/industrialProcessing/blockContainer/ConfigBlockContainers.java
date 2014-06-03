@@ -1,10 +1,15 @@
 package mod.industrialProcessing.blockContainer;
 
 import mod.industrialProcessing.IndustrialProcessing;
-import mod.industrialProcessing.blockContainer.multiblock.core.block.plants.storage.container.TileEntityContainer;
-import mod.industrialProcessing.blockContainer.multiblock.core.block.plants.storage.container.model.ModelContainer;
-import mod.industrialProcessing.blockContainer.multiblock.dummy.block.containerWall.TileEntityContainerWall;
-import mod.industrialProcessing.blockContainer.multiblock.dummy.block.containerWall.model.ModelContainerWall;
+import mod.industrialProcessing.plants.blackSmith.bloomery.BlockBloomery;
+import mod.industrialProcessing.plants.blackSmith.bloomery.TileEntityBloomery;
+import mod.industrialProcessing.plants.blackSmith.bloomery.dummy.bellows.BlockBellows;
+import mod.industrialProcessing.plants.blackSmith.bloomery.dummy.bellows.TileEntityBellows;
+import mod.industrialProcessing.plants.blackSmith.bloomery.dummy.bellows.model.ModelBellows;
+import mod.industrialProcessing.plants.blackSmith.bloomery.dummy.ironBowl.BlockIronBowl;
+import mod.industrialProcessing.plants.blackSmith.bloomery.dummy.ironBowl.TileEntityIronBowl;
+import mod.industrialProcessing.plants.blackSmith.bloomery.dummy.ironBowl.model.ModelIronBowl;
+import mod.industrialProcessing.plants.blackSmith.bloomery.model.ModelBloomery;
 import mod.industrialProcessing.plants.decoration.light.hangingLamp.TileEntityPetrolLamp;
 import mod.industrialProcessing.plants.decoration.light.hangingLamp.model.ModelPetrolLamp;
 import mod.industrialProcessing.plants.decoration.light.torch.TileEntityTorch;
@@ -17,6 +22,8 @@ import mod.industrialProcessing.plants.machine.mixer.TileEntityMixer;
 import mod.industrialProcessing.plants.power.generator.crankGenerator.ModelCrankGenerator;
 import mod.industrialProcessing.plants.power.generator.crankGenerator.TileEntityManualGenerator;
 import mod.industrialProcessing.plants.power.generator.creative.TileEntityCreativeGenerator;
+import mod.industrialProcessing.plants.power.generator.solar.standingSolarPanel.TileEntityStandingSolarPanel;
+import mod.industrialProcessing.plants.power.generator.solar.standingSolarPanel.model.ModelStandingSolarPanel;
 import mod.industrialProcessing.plants.power.meter.ModelVoltMeter;
 import mod.industrialProcessing.plants.power.meter.TileEntityVoltMeter;
 import mod.industrialProcessing.plants.power.motor.electroMotor.TileEntityElectroMotor;
@@ -27,6 +34,12 @@ import mod.industrialProcessing.plants.power.storage.model.ModelEnergyCellBlock;
 import mod.industrialProcessing.plants.power.storage.model.ModelEnergyCellTile;
 import mod.industrialProcessing.plants.power.wire.TileEntityWire;
 import mod.industrialProcessing.plants.power.wire.models.ModelWireBlock;
+import mod.industrialProcessing.plants.todo.core.plants.storage.container.TileEntityContainer;
+import mod.industrialProcessing.plants.todo.core.plants.storage.container.model.ModelContainer;
+import mod.industrialProcessing.plants.todo.dummy.containerWall.TileEntityContainerWall;
+import mod.industrialProcessing.plants.todo.dummy.containerWall.model.ModelContainerWall;
+import mod.industrialProcessing.plants.todo.dummy.ironPole.TileEntityIronPole;
+import mod.industrialProcessing.plants.todo.dummy.ironPole.model.ModelIronPole;
 import mod.industrialProcessing.plants.transport.fluids.grate.TileEntityGrate;
 import mod.industrialProcessing.plants.transport.fluids.manoMeter.TileEntityManoMeter;
 import mod.industrialProcessing.plants.transport.fluids.pump.TileEntityPump;
@@ -101,7 +114,19 @@ public class ConfigBlockContainers {
     	
     	BlockRegistry.registerMachine(IndustrialProcessing.blockContainer, TileEntityContainer.class, "IP.storage.container", new ModelContainer());
     	BlockRegistry.registerMachine(IndustrialProcessing.blockContainerWall, TileEntityContainerWall.class, "IP.storage.containerWall", new ModelContainerWall());
+    	
+    	BlockRegistry.registerMachine(IndustrialProcessing.blockIronPole, TileEntityIronPole.class, "IP.dummy.ironPole", new ModelIronPole());
+    	BlockRegistry.registerMachine(IndustrialProcessing.blockStandingSolarPanel, TileEntityStandingSolarPanel.class, "IP.solar.standing", new ModelStandingSolarPanel());
+    	
+    	BlockRegistry.registerMachine(IndustrialProcessing.blockBloomery, TileEntityBloomery.class, "IP.blacks.bloomery", new ModelBloomery());
+    	BlockRegistry.registerMachine(IndustrialProcessing.blockBellows, TileEntityBellows.class, "IP.dummy.bellows", new ModelBellows());
+    	BlockRegistry.registerMachine(IndustrialProcessing.blockIronBowl, TileEntityIronBowl.class, "IP.dummy.ironBowl", new ModelIronBowl());
+
+    	
     	/*
+    	 * 
+    	 * 
+    	 * 
         registerMachineBlock(ISetupMachineBlocks.blockTorch, "IP.Machine.Torch", "Torch", TileEntityTorch.class, BlockType.decoration);
         registerMachineBlock(ISetupMachineBlocks.blockAlkylationUnit, "IP.Machine.AlkUnit", "Alkylation unit", TileEntityAlkylationUnit.class, BlockType.Machine, BlockType.Refinary);
         registerMachineBlock(ISetupMachineBlocks.blockGasProcessor, "IP.Machine.GasProc", "Gas processor", TileEntityGasProcessor.class, BlockType.Machine, BlockType.Refinary);

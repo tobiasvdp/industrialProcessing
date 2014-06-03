@@ -76,9 +76,9 @@ public class RecipeMultiblockWorker extends ServerWorker {
 	    protected boolean hasInputIngredients(RecipeInputSlot slot) {
 	        if (slot.type == RecipeSlotType.INVENTORY || slot.type == RecipeSlotType.DAMAGEDITEM) {
 	            if (slot.hasMetadata)
-	                return this.handler.slotContains(slot.index, slot.item, slot.metadata, slot.amount);
+	                return this.handler.slotContains(slot.index, slot.getItem(), slot.metadata, slot.amount);
 	            else
-	                return this.handler.slotContains(slot.index, slot.item, slot.amount);
+	                return this.handler.slotContains(slot.index, slot.getItem(), slot.amount);
 	        }
 	        return false;
 	    }
@@ -96,7 +96,7 @@ public class RecipeMultiblockWorker extends ServerWorker {
 
 	    protected boolean hasOutputSpace(RecipeOutputSlot slot) {
 	        if (slot.type == RecipeSlotType.INVENTORY) {
-	            return this.handler.slotHasRoomFor(slot.index, slot.item, slot.maxAmount, slot.damage);
+	            return this.handler.slotHasRoomFor(slot.index, slot.getItem(), slot.maxAmount, slot.damage);
 	        }
 	        return false;
 	    }
@@ -113,10 +113,10 @@ public class RecipeMultiblockWorker extends ServerWorker {
 
 	    protected void removeFromInput(RecipeInputSlot slot) {
 	        if (slot.type == RecipeSlotType.INVENTORY) {
-	            if (!this.handler.removeFromSlot(slot.index, slot.item, slot.amount))
+	            if (!this.handler.removeFromSlot(slot.index, slot.getItem(), slot.amount))
 	                System.err.println("Failed to remove recipe input?!");
 	        } else if (slot.type == RecipeSlotType.DAMAGEDITEM) {
-	            if (!this.handler.damageItem(slot.index, slot.item))
+	            if (!this.handler.damageItem(slot.index, slot.getItem()))
 	                System.err.println("Failed to damage recipe input?!");
 	        }
 	    }
@@ -139,7 +139,7 @@ public class RecipeMultiblockWorker extends ServerWorker {
 
 	    protected void addToOutput(int amount, RecipeOutputSlot slot) {
 	        if (slot.type == RecipeSlotType.INVENTORY) {
-	            if (!this.handler.addToSlot(slot.index, slot.item, amount, slot.damage))
+	            if (!this.handler.addToSlot(slot.index, slot.getItem(), amount, slot.damage))
 	                System.err.println("Failed to create recipe output?!");
 	        }
 	    }

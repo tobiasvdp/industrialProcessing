@@ -1,20 +1,21 @@
 package mod.industrialProcessing.gui.guide.pages.machines.crafts;
 
-import ip.industrialProcessing.gui3.framework.Alignment;
-import ip.industrialProcessing.gui3.framework.UIElement;
-import ip.industrialProcessing.gui3.framework.controls.Button;
-import ip.industrialProcessing.gui3.framework.controls.IButtonClickListener;
-import ip.industrialProcessing.gui3.framework.controls.ProgressBar;
-import ip.industrialProcessing.gui3.framework.controls.SlotItemControl;
-import ip.industrialProcessing.gui3.framework.controls.TextBlock;
-import ip.industrialProcessing.gui3.framework.panels.GridCell;
-import ip.industrialProcessing.gui3.framework.panels.GridPanel;
-import ip.industrialProcessing.gui3.framework.panels.GridSize;
-import ip.industrialProcessing.gui3.framework.panels.Orientation;
-import ip.industrialProcessing.gui3.framework.panels.SizeMode;
-import ip.industrialProcessing.gui3.framework.panels.StackPanel;
-import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
-import net.minecraft.block.Block;
+import mod.industrialProcessing.gui.framework.Alignment;
+import mod.industrialProcessing.gui.framework.UIElement;
+import mod.industrialProcessing.gui.framework.controls.Button;
+import mod.industrialProcessing.gui.framework.controls.IButtonClickListener;
+import mod.industrialProcessing.gui.framework.controls.ProgressBar;
+import mod.industrialProcessing.gui.framework.controls.SlotItemControl;
+import mod.industrialProcessing.gui.framework.controls.TextBlock;
+import mod.industrialProcessing.gui.framework.panels.GridCell;
+import mod.industrialProcessing.gui.framework.panels.GridPanel;
+import mod.industrialProcessing.gui.framework.panels.GridSize;
+import mod.industrialProcessing.gui.framework.panels.Orientation;
+import mod.industrialProcessing.gui.framework.panels.SizeMode;
+import mod.industrialProcessing.gui.framework.panels.StackPanel;
+import mod.industrialProcessing.gui.framework.rendering.TextureReference;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class FurnaceCraft implements ICraftBase {
@@ -24,7 +25,7 @@ public class FurnaceCraft implements ICraftBase {
     private ItemStack target;
 
     public FurnaceCraft(int key, ItemStack value) {
-	this.source = new ItemStack(key, 1, 0);
+	this.source = new ItemStack(Item.getItemById(key), 1, 0);
 	this.target = value;
     }
 
@@ -32,7 +33,7 @@ public class FurnaceCraft implements ICraftBase {
     public UIElement getGui(IButtonClickListener<ItemStack> slotClickListener) {
 
 	StackPanel stack = new StackPanel();
-	stack.addChild(TextBlock.createText(Block.furnaceIdle.getLocalizedName()));
+	stack.addChild(TextBlock.createText(Blocks.furnace.getLocalizedName()));
 	stack.orientation = Orientation.HORIZONTAL;
 
 	GridPanel grid = new GridPanel();

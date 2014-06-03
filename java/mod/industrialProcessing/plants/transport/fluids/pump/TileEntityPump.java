@@ -6,7 +6,7 @@ import mod.industrialProcessing.client.rendering.tileEntity.animation.AnimationH
 import mod.industrialProcessing.client.rendering.tileEntity.animation.AnimationMode;
 import mod.industrialProcessing.client.rendering.tileEntity.animation.IAnimationSyncable;
 import mod.industrialProcessing.client.rendering.tileEntity.animation.TileAnimationSyncHandler;
-import mod.industrialProcessing.power.plants.IMechanicalMotion;
+import mod.industrialProcessing.power.utils.IMechanicalMotion;
 import mod.industrialProcessing.utils.rotation.DirectionUtils;
 import mod.industrialProcessing.utils.rotation.LocalDirection;
 import net.minecraft.item.Item;

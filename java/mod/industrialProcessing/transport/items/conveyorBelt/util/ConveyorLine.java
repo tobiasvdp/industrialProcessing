@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import mod.industrialProcessing.plants.transport.items.ConveyorBeltPowerInput.TileEntityConveyorBeltPowerInput;
-import mod.industrialProcessing.power.plants.IMechanicalMotion;
+import mod.industrialProcessing.power.utils.IMechanicalMotion;
 import mod.industrialProcessing.transport.items.conveyorBelt.tileEntity.TileEntityConveyorConnectionsBase;
 
 public class ConveyorLine {

@@ -1,5 +1,6 @@
 package mod.industrialProcessing.work.recipe;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
@@ -16,10 +17,18 @@ public class RecipeInputSlot extends RecipeSlot {
 		super(index,item,metadata,type);
 		this.amount = amount;
 	}
+	public RecipeInputSlot(int index,Block item, RecipeSlotType type,int amount){
+		super(index,item,type);
+		this.amount = amount;
+	}
+	public RecipeInputSlot(int index,Block item,int metadata, RecipeSlotType type,int amount){
+		super(index,item,metadata,type);
+		this.amount = amount;
+	}
 	public RecipeInputSlot(int index,ItemStack stack){
 		super();
 		this.index = index;
-		this.item = stack.getItem();
+		this.setItem(stack.getItem());
 		if(stack.getItemDamage() != 0 && stack.getItemDamage()!= WILDCARD_VALUE){
 			this.hasMetadata = true;
 			this.metadata = stack.getItemDamage();

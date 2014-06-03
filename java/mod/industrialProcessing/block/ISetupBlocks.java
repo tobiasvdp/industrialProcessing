@@ -13,6 +13,7 @@ import mod.industrialProcessing.block.tree.BlockIndustrialSapling;
 import mod.industrialProcessing.block.tree.BlockPineLog;
 import mod.industrialProcessing.block.tree.BlockRubberLog;
 import mod.industrialProcessing.blockContainer.multiblock.utils.Blocktransparent;
+import mod.industrialProcessing.plants.blackSmith.anvil.BlockAnvil;
 import mod.industrialProcessing.plants.decoration.machineBlock.BlockMachineBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockOre;
@@ -50,6 +51,8 @@ public interface ISetupBlocks {
 	public final static Block blockHalfWavePlate = (new BlockIPPane("blockHalfWavePlate", "blockHalfWavePlate", Material.iron, false)).setHardness(0.9F).setStepSound(Block.soundTypeMetal);
 	
 	public final static BlockMachineBlock blockMachineBlock = new BlockMachineBlock();
+	
+	public final static BlockAnvil blockAnvil = new BlockAnvil();
 	
 	public final static Blocktransparent blocktransparent = new Blocktransparent();
 	/*

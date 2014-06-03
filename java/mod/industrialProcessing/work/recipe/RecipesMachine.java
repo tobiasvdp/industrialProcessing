@@ -62,7 +62,7 @@ public class RecipesMachine implements IMachineRecipes<IMachineRecipe> {
 	    for (RecipeInputSlot input : recipe.getInputs()) {
 		if (input.type != RecipeSlotType.INVENTORY && input.type != RecipeSlotType.DAMAGEDITEM)
 		    continue;
-		if (input.index == slot && input.item.equals(item))
+		if (input.index == slot && input.getItem().equals(item))
 		    return true;
 	    }
 	}

@@ -148,6 +148,8 @@ item.IP.item.calcareousSinterDust.name=Calcareous sinter dust
 item.IP.item.cokes.name=Cokes
 item.IP.item.slag.name=Slag
 
+tile.IP.light.torch.name=Torch
+
 tile.IP.fluid.lightnaphtha.block.name=Light naphtha
 item.IP.fluid.lightnaphtha.bucket.name=Bucket of light naphtha
 tile.IP.fluid.dirtywater.block.name=Dirty water

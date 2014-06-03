@@ -18,6 +18,7 @@ import net.minecraft.world.World;
 public class BlockIP extends Block implements IDescriptionBlock{
 	boolean dropItems = false;
 	Item dropItem;
+	Block dropBlock;
 
 	public BlockIP(float hardness, float resistance, Material material, SoundType soundtype) {
 		super(material);
@@ -36,13 +37,13 @@ public class BlockIP extends Block implements IDescriptionBlock{
 		this.dropItem = dropitem;
 	}
 	
-	public BlockIP(float hardness, float resistance, Material material, SoundType soundtype,Block dropitem) {
+	public BlockIP(float hardness, float resistance, Material material, SoundType soundtype,Block dropBlock) {
 		super(material);
 		setHardness(hardness);
 		setResistance(resistance);
 		setStepSound(soundtype);
 		this.dropItems = true;
-		this.dropItem = Item.getItemFromBlock(dropitem);
+		this.dropBlock = dropBlock;
 	}
 
 	@Override
@@ -55,6 +56,8 @@ public class BlockIP extends Block implements IDescriptionBlock{
 	@Override
 	public Item getItemDropped(int par1, Random par2Random, int par3) {
 		if (this.dropItems) {
+			if(dropBlock != null)
+				return Item.getItemFromBlock(dropBlock);
 			return this.dropItem;
 		}
 		return super.getItemDropped(par1, par2Random, par3);

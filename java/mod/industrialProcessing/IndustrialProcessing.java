@@ -9,10 +9,15 @@ import mod.industrialProcessing.fluids.ISetupFluids;
 import mod.industrialProcessing.items.ConfigItems;
 import mod.industrialProcessing.items.ISetupItems;
 import mod.industrialProcessing.utils.INamepace;
+import mod.industrialProcessing.utils.achievements.ConfigAchievements;
+import mod.industrialProcessing.utils.achievements.ISetupAchievements;
+import mod.industrialProcessing.utils.baseRecipes.ConfigBaseRecipes;
 import mod.industrialProcessing.utils.creativeTab.ISetupCreativeTabs;
 import mod.industrialProcessing.utils.damage.ISetupDamageSource;
 import mod.industrialProcessing.utils.handlers.fluids.BucketHandler;
+import mod.industrialProcessing.utils.handlers.fuel.FuelHandler;
 import mod.industrialProcessing.utils.handlers.gui.GuiHandler;
+import mod.industrialProcessing.utils.handlers.heat.HeatHandler;
 import mod.industrialProcessing.utils.handlers.line.LineHandler;
 import mod.industrialProcessing.utils.handlers.packet.PacketHandler;
 import mod.industrialProcessing.utils.handlers.packet.packets.ConveyorPacket;
@@ -43,7 +48,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 
 @Mod(modid = IndustrialProcessing.MODID, version = IndustrialProcessing.VERSION)
-public class IndustrialProcessing implements INamepace, ISetupCreativeTabs, ISetupItems, ISetupBlocks, ISetupFluids, ISetupDamageSource, ISetupBlockContainers {
+public class IndustrialProcessing implements INamepace, ISetupCreativeTabs, ISetupItems, ISetupBlocks, ISetupFluids, ISetupDamageSource, ISetupBlockContainers, ISetupAchievements {
 	public static final String MODID = "IndustrialProcessing";
 	public static final String VERSION = "0.0.3";
 	private static ModContainer container;
@@ -79,7 +84,12 @@ public class IndustrialProcessing implements INamepace, ISetupCreativeTabs, ISet
 		GameRegistry.registerWorldGenerator(new WorldGeneration(), 100);
 		
 		//register handlers
-		HandlerRegistry.registerConveyorLineHandler(new LineHandler());
+		HandlerRegistry.registerConveyorLineHandler(new LineHandler());		
+		GameRegistry.registerFuelHandler(new FuelHandler());
+		HandlerRegistry.registerHeatHandler(new HeatHandler());
+		
+		//register achievements
+		ConfigAchievements.getInstance().registerAchievments();
 		
 		//register guihandler
 		NetworkRegistry.INSTANCE.registerGuiHandler(this.instance,new GuiHandler());		
@@ -90,6 +100,10 @@ public class IndustrialProcessing implements INamepace, ISetupCreativeTabs, ISet
 		
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(FluidRegistry.WATER, FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(Items.water_bucket),new ItemStack(Items.bucket));
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(FluidRegistry.LAVA, FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(Items.lava_bucket),new ItemStack(Items.bucket));
+		
+		
+		
+		ConfigBaseRecipes.getInstance().addBaseRecipes();
 
 	}
 

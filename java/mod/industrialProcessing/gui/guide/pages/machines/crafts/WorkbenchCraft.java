@@ -1,24 +1,23 @@
 package mod.industrialProcessing.gui.guide.pages.machines.crafts;
 
-import ip.industrialProcessing.gui3.framework.Alignment;
-import ip.industrialProcessing.gui3.framework.UIElement;
-import ip.industrialProcessing.gui3.framework.controls.Button;
-import ip.industrialProcessing.gui3.framework.controls.IButtonClickListener;
-import ip.industrialProcessing.gui3.framework.controls.ProgressBar;
-import ip.industrialProcessing.gui3.framework.controls.SlotItemControl;
-import ip.industrialProcessing.gui3.framework.controls.TextBlock;
-import ip.industrialProcessing.gui3.framework.custom.ElementGrid;
-import ip.industrialProcessing.gui3.framework.panels.GridCell;
-import ip.industrialProcessing.gui3.framework.panels.GridPanel;
-import ip.industrialProcessing.gui3.framework.panels.GridSize;
-import ip.industrialProcessing.gui3.framework.panels.Orientation;
-import ip.industrialProcessing.gui3.framework.panels.SizeMode;
-import ip.industrialProcessing.gui3.framework.panels.StackPanel;
-import ip.industrialProcessing.gui3.framework.rendering.TextureReference;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import mod.industrialProcessing.gui.framework.Alignment;
+import mod.industrialProcessing.gui.framework.UIElement;
+import mod.industrialProcessing.gui.framework.controls.Button;
+import mod.industrialProcessing.gui.framework.controls.IButtonClickListener;
+import mod.industrialProcessing.gui.framework.controls.ProgressBar;
+import mod.industrialProcessing.gui.framework.controls.SlotItemControl;
+import mod.industrialProcessing.gui.framework.controls.TextBlock;
+import mod.industrialProcessing.gui.framework.custom.ElementGrid;
+import mod.industrialProcessing.gui.framework.panels.GridCell;
+import mod.industrialProcessing.gui.framework.panels.GridPanel;
+import mod.industrialProcessing.gui.framework.panels.GridSize;
+import mod.industrialProcessing.gui.framework.panels.Orientation;
+import mod.industrialProcessing.gui.framework.panels.SizeMode;
+import mod.industrialProcessing.gui.framework.panels.StackPanel;
+import mod.industrialProcessing.gui.framework.rendering.TextureReference;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;

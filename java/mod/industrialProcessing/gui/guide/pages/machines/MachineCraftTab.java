@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import mod.industrialProcessing.IndustrialProcessing;
 import mod.industrialProcessing.blockContainer.ISetupBlockContainers;
 import mod.industrialProcessing.gui.framework.Thickness;
 import mod.industrialProcessing.gui.framework.controls.Button;
@@ -25,9 +26,11 @@ import mod.industrialProcessing.gui.guide.pages.machines.crafts.FurnaceCraft;
 import mod.industrialProcessing.gui.guide.pages.machines.crafts.ICraftBase;
 import mod.industrialProcessing.gui.guide.pages.machines.crafts.MachineCraft;
 import mod.industrialProcessing.gui.guide.pages.machines.crafts.WorkbenchCraft;
+import mod.industrialProcessing.plants.blackSmith.anvil.ContainerAnvil;
 import mod.industrialProcessing.utils.registry.RecipeRegistry;
 import mod.industrialProcessing.work.recipe.IMachineRecipe;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -101,8 +104,8 @@ public class MachineCraftTab extends TabPage implements IButtonClickListener<ICr
             if (listItem instanceof IRecipe) {
                 IRecipe recipe = (IRecipe) listItem;
                 ItemStack output = recipe.getRecipeOutput();
-                if (output != null && output.itemID == tag.itemID) {
-                    SlotItemControl slot = SlotItemControl.createItemstack(new ItemStack(ISetupBlockContainers.blockAnvil));
+                if (output != null && output.getItem().equals(tag.getItem())) {
+                    SlotItemControl slot = SlotItemControl.createItemstack(new ItemStack(IndustrialProcessing.blockAnvil));
                     Button button = new Button<ICraftBase>(slot, lastCraft = new AnvilCraft(recipe));
                     button.subscribeClick(this);
                     this.wrapPanel.addChild(button);
@@ -120,8 +123,8 @@ public class MachineCraftTab extends TabPage implements IButtonClickListener<ICr
             if (listItem instanceof IRecipe) {
                 IRecipe recipe = (IRecipe) listItem;
                 ItemStack output = recipe.getRecipeOutput();
-                if (output != null && output.itemID == tag.itemID) {
-                    SlotItemControl slot = SlotItemControl.createItemstack(new ItemStack(Block.workbench));
+                if (output != null && output.getItem().equals(tag.getItem())) {
+                    SlotItemControl slot = SlotItemControl.createItemstack(new ItemStack(Blocks.crafting_table));
                     Button button = new Button<ICraftBase>(slot, lastCraft = new WorkbenchCraft(recipe));
                     button.subscribeClick(this);
                     this.wrapPanel.addChild(button);
@@ -140,8 +143,8 @@ public class MachineCraftTab extends TabPage implements IButtonClickListener<ICr
         while (it.hasNext()) {
             Map.Entry<Integer, ItemStack> entry = (Entry<Integer, ItemStack>) it.next();
             ItemStack stack = entry.getValue();
-            if (stack != null && stack.itemID == tag.itemID) {
-                SlotItemControl slot = SlotItemControl.createItemstack(new ItemStack(Block.furnaceIdle));
+            if (stack != null && stack.getItem().equals(tag.getItem())) {
+                SlotItemControl slot = SlotItemControl.createItemstack(new ItemStack(Blocks.furnace));
                 Button button = new Button<ICraftBase>(slot, lastCraft = new FurnaceCraft(entry.getKey(), entry.getValue()));
                 button.subscribeClick(this);
                 this.wrapPanel.addChild(button);

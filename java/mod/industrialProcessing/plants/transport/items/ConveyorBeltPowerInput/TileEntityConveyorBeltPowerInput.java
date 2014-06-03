@@ -5,7 +5,7 @@ import mod.industrialProcessing.client.rendering.tileEntity.IAnimationProgress;
 import mod.industrialProcessing.client.rendering.tileEntity.animation.AnimationHandler;
 import mod.industrialProcessing.client.rendering.tileEntity.animation.AnimationMode;
 import mod.industrialProcessing.client.rendering.tileEntity.animation.TileAnimationSyncHandler;
-import mod.industrialProcessing.power.plants.IMechanicalMotion;
+import mod.industrialProcessing.power.utils.IMechanicalMotion;
 import mod.industrialProcessing.transport.items.conveyorBelt.tileEntity.TileEntityConveyorConnectionsBase;
 import mod.industrialProcessing.utils.registry.HandlerRegistry;
 import mod.industrialProcessing.utils.rotation.DirectionUtils;

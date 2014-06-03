@@ -119,6 +119,12 @@ public class ConfigItems {
 		ItemRegistry.registerItem(ISetupItems.itemCokes, "IP.item.cokes");
 		ItemRegistry.registerItem(ISetupItems.itemSlag, "IP.item.slag");
 	
+		ItemRegistry.registerItem(ISetupItems.itemWroughtIron ,"IP.item.WroughtIron");
+		ItemRegistry.registerItem(ISetupItems.itemPliers ,"IP.item.Pliers");
+		ItemRegistry.registerItem(ISetupItems.itemPliersHeatedIron ,"IP.item.PliersHeatedIron");
+		ItemRegistry.registerItem(ISetupItems.itemPliersBloomIron,"IP.item.PliersBloomIron");
+		
+		
 	}
 
 	private ConfigItems() {
