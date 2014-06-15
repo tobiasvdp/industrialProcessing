@@ -196,8 +196,9 @@ public class TileEntityMultiblockDummy extends TileEntityBlockContainerIP implem
 		}
 	}
 
-	private void setCore(TileEntityMultiblockCore te) {
+	public void setCore(TileEntityMultiblockCore te) {
 		core = te;
+		loadedFromNBT = false;
 		ID = getCore().setDummieID(this);
 		getCore().registerDummy(this);
 		modelConnection = getCore().setDummieModelConnection(this);

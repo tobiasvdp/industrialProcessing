@@ -33,7 +33,7 @@ public class TileEntityMultiblockCore extends TileEntityBlockContainerIP impleme
 	private int modelConnection;
 	protected AnimationHandler[] animation;
 	protected boolean[] isAnimationEnabled;
-	
+
 	public TileEntityMultiblockCore() {
 		canRotate = false;
 	}
@@ -118,7 +118,8 @@ public class TileEntityMultiblockCore extends TileEntityBlockContainerIP impleme
 	public ArrayList<TileEntityMultiblockDummy> getDummies() {
 		if (loadedFromNBT) {
 			for (int[] coord : dummyDataFromNBT) {
-				dummy.add((TileEntityMultiblockDummy) worldObj.getTileEntity(coord[0], coord[1], coord[2]));
+				if (worldObj.getTileEntity(coord[0], coord[1], coord[2]) instanceof TileEntityMultiblockDummy)
+					dummy.add((TileEntityMultiblockDummy) worldObj.getTileEntity(coord[0], coord[1], coord[2]));
 			}
 			loadedFromNBT = false;
 		}
@@ -150,7 +151,7 @@ public class TileEntityMultiblockCore extends TileEntityBlockContainerIP impleme
 
 		nbtComp = new NBTTagCompound();
 		NBTTagList nbttaglistDummies = new NBTTagList();
-		System.out.println("writing dummies");
+
 		for (TileEntityMultiblockDummy te : getDummies()) {
 			if (te != null) {
 				NBTTagCompound nbttaglistDummie = new NBTTagCompound();
@@ -182,7 +183,7 @@ public class TileEntityMultiblockCore extends TileEntityBlockContainerIP impleme
 	};
 
 	private void readCore(NBTTagCompound nbt) {
-		NBTTagList nbttaglist = nbt.getTagList("Core",10);
+		NBTTagList nbttaglist = nbt.getTagList("Core", 10);
 
 		NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.getCompoundTagAt(0);
 		modelConnection = nbttagcompound1.getInteger("modelConnection");
@@ -201,21 +202,21 @@ public class TileEntityMultiblockCore extends TileEntityBlockContainerIP impleme
 		side = FacingDirection.values()[nbttagcompound1.getInteger("side")];
 
 		getDummies().clear();
-		nbttaglist = nbt.getTagList("Dummies",10);
+		nbttaglist = nbt.getTagList("Dummies", 10);
 		dummyDataFromNBT = new int[nbttaglist.tagCount()][3];
 		for (int i = 0; i < nbttaglist.tagCount(); i++) {
-			NBTTagCompound nbttaglistDummie =  nbttaglist.getCompoundTagAt(i);
+			NBTTagCompound nbttaglistDummie = nbttaglist.getCompoundTagAt(i);
 			NBTTagInt base = (NBTTagInt) nbttaglistDummie.getTag("x");
 			int x = base.func_150287_d();
-			base =  (NBTTagInt) nbttaglistDummie.getTag("y");
+			base = (NBTTagInt) nbttaglistDummie.getTag("y");
 			int y = base.func_150287_d();
-			base =  (NBTTagInt) nbttaglistDummie.getTag("z");
+			base = (NBTTagInt) nbttaglistDummie.getTag("z");
 			int z = base.func_150287_d();
 			loadedFromNBT = true;
 			dummyDataFromNBT[i] = new int[] { x, y, z };
 		}
 
-		nbttaglist = nbt.getTagList("Animation",10);
+		nbttaglist = nbt.getTagList("Animation", 10);
 		if (nbttaglist != null) {
 			for (int i = 0; i < nbttaglist.tagCount(); i++) {
 				NBTTagCompound nbttaglistDummie = nbttaglist.getCompoundTagAt(i);
@@ -495,6 +496,10 @@ public class TileEntityMultiblockCore extends TileEntityBlockContainerIP impleme
 		return false;
 	}
 
+	public StructureMultiblock getStructure() {
+		return structure;
+	}
+
 	@Override
 	public int getX() {
 		return this.xCoord;
@@ -516,8 +521,7 @@ public class TileEntityMultiblockCore extends TileEntityBlockContainerIP impleme
 
 	@Override
 	public void setForwardDirection(ForgeDirection forward) {
-		// TODO Auto-generated method stub
-
+		side = ForgeToFacingDirection(forward);
 	}
 
 	@Override

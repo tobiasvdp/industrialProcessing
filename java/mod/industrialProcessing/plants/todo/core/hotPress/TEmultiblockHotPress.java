@@ -19,8 +19,8 @@ public class TEmultiblockHotPress extends TileEntityMultiblockCore {
 		int i = 0;
 		layout.setCoreID(i++,0, 0, ISetupMachineBlocks.BLmultiblockHotPress.blockID);
 
-		layout.setBlockID(0, 0, 1,i++, 0, 0, ISetupMachineBlocks.BLmultiblockFrame.blockID);
-		layout.setBlockID(0, 0, 2,i++, 0, 0, ISetupMachineBlocks.BLmultiblockFrame.blockID);
+		layout.setBlockID(0, 0, 1,i++, 0, 0, ISetupMachineBlocks.BlockFrame.blockID);
+		layout.setBlockID(0, 0, 2,i++, 0, 0, ISetupMachineBlocks.BlockFrame.blockID);
 		// layout.setBlockID(-1, 0, 0, 0,0,
 		// IndustrialProcessing.BLmultiblockFrame.blockID);
 		// layout.setBlockID(1, 0, 0, 0,0,

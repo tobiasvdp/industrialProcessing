@@ -20,6 +20,10 @@ public class FuelHandler implements IFuelHandler {
     Item item = fuel.getItem();
 
     
+    if(item == null){
+    	return 0;
+    }
+    
     //mc default
     if (item instanceof ItemBlock)
     {

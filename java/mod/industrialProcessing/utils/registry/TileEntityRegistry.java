@@ -2,6 +2,15 @@ package mod.industrialProcessing.utils.registry;
 
 import java.util.HashMap;
 
+import mod.industrialProcessing.blockContainer.multiblock.coreAndDummy.BlockMultiblockSwitcher;
+import mod.industrialProcessing.blockContainer.multiblock.coreAndDummy.TileEntityMultiblockSwitcherCore;
+import mod.industrialProcessing.blockContainer.multiblock.coreAndDummy.TileEntityMultiblockSwitcherDummy;
+import mod.industrialProcessing.client.rendering.tileEntity.ModelTileEntity;
+import mod.industrialProcessing.plants.blackSmith.forge.model.ModelForgeAnimated;
+import mod.industrialProcessing.plants.blackSmith.waterBasin.BlockWaterBasin;
+import mod.industrialProcessing.plants.blackSmith.waterBasin.TileEntityWaterBasinCore;
+import mod.industrialProcessing.plants.blackSmith.waterBasin.model.ModelWaterBasin;
+import mod.industrialProcessing.plants.blackSmith.waterBasin.model.ModelWaterBasinAnimated;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -31,5 +40,10 @@ public class TileEntityRegistry {
 	
 	public static Class getTileEntityClassForBlock(Block block){
 		return array.get(block);
+	}
+	public static void registerCoreSwitcherTileEntity(Block block, Class tileEntity, String uniqueId, ModelTileEntity modelTE) {
+		GameRegistry.registerTileEntity(tileEntity, uniqueId);
+		RenderRegistry.registerRendering(block, tileEntity, modelTE);
+		BlockSwitcherRegistry.addSwitching(block.getUnlocalizedName(), "tile."+ uniqueId);
 	}
 }

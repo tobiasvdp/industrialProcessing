@@ -33,32 +33,32 @@ public class LayoutMultiblock {
 	}
 
 	public void setCoreID(int ID, int modelID, int renderConnection, Block blockID) {
-		layout[xCore][yCore][zCore] = new LayoutBlockDescription(ID, modelID, renderConnection,0, blockID);
+		layout[xCore][yCore][zCore] = new LayoutBlockDescription(ID, modelID, renderConnection, 0, blockID);
 	}
 
-	public void setBlockID(int i, int j, int k,int ID, int renderID, int renderConnection, Block... blockIDs) {
-		layout[i + xCore][j + yCore][-k + zCore] = new LayoutBlockDescription(ID, renderID, renderConnection,0, blockIDs);
+	public void setBlockID(int i, int j, int k, int ID, int renderID, int renderConnection, Block... blockIDs) {
+		layout[i + xCore][j + yCore][-k + zCore] = new LayoutBlockDescription(ID, renderID, renderConnection, 0, blockIDs);
 	}
-	
-	public void setBlockIDwithGroup(int i, int j, int k,int ID, int renderID, int renderConnection,int groupID, Block... blockIDs) {
-		layout[i + xCore][j + yCore][-k + zCore] = new LayoutBlockDescription(ID, renderID, renderConnection,groupID, blockIDs);
+
+	public void setBlockIDwithGroup(int i, int j, int k, int ID, int renderID, int renderConnection, int groupID, Block... blockIDs) {
+		layout[i + xCore][j + yCore][-k + zCore] = new LayoutBlockDescription(ID, renderID, renderConnection, groupID, blockIDs);
 	}
 
 	// i,j,k = coord - coord core
 	public int getModelIDforBlock(int i, int j, int k) {
 		return layout[i + xCore][j + yCore][-k + zCore].getModelID();
 	}
-	
+
 	// i,j,k = coord - coord core
 	public int getModelConnectionforBlock(int i, int j, int k) {
 		return layout[i + xCore][j + yCore][-k + zCore].getModelConnection();
 	}
-	
+
 	// i,j,k = coord - coord core
 	public int getIDforBlock(int i, int j, int k) {
 		return layout[i + xCore][j + yCore][-k + zCore].getID();
 	}
-	
+
 	// i,j,k = coord - coord core
 	public int getGroupIDforBlock(int i, int j, int k) {
 		return layout[i + xCore][j + yCore][-k + zCore].getGroupID();
@@ -69,12 +69,11 @@ public class LayoutMultiblock {
 		int x = i + xCore;
 		int y = j + yCore;
 		int z = -k + zCore;
-		if (x >= 0 && y >= 0 && z >= 0 && x < layout.length && y < layout[0].length & z < layout[0][0].length){
+		if (x >= 0 && y >= 0 && z >= 0 && x < layout.length && y < layout[0].length & z < layout[0][0].length) {
 			if (layout[x][y][z] == null)
 				return false;
 			return layout[x][y][z].isValidID(blockID);
-		}
-		else
+		} else
 			return false;
 	}
 
@@ -146,6 +145,105 @@ public class LayoutMultiblock {
 
 	public void unsetBlockID(int i, int j, int k) {
 		layout[i + xCore][j + yCore][-k + zCore] = null;
+	}
+
+	public int getLayoutValidCount(World world, int xCore, int yCore, int zCore) {
+		int count = 0;
+		for (int i = 0; i < layout.length; i++) {
+			for (int j = 0; j < layout[0].length; j++) {
+				for (int k = 0; k < layout[0][0].length; k++) {
+					int xBlock = xCore - this.xCore + i;
+					int yBlock = yCore - this.yCore + j;
+					int zBlock = zCore + this.zCore - k;
+					if (layout[i][j][k] != null) {
+						if (!layout[i][j][k].isValidID(world.getBlock(xBlock, yBlock, zBlock))) {
+
+						} else {
+							TileEntity te = world.getTileEntity(xBlock, yBlock, zBlock);
+							if (te instanceof TileEntityMultiblockDummy) {
+								TileEntityMultiblockCore teCore = ((TileEntityMultiblockDummy) te).getCore();
+								if (teCore == null) {
+									count++;
+								}
+
+							} else if (te instanceof TileEntityMultiblockCore) {
+							}
+						}
+					}
+				}
+			}
+		}
+		return count;
+	}
+
+	public void registerAllValidDummies(World world, int xCore, int yCore, int zCore) {
+		TileEntityMultiblockCore newCore = (TileEntityMultiblockCore) world.getTileEntity(xCore, yCore, zCore);
+		if (newCore != null) {
+			for (int i = 0; i < layout.length; i++) {
+				for (int j = 0; j < layout[0].length; j++) {
+					for (int k = 0; k < layout[0][0].length; k++) {
+						int xBlock = xCore - this.xCore + i;
+						int yBlock = yCore - this.yCore + j;
+						int zBlock = zCore + this.zCore - k;
+						if (layout[i][j][k] != null) {
+							if (!layout[i][j][k].isValidID(world.getBlock(xBlock, yBlock, zBlock))) {
+
+							} else {
+								TileEntity te = world.getTileEntity(xBlock, yBlock, zBlock);
+								if (te instanceof TileEntityMultiblockDummy) {
+									TileEntityMultiblockCore teCore = ((TileEntityMultiblockDummy) te).getCore();
+									if (teCore != null) {
+										if (teCore != world.getTileEntity(xCore, yCore, zCore)) {
+
+										} else {
+
+										}
+									} else {
+										((TileEntityMultiblockDummy) te).setCore(newCore);
+									}
+
+								} else if (te instanceof TileEntityMultiblockCore) {
+									TileEntityMultiblockCore teCore = ((TileEntityMultiblockCore) te);
+									if (teCore == null) {
+
+									} else {
+										if (teCore != world.getTileEntity(xCore, yCore, zCore)) {
+
+										} else {
+
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	public boolean couldLayoutBeValid(World world, int xCore, int yCore, int zCore) {
+		for (int i = 0; i < layout.length; i++) {
+			for (int j = 0; j < layout[0].length; j++) {
+				for (int k = 0; k < layout[0][0].length; k++) {
+					int xBlock = xCore - this.xCore + i;
+					int yBlock = yCore - this.yCore + j;
+					int zBlock = zCore + this.zCore - k;
+					if (layout[i][j][k] != null) {
+						if (!layout[i][j][k].isValidID(world.getBlock(xBlock, yBlock, zBlock))) {
+							return false;
+						}
+						TileEntity te = world.getTileEntity(xBlock, yBlock, zBlock);
+						if (te instanceof TileEntityMultiblockDummy) {
+							TileEntityMultiblockCore teCore = ((TileEntityMultiblockDummy) te).getCore();
+							if(teCore != null)
+								return false;
+						}
+					}
+				}
+			}
+		}
+		return true;
 	}
 
 }

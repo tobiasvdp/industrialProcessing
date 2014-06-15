@@ -1,5 +1,10 @@
 package mod.industrialProcessing.items;
 
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
+import mod.industrialProcessing.IndustrialProcessing;
 import mod.industrialProcessing.utils.registry.ItemRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -118,11 +123,19 @@ public class ConfigItems {
 		ItemRegistry.registerItem(ISetupItems.itemCalcareousSinterDust, "IP.item.calcareousSinterDust");
 		ItemRegistry.registerItem(ISetupItems.itemCokes, "IP.item.cokes");
 		ItemRegistry.registerItem(ISetupItems.itemSlag, "IP.item.slag");
+		ItemRegistry.registerItem(ISetupItems.itemLeadBowl,"IP.item.leadBowl");
+		ItemRegistry.registerItem(ISetupItems.itemLeadDust,"IP.item.leadDust");
 	
 		ItemRegistry.registerItem(ISetupItems.itemWroughtIron ,"IP.item.WroughtIron");
 		ItemRegistry.registerItem(ISetupItems.itemPliers ,"IP.item.Pliers");
 		ItemRegistry.registerItem(ISetupItems.itemPliersHeatedIron ,"IP.item.PliersHeatedIron");
 		ItemRegistry.registerItem(ISetupItems.itemPliersBloomIron,"IP.item.PliersBloomIron");
+		ItemRegistry.registerItem(ISetupItems.itemHeatedCopper,"IP.item.heatedCopper");
+		ItemRegistry.registerItem(ISetupItems.itemPliersHeatedCopper ,"IP.item.PliersHeatedCopper");
+		
+		ItemRegistry.registerItem(ISetupItems.itemWoodenBucket,"IP.item.woodenBucket");
+		ItemRegistry.registerItem(ISetupItems.itemWoodenBucketWater,"IP.item.woodenBucketWater");
+		FluidContainerRegistry.registerFluidContainer(FluidRegistry.WATER, new ItemStack(IndustrialProcessing.itemWoodenBucketWater), new ItemStack(IndustrialProcessing.itemWoodenBucket));
 		
 		
 	}

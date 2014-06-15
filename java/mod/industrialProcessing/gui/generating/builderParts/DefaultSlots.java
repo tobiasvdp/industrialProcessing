@@ -2,6 +2,7 @@ package mod.industrialProcessing.gui.generating.builderParts;
 
 import java.util.ArrayList;
 
+import mod.industrialProcessing.gui.containers.CraftingContainer;
 import mod.industrialProcessing.gui.containers.LayoutContainer;
 import mod.industrialProcessing.gui.framework.Alignment;
 import mod.industrialProcessing.gui.framework.UIElement;
@@ -42,6 +43,7 @@ public class DefaultSlots {
 			}
 		}
 	}
+	
 
 	public static void setup(ArrayList<SlotClusterReference> slots, LayoutContainer container, TileEntity tileEntity, boolean input) {
 		if (!slots.isEmpty()) {
@@ -55,6 +57,8 @@ public class DefaultSlots {
 			}
 		}
 	}
+	
+	
 
 	private static IInventory getInventory(TileEntity tileEntity) {
 		IInventory inventory = null;
@@ -98,7 +102,7 @@ public class DefaultSlots {
 		}
 		return 0;
 	}
-
+	
 	private static ItemStack getStack(RecipeSlot[] slots, int startSlot) {
 		for (int i = 0; i < slots.length; i++) {
 			RecipeSlot slot = slots[i];

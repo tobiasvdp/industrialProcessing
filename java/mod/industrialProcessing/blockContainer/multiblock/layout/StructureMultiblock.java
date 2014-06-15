@@ -22,7 +22,7 @@ public class StructureMultiblock {
 		else
 			return 0;
 	}
-	
+
 	// i,j,k = coord - coord core
 	public int getModelConnectionforBlock(int i, int j, int k, FacingDirection dir) {
 		if (dir != FacingDirection.Invalid)
@@ -30,7 +30,7 @@ public class StructureMultiblock {
 		else
 			return 0;
 	}
-	
+
 	// i,j,k = coord - coord core
 	public int getIDforBlock(int i, int j, int k, FacingDirection dir) {
 		if (dir != FacingDirection.Invalid)
@@ -38,7 +38,7 @@ public class StructureMultiblock {
 		else
 			return 0;
 	}
-	
+
 	// i,j,k = coord - coord core
 	public int getGroupIDforBlock(int i, int j, int k, FacingDirection dir) {
 		if (dir != FacingDirection.Invalid)
@@ -76,7 +76,7 @@ public class StructureMultiblock {
 			return MultiblockState.CONNECTED;
 		}
 	}
-	
+
 	public int getSizeLeft(FacingDirection dir) {
 		return layouts[dir.ordinal()].getSizeLeft();
 	}
@@ -101,4 +101,19 @@ public class StructureMultiblock {
 		return layouts[dir.ordinal()].getSizeFront();
 	}
 
+	public int getLayoutValidCount(World worldObj, int xCore, int yCore, int zCore, FacingDirection dir) {
+		return (layouts[dir.ordinal()].getLayoutValidCount(worldObj, xCore, yCore, zCore));
+	}
+
+	public void registerAllValidDummies(World worldObj, int xCore, int yCore, int zCore, FacingDirection face) {
+		layouts[face.ordinal()].registerAllValidDummies(worldObj, xCore, yCore, zCore);
+	}
+
+	public MultiblockState couldLayoutBeValid(World world, int xCore, int yCore, int zCore, FacingDirection dir) {
+		if (layouts[dir.ordinal()].couldLayoutBeValid(world, xCore, yCore, zCore)) {
+			return MultiblockState.COMPLETED;
+		} else {
+			return MultiblockState.CONNECTED;
+		}
+	}
 }

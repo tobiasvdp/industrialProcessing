@@ -1,15 +1,18 @@
 package mod.industrialProcessing.gui.generating;
 
+import mod.industrialProcessing.blockContainer.machine.crafter.TileEntityMachineCrafter;
 import mod.industrialProcessing.blockContainer.multiblock.IMultiblock;
 import mod.industrialProcessing.blockContainer.multiblock.tier.Tiers;
 import mod.industrialProcessing.gui.containers.LayoutContainer;
 import mod.industrialProcessing.utils.block.IGuiBlock;
 import mod.industrialProcessing.utils.block.IGuiMultiblock;
+import mod.industrialProcessing.utils.block.IUpgradableBlock;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
 public class LayoutGuiBuilder {
 
@@ -33,6 +36,15 @@ public class LayoutGuiBuilder {
 	}
 	return null;
     }
+    
+	public static Object createContainer(InventoryPlayer inventory, IUpgradableBlock blockType,World world,  int x, int y, int z) {
+		TileEntity te = new TileEntityMachineCrafter(((GuiBuilderCrafting)blockType.getUpgradeGui()).getInputSlots(), ((GuiBuilderCrafting)blockType.getUpgradeGui()).getFillingSlot(), (Block) blockType, blockType.isMachineUpgradable(), blockType.getUpgradeRecipes());
+		te.xCoord = x;
+		te.yCoord = y;
+		te.zCoord = z;
+		te.setWorldObj(world);
+	    return blockType.getUpgradeGui().getContainer(inventory, te);
+	}
 
     public static GuiContainer createGuiContainer(InventoryPlayer player, TileEntity entity) {
 	Block block = entity.getBlockType();
@@ -56,4 +68,12 @@ public class LayoutGuiBuilder {
 	}
 	return null;
     }
+	public static Object createGuiContainer(InventoryPlayer inventory, IUpgradableBlock blockType, World world, int x, int y, int z) {
+		TileEntity te = new TileEntityMachineCrafter(((GuiBuilderCrafting)blockType.getUpgradeGui()).getInputSlots(), ((GuiBuilderCrafting)blockType.getUpgradeGui()).getFillingSlot(), (Block) blockType, blockType.isMachineUpgradable(), blockType.getUpgradeRecipes());
+		te.xCoord = x;
+		te.yCoord = y;
+		te.zCoord = z;
+		te.setWorldObj(world);
+		return blockType.getUpgradeGui().getGuiContainer(blockType.getUpgradeGui().getContainer(inventory, te), te);
+	}
 }

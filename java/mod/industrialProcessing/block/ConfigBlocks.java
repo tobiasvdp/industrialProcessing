@@ -5,7 +5,7 @@ import mod.industrialProcessing.block.doors.emergency.model.ModelDoorEmergency;
 import mod.industrialProcessing.block.platforms.ModelPlatform;
 import mod.industrialProcessing.block.platforms.ModelStairs;
 import mod.industrialProcessing.plants.blackSmith.anvil.model.ModelAnvil;
-import mod.industrialProcessing.plants.decoration.machineBlock.model.ModelMachineBlock;
+import mod.industrialProcessing.plants.construction.machineBlock.model.ModelMachineBlock;
 import mod.industrialProcessing.utils.registry.BlockRegistry;
 
 public class ConfigBlocks {
@@ -33,7 +33,6 @@ public class ConfigBlocks {
 		BlockRegistry.registerBlock(ISetupBlocks.blockPlatform, "IP.block.platform", "pickaxe", 1,new ModelPlatform());
 		BlockRegistry.registerBlock(ISetupBlocks.blockDoorEmergency, "IP.block.doorEmergency", "pickaxe", 1,new ModelDoorEmergency());
 		BlockRegistry.registerMCBlock(ISetupBlocks.blockHalfWavePlate, "IP.block.halfWavePlate", "pickaxe", 1);
-		BlockRegistry.registerBlock(ISetupBlocks.blockMachineBlock, "IP.block.machine", "pickaxe", 1,new ModelMachineBlock());
 		BlockRegistry.registerBlock(ISetupBlocks.blocktransparent, "IP.block.dummy","pickaxe",3);
 		BlockRegistry.registerBlock(ISetupBlocks.blockAnvil, "IP.block.anvil","pickaxe",0, new ModelAnvil());
 				

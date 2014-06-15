@@ -2,6 +2,7 @@ package mod.industrialProcessing.items;
 
 import mod.industrialProcessing.IndustrialProcessing;
 import mod.industrialProcessing.items.guide.ItemGuide;
+import net.minecraft.init.Blocks;
 
 public interface ISetupItems {
 
@@ -192,12 +193,19 @@ public interface ISetupItems {
 	public final static ItemIP itemFilterTray = new ItemIP();
 
 	public final static ItemIP itemLeadIngot = new ItemIP();
+	public final static ItemIP itemLeadBowl = new ItemIP();
 	public final static ItemIP itemIronBlade = new ItemIP();
 	public final static ItemIP itemTurbineBlades = new ItemIP();
 	public final static ItemRemote itemRemote = new ItemRemote();
 	
 	public final static ItemIP itemWroughtIron = new ItemIP();
-	public final static ItemIP itemPliers = new ItemIP();
-	public final static ItemIP itemPliersHeatedIron = new ItemIP();
-	public final static ItemIP itemPliersBloomIron = new ItemIP();
+	public final static ItemIP itemPliers = (ItemIP) new ItemIP().setMaxStackSize(1);
+	public final static ItemIP itemPliersHeatedIron = (ItemIP) new ItemIP().setMaxStackSize(1);
+	public final static ItemIP itemPliersBloomIron = (ItemIP) new ItemIP().setMaxStackSize(1);
+	
+	public final static ItemIP itemHeatedCopper = new ItemIP();
+	public final static ItemIP itemPliersHeatedCopper = new ItemIP();
+	
+	public final static ItemWoodenBucket itemWoodenBucket = (ItemWoodenBucket) new ItemWoodenBucket(null);
+	public final static ItemWoodenBucketFilled itemWoodenBucketWater = new ItemWoodenBucketFilled(Blocks.water);
 }

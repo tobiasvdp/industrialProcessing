@@ -29,7 +29,7 @@ public class ContainerAnvil extends Container {
     public static final int WILDCARD_VALUE = Short.MAX_VALUE;
 
     static {
-	//TODO: AnvilCraftingManager.getInstance().addRecipe(new ItemStack(ISetupMachineBlocks.BLmultiblockScreen), "xxx", "x x", " y ", 'x', new ItemStack(Items.iron_ingot), 'y', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
+	AnvilCraftingManager.getInstance().addRecipe(new ItemStack(IndustrialProcessing.blockScreen), "xxx", "x x", " y ", 'x', new ItemStack(Items.iron_ingot), 'y', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
 	AnvilCraftingManager.getInstance().addRecipe(new ItemStack(ISetupItems.itemKnife), "   ", " y ", "x z", 'x', new ItemStack(ISetupItems.itemThickStick), 'y', new ItemStack(ISetupItems.itemIronBlade), 'z', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
 	AnvilCraftingManager.getInstance().addRecipe(new ItemStack(ISetupItems.itemBlowingTorch), "   ", " y ", "x z", 'x', new ItemStack(Items.iron_ingot), 'y', new ItemStack(Items.flint_and_steel), 'z', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
 	AnvilCraftingManager.getInstance().addRecipe(new ItemStack(ISetupItems.itemSolderingIron), "  y", " w ", "x z", 'x', new ItemStack(ISetupItems.itemThickStick), 'y', new ItemStack(Items.iron_ingot), 'z', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE), 'w', new ItemStack(IndustrialProcessing.fluidLatex.getBucket()));

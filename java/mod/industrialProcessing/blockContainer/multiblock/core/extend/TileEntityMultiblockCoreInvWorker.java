@@ -15,12 +15,14 @@ import mod.industrialProcessing.work.recipe.RecipeMultiblockWorker;
 import mod.industrialProcessing.work.recipe.RecipesMultiblock;
 import mod.industrialProcessing.work.worker.ClientWorker;
 import mod.industrialProcessing.work.worker.IWorker;
+import mod.industrialProcessing.work.worker.IWorkingEntity;
 import mod.industrialProcessing.work.worker.ServerWorker;
 import mod.industrialProcessing.work.worker.WorkUtils;
+import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-public abstract class TileEntityMultiblockCoreInvWorker extends TileEntityMultiblockCoreInv implements IRecipeMultiblockWorkHandler, IAnimationProgress, IAnimationSyncable {
+public abstract class TileEntityMultiblockCoreInvWorker extends TileEntityMultiblockCoreInv implements IRecipeMultiblockWorkHandler, IAnimationProgress, IAnimationSyncable,IWorkingEntity {
 
     public TileEntityMultiblockCoreInvWorker(StructureMultiblock structure, TierCollection tierRequirments, RecipesMultiblock recipes) {
 	super(structure, tierRequirments, recipes);
@@ -47,6 +49,11 @@ public abstract class TileEntityMultiblockCoreInvWorker extends TileEntityMultib
     public Iterator<RecipeMultiblock> iterateRecipes() {
     	return recipe.getRecipes();
     }
+    
+	@Override
+	protected boolean isValidInput(int slot, Item itemID) {
+		return recipe.isValidInput(slot, itemID, getTier());
+	}
 
     @Override
 	public IWorker getWorker() {

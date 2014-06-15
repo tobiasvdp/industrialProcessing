@@ -58,32 +58,34 @@ public class TileEntityMachineInv extends TileEntityBlockContainerIP implements 
 			}
 		}
 	}
-	
+
 	protected int addStack(ItemStack stack, LocalDirection side, boolean input, boolean output) {
-        if (side == null)
-            return addStack(stack, new LocalDirection[0], input, output);
-        else
-            return addStack(stack, new LocalDirection[] { side }, input, output);
-    }
+		if (side == null)
+			return addStack(stack, new LocalDirection[0], input, output);
+		else
+			return addStack(stack, new LocalDirection[] { side }, input, output);
+	}
 
-    protected int addStack(ItemStack stack, LocalDirection[] sides, boolean input, boolean output) {
-        int index = itemStacks.size();
-        int[] sideIndices = new int[sides.length];
-        for (int i = 0; i < sideIndices.length; i++) {
-            sideIndices[i] = sides[i].ordinal();
-        } 
-        itemStacks.add(new MachineItemStack(stack, sideIndices, input, output));
+	protected int addStack(ItemStack stack, LocalDirection[] sides, boolean input, boolean output) {
+		int index = itemStacks.size();
+		int[] sideIndices = new int[sides.length];
+		for (int i = 0; i < sideIndices.length; i++) {
+			sideIndices[i] = sides[i].ordinal();
+		}
+		itemStacks.add(new MachineItemStack(stack, sideIndices, input, output));
 
-        for (int i = 0; i < sideIndices.length; i++) {
-            int sideIndex = sideIndices[i];
-            int[] slots = itemStackSideSlots[sideIndex];
-            int[] newSlots = new int[slots.length + 1];
-            System.arraycopy(slots, 0, newSlots, 0, slots.length);
-            newSlots[slots.length] = index;
-            itemStackSideSlots[sideIndex] = newSlots;
-        }
-        return index;
-    }
+		for (int i = 0; i < sideIndices.length; i++) {
+			int sideIndex = sideIndices[i];
+			if (sideIndex < 6) {
+				int[] slots = itemStackSideSlots[sideIndex];
+				int[] newSlots = new int[slots.length + 1];
+				System.arraycopy(slots, 0, newSlots, 0, slots.length);
+				newSlots[slots.length] = index;
+				itemStackSideSlots[sideIndex] = newSlots;
+			}
+		}
+		return index;
+	}
 
 	@Override
 	public int getSizeInventory() {
@@ -190,7 +192,7 @@ public class TileEntityMachineInv extends TileEntityBlockContainerIP implements 
 		return stack.input && isValidInput(slot, itemstack.getItem());
 	}
 
-	protected boolean isValidInput(int slot, Item item){
+	protected boolean isValidInput(int slot, Item item) {
 		return true;
 	}
 
@@ -222,65 +224,65 @@ public class TileEntityMachineInv extends TileEntityBlockContainerIP implements 
 		return false;
 	}
 
-	 @Override
-	    public boolean slotContains(int slot, Item item, int amount) {
-	        MachineItemStack machineStack = itemStacks.get(slot);
-	        return machineStack != null && machineStack.stack != null && machineStack.stack.getItem().equals(item) && machineStack.stack.stackSize >= amount;
-	    }
+	@Override
+	public boolean slotContains(int slot, Item item, int amount) {
+		MachineItemStack machineStack = itemStacks.get(slot);
+		return machineStack != null && machineStack.stack != null && machineStack.stack.getItem().equals(item) && machineStack.stack.stackSize >= amount;
+	}
 
-	    @Override
-	    public boolean slotContains(int slot, Item item, int metadata, int amount) {
-	        MachineItemStack machineStack = itemStacks.get(slot);
-	        return machineStack != null && machineStack.stack != null && machineStack.stack.getItem().equals(item) && machineStack.stack.stackSize >= amount;
-	    }
+	@Override
+	public boolean slotContains(int slot, Item item, int metadata, int amount) {
+		MachineItemStack machineStack = itemStacks.get(slot);
+		return machineStack != null && machineStack.stack != null && machineStack.stack.getItem().equals(item) && machineStack.stack.stackSize >= amount;
+	}
 
-	    @Override
-	    public boolean slotHasRoomFor(int slot, ItemStack stack) {
-	        if (stack == null || stack.stackSize == 0)
-	            return true;
-	        MachineItemStack machineStack = itemStacks.get(slot);
-	        return machineStack != null && (machineStack.stack == null || (machineStack.stack.getItem().equals(stack.getItem()) && (machineStack.stack.stackSize + stack.stackSize < stack.getMaxStackSize())));
-	    }
+	@Override
+	public boolean slotHasRoomFor(int slot, ItemStack stack) {
+		if (stack == null || stack.stackSize == 0)
+			return true;
+		MachineItemStack machineStack = itemStacks.get(slot);
+		return machineStack != null && (machineStack.stack == null || (machineStack.stack.getItem().equals(stack.getItem()) && (machineStack.stack.stackSize + stack.stackSize < stack.getMaxStackSize())));
+	}
 
-	    @Override
-	    public boolean slotHasRoomFor(int slot, Item item, int amount, int damage) {
-	        if (amount == 0)
-	            return true;
-	        MachineItemStack machineStack = itemStacks.get(slot);
-	        return machineStack != null && (machineStack.stack == null || (machineStack.stack.getItem().equals(item) && machineStack.stack.getItemDamage() == damage && (machineStack.stack.stackSize + amount < machineStack.stack.getMaxStackSize())));
-	    }
+	@Override
+	public boolean slotHasRoomFor(int slot, Item item, int amount, int damage) {
+		if (amount == 0)
+			return true;
+		MachineItemStack machineStack = itemStacks.get(slot);
+		return machineStack != null && (machineStack.stack == null || (machineStack.stack.getItem().equals(item) && machineStack.stack.getItemDamage() == damage && (machineStack.stack.stackSize + amount < machineStack.stack.getMaxStackSize())));
+	}
 
-	    @Override
-	    public boolean addToSlot(int slot, Item item, int amount, int damage) {
-	        if (slotHasRoomFor(slot, item, amount, damage)) {
-	            MachineItemStack machineStack = itemStacks.get(slot);
-	            if (machineStack.stack == null)
-	                machineStack.stack = new ItemStack(item, amount, damage);
-	            else
-	                machineStack.stack.stackSize += amount;
-	            onInventoryChanged();
-	            return true;
-	        }
-	        return false;
-	    }
+	@Override
+	public boolean addToSlot(int slot, Item item, int amount, int damage) {
+		if (slotHasRoomFor(slot, item, amount, damage)) {
+			MachineItemStack machineStack = itemStacks.get(slot);
+			if (machineStack.stack == null)
+				machineStack.stack = new ItemStack(item, amount, damage);
+			else
+				machineStack.stack.stackSize += amount;
+			onInventoryChanged();
+			return true;
+		}
+		return false;
+	}
 
-	    @Override
-	    public boolean removeFromSlot(int slot, Item item, int amount) {
-	        if (slotContains(slot, item, amount)) {
-	            MachineItemStack machineStack = itemStacks.get(slot);
-	            machineStack.stack.stackSize -= amount;
-	            if (machineStack.stack.stackSize == 0)
-	                machineStack.stack = null;
-	            onInventoryChanged();
-	            return true;
-	        }
-	        return false;
-	    }
+	@Override
+	public boolean removeFromSlot(int slot, Item item, int amount) {
+		if (slotContains(slot, item, amount)) {
+			MachineItemStack machineStack = itemStacks.get(slot);
+			machineStack.stack.stackSize -= amount;
+			if (machineStack.stack.stackSize == 0)
+				machineStack.stack = null;
+			onInventoryChanged();
+			return true;
+		}
+		return false;
+	}
 
-	    @Override
-	    public boolean damageItem(int slot, Item item) {
-	        itemStacks.get(slot).stack.setItemDamage(itemStacks.get(slot).stack.getItemDamage() + 1);
-	        return itemStacks.get(slot).stack.getItemDamage() >= itemStacks.get(slot).stack.getMaxDamage();
-	    }
+	@Override
+	public boolean damageItem(int slot, Item item) {
+		itemStacks.get(slot).stack.setItemDamage(itemStacks.get(slot).stack.getItemDamage() + 1);
+		return itemStacks.get(slot).stack.getItemDamage() >= itemStacks.get(slot).stack.getMaxDamage();
+	}
 
 }

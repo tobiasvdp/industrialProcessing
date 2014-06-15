@@ -188,5 +188,4 @@ public abstract class VerifyingContainer extends Container {
             return flag1;
         }
     }
-
 }

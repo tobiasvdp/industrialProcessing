@@ -22,7 +22,6 @@ public abstract class ShiftContainer extends VerifyingContainer {
             System.out.println("// move from machine to inventory");
             stack = transfer(stack, false);
         }
-
         slot.putStack(stack);
         return null; 
     }

@@ -79,7 +79,7 @@ public class RecipesCrusher extends RecipesMachine {
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Items.coal, RecipeSlotType.INVENTORY, 1) };
 
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, ISetupItems.itemCoalDust, RecipeSlotType.INVENTORY, 1, 3, 0) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, ISetupItems.itemCoalDust, RecipeSlotType.INVENTORY, 1, 3, 0.5) };
 	recipe.workRequired = workTime;
 	recipe.powerRequired = powerConsumption;
 	return recipe;

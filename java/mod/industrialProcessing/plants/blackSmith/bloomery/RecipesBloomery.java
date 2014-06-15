@@ -33,7 +33,6 @@ public class RecipesBloomery extends RecipesMultiblock {
 	addRecipe(ironDust(150, 0, Tiers.Tier0));
 	addRecipe(copper(500, 0, Tiers.Tier0));
 	addRecipe(tin(450, 0, Tiers.Tier0));
-	addRecipe(lead(450, 0, Tiers.Tier0));
     }
 
     private void addTier1Recipes() {
@@ -70,9 +69,9 @@ public class RecipesBloomery extends RecipesMultiblock {
 
     private RecipeMultiblock lead3(int workTime, int powerConsumption, Tiers tier) {
 	PoweredRecipeMultiblock recipe = new PoweredRecipeMultiblock();
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, ISetupItems.itemLeadDust, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(4, ISetupItems.itemLeadDust, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(5, ISetupItems.itemLeadDust, RecipeSlotType.INVENTORY, 1) };
+	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, ISetupItems.itemLeadDust, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(4, ISetupItems.itemLeadDust, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(5, ISetupItems.itemIronBowl, RecipeSlotType.INVENTORY, 1) };
 
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, ISetupItems.itemLeadIngot, RecipeSlotType.INVENTORY, 3, 3, 0.25) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, ISetupItems.itemLeadBowl, RecipeSlotType.INVENTORY, 1, 1, 0.25) };
 	recipe.workRequired = workTime;
 	recipe.powerRequired = powerConsumption;
 	recipe.tier = tier;
@@ -94,7 +93,7 @@ public class RecipesBloomery extends RecipesMultiblock {
 	PoweredRecipeMultiblock recipe = new PoweredRecipeMultiblock();
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.blockCopperOre, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(4, IndustrialProcessing.blockCopperOre, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(5, IndustrialProcessing.blockCopperOre, RecipeSlotType.INVENTORY, 1) };
 
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, ISetupItems.itemCopperIngot, RecipeSlotType.INVENTORY, 3, 3, 0.25) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, ISetupItems.itemHeatedCopper, RecipeSlotType.INVENTORY, 4, 4, 0.25) };
 	recipe.workRequired = workTime;
 	recipe.powerRequired = powerConsumption;
 	recipe.tier = tier;
@@ -149,7 +148,7 @@ public class RecipesBloomery extends RecipesMultiblock {
 	PoweredRecipeMultiblock recipe = new PoweredRecipeMultiblock();
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.blockCopperOre, RecipeSlotType.INVENTORY, 1) };
 
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, ISetupItems.itemCopperIngot, RecipeSlotType.INVENTORY, 1, 1, 0.25) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, ISetupItems.itemHeatedCopper, RecipeSlotType.INVENTORY, 1, 1, 0.25) };
 	recipe.workRequired = workTime;
 	recipe.powerRequired = powerConsumption;
 	recipe.tier = tier;

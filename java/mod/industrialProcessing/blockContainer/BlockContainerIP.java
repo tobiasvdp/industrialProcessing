@@ -4,6 +4,7 @@ import mod.industrialProcessing.IndustrialProcessing;
 import mod.industrialProcessing.fluids.FluidTransfers;
 import mod.industrialProcessing.items.ISetupItems;
 import mod.industrialProcessing.plants.machine.crusher.TileEntityCrusher;
+import mod.industrialProcessing.utils.block.IUpgradableBlock;
 import mod.industrialProcessing.utils.inventory.InventoryUtils;
 import mod.industrialProcessing.utils.registry.TileEntityRegistry;
 import mod.industrialProcessing.utils.rotation.IRotateableEntity;
@@ -30,7 +31,7 @@ public abstract class BlockContainerIP extends BlockContainer {
 	
 	@Override
 	public TileEntity createNewTileEntity(World world, int var) {
-		TileEntity te = TileEntityRegistry .createNewTileEntity(this);
+		TileEntity te = TileEntityRegistry.createNewTileEntity(this);
 		return te;
 	}
 
@@ -44,6 +45,12 @@ public abstract class BlockContainerIP extends BlockContainer {
 		if (stack != null) {
 			if (stack.getItem() == ISetupItems.itemWrench)
 				return false;
+			if (stack.getItem() == ISetupItems.itemBlowingTorch){
+				if(this instanceof IUpgradableBlock){
+					player.openGui(IndustrialProcessing.instance, 4, world, x, y, z);
+				}
+				return false;
+			}	
 		}
 
 		TileEntity te = world.getTileEntity(x, y, z);

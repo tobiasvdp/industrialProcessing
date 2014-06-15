@@ -1,5 +1,6 @@
 package mod.industrialProcessing.work.recipe;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
@@ -27,6 +28,22 @@ public class RecipeOutputSlot extends RecipeSlot {
         this.maxAmount = maxAmount;
         this.distributionCenter = distributionCenter;
     }
+    
+	public RecipeOutputSlot(int index,Block item, RecipeSlotType type,int minAmount,int maxAmount,double distributionCenter){
+		super(index,item,type);
+		this.minAmount = minAmount;
+		this.maxAmount = maxAmount;
+		this.distributionCenter = distributionCenter;
+	}
+	
+    public RecipeOutputSlot(int index,Block item, int damage, RecipeSlotType type,int minAmount,int maxAmount,double distributionCenter){
+        super(index,item,type);
+        this.damage = damage;
+        this.minAmount = minAmount;
+        this.maxAmount = maxAmount;
+        this.distributionCenter = distributionCenter;
+    }
+    
 	public RecipeOutputSlot(int index,ItemStack stack){
 		super();
 		this.index = index;

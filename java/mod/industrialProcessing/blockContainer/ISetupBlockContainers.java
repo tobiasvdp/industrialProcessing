@@ -3,13 +3,28 @@ package mod.industrialProcessing.blockContainer;
 import mod.industrialProcessing.plants.blackSmith.bloomery.BlockBloomery;
 import mod.industrialProcessing.plants.blackSmith.bloomery.dummy.bellows.BlockBellows;
 import mod.industrialProcessing.plants.blackSmith.bloomery.dummy.ironBowl.BlockIronBowl;
+import mod.industrialProcessing.plants.blackSmith.forge.BlockForge;
+import mod.industrialProcessing.plants.blackSmith.grindingStone.BlockGrindingStone;
+import mod.industrialProcessing.plants.blackSmith.tripHammer.BlockTripHammer;
+import mod.industrialProcessing.plants.blackSmith.tripHammer.dummy.woodenBar.BlockWoodenBar;
+import mod.industrialProcessing.plants.blackSmith.tripHammer.dummy.woodenHammer.BlockWoodenHammer;
+import mod.industrialProcessing.plants.blackSmith.tripHammer.dummy.woodenWheel.BlockWoodenWheel;
+import mod.industrialProcessing.plants.blackSmith.waterBasin.BlockWaterBasin;
+import mod.industrialProcessing.plants.construction.frame.BlockFrame;
+import mod.industrialProcessing.plants.construction.machineBlock.BlockMachineBlock;
+import mod.industrialProcessing.plants.construction.solderingStation.BlockSolderingStation;
+import mod.industrialProcessing.plants.construction.weldingStation.BlockWeldingStation;
+import mod.industrialProcessing.plants.construction.weldingStation.dummy.screen.BlockScreen;
+import mod.industrialProcessing.plants.construction.weldingStation.dummy.weldingTable.BlockWeldingTable;
 import mod.industrialProcessing.plants.decoration.light.hangingLamp.BlockPetrolLamp;
 import mod.industrialProcessing.plants.decoration.light.torch.BlockTorch;
 import mod.industrialProcessing.plants.machine.crusher.BlockCrusher;
 import mod.industrialProcessing.plants.machine.filter.BlockFilter;
 import mod.industrialProcessing.plants.machine.mixer.BlockMixer;
+import mod.industrialProcessing.plants.machine.treetap.BlockManualTreeTap;
 import mod.industrialProcessing.plants.power.generator.crankGenerator.BlockManualGenerator;
 import mod.industrialProcessing.plants.power.generator.creative.BlockCreativeGenerator;
+import mod.industrialProcessing.plants.power.generator.generator.BlockGenerator;
 import mod.industrialProcessing.plants.power.generator.solar.standingSolarPanel.BlockStandingSolarPanel;
 import mod.industrialProcessing.plants.power.meter.BlockVoltMeter;
 import mod.industrialProcessing.plants.power.motor.electroMotor.BlockElectroMotor;
@@ -75,6 +90,27 @@ public interface ISetupBlockContainers {
     public final static BlockBloomery blockBloomery = new BlockBloomery();
     public final static BlockBellows blockBellows = new BlockBellows();
     public final static BlockIronBowl blockIronBowl = new BlockIronBowl();
+    
+    public final static BlockForge blockForge = new BlockForge();
+    public final static BlockWoodenBar blockWoodenBar = new BlockWoodenBar();
+    public final static BlockWoodenHammer blockWoodenHammer = new BlockWoodenHammer();
+    public final static BlockWoodenWheel blockWoodenWheel = new BlockWoodenWheel();
+    public final static BlockTripHammer blockTripHammer = new BlockTripHammer();
+    public final static BlockWaterBasin blockWaterBasin = new BlockWaterBasin();
+    public final static BlockGrindingStone blockGrindingStone = new BlockGrindingStone();
+    
+    public final static BlockWeldingStation blockWeldingStation = new BlockWeldingStation();
+    public final static BlockWeldingTable blockWeldingTable = new BlockWeldingTable();
+    public final static BlockSolderingStation blockSolderingStation = new BlockSolderingStation();
+    public final static BlockScreen blockScreen = new BlockScreen();
+    
+    public final static BlockFrame blockFrame = new BlockFrame();
+    
+    public final static BlockMachineBlock blockMachineBlock = new BlockMachineBlock();
+    
+    public final static BlockManualTreeTap blockManualTreeTap = new BlockManualTreeTap();
+    
+    public final static BlockGenerator blockGenerator = new BlockGenerator();
     
     /* machines
     public final static BlockFilter blockFilter = new BlockFilter();
