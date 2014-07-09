@@ -3,7 +3,7 @@ package mod.industrialProcessing.blockContainer;
 import mod.industrialProcessing.IndustrialProcessing;
 import mod.industrialProcessing.fluids.FluidTransfers;
 import mod.industrialProcessing.items.ISetupItems;
-import mod.industrialProcessing.plants.machine.crusher.TileEntityCrusher;
+import mod.industrialProcessing.plants.grinding.crusher.TileEntityCrusher;
 import mod.industrialProcessing.utils.block.IUpgradableBlock;
 import mod.industrialProcessing.utils.inventory.InventoryUtils;
 import mod.industrialProcessing.utils.registry.TileEntityRegistry;

@@ -23,20 +23,60 @@ public class RecipesUpgradeMachineBlock extends RecipesMachine {
 	}
 
 	private void addDefaultRecipes() {
-		addRecipe(generator());
-
+		addRecipe(crusher());
+		addRecipe(electroMotor());
+		addRecipe(mixer());
+		addRecipe(filter());
+		addRecipe(dryer());
 	}
 
-
-	private Recipe generator() {
+	private Recipe crusher() {
 		Recipe recipe = new Recipe();
 
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(3, ISetupItems.itemMotorPoleAxis, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(4, ISetupItems.itemIronBar, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(5, IndustrialProcessing.blockElectroMotor, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(0, ISetupItems.itemIronPlate, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(6, ISetupItems.itemIronPlate, RecipeSlotType.INVENTORY, 1) };
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(1, ISetupItems.itemSmallEngine, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(7, ISetupItems.itemStripBoardWired, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(3, ISetupItems.itemCrusingPlate, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(4, IndustrialProcessing.blockMachineBlock, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(5, ISetupItems.itemCrusingPlate, RecipeSlotType.INVENTORY, 1) };
 
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(9, IndustrialProcessing.blockGenerator, RecipeSlotType.INVENTORY, 1, 1, 0) };
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(9, IndustrialProcessing.blockCrusher, RecipeSlotType.INVENTORY, 1, 1, 0) };
 
 		return recipe;
 	}
+	private Recipe electroMotor() {
+		Recipe recipe = new Recipe();
+
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(3, ISetupItems.itemMotorStator, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(4, IndustrialProcessing.blockMachineBlock, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(5, ISetupItems.itemMotorRotor, RecipeSlotType.INVENTORY, 1) };
+
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(9, IndustrialProcessing.blockElectroMotor, RecipeSlotType.INVENTORY, 1, 1, 0) };
+		return recipe;
+	}
+	
+    private Recipe mixer() {
+    Recipe recipe = new Recipe();
+
+	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(7, IndustrialProcessing.blockMachineBlock, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(1, ISetupItems.itemSmallEngine, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(3, ISetupItems.itemIronBar, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(5, ISetupItems.itemIronBar, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(6, ISetupItems.itemIronBar, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(0, ISetupItems.itemIronBar, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(2, ISetupItems.itemIronBar, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(4, ISetupItems.itemMixingHook, RecipeSlotType.INVENTORY, 1),
+		new RecipeInputSlot(8, ISetupItems.itemStripBoardWired, RecipeSlotType.INVENTORY, 1) };
+
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(9, IndustrialProcessing.blockMixer, RecipeSlotType.INVENTORY, 1, 1, 0) };
+
+	return recipe;
+    }
+    
+    private Recipe filter() {
+    Recipe recipe = new Recipe();
+
+	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(1, ISetupItems.itemFilterTray, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(4, ISetupItems.itemFilterTray, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(6, ISetupItems.itemSmallEngine, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(7, IndustrialProcessing.blockMachineBlock, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(8, ISetupItems.itemStripBoardWired, RecipeSlotType.INVENTORY, 1) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(9, IndustrialProcessing.blockFilter, RecipeSlotType.INVENTORY, 1, 1, 0) };
+
+	return recipe;
+    }
+    
+    private Recipe dryer() {
+    	Recipe recipe = new Recipe();
+
+    	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(1, ISetupItems.itemStripBoardWired, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(4, IndustrialProcessing.blockMachineBlock, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(6, ISetupItems.itemHeatingElement, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(7, ISetupItems.itemHeatingElement, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(8, ISetupItems.itemHeatingElement, RecipeSlotType.INVENTORY, 1) };
+
+    	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(9, IndustrialProcessing.blockDryer, RecipeSlotType.INVENTORY, 1, 1, 0) };
+
+    	return recipe;
+    }
 
 	
 }

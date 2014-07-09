@@ -1,16 +1,15 @@
-package ip.industrialProcessing.machines.dryer;
+package mod.industrialProcessing.plants.machine.dryer;
 
-import ip.industrialProcessing.config.ISetupBlocks;
-import ip.industrialProcessing.config.ISetupFluids;
-import ip.industrialProcessing.config.ISetupItems;
-import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.recipes.PoweredRecipe;
-import ip.industrialProcessing.recipes.Recipe;
-import ip.industrialProcessing.recipes.RecipeInputSlot;
-import ip.industrialProcessing.recipes.RecipeOutputSlot;
-import ip.industrialProcessing.recipes.RecipeSlotType;
-import net.minecraft.block.Block;
-import net.minecraftforge.fluids.FluidRegistry;
+import mod.industrialProcessing.IndustrialProcessing;
+import mod.industrialProcessing.block.ISetupBlocks;
+import mod.industrialProcessing.items.ISetupItems;
+import mod.industrialProcessing.work.recipe.PoweredRecipe;
+import mod.industrialProcessing.work.recipe.Recipe;
+import mod.industrialProcessing.work.recipe.RecipeInputSlot;
+import mod.industrialProcessing.work.recipe.RecipeOutputSlot;
+import mod.industrialProcessing.work.recipe.RecipeSlotType;
+import mod.industrialProcessing.work.recipe.RecipesMachine;
+import net.minecraft.init.Blocks;
 
 public class RecipesDryer extends RecipesMachine {
 
@@ -37,8 +36,8 @@ public class RecipesDryer extends RecipesMachine {
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidGritSludge.getName()), RecipeSlotType.TANK, 1000) };
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupBlocks.blockGrit.blockID, RecipeSlotType.INVENTORY, 1, 1, 0) };
+	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.fluidGritSludge.getItem(), 1000) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupBlocks.blockGrit, RecipeSlotType.INVENTORY, 1, 1, 0) };
 	return recipe;
     }
 
@@ -46,8 +45,8 @@ public class RecipesDryer extends RecipesMachine {
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidResidu.getName()), RecipeSlotType.TANK, 1000) };
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, Block.sand.blockID, RecipeSlotType.INVENTORY, 1, 1, 0) };
+	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.fluidResidu.getItem(), 1000) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, Blocks.sand, RecipeSlotType.INVENTORY, 1, 1, 0) };
 	return recipe;
     }
 
@@ -55,8 +54,8 @@ public class RecipesDryer extends RecipesMachine {
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidOreSludgeChromite.getName()), RecipeSlotType.TANK, 1000) };
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemChromiteWashedChunks.itemID, RecipeSlotType.INVENTORY, 1, 2, 0), new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidfiltyWater.getName()), RecipeSlotType.TANK, 0, 1000, 0.5) };
+	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.fluidOreSludgeChromite.getItem(), 1000) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemChromiteWashedChunks, RecipeSlotType.INVENTORY, 1, 2, 0), new RecipeOutputSlot(1, IndustrialProcessing.fluidFiltyWater.getItem(), 0, 1000, 0.5) };
 	return recipe;
     }
 
@@ -64,8 +63,8 @@ public class RecipesDryer extends RecipesMachine {
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidOreSludgeTalia.getName()), RecipeSlotType.TANK, 1000) };
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemTaliaWashedChunks.itemID, RecipeSlotType.INVENTORY, 1, 2, 0), new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidfiltyWater.getName()), RecipeSlotType.TANK, 0, 1000, 0.5) };
+	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.fluidOreSludgeTalia.getItem(), 1000) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemTaliaWashedChunks, RecipeSlotType.INVENTORY, 1, 2, 0), new RecipeOutputSlot(1, IndustrialProcessing.fluidFiltyWater.getItem(), 0, 1000, 0.5) };
 	return recipe;
     }
 
@@ -73,8 +72,8 @@ public class RecipesDryer extends RecipesMachine {
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidOreSludgeGalena.getName()), RecipeSlotType.TANK, 1000) };
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemGalenaWashedChunks.itemID, RecipeSlotType.INVENTORY, 1, 2, 0), new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidfiltyWater.getName()), RecipeSlotType.TANK, 0, 1000, 0.5) };
+	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.fluidOreSludgeGalena.getItem(), 1000) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemGalenaWashedChunks, RecipeSlotType.INVENTORY, 1, 2, 0), new RecipeOutputSlot(1, IndustrialProcessing.fluidFiltyWater.getItem(), 0, 1000, 0.5) };
 	return recipe;
     }
 
@@ -82,8 +81,8 @@ public class RecipesDryer extends RecipesMachine {
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidOreSludgeGold.getName()), RecipeSlotType.TANK, 1000) };
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemGoldWashedChunks.itemID, RecipeSlotType.INVENTORY, 1, 2, 0), new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidfiltyWater.getName()), RecipeSlotType.TANK, 0, 1000, 0.5) };
+	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.fluidOreSludgeGold.getItem(), 1000) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemGoldWashedChunks, RecipeSlotType.INVENTORY, 1, 2, 0), new RecipeOutputSlot(1, IndustrialProcessing.fluidFiltyWater.getItem(), 0, 1000, 0.5) };
 	return recipe;
     }
 
@@ -91,8 +90,8 @@ public class RecipesDryer extends RecipesMachine {
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidOreSludgeTin.getName()), RecipeSlotType.TANK, 1000) };
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemTinWashedChunks.itemID, RecipeSlotType.INVENTORY, 1, 2, 0), new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidfiltyWater.getName()), RecipeSlotType.TANK, 0, 1000, 0.5) };
+	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.fluidOreSludgeTin.getItem(), 1000) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemTinWashedChunks, RecipeSlotType.INVENTORY, 1, 2, 0), new RecipeOutputSlot(1, IndustrialProcessing.fluidFiltyWater.getItem(), 0, 1000, 0.5) };
 	return recipe;
     }
 
@@ -100,8 +99,8 @@ public class RecipesDryer extends RecipesMachine {
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidOreSludgeCopper.getName()), RecipeSlotType.TANK, 1000) };
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemCopperWashedChunks.itemID, RecipeSlotType.INVENTORY, 1, 2, 0), new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidfiltyWater.getName()), RecipeSlotType.TANK, 0, 1000, 0.5) };
+	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.fluidOreSludgeCopper.getItem(), 1000) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemCopperWashedChunks, RecipeSlotType.INVENTORY, 1, 2, 0), new RecipeOutputSlot(1, IndustrialProcessing.fluidFiltyWater.getItem(), 0, 1000, 0.5) };
 	return recipe;
     }
 
@@ -109,8 +108,8 @@ public class RecipesDryer extends RecipesMachine {
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidOreSludgeIron.getName()), RecipeSlotType.TANK, 100) };
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemIronWashedChunks.itemID, RecipeSlotType.INVENTORY, 1, 2, 0.35), new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidfiltyWater.getName()), RecipeSlotType.TANK, 90, 110, 0.5) };
+	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.fluidOreSludgeIron.getItem(), 120) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemIronWashedChunks, RecipeSlotType.INVENTORY, 1, 2, 0.2), new RecipeOutputSlot(1, IndustrialProcessing.fluidFiltyWater.getItem(), 90, 110, 0.5) };
 	return recipe;
     }
 
@@ -118,8 +117,8 @@ public class RecipesDryer extends RecipesMachine {
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidPasteIronSediment.getName()), RecipeSlotType.TANK, 1000) };
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemIronOxideDust.itemID, RecipeSlotType.INVENTORY, 1, 2, 0), new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 0, 200, 0.5) };
+	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.fluidPasteIronSediment.getItem(), 1000) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemIronOxideDust, RecipeSlotType.INVENTORY, 1, 2, 0), new RecipeOutputSlot(1, IndustrialProcessing.fluidDirtyWater.getItem(), 0, 200, 0.5) };
 	return recipe;
     }
 
@@ -127,8 +126,8 @@ public class RecipesDryer extends RecipesMachine {
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidPasteTinSediment.getName()), RecipeSlotType.TANK, 1000) };
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemTinOxideDust.itemID, RecipeSlotType.INVENTORY, 1, 2, 0), new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 0, 200, 0.5) };
+	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.fluidPasteTinSediment.getItem(), 1000) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemTinOxideDust, RecipeSlotType.INVENTORY, 1, 2, 0), new RecipeOutputSlot(1, IndustrialProcessing.fluidDirtyWater.getItem(), 0, 200, 0.5) };
 	return recipe;
     }
 
@@ -136,8 +135,8 @@ public class RecipesDryer extends RecipesMachine {
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidPasteCopperSediment.getName()), RecipeSlotType.TANK, 1000) };
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemCopperMineral.itemID, RecipeSlotType.INVENTORY, 1, 2, 0), new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 0, 200, 0.5) };
+	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.fluidPasteCopperSediment.getItem(), 1000) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemCopperMineral, RecipeSlotType.INVENTORY, 1, 2, 0), new RecipeOutputSlot(1, IndustrialProcessing.fluidDirtyWater.getItem(), 0, 200, 0.5) };
 	return recipe;
     }
 
@@ -145,8 +144,8 @@ public class RecipesDryer extends RecipesMachine {
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidPasteTaliaSediment.getName()), RecipeSlotType.TANK, 1000) };
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemTaliaDust.itemID, RecipeSlotType.INVENTORY, 1, 2, 0), new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 0, 200, 0.5) };
+	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.fluidPasteTaliaSediment.getItem(), 1000) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemTaliaDust, RecipeSlotType.INVENTORY, 1, 2, 0), new RecipeOutputSlot(1, IndustrialProcessing.fluidDirtyWater.getItem(), 0, 200, 0.5) };
 	return recipe;
     }
 
@@ -154,8 +153,8 @@ public class RecipesDryer extends RecipesMachine {
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidPasteChromiteSediment.getName()), RecipeSlotType.TANK, 1000) };
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemChromiteDust.itemID, RecipeSlotType.INVENTORY, 1, 2, 0), new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 0, 200, 0.5) };
+	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.fluidPasteChromiteSediment.getItem(), 1000) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemChromiteDust, RecipeSlotType.INVENTORY, 1, 2, 0), new RecipeOutputSlot(1, IndustrialProcessing.fluidDirtyWater.getItem(), 0, 200, 0.5) };
 	return recipe;
     }
 
@@ -163,8 +162,8 @@ public class RecipesDryer extends RecipesMachine {
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidPasteGoldSediment.getName()), RecipeSlotType.TANK, 1000) };
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemGoldDust.itemID, RecipeSlotType.INVENTORY, 1, 2, 0), new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 0, 200, 0.5) };
+	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.fluidPasteGoldSediment.getItem(), 1000) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemGoldDust, RecipeSlotType.INVENTORY, 1, 2, 0), new RecipeOutputSlot(1, IndustrialProcessing.fluidDirtyWater.getItem(), 0, 200, 0.5) };
 	return recipe;
     }
 
@@ -172,8 +171,8 @@ public class RecipesDryer extends RecipesMachine {
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidPasteGalenaSediment.getName()), RecipeSlotType.TANK, 1000) };
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemSilverDust.itemID, RecipeSlotType.INVENTORY, 1, 2, 0), new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 0, 200, 0.5) };
+	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, IndustrialProcessing.fluidPasteGalenaSediment.getItem(), 1000) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemSilverDust, RecipeSlotType.INVENTORY, 1, 2, 0), new RecipeOutputSlot(1, IndustrialProcessing.fluidDirtyWater.getItem(), 0, 200, 0.5) };
 	return recipe;
     }
 

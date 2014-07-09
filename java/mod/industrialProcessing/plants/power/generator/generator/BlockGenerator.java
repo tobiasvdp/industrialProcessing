@@ -21,7 +21,7 @@ public class BlockGenerator extends BlockPowerGenerator implements IGuiBlock, ID
     private static IGuiBuilder gui = new GuiBuilderCrafting("Machine Block").addInputSlotCluster(1, 9, 3, Orientation.HORIZONTAL).setFillingSlot(5);
 
     public BlockGenerator() {
-        super(1.0f,1.0f, Material.iron, Block.soundTypeMetal, "tankSide","generatorFeatures");
+        super(1.0f,1.0f, Material.iron, Block.soundTypeMetal,"generatorFeatures", "tankSide");
     }
 
     @Override

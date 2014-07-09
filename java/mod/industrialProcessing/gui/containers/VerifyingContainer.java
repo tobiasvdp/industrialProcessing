@@ -113,7 +113,7 @@ public abstract class VerifyingContainer extends Container {
     }
 
     public int getSizeInventory() {
-        return 0;
+        return inventorySlots.size();
     }
 
     @Override

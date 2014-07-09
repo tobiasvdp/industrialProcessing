@@ -18,7 +18,8 @@ import mod.industrialProcessing.plants.construction.weldingStation.dummy.screen.
 import mod.industrialProcessing.plants.construction.weldingStation.dummy.weldingTable.BlockWeldingTable;
 import mod.industrialProcessing.plants.decoration.light.hangingLamp.BlockPetrolLamp;
 import mod.industrialProcessing.plants.decoration.light.torch.BlockTorch;
-import mod.industrialProcessing.plants.machine.crusher.BlockCrusher;
+import mod.industrialProcessing.plants.grinding.crusher.BlockCrusher;
+import mod.industrialProcessing.plants.machine.dryer.BlockDryer;
 import mod.industrialProcessing.plants.machine.filter.BlockFilter;
 import mod.industrialProcessing.plants.machine.mixer.BlockMixer;
 import mod.industrialProcessing.plants.machine.treetap.BlockManualTreeTap;
@@ -54,6 +55,7 @@ public interface ISetupBlockContainers {
     public final static BlockCrusher blockCrusher = new BlockCrusher();
     public final static BlockFilter blockFilter = new BlockFilter();
     public final static BlockMixer blockMixer = new BlockMixer();
+    public final static BlockDryer blockDryer = new BlockDryer();
     
     public final static BlockManualGenerator blockManualGenerator = new BlockManualGenerator();
     public final static BlockWire blockWire = new BlockWire();

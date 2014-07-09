@@ -9,7 +9,7 @@ import mod.industrialProcessing.block.platforms.ModelStairs;
 import mod.industrialProcessing.blockContainer.ISetupBlockContainers;
 import mod.industrialProcessing.client.rendering.block.ModelBlock;
 import mod.industrialProcessing.client.rendering.tileEntity.ModelTileEntity;
-import mod.industrialProcessing.plants.machine.crusher.ModelCrusher;
+import mod.industrialProcessing.plants.grinding.crusher.ModelCrusher;
 import mod.industrialProcessing.utils.registry.RenderRegistry;
 
 public class ClientProxy extends CommonProxy {

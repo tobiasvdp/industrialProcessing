@@ -16,6 +16,8 @@ public class RecipesForge extends RecipesMultiblock {
 	private void addTier0Recipes() {
 		addRecipe(heatIron(6000));
 		addRecipe(heatCopper(6000));
+		addRecipe(heatIronCrushed(6000));
+		addRecipe(heatCopperCrushed(6000));
 	}
 
 	private RecipeMultiblock heatIron(int work) {
@@ -31,6 +33,22 @@ public class RecipesForge extends RecipesMultiblock {
 		recipe.tier = Tiers.Tier0;
 		recipe.workRequired = work;
 		recipe.inputs =  new RecipeInputSlot[]{new RecipeInputSlot(0, new ItemStack(IndustrialProcessing.itemHeatedCopper))};
+		recipe.outputs =  new RecipeOutputSlot[]{new RecipeOutputSlot(1, new ItemStack(IndustrialProcessing.itemPliersHeatedCopper))};
+		return recipe;
+	}
+	private RecipeMultiblock heatIronCrushed(int work) {
+		RecipeMultiblock recipe = new RecipeMultiblock();
+		recipe.tier = Tiers.Tier0;
+		recipe.workRequired = work;
+		recipe.inputs =  new RecipeInputSlot[]{new RecipeInputSlot(0, new ItemStack(IndustrialProcessing.itemIronCrushedChunks))};
+		recipe.outputs =  new RecipeOutputSlot[]{new RecipeOutputSlot(1, new ItemStack(IndustrialProcessing.itemPliersBloomIron))};
+		return recipe;
+	}
+	private RecipeMultiblock heatCopperCrushed(int work) {
+		RecipeMultiblock recipe = new RecipeMultiblock();
+		recipe.tier = Tiers.Tier0;
+		recipe.workRequired = work;
+		recipe.inputs =  new RecipeInputSlot[]{new RecipeInputSlot(0, new ItemStack(IndustrialProcessing.itemCopperCrushedChunks))};
 		recipe.outputs =  new RecipeOutputSlot[]{new RecipeOutputSlot(1, new ItemStack(IndustrialProcessing.itemPliersHeatedCopper))};
 		return recipe;
 	}

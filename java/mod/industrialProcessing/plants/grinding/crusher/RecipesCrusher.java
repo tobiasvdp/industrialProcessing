@@ -1,4 +1,4 @@
-package mod.industrialProcessing.plants.machine.crusher;
+package mod.industrialProcessing.plants.grinding.crusher;
 
 import mod.industrialProcessing.block.ISetupBlocks;
 import mod.industrialProcessing.items.ISetupItems;
@@ -239,7 +239,7 @@ public class RecipesCrusher extends RecipesMachine {
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.getItemFromBlock(ISetupBlocks.blockRutile), RecipeSlotType.INVENTORY, 1) };
 
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, ISetupItems.itemRutileLargeCrushedCrystals, RecipeSlotType.INVENTORY, 1, 3, 0) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, ISetupItems.itemRutileLargeCrushedCrystals, RecipeSlotType.INVENTORY, 1, 2, 0.2) };
 	recipe.workRequired = workTime;
 	recipe.powerRequired = powerConsumption;
 	return recipe;
@@ -249,7 +249,7 @@ public class RecipesCrusher extends RecipesMachine {
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.getItemFromBlock(ISetupBlocks.blockCinnebar), RecipeSlotType.INVENTORY, 1) };
 
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, ISetupItems.itemCinnebarLargeCrushedCrystals, RecipeSlotType.INVENTORY, 1, 3, 0) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, ISetupItems.itemCinnebarLargeCrushedCrystals, RecipeSlotType.INVENTORY, 1, 3, 0.2) };
 	recipe.workRequired = workTime;
 	recipe.powerRequired = powerConsumption;
 	return recipe;
@@ -259,7 +259,7 @@ public class RecipesCrusher extends RecipesMachine {
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.getItemFromBlock(ISetupBlocks.blockTaliaOre), RecipeSlotType.INVENTORY, 1) };
 
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, ISetupItems.itemTaliaCrushedChunks, RecipeSlotType.INVENTORY, 1, 2, 0) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, ISetupItems.itemTaliaCrushedChunks, RecipeSlotType.INVENTORY, 1, 2, 0.2) };
 	recipe.workRequired = workTime;
 	recipe.powerRequired = powerConsumption;
 	return recipe;
@@ -269,7 +269,7 @@ public class RecipesCrusher extends RecipesMachine {
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.getItemFromBlock(ISetupBlocks.blockChromiteOre), RecipeSlotType.INVENTORY, 1) };
 
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, ISetupItems.itemChromiteCrushedChunks, RecipeSlotType.INVENTORY, 1, 2, 0) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, ISetupItems.itemChromiteCrushedChunks, RecipeSlotType.INVENTORY, 1, 2, 0.2) };
 	recipe.workRequired = workTime;
 	recipe.powerRequired = powerConsumption;
 	return recipe;
@@ -279,7 +279,7 @@ public class RecipesCrusher extends RecipesMachine {
 	PoweredRecipe TinCrushing = new PoweredRecipe();
 	TinCrushing.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.getItemFromBlock(ISetupBlocks.blockTinOre), RecipeSlotType.INVENTORY, 1) };
 
-	TinCrushing.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, ISetupItems.itemTinCrushedChunks, RecipeSlotType.INVENTORY, 1, 2, 0) };
+	TinCrushing.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, ISetupItems.itemTinCrushedChunks, RecipeSlotType.INVENTORY, 1, 2, 0.2) };
 	TinCrushing.workRequired = workTime;
 	TinCrushing.powerRequired = powerConsumption;
 	return TinCrushing;
@@ -309,7 +309,7 @@ public class RecipesCrusher extends RecipesMachine {
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.getItemFromBlock(ISetupBlocks.blockGalenaOre), RecipeSlotType.INVENTORY, 1) };
 
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, ISetupItems.itemGalenaCrushedChunks, RecipeSlotType.INVENTORY, 1, 2, 0) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, ISetupItems.itemGalenaCrushedChunks, RecipeSlotType.INVENTORY, 1, 2, 0.2) };
 	recipe.workRequired = workTime;
 	recipe.powerRequired = powerConsumption;
 	return recipe;
@@ -319,7 +319,7 @@ public class RecipesCrusher extends RecipesMachine {
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.getItemFromBlock(Blocks.gold_ore), RecipeSlotType.INVENTORY, 1) };
 
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, ISetupItems.itemGoldCrushedChunks, RecipeSlotType.INVENTORY, 1, 2, 0) };
+	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, ISetupItems.itemGoldCrushedChunks, RecipeSlotType.INVENTORY, 1, 2, 0.2) };
 	recipe.workRequired = workTime;
 	recipe.powerRequired = powerConsumption;
 	return recipe;
@@ -357,7 +357,7 @@ public class RecipesCrusher extends RecipesMachine {
     private Recipe copperOreToCrushedChunks(int workTime, int powerConsumption) {
 	PoweredRecipe copperCrushing = new PoweredRecipe();
 	copperCrushing.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.getItemFromBlock(ISetupBlocks.blockCopperOre), RecipeSlotType.INVENTORY, 1) };
-	copperCrushing.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, ISetupItems.itemCopperCrushedChunks, RecipeSlotType.INVENTORY, 1, 2, 0) };
+	copperCrushing.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, ISetupItems.itemCopperCrushedChunks, RecipeSlotType.INVENTORY, 1, 2, 0.2) };
 	copperCrushing.workRequired = workTime;
 	copperCrushing.powerRequired = powerConsumption;
 	return copperCrushing;

@@ -31,7 +31,7 @@ public class TileEntityMixer extends TileEntityMachineTankWorkPower{
 		addStack(null, nodirections, false, true); // Liquid Output Full
 		// Output
 
-		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.RIGHT, true, false,1,2);
+		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.LEFT, true, false,1,2);
 		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.DOWN, false, true,3,4);
 		
 		setupTankSync(0);

@@ -44,8 +44,10 @@ import mod.industrialProcessing.plants.construction.weldingStation.model.ModelWe
 import mod.industrialProcessing.plants.decoration.light.hangingLamp.TileEntityPetrolLamp;
 import mod.industrialProcessing.plants.decoration.light.hangingLamp.model.ModelPetrolLamp;
 import mod.industrialProcessing.plants.decoration.light.torch.TileEntityTorch;
-import mod.industrialProcessing.plants.machine.crusher.ModelCrusher;
-import mod.industrialProcessing.plants.machine.crusher.TileEntityCrusher;
+import mod.industrialProcessing.plants.grinding.crusher.ModelCrusher;
+import mod.industrialProcessing.plants.grinding.crusher.TileEntityCrusher;
+import mod.industrialProcessing.plants.machine.dryer.ModelDryer;
+import mod.industrialProcessing.plants.machine.dryer.TileEntityDryer;
 import mod.industrialProcessing.plants.machine.filter.ModelFilter;
 import mod.industrialProcessing.plants.machine.filter.TileEntityFilter;
 import mod.industrialProcessing.plants.machine.mixer.ModelMixer;
@@ -125,6 +127,7 @@ public class ConfigBlockContainers {
 		BlockRegistry.registerMachine(IndustrialProcessing.blockCrusher, TileEntityCrusher.class, "IP.machine.crusher", new ModelCrusher());
 		BlockRegistry.registerMachine(IndustrialProcessing.blockFilter, TileEntityFilter.class, "IP.machine.filter", new ModelFilter());
 		BlockRegistry.registerMachine(IndustrialProcessing.blockMixer, TileEntityMixer.class, "IP.machine.mixer", new ModelMixer());
+		BlockRegistry.registerMachine(IndustrialProcessing.blockDryer, TileEntityDryer.class, "IP.machine.dryer", new ModelDryer());
 		BlockRegistry.registerMachine(IndustrialProcessing.blockManualGenerator, TileEntityManualGenerator.class, "IP.generator.manual", new ModelCrankGenerator(true));
 		BlockRegistry.registerMachine(IndustrialProcessing.blockElectroMotor, TileEntityElectroMotor.class, "IP.motor.electro", new ModelElectroMotorBlock(), new ModelElectroMotorTile());
 		BlockRegistry.registerMachine(IndustrialProcessing.blockWire, TileEntityWire.class, "IP.power.wire", new ModelWireBlock());

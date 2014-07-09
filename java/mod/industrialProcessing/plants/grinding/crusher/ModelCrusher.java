@@ -1,4 +1,4 @@
-package mod.industrialProcessing.plants.machine.crusher;
+package mod.industrialProcessing.plants.grinding.crusher;
 
 import mod.industrialProcessing.client.rendering.tileEntity.ModelAnimatedMachine;
 import net.minecraft.client.model.ModelRenderer;

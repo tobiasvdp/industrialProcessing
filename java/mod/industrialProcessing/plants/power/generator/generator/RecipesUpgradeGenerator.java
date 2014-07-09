@@ -23,8 +23,18 @@ public class RecipesUpgradeGenerator extends RecipesMachine {
 	}
 
 	private void addDefaultRecipes() {
+		this.addRecipe(crank());
 
+	}
+	
+	private Recipe crank(){
+		Recipe recipe = new Recipe();
 
+		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(1, ISetupItems.itemCrankWheel, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(4, IndustrialProcessing.blockGenerator, RecipeSlotType.INVENTORY, 1)};
+
+		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(9, IndustrialProcessing.blockManualGenerator, RecipeSlotType.INVENTORY, 1, 1, 0) };
+
+		return recipe;
 	}
 
 	

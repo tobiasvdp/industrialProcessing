@@ -1,10 +1,11 @@
-package ip.industrialProcessing.machines.dryer;
+package mod.industrialProcessing.plants.machine.dryer;
 
-import ip.industrialProcessing.api.rendering.ModelMachine;
+import mod.industrialProcessing.client.rendering.tileEntity.ModelAnimatedMachine;
+import mod.industrialProcessing.client.rendering.tileEntity.ModelTileEntity;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.tileentity.TileEntity;
 
-public class ModelDryer extends ModelMachine {
+public class ModelDryer extends ModelAnimatedMachine {
 
 	ModelRenderer Support1;
 	ModelRenderer Support2;
@@ -198,6 +199,36 @@ public class ModelDryer extends ModelMachine {
 
 	@Override
 	public void renderModel(TileEntity tileEntity, float f5) {
+		Support1.render(f5);
+		Support2.render(f5);
+		Tumbler1.render(f5);
+		Tumbler2.render(f5);
+		Tumbler3.render(f5);
+		Tumbler4.render(f5);
+		Tumbler5.render(f5);
+		Tumbler6.render(f5);
+		Tumbler7.render(f5);
+		Tumbler8.render(f5);
+		FluidTubeUp.render(f5);
+		FluidConnectorTop.render(f5);
+		PowerConnectorLeft.render(f5);
+		FluidTubeDown.render(f5);
+		FluidConnectorBottom.render(f5);
+		CrossSupport5.render(f5);
+		CrossSupport6.render(f5);
+		CrossSupport4.render(f5);
+		CrossSupport3.render(f5);
+		CrossSupport2.render(f5);
+		CrossSupport1.render(f5);
+		PowerBox.render(f5);
+		PowerSupport1.render(f5);
+		PowerSupport2.render(f5);
+		ItemConnectorFront.render(f5);
+		ItemConnectorBack.render(f5);
+	}
+
+	@Override
+	public void renderModelAnimated(TileEntity tileEntity, float f5, float[] progress) {
 		Support1.render(f5);
 		Support2.render(f5);
 		Tumbler1.render(f5);

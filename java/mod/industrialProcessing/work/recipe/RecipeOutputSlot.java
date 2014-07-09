@@ -98,4 +98,13 @@ public class RecipeOutputSlot extends RecipeSlot {
 		this.minAmount = max;
 		this.distributionCenter = 0.5;
 	}
+	public RecipeOutputSlot(int index,Fluid stack,int min,int max, double center){
+		super();
+		this.index = index;
+		this.fluid = stack;
+		this.type = RecipeSlotType.TANK;
+		this.maxAmount = min;
+		this.minAmount = max;
+		this.distributionCenter = center;
+	}
 }

@@ -23,20 +23,8 @@ public class RecipesUpgradeElectroMotor extends RecipesMachine {
 	}
 
 	private void addDefaultRecipes() {
-		addRecipe(crusher());
 		addRecipe(generator());
-		addRecipe(electroMotor());
 
-	}
-
-	private Recipe crusher() {
-		Recipe recipe = new Recipe();
-
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(1, ISetupItems.itemSmallEngine, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(7, ISetupItems.itemStripBoardWired, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(3, ISetupItems.itemCrusingPlate, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(4, IndustrialProcessing.blockMachineBlock, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(5, ISetupItems.itemCrusingPlate, RecipeSlotType.INVENTORY, 1) };
-
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(9, IndustrialProcessing.blockCrusher, RecipeSlotType.INVENTORY, 1, 1, 0) };
-
-		return recipe;
 	}
 
 	private Recipe generator() {
@@ -49,12 +37,5 @@ public class RecipesUpgradeElectroMotor extends RecipesMachine {
 		return recipe;
 	}
 
-	private Recipe electroMotor() {
-		Recipe recipe = new Recipe();
 
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(3, ISetupItems.itemMotorStator, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(4, IndustrialProcessing.blockMachineBlock, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(5, ISetupItems.itemMotorRotor, RecipeSlotType.INVENTORY, 1) };
-
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(9, IndustrialProcessing.blockElectroMotor, RecipeSlotType.INVENTORY, 1, 1, 0) };
-		return recipe;
-	}
 }

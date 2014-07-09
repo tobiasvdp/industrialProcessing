@@ -1,4 +1,4 @@
-package mod.industrialProcessing.plants.machine.crusher;
+package mod.industrialProcessing.plants.grinding.crusher;
 
 import java.util.Random;
 
