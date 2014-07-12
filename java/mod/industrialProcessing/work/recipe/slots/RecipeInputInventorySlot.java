@@ -1,6 +1,7 @@
 package mod.industrialProcessing.work.recipe.slots;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import mod.industrialProcessing.utils.inventory.IInventorySlots;
 import mod.industrialProcessing.work.recipe.IRecipeWorkHandler;
 import mod.industrialProcessing.work.recipe.Inputs.ExactInputBlock;
 import mod.industrialProcessing.work.recipe.Inputs.ExactInputItem;
@@ -78,7 +79,7 @@ public class RecipeInputInventorySlot extends RecipeInputSlot {
 		return this.item.isValid(item2);
 	}
 
-	public void removeFrom(IRecipeWorkHandler handler) {
+	public void removeFrom(IInventorySlots handler) {
 
 		if (!handler.removeFromSlot(this.index, this.getMaxAmount()))
 			System.err.println("Failed to remove recipe input?!");

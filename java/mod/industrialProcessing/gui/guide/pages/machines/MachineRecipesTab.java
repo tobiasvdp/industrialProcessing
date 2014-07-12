@@ -106,7 +106,8 @@ public class MachineRecipesTab extends TabPage implements IButtonClickListener<I
 	}
 
 	private ItemStack getStack(RecipeOutputInventorySlot mainProduct) {
-		switch (mainProduct.type) {
+		
+		/*switch (mainProduct.type) {
 		case INVENTORY:
 		case DAMAGEDITEM:
 			return new ItemStack(mainProduct.getItem(), 1, mainProduct.damage);
@@ -115,7 +116,9 @@ public class MachineRecipesTab extends TabPage implements IButtonClickListener<I
 			return new ItemStack(fluid.getBlock(), 1, 0);
 		default:
 			return null;
-		}
+		}*/
+		
+		return mainProduct.getDefaultDisplayStack();
 	}
 
 	@Override

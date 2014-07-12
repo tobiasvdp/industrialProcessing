@@ -3,6 +3,7 @@ package mod.industrialProcessing.work.recipe;
 import java.util.Iterator;
 import java.util.Random;
 
+import net.minecraft.item.ItemStack;
 import mod.industrialProcessing.work.recipe.slots.RecipeInputInventorySlot;
 import mod.industrialProcessing.work.recipe.slots.RecipeOutputInventorySlot;
 import mod.industrialProcessing.work.recipe.slots.RecipeSlotType;
@@ -10,154 +11,126 @@ import mod.industrialProcessing.work.worker.ServerWorker;
 
 public class RecipeMultiblockWorker extends ServerWorker {
 
-    private Random random;
-    protected IRecipeMultiblockWorkHandler handler;
-    protected RecipeMultiblock recipe;
-	
+	private Random random;
+	protected IRecipeMultiblockWorkHandler handler;
+	protected RecipeMultiblock recipe;
+
 	public RecipeMultiblockWorker(IRecipeMultiblockWorkHandler handler) {
-		super(handler,100);
-        this.handler = handler;
-        this.random = new Random(156464564);
+		super(handler, 100);
+		this.handler = handler;
+		this.random = new Random(156464564);
 	}
+
 	protected boolean matchesInput(RecipeMultiblock currentRecipe) {
-	        if (currentRecipe == null)
-	            return false;
-	        if (currentRecipe.inputs == null)
-	            return false;
-	        if(currentRecipe.tier != handler.getTier())
-	        	return false;
-	        for (int i = 0; i < currentRecipe.inputs.length; i++) {
-	            RecipeInputInventorySlot slot = currentRecipe.inputs[i];
-	            if (!hasInputIngredients(slot))
-	                return false;
-	        }
-	        return true;
-	    }
-	
-	
-	 @Override
-	    public boolean hasWork() {
-	        return super.hasWork() && matchesInput(this.recipe);
-	    };
+		if (currentRecipe == null)
+			return false;
+		if (currentRecipe.inputs == null)
+			return false;
+		if (currentRecipe.tier != handler.getTier())
+			return false;
+		for (int i = 0; i < currentRecipe.inputs.length; i++) {
+			RecipeInputInventorySlot slot = currentRecipe.inputs[i];
+			if (!hasInputIngredients(slot))
+				return false;
+		}
+		return true;
+	}
 
-	    @Override
-	    public boolean canWork() {
-	        return super.canWork() && outputAvailable(this.recipe);
-	    };
+	@Override
+	public boolean hasWork() {
+		return super.hasWork() && matchesInput(this.recipe);
+	};
 
-	    @Override
-	    protected void onEndWork() {
-	        removeInput(recipe);
-	        produceOutput(recipe);
-	        super.onEndWork();
-	        this.recipe = null;
-	    }
+	@Override
+	public boolean canWork() {
+		return super.canWork() && outputAvailable(this.recipe);
+	};
 
-	    @Override
-	    protected void onPrepareWork() {
-	        this.recipe = this.getCurrentRecipe();
-	        if (recipe != null)
-	            this.totalWork = this.recipe.workRequired;
-	        else
-	            this.totalWork = 0;
-	        super.onPrepareWork();
-	    }
+	@Override
+	protected void onEndWork() {
+		removeInput(recipe);
+		produceOutput(recipe);
+		super.onEndWork();
+		this.recipe = null;
+	}
 
-	    public RecipeMultiblock getCurrentRecipe() {
-	        Iterator<RecipeMultiblock> iterator = this.handler.iterateRecipes();
-	        if (iterator == null)
-	            return null;
-	        for (; iterator.hasNext();) {
-	        	RecipeMultiblock currentRecipe = iterator.next();
-	            if (matchesInput(currentRecipe)) {
-	                return currentRecipe;
-	            }
-	        }
-	        return null;
-	    }
+	@Override
+	protected void onPrepareWork() {
+		this.recipe = this.getCurrentRecipe();
+		if (recipe != null)
+			this.totalWork = this.recipe.workRequired;
+		else
+			this.totalWork = 0;
+		super.onPrepareWork();
+	}
 
-	    protected boolean hasInputIngredients(RecipeInputInventorySlot slot) {
-	        if (slot.type == RecipeSlotType.INVENTORY || slot.type == RecipeSlotType.DAMAGEDITEM) {
-	            if (slot.hasMetadata)
-	                return this.handler.slotContains(slot.index, slot.getItem(), slot.metadata, slot.amount);
-	            else
-	                return this.handler.slotContains(slot.index, slot.getItem(), slot.amount);
-	        }
-	        return false;
-	    }
+	public RecipeMultiblock getCurrentRecipe() {
+		Iterator<RecipeMultiblock> iterator = this.handler.iterateRecipes();
+		if (iterator == null)
+			return null;
+		for (; iterator.hasNext();) {
+			RecipeMultiblock currentRecipe = iterator.next();
+			if (matchesInput(currentRecipe)) {
+				return currentRecipe;
+			}
+		}
+		return null;
+	}
 
-	    private boolean outputAvailable(Recipe currentRecipe) {
-	        if (currentRecipe == null || currentRecipe.outputs == null)
-	            return false;
-	        for (int i = 0; i < currentRecipe.outputs.length; i++) {
-	            RecipeOutputInventorySlot slot = currentRecipe.outputs[i];
-	            if (!hasOutputSpace(slot))
-	                return false;
-	        }
-	        return true;
-	    }
+	protected boolean hasInputIngredients(RecipeInputInventorySlot slot) {
+		ItemStack stack = this.handler.getStackInSlot(slot.index);
+		if (stack == null)
+			return false;
+		return slot.isItemValid(stack);
+	}
 
-	    protected boolean hasOutputSpace(RecipeOutputInventorySlot slot) {
-	        if (slot.type == RecipeSlotType.INVENTORY) {
-	            return this.handler.slotHasRoomFor(slot.index, slot.getItem(), slot.maxAmount, slot.damage);
-	        }
-	        return false;
-	    }
+	protected boolean outputAvailable(Recipe currentRecipe) {
+		RecipeOutputInventorySlot[] outputSlots = recipe.getInventoryOutputs();
+		if (currentRecipe == null || outputSlots == null)
+			return false;
+		for (int i = 0; i < outputSlots.length; i++) {
+			RecipeOutputInventorySlot slot = outputSlots[i];
+			if (!hasOutputSpace(slot))
+				return false;
+		}
+		return true;
+	}
 
-	    private void removeInput(Recipe currentRecipe) {
-	        if (currentRecipe == null || currentRecipe.inputs == null)
-	            return;
-	        for (int i = 0; i < currentRecipe.inputs.length; i++) {
-	            RecipeInputInventorySlot slot = currentRecipe.inputs[i];
+	protected boolean hasOutputSpace(RecipeOutputInventorySlot slot) {
+		return slot.hasSpace(this.handler);
+	}
 
-	            removeFromInput(slot);
-	        }
-	    }
+	protected void removeInput(Recipe currentRecipe) {
+		RecipeInputInventorySlot[] inputSlots = currentRecipe.getInventoryInputs();
+		if (currentRecipe == null || inputSlots == null)
+			return;
+		for (int i = 0; i < inputSlots.length; i++) {
+			RecipeInputInventorySlot slot = currentRecipe.inputs[i];
 
-	    protected void removeFromInput(RecipeInputInventorySlot slot) {
-	        if (slot.type == RecipeSlotType.INVENTORY) {
-	            if (!this.handler.removeFromSlot(slot.index, slot.amount))
-	                System.err.println("Failed to remove recipe input?!");
-	        } else if (slot.type == RecipeSlotType.DAMAGEDITEM) {
-	            if (!this.handler.damageItem(slot.index))
-	                System.err.println("Failed to damage recipe input?!");
-	        }
-	    }
+			removeFromInput(slot);
+		}
+	}
 
-	    protected void produceOutput(Recipe recipe) {
+	protected void removeFromInput(RecipeInputInventorySlot slot) {
+		slot.removeFrom(handler);
+	}
 
-	        if (recipe == null || recipe.outputs == null)
-	            return;
-	        for (int i = 0; i < recipe.outputs.length; i++) {
-	            RecipeOutputInventorySlot slot = recipe.outputs[i];
+	protected void produceOutput(Recipe recipe) {
+		RecipeOutputInventorySlot[] outputSlots = recipe.getInventoryOutputs();
+		if (recipe == null || outputSlots == null)
+			return;
+		for (int i = 0; i < outputSlots.length; i++) {
+			RecipeOutputInventorySlot slot = outputSlots[i];
 
-	            double randomValue = random.nextGaussian();
+			double randomValue = random.nextGaussian();
 
-	            int amount = getAmount(randomValue, slot.minAmount, slot.maxAmount, slot.distributionCenter);
-	            if (amount > 0)
-	                addToOutput(amount, slot);
-	        }
+			int amount = slot.getRandomAmount(randomValue);
+			if (amount > 0)
+				addToOutput(amount, slot);
+		}
+	}
 
-	    }
-
-	    protected void addToOutput(int amount, RecipeOutputInventorySlot slot) {
-	        if (slot.type == RecipeSlotType.INVENTORY) {
-	            if (!this.handler.addToSlot(slot.index, slot.getItem(), amount, slot.damage))
-	                System.err.println("Failed to create recipe output?!");
-	        }
-	    }
-
-	    protected int getAmount(double randomValue, int minAmount, int maxAmount, double distributionCenter) {
-	        int size = maxAmount - minAmount;
-	        if (size == 0)
-	            return minAmount;
-
-	        double value = randomValue;
-	        double resize = Math.abs(0.5 - distributionCenter) + 1;
-	        value *= resize;
-	        value = Math.max(0, Math.min(value + distributionCenter, 1));
-	        int amount = (int) Math.round(value * size) + minAmount;
-	        return amount;
-	    }
-
+	protected void addToOutput(int amount, RecipeOutputInventorySlot slot) {
+		slot.addToOutput(this.handler, amount);
+	}
 }

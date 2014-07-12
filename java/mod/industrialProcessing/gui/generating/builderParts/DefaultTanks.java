@@ -18,6 +18,7 @@ import mod.industrialProcessing.gui.framework.panels.GridSize;
 import mod.industrialProcessing.gui.framework.panels.SizeMode;
 import mod.industrialProcessing.gui.framework.slots.SlotLiquid;
 import mod.industrialProcessing.gui.framework.slots.SlotLiquidOutput;
+import mod.industrialProcessing.work.recipe.slots.IRecipeFluidSlot;
 import mod.industrialProcessing.work.recipe.slots.RecipeInputInventorySlot;
 import mod.industrialProcessing.work.recipe.slots.RecipeOutputInventorySlot;
 import mod.industrialProcessing.work.recipe.slots.RecipeSlot;
@@ -29,7 +30,7 @@ import net.minecraftforge.fluids.FluidStack;
 public class DefaultTanks {
 	public static void setup(ArrayList<TankReference> tankRefs, GuiLayoutContainer guiContainer, LayoutContainer container, GridPanel grid, Alignment max) {
 		for (TankReference tank : tankRefs) {
-			Binder binder;
+			Binder<ITankBinding> binder;
 			Control control;
 			int size;
 			if (tank.inputSlot >= 0 && tank.outputSlot >= 0) {
@@ -103,24 +104,28 @@ public class DefaultTanks {
 	}
 
 	private static FluidStack getStack(RecipeSlot[] slots, int tankSlot) {
-		for (int i = 0; i < slots.length; i++) {
-			RecipeSlot slot = slots[i];
-			if (slot.index == tankSlot && slot.type == RecipeSlotType.TANK) {
-				int amount = slot.getMaxAmount();
-				return new FluidStack(slot.fluid, amount);
+		if (slots != null)
+			for (int i = 0; i < slots.length; i++) {
+				RecipeSlot slot = slots[i];
+
+				if (slot.index == tankSlot && slot instanceof IRecipeFluidSlot) {
+					IRecipeFluidSlot fluidSlot = (IRecipeFluidSlot) slot;
+					if (slot.index == tankSlot) {
+						return fluidSlot.getDisplayFluidStack();
+					}
+				}
 			}
-		}
 		return null;
 	}
- 
 
 	public static int getMaxAmount(RecipeSlot[] outputs) {
 		int max = 0;
-		for (int i = 0; i < outputs.length; i++) {
-			int amount = outputs[i].getMaxAmount();
-			if (amount > max)
-				max = amount;
-		}
+		if (outputs != null)
+			for (int i = 0; i < outputs.length; i++) {
+				int amount = outputs[i].getMaxAmount();
+				if (amount > max)
+					max = amount;
+			}
 		return max;
 	}
 }

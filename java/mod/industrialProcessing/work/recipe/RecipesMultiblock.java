@@ -6,6 +6,7 @@ import java.util.Iterator;
 import net.minecraft.item.Item;
 import net.minecraftforge.fluids.Fluid;
 import mod.industrialProcessing.blockContainer.multiblock.tier.Tiers;
+import mod.industrialProcessing.work.recipe.slots.RecipeInputFluidSlot;
 import mod.industrialProcessing.work.recipe.slots.RecipeInputInventorySlot;
 import mod.industrialProcessing.work.recipe.slots.RecipeSlotType;
 
@@ -31,16 +32,14 @@ public class RecipesMultiblock implements IMachineRecipes<RecipeMultiblock> {
 		return recipes.iterator();
 	}
 
-	public boolean isValidFluidInput(int slot, Fluid fluidId, Tiers tier) {
+	public boolean isValidFluidInput(int slot, Fluid fluid, Tiers tier) {
 		for (Iterator<RecipeMultiblock> i = getRecipes(); i.hasNext();) {
 			RecipeMultiblock recipe = i.next();
-			for (RecipeInputInventorySlot input : recipe.inputs) {
-				if (input.type != RecipeSlotType.TANK)
-					continue;
-				if (input.index == slot && input.fluid.equals(fluidId))
-					if (recipe.tier == tier)
+			if (recipe.tier == tier)
+				for (RecipeInputFluidSlot input : recipe.getFluidInputs()) {
+					if (input.index == slot && input.isFluidValid(fluid))
 						return true;
-			}
+				}
 		}
 		return false;
 	}
@@ -48,13 +47,12 @@ public class RecipesMultiblock implements IMachineRecipes<RecipeMultiblock> {
 	public boolean isValidInput(int slot, Item item, Tiers tier) {
 		for (Iterator<RecipeMultiblock> i = getRecipes(); i.hasNext();) {
 			RecipeMultiblock recipe = i.next();
-			for (RecipeInputInventorySlot input : recipe.inputs) {
-				if (input.type != RecipeSlotType.INVENTORY && input.type != RecipeSlotType.DAMAGEDITEM)
-					continue;
-				if (input.index == slot && input.getItem().equals(item))
-					if (recipe.tier == tier)
+			if (recipe.tier == tier)
+				for (RecipeInputInventorySlot input : recipe.getInventoryInputs()) {
+
+					if (input.index == slot && input.isItemValid(item))
 						return true;
-			}
+				}
 		}
 		return false;
 	}

@@ -1,6 +1,8 @@
 package mod.industrialProcessing.work.recipe;
 
+import mod.industrialProcessing.work.recipe.slots.RecipeInputFluidSlot;
 import mod.industrialProcessing.work.recipe.slots.RecipeInputInventorySlot;
+import mod.industrialProcessing.work.recipe.slots.RecipeOutputFluidSlot;
 import mod.industrialProcessing.work.recipe.slots.RecipeOutputInventorySlot;
 import mod.industrialProcessing.work.recipe.slots.RecipeSlotType;
 
@@ -15,14 +17,15 @@ public class RecipeMultiblockFluidWorker extends RecipeMultiblockWorker {
 
 	@Override
 	protected boolean matchesInput(RecipeMultiblock currentRecipe) {
-		if (currentRecipe == null)
+		boolean inventory = super.matchesInput(currentRecipe);
+		if (!inventory)
 			return false;
-		if (currentRecipe.inputs == null)
+
+		RecipeInputFluidSlot[] inputSlots = currentRecipe.getFluidInputs();
+		if (inputSlots == null)
 			return false;
-		if (currentRecipe.tier != handler.getTier())
-			return false;
-		for (int i = 0; i < currentRecipe.inputs.length; i++) {
-			RecipeInputInventorySlot slot = currentRecipe.inputs[i];
+		for (int i = 0; i < inputSlots.length; i++) {
+			RecipeInputFluidSlot slot = inputSlots[i];
 			if (!hasInputIngredients(slot))
 				return false;
 		}
@@ -30,41 +33,54 @@ public class RecipeMultiblockFluidWorker extends RecipeMultiblockWorker {
 	}
 
 	@Override
-	protected boolean hasOutputSpace(RecipeOutputInventorySlot slot) {
-		if (slot.type == RecipeSlotType.TANK) {
-			return this.fluidHanlder.tankHasRoomFor(slot.index, slot.fluid, slot.maxAmount);
-		} else {
-			return super.hasOutputSpace(slot);
+	protected void removeInput(Recipe currentRecipe) { 
+		super.removeInput(currentRecipe);
+
+		RecipeInputFluidSlot[] inputSlots = currentRecipe.getFluidInputs();
+		if (currentRecipe == null || inputSlots == null)
+			return;
+		for (int i = 0; i < inputSlots.length; i++) {
+			RecipeInputFluidSlot slot = inputSlots[i];
+
+			removeFromInput(slot);
 		}
 	}
-
+	
 	@Override
-	protected boolean hasInputIngredients(RecipeInputInventorySlot slot) {
-		if (slot.type == RecipeSlotType.TANK) {
-			return this.fluidHanlder.tankContains(slot.index, slot.fluid, slot.amount);
-		} else {
-			return super.hasInputIngredients(slot);
+	protected boolean outputAvailable(Recipe currentRecipe) {
+		boolean inventory = super.outputAvailable(currentRecipe);
+
+		if (!inventory)
+			return false;
+
+		RecipeOutputFluidSlot[] outputSlots = recipe.getFluidOutputs();
+		if (currentRecipe == null || outputSlots == null)
+			return false;
+		for (int i = 0; i < outputSlots.length; i++) {
+			RecipeOutputFluidSlot slot = outputSlots[i];
+			if (!hasOutputSpace(slot))
+				return false;
 		}
+		return true;
+	}
+	
+
+	protected boolean hasOutputSpace(RecipeOutputFluidSlot slot) {
+
+		return slot.hasRoom(this.fluidHanlder);
+	}
+
+	protected boolean hasInputIngredients(RecipeInputFluidSlot fluidSlot) {
+		return this.fluidHanlder.tankContains(fluidSlot.index, fluidSlot.getFluid(), fluidSlot.getMaxAmount());
 	};
 
-	@Override
-	protected void removeFromInput(RecipeInputInventorySlot slot) {
-		if (slot.type == RecipeSlotType.TANK) {
-			if (!this.fluidHanlder.removeFromTank(slot.index, slot.fluid, slot.amount))
-				System.out.println("Failed to remove recipe inpt?!");
-		} else {
-			super.removeFromInput(slot);
-		}
+	protected void removeFromInput(RecipeInputFluidSlot slot) {
+
+		slot.removeFrom(this.fluidHanlder);
 	}
 
-	@Override
-	protected void addToOutput(int amount, RecipeOutputInventorySlot slot) {
-		if (slot.type == RecipeSlotType.TANK) {
-			if (!this.fluidHanlder.addToTank(slot.index, slot.fluid, amount))
-				System.out.println("Failed to create recipe output?! ");
-		} else {
-			super.addToOutput(amount, slot);
-		}
+	protected void addToOutput(int amount, RecipeOutputFluidSlot slot) {
+		slot.addToOutput(this.fluidHanlder, amount);
 	}
 
 }

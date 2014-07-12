@@ -1,5 +1,6 @@
 package mod.industrialProcessing.work.recipe.slots;
 
+import mod.industrialProcessing.utils.inventory.IInventorySlots;
 import mod.industrialProcessing.work.recipe.IRecipeWorkHandler;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -43,14 +44,14 @@ public class RecipeOutputInventorySlot extends RecipeOutputSlot {
 		this.item = stack.copy(); 
 	}
 
-	public boolean hasSpace(IRecipeWorkHandler handler) {
+	public boolean hasSpace(IInventorySlots handler) {
 
 		ItemStack newStack = this.item.copy();
 		newStack.stackSize = this.getMaxAmount();
 		return handler.slotHasRoomFor(index, newStack);
 	}
 
-	public void addToOutput(IRecipeWorkHandler handler, int amount) {
+	public void addToOutput(IInventorySlots handler, int amount) {
 
 		ItemStack newStack = this.item.copy();
 		newStack.stackSize = amount;
