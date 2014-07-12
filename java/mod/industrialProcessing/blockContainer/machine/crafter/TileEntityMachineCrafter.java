@@ -10,6 +10,7 @@ import mod.industrialProcessing.work.recipe.IMachineRecipe;
 import mod.industrialProcessing.work.recipe.RecipesMachine;
 import mod.industrialProcessing.work.recipe.Inputs.InputItem;
 import mod.industrialProcessing.work.recipe.slots.RecipeInputInventorySlot;
+import mod.industrialProcessing.work.recipe.slots.RecipeOutputInventorySlot;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -52,14 +53,8 @@ public class TileEntityMachineCrafter extends TileEntityMachineInv {
 						boolean found = false;
 						for (RecipeInputInventorySlot input : recipe.getInventoryInputs()) {
 							if (input.index == i - offset) {
-								if (input.getItem() == null) {
+								if (!input.isItemValid(te.getMachineStack(0).stack)) {
 									notRecipe = true;
-								} else {
-									InputItem item = input.getItem();
-									
-									if(!item.isValid(te.getMachineStack(i).stack)){
-										notRecipe = true;
-									}
 								}
 								found = true;
 							}
@@ -77,7 +72,8 @@ public class TileEntityMachineCrafter extends TileEntityMachineInv {
 				}
 			}
 			if (!notRecipe) {
-				return new ItemStack(recipe.getInventoryOutputs()[0].getItem(), recipe.getInventoryOutputs()[0].minAmount, recipe.getInventoryOutputs()[0].metadata);
+				RecipeOutputInventorySlot output = recipe.getInventoryOutputs()[0];
+				return output.createStack(output.getMinAmount());
 			}
 		}
 		return null;
@@ -97,12 +93,9 @@ public class TileEntityMachineCrafter extends TileEntityMachineInv {
 						boolean found = false;
 						for (RecipeInputInventorySlot input : recipe.getInventoryInputs()) {
 							if (input.index == i - offset) {
-								if (input.getItem() == null) {
+
+								if (!input.isItemValid(te.getMachineStack(0).stack)) {
 									notRecipe = true;
-								} else {
-									if (!input.getItem().equals(te.getMachineStack(i).stack.getItem())) {
-										notRecipe = true;
-									}
 								}
 								found = true;
 							}
@@ -147,7 +140,7 @@ public class TileEntityMachineCrafter extends TileEntityMachineInv {
 				for (RecipeInputInventorySlot input : recipe.getInventoryInputs()) {
 					te.decrStackSize(input.index + offset, 1);
 				}
-				te.onProduce(recipe.getInventoryOutputs()[0].getItem(), par4EntityPlayer);
+				te.onProduce(recipe.getInventoryOutputs()[0].createStack(1), par4EntityPlayer);
 			}
 		}
 	}
@@ -156,9 +149,10 @@ public class TileEntityMachineCrafter extends TileEntityMachineInv {
 		return needsToClose;
 	}
 
-	public void onProduce(Item item, EntityPlayer par4EntityPlayer) {
+	public void onProduce(ItemStack item, EntityPlayer par4EntityPlayer) {
 		if (blockset) {
-			this.getWorldObj().setBlock(xCoord, yCoord, zCoord, Block.getBlockFromItem(item));
+
+			this.getWorldObj().setBlock(xCoord, yCoord, zCoord, Block.getBlockFromItem(item.getItem()));
 			((IRotateableEntity) this.getWorldObj().getTileEntity(xCoord, yCoord, zCoord)).setForwardDirection(this.getForwardDirection());
 			par4EntityPlayer.inventory.setItemStack(null);
 			needsToClose = true;
