@@ -3,17 +3,17 @@ package mod.industrialProcessing.work.recipe;
 import mod.industrialProcessing.work.recipe.slots.RecipeInputFluidSlot;
 import mod.industrialProcessing.work.recipe.slots.RecipeOutputFluidSlot;
 
-public class RecipeFluidWorker extends RecipeWorker {
+public class RecipeGenericFluidWorker<TMachineRecipe extends IMachineRecipe, TWorkHandler extends IRecipeFluidWorkHandler<TMachineRecipe>> extends RecipeGenericWorker<TMachineRecipe, TWorkHandler> {
 
-	private IRecipeFluidWorkHandler fluidHanlder;
+	private TWorkHandler fluidHanlder;
 
-	public RecipeFluidWorker(IRecipeFluidWorkHandler handler) {
+	public RecipeGenericFluidWorker(TWorkHandler handler) {
 		super(handler);
 		this.fluidHanlder = handler;
 	}
 
 	@Override
-	protected boolean matchesInput(IMachineRecipe currentRecipe) {
+	protected boolean matchesInput(TMachineRecipe currentRecipe) {
 		boolean inventory = super.matchesInput(currentRecipe);
 		if (!inventory)
 			return false;
@@ -30,7 +30,7 @@ public class RecipeFluidWorker extends RecipeWorker {
 	}
 
 	@Override
-	protected void removeInput(IMachineRecipe currentRecipe) {
+	protected void removeInput(TMachineRecipe currentRecipe) {
 		super.removeInput(currentRecipe);
 
 		RecipeInputFluidSlot[] inputSlots = currentRecipe.getFluidInputs();
@@ -44,7 +44,7 @@ public class RecipeFluidWorker extends RecipeWorker {
 	}
 
 	@Override
-	protected boolean outputAvailable(IMachineRecipe currentRecipe) {
+	protected boolean outputAvailable(TMachineRecipe currentRecipe) {
 		boolean inventory = super.outputAvailable(currentRecipe);
 
 		if (!inventory)
@@ -63,7 +63,7 @@ public class RecipeFluidWorker extends RecipeWorker {
 	}
 
 	@Override
-	protected void produceOutput(IMachineRecipe recipe) {
+	protected void produceOutput(TMachineRecipe recipe) {
 		super.produceOutput(recipe);
 
 		RecipeOutputFluidSlot[] outputSlots = recipe.getFluidOutputs();
@@ -73,8 +73,8 @@ public class RecipeFluidWorker extends RecipeWorker {
 			RecipeOutputFluidSlot slot = outputSlots[i];
 
 			double randomValue = random.nextGaussian();
-  			
-			int amount = slot.getRandomAmount(randomValue); 
+
+			int amount = slot.getRandomAmount(randomValue);
 			if (amount > 0)
 				addToOutput(amount, slot);
 

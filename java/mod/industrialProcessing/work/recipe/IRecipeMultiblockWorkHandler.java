@@ -6,7 +6,6 @@ import mod.industrialProcessing.blockContainer.multiblock.tier.Tiers;
 import mod.industrialProcessing.utils.inventory.IInventorySlots;
 import mod.industrialProcessing.work.worker.IWorkHandler;
 
-public interface IRecipeMultiblockWorkHandler extends IWorkHandler, IInventorySlots{
-	Iterator<RecipeMultiblock> iterateRecipes();
+public interface IRecipeMultiblockWorkHandler extends IRecipeWorkHandler<RecipeMultiblock>, IInventorySlots{ 
 	Tiers getTier();
 }
