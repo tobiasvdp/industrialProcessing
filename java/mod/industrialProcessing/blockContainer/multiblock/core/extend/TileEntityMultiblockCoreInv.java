@@ -74,21 +74,25 @@ public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCo
 				machineStack.stack = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 			}
 		}
-	}
+	} 
 
 	@Override
 	public boolean removeFromSlot(int slot, int amount) {
-		if (slotContains(slot, itemId, amount)) {
-			MachineItemStack machineStack = getMachineStack(slot);
-			machineStack.stack.stackSize -= amount;
-			if (machineStack.stack.stackSize == 0)
-				machineStack.stack = null;
-			onInventoryChanged();
-			return true;
-		}
-		return false;
-	}
+		if (slot >= itemStacks.size())
+			return false;
+		MachineItemStack machineStack = itemStacks.get(slot);
+		if (machineStack.stack == null)
+			return false;
+		if (machineStack.stack.stackSize < amount)
+			return false;
 
+		machineStack.stack.stackSize -= amount;
+		if (machineStack.stack.stackSize == 0)
+			machineStack.stack = null;
+		onInventoryChanged();
+		return true;
+	}
+	
 	protected void onInventoryChanged() {
 		this.markDirty();
 	}
