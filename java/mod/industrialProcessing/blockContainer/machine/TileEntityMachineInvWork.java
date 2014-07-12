@@ -20,10 +20,10 @@ import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityMachineInvWork extends TileEntityMachineInv implements IWorkHandler, IRecipeWorkHandler, IAnimationSyncable, IAnimationProgress {
+public class TileEntityMachineInvWork extends TileEntityMachineInv implements IWorkHandler, IRecipeWorkHandler<IMachineRecipe>, IAnimationSyncable, IAnimationProgress {
 
 	protected ServerWorker worker;
-	protected RecipesMachine recipes; 
+	protected RecipesMachine recipes;
 	protected AnimationHandler animation = new AnimationHandler(AnimationMode.WRAP, 1f, true);
 	protected boolean animated = false;
 
@@ -39,9 +39,9 @@ public class TileEntityMachineInvWork extends TileEntityMachineInv implements IW
 	@Override
 	public void updateEntity() {
 		doWork();
-		if(animated ){
-		    this.animation.update();
-		    TileAnimationSyncHandler.sendAnimationData(this, this.animation);
+		if (animated) {
+			this.animation.update();
+			TileAnimationSyncHandler.sendAnimationData(this, this.animation);
 		}
 	}
 
@@ -126,12 +126,12 @@ public class TileEntityMachineInvWork extends TileEntityMachineInv implements IW
 	public IWorker getWorker() {
 		return worker;
 	}
-	
+
 	@Override
-	protected boolean isValidInput(int slot, Item item){
+	protected boolean isValidInput(int slot, Item item) {
 		return recipes.isValidInput(slot, item);
 	}
-	
+
 	@Override
 	public int getAnimationCount() {
 		return 1;

@@ -1,9 +1,9 @@
 package mod.industrialProcessing.work.recipe;
 
 
-public class RecipeWorker extends RecipeGenericFluidWorker<IMachineRecipe, IRecipeFluidWorkHandler<IMachineRecipe>> {
+public class RecipeWorker extends RecipeGenericWorker<IMachineRecipe, IRecipeWorkHandler<IMachineRecipe>> {
 
-	public RecipeWorker(IRecipeFluidWorkHandler<IMachineRecipe> handler) {
+	public RecipeWorker(IRecipeWorkHandler<IMachineRecipe> handler) {
 		super(handler); 
 	}
 
