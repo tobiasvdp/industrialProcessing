@@ -4,6 +4,7 @@ import mod.industrialProcessing.work.recipe.slots.RecipeInputFluidSlot;
 import mod.industrialProcessing.work.recipe.slots.RecipeInputInventorySlot;
 import mod.industrialProcessing.work.recipe.slots.RecipeOutputFluidSlot;
 import mod.industrialProcessing.work.recipe.slots.RecipeOutputInventorySlot;
+import net.minecraft.item.ItemStack;
 
 public class Recipe implements IMachineRecipe {
 	public RecipeInputInventorySlot[] inputs;
@@ -116,6 +117,23 @@ public class Recipe implements IMachineRecipe {
 	@Override
 	public int getWorkRequired() {
 		return workRequired;
+	}
+
+	public boolean matchesInput(ItemStack[] config) {
+		if (config == null)
+			return false;
+		for (int i = 0; i < inputs.length; i++) {
+			RecipeInputInventorySlot input = this.inputs[i];
+			if (input == null)
+				continue;
+			if (input.index >= config.length)
+				return false;
+
+			ItemStack stack = config[input.index];
+			if (!input.isItemValid(stack))
+				return false;
+		}
+		return inputs != null && inputs.length > 0;
 	}
 
 }

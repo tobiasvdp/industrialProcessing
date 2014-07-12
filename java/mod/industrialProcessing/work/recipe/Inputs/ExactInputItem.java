@@ -24,6 +24,7 @@ public class ExactInputItem extends InputItem {
 
 	@Override
 	public boolean isValid(ItemStack stack) {
+		if(stack == null) return false;
 		Item item = stack.getItem();
 		return (item == this.item && (!hasMeta || stack.getItemDamage() == this.meta));
 	}

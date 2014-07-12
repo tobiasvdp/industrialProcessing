@@ -5,7 +5,7 @@ import mod.industrialProcessing.work.recipe.slots.RecipeInputInventorySlot;
 import mod.industrialProcessing.work.recipe.slots.RecipeOutputInventorySlot;
 
 public class PoweredRecipeMultiblock extends RecipeMultiblock implements IPowerRecipe {
-	public PoweredRecipeMultiblock(RecipeInputInventorySlot[] input, RecipeOutputInventorySlot[] output, int work, int power, Tiers tier) {
+	public PoweredRecipeMultiblock(RecipeInputInventorySlot[] input, RecipeOutputInventorySlot[] output, int work, float power, Tiers tier) {
 		super(input, output, work, tier);
 		this.powerRequired = power;
 	}
@@ -14,10 +14,10 @@ public class PoweredRecipeMultiblock extends RecipeMultiblock implements IPowerR
 		super();
 	}
 
-	public int powerRequired;
+	public float powerRequired;
 
 	@Override
-	public int getPowerRequired() {
+	public float getPowerRequired() {
 		return this.powerRequired;
 	}
 

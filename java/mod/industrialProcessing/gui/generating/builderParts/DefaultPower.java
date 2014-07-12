@@ -72,7 +72,7 @@ public class DefaultPower {
 	}
 
 	public static void setup(PowerReference powerRef, IMachineRecipe recipe, StackPanel stackPanel) {
-		int powerRequired = getPowerRequired(recipe);
+		float powerRequired = getPowerRequired(recipe);
 
 		if (powerRef != null && powerRequired > 0) {
 			ProgressBar powerControl = ProgressBar.createHorizontal1();
@@ -84,7 +84,7 @@ public class DefaultPower {
 		}
 	}
 
-	private static int getPowerRequired(IMachineRecipe recipe) {
+	private static float getPowerRequired(IMachineRecipe recipe) {
 		if (recipe instanceof IPowerRecipe) {
 			IPowerRecipe powerRecipe = (IPowerRecipe) recipe;
 			return powerRecipe.getPowerRequired();

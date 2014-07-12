@@ -59,7 +59,7 @@ public class TileEntityMachineTankWorkPower extends TileEntityMachineTankWork  i
 
     @Override
     public void doWork() {
-        IMachineRecipe recipe = ((RecipeWorker) this.worker).getCurrentRecipe();
+        IMachineRecipe recipe = ((RecipeWorker) this.worker).findCurrentRecipe();
 
         if (recipe != null && !worldObj.isRemote) {
             int amount = PowerWorkerHelper.getWork(this.storage, this.maxWorkSpeed);

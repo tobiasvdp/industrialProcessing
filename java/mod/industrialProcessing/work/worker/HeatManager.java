@@ -41,7 +41,7 @@ public class HeatManager {
         if (heat > 0) {
             float minHeat = operatingTemperature;
             if (worker instanceof RecipeWorker) {
-                IMachineRecipe recipe = ((RecipeWorker) worker).getCurrentRecipe();
+                IMachineRecipe recipe = ((RecipeWorker) worker).findCurrentRecipe();
                 if (recipe instanceof IHeatRecipe)
                     minHeat = ((IHeatRecipe) recipe).getHeatRequired();
             }

@@ -31,7 +31,7 @@ public abstract class TileEntityMultiblockCoreInvWorkerPowered extends TileEntit
 
     @Override
     public void doWork() {
-        Recipe recipe = ((RecipeMultiblockWorker) getWorker()).getCurrentRecipe();
+        Recipe recipe = ((RecipeMultiblockWorker) getWorker()).findCurrentRecipe();
 
         if (recipe != null) {
             int amount = PowerWorkerHelper.getWork(this.storage, this.maxWorkSpeed);

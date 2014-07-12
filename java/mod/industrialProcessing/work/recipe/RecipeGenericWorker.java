@@ -14,6 +14,10 @@ public class RecipeGenericWorker<TMachineRecipe extends IMachineRecipe, TWorkHan
 	protected TWorkHandler handler;
 	protected TMachineRecipe recipe;
 
+	public TMachineRecipe getRecipe() {
+		return recipe;
+	}
+
 	public RecipeGenericWorker(TWorkHandler handler) {
 		super(handler, 100);
 		this.handler = handler;
@@ -40,7 +44,7 @@ public class RecipeGenericWorker<TMachineRecipe extends IMachineRecipe, TWorkHan
 
 	@Override
 	protected void onPrepareWork() {
-		this.recipe = this.getCurrentRecipe();
+		this.recipe = this.findCurrentRecipe();
 		if (recipe != null)
 			this.totalWork = this.recipe.getWorkRequired();
 		else
@@ -48,12 +52,13 @@ public class RecipeGenericWorker<TMachineRecipe extends IMachineRecipe, TWorkHan
 		super.onPrepareWork();
 	}
 
-	public TMachineRecipe getCurrentRecipe() {
+	public TMachineRecipe findCurrentRecipe() {
 		Iterator<TMachineRecipe> iterator = this.handler.iterateRecipes();
 		if (iterator == null)
 			return null;
 		for (; iterator.hasNext();) {
 			TMachineRecipe currentRecipe = iterator.next();
+			System.out.println(currentRecipe);
 			if (matchesInput(currentRecipe)) {
 				return currentRecipe;
 			}

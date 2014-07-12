@@ -8,7 +8,9 @@ import mod.industrialProcessing.client.rendering.tileEntity.animation.AnimationM
 import mod.industrialProcessing.client.rendering.tileEntity.animation.IAnimationSyncable;
 import mod.industrialProcessing.client.rendering.tileEntity.animation.TileAnimationSyncHandler;
 import mod.industrialProcessing.work.recipe.IMachineRecipe;
+import mod.industrialProcessing.work.recipe.IMachineRecipes;
 import mod.industrialProcessing.work.recipe.IRecipeWorkHandler;
+import mod.industrialProcessing.work.recipe.RecipeGenericWorker;
 import mod.industrialProcessing.work.recipe.RecipeWorker;
 import mod.industrialProcessing.work.recipe.RecipesMachine;
 import mod.industrialProcessing.work.worker.IWorkHandler;
@@ -22,17 +24,17 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityMachineInvWork extends TileEntityMachineInv implements IWorkHandler, IRecipeWorkHandler<IMachineRecipe>, IAnimationSyncable, IAnimationProgress {
 
-	protected ServerWorker worker;
-	protected RecipesMachine recipes;
+	protected RecipeGenericWorker<IMachineRecipe, IRecipeWorkHandler<IMachineRecipe>> worker;
+	protected IMachineRecipes<IMachineRecipe> recipes;
 	protected AnimationHandler animation = new AnimationHandler(AnimationMode.WRAP, 1f, true);
 	protected boolean animated = false;
 
-	public TileEntityMachineInvWork(RecipesMachine recipes) {
+	public TileEntityMachineInvWork(IMachineRecipes<IMachineRecipe> recipes) {
 		this.worker = createServerSideWorker();
 		this.recipes = recipes;
 	}
 
-	protected ServerWorker createServerSideWorker() {
+	protected RecipeGenericWorker<IMachineRecipe, IRecipeWorkHandler<IMachineRecipe>> createServerSideWorker() {
 		return new RecipeWorker(this);
 	}
 
