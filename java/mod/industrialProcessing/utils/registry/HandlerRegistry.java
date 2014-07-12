@@ -159,7 +159,7 @@ public class HandlerRegistry {
 		while (it.hasNext()) {
 			ILineHandler handler = it.next();
 			resistance = Math.max(resistance, handler.getResistanceForLine(line));
-		}
+		} 
 		return resistance;
 	}
 

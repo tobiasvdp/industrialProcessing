@@ -1,62 +1,31 @@
 package mod.industrialProcessing.plants.transport.items.conveyorSorter;
 
-import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.config.ConfigMachineBlocks;
-import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.gui.GuiLayout;
-import ip.industrialProcessing.gui.IGuiLayout;
-import ip.industrialProcessing.gui.components.GuiLayoutPanelType;
-import ip.industrialProcessing.gui.container.slot.layout.SlotLayoutType;
-import ip.industrialProcessing.transport.items.conveyorBelt.BlockConveyorBase;
-import ip.industrialProcessing.utils.IDescriptionBlock;
-
-import java.awt.Rectangle;
-
+import mod.industrialProcessing.gui.framework.panels.Orientation;
+import mod.industrialProcessing.gui.generating.GuiBuilderDefault;
+import mod.industrialProcessing.gui.generating.IGuiBuilder;
+import mod.industrialProcessing.transport.items.conveyorBelt.block.BlockConveyorMachineBase;
+import mod.industrialProcessing.utils.block.IDescriptionBlock;
+import mod.industrialProcessing.utils.block.IGuiBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 
-public class BlockConveyorSorter extends BlockConveyorBase implements IDescriptionBlock, IGuiLayout {
+public class BlockConveyorSorter extends BlockConveyorMachineBase implements IDescriptionBlock, IGuiBlock {
 
-    public static GuiLayout guiLayout;
-    static {
-	guiLayout = new GuiLayout();
-	guiLayout.setSortingOrderByPanelID(1,3,2);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 9);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.slotsInput).setSlotLayout(SlotLayoutType.horizontal, 9);
-	guiLayout.addLayoutPanel(GuiLayoutPanelType.image).setImageLocation(new Rectangle(0,0,36,54));
-    }
+	public static IGuiBuilder guiBuilder = new GuiBuilderDefault("Conveyor Sorter").addInputSlot(0).addInputSlotCluster(1, 9, 3, Orientation.HORIZONTAL).addInputSlotCluster(0, 9, 3, Orientation.HORIZONTAL).addInputSlotCluster(10, 9, 3, Orientation.HORIZONTAL);
 
-    public BlockConveyorSorter() {
-	super(ConfigMachineBlocks.getBLtransportConveyorBeltSorter(), Material.iron, 5.0f, Block.soundMetalFootstep, "Conveyor Sorter", ISetupCreativeTabs.tabPower);
-    }
+	public BlockConveyorSorter() {
+		// super(ConfigMachineBlocks.getBLtransportConveyorBeltSorter(), Material.iron, 5.0f, Block.soundTypeMetal, "Conveyor Sorter", ISetupCreativeTabs.tabPower);
 
-    @Override
-    public TileEntity createNewTileEntity(World world) {
-	return new TileEntityConveyorSorter();
-    }
+		super(5.0f, 5.0f, Material.iron, Block.soundTypeMetal, "conveyorSorter");
+	}
 
-    @Override
-    public int getRenderType() {
-	return ConfigRenderers.getRendererConveyorSorterID();
-    }
+	@Override
+	public IGuiBuilder getGui() {
+		return guiBuilder;
+	}
 
-    @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
-	player.openGui(IndustrialProcessing.instance, 0, world, x, y, z);
-	return true;
-    }
-
-    @Override
-    public GuiLayout getGuiLayout() {
-	return guiLayout;
-    }
-
-    @Override
-    public String getDescription() {
-	return "A conveyor that can send items to the sides when they match a configured filter.";
-    }
+	@Override
+	public String getDescription() {
+		return "A conveyor that can send items to the sides when they match a configured filter.";
+	}
 }
