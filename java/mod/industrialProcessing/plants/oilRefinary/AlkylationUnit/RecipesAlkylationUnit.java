@@ -23,8 +23,8 @@ public class RecipesAlkylationUnit extends RecipesMachine {
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidButane.getName()), RecipeSlotType.TANK, 100) };
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidAlkylate.getName()), RecipeSlotType.TANK, 40, 70, 0.5), new RecipeOutputSlot(3, FluidRegistry.getFluidID(ISetupFluids.itemFluidGasMix.getName()), RecipeSlotType.TANK, 150, 200, 0.5) };
+	recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidButane.getName()), RecipeSlotType.TANK, 100) };
+	recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidAlkylate.getName()), RecipeSlotType.TANK, 40, 70, 0.5), new RecipeOutputInventorySlot(3, FluidRegistry.getFluidID(ISetupFluids.itemFluidGasMix.getName()), RecipeSlotType.TANK, 150, 200, 0.5) };
 	return recipe;
     }
 
@@ -32,8 +32,8 @@ public class RecipesAlkylationUnit extends RecipesMachine {
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidIsoButane.getName()), RecipeSlotType.TANK, 100) };
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidAlkylate.getName()), RecipeSlotType.TANK, 40, 70, 0.5), new RecipeOutputSlot(3, FluidRegistry.getFluidID(ISetupFluids.itemFluidGasMix.getName()), RecipeSlotType.TANK, 150, 200, 0.5) };
+	recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidIsoButane.getName()), RecipeSlotType.TANK, 100) };
+	recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidAlkylate.getName()), RecipeSlotType.TANK, 40, 70, 0.5), new RecipeOutputInventorySlot(3, FluidRegistry.getFluidID(ISetupFluids.itemFluidGasMix.getName()), RecipeSlotType.TANK, 150, 200, 0.5) };
 	return recipe;
     }
 }

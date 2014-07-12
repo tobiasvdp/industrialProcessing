@@ -233,6 +233,6 @@ public class TileEntityBloomery extends TileEntityMultiblockCoreTankWorker imple
 	@Override
 	public void SetLifeTime(int time) {
 		liveTime = time;
-	}
+	} 
 
 }

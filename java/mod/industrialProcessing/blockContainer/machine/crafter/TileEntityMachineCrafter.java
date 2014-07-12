@@ -7,8 +7,9 @@ import mod.industrialProcessing.blockContainer.machine.TileEntityMachineInv;
 import mod.industrialProcessing.utils.rotation.IRotateableEntity;
 import mod.industrialProcessing.utils.rotation.LocalDirection;
 import mod.industrialProcessing.work.recipe.IMachineRecipe;
-import mod.industrialProcessing.work.recipe.RecipeInputSlot;
 import mod.industrialProcessing.work.recipe.RecipesMachine;
+import mod.industrialProcessing.work.recipe.Inputs.InputItem;
+import mod.industrialProcessing.work.recipe.slots.RecipeInputInventorySlot;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -49,12 +50,14 @@ public class TileEntityMachineCrafter extends TileEntityMachineInv {
 				if (te.getMachineStack(i).input) {
 					if (te.getMachineStack(i).stack != null) {
 						boolean found = false;
-						for (RecipeInputSlot input : recipe.getInputs()) {
+						for (RecipeInputInventorySlot input : recipe.getInventoryInputs()) {
 							if (input.index == i - offset) {
 								if (input.getItem() == null) {
 									notRecipe = true;
 								} else {
-									if (!input.getItem().equals(te.getMachineStack(i).stack.getItem())) {
+									InputItem item = input.getItem();
+									
+									if(!item.isValid(te.getMachineStack(i).stack)){
 										notRecipe = true;
 									}
 								}
@@ -65,7 +68,7 @@ public class TileEntityMachineCrafter extends TileEntityMachineInv {
 							notRecipe = true;
 						}
 					} else {
-						for (RecipeInputSlot input : recipe.getInputs()) {
+						for (RecipeInputInventorySlot input : recipe.getInventoryInputs()) {
 							if (input.index == i - offset) {
 								notRecipe = true;
 							}
@@ -74,7 +77,7 @@ public class TileEntityMachineCrafter extends TileEntityMachineInv {
 				}
 			}
 			if (!notRecipe) {
-				return new ItemStack(recipe.getOutputs()[0].getItem(), recipe.getOutputs()[0].minAmount, recipe.getOutputs()[0].metadata);
+				return new ItemStack(recipe.getInventoryOutputs()[0].getItem(), recipe.getInventoryOutputs()[0].minAmount, recipe.getInventoryOutputs()[0].metadata);
 			}
 		}
 		return null;
@@ -92,7 +95,7 @@ public class TileEntityMachineCrafter extends TileEntityMachineInv {
 				if (te.getMachineStack(i).input) {
 					if (te.getMachineStack(i).stack != null) {
 						boolean found = false;
-						for (RecipeInputSlot input : recipe.getInputs()) {
+						for (RecipeInputInventorySlot input : recipe.getInventoryInputs()) {
 							if (input.index == i - offset) {
 								if (input.getItem() == null) {
 									notRecipe = true;
@@ -108,7 +111,7 @@ public class TileEntityMachineCrafter extends TileEntityMachineInv {
 							notRecipe = true;
 						}
 					} else {
-						for (RecipeInputSlot input : recipe.getInputs()) {
+						for (RecipeInputInventorySlot input : recipe.getInventoryInputs()) {
 							if (input.index == i - offset) {
 								notRecipe = true;
 							}
@@ -141,10 +144,10 @@ public class TileEntityMachineCrafter extends TileEntityMachineInv {
 			int offset = getInputOffset(te);
 
 			if (recipe != null) {
-				for (RecipeInputSlot input : recipe.getInputs()) {
+				for (RecipeInputInventorySlot input : recipe.getInventoryInputs()) {
 					te.decrStackSize(input.index + offset, 1);
 				}
-				te.onProduce(recipe.getOutputs()[0].getItem(), par4EntityPlayer);
+				te.onProduce(recipe.getInventoryOutputs()[0].getItem(), par4EntityPlayer);
 			}
 		}
 	}

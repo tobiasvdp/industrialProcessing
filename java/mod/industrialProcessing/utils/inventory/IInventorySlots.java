@@ -11,10 +11,14 @@ public interface IInventorySlots extends ISidedInventory{
 
 	boolean slotHasRoomFor(int slot, ItemStack stack);
 	boolean slotHasRoomFor(int slot, Item item, int amount, int damage);
+	 
+	//boolean addToSlot(int index, Item item, int maxAmount, int damage);
+	boolean addToSlot(int index, ItemStack stack);
 	
-	boolean addToSlot(int index, Item item, int maxAmount, int damage);
-	boolean removeFromSlot(int index, Item item, int maxAmount);
-	boolean damageItem(int slot, Item item);
+	boolean removeFromSlot(int index, int maxAmount);
+	boolean damageItem(int slot);
+	
+	
 	
 	public MachineItemStack getMachineStack(int i);
 	

@@ -33,7 +33,7 @@ import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-public class TileEntityWaterBasinCore extends TileEntityMultiblockSwitcherCore implements ITankSyncable,IProgressSync {
+public class TileEntityWaterBasinCore extends TileEntityMultiblockSwitcherCore implements ITankSyncable, IProgressSync {
 	static StructureMultiblock structure;
 	static TierCollection tierRequirments;
 	private TankHandler tankHandler;
@@ -100,18 +100,21 @@ public class TileEntityWaterBasinCore extends TileEntityMultiblockSwitcherCore i
 				Iterator<RecipeMultiblock> it = recipes.getRecipes();
 				while (it.hasNext()) {
 					RecipeMultiblock recipe = it.next();
-					if (recipe.inputs[0].getItem() == player.getCurrentEquippedItem().getItem()) {
+
+					Item playerEquippedItem = player.getCurrentEquippedItem().getItem();
+
+					if (recipe.inputs[0].isItemValid(playerEquippedItem)) {
 						player.getCurrentEquippedItem().splitStack(1);
-						if (!player.inventory.addItemStackToInventory(new ItemStack(recipe.outputs[0].getItem(), 1, 0))) {
-							DropBlock.doDispense(worldObj, new ItemStack(recipe.outputs[0].getItem(), 1, 0), 1, ForgeDirection.UP, xCoord, yCoord, zCoord);
+
+						for (int j = 0; j < recipe.outputs.length; j++) {
+							ItemStack outputStack = recipe.outputs[j].createStack(1);
+							if (!player.inventory.addItemStackToInventory(outputStack))
+								DropBlock.doDispense(worldObj, outputStack, 1, ForgeDirection.UP, xCoord, yCoord, zCoord);
 						}
-						if (!player.inventory.addItemStackToInventory(new ItemStack(recipe.outputs[1].getItem(), 1, 0))) {
-							DropBlock.doDispense(worldObj, new ItemStack(recipe.outputs[1].getItem(), 1, 0), 1, ForgeDirection.UP, xCoord, yCoord, zCoord);
-						}
-						drain(ForgeDirection.UNKNOWN, new FluidStack(FluidRegistry.WATER, 1000), true);
-						spawnSmoke();
-						return true;
 					}
+					drain(ForgeDirection.UNKNOWN, new FluidStack(FluidRegistry.WATER, 1000), true);
+					spawnSmoke();
+					return true;
 				}
 			}
 		}
@@ -164,19 +167,19 @@ public class TileEntityWaterBasinCore extends TileEntityMultiblockSwitcherCore i
 	@Override
 	public void setValues(int[] val) {
 		if (val[0] != 0 && val[1] != 0) {
-			if(Item.getItemById(val[1]) != null)
-				getMachineStack(0).stack = new ItemStack(Item.getItemById(val[0]),val[1]);
+			if (Item.getItemById(val[1]) != null)
+				getMachineStack(0).stack = new ItemStack(Item.getItemById(val[0]), val[1]);
 			else
-				getMachineStack(0).stack = new ItemStack(Block.getBlockById(val[0]),val[1]);
-		}else{
+				getMachineStack(0).stack = new ItemStack(Block.getBlockById(val[0]), val[1]);
+		} else {
 			getMachineStack(0).stack = null;
 		}
-		if(val[2] != 0 && val[3] != 0){
-			if(Item.getItemById(val[3]) != null)
-				getMachineStack(1).stack = new ItemStack(Item.getItemById(val[2]),val[3]);
+		if (val[2] != 0 && val[3] != 0) {
+			if (Item.getItemById(val[3]) != null)
+				getMachineStack(1).stack = new ItemStack(Item.getItemById(val[2]), val[3]);
 			else
-				getMachineStack(1).stack = new ItemStack(Block.getBlockById(val[2]),val[3]);
-		}else{
+				getMachineStack(1).stack = new ItemStack(Block.getBlockById(val[2]), val[3]);
+		} else {
 			getMachineStack(1).stack = null;
 		}
 	}
@@ -206,7 +209,7 @@ public class TileEntityWaterBasinCore extends TileEntityMultiblockSwitcherCore i
 			}
 		}
 		if (requireUpdate) {
-			SyncValuesPacket packet = new SyncValuesPacket(this.xCoord,this.yCoord,this.zCoord, getValues());
+			SyncValuesPacket packet = new SyncValuesPacket(this.xCoord, this.yCoord, this.zCoord, getValues());
 			PacketHandler.getInstance().sendToAllAround(packet, new TargetPoint(this.getWorldObj().provider.dimensionId, this.xCoord, this.yCoord, this.zCoord, 32));
 		}
 	}

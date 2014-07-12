@@ -20,9 +20,9 @@ public class RecipesKiln extends RecipesMachine {
 
     private Recipe coalToCoke(int workTime, int powerConsumption) {
 	PoweredRecipe recipe = new PoweredRecipe();
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.coal.itemID, RecipeSlotType.INVENTORY, 1) };
+	recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, Item.coal.itemID, RecipeSlotType.INVENTORY, 1) };
 
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, ISetupItems.itemCokes.itemID, RecipeSlotType.INVENTORY, 1, 2, 0) };
+	recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(1, ISetupItems.itemCokes.itemID, RecipeSlotType.INVENTORY, 1, 2, 0) };
 	recipe.workRequired = workTime;
 	recipe.powerRequired = powerConsumption;
 	return recipe;

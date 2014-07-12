@@ -1,9 +1,12 @@
 package mod.industrialProcessing.work.recipe;
 
+import mod.industrialProcessing.work.recipe.slots.RecipeInputInventorySlot;
+import mod.industrialProcessing.work.recipe.slots.RecipeOutputInventorySlot;
+
 public class PoweredRecipe extends Recipe implements IPowerRecipe {
     public int powerRequired;
 
-    public PoweredRecipe(RecipeInputSlot[] input, RecipeOutputSlot[] output, int work, int power) {
+    public PoweredRecipe(RecipeInputInventorySlot[] input, RecipeOutputInventorySlot[] output, int work, int power) {
 	super(input, output, work);
 	this.powerRequired = power;
 	if (power <= 0)

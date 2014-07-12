@@ -22,8 +22,8 @@ public class RecipesGasProcessor extends RecipesMachine {
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidGasMix.getName()), RecipeSlotType.TANK, 1000) };
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidFuelGas.getName()), RecipeSlotType.TANK, 300, 400, 0.5), new RecipeOutputSlot(3, FluidRegistry.getFluidID(ISetupFluids.itemFluidUnsweetenedLPG.getName()), RecipeSlotType.TANK, 50, 70, 0.5), new RecipeOutputSlot(4, FluidRegistry.getFluidID(ISetupFluids.itemFluidUnsweetenedButane.getName()), RecipeSlotType.TANK, 200, 300, 0.5) };
+	recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidGasMix.getName()), RecipeSlotType.TANK, 1000) };
+	recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidFuelGas.getName()), RecipeSlotType.TANK, 300, 400, 0.5), new RecipeOutputInventorySlot(3, FluidRegistry.getFluidID(ISetupFluids.itemFluidUnsweetenedLPG.getName()), RecipeSlotType.TANK, 50, 70, 0.5), new RecipeOutputInventorySlot(4, FluidRegistry.getFluidID(ISetupFluids.itemFluidUnsweetenedButane.getName()), RecipeSlotType.TANK, 200, 300, 0.5) };
 	return recipe;
     }
 }

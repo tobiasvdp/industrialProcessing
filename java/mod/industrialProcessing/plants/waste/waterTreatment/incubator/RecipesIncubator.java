@@ -22,9 +22,9 @@ public class RecipesIncubator extends RecipesMachine {
 
     private Recipe rottenFleshToCulture(int workTime, int powerConsumption) {
 	PoweredRecipe recipe = new PoweredRecipe();
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.rottenFlesh.itemID, RecipeSlotType.INVENTORY, 3) };
+	recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, Item.rottenFlesh.itemID, RecipeSlotType.INVENTORY, 3) };
 
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, ISetupItems.itemGrownCulture.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
+	recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(1, ISetupItems.itemGrownCulture.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
 	recipe.workRequired = workTime;
 	recipe.powerRequired = powerConsumption;
 	return recipe;
@@ -32,9 +32,9 @@ public class RecipesIncubator extends RecipesMachine {
 
     private Recipe meatToRottenFlesh(int workTime, int powerConsumption) {
 	PoweredRecipe recipe = new PoweredRecipe();
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.beefRaw.itemID, RecipeSlotType.INVENTORY, 3) };
+	recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, Item.beefRaw.itemID, RecipeSlotType.INVENTORY, 3) };
 
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, Item.rottenFlesh.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
+	recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(1, Item.rottenFlesh.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
 	recipe.workRequired = workTime;
 	recipe.powerRequired = powerConsumption;
 	return recipe;
@@ -42,9 +42,9 @@ public class RecipesIncubator extends RecipesMachine {
 
     private Recipe porkToRottenFlesh(int workTime, int powerConsumption) {
 	PoweredRecipe recipe = new PoweredRecipe();
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, Item.porkRaw.itemID, RecipeSlotType.INVENTORY, 3) };
+	recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, Item.porkRaw.itemID, RecipeSlotType.INVENTORY, 3) };
 
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, Item.rottenFlesh.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
+	recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(1, Item.rottenFlesh.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
 	recipe.workRequired = workTime;
 	recipe.powerRequired = powerConsumption;
 	return recipe;

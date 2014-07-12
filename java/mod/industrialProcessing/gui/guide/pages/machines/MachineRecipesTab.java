@@ -21,7 +21,7 @@ import mod.industrialProcessing.utils.block.IRecipeBlock;
 import mod.industrialProcessing.utils.registry.RecipeRegistry;
 import mod.industrialProcessing.work.recipe.IMachineRecipe;
 import mod.industrialProcessing.work.recipe.ITierRecipe;
-import mod.industrialProcessing.work.recipe.RecipeOutputSlot;
+import mod.industrialProcessing.work.recipe.slots.RecipeOutputInventorySlot;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
@@ -73,7 +73,7 @@ public class MachineRecipesTab extends TabPage implements IButtonClickListener<I
 				IMachineRecipe recipe = recipes.next();
 				if(i == 0)
 					firstRecipe = recipe;
-				RecipeOutputSlot[] outputs = recipe.getOutputs();
+				RecipeOutputInventorySlot[] outputs = recipe.getInventoryOutputs();
 				if (outputs != null && outputs.length > 0) {
 
 					StackPanel outputStack = new StackPanel();
@@ -105,7 +105,7 @@ public class MachineRecipesTab extends TabPage implements IButtonClickListener<I
 
 	}
 
-	private ItemStack getStack(RecipeOutputSlot mainProduct) {
+	private ItemStack getStack(RecipeOutputInventorySlot mainProduct) {
 		switch (mainProduct.type) {
 		case INVENTORY:
 		case DAMAGEDITEM:

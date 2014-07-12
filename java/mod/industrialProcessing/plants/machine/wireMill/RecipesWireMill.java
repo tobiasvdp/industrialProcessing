@@ -15,9 +15,9 @@ public class RecipesWireMill extends RecipesMachine {
 
 	private Recipe copperToWire(int workTime, int powerConsumption) {
 		PoweredRecipe recipe = new PoweredRecipe();
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, ISetupItems.itemCopperBar.itemID, RecipeSlotType.INVENTORY, 4) };
+		recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, ISetupItems.itemCopperBar.itemID, RecipeSlotType.INVENTORY, 4) };
 
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, ISetupItems.itemCopperWire.itemID, RecipeSlotType.INVENTORY, 4, 6, 0) };
+		recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(1, ISetupItems.itemCopperWire.itemID, RecipeSlotType.INVENTORY, 4, 6, 0) };
 		recipe.workRequired = workTime;
 		recipe.powerRequired = powerConsumption;
 		return recipe;

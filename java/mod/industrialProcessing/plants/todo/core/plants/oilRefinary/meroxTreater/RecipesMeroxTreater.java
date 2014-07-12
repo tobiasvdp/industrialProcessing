@@ -23,8 +23,8 @@ public class RecipesMeroxTreater extends RecipesMultiblock {
 		PoweredRecipeMultiblock recipe = new PoweredRecipeMultiblock();
 		recipe.workRequired = i;
 		recipe.powerRequired = power;
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidUntreatedKerosene.getName()), RecipeSlotType.TANK, 100) };
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidKerosene.getName()), RecipeSlotType.TANK, 100, 100, 0.5)};
+		recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidUntreatedKerosene.getName()), RecipeSlotType.TANK, 100) };
+		recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidKerosene.getName()), RecipeSlotType.TANK, 100, 100, 0.5)};
 		recipe.tier = tier;
 		return recipe;
 	}

@@ -1,5 +1,9 @@
 package mod.industrialProcessing.work.recipe;
 
+import mod.industrialProcessing.work.recipe.slots.RecipeInputInventorySlot;
+import mod.industrialProcessing.work.recipe.slots.RecipeOutputInventorySlot;
+import mod.industrialProcessing.work.recipe.slots.RecipeSlotType;
+
 public class RecipeMultiblockFluidWorker extends RecipeMultiblockWorker {
 
 	private IRecipeMultiblockFluidWorkHandler fluidHanlder;
@@ -18,7 +22,7 @@ public class RecipeMultiblockFluidWorker extends RecipeMultiblockWorker {
 		if (currentRecipe.tier != handler.getTier())
 			return false;
 		for (int i = 0; i < currentRecipe.inputs.length; i++) {
-			RecipeInputSlot slot = currentRecipe.inputs[i];
+			RecipeInputInventorySlot slot = currentRecipe.inputs[i];
 			if (!hasInputIngredients(slot))
 				return false;
 		}
@@ -26,7 +30,7 @@ public class RecipeMultiblockFluidWorker extends RecipeMultiblockWorker {
 	}
 
 	@Override
-	protected boolean hasOutputSpace(RecipeOutputSlot slot) {
+	protected boolean hasOutputSpace(RecipeOutputInventorySlot slot) {
 		if (slot.type == RecipeSlotType.TANK) {
 			return this.fluidHanlder.tankHasRoomFor(slot.index, slot.fluid, slot.maxAmount);
 		} else {
@@ -35,7 +39,7 @@ public class RecipeMultiblockFluidWorker extends RecipeMultiblockWorker {
 	}
 
 	@Override
-	protected boolean hasInputIngredients(RecipeInputSlot slot) {
+	protected boolean hasInputIngredients(RecipeInputInventorySlot slot) {
 		if (slot.type == RecipeSlotType.TANK) {
 			return this.fluidHanlder.tankContains(slot.index, slot.fluid, slot.amount);
 		} else {
@@ -44,7 +48,7 @@ public class RecipeMultiblockFluidWorker extends RecipeMultiblockWorker {
 	};
 
 	@Override
-	protected void removeFromInput(RecipeInputSlot slot) {
+	protected void removeFromInput(RecipeInputInventorySlot slot) {
 		if (slot.type == RecipeSlotType.TANK) {
 			if (!this.fluidHanlder.removeFromTank(slot.index, slot.fluid, slot.amount))
 				System.out.println("Failed to remove recipe inpt?!");
@@ -54,7 +58,7 @@ public class RecipeMultiblockFluidWorker extends RecipeMultiblockWorker {
 	}
 
 	@Override
-	protected void addToOutput(int amount, RecipeOutputSlot slot) {
+	protected void addToOutput(int amount, RecipeOutputInventorySlot slot) {
 		if (slot.type == RecipeSlotType.TANK) {
 			if (!this.fluidHanlder.addToTank(slot.index, slot.fluid, amount))
 				System.out.println("Failed to create recipe output?! ");

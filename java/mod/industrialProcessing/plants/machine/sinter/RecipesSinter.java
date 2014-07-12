@@ -19,9 +19,9 @@ public class RecipesSinter extends RecipesMachine {
 
     private Recipe ironDustToSinter(int workTime, int powerConsumption) {
 	PoweredRecipe recipe = new PoweredRecipe();
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, ISetupItems.itemIronOxideDust.itemID, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(1, ISetupItems.itemLimestoneDust.itemID, RecipeSlotType.INVENTORY, 1) };
+	recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, ISetupItems.itemIronOxideDust.itemID, RecipeSlotType.INVENTORY, 1), new RecipeInputInventorySlot(1, ISetupItems.itemLimestoneDust.itemID, RecipeSlotType.INVENTORY, 1) };
 
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(2, ISetupItems.itemIronSinter.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
+	recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(2, ISetupItems.itemIronSinter.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
 	recipe.workRequired = workTime;
 	recipe.powerRequired = powerConsumption;
 	return recipe;

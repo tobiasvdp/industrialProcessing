@@ -16,10 +16,10 @@ import mod.industrialProcessing.gui.framework.panels.GridSize;
 import mod.industrialProcessing.gui.framework.panels.SizeMode;
 import mod.industrialProcessing.gui.framework.slots.SlotBase;
 import mod.industrialProcessing.gui.framework.slots.SlotOutput;
-import mod.industrialProcessing.work.recipe.RecipeInputSlot;
-import mod.industrialProcessing.work.recipe.RecipeOutputSlot;
-import mod.industrialProcessing.work.recipe.RecipeSlot;
-import mod.industrialProcessing.work.recipe.RecipeSlotType;
+import mod.industrialProcessing.work.recipe.slots.RecipeInputInventorySlot;
+import mod.industrialProcessing.work.recipe.slots.RecipeOutputInventorySlot;
+import mod.industrialProcessing.work.recipe.slots.RecipeSlot;
+import mod.industrialProcessing.work.recipe.slots.RecipeSlotType;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -93,14 +93,7 @@ public class DefaultSlots {
 	}
 
 	private static int getAmount(RecipeSlot slot) {
-		if (slot instanceof RecipeInputSlot) {
-			RecipeInputSlot inputSlot = (RecipeInputSlot) slot;
-			return inputSlot.amount;
-		} else if (slot instanceof RecipeOutputSlot) {
-			RecipeOutputSlot inputSlot = (RecipeOutputSlot) slot;
-			return inputSlot.maxAmount;
-		}
-		return 0;
+		return slot.getMaxAmount();
 	}
 	
 	private static ItemStack getStack(RecipeSlot[] slots, int startSlot) {
@@ -108,7 +101,8 @@ public class DefaultSlots {
 			RecipeSlot slot = slots[i];
 			if (slot.index == startSlot && slot.type != RecipeSlotType.TANK) {
 				int amount = getAmount(slot);
-				return new ItemStack(slot.getItem(), amount, slot.metadata);
+				//return new ItemStack(slot.getItem(), amount, slot.metadata);
+				return slot.getDefaultDisplayStack();
 			}
 		}
 		return null;

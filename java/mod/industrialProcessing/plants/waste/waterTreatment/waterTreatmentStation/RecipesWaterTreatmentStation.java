@@ -23,8 +23,8 @@ public class RecipesWaterTreatmentStation extends RecipesMachine {
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
-        recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidMicrobialWater.getName()), RecipeSlotType.TANK, 1000), new RecipeInputSlot(0, ISetupItems.itemActiveCoal.itemID, RecipeSlotType.DAMAGEDITEM, 1) };
-        recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(FluidRegistry.WATER.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
+        recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidMicrobialWater.getName()), RecipeSlotType.TANK, 1000), new RecipeInputInventorySlot(0, ISetupItems.itemActiveCoal.itemID, RecipeSlotType.DAMAGEDITEM, 1) };
+        recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(1, FluidRegistry.getFluidID(FluidRegistry.WATER.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
         return recipe;
     }
 }

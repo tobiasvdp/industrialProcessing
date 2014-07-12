@@ -8,10 +8,11 @@ import java.util.Map.Entry;
 import mod.industrialProcessing.work.recipe.IMachineRecipe;
 import mod.industrialProcessing.work.recipe.IMachineRecipes;
 import mod.industrialProcessing.work.recipe.Recipe;
-import mod.industrialProcessing.work.recipe.RecipeInputSlot;
 import mod.industrialProcessing.work.recipe.RecipeMultiblock;
-import mod.industrialProcessing.work.recipe.RecipeOutputSlot;
 import mod.industrialProcessing.work.recipe.RecipesMultiblock;
+import mod.industrialProcessing.work.recipe.slots.RecipeInputInventorySlot;
+import mod.industrialProcessing.work.recipe.slots.RecipeOutputFluidSlot;
+import mod.industrialProcessing.work.recipe.slots.RecipeOutputInventorySlot;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -43,7 +44,7 @@ public class RecipeRegistry {
 				addRecipe(vanillaRecipes.get(i), Blocks.crafting_table);
 		}
 	}
-	
+
 	public static void appendVanillaRecipe(Recipe vanillaRecipe) {
 		addRecipe(vanillaRecipe, Blocks.crafting_table);
 	}
@@ -54,12 +55,14 @@ public class RecipeRegistry {
 			Iterator<Entry<IMachineRecipe, Block>> iterator = recipes.entrySet().iterator();
 			while (iterator.hasNext()) {
 				IMachineRecipe recipe = iterator.next().getKey();
-				RecipeOutputSlot[] outputs = recipe.getOutputs();
-				for (int i = 0; i < outputs.length; i++) {
-					if (outputs[i].getItem().equals(stack.getItem())) {
-						list.add(recipe);
+
+				RecipeOutputInventorySlot[] inventoryOutputs = recipe.getInventoryOutputs();
+				if (inventoryOutputs != null)
+					for (int i = 0; i < inventoryOutputs.length; i++) {
+						if (inventoryOutputs[i].isItemEqual(stack)) {
+							list.add(recipe);
+						}
 					}
-				}
 			}
 		}
 		return list;
@@ -71,12 +74,13 @@ public class RecipeRegistry {
 			Iterator<Entry<IMachineRecipe, Block>> iterator = recipes.entrySet().iterator();
 			while (iterator.hasNext()) {
 				IMachineRecipe recipe = iterator.next().getKey();
-				RecipeOutputSlot[] outputs = recipe.getOutputs();
-				for (int i = 0; i < outputs.length; i++) {
-					if (outputs[i].getItem().equals(stack.getItem()) && outputs[i].damage == damage) {
-						list.add(recipe);
+				RecipeOutputInventorySlot[] inventoryOutputs = recipe.getInventoryOutputs();
+				if (inventoryOutputs != null)
+					for (int i = 0; i < inventoryOutputs.length; i++) {
+						if (inventoryOutputs[i].isItemEqual(stack, damage)) {
+							list.add(recipe);
+						}
 					}
-				}
 			}
 		}
 		return list;
@@ -88,9 +92,9 @@ public class RecipeRegistry {
 			Iterator<Entry<IMachineRecipe, Block>> iterator = recipes.entrySet().iterator();
 			while (iterator.hasNext()) {
 				IMachineRecipe recipe = iterator.next().getKey();
-				RecipeInputSlot[] inputs = recipe.getInputs();
+				RecipeInputInventorySlot[] inputs = recipe.getInventoryInputs();
 				for (int i = 0; i < inputs.length; i++) {
-					if (inputs[i].getItem().equals(stack.getItem())) {
+					if (inputs[i].isItemValid(stack)) {
 						list.add(recipe);
 					}
 				}
@@ -100,21 +104,13 @@ public class RecipeRegistry {
 	}
 
 	public static ArrayList<IMachineRecipe> FindRecipeForInput(ItemStack stack, int damage) {
-		ArrayList<IMachineRecipe> list = new ArrayList<IMachineRecipe>();
 		if (stack != null) {
-			Iterator<Entry<IMachineRecipe, Block>> iterator = recipes.entrySet().iterator();
-			while (iterator.hasNext()) {
-				IMachineRecipe recipe = iterator.next().getKey();
-				RecipeInputSlot[] inputs = recipe.getInputs();
-				RecipeOutputSlot[] outputs = recipe.getOutputs();
-				for (int i = 0; i < recipe.getInputs().length; i++) {
-					if (inputs[i].getItem().equals(stack.getItem()) && outputs[i].damage == damage) {
-						list.add(recipe);
-					}
-				}
-			}
+			ItemStack clone = stack.copy();
+			clone.setItemDamage(damage);
+
+			return FindRecipeForInput(clone);
 		}
-		return list;
+		return new ArrayList<IMachineRecipe>();
 	}
 
 	public static Block getBlockForRecipe(IMachineRecipe recipe) {

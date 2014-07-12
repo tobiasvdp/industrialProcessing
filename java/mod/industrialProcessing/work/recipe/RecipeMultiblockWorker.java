@@ -3,6 +3,9 @@ package mod.industrialProcessing.work.recipe;
 import java.util.Iterator;
 import java.util.Random;
 
+import mod.industrialProcessing.work.recipe.slots.RecipeInputInventorySlot;
+import mod.industrialProcessing.work.recipe.slots.RecipeOutputInventorySlot;
+import mod.industrialProcessing.work.recipe.slots.RecipeSlotType;
 import mod.industrialProcessing.work.worker.ServerWorker;
 
 public class RecipeMultiblockWorker extends ServerWorker {
@@ -24,7 +27,7 @@ public class RecipeMultiblockWorker extends ServerWorker {
 	        if(currentRecipe.tier != handler.getTier())
 	        	return false;
 	        for (int i = 0; i < currentRecipe.inputs.length; i++) {
-	            RecipeInputSlot slot = currentRecipe.inputs[i];
+	            RecipeInputInventorySlot slot = currentRecipe.inputs[i];
 	            if (!hasInputIngredients(slot))
 	                return false;
 	        }
@@ -73,7 +76,7 @@ public class RecipeMultiblockWorker extends ServerWorker {
 	        return null;
 	    }
 
-	    protected boolean hasInputIngredients(RecipeInputSlot slot) {
+	    protected boolean hasInputIngredients(RecipeInputInventorySlot slot) {
 	        if (slot.type == RecipeSlotType.INVENTORY || slot.type == RecipeSlotType.DAMAGEDITEM) {
 	            if (slot.hasMetadata)
 	                return this.handler.slotContains(slot.index, slot.getItem(), slot.metadata, slot.amount);
@@ -87,14 +90,14 @@ public class RecipeMultiblockWorker extends ServerWorker {
 	        if (currentRecipe == null || currentRecipe.outputs == null)
 	            return false;
 	        for (int i = 0; i < currentRecipe.outputs.length; i++) {
-	            RecipeOutputSlot slot = currentRecipe.outputs[i];
+	            RecipeOutputInventorySlot slot = currentRecipe.outputs[i];
 	            if (!hasOutputSpace(slot))
 	                return false;
 	        }
 	        return true;
 	    }
 
-	    protected boolean hasOutputSpace(RecipeOutputSlot slot) {
+	    protected boolean hasOutputSpace(RecipeOutputInventorySlot slot) {
 	        if (slot.type == RecipeSlotType.INVENTORY) {
 	            return this.handler.slotHasRoomFor(slot.index, slot.getItem(), slot.maxAmount, slot.damage);
 	        }
@@ -105,18 +108,18 @@ public class RecipeMultiblockWorker extends ServerWorker {
 	        if (currentRecipe == null || currentRecipe.inputs == null)
 	            return;
 	        for (int i = 0; i < currentRecipe.inputs.length; i++) {
-	            RecipeInputSlot slot = currentRecipe.inputs[i];
+	            RecipeInputInventorySlot slot = currentRecipe.inputs[i];
 
 	            removeFromInput(slot);
 	        }
 	    }
 
-	    protected void removeFromInput(RecipeInputSlot slot) {
+	    protected void removeFromInput(RecipeInputInventorySlot slot) {
 	        if (slot.type == RecipeSlotType.INVENTORY) {
-	            if (!this.handler.removeFromSlot(slot.index, slot.getItem(), slot.amount))
+	            if (!this.handler.removeFromSlot(slot.index, slot.amount))
 	                System.err.println("Failed to remove recipe input?!");
 	        } else if (slot.type == RecipeSlotType.DAMAGEDITEM) {
-	            if (!this.handler.damageItem(slot.index, slot.getItem()))
+	            if (!this.handler.damageItem(slot.index))
 	                System.err.println("Failed to damage recipe input?!");
 	        }
 	    }
@@ -126,7 +129,7 @@ public class RecipeMultiblockWorker extends ServerWorker {
 	        if (recipe == null || recipe.outputs == null)
 	            return;
 	        for (int i = 0; i < recipe.outputs.length; i++) {
-	            RecipeOutputSlot slot = recipe.outputs[i];
+	            RecipeOutputInventorySlot slot = recipe.outputs[i];
 
 	            double randomValue = random.nextGaussian();
 
@@ -137,7 +140,7 @@ public class RecipeMultiblockWorker extends ServerWorker {
 
 	    }
 
-	    protected void addToOutput(int amount, RecipeOutputSlot slot) {
+	    protected void addToOutput(int amount, RecipeOutputInventorySlot slot) {
 	        if (slot.type == RecipeSlotType.INVENTORY) {
 	            if (!this.handler.addToSlot(slot.index, slot.getItem(), amount, slot.damage))
 	                System.err.println("Failed to create recipe output?!");

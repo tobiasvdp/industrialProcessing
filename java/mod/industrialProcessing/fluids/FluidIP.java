@@ -2,6 +2,7 @@ package mod.industrialProcessing.fluids;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBucket;
+import net.minecraftforge.fluids.Fluid;
 
 public class FluidIP {
 
@@ -27,5 +28,9 @@ public class FluidIP {
 
 	public BlockFluid getBlock() {
 		return block;
+	}
+
+	public Fluid getFluid() {
+		return item;
 	}
 }

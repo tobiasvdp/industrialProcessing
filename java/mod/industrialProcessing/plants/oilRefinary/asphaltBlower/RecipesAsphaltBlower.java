@@ -22,8 +22,8 @@ public class RecipesAsphaltBlower  extends RecipesMachine{
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = i;
 	recipe.powerRequired = powerConsumption;
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidAsphaltSludge.getName()), RecipeSlotType.TANK, 100), new RecipeInputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidAir.getName()), RecipeSlotType.TANK, 100) };
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(2, ISetupBlocks.blockAsphalt.blockID, RecipeSlotType.INVENTORY, 1, 1, 0.5)};
+	recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidAsphaltSludge.getName()), RecipeSlotType.TANK, 100), new RecipeInputInventorySlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidAir.getName()), RecipeSlotType.TANK, 100) };
+	recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(2, ISetupBlocks.blockAsphalt.blockID, RecipeSlotType.INVENTORY, 1, 1, 0.5)};
 	return recipe;
     }
 }

@@ -18,10 +18,10 @@ import mod.industrialProcessing.gui.framework.panels.GridSize;
 import mod.industrialProcessing.gui.framework.panels.SizeMode;
 import mod.industrialProcessing.gui.framework.slots.SlotLiquid;
 import mod.industrialProcessing.gui.framework.slots.SlotLiquidOutput;
-import mod.industrialProcessing.work.recipe.RecipeInputSlot;
-import mod.industrialProcessing.work.recipe.RecipeOutputSlot;
-import mod.industrialProcessing.work.recipe.RecipeSlot;
-import mod.industrialProcessing.work.recipe.RecipeSlotType;
+import mod.industrialProcessing.work.recipe.slots.RecipeInputInventorySlot;
+import mod.industrialProcessing.work.recipe.slots.RecipeOutputInventorySlot;
+import mod.industrialProcessing.work.recipe.slots.RecipeSlot;
+import mod.industrialProcessing.work.recipe.slots.RecipeSlotType;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fluids.FluidStack;
@@ -106,28 +106,18 @@ public class DefaultTanks {
 		for (int i = 0; i < slots.length; i++) {
 			RecipeSlot slot = slots[i];
 			if (slot.index == tankSlot && slot.type == RecipeSlotType.TANK) {
-				int amount = getAmount(slot);
+				int amount = slot.getMaxAmount();
 				return new FluidStack(slot.fluid, amount);
 			}
 		}
 		return null;
 	}
-
-	private static int getAmount(RecipeSlot slot) {
-		if (slot instanceof RecipeInputSlot) {
-			RecipeInputSlot inputSlot = (RecipeInputSlot) slot;
-			return inputSlot.amount;
-		} else if (slot instanceof RecipeOutputSlot) {
-			RecipeOutputSlot inputSlot = (RecipeOutputSlot) slot;
-			return inputSlot.maxAmount;
-		}
-		return 0;
-	}
+ 
 
 	public static int getMaxAmount(RecipeSlot[] outputs) {
 		int max = 0;
 		for (int i = 0; i < outputs.length; i++) {
-			int amount = getAmount(outputs[i]);
+			int amount = outputs[i].getMaxAmount();
 			if (amount > max)
 				max = amount;
 		}

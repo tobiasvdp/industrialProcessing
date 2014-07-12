@@ -7,11 +7,11 @@ import mod.industrialProcessing.items.ISetupItems;
 import mod.industrialProcessing.work.recipe.PoweredRecipe;
 import mod.industrialProcessing.work.recipe.PoweredRecipeMultiblock;
 import mod.industrialProcessing.work.recipe.Recipe;
-import mod.industrialProcessing.work.recipe.RecipeInputSlot;
 import mod.industrialProcessing.work.recipe.RecipeMultiblock;
-import mod.industrialProcessing.work.recipe.RecipeOutputSlot;
-import mod.industrialProcessing.work.recipe.RecipeSlotType;
 import mod.industrialProcessing.work.recipe.RecipesMachine;
+import mod.industrialProcessing.work.recipe.slots.RecipeInputInventorySlot;
+import mod.industrialProcessing.work.recipe.slots.RecipeOutputInventorySlot;
+import mod.industrialProcessing.work.recipe.slots.RecipeSlotType;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -30,9 +30,9 @@ public class RecipesUpgradeElectroMotor extends RecipesMachine {
 	private Recipe generator() {
 		Recipe recipe = new Recipe();
 
-		recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(3, ISetupItems.itemMotorPoleAxis, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(4, ISetupItems.itemIronBar, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(5, IndustrialProcessing.blockElectroMotor, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(0, ISetupItems.itemIronPlate, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(6, ISetupItems.itemIronPlate, RecipeSlotType.INVENTORY, 1) };
+		recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(3, ISetupItems.itemMotorPoleAxis, 1), new RecipeInputInventorySlot(4, ISetupItems.itemIronBar, 1), new RecipeInputInventorySlot(5, IndustrialProcessing.blockElectroMotor, RecipeSlotType.INVENTORY, 1), new RecipeInputInventorySlot(0, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(6, ISetupItems.itemIronPlate, 1) };
 
-		recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(9, IndustrialProcessing.blockGenerator, RecipeSlotType.INVENTORY, 1, 1, 0) };
+		recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(9, IndustrialProcessing.blockGenerator, 1, 1, 0) };
 
 		return recipe;
 	}

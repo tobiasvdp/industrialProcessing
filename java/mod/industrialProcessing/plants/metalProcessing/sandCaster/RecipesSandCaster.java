@@ -24,8 +24,8 @@ public class RecipesSandCaster extends RecipesMachine {
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = work;
 	recipe.powerRequired = power;
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidPigIron.getName()), RecipeSlotType.TANK, 800), new RecipeInputSlot(0, ISetupItems.itemSandCastIngot.itemID, RecipeSlotType.DAMAGEDITEM, 1) };
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, Item.ingotIron.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
+	recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidPigIron.getName()), RecipeSlotType.TANK, 800), new RecipeInputInventorySlot(0, ISetupItems.itemSandCastIngot.itemID, RecipeSlotType.DAMAGEDITEM, 1) };
+	recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(1, Item.ingotIron.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
 	return recipe;
     }
 }

@@ -279,13 +279,13 @@ public class GuiBuilderDefault implements IGuiBuilder {
         grid.rows.add(new GridSize(54, SizeMode.ABSOLUTE));
         DefaultHeat.setup(this.heatRef, recipe, grid, Alignment.MIN);
 
-        int maxTankAmount = Math.max(DefaultTanks.getMaxAmount(recipe.getInputs()), DefaultTanks.getMaxAmount(recipe.getOutputs()));
+        int maxTankAmount = Math.max(DefaultTanks.getMaxAmount(recipe.getInventoryInputs()), DefaultTanks.getMaxAmount(recipe.getInventoryOutputs()));
 
-        DefaultSlots.setup(this.inputSlots, recipe.getInputs(), grid, Alignment.MIN, stackClickListener);
-        DefaultTanks.setup(this.inputTanks, recipe.getInputs(), maxTankAmount, grid, Alignment.MIN);
+        DefaultSlots.setup(this.inputSlots, recipe.getInventoryInputs(), grid, Alignment.MIN, stackClickListener);
+        DefaultTanks.setup(this.inputTanks, recipe.getInventoryInputs(), maxTankAmount, grid, Alignment.MIN);
         DefaultWorker.setup(this.workerRef, recipe, grid, Alignment.CENTER);
-        DefaultTanks.setup(this.outputTanks, recipe.getOutputs(), maxTankAmount, grid, Alignment.MAX);
-        DefaultSlots.setup(this.outputSlots, recipe.getOutputs(), grid, Alignment.MAX, stackClickListener);
+        DefaultTanks.setup(this.outputTanks, recipe.getInventoryOutputs(), maxTankAmount, grid, Alignment.MAX);
+        DefaultSlots.setup(this.outputSlots, recipe.getInventoryOutputs(), grid, Alignment.MAX, stackClickListener);
         stackPanel.addChild(grid);
         return new RecipeFrame(stackPanel, this.title);
     }

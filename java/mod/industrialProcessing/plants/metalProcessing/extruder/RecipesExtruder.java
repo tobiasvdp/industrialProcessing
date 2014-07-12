@@ -25,8 +25,8 @@ public class RecipesExtruder extends RecipesMachine {
 	PoweredRecipe slag = new PoweredRecipe();
 	slag.workRequired = work;
 	slag.powerRequired = power;
-	slag.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidHotSlag.getName()), RecipeSlotType.TANK, 1000) };
-	slag.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemSlag.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
+	slag.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidHotSlag.getName()), RecipeSlotType.TANK, 1000) };
+	slag.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(0, ISetupItems.itemSlag.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
 	return slag;
     }
 
@@ -34,8 +34,8 @@ public class RecipesExtruder extends RecipesMachine {
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = work;
 	recipe.powerRequired = power;
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidPigIron.getName()), RecipeSlotType.TANK, 200) };
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(0, ISetupItems.itemIronBar.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
+	recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidPigIron.getName()), RecipeSlotType.TANK, 200) };
+	recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(0, ISetupItems.itemIronBar.itemID, RecipeSlotType.INVENTORY, 1, 1, 0) };
 	return recipe;
     }
 }

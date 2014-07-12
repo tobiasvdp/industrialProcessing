@@ -77,7 +77,7 @@ public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCo
 	}
 
 	@Override
-	public boolean removeFromSlot(int slot, Item itemId, int amount) {
+	public boolean removeFromSlot(int slot, int amount) {
 		if (slotContains(slot, itemId, amount)) {
 			MachineItemStack machineStack = getMachineStack(slot);
 			machineStack.stack.stackSize -= amount;
@@ -92,15 +92,19 @@ public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCo
 	protected void onInventoryChanged() {
 		this.markDirty();
 	}
-
+ 
+	public boolean addToSlot(int slot, Item item, int amount, int damage) {
+		return addToSlot(slot, new ItemStack(item, amount, damage));
+	}
+	
 	@Override
-	public boolean addToSlot(int slot, Item itemId, int amount, int damage) {
-		if (slotHasRoomFor(slot, itemId, amount, damage)) {
+	public boolean addToSlot(int slot, ItemStack stack) {
+		if (slotHasRoomFor(slot, stack)) {
 			MachineItemStack machineStack = getMachineStack(slot);
 			if (machineStack.stack == null)
-				machineStack.stack = new ItemStack(itemId, amount, damage);
+				machineStack.stack = stack.copy();
 			else
-				machineStack.stack.stackSize += amount;
+				machineStack.stack.stackSize += stack.stackSize;
 			onInventoryChanged();
 			return true;
 		}
@@ -274,7 +278,7 @@ public abstract class TileEntityMultiblockCoreInv extends TileEntityMultiblockCo
 	}
 
 	@Override
-	public boolean damageItem(int slot, Item itemId) {
+	public boolean damageItem(int slot) {
 		getMachineStack(slot).stack.setItemDamage(getMachineStack(slot).stack.getItemDamage()+1);
 		return getMachineStack(slot).stack.getItemDamage()>=getMachineStack(slot).stack.getMaxDamage();
 	}

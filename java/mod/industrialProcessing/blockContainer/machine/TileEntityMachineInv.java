@@ -251,15 +251,15 @@ public class TileEntityMachineInv extends TileEntityBlockContainerIP implements 
 		MachineItemStack machineStack = itemStacks.get(slot);
 		return machineStack != null && (machineStack.stack == null || (machineStack.stack.getItem().equals(item) && machineStack.stack.getItemDamage() == damage && (machineStack.stack.stackSize + amount < machineStack.stack.getMaxStackSize())));
 	}
-
+ 	
 	@Override
-	public boolean addToSlot(int slot, Item item, int amount, int damage) {
-		if (slotHasRoomFor(slot, item, amount, damage)) {
+	public boolean addToSlot(int slot, ItemStack stack) { 
+		if (slotHasRoomFor(slot, stack)) {
 			MachineItemStack machineStack = itemStacks.get(slot);
 			if (machineStack.stack == null)
-				machineStack.stack = new ItemStack(item, amount, damage);
+				machineStack.stack = stack.copy();
 			else
-				machineStack.stack.stackSize += amount;
+				machineStack.stack.stackSize += stack.stackSize;
 			onInventoryChanged();
 			return true;
 		}
@@ -267,22 +267,44 @@ public class TileEntityMachineInv extends TileEntityBlockContainerIP implements 
 	}
 
 	@Override
-	public boolean removeFromSlot(int slot, Item item, int amount) {
-		if (slotContains(slot, item, amount)) {
-			MachineItemStack machineStack = itemStacks.get(slot);
-			machineStack.stack.stackSize -= amount;
-			if (machineStack.stack.stackSize == 0)
-				machineStack.stack = null;
-			onInventoryChanged();
-			return true;
-		}
-		return false;
+	public boolean removeFromSlot(int slot, int amount) {
+		if (slot >= itemStacks.size())
+			return false;
+		MachineItemStack machineStack = itemStacks.get(slot);
+		if (machineStack.stack == null)
+			return false;
+		if (machineStack.stack.stackSize < amount)
+			return false;
+
+		machineStack.stack.stackSize -= amount;
+		if (machineStack.stack.stackSize == 0)
+			machineStack.stack = null;
+		onInventoryChanged();
+		return true;
 	}
 
 	@Override
-	public boolean damageItem(int slot, Item item) {
-		itemStacks.get(slot).stack.setItemDamage(itemStacks.get(slot).stack.getItemDamage() + 1);
-		return itemStacks.get(slot).stack.getItemDamage() >= itemStacks.get(slot).stack.getMaxDamage();
+	public boolean damageItem(int slot) {
+
+		if (slot >= itemStacks.size())
+			return false;
+		MachineItemStack machineStack = itemStacks.get(slot);
+		if (machineStack.stack == null)
+			return false;
+		if (machineStack.stack.stackSize < 1)
+			return false;
+
+		if (machineStack.stack.getItemDamage() >= machineStack.stack.getMaxDamage())
+			return false;
+
+		machineStack.stack.setItemDamage(machineStack.stack.getItemDamage() + 1);
+		
+		/* currently don't remove when completly damaged
+		if (machineStack.stack.getItemDamage() >= machineStack.stack.getMaxDamage())
+			machineStack.stack = null;
+		*/
+		onInventoryChanged();
+		return true;
 	}
 
 }

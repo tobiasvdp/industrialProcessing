@@ -24,8 +24,8 @@ public class RecipesMultiblockBlastFurnace extends RecipesMultiblock {
 	PoweredRecipeMultiblock recipe = new PoweredRecipeMultiblock();
 	recipe.workRequired = i;
 	recipe.powerRequired = power;
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidAir.getName()), RecipeSlotType.TANK, 1000), new RecipeInputSlot(0, ISetupItems.itemIronSinter.itemID, RecipeSlotType.INVENTORY, 1), new RecipeInputSlot(1, ISetupItems.itemCokePellet.itemID, RecipeSlotType.INVENTORY, 1) };
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidPigIron.getName()), RecipeSlotType.TANK, 800, 1200, 0.5), new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidHotSlag.getName()), RecipeSlotType.TANK, 300, 500, 0.5), new RecipeOutputSlot(3, FluidRegistry.getFluidID(ISetupFluids.itemFluidExhaustGas.getName()), RecipeSlotType.TANK, 100, 100, 0.5) };
+	recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidAir.getName()), RecipeSlotType.TANK, 1000), new RecipeInputInventorySlot(0, ISetupItems.itemIronSinter.itemID, RecipeSlotType.INVENTORY, 1), new RecipeInputInventorySlot(1, ISetupItems.itemCokePellet.itemID, RecipeSlotType.INVENTORY, 1) };
+	recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidPigIron.getName()), RecipeSlotType.TANK, 800, 1200, 0.5), new RecipeOutputInventorySlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidHotSlag.getName()), RecipeSlotType.TANK, 300, 500, 0.5), new RecipeOutputInventorySlot(3, FluidRegistry.getFluidID(ISetupFluids.itemFluidExhaustGas.getName()), RecipeSlotType.TANK, 100, 100, 0.5) };
 	recipe.tier = tier;
 	return recipe;
     }

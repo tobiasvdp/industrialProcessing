@@ -22,8 +22,8 @@ public class RecipesCoolingUnit extends RecipesMachine {
 	PoweredRecipe recipe = new PoweredRecipe();
 	recipe.workRequired = work;
 	recipe.powerRequired = power;
-	recipe.inputs = new RecipeInputSlot[] { new RecipeInputSlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidExhaustGas.getName()), RecipeSlotType.TANK, 200), new RecipeInputSlot(1, FluidRegistry.WATER.getID(), RecipeSlotType.TANK, 100) };
-	recipe.outputs = new RecipeOutputSlot[] { new RecipeOutputSlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidSteam.getName()), RecipeSlotType.TANK, 200, 200, 0) };
+	recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidExhaustGas.getName()), RecipeSlotType.TANK, 200), new RecipeInputInventorySlot(1, FluidRegistry.WATER.getID(), RecipeSlotType.TANK, 100) };
+	recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidSteam.getName()), RecipeSlotType.TANK, 200, 200, 0) };
 	return recipe;
     }
 }
