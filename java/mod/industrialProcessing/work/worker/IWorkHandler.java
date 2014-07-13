@@ -7,12 +7,12 @@ public interface IWorkHandler {
 	 * verify if there is work to be done, if not, reset work counter to 0
 	 * @return
 	 */
-	boolean hasWork();
+	boolean hasWorkToDo();
 	/**
 	 * verify if the work can be completed, if not, pause until it can be
 	 * @return
 	 */
-	boolean canWork();
+	boolean canWorkProgress();
 	/**
 	 * this method gets called when the work is done
 	 */

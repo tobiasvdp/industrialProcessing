@@ -33,7 +33,7 @@ public class DefaultInventory {
 	}
 
 	public static void setup(InventoryReference inventoryRef, GuiLayoutContainer guiContainer, StackPanel rootStack) {
-		if (inventoryRef != null) {
+		if (inventoryRef != null) { 
 			// TODO: crafting grid;
 			rootStack.addChild(PlayerInventory.createInventory(inventoryRef.hotbarSlots, inventoryRef.inventorySlots, inventoryRef.armorSlots, null, null));
 		}

@@ -11,6 +11,7 @@ import mod.industrialProcessing.gui.framework.rendering.TextureReference;
 
 public class Decorator extends UIElement {
 
+	private static final TextureReference DEFAULT_FLYOUT_TEXTURE = new TextureReference(new Size(256, 256), IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/FlyoutBackground.png");
 	private static final TextureReference DEFAULT_TEXTURE = new TextureReference(new Size(256, 256), IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/Background.png");
 	private static final TextureReference DEFAULT_TAB_TEXTURE = new TextureReference(new Size(256, 64), IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/TabBackground.png");
 	private static final TextureReference DEFAULT_EXPANDER_TEXTURE = new TextureReference(new Size(128, 32), IndustrialProcessing.TEXTURE_DOMAIN, "textures/gui/Expander.png");
@@ -26,6 +27,10 @@ public class Decorator extends UIElement {
 
 	public static Decorator createDecorator() {
 		return new Decorator(DEFAULT_TEXTURE, DEFAULT_BORDER_SIZE, DEFAULT_SECTION);
+	}
+
+	public static Decorator createFlyoutDecorator() {
+		return new Decorator(DEFAULT_FLYOUT_TEXTURE, DEFAULT_BORDER_SIZE, DEFAULT_SECTION);
 	}
 
 	public static Decorator createExpanderDecorator(boolean active) {

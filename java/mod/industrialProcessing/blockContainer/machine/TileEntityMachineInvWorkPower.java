@@ -13,6 +13,7 @@ import mod.industrialProcessing.work.recipe.IPowerRecipe;
 import mod.industrialProcessing.work.recipe.RecipeGenericWorker;
 import mod.industrialProcessing.work.recipe.RecipeWorker;
 import mod.industrialProcessing.work.recipe.RecipesMachine;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -20,10 +21,10 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class TileEntityMachineInvWorkPower extends TileEntityMachineInvWork implements IPoweredMachine {
 
 	private LocalDirection powerInputSide;
-	private int maxWorkSpeed;
-
 	private SimplePowerStorage storage;
-	private int batterySlot = -1;
+	protected int batterySlot = -1;
+	private int maxWorkSpeed;
+  
 
 	public TileEntityMachineInvWorkPower(IMachineRecipes<IMachineRecipe> recipes, LocalDirection powerInput, int powerCapacity, int maxWorkSpeed) {
 		super(recipes);
@@ -76,8 +77,7 @@ public class TileEntityMachineInvWorkPower extends TileEntityMachineInvWork impl
 				maxWorkSpeed = (int) (this.maxWorkSpeed * f);
 			}
 		}
-
-		// System.out.println("speed: " + maxWorkSpeed + " of " + this.maxWorkSpeed);
+ 
 
 		work(maxWorkSpeed);
 	}
@@ -98,6 +98,8 @@ public class TileEntityMachineInvWorkPower extends TileEntityMachineInvWork impl
 			storage.drainPower(powerUsed, true);
 		}
 	}
+
+	 
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {

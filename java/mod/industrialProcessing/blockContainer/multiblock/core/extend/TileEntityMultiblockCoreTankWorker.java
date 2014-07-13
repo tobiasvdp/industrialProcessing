@@ -163,12 +163,12 @@ public abstract class TileEntityMultiblockCoreTankWorker extends TileEntityMulti
 	}
 
 	@Override
-	public boolean hasWork() {
+	public boolean hasWorkToDo() {
 		return true;
 	}
 
 	@Override
-	public boolean canWork() {
+	public boolean canWorkProgress() {
 		return true;
 	}
 

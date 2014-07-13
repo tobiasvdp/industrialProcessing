@@ -21,12 +21,13 @@ public class PowerControl extends UserControl implements IProgressBinding {
 		width = Float.NaN;
 		height = Float.NaN;
 		StackPanel stack = new StackPanel();
-		stack.orientation = Orientation.HORIZONTAL;
+		stack.orientation = Orientation.VERTICAL;
 
 		SlotControl slot = SlotControl.createPowerSlot(powerSlot);
 		stack.addChild(slot);
 
-		progress = ProgressBar.createHorizontal1();
+		progress = ProgressBar.createVertical1();
+		progress.width = 18;
 		progress.tooltip = "%.0fJoules";
 		progress.margin = new Thickness(0, 0, 0, 0);
 		slot.margin = new Thickness(0, 0, 0, 0);

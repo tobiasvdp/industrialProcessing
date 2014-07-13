@@ -2,7 +2,6 @@ package mod.industrialProcessing.gui.generating.builderParts;
 
 import java.util.ArrayList;
 
-import mod.industrialProcessing.gui.containers.CraftingContainer;
 import mod.industrialProcessing.gui.containers.LayoutContainer;
 import mod.industrialProcessing.gui.framework.Alignment;
 import mod.industrialProcessing.gui.framework.UIElement;
@@ -14,10 +13,9 @@ import mod.industrialProcessing.gui.framework.panels.GridCell;
 import mod.industrialProcessing.gui.framework.panels.GridPanel;
 import mod.industrialProcessing.gui.framework.panels.GridSize;
 import mod.industrialProcessing.gui.framework.panels.SizeMode;
+import mod.industrialProcessing.gui.framework.panels.StackPanel;
 import mod.industrialProcessing.gui.framework.slots.SlotBase;
 import mod.industrialProcessing.gui.framework.slots.SlotOutput;
-import mod.industrialProcessing.work.recipe.slots.RecipeInputInventorySlot;
-import mod.industrialProcessing.work.recipe.slots.RecipeOutputInventorySlot;
 import mod.industrialProcessing.work.recipe.slots.RecipeSlot;
 import mod.industrialProcessing.work.recipe.slots.RecipeSlotType;
 import net.minecraft.inventory.IInventory;
@@ -43,7 +41,23 @@ public class DefaultSlots {
 			}
 		}
 	}
-	
+
+	public static void setup(ArrayList<SlotClusterReference> slotRefs, LayoutContainer container, StackPanel stack, Alignment max) {
+		for (SlotClusterReference slot : slotRefs) {
+			if (slot.slotCount == 1) {
+				SlotControl slotControl = SlotControl.createSlot(slot.slots[0]);
+				slotControl.horizontalAlign = max;
+				slotControl.verticalAlign = Alignment.CENTER;
+
+				stack.addChild(slotControl);
+			} else {
+				ElementGrid slotGrid = ElementGrid.createSlotGrid(slot.slots, slot.size, slot.orientation);
+				slotGrid.horizontalAlign = max;
+				slotGrid.verticalAlign = Alignment.CENTER;
+				stack.addChild(slotGrid);
+			}
+		}
+	}
 
 	public static void setup(ArrayList<SlotClusterReference> slots, LayoutContainer container, TileEntity tileEntity, boolean input) {
 		if (!slots.isEmpty()) {
@@ -57,8 +71,6 @@ public class DefaultSlots {
 			}
 		}
 	}
-	
-	
 
 	private static IInventory getInventory(TileEntity tileEntity) {
 		IInventory inventory = null;
@@ -95,13 +107,13 @@ public class DefaultSlots {
 	private static int getAmount(RecipeSlot slot) {
 		return slot.getMaxAmount();
 	}
-	
+
 	private static ItemStack getStack(RecipeSlot[] slots, int startSlot) {
 		for (int i = 0; i < slots.length; i++) {
 			RecipeSlot slot = slots[i];
 			if (slot.index == startSlot && slot.type != RecipeSlotType.TANK) {
 				int amount = getAmount(slot);
-				//return new ItemStack(slot.getItem(), amount, slot.metadata);
+				// return new ItemStack(slot.getItem(), amount, slot.metadata);
 				return slot.getDefaultDisplayStack();
 			}
 		}

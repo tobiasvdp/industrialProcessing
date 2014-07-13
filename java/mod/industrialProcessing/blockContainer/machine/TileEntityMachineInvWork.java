@@ -85,12 +85,12 @@ public class TileEntityMachineInvWork extends TileEntityMachineInv implements IW
 	}
 
 	@Override
-	public boolean hasWork() {
+	public boolean hasWorkToDo() {
 		return true;
 	}
 
 	@Override
-	public boolean canWork() {
+	public boolean canWorkProgress() {
 		return true;
 	}
 

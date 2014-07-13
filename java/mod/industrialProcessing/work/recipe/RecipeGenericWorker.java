@@ -58,7 +58,6 @@ public class RecipeGenericWorker<TMachineRecipe extends IMachineRecipe, TWorkHan
 			return null;
 		for (; iterator.hasNext();) {
 			TMachineRecipe currentRecipe = iterator.next();
-			System.out.println(currentRecipe);
 			if (matchesInput(currentRecipe)) {
 				return currentRecipe;
 			}

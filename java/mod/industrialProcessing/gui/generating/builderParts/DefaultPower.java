@@ -59,7 +59,7 @@ public class DefaultPower {
 				control = powerControl;
 				binder = new Binder<IProgressBinding>(powerRef.powerHandler, powerControl);
 			} else {
-				ProgressBar powerControl = ProgressBar.createHorizontal1();
+				ProgressBar powerControl = ProgressBar.createVertical1();
 				powerControl.tooltip = "%.0fJoules";
 				control = powerControl;
 				binder = new Binder<IProgressBinding>(powerRef.powerHandler, powerControl);

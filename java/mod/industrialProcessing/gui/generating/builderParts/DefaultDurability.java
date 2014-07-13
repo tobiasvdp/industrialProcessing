@@ -1,5 +1,6 @@
 package mod.industrialProcessing.gui.generating.builderParts;
 
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import mod.industrialProcessing.gui.binding.Binder;
 import mod.industrialProcessing.gui.containers.GuiLayoutContainer;
 import mod.industrialProcessing.gui.containers.LayoutContainer;
@@ -14,11 +15,11 @@ import net.minecraft.tileentity.TileEntity;
 public class DefaultDurability {
 	public static void setup(DurabilityReference durabilityRef, GuiLayoutContainer guiContainer, StackPanel stack) {
 		if (durabilityRef != null) {
-			ProgressBar durabilityProgress = ProgressBar.createHorizontal3();
+			ProgressBar durabilityProgress = ProgressBar.createVertical3();
 			durabilityProgress.horizontalAlign = Alignment.MIN;
 			durabilityProgress.invert = true;
-			durabilityProgress.flip = true;
-			durabilityProgress.margin = new Thickness(0, 0, 7, 0);
+			durabilityProgress.flip = false;
+			durabilityProgress.margin = new Thickness(0, 0, 0, 0); 
 			stack.addChild(durabilityProgress);
 			Binder binder = new Binder(durabilityRef.handler, durabilityProgress);
 			guiContainer.addBinding(binder);

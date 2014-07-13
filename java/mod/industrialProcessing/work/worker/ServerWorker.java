@@ -66,11 +66,11 @@ public class ServerWorker implements IWorker {
     }
 
     public boolean hasWork() {
-        return this.handler.hasWork();
+        return this.handler.hasWorkToDo();
     }
 
     public boolean canWork() {
-        return this.handler.canWork();
+        return this.handler.canWorkProgress();
     }
 
     protected void onEndWork() {

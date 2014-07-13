@@ -10,6 +10,7 @@ import mod.industrialProcessing.plants.blackSmith.tripHammer.dummy.woodenBar.Blo
 import mod.industrialProcessing.plants.blackSmith.tripHammer.dummy.woodenHammer.BlockWoodenHammer;
 import mod.industrialProcessing.plants.blackSmith.tripHammer.dummy.woodenWheel.BlockWoodenWheel;
 import mod.industrialProcessing.plants.blackSmith.waterBasin.BlockWaterBasin;
+import mod.industrialProcessing.plants.construction.craftomatic.BlockCraftomatic;
 import mod.industrialProcessing.plants.construction.frame.BlockFrame;
 import mod.industrialProcessing.plants.construction.machineBlock.BlockMachineBlock;
 import mod.industrialProcessing.plants.construction.solderingStation.BlockSolderingStation;
@@ -52,6 +53,7 @@ import mod.industrialProcessing.transport.fluids.block.BlockTransportFluidsWood;
 public interface ISetupBlockContainers {
 
     
+	public final static BlockCraftomatic blockCraftomatic = new BlockCraftomatic();
     public final static BlockCrusher blockCrusher = new BlockCrusher();
     public final static BlockFilter blockFilter = new BlockFilter();
     public final static BlockMixer blockMixer = new BlockMixer();

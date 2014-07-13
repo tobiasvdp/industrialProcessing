@@ -27,7 +27,7 @@ public class TileEntityMachineCrafter extends TileEntityMachineInv {
 		this.blockset = blockset;
 		addStack(null, LocalDirection.UNKNOWN, false, true);
 		for (int i = 0; i < inputs; i++)
-			addStack(null, LocalDirection.UNKNOWN, true, false);
+			addStack(null, LocalDirection.UNKNOWN, true, false);		
 		if (fillingSlot != -1)
 			this.setInventorySlotContents(fillingSlot, new ItemStack(fillingBlock, 0));
 	}
