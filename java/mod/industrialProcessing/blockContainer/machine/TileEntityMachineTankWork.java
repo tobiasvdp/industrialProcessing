@@ -24,18 +24,18 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import mod.industrialProcessing.fluids.tank.IPfluidTank;
 
-public class TileEntityMachineTankWork extends TileEntityMachineTank implements IWorkHandler, IRecipeFluidWorkHandler<IMachineRecipe>,IAnimationProgress, IAnimationSyncable{
+public class TileEntityMachineTankWork extends TileEntityMachineTank implements IWorkHandler, IRecipeFluidWorkHandler<IMachineRecipe>, IAnimationProgress, IAnimationSyncable {
 
 	protected RecipeGenericFluidWorker<IMachineRecipe, IRecipeFluidWorkHandler<IMachineRecipe>> worker;
-	protected RecipesMachine recipes; 
+	protected RecipesMachine recipes;
 	protected AnimationHandler animation = new AnimationHandler(AnimationMode.WRAP, 1f, true);
 	protected boolean animated = false;
 
 	public TileEntityMachineTankWork(RecipesMachine recipes) {
 		this.worker = createServerSideWorker();
 		this.recipes = recipes;
-	}	
-	
+	}
+
 	@Override
 	protected boolean isTankValidForFluid(int slot, Fluid fluid) {
 		return recipes.isValidFluidInput(slot, fluid);
@@ -49,9 +49,9 @@ public class TileEntityMachineTankWork extends TileEntityMachineTank implements 
 	public void updateEntity() {
 		super.updateEntity();
 		doWork();
-		if(animated ){
-		    this.animation.update();
-		    TileAnimationSyncHandler.sendAnimationData(this, this.animation);
+		if (animated) {
+			this.animation.update();
+			TileAnimationSyncHandler.sendAnimationData(this, this.animation);
 		}
 	}
 
@@ -98,7 +98,7 @@ public class TileEntityMachineTankWork extends TileEntityMachineTank implements 
 	}
 
 	@Override
-	public boolean canWorkProgress() {
+	public boolean canWorkProgress() { 
 		return true;
 	}
 
@@ -109,7 +109,6 @@ public class TileEntityMachineTankWork extends TileEntityMachineTank implements 
 
 	@Override
 	public void prepareWork() {
-
 	}
 
 	@Override
@@ -119,6 +118,7 @@ public class TileEntityMachineTankWork extends TileEntityMachineTank implements 
 
 	@Override
 	public void workProgressed(int amount) {
+		System.out.println("working on " + this + " for " + amount);
 
 	}
 
@@ -136,15 +136,15 @@ public class TileEntityMachineTankWork extends TileEntityMachineTank implements 
 	public IWorker getWorker() {
 		return worker;
 	}
-	
+
 	@Override
-	protected boolean isValidInput(int slot, Item item){
-		if(super.isValidInput(slot, item))
+	protected boolean isValidInput(int slot, Item item) {
+		if (super.isValidInput(slot, item))
 			return true;
 		else
 			return recipes.isValidInput(slot, item);
 	}
-	
+
 	@Override
 	public int getAnimationCount() {
 		return 1;

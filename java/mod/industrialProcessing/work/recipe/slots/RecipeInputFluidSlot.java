@@ -38,7 +38,10 @@ public class RecipeInputFluidSlot extends RecipeInputSlot implements IRecipeFlui
 	public boolean isFluidStackValid(FluidStack stack) {
 		if (stack == null)
 			return false;
-		return stack.getFluid() == fluid && stack.amount >= getMaxAmount();
+		
+		boolean isFluidEqual = stack.getFluid() == fluid;
+		boolean isAmountSufficient = stack.amount >= getMaxAmount();
+		return isFluidEqual && isAmountSufficient;
 	}
 
 	public Fluid getFluid() {

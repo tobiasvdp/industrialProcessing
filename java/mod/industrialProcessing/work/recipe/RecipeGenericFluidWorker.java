@@ -1,5 +1,6 @@
 package mod.industrialProcessing.work.recipe;
 
+import net.minecraftforge.fluids.FluidStack;
 import mod.industrialProcessing.work.recipe.slots.RecipeInputFluidSlot;
 import mod.industrialProcessing.work.recipe.slots.RecipeOutputFluidSlot;
 
@@ -17,7 +18,6 @@ public class RecipeGenericFluidWorker<TMachineRecipe extends IMachineRecipe, TWo
 		boolean inventory = super.matchesInput(currentRecipe);
 		if (!inventory)
 			return false;
-
 		RecipeInputFluidSlot[] inputSlots = currentRecipe.getFluidInputs();
 		if (inputSlots == null)
 			return false;
@@ -47,12 +47,15 @@ public class RecipeGenericFluidWorker<TMachineRecipe extends IMachineRecipe, TWo
 	protected boolean outputAvailable(TMachineRecipe currentRecipe) {
 		boolean inventory = super.outputAvailable(currentRecipe);
 
+		System.out.println("output available?");
 		if (!inventory)
 			return false;
 
 		RecipeOutputFluidSlot[] outputSlots = recipe.getFluidOutputs();
-		if (currentRecipe == null || outputSlots == null)
+		if (currentRecipe == null)
 			return false;
+		if (outputSlots == null)// no outputs means room enough to output nothing!
+			return true;
 		for (int i = 0; i < outputSlots.length; i++) {
 			RecipeOutputFluidSlot slot = outputSlots[i];
 			if (!hasOutputSpace(slot))
@@ -87,7 +90,9 @@ public class RecipeGenericFluidWorker<TMachineRecipe extends IMachineRecipe, TWo
 	}
 
 	protected boolean hasInputIngredients(RecipeInputFluidSlot fluidSlot) {
-		return fluidSlot.isFluidStackValid(this.fluidHanlder.getFluidStackInSlot(fluidSlot.index));
+
+		FluidStack stack = this.fluidHanlder.getFluidStackInSlot(fluidSlot.index);
+		return fluidSlot.isFluidStackValid(stack);
 	};
 
 	protected void removeFromInput(RecipeInputFluidSlot slot) {

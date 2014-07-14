@@ -96,8 +96,10 @@ public class RecipeGenericWorker<TMachineRecipe extends IMachineRecipe, TWorkHan
 
 	protected boolean outputAvailable(TMachineRecipe currentRecipe) {
 		RecipeOutputInventorySlot[] outputSlots = recipe.getInventoryOutputs();
-		if (currentRecipe == null || outputSlots == null)
+		if (currentRecipe == null)
 			return false;
+		if( outputSlots == null)// no outputs means room enough to output nothing!
+			return true;
 		for (int i = 0; i < outputSlots.length; i++) {
 			RecipeOutputInventorySlot slot = outputSlots[i];
 			if (!hasOutputSpace(slot))

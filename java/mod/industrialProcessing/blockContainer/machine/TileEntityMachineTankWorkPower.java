@@ -58,7 +58,7 @@ public class TileEntityMachineTankWorkPower extends TileEntityMachineTankWork  i
     }
 
     @Override
-    public void doWork() {
+    public void doWork() { 
 		IMachineRecipe recipe = this.worker.getRecipe();
 
 		int maxWorkSpeed = this.maxWorkSpeed;
