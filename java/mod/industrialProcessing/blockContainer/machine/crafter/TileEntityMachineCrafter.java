@@ -53,7 +53,7 @@ public class TileEntityMachineCrafter extends TileEntityMachineInv {
 						boolean found = false;
 						for (RecipeInputInventorySlot input : recipe.getInventoryInputs()) {
 							if (input.index == i - offset) {
-								if (!input.isItemValid(te.getMachineStack(0).stack)) {
+								if (!input.isStackValid(te.getMachineStack(0).stack)) {
 									notRecipe = true;
 								}
 								found = true;
@@ -94,7 +94,7 @@ public class TileEntityMachineCrafter extends TileEntityMachineInv {
 						for (RecipeInputInventorySlot input : recipe.getInventoryInputs()) {
 							if (input.index == i - offset) {
 
-								if (!input.isItemValid(te.getMachineStack(0).stack)) {
+								if (!input.isStackValid(te.getMachineStack(0).stack)) {
 									notRecipe = true;
 								}
 								found = true;

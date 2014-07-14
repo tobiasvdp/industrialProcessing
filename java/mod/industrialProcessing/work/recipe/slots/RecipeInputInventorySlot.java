@@ -22,7 +22,7 @@ public class RecipeInputInventorySlot extends RecipeInputSlot {
 		this.item = new ExactInputItem(item);
 	}
 
-	/** 
+	/**
 	 * @deprecated Use ore dictionary!
 	 */
 	@Deprecated
@@ -31,7 +31,7 @@ public class RecipeInputInventorySlot extends RecipeInputSlot {
 		this.item = new ExactInputItem(item, metadata);
 	}
 
-	/** 
+	/**
 	 * @deprecated Use ore dictionary!
 	 */
 	@Deprecated
@@ -40,7 +40,7 @@ public class RecipeInputInventorySlot extends RecipeInputSlot {
 		this.item = new ExactInputBlock(item);
 	}
 
-	/** 
+	/**
 	 * @deprecated Use ore dictionary!
 	 */
 	@Deprecated
@@ -49,7 +49,7 @@ public class RecipeInputInventorySlot extends RecipeInputSlot {
 		this.item = new ExactInputBlock(item, metadata);
 	}
 
-	/** 
+	/**
 	 * @deprecated Use ore dictionary!
 	 */
 	@Deprecated
@@ -57,9 +57,8 @@ public class RecipeInputInventorySlot extends RecipeInputSlot {
 		super(index, stack.stackSize, RecipeSlotType.INVENTORY);
 		this.item = new InputItemStack(stack);
 	}
-	
-	public RecipeInputInventorySlot(int index, String oreDictionaryKey, int amount)
-	{
+
+	public RecipeInputInventorySlot(int index, String oreDictionaryKey, int amount) {
 		super(index, amount, RecipeSlotType.INVENTORY);
 		this.item = new OreDictionaryItem(oreDictionaryKey);
 	}
@@ -71,17 +70,17 @@ public class RecipeInputInventorySlot extends RecipeInputSlot {
 		return null;
 	}
 
-	public boolean isItemValid(Item item2) {
-		return this.item.isValid(new ItemStack(item2));
+	public boolean isItemValid(Item item){		
+		return this.item.isValid(new ItemStack(item));
 	}
-
-	public boolean isItemValid(ItemStack item2) {
-		return this.item.isValid(item2);
+	
+	public boolean isStackValid(ItemStack item2) {		
+		return this.item.isValid(item2) && item2.stackSize >= this.getMaxAmount();
 	}
 
 	public void removeFrom(IInventorySlots handler) {
 
 		if (!handler.removeFromSlot(this.index, this.getMaxAmount()))
-			System.err.println("Failed to remove recipe input?!");
+			System.err.println("Failed to remove " + this.getMaxAmount() + "  from " + this.item + " in slot " + this.index + " from " + handler + "?!");
 	}
 }

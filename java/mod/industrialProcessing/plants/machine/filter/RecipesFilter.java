@@ -131,7 +131,7 @@ public class RecipesFilter extends RecipesMachine {
 	PoweredRecipe iron = new PoweredRecipe();
         iron.workRequired = i;
         iron.powerRequired = powerConsumption;
-        iron.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, ISetupItems.itemIronCrushedChunks, 2) };
+        iron.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, ISetupItems.itemIronCrushedChunks, 1) };
         iron.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(1, ISetupItems.itemIronLargeChunks, 0, 1, 0.35), new RecipeOutputInventorySlot(2, ISetupItems.itemIronSmallChunks, 1, 3, 0.45) };
         return iron;
     }

@@ -94,7 +94,7 @@ public class RecipeRegistry {
 				IMachineRecipe recipe = iterator.next().getKey();
 				RecipeInputInventorySlot[] inputs = recipe.getInventoryInputs();
 				for (int i = 0; i < inputs.length; i++) {
-					if (inputs[i].isItemValid(stack)) {
+					if (inputs[i].isStackValid(stack)) {
 						list.add(recipe);
 					}
 				}

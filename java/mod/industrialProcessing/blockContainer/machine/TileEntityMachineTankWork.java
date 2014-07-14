@@ -1,6 +1,7 @@
 package mod.industrialProcessing.blockContainer.machine;
 
 import java.util.Iterator;
+
 import mod.industrialProcessing.client.rendering.tileEntity.IAnimationProgress;
 import mod.industrialProcessing.client.rendering.tileEntity.animation.AnimationHandler;
 import mod.industrialProcessing.client.rendering.tileEntity.animation.AnimationMode;
@@ -9,6 +10,8 @@ import mod.industrialProcessing.client.rendering.tileEntity.animation.TileAnimat
 import mod.industrialProcessing.work.recipe.IMachineRecipe;
 import mod.industrialProcessing.work.recipe.IRecipeFluidWorkHandler;
 import mod.industrialProcessing.work.recipe.RecipeFluidWorker;
+import mod.industrialProcessing.work.recipe.RecipeGenericFluidWorker;
+import mod.industrialProcessing.work.recipe.RecipeGenericWorker;
 import mod.industrialProcessing.work.recipe.RecipesMachine;
 import mod.industrialProcessing.work.worker.IWorkHandler;
 import mod.industrialProcessing.work.worker.IWorker;
@@ -21,9 +24,9 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import mod.industrialProcessing.fluids.tank.IPfluidTank;
 
-public class TileEntityMachineTankWork extends TileEntityMachineTank implements IWorkHandler,IRecipeFluidWorkHandler,IAnimationProgress, IAnimationSyncable{
+public class TileEntityMachineTankWork extends TileEntityMachineTank implements IWorkHandler, IRecipeFluidWorkHandler<IMachineRecipe>,IAnimationProgress, IAnimationSyncable{
 
-	protected ServerWorker worker;
+	protected RecipeGenericFluidWorker<IMachineRecipe, IRecipeFluidWorkHandler<IMachineRecipe>> worker;
 	protected RecipesMachine recipes; 
 	protected AnimationHandler animation = new AnimationHandler(AnimationMode.WRAP, 1f, true);
 	protected boolean animated = false;
@@ -38,7 +41,7 @@ public class TileEntityMachineTankWork extends TileEntityMachineTank implements 
 		return recipes.isValidFluidInput(slot, fluid);
 	}
 
-	protected ServerWorker createServerSideWorker() {
+	protected RecipeGenericFluidWorker<IMachineRecipe, IRecipeFluidWorkHandler<IMachineRecipe>> createServerSideWorker() {
 		return new RecipeFluidWorker(this);
 	}
 

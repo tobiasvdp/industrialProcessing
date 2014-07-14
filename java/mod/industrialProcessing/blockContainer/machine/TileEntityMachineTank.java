@@ -442,4 +442,12 @@ public class TileEntityMachineTank extends TileEntityMachineInv implements ITank
 		return fluidTanks.size();
 	}
 
+	@Override
+	public FluidStack getFluidStackInSlot(int slot) {
+		IPfluidTank tank = this.getTank(slot);
+		if(tank != null)
+			return tank.getFluid();
+		return null;
+	}
+
 }

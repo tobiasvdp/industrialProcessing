@@ -10,7 +10,6 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class RecipeOutputInventorySlot extends RecipeOutputSlot {
 	public static final int WILDCARD_VALUE = Short.MAX_VALUE;
- 
 
 	private ItemStack item;
 
@@ -41,7 +40,7 @@ public class RecipeOutputInventorySlot extends RecipeOutputSlot {
 	public RecipeOutputInventorySlot(int index, ItemStack stack, int min, int max, double distributionCenter) {
 		super(index, min, max, distributionCenter, RecipeSlotType.INVENTORY);
 
-		this.item = stack.copy(); 
+		this.item = stack.copy();
 	}
 
 	public boolean hasSpace(IInventorySlots handler) {
@@ -55,7 +54,8 @@ public class RecipeOutputInventorySlot extends RecipeOutputSlot {
 
 		ItemStack newStack = this.item.copy();
 		newStack.stackSize = amount;
-		if (!handler.addToSlot(amount, newStack))
+ 
+		if (!handler.addToSlot(this.index, newStack))
 			System.err.println("Failed to create recipe output?!");
 	}
 
@@ -74,7 +74,7 @@ public class RecipeOutputInventorySlot extends RecipeOutputSlot {
 		return item.isItemEqual(stack) && item.getItemDamage() == damage;
 	}
 
-	public ItemStack createStack(int amount) { 
+	public ItemStack createStack(int amount) {
 		ItemStack newStack = this.item.copy();
 		newStack.stackSize = amount;
 		return newStack;

@@ -59,32 +59,35 @@ public class TileEntityMachineTankWorkPower extends TileEntityMachineTankWork  i
 
     @Override
     public void doWork() {
-        IMachineRecipe recipe = ((RecipeWorker) this.worker).findCurrentRecipe();
+		IMachineRecipe recipe = this.worker.getRecipe();
 
-        if (recipe != null && !worldObj.isRemote) {
-            int amount = PowerWorkerHelper.getWork(this.storage, this.maxWorkSpeed);
-            int maxWork = (int) this.storage.drainPower(amount, false);
+		int maxWorkSpeed = this.maxWorkSpeed;
 
-            if (recipe instanceof IPowerRecipe) {
-                IPowerRecipe powerRecipe = (IPowerRecipe) recipe;
-                if (powerRecipe.getPowerRequired() > 0)
-                    maxWork /= powerRecipe.getPowerRequired();
-                else
-                    maxWork = this.maxWorkSpeed;
-            } else
-                maxWork = this.maxWorkSpeed;
+		if (recipe instanceof IPowerRecipe) {
+			IPowerRecipe powerRecipe = (IPowerRecipe) recipe;
+			float powerRequired = powerRecipe.getPowerRequired() * this.maxWorkSpeed;
+			if (powerRequired > 0) {
 
-            int maxPower = work(maxWork);
-            if (recipe instanceof IPowerRecipe) {
-                IPowerRecipe powerRecipe = (IPowerRecipe) recipe;
-                maxPower *= powerRecipe.getPowerRequired();
-                this.storage.drainPower(maxPower, true);
-            }
+				float f = this.storage.getStoredPower() / powerRequired;
+				f = 1 - 1 / (f / 2 + 1);
+				maxWorkSpeed = (int) (this.maxWorkSpeed * f);
+			}
+		}
 
-        } else{
-        	
-        }
+		work(maxWorkSpeed);
     }
+
+	@Override
+	public void workProgressed(int amount) {
+		super.workProgressed(amount);
+		IMachineRecipe recipe = this.worker.getRecipe();
+
+		if (recipe instanceof IPowerRecipe) {
+			IPowerRecipe powerRecipe = (IPowerRecipe) recipe;
+			float powerUsed = powerRecipe.getPowerRequired() * amount;
+			storage.drainPower(powerUsed, true);
+		}
+	}
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {

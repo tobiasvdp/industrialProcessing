@@ -3,6 +3,7 @@ package mod.industrialProcessing.plants.machine.filter;
 import javax.swing.Icon;
 
 import mod.industrialProcessing.blockContainer.BlockContainerIPRendered;
+import mod.industrialProcessing.gui.framework.panels.Orientation;
 import mod.industrialProcessing.gui.framework.rendering.TextureReference;
 import mod.industrialProcessing.gui.generating.GuiBuilderDefault;
 import mod.industrialProcessing.gui.generating.IGuiBuilder;
@@ -20,7 +21,7 @@ public class BlockFilter extends BlockContainerIPRendered implements IRecipeBloc
 
     private Icon[] textures;
 
-    public static IGuiBuilder guiBuilder = new GuiBuilderDefault("Ore Filter").addInputSlot(0).addOutputSlot(1).addOutputSlot(2).enableWorker(WORKER_TEXTURE).enablePower(3);
+    public static IGuiBuilder guiBuilder = new GuiBuilderDefault("Ore Filter").addInputSlot(0).addOutputSlotCluster(1, 2, 1, Orientation.VERTICAL).enableWorker(WORKER_TEXTURE).enablePower(3);
 
     public BlockFilter() {
 	super(1.0f,1.0f, Material.iron, Block.soundTypeMetal);

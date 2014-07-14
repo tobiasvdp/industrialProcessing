@@ -87,7 +87,7 @@ public class RecipeGenericFluidWorker<TMachineRecipe extends IMachineRecipe, TWo
 	}
 
 	protected boolean hasInputIngredients(RecipeInputFluidSlot fluidSlot) {
-		return this.fluidHanlder.tankContains(fluidSlot.index, fluidSlot.getFluid(), fluidSlot.getMaxAmount());
+		return fluidSlot.isFluidStackValid(this.fluidHanlder.getFluidStackInSlot(fluidSlot.index));
 	};
 
 	protected void removeFromInput(RecipeInputFluidSlot slot) {

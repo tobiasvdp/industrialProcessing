@@ -24,7 +24,6 @@ public class TileEntityMachineInvWorkPower extends TileEntityMachineInvWork impl
 	private SimplePowerStorage storage;
 	protected int batterySlot = -1;
 	private int maxWorkSpeed;
-  
 
 	public TileEntityMachineInvWorkPower(IMachineRecipes<IMachineRecipe> recipes, LocalDirection powerInput, int powerCapacity, int maxWorkSpeed) {
 		super(recipes);
@@ -57,7 +56,8 @@ public class TileEntityMachineInvWorkPower extends TileEntityMachineInvWork impl
 	}
 
 	protected void setupPowerSlot() {
-		this.batterySlot = addStack(null, new LocalDirection[0], true, true);
+		this.batterySlot = addStack(null, (LocalDirection) null, true, true);
+		System.out.println(this.toString() + " battery slot :" + batterySlot);
 	}
 
 	@Override
@@ -77,7 +77,6 @@ public class TileEntityMachineInvWorkPower extends TileEntityMachineInvWork impl
 				maxWorkSpeed = (int) (this.maxWorkSpeed * f);
 			}
 		}
- 
 
 		work(maxWorkSpeed);
 	}
@@ -98,8 +97,6 @@ public class TileEntityMachineInvWorkPower extends TileEntityMachineInvWork impl
 			storage.drainPower(powerUsed, true);
 		}
 	}
-
-	 
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {

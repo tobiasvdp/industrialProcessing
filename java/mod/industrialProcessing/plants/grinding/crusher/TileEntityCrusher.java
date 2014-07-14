@@ -13,7 +13,7 @@ public class TileEntityCrusher extends TileEntityMachineInvWorkPower {
 	public TileEntityCrusher() {
 		super(recipes,LocalDirection.RIGHT, 10000, 100);										
 		
-		this.addStack(null, LocalDirection.BACK, true, false);
+		this.addStack(null, LocalDirection.UP, true, false);
 		this.addStack(null, LocalDirection.DOWN, false, true);
 		setupPowerSlot();
 	}

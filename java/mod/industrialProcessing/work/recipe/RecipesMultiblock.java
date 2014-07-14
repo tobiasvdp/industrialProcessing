@@ -71,4 +71,17 @@ public class RecipesMultiblock implements IMachineRecipes<RecipeMultiblock> {
 	public RecipeMultiblock get(int index) {
 		return recipes.get(index);
 	}
+
+	@Override
+	public boolean isValidInput(int slot, Item item) {
+		for (Iterator<RecipeMultiblock> i = getRecipes(); i.hasNext();) {
+			RecipeMultiblock recipe = i.next();
+			for (RecipeInputInventorySlot input : recipe.getInventoryInputs()) {
+
+				if (input.index == slot && input.isItemValid(item))
+					return true;
+			}
+		}
+		return false;
+	}
 }

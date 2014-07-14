@@ -130,7 +130,7 @@ public class Recipe implements IMachineRecipe {
 				return false;
 
 			ItemStack stack = config[input.index];
-			if (!input.isItemValid(stack))
+			if (!input.isStackValid(stack))
 				return false;
 		}
 		return inputs != null && inputs.length > 0;

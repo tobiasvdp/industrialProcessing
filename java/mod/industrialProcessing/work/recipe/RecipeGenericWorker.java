@@ -91,7 +91,7 @@ public class RecipeGenericWorker<TMachineRecipe extends IMachineRecipe, TWorkHan
 
 		if (stack == null)
 			return false;
-		return slot.isItemValid(stack);
+		return slot.isStackValid(stack);
 	}
 
 	protected boolean outputAvailable(TMachineRecipe currentRecipe) {
