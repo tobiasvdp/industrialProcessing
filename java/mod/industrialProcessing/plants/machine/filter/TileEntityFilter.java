@@ -10,7 +10,7 @@ public class TileEntityFilter extends TileEntityMachineInvWorkPower {
 	public TileEntityFilter() {
 		super(recipes, LocalDirection.RIGHT, 10000, 100);
 		this.addStack(null, LocalDirection.UP, true, false);
-		this.addStack(null, LocalDirection.RIGHT, false, true);
+		this.addStack(null, LocalDirection.LEFT, false, true);
 		this.addStack(null, LocalDirection.DOWN, false, true);
 		setupPowerSlot();
 		animated = true;

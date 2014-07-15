@@ -80,6 +80,7 @@ import mod.industrialProcessing.plants.todo.dummy.containerWall.TileEntityContai
 import mod.industrialProcessing.plants.todo.dummy.containerWall.model.ModelContainerWall;
 import mod.industrialProcessing.plants.todo.dummy.ironPole.TileEntityIronPole;
 import mod.industrialProcessing.plants.todo.dummy.ironPole.model.ModelIronPole;
+import mod.industrialProcessing.plants.transport.fluids.creativeTank.TileEntityCreativeTank;
 import mod.industrialProcessing.plants.transport.fluids.grate.TileEntityGrate;
 import mod.industrialProcessing.plants.transport.fluids.manoMeter.TileEntityManoMeter;
 import mod.industrialProcessing.plants.transport.fluids.pump.TileEntityPump;
@@ -150,6 +151,7 @@ public class ConfigBlockContainers {
 		BlockRegistry.registerMachine(IndustrialProcessing.blockPump, TileEntityPump.class, "IP.trans.pump", new ModelPumpBlock(), new ModelPump());
 		BlockRegistry.registerMachine(IndustrialProcessing.blockRainTank, TileEntityRainTank.class, "IP.trans.rainTank", new ModelRainTankBlock(), new ModelRainTank());
 		BlockRegistry.registerMachine(IndustrialProcessing.blockTank, TileEntityTank.class, "IP.trans.tank", new ModelTankBlock(), new ModelTank());
+		BlockRegistry.registerMachine(IndustrialProcessing.blockCreativeTank, TileEntityCreativeTank.class, "IP.trans.creativeTank", new ModelTankBlock(), new ModelTank());
 		BlockRegistry.registerMachine(IndustrialProcessing.blockTransportFluids, TileEntityTransportFluids.class, "IP.trans.pipe", new ModelPipeBlock(), new ModelTransportFluids());
 		BlockRegistry.registerMachine(IndustrialProcessing.blockTransportFluidsStone, TileEntityTransportFluidsStone.class, "IP.trans.pipeStone", new ModelPipeBlock(), new ModelTransportFluids());
 		BlockRegistry.registerMachine(IndustrialProcessing.blockTransportFluidsWood, TileEntityTransportFluidsWood.class, "IP.trans.pipeWood", new ModelPipeBlock(), new ModelTransportFluids());

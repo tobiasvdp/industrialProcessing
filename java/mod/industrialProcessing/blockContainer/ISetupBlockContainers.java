@@ -35,6 +35,7 @@ import mod.industrialProcessing.plants.power.wire.BlockWire;
 import mod.industrialProcessing.plants.todo.core.plants.storage.container.BlockContainer;
 import mod.industrialProcessing.plants.todo.dummy.containerWall.BlockContainerWall;
 import mod.industrialProcessing.plants.todo.dummy.ironPole.BlockIronPole;
+import mod.industrialProcessing.plants.transport.fluids.creativeTank.BlockCreativeTank;
 import mod.industrialProcessing.plants.transport.fluids.grate.BlockGrate;
 import mod.industrialProcessing.plants.transport.fluids.manoMeter.BlockManoMeter;
 import mod.industrialProcessing.plants.transport.fluids.pump.BlockPump;
@@ -80,6 +81,7 @@ public interface ISetupBlockContainers {
     public final static BlockPump  blockPump = new BlockPump();
     public final static BlockRainTank  blockRainTank = new BlockRainTank();
     public final static BlockTank  blockTank = new BlockTank();
+    public final static BlockCreativeTank  blockCreativeTank = new BlockCreativeTank();
     public final static BlockTransportFluids  blockTransportFluids = new BlockTransportFluids();
     public final static BlockTransportFluidsStone  blockTransportFluidsStone = new BlockTransportFluidsStone();
     public final static BlockTransportFluidsWood  blockTransportFluidsWood = new BlockTransportFluidsWood();
