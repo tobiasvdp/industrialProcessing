@@ -75,8 +75,8 @@ public class RecipeGenericWorker<TMachineRecipe extends IMachineRecipe, TWorkHan
 		if (!recipeValid(currentRecipe))
 			return false;
 		RecipeInputInventorySlot[] inputSlots = currentRecipe.getInventoryInputs();
-		if (inputSlots == null)
-			return false;
+		if (inputSlots == null) // no input required = always enough of "nothing" available.
+			return true;
 		for (int i = 0; i < inputSlots.length; i++) {
 			RecipeInputInventorySlot slot = inputSlots[i];
 			if (!hasInputIngredients(slot))

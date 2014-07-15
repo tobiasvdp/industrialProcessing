@@ -1,13 +1,8 @@
 package mod.industrialProcessing.plants.machine.dryer;
 
-import java.util.Iterator;
-
 import mod.industrialProcessing.blockContainer.machine.TileEntityMachineTankWorkPower;
 import mod.industrialProcessing.utils.rotation.LocalDirection;
-import mod.industrialProcessing.work.recipe.IMachineRecipe;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
-import net.minecraftforge.fluids.FluidStack;
 
 public class TileEntityDryer extends TileEntityMachineTankWorkPower {
 
