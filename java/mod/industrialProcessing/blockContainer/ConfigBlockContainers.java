@@ -48,6 +48,9 @@ import mod.industrialProcessing.plants.decoration.light.hangingLamp.model.ModelP
 import mod.industrialProcessing.plants.decoration.light.torch.TileEntityTorch;
 import mod.industrialProcessing.plants.grinding.crusher.ModelCrusher;
 import mod.industrialProcessing.plants.grinding.crusher.TileEntityCrusher;
+import mod.industrialProcessing.plants.machine.classifier.ModelClassifier;
+import mod.industrialProcessing.plants.machine.classifier.TileEntityClassifier;
+import mod.industrialProcessing.plants.machine.classifier.model.ModelClassifierBlock;
 import mod.industrialProcessing.plants.machine.dryer.ModelDryer;
 import mod.industrialProcessing.plants.machine.dryer.TileEntityDryer;
 import mod.industrialProcessing.plants.machine.filter.ModelFilter;
@@ -132,6 +135,8 @@ public class ConfigBlockContainers {
 		BlockRegistry.registerMachine(IndustrialProcessing.blockFilter, TileEntityFilter.class, "IP.machine.filter", new ModelFilter());
 		BlockRegistry.registerMachine(IndustrialProcessing.blockMixer, TileEntityMixer.class, "IP.machine.mixer", new ModelMixer());
 		BlockRegistry.registerMachine(IndustrialProcessing.blockDryer, TileEntityDryer.class, "IP.machine.dryer", new ModelDryer());
+		BlockRegistry.registerMachine(IndustrialProcessing.blockClassifier, TileEntityClassifier.class, "IP.machine.classifier", new ModelClassifierBlock(), new ModelClassifier());
+		
 		BlockRegistry.registerMachine(IndustrialProcessing.blockManualGenerator, TileEntityManualGenerator.class, "IP.generator.manual", new ModelCrankGenerator(true));
 		BlockRegistry.registerMachine(IndustrialProcessing.blockElectroMotor, TileEntityElectroMotor.class, "IP.motor.electro", new ModelElectroMotorBlock(), new ModelElectroMotorTile());
 		BlockRegistry.registerMachine(IndustrialProcessing.blockWire, TileEntityWire.class, "IP.power.wire", new ModelWireBlock());

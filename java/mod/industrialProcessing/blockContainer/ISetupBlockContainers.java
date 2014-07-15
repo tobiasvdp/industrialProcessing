@@ -20,6 +20,7 @@ import mod.industrialProcessing.plants.construction.weldingStation.dummy.welding
 import mod.industrialProcessing.plants.decoration.light.hangingLamp.BlockPetrolLamp;
 import mod.industrialProcessing.plants.decoration.light.torch.BlockTorch;
 import mod.industrialProcessing.plants.grinding.crusher.BlockCrusher;
+import mod.industrialProcessing.plants.machine.classifier.BlockClassifier;
 import mod.industrialProcessing.plants.machine.dryer.BlockDryer;
 import mod.industrialProcessing.plants.machine.filter.BlockFilter;
 import mod.industrialProcessing.plants.machine.mixer.BlockMixer;
@@ -59,6 +60,7 @@ public interface ISetupBlockContainers {
     public final static BlockFilter blockFilter = new BlockFilter();
     public final static BlockMixer blockMixer = new BlockMixer();
     public final static BlockDryer blockDryer = new BlockDryer();
+    public final static BlockClassifier blockClassifier = new BlockClassifier();
     
     public final static BlockManualGenerator blockManualGenerator = new BlockManualGenerator();
     public final static BlockWire blockWire = new BlockWire();
@@ -118,12 +120,8 @@ public interface ISetupBlockContainers {
     
     public final static BlockGenerator blockGenerator = new BlockGenerator();
     
-    /* machines
-    public final static BlockFilter blockFilter = new BlockFilter();
-    public final static BlockMagneticSeparator blockMageneticSeparator = new BlockMagneticSeparator();
-    public final static BlockMixer blockMixer = new BlockMixer();
-    public final static BlockDryer blockDryer = new BlockDryer();
-    public final static BlockClassifier blockClassifier = new BlockClassifier();
+    /* machines 
+    public final static BlockMagneticSeparator blockMageneticSeparator = new BlockMagneticSeparator(); 
     public final static BlockThickener blockThickener = new BlockThickener();
     public final static BlockFlotationCell blockFlotationCell = new BlockFlotationCell();
     public final static BlockHydroCyclone blockHydroCyclone = new BlockHydroCyclone();

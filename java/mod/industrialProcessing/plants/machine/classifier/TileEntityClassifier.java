@@ -31,7 +31,7 @@ public class TileEntityClassifier extends TileEntityMachineTankWorkPower {
 		addStack(null, nodirections, true, false); // Liquid Output Empty Input
 		addStack(null, nodirections, false, true); // Liquid Output Full Output
 
-		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.RIGHT, true, false, 2, 3);
+		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.LEFT, true, false, 2, 3);
 		addTank(FluidContainerRegistry.BUCKET_VOLUME * 10, LocalDirection.DOWN, false, true, 4, 5);
 
 		setupTankSync(0);
