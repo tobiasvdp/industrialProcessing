@@ -46,8 +46,7 @@ public class RecipeGenericFluidWorker<TMachineRecipe extends IMachineRecipe, TWo
 	@Override
 	protected boolean outputAvailable(TMachineRecipe currentRecipe) {
 		boolean inventory = super.outputAvailable(currentRecipe);
-
-		System.out.println("output available?");
+ 
 		if (!inventory)
 			return false;
 

@@ -98,7 +98,7 @@ public class TileEntityMachineTankWork extends TileEntityMachineTank implements 
 	}
 
 	@Override
-	public boolean canWorkProgress() { 
+	public boolean canWorkProgress() {
 		return true;
 	}
 
@@ -118,8 +118,6 @@ public class TileEntityMachineTankWork extends TileEntityMachineTank implements 
 
 	@Override
 	public void workProgressed(int amount) {
-		System.out.println("working on " + this + " for " + amount);
-
 	}
 
 	@Override
