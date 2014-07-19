@@ -58,7 +58,7 @@ public class ConfigBaseRecipes {
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemCoalDust), new ItemStack(Items.coal), new ItemStack(ISetupItems.itemIronBowl, 1, WILDCARD_VALUE), new ItemStack(ISetupItems.itemPestle, 1, WILDCARD_VALUE));
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemHardenedSandDust), new ItemStack(ISetupBlocks.blockHardSand), new ItemStack(ISetupItems.itemIronBowl, 1, WILDCARD_VALUE), new ItemStack(ISetupItems.itemPestle, 1, WILDCARD_VALUE));
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemAluminumDust), new ItemStack(ISetupBlocks.blockBauxiteOre), new ItemStack(ISetupItems.itemIronBowl, 1, WILDCARD_VALUE), new ItemStack(ISetupItems.itemPestle, 1, WILDCARD_VALUE));
-		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemLeadDust), new ItemStack(ISetupBlocks.blockGalenaOre), new ItemStack(ISetupItems.itemIronBowl, 1, WILDCARD_VALUE), new ItemStack(ISetupItems.itemPestle, 1, WILDCARD_VALUE));
+		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemLeadSulfideDust), new ItemStack(ISetupBlocks.blockGalenaOre), new ItemStack(ISetupItems.itemIronBowl, 1, WILDCARD_VALUE), new ItemStack(ISetupItems.itemPestle, 1, WILDCARD_VALUE));
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemLimestoneDust), new ItemStack(ISetupBlocks.blockCobbleLimestone), new ItemStack(ISetupItems.itemIronBowl, 1, WILDCARD_VALUE), new ItemStack(ISetupItems.itemPestle, 1, WILDCARD_VALUE));
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemElectroMagnet), new ItemStack(ISetupItems.itemIronBar), new ItemStack(ISetupItems.itemCopperCoil));
 		GameRegistry.addShapelessRecipe(new ItemStack(ISetupItems.itemCopperCoil), new ItemStack(ISetupItems.itemThickStick), new ItemStack(ISetupItems.itemCopperWireInsulated));
@@ -117,7 +117,7 @@ public class ConfigBaseRecipes {
 		GameRegistry.addSmelting(ISetupBlocks.blockGalenaOre, new ItemStack(ISetupItems.itemSilverIngot), 0);
 		GameRegistry.addSmelting(ISetupItems.itemCopperMineral, new ItemStack(ISetupItems.itemCopperIngot), 0);
 		GameRegistry.addSmelting(ISetupItems.itemTinOxideDust, new ItemStack(ISetupItems.itemTinIngot), 0);
-		GameRegistry.addSmelting(ISetupItems.itemSilverDust, new ItemStack(ISetupItems.itemSilverIngot), 0);
+		GameRegistry.addSmelting(ISetupItems.itemSilverSulfideDust, new ItemStack(ISetupItems.itemSilverIngot), 0);
 		GameRegistry.addSmelting(Blocks.sand, new ItemStack(ISetupBlocks.blockHardSand), 0);
 		GameRegistry.addSmelting(ISetupBlocks.blockHardSand, new ItemStack(Blocks.glass), 0);
 		GameRegistry.addSmelting(ISetupItems.itemnhardenedIsolationBoard, new ItemStack(ISetupItems.itemIsolationBoard), 0);

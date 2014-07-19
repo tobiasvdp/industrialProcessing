@@ -1,100 +1,114 @@
-package ip.industrialProcessing.machines.flotationCell;
+package mod.industrialProcessing.plants.machine.flotationCell;
 
-import ip.industrialProcessing.config.ISetupFluids;
-import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.recipes.PoweredRecipe;
-import ip.industrialProcessing.recipes.Recipe;
-import ip.industrialProcessing.recipes.RecipeInputSlot;
-import ip.industrialProcessing.recipes.RecipeOutputSlot;
-import ip.industrialProcessing.recipes.RecipeSlotType;
+import mod.industrialProcessing.fluids.ISetupFluids;
+import mod.industrialProcessing.work.recipe.IMachineRecipe;
+import mod.industrialProcessing.work.recipe.PoweredRecipe;
+import mod.industrialProcessing.work.recipe.RecipesMachine;
+import mod.industrialProcessing.work.recipe.builder.RecipeBuilder;
+import mod.industrialProcessing.work.recipe.slots.RecipeInputInventorySlot;
+import mod.industrialProcessing.work.recipe.slots.RecipeOutputInventorySlot;
+import mod.industrialProcessing.work.recipe.slots.RecipeSlotType;
 import net.minecraftforge.fluids.FluidRegistry;
 
 public class RecipesFlotationCell extends RecipesMachine {
-    public RecipesFlotationCell() {
-	addDefaultRecipes();
-    }
+	public RecipesFlotationCell() {
+		addDefaultRecipes();
+	}
 
-    private void addDefaultRecipes() {
-	addRecipe(dirtyToUnclean(300, 0));
-	addRecipe(ThickSludgeToFlotationSedimentIron(300, 0));
-	addRecipe(ThickSludgeToFlotationSedimentTin(300, 0));
-	addRecipe(ThickSludgeToFlotationSedimentCopper(300, 0));
-	addRecipe(ThickSludgeToFlotationSedimentGold(300, 0));
-	addRecipe(ThickSludgeToFlotationSedimentTalia(300, 0));
-	addRecipe(ThickSludgeToFlotationSedimentGalena(300, 0));
-	addRecipe(ThickSludgeToFlotationSedimentChromite(300, 0));
-    }
+	private void addDefaultRecipes() {
+		addRecipe(dirtyToUnclean(300, 0));
+		addRecipe(ThickSludgeToFlotationSedimentIron(300, 0));
+		addRecipe(ThickSludgeToFlotationSedimentTin(300, 0));
+		addRecipe(ThickSludgeToFlotationSedimentCopper(300, 0));
+		addRecipe(ThickSludgeToFlotationSedimentGold(300, 0));
+		addRecipe(ThickSludgeToFlotationSedimentTalia(300, 0));
+		addRecipe(ThickSludgeToFlotationSedimentGalena(300, 0));
+		addRecipe(ThickSludgeToFlotationSedimentChromite(300, 0));
+	}
 
-    private Recipe dirtyToUnclean(int i, int power) {
-	PoweredRecipe recipe = new PoweredRecipe();
-	recipe.workRequired = i;
-	recipe.powerRequired = power;
-	recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidDirtyWater.getName()), RecipeSlotType.TANK, 1000) };
-	recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidUncleanWater.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputInventorySlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidResidu.getName()), RecipeSlotType.TANK, 100, 200, 0.5) };
-	return recipe;
-    }
+	private IMachineRecipe dirtyToUnclean(int i, int power) {
+		RecipeBuilder builder = new RecipeBuilder();
+		builder.withWork(i);
+		builder.withPower(power);
+		builder.withFluidInput(0, ISetupFluids.fluidDirtyWater, 1000);
+		builder.withFluidOutput(1, ISetupFluids.fluidUncleanWater, 1000);
+		builder.withFluidOutput(2, ISetupFluids.fluidResidu, 100, 200);
+		return builder.getMachineRecipe();
+	}
 
-    private Recipe ThickSludgeToFlotationSedimentIron(int i, int powerConsumption) {
-	PoweredRecipe recipe = new PoweredRecipe();
-	recipe.workRequired = i;
-	recipe.powerRequired = powerConsumption;
-	recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickIronSludge.getName()), RecipeSlotType.TANK, 1000) };
-	recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidFlotationIronSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputInventorySlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidConcentratedIronSludge.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
-	return recipe;
-    }
+	private IMachineRecipe ThickSludgeToFlotationSedimentIron(int i, int powerConsumption) {
+		RecipeBuilder builder = new RecipeBuilder();
+		builder.withWork(i);
+		builder.withPower(powerConsumption);
+		builder.withFluidInput(0, ISetupFluids.fluidThickIronSludge, 1000);
+		builder.withFluidOutput(1, ISetupFluids.fluidFlotationIronSediment, 1000);
+		builder.withFluidOutput(2, ISetupFluids.fluidConcentratedIronSludge, 1000);
+		return builder.getMachineRecipe();
+	}
 
-    private Recipe ThickSludgeToFlotationSedimentTin(int i, int powerConsumption) {
-	PoweredRecipe recipe = new PoweredRecipe();
-	recipe.workRequired = i;
-	recipe.powerRequired = powerConsumption;
-	recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickTinSludge.getName()), RecipeSlotType.TANK, 1000) };
-	recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidFlotationTinSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputInventorySlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidConcentratedTinSludge.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
-	return recipe;
-    }
+	private IMachineRecipe ThickSludgeToFlotationSedimentTin(int i, int powerConsumption) {
+		RecipeBuilder builder = new RecipeBuilder();
+		builder.withWork(i);
+		builder.withPower(powerConsumption);
+		builder.withFluidInput(0, ISetupFluids.fluidThickTinSludge, 1000);
+		builder.withFluidOutput(1, ISetupFluids.fluidFlotationTinSediment, 1000);
+		builder.withFluidOutput(2, ISetupFluids.fluidConcentratedTinSludge, 1000);
+		return builder.getMachineRecipe();
+	}
 
-    private Recipe ThickSludgeToFlotationSedimentCopper(int i, int powerConsumption) {
-	PoweredRecipe recipe = new PoweredRecipe();
-	recipe.workRequired = i;
-	recipe.powerRequired = powerConsumption;
-	recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickCopperSludge.getName()), RecipeSlotType.TANK, 1000) };
-	recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidFlotationCopperSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputInventorySlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidConcentratedCopperSludge.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
-	return recipe;
-    }
+	private IMachineRecipe ThickSludgeToFlotationSedimentCopper(int i, int powerConsumption) {
 
-    private Recipe ThickSludgeToFlotationSedimentGold(int i, int powerConsumption) {
-	PoweredRecipe recipe = new PoweredRecipe();
-	recipe.workRequired = i;
-	recipe.powerRequired = powerConsumption;
-	recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickGoldSludge.getName()), RecipeSlotType.TANK, 1000) };
-	recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidFlotationGoldSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputInventorySlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidConcentratedGoldSludge.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
-	return recipe;
-    }
+		RecipeBuilder builder = new RecipeBuilder();
+		builder.withWork(i);
+		builder.withPower(powerConsumption);
+		builder.withFluidInput(0, ISetupFluids.fluidThickCopperSludge, 1000);
+		builder.withFluidOutput(1, ISetupFluids.fluidFlotationCopperSediment, 1000);
+		builder.withFluidOutput(2, ISetupFluids.fluidConcentratedCopperSludge, 1000);
+		return builder.getMachineRecipe();
+	}
 
-    private Recipe ThickSludgeToFlotationSedimentGalena(int i, int powerConsumption) {
-	PoweredRecipe recipe = new PoweredRecipe();
-	recipe.workRequired = i;
-	recipe.powerRequired = powerConsumption;
-	recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickGalenaSludge.getName()), RecipeSlotType.TANK, 1000) };
-	recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidFlotationGalenaSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputInventorySlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidConcentratedGalenaSludge.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
-	return recipe;
-    }
+	private IMachineRecipe ThickSludgeToFlotationSedimentGold(int i, int powerConsumption) {
 
-    private Recipe ThickSludgeToFlotationSedimentChromite(int i, int powerConsumption) {
-	PoweredRecipe recipe = new PoweredRecipe();
-	recipe.workRequired = i;
-	recipe.powerRequired = powerConsumption;
-	recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickChromiteSludge.getName()), RecipeSlotType.TANK, 1000) };
-	recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidFlotationChromiteSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputInventorySlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidConcentratedChromiteSludge.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
-	return recipe;
-    }
+		RecipeBuilder builder = new RecipeBuilder();
+		builder.withWork(i);
+		builder.withPower(powerConsumption);
+		builder.withFluidInput(0, ISetupFluids.fluidThickGoldSludge, 1000);
+		builder.withFluidOutput(1, ISetupFluids.fluidFlotationGoldSediment, 1000);
+		builder.withFluidOutput(2, ISetupFluids.fluidConcentratedGoldSludge, 1000);
+		return builder.getMachineRecipe();
+	}
 
-    private Recipe ThickSludgeToFlotationSedimentTalia(int i, int powerConsumption) {
-	PoweredRecipe recipe = new PoweredRecipe();
-	recipe.workRequired = i;
-	recipe.powerRequired = powerConsumption;
-	recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, FluidRegistry.getFluidID(ISetupFluids.itemFluidThickTaliaSludge.getName()), RecipeSlotType.TANK, 1000) };
-	recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(2, FluidRegistry.getFluidID(ISetupFluids.itemFluidFlotationTaliaSediment.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5), new RecipeOutputInventorySlot(1, FluidRegistry.getFluidID(ISetupFluids.itemFluidConcentratedTaliaSludge.getName()), RecipeSlotType.TANK, 1000, 1000, 0.5) };
-	return recipe;
-    }
+	private IMachineRecipe ThickSludgeToFlotationSedimentGalena(int i, int powerConsumption) {
+
+		RecipeBuilder builder = new RecipeBuilder();
+		builder.withWork(i);
+		builder.withPower(powerConsumption);
+		builder.withFluidInput(0, ISetupFluids.fluidThickGalenaSludge, 1000);
+		builder.withFluidOutput(1, ISetupFluids.fluidFlotationGalenaSediment, 1000);
+		builder.withFluidOutput(2, ISetupFluids.fluidConcentratedGalenaSludge, 1000);
+		return builder.getMachineRecipe();
+	}
+
+	private IMachineRecipe ThickSludgeToFlotationSedimentChromite(int i, int powerConsumption) {
+
+		RecipeBuilder builder = new RecipeBuilder();
+		builder.withWork(i);
+		builder.withPower(powerConsumption);
+		builder.withFluidInput(0, ISetupFluids.fluidThickChromiteSludge, 1000);
+		builder.withFluidOutput(1, ISetupFluids.fluidFlotationChromiteSediment, 1000);
+		builder.withFluidOutput(2, ISetupFluids.fluidConcentratedChromiteSludge, 1000);
+		return builder.getMachineRecipe();
+	}
+
+	private IMachineRecipe ThickSludgeToFlotationSedimentTalia(int i, int powerConsumption) {
+
+		RecipeBuilder builder = new RecipeBuilder();
+		builder.withWork(i);
+		builder.withPower(powerConsumption);
+		builder.withFluidInput(0, ISetupFluids.fluidThickTaliaSludge, 1000);
+		builder.withFluidOutput(1, ISetupFluids.fluidFlotationTaliaSediment, 1000);
+		builder.withFluidOutput(2, ISetupFluids.fluidConcentratedTaliaSludge, 1000);
+		return builder.getMachineRecipe();
+	}
 
 }

@@ -17,7 +17,7 @@ public class BlockCreativeGenerator extends BlockPowerGenerator implements IDesc
     public static IGuiBuilder guiBuilder = new GuiBuilderDefault(UNLOCALIZED_NAME).addGauge("Voltage", "%.2fV", 0).addGauge("Current", "%.2fA", 1).addGauge("Power", "%.2fW", 2).addSpinner(0, "%.0f Volt", 1, 18 * 4);
 
     public BlockCreativeGenerator() {
-        super(1.0f,1.0f, Material.iron, Block.soundTypeMetal, "creativeGenerator");
+        super(1.0f,1.0f, Material.iron, Block.soundTypeMetal,"generatorFeatures", "tankSideCreative");
     }
 
     @Override

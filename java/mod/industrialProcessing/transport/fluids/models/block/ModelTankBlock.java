@@ -93,6 +93,8 @@ public class ModelTankBlock extends ModelBlock {
 					connector[i].renderMesh(false, tankFeaturesIcon, reference);
 			}
 		}
+			
+			
 		return true;
 	}
 

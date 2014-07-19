@@ -76,7 +76,7 @@ public class RecipesClassifier extends RecipesMachine {
 		recipe.powerRequired = powerConsumption;
 		recipe.inputFluids = new RecipeInputFluidSlot[] { new RecipeInputFluidSlot(0, FluidRegistry.WATER, 1000) };
 		recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, ISetupItems.itemGoldMixedFragments, 1) };
-		recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(1, ISetupItems.itemSilverDust, 0, 1, 0.2) };
+		recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(1, ISetupItems.itemSilverSulfideDust, 0, 1, 0.2) };
 		recipe.outputFluids = new RecipeOutputFluidSlot[] { new RecipeOutputFluidSlot(1, 1000, 1000, ISetupFluids.fluidMixedSludgeGold) };
 		return recipe;
 	}

@@ -17,6 +17,10 @@ import net.minecraftforge.fluids.FluidStack;
 public class RecipeInputInventorySlot extends RecipeInputSlot {
 	private InputItem item;
 
+	/**
+	 * @deprecated Use ore dictionary!
+	 */
+	@Deprecated
 	public RecipeInputInventorySlot(int index, Item item, int amount) {
 		super(index, amount, RecipeSlotType.INVENTORY);
 		this.item = new ExactInputItem(item);
@@ -26,7 +30,7 @@ public class RecipeInputInventorySlot extends RecipeInputSlot {
 	 * @deprecated Use ore dictionary!
 	 */
 	@Deprecated
-	public RecipeInputInventorySlot(int index, Item item, int metadata, RecipeSlotType type, int amount) {
+	public RecipeInputInventorySlot(int index, Item item, int metadata, int amount) {
 		super(index, amount, RecipeSlotType.INVENTORY);
 		this.item = new ExactInputItem(item, metadata);
 	}
@@ -35,7 +39,7 @@ public class RecipeInputInventorySlot extends RecipeInputSlot {
 	 * @deprecated Use ore dictionary!
 	 */
 	@Deprecated
-	public RecipeInputInventorySlot(int index, Block item, RecipeSlotType type, int amount) {
+	public RecipeInputInventorySlot(int index, Block item, int amount) {
 		super(index, amount, RecipeSlotType.INVENTORY);
 		this.item = new ExactInputBlock(item);
 	}
@@ -44,7 +48,7 @@ public class RecipeInputInventorySlot extends RecipeInputSlot {
 	 * @deprecated Use ore dictionary!
 	 */
 	@Deprecated
-	public RecipeInputInventorySlot(int index, Block item, int metadata, RecipeSlotType type, int amount) {
+	public RecipeInputInventorySlot(int index, Block item, int metadata, int amount) {
 		super(index, amount, RecipeSlotType.INVENTORY);
 		this.item = new ExactInputBlock(item, metadata);
 	}

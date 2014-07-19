@@ -1,7 +1,5 @@
 package mod.industrialProcessing.plants.machine.classifier;
 
-import javax.swing.Icon;
-
 import mod.industrialProcessing.client.rendering.tileEntity.ModelAnimatedFluidMachine;
 import mod.industrialProcessing.plants.machine.classifier.model.ClassifierSpiral;
 import net.minecraft.client.renderer.Tessellator;

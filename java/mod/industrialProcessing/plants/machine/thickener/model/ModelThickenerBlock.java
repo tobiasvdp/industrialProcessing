@@ -12,41 +12,42 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.util.vector.Vector3f;
 
-public class ModelThickenerBlock  extends ModelBlock {
+public class ModelThickenerBlock extends ModelBlock {
 
-    ObjRotator features = new ObjRotator(new ThickenerFeatures(), 0);
-    ObjRotator hull = new ObjRotator(new ThickenerHull(), 0);
-    ObjRotator connector = new ObjRotator(new ThickenerSideConnector(), 0);
-    @Override
-    public void renderInventory(Block block, int metadata, int modelID, RenderBlocks renderer) {
+	ObjRotator features = new ObjRotator(new ThickenerFeatures(), 0);
+	ObjRotator hull = new ObjRotator(new ThickenerHull(), 0);
+	ObjRotator connector = new ObjRotator(new ThickenerSideConnector(), 0);
 
-        int dir = 0;
+	@Override
+	public void renderInventory(Block block, int metadata, int modelID, RenderBlocks renderer) {
 
-        Vector3f position = new Vector3f(0, 0, 0);
-        IIcon iconFeatures = block.getIcon(0, 0);
-        IIcon iconHull = block.getIcon(1, 0);
+		int dir = 0;
 
-        features.getRotated(dir).renderMesh(iconFeatures);
-        hull.getRotated(dir).renderMesh(iconHull);
-    }
+		Vector3f position = new Vector3f(0, 0, 0);
+		IIcon iconFeatures = block.getIcon(0, 0);
+		IIcon iconHull = block.getIcon(1, 0);
 
-    @Override
-    public boolean renderWorldBlock(WorldReference reference, int modelId, RenderBlocks renderer) {
+		features.getRotated(dir).renderMesh(iconFeatures);
+		hull.getRotated(dir).renderMesh(iconHull);
+	}
 
-        TileEntity entity = reference.getBlockTileEntity();
-        ForgeDirection forward = BlockContainerIP.getForwardFromEntity(entity);
-        int dir = 6 - BlockContainerIP.getMetadataFromForward(forward);
+	@Override
+	public boolean renderWorldBlock(WorldReference reference, int modelId, RenderBlocks renderer) {
 
-        IIcon iconFeatures = reference.getIcon(0);
-        IIcon iconHull = reference.getIcon(1);
-        IIcon iconPower = reference.getIcon(2);
+		TileEntity entity = reference.getBlockTileEntity();
+		ForgeDirection forward = BlockContainerIP.getForwardFromEntity(entity);
+		int dir = 6 - BlockContainerIP.getMetadataFromForward(forward);
 
-        features.getRotated(dir).renderMesh(false, iconFeatures, reference);
-        connector.getRotated(dir+2).renderMesh(false, iconFeatures, reference);
-        connector.getRotated(dir).renderMesh(false, iconPower, reference);
-        hull.getRotated(dir).renderMesh(false, iconHull, reference); 
+		IIcon iconFeatures = reference.getIcon(0);
+		IIcon iconHull = reference.getIcon(1);
+		IIcon iconPower = reference.getIcon(2);
 
-        return true;
-    }
+		features.getRotated(dir).renderMesh(false, iconFeatures, reference);
+		connector.getRotated(dir + 2).renderMesh(false, iconFeatures, reference);
+		connector.getRotated(dir).renderMesh(false, iconPower, reference);
+		hull.getRotated(dir).renderMesh(false, iconHull, reference);
+
+		return true;
+	}
 
 }

@@ -124,7 +124,7 @@ public class ConfigItems {
 		ItemRegistry.registerItem(ISetupItems.itemCokes, "IP.item.cokes");
 		ItemRegistry.registerItem(ISetupItems.itemSlag, "IP.item.slag");
 		ItemRegistry.registerItem(ISetupItems.itemLeadBowl,"IP.item.leadBowl");
-		ItemRegistry.registerItem(ISetupItems.itemLeadDust,"IP.item.leadDust");
+		ItemRegistry.registerItem(ISetupItems.itemLeadSulfideDust,"IP.item.leadDust");
 	
 		ItemRegistry.registerItem(ISetupItems.itemWroughtIron ,"IP.item.WroughtIron");
 		ItemRegistry.registerItem(ISetupItems.itemPliers ,"IP.item.Pliers");

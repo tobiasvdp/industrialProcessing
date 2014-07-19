@@ -1,14 +1,23 @@
-package ip.industrialProcessing.machines.flotationCell;
+package mod.industrialProcessing.plants.machine.flotationCell;
 
-import ip.industrialProcessing.api.rendering.ModelMachine;
+import mod.industrialProcessing.client.rendering.tileEntity.ModelAnimatedFluidMachine;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIcon;
 
-public class ModelFlotationCell extends ModelMachine {
+public class ModelFlotationCell extends ModelAnimatedFluidMachine {
 
-    @Override
-    public void renderModel(TileEntity tileEntity, float f) {
-	// TODO Auto-generated method stub
+	@Override
+	public void renderModelAnimated(TileEntity tileEntity, float f, float[] progress) {
 
-    }
+	}
+
+	@Override
+	public void renderLiquid(TileEntity tl, float f, int tankSlot, float percentageFilled, IIcon icon) {
+	}
+
+	@Override
+	public void renderModel(TileEntity tileEntity, float f) {
+
+	}
 
 }

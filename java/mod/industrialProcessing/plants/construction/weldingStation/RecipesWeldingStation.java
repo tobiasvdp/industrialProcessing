@@ -8,7 +8,6 @@ import mod.industrialProcessing.work.recipe.RecipeMultiblock;
 import mod.industrialProcessing.work.recipe.RecipesMultiblock;
 import mod.industrialProcessing.work.recipe.slots.RecipeInputInventorySlot;
 import mod.industrialProcessing.work.recipe.slots.RecipeOutputInventorySlot;
-import mod.industrialProcessing.work.recipe.slots.RecipeSlotType;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -68,7 +67,7 @@ public class RecipesWeldingStation extends RecipesMultiblock {
 	private RecipeMultiblock platformStairs(int workTime, int power, Tiers tier) {
 		PoweredRecipeMultiblock recipe = new PoweredRecipeMultiblock();
 
-		recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(2, IndustrialProcessing.blockPlatform, RecipeSlotType.INVENTORY, 1), new RecipeInputInventorySlot(4, IndustrialProcessing.blockPlatform, RecipeSlotType.INVENTORY, 1), new RecipeInputInventorySlot(5, IndustrialProcessing.blockPlatform, RecipeSlotType.INVENTORY, 1), new RecipeInputInventorySlot(6, IndustrialProcessing.blockPlatform, RecipeSlotType.INVENTORY, 1), new RecipeInputInventorySlot(7, IndustrialProcessing.blockPlatform, RecipeSlotType.INVENTORY, 1), new RecipeInputInventorySlot(8, IndustrialProcessing.blockPlatform, RecipeSlotType.INVENTORY, 1) };
+		recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(2, IndustrialProcessing.blockPlatform, 1), new RecipeInputInventorySlot(4, IndustrialProcessing.blockPlatform, 1), new RecipeInputInventorySlot(5, IndustrialProcessing.blockPlatform, 1), new RecipeInputInventorySlot(6, IndustrialProcessing.blockPlatform, 1), new RecipeInputInventorySlot(7, IndustrialProcessing.blockPlatform, 1), new RecipeInputInventorySlot(8, IndustrialProcessing.blockPlatform, 1) };
 
 		recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(9, IndustrialProcessing.blockStairs, 4, 4, 0) };
 
@@ -94,7 +93,7 @@ public class RecipesWeldingStation extends RecipesMultiblock {
 	private RecipeMultiblock turbine(int workTime, int power, Tiers tier) {
 		PoweredRecipeMultiblock recipe = new PoweredRecipeMultiblock();
 
-		recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(7, IndustrialProcessing.blockMachineBlock, RecipeSlotType.INVENTORY, 1), new RecipeInputInventorySlot(3, ISetupItems.itemTurbineBlades, 1), new RecipeInputInventorySlot(4, ISetupItems.itemTurbineBlades, 1), new RecipeInputInventorySlot(5, ISetupItems.itemTurbineBlades, 1), new RecipeInputInventorySlot(6, IndustrialProcessing.blockTransportFluids, RecipeSlotType.INVENTORY, 1), new RecipeInputInventorySlot(8, IndustrialProcessing.blockWire, RecipeSlotType.INVENTORY, 1) };
+		recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(7, IndustrialProcessing.blockMachineBlock, 1), new RecipeInputInventorySlot(3, ISetupItems.itemTurbineBlades, 1), new RecipeInputInventorySlot(4, ISetupItems.itemTurbineBlades, 1), new RecipeInputInventorySlot(5, ISetupItems.itemTurbineBlades, 1), new RecipeInputInventorySlot(6, IndustrialProcessing.blockTransportFluids, 1), new RecipeInputInventorySlot(8, IndustrialProcessing.blockWire, 1) };
 
 		recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(9, IndustrialProcessing.blockTurbine, 1, 1, 0) };
 
@@ -107,7 +106,7 @@ public class RecipesWeldingStation extends RecipesMultiblock {
 	private RecipeMultiblock solidBurner(int workTime, int power, Tiers tier) {
 		PoweredRecipeMultiblock recipe = new PoweredRecipeMultiblock();
 
-		recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(7, Blocks.furnace, RecipeSlotType.INVENTORY, 1), new RecipeInputInventorySlot(4, IndustrialProcessing.blockMachineBlock, RecipeSlotType.INVENTORY, 1), new RecipeInputInventorySlot(0, ISetupItems.itemHeatingElement, 1), new RecipeInputInventorySlot(1, ISetupItems.itemHeatingElement, 1), new RecipeInputInventorySlot(2, ISetupItems.itemHeatingElement, 1) };
+		recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(7, Blocks.furnace, 1), new RecipeInputInventorySlot(4, IndustrialProcessing.blockMachineBlock, 1), new RecipeInputInventorySlot(0, ISetupItems.itemHeatingElement, 1), new RecipeInputInventorySlot(1, ISetupItems.itemHeatingElement, 1), new RecipeInputInventorySlot(2, ISetupItems.itemHeatingElement, 1) };
 
 		recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(9, IndustrialProcessing.blockSolidBurner, 1, 1, 0) };
 
@@ -120,7 +119,7 @@ public class RecipesWeldingStation extends RecipesMultiblock {
 	private RecipeMultiblock boiler(int workTime, int power, Tiers tier) {
 		PoweredRecipeMultiblock recipe = new PoweredRecipeMultiblock();
 
-		recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(1, IndustrialProcessing.blockTransportFluids, RecipeSlotType.INVENTORY, 1), new RecipeInputInventorySlot(4, IndustrialProcessing.blockTank, RecipeSlotType.INVENTORY, 1), new RecipeInputInventorySlot(6, ISetupItems.itemHeatingElement, 1), new RecipeInputInventorySlot(7, ISetupItems.itemHeatingElement, 1), new RecipeInputInventorySlot(8, ISetupItems.itemHeatingElement, 1) };
+		recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(1, IndustrialProcessing.blockTransportFluids, 1), new RecipeInputInventorySlot(4, IndustrialProcessing.blockTank, 1), new RecipeInputInventorySlot(6, ISetupItems.itemHeatingElement, 1), new RecipeInputInventorySlot(7, ISetupItems.itemHeatingElement, 1), new RecipeInputInventorySlot(8, ISetupItems.itemHeatingElement, 1) };
 
 		recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(9, IndustrialProcessing.blockBoiler, 1, 1, 0) };
 
@@ -133,7 +132,7 @@ public class RecipesWeldingStation extends RecipesMultiblock {
 	private RecipeMultiblock tank(int workTime, int power, Tiers tier) {
 		PoweredRecipeMultiblock recipe = new PoweredRecipeMultiblock();
 
-		recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(1, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(2, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(3, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(5, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(4, IndustrialProcessing.blockTransportFluids, RecipeSlotType.INVENTORY, 1), new RecipeInputInventorySlot(6, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(7, Blocks.glass_pane, RecipeSlotType.INVENTORY, 1), new RecipeInputInventorySlot(8, ISetupItems.itemIronPlate, 1) };
+		recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(1, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(2, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(3, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(5, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(4, IndustrialProcessing.blockTransportFluids, 1), new RecipeInputInventorySlot(6, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(7, Blocks.glass_pane, 1), new RecipeInputInventorySlot(8, ISetupItems.itemIronPlate, 1) };
 
 		recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(9, IndustrialProcessing.blockTank, 1, 1, 0) };
 
@@ -146,7 +145,7 @@ public class RecipesWeldingStation extends RecipesMultiblock {
 	private RecipeMultiblock rainTank(int workTime, int power, Tiers tier) {
 		PoweredRecipeMultiblock recipe = new PoweredRecipeMultiblock();
 
-		recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(2, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(3, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(5, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(4, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(7, IndustrialProcessing.blockTransportFluids, RecipeSlotType.INVENTORY, 1), new RecipeInputInventorySlot(6, ISetupItems.itemIronBar, 1), new RecipeInputInventorySlot(8, ISetupItems.itemIronBar, 1) };
+		recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(2, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(3, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(5, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(4, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(7, IndustrialProcessing.blockTransportFluids, 1), new RecipeInputInventorySlot(6, ISetupItems.itemIronBar, 1), new RecipeInputInventorySlot(8, ISetupItems.itemIronBar, 1) };
 
 		recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(9, IndustrialProcessing.blockRainTank, 1, 1, 0) };
 
@@ -159,7 +158,7 @@ public class RecipesWeldingStation extends RecipesMultiblock {
 	private RecipeMultiblock fluidpipe(int workTime, int power, Tiers tier) {
 		PoweredRecipeMultiblock recipe = new PoweredRecipeMultiblock();
 
-		recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, ISetupItems.itemLeadIngot, 1), new RecipeInputInventorySlot(2, ISetupItems.itemLeadIngot, 1), new RecipeInputInventorySlot(3, ISetupItems.itemLeadIngot, 1), new RecipeInputInventorySlot(5, ISetupItems.itemLeadIngot, 1), new RecipeInputInventorySlot(6, ISetupItems.itemLeadIngot, 1), new RecipeInputInventorySlot(8, ISetupItems.itemLeadIngot, 1), new RecipeInputInventorySlot(1, Blocks.glass, RecipeSlotType.INVENTORY, 1), new RecipeInputInventorySlot(4, Blocks.glass, RecipeSlotType.INVENTORY, 1), new RecipeInputInventorySlot(7, Blocks.glass, RecipeSlotType.INVENTORY, 1) };
+		recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, ISetupItems.itemLeadIngot, 1), new RecipeInputInventorySlot(2, ISetupItems.itemLeadIngot, 1), new RecipeInputInventorySlot(3, ISetupItems.itemLeadIngot, 1), new RecipeInputInventorySlot(5, ISetupItems.itemLeadIngot, 1), new RecipeInputInventorySlot(6, ISetupItems.itemLeadIngot, 1), new RecipeInputInventorySlot(8, ISetupItems.itemLeadIngot, 1), new RecipeInputInventorySlot(1, Blocks.glass, 1), new RecipeInputInventorySlot(4, Blocks.glass, 1), new RecipeInputInventorySlot(7, Blocks.glass, 1) };
 
 		recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(9, IndustrialProcessing.blockTransportFluids, 6, 6, 0) };
 
@@ -185,7 +184,7 @@ public class RecipesWeldingStation extends RecipesMultiblock {
 	private RecipeMultiblock containerCore(int workTime, int power, Tiers tier) {
 		PoweredRecipeMultiblock recipe = new PoweredRecipeMultiblock();
 
-		recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(1, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(2, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(3, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(5, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(6, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(7, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(8, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(4, Blocks.chest, RecipeSlotType.INVENTORY, 1) };
+		recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(1, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(2, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(3, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(5, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(6, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(7, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(8, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(4, Blocks.chest, 1) };
 
 		recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(9, IndustrialProcessing.blockContainer, 1, 1, 0) };
 
@@ -198,7 +197,7 @@ public class RecipesWeldingStation extends RecipesMultiblock {
 	private RecipeMultiblock container(int workTime, int power, Tiers tier) {
 		PoweredRecipeMultiblock recipe = new PoweredRecipeMultiblock();
 
-		recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(1, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(2, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(3, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(5, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(6, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(7, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(8, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(4, Items.dye, 1, RecipeSlotType.INVENTORY, 1) };
+		recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(1, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(2, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(3, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(5, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(6, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(7, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(8, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(4, Items.dye, 1, 1) };
 
 		recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(9, IndustrialProcessing.blockContainerWall, 8, 8, 0) };
 
@@ -237,7 +236,7 @@ public class RecipesWeldingStation extends RecipesMultiblock {
 	private RecipeMultiblock lamp(int workTime, int power, Tiers tier) {
 		PoweredRecipeMultiblock recipe = new PoweredRecipeMultiblock();
 
-		recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, Items.iron_ingot, 1), new RecipeInputInventorySlot(1, Items.iron_ingot, 1), new RecipeInputInventorySlot(2, Items.iron_ingot, 1), new RecipeInputInventorySlot(3, Blocks.glass, RecipeSlotType.INVENTORY, 1), new RecipeInputInventorySlot(5, Blocks.glass, RecipeSlotType.INVENTORY, 1), new RecipeInputInventorySlot(6, Items.iron_ingot, 1), new RecipeInputInventorySlot(7, Items.iron_ingot, 1), new RecipeInputInventorySlot(8, Items.iron_ingot, 1) };
+		recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, Items.iron_ingot, 1), new RecipeInputInventorySlot(1, Items.iron_ingot, 1), new RecipeInputInventorySlot(2, Items.iron_ingot, 1), new RecipeInputInventorySlot(3, Blocks.glass, 1), new RecipeInputInventorySlot(5, Blocks.glass, 1), new RecipeInputInventorySlot(6, Items.iron_ingot, 1), new RecipeInputInventorySlot(7, Items.iron_ingot, 1), new RecipeInputInventorySlot(8, Items.iron_ingot, 1) };
 
 		recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(9, IndustrialProcessing.blockPetrolLamp, 3, 3, 0) };
 
@@ -423,7 +422,7 @@ public class RecipesWeldingStation extends RecipesMultiblock {
 
 	private RecipeMultiblock ironMachineBlock(int workTime, int power, Tiers tier) {
 		PoweredRecipeMultiblock recipe = new PoweredRecipeMultiblock();
-		recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, Items.dye, 14, RecipeSlotType.INVENTORY, 1), new RecipeInputInventorySlot(2, Items.dye, 14, RecipeSlotType.INVENTORY, 1), new RecipeInputInventorySlot(1, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(3, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(4, IndustrialProcessing.blockFrame, RecipeSlotType.INVENTORY, 1), new RecipeInputInventorySlot(5, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(6, ISetupItems.itemIronBar, 1), new RecipeInputInventorySlot(7, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(8, ISetupItems.itemIronBar, 1) };
+		recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, Items.dye, 14, 1), new RecipeInputInventorySlot(2, Items.dye, 14, 1), new RecipeInputInventorySlot(1, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(3, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(4, IndustrialProcessing.blockFrame, 1), new RecipeInputInventorySlot(5, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(6, ISetupItems.itemIronBar, 1), new RecipeInputInventorySlot(7, ISetupItems.itemIronPlate, 1), new RecipeInputInventorySlot(8, ISetupItems.itemIronBar, 1) };
 		recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(9, IndustrialProcessing.blockMachineBlock, 1, 1, 0) };
 
 		recipe.workRequired = workTime;

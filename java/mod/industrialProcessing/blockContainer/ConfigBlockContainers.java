@@ -51,12 +51,23 @@ import mod.industrialProcessing.plants.grinding.crusher.TileEntityCrusher;
 import mod.industrialProcessing.plants.machine.classifier.ModelClassifier;
 import mod.industrialProcessing.plants.machine.classifier.TileEntityClassifier;
 import mod.industrialProcessing.plants.machine.classifier.model.ModelClassifierBlock;
+import mod.industrialProcessing.plants.machine.diskFilter.ModelDiskFilter;
+import mod.industrialProcessing.plants.machine.diskFilter.TileEntityDiskFilter;
+import mod.industrialProcessing.plants.machine.diskFilter.model.ModelDiskFilterBlock;
 import mod.industrialProcessing.plants.machine.dryer.ModelDryer;
 import mod.industrialProcessing.plants.machine.dryer.TileEntityDryer;
 import mod.industrialProcessing.plants.machine.filter.ModelFilter;
 import mod.industrialProcessing.plants.machine.filter.TileEntityFilter;
+import mod.industrialProcessing.plants.machine.flotationCell.ModelFlotationCell;
+import mod.industrialProcessing.plants.machine.flotationCell.TileEntityFlotationCell;
+import mod.industrialProcessing.plants.machine.flotationCell.model.ModelFlotationCellBlock;
+import mod.industrialProcessing.plants.machine.hydroCyclone.TileEntityHydroCyclone;
+import mod.industrialProcessing.plants.machine.hydroCyclone.model.ModelHydroCycloneBlock;
 import mod.industrialProcessing.plants.machine.mixer.ModelMixer;
 import mod.industrialProcessing.plants.machine.mixer.TileEntityMixer;
+import mod.industrialProcessing.plants.machine.thickener.ModelThickener;
+import mod.industrialProcessing.plants.machine.thickener.TileEntityThickener;
+import mod.industrialProcessing.plants.machine.thickener.model.ModelThickenerBlock;
 import mod.industrialProcessing.plants.machine.treetap.TileEntityManualTreeTap;
 import mod.industrialProcessing.plants.machine.treetap.model.ModelManualTreeTapBlock;
 import mod.industrialProcessing.plants.power.generator.crankGenerator.ModelCrankGenerator;
@@ -136,7 +147,12 @@ public class ConfigBlockContainers {
 		BlockRegistry.registerMachine(IndustrialProcessing.blockMixer, TileEntityMixer.class, "IP.machine.mixer", new ModelMixer());
 		BlockRegistry.registerMachine(IndustrialProcessing.blockDryer, TileEntityDryer.class, "IP.machine.dryer", new ModelDryer());
 		BlockRegistry.registerMachine(IndustrialProcessing.blockClassifier, TileEntityClassifier.class, "IP.machine.classifier", new ModelClassifierBlock(), new ModelClassifier());
-		
+
+		BlockRegistry.registerMachine(IndustrialProcessing.blockThickener, TileEntityThickener.class, "IP.machine.thickener", new ModelThickenerBlock(), new ModelThickener());
+		BlockRegistry.registerMachine(IndustrialProcessing.blockFlotationCell, TileEntityFlotationCell.class, "IP.machine.flotationCell", new ModelFlotationCellBlock(), new ModelFlotationCell());
+		BlockRegistry.registerMachine(IndustrialProcessing.blockHydroCyclone, TileEntityHydroCyclone.class, "IP.machine.hydroCyclone", new ModelHydroCycloneBlock());
+		BlockRegistry.registerMachine(IndustrialProcessing.blockDiskFilter, TileEntityDiskFilter.class, "IP.machine.diskFilter", new ModelDiskFilterBlock(), new ModelDiskFilter());
+
 		BlockRegistry.registerMachine(IndustrialProcessing.blockManualGenerator, TileEntityManualGenerator.class, "IP.generator.manual", new ModelCrankGenerator(true));
 		BlockRegistry.registerMachine(IndustrialProcessing.blockElectroMotor, TileEntityElectroMotor.class, "IP.motor.electro", new ModelElectroMotorBlock(), new ModelElectroMotorTile());
 		BlockRegistry.registerMachine(IndustrialProcessing.blockWire, TileEntityWire.class, "IP.power.wire", new ModelWireBlock());
@@ -149,7 +165,7 @@ public class ConfigBlockContainers {
 		BlockRegistry.registerMachine(IndustrialProcessing.blockConveyorChute, TileEntityConveyorChute.class, "IP.trans.chute", new ModelConveyorChuteBlock());
 		BlockRegistry.registerMachine(IndustrialProcessing.blockConveyorInput, TileEntityConveyorInput.class, "IP.trans.in", new ModelConveyorInputBlock(), new ModelConveyorInput());
 		BlockRegistry.registerMachine(IndustrialProcessing.blockConveyorOutput, TileEntityConveyorOutput.class, "IP.trans.out", new ModelConveyorOutputBlock(), new ModelConveyorOutput());
-		BlockRegistry.registerMachine(IndustrialProcessing.blockCreativeGenerator, TileEntityCreativeGenerator.class, "IP.generator.creative");
+		BlockRegistry.registerMachine(IndustrialProcessing.blockCreativeGenerator, TileEntityCreativeGenerator.class, "IP.generator.creative", new ModelGeneratorBlock(), new ModelGenerator());
 
 		BlockRegistry.registerMachine(IndustrialProcessing.blockGrate, TileEntityGrate.class, "IP.trans.grate");
 		BlockRegistry.registerMachine(IndustrialProcessing.blockManoMeter, TileEntityManoMeter.class, "IP.trans.manoMeter", new ModelManometerBlock(), new ModelManoMeter());

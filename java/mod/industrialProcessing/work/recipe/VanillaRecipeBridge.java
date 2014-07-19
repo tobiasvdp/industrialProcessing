@@ -5,7 +5,6 @@ import java.util.Iterator;
 
 import mod.industrialProcessing.work.recipe.slots.RecipeInputInventorySlot;
 import mod.industrialProcessing.work.recipe.slots.RecipeOutputInventorySlot;
-import mod.industrialProcessing.work.recipe.slots.RecipeSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
@@ -47,7 +46,7 @@ public class VanillaRecipeBridge {
 			for (int i = 0; i < recipeVanilla.recipeItems.length; i++) {
 				ItemStack itemStack = recipeVanilla.recipeItems[i];
 				if (itemStack != null)
-					ipRecipe.inputs[i] = new RecipeInputInventorySlot(i, itemStack.getItem(), itemStack.getItemDamage(), RecipeSlotType.INVENTORY, itemStack.stackSize);
+					ipRecipe.inputs[i] = new RecipeInputInventorySlot(i, itemStack.getItem(), itemStack.getItemDamage(), itemStack.stackSize);
 			}
 		} else if (recipe instanceof ShapelessOreRecipe) {
 			return null;
@@ -57,7 +56,7 @@ public class VanillaRecipeBridge {
 				ipRecipe.inputs = new RecipeInputInventorySlot[recipeVanilla.recipeItems.size()];
 				for (int i = 0; i < recipeVanilla.recipeItems.size(); i++) {
 					ItemStack itemStack = (ItemStack) recipeVanilla.recipeItems.get(i);
-					ipRecipe.inputs[i] = new RecipeInputInventorySlot(i, itemStack.getItem(), itemStack.getItemDamage(), RecipeSlotType.INVENTORY, itemStack.stackSize);
+					ipRecipe.inputs[i] = new RecipeInputInventorySlot(i, itemStack.getItem(), itemStack.getItemDamage(), itemStack.stackSize);
 				}
 			} else {
 				ipRecipe.inputs = new RecipeInputInventorySlot[recipeVanilla.recipeItems.size() + 1];
@@ -65,7 +64,7 @@ public class VanillaRecipeBridge {
 					ItemStack itemStack = (ItemStack) recipeVanilla.recipeItems.get(i);
 					if (i == 3)
 						i++;
-					ipRecipe.inputs[i] = new RecipeInputInventorySlot(i, itemStack.getItem(), itemStack.getItemDamage(), RecipeSlotType.INVENTORY, itemStack.stackSize);
+					ipRecipe.inputs[i] = new RecipeInputInventorySlot(i, itemStack.getItem(), itemStack.getItemDamage(), itemStack.stackSize);
 				}
 			}
 		}

@@ -50,7 +50,7 @@ public class RecipesFilter extends RecipesMachine {
         recipe.workRequired = i;
         recipe.powerRequired = powerConsumption;
         recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(0, ISetupItems.itemGalenaFineChunks, 1) };
-        recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(1, ISetupItems.itemLeadDust, 0, 1, 0), new RecipeOutputInventorySlot(2, ISetupItems.itemGalenaMixedFragments, 1, 2, 0.75) };
+        recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(1, ISetupItems.itemLeadSulfideDust, 0, 1, 0), new RecipeOutputInventorySlot(2, ISetupItems.itemGalenaMixedFragments, 1, 2, 0.75) };
         return recipe;
     }
 

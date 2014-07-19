@@ -7,33 +7,34 @@ import net.minecraft.init.Blocks;
 public interface ISetupItems {
 
 	// processing
-	public final static ItemIP itemIronLargeChunks = new ItemIP();
-	public final static ItemIP itemCopperLargeChunks = new ItemIP();
-	public final static ItemIP itemTinLargeChunks = new ItemIP();
-	public final static ItemIP itemIronSmallChunks = new ItemIP();
-	public final static ItemIP itemCopperSmallChunks = new ItemIP();
-	public final static ItemIP itemTinSmallChunks = new ItemIP();
-	public final static ItemIP itemIronCrushedChunks = new ItemIP();
-	public final static ItemIP itemCopperCrushedChunks = new ItemIP();
-	public final static ItemIP itemTinCrushedChunks = new ItemIP();
-	public final static ItemIP itemIronWashedChunks = new ItemIP();
-	public final static ItemIP itemCopperWashedChunks = new ItemIP();
-	public final static ItemIP itemTinWashedChunks = new ItemIP();
-	public final static ItemIP itemIronFineChunks = new ItemIP();
-	public final static ItemIP itemCopperFineChunks = new ItemIP();
-	public final static ItemIP itemTinFineChunks = new ItemIP();
-	public final static ItemIP itemIronOxideDust = new ItemIP();
-	public final static ItemIP itemCopperMineral = new ItemIP();
-	public final static ItemIP itemTinOxideDust = new ItemIP();
-	public final static ItemIP itemIronMixedFragments = new ItemIP();
-	public final static ItemIP itemCopperMixedFragments = new ItemIP();
-	public final static ItemIP itemTinMixedFragments = new ItemIP();
-	public final static ItemIP itemCopperPurified = new ItemIP();
-	public final static ItemIP itemSilicium = new ItemIP();
-	public final static ItemIP itemZincDust = new ItemIP();
-	public final static ItemIP itemTinPurified = new ItemIP();
-	public final static ItemIP itemSulfur = new ItemIP();
+	public final static ItemIP itemIronLargeChunks = new ItemIP("FeO");
+	public final static ItemIP itemCopperLargeChunks = new ItemIP("Cu");
+	public final static ItemIP itemTinLargeChunks = new ItemIP("SnO2");
+	public final static ItemIP itemIronSmallChunks = new ItemIP("FeO");
+	public final static ItemIP itemCopperSmallChunks = new ItemIP("Cu");
+	public final static ItemIP itemTinSmallChunks = new ItemIP("SnO2");
+	public final static ItemIP itemIronCrushedChunks = new ItemIP("FeO");
+	public final static ItemIP itemCopperCrushedChunks = new ItemIP("Cu");
+	public final static ItemIP itemTinCrushedChunks = new ItemIP("SnO2");
+	public final static ItemIP itemIronWashedChunks = new ItemIP("FeO");
+	public final static ItemIP itemCopperWashedChunks = new ItemIP("Cu");
+	public final static ItemIP itemTinWashedChunks = new ItemIP("SnO2");
+	public final static ItemIP itemIronFineChunks = new ItemIP("FeO");
+	public final static ItemIP itemCopperFineChunks = new ItemIP("Cu");
+	public final static ItemIP itemTinFineChunks = new ItemIP("SnO2");
+	public final static ItemIP itemIronOxideDust = new ItemIP("FeO");
+	public final static ItemIP itemCopperMineral = new ItemIP("Cu");
+	public final static ItemIP itemTinOxideDust = new ItemIP("SnO2");
+	public final static ItemIP itemIronMixedFragments = new ItemIP("FeO");
+	public final static ItemIP itemCopperMixedFragments = new ItemIP("FeO");
+	public final static ItemIP itemTinMixedFragments = new ItemIP("SnO2");
+	public final static ItemIP itemCopperPurified = new ItemIP("Cu");
+	public final static ItemIP itemSilicium = new ItemIP("Si");
+	public final static ItemIP itemZincDust = new ItemIP("Zn");
+	public final static ItemIP itemTinPurified = new ItemIP("Sn");
+	public final static ItemIP itemSulfur = new ItemIP("S");
 	public final static ItemIP itemSmallMachineCasing = new ItemIP();
+	
 	public final static ItemIP itemInputPort = new ItemIP();
 	public final static ItemIP itemOutputPort = new ItemIP();
 	public final static ItemIP itemPowerPort = new ItemIP();
@@ -43,49 +44,49 @@ public interface ISetupItems {
 	public final static ItemIP itemSmallMachineCasingCrusher = new ItemIP();
 	public final static ItemIP itemFiberGlass = new ItemIP();
 
-	public final static ItemIP itemGalenaCrushedChunks = new ItemIP();
-	public final static ItemIP itemGalenaSmallChunks = new ItemIP();
-	public final static ItemIP itemGalenaLargeChunks = new ItemIP();
-	public final static ItemIP itemGalenaFineChunks = new ItemIP();
-	public final static ItemIP itemGalenaWashedChunks = new ItemIP();
-	public final static ItemIP itemSilverDust = new ItemIP();
-	public final static ItemIP itemLeadDust = new ItemIP();
+	public final static ItemIP itemGalenaCrushedChunks = new ItemIP("PbS+AgS");
+	public final static ItemIP itemGalenaSmallChunks = new ItemIP("PbS+AgS");
+	public final static ItemIP itemGalenaLargeChunks = new ItemIP("PbS+AgS");
+	public final static ItemIP itemGalenaFineChunks = new ItemIP("PbS+AgS");
+	public final static ItemIP itemGalenaWashedChunks = new ItemIP("PbS+AgS");
+	public final static ItemIP itemSilverSulfideDust = new ItemIP("AgS");
+	public final static ItemIP itemLeadSulfideDust = new ItemIP("PbS");
 
-	public final static ItemIP itemChromiteCrushedChunks = new ItemIP();
-	public final static ItemIP itemChromiteSmallChunks = new ItemIP();
-	public final static ItemIP itemChromiteLargeChunks = new ItemIP();
-	public final static ItemIP itemChromiteFineChunks = new ItemIP();
-	public final static ItemIP itemChromiteWashedChunks = new ItemIP();
-	public final static ItemIP itemChromiteDust = new ItemIP();
+	public final static ItemIP itemChromiteCrushedChunks = new ItemIP("FeCr2O4");
+	public final static ItemIP itemChromiteSmallChunks = new ItemIP("FeCr2O4");
+	public final static ItemIP itemChromiteLargeChunks = new ItemIP("FeCr2O4");
+	public final static ItemIP itemChromiteFineChunks = new ItemIP("FeCr2O4");
+	public final static ItemIP itemChromiteWashedChunks = new ItemIP("FeCr2O4");
+	public final static ItemIP itemChromiteDust = new ItemIP("FeCr2O4");
 
-	public final static ItemIP itemTaliaCrushedChunks = new ItemIP();
-	public final static ItemIP itemTaliaSmallChunks = new ItemIP();
-	public final static ItemIP itemTaliaLargeChunks = new ItemIP();
-	public final static ItemIP itemTaliaFineChunks = new ItemIP();
-	public final static ItemIP itemTaliaWashedChunks = new ItemIP();
-	public final static ItemIP itemTaliaDust = new ItemIP();
+	public final static ItemIP itemTaliaCrushedChunks = new ItemIP("T?");
+	public final static ItemIP itemTaliaSmallChunks = new ItemIP("T?");
+	public final static ItemIP itemTaliaLargeChunks = new ItemIP("T?");
+	public final static ItemIP itemTaliaFineChunks = new ItemIP("T?");
+	public final static ItemIP itemTaliaWashedChunks = new ItemIP("T?");
+	public final static ItemIP itemTaliaDust = new ItemIP("T?");
 
-	public final static ItemIP itemGoldCrushedChunks = new ItemIP();
-	public final static ItemIP itemGoldSmallChunks = new ItemIP();
-	public final static ItemIP itemGoldLargeChunks = new ItemIP();
-	public final static ItemIP itemGoldFineChunks = new ItemIP();
-	public final static ItemIP itemGoldWashedChunks = new ItemIP();
-	public final static ItemIP itemGoldDust = new ItemIP();
+	public final static ItemIP itemGoldCrushedChunks = new ItemIP("Au");
+	public final static ItemIP itemGoldSmallChunks = new ItemIP("Au");
+	public final static ItemIP itemGoldLargeChunks = new ItemIP("Au");
+	public final static ItemIP itemGoldFineChunks = new ItemIP("Au");
+	public final static ItemIP itemGoldWashedChunks = new ItemIP("Au");
+	public final static ItemIP itemGoldDust = new ItemIP("Au");
 
-	public final static ItemIP itemCinnebarCrystals = new ItemIP();
-	public final static ItemIP itemCinnebarLargeCrushedCrystals = new ItemIP();
-	public final static ItemIP itemCinnebarSmallCrushedCrystals = new ItemIP();
-	public final static ItemIP itemCinnebarFineCrushedCrystals = new ItemIP();
-	public final static ItemIP itemCinnebarDust = new ItemIP();
+	public final static ItemIP itemCinnebarCrystals = new ItemIP("HgS");
+	public final static ItemIP itemCinnebarLargeCrushedCrystals = new ItemIP("HgS");
+	public final static ItemIP itemCinnebarSmallCrushedCrystals = new ItemIP("HgS");
+	public final static ItemIP itemCinnebarFineCrushedCrystals = new ItemIP("HgS");
+	public final static ItemIP itemCinnebarDust = new ItemIP("HgS");
 
-	public final static ItemIP itemRutileCrystals = new ItemIP();
-	public final static ItemIP itemRutileLargeCrushedCrystals = new ItemIP();
-	public final static ItemIP itemRutileSmallCrushedCrystals = new ItemIP();
-	public final static ItemIP itemRutileFineCrushedCrystals = new ItemIP();
-	public final static ItemIP itemRutileDust = new ItemIP();
-	public final static ItemIP itemCoalDust = new ItemIP();
-	public final static ItemIP itemHardenedSandDust = new ItemIP();
-	public final static ItemIP itemAluminumDust = new ItemIP();
+	public final static ItemIP itemRutileCrystals = new ItemIP("TiO2");
+	public final static ItemIP itemRutileLargeCrushedCrystals = new ItemIP("TiO2");
+	public final static ItemIP itemRutileSmallCrushedCrystals = new ItemIP("TiO2");
+	public final static ItemIP itemRutileFineCrushedCrystals = new ItemIP("TiO2");
+	public final static ItemIP itemRutileDust = new ItemIP("TiO2");
+	public final static ItemIP itemCoalDust = new ItemIP("C");
+	public final static ItemIP itemHardenedSandDust = new ItemIP("SiO2");
+	public final static ItemIP itemAluminumDust = new ItemIP("Al");
 
 	public final static ItemIP itemThickStick = new ItemIP();
 	public final static ItemDamage itemHammer = new ItemDamage();
@@ -93,15 +94,15 @@ public interface ISetupItems {
 	public final static ItemDamage itemBlowingTorch = new ItemDamage();
 
 	// Iron blast furnace
-	public final static ItemIP itemCalcareousSinterDust = new ItemIP();
-	public final static ItemIP itemCokes = new ItemIP();
-	public final static ItemIP itemCokePellet = new ItemIP();
-	public final static ItemIP itemSlag = new ItemIP();
+	public final static ItemIP itemCalcareousSinterDust = new ItemIP("CaCO3");
+	public final static ItemIP itemCokes = new ItemIP("C");
+	public final static ItemIP itemCokePellet = new ItemIP("C");
+	public final static ItemIP itemSlag = new ItemIP("-S");
 
 	public final static ItemIP itemHexKey = new ItemIP();
 	public final static ItemWrench itemWrench = new ItemWrench();
 	public final static ItemBattery itemBattery = new ItemBattery();
-	public final static ItemIP itemAsh = new ItemIP();
+	public final static ItemIP itemAsh = new ItemIP("C");
 
 	public final static ItemGuide itemGuide = new ItemGuide("itemGuide", IndustrialProcessing.tabMachineParts);
 
@@ -126,9 +127,9 @@ public interface ISetupItems {
 	public final static ItemPaintBrush paintBrushBlack = new ItemPaintBrush(15);
 	public final static ItemIP paintBrush = new ItemIP();
 
-	public final static ItemIP itemCopperIngot = new ItemIP();
-	public final static ItemIP itemTinIngot = new ItemIP();
-	public final static ItemIP itemSilverIngot = new ItemIP();
+	public final static ItemIP itemCopperIngot = new ItemIP("Cu");
+	public final static ItemIP itemTinIngot = new ItemIP("Sn");
+	public final static ItemIP itemSilverIngot = new ItemIP("Ag");
 
 	public final static ItemIP itemCopperWire = new ItemIP();
 	public final static ItemIP itemCopperWireInsulated = new ItemIP();
@@ -160,12 +161,12 @@ public interface ISetupItems {
 	public final static ItemIP itemDisk = new ItemIP();
 
 	public final static ItemIP itemTaliaMixedFragments = new ItemIP();
-	public final static ItemIP itemGoldMixedFragments = new ItemIP();
+	public final static ItemIP itemGoldMixedFragments = new ItemIP("Ag");
 	public final static ItemIP itemGalenaMixedFragments = new ItemIP();
 	public final static ItemIP itemChromiteMixedFragments = new ItemIP();
 
-	public final static ItemIP itemLimestoneDust = new ItemIP();
-	public final static ItemIP itemIronSinter = new ItemIP();
+	public final static ItemIP itemLimestoneDust = new ItemIP("CaCO3");
+	public final static ItemIP itemIronSinter = new ItemIP("Fe+C");
 
 	public final static ItemIP itemFlask = new ItemIP();
 	public final static ItemIP itemCastingMulsh = new ItemIP();
@@ -192,7 +193,7 @@ public interface ISetupItems {
 	public final static ItemIP itemCopperBar = new ItemIP();
 	public final static ItemIP itemFilterTray = new ItemIP();
 
-	public final static ItemIP itemLeadIngot = new ItemIP();
+	public final static ItemIP itemLeadIngot = new ItemIP("Pb");
 	public final static ItemIP itemLeadBowl = new ItemIP();
 	public final static ItemIP itemIronBlade = new ItemIP();
 	public final static ItemIP itemTurbineBlades = new ItemIP();

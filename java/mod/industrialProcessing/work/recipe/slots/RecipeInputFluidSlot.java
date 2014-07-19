@@ -3,11 +3,11 @@ package mod.industrialProcessing.work.recipe.slots;
 import mod.industrialProcessing.fluids.tank.IMachineTanks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 public class RecipeInputFluidSlot extends RecipeInputSlot implements IRecipeFluidSlot {
-
-	// TODO: fluid registry?!
+ 
 	private Fluid fluid;
 
 	public RecipeInputFluidSlot(int index, FluidStack stack) {
@@ -21,7 +21,11 @@ public class RecipeInputFluidSlot extends RecipeInputSlot implements IRecipeFlui
 		super(index, amount, RecipeSlotType.TANK);
 
 		this.fluid = fluid;
+	}
 
+	// TODO: this should be evaluated in isFluidValid, not here.
+	public RecipeInputFluidSlot(int index, String fluidDictionary, int amount) {
+		this(index, FluidRegistry.getFluid(fluidDictionary), amount);
 	}
 
 	@Override
@@ -38,9 +42,9 @@ public class RecipeInputFluidSlot extends RecipeInputSlot implements IRecipeFlui
 	public boolean isFluidStackValid(FluidStack stack) {
 		if (stack == null)
 			return false;
-		
+
 		boolean isFluidEqual = stack.getFluid() == fluid;
-		boolean isAmountSufficient = stack.amount >= getMaxAmount(); 
+		boolean isAmountSufficient = stack.amount >= getMaxAmount();
 		return isFluidEqual && isAmountSufficient;
 	}
 

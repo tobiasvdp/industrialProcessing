@@ -11,7 +11,6 @@ import mod.industrialProcessing.work.recipe.RecipeMultiblock;
 import mod.industrialProcessing.work.recipe.RecipesMachine;
 import mod.industrialProcessing.work.recipe.slots.RecipeInputInventorySlot;
 import mod.industrialProcessing.work.recipe.slots.RecipeOutputInventorySlot;
-import mod.industrialProcessing.work.recipe.slots.RecipeSlotType;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -30,7 +29,7 @@ public class RecipesUpgradeGenerator extends RecipesMachine {
 	private Recipe crank(){
 		Recipe recipe = new Recipe();
 
-		recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(1, ISetupItems.itemCrankWheel, 1), new RecipeInputInventorySlot(4, IndustrialProcessing.blockGenerator, RecipeSlotType.INVENTORY, 1)};
+		recipe.inputs = new RecipeInputInventorySlot[] { new RecipeInputInventorySlot(1, ISetupItems.itemCrankWheel, 1), new RecipeInputInventorySlot(4, IndustrialProcessing.blockGenerator, 1)};
 
 		recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(9, IndustrialProcessing.blockManualGenerator, 1, 1, 0) };
 

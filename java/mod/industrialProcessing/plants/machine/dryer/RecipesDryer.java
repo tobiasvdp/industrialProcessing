@@ -186,7 +186,7 @@ public class RecipesDryer extends RecipesMachine {
 		recipe.workRequired = i;
 		recipe.powerRequired = powerConsumption;
 		recipe.inputFluids = new RecipeInputFluidSlot[] { new RecipeInputFluidSlot(0, IndustrialProcessing.fluidPasteGalenaSediment.getItem(), 1000) };
-		recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(0, ISetupItems.itemSilverDust, 1, 2, 0) };
+		recipe.outputs = new RecipeOutputInventorySlot[] { new RecipeOutputInventorySlot(0, ISetupItems.itemSilverSulfideDust, 1, 2, 0) };
 		recipe.outputFluids = new RecipeOutputFluidSlot[] { new RecipeOutputFluidSlot(1, 0, 200, IndustrialProcessing.fluidDirtyWater) };
 		return recipe;
 	}
