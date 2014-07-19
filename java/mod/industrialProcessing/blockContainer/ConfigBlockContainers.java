@@ -43,9 +43,12 @@ import mod.industrialProcessing.plants.construction.weldingStation.dummy.screen.
 import mod.industrialProcessing.plants.construction.weldingStation.dummy.weldingTable.TileEntityWeldingTable;
 import mod.industrialProcessing.plants.construction.weldingStation.dummy.weldingTable.model.ModelWeldingTable;
 import mod.industrialProcessing.plants.construction.weldingStation.model.ModelWeldingStation;
+import mod.industrialProcessing.plants.crafting.assembler.TileEntityAssembler;
 import mod.industrialProcessing.plants.decoration.light.hangingLamp.TileEntityPetrolLamp;
 import mod.industrialProcessing.plants.decoration.light.hangingLamp.model.ModelPetrolLamp;
 import mod.industrialProcessing.plants.decoration.light.torch.TileEntityTorch;
+import mod.industrialProcessing.plants.dummyBlocks.ioPort.TileEntityIOPort;
+import mod.industrialProcessing.plants.dummyBlocks.machineFrame.TileEntityMachineFrame;
 import mod.industrialProcessing.plants.grinding.crusher.ModelCrusher;
 import mod.industrialProcessing.plants.grinding.crusher.TileEntityCrusher;
 import mod.industrialProcessing.plants.machine.classifier.ModelClassifier;
@@ -194,6 +197,10 @@ public class ConfigBlockContainers {
 		BlockRegistry.registerMachine(IndustrialProcessing.blockManualTreeTap, TileEntityManualTreeTap.class, "IP.tap.manual", new ModelManualTreeTapBlock());
 
 		BlockRegistry.registerMachine(IndustrialProcessing.blockGenerator, TileEntityGenerator.class, "IP.power.generator", new ModelGeneratorBlock(), new ModelGenerator());
+		
+		BlockRegistry.registerMachine(IndustrialProcessing.blockAssembler, TileEntityAssembler.class, "IP.crafting.assembler");
+		BlockRegistry.registerMachine(IndustrialProcessing.blockMachineFrame, TileEntityMachineFrame.class, "IP.dummy.machineFrame");
+		BlockRegistry.registerMachine(IndustrialProcessing.blockIOPort, TileEntityIOPort.class, "IP.dummy.ioPort");
 
 		/*
 		 * 

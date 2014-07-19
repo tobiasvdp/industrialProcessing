@@ -488,4 +488,9 @@ public abstract class TileEntityMultiblockCoreTank extends TileEntityMultiblockC
 	private void onTanksChanged() {
 		markDirty();
 	}
+	
+	@Override
+	public FluidStack getFluidStackInSlot(int slot) {
+		return fluidTanks.get(slot).getFluid();
+	}
 }

@@ -17,8 +17,11 @@ import mod.industrialProcessing.plants.construction.solderingStation.BlockSolder
 import mod.industrialProcessing.plants.construction.weldingStation.BlockWeldingStation;
 import mod.industrialProcessing.plants.construction.weldingStation.dummy.screen.BlockScreen;
 import mod.industrialProcessing.plants.construction.weldingStation.dummy.weldingTable.BlockWeldingTable;
+import mod.industrialProcessing.plants.crafting.assembler.BlockAssembler;
 import mod.industrialProcessing.plants.decoration.light.hangingLamp.BlockPetrolLamp;
 import mod.industrialProcessing.plants.decoration.light.torch.BlockTorch;
+import mod.industrialProcessing.plants.dummyBlocks.ioPort.BlockIOPort;
+import mod.industrialProcessing.plants.dummyBlocks.machineFrame.BlockMachineFrame;
 import mod.industrialProcessing.plants.grinding.crusher.BlockCrusher;
 import mod.industrialProcessing.plants.machine.classifier.BlockClassifier;
 import mod.industrialProcessing.plants.machine.dryer.BlockDryer;
@@ -119,6 +122,10 @@ public interface ISetupBlockContainers {
     public final static BlockManualTreeTap blockManualTreeTap = new BlockManualTreeTap();
     
     public final static BlockGenerator blockGenerator = new BlockGenerator();
+    
+    public final static BlockAssembler blockAssembler = new BlockAssembler();
+    public final static BlockMachineFrame blockMachineFrame = new BlockMachineFrame();
+    public final static BlockIOPort blockIOPort = new BlockIOPort();
     
     /* machines 
     public final static BlockMagneticSeparator blockMageneticSeparator = new BlockMagneticSeparator(); 
