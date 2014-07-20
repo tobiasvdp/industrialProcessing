@@ -30,6 +30,30 @@ public class TileEntityAssembler extends TileEntityMultiblockCoreTankWorkerPower
 		layout.setCoreID(i++, 0, 1, IndustrialProcessing.blockAssembler);
 
 		layout.setBlockIDwithGroup(0, -1, 0, i++, 0, 0, 1, IndustrialProcessing.blockMachineFrame,IndustrialProcessing.blockIOPort);
+		layout.setBlockIDwithGroup(-1, -1, 0, i++, 0, 0, 1, IndustrialProcessing.blockMachineFrame,IndustrialProcessing.blockIOPort);
+		layout.setBlockIDwithGroup(+1, -1, 0, i++, 0, 0, 1, IndustrialProcessing.blockMachineFrame,IndustrialProcessing.blockIOPort);
+		layout.setBlockIDwithGroup(+2, -1, 0, i++, 0, 0, 1, IndustrialProcessing.blockMachineFrame,IndustrialProcessing.blockIOPort);
+		
+		layout.setBlockIDwithGroup(0, -1, -1, i++, 0, 0, 1, IndustrialProcessing.blockMachineFrame,IndustrialProcessing.blockIOPort);
+		layout.setBlockIDwithGroup(-1, -1, -1, i++, 0, 0, 1, IndustrialProcessing.blockMachineFrame,IndustrialProcessing.blockIOPort);
+		layout.setBlockIDwithGroup(+1, -1, -1, i++, 0, 0, 1, IndustrialProcessing.blockMachineFrame,IndustrialProcessing.blockIOPort);
+		layout.setBlockIDwithGroup(+2, -1, -1, i++, 0, 0, 1, IndustrialProcessing.blockMachineFrame,IndustrialProcessing.blockIOPort);
+		
+		layout.setBlockIDwithGroup(0, -1, -2, i++, 0, 0, 1, IndustrialProcessing.blockMachineFrame,IndustrialProcessing.blockIOPort);
+		layout.setBlockIDwithGroup(-1, -1, -2, i++, 0, 0, 1, IndustrialProcessing.blockMachineFrame,IndustrialProcessing.blockIOPort);
+		layout.setBlockIDwithGroup(+1, -1, -2, i++, 0, 0, 1, IndustrialProcessing.blockMachineFrame,IndustrialProcessing.blockIOPort);
+		layout.setBlockIDwithGroup(+2, -1, -2, i++, 0, 0, 1, IndustrialProcessing.blockMachineFrame,IndustrialProcessing.blockIOPort);
+		
+		layout.setBlockIDwithGroup(0, -1, -3, i++, 0, 0, 1, IndustrialProcessing.blockMachineFrame,IndustrialProcessing.blockIOPort);
+		layout.setBlockIDwithGroup(-1, -1, -3, i++, 0, 0, 1, IndustrialProcessing.blockMachineFrame,IndustrialProcessing.blockIOPort);
+		layout.setBlockIDwithGroup(+1, -1, -3, i++, 0, 0, 1, IndustrialProcessing.blockMachineFrame,IndustrialProcessing.blockIOPort);
+		layout.setBlockIDwithGroup(+2, -1, -3, i++, 0, 0, 1, IndustrialProcessing.blockMachineFrame,IndustrialProcessing.blockIOPort);
+		
+		layout.setBlockIDwithGroup(1, 0, 0, i++, 0, 0, 1, IndustrialProcessing.blockConveyorBelt);
+		layout.setBlockIDwithGroup(1, 0, -1, i++, 0, 0, 1, IndustrialProcessing.blockConveyorBelt);
+		layout.setBlockIDwithGroup(1, 0, -2, i++, 0, 0, 1, IndustrialProcessing.blockConveyorBelt);
+		layout.setBlockIDwithGroup(2, 0, -3, i++, 0, 0, 1, IndustrialProcessing.blockConveyorBelt);
+		
 		
 		
 
