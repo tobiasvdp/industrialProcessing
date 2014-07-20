@@ -17,8 +17,8 @@ public class ItemMicroBlock extends ItemIP {
 	public int level;
 	public String tileEntity;
 
-	public ItemMicroBlock(String name, CreativeTabs tab, int microblock, MicroBlockType type, String tileEntity,int level) {
-		super(name, tab);
+	public ItemMicroBlock(int microblock, MicroBlockType type, String tileEntity,int level) {
+		super();
 		this.microblock = microblock;
 		this.type = type;
 		this.level = level;

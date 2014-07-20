@@ -1,4 +1,4 @@
-package ip.industrialProcessing.microBlock;
+package mod.industrialProcessing.microBlock;
 
 import ip.industrialProcessing.items.ItemMicroBlock;
 import net.minecraft.entity.player.EntityPlayer;

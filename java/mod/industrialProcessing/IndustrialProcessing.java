@@ -19,7 +19,7 @@ import mod.industrialProcessing.utils.handlers.fluids.BucketHandler;
 import mod.industrialProcessing.utils.handlers.fuel.FuelHandler;
 import mod.industrialProcessing.utils.handlers.gui.GuiHandler;
 import mod.industrialProcessing.utils.handlers.heat.HeatHandler;
-import mod.industrialProcessing.utils.handlers.line.LineHandler;
+import mod.industrialProcessing.utils.handlers.line.OldLineHandler;
 import mod.industrialProcessing.utils.handlers.packet.PacketHandler;
 import mod.industrialProcessing.utils.handlers.packet.packets.ConveyorPacket;
 import mod.industrialProcessing.utils.handlers.packet.packets.StateConfigPacket;
@@ -87,7 +87,7 @@ public class IndustrialProcessing implements INamepace, ISetupCreativeTabs, ISet
 		GameRegistry.registerWorldGenerator(new WorldGeneration(), 100);
 		
 		//register handlers
-		HandlerRegistry.registerConveyorLineHandler(new LineHandler());		
+		HandlerRegistry.registerConveyorLineHandler(new OldLineHandler());		
 		GameRegistry.registerFuelHandler(new FuelHandler());
 		HandlerRegistry.registerHeatHandler(new HeatHandler());
 		

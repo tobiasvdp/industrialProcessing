@@ -1,17 +1,13 @@
-package ip.industrialProcessing.microBlock.core;
-
-import ip.industrialProcessing.IndustrialProcessing;
-import ip.industrialProcessing.items.ItemMicroBlock;
-import ip.industrialProcessing.machines.BlockMachineRendered;
-import ip.industrialProcessing.microBlock.IMicroBlock;
-import ip.industrialProcessing.microBlock.MicroBlockType;
-import ip.industrialProcessing.utils.packets.PacketIP002SendMicroBlockDestructionChange;
-import ip.industrialProcessing.utils.packets.PacketIP004RayTraceToServer;
-import ip.industrialProcessing.utils.registry.MicroBlockRegistry;
+package mod.industrialProcessing.microBlock.core;
 
 import java.util.List;
 import java.util.Random;
 
+import mod.industrialProcessing.IndustrialProcessing;
+import mod.industrialProcessing.blockContainer.BlockContainerIPRendered;
+import mod.industrialProcessing.items.ItemMicroBlock;
+import mod.industrialProcessing.microBlock.IMicroBlock;
+import mod.industrialProcessing.microBlock.MicroBlockType;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -28,12 +24,12 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public abstract class BlockMicroBlock extends BlockMachineRendered {
+public abstract class BlockMicroBlock extends BlockContainerIPRendered {
 
 	public static boolean isDestroying = false;
 
-	protected BlockMicroBlock(int par1, Material par2Material, float hardness, StepSound stepSound, String name) {
-		super(par1, par2Material, hardness, stepSound, name, null);
+	protected BlockMicroBlock(float hardness, float resistance, Material material, SoundType soundtype, String... iconNames) {
+		super(hardness, resistance, material, soundtype, iconNames);
 		this.setBlockBounds(0, 0, 0, 1f, 1f, 1f);
 	}
 
@@ -84,8 +80,8 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 			int x = hit.blockX + offset.offsetX;
 			int y = hit.blockY + offset.offsetY;
 			int z = hit.blockZ + offset.offsetZ;
-			int blockID = world.getBlockId(x, y, z);
-			if (Block.blocksList[blockID] instanceof BlockMicroBlock) {
+			Block block = world.getBlock(x, y, z);
+			if (block instanceof BlockMicroBlock) {
 				int invertedSide = invertSide(hit.sideHit);
 				handleHit(x, y, z, invertedSide, player, hit, hitType);
 			} else {
@@ -104,7 +100,7 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 		if (hitType == 0) {
 			Minecraft.getMinecraft().playerController.clickBlock(blockX, blockY, blockZ, sideHit);
 			isDestroying = true;
-			player.worldObj.scheduleBlockUpdate(x, y, z, player.worldObj.getBlockId(x, y, z), 50);
+			player.worldObj.scheduleBlockUpdate(x, y, z, player.worldObj.getBlock(x, y, z), 50);
 		}
 		if (hitType == 2) {
 			Minecraft.getMinecraft().playerController.onPlayerDestroyBlock(blockX, blockY, blockZ, 0);
@@ -119,7 +115,7 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 		if (hitType == 1) {
 			ItemStack itemstack = player.getCurrentEquippedItem();
 			if (itemstack != null && itemstack.getItem() instanceof ItemMicroBlock) {
-				TileEntity te = player.worldObj.getBlockTileEntity(x, y, z);
+				TileEntity te = player.worldObj.getTileEntity(x, y, z);
 				if (te instanceof IMicroBlock) {
 					IMicroBlock microblock = (IMicroBlock) te;
 					ForgeDirection dir = sideToForge(sideHit);
@@ -128,7 +124,7 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 					}
 				}
 			}else{
-				TileEntity te = player.worldObj.getBlockTileEntity(x, y, z);
+				TileEntity te = player.worldObj.getTileEntity(x, y, z);
 				if (te instanceof IMicroBlock) {
 					IMicroBlock microblock = (IMicroBlock) te;
 					ForgeDirection dir = sideToForge(sideHit);
@@ -139,7 +135,7 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 			}
 		}
 		if (hitType == 2) {
-			TileEntity te = player.worldObj.getBlockTileEntity(x, y, z);
+			TileEntity te = player.worldObj.getTileEntity(x, y, z);
 			if (te instanceof IMicroBlock) {
 				IMicroBlock microblock = (IMicroBlock) te;
 				ForgeDirection dir = sideToForge(sideHit);
@@ -151,7 +147,7 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 			}
 		}
 		if (hitType == 0) {
-			TileEntity te = player.worldObj.getBlockTileEntity(x, y, z);
+			TileEntity te = player.worldObj.getTileEntity(x, y, z);
 			if (te instanceof IMicroBlock) {
 				IMicroBlock microblock = (IMicroBlock) te;
 				ForgeDirection dir = sideToForge(sideHit);
@@ -272,11 +268,11 @@ public abstract class BlockMicroBlock extends BlockMachineRendered {
 	}
 
 	@Override
-	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, int par5) {
+	public void onNeighborBlockChange(World par1World, int par2, int par3, int par4, Block par5) {
 		if (isDestroying) {
 			isDestroying = false;
 		}
-		((IMicroBlock) par1World.getBlockTileEntity(par2, par3, par4)).refresh();
+		((IMicroBlock) par1World.getTileEntity(par2, par3, par4)).refresh();
 		super.onNeighborBlockChange(par1World, par2, par3, par4, par5);
 	}
 

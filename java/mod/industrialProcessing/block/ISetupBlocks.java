@@ -1,5 +1,6 @@
 package mod.industrialProcessing.block;
 
+import mod.industrialProcessing.microBlock.MicroBlock;
 import mod.industrialProcessing.IndustrialProcessing;
 import mod.industrialProcessing.block.crystals.BlockCrystal;
 import mod.industrialProcessing.block.doors.BlockDoor;
@@ -53,9 +54,8 @@ public interface ISetupBlocks {
 	public final static BlockAnvil blockAnvil = new BlockAnvil();
 	
 	public final static Blocktransparent blocktransparent = new Blocktransparent();
-	/*
-	 * public final static MicroBlock microBlock = new MicroBlock();
-	 */
+	public final static MicroBlock microBlock = new MicroBlock();
+	
 	// TODO public final static BlockMachineBlock blockMachineBlock = new
 	// BlockMachineBlock();
 }
