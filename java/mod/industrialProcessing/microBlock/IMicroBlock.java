@@ -1,6 +1,6 @@
 package mod.industrialProcessing.microBlock;
 
-import ip.industrialProcessing.items.ItemMicroBlock;
+import mod.industrialProcessing.items.ItemMicroBlock;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.util.ForgeDirection;
 

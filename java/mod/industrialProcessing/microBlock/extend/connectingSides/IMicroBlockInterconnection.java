@@ -1,6 +1,6 @@
-package ip.industrialProcessing.microBlock.extend.connectingSides;
+package mod.industrialProcessing.microBlock.extend.connectingSides;
 
-import ip.industrialProcessing.microBlock.IMicroBlock;
+import mod.industrialProcessing.microBlock.IMicroBlock;
 
 public interface IMicroBlockInterconnection extends IMicroBlock{
 	boolean[] getInterConnections(int side);

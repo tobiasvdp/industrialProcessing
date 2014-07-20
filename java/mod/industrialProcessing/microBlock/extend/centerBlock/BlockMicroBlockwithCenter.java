@@ -106,7 +106,7 @@ public abstract class BlockMicroBlockwithCenter extends BlockMicroBlock {
 		if (world.isRemote) {
 			MovingObjectPosition hit = rayTroughBlock(world, x, y, z, player);
 			if (hit != null) {
-				PacketDispatcher.sendPacketToServer(new PacketIP004RayTraceToServer(hit, 2).getCustom250Packet());
+				PacketDispatcher.sendPacketToServer(new RayTraceToServerPacket(hit, 2).getCustom250Packet());
 			}
 		}
 		return destroy;

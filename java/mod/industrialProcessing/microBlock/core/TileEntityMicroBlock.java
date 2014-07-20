@@ -1,11 +1,10 @@
-package ip.industrialProcessing.microBlock.core;
-
-import ip.industrialProcessing.items.ItemMicroBlock;
-import ip.industrialProcessing.microBlock.IMicroBlock;
-import ip.industrialProcessing.microBlock.MicroBlockType;
+package mod.industrialProcessing.microBlock.core;
 
 import java.util.Arrays;
 
+import mod.industrialProcessing.items.ItemMicroBlock;
+import mod.industrialProcessing.microBlock.IMicroBlock;
+import mod.industrialProcessing.microBlock.MicroBlockType;
 import net.minecraft.dispenser.IPosition;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;

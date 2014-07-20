@@ -1,24 +1,25 @@
-package ip.industrialProcessing.microBlock.rendering;
-
-import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
-import ip.industrialProcessing.microBlock.extend.connectionCorners.IMicroBlockConnectionCorner;
-import ip.industrialProcessing.utils.registry.MicroBlockIconRegistry;
-import ip.industrialProcessing.utils.registry.MicroBlockModel;
-import ip.industrialProcessing.utils.registry.MicroBlockModelRegistry;
+package mod.industrialProcessing.microBlock.rendering;
 
 import javax.swing.Icon;
+
+import net.minecraft.util.IIcon;
+import mod.industrialProcessing.client.rendering.block.obj.wavefront.WorldReference;
+import mod.industrialProcessing.microBlock.extend.connectionCorners.IMicroBlockConnectionCorner;
+import mod.industrialProcessing.utils.registry.MicroBlockIconRegistry;
+import mod.industrialProcessing.utils.registry.MicroBlockModel;
+import mod.industrialProcessing.utils.registry.MicroBlockModelRegistry;
 
 public class RenderConnectionsMicroblock {
 
 	public static void renderMicroBlockParts(WorldReference reference) {
-		IMicroBlockConnectionCorner microBlock = (IMicroBlockConnectionCorner) reference.world.getBlockTileEntity(reference.x, reference.y, reference.z);
+		IMicroBlockConnectionCorner microBlock = (IMicroBlockConnectionCorner) reference.world.getTileEntity(reference.x, reference.y, reference.z);
 		renderMicroblock(reference, microBlock);
 	}
 
 	private static void renderMicroblock(WorldReference reference, IMicroBlockConnectionCorner microBlock) {
 		int[] sides = microBlock.getSides();
 		String iconName = "";
-		Icon icon = null;
+		IIcon icon = null;
 		for (int i = 0; i < sides.length; i++) {
 			if (sides[i] != -1) {
 				MicroBlockModel model = MicroBlockModelRegistry.getModel(sides[i]);

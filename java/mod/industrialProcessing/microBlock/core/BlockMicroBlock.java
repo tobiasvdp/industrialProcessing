@@ -8,6 +8,7 @@ import mod.industrialProcessing.blockContainer.BlockContainerIPRendered;
 import mod.industrialProcessing.items.ItemMicroBlock;
 import mod.industrialProcessing.microBlock.IMicroBlock;
 import mod.industrialProcessing.microBlock.MicroBlockType;
+import mod.industrialProcessing.utils.registry.MicroBlockRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -34,9 +35,10 @@ public abstract class BlockMicroBlock extends BlockContainerIPRendered {
 	}
 
 	@Override
-	public boolean addBlockDestroyEffects(World world, int x, int y, int z, int meta, EffectRenderer effectRenderer) {
+	public boolean addDestroyEffects(World world, int x, int y, int z, int meta, EffectRenderer effectRenderer) {
 		return true;
 	}
+	
 
 	@Override
 	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
@@ -46,7 +48,7 @@ public abstract class BlockMicroBlock extends BlockContainerIPRendered {
 		if (par1World.isRemote) {
 			MovingObjectPosition hit = rayTroughBlock(par1World, par2, par3, par4, par5EntityPlayer);
 			if (hit != null) {
-				PacketDispatcher.sendPacketToServer(new PacketIP004RayTraceToServer(hit, 1).getCustom250Packet());
+				PacketDispatcher.sendPacketToServer(new RayTraceToServerPacket(hit, 1).getCustom250Packet());
 			}
 		}
 		return true;
@@ -69,7 +71,7 @@ public abstract class BlockMicroBlock extends BlockContainerIPRendered {
 		if (par1World.isRemote) {
 			MovingObjectPosition hit = rayTroughBlock(par1World, par2, par3, par4, par5EntityPlayer);
 			if (hit != null) {
-				PacketDispatcher.sendPacketToServer(new PacketIP004RayTraceToServer(hit, 0).getCustom250Packet());
+				PacketDispatcher.sendPacketToServer(new RayTraceToServerPacket(hit, 0).getCustom250Packet());
 			}
 		}
 	}
@@ -105,9 +107,9 @@ public abstract class BlockMicroBlock extends BlockContainerIPRendered {
 		if (hitType == 2) {
 			Minecraft.getMinecraft().playerController.onPlayerDestroyBlock(blockX, blockY, blockZ, 0);
 			if (player.capabilities.isCreativeMode)
-				player.worldObj.destroyBlock(blockX, blockY, blockZ, false);
+				player.worldObj.func_147480_a(blockX, blockY, blockZ, false);
 			else
-				player.worldObj.destroyBlock(blockX, blockY, blockZ, true);
+				player.worldObj.func_147480_a(blockX, blockY, blockZ, true);
 		}
 	}
 
@@ -204,7 +206,7 @@ public abstract class BlockMicroBlock extends BlockContainerIPRendered {
 			Vec3 vec3 = getPositionEntity(1.0f, entity);
 			Vec3 vec31 = getLookEntity(1.0f, entity);
 			Vec3 vec32 = vec3.addVector(vec31.xCoord * reach, vec31.yCoord * reach, vec31.zCoord * reach);
-			MovingObjectPosition hit = world.clip(vec3, vec32);
+			MovingObjectPosition hit = world.rayTraceBlocks(vec3, vec32);
 
 			MicroBlockRegistry.setBounds(true);
 			
@@ -246,16 +248,17 @@ public abstract class BlockMicroBlock extends BlockContainerIPRendered {
 	}
 
 	@Override
-	public boolean removeBlockByPlayer(World world, EntityPlayer player, int x, int y, int z) {
+	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z) {
 		boolean destroy = false;
 		if (world.isRemote) {
 			MovingObjectPosition hit = rayTroughBlock(world, x, y, z, player);
 			if (hit != null) {
-				PacketDispatcher.sendPacketToServer(new PacketIP004RayTraceToServer(hit, 2).getCustom250Packet());
+				PacketDispatcher.sendPacketToServer(new RayTraceToServerPacket(hit, 2).getCustom250Packet());
 			}
 		}
 		return destroy;
 	}
+
 
 	public abstract MicroBlockType getMicroBlockType();
 
@@ -280,7 +283,7 @@ public abstract class BlockMicroBlock extends BlockContainerIPRendered {
 	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
 		if (isDestroying) {
 			isDestroying = false;
-			PacketDispatcher.sendPacketToAllPlayers(new PacketIP002SendMicroBlockDestructionChange(this.blockID, isDestroying).getCustom250Packet());
+			PacketDispatcher.sendPacketToAllPlayers(new SendMicroBlockDestructionChangePacket(this.blockID, isDestroying).getCustom250Packet());
 		}
 		super.updateTick(par1World, par2, par3, par4, par5Random);
 	}

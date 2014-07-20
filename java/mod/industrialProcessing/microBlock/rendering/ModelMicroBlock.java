@@ -1,7 +1,7 @@
-package ip.industrialProcessing.microBlock.rendering;
+package mod.industrialProcessing.microBlock.rendering;
 
-import ip.industrialProcessing.api.rendering.wavefront.WorldReference;
-import ip.industrialProcessing.client.render.ModelBlock;
+import mod.industrialProcessing.client.rendering.block.ModelBlock;
+import mod.industrialProcessing.client.rendering.block.obj.wavefront.WorldReference;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 

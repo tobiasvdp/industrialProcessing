@@ -1,6 +1,6 @@
-package ip.industrialProcessing.microBlock.extend.externalConnections;
+package mod.industrialProcessing.microBlock.extend.externalConnections;
 
-import ip.industrialProcessing.microBlock.IMicroBlock;
+import mod.industrialProcessing.microBlock.IMicroBlock;
 
 public interface IMicroBlockExternalConnection  extends IMicroBlock{
 	boolean[] getExternalConnections(int side);
