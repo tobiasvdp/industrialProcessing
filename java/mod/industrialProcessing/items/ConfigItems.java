@@ -5,7 +5,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import mod.industrialProcessing.IndustrialProcessing;
+import mod.industrialProcessing.logic.wire.cable.model.ModelCable;
 import mod.industrialProcessing.utils.registry.ItemRegistry;
+import mod.industrialProcessing.utils.registry.MicroBlockRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ConfigItems {
@@ -136,6 +138,10 @@ public class ConfigItems {
 		ItemRegistry.registerItem(ISetupItems.itemWoodenBucket,"IP.item.woodenBucket");
 		ItemRegistry.registerItem(ISetupItems.itemWoodenBucketWater,"IP.item.woodenBucketWater");
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.WATER, new ItemStack(IndustrialProcessing.itemWoodenBucketWater), new ItemStack(IndustrialProcessing.itemWoodenBucket));
+		
+		ItemRegistry.registerItem(ISetupItems.itemCable,"IP.micro.cable");
+
+		MicroBlockRegistry.registerMicroBlock(ISetupItems.itemTest,"IP.micro.test", new ModelCable());
 		
 		
 	}

@@ -1,40 +1,49 @@
 package mod.industrialProcessing.utils.handlers.packet.packets;
 
-import ip.industrialProcessing.utils.handler.packets.PacketHandler;
+import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelHandlerContext;
+import mod.industrialProcessing.microBlock.core.BlockMicroBlock;
+import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 
-import java.io.DataInput;
-import java.io.DataOutput;
-import java.io.IOException;
+public class SendMicroBlockDestructionChangePacket extends PacketIP {
 
-public class SendMicroBlockDestructionChangePacket extends PacketIP000 {
-	
 	boolean isDestroying;
 	int blockID;
 
 	public SendMicroBlockDestructionChangePacket() {
-		super(PacketHandler.IP_MICROBLOCKS_DESTROYING);
 	}
-	
-	public SendMicroBlockDestructionChangePacket(int blockID,boolean isDestroying) {
-		super(PacketHandler.IP_MICROBLOCKS_DESTROYING);
+
+	public SendMicroBlockDestructionChangePacket(Block block, boolean isDestroying) {
 		this.isDestroying = isDestroying;
-		this.blockID = blockID;
+		this.blockID = Block.getIdFromBlock(block);
 	}
 
 	@Override
-	protected void writePacketData(DataOutput dataoutput) throws IOException {
+	public void encodeInto(ChannelHandlerContext ctx, ByteBuf dataoutput) {
 		dataoutput.writeBoolean(isDestroying);
 		dataoutput.writeInt(blockID);
 	}
 
 	@Override
-	protected void readPacketData(DataInput datainput) throws IOException {
+	public void decodeInto(ChannelHandlerContext ctx, ByteBuf datainput) {
 		isDestroying = datainput.readBoolean();
 		blockID = datainput.readInt();
 	}
-	
-    public static SendMicroBlockDestructionChangePacket getPacketFromCustom250packet(Packet250CustomPayload packet) {
-	return (SendMicroBlockDestructionChangePacket) PacketIP000.getPacketFromCustom250packet(new SendMicroBlockDestructionChangePacket(), packet);
-    }
+
+	@Override
+	public void handleClientSide(EntityPlayer player) {
+		World world = ((Entity) player).worldObj;
+		if (world != null && world.isRemote) {
+			BlockMicroBlock.isDestroying = isDestroying;
+		}
+	}
+
+	@Override
+	public void handleServerSide(EntityPlayer player) {
+
+	}
 
 }

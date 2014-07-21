@@ -1,8 +1,10 @@
 package mod.industrialProcessing.items;
 
+import mod.industrialProcessing.IndustrialProcessing;
 import mod.industrialProcessing.block.ISetupBlocks;
 import mod.industrialProcessing.microBlock.MicroBlockType;
 import mod.industrialProcessing.microBlock.core.BlockMicroBlock;
+import mod.industrialProcessing.utils.registry.MicroBlockRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,16 +15,15 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class ItemMicroBlock extends ItemIP {
 
 	public int microblock;
-	public MicroBlockType type;
-	public int level;
-	public String tileEntity;
-
-	public ItemMicroBlock(int microblock, MicroBlockType type, String tileEntity,int level) {
+	public Class tileEntity;
+	
+	public ItemMicroBlock(Class tileEntity) {
 		super();
-		this.microblock = microblock;
-		this.type = type;
-		this.level = level;
 		this.tileEntity = tileEntity;
+	}
+	
+	public void setMicroblockID(int id){
+		microblock = id;
 	}
 
 	@Override
@@ -30,9 +31,9 @@ public class ItemMicroBlock extends ItemIP {
 
 		ForgeDirection dir = BlockMicroBlock.sideToForge(par7);
 		if (canPlaceBlockAt(par3World, par4 + dir.offsetX, par5 + dir.offsetY, par6 + dir.offsetZ)) {
-			par3World.setBlock(par4 + dir.offsetX, par5 + dir.offsetY, par6 + dir.offsetZ, ISetupBlocks.microBlock);
+			par3World.setBlock(par4 + dir.offsetX, par5 + dir.offsetY, par6 + dir.offsetZ, IndustrialProcessing.microBlock);
 			par3World.setBlockMetadataWithNotify(par4 + dir.offsetX, par5 + dir.offsetY, par6 + dir.offsetZ, BlockMicroBlock.invertSide(par7), 0);
-			ISetupBlocks.microBlock.onBlockPlacedBy(par3World, par4 + dir.offsetX, par5 + dir.offsetY, par6 + dir.offsetZ, par2EntityPlayer, par1ItemStack);
+			IndustrialProcessing.microBlock.onBlockPlacedBy(par3World, par4 + dir.offsetX, par5 + dir.offsetY, par6 + dir.offsetZ, par2EntityPlayer, par1ItemStack);
 		}
 		return super.onItemUse(par1ItemStack, par2EntityPlayer, par3World, par4, par5, par6, par7, par8, par9, par10);
 	}
@@ -52,7 +53,7 @@ public class ItemMicroBlock extends ItemIP {
 	}
 
 	public String getTileEntityName() {
-		return tileEntity;
+		return tileEntity.getName();
 	}
 
 }

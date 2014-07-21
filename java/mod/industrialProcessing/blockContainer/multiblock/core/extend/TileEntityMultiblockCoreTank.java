@@ -491,6 +491,10 @@ public abstract class TileEntityMultiblockCoreTank extends TileEntityMultiblockC
 	
 	@Override
 	public FluidStack getFluidStackInSlot(int slot) {
+		return getFluidStackInSlot(0,slot);
+	}
+
+	public FluidStack getFluidStackInSlot(int group, int slot) {
 		return fluidTanks.get(slot).getFluid();
 	}
 }

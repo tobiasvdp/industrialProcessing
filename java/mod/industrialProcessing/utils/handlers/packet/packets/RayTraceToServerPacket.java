@@ -1,13 +1,17 @@
 package mod.industrialProcessing.utils.handlers.packet.packets;
 
-import ip.industrialProcessing.utils.handler.packets.PacketHandler;
-
-import java.io.DataInput;
-import java.io.DataOutput;
-import java.io.IOException;
-
+import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelHandlerContext;
+import mod.industrialProcessing.IndustrialProcessing;
+import mod.industrialProcessing.utils.handlers.numbers.IStateConfig;
+import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.util.Vec3;
+import net.minecraft.world.World;
 
 public class RayTraceToServerPacket extends PacketIP {
 
@@ -16,17 +20,15 @@ public class RayTraceToServerPacket extends PacketIP {
 	MovingObjectPosition hit;
 
 	public RayTraceToServerPacket() {
-		super(PacketHandler.IP_RAY_TRACE);
 	}
 
 	public RayTraceToServerPacket(MovingObjectPosition hit, int hitType) {
-		super(PacketHandler.IP_RAY_TRACE);
 		this.hitType = hitType;
 		this.hit = hit;
 	}
-
+	
 	@Override
-	protected void writePacketData(DataOutput dataoutput) throws IOException {
+	public void encodeInto(ChannelHandlerContext ctx, ByteBuf dataoutput) {
 		dataoutput.writeInt(hitType);
 		dataoutput.writeInt(hit.blockX);
 		dataoutput.writeInt(hit.blockY);
@@ -34,7 +36,7 @@ public class RayTraceToServerPacket extends PacketIP {
 		dataoutput.writeInt(hit.sideHit);
 		dataoutput.writeInt(hit.subHit);
 		if (hit.entityHit != null)
-			dataoutput.writeInt(hit.entityHit.entityId);
+			dataoutput.writeInt(hit.entityHit.getEntityId());
 		else
 			dataoutput.writeInt(-1);
 		dataoutput.writeInt(hit.typeOfHit.ordinal());
@@ -44,7 +46,7 @@ public class RayTraceToServerPacket extends PacketIP {
 	}
 
 	@Override
-	protected void readPacketData(DataInput datainput) throws IOException {
+	public void decodeInto(ChannelHandlerContext ctx, ByteBuf datainput) {
 		hitType = datainput.readInt();
 		int blockX = datainput.readInt();
 		int blockY = datainput.readInt();
@@ -52,15 +54,24 @@ public class RayTraceToServerPacket extends PacketIP {
 		int sideHit = datainput.readInt();
 		int subHit = datainput.readInt();
 		entityID = datainput.readInt();
-		EnumMovingObjectType typeOfHit = EnumMovingObjectType.values()[datainput.readInt()];
+		MovingObjectType typeOfHit = MovingObjectType.values()[datainput.readInt()];
 		Vec3 hitVec = Vec3.createVectorHelper(datainput.readDouble(), datainput.readDouble(), datainput.readDouble());
 		hit = new MovingObjectPosition(blockX, blockY, blockZ, sideHit, hitVec);
 		hit.subHit = subHit;
 		hit.typeOfHit = typeOfHit;
 	}
 
-	public static RayTraceToServerPacket getPacketFromCustom250packet(Packet250CustomPayload packet) {
-		return (RayTraceToServerPacket) PacketIP000.getPacketFromCustom250packet(new RayTraceToServerPacket(), packet);
+	@Override
+	public void handleClientSide(EntityPlayer player) {
+
+	}
+
+	@Override
+	public void handleServerSide(EntityPlayer player) {
+		World world = ((Entity) player).worldObj;
+		if (world != null && !world.isRemote) {
+			IndustrialProcessing.microBlock.handleSideBlock(world, (EntityPlayer) player, hit, hitType);
+		}
 	}
 
 }

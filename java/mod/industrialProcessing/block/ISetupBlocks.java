@@ -54,7 +54,6 @@ public interface ISetupBlocks {
 	public final static BlockAnvil blockAnvil = new BlockAnvil();
 	
 	public final static Blocktransparent blocktransparent = new Blocktransparent();
-	public final static MicroBlock microBlock = new MicroBlock();
 	
 	// TODO public final static BlockMachineBlock blockMachineBlock = new
 	// BlockMachineBlock();

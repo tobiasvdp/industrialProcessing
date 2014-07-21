@@ -22,6 +22,8 @@ import mod.industrialProcessing.utils.handlers.heat.HeatHandler;
 import mod.industrialProcessing.utils.handlers.line.OldLineHandler;
 import mod.industrialProcessing.utils.handlers.packet.PacketHandler;
 import mod.industrialProcessing.utils.handlers.packet.packets.ConveyorPacket;
+import mod.industrialProcessing.utils.handlers.packet.packets.RayTraceToServerPacket;
+import mod.industrialProcessing.utils.handlers.packet.packets.SendMicroBlockDestructionChangePacket;
 import mod.industrialProcessing.utils.handlers.packet.packets.StateConfigPacket;
 import mod.industrialProcessing.utils.handlers.packet.packets.SyncAnimationPacket;
 import mod.industrialProcessing.utils.handlers.packet.packets.SyncValuesPacket;
@@ -119,6 +121,8 @@ public class IndustrialProcessing implements INamepace, ISetupCreativeTabs, ISet
 		PacketHandler.getInstance().registerPacket(ConveyorPacket.class);
 		PacketHandler.getInstance().registerPacket(StateConfigPacket.class);
 		PacketHandler.getInstance().registerPacket(SyncValuesPacket.class);
+		PacketHandler.getInstance().registerPacket(SendMicroBlockDestructionChangePacket.class);
+		PacketHandler.getInstance().registerPacket(RayTraceToServerPacket.class);
 		//PacketHandler.getInstance().register();
 		
 		FMLCommonHandler.instance().bus().register(new CraftingHandler());

@@ -2,6 +2,9 @@ package mod.industrialProcessing.items;
 
 import mod.industrialProcessing.IndustrialProcessing;
 import mod.industrialProcessing.items.guide.ItemGuide;
+import mod.industrialProcessing.logic.wire.cable.TileEntityCable;
+import mod.industrialProcessing.microBlock.MicroBlockType;
+import mod.industrialProcessing.microBlock.test.TileEntityTestMicroblock;
 import net.minecraft.init.Blocks;
 
 public interface ISetupItems {
@@ -208,4 +211,7 @@ public interface ISetupItems {
 	
 	public final static ItemWoodenBucket itemWoodenBucket = (ItemWoodenBucket) new ItemWoodenBucket(null);
 	public final static ItemWoodenBucketFilled itemWoodenBucketWater = new ItemWoodenBucketFilled(Blocks.water);
+	
+	public final static ItemMicroBlock itemCable = new ItemMicroBlock(TileEntityCable.class);
+	public final static ItemMicroBlock itemTest = new ItemMicroBlock(TileEntityTestMicroblock.class);
 }

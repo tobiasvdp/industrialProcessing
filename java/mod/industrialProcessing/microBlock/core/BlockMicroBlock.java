@@ -8,6 +8,9 @@ import mod.industrialProcessing.blockContainer.BlockContainerIPRendered;
 import mod.industrialProcessing.items.ItemMicroBlock;
 import mod.industrialProcessing.microBlock.IMicroBlock;
 import mod.industrialProcessing.microBlock.MicroBlockType;
+import mod.industrialProcessing.utils.handlers.packet.PacketHandler;
+import mod.industrialProcessing.utils.handlers.packet.packets.RayTraceToServerPacket;
+import mod.industrialProcessing.utils.handlers.packet.packets.SendMicroBlockDestructionChangePacket;
 import mod.industrialProcessing.utils.registry.MicroBlockRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -48,7 +51,7 @@ public abstract class BlockMicroBlock extends BlockContainerIPRendered {
 		if (par1World.isRemote) {
 			MovingObjectPosition hit = rayTroughBlock(par1World, par2, par3, par4, par5EntityPlayer);
 			if (hit != null) {
-				PacketDispatcher.sendPacketToServer(new RayTraceToServerPacket(hit, 1).getCustom250Packet());
+				PacketHandler.getInstance().sendToServer(new RayTraceToServerPacket(hit, 1));
 			}
 		}
 		return true;
@@ -71,7 +74,7 @@ public abstract class BlockMicroBlock extends BlockContainerIPRendered {
 		if (par1World.isRemote) {
 			MovingObjectPosition hit = rayTroughBlock(par1World, par2, par3, par4, par5EntityPlayer);
 			if (hit != null) {
-				PacketDispatcher.sendPacketToServer(new RayTraceToServerPacket(hit, 0).getCustom250Packet());
+				PacketHandler.getInstance().sendToServer(new RayTraceToServerPacket(hit, 0));
 			}
 		}
 	}
@@ -253,7 +256,7 @@ public abstract class BlockMicroBlock extends BlockContainerIPRendered {
 		if (world.isRemote) {
 			MovingObjectPosition hit = rayTroughBlock(world, x, y, z, player);
 			if (hit != null) {
-				PacketDispatcher.sendPacketToServer(new RayTraceToServerPacket(hit, 2).getCustom250Packet());
+				PacketHandler.getInstance().sendToServer(new RayTraceToServerPacket(hit, 2));
 			}
 		}
 		return destroy;
@@ -283,7 +286,7 @@ public abstract class BlockMicroBlock extends BlockContainerIPRendered {
 	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
 		if (isDestroying) {
 			isDestroying = false;
-			PacketDispatcher.sendPacketToAllPlayers(new SendMicroBlockDestructionChangePacket(this.blockID, isDestroying).getCustom250Packet());
+			PacketHandler.getInstance().sendToAll(new SendMicroBlockDestructionChangePacket(this, isDestroying));
 		}
 		super.updateTick(par1World, par2, par3, par4, par5Random);
 	}

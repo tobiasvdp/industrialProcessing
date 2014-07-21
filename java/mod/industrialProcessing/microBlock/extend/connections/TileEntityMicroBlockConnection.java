@@ -1,11 +1,11 @@
-package ip.industrialProcessing.microBlock.extend.connections;
+package mod.industrialProcessing.microBlock.extend.connections;
 
-import ip.industrialProcessing.items.ItemMicroBlock;
-import ip.industrialProcessing.microBlock.IMicroBlock;
-import ip.industrialProcessing.microBlock.MicroBlockType;
-import ip.industrialProcessing.microBlock.core.BlockMicroBlock;
-import ip.industrialProcessing.microBlock.core.TileEntityMicroBlock;
-import ip.industrialProcessing.microBlock.extend.externalConnections.IMicroBlockExternalConnection;
+import mod.industrialProcessing.items.ItemMicroBlock;
+import mod.industrialProcessing.microBlock.IMicroBlock;
+import mod.industrialProcessing.microBlock.MicroBlockType;
+import mod.industrialProcessing.microBlock.core.BlockMicroBlock;
+import mod.industrialProcessing.microBlock.core.TileEntityMicroBlock;
+import mod.industrialProcessing.microBlock.extend.externalConnections.IMicroBlockExternalConnection;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -31,11 +31,11 @@ public abstract class TileEntityMicroBlockConnection extends TileEntityMicroBloc
 	}
 
 	@Override
-	public void setSide(ForgeDirection dir, ItemMicroBlock itemMicroBlock,EntityPlayer player) {
-		super.setSide(dir, itemMicroBlock,player);
+	public void setSide(ForgeDirection dir, ItemMicroBlock itemMicroBlock, EntityPlayer player) {
+		super.setSide(dir, itemMicroBlock, player);
 		updateSideConnections();
 		updateExtConnections();
-		onPostSideSet(dir,itemMicroBlock);
+		onPostSideSet(dir, itemMicroBlock);
 		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
@@ -60,11 +60,11 @@ public abstract class TileEntityMicroBlockConnection extends TileEntityMicroBloc
 		System.out.println("trigger recheck external");
 		for (int i = 0; i < 6; i++) {
 			ForgeDirection dir = ForgeDirection.values()[i];
-			int id = worldObj.getBlockId(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
-			if (id != 0) {
-				if (Block.blocksList[id] instanceof BlockMicroBlock) {
-					if (this.getBlockType() != null && isValidMicroBlockType(((BlockMicroBlock) Block.blocksList[id]).getMicroBlockType(),((BlockMicroBlock) this.getBlockType()).getMicroBlockType()))
-						setExternalConnectionForSide(i, (IMicroBlock) this.worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ), true);
+			Block block = worldObj.getBlock(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+			if (block != null) {
+				if (block instanceof BlockMicroBlock) {
+					if (this.getBlockType() != null && isValidMicroBlockType(((BlockMicroBlock) block).getMicroBlockType(), ((BlockMicroBlock) this.getBlockType()).getMicroBlockType()))
+						setExternalConnectionForSide(i, (IMicroBlock) this.worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ), true);
 				} else {
 					setExternalConnectionForSide(i, null, true);
 				}
@@ -74,7 +74,7 @@ public abstract class TileEntityMicroBlockConnection extends TileEntityMicroBloc
 		}
 	}
 
-	public boolean isValidMicroBlockType(MicroBlockType other, MicroBlockType me){
+	public boolean isValidMicroBlockType(MicroBlockType other, MicroBlockType me) {
 		return true;
 	}
 
@@ -171,7 +171,7 @@ public abstract class TileEntityMicroBlockConnection extends TileEntityMicroBloc
 	@Override
 	public void updateConnections(int i) {
 		ForgeDirection dir = ForgeDirection.values()[i];
-		TileEntity te = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+		TileEntity te = worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
 		if (te != null && te instanceof IMicroBlock)
 			setExternalConnectionForSide(i, (IMicroBlock) te, false);
 		else
@@ -214,7 +214,7 @@ public abstract class TileEntityMicroBlockConnection extends TileEntityMicroBloc
 
 		return ForgeDirection.UNKNOWN;
 	}
-	
+
 	@Override
 	public void refresh() {
 		super.refresh();
@@ -223,4 +223,3 @@ public abstract class TileEntityMicroBlockConnection extends TileEntityMicroBloc
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 }
-

@@ -1,5 +1,6 @@
 package mod.industrialProcessing.blockContainer;
 
+import mod.industrialProcessing.microBlock.MicroBlock;
 import mod.industrialProcessing.plants.blackSmith.bloomery.BlockBloomery;
 import mod.industrialProcessing.plants.blackSmith.bloomery.dummy.bellows.BlockBellows;
 import mod.industrialProcessing.plants.blackSmith.bloomery.dummy.ironBowl.BlockIronBowl;
@@ -126,6 +127,8 @@ public interface ISetupBlockContainers {
     public final static BlockAssembler blockAssembler = new BlockAssembler();
     public final static BlockMachineFrame blockMachineFrame = new BlockMachineFrame();
     public final static BlockIOPort blockIOPort = new BlockIOPort();
+    
+    public final static MicroBlock microBlock = new MicroBlock();
     
     /* machines 
     public final static BlockMagneticSeparator blockMageneticSeparator = new BlockMagneticSeparator(); 

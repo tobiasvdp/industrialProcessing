@@ -1,6 +1,8 @@
 package mod.industrialProcessing.blockContainer;
 
 import mod.industrialProcessing.IndustrialProcessing;
+import mod.industrialProcessing.microBlock.core.TileEntityMicroBlock;
+import mod.industrialProcessing.microBlock.rendering.ModelMicroBlock;
 import mod.industrialProcessing.plants.blackSmith.bloomery.TileEntityBloomery;
 import mod.industrialProcessing.plants.blackSmith.bloomery.dummy.bellows.TileEntityBellows;
 import mod.industrialProcessing.plants.blackSmith.bloomery.dummy.bellows.model.ModelBellows;
@@ -201,6 +203,8 @@ public class ConfigBlockContainers {
 		BlockRegistry.registerMachine(IndustrialProcessing.blockAssembler, TileEntityAssembler.class, "IP.crafting.assembler");
 		BlockRegistry.registerMachine(IndustrialProcessing.blockMachineFrame, TileEntityMachineFrame.class, "IP.dummy.machineFrame");
 		BlockRegistry.registerMachine(IndustrialProcessing.blockIOPort, TileEntityIOPort.class, "IP.dummy.ioPort");
+		
+		BlockRegistry.registerMachine(IndustrialProcessing.microBlock, TileEntityMicroBlock.class, "IP.micro.block", new ModelMicroBlock());
 
 		/*
 		 * 
