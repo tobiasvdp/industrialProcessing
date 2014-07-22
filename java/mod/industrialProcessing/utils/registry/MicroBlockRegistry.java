@@ -6,7 +6,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import mod.industrialProcessing.IndustrialProcessing;
 import mod.industrialProcessing.items.ISetupItems;
 import mod.industrialProcessing.items.ItemMicroBlock;
-import mod.industrialProcessing.logic.wire.cable.model.ModelCable;
+import mod.industrialProcessing.plants.logic.wire.cable.model.ModelCable;
 import net.minecraft.item.Item;
 
 public class MicroBlockRegistry {

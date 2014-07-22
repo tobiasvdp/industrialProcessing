@@ -1,10 +1,10 @@
 package mod.industrialProcessing.items;
 
 import mod.industrialProcessing.IndustrialProcessing;
+import mod.industrialProcessing.blockContainer.microblock.MicroBlockType;
+import mod.industrialProcessing.blockContainer.microblock.test.TileEntityTestMicroblock;
 import mod.industrialProcessing.items.guide.ItemGuide;
-import mod.industrialProcessing.logic.wire.cable.TileEntityCable;
-import mod.industrialProcessing.microBlock.MicroBlockType;
-import mod.industrialProcessing.microBlock.test.TileEntityTestMicroblock;
+import mod.industrialProcessing.plants.logic.wire.cable.TileEntityCable;
 import net.minecraft.init.Blocks;
 
 public interface ISetupItems {

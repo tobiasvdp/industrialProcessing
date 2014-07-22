@@ -3,6 +3,7 @@ package mod.industrialProcessing.utils.registry;
 import java.util.HashMap;
 
 import mod.industrialProcessing.client.rendering.block.obj.wavefront.ObjMesh;
+import mod.industrialProcessing.utils.MicroBlockModel;
 
 public class MicroBlockModelRegistry {
 	private static HashMap<Integer, MicroBlockModel> models = new HashMap<Integer, MicroBlockModel>();

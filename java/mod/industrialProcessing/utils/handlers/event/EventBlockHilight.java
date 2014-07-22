@@ -1,8 +1,8 @@
 package mod.industrialProcessing.utils.handlers.event;
 
-import mod.industrialProcessing.microBlock.IMicroBlock;
-import mod.industrialProcessing.microBlock.core.BlockMicroBlock;
-import mod.industrialProcessing.microBlock.extend.centerBlock.BlockMicroBlockwithCenter;
+import mod.industrialProcessing.blockContainer.microblock.IMicroBlock;
+import mod.industrialProcessing.blockContainer.microblock.core.BlockMicroBlock;
+import mod.industrialProcessing.blockContainer.microblock.extend.centerBlock.BlockMicroBlockwithCenter;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;

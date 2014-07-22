@@ -7,7 +7,7 @@ import java.util.Map.Entry;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import mod.industrialProcessing.items.ItemMicroBlock;
-import mod.industrialProcessing.logic.wire.cable.model.ModelCable;
+import mod.industrialProcessing.plants.logic.wire.cable.model.ModelCable;
 import mod.industrialProcessing.utils.INamepace;
 import mod.industrialProcessing.utils.creativeTab.ISetupCreativeTabs;
 import net.minecraft.creativetab.CreativeTabs;

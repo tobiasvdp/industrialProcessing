@@ -2,7 +2,7 @@ package mod.industrialProcessing.utils.handlers.packet.packets;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-import mod.industrialProcessing.microBlock.core.BlockMicroBlock;
+import mod.industrialProcessing.blockContainer.microblock.core.BlockMicroBlock;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;

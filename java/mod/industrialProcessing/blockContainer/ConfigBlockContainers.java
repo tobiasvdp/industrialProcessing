@@ -1,8 +1,8 @@
 package mod.industrialProcessing.blockContainer;
 
 import mod.industrialProcessing.IndustrialProcessing;
-import mod.industrialProcessing.microBlock.core.TileEntityMicroBlock;
-import mod.industrialProcessing.microBlock.rendering.ModelMicroBlock;
+import mod.industrialProcessing.blockContainer.microblock.core.TileEntityMicroBlock;
+import mod.industrialProcessing.blockContainer.microblock.rendering.ModelMicroBlock;
 import mod.industrialProcessing.plants.blackSmith.bloomery.TileEntityBloomery;
 import mod.industrialProcessing.plants.blackSmith.bloomery.dummy.bellows.TileEntityBellows;
 import mod.industrialProcessing.plants.blackSmith.bloomery.dummy.bellows.model.ModelBellows;

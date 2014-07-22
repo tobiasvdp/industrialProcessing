@@ -1,0 +1,8 @@
+package mod.industrialProcessing.blockContainer.microblock.extend.connections;
+
+import mod.industrialProcessing.blockContainer.microblock.extend.connectingSides.IMicroBlockInterconnection;
+import mod.industrialProcessing.blockContainer.microblock.extend.externalConnections.IMicroBlockExternalConnection;
+
+public interface IMicroBlockConnection extends IMicroBlockExternalConnection,IMicroBlockInterconnection{
+
+}

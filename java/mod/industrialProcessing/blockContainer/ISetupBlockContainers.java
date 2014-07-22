@@ -1,6 +1,6 @@
 package mod.industrialProcessing.blockContainer;
 
-import mod.industrialProcessing.microBlock.MicroBlock;
+import mod.industrialProcessing.blockContainer.microblock.MicroBlock;
 import mod.industrialProcessing.plants.blackSmith.bloomery.BlockBloomery;
 import mod.industrialProcessing.plants.blackSmith.bloomery.dummy.bellows.BlockBellows;
 import mod.industrialProcessing.plants.blackSmith.bloomery.dummy.ironBowl.BlockIronBowl;

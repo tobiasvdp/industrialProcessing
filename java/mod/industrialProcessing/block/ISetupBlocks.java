@@ -1,6 +1,5 @@
 package mod.industrialProcessing.block;
 
-import mod.industrialProcessing.microBlock.MicroBlock;
 import mod.industrialProcessing.IndustrialProcessing;
 import mod.industrialProcessing.block.crystals.BlockCrystal;
 import mod.industrialProcessing.block.doors.BlockDoor;
@@ -13,6 +12,7 @@ import mod.industrialProcessing.block.tree.BlockIndustrialLog;
 import mod.industrialProcessing.block.tree.BlockIndustrialSapling;
 import mod.industrialProcessing.block.tree.BlockPineLog;
 import mod.industrialProcessing.block.tree.BlockRubberLog;
+import mod.industrialProcessing.blockContainer.microblock.MicroBlock;
 import mod.industrialProcessing.blockContainer.multiblock.utils.Blocktransparent;
 import mod.industrialProcessing.plants.blackSmith.anvil.BlockAnvil;
 import mod.industrialProcessing.plants.construction.machineBlock.BlockMachineBlock;
