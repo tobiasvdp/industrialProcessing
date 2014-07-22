@@ -1,11 +1,10 @@
 package ip.industrialProcessing.microBlock.extend.centerBlock;
 
-import ip.industrialProcessing.microBlock.core.BlockMicroBlock;
-import ip.industrialProcessing.utils.packets.PacketIP004RayTraceToServer;
-import ip.industrialProcessing.utils.registry.MicroBlockRegistry;
-
 import java.util.List;
 
+import mod.industrialProcessing.microBlock.core.BlockMicroBlock;
+import mod.industrialProcessing.utils.handlers.packet.packets.RayTraceToServerPacket;
+import mod.industrialProcessing.utils.registry.MicroBlockRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -74,11 +73,11 @@ public abstract class BlockMicroBlockwithCenter extends BlockMicroBlock {
 
 	@Override
 	public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
-			AxisAlignedBB axisalignedbb1 = this.getCollisionBoundingBoxFromPool(par1World, par2, par3, par4);
+		AxisAlignedBB axisalignedbb1 = this.getCollisionBoundingBoxFromPool(par1World, par2, par3, par4);
 
-			if (axisalignedbb1 != null && par5AxisAlignedBB.intersectsWith(axisalignedbb1)) {
-				par6List.add(axisalignedbb1);
-			}
+		if (axisalignedbb1 != null && par5AxisAlignedBB.intersectsWith(axisalignedbb1)) {
+			par6List.add(axisalignedbb1);
+		}
 	}
 
 	@Override

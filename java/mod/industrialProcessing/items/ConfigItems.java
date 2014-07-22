@@ -6,6 +6,7 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import mod.industrialProcessing.IndustrialProcessing;
 import mod.industrialProcessing.logic.wire.cable.model.ModelCable;
+import mod.industrialProcessing.microBlock.test.TileEntityTestMicroblock;
 import mod.industrialProcessing.utils.registry.ItemRegistry;
 import mod.industrialProcessing.utils.registry.MicroBlockRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -141,7 +142,7 @@ public class ConfigItems {
 		
 		ItemRegistry.registerItem(ISetupItems.itemCable,"IP.micro.cable");
 
-		MicroBlockRegistry.registerMicroBlock(ISetupItems.itemTest,"IP.micro.test", new ModelCable());
+		MicroBlockRegistry.registerMicroBlock(ISetupItems.itemTest,"IP.micro.test",TileEntityTestMicroblock.class, new ModelCable());
 		
 		
 	}

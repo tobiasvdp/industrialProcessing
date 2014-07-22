@@ -15,6 +15,7 @@ import mod.industrialProcessing.utils.baseRecipes.ConfigBaseRecipes;
 import mod.industrialProcessing.utils.creativeTab.ISetupCreativeTabs;
 import mod.industrialProcessing.utils.damage.ISetupDamageSource;
 import mod.industrialProcessing.utils.handlers.crafting.CraftingHandler;
+import mod.industrialProcessing.utils.handlers.event.EventBlockHilight;
 import mod.industrialProcessing.utils.handlers.fluids.BucketHandler;
 import mod.industrialProcessing.utils.handlers.fuel.FuelHandler;
 import mod.industrialProcessing.utils.handlers.gui.GuiHandler;
@@ -126,6 +127,7 @@ public class IndustrialProcessing implements INamepace, ISetupCreativeTabs, ISet
 		//PacketHandler.getInstance().register();
 		
 		FMLCommonHandler.instance().bus().register(new CraftingHandler());
+		MinecraftForge.EVENT_BUS.register(new EventBlockHilight());
 	}
 
 	@EventHandler

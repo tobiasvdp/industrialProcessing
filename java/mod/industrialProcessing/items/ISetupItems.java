@@ -212,6 +212,6 @@ public interface ISetupItems {
 	public final static ItemWoodenBucket itemWoodenBucket = (ItemWoodenBucket) new ItemWoodenBucket(null);
 	public final static ItemWoodenBucketFilled itemWoodenBucketWater = new ItemWoodenBucketFilled(Blocks.water);
 	
-	public final static ItemMicroBlock itemCable = new ItemMicroBlock(TileEntityCable.class);
-	public final static ItemMicroBlock itemTest = new ItemMicroBlock(TileEntityTestMicroblock.class);
+	public final static ItemMicroBlock itemCable = new ItemMicroBlock();
+	public final static ItemMicroBlock itemTest = new ItemMicroBlock();
 }

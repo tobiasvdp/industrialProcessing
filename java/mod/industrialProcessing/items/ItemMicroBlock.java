@@ -15,11 +15,11 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class ItemMicroBlock extends ItemIP {
 
 	public int microblock;
-	public Class tileEntity;
+	public String tileEntity;
+	public int level = 1;
 	
-	public ItemMicroBlock(Class tileEntity) {
+	public ItemMicroBlock() {
 		super();
-		this.tileEntity = tileEntity;
 	}
 	
 	public void setMicroblockID(int id){
@@ -53,11 +53,15 @@ public class ItemMicroBlock extends ItemIP {
 	}
 
 	public String getTileEntityName() {
-		return tileEntity.getName();
+		return tileEntity;
 	}
 
 	public boolean isCompatible(ItemMicroBlock itemMicroBlock) {
 		return true;
+	}
+
+	public void setTileEntityName(String name) {
+		tileEntity = name;
 	}
 
 }

@@ -9,7 +9,7 @@ public interface IMicroBlock {
 	boolean isSideFree(int dir);
 	public int countSetSides();
 	void setSide(ForgeDirection dir, ItemMicroBlock itemMicroBlock, EntityPlayer player);
-	void unsetSide(ForgeDirection dir, EntityPlayer player);
+	boolean unsetSide(ForgeDirection dir, EntityPlayer player);
 	void refresh();
 	int[] getSides();
 }

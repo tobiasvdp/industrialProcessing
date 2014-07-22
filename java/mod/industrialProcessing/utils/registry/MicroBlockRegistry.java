@@ -2,6 +2,7 @@ package mod.industrialProcessing.utils.registry;
 
 import java.util.ArrayList;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import mod.industrialProcessing.IndustrialProcessing;
 import mod.industrialProcessing.items.ISetupItems;
 import mod.industrialProcessing.items.ItemMicroBlock;
@@ -24,9 +25,11 @@ public class MicroBlockRegistry {
 		}
 	}
 
-	public static void registerMicroBlock(ItemMicroBlock item, String name, ModelCable modelCable) {
+	public static void registerMicroBlock(ItemMicroBlock item, String name, Class tileEntityClass, ModelCable modelCable) {
 		int id = RegisterMicroBlock(item);
 		item.setMicroblockID(id);
+		item.setTileEntityName(name);
+		GameRegistry.registerTileEntity(tileEntityClass,name);
 		
 		int renderID = MicroBlockModelRegistry.getNextAvailableID();
 		modelCable.register(renderID);

@@ -205,6 +205,7 @@ public class ConfigBlockContainers {
 		BlockRegistry.registerMachine(IndustrialProcessing.blockIOPort, TileEntityIOPort.class, "IP.dummy.ioPort");
 		
 		BlockRegistry.registerMachine(IndustrialProcessing.microBlock, TileEntityMicroBlock.class, "IP.micro.block", new ModelMicroBlock());
+		
 
 		/*
 		 * 

@@ -24,6 +24,7 @@ public class TileEntityMicroBlock extends TileEntity implements IMicroBlock, IPo
 	protected int[] sidesMicroblockItemID = new int[6];
 	protected boolean hasCore = false;
 	protected boolean overrideSolidSide;
+	protected int tileEntityLevel = 0;
 
 	public TileEntityMicroBlock() {
 		Arrays.fill(sidesMicroblock, -1);
@@ -46,11 +47,23 @@ public class TileEntityMicroBlock extends TileEntity implements IMicroBlock, IPo
 	@Override
 	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
 		super.readFromNBT(par1nbtTagCompound);
+					
+		tileEntityLevel = par1nbtTagCompound.getInteger("tileEntityLevel");
 		sidesMicroblock = par1nbtTagCompound.getIntArray("sidesMicro");
 		sidesMicroblockItemID = par1nbtTagCompound.getIntArray("sidesMicroID");
 		if (sidesMicroblock.length == 0) {
 			sidesMicroblock = new int[6];
 			Arrays.fill(sidesMicroblock, -1);
+		}
+		
+		NBTTagCompound thisNBT = new NBTTagCompound();
+		this.writeToNBT(thisNBT);
+		if(!thisNBT.getString("id").equals(par1nbtTagCompound.getString("id"))){
+			thisNBT.setString("id", par1nbtTagCompound.getString("id"));
+			TileEntity te = TileEntity.createAndLoadEntity(thisNBT);
+			worldObj.setTileEntity(xCoord, yCoord, zCoord, te);
+			TileEntity newTe = worldObj.getTileEntity(xCoord, yCoord, zCoord);
+			((TileEntityMicroBlock) te).notifyOnCreation();
 		}
 
 	}
@@ -58,6 +71,7 @@ public class TileEntityMicroBlock extends TileEntity implements IMicroBlock, IPo
 	@Override
 	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
 		super.writeToNBT(par1nbtTagCompound);
+		par1nbtTagCompound.setInteger("tileEntityLevel", tileEntityLevel);
 		par1nbtTagCompound.setIntArray("sidesMicro", sidesMicroblock);
 		par1nbtTagCompound.setIntArray("sidesMicroID", sidesMicroblockItemID);
 	}
@@ -122,7 +136,6 @@ public class TileEntityMicroBlock extends TileEntity implements IMicroBlock, IPo
 	}
 
 	private void switchTileEntities() {
-		/*
 		int level = -1;
 		for (int i = 0; i < 6; i++) {
 			if (sidesMicroblockItemID[i] != -1) {
@@ -132,7 +145,7 @@ public class TileEntityMicroBlock extends TileEntity implements IMicroBlock, IPo
 				}
 			}
 		}
-		if (level > this.tileEntityLevel) {
+		if (level > this.tileEntityLevel ) {
 			TileEntity te = null;
 			int i = 0;
 			while (te == null) {
@@ -145,13 +158,14 @@ public class TileEntityMicroBlock extends TileEntity implements IMicroBlock, IPo
 							nbtTag.setString("id", ((ItemMicroBlock) item).getTileEntityName());
 							te = TileEntity.createAndLoadEntity(nbtTag);
 							worldObj.setTileEntity(xCoord, yCoord, zCoord, te);
+							TileEntity newTe = worldObj.getTileEntity(xCoord, yCoord, zCoord);
 							((TileEntityMicroBlock) te).notifyOnCreation();
 						}
 					}
 				}
 				i++;
 			}
-		}*/
+		}
 	}
 
 	protected void notifyOnCreation() {
@@ -163,7 +177,7 @@ public class TileEntityMicroBlock extends TileEntity implements IMicroBlock, IPo
 	}
 
 	@Override
-	public void unsetSide(ForgeDirection dir, EntityPlayer player) {
+	public boolean unsetSide(ForgeDirection dir, EntityPlayer player) {
 		if (player == null || !player.capabilities.isCreativeMode)
 			doDispense(this.worldObj, new ItemStack(Item.getItemById(sidesMicroblockItemID[dir.ordinal()]), 1, 0), 1, EnumFacing.values()[dir.getOpposite().ordinal()], this);
 		sidesMicroblock[dir.ordinal()] = -1;
@@ -175,7 +189,9 @@ public class TileEntityMicroBlock extends TileEntity implements IMicroBlock, IPo
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		if (!hasCore && countSetSides() == 0) {
 			worldObj.func_147480_a(xCoord, yCoord, zCoord, false);
+			return true;
 		}
+		return false;
 	}
 
 	public void onUnsetSide(ForgeDirection dir) {
@@ -231,7 +247,7 @@ public class TileEntityMicroBlock extends TileEntity implements IMicroBlock, IPo
 			}
 			return false;
 		}
-		return false;
+		return true;
 	}
 
 	@Override

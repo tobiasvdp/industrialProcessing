@@ -44,12 +44,18 @@ public abstract class TileEntityMicroBlockConnection extends TileEntityMicroBloc
 	}
 
 	@Override
-	public void unsetSide(ForgeDirection dir, EntityPlayer player) {
-		super.unsetSide(dir, player);
+	public boolean unsetSide(ForgeDirection dir, EntityPlayer player) {
+		boolean result = super.unsetSide(dir, player);
+		if(!result){
 		updateSideConnections();
 		updateExtConnections();
 		onPostSideUnset(dir);
 		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+		return false;
+		}
+		else{
+			return true;
+		}
 	}
 
 	public void onPostSideUnset(ForgeDirection dir) {

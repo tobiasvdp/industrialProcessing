@@ -8,20 +8,24 @@ import mod.industrialProcessing.blockContainer.BlockContainerIPRendered;
 import mod.industrialProcessing.items.ItemMicroBlock;
 import mod.industrialProcessing.microBlock.IMicroBlock;
 import mod.industrialProcessing.microBlock.MicroBlockType;
+import mod.industrialProcessing.utils.INamepace;
 import mod.industrialProcessing.utils.handlers.packet.PacketHandler;
 import mod.industrialProcessing.utils.handlers.packet.packets.RayTraceToServerPacket;
 import mod.industrialProcessing.utils.handlers.packet.packets.SendMicroBlockDestructionChangePacket;
+import mod.industrialProcessing.utils.registry.MicroBlockIconRegistry;
 import mod.industrialProcessing.utils.registry.MicroBlockRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.EffectRenderer;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
@@ -41,12 +45,11 @@ public abstract class BlockMicroBlock extends BlockContainerIPRendered {
 	public boolean addDestroyEffects(World world, int x, int y, int z, int meta, EffectRenderer effectRenderer) {
 		return true;
 	}
-	
 
 	@Override
 	public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
-		if(par5EntityPlayer.isSneaking()){
-		    return false;
+		if (par5EntityPlayer.isSneaking()) {
+			return false;
 		}
 		if (par1World.isRemote) {
 			MovingObjectPosition hit = rayTroughBlock(par1World, par2, par3, par4, par5EntityPlayer);
@@ -125,10 +128,10 @@ public abstract class BlockMicroBlock extends BlockContainerIPRendered {
 					IMicroBlock microblock = (IMicroBlock) te;
 					ForgeDirection dir = sideToForge(sideHit);
 					if (microblock.isSideFree(dir)) {
-						microblock.setSide(dir, ((ItemMicroBlock)itemstack.getItem()), player);
+						microblock.setSide(dir, ((ItemMicroBlock) itemstack.getItem()), player);
 					}
 				}
-			}else{
+			} else {
 				TileEntity te = player.worldObj.getTileEntity(x, y, z);
 				if (te instanceof IMicroBlock) {
 					IMicroBlock microblock = (IMicroBlock) te;
@@ -203,17 +206,17 @@ public abstract class BlockMicroBlock extends BlockContainerIPRendered {
 
 	public MovingObjectPosition rayTroughBlock(World world, int par2, int par3, int par4, Entity entity) {
 
-			MicroBlockRegistry.setBounds(false);
-		
-			float reach = 5.0f;
-			Vec3 vec3 = getPositionEntity(1.0f, entity);
-			Vec3 vec31 = getLookEntity(1.0f, entity);
-			Vec3 vec32 = vec3.addVector(vec31.xCoord * reach, vec31.yCoord * reach, vec31.zCoord * reach);
-			MovingObjectPosition hit = world.rayTraceBlocks(vec3, vec32);
+		MicroBlockRegistry.setBounds(false);
 
-			MicroBlockRegistry.setBounds(true);
-			
-			return hit;
+		float reach = 5.0f;
+		Vec3 vec3 = getPositionEntity(1.0f, entity);
+		Vec3 vec31 = getLookEntity(1.0f, entity);
+		Vec3 vec32 = vec3.addVector(vec31.xCoord * reach, vec31.yCoord * reach, vec31.zCoord * reach);
+		MovingObjectPosition hit = world.rayTraceBlocks(vec3, vec32);
+
+		MicroBlockRegistry.setBounds(true);
+
+		return hit;
 	}
 
 	protected Vec3 getPositionEntity(float par1, Entity entity) {
@@ -262,7 +265,6 @@ public abstract class BlockMicroBlock extends BlockContainerIPRendered {
 		return destroy;
 	}
 
-
 	public abstract MicroBlockType getMicroBlockType();
 
 	@Override
@@ -294,6 +296,16 @@ public abstract class BlockMicroBlock extends BlockContainerIPRendered {
 	@Override
 	public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
 
+	}
+
+	@Override
+	public IIcon getIcon(int par1, int par2) {
+		return super.getIcon(par1, par2);
+	}
+
+	@Override
+	public void registerBlockIcons(IIconRegister par1IconRegister) {
+		MicroBlockIconRegistry.registerIcons(par1IconRegister);
 	}
 
 }
