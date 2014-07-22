@@ -74,7 +74,7 @@ public class TileEntityMicroBlock extends TileEntity implements IMicroBlock, IPo
 
 	@Override
 	public void setSide(ForgeDirection dir, ItemMicroBlock itemMicroBlock, EntityPlayer player) {
-		if (itemMicroBlock.isValidPlacingSide(dir, worldObj, xCoord, yCoord, zCoord, itemMicroBlock) && isValidSide(dir)){
+		if (itemMicroBlock.isValidPlacingSide(dir, worldObj, xCoord, yCoord, zCoord, itemMicroBlock) && isValidSide(dir) && isCompatible(itemMicroBlock)){
 			if (player != null) {
 				if (player.getCurrentEquippedItem() != null && !player.capabilities.isCreativeMode) {
 					if (player.getCurrentEquippedItem().equals(itemMicroBlock)) {
@@ -96,6 +96,29 @@ public class TileEntityMicroBlock extends TileEntity implements IMicroBlock, IPo
 				worldObj.func_147480_a(xCoord, yCoord, zCoord, false);
 			}
 		}
+	}
+
+	private boolean isCompatible(ItemMicroBlock itemMicroBlock) {
+		if( countSetSides() == 0){
+			return true;
+		}else{
+			
+			for(int i = 0;i<6;i++){
+				if(sidesMicroblockItemID[i] != -1){
+					Item item = Item.getItemById(sidesMicroblockItemID[i]);
+					if(item != null && item instanceof ItemMicroBlock){
+						if(((ItemMicroBlock) item ).isCompatible( itemMicroBlock)){
+							return true;
+						}
+						else{
+							return false;
+						}
+						
+					}
+				}
+			}
+		}
+		return true;
 	}
 
 	private void switchTileEntities() {
@@ -208,7 +231,7 @@ public class TileEntityMicroBlock extends TileEntity implements IMicroBlock, IPo
 			}
 			return false;
 		}
-		return true;
+		return false;
 	}
 
 	@Override

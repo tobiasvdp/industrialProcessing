@@ -56,4 +56,8 @@ public class ItemMicroBlock extends ItemIP {
 		return tileEntity.getName();
 	}
 
+	public boolean isCompatible(ItemMicroBlock itemMicroBlock) {
+		return true;
+	}
+
 }
