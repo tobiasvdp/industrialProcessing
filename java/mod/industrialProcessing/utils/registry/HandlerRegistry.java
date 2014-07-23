@@ -7,10 +7,13 @@ import mod.industrialProcessing.plants.transport.items.ConveyorBeltPowerInput.Ti
 import mod.industrialProcessing.transport.items.conveyorBelt.tileEntity.TileEntityConveyorConnectionsBase;
 import mod.industrialProcessing.transport.items.conveyorBelt.tileEntity.TileEntityConveyorTransportBase;
 import mod.industrialProcessing.utils.handlers.heat.IHeatHandler;
+import mod.industrialProcessing.utils.handlers.line.ILineHandler;
+import mod.industrialProcessing.utils.handlers.line.ILineTileEntity;
 import mod.industrialProcessing.utils.handlers.line.IOldLineHandler;
 import mod.industrialProcessing.utils.handlers.line.OldLineHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import com.google.common.collect.Lists;
 
@@ -18,7 +21,33 @@ public class HandlerRegistry {
 
 	private static List<IHeatHandler> heatHandlers = Lists.newArrayList();
 	private static List<IOldLineHandler> oldLineHandler = Lists.newArrayList();
+	private static List<ILineHandler> lineHandlers = Lists.newArrayList();
 
+	
+	public static void registerLineHandler(ILineHandler handler) {
+		lineHandlers.add(handler);
+	}
+	
+	public static void registerToLineHandler(String lineHandler, ILineTileEntity te, ForgeDirection dir) {
+		Iterator<ILineHandler> it = lineHandlers.iterator();
+		while(it.hasNext()){
+			ILineHandler handler = it.next();
+			if(handler.getName().equals(lineHandler)){
+				handler.registerToLine(te,dir);
+			}
+		}
+	}
+	
+	public static void unregisterFromLineHandler(String lineHandler, ILineTileEntity te, ForgeDirection dir) {
+		Iterator<ILineHandler> it = lineHandlers.iterator();
+		while(it.hasNext()){
+			ILineHandler handler = it.next();
+			if(handler.getName().equals(lineHandler)){
+				handler.unregisterFromLine(te,dir);
+			}
+		}
+	}
+	
 	public static void registerHeatHandler(IHeatHandler handler) {
 		heatHandlers.add(handler);
 	}

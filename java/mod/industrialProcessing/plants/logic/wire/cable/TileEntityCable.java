@@ -5,10 +5,13 @@ import java.util.Arrays;
 import mod.industrialProcessing.blockContainer.microblock.IMicroBlock;
 import mod.industrialProcessing.blockContainer.microblock.MicroBlockType;
 import mod.industrialProcessing.blockContainer.microblock.extend.connectionCorners.TileEntityMicroBlockConnectionCorners;
+import mod.industrialProcessing.items.ItemMicroBlock;
 import mod.industrialProcessing.utils.handlers.line.ILineTileEntityMicroblock;
+import mod.industrialProcessing.utils.registry.HandlerRegistry;
 import mod.industrialProcessing.utils.registry.MicroBlockConnectionRegistry;
 import mod.industrialProcessing.utils.rotation.LocalDirection;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityCable extends TileEntityMicroBlockConnectionCorners implements ILineTileEntityMicroblock {
 
@@ -34,11 +37,6 @@ public class TileEntityCable extends TileEntityMicroBlockConnectionCorners imple
 	@Override
 	public boolean isMicroblock() {
 		return true;
-	}
-
-	@Override
-	public int getLineId() {
-		return -1;
 	}
 
 	@Override
@@ -86,34 +84,36 @@ public class TileEntityCable extends TileEntityMicroBlockConnectionCorners imple
 	}
 
 	@Override
-	public void formConnections() {
-		for (int i = 0; i < 6; i++) {
-			if (getLineID(i) == -1) {
-				if (!isSideFree(i)) {
-					// check internal connections for line
-					for (int j = 0; j < 4; j++) {
-						if (interConnections[i][j]) {
-							int side = getRotated(i, j);
-							if (getLineID(side) != -1) {
-								if (getLineID(i) == -1) {
-									setLineID(side, getLineID(side));
-								} else {
-									if((getLineID(i)>(getLineID(side)){
-										setLineID(side, getLineID(side));
-										translateTo
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
+	public void setLineID(int side, int id) {
+		lineID[side] = id;
+	}
+	
+	@Override
+	public void onPostSideSet(ForgeDirection dir, ItemMicroBlock itemMicroBlock) {
+		super.onPostSideSet(dir, itemMicroBlock);
+	    registerToLine(dir);
+	}
+	
+	@Override
+	public void onPostSideUnset(ForgeDirection dir) {
+		super.onPostSideUnset(dir);
+		unregisterFromLine(dir);
 	}
 
 	@Override
-	public void setLineID(int side, int id) {
-		lineID[side] = id;
+	public void registerToLine(ForgeDirection dir) {
+		HandlerRegistry.registerToLineHandler("logic", this, dir);
+	}
+
+	@Override
+	public void unregisterFromLine(ForgeDirection dir) {
+		HandlerRegistry.unregisterFromLineHandler("logic", this, dir);
+	}
+
+	@Override
+	public int[] getLineConnectionArray(ForgeDirection dir) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

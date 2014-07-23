@@ -20,6 +20,7 @@ import mod.industrialProcessing.utils.handlers.fluids.BucketHandler;
 import mod.industrialProcessing.utils.handlers.fuel.FuelHandler;
 import mod.industrialProcessing.utils.handlers.gui.GuiHandler;
 import mod.industrialProcessing.utils.handlers.heat.HeatHandler;
+import mod.industrialProcessing.utils.handlers.line.LineHandler;
 import mod.industrialProcessing.utils.handlers.line.OldLineHandler;
 import mod.industrialProcessing.utils.handlers.packet.PacketHandler;
 import mod.industrialProcessing.utils.handlers.packet.packets.ConveyorPacket;
@@ -93,6 +94,7 @@ public class IndustrialProcessing implements INamepace, ISetupCreativeTabs, ISet
 		HandlerRegistry.registerConveyorLineHandler(new OldLineHandler());		
 		GameRegistry.registerFuelHandler(new FuelHandler());
 		HandlerRegistry.registerHeatHandler(new HeatHandler());
+		HandlerRegistry.registerLineHandler(new LineHandler("logic"));
 		
 		//register achievements
 		ConfigAchievements.getInstance().registerAchievments();
