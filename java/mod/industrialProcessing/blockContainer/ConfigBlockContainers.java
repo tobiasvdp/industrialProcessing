@@ -1,7 +1,7 @@
 package mod.industrialProcessing.blockContainer;
 
 import mod.industrialProcessing.IndustrialProcessing;
-import mod.industrialProcessing.blockContainer.microblock.core.TileEntityMicroBlock;
+import mod.industrialProcessing.blockContainer.microblock.MicroBlockTileEntity;
 import mod.industrialProcessing.blockContainer.microblock.rendering.ModelMicroBlock;
 import mod.industrialProcessing.plants.blackSmith.bloomery.TileEntityBloomery;
 import mod.industrialProcessing.plants.blackSmith.bloomery.dummy.bellows.TileEntityBellows;
@@ -204,7 +204,7 @@ public class ConfigBlockContainers {
 		BlockRegistry.registerMachine(IndustrialProcessing.blockMachineFrame, TileEntityMachineFrame.class, "IP.dummy.machineFrame");
 		BlockRegistry.registerMachine(IndustrialProcessing.blockIOPort, TileEntityIOPort.class, "IP.dummy.ioPort");
 		
-		BlockRegistry.registerMachine(IndustrialProcessing.microBlock, TileEntityMicroBlock.class, "IP.micro.block", new ModelMicroBlock());
+		BlockRegistry.registerMachine(IndustrialProcessing.microBlock, MicroBlockTileEntity.class, "IP.micro.block", new ModelMicroBlock());
 		
 
 		/*

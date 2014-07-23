@@ -63,7 +63,6 @@ public abstract class TileEntityMicroBlockConnection extends TileEntityMicroBloc
 	}
 
 	protected void updateExtConnections() {
-		System.out.println("trigger recheck external");
 		for (int i = 0; i < 6; i++) {
 			ForgeDirection dir = ForgeDirection.values()[i];
 			Block block = worldObj.getBlock(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);

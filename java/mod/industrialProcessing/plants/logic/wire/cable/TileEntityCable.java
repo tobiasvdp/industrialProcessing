@@ -7,6 +7,7 @@ import mod.industrialProcessing.blockContainer.microblock.MicroBlockType;
 import mod.industrialProcessing.blockContainer.microblock.extend.connectionCorners.TileEntityMicroBlockConnectionCorners;
 import mod.industrialProcessing.items.ItemMicroBlock;
 import mod.industrialProcessing.utils.handlers.line.ILineTileEntityMicroblock;
+import mod.industrialProcessing.utils.handlers.line.ILineTileEntitySolidBlock;
 import mod.industrialProcessing.utils.registry.HandlerRegistry;
 import mod.industrialProcessing.utils.registry.MicroBlockConnectionRegistry;
 import mod.industrialProcessing.utils.rotation.LocalDirection;
@@ -87,17 +88,27 @@ public class TileEntityCable extends TileEntityMicroBlockConnectionCorners imple
 	public void setLineID(int side, int id) {
 		lineID[side] = id;
 	}
-	
+
 	@Override
 	public void onPostSideSet(ForgeDirection dir, ItemMicroBlock itemMicroBlock) {
 		super.onPostSideSet(dir, itemMicroBlock);
-	    registerToLine(dir);
+		registerToLine(dir);
 	}
-	
+
 	@Override
 	public void onPostSideUnset(ForgeDirection dir) {
 		super.onPostSideUnset(dir);
 		unregisterFromLine(dir);
+	}
+	
+	@Override
+	protected void notifyOnCreation() {
+		super.notifyOnCreation();
+		for(int i = 0;i<6;i++){
+			if(sidesMicroblockItemID[i] != -1){
+				registerToLine(ForgeDirection.values()[i]);
+			}
+		}
 	}
 
 	@Override
@@ -111,9 +122,56 @@ public class TileEntityCable extends TileEntityMicroBlockConnectionCorners imple
 	}
 
 	@Override
-	public int[] getLineConnectionArray(ForgeDirection dir) {
-		// TODO Auto-generated method stub
-		return null;
+	public int[][] getLineConnectionArray(ForgeDirection dir) {
+		int[][] result = new int[3][4];
+		// innerconnections
+		for (int i = 0; i < 4; i++) {
+			if (interConnections[dir.ordinal()][i]) {
+				int side = getRotated(dir.ordinal(), i);
+				result[0][i] = getLineID(side);
+			} else {
+				result[0][i] = -2;
+			}
+		}
+		// external connections
+		for (int i = 0; i < 4; i++) {
+			if (externalConnections[dir.ordinal()][i]) {
+				int side = getRotated(dir.ordinal(), i);
+				ForgeDirection nextDir = ForgeDirection.values()[side];
+				TileEntity nextTe = worldObj.getTileEntity(xCoord + nextDir.offsetX, yCoord + nextDir.offsetY, zCoord + nextDir.offsetZ);
+				if (nextTe instanceof ILineTileEntityMicroblock) {
+					result[1][i] = ((ILineTileEntityMicroblock) nextTe).getLineID(dir.ordinal());
+				} else if (nextTe instanceof ILineTileEntitySolidBlock) {
+					result[1][i] = ((ILineTileEntitySolidBlock) nextTe).getLineId();
+				} else {
+					result[1][i] = -3;
+				}
+
+			} else {
+				result[1][i] = -2;
+			}
+		}
+
+		// cornerConnections
+		for (int i = 0; i < 4; i++) {
+			if (externalConnectionExtentions[dir.ordinal()][i]) {
+				int side = getRotated(dir.ordinal(), i);
+				ForgeDirection nextDir = ForgeDirection.values()[side];
+				TileEntity nextTe = worldObj.getTileEntity(xCoord + nextDir.offsetX + dir.offsetX, yCoord + nextDir.offsetY + dir.offsetY, zCoord + nextDir.offsetZ + dir.offsetZ);
+				if (nextTe instanceof ILineTileEntityMicroblock) {
+					result[2][i] = ((ILineTileEntityMicroblock) nextTe).getLineID(nextDir.getOpposite().ordinal());
+				} else if (nextTe instanceof ILineTileEntitySolidBlock) {
+					result[2][i] = ((ILineTileEntitySolidBlock) nextTe).getLineId();
+				} else {
+					result[2][i] = -3;
+				}
+
+			} else {
+				result[2][i] = -2;
+			}
+		}
+
+		return result;
 	}
 
 }

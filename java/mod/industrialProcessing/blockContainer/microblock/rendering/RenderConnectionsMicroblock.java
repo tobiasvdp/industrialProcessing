@@ -12,7 +12,6 @@ import mod.industrialProcessing.utils.registry.MicroBlockModelRegistry;
 public class RenderConnectionsMicroblock {
 
 	public static void renderMicroBlockParts(WorldReference reference) {
-		System.out.println(reference.world.getTileEntity(reference.x, reference.y, reference.z));
 		if (reference.world.getTileEntity(reference.x, reference.y, reference.z) instanceof IMicroBlockConnectionCorner) {
 			IMicroBlockConnectionCorner microBlock = (IMicroBlockConnectionCorner) reference.world.getTileEntity(reference.x, reference.y, reference.z);
 			renderMicroblock(reference, microBlock);

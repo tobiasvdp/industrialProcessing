@@ -23,31 +23,34 @@ public class HandlerRegistry {
 	private static List<IOldLineHandler> oldLineHandler = Lists.newArrayList();
 	private static List<ILineHandler> lineHandlers = Lists.newArrayList();
 
-	
 	public static void registerLineHandler(ILineHandler handler) {
 		lineHandlers.add(handler);
 	}
-	
+
 	public static void registerToLineHandler(String lineHandler, ILineTileEntity te, ForgeDirection dir) {
-		Iterator<ILineHandler> it = lineHandlers.iterator();
-		while(it.hasNext()){
-			ILineHandler handler = it.next();
-			if(handler.getName().equals(lineHandler)){
-				handler.registerToLine(te,dir);
+		if (!te.getWorldObj().isRemote) {
+			Iterator<ILineHandler> it = lineHandlers.iterator();
+			while (it.hasNext()) {
+				ILineHandler handler = it.next();
+				if (handler.getName().equals(lineHandler)) {
+					handler.registerToLine(te, dir);
+				}
 			}
 		}
 	}
-	
+
 	public static void unregisterFromLineHandler(String lineHandler, ILineTileEntity te, ForgeDirection dir) {
-		Iterator<ILineHandler> it = lineHandlers.iterator();
-		while(it.hasNext()){
-			ILineHandler handler = it.next();
-			if(handler.getName().equals(lineHandler)){
-				handler.unregisterFromLine(te,dir);
+		if (!te.getWorldObj().isRemote) {
+			Iterator<ILineHandler> it = lineHandlers.iterator();
+			while (it.hasNext()) {
+				ILineHandler handler = it.next();
+				if (handler.getName().equals(lineHandler)) {
+					handler.unregisterFromLine(te, dir);
+				}
 			}
 		}
 	}
-	
+
 	public static void registerHeatHandler(IHeatHandler handler) {
 		heatHandlers.add(handler);
 	}
@@ -55,7 +58,6 @@ public class HandlerRegistry {
 	public static void registerConveyorLineHandler(IOldLineHandler handler) {
 		oldLineHandler.add(handler);
 	}
-
 
 	public static void resetConveyorLineHandler() {
 		for (int i = 0; i < oldLineHandler.size(); i++) {
@@ -105,56 +107,29 @@ public class HandlerRegistry {
 	}
 
 	/*
-	public static int addToLogicLine(ILinePart te, boolean isNBT) {
-		if ((((TileEntity) te).getWorldObj() != null && !((TileEntity) te).getWorldObj().isRemote) || ((TileEntity) te).getWorldObj() == null) {
-			Iterator<ILineHandler> it = logicLineHandler.iterator();
-			int ID = -1;
-			while (it.hasNext()) {
-				ILineHandler handler = it.next();
-				if (te instanceof ILineTransport) {
-					if (isNBT) {
-						handler.registerTransportFromNBT((ILineTransport) te);
-						return 0;
-					} else {
-						ID = handler.registerTransport((ILineTransport) te);
-					}
-				} else if (te instanceof ILineDevice) {
-					for(int i = 0;i<6;i++){
-						int id = ((ILineDevice)te).getLineID(i);
-						if(id != -1){
-							handler.registerDevice(id, (ILineDevice) te);
-						}
-					}
-					return -1;
-				}
-			}
-			return ID;
-		}
-		return -1;
-	}
-	*/
+	 * public static int addToLogicLine(ILinePart te, boolean isNBT) { if
+	 * ((((TileEntity) te).getWorldObj() != null && !((TileEntity)
+	 * te).getWorldObj().isRemote) || ((TileEntity) te).getWorldObj() == null) {
+	 * Iterator<ILineHandler> it = logicLineHandler.iterator(); int ID = -1;
+	 * while (it.hasNext()) { ILineHandler handler = it.next(); if (te
+	 * instanceof ILineTransport) { if (isNBT) {
+	 * handler.registerTransportFromNBT((ILineTransport) te); return 0; } else {
+	 * ID = handler.registerTransport((ILineTransport) te); } } else if (te
+	 * instanceof ILineDevice) { for(int i = 0;i<6;i++){ int id =
+	 * ((ILineDevice)te).getLineID(i); if(id != -1){ handler.registerDevice(id,
+	 * (ILineDevice) te); } } return -1; } } return ID; } return -1; }
+	 */
 
 	/*
-	public static void removeFromLogicLine(ILinePart te) {
-		if (((TileEntity) te).getWorldObj() != null && !((TileEntity) te).getWorldObj().isRemote) {
-			Iterator<ILineHandler> it = logicLineHandler.iterator();
-			int ID = -1;
-			while (it.hasNext()) {
-				ILineHandler handler = it.next();
-				if(te instanceof ILineDevice){
-					for(int i = 0;i<6;i++){
-						int id = ((ILineDevice)te).getLineID(i);
-						if(id != -1){
-							handler.unregisterDevice(id, (ILineDevice) te);
-						}
-					}
-				}
-				if(te instanceof ILineTransport)
-					handler.unregisterTransport((ILineTransport) te);
-			}
-		}
-	}
-	*/
+	 * public static void removeFromLogicLine(ILinePart te) { if (((TileEntity)
+	 * te).getWorldObj() != null && !((TileEntity) te).getWorldObj().isRemote) {
+	 * Iterator<ILineHandler> it = logicLineHandler.iterator(); int ID = -1;
+	 * while (it.hasNext()) { ILineHandler handler = it.next(); if(te instanceof
+	 * ILineDevice){ for(int i = 0;i<6;i++){ int id =
+	 * ((ILineDevice)te).getLineID(i); if(id != -1){
+	 * handler.unregisterDevice(id, (ILineDevice) te); } } } if(te instanceof
+	 * ILineTransport) handler.unregisterTransport((ILineTransport) te); } } }
+	 */
 
 	public static boolean addToConveyorLine(int line, TileEntityConveyorBeltPowerInput te) {
 		if ((te.getWorldObj() != null && !te.getWorldObj().isRemote) || te.getWorldObj() == null) {
@@ -188,7 +163,7 @@ public class HandlerRegistry {
 		while (it.hasNext()) {
 			IOldLineHandler handler = it.next();
 			resistance = Math.max(resistance, handler.getResistanceForLine(line));
-		} 
+		}
 		return resistance;
 	}
 

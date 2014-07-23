@@ -9,5 +9,5 @@ public interface ILineTileEntityMicroblock extends ILineTileEntity {
 	MicroBlockType getType();
 	void registerToLine(ForgeDirection dir);
 	void unregisterFromLine(ForgeDirection dir);
-	int[] getLineConnectionArray(ForgeDirection dir);
+	int[][] getLineConnectionArray(ForgeDirection dir);
 }

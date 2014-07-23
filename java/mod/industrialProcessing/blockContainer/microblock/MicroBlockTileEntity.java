@@ -4,4 +4,9 @@ import mod.industrialProcessing.blockContainer.microblock.extend.connectionCorne
 
 public class MicroBlockTileEntity extends TileEntityMicroBlockConnectionCorners{
 
+	@Override
+	public MicroBlockType getType() {
+		return null;
+	}
+
 }
