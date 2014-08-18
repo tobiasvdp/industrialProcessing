@@ -1,15 +1,12 @@
-package ip.industrialProcessing.machines.wireMill;
+package mod.industrialProcessing.plants.machine.wireMill;
 
-import ip.industrialProcessing.config.ConfigMachineBlocks;
-import ip.industrialProcessing.config.ConfigRenderers;
-import ip.industrialProcessing.config.ISetupCreativeTabs;
-import ip.industrialProcessing.gui3.generating.GuiBuilderDefault;
-import ip.industrialProcessing.gui3.generating.IGuiBlock;
-import ip.industrialProcessing.gui3.generating.IGuiBuilder;
-import ip.industrialProcessing.machines.BlockMachineRendered;
-import ip.industrialProcessing.machines.RecipesMachine;
-import ip.industrialProcessing.recipes.IRecipeBlock;
-import ip.industrialProcessing.utils.IDescriptionBlock;
+import mod.industrialProcessing.gui.generating.GuiBuilderDefault;
+import mod.industrialProcessing.gui.generating.IGuiBuilder;
+import mod.industrialProcessing.utils.block.IDescriptionBlock;
+import mod.industrialProcessing.utils.block.IGuiBlock;
+import mod.industrialProcessing.utils.block.IRecipeBlock;
+import mod.industrialProcessing.utils.creativeTab.ISetupCreativeTabs;
+import mod.industrialProcessing.work.recipe.RecipesMachine;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
@@ -17,37 +14,37 @@ import net.minecraft.world.World;
 
 public class BlockWireMill extends BlockMachineRendered implements IRecipeBlock, IDescriptionBlock, IGuiBlock {
 
-    public static final String UNLOCALIZED_NAME = "IP.Machine.WireMill";
-    public static IGuiBuilder guiBuilder = new GuiBuilderDefault(UNLOCALIZED_NAME).addInputSlot(0).addOutputSlot(1).enablePower(2).enableWorker();
+	public static final String UNLOCALIZED_NAME = "IP.Machine.WireMill";
+	public static IGuiBuilder guiBuilder = new GuiBuilderDefault(UNLOCALIZED_NAME).addInputSlot(0).addOutputSlot(1).enablePower(2).enableWorker();
 
-    public BlockWireMill() {
-        super(ConfigMachineBlocks.getWireMillBlockID(), Material.iron, 1F, Block.soundMetalFootstep, UNLOCALIZED_NAME, ISetupCreativeTabs.tabOreProcessing);
-    }
+	public BlockWireMill() {
+		super(ConfigMachineBlocks.getWireMillBlockID(), Material.iron, 1F, Block.soundMetalFootstep, UNLOCALIZED_NAME, ISetupCreativeTabs.tabOreProcessing);
+	}
 
-    @Override
-    public TileEntity createNewTileEntity(World world) {
-        TileEntityWireMill te = new TileEntityWireMill();
-        te.setName(getLocalizedName());
-        return te;
-    }
+	@Override
+	public TileEntity createNewTileEntity(World world) {
+		TileEntityWireMill te = new TileEntityWireMill();
+		te.setName(getLocalizedName());
+		return te;
+	}
 
-    @Override
-    public int getRenderType() {
-        return ConfigRenderers.getRendererWireMillId();
-    }
+	@Override
+	public int getRenderType() {
+		return ConfigRenderers.getRendererWireMillId();
+	}
 
-    @Override
-    public RecipesMachine getRecipes() {
-        return TileEntityWireMill.recipes;
-    }
+	@Override
+	public RecipesMachine getRecipes() {
+		return TileEntityWireMill.recipes;
+	}
 
-    @Override
-    public IGuiBuilder getGui() {
-        return guiBuilder;
-    }
+	@Override
+	public IGuiBuilder getGui() {
+		return guiBuilder;
+	}
 
-    @Override
-    public String getDescription() {
-        return "Automates the process of drawing wires";
-    }
+	@Override
+	public String getDescription() {
+		return "Automates the process of drawing wires";
+	}
 }

@@ -135,5 +135,12 @@ public class TileEntityMultiblockDummyTank extends TileEntityMultiblockDummy imp
 		return false;
 	}
 
+	@Override
+	public FluidStack getFluidStackInSlot(int slot) {
+		if (this.getCore() != null)
+			return this.getCore().getFluidStackInSlot(getGroup(),slot);
+		return null;
+	}
+
 
 }

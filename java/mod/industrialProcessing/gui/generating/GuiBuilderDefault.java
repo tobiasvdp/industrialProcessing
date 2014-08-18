@@ -78,6 +78,7 @@ public class GuiBuilderDefault implements IGuiBuilder {
 	private ArrayList<StateButtonReference> stateButtons = new ArrayList<StateButtonReference>();
 	private ArrayList<GaugeReference> gauges = new ArrayList<GaugeReference>();
 	private ArrayList<SlotClusterReference> bufferSlots = new ArrayList<SlotClusterReference>();
+	private ArrayList<TextBlock> textBlocks = new ArrayList<TextBlock>();
 
 	private WorkerReference workerRef;
 	private HeatedReference heatRef;
@@ -94,6 +95,11 @@ public class GuiBuilderDefault implements IGuiBuilder {
 	public GuiBuilderDefault enableInventoryArmor() {
 		if (this.inventoryRef != null)
 			this.inventoryRef.showArmor = true;
+		return this;
+	}
+	
+	public GuiBuilderDefault addText(String text) {
+		this.textBlocks.add(new TextBlock(text, 4210752));
 		return this;
 	}
 
@@ -263,6 +269,9 @@ public class GuiBuilderDefault implements IGuiBuilder {
 		StackPanel titleDurabilityStack = new StackPanel();
 		titleDurabilityStack.orientation = Orientation.VERTICAL;
 		titleDurabilityStack.addChild(title);
+		for(int i =0;i<textBlocks.size();i++){
+			titleDurabilityStack.addChild(textBlocks.get(i));
+		}
 		titleDurabilityStack.horizontalAlign = Alignment.MIN;
 		topPanel.addChild(titleDurabilityStack);
 		verticalStack.addChild(topPanel);

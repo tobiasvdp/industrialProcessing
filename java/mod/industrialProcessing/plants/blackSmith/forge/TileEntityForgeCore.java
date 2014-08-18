@@ -248,8 +248,6 @@ public class TileEntityForgeCore extends TileEntityMultiblockSwitcherCore implem
 					if (player.inventory.addItemStackToInventory(givenStack)) {
 						DropBlock.doDispense(worldObj, givenStack, 1, getForwardDirection().getOpposite(), xCoord, yCoord + 1, zCoord);
 					}
-					player.inventory.markDirty();
-					onInventoryChanged();
 				}
 			}
 			player.inventory.markDirty();

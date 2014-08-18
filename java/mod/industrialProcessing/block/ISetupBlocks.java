@@ -12,6 +12,7 @@ import mod.industrialProcessing.block.tree.BlockIndustrialLog;
 import mod.industrialProcessing.block.tree.BlockIndustrialSapling;
 import mod.industrialProcessing.block.tree.BlockPineLog;
 import mod.industrialProcessing.block.tree.BlockRubberLog;
+import mod.industrialProcessing.blockContainer.microblock.MicroBlock;
 import mod.industrialProcessing.blockContainer.multiblock.utils.Blocktransparent;
 import mod.industrialProcessing.plants.blackSmith.anvil.BlockAnvil;
 import mod.industrialProcessing.plants.construction.machineBlock.BlockMachineBlock;
@@ -53,9 +54,7 @@ public interface ISetupBlocks {
 	public final static BlockAnvil blockAnvil = new BlockAnvil();
 	
 	public final static Blocktransparent blocktransparent = new Blocktransparent();
-	/*
-	 * public final static MicroBlock microBlock = new MicroBlock();
-	 */
+	
 	// TODO public final static BlockMachineBlock blockMachineBlock = new
 	// BlockMachineBlock();
 }

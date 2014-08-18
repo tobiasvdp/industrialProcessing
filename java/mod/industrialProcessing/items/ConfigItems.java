@@ -1,45 +1,47 @@
 package mod.industrialProcessing.items;
 
-import net.minecraft.init.Blocks;
+import mod.industrialProcessing.IndustrialProcessing;
+import mod.industrialProcessing.plants.logic.adaptor.TileEntityInterfaceAdaptor;
+import mod.industrialProcessing.plants.logic.wire.cable.TileEntityLogicCable;
+import mod.industrialProcessing.plants.logic.wire.cable.model.ModelCable;
+import mod.industrialProcessing.utils.registry.ItemRegistry;
+import mod.industrialProcessing.utils.registry.MicroBlockRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
-import mod.industrialProcessing.IndustrialProcessing;
-import mod.industrialProcessing.utils.registry.ItemRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ConfigItems {
 
 	public static void registerItems() {
-		ItemRegistry.registerItem(ISetupItems.itemIronBracket , "IP.item.ironBracket");
-		ItemRegistry.registerItem(ISetupItems.paintBrush , "IP.item.paintBrush");
-		ItemRegistry.registerItem(ISetupItems.itemCopperBar , "IP.item.copperBar");
-		ItemRegistry.registerItem(ISetupItems.itemIronBowl , "IP.item.ironBowl");
-		ItemRegistry.registerItem(ISetupItems.itemRemote , "IP.item.remote");
-		ItemRegistry.registerItem(ISetupItems.itemTurbineBlades , "IP.item.turbineBlades");
-		ItemRegistry.registerItem(ISetupItems.itemIronBlade , "IP.item.ironBlade");
-		ItemRegistry.registerItem(ISetupItems.itemLeadIngot , "IP.item.leadIngot");
-		ItemRegistry.registerItem(ISetupItems.itemFilterTray , "IP.item.filterTray");
-		ItemRegistry.registerItem(ISetupItems.itemMotorPoleAxis , "IP.item.magneticPoles");
-		ItemRegistry.registerItem(ISetupItems.itemSmallEngine , "IP.item.smallEngine");
-		ItemRegistry.registerItem(ISetupItems.itemGuide , "IP.item.guide");
-		ItemRegistry.registerItem(ISetupItems.itemRedstoneCircuitry , "IP.item.redstoneCircuitry");
-		ItemRegistry.registerItem(ISetupItems.itemSolderAlloyIngot , "IP.item.solderAlloyIngot");
-		ItemRegistry.registerItem(ISetupItems.itemSolderAlloyWire , "IP.item.solderAlloyWire");
-		ItemRegistry.registerItem(ISetupItems.itemnhardenedIsolationBoard , "IP.item.unhardenedIsolationBoard");
-		ItemRegistry.registerItem(ISetupItems.itemFiberGlass , "IP.item.fiberGlass");
-		ItemRegistry.registerItem(ISetupItems.itemAluminumDust , "IP.item.aluminumDust");
-		ItemRegistry.registerItem(ISetupItems.itemHardenedSandDust , "IP.item.hardenedSandDust");
-		ItemRegistry.registerItem(ISetupItems.itemCopperBoard , "IP.item.copperBoard");
-		ItemRegistry.registerItem(ISetupItems.itemElectricComponents , "IP.item.electronicComponents");
-		ItemRegistry.registerItem(ISetupItems.itemIsolationBoard , "IP.item.isolationBoard");
-		ItemRegistry.registerItem(ISetupItems.itemPCBoard , "IP.item.pcb");
-		ItemRegistry.registerItem(ISetupItems.itemPCBoardWired , "IP.item.pcbCircuit");
-		ItemRegistry.registerItem(ISetupItems.itemSolder , "IP.item.solder");
-		ItemRegistry.registerItem(ISetupItems.itemSolderEmpty , "IP.item.emptySolderRing");
-		ItemRegistry.registerItem(ISetupItems.itemSolderingIron , "IP.item.solderingIron");
-		ItemRegistry.registerItem(ISetupItems.itemStripBoard , "IP.item.stripBoard");
-		ItemRegistry.registerItem(ISetupItems.itemStripBoardWired , "IP.item.stripboardCircuit");
+		ItemRegistry.registerItem(ISetupItems.itemIronBracket, "IP.item.ironBracket");
+		ItemRegistry.registerItem(ISetupItems.paintBrush, "IP.item.paintBrush");
+		ItemRegistry.registerItem(ISetupItems.itemCopperBar, "IP.item.copperBar");
+		ItemRegistry.registerItem(ISetupItems.itemIronBowl, "IP.item.ironBowl");
+		ItemRegistry.registerItem(ISetupItems.itemRemote, "IP.item.remote");
+		ItemRegistry.registerItem(ISetupItems.itemTurbineBlades, "IP.item.turbineBlades");
+		ItemRegistry.registerItem(ISetupItems.itemIronBlade, "IP.item.ironBlade");
+		ItemRegistry.registerItem(ISetupItems.itemLeadIngot, "IP.item.leadIngot");
+		ItemRegistry.registerItem(ISetupItems.itemFilterTray, "IP.item.filterTray");
+		ItemRegistry.registerItem(ISetupItems.itemMotorPoleAxis, "IP.item.magneticPoles");
+		ItemRegistry.registerItem(ISetupItems.itemSmallEngine, "IP.item.smallEngine");
+		ItemRegistry.registerItem(ISetupItems.itemGuide, "IP.item.guide");
+		ItemRegistry.registerItem(ISetupItems.itemRedstoneCircuitry, "IP.item.redstoneCircuitry");
+		ItemRegistry.registerItem(ISetupItems.itemSolderAlloyIngot, "IP.item.solderAlloyIngot");
+		ItemRegistry.registerItem(ISetupItems.itemSolderAlloyWire, "IP.item.solderAlloyWire");
+		ItemRegistry.registerItem(ISetupItems.itemnhardenedIsolationBoard, "IP.item.unhardenedIsolationBoard");
+		ItemRegistry.registerItem(ISetupItems.itemFiberGlass, "IP.item.fiberGlass");
+		ItemRegistry.registerItem(ISetupItems.itemAluminumDust, "IP.item.aluminumDust");
+		ItemRegistry.registerItem(ISetupItems.itemHardenedSandDust, "IP.item.hardenedSandDust");
+		ItemRegistry.registerItem(ISetupItems.itemCopperBoard, "IP.item.copperBoard");
+		ItemRegistry.registerItem(ISetupItems.itemElectricComponents, "IP.item.electronicComponents");
+		ItemRegistry.registerItem(ISetupItems.itemIsolationBoard, "IP.item.isolationBoard");
+		ItemRegistry.registerItem(ISetupItems.itemPCBoard, "IP.item.pcb");
+		ItemRegistry.registerItem(ISetupItems.itemPCBoardWired, "IP.item.pcbCircuit");
+		ItemRegistry.registerItem(ISetupItems.itemSolder, "IP.item.solder");
+		ItemRegistry.registerItem(ISetupItems.itemSolderEmpty, "IP.item.emptySolderRing");
+		ItemRegistry.registerItem(ISetupItems.itemSolderingIron, "IP.item.solderingIron");
+		ItemRegistry.registerItem(ISetupItems.itemStripBoard, "IP.item.stripBoard");
+		ItemRegistry.registerItem(ISetupItems.itemStripBoardWired, "IP.item.stripboardCircuit");
 		ItemRegistry.registerItem(ISetupItems.itemCopperPlate, "IP.item.copperPlate");
 		ItemRegistry.registerItem(ISetupItems.itemCastingMulsh, "IP.item.castingMulsh");
 		ItemRegistry.registerItem(ISetupItems.itemSandCast, "IP.item.sandCast");
@@ -79,7 +81,7 @@ public class ConfigItems {
 		ItemRegistry.registerItem(ISetupItems.itemCoalDust, "IP.item.coalDust");
 		ItemRegistry.registerItem(ISetupItems.itemGrownCulture, "IP.item.grownCulture");
 		ItemRegistry.registerItem(ISetupItems.itemWrench, "IP.item.wrench");
-        ItemRegistry.registerItem(ISetupItems.itemBattery, "IP.item.battery");
+		ItemRegistry.registerItem(ISetupItems.itemBattery, "IP.item.battery");
 		ItemRegistry.registerItem(ISetupItems.itemHexKey, "IP.item.hexKey");
 		ItemRegistry.registerItem(ISetupItems.itemSmallMachineCasing, "IP.item.smallMachineCasing");
 		ItemRegistry.registerItem(ISetupItems.itemInputPort, "IP.item.inputPort");
@@ -123,21 +125,23 @@ public class ConfigItems {
 		ItemRegistry.registerItem(ISetupItems.itemCalcareousSinterDust, "IP.item.calcareousSinterDust");
 		ItemRegistry.registerItem(ISetupItems.itemCokes, "IP.item.cokes");
 		ItemRegistry.registerItem(ISetupItems.itemSlag, "IP.item.slag");
-		ItemRegistry.registerItem(ISetupItems.itemLeadBowl,"IP.item.leadBowl");
-		ItemRegistry.registerItem(ISetupItems.itemLeadSulfideDust,"IP.item.leadDust");
-	
-		ItemRegistry.registerItem(ISetupItems.itemWroughtIron ,"IP.item.WroughtIron");
-		ItemRegistry.registerItem(ISetupItems.itemPliers ,"IP.item.Pliers");
-		ItemRegistry.registerItem(ISetupItems.itemPliersHeatedIron ,"IP.item.PliersHeatedIron");
-		ItemRegistry.registerItem(ISetupItems.itemPliersBloomIron,"IP.item.PliersBloomIron");
-		ItemRegistry.registerItem(ISetupItems.itemHeatedCopper,"IP.item.heatedCopper");
-		ItemRegistry.registerItem(ISetupItems.itemPliersHeatedCopper ,"IP.item.PliersHeatedCopper");
-		
-		ItemRegistry.registerItem(ISetupItems.itemWoodenBucket,"IP.item.woodenBucket");
-		ItemRegistry.registerItem(ISetupItems.itemWoodenBucketWater,"IP.item.woodenBucketWater");
+		ItemRegistry.registerItem(ISetupItems.itemLeadBowl, "IP.item.leadBowl");
+		ItemRegistry.registerItem(ISetupItems.itemLeadDust, "IP.item.leadDust");
+
+		ItemRegistry.registerItem(ISetupItems.itemWroughtIron, "IP.item.WroughtIron");
+		ItemRegistry.registerItem(ISetupItems.itemPliers, "IP.item.Pliers");
+		ItemRegistry.registerItem(ISetupItems.itemPliersHeatedIron, "IP.item.PliersHeatedIron");
+		ItemRegistry.registerItem(ISetupItems.itemPliersBloomIron, "IP.item.PliersBloomIron");
+		ItemRegistry.registerItem(ISetupItems.itemHeatedCopper, "IP.item.heatedCopper");
+		ItemRegistry.registerItem(ISetupItems.itemPliersHeatedCopper, "IP.item.PliersHeatedCopper");
+
+		ItemRegistry.registerItem(ISetupItems.itemWoodenBucket, "IP.item.woodenBucket");
+		ItemRegistry.registerItem(ISetupItems.itemWoodenBucketWater, "IP.item.woodenBucketWater");
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.WATER, new ItemStack(IndustrialProcessing.itemWoodenBucketWater), new ItemStack(IndustrialProcessing.itemWoodenBucket));
-		
-		
+
+		MicroBlockRegistry.registerMicroBlock(ISetupItems.itemCable, "IP.micro.cable", TileEntityLogicCable.class, new ModelCable());
+		MicroBlockRegistry.registerMicroBlock(ISetupItems.itemInterfaceAdaptor, "IP.micro.interfaceAdaptor", TileEntityInterfaceAdaptor.class, new ModelCable());
+
 	}
 
 	private ConfigItems() {

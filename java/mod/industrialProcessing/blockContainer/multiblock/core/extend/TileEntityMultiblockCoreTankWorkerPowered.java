@@ -11,6 +11,7 @@ import mod.industrialProcessing.utils.rotation.DirectionUtils;
 import mod.industrialProcessing.utils.rotation.LocalDirection;
 import mod.industrialProcessing.work.recipe.IPowerRecipe;
 import mod.industrialProcessing.work.recipe.Recipe;
+import mod.industrialProcessing.work.recipe.RecipeMultiblockFluidWorker;
 import mod.industrialProcessing.work.recipe.RecipeMultiblockWorker;
 import mod.industrialProcessing.work.recipe.RecipesMultiblock;
 import net.minecraft.nbt.NBTTagCompound;
@@ -31,7 +32,7 @@ public abstract class TileEntityMultiblockCoreTankWorkerPowered extends TileEnti
 
     @Override
     public void doWork() {
-        Recipe recipe = ((RecipeMultiblockWorker) getWorker()).findCurrentRecipe();
+        Recipe recipe = ((RecipeMultiblockFluidWorker) getWorker()).findCurrentRecipe();
 
         if (recipe != null) {
             int amount = PowerWorkerHelper.getWork(this.storage, this.maxWorkSpeed);

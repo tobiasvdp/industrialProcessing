@@ -1,250 +1,207 @@
 package mod.industrialProcessing.utils.handlers.line;
 
-import mod.industrialProcessing.plants.transport.items.ConveyorBeltPowerInput.TileEntityConveyorBeltPowerInput;
-import mod.industrialProcessing.transport.items.conveyorBelt.tileEntity.TileEntityConveyorConnectionsBase;
-import mod.industrialProcessing.transport.items.conveyorBelt.util.ConveyorLine;
-import mod.industrialProcessing.utils.rotation.DirectionUtils;
-import mod.industrialProcessing.utils.rotation.LocalDirection;
-import net.minecraft.tileentity.TileEntity;
+import java.util.ArrayList;
+
 import net.minecraftforge.common.util.ForgeDirection;
+import mod.industrialProcessing.transport.items.conveyorBelt.util.ConveyorLine;
 
 public class LineHandler implements ILineHandler {
-	ConveyorLine[] lines;;
 
-	public LineHandler() {
-		lines = new ConveyorLine[1];
+	ILine[] lines;
+	String name;
+
+	public LineHandler(String name) {
+		lines = new Line[1];
+		this.name = name;
 	}
 
-	@Override
-	public boolean registerPowercontainer(int id, TileEntityConveyorBeltPowerInput te) {
-		if (id < lines.length && id != -1) {
-			ConveyorLine line = lines[id];
-			if (line != null) {
-				line.registerPowercontainer(te);
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public void unregisterPowercontainer(int id, TileEntityConveyorBeltPowerInput te) {
-		if (id < lines.length && id != -1) {
-			ConveyorLine line = lines[id];
-			if (line != null) {
-				line.unregisterPowercontainer(te);
-			}
-		}
-	}
-
-	public ConveyorLine getConveyorLine(int id) {
-		return lines[id];
-	}
-
-	@Override
-	public void unregisterLine(TileEntityConveyorConnectionsBase te) {
-		if (te.getLineID() != -1) {
-			unregisterConveyorToLine(te.getLineID(), te);
-			ConveyorLine line = lines[te.getLineID()];
-			if (line != null) {
-				splitLine(te.getLineID(), te);
-			}
-		}
-	}
-
-	@Override
-	public int registerLine(TileEntityConveyorConnectionsBase te) {
-		int id1 = te.isValidLineConnection(LocalDirection.BACK, true);
-		int id2 = -1;
-		switch (te.getCornerState()) {
-		case crossing:
-		case invalid:
-		case multi:
-		case straight:
-			id2 = te.isValidLineConnection(LocalDirection.FRONT, false);
-			break;
-		case left:
-			id2 = te.isValidLineConnection(LocalDirection.LEFT, false);
-			break;
-
-		case right:
-			id2 = te.isValidLineConnection(LocalDirection.RIGHT, false);
-			break;
-		default:
-			break;
-		}
-		if (id1 == -1 && id2 == -1) {
-			if (te.getLineID() == -1) {
-				System.out.println("new line");
-				int id = createNewLine();
-				registerConveyorToLine(id, te);
-				return id;
-			}
-			return te.getLineID();
-		} else if (id1 == id2) {
-			if (te.getLineID() == -1) {
-				System.out.println("added to line " + id1);
-				registerConveyorToLine(id1, te);
-			}
-			System.out.println("line" + id1);
-			return id1;
-		} else if (id1 != -1 && id2 == -1) {
-			System.out.println("added to line " + id1);
-			registerConveyorToLine(id1, te);
-			if (te.getLineID() != 1 && (te.getLineID() != id1 && te.getLineID() != id2)) {
-				unregisterConveyorToLine(te.getLineID(), te);
-			}
-			return id1;
-		} else if (id1 == -1 && id2 != -1) {
-			System.out.println("added to line " + id2);
-			registerConveyorToLine(id2, te);
-			if (te.getLineID() != -1 && (te.getLineID() != id1 && te.getLineID() != id2)) {
-				unregisterConveyorToLine(te.getLineID(), te);
-			}
-			return id2;
-		} else if (id1 != id2) {
-			System.out.println("merge lines " + id1 + " " + id2);
-			int id = mergeLine(id1, id2, te);
-			if (te.getLineID() == -1)
-				registerConveyorToLine(id, te);
-			return id;
-		}
-		return te.getLineID();
-	}
-
-	public void registerConveyorToLine(int id, TileEntityConveyorConnectionsBase te) {
-		if (id != -1) {
-			ConveyorLine line = lines[id];
-			if (line != null)
-				line.registerConveyor(te);
-		}
-	}
-
-	public void unregisterConveyorToLine(int id, TileEntityConveyorConnectionsBase te) {
-		if (id != -1) {
-			ConveyorLine line = lines[id];
-			if (line != null)
-				if (line.unregisterConveyor(te))
-					lines[id] = null;
-		}
-	}
-
-	public void evaluateLine(int id) {
-		ConveyorLine line = lines[id];
-	}
-
-	public void splitLine(int id1, TileEntityConveyorConnectionsBase te) {
-		int idBack = te.isValidLineConnection(LocalDirection.BACK, true);
-		int idFront = -1;
-		switch (te.getCornerState()) {
-		case crossing:
-		case invalid:
-		case multi:
-		case straight:
-			idFront = te.isValidLineConnection(LocalDirection.FRONT, false);
-			break;
-		case left:
-			idFront = te.isValidLineConnection(LocalDirection.RIGHT, false);
-			break;
-
-		case right:
-			idFront = te.isValidLineConnection(LocalDirection.LEFT, false);
-			break;
-		default:
-			break;
-		}
-		if (idBack == -1 || idFront == -1) {
-		} else {
-			System.out.println("split required");
-			int id2 = createNewLine();
-			translateNewIDToLineForward(id1, id2, te);
-		}
-
-	}
-
-	private void translateNewIDToLineForward(int id1, int id2, TileEntityConveyorConnectionsBase base) {
-		TileEntityConveyorConnectionsBase[] te = new TileEntityConveyorConnectionsBase[] { base };
-		boolean doNext = true;
-		while (doNext) {
-			ForgeDirection dir = DirectionUtils.getWorldDirection(LocalDirection.BACK, te[0].getForwardDirection());
-			int offsetSlope = te[0].getOffsetfromSlope(LocalDirection.BACK);
-			TileEntity next = te[0].getWorldObj().getTileEntity(te[0].xCoord + dir.offsetX, te[0].yCoord + dir.offsetY + offsetSlope, te[0].zCoord + dir.offsetZ);
-			if (next != null && next instanceof TileEntityConveyorConnectionsBase) {
-				TileEntityConveyorConnectionsBase nextTe = ((TileEntityConveyorConnectionsBase) next);
-				if (nextTe.getLineID() == id1) {
-					registerConveyorToLine(id2, nextTe);
-					unregisterConveyorToLine(id1, nextTe);
-					nextTe.setLineID(id2);
-					te[0] = nextTe;
-				} else {
-					doNext = false;
-				}
-
-			} else {
-				doNext = false;
-			}
-		}
-	}
-
-	public int mergeLine(int id1, int id2, TileEntityConveyorConnectionsBase te) {
-		translateNewIDToLineForward(id1, id2, te);
-		return id2;
-	}
-
-	public int createNewLine() {
-		int id = 0;
+	public int createNewLine(int id) {
 		while (true) {
-			if (id == lines.length) {
-				ConveyorLine[] lines = new ConveyorLine[this.lines.length * 2];
+			while (id >= lines.length) {
+				ILine[] lines = new Line[this.lines.length * 2];
 				for (int i = 0; i < this.lines.length; i++) {
 					lines[i] = this.lines[i];
 				}
 				this.lines = lines;
 			}
 			if (lines[id] == null) {
-				lines[id] = new ConveyorLine(id);
+				lines[id] = new Line(id);
 				return id;
 			}
 			id++;
 		}
 	}
 
+	public int createNewLine() {
+		return createNewLine(0);
+	}
+
 	@Override
-	public void registerLineFromNBT(TileEntityConveyorConnectionsBase conveyorBelt) {
-		int id = conveyorBelt.getLineID();
-		if (id != -1) {
-			while (id >= lines.length) {
-				ConveyorLine[] lines = new ConveyorLine[this.lines.length * 2];
-				for (int i = 0; i < this.lines.length; i++) {
-					lines[i] = this.lines[i];
+	public int registerToLine(ILineTileEntity teLine, ForgeDirection dir) {
+		if (teLine.isMicroblock()) {
+			return registerMicroblockToLine((ILineTileEntityMicroblock) teLine, dir);
+		} else {
+			return -1;
+		}
+	}
+
+	private int registerMicroblockToLine(ILineTileEntityMicroblock teLine, ForgeDirection dir) {
+		int[] lines = teLine.getLineConnectionArray(dir);
+		int line = getSmallestValidLineNumber(lines);
+		if (line == -1) {
+			int newLine = createNewLine();
+			teLine.setLineID(dir.ordinal(), newLine);
+			System.out.println("created new line " + newLine);
+			return this.lines[newLine].registerToLine(teLine);
+		} else {
+			teLine.setLineID(dir.ordinal(), line);
+			this.lines[line].registerToLine(teLine);
+			System.out.println("added to existing line " + line);
+			translateToOtherLines(lines, line);
+		}
+		return -1;
+	}
+
+	private void translateToOtherLines(int[] lines, int line) {
+		for (int i = 0; i < lines.length; i++) {
+				if (lines[i] > line) {
+					mergeLines(line, lines[i]);
 				}
-				this.lines = lines;
 			}
-			if (lines[id] == null)
-				lines[id] = new ConveyorLine(id);
-			lines[id].registerConveyor(conveyorBelt);
+	}
+
+	private void mergeLines(int line, int oldLine) {
+		if (lines[oldLine] != null) {
+			System.out.println("merge line " + line + " and " + oldLine);
+			lines[oldLine].mergeLine(lines[line]);
+			lines[oldLine] = null;
+		}
+	}
+
+	private int getSmallestValidLineNumber(int[] lines) {
+		int min = -1;
+		for (int i = 0; i < lines.length; i++) {
+				if (lines[i] >= 0 && (min == -1 || lines[i] < min)) {
+					min = lines[i];
+				}
+		}
+		return min;
+	}
+
+	@Override
+	public void unregisterFromLine(ILineTileEntity teLine, ForgeDirection dir) {
+		if (teLine.isMicroblock()) {
+			unregisterMicroblockFromLine((ILineTileEntityMicroblock) teLine, dir);
+		} else {
+
+		}
+	}
+
+	private void unregisterMicroblockFromLine(ILineTileEntityMicroblock teLine, ForgeDirection dir) {
+		int line = teLine.getLineID(dir.ordinal());
+		teLine.setLineID(dir.ordinal(), -1);
+		if (line != -1) {
+			if (lines[line] != null) {
+				if (lines[line].unregisterFromLine(teLine)) {
+					lines[line] = null;
+				} else {
+					splitLine(line);
+					lines[line] = null;
+				}
+			}
+		}
+	}
+
+	private void splitLine(int oldLine) {
+		lines[oldLine].redoLine();
+	}
+
+	@Override
+	public void registerToLineFromNBT(ILineTileEntity teLine) {
+		if (teLine.isMicroblock()) {
+			registerMicroblockToLineFromNBT((ILineTileEntityMicroblock) teLine);
+		} else {
+			// TODO
+		}
+	}
+
+	private void registerMicroblockToLineFromNBT(ILineTileEntityMicroblock teLine) {
+		if (!teLine.isLineNull()) {
+			for (int i = 0; i < 6; i++) {
+				int id = teLine.getLineID(i);
+				if (id >= 0) {
+					if (id >= lines.length || lines[id] == null)
+						createNewLine(id);
+					lines[id].registerToLineFromNBT(teLine);
+					System.out.println("Registered to line " + id + " from NBT");
+				}
+			}
 		}
 	}
 
 	@Override
-	public float getResistanceForLine(int id) {
-		if (id < lines.length) {
-			ConveyorLine line = lines[id];
-			if (line != null) {
-				return line.getResistance();
+	public int registerUtilityToLine(ILineTileEntity teLine, ForgeDirection dir) {
+		int[] lines = teLine.getLineConnectionArray(dir);
+		if(teLine.hasMultipleLineSupport()){
+			for(int i = 0;i<lines.length;i++){
+				if(lines[i] >= 0){
+					this.lines[i].registerUtilityToLine(teLine);
+					System.out.println("registered util to line "+i);
+				}
+			}
+		}else{
+			int line = getSmallestValidLineNumber(lines);
+			if(line >= 0){
+				if(teLine instanceof ILineTileEntityMicroblock){
+					
+				}else{
+					((ILineTileEntitySolidBlock)teLine).setLineID(line);
+				}
+				this.lines[line].registerUtilityToLine(teLine);
+				System.out.println("registered util to line "+line);
 			}
 		}
 		return 0;
 	}
 
 	@Override
-	public float getSpeedForLine(int id) {
-		if (id < lines.length) {
-			ConveyorLine line = lines[id];
-			if (line != null) {
-				return line.getSpeed();
+	public void unregisterUtilityFromLine(ILineTileEntity teLine, ForgeDirection dir) {
+		for(int i = 0;i<lines.length;i++){
+			lines[i].unregisterUtilityFromLine(teLine);
+		}
+		System.out.println("unregistered Util");
+	}
+
+	@Override
+	public void registerUtilityToLineFromNBT(ILineTileEntity teLine) {
+		if (teLine.isMicroblock()) {
+			
+		} else {
+			ILineTileEntitySolidBlock teSolid = ((ILineTileEntitySolidBlock)teLine);
+			int id = teSolid.getLineId();
+			if (id >= 0) {
+				if (id >= lines.length || lines[id] == null)
+					createNewLine(id);
+				lines[id].registerUtilityToLineFromNBT(teLine);
+				System.out.println("Registered utility to line " + id + " from NBT");
 			}
 		}
-		return 0;
 	}
+
+	@Override
+	public ILine[] getLines() {
+		return lines;
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public void reset() {
+		lines = new Line[1];
+		lines[0] = null;
+	}
+
 }

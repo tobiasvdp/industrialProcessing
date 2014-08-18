@@ -15,13 +15,17 @@ import mod.industrialProcessing.utils.baseRecipes.ConfigBaseRecipes;
 import mod.industrialProcessing.utils.creativeTab.ISetupCreativeTabs;
 import mod.industrialProcessing.utils.damage.ISetupDamageSource;
 import mod.industrialProcessing.utils.handlers.crafting.CraftingHandler;
+import mod.industrialProcessing.utils.handlers.event.EventBlockHilight;
 import mod.industrialProcessing.utils.handlers.fluids.BucketHandler;
 import mod.industrialProcessing.utils.handlers.fuel.FuelHandler;
 import mod.industrialProcessing.utils.handlers.gui.GuiHandler;
 import mod.industrialProcessing.utils.handlers.heat.HeatHandler;
 import mod.industrialProcessing.utils.handlers.line.LineHandler;
+import mod.industrialProcessing.utils.handlers.line.OldLineHandler;
 import mod.industrialProcessing.utils.handlers.packet.PacketHandler;
 import mod.industrialProcessing.utils.handlers.packet.packets.ConveyorPacket;
+import mod.industrialProcessing.utils.handlers.packet.packets.RayTraceToServerPacket;
+import mod.industrialProcessing.utils.handlers.packet.packets.SendMicroBlockDestructionChangePacket;
 import mod.industrialProcessing.utils.handlers.packet.packets.StateConfigPacket;
 import mod.industrialProcessing.utils.handlers.packet.packets.SyncAnimationPacket;
 import mod.industrialProcessing.utils.handlers.packet.packets.SyncValuesPacket;
@@ -87,9 +91,10 @@ public class IndustrialProcessing implements INamepace, ISetupCreativeTabs, ISet
 		GameRegistry.registerWorldGenerator(new WorldGeneration(), 100);
 		
 		//register handlers
-		HandlerRegistry.registerConveyorLineHandler(new LineHandler());		
+		HandlerRegistry.registerConveyorLineHandler(new OldLineHandler());		
 		GameRegistry.registerFuelHandler(new FuelHandler());
 		HandlerRegistry.registerHeatHandler(new HeatHandler());
+		HandlerRegistry.registerLineHandler(new LineHandler("logic"));
 		
 		//register achievements
 		ConfigAchievements.getInstance().registerAchievments();
@@ -119,9 +124,12 @@ public class IndustrialProcessing implements INamepace, ISetupCreativeTabs, ISet
 		PacketHandler.getInstance().registerPacket(ConveyorPacket.class);
 		PacketHandler.getInstance().registerPacket(StateConfigPacket.class);
 		PacketHandler.getInstance().registerPacket(SyncValuesPacket.class);
+		PacketHandler.getInstance().registerPacket(SendMicroBlockDestructionChangePacket.class);
+		PacketHandler.getInstance().registerPacket(RayTraceToServerPacket.class);
 		//PacketHandler.getInstance().register();
 		
 		FMLCommonHandler.instance().bus().register(new CraftingHandler());
+		MinecraftForge.EVENT_BUS.register(new EventBlockHilight());
 	}
 
 	@EventHandler
@@ -141,5 +149,6 @@ public class IndustrialProcessing implements INamepace, ISetupCreativeTabs, ISet
 	@EventHandler
 	public void serverStop(FMLServerStoppingEvent event) {
 		HandlerRegistry.resetConveyorLineHandler();
+		HandlerRegistry.resetLineHandlers();
 	}
 }
