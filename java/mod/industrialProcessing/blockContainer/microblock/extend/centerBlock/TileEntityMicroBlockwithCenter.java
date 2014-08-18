@@ -1,7 +1,7 @@
 package mod.industrialProcessing.blockContainer.microblock.extend.centerBlock;
 
-import ip.industrialProcessing.items.ItemMicroBlock;
-import ip.industrialProcessing.microBlock.extend.connectionCorners.TileEntityMicroBlockConnectionCorners;
+import mod.industrialProcessing.blockContainer.microblock.extend.connectionCorners.TileEntityMicroBlockConnectionCorners;
+import mod.industrialProcessing.items.ItemMicroBlock;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -15,7 +15,7 @@ public abstract class TileEntityMicroBlockwithCenter extends TileEntityMicroBloc
 	}
 
 	@Override
-	public void setSide(ForgeDirection dir,  ItemMicroBlock itemMicroBlock, EntityPlayer player) {
+	public void setSide(ForgeDirection dir, ItemMicroBlock itemMicroBlock, EntityPlayer player) {
 		if (!hasCore()) {
 			setCore(itemMicroBlock.itemID);
 		} else {

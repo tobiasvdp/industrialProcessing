@@ -1,4 +1,4 @@
-package mod.industrialProcessing.plants.logic.wire.cable;
+package mod.industrialProcessing.blockContainer.microblock.extend.cable;
 
 import java.util.Arrays;
 
@@ -11,28 +11,24 @@ import mod.industrialProcessing.utils.handlers.line.ILineTileEntitySolidBlock;
 import mod.industrialProcessing.utils.registry.HandlerRegistry;
 import mod.industrialProcessing.utils.registry.MicroBlockConnectionRegistry;
 import mod.industrialProcessing.utils.rotation.LocalDirection;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityCable extends TileEntityMicroBlockConnectionCorners implements ILineTileEntityMicroblock {
+public abstract class TileEntityCable extends TileEntityMicroBlockConnectionCorners implements ILineTileEntityMicroblock {
 
 	protected int[] lineID = new int[6];
+	protected int lineLength = 0;
+	protected boolean isLoaded = false;
 
 	public TileEntityCable() {
+		int[] lineID = new int[6];
 		Arrays.fill(lineID, -1);
 	}
 
 	@Override
-	public boolean hasMultipleLines() {
-		int count = 0;
-		int current = -1;
-		for (int i = 0; i < 6; i++) {
-			if (-1 != this.lineID[i] && current != this.lineID[i]) {
-				current = this.lineID[i];
-				count++;
-			}
-		}
-		return count > 1;
+	public boolean hasMultipleLineSupport() {
+		return true;
 	}
 
 	@Override
@@ -122,15 +118,16 @@ public class TileEntityCable extends TileEntityMicroBlockConnectionCorners imple
 	}
 
 	@Override
-	public int[][] getLineConnectionArray(ForgeDirection dir) {
-		int[][] result = new int[3][4];
+	public int[] getLineConnectionArray(ForgeDirection dir) {
+		int[] result = new int[12];
+		int k = 0;
 		// innerconnections
 		for (int i = 0; i < 4; i++) {
 			if (interConnections[dir.ordinal()][i]) {
 				int side = getRotated(dir.ordinal(), i);
-				result[0][i] = getLineID(side);
+				result[k++] = getLineID(side);
 			} else {
-				result[0][i] = -2;
+				result[k++] = -2;
 			}
 		}
 		// external connections
@@ -140,15 +137,15 @@ public class TileEntityCable extends TileEntityMicroBlockConnectionCorners imple
 				ForgeDirection nextDir = ForgeDirection.values()[side];
 				TileEntity nextTe = worldObj.getTileEntity(xCoord + nextDir.offsetX, yCoord + nextDir.offsetY, zCoord + nextDir.offsetZ);
 				if (nextTe instanceof ILineTileEntityMicroblock) {
-					result[1][i] = ((ILineTileEntityMicroblock) nextTe).getLineID(dir.ordinal());
+					result[k++] = ((ILineTileEntityMicroblock) nextTe).getLineID(dir.ordinal());
 				} else if (nextTe instanceof ILineTileEntitySolidBlock) {
-					result[1][i] = ((ILineTileEntitySolidBlock) nextTe).getLineId();
+					result[k++] = ((ILineTileEntitySolidBlock) nextTe).getLineId();
 				} else {
-					result[1][i] = -3;
+					result[k++] = -3;
 				}
 
 			} else {
-				result[1][i] = -2;
+				result[k++] = -2;
 			}
 		}
 
@@ -159,19 +156,62 @@ public class TileEntityCable extends TileEntityMicroBlockConnectionCorners imple
 				ForgeDirection nextDir = ForgeDirection.values()[side];
 				TileEntity nextTe = worldObj.getTileEntity(xCoord + nextDir.offsetX + dir.offsetX, yCoord + nextDir.offsetY + dir.offsetY, zCoord + nextDir.offsetZ + dir.offsetZ);
 				if (nextTe instanceof ILineTileEntityMicroblock) {
-					result[2][i] = ((ILineTileEntityMicroblock) nextTe).getLineID(nextDir.getOpposite().ordinal());
+					result[k++] = ((ILineTileEntityMicroblock) nextTe).getLineID(nextDir.getOpposite().ordinal());
 				} else if (nextTe instanceof ILineTileEntitySolidBlock) {
-					result[2][i] = ((ILineTileEntitySolidBlock) nextTe).getLineId();
+					result[k++] = ((ILineTileEntitySolidBlock) nextTe).getLineId();
 				} else {
-					result[2][i] = -3;
+					result[k++] = -3;
 				}
 
 			} else {
-				result[2][i] = -2;
+				result[k++] = -2;
 			}
 		}
 
 		return result;
+	}
+	
+	@Override
+	public void writeToNBT(NBTTagCompound par1nbtTagCompound) {
+		super.writeToNBT(par1nbtTagCompound);
+		par1nbtTagCompound.setIntArray("lineID", lineID);
+		par1nbtTagCompound.setInteger("lineLength", lineLength);
+	}
+	
+	@Override
+	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
+		super.readFromNBT(par1nbtTagCompound);
+		
+		lineID = par1nbtTagCompound.getIntArray("lineID");
+		if(lineID == null || lineID.length == 0){
+			lineID = new int[6];
+			Arrays.fill(lineID, -1);
+		}
+		lineLength = par1nbtTagCompound.getInteger("lineLength");
+		
+		if(!isLoaded){
+			HandlerRegistry.registerToLineHandlerFromNBT("logic", this);
+			isLoaded = true;
+		}
+	}
+
+	@Override
+	public boolean isLineNull() {
+		if(lineID == null)
+			return true;
+		if(lineID.length == 0)
+			return true;
+		return false;
+	}
+
+	@Override
+	public void setLineLength(int length) {
+		lineLength = length;
+	}
+
+	@Override
+	public int getLineLength() {
+		return lineLength;
 	}
 
 }

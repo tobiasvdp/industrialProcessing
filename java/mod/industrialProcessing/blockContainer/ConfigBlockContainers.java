@@ -64,6 +64,7 @@ import mod.industrialProcessing.plants.machine.mixer.ModelMixer;
 import mod.industrialProcessing.plants.machine.mixer.TileEntityMixer;
 import mod.industrialProcessing.plants.machine.treetap.TileEntityManualTreeTap;
 import mod.industrialProcessing.plants.machine.treetap.model.ModelManualTreeTapBlock;
+import mod.industrialProcessing.plants.network.monitor.TileEntityNetworkMonitor;
 import mod.industrialProcessing.plants.power.generator.crankGenerator.ModelCrankGenerator;
 import mod.industrialProcessing.plants.power.generator.crankGenerator.TileEntityManualGenerator;
 import mod.industrialProcessing.plants.power.generator.creative.TileEntityCreativeGenerator;
@@ -206,7 +207,7 @@ public class ConfigBlockContainers {
 		
 		BlockRegistry.registerMachine(IndustrialProcessing.microBlock, MicroBlockTileEntity.class, "IP.micro.block", new ModelMicroBlock());
 		
-
+		BlockRegistry.registerMachine(IndustrialProcessing.blockNetworkMonitor, TileEntityNetworkMonitor.class, "IP.logic.netwMonitor");
 		/*
 		 * 
 		 * 

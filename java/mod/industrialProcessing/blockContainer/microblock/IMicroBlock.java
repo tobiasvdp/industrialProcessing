@@ -13,4 +13,5 @@ public interface IMicroBlock {
 	void refresh();
 	int[] getSides();
 	MicroBlockType getType();
+	ItemMicroBlock getItemOnSide(ForgeDirection dir);
 }

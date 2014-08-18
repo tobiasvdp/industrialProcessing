@@ -1,7 +1,8 @@
 package mod.industrialProcessing.items;
 
 import mod.industrialProcessing.IndustrialProcessing;
-import mod.industrialProcessing.plants.logic.wire.cable.TileEntityCable;
+import mod.industrialProcessing.plants.logic.adaptor.TileEntityInterfaceAdaptor;
+import mod.industrialProcessing.plants.logic.wire.cable.TileEntityLogicCable;
 import mod.industrialProcessing.plants.logic.wire.cable.model.ModelCable;
 import mod.industrialProcessing.utils.registry.ItemRegistry;
 import mod.industrialProcessing.utils.registry.MicroBlockRegistry;
@@ -138,7 +139,8 @@ public class ConfigItems {
 		ItemRegistry.registerItem(ISetupItems.itemWoodenBucketWater, "IP.item.woodenBucketWater");
 		FluidContainerRegistry.registerFluidContainer(FluidRegistry.WATER, new ItemStack(IndustrialProcessing.itemWoodenBucketWater), new ItemStack(IndustrialProcessing.itemWoodenBucket));
 
-		MicroBlockRegistry.registerMicroBlock(ISetupItems.itemCable, "IP.micro.cable", TileEntityCable.class, new ModelCable());
+		MicroBlockRegistry.registerMicroBlock(ISetupItems.itemCable, "IP.micro.cable", TileEntityLogicCable.class, new ModelCable());
+		MicroBlockRegistry.registerMicroBlock(ISetupItems.itemInterfaceAdaptor, "IP.micro.interfaceAdaptor", TileEntityInterfaceAdaptor.class, new ModelCable());
 
 	}
 

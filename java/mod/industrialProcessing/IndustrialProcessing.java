@@ -149,5 +149,6 @@ public class IndustrialProcessing implements INamepace, ISetupCreativeTabs, ISet
 	@EventHandler
 	public void serverStop(FMLServerStoppingEvent event) {
 		HandlerRegistry.resetConveyorLineHandler();
+		HandlerRegistry.resetLineHandlers();
 	}
 }

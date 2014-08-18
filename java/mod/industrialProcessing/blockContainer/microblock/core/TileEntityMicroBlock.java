@@ -5,6 +5,7 @@ import java.util.Arrays;
 import mod.industrialProcessing.blockContainer.microblock.IMicroBlock;
 import mod.industrialProcessing.blockContainer.microblock.MicroBlockType;
 import mod.industrialProcessing.items.ItemMicroBlock;
+import net.minecraft.block.Block;
 import net.minecraft.dispenser.IPosition;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,10 +26,20 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 	protected boolean hasCore = false;
 	protected boolean overrideSolidSide;
 	protected int tileEntityLevel = 0;
+	boolean refresh = false;
 
 	public TileEntityMicroBlock() {
 		Arrays.fill(sidesMicroblock, -1);
 		Arrays.fill(sidesMicroblockItemID, -1);
+	}
+	
+	@Override
+	public void updateEntity() {
+		if(refresh){
+			refresh = false;
+			notifyOnCreation();
+		}
+		super.updateEntity();
 	}
 
 	@Override
@@ -47,7 +58,7 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 	@Override
 	public void readFromNBT(NBTTagCompound par1nbtTagCompound) {
 		super.readFromNBT(par1nbtTagCompound);
-					
+
 		tileEntityLevel = par1nbtTagCompound.getInteger("tileEntityLevel");
 		sidesMicroblock = par1nbtTagCompound.getIntArray("sidesMicro");
 		sidesMicroblockItemID = par1nbtTagCompound.getIntArray("sidesMicroID");
@@ -55,15 +66,19 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 			sidesMicroblock = new int[6];
 			Arrays.fill(sidesMicroblock, -1);
 		}
-		
+		if (sidesMicroblockItemID.length == 0) {
+			sidesMicroblockItemID = new int[6];
+			Arrays.fill(sidesMicroblockItemID, -1);
+		}
+
 		NBTTagCompound thisNBT = new NBTTagCompound();
 		this.writeToNBT(thisNBT);
-		if(!thisNBT.getString("id").equals(par1nbtTagCompound.getString("id"))){
+		if (!thisNBT.getString("id").equals(par1nbtTagCompound.getString("id"))) {
 			thisNBT.setString("id", par1nbtTagCompound.getString("id"));
 			TileEntity te = TileEntity.createAndLoadEntity(thisNBT);
 			worldObj.setTileEntity(xCoord, yCoord, zCoord, te);
 			TileEntity newTe = worldObj.getTileEntity(xCoord, yCoord, zCoord);
-			((TileEntityMicroBlock) te).notifyOnCreation();
+			((TileEntityMicroBlock) te).refresh = true;
 		}
 
 	}
@@ -88,7 +103,7 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 
 	@Override
 	public void setSide(ForgeDirection dir, ItemMicroBlock itemMicroBlock, EntityPlayer player) {
-		if (itemMicroBlock.isValidPlacingSide(dir, worldObj, xCoord, yCoord, zCoord, itemMicroBlock) && isValidSide(dir) && isCompatible(itemMicroBlock)){
+		if (itemMicroBlock.isValidPlacingSide(dir, worldObj, xCoord, yCoord, zCoord, itemMicroBlock) && isValidSide(dir) && isCompatible(itemMicroBlock)) {
 			if (player != null) {
 				if (player.getCurrentEquippedItem() != null && !player.capabilities.isCreativeMode) {
 					if (player.getCurrentEquippedItem().equals(itemMicroBlock)) {
@@ -98,9 +113,9 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 			}
 			boolean firstSide = countSetSides() == 0;
 			sidesMicroblock[dir.ordinal()] = itemMicroBlock.microblock;
-			sidesMicroblockItemID[dir.ordinal()] =  Item.getIdFromItem(itemMicroBlock);
+			sidesMicroblockItemID[dir.ordinal()] = Item.getIdFromItem(itemMicroBlock);
 			if (firstSide) {
-					switchTileEntities();
+				switchTileEntities();
 			}
 			System.out.println("set " + dir + " to " + itemMicroBlock.microblock);
 			onSetSide(dir, itemMicroBlock.microblock);
@@ -113,21 +128,20 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 	}
 
 	private boolean isCompatible(ItemMicroBlock itemMicroBlock) {
-		if( countSetSides() == 0){
+		if (countSetSides() == 0) {
 			return true;
-		}else{
-			
-			for(int i = 0;i<6;i++){
-				if(sidesMicroblockItemID[i] != -1){
+		} else {
+
+			for (int i = 0; i < 6; i++) {
+				if (sidesMicroblockItemID[i] != -1) {
 					Item item = Item.getItemById(sidesMicroblockItemID[i]);
-					if(item != null && item instanceof ItemMicroBlock){
-						if(((ItemMicroBlock) item ).isCompatible( itemMicroBlock)){
+					if (item != null && item instanceof ItemMicroBlock) {
+						if (((ItemMicroBlock) item).isCompatible(itemMicroBlock)) {
 							return true;
-						}
-						else{
+						} else {
 							return false;
 						}
-						
+
 					}
 				}
 			}
@@ -145,7 +159,7 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 				}
 			}
 		}
-		if (level > this.tileEntityLevel ) {
+		if (level > this.tileEntityLevel) {
 			TileEntity te = null;
 			int i = 0;
 			while (te == null) {
@@ -159,7 +173,8 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 							te = TileEntity.createAndLoadEntity(nbtTag);
 							worldObj.setTileEntity(xCoord, yCoord, zCoord, te);
 							TileEntity newTe = worldObj.getTileEntity(xCoord, yCoord, zCoord);
-							((TileEntityMicroBlock) te).notifyOnCreation();
+							((TileEntityMicroBlock)te).notifyOnCreation();
+
 						}
 					}
 				}
@@ -173,7 +188,7 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 	}
 
 	public void onSetSide(ForgeDirection dir, int itemID) {
-
+		this.worldObj.notifyBlockChange(xCoord, yCoord, zCoord, this.getBlockType());
 	}
 
 	@Override
@@ -242,7 +257,8 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 
 	private boolean isValidSide(ForgeDirection dir) {
 		if (!isSideFree(dir)) {
-			if (worldObj.getBlock(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ).isSideSolid(worldObj,xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ, dir.getOpposite()) || overrideSolidSide) {
+			Block block = worldObj.getBlock(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+			if (block.isSideSolid(worldObj, xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ, dir.getOpposite()) || overrideSolidSide) {
 				return true;
 			}
 			return false;
@@ -277,6 +293,15 @@ public abstract class TileEntityMicroBlock extends TileEntity implements IMicroB
 		}
 
 	}
-	
+
 	public abstract MicroBlockType getType();
+
+	@Override
+	public ItemMicroBlock getItemOnSide(ForgeDirection dir) {
+		if (sidesMicroblockItemID[dir.ordinal()] >= 0) {
+			Item item = Item.getItemById(sidesMicroblockItemID[dir.ordinal()]);
+			return (ItemMicroBlock) item;
+		}
+		return null;
+	}
 }

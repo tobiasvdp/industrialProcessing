@@ -46,10 +46,10 @@ public abstract class TileEntityMicroBlockConnection extends TileEntityMicroBloc
 	@Override
 	public boolean unsetSide(ForgeDirection dir, EntityPlayer player) {
 		boolean result = super.unsetSide(dir, player);
+		onPostSideUnset(dir);
 		if(!result){
 		updateSideConnections();
 		updateExtConnections();
-		onPostSideUnset(dir);
 		this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		return false;
 		}
@@ -67,7 +67,7 @@ public abstract class TileEntityMicroBlockConnection extends TileEntityMicroBloc
 			ForgeDirection dir = ForgeDirection.values()[i];
 			Block block = worldObj.getBlock(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
 			if (block != null) {
-				if (block instanceof BlockMicroBlock) {
+				if (block instanceof BlockMicroBlock && this.getBlockType() instanceof BlockMicroBlock) {
 					if (this.getBlockType() != null && isValidMicroBlockType(((BlockMicroBlock) block).getMicroBlockType(), ((BlockMicroBlock) this.getBlockType()).getMicroBlockType()))
 						setExternalConnectionForSide(i, (IMicroBlock) this.worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ), true);
 				} else {

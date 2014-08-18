@@ -38,6 +38,16 @@ public class HandlerRegistry {
 			}
 		}
 	}
+	
+	public static void registerToLineHandlerFromNBT(String lineHandler, ILineTileEntity te) {
+			Iterator<ILineHandler> it = lineHandlers.iterator();
+			while (it.hasNext()) {
+				ILineHandler handler = it.next();
+				if (handler.getName().equals(lineHandler)) {
+					handler.registerToLineFromNBT(te);
+				}
+			}
+	}
 
 	public static void unregisterFromLineHandler(String lineHandler, ILineTileEntity te, ForgeDirection dir) {
 		if (!te.getWorldObj().isRemote) {
@@ -46,6 +56,40 @@ public class HandlerRegistry {
 				ILineHandler handler = it.next();
 				if (handler.getName().equals(lineHandler)) {
 					handler.unregisterFromLine(te, dir);
+				}
+			}
+		}
+	}
+	
+	public static void registerUtilToLineHandler(String lineHandler, ILineTileEntity te, ForgeDirection dir) {
+		if (!te.getWorldObj().isRemote) {
+			Iterator<ILineHandler> it = lineHandlers.iterator();
+			while (it.hasNext()) {
+				ILineHandler handler = it.next();
+				if (handler.getName().equals(lineHandler)) {
+					handler.registerUtilityToLine(te, dir);
+				}
+			}
+		}
+	}
+	
+	public static void registerUtilToLineHandlerFromNBT(String lineHandler, ILineTileEntity te) {
+			Iterator<ILineHandler> it = lineHandlers.iterator();
+			while (it.hasNext()) {
+				ILineHandler handler = it.next();
+				if (handler.getName().equals(lineHandler)) {
+					handler.registerUtilityToLineFromNBT(te);
+				}
+			}
+	}
+
+	public static void unregisterUtilFromLineHandler(String lineHandler, ILineTileEntity te, ForgeDirection dir) {
+		if (!te.getWorldObj().isRemote) {
+			Iterator<ILineHandler> it = lineHandlers.iterator();
+			while (it.hasNext()) {
+				ILineHandler handler = it.next();
+				if (handler.getName().equals(lineHandler)) {
+					handler.unregisterUtilityFromLine(te, dir);
 				}
 			}
 		}
@@ -176,6 +220,12 @@ public class HandlerRegistry {
 			speed = Math.max(speed, handler.getSpeedForLine(line));
 		}
 		return speed;
+	}
+
+	public static void resetLineHandlers() {
+		for(ILineHandler lineHandler:lineHandlers){
+			lineHandler.reset();
+		}
 	}
 
 }

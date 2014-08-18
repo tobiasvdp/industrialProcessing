@@ -8,51 +8,59 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class Line implements ILine {
 	
 	int ID;
+	int length = 0;
 	ArrayList<ILineTileEntity> te;
+	ArrayList<ILineTileEntity> teUtil;
 	
 	public Line(int id) {
 		this.ID = id;
 		te = new ArrayList<ILineTileEntity>();
+		teUtil = new ArrayList<ILineTileEntity>();
 	}
 
 	@Override
 	public int registerToLine(ILineTileEntity teLine) {
 		te.add(teLine);
+		setLength(getLength()+1);
 		return 0;
 	}
 
 	@Override
 	public boolean unregisterFromLine(ILineTileEntity teLine) {
 		te.remove(teLine);
-		if(te.size() == 0)
+		setLength(getLength()-1);
+		if(getLength() == 0)
 			return true;
 		return false;
 	}
 
 	@Override
 	public void registerToLineFromNBT(ILineTileEntity teLine) {
-		// TODO Auto-generated method stub
-
+		te.add(teLine);
+		length = Math.max(length, teLine.getLineLength());
+		System.out.println(this.ID + " line has " + length + " size");
 	}
 
 	@Override
 	public int registerUtilityToLine(ILineTileEntity teLine) {
-		// TODO Auto-generated method stub
+		teUtil.add(teLine);
 		return 0;
 	}
 
 	@Override
 	public boolean unregisterUtilityFromLine(ILineTileEntity teLine) {
+		teUtil.remove(teLine);
 		return false;
 	}
 
 	@Override
 	public void registerUtilityToLineFromNBT(ILineTileEntity teLine) {
-		// TODO Auto-generated method stub       
+		teUtil.add(teLine);     
 	}
 
 	@Override
 	public boolean mergeLine(ILine line) {
+		//TODO load entire line
 		Iterator<ILineTileEntity> it = te.iterator();
 		while(it.hasNext()){
 			ILineTileEntity tile = it.next();
@@ -69,6 +77,18 @@ public class Line implements ILine {
 			}
 		}
 		te.clear();
+		it = teUtil.iterator();
+		while(it.hasNext()){
+			ILineTileEntity tile = it.next();
+			line.registerUtilityToLine(tile);
+			if(tile instanceof ILineTileEntityMicroblock){
+				//TODO
+			}else{
+				ILineTileEntitySolidBlock teSolid = (ILineTileEntitySolidBlock) tile;
+				teSolid.setLineID(line.getID());
+			}
+		}
+		teUtil.clear();
 		return true;
 	}
 
@@ -107,6 +127,42 @@ public class Line implements ILine {
 			}
 		}
 		te.clear();
+		
+		it = teUtil.iterator();
+		while(it.hasNext()){
+			ILineTileEntity tile = it.next();
+			if(tile instanceof ILineTileEntityMicroblock){
+				ILineTileEntityMicroblock micro = (ILineTileEntityMicroblock) tile;
+			}else{
+				ILineTileEntitySolidBlock teSolid = (ILineTileEntitySolidBlock) tile;
+				teSolid.setLineID(-1);
+			}
+		}
+		it = teUtil.iterator();
+		while(it.hasNext()){
+			ILineTileEntity tile = it.next();
+			if(tile instanceof ILineTileEntityMicroblock){
+				ILineTileEntityMicroblock micro = (ILineTileEntityMicroblock) tile;
+			}else{
+				ILineTileEntitySolidBlock teSolid = (ILineTileEntitySolidBlock) tile;
+				teSolid.registerToLine();
+			}
+		}
+		teUtil.clear();
+	}
+
+	@Override
+	public int getLength() {
+		return length;
+	}
+
+	@Override
+	public void setLength(int i) {
+		length = i;
+		Iterator<ILineTileEntity> it = te.iterator();
+		while(it.hasNext()){
+			it.next().setLineLength(length);
+		}
 	}
 
 }

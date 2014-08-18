@@ -29,6 +29,7 @@ import mod.industrialProcessing.plants.machine.dryer.BlockDryer;
 import mod.industrialProcessing.plants.machine.filter.BlockFilter;
 import mod.industrialProcessing.plants.machine.mixer.BlockMixer;
 import mod.industrialProcessing.plants.machine.treetap.BlockManualTreeTap;
+import mod.industrialProcessing.plants.network.monitor.BlockNetworkMonitor;
 import mod.industrialProcessing.plants.power.generator.crankGenerator.BlockManualGenerator;
 import mod.industrialProcessing.plants.power.generator.creative.BlockCreativeGenerator;
 import mod.industrialProcessing.plants.power.generator.generator.BlockGenerator;
@@ -129,6 +130,8 @@ public interface ISetupBlockContainers {
     public final static BlockIOPort blockIOPort = new BlockIOPort();
     
     public final static MicroBlock microBlock = new MicroBlock();
+    
+    public final static BlockNetworkMonitor blockNetworkMonitor = new BlockNetworkMonitor();
     
     /* machines 
     public final static BlockMagneticSeparator blockMageneticSeparator = new BlockMagneticSeparator(); 

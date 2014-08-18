@@ -13,4 +13,7 @@ public interface ILine {
 	public void redoLine();
 	
 	public int getID();
+	
+	public int getLength();
+	public void setLength(int i);
 }
