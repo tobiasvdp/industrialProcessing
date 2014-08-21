@@ -6,14 +6,14 @@ import mod.industrialProcessing.client.rendering.tileEntity.animation.AnimationH
 import mod.industrialProcessing.client.rendering.tileEntity.animation.AnimationMode;
 import mod.industrialProcessing.client.rendering.tileEntity.animation.IAnimationSyncable;
 import mod.industrialProcessing.client.rendering.tileEntity.animation.TileAnimationSyncHandler;
-import mod.industrialProcessing.power.utils.IMechanicalMotion;
+import mod.industrialProcessing.power.utils.IMechanicalMotionReceiver;
 import mod.industrialProcessing.utils.rotation.DirectionUtils;
 import mod.industrialProcessing.utils.rotation.LocalDirection;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityGenerator extends TileEntityPowerGenerator implements IAnimationProgress, IMechanicalMotion, IAnimationSyncable {
+public class TileEntityGenerator extends TileEntityPowerGenerator implements IAnimationProgress, IMechanicalMotionReceiver, IAnimationSyncable {
 
     private AnimationHandler animationHandler;
     LocalDirection outputSide = LocalDirection.BACK;

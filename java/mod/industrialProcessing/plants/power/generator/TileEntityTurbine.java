@@ -13,7 +13,7 @@ import ip.industrialProcessing.utils.handler.numbers.IProgressable;
 
 import java.util.Iterator;
 
-import mod.industrialProcessing.power.utils.IMechanicalMotion;
+import mod.industrialProcessing.power.utils.IMechanicalMotionReceiver;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -51,7 +51,7 @@ public class TileEntityTurbine extends TileEntityFluidWorkerMachine implements I
 	    float speed = this.animationHandler.getSpeed();
 	    speed -= speed * DRAG * AnimationHandler.DT;
 	    ForgeDirection generatorDirection = DirectionUtils.getWorldDirection(motionOutputDirection, this.getForwardDirection());
-	    IMechanicalMotion generator = getGenerator(generatorDirection.getOpposite());
+	    IMechanicalMotionReceiver generator = getGenerator(generatorDirection.getOpposite());
 	    if (generator != null) {
 		float resistance = generator.setSpeed(generatorDirection, speed);
 		speed -= speed * resistance * AnimationHandler.DT;
@@ -61,11 +61,11 @@ public class TileEntityTurbine extends TileEntityFluidWorkerMachine implements I
 	super.updateEntity();
     }
 
-    private IMechanicalMotion getGenerator(ForgeDirection dir) {
+    private IMechanicalMotionReceiver getGenerator(ForgeDirection dir) {
 
 	TileEntity entity = this.worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
-	if (entity instanceof IMechanicalMotion)
-	    return (IMechanicalMotion) entity;
+	if (entity instanceof IMechanicalMotionReceiver)
+	    return (IMechanicalMotionReceiver) entity;
 	return null;
     }
 
