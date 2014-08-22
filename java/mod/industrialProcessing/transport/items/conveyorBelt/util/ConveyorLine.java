@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import mod.industrialProcessing.plants.transport.items.ConveyorBeltPowerInput.TileEntityConveyorBeltPowerInput;
-import mod.industrialProcessing.power.utils.IMechanicalMotion;
+import mod.industrialProcessing.power.utils.IMechanicalMotionReceiver;
 import mod.industrialProcessing.transport.items.conveyorBelt.tileEntity.TileEntityConveyorConnectionsBase;
 
 public class ConveyorLine {
@@ -69,7 +69,7 @@ public class ConveyorLine {
 		return speed / this.powercontainers.size();
 	}
 
-	public int getPowerID(IMechanicalMotion te) {
+	public int getPowerID(IMechanicalMotionReceiver te) {
 		return powercontainers.indexOf(te);
 	}
 }

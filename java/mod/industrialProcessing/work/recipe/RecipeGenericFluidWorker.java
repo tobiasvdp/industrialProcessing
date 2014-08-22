@@ -19,8 +19,8 @@ public class RecipeGenericFluidWorker<TMachineRecipe extends IMachineRecipe, TWo
 		if (!inventory)
 			return false;
 		RecipeInputFluidSlot[] inputSlots = currentRecipe.getFluidInputs();
-		if (inputSlots == null)
-			return false;
+		if (inputSlots == null) // no inputs? all inputs match
+			return true;
 		for (int i = 0; i < inputSlots.length; i++) {
 			RecipeInputFluidSlot slot = inputSlots[i];
 			if (!hasInputIngredients(slot))
@@ -50,9 +50,8 @@ public class RecipeGenericFluidWorker<TMachineRecipe extends IMachineRecipe, TWo
 		if (!inventory)
 			return false;
 
-		RecipeOutputFluidSlot[] outputSlots = recipe.getFluidOutputs();
-		if (currentRecipe == null)
-			return false;
+		RecipeOutputFluidSlot[] outputSlots = recipe.getFluidOutputs(); 
+		
 		if (outputSlots == null)// no outputs means room enough to output nothing!
 			return true;
 		for (int i = 0; i < outputSlots.length; i++) {

@@ -6,6 +6,7 @@ import mod.industrialProcessing.blockContainer.multiblock.tier.TierCollection;
 import mod.industrialProcessing.utils.registry.BlockSwitcherRegistry;
 import mod.industrialProcessing.utils.rotation.LocalDirection;
 import mod.industrialProcessing.work.recipe.RecipesMultiblock;
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -52,8 +53,10 @@ public abstract class TileEntityMultiblockSwitcherCore extends TileEntityMultibl
 
 	public void switchToDummy() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
-		this.writeToNBT(nbtTag);
-		nbtTag.setString("id", unlocalizedDummyName().substring(5));
+		this.writeToNBT(nbtTag); 
+		String name = unlocalizedDummyName();
+		if(name != null)
+			nbtTag.setString("id", name.substring(5));
 		nbtTag.setBoolean("isCore", false);
 		nbtTag.removeTag("Dummies");
 		nbtTag.removeTag("Items");
@@ -106,6 +109,8 @@ public abstract class TileEntityMultiblockSwitcherCore extends TileEntityMultibl
 	}
 
 	public String unlocalizedDummyName() {
-		return BlockSwitcherRegistry.getDummyName(this.getBlockType().getUnlocalizedName());
+		Block block = this.getBlockType();
+		String name = block.getUnlocalizedName();
+		return BlockSwitcherRegistry.getDummyName(name);
 	}
 }

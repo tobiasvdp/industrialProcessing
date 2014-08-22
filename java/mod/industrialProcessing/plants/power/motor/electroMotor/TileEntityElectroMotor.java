@@ -7,7 +7,7 @@ import mod.industrialProcessing.client.rendering.tileEntity.animation.TileAnimat
 import mod.industrialProcessing.power.network.IPowerAcceptor;
 import mod.industrialProcessing.power.network.PowerHelper;
 import mod.industrialProcessing.power.network.SimplePowerStorage;
-import mod.industrialProcessing.power.utils.IMechanicalMotion;
+import mod.industrialProcessing.power.utils.IMechanicalMotionReceiver;
 import mod.industrialProcessing.utils.handlers.numbers.IProgressable;
 import mod.industrialProcessing.utils.rotation.LocalDirection;
 import net.minecraft.tileentity.TileEntity;
@@ -23,11 +23,11 @@ public class TileEntityElectroMotor extends TileEntityBlockContainerIP implement
     private float voltage;
     private float lastVoltage;
 
-    private IMechanicalMotion getGenerator(ForgeDirection dir) {
+    private IMechanicalMotionReceiver getGenerator(ForgeDirection dir) {
 
         TileEntity entity = this.worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
-        if (entity instanceof IMechanicalMotion)
-            return (IMechanicalMotion) entity;
+        if (entity instanceof IMechanicalMotionReceiver)
+            return (IMechanicalMotionReceiver) entity;
         return null;
     }
 
@@ -50,7 +50,7 @@ public class TileEntityElectroMotor extends TileEntityBlockContainerIP implement
             //TODO TileAnimationSyncHandler.sendAnimationData(this, this.animationHandler);
 
             ForgeDirection generatorDirection = getExternalDirection(motionOutputDirection);
-            IMechanicalMotion generator = getGenerator(generatorDirection);
+            IMechanicalMotionReceiver generator = getGenerator(generatorDirection);
             if (generator != null) {
                 float speed = this.animationHandler.getSpeed();
                 float resistance = generator.setSpeed(generatorDirection.getOpposite(), speed);

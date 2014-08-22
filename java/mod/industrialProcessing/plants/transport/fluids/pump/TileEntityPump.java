@@ -6,7 +6,7 @@ import mod.industrialProcessing.client.rendering.tileEntity.animation.AnimationH
 import mod.industrialProcessing.client.rendering.tileEntity.animation.AnimationMode;
 import mod.industrialProcessing.client.rendering.tileEntity.animation.IAnimationSyncable;
 import mod.industrialProcessing.client.rendering.tileEntity.animation.TileAnimationSyncHandler;
-import mod.industrialProcessing.power.utils.IMechanicalMotion;
+import mod.industrialProcessing.power.utils.IMechanicalMotionReceiver;
 import mod.industrialProcessing.utils.rotation.DirectionUtils;
 import mod.industrialProcessing.utils.rotation.LocalDirection;
 import net.minecraft.item.Item;
@@ -15,7 +15,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.IFluidTank;
 
-public class TileEntityPump extends TileEntityMachineInv implements IAnimationProgress, IAnimationSyncable, IMechanicalMotion {
+public class TileEntityPump extends TileEntityMachineInv implements IAnimationProgress, IAnimationSyncable, IMechanicalMotionReceiver {
 
     public FluidTank tank = new FluidTank(1000);
     LocalDirection inputSide = LocalDirection.BACK;

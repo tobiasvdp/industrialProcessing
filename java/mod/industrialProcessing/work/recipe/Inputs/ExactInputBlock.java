@@ -12,27 +12,27 @@ public class ExactInputBlock extends InputItem {
 	private Block block;
 	private int meta;
 	private boolean hasMeta;
+	private ItemStack stack;
 
 	public ExactInputBlock(Block block, int meta) {
 		this.block = block;
 		this.meta = meta;
 		this.hasMeta = true;
+		this.stack = new ItemStack(block, meta);
 	}
 
 	public ExactInputBlock(Block item) {
 		this.block = item;
 		this.hasMeta = false;
+		this.stack = new ItemStack(block);
 	}
 
 	@Override
 	public boolean isValid(ItemStack stack) {
-		Item item = stack.getItem();
-
-		if (item instanceof ItemBlock) {
-			ItemBlock block = (ItemBlock) item;
-			return (block.field_150939_a == this.block) && (!hasMeta || stack.getItemDamage() == this.meta);
-		}
-		return false;
+		
+		boolean itemEqual = stack.isItemEqual(stack);
+		
+		return itemEqual				&& (!hasMeta || stack.getItemDamage() == this.meta);
 	}
 
 	@Override
