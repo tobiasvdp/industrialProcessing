@@ -156,7 +156,9 @@ item.IP.item.ironSinter.name=Iron sinter
 item.IP.item.calcareousSinterDust.name=Calcareous sinter dust
 item.IP.item.cokes.name=Cokes
 item.IP.item.slag.name=Slag
-item.IP.item.WroughtIron.name=Slag
+item.IP.item.WroughtIron.name=Wrought iron
+item.IP.item.Pliers.name=Pliers
+item.IP.item.PliersBloomIron.name=Bloom iron
 
 
 tile.IP.light.torch.name=Torch

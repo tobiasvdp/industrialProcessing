@@ -71,6 +71,7 @@ public class TileEntityTripHammer extends TileEntityMultiblockCoreInv{
 		setInventoryGroupArray(1);
 		addStack(null,0, LocalDirection.DOWN, true, false);
 		addStack(null,0, LocalDirection.DOWN, false, true);
+		checkLayoutInTime = true;
 	}	
 	
 	
@@ -115,17 +116,13 @@ public class TileEntityTripHammer extends TileEntityMultiblockCoreInv{
 		if (getState() == MultiblockState.COMPLETED && player.getCurrentEquippedItem() != null) {
 			if (isValidInput(0, player.getCurrentEquippedItem().getItem() )&& getStackInSlot(0) == null && getStackInSlot(1) == null) {
 				if (addToSlot(0, player.getCurrentEquippedItem().getItem(), 1, 0)) {
-					player.getCurrentEquippedItem().splitStack(1);
-					player.inventory.addItemStackToInventory(new ItemStack(IndustrialProcessing.itemPliers));
-					player.inventory.markDirty();
+					player.setCurrentItemOrArmor(0, new ItemStack(IndustrialProcessing.itemPliers));
 				}
 			}
 			if (player.getCurrentEquippedItem().getItem().equals(IndustrialProcessing.itemPliers)) {
 				if (getStackInSlot(1) != null && getStackInSlot(1).stackSize > 0) {
-					player.getCurrentEquippedItem().splitStack(1);
 					ItemStack givenStack = decrStackSize(1, 1);
-					player.inventory.addItemStackToInventory(givenStack);
-					onInventoryChanged();
+					player.setCurrentItemOrArmor(0, givenStack);
 				}
 			}
 		}

@@ -24,6 +24,11 @@ public abstract class BlockMultiblockDummy extends BlockContainerIPRendered {
 
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block par5) {
+		TileEntityMultiblockDummy te = (TileEntityMultiblockDummy) world.getTileEntity(x, y, z);
+		TileEntityMultiblockCore core = te.getCore();
+		if(core != null && te.getState() != MultiblockState.COMPLETED){
+			core.onLayoutChange();
+		}
 		super.onNeighborBlockChange(world, x, y, z, par5);
 	}
 

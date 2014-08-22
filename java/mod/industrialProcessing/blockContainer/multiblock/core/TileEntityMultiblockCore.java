@@ -33,9 +33,27 @@ public class TileEntityMultiblockCore extends TileEntityBlockContainerIP impleme
 	private int modelConnection;
 	protected AnimationHandler[] animation;
 	protected boolean[] isAnimationEnabled;
+	protected boolean checkLayoutInTime = false;
+	int layoutCheckDelay = 0;
 
 	public TileEntityMultiblockCore() {
 		canRotate = false;
+	}
+	
+	@Override
+	public void updateEntity() {
+		if(checkLayoutInTime){
+			layoutCheckDelay++;
+			if(getState() != MultiblockState.COMPLETED && layoutCheckDelay > 20){
+				layoutCheckDelay = 0;
+				onLayoutChange();
+			}
+			if(getState() == MultiblockState.COMPLETED && layoutCheckDelay > 2000){
+				layoutCheckDelay = 0;
+				onLayoutChange();
+			}
+		}
+		super.updateEntity();
 	}
 
 	@Override

@@ -86,7 +86,7 @@ public class TileEntityForgeCore extends TileEntityMultiblockCoreInvWorker imple
 	}
 
 	public void burn() {
-		if (burnTime > 10000) {
+		if (burnTime > 1000) {
 			Random random = new Random();
 			for (int j = 0; j < 2; j++) {
 				worldObj.spawnParticle("smoke", xCoord + Math.max(0.1, random.nextFloat()), yCoord + 1.25, zCoord + Math.max(0.1, random.nextFloat()), 0.0D, 0.0D, 0.0D);
