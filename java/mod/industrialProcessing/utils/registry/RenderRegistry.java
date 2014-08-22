@@ -63,10 +63,10 @@ public class RenderRegistry {
 		}else {
 			ClientRegistry.bindTileEntitySpecialRenderer(teClass, new RendererTileEntity(block, block.getUnlocalizedName(), model));
 		}
-		if (((BlockContainerIPRendered) block).getRenderType() == 0) {
+		/*if (((BlockContainerIPRendered) block).getRenderType() == 0) {
 			((BlockContainerIPRendered) block).setRenderID(RenderingRegistry.getNextAvailableRenderId());
 			RenderingRegistry.registerBlockHandler(new RendererTileBlock(block.getRenderType(), TileEntityRegistry.createNewTileEntity(block)));
-		}
+		}*/
 		arrayTE.put(block, model);
 	}
 

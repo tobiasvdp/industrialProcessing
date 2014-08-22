@@ -5,6 +5,7 @@ import mod.industrialProcessing.plants.blackSmith.bloomery.BlockBloomery;
 import mod.industrialProcessing.plants.blackSmith.bloomery.dummy.bellows.BlockBellows;
 import mod.industrialProcessing.plants.blackSmith.bloomery.dummy.ironBowl.BlockIronBowl;
 import mod.industrialProcessing.plants.blackSmith.forge.BlockForge;
+import mod.industrialProcessing.plants.blackSmith.forge.dummy.BlockForgeDummy;
 import mod.industrialProcessing.plants.blackSmith.grindingStone.BlockGrindingStone;
 import mod.industrialProcessing.plants.blackSmith.tripHammer.BlockTripHammer;
 import mod.industrialProcessing.plants.blackSmith.tripHammer.dummy.woodenBar.BlockWoodenBar;
@@ -113,6 +114,7 @@ public interface ISetupBlockContainers {
     public final static BlockIronBowl blockIronBowl = new BlockIronBowl();
     
     public final static BlockForge blockForge = new BlockForge();
+    public final static BlockForgeDummy blockForgeDummy = new BlockForgeDummy();
     public final static BlockWoodenBar blockWoodenBar = new BlockWoodenBar();
     public final static BlockWoodenHammer blockWoodenHammer = new BlockWoodenHammer();
     public final static BlockWoodenWheel blockWoodenWheel = new BlockWoodenWheel();

@@ -10,7 +10,7 @@ import mod.industrialProcessing.plants.blackSmith.bloomery.dummy.ironBowl.TileEn
 import mod.industrialProcessing.plants.blackSmith.bloomery.dummy.ironBowl.model.ModelIronBowl;
 import mod.industrialProcessing.plants.blackSmith.bloomery.model.ModelBloomery;
 import mod.industrialProcessing.plants.blackSmith.forge.TileEntityForgeCore;
-import mod.industrialProcessing.plants.blackSmith.forge.TileEntityForgeDummy;
+import mod.industrialProcessing.plants.blackSmith.forge.dummy.TileEntityForgeDummy;
 import mod.industrialProcessing.plants.blackSmith.forge.model.ModelForge;
 import mod.industrialProcessing.plants.blackSmith.forge.model.ModelForgeAnimated;
 import mod.industrialProcessing.plants.blackSmith.grindingStone.TileEntityGrindingStone;
@@ -194,8 +194,8 @@ public class ConfigBlockContainers {
 		BlockRegistry.registerMachine(IndustrialProcessing.blockBellows, TileEntityBellows.class, "IP.dummy.bellows", new ModelBellows());
 		BlockRegistry.registerMachine(IndustrialProcessing.blockIronBowl, TileEntityIronBowl.class, "IP.dummy.ironBowl", new ModelIronBowl());
 
-		BlockRegistry.registerMachine(IndustrialProcessing.blockForge, TileEntityForgeDummy.class, "IP.dummy.forge", new ModelForge(), new ModelForgeAnimated());
-		TileEntityRegistry.registerCoreSwitcherTileEntity(IndustrialProcessing.blockForge, TileEntityForgeCore.class, "IP.blacks.forge", new ModelForgeAnimated());
+		BlockRegistry.registerMachine(IndustrialProcessing.blockForge, TileEntityForgeCore.class, "IP.blacks.forge", new ModelForge(),new ModelForgeAnimated());
+		BlockRegistry.registerMachine(IndustrialProcessing.blockForgeDummy, TileEntityForgeDummy.class, "IP.dummy.forge", new ModelForge());
 		BlockRegistry.registerMachine(IndustrialProcessing.blockWoodenBar, TileEntityWoodenBar.class, "IP.blacks.wbar", new ModelWoodenBar(), new ModelWoodenBarAnimated());
 		BlockRegistry.registerMachine(IndustrialProcessing.blockWoodenHammer, TileEntityWoodenHammer.class, "IP.blacks.whammer", new ModelWoodenHammer(), new ModelWoodenHammerAnimated());
 		BlockRegistry.registerMachine(IndustrialProcessing.blockWoodenWheel, TileEntityWoodenWheel.class, "IP.blacks.wwheel", new ModelWoodenWheel(), new ModelWoodenWheelAnimated());

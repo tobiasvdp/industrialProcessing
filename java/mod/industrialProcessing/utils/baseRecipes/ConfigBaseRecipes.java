@@ -93,7 +93,8 @@ public class ConfigBaseRecipes {
 		GameRegistry.addShapedRecipe(new ItemStack(IndustrialProcessing.blockBloomery), "xyx", "y y", "xzx", 'x', new ItemStack(Items.clay_ball), 'y', new ItemStack(Blocks.dirt), 'z', new ItemStack(Blocks.cobblestone));
 		GameRegistry.addShapedRecipe(new ItemStack(IndustrialProcessing.blockBellows), "xxx", "yyy", "xxx", 'x', new ItemStack(Blocks.log, 1, WILDCARD_VALUE), 'y', new ItemStack(Items.leather));
 		GameRegistry.addShapedRecipe(new ItemStack(IndustrialProcessing.blockIronBowl), "   ", "xyx", "   ", 'x', new ItemStack(ISetupItems.itemThickStick), 'y', new ItemStack(ISetupItems.itemIronBowl, 8));
-		GameRegistry.addShapedRecipe(new ItemStack(IndustrialProcessing.blockForge,4), "xyx", "y y", "xyx", 'x', new ItemStack(IndustrialProcessing.blockCobbleLimestone), 'y', new ItemStack(Blocks.cobblestone));
+		GameRegistry.addShapedRecipe(new ItemStack(IndustrialProcessing.blockForge,1), "xyx", "yzy", "xyx", 'x', new ItemStack(IndustrialProcessing.blockCobbleLimestone), 'y', new ItemStack(Blocks.clay),'z' ,new ItemStack(Items.flint));
+		GameRegistry.addShapedRecipe(new ItemStack(IndustrialProcessing.blockForgeDummy,4), "xyx", "y y", "xyx", 'x', new ItemStack(IndustrialProcessing.blockCobbleLimestone), 'y', new ItemStack(Blocks.clay));
 		GameRegistry.addShapedRecipe(new ItemStack(IndustrialProcessing.blockWaterBasin), "   ", "x x", "xxx", 'x', new ItemStack(Blocks.cobblestone));
 		GameRegistry.addShapedRecipe(new ItemStack(IndustrialProcessing.itemWoodenBucket), " y ", "x x", " x ", 'x', new ItemStack(Blocks.planks,1,WILDCARD_VALUE),'y',new ItemStack(Items.string));
 		GameRegistry.addShapedRecipe(new ItemStack(IndustrialProcessing.itemPliers), "x x", " x ", " x ", 'x', new ItemStack(Blocks.cobblestone));

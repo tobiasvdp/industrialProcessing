@@ -20,11 +20,10 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public abstract class BlockMultiblockSwitcher extends BlockContainerIPRendered{
+public abstract class BlockMultiblockSwitcher extends BlockContainerIPRendered {
 	public BlockMultiblockSwitcher(float hardness, float resistance, Material material, SoundType soundtype, String... textures) {
-			super(hardness, resistance, material, soundtype,textures);
+		super(hardness, resistance, material, soundtype, textures);
 	}
-
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
@@ -43,9 +42,12 @@ public abstract class BlockMultiblockSwitcher extends BlockContainerIPRendered{
 			TileEntityMultiblockDummy TEdummy = ((TileEntityMultiblockDummy) te);
 			if (TEdummy.getState() == MultiblockState.COMPLETED) {
 				TileEntityMultiblockCore TEcore = TEdummy.getCore();
+				if(TEcore != null){
 				if (TEcore.getState() == MultiblockState.COMPLETED) {
 					player.openGui(IndustrialProcessing.instance, 0, world, TEcore.xCoord, TEcore.yCoord, TEcore.zCoord);
 					return true;
+				}}else{
+					TEdummy.setState(MultiblockState.CONNECTED);
 				}
 			}
 			return false;
@@ -84,12 +86,9 @@ public abstract class BlockMultiblockSwitcher extends BlockContainerIPRendered{
 			super.breakBlock(world, x, y, z, par5, par6);
 		} else {
 			TileEntityMultiblockCore core = ((TileEntityMultiblockDummy) world.getTileEntity(x, y, z)).getCore();
-			((TileEntityMultiblockDummy) world.getTileEntity(x, y, z)).onDestroy();
-			((TileEntityMultiblockDummy) world.getTileEntity(x, y, z)).delCore();
-			world.func_147480_a(x, y, z, true);
-			super.breakBlock(world, x, y, z, par5, par6);
 			if (core != null) {
-				core.onLayoutChange();
+				core.unregisterDummy((TileEntityMultiblockDummy) world.getTileEntity(x, y, z));
+				world.func_147480_a(core.xCoord, core.yCoord, core.zCoord, true);
 			}
 		}
 	}

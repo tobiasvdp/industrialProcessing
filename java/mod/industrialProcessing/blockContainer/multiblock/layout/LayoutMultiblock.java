@@ -236,7 +236,7 @@ public class LayoutMultiblock {
 						TileEntity te = world.getTileEntity(xBlock, yBlock, zBlock);
 						if (te instanceof TileEntityMultiblockDummy) {
 							TileEntityMultiblockCore teCore = ((TileEntityMultiblockDummy) te).getCore();
-							if(teCore != null)
+							if (teCore != null)
 								return false;
 						}
 					}
@@ -244,6 +244,26 @@ public class LayoutMultiblock {
 			}
 		}
 		return true;
+	}
+
+	public void breakStructure(World world, int xCore, int yCore, int zCore) {
+		TileEntityMultiblockCore newCore = (TileEntityMultiblockCore) world.getTileEntity(xCore, yCore, zCore);
+		if (newCore != null) {
+			for (int i = 0; i < layout.length; i++) {
+				for (int j = 0; j < layout[0].length; j++) {
+					for (int k = 0; k < layout[0][0].length; k++) {
+						int xBlock = xCore - this.xCore + i;
+						int yBlock = yCore - this.yCore + j;
+						int zBlock = zCore + this.zCore - k;
+						if (layout[i][j][k] != null && layout[i][j][k].isValidID(world.getBlock(xBlock, yBlock, zBlock))) {
+						if (!(xCore == xBlock && yCore == yBlock && zCore == zBlock))
+							world.func_147480_a(xBlock, yBlock, zBlock,true);
+							world.removeTileEntity(xBlock, yBlock, zBlock);
+						}
+					}
+				}
+			}
+		}
 	}
 
 }

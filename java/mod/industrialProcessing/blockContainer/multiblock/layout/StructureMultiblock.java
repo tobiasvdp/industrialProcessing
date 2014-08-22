@@ -3,6 +3,7 @@ package mod.industrialProcessing.blockContainer.multiblock.layout;
 import mod.industrialProcessing.blockContainer.multiblock.utils.MultiblockState;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class StructureMultiblock {
 
@@ -115,5 +116,9 @@ public class StructureMultiblock {
 		} else {
 			return MultiblockState.CONNECTED;
 		}
+	}
+
+	public void breakStructure(World worldObj, int xCore, int yCore, int zCore, FacingDirection face) {
+		layouts[face.ordinal()].breakStructure(worldObj, xCore, yCore, zCore);
 	}
 }

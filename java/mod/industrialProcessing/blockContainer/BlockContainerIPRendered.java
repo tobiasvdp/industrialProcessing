@@ -1,5 +1,6 @@
 package mod.industrialProcessing.blockContainer;
 
+import mod.industrialProcessing.IndustrialProcessing;
 import mod.industrialProcessing.client.ClientProxy;
 import mod.industrialProcessing.utils.INamepace;
 import net.minecraft.block.Block.SoundType;
@@ -23,6 +24,9 @@ public abstract class BlockContainerIPRendered extends BlockContainerIP {
 			this.iconNames = iconNames;
 			icons = new IIcon[iconNames.length];
 			multipleIcons = true;
+		}else{
+			setBlockTextureName(IndustrialProcessing.TEXTURE_NAME_PREFIX + getUnlocalizedName());
+			setRenderID(0);
 		}
 	}
 

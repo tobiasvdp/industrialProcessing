@@ -20,7 +20,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class TileEntityMultiblockCore extends TileEntityBlockContainerIP implements ITileEntityMultiblockCore {
 
-	private StructureMultiblock structure;
+	protected StructureMultiblock structure;
 	private TierCollection tierRequirments;
 
 	private ArrayList<TileEntityMultiblockDummy> dummy = new ArrayList<TileEntityMultiblockDummy>();
@@ -279,11 +279,13 @@ public class TileEntityMultiblockCore extends TileEntityBlockContainerIP impleme
 	}
 
 	public void destroyMultiblock() {
-		ArrayList<TileEntityMultiblockDummy> list = (ArrayList<TileEntityMultiblockDummy>) getDummies().clone();
-		for (TileEntityMultiblockDummy te : list) {
-			if (te != null)
-				worldObj.func_147480_a(te.xCoord, te.yCoord, te.zCoord, true);
-		}
+		structure.breakStructure(this.worldObj,xCoord,yCoord,zCoord,side);
+	}
+
+	private void reloadDumies() {
+		NBTTagCompound nbt = new NBTTagCompound();
+		this.writeToNBT(nbt);
+		this.readFromNBT(nbt);
 	}
 
 	public void onStateChange() {
