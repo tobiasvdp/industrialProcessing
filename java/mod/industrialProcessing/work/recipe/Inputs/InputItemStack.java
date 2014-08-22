@@ -13,9 +13,8 @@ public class InputItemStack extends InputItem {
 	}
 
 	@Override
-	public boolean isValid(ItemStack stack) {
-
-		return ItemStack.areItemStacksEqual(stack, stack);
+	public boolean isValid(ItemStack stack) { 
+		return stack.isItemEqual(this.stack); 
 	}
 
 	@Override
