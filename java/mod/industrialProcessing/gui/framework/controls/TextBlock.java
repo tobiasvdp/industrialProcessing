@@ -18,7 +18,7 @@ public class TextBlock extends Control {
 	private Size textSize;
 
 	public TextBlock(String text, int color) {
-		this.text = LanguageRegistry.instance().getStringLocalization(text, "en_US");
+		this.text = text; 
 		this.width = Float.NaN;
 		this.height = Float.NaN;
 		this.color = color;
