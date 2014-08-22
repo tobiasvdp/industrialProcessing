@@ -1,7 +1,7 @@
 package mod.industrialProcessing.plants.blackSmith.forge.model;
 
 import mod.industrialProcessing.blockContainer.BlockContainerIP;
-import mod.industrialProcessing.blockContainer.multiblock.coreAndDummy.ITileEntityMultiblockSwitcher;
+import mod.industrialProcessing.blockContainer.multiblock.IMultiblock;
 import mod.industrialProcessing.client.rendering.block.ModelBlock;
 import mod.industrialProcessing.client.rendering.block.obj.wavefront.ObjRotator;
 import mod.industrialProcessing.client.rendering.block.obj.wavefront.WorldReference;
@@ -16,6 +16,7 @@ import org.lwjgl.util.vector.Vector3f;
 
 public class ModelForge extends ModelBlock {
 
+	ObjRotator obj0 = new ObjRotator(new Object(), 0);
     ObjRotator obj1 = new ObjRotator(new Object001(), 0);
     ObjRotator obj2 = new ObjRotator(new Object002(), 0);
     ObjRotator obj3 = new ObjRotator(new Object003(), 0);
@@ -30,56 +31,14 @@ public class ModelForge extends ModelBlock {
 
     @Override
     public void renderInventory(Block block, int metadata, int modelID, RenderBlocks renderer) { 
+        int dir = 0;
         Vector3f position = new Vector3f(0, 0, 0);
-        
         IIcon iconWood = block.getIcon(0, 0);
+        IIcon iconWood2 = block.getIcon(1,0);
         
-        GL11.glPushMatrix();
-        GL11.glScalef(0.35f, 0.35f, 0.35f);
-        GL11.glTranslatef(0, -1f, 0);
+        obj11.getRotated(dir).renderMesh(iconWood);
+        obj0.getRotated(dir).renderMesh(iconWood2);
         
-        obj11.getRotated(0).renderMesh(iconWood);
-        GL11.glTranslatef(1f, 0f, 0);
-        obj11.getRotated(0).renderMesh(iconWood);
-        GL11.glTranslatef(-2f, 0f, 0);
-        obj11.getRotated(0).renderMesh(iconWood);
-        
-        GL11.glTranslatef(0f, 1f, 0);
-        obj2.getRotated(0).renderMesh(iconWood);
-        GL11.glTranslatef(2f, 0f, 0);
-        obj1.getRotated(0).renderMesh(iconWood);
-        
-        GL11.glTranslatef(0f, 1f, 0);
-        obj6.getRotated(0).renderMesh(iconWood);
-        GL11.glTranslatef(-1f, 0f, 0);
-        obj3.getRotated(0).renderMesh(iconWood);
-        GL11.glTranslatef(-1f, 0f, 0);
-        obj5.getRotated(0).renderMesh(iconWood);
-        GL11.glTranslatef(1f, -2f, -1);
-        
-        obj11.getRotated(0).renderMesh(iconWood);
-        GL11.glTranslatef(1f, 0f, 0);
-        obj11.getRotated(0).renderMesh(iconWood);
-        GL11.glTranslatef(-2f, 0f, 0);
-        obj11.getRotated(0).renderMesh(iconWood);
-        
-        GL11.glTranslatef(0f, 1f, 0);
-        obj4.getRotated(0).renderMesh(iconWood);
-        GL11.glTranslatef(1f, 0f, 0);
-        obj9.getRotated(0).renderMesh(iconWood);
-        GL11.glTranslatef(1f, 0f, 0);
-        obj10.getRotated(0).renderMesh(iconWood);
-        
-        GL11.glTranslatef(0f, 1f, 0);
-        
-        obj7.getRotated(0).renderMesh(iconWood);
-        GL11.glTranslatef(-1f, 0f, 0);
-        obj11.getRotated(0).renderMesh(iconWood);
-        GL11.glTranslatef(-1f, 0f, 0);
-        obj8.getRotated(0).renderMesh(iconWood);
-        
-        
-        GL11.glPopMatrix();
     }
 
     @Override
@@ -88,13 +47,15 @@ public class ModelForge extends ModelBlock {
         TileEntity entity = reference.getBlockTileEntity();
         ForgeDirection forward = BlockContainerIP.getForwardFromEntity(entity);
         int dir = BlockContainerIP.getMetadataFromForward(forward);
-        int renderConnection = ((ITileEntityMultiblockSwitcher) entity).getModelConnection();
+        int renderConnection = ((IMultiblock) entity).getModelConnection();
         
         IIcon iconWood = reference.getIcon(0);
+        IIcon iconWood2 = reference.getIcon(1);
         
         switch(renderConnection){
         case 0:
         	obj11.getRotated(dir).renderMesh(false, iconWood, reference);
+        	obj0.getRotated(dir).renderMesh(false, iconWood2, reference);
         	break;
         case 1:
         	obj2.getRotated(dir).renderMesh(false, iconWood, reference);
@@ -118,7 +79,7 @@ public class ModelForge extends ModelBlock {
         	obj4.getRotated(dir).renderMesh(false, iconWood, reference);
         	break;
         case 8:
-        	obj10.getRotated(dir).renderMesh(false, iconWood, reference);
+        	obj10.getRotated(dir).renderMesh(false, iconWood2, reference);
         	break;
         case 9:
         	obj8.getRotated(dir).renderMesh(false, iconWood, reference);

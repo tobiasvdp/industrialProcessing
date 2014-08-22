@@ -49,7 +49,6 @@ public class RecipesMultiblock implements IMachineRecipes<RecipeMultiblock> {
 			RecipeMultiblock recipe = i.next();
 			if (recipe.tier == tier)
 				for (RecipeInputInventorySlot input : recipe.getInventoryInputs()) {
-
 					if (input.index == slot && input.isItemValid(item))
 						return true;
 				}

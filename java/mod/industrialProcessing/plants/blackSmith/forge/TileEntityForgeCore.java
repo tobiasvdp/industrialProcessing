@@ -3,6 +3,7 @@ package mod.industrialProcessing.plants.blackSmith.forge;
 import java.util.Random;
 
 import mod.industrialProcessing.IndustrialProcessing;
+import mod.industrialProcessing.blockContainer.multiblock.core.extend.TileEntityMultiblockCoreInvWorker;
 import mod.industrialProcessing.blockContainer.multiblock.coreAndDummy.TileEntityMultiblockSwitcherCore;
 import mod.industrialProcessing.blockContainer.multiblock.layout.FacingDirection;
 import mod.industrialProcessing.blockContainer.multiblock.layout.LayoutMultiblock;
@@ -30,7 +31,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class TileEntityForgeCore extends TileEntityMultiblockSwitcherCore implements IProgressSync {
+public class TileEntityForgeCore extends TileEntityMultiblockCoreInvWorker implements IProgressSync {
 	static StructureMultiblock structure;
 	static TierCollection tierRequirments;
 	private TankHandler tankHandler;
@@ -46,25 +47,25 @@ public class TileEntityForgeCore extends TileEntityMultiblockSwitcherCore implem
 		int i = 0;
 		layout.setCoreID(i++, 0, 0, IndustrialProcessing.blockForge);
 
-		layout.setBlockID(-1, 0, 0, i++, 0, 0, IndustrialProcessing.blockForge);
-		layout.setBlockID(1, 0, 0, i++, 0, 0, IndustrialProcessing.blockForge);
-		layout.setBlockID(-1, 1, 0, i++, 0, 1, IndustrialProcessing.blockForge);
-		layout.setBlockID(1, 1, 0, i++, 0, 2, IndustrialProcessing.blockForge);
-		layout.setBlockID(0, 2, 0, i++, 0, 3, IndustrialProcessing.blockForge);
-		layout.setBlockID(-1, 2, 0, i++, 0, 4, IndustrialProcessing.blockForge);
-		layout.setBlockID(1, 2, 0, i++, 0, 5, IndustrialProcessing.blockForge);
+		layout.setBlockID(-1, 0, 0, i++, 0, 0, IndustrialProcessing.blockForgeDummy);
+		layout.setBlockID(1, 0, 0, i++, 0, 0, IndustrialProcessing.blockForgeDummy);
+		layout.setBlockID(-1, 1, 0, i++, 0, 1, IndustrialProcessing.blockForgeDummy);
+		layout.setBlockID(1, 1, 0, i++, 0, 2, IndustrialProcessing.blockForgeDummy);
+		layout.setBlockID(0, 2, 0, i++, 0, 3, IndustrialProcessing.blockForgeDummy);
+		layout.setBlockID(-1, 2, 0, i++, 0, 4, IndustrialProcessing.blockForgeDummy);
+		layout.setBlockID(1, 2, 0, i++, 0, 5, IndustrialProcessing.blockForgeDummy);
 
-		layout.setBlockID(0, 0, -1, i++, 0, 0, IndustrialProcessing.blockForge);
-		layout.setBlockID(-1, 0, -1, i++, 0, 0, IndustrialProcessing.blockForge);
-		layout.setBlockID(1, 0, -1, i++, 0, 0, IndustrialProcessing.blockForge);
+		layout.setBlockID(0, 0, -1, i++, 0, 0, IndustrialProcessing.blockForgeDummy);
+		layout.setBlockID(-1, 0, -1, i++, 0, 0, IndustrialProcessing.blockForgeDummy);
+		layout.setBlockID(1, 0, -1, i++, 0, 0, IndustrialProcessing.blockForgeDummy);
 
-		layout.setBlockID(0, 1, -1, i++, 0, 6, IndustrialProcessing.blockForge);
-		layout.setBlockID(-1, 1, -1, i++, 0, 7, IndustrialProcessing.blockForge);
-		layout.setBlockID(1, 1, -1, i++, 0, 8, IndustrialProcessing.blockForge);
+		layout.setBlockID(0, 1, -1, i++, 0, 6, IndustrialProcessing.blockForgeDummy);
+		layout.setBlockID(-1, 1, -1, i++, 0, 7, IndustrialProcessing.blockForgeDummy);
+		layout.setBlockID(1, 1, -1, i++, 0, 8, IndustrialProcessing.blockForgeDummy);
 
-		layout.setBlockID(0, 2, -1, i++, 0, 0, IndustrialProcessing.blockForge);
-		layout.setBlockID(-1, 2, -1, i++, 0, 9, IndustrialProcessing.blockForge);
-		layout.setBlockID(1, 2, -1, i++, 0, 10, IndustrialProcessing.blockForge);
+		layout.setBlockID(0, 2, -1, i++, 0, 0, IndustrialProcessing.blockForgeDummy);
+		layout.setBlockID(-1, 2, -1, i++, 0, 9, IndustrialProcessing.blockForgeDummy);
+		layout.setBlockID(1, 2, -1, i++, 0, 10, IndustrialProcessing.blockForgeDummy);
 
 		structure.addLayout(layout, FacingDirection.North);
 		structure.addLayout(LayoutTransformer.transform(layout, FacingDirection.East), FacingDirection.East);
@@ -78,14 +79,14 @@ public class TileEntityForgeCore extends TileEntityMultiblockSwitcherCore implem
 	}
 
 	public TileEntityForgeCore() {
-		super(structure, tierRequirments, recipes, LocalDirection.UNKNOWN, 10000, 100);
+		super(structure, tierRequirments, recipes);
 		setInventoryGroupArray(1);
 		addStack(null, 0, LocalDirection.LEFT, true, false);
 		addStack(null, 0, LocalDirection.RIGHT, false, true);
 	}
 
 	public void burn() {
-		if (burnTime > 10000) {
+		if (burnTime > 1000) {
 			Random random = new Random();
 			for (int j = 0; j < 2; j++) {
 				worldObj.spawnParticle("smoke", xCoord + Math.max(0.1, random.nextFloat()), yCoord + 1.25, zCoord + Math.max(0.1, random.nextFloat()), 0.0D, 0.0D, 0.0D);
@@ -132,26 +133,27 @@ public class TileEntityForgeCore extends TileEntityMultiblockSwitcherCore implem
 			}
 			sendUpdatesifChanged(getValues(), getPrevValues());
 		}
-		super.updateEntity();
+		if (burnTime > 1000)
+			super.updateEntity();
 	}
 
 	@Override
 	public void setValues(int[] val) {
 		burnTime = val[0];
 		if (val[1] != 0 && val[2] != 0) {
-			if(Item.getItemById(val[1]) != null)
-				getMachineStack(0).stack = new ItemStack(Item.getItemById(val[1]),val[2]);
+			if (Item.getItemById(val[1]) != null)
+				getMachineStack(0).stack = new ItemStack(Item.getItemById(val[1]), val[2]);
 			else
-				getMachineStack(0).stack = new ItemStack(Block.getBlockById(val[1]),val[2]);
-		}else{
+				getMachineStack(0).stack = new ItemStack(Block.getBlockById(val[1]), val[2]);
+		} else {
 			getMachineStack(0).stack = null;
 		}
-		if(val[3] != 0 && val[4] != 0){
-			if(Item.getItemById(val[3]) != null)
-				getMachineStack(1).stack = new ItemStack(Item.getItemById(val[3]),val[4]);
+		if (val[3] != 0 && val[4] != 0) {
+			if (Item.getItemById(val[3]) != null)
+				getMachineStack(1).stack = new ItemStack(Item.getItemById(val[3]), val[4]);
 			else
-				getMachineStack(1).stack = new ItemStack(Block.getBlockById(val[3]),val[4]);
-		}else{
+				getMachineStack(1).stack = new ItemStack(Block.getBlockById(val[3]), val[4]);
+		} else {
 			getMachineStack(1).stack = null;
 		}
 	}
@@ -183,7 +185,7 @@ public class TileEntityForgeCore extends TileEntityMultiblockSwitcherCore implem
 		}
 		if (requireUpdate) {
 			PrevburnTime = burnTime;
-			SyncValuesPacket packet = new SyncValuesPacket(this.xCoord,this.yCoord,this.zCoord, getValues());
+			SyncValuesPacket packet = new SyncValuesPacket(this.xCoord, this.yCoord, this.zCoord, getValues());
 			PacketHandler.getInstance().sendToAllAround(packet, new TargetPoint(this.getWorldObj().provider.dimensionId, this.xCoord, this.yCoord, this.zCoord, 32));
 		}
 	}
@@ -222,35 +224,32 @@ public class TileEntityForgeCore extends TileEntityMultiblockSwitcherCore implem
 		super.writeToNBT(nbt);
 	}
 
-	public void handleRightClick(EntityPlayer player) {
+	public boolean handleRightClick(EntityPlayer player) {
 		if (getState() == MultiblockState.COMPLETED) {
 			if (isValidInput(0, player.getCurrentEquippedItem().getItem())) {
 				if (addToSlot(0, player.getCurrentEquippedItem().getItem(), 1, 0)) {
 					player.getCurrentEquippedItem().splitStack(1);
-					player.inventory.markDirty();
+					return true;
 				}
-			}else if(GameRegistry.getFuelValue(player.getCurrentEquippedItem())!=0){
-				int value =GameRegistry.getFuelValue(player.getCurrentEquippedItem());
+			} else if (GameRegistry.getFuelValue(player.getCurrentEquippedItem()) != 0) {
+				int value = GameRegistry.getFuelValue(player.getCurrentEquippedItem());
 				if (burnTime > 40000) {
-					
+					return false;
 				} else {
 					burnTime += value;
 					PrevburnTime = burnTime;
 					player.getCurrentEquippedItem().splitStack(1);
-					player.inventory.markDirty();
+					return true;
 				}
 			}
 			if (player.getCurrentEquippedItem().getItem().equals(IndustrialProcessing.itemPliers)) {
 				if (getStackInSlot(1) != null && getStackInSlot(1).stackSize > 0) {
-					player.getCurrentEquippedItem().splitStack(1);
 					ItemStack givenStack = decrStackSize(1, 1);
-					player.inventory.markDirty();
-					if (player.inventory.addItemStackToInventory(givenStack)) {
-						DropBlock.doDispense(worldObj, givenStack, 1, getForwardDirection().getOpposite(), xCoord, yCoord + 1, zCoord);
-					}
+					player.setCurrentItemOrArmor(0, givenStack);
 				}
 			}
 			player.inventory.markDirty();
 		}
+		return false;
 	}
 }

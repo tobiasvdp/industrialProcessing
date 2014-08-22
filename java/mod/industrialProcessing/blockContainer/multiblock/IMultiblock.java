@@ -6,6 +6,7 @@ import mod.industrialProcessing.blockContainer.multiblock.utils.MultiblockState;
 
 public interface IMultiblock {
 	public MultiblockState getState();
+	int getModelConnection();
 
 	public Tiers getTier();
 

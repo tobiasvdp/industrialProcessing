@@ -14,10 +14,10 @@ public class RecipesForge extends RecipesMultiblock {
 	}
 
 	private void addTier0Recipes() {
-		addRecipe(heatIron(6000));
-		addRecipe(heatCopper(6000));
-		addRecipe(heatIronCrushed(6000));
-		addRecipe(heatCopperCrushed(6000));
+		addRecipe(heatIron(60));
+		addRecipe(heatCopper(60));
+		addRecipe(heatIronCrushed(60));
+		addRecipe(heatCopperCrushed(60));
 	}
 
 	private RecipeMultiblock heatIron(int work) {

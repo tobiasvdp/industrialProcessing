@@ -53,10 +53,11 @@ public abstract class TileEntityMultiblockSwitcherCore extends TileEntityMultibl
 
 	public void switchToDummy() {
 		NBTTagCompound nbtTag = new NBTTagCompound();
-		this.writeToNBT(nbtTag); 
 		String name = unlocalizedDummyName();
-		if(name != null)
+		this.writeToNBT(nbtTag);
+		if (name != null) {
 			nbtTag.setString("id", name.substring(5));
+		}
 		nbtTag.setBoolean("isCore", false);
 		nbtTag.removeTag("Dummies");
 		nbtTag.removeTag("Items");
@@ -101,6 +102,8 @@ public abstract class TileEntityMultiblockSwitcherCore extends TileEntityMultibl
 		nbtTag.setTag("Core", null);
 		TileEntity te = TileEntity.createAndLoadEntity(nbtTag);
 		worldObj.setTileEntity(xCoord, yCoord, zCoord, te);
+		System.out.println("test");
+		
 		((TileEntityMultiblockSwitcherDummy) worldObj.getTileEntity(xCoord, yCoord, zCoord)).notifyOnCreation();
 	}
 

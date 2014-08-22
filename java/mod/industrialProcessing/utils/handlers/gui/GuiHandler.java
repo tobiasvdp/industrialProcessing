@@ -14,49 +14,57 @@ import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler {
 
-    public static final int GUIDE_ID = 1;
-    public static final int ANVIL_ID = 2;
-    public static final int SOLDERINGIRON_ID = 3;
-    public static final int UPGRADE_ID = 4;
+	public static final int GUIDE_ID = 1;
+	public static final int ANVIL_ID = 2;
+	public static final int SOLDERINGIRON_ID = 3;
+	public static final int UPGRADE_ID = 4;
 
-    @Override
-    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+	@Override
+	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 
-        TileEntity entity = world.getTileEntity(x, y, z);
-        if (ID == 0) {
-            if (entity.getBlockType() != null && (entity.getBlockType() instanceof IGuiBlock || entity.getBlockType() instanceof IGuiMultiblock)) {
-                return LayoutGuiBuilder.createContainer(player.inventory, entity);
-            }
-        } else if (ID == GUIDE_ID) {
-            return null;
-        } else if (ID == ANVIL_ID) {
-        	return new ContainerAnvil(player.inventory, world, x, y, z);
-        } else if(ID == UPGRADE_ID){
-        	 if (entity.getBlockType() != null && (entity.getBlockType() instanceof IUpgradableBlock)) {
-                 return LayoutGuiBuilder.createContainer(player.inventory, (IUpgradableBlock)entity.getBlockType(),world,x, y, z);
-             }
-        }
-        return null;
-    }
+		TileEntity entity = world.getTileEntity(x, y, z);
 
-    @Override
-    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+		if (ID == 0) {
+			if (entity != null) {
+				if (entity.getBlockType() != null && (entity.getBlockType() instanceof IGuiBlock || entity.getBlockType() instanceof IGuiMultiblock)) {
+					return LayoutGuiBuilder.createContainer(player.inventory, entity);
+				}
+			}
+		} else if (ID == GUIDE_ID) {
+			return null;
+		} else if (ID == ANVIL_ID) {
+			return new ContainerAnvil(player.inventory, world, x, y, z);
+		} else if (ID == UPGRADE_ID) {
+			if (entity.getBlockType() != null && (entity.getBlockType() instanceof IUpgradableBlock)) {
+				return LayoutGuiBuilder.createContainer(player.inventory, (IUpgradableBlock) entity.getBlockType(), world, x, y, z);
+			}
+		}
 
-        TileEntity entity = world.getTileEntity(x, y, z);
-        if (ID == 0) {
-            if (entity.getBlockType() != null && (entity.getBlockType() instanceof IGuiBlock || entity.getBlockType() instanceof IGuiMultiblock)) {
-                return LayoutGuiBuilder.createGuiContainer(player.inventory, entity);
-            }
-        } else if (ID == GUIDE_ID) {
-            return new GuideScreen(player);
-            // return new GuiGuide(player);
-        } else if (ID == ANVIL_ID) {
-            return new GuiContainerAnvil(player.inventory, world, x, y, z);
-        } else if(ID == UPGRADE_ID){
-       	 if (entity.getBlockType() != null && (entity.getBlockType() instanceof IUpgradableBlock)) {
-             return LayoutGuiBuilder.createGuiContainer(player.inventory, (IUpgradableBlock)entity.getBlockType(),world,x, y, z);
-         }
-    }
-        return null;
-    }
+		return null;
+	}
+
+	@Override
+	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+
+		TileEntity entity = world.getTileEntity(x, y, z);
+
+		if (ID == 0) {
+			if (entity != null) {
+				if (entity.getBlockType() != null && (entity.getBlockType() instanceof IGuiBlock || entity.getBlockType() instanceof IGuiMultiblock)) {
+					return LayoutGuiBuilder.createGuiContainer(player.inventory, entity);
+				}
+			}
+		} else if (ID == GUIDE_ID) {
+			return new GuideScreen(player);
+			// return new GuiGuide(player);
+		} else if (ID == ANVIL_ID) {
+			return new GuiContainerAnvil(player.inventory, world, x, y, z);
+		} else if (ID == UPGRADE_ID) {
+			if (entity.getBlockType() != null && (entity.getBlockType() instanceof IUpgradableBlock)) {
+				return LayoutGuiBuilder.createGuiContainer(player.inventory, (IUpgradableBlock) entity.getBlockType(), world, x, y, z);
+			}
+		}
+
+		return null;
+	}
 }
