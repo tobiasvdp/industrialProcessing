@@ -2,13 +2,15 @@ package mod.industrialProcessing.utils.clusters;
 
 import java.util.UUID;
 
-import mod.industrialProcessing.transport.motion.TileEntityMotion;
+import mod.industrialProcessing.transport.motion.ClusterTileEntityMotion;
 
-public interface IClusterManager<T extends IClusterItem<T>> {
+public interface IClusterManager<T extends IClusterItem<T, U>, U extends ICluster<T, U>> {
 
-	void load(IClusterTileEntity<T> tileEntityMotion);  
-	UUID add(IClusterTileEntity<T> item);
-	void remove(IClusterTileEntity<T> item);
-	
-	ICluster<T> getCluster(UUID id);
+	T load(IClusterTileEntity<T, U> tileEntityMotion);
+
+	T add(IClusterTileEntity<T, U> item);
+
+	void remove(IClusterTileEntity<T, U> item);
+
+	U getCluster(UUID id);
 }

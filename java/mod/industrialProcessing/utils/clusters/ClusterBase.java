@@ -4,9 +4,10 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.UUID;
 
-public abstract class ClusterBase<T extends IClusterItem<T>> implements ICluster<T> {
+public abstract class ClusterBase<T extends IClusterItem<T, U>, U extends ClusterBase<T, U>> implements ICluster<T, U> {
 
 	private HashSet<T> clusterItems = new HashSet<T>();
+
 	private UUID id;
 
 	public ClusterBase(UUID id) {
@@ -15,24 +16,32 @@ public abstract class ClusterBase<T extends IClusterItem<T>> implements ICluster
 
 	@Override
 	public void addItem(T item) {
-		if (clusterItems.add(item)) {
-			item.onAddedToCluster(this);
+		if (clusterItems.add(item)) { 
+			item.onAddedToCluster((U)this); 
 		} else
 			System.err.format("Couldn't add item %s from cluster %s twice!", item, this);
 	}
 
 	@Override
+	public T getItem(int x, int y, int z) {
+		for (T t : clusterItems) {
+			if (t.getX() == x && t.getY() == y && t.getZ() == z)
+				return t;
+		}
+		return null;
+	}
+
+	@Override
 	public void loadItem(T item) {
-		if(clusterItems.add(item))
-		{
-			item.onLoadedToCluster(this);
+		if (clusterItems.add(item)) {
+			item.onLoadedToCluster((U)this);
 		}
 	}
-	
+
 	@Override
 	public void removeItem(T item) {
 		if (clusterItems.remove(item)) {
-			item.onRemovedFromCluster(this);
+			item.onRemovedFromCluster((U)this); 
 		} else
 			System.err.format("Couldn't remove item %s from cluster %s", item, this);
 	}
@@ -43,20 +52,13 @@ public abstract class ClusterBase<T extends IClusterItem<T>> implements ICluster
 	}
 
 	@Override
-	public void setId(UUID value) {
-		this.id = value;
-		for (T t : clusterItems) {
-			t.onClusterIdChanged(value); // in case nbt needs to update.
-		}
-	}
-
-	@Override
 	public Iterator<T> iterator() {
 		return clusterItems.iterator();
 	}
 
 	@Override
 	public void onRemoved() {
-		 
+		if (!clusterItems.isEmpty())
+			System.out.println("Removed non-empty cluster?!");
 	}
 }

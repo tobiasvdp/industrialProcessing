@@ -49,15 +49,10 @@ public class TileEntityBlockContainerIP extends TileEntity implements IRotateabl
 	}
 
 	protected void notifyBlockChange() {
+		this.markDirty();
 		if (!this.worldObj.isRemote) {
-			this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-
-			StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
-			StackTraceElement e = stacktrace[2];
-			String methodName = e.getMethodName();
-			String className = e.getClassName();
-		}
-
+			this.worldObj.markBlockForUpdate(xCoord, yCoord, zCoord); 
+		} 
 	}
 
 	@Override
@@ -98,4 +93,11 @@ public class TileEntityBlockContainerIP extends TileEntity implements IRotateabl
 		return ForgeDirection.VALID_DIRECTIONS[rotationMatrixExternal[getForwardDirection().ordinal()][dir.ordinal()]];
 	}
 
+	public TileEntity getNeighbor(ForgeDirection dir)
+	{
+		int x = xCoord+dir.offsetX;
+		int y = yCoord+dir.offsetY;
+		int z = zCoord+dir.offsetZ;
+		return worldObj.getTileEntity(x, y, z);
+	}
 }

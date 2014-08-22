@@ -8,6 +8,7 @@ import mod.industrialProcessing.fluids.ConfigFluids;
 import mod.industrialProcessing.fluids.ISetupFluids;
 import mod.industrialProcessing.items.ConfigItems;
 import mod.industrialProcessing.items.ISetupItems;
+import mod.industrialProcessing.transport.motion.ClusterManagerMotion;
 import mod.industrialProcessing.utils.INamepace;
 import mod.industrialProcessing.utils.achievements.ConfigAchievements;
 import mod.industrialProcessing.utils.achievements.ISetupAchievements;
@@ -146,9 +147,12 @@ public class IndustrialProcessing implements INamepace, ISetupCreativeTabs, ISet
 		return instance;
 	}
 	
+	
+	
 	@EventHandler
 	public void serverStop(FMLServerStoppingEvent event) {
 		HandlerRegistry.resetConveyorLineHandler();
 		HandlerRegistry.resetLineHandlers();
+		ClusterManagerMotion.managers.clear();
 	}
 }

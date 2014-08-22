@@ -14,6 +14,7 @@ public class UUIDUtil {
 	}
 
 	public static byte[] getBytes(UUID id) {
+		if(id == null) return null;
 		byte[] bytes = new byte[16];
 		ByteBuffer bb = ByteBuffer.wrap(bytes);
 		bb.putLong(id.getMostSignificantBits());

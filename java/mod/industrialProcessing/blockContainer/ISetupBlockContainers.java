@@ -60,9 +60,11 @@ import mod.industrialProcessing.plants.transport.items.conveyorOutput.BlockConve
 import mod.industrialProcessing.transport.fluids.block.BlockTransportFluids;
 import mod.industrialProcessing.transport.fluids.block.BlockTransportFluidsStone;
 import mod.industrialProcessing.transport.fluids.block.BlockTransportFluidsWood;
+import mod.industrialProcessing.transport.motion.axle.BlockAxle;
 
 public interface ISetupBlockContainers {
 
+	public final static BlockAxle blockAxle = new BlockAxle();
     
 	public final static BlockCraftomatic blockCraftomatic = new BlockCraftomatic();
     public final static BlockCrusher blockCrusher = new BlockCrusher();

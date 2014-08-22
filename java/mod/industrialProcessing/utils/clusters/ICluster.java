@@ -2,16 +2,13 @@ package mod.industrialProcessing.utils.clusters;
 
 import java.util.UUID;
 
-public interface ICluster<TClusterItem extends IClusterItem<TClusterItem>> extends Iterable<TClusterItem> {
+public interface ICluster<T extends IClusterItem<T, U>, U extends ICluster<T,U>> extends Iterable<T> {
 
-	void addItem(TClusterItem item);
-	void loadItem(TClusterItem item);
-	void removeItem(TClusterItem item);
-
-	UUID getId();
-
-	void setId(UUID value);
-
+	void addItem(T item);
+	T getItem(int x, int y, int z);
+	void removeItem(T item);
+	void loadItem(T item);
+	UUID getId(); 
 	void onRemoved();
 
 }

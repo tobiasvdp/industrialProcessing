@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import net.minecraft.world.World;
 
-public interface IClusterTileEntity<T extends IClusterItem<T>> {
+public interface IClusterTileEntity<T extends IClusterItem<T,U>, U extends ICluster<T,U>> {
 	int getX();
 
 	int getY();
@@ -13,13 +13,12 @@ public interface IClusterTileEntity<T extends IClusterItem<T>> {
 
 	World getWorld();
 
-	void onAddedToCluster(UUID id);
-	void onLoadedToCluster(UUID id);
-
-
-	void onRemovedFromCluster(UUID id);
-
-	void onClusterIdChanged(UUID newID);
-
+	void onClusterChanged(); 
+ 
 	UUID getClusterId();
+	
+	T getClusterItem();
+	void setClusterItem(T item);
+
+	void onClusterLoaded();
 }

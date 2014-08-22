@@ -134,6 +134,9 @@ import mod.industrialProcessing.transport.fluids.tileEntity.TileEntityTransportF
 import mod.industrialProcessing.transport.items.conveyorBelt.rendering.ModelConveyorBeltTile;
 import mod.industrialProcessing.transport.items.conveyorBelt.rendering.comonModels.ModelConveyorBeltBlock;
 import mod.industrialProcessing.transport.items.conveyorBelt.rendering.comonModels.ModelConveyorOutputBlock;
+import mod.industrialProcessing.transport.motion.axle.ModelAxle;
+import mod.industrialProcessing.transport.motion.axle.ModelAxleTile;
+import mod.industrialProcessing.transport.motion.axle.TileEntityAxle;
 import mod.industrialProcessing.utils.registry.BlockRegistry;
 import mod.industrialProcessing.utils.registry.TileEntityRegistry;
 
@@ -147,6 +150,8 @@ public class ConfigBlockContainers {
 
 	public void registerBlocks() {
 
+		BlockRegistry.registerMachine(IndustrialProcessing.blockAxle, TileEntityAxle.class, "ip.transport.motion.axle", new ModelAxle(), new ModelAxleTile());
+		
 		BlockRegistry.registerMachine(IndustrialProcessing.blockCrusher, TileEntityCrusher.class, "IP.machine.crusher", new ModelCrusher());
 		BlockRegistry.registerMachine(IndustrialProcessing.blockCraftomatic, TileEntityCraftomatic.class, "IP.machine.craftomatic", new ModelCraftomatic());
 		BlockRegistry.registerMachine(IndustrialProcessing.blockFilter, TileEntityFilter.class, "IP.machine.filter", new ModelFilter());
