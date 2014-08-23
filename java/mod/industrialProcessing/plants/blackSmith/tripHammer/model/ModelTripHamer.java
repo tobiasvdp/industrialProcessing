@@ -17,6 +17,8 @@ import org.lwjgl.util.vector.Vector3f;
 public class ModelTripHamer  extends ModelBlock {
 
     ObjRotator foot = new ObjRotator(new Foot(), 0);
+    ObjRotator wheelRing = new ObjRotator(new WheelRings(), 0);
+    ObjRotator top = new ObjRotator(new Top(), 0);
     ObjRotator rot = new ObjRotator(new Rot(), 0);
 
     @Override
@@ -30,6 +32,8 @@ public class ModelTripHamer  extends ModelBlock {
         GL11.glTranslatef(0, -0.5f, 0);
         
         foot.getRotated(0).renderMesh(iconWood);
+        wheelRing.getRotated(0).renderMesh(iconWood);
+        top.getRotated(0).renderMesh(iconWood);
         rot.getRotated(0).renderMesh(iconWood);
         
         GL11.glPopMatrix();
@@ -46,6 +50,8 @@ public class ModelTripHamer  extends ModelBlock {
         IIcon iconWood = reference.getIcon(0);
 
         foot.getRotated(dir).renderMesh(false, iconWood, reference);
+        wheelRing.getRotated(dir).renderMesh(false, iconWood, reference);
+        top.getRotated(dir).renderMesh(false, iconWood, reference);
         rot.getRotated(dir).renderMesh(false, iconWood, reference);
 
         return true;

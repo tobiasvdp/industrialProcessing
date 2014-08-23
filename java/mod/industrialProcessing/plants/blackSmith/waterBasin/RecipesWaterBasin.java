@@ -28,7 +28,7 @@ public class RecipesWaterBasin extends RecipesMultiblock {
 		recipe.tier = Tiers.Tier0;
 		recipe.workRequired = 0;
 		recipe.inputs = new RecipeInputInventorySlot[]{new RecipeInputInventorySlot(0, new ItemStack(IndustrialProcessing.itemPliersHeatedIron))};
-		recipe.outputs = new RecipeOutputInventorySlot[]{new RecipeOutputInventorySlot(1,  new ItemStack(Items.iron_ingot)),new RecipeOutputInventorySlot(2,  new ItemStack(IndustrialProcessing.itemPliers))};
+		recipe.outputs = new RecipeOutputInventorySlot[]{new RecipeOutputInventorySlot(1,  new ItemStack(IndustrialProcessing.itemPliers)),new RecipeOutputInventorySlot(2,  new ItemStack(Items.iron_ingot))};
 		return recipe;
 	}
 	private RecipeMultiblock lead() {

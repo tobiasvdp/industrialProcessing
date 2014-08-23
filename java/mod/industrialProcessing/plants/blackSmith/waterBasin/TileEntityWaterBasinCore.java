@@ -104,16 +104,16 @@ public class TileEntityWaterBasinCore extends TileEntityMultiblockSwitcherCore i
 					Item playerEquippedItem = player.getCurrentEquippedItem().getItem();
 
 					if (recipe.inputs[0].isItemValid(playerEquippedItem)) {
-						player.getCurrentEquippedItem().splitStack(1);
-
-						for (int j = 0; j < recipe.outputs.length; j++) {
+						player.setCurrentItemOrArmor(0, recipe.outputs[0].createStack(1));
+						for (int j = 1; j < recipe.outputs.length; j++) {
 							ItemStack outputStack = recipe.outputs[j].createStack(1);
 							if (!player.inventory.addItemStackToInventory(outputStack))
 								DropBlock.doDispense(worldObj, outputStack, 1, ForgeDirection.UP, xCoord, yCoord, zCoord);
 						}
+						drain(ForgeDirection.UNKNOWN, new FluidStack(FluidRegistry.WATER, 1000), true);
+						spawnSmoke();
 					}
-					drain(ForgeDirection.UNKNOWN, new FluidStack(FluidRegistry.WATER, 1000), true);
-					spawnSmoke();
+					
 					return true;
 				}
 			}
@@ -141,11 +141,8 @@ public class TileEntityWaterBasinCore extends TileEntityMultiblockSwitcherCore i
 				if (emptyContainer != null) {
 					if (this.tankHasRoomFor(0, fluid)) {
 						emptyContainer.stackSize = 1;
-						player.getCurrentEquippedItem().splitStack(1);
+						player.setCurrentItemOrArmor(0, emptyContainer);
 						this.getTankInSlot(0).fill(fluid, true);
-						if (!player.inventory.addItemStackToInventory(emptyContainer)) {
-							DropBlock.doDispense(worldObj, emptyContainer, 1, ForgeDirection.UP, xCoord, yCoord, zCoord);
-						}
 						return true;
 					}
 				}

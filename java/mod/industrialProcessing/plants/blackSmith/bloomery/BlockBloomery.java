@@ -3,6 +3,7 @@ package mod.industrialProcessing.plants.blackSmith.bloomery;
 import java.util.ArrayList;
 import java.util.Random;
 
+import mod.industrialProcessing.IndustrialProcessing;
 import mod.industrialProcessing.blockContainer.multiblock.core.BlockMultiblockCore;
 import mod.industrialProcessing.blockContainer.multiblock.tier.Tiers;
 import mod.industrialProcessing.gui.framework.panels.Orientation;
@@ -16,8 +17,10 @@ import mod.industrialProcessing.work.recipe.RecipesMultiblock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.IBlockAccess;
@@ -34,6 +37,16 @@ public class BlockBloomery extends BlockMultiblockCore implements IRecipeBlock, 
 	public BlockBloomery() {
 		super(1.0f, 1.0f, Material.clay, Block.soundTypeGravel, "Bloomery");
 		this.setTickRandomly(true);
+	}
+
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are) {
+		if (these == 1.0 && player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof ItemBlock) {
+			Block block = Block.getBlockFromItem(player.getCurrentEquippedItem().getItem());
+			if (block.equals(IndustrialProcessing.blockIronBowl))
+				return false;
+		}
+		return super.onBlockActivated(world, x, y, z, player, metadata, what, these, are);
 	}
 
 	@Override

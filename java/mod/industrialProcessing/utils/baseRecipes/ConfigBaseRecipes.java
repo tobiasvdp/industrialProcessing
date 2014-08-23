@@ -9,6 +9,7 @@ import mod.industrialProcessing.block.ConfigBlocks;
 import mod.industrialProcessing.block.ISetupBlocks;
 import mod.industrialProcessing.fluids.ISetupFluids;
 import mod.industrialProcessing.items.ISetupItems;
+import mod.industrialProcessing.utils.manager.AnvilCraftingManager;
 import mod.industrialProcessing.utils.registry.BlockRegistry;
 import mod.industrialProcessing.utils.registry.BlockType;
 import mod.industrialProcessing.utils.registry.RecipeRegistry;
@@ -89,6 +90,7 @@ public class ConfigBaseRecipes {
 		GameRegistry.addShapedRecipe(new ItemStack(IndustrialProcessing.blockSolderingStation), "xxx", "yzy", "iji", 'x', new ItemStack(Blocks.stone_slab), 'y', new ItemStack(Blocks.planks, 1, WILDCARD_VALUE), 'z', new ItemStack(ISetupItems.itemSolderingIron), 'i', new ItemStack(ISetupItems.itemThickStick), 'j', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
 		GameRegistry.addShapedRecipe(new ItemStack(IndustrialProcessing.blockGrindingStone), "x x", "xyx", "x x", 'x', new ItemStack(ISetupItems.itemThickStick), 'y', new ItemStack(Blocks.cobblestone));
 		GameRegistry.addShapedRecipe(new ItemStack(IndustrialProcessing.blockAnvil), "zzz", " x ", "zyz", 'x', new ItemStack(Blocks.iron_block), 'y', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE), 'z', new ItemStack(Items.iron_ingot));
+		GameRegistry.addShapedRecipe(new ItemStack(ISetupItems.itemIronBowl, 3), " z ", "x x", " x ", 'x', new ItemStack(Items.iron_ingot), 'z', new ItemStack(ISetupItems.itemHammer, 1, WILDCARD_VALUE));
 		
 		GameRegistry.addShapedRecipe(new ItemStack(IndustrialProcessing.blockBloomery), "xyx", "y y", "xzx", 'x', new ItemStack(Items.clay_ball), 'y', new ItemStack(Blocks.dirt), 'z', new ItemStack(Blocks.cobblestone));
 		GameRegistry.addShapedRecipe(new ItemStack(IndustrialProcessing.blockBellows), "xxx", "yyy", "xxx", 'x', new ItemStack(Blocks.log, 1, WILDCARD_VALUE), 'y', new ItemStack(Items.leather));

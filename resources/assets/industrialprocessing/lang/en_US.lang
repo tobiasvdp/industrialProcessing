@@ -36,6 +36,7 @@ tile.IP.machine.crusher.name=Crusher
 tile.IP.machine.crusher.desc=The crusher grinds objects into small pieces.
 
 tile.IP.blacks.bloomery.name=Bloomery
+tile.IP.dummy.ironBowl.name=Iron bowl on sticks
 tile.IP.blacks.bloomery.desc=Separate the stone from the ore.
 
 tile.IP.blacks.forge.name=Forge pit
@@ -159,6 +160,9 @@ item.IP.item.slag.name=Slag
 item.IP.item.WroughtIron.name=Wrought iron
 item.IP.item.Pliers.name=Pliers
 item.IP.item.PliersBloomIron.name=Bloom iron
+item.IP.item.PliersHeatedIron.name=Hot iron
+item.IP.item.woodenBucket.name=Wooden bucket
+item.IP.item.woodenBucketWater.name=Wooden bucket of water
 
 
 tile.IP.light.torch.name=Torch

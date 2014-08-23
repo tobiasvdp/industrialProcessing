@@ -165,6 +165,7 @@ public class TileEntityMultiblockDummy extends TileEntityBlockContainerIP implem
 						} else if (teCore.getState() == MultiblockState.COMPLETED && teCore.isDummyValidForStructure(this, true)) {
 							setCore(teCore);
 							notifyNeighboursOfCoreSet();
+							teCore.onStateChange();
 							return true;
 						}
 					}
@@ -177,6 +178,7 @@ public class TileEntityMultiblockDummy extends TileEntityBlockContainerIP implem
 					} else if (te.getState() == MultiblockState.COMPLETED && te.isDummyValidForStructure(this, true)) {
 						setCore(te);
 						notifyNeighboursOfCoreSet();
+						te.onStateChange();
 						return true;
 					}
 				}

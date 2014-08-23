@@ -18,7 +18,7 @@ public class ObjConverter {
 		ObjConverter cv = new ObjConverter();
 		try {
 			// cv.parseObjFile("C:\\Users\\Stijn\\Documents\\3dsMax\\export\\floorTile.obj");
-			cv.parseObjFile("C:\\Users\\Tobias\\Documents\\3dsMax\\export\\Forge.obj");
+			cv.parseObjFile("C:\\Users\\Tobias\\Documents\\3dsMax\\export\\TripHammerBlock2.obj");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
