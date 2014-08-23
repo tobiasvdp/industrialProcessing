@@ -27,6 +27,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -37,6 +38,7 @@ public class TileEntityForgeCore extends TileEntityMultiblockCoreInvWorker imple
 	private TankHandler tankHandler;
 	public int burnTime = 0;
 	public int PrevburnTime = 0;
+	public boolean lightChanged = true;
 	public static RecipesMultiblock recipes = new RecipesForge();
 	static {
 		// set layout
@@ -84,6 +86,11 @@ public class TileEntityForgeCore extends TileEntityMultiblockCoreInvWorker imple
 		addStack(null, 0, LocalDirection.LEFT, true, false);
 		addStack(null, 0, LocalDirection.RIGHT, false, true);
 	}
+	
+	public void updateLight() {
+		this.worldObj.updateLightByType(EnumSkyBlock.Sky,xCoord, yCoord, zCoord);
+		this.worldObj.updateLightByType(EnumSkyBlock.Block,xCoord, yCoord, zCoord);
+	}
 
 	public void burn() {
 		if (burnTime > 1000) {
@@ -130,6 +137,9 @@ public class TileEntityForgeCore extends TileEntityMultiblockCoreInvWorker imple
 		if (!worldObj.isRemote) {
 			if (burnTime > 0) {
 				burnTime--;
+			}
+			if(burnTime == 900){
+				lightChanged = true;
 			}
 			sendUpdatesifChanged(getValues(), getPrevValues());
 		}
@@ -239,6 +249,7 @@ public class TileEntityForgeCore extends TileEntityMultiblockCoreInvWorker imple
 					burnTime += value;
 					PrevburnTime = burnTime;
 					player.getCurrentEquippedItem().splitStack(1);
+					lightChanged = true;
 					return true;
 				}
 			}

@@ -14,6 +14,7 @@ import mod.industrialProcessing.blockContainer.multiblock.tier.Tiers;
 import mod.industrialProcessing.utils.block.IBreakable;
 import mod.industrialProcessing.utils.handlers.heat.HeatStorage;
 import mod.industrialProcessing.utils.handlers.heat.IHeatStorage;
+import mod.industrialProcessing.utils.inventory.InventoryUtils;
 import mod.industrialProcessing.utils.rotation.LocalDirection;
 import mod.industrialProcessing.work.recipe.RecipeMultiblock;
 import mod.industrialProcessing.work.recipe.RecipesMultiblock;
@@ -78,6 +79,15 @@ public class TileEntityBloomery extends TileEntityMultiblockCoreTankWorker imple
 	@Override
 	public Iterator<RecipeMultiblock> iterateRecipes() {
 		return recipes.getRecipes();
+	}
+	
+	@Override
+	public void onTierChange() {
+		super.onTierChange();
+		if(!this.worldObj.isRemote && getTier() == Tiers.Tier0){
+			InventoryUtils.DropInventoryContents(this.worldObj, xCoord, yCoord, zCoord,4);
+			InventoryUtils.DropInventoryContents(this.worldObj, xCoord, yCoord, zCoord,5);
+		}
 	}
 
 	@Override

@@ -43,6 +43,40 @@ public final class InventoryUtils {
 		}
 	}
 
+	public static void DropInventoryContents(World world, int x, int y, int z, int slot) {
+		TileEntity tileEntity = world.getTileEntity(x, y, z);
+		if (!(tileEntity instanceof IInventory)) {
+			return;
+		}
+		IInventory inventory = (IInventory) tileEntity;
+
+		Random rand = new Random();
+
+		int i = slot;
+
+		ItemStack item = inventory.getStackInSlot(i);
+		if (item != null && item.stackSize > 0) {
+			inventory.setInventorySlotContents(i, null);
+			float rx = rand.nextFloat() * 0.8F + 0.1F;
+			float ry = rand.nextFloat() * 0.8F + 0.1F;
+			float rz = rand.nextFloat() * 0.8F + 0.1F;
+
+			EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z + rz, new ItemStack(item.getItem(), item.stackSize, item.getItemDamage()));
+
+			if (item.hasTagCompound()) {
+				entityItem.getEntityItem().setTagCompound((NBTTagCompound) item.getTagCompound().copy());
+			}
+
+			float factor = 0.05F;
+			entityItem.motionX = rand.nextGaussian() * factor;
+			entityItem.motionY = rand.nextGaussian() * factor + 0.2F;
+			entityItem.motionZ = rand.nextGaussian() * factor;
+			world.spawnEntityInWorld(entityItem);
+			item.stackSize = 0;
+		}
+
+	}
+
 	public static void WriteInventory(IItemStacksInventory inventory, NBTTagCompound nbt) {
 		NBTTagList nbttaglist = new NBTTagList();
 		ItemStack[] itemStacks = inventory.getStacks();
@@ -61,7 +95,7 @@ public final class InventoryUtils {
 	public static void ReadInventory(IItemStacksInventory inventory, NBTTagCompound nbt) {
 
 		ItemStack[] itemStacks = new ItemStack[inventory.getStackCount()];
-		NBTTagList nbttaglist = nbt.getTagList("Items",0);
+		NBTTagList nbttaglist = nbt.getTagList("Items", 0);
 		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
 			NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.getCompoundTagAt(i);
 			byte b0 = nbttagcompound1.getByte("Slot");
