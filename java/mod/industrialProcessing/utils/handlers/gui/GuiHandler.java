@@ -2,8 +2,8 @@ package mod.industrialProcessing.utils.handlers.gui;
 
 import mod.industrialProcessing.gui.generating.LayoutGuiBuilder;
 import mod.industrialProcessing.gui.guide.GuideScreen;
-import mod.industrialProcessing.plants.blackSmith.anvil.ContainerAnvil;
-import mod.industrialProcessing.plants.blackSmith.anvil.GuiContainerAnvil;
+import mod.industrialProcessing.plants.middleAge.anvil.ContainerAnvil;
+import mod.industrialProcessing.plants.middleAge.anvil.GuiContainerAnvil;
 import mod.industrialProcessing.utils.block.IGuiBlock;
 import mod.industrialProcessing.utils.block.IGuiMultiblock;
 import mod.industrialProcessing.utils.block.IUpgradableBlock;

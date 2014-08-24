@@ -11,7 +11,7 @@ import mod.industrialProcessing.blockContainer.multiblock.layout.StructureMultib
 import mod.industrialProcessing.blockContainer.multiblock.tier.Tier;
 import mod.industrialProcessing.blockContainer.multiblock.tier.TierCollection;
 import mod.industrialProcessing.blockContainer.multiblock.tier.Tiers;
-import mod.industrialProcessing.plants.blackSmith.tripHammer.RecipesTripHammer;
+import mod.industrialProcessing.plants.middleAge.tripHammer.RecipesTripHammer;
 import mod.industrialProcessing.utils.rotation.LocalDirection;
 import mod.industrialProcessing.work.recipe.RecipesMultiblock;
 

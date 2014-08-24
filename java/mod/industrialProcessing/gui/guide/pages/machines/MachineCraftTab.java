@@ -26,7 +26,7 @@ import mod.industrialProcessing.gui.guide.pages.machines.crafts.FurnaceCraft;
 import mod.industrialProcessing.gui.guide.pages.machines.crafts.ICraftBase;
 import mod.industrialProcessing.gui.guide.pages.machines.crafts.MachineCraft;
 import mod.industrialProcessing.gui.guide.pages.machines.crafts.WorkbenchCraft;
-import mod.industrialProcessing.plants.blackSmith.anvil.ContainerAnvil;
+import mod.industrialProcessing.plants.middleAge.anvil.ContainerAnvil;
 import mod.industrialProcessing.utils.registry.RecipeRegistry;
 import mod.industrialProcessing.work.recipe.IMachineRecipe;
 import net.minecraft.block.Block;

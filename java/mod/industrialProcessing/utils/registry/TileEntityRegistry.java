@@ -6,11 +6,11 @@ import mod.industrialProcessing.blockContainer.multiblock.coreAndDummy.BlockMult
 import mod.industrialProcessing.blockContainer.multiblock.coreAndDummy.TileEntityMultiblockSwitcherCore;
 import mod.industrialProcessing.blockContainer.multiblock.coreAndDummy.TileEntityMultiblockSwitcherDummy;
 import mod.industrialProcessing.client.rendering.tileEntity.ModelTileEntity;
-import mod.industrialProcessing.plants.blackSmith.forge.model.ModelForgeAnimated;
-import mod.industrialProcessing.plants.blackSmith.waterBasin.BlockWaterBasin;
-import mod.industrialProcessing.plants.blackSmith.waterBasin.TileEntityWaterBasinCore;
-import mod.industrialProcessing.plants.blackSmith.waterBasin.model.ModelWaterBasin;
-import mod.industrialProcessing.plants.blackSmith.waterBasin.model.ModelWaterBasinAnimated;
+import mod.industrialProcessing.plants.middleAge.forge.model.ModelForgeAnimated;
+import mod.industrialProcessing.plants.middleAge.waterBasin.BlockWaterBasin;
+import mod.industrialProcessing.plants.middleAge.waterBasin.TileEntityWaterBasinCore;
+import mod.industrialProcessing.plants.middleAge.waterBasin.model.ModelWaterBasin;
+import mod.industrialProcessing.plants.middleAge.waterBasin.model.ModelWaterBasinAnimated;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import cpw.mods.fml.common.registry.GameRegistry;

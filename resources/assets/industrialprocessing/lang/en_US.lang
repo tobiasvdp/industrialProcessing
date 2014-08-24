@@ -18,6 +18,7 @@ tile.IP.ore.chromiteOre.name=Chromite ore
 tile.IP.ore.cinnebarOre.name=Cinnebar ore
 tile.IP.ore.taliaOre.name=Talia ore
 
+tile.IP.block.anvil.name=Anvil
 tile.IP.block.girt.name=Girt
 tile.IP.block.asphalt.name=Asphalt
 tile.IP.block.cobbleLimestone.name=Cobble limestone

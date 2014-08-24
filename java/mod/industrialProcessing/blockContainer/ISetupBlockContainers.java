@@ -1,17 +1,6 @@
 package mod.industrialProcessing.blockContainer;
 
 import mod.industrialProcessing.blockContainer.microblock.MicroBlock;
-import mod.industrialProcessing.plants.blackSmith.bloomery.BlockBloomery;
-import mod.industrialProcessing.plants.blackSmith.bloomery.dummy.bellows.BlockBellows;
-import mod.industrialProcessing.plants.blackSmith.bloomery.dummy.ironBowl.BlockIronBowl;
-import mod.industrialProcessing.plants.blackSmith.forge.BlockForge;
-import mod.industrialProcessing.plants.blackSmith.forge.dummy.BlockForgeDummy;
-import mod.industrialProcessing.plants.blackSmith.grindingStone.BlockGrindingStone;
-import mod.industrialProcessing.plants.blackSmith.tripHammer.BlockTripHammer;
-import mod.industrialProcessing.plants.blackSmith.tripHammer.dummy.woodenBar.BlockWoodenBar;
-import mod.industrialProcessing.plants.blackSmith.tripHammer.dummy.woodenHammer.BlockWoodenHammer;
-import mod.industrialProcessing.plants.blackSmith.tripHammer.dummy.woodenWheel.BlockWoodenWheel;
-import mod.industrialProcessing.plants.blackSmith.waterBasin.BlockWaterBasin;
 import mod.industrialProcessing.plants.construction.craftomatic.BlockCraftomatic;
 import mod.industrialProcessing.plants.construction.frame.BlockFrame;
 import mod.industrialProcessing.plants.construction.machineBlock.BlockMachineBlock;
@@ -25,6 +14,9 @@ import mod.industrialProcessing.plants.decoration.light.torch.BlockTorch;
 import mod.industrialProcessing.plants.dummyBlocks.ioPort.BlockIOPort;
 import mod.industrialProcessing.plants.dummyBlocks.machineFrame.BlockMachineFrame;
 import mod.industrialProcessing.plants.grinding.crusher.BlockCrusher;
+import mod.industrialProcessing.plants.industrialAge.windMill.BlockWindMill;
+import mod.industrialProcessing.plants.industrialAge.windMill.dummy.BlockSails;
+import mod.industrialProcessing.plants.industrialAge.windMill.dummy.BlockWoodenSupport;
 import mod.industrialProcessing.plants.machine.classifier.BlockClassifier;
 import mod.industrialProcessing.plants.machine.diskFilter.BlockDiskFilter;
 import mod.industrialProcessing.plants.machine.dryer.BlockDryer;
@@ -34,6 +26,17 @@ import mod.industrialProcessing.plants.machine.hydroCyclone.BlockHydroCyclone;
 import mod.industrialProcessing.plants.machine.mixer.BlockMixer;
 import mod.industrialProcessing.plants.machine.thickener.BlockThickener;
 import mod.industrialProcessing.plants.machine.treetap.BlockManualTreeTap;
+import mod.industrialProcessing.plants.middleAge.bloomery.BlockBloomery;
+import mod.industrialProcessing.plants.middleAge.bloomery.dummy.bellows.BlockBellows;
+import mod.industrialProcessing.plants.middleAge.bloomery.dummy.ironBowl.BlockIronBowl;
+import mod.industrialProcessing.plants.middleAge.forge.BlockForge;
+import mod.industrialProcessing.plants.middleAge.forge.dummy.BlockForgeDummy;
+import mod.industrialProcessing.plants.middleAge.grindingStone.BlockGrindingStone;
+import mod.industrialProcessing.plants.middleAge.tripHammer.BlockTripHammer;
+import mod.industrialProcessing.plants.middleAge.tripHammer.dummy.woodenBar.BlockWoodenBar;
+import mod.industrialProcessing.plants.middleAge.tripHammer.dummy.woodenHammer.BlockWoodenHammer;
+import mod.industrialProcessing.plants.middleAge.tripHammer.dummy.woodenWheel.BlockWoodenWheel;
+import mod.industrialProcessing.plants.middleAge.waterBasin.BlockWaterBasin;
 import mod.industrialProcessing.plants.network.monitor.BlockNetworkMonitor;
 import mod.industrialProcessing.plants.power.generator.crankGenerator.BlockManualGenerator;
 import mod.industrialProcessing.plants.power.generator.creative.BlockCreativeGenerator;
@@ -144,6 +147,10 @@ public interface ISetupBlockContainers {
     public final static MicroBlock microBlock = new MicroBlock();
     
     public final static BlockNetworkMonitor blockNetworkMonitor = new BlockNetworkMonitor();
+    
+    public final static BlockWindMill blockWindMill = new BlockWindMill();
+    public final static BlockSails blockSails = new BlockSails();
+    public final static BlockWoodenSupport blockWoodenSupport = new BlockWoodenSupport();
     
     /* machines 
     public final static BlockMagneticSeparator blockMageneticSeparator = new BlockMagneticSeparator(); 

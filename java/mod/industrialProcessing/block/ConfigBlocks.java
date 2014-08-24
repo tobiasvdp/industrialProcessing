@@ -4,8 +4,8 @@ import mod.industrialProcessing.block.crystals.ModelCrystal;
 import mod.industrialProcessing.block.doors.emergency.model.ModelDoorEmergency;
 import mod.industrialProcessing.block.platforms.ModelPlatform;
 import mod.industrialProcessing.block.platforms.ModelStairs;
-import mod.industrialProcessing.plants.blackSmith.anvil.model.ModelAnvil;
 import mod.industrialProcessing.plants.construction.machineBlock.model.ModelMachineBlock;
+import mod.industrialProcessing.plants.middleAge.anvil.model.ModelAnvil;
 import mod.industrialProcessing.utils.registry.BlockRegistry;
 
 public class ConfigBlocks {
